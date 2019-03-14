@@ -63,15 +63,13 @@ public class LiveVideoTargeting extends APINode {
   private List<String> mExcludedCountries = null;
   @SerializedName("geo_locations")
   private TargetingGeoLocation mGeoLocations = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public LiveVideoTargeting() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static LiveVideoTargeting loadJSON(String json, APIContext context, String header) {
     LiveVideoTargeting liveVideoTargeting = getGson().fromJson(json, LiveVideoTargeting.class);
@@ -257,15 +255,6 @@ public class LiveVideoTargeting extends APINode {
     this.mGeoLocations = TargetingGeoLocation.getGson().fromJson(value, type);
     return this;
   }
-  public String getFieldId() {
-    return mId;
-  }
-
-  public LiveVideoTargeting setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -287,7 +276,6 @@ public class LiveVideoTargeting extends APINode {
     this.mAgeMin = instance.mAgeMin;
     this.mExcludedCountries = instance.mExcludedCountries;
     this.mGeoLocations = instance.mGeoLocations;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

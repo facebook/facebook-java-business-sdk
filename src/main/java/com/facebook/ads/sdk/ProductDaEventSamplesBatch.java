@@ -61,15 +61,13 @@ public class ProductDaEventSamplesBatch extends APINode {
   private Long mTimeStart = null;
   @SerializedName("time_stop")
   private Long mTimeStop = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public ProductDaEventSamplesBatch() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static ProductDaEventSamplesBatch loadJSON(String json, APIContext context, String header) {
     ProductDaEventSamplesBatch productDaEventSamplesBatch = getGson().fromJson(json, ProductDaEventSamplesBatch.class);
@@ -241,15 +239,6 @@ public class ProductDaEventSamplesBatch extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public ProductDaEventSamplesBatch setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumAggregationType {
@@ -318,7 +307,6 @@ public class ProductDaEventSamplesBatch extends APINode {
     this.mSamples = instance.mSamples;
     this.mTimeStart = instance.mTimeStart;
     this.mTimeStop = instance.mTimeStop;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

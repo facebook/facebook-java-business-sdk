@@ -65,15 +65,13 @@ public class AdEntityTargetSpend extends APINode {
   private Boolean mIsProrated = null;
   @SerializedName("is_updating")
   private Boolean mIsUpdating = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdEntityTargetSpend() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdEntityTargetSpend loadJSON(String json, APIContext context, String header) {
     AdEntityTargetSpend adEntityTargetSpend = getGson().fromJson(json, AdEntityTargetSpend.class);
@@ -263,15 +261,6 @@ public class AdEntityTargetSpend extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdEntityTargetSpend setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -294,7 +283,6 @@ public class AdEntityTargetSpend extends APINode {
     this.mIsAccurate = instance.mIsAccurate;
     this.mIsProrated = instance.mIsProrated;
     this.mIsUpdating = instance.mIsUpdating;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

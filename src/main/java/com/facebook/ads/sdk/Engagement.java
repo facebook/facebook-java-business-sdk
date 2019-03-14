@@ -69,15 +69,13 @@ public class Engagement extends APINode {
   private String mSocialSentenceWithLike = null;
   @SerializedName("social_sentence_without_like")
   private String mSocialSentenceWithoutLike = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public Engagement() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static Engagement loadJSON(String json, APIContext context, String header) {
     Engagement engagement = getGson().fromJson(json, Engagement.class);
@@ -285,15 +283,6 @@ public class Engagement extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public Engagement setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -318,7 +307,6 @@ public class Engagement extends APINode {
     this.mSocialSentence = instance.mSocialSentence;
     this.mSocialSentenceWithLike = instance.mSocialSentenceWithLike;
     this.mSocialSentenceWithoutLike = instance.mSocialSentenceWithoutLike;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

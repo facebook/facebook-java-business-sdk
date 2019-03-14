@@ -63,15 +63,13 @@ public class FundingSourceDetailsCoupon extends APINode {
   private String mDisplayAmount = null;
   @SerializedName("expiration")
   private String mExpiration = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public FundingSourceDetailsCoupon() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static FundingSourceDetailsCoupon loadJSON(String json, APIContext context, String header) {
     FundingSourceDetailsCoupon fundingSourceDetailsCoupon = getGson().fromJson(json, FundingSourceDetailsCoupon.class);
@@ -252,15 +250,6 @@ public class FundingSourceDetailsCoupon extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public FundingSourceDetailsCoupon setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -282,7 +271,6 @@ public class FundingSourceDetailsCoupon extends APINode {
     this.mCurrency = instance.mCurrency;
     this.mDisplayAmount = instance.mDisplayAmount;
     this.mExpiration = instance.mExpiration;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

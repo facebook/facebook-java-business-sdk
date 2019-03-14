@@ -61,15 +61,13 @@ public class ReachFrequencyDayPart extends APINode {
   private Long mEndMinute = null;
   @SerializedName("start_minute")
   private Long mStartMinute = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public ReachFrequencyDayPart() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static ReachFrequencyDayPart loadJSON(String json, APIContext context, String header) {
     ReachFrequencyDayPart reachFrequencyDayPart = getGson().fromJson(json, ReachFrequencyDayPart.class);
@@ -241,15 +239,6 @@ public class ReachFrequencyDayPart extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public ReachFrequencyDayPart setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -270,7 +259,6 @@ public class ReachFrequencyDayPart extends APINode {
     this.mDays = instance.mDays;
     this.mEndMinute = instance.mEndMinute;
     this.mStartMinute = instance.mStartMinute;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

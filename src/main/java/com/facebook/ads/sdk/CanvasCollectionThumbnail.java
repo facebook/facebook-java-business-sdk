@@ -61,15 +61,13 @@ public class CanvasCollectionThumbnail extends APINode {
   private String mElementId = null;
   @SerializedName("photo")
   private Photo mPhoto = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public CanvasCollectionThumbnail() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static CanvasCollectionThumbnail loadJSON(String json, APIContext context, String header) {
     CanvasCollectionThumbnail canvasCollectionThumbnail = getGson().fromJson(json, CanvasCollectionThumbnail.class);
@@ -249,15 +247,6 @@ public class CanvasCollectionThumbnail extends APINode {
     this.mPhoto = Photo.getGson().fromJson(value, type);
     return this;
   }
-  public String getFieldId() {
-    return mId;
-  }
-
-  public CanvasCollectionThumbnail setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -278,7 +267,6 @@ public class CanvasCollectionThumbnail extends APINode {
     this.mElementChildIndex = instance.mElementChildIndex;
     this.mElementId = instance.mElementId;
     this.mPhoto = instance.mPhoto;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

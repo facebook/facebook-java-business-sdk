@@ -59,15 +59,13 @@ public class BusinessProductCatalogTOS extends APINode {
   private Boolean mAccepted = null;
   @SerializedName("content")
   private String mContent = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public BusinessProductCatalogTOS() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static BusinessProductCatalogTOS loadJSON(String json, APIContext context, String header) {
     BusinessProductCatalogTOS businessProductCatalogTOS = getGson().fromJson(json, BusinessProductCatalogTOS.class);
@@ -230,15 +228,6 @@ public class BusinessProductCatalogTOS extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public BusinessProductCatalogTOS setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -258,7 +247,6 @@ public class BusinessProductCatalogTOS extends APINode {
   public BusinessProductCatalogTOS copyFrom(BusinessProductCatalogTOS instance) {
     this.mAccepted = instance.mAccepted;
     this.mContent = instance.mContent;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

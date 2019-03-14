@@ -58,18 +58,16 @@ public class AdCreativeLinkDataTemplateVideoSpec extends APINode {
   @SerializedName("categorization_criteria")
   private String mCategorizationCriteria = null;
   @SerializedName("customization")
-  private List<Object> mCustomization = null;
+  private Map<String, String> mCustomization = null;
   @SerializedName("template_id")
   private String mTemplateId = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdCreativeLinkDataTemplateVideoSpec() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdCreativeLinkDataTemplateVideoSpec loadJSON(String json, APIContext context, String header) {
     AdCreativeLinkDataTemplateVideoSpec adCreativeLinkDataTemplateVideoSpec = getGson().fromJson(json, AdCreativeLinkDataTemplateVideoSpec.class);
@@ -223,11 +221,11 @@ public class AdCreativeLinkDataTemplateVideoSpec extends APINode {
     return this;
   }
 
-  public List<Object> getFieldCustomization() {
+  public Map<String, String> getFieldCustomization() {
     return mCustomization;
   }
 
-  public AdCreativeLinkDataTemplateVideoSpec setFieldCustomization(List<Object> value) {
+  public AdCreativeLinkDataTemplateVideoSpec setFieldCustomization(Map<String, String> value) {
     this.mCustomization = value;
     return this;
   }
@@ -238,15 +236,6 @@ public class AdCreativeLinkDataTemplateVideoSpec extends APINode {
 
   public AdCreativeLinkDataTemplateVideoSpec setFieldTemplateId(String value) {
     this.mTemplateId = value;
-    return this;
-  }
-
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdCreativeLinkDataTemplateVideoSpec setFieldId(String value) {
-    this.mId = value;
     return this;
   }
 
@@ -270,7 +259,6 @@ public class AdCreativeLinkDataTemplateVideoSpec extends APINode {
     this.mCategorizationCriteria = instance.mCategorizationCriteria;
     this.mCustomization = instance.mCustomization;
     this.mTemplateId = instance.mTemplateId;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

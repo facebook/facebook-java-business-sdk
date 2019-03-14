@@ -2088,7 +2088,6 @@ public class ProductCatalog extends APINode {
       "name",
       "num_items",
       "tokens",
-      "id",
     };
 
     @Override
@@ -2247,13 +2246,6 @@ public class ProductCatalog extends APINode {
       this.requestField("tokens", value);
       return this;
     }
-    public APIRequestGetCategories requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetCategories requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
   }
 
   public static class APIRequestCreateCategory extends APIRequest<ProductCatalogCategory> {
@@ -2390,7 +2382,6 @@ public class ProductCatalog extends APINode {
       "status",
       "warnings",
       "warnings_total_count",
-      "id",
     };
 
     @Override
@@ -2545,13 +2536,6 @@ public class ProductCatalog extends APINode {
       this.requestField("warnings_total_count", value);
       return this;
     }
-    public APIRequestGetCheckBatchRequestStatus requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetCheckBatchRequestStatus requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
   }
 
   public static class APIRequestGetDaEventSamples extends APIRequest<ProductDaEventSamplesBatch> {
@@ -2571,7 +2555,6 @@ public class ProductCatalog extends APINode {
       "samples",
       "time_start",
       "time_stop",
-      "id",
     };
 
     @Override
@@ -2705,13 +2688,6 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetDaEventSamples requestTimeStopField (boolean value) {
       this.requestField("time_stop", value);
-      return this;
-    }
-    public APIRequestGetDaEventSamples requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetDaEventSamples requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -3137,7 +3113,6 @@ public class ProductCatalog extends APINode {
       "unique_content_ids_matched_other_catalogs",
       "unique_matched_content_ids",
       "unique_unmatched_content_ids",
-      "id",
     };
 
     @Override
@@ -3313,13 +3288,6 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetEventStats requestUniqueUnmatchedContentIdsField (boolean value) {
       this.requestField("unique_unmatched_content_ids", value);
-      return this;
-    }
-    public APIRequestGetEventStats requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetEventStats requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -4776,7 +4744,6 @@ public class ProductCatalog extends APINode {
       "errors_total_count",
       "handle",
       "status",
-      "id",
     };
 
     @Override
@@ -4899,13 +4866,6 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetHotelRoomsBatch requestStatusField (boolean value) {
       this.requestField("status", value);
-      return this;
-    }
-    public APIRequestGetHotelRoomsBatch requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetHotelRoomsBatch requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -5614,10 +5574,6 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateItemsBatch setItemType (ProductCatalog.EnumItemType itemType) {
-      this.setParam("item_type", itemType);
-      return this;
-    }
     public APIRequestCreateItemsBatch setItemType (String itemType) {
       this.setParam("item_type", itemType);
       return this;
@@ -5686,7 +5642,6 @@ public class ProductCatalog extends APINode {
       "errors_total_count",
       "handle",
       "status",
-      "id",
     };
 
     @Override
@@ -5809,13 +5764,6 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetPricingVariablesBatch requestStatusField (boolean value) {
       this.requestField("status", value);
-      return this;
-    }
-    public APIRequestGetPricingVariablesBatch requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetPricingVariablesBatch requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -6976,7 +6924,6 @@ public class ProductCatalog extends APINode {
       "errors_total_count",
       "handle",
       "status",
-      "id",
     };
 
     @Override
@@ -7099,13 +7046,6 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetProductSetsBatch requestStatusField (boolean value) {
       this.requestField("status", value);
-      return this;
-    }
-    public APIRequestGetProductSetsBatch requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetProductSetsBatch requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -8473,7 +8413,6 @@ public class ProductCatalog extends APINode {
       "updated_by",
       "updated_time",
       "user",
-      "id",
     };
 
     @Override
@@ -8647,13 +8586,6 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetUserPermissions requestUserField (boolean value) {
       this.requestField("user", value);
-      return this;
-    }
-    public APIRequestGetUserPermissions requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetUserPermissions requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -9278,7 +9210,7 @@ public class ProductCatalog extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "applinks",
+      "vehicle_id",
       "body_style",
       "description",
       "exterior_color",
@@ -9288,13 +9220,13 @@ public class ProductCatalog extends APINode {
       "state_of_vehicle",
       "vin",
       "url",
-      "vehicle_id",
       "year",
       "images",
       "address",
       "currency",
       "price",
       "title",
+      "applinks",
       "transmission",
       "drivetrain",
       "fuel_type",
@@ -9365,12 +9297,8 @@ public class ProductCatalog extends APINode {
     }
 
 
-    public APIRequestCreateVehicle setApplinks (Object applinks) {
-      this.setParam("applinks", applinks);
-      return this;
-    }
-    public APIRequestCreateVehicle setApplinks (String applinks) {
-      this.setParam("applinks", applinks);
+    public APIRequestCreateVehicle setVehicleId (String vehicleId) {
+      this.setParam("vehicle_id", vehicleId);
       return this;
     }
 
@@ -9431,11 +9359,6 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateVehicle setVehicleId (String vehicleId) {
-      this.setParam("vehicle_id", vehicleId);
-      return this;
-    }
-
     public APIRequestCreateVehicle setYear (Long year) {
       this.setParam("year", year);
       return this;
@@ -9479,6 +9402,15 @@ public class ProductCatalog extends APINode {
 
     public APIRequestCreateVehicle setTitle (String title) {
       this.setParam("title", title);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setApplinks (Object applinks) {
+      this.setParam("applinks", applinks);
+      return this;
+    }
+    public APIRequestCreateVehicle setApplinks (String applinks) {
+      this.setParam("applinks", applinks);
       return this;
     }
 
@@ -10815,59 +10747,6 @@ public class ProductCatalog extends APINode {
       private String value;
 
       private EnumStandard(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumItemType {
-      @SerializedName("AUTO")
-      VALUE_AUTO("AUTO"),
-      @SerializedName("AUTOMOTIVE_MODEL")
-      VALUE_AUTOMOTIVE_MODEL("AUTOMOTIVE_MODEL"),
-      @SerializedName("AUTO_MARKET")
-      VALUE_AUTO_MARKET("AUTO_MARKET"),
-      @SerializedName("DESTINATION")
-      VALUE_DESTINATION("DESTINATION"),
-      @SerializedName("FLIGHT")
-      VALUE_FLIGHT("FLIGHT"),
-      @SerializedName("GEO_BASED_ITEM")
-      VALUE_GEO_BASED_ITEM("GEO_BASED_ITEM"),
-      @SerializedName("HOME_LISTING")
-      VALUE_HOME_LISTING("HOME_LISTING"),
-      @SerializedName("HOME_SERVICE_PROVIDER")
-      VALUE_HOME_SERVICE_PROVIDER("HOME_SERVICE_PROVIDER"),
-      @SerializedName("HOME_SERVICE_REVIEW")
-      VALUE_HOME_SERVICE_REVIEW("HOME_SERVICE_REVIEW"),
-      @SerializedName("HOTEL")
-      VALUE_HOTEL("HOTEL"),
-      @SerializedName("HOTEL_ROOM")
-      VALUE_HOTEL_ROOM("HOTEL_ROOM"),
-      @SerializedName("MEDIA_TITLE")
-      VALUE_MEDIA_TITLE("MEDIA_TITLE"),
-      @SerializedName("OTHER_TEST_DYNAMIC_ITEM")
-      VALUE_OTHER_TEST_DYNAMIC_ITEM("OTHER_TEST_DYNAMIC_ITEM"),
-      @SerializedName("PRODUCT_GROUP")
-      VALUE_PRODUCT_GROUP("PRODUCT_GROUP"),
-      @SerializedName("PRODUCT_ITEM")
-      VALUE_PRODUCT_ITEM("PRODUCT_ITEM"),
-      @SerializedName("STORE_PRODUCT_ITEM")
-      VALUE_STORE_PRODUCT_ITEM("STORE_PRODUCT_ITEM"),
-      @SerializedName("TEST_DYNAMIC_ITEM")
-      VALUE_TEST_DYNAMIC_ITEM("TEST_DYNAMIC_ITEM"),
-      @SerializedName("VEHICLE")
-      VALUE_VEHICLE("VEHICLE"),
-      @SerializedName("VEHICLE_OFFER")
-      VALUE_VEHICLE_OFFER("VEHICLE_OFFER"),
-      NULL(null);
-
-      private String value;
-
-      private EnumItemType(String value) {
         this.value = value;
       }
 

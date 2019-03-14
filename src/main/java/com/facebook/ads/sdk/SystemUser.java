@@ -367,6 +367,7 @@ public class SystemUser extends APINode {
       "end_advertiser_name",
       "extended_credit_invoice_group",
       "failed_delivery_checks",
+      "fb_entity",
       "funding_source",
       "funding_source_details",
       "has_migrated_permissions",
@@ -672,6 +673,13 @@ public class SystemUser extends APINode {
     }
     public APIRequestGetAssignedAdAccounts requestFailedDeliveryChecksField (boolean value) {
       this.requestField("failed_delivery_checks", value);
+      return this;
+    }
+    public APIRequestGetAssignedAdAccounts requestFbEntityField () {
+      return this.requestFbEntityField(true);
+    }
+    public APIRequestGetAssignedAdAccounts requestFbEntityField (boolean value) {
+      this.requestField("fb_entity", value);
       return this;
     }
     public APIRequestGetAssignedAdAccounts requestFundingSourceField () {

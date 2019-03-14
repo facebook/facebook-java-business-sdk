@@ -1163,7 +1163,6 @@ public class AdCreative extends APINode {
 
     public static final String[] FIELDS = {
       "body",
-      "id",
     };
 
     @Override
@@ -1370,13 +1369,6 @@ public class AdCreative extends APINode {
     }
     public APIRequestGetPreviews requestBodyField (boolean value) {
       this.requestField("body", value);
-      return this;
-    }
-    public APIRequestGetPreviews requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetPreviews requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -2369,10 +2361,6 @@ public class AdCreative extends APINode {
       VALUE_ACTIVE("ACTIVE"),
       @SerializedName("DELETED")
       VALUE_DELETED("DELETED"),
-      @SerializedName("PENDING_PROCESS")
-      VALUE_PENDING_PROCESS("PENDING_PROCESS"),
-      @SerializedName("WITH_ISSUES")
-      VALUE_WITH_ISSUES("WITH_ISSUES"),
       NULL(null);
 
       private String value;

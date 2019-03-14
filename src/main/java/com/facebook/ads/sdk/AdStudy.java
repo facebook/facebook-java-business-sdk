@@ -709,7 +709,6 @@ public class AdStudy extends APINode {
     public static final String[] FIELDS = {
       "error_code",
       "target_id",
-      "id",
     };
 
     @Override
@@ -813,13 +812,6 @@ public class AdStudy extends APINode {
     }
     public APIRequestGetHealthCheckErrors requestTargetIdField (boolean value) {
       this.requestField("target_id", value);
-      return this;
-    }
-    public APIRequestGetHealthCheckErrors requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetHealthCheckErrors requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -1311,7 +1303,6 @@ public class AdStudy extends APINode {
       "updated_by",
       "updated_time",
       "user",
-      "id",
     };
 
     @Override
@@ -1471,13 +1462,6 @@ public class AdStudy extends APINode {
     }
     public APIRequestGetUserPermissions requestUserField (boolean value) {
       this.requestField("user", value);
-      return this;
-    }
-    public APIRequestGetUserPermissions requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetUserPermissions requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -2771,6 +2755,8 @@ public class AdStudy extends APINode {
   }
 
   public static enum EnumType {
+      @SerializedName("CONTINUOUS_LIFT_CONFIG")
+      VALUE_CONTINUOUS_LIFT_CONFIG("CONTINUOUS_LIFT_CONFIG"),
       @SerializedName("LIFT")
       VALUE_LIFT("LIFT"),
       @SerializedName("SPLIT_TEST")

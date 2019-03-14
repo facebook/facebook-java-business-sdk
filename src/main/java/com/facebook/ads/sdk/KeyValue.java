@@ -59,15 +59,13 @@ public class KeyValue extends APINode {
   private String mKey = null;
   @SerializedName("value")
   private String mValue = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public KeyValue() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static KeyValue loadJSON(String json, APIContext context, String header) {
     KeyValue keyValue = getGson().fromJson(json, KeyValue.class);
@@ -230,15 +228,6 @@ public class KeyValue extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public KeyValue setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -258,7 +247,6 @@ public class KeyValue extends APINode {
   public KeyValue copyFrom(KeyValue instance) {
     this.mKey = instance.mKey;
     this.mValue = instance.mValue;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

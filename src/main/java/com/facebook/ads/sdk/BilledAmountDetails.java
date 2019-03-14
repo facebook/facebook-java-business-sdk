@@ -63,15 +63,13 @@ public class BilledAmountDetails extends APINode {
   private String mTaxAmount = null;
   @SerializedName("total_amount")
   private String mTotalAmount = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public BilledAmountDetails() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static BilledAmountDetails loadJSON(String json, APIContext context, String header) {
     BilledAmountDetails billedAmountDetails = getGson().fromJson(json, BilledAmountDetails.class);
@@ -252,15 +250,6 @@ public class BilledAmountDetails extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public BilledAmountDetails setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -282,7 +271,6 @@ public class BilledAmountDetails extends APINode {
     this.mNetAmount = instance.mNetAmount;
     this.mTaxAmount = instance.mTaxAmount;
     this.mTotalAmount = instance.mTotalAmount;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

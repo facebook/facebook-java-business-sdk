@@ -63,15 +63,13 @@ public class ProductFeedMissingFeedItemReplacement extends APINode {
   private Object mStoreProductItem = null;
   @SerializedName("vehicle")
   private Object mVehicle = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public ProductFeedMissingFeedItemReplacement() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static ProductFeedMissingFeedItemReplacement loadJSON(String json, APIContext context, String header) {
     ProductFeedMissingFeedItemReplacement productFeedMissingFeedItemReplacement = getGson().fromJson(json, ProductFeedMissingFeedItemReplacement.class);
@@ -252,15 +250,6 @@ public class ProductFeedMissingFeedItemReplacement extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public ProductFeedMissingFeedItemReplacement setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -282,7 +271,6 @@ public class ProductFeedMissingFeedItemReplacement extends APINode {
     this.mProductItem = instance.mProductItem;
     this.mStoreProductItem = instance.mStoreProductItem;
     this.mVehicle = instance.mVehicle;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

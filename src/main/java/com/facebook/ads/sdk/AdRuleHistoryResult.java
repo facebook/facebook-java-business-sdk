@@ -61,15 +61,13 @@ public class AdRuleHistoryResult extends APINode {
   private String mObjectId = null;
   @SerializedName("object_type")
   private EnumObjectType mObjectType = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdRuleHistoryResult() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdRuleHistoryResult loadJSON(String json, APIContext context, String header) {
     AdRuleHistoryResult adRuleHistoryResult = getGson().fromJson(json, AdRuleHistoryResult.class);
@@ -246,15 +244,6 @@ public class AdRuleHistoryResult extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdRuleHistoryResult setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumObjectType {
@@ -296,7 +285,6 @@ public class AdRuleHistoryResult extends APINode {
     this.mActions = instance.mActions;
     this.mObjectId = instance.mObjectId;
     this.mObjectType = instance.mObjectType;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

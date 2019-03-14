@@ -79,15 +79,13 @@ public class AdCreativeLinkDataChildAttachment extends APINode {
   private Boolean mStaticCard = null;
   @SerializedName("video_id")
   private String mVideoId = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdCreativeLinkDataChildAttachment() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdCreativeLinkDataChildAttachment loadJSON(String json, APIContext context, String header) {
     AdCreativeLinkDataChildAttachment adCreativeLinkDataChildAttachment = getGson().fromJson(json, AdCreativeLinkDataChildAttachment.class);
@@ -355,15 +353,6 @@ public class AdCreativeLinkDataChildAttachment extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdCreativeLinkDataChildAttachment setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -393,7 +382,6 @@ public class AdCreativeLinkDataChildAttachment extends APINode {
     this.mReferralId = instance.mReferralId;
     this.mStaticCard = instance.mStaticCard;
     this.mVideoId = instance.mVideoId;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

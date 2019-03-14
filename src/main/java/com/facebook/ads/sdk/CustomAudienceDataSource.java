@@ -61,15 +61,13 @@ public class CustomAudienceDataSource extends APINode {
   private EnumSubType mSubType = null;
   @SerializedName("type")
   private EnumType mType = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public CustomAudienceDataSource() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static CustomAudienceDataSource loadJSON(String json, APIContext context, String header) {
     CustomAudienceDataSource customAudienceDataSource = getGson().fromJson(json, CustomAudienceDataSource.class);
@@ -238,15 +236,6 @@ public class CustomAudienceDataSource extends APINode {
 
   public CustomAudienceDataSource setFieldType(EnumType value) {
     this.mType = value;
-    return this;
-  }
-
-  public String getFieldId() {
-    return mId;
-  }
-
-  public CustomAudienceDataSource setFieldId(String value) {
-    this.mId = value;
     return this;
   }
 
@@ -420,7 +409,6 @@ public class CustomAudienceDataSource extends APINode {
     this.mCreationParams = instance.mCreationParams;
     this.mSubType = instance.mSubType;
     this.mType = instance.mType;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

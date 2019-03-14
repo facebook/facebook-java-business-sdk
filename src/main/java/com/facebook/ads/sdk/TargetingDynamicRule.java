@@ -71,15 +71,13 @@ public class TargetingDynamicRule extends APINode {
   private String mPost = null;
   @SerializedName("retention_seconds")
   private String mRetentionSeconds = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public TargetingDynamicRule() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static TargetingDynamicRule loadJSON(String json, APIContext context, String header) {
     TargetingDynamicRule targetingDynamicRule = getGson().fromJson(json, TargetingDynamicRule.class);
@@ -296,15 +294,6 @@ public class TargetingDynamicRule extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public TargetingDynamicRule setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -330,7 +319,6 @@ public class TargetingDynamicRule extends APINode {
     this.mPageId = instance.mPageId;
     this.mPost = instance.mPost;
     this.mRetentionSeconds = instance.mRetentionSeconds;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

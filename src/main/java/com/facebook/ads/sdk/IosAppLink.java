@@ -61,15 +61,13 @@ public class IosAppLink extends APINode {
   private String mAppStoreId = null;
   @SerializedName("url")
   private String mUrl = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public IosAppLink() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static IosAppLink loadJSON(String json, APIContext context, String header) {
     IosAppLink iosAppLink = getGson().fromJson(json, IosAppLink.class);
@@ -241,15 +239,6 @@ public class IosAppLink extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public IosAppLink setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -270,7 +259,6 @@ public class IosAppLink extends APINode {
     this.mAppName = instance.mAppName;
     this.mAppStoreId = instance.mAppStoreId;
     this.mUrl = instance.mUrl;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

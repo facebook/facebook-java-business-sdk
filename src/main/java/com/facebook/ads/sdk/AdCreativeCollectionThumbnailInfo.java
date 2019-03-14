@@ -61,15 +61,13 @@ public class AdCreativeCollectionThumbnailInfo extends APINode {
   private AdsImageCrops mElementCrops = null;
   @SerializedName("element_id")
   private String mElementId = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdCreativeCollectionThumbnailInfo() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdCreativeCollectionThumbnailInfo loadJSON(String json, APIContext context, String header) {
     AdCreativeCollectionThumbnailInfo adCreativeCollectionThumbnailInfo = getGson().fromJson(json, AdCreativeCollectionThumbnailInfo.class);
@@ -246,15 +244,6 @@ public class AdCreativeCollectionThumbnailInfo extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdCreativeCollectionThumbnailInfo setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -275,7 +264,6 @@ public class AdCreativeCollectionThumbnailInfo extends APINode {
     this.mElementChildIndex = instance.mElementChildIndex;
     this.mElementCrops = instance.mElementCrops;
     this.mElementId = instance.mElementId;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

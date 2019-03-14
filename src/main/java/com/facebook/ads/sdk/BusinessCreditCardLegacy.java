@@ -54,31 +54,43 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class CustomAudiencesharedAccountInfo extends APINode {
-  @SerializedName("account_id")
-  private String mAccountId = null;
-  @SerializedName("account_name")
-  private String mAccountName = null;
+public class BusinessCreditCardLegacy extends APINode {
+  @SerializedName("address")
+  private Object mAddress = null;
   @SerializedName("business_id")
   private String mBusinessId = null;
-  @SerializedName("business_name")
-  private String mBusinessName = null;
-  @SerializedName("sharing_status")
-  private String mSharingStatus = null;
+  @SerializedName("credit_card_suffix")
+  private String mCreditCardSuffix = null;
+  @SerializedName("credit_card_type")
+  private String mCreditCardType = null;
+  @SerializedName("expiration_month")
+  private Long mExpirationMonth = null;
+  @SerializedName("expiration_year")
+  private Long mExpirationYear = null;
+  @SerializedName("first_name")
+  private String mFirstName = null;
+  @SerializedName("fraud_status")
+  private String mFraudStatus = null;
+  @SerializedName("id")
+  private String mId = null;
+  @SerializedName("last_name")
+  private String mLastName = null;
+  @SerializedName("middle_name")
+  private String mMiddleName = null;
   protected static Gson gson = null;
 
-  public CustomAudiencesharedAccountInfo() {
+  public BusinessCreditCardLegacy() {
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
-  public static CustomAudiencesharedAccountInfo loadJSON(String json, APIContext context, String header) {
-    CustomAudiencesharedAccountInfo customAudiencesharedAccountInfo = getGson().fromJson(json, CustomAudiencesharedAccountInfo.class);
+  public static BusinessCreditCardLegacy loadJSON(String json, APIContext context, String header) {
+    BusinessCreditCardLegacy businessCreditCardLegacy = getGson().fromJson(json, BusinessCreditCardLegacy.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(customAudiencesharedAccountInfo.toString());
+      JsonElement o2 = parser.parse(businessCreditCardLegacy.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -88,14 +100,14 @@ public class CustomAudiencesharedAccountInfo extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    customAudiencesharedAccountInfo.context = context;
-    customAudiencesharedAccountInfo.rawValue = json;
-    customAudiencesharedAccountInfo.header = header;
-    return customAudiencesharedAccountInfo;
+    businessCreditCardLegacy.context = context;
+    businessCreditCardLegacy.rawValue = json;
+    businessCreditCardLegacy.header = header;
+    return businessCreditCardLegacy;
   }
 
-  public static APINodeList<CustomAudiencesharedAccountInfo> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<CustomAudiencesharedAccountInfo> customAudiencesharedAccountInfos = new APINodeList<CustomAudiencesharedAccountInfo>(request, json, header);
+  public static APINodeList<BusinessCreditCardLegacy> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<BusinessCreditCardLegacy> businessCreditCardLegacys = new APINodeList<BusinessCreditCardLegacy>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -106,9 +118,9 @@ public class CustomAudiencesharedAccountInfo extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          customAudiencesharedAccountInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          businessCreditCardLegacys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return customAudiencesharedAccountInfos;
+        return businessCreditCardLegacys;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -118,20 +130,20 @@ public class CustomAudiencesharedAccountInfo extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                customAudiencesharedAccountInfos.setCursors(before, after);
+                businessCreditCardLegacys.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            customAudiencesharedAccountInfos.setPaging(previous, next);
+            businessCreditCardLegacys.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              customAudiencesharedAccountInfos.setAppSecret(context.getAppSecretProof());
+              businessCreditCardLegacys.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              customAudiencesharedAccountInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              businessCreditCardLegacys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -142,23 +154,23 @@ public class CustomAudiencesharedAccountInfo extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  customAudiencesharedAccountInfos.add(loadJSON(entry.getValue().toString(), context, header));
+                  businessCreditCardLegacys.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              customAudiencesharedAccountInfos.add(loadJSON(obj.toString(), context, header));
+              businessCreditCardLegacys.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return customAudiencesharedAccountInfos;
+          return businessCreditCardLegacys;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              customAudiencesharedAccountInfos.add(loadJSON(entry.getValue().toString(), context, header));
+              businessCreditCardLegacys.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return customAudiencesharedAccountInfos;
+          return businessCreditCardLegacys;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -175,20 +187,20 @@ public class CustomAudiencesharedAccountInfo extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              customAudiencesharedAccountInfos.add(loadJSON(value.toString(), context, header));
+              businessCreditCardLegacys.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return customAudiencesharedAccountInfos;
+            return businessCreditCardLegacys;
           }
 
           // Sixth, check if it's pure JsonObject
-          customAudiencesharedAccountInfos.clear();
-          customAudiencesharedAccountInfos.add(loadJSON(json, context, header));
-          return customAudiencesharedAccountInfos;
+          businessCreditCardLegacys.clear();
+          businessCreditCardLegacys.add(loadJSON(json, context, header));
+          return businessCreditCardLegacys;
         }
       }
     } catch (Exception e) {
@@ -216,21 +228,12 @@ public class CustomAudiencesharedAccountInfo extends APINode {
   }
 
 
-  public String getFieldAccountId() {
-    return mAccountId;
+  public Object getFieldAddress() {
+    return mAddress;
   }
 
-  public CustomAudiencesharedAccountInfo setFieldAccountId(String value) {
-    this.mAccountId = value;
-    return this;
-  }
-
-  public String getFieldAccountName() {
-    return mAccountName;
-  }
-
-  public CustomAudiencesharedAccountInfo setFieldAccountName(String value) {
-    this.mAccountName = value;
+  public BusinessCreditCardLegacy setFieldAddress(Object value) {
+    this.mAddress = value;
     return this;
   }
 
@@ -238,26 +241,89 @@ public class CustomAudiencesharedAccountInfo extends APINode {
     return mBusinessId;
   }
 
-  public CustomAudiencesharedAccountInfo setFieldBusinessId(String value) {
+  public BusinessCreditCardLegacy setFieldBusinessId(String value) {
     this.mBusinessId = value;
     return this;
   }
 
-  public String getFieldBusinessName() {
-    return mBusinessName;
+  public String getFieldCreditCardSuffix() {
+    return mCreditCardSuffix;
   }
 
-  public CustomAudiencesharedAccountInfo setFieldBusinessName(String value) {
-    this.mBusinessName = value;
+  public BusinessCreditCardLegacy setFieldCreditCardSuffix(String value) {
+    this.mCreditCardSuffix = value;
     return this;
   }
 
-  public String getFieldSharingStatus() {
-    return mSharingStatus;
+  public String getFieldCreditCardType() {
+    return mCreditCardType;
   }
 
-  public CustomAudiencesharedAccountInfo setFieldSharingStatus(String value) {
-    this.mSharingStatus = value;
+  public BusinessCreditCardLegacy setFieldCreditCardType(String value) {
+    this.mCreditCardType = value;
+    return this;
+  }
+
+  public Long getFieldExpirationMonth() {
+    return mExpirationMonth;
+  }
+
+  public BusinessCreditCardLegacy setFieldExpirationMonth(Long value) {
+    this.mExpirationMonth = value;
+    return this;
+  }
+
+  public Long getFieldExpirationYear() {
+    return mExpirationYear;
+  }
+
+  public BusinessCreditCardLegacy setFieldExpirationYear(Long value) {
+    this.mExpirationYear = value;
+    return this;
+  }
+
+  public String getFieldFirstName() {
+    return mFirstName;
+  }
+
+  public BusinessCreditCardLegacy setFieldFirstName(String value) {
+    this.mFirstName = value;
+    return this;
+  }
+
+  public String getFieldFraudStatus() {
+    return mFraudStatus;
+  }
+
+  public BusinessCreditCardLegacy setFieldFraudStatus(String value) {
+    this.mFraudStatus = value;
+    return this;
+  }
+
+  public String getFieldId() {
+    return mId;
+  }
+
+  public BusinessCreditCardLegacy setFieldId(String value) {
+    this.mId = value;
+    return this;
+  }
+
+  public String getFieldLastName() {
+    return mLastName;
+  }
+
+  public BusinessCreditCardLegacy setFieldLastName(String value) {
+    this.mLastName = value;
+    return this;
+  }
+
+  public String getFieldMiddleName() {
+    return mMiddleName;
+  }
+
+  public BusinessCreditCardLegacy setFieldMiddleName(String value) {
+    this.mMiddleName = value;
     return this;
   }
 
@@ -277,21 +343,27 @@ public class CustomAudiencesharedAccountInfo extends APINode {
     return gson;
   }
 
-  public CustomAudiencesharedAccountInfo copyFrom(CustomAudiencesharedAccountInfo instance) {
-    this.mAccountId = instance.mAccountId;
-    this.mAccountName = instance.mAccountName;
+  public BusinessCreditCardLegacy copyFrom(BusinessCreditCardLegacy instance) {
+    this.mAddress = instance.mAddress;
     this.mBusinessId = instance.mBusinessId;
-    this.mBusinessName = instance.mBusinessName;
-    this.mSharingStatus = instance.mSharingStatus;
+    this.mCreditCardSuffix = instance.mCreditCardSuffix;
+    this.mCreditCardType = instance.mCreditCardType;
+    this.mExpirationMonth = instance.mExpirationMonth;
+    this.mExpirationYear = instance.mExpirationYear;
+    this.mFirstName = instance.mFirstName;
+    this.mFraudStatus = instance.mFraudStatus;
+    this.mId = instance.mId;
+    this.mLastName = instance.mLastName;
+    this.mMiddleName = instance.mMiddleName;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<CustomAudiencesharedAccountInfo> getParser() {
-    return new APIRequest.ResponseParser<CustomAudiencesharedAccountInfo>() {
-      public APINodeList<CustomAudiencesharedAccountInfo> parseResponse(String response, APIContext context, APIRequest<CustomAudiencesharedAccountInfo> request, String header) throws MalformedResponseException {
-        return CustomAudiencesharedAccountInfo.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<BusinessCreditCardLegacy> getParser() {
+    return new APIRequest.ResponseParser<BusinessCreditCardLegacy>() {
+      public APINodeList<BusinessCreditCardLegacy> parseResponse(String response, APIContext context, APIRequest<BusinessCreditCardLegacy> request, String header) throws MalformedResponseException {
+        return BusinessCreditCardLegacy.parseResponse(response, context, request, header);
       }
     };
   }

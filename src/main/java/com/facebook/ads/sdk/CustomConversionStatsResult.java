@@ -61,15 +61,13 @@ public class CustomConversionStatsResult extends APINode {
   private List<Object> mData = null;
   @SerializedName("timestamp")
   private String mTimestamp = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public CustomConversionStatsResult() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static CustomConversionStatsResult loadJSON(String json, APIContext context, String header) {
     CustomConversionStatsResult customConversionStatsResult = getGson().fromJson(json, CustomConversionStatsResult.class);
@@ -241,15 +239,6 @@ public class CustomConversionStatsResult extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public CustomConversionStatsResult setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumAggregation {
@@ -301,7 +290,6 @@ public class CustomConversionStatsResult extends APINode {
     this.mAggregation = instance.mAggregation;
     this.mData = instance.mData;
     this.mTimestamp = instance.mTimestamp;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

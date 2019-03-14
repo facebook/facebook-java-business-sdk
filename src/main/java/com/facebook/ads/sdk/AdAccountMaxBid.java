@@ -57,15 +57,13 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdAccountMaxBid extends APINode {
   @SerializedName("max_bid")
   private Long mMaxBid = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdAccountMaxBid() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdAccountMaxBid loadJSON(String json, APIContext context, String header) {
     AdAccountMaxBid adAccountMaxBid = getGson().fromJson(json, AdAccountMaxBid.class);
@@ -219,15 +217,6 @@ public class AdAccountMaxBid extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdAccountMaxBid setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -246,7 +235,6 @@ public class AdAccountMaxBid extends APINode {
 
   public AdAccountMaxBid copyFrom(AdAccountMaxBid instance) {
     this.mMaxBid = instance.mMaxBid;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

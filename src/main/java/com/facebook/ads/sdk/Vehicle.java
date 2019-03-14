@@ -356,6 +356,10 @@ public class Vehicle extends APINode {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestUpdate update() {
+    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
+  }
+
 
   public Object getFieldAddress() {
     return mAddress;
@@ -995,6 +999,334 @@ public class Vehicle extends APINode {
       this.requestField("year", value);
       return this;
     }
+  }
+
+  public static class APIRequestUpdate extends APIRequest<Vehicle> {
+
+    Vehicle lastResponse = null;
+    @Override
+    public Vehicle getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "applinks",
+      "transmission",
+      "drivetrain",
+      "fuel_type",
+      "trim",
+      "interior_color",
+      "condition",
+      "date_first_on_lot",
+      "availability",
+      "dealer_id",
+      "dealer_name",
+      "dealer_phone",
+      "vehicle_type",
+      "body_style",
+      "description",
+      "exterior_color",
+      "make",
+      "mileage",
+      "model",
+      "state_of_vehicle",
+      "vin",
+      "url",
+      "year",
+      "images",
+      "address",
+      "currency",
+      "price",
+      "title",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Vehicle parseResponse(String response, String header) throws APIException {
+      return Vehicle.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Vehicle execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Vehicle execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Vehicle> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Vehicle> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, Vehicle>() {
+           public Vehicle apply(ResponseWrapper result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestUpdate(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestUpdate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestUpdate setApplinks (Object applinks) {
+      this.setParam("applinks", applinks);
+      return this;
+    }
+    public APIRequestUpdate setApplinks (String applinks) {
+      this.setParam("applinks", applinks);
+      return this;
+    }
+
+    public APIRequestUpdate setTransmission (Vehicle.EnumTransmission transmission) {
+      this.setParam("transmission", transmission);
+      return this;
+    }
+    public APIRequestUpdate setTransmission (String transmission) {
+      this.setParam("transmission", transmission);
+      return this;
+    }
+
+    public APIRequestUpdate setDrivetrain (Vehicle.EnumDrivetrain drivetrain) {
+      this.setParam("drivetrain", drivetrain);
+      return this;
+    }
+    public APIRequestUpdate setDrivetrain (String drivetrain) {
+      this.setParam("drivetrain", drivetrain);
+      return this;
+    }
+
+    public APIRequestUpdate setFuelType (Vehicle.EnumFuelType fuelType) {
+      this.setParam("fuel_type", fuelType);
+      return this;
+    }
+    public APIRequestUpdate setFuelType (String fuelType) {
+      this.setParam("fuel_type", fuelType);
+      return this;
+    }
+
+    public APIRequestUpdate setTrim (String trim) {
+      this.setParam("trim", trim);
+      return this;
+    }
+
+    public APIRequestUpdate setInteriorColor (String interiorColor) {
+      this.setParam("interior_color", interiorColor);
+      return this;
+    }
+
+    public APIRequestUpdate setCondition (Vehicle.EnumCondition condition) {
+      this.setParam("condition", condition);
+      return this;
+    }
+    public APIRequestUpdate setCondition (String condition) {
+      this.setParam("condition", condition);
+      return this;
+    }
+
+    public APIRequestUpdate setDateFirstOnLot (String dateFirstOnLot) {
+      this.setParam("date_first_on_lot", dateFirstOnLot);
+      return this;
+    }
+
+    public APIRequestUpdate setAvailability (Vehicle.EnumAvailability availability) {
+      this.setParam("availability", availability);
+      return this;
+    }
+    public APIRequestUpdate setAvailability (String availability) {
+      this.setParam("availability", availability);
+      return this;
+    }
+
+    public APIRequestUpdate setDealerId (String dealerId) {
+      this.setParam("dealer_id", dealerId);
+      return this;
+    }
+
+    public APIRequestUpdate setDealerName (String dealerName) {
+      this.setParam("dealer_name", dealerName);
+      return this;
+    }
+
+    public APIRequestUpdate setDealerPhone (String dealerPhone) {
+      this.setParam("dealer_phone", dealerPhone);
+      return this;
+    }
+
+    public APIRequestUpdate setVehicleType (Vehicle.EnumVehicleType vehicleType) {
+      this.setParam("vehicle_type", vehicleType);
+      return this;
+    }
+    public APIRequestUpdate setVehicleType (String vehicleType) {
+      this.setParam("vehicle_type", vehicleType);
+      return this;
+    }
+
+    public APIRequestUpdate setBodyStyle (Vehicle.EnumBodyStyle bodyStyle) {
+      this.setParam("body_style", bodyStyle);
+      return this;
+    }
+    public APIRequestUpdate setBodyStyle (String bodyStyle) {
+      this.setParam("body_style", bodyStyle);
+      return this;
+    }
+
+    public APIRequestUpdate setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestUpdate setExteriorColor (String exteriorColor) {
+      this.setParam("exterior_color", exteriorColor);
+      return this;
+    }
+
+    public APIRequestUpdate setMake (String make) {
+      this.setParam("make", make);
+      return this;
+    }
+
+    public APIRequestUpdate setMileage (Map<String, String> mileage) {
+      this.setParam("mileage", mileage);
+      return this;
+    }
+    public APIRequestUpdate setMileage (String mileage) {
+      this.setParam("mileage", mileage);
+      return this;
+    }
+
+    public APIRequestUpdate setModel (String model) {
+      this.setParam("model", model);
+      return this;
+    }
+
+    public APIRequestUpdate setStateOfVehicle (Vehicle.EnumStateOfVehicle stateOfVehicle) {
+      this.setParam("state_of_vehicle", stateOfVehicle);
+      return this;
+    }
+    public APIRequestUpdate setStateOfVehicle (String stateOfVehicle) {
+      this.setParam("state_of_vehicle", stateOfVehicle);
+      return this;
+    }
+
+    public APIRequestUpdate setVin (String vin) {
+      this.setParam("vin", vin);
+      return this;
+    }
+
+    public APIRequestUpdate setUrl (String url) {
+      this.setParam("url", url);
+      return this;
+    }
+
+    public APIRequestUpdate setYear (Long year) {
+      this.setParam("year", year);
+      return this;
+    }
+    public APIRequestUpdate setYear (String year) {
+      this.setParam("year", year);
+      return this;
+    }
+
+    public APIRequestUpdate setImages (List<Object> images) {
+      this.setParam("images", images);
+      return this;
+    }
+    public APIRequestUpdate setImages (String images) {
+      this.setParam("images", images);
+      return this;
+    }
+
+    public APIRequestUpdate setAddress (Map<String, String> address) {
+      this.setParam("address", address);
+      return this;
+    }
+    public APIRequestUpdate setAddress (String address) {
+      this.setParam("address", address);
+      return this;
+    }
+
+    public APIRequestUpdate setCurrency (String currency) {
+      this.setParam("currency", currency);
+      return this;
+    }
+
+    public APIRequestUpdate setPrice (Long price) {
+      this.setParam("price", price);
+      return this;
+    }
+    public APIRequestUpdate setPrice (String price) {
+      this.setParam("price", price);
+      return this;
+    }
+
+    public APIRequestUpdate setTitle (String title) {
+      this.setParam("title", title);
+      return this;
+    }
+
+    public APIRequestUpdate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestUpdate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static enum EnumAvailability {

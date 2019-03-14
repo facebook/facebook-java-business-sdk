@@ -63,15 +63,13 @@ public class AdCreativeLinkDataAppLinkSpec extends APINode {
   private List<IosAppLink> mIpad = null;
   @SerializedName("iphone")
   private List<IosAppLink> mIphone = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdCreativeLinkDataAppLinkSpec() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdCreativeLinkDataAppLinkSpec loadJSON(String json, APIContext context, String header) {
     AdCreativeLinkDataAppLinkSpec adCreativeLinkDataAppLinkSpec = getGson().fromJson(json, AdCreativeLinkDataAppLinkSpec.class);
@@ -272,15 +270,6 @@ public class AdCreativeLinkDataAppLinkSpec extends APINode {
     this.mIphone = IosAppLink.getGson().fromJson(value, type);
     return this;
   }
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdCreativeLinkDataAppLinkSpec setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -302,7 +291,6 @@ public class AdCreativeLinkDataAppLinkSpec extends APINode {
     this.mIos = instance.mIos;
     this.mIpad = instance.mIpad;
     this.mIphone = instance.mIphone;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

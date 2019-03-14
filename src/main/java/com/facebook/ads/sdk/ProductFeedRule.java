@@ -60,7 +60,7 @@ public class ProductFeedRule extends APINode {
   @SerializedName("id")
   private String mId = null;
   @SerializedName("params")
-  private List<Object> mParams = null;
+  private Map<String, String> mParams = null;
   @SerializedName("rule_type")
   private String mRuleType = null;
   protected static Gson gson = null;
@@ -293,7 +293,7 @@ public class ProductFeedRule extends APINode {
     return mId;
   }
 
-  public List<Object> getFieldParams() {
+  public Map<String, String> getFieldParams() {
     return mParams;
   }
 

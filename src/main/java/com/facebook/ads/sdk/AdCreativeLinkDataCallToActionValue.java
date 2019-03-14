@@ -77,15 +77,13 @@ public class AdCreativeLinkDataCallToActionValue extends APINode {
   private String mProductLink = null;
   @SerializedName("whatsapp_number")
   private String mWhatsappNumber = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdCreativeLinkDataCallToActionValue() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdCreativeLinkDataCallToActionValue loadJSON(String json, APIContext context, String header) {
     AdCreativeLinkDataCallToActionValue adCreativeLinkDataCallToActionValue = getGson().fromJson(json, AdCreativeLinkDataCallToActionValue.class);
@@ -329,15 +327,6 @@ public class AdCreativeLinkDataCallToActionValue extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdCreativeLinkDataCallToActionValue setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -366,7 +355,6 @@ public class AdCreativeLinkDataCallToActionValue extends APINode {
     this.mPage = instance.mPage;
     this.mProductLink = instance.mProductLink;
     this.mWhatsappNumber = instance.mWhatsappNumber;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

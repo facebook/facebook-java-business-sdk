@@ -2345,7 +2345,6 @@ public class Application extends APINode {
     public static final String[] FIELDS = {
       "query_id",
       "results",
-      "id",
     };
 
     @Override
@@ -2401,7 +2400,7 @@ public class Application extends APINode {
     }
 
 
-    public APIRequestGetAdNetworkAnalytics setAggregationPeriod (Application.EnumAggregationPeriod aggregationPeriod) {
+    public APIRequestGetAdNetworkAnalytics setAggregationPeriod (AdNetworkAnalyticsSyncQueryResult.EnumAggregationPeriod aggregationPeriod) {
       this.setParam("aggregation_period", aggregationPeriod);
       return this;
     }
@@ -2410,7 +2409,7 @@ public class Application extends APINode {
       return this;
     }
 
-    public APIRequestGetAdNetworkAnalytics setBreakdowns (List<Application.EnumBreakdowns> breakdowns) {
+    public APIRequestGetAdNetworkAnalytics setBreakdowns (List<AdNetworkAnalyticsSyncQueryResult.EnumBreakdowns> breakdowns) {
       this.setParam("breakdowns", breakdowns);
       return this;
     }
@@ -2437,7 +2436,7 @@ public class Application extends APINode {
       return this;
     }
 
-    public APIRequestGetAdNetworkAnalytics setMetrics (List<Application.EnumMetrics> metrics) {
+    public APIRequestGetAdNetworkAnalytics setMetrics (List<AdNetworkAnalyticsSyncQueryResult.EnumMetrics> metrics) {
       this.setParam("metrics", metrics);
       return this;
     }
@@ -2446,7 +2445,7 @@ public class Application extends APINode {
       return this;
     }
 
-    public APIRequestGetAdNetworkAnalytics setOrderingColumn (Application.EnumOrderingColumn orderingColumn) {
+    public APIRequestGetAdNetworkAnalytics setOrderingColumn (AdNetworkAnalyticsSyncQueryResult.EnumOrderingColumn orderingColumn) {
       this.setParam("ordering_column", orderingColumn);
       return this;
     }
@@ -2455,7 +2454,7 @@ public class Application extends APINode {
       return this;
     }
 
-    public APIRequestGetAdNetworkAnalytics setOrderingType (Application.EnumOrderingType orderingType) {
+    public APIRequestGetAdNetworkAnalytics setOrderingType (AdNetworkAnalyticsSyncQueryResult.EnumOrderingType orderingType) {
       this.setParam("ordering_type", orderingType);
       return this;
     }
@@ -2522,13 +2521,6 @@ public class Application extends APINode {
     }
     public APIRequestGetAdNetworkAnalytics requestResultsField (boolean value) {
       this.requestField("results", value);
-      return this;
-    }
-    public APIRequestGetAdNetworkAnalytics requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetAdNetworkAnalytics requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -2608,7 +2600,7 @@ public class Application extends APINode {
     }
 
 
-    public APIRequestCreateAdNetworkAnalytic setAggregationPeriod (Application.EnumAggregationPeriod aggregationPeriod) {
+    public APIRequestCreateAdNetworkAnalytic setAggregationPeriod (AdNetworkAnalyticsSyncQueryResult.EnumAggregationPeriod aggregationPeriod) {
       this.setParam("aggregation_period", aggregationPeriod);
       return this;
     }
@@ -2617,7 +2609,7 @@ public class Application extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdNetworkAnalytic setBreakdowns (List<Application.EnumBreakdowns> breakdowns) {
+    public APIRequestCreateAdNetworkAnalytic setBreakdowns (List<AdNetworkAnalyticsSyncQueryResult.EnumBreakdowns> breakdowns) {
       this.setParam("breakdowns", breakdowns);
       return this;
     }
@@ -2626,7 +2618,7 @@ public class Application extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdNetworkAnalytic setMetrics (List<Application.EnumMetrics> metrics) {
+    public APIRequestCreateAdNetworkAnalytic setMetrics (List<AdNetworkAnalyticsSyncQueryResult.EnumMetrics> metrics) {
       this.setParam("metrics", metrics);
       return this;
     }
@@ -2653,7 +2645,7 @@ public class Application extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdNetworkAnalytic setOrderingColumn (Application.EnumOrderingColumn orderingColumn) {
+    public APIRequestCreateAdNetworkAnalytic setOrderingColumn (AdNetworkAnalyticsSyncQueryResult.EnumOrderingColumn orderingColumn) {
       this.setParam("ordering_column", orderingColumn);
       return this;
     }
@@ -2662,7 +2654,7 @@ public class Application extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdNetworkAnalytic setOrderingType (Application.EnumOrderingType orderingType) {
+    public APIRequestCreateAdNetworkAnalytic setOrderingType (AdNetworkAnalyticsSyncQueryResult.EnumOrderingType orderingType) {
       this.setParam("ordering_type", orderingType);
       return this;
     }
@@ -2736,7 +2728,6 @@ public class Application extends APINode {
       "query_id",
       "results",
       "status",
-      "id",
     };
 
     @Override
@@ -2870,13 +2861,6 @@ public class Application extends APINode {
     }
     public APIRequestGetAdNetworkAnalyticsResults requestStatusField (boolean value) {
       this.requestField("status", value);
-      return this;
-    }
-    public APIRequestGetAdNetworkAnalyticsResults requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetAdNetworkAnalyticsResults requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -4961,6 +4945,7 @@ public class Application extends APINode {
       "end_advertiser_name",
       "extended_credit_invoice_group",
       "failed_delivery_checks",
+      "fb_entity",
       "funding_source",
       "funding_source_details",
       "has_migrated_permissions",
@@ -5271,6 +5256,13 @@ public class Application extends APINode {
     }
     public APIRequestGetAuthorizedAdAccounts requestFailedDeliveryChecksField (boolean value) {
       this.requestField("failed_delivery_checks", value);
+      return this;
+    }
+    public APIRequestGetAuthorizedAdAccounts requestFbEntityField () {
+      return this.requestFbEntityField(true);
+    }
+    public APIRequestGetAuthorizedAdAccounts requestFbEntityField (boolean value) {
+      this.requestField("fb_entity", value);
       return this;
     }
     public APIRequestGetAuthorizedAdAccounts requestFundingSourceField () {
@@ -7213,7 +7205,6 @@ public class Application extends APINode {
       "result",
       "title",
       "user_message",
-      "id",
     };
 
     @Override
@@ -7354,13 +7345,6 @@ public class Application extends APINode {
     }
     public APIRequestGetDaChecks requestUserMessageField (boolean value) {
       this.requestField("user_message", value);
-      return this;
-    }
-    public APIRequestGetDaChecks requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetDaChecks requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -9590,6 +9574,7 @@ public class Application extends APINode {
       "view_attr_window",
       "decline_reason",
       "auditing_token",
+      "custom_events",
     };
 
     public static final String[] FIELDS = {
@@ -9738,6 +9723,15 @@ public class Application extends APINode {
 
     public APIRequestCreateMmpAuditing setAuditingToken (String auditingToken) {
       this.setParam("auditing_token", auditingToken);
+      return this;
+    }
+
+    public APIRequestCreateMmpAuditing setCustomEvents (List<Object> customEvents) {
+      this.setParam("custom_events", customEvents);
+      return this;
+    }
+    public APIRequestCreateMmpAuditing setCustomEvents (String customEvents) {
+      this.setParam("custom_events", customEvents);
       return this;
     }
 
@@ -12621,7 +12615,6 @@ public class Application extends APINode {
       "top",
       "url",
       "width",
-      "id",
     };
 
     @Override
@@ -12792,13 +12785,6 @@ public class Application extends APINode {
     }
     public APIRequestGetPicture requestWidthField (boolean value) {
       this.requestField("width", value);
-      return this;
-    }
-    public APIRequestGetPicture requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetPicture requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -16006,193 +15992,6 @@ public class Application extends APINode {
       private String value;
 
       private EnumAnPlatforms(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumAggregationPeriod {
-      @SerializedName("DAY")
-      VALUE_DAY("DAY"),
-      @SerializedName("HOUR")
-      VALUE_HOUR("HOUR"),
-      @SerializedName("TOTAL")
-      VALUE_TOTAL("TOTAL"),
-      NULL(null);
-
-      private String value;
-
-      private EnumAggregationPeriod(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumBreakdowns {
-      @SerializedName("AGE")
-      VALUE_AGE("AGE"),
-      @SerializedName("APP")
-      VALUE_APP("APP"),
-      @SerializedName("CLICKED_VIEW_TAG")
-      VALUE_CLICKED_VIEW_TAG("CLICKED_VIEW_TAG"),
-      @SerializedName("COUNTRY")
-      VALUE_COUNTRY("COUNTRY"),
-      @SerializedName("DEAL")
-      VALUE_DEAL("DEAL"),
-      @SerializedName("DEAL_AD")
-      VALUE_DEAL_AD("DEAL_AD"),
-      @SerializedName("DEAL_PAGE")
-      VALUE_DEAL_PAGE("DEAL_PAGE"),
-      @SerializedName("DELIVERY_METHOD")
-      VALUE_DELIVERY_METHOD("DELIVERY_METHOD"),
-      @SerializedName("DISPLAY_FORMAT")
-      VALUE_DISPLAY_FORMAT("DISPLAY_FORMAT"),
-      @SerializedName("FAIL_REASON")
-      VALUE_FAIL_REASON("FAIL_REASON"),
-      @SerializedName("GENDER")
-      VALUE_GENDER("GENDER"),
-      @SerializedName("PLACEMENT")
-      VALUE_PLACEMENT("PLACEMENT"),
-      @SerializedName("PLATFORM")
-      VALUE_PLATFORM("PLATFORM"),
-      @SerializedName("PROPERTY")
-      VALUE_PROPERTY("PROPERTY"),
-      @SerializedName("SDK_VERSION")
-      VALUE_SDK_VERSION("SDK_VERSION"),
-      NULL(null);
-
-      private String value;
-
-      private EnumBreakdowns(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumMetrics {
-      @SerializedName("FB_AD_NETWORK_BIDDING_BID_RATE")
-      VALUE_FB_AD_NETWORK_BIDDING_BID_RATE("FB_AD_NETWORK_BIDDING_BID_RATE"),
-      @SerializedName("FB_AD_NETWORK_BIDDING_REQUEST")
-      VALUE_FB_AD_NETWORK_BIDDING_REQUEST("FB_AD_NETWORK_BIDDING_REQUEST"),
-      @SerializedName("FB_AD_NETWORK_BIDDING_RESPONSE")
-      VALUE_FB_AD_NETWORK_BIDDING_RESPONSE("FB_AD_NETWORK_BIDDING_RESPONSE"),
-      @SerializedName("FB_AD_NETWORK_BIDDING_REVENUE")
-      VALUE_FB_AD_NETWORK_BIDDING_REVENUE("FB_AD_NETWORK_BIDDING_REVENUE"),
-      @SerializedName("FB_AD_NETWORK_BIDDING_WIN_RATE")
-      VALUE_FB_AD_NETWORK_BIDDING_WIN_RATE("FB_AD_NETWORK_BIDDING_WIN_RATE"),
-      @SerializedName("FB_AD_NETWORK_CLICK")
-      VALUE_FB_AD_NETWORK_CLICK("FB_AD_NETWORK_CLICK"),
-      @SerializedName("FB_AD_NETWORK_CLICK_VALUE_SCORE")
-      VALUE_FB_AD_NETWORK_CLICK_VALUE_SCORE("FB_AD_NETWORK_CLICK_VALUE_SCORE"),
-      @SerializedName("FB_AD_NETWORK_CLICK_VALUE_SCORE_DENOMINATOR")
-      VALUE_FB_AD_NETWORK_CLICK_VALUE_SCORE_DENOMINATOR("FB_AD_NETWORK_CLICK_VALUE_SCORE_DENOMINATOR"),
-      @SerializedName("FB_AD_NETWORK_CLICK_VALUE_SCORE_NUMERATOR")
-      VALUE_FB_AD_NETWORK_CLICK_VALUE_SCORE_NUMERATOR("FB_AD_NETWORK_CLICK_VALUE_SCORE_NUMERATOR"),
-      @SerializedName("FB_AD_NETWORK_CPM")
-      VALUE_FB_AD_NETWORK_CPM("FB_AD_NETWORK_CPM"),
-      @SerializedName("FB_AD_NETWORK_CTR")
-      VALUE_FB_AD_NETWORK_CTR("FB_AD_NETWORK_CTR"),
-      @SerializedName("FB_AD_NETWORK_DIRECT_PUBLISHER_BILL")
-      VALUE_FB_AD_NETWORK_DIRECT_PUBLISHER_BILL("FB_AD_NETWORK_DIRECT_PUBLISHER_BILL"),
-      @SerializedName("FB_AD_NETWORK_DIRECT_TOTAL_REVENUE")
-      VALUE_FB_AD_NETWORK_DIRECT_TOTAL_REVENUE("FB_AD_NETWORK_DIRECT_TOTAL_REVENUE"),
-      @SerializedName("FB_AD_NETWORK_FAST_CLICK_DENOMINATOR")
-      VALUE_FB_AD_NETWORK_FAST_CLICK_DENOMINATOR("FB_AD_NETWORK_FAST_CLICK_DENOMINATOR"),
-      @SerializedName("FB_AD_NETWORK_FAST_CLICK_NUMERATOR")
-      VALUE_FB_AD_NETWORK_FAST_CLICK_NUMERATOR("FB_AD_NETWORK_FAST_CLICK_NUMERATOR"),
-      @SerializedName("FB_AD_NETWORK_FAST_CLICK_RATE")
-      VALUE_FB_AD_NETWORK_FAST_CLICK_RATE("FB_AD_NETWORK_FAST_CLICK_RATE"),
-      @SerializedName("FB_AD_NETWORK_FAST_RETURN_DENOMINATOR")
-      VALUE_FB_AD_NETWORK_FAST_RETURN_DENOMINATOR("FB_AD_NETWORK_FAST_RETURN_DENOMINATOR"),
-      @SerializedName("FB_AD_NETWORK_FAST_RETURN_NUMERATOR")
-      VALUE_FB_AD_NETWORK_FAST_RETURN_NUMERATOR("FB_AD_NETWORK_FAST_RETURN_NUMERATOR"),
-      @SerializedName("FB_AD_NETWORK_FAST_RETURN_RATE")
-      VALUE_FB_AD_NETWORK_FAST_RETURN_RATE("FB_AD_NETWORK_FAST_RETURN_RATE"),
-      @SerializedName("FB_AD_NETWORK_FILLED_REQUEST")
-      VALUE_FB_AD_NETWORK_FILLED_REQUEST("FB_AD_NETWORK_FILLED_REQUEST"),
-      @SerializedName("FB_AD_NETWORK_FILL_RATE")
-      VALUE_FB_AD_NETWORK_FILL_RATE("FB_AD_NETWORK_FILL_RATE"),
-      @SerializedName("FB_AD_NETWORK_IMP")
-      VALUE_FB_AD_NETWORK_IMP("FB_AD_NETWORK_IMP"),
-      @SerializedName("FB_AD_NETWORK_NO_BID")
-      VALUE_FB_AD_NETWORK_NO_BID("FB_AD_NETWORK_NO_BID"),
-      @SerializedName("FB_AD_NETWORK_NO_FILL")
-      VALUE_FB_AD_NETWORK_NO_FILL("FB_AD_NETWORK_NO_FILL"),
-      @SerializedName("FB_AD_NETWORK_REQUEST")
-      VALUE_FB_AD_NETWORK_REQUEST("FB_AD_NETWORK_REQUEST"),
-      @SerializedName("FB_AD_NETWORK_REVENUE")
-      VALUE_FB_AD_NETWORK_REVENUE("FB_AD_NETWORK_REVENUE"),
-      @SerializedName("FB_AD_NETWORK_SHOW_RATE")
-      VALUE_FB_AD_NETWORK_SHOW_RATE("FB_AD_NETWORK_SHOW_RATE"),
-      @SerializedName("FB_AD_NETWORK_VIDEO_GUARANTEE_REVENUE")
-      VALUE_FB_AD_NETWORK_VIDEO_GUARANTEE_REVENUE("FB_AD_NETWORK_VIDEO_GUARANTEE_REVENUE"),
-      @SerializedName("FB_AD_NETWORK_VIDEO_MRC")
-      VALUE_FB_AD_NETWORK_VIDEO_MRC("FB_AD_NETWORK_VIDEO_MRC"),
-      @SerializedName("FB_AD_NETWORK_VIDEO_MRC_RATE")
-      VALUE_FB_AD_NETWORK_VIDEO_MRC_RATE("FB_AD_NETWORK_VIDEO_MRC_RATE"),
-      @SerializedName("FB_AD_NETWORK_VIDEO_VIEW")
-      VALUE_FB_AD_NETWORK_VIDEO_VIEW("FB_AD_NETWORK_VIDEO_VIEW"),
-      @SerializedName("FB_AD_NETWORK_VIDEO_VIEW_RATE")
-      VALUE_FB_AD_NETWORK_VIDEO_VIEW_RATE("FB_AD_NETWORK_VIDEO_VIEW_RATE"),
-      @SerializedName("FB_AD_NETWORK_WIN_RATE")
-      VALUE_FB_AD_NETWORK_WIN_RATE("FB_AD_NETWORK_WIN_RATE"),
-      NULL(null);
-
-      private String value;
-
-      private EnumMetrics(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumOrderingColumn {
-      @SerializedName("METRIC")
-      VALUE_METRIC("METRIC"),
-      @SerializedName("TIME")
-      VALUE_TIME("TIME"),
-      @SerializedName("VALUE")
-      VALUE_VALUE("VALUE"),
-      NULL(null);
-
-      private String value;
-
-      private EnumOrderingColumn(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumOrderingType {
-      @SerializedName("ASCENDING")
-      VALUE_ASCENDING("ASCENDING"),
-      @SerializedName("DESCENDING")
-      VALUE_DESCENDING("DESCENDING"),
-      NULL(null);
-
-      private String value;
-
-      private EnumOrderingType(String value) {
         this.value = value;
       }
 

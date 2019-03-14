@@ -69,15 +69,13 @@ public class CheckBatchRequestStatus extends APINode {
   private List<Object> mWarnings = null;
   @SerializedName("warnings_total_count")
   private Long mWarningsTotalCount = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public CheckBatchRequestStatus() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static CheckBatchRequestStatus loadJSON(String json, APIContext context, String header) {
     CheckBatchRequestStatus checkBatchRequestStatus = getGson().fromJson(json, CheckBatchRequestStatus.class);
@@ -285,15 +283,6 @@ public class CheckBatchRequestStatus extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public CheckBatchRequestStatus setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -318,7 +307,6 @@ public class CheckBatchRequestStatus extends APINode {
     this.mStatus = instance.mStatus;
     this.mWarnings = instance.mWarnings;
     this.mWarningsTotalCount = instance.mWarningsTotalCount;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

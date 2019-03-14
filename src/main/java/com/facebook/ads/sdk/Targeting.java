@@ -235,15 +235,13 @@ public class Targeting extends APINode {
   private List<IDName> mWorkPositions = null;
   @SerializedName("zips")
   private List<String> mZips = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public Targeting() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static Targeting loadJSON(String json, APIContext context, String header) {
     Targeting targeting = getGson().fromJson(json, Targeting.class);
@@ -1393,15 +1391,6 @@ public class Targeting extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public Targeting setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumDevicePlatforms {
@@ -1551,7 +1540,6 @@ public class Targeting extends APINode {
     this.mWorkEmployers = instance.mWorkEmployers;
     this.mWorkPositions = instance.mWorkPositions;
     this.mZips = instance.mZips;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

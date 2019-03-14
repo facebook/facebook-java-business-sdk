@@ -59,15 +59,13 @@ public class LeadGenQuestionOption extends APINode {
   private String mKey = null;
   @SerializedName("value")
   private String mValue = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public LeadGenQuestionOption() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static LeadGenQuestionOption loadJSON(String json, APIContext context, String header) {
     LeadGenQuestionOption leadGenQuestionOption = getGson().fromJson(json, LeadGenQuestionOption.class);
@@ -230,15 +228,6 @@ public class LeadGenQuestionOption extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public LeadGenQuestionOption setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -258,7 +247,6 @@ public class LeadGenQuestionOption extends APINode {
   public LeadGenQuestionOption copyFrom(LeadGenQuestionOption instance) {
     this.mKey = instance.mKey;
     this.mValue = instance.mValue;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

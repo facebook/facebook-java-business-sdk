@@ -57,15 +57,13 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdCampaignBidConstraint extends APINode {
   @SerializedName("roas_average_floor")
   private Long mRoasAverageFloor = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdCampaignBidConstraint() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdCampaignBidConstraint loadJSON(String json, APIContext context, String header) {
     AdCampaignBidConstraint adCampaignBidConstraint = getGson().fromJson(json, AdCampaignBidConstraint.class);
@@ -219,15 +217,6 @@ public class AdCampaignBidConstraint extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdCampaignBidConstraint setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -246,7 +235,6 @@ public class AdCampaignBidConstraint extends APINode {
 
   public AdCampaignBidConstraint copyFrom(AdCampaignBidConstraint instance) {
     this.mRoasAverageFloor = instance.mRoasAverageFloor;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

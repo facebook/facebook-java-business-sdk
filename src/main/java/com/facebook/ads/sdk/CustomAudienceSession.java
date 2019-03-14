@@ -71,15 +71,13 @@ public class CustomAudienceSession extends APINode {
   private String mStage = null;
   @SerializedName("start_time")
   private String mStartTime = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public CustomAudienceSession() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static CustomAudienceSession loadJSON(String json, APIContext context, String header) {
     CustomAudienceSession customAudienceSession = getGson().fromJson(json, CustomAudienceSession.class);
@@ -296,15 +294,6 @@ public class CustomAudienceSession extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public CustomAudienceSession setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -330,7 +319,6 @@ public class CustomAudienceSession extends APINode {
     this.mSessionId = instance.mSessionId;
     this.mStage = instance.mStage;
     this.mStartTime = instance.mStartTime;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -73,15 +73,13 @@ public class ProductFeedSchedule extends APINode {
   private String mUrl = null;
   @SerializedName("username")
   private String mUsername = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public ProductFeedSchedule() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static ProductFeedSchedule loadJSON(String json, APIContext context, String header) {
     ProductFeedSchedule productFeedSchedule = getGson().fromJson(json, ProductFeedSchedule.class);
@@ -307,15 +305,6 @@ public class ProductFeedSchedule extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public ProductFeedSchedule setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumDayOfWeek {
@@ -394,7 +383,6 @@ public class ProductFeedSchedule extends APINode {
     this.mTimezone = instance.mTimezone;
     this.mUrl = instance.mUrl;
     this.mUsername = instance.mUsername;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

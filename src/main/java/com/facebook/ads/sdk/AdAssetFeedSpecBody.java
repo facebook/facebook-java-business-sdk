@@ -61,15 +61,13 @@ public class AdAssetFeedSpecBody extends APINode {
   private String mText = null;
   @SerializedName("url_tags")
   private String mUrlTags = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdAssetFeedSpecBody() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdAssetFeedSpecBody loadJSON(String json, APIContext context, String header) {
     AdAssetFeedSpecBody adAssetFeedSpecBody = getGson().fromJson(json, AdAssetFeedSpecBody.class);
@@ -246,15 +244,6 @@ public class AdAssetFeedSpecBody extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdAssetFeedSpecBody setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -275,7 +264,6 @@ public class AdAssetFeedSpecBody extends APINode {
     this.mAdlabels = instance.mAdlabels;
     this.mText = instance.mText;
     this.mUrlTags = instance.mUrlTags;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

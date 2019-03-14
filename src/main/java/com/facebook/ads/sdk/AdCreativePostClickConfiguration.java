@@ -59,15 +59,13 @@ public class AdCreativePostClickConfiguration extends APINode {
   private String mPostClickItemDescription = null;
   @SerializedName("post_click_item_headline")
   private String mPostClickItemHeadline = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdCreativePostClickConfiguration() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdCreativePostClickConfiguration loadJSON(String json, APIContext context, String header) {
     AdCreativePostClickConfiguration adCreativePostClickConfiguration = getGson().fromJson(json, AdCreativePostClickConfiguration.class);
@@ -230,15 +228,6 @@ public class AdCreativePostClickConfiguration extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdCreativePostClickConfiguration setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -258,7 +247,6 @@ public class AdCreativePostClickConfiguration extends APINode {
   public AdCreativePostClickConfiguration copyFrom(AdCreativePostClickConfiguration instance) {
     this.mPostClickItemDescription = instance.mPostClickItemDescription;
     this.mPostClickItemHeadline = instance.mPostClickItemHeadline;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

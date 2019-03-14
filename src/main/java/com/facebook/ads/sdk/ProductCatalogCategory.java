@@ -68,16 +68,14 @@ public class ProductCatalogCategory extends APINode {
   @SerializedName("num_items")
   private Long mNumItems = null;
   @SerializedName("tokens")
-  private List<Object> mTokens = null;
-  @SerializedName("id")
-  private String mId = null;
+  private Map<String, String> mTokens = null;
   protected static Gson gson = null;
 
   public ProductCatalogCategory() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static ProductCatalogCategory loadJSON(String json, APIContext context, String header) {
     ProductCatalogCategory productCatalogCategory = getGson().fromJson(json, ProductCatalogCategory.class);
@@ -276,21 +274,12 @@ public class ProductCatalogCategory extends APINode {
     return this;
   }
 
-  public List<Object> getFieldTokens() {
+  public Map<String, String> getFieldTokens() {
     return mTokens;
   }
 
-  public ProductCatalogCategory setFieldTokens(List<Object> value) {
+  public ProductCatalogCategory setFieldTokens(Map<String, String> value) {
     this.mTokens = value;
-    return this;
-  }
-
-  public String getFieldId() {
-    return mId;
-  }
-
-  public ProductCatalogCategory setFieldId(String value) {
-    this.mId = value;
     return this;
   }
 
@@ -339,7 +328,6 @@ public class ProductCatalogCategory extends APINode {
     this.mName = instance.mName;
     this.mNumItems = instance.mNumItems;
     this.mTokens = instance.mTokens;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

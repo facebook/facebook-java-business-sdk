@@ -59,15 +59,13 @@ public class ReachFrequencyAdFormat extends APINode {
   private Object mDetails = null;
   @SerializedName("type")
   private String mType = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public ReachFrequencyAdFormat() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static ReachFrequencyAdFormat loadJSON(String json, APIContext context, String header) {
     ReachFrequencyAdFormat reachFrequencyAdFormat = getGson().fromJson(json, ReachFrequencyAdFormat.class);
@@ -230,15 +228,6 @@ public class ReachFrequencyAdFormat extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public ReachFrequencyAdFormat setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -258,7 +247,6 @@ public class ReachFrequencyAdFormat extends APINode {
   public ReachFrequencyAdFormat copyFrom(ReachFrequencyAdFormat instance) {
     this.mDetails = instance.mDetails;
     this.mType = instance.mType;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

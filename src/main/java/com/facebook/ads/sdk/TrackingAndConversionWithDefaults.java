@@ -63,15 +63,13 @@ public class TrackingAndConversionWithDefaults extends APINode {
   private List<Object> mDefaultConversion = null;
   @SerializedName("default_tracking")
   private List<Object> mDefaultTracking = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public TrackingAndConversionWithDefaults() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static TrackingAndConversionWithDefaults loadJSON(String json, APIContext context, String header) {
     TrackingAndConversionWithDefaults trackingAndConversionWithDefaults = getGson().fromJson(json, TrackingAndConversionWithDefaults.class);
@@ -252,15 +250,6 @@ public class TrackingAndConversionWithDefaults extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public TrackingAndConversionWithDefaults setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -282,7 +271,6 @@ public class TrackingAndConversionWithDefaults extends APINode {
     this.mCustomTracking = instance.mCustomTracking;
     this.mDefaultConversion = instance.mDefaultConversion;
     this.mDefaultTracking = instance.mDefaultTracking;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

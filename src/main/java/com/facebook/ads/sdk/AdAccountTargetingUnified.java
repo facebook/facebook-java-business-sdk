@@ -451,126 +451,22 @@ public class AdAccountTargetingUnified extends APINode {
 
 
   public static enum EnumLimitType {
-      @SerializedName("adgroup_id")
-      VALUE_ADGROUP_ID("adgroup_id"),
-      @SerializedName("age_max")
-      VALUE_AGE_MAX("age_max"),
-      @SerializedName("age_min")
-      VALUE_AGE_MIN("age_min"),
-      @SerializedName("alternate_auto_targeting_option")
-      VALUE_ALTERNATE_AUTO_TARGETING_OPTION("alternate_auto_targeting_option"),
-      @SerializedName("app_install_state")
-      VALUE_APP_INSTALL_STATE("app_install_state"),
-      @SerializedName("audience_network_positions")
-      VALUE_AUDIENCE_NETWORK_POSITIONS("audience_network_positions"),
       @SerializedName("behaviors")
       VALUE_BEHAVIORS("behaviors"),
-      @SerializedName("brand_safety_content_filter_levels")
-      VALUE_BRAND_SAFETY_CONTENT_FILTER_LEVELS("brand_safety_content_filter_levels"),
-      @SerializedName("brand_safety_content_severity_levels")
-      VALUE_BRAND_SAFETY_CONTENT_SEVERITY_LEVELS("brand_safety_content_severity_levels"),
-      @SerializedName("catalog_based_targeting")
-      VALUE_CATALOG_BASED_TARGETING("catalog_based_targeting"),
-      @SerializedName("cities")
-      VALUE_CITIES("cities"),
       @SerializedName("college_years")
       VALUE_COLLEGE_YEARS("college_years"),
-      @SerializedName("conjunctive_user_adclusters")
-      VALUE_CONJUNCTIVE_USER_ADCLUSTERS("conjunctive_user_adclusters"),
-      @SerializedName("connections")
-      VALUE_CONNECTIONS("connections"),
-      @SerializedName("contextual_targeting_categories")
-      VALUE_CONTEXTUAL_TARGETING_CATEGORIES("contextual_targeting_categories"),
-      @SerializedName("countries")
-      VALUE_COUNTRIES("countries"),
-      @SerializedName("country")
-      VALUE_COUNTRY("country"),
-      @SerializedName("country_groups")
-      VALUE_COUNTRY_GROUPS("country_groups"),
-      @SerializedName("custom_audiences")
-      VALUE_CUSTOM_AUDIENCES("custom_audiences"),
-      @SerializedName("device_platforms")
-      VALUE_DEVICE_PLATFORMS("device_platforms"),
-      @SerializedName("direct_install_devices")
-      VALUE_DIRECT_INSTALL_DEVICES("direct_install_devices"),
-      @SerializedName("dynamic_audience_ids")
-      VALUE_DYNAMIC_AUDIENCE_IDS("dynamic_audience_ids"),
       @SerializedName("education_majors")
       VALUE_EDUCATION_MAJORS("education_majors"),
       @SerializedName("education_schools")
       VALUE_EDUCATION_SCHOOLS("education_schools"),
       @SerializedName("education_statuses")
       VALUE_EDUCATION_STATUSES("education_statuses"),
-      @SerializedName("effective_audience_network_positions")
-      VALUE_EFFECTIVE_AUDIENCE_NETWORK_POSITIONS("effective_audience_network_positions"),
-      @SerializedName("effective_device_platforms")
-      VALUE_EFFECTIVE_DEVICE_PLATFORMS("effective_device_platforms"),
-      @SerializedName("effective_facebook_positions")
-      VALUE_EFFECTIVE_FACEBOOK_POSITIONS("effective_facebook_positions"),
-      @SerializedName("effective_instagram_positions")
-      VALUE_EFFECTIVE_INSTAGRAM_POSITIONS("effective_instagram_positions"),
-      @SerializedName("effective_messenger_positions")
-      VALUE_EFFECTIVE_MESSENGER_POSITIONS("effective_messenger_positions"),
-      @SerializedName("effective_publisher_platforms")
-      VALUE_EFFECTIVE_PUBLISHER_PLATFORMS("effective_publisher_platforms"),
-      @SerializedName("effective_whatsapp_positions")
-      VALUE_EFFECTIVE_WHATSAPP_POSITIONS("effective_whatsapp_positions"),
-      @SerializedName("engagement_specs")
-      VALUE_ENGAGEMENT_SPECS("engagement_specs"),
       @SerializedName("ethnic_affinity")
       VALUE_ETHNIC_AFFINITY("ethnic_affinity"),
-      @SerializedName("exclude_previous_days")
-      VALUE_EXCLUDE_PREVIOUS_DAYS("exclude_previous_days"),
-      @SerializedName("exclude_reached_since")
-      VALUE_EXCLUDE_REACHED_SINCE("exclude_reached_since"),
-      @SerializedName("excluded_connections")
-      VALUE_EXCLUDED_CONNECTIONS("excluded_connections"),
-      @SerializedName("excluded_custom_audiences")
-      VALUE_EXCLUDED_CUSTOM_AUDIENCES("excluded_custom_audiences"),
-      @SerializedName("excluded_dynamic_audience_ids")
-      VALUE_EXCLUDED_DYNAMIC_AUDIENCE_IDS("excluded_dynamic_audience_ids"),
-      @SerializedName("excluded_engagement_specs")
-      VALUE_EXCLUDED_ENGAGEMENT_SPECS("excluded_engagement_specs"),
-      @SerializedName("excluded_geo_locations")
-      VALUE_EXCLUDED_GEO_LOCATIONS("excluded_geo_locations"),
-      @SerializedName("excluded_mobile_device_model")
-      VALUE_EXCLUDED_MOBILE_DEVICE_MODEL("excluded_mobile_device_model"),
-      @SerializedName("excluded_product_audience_specs")
-      VALUE_EXCLUDED_PRODUCT_AUDIENCE_SPECS("excluded_product_audience_specs"),
-      @SerializedName("excluded_publisher_categories")
-      VALUE_EXCLUDED_PUBLISHER_CATEGORIES("excluded_publisher_categories"),
-      @SerializedName("excluded_publisher_list_ids")
-      VALUE_EXCLUDED_PUBLISHER_LIST_IDS("excluded_publisher_list_ids"),
-      @SerializedName("excluded_user_adclusters")
-      VALUE_EXCLUDED_USER_ADCLUSTERS("excluded_user_adclusters"),
-      @SerializedName("excluded_user_device")
-      VALUE_EXCLUDED_USER_DEVICE("excluded_user_device"),
-      @SerializedName("exclusions")
-      VALUE_EXCLUSIONS("exclusions"),
-      @SerializedName("facebook_positions")
-      VALUE_FACEBOOK_POSITIONS("facebook_positions"),
       @SerializedName("family_statuses")
       VALUE_FAMILY_STATUSES("family_statuses"),
-      @SerializedName("fb_deal_id")
-      VALUE_FB_DEAL_ID("fb_deal_id"),
-      @SerializedName("flexible_spec")
-      VALUE_FLEXIBLE_SPEC("flexible_spec"),
-      @SerializedName("follow_profiles")
-      VALUE_FOLLOW_PROFILES("follow_profiles"),
-      @SerializedName("follow_profiles_negative")
-      VALUE_FOLLOW_PROFILES_NEGATIVE("follow_profiles_negative"),
-      @SerializedName("format")
-      VALUE_FORMAT("format"),
-      @SerializedName("friends_of_connections")
-      VALUE_FRIENDS_OF_CONNECTIONS("friends_of_connections"),
-      @SerializedName("gatekeepers")
-      VALUE_GATEKEEPERS("gatekeepers"),
-      @SerializedName("genders")
-      VALUE_GENDERS("genders"),
       @SerializedName("generation")
       VALUE_GENERATION("generation"),
-      @SerializedName("geo_locations")
-      VALUE_GEO_LOCATIONS("geo_locations"),
       @SerializedName("home_ownership")
       VALUE_HOME_OWNERSHIP("home_ownership"),
       @SerializedName("home_type")
@@ -583,98 +479,30 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_INCOME("income"),
       @SerializedName("industries")
       VALUE_INDUSTRIES("industries"),
-      @SerializedName("instagram_positions")
-      VALUE_INSTAGRAM_POSITIONS("instagram_positions"),
-      @SerializedName("instream_video_sponsorship_placements")
-      VALUE_INSTREAM_VIDEO_SPONSORSHIP_PLACEMENTS("instream_video_sponsorship_placements"),
-      @SerializedName("interest_defaults_source")
-      VALUE_INTEREST_DEFAULTS_SOURCE("interest_defaults_source"),
       @SerializedName("interested_in")
       VALUE_INTERESTED_IN("interested_in"),
       @SerializedName("interests")
       VALUE_INTERESTS("interests"),
-      @SerializedName("is_whatsapp_destination_ad")
-      VALUE_IS_WHATSAPP_DESTINATION_AD("is_whatsapp_destination_ad"),
-      @SerializedName("keywords")
-      VALUE_KEYWORDS("keywords"),
       @SerializedName("life_events")
       VALUE_LIFE_EVENTS("life_events"),
-      @SerializedName("locales")
-      VALUE_LOCALES("locales"),
       @SerializedName("location_categories")
       VALUE_LOCATION_CATEGORIES("location_categories"),
-      @SerializedName("location_cluster_ids")
-      VALUE_LOCATION_CLUSTER_IDS("location_cluster_ids"),
-      @SerializedName("location_expansion")
-      VALUE_LOCATION_EXPANSION("location_expansion"),
-      @SerializedName("marketplace_product_categories")
-      VALUE_MARKETPLACE_PRODUCT_CATEGORIES("marketplace_product_categories"),
-      @SerializedName("messenger_positions")
-      VALUE_MESSENGER_POSITIONS("messenger_positions"),
-      @SerializedName("mobile_device_model")
-      VALUE_MOBILE_DEVICE_MODEL("mobile_device_model"),
       @SerializedName("moms")
       VALUE_MOMS("moms"),
       @SerializedName("net_worth")
       VALUE_NET_WORTH("net_worth"),
       @SerializedName("office_type")
       VALUE_OFFICE_TYPE("office_type"),
-      @SerializedName("page_types")
-      VALUE_PAGE_TYPES("page_types"),
-      @SerializedName("place_page_set_ids")
-      VALUE_PLACE_PAGE_SET_IDS("place_page_set_ids"),
-      @SerializedName("political_views")
-      VALUE_POLITICAL_VIEWS("political_views"),
       @SerializedName("politics")
       VALUE_POLITICS("politics"),
-      @SerializedName("product_audience_specs")
-      VALUE_PRODUCT_AUDIENCE_SPECS("product_audience_specs"),
-      @SerializedName("prospecting_audience")
-      VALUE_PROSPECTING_AUDIENCE("prospecting_audience"),
-      @SerializedName("publisher_platforms")
-      VALUE_PUBLISHER_PLATFORMS("publisher_platforms"),
-      @SerializedName("publisher_visibility_categories")
-      VALUE_PUBLISHER_VISIBILITY_CATEGORIES("publisher_visibility_categories"),
-      @SerializedName("radius")
-      VALUE_RADIUS("radius"),
-      @SerializedName("regions")
-      VALUE_REGIONS("regions"),
       @SerializedName("relationship_statuses")
       VALUE_RELATIONSHIP_STATUSES("relationship_statuses"),
-      @SerializedName("rtb_flag")
-      VALUE_RTB_FLAG("rtb_flag"),
-      @SerializedName("site_category")
-      VALUE_SITE_CATEGORY("site_category"),
-      @SerializedName("targeting_optimization")
-      VALUE_TARGETING_OPTIMIZATION("targeting_optimization"),
-      @SerializedName("timezones")
-      VALUE_TIMEZONES("timezones"),
-      @SerializedName("topic")
-      VALUE_TOPIC("topic"),
-      @SerializedName("trending")
-      VALUE_TRENDING("trending"),
       @SerializedName("user_adclusters")
       VALUE_USER_ADCLUSTERS("user_adclusters"),
-      @SerializedName("user_device")
-      VALUE_USER_DEVICE("user_device"),
-      @SerializedName("user_event")
-      VALUE_USER_EVENT("user_event"),
-      @SerializedName("user_os")
-      VALUE_USER_OS("user_os"),
-      @SerializedName("user_page_threads")
-      VALUE_USER_PAGE_THREADS("user_page_threads"),
-      @SerializedName("user_page_threads_excluded")
-      VALUE_USER_PAGE_THREADS_EXCLUDED("user_page_threads_excluded"),
-      @SerializedName("whatsapp_positions")
-      VALUE_WHATSAPP_POSITIONS("whatsapp_positions"),
-      @SerializedName("wireless_carrier")
-      VALUE_WIRELESS_CARRIER("wireless_carrier"),
       @SerializedName("work_employers")
       VALUE_WORK_EMPLOYERS("work_employers"),
       @SerializedName("work_positions")
       VALUE_WORK_POSITIONS("work_positions"),
-      @SerializedName("zips")
-      VALUE_ZIPS("zips"),
       NULL(null);
 
       private String value;

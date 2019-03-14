@@ -59,15 +59,13 @@ public class AdAsyncRequestSetNotificationResult extends APINode {
   private String mResponse = null;
   @SerializedName("status")
   private String mStatus = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdAsyncRequestSetNotificationResult() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdAsyncRequestSetNotificationResult loadJSON(String json, APIContext context, String header) {
     AdAsyncRequestSetNotificationResult adAsyncRequestSetNotificationResult = getGson().fromJson(json, AdAsyncRequestSetNotificationResult.class);
@@ -230,15 +228,6 @@ public class AdAsyncRequestSetNotificationResult extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdAsyncRequestSetNotificationResult setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -258,7 +247,6 @@ public class AdAsyncRequestSetNotificationResult extends APINode {
   public AdAsyncRequestSetNotificationResult copyFrom(AdAsyncRequestSetNotificationResult instance) {
     this.mResponse = instance.mResponse;
     this.mStatus = instance.mStatus;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

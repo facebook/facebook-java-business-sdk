@@ -66,18 +66,16 @@ public class RequestHistory extends APINode {
   @SerializedName("http_method")
   private EnumHttpMethod mHttpMethod = null;
   @SerializedName("post_params")
-  private List<Object> mPostParams = null;
+  private Map<String, String> mPostParams = null;
   @SerializedName("query_params")
-  private List<Object> mQueryParams = null;
-  @SerializedName("id")
-  private String mId = null;
+  private Map<String, String> mQueryParams = null;
   protected static Gson gson = null;
 
   public RequestHistory() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static RequestHistory loadJSON(String json, APIContext context, String header) {
     RequestHistory requestHistory = getGson().fromJson(json, RequestHistory.class);
@@ -267,30 +265,21 @@ public class RequestHistory extends APINode {
     return this;
   }
 
-  public List<Object> getFieldPostParams() {
+  public Map<String, String> getFieldPostParams() {
     return mPostParams;
   }
 
-  public RequestHistory setFieldPostParams(List<Object> value) {
+  public RequestHistory setFieldPostParams(Map<String, String> value) {
     this.mPostParams = value;
     return this;
   }
 
-  public List<Object> getFieldQueryParams() {
+  public Map<String, String> getFieldQueryParams() {
     return mQueryParams;
   }
 
-  public RequestHistory setFieldQueryParams(List<Object> value) {
+  public RequestHistory setFieldQueryParams(Map<String, String> value) {
     this.mQueryParams = value;
-    return this;
-  }
-
-  public String getFieldId() {
-    return mId;
-  }
-
-  public RequestHistory setFieldId(String value) {
-    this.mId = value;
     return this;
   }
 
@@ -339,7 +328,6 @@ public class RequestHistory extends APINode {
     this.mHttpMethod = instance.mHttpMethod;
     this.mPostParams = instance.mPostParams;
     this.mQueryParams = instance.mQueryParams;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -61,15 +61,13 @@ public class ScreenName extends APINode {
   private String mServiceType = null;
   @SerializedName("value")
   private String mValue = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public ScreenName() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static ScreenName loadJSON(String json, APIContext context, String header) {
     ScreenName screenName = getGson().fromJson(json, ScreenName.class);
@@ -241,15 +239,6 @@ public class ScreenName extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public ScreenName setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -270,7 +259,6 @@ public class ScreenName extends APINode {
     this.mServiceName = instance.mServiceName;
     this.mServiceType = instance.mServiceType;
     this.mValue = instance.mValue;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -61,15 +61,13 @@ public class CreditPartitionActionOptions extends APINode {
   private Object mPartitionType = null;
   @SerializedName("send_bill_to")
   private Object mSendBillTo = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public CreditPartitionActionOptions() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static CreditPartitionActionOptions loadJSON(String json, APIContext context, String header) {
     CreditPartitionActionOptions creditPartitionActionOptions = getGson().fromJson(json, CreditPartitionActionOptions.class);
@@ -241,15 +239,6 @@ public class CreditPartitionActionOptions extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public CreditPartitionActionOptions setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -270,7 +259,6 @@ public class CreditPartitionActionOptions extends APINode {
     this.mLiabilityType = instance.mLiabilityType;
     this.mPartitionType = instance.mPartitionType;
     this.mSendBillTo = instance.mSendBillTo;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -57,15 +57,13 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class TargetingProspectingAudience extends APINode {
   @SerializedName("sources")
   private List<Object> mSources = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public TargetingProspectingAudience() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static TargetingProspectingAudience loadJSON(String json, APIContext context, String header) {
     TargetingProspectingAudience targetingProspectingAudience = getGson().fromJson(json, TargetingProspectingAudience.class);
@@ -219,15 +217,6 @@ public class TargetingProspectingAudience extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public TargetingProspectingAudience setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -246,7 +235,6 @@ public class TargetingProspectingAudience extends APINode {
 
   public TargetingProspectingAudience copyFrom(TargetingProspectingAudience instance) {
     this.mSources = instance.mSources;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

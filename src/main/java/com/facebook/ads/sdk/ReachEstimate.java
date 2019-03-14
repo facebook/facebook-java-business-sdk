@@ -61,15 +61,13 @@ public class ReachEstimate extends APINode {
   private Boolean mUnsupported = null;
   @SerializedName("users")
   private Long mUsers = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public ReachEstimate() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static ReachEstimate loadJSON(String json, APIContext context, String header) {
     ReachEstimate reachEstimate = getGson().fromJson(json, ReachEstimate.class);
@@ -241,15 +239,6 @@ public class ReachEstimate extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public ReachEstimate setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -270,7 +259,6 @@ public class ReachEstimate extends APINode {
     this.mEstimateReady = instance.mEstimateReady;
     this.mUnsupported = instance.mUnsupported;
     this.mUsers = instance.mUsers;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

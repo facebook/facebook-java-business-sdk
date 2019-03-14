@@ -59,15 +59,13 @@ public class MessagingFeatureReview extends APINode {
   private String mFeature = null;
   @SerializedName("status")
   private String mStatus = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public MessagingFeatureReview() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static MessagingFeatureReview loadJSON(String json, APIContext context, String header) {
     MessagingFeatureReview messagingFeatureReview = getGson().fromJson(json, MessagingFeatureReview.class);
@@ -230,15 +228,6 @@ public class MessagingFeatureReview extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public MessagingFeatureReview setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -258,7 +247,6 @@ public class MessagingFeatureReview extends APINode {
   public MessagingFeatureReview copyFrom(MessagingFeatureReview instance) {
     this.mFeature = instance.mFeature;
     this.mStatus = instance.mStatus;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

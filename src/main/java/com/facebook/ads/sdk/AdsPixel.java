@@ -1344,7 +1344,6 @@ public class AdsPixel extends APINode {
       "result",
       "title",
       "user_message",
-      "id",
     };
 
     @Override
@@ -1485,13 +1484,6 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetDaChecks requestUserMessageField (boolean value) {
       this.requestField("user_message", value);
-      return this;
-    }
-    public APIRequestGetDaChecks requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetDaChecks requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -2012,6 +2004,7 @@ public class AdsPixel extends APINode {
       "end_advertiser_name",
       "extended_credit_invoice_group",
       "failed_delivery_checks",
+      "fb_entity",
       "funding_source",
       "funding_source_details",
       "has_migrated_permissions",
@@ -2322,6 +2315,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetSharedAccounts requestFailedDeliveryChecksField (boolean value) {
       this.requestField("failed_delivery_checks", value);
+      return this;
+    }
+    public APIRequestGetSharedAccounts requestFbEntityField () {
+      return this.requestFbEntityField(true);
+    }
+    public APIRequestGetSharedAccounts requestFbEntityField (boolean value) {
+      this.requestField("fb_entity", value);
       return this;
     }
     public APIRequestGetSharedAccounts requestFundingSourceField () {
@@ -3063,7 +3063,6 @@ public class AdsPixel extends APINode {
       "aggregation",
       "data",
       "start_time",
-      "id",
     };
 
     @Override
@@ -3203,13 +3202,6 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetStats requestStartTimeField (boolean value) {
       this.requestField("start_time", value);
-      return this;
-    }
-    public APIRequestGetStats requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetStats requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }

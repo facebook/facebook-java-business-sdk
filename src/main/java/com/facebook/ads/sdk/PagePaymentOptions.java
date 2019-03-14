@@ -65,15 +65,13 @@ public class PagePaymentOptions extends APINode {
   private Long mMastercard = null;
   @SerializedName("visa")
   private Long mVisa = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public PagePaymentOptions() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static PagePaymentOptions loadJSON(String json, APIContext context, String header) {
     PagePaymentOptions pagePaymentOptions = getGson().fromJson(json, PagePaymentOptions.class);
@@ -263,15 +261,6 @@ public class PagePaymentOptions extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public PagePaymentOptions setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -294,7 +283,6 @@ public class PagePaymentOptions extends APINode {
     this.mDiscover = instance.mDiscover;
     this.mMastercard = instance.mMastercard;
     this.mVisa = instance.mVisa;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

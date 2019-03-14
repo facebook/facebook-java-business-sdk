@@ -68,7 +68,7 @@ public class AdAsyncRequest extends APINode {
   @SerializedName("scope_object_id")
   private String mScopeObjectId = null;
   @SerializedName("status")
-  private EnumStatus mStatus = null;
+  private String mStatus = null;
   @SerializedName("type")
   private String mType = null;
   @SerializedName("updated_time")
@@ -318,7 +318,7 @@ public class AdAsyncRequest extends APINode {
     return mScopeObjectId;
   }
 
-  public EnumStatus getFieldStatus() {
+  public String getFieldStatus() {
     return mStatus;
   }
 
@@ -610,39 +610,6 @@ public class AdAsyncRequest extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-  }
-
-  public static enum EnumStatus {
-      @SerializedName("CANCELED")
-      VALUE_CANCELED("CANCELED"),
-      @SerializedName("CANCELED_DEPENDENCY")
-      VALUE_CANCELED_DEPENDENCY("CANCELED_DEPENDENCY"),
-      @SerializedName("ERROR")
-      VALUE_ERROR("ERROR"),
-      @SerializedName("ERROR_CONFLICTS")
-      VALUE_ERROR_CONFLICTS("ERROR_CONFLICTS"),
-      @SerializedName("ERROR_DEPENDENCY")
-      VALUE_ERROR_DEPENDENCY("ERROR_DEPENDENCY"),
-      @SerializedName("INITIAL")
-      VALUE_INITIAL("INITIAL"),
-      @SerializedName("IN_PROGRESS")
-      VALUE_IN_PROGRESS("IN_PROGRESS"),
-      @SerializedName("PENDING_DEPENDENCY")
-      VALUE_PENDING_DEPENDENCY("PENDING_DEPENDENCY"),
-      @SerializedName("SUCCESS")
-      VALUE_SUCCESS("SUCCESS"),
-      NULL(null);
-
-      private String value;
-
-      private EnumStatus(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
   }
 
   public static enum EnumStatuses {

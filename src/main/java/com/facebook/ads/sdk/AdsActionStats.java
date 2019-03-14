@@ -107,15 +107,13 @@ public class AdsActionStats extends APINode {
   private String mInteractiveComponentStickerResponse = null;
   @SerializedName("value")
   private String mValue = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdsActionStats() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdsActionStats loadJSON(String json, APIContext context, String header) {
     AdsActionStats adsActionStats = getGson().fromJson(json, AdsActionStats.class);
@@ -494,15 +492,6 @@ public class AdsActionStats extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdsActionStats setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -546,7 +535,6 @@ public class AdsActionStats extends APINode {
     this.mInteractiveComponentStickerId = instance.mInteractiveComponentStickerId;
     this.mInteractiveComponentStickerResponse = instance.mInteractiveComponentStickerResponse;
     this.mValue = instance.mValue;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

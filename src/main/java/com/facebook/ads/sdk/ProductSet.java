@@ -700,7 +700,6 @@ public class ProductSet extends APINode {
       "result",
       "title",
       "user_message",
-      "id",
     };
 
     @Override
@@ -841,13 +840,6 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetDaChecks requestUserMessageField (boolean value) {
       this.requestField("user_message", value);
-      return this;
-    }
-    public APIRequestGetDaChecks requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetDaChecks requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }

@@ -67,15 +67,13 @@ public class Privacy extends APINode {
   private String mNetworks = null;
   @SerializedName("value")
   private String mValue = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public Privacy() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static Privacy loadJSON(String json, APIContext context, String header) {
     Privacy privacy = getGson().fromJson(json, Privacy.class);
@@ -274,15 +272,6 @@ public class Privacy extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public Privacy setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -306,7 +295,6 @@ public class Privacy extends APINode {
     this.mFriends = instance.mFriends;
     this.mNetworks = instance.mNetworks;
     this.mValue = instance.mValue;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

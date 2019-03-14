@@ -63,15 +63,13 @@ public class AndroidAppLink extends APINode {
   private String mPackage = null;
   @SerializedName("url")
   private String mUrl = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AndroidAppLink() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AndroidAppLink loadJSON(String json, APIContext context, String header) {
     AndroidAppLink androidAppLink = getGson().fromJson(json, AndroidAppLink.class);
@@ -252,15 +250,6 @@ public class AndroidAppLink extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AndroidAppLink setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -282,7 +271,6 @@ public class AndroidAppLink extends APINode {
     this.mClass = instance.mClass;
     this.mPackage = instance.mPackage;
     this.mUrl = instance.mUrl;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

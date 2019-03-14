@@ -25,7 +25,7 @@
 import java.io.File;
 import java.util.Arrays;
 
-public class AdAccountAdSetsPostOptimizePostEngagement {
+public class AdAccountAdSetsPostInterestTargeting {
   public static void main (String args[]) throws APIException {
 
     String access_token = "<ACCESS_TOKEN>";
@@ -35,24 +35,26 @@ public class AdAccountAdSetsPostOptimizePostEngagement {
     APIContext context = new APIContext(access_token).enableDebug(true);
 
     new AdAccount(id, context).createAdSet()
-      .setName("My First Adset")
-      .setLifetimeBudget(20000L)
-      .setStartTime("2019-03-04T04:35:37-0800")
-      .setEndTime("2019-03-14T04:35:37-0700")
-      .setCampaignId("<adCampaignLinkClicksID>")
-      .setBidAmount(500L)
+      .setName("My First AdSet")
+      .setDailyBudget(10000L)
+      .setBidAmount(300L)
       .setBillingEvent(AdSet.EnumBillingEvent.VALUE_IMPRESSIONS)
-      .setOptimizationGoal(AdSet.EnumOptimizationGoal.VALUE_POST_ENGAGEMENT)
+      .setOptimizationGoal(AdSet.EnumOptimizationGoal.VALUE_REACH)
+      .setCampaignId("<adCampaignLinkClicksID>")
+      .setPromotedObject("{\"page_id\":\"<pageID>\"}")
       .setTargeting(
           new Targeting()
             .setFieldAgeMax(24L)
             .setFieldAgeMin(20L)
-            .setFieldBehaviors(Arrays.asList(
-              new IDName()
-                .setFieldId(6002714895372L)
-                .setFieldName("All travelers")
+            .setFieldDevicePlatforms(Arrays.asList(Targeting.EnumDevicePlatforms.VALUE_MOBILE))
+            .setFieldFlexibleSpec(Arrays.asList(
+              new FlexibleTargeting()
+                .setFieldInterests(Arrays.asList(
+                  new IDName()
+                    .setFieldId("<adsInterestID>")
+                    .setFieldName("<adsInterestName>")
+                ))
             ))
-            .setFieldDevicePlatforms(Arrays.asList(Targeting.EnumDevicePlatforms.VALUE_DESKTOP))
             .setFieldGenders(Arrays.asList(1L))
             .setFieldGeoLocations(
               new TargetingGeoLocation()
@@ -68,17 +70,7 @@ public class AdAccountAdSetsPostOptimizePostEngagement {
                     .setFieldKey("4081")
                 ))
             )
-            .setFieldHomeOwnership(Arrays.asList(
-              new IDName()
-                .setFieldId(6006371327132L)
-                .setFieldName("Renters")
-            ))
-            .setFieldLifeEvents(Arrays.asList(
-              new IDName()
-                .setFieldId(6002714398172L)
-                .setFieldName("Newlywed (1 year)")
-            ))
-            .setFieldPublisherPlatforms(Arrays.asList("facebook"))
+            .setFieldPublisherPlatforms(Arrays.asList("facebook", "audience_network"))
         )
       .setStatus(AdSet.EnumStatus.VALUE_PAUSED)
       .execute();

@@ -75,15 +75,13 @@ public class LiveVideoAdBreakConfig extends APINode {
   private Long mTimeBetweenAdBreaksSecs = null;
   @SerializedName("viewer_count_threshold")
   private Long mViewerCountThreshold = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public LiveVideoAdBreakConfig() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static LiveVideoAdBreakConfig loadJSON(String json, APIContext context, String header) {
     LiveVideoAdBreakConfig liveVideoAdBreakConfig = getGson().fromJson(json, LiveVideoAdBreakConfig.class);
@@ -318,15 +316,6 @@ public class LiveVideoAdBreakConfig extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public LiveVideoAdBreakConfig setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -354,7 +343,6 @@ public class LiveVideoAdBreakConfig extends APINode {
     this.mPreparingDuration = instance.mPreparingDuration;
     this.mTimeBetweenAdBreaksSecs = instance.mTimeBetweenAdBreaksSecs;
     this.mViewerCountThreshold = instance.mViewerCountThreshold;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

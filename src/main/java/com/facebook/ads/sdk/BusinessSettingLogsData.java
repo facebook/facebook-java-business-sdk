@@ -65,15 +65,13 @@ public class BusinessSettingLogsData extends APINode {
   private String mEventType = null;
   @SerializedName("extra_data")
   private Object mExtraData = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public BusinessSettingLogsData() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static BusinessSettingLogsData loadJSON(String json, APIContext context, String header) {
     BusinessSettingLogsData businessSettingLogsData = getGson().fromJson(json, BusinessSettingLogsData.class);
@@ -263,15 +261,6 @@ public class BusinessSettingLogsData extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public BusinessSettingLogsData setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -294,7 +283,6 @@ public class BusinessSettingLogsData extends APINode {
     this.mEventTime = instance.mEventTime;
     this.mEventType = instance.mEventType;
     this.mExtraData = instance.mExtraData;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -63,15 +63,13 @@ public class ProductCatalogHotelRoomsBatch extends APINode {
   private String mHandle = null;
   @SerializedName("status")
   private String mStatus = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public ProductCatalogHotelRoomsBatch() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static ProductCatalogHotelRoomsBatch loadJSON(String json, APIContext context, String header) {
     ProductCatalogHotelRoomsBatch productCatalogHotelRoomsBatch = getGson().fromJson(json, ProductCatalogHotelRoomsBatch.class);
@@ -252,15 +250,6 @@ public class ProductCatalogHotelRoomsBatch extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public ProductCatalogHotelRoomsBatch setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -282,7 +271,6 @@ public class ProductCatalogHotelRoomsBatch extends APINode {
     this.mErrorsTotalCount = instance.mErrorsTotalCount;
     this.mHandle = instance.mHandle;
     this.mStatus = instance.mStatus;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

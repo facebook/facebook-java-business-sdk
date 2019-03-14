@@ -71,15 +71,13 @@ public class LeadGenDraftQuestion extends APINode {
   private List<LeadGenQuestionOption> mOptions = null;
   @SerializedName("type")
   private String mType = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public LeadGenDraftQuestion() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static LeadGenDraftQuestion loadJSON(String json, APIContext context, String header) {
     LeadGenDraftQuestion leadGenDraftQuestion = getGson().fromJson(json, LeadGenDraftQuestion.class);
@@ -311,15 +309,6 @@ public class LeadGenDraftQuestion extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public LeadGenDraftQuestion setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -345,7 +334,6 @@ public class LeadGenDraftQuestion extends APINode {
     this.mLabel = instance.mLabel;
     this.mOptions = instance.mOptions;
     this.mType = instance.mType;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

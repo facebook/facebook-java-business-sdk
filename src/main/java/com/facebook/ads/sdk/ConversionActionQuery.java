@@ -107,15 +107,13 @@ public class ConversionActionQuery extends APINode {
   private List<String> mResponse = null;
   @SerializedName("subtype")
   private List<String> mSubtype = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public ConversionActionQuery() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static ConversionActionQuery loadJSON(String json, APIContext context, String header) {
     ConversionActionQuery conversionActionQuery = getGson().fromJson(json, ConversionActionQuery.class);
@@ -494,15 +492,6 @@ public class ConversionActionQuery extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public ConversionActionQuery setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -546,7 +535,6 @@ public class ConversionActionQuery extends APINode {
     this.mQuestionCreator = instance.mQuestionCreator;
     this.mResponse = instance.mResponse;
     this.mSubtype = instance.mSubtype;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

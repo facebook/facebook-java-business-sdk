@@ -65,15 +65,13 @@ public class CopyrightAttributionInsights extends APINode {
   private Double mL7AttributionVideoViewDelta = null;
   @SerializedName("metrics_ending_date")
   private String mMetricsEndingDate = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public CopyrightAttributionInsights() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static CopyrightAttributionInsights loadJSON(String json, APIContext context, String header) {
     CopyrightAttributionInsights copyrightAttributionInsights = getGson().fromJson(json, CopyrightAttributionInsights.class);
@@ -263,15 +261,6 @@ public class CopyrightAttributionInsights extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public CopyrightAttributionInsights setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -294,7 +283,6 @@ public class CopyrightAttributionInsights extends APINode {
     this.mL7AttributionVideoView = instance.mL7AttributionVideoView;
     this.mL7AttributionVideoViewDelta = instance.mL7AttributionVideoViewDelta;
     this.mMetricsEndingDate = instance.mMetricsEndingDate;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

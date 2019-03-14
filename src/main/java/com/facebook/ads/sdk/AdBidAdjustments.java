@@ -61,15 +61,13 @@ public class AdBidAdjustments extends APINode {
   private Object mPageTypes = null;
   @SerializedName("user_groups")
   private String mUserGroups = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdBidAdjustments() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdBidAdjustments loadJSON(String json, APIContext context, String header) {
     AdBidAdjustments adBidAdjustments = getGson().fromJson(json, AdBidAdjustments.class);
@@ -241,15 +239,6 @@ public class AdBidAdjustments extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdBidAdjustments setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -270,7 +259,6 @@ public class AdBidAdjustments extends APINode {
     this.mAgeRange = instance.mAgeRange;
     this.mPageTypes = instance.mPageTypes;
     this.mUserGroups = instance.mUserGroups;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

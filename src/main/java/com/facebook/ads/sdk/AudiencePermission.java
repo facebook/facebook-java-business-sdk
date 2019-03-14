@@ -61,15 +61,13 @@ public class AudiencePermission extends APINode {
   private String mShareAccountId = null;
   @SerializedName("share_account_name")
   private String mShareAccountName = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AudiencePermission() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AudiencePermission loadJSON(String json, APIContext context, String header) {
     AudiencePermission audiencePermission = getGson().fromJson(json, AudiencePermission.class);
@@ -249,15 +247,6 @@ public class AudiencePermission extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AudiencePermission setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -278,7 +267,6 @@ public class AudiencePermission extends APINode {
     this.mAudience = instance.mAudience;
     this.mShareAccountId = instance.mShareAccountId;
     this.mShareAccountName = instance.mShareAccountName;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

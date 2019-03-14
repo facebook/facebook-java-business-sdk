@@ -89,15 +89,13 @@ public class AdPromotedObject extends APINode {
   private String mProductSetId = null;
   @SerializedName("retention_days")
   private String mRetentionDays = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdPromotedObject() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdPromotedObject loadJSON(String json, APIContext context, String header) {
     AdPromotedObject adPromotedObject = getGson().fromJson(json, AdPromotedObject.class);
@@ -395,15 +393,6 @@ public class AdPromotedObject extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdPromotedObject setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumCustomEventType {
@@ -509,7 +498,6 @@ public class AdPromotedObject extends APINode {
     this.mProductItemId = instance.mProductItemId;
     this.mProductSetId = instance.mProductSetId;
     this.mRetentionDays = instance.mRetentionDays;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

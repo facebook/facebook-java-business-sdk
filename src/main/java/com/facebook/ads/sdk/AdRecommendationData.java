@@ -57,15 +57,13 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdRecommendationData extends APINode {
   @SerializedName("link")
   private String mLink = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdRecommendationData() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdRecommendationData loadJSON(String json, APIContext context, String header) {
     AdRecommendationData adRecommendationData = getGson().fromJson(json, AdRecommendationData.class);
@@ -219,15 +217,6 @@ public class AdRecommendationData extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdRecommendationData setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -246,7 +235,6 @@ public class AdRecommendationData extends APINode {
 
   public AdRecommendationData copyFrom(AdRecommendationData instance) {
     this.mLink = instance.mLink;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

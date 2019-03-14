@@ -58,18 +58,16 @@ public class SplitTestWinner extends APINode {
   @SerializedName("ad_object_level")
   private String mAdObjectLevel = null;
   @SerializedName("confidences")
-  private List<Object> mConfidences = null;
+  private Map<String, Double> mConfidences = null;
   @SerializedName("winner_ad_object_id")
   private String mWinnerAdObjectId = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public SplitTestWinner() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static SplitTestWinner loadJSON(String json, APIContext context, String header) {
     SplitTestWinner splitTestWinner = getGson().fromJson(json, SplitTestWinner.class);
@@ -223,11 +221,11 @@ public class SplitTestWinner extends APINode {
     return this;
   }
 
-  public List<Object> getFieldConfidences() {
+  public Map<String, Double> getFieldConfidences() {
     return mConfidences;
   }
 
-  public SplitTestWinner setFieldConfidences(List<Object> value) {
+  public SplitTestWinner setFieldConfidences(Map<String, Double> value) {
     this.mConfidences = value;
     return this;
   }
@@ -238,15 +236,6 @@ public class SplitTestWinner extends APINode {
 
   public SplitTestWinner setFieldWinnerAdObjectId(String value) {
     this.mWinnerAdObjectId = value;
-    return this;
-  }
-
-  public String getFieldId() {
-    return mId;
-  }
-
-  public SplitTestWinner setFieldId(String value) {
-    this.mId = value;
     return this;
   }
 
@@ -270,7 +259,6 @@ public class SplitTestWinner extends APINode {
     this.mAdObjectLevel = instance.mAdObjectLevel;
     this.mConfidences = instance.mConfidences;
     this.mWinnerAdObjectId = instance.mWinnerAdObjectId;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

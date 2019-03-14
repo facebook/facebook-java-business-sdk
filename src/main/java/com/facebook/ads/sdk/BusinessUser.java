@@ -417,6 +417,7 @@ public class BusinessUser extends APINode {
       "end_advertiser_name",
       "extended_credit_invoice_group",
       "failed_delivery_checks",
+      "fb_entity",
       "funding_source",
       "funding_source_details",
       "has_migrated_permissions",
@@ -722,6 +723,13 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGetAssignedAdAccounts requestFailedDeliveryChecksField (boolean value) {
       this.requestField("failed_delivery_checks", value);
+      return this;
+    }
+    public APIRequestGetAssignedAdAccounts requestFbEntityField () {
+      return this.requestFbEntityField(true);
+    }
+    public APIRequestGetAssignedAdAccounts requestFbEntityField (boolean value) {
+      this.requestField("fb_entity", value);
       return this;
     }
     public APIRequestGetAssignedAdAccounts requestFundingSourceField () {
@@ -2540,7 +2548,6 @@ public class BusinessUser extends APINode {
       "event_time",
       "event_type",
       "extra_data",
-      "id",
     };
 
     @Override
@@ -2665,13 +2672,6 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGetBusinessSettingLogs requestExtraDataField (boolean value) {
       this.requestField("extra_data", value);
-      return this;
-    }
-    public APIRequestGetBusinessSettingLogs requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetBusinessSettingLogs requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }

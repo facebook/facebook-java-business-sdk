@@ -59,15 +59,13 @@ public class StreamingReaction extends APINode {
   private Long mCount = null;
   @SerializedName("reaction_type")
   private EnumReactionType mReactionType = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public StreamingReaction() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static StreamingReaction loadJSON(String json, APIContext context, String header) {
     StreamingReaction streamingReaction = getGson().fromJson(json, StreamingReaction.class);
@@ -230,15 +228,6 @@ public class StreamingReaction extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public StreamingReaction setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumReactionType {
@@ -291,7 +280,6 @@ public class StreamingReaction extends APINode {
   public StreamingReaction copyFrom(StreamingReaction instance) {
     this.mCount = instance.mCount;
     this.mReactionType = instance.mReactionType;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

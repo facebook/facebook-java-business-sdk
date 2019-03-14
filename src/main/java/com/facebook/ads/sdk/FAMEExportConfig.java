@@ -63,15 +63,13 @@ public class FAMEExportConfig extends APINode {
   private String mDisplayName = null;
   @SerializedName("format")
   private String mFormat = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public FAMEExportConfig() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static FAMEExportConfig loadJSON(String json, APIContext context, String header) {
     FAMEExportConfig fameExportConfig = getGson().fromJson(json, FAMEExportConfig.class);
@@ -252,15 +250,6 @@ public class FAMEExportConfig extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public FAMEExportConfig setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -282,7 +271,6 @@ public class FAMEExportConfig extends APINode {
     this.mColumnId = instance.mColumnId;
     this.mDisplayName = instance.mDisplayName;
     this.mFormat = instance.mFormat;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

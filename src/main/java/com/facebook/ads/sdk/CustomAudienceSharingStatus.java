@@ -59,15 +59,13 @@ public class CustomAudienceSharingStatus extends APINode {
   private Long mSharingRelationshipId = null;
   @SerializedName("status")
   private String mStatus = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public CustomAudienceSharingStatus() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static CustomAudienceSharingStatus loadJSON(String json, APIContext context, String header) {
     CustomAudienceSharingStatus customAudienceSharingStatus = getGson().fromJson(json, CustomAudienceSharingStatus.class);
@@ -230,15 +228,6 @@ public class CustomAudienceSharingStatus extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public CustomAudienceSharingStatus setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -258,7 +247,6 @@ public class CustomAudienceSharingStatus extends APINode {
   public CustomAudienceSharingStatus copyFrom(CustomAudienceSharingStatus instance) {
     this.mSharingRelationshipId = instance.mSharingRelationshipId;
     this.mStatus = instance.mStatus;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

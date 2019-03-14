@@ -71,15 +71,13 @@ public class MessengerProfile extends APINode {
   private Object mTargetAudience = null;
   @SerializedName("whitelisted_domains")
   private List<String> mWhitelistedDomains = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public MessengerProfile() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static MessengerProfile loadJSON(String json, APIContext context, String header) {
     MessengerProfile messengerProfile = getGson().fromJson(json, MessengerProfile.class);
@@ -296,15 +294,6 @@ public class MessengerProfile extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public MessengerProfile setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -330,7 +319,6 @@ public class MessengerProfile extends APINode {
     this.mPersistentMenu = instance.mPersistentMenu;
     this.mTargetAudience = instance.mTargetAudience;
     this.mWhitelistedDomains = instance.mWhitelistedDomains;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

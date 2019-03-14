@@ -1624,6 +1624,7 @@ public class AdStudyObjective extends APINode {
       "first_fired_time",
       "id",
       "is_archived",
+      "is_unavailable",
       "last_fired_time",
       "name",
       "offline_conversion_data_set",
@@ -1803,6 +1804,13 @@ public class AdStudyObjective extends APINode {
     }
     public APIRequestGetCustomConversions requestIsArchivedField (boolean value) {
       this.requestField("is_archived", value);
+      return this;
+    }
+    public APIRequestGetCustomConversions requestIsUnavailableField () {
+      return this.requestIsUnavailableField(true);
+    }
+    public APIRequestGetCustomConversions requestIsUnavailableField (boolean value) {
+      this.requestField("is_unavailable", value);
       return this;
     }
     public APIRequestGetCustomConversions requestLastFiredTimeField () {

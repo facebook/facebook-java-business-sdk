@@ -63,15 +63,13 @@ public class CustomConversionActivities extends APINode {
   private String mEventType = null;
   @SerializedName("timestamp")
   private String mTimestamp = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public CustomConversionActivities() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static CustomConversionActivities loadJSON(String json, APIContext context, String header) {
     CustomConversionActivities customConversionActivities = getGson().fromJson(json, CustomConversionActivities.class);
@@ -252,15 +250,6 @@ public class CustomConversionActivities extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public CustomConversionActivities setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumEventType {
@@ -303,7 +292,6 @@ public class CustomConversionActivities extends APINode {
     this.mData = instance.mData;
     this.mEventType = instance.mEventType;
     this.mTimestamp = instance.mTimestamp;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

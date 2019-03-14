@@ -63,15 +63,13 @@ public class AdsPixelStats extends APINode {
   private String mEvent = null;
   @SerializedName("value")
   private String mValue = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdsPixelStats() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdsPixelStats loadJSON(String json, APIContext context, String header) {
     AdsPixelStats adsPixelStats = getGson().fromJson(json, AdsPixelStats.class);
@@ -252,15 +250,6 @@ public class AdsPixelStats extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdsPixelStats setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -282,7 +271,6 @@ public class AdsPixelStats extends APINode {
     this.mDiagnosticsHourlyLastTimestamp = instance.mDiagnosticsHourlyLastTimestamp;
     this.mEvent = instance.mEvent;
     this.mValue = instance.mValue;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

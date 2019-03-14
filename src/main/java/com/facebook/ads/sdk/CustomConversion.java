@@ -79,6 +79,8 @@ public class CustomConversion extends APINode {
   private String mId = null;
   @SerializedName("is_archived")
   private Boolean mIsArchived = null;
+  @SerializedName("is_unavailable")
+  private Boolean mIsUnavailable = null;
   @SerializedName("last_fired_time")
   private String mLastFiredTime = null;
   @SerializedName("name")
@@ -384,6 +386,10 @@ public class CustomConversion extends APINode {
     return mIsArchived;
   }
 
+  public Boolean getFieldIsUnavailable() {
+    return mIsUnavailable;
+  }
+
   public String getFieldLastFiredTime() {
     return mLastFiredTime;
   }
@@ -434,7 +440,6 @@ public class CustomConversion extends APINode {
       "data",
       "event_type",
       "timestamp",
-      "id",
     };
 
     @Override
@@ -571,13 +576,6 @@ public class CustomConversion extends APINode {
     }
     public APIRequestGetActivities requestTimestampField (boolean value) {
       this.requestField("timestamp", value);
-      return this;
-    }
-    public APIRequestGetActivities requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetActivities requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -736,6 +734,7 @@ public class CustomConversion extends APINode {
       "end_advertiser_name",
       "extended_credit_invoice_group",
       "failed_delivery_checks",
+      "fb_entity",
       "funding_source",
       "funding_source_details",
       "has_migrated_permissions",
@@ -1046,6 +1045,13 @@ public class CustomConversion extends APINode {
     }
     public APIRequestGetAdAccounts requestFailedDeliveryChecksField (boolean value) {
       this.requestField("failed_delivery_checks", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestFbEntityField () {
+      return this.requestFbEntityField(true);
+    }
+    public APIRequestGetAdAccounts requestFbEntityField (boolean value) {
+      this.requestField("fb_entity", value);
       return this;
     }
     public APIRequestGetAdAccounts requestFundingSourceField () {
@@ -1421,7 +1427,6 @@ public class CustomConversion extends APINode {
       "aggregation",
       "data",
       "timestamp",
-      "id",
     };
 
     @Override
@@ -1553,13 +1558,6 @@ public class CustomConversion extends APINode {
       this.requestField("timestamp", value);
       return this;
     }
-    public APIRequestGetStats requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetStats requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
   }
 
   public static class APIRequestDelete extends APIRequest<APINode> {
@@ -1689,6 +1687,7 @@ public class CustomConversion extends APINode {
       "first_fired_time",
       "id",
       "is_archived",
+      "is_unavailable",
       "last_fired_time",
       "name",
       "offline_conversion_data_set",
@@ -1868,6 +1867,13 @@ public class CustomConversion extends APINode {
     }
     public APIRequestGet requestIsArchivedField (boolean value) {
       this.requestField("is_archived", value);
+      return this;
+    }
+    public APIRequestGet requestIsUnavailableField () {
+      return this.requestIsUnavailableField(true);
+    }
+    public APIRequestGet requestIsUnavailableField (boolean value) {
+      this.requestField("is_unavailable", value);
       return this;
     }
     public APIRequestGet requestLastFiredTimeField () {
@@ -2120,6 +2126,7 @@ public class CustomConversion extends APINode {
     this.mFirstFiredTime = instance.mFirstFiredTime;
     this.mId = instance.mId;
     this.mIsArchived = instance.mIsArchived;
+    this.mIsUnavailable = instance.mIsUnavailable;
     this.mLastFiredTime = instance.mLastFiredTime;
     this.mName = instance.mName;
     this.mOfflineConversionDataSet = instance.mOfflineConversionDataSet;

@@ -59,15 +59,13 @@ public class UserDevice extends APINode {
   private String mHardware = null;
   @SerializedName("os")
   private String mOs = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public UserDevice() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static UserDevice loadJSON(String json, APIContext context, String header) {
     UserDevice userDevice = getGson().fromJson(json, UserDevice.class);
@@ -230,15 +228,6 @@ public class UserDevice extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public UserDevice setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -258,7 +247,6 @@ public class UserDevice extends APINode {
   public UserDevice copyFrom(UserDevice instance) {
     this.mHardware = instance.mHardware;
     this.mOs = instance.mOs;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

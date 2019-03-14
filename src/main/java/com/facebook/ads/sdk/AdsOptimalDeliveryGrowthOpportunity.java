@@ -56,20 +56,18 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  */
 public class AdsOptimalDeliveryGrowthOpportunity extends APINode {
   @SerializedName("child_metadata")
-  private List<Object> mChildMetadata = null;
+  private Map<String, Object> mChildMetadata = null;
   @SerializedName("metadata")
   private Object mMetadata = null;
   @SerializedName("optimization_type")
   private String mOptimizationType = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdsOptimalDeliveryGrowthOpportunity() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdsOptimalDeliveryGrowthOpportunity loadJSON(String json, APIContext context, String header) {
     AdsOptimalDeliveryGrowthOpportunity adsOptimalDeliveryGrowthOpportunity = getGson().fromJson(json, AdsOptimalDeliveryGrowthOpportunity.class);
@@ -214,11 +212,11 @@ public class AdsOptimalDeliveryGrowthOpportunity extends APINode {
   }
 
 
-  public List<Object> getFieldChildMetadata() {
+  public Map<String, Object> getFieldChildMetadata() {
     return mChildMetadata;
   }
 
-  public AdsOptimalDeliveryGrowthOpportunity setFieldChildMetadata(List<Object> value) {
+  public AdsOptimalDeliveryGrowthOpportunity setFieldChildMetadata(Map<String, Object> value) {
     this.mChildMetadata = value;
     return this;
   }
@@ -238,15 +236,6 @@ public class AdsOptimalDeliveryGrowthOpportunity extends APINode {
 
   public AdsOptimalDeliveryGrowthOpportunity setFieldOptimizationType(String value) {
     this.mOptimizationType = value;
-    return this;
-  }
-
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdsOptimalDeliveryGrowthOpportunity setFieldId(String value) {
-    this.mId = value;
     return this;
   }
 
@@ -270,7 +259,6 @@ public class AdsOptimalDeliveryGrowthOpportunity extends APINode {
     this.mChildMetadata = instance.mChildMetadata;
     this.mMetadata = instance.mMetadata;
     this.mOptimizationType = instance.mOptimizationType;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

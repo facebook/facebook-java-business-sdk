@@ -71,15 +71,13 @@ public class InvoiceCampaign extends APINode {
   private Long mImpressions = null;
   @SerializedName("tags")
   private List<String> mTags = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public InvoiceCampaign() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static InvoiceCampaign loadJSON(String json, APIContext context, String header) {
     InvoiceCampaign invoiceCampaign = getGson().fromJson(json, InvoiceCampaign.class);
@@ -301,15 +299,6 @@ public class InvoiceCampaign extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public InvoiceCampaign setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -335,7 +324,6 @@ public class InvoiceCampaign extends APINode {
     this.mConversions = instance.mConversions;
     this.mImpressions = instance.mImpressions;
     this.mTags = instance.mTags;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

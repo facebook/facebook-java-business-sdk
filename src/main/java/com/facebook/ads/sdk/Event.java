@@ -332,10 +332,6 @@ public class Event extends APINode {
     return new APIRequestGetAttending(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateAttending createAttending() {
-    return new APIRequestCreateAttending(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetComments getComments() {
     return new APIRequestGetComments(this.getPrefixedId().toString(), context);
   }
@@ -346,10 +342,6 @@ public class Event extends APINode {
 
   public APIRequestGetDeclined getDeclined() {
     return new APIRequestGetDeclined(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateDeclined createDeclined() {
-    return new APIRequestCreateDeclined(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetFeed getFeed() {
@@ -374,10 +366,6 @@ public class Event extends APINode {
 
   public APIRequestGetMaybe getMaybe() {
     return new APIRequestGetMaybe(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateMaybe createMaybe() {
-    return new APIRequestCreateMaybe(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetNoreply getNoreply() {
@@ -1331,152 +1319,6 @@ public class Event extends APINode {
     }
   }
 
-  public static class APIRequestCreateAttending extends APIRequest<Event> {
-
-    Event lastResponse = null;
-    @Override
-    public Event getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "eid",
-      "action_context",
-      "app_context",
-      "tracking",
-      "uid",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Event parseResponse(String response, String header) throws APIException {
-      return Event.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Event execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Event execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Event> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Event> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Event>() {
-           public Event apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateAttending.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateAttending(String nodeId, APIContext context) {
-      super(context, nodeId, "/attending", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateAttending setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAttending setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateAttending setEid (String eid) {
-      this.setParam("eid", eid);
-      return this;
-    }
-
-    public APIRequestCreateAttending setActionContext (Object actionContext) {
-      this.setParam("action_context", actionContext);
-      return this;
-    }
-    public APIRequestCreateAttending setActionContext (String actionContext) {
-      this.setParam("action_context", actionContext);
-      return this;
-    }
-
-    public APIRequestCreateAttending setAppContext (Object appContext) {
-      this.setParam("app_context", appContext);
-      return this;
-    }
-    public APIRequestCreateAttending setAppContext (String appContext) {
-      this.setParam("app_context", appContext);
-      return this;
-    }
-
-    public APIRequestCreateAttending setTracking (String tracking) {
-      this.setParam("tracking", tracking);
-      return this;
-    }
-
-    public APIRequestCreateAttending setUid (Long uid) {
-      this.setParam("uid", uid);
-      return this;
-    }
-    public APIRequestCreateAttending setUid (String uid) {
-      this.setParam("uid", uid);
-      return this;
-    }
-
-    public APIRequestCreateAttending requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateAttending requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAttending requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateAttending requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAttending requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAttending requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetComments extends APIRequest<NullNode> {
 
     APINodeList<NullNode> lastResponse = null;
@@ -1488,7 +1330,6 @@ public class Event extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "id",
     };
 
     @Override
@@ -1580,13 +1421,6 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestGetComments requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetComments requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
   }
 
   public static class APIRequestCreateComment extends APIRequest<Comment> {
@@ -2381,152 +2215,6 @@ public class Event extends APINode {
     }
   }
 
-  public static class APIRequestCreateDeclined extends APIRequest<Event> {
-
-    Event lastResponse = null;
-    @Override
-    public Event getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "eid",
-      "action_context",
-      "app_context",
-      "tracking",
-      "uid",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Event parseResponse(String response, String header) throws APIException {
-      return Event.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Event execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Event execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Event> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Event> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Event>() {
-           public Event apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateDeclined.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateDeclined(String nodeId, APIContext context) {
-      super(context, nodeId, "/declined", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateDeclined setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateDeclined setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateDeclined setEid (String eid) {
-      this.setParam("eid", eid);
-      return this;
-    }
-
-    public APIRequestCreateDeclined setActionContext (Object actionContext) {
-      this.setParam("action_context", actionContext);
-      return this;
-    }
-    public APIRequestCreateDeclined setActionContext (String actionContext) {
-      this.setParam("action_context", actionContext);
-      return this;
-    }
-
-    public APIRequestCreateDeclined setAppContext (Object appContext) {
-      this.setParam("app_context", appContext);
-      return this;
-    }
-    public APIRequestCreateDeclined setAppContext (String appContext) {
-      this.setParam("app_context", appContext);
-      return this;
-    }
-
-    public APIRequestCreateDeclined setTracking (String tracking) {
-      this.setParam("tracking", tracking);
-      return this;
-    }
-
-    public APIRequestCreateDeclined setUid (Long uid) {
-      this.setParam("uid", uid);
-      return this;
-    }
-    public APIRequestCreateDeclined setUid (String uid) {
-      this.setParam("uid", uid);
-      return this;
-    }
-
-    public APIRequestCreateDeclined requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateDeclined requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateDeclined requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateDeclined requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateDeclined requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateDeclined requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetFeed extends APIRequest<NullNode> {
 
     APINodeList<NullNode> lastResponse = null;
@@ -2538,7 +2226,6 @@ public class Event extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "id",
     };
 
     @Override
@@ -2630,13 +2317,6 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestGetFeed requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetFeed requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
   }
 
   public static class APIRequestCreateFeed extends APIRequest<APINode> {
@@ -4260,7 +3940,6 @@ public class Event extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "id",
     };
 
     @Override
@@ -4352,20 +4031,13 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestGetLiveVideos requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetLiveVideos requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
   }
 
-  public static class APIRequestCreateLiveVideo extends APIRequest<Event> {
+  public static class APIRequestCreateLiveVideo extends APIRequest<LiveVideo> {
 
-    Event lastResponse = null;
+    LiveVideo lastResponse = null;
     @Override
-    public Event getLastResponse() {
+    public LiveVideo getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -4397,31 +4069,31 @@ public class Event extends APINode {
     };
 
     @Override
-    public Event parseResponse(String response, String header) throws APIException {
-      return Event.parseResponse(response, getContext(), this, header).head();
+    public LiveVideo parseResponse(String response, String header) throws APIException {
+      return LiveVideo.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public Event execute() throws APIException {
+    public LiveVideo execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public Event execute(Map<String, Object> extraParams) throws APIException {
+    public LiveVideo execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<Event> executeAsync() throws APIException {
+    public ListenableFuture<LiveVideo> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<Event> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<LiveVideo> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Event>() {
-           public Event apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, LiveVideo>() {
+           public LiveVideo apply(ResponseWrapper result) {
              try {
                return APIRequestCreateLiveVideo.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -4477,7 +4149,7 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestCreateLiveVideo setStatus (Event.EnumStatus status) {
+    public APIRequestCreateLiveVideo setStatus (LiveVideo.EnumStatus status) {
       this.setParam("status", status);
       return this;
     }
@@ -4500,7 +4172,7 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestCreateLiveVideo setStreamType (Event.EnumStreamType streamType) {
+    public APIRequestCreateLiveVideo setStreamType (LiveVideo.EnumStreamType streamType) {
       this.setParam("stream_type", streamType);
       return this;
     }
@@ -4554,7 +4226,7 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestCreateLiveVideo setProjection (Event.EnumProjection projection) {
+    public APIRequestCreateLiveVideo setProjection (LiveVideo.EnumProjection projection) {
       this.setParam("projection", projection);
       return this;
     }
@@ -4563,7 +4235,7 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestCreateLiveVideo setSpatialAudioFormat (Event.EnumSpatialAudioFormat spatialAudioFormat) {
+    public APIRequestCreateLiveVideo setSpatialAudioFormat (LiveVideo.EnumSpatialAudioFormat spatialAudioFormat) {
       this.setParam("spatial_audio_format", spatialAudioFormat);
       return this;
     }
@@ -4618,7 +4290,7 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestCreateLiveVideo setStereoscopicMode (Event.EnumStereoscopicMode stereoscopicMode) {
+    public APIRequestCreateLiveVideo setStereoscopicMode (LiveVideo.EnumStereoscopicMode stereoscopicMode) {
       this.setParam("stereoscopic_mode", stereoscopicMode);
       return this;
     }
@@ -5259,152 +4931,6 @@ public class Event extends APINode {
     }
   }
 
-  public static class APIRequestCreateMaybe extends APIRequest<Event> {
-
-    Event lastResponse = null;
-    @Override
-    public Event getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "eid",
-      "action_context",
-      "app_context",
-      "tracking",
-      "uid",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Event parseResponse(String response, String header) throws APIException {
-      return Event.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Event execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Event execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Event> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Event> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Event>() {
-           public Event apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateMaybe.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateMaybe(String nodeId, APIContext context) {
-      super(context, nodeId, "/maybe", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateMaybe setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateMaybe setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateMaybe setEid (String eid) {
-      this.setParam("eid", eid);
-      return this;
-    }
-
-    public APIRequestCreateMaybe setActionContext (Object actionContext) {
-      this.setParam("action_context", actionContext);
-      return this;
-    }
-    public APIRequestCreateMaybe setActionContext (String actionContext) {
-      this.setParam("action_context", actionContext);
-      return this;
-    }
-
-    public APIRequestCreateMaybe setAppContext (Object appContext) {
-      this.setParam("app_context", appContext);
-      return this;
-    }
-    public APIRequestCreateMaybe setAppContext (String appContext) {
-      this.setParam("app_context", appContext);
-      return this;
-    }
-
-    public APIRequestCreateMaybe setTracking (String tracking) {
-      this.setParam("tracking", tracking);
-      return this;
-    }
-
-    public APIRequestCreateMaybe setUid (Long uid) {
-      this.setParam("uid", uid);
-      return this;
-    }
-    public APIRequestCreateMaybe setUid (String uid) {
-      this.setParam("uid", uid);
-      return this;
-    }
-
-    public APIRequestCreateMaybe requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateMaybe requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateMaybe requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateMaybe requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateMaybe requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateMaybe requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetNoreply extends APIRequest<User> {
 
     APINodeList<User> lastResponse = null;
@@ -6010,7 +5536,6 @@ public class Event extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "id",
     };
 
     @Override
@@ -6102,13 +5627,6 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestGetPhotos requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetPhotos requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
   }
 
   public static class APIRequestCreatePhoto extends APIRequest<Photo> {
@@ -6646,7 +6164,6 @@ public class Event extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "id",
     };
 
     @Override
@@ -6738,13 +6255,6 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestGetPicture requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetPicture requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
   }
 
   public static class APIRequestGetPosts extends APIRequest<NullNode> {
@@ -6758,7 +6268,6 @@ public class Event extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "id",
     };
 
     @Override
@@ -6850,13 +6359,6 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestGetPosts requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetPosts requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
   }
 
   public static class APIRequestGetRoles extends APIRequest<Profile> {
@@ -7062,7 +6564,6 @@ public class Event extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "id",
     };
 
     @Override
@@ -7154,13 +6655,6 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestGetVideos requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetVideos requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
   }
 
   public static class APIRequestCreateVideo extends APIRequest<AdVideo> {
@@ -8203,109 +7697,6 @@ public class Event extends APINode {
       private String value;
 
       private EnumType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumProjection {
-      @SerializedName("CUBEMAP")
-      VALUE_CUBEMAP("CUBEMAP"),
-      @SerializedName("EQUIRECTANGULAR")
-      VALUE_EQUIRECTANGULAR("EQUIRECTANGULAR"),
-      @SerializedName("HALF_EQUIRECTANGULAR")
-      VALUE_HALF_EQUIRECTANGULAR("HALF_EQUIRECTANGULAR"),
-      NULL(null);
-
-      private String value;
-
-      private EnumProjection(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumSpatialAudioFormat {
-      @SerializedName("ambiX_4")
-      VALUE_AMBIX_4("ambiX_4"),
-      NULL(null);
-
-      private String value;
-
-      private EnumSpatialAudioFormat(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumStatus {
-      @SerializedName("LIVE_NOW")
-      VALUE_LIVE_NOW("LIVE_NOW"),
-      @SerializedName("SCHEDULED_CANCELED")
-      VALUE_SCHEDULED_CANCELED("SCHEDULED_CANCELED"),
-      @SerializedName("SCHEDULED_LIVE")
-      VALUE_SCHEDULED_LIVE("SCHEDULED_LIVE"),
-      @SerializedName("SCHEDULED_UNPUBLISHED")
-      VALUE_SCHEDULED_UNPUBLISHED("SCHEDULED_UNPUBLISHED"),
-      @SerializedName("UNPUBLISHED")
-      VALUE_UNPUBLISHED("UNPUBLISHED"),
-      NULL(null);
-
-      private String value;
-
-      private EnumStatus(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumStereoscopicMode {
-      @SerializedName("LEFT_RIGHT")
-      VALUE_LEFT_RIGHT("LEFT_RIGHT"),
-      @SerializedName("MONO")
-      VALUE_MONO("MONO"),
-      @SerializedName("TOP_BOTTOM")
-      VALUE_TOP_BOTTOM("TOP_BOTTOM"),
-      NULL(null);
-
-      private String value;
-
-      private EnumStereoscopicMode(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumStreamType {
-      @SerializedName("AMBIENT")
-      VALUE_AMBIENT("AMBIENT"),
-      @SerializedName("REGULAR")
-      VALUE_REGULAR("REGULAR"),
-      NULL(null);
-
-      private String value;
-
-      private EnumStreamType(String value) {
         this.value = value;
       }
 

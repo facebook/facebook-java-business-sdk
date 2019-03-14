@@ -79,15 +79,13 @@ public class AgencyClientDeclaration extends APINode {
   private Long mHasWrittenMandateFromAdvertiser = null;
   @SerializedName("is_client_paying_invoices")
   private Long mIsClientPayingInvoices = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AgencyClientDeclaration() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AgencyClientDeclaration loadJSON(String json, APIContext context, String header) {
     AgencyClientDeclaration agencyClientDeclaration = getGson().fromJson(json, AgencyClientDeclaration.class);
@@ -340,15 +338,6 @@ public class AgencyClientDeclaration extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AgencyClientDeclaration setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -378,7 +367,6 @@ public class AgencyClientDeclaration extends APINode {
     this.mClientStreet2 = instance.mClientStreet2;
     this.mHasWrittenMandateFromAdvertiser = instance.mHasWrittenMandateFromAdvertiser;
     this.mIsClientPayingInvoices = instance.mIsClientPayingInvoices;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

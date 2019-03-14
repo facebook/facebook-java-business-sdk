@@ -63,15 +63,13 @@ public class OutcomePredictionPoint extends APINode {
   private Double mReach = null;
   @SerializedName("spend")
   private Long mSpend = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public OutcomePredictionPoint() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static OutcomePredictionPoint loadJSON(String json, APIContext context, String header) {
     OutcomePredictionPoint outcomePredictionPoint = getGson().fromJson(json, OutcomePredictionPoint.class);
@@ -252,15 +250,6 @@ public class OutcomePredictionPoint extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public OutcomePredictionPoint setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -282,7 +271,6 @@ public class OutcomePredictionPoint extends APINode {
     this.mImpressions = instance.mImpressions;
     this.mReach = instance.mReach;
     this.mSpend = instance.mSpend;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

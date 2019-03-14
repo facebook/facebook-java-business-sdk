@@ -125,15 +125,13 @@ public class AdCreativeLinkData extends APINode {
   private AdCreativeStaticFallbackSpec mStaticFallbackSpec = null;
   @SerializedName("use_flexible_image_aspect_ratio")
   private Boolean mUseFlexibleImageAspectRatio = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdCreativeLinkData() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdCreativeLinkData loadJSON(String json, APIContext context, String header) {
     AdCreativeLinkData adCreativeLinkData = getGson().fromJson(json, AdCreativeLinkData.class);
@@ -653,15 +651,6 @@ public class AdCreativeLinkData extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdCreativeLinkData setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumAttachmentStyle {
@@ -756,7 +745,6 @@ public class AdCreativeLinkData extends APINode {
     this.mSponsorshipInfo = instance.mSponsorshipInfo;
     this.mStaticFallbackSpec = instance.mStaticFallbackSpec;
     this.mUseFlexibleImageAspectRatio = instance.mUseFlexibleImageAspectRatio;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

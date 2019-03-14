@@ -59,15 +59,13 @@ public class PageStartInfo extends APINode {
   private Object mDate = null;
   @SerializedName("type")
   private String mType = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public PageStartInfo() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static PageStartInfo loadJSON(String json, APIContext context, String header) {
     PageStartInfo pageStartInfo = getGson().fromJson(json, PageStartInfo.class);
@@ -230,15 +228,6 @@ public class PageStartInfo extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public PageStartInfo setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -258,7 +247,6 @@ public class PageStartInfo extends APINode {
   public PageStartInfo copyFrom(PageStartInfo instance) {
     this.mDate = instance.mDate;
     this.mType = instance.mType;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

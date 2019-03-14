@@ -59,15 +59,13 @@ public class RevSharePolicy extends APINode {
   private String mPolicyId = null;
   @SerializedName("policy_name")
   private String mPolicyName = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public RevSharePolicy() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static RevSharePolicy loadJSON(String json, APIContext context, String header) {
     RevSharePolicy revSharePolicy = getGson().fromJson(json, RevSharePolicy.class);
@@ -230,15 +228,6 @@ public class RevSharePolicy extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public RevSharePolicy setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -258,7 +247,6 @@ public class RevSharePolicy extends APINode {
   public RevSharePolicy copyFrom(RevSharePolicy instance) {
     this.mPolicyId = instance.mPolicyId;
     this.mPolicyName = instance.mPolicyName;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

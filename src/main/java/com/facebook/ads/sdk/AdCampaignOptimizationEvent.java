@@ -61,15 +61,13 @@ public class AdCampaignOptimizationEvent extends APINode {
   private Long mEventSequence = null;
   @SerializedName("event_type")
   private String mEventType = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdCampaignOptimizationEvent() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdCampaignOptimizationEvent loadJSON(String json, APIContext context, String header) {
     AdCampaignOptimizationEvent adCampaignOptimizationEvent = getGson().fromJson(json, AdCampaignOptimizationEvent.class);
@@ -241,15 +239,6 @@ public class AdCampaignOptimizationEvent extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdCampaignOptimizationEvent setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -270,7 +259,6 @@ public class AdCampaignOptimizationEvent extends APINode {
     this.mCustomConversionId = instance.mCustomConversionId;
     this.mEventSequence = instance.mEventSequence;
     this.mEventType = instance.mEventType;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

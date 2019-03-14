@@ -57,15 +57,13 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class TargetingGeoLocationLocationCluster extends APINode {
   @SerializedName("key")
   private Long mKey = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public TargetingGeoLocationLocationCluster() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static TargetingGeoLocationLocationCluster loadJSON(String json, APIContext context, String header) {
     TargetingGeoLocationLocationCluster targetingGeoLocationLocationCluster = getGson().fromJson(json, TargetingGeoLocationLocationCluster.class);
@@ -219,15 +217,6 @@ public class TargetingGeoLocationLocationCluster extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public TargetingGeoLocationLocationCluster setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -246,7 +235,6 @@ public class TargetingGeoLocationLocationCluster extends APINode {
 
   public TargetingGeoLocationLocationCluster copyFrom(TargetingGeoLocationLocationCluster instance) {
     this.mKey = instance.mKey;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

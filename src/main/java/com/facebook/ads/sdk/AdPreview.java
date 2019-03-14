@@ -57,15 +57,13 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdPreview extends APINode {
   @SerializedName("body")
   private String mBody = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdPreview() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdPreview loadJSON(String json, APIContext context, String header) {
     AdPreview adPreview = getGson().fromJson(json, AdPreview.class);
@@ -219,15 +217,6 @@ public class AdPreview extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdPreview setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumAdFormat {
@@ -326,7 +315,6 @@ public class AdPreview extends APINode {
 
   public AdPreview copyFrom(AdPreview instance) {
     this.mBody = instance.mBody;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

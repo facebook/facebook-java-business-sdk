@@ -79,15 +79,13 @@ public class AdActivity extends APINode {
   private String mObjectType = null;
   @SerializedName("translated_event_type")
   private String mTranslatedEventType = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdActivity() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdActivity loadJSON(String json, APIContext context, String header) {
     AdActivity adActivity = getGson().fromJson(json, AdActivity.class);
@@ -340,15 +338,6 @@ public class AdActivity extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdActivity setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumEventType {
@@ -558,7 +547,6 @@ public class AdActivity extends APINode {
     this.mObjectName = instance.mObjectName;
     this.mObjectType = instance.mObjectType;
     this.mTranslatedEventType = instance.mTranslatedEventType;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

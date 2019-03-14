@@ -69,15 +69,13 @@ public class AdRecommendation extends APINode {
   private AdRecommendationData mRecommendationData = null;
   @SerializedName("title")
   private String mTitle = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdRecommendation() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdRecommendation loadJSON(String json, APIContext context, String header) {
     AdRecommendation adRecommendation = getGson().fromJson(json, AdRecommendation.class);
@@ -290,15 +288,6 @@ public class AdRecommendation extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdRecommendation setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumConfidence {
@@ -365,7 +354,6 @@ public class AdRecommendation extends APINode {
     this.mMessage = instance.mMessage;
     this.mRecommendationData = instance.mRecommendationData;
     this.mTitle = instance.mTitle;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

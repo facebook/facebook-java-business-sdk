@@ -69,15 +69,13 @@ public class AdCreativePhotoData extends APINode {
   private String mPageWelcomeMessage = null;
   @SerializedName("url")
   private String mUrl = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdCreativePhotoData() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdCreativePhotoData loadJSON(String json, APIContext context, String header) {
     AdCreativePhotoData adCreativePhotoData = getGson().fromJson(json, AdCreativePhotoData.class);
@@ -285,15 +283,6 @@ public class AdCreativePhotoData extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdCreativePhotoData setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -318,7 +307,6 @@ public class AdCreativePhotoData extends APINode {
     this.mImageHash = instance.mImageHash;
     this.mPageWelcomeMessage = instance.mPageWelcomeMessage;
     this.mUrl = instance.mUrl;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

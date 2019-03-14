@@ -61,15 +61,13 @@ public class AdRuleExecutionOptions extends APINode {
   private EnumOperator mOperator = null;
   @SerializedName("value")
   private Object mValue = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdRuleExecutionOptions() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdRuleExecutionOptions loadJSON(String json, APIContext context, String header) {
     AdRuleExecutionOptions adRuleExecutionOptions = getGson().fromJson(json, AdRuleExecutionOptions.class);
@@ -241,15 +239,6 @@ public class AdRuleExecutionOptions extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdRuleExecutionOptions setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumOperator {
@@ -289,7 +278,6 @@ public class AdRuleExecutionOptions extends APINode {
     this.mField = instance.mField;
     this.mOperator = instance.mOperator;
     this.mValue = instance.mValue;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -73,15 +73,13 @@ public class ReachFrequencyEstimatesCurve extends APINode {
   private List<Long> mRawReach = null;
   @SerializedName("reach")
   private List<Long> mReach = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public ReachFrequencyEstimatesCurve() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static ReachFrequencyEstimatesCurve loadJSON(String json, APIContext context, String header) {
     ReachFrequencyEstimatesCurve reachFrequencyEstimatesCurve = getGson().fromJson(json, ReachFrequencyEstimatesCurve.class);
@@ -307,15 +305,6 @@ public class ReachFrequencyEstimatesCurve extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public ReachFrequencyEstimatesCurve setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -342,7 +331,6 @@ public class ReachFrequencyEstimatesCurve extends APINode {
     this.mRawImpression = instance.mRawImpression;
     this.mRawReach = instance.mRawReach;
     this.mReach = instance.mReach;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

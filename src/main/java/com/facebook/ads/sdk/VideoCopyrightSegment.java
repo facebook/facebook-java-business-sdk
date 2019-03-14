@@ -61,15 +61,13 @@ public class VideoCopyrightSegment extends APINode {
   private String mMediaType = null;
   @SerializedName("start_time_in_sec")
   private Double mStartTimeInSec = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public VideoCopyrightSegment() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static VideoCopyrightSegment loadJSON(String json, APIContext context, String header) {
     VideoCopyrightSegment videoCopyrightSegment = getGson().fromJson(json, VideoCopyrightSegment.class);
@@ -241,15 +239,6 @@ public class VideoCopyrightSegment extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public VideoCopyrightSegment setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -270,7 +259,6 @@ public class VideoCopyrightSegment extends APINode {
     this.mDurationInSec = instance.mDurationInSec;
     this.mMediaType = instance.mMediaType;
     this.mStartTimeInSec = instance.mStartTimeInSec;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

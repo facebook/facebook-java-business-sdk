@@ -61,15 +61,13 @@ public class AdsPixelStatsResult extends APINode {
   private List<AdsPixelStats> mData = null;
   @SerializedName("start_time")
   private String mStartTime = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdsPixelStatsResult() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdsPixelStatsResult loadJSON(String json, APIContext context, String header) {
     AdsPixelStatsResult adsPixelStatsResult = getGson().fromJson(json, AdsPixelStatsResult.class);
@@ -246,15 +244,6 @@ public class AdsPixelStatsResult extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdsPixelStatsResult setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumAggregation {
@@ -270,6 +259,8 @@ public class AdsPixelStatsResult extends APINode {
       VALUE_EVENT("event"),
       @SerializedName("event_detection_method")
       VALUE_EVENT_DETECTION_METHOD("event_detection_method"),
+      @SerializedName("event_processing_results")
+      VALUE_EVENT_PROCESSING_RESULTS("event_processing_results"),
       @SerializedName("event_source")
       VALUE_EVENT_SOURCE("event_source"),
       @SerializedName("event_total_counts")
@@ -322,7 +313,6 @@ public class AdsPixelStatsResult extends APINode {
     this.mAggregation = instance.mAggregation;
     this.mData = instance.mData;
     this.mStartTime = instance.mStartTime;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

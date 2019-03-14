@@ -400,7 +400,6 @@ public class OracleTransaction extends APINode {
       "conversions",
       "impressions",
       "tags",
-      "id",
     };
 
     @Override
@@ -548,13 +547,6 @@ public class OracleTransaction extends APINode {
       this.requestField("tags", value);
       return this;
     }
-    public APIRequestGetCampaigns requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetCampaigns requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
   }
 
   public static class APIRequestGetData extends APIRequest<AtlasURL> {
@@ -570,7 +562,6 @@ public class OracleTransaction extends APINode {
 
     public static final String[] FIELDS = {
       "url",
-      "id",
     };
 
     @Override
@@ -676,13 +667,6 @@ public class OracleTransaction extends APINode {
     }
     public APIRequestGetData requestUrlField (boolean value) {
       this.requestField("url", value);
-      return this;
-    }
-    public APIRequestGetData requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetData requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }

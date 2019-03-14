@@ -712,6 +712,7 @@ public class CustomAudience extends APINode {
       "end_advertiser_name",
       "extended_credit_invoice_group",
       "failed_delivery_checks",
+      "fb_entity",
       "funding_source",
       "funding_source_details",
       "has_migrated_permissions",
@@ -1022,6 +1023,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAdAccounts requestFailedDeliveryChecksField (boolean value) {
       this.requestField("failed_delivery_checks", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestFbEntityField () {
+      return this.requestFbEntityField(true);
+    }
+    public APIRequestGetAdAccounts requestFbEntityField (boolean value) {
+      this.requestField("fb_entity", value);
       return this;
     }
     public APIRequestGetAdAccounts requestFundingSourceField () {
@@ -2206,7 +2214,6 @@ public class CustomAudience extends APINode {
       "description",
       "num_added",
       "status",
-      "id",
     };
 
     @Override
@@ -2319,13 +2326,6 @@ public class CustomAudience extends APINode {
       this.requestField("status", value);
       return this;
     }
-    public APIRequestGetPrefills requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetPrefills requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
   }
 
   public static class APIRequestGetSessions extends APIRequest<CustomAudienceSession> {
@@ -2348,7 +2348,6 @@ public class CustomAudience extends APINode {
       "session_id",
       "stage",
       "start_time",
-      "id",
     };
 
     @Override
@@ -2505,13 +2504,6 @@ public class CustomAudience extends APINode {
       this.requestField("start_time", value);
       return this;
     }
-    public APIRequestGetSessions requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetSessions requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
   }
 
   public static class APIRequestGetSharedAccountInfo extends APIRequest<CustomAudiencesharedAccountInfo> {
@@ -2530,7 +2522,6 @@ public class CustomAudience extends APINode {
       "business_id",
       "business_name",
       "sharing_status",
-      "id",
     };
 
     @Override
@@ -2655,13 +2646,6 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetSharedAccountInfo requestSharingStatusField (boolean value) {
       this.requestField("sharing_status", value);
-      return this;
-    }
-    public APIRequestGetSharedAccountInfo requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetSharedAccountInfo requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -3738,6 +3722,7 @@ public class CustomAudience extends APINode {
       "event_source_group",
       "product_set_id",
       "event_sources",
+      "enable_fetch_or_create",
       "study_spec",
     };
 
@@ -4039,6 +4024,15 @@ public class CustomAudience extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setEnableFetchOrCreate (Boolean enableFetchOrCreate) {
+      this.setParam("enable_fetch_or_create", enableFetchOrCreate);
+      return this;
+    }
+    public APIRequestUpdate setEnableFetchOrCreate (String enableFetchOrCreate) {
+      this.setParam("enable_fetch_or_create", enableFetchOrCreate);
+      return this;
+    }
+
     public APIRequestUpdate setStudySpec (Map<String, String> studySpec) {
       this.setParam("study_spec", studySpec);
       return this;
@@ -4188,6 +4182,8 @@ public class CustomAudience extends APINode {
       VALUE_LOOKALIKE("LOOKALIKE"),
       @SerializedName("MANAGED")
       VALUE_MANAGED("MANAGED"),
+      @SerializedName("MEASUREMENT")
+      VALUE_MEASUREMENT("MEASUREMENT"),
       @SerializedName("OFFLINE_CONVERSION")
       VALUE_OFFLINE_CONVERSION("OFFLINE_CONVERSION"),
       @SerializedName("PARTNER")

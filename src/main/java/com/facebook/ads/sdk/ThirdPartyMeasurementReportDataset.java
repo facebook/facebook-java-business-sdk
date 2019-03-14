@@ -54,80 +54,72 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class IterativeSplitTestConfig extends APINode {
-  @SerializedName("budget")
-  private Long mBudget = null;
-  @SerializedName("end_time")
-  private String mEndTime = null;
-  @SerializedName("guidance")
-  private Object mGuidance = null;
+public class ThirdPartyMeasurementReportDataset extends APINode {
+  @SerializedName("category")
+  private String mCategory = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("iterative_split_test_original_variant_id")
-  private String mIterativeSplitTestOriginalVariantId = null;
-  @SerializedName("iterative_split_test_variant_to_split_mapping")
-  private Map<String, Long> mIterativeSplitTestVariantToSplitMapping = null;
-  @SerializedName("results_window")
-  private Object mResultsWindow = null;
-  @SerializedName("splits")
-  private List<Long> mSplits = null;
-  @SerializedName("start_time")
-  private String mStartTime = null;
+  @SerializedName("partner")
+  private Business mPartner = null;
+  @SerializedName("product")
+  private String mProduct = null;
+  @SerializedName("schema")
+  private List<Object> mSchema = null;
   protected static Gson gson = null;
 
-  IterativeSplitTestConfig() {
+  ThirdPartyMeasurementReportDataset() {
   }
 
-  public IterativeSplitTestConfig(Long id, APIContext context) {
+  public ThirdPartyMeasurementReportDataset(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public IterativeSplitTestConfig(String id, APIContext context) {
+  public ThirdPartyMeasurementReportDataset(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public IterativeSplitTestConfig fetch() throws APIException{
-    IterativeSplitTestConfig newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public ThirdPartyMeasurementReportDataset fetch() throws APIException{
+    ThirdPartyMeasurementReportDataset newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static IterativeSplitTestConfig fetchById(Long id, APIContext context) throws APIException {
+  public static ThirdPartyMeasurementReportDataset fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<IterativeSplitTestConfig> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<ThirdPartyMeasurementReportDataset> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static IterativeSplitTestConfig fetchById(String id, APIContext context) throws APIException {
+  public static ThirdPartyMeasurementReportDataset fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<IterativeSplitTestConfig> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<ThirdPartyMeasurementReportDataset> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<IterativeSplitTestConfig> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<IterativeSplitTestConfig>)(
-      new APIRequest<IterativeSplitTestConfig>(context, "", "/", "GET", IterativeSplitTestConfig.getParser())
+  public static APINodeList<ThirdPartyMeasurementReportDataset> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<ThirdPartyMeasurementReportDataset>)(
+      new APIRequest<ThirdPartyMeasurementReportDataset>(context, "", "/", "GET", ThirdPartyMeasurementReportDataset.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<IterativeSplitTestConfig>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<ThirdPartyMeasurementReportDataset>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", IterativeSplitTestConfig.getParser())
+      new APIRequest(context, "", "/", "GET", ThirdPartyMeasurementReportDataset.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -140,12 +132,12 @@ public class IterativeSplitTestConfig extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static IterativeSplitTestConfig loadJSON(String json, APIContext context, String header) {
-    IterativeSplitTestConfig iterativeSplitTestConfig = getGson().fromJson(json, IterativeSplitTestConfig.class);
+  public static ThirdPartyMeasurementReportDataset loadJSON(String json, APIContext context, String header) {
+    ThirdPartyMeasurementReportDataset thirdPartyMeasurementReportDataset = getGson().fromJson(json, ThirdPartyMeasurementReportDataset.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(iterativeSplitTestConfig.toString());
+      JsonElement o2 = parser.parse(thirdPartyMeasurementReportDataset.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -155,14 +147,14 @@ public class IterativeSplitTestConfig extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    iterativeSplitTestConfig.context = context;
-    iterativeSplitTestConfig.rawValue = json;
-    iterativeSplitTestConfig.header = header;
-    return iterativeSplitTestConfig;
+    thirdPartyMeasurementReportDataset.context = context;
+    thirdPartyMeasurementReportDataset.rawValue = json;
+    thirdPartyMeasurementReportDataset.header = header;
+    return thirdPartyMeasurementReportDataset;
   }
 
-  public static APINodeList<IterativeSplitTestConfig> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<IterativeSplitTestConfig> iterativeSplitTestConfigs = new APINodeList<IterativeSplitTestConfig>(request, json, header);
+  public static APINodeList<ThirdPartyMeasurementReportDataset> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ThirdPartyMeasurementReportDataset> thirdPartyMeasurementReportDatasets = new APINodeList<ThirdPartyMeasurementReportDataset>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -173,9 +165,9 @@ public class IterativeSplitTestConfig extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          iterativeSplitTestConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          thirdPartyMeasurementReportDatasets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return iterativeSplitTestConfigs;
+        return thirdPartyMeasurementReportDatasets;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -185,20 +177,20 @@ public class IterativeSplitTestConfig extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                iterativeSplitTestConfigs.setCursors(before, after);
+                thirdPartyMeasurementReportDatasets.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            iterativeSplitTestConfigs.setPaging(previous, next);
+            thirdPartyMeasurementReportDatasets.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              iterativeSplitTestConfigs.setAppSecret(context.getAppSecretProof());
+              thirdPartyMeasurementReportDatasets.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              iterativeSplitTestConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              thirdPartyMeasurementReportDatasets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -209,23 +201,23 @@ public class IterativeSplitTestConfig extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  iterativeSplitTestConfigs.add(loadJSON(entry.getValue().toString(), context, header));
+                  thirdPartyMeasurementReportDatasets.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              iterativeSplitTestConfigs.add(loadJSON(obj.toString(), context, header));
+              thirdPartyMeasurementReportDatasets.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return iterativeSplitTestConfigs;
+          return thirdPartyMeasurementReportDatasets;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              iterativeSplitTestConfigs.add(loadJSON(entry.getValue().toString(), context, header));
+              thirdPartyMeasurementReportDatasets.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return iterativeSplitTestConfigs;
+          return thirdPartyMeasurementReportDatasets;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -242,20 +234,20 @@ public class IterativeSplitTestConfig extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              iterativeSplitTestConfigs.add(loadJSON(value.toString(), context, header));
+              thirdPartyMeasurementReportDatasets.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return iterativeSplitTestConfigs;
+            return thirdPartyMeasurementReportDatasets;
           }
 
           // Sixth, check if it's pure JsonObject
-          iterativeSplitTestConfigs.clear();
-          iterativeSplitTestConfigs.add(loadJSON(json, context, header));
-          return iterativeSplitTestConfigs;
+          thirdPartyMeasurementReportDatasets.clear();
+          thirdPartyMeasurementReportDatasets.add(loadJSON(json, context, header));
+          return thirdPartyMeasurementReportDatasets;
         }
       }
     } catch (Exception e) {
@@ -287,92 +279,75 @@ public class IterativeSplitTestConfig extends APINode {
   }
 
 
-  public Long getFieldBudget() {
-    return mBudget;
-  }
-
-  public String getFieldEndTime() {
-    return mEndTime;
-  }
-
-  public Object getFieldGuidance() {
-    return mGuidance;
+  public String getFieldCategory() {
+    return mCategory;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-  public String getFieldIterativeSplitTestOriginalVariantId() {
-    return mIterativeSplitTestOriginalVariantId;
+  public Business getFieldPartner() {
+    if (mPartner != null) {
+      mPartner.context = getContext();
+    }
+    return mPartner;
   }
 
-  public Map<String, Long> getFieldIterativeSplitTestVariantToSplitMapping() {
-    return mIterativeSplitTestVariantToSplitMapping;
+  public String getFieldProduct() {
+    return mProduct;
   }
 
-  public Object getFieldResultsWindow() {
-    return mResultsWindow;
-  }
-
-  public List<Long> getFieldSplits() {
-    return mSplits;
-  }
-
-  public String getFieldStartTime() {
-    return mStartTime;
+  public List<Object> getFieldSchema() {
+    return mSchema;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<IterativeSplitTestConfig> {
+  public static class APIRequestGet extends APIRequest<ThirdPartyMeasurementReportDataset> {
 
-    IterativeSplitTestConfig lastResponse = null;
+    ThirdPartyMeasurementReportDataset lastResponse = null;
     @Override
-    public IterativeSplitTestConfig getLastResponse() {
+    public ThirdPartyMeasurementReportDataset getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "budget",
-      "end_time",
-      "guidance",
+      "category",
       "id",
-      "iterative_split_test_original_variant_id",
-      "iterative_split_test_variant_to_split_mapping",
-      "results_window",
-      "splits",
-      "start_time",
+      "partner",
+      "product",
+      "schema",
     };
 
     @Override
-    public IterativeSplitTestConfig parseResponse(String response, String header) throws APIException {
-      return IterativeSplitTestConfig.parseResponse(response, getContext(), this, header).head();
+    public ThirdPartyMeasurementReportDataset parseResponse(String response, String header) throws APIException {
+      return ThirdPartyMeasurementReportDataset.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public IterativeSplitTestConfig execute() throws APIException {
+    public ThirdPartyMeasurementReportDataset execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public IterativeSplitTestConfig execute(Map<String, Object> extraParams) throws APIException {
+    public ThirdPartyMeasurementReportDataset execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<IterativeSplitTestConfig> executeAsync() throws APIException {
+    public ListenableFuture<ThirdPartyMeasurementReportDataset> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<IterativeSplitTestConfig> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<ThirdPartyMeasurementReportDataset> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, IterativeSplitTestConfig>() {
-           public IterativeSplitTestConfig apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, ThirdPartyMeasurementReportDataset>() {
+           public ThirdPartyMeasurementReportDataset apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -436,25 +411,11 @@ public class IterativeSplitTestConfig extends APINode {
       return this;
     }
 
-    public APIRequestGet requestBudgetField () {
-      return this.requestBudgetField(true);
+    public APIRequestGet requestCategoryField () {
+      return this.requestCategoryField(true);
     }
-    public APIRequestGet requestBudgetField (boolean value) {
-      this.requestField("budget", value);
-      return this;
-    }
-    public APIRequestGet requestEndTimeField () {
-      return this.requestEndTimeField(true);
-    }
-    public APIRequestGet requestEndTimeField (boolean value) {
-      this.requestField("end_time", value);
-      return this;
-    }
-    public APIRequestGet requestGuidanceField () {
-      return this.requestGuidanceField(true);
-    }
-    public APIRequestGet requestGuidanceField (boolean value) {
-      this.requestField("guidance", value);
+    public APIRequestGet requestCategoryField (boolean value) {
+      this.requestField("category", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -464,41 +425,65 @@ public class IterativeSplitTestConfig extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestIterativeSplitTestOriginalVariantIdField () {
-      return this.requestIterativeSplitTestOriginalVariantIdField(true);
+    public APIRequestGet requestPartnerField () {
+      return this.requestPartnerField(true);
     }
-    public APIRequestGet requestIterativeSplitTestOriginalVariantIdField (boolean value) {
-      this.requestField("iterative_split_test_original_variant_id", value);
+    public APIRequestGet requestPartnerField (boolean value) {
+      this.requestField("partner", value);
       return this;
     }
-    public APIRequestGet requestIterativeSplitTestVariantToSplitMappingField () {
-      return this.requestIterativeSplitTestVariantToSplitMappingField(true);
+    public APIRequestGet requestProductField () {
+      return this.requestProductField(true);
     }
-    public APIRequestGet requestIterativeSplitTestVariantToSplitMappingField (boolean value) {
-      this.requestField("iterative_split_test_variant_to_split_mapping", value);
+    public APIRequestGet requestProductField (boolean value) {
+      this.requestField("product", value);
       return this;
     }
-    public APIRequestGet requestResultsWindowField () {
-      return this.requestResultsWindowField(true);
+    public APIRequestGet requestSchemaField () {
+      return this.requestSchemaField(true);
     }
-    public APIRequestGet requestResultsWindowField (boolean value) {
-      this.requestField("results_window", value);
+    public APIRequestGet requestSchemaField (boolean value) {
+      this.requestField("schema", value);
       return this;
     }
-    public APIRequestGet requestSplitsField () {
-      return this.requestSplitsField(true);
-    }
-    public APIRequestGet requestSplitsField (boolean value) {
-      this.requestField("splits", value);
-      return this;
-    }
-    public APIRequestGet requestStartTimeField () {
-      return this.requestStartTimeField(true);
-    }
-    public APIRequestGet requestStartTimeField (boolean value) {
-      this.requestField("start_time", value);
-      return this;
-    }
+  }
+
+  public static enum EnumCategory {
+      @SerializedName("MTA")
+      VALUE_MTA("MTA"),
+      NULL(null);
+
+      private String value;
+
+      private EnumCategory(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumProduct {
+      @SerializedName("CUSTOM")
+      VALUE_CUSTOM("CUSTOM"),
+      @SerializedName("MTA")
+      VALUE_MTA("MTA"),
+      @SerializedName("VIEWABILITY")
+      VALUE_VIEWABILITY("VIEWABILITY"),
+      NULL(null);
+
+      private String value;
+
+      private EnumProduct(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
 
@@ -515,25 +500,21 @@ public class IterativeSplitTestConfig extends APINode {
     return gson;
   }
 
-  public IterativeSplitTestConfig copyFrom(IterativeSplitTestConfig instance) {
-    this.mBudget = instance.mBudget;
-    this.mEndTime = instance.mEndTime;
-    this.mGuidance = instance.mGuidance;
+  public ThirdPartyMeasurementReportDataset copyFrom(ThirdPartyMeasurementReportDataset instance) {
+    this.mCategory = instance.mCategory;
     this.mId = instance.mId;
-    this.mIterativeSplitTestOriginalVariantId = instance.mIterativeSplitTestOriginalVariantId;
-    this.mIterativeSplitTestVariantToSplitMapping = instance.mIterativeSplitTestVariantToSplitMapping;
-    this.mResultsWindow = instance.mResultsWindow;
-    this.mSplits = instance.mSplits;
-    this.mStartTime = instance.mStartTime;
+    this.mPartner = instance.mPartner;
+    this.mProduct = instance.mProduct;
+    this.mSchema = instance.mSchema;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<IterativeSplitTestConfig> getParser() {
-    return new APIRequest.ResponseParser<IterativeSplitTestConfig>() {
-      public APINodeList<IterativeSplitTestConfig> parseResponse(String response, APIContext context, APIRequest<IterativeSplitTestConfig> request, String header) throws MalformedResponseException {
-        return IterativeSplitTestConfig.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ThirdPartyMeasurementReportDataset> getParser() {
+    return new APIRequest.ResponseParser<ThirdPartyMeasurementReportDataset>() {
+      public APINodeList<ThirdPartyMeasurementReportDataset> parseResponse(String response, APIContext context, APIRequest<ThirdPartyMeasurementReportDataset> request, String header) throws MalformedResponseException {
+        return ThirdPartyMeasurementReportDataset.parseResponse(response, context, request, header);
       }
     };
   }

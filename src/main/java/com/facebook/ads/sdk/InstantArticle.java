@@ -353,7 +353,6 @@ public class InstantArticle extends APINode {
       "name",
       "time",
       "value",
-      "id",
     };
 
     @Override
@@ -508,13 +507,6 @@ public class InstantArticle extends APINode {
     }
     public APIRequestGetInsights requestValueField (boolean value) {
       this.requestField("value", value);
-      return this;
-    }
-    public APIRequestGetInsights requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetInsights requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }

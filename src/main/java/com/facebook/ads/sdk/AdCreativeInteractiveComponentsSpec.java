@@ -57,15 +57,13 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdCreativeInteractiveComponentsSpec extends APINode {
   @SerializedName("components")
   private List<Object> mComponents = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdCreativeInteractiveComponentsSpec() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdCreativeInteractiveComponentsSpec loadJSON(String json, APIContext context, String header) {
     AdCreativeInteractiveComponentsSpec adCreativeInteractiveComponentsSpec = getGson().fromJson(json, AdCreativeInteractiveComponentsSpec.class);
@@ -219,15 +217,6 @@ public class AdCreativeInteractiveComponentsSpec extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdCreativeInteractiveComponentsSpec setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -246,7 +235,6 @@ public class AdCreativeInteractiveComponentsSpec extends APINode {
 
   public AdCreativeInteractiveComponentsSpec copyFrom(AdCreativeInteractiveComponentsSpec instance) {
     this.mComponents = instance.mComponents;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

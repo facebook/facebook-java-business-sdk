@@ -65,15 +65,13 @@ public class AdNetworkAnalyticsAsyncQueryResult extends APINode {
   private List<Object> mResults = null;
   @SerializedName("status")
   private String mStatus = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdNetworkAnalyticsAsyncQueryResult() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdNetworkAnalyticsAsyncQueryResult loadJSON(String json, APIContext context, String header) {
     AdNetworkAnalyticsAsyncQueryResult adNetworkAnalyticsAsyncQueryResult = getGson().fromJson(json, AdNetworkAnalyticsAsyncQueryResult.class);
@@ -263,15 +261,6 @@ public class AdNetworkAnalyticsAsyncQueryResult extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdNetworkAnalyticsAsyncQueryResult setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -294,7 +283,6 @@ public class AdNetworkAnalyticsAsyncQueryResult extends APINode {
     this.mQueryId = instance.mQueryId;
     this.mResults = instance.mResults;
     this.mStatus = instance.mStatus;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

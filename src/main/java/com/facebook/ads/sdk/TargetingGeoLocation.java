@@ -95,15 +95,13 @@ public class TargetingGeoLocation extends APINode {
   private List<TargetingGeoLocationGeoEntities> mSubneighborhoods = null;
   @SerializedName("zips")
   private List<TargetingGeoLocationZip> mZips = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public TargetingGeoLocation() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static TargetingGeoLocation loadJSON(String json, APIContext context, String header) {
     TargetingGeoLocation targetingGeoLocation = getGson().fromJson(json, TargetingGeoLocation.class);
@@ -508,15 +506,6 @@ public class TargetingGeoLocation extends APINode {
     this.mZips = TargetingGeoLocationZip.getGson().fromJson(value, type);
     return this;
   }
-  public String getFieldId() {
-    return mId;
-  }
-
-  public TargetingGeoLocation setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -554,7 +543,6 @@ public class TargetingGeoLocation extends APINode {
     this.mSubcities = instance.mSubcities;
     this.mSubneighborhoods = instance.mSubneighborhoods;
     this.mZips = instance.mZips;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

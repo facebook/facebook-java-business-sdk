@@ -59,15 +59,13 @@ public class ProductCatalogImageSettings extends APINode {
   private ProductCatalogImageSettingsOperation mCarouselAd = null;
   @SerializedName("single_ad")
   private ProductCatalogImageSettingsOperation mSingleAd = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public ProductCatalogImageSettings() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static ProductCatalogImageSettings loadJSON(String json, APIContext context, String header) {
     ProductCatalogImageSettings productCatalogImageSettings = getGson().fromJson(json, ProductCatalogImageSettings.class);
@@ -240,15 +238,6 @@ public class ProductCatalogImageSettings extends APINode {
     this.mSingleAd = ProductCatalogImageSettingsOperation.getGson().fromJson(value, type);
     return this;
   }
-  public String getFieldId() {
-    return mId;
-  }
-
-  public ProductCatalogImageSettings setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -268,7 +257,6 @@ public class ProductCatalogImageSettings extends APINode {
   public ProductCatalogImageSettings copyFrom(ProductCatalogImageSettings instance) {
     this.mCarouselAd = instance.mCarouselAd;
     this.mSingleAd = instance.mSingleAd;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -63,15 +63,13 @@ public class CurrencyAmount extends APINode {
   private String mCurrency = null;
   @SerializedName("offsetted_amount")
   private String mOffsettedAmount = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public CurrencyAmount() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static CurrencyAmount loadJSON(String json, APIContext context, String header) {
     CurrencyAmount currencyAmount = getGson().fromJson(json, CurrencyAmount.class);
@@ -252,15 +250,6 @@ public class CurrencyAmount extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public CurrencyAmount setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -282,7 +271,6 @@ public class CurrencyAmount extends APINode {
     this.mAmountInHundredths = instance.mAmountInHundredths;
     this.mCurrency = instance.mCurrency;
     this.mOffsettedAmount = instance.mOffsettedAmount;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

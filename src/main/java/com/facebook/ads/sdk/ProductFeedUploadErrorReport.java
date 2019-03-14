@@ -59,15 +59,13 @@ public class ProductFeedUploadErrorReport extends APINode {
   private String mFileHandle = null;
   @SerializedName("report_status")
   private String mReportStatus = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public ProductFeedUploadErrorReport() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static ProductFeedUploadErrorReport loadJSON(String json, APIContext context, String header) {
     ProductFeedUploadErrorReport productFeedUploadErrorReport = getGson().fromJson(json, ProductFeedUploadErrorReport.class);
@@ -230,15 +228,6 @@ public class ProductFeedUploadErrorReport extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public ProductFeedUploadErrorReport setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -258,7 +247,6 @@ public class ProductFeedUploadErrorReport extends APINode {
   public ProductFeedUploadErrorReport copyFrom(ProductFeedUploadErrorReport instance) {
     this.mFileHandle = instance.mFileHandle;
     this.mReportStatus = instance.mReportStatus;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

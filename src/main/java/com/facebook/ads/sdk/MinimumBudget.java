@@ -65,15 +65,13 @@ public class MinimumBudget extends APINode {
   private Long mMinDailyBudgetLowFreq = null;
   @SerializedName("min_daily_budget_video_views")
   private Long mMinDailyBudgetVideoViews = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public MinimumBudget() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static MinimumBudget loadJSON(String json, APIContext context, String header) {
     MinimumBudget minimumBudget = getGson().fromJson(json, MinimumBudget.class);
@@ -263,15 +261,6 @@ public class MinimumBudget extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public MinimumBudget setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -294,7 +283,6 @@ public class MinimumBudget extends APINode {
     this.mMinDailyBudgetImp = instance.mMinDailyBudgetImp;
     this.mMinDailyBudgetLowFreq = instance.mMinDailyBudgetLowFreq;
     this.mMinDailyBudgetVideoViews = instance.mMinDailyBudgetVideoViews;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

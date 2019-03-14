@@ -63,15 +63,13 @@ public class UserPaymentModulesOptions extends APINode {
   private String mCountry = null;
   @SerializedName("currency")
   private String mCurrency = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public UserPaymentModulesOptions() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static UserPaymentModulesOptions loadJSON(String json, APIContext context, String header) {
     UserPaymentModulesOptions userPaymentModulesOptions = getGson().fromJson(json, UserPaymentModulesOptions.class);
@@ -252,15 +250,6 @@ public class UserPaymentModulesOptions extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public UserPaymentModulesOptions setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -282,7 +271,6 @@ public class UserPaymentModulesOptions extends APINode {
     this.mAvailablePaymentOptions = instance.mAvailablePaymentOptions;
     this.mCountry = instance.mCountry;
     this.mCurrency = instance.mCurrency;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

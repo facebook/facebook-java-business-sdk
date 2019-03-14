@@ -77,15 +77,13 @@ public class LeadGenFormPreviewDetails extends APINode {
   private String mSlideToSubmitText = null;
   @SerializedName("submit_button_text")
   private String mSubmitButtonText = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public LeadGenFormPreviewDetails() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static LeadGenFormPreviewDetails loadJSON(String json, APIContext context, String header) {
     LeadGenFormPreviewDetails leadGenFormPreviewDetails = getGson().fromJson(json, LeadGenFormPreviewDetails.class);
@@ -329,15 +327,6 @@ public class LeadGenFormPreviewDetails extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public LeadGenFormPreviewDetails setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -366,7 +355,6 @@ public class LeadGenFormPreviewDetails extends APINode {
     this.mReviewYourInfoText = instance.mReviewYourInfoText;
     this.mSlideToSubmitText = instance.mSlideToSubmitText;
     this.mSubmitButtonText = instance.mSubmitButtonText;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

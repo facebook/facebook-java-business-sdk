@@ -59,15 +59,13 @@ public class AdRuleScheduleSpec extends APINode {
   private List<AdRuleSchedule> mSchedule = null;
   @SerializedName("schedule_type")
   private String mScheduleType = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdRuleScheduleSpec() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdRuleScheduleSpec loadJSON(String json, APIContext context, String header) {
     AdRuleScheduleSpec adRuleScheduleSpec = getGson().fromJson(json, AdRuleScheduleSpec.class);
@@ -235,15 +233,6 @@ public class AdRuleScheduleSpec extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdRuleScheduleSpec setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -263,7 +252,6 @@ public class AdRuleScheduleSpec extends APINode {
   public AdRuleScheduleSpec copyFrom(AdRuleScheduleSpec instance) {
     this.mSchedule = instance.mSchedule;
     this.mScheduleType = instance.mScheduleType;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

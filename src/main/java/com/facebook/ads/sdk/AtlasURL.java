@@ -57,15 +57,13 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AtlasURL extends APINode {
   @SerializedName("url")
   private String mUrl = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AtlasURL() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AtlasURL loadJSON(String json, APIContext context, String header) {
     AtlasURL atlasURL = getGson().fromJson(json, AtlasURL.class);
@@ -219,15 +217,6 @@ public class AtlasURL extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AtlasURL setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -246,7 +235,6 @@ public class AtlasURL extends APINode {
 
   public AtlasURL copyFrom(AtlasURL instance) {
     this.mUrl = instance.mUrl;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

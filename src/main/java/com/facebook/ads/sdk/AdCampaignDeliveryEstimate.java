@@ -63,15 +63,13 @@ public class AdCampaignDeliveryEstimate extends APINode {
   private Long mEstimateMau = null;
   @SerializedName("estimate_ready")
   private Boolean mEstimateReady = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdCampaignDeliveryEstimate() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdCampaignDeliveryEstimate loadJSON(String json, APIContext context, String header) {
     AdCampaignDeliveryEstimate adCampaignDeliveryEstimate = getGson().fromJson(json, AdCampaignDeliveryEstimate.class);
@@ -257,15 +255,6 @@ public class AdCampaignDeliveryEstimate extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdCampaignDeliveryEstimate setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumOptimizationGoal {
@@ -352,7 +341,6 @@ public class AdCampaignDeliveryEstimate extends APINode {
     this.mEstimateDau = instance.mEstimateDau;
     this.mEstimateMau = instance.mEstimateMau;
     this.mEstimateReady = instance.mEstimateReady;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

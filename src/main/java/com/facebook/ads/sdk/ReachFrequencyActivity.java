@@ -79,15 +79,13 @@ public class ReachFrequencyActivity extends APINode {
   private Boolean mIoApproved = null;
   @SerializedName("sf_link")
   private String mSfLink = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public ReachFrequencyActivity() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static ReachFrequencyActivity loadJSON(String json, APIContext context, String header) {
     ReachFrequencyActivity reachFrequencyActivity = getGson().fromJson(json, ReachFrequencyActivity.class);
@@ -340,15 +338,6 @@ public class ReachFrequencyActivity extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public ReachFrequencyActivity setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -378,7 +367,6 @@ public class ReachFrequencyActivity extends APINode {
     this.mDeliveredTotalImpression = instance.mDeliveredTotalImpression;
     this.mIoApproved = instance.mIoApproved;
     this.mSfLink = instance.mSfLink;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

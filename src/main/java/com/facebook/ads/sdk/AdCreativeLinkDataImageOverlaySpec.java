@@ -71,15 +71,13 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
   private EnumTextType mTextType = null;
   @SerializedName("theme_color")
   private EnumThemeColor mThemeColor = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdCreativeLinkDataImageOverlaySpec() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdCreativeLinkDataImageOverlaySpec loadJSON(String json, APIContext context, String header) {
     AdCreativeLinkDataImageOverlaySpec adCreativeLinkDataImageOverlaySpec = getGson().fromJson(json, AdCreativeLinkDataImageOverlaySpec.class);
@@ -296,15 +294,6 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdCreativeLinkDataImageOverlaySpec setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumCustomTextType {
@@ -500,7 +489,6 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
     this.mTextTemplateTags = instance.mTextTemplateTags;
     this.mTextType = instance.mTextType;
     this.mThemeColor = instance.mThemeColor;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -61,15 +61,13 @@ public class UserCoverPhoto extends APINode {
   private Double mOffsetY = null;
   @SerializedName("source")
   private String mSource = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public UserCoverPhoto() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static UserCoverPhoto loadJSON(String json, APIContext context, String header) {
     UserCoverPhoto userCoverPhoto = getGson().fromJson(json, UserCoverPhoto.class);
@@ -241,15 +239,6 @@ public class UserCoverPhoto extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public UserCoverPhoto setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -270,7 +259,6 @@ public class UserCoverPhoto extends APINode {
     this.mOffsetX = instance.mOffsetX;
     this.mOffsetY = instance.mOffsetY;
     this.mSource = instance.mSource;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

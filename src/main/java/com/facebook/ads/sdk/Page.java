@@ -846,10 +846,6 @@ public class Page extends APINode {
     return new APIRequestGetLeadGenLegalContent(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetLeadGenQualifiers getLeadGenQualifiers() {
-    return new APIRequestGetLeadGenQualifiers(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestDeleteLeadGenWhitelistedUsers deleteLeadGenWhitelistedUsers() {
     return new APIRequestDeleteLeadGenWhitelistedUsers(this.getPrefixedId().toString(), context);
   }
@@ -5348,7 +5344,6 @@ public class Page extends APINode {
       "target_business_object_id",
       "target_business_object_name",
       "target_business_object_type",
-      "id",
     };
 
     @Override
@@ -5576,13 +5571,6 @@ public class Page extends APINode {
     }
     public APIRequestGetBusinessActivities requestTargetBusinessObjectTypeField (boolean value) {
       this.requestField("target_business_object_type", value);
-      return this;
-    }
-    public APIRequestGetBusinessActivities requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetBusinessActivities requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -5863,7 +5851,6 @@ public class Page extends APINode {
       "event_time",
       "event_type",
       "extra_data",
-      "id",
     };
 
     @Override
@@ -5988,13 +5975,6 @@ public class Page extends APINode {
     }
     public APIRequestGetBusinessSettingLogs requestExtraDataField (boolean value) {
       this.requestField("extra_data", value);
-      return this;
-    }
-    public APIRequestGetBusinessSettingLogs requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetBusinessSettingLogs requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -6479,7 +6459,6 @@ public class Page extends APINode {
 
     public static final String[] FIELDS = {
       "element",
-      "id",
     };
 
     @Override
@@ -6576,13 +6555,6 @@ public class Page extends APINode {
     }
     public APIRequestGetCanvasElements requestElementField (boolean value) {
       this.requestField("element", value);
-      return this;
-    }
-    public APIRequestGetCanvasElements requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetCanvasElements requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -17213,7 +17185,6 @@ public class Page extends APINode {
       "name",
       "time",
       "value",
-      "id",
     };
 
     @Override
@@ -17368,13 +17339,6 @@ public class Page extends APINode {
     }
     public APIRequestGetInstantArticlesInsights requestValueField (boolean value) {
       this.requestField("value", value);
-      return this;
-    }
-    public APIRequestGetInstantArticlesInsights requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetInstantArticlesInsights requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -19355,150 +19319,6 @@ public class Page extends APINode {
     }
     public APIRequestGetLeadGenLegalContent requestPrivacyPolicyField (boolean value) {
       this.requestField("privacy_policy", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestGetLeadGenQualifiers extends APIRequest<LeadGenQualifier> {
-
-    APINodeList<LeadGenQualifier> lastResponse = null;
-    @Override
-    public APINodeList<LeadGenQualifier> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "category",
-      "field_key",
-      "id",
-      "label",
-      "question",
-    };
-
-    @Override
-    public APINodeList<LeadGenQualifier> parseResponse(String response, String header) throws APIException {
-      return LeadGenQualifier.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<LeadGenQualifier> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<LeadGenQualifier> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<LeadGenQualifier>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<LeadGenQualifier>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<LeadGenQualifier>>() {
-           public APINodeList<LeadGenQualifier> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetLeadGenQualifiers.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetLeadGenQualifiers(String nodeId, APIContext context) {
-      super(context, nodeId, "/leadgen_qualifiers", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetLeadGenQualifiers setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetLeadGenQualifiers setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetLeadGenQualifiers requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetLeadGenQualifiers requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetLeadGenQualifiers requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetLeadGenQualifiers requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetLeadGenQualifiers requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetLeadGenQualifiers requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetLeadGenQualifiers requestCategoryField () {
-      return this.requestCategoryField(true);
-    }
-    public APIRequestGetLeadGenQualifiers requestCategoryField (boolean value) {
-      this.requestField("category", value);
-      return this;
-    }
-    public APIRequestGetLeadGenQualifiers requestFieldKeyField () {
-      return this.requestFieldKeyField(true);
-    }
-    public APIRequestGetLeadGenQualifiers requestFieldKeyField (boolean value) {
-      this.requestField("field_key", value);
-      return this;
-    }
-    public APIRequestGetLeadGenQualifiers requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetLeadGenQualifiers requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetLeadGenQualifiers requestLabelField () {
-      return this.requestLabelField(true);
-    }
-    public APIRequestGetLeadGenQualifiers requestLabelField (boolean value) {
-      this.requestField("label", value);
-      return this;
-    }
-    public APIRequestGetLeadGenQualifiers requestQuestionField () {
-      return this.requestQuestionField(true);
-    }
-    public APIRequestGetLeadGenQualifiers requestQuestionField (boolean value) {
-      this.requestField("question", value);
       return this;
     }
   }
@@ -24922,7 +24742,6 @@ public class Page extends APINode {
     public static final String[] FIELDS = {
       "feature",
       "status",
-      "id",
     };
 
     @Override
@@ -25026,13 +24845,6 @@ public class Page extends APINode {
     }
     public APIRequestGetMessagingFeatureReview requestStatusField (boolean value) {
       this.requestField("status", value);
-      return this;
-    }
-    public APIRequestGetMessagingFeatureReview requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetMessagingFeatureReview requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -25452,7 +25264,6 @@ public class Page extends APINode {
       "persistent_menu",
       "target_audience",
       "whitelisted_domains",
-      "id",
     };
 
     @Override
@@ -25598,13 +25409,6 @@ public class Page extends APINode {
     }
     public APIRequestGetMessengerProfile requestWhitelistedDomainsField (boolean value) {
       this.requestField("whitelisted_domains", value);
-      return this;
-    }
-    public APIRequestGetMessengerProfile requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetMessengerProfile requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -28907,7 +28711,6 @@ public class Page extends APINode {
       "top",
       "url",
       "width",
-      "id",
     };
 
     @Override
@@ -29096,13 +28899,6 @@ public class Page extends APINode {
     }
     public APIRequestGetPicture requestWidthField (boolean value) {
       this.requestField("width", value);
-      return this;
-    }
-    public APIRequestGetPicture requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetPicture requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -31802,7 +31598,6 @@ public class Page extends APINode {
       "recommendation_type",
       "review_text",
       "reviewer",
-      "id",
     };
 
     @Override
@@ -31948,13 +31743,6 @@ public class Page extends APINode {
     }
     public APIRequestGetRatings requestReviewerField (boolean value) {
       this.requestField("reviewer", value);
-      return this;
-    }
-    public APIRequestGetRatings requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetRatings requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -34243,7 +34031,6 @@ public class Page extends APINode {
       "service_name",
       "service_type",
       "value",
-      "id",
     };
 
     @Override
@@ -34354,13 +34141,6 @@ public class Page extends APINode {
     }
     public APIRequestGetScreenNames requestValueField (boolean value) {
       this.requestField("value", value);
-      return this;
-    }
-    public APIRequestGetScreenNames requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetScreenNames requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -35442,7 +35222,6 @@ public class Page extends APINode {
     public static final String[] FIELDS = {
       "setting",
       "value",
-      "id",
     };
 
     @Override
@@ -35546,13 +35325,6 @@ public class Page extends APINode {
     }
     public APIRequestGetSettings requestValueField (boolean value) {
       this.requestField("value", value);
-      return this;
-    }
-    public APIRequestGetSettings requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetSettings requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -38268,7 +38040,6 @@ public class Page extends APINode {
 
     public static final String[] FIELDS = {
       "thread_owner",
-      "id",
     };
 
     @Override
@@ -38370,13 +38141,6 @@ public class Page extends APINode {
     }
     public APIRequestGetThreadOwner requestThreadOwnerField (boolean value) {
       this.requestField("thread_owner", value);
-      return this;
-    }
-    public APIRequestGetThreadOwner requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetThreadOwner requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -45126,6 +44890,12 @@ public class Page extends APINode {
       VALUE_MODERATE("MODERATE"),
       @SerializedName("MODERATE_COMMUNITY")
       VALUE_MODERATE_COMMUNITY("MODERATE_COMMUNITY"),
+      @SerializedName("PAGES_MESSAGING")
+      VALUE_PAGES_MESSAGING("PAGES_MESSAGING"),
+      @SerializedName("PAGES_MESSAGING_SUBSCRIPTIONS")
+      VALUE_PAGES_MESSAGING_SUBSCRIPTIONS("PAGES_MESSAGING_SUBSCRIPTIONS"),
+      @SerializedName("READ_PAGE_MAILBOXES")
+      VALUE_READ_PAGE_MAILBOXES("READ_PAGE_MAILBOXES"),
       NULL(null);
 
       private String value;
@@ -45155,6 +44925,12 @@ public class Page extends APINode {
       VALUE_MODERATE("MODERATE"),
       @SerializedName("MODERATE_COMMUNITY")
       VALUE_MODERATE_COMMUNITY("MODERATE_COMMUNITY"),
+      @SerializedName("PAGES_MESSAGING")
+      VALUE_PAGES_MESSAGING("PAGES_MESSAGING"),
+      @SerializedName("PAGES_MESSAGING_SUBSCRIPTIONS")
+      VALUE_PAGES_MESSAGING_SUBSCRIPTIONS("PAGES_MESSAGING_SUBSCRIPTIONS"),
+      @SerializedName("READ_PAGE_MAILBOXES")
+      VALUE_READ_PAGE_MAILBOXES("READ_PAGE_MAILBOXES"),
       NULL(null);
 
       private String value;

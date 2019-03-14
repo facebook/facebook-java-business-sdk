@@ -59,15 +59,13 @@ public class PageSettings extends APINode {
   private String mSetting = null;
   @SerializedName("value")
   private Object mValue = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public PageSettings() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static PageSettings loadJSON(String json, APIContext context, String header) {
     PageSettings pageSettings = getGson().fromJson(json, PageSettings.class);
@@ -230,15 +228,6 @@ public class PageSettings extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public PageSettings setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -258,7 +247,6 @@ public class PageSettings extends APINode {
   public PageSettings copyFrom(PageSettings instance) {
     this.mSetting = instance.mSetting;
     this.mValue = instance.mValue;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

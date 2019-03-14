@@ -69,15 +69,13 @@ public class AdCreativeTemplateURLSpec extends APINode {
   private Object mWeb = null;
   @SerializedName("windows_phone")
   private Object mWindowsPhone = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdCreativeTemplateURLSpec() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdCreativeTemplateURLSpec loadJSON(String json, APIContext context, String header) {
     AdCreativeTemplateURLSpec adCreativeTemplateURLSpec = getGson().fromJson(json, AdCreativeTemplateURLSpec.class);
@@ -285,15 +283,6 @@ public class AdCreativeTemplateURLSpec extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdCreativeTemplateURLSpec setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -318,7 +307,6 @@ public class AdCreativeTemplateURLSpec extends APINode {
     this.mIphone = instance.mIphone;
     this.mWeb = instance.mWeb;
     this.mWindowsPhone = instance.mWindowsPhone;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

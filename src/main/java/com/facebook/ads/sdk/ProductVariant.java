@@ -61,15 +61,13 @@ public class ProductVariant extends APINode {
   private List<String> mOptions = null;
   @SerializedName("product_field")
   private String mProductField = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public ProductVariant() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static ProductVariant loadJSON(String json, APIContext context, String header) {
     ProductVariant productVariant = getGson().fromJson(json, ProductVariant.class);
@@ -241,15 +239,6 @@ public class ProductVariant extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public ProductVariant setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -270,7 +259,6 @@ public class ProductVariant extends APINode {
     this.mLabel = instance.mLabel;
     this.mOptions = instance.mOptions;
     this.mProductField = instance.mProductField;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

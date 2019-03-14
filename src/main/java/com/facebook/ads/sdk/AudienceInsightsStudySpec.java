@@ -71,15 +71,13 @@ public class AudienceInsightsStudySpec extends APINode {
   private Long mStartTime = null;
   @SerializedName("status")
   private String mStatus = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AudienceInsightsStudySpec() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AudienceInsightsStudySpec loadJSON(String json, APIContext context, String header) {
     AudienceInsightsStudySpec audienceInsightsStudySpec = getGson().fromJson(json, AudienceInsightsStudySpec.class);
@@ -296,15 +294,6 @@ public class AudienceInsightsStudySpec extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AudienceInsightsStudySpec setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -330,7 +319,6 @@ public class AudienceInsightsStudySpec extends APINode {
     this.mIncludedRules = instance.mIncludedRules;
     this.mStartTime = instance.mStartTime;
     this.mStatus = instance.mStatus;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

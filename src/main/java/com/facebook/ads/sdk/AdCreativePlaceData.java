@@ -67,15 +67,13 @@ public class AdCreativePlaceData extends APINode {
   private Double mLongitude = null;
   @SerializedName("type")
   private String mType = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdCreativePlaceData() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdCreativePlaceData loadJSON(String json, APIContext context, String header) {
     AdCreativePlaceData adCreativePlaceData = getGson().fromJson(json, AdCreativePlaceData.class);
@@ -274,15 +272,6 @@ public class AdCreativePlaceData extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdCreativePlaceData setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -306,7 +295,6 @@ public class AdCreativePlaceData extends APINode {
     this.mLocationSourceId = instance.mLocationSourceId;
     this.mLongitude = instance.mLongitude;
     this.mType = instance.mType;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

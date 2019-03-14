@@ -61,15 +61,13 @@ public class AdAccountRecommendedCamapaignBudget extends APINode {
   private String mLifetime = null;
   @SerializedName("objective")
   private String mObjective = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdAccountRecommendedCamapaignBudget() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdAccountRecommendedCamapaignBudget loadJSON(String json, APIContext context, String header) {
     AdAccountRecommendedCamapaignBudget adAccountRecommendedCamapaignBudget = getGson().fromJson(json, AdAccountRecommendedCamapaignBudget.class);
@@ -241,15 +239,6 @@ public class AdAccountRecommendedCamapaignBudget extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdAccountRecommendedCamapaignBudget setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -270,7 +259,6 @@ public class AdAccountRecommendedCamapaignBudget extends APINode {
     this.mDaily = instance.mDaily;
     this.mLifetime = instance.mLifetime;
     this.mObjective = instance.mObjective;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

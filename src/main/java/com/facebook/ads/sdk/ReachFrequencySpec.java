@@ -73,15 +73,13 @@ public class ReachFrequencySpec extends APINode {
   private Object mMinReachLimits = null;
   @SerializedName("supports_video_view_benchmark_per_country")
   private Object mSupportsVideoViewBenchmarkPerCountry = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public ReachFrequencySpec() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static ReachFrequencySpec loadJSON(String json, APIContext context, String header) {
     ReachFrequencySpec reachFrequencySpec = getGson().fromJson(json, ReachFrequencySpec.class);
@@ -307,15 +305,6 @@ public class ReachFrequencySpec extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public ReachFrequencySpec setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -342,7 +331,6 @@ public class ReachFrequencySpec extends APINode {
     this.mMinCampaignDuration = instance.mMinCampaignDuration;
     this.mMinReachLimits = instance.mMinReachLimits;
     this.mSupportsVideoViewBenchmarkPerCountry = instance.mSupportsVideoViewBenchmarkPerCountry;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

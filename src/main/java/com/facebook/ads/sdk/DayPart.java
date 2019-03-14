@@ -63,15 +63,13 @@ public class DayPart extends APINode {
   private Long mStartMinute = null;
   @SerializedName("timezone_type")
   private String mTimezoneType = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public DayPart() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static DayPart loadJSON(String json, APIContext context, String header) {
     DayPart dayPart = getGson().fromJson(json, DayPart.class);
@@ -252,15 +250,6 @@ public class DayPart extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public DayPart setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -282,7 +271,6 @@ public class DayPart extends APINode {
     this.mEndMinute = instance.mEndMinute;
     this.mStartMinute = instance.mStartMinute;
     this.mTimezoneType = instance.mTimezoneType;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

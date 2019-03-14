@@ -1013,7 +1013,6 @@ public class AdSet extends APINode {
       "object_name",
       "object_type",
       "translated_event_type",
-      "id",
     };
 
     @Override
@@ -1234,13 +1233,6 @@ public class AdSet extends APINode {
     }
     public APIRequestGetActivities requestTranslatedEventTypeField (boolean value) {
       this.requestField("translated_event_type", value);
-      return this;
-    }
-    public APIRequestGetActivities requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetActivities requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -3773,7 +3765,6 @@ public class AdSet extends APINode {
       "estimate_dau",
       "estimate_mau",
       "estimate_ready",
-      "id",
     };
 
     @Override
@@ -3918,13 +3909,6 @@ public class AdSet extends APINode {
     }
     public APIRequestGetDeliveryEstimate requestEstimateReadyField (boolean value) {
       this.requestField("estimate_ready", value);
-      return this;
-    }
-    public APIRequestGetDeliveryEstimate requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetDeliveryEstimate requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }

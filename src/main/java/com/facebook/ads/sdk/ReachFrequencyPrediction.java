@@ -86,7 +86,7 @@ public class ReachFrequencyPrediction extends APINode {
   @SerializedName("daily_impression_curve")
   private List<Double> mDailyImpressionCurve = null;
   @SerializedName("daily_impression_curve_map")
-  private List<Object> mDailyImpressionCurveMap = null;
+  private Map<Long, List<Double>> mDailyImpressionCurveMap = null;
   @SerializedName("day_parting_schedule")
   private List<ReachFrequencyDayPart> mDayPartingSchedule = null;
   @SerializedName("demo_breakdown")
@@ -124,9 +124,9 @@ public class ReachFrequencyPrediction extends APINode {
   @SerializedName("frequency_distribution")
   private List<Double> mFrequencyDistribution = null;
   @SerializedName("frequency_distribution_map")
-  private List<Object> mFrequencyDistributionMap = null;
+  private Map<Long, List<Double>> mFrequencyDistributionMap = null;
   @SerializedName("frequency_distribution_map_agg")
-  private List<Object> mFrequencyDistributionMapAgg = null;
+  private Map<Long, List<Long>> mFrequencyDistributionMapAgg = null;
   @SerializedName("full_view_ratio_00")
   private Long mFullViewRatio00 = null;
   @SerializedName("grp_audience_size")
@@ -186,7 +186,7 @@ public class ReachFrequencyPrediction extends APINode {
   @SerializedName("placement_breakdown")
   private ReachFrequencyEstimatesPlacementBreakdown mPlacementBreakdown = null;
   @SerializedName("placement_breakdown_map")
-  private List<Object> mPlacementBreakdownMap = null;
+  private Map<Long, ReachFrequencyEstimatesPlacementBreakdown> mPlacementBreakdownMap = null;
   @SerializedName("plan_name")
   private String mPlanName = null;
   @SerializedName("plan_type")
@@ -222,9 +222,9 @@ public class ReachFrequencyPrediction extends APINode {
   @SerializedName("topline_id")
   private Long mToplineId = null;
   @SerializedName("tv_viewer_cluster_map")
-  private List<Object> mTvViewerClusterMap = null;
+  private Map<Long, Object> mTvViewerClusterMap = null;
   @SerializedName("video_view_benchmark_map")
-  private List<Object> mVideoViewBenchmarkMap = null;
+  private Map<String, ReachFrequencyEstimatesCurve> mVideoViewBenchmarkMap = null;
   @SerializedName("video_view_length_constraint")
   private Long mVideoViewLengthConstraint = null;
   @SerializedName("viewtag")
@@ -503,7 +503,7 @@ public class ReachFrequencyPrediction extends APINode {
     return mDailyImpressionCurve;
   }
 
-  public List<Object> getFieldDailyImpressionCurveMap() {
+  public Map<Long, List<Double>> getFieldDailyImpressionCurveMap() {
     return mDailyImpressionCurveMap;
   }
 
@@ -579,11 +579,11 @@ public class ReachFrequencyPrediction extends APINode {
     return mFrequencyDistribution;
   }
 
-  public List<Object> getFieldFrequencyDistributionMap() {
+  public Map<Long, List<Double>> getFieldFrequencyDistributionMap() {
     return mFrequencyDistributionMap;
   }
 
-  public List<Object> getFieldFrequencyDistributionMapAgg() {
+  public Map<Long, List<Long>> getFieldFrequencyDistributionMapAgg() {
     return mFrequencyDistributionMapAgg;
   }
 
@@ -703,7 +703,7 @@ public class ReachFrequencyPrediction extends APINode {
     return mPlacementBreakdown;
   }
 
-  public List<Object> getFieldPlacementBreakdownMap() {
+  public Map<Long, ReachFrequencyEstimatesPlacementBreakdown> getFieldPlacementBreakdownMap() {
     return mPlacementBreakdownMap;
   }
 
@@ -775,11 +775,11 @@ public class ReachFrequencyPrediction extends APINode {
     return mToplineId;
   }
 
-  public List<Object> getFieldTvViewerClusterMap() {
+  public Map<Long, Object> getFieldTvViewerClusterMap() {
     return mTvViewerClusterMap;
   }
 
-  public List<Object> getFieldVideoViewBenchmarkMap() {
+  public Map<String, ReachFrequencyEstimatesCurve> getFieldVideoViewBenchmarkMap() {
     return mVideoViewBenchmarkMap;
   }
 

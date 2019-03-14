@@ -54,31 +54,31 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class LeadGenQualifier extends APINode {
-  @SerializedName("category")
-  private String mCategory = null;
-  @SerializedName("field_key")
-  private String mFieldKey = null;
-  @SerializedName("id")
-  private String mId = null;
-  @SerializedName("label")
-  private String mLabel = null;
-  @SerializedName("question")
-  private String mQuestion = null;
+public class BrandSafetyBlockListUsage extends APINode {
+  @SerializedName("current_usage")
+  private Long mCurrentUsage = null;
+  @SerializedName("new_usage")
+  private Long mNewUsage = null;
+  @SerializedName("platform")
+  private String mPlatform = null;
+  @SerializedName("position")
+  private String mPosition = null;
+  @SerializedName("threshold")
+  private Long mThreshold = null;
   protected static Gson gson = null;
 
-  public LeadGenQualifier() {
+  public BrandSafetyBlockListUsage() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
-  public static LeadGenQualifier loadJSON(String json, APIContext context, String header) {
-    LeadGenQualifier leadGenQualifier = getGson().fromJson(json, LeadGenQualifier.class);
+  public static BrandSafetyBlockListUsage loadJSON(String json, APIContext context, String header) {
+    BrandSafetyBlockListUsage brandSafetyBlockListUsage = getGson().fromJson(json, BrandSafetyBlockListUsage.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(leadGenQualifier.toString());
+      JsonElement o2 = parser.parse(brandSafetyBlockListUsage.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -88,14 +88,14 @@ public class LeadGenQualifier extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    leadGenQualifier.context = context;
-    leadGenQualifier.rawValue = json;
-    leadGenQualifier.header = header;
-    return leadGenQualifier;
+    brandSafetyBlockListUsage.context = context;
+    brandSafetyBlockListUsage.rawValue = json;
+    brandSafetyBlockListUsage.header = header;
+    return brandSafetyBlockListUsage;
   }
 
-  public static APINodeList<LeadGenQualifier> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<LeadGenQualifier> leadGenQualifiers = new APINodeList<LeadGenQualifier>(request, json, header);
+  public static APINodeList<BrandSafetyBlockListUsage> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<BrandSafetyBlockListUsage> brandSafetyBlockListUsages = new APINodeList<BrandSafetyBlockListUsage>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -106,9 +106,9 @@ public class LeadGenQualifier extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          leadGenQualifiers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          brandSafetyBlockListUsages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return leadGenQualifiers;
+        return brandSafetyBlockListUsages;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -118,20 +118,20 @@ public class LeadGenQualifier extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                leadGenQualifiers.setCursors(before, after);
+                brandSafetyBlockListUsages.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            leadGenQualifiers.setPaging(previous, next);
+            brandSafetyBlockListUsages.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              leadGenQualifiers.setAppSecret(context.getAppSecretProof());
+              brandSafetyBlockListUsages.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              leadGenQualifiers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              brandSafetyBlockListUsages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -142,23 +142,23 @@ public class LeadGenQualifier extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  leadGenQualifiers.add(loadJSON(entry.getValue().toString(), context, header));
+                  brandSafetyBlockListUsages.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              leadGenQualifiers.add(loadJSON(obj.toString(), context, header));
+              brandSafetyBlockListUsages.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return leadGenQualifiers;
+          return brandSafetyBlockListUsages;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              leadGenQualifiers.add(loadJSON(entry.getValue().toString(), context, header));
+              brandSafetyBlockListUsages.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return leadGenQualifiers;
+          return brandSafetyBlockListUsages;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -175,20 +175,20 @@ public class LeadGenQualifier extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              leadGenQualifiers.add(loadJSON(value.toString(), context, header));
+              brandSafetyBlockListUsages.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return leadGenQualifiers;
+            return brandSafetyBlockListUsages;
           }
 
           // Sixth, check if it's pure JsonObject
-          leadGenQualifiers.clear();
-          leadGenQualifiers.add(loadJSON(json, context, header));
-          return leadGenQualifiers;
+          brandSafetyBlockListUsages.clear();
+          brandSafetyBlockListUsages.add(loadJSON(json, context, header));
+          return brandSafetyBlockListUsages;
         }
       }
     } catch (Exception e) {
@@ -216,48 +216,48 @@ public class LeadGenQualifier extends APINode {
   }
 
 
-  public String getFieldCategory() {
-    return mCategory;
+  public Long getFieldCurrentUsage() {
+    return mCurrentUsage;
   }
 
-  public LeadGenQualifier setFieldCategory(String value) {
-    this.mCategory = value;
+  public BrandSafetyBlockListUsage setFieldCurrentUsage(Long value) {
+    this.mCurrentUsage = value;
     return this;
   }
 
-  public String getFieldFieldKey() {
-    return mFieldKey;
+  public Long getFieldNewUsage() {
+    return mNewUsage;
   }
 
-  public LeadGenQualifier setFieldFieldKey(String value) {
-    this.mFieldKey = value;
+  public BrandSafetyBlockListUsage setFieldNewUsage(Long value) {
+    this.mNewUsage = value;
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
+  public String getFieldPlatform() {
+    return mPlatform;
   }
 
-  public LeadGenQualifier setFieldId(String value) {
-    this.mId = value;
+  public BrandSafetyBlockListUsage setFieldPlatform(String value) {
+    this.mPlatform = value;
     return this;
   }
 
-  public String getFieldLabel() {
-    return mLabel;
+  public String getFieldPosition() {
+    return mPosition;
   }
 
-  public LeadGenQualifier setFieldLabel(String value) {
-    this.mLabel = value;
+  public BrandSafetyBlockListUsage setFieldPosition(String value) {
+    this.mPosition = value;
     return this;
   }
 
-  public String getFieldQuestion() {
-    return mQuestion;
+  public Long getFieldThreshold() {
+    return mThreshold;
   }
 
-  public LeadGenQualifier setFieldQuestion(String value) {
-    this.mQuestion = value;
+  public BrandSafetyBlockListUsage setFieldThreshold(Long value) {
+    this.mThreshold = value;
     return this;
   }
 
@@ -277,21 +277,21 @@ public class LeadGenQualifier extends APINode {
     return gson;
   }
 
-  public LeadGenQualifier copyFrom(LeadGenQualifier instance) {
-    this.mCategory = instance.mCategory;
-    this.mFieldKey = instance.mFieldKey;
-    this.mId = instance.mId;
-    this.mLabel = instance.mLabel;
-    this.mQuestion = instance.mQuestion;
+  public BrandSafetyBlockListUsage copyFrom(BrandSafetyBlockListUsage instance) {
+    this.mCurrentUsage = instance.mCurrentUsage;
+    this.mNewUsage = instance.mNewUsage;
+    this.mPlatform = instance.mPlatform;
+    this.mPosition = instance.mPosition;
+    this.mThreshold = instance.mThreshold;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<LeadGenQualifier> getParser() {
-    return new APIRequest.ResponseParser<LeadGenQualifier>() {
-      public APINodeList<LeadGenQualifier> parseResponse(String response, APIContext context, APIRequest<LeadGenQualifier> request, String header) throws MalformedResponseException {
-        return LeadGenQualifier.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<BrandSafetyBlockListUsage> getParser() {
+    return new APIRequest.ResponseParser<BrandSafetyBlockListUsage>() {
+      public APINodeList<BrandSafetyBlockListUsage> parseResponse(String response, APIContext context, APIRequest<BrandSafetyBlockListUsage> request, String header) throws MalformedResponseException {
+        return BrandSafetyBlockListUsage.parseResponse(response, context, request, header);
       }
     };
   }

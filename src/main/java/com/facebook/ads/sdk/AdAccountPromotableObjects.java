@@ -61,15 +61,13 @@ public class AdAccountPromotableObjects extends APINode {
   private List<String> mPromotablePageIds = null;
   @SerializedName("promotable_urls")
   private List<String> mPromotableUrls = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdAccountPromotableObjects() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdAccountPromotableObjects loadJSON(String json, APIContext context, String header) {
     AdAccountPromotableObjects adAccountPromotableObjects = getGson().fromJson(json, AdAccountPromotableObjects.class);
@@ -241,15 +239,6 @@ public class AdAccountPromotableObjects extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdAccountPromotableObjects setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -270,7 +259,6 @@ public class AdAccountPromotableObjects extends APINode {
     this.mPromotableAppIds = instance.mPromotableAppIds;
     this.mPromotablePageIds = instance.mPromotablePageIds;
     this.mPromotableUrls = instance.mPromotableUrls;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

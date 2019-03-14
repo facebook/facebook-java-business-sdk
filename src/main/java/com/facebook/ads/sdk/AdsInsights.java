@@ -329,15 +329,13 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mWebsitePurchaseRoas = null;
   @SerializedName("wish_bid")
   private String mWishBid = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdsInsights() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdsInsights loadJSON(String json, APIContext context, String header) {
     AdsInsights adsInsights = getGson().fromJson(json, AdsInsights.class);
@@ -1945,15 +1943,6 @@ public class AdsInsights extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdsInsights setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumActionAttributionWindows {
@@ -2361,7 +2350,6 @@ public class AdsInsights extends APINode {
     this.mWebsiteCtr = instance.mWebsiteCtr;
     this.mWebsitePurchaseRoas = instance.mWebsitePurchaseRoas;
     this.mWishBid = instance.mWishBid;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -3810,6 +3810,7 @@ public class User extends APINode {
       "end_advertiser_name",
       "extended_credit_invoice_group",
       "failed_delivery_checks",
+      "fb_entity",
       "funding_source",
       "funding_source_details",
       "has_migrated_permissions",
@@ -4117,6 +4118,13 @@ public class User extends APINode {
       this.requestField("failed_delivery_checks", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestFbEntityField () {
+      return this.requestFbEntityField(true);
+    }
+    public APIRequestGetAdAccounts requestFbEntityField (boolean value) {
+      this.requestField("fb_entity", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestFundingSourceField () {
       return this.requestFundingSourceField(true);
     }
@@ -4410,7 +4418,6 @@ public class User extends APINode {
       "vat_country",
       "version",
       "vertical",
-      "id",
     };
 
     @Override
@@ -4794,13 +4801,6 @@ public class User extends APINode {
     }
     public APIRequestGetAdContracts requestVerticalField (boolean value) {
       this.requestField("vertical", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetAdContracts requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -5978,6 +5978,7 @@ public class User extends APINode {
       "end_advertiser_name",
       "extended_credit_invoice_group",
       "failed_delivery_checks",
+      "fb_entity",
       "funding_source",
       "funding_source_details",
       "has_migrated_permissions",
@@ -6283,6 +6284,13 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedAdAccounts requestFailedDeliveryChecksField (boolean value) {
       this.requestField("failed_delivery_checks", value);
+      return this;
+    }
+    public APIRequestGetAssignedAdAccounts requestFbEntityField () {
+      return this.requestFbEntityField(true);
+    }
+    public APIRequestGetAssignedAdAccounts requestFbEntityField (boolean value) {
+      this.requestField("fb_entity", value);
       return this;
     }
     public APIRequestGetAssignedAdAccounts requestFundingSourceField () {
@@ -9484,7 +9492,6 @@ public class User extends APINode {
       "target_business_object_id",
       "target_business_object_name",
       "target_business_object_type",
-      "id",
     };
 
     @Override
@@ -9712,13 +9719,6 @@ public class User extends APINode {
     }
     public APIRequestGetBusinessActivities requestTargetBusinessObjectTypeField (boolean value) {
       this.requestField("target_business_object_type", value);
-      return this;
-    }
-    public APIRequestGetBusinessActivities requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetBusinessActivities requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -23754,7 +23754,6 @@ public class User extends APINode {
     public static final String[] FIELDS = {
       "permission",
       "status",
-      "id",
     };
 
     @Override
@@ -23874,13 +23873,6 @@ public class User extends APINode {
       this.requestField("status", value);
       return this;
     }
-    public APIRequestGetPermissions requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetPermissions requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
   }
 
   public static class APIRequestGetPersonalAdAccounts extends APIRequest<AdAccount> {
@@ -23920,6 +23912,7 @@ public class User extends APINode {
       "end_advertiser_name",
       "extended_credit_invoice_group",
       "failed_delivery_checks",
+      "fb_entity",
       "funding_source",
       "funding_source_details",
       "has_migrated_permissions",
@@ -24225,6 +24218,13 @@ public class User extends APINode {
     }
     public APIRequestGetPersonalAdAccounts requestFailedDeliveryChecksField (boolean value) {
       this.requestField("failed_delivery_checks", value);
+      return this;
+    }
+    public APIRequestGetPersonalAdAccounts requestFbEntityField () {
+      return this.requestFbEntityField(true);
+    }
+    public APIRequestGetPersonalAdAccounts requestFbEntityField (boolean value) {
+      this.requestField("fb_entity", value);
       return this;
     }
     public APIRequestGetPersonalAdAccounts requestFundingSourceField () {
@@ -25329,7 +25329,6 @@ public class User extends APINode {
       "top",
       "url",
       "width",
-      "id",
     };
 
     @Override
@@ -25518,13 +25517,6 @@ public class User extends APINode {
     }
     public APIRequestGetPicture requestWidthField (boolean value) {
       this.requestField("width", value);
-      return this;
-    }
-    public APIRequestGetPicture requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetPicture requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -26287,7 +26279,6 @@ public class User extends APINode {
       "http_method",
       "post_params",
       "query_params",
-      "id",
     };
 
     @Override
@@ -26426,13 +26417,6 @@ public class User extends APINode {
     }
     public APIRequestGetRequestHistory requestQueryParamsField (boolean value) {
       this.requestField("query_params", value);
-      return this;
-    }
-    public APIRequestGetRequestHistory requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetRequestHistory requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -27107,7 +27091,6 @@ public class User extends APINode {
       "filter_key",
       "name",
       "type",
-      "id",
     };
 
     @Override
@@ -27218,13 +27201,6 @@ public class User extends APINode {
     }
     public APIRequestGetStreamFilters requestTypeField (boolean value) {
       this.requestField("type", value);
-      return this;
-    }
-    public APIRequestGetStreamFilters requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetStreamFilters requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -31450,6 +31426,12 @@ public class User extends APINode {
       VALUE_MODERATE("MODERATE"),
       @SerializedName("MODERATE_COMMUNITY")
       VALUE_MODERATE_COMMUNITY("MODERATE_COMMUNITY"),
+      @SerializedName("PAGES_MESSAGING")
+      VALUE_PAGES_MESSAGING("PAGES_MESSAGING"),
+      @SerializedName("PAGES_MESSAGING_SUBSCRIPTIONS")
+      VALUE_PAGES_MESSAGING_SUBSCRIPTIONS("PAGES_MESSAGING_SUBSCRIPTIONS"),
+      @SerializedName("READ_PAGE_MAILBOXES")
+      VALUE_READ_PAGE_MAILBOXES("READ_PAGE_MAILBOXES"),
       NULL(null);
 
       private String value;

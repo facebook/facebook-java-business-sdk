@@ -69,15 +69,13 @@ public class AdCreativeObjectStorySpec extends APINode {
   private AdCreativeTextData mTextData = null;
   @SerializedName("video_data")
   private AdCreativeVideoData mVideoData = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdCreativeObjectStorySpec() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdCreativeObjectStorySpec loadJSON(String json, APIContext context, String header) {
     AdCreativeObjectStorySpec adCreativeObjectStorySpec = getGson().fromJson(json, AdCreativeObjectStorySpec.class);
@@ -310,15 +308,6 @@ public class AdCreativeObjectStorySpec extends APINode {
     this.mVideoData = AdCreativeVideoData.getGson().fromJson(value, type);
     return this;
   }
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdCreativeObjectStorySpec setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -343,7 +332,6 @@ public class AdCreativeObjectStorySpec extends APINode {
     this.mTemplateData = instance.mTemplateData;
     this.mTextData = instance.mTextData;
     this.mVideoData = instance.mVideoData;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

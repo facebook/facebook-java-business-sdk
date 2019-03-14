@@ -71,15 +71,13 @@ public class AdCustomizationRuleSpec extends APINode {
   private Long mPriority = null;
   @SerializedName("template_url_spec")
   private AdCreativeTemplateURLSpec mTemplateUrlSpec = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdCustomizationRuleSpec() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdCustomizationRuleSpec loadJSON(String json, APIContext context, String header) {
     AdCustomizationRuleSpec adCustomizationRuleSpec = getGson().fromJson(json, AdCustomizationRuleSpec.class);
@@ -301,15 +299,6 @@ public class AdCustomizationRuleSpec extends APINode {
     this.mTemplateUrlSpec = AdCreativeTemplateURLSpec.getGson().fromJson(value, type);
     return this;
   }
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdCustomizationRuleSpec setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -335,7 +324,6 @@ public class AdCustomizationRuleSpec extends APINode {
     this.mName = instance.mName;
     this.mPriority = instance.mPriority;
     this.mTemplateUrlSpec = instance.mTemplateUrlSpec;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -82,7 +82,7 @@ public class BusinessActivityLogEvent extends APINode {
   @SerializedName("event_type")
   private String mEventType = null;
   @SerializedName("extra_data")
-  private List<Object> mExtraData = null;
+  private Map<String, String> mExtraData = null;
   @SerializedName("target_business_id")
   private String mTargetBusinessId = null;
   @SerializedName("target_business_name")
@@ -93,15 +93,13 @@ public class BusinessActivityLogEvent extends APINode {
   private String mTargetBusinessObjectName = null;
   @SerializedName("target_business_object_type")
   private String mTargetBusinessObjectType = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public BusinessActivityLogEvent() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static BusinessActivityLogEvent loadJSON(String json, APIContext context, String header) {
     BusinessActivityLogEvent businessActivityLogEvent = getGson().fromJson(json, BusinessActivityLogEvent.class);
@@ -363,11 +361,11 @@ public class BusinessActivityLogEvent extends APINode {
     return this;
   }
 
-  public List<Object> getFieldExtraData() {
+  public Map<String, String> getFieldExtraData() {
     return mExtraData;
   }
 
-  public BusinessActivityLogEvent setFieldExtraData(List<Object> value) {
+  public BusinessActivityLogEvent setFieldExtraData(Map<String, String> value) {
     this.mExtraData = value;
     return this;
   }
@@ -417,15 +415,6 @@ public class BusinessActivityLogEvent extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public BusinessActivityLogEvent setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -462,7 +451,6 @@ public class BusinessActivityLogEvent extends APINode {
     this.mTargetBusinessObjectId = instance.mTargetBusinessObjectId;
     this.mTargetBusinessObjectName = instance.mTargetBusinessObjectName;
     this.mTargetBusinessObjectType = instance.mTargetBusinessObjectType;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

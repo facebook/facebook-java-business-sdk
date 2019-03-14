@@ -69,15 +69,13 @@ public class TargetingGeoLocationCity extends APINode {
   private String mRegion = null;
   @SerializedName("region_id")
   private String mRegionId = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public TargetingGeoLocationCity() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static TargetingGeoLocationCity loadJSON(String json, APIContext context, String header) {
     TargetingGeoLocationCity targetingGeoLocationCity = getGson().fromJson(json, TargetingGeoLocationCity.class);
@@ -285,15 +283,6 @@ public class TargetingGeoLocationCity extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public TargetingGeoLocationCity setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -318,7 +307,6 @@ public class TargetingGeoLocationCity extends APINode {
     this.mRadius = instance.mRadius;
     this.mRegion = instance.mRegion;
     this.mRegionId = instance.mRegionId;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

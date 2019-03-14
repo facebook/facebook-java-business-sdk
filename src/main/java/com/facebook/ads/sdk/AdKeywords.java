@@ -63,15 +63,13 @@ public class AdKeywords extends APINode {
   private List<String> mProductNames = null;
   @SerializedName("search_terms")
   private List<String> mSearchTerms = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdKeywords() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdKeywords loadJSON(String json, APIContext context, String header) {
     AdKeywords adKeywords = getGson().fromJson(json, AdKeywords.class);
@@ -252,15 +250,6 @@ public class AdKeywords extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdKeywords setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -282,7 +271,6 @@ public class AdKeywords extends APINode {
     this.mProductCategories = instance.mProductCategories;
     this.mProductNames = instance.mProductNames;
     this.mSearchTerms = instance.mSearchTerms;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

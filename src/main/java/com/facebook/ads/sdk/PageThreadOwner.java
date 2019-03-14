@@ -57,15 +57,13 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class PageThreadOwner extends APINode {
   @SerializedName("thread_owner")
   private Object mThreadOwner = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public PageThreadOwner() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static PageThreadOwner loadJSON(String json, APIContext context, String header) {
     PageThreadOwner pageThreadOwner = getGson().fromJson(json, PageThreadOwner.class);
@@ -219,15 +217,6 @@ public class PageThreadOwner extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public PageThreadOwner setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -246,7 +235,6 @@ public class PageThreadOwner extends APINode {
 
   public PageThreadOwner copyFrom(PageThreadOwner instance) {
     this.mThreadOwner = instance.mThreadOwner;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

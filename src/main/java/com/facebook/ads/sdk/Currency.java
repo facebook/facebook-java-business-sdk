@@ -63,15 +63,13 @@ public class Currency extends APINode {
   private Double mUsdExchangeInverse = null;
   @SerializedName("user_currency")
   private String mUserCurrency = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public Currency() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static Currency loadJSON(String json, APIContext context, String header) {
     Currency currency = getGson().fromJson(json, Currency.class);
@@ -252,15 +250,6 @@ public class Currency extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public Currency setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -282,7 +271,6 @@ public class Currency extends APINode {
     this.mUsdExchange = instance.mUsdExchange;
     this.mUsdExchangeInverse = instance.mUsdExchangeInverse;
     this.mUserCurrency = instance.mUserCurrency;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

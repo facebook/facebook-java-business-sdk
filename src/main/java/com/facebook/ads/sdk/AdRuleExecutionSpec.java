@@ -59,15 +59,13 @@ public class AdRuleExecutionSpec extends APINode {
   private List<AdRuleExecutionOptions> mExecutionOptions = null;
   @SerializedName("execution_type")
   private EnumExecutionType mExecutionType = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdRuleExecutionSpec() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdRuleExecutionSpec loadJSON(String json, APIContext context, String header) {
     AdRuleExecutionSpec adRuleExecutionSpec = getGson().fromJson(json, AdRuleExecutionSpec.class);
@@ -235,15 +233,6 @@ public class AdRuleExecutionSpec extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdRuleExecutionSpec setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumExecutionType {
@@ -294,7 +283,6 @@ public class AdRuleExecutionSpec extends APINode {
   public AdRuleExecutionSpec copyFrom(AdRuleExecutionSpec instance) {
     this.mExecutionOptions = instance.mExecutionOptions;
     this.mExecutionType = instance.mExecutionType;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

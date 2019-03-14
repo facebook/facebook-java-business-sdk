@@ -81,15 +81,13 @@ public class AdCreativeLinkDataImageLayerSpec extends APINode {
   private String mTextColor = null;
   @SerializedName("text_font")
   private EnumTextFont mTextFont = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdCreativeLinkDataImageLayerSpec() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdCreativeLinkDataImageLayerSpec loadJSON(String json, APIContext context, String header) {
     AdCreativeLinkDataImageLayerSpec adCreativeLinkDataImageLayerSpec = getGson().fromJson(json, AdCreativeLinkDataImageLayerSpec.class);
@@ -351,15 +349,6 @@ public class AdCreativeLinkDataImageLayerSpec extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdCreativeLinkDataImageLayerSpec setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumBlendingMode {
@@ -557,7 +546,6 @@ public class AdCreativeLinkDataImageLayerSpec extends APINode {
     this.mShapeColor = instance.mShapeColor;
     this.mTextColor = instance.mTextColor;
     this.mTextFont = instance.mTextFont;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

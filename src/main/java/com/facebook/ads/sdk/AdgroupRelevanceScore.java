@@ -63,15 +63,13 @@ public class AdgroupRelevanceScore extends APINode {
   private String mScore = null;
   @SerializedName("status")
   private String mStatus = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdgroupRelevanceScore() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdgroupRelevanceScore loadJSON(String json, APIContext context, String header) {
     AdgroupRelevanceScore adgroupRelevanceScore = getGson().fromJson(json, AdgroupRelevanceScore.class);
@@ -252,15 +250,6 @@ public class AdgroupRelevanceScore extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdgroupRelevanceScore setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -282,7 +271,6 @@ public class AdgroupRelevanceScore extends APINode {
     this.mPositiveFeedback = instance.mPositiveFeedback;
     this.mScore = instance.mScore;
     this.mStatus = instance.mStatus;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

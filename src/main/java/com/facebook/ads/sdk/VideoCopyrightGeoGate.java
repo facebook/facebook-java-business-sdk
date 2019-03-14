@@ -59,15 +59,13 @@ public class VideoCopyrightGeoGate extends APINode {
   private List<String> mExcludedCountries = null;
   @SerializedName("included_countries")
   private List<String> mIncludedCountries = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public VideoCopyrightGeoGate() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static VideoCopyrightGeoGate loadJSON(String json, APIContext context, String header) {
     VideoCopyrightGeoGate videoCopyrightGeoGate = getGson().fromJson(json, VideoCopyrightGeoGate.class);
@@ -230,15 +228,6 @@ public class VideoCopyrightGeoGate extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public VideoCopyrightGeoGate setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -258,7 +247,6 @@ public class VideoCopyrightGeoGate extends APINode {
   public VideoCopyrightGeoGate copyFrom(VideoCopyrightGeoGate instance) {
     this.mExcludedCountries = instance.mExcludedCountries;
     this.mIncludedCountries = instance.mIncludedCountries;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

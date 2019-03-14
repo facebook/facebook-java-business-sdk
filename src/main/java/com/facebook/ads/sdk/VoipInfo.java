@@ -69,15 +69,13 @@ public class VoipInfo extends APINode {
   private Long mReasonCode = null;
   @SerializedName("reason_description")
   private String mReasonDescription = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public VoipInfo() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static VoipInfo loadJSON(String json, APIContext context, String header) {
     VoipInfo voipInfo = getGson().fromJson(json, VoipInfo.class);
@@ -285,15 +283,6 @@ public class VoipInfo extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public VoipInfo setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -318,7 +307,6 @@ public class VoipInfo extends APINode {
     this.mIsPushable = instance.mIsPushable;
     this.mReasonCode = instance.mReasonCode;
     this.mReasonDescription = instance.mReasonDescription;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -75,15 +75,13 @@ public class AdCreativeVideoDataCustomOverlaySpec extends APINode {
   private EnumTemplate mTemplate = null;
   @SerializedName("text_color")
   private String mTextColor = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdCreativeVideoDataCustomOverlaySpec() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdCreativeVideoDataCustomOverlaySpec loadJSON(String json, APIContext context, String header) {
     AdCreativeVideoDataCustomOverlaySpec adCreativeVideoDataCustomOverlaySpec = getGson().fromJson(json, AdCreativeVideoDataCustomOverlaySpec.class);
@@ -318,15 +316,6 @@ public class AdCreativeVideoDataCustomOverlaySpec extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdCreativeVideoDataCustomOverlaySpec setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumBackgroundOpacity {
@@ -452,7 +441,6 @@ public class AdCreativeVideoDataCustomOverlaySpec extends APINode {
     this.mStart = instance.mStart;
     this.mTemplate = instance.mTemplate;
     this.mTextColor = instance.mTextColor;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

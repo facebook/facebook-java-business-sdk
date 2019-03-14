@@ -63,15 +63,13 @@ public class WindowsAppLink extends APINode {
   private String mPackageFamilyName = null;
   @SerializedName("url")
   private String mUrl = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public WindowsAppLink() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static WindowsAppLink loadJSON(String json, APIContext context, String header) {
     WindowsAppLink windowsAppLink = getGson().fromJson(json, WindowsAppLink.class);
@@ -252,15 +250,6 @@ public class WindowsAppLink extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public WindowsAppLink setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -282,7 +271,6 @@ public class WindowsAppLink extends APINode {
     this.mAppName = instance.mAppName;
     this.mPackageFamilyName = instance.mPackageFamilyName;
     this.mUrl = instance.mUrl;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

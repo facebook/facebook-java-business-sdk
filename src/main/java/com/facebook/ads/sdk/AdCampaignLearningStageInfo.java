@@ -67,15 +67,13 @@ public class AdCampaignLearningStageInfo extends APINode {
   private String mStatus = null;
   @SerializedName("types")
   private List<String> mTypes = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdCampaignLearningStageInfo() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdCampaignLearningStageInfo loadJSON(String json, APIContext context, String header) {
     AdCampaignLearningStageInfo adCampaignLearningStageInfo = getGson().fromJson(json, AdCampaignLearningStageInfo.class);
@@ -274,15 +272,6 @@ public class AdCampaignLearningStageInfo extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdCampaignLearningStageInfo setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -306,7 +295,6 @@ public class AdCampaignLearningStageInfo extends APINode {
     this.mLastSigEditTs = instance.mLastSigEditTs;
     this.mStatus = instance.mStatus;
     this.mTypes = instance.mTypes;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

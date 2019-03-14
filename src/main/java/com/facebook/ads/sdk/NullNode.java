@@ -55,15 +55,13 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class NullNode extends APINode {
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public NullNode() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static NullNode loadJSON(String json, APIContext context, String header) {
     NullNode nullNode = getGson().fromJson(json, NullNode.class);
@@ -208,15 +206,6 @@ public class NullNode extends APINode {
   }
 
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public NullNode setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -234,7 +223,6 @@ public class NullNode extends APINode {
   }
 
   public NullNode copyFrom(NullNode instance) {
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -67,15 +67,13 @@ public class AdCreativeStaticFallbackSpec extends APINode {
   private String mMessage = null;
   @SerializedName("name")
   private String mName = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdCreativeStaticFallbackSpec() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdCreativeStaticFallbackSpec loadJSON(String json, APIContext context, String header) {
     AdCreativeStaticFallbackSpec adCreativeStaticFallbackSpec = getGson().fromJson(json, AdCreativeStaticFallbackSpec.class);
@@ -279,15 +277,6 @@ public class AdCreativeStaticFallbackSpec extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdCreativeStaticFallbackSpec setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -311,7 +300,6 @@ public class AdCreativeStaticFallbackSpec extends APINode {
     this.mLink = instance.mLink;
     this.mMessage = instance.mMessage;
     this.mName = instance.mName;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

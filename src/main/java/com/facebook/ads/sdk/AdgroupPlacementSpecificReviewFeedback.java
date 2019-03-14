@@ -101,15 +101,13 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
   private Map<String, String> mShops = null;
   @SerializedName("whatsapp")
   private Map<String, String> mWhatsapp = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdgroupPlacementSpecificReviewFeedback() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdgroupPlacementSpecificReviewFeedback loadJSON(String json, APIContext context, String header) {
     AdgroupPlacementSpecificReviewFeedback adgroupPlacementSpecificReviewFeedback = getGson().fromJson(json, AdgroupPlacementSpecificReviewFeedback.class);
@@ -461,15 +459,6 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdgroupPlacementSpecificReviewFeedback setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -510,7 +499,6 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
     this.mSeller = instance.mSeller;
     this.mShops = instance.mShops;
     this.mWhatsapp = instance.mWhatsapp;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

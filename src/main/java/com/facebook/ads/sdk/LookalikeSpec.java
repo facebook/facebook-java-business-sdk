@@ -79,15 +79,13 @@ public class LookalikeSpec extends APINode {
   private JsonArray mTargetCountryNames = null;
   @SerializedName("type")
   private String mType = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public LookalikeSpec() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static LookalikeSpec loadJSON(String json, APIContext context, String header) {
     LookalikeSpec lookalikeSpec = getGson().fromJson(json, LookalikeSpec.class);
@@ -340,15 +338,6 @@ public class LookalikeSpec extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public LookalikeSpec setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -378,7 +367,6 @@ public class LookalikeSpec extends APINode {
     this.mTargetCountries = instance.mTargetCountries;
     this.mTargetCountryNames = instance.mTargetCountryNames;
     this.mType = instance.mType;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -57,15 +57,13 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class PaymentPricepoints extends APINode {
   @SerializedName("mobile")
   private List<Object> mMobile = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public PaymentPricepoints() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static PaymentPricepoints loadJSON(String json, APIContext context, String header) {
     PaymentPricepoints paymentPricepoints = getGson().fromJson(json, PaymentPricepoints.class);
@@ -219,15 +217,6 @@ public class PaymentPricepoints extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public PaymentPricepoints setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -246,7 +235,6 @@ public class PaymentPricepoints extends APINode {
 
   public PaymentPricepoints copyFrom(PaymentPricepoints instance) {
     this.mMobile = instance.mMobile;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

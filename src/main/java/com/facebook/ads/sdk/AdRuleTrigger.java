@@ -63,15 +63,13 @@ public class AdRuleTrigger extends APINode {
   private EnumType mType = null;
   @SerializedName("value")
   private Object mValue = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdRuleTrigger() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdRuleTrigger loadJSON(String json, APIContext context, String header) {
     AdRuleTrigger adRuleTrigger = getGson().fromJson(json, AdRuleTrigger.class);
@@ -252,15 +250,6 @@ public class AdRuleTrigger extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdRuleTrigger setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumOperator {
@@ -348,7 +337,6 @@ public class AdRuleTrigger extends APINode {
     this.mOperator = instance.mOperator;
     this.mType = instance.mType;
     this.mValue = instance.mValue;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

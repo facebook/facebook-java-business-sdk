@@ -60,7 +60,7 @@ public class LiveWithGuestSession extends APINode {
   @SerializedName("id")
   private String mId = null;
   @SerializedName("participant_call_states")
-  private List<Object> mParticipantCallStates = null;
+  private Map<String, String> mParticipantCallStates = null;
   @SerializedName("server_sdp")
   private String mServerSdp = null;
   protected static Gson gson = null;
@@ -297,7 +297,7 @@ public class LiveWithGuestSession extends APINode {
     return mId;
   }
 
-  public List<Object> getFieldParticipantCallStates() {
+  public Map<String, String> getFieldParticipantCallStates() {
     return mParticipantCallStates;
   }
 

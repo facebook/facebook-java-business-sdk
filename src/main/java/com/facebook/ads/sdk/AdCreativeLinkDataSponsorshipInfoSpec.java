@@ -59,15 +59,13 @@ public class AdCreativeLinkDataSponsorshipInfoSpec extends APINode {
   private String mSponsorImageUrl = null;
   @SerializedName("sponsor_name")
   private String mSponsorName = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdCreativeLinkDataSponsorshipInfoSpec() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdCreativeLinkDataSponsorshipInfoSpec loadJSON(String json, APIContext context, String header) {
     AdCreativeLinkDataSponsorshipInfoSpec adCreativeLinkDataSponsorshipInfoSpec = getGson().fromJson(json, AdCreativeLinkDataSponsorshipInfoSpec.class);
@@ -230,15 +228,6 @@ public class AdCreativeLinkDataSponsorshipInfoSpec extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdCreativeLinkDataSponsorshipInfoSpec setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -258,7 +247,6 @@ public class AdCreativeLinkDataSponsorshipInfoSpec extends APINode {
   public AdCreativeLinkDataSponsorshipInfoSpec copyFrom(AdCreativeLinkDataSponsorshipInfoSpec instance) {
     this.mSponsorImageUrl = instance.mSponsorImageUrl;
     this.mSponsorName = instance.mSponsorName;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

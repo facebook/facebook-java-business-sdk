@@ -61,15 +61,13 @@ public class ProductItemCommerceInsights extends APINode {
   private Long mOrganicImpressions = null;
   @SerializedName("paid_impressions")
   private Long mPaidImpressions = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public ProductItemCommerceInsights() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static ProductItemCommerceInsights loadJSON(String json, APIContext context, String header) {
     ProductItemCommerceInsights productItemCommerceInsights = getGson().fromJson(json, ProductItemCommerceInsights.class);
@@ -241,15 +239,6 @@ public class ProductItemCommerceInsights extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public ProductItemCommerceInsights setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -270,7 +259,6 @@ public class ProductItemCommerceInsights extends APINode {
     this.mMessageSends = instance.mMessageSends;
     this.mOrganicImpressions = instance.mOrganicImpressions;
     this.mPaidImpressions = instance.mPaidImpressions;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

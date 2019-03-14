@@ -1140,7 +1140,7 @@ public class Ad extends APINode {
       return this;
     }
 
-    public APIRequestDeleteAdLabels setExecutionOptions (List<EnumExecutionOptions> executionOptions) {
+    public APIRequestDeleteAdLabels setExecutionOptions (List<Ad.EnumExecutionOptions> executionOptions) {
       this.setParam("execution_options", executionOptions);
       return this;
     }
@@ -1264,7 +1264,7 @@ public class Ad extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdLabel setExecutionOptions (List<EnumExecutionOptions> executionOptions) {
+    public APIRequestCreateAdLabel setExecutionOptions (List<Ad.EnumExecutionOptions> executionOptions) {
       this.setParam("execution_options", executionOptions);
       return this;
     }
@@ -3279,7 +3279,6 @@ public class Ad extends APINode {
 
     public static final String[] FIELDS = {
       "body",
-      "id",
     };
 
     @Override
@@ -3486,13 +3485,6 @@ public class Ad extends APINode {
     }
     public APIRequestGetPreviews requestBodyField (boolean value) {
       this.requestField("body", value);
-      return this;
-    }
-    public APIRequestGetPreviews requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetPreviews requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }

@@ -57,15 +57,13 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class CanvasBodyElement extends APINode {
   @SerializedName("element")
   private Object mElement = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public CanvasBodyElement() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static CanvasBodyElement loadJSON(String json, APIContext context, String header) {
     CanvasBodyElement canvasBodyElement = getGson().fromJson(json, CanvasBodyElement.class);
@@ -219,15 +217,6 @@ public class CanvasBodyElement extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public CanvasBodyElement setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -246,7 +235,6 @@ public class CanvasBodyElement extends APINode {
 
   public CanvasBodyElement copyFrom(CanvasBodyElement instance) {
     this.mElement = instance.mElement;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

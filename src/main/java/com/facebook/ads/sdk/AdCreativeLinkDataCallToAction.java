@@ -59,15 +59,13 @@ public class AdCreativeLinkDataCallToAction extends APINode {
   private EnumType mType = null;
   @SerializedName("value")
   private AdCreativeLinkDataCallToActionValue mValue = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdCreativeLinkDataCallToAction() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdCreativeLinkDataCallToAction loadJSON(String json, APIContext context, String header) {
     AdCreativeLinkDataCallToAction adCreativeLinkDataCallToAction = getGson().fromJson(json, AdCreativeLinkDataCallToAction.class);
@@ -235,15 +233,6 @@ public class AdCreativeLinkDataCallToAction extends APINode {
     this.mValue = AdCreativeLinkDataCallToActionValue.getGson().fromJson(value, type);
     return this;
   }
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdCreativeLinkDataCallToAction setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumType {
@@ -376,7 +365,6 @@ public class AdCreativeLinkDataCallToAction extends APINode {
   public AdCreativeLinkDataCallToAction copyFrom(AdCreativeLinkDataCallToAction instance) {
     this.mType = instance.mType;
     this.mValue = instance.mValue;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

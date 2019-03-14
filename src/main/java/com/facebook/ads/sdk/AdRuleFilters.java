@@ -61,15 +61,13 @@ public class AdRuleFilters extends APINode {
   private EnumOperator mOperator = null;
   @SerializedName("value")
   private Object mValue = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdRuleFilters() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdRuleFilters loadJSON(String json, APIContext context, String header) {
     AdRuleFilters adRuleFilters = getGson().fromJson(json, AdRuleFilters.class);
@@ -241,15 +239,6 @@ public class AdRuleFilters extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdRuleFilters setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumOperator {
@@ -311,7 +300,6 @@ public class AdRuleFilters extends APINode {
     this.mField = instance.mField;
     this.mOperator = instance.mOperator;
     this.mValue = instance.mValue;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

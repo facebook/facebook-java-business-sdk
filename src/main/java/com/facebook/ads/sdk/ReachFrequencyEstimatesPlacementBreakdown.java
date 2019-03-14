@@ -79,15 +79,13 @@ public class ReachFrequencyEstimatesPlacementBreakdown extends APINode {
   private List<Double> mMsite = null;
   @SerializedName("suggested_videos")
   private List<Double> mSuggestedVideos = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public ReachFrequencyEstimatesPlacementBreakdown() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static ReachFrequencyEstimatesPlacementBreakdown loadJSON(String json, APIContext context, String header) {
     ReachFrequencyEstimatesPlacementBreakdown reachFrequencyEstimatesPlacementBreakdown = getGson().fromJson(json, ReachFrequencyEstimatesPlacementBreakdown.class);
@@ -340,15 +338,6 @@ public class ReachFrequencyEstimatesPlacementBreakdown extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public ReachFrequencyEstimatesPlacementBreakdown setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -378,7 +367,6 @@ public class ReachFrequencyEstimatesPlacementBreakdown extends APINode {
     this.mIos = instance.mIos;
     this.mMsite = instance.mMsite;
     this.mSuggestedVideos = instance.mSuggestedVideos;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

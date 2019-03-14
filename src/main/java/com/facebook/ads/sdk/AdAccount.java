@@ -109,6 +109,8 @@ public class AdAccount extends APINode {
   private ExtendedCreditInvoiceGroup mExtendedCreditInvoiceGroup = null;
   @SerializedName("failed_delivery_checks")
   private List<DeliveryCheck> mFailedDeliveryChecks = null;
+  @SerializedName("fb_entity")
+  private Long mFbEntity = null;
   @SerializedName("funding_source")
   private String mFundingSource = null;
   @SerializedName("funding_source_details")
@@ -1024,6 +1026,10 @@ public class AdAccount extends APINode {
     return mFailedDeliveryChecks;
   }
 
+  public Long getFieldFbEntity() {
+    return mFbEntity;
+  }
+
   public String getFieldFundingSource() {
     return mFundingSource;
   }
@@ -1195,7 +1201,6 @@ public class AdAccount extends APINode {
       "object_name",
       "object_type",
       "translated_event_type",
-      "id",
     };
 
     @Override
@@ -1439,13 +1444,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetActivities requestTranslatedEventTypeField (boolean value) {
       this.requestField("translated_event_type", value);
-      return this;
-    }
-    public APIRequestGetActivities requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetActivities requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -2015,7 +2013,6 @@ public class AdAccount extends APINode {
       "vat_country",
       "version",
       "vertical",
-      "id",
     };
 
     @Override
@@ -2399,13 +2396,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdContracts requestVerticalField (boolean value) {
       this.requestField("vertical", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetAdContracts requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -6154,7 +6144,6 @@ public class AdAccount extends APINode {
       "rule_id",
       "schedule_spec",
       "timestamp",
-      "id",
     };
 
     @Override
@@ -6339,13 +6328,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdRulesHistory requestTimestampField (boolean value) {
       this.requestField("timestamp", value);
-      return this;
-    }
-    public APIRequestGetAdRulesHistory requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetAdRulesHistory requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -16603,7 +16585,6 @@ public class AdAccount extends APINode {
       "target_business_object_id",
       "target_business_object_name",
       "target_business_object_type",
-      "id",
     };
 
     @Override
@@ -16833,13 +16814,6 @@ public class AdAccount extends APINode {
       this.requestField("target_business_object_type", value);
       return this;
     }
-    public APIRequestGetBusinessActivities requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetBusinessActivities requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
   }
 
   public static class APIRequestGetBusinessProjects extends APIRequest<BusinessProject> {
@@ -17008,7 +16982,6 @@ public class AdAccount extends APINode {
       "event_time",
       "event_type",
       "extra_data",
-      "id",
     };
 
     @Override
@@ -17133,13 +17106,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetBusinessSettingLogs requestExtraDataField (boolean value) {
       this.requestField("extra_data", value);
-      return this;
-    }
-    public APIRequestGetBusinessSettingLogs requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetBusinessSettingLogs requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -18770,6 +18736,7 @@ public class AdAccount extends APINode {
       "event_source_group",
       "product_set_id",
       "event_sources",
+      "enable_fetch_or_create",
       "video_group_ids",
       "study_spec",
       "list_of_accounts",
@@ -19138,6 +19105,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateCustomAudience setEnableFetchOrCreate (Boolean enableFetchOrCreate) {
+      this.setParam("enable_fetch_or_create", enableFetchOrCreate);
+      return this;
+    }
+    public APIRequestCreateCustomAudience setEnableFetchOrCreate (String enableFetchOrCreate) {
+      this.setParam("enable_fetch_or_create", enableFetchOrCreate);
+      return this;
+    }
+
     public APIRequestCreateCustomAudience setVideoGroupIds (List<String> videoGroupIds) {
       this.setParam("video_group_ids", videoGroupIds);
       return this;
@@ -19359,6 +19335,7 @@ public class AdAccount extends APINode {
       "first_fired_time",
       "id",
       "is_archived",
+      "is_unavailable",
       "last_fired_time",
       "name",
       "offline_conversion_data_set",
@@ -19538,6 +19515,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetCustomConversions requestIsArchivedField (boolean value) {
       this.requestField("is_archived", value);
+      return this;
+    }
+    public APIRequestGetCustomConversions requestIsUnavailableField () {
+      return this.requestIsUnavailableField(true);
+    }
+    public APIRequestGetCustomConversions requestIsUnavailableField (boolean value) {
+      this.requestField("is_unavailable", value);
       return this;
     }
     public APIRequestGetCustomConversions requestLastFiredTimeField () {
@@ -19860,7 +19844,6 @@ public class AdAccount extends APINode {
       "estimate_dau",
       "estimate_mau",
       "estimate_ready",
-      "id",
     };
 
     @Override
@@ -20005,13 +19988,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetDeliveryEstimate requestEstimateReadyField (boolean value) {
       this.requestField("estimate_ready", value);
-      return this;
-    }
-    public APIRequestGetDeliveryEstimate requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetDeliveryEstimate requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -21095,7 +21071,6 @@ public class AdAccount extends APINode {
 
     public static final String[] FIELDS = {
       "body",
-      "id",
     };
 
     @Override
@@ -21311,13 +21286,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetGeneratePreviews requestBodyField (boolean value) {
       this.requestField("body", value);
-      return this;
-    }
-    public APIRequestGetGeneratePreviews requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetGeneratePreviews requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -22793,7 +22761,6 @@ public class AdAccount extends APINode {
       "store",
       "unique_id",
       "url",
-      "id",
     };
 
     @Override
@@ -22967,13 +22934,6 @@ public class AdAccount extends APINode {
       this.requestField("url", value);
       return this;
     }
-    public APIRequestGetMatchedSearchApplications requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetMatchedSearchApplications requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
   }
 
   public static class APIRequestGetMaxBid extends APIRequest<AdAccountMaxBid> {
@@ -22988,7 +22948,6 @@ public class AdAccount extends APINode {
 
     public static final String[] FIELDS = {
       "max_bid",
-      "id",
     };
 
     @Override
@@ -23087,13 +23046,6 @@ public class AdAccount extends APINode {
       this.requestField("max_bid", value);
       return this;
     }
-    public APIRequestGetMaxBid requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetMaxBid requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
   }
 
   public static class APIRequestGetMinimumBudgets extends APIRequest<MinimumBudget> {
@@ -23113,7 +23065,6 @@ public class AdAccount extends APINode {
       "min_daily_budget_imp",
       "min_daily_budget_low_freq",
       "min_daily_budget_video_views",
-      "id",
     };
 
     @Override
@@ -23247,13 +23198,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetMinimumBudgets requestMinDailyBudgetVideoViewsField (boolean value) {
       this.requestField("min_daily_budget_video_views", value);
-      return this;
-    }
-    public APIRequestGetMinimumBudgets requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetMinimumBudgets requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -25000,6 +24944,7 @@ public class AdAccount extends APINode {
       "product_set_id",
       "rev_share_policy_id",
       "event_sources",
+      "enable_fetch_or_create",
       "inclusions",
       "exclusions",
     };
@@ -25217,6 +25162,15 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateProductAudience setEventSources (String eventSources) {
       this.setParam("event_sources", eventSources);
+      return this;
+    }
+
+    public APIRequestCreateProductAudience setEnableFetchOrCreate (Boolean enableFetchOrCreate) {
+      this.setParam("enable_fetch_or_create", enableFetchOrCreate);
+      return this;
+    }
+    public APIRequestCreateProductAudience setEnableFetchOrCreate (String enableFetchOrCreate) {
+      this.setParam("enable_fetch_or_create", enableFetchOrCreate);
       return this;
     }
 
@@ -26839,7 +26793,6 @@ public class AdAccount extends APINode {
       "estimate_ready",
       "unsupported",
       "users",
-      "id",
     };
 
     @Override
@@ -26997,13 +26950,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetReachEstimate requestUsersField (boolean value) {
       this.requestField("users", value);
-      return this;
-    }
-    public APIRequestGetReachEstimate requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetReachEstimate requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -27845,6 +27791,7 @@ public class AdAccount extends APINode {
       "is_bonus_media",
       "is_conversion_goal",
       "is_full_view",
+      "is_higher_average_frequency",
       "is_reach_and_frequency_io_buying",
       "is_reserved_buying",
       "expiration_time",
@@ -28148,6 +28095,15 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateReachFrequencyPrediction setIsFullView (String isFullView) {
       this.setParam("is_full_view", isFullView);
+      return this;
+    }
+
+    public APIRequestCreateReachFrequencyPrediction setIsHigherAverageFrequency (Boolean isHigherAverageFrequency) {
+      this.setParam("is_higher_average_frequency", isHigherAverageFrequency);
+      return this;
+    }
+    public APIRequestCreateReachFrequencyPrediction setIsHigherAverageFrequency (String isHigherAverageFrequency) {
+      this.setParam("is_higher_average_frequency", isHigherAverageFrequency);
       return this;
     }
 
@@ -30563,7 +30519,6 @@ public class AdAccount extends APINode {
       "offset",
       "time",
       "ts",
-      "id",
     };
 
     @Override
@@ -30699,13 +30654,6 @@ public class AdAccount extends APINode {
       this.requestField("ts", value);
       return this;
     }
-    public APIRequestGetTimezoneOffsets requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetTimezoneOffsets requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
   }
 
   public static class APIRequestDeleteTracking extends APIRequest<APINode> {
@@ -30834,7 +30782,6 @@ public class AdAccount extends APINode {
 
     public static final String[] FIELDS = {
       "tracking_specs",
-      "id",
     };
 
     @Override
@@ -30931,13 +30878,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetTracking requestTrackingSpecsField (boolean value) {
       this.requestField("tracking_specs", value);
-      return this;
-    }
-    public APIRequestGetTracking requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetTracking requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }
@@ -31871,6 +31811,7 @@ public class AdAccount extends APINode {
       "end_advertiser_name",
       "extended_credit_invoice_group",
       "failed_delivery_checks",
+      "fb_entity",
       "funding_source",
       "funding_source_details",
       "has_migrated_permissions",
@@ -32176,6 +32117,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGet requestFailedDeliveryChecksField (boolean value) {
       this.requestField("failed_delivery_checks", value);
+      return this;
+    }
+    public APIRequestGet requestFbEntityField () {
+      return this.requestFbEntityField(true);
+    }
+    public APIRequestGet requestFbEntityField (boolean value) {
+      this.requestField("fb_entity", value);
       return this;
     }
     public APIRequestGet requestFundingSourceField () {
@@ -32878,6 +32826,8 @@ public class AdAccount extends APINode {
       VALUE_LOOKALIKE("LOOKALIKE"),
       @SerializedName("MANAGED")
       VALUE_MANAGED("MANAGED"),
+      @SerializedName("MEASUREMENT")
+      VALUE_MEASUREMENT("MEASUREMENT"),
       @SerializedName("OFFLINE_CONVERSION")
       VALUE_OFFLINE_CONVERSION("OFFLINE_CONVERSION"),
       @SerializedName("PARTNER")
@@ -33215,6 +33165,7 @@ public class AdAccount extends APINode {
     this.mEndAdvertiserName = instance.mEndAdvertiserName;
     this.mExtendedCreditInvoiceGroup = instance.mExtendedCreditInvoiceGroup;
     this.mFailedDeliveryChecks = instance.mFailedDeliveryChecks;
+    this.mFbEntity = instance.mFbEntity;
     this.mFundingSource = instance.mFundingSource;
     this.mFundingSourceDetails = instance.mFundingSourceDetails;
     this.mHasMigratedPermissions = instance.mHasMigratedPermissions;

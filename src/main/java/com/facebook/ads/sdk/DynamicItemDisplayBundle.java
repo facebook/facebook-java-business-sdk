@@ -56,7 +56,7 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  */
 public class DynamicItemDisplayBundle extends APINode {
   @SerializedName("additional_urls")
-  private List<Object> mAdditionalUrls = null;
+  private Map<String, String> mAdditionalUrls = null;
   @SerializedName("description")
   private String mDescription = null;
   @SerializedName("id")
@@ -66,7 +66,7 @@ public class DynamicItemDisplayBundle extends APINode {
   @SerializedName("product_set")
   private ProductSet mProductSet = null;
   @SerializedName("text_tokens")
-  private List<Object> mTextTokens = null;
+  private Map<String, String> mTextTokens = null;
   @SerializedName("url")
   private String mUrl = null;
   protected static Gson gson = null;
@@ -295,7 +295,7 @@ public class DynamicItemDisplayBundle extends APINode {
   }
 
 
-  public List<Object> getFieldAdditionalUrls() {
+  public Map<String, String> getFieldAdditionalUrls() {
     return mAdditionalUrls;
   }
 
@@ -318,7 +318,7 @@ public class DynamicItemDisplayBundle extends APINode {
     return mProductSet;
   }
 
-  public List<Object> getFieldTextTokens() {
+  public Map<String, String> getFieldTextTokens() {
     return mTextTokens;
   }
 

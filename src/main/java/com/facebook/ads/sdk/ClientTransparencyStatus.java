@@ -63,15 +63,13 @@ public class ClientTransparencyStatus extends APINode {
   private Boolean mIsSatisfied = null;
   @SerializedName("owning_business_requirements")
   private Object mOwningBusinessRequirements = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public ClientTransparencyStatus() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static ClientTransparencyStatus loadJSON(String json, APIContext context, String header) {
     ClientTransparencyStatus clientTransparencyStatus = getGson().fromJson(json, ClientTransparencyStatus.class);
@@ -252,15 +250,6 @@ public class ClientTransparencyStatus extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public ClientTransparencyStatus setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -282,7 +271,6 @@ public class ClientTransparencyStatus extends APINode {
     this.mHasOwningBusiness = instance.mHasOwningBusiness;
     this.mIsSatisfied = instance.mIsSatisfied;
     this.mOwningBusinessRequirements = instance.mOwningBusinessRequirements;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

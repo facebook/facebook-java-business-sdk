@@ -61,15 +61,13 @@ public class CampaignGroupBrandConfiguration extends APINode {
   private String mLocale = null;
   @SerializedName("vertical")
   private String mVertical = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public CampaignGroupBrandConfiguration() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static CampaignGroupBrandConfiguration loadJSON(String json, APIContext context, String header) {
     CampaignGroupBrandConfiguration campaignGroupBrandConfiguration = getGson().fromJson(json, CampaignGroupBrandConfiguration.class);
@@ -241,15 +239,6 @@ public class CampaignGroupBrandConfiguration extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public CampaignGroupBrandConfiguration setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -270,7 +259,6 @@ public class CampaignGroupBrandConfiguration extends APINode {
     this.mBrandProductName = instance.mBrandProductName;
     this.mLocale = instance.mLocale;
     this.mVertical = instance.mVertical;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -61,15 +61,13 @@ public class LeadGenAppointmentBookingInfo extends APINode {
   private List<String> mAppointmentDurations = null;
   @SerializedName("appointment_slots_by_day")
   private List<Object> mAppointmentSlotsByDay = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public LeadGenAppointmentBookingInfo() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static LeadGenAppointmentBookingInfo loadJSON(String json, APIContext context, String header) {
     LeadGenAppointmentBookingInfo leadGenAppointmentBookingInfo = getGson().fromJson(json, LeadGenAppointmentBookingInfo.class);
@@ -241,15 +239,6 @@ public class LeadGenAppointmentBookingInfo extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public LeadGenAppointmentBookingInfo setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -270,7 +259,6 @@ public class LeadGenAppointmentBookingInfo extends APINode {
     this.mAdvertiserTimezoneOffset = instance.mAdvertiserTimezoneOffset;
     this.mAppointmentDurations = instance.mAppointmentDurations;
     this.mAppointmentSlotsByDay = instance.mAppointmentSlotsByDay;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

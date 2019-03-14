@@ -67,15 +67,13 @@ public class AdAssetFeedSpecVideo extends APINode {
   private String mUrlTags = null;
   @SerializedName("video_id")
   private String mVideoId = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdAssetFeedSpecVideo() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdAssetFeedSpecVideo loadJSON(String json, APIContext context, String header) {
     AdAssetFeedSpecVideo adAssetFeedSpecVideo = getGson().fromJson(json, AdAssetFeedSpecVideo.class);
@@ -279,15 +277,6 @@ public class AdAssetFeedSpecVideo extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdAssetFeedSpecVideo setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -311,7 +300,6 @@ public class AdAssetFeedSpecVideo extends APINode {
     this.mThumbnailUrl = instance.mThumbnailUrl;
     this.mUrlTags = instance.mUrlTags;
     this.mVideoId = instance.mVideoId;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -59,15 +59,13 @@ public class CommerceSettings extends APINode {
   private Long mInventory = null;
   @SerializedName("total_inventory")
   private Long mTotalInventory = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public CommerceSettings() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static CommerceSettings loadJSON(String json, APIContext context, String header) {
     CommerceSettings commerceSettings = getGson().fromJson(json, CommerceSettings.class);
@@ -230,15 +228,6 @@ public class CommerceSettings extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public CommerceSettings setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -258,7 +247,6 @@ public class CommerceSettings extends APINode {
   public CommerceSettings copyFrom(CommerceSettings instance) {
     this.mInventory = instance.mInventory;
     this.mTotalInventory = instance.mTotalInventory;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -68,9 +68,9 @@ public class FavoriteRequest extends APINode {
   @SerializedName("id")
   private String mId = null;
   @SerializedName("post_params")
-  private List<Object> mPostParams = null;
+  private Map<String, String> mPostParams = null;
   @SerializedName("query_params")
-  private List<Object> mQueryParams = null;
+  private Map<String, String> mQueryParams = null;
   protected static Gson gson = null;
 
   FavoriteRequest() {
@@ -313,11 +313,11 @@ public class FavoriteRequest extends APINode {
     return mId;
   }
 
-  public List<Object> getFieldPostParams() {
+  public Map<String, String> getFieldPostParams() {
     return mPostParams;
   }
 
-  public List<Object> getFieldQueryParams() {
+  public Map<String, String> getFieldQueryParams() {
     return mQueryParams;
   }
 

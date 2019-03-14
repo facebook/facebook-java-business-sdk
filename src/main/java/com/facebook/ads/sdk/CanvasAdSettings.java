@@ -69,15 +69,13 @@ public class CanvasAdSettings extends APINode {
   private String mProductSetId = null;
   @SerializedName("use_retailer_item_ids")
   private Boolean mUseRetailerItemIds = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public CanvasAdSettings() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static CanvasAdSettings loadJSON(String json, APIContext context, String header) {
     CanvasAdSettings canvasAdSettings = getGson().fromJson(json, CanvasAdSettings.class);
@@ -285,15 +283,6 @@ public class CanvasAdSettings extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public CanvasAdSettings setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -318,7 +307,6 @@ public class CanvasAdSettings extends APINode {
     this.mLeadsCount = instance.mLeadsCount;
     this.mProductSetId = instance.mProductSetId;
     this.mUseRetailerItemIds = instance.mUseRetailerItemIds;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

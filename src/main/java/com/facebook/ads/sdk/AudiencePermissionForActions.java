@@ -65,15 +65,13 @@ public class AudiencePermissionForActions extends APINode {
   private Boolean mSubtypeSupportsLookalike = null;
   @SerializedName("supports_recipient_lookalike")
   private Boolean mSupportsRecipientLookalike = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AudiencePermissionForActions() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AudiencePermissionForActions loadJSON(String json, APIContext context, String header) {
     AudiencePermissionForActions audiencePermissionForActions = getGson().fromJson(json, AudiencePermissionForActions.class);
@@ -263,15 +261,6 @@ public class AudiencePermissionForActions extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AudiencePermissionForActions setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -294,7 +283,6 @@ public class AudiencePermissionForActions extends APINode {
     this.mCanShare = instance.mCanShare;
     this.mSubtypeSupportsLookalike = instance.mSubtypeSupportsLookalike;
     this.mSupportsRecipientLookalike = instance.mSupportsRecipientLookalike;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

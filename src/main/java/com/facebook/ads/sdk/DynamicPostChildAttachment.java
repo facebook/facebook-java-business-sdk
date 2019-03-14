@@ -67,15 +67,13 @@ public class DynamicPostChildAttachment extends APINode {
   private String mProductId = null;
   @SerializedName("title")
   private String mTitle = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public DynamicPostChildAttachment() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static DynamicPostChildAttachment loadJSON(String json, APIContext context, String header) {
     DynamicPostChildAttachment dynamicPostChildAttachment = getGson().fromJson(json, DynamicPostChildAttachment.class);
@@ -274,15 +272,6 @@ public class DynamicPostChildAttachment extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public DynamicPostChildAttachment setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -306,7 +295,6 @@ public class DynamicPostChildAttachment extends APINode {
     this.mPlaceId = instance.mPlaceId;
     this.mProductId = instance.mProductId;
     this.mTitle = instance.mTitle;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

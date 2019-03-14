@@ -65,15 +65,13 @@ public class TimezoneOffset extends APINode {
   private String mTime = null;
   @SerializedName("ts")
   private Long mTs = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public TimezoneOffset() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static TimezoneOffset loadJSON(String json, APIContext context, String header) {
     TimezoneOffset timezoneOffset = getGson().fromJson(json, TimezoneOffset.class);
@@ -263,15 +261,6 @@ public class TimezoneOffset extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public TimezoneOffset setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -294,7 +283,6 @@ public class TimezoneOffset extends APINode {
     this.mOffset = instance.mOffset;
     this.mTime = instance.mTime;
     this.mTs = instance.mTs;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

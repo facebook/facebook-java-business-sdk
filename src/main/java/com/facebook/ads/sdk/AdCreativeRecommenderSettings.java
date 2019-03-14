@@ -59,15 +59,13 @@ public class AdCreativeRecommenderSettings extends APINode {
   private List<String> mPreferredEvents = null;
   @SerializedName("product_sales_channel")
   private String mProductSalesChannel = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdCreativeRecommenderSettings() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdCreativeRecommenderSettings loadJSON(String json, APIContext context, String header) {
     AdCreativeRecommenderSettings adCreativeRecommenderSettings = getGson().fromJson(json, AdCreativeRecommenderSettings.class);
@@ -230,15 +228,6 @@ public class AdCreativeRecommenderSettings extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdCreativeRecommenderSettings setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -258,7 +247,6 @@ public class AdCreativeRecommenderSettings extends APINode {
   public AdCreativeRecommenderSettings copyFrom(AdCreativeRecommenderSettings instance) {
     this.mPreferredEvents = instance.mPreferredEvents;
     this.mProductSalesChannel = instance.mProductSalesChannel;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

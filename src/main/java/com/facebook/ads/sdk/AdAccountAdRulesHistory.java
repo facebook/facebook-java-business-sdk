@@ -73,15 +73,13 @@ public class AdAccountAdRulesHistory extends APINode {
   private AdRuleScheduleSpec mScheduleSpec = null;
   @SerializedName("timestamp")
   private String mTimestamp = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdAccountAdRulesHistory() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdAccountAdRulesHistory loadJSON(String json, APIContext context, String header) {
     AdAccountAdRulesHistory adAccountAdRulesHistory = getGson().fromJson(json, AdAccountAdRulesHistory.class);
@@ -327,15 +325,6 @@ public class AdAccountAdRulesHistory extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdAccountAdRulesHistory setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumAction {
@@ -418,7 +407,6 @@ public class AdAccountAdRulesHistory extends APINode {
     this.mRuleId = instance.mRuleId;
     this.mScheduleSpec = instance.mScheduleSpec;
     this.mTimestamp = instance.mTimestamp;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

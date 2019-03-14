@@ -61,15 +61,13 @@ public class SavedMessageResponseMacro extends APINode {
   private String mMacro = null;
   @SerializedName("offset")
   private Long mOffset = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public SavedMessageResponseMacro() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static SavedMessageResponseMacro loadJSON(String json, APIContext context, String header) {
     SavedMessageResponseMacro savedMessageResponseMacro = getGson().fromJson(json, SavedMessageResponseMacro.class);
@@ -241,15 +239,6 @@ public class SavedMessageResponseMacro extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public SavedMessageResponseMacro setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -270,7 +259,6 @@ public class SavedMessageResponseMacro extends APINode {
     this.mLength = instance.mLength;
     this.mMacro = instance.mMacro;
     this.mOffset = instance.mOffset;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

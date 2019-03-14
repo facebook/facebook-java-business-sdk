@@ -61,15 +61,13 @@ public class PlatformImageSource extends APINode {
   private String mSource = null;
   @SerializedName("width")
   private Long mWidth = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public PlatformImageSource() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static PlatformImageSource loadJSON(String json, APIContext context, String header) {
     PlatformImageSource platformImageSource = getGson().fromJson(json, PlatformImageSource.class);
@@ -241,15 +239,6 @@ public class PlatformImageSource extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public PlatformImageSource setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -270,7 +259,6 @@ public class PlatformImageSource extends APINode {
     this.mHeight = instance.mHeight;
     this.mSource = instance.mSource;
     this.mWidth = instance.mWidth;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

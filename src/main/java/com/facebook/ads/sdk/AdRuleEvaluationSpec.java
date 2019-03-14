@@ -61,15 +61,13 @@ public class AdRuleEvaluationSpec extends APINode {
   private List<AdRuleFilters> mFilters = null;
   @SerializedName("trigger")
   private AdRuleTrigger mTrigger = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdRuleEvaluationSpec() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdRuleEvaluationSpec loadJSON(String json, APIContext context, String header) {
     AdRuleEvaluationSpec adRuleEvaluationSpec = getGson().fromJson(json, AdRuleEvaluationSpec.class);
@@ -251,15 +249,6 @@ public class AdRuleEvaluationSpec extends APINode {
     this.mTrigger = AdRuleTrigger.getGson().fromJson(value, type);
     return this;
   }
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdRuleEvaluationSpec setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumEvaluationType {
@@ -299,7 +288,6 @@ public class AdRuleEvaluationSpec extends APINode {
     this.mEvaluationType = instance.mEvaluationType;
     this.mFilters = instance.mFilters;
     this.mTrigger = instance.mTrigger;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

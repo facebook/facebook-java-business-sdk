@@ -61,15 +61,13 @@ public class CustomAudiencePrefillState extends APINode {
   private Long mNumAdded = null;
   @SerializedName("status")
   private String mStatus = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public CustomAudiencePrefillState() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static CustomAudiencePrefillState loadJSON(String json, APIContext context, String header) {
     CustomAudiencePrefillState customAudiencePrefillState = getGson().fromJson(json, CustomAudiencePrefillState.class);
@@ -241,15 +239,6 @@ public class CustomAudiencePrefillState extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public CustomAudiencePrefillState setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -270,7 +259,6 @@ public class CustomAudiencePrefillState extends APINode {
     this.mDescription = instance.mDescription;
     this.mNumAdded = instance.mNumAdded;
     this.mStatus = instance.mStatus;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

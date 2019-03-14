@@ -63,15 +63,13 @@ public class TargetingGeoLocationElectoralDistrict extends APINode {
   private String mKey = null;
   @SerializedName("name")
   private String mName = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public TargetingGeoLocationElectoralDistrict() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static TargetingGeoLocationElectoralDistrict loadJSON(String json, APIContext context, String header) {
     TargetingGeoLocationElectoralDistrict targetingGeoLocationElectoralDistrict = getGson().fromJson(json, TargetingGeoLocationElectoralDistrict.class);
@@ -252,15 +250,6 @@ public class TargetingGeoLocationElectoralDistrict extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public TargetingGeoLocationElectoralDistrict setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -282,7 +271,6 @@ public class TargetingGeoLocationElectoralDistrict extends APINode {
     this.mElectoralDistrict = instance.mElectoralDistrict;
     this.mKey = instance.mKey;
     this.mName = instance.mName;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

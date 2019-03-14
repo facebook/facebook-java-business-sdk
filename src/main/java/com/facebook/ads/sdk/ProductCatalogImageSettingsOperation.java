@@ -57,15 +57,13 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class ProductCatalogImageSettingsOperation extends APINode {
   @SerializedName("transformation_type")
   private String mTransformationType = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public ProductCatalogImageSettingsOperation() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static ProductCatalogImageSettingsOperation loadJSON(String json, APIContext context, String header) {
     ProductCatalogImageSettingsOperation productCatalogImageSettingsOperation = getGson().fromJson(json, ProductCatalogImageSettingsOperation.class);
@@ -219,15 +217,6 @@ public class ProductCatalogImageSettingsOperation extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public ProductCatalogImageSettingsOperation setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -246,7 +235,6 @@ public class ProductCatalogImageSettingsOperation extends APINode {
 
   public ProductCatalogImageSettingsOperation copyFrom(ProductCatalogImageSettingsOperation instance) {
     this.mTransformationType = instance.mTransformationType;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

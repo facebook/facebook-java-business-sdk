@@ -67,15 +67,13 @@ public class NativeOfferDiscount extends APINode {
   private Double mValue1 = null;
   @SerializedName("value2")
   private Double mValue2 = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public NativeOfferDiscount() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static NativeOfferDiscount loadJSON(String json, APIContext context, String header) {
     NativeOfferDiscount nativeOfferDiscount = getGson().fromJson(json, NativeOfferDiscount.class);
@@ -274,15 +272,6 @@ public class NativeOfferDiscount extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public NativeOfferDiscount setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -306,7 +295,6 @@ public class NativeOfferDiscount extends APINode {
     this.mType = instance.mType;
     this.mValue1 = instance.mValue1;
     this.mValue2 = instance.mValue2;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -63,15 +63,13 @@ public class ProductCatalogPricingVariablesBatch extends APINode {
   private String mHandle = null;
   @SerializedName("status")
   private String mStatus = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public ProductCatalogPricingVariablesBatch() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static ProductCatalogPricingVariablesBatch loadJSON(String json, APIContext context, String header) {
     ProductCatalogPricingVariablesBatch productCatalogPricingVariablesBatch = getGson().fromJson(json, ProductCatalogPricingVariablesBatch.class);
@@ -252,15 +250,6 @@ public class ProductCatalogPricingVariablesBatch extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public ProductCatalogPricingVariablesBatch setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -282,7 +271,6 @@ public class ProductCatalogPricingVariablesBatch extends APINode {
     this.mErrorsTotalCount = instance.mErrorsTotalCount;
     this.mHandle = instance.mHandle;
     this.mStatus = instance.mStatus;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -59,15 +59,13 @@ public class InstagramInsightsValue extends APINode {
   private String mEndTime = null;
   @SerializedName("value")
   private Object mValue = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public InstagramInsightsValue() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static InstagramInsightsValue loadJSON(String json, APIContext context, String header) {
     InstagramInsightsValue instagramInsightsValue = getGson().fromJson(json, InstagramInsightsValue.class);
@@ -230,15 +228,6 @@ public class InstagramInsightsValue extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public InstagramInsightsValue setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -258,7 +247,6 @@ public class InstagramInsightsValue extends APINode {
   public InstagramInsightsValue copyFrom(InstagramInsightsValue instance) {
     this.mEndTime = instance.mEndTime;
     this.mValue = instance.mValue;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

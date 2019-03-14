@@ -113,15 +113,13 @@ public class AdAccountRoas extends APINode {
   private Double mYield7d = null;
   @SerializedName("yield_90d")
   private Double mYield90d = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdAccountRoas() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdAccountRoas loadJSON(String json, APIContext context, String header) {
     AdAccountRoas adAccountRoas = getGson().fromJson(json, AdAccountRoas.class);
@@ -527,15 +525,6 @@ public class AdAccountRoas extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdAccountRoas setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -582,7 +571,6 @@ public class AdAccountRoas extends APINode {
     this.mYield3d = instance.mYield3d;
     this.mYield7d = instance.mYield7d;
     this.mYield90d = instance.mYield90d;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

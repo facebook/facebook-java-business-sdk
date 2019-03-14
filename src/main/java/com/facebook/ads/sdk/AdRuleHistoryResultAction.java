@@ -63,15 +63,13 @@ public class AdRuleHistoryResultAction extends APINode {
   private String mNewValue = null;
   @SerializedName("old_value")
   private String mOldValue = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdRuleHistoryResultAction() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdRuleHistoryResultAction loadJSON(String json, APIContext context, String header) {
     AdRuleHistoryResultAction adRuleHistoryResultAction = getGson().fromJson(json, AdRuleHistoryResultAction.class);
@@ -252,15 +250,6 @@ public class AdRuleHistoryResultAction extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdRuleHistoryResultAction setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -282,7 +271,6 @@ public class AdRuleHistoryResultAction extends APINode {
     this.mField = instance.mField;
     this.mNewValue = instance.mNewValue;
     this.mOldValue = instance.mOldValue;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -693,6 +693,8 @@ public class PartnerIntegrationLinked extends APINode {
       "offline_conversion_data_set_id",
       "product_catalog_id",
       "setup_status",
+      "install_name",
+      "workspace_name",
     };
 
     public static final String[] FIELDS = {
@@ -796,6 +798,16 @@ public class PartnerIntegrationLinked extends APINode {
     }
     public APIRequestUpdate setSetupStatus (String setupStatus) {
       this.setParam("setup_status", setupStatus);
+      return this;
+    }
+
+    public APIRequestUpdate setInstallName (String installName) {
+      this.setParam("install_name", installName);
+      return this;
+    }
+
+    public APIRequestUpdate setWorkspaceName (String workspaceName) {
+      this.setParam("workspace_name", workspaceName);
       return this;
     }
 
@@ -924,6 +936,8 @@ public class PartnerIntegrationLinked extends APINode {
       VALUE_SHOPIFY_ONLINE("shopify_online"),
       @SerializedName("shopline")
       VALUE_SHOPLINE("shopline"),
+      @SerializedName("singular")
+      VALUE_SINGULAR("singular"),
       @SerializedName("sirclo")
       VALUE_SIRCLO("sirclo"),
       @SerializedName("squarespace")

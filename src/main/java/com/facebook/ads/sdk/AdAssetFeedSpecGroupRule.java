@@ -69,15 +69,13 @@ public class AdAssetFeedSpecGroupRule extends APINode {
   private AdAssetFeedSpecAssetLabel mTitleLabel = null;
   @SerializedName("video_label")
   private AdAssetFeedSpecAssetLabel mVideoLabel = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdAssetFeedSpecGroupRule() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdAssetFeedSpecGroupRule loadJSON(String json, APIContext context, String header) {
     AdAssetFeedSpecGroupRule adAssetFeedSpecGroupRule = getGson().fromJson(json, AdAssetFeedSpecGroupRule.class);
@@ -320,15 +318,6 @@ public class AdAssetFeedSpecGroupRule extends APINode {
     this.mVideoLabel = AdAssetFeedSpecAssetLabel.getGson().fromJson(value, type);
     return this;
   }
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdAssetFeedSpecGroupRule setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -353,7 +342,6 @@ public class AdAssetFeedSpecGroupRule extends APINode {
     this.mLinkUrlLabel = instance.mLinkUrlLabel;
     this.mTitleLabel = instance.mTitleLabel;
     this.mVideoLabel = instance.mVideoLabel;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

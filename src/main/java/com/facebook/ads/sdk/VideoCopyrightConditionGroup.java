@@ -61,15 +61,13 @@ public class VideoCopyrightConditionGroup extends APINode {
   private List<Object> mConditions = null;
   @SerializedName("validity_status")
   private String mValidityStatus = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public VideoCopyrightConditionGroup() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static VideoCopyrightConditionGroup loadJSON(String json, APIContext context, String header) {
     VideoCopyrightConditionGroup videoCopyrightConditionGroup = getGson().fromJson(json, VideoCopyrightConditionGroup.class);
@@ -241,15 +239,6 @@ public class VideoCopyrightConditionGroup extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public VideoCopyrightConditionGroup setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -270,7 +259,6 @@ public class VideoCopyrightConditionGroup extends APINode {
     this.mAction = instance.mAction;
     this.mConditions = instance.mConditions;
     this.mValidityStatus = instance.mValidityStatus;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

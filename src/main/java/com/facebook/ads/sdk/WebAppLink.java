@@ -59,15 +59,13 @@ public class WebAppLink extends APINode {
   private Boolean mShouldFallback = null;
   @SerializedName("url")
   private String mUrl = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public WebAppLink() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static WebAppLink loadJSON(String json, APIContext context, String header) {
     WebAppLink webAppLink = getGson().fromJson(json, WebAppLink.class);
@@ -230,15 +228,6 @@ public class WebAppLink extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public WebAppLink setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -258,7 +247,6 @@ public class WebAppLink extends APINode {
   public WebAppLink copyFrom(WebAppLink instance) {
     this.mShouldFallback = instance.mShouldFallback;
     this.mUrl = instance.mUrl;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

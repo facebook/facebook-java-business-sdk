@@ -61,15 +61,13 @@ public class TargetingProductAudienceSpec extends APINode {
   private List<TargetingProductAudienceSubSpec> mInclusions = null;
   @SerializedName("product_set_id")
   private String mProductSetId = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public TargetingProductAudienceSpec() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static TargetingProductAudienceSpec loadJSON(String json, APIContext context, String header) {
     TargetingProductAudienceSpec targetingProductAudienceSpec = getGson().fromJson(json, TargetingProductAudienceSpec.class);
@@ -251,15 +249,6 @@ public class TargetingProductAudienceSpec extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public TargetingProductAudienceSpec setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -280,7 +269,6 @@ public class TargetingProductAudienceSpec extends APINode {
     this.mExclusions = instance.mExclusions;
     this.mInclusions = instance.mInclusions;
     this.mProductSetId = instance.mProductSetId;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

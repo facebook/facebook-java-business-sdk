@@ -67,15 +67,13 @@ public class DACheck extends APINode {
   private String mTitle = null;
   @SerializedName("user_message")
   private String mUserMessage = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public DACheck() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static DACheck loadJSON(String json, APIContext context, String header) {
     DACheck daCheck = getGson().fromJson(json, DACheck.class);
@@ -274,15 +272,6 @@ public class DACheck extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public DACheck setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -306,7 +295,6 @@ public class DACheck extends APINode {
     this.mResult = instance.mResult;
     this.mTitle = instance.mTitle;
     this.mUserMessage = instance.mUserMessage;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

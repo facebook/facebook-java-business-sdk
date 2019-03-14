@@ -63,15 +63,13 @@ public class DeliveryCheck extends APINode {
   private DeliveryCheckExtraInfo mExtraInfo = null;
   @SerializedName("summary")
   private String mSummary = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public DeliveryCheck() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static DeliveryCheck loadJSON(String json, APIContext context, String header) {
     DeliveryCheck deliveryCheck = getGson().fromJson(json, DeliveryCheck.class);
@@ -257,15 +255,6 @@ public class DeliveryCheck extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public DeliveryCheck setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -287,7 +276,6 @@ public class DeliveryCheck extends APINode {
     this.mDescription = instance.mDescription;
     this.mExtraInfo = instance.mExtraInfo;
     this.mSummary = instance.mSummary;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

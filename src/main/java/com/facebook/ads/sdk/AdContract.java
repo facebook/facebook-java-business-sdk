@@ -139,15 +139,13 @@ public class AdContract extends APINode {
   private Long mVersion = null;
   @SerializedName("vertical")
   private String mVertical = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdContract() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdContract loadJSON(String json, APIContext context, String header) {
     AdContract adContract = getGson().fromJson(json, AdContract.class);
@@ -670,15 +668,6 @@ public class AdContract extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdContract setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -738,7 +727,6 @@ public class AdContract extends APINode {
     this.mVatCountry = instance.mVatCountry;
     this.mVersion = instance.mVersion;
     this.mVertical = instance.mVertical;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

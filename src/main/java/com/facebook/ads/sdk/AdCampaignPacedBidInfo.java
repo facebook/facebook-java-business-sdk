@@ -57,15 +57,13 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdCampaignPacedBidInfo extends APINode {
   @SerializedName("bidding_status")
   private String mBiddingStatus = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdCampaignPacedBidInfo() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdCampaignPacedBidInfo loadJSON(String json, APIContext context, String header) {
     AdCampaignPacedBidInfo adCampaignPacedBidInfo = getGson().fromJson(json, AdCampaignPacedBidInfo.class);
@@ -219,15 +217,6 @@ public class AdCampaignPacedBidInfo extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdCampaignPacedBidInfo setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -246,7 +235,6 @@ public class AdCampaignPacedBidInfo extends APINode {
 
   public AdCampaignPacedBidInfo copyFrom(AdCampaignPacedBidInfo instance) {
     this.mBiddingStatus = instance.mBiddingStatus;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

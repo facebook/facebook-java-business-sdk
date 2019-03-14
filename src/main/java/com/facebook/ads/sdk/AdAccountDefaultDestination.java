@@ -59,15 +59,13 @@ public class AdAccountDefaultDestination extends APINode {
   private String mDestinationId = null;
   @SerializedName("destination_url")
   private String mDestinationUrl = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdAccountDefaultDestination() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdAccountDefaultDestination loadJSON(String json, APIContext context, String header) {
     AdAccountDefaultDestination adAccountDefaultDestination = getGson().fromJson(json, AdAccountDefaultDestination.class);
@@ -230,15 +228,6 @@ public class AdAccountDefaultDestination extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdAccountDefaultDestination setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -258,7 +247,6 @@ public class AdAccountDefaultDestination extends APINode {
   public AdAccountDefaultDestination copyFrom(AdAccountDefaultDestination instance) {
     this.mDestinationId = instance.mDestinationId;
     this.mDestinationUrl = instance.mDestinationUrl;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -480,7 +480,6 @@ public class AdRule extends APINode {
       "results",
       "schedule_spec",
       "timestamp",
-      "id",
     };
 
     @Override
@@ -649,13 +648,6 @@ public class AdRule extends APINode {
     }
     public APIRequestGetHistory requestTimestampField (boolean value) {
       this.requestField("timestamp", value);
-      return this;
-    }
-    public APIRequestGetHistory requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetHistory requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }

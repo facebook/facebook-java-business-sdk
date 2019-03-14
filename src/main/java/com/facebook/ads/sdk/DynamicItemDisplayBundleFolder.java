@@ -66,7 +66,7 @@ public class DynamicItemDisplayBundleFolder extends APINode {
   @SerializedName("product_set")
   private ProductSet mProductSet = null;
   @SerializedName("valid_labels")
-  private List<Object> mValidLabels = null;
+  private Map<String, List<String>> mValidLabels = null;
   protected static Gson gson = null;
 
   DynamicItemDisplayBundleFolder() {
@@ -327,7 +327,7 @@ public class DynamicItemDisplayBundleFolder extends APINode {
     return mProductSet;
   }
 
-  public List<Object> getFieldValidLabels() {
+  public Map<String, List<String>> getFieldValidLabels() {
     return mValidLabels;
   }
 

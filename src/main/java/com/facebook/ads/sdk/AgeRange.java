@@ -59,15 +59,13 @@ public class AgeRange extends APINode {
   private Long mMax = null;
   @SerializedName("min")
   private Long mMin = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AgeRange() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AgeRange loadJSON(String json, APIContext context, String header) {
     AgeRange ageRange = getGson().fromJson(json, AgeRange.class);
@@ -230,15 +228,6 @@ public class AgeRange extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AgeRange setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -258,7 +247,6 @@ public class AgeRange extends APINode {
   public AgeRange copyFrom(AgeRange instance) {
     this.mMax = instance.mMax;
     this.mMin = instance.mMin;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

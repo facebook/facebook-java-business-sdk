@@ -61,15 +61,13 @@ public class RichMediaElement extends APINode {
   private String mElementType = null;
   @SerializedName("name")
   private String mName = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public RichMediaElement() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static RichMediaElement loadJSON(String json, APIContext context, String header) {
     RichMediaElement richMediaElement = getGson().fromJson(json, RichMediaElement.class);
@@ -241,15 +239,6 @@ public class RichMediaElement extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public RichMediaElement setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -270,7 +259,6 @@ public class RichMediaElement extends APINode {
     this.mElement = instance.mElement;
     this.mElementType = instance.mElementType;
     this.mName = instance.mName;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

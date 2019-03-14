@@ -63,15 +63,13 @@ public class TargetingGeoLocationMarket extends APINode {
   private String mMarketType = null;
   @SerializedName("name")
   private String mName = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public TargetingGeoLocationMarket() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static TargetingGeoLocationMarket loadJSON(String json, APIContext context, String header) {
     TargetingGeoLocationMarket targetingGeoLocationMarket = getGson().fromJson(json, TargetingGeoLocationMarket.class);
@@ -252,15 +250,6 @@ public class TargetingGeoLocationMarket extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public TargetingGeoLocationMarket setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -282,7 +271,6 @@ public class TargetingGeoLocationMarket extends APINode {
     this.mKey = instance.mKey;
     this.mMarketType = instance.mMarketType;
     this.mName = instance.mName;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

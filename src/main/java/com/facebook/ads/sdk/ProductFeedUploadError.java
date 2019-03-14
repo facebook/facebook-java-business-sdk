@@ -463,7 +463,6 @@ public class ProductFeedUploadError extends APINode {
       "attribute",
       "params",
       "type",
-      "id",
     };
 
     @Override
@@ -574,13 +573,6 @@ public class ProductFeedUploadError extends APINode {
     }
     public APIRequestGetSuggestedRules requestTypeField (boolean value) {
       this.requestField("type", value);
-      return this;
-    }
-    public APIRequestGetSuggestedRules requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetSuggestedRules requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }

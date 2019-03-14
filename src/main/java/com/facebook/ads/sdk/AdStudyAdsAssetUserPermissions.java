@@ -75,15 +75,13 @@ public class AdStudyAdsAssetUserPermissions extends APINode {
   private String mUpdatedTime = null;
   @SerializedName("user")
   private User mUser = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdStudyAdsAssetUserPermissions() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdStudyAdsAssetUserPermissions loadJSON(String json, APIContext context, String header) {
     AdStudyAdsAssetUserPermissions adStudyAdsAssetUserPermissions = getGson().fromJson(json, AdStudyAdsAssetUserPermissions.class);
@@ -350,15 +348,6 @@ public class AdStudyAdsAssetUserPermissions extends APINode {
     this.mUser = User.getGson().fromJson(value, type);
     return this;
   }
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdStudyAdsAssetUserPermissions setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -386,7 +375,6 @@ public class AdStudyAdsAssetUserPermissions extends APINode {
     this.mUpdatedBy = instance.mUpdatedBy;
     this.mUpdatedTime = instance.mUpdatedTime;
     this.mUser = instance.mUser;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

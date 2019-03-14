@@ -61,15 +61,13 @@ public class LeadGenConditionalQuestionsGroupQuestions extends APINode {
   private String mInputType = null;
   @SerializedName("name")
   private String mName = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public LeadGenConditionalQuestionsGroupQuestions() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static LeadGenConditionalQuestionsGroupQuestions loadJSON(String json, APIContext context, String header) {
     LeadGenConditionalQuestionsGroupQuestions leadGenConditionalQuestionsGroupQuestions = getGson().fromJson(json, LeadGenConditionalQuestionsGroupQuestions.class);
@@ -241,15 +239,6 @@ public class LeadGenConditionalQuestionsGroupQuestions extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public LeadGenConditionalQuestionsGroupQuestions setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -270,7 +259,6 @@ public class LeadGenConditionalQuestionsGroupQuestions extends APINode {
     this.mFieldKey = instance.mFieldKey;
     this.mInputType = instance.mInputType;
     this.mName = instance.mName;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

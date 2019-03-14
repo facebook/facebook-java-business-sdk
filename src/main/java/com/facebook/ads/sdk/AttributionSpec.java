@@ -59,15 +59,13 @@ public class AttributionSpec extends APINode {
   private String mEventType = null;
   @SerializedName("window_days")
   private Long mWindowDays = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AttributionSpec() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AttributionSpec loadJSON(String json, APIContext context, String header) {
     AttributionSpec attributionSpec = getGson().fromJson(json, AttributionSpec.class);
@@ -230,15 +228,6 @@ public class AttributionSpec extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AttributionSpec setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -258,7 +247,6 @@ public class AttributionSpec extends APINode {
   public AttributionSpec copyFrom(AttributionSpec instance) {
     this.mEventType = instance.mEventType;
     this.mWindowDays = instance.mWindowDays;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -67,15 +67,13 @@ public class ReachFrequencyCurveUpperConfidenceRange extends APINode {
   private List<Long> mUniqVideoViews2sUpper = null;
   @SerializedName("video_views_2s_upper")
   private List<Long> mVideoViews2sUpper = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public ReachFrequencyCurveUpperConfidenceRange() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static ReachFrequencyCurveUpperConfidenceRange loadJSON(String json, APIContext context, String header) {
     ReachFrequencyCurveUpperConfidenceRange reachFrequencyCurveUpperConfidenceRange = getGson().fromJson(json, ReachFrequencyCurveUpperConfidenceRange.class);
@@ -274,15 +272,6 @@ public class ReachFrequencyCurveUpperConfidenceRange extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public ReachFrequencyCurveUpperConfidenceRange setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -306,7 +295,6 @@ public class ReachFrequencyCurveUpperConfidenceRange extends APINode {
     this.mReachUpper = instance.mReachUpper;
     this.mUniqVideoViews2sUpper = instance.mUniqVideoViews2sUpper;
     this.mVideoViews2sUpper = instance.mVideoViews2sUpper;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

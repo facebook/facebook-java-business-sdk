@@ -69,15 +69,13 @@ public class BusinessMatchedSearchApplicationsEdgeData extends APINode {
   private String mUniqueId = null;
   @SerializedName("url")
   private String mUrl = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public BusinessMatchedSearchApplicationsEdgeData() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static BusinessMatchedSearchApplicationsEdgeData loadJSON(String json, APIContext context, String header) {
     BusinessMatchedSearchApplicationsEdgeData businessMatchedSearchApplicationsEdgeData = getGson().fromJson(json, BusinessMatchedSearchApplicationsEdgeData.class);
@@ -285,15 +283,6 @@ public class BusinessMatchedSearchApplicationsEdgeData extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public BusinessMatchedSearchApplicationsEdgeData setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumAppStore {
@@ -357,7 +346,6 @@ public class BusinessMatchedSearchApplicationsEdgeData extends APINode {
     this.mStore = instance.mStore;
     this.mUniqueId = instance.mUniqueId;
     this.mUrl = instance.mUrl;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

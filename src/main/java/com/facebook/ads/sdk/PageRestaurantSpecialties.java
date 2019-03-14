@@ -65,15 +65,13 @@ public class PageRestaurantSpecialties extends APINode {
   private Long mDrinks = null;
   @SerializedName("lunch")
   private Long mLunch = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public PageRestaurantSpecialties() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static PageRestaurantSpecialties loadJSON(String json, APIContext context, String header) {
     PageRestaurantSpecialties pageRestaurantSpecialties = getGson().fromJson(json, PageRestaurantSpecialties.class);
@@ -263,15 +261,6 @@ public class PageRestaurantSpecialties extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public PageRestaurantSpecialties setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -294,7 +283,6 @@ public class PageRestaurantSpecialties extends APINode {
     this.mDinner = instance.mDinner;
     this.mDrinks = instance.mDrinks;
     this.mLunch = instance.mLunch;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

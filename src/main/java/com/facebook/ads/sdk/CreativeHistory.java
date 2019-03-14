@@ -59,15 +59,13 @@ public class CreativeHistory extends APINode {
   private Long mCreativeFingerprint = null;
   @SerializedName("time_ranges")
   private List<Object> mTimeRanges = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public CreativeHistory() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static CreativeHistory loadJSON(String json, APIContext context, String header) {
     CreativeHistory creativeHistory = getGson().fromJson(json, CreativeHistory.class);
@@ -230,15 +228,6 @@ public class CreativeHistory extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public CreativeHistory setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -258,7 +247,6 @@ public class CreativeHistory extends APINode {
   public CreativeHistory copyFrom(CreativeHistory instance) {
     this.mCreativeFingerprint = instance.mCreativeFingerprint;
     this.mTimeRanges = instance.mTimeRanges;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

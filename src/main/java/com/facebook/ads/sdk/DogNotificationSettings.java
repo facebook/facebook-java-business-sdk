@@ -60,7 +60,7 @@ public class DogNotificationSettings extends APINode {
   @SerializedName("id")
   private String mId = null;
   @SerializedName("subscription_status_per_channel")
-  private List<Object> mSubscriptionStatusPerChannel = null;
+  private Map<String, String> mSubscriptionStatusPerChannel = null;
   protected static Gson gson = null;
 
   DogNotificationSettings() {
@@ -287,7 +287,7 @@ public class DogNotificationSettings extends APINode {
     return mId;
   }
 
-  public List<Object> getFieldSubscriptionStatusPerChannel() {
+  public Map<String, String> getFieldSubscriptionStatusPerChannel() {
     return mSubscriptionStatusPerChannel;
   }
 

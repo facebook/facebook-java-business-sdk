@@ -2270,7 +2270,6 @@ public class Album extends APINode {
       "top",
       "url",
       "width",
-      "id",
     };
 
     @Override
@@ -2441,13 +2440,6 @@ public class Album extends APINode {
     }
     public APIRequestGetPicture requestWidthField (boolean value) {
       this.requestField("width", value);
-      return this;
-    }
-    public APIRequestGetPicture requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetPicture requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }

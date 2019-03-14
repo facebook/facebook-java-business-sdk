@@ -59,15 +59,13 @@ public class VideoUploadLimits extends APINode {
   private Long mLength = null;
   @SerializedName("size")
   private Long mSize = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public VideoUploadLimits() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static VideoUploadLimits loadJSON(String json, APIContext context, String header) {
     VideoUploadLimits videoUploadLimits = getGson().fromJson(json, VideoUploadLimits.class);
@@ -230,15 +228,6 @@ public class VideoUploadLimits extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public VideoUploadLimits setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -258,7 +247,6 @@ public class VideoUploadLimits extends APINode {
   public VideoUploadLimits copyFrom(VideoUploadLimits instance) {
     this.mLength = instance.mLength;
     this.mSize = instance.mSize;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

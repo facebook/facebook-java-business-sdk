@@ -73,15 +73,13 @@ public class ProfilePictureSource extends APINode {
   private String mUrl = null;
   @SerializedName("width")
   private Long mWidth = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public ProfilePictureSource() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static ProfilePictureSource loadJSON(String json, APIContext context, String header) {
     ProfilePictureSource profilePictureSource = getGson().fromJson(json, ProfilePictureSource.class);
@@ -307,15 +305,6 @@ public class ProfilePictureSource extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public ProfilePictureSource setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumType {
@@ -363,7 +352,6 @@ public class ProfilePictureSource extends APINode {
     this.mTop = instance.mTop;
     this.mUrl = instance.mUrl;
     this.mWidth = instance.mWidth;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

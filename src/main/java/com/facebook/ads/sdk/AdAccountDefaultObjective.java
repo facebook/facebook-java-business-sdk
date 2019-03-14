@@ -59,15 +59,13 @@ public class AdAccountDefaultObjective extends APINode {
   private EnumDefaultObjectiveForUser mDefaultObjectiveForUser = null;
   @SerializedName("objective_for_level")
   private EnumObjectiveForLevel mObjectiveForLevel = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdAccountDefaultObjective() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdAccountDefaultObjective loadJSON(String json, APIContext context, String header) {
     AdAccountDefaultObjective adAccountDefaultObjective = getGson().fromJson(json, AdAccountDefaultObjective.class);
@@ -230,15 +228,6 @@ public class AdAccountDefaultObjective extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdAccountDefaultObjective setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumDefaultObjectiveForUser {
@@ -360,7 +349,6 @@ public class AdAccountDefaultObjective extends APINode {
   public AdAccountDefaultObjective copyFrom(AdAccountDefaultObjective instance) {
     this.mDefaultObjectiveForUser = instance.mDefaultObjectiveForUser;
     this.mObjectiveForLevel = instance.mObjectiveForLevel;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

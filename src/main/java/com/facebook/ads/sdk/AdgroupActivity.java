@@ -68,9 +68,9 @@ public class AdgroupActivity extends APINode {
   @SerializedName("bid_amount_old")
   private Long mBidAmountOld = null;
   @SerializedName("bid_info_new")
-  private List<Object> mBidInfoNew = null;
+  private Map<String, Long> mBidInfoNew = null;
   @SerializedName("bid_info_old")
-  private List<Object> mBidInfoOld = null;
+  private Map<String, Long> mBidInfoOld = null;
   @SerializedName("bid_type_new")
   private String mBidTypeNew = null;
   @SerializedName("bid_type_old")
@@ -397,11 +397,11 @@ public class AdgroupActivity extends APINode {
     return mBidAmountOld;
   }
 
-  public List<Object> getFieldBidInfoNew() {
+  public Map<String, Long> getFieldBidInfoNew() {
     return mBidInfoNew;
   }
 
-  public List<Object> getFieldBidInfoOld() {
+  public Map<String, Long> getFieldBidInfoOld() {
     return mBidInfoOld;
   }
 

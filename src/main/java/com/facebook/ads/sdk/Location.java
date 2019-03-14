@@ -81,15 +81,13 @@ public class Location extends APINode {
   private String mStreet = null;
   @SerializedName("zip")
   private String mZip = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public Location() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static Location loadJSON(String json, APIContext context, String header) {
     Location location = getGson().fromJson(json, Location.class);
@@ -351,15 +349,6 @@ public class Location extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public Location setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -390,7 +379,6 @@ public class Location extends APINode {
     this.mState = instance.mState;
     this.mStreet = instance.mStreet;
     this.mZip = instance.mZip;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -91,15 +91,13 @@ public class AdCreativeVideoData extends APINode {
   private String mTitle = null;
   @SerializedName("video_id")
   private String mVideoId = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdCreativeVideoData() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdCreativeVideoData loadJSON(String json, APIContext context, String header) {
     AdCreativeVideoData adCreativeVideoData = getGson().fromJson(json, AdCreativeVideoData.class);
@@ -431,15 +429,6 @@ public class AdCreativeVideoData extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdCreativeVideoData setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -475,7 +464,6 @@ public class AdCreativeVideoData extends APINode {
     this.mTargeting = instance.mTargeting;
     this.mTitle = instance.mTitle;
     this.mVideoId = instance.mVideoId;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

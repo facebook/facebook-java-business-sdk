@@ -59,15 +59,13 @@ public class UserLeadGenDisclaimerResponse extends APINode {
   private String mCheckboxKey = null;
   @SerializedName("is_checked")
   private String mIsChecked = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public UserLeadGenDisclaimerResponse() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static UserLeadGenDisclaimerResponse loadJSON(String json, APIContext context, String header) {
     UserLeadGenDisclaimerResponse userLeadGenDisclaimerResponse = getGson().fromJson(json, UserLeadGenDisclaimerResponse.class);
@@ -230,15 +228,6 @@ public class UserLeadGenDisclaimerResponse extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public UserLeadGenDisclaimerResponse setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -258,7 +247,6 @@ public class UserLeadGenDisclaimerResponse extends APINode {
   public UserLeadGenDisclaimerResponse copyFrom(UserLeadGenDisclaimerResponse instance) {
     this.mCheckboxKey = instance.mCheckboxKey;
     this.mIsChecked = instance.mIsChecked;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

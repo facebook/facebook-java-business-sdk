@@ -63,15 +63,13 @@ public class UserPaymentMobilePricepoints extends APINode {
   private List<Object> mPricepoints = null;
   @SerializedName("user_currency")
   private String mUserCurrency = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public UserPaymentMobilePricepoints() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static UserPaymentMobilePricepoints loadJSON(String json, APIContext context, String header) {
     UserPaymentMobilePricepoints userPaymentMobilePricepoints = getGson().fromJson(json, UserPaymentMobilePricepoints.class);
@@ -252,15 +250,6 @@ public class UserPaymentMobilePricepoints extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public UserPaymentMobilePricepoints setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -282,7 +271,6 @@ public class UserPaymentMobilePricepoints extends APINode {
     this.mPhoneNumberLast4 = instance.mPhoneNumberLast4;
     this.mPricepoints = instance.mPricepoints;
     this.mUserCurrency = instance.mUserCurrency;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

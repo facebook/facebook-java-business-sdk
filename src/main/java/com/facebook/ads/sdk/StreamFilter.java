@@ -61,15 +61,13 @@ public class StreamFilter extends APINode {
   private String mName = null;
   @SerializedName("type")
   private String mType = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public StreamFilter() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static StreamFilter loadJSON(String json, APIContext context, String header) {
     StreamFilter streamFilter = getGson().fromJson(json, StreamFilter.class);
@@ -241,15 +239,6 @@ public class StreamFilter extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public StreamFilter setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -270,7 +259,6 @@ public class StreamFilter extends APINode {
     this.mFilterKey = instance.mFilterKey;
     this.mName = instance.mName;
     this.mType = instance.mType;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

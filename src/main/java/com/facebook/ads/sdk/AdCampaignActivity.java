@@ -72,9 +72,9 @@ public class AdCampaignActivity extends APINode {
   @SerializedName("bid_constraints_old")
   private Object mBidConstraintsOld = null;
   @SerializedName("bid_info_new")
-  private List<Object> mBidInfoNew = null;
+  private Map<String, Long> mBidInfoNew = null;
   @SerializedName("bid_info_old")
-  private List<Object> mBidInfoOld = null;
+  private Map<String, Long> mBidInfoOld = null;
   @SerializedName("bid_strategy_new")
   private EnumBidStrategyNew mBidStrategyNew = null;
   @SerializedName("bid_strategy_old")
@@ -413,11 +413,11 @@ public class AdCampaignActivity extends APINode {
     return mBidConstraintsOld;
   }
 
-  public List<Object> getFieldBidInfoNew() {
+  public Map<String, Long> getFieldBidInfoNew() {
     return mBidInfoNew;
   }
 
-  public List<Object> getFieldBidInfoOld() {
+  public Map<String, Long> getFieldBidInfoOld() {
     return mBidInfoOld;
   }
 

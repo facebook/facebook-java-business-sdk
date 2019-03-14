@@ -522,7 +522,6 @@ public class AdReportRun extends APINode {
       "website_ctr",
       "website_purchase_roas",
       "wish_bid",
-      "id",
     };
 
     @Override
@@ -1571,13 +1570,6 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestWishBidField (boolean value) {
       this.requestField("wish_bid", value);
-      return this;
-    }
-    public APIRequestGetInsights requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetInsights requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }

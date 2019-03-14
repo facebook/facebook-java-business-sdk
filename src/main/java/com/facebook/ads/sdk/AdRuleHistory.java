@@ -71,15 +71,13 @@ public class AdRuleHistory extends APINode {
   private AdRuleScheduleSpec mScheduleSpec = null;
   @SerializedName("timestamp")
   private String mTimestamp = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdRuleHistory() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdRuleHistory loadJSON(String json, APIContext context, String header) {
     AdRuleHistory adRuleHistory = getGson().fromJson(json, AdRuleHistory.class);
@@ -316,15 +314,6 @@ public class AdRuleHistory extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdRuleHistory setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumAction {
@@ -387,7 +376,6 @@ public class AdRuleHistory extends APINode {
     this.mResults = instance.mResults;
     this.mScheduleSpec = instance.mScheduleSpec;
     this.mTimestamp = instance.mTimestamp;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

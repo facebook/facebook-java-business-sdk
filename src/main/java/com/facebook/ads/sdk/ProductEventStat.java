@@ -77,15 +77,13 @@ public class ProductEventStat extends APINode {
   private Long mUniqueMatchedContentIds = null;
   @SerializedName("unique_unmatched_content_ids")
   private Long mUniqueUnmatchedContentIds = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public ProductEventStat() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static ProductEventStat loadJSON(String json, APIContext context, String header) {
     ProductEventStat productEventStat = getGson().fromJson(json, ProductEventStat.class);
@@ -337,15 +335,6 @@ public class ProductEventStat extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public ProductEventStat setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumDeviceType {
@@ -455,7 +444,6 @@ public class ProductEventStat extends APINode {
     this.mUniqueContentIdsMatchedOtherCatalogs = instance.mUniqueContentIdsMatchedOtherCatalogs;
     this.mUniqueMatchedContentIds = instance.mUniqueMatchedContentIds;
     this.mUniqueUnmatchedContentIds = instance.mUniqueUnmatchedContentIds;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

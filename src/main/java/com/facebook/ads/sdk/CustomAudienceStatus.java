@@ -59,15 +59,13 @@ public class CustomAudienceStatus extends APINode {
   private Long mCode = null;
   @SerializedName("description")
   private String mDescription = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public CustomAudienceStatus() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static CustomAudienceStatus loadJSON(String json, APIContext context, String header) {
     CustomAudienceStatus customAudienceStatus = getGson().fromJson(json, CustomAudienceStatus.class);
@@ -230,15 +228,6 @@ public class CustomAudienceStatus extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public CustomAudienceStatus setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -258,7 +247,6 @@ public class CustomAudienceStatus extends APINode {
   public CustomAudienceStatus copyFrom(CustomAudienceStatus instance) {
     this.mCode = instance.mCode;
     this.mDescription = instance.mDescription;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

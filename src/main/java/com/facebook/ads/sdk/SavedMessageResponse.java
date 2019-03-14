@@ -333,7 +333,6 @@ public class SavedMessageResponse extends APINode {
       "length",
       "macro",
       "offset",
-      "id",
     };
 
     @Override
@@ -444,13 +443,6 @@ public class SavedMessageResponse extends APINode {
     }
     public APIRequestGetMacros requestOffsetField (boolean value) {
       this.requestField("offset", value);
-      return this;
-    }
-    public APIRequestGetMacros requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetMacros requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }

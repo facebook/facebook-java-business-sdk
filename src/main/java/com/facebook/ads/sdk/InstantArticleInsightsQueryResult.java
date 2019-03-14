@@ -63,15 +63,13 @@ public class InstantArticleInsightsQueryResult extends APINode {
   private String mTime = null;
   @SerializedName("value")
   private String mValue = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public InstantArticleInsightsQueryResult() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static InstantArticleInsightsQueryResult loadJSON(String json, APIContext context, String header) {
     InstantArticleInsightsQueryResult instantArticleInsightsQueryResult = getGson().fromJson(json, InstantArticleInsightsQueryResult.class);
@@ -252,15 +250,6 @@ public class InstantArticleInsightsQueryResult extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public InstantArticleInsightsQueryResult setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumBreakdown {
@@ -340,7 +329,6 @@ public class InstantArticleInsightsQueryResult extends APINode {
     this.mName = instance.mName;
     this.mTime = instance.mTime;
     this.mValue = instance.mValue;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

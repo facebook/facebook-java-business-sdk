@@ -57,15 +57,13 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class CatalogBasedTargeting extends APINode {
   @SerializedName("geo_targeting_type")
   private String mGeoTargetingType = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public CatalogBasedTargeting() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static CatalogBasedTargeting loadJSON(String json, APIContext context, String header) {
     CatalogBasedTargeting catalogBasedTargeting = getGson().fromJson(json, CatalogBasedTargeting.class);
@@ -219,15 +217,6 @@ public class CatalogBasedTargeting extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public CatalogBasedTargeting setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -246,7 +235,6 @@ public class CatalogBasedTargeting extends APINode {
 
   public CatalogBasedTargeting copyFrom(CatalogBasedTargeting instance) {
     this.mGeoTargetingType = instance.mGeoTargetingType;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

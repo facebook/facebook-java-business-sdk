@@ -59,15 +59,13 @@ public class UserLeadGenFieldData extends APINode {
   private String mName = null;
   @SerializedName("values")
   private List<String> mValues = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public UserLeadGenFieldData() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static UserLeadGenFieldData loadJSON(String json, APIContext context, String header) {
     UserLeadGenFieldData userLeadGenFieldData = getGson().fromJson(json, UserLeadGenFieldData.class);
@@ -230,15 +228,6 @@ public class UserLeadGenFieldData extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public UserLeadGenFieldData setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -258,7 +247,6 @@ public class UserLeadGenFieldData extends APINode {
   public UserLeadGenFieldData copyFrom(UserLeadGenFieldData instance) {
     this.mName = instance.mName;
     this.mValues = instance.mValues;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

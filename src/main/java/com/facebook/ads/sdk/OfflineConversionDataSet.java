@@ -762,6 +762,7 @@ public class OfflineConversionDataSet extends APINode {
       "end_advertiser_name",
       "extended_credit_invoice_group",
       "failed_delivery_checks",
+      "fb_entity",
       "funding_source",
       "funding_source_details",
       "has_migrated_permissions",
@@ -1072,6 +1073,13 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetAdAccounts requestFailedDeliveryChecksField (boolean value) {
       this.requestField("failed_delivery_checks", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestFbEntityField () {
+      return this.requestFbEntityField(true);
+    }
+    public APIRequestGetAdAccounts requestFbEntityField (boolean value) {
+      this.requestField("fb_entity", value);
       return this;
     }
     public APIRequestGetAdAccounts requestFundingSourceField () {
@@ -2364,6 +2372,7 @@ public class OfflineConversionDataSet extends APINode {
       "first_fired_time",
       "id",
       "is_archived",
+      "is_unavailable",
       "last_fired_time",
       "name",
       "offline_conversion_data_set",
@@ -2550,6 +2559,13 @@ public class OfflineConversionDataSet extends APINode {
       this.requestField("is_archived", value);
       return this;
     }
+    public APIRequestGetCustomConversions requestIsUnavailableField () {
+      return this.requestIsUnavailableField(true);
+    }
+    public APIRequestGetCustomConversions requestIsUnavailableField (boolean value) {
+      this.requestField("is_unavailable", value);
+      return this;
+    }
     public APIRequestGetCustomConversions requestLastFiredTimeField () {
       return this.requestLastFiredTimeField(true);
     }
@@ -2612,7 +2628,6 @@ public class OfflineConversionDataSet extends APINode {
       "result",
       "title",
       "user_message",
-      "id",
     };
 
     @Override
@@ -2753,13 +2768,6 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetDaChecks requestUserMessageField (boolean value) {
       this.requestField("user_message", value);
-      return this;
-    }
-    public APIRequestGetDaChecks requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetDaChecks requestIdField (boolean value) {
-      this.requestField("id", value);
       return this;
     }
   }

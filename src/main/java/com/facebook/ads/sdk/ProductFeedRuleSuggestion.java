@@ -58,18 +58,16 @@ public class ProductFeedRuleSuggestion extends APINode {
   @SerializedName("attribute")
   private String mAttribute = null;
   @SerializedName("params")
-  private List<Object> mParams = null;
+  private Map<String, String> mParams = null;
   @SerializedName("type")
   private String mType = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public ProductFeedRuleSuggestion() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static ProductFeedRuleSuggestion loadJSON(String json, APIContext context, String header) {
     ProductFeedRuleSuggestion productFeedRuleSuggestion = getGson().fromJson(json, ProductFeedRuleSuggestion.class);
@@ -223,11 +221,11 @@ public class ProductFeedRuleSuggestion extends APINode {
     return this;
   }
 
-  public List<Object> getFieldParams() {
+  public Map<String, String> getFieldParams() {
     return mParams;
   }
 
-  public ProductFeedRuleSuggestion setFieldParams(List<Object> value) {
+  public ProductFeedRuleSuggestion setFieldParams(Map<String, String> value) {
     this.mParams = value;
     return this;
   }
@@ -238,15 +236,6 @@ public class ProductFeedRuleSuggestion extends APINode {
 
   public ProductFeedRuleSuggestion setFieldType(String value) {
     this.mType = value;
-    return this;
-  }
-
-  public String getFieldId() {
-    return mId;
-  }
-
-  public ProductFeedRuleSuggestion setFieldId(String value) {
-    this.mId = value;
     return this;
   }
 
@@ -270,7 +259,6 @@ public class ProductFeedRuleSuggestion extends APINode {
     this.mAttribute = instance.mAttribute;
     this.mParams = instance.mParams;
     this.mType = instance.mType;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

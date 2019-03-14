@@ -57,15 +57,13 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdDynamicCreative extends APINode {
   @SerializedName("preview_url")
   private String mPreviewUrl = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdDynamicCreative() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdDynamicCreative loadJSON(String json, APIContext context, String header) {
     AdDynamicCreative adDynamicCreative = getGson().fromJson(json, AdDynamicCreative.class);
@@ -219,15 +217,6 @@ public class AdDynamicCreative extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdDynamicCreative setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -246,7 +235,6 @@ public class AdDynamicCreative extends APINode {
 
   public AdDynamicCreative copyFrom(AdDynamicCreative instance) {
     this.mPreviewUrl = instance.mPreviewUrl;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -61,15 +61,13 @@ public class PageParking extends APINode {
   private Long mStreet = null;
   @SerializedName("valet")
   private Long mValet = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public PageParking() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static PageParking loadJSON(String json, APIContext context, String header) {
     PageParking pageParking = getGson().fromJson(json, PageParking.class);
@@ -241,15 +239,6 @@ public class PageParking extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public PageParking setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -270,7 +259,6 @@ public class PageParking extends APINode {
     this.mLot = instance.mLot;
     this.mStreet = instance.mStreet;
     this.mValet = instance.mValet;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

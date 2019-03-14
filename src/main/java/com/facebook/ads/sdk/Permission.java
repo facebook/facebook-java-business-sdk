@@ -59,15 +59,13 @@ public class Permission extends APINode {
   private String mPermission = null;
   @SerializedName("status")
   private String mStatus = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public Permission() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static Permission loadJSON(String json, APIContext context, String header) {
     Permission permission = getGson().fromJson(json, Permission.class);
@@ -230,20 +228,13 @@ public class Permission extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public Permission setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
   public static enum EnumStatus {
       @SerializedName("declined")
       VALUE_DECLINED("declined"),
+      @SerializedName("expired")
+      VALUE_EXPIRED("expired"),
       @SerializedName("granted")
       VALUE_GRANTED("granted"),
       NULL(null);
@@ -277,7 +268,6 @@ public class Permission extends APINode {
   public Permission copyFrom(Permission instance) {
     this.mPermission = instance.mPermission;
     this.mStatus = instance.mStatus;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

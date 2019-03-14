@@ -59,15 +59,13 @@ public class AdsTALHealthCheckError extends APINode {
   private Long mErrorCode = null;
   @SerializedName("target_id")
   private String mTargetId = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdsTALHealthCheckError() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdsTALHealthCheckError loadJSON(String json, APIContext context, String header) {
     AdsTALHealthCheckError adsTALHealthCheckError = getGson().fromJson(json, AdsTALHealthCheckError.class);
@@ -230,15 +228,6 @@ public class AdsTALHealthCheckError extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdsTALHealthCheckError setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -258,7 +247,6 @@ public class AdsTALHealthCheckError extends APINode {
   public AdsTALHealthCheckError copyFrom(AdsTALHealthCheckError instance) {
     this.mErrorCode = instance.mErrorCode;
     this.mTargetId = instance.mTargetId;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

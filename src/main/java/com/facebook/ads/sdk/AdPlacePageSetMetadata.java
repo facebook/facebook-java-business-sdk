@@ -61,15 +61,13 @@ public class AdPlacePageSetMetadata extends APINode {
   private String mExtraData = null;
   @SerializedName("fixed_radius")
   private Object mFixedRadius = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdPlacePageSetMetadata() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdPlacePageSetMetadata loadJSON(String json, APIContext context, String header) {
     AdPlacePageSetMetadata adPlacePageSetMetadata = getGson().fromJson(json, AdPlacePageSetMetadata.class);
@@ -241,15 +239,6 @@ public class AdPlacePageSetMetadata extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdPlacePageSetMetadata setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -270,7 +259,6 @@ public class AdPlacePageSetMetadata extends APINode {
     this.mAudience = instance.mAudience;
     this.mExtraData = instance.mExtraData;
     this.mFixedRadius = instance.mFixedRadius;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -102,7 +102,7 @@ public class LeadgenForm extends APINode {
   @SerializedName("privacy_policy_url")
   private String mPrivacyPolicyUrl = null;
   @SerializedName("qualifiers")
-  private List<LeadGenQualifier> mQualifiers = null;
+  private List<Object> mQualifiers = null;
   @SerializedName("question_page_custom_headline")
   private String mQuestionPageCustomHeadline = null;
   @SerializedName("questions")
@@ -114,7 +114,7 @@ public class LeadgenForm extends APINode {
   @SerializedName("thank_you_page")
   private Object mThankYouPage = null;
   @SerializedName("tracking_parameters")
-  private List<Object> mTrackingParameters = null;
+  private Map<String, String> mTrackingParameters = null;
   protected static Gson gson = null;
 
   LeadgenForm() {
@@ -457,7 +457,7 @@ public class LeadgenForm extends APINode {
     return mPrivacyPolicyUrl;
   }
 
-  public List<LeadGenQualifier> getFieldQualifiers() {
+  public List<Object> getFieldQualifiers() {
     return mQualifiers;
   }
 
@@ -481,7 +481,7 @@ public class LeadgenForm extends APINode {
     return mThankYouPage;
   }
 
-  public List<Object> getFieldTrackingParameters() {
+  public Map<String, String> getFieldTrackingParameters() {
     return mTrackingParameters;
   }
 

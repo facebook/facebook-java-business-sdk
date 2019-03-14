@@ -57,15 +57,13 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdCreativeDegreesOfFreedomSpec extends APINode {
   @SerializedName("degrees_of_freedom_type")
   private String mDegreesOfFreedomType = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdCreativeDegreesOfFreedomSpec() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdCreativeDegreesOfFreedomSpec loadJSON(String json, APIContext context, String header) {
     AdCreativeDegreesOfFreedomSpec adCreativeDegreesOfFreedomSpec = getGson().fromJson(json, AdCreativeDegreesOfFreedomSpec.class);
@@ -219,15 +217,6 @@ public class AdCreativeDegreesOfFreedomSpec extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdCreativeDegreesOfFreedomSpec setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -246,7 +235,6 @@ public class AdCreativeDegreesOfFreedomSpec extends APINode {
 
   public AdCreativeDegreesOfFreedomSpec copyFrom(AdCreativeDegreesOfFreedomSpec instance) {
     this.mDegreesOfFreedomType = instance.mDegreesOfFreedomType;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -57,15 +57,13 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdAccountTrackingData extends APINode {
   @SerializedName("tracking_specs")
   private ConversionActionQuery mTrackingSpecs = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdAccountTrackingData() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdAccountTrackingData loadJSON(String json, APIContext context, String header) {
     AdAccountTrackingData adAccountTrackingData = getGson().fromJson(json, AdAccountTrackingData.class);
@@ -224,15 +222,6 @@ public class AdAccountTrackingData extends APINode {
     this.mTrackingSpecs = ConversionActionQuery.getGson().fromJson(value, type);
     return this;
   }
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdAccountTrackingData setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -251,7 +240,6 @@ public class AdAccountTrackingData extends APINode {
 
   public AdAccountTrackingData copyFrom(AdAccountTrackingData instance) {
     this.mTrackingSpecs = instance.mTrackingSpecs;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

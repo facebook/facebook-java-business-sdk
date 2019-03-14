@@ -56,18 +56,16 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  */
 public class AdCampaignDeliveryStatsUnsupportedReasons extends APINode {
   @SerializedName("reason_data")
-  private List<Object> mReasonData = null;
+  private Map<String, String> mReasonData = null;
   @SerializedName("reason_type")
   private String mReasonType = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdCampaignDeliveryStatsUnsupportedReasons() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdCampaignDeliveryStatsUnsupportedReasons loadJSON(String json, APIContext context, String header) {
     AdCampaignDeliveryStatsUnsupportedReasons adCampaignDeliveryStatsUnsupportedReasons = getGson().fromJson(json, AdCampaignDeliveryStatsUnsupportedReasons.class);
@@ -212,11 +210,11 @@ public class AdCampaignDeliveryStatsUnsupportedReasons extends APINode {
   }
 
 
-  public List<Object> getFieldReasonData() {
+  public Map<String, String> getFieldReasonData() {
     return mReasonData;
   }
 
-  public AdCampaignDeliveryStatsUnsupportedReasons setFieldReasonData(List<Object> value) {
+  public AdCampaignDeliveryStatsUnsupportedReasons setFieldReasonData(Map<String, String> value) {
     this.mReasonData = value;
     return this;
   }
@@ -227,15 +225,6 @@ public class AdCampaignDeliveryStatsUnsupportedReasons extends APINode {
 
   public AdCampaignDeliveryStatsUnsupportedReasons setFieldReasonType(String value) {
     this.mReasonType = value;
-    return this;
-  }
-
-  public String getFieldId() {
-    return mId;
-  }
-
-  public AdCampaignDeliveryStatsUnsupportedReasons setFieldId(String value) {
-    this.mId = value;
     return this;
   }
 
@@ -258,7 +247,6 @@ public class AdCampaignDeliveryStatsUnsupportedReasons extends APINode {
   public AdCampaignDeliveryStatsUnsupportedReasons copyFrom(AdCampaignDeliveryStatsUnsupportedReasons instance) {
     this.mReasonData = instance.mReasonData;
     this.mReasonType = instance.mReasonType;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

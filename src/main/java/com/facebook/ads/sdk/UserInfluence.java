@@ -61,15 +61,13 @@ public class UserInfluence extends APINode {
   private Long mTrustCode = null;
   @SerializedName("version")
   private Long mVersion = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public UserInfluence() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static UserInfluence loadJSON(String json, APIContext context, String header) {
     UserInfluence userInfluence = getGson().fromJson(json, UserInfluence.class);
@@ -241,15 +239,6 @@ public class UserInfluence extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
-  }
-
-  public UserInfluence setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
 
 
 
@@ -270,7 +259,6 @@ public class UserInfluence extends APINode {
     this.mTrust = instance.mTrust;
     this.mTrustCode = instance.mTrustCode;
     this.mVersion = instance.mVersion;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

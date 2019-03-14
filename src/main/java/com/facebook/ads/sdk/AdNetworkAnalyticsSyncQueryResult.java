@@ -59,15 +59,13 @@ public class AdNetworkAnalyticsSyncQueryResult extends APINode {
   private String mQueryId = null;
   @SerializedName("results")
   private List<Object> mResults = null;
-  @SerializedName("id")
-  private String mId = null;
   protected static Gson gson = null;
 
   public AdNetworkAnalyticsSyncQueryResult() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
   public static AdNetworkAnalyticsSyncQueryResult loadJSON(String json, APIContext context, String header) {
     AdNetworkAnalyticsSyncQueryResult adNetworkAnalyticsSyncQueryResult = getGson().fromJson(json, AdNetworkAnalyticsSyncQueryResult.class);
@@ -230,16 +228,164 @@ public class AdNetworkAnalyticsSyncQueryResult extends APINode {
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
+
+
+  public static enum EnumAggregationPeriod {
+      @SerializedName("DAY")
+      VALUE_DAY("DAY"),
+      @SerializedName("TOTAL")
+      VALUE_TOTAL("TOTAL"),
+      NULL(null);
+
+      private String value;
+
+      private EnumAggregationPeriod(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
-  public AdNetworkAnalyticsSyncQueryResult setFieldId(String value) {
-    this.mId = value;
-    return this;
+  public static enum EnumBreakdowns {
+      @SerializedName("AGE")
+      VALUE_AGE("AGE"),
+      @SerializedName("APP")
+      VALUE_APP("APP"),
+      @SerializedName("CLICKED_VIEW_TAG")
+      VALUE_CLICKED_VIEW_TAG("CLICKED_VIEW_TAG"),
+      @SerializedName("COUNTRY")
+      VALUE_COUNTRY("COUNTRY"),
+      @SerializedName("DEAL")
+      VALUE_DEAL("DEAL"),
+      @SerializedName("DEAL_AD")
+      VALUE_DEAL_AD("DEAL_AD"),
+      @SerializedName("DEAL_PAGE")
+      VALUE_DEAL_PAGE("DEAL_PAGE"),
+      @SerializedName("DELIVERY_METHOD")
+      VALUE_DELIVERY_METHOD("DELIVERY_METHOD"),
+      @SerializedName("DISPLAY_FORMAT")
+      VALUE_DISPLAY_FORMAT("DISPLAY_FORMAT"),
+      @SerializedName("FAIL_REASON")
+      VALUE_FAIL_REASON("FAIL_REASON"),
+      @SerializedName("GENDER")
+      VALUE_GENDER("GENDER"),
+      @SerializedName("PLACEMENT")
+      VALUE_PLACEMENT("PLACEMENT"),
+      @SerializedName("PLATFORM")
+      VALUE_PLATFORM("PLATFORM"),
+      @SerializedName("PROPERTY")
+      VALUE_PROPERTY("PROPERTY"),
+      @SerializedName("SDK_VERSION")
+      VALUE_SDK_VERSION("SDK_VERSION"),
+      NULL(null);
+
+      private String value;
+
+      private EnumBreakdowns(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
+  public static enum EnumMetrics {
+      @SerializedName("FB_AD_NETWORK_BIDDING_BID_RATE")
+      VALUE_FB_AD_NETWORK_BIDDING_BID_RATE("FB_AD_NETWORK_BIDDING_BID_RATE"),
+      @SerializedName("FB_AD_NETWORK_BIDDING_REQUEST")
+      VALUE_FB_AD_NETWORK_BIDDING_REQUEST("FB_AD_NETWORK_BIDDING_REQUEST"),
+      @SerializedName("FB_AD_NETWORK_BIDDING_RESPONSE")
+      VALUE_FB_AD_NETWORK_BIDDING_RESPONSE("FB_AD_NETWORK_BIDDING_RESPONSE"),
+      @SerializedName("FB_AD_NETWORK_BIDDING_REVENUE")
+      VALUE_FB_AD_NETWORK_BIDDING_REVENUE("FB_AD_NETWORK_BIDDING_REVENUE"),
+      @SerializedName("FB_AD_NETWORK_BIDDING_WIN_RATE")
+      VALUE_FB_AD_NETWORK_BIDDING_WIN_RATE("FB_AD_NETWORK_BIDDING_WIN_RATE"),
+      @SerializedName("FB_AD_NETWORK_CLICK")
+      VALUE_FB_AD_NETWORK_CLICK("FB_AD_NETWORK_CLICK"),
+      @SerializedName("FB_AD_NETWORK_CPM")
+      VALUE_FB_AD_NETWORK_CPM("FB_AD_NETWORK_CPM"),
+      @SerializedName("FB_AD_NETWORK_CTR")
+      VALUE_FB_AD_NETWORK_CTR("FB_AD_NETWORK_CTR"),
+      @SerializedName("FB_AD_NETWORK_FILLED_REQUEST")
+      VALUE_FB_AD_NETWORK_FILLED_REQUEST("FB_AD_NETWORK_FILLED_REQUEST"),
+      @SerializedName("FB_AD_NETWORK_FILL_RATE")
+      VALUE_FB_AD_NETWORK_FILL_RATE("FB_AD_NETWORK_FILL_RATE"),
+      @SerializedName("FB_AD_NETWORK_IMP")
+      VALUE_FB_AD_NETWORK_IMP("FB_AD_NETWORK_IMP"),
+      @SerializedName("FB_AD_NETWORK_REQUEST")
+      VALUE_FB_AD_NETWORK_REQUEST("FB_AD_NETWORK_REQUEST"),
+      @SerializedName("FB_AD_NETWORK_REVENUE")
+      VALUE_FB_AD_NETWORK_REVENUE("FB_AD_NETWORK_REVENUE"),
+      @SerializedName("FB_AD_NETWORK_SHOW_RATE")
+      VALUE_FB_AD_NETWORK_SHOW_RATE("FB_AD_NETWORK_SHOW_RATE"),
+      @SerializedName("FB_AD_NETWORK_VIDEO_GUARANTEE_REVENUE")
+      VALUE_FB_AD_NETWORK_VIDEO_GUARANTEE_REVENUE("FB_AD_NETWORK_VIDEO_GUARANTEE_REVENUE"),
+      @SerializedName("FB_AD_NETWORK_VIDEO_MRC")
+      VALUE_FB_AD_NETWORK_VIDEO_MRC("FB_AD_NETWORK_VIDEO_MRC"),
+      @SerializedName("FB_AD_NETWORK_VIDEO_MRC_RATE")
+      VALUE_FB_AD_NETWORK_VIDEO_MRC_RATE("FB_AD_NETWORK_VIDEO_MRC_RATE"),
+      @SerializedName("FB_AD_NETWORK_VIDEO_VIEW")
+      VALUE_FB_AD_NETWORK_VIDEO_VIEW("FB_AD_NETWORK_VIDEO_VIEW"),
+      @SerializedName("FB_AD_NETWORK_VIDEO_VIEW_RATE")
+      VALUE_FB_AD_NETWORK_VIDEO_VIEW_RATE("FB_AD_NETWORK_VIDEO_VIEW_RATE"),
+      NULL(null);
 
+      private String value;
+
+      private EnumMetrics(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumOrderingColumn {
+      @SerializedName("METRIC")
+      VALUE_METRIC("METRIC"),
+      @SerializedName("TIME")
+      VALUE_TIME("TIME"),
+      @SerializedName("VALUE")
+      VALUE_VALUE("VALUE"),
+      NULL(null);
+
+      private String value;
+
+      private EnumOrderingColumn(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumOrderingType {
+      @SerializedName("ASCENDING")
+      VALUE_ASCENDING("ASCENDING"),
+      @SerializedName("DESCENDING")
+      VALUE_DESCENDING("DESCENDING"),
+      NULL(null);
+
+      private String value;
+
+      private EnumOrderingType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -258,7 +404,6 @@ public class AdNetworkAnalyticsSyncQueryResult extends APINode {
   public AdNetworkAnalyticsSyncQueryResult copyFrom(AdNetworkAnalyticsSyncQueryResult instance) {
     this.mQueryId = instance.mQueryId;
     this.mResults = instance.mResults;
-    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

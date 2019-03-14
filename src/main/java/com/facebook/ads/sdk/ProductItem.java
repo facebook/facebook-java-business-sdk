@@ -56,11 +56,11 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  */
 public class ProductItem extends APINode {
   @SerializedName("additional_image_cdn_urls")
-  private List<List<Object>> mAdditionalImageCdnUrls = null;
+  private List<Map<String, String>> mAdditionalImageCdnUrls = null;
   @SerializedName("additional_image_urls")
   private List<String> mAdditionalImageUrls = null;
   @SerializedName("additional_variant_attributes")
-  private List<Object> mAdditionalVariantAttributes = null;
+  private Map<String, String> mAdditionalVariantAttributes = null;
   @SerializedName("age_group")
   private EnumAgeGroup mAgeGroup = null;
   @SerializedName("applinks")
@@ -70,7 +70,7 @@ public class ProductItem extends APINode {
   @SerializedName("brand")
   private String mBrand = null;
   @SerializedName("capability_to_review_status")
-  private List<Object> mCapabilityToReviewStatus = null;
+  private Map<Object, Object> mCapabilityToReviewStatus = null;
   @SerializedName("category")
   private String mCategory = null;
   @SerializedName("color")
@@ -82,7 +82,7 @@ public class ProductItem extends APINode {
   @SerializedName("currency")
   private String mCurrency = null;
   @SerializedName("custom_data")
-  private List<Object> mCustomData = null;
+  private Map<String, String> mCustomData = null;
   @SerializedName("custom_label_0")
   private String mCustomLabel0 = null;
   @SerializedName("custom_label_1")
@@ -104,7 +104,7 @@ public class ProductItem extends APINode {
   @SerializedName("id")
   private String mId = null;
   @SerializedName("image_cdn_urls")
-  private List<Object> mImageCdnUrls = null;
+  private Map<String, String> mImageCdnUrls = null;
   @SerializedName("image_url")
   private String mImageUrl = null;
   @SerializedName("inventory")
@@ -389,7 +389,7 @@ public class ProductItem extends APINode {
   }
 
 
-  public List<List<Object>> getFieldAdditionalImageCdnUrls() {
+  public List<Map<String, String>> getFieldAdditionalImageCdnUrls() {
     return mAdditionalImageCdnUrls;
   }
 
@@ -397,7 +397,7 @@ public class ProductItem extends APINode {
     return mAdditionalImageUrls;
   }
 
-  public List<Object> getFieldAdditionalVariantAttributes() {
+  public Map<String, String> getFieldAdditionalVariantAttributes() {
     return mAdditionalVariantAttributes;
   }
 
@@ -420,7 +420,7 @@ public class ProductItem extends APINode {
     return mBrand;
   }
 
-  public List<Object> getFieldCapabilityToReviewStatus() {
+  public Map<Object, Object> getFieldCapabilityToReviewStatus() {
     return mCapabilityToReviewStatus;
   }
 
@@ -444,7 +444,7 @@ public class ProductItem extends APINode {
     return mCurrency;
   }
 
-  public List<Object> getFieldCustomData() {
+  public Map<String, String> getFieldCustomData() {
     return mCustomData;
   }
 
@@ -488,7 +488,7 @@ public class ProductItem extends APINode {
     return mId;
   }
 
-  public List<Object> getFieldImageCdnUrls() {
+  public Map<String, String> getFieldImageCdnUrls() {
     return mImageCdnUrls;
   }
 
