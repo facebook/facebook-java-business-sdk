@@ -1365,6 +1365,8 @@ public class Vehicle extends APINode {
       VALUE_OTHER("OTHER"),
       @SerializedName("SEDAN")
       VALUE_SEDAN("SEDAN"),
+      @SerializedName("SMALL_CAR")
+      VALUE_SMALL_CAR("SMALL_CAR"),
       @SerializedName("SUV")
       VALUE_SUV("SUV"),
       @SerializedName("TRUCK")

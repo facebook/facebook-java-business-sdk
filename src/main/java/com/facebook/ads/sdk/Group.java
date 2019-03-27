@@ -5426,6 +5426,7 @@ public class Group extends APINode {
     }
     public static final String[] PARAMS = {
       "aid",
+      "alt_text_custom",
       "caption",
       "url",
       "uid",
@@ -5535,6 +5536,11 @@ public class Group extends APINode {
 
     public APIRequestCreatePhoto setAid (String aid) {
       this.setParam("aid", aid);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setAltTextCustom (String altTextCustom) {
+      this.setParam("alt_text_custom", altTextCustom);
       return this;
     }
 
@@ -7804,6 +7810,8 @@ public class Group extends APINode {
       VALUE_FRATERNITY("FRATERNITY"),
       @SerializedName("GAME")
       VALUE_GAME("GAME"),
+      @SerializedName("HEALTH")
+      VALUE_HEALTH("HEALTH"),
       @SerializedName("HIGH_SCHOOL_FORUM")
       VALUE_HIGH_SCHOOL_FORUM("HIGH_SCHOOL_FORUM"),
       @SerializedName("JOBS")
@@ -7947,6 +7955,8 @@ public class Group extends APINode {
       VALUE_FRATERNITY("FRATERNITY"),
       @SerializedName("GAME")
       VALUE_GAME("GAME"),
+      @SerializedName("HEALTH")
+      VALUE_HEALTH("HEALTH"),
       @SerializedName("HIGH_SCHOOL_FORUM")
       VALUE_HIGH_SCHOOL_FORUM("HIGH_SCHOOL_FORUM"),
       @SerializedName("JOBS")

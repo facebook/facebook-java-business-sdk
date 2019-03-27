@@ -1432,6 +1432,8 @@ public class Album extends APINode {
 
     public static final String[] FIELDS = {
       "album",
+      "alt_text",
+      "alt_text_custom",
       "backdated_time",
       "backdated_time_granularity",
       "can_backdate",
@@ -1552,6 +1554,20 @@ public class Album extends APINode {
     }
     public APIRequestGetPhotos requestAlbumField (boolean value) {
       this.requestField("album", value);
+      return this;
+    }
+    public APIRequestGetPhotos requestAltTextField () {
+      return this.requestAltTextField(true);
+    }
+    public APIRequestGetPhotos requestAltTextField (boolean value) {
+      this.requestField("alt_text", value);
+      return this;
+    }
+    public APIRequestGetPhotos requestAltTextCustomField () {
+      return this.requestAltTextCustomField(true);
+    }
+    public APIRequestGetPhotos requestAltTextCustomField (boolean value) {
+      this.requestField("alt_text_custom", value);
       return this;
     }
     public APIRequestGetPhotos requestBackdatedTimeField () {
@@ -1733,6 +1749,7 @@ public class Album extends APINode {
     }
     public static final String[] PARAMS = {
       "aid",
+      "alt_text_custom",
       "caption",
       "url",
       "uid",
@@ -1842,6 +1859,11 @@ public class Album extends APINode {
 
     public APIRequestCreatePhoto setAid (String aid) {
       this.setParam("aid", aid);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setAltTextCustom (String altTextCustom) {
+      this.setParam("alt_text_custom", altTextCustom);
       return this;
     }
 

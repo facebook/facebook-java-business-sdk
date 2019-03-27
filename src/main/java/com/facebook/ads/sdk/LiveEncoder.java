@@ -286,8 +286,20 @@ public class LiveEncoder extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestCreateTelemetry createTelemetry() {
+    return new APIRequestCreateTelemetry(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestDelete delete() {
+    return new APIRequestDelete(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestUpdate update() {
+    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
   }
 
 
@@ -342,6 +354,500 @@ public class LiveEncoder extends APINode {
   }
 
 
+
+  public static class APIRequestCreateTelemetry extends APIRequest<LiveEncoder> {
+
+    LiveEncoder lastResponse = null;
+    @Override
+    public LiveEncoder getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "broadcast_id",
+      "status",
+      "timestamp",
+      "uptime",
+      "cpu_usage",
+      "process_uptime",
+      "cpu_temperature",
+      "gpu_usage",
+      "gpu_temperature",
+      "cpu_load_1m",
+      "cpu_load_5m",
+      "cpu_load_15m",
+      "memory_usage",
+      "network_tx_bandwidth",
+      "network_rx_bandwidth",
+      "network_tx_packets_dropped",
+      "network_rx_packets_dropped",
+      "network_tx_packets_errors",
+      "network_rx_packets_errors",
+      "network_latency",
+      "frames_dropped",
+      "framerate",
+      "bitrate",
+      "total_video_frames_sent",
+      "total_video_keyframes_sent",
+      "total_audio_frames_sent",
+      "last_video_timecode",
+      "last_video_keyframe_timecode",
+      "last_audio_timecode",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public LiveEncoder parseResponse(String response, String header) throws APIException {
+      return LiveEncoder.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public LiveEncoder execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public LiveEncoder execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<LiveEncoder> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<LiveEncoder> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, LiveEncoder>() {
+           public LiveEncoder apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateTelemetry.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateTelemetry(String nodeId, APIContext context) {
+      super(context, nodeId, "/telemetry", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateTelemetry setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateTelemetry setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateTelemetry setBroadcastId (String broadcastId) {
+      this.setParam("broadcast_id", broadcastId);
+      return this;
+    }
+
+    public APIRequestCreateTelemetry setStatus (LiveEncoder.EnumStatus status) {
+      this.setParam("status", status);
+      return this;
+    }
+    public APIRequestCreateTelemetry setStatus (String status) {
+      this.setParam("status", status);
+      return this;
+    }
+
+    public APIRequestCreateTelemetry setTimestamp (Long timestamp) {
+      this.setParam("timestamp", timestamp);
+      return this;
+    }
+    public APIRequestCreateTelemetry setTimestamp (String timestamp) {
+      this.setParam("timestamp", timestamp);
+      return this;
+    }
+
+    public APIRequestCreateTelemetry setUptime (Long uptime) {
+      this.setParam("uptime", uptime);
+      return this;
+    }
+    public APIRequestCreateTelemetry setUptime (String uptime) {
+      this.setParam("uptime", uptime);
+      return this;
+    }
+
+    public APIRequestCreateTelemetry setCpuUsage (Double cpuUsage) {
+      this.setParam("cpu_usage", cpuUsage);
+      return this;
+    }
+    public APIRequestCreateTelemetry setCpuUsage (String cpuUsage) {
+      this.setParam("cpu_usage", cpuUsage);
+      return this;
+    }
+
+    public APIRequestCreateTelemetry setProcessUptime (Long processUptime) {
+      this.setParam("process_uptime", processUptime);
+      return this;
+    }
+    public APIRequestCreateTelemetry setProcessUptime (String processUptime) {
+      this.setParam("process_uptime", processUptime);
+      return this;
+    }
+
+    public APIRequestCreateTelemetry setCpuTemperature (Long cpuTemperature) {
+      this.setParam("cpu_temperature", cpuTemperature);
+      return this;
+    }
+    public APIRequestCreateTelemetry setCpuTemperature (String cpuTemperature) {
+      this.setParam("cpu_temperature", cpuTemperature);
+      return this;
+    }
+
+    public APIRequestCreateTelemetry setGpuUsage (Double gpuUsage) {
+      this.setParam("gpu_usage", gpuUsage);
+      return this;
+    }
+    public APIRequestCreateTelemetry setGpuUsage (String gpuUsage) {
+      this.setParam("gpu_usage", gpuUsage);
+      return this;
+    }
+
+    public APIRequestCreateTelemetry setGpuTemperature (Long gpuTemperature) {
+      this.setParam("gpu_temperature", gpuTemperature);
+      return this;
+    }
+    public APIRequestCreateTelemetry setGpuTemperature (String gpuTemperature) {
+      this.setParam("gpu_temperature", gpuTemperature);
+      return this;
+    }
+
+    public APIRequestCreateTelemetry setCpuLoad1m (Double cpuLoad1m) {
+      this.setParam("cpu_load_1m", cpuLoad1m);
+      return this;
+    }
+    public APIRequestCreateTelemetry setCpuLoad1m (String cpuLoad1m) {
+      this.setParam("cpu_load_1m", cpuLoad1m);
+      return this;
+    }
+
+    public APIRequestCreateTelemetry setCpuLoad5m (Double cpuLoad5m) {
+      this.setParam("cpu_load_5m", cpuLoad5m);
+      return this;
+    }
+    public APIRequestCreateTelemetry setCpuLoad5m (String cpuLoad5m) {
+      this.setParam("cpu_load_5m", cpuLoad5m);
+      return this;
+    }
+
+    public APIRequestCreateTelemetry setCpuLoad15m (Double cpuLoad15m) {
+      this.setParam("cpu_load_15m", cpuLoad15m);
+      return this;
+    }
+    public APIRequestCreateTelemetry setCpuLoad15m (String cpuLoad15m) {
+      this.setParam("cpu_load_15m", cpuLoad15m);
+      return this;
+    }
+
+    public APIRequestCreateTelemetry setMemoryUsage (Double memoryUsage) {
+      this.setParam("memory_usage", memoryUsage);
+      return this;
+    }
+    public APIRequestCreateTelemetry setMemoryUsage (String memoryUsage) {
+      this.setParam("memory_usage", memoryUsage);
+      return this;
+    }
+
+    public APIRequestCreateTelemetry setNetworkTxBandwidth (Long networkTxBandwidth) {
+      this.setParam("network_tx_bandwidth", networkTxBandwidth);
+      return this;
+    }
+    public APIRequestCreateTelemetry setNetworkTxBandwidth (String networkTxBandwidth) {
+      this.setParam("network_tx_bandwidth", networkTxBandwidth);
+      return this;
+    }
+
+    public APIRequestCreateTelemetry setNetworkRxBandwidth (Long networkRxBandwidth) {
+      this.setParam("network_rx_bandwidth", networkRxBandwidth);
+      return this;
+    }
+    public APIRequestCreateTelemetry setNetworkRxBandwidth (String networkRxBandwidth) {
+      this.setParam("network_rx_bandwidth", networkRxBandwidth);
+      return this;
+    }
+
+    public APIRequestCreateTelemetry setNetworkTxPacketsDropped (Double networkTxPacketsDropped) {
+      this.setParam("network_tx_packets_dropped", networkTxPacketsDropped);
+      return this;
+    }
+    public APIRequestCreateTelemetry setNetworkTxPacketsDropped (String networkTxPacketsDropped) {
+      this.setParam("network_tx_packets_dropped", networkTxPacketsDropped);
+      return this;
+    }
+
+    public APIRequestCreateTelemetry setNetworkRxPacketsDropped (Double networkRxPacketsDropped) {
+      this.setParam("network_rx_packets_dropped", networkRxPacketsDropped);
+      return this;
+    }
+    public APIRequestCreateTelemetry setNetworkRxPacketsDropped (String networkRxPacketsDropped) {
+      this.setParam("network_rx_packets_dropped", networkRxPacketsDropped);
+      return this;
+    }
+
+    public APIRequestCreateTelemetry setNetworkTxPacketsErrors (Double networkTxPacketsErrors) {
+      this.setParam("network_tx_packets_errors", networkTxPacketsErrors);
+      return this;
+    }
+    public APIRequestCreateTelemetry setNetworkTxPacketsErrors (String networkTxPacketsErrors) {
+      this.setParam("network_tx_packets_errors", networkTxPacketsErrors);
+      return this;
+    }
+
+    public APIRequestCreateTelemetry setNetworkRxPacketsErrors (Double networkRxPacketsErrors) {
+      this.setParam("network_rx_packets_errors", networkRxPacketsErrors);
+      return this;
+    }
+    public APIRequestCreateTelemetry setNetworkRxPacketsErrors (String networkRxPacketsErrors) {
+      this.setParam("network_rx_packets_errors", networkRxPacketsErrors);
+      return this;
+    }
+
+    public APIRequestCreateTelemetry setNetworkLatency (Double networkLatency) {
+      this.setParam("network_latency", networkLatency);
+      return this;
+    }
+    public APIRequestCreateTelemetry setNetworkLatency (String networkLatency) {
+      this.setParam("network_latency", networkLatency);
+      return this;
+    }
+
+    public APIRequestCreateTelemetry setFramesDropped (Double framesDropped) {
+      this.setParam("frames_dropped", framesDropped);
+      return this;
+    }
+    public APIRequestCreateTelemetry setFramesDropped (String framesDropped) {
+      this.setParam("frames_dropped", framesDropped);
+      return this;
+    }
+
+    public APIRequestCreateTelemetry setFramerate (Double framerate) {
+      this.setParam("framerate", framerate);
+      return this;
+    }
+    public APIRequestCreateTelemetry setFramerate (String framerate) {
+      this.setParam("framerate", framerate);
+      return this;
+    }
+
+    public APIRequestCreateTelemetry setBitrate (Long bitrate) {
+      this.setParam("bitrate", bitrate);
+      return this;
+    }
+    public APIRequestCreateTelemetry setBitrate (String bitrate) {
+      this.setParam("bitrate", bitrate);
+      return this;
+    }
+
+    public APIRequestCreateTelemetry setTotalVideoFramesSent (Long totalVideoFramesSent) {
+      this.setParam("total_video_frames_sent", totalVideoFramesSent);
+      return this;
+    }
+    public APIRequestCreateTelemetry setTotalVideoFramesSent (String totalVideoFramesSent) {
+      this.setParam("total_video_frames_sent", totalVideoFramesSent);
+      return this;
+    }
+
+    public APIRequestCreateTelemetry setTotalVideoKeyframesSent (Long totalVideoKeyframesSent) {
+      this.setParam("total_video_keyframes_sent", totalVideoKeyframesSent);
+      return this;
+    }
+    public APIRequestCreateTelemetry setTotalVideoKeyframesSent (String totalVideoKeyframesSent) {
+      this.setParam("total_video_keyframes_sent", totalVideoKeyframesSent);
+      return this;
+    }
+
+    public APIRequestCreateTelemetry setTotalAudioFramesSent (Long totalAudioFramesSent) {
+      this.setParam("total_audio_frames_sent", totalAudioFramesSent);
+      return this;
+    }
+    public APIRequestCreateTelemetry setTotalAudioFramesSent (String totalAudioFramesSent) {
+      this.setParam("total_audio_frames_sent", totalAudioFramesSent);
+      return this;
+    }
+
+    public APIRequestCreateTelemetry setLastVideoTimecode (Long lastVideoTimecode) {
+      this.setParam("last_video_timecode", lastVideoTimecode);
+      return this;
+    }
+    public APIRequestCreateTelemetry setLastVideoTimecode (String lastVideoTimecode) {
+      this.setParam("last_video_timecode", lastVideoTimecode);
+      return this;
+    }
+
+    public APIRequestCreateTelemetry setLastVideoKeyframeTimecode (Long lastVideoKeyframeTimecode) {
+      this.setParam("last_video_keyframe_timecode", lastVideoKeyframeTimecode);
+      return this;
+    }
+    public APIRequestCreateTelemetry setLastVideoKeyframeTimecode (String lastVideoKeyframeTimecode) {
+      this.setParam("last_video_keyframe_timecode", lastVideoKeyframeTimecode);
+      return this;
+    }
+
+    public APIRequestCreateTelemetry setLastAudioTimecode (Long lastAudioTimecode) {
+      this.setParam("last_audio_timecode", lastAudioTimecode);
+      return this;
+    }
+    public APIRequestCreateTelemetry setLastAudioTimecode (String lastAudioTimecode) {
+      this.setParam("last_audio_timecode", lastAudioTimecode);
+      return this;
+    }
+
+    public APIRequestCreateTelemetry requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateTelemetry requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateTelemetry requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateTelemetry requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateTelemetry requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateTelemetry requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestDelete extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDelete(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDelete setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDelete requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDelete requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
 
   public static class APIRequestGet extends APIRequest<LiveEncoder> {
 
@@ -533,6 +1039,283 @@ public class LiveEncoder extends APINode {
       this.requestField("version", value);
       return this;
     }
+  }
+
+  public static class APIRequestUpdate extends APIRequest<LiveEncoder> {
+
+    LiveEncoder lastResponse = null;
+    @Override
+    public LiveEncoder getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "broadcast_id",
+      "name",
+      "version",
+      "status",
+      "cap_streaming_protocols",
+      "cap_audio_codecs",
+      "cap_video_codecs",
+      "input_video_height",
+      "input_video_width",
+      "input_video_framerate",
+      "input_video_gop_size",
+      "input_video_gop_num_b_frames",
+      "input_video_interlace_mode",
+      "input_audio_channels",
+      "input_audio_samplerate",
+      "error_code",
+      "error_msg",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public LiveEncoder parseResponse(String response, String header) throws APIException {
+      return LiveEncoder.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public LiveEncoder execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public LiveEncoder execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<LiveEncoder> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<LiveEncoder> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, LiveEncoder>() {
+           public LiveEncoder apply(ResponseWrapper result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestUpdate(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestUpdate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestUpdate setBroadcastId (String broadcastId) {
+      this.setParam("broadcast_id", broadcastId);
+      return this;
+    }
+
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestUpdate setVersion (String version) {
+      this.setParam("version", version);
+      return this;
+    }
+
+    public APIRequestUpdate setStatus (LiveEncoder.EnumStatus status) {
+      this.setParam("status", status);
+      return this;
+    }
+    public APIRequestUpdate setStatus (String status) {
+      this.setParam("status", status);
+      return this;
+    }
+
+    public APIRequestUpdate setCapStreamingProtocols (Object capStreamingProtocols) {
+      this.setParam("cap_streaming_protocols", capStreamingProtocols);
+      return this;
+    }
+    public APIRequestUpdate setCapStreamingProtocols (String capStreamingProtocols) {
+      this.setParam("cap_streaming_protocols", capStreamingProtocols);
+      return this;
+    }
+
+    public APIRequestUpdate setCapAudioCodecs (Object capAudioCodecs) {
+      this.setParam("cap_audio_codecs", capAudioCodecs);
+      return this;
+    }
+    public APIRequestUpdate setCapAudioCodecs (String capAudioCodecs) {
+      this.setParam("cap_audio_codecs", capAudioCodecs);
+      return this;
+    }
+
+    public APIRequestUpdate setCapVideoCodecs (Object capVideoCodecs) {
+      this.setParam("cap_video_codecs", capVideoCodecs);
+      return this;
+    }
+    public APIRequestUpdate setCapVideoCodecs (String capVideoCodecs) {
+      this.setParam("cap_video_codecs", capVideoCodecs);
+      return this;
+    }
+
+    public APIRequestUpdate setInputVideoHeight (Long inputVideoHeight) {
+      this.setParam("input_video_height", inputVideoHeight);
+      return this;
+    }
+    public APIRequestUpdate setInputVideoHeight (String inputVideoHeight) {
+      this.setParam("input_video_height", inputVideoHeight);
+      return this;
+    }
+
+    public APIRequestUpdate setInputVideoWidth (Long inputVideoWidth) {
+      this.setParam("input_video_width", inputVideoWidth);
+      return this;
+    }
+    public APIRequestUpdate setInputVideoWidth (String inputVideoWidth) {
+      this.setParam("input_video_width", inputVideoWidth);
+      return this;
+    }
+
+    public APIRequestUpdate setInputVideoFramerate (String inputVideoFramerate) {
+      this.setParam("input_video_framerate", inputVideoFramerate);
+      return this;
+    }
+
+    public APIRequestUpdate setInputVideoGopSize (Long inputVideoGopSize) {
+      this.setParam("input_video_gop_size", inputVideoGopSize);
+      return this;
+    }
+    public APIRequestUpdate setInputVideoGopSize (String inputVideoGopSize) {
+      this.setParam("input_video_gop_size", inputVideoGopSize);
+      return this;
+    }
+
+    public APIRequestUpdate setInputVideoGopNumBFrames (Long inputVideoGopNumBFrames) {
+      this.setParam("input_video_gop_num_b_frames", inputVideoGopNumBFrames);
+      return this;
+    }
+    public APIRequestUpdate setInputVideoGopNumBFrames (String inputVideoGopNumBFrames) {
+      this.setParam("input_video_gop_num_b_frames", inputVideoGopNumBFrames);
+      return this;
+    }
+
+    public APIRequestUpdate setInputVideoInterlaceMode (String inputVideoInterlaceMode) {
+      this.setParam("input_video_interlace_mode", inputVideoInterlaceMode);
+      return this;
+    }
+
+    public APIRequestUpdate setInputAudioChannels (Long inputAudioChannels) {
+      this.setParam("input_audio_channels", inputAudioChannels);
+      return this;
+    }
+    public APIRequestUpdate setInputAudioChannels (String inputAudioChannels) {
+      this.setParam("input_audio_channels", inputAudioChannels);
+      return this;
+    }
+
+    public APIRequestUpdate setInputAudioSamplerate (Long inputAudioSamplerate) {
+      this.setParam("input_audio_samplerate", inputAudioSamplerate);
+      return this;
+    }
+    public APIRequestUpdate setInputAudioSamplerate (String inputAudioSamplerate) {
+      this.setParam("input_audio_samplerate", inputAudioSamplerate);
+      return this;
+    }
+
+    public APIRequestUpdate setErrorCode (Long errorCode) {
+      this.setParam("error_code", errorCode);
+      return this;
+    }
+    public APIRequestUpdate setErrorCode (String errorCode) {
+      this.setParam("error_code", errorCode);
+      return this;
+    }
+
+    public APIRequestUpdate setErrorMsg (String errorMsg) {
+      this.setParam("error_msg", errorMsg);
+      return this;
+    }
+
+    public APIRequestUpdate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestUpdate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static enum EnumStatus {
+      @SerializedName("CAPTURE")
+      VALUE_CAPTURE("CAPTURE"),
+      @SerializedName("LIVE")
+      VALUE_LIVE("LIVE"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
+      @SerializedName("PREVIEW")
+      VALUE_PREVIEW("PREVIEW"),
+      @SerializedName("READY")
+      VALUE_READY("READY"),
+      @SerializedName("REGISTER")
+      VALUE_REGISTER("REGISTER"),
+      NULL(null);
+
+      private String value;
+
+      private EnumStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
 

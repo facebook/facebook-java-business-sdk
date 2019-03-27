@@ -54,7 +54,7 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ShadowIGComment extends APINode {
+public class IGComment extends APINode {
   @SerializedName("hidden")
   private Boolean mHidden = null;
   @SerializedName("id")
@@ -62,70 +62,70 @@ public class ShadowIGComment extends APINode {
   @SerializedName("like_count")
   private Long mLikeCount = null;
   @SerializedName("media")
-  private ShadowIGMedia mMedia = null;
+  private IGMedia mMedia = null;
   @SerializedName("text")
   private String mText = null;
   @SerializedName("timestamp")
   private String mTimestamp = null;
   @SerializedName("user")
-  private ShadowIGUser mUser = null;
+  private Object mUser = null;
   @SerializedName("username")
   private String mUsername = null;
   protected static Gson gson = null;
 
-  ShadowIGComment() {
+  IGComment() {
   }
 
-  public ShadowIGComment(Long id, APIContext context) {
+  public IGComment(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public ShadowIGComment(String id, APIContext context) {
+  public IGComment(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public ShadowIGComment fetch() throws APIException{
-    ShadowIGComment newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public IGComment fetch() throws APIException{
+    IGComment newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static ShadowIGComment fetchById(Long id, APIContext context) throws APIException {
+  public static IGComment fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<ShadowIGComment> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<IGComment> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static ShadowIGComment fetchById(String id, APIContext context) throws APIException {
+  public static IGComment fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<ShadowIGComment> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<IGComment> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<ShadowIGComment> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<ShadowIGComment>)(
-      new APIRequest<ShadowIGComment>(context, "", "/", "GET", ShadowIGComment.getParser())
+  public static APINodeList<IGComment> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<IGComment>)(
+      new APIRequest<IGComment>(context, "", "/", "GET", IGComment.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<ShadowIGComment>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<IGComment>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", ShadowIGComment.getParser())
+      new APIRequest(context, "", "/", "GET", IGComment.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -138,12 +138,12 @@ public class ShadowIGComment extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ShadowIGComment loadJSON(String json, APIContext context, String header) {
-    ShadowIGComment shadowIGComment = getGson().fromJson(json, ShadowIGComment.class);
+  public static IGComment loadJSON(String json, APIContext context, String header) {
+    IGComment igComment = getGson().fromJson(json, IGComment.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(shadowIGComment.toString());
+      JsonElement o2 = parser.parse(igComment.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -153,14 +153,14 @@ public class ShadowIGComment extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    shadowIGComment.context = context;
-    shadowIGComment.rawValue = json;
-    shadowIGComment.header = header;
-    return shadowIGComment;
+    igComment.context = context;
+    igComment.rawValue = json;
+    igComment.header = header;
+    return igComment;
   }
 
-  public static APINodeList<ShadowIGComment> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ShadowIGComment> shadowIGComments = new APINodeList<ShadowIGComment>(request, json, header);
+  public static APINodeList<IGComment> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<IGComment> igComments = new APINodeList<IGComment>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -171,9 +171,9 @@ public class ShadowIGComment extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          shadowIGComments.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          igComments.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return shadowIGComments;
+        return igComments;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -183,20 +183,20 @@ public class ShadowIGComment extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                shadowIGComments.setCursors(before, after);
+                igComments.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            shadowIGComments.setPaging(previous, next);
+            igComments.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              shadowIGComments.setAppSecret(context.getAppSecretProof());
+              igComments.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              shadowIGComments.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              igComments.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -207,23 +207,23 @@ public class ShadowIGComment extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  shadowIGComments.add(loadJSON(entry.getValue().toString(), context, header));
+                  igComments.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              shadowIGComments.add(loadJSON(obj.toString(), context, header));
+              igComments.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return shadowIGComments;
+          return igComments;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              shadowIGComments.add(loadJSON(entry.getValue().toString(), context, header));
+              igComments.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return shadowIGComments;
+          return igComments;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -240,20 +240,20 @@ public class ShadowIGComment extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              shadowIGComments.add(loadJSON(value.toString(), context, header));
+              igComments.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return shadowIGComments;
+            return igComments;
           }
 
           // Sixth, check if it's pure JsonObject
-          shadowIGComments.clear();
-          shadowIGComments.add(loadJSON(json, context, header));
-          return shadowIGComments;
+          igComments.clear();
+          igComments.add(loadJSON(json, context, header));
+          return igComments;
         }
       }
     } catch (Exception e) {
@@ -313,7 +313,7 @@ public class ShadowIGComment extends APINode {
     return mLikeCount;
   }
 
-  public ShadowIGMedia getFieldMedia() {
+  public IGMedia getFieldMedia() {
     if (mMedia != null) {
       mMedia.context = getContext();
     }
@@ -328,10 +328,7 @@ public class ShadowIGComment extends APINode {
     return mTimestamp;
   }
 
-  public ShadowIGUser getFieldUser() {
-    if (mUser != null) {
-      mUser.context = getContext();
-    }
+  public Object getFieldUser() {
     return mUser;
   }
 
@@ -341,11 +338,11 @@ public class ShadowIGComment extends APINode {
 
 
 
-  public static class APIRequestGetReplies extends APIRequest<ShadowIGComment> {
+  public static class APIRequestGetReplies extends APIRequest<IGComment> {
 
-    APINodeList<ShadowIGComment> lastResponse = null;
+    APINodeList<IGComment> lastResponse = null;
     @Override
-    public APINodeList<ShadowIGComment> getLastResponse() {
+    public APINodeList<IGComment> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -363,31 +360,31 @@ public class ShadowIGComment extends APINode {
     };
 
     @Override
-    public APINodeList<ShadowIGComment> parseResponse(String response, String header) throws APIException {
-      return ShadowIGComment.parseResponse(response, getContext(), this, header);
+    public APINodeList<IGComment> parseResponse(String response, String header) throws APIException {
+      return IGComment.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<ShadowIGComment> execute() throws APIException {
+    public APINodeList<IGComment> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<ShadowIGComment> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<IGComment> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<ShadowIGComment>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<IGComment>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<ShadowIGComment>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<IGComment>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<ShadowIGComment>>() {
-           public APINodeList<ShadowIGComment> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<IGComment>>() {
+           public APINodeList<IGComment> apply(ResponseWrapper result) {
              try {
                return APIRequestGetReplies.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -509,11 +506,11 @@ public class ShadowIGComment extends APINode {
     }
   }
 
-  public static class APIRequestCreateReply extends APIRequest<ShadowIGComment> {
+  public static class APIRequestCreateReply extends APIRequest<IGComment> {
 
-    ShadowIGComment lastResponse = null;
+    IGComment lastResponse = null;
     @Override
-    public ShadowIGComment getLastResponse() {
+    public IGComment getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -524,31 +521,31 @@ public class ShadowIGComment extends APINode {
     };
 
     @Override
-    public ShadowIGComment parseResponse(String response, String header) throws APIException {
-      return ShadowIGComment.parseResponse(response, getContext(), this, header).head();
+    public IGComment parseResponse(String response, String header) throws APIException {
+      return IGComment.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public ShadowIGComment execute() throws APIException {
+    public IGComment execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public ShadowIGComment execute(Map<String, Object> extraParams) throws APIException {
+    public IGComment execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<ShadowIGComment> executeAsync() throws APIException {
+    public ListenableFuture<IGComment> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<ShadowIGComment> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<IGComment> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, ShadowIGComment>() {
-           public ShadowIGComment apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, IGComment>() {
+           public IGComment apply(ResponseWrapper result) {
              try {
                return APIRequestCreateReply.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -723,11 +720,11 @@ public class ShadowIGComment extends APINode {
 
   }
 
-  public static class APIRequestGet extends APIRequest<ShadowIGComment> {
+  public static class APIRequestGet extends APIRequest<IGComment> {
 
-    ShadowIGComment lastResponse = null;
+    IGComment lastResponse = null;
     @Override
-    public ShadowIGComment getLastResponse() {
+    public IGComment getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -745,31 +742,31 @@ public class ShadowIGComment extends APINode {
     };
 
     @Override
-    public ShadowIGComment parseResponse(String response, String header) throws APIException {
-      return ShadowIGComment.parseResponse(response, getContext(), this, header).head();
+    public IGComment parseResponse(String response, String header) throws APIException {
+      return IGComment.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public ShadowIGComment execute() throws APIException {
+    public IGComment execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public ShadowIGComment execute(Map<String, Object> extraParams) throws APIException {
+    public IGComment execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<ShadowIGComment> executeAsync() throws APIException {
+    public ListenableFuture<IGComment> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<ShadowIGComment> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<IGComment> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, ShadowIGComment>() {
-           public ShadowIGComment apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, IGComment>() {
+           public IGComment apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -891,11 +888,11 @@ public class ShadowIGComment extends APINode {
     }
   }
 
-  public static class APIRequestUpdate extends APIRequest<ShadowIGComment> {
+  public static class APIRequestUpdate extends APIRequest<IGComment> {
 
-    ShadowIGComment lastResponse = null;
+    IGComment lastResponse = null;
     @Override
-    public ShadowIGComment getLastResponse() {
+    public IGComment getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -906,31 +903,31 @@ public class ShadowIGComment extends APINode {
     };
 
     @Override
-    public ShadowIGComment parseResponse(String response, String header) throws APIException {
-      return ShadowIGComment.parseResponse(response, getContext(), this, header).head();
+    public IGComment parseResponse(String response, String header) throws APIException {
+      return IGComment.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public ShadowIGComment execute() throws APIException {
+    public IGComment execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public ShadowIGComment execute(Map<String, Object> extraParams) throws APIException {
+    public IGComment execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<ShadowIGComment> executeAsync() throws APIException {
+    public ListenableFuture<IGComment> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<ShadowIGComment> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<IGComment> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, ShadowIGComment>() {
-           public ShadowIGComment apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, IGComment>() {
+           public IGComment apply(ResponseWrapper result) {
              try {
                return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -1019,7 +1016,7 @@ public class ShadowIGComment extends APINode {
     return gson;
   }
 
-  public ShadowIGComment copyFrom(ShadowIGComment instance) {
+  public IGComment copyFrom(IGComment instance) {
     this.mHidden = instance.mHidden;
     this.mId = instance.mId;
     this.mLikeCount = instance.mLikeCount;
@@ -1033,10 +1030,10 @@ public class ShadowIGComment extends APINode {
     return this;
   }
 
-  public static APIRequest.ResponseParser<ShadowIGComment> getParser() {
-    return new APIRequest.ResponseParser<ShadowIGComment>() {
-      public APINodeList<ShadowIGComment> parseResponse(String response, APIContext context, APIRequest<ShadowIGComment> request, String header) throws MalformedResponseException {
-        return ShadowIGComment.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<IGComment> getParser() {
+    return new APIRequest.ResponseParser<IGComment>() {
+      public APINodeList<IGComment> parseResponse(String response, APIContext context, APIRequest<IGComment> request, String header) throws MalformedResponseException {
+        return IGComment.parseResponse(response, context, request, header);
       }
     };
   }

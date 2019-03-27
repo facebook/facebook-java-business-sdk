@@ -6826,6 +6826,7 @@ public class AdAccount extends APINode {
       "time_range",
       "updated_since",
       "ad_draft_id",
+      "include_drafts",
     };
 
     public static final String[] FIELDS = {
@@ -6963,6 +6964,15 @@ public class AdAccount extends APINode {
 
     public APIRequestGetAds setAdDraftId (String adDraftId) {
       this.setParam("ad_draft_id", adDraftId);
+      return this;
+    }
+
+    public APIRequestGetAds setIncludeDrafts (Boolean includeDrafts) {
+      this.setParam("include_drafts", includeDrafts);
+      return this;
+    }
+    public APIRequestGetAds setIncludeDrafts (String includeDrafts) {
+      this.setParam("include_drafts", includeDrafts);
       return this;
     }
 
@@ -8026,6 +8036,7 @@ public class AdAccount extends APINode {
       "is_completed",
       "time_range",
       "ad_draft_id",
+      "include_drafts",
     };
 
     public static final String[] FIELDS = {
@@ -8183,6 +8194,15 @@ public class AdAccount extends APINode {
 
     public APIRequestGetAdSets setAdDraftId (String adDraftId) {
       this.setParam("ad_draft_id", adDraftId);
+      return this;
+    }
+
+    public APIRequestGetAdSets setIncludeDrafts (Boolean includeDrafts) {
+      this.setParam("include_drafts", includeDrafts);
+      return this;
+    }
+    public APIRequestGetAdSets setIncludeDrafts (String includeDrafts) {
+      this.setParam("include_drafts", includeDrafts);
       return this;
     }
 
@@ -27773,6 +27793,7 @@ public class AdAccount extends APINode {
       "frequency_cap",
       "budget",
       "prediction_mode",
+      "deal_id",
       "destination_id",
       "destination_ids",
       "story_event_type",
@@ -27953,6 +27974,11 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateReachFrequencyPrediction setPredictionMode (String predictionMode) {
       this.setParam("prediction_mode", predictionMode);
+      return this;
+    }
+
+    public APIRequestCreateReachFrequencyPrediction setDealId (String dealId) {
+      this.setParam("deal_id", dealId);
       return this;
     }
 

@@ -84,7 +84,7 @@ public class AdSet extends APINode {
   @SerializedName("budget_remaining")
   private String mBudgetRemaining = null;
   @SerializedName("campaign")
-  private Campaign mCampaign = null;
+  private Object mCampaign = null;
   @SerializedName("campaign_id")
   private String mCampaignId = null;
   @SerializedName("configured_status")
@@ -142,7 +142,7 @@ public class AdSet extends APINode {
   @SerializedName("rf_prediction_id")
   private String mRfPredictionId = null;
   @SerializedName("source_adset")
-  private AdSet mSourceAdset = null;
+  private Object mSourceAdset = null;
   @SerializedName("source_adset_id")
   private String mSourceAdsetId = null;
   @SerializedName("start_time")
@@ -598,23 +598,15 @@ public class AdSet extends APINode {
     return this;
   }
 
-  public Campaign getFieldCampaign() {
-    if (mCampaign != null) {
-      mCampaign.context = getContext();
-    }
+  public Object getFieldCampaign() {
     return mCampaign;
   }
 
-  public AdSet setFieldCampaign(Campaign value) {
+  public AdSet setFieldCampaign(Object value) {
     this.mCampaign = value;
     return this;
   }
 
-  public AdSet setFieldCampaign(String value) {
-    Type type = new TypeToken<Campaign>(){}.getType();
-    this.mCampaign = Campaign.getGson().fromJson(value, type);
-    return this;
-  }
   public String getFieldCampaignId() {
     return mCampaignId;
   }
@@ -887,23 +879,15 @@ public class AdSet extends APINode {
     return this;
   }
 
-  public AdSet getFieldSourceAdset() {
-    if (mSourceAdset != null) {
-      mSourceAdset.context = getContext();
-    }
+  public Object getFieldSourceAdset() {
     return mSourceAdset;
   }
 
-  public AdSet setFieldSourceAdset(AdSet value) {
+  public AdSet setFieldSourceAdset(Object value) {
     this.mSourceAdset = value;
     return this;
   }
 
-  public AdSet setFieldSourceAdset(String value) {
-    Type type = new TypeToken<AdSet>(){}.getType();
-    this.mSourceAdset = AdSet.getGson().fromJson(value, type);
-    return this;
-  }
   public String getFieldSourceAdsetId() {
     return mSourceAdsetId;
   }
@@ -2437,6 +2421,7 @@ public class AdSet extends APINode {
       "time_range",
       "updated_since",
       "ad_draft_id",
+      "include_drafts",
     };
 
     public static final String[] FIELDS = {
@@ -2574,6 +2559,15 @@ public class AdSet extends APINode {
 
     public APIRequestGetAds setAdDraftId (String adDraftId) {
       this.setParam("ad_draft_id", adDraftId);
+      return this;
+    }
+
+    public APIRequestGetAds setIncludeDrafts (Boolean includeDrafts) {
+      this.setParam("include_drafts", includeDrafts);
+      return this;
+    }
+    public APIRequestGetAds setIncludeDrafts (String includeDrafts) {
+      this.setParam("include_drafts", includeDrafts);
       return this;
     }
 

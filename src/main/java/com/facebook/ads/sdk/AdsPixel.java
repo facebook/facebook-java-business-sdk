@@ -3435,6 +3435,7 @@ public class AdsPixel extends APINode {
       "automatic_matching_fields",
       "first_party_cookie_status",
       "data_use_setting",
+      "server_events_business_id",
     };
 
     public static final String[] FIELDS = {
@@ -3531,6 +3532,11 @@ public class AdsPixel extends APINode {
     }
     public APIRequestUpdate setDataUseSetting (String dataUseSetting) {
       this.setParam("data_use_setting", dataUseSetting);
+      return this;
+    }
+
+    public APIRequestUpdate setServerEventsBusinessId (String serverEventsBusinessId) {
+      this.setParam("server_events_business_id", serverEventsBusinessId);
       return this;
     }
 

@@ -992,6 +992,7 @@ public class AdStudy extends APINode {
       "applications",
       "offsitepixels",
       "offline_conversion_data_sets",
+      "product_sets",
     };
 
     public static final String[] FIELDS = {
@@ -1115,6 +1116,15 @@ public class AdStudy extends APINode {
     }
     public APIRequestCreateObjective setOfflineConversionDataSets (String offlineConversionDataSets) {
       this.setParam("offline_conversion_data_sets", offlineConversionDataSets);
+      return this;
+    }
+
+    public APIRequestCreateObjective setProductSets (List<Object> productSets) {
+      this.setParam("product_sets", productSets);
+      return this;
+    }
+    public APIRequestCreateObjective setProductSets (String productSets) {
+      this.setParam("product_sets", productSets);
       return this;
     }
 

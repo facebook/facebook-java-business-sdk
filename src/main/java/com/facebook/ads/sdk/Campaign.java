@@ -102,7 +102,7 @@ public class Campaign extends APINode {
   @SerializedName("recommendations")
   private List<AdRecommendation> mRecommendations = null;
   @SerializedName("source_campaign")
-  private Campaign mSourceCampaign = null;
+  private Object mSourceCampaign = null;
   @SerializedName("source_campaign_id")
   private String mSourceCampaignId = null;
   @SerializedName("spend_cap")
@@ -471,10 +471,7 @@ public class Campaign extends APINode {
     return mRecommendations;
   }
 
-  public Campaign getFieldSourceCampaign() {
-    if (mSourceCampaign != null) {
-      mSourceCampaign.context = getContext();
-    }
+  public Object getFieldSourceCampaign() {
     return mSourceCampaign;
   }
 
@@ -1188,6 +1185,7 @@ public class Campaign extends APINode {
       "time_range",
       "updated_since",
       "ad_draft_id",
+      "include_drafts",
     };
 
     public static final String[] FIELDS = {
@@ -1325,6 +1323,15 @@ public class Campaign extends APINode {
 
     public APIRequestGetAds setAdDraftId (String adDraftId) {
       this.setParam("ad_draft_id", adDraftId);
+      return this;
+    }
+
+    public APIRequestGetAds setIncludeDrafts (Boolean includeDrafts) {
+      this.setParam("include_drafts", includeDrafts);
+      return this;
+    }
+    public APIRequestGetAds setIncludeDrafts (String includeDrafts) {
+      this.setParam("include_drafts", includeDrafts);
       return this;
     }
 
@@ -1603,6 +1610,7 @@ public class Campaign extends APINode {
       "is_completed",
       "time_range",
       "ad_draft_id",
+      "include_drafts",
     };
 
     public static final String[] FIELDS = {
@@ -1751,6 +1759,15 @@ public class Campaign extends APINode {
 
     public APIRequestGetAdSets setAdDraftId (String adDraftId) {
       this.setParam("ad_draft_id", adDraftId);
+      return this;
+    }
+
+    public APIRequestGetAdSets setIncludeDrafts (Boolean includeDrafts) {
+      this.setParam("include_drafts", includeDrafts);
+      return this;
+    }
+    public APIRequestGetAdSets setIncludeDrafts (String includeDrafts) {
+      this.setParam("include_drafts", includeDrafts);
       return this;
     }
 

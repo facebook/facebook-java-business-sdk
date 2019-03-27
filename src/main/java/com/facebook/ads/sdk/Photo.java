@@ -57,6 +57,10 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class Photo extends APINode {
   @SerializedName("album")
   private Album mAlbum = null;
+  @SerializedName("alt_text")
+  private String mAltText = null;
+  @SerializedName("alt_text_custom")
+  private String mAltTextCustom = null;
   @SerializedName("backdated_time")
   private String mBackdatedTime = null;
   @SerializedName("backdated_time_granularity")
@@ -384,6 +388,14 @@ public class Photo extends APINode {
       mAlbum.context = getContext();
     }
     return mAlbum;
+  }
+
+  public String getFieldAltText() {
+    return mAltText;
+  }
+
+  public String getFieldAltTextCustom() {
+    return mAltTextCustom;
   }
 
   public String getFieldBackdatedTime() {
@@ -1802,6 +1814,7 @@ public class Photo extends APINode {
     }
     public static final String[] PARAMS = {
       "aid",
+      "alt_text_custom",
       "caption",
       "url",
       "uid",
@@ -1911,6 +1924,11 @@ public class Photo extends APINode {
 
     public APIRequestCreatePhoto setAid (String aid) {
       this.setParam("aid", aid);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setAltTextCustom (String altTextCustom) {
+      this.setParam("alt_text_custom", altTextCustom);
       return this;
     }
 
@@ -4751,6 +4769,8 @@ public class Photo extends APINode {
 
     public static final String[] FIELDS = {
       "album",
+      "alt_text",
+      "alt_text_custom",
       "backdated_time",
       "backdated_time_granularity",
       "can_backdate",
@@ -4871,6 +4891,20 @@ public class Photo extends APINode {
     }
     public APIRequestGet requestAlbumField (boolean value) {
       this.requestField("album", value);
+      return this;
+    }
+    public APIRequestGet requestAltTextField () {
+      return this.requestAltTextField(true);
+    }
+    public APIRequestGet requestAltTextField (boolean value) {
+      this.requestField("alt_text", value);
+      return this;
+    }
+    public APIRequestGet requestAltTextCustomField () {
+      return this.requestAltTextCustomField(true);
+    }
+    public APIRequestGet requestAltTextCustomField (boolean value) {
+      this.requestField("alt_text_custom", value);
       return this;
     }
     public APIRequestGet requestBackdatedTimeField () {
@@ -5099,6 +5133,7 @@ public class Photo extends APINode {
       "prompt_id",
       "prompt_tracking_string",
       "referenced_sticker_id",
+      "alt_text_custom",
       "adaptive_type",
       "animated_effect_id",
       "asked_fun_fact_prompt_id",
@@ -5533,6 +5568,11 @@ public class Photo extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setAltTextCustom (String altTextCustom) {
+      this.setParam("alt_text_custom", altTextCustom);
+      return this;
+    }
+
     public APIRequestUpdate setAdaptiveType (String adaptiveType) {
       this.setParam("adaptive_type", adaptiveType);
       return this;
@@ -5923,6 +5963,8 @@ public class Photo extends APINode {
 
   public Photo copyFrom(Photo instance) {
     this.mAlbum = instance.mAlbum;
+    this.mAltText = instance.mAltText;
+    this.mAltTextCustom = instance.mAltTextCustom;
     this.mBackdatedTime = instance.mBackdatedTime;
     this.mBackdatedTimeGranularity = instance.mBackdatedTimeGranularity;
     this.mCanBackdate = instance.mCanBackdate;

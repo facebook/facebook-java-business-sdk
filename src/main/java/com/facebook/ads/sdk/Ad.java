@@ -62,7 +62,7 @@ public class Ad extends APINode {
   @SerializedName("adlabels")
   private List<AdLabel> mAdlabels = null;
   @SerializedName("adset")
-  private AdSet mAdset = null;
+  private Object mAdset = null;
   @SerializedName("adset_id")
   private String mAdsetId = null;
   @SerializedName("bid_amount")
@@ -72,7 +72,7 @@ public class Ad extends APINode {
   @SerializedName("bid_type")
   private EnumBidType mBidType = null;
   @SerializedName("campaign")
-  private Campaign mCampaign = null;
+  private Object mCampaign = null;
   @SerializedName("campaign_id")
   private String mCampaignId = null;
   @SerializedName("configured_status")
@@ -106,7 +106,7 @@ public class Ad extends APINode {
   @SerializedName("recommendations")
   private List<AdRecommendation> mRecommendations = null;
   @SerializedName("source_ad")
-  private Ad mSourceAd = null;
+  private Object mSourceAd = null;
   @SerializedName("source_ad_id")
   private String mSourceAdId = null;
   @SerializedName("status")
@@ -413,10 +413,7 @@ public class Ad extends APINode {
     return mAdlabels;
   }
 
-  public AdSet getFieldAdset() {
-    if (mAdset != null) {
-      mAdset.context = getContext();
-    }
+  public Object getFieldAdset() {
     return mAdset;
   }
 
@@ -436,10 +433,7 @@ public class Ad extends APINode {
     return mBidType;
   }
 
-  public Campaign getFieldCampaign() {
-    if (mCampaign != null) {
-      mCampaign.context = getContext();
-    }
+  public Object getFieldCampaign() {
     return mCampaign;
   }
 
@@ -510,10 +504,7 @@ public class Ad extends APINode {
     return mRecommendations;
   }
 
-  public Ad getFieldSourceAd() {
-    if (mSourceAd != null) {
-      mSourceAd.context = getContext();
-    }
+  public Object getFieldSourceAd() {
     return mSourceAd;
   }
 

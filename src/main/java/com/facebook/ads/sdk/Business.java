@@ -510,10 +510,6 @@ public class Business extends APINode {
     return new APIRequestCreateManagedBusiness(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetMatchedSearchApplications getMatchedSearchApplications() {
-    return new APIRequestGetMatchedSearchApplications(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetMeasurementReports getMeasurementReports() {
     return new APIRequestGetMeasurementReports(this.getPrefixedId().toString(), context);
   }
@@ -14810,198 +14806,6 @@ public class Business extends APINode {
 
   }
 
-  public static class APIRequestGetMatchedSearchApplications extends APIRequest<BusinessMatchedSearchApplicationsEdgeData> {
-
-    APINodeList<BusinessMatchedSearchApplicationsEdgeData> lastResponse = null;
-    @Override
-    public APINodeList<BusinessMatchedSearchApplicationsEdgeData> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "app_store",
-      "app_store_country",
-      "query_term",
-      "allow_incomplete_app",
-    };
-
-    public static final String[] FIELDS = {
-      "app_id",
-      "icon_url",
-      "name",
-      "search_source_store",
-      "store",
-      "unique_id",
-      "url",
-    };
-
-    @Override
-    public APINodeList<BusinessMatchedSearchApplicationsEdgeData> parseResponse(String response, String header) throws APIException {
-      return BusinessMatchedSearchApplicationsEdgeData.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<BusinessMatchedSearchApplicationsEdgeData> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<BusinessMatchedSearchApplicationsEdgeData> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<BusinessMatchedSearchApplicationsEdgeData>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<BusinessMatchedSearchApplicationsEdgeData>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<BusinessMatchedSearchApplicationsEdgeData>>() {
-           public APINodeList<BusinessMatchedSearchApplicationsEdgeData> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetMatchedSearchApplications.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetMatchedSearchApplications(String nodeId, APIContext context) {
-      super(context, nodeId, "/matched_search_applications", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetMatchedSearchApplications setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMatchedSearchApplications setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetMatchedSearchApplications setAppStore (BusinessMatchedSearchApplicationsEdgeData.EnumAppStore appStore) {
-      this.setParam("app_store", appStore);
-      return this;
-    }
-    public APIRequestGetMatchedSearchApplications setAppStore (String appStore) {
-      this.setParam("app_store", appStore);
-      return this;
-    }
-
-    public APIRequestGetMatchedSearchApplications setAppStoreCountry (String appStoreCountry) {
-      this.setParam("app_store_country", appStoreCountry);
-      return this;
-    }
-
-    public APIRequestGetMatchedSearchApplications setQueryTerm (String queryTerm) {
-      this.setParam("query_term", queryTerm);
-      return this;
-    }
-
-    public APIRequestGetMatchedSearchApplications setAllowIncompleteApp (Boolean allowIncompleteApp) {
-      this.setParam("allow_incomplete_app", allowIncompleteApp);
-      return this;
-    }
-    public APIRequestGetMatchedSearchApplications setAllowIncompleteApp (String allowIncompleteApp) {
-      this.setParam("allow_incomplete_app", allowIncompleteApp);
-      return this;
-    }
-
-    public APIRequestGetMatchedSearchApplications requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetMatchedSearchApplications requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMatchedSearchApplications requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetMatchedSearchApplications requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMatchedSearchApplications requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMatchedSearchApplications requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetMatchedSearchApplications requestAppIdField () {
-      return this.requestAppIdField(true);
-    }
-    public APIRequestGetMatchedSearchApplications requestAppIdField (boolean value) {
-      this.requestField("app_id", value);
-      return this;
-    }
-    public APIRequestGetMatchedSearchApplications requestIconUrlField () {
-      return this.requestIconUrlField(true);
-    }
-    public APIRequestGetMatchedSearchApplications requestIconUrlField (boolean value) {
-      this.requestField("icon_url", value);
-      return this;
-    }
-    public APIRequestGetMatchedSearchApplications requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetMatchedSearchApplications requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetMatchedSearchApplications requestSearchSourceStoreField () {
-      return this.requestSearchSourceStoreField(true);
-    }
-    public APIRequestGetMatchedSearchApplications requestSearchSourceStoreField (boolean value) {
-      this.requestField("search_source_store", value);
-      return this;
-    }
-    public APIRequestGetMatchedSearchApplications requestStoreField () {
-      return this.requestStoreField(true);
-    }
-    public APIRequestGetMatchedSearchApplications requestStoreField (boolean value) {
-      this.requestField("store", value);
-      return this;
-    }
-    public APIRequestGetMatchedSearchApplications requestUniqueIdField () {
-      return this.requestUniqueIdField(true);
-    }
-    public APIRequestGetMatchedSearchApplications requestUniqueIdField (boolean value) {
-      this.requestField("unique_id", value);
-      return this;
-    }
-    public APIRequestGetMatchedSearchApplications requestUrlField () {
-      return this.requestUrlField(true);
-    }
-    public APIRequestGetMatchedSearchApplications requestUrlField (boolean value) {
-      this.requestField("url", value);
-      return this;
-    }
-  }
-
   public static class APIRequestGetMeasurementReports extends APIRequest<MeasurementReport> {
 
     APINodeList<MeasurementReport> lastResponse = null;
@@ -17913,6 +17717,7 @@ public class Business extends APINode {
       "sales_rep_email",
       "shared_page_id",
       "page_permitted_roles",
+      "page_permitted_tasks",
     };
 
     public static final String[] FIELDS = {
@@ -18037,6 +17842,15 @@ public class Business extends APINode {
     }
     public APIRequestCreateOwnedBusiness setPagePermittedRoles (String pagePermittedRoles) {
       this.setParam("page_permitted_roles", pagePermittedRoles);
+      return this;
+    }
+
+    public APIRequestCreateOwnedBusiness setPagePermittedTasks (List<Business.EnumPagePermittedTasks> pagePermittedTasks) {
+      this.setParam("page_permitted_tasks", pagePermittedTasks);
+      return this;
+    }
+    public APIRequestCreateOwnedBusiness setPagePermittedTasks (String pagePermittedTasks) {
+      this.setParam("page_permitted_tasks", pagePermittedTasks);
       return this;
     }
 
@@ -24771,15 +24585,12 @@ public class Business extends APINode {
       "conversion_end_date",
       "conversion_start_date",
       "event_status",
-      "group",
       "id",
       "lookback_window",
       "match_universe",
       "partner",
-      "upload_end_time",
-      "upload_start_time",
+      "timezone",
       "upload_tag",
-      "version",
     };
 
     @Override
@@ -24899,13 +24710,6 @@ public class Business extends APINode {
       this.requestField("event_status", value);
       return this;
     }
-    public APIRequestGetUploadEvent requestGroupField () {
-      return this.requestGroupField(true);
-    }
-    public APIRequestGetUploadEvent requestGroupField (boolean value) {
-      this.requestField("group", value);
-      return this;
-    }
     public APIRequestGetUploadEvent requestIdField () {
       return this.requestIdField(true);
     }
@@ -24934,18 +24738,11 @@ public class Business extends APINode {
       this.requestField("partner", value);
       return this;
     }
-    public APIRequestGetUploadEvent requestUploadEndTimeField () {
-      return this.requestUploadEndTimeField(true);
+    public APIRequestGetUploadEvent requestTimezoneField () {
+      return this.requestTimezoneField(true);
     }
-    public APIRequestGetUploadEvent requestUploadEndTimeField (boolean value) {
-      this.requestField("upload_end_time", value);
-      return this;
-    }
-    public APIRequestGetUploadEvent requestUploadStartTimeField () {
-      return this.requestUploadStartTimeField(true);
-    }
-    public APIRequestGetUploadEvent requestUploadStartTimeField (boolean value) {
-      this.requestField("upload_start_time", value);
+    public APIRequestGetUploadEvent requestTimezoneField (boolean value) {
+      this.requestField("timezone", value);
       return this;
     }
     public APIRequestGetUploadEvent requestUploadTagField () {
@@ -24953,13 +24750,6 @@ public class Business extends APINode {
     }
     public APIRequestGetUploadEvent requestUploadTagField (boolean value) {
       this.requestField("upload_tag", value);
-      return this;
-    }
-    public APIRequestGetUploadEvent requestVersionField () {
-      return this.requestVersionField(true);
-    }
-    public APIRequestGetUploadEvent requestVersionField (boolean value) {
-      this.requestField("version", value);
       return this;
     }
   }
@@ -24976,13 +24766,10 @@ public class Business extends APINode {
       "conversion_end_date",
       "conversion_start_date",
       "event_status",
-      "group",
       "lookback_window",
       "match_universe",
-      "upload_end_time",
-      "upload_start_time",
+      "timezone",
       "upload_tag",
-      "version",
     };
 
     public static final String[] FIELDS = {
@@ -25069,15 +24856,6 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestCreateUploadEvent setGroup (MeasurementUploadEvent.EnumGroup group) {
-      this.setParam("group", group);
-      return this;
-    }
-    public APIRequestCreateUploadEvent setGroup (String group) {
-      this.setParam("group", group);
-      return this;
-    }
-
     public APIRequestCreateUploadEvent setLookbackWindow (MeasurementUploadEvent.EnumLookbackWindow lookbackWindow) {
       this.setParam("lookback_window", lookbackWindow);
       return this;
@@ -25096,27 +24874,17 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestCreateUploadEvent setUploadEndTime (String uploadEndTime) {
-      this.setParam("upload_end_time", uploadEndTime);
+    public APIRequestCreateUploadEvent setTimezone (MeasurementUploadEvent.EnumTimezone timezone) {
+      this.setParam("timezone", timezone);
       return this;
     }
-
-    public APIRequestCreateUploadEvent setUploadStartTime (String uploadStartTime) {
-      this.setParam("upload_start_time", uploadStartTime);
+    public APIRequestCreateUploadEvent setTimezone (String timezone) {
+      this.setParam("timezone", timezone);
       return this;
     }
 
     public APIRequestCreateUploadEvent setUploadTag (String uploadTag) {
       this.setParam("upload_tag", uploadTag);
-      return this;
-    }
-
-    public APIRequestCreateUploadEvent setVersion (MeasurementUploadEvent.EnumVersion version) {
-      this.setParam("version", version);
-      return this;
-    }
-    public APIRequestCreateUploadEvent setVersion (String version) {
-      this.setParam("version", version);
       return this;
     }
 
@@ -26593,6 +26361,41 @@ public class Business extends APINode {
       private String value;
 
       private EnumPagePermittedRoles(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumPagePermittedTasks {
+      @SerializedName("ADVERTISE")
+      VALUE_ADVERTISE("ADVERTISE"),
+      @SerializedName("ANALYZE")
+      VALUE_ANALYZE("ANALYZE"),
+      @SerializedName("CREATE_CONTENT")
+      VALUE_CREATE_CONTENT("CREATE_CONTENT"),
+      @SerializedName("MANAGE")
+      VALUE_MANAGE("MANAGE"),
+      @SerializedName("MANAGE_JOBS")
+      VALUE_MANAGE_JOBS("MANAGE_JOBS"),
+      @SerializedName("MODERATE")
+      VALUE_MODERATE("MODERATE"),
+      @SerializedName("MODERATE_COMMUNITY")
+      VALUE_MODERATE_COMMUNITY("MODERATE_COMMUNITY"),
+      @SerializedName("PAGES_MESSAGING")
+      VALUE_PAGES_MESSAGING("PAGES_MESSAGING"),
+      @SerializedName("PAGES_MESSAGING_SUBSCRIPTIONS")
+      VALUE_PAGES_MESSAGING_SUBSCRIPTIONS("PAGES_MESSAGING_SUBSCRIPTIONS"),
+      @SerializedName("READ_PAGE_MAILBOXES")
+      VALUE_READ_PAGE_MAILBOXES("READ_PAGE_MAILBOXES"),
+      NULL(null);
+
+      private String value;
+
+      private EnumPagePermittedTasks(String value) {
         this.value = value;
       }
 

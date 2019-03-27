@@ -60,7 +60,7 @@ public class Page extends APINode {
   @SerializedName("access_token")
   private String mAccessToken = null;
   @SerializedName("ad_campaign")
-  private AdSet mAdCampaign = null;
+  private Object mAdCampaign = null;
   @SerializedName("affiliation")
   private String mAffiliation = null;
   @SerializedName("app_id")
@@ -102,7 +102,7 @@ public class Page extends APINode {
   @SerializedName("company_overview")
   private String mCompanyOverview = null;
   @SerializedName("connected_instagram_account")
-  private ShadowIGUser mConnectedInstagramAccount = null;
+  private Object mConnectedInstagramAccount = null;
   @SerializedName("contact_address")
   private MailingAddress mContactAddress = null;
   @SerializedName("context")
@@ -170,7 +170,7 @@ public class Page extends APINode {
   @SerializedName("influences")
   private String mInfluences = null;
   @SerializedName("instagram_business_account")
-  private ShadowIGUser mInstagramBusinessAccount = null;
+  private Object mInstagramBusinessAccount = null;
   @SerializedName("instant_articles_review_status")
   private String mInstantArticlesReviewStatus = null;
   @SerializedName("is_always_open")
@@ -578,6 +578,10 @@ public class Page extends APINode {
     return new APIRequestCreateAdminStickySetting(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetAdsPosts getAdsPosts() {
+    return new APIRequestGetAdsPosts(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestDeleteAgencies deleteAgencies() {
     return new APIRequestDeleteAgencies(this.getPrefixedId().toString(), context);
   }
@@ -934,6 +938,10 @@ public class Page extends APINode {
     return new APIRequestCreateMessengerProfile(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateMessengerThreadSetting createMessengerThreadSetting() {
+    return new APIRequestCreateMessengerThreadSetting(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetMilestones getMilestones() {
     return new APIRequestGetMilestones(this.getPrefixedId().toString(), context);
   }
@@ -1223,10 +1231,7 @@ public class Page extends APINode {
     return mAccessToken;
   }
 
-  public AdSet getFieldAdCampaign() {
-    if (mAdCampaign != null) {
-      mAdCampaign.context = getContext();
-    }
+  public Object getFieldAdCampaign() {
     return mAdCampaign;
   }
 
@@ -1316,10 +1321,7 @@ public class Page extends APINode {
     return mCompanyOverview;
   }
 
-  public ShadowIGUser getFieldConnectedInstagramAccount() {
-    if (mConnectedInstagramAccount != null) {
-      mConnectedInstagramAccount.context = getContext();
-    }
+  public Object getFieldConnectedInstagramAccount() {
     return mConnectedInstagramAccount;
   }
 
@@ -1464,10 +1466,7 @@ public class Page extends APINode {
     return mInfluences;
   }
 
-  public ShadowIGUser getFieldInstagramBusinessAccount() {
-    if (mInstagramBusinessAccount != null) {
-      mInstagramBusinessAccount.context = getContext();
-    }
+  public Object getFieldInstagramBusinessAccount() {
     return mInstagramBusinessAccount;
   }
 
@@ -2759,6 +2758,256 @@ public class Page extends APINode {
       return this;
     }
 
+  }
+
+  public static class APIRequestGetAdsPosts extends APIRequest<AdsPost> {
+
+    APINodeList<AdsPost> lastResponse = null;
+    @Override
+    public APINodeList<AdsPost> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "include_inline_create",
+    };
+
+    public static final String[] FIELDS = {
+      "admin_creator",
+      "creation_time",
+      "feed_audience_description",
+      "feed_targeting",
+      "id",
+      "message",
+      "modified_time",
+      "og_action_summary",
+      "permalink_url",
+      "place",
+      "privacy_description",
+      "promotion_info",
+      "scheduled_publish_time",
+      "story_token",
+      "thumbnail",
+      "type",
+      "video_id",
+    };
+
+    @Override
+    public APINodeList<AdsPost> parseResponse(String response, String header) throws APIException {
+      return AdsPost.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<AdsPost> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdsPost> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<AdsPost>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdsPost>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<AdsPost>>() {
+           public APINodeList<AdsPost> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetAdsPosts.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetAdsPosts(String nodeId, APIContext context) {
+      super(context, nodeId, "/ads_posts", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetAdsPosts setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdsPosts setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetAdsPosts setIncludeInlineCreate (Boolean includeInlineCreate) {
+      this.setParam("include_inline_create", includeInlineCreate);
+      return this;
+    }
+    public APIRequestGetAdsPosts setIncludeInlineCreate (String includeInlineCreate) {
+      this.setParam("include_inline_create", includeInlineCreate);
+      return this;
+    }
+
+    public APIRequestGetAdsPosts requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetAdsPosts requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdsPosts requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetAdsPosts requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdsPosts requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdsPosts requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetAdsPosts requestAdminCreatorField () {
+      return this.requestAdminCreatorField(true);
+    }
+    public APIRequestGetAdsPosts requestAdminCreatorField (boolean value) {
+      this.requestField("admin_creator", value);
+      return this;
+    }
+    public APIRequestGetAdsPosts requestCreationTimeField () {
+      return this.requestCreationTimeField(true);
+    }
+    public APIRequestGetAdsPosts requestCreationTimeField (boolean value) {
+      this.requestField("creation_time", value);
+      return this;
+    }
+    public APIRequestGetAdsPosts requestFeedAudienceDescriptionField () {
+      return this.requestFeedAudienceDescriptionField(true);
+    }
+    public APIRequestGetAdsPosts requestFeedAudienceDescriptionField (boolean value) {
+      this.requestField("feed_audience_description", value);
+      return this;
+    }
+    public APIRequestGetAdsPosts requestFeedTargetingField () {
+      return this.requestFeedTargetingField(true);
+    }
+    public APIRequestGetAdsPosts requestFeedTargetingField (boolean value) {
+      this.requestField("feed_targeting", value);
+      return this;
+    }
+    public APIRequestGetAdsPosts requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetAdsPosts requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetAdsPosts requestMessageField () {
+      return this.requestMessageField(true);
+    }
+    public APIRequestGetAdsPosts requestMessageField (boolean value) {
+      this.requestField("message", value);
+      return this;
+    }
+    public APIRequestGetAdsPosts requestModifiedTimeField () {
+      return this.requestModifiedTimeField(true);
+    }
+    public APIRequestGetAdsPosts requestModifiedTimeField (boolean value) {
+      this.requestField("modified_time", value);
+      return this;
+    }
+    public APIRequestGetAdsPosts requestOgActionSummaryField () {
+      return this.requestOgActionSummaryField(true);
+    }
+    public APIRequestGetAdsPosts requestOgActionSummaryField (boolean value) {
+      this.requestField("og_action_summary", value);
+      return this;
+    }
+    public APIRequestGetAdsPosts requestPermalinkUrlField () {
+      return this.requestPermalinkUrlField(true);
+    }
+    public APIRequestGetAdsPosts requestPermalinkUrlField (boolean value) {
+      this.requestField("permalink_url", value);
+      return this;
+    }
+    public APIRequestGetAdsPosts requestPlaceField () {
+      return this.requestPlaceField(true);
+    }
+    public APIRequestGetAdsPosts requestPlaceField (boolean value) {
+      this.requestField("place", value);
+      return this;
+    }
+    public APIRequestGetAdsPosts requestPrivacyDescriptionField () {
+      return this.requestPrivacyDescriptionField(true);
+    }
+    public APIRequestGetAdsPosts requestPrivacyDescriptionField (boolean value) {
+      this.requestField("privacy_description", value);
+      return this;
+    }
+    public APIRequestGetAdsPosts requestPromotionInfoField () {
+      return this.requestPromotionInfoField(true);
+    }
+    public APIRequestGetAdsPosts requestPromotionInfoField (boolean value) {
+      this.requestField("promotion_info", value);
+      return this;
+    }
+    public APIRequestGetAdsPosts requestScheduledPublishTimeField () {
+      return this.requestScheduledPublishTimeField(true);
+    }
+    public APIRequestGetAdsPosts requestScheduledPublishTimeField (boolean value) {
+      this.requestField("scheduled_publish_time", value);
+      return this;
+    }
+    public APIRequestGetAdsPosts requestStoryTokenField () {
+      return this.requestStoryTokenField(true);
+    }
+    public APIRequestGetAdsPosts requestStoryTokenField (boolean value) {
+      this.requestField("story_token", value);
+      return this;
+    }
+    public APIRequestGetAdsPosts requestThumbnailField () {
+      return this.requestThumbnailField(true);
+    }
+    public APIRequestGetAdsPosts requestThumbnailField (boolean value) {
+      this.requestField("thumbnail", value);
+      return this;
+    }
+    public APIRequestGetAdsPosts requestTypeField () {
+      return this.requestTypeField(true);
+    }
+    public APIRequestGetAdsPosts requestTypeField (boolean value) {
+      this.requestField("type", value);
+      return this;
+    }
+    public APIRequestGetAdsPosts requestVideoIdField () {
+      return this.requestVideoIdField(true);
+    }
+    public APIRequestGetAdsPosts requestVideoIdField (boolean value) {
+      this.requestField("video_id", value);
+      return this;
+    }
   }
 
   public static class APIRequestDeleteAgencies extends APIRequest<APINode> {
@@ -25593,6 +25842,126 @@ public class Page extends APINode {
 
   }
 
+  public static class APIRequestCreateMessengerThreadSetting extends APIRequest<Page> {
+
+    Page lastResponse = null;
+    @Override
+    public Page getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "psid",
+      "thread_banner",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Page parseResponse(String response, String header) throws APIException {
+      return Page.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Page execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Page execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Page> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Page> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, Page>() {
+           public Page apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateMessengerThreadSetting.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateMessengerThreadSetting(String nodeId, APIContext context) {
+      super(context, nodeId, "/messenger_thread_settings", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateMessengerThreadSetting setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMessengerThreadSetting setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateMessengerThreadSetting setPsid (String psid) {
+      this.setParam("psid", psid);
+      return this;
+    }
+
+    public APIRequestCreateMessengerThreadSetting setThreadBanner (Object threadBanner) {
+      this.setParam("thread_banner", threadBanner);
+      return this;
+    }
+    public APIRequestCreateMessengerThreadSetting setThreadBanner (String threadBanner) {
+      this.setParam("thread_banner", threadBanner);
+      return this;
+    }
+
+    public APIRequestCreateMessengerThreadSetting requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateMessengerThreadSetting requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMessengerThreadSetting requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateMessengerThreadSetting requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMessengerThreadSetting requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMessengerThreadSetting requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetMilestones extends APIRequest<LifeEvent> {
 
     APINodeList<LifeEvent> lastResponse = null;
@@ -27826,6 +28195,8 @@ public class Page extends APINode {
 
     public static final String[] FIELDS = {
       "album",
+      "alt_text",
+      "alt_text_custom",
       "backdated_time",
       "backdated_time_granularity",
       "can_backdate",
@@ -27969,6 +28340,20 @@ public class Page extends APINode {
     }
     public APIRequestGetPhotos requestAlbumField (boolean value) {
       this.requestField("album", value);
+      return this;
+    }
+    public APIRequestGetPhotos requestAltTextField () {
+      return this.requestAltTextField(true);
+    }
+    public APIRequestGetPhotos requestAltTextField (boolean value) {
+      this.requestField("alt_text", value);
+      return this;
+    }
+    public APIRequestGetPhotos requestAltTextCustomField () {
+      return this.requestAltTextCustomField(true);
+    }
+    public APIRequestGetPhotos requestAltTextCustomField (boolean value) {
+      this.requestField("alt_text_custom", value);
       return this;
     }
     public APIRequestGetPhotos requestBackdatedTimeField () {
@@ -28150,6 +28535,7 @@ public class Page extends APINode {
     }
     public static final String[] PARAMS = {
       "aid",
+      "alt_text_custom",
       "caption",
       "url",
       "uid",
@@ -28262,6 +28648,11 @@ public class Page extends APINode {
 
     public APIRequestCreatePhoto setAid (String aid) {
       this.setParam("aid", aid);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setAltTextCustom (String altTextCustom) {
+      this.setParam("alt_text_custom", altTextCustom);
       return this;
     }
 

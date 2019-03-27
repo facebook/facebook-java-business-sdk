@@ -862,6 +862,8 @@ public class PartnerIntegrationLinked extends APINode {
       VALUE_BANDZOOGLE("bandzoogle"),
       @SerializedName("big_commerce")
       VALUE_BIG_COMMERCE("big_commerce"),
+      @SerializedName("branch")
+      VALUE_BRANCH("branch"),
       @SerializedName("cart_3d")
       VALUE_CART_3D("cart_3d"),
       @SerializedName("default")

@@ -1273,6 +1273,7 @@ public class OpenGraphObject extends APINode {
     }
     public static final String[] PARAMS = {
       "aid",
+      "alt_text_custom",
       "caption",
       "url",
       "uid",
@@ -1382,6 +1383,11 @@ public class OpenGraphObject extends APINode {
 
     public APIRequestCreatePhoto setAid (String aid) {
       this.setParam("aid", aid);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setAltTextCustom (String altTextCustom) {
+      this.setParam("alt_text_custom", altTextCustom);
       return this;
     }
 

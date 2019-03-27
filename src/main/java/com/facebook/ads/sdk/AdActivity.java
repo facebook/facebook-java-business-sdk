@@ -437,6 +437,8 @@ public class AdActivity extends APINode {
       VALUE_UPDATE_AD_RUN_STATUS("update_ad_run_status"),
       @SerializedName("update_ad_run_status_to_be_set_after_review")
       VALUE_UPDATE_AD_RUN_STATUS_TO_BE_SET_AFTER_REVIEW("update_ad_run_status_to_be_set_after_review"),
+      @SerializedName("update_ad_set_ad_keywords")
+      VALUE_UPDATE_AD_SET_AD_KEYWORDS("update_ad_set_ad_keywords"),
       @SerializedName("update_ad_set_bid_adjustments")
       VALUE_UPDATE_AD_SET_BID_ADJUSTMENTS("update_ad_set_bid_adjustments"),
       @SerializedName("update_ad_set_bid_strategy")
@@ -461,10 +463,18 @@ public class AdActivity extends APINode {
       VALUE_UPDATE_ADGROUP_STOP_DELIVERY("update_adgroup_stop_delivery"),
       @SerializedName("update_audience")
       VALUE_UPDATE_AUDIENCE("update_audience"),
+      @SerializedName("update_campaign_ad_scheduling")
+      VALUE_UPDATE_CAMPAIGN_AD_SCHEDULING("update_campaign_ad_scheduling"),
       @SerializedName("update_campaign_budget")
       VALUE_UPDATE_CAMPAIGN_BUDGET("update_campaign_budget"),
+      @SerializedName("update_campaign_delivery_type")
+      VALUE_UPDATE_CAMPAIGN_DELIVERY_TYPE("update_campaign_delivery_type"),
       @SerializedName("update_campaign_duration")
       VALUE_UPDATE_CAMPAIGN_DURATION("update_campaign_duration"),
+      @SerializedName("update_campaign_group_ad_scheduling")
+      VALUE_UPDATE_CAMPAIGN_GROUP_AD_SCHEDULING("update_campaign_group_ad_scheduling"),
+      @SerializedName("update_campaign_group_delivery_type")
+      VALUE_UPDATE_CAMPAIGN_GROUP_DELIVERY_TYPE("update_campaign_group_delivery_type"),
       @SerializedName("update_campaign_group_spend_cap")
       VALUE_UPDATE_CAMPAIGN_GROUP_SPEND_CAP("update_campaign_group_spend_cap"),
       @SerializedName("update_campaign_name")
@@ -490,6 +500,8 @@ public class AdActivity extends APINode {
       VALUE_ACCOUNT("ACCOUNT"),
       @SerializedName("AD")
       VALUE_AD("AD"),
+      @SerializedName("AD_KEYWORDS")
+      VALUE_AD_KEYWORDS("AD_KEYWORDS"),
       @SerializedName("AD_SET")
       VALUE_AD_SET("AD_SET"),
       @SerializedName("AUDIENCE")
