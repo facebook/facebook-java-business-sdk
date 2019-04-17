@@ -710,7 +710,6 @@ public class CustomAudience extends APINode {
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
-      "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
       "funding_source",
@@ -1011,13 +1010,6 @@ public class CustomAudience extends APINode {
       this.requestField("end_advertiser_name", value);
       return this;
     }
-    public APIRequestGetAdAccounts requestExtendedCreditInvoiceGroupField () {
-      return this.requestExtendedCreditInvoiceGroupField(true);
-    }
-    public APIRequestGetAdAccounts requestExtendedCreditInvoiceGroupField (boolean value) {
-      this.requestField("extended_credit_invoice_group", value);
-      return this;
-    }
     public APIRequestGetAdAccounts requestFailedDeliveryChecksField () {
       return this.requestFailedDeliveryChecksField(true);
     }
@@ -1282,8 +1274,8 @@ public class CustomAudience extends APINode {
     public static final String[] PARAMS = {
       "adaccounts",
       "permissions",
-      "replace",
       "relationship_type",
+      "replace",
     };
 
     public static final String[] FIELDS = {
@@ -1356,21 +1348,21 @@ public class CustomAudience extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdAccount setReplace (Boolean replace) {
-      this.setParam("replace", replace);
-      return this;
-    }
-    public APIRequestCreateAdAccount setReplace (String replace) {
-      this.setParam("replace", replace);
-      return this;
-    }
-
     public APIRequestCreateAdAccount setRelationshipType (List<String> relationshipType) {
       this.setParam("relationship_type", relationshipType);
       return this;
     }
     public APIRequestCreateAdAccount setRelationshipType (String relationshipType) {
       this.setParam("relationship_type", relationshipType);
+      return this;
+    }
+
+    public APIRequestCreateAdAccount setReplace (Boolean replace) {
+      this.setParam("replace", replace);
+      return this;
+    }
+    public APIRequestCreateAdAccount setReplace (String replace) {
+      this.setParam("replace", replace);
       return this;
     }
 
@@ -2035,12 +2027,12 @@ public class CustomAudience extends APINode {
     }
     public static final String[] PARAMS = {
       "action_type",
-      "encoding",
-      "entry_type",
-      "entries",
-      "session_id",
       "batch_seq",
+      "encoding",
+      "entries",
+      "entry_type",
       "last_batch_flag",
+      "session_id",
     };
 
     public static final String[] FIELDS = {
@@ -2108,21 +2100,21 @@ public class CustomAudience extends APINode {
       return this;
     }
 
+    public APIRequestCreateDatum setBatchSeq (Long batchSeq) {
+      this.setParam("batch_seq", batchSeq);
+      return this;
+    }
+    public APIRequestCreateDatum setBatchSeq (String batchSeq) {
+      this.setParam("batch_seq", batchSeq);
+      return this;
+    }
+
     public APIRequestCreateDatum setEncoding (EnumEncoding encoding) {
       this.setParam("encoding", encoding);
       return this;
     }
     public APIRequestCreateDatum setEncoding (String encoding) {
       this.setParam("encoding", encoding);
-      return this;
-    }
-
-    public APIRequestCreateDatum setEntryType (EnumEntryType entryType) {
-      this.setParam("entry_type", entryType);
-      return this;
-    }
-    public APIRequestCreateDatum setEntryType (String entryType) {
-      this.setParam("entry_type", entryType);
       return this;
     }
 
@@ -2135,21 +2127,12 @@ public class CustomAudience extends APINode {
       return this;
     }
 
-    public APIRequestCreateDatum setSessionId (Long sessionId) {
-      this.setParam("session_id", sessionId);
+    public APIRequestCreateDatum setEntryType (EnumEntryType entryType) {
+      this.setParam("entry_type", entryType);
       return this;
     }
-    public APIRequestCreateDatum setSessionId (String sessionId) {
-      this.setParam("session_id", sessionId);
-      return this;
-    }
-
-    public APIRequestCreateDatum setBatchSeq (Long batchSeq) {
-      this.setParam("batch_seq", batchSeq);
-      return this;
-    }
-    public APIRequestCreateDatum setBatchSeq (String batchSeq) {
-      this.setParam("batch_seq", batchSeq);
+    public APIRequestCreateDatum setEntryType (String entryType) {
+      this.setParam("entry_type", entryType);
       return this;
     }
 
@@ -2159,6 +2142,15 @@ public class CustomAudience extends APINode {
     }
     public APIRequestCreateDatum setLastBatchFlag (String lastBatchFlag) {
       this.setParam("last_batch_flag", lastBatchFlag);
+      return this;
+    }
+
+    public APIRequestCreateDatum setSessionId (Long sessionId) {
+      this.setParam("session_id", sessionId);
+      return this;
+    }
+    public APIRequestCreateDatum setSessionId (String sessionId) {
+      this.setParam("session_id", sessionId);
       return this;
     }
 
@@ -2658,9 +2650,9 @@ public class CustomAudience extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "session",
-      "payload",
       "namespace",
+      "payload",
+      "session",
     };
 
     public static final String[] FIELDS = {
@@ -2719,12 +2711,8 @@ public class CustomAudience extends APINode {
     }
 
 
-    public APIRequestDeleteUpload setSession (Object session) {
-      this.setParam("session", session);
-      return this;
-    }
-    public APIRequestDeleteUpload setSession (String session) {
-      this.setParam("session", session);
+    public APIRequestDeleteUpload setNamespace (String namespace) {
+      this.setParam("namespace", namespace);
       return this;
     }
 
@@ -2737,8 +2725,12 @@ public class CustomAudience extends APINode {
       return this;
     }
 
-    public APIRequestDeleteUpload setNamespace (String namespace) {
-      this.setParam("namespace", namespace);
+    public APIRequestDeleteUpload setSession (Object session) {
+      this.setParam("session", session);
+      return this;
+    }
+    public APIRequestDeleteUpload setSession (String session) {
+      this.setParam("session", session);
       return this;
     }
 
@@ -2788,9 +2780,9 @@ public class CustomAudience extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "session",
-      "payload",
       "namespace",
+      "payload",
+      "session",
     };
 
     public static final String[] FIELDS = {
@@ -2849,12 +2841,8 @@ public class CustomAudience extends APINode {
     }
 
 
-    public APIRequestCreateUpload setSession (Object session) {
-      this.setParam("session", session);
-      return this;
-    }
-    public APIRequestCreateUpload setSession (String session) {
-      this.setParam("session", session);
+    public APIRequestCreateUpload setNamespace (String namespace) {
+      this.setParam("namespace", namespace);
       return this;
     }
 
@@ -2867,8 +2855,12 @@ public class CustomAudience extends APINode {
       return this;
     }
 
-    public APIRequestCreateUpload setNamespace (String namespace) {
-      this.setParam("namespace", namespace);
+    public APIRequestCreateUpload setSession (Object session) {
+      this.setParam("session", session);
+      return this;
+    }
+    public APIRequestCreateUpload setSession (String session) {
+      this.setParam("session", session);
       return this;
     }
 
@@ -2918,9 +2910,9 @@ public class CustomAudience extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "session",
-      "payload",
       "namespace",
+      "payload",
+      "session",
     };
 
     public static final String[] FIELDS = {
@@ -2979,12 +2971,8 @@ public class CustomAudience extends APINode {
     }
 
 
-    public APIRequestDeleteUsers setSession (Object session) {
-      this.setParam("session", session);
-      return this;
-    }
-    public APIRequestDeleteUsers setSession (String session) {
-      this.setParam("session", session);
+    public APIRequestDeleteUsers setNamespace (String namespace) {
+      this.setParam("namespace", namespace);
       return this;
     }
 
@@ -2997,8 +2985,12 @@ public class CustomAudience extends APINode {
       return this;
     }
 
-    public APIRequestDeleteUsers setNamespace (String namespace) {
-      this.setParam("namespace", namespace);
+    public APIRequestDeleteUsers setSession (Object session) {
+      this.setParam("session", session);
+      return this;
+    }
+    public APIRequestDeleteUsers setSession (String session) {
+      this.setParam("session", session);
       return this;
     }
 
@@ -3048,9 +3040,9 @@ public class CustomAudience extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "session",
-      "payload",
       "namespace",
+      "payload",
+      "session",
     };
 
     public static final String[] FIELDS = {
@@ -3109,12 +3101,8 @@ public class CustomAudience extends APINode {
     }
 
 
-    public APIRequestCreateUser setSession (Object session) {
-      this.setParam("session", session);
-      return this;
-    }
-    public APIRequestCreateUser setSession (String session) {
-      this.setParam("session", session);
+    public APIRequestCreateUser setNamespace (String namespace) {
+      this.setParam("namespace", namespace);
       return this;
     }
 
@@ -3127,8 +3115,12 @@ public class CustomAudience extends APINode {
       return this;
     }
 
-    public APIRequestCreateUser setNamespace (String namespace) {
-      this.setParam("namespace", namespace);
+    public APIRequestCreateUser setSession (Object session) {
+      this.setParam("session", session);
+      return this;
+    }
+    public APIRequestCreateUser setSession (String session) {
+      this.setParam("session", session);
       return this;
     }
 
@@ -3688,42 +3680,42 @@ public class CustomAudience extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "accountID",
+      "additionalMetadata",
+      "allowed_domains",
+      "claim_objective",
+      "content_type",
+      "countries",
+      "customer_file_source",
       "description",
+      "details",
+      "enable_fetch_or_create",
+      "event_source_group",
+      "event_sources",
+      "exclusions",
+      "expectedSize",
+      "gender",
+      "inclusions",
+      "isPrivate",
+      "is_household",
+      "is_household_exclusion",
+      "lookalike_spec",
+      "maxAge",
+      "minAge",
       "name",
       "opt_out_link",
       "parent_audience_id",
-      "seed_audience",
-      "tags",
-      "is_household",
-      "is_household_exclusion",
-      "allowed_domains",
-      "lookalike_spec",
+      "partnerID",
+      "partner_reference_key",
+      "product_set_id",
       "retention_days",
-      "customer_file_source",
+      "rev_share_policy_id",
       "rule",
       "rule_aggregation",
-      "inclusions",
-      "exclusions",
-      "countries",
-      "details",
+      "seed_audience",
       "source",
-      "isPrivate",
-      "additionalMetadata",
-      "minAge",
-      "maxAge",
-      "expectedSize",
-      "gender",
-      "partnerID",
-      "accountID",
-      "rev_share_policy_id",
-      "partner_reference_key",
-      "claim_objective",
-      "content_type",
-      "event_source_group",
-      "product_set_id",
-      "event_sources",
-      "enable_fetch_or_create",
       "study_spec",
+      "tags",
     };
 
     public static final String[] FIELDS = {
@@ -3782,8 +3774,169 @@ public class CustomAudience extends APINode {
     }
 
 
+    public APIRequestUpdate setAccountid (String accountid) {
+      this.setParam("accountID", accountid);
+      return this;
+    }
+
+    public APIRequestUpdate setAdditionalmetadata (String additionalmetadata) {
+      this.setParam("additionalMetadata", additionalmetadata);
+      return this;
+    }
+
+    public APIRequestUpdate setAllowedDomains (List<String> allowedDomains) {
+      this.setParam("allowed_domains", allowedDomains);
+      return this;
+    }
+    public APIRequestUpdate setAllowedDomains (String allowedDomains) {
+      this.setParam("allowed_domains", allowedDomains);
+      return this;
+    }
+
+    public APIRequestUpdate setClaimObjective (CustomAudience.EnumClaimObjective claimObjective) {
+      this.setParam("claim_objective", claimObjective);
+      return this;
+    }
+    public APIRequestUpdate setClaimObjective (String claimObjective) {
+      this.setParam("claim_objective", claimObjective);
+      return this;
+    }
+
+    public APIRequestUpdate setContentType (CustomAudience.EnumContentType contentType) {
+      this.setParam("content_type", contentType);
+      return this;
+    }
+    public APIRequestUpdate setContentType (String contentType) {
+      this.setParam("content_type", contentType);
+      return this;
+    }
+
+    public APIRequestUpdate setCountries (String countries) {
+      this.setParam("countries", countries);
+      return this;
+    }
+
+    public APIRequestUpdate setCustomerFileSource (CustomAudience.EnumCustomerFileSource customerFileSource) {
+      this.setParam("customer_file_source", customerFileSource);
+      return this;
+    }
+    public APIRequestUpdate setCustomerFileSource (String customerFileSource) {
+      this.setParam("customer_file_source", customerFileSource);
+      return this;
+    }
+
     public APIRequestUpdate setDescription (String description) {
       this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestUpdate setDetails (String details) {
+      this.setParam("details", details);
+      return this;
+    }
+
+    public APIRequestUpdate setEnableFetchOrCreate (Boolean enableFetchOrCreate) {
+      this.setParam("enable_fetch_or_create", enableFetchOrCreate);
+      return this;
+    }
+    public APIRequestUpdate setEnableFetchOrCreate (String enableFetchOrCreate) {
+      this.setParam("enable_fetch_or_create", enableFetchOrCreate);
+      return this;
+    }
+
+    public APIRequestUpdate setEventSourceGroup (String eventSourceGroup) {
+      this.setParam("event_source_group", eventSourceGroup);
+      return this;
+    }
+
+    public APIRequestUpdate setEventSources (List<Map<String, String>> eventSources) {
+      this.setParam("event_sources", eventSources);
+      return this;
+    }
+    public APIRequestUpdate setEventSources (String eventSources) {
+      this.setParam("event_sources", eventSources);
+      return this;
+    }
+
+    public APIRequestUpdate setExclusions (List<Object> exclusions) {
+      this.setParam("exclusions", exclusions);
+      return this;
+    }
+    public APIRequestUpdate setExclusions (String exclusions) {
+      this.setParam("exclusions", exclusions);
+      return this;
+    }
+
+    public APIRequestUpdate setExpectedsize (Long expectedsize) {
+      this.setParam("expectedSize", expectedsize);
+      return this;
+    }
+    public APIRequestUpdate setExpectedsize (String expectedsize) {
+      this.setParam("expectedSize", expectedsize);
+      return this;
+    }
+
+    public APIRequestUpdate setGender (String gender) {
+      this.setParam("gender", gender);
+      return this;
+    }
+
+    public APIRequestUpdate setInclusions (List<Object> inclusions) {
+      this.setParam("inclusions", inclusions);
+      return this;
+    }
+    public APIRequestUpdate setInclusions (String inclusions) {
+      this.setParam("inclusions", inclusions);
+      return this;
+    }
+
+    public APIRequestUpdate setIsprivate (Boolean isprivate) {
+      this.setParam("isPrivate", isprivate);
+      return this;
+    }
+    public APIRequestUpdate setIsprivate (String isprivate) {
+      this.setParam("isPrivate", isprivate);
+      return this;
+    }
+
+    public APIRequestUpdate setIsHousehold (Boolean isHousehold) {
+      this.setParam("is_household", isHousehold);
+      return this;
+    }
+    public APIRequestUpdate setIsHousehold (String isHousehold) {
+      this.setParam("is_household", isHousehold);
+      return this;
+    }
+
+    public APIRequestUpdate setIsHouseholdExclusion (Boolean isHouseholdExclusion) {
+      this.setParam("is_household_exclusion", isHouseholdExclusion);
+      return this;
+    }
+    public APIRequestUpdate setIsHouseholdExclusion (String isHouseholdExclusion) {
+      this.setParam("is_household_exclusion", isHouseholdExclusion);
+      return this;
+    }
+
+    public APIRequestUpdate setLookalikeSpec (String lookalikeSpec) {
+      this.setParam("lookalike_spec", lookalikeSpec);
+      return this;
+    }
+
+    public APIRequestUpdate setMaxage (Long maxage) {
+      this.setParam("maxAge", maxage);
+      return this;
+    }
+    public APIRequestUpdate setMaxage (String maxage) {
+      this.setParam("maxAge", maxage);
+      return this;
+    }
+
+    public APIRequestUpdate setMinage (Long minage) {
+      this.setParam("minAge", minage);
+      return this;
+    }
+    public APIRequestUpdate setMinage (String minage) {
+      this.setParam("minAge", minage);
       return this;
     }
 
@@ -3806,53 +3959,18 @@ public class CustomAudience extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setSeedAudience (Long seedAudience) {
-      this.setParam("seed_audience", seedAudience);
-      return this;
-    }
-    public APIRequestUpdate setSeedAudience (String seedAudience) {
-      this.setParam("seed_audience", seedAudience);
+    public APIRequestUpdate setPartnerid (String partnerid) {
+      this.setParam("partnerID", partnerid);
       return this;
     }
 
-    public APIRequestUpdate setTags (List<String> tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-    public APIRequestUpdate setTags (String tags) {
-      this.setParam("tags", tags);
+    public APIRequestUpdate setPartnerReferenceKey (String partnerReferenceKey) {
+      this.setParam("partner_reference_key", partnerReferenceKey);
       return this;
     }
 
-    public APIRequestUpdate setIsHousehold (Boolean isHousehold) {
-      this.setParam("is_household", isHousehold);
-      return this;
-    }
-    public APIRequestUpdate setIsHousehold (String isHousehold) {
-      this.setParam("is_household", isHousehold);
-      return this;
-    }
-
-    public APIRequestUpdate setIsHouseholdExclusion (Boolean isHouseholdExclusion) {
-      this.setParam("is_household_exclusion", isHouseholdExclusion);
-      return this;
-    }
-    public APIRequestUpdate setIsHouseholdExclusion (String isHouseholdExclusion) {
-      this.setParam("is_household_exclusion", isHouseholdExclusion);
-      return this;
-    }
-
-    public APIRequestUpdate setAllowedDomains (List<String> allowedDomains) {
-      this.setParam("allowed_domains", allowedDomains);
-      return this;
-    }
-    public APIRequestUpdate setAllowedDomains (String allowedDomains) {
-      this.setParam("allowed_domains", allowedDomains);
-      return this;
-    }
-
-    public APIRequestUpdate setLookalikeSpec (String lookalikeSpec) {
-      this.setParam("lookalike_spec", lookalikeSpec);
+    public APIRequestUpdate setProductSetId (String productSetId) {
+      this.setParam("product_set_id", productSetId);
       return this;
     }
 
@@ -3865,12 +3983,12 @@ public class CustomAudience extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setCustomerFileSource (CustomAudience.EnumCustomerFileSource customerFileSource) {
-      this.setParam("customer_file_source", customerFileSource);
+    public APIRequestUpdate setRevSharePolicyId (Long revSharePolicyId) {
+      this.setParam("rev_share_policy_id", revSharePolicyId);
       return this;
     }
-    public APIRequestUpdate setCustomerFileSource (String customerFileSource) {
-      this.setParam("customer_file_source", customerFileSource);
+    public APIRequestUpdate setRevSharePolicyId (String revSharePolicyId) {
+      this.setParam("rev_share_policy_id", revSharePolicyId);
       return this;
     }
 
@@ -3884,152 +4002,17 @@ public class CustomAudience extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setInclusions (List<Object> inclusions) {
-      this.setParam("inclusions", inclusions);
+    public APIRequestUpdate setSeedAudience (Long seedAudience) {
+      this.setParam("seed_audience", seedAudience);
       return this;
     }
-    public APIRequestUpdate setInclusions (String inclusions) {
-      this.setParam("inclusions", inclusions);
-      return this;
-    }
-
-    public APIRequestUpdate setExclusions (List<Object> exclusions) {
-      this.setParam("exclusions", exclusions);
-      return this;
-    }
-    public APIRequestUpdate setExclusions (String exclusions) {
-      this.setParam("exclusions", exclusions);
-      return this;
-    }
-
-    public APIRequestUpdate setCountries (String countries) {
-      this.setParam("countries", countries);
-      return this;
-    }
-
-    public APIRequestUpdate setDetails (String details) {
-      this.setParam("details", details);
+    public APIRequestUpdate setSeedAudience (String seedAudience) {
+      this.setParam("seed_audience", seedAudience);
       return this;
     }
 
     public APIRequestUpdate setSource (String source) {
       this.setParam("source", source);
-      return this;
-    }
-
-    public APIRequestUpdate setIsprivate (Boolean isprivate) {
-      this.setParam("isPrivate", isprivate);
-      return this;
-    }
-    public APIRequestUpdate setIsprivate (String isprivate) {
-      this.setParam("isPrivate", isprivate);
-      return this;
-    }
-
-    public APIRequestUpdate setAdditionalmetadata (String additionalmetadata) {
-      this.setParam("additionalMetadata", additionalmetadata);
-      return this;
-    }
-
-    public APIRequestUpdate setMinage (Long minage) {
-      this.setParam("minAge", minage);
-      return this;
-    }
-    public APIRequestUpdate setMinage (String minage) {
-      this.setParam("minAge", minage);
-      return this;
-    }
-
-    public APIRequestUpdate setMaxage (Long maxage) {
-      this.setParam("maxAge", maxage);
-      return this;
-    }
-    public APIRequestUpdate setMaxage (String maxage) {
-      this.setParam("maxAge", maxage);
-      return this;
-    }
-
-    public APIRequestUpdate setExpectedsize (Long expectedsize) {
-      this.setParam("expectedSize", expectedsize);
-      return this;
-    }
-    public APIRequestUpdate setExpectedsize (String expectedsize) {
-      this.setParam("expectedSize", expectedsize);
-      return this;
-    }
-
-    public APIRequestUpdate setGender (String gender) {
-      this.setParam("gender", gender);
-      return this;
-    }
-
-    public APIRequestUpdate setPartnerid (String partnerid) {
-      this.setParam("partnerID", partnerid);
-      return this;
-    }
-
-    public APIRequestUpdate setAccountid (String accountid) {
-      this.setParam("accountID", accountid);
-      return this;
-    }
-
-    public APIRequestUpdate setRevSharePolicyId (Long revSharePolicyId) {
-      this.setParam("rev_share_policy_id", revSharePolicyId);
-      return this;
-    }
-    public APIRequestUpdate setRevSharePolicyId (String revSharePolicyId) {
-      this.setParam("rev_share_policy_id", revSharePolicyId);
-      return this;
-    }
-
-    public APIRequestUpdate setPartnerReferenceKey (String partnerReferenceKey) {
-      this.setParam("partner_reference_key", partnerReferenceKey);
-      return this;
-    }
-
-    public APIRequestUpdate setClaimObjective (CustomAudience.EnumClaimObjective claimObjective) {
-      this.setParam("claim_objective", claimObjective);
-      return this;
-    }
-    public APIRequestUpdate setClaimObjective (String claimObjective) {
-      this.setParam("claim_objective", claimObjective);
-      return this;
-    }
-
-    public APIRequestUpdate setContentType (CustomAudience.EnumContentType contentType) {
-      this.setParam("content_type", contentType);
-      return this;
-    }
-    public APIRequestUpdate setContentType (String contentType) {
-      this.setParam("content_type", contentType);
-      return this;
-    }
-
-    public APIRequestUpdate setEventSourceGroup (String eventSourceGroup) {
-      this.setParam("event_source_group", eventSourceGroup);
-      return this;
-    }
-
-    public APIRequestUpdate setProductSetId (String productSetId) {
-      this.setParam("product_set_id", productSetId);
-      return this;
-    }
-
-    public APIRequestUpdate setEventSources (List<Map<String, String>> eventSources) {
-      this.setParam("event_sources", eventSources);
-      return this;
-    }
-    public APIRequestUpdate setEventSources (String eventSources) {
-      this.setParam("event_sources", eventSources);
-      return this;
-    }
-
-    public APIRequestUpdate setEnableFetchOrCreate (Boolean enableFetchOrCreate) {
-      this.setParam("enable_fetch_or_create", enableFetchOrCreate);
-      return this;
-    }
-    public APIRequestUpdate setEnableFetchOrCreate (String enableFetchOrCreate) {
-      this.setParam("enable_fetch_or_create", enableFetchOrCreate);
       return this;
     }
 
@@ -4039,6 +4022,15 @@ public class CustomAudience extends APINode {
     }
     public APIRequestUpdate setStudySpec (String studySpec) {
       this.setParam("study_spec", studySpec);
+      return this;
+    }
+
+    public APIRequestUpdate setTags (List<String> tags) {
+      this.setParam("tags", tags);
+      return this;
+    }
+    public APIRequestUpdate setTags (String tags) {
+      this.setParam("tags", tags);
       return this;
     }
 

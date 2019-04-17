@@ -621,8 +621,8 @@ public class MediaFingerprint extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "title",
       "metadata",
+      "title",
       "universal_content_id",
     };
 
@@ -682,17 +682,17 @@ public class MediaFingerprint extends APINode {
     }
 
 
-    public APIRequestUpdate setTitle (String title) {
-      this.setParam("title", title);
-      return this;
-    }
-
     public APIRequestUpdate setMetadata (JsonArray metadata) {
       this.setParam("metadata", metadata);
       return this;
     }
     public APIRequestUpdate setMetadata (String metadata) {
       this.setParam("metadata", metadata);
+      return this;
+    }
+
+    public APIRequestUpdate setTitle (String title) {
+      this.setParam("title", title);
       return this;
     }
 

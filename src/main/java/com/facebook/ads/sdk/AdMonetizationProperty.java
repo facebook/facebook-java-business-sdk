@@ -501,9 +501,9 @@ public class AdMonetizationProperty extends APINode {
     public static final String[] PARAMS = {
       "aggregation_period",
       "breakdowns",
-      "metrics",
       "filters",
       "limit",
+      "metrics",
       "ordering_column",
       "ordering_type",
       "since",
@@ -584,15 +584,6 @@ public class AdMonetizationProperty extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdNetworkAnalytic setMetrics (List<AdNetworkAnalyticsSyncQueryResult.EnumMetrics> metrics) {
-      this.setParam("metrics", metrics);
-      return this;
-    }
-    public APIRequestCreateAdNetworkAnalytic setMetrics (String metrics) {
-      this.setParam("metrics", metrics);
-      return this;
-    }
-
     public APIRequestCreateAdNetworkAnalytic setFilters (List<Object> filters) {
       this.setParam("filters", filters);
       return this;
@@ -608,6 +599,15 @@ public class AdMonetizationProperty extends APINode {
     }
     public APIRequestCreateAdNetworkAnalytic setLimit (String limit) {
       this.setParam("limit", limit);
+      return this;
+    }
+
+    public APIRequestCreateAdNetworkAnalytic setMetrics (List<AdNetworkAnalyticsSyncQueryResult.EnumMetrics> metrics) {
+      this.setParam("metrics", metrics);
+      return this;
+    }
+    public APIRequestCreateAdNetworkAnalytic setMetrics (String metrics) {
+      this.setParam("metrics", metrics);
       return this;
     }
 

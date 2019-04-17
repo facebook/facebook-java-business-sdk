@@ -103,6 +103,8 @@ public class PagePost extends APINode {
   private String mInstagramEligibility = null;
   @SerializedName("is_app_share")
   private Boolean mIsAppShare = null;
+  @SerializedName("is_eligible_for_promotion")
+  private Boolean mIsEligibleForPromotion = null;
   @SerializedName("is_expired")
   private Boolean mIsExpired = null;
   @SerializedName("is_hidden")
@@ -563,6 +565,10 @@ public class PagePost extends APINode {
     return mIsAppShare;
   }
 
+  public Boolean getFieldIsEligibleForPromotion() {
+    return mIsEligibleForPromotion;
+  }
+
   public Boolean getFieldIsExpired() {
     return mIsExpired;
   }
@@ -828,8 +834,8 @@ public class PagePost extends APINode {
     }
     public static final String[] PARAMS = {
       "filter",
-      "order",
       "live_filter",
+      "order",
       "since",
     };
 
@@ -919,21 +925,21 @@ public class PagePost extends APINode {
       return this;
     }
 
-    public APIRequestGetComments setOrder (Comment.EnumOrder order) {
-      this.setParam("order", order);
-      return this;
-    }
-    public APIRequestGetComments setOrder (String order) {
-      this.setParam("order", order);
-      return this;
-    }
-
     public APIRequestGetComments setLiveFilter (Comment.EnumLiveFilter liveFilter) {
       this.setParam("live_filter", liveFilter);
       return this;
     }
     public APIRequestGetComments setLiveFilter (String liveFilter) {
       this.setParam("live_filter", liveFilter);
+      return this;
+    }
+
+    public APIRequestGetComments setOrder (Comment.EnumOrder order) {
+      this.setParam("order", order);
+      return this;
+    }
+    public APIRequestGetComments setOrder (String order) {
+      this.setParam("order", order);
       return this;
     }
 
@@ -1135,17 +1141,17 @@ public class PagePost extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "message",
-      "tracking",
-      "nectar_module",
       "attachment_id",
-      "attachment_url",
       "attachment_share_url",
-      "post_id",
-      "parent_comment_id",
+      "attachment_url",
       "comment",
-      "feedback_source",
       "comment_privacy_value",
+      "feedback_source",
+      "message",
+      "nectar_module",
+      "parent_comment_id",
+      "post_id",
+      "tracking",
     };
 
     public static final String[] FIELDS = {
@@ -1204,28 +1210,8 @@ public class PagePost extends APINode {
     }
 
 
-    public APIRequestCreateComment setMessage (String message) {
-      this.setParam("message", message);
-      return this;
-    }
-
-    public APIRequestCreateComment setTracking (String tracking) {
-      this.setParam("tracking", tracking);
-      return this;
-    }
-
-    public APIRequestCreateComment setNectarModule (String nectarModule) {
-      this.setParam("nectar_module", nectarModule);
-      return this;
-    }
-
     public APIRequestCreateComment setAttachmentId (String attachmentId) {
       this.setParam("attachment_id", attachmentId);
-      return this;
-    }
-
-    public APIRequestCreateComment setAttachmentUrl (String attachmentUrl) {
-      this.setParam("attachment_url", attachmentUrl);
       return this;
     }
 
@@ -1234,8 +1220,37 @@ public class PagePost extends APINode {
       return this;
     }
 
-    public APIRequestCreateComment setPostId (String postId) {
-      this.setParam("post_id", postId);
+    public APIRequestCreateComment setAttachmentUrl (String attachmentUrl) {
+      this.setParam("attachment_url", attachmentUrl);
+      return this;
+    }
+
+    public APIRequestCreateComment setComment (String comment) {
+      this.setParam("comment", comment);
+      return this;
+    }
+
+    public APIRequestCreateComment setCommentPrivacyValue (Comment.EnumCommentPrivacyValue commentPrivacyValue) {
+      this.setParam("comment_privacy_value", commentPrivacyValue);
+      return this;
+    }
+    public APIRequestCreateComment setCommentPrivacyValue (String commentPrivacyValue) {
+      this.setParam("comment_privacy_value", commentPrivacyValue);
+      return this;
+    }
+
+    public APIRequestCreateComment setFeedbackSource (String feedbackSource) {
+      this.setParam("feedback_source", feedbackSource);
+      return this;
+    }
+
+    public APIRequestCreateComment setMessage (String message) {
+      this.setParam("message", message);
+      return this;
+    }
+
+    public APIRequestCreateComment setNectarModule (String nectarModule) {
+      this.setParam("nectar_module", nectarModule);
       return this;
     }
 
@@ -1248,22 +1263,13 @@ public class PagePost extends APINode {
       return this;
     }
 
-    public APIRequestCreateComment setComment (String comment) {
-      this.setParam("comment", comment);
+    public APIRequestCreateComment setPostId (String postId) {
+      this.setParam("post_id", postId);
       return this;
     }
 
-    public APIRequestCreateComment setFeedbackSource (String feedbackSource) {
-      this.setParam("feedback_source", feedbackSource);
-      return this;
-    }
-
-    public APIRequestCreateComment setCommentPrivacyValue (Comment.EnumCommentPrivacyValue commentPrivacyValue) {
-      this.setParam("comment_privacy_value", commentPrivacyValue);
-      return this;
-    }
-    public APIRequestCreateComment setCommentPrivacyValue (String commentPrivacyValue) {
-      this.setParam("comment_privacy_value", commentPrivacyValue);
+    public APIRequestCreateComment setTracking (String tracking) {
+      this.setParam("tracking", tracking);
       return this;
     }
 
@@ -1609,11 +1615,11 @@ public class PagePost extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "since",
-      "until",
+      "date_preset",
       "metric",
       "period",
-      "date_preset",
+      "since",
+      "until",
     };
 
     public static final String[] FIELDS = {
@@ -1679,13 +1685,12 @@ public class PagePost extends APINode {
     }
 
 
-    public APIRequestGetInsights setSince (String since) {
-      this.setParam("since", since);
+    public APIRequestGetInsights setDatePreset (InsightsResult.EnumDatePreset datePreset) {
+      this.setParam("date_preset", datePreset);
       return this;
     }
-
-    public APIRequestGetInsights setUntil (String until) {
-      this.setParam("until", until);
+    public APIRequestGetInsights setDatePreset (String datePreset) {
+      this.setParam("date_preset", datePreset);
       return this;
     }
 
@@ -1707,12 +1712,13 @@ public class PagePost extends APINode {
       return this;
     }
 
-    public APIRequestGetInsights setDatePreset (InsightsResult.EnumDatePreset datePreset) {
-      this.setParam("date_preset", datePreset);
+    public APIRequestGetInsights setSince (String since) {
+      this.setParam("since", since);
       return this;
     }
-    public APIRequestGetInsights setDatePreset (String datePreset) {
-      this.setParam("date_preset", datePreset);
+
+    public APIRequestGetInsights setUntil (String until) {
+      this.setParam("until", until);
       return this;
     }
 
@@ -1811,8 +1817,8 @@ public class PagePost extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "tracking",
       "nectar_module",
+      "tracking",
     };
 
     public static final String[] FIELDS = {
@@ -1871,13 +1877,13 @@ public class PagePost extends APINode {
     }
 
 
-    public APIRequestDeleteLikes setTracking (String tracking) {
-      this.setParam("tracking", tracking);
+    public APIRequestDeleteLikes setNectarModule (String nectarModule) {
+      this.setParam("nectar_module", nectarModule);
       return this;
     }
 
-    public APIRequestDeleteLikes setNectarModule (String nectarModule) {
-      this.setParam("nectar_module", nectarModule);
+    public APIRequestDeleteLikes setTracking (String tracking) {
+      this.setParam("tracking", tracking);
       return this;
     }
 
@@ -2119,9 +2125,9 @@ public class PagePost extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "tracking",
-      "nectar_module",
       "feedback_source",
+      "nectar_module",
+      "tracking",
     };
 
     public static final String[] FIELDS = {
@@ -2180,8 +2186,8 @@ public class PagePost extends APINode {
     }
 
 
-    public APIRequestCreateLike setTracking (String tracking) {
-      this.setParam("tracking", tracking);
+    public APIRequestCreateLike setFeedbackSource (String feedbackSource) {
+      this.setParam("feedback_source", feedbackSource);
       return this;
     }
 
@@ -2190,8 +2196,8 @@ public class PagePost extends APINode {
       return this;
     }
 
-    public APIRequestCreateLike setFeedbackSource (String feedbackSource) {
-      this.setParam("feedback_source", feedbackSource);
+    public APIRequestCreateLike setTracking (String tracking) {
+      this.setParam("tracking", tracking);
       return this;
     }
 
@@ -2241,19 +2247,19 @@ public class PagePost extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "budget",
-      "currency",
       "ad_account_id",
-      "audience",
-      "targeting",
-      "start_time",
-      "stop_time",
       "ad_conversion_pixel_id",
-      "placement",
-      "flow_id",
+      "audience",
       "audience_id",
       "bid_amount",
+      "budget",
       "cta_type",
+      "currency",
+      "flow_id",
+      "placement",
+      "start_time",
+      "stop_time",
+      "targeting",
     };
 
     public static final String[] FIELDS = {
@@ -2312,22 +2318,17 @@ public class PagePost extends APINode {
     }
 
 
-    public APIRequestCreatePromotion setBudget (Long budget) {
-      this.setParam("budget", budget);
-      return this;
-    }
-    public APIRequestCreatePromotion setBudget (String budget) {
-      this.setParam("budget", budget);
-      return this;
-    }
-
-    public APIRequestCreatePromotion setCurrency (String currency) {
-      this.setParam("currency", currency);
-      return this;
-    }
-
     public APIRequestCreatePromotion setAdAccountId (String adAccountId) {
       this.setParam("ad_account_id", adAccountId);
+      return this;
+    }
+
+    public APIRequestCreatePromotion setAdConversionPixelId (Long adConversionPixelId) {
+      this.setParam("ad_conversion_pixel_id", adConversionPixelId);
+      return this;
+    }
+    public APIRequestCreatePromotion setAdConversionPixelId (String adConversionPixelId) {
+      this.setParam("ad_conversion_pixel_id", adConversionPixelId);
       return this;
     }
 
@@ -2340,12 +2341,50 @@ public class PagePost extends APINode {
       return this;
     }
 
-    public APIRequestCreatePromotion setTargeting (Targeting targeting) {
-      this.setParam("targeting", targeting);
+    public APIRequestCreatePromotion setAudienceId (String audienceId) {
+      this.setParam("audience_id", audienceId);
       return this;
     }
-    public APIRequestCreatePromotion setTargeting (String targeting) {
-      this.setParam("targeting", targeting);
+
+    public APIRequestCreatePromotion setBidAmount (Long bidAmount) {
+      this.setParam("bid_amount", bidAmount);
+      return this;
+    }
+    public APIRequestCreatePromotion setBidAmount (String bidAmount) {
+      this.setParam("bid_amount", bidAmount);
+      return this;
+    }
+
+    public APIRequestCreatePromotion setBudget (Long budget) {
+      this.setParam("budget", budget);
+      return this;
+    }
+    public APIRequestCreatePromotion setBudget (String budget) {
+      this.setParam("budget", budget);
+      return this;
+    }
+
+    public APIRequestCreatePromotion setCtaType (EnumCtaType ctaType) {
+      this.setParam("cta_type", ctaType);
+      return this;
+    }
+    public APIRequestCreatePromotion setCtaType (String ctaType) {
+      this.setParam("cta_type", ctaType);
+      return this;
+    }
+
+    public APIRequestCreatePromotion setCurrency (String currency) {
+      this.setParam("currency", currency);
+      return this;
+    }
+
+    public APIRequestCreatePromotion setFlowId (String flowId) {
+      this.setParam("flow_id", flowId);
+      return this;
+    }
+
+    public APIRequestCreatePromotion setPlacement (String placement) {
+      this.setParam("placement", placement);
       return this;
     }
 
@@ -2367,45 +2406,12 @@ public class PagePost extends APINode {
       return this;
     }
 
-    public APIRequestCreatePromotion setAdConversionPixelId (Long adConversionPixelId) {
-      this.setParam("ad_conversion_pixel_id", adConversionPixelId);
+    public APIRequestCreatePromotion setTargeting (Targeting targeting) {
+      this.setParam("targeting", targeting);
       return this;
     }
-    public APIRequestCreatePromotion setAdConversionPixelId (String adConversionPixelId) {
-      this.setParam("ad_conversion_pixel_id", adConversionPixelId);
-      return this;
-    }
-
-    public APIRequestCreatePromotion setPlacement (String placement) {
-      this.setParam("placement", placement);
-      return this;
-    }
-
-    public APIRequestCreatePromotion setFlowId (String flowId) {
-      this.setParam("flow_id", flowId);
-      return this;
-    }
-
-    public APIRequestCreatePromotion setAudienceId (String audienceId) {
-      this.setParam("audience_id", audienceId);
-      return this;
-    }
-
-    public APIRequestCreatePromotion setBidAmount (Long bidAmount) {
-      this.setParam("bid_amount", bidAmount);
-      return this;
-    }
-    public APIRequestCreatePromotion setBidAmount (String bidAmount) {
-      this.setParam("bid_amount", bidAmount);
-      return this;
-    }
-
-    public APIRequestCreatePromotion setCtaType (EnumCtaType ctaType) {
-      this.setParam("cta_type", ctaType);
-      return this;
-    }
-    public APIRequestCreatePromotion setCtaType (String ctaType) {
-      this.setParam("cta_type", ctaType);
+    public APIRequestCreatePromotion setTargeting (String targeting) {
+      this.setParam("targeting", targeting);
       return this;
     }
 
@@ -3267,6 +3273,7 @@ public class PagePost extends APINode {
       "id",
       "instagram_eligibility",
       "is_app_share",
+      "is_eligible_for_promotion",
       "is_expired",
       "is_hidden",
       "is_instagram_eligible",
@@ -3553,6 +3560,13 @@ public class PagePost extends APINode {
     }
     public APIRequestGetSharedPosts requestIsAppShareField (boolean value) {
       this.requestField("is_app_share", value);
+      return this;
+    }
+    public APIRequestGetSharedPosts requestIsEligibleForPromotionField () {
+      return this.requestIsEligibleForPromotionField(true);
+    }
+    public APIRequestGetSharedPosts requestIsEligibleForPromotionField (boolean value) {
+      this.requestField("is_eligible_for_promotion", value);
       return this;
     }
     public APIRequestGetSharedPosts requestIsExpiredField () {
@@ -5580,6 +5594,7 @@ public class PagePost extends APINode {
       "id",
       "instagram_eligibility",
       "is_app_share",
+      "is_eligible_for_promotion",
       "is_expired",
       "is_hidden",
       "is_instagram_eligible",
@@ -5875,6 +5890,13 @@ public class PagePost extends APINode {
       this.requestField("is_app_share", value);
       return this;
     }
+    public APIRequestGet requestIsEligibleForPromotionField () {
+      return this.requestIsEligibleForPromotionField(true);
+    }
+    public APIRequestGet requestIsEligibleForPromotionField (boolean value) {
+      this.requestField("is_eligible_for_promotion", value);
+      return this;
+    }
     public APIRequestGet requestIsExpiredField () {
       return this.requestIsExpiredField(true);
     }
@@ -6137,36 +6159,36 @@ public class PagePost extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "privacy",
-      "composer_session_id",
-      "message",
-      "is_hidden",
-      "is_published",
-      "scheduled_publish_time",
-      "is_pinned",
-      "timeline_visibility",
-      "feed_story_visibility",
+      "attached_media",
       "backdated_time",
       "backdated_time_granularity",
-      "tracking",
-      "source_type",
-      "attached_media",
+      "composer_session_id",
+      "direct_share_status",
+      "feed_story_visibility",
+      "is_explicit_location",
+      "is_hidden",
+      "is_pinned",
+      "is_published",
+      "message",
       "og_action_type_id",
+      "og_hide_object_attachment",
+      "og_icon_id",
       "og_object_id",
       "og_phrase",
-      "og_icon_id",
-      "og_suggestion_mechanism",
-      "og_hide_object_attachment",
-      "tags",
       "og_set_profile_badge",
+      "og_suggestion_mechanism",
       "place",
-      "is_explicit_location",
+      "privacy",
       "product_item",
+      "scheduled_publish_time",
       "should_sync_product_edit",
+      "source_type",
       "sponsor_id",
-      "direct_share_status",
       "sponsor_relationship",
+      "tags",
       "text_format_preset_id",
+      "timeline_visibility",
+      "tracking",
     };
 
     public static final String[] FIELDS = {
@@ -6225,72 +6247,12 @@ public class PagePost extends APINode {
     }
 
 
-    public APIRequestUpdate setPrivacy (String privacy) {
-      this.setParam("privacy", privacy);
+    public APIRequestUpdate setAttachedMedia (List<Object> attachedMedia) {
+      this.setParam("attached_media", attachedMedia);
       return this;
     }
-
-    public APIRequestUpdate setComposerSessionId (String composerSessionId) {
-      this.setParam("composer_session_id", composerSessionId);
-      return this;
-    }
-
-    public APIRequestUpdate setMessage (String message) {
-      this.setParam("message", message);
-      return this;
-    }
-
-    public APIRequestUpdate setIsHidden (Boolean isHidden) {
-      this.setParam("is_hidden", isHidden);
-      return this;
-    }
-    public APIRequestUpdate setIsHidden (String isHidden) {
-      this.setParam("is_hidden", isHidden);
-      return this;
-    }
-
-    public APIRequestUpdate setIsPublished (Boolean isPublished) {
-      this.setParam("is_published", isPublished);
-      return this;
-    }
-    public APIRequestUpdate setIsPublished (String isPublished) {
-      this.setParam("is_published", isPublished);
-      return this;
-    }
-
-    public APIRequestUpdate setScheduledPublishTime (Long scheduledPublishTime) {
-      this.setParam("scheduled_publish_time", scheduledPublishTime);
-      return this;
-    }
-    public APIRequestUpdate setScheduledPublishTime (String scheduledPublishTime) {
-      this.setParam("scheduled_publish_time", scheduledPublishTime);
-      return this;
-    }
-
-    public APIRequestUpdate setIsPinned (Boolean isPinned) {
-      this.setParam("is_pinned", isPinned);
-      return this;
-    }
-    public APIRequestUpdate setIsPinned (String isPinned) {
-      this.setParam("is_pinned", isPinned);
-      return this;
-    }
-
-    public APIRequestUpdate setTimelineVisibility (PagePost.EnumTimelineVisibility timelineVisibility) {
-      this.setParam("timeline_visibility", timelineVisibility);
-      return this;
-    }
-    public APIRequestUpdate setTimelineVisibility (String timelineVisibility) {
-      this.setParam("timeline_visibility", timelineVisibility);
-      return this;
-    }
-
-    public APIRequestUpdate setFeedStoryVisibility (PagePost.EnumFeedStoryVisibility feedStoryVisibility) {
-      this.setParam("feed_story_visibility", feedStoryVisibility);
-      return this;
-    }
-    public APIRequestUpdate setFeedStoryVisibility (String feedStoryVisibility) {
-      this.setParam("feed_story_visibility", feedStoryVisibility);
+    public APIRequestUpdate setAttachedMedia (String attachedMedia) {
+      this.setParam("attached_media", attachedMedia);
       return this;
     }
 
@@ -6308,27 +6270,86 @@ public class PagePost extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setTracking (String tracking) {
-      this.setParam("tracking", tracking);
+    public APIRequestUpdate setComposerSessionId (String composerSessionId) {
+      this.setParam("composer_session_id", composerSessionId);
       return this;
     }
 
-    public APIRequestUpdate setSourceType (String sourceType) {
-      this.setParam("source_type", sourceType);
+    public APIRequestUpdate setDirectShareStatus (Long directShareStatus) {
+      this.setParam("direct_share_status", directShareStatus);
+      return this;
+    }
+    public APIRequestUpdate setDirectShareStatus (String directShareStatus) {
+      this.setParam("direct_share_status", directShareStatus);
       return this;
     }
 
-    public APIRequestUpdate setAttachedMedia (List<Object> attachedMedia) {
-      this.setParam("attached_media", attachedMedia);
+    public APIRequestUpdate setFeedStoryVisibility (PagePost.EnumFeedStoryVisibility feedStoryVisibility) {
+      this.setParam("feed_story_visibility", feedStoryVisibility);
       return this;
     }
-    public APIRequestUpdate setAttachedMedia (String attachedMedia) {
-      this.setParam("attached_media", attachedMedia);
+    public APIRequestUpdate setFeedStoryVisibility (String feedStoryVisibility) {
+      this.setParam("feed_story_visibility", feedStoryVisibility);
+      return this;
+    }
+
+    public APIRequestUpdate setIsExplicitLocation (Boolean isExplicitLocation) {
+      this.setParam("is_explicit_location", isExplicitLocation);
+      return this;
+    }
+    public APIRequestUpdate setIsExplicitLocation (String isExplicitLocation) {
+      this.setParam("is_explicit_location", isExplicitLocation);
+      return this;
+    }
+
+    public APIRequestUpdate setIsHidden (Boolean isHidden) {
+      this.setParam("is_hidden", isHidden);
+      return this;
+    }
+    public APIRequestUpdate setIsHidden (String isHidden) {
+      this.setParam("is_hidden", isHidden);
+      return this;
+    }
+
+    public APIRequestUpdate setIsPinned (Boolean isPinned) {
+      this.setParam("is_pinned", isPinned);
+      return this;
+    }
+    public APIRequestUpdate setIsPinned (String isPinned) {
+      this.setParam("is_pinned", isPinned);
+      return this;
+    }
+
+    public APIRequestUpdate setIsPublished (Boolean isPublished) {
+      this.setParam("is_published", isPublished);
+      return this;
+    }
+    public APIRequestUpdate setIsPublished (String isPublished) {
+      this.setParam("is_published", isPublished);
+      return this;
+    }
+
+    public APIRequestUpdate setMessage (String message) {
+      this.setParam("message", message);
       return this;
     }
 
     public APIRequestUpdate setOgActionTypeId (String ogActionTypeId) {
       this.setParam("og_action_type_id", ogActionTypeId);
+      return this;
+    }
+
+    public APIRequestUpdate setOgHideObjectAttachment (Boolean ogHideObjectAttachment) {
+      this.setParam("og_hide_object_attachment", ogHideObjectAttachment);
+      return this;
+    }
+    public APIRequestUpdate setOgHideObjectAttachment (String ogHideObjectAttachment) {
+      this.setParam("og_hide_object_attachment", ogHideObjectAttachment);
+      return this;
+    }
+
+    public APIRequestUpdate setOgIconId (String ogIconId) {
+      this.setParam("og_icon_id", ogIconId);
       return this;
     }
 
@@ -6342,40 +6363,17 @@ public class PagePost extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setOgIconId (String ogIconId) {
-      this.setParam("og_icon_id", ogIconId);
-      return this;
-    }
-
-    public APIRequestUpdate setOgSuggestionMechanism (String ogSuggestionMechanism) {
-      this.setParam("og_suggestion_mechanism", ogSuggestionMechanism);
-      return this;
-    }
-
-    public APIRequestUpdate setOgHideObjectAttachment (Boolean ogHideObjectAttachment) {
-      this.setParam("og_hide_object_attachment", ogHideObjectAttachment);
-      return this;
-    }
-    public APIRequestUpdate setOgHideObjectAttachment (String ogHideObjectAttachment) {
-      this.setParam("og_hide_object_attachment", ogHideObjectAttachment);
-      return this;
-    }
-
-    public APIRequestUpdate setTags (List<Long> tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-    public APIRequestUpdate setTags (String tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-
     public APIRequestUpdate setOgSetProfileBadge (Boolean ogSetProfileBadge) {
       this.setParam("og_set_profile_badge", ogSetProfileBadge);
       return this;
     }
     public APIRequestUpdate setOgSetProfileBadge (String ogSetProfileBadge) {
       this.setParam("og_set_profile_badge", ogSetProfileBadge);
+      return this;
+    }
+
+    public APIRequestUpdate setOgSuggestionMechanism (String ogSuggestionMechanism) {
+      this.setParam("og_suggestion_mechanism", ogSuggestionMechanism);
       return this;
     }
 
@@ -6388,12 +6386,8 @@ public class PagePost extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setIsExplicitLocation (Boolean isExplicitLocation) {
-      this.setParam("is_explicit_location", isExplicitLocation);
-      return this;
-    }
-    public APIRequestUpdate setIsExplicitLocation (String isExplicitLocation) {
-      this.setParam("is_explicit_location", isExplicitLocation);
+    public APIRequestUpdate setPrivacy (String privacy) {
+      this.setParam("privacy", privacy);
       return this;
     }
 
@@ -6406,6 +6400,15 @@ public class PagePost extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setScheduledPublishTime (Long scheduledPublishTime) {
+      this.setParam("scheduled_publish_time", scheduledPublishTime);
+      return this;
+    }
+    public APIRequestUpdate setScheduledPublishTime (String scheduledPublishTime) {
+      this.setParam("scheduled_publish_time", scheduledPublishTime);
+      return this;
+    }
+
     public APIRequestUpdate setShouldSyncProductEdit (Boolean shouldSyncProductEdit) {
       this.setParam("should_sync_product_edit", shouldSyncProductEdit);
       return this;
@@ -6415,17 +6418,13 @@ public class PagePost extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setSponsorId (String sponsorId) {
-      this.setParam("sponsor_id", sponsorId);
+    public APIRequestUpdate setSourceType (String sourceType) {
+      this.setParam("source_type", sourceType);
       return this;
     }
 
-    public APIRequestUpdate setDirectShareStatus (Long directShareStatus) {
-      this.setParam("direct_share_status", directShareStatus);
-      return this;
-    }
-    public APIRequestUpdate setDirectShareStatus (String directShareStatus) {
-      this.setParam("direct_share_status", directShareStatus);
+    public APIRequestUpdate setSponsorId (String sponsorId) {
+      this.setParam("sponsor_id", sponsorId);
       return this;
     }
 
@@ -6438,8 +6437,31 @@ public class PagePost extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setTags (List<Long> tags) {
+      this.setParam("tags", tags);
+      return this;
+    }
+    public APIRequestUpdate setTags (String tags) {
+      this.setParam("tags", tags);
+      return this;
+    }
+
     public APIRequestUpdate setTextFormatPresetId (String textFormatPresetId) {
       this.setParam("text_format_preset_id", textFormatPresetId);
+      return this;
+    }
+
+    public APIRequestUpdate setTimelineVisibility (PagePost.EnumTimelineVisibility timelineVisibility) {
+      this.setParam("timeline_visibility", timelineVisibility);
+      return this;
+    }
+    public APIRequestUpdate setTimelineVisibility (String timelineVisibility) {
+      this.setParam("timeline_visibility", timelineVisibility);
+      return this;
+    }
+
+    public APIRequestUpdate setTracking (String tracking) {
+      this.setParam("tracking", tracking);
       return this;
     }
 
@@ -6780,6 +6802,8 @@ public class PagePost extends APINode {
       VALUE_CALL("CALL"),
       @SerializedName("CALL_ME")
       VALUE_CALL_ME("CALL_ME"),
+      @SerializedName("CONTACT")
+      VALUE_CONTACT("CONTACT"),
       @SerializedName("CONTACT_US")
       VALUE_CONTACT_US("CONTACT_US"),
       @SerializedName("DONATE")
@@ -6790,6 +6814,8 @@ public class PagePost extends APINode {
       VALUE_DOWNLOAD("DOWNLOAD"),
       @SerializedName("EVENT_RSVP")
       VALUE_EVENT_RSVP("EVENT_RSVP"),
+      @SerializedName("FIND_A_GROUP")
+      VALUE_FIND_A_GROUP("FIND_A_GROUP"),
       @SerializedName("FOLLOW_NEWS_STORYLINE")
       VALUE_FOLLOW_NEWS_STORYLINE("FOLLOW_NEWS_STORYLINE"),
       @SerializedName("GET_DIRECTIONS")
@@ -6915,6 +6941,7 @@ public class PagePost extends APINode {
     this.mId = instance.mId;
     this.mInstagramEligibility = instance.mInstagramEligibility;
     this.mIsAppShare = instance.mIsAppShare;
+    this.mIsEligibleForPromotion = instance.mIsEligibleForPromotion;
     this.mIsExpired = instance.mIsExpired;
     this.mIsHidden = instance.mIsHidden;
     this.mIsInstagramEligible = instance.mIsInstagramEligible;

@@ -72,7 +72,7 @@ public class IGMedia extends APINode {
   @SerializedName("media_url")
   private String mMediaUrl = null;
   @SerializedName("owner")
-  private Object mOwner = null;
+  private IGUser mOwner = null;
   @SerializedName("permalink")
   private String mPermalink = null;
   @SerializedName("shortcode")
@@ -349,7 +349,10 @@ public class IGMedia extends APINode {
     return mMediaUrl;
   }
 
-  public Object getFieldOwner() {
+  public IGUser getFieldOwner() {
+    if (mOwner != null) {
+      mOwner.context = getContext();
+    }
     return mOwner;
   }
 

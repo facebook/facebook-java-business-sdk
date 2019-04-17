@@ -447,8 +447,8 @@ public class OpenGraphObject extends APINode {
     }
     public static final String[] PARAMS = {
       "filter",
-      "order",
       "live_filter",
+      "order",
       "since",
     };
 
@@ -538,21 +538,21 @@ public class OpenGraphObject extends APINode {
       return this;
     }
 
-    public APIRequestGetComments setOrder (Comment.EnumOrder order) {
-      this.setParam("order", order);
-      return this;
-    }
-    public APIRequestGetComments setOrder (String order) {
-      this.setParam("order", order);
-      return this;
-    }
-
     public APIRequestGetComments setLiveFilter (Comment.EnumLiveFilter liveFilter) {
       this.setParam("live_filter", liveFilter);
       return this;
     }
     public APIRequestGetComments setLiveFilter (String liveFilter) {
       this.setParam("live_filter", liveFilter);
+      return this;
+    }
+
+    public APIRequestGetComments setOrder (Comment.EnumOrder order) {
+      this.setParam("order", order);
+      return this;
+    }
+    public APIRequestGetComments setOrder (String order) {
+      this.setParam("order", order);
       return this;
     }
 
@@ -754,17 +754,17 @@ public class OpenGraphObject extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "attachment_id",
+      "attachment_share_url",
+      "attachment_url",
+      "comment_privacy_value",
+      "facepile_mentioned_ids",
+      "feedback_source",
+      "is_offline",
+      "message",
+      "nectar_module",
       "object_id",
       "parent_comment_id",
-      "nectar_module",
-      "attachment_id",
-      "attachment_url",
-      "attachment_share_url",
-      "feedback_source",
-      "facepile_mentioned_ids",
-      "is_offline",
-      "comment_privacy_value",
-      "message",
       "text",
       "tracking",
     };
@@ -825,32 +825,8 @@ public class OpenGraphObject extends APINode {
     }
 
 
-    public APIRequestCreateComment setObjectId (String objectId) {
-      this.setParam("object_id", objectId);
-      return this;
-    }
-
-    public APIRequestCreateComment setParentCommentId (Object parentCommentId) {
-      this.setParam("parent_comment_id", parentCommentId);
-      return this;
-    }
-    public APIRequestCreateComment setParentCommentId (String parentCommentId) {
-      this.setParam("parent_comment_id", parentCommentId);
-      return this;
-    }
-
-    public APIRequestCreateComment setNectarModule (String nectarModule) {
-      this.setParam("nectar_module", nectarModule);
-      return this;
-    }
-
     public APIRequestCreateComment setAttachmentId (String attachmentId) {
       this.setParam("attachment_id", attachmentId);
-      return this;
-    }
-
-    public APIRequestCreateComment setAttachmentUrl (String attachmentUrl) {
-      this.setParam("attachment_url", attachmentUrl);
       return this;
     }
 
@@ -859,26 +835,8 @@ public class OpenGraphObject extends APINode {
       return this;
     }
 
-    public APIRequestCreateComment setFeedbackSource (String feedbackSource) {
-      this.setParam("feedback_source", feedbackSource);
-      return this;
-    }
-
-    public APIRequestCreateComment setFacepileMentionedIds (List<String> facepileMentionedIds) {
-      this.setParam("facepile_mentioned_ids", facepileMentionedIds);
-      return this;
-    }
-    public APIRequestCreateComment setFacepileMentionedIds (String facepileMentionedIds) {
-      this.setParam("facepile_mentioned_ids", facepileMentionedIds);
-      return this;
-    }
-
-    public APIRequestCreateComment setIsOffline (Boolean isOffline) {
-      this.setParam("is_offline", isOffline);
-      return this;
-    }
-    public APIRequestCreateComment setIsOffline (String isOffline) {
-      this.setParam("is_offline", isOffline);
+    public APIRequestCreateComment setAttachmentUrl (String attachmentUrl) {
+      this.setParam("attachment_url", attachmentUrl);
       return this;
     }
 
@@ -891,8 +849,50 @@ public class OpenGraphObject extends APINode {
       return this;
     }
 
+    public APIRequestCreateComment setFacepileMentionedIds (List<String> facepileMentionedIds) {
+      this.setParam("facepile_mentioned_ids", facepileMentionedIds);
+      return this;
+    }
+    public APIRequestCreateComment setFacepileMentionedIds (String facepileMentionedIds) {
+      this.setParam("facepile_mentioned_ids", facepileMentionedIds);
+      return this;
+    }
+
+    public APIRequestCreateComment setFeedbackSource (String feedbackSource) {
+      this.setParam("feedback_source", feedbackSource);
+      return this;
+    }
+
+    public APIRequestCreateComment setIsOffline (Boolean isOffline) {
+      this.setParam("is_offline", isOffline);
+      return this;
+    }
+    public APIRequestCreateComment setIsOffline (String isOffline) {
+      this.setParam("is_offline", isOffline);
+      return this;
+    }
+
     public APIRequestCreateComment setMessage (String message) {
       this.setParam("message", message);
+      return this;
+    }
+
+    public APIRequestCreateComment setNectarModule (String nectarModule) {
+      this.setParam("nectar_module", nectarModule);
+      return this;
+    }
+
+    public APIRequestCreateComment setObjectId (String objectId) {
+      this.setParam("object_id", objectId);
+      return this;
+    }
+
+    public APIRequestCreateComment setParentCommentId (Object parentCommentId) {
+      this.setParam("parent_comment_id", parentCommentId);
+      return this;
+    }
+    public APIRequestCreateComment setParentCommentId (String parentCommentId) {
+      this.setParam("parent_comment_id", parentCommentId);
       return this;
     }
 
@@ -1144,10 +1144,10 @@ public class OpenGraphObject extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "message",
-      "url",
-      "ref",
       "action",
+      "message",
+      "ref",
+      "url",
     };
 
     public static final String[] FIELDS = {
@@ -1206,13 +1206,13 @@ public class OpenGraphObject extends APINode {
     }
 
 
-    public APIRequestCreateLike setMessage (String message) {
-      this.setParam("message", message);
+    public APIRequestCreateLike setAction (String action) {
+      this.setParam("action", action);
       return this;
     }
 
-    public APIRequestCreateLike setUrl (String url) {
-      this.setParam("url", url);
+    public APIRequestCreateLike setMessage (String message) {
+      this.setParam("message", message);
       return this;
     }
 
@@ -1221,8 +1221,8 @@ public class OpenGraphObject extends APINode {
       return this;
     }
 
-    public APIRequestCreateLike setAction (String action) {
-      this.setParam("action", action);
+    public APIRequestCreateLike setUrl (String url) {
+      this.setParam("url", url);
       return this;
     }
 
@@ -1273,56 +1273,56 @@ public class OpenGraphObject extends APINode {
     }
     public static final String[] PARAMS = {
       "aid",
+      "allow_spherical_photo",
       "alt_text_custom",
-      "caption",
-      "url",
-      "uid",
-      "profile_id",
-      "target_id",
-      "vault_image_id",
-      "tags",
-      "place",
-      "is_explicit_place",
-      "is_explicit_location",
-      "og_action_type_id",
-      "og_object_id",
-      "og_phrase",
-      "og_icon_id",
-      "og_suggestion_mechanism",
-      "og_set_profile_badge",
-      "privacy",
-      "targeting",
-      "feed_targeting",
-      "no_story",
-      "published",
-      "offline_id",
+      "android_key_hash",
+      "application_id",
       "attempt",
+      "audience_exp",
       "backdated_time",
       "backdated_time_granularity",
-      "time_since_original_post",
-      "filter_type",
-      "scheduled_publish_time",
-      "unpublished_content_type",
-      "full_res_is_coming_later",
+      "caption",
       "composer_session_id",
-      "qn",
-      "manual_privacy",
-      "audience_exp",
-      "proxied_app_id",
-      "ios_bundle_id",
-      "android_key_hash",
-      "user_selected_tags",
-      "allow_spherical_photo",
-      "spherical_metadata",
+      "direct_share_status",
+      "feed_targeting",
+      "filter_type",
+      "full_res_is_coming_later",
       "initial_view_heading_override_degrees",
       "initial_view_pitch_override_degrees",
       "initial_view_vertical_fov_override_degrees",
-      "sponsor_id",
-      "direct_share_status",
-      "sponsor_relationship",
-      "application_id",
-      "name",
+      "ios_bundle_id",
+      "is_explicit_location",
+      "is_explicit_place",
+      "manual_privacy",
       "message",
+      "name",
+      "no_story",
+      "offline_id",
+      "og_action_type_id",
+      "og_icon_id",
+      "og_object_id",
+      "og_phrase",
+      "og_set_profile_badge",
+      "og_suggestion_mechanism",
+      "place",
+      "privacy",
+      "profile_id",
+      "proxied_app_id",
+      "published",
+      "qn",
+      "scheduled_publish_time",
+      "spherical_metadata",
+      "sponsor_id",
+      "sponsor_relationship",
+      "tags",
+      "target_id",
+      "targeting",
+      "time_since_original_post",
+      "uid",
+      "unpublished_content_type",
+      "url",
+      "user_selected_tags",
+      "vault_image_id",
     };
 
     public static final String[] FIELDS = {
@@ -1386,170 +1386,27 @@ public class OpenGraphObject extends APINode {
       return this;
     }
 
+    public APIRequestCreatePhoto setAllowSphericalPhoto (Boolean allowSphericalPhoto) {
+      this.setParam("allow_spherical_photo", allowSphericalPhoto);
+      return this;
+    }
+    public APIRequestCreatePhoto setAllowSphericalPhoto (String allowSphericalPhoto) {
+      this.setParam("allow_spherical_photo", allowSphericalPhoto);
+      return this;
+    }
+
     public APIRequestCreatePhoto setAltTextCustom (String altTextCustom) {
       this.setParam("alt_text_custom", altTextCustom);
       return this;
     }
 
-    public APIRequestCreatePhoto setCaption (String caption) {
-      this.setParam("caption", caption);
+    public APIRequestCreatePhoto setAndroidKeyHash (String androidKeyHash) {
+      this.setParam("android_key_hash", androidKeyHash);
       return this;
     }
 
-    public APIRequestCreatePhoto setUrl (String url) {
-      this.setParam("url", url);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setUid (Long uid) {
-      this.setParam("uid", uid);
-      return this;
-    }
-    public APIRequestCreatePhoto setUid (String uid) {
-      this.setParam("uid", uid);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setProfileId (Long profileId) {
-      this.setParam("profile_id", profileId);
-      return this;
-    }
-    public APIRequestCreatePhoto setProfileId (String profileId) {
-      this.setParam("profile_id", profileId);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setTargetId (Long targetId) {
-      this.setParam("target_id", targetId);
-      return this;
-    }
-    public APIRequestCreatePhoto setTargetId (String targetId) {
-      this.setParam("target_id", targetId);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setVaultImageId (String vaultImageId) {
-      this.setParam("vault_image_id", vaultImageId);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setTags (List<Object> tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-    public APIRequestCreatePhoto setTags (String tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setPlace (Object place) {
-      this.setParam("place", place);
-      return this;
-    }
-    public APIRequestCreatePhoto setPlace (String place) {
-      this.setParam("place", place);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setIsExplicitPlace (Boolean isExplicitPlace) {
-      this.setParam("is_explicit_place", isExplicitPlace);
-      return this;
-    }
-    public APIRequestCreatePhoto setIsExplicitPlace (String isExplicitPlace) {
-      this.setParam("is_explicit_place", isExplicitPlace);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setIsExplicitLocation (Boolean isExplicitLocation) {
-      this.setParam("is_explicit_location", isExplicitLocation);
-      return this;
-    }
-    public APIRequestCreatePhoto setIsExplicitLocation (String isExplicitLocation) {
-      this.setParam("is_explicit_location", isExplicitLocation);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setOgActionTypeId (String ogActionTypeId) {
-      this.setParam("og_action_type_id", ogActionTypeId);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setOgObjectId (String ogObjectId) {
-      this.setParam("og_object_id", ogObjectId);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setOgPhrase (String ogPhrase) {
-      this.setParam("og_phrase", ogPhrase);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setOgIconId (String ogIconId) {
-      this.setParam("og_icon_id", ogIconId);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setOgSuggestionMechanism (String ogSuggestionMechanism) {
-      this.setParam("og_suggestion_mechanism", ogSuggestionMechanism);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setOgSetProfileBadge (Boolean ogSetProfileBadge) {
-      this.setParam("og_set_profile_badge", ogSetProfileBadge);
-      return this;
-    }
-    public APIRequestCreatePhoto setOgSetProfileBadge (String ogSetProfileBadge) {
-      this.setParam("og_set_profile_badge", ogSetProfileBadge);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setPrivacy (String privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setTargeting (Object targeting) {
-      this.setParam("targeting", targeting);
-      return this;
-    }
-    public APIRequestCreatePhoto setTargeting (String targeting) {
-      this.setParam("targeting", targeting);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setFeedTargeting (Object feedTargeting) {
-      this.setParam("feed_targeting", feedTargeting);
-      return this;
-    }
-    public APIRequestCreatePhoto setFeedTargeting (String feedTargeting) {
-      this.setParam("feed_targeting", feedTargeting);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setNoStory (Boolean noStory) {
-      this.setParam("no_story", noStory);
-      return this;
-    }
-    public APIRequestCreatePhoto setNoStory (String noStory) {
-      this.setParam("no_story", noStory);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setPublished (Boolean published) {
-      this.setParam("published", published);
-      return this;
-    }
-    public APIRequestCreatePhoto setPublished (String published) {
-      this.setParam("published", published);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setOfflineId (Long offlineId) {
-      this.setParam("offline_id", offlineId);
-      return this;
-    }
-    public APIRequestCreatePhoto setOfflineId (String offlineId) {
-      this.setParam("offline_id", offlineId);
+    public APIRequestCreatePhoto setApplicationId (String applicationId) {
+      this.setParam("application_id", applicationId);
       return this;
     }
 
@@ -1559,6 +1416,15 @@ public class OpenGraphObject extends APINode {
     }
     public APIRequestCreatePhoto setAttempt (String attempt) {
       this.setParam("attempt", attempt);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setAudienceExp (Boolean audienceExp) {
+      this.setParam("audience_exp", audienceExp);
+      return this;
+    }
+    public APIRequestCreatePhoto setAudienceExp (String audienceExp) {
+      this.setParam("audience_exp", audienceExp);
       return this;
     }
 
@@ -1576,12 +1442,31 @@ public class OpenGraphObject extends APINode {
       return this;
     }
 
-    public APIRequestCreatePhoto setTimeSinceOriginalPost (Long timeSinceOriginalPost) {
-      this.setParam("time_since_original_post", timeSinceOriginalPost);
+    public APIRequestCreatePhoto setCaption (String caption) {
+      this.setParam("caption", caption);
       return this;
     }
-    public APIRequestCreatePhoto setTimeSinceOriginalPost (String timeSinceOriginalPost) {
-      this.setParam("time_since_original_post", timeSinceOriginalPost);
+
+    public APIRequestCreatePhoto setComposerSessionId (String composerSessionId) {
+      this.setParam("composer_session_id", composerSessionId);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setDirectShareStatus (Long directShareStatus) {
+      this.setParam("direct_share_status", directShareStatus);
+      return this;
+    }
+    public APIRequestCreatePhoto setDirectShareStatus (String directShareStatus) {
+      this.setParam("direct_share_status", directShareStatus);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setFeedTargeting (Object feedTargeting) {
+      this.setParam("feed_targeting", feedTargeting);
+      return this;
+    }
+    public APIRequestCreatePhoto setFeedTargeting (String feedTargeting) {
+      this.setParam("feed_targeting", feedTargeting);
       return this;
     }
 
@@ -1594,100 +1479,12 @@ public class OpenGraphObject extends APINode {
       return this;
     }
 
-    public APIRequestCreatePhoto setScheduledPublishTime (Long scheduledPublishTime) {
-      this.setParam("scheduled_publish_time", scheduledPublishTime);
-      return this;
-    }
-    public APIRequestCreatePhoto setScheduledPublishTime (String scheduledPublishTime) {
-      this.setParam("scheduled_publish_time", scheduledPublishTime);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setUnpublishedContentType (Photo.EnumUnpublishedContentType unpublishedContentType) {
-      this.setParam("unpublished_content_type", unpublishedContentType);
-      return this;
-    }
-    public APIRequestCreatePhoto setUnpublishedContentType (String unpublishedContentType) {
-      this.setParam("unpublished_content_type", unpublishedContentType);
-      return this;
-    }
-
     public APIRequestCreatePhoto setFullResIsComingLater (Boolean fullResIsComingLater) {
       this.setParam("full_res_is_coming_later", fullResIsComingLater);
       return this;
     }
     public APIRequestCreatePhoto setFullResIsComingLater (String fullResIsComingLater) {
       this.setParam("full_res_is_coming_later", fullResIsComingLater);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setComposerSessionId (String composerSessionId) {
-      this.setParam("composer_session_id", composerSessionId);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setQn (String qn) {
-      this.setParam("qn", qn);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setManualPrivacy (Boolean manualPrivacy) {
-      this.setParam("manual_privacy", manualPrivacy);
-      return this;
-    }
-    public APIRequestCreatePhoto setManualPrivacy (String manualPrivacy) {
-      this.setParam("manual_privacy", manualPrivacy);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setAudienceExp (Boolean audienceExp) {
-      this.setParam("audience_exp", audienceExp);
-      return this;
-    }
-    public APIRequestCreatePhoto setAudienceExp (String audienceExp) {
-      this.setParam("audience_exp", audienceExp);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setProxiedAppId (String proxiedAppId) {
-      this.setParam("proxied_app_id", proxiedAppId);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setIosBundleId (String iosBundleId) {
-      this.setParam("ios_bundle_id", iosBundleId);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setAndroidKeyHash (String androidKeyHash) {
-      this.setParam("android_key_hash", androidKeyHash);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setUserSelectedTags (Boolean userSelectedTags) {
-      this.setParam("user_selected_tags", userSelectedTags);
-      return this;
-    }
-    public APIRequestCreatePhoto setUserSelectedTags (String userSelectedTags) {
-      this.setParam("user_selected_tags", userSelectedTags);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setAllowSphericalPhoto (Boolean allowSphericalPhoto) {
-      this.setParam("allow_spherical_photo", allowSphericalPhoto);
-      return this;
-    }
-    public APIRequestCreatePhoto setAllowSphericalPhoto (String allowSphericalPhoto) {
-      this.setParam("allow_spherical_photo", allowSphericalPhoto);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setSphericalMetadata (Map<String, String> sphericalMetadata) {
-      this.setParam("spherical_metadata", sphericalMetadata);
-      return this;
-    }
-    public APIRequestCreatePhoto setSphericalMetadata (String sphericalMetadata) {
-      this.setParam("spherical_metadata", sphericalMetadata);
       return this;
     }
 
@@ -1718,17 +1515,162 @@ public class OpenGraphObject extends APINode {
       return this;
     }
 
-    public APIRequestCreatePhoto setSponsorId (String sponsorId) {
-      this.setParam("sponsor_id", sponsorId);
+    public APIRequestCreatePhoto setIosBundleId (String iosBundleId) {
+      this.setParam("ios_bundle_id", iosBundleId);
       return this;
     }
 
-    public APIRequestCreatePhoto setDirectShareStatus (Long directShareStatus) {
-      this.setParam("direct_share_status", directShareStatus);
+    public APIRequestCreatePhoto setIsExplicitLocation (Boolean isExplicitLocation) {
+      this.setParam("is_explicit_location", isExplicitLocation);
       return this;
     }
-    public APIRequestCreatePhoto setDirectShareStatus (String directShareStatus) {
-      this.setParam("direct_share_status", directShareStatus);
+    public APIRequestCreatePhoto setIsExplicitLocation (String isExplicitLocation) {
+      this.setParam("is_explicit_location", isExplicitLocation);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setIsExplicitPlace (Boolean isExplicitPlace) {
+      this.setParam("is_explicit_place", isExplicitPlace);
+      return this;
+    }
+    public APIRequestCreatePhoto setIsExplicitPlace (String isExplicitPlace) {
+      this.setParam("is_explicit_place", isExplicitPlace);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setManualPrivacy (Boolean manualPrivacy) {
+      this.setParam("manual_privacy", manualPrivacy);
+      return this;
+    }
+    public APIRequestCreatePhoto setManualPrivacy (String manualPrivacy) {
+      this.setParam("manual_privacy", manualPrivacy);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setMessage (String message) {
+      this.setParam("message", message);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setNoStory (Boolean noStory) {
+      this.setParam("no_story", noStory);
+      return this;
+    }
+    public APIRequestCreatePhoto setNoStory (String noStory) {
+      this.setParam("no_story", noStory);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setOfflineId (Long offlineId) {
+      this.setParam("offline_id", offlineId);
+      return this;
+    }
+    public APIRequestCreatePhoto setOfflineId (String offlineId) {
+      this.setParam("offline_id", offlineId);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setOgActionTypeId (String ogActionTypeId) {
+      this.setParam("og_action_type_id", ogActionTypeId);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setOgIconId (String ogIconId) {
+      this.setParam("og_icon_id", ogIconId);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setOgObjectId (String ogObjectId) {
+      this.setParam("og_object_id", ogObjectId);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setOgPhrase (String ogPhrase) {
+      this.setParam("og_phrase", ogPhrase);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setOgSetProfileBadge (Boolean ogSetProfileBadge) {
+      this.setParam("og_set_profile_badge", ogSetProfileBadge);
+      return this;
+    }
+    public APIRequestCreatePhoto setOgSetProfileBadge (String ogSetProfileBadge) {
+      this.setParam("og_set_profile_badge", ogSetProfileBadge);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setOgSuggestionMechanism (String ogSuggestionMechanism) {
+      this.setParam("og_suggestion_mechanism", ogSuggestionMechanism);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setPlace (Object place) {
+      this.setParam("place", place);
+      return this;
+    }
+    public APIRequestCreatePhoto setPlace (String place) {
+      this.setParam("place", place);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setPrivacy (String privacy) {
+      this.setParam("privacy", privacy);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setProfileId (Long profileId) {
+      this.setParam("profile_id", profileId);
+      return this;
+    }
+    public APIRequestCreatePhoto setProfileId (String profileId) {
+      this.setParam("profile_id", profileId);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setProxiedAppId (String proxiedAppId) {
+      this.setParam("proxied_app_id", proxiedAppId);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setPublished (Boolean published) {
+      this.setParam("published", published);
+      return this;
+    }
+    public APIRequestCreatePhoto setPublished (String published) {
+      this.setParam("published", published);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setQn (String qn) {
+      this.setParam("qn", qn);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setScheduledPublishTime (Long scheduledPublishTime) {
+      this.setParam("scheduled_publish_time", scheduledPublishTime);
+      return this;
+    }
+    public APIRequestCreatePhoto setScheduledPublishTime (String scheduledPublishTime) {
+      this.setParam("scheduled_publish_time", scheduledPublishTime);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setSphericalMetadata (Map<String, String> sphericalMetadata) {
+      this.setParam("spherical_metadata", sphericalMetadata);
+      return this;
+    }
+    public APIRequestCreatePhoto setSphericalMetadata (String sphericalMetadata) {
+      this.setParam("spherical_metadata", sphericalMetadata);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setSponsorId (String sponsorId) {
+      this.setParam("sponsor_id", sponsorId);
       return this;
     }
 
@@ -1741,18 +1683,76 @@ public class OpenGraphObject extends APINode {
       return this;
     }
 
-    public APIRequestCreatePhoto setApplicationId (String applicationId) {
-      this.setParam("application_id", applicationId);
+    public APIRequestCreatePhoto setTags (List<Object> tags) {
+      this.setParam("tags", tags);
+      return this;
+    }
+    public APIRequestCreatePhoto setTags (String tags) {
+      this.setParam("tags", tags);
       return this;
     }
 
-    public APIRequestCreatePhoto setName (String name) {
-      this.setParam("name", name);
+    public APIRequestCreatePhoto setTargetId (Long targetId) {
+      this.setParam("target_id", targetId);
+      return this;
+    }
+    public APIRequestCreatePhoto setTargetId (String targetId) {
+      this.setParam("target_id", targetId);
       return this;
     }
 
-    public APIRequestCreatePhoto setMessage (String message) {
-      this.setParam("message", message);
+    public APIRequestCreatePhoto setTargeting (Object targeting) {
+      this.setParam("targeting", targeting);
+      return this;
+    }
+    public APIRequestCreatePhoto setTargeting (String targeting) {
+      this.setParam("targeting", targeting);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setTimeSinceOriginalPost (Long timeSinceOriginalPost) {
+      this.setParam("time_since_original_post", timeSinceOriginalPost);
+      return this;
+    }
+    public APIRequestCreatePhoto setTimeSinceOriginalPost (String timeSinceOriginalPost) {
+      this.setParam("time_since_original_post", timeSinceOriginalPost);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setUid (Long uid) {
+      this.setParam("uid", uid);
+      return this;
+    }
+    public APIRequestCreatePhoto setUid (String uid) {
+      this.setParam("uid", uid);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setUnpublishedContentType (Photo.EnumUnpublishedContentType unpublishedContentType) {
+      this.setParam("unpublished_content_type", unpublishedContentType);
+      return this;
+    }
+    public APIRequestCreatePhoto setUnpublishedContentType (String unpublishedContentType) {
+      this.setParam("unpublished_content_type", unpublishedContentType);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setUrl (String url) {
+      this.setParam("url", url);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setUserSelectedTags (Boolean userSelectedTags) {
+      this.setParam("user_selected_tags", userSelectedTags);
+      return this;
+    }
+    public APIRequestCreatePhoto setUserSelectedTags (String userSelectedTags) {
+      this.setParam("user_selected_tags", userSelectedTags);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setVaultImageId (String vaultImageId) {
+      this.setParam("vault_image_id", vaultImageId);
       return this;
     }
 
@@ -1802,8 +1802,8 @@ public class OpenGraphObject extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "type",
       "redirect",
+      "type",
     };
 
     public static final String[] FIELDS = {
@@ -1871,21 +1871,21 @@ public class OpenGraphObject extends APINode {
     }
 
 
-    public APIRequestGetPicture setType (ProfilePictureSource.EnumType type) {
-      this.setParam("type", type);
-      return this;
-    }
-    public APIRequestGetPicture setType (String type) {
-      this.setParam("type", type);
-      return this;
-    }
-
     public APIRequestGetPicture setRedirect (Boolean redirect) {
       this.setParam("redirect", redirect);
       return this;
     }
     public APIRequestGetPicture setRedirect (String redirect) {
       this.setParam("redirect", redirect);
+      return this;
+    }
+
+    public APIRequestGetPicture setType (ProfilePictureSource.EnumType type) {
+      this.setParam("type", type);
+      return this;
+    }
+    public APIRequestGetPicture setType (String type) {
+      this.setParam("type", type);
       return this;
     }
 
@@ -2480,9 +2480,9 @@ public class OpenGraphObject extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "action_properties",
       "locale",
       "object",
-      "action_properties",
     };
 
     public static final String[] FIELDS = {
@@ -2541,6 +2541,15 @@ public class OpenGraphObject extends APINode {
     }
 
 
+    public APIRequestUpdate setActionProperties (Object actionProperties) {
+      this.setParam("action_properties", actionProperties);
+      return this;
+    }
+    public APIRequestUpdate setActionProperties (String actionProperties) {
+      this.setParam("action_properties", actionProperties);
+      return this;
+    }
+
     public APIRequestUpdate setLocale (JsonArray locale) {
       this.setParam("locale", locale);
       return this;
@@ -2556,15 +2565,6 @@ public class OpenGraphObject extends APINode {
     }
     public APIRequestUpdate setObject (String object) {
       this.setParam("object", object);
-      return this;
-    }
-
-    public APIRequestUpdate setActionProperties (Object actionProperties) {
-      this.setParam("action_properties", actionProperties);
-      return this;
-    }
-    public APIRequestUpdate setActionProperties (String actionProperties) {
-      this.setParam("action_properties", actionProperties);
       return this;
     }
 

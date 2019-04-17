@@ -109,6 +109,8 @@ public class AdCreative extends APINode {
   private String mInstagramPermalinkUrl = null;
   @SerializedName("instagram_story_id")
   private String mInstagramStoryId = null;
+  @SerializedName("interactive_components_spec")
+  private AdCreativeInteractiveComponentsSpec mInteractiveComponentsSpec = null;
   @SerializedName("link_deep_link_url")
   private String mLinkDeepLinkUrl = null;
   @SerializedName("link_og_id")
@@ -657,6 +659,20 @@ public class AdCreative extends APINode {
     return this;
   }
 
+  public AdCreativeInteractiveComponentsSpec getFieldInteractiveComponentsSpec() {
+    return mInteractiveComponentsSpec;
+  }
+
+  public AdCreative setFieldInteractiveComponentsSpec(AdCreativeInteractiveComponentsSpec value) {
+    this.mInteractiveComponentsSpec = value;
+    return this;
+  }
+
+  public AdCreative setFieldInteractiveComponentsSpec(String value) {
+    Type type = new TypeToken<AdCreativeInteractiveComponentsSpec>(){}.getType();
+    this.mInteractiveComponentsSpec = AdCreativeInteractiveComponentsSpec.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldLinkDeepLinkUrl() {
     return mLinkDeepLinkUrl;
   }
@@ -1146,19 +1162,19 @@ public class AdCreative extends APINode {
     }
     public static final String[] PARAMS = {
       "ad_format",
+      "dynamic_asset_label",
       "dynamic_creative_spec",
       "dynamic_customization",
-      "dynamic_asset_label",
-      "interactive",
-      "post",
-      "height",
-      "width",
-      "place_page_id",
-      "product_item_ids",
-      "start_date",
       "end_date",
+      "height",
+      "interactive",
       "locale",
+      "place_page_id",
+      "post",
+      "product_item_ids",
       "render_type",
+      "start_date",
+      "width",
     };
 
     public static final String[] FIELDS = {
@@ -1227,6 +1243,11 @@ public class AdCreative extends APINode {
       return this;
     }
 
+    public APIRequestGetPreviews setDynamicAssetLabel (String dynamicAssetLabel) {
+      this.setParam("dynamic_asset_label", dynamicAssetLabel);
+      return this;
+    }
+
     public APIRequestGetPreviews setDynamicCreativeSpec (Object dynamicCreativeSpec) {
       this.setParam("dynamic_creative_spec", dynamicCreativeSpec);
       return this;
@@ -1245,26 +1266,8 @@ public class AdCreative extends APINode {
       return this;
     }
 
-    public APIRequestGetPreviews setDynamicAssetLabel (String dynamicAssetLabel) {
-      this.setParam("dynamic_asset_label", dynamicAssetLabel);
-      return this;
-    }
-
-    public APIRequestGetPreviews setInteractive (Boolean interactive) {
-      this.setParam("interactive", interactive);
-      return this;
-    }
-    public APIRequestGetPreviews setInteractive (String interactive) {
-      this.setParam("interactive", interactive);
-      return this;
-    }
-
-    public APIRequestGetPreviews setPost (Object post) {
-      this.setParam("post", post);
-      return this;
-    }
-    public APIRequestGetPreviews setPost (String post) {
-      this.setParam("post", post);
+    public APIRequestGetPreviews setEndDate (String endDate) {
+      this.setParam("end_date", endDate);
       return this;
     }
 
@@ -1277,12 +1280,17 @@ public class AdCreative extends APINode {
       return this;
     }
 
-    public APIRequestGetPreviews setWidth (Long width) {
-      this.setParam("width", width);
+    public APIRequestGetPreviews setInteractive (Boolean interactive) {
+      this.setParam("interactive", interactive);
       return this;
     }
-    public APIRequestGetPreviews setWidth (String width) {
-      this.setParam("width", width);
+    public APIRequestGetPreviews setInteractive (String interactive) {
+      this.setParam("interactive", interactive);
+      return this;
+    }
+
+    public APIRequestGetPreviews setLocale (String locale) {
+      this.setParam("locale", locale);
       return this;
     }
 
@@ -1295,6 +1303,15 @@ public class AdCreative extends APINode {
       return this;
     }
 
+    public APIRequestGetPreviews setPost (Object post) {
+      this.setParam("post", post);
+      return this;
+    }
+    public APIRequestGetPreviews setPost (String post) {
+      this.setParam("post", post);
+      return this;
+    }
+
     public APIRequestGetPreviews setProductItemIds (List<String> productItemIds) {
       this.setParam("product_item_ids", productItemIds);
       return this;
@@ -1304,27 +1321,26 @@ public class AdCreative extends APINode {
       return this;
     }
 
-    public APIRequestGetPreviews setStartDate (String startDate) {
-      this.setParam("start_date", startDate);
-      return this;
-    }
-
-    public APIRequestGetPreviews setEndDate (String endDate) {
-      this.setParam("end_date", endDate);
-      return this;
-    }
-
-    public APIRequestGetPreviews setLocale (String locale) {
-      this.setParam("locale", locale);
-      return this;
-    }
-
     public APIRequestGetPreviews setRenderType (AdPreview.EnumRenderType renderType) {
       this.setParam("render_type", renderType);
       return this;
     }
     public APIRequestGetPreviews setRenderType (String renderType) {
       this.setParam("render_type", renderType);
+      return this;
+    }
+
+    public APIRequestGetPreviews setStartDate (String startDate) {
+      this.setParam("start_date", startDate);
+      return this;
+    }
+
+    public APIRequestGetPreviews setWidth (Long width) {
+      this.setParam("width", width);
+      return this;
+    }
+    public APIRequestGetPreviews setWidth (String width) {
+      this.setParam("width", width);
       return this;
     }
 
@@ -1382,8 +1398,8 @@ public class AdCreative extends APINode {
     }
     public static final String[] PARAMS = {
       "account_id",
-      "name",
       "adlabels",
+      "name",
       "status",
     };
 
@@ -1448,17 +1464,17 @@ public class AdCreative extends APINode {
       return this;
     }
 
-    public APIRequestDelete setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
     public APIRequestDelete setAdlabels (List<Object> adlabels) {
       this.setParam("adlabels", adlabels);
       return this;
     }
     public APIRequestDelete setAdlabels (String adlabels) {
       this.setParam("adlabels", adlabels);
+      return this;
+    }
+
+    public APIRequestDelete setName (String name) {
+      this.setParam("name", name);
       return this;
     }
 
@@ -1549,6 +1565,7 @@ public class AdCreative extends APINode {
       "instagram_actor_id",
       "instagram_permalink_url",
       "instagram_story_id",
+      "interactive_components_spec",
       "link_deep_link_url",
       "link_og_id",
       "link_url",
@@ -1872,6 +1889,13 @@ public class AdCreative extends APINode {
       this.requestField("instagram_story_id", value);
       return this;
     }
+    public APIRequestGet requestInteractiveComponentsSpecField () {
+      return this.requestInteractiveComponentsSpecField(true);
+    }
+    public APIRequestGet requestInteractiveComponentsSpecField (boolean value) {
+      this.requestField("interactive_components_spec", value);
+      return this;
+    }
     public APIRequestGet requestLinkDeepLinkUrlField () {
       return this.requestLinkDeepLinkUrlField(true);
     }
@@ -2058,8 +2082,8 @@ public class AdCreative extends APINode {
     }
     public static final String[] PARAMS = {
       "account_id",
-      "name",
       "adlabels",
+      "name",
       "status",
     };
 
@@ -2124,17 +2148,17 @@ public class AdCreative extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
     public APIRequestUpdate setAdlabels (List<Object> adlabels) {
       this.setParam("adlabels", adlabels);
       return this;
     }
     public APIRequestUpdate setAdlabels (String adlabels) {
       this.setParam("adlabels", adlabels);
+      return this;
+    }
+
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
       return this;
     }
 
@@ -2223,6 +2247,8 @@ public class AdCreative extends APINode {
       VALUE_CALL("CALL"),
       @SerializedName("CALL_ME")
       VALUE_CALL_ME("CALL_ME"),
+      @SerializedName("CONTACT")
+      VALUE_CONTACT("CONTACT"),
       @SerializedName("CONTACT_US")
       VALUE_CONTACT_US("CONTACT_US"),
       @SerializedName("DONATE")
@@ -2233,6 +2259,8 @@ public class AdCreative extends APINode {
       VALUE_DOWNLOAD("DOWNLOAD"),
       @SerializedName("EVENT_RSVP")
       VALUE_EVENT_RSVP("EVENT_RSVP"),
+      @SerializedName("FIND_A_GROUP")
+      VALUE_FIND_A_GROUP("FIND_A_GROUP"),
       @SerializedName("FOLLOW_NEWS_STORYLINE")
       VALUE_FOLLOW_NEWS_STORYLINE("FOLLOW_NEWS_STORYLINE"),
       @SerializedName("GET_DIRECTIONS")
@@ -2518,6 +2546,7 @@ public class AdCreative extends APINode {
     this.mInstagramActorId = instance.mInstagramActorId;
     this.mInstagramPermalinkUrl = instance.mInstagramPermalinkUrl;
     this.mInstagramStoryId = instance.mInstagramStoryId;
+    this.mInteractiveComponentsSpec = instance.mInteractiveComponentsSpec;
     this.mLinkDeepLinkUrl = instance.mLinkDeepLinkUrl;
     this.mLinkOgId = instance.mLinkOgId;
     this.mLinkUrl = instance.mLinkUrl;

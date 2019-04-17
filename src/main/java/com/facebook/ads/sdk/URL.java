@@ -494,8 +494,8 @@ public class URL extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "locale",
       "hmac",
+      "locale",
       "ts",
     };
 
@@ -555,17 +555,17 @@ public class URL extends APINode {
     }
 
 
+    public APIRequestUpdate setHmac (String hmac) {
+      this.setParam("hmac", hmac);
+      return this;
+    }
+
     public APIRequestUpdate setLocale (JsonArray locale) {
       this.setParam("locale", locale);
       return this;
     }
     public APIRequestUpdate setLocale (String locale) {
       this.setParam("locale", locale);
-      return this;
-    }
-
-    public APIRequestUpdate setHmac (String hmac) {
-      this.setParam("hmac", hmac);
       return this;
     }
 

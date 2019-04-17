@@ -54,27 +54,27 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class LegacyBusinessAdAccountRequest extends APINode {
-  @SerializedName("ad_account")
-  private AdAccount mAdAccount = null;
-  @SerializedName("id")
-  private String mId = null;
-  @SerializedName("permitted_roles")
-  private List<String> mPermittedRoles = null;
+public class AdCreativeOptimizationSpec extends APINode {
+  @SerializedName("bodies")
+  private List<String> mBodies = null;
+  @SerializedName("descriptions")
+  private List<String> mDescriptions = null;
+  @SerializedName("titles")
+  private List<String> mTitles = null;
   protected static Gson gson = null;
 
-  public LegacyBusinessAdAccountRequest() {
+  public AdCreativeOptimizationSpec() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
-  public static LegacyBusinessAdAccountRequest loadJSON(String json, APIContext context, String header) {
-    LegacyBusinessAdAccountRequest legacyBusinessAdAccountRequest = getGson().fromJson(json, LegacyBusinessAdAccountRequest.class);
+  public static AdCreativeOptimizationSpec loadJSON(String json, APIContext context, String header) {
+    AdCreativeOptimizationSpec adCreativeOptimizationSpec = getGson().fromJson(json, AdCreativeOptimizationSpec.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(legacyBusinessAdAccountRequest.toString());
+      JsonElement o2 = parser.parse(adCreativeOptimizationSpec.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -84,14 +84,14 @@ public class LegacyBusinessAdAccountRequest extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    legacyBusinessAdAccountRequest.context = context;
-    legacyBusinessAdAccountRequest.rawValue = json;
-    legacyBusinessAdAccountRequest.header = header;
-    return legacyBusinessAdAccountRequest;
+    adCreativeOptimizationSpec.context = context;
+    adCreativeOptimizationSpec.rawValue = json;
+    adCreativeOptimizationSpec.header = header;
+    return adCreativeOptimizationSpec;
   }
 
-  public static APINodeList<LegacyBusinessAdAccountRequest> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<LegacyBusinessAdAccountRequest> legacyBusinessAdAccountRequests = new APINodeList<LegacyBusinessAdAccountRequest>(request, json, header);
+  public static APINodeList<AdCreativeOptimizationSpec> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCreativeOptimizationSpec> adCreativeOptimizationSpecs = new APINodeList<AdCreativeOptimizationSpec>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -102,9 +102,9 @@ public class LegacyBusinessAdAccountRequest extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          legacyBusinessAdAccountRequests.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adCreativeOptimizationSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return legacyBusinessAdAccountRequests;
+        return adCreativeOptimizationSpecs;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -114,20 +114,20 @@ public class LegacyBusinessAdAccountRequest extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                legacyBusinessAdAccountRequests.setCursors(before, after);
+                adCreativeOptimizationSpecs.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            legacyBusinessAdAccountRequests.setPaging(previous, next);
+            adCreativeOptimizationSpecs.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              legacyBusinessAdAccountRequests.setAppSecret(context.getAppSecretProof());
+              adCreativeOptimizationSpecs.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              legacyBusinessAdAccountRequests.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adCreativeOptimizationSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -138,23 +138,23 @@ public class LegacyBusinessAdAccountRequest extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  legacyBusinessAdAccountRequests.add(loadJSON(entry.getValue().toString(), context, header));
+                  adCreativeOptimizationSpecs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              legacyBusinessAdAccountRequests.add(loadJSON(obj.toString(), context, header));
+              adCreativeOptimizationSpecs.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return legacyBusinessAdAccountRequests;
+          return adCreativeOptimizationSpecs;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              legacyBusinessAdAccountRequests.add(loadJSON(entry.getValue().toString(), context, header));
+              adCreativeOptimizationSpecs.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return legacyBusinessAdAccountRequests;
+          return adCreativeOptimizationSpecs;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -171,20 +171,20 @@ public class LegacyBusinessAdAccountRequest extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              legacyBusinessAdAccountRequests.add(loadJSON(value.toString(), context, header));
+              adCreativeOptimizationSpecs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return legacyBusinessAdAccountRequests;
+            return adCreativeOptimizationSpecs;
           }
 
           // Sixth, check if it's pure JsonObject
-          legacyBusinessAdAccountRequests.clear();
-          legacyBusinessAdAccountRequests.add(loadJSON(json, context, header));
-          return legacyBusinessAdAccountRequests;
+          adCreativeOptimizationSpecs.clear();
+          adCreativeOptimizationSpecs.add(loadJSON(json, context, header));
+          return adCreativeOptimizationSpecs;
         }
       }
     } catch (Exception e) {
@@ -212,38 +212,30 @@ public class LegacyBusinessAdAccountRequest extends APINode {
   }
 
 
-  public AdAccount getFieldAdAccount() {
-    if (mAdAccount != null) {
-      mAdAccount.context = getContext();
-    }
-    return mAdAccount;
+  public List<String> getFieldBodies() {
+    return mBodies;
   }
 
-  public LegacyBusinessAdAccountRequest setFieldAdAccount(AdAccount value) {
-    this.mAdAccount = value;
+  public AdCreativeOptimizationSpec setFieldBodies(List<String> value) {
+    this.mBodies = value;
     return this;
   }
 
-  public LegacyBusinessAdAccountRequest setFieldAdAccount(String value) {
-    Type type = new TypeToken<AdAccount>(){}.getType();
-    this.mAdAccount = AdAccount.getGson().fromJson(value, type);
-    return this;
-  }
-  public String getFieldId() {
-    return mId;
+  public List<String> getFieldDescriptions() {
+    return mDescriptions;
   }
 
-  public LegacyBusinessAdAccountRequest setFieldId(String value) {
-    this.mId = value;
+  public AdCreativeOptimizationSpec setFieldDescriptions(List<String> value) {
+    this.mDescriptions = value;
     return this;
   }
 
-  public List<String> getFieldPermittedRoles() {
-    return mPermittedRoles;
+  public List<String> getFieldTitles() {
+    return mTitles;
   }
 
-  public LegacyBusinessAdAccountRequest setFieldPermittedRoles(List<String> value) {
-    this.mPermittedRoles = value;
+  public AdCreativeOptimizationSpec setFieldTitles(List<String> value) {
+    this.mTitles = value;
     return this;
   }
 
@@ -263,19 +255,19 @@ public class LegacyBusinessAdAccountRequest extends APINode {
     return gson;
   }
 
-  public LegacyBusinessAdAccountRequest copyFrom(LegacyBusinessAdAccountRequest instance) {
-    this.mAdAccount = instance.mAdAccount;
-    this.mId = instance.mId;
-    this.mPermittedRoles = instance.mPermittedRoles;
+  public AdCreativeOptimizationSpec copyFrom(AdCreativeOptimizationSpec instance) {
+    this.mBodies = instance.mBodies;
+    this.mDescriptions = instance.mDescriptions;
+    this.mTitles = instance.mTitles;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<LegacyBusinessAdAccountRequest> getParser() {
-    return new APIRequest.ResponseParser<LegacyBusinessAdAccountRequest>() {
-      public APINodeList<LegacyBusinessAdAccountRequest> parseResponse(String response, APIContext context, APIRequest<LegacyBusinessAdAccountRequest> request, String header) throws MalformedResponseException {
-        return LegacyBusinessAdAccountRequest.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdCreativeOptimizationSpec> getParser() {
+    return new APIRequest.ResponseParser<AdCreativeOptimizationSpec>() {
+      public APINodeList<AdCreativeOptimizationSpec> parseResponse(String response, APIContext context, APIRequest<AdCreativeOptimizationSpec> request, String header) throws MalformedResponseException {
+        return AdCreativeOptimizationSpec.parseResponse(response, context, request, header);
       }
     };
   }

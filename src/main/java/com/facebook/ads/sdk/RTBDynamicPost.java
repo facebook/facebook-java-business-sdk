@@ -362,8 +362,8 @@ public class RTBDynamicPost extends APINode {
     }
     public static final String[] PARAMS = {
       "filter",
-      "order",
       "live_filter",
+      "order",
       "since",
     };
 
@@ -453,21 +453,21 @@ public class RTBDynamicPost extends APINode {
       return this;
     }
 
-    public APIRequestGetComments setOrder (Comment.EnumOrder order) {
-      this.setParam("order", order);
-      return this;
-    }
-    public APIRequestGetComments setOrder (String order) {
-      this.setParam("order", order);
-      return this;
-    }
-
     public APIRequestGetComments setLiveFilter (Comment.EnumLiveFilter liveFilter) {
       this.setParam("live_filter", liveFilter);
       return this;
     }
     public APIRequestGetComments setLiveFilter (String liveFilter) {
       this.setParam("live_filter", liveFilter);
+      return this;
+    }
+
+    public APIRequestGetComments setOrder (Comment.EnumOrder order) {
+      this.setParam("order", order);
+      return this;
+    }
+    public APIRequestGetComments setOrder (String order) {
+      this.setParam("order", order);
       return this;
     }
 

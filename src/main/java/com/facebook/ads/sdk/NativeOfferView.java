@@ -636,11 +636,11 @@ public class NativeOfferView extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "urls",
-      "photos",
       "ad_account",
       "ad_image_hashes",
       "image_crops",
+      "photos",
+      "urls",
       "file",
     };
 
@@ -709,24 +709,6 @@ public class NativeOfferView extends APINode {
       return this;
     }
 
-    public APIRequestCreatePhoto setUrls (List<String> urls) {
-      this.setParam("urls", urls);
-      return this;
-    }
-    public APIRequestCreatePhoto setUrls (String urls) {
-      this.setParam("urls", urls);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setPhotos (List<String> photos) {
-      this.setParam("photos", photos);
-      return this;
-    }
-    public APIRequestCreatePhoto setPhotos (String photos) {
-      this.setParam("photos", photos);
-      return this;
-    }
-
     public APIRequestCreatePhoto setAdAccount (String adAccount) {
       this.setParam("ad_account", adAccount);
       return this;
@@ -747,6 +729,24 @@ public class NativeOfferView extends APINode {
     }
     public APIRequestCreatePhoto setImageCrops (String imageCrops) {
       this.setParam("image_crops", imageCrops);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setPhotos (List<String> photos) {
+      this.setParam("photos", photos);
+      return this;
+    }
+    public APIRequestCreatePhoto setPhotos (String photos) {
+      this.setParam("photos", photos);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setUrls (List<String> urls) {
+      this.setParam("urls", urls);
+      return this;
+    }
+    public APIRequestCreatePhoto setUrls (String urls) {
+      this.setParam("urls", urls);
       return this;
     }
 
@@ -1038,9 +1038,9 @@ public class NativeOfferView extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "published_ads",
-      "published",
       "message",
+      "published",
+      "published_ads",
     };
 
     public static final String[] FIELDS = {
@@ -1099,12 +1099,8 @@ public class NativeOfferView extends APINode {
     }
 
 
-    public APIRequestUpdate setPublishedAds (Boolean publishedAds) {
-      this.setParam("published_ads", publishedAds);
-      return this;
-    }
-    public APIRequestUpdate setPublishedAds (String publishedAds) {
-      this.setParam("published_ads", publishedAds);
+    public APIRequestUpdate setMessage (String message) {
+      this.setParam("message", message);
       return this;
     }
 
@@ -1117,8 +1113,12 @@ public class NativeOfferView extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setMessage (String message) {
-      this.setParam("message", message);
+    public APIRequestUpdate setPublishedAds (Boolean publishedAds) {
+      this.setParam("published_ads", publishedAds);
+      return this;
+    }
+    public APIRequestUpdate setPublishedAds (String publishedAds) {
+      this.setParam("published_ads", publishedAds);
       return this;
     }
 

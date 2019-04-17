@@ -867,12 +867,12 @@ public class Canvas extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "name",
-      "body_element_ids",
       "background_color",
-      "is_published",
-      "is_hidden",
+      "body_element_ids",
       "enable_swipe_to_open",
+      "is_hidden",
+      "is_published",
+      "name",
     };
 
     public static final String[] FIELDS = {
@@ -931,8 +931,8 @@ public class Canvas extends APINode {
     }
 
 
-    public APIRequestUpdate setName (String name) {
-      this.setParam("name", name);
+    public APIRequestUpdate setBackgroundColor (String backgroundColor) {
+      this.setParam("background_color", backgroundColor);
       return this;
     }
 
@@ -945,17 +945,12 @@ public class Canvas extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setBackgroundColor (String backgroundColor) {
-      this.setParam("background_color", backgroundColor);
+    public APIRequestUpdate setEnableSwipeToOpen (Boolean enableSwipeToOpen) {
+      this.setParam("enable_swipe_to_open", enableSwipeToOpen);
       return this;
     }
-
-    public APIRequestUpdate setIsPublished (Boolean isPublished) {
-      this.setParam("is_published", isPublished);
-      return this;
-    }
-    public APIRequestUpdate setIsPublished (String isPublished) {
-      this.setParam("is_published", isPublished);
+    public APIRequestUpdate setEnableSwipeToOpen (String enableSwipeToOpen) {
+      this.setParam("enable_swipe_to_open", enableSwipeToOpen);
       return this;
     }
 
@@ -968,12 +963,17 @@ public class Canvas extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setEnableSwipeToOpen (Boolean enableSwipeToOpen) {
-      this.setParam("enable_swipe_to_open", enableSwipeToOpen);
+    public APIRequestUpdate setIsPublished (Boolean isPublished) {
+      this.setParam("is_published", isPublished);
       return this;
     }
-    public APIRequestUpdate setEnableSwipeToOpen (String enableSwipeToOpen) {
-      this.setParam("enable_swipe_to_open", enableSwipeToOpen);
+    public APIRequestUpdate setIsPublished (String isPublished) {
+      this.setParam("is_published", isPublished);
+      return this;
+    }
+
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
       return this;
     }
 

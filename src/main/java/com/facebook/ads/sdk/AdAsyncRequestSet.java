@@ -910,8 +910,8 @@ public class AdAsyncRequestSet extends APINode {
     }
     public static final String[] PARAMS = {
       "name",
-      "notification_uri",
       "notification_mode",
+      "notification_uri",
     };
 
     public static final String[] FIELDS = {
@@ -975,17 +975,17 @@ public class AdAsyncRequestSet extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setNotificationUri (String notificationUri) {
-      this.setParam("notification_uri", notificationUri);
-      return this;
-    }
-
     public APIRequestUpdate setNotificationMode (AdAsyncRequestSet.EnumNotificationMode notificationMode) {
       this.setParam("notification_mode", notificationMode);
       return this;
     }
     public APIRequestUpdate setNotificationMode (String notificationMode) {
       this.setParam("notification_mode", notificationMode);
+      return this;
+    }
+
+    public APIRequestUpdate setNotificationUri (String notificationUri) {
+      this.setParam("notification_uri", notificationUri);
       return this;
     }
 

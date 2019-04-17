@@ -566,11 +566,11 @@ public class AdStudy extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "cell_id",
-      "objective_id",
       "account_id",
       "audience_name",
       "audience_type",
+      "cell_id",
+      "objective_id",
     };
 
     public static final String[] FIELDS = {
@@ -629,16 +629,6 @@ public class AdStudy extends APINode {
     }
 
 
-    public APIRequestCreateCustomAudience setCellId (String cellId) {
-      this.setParam("cell_id", cellId);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setObjectiveId (String objectiveId) {
-      this.setParam("objective_id", objectiveId);
-      return this;
-    }
-
     public APIRequestCreateCustomAudience setAccountId (String accountId) {
       this.setParam("account_id", accountId);
       return this;
@@ -655,6 +645,16 @@ public class AdStudy extends APINode {
     }
     public APIRequestCreateCustomAudience setAudienceType (String audienceType) {
       this.setParam("audience_type", audienceType);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setCellId (String cellId) {
+      this.setParam("cell_id", cellId);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setObjectiveId (String objectiveId) {
+      this.setParam("objective_id", objectiveId);
       return this;
     }
 
@@ -984,15 +984,15 @@ public class AdStudy extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "adspixels",
+      "applications",
+      "customconversions",
       "is_primary",
       "name",
-      "type",
-      "adspixels",
-      "customconversions",
-      "applications",
-      "offsitepixels",
       "offline_conversion_data_sets",
+      "offsitepixels",
       "product_sets",
+      "type",
     };
 
     public static final String[] FIELDS = {
@@ -1051,6 +1051,33 @@ public class AdStudy extends APINode {
     }
 
 
+    public APIRequestCreateObjective setAdspixels (List<Object> adspixels) {
+      this.setParam("adspixels", adspixels);
+      return this;
+    }
+    public APIRequestCreateObjective setAdspixels (String adspixels) {
+      this.setParam("adspixels", adspixels);
+      return this;
+    }
+
+    public APIRequestCreateObjective setApplications (List<Object> applications) {
+      this.setParam("applications", applications);
+      return this;
+    }
+    public APIRequestCreateObjective setApplications (String applications) {
+      this.setParam("applications", applications);
+      return this;
+    }
+
+    public APIRequestCreateObjective setCustomconversions (List<Object> customconversions) {
+      this.setParam("customconversions", customconversions);
+      return this;
+    }
+    public APIRequestCreateObjective setCustomconversions (String customconversions) {
+      this.setParam("customconversions", customconversions);
+      return this;
+    }
+
     public APIRequestCreateObjective setIsPrimary (Boolean isPrimary) {
       this.setParam("is_primary", isPrimary);
       return this;
@@ -1065,39 +1092,12 @@ public class AdStudy extends APINode {
       return this;
     }
 
-    public APIRequestCreateObjective setType (AdStudyObjective.EnumType type) {
-      this.setParam("type", type);
+    public APIRequestCreateObjective setOfflineConversionDataSets (List<Object> offlineConversionDataSets) {
+      this.setParam("offline_conversion_data_sets", offlineConversionDataSets);
       return this;
     }
-    public APIRequestCreateObjective setType (String type) {
-      this.setParam("type", type);
-      return this;
-    }
-
-    public APIRequestCreateObjective setAdspixels (List<Object> adspixels) {
-      this.setParam("adspixels", adspixels);
-      return this;
-    }
-    public APIRequestCreateObjective setAdspixels (String adspixels) {
-      this.setParam("adspixels", adspixels);
-      return this;
-    }
-
-    public APIRequestCreateObjective setCustomconversions (List<Object> customconversions) {
-      this.setParam("customconversions", customconversions);
-      return this;
-    }
-    public APIRequestCreateObjective setCustomconversions (String customconversions) {
-      this.setParam("customconversions", customconversions);
-      return this;
-    }
-
-    public APIRequestCreateObjective setApplications (List<Object> applications) {
-      this.setParam("applications", applications);
-      return this;
-    }
-    public APIRequestCreateObjective setApplications (String applications) {
-      this.setParam("applications", applications);
+    public APIRequestCreateObjective setOfflineConversionDataSets (String offlineConversionDataSets) {
+      this.setParam("offline_conversion_data_sets", offlineConversionDataSets);
       return this;
     }
 
@@ -1110,21 +1110,21 @@ public class AdStudy extends APINode {
       return this;
     }
 
-    public APIRequestCreateObjective setOfflineConversionDataSets (List<Object> offlineConversionDataSets) {
-      this.setParam("offline_conversion_data_sets", offlineConversionDataSets);
-      return this;
-    }
-    public APIRequestCreateObjective setOfflineConversionDataSets (String offlineConversionDataSets) {
-      this.setParam("offline_conversion_data_sets", offlineConversionDataSets);
-      return this;
-    }
-
     public APIRequestCreateObjective setProductSets (List<Object> productSets) {
       this.setParam("product_sets", productSets);
       return this;
     }
     public APIRequestCreateObjective setProductSets (String productSets) {
       this.setParam("product_sets", productSets);
+      return this;
+    }
+
+    public APIRequestCreateObjective setType (AdStudyObjective.EnumType type) {
+      this.setParam("type", type);
+      return this;
+    }
+    public APIRequestCreateObjective setType (String type) {
+      this.setParam("type", type);
       return this;
     }
 
@@ -1174,9 +1174,9 @@ public class AdStudy extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "user",
-      "email",
       "business",
+      "email",
+      "user",
     };
 
     public static final String[] FIELDS = {
@@ -1235,12 +1235,8 @@ public class AdStudy extends APINode {
     }
 
 
-    public APIRequestDeleteUserPermissions setUser (Long user) {
-      this.setParam("user", user);
-      return this;
-    }
-    public APIRequestDeleteUserPermissions setUser (String user) {
-      this.setParam("user", user);
+    public APIRequestDeleteUserPermissions setBusiness (String business) {
+      this.setParam("business", business);
       return this;
     }
 
@@ -1249,8 +1245,12 @@ public class AdStudy extends APINode {
       return this;
     }
 
-    public APIRequestDeleteUserPermissions setBusiness (String business) {
-      this.setParam("business", business);
+    public APIRequestDeleteUserPermissions setUser (Long user) {
+      this.setParam("user", user);
+      return this;
+    }
+    public APIRequestDeleteUserPermissions setUser (String user) {
+      this.setParam("user", user);
       return this;
     }
 
@@ -1484,10 +1484,10 @@ public class AdStudy extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "user",
+      "business",
       "email",
       "role",
-      "business",
+      "user",
     };
 
     public static final String[] FIELDS = {
@@ -1546,12 +1546,8 @@ public class AdStudy extends APINode {
     }
 
 
-    public APIRequestCreateUserPermission setUser (Long user) {
-      this.setParam("user", user);
-      return this;
-    }
-    public APIRequestCreateUserPermission setUser (String user) {
-      this.setParam("user", user);
+    public APIRequestCreateUserPermission setBusiness (String business) {
+      this.setParam("business", business);
       return this;
     }
 
@@ -1569,8 +1565,12 @@ public class AdStudy extends APINode {
       return this;
     }
 
-    public APIRequestCreateUserPermission setBusiness (String business) {
-      this.setParam("business", business);
+    public APIRequestCreateUserPermission setUser (Long user) {
+      this.setParam("user", user);
+      return this;
+    }
+    public APIRequestCreateUserPermission setUser (String user) {
+      this.setParam("user", user);
       return this;
     }
 
@@ -2533,16 +2533,16 @@ public class AdStudy extends APINode {
     }
     public static final String[] PARAMS = {
       "cells",
-      "objectives",
-      "end_time",
+      "client_business",
+      "confidence_level",
+      "cooldown_start_time",
       "description",
+      "end_time",
       "name",
+      "objectives",
+      "observation_end_time",
       "start_time",
       "viewers",
-      "cooldown_start_time",
-      "observation_end_time",
-      "confidence_level",
-      "client_business",
     };
 
     public static final String[] FIELDS = {
@@ -2610,12 +2610,31 @@ public class AdStudy extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setObjectives (List<Object> objectives) {
-      this.setParam("objectives", objectives);
+    public APIRequestUpdate setClientBusiness (String clientBusiness) {
+      this.setParam("client_business", clientBusiness);
       return this;
     }
-    public APIRequestUpdate setObjectives (String objectives) {
-      this.setParam("objectives", objectives);
+
+    public APIRequestUpdate setConfidenceLevel (Double confidenceLevel) {
+      this.setParam("confidence_level", confidenceLevel);
+      return this;
+    }
+    public APIRequestUpdate setConfidenceLevel (String confidenceLevel) {
+      this.setParam("confidence_level", confidenceLevel);
+      return this;
+    }
+
+    public APIRequestUpdate setCooldownStartTime (Long cooldownStartTime) {
+      this.setParam("cooldown_start_time", cooldownStartTime);
+      return this;
+    }
+    public APIRequestUpdate setCooldownStartTime (String cooldownStartTime) {
+      this.setParam("cooldown_start_time", cooldownStartTime);
+      return this;
+    }
+
+    public APIRequestUpdate setDescription (String description) {
+      this.setParam("description", description);
       return this;
     }
 
@@ -2628,13 +2647,26 @@ public class AdStudy extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setDescription (String description) {
-      this.setParam("description", description);
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
       return this;
     }
 
-    public APIRequestUpdate setName (String name) {
-      this.setParam("name", name);
+    public APIRequestUpdate setObjectives (List<Object> objectives) {
+      this.setParam("objectives", objectives);
+      return this;
+    }
+    public APIRequestUpdate setObjectives (String objectives) {
+      this.setParam("objectives", objectives);
+      return this;
+    }
+
+    public APIRequestUpdate setObservationEndTime (Long observationEndTime) {
+      this.setParam("observation_end_time", observationEndTime);
+      return this;
+    }
+    public APIRequestUpdate setObservationEndTime (String observationEndTime) {
+      this.setParam("observation_end_time", observationEndTime);
       return this;
     }
 
@@ -2653,38 +2685,6 @@ public class AdStudy extends APINode {
     }
     public APIRequestUpdate setViewers (String viewers) {
       this.setParam("viewers", viewers);
-      return this;
-    }
-
-    public APIRequestUpdate setCooldownStartTime (Long cooldownStartTime) {
-      this.setParam("cooldown_start_time", cooldownStartTime);
-      return this;
-    }
-    public APIRequestUpdate setCooldownStartTime (String cooldownStartTime) {
-      this.setParam("cooldown_start_time", cooldownStartTime);
-      return this;
-    }
-
-    public APIRequestUpdate setObservationEndTime (Long observationEndTime) {
-      this.setParam("observation_end_time", observationEndTime);
-      return this;
-    }
-    public APIRequestUpdate setObservationEndTime (String observationEndTime) {
-      this.setParam("observation_end_time", observationEndTime);
-      return this;
-    }
-
-    public APIRequestUpdate setConfidenceLevel (Double confidenceLevel) {
-      this.setParam("confidence_level", confidenceLevel);
-      return this;
-    }
-    public APIRequestUpdate setConfidenceLevel (String confidenceLevel) {
-      this.setParam("confidence_level", confidenceLevel);
-      return this;
-    }
-
-    public APIRequestUpdate setClientBusiness (String clientBusiness) {
-      this.setParam("client_business", clientBusiness);
       return this;
     }
 

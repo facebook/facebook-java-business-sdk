@@ -711,10 +711,10 @@ public class SavedMessageResponse extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "message",
-      "title",
       "image",
+      "message",
       "remove_image",
+      "title",
     };
 
     public static final String[] FIELDS = {
@@ -773,18 +773,13 @@ public class SavedMessageResponse extends APINode {
     }
 
 
-    public APIRequestUpdate setMessage (String message) {
-      this.setParam("message", message);
-      return this;
-    }
-
-    public APIRequestUpdate setTitle (String title) {
-      this.setParam("title", title);
-      return this;
-    }
-
     public APIRequestUpdate setImage (String image) {
       this.setParam("image", image);
+      return this;
+    }
+
+    public APIRequestUpdate setMessage (String message) {
+      this.setParam("message", message);
       return this;
     }
 
@@ -794,6 +789,11 @@ public class SavedMessageResponse extends APINode {
     }
     public APIRequestUpdate setRemoveImage (String removeImage) {
       this.setParam("remove_image", removeImage);
+      return this;
+    }
+
+    public APIRequestUpdate setTitle (String title) {
+      this.setParam("title", title);
       return this;
     }
 

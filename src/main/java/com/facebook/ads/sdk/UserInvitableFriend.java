@@ -276,9 +276,9 @@ public class UserInvitableFriend extends APINode {
     }
     public static final String[] PARAMS = {
       "height",
-      "width",
-      "type",
       "redirect",
+      "type",
+      "width",
     };
 
     public static final String[] FIELDS = {
@@ -355,12 +355,12 @@ public class UserInvitableFriend extends APINode {
       return this;
     }
 
-    public APIRequestGetPicture setWidth (Long width) {
-      this.setParam("width", width);
+    public APIRequestGetPicture setRedirect (Boolean redirect) {
+      this.setParam("redirect", redirect);
       return this;
     }
-    public APIRequestGetPicture setWidth (String width) {
-      this.setParam("width", width);
+    public APIRequestGetPicture setRedirect (String redirect) {
+      this.setParam("redirect", redirect);
       return this;
     }
 
@@ -373,12 +373,12 @@ public class UserInvitableFriend extends APINode {
       return this;
     }
 
-    public APIRequestGetPicture setRedirect (Boolean redirect) {
-      this.setParam("redirect", redirect);
+    public APIRequestGetPicture setWidth (Long width) {
+      this.setParam("width", width);
       return this;
     }
-    public APIRequestGetPicture setRedirect (String redirect) {
-      this.setParam("redirect", redirect);
+    public APIRequestGetPicture setWidth (String width) {
+      this.setParam("width", width);
       return this;
     }
 

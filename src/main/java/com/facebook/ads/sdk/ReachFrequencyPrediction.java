@@ -127,8 +127,6 @@ public class ReachFrequencyPrediction extends APINode {
   private Map<Long, List<Double>> mFrequencyDistributionMap = null;
   @SerializedName("frequency_distribution_map_agg")
   private Map<Long, List<Long>> mFrequencyDistributionMapAgg = null;
-  @SerializedName("full_view_ratio_00")
-  private Long mFullViewRatio00 = null;
   @SerializedName("grp_audience_size")
   private Double mGrpAudienceSize = null;
   @SerializedName("grp_avg_probability_map")
@@ -587,10 +585,6 @@ public class ReachFrequencyPrediction extends APINode {
     return mFrequencyDistributionMapAgg;
   }
 
-  public Long getFieldFullViewRatio00() {
-    return mFullViewRatio00;
-  }
-
   public Double getFieldGrpAudienceSize() {
     return mGrpAudienceSize;
   }
@@ -840,7 +834,6 @@ public class ReachFrequencyPrediction extends APINode {
       "frequency_distribution",
       "frequency_distribution_map",
       "frequency_distribution_map_agg",
-      "full_view_ratio_00",
       "grp_audience_size",
       "grp_avg_probability_map",
       "grp_country_audience_size",
@@ -1232,13 +1225,6 @@ public class ReachFrequencyPrediction extends APINode {
     }
     public APIRequestGet requestFrequencyDistributionMapAggField (boolean value) {
       this.requestField("frequency_distribution_map_agg", value);
-      return this;
-    }
-    public APIRequestGet requestFullViewRatio00Field () {
-      return this.requestFullViewRatio00Field(true);
-    }
-    public APIRequestGet requestFullViewRatio00Field (boolean value) {
-      this.requestField("full_view_ratio_00", value);
       return this;
     }
     public APIRequestGet requestGrpAudienceSizeField () {
@@ -1760,7 +1746,6 @@ public class ReachFrequencyPrediction extends APINode {
     this.mFrequencyDistribution = instance.mFrequencyDistribution;
     this.mFrequencyDistributionMap = instance.mFrequencyDistributionMap;
     this.mFrequencyDistributionMapAgg = instance.mFrequencyDistributionMapAgg;
-    this.mFullViewRatio00 = instance.mFullViewRatio00;
     this.mGrpAudienceSize = instance.mGrpAudienceSize;
     this.mGrpAvgProbabilityMap = instance.mGrpAvgProbabilityMap;
     this.mGrpCountryAudienceSize = instance.mGrpCountryAudienceSize;

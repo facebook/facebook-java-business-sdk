@@ -574,19 +574,19 @@ public class NativeOffer extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "urls",
-      "photos",
       "ad_account",
       "ad_image_hashes",
-      "image_crops",
-      "published_ads",
-      "published",
-      "message",
-      "place_data",
-      "deeplinks",
       "carousel_captions",
-      "carousel_links",
       "carousel_data",
+      "carousel_links",
+      "deeplinks",
+      "image_crops",
+      "message",
+      "photos",
+      "place_data",
+      "published",
+      "published_ads",
+      "urls",
       "videos",
     };
 
@@ -646,24 +646,6 @@ public class NativeOffer extends APINode {
     }
 
 
-    public APIRequestCreateNativeOfferView setUrls (List<String> urls) {
-      this.setParam("urls", urls);
-      return this;
-    }
-    public APIRequestCreateNativeOfferView setUrls (String urls) {
-      this.setParam("urls", urls);
-      return this;
-    }
-
-    public APIRequestCreateNativeOfferView setPhotos (List<String> photos) {
-      this.setParam("photos", photos);
-      return this;
-    }
-    public APIRequestCreateNativeOfferView setPhotos (String photos) {
-      this.setParam("photos", photos);
-      return this;
-    }
-
     public APIRequestCreateNativeOfferView setAdAccount (String adAccount) {
       this.setParam("ad_account", adAccount);
       return this;
@@ -678,62 +660,21 @@ public class NativeOffer extends APINode {
       return this;
     }
 
-    public APIRequestCreateNativeOfferView setImageCrops (List<Map<String, String>> imageCrops) {
-      this.setParam("image_crops", imageCrops);
-      return this;
-    }
-    public APIRequestCreateNativeOfferView setImageCrops (String imageCrops) {
-      this.setParam("image_crops", imageCrops);
-      return this;
-    }
-
-    public APIRequestCreateNativeOfferView setPublishedAds (Boolean publishedAds) {
-      this.setParam("published_ads", publishedAds);
-      return this;
-    }
-    public APIRequestCreateNativeOfferView setPublishedAds (String publishedAds) {
-      this.setParam("published_ads", publishedAds);
-      return this;
-    }
-
-    public APIRequestCreateNativeOfferView setPublished (Boolean published) {
-      this.setParam("published", published);
-      return this;
-    }
-    public APIRequestCreateNativeOfferView setPublished (String published) {
-      this.setParam("published", published);
-      return this;
-    }
-
-    public APIRequestCreateNativeOfferView setMessage (String message) {
-      this.setParam("message", message);
-      return this;
-    }
-
-    public APIRequestCreateNativeOfferView setPlaceData (Object placeData) {
-      this.setParam("place_data", placeData);
-      return this;
-    }
-    public APIRequestCreateNativeOfferView setPlaceData (String placeData) {
-      this.setParam("place_data", placeData);
-      return this;
-    }
-
-    public APIRequestCreateNativeOfferView setDeeplinks (List<String> deeplinks) {
-      this.setParam("deeplinks", deeplinks);
-      return this;
-    }
-    public APIRequestCreateNativeOfferView setDeeplinks (String deeplinks) {
-      this.setParam("deeplinks", deeplinks);
-      return this;
-    }
-
     public APIRequestCreateNativeOfferView setCarouselCaptions (List<String> carouselCaptions) {
       this.setParam("carousel_captions", carouselCaptions);
       return this;
     }
     public APIRequestCreateNativeOfferView setCarouselCaptions (String carouselCaptions) {
       this.setParam("carousel_captions", carouselCaptions);
+      return this;
+    }
+
+    public APIRequestCreateNativeOfferView setCarouselData (List<Object> carouselData) {
+      this.setParam("carousel_data", carouselData);
+      return this;
+    }
+    public APIRequestCreateNativeOfferView setCarouselData (String carouselData) {
+      this.setParam("carousel_data", carouselData);
       return this;
     }
 
@@ -746,12 +687,71 @@ public class NativeOffer extends APINode {
       return this;
     }
 
-    public APIRequestCreateNativeOfferView setCarouselData (List<Object> carouselData) {
-      this.setParam("carousel_data", carouselData);
+    public APIRequestCreateNativeOfferView setDeeplinks (List<String> deeplinks) {
+      this.setParam("deeplinks", deeplinks);
       return this;
     }
-    public APIRequestCreateNativeOfferView setCarouselData (String carouselData) {
-      this.setParam("carousel_data", carouselData);
+    public APIRequestCreateNativeOfferView setDeeplinks (String deeplinks) {
+      this.setParam("deeplinks", deeplinks);
+      return this;
+    }
+
+    public APIRequestCreateNativeOfferView setImageCrops (List<Map<String, String>> imageCrops) {
+      this.setParam("image_crops", imageCrops);
+      return this;
+    }
+    public APIRequestCreateNativeOfferView setImageCrops (String imageCrops) {
+      this.setParam("image_crops", imageCrops);
+      return this;
+    }
+
+    public APIRequestCreateNativeOfferView setMessage (String message) {
+      this.setParam("message", message);
+      return this;
+    }
+
+    public APIRequestCreateNativeOfferView setPhotos (List<String> photos) {
+      this.setParam("photos", photos);
+      return this;
+    }
+    public APIRequestCreateNativeOfferView setPhotos (String photos) {
+      this.setParam("photos", photos);
+      return this;
+    }
+
+    public APIRequestCreateNativeOfferView setPlaceData (Object placeData) {
+      this.setParam("place_data", placeData);
+      return this;
+    }
+    public APIRequestCreateNativeOfferView setPlaceData (String placeData) {
+      this.setParam("place_data", placeData);
+      return this;
+    }
+
+    public APIRequestCreateNativeOfferView setPublished (Boolean published) {
+      this.setParam("published", published);
+      return this;
+    }
+    public APIRequestCreateNativeOfferView setPublished (String published) {
+      this.setParam("published", published);
+      return this;
+    }
+
+    public APIRequestCreateNativeOfferView setPublishedAds (Boolean publishedAds) {
+      this.setParam("published_ads", publishedAds);
+      return this;
+    }
+    public APIRequestCreateNativeOfferView setPublishedAds (String publishedAds) {
+      this.setParam("published_ads", publishedAds);
+      return this;
+    }
+
+    public APIRequestCreateNativeOfferView setUrls (List<String> urls) {
+      this.setParam("urls", urls);
+      return this;
+    }
+    public APIRequestCreateNativeOfferView setUrls (String urls) {
+      this.setParam("urls", urls);
       return this;
     }
 

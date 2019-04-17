@@ -1009,34 +1009,34 @@ public class Vehicle extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "address",
       "applinks",
-      "transmission",
-      "drivetrain",
-      "fuel_type",
-      "trim",
-      "interior_color",
-      "condition",
-      "date_first_on_lot",
       "availability",
+      "body_style",
+      "condition",
+      "currency",
+      "date_first_on_lot",
       "dealer_id",
       "dealer_name",
       "dealer_phone",
-      "vehicle_type",
-      "body_style",
       "description",
+      "drivetrain",
       "exterior_color",
+      "fuel_type",
+      "images",
+      "interior_color",
       "make",
       "mileage",
       "model",
-      "state_of_vehicle",
-      "vin",
-      "url",
-      "year",
-      "images",
-      "address",
-      "currency",
       "price",
+      "state_of_vehicle",
       "title",
+      "transmission",
+      "trim",
+      "url",
+      "vehicle_type",
+      "vin",
+      "year",
     };
 
     public static final String[] FIELDS = {
@@ -1095,6 +1095,15 @@ public class Vehicle extends APINode {
     }
 
 
+    public APIRequestUpdate setAddress (Map<String, String> address) {
+      this.setParam("address", address);
+      return this;
+    }
+    public APIRequestUpdate setAddress (String address) {
+      this.setParam("address", address);
+      return this;
+    }
+
     public APIRequestUpdate setApplinks (Object applinks) {
       this.setParam("applinks", applinks);
       return this;
@@ -1104,40 +1113,21 @@ public class Vehicle extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setTransmission (Vehicle.EnumTransmission transmission) {
-      this.setParam("transmission", transmission);
+    public APIRequestUpdate setAvailability (Vehicle.EnumAvailability availability) {
+      this.setParam("availability", availability);
       return this;
     }
-    public APIRequestUpdate setTransmission (String transmission) {
-      this.setParam("transmission", transmission);
-      return this;
-    }
-
-    public APIRequestUpdate setDrivetrain (Vehicle.EnumDrivetrain drivetrain) {
-      this.setParam("drivetrain", drivetrain);
-      return this;
-    }
-    public APIRequestUpdate setDrivetrain (String drivetrain) {
-      this.setParam("drivetrain", drivetrain);
+    public APIRequestUpdate setAvailability (String availability) {
+      this.setParam("availability", availability);
       return this;
     }
 
-    public APIRequestUpdate setFuelType (Vehicle.EnumFuelType fuelType) {
-      this.setParam("fuel_type", fuelType);
+    public APIRequestUpdate setBodyStyle (Vehicle.EnumBodyStyle bodyStyle) {
+      this.setParam("body_style", bodyStyle);
       return this;
     }
-    public APIRequestUpdate setFuelType (String fuelType) {
-      this.setParam("fuel_type", fuelType);
-      return this;
-    }
-
-    public APIRequestUpdate setTrim (String trim) {
-      this.setParam("trim", trim);
-      return this;
-    }
-
-    public APIRequestUpdate setInteriorColor (String interiorColor) {
-      this.setParam("interior_color", interiorColor);
+    public APIRequestUpdate setBodyStyle (String bodyStyle) {
+      this.setParam("body_style", bodyStyle);
       return this;
     }
 
@@ -1150,17 +1140,13 @@ public class Vehicle extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setDateFirstOnLot (String dateFirstOnLot) {
-      this.setParam("date_first_on_lot", dateFirstOnLot);
+    public APIRequestUpdate setCurrency (String currency) {
+      this.setParam("currency", currency);
       return this;
     }
 
-    public APIRequestUpdate setAvailability (Vehicle.EnumAvailability availability) {
-      this.setParam("availability", availability);
-      return this;
-    }
-    public APIRequestUpdate setAvailability (String availability) {
-      this.setParam("availability", availability);
+    public APIRequestUpdate setDateFirstOnLot (String dateFirstOnLot) {
+      this.setParam("date_first_on_lot", dateFirstOnLot);
       return this;
     }
 
@@ -1179,31 +1165,45 @@ public class Vehicle extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setVehicleType (Vehicle.EnumVehicleType vehicleType) {
-      this.setParam("vehicle_type", vehicleType);
-      return this;
-    }
-    public APIRequestUpdate setVehicleType (String vehicleType) {
-      this.setParam("vehicle_type", vehicleType);
-      return this;
-    }
-
-    public APIRequestUpdate setBodyStyle (Vehicle.EnumBodyStyle bodyStyle) {
-      this.setParam("body_style", bodyStyle);
-      return this;
-    }
-    public APIRequestUpdate setBodyStyle (String bodyStyle) {
-      this.setParam("body_style", bodyStyle);
-      return this;
-    }
-
     public APIRequestUpdate setDescription (String description) {
       this.setParam("description", description);
       return this;
     }
 
+    public APIRequestUpdate setDrivetrain (Vehicle.EnumDrivetrain drivetrain) {
+      this.setParam("drivetrain", drivetrain);
+      return this;
+    }
+    public APIRequestUpdate setDrivetrain (String drivetrain) {
+      this.setParam("drivetrain", drivetrain);
+      return this;
+    }
+
     public APIRequestUpdate setExteriorColor (String exteriorColor) {
       this.setParam("exterior_color", exteriorColor);
+      return this;
+    }
+
+    public APIRequestUpdate setFuelType (Vehicle.EnumFuelType fuelType) {
+      this.setParam("fuel_type", fuelType);
+      return this;
+    }
+    public APIRequestUpdate setFuelType (String fuelType) {
+      this.setParam("fuel_type", fuelType);
+      return this;
+    }
+
+    public APIRequestUpdate setImages (List<Object> images) {
+      this.setParam("images", images);
+      return this;
+    }
+    public APIRequestUpdate setImages (String images) {
+      this.setParam("images", images);
+      return this;
+    }
+
+    public APIRequestUpdate setInteriorColor (String interiorColor) {
+      this.setParam("interior_color", interiorColor);
       return this;
     }
 
@@ -1226,57 +1226,6 @@ public class Vehicle extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setStateOfVehicle (Vehicle.EnumStateOfVehicle stateOfVehicle) {
-      this.setParam("state_of_vehicle", stateOfVehicle);
-      return this;
-    }
-    public APIRequestUpdate setStateOfVehicle (String stateOfVehicle) {
-      this.setParam("state_of_vehicle", stateOfVehicle);
-      return this;
-    }
-
-    public APIRequestUpdate setVin (String vin) {
-      this.setParam("vin", vin);
-      return this;
-    }
-
-    public APIRequestUpdate setUrl (String url) {
-      this.setParam("url", url);
-      return this;
-    }
-
-    public APIRequestUpdate setYear (Long year) {
-      this.setParam("year", year);
-      return this;
-    }
-    public APIRequestUpdate setYear (String year) {
-      this.setParam("year", year);
-      return this;
-    }
-
-    public APIRequestUpdate setImages (List<Object> images) {
-      this.setParam("images", images);
-      return this;
-    }
-    public APIRequestUpdate setImages (String images) {
-      this.setParam("images", images);
-      return this;
-    }
-
-    public APIRequestUpdate setAddress (Map<String, String> address) {
-      this.setParam("address", address);
-      return this;
-    }
-    public APIRequestUpdate setAddress (String address) {
-      this.setParam("address", address);
-      return this;
-    }
-
-    public APIRequestUpdate setCurrency (String currency) {
-      this.setParam("currency", currency);
-      return this;
-    }
-
     public APIRequestUpdate setPrice (Long price) {
       this.setParam("price", price);
       return this;
@@ -1286,8 +1235,59 @@ public class Vehicle extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setStateOfVehicle (Vehicle.EnumStateOfVehicle stateOfVehicle) {
+      this.setParam("state_of_vehicle", stateOfVehicle);
+      return this;
+    }
+    public APIRequestUpdate setStateOfVehicle (String stateOfVehicle) {
+      this.setParam("state_of_vehicle", stateOfVehicle);
+      return this;
+    }
+
     public APIRequestUpdate setTitle (String title) {
       this.setParam("title", title);
+      return this;
+    }
+
+    public APIRequestUpdate setTransmission (Vehicle.EnumTransmission transmission) {
+      this.setParam("transmission", transmission);
+      return this;
+    }
+    public APIRequestUpdate setTransmission (String transmission) {
+      this.setParam("transmission", transmission);
+      return this;
+    }
+
+    public APIRequestUpdate setTrim (String trim) {
+      this.setParam("trim", trim);
+      return this;
+    }
+
+    public APIRequestUpdate setUrl (String url) {
+      this.setParam("url", url);
+      return this;
+    }
+
+    public APIRequestUpdate setVehicleType (Vehicle.EnumVehicleType vehicleType) {
+      this.setParam("vehicle_type", vehicleType);
+      return this;
+    }
+    public APIRequestUpdate setVehicleType (String vehicleType) {
+      this.setParam("vehicle_type", vehicleType);
+      return this;
+    }
+
+    public APIRequestUpdate setVin (String vin) {
+      this.setParam("vin", vin);
+      return this;
+    }
+
+    public APIRequestUpdate setYear (Long year) {
+      this.setParam("year", year);
+      return this;
+    }
+    public APIRequestUpdate setYear (String year) {
+      this.setParam("year", year);
       return this;
     }
 
@@ -1402,6 +1402,8 @@ public class Vehicle extends APINode {
       VALUE_OTHER("OTHER"),
       @SerializedName("POOR")
       VALUE_POOR("POOR"),
+      @SerializedName("VERY_GOOD")
+      VALUE_VERY_GOOD("VERY_GOOD"),
       NULL(null);
 
       private String value;

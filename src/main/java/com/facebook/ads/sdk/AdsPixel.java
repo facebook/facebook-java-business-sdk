@@ -432,8 +432,8 @@ public class AdsPixel extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "user",
       "business",
+      "user",
     };
 
     public static final String[] FIELDS = {
@@ -492,17 +492,17 @@ public class AdsPixel extends APINode {
     }
 
 
+    public APIRequestDeleteAssignedUsers setBusiness (String business) {
+      this.setParam("business", business);
+      return this;
+    }
+
     public APIRequestDeleteAssignedUsers setUser (Long user) {
       this.setParam("user", user);
       return this;
     }
     public APIRequestDeleteAssignedUsers setUser (String user) {
       this.setParam("user", user);
-      return this;
-    }
-
-    public APIRequestDeleteAssignedUsers setBusiness (String business) {
-      this.setParam("business", business);
       return this;
     }
 
@@ -694,9 +694,9 @@ public class AdsPixel extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "user",
-      "tasks",
       "business",
+      "tasks",
+      "user",
     };
 
     public static final String[] FIELDS = {
@@ -755,12 +755,8 @@ public class AdsPixel extends APINode {
     }
 
 
-    public APIRequestCreateAssignedUser setUser (Long user) {
-      this.setParam("user", user);
-      return this;
-    }
-    public APIRequestCreateAssignedUser setUser (String user) {
-      this.setParam("user", user);
+    public APIRequestCreateAssignedUser setBusiness (String business) {
+      this.setParam("business", business);
       return this;
     }
 
@@ -773,8 +769,12 @@ public class AdsPixel extends APINode {
       return this;
     }
 
-    public APIRequestCreateAssignedUser setBusiness (String business) {
-      this.setParam("business", business);
+    public APIRequestCreateAssignedUser setUser (Long user) {
+      this.setParam("user", user);
+      return this;
+    }
+    public APIRequestCreateAssignedUser setUser (String user) {
+      this.setParam("user", user);
       return this;
     }
 
@@ -2002,7 +2002,6 @@ public class AdsPixel extends APINode {
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
-      "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
       "funding_source",
@@ -2301,13 +2300,6 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetSharedAccounts requestEndAdvertiserNameField (boolean value) {
       this.requestField("end_advertiser_name", value);
-      return this;
-    }
-    public APIRequestGetSharedAccounts requestExtendedCreditInvoiceGroupField () {
-      return this.requestExtendedCreditInvoiceGroupField(true);
-    }
-    public APIRequestGetSharedAccounts requestExtendedCreditInvoiceGroupField (boolean value) {
-      this.requestField("extended_credit_invoice_group", value);
       return this;
     }
     public APIRequestGetSharedAccounts requestFailedDeliveryChecksField () {
@@ -3052,11 +3044,11 @@ public class AdsPixel extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "start_time",
-      "end_time",
       "aggregation",
+      "end_time",
       "event",
       "event_source",
+      "start_time",
     };
 
     public static final String[] FIELDS = {
@@ -3118,22 +3110,17 @@ public class AdsPixel extends APINode {
     }
 
 
-    public APIRequestGetStats setStartTime (String startTime) {
-      this.setParam("start_time", startTime);
-      return this;
-    }
-
-    public APIRequestGetStats setEndTime (String endTime) {
-      this.setParam("end_time", endTime);
-      return this;
-    }
-
     public APIRequestGetStats setAggregation (AdsPixelStatsResult.EnumAggregation aggregation) {
       this.setParam("aggregation", aggregation);
       return this;
     }
     public APIRequestGetStats setAggregation (String aggregation) {
       this.setParam("aggregation", aggregation);
+      return this;
+    }
+
+    public APIRequestGetStats setEndTime (String endTime) {
+      this.setParam("end_time", endTime);
       return this;
     }
 
@@ -3144,6 +3131,11 @@ public class AdsPixel extends APINode {
 
     public APIRequestGetStats setEventSource (String eventSource) {
       this.setParam("event_source", eventSource);
+      return this;
+    }
+
+    public APIRequestGetStats setStartTime (String startTime) {
+      this.setParam("start_time", startTime);
       return this;
     }
 
@@ -3430,11 +3422,11 @@ public class AdsPixel extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "name",
-      "enable_automatic_matching",
       "automatic_matching_fields",
-      "first_party_cookie_status",
       "data_use_setting",
+      "enable_automatic_matching",
+      "first_party_cookie_status",
+      "name",
       "server_events_business_id",
     };
 
@@ -3494,8 +3486,21 @@ public class AdsPixel extends APINode {
     }
 
 
-    public APIRequestUpdate setName (String name) {
-      this.setParam("name", name);
+    public APIRequestUpdate setAutomaticMatchingFields (List<AdsPixel.EnumAutomaticMatchingFields> automaticMatchingFields) {
+      this.setParam("automatic_matching_fields", automaticMatchingFields);
+      return this;
+    }
+    public APIRequestUpdate setAutomaticMatchingFields (String automaticMatchingFields) {
+      this.setParam("automatic_matching_fields", automaticMatchingFields);
+      return this;
+    }
+
+    public APIRequestUpdate setDataUseSetting (AdsPixel.EnumDataUseSetting dataUseSetting) {
+      this.setParam("data_use_setting", dataUseSetting);
+      return this;
+    }
+    public APIRequestUpdate setDataUseSetting (String dataUseSetting) {
+      this.setParam("data_use_setting", dataUseSetting);
       return this;
     }
 
@@ -3508,15 +3513,6 @@ public class AdsPixel extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setAutomaticMatchingFields (List<AdsPixel.EnumAutomaticMatchingFields> automaticMatchingFields) {
-      this.setParam("automatic_matching_fields", automaticMatchingFields);
-      return this;
-    }
-    public APIRequestUpdate setAutomaticMatchingFields (String automaticMatchingFields) {
-      this.setParam("automatic_matching_fields", automaticMatchingFields);
-      return this;
-    }
-
     public APIRequestUpdate setFirstPartyCookieStatus (AdsPixel.EnumFirstPartyCookieStatus firstPartyCookieStatus) {
       this.setParam("first_party_cookie_status", firstPartyCookieStatus);
       return this;
@@ -3526,12 +3522,8 @@ public class AdsPixel extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setDataUseSetting (AdsPixel.EnumDataUseSetting dataUseSetting) {
-      this.setParam("data_use_setting", dataUseSetting);
-      return this;
-    }
-    public APIRequestUpdate setDataUseSetting (String dataUseSetting) {
-      this.setParam("data_use_setting", dataUseSetting);
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
       return this;
     }
 

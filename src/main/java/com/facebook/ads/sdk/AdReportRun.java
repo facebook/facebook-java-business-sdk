@@ -403,7 +403,6 @@ public class AdReportRun extends APINode {
       "auction_bid",
       "auction_competitiveness",
       "auction_max_competitor_bid",
-      "bid_type",
       "body_asset",
       "buying_type",
       "call_to_action_asset",
@@ -476,11 +475,9 @@ public class AdReportRun extends APINode {
       "place_page_name",
       "placement",
       "platform_position",
-      "product_format",
       "product_id",
       "publisher_platform",
       "purchase_roas",
-      "purchasing_interface",
       "reach",
       "region",
       "relevance_score",
@@ -737,13 +734,6 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestAuctionMaxCompetitorBidField (boolean value) {
       this.requestField("auction_max_competitor_bid", value);
-      return this;
-    }
-    public APIRequestGetInsights requestBidTypeField () {
-      return this.requestBidTypeField(true);
-    }
-    public APIRequestGetInsights requestBidTypeField (boolean value) {
-      this.requestField("bid_type", value);
       return this;
     }
     public APIRequestGetInsights requestBodyAssetField () {
@@ -1250,13 +1240,6 @@ public class AdReportRun extends APINode {
       this.requestField("platform_position", value);
       return this;
     }
-    public APIRequestGetInsights requestProductFormatField () {
-      return this.requestProductFormatField(true);
-    }
-    public APIRequestGetInsights requestProductFormatField (boolean value) {
-      this.requestField("product_format", value);
-      return this;
-    }
     public APIRequestGetInsights requestProductIdField () {
       return this.requestProductIdField(true);
     }
@@ -1276,13 +1259,6 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestPurchaseRoasField (boolean value) {
       this.requestField("purchase_roas", value);
-      return this;
-    }
-    public APIRequestGetInsights requestPurchasingInterfaceField () {
-      return this.requestPurchasingInterfaceField(true);
-    }
-    public APIRequestGetInsights requestPurchasingInterfaceField (boolean value) {
-      this.requestField("purchasing_interface", value);
       return this;
     }
     public APIRequestGetInsights requestReachField () {

@@ -58,7 +58,7 @@ public class IGUser extends APINode {
   @SerializedName("biography")
   private String mBiography = null;
   @SerializedName("business_discovery")
-  private Object mBusinessDiscovery = null;
+  private IGUser mBusinessDiscovery = null;
   @SerializedName("followers_count")
   private Long mFollowersCount = null;
   @SerializedName("follows_count")
@@ -331,7 +331,10 @@ public class IGUser extends APINode {
     return mBiography;
   }
 
-  public Object getFieldBusinessDiscovery() {
+  public IGUser getFieldBusinessDiscovery() {
+    if (mBusinessDiscovery != null) {
+      mBusinessDiscovery.context = getContext();
+    }
     return mBusinessDiscovery;
   }
 
@@ -395,8 +398,8 @@ public class IGUser extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "media_id",
       "comment_id",
+      "media_id",
       "message",
     };
 
@@ -456,13 +459,13 @@ public class IGUser extends APINode {
     }
 
 
-    public APIRequestCreateMention setMediaId (String mediaId) {
-      this.setParam("media_id", mediaId);
+    public APIRequestCreateMention setCommentId (String commentId) {
+      this.setParam("comment_id", commentId);
       return this;
     }
 
-    public APIRequestCreateMention setCommentId (String commentId) {
-      this.setParam("comment_id", commentId);
+    public APIRequestCreateMention setMediaId (String mediaId) {
+      this.setParam("media_id", mediaId);
       return this;
     }
 
@@ -517,10 +520,10 @@ public class IGUser extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "since",
-      "until",
       "metric",
       "period",
+      "since",
+      "until",
     };
 
     public static final String[] FIELDS = {
@@ -585,16 +588,6 @@ public class IGUser extends APINode {
     }
 
 
-    public APIRequestGetInsights setSince (String since) {
-      this.setParam("since", since);
-      return this;
-    }
-
-    public APIRequestGetInsights setUntil (String until) {
-      this.setParam("until", until);
-      return this;
-    }
-
     public APIRequestGetInsights setMetric (List<InstagramInsightsResult.EnumMetric> metric) {
       this.setParam("metric", metric);
       return this;
@@ -610,6 +603,16 @@ public class IGUser extends APINode {
     }
     public APIRequestGetInsights setPeriod (String period) {
       this.setParam("period", period);
+      return this;
+    }
+
+    public APIRequestGetInsights setSince (String since) {
+      this.setParam("since", since);
+      return this;
+    }
+
+    public APIRequestGetInsights setUntil (String until) {
+      this.setParam("until", until);
       return this;
     }
 
@@ -917,10 +920,10 @@ public class IGUser extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "media_type",
       "caption",
-      "image_url",
       "children",
+      "image_url",
+      "media_type",
     };
 
     public static final String[] FIELDS = {
@@ -979,18 +982,8 @@ public class IGUser extends APINode {
     }
 
 
-    public APIRequestCreateMedia setMediaType (String mediaType) {
-      this.setParam("media_type", mediaType);
-      return this;
-    }
-
     public APIRequestCreateMedia setCaption (String caption) {
       this.setParam("caption", caption);
-      return this;
-    }
-
-    public APIRequestCreateMedia setImageUrl (String imageUrl) {
-      this.setParam("image_url", imageUrl);
       return this;
     }
 
@@ -1000,6 +993,16 @@ public class IGUser extends APINode {
     }
     public APIRequestCreateMedia setChildren (String children) {
       this.setParam("children", children);
+      return this;
+    }
+
+    public APIRequestCreateMedia setImageUrl (String imageUrl) {
+      this.setParam("image_url", imageUrl);
+      return this;
+    }
+
+    public APIRequestCreateMedia setMediaType (String mediaType) {
+      this.setParam("media_type", mediaType);
       return this;
     }
 

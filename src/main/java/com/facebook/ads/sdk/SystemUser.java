@@ -365,7 +365,6 @@ public class SystemUser extends APINode {
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
-      "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
       "funding_source",
@@ -659,13 +658,6 @@ public class SystemUser extends APINode {
     }
     public APIRequestGetAssignedAdAccounts requestEndAdvertiserNameField (boolean value) {
       this.requestField("end_advertiser_name", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestExtendedCreditInvoiceGroupField () {
-      return this.requestExtendedCreditInvoiceGroupField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestExtendedCreditInvoiceGroupField (boolean value) {
-      this.requestField("extended_credit_invoice_group", value);
       return this;
     }
     public APIRequestGetAssignedAdAccounts requestFailedDeliveryChecksField () {

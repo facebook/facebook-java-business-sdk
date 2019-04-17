@@ -594,10 +594,10 @@ public class VideoPoll extends APINode {
     }
     public static final String[] PARAMS = {
       "action",
-      "default_open",
-      "show_results",
-      "show_gradient",
       "close_after_voting",
+      "default_open",
+      "show_gradient",
+      "show_results",
     };
 
     public static final String[] FIELDS = {
@@ -665,21 +665,21 @@ public class VideoPoll extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setCloseAfterVoting (Boolean closeAfterVoting) {
+      this.setParam("close_after_voting", closeAfterVoting);
+      return this;
+    }
+    public APIRequestUpdate setCloseAfterVoting (String closeAfterVoting) {
+      this.setParam("close_after_voting", closeAfterVoting);
+      return this;
+    }
+
     public APIRequestUpdate setDefaultOpen (Boolean defaultOpen) {
       this.setParam("default_open", defaultOpen);
       return this;
     }
     public APIRequestUpdate setDefaultOpen (String defaultOpen) {
       this.setParam("default_open", defaultOpen);
-      return this;
-    }
-
-    public APIRequestUpdate setShowResults (Boolean showResults) {
-      this.setParam("show_results", showResults);
-      return this;
-    }
-    public APIRequestUpdate setShowResults (String showResults) {
-      this.setParam("show_results", showResults);
       return this;
     }
 
@@ -692,12 +692,12 @@ public class VideoPoll extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setCloseAfterVoting (Boolean closeAfterVoting) {
-      this.setParam("close_after_voting", closeAfterVoting);
+    public APIRequestUpdate setShowResults (Boolean showResults) {
+      this.setParam("show_results", showResults);
       return this;
     }
-    public APIRequestUpdate setCloseAfterVoting (String closeAfterVoting) {
-      this.setParam("close_after_voting", closeAfterVoting);
+    public APIRequestUpdate setShowResults (String showResults) {
+      this.setParam("show_results", showResults);
       return this;
     }
 

@@ -747,27 +747,27 @@ public class AdReportSpec extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "time_ranges",
-      "data_columns",
       "actions_group_by",
+      "business_id",
+      "bypass_async",
+      "creation_source",
+      "data_columns",
+      "date_preset",
+      "export_columns",
       "filters",
+      "format",
+      "format_version",
+      "insights_section",
+      "limit",
+      "name",
+      "report_run_id",
+      "report_schedule_id",
       "sort_by",
       "sort_dir",
       "time_increment",
       "time_interval",
-      "date_preset",
-      "format",
-      "export_columns",
-      "report_run_id",
-      "name",
+      "time_ranges",
       "user_report",
-      "business_id",
-      "limit",
-      "bypass_async",
-      "report_schedule_id",
-      "insights_section",
-      "creation_source",
-      "format_version",
     };
 
     public static final String[] FIELDS = {
@@ -826,12 +826,35 @@ public class AdReportSpec extends APINode {
     }
 
 
-    public APIRequestUpdate setTimeRanges (JsonArray timeRanges) {
-      this.setParam("time_ranges", timeRanges);
+    public APIRequestUpdate setActionsGroupBy (List<AdReportSpec.EnumActionsGroupBy> actionsGroupBy) {
+      this.setParam("actions_group_by", actionsGroupBy);
       return this;
     }
-    public APIRequestUpdate setTimeRanges (String timeRanges) {
-      this.setParam("time_ranges", timeRanges);
+    public APIRequestUpdate setActionsGroupBy (String actionsGroupBy) {
+      this.setParam("actions_group_by", actionsGroupBy);
+      return this;
+    }
+
+    public APIRequestUpdate setBusinessId (String businessId) {
+      this.setParam("business_id", businessId);
+      return this;
+    }
+
+    public APIRequestUpdate setBypassAsync (Boolean bypassAsync) {
+      this.setParam("bypass_async", bypassAsync);
+      return this;
+    }
+    public APIRequestUpdate setBypassAsync (String bypassAsync) {
+      this.setParam("bypass_async", bypassAsync);
+      return this;
+    }
+
+    public APIRequestUpdate setCreationSource (AdReportSpec.EnumCreationSource creationSource) {
+      this.setParam("creation_source", creationSource);
+      return this;
+    }
+    public APIRequestUpdate setCreationSource (String creationSource) {
+      this.setParam("creation_source", creationSource);
       return this;
     }
 
@@ -844,12 +867,21 @@ public class AdReportSpec extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setActionsGroupBy (List<AdReportSpec.EnumActionsGroupBy> actionsGroupBy) {
-      this.setParam("actions_group_by", actionsGroupBy);
+    public APIRequestUpdate setDatePreset (AdReportSpec.EnumDatePreset datePreset) {
+      this.setParam("date_preset", datePreset);
       return this;
     }
-    public APIRequestUpdate setActionsGroupBy (String actionsGroupBy) {
-      this.setParam("actions_group_by", actionsGroupBy);
+    public APIRequestUpdate setDatePreset (String datePreset) {
+      this.setParam("date_preset", datePreset);
+      return this;
+    }
+
+    public APIRequestUpdate setExportColumns (Object exportColumns) {
+      this.setParam("export_columns", exportColumns);
+      return this;
+    }
+    public APIRequestUpdate setExportColumns (String exportColumns) {
+      this.setParam("export_columns", exportColumns);
       return this;
     }
 
@@ -859,6 +891,57 @@ public class AdReportSpec extends APINode {
     }
     public APIRequestUpdate setFilters (String filters) {
       this.setParam("filters", filters);
+      return this;
+    }
+
+    public APIRequestUpdate setFormat (AdReportSpec.EnumFormat format) {
+      this.setParam("format", format);
+      return this;
+    }
+    public APIRequestUpdate setFormat (String format) {
+      this.setParam("format", format);
+      return this;
+    }
+
+    public APIRequestUpdate setFormatVersion (Long formatVersion) {
+      this.setParam("format_version", formatVersion);
+      return this;
+    }
+    public APIRequestUpdate setFormatVersion (String formatVersion) {
+      this.setParam("format_version", formatVersion);
+      return this;
+    }
+
+    public APIRequestUpdate setInsightsSection (Object insightsSection) {
+      this.setParam("insights_section", insightsSection);
+      return this;
+    }
+    public APIRequestUpdate setInsightsSection (String insightsSection) {
+      this.setParam("insights_section", insightsSection);
+      return this;
+    }
+
+    public APIRequestUpdate setLimit (Long limit) {
+      this.setParam("limit", limit);
+      return this;
+    }
+    public APIRequestUpdate setLimit (String limit) {
+      this.setParam("limit", limit);
+      return this;
+    }
+
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestUpdate setReportRunId (String reportRunId) {
+      this.setParam("report_run_id", reportRunId);
+      return this;
+    }
+
+    public APIRequestUpdate setReportScheduleId (String reportScheduleId) {
+      this.setParam("report_schedule_id", reportScheduleId);
       return this;
     }
 
@@ -886,40 +969,12 @@ public class AdReportSpec extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setDatePreset (AdReportSpec.EnumDatePreset datePreset) {
-      this.setParam("date_preset", datePreset);
+    public APIRequestUpdate setTimeRanges (JsonArray timeRanges) {
+      this.setParam("time_ranges", timeRanges);
       return this;
     }
-    public APIRequestUpdate setDatePreset (String datePreset) {
-      this.setParam("date_preset", datePreset);
-      return this;
-    }
-
-    public APIRequestUpdate setFormat (AdReportSpec.EnumFormat format) {
-      this.setParam("format", format);
-      return this;
-    }
-    public APIRequestUpdate setFormat (String format) {
-      this.setParam("format", format);
-      return this;
-    }
-
-    public APIRequestUpdate setExportColumns (Object exportColumns) {
-      this.setParam("export_columns", exportColumns);
-      return this;
-    }
-    public APIRequestUpdate setExportColumns (String exportColumns) {
-      this.setParam("export_columns", exportColumns);
-      return this;
-    }
-
-    public APIRequestUpdate setReportRunId (String reportRunId) {
-      this.setParam("report_run_id", reportRunId);
-      return this;
-    }
-
-    public APIRequestUpdate setName (String name) {
-      this.setParam("name", name);
+    public APIRequestUpdate setTimeRanges (String timeRanges) {
+      this.setParam("time_ranges", timeRanges);
       return this;
     }
 
@@ -929,61 +984,6 @@ public class AdReportSpec extends APINode {
     }
     public APIRequestUpdate setUserReport (String userReport) {
       this.setParam("user_report", userReport);
-      return this;
-    }
-
-    public APIRequestUpdate setBusinessId (String businessId) {
-      this.setParam("business_id", businessId);
-      return this;
-    }
-
-    public APIRequestUpdate setLimit (Long limit) {
-      this.setParam("limit", limit);
-      return this;
-    }
-    public APIRequestUpdate setLimit (String limit) {
-      this.setParam("limit", limit);
-      return this;
-    }
-
-    public APIRequestUpdate setBypassAsync (Boolean bypassAsync) {
-      this.setParam("bypass_async", bypassAsync);
-      return this;
-    }
-    public APIRequestUpdate setBypassAsync (String bypassAsync) {
-      this.setParam("bypass_async", bypassAsync);
-      return this;
-    }
-
-    public APIRequestUpdate setReportScheduleId (String reportScheduleId) {
-      this.setParam("report_schedule_id", reportScheduleId);
-      return this;
-    }
-
-    public APIRequestUpdate setInsightsSection (Object insightsSection) {
-      this.setParam("insights_section", insightsSection);
-      return this;
-    }
-    public APIRequestUpdate setInsightsSection (String insightsSection) {
-      this.setParam("insights_section", insightsSection);
-      return this;
-    }
-
-    public APIRequestUpdate setCreationSource (AdReportSpec.EnumCreationSource creationSource) {
-      this.setParam("creation_source", creationSource);
-      return this;
-    }
-    public APIRequestUpdate setCreationSource (String creationSource) {
-      this.setParam("creation_source", creationSource);
-      return this;
-    }
-
-    public APIRequestUpdate setFormatVersion (Long formatVersion) {
-      this.setParam("format_version", formatVersion);
-      return this;
-    }
-    public APIRequestUpdate setFormatVersion (String formatVersion) {
-      this.setParam("format_version", formatVersion);
       return this;
     }
 

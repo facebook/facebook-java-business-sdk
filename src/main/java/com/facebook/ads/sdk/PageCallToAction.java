@@ -770,20 +770,20 @@ public class PageCallToAction extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "type",
-      "intl_number_with_plus",
-      "email_address",
-      "web_destination_type",
-      "web_url",
-      "android_destination_type",
+      "android_app_id",
       "android_deeplink",
+      "android_destination_type",
       "android_package_name",
       "android_url",
-      "android_app_id",
-      "iphone_destination_type",
-      "iphone_deeplink",
-      "iphone_url",
+      "email_address",
+      "intl_number_with_plus",
       "iphone_app_id",
+      "iphone_deeplink",
+      "iphone_destination_type",
+      "iphone_url",
+      "type",
+      "web_destination_type",
+      "web_url",
     };
 
     public static final String[] FIELDS = {
@@ -842,12 +842,41 @@ public class PageCallToAction extends APINode {
     }
 
 
-    public APIRequestUpdate setType (PageCallToAction.EnumType type) {
-      this.setParam("type", type);
+    public APIRequestUpdate setAndroidAppId (Long androidAppId) {
+      this.setParam("android_app_id", androidAppId);
       return this;
     }
-    public APIRequestUpdate setType (String type) {
-      this.setParam("type", type);
+    public APIRequestUpdate setAndroidAppId (String androidAppId) {
+      this.setParam("android_app_id", androidAppId);
+      return this;
+    }
+
+    public APIRequestUpdate setAndroidDeeplink (String androidDeeplink) {
+      this.setParam("android_deeplink", androidDeeplink);
+      return this;
+    }
+
+    public APIRequestUpdate setAndroidDestinationType (PageCallToAction.EnumAndroidDestinationType androidDestinationType) {
+      this.setParam("android_destination_type", androidDestinationType);
+      return this;
+    }
+    public APIRequestUpdate setAndroidDestinationType (String androidDestinationType) {
+      this.setParam("android_destination_type", androidDestinationType);
+      return this;
+    }
+
+    public APIRequestUpdate setAndroidPackageName (String androidPackageName) {
+      this.setParam("android_package_name", androidPackageName);
+      return this;
+    }
+
+    public APIRequestUpdate setAndroidUrl (String androidUrl) {
+      this.setParam("android_url", androidUrl);
+      return this;
+    }
+
+    public APIRequestUpdate setEmailAddress (String emailAddress) {
+      this.setParam("email_address", emailAddress);
       return this;
     }
 
@@ -856,8 +885,40 @@ public class PageCallToAction extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setEmailAddress (String emailAddress) {
-      this.setParam("email_address", emailAddress);
+    public APIRequestUpdate setIphoneAppId (Long iphoneAppId) {
+      this.setParam("iphone_app_id", iphoneAppId);
+      return this;
+    }
+    public APIRequestUpdate setIphoneAppId (String iphoneAppId) {
+      this.setParam("iphone_app_id", iphoneAppId);
+      return this;
+    }
+
+    public APIRequestUpdate setIphoneDeeplink (String iphoneDeeplink) {
+      this.setParam("iphone_deeplink", iphoneDeeplink);
+      return this;
+    }
+
+    public APIRequestUpdate setIphoneDestinationType (PageCallToAction.EnumIphoneDestinationType iphoneDestinationType) {
+      this.setParam("iphone_destination_type", iphoneDestinationType);
+      return this;
+    }
+    public APIRequestUpdate setIphoneDestinationType (String iphoneDestinationType) {
+      this.setParam("iphone_destination_type", iphoneDestinationType);
+      return this;
+    }
+
+    public APIRequestUpdate setIphoneUrl (String iphoneUrl) {
+      this.setParam("iphone_url", iphoneUrl);
+      return this;
+    }
+
+    public APIRequestUpdate setType (PageCallToAction.EnumType type) {
+      this.setParam("type", type);
+      return this;
+    }
+    public APIRequestUpdate setType (String type) {
+      this.setParam("type", type);
       return this;
     }
 
@@ -872,67 +933,6 @@ public class PageCallToAction extends APINode {
 
     public APIRequestUpdate setWebUrl (String webUrl) {
       this.setParam("web_url", webUrl);
-      return this;
-    }
-
-    public APIRequestUpdate setAndroidDestinationType (PageCallToAction.EnumAndroidDestinationType androidDestinationType) {
-      this.setParam("android_destination_type", androidDestinationType);
-      return this;
-    }
-    public APIRequestUpdate setAndroidDestinationType (String androidDestinationType) {
-      this.setParam("android_destination_type", androidDestinationType);
-      return this;
-    }
-
-    public APIRequestUpdate setAndroidDeeplink (String androidDeeplink) {
-      this.setParam("android_deeplink", androidDeeplink);
-      return this;
-    }
-
-    public APIRequestUpdate setAndroidPackageName (String androidPackageName) {
-      this.setParam("android_package_name", androidPackageName);
-      return this;
-    }
-
-    public APIRequestUpdate setAndroidUrl (String androidUrl) {
-      this.setParam("android_url", androidUrl);
-      return this;
-    }
-
-    public APIRequestUpdate setAndroidAppId (Long androidAppId) {
-      this.setParam("android_app_id", androidAppId);
-      return this;
-    }
-    public APIRequestUpdate setAndroidAppId (String androidAppId) {
-      this.setParam("android_app_id", androidAppId);
-      return this;
-    }
-
-    public APIRequestUpdate setIphoneDestinationType (PageCallToAction.EnumIphoneDestinationType iphoneDestinationType) {
-      this.setParam("iphone_destination_type", iphoneDestinationType);
-      return this;
-    }
-    public APIRequestUpdate setIphoneDestinationType (String iphoneDestinationType) {
-      this.setParam("iphone_destination_type", iphoneDestinationType);
-      return this;
-    }
-
-    public APIRequestUpdate setIphoneDeeplink (String iphoneDeeplink) {
-      this.setParam("iphone_deeplink", iphoneDeeplink);
-      return this;
-    }
-
-    public APIRequestUpdate setIphoneUrl (String iphoneUrl) {
-      this.setParam("iphone_url", iphoneUrl);
-      return this;
-    }
-
-    public APIRequestUpdate setIphoneAppId (Long iphoneAppId) {
-      this.setParam("iphone_app_id", iphoneAppId);
-      return this;
-    }
-    public APIRequestUpdate setIphoneAppId (String iphoneAppId) {
-      this.setParam("iphone_app_id", iphoneAppId);
       return this;
     }
 

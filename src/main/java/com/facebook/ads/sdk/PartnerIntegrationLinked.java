@@ -688,12 +688,13 @@ public class PartnerIntegrationLinked extends APINode {
       "ads_pixel_id",
       "application_id",
       "completed_integration_types",
+      "install_name",
       "name",
       "oauth_partner_integration_id",
       "offline_conversion_data_set_id",
       "product_catalog_id",
+      "salesforce_instance_url",
       "setup_status",
-      "install_name",
       "workspace_name",
     };
 
@@ -772,6 +773,11 @@ public class PartnerIntegrationLinked extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setInstallName (String installName) {
+      this.setParam("install_name", installName);
+      return this;
+    }
+
     public APIRequestUpdate setName (String name) {
       this.setParam("name", name);
       return this;
@@ -792,17 +798,17 @@ public class PartnerIntegrationLinked extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setSalesforceInstanceUrl (String salesforceInstanceUrl) {
+      this.setParam("salesforce_instance_url", salesforceInstanceUrl);
+      return this;
+    }
+
     public APIRequestUpdate setSetupStatus (PartnerIntegrationLinked.EnumSetupStatus setupStatus) {
       this.setParam("setup_status", setupStatus);
       return this;
     }
     public APIRequestUpdate setSetupStatus (String setupStatus) {
       this.setParam("setup_status", setupStatus);
-      return this;
-    }
-
-    public APIRequestUpdate setInstallName (String installName) {
-      this.setParam("install_name", installName);
       return this;
     }
 
@@ -900,6 +906,8 @@ public class PartnerIntegrationLinked extends APINode {
       VALUE_JUMPSELLER("jumpseller"),
       @SerializedName("kajabi")
       VALUE_KAJABI("kajabi"),
+      @SerializedName("kochava")
+      VALUE_KOCHAVA("kochava"),
       @SerializedName("kraftly")
       VALUE_KRAFTLY("kraftly"),
       @SerializedName("m_particle")

@@ -727,9 +727,9 @@ public class LeadgenForm extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "start_time",
       "end_time",
       "session_id",
+      "start_time",
     };
 
     public static final String[] FIELDS = {
@@ -788,11 +788,6 @@ public class LeadgenForm extends APINode {
     }
 
 
-    public APIRequestCreateLead setStartTime (String startTime) {
-      this.setParam("start_time", startTime);
-      return this;
-    }
-
     public APIRequestCreateLead setEndTime (String endTime) {
       this.setParam("end_time", endTime);
       return this;
@@ -800,6 +795,11 @@ public class LeadgenForm extends APINode {
 
     public APIRequestCreateLead setSessionId (String sessionId) {
       this.setParam("session_id", sessionId);
+      return this;
+    }
+
+    public APIRequestCreateLead setStartTime (String startTime) {
+      this.setParam("start_time", startTime);
       return this;
     }
 
@@ -1081,8 +1081,8 @@ public class LeadgenForm extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "field_data",
       "custom_disclaimer_responses",
+      "field_data",
     };
 
     public static final String[] FIELDS = {
@@ -1141,21 +1141,21 @@ public class LeadgenForm extends APINode {
     }
 
 
-    public APIRequestCreateTestLead setFieldData (List<Object> fieldData) {
-      this.setParam("field_data", fieldData);
-      return this;
-    }
-    public APIRequestCreateTestLead setFieldData (String fieldData) {
-      this.setParam("field_data", fieldData);
-      return this;
-    }
-
     public APIRequestCreateTestLead setCustomDisclaimerResponses (List<Object> customDisclaimerResponses) {
       this.setParam("custom_disclaimer_responses", customDisclaimerResponses);
       return this;
     }
     public APIRequestCreateTestLead setCustomDisclaimerResponses (String customDisclaimerResponses) {
       this.setParam("custom_disclaimer_responses", customDisclaimerResponses);
+      return this;
+    }
+
+    public APIRequestCreateTestLead setFieldData (List<Object> fieldData) {
+      this.setParam("field_data", fieldData);
+      return this;
+    }
+    public APIRequestCreateTestLead setFieldData (String fieldData) {
+      this.setParam("field_data", fieldData);
       return this;
     }
 

@@ -579,8 +579,8 @@ public class MeasurementReport extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "payload",
       "is_last_batch",
+      "payload",
       "url",
     };
 
@@ -640,21 +640,21 @@ public class MeasurementReport extends APINode {
     }
 
 
-    public APIRequestUpdate setPayload (File payload) {
-      this.setParam("payload", payload);
-      return this;
-    }
-    public APIRequestUpdate setPayload (String payload) {
-      this.setParam("payload", payload);
-      return this;
-    }
-
     public APIRequestUpdate setIsLastBatch (Boolean isLastBatch) {
       this.setParam("is_last_batch", isLastBatch);
       return this;
     }
     public APIRequestUpdate setIsLastBatch (String isLastBatch) {
       this.setParam("is_last_batch", isLastBatch);
+      return this;
+    }
+
+    public APIRequestUpdate setPayload (File payload) {
+      this.setParam("payload", payload);
+      return this;
+    }
+    public APIRequestUpdate setPayload (String payload) {
+      this.setParam("payload", payload);
       return this;
     }
 

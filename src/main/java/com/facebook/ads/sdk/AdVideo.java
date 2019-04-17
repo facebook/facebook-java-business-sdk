@@ -711,8 +711,8 @@ public class AdVideo extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "target_id",
       "auto_trim_type",
+      "target_id",
     };
 
     public static final String[] FIELDS = {
@@ -771,17 +771,17 @@ public class AdVideo extends APINode {
     }
 
 
+    public APIRequestCreateAutoTrim setAutoTrimType (String autoTrimType) {
+      this.setParam("auto_trim_type", autoTrimType);
+      return this;
+    }
+
     public APIRequestCreateAutoTrim setTargetId (Long targetId) {
       this.setParam("target_id", targetId);
       return this;
     }
     public APIRequestCreateAutoTrim setTargetId (String targetId) {
       this.setParam("target_id", targetId);
-      return this;
-    }
-
-    public APIRequestCreateAutoTrim setAutoTrimType (String autoTrimType) {
-      this.setParam("auto_trim_type", autoTrimType);
       return this;
     }
 
@@ -831,8 +831,8 @@ public class AdVideo extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "uid",
       "remove_block",
+      "uid",
     };
 
     public static final String[] FIELDS = {
@@ -891,21 +891,21 @@ public class AdVideo extends APINode {
     }
 
 
-    public APIRequestCreateBlockedUser setUid (Object uid) {
-      this.setParam("uid", uid);
-      return this;
-    }
-    public APIRequestCreateBlockedUser setUid (String uid) {
-      this.setParam("uid", uid);
-      return this;
-    }
-
     public APIRequestCreateBlockedUser setRemoveBlock (Boolean removeBlock) {
       this.setParam("remove_block", removeBlock);
       return this;
     }
     public APIRequestCreateBlockedUser setRemoveBlock (String removeBlock) {
       this.setParam("remove_block", removeBlock);
+      return this;
+    }
+
+    public APIRequestCreateBlockedUser setUid (Object uid) {
+      this.setParam("uid", uid);
+      return this;
+    }
+    public APIRequestCreateBlockedUser setUid (String uid) {
+      this.setParam("uid", uid);
       return this;
     }
 
@@ -1169,8 +1169,8 @@ public class AdVideo extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "default_locale",
       "captions_file",
+      "default_locale",
       "locales_to_delete",
     };
 
@@ -1230,17 +1230,17 @@ public class AdVideo extends APINode {
     }
 
 
-    public APIRequestCreateCaption setDefaultLocale (String defaultLocale) {
-      this.setParam("default_locale", defaultLocale);
-      return this;
-    }
-
     public APIRequestCreateCaption setCaptionsFile (File captionsFile) {
       this.setParam("captions_file", captionsFile);
       return this;
     }
     public APIRequestCreateCaption setCaptionsFile (String captionsFile) {
       this.setParam("captions_file", captionsFile);
+      return this;
+    }
+
+    public APIRequestCreateCaption setDefaultLocale (String defaultLocale) {
+      this.setParam("default_locale", defaultLocale);
       return this;
     }
 
@@ -1300,8 +1300,8 @@ public class AdVideo extends APINode {
     }
     public static final String[] PARAMS = {
       "filter",
-      "order",
       "live_filter",
+      "order",
       "since",
     };
 
@@ -1391,21 +1391,21 @@ public class AdVideo extends APINode {
       return this;
     }
 
-    public APIRequestGetComments setOrder (Comment.EnumOrder order) {
-      this.setParam("order", order);
-      return this;
-    }
-    public APIRequestGetComments setOrder (String order) {
-      this.setParam("order", order);
-      return this;
-    }
-
     public APIRequestGetComments setLiveFilter (Comment.EnumLiveFilter liveFilter) {
       this.setParam("live_filter", liveFilter);
       return this;
     }
     public APIRequestGetComments setLiveFilter (String liveFilter) {
       this.setParam("live_filter", liveFilter);
+      return this;
+    }
+
+    public APIRequestGetComments setOrder (Comment.EnumOrder order) {
+      this.setParam("order", order);
+      return this;
+    }
+    public APIRequestGetComments setOrder (String order) {
+      this.setParam("order", order);
       return this;
     }
 
@@ -1607,17 +1607,17 @@ public class AdVideo extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "attachment_id",
+      "attachment_share_url",
+      "attachment_url",
+      "comment_privacy_value",
+      "facepile_mentioned_ids",
+      "feedback_source",
+      "is_offline",
+      "message",
+      "nectar_module",
       "object_id",
       "parent_comment_id",
-      "nectar_module",
-      "attachment_id",
-      "attachment_url",
-      "attachment_share_url",
-      "feedback_source",
-      "facepile_mentioned_ids",
-      "is_offline",
-      "comment_privacy_value",
-      "message",
       "text",
       "tracking",
     };
@@ -1678,32 +1678,8 @@ public class AdVideo extends APINode {
     }
 
 
-    public APIRequestCreateComment setObjectId (String objectId) {
-      this.setParam("object_id", objectId);
-      return this;
-    }
-
-    public APIRequestCreateComment setParentCommentId (Object parentCommentId) {
-      this.setParam("parent_comment_id", parentCommentId);
-      return this;
-    }
-    public APIRequestCreateComment setParentCommentId (String parentCommentId) {
-      this.setParam("parent_comment_id", parentCommentId);
-      return this;
-    }
-
-    public APIRequestCreateComment setNectarModule (String nectarModule) {
-      this.setParam("nectar_module", nectarModule);
-      return this;
-    }
-
     public APIRequestCreateComment setAttachmentId (String attachmentId) {
       this.setParam("attachment_id", attachmentId);
-      return this;
-    }
-
-    public APIRequestCreateComment setAttachmentUrl (String attachmentUrl) {
-      this.setParam("attachment_url", attachmentUrl);
       return this;
     }
 
@@ -1712,26 +1688,8 @@ public class AdVideo extends APINode {
       return this;
     }
 
-    public APIRequestCreateComment setFeedbackSource (String feedbackSource) {
-      this.setParam("feedback_source", feedbackSource);
-      return this;
-    }
-
-    public APIRequestCreateComment setFacepileMentionedIds (List<String> facepileMentionedIds) {
-      this.setParam("facepile_mentioned_ids", facepileMentionedIds);
-      return this;
-    }
-    public APIRequestCreateComment setFacepileMentionedIds (String facepileMentionedIds) {
-      this.setParam("facepile_mentioned_ids", facepileMentionedIds);
-      return this;
-    }
-
-    public APIRequestCreateComment setIsOffline (Boolean isOffline) {
-      this.setParam("is_offline", isOffline);
-      return this;
-    }
-    public APIRequestCreateComment setIsOffline (String isOffline) {
-      this.setParam("is_offline", isOffline);
+    public APIRequestCreateComment setAttachmentUrl (String attachmentUrl) {
+      this.setParam("attachment_url", attachmentUrl);
       return this;
     }
 
@@ -1744,8 +1702,50 @@ public class AdVideo extends APINode {
       return this;
     }
 
+    public APIRequestCreateComment setFacepileMentionedIds (List<String> facepileMentionedIds) {
+      this.setParam("facepile_mentioned_ids", facepileMentionedIds);
+      return this;
+    }
+    public APIRequestCreateComment setFacepileMentionedIds (String facepileMentionedIds) {
+      this.setParam("facepile_mentioned_ids", facepileMentionedIds);
+      return this;
+    }
+
+    public APIRequestCreateComment setFeedbackSource (String feedbackSource) {
+      this.setParam("feedback_source", feedbackSource);
+      return this;
+    }
+
+    public APIRequestCreateComment setIsOffline (Boolean isOffline) {
+      this.setParam("is_offline", isOffline);
+      return this;
+    }
+    public APIRequestCreateComment setIsOffline (String isOffline) {
+      this.setParam("is_offline", isOffline);
+      return this;
+    }
+
     public APIRequestCreateComment setMessage (String message) {
       this.setParam("message", message);
+      return this;
+    }
+
+    public APIRequestCreateComment setNectarModule (String nectarModule) {
+      this.setParam("nectar_module", nectarModule);
+      return this;
+    }
+
+    public APIRequestCreateComment setObjectId (String objectId) {
+      this.setParam("object_id", objectId);
+      return this;
+    }
+
+    public APIRequestCreateComment setParentCommentId (Object parentCommentId) {
+      this.setParam("parent_comment_id", parentCommentId);
+      return this;
+    }
+    public APIRequestCreateComment setParentCommentId (String parentCommentId) {
+      this.setParam("parent_comment_id", parentCommentId);
       return this;
     }
 
@@ -3053,10 +3053,10 @@ public class AdVideo extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "tracking",
+      "feedback_source",
       "nectar_module",
       "notify",
-      "feedback_source",
+      "tracking",
     };
 
     public static final String[] FIELDS = {
@@ -3115,8 +3115,8 @@ public class AdVideo extends APINode {
     }
 
 
-    public APIRequestDeleteLikes setTracking (String tracking) {
-      this.setParam("tracking", tracking);
+    public APIRequestDeleteLikes setFeedbackSource (String feedbackSource) {
+      this.setParam("feedback_source", feedbackSource);
       return this;
     }
 
@@ -3134,8 +3134,8 @@ public class AdVideo extends APINode {
       return this;
     }
 
-    public APIRequestDeleteLikes setFeedbackSource (String feedbackSource) {
-      this.setParam("feedback_source", feedbackSource);
+    public APIRequestDeleteLikes setTracking (String tracking) {
+      this.setParam("tracking", tracking);
       return this;
     }
 
@@ -3377,10 +3377,10 @@ public class AdVideo extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "tracking",
+      "feedback_source",
       "nectar_module",
       "notify",
-      "feedback_source",
+      "tracking",
     };
 
     public static final String[] FIELDS = {
@@ -3439,8 +3439,8 @@ public class AdVideo extends APINode {
     }
 
 
-    public APIRequestCreateLike setTracking (String tracking) {
-      this.setParam("tracking", tracking);
+    public APIRequestCreateLike setFeedbackSource (String feedbackSource) {
+      this.setParam("feedback_source", feedbackSource);
       return this;
     }
 
@@ -3458,8 +3458,8 @@ public class AdVideo extends APINode {
       return this;
     }
 
-    public APIRequestCreateLike setFeedbackSource (String feedbackSource) {
-      this.setParam("feedback_source", feedbackSource);
+    public APIRequestCreateLike setTracking (String tracking) {
+      this.setParam("tracking", tracking);
       return this;
     }
 
@@ -3669,13 +3669,13 @@ public class AdVideo extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "question",
-      "options",
+      "close_after_voting",
       "correct_option",
       "default_open",
-      "show_results",
+      "options",
+      "question",
       "show_gradient",
-      "close_after_voting",
+      "show_results",
     };
 
     public static final String[] FIELDS = {
@@ -3734,17 +3734,12 @@ public class AdVideo extends APINode {
     }
 
 
-    public APIRequestCreatePoll setQuestion (String question) {
-      this.setParam("question", question);
+    public APIRequestCreatePoll setCloseAfterVoting (Boolean closeAfterVoting) {
+      this.setParam("close_after_voting", closeAfterVoting);
       return this;
     }
-
-    public APIRequestCreatePoll setOptions (List<String> options) {
-      this.setParam("options", options);
-      return this;
-    }
-    public APIRequestCreatePoll setOptions (String options) {
-      this.setParam("options", options);
+    public APIRequestCreatePoll setCloseAfterVoting (String closeAfterVoting) {
+      this.setParam("close_after_voting", closeAfterVoting);
       return this;
     }
 
@@ -3766,12 +3761,17 @@ public class AdVideo extends APINode {
       return this;
     }
 
-    public APIRequestCreatePoll setShowResults (Boolean showResults) {
-      this.setParam("show_results", showResults);
+    public APIRequestCreatePoll setOptions (List<String> options) {
+      this.setParam("options", options);
       return this;
     }
-    public APIRequestCreatePoll setShowResults (String showResults) {
-      this.setParam("show_results", showResults);
+    public APIRequestCreatePoll setOptions (String options) {
+      this.setParam("options", options);
+      return this;
+    }
+
+    public APIRequestCreatePoll setQuestion (String question) {
+      this.setParam("question", question);
       return this;
     }
 
@@ -3784,12 +3784,12 @@ public class AdVideo extends APINode {
       return this;
     }
 
-    public APIRequestCreatePoll setCloseAfterVoting (Boolean closeAfterVoting) {
-      this.setParam("close_after_voting", closeAfterVoting);
+    public APIRequestCreatePoll setShowResults (Boolean showResults) {
+      this.setParam("show_results", showResults);
       return this;
     }
-    public APIRequestCreatePoll setCloseAfterVoting (String closeAfterVoting) {
-      this.setParam("close_after_voting", closeAfterVoting);
+    public APIRequestCreatePoll setShowResults (String showResults) {
+      this.setParam("show_results", showResults);
       return this;
     }
 
@@ -4067,6 +4067,7 @@ public class AdVideo extends APINode {
       "id",
       "instagram_eligibility",
       "is_app_share",
+      "is_eligible_for_promotion",
       "is_expired",
       "is_hidden",
       "is_instagram_eligible",
@@ -4353,6 +4354,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetSharedPosts requestIsAppShareField (boolean value) {
       this.requestField("is_app_share", value);
+      return this;
+    }
+    public APIRequestGetSharedPosts requestIsEligibleForPromotionField () {
+      return this.requestIsEligibleForPromotionField(true);
+    }
+    public APIRequestGetSharedPosts requestIsEligibleForPromotionField (boolean value) {
+      this.requestField("is_eligible_for_promotion", value);
       return this;
     }
     public APIRequestGetSharedPosts requestIsExpiredField () {
@@ -5865,8 +5873,8 @@ public class AdVideo extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "target_id",
       "summarization_type",
+      "target_id",
     };
 
     public static final String[] FIELDS = {
@@ -5925,17 +5933,17 @@ public class AdVideo extends APINode {
     }
 
 
+    public APIRequestCreateSummarization setSummarizationType (String summarizationType) {
+      this.setParam("summarization_type", summarizationType);
+      return this;
+    }
+
     public APIRequestCreateSummarization setTargetId (Long targetId) {
       this.setParam("target_id", targetId);
       return this;
     }
     public APIRequestCreateSummarization setTargetId (String targetId) {
       this.setParam("target_id", targetId);
-      return this;
-    }
-
-    public APIRequestCreateSummarization setSummarizationType (String summarizationType) {
-      this.setParam("summarization_type", summarizationType);
       return this;
     }
 
@@ -6105,9 +6113,9 @@ public class AdVideo extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "tag_uid",
       "uid",
       "vid",
-      "tag_uid",
     };
 
     public static final String[] FIELDS = {
@@ -6166,6 +6174,15 @@ public class AdVideo extends APINode {
     }
 
 
+    public APIRequestCreateTag setTagUid (Long tagUid) {
+      this.setParam("tag_uid", tagUid);
+      return this;
+    }
+    public APIRequestCreateTag setTagUid (String tagUid) {
+      this.setParam("tag_uid", tagUid);
+      return this;
+    }
+
     public APIRequestCreateTag setUid (Long uid) {
       this.setParam("uid", uid);
       return this;
@@ -6177,15 +6194,6 @@ public class AdVideo extends APINode {
 
     public APIRequestCreateTag setVid (String vid) {
       this.setParam("vid", vid);
-      return this;
-    }
-
-    public APIRequestCreateTag setTagUid (Long tagUid) {
-      this.setParam("tag_uid", tagUid);
-      return this;
-    }
-    public APIRequestCreateTag setTagUid (String tagUid) {
-      this.setParam("tag_uid", tagUid);
       return this;
     }
 
@@ -6395,8 +6403,8 @@ public class AdVideo extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "source",
       "is_preferred",
+      "source",
     };
 
     public static final String[] FIELDS = {
@@ -6455,21 +6463,21 @@ public class AdVideo extends APINode {
     }
 
 
-    public APIRequestCreateThumbnail setSource (File source) {
-      this.setParam("source", source);
-      return this;
-    }
-    public APIRequestCreateThumbnail setSource (String source) {
-      this.setParam("source", source);
-      return this;
-    }
-
     public APIRequestCreateThumbnail setIsPreferred (Boolean isPreferred) {
       this.setParam("is_preferred", isPreferred);
       return this;
     }
     public APIRequestCreateThumbnail setIsPreferred (String isPreferred) {
       this.setParam("is_preferred", isPreferred);
+      return this;
+    }
+
+    public APIRequestCreateThumbnail setSource (File source) {
+      this.setParam("source", source);
+      return this;
+    }
+    public APIRequestCreateThumbnail setSource (String source) {
+      this.setParam("source", source);
       return this;
     }
 
@@ -7215,34 +7223,34 @@ public class AdVideo extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "privacy",
-      "published",
-      "target",
-      "scheduled_publish_time",
-      "name",
-      "description",
-      "tags",
-      "preferred_thumbnail_id",
       "ad_breaks",
+      "allow_bm_crossposting",
+      "allow_crossposting_for_pages",
       "backdated_time",
       "backdated_time_granularity",
       "call_to_action",
+      "content_category",
+      "content_tags",
       "custom_labels",
+      "description",
+      "direct_share_status",
+      "embeddable",
       "expiration",
       "expire_now",
-      "embeddable",
-      "allow_bm_crossposting",
-      "allow_crossposting_for_pages",
-      "social_actions",
-      "content_category",
-      "publish_to_videos_tab",
-      "publish_to_news_feed",
-      "universal_video_id",
-      "content_tags",
-      "sponsor_id",
-      "direct_share_status",
-      "sponsor_relationship",
       "increment_play_count",
+      "name",
+      "preferred_thumbnail_id",
+      "privacy",
+      "publish_to_news_feed",
+      "publish_to_videos_tab",
+      "published",
+      "scheduled_publish_time",
+      "social_actions",
+      "sponsor_id",
+      "sponsor_relationship",
+      "tags",
+      "target",
+      "universal_video_id",
     };
 
     public static final String[] FIELDS = {
@@ -7301,64 +7309,30 @@ public class AdVideo extends APINode {
     }
 
 
-    public APIRequestUpdate setPrivacy (String privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
-
-    public APIRequestUpdate setPublished (Boolean published) {
-      this.setParam("published", published);
-      return this;
-    }
-    public APIRequestUpdate setPublished (String published) {
-      this.setParam("published", published);
-      return this;
-    }
-
-    public APIRequestUpdate setTarget (String target) {
-      this.setParam("target", target);
-      return this;
-    }
-
-    public APIRequestUpdate setScheduledPublishTime (Long scheduledPublishTime) {
-      this.setParam("scheduled_publish_time", scheduledPublishTime);
-      return this;
-    }
-    public APIRequestUpdate setScheduledPublishTime (String scheduledPublishTime) {
-      this.setParam("scheduled_publish_time", scheduledPublishTime);
-      return this;
-    }
-
-    public APIRequestUpdate setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestUpdate setDescription (String description) {
-      this.setParam("description", description);
-      return this;
-    }
-
-    public APIRequestUpdate setTags (List<String> tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-    public APIRequestUpdate setTags (String tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-
-    public APIRequestUpdate setPreferredThumbnailId (String preferredThumbnailId) {
-      this.setParam("preferred_thumbnail_id", preferredThumbnailId);
-      return this;
-    }
-
     public APIRequestUpdate setAdBreaks (JsonArray adBreaks) {
       this.setParam("ad_breaks", adBreaks);
       return this;
     }
     public APIRequestUpdate setAdBreaks (String adBreaks) {
       this.setParam("ad_breaks", adBreaks);
+      return this;
+    }
+
+    public APIRequestUpdate setAllowBmCrossposting (Boolean allowBmCrossposting) {
+      this.setParam("allow_bm_crossposting", allowBmCrossposting);
+      return this;
+    }
+    public APIRequestUpdate setAllowBmCrossposting (String allowBmCrossposting) {
+      this.setParam("allow_bm_crossposting", allowBmCrossposting);
+      return this;
+    }
+
+    public APIRequestUpdate setAllowCrosspostingForPages (List<Object> allowCrosspostingForPages) {
+      this.setParam("allow_crossposting_for_pages", allowCrosspostingForPages);
+      return this;
+    }
+    public APIRequestUpdate setAllowCrosspostingForPages (String allowCrosspostingForPages) {
+      this.setParam("allow_crossposting_for_pages", allowCrosspostingForPages);
       return this;
     }
 
@@ -7385,12 +7359,53 @@ public class AdVideo extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setContentCategory (AdVideo.EnumContentCategory contentCategory) {
+      this.setParam("content_category", contentCategory);
+      return this;
+    }
+    public APIRequestUpdate setContentCategory (String contentCategory) {
+      this.setParam("content_category", contentCategory);
+      return this;
+    }
+
+    public APIRequestUpdate setContentTags (List<String> contentTags) {
+      this.setParam("content_tags", contentTags);
+      return this;
+    }
+    public APIRequestUpdate setContentTags (String contentTags) {
+      this.setParam("content_tags", contentTags);
+      return this;
+    }
+
     public APIRequestUpdate setCustomLabels (List<String> customLabels) {
       this.setParam("custom_labels", customLabels);
       return this;
     }
     public APIRequestUpdate setCustomLabels (String customLabels) {
       this.setParam("custom_labels", customLabels);
+      return this;
+    }
+
+    public APIRequestUpdate setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestUpdate setDirectShareStatus (Long directShareStatus) {
+      this.setParam("direct_share_status", directShareStatus);
+      return this;
+    }
+    public APIRequestUpdate setDirectShareStatus (String directShareStatus) {
+      this.setParam("direct_share_status", directShareStatus);
+      return this;
+    }
+
+    public APIRequestUpdate setEmbeddable (Boolean embeddable) {
+      this.setParam("embeddable", embeddable);
+      return this;
+    }
+    public APIRequestUpdate setEmbeddable (String embeddable) {
+      this.setParam("embeddable", embeddable);
       return this;
     }
 
@@ -7412,57 +7427,27 @@ public class AdVideo extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setEmbeddable (Boolean embeddable) {
-      this.setParam("embeddable", embeddable);
+    public APIRequestUpdate setIncrementPlayCount (Boolean incrementPlayCount) {
+      this.setParam("increment_play_count", incrementPlayCount);
       return this;
     }
-    public APIRequestUpdate setEmbeddable (String embeddable) {
-      this.setParam("embeddable", embeddable);
-      return this;
-    }
-
-    public APIRequestUpdate setAllowBmCrossposting (Boolean allowBmCrossposting) {
-      this.setParam("allow_bm_crossposting", allowBmCrossposting);
-      return this;
-    }
-    public APIRequestUpdate setAllowBmCrossposting (String allowBmCrossposting) {
-      this.setParam("allow_bm_crossposting", allowBmCrossposting);
+    public APIRequestUpdate setIncrementPlayCount (String incrementPlayCount) {
+      this.setParam("increment_play_count", incrementPlayCount);
       return this;
     }
 
-    public APIRequestUpdate setAllowCrosspostingForPages (List<Object> allowCrosspostingForPages) {
-      this.setParam("allow_crossposting_for_pages", allowCrosspostingForPages);
-      return this;
-    }
-    public APIRequestUpdate setAllowCrosspostingForPages (String allowCrosspostingForPages) {
-      this.setParam("allow_crossposting_for_pages", allowCrosspostingForPages);
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
       return this;
     }
 
-    public APIRequestUpdate setSocialActions (Boolean socialActions) {
-      this.setParam("social_actions", socialActions);
-      return this;
-    }
-    public APIRequestUpdate setSocialActions (String socialActions) {
-      this.setParam("social_actions", socialActions);
+    public APIRequestUpdate setPreferredThumbnailId (String preferredThumbnailId) {
+      this.setParam("preferred_thumbnail_id", preferredThumbnailId);
       return this;
     }
 
-    public APIRequestUpdate setContentCategory (AdVideo.EnumContentCategory contentCategory) {
-      this.setParam("content_category", contentCategory);
-      return this;
-    }
-    public APIRequestUpdate setContentCategory (String contentCategory) {
-      this.setParam("content_category", contentCategory);
-      return this;
-    }
-
-    public APIRequestUpdate setPublishToVideosTab (Boolean publishToVideosTab) {
-      this.setParam("publish_to_videos_tab", publishToVideosTab);
-      return this;
-    }
-    public APIRequestUpdate setPublishToVideosTab (String publishToVideosTab) {
-      this.setParam("publish_to_videos_tab", publishToVideosTab);
+    public APIRequestUpdate setPrivacy (String privacy) {
+      this.setParam("privacy", privacy);
       return this;
     }
 
@@ -7475,31 +7460,44 @@ public class AdVideo extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setUniversalVideoId (String universalVideoId) {
-      this.setParam("universal_video_id", universalVideoId);
+    public APIRequestUpdate setPublishToVideosTab (Boolean publishToVideosTab) {
+      this.setParam("publish_to_videos_tab", publishToVideosTab);
+      return this;
+    }
+    public APIRequestUpdate setPublishToVideosTab (String publishToVideosTab) {
+      this.setParam("publish_to_videos_tab", publishToVideosTab);
       return this;
     }
 
-    public APIRequestUpdate setContentTags (List<String> contentTags) {
-      this.setParam("content_tags", contentTags);
+    public APIRequestUpdate setPublished (Boolean published) {
+      this.setParam("published", published);
       return this;
     }
-    public APIRequestUpdate setContentTags (String contentTags) {
-      this.setParam("content_tags", contentTags);
+    public APIRequestUpdate setPublished (String published) {
+      this.setParam("published", published);
+      return this;
+    }
+
+    public APIRequestUpdate setScheduledPublishTime (Long scheduledPublishTime) {
+      this.setParam("scheduled_publish_time", scheduledPublishTime);
+      return this;
+    }
+    public APIRequestUpdate setScheduledPublishTime (String scheduledPublishTime) {
+      this.setParam("scheduled_publish_time", scheduledPublishTime);
+      return this;
+    }
+
+    public APIRequestUpdate setSocialActions (Boolean socialActions) {
+      this.setParam("social_actions", socialActions);
+      return this;
+    }
+    public APIRequestUpdate setSocialActions (String socialActions) {
+      this.setParam("social_actions", socialActions);
       return this;
     }
 
     public APIRequestUpdate setSponsorId (String sponsorId) {
       this.setParam("sponsor_id", sponsorId);
-      return this;
-    }
-
-    public APIRequestUpdate setDirectShareStatus (Long directShareStatus) {
-      this.setParam("direct_share_status", directShareStatus);
-      return this;
-    }
-    public APIRequestUpdate setDirectShareStatus (String directShareStatus) {
-      this.setParam("direct_share_status", directShareStatus);
       return this;
     }
 
@@ -7512,12 +7510,22 @@ public class AdVideo extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setIncrementPlayCount (Boolean incrementPlayCount) {
-      this.setParam("increment_play_count", incrementPlayCount);
+    public APIRequestUpdate setTags (List<String> tags) {
+      this.setParam("tags", tags);
       return this;
     }
-    public APIRequestUpdate setIncrementPlayCount (String incrementPlayCount) {
-      this.setParam("increment_play_count", incrementPlayCount);
+    public APIRequestUpdate setTags (String tags) {
+      this.setParam("tags", tags);
+      return this;
+    }
+
+    public APIRequestUpdate setTarget (String target) {
+      this.setParam("target", target);
+      return this;
+    }
+
+    public APIRequestUpdate setUniversalVideoId (String universalVideoId) {
+      this.setParam("universal_video_id", universalVideoId);
       return this;
     }
 
@@ -7588,6 +7596,8 @@ public class AdVideo extends APINode {
       VALUE_CANDIDATE_VIDEOS("CANDIDATE_VIDEOS"),
       @SerializedName("CANVAS")
       VALUE_CANVAS("CANVAS"),
+      @SerializedName("CFC_VIDEO")
+      VALUE_CFC_VIDEO("CFC_VIDEO"),
       @SerializedName("CIVIC_PROPOSAL_COVER_VIDEO")
       VALUE_CIVIC_PROPOSAL_COVER_VIDEO("CIVIC_PROPOSAL_COVER_VIDEO"),
       @SerializedName("CONTAINED_POST_ATTACHMENT")
@@ -7714,6 +7724,8 @@ public class AdVideo extends APINode {
       VALUE_QUICK_PROMOTION("QUICK_PROMOTION"),
       @SerializedName("REPLACE_VIDEO")
       VALUE_REPLACE_VIDEO("REPLACE_VIDEO"),
+      @SerializedName("SALES_CLIENT_INTERACTION")
+      VALUE_SALES_CLIENT_INTERACTION("SALES_CLIENT_INTERACTION"),
       @SerializedName("SAY_THANKS_DEPRECATED")
       VALUE_SAY_THANKS_DEPRECATED("SAY_THANKS_DEPRECATED"),
       @SerializedName("SLIDESHOW_ANIMOTO")
@@ -7728,6 +7740,8 @@ public class AdVideo extends APINode {
       VALUE_STORYLINE_WITH_EXTERNAL_MUSIC("STORYLINE_WITH_EXTERNAL_MUSIC"),
       @SerializedName("STORY_ARCHIVE_VIDEO")
       VALUE_STORY_ARCHIVE_VIDEO("STORY_ARCHIVE_VIDEO"),
+      @SerializedName("STORY_CARD_TEMPLATE")
+      VALUE_STORY_CARD_TEMPLATE("STORY_CARD_TEMPLATE"),
       @SerializedName("TAROT_DIGEST")
       VALUE_TAROT_DIGEST("TAROT_DIGEST"),
       @SerializedName("TEMP_MULTIMEDIA_POST")

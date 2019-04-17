@@ -1091,18 +1091,18 @@ public class HomeListing extends APINode {
     public static final String[] PARAMS = {
       "address",
       "availability",
-      "images",
-      "name",
       "currency",
-      "price",
-      "url",
-      "year_built",
       "description",
+      "images",
       "listing_type",
+      "name",
       "num_baths",
       "num_beds",
       "num_units",
+      "price",
       "property_type",
+      "url",
+      "year_built",
     };
 
     public static final String[] FIELDS = {
@@ -1175,6 +1175,16 @@ public class HomeListing extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setCurrency (String currency) {
+      this.setParam("currency", currency);
+      return this;
+    }
+
+    public APIRequestUpdate setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
     public APIRequestUpdate setImages (List<Object> images) {
       this.setParam("images", images);
       return this;
@@ -1184,46 +1194,13 @@ public class HomeListing extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestUpdate setCurrency (String currency) {
-      this.setParam("currency", currency);
-      return this;
-    }
-
-    public APIRequestUpdate setPrice (Double price) {
-      this.setParam("price", price);
-      return this;
-    }
-    public APIRequestUpdate setPrice (String price) {
-      this.setParam("price", price);
-      return this;
-    }
-
-    public APIRequestUpdate setUrl (String url) {
-      this.setParam("url", url);
-      return this;
-    }
-
-    public APIRequestUpdate setYearBuilt (Long yearBuilt) {
-      this.setParam("year_built", yearBuilt);
-      return this;
-    }
-    public APIRequestUpdate setYearBuilt (String yearBuilt) {
-      this.setParam("year_built", yearBuilt);
-      return this;
-    }
-
-    public APIRequestUpdate setDescription (String description) {
-      this.setParam("description", description);
-      return this;
-    }
-
     public APIRequestUpdate setListingType (String listingType) {
       this.setParam("listing_type", listingType);
+      return this;
+    }
+
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
       return this;
     }
 
@@ -1254,8 +1231,31 @@ public class HomeListing extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setPrice (Double price) {
+      this.setParam("price", price);
+      return this;
+    }
+    public APIRequestUpdate setPrice (String price) {
+      this.setParam("price", price);
+      return this;
+    }
+
     public APIRequestUpdate setPropertyType (String propertyType) {
       this.setParam("property_type", propertyType);
+      return this;
+    }
+
+    public APIRequestUpdate setUrl (String url) {
+      this.setParam("url", url);
+      return this;
+    }
+
+    public APIRequestUpdate setYearBuilt (Long yearBuilt) {
+      this.setParam("year_built", yearBuilt);
+      return this;
+    }
+    public APIRequestUpdate setYearBuilt (String yearBuilt) {
+      this.setParam("year_built", yearBuilt);
       return this;
     }
 

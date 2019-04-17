@@ -61,8 +61,6 @@ public class SplitTestConfig extends APINode {
   private Boolean mEarlyWinnerDeclarationEnabled = null;
   @SerializedName("end_time")
   private String mEndTime = null;
-  @SerializedName("extend_winner_enabled")
-  private Boolean mExtendWinnerEnabled = null;
   @SerializedName("splits")
   private List<Long> mSplits = null;
   @SerializedName("start_time")
@@ -297,10 +295,6 @@ public class SplitTestConfig extends APINode {
     return mEndTime;
   }
 
-  public Boolean getFieldExtendWinnerEnabled() {
-    return mExtendWinnerEnabled;
-  }
-
   public List<Long> getFieldSplits() {
     return mSplits;
   }
@@ -333,7 +327,6 @@ public class SplitTestConfig extends APINode {
       "budget",
       "early_winner_declaration_enabled",
       "end_time",
-      "extend_winner_enabled",
       "splits",
       "start_time",
       "test_variable",
@@ -450,13 +443,6 @@ public class SplitTestConfig extends APINode {
       this.requestField("end_time", value);
       return this;
     }
-    public APIRequestGet requestExtendWinnerEnabledField () {
-      return this.requestExtendWinnerEnabledField(true);
-    }
-    public APIRequestGet requestExtendWinnerEnabledField (boolean value) {
-      this.requestField("extend_winner_enabled", value);
-      return this;
-    }
     public APIRequestGet requestSplitsField () {
       return this.requestSplitsField(true);
     }
@@ -505,7 +491,6 @@ public class SplitTestConfig extends APINode {
     this.mBudget = instance.mBudget;
     this.mEarlyWinnerDeclarationEnabled = instance.mEarlyWinnerDeclarationEnabled;
     this.mEndTime = instance.mEndTime;
-    this.mExtendWinnerEnabled = instance.mExtendWinnerEnabled;
     this.mSplits = instance.mSplits;
     this.mStartTime = instance.mStartTime;
     this.mTestVariable = instance.mTestVariable;

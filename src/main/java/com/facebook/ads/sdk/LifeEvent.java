@@ -365,8 +365,8 @@ public class LifeEvent extends APINode {
     }
     public static final String[] PARAMS = {
       "filter",
-      "order",
       "live_filter",
+      "order",
       "since",
     };
 
@@ -456,21 +456,21 @@ public class LifeEvent extends APINode {
       return this;
     }
 
-    public APIRequestGetComments setOrder (Comment.EnumOrder order) {
-      this.setParam("order", order);
-      return this;
-    }
-    public APIRequestGetComments setOrder (String order) {
-      this.setParam("order", order);
-      return this;
-    }
-
     public APIRequestGetComments setLiveFilter (Comment.EnumLiveFilter liveFilter) {
       this.setParam("live_filter", liveFilter);
       return this;
     }
     public APIRequestGetComments setLiveFilter (String liveFilter) {
       this.setParam("live_filter", liveFilter);
+      return this;
+    }
+
+    public APIRequestGetComments setOrder (Comment.EnumOrder order) {
+      this.setParam("order", order);
+      return this;
+    }
+    public APIRequestGetComments setOrder (String order) {
+      this.setParam("order", order);
       return this;
     }
 
@@ -672,17 +672,17 @@ public class LifeEvent extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "attachment_id",
+      "attachment_share_url",
+      "attachment_url",
+      "comment_privacy_value",
+      "facepile_mentioned_ids",
+      "feedback_source",
+      "is_offline",
+      "message",
+      "nectar_module",
       "object_id",
       "parent_comment_id",
-      "nectar_module",
-      "attachment_id",
-      "attachment_url",
-      "attachment_share_url",
-      "feedback_source",
-      "facepile_mentioned_ids",
-      "is_offline",
-      "comment_privacy_value",
-      "message",
       "text",
       "tracking",
     };
@@ -743,32 +743,8 @@ public class LifeEvent extends APINode {
     }
 
 
-    public APIRequestCreateComment setObjectId (String objectId) {
-      this.setParam("object_id", objectId);
-      return this;
-    }
-
-    public APIRequestCreateComment setParentCommentId (Object parentCommentId) {
-      this.setParam("parent_comment_id", parentCommentId);
-      return this;
-    }
-    public APIRequestCreateComment setParentCommentId (String parentCommentId) {
-      this.setParam("parent_comment_id", parentCommentId);
-      return this;
-    }
-
-    public APIRequestCreateComment setNectarModule (String nectarModule) {
-      this.setParam("nectar_module", nectarModule);
-      return this;
-    }
-
     public APIRequestCreateComment setAttachmentId (String attachmentId) {
       this.setParam("attachment_id", attachmentId);
-      return this;
-    }
-
-    public APIRequestCreateComment setAttachmentUrl (String attachmentUrl) {
-      this.setParam("attachment_url", attachmentUrl);
       return this;
     }
 
@@ -777,26 +753,8 @@ public class LifeEvent extends APINode {
       return this;
     }
 
-    public APIRequestCreateComment setFeedbackSource (String feedbackSource) {
-      this.setParam("feedback_source", feedbackSource);
-      return this;
-    }
-
-    public APIRequestCreateComment setFacepileMentionedIds (List<String> facepileMentionedIds) {
-      this.setParam("facepile_mentioned_ids", facepileMentionedIds);
-      return this;
-    }
-    public APIRequestCreateComment setFacepileMentionedIds (String facepileMentionedIds) {
-      this.setParam("facepile_mentioned_ids", facepileMentionedIds);
-      return this;
-    }
-
-    public APIRequestCreateComment setIsOffline (Boolean isOffline) {
-      this.setParam("is_offline", isOffline);
-      return this;
-    }
-    public APIRequestCreateComment setIsOffline (String isOffline) {
-      this.setParam("is_offline", isOffline);
+    public APIRequestCreateComment setAttachmentUrl (String attachmentUrl) {
+      this.setParam("attachment_url", attachmentUrl);
       return this;
     }
 
@@ -809,8 +767,50 @@ public class LifeEvent extends APINode {
       return this;
     }
 
+    public APIRequestCreateComment setFacepileMentionedIds (List<String> facepileMentionedIds) {
+      this.setParam("facepile_mentioned_ids", facepileMentionedIds);
+      return this;
+    }
+    public APIRequestCreateComment setFacepileMentionedIds (String facepileMentionedIds) {
+      this.setParam("facepile_mentioned_ids", facepileMentionedIds);
+      return this;
+    }
+
+    public APIRequestCreateComment setFeedbackSource (String feedbackSource) {
+      this.setParam("feedback_source", feedbackSource);
+      return this;
+    }
+
+    public APIRequestCreateComment setIsOffline (Boolean isOffline) {
+      this.setParam("is_offline", isOffline);
+      return this;
+    }
+    public APIRequestCreateComment setIsOffline (String isOffline) {
+      this.setParam("is_offline", isOffline);
+      return this;
+    }
+
     public APIRequestCreateComment setMessage (String message) {
       this.setParam("message", message);
+      return this;
+    }
+
+    public APIRequestCreateComment setNectarModule (String nectarModule) {
+      this.setParam("nectar_module", nectarModule);
+      return this;
+    }
+
+    public APIRequestCreateComment setObjectId (String objectId) {
+      this.setParam("object_id", objectId);
+      return this;
+    }
+
+    public APIRequestCreateComment setParentCommentId (Object parentCommentId) {
+      this.setParam("parent_comment_id", parentCommentId);
+      return this;
+    }
+    public APIRequestCreateComment setParentCommentId (String parentCommentId) {
+      this.setParam("parent_comment_id", parentCommentId);
       return this;
     }
 
@@ -1408,6 +1408,7 @@ public class LifeEvent extends APINode {
       "id",
       "instagram_eligibility",
       "is_app_share",
+      "is_eligible_for_promotion",
       "is_expired",
       "is_hidden",
       "is_instagram_eligible",
@@ -1694,6 +1695,13 @@ public class LifeEvent extends APINode {
     }
     public APIRequestGetSharedPosts requestIsAppShareField (boolean value) {
       this.requestField("is_app_share", value);
+      return this;
+    }
+    public APIRequestGetSharedPosts requestIsEligibleForPromotionField () {
+      return this.requestIsEligibleForPromotionField(true);
+    }
+    public APIRequestGetSharedPosts requestIsEligibleForPromotionField (boolean value) {
+      this.requestField("is_eligible_for_promotion", value);
       return this;
     }
     public APIRequestGetSharedPosts requestIsExpiredField () {
@@ -2244,9 +2252,9 @@ public class LifeEvent extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "title",
       "description",
       "start_time",
+      "title",
     };
 
     public static final String[] FIELDS = {
@@ -2305,11 +2313,6 @@ public class LifeEvent extends APINode {
     }
 
 
-    public APIRequestUpdate setTitle (String title) {
-      this.setParam("title", title);
-      return this;
-    }
-
     public APIRequestUpdate setDescription (String description) {
       this.setParam("description", description);
       return this;
@@ -2317,6 +2320,11 @@ public class LifeEvent extends APINode {
 
     public APIRequestUpdate setStartTime (String startTime) {
       this.setParam("start_time", startTime);
+      return this;
+    }
+
+    public APIRequestUpdate setTitle (String title) {
+      this.setParam("title", title);
       return this;
     }
 

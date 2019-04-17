@@ -596,11 +596,11 @@ public class PageAboutStory extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "composed_text",
+      "cover_photo",
+      "entity_map",
       "is_published",
       "title",
-      "cover_photo",
-      "composed_text",
-      "entity_map",
     };
 
     public static final String[] FIELDS = {
@@ -659,17 +659,12 @@ public class PageAboutStory extends APINode {
     }
 
 
-    public APIRequestUpdate setIsPublished (Boolean isPublished) {
-      this.setParam("is_published", isPublished);
+    public APIRequestUpdate setComposedText (List<Map<String, String>> composedText) {
+      this.setParam("composed_text", composedText);
       return this;
     }
-    public APIRequestUpdate setIsPublished (String isPublished) {
-      this.setParam("is_published", isPublished);
-      return this;
-    }
-
-    public APIRequestUpdate setTitle (String title) {
-      this.setParam("title", title);
+    public APIRequestUpdate setComposedText (String composedText) {
+      this.setParam("composed_text", composedText);
       return this;
     }
 
@@ -682,21 +677,26 @@ public class PageAboutStory extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setComposedText (List<Map<String, String>> composedText) {
-      this.setParam("composed_text", composedText);
-      return this;
-    }
-    public APIRequestUpdate setComposedText (String composedText) {
-      this.setParam("composed_text", composedText);
-      return this;
-    }
-
     public APIRequestUpdate setEntityMap (List<Map<String, String>> entityMap) {
       this.setParam("entity_map", entityMap);
       return this;
     }
     public APIRequestUpdate setEntityMap (String entityMap) {
       this.setParam("entity_map", entityMap);
+      return this;
+    }
+
+    public APIRequestUpdate setIsPublished (Boolean isPublished) {
+      this.setParam("is_published", isPublished);
+      return this;
+    }
+    public APIRequestUpdate setIsPublished (String isPublished) {
+      this.setParam("is_published", isPublished);
+      return this;
+    }
+
+    public APIRequestUpdate setTitle (String title) {
+      this.setParam("title", title);
       return this;
     }
 

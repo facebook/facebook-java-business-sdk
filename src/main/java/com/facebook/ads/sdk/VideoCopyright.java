@@ -708,17 +708,17 @@ public class VideoCopyright extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "monitoring_type",
-      "rule_id",
-      "whitelisted_ids",
-      "whitelisted_ig_user_ids",
-      "ownership_countries",
+      "append_excluded_ownership_segments",
+      "attribution_id",
+      "content_category",
       "excluded_ownership_countries",
       "excluded_ownership_segments",
       "is_reference_disabled",
-      "content_category",
-      "attribution_id",
-      "append_excluded_ownership_segments",
+      "monitoring_type",
+      "ownership_countries",
+      "rule_id",
+      "whitelisted_ids",
+      "whitelisted_ig_user_ids",
     };
 
     public static final String[] FIELDS = {
@@ -777,44 +777,26 @@ public class VideoCopyright extends APINode {
     }
 
 
-    public APIRequestUpdate setMonitoringType (VideoCopyright.EnumMonitoringType monitoringType) {
-      this.setParam("monitoring_type", monitoringType);
+    public APIRequestUpdate setAppendExcludedOwnershipSegments (Boolean appendExcludedOwnershipSegments) {
+      this.setParam("append_excluded_ownership_segments", appendExcludedOwnershipSegments);
       return this;
     }
-    public APIRequestUpdate setMonitoringType (String monitoringType) {
-      this.setParam("monitoring_type", monitoringType);
-      return this;
-    }
-
-    public APIRequestUpdate setRuleId (String ruleId) {
-      this.setParam("rule_id", ruleId);
+    public APIRequestUpdate setAppendExcludedOwnershipSegments (String appendExcludedOwnershipSegments) {
+      this.setParam("append_excluded_ownership_segments", appendExcludedOwnershipSegments);
       return this;
     }
 
-    public APIRequestUpdate setWhitelistedIds (List<String> whitelistedIds) {
-      this.setParam("whitelisted_ids", whitelistedIds);
-      return this;
-    }
-    public APIRequestUpdate setWhitelistedIds (String whitelistedIds) {
-      this.setParam("whitelisted_ids", whitelistedIds);
+    public APIRequestUpdate setAttributionId (String attributionId) {
+      this.setParam("attribution_id", attributionId);
       return this;
     }
 
-    public APIRequestUpdate setWhitelistedIgUserIds (List<String> whitelistedIgUserIds) {
-      this.setParam("whitelisted_ig_user_ids", whitelistedIgUserIds);
+    public APIRequestUpdate setContentCategory (VideoCopyright.EnumContentCategory contentCategory) {
+      this.setParam("content_category", contentCategory);
       return this;
     }
-    public APIRequestUpdate setWhitelistedIgUserIds (String whitelistedIgUserIds) {
-      this.setParam("whitelisted_ig_user_ids", whitelistedIgUserIds);
-      return this;
-    }
-
-    public APIRequestUpdate setOwnershipCountries (List<String> ownershipCountries) {
-      this.setParam("ownership_countries", ownershipCountries);
-      return this;
-    }
-    public APIRequestUpdate setOwnershipCountries (String ownershipCountries) {
-      this.setParam("ownership_countries", ownershipCountries);
+    public APIRequestUpdate setContentCategory (String contentCategory) {
+      this.setParam("content_category", contentCategory);
       return this;
     }
 
@@ -845,26 +827,44 @@ public class VideoCopyright extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setContentCategory (VideoCopyright.EnumContentCategory contentCategory) {
-      this.setParam("content_category", contentCategory);
+    public APIRequestUpdate setMonitoringType (VideoCopyright.EnumMonitoringType monitoringType) {
+      this.setParam("monitoring_type", monitoringType);
       return this;
     }
-    public APIRequestUpdate setContentCategory (String contentCategory) {
-      this.setParam("content_category", contentCategory);
-      return this;
-    }
-
-    public APIRequestUpdate setAttributionId (String attributionId) {
-      this.setParam("attribution_id", attributionId);
+    public APIRequestUpdate setMonitoringType (String monitoringType) {
+      this.setParam("monitoring_type", monitoringType);
       return this;
     }
 
-    public APIRequestUpdate setAppendExcludedOwnershipSegments (Boolean appendExcludedOwnershipSegments) {
-      this.setParam("append_excluded_ownership_segments", appendExcludedOwnershipSegments);
+    public APIRequestUpdate setOwnershipCountries (List<String> ownershipCountries) {
+      this.setParam("ownership_countries", ownershipCountries);
       return this;
     }
-    public APIRequestUpdate setAppendExcludedOwnershipSegments (String appendExcludedOwnershipSegments) {
-      this.setParam("append_excluded_ownership_segments", appendExcludedOwnershipSegments);
+    public APIRequestUpdate setOwnershipCountries (String ownershipCountries) {
+      this.setParam("ownership_countries", ownershipCountries);
+      return this;
+    }
+
+    public APIRequestUpdate setRuleId (String ruleId) {
+      this.setParam("rule_id", ruleId);
+      return this;
+    }
+
+    public APIRequestUpdate setWhitelistedIds (List<String> whitelistedIds) {
+      this.setParam("whitelisted_ids", whitelistedIds);
+      return this;
+    }
+    public APIRequestUpdate setWhitelistedIds (String whitelistedIds) {
+      this.setParam("whitelisted_ids", whitelistedIds);
+      return this;
+    }
+
+    public APIRequestUpdate setWhitelistedIgUserIds (List<String> whitelistedIgUserIds) {
+      this.setParam("whitelisted_ig_user_ids", whitelistedIgUserIds);
+      return this;
+    }
+    public APIRequestUpdate setWhitelistedIgUserIds (String whitelistedIgUserIds) {
+      this.setParam("whitelisted_ig_user_ids", whitelistedIgUserIds);
       return this;
     }
 

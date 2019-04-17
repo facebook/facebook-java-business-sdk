@@ -485,9 +485,9 @@ public class OfflineConversionDataSet extends APINode {
     }
     public static final String[] PARAMS = {
       "business_id",
-      "start_time",
       "end_time",
       "event_type",
+      "start_time",
     };
 
     public static final String[] FIELDS = {
@@ -551,11 +551,6 @@ public class OfflineConversionDataSet extends APINode {
       return this;
     }
 
-    public APIRequestGetActivities setStartTime (String startTime) {
-      this.setParam("start_time", startTime);
-      return this;
-    }
-
     public APIRequestGetActivities setEndTime (String endTime) {
       this.setParam("end_time", endTime);
       return this;
@@ -567,6 +562,11 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetActivities setEventType (String eventType) {
       this.setParam("event_type", eventType);
+      return this;
+    }
+
+    public APIRequestGetActivities setStartTime (String startTime) {
+      this.setParam("start_time", startTime);
       return this;
     }
 
@@ -760,7 +760,6 @@ public class OfflineConversionDataSet extends APINode {
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
-      "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
       "funding_source",
@@ -1061,13 +1060,6 @@ public class OfflineConversionDataSet extends APINode {
       this.requestField("end_advertiser_name", value);
       return this;
     }
-    public APIRequestGetAdAccounts requestExtendedCreditInvoiceGroupField () {
-      return this.requestExtendedCreditInvoiceGroupField(true);
-    }
-    public APIRequestGetAdAccounts requestExtendedCreditInvoiceGroupField (boolean value) {
-      this.requestField("extended_credit_invoice_group", value);
-      return this;
-    }
     public APIRequestGetAdAccounts requestFailedDeliveryChecksField () {
       return this.requestFailedDeliveryChecksField(true);
     }
@@ -1331,8 +1323,8 @@ public class OfflineConversionDataSet extends APINode {
     }
     public static final String[] PARAMS = {
       "account_id",
-      "business",
       "auto_track_for_ads",
+      "business",
     };
 
     public static final String[] FIELDS = {
@@ -1396,17 +1388,17 @@ public class OfflineConversionDataSet extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdAccount setBusiness (String business) {
-      this.setParam("business", business);
-      return this;
-    }
-
     public APIRequestCreateAdAccount setAutoTrackForAds (Boolean autoTrackForAds) {
       this.setParam("auto_track_for_ads", autoTrackForAds);
       return this;
     }
     public APIRequestCreateAdAccount setAutoTrackForAds (String autoTrackForAds) {
       this.setParam("auto_track_for_ads", autoTrackForAds);
+      return this;
+    }
+
+    public APIRequestCreateAdAccount setBusiness (String business) {
+      this.setParam("business", business);
       return this;
     }
 
@@ -1815,9 +1807,9 @@ public class OfflineConversionDataSet extends APINode {
     }
     public static final String[] PARAMS = {
       "business",
+      "other_relationship",
       "permitted_roles",
       "relationship_type",
-      "other_relationship",
     };
 
     public static final String[] FIELDS = {
@@ -1881,6 +1873,11 @@ public class OfflineConversionDataSet extends APINode {
       return this;
     }
 
+    public APIRequestCreateAgency setOtherRelationship (String otherRelationship) {
+      this.setParam("other_relationship", otherRelationship);
+      return this;
+    }
+
     public APIRequestCreateAgency setPermittedRoles (List<OfflineConversionDataSet.EnumPermittedRoles> permittedRoles) {
       this.setParam("permitted_roles", permittedRoles);
       return this;
@@ -1896,11 +1893,6 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestCreateAgency setRelationshipType (String relationshipType) {
       this.setParam("relationship_type", relationshipType);
-      return this;
-    }
-
-    public APIRequestCreateAgency setOtherRelationship (String otherRelationship) {
-      this.setParam("other_relationship", otherRelationship);
       return this;
     }
 
@@ -2780,12 +2772,12 @@ public class OfflineConversionDataSet extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "upload_tag",
-      "upload_id",
-      "upload_source",
       "data",
       "namespace_id",
       "progress",
+      "upload_id",
+      "upload_source",
+      "upload_tag",
     };
 
     public static final String[] FIELDS = {
@@ -2844,21 +2836,6 @@ public class OfflineConversionDataSet extends APINode {
     }
 
 
-    public APIRequestCreateEvent setUploadTag (String uploadTag) {
-      this.setParam("upload_tag", uploadTag);
-      return this;
-    }
-
-    public APIRequestCreateEvent setUploadId (String uploadId) {
-      this.setParam("upload_id", uploadId);
-      return this;
-    }
-
-    public APIRequestCreateEvent setUploadSource (String uploadSource) {
-      this.setParam("upload_source", uploadSource);
-      return this;
-    }
-
     public APIRequestCreateEvent setData (List<String> data) {
       this.setParam("data", data);
       return this;
@@ -2879,6 +2856,21 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestCreateEvent setProgress (String progress) {
       this.setParam("progress", progress);
+      return this;
+    }
+
+    public APIRequestCreateEvent setUploadId (String uploadId) {
+      this.setParam("upload_id", uploadId);
+      return this;
+    }
+
+    public APIRequestCreateEvent setUploadSource (String uploadSource) {
+      this.setParam("upload_source", uploadSource);
+      return this;
+    }
+
+    public APIRequestCreateEvent setUploadTag (String uploadTag) {
+      this.setParam("upload_tag", uploadTag);
       return this;
     }
 
@@ -2928,12 +2920,12 @@ public class OfflineConversionDataSet extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "start",
-      "end",
-      "skip_empty_values",
       "aggr_time",
-      "user_timezone_id",
+      "end",
       "granularity",
+      "skip_empty_values",
+      "start",
+      "user_timezone_id",
     };
 
     public static final String[] FIELDS = {
@@ -2992,12 +2984,12 @@ public class OfflineConversionDataSet extends APINode {
     }
 
 
-    public APIRequestGetStats setStart (Long start) {
-      this.setParam("start", start);
+    public APIRequestGetStats setAggrTime (EnumAggrTime aggrTime) {
+      this.setParam("aggr_time", aggrTime);
       return this;
     }
-    public APIRequestGetStats setStart (String start) {
-      this.setParam("start", start);
+    public APIRequestGetStats setAggrTime (String aggrTime) {
+      this.setParam("aggr_time", aggrTime);
       return this;
     }
 
@@ -3010,6 +3002,15 @@ public class OfflineConversionDataSet extends APINode {
       return this;
     }
 
+    public APIRequestGetStats setGranularity (EnumGranularity granularity) {
+      this.setParam("granularity", granularity);
+      return this;
+    }
+    public APIRequestGetStats setGranularity (String granularity) {
+      this.setParam("granularity", granularity);
+      return this;
+    }
+
     public APIRequestGetStats setSkipEmptyValues (Boolean skipEmptyValues) {
       this.setParam("skip_empty_values", skipEmptyValues);
       return this;
@@ -3019,12 +3020,12 @@ public class OfflineConversionDataSet extends APINode {
       return this;
     }
 
-    public APIRequestGetStats setAggrTime (EnumAggrTime aggrTime) {
-      this.setParam("aggr_time", aggrTime);
+    public APIRequestGetStats setStart (Long start) {
+      this.setParam("start", start);
       return this;
     }
-    public APIRequestGetStats setAggrTime (String aggrTime) {
-      this.setParam("aggr_time", aggrTime);
+    public APIRequestGetStats setStart (String start) {
+      this.setParam("start", start);
       return this;
     }
 
@@ -3034,15 +3035,6 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetStats setUserTimezoneId (String userTimezoneId) {
       this.setParam("user_timezone_id", userTimezoneId);
-      return this;
-    }
-
-    public APIRequestGetStats setGranularity (EnumGranularity granularity) {
-      this.setParam("granularity", granularity);
-      return this;
-    }
-    public APIRequestGetStats setGranularity (String granularity) {
-      this.setParam("granularity", granularity);
       return this;
     }
 
@@ -3092,11 +3084,11 @@ public class OfflineConversionDataSet extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "upload_tag",
-      "start_time",
       "end_time",
-      "sort_by",
       "order",
+      "sort_by",
+      "start_time",
+      "upload_tag",
     };
 
     public static final String[] FIELDS = {
@@ -3155,18 +3147,17 @@ public class OfflineConversionDataSet extends APINode {
     }
 
 
-    public APIRequestGetUploads setUploadTag (String uploadTag) {
-      this.setParam("upload_tag", uploadTag);
-      return this;
-    }
-
-    public APIRequestGetUploads setStartTime (String startTime) {
-      this.setParam("start_time", startTime);
-      return this;
-    }
-
     public APIRequestGetUploads setEndTime (String endTime) {
       this.setParam("end_time", endTime);
+      return this;
+    }
+
+    public APIRequestGetUploads setOrder (EnumOrder order) {
+      this.setParam("order", order);
+      return this;
+    }
+    public APIRequestGetUploads setOrder (String order) {
+      this.setParam("order", order);
       return this;
     }
 
@@ -3179,12 +3170,13 @@ public class OfflineConversionDataSet extends APINode {
       return this;
     }
 
-    public APIRequestGetUploads setOrder (EnumOrder order) {
-      this.setParam("order", order);
+    public APIRequestGetUploads setStartTime (String startTime) {
+      this.setParam("start_time", startTime);
       return this;
     }
-    public APIRequestGetUploads setOrder (String order) {
-      this.setParam("order", order);
+
+    public APIRequestGetUploads setUploadTag (String uploadTag) {
+      this.setParam("upload_tag", uploadTag);
       return this;
     }
 
@@ -3344,9 +3336,9 @@ public class OfflineConversionDataSet extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "user",
-      "email",
       "business",
+      "email",
+      "user",
     };
 
     public static final String[] FIELDS = {
@@ -3405,12 +3397,8 @@ public class OfflineConversionDataSet extends APINode {
     }
 
 
-    public APIRequestDeleteUserPermissions setUser (Long user) {
-      this.setParam("user", user);
-      return this;
-    }
-    public APIRequestDeleteUserPermissions setUser (String user) {
-      this.setParam("user", user);
+    public APIRequestDeleteUserPermissions setBusiness (String business) {
+      this.setParam("business", business);
       return this;
     }
 
@@ -3419,8 +3407,12 @@ public class OfflineConversionDataSet extends APINode {
       return this;
     }
 
-    public APIRequestDeleteUserPermissions setBusiness (String business) {
-      this.setParam("business", business);
+    public APIRequestDeleteUserPermissions setUser (Long user) {
+      this.setParam("user", user);
+      return this;
+    }
+    public APIRequestDeleteUserPermissions setUser (String user) {
+      this.setParam("user", user);
       return this;
     }
 
@@ -3580,9 +3572,9 @@ public class OfflineConversionDataSet extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "user",
-      "role",
       "business",
+      "role",
+      "user",
     };
 
     public static final String[] FIELDS = {
@@ -3641,12 +3633,8 @@ public class OfflineConversionDataSet extends APINode {
     }
 
 
-    public APIRequestCreateUserPermission setUser (Long user) {
-      this.setParam("user", user);
-      return this;
-    }
-    public APIRequestCreateUserPermission setUser (String user) {
-      this.setParam("user", user);
+    public APIRequestCreateUserPermission setBusiness (String business) {
+      this.setParam("business", business);
       return this;
     }
 
@@ -3659,8 +3647,12 @@ public class OfflineConversionDataSet extends APINode {
       return this;
     }
 
-    public APIRequestCreateUserPermission setBusiness (String business) {
-      this.setParam("business", business);
+    public APIRequestCreateUserPermission setUser (Long user) {
+      this.setParam("user", user);
+      return this;
+    }
+    public APIRequestCreateUserPermission setUser (String user) {
+      this.setParam("user", user);
       return this;
     }
 
@@ -4418,10 +4410,10 @@ public class OfflineConversionDataSet extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "name",
+      "auto_assign_to_new_accounts_only",
       "description",
       "enable_auto_assign_to_accounts",
-      "auto_assign_to_new_accounts_only",
+      "name",
     };
 
     public static final String[] FIELDS = {
@@ -4480,8 +4472,12 @@ public class OfflineConversionDataSet extends APINode {
     }
 
 
-    public APIRequestUpdate setName (String name) {
-      this.setParam("name", name);
+    public APIRequestUpdate setAutoAssignToNewAccountsOnly (Boolean autoAssignToNewAccountsOnly) {
+      this.setParam("auto_assign_to_new_accounts_only", autoAssignToNewAccountsOnly);
+      return this;
+    }
+    public APIRequestUpdate setAutoAssignToNewAccountsOnly (String autoAssignToNewAccountsOnly) {
+      this.setParam("auto_assign_to_new_accounts_only", autoAssignToNewAccountsOnly);
       return this;
     }
 
@@ -4499,12 +4495,8 @@ public class OfflineConversionDataSet extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setAutoAssignToNewAccountsOnly (Boolean autoAssignToNewAccountsOnly) {
-      this.setParam("auto_assign_to_new_accounts_only", autoAssignToNewAccountsOnly);
-      return this;
-    }
-    public APIRequestUpdate setAutoAssignToNewAccountsOnly (String autoAssignToNewAccountsOnly) {
-      this.setParam("auto_assign_to_new_accounts_only", autoAssignToNewAccountsOnly);
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
       return this;
     }
 
@@ -4692,6 +4684,25 @@ public class OfflineConversionDataSet extends APINode {
       }
   }
 
+  public static enum EnumOrder {
+      @SerializedName("ASCENDING")
+      VALUE_ASCENDING("ASCENDING"),
+      @SerializedName("DESCENDING")
+      VALUE_DESCENDING("DESCENDING"),
+      NULL(null);
+
+      private String value;
+
+      private EnumOrder(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumSortBy {
       @SerializedName("API_CALLS")
       VALUE_API_CALLS("API_CALLS"),
@@ -4712,25 +4723,6 @@ public class OfflineConversionDataSet extends APINode {
       private String value;
 
       private EnumSortBy(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumOrder {
-      @SerializedName("ASCENDING")
-      VALUE_ASCENDING("ASCENDING"),
-      @SerializedName("DESCENDING")
-      VALUE_DESCENDING("DESCENDING"),
-      NULL(null);
-
-      private String value;
-
-      private EnumOrder(String value) {
         this.value = value;
       }
 

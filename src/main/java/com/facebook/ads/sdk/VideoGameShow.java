@@ -425,9 +425,9 @@ public class VideoGameShow extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "question",
-      "options",
       "correct_option",
+      "options",
+      "question",
     };
 
     public static final String[] FIELDS = {
@@ -486,8 +486,12 @@ public class VideoGameShow extends APINode {
     }
 
 
-    public APIRequestCreateQuestion setQuestion (String question) {
-      this.setParam("question", question);
+    public APIRequestCreateQuestion setCorrectOption (Long correctOption) {
+      this.setParam("correct_option", correctOption);
+      return this;
+    }
+    public APIRequestCreateQuestion setCorrectOption (String correctOption) {
+      this.setParam("correct_option", correctOption);
       return this;
     }
 
@@ -500,12 +504,8 @@ public class VideoGameShow extends APINode {
       return this;
     }
 
-    public APIRequestCreateQuestion setCorrectOption (Long correctOption) {
-      this.setParam("correct_option", correctOption);
-      return this;
-    }
-    public APIRequestCreateQuestion setCorrectOption (String correctOption) {
-      this.setParam("correct_option", correctOption);
+    public APIRequestCreateQuestion setQuestion (String question) {
+      this.setParam("question", question);
       return this;
     }
 

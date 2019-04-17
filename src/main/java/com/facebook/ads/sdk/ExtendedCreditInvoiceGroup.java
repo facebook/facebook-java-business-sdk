@@ -468,7 +468,6 @@ public class ExtendedCreditInvoiceGroup extends APINode {
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
-      "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
       "funding_source",
@@ -762,13 +761,6 @@ public class ExtendedCreditInvoiceGroup extends APINode {
     }
     public APIRequestGetAdAccounts requestEndAdvertiserNameField (boolean value) {
       this.requestField("end_advertiser_name", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestExtendedCreditInvoiceGroupField () {
-      return this.requestExtendedCreditInvoiceGroupField(true);
-    }
-    public APIRequestGetAdAccounts requestExtendedCreditInvoiceGroupField (boolean value) {
-      this.requestField("extended_credit_invoice_group", value);
       return this;
     }
     public APIRequestGetAdAccounts requestFailedDeliveryChecksField () {
@@ -1289,8 +1281,8 @@ public class ExtendedCreditInvoiceGroup extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "name",
       "emails",
+      "name",
     };
 
     public static final String[] FIELDS = {
@@ -1349,17 +1341,17 @@ public class ExtendedCreditInvoiceGroup extends APINode {
     }
 
 
-    public APIRequestUpdate setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
     public APIRequestUpdate setEmails (List<String> emails) {
       this.setParam("emails", emails);
       return this;
     }
     public APIRequestUpdate setEmails (String emails) {
       this.setParam("emails", emails);
+      return this;
+    }
+
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
       return this;
     }
 

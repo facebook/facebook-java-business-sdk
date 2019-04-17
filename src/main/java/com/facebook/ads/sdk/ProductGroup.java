@@ -326,17 +326,17 @@ public class ProductGroup extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "attachment_id",
+      "attachment_share_url",
+      "attachment_url",
+      "comment_privacy_value",
+      "facepile_mentioned_ids",
+      "feedback_source",
+      "is_offline",
+      "message",
+      "nectar_module",
       "object_id",
       "parent_comment_id",
-      "nectar_module",
-      "attachment_id",
-      "attachment_url",
-      "attachment_share_url",
-      "feedback_source",
-      "facepile_mentioned_ids",
-      "is_offline",
-      "comment_privacy_value",
-      "message",
       "text",
       "tracking",
     };
@@ -397,32 +397,8 @@ public class ProductGroup extends APINode {
     }
 
 
-    public APIRequestCreateComment setObjectId (String objectId) {
-      this.setParam("object_id", objectId);
-      return this;
-    }
-
-    public APIRequestCreateComment setParentCommentId (Object parentCommentId) {
-      this.setParam("parent_comment_id", parentCommentId);
-      return this;
-    }
-    public APIRequestCreateComment setParentCommentId (String parentCommentId) {
-      this.setParam("parent_comment_id", parentCommentId);
-      return this;
-    }
-
-    public APIRequestCreateComment setNectarModule (String nectarModule) {
-      this.setParam("nectar_module", nectarModule);
-      return this;
-    }
-
     public APIRequestCreateComment setAttachmentId (String attachmentId) {
       this.setParam("attachment_id", attachmentId);
-      return this;
-    }
-
-    public APIRequestCreateComment setAttachmentUrl (String attachmentUrl) {
-      this.setParam("attachment_url", attachmentUrl);
       return this;
     }
 
@@ -431,26 +407,8 @@ public class ProductGroup extends APINode {
       return this;
     }
 
-    public APIRequestCreateComment setFeedbackSource (String feedbackSource) {
-      this.setParam("feedback_source", feedbackSource);
-      return this;
-    }
-
-    public APIRequestCreateComment setFacepileMentionedIds (List<String> facepileMentionedIds) {
-      this.setParam("facepile_mentioned_ids", facepileMentionedIds);
-      return this;
-    }
-    public APIRequestCreateComment setFacepileMentionedIds (String facepileMentionedIds) {
-      this.setParam("facepile_mentioned_ids", facepileMentionedIds);
-      return this;
-    }
-
-    public APIRequestCreateComment setIsOffline (Boolean isOffline) {
-      this.setParam("is_offline", isOffline);
-      return this;
-    }
-    public APIRequestCreateComment setIsOffline (String isOffline) {
-      this.setParam("is_offline", isOffline);
+    public APIRequestCreateComment setAttachmentUrl (String attachmentUrl) {
+      this.setParam("attachment_url", attachmentUrl);
       return this;
     }
 
@@ -463,8 +421,50 @@ public class ProductGroup extends APINode {
       return this;
     }
 
+    public APIRequestCreateComment setFacepileMentionedIds (List<String> facepileMentionedIds) {
+      this.setParam("facepile_mentioned_ids", facepileMentionedIds);
+      return this;
+    }
+    public APIRequestCreateComment setFacepileMentionedIds (String facepileMentionedIds) {
+      this.setParam("facepile_mentioned_ids", facepileMentionedIds);
+      return this;
+    }
+
+    public APIRequestCreateComment setFeedbackSource (String feedbackSource) {
+      this.setParam("feedback_source", feedbackSource);
+      return this;
+    }
+
+    public APIRequestCreateComment setIsOffline (Boolean isOffline) {
+      this.setParam("is_offline", isOffline);
+      return this;
+    }
+    public APIRequestCreateComment setIsOffline (String isOffline) {
+      this.setParam("is_offline", isOffline);
+      return this;
+    }
+
     public APIRequestCreateComment setMessage (String message) {
       this.setParam("message", message);
+      return this;
+    }
+
+    public APIRequestCreateComment setNectarModule (String nectarModule) {
+      this.setParam("nectar_module", nectarModule);
+      return this;
+    }
+
+    public APIRequestCreateComment setObjectId (String objectId) {
+      this.setParam("object_id", objectId);
+      return this;
+    }
+
+    public APIRequestCreateComment setParentCommentId (Object parentCommentId) {
+      this.setParam("parent_comment_id", parentCommentId);
+      return this;
+    }
+    public APIRequestCreateComment setParentCommentId (String parentCommentId) {
+      this.setParam("parent_comment_id", parentCommentId);
       return this;
     }
 
@@ -1044,63 +1044,63 @@ public class ProductGroup extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "retailer_id",
-      "availability",
-      "currency",
-      "condition",
-      "description",
-      "image_url",
-      "name",
-      "price",
-      "product_type",
-      "url",
-      "visibility",
       "additional_image_urls",
       "additional_variant_attributes",
+      "android_app_name",
+      "android_class",
+      "android_package",
+      "android_url",
+      "availability",
       "brand",
       "category",
       "checkout_url",
       "color",
+      "condition",
+      "currency",
       "custom_data",
       "custom_label_0",
       "custom_label_1",
       "custom_label_2",
       "custom_label_3",
       "custom_label_4",
+      "description",
       "expiration_date",
       "gender",
       "gtin",
+      "image_url",
       "inventory",
+      "ios_app_name",
+      "ios_app_store_id",
+      "ios_url",
+      "ipad_app_name",
+      "ipad_app_store_id",
+      "ipad_url",
+      "iphone_app_name",
+      "iphone_app_store_id",
+      "iphone_url",
       "manufacturer_part_number",
-      "mobile_link",
       "material",
+      "mobile_link",
+      "name",
       "offer_price_amount",
       "offer_price_end_date",
       "offer_price_start_date",
       "ordering_index",
       "pattern",
+      "price",
+      "product_type",
+      "retailer_id",
       "sale_price",
       "sale_price_end_date",
       "sale_price_start_date",
       "short_description",
       "size",
       "start_date",
-      "ios_url",
-      "ios_app_store_id",
-      "ios_app_name",
-      "iphone_url",
-      "iphone_app_store_id",
-      "iphone_app_name",
-      "ipad_url",
-      "ipad_app_store_id",
-      "ipad_app_name",
-      "android_url",
-      "android_package",
-      "android_class",
-      "android_app_name",
-      "windows_phone_url",
+      "url",
+      "visibility",
       "windows_phone_app_id",
       "windows_phone_app_name",
+      "windows_phone_url",
     };
 
     public static final String[] FIELDS = {
@@ -1159,77 +1159,6 @@ public class ProductGroup extends APINode {
     }
 
 
-    public APIRequestCreateProduct setRetailerId (String retailerId) {
-      this.setParam("retailer_id", retailerId);
-      return this;
-    }
-
-    public APIRequestCreateProduct setAvailability (ProductItem.EnumAvailability availability) {
-      this.setParam("availability", availability);
-      return this;
-    }
-    public APIRequestCreateProduct setAvailability (String availability) {
-      this.setParam("availability", availability);
-      return this;
-    }
-
-    public APIRequestCreateProduct setCurrency (String currency) {
-      this.setParam("currency", currency);
-      return this;
-    }
-
-    public APIRequestCreateProduct setCondition (ProductItem.EnumCondition condition) {
-      this.setParam("condition", condition);
-      return this;
-    }
-    public APIRequestCreateProduct setCondition (String condition) {
-      this.setParam("condition", condition);
-      return this;
-    }
-
-    public APIRequestCreateProduct setDescription (String description) {
-      this.setParam("description", description);
-      return this;
-    }
-
-    public APIRequestCreateProduct setImageUrl (String imageUrl) {
-      this.setParam("image_url", imageUrl);
-      return this;
-    }
-
-    public APIRequestCreateProduct setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateProduct setPrice (Long price) {
-      this.setParam("price", price);
-      return this;
-    }
-    public APIRequestCreateProduct setPrice (String price) {
-      this.setParam("price", price);
-      return this;
-    }
-
-    public APIRequestCreateProduct setProductType (String productType) {
-      this.setParam("product_type", productType);
-      return this;
-    }
-
-    public APIRequestCreateProduct setUrl (String url) {
-      this.setParam("url", url);
-      return this;
-    }
-
-    public APIRequestCreateProduct setVisibility (ProductItem.EnumVisibility visibility) {
-      this.setParam("visibility", visibility);
-      return this;
-    }
-    public APIRequestCreateProduct setVisibility (String visibility) {
-      this.setParam("visibility", visibility);
-      return this;
-    }
-
     public APIRequestCreateProduct setAdditionalImageUrls (List<String> additionalImageUrls) {
       this.setParam("additional_image_urls", additionalImageUrls);
       return this;
@@ -1245,6 +1174,35 @@ public class ProductGroup extends APINode {
     }
     public APIRequestCreateProduct setAdditionalVariantAttributes (String additionalVariantAttributes) {
       this.setParam("additional_variant_attributes", additionalVariantAttributes);
+      return this;
+    }
+
+    public APIRequestCreateProduct setAndroidAppName (String androidAppName) {
+      this.setParam("android_app_name", androidAppName);
+      return this;
+    }
+
+    public APIRequestCreateProduct setAndroidClass (String androidClass) {
+      this.setParam("android_class", androidClass);
+      return this;
+    }
+
+    public APIRequestCreateProduct setAndroidPackage (String androidPackage) {
+      this.setParam("android_package", androidPackage);
+      return this;
+    }
+
+    public APIRequestCreateProduct setAndroidUrl (String androidUrl) {
+      this.setParam("android_url", androidUrl);
+      return this;
+    }
+
+    public APIRequestCreateProduct setAvailability (ProductItem.EnumAvailability availability) {
+      this.setParam("availability", availability);
+      return this;
+    }
+    public APIRequestCreateProduct setAvailability (String availability) {
+      this.setParam("availability", availability);
       return this;
     }
 
@@ -1265,6 +1223,20 @@ public class ProductGroup extends APINode {
 
     public APIRequestCreateProduct setColor (String color) {
       this.setParam("color", color);
+      return this;
+    }
+
+    public APIRequestCreateProduct setCondition (ProductItem.EnumCondition condition) {
+      this.setParam("condition", condition);
+      return this;
+    }
+    public APIRequestCreateProduct setCondition (String condition) {
+      this.setParam("condition", condition);
+      return this;
+    }
+
+    public APIRequestCreateProduct setCurrency (String currency) {
+      this.setParam("currency", currency);
       return this;
     }
 
@@ -1302,6 +1274,11 @@ public class ProductGroup extends APINode {
       return this;
     }
 
+    public APIRequestCreateProduct setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
     public APIRequestCreateProduct setExpirationDate (String expirationDate) {
       this.setParam("expiration_date", expirationDate);
       return this;
@@ -1321,6 +1298,11 @@ public class ProductGroup extends APINode {
       return this;
     }
 
+    public APIRequestCreateProduct setImageUrl (String imageUrl) {
+      this.setParam("image_url", imageUrl);
+      return this;
+    }
+
     public APIRequestCreateProduct setInventory (Long inventory) {
       this.setParam("inventory", inventory);
       return this;
@@ -1330,8 +1312,70 @@ public class ProductGroup extends APINode {
       return this;
     }
 
+    public APIRequestCreateProduct setIosAppName (String iosAppName) {
+      this.setParam("ios_app_name", iosAppName);
+      return this;
+    }
+
+    public APIRequestCreateProduct setIosAppStoreId (Long iosAppStoreId) {
+      this.setParam("ios_app_store_id", iosAppStoreId);
+      return this;
+    }
+    public APIRequestCreateProduct setIosAppStoreId (String iosAppStoreId) {
+      this.setParam("ios_app_store_id", iosAppStoreId);
+      return this;
+    }
+
+    public APIRequestCreateProduct setIosUrl (String iosUrl) {
+      this.setParam("ios_url", iosUrl);
+      return this;
+    }
+
+    public APIRequestCreateProduct setIpadAppName (String ipadAppName) {
+      this.setParam("ipad_app_name", ipadAppName);
+      return this;
+    }
+
+    public APIRequestCreateProduct setIpadAppStoreId (Long ipadAppStoreId) {
+      this.setParam("ipad_app_store_id", ipadAppStoreId);
+      return this;
+    }
+    public APIRequestCreateProduct setIpadAppStoreId (String ipadAppStoreId) {
+      this.setParam("ipad_app_store_id", ipadAppStoreId);
+      return this;
+    }
+
+    public APIRequestCreateProduct setIpadUrl (String ipadUrl) {
+      this.setParam("ipad_url", ipadUrl);
+      return this;
+    }
+
+    public APIRequestCreateProduct setIphoneAppName (String iphoneAppName) {
+      this.setParam("iphone_app_name", iphoneAppName);
+      return this;
+    }
+
+    public APIRequestCreateProduct setIphoneAppStoreId (Long iphoneAppStoreId) {
+      this.setParam("iphone_app_store_id", iphoneAppStoreId);
+      return this;
+    }
+    public APIRequestCreateProduct setIphoneAppStoreId (String iphoneAppStoreId) {
+      this.setParam("iphone_app_store_id", iphoneAppStoreId);
+      return this;
+    }
+
+    public APIRequestCreateProduct setIphoneUrl (String iphoneUrl) {
+      this.setParam("iphone_url", iphoneUrl);
+      return this;
+    }
+
     public APIRequestCreateProduct setManufacturerPartNumber (String manufacturerPartNumber) {
       this.setParam("manufacturer_part_number", manufacturerPartNumber);
+      return this;
+    }
+
+    public APIRequestCreateProduct setMaterial (String material) {
+      this.setParam("material", material);
       return this;
     }
 
@@ -1340,8 +1384,8 @@ public class ProductGroup extends APINode {
       return this;
     }
 
-    public APIRequestCreateProduct setMaterial (String material) {
-      this.setParam("material", material);
+    public APIRequestCreateProduct setName (String name) {
+      this.setParam("name", name);
       return this;
     }
 
@@ -1375,6 +1419,25 @@ public class ProductGroup extends APINode {
 
     public APIRequestCreateProduct setPattern (String pattern) {
       this.setParam("pattern", pattern);
+      return this;
+    }
+
+    public APIRequestCreateProduct setPrice (Long price) {
+      this.setParam("price", price);
+      return this;
+    }
+    public APIRequestCreateProduct setPrice (String price) {
+      this.setParam("price", price);
+      return this;
+    }
+
+    public APIRequestCreateProduct setProductType (String productType) {
+      this.setParam("product_type", productType);
+      return this;
+    }
+
+    public APIRequestCreateProduct setRetailerId (String retailerId) {
+      this.setParam("retailer_id", retailerId);
       return this;
     }
 
@@ -1412,85 +1475,17 @@ public class ProductGroup extends APINode {
       return this;
     }
 
-    public APIRequestCreateProduct setIosUrl (String iosUrl) {
-      this.setParam("ios_url", iosUrl);
+    public APIRequestCreateProduct setUrl (String url) {
+      this.setParam("url", url);
       return this;
     }
 
-    public APIRequestCreateProduct setIosAppStoreId (Long iosAppStoreId) {
-      this.setParam("ios_app_store_id", iosAppStoreId);
+    public APIRequestCreateProduct setVisibility (ProductItem.EnumVisibility visibility) {
+      this.setParam("visibility", visibility);
       return this;
     }
-    public APIRequestCreateProduct setIosAppStoreId (String iosAppStoreId) {
-      this.setParam("ios_app_store_id", iosAppStoreId);
-      return this;
-    }
-
-    public APIRequestCreateProduct setIosAppName (String iosAppName) {
-      this.setParam("ios_app_name", iosAppName);
-      return this;
-    }
-
-    public APIRequestCreateProduct setIphoneUrl (String iphoneUrl) {
-      this.setParam("iphone_url", iphoneUrl);
-      return this;
-    }
-
-    public APIRequestCreateProduct setIphoneAppStoreId (Long iphoneAppStoreId) {
-      this.setParam("iphone_app_store_id", iphoneAppStoreId);
-      return this;
-    }
-    public APIRequestCreateProduct setIphoneAppStoreId (String iphoneAppStoreId) {
-      this.setParam("iphone_app_store_id", iphoneAppStoreId);
-      return this;
-    }
-
-    public APIRequestCreateProduct setIphoneAppName (String iphoneAppName) {
-      this.setParam("iphone_app_name", iphoneAppName);
-      return this;
-    }
-
-    public APIRequestCreateProduct setIpadUrl (String ipadUrl) {
-      this.setParam("ipad_url", ipadUrl);
-      return this;
-    }
-
-    public APIRequestCreateProduct setIpadAppStoreId (Long ipadAppStoreId) {
-      this.setParam("ipad_app_store_id", ipadAppStoreId);
-      return this;
-    }
-    public APIRequestCreateProduct setIpadAppStoreId (String ipadAppStoreId) {
-      this.setParam("ipad_app_store_id", ipadAppStoreId);
-      return this;
-    }
-
-    public APIRequestCreateProduct setIpadAppName (String ipadAppName) {
-      this.setParam("ipad_app_name", ipadAppName);
-      return this;
-    }
-
-    public APIRequestCreateProduct setAndroidUrl (String androidUrl) {
-      this.setParam("android_url", androidUrl);
-      return this;
-    }
-
-    public APIRequestCreateProduct setAndroidPackage (String androidPackage) {
-      this.setParam("android_package", androidPackage);
-      return this;
-    }
-
-    public APIRequestCreateProduct setAndroidClass (String androidClass) {
-      this.setParam("android_class", androidClass);
-      return this;
-    }
-
-    public APIRequestCreateProduct setAndroidAppName (String androidAppName) {
-      this.setParam("android_app_name", androidAppName);
-      return this;
-    }
-
-    public APIRequestCreateProduct setWindowsPhoneUrl (String windowsPhoneUrl) {
-      this.setParam("windows_phone_url", windowsPhoneUrl);
+    public APIRequestCreateProduct setVisibility (String visibility) {
+      this.setParam("visibility", visibility);
       return this;
     }
 
@@ -1501,6 +1496,11 @@ public class ProductGroup extends APINode {
 
     public APIRequestCreateProduct setWindowsPhoneAppName (String windowsPhoneAppName) {
       this.setParam("windows_phone_app_name", windowsPhoneAppName);
+      return this;
+    }
+
+    public APIRequestCreateProduct setWindowsPhoneUrl (String windowsPhoneUrl) {
+      this.setParam("windows_phone_url", windowsPhoneUrl);
       return this;
     }
 
@@ -1790,8 +1790,8 @@ public class ProductGroup extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "variants",
       "default_product_id",
+      "variants",
     };
 
     public static final String[] FIELDS = {
@@ -1850,17 +1850,17 @@ public class ProductGroup extends APINode {
     }
 
 
+    public APIRequestUpdate setDefaultProductId (String defaultProductId) {
+      this.setParam("default_product_id", defaultProductId);
+      return this;
+    }
+
     public APIRequestUpdate setVariants (List<Object> variants) {
       this.setParam("variants", variants);
       return this;
     }
     public APIRequestUpdate setVariants (String variants) {
       this.setParam("variants", variants);
-      return this;
-    }
-
-    public APIRequestUpdate setDefaultProductId (String defaultProductId) {
-      this.setParam("default_product_id", defaultProductId);
       return this;
     }
 

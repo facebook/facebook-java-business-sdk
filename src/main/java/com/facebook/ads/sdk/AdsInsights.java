@@ -91,8 +91,6 @@ public class AdsInsights extends APINode {
   private String mAuctionCompetitiveness = null;
   @SerializedName("auction_max_competitor_bid")
   private String mAuctionMaxCompetitorBid = null;
-  @SerializedName("bid_type")
-  private String mBidType = null;
   @SerializedName("body_asset")
   private Object mBodyAsset = null;
   @SerializedName("buying_type")
@@ -237,16 +235,12 @@ public class AdsInsights extends APINode {
   private String mPlacement = null;
   @SerializedName("platform_position")
   private String mPlatformPosition = null;
-  @SerializedName("product_format")
-  private String mProductFormat = null;
   @SerializedName("product_id")
   private String mProductId = null;
   @SerializedName("publisher_platform")
   private String mPublisherPlatform = null;
   @SerializedName("purchase_roas")
   private List<AdsActionStats> mPurchaseRoas = null;
-  @SerializedName("purchasing_interface")
-  private String mPurchasingInterface = null;
   @SerializedName("reach")
   private String mReach = null;
   @SerializedName("region")
@@ -659,15 +653,6 @@ public class AdsInsights extends APINode {
 
   public AdsInsights setFieldAuctionMaxCompetitorBid(String value) {
     this.mAuctionMaxCompetitorBid = value;
-    return this;
-  }
-
-  public String getFieldBidType() {
-    return mBidType;
-  }
-
-  public AdsInsights setFieldBidType(String value) {
-    this.mBidType = value;
     return this;
   }
 
@@ -1404,15 +1389,6 @@ public class AdsInsights extends APINode {
     return this;
   }
 
-  public String getFieldProductFormat() {
-    return mProductFormat;
-  }
-
-  public AdsInsights setFieldProductFormat(String value) {
-    this.mProductFormat = value;
-    return this;
-  }
-
   public String getFieldProductId() {
     return mProductId;
   }
@@ -1445,15 +1421,6 @@ public class AdsInsights extends APINode {
     this.mPurchaseRoas = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
-  public String getFieldPurchasingInterface() {
-    return mPurchasingInterface;
-  }
-
-  public AdsInsights setFieldPurchasingInterface(String value) {
-    this.mPurchasingInterface = value;
-    return this;
-  }
-
   public String getFieldReach() {
     return mReach;
   }
@@ -2231,7 +2198,6 @@ public class AdsInsights extends APINode {
     this.mAuctionBid = instance.mAuctionBid;
     this.mAuctionCompetitiveness = instance.mAuctionCompetitiveness;
     this.mAuctionMaxCompetitorBid = instance.mAuctionMaxCompetitorBid;
-    this.mBidType = instance.mBidType;
     this.mBodyAsset = instance.mBodyAsset;
     this.mBuyingType = instance.mBuyingType;
     this.mCallToActionAsset = instance.mCallToActionAsset;
@@ -2304,11 +2270,9 @@ public class AdsInsights extends APINode {
     this.mPlacePageName = instance.mPlacePageName;
     this.mPlacement = instance.mPlacement;
     this.mPlatformPosition = instance.mPlatformPosition;
-    this.mProductFormat = instance.mProductFormat;
     this.mProductId = instance.mProductId;
     this.mPublisherPlatform = instance.mPublisherPlatform;
     this.mPurchaseRoas = instance.mPurchaseRoas;
-    this.mPurchasingInterface = instance.mPurchasingInterface;
     this.mReach = instance.mReach;
     this.mRegion = instance.mRegion;
     this.mRelevanceScore = instance.mRelevanceScore;

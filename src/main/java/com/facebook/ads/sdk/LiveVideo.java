@@ -1096,8 +1096,8 @@ public class LiveVideo extends APINode {
     }
     public static final String[] PARAMS = {
       "filter",
-      "order",
       "live_filter",
+      "order",
       "since",
     };
 
@@ -1187,21 +1187,21 @@ public class LiveVideo extends APINode {
       return this;
     }
 
-    public APIRequestGetComments setOrder (Comment.EnumOrder order) {
-      this.setParam("order", order);
-      return this;
-    }
-    public APIRequestGetComments setOrder (String order) {
-      this.setParam("order", order);
-      return this;
-    }
-
     public APIRequestGetComments setLiveFilter (Comment.EnumLiveFilter liveFilter) {
       this.setParam("live_filter", liveFilter);
       return this;
     }
     public APIRequestGetComments setLiveFilter (String liveFilter) {
       this.setParam("live_filter", liveFilter);
+      return this;
+    }
+
+    public APIRequestGetComments setOrder (Comment.EnumOrder order) {
+      this.setParam("order", order);
+      return this;
+    }
+    public APIRequestGetComments setOrder (String order) {
+      this.setParam("order", order);
       return this;
     }
 
@@ -3947,13 +3947,13 @@ public class LiveVideo extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "question",
-      "options",
+      "close_after_voting",
       "correct_option",
       "default_open",
-      "show_results",
+      "options",
+      "question",
       "show_gradient",
-      "close_after_voting",
+      "show_results",
     };
 
     public static final String[] FIELDS = {
@@ -4012,17 +4012,12 @@ public class LiveVideo extends APINode {
     }
 
 
-    public APIRequestCreatePoll setQuestion (String question) {
-      this.setParam("question", question);
+    public APIRequestCreatePoll setCloseAfterVoting (Boolean closeAfterVoting) {
+      this.setParam("close_after_voting", closeAfterVoting);
       return this;
     }
-
-    public APIRequestCreatePoll setOptions (List<String> options) {
-      this.setParam("options", options);
-      return this;
-    }
-    public APIRequestCreatePoll setOptions (String options) {
-      this.setParam("options", options);
+    public APIRequestCreatePoll setCloseAfterVoting (String closeAfterVoting) {
+      this.setParam("close_after_voting", closeAfterVoting);
       return this;
     }
 
@@ -4044,12 +4039,17 @@ public class LiveVideo extends APINode {
       return this;
     }
 
-    public APIRequestCreatePoll setShowResults (Boolean showResults) {
-      this.setParam("show_results", showResults);
+    public APIRequestCreatePoll setOptions (List<String> options) {
+      this.setParam("options", options);
       return this;
     }
-    public APIRequestCreatePoll setShowResults (String showResults) {
-      this.setParam("show_results", showResults);
+    public APIRequestCreatePoll setOptions (String options) {
+      this.setParam("options", options);
+      return this;
+    }
+
+    public APIRequestCreatePoll setQuestion (String question) {
+      this.setParam("question", question);
       return this;
     }
 
@@ -4062,12 +4062,12 @@ public class LiveVideo extends APINode {
       return this;
     }
 
-    public APIRequestCreatePoll setCloseAfterVoting (Boolean closeAfterVoting) {
-      this.setParam("close_after_voting", closeAfterVoting);
+    public APIRequestCreatePoll setShowResults (Boolean showResults) {
+      this.setParam("show_results", showResults);
       return this;
     }
-    public APIRequestCreatePoll setCloseAfterVoting (String closeAfterVoting) {
-      this.setParam("close_after_voting", closeAfterVoting);
+    public APIRequestCreatePoll setShowResults (String showResults) {
+      this.setParam("show_results", showResults);
       return this;
     }
 
@@ -4741,44 +4741,44 @@ public class LiveVideo extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "content_tags",
-      "privacy",
-      "title",
-      "description",
-      "embeddable",
-      "disturbing",
-      "place",
-      "published",
-      "status",
-      "end_live_video",
-      "targeting",
-      "tags",
-      "og_phrase",
-      "og_icon_id",
-      "sponsor_id",
-      "direct_share_status",
-      "sponsor_relationship",
-      "planned_start_time",
-      "stream_type",
-      "attribution_app_id",
-      "attribution_app_metadata",
-      "custom_labels",
-      "commercial_break_durations",
-      "is_audio_only",
-      "is_manual_mode",
-      "schedule_custom_profile_image",
-      "schedule_feed_background_image",
-      "product_items",
+      "ad_break_drop_live_stream",
+      "ad_break_duration",
+      "ad_break_encoder_drops_live_stream",
       "ad_break_intent",
       "ad_break_start_now",
-      "ad_break_drop_live_stream",
       "ad_break_time_offset",
-      "ad_break_encoder_drops_live_stream",
-      "ad_break_duration",
-      "live_encoders",
-      "live_comment_moderation_setting",
-      "crossposting_actions",
       "allow_bm_crossposting",
+      "attribution_app_id",
+      "attribution_app_metadata",
+      "commercial_break_durations",
+      "content_tags",
+      "crossposting_actions",
+      "custom_labels",
+      "description",
+      "direct_share_status",
+      "disturbing",
+      "embeddable",
+      "end_live_video",
+      "is_audio_only",
+      "is_manual_mode",
+      "live_comment_moderation_setting",
+      "live_encoders",
+      "og_icon_id",
+      "og_phrase",
+      "place",
+      "planned_start_time",
+      "privacy",
+      "product_items",
+      "published",
+      "schedule_custom_profile_image",
+      "schedule_feed_background_image",
+      "sponsor_id",
+      "sponsor_relationship",
+      "status",
+      "stream_type",
+      "tags",
+      "targeting",
+      "title",
     };
 
     public static final String[] FIELDS = {
@@ -4837,223 +4837,30 @@ public class LiveVideo extends APINode {
     }
 
 
-    public APIRequestUpdate setContentTags (List<String> contentTags) {
-      this.setParam("content_tags", contentTags);
+    public APIRequestUpdate setAdBreakDropLiveStream (Boolean adBreakDropLiveStream) {
+      this.setParam("ad_break_drop_live_stream", adBreakDropLiveStream);
       return this;
     }
-    public APIRequestUpdate setContentTags (String contentTags) {
-      this.setParam("content_tags", contentTags);
-      return this;
-    }
-
-    public APIRequestUpdate setPrivacy (String privacy) {
-      this.setParam("privacy", privacy);
+    public APIRequestUpdate setAdBreakDropLiveStream (String adBreakDropLiveStream) {
+      this.setParam("ad_break_drop_live_stream", adBreakDropLiveStream);
       return this;
     }
 
-    public APIRequestUpdate setTitle (String title) {
-      this.setParam("title", title);
+    public APIRequestUpdate setAdBreakDuration (Long adBreakDuration) {
+      this.setParam("ad_break_duration", adBreakDuration);
+      return this;
+    }
+    public APIRequestUpdate setAdBreakDuration (String adBreakDuration) {
+      this.setParam("ad_break_duration", adBreakDuration);
       return this;
     }
 
-    public APIRequestUpdate setDescription (String description) {
-      this.setParam("description", description);
+    public APIRequestUpdate setAdBreakEncoderDropsLiveStream (Boolean adBreakEncoderDropsLiveStream) {
+      this.setParam("ad_break_encoder_drops_live_stream", adBreakEncoderDropsLiveStream);
       return this;
     }
-
-    public APIRequestUpdate setEmbeddable (Boolean embeddable) {
-      this.setParam("embeddable", embeddable);
-      return this;
-    }
-    public APIRequestUpdate setEmbeddable (String embeddable) {
-      this.setParam("embeddable", embeddable);
-      return this;
-    }
-
-    public APIRequestUpdate setDisturbing (Boolean disturbing) {
-      this.setParam("disturbing", disturbing);
-      return this;
-    }
-    public APIRequestUpdate setDisturbing (String disturbing) {
-      this.setParam("disturbing", disturbing);
-      return this;
-    }
-
-    public APIRequestUpdate setPlace (Object place) {
-      this.setParam("place", place);
-      return this;
-    }
-    public APIRequestUpdate setPlace (String place) {
-      this.setParam("place", place);
-      return this;
-    }
-
-    public APIRequestUpdate setPublished (Boolean published) {
-      this.setParam("published", published);
-      return this;
-    }
-    public APIRequestUpdate setPublished (String published) {
-      this.setParam("published", published);
-      return this;
-    }
-
-    public APIRequestUpdate setStatus (LiveVideo.EnumStatus status) {
-      this.setParam("status", status);
-      return this;
-    }
-    public APIRequestUpdate setStatus (String status) {
-      this.setParam("status", status);
-      return this;
-    }
-
-    public APIRequestUpdate setEndLiveVideo (Boolean endLiveVideo) {
-      this.setParam("end_live_video", endLiveVideo);
-      return this;
-    }
-    public APIRequestUpdate setEndLiveVideo (String endLiveVideo) {
-      this.setParam("end_live_video", endLiveVideo);
-      return this;
-    }
-
-    public APIRequestUpdate setTargeting (Object targeting) {
-      this.setParam("targeting", targeting);
-      return this;
-    }
-    public APIRequestUpdate setTargeting (String targeting) {
-      this.setParam("targeting", targeting);
-      return this;
-    }
-
-    public APIRequestUpdate setTags (List<Long> tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-    public APIRequestUpdate setTags (String tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-
-    public APIRequestUpdate setOgPhrase (String ogPhrase) {
-      this.setParam("og_phrase", ogPhrase);
-      return this;
-    }
-
-    public APIRequestUpdate setOgIconId (String ogIconId) {
-      this.setParam("og_icon_id", ogIconId);
-      return this;
-    }
-
-    public APIRequestUpdate setSponsorId (String sponsorId) {
-      this.setParam("sponsor_id", sponsorId);
-      return this;
-    }
-
-    public APIRequestUpdate setDirectShareStatus (Long directShareStatus) {
-      this.setParam("direct_share_status", directShareStatus);
-      return this;
-    }
-    public APIRequestUpdate setDirectShareStatus (String directShareStatus) {
-      this.setParam("direct_share_status", directShareStatus);
-      return this;
-    }
-
-    public APIRequestUpdate setSponsorRelationship (Long sponsorRelationship) {
-      this.setParam("sponsor_relationship", sponsorRelationship);
-      return this;
-    }
-    public APIRequestUpdate setSponsorRelationship (String sponsorRelationship) {
-      this.setParam("sponsor_relationship", sponsorRelationship);
-      return this;
-    }
-
-    public APIRequestUpdate setPlannedStartTime (Long plannedStartTime) {
-      this.setParam("planned_start_time", plannedStartTime);
-      return this;
-    }
-    public APIRequestUpdate setPlannedStartTime (String plannedStartTime) {
-      this.setParam("planned_start_time", plannedStartTime);
-      return this;
-    }
-
-    public APIRequestUpdate setStreamType (LiveVideo.EnumStreamType streamType) {
-      this.setParam("stream_type", streamType);
-      return this;
-    }
-    public APIRequestUpdate setStreamType (String streamType) {
-      this.setParam("stream_type", streamType);
-      return this;
-    }
-
-    public APIRequestUpdate setAttributionAppId (String attributionAppId) {
-      this.setParam("attribution_app_id", attributionAppId);
-      return this;
-    }
-
-    public APIRequestUpdate setAttributionAppMetadata (String attributionAppMetadata) {
-      this.setParam("attribution_app_metadata", attributionAppMetadata);
-      return this;
-    }
-
-    public APIRequestUpdate setCustomLabels (List<String> customLabels) {
-      this.setParam("custom_labels", customLabels);
-      return this;
-    }
-    public APIRequestUpdate setCustomLabels (String customLabels) {
-      this.setParam("custom_labels", customLabels);
-      return this;
-    }
-
-    public APIRequestUpdate setCommercialBreakDurations (List<Long> commercialBreakDurations) {
-      this.setParam("commercial_break_durations", commercialBreakDurations);
-      return this;
-    }
-    public APIRequestUpdate setCommercialBreakDurations (String commercialBreakDurations) {
-      this.setParam("commercial_break_durations", commercialBreakDurations);
-      return this;
-    }
-
-    public APIRequestUpdate setIsAudioOnly (Boolean isAudioOnly) {
-      this.setParam("is_audio_only", isAudioOnly);
-      return this;
-    }
-    public APIRequestUpdate setIsAudioOnly (String isAudioOnly) {
-      this.setParam("is_audio_only", isAudioOnly);
-      return this;
-    }
-
-    public APIRequestUpdate setIsManualMode (Boolean isManualMode) {
-      this.setParam("is_manual_mode", isManualMode);
-      return this;
-    }
-    public APIRequestUpdate setIsManualMode (String isManualMode) {
-      this.setParam("is_manual_mode", isManualMode);
-      return this;
-    }
-
-    public APIRequestUpdate setScheduleCustomProfileImage (File scheduleCustomProfileImage) {
-      this.setParam("schedule_custom_profile_image", scheduleCustomProfileImage);
-      return this;
-    }
-    public APIRequestUpdate setScheduleCustomProfileImage (String scheduleCustomProfileImage) {
-      this.setParam("schedule_custom_profile_image", scheduleCustomProfileImage);
-      return this;
-    }
-
-    public APIRequestUpdate setScheduleFeedBackgroundImage (File scheduleFeedBackgroundImage) {
-      this.setParam("schedule_feed_background_image", scheduleFeedBackgroundImage);
-      return this;
-    }
-    public APIRequestUpdate setScheduleFeedBackgroundImage (String scheduleFeedBackgroundImage) {
-      this.setParam("schedule_feed_background_image", scheduleFeedBackgroundImage);
-      return this;
-    }
-
-    public APIRequestUpdate setProductItems (List<String> productItems) {
-      this.setParam("product_items", productItems);
-      return this;
-    }
-    public APIRequestUpdate setProductItems (String productItems) {
-      this.setParam("product_items", productItems);
+    public APIRequestUpdate setAdBreakEncoderDropsLiveStream (String adBreakEncoderDropsLiveStream) {
+      this.setParam("ad_break_encoder_drops_live_stream", adBreakEncoderDropsLiveStream);
       return this;
     }
 
@@ -5075,15 +4882,6 @@ public class LiveVideo extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setAdBreakDropLiveStream (Boolean adBreakDropLiveStream) {
-      this.setParam("ad_break_drop_live_stream", adBreakDropLiveStream);
-      return this;
-    }
-    public APIRequestUpdate setAdBreakDropLiveStream (String adBreakDropLiveStream) {
-      this.setParam("ad_break_drop_live_stream", adBreakDropLiveStream);
-      return this;
-    }
-
     public APIRequestUpdate setAdBreakTimeOffset (Double adBreakTimeOffset) {
       this.setParam("ad_break_time_offset", adBreakTimeOffset);
       return this;
@@ -5093,39 +4891,40 @@ public class LiveVideo extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setAdBreakEncoderDropsLiveStream (Boolean adBreakEncoderDropsLiveStream) {
-      this.setParam("ad_break_encoder_drops_live_stream", adBreakEncoderDropsLiveStream);
+    public APIRequestUpdate setAllowBmCrossposting (Boolean allowBmCrossposting) {
+      this.setParam("allow_bm_crossposting", allowBmCrossposting);
       return this;
     }
-    public APIRequestUpdate setAdBreakEncoderDropsLiveStream (String adBreakEncoderDropsLiveStream) {
-      this.setParam("ad_break_encoder_drops_live_stream", adBreakEncoderDropsLiveStream);
-      return this;
-    }
-
-    public APIRequestUpdate setAdBreakDuration (Long adBreakDuration) {
-      this.setParam("ad_break_duration", adBreakDuration);
-      return this;
-    }
-    public APIRequestUpdate setAdBreakDuration (String adBreakDuration) {
-      this.setParam("ad_break_duration", adBreakDuration);
+    public APIRequestUpdate setAllowBmCrossposting (String allowBmCrossposting) {
+      this.setParam("allow_bm_crossposting", allowBmCrossposting);
       return this;
     }
 
-    public APIRequestUpdate setLiveEncoders (List<String> liveEncoders) {
-      this.setParam("live_encoders", liveEncoders);
-      return this;
-    }
-    public APIRequestUpdate setLiveEncoders (String liveEncoders) {
-      this.setParam("live_encoders", liveEncoders);
+    public APIRequestUpdate setAttributionAppId (String attributionAppId) {
+      this.setParam("attribution_app_id", attributionAppId);
       return this;
     }
 
-    public APIRequestUpdate setLiveCommentModerationSetting (List<LiveVideo.EnumLiveCommentModerationSetting> liveCommentModerationSetting) {
-      this.setParam("live_comment_moderation_setting", liveCommentModerationSetting);
+    public APIRequestUpdate setAttributionAppMetadata (String attributionAppMetadata) {
+      this.setParam("attribution_app_metadata", attributionAppMetadata);
       return this;
     }
-    public APIRequestUpdate setLiveCommentModerationSetting (String liveCommentModerationSetting) {
-      this.setParam("live_comment_moderation_setting", liveCommentModerationSetting);
+
+    public APIRequestUpdate setCommercialBreakDurations (List<Long> commercialBreakDurations) {
+      this.setParam("commercial_break_durations", commercialBreakDurations);
+      return this;
+    }
+    public APIRequestUpdate setCommercialBreakDurations (String commercialBreakDurations) {
+      this.setParam("commercial_break_durations", commercialBreakDurations);
+      return this;
+    }
+
+    public APIRequestUpdate setContentTags (List<String> contentTags) {
+      this.setParam("content_tags", contentTags);
+      return this;
+    }
+    public APIRequestUpdate setContentTags (String contentTags) {
+      this.setParam("content_tags", contentTags);
       return this;
     }
 
@@ -5138,12 +4937,213 @@ public class LiveVideo extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setAllowBmCrossposting (Boolean allowBmCrossposting) {
-      this.setParam("allow_bm_crossposting", allowBmCrossposting);
+    public APIRequestUpdate setCustomLabels (List<String> customLabels) {
+      this.setParam("custom_labels", customLabels);
       return this;
     }
-    public APIRequestUpdate setAllowBmCrossposting (String allowBmCrossposting) {
-      this.setParam("allow_bm_crossposting", allowBmCrossposting);
+    public APIRequestUpdate setCustomLabels (String customLabels) {
+      this.setParam("custom_labels", customLabels);
+      return this;
+    }
+
+    public APIRequestUpdate setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestUpdate setDirectShareStatus (Long directShareStatus) {
+      this.setParam("direct_share_status", directShareStatus);
+      return this;
+    }
+    public APIRequestUpdate setDirectShareStatus (String directShareStatus) {
+      this.setParam("direct_share_status", directShareStatus);
+      return this;
+    }
+
+    public APIRequestUpdate setDisturbing (Boolean disturbing) {
+      this.setParam("disturbing", disturbing);
+      return this;
+    }
+    public APIRequestUpdate setDisturbing (String disturbing) {
+      this.setParam("disturbing", disturbing);
+      return this;
+    }
+
+    public APIRequestUpdate setEmbeddable (Boolean embeddable) {
+      this.setParam("embeddable", embeddable);
+      return this;
+    }
+    public APIRequestUpdate setEmbeddable (String embeddable) {
+      this.setParam("embeddable", embeddable);
+      return this;
+    }
+
+    public APIRequestUpdate setEndLiveVideo (Boolean endLiveVideo) {
+      this.setParam("end_live_video", endLiveVideo);
+      return this;
+    }
+    public APIRequestUpdate setEndLiveVideo (String endLiveVideo) {
+      this.setParam("end_live_video", endLiveVideo);
+      return this;
+    }
+
+    public APIRequestUpdate setIsAudioOnly (Boolean isAudioOnly) {
+      this.setParam("is_audio_only", isAudioOnly);
+      return this;
+    }
+    public APIRequestUpdate setIsAudioOnly (String isAudioOnly) {
+      this.setParam("is_audio_only", isAudioOnly);
+      return this;
+    }
+
+    public APIRequestUpdate setIsManualMode (Boolean isManualMode) {
+      this.setParam("is_manual_mode", isManualMode);
+      return this;
+    }
+    public APIRequestUpdate setIsManualMode (String isManualMode) {
+      this.setParam("is_manual_mode", isManualMode);
+      return this;
+    }
+
+    public APIRequestUpdate setLiveCommentModerationSetting (List<LiveVideo.EnumLiveCommentModerationSetting> liveCommentModerationSetting) {
+      this.setParam("live_comment_moderation_setting", liveCommentModerationSetting);
+      return this;
+    }
+    public APIRequestUpdate setLiveCommentModerationSetting (String liveCommentModerationSetting) {
+      this.setParam("live_comment_moderation_setting", liveCommentModerationSetting);
+      return this;
+    }
+
+    public APIRequestUpdate setLiveEncoders (List<String> liveEncoders) {
+      this.setParam("live_encoders", liveEncoders);
+      return this;
+    }
+    public APIRequestUpdate setLiveEncoders (String liveEncoders) {
+      this.setParam("live_encoders", liveEncoders);
+      return this;
+    }
+
+    public APIRequestUpdate setOgIconId (String ogIconId) {
+      this.setParam("og_icon_id", ogIconId);
+      return this;
+    }
+
+    public APIRequestUpdate setOgPhrase (String ogPhrase) {
+      this.setParam("og_phrase", ogPhrase);
+      return this;
+    }
+
+    public APIRequestUpdate setPlace (Object place) {
+      this.setParam("place", place);
+      return this;
+    }
+    public APIRequestUpdate setPlace (String place) {
+      this.setParam("place", place);
+      return this;
+    }
+
+    public APIRequestUpdate setPlannedStartTime (Long plannedStartTime) {
+      this.setParam("planned_start_time", plannedStartTime);
+      return this;
+    }
+    public APIRequestUpdate setPlannedStartTime (String plannedStartTime) {
+      this.setParam("planned_start_time", plannedStartTime);
+      return this;
+    }
+
+    public APIRequestUpdate setPrivacy (String privacy) {
+      this.setParam("privacy", privacy);
+      return this;
+    }
+
+    public APIRequestUpdate setProductItems (List<String> productItems) {
+      this.setParam("product_items", productItems);
+      return this;
+    }
+    public APIRequestUpdate setProductItems (String productItems) {
+      this.setParam("product_items", productItems);
+      return this;
+    }
+
+    public APIRequestUpdate setPublished (Boolean published) {
+      this.setParam("published", published);
+      return this;
+    }
+    public APIRequestUpdate setPublished (String published) {
+      this.setParam("published", published);
+      return this;
+    }
+
+    public APIRequestUpdate setScheduleCustomProfileImage (File scheduleCustomProfileImage) {
+      this.setParam("schedule_custom_profile_image", scheduleCustomProfileImage);
+      return this;
+    }
+    public APIRequestUpdate setScheduleCustomProfileImage (String scheduleCustomProfileImage) {
+      this.setParam("schedule_custom_profile_image", scheduleCustomProfileImage);
+      return this;
+    }
+
+    public APIRequestUpdate setScheduleFeedBackgroundImage (File scheduleFeedBackgroundImage) {
+      this.setParam("schedule_feed_background_image", scheduleFeedBackgroundImage);
+      return this;
+    }
+    public APIRequestUpdate setScheduleFeedBackgroundImage (String scheduleFeedBackgroundImage) {
+      this.setParam("schedule_feed_background_image", scheduleFeedBackgroundImage);
+      return this;
+    }
+
+    public APIRequestUpdate setSponsorId (String sponsorId) {
+      this.setParam("sponsor_id", sponsorId);
+      return this;
+    }
+
+    public APIRequestUpdate setSponsorRelationship (Long sponsorRelationship) {
+      this.setParam("sponsor_relationship", sponsorRelationship);
+      return this;
+    }
+    public APIRequestUpdate setSponsorRelationship (String sponsorRelationship) {
+      this.setParam("sponsor_relationship", sponsorRelationship);
+      return this;
+    }
+
+    public APIRequestUpdate setStatus (LiveVideo.EnumStatus status) {
+      this.setParam("status", status);
+      return this;
+    }
+    public APIRequestUpdate setStatus (String status) {
+      this.setParam("status", status);
+      return this;
+    }
+
+    public APIRequestUpdate setStreamType (LiveVideo.EnumStreamType streamType) {
+      this.setParam("stream_type", streamType);
+      return this;
+    }
+    public APIRequestUpdate setStreamType (String streamType) {
+      this.setParam("stream_type", streamType);
+      return this;
+    }
+
+    public APIRequestUpdate setTags (List<Long> tags) {
+      this.setParam("tags", tags);
+      return this;
+    }
+    public APIRequestUpdate setTags (String tags) {
+      this.setParam("tags", tags);
+      return this;
+    }
+
+    public APIRequestUpdate setTargeting (Object targeting) {
+      this.setParam("targeting", targeting);
+      return this;
+    }
+    public APIRequestUpdate setTargeting (String targeting) {
+      this.setParam("targeting", targeting);
+      return this;
+    }
+
+    public APIRequestUpdate setTitle (String title) {
+      this.setParam("title", title);
       return this;
     }
 

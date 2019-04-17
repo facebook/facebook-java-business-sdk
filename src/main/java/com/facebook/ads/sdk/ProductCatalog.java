@@ -300,6 +300,18 @@ public class ProductCatalog extends APINode {
     return new APIRequestCreateAgency(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestDeleteAssignedUsers deleteAssignedUsers() {
+    return new APIRequestDeleteAssignedUsers(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetAssignedUsers getAssignedUsers() {
+    return new APIRequestGetAssignedUsers(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateAssignedUser createAssignedUser() {
+    return new APIRequestCreateAssignedUser(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetAutomotiveModels getAutomotiveModels() {
     return new APIRequestGetAutomotiveModels(this.getPrefixedId().toString(), context);
   }
@@ -1032,6 +1044,398 @@ public class ProductCatalog extends APINode {
 
   }
 
+  public static class APIRequestDeleteAssignedUsers extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "business",
+      "user",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestDeleteAssignedUsers.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDeleteAssignedUsers(String nodeId, APIContext context) {
+      super(context, nodeId, "/assigned_users", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDeleteAssignedUsers setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteAssignedUsers setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDeleteAssignedUsers setBusiness (String business) {
+      this.setParam("business", business);
+      return this;
+    }
+
+    public APIRequestDeleteAssignedUsers setUser (Long user) {
+      this.setParam("user", user);
+      return this;
+    }
+    public APIRequestDeleteAssignedUsers setUser (String user) {
+      this.setParam("user", user);
+      return this;
+    }
+
+    public APIRequestDeleteAssignedUsers requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDeleteAssignedUsers requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteAssignedUsers requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDeleteAssignedUsers requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteAssignedUsers requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteAssignedUsers requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetAssignedUsers extends APIRequest<AssignedUser> {
+
+    APINodeList<AssignedUser> lastResponse = null;
+    @Override
+    public APINodeList<AssignedUser> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "business",
+    };
+
+    public static final String[] FIELDS = {
+      "business",
+      "id",
+      "name",
+      "user_type",
+    };
+
+    @Override
+    public APINodeList<AssignedUser> parseResponse(String response, String header) throws APIException {
+      return AssignedUser.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<AssignedUser> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AssignedUser> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<AssignedUser>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AssignedUser>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<AssignedUser>>() {
+           public APINodeList<AssignedUser> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetAssignedUsers.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetAssignedUsers(String nodeId, APIContext context) {
+      super(context, nodeId, "/assigned_users", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetAssignedUsers setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAssignedUsers setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetAssignedUsers setBusiness (String business) {
+      this.setParam("business", business);
+      return this;
+    }
+
+    public APIRequestGetAssignedUsers requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetAssignedUsers requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAssignedUsers requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetAssignedUsers requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAssignedUsers requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAssignedUsers requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetAssignedUsers requestBusinessField () {
+      return this.requestBusinessField(true);
+    }
+    public APIRequestGetAssignedUsers requestBusinessField (boolean value) {
+      this.requestField("business", value);
+      return this;
+    }
+    public APIRequestGetAssignedUsers requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetAssignedUsers requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetAssignedUsers requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetAssignedUsers requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAssignedUsers requestUserTypeField () {
+      return this.requestUserTypeField(true);
+    }
+    public APIRequestGetAssignedUsers requestUserTypeField (boolean value) {
+      this.requestField("user_type", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreateAssignedUser extends APIRequest<ProductCatalog> {
+
+    ProductCatalog lastResponse = null;
+    @Override
+    public ProductCatalog getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "business",
+      "tasks",
+      "user",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public ProductCatalog parseResponse(String response, String header) throws APIException {
+      return ProductCatalog.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public ProductCatalog execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ProductCatalog execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<ProductCatalog> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, ProductCatalog>() {
+           public ProductCatalog apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateAssignedUser.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateAssignedUser(String nodeId, APIContext context) {
+      super(context, nodeId, "/assigned_users", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateAssignedUser setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAssignedUser setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateAssignedUser setBusiness (String business) {
+      this.setParam("business", business);
+      return this;
+    }
+
+    public APIRequestCreateAssignedUser setTasks (List<ProductCatalog.EnumTasks> tasks) {
+      this.setParam("tasks", tasks);
+      return this;
+    }
+    public APIRequestCreateAssignedUser setTasks (String tasks) {
+      this.setParam("tasks", tasks);
+      return this;
+    }
+
+    public APIRequestCreateAssignedUser setUser (Long user) {
+      this.setParam("user", user);
+      return this;
+    }
+    public APIRequestCreateAssignedUser setUser (String user) {
+      this.setParam("user", user);
+      return this;
+    }
+
+    public APIRequestCreateAssignedUser requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateAssignedUser requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAssignedUser requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateAssignedUser requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAssignedUser requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAssignedUser requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetAutomotiveModels extends APIRequest<AutomotiveModel> {
 
     APINodeList<AutomotiveModel> lastResponse = null;
@@ -1372,8 +1776,8 @@ public class ProductCatalog extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "requests",
       "allow_upsert",
+      "requests",
     };
 
     public static final String[] FIELDS = {
@@ -1432,21 +1836,21 @@ public class ProductCatalog extends APINode {
     }
 
 
-    public APIRequestCreateBatch setRequests (List<Map<String, String>> requests) {
-      this.setParam("requests", requests);
-      return this;
-    }
-    public APIRequestCreateBatch setRequests (String requests) {
-      this.setParam("requests", requests);
-      return this;
-    }
-
     public APIRequestCreateBatch setAllowUpsert (Boolean allowUpsert) {
       this.setParam("allow_upsert", allowUpsert);
       return this;
     }
     public APIRequestCreateBatch setAllowUpsert (String allowUpsert) {
       this.setParam("allow_upsert", allowUpsert);
+      return this;
+    }
+
+    public APIRequestCreateBatch setRequests (List<Map<String, String>> requests) {
+      this.setParam("requests", requests);
+      return this;
+    }
+    public APIRequestCreateBatch setRequests (String requests) {
+      this.setParam("requests", requests);
       return this;
     }
 
@@ -2546,9 +2950,9 @@ public class ProductCatalog extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "source_id",
-      "event",
       "aggregation_type",
+      "event",
+      "source_id",
     };
 
     public static final String[] FIELDS = {
@@ -2610,8 +3014,12 @@ public class ProductCatalog extends APINode {
     }
 
 
-    public APIRequestGetDaEventSamples setSourceId (String sourceId) {
-      this.setParam("source_id", sourceId);
+    public APIRequestGetDaEventSamples setAggregationType (ProductDaEventSamplesBatch.EnumAggregationType aggregationType) {
+      this.setParam("aggregation_type", aggregationType);
+      return this;
+    }
+    public APIRequestGetDaEventSamples setAggregationType (String aggregationType) {
+      this.setParam("aggregation_type", aggregationType);
       return this;
     }
 
@@ -2624,12 +3032,8 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestGetDaEventSamples setAggregationType (ProductDaEventSamplesBatch.EnumAggregationType aggregationType) {
-      this.setParam("aggregation_type", aggregationType);
-      return this;
-    }
-    public APIRequestGetDaEventSamples setAggregationType (String aggregationType) {
-      this.setParam("aggregation_type", aggregationType);
+    public APIRequestGetDaEventSamples setSourceId (String sourceId) {
+      this.setParam("source_id", sourceId);
       return this;
     }
 
@@ -2928,15 +3332,15 @@ public class ProductCatalog extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "destination_id",
-      "images",
-      "types",
-      "url",
-      "name",
       "address",
       "currency",
-      "price",
       "description",
+      "destination_id",
+      "images",
+      "name",
+      "price",
+      "types",
+      "url",
     };
 
     public static final String[] FIELDS = {
@@ -2995,35 +3399,6 @@ public class ProductCatalog extends APINode {
     }
 
 
-    public APIRequestCreateDestination setDestinationId (String destinationId) {
-      this.setParam("destination_id", destinationId);
-      return this;
-    }
-
-    public APIRequestCreateDestination setImages (List<Object> images) {
-      this.setParam("images", images);
-      return this;
-    }
-    public APIRequestCreateDestination setImages (String images) {
-      this.setParam("images", images);
-      return this;
-    }
-
-    public APIRequestCreateDestination setTypes (String types) {
-      this.setParam("types", types);
-      return this;
-    }
-
-    public APIRequestCreateDestination setUrl (String url) {
-      this.setParam("url", url);
-      return this;
-    }
-
-    public APIRequestCreateDestination setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
     public APIRequestCreateDestination setAddress (Object address) {
       this.setParam("address", address);
       return this;
@@ -3038,6 +3413,30 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateDestination setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestCreateDestination setDestinationId (String destinationId) {
+      this.setParam("destination_id", destinationId);
+      return this;
+    }
+
+    public APIRequestCreateDestination setImages (List<Object> images) {
+      this.setParam("images", images);
+      return this;
+    }
+    public APIRequestCreateDestination setImages (String images) {
+      this.setParam("images", images);
+      return this;
+    }
+
+    public APIRequestCreateDestination setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
     public APIRequestCreateDestination setPrice (Long price) {
       this.setParam("price", price);
       return this;
@@ -3047,8 +3446,13 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateDestination setDescription (String description) {
-      this.setParam("description", description);
+    public APIRequestCreateDestination setTypes (String types) {
+      this.setParam("types", types);
+      return this;
+    }
+
+    public APIRequestCreateDestination setUrl (String url) {
+      this.setParam("url", url);
       return this;
     }
 
@@ -3900,13 +4304,13 @@ public class ProductCatalog extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "currency",
+      "description",
+      "destination_airport",
       "images",
       "origin_airport",
-      "destination_airport",
-      "description",
-      "url",
-      "currency",
       "price",
+      "url",
     };
 
     public static final String[] FIELDS = {
@@ -3965,6 +4369,21 @@ public class ProductCatalog extends APINode {
     }
 
 
+    public APIRequestCreateFlight setCurrency (String currency) {
+      this.setParam("currency", currency);
+      return this;
+    }
+
+    public APIRequestCreateFlight setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestCreateFlight setDestinationAirport (String destinationAirport) {
+      this.setParam("destination_airport", destinationAirport);
+      return this;
+    }
+
     public APIRequestCreateFlight setImages (List<Object> images) {
       this.setParam("images", images);
       return this;
@@ -3979,32 +4398,17 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateFlight setDestinationAirport (String destinationAirport) {
-      this.setParam("destination_airport", destinationAirport);
-      return this;
-    }
-
-    public APIRequestCreateFlight setDescription (String description) {
-      this.setParam("description", description);
-      return this;
-    }
-
-    public APIRequestCreateFlight setUrl (String url) {
-      this.setParam("url", url);
-      return this;
-    }
-
-    public APIRequestCreateFlight setCurrency (String currency) {
-      this.setParam("currency", currency);
-      return this;
-    }
-
     public APIRequestCreateFlight setPrice (Long price) {
       this.setParam("price", price);
       return this;
     }
     public APIRequestCreateFlight setPrice (String price) {
       this.setParam("price", price);
+      return this;
+    }
+
+    public APIRequestCreateFlight setUrl (String url) {
+      this.setParam("url", url);
       return this;
     }
 
@@ -4514,21 +4918,21 @@ public class ProductCatalog extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "home_listing_id",
       "address",
       "availability",
-      "images",
-      "name",
       "currency",
-      "price",
-      "url",
-      "year_built",
       "description",
+      "home_listing_id",
+      "images",
       "listing_type",
+      "name",
       "num_baths",
       "num_beds",
       "num_units",
+      "price",
       "property_type",
+      "url",
+      "year_built",
     };
 
     public static final String[] FIELDS = {
@@ -4587,11 +4991,6 @@ public class ProductCatalog extends APINode {
     }
 
 
-    public APIRequestCreateHomeListing setHomeListingId (String homeListingId) {
-      this.setParam("home_listing_id", homeListingId);
-      return this;
-    }
-
     public APIRequestCreateHomeListing setAddress (Object address) {
       this.setParam("address", address);
       return this;
@@ -4606,6 +5005,21 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateHomeListing setCurrency (String currency) {
+      this.setParam("currency", currency);
+      return this;
+    }
+
+    public APIRequestCreateHomeListing setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestCreateHomeListing setHomeListingId (String homeListingId) {
+      this.setParam("home_listing_id", homeListingId);
+      return this;
+    }
+
     public APIRequestCreateHomeListing setImages (List<Object> images) {
       this.setParam("images", images);
       return this;
@@ -4615,46 +5029,13 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateHomeListing setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateHomeListing setCurrency (String currency) {
-      this.setParam("currency", currency);
-      return this;
-    }
-
-    public APIRequestCreateHomeListing setPrice (Double price) {
-      this.setParam("price", price);
-      return this;
-    }
-    public APIRequestCreateHomeListing setPrice (String price) {
-      this.setParam("price", price);
-      return this;
-    }
-
-    public APIRequestCreateHomeListing setUrl (String url) {
-      this.setParam("url", url);
-      return this;
-    }
-
-    public APIRequestCreateHomeListing setYearBuilt (Long yearBuilt) {
-      this.setParam("year_built", yearBuilt);
-      return this;
-    }
-    public APIRequestCreateHomeListing setYearBuilt (String yearBuilt) {
-      this.setParam("year_built", yearBuilt);
-      return this;
-    }
-
-    public APIRequestCreateHomeListing setDescription (String description) {
-      this.setParam("description", description);
-      return this;
-    }
-
     public APIRequestCreateHomeListing setListingType (String listingType) {
       this.setParam("listing_type", listingType);
+      return this;
+    }
+
+    public APIRequestCreateHomeListing setName (String name) {
+      this.setParam("name", name);
       return this;
     }
 
@@ -4685,8 +5066,31 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateHomeListing setPrice (Double price) {
+      this.setParam("price", price);
+      return this;
+    }
+    public APIRequestCreateHomeListing setPrice (String price) {
+      this.setParam("price", price);
+      return this;
+    }
+
     public APIRequestCreateHomeListing setPropertyType (String propertyType) {
       this.setParam("property_type", propertyType);
+      return this;
+    }
+
+    public APIRequestCreateHomeListing setUrl (String url) {
+      this.setParam("url", url);
+      return this;
+    }
+
+    public APIRequestCreateHomeListing setYearBuilt (Long yearBuilt) {
+      this.setParam("year_built", yearBuilt);
+      return this;
+    }
+    public APIRequestCreateHomeListing setYearBuilt (String yearBuilt) {
+      this.setParam("year_built", yearBuilt);
       return this;
     }
 
@@ -4880,9 +5284,9 @@ public class ProductCatalog extends APINode {
     public static final String[] PARAMS = {
       "password",
       "standard",
+      "update_only",
       "url",
       "username",
-      "update_only",
       "file",
     };
 
@@ -4965,6 +5369,15 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateHotelRoomsBatch setUpdateOnly (Boolean updateOnly) {
+      this.setParam("update_only", updateOnly);
+      return this;
+    }
+    public APIRequestCreateHotelRoomsBatch setUpdateOnly (String updateOnly) {
+      this.setParam("update_only", updateOnly);
+      return this;
+    }
+
     public APIRequestCreateHotelRoomsBatch setUrl (String url) {
       this.setParam("url", url);
       return this;
@@ -4972,15 +5385,6 @@ public class ProductCatalog extends APINode {
 
     public APIRequestCreateHotelRoomsBatch setUsername (String username) {
       this.setParam("username", username);
-      return this;
-    }
-
-    public APIRequestCreateHotelRoomsBatch setUpdateOnly (Boolean updateOnly) {
-      this.setParam("update_only", updateOnly);
-      return this;
-    }
-    public APIRequestCreateHotelRoomsBatch setUpdateOnly (String updateOnly) {
-      this.setParam("update_only", updateOnly);
       return this;
     }
 
@@ -5298,19 +5702,19 @@ public class ProductCatalog extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "hotel_id",
       "address",
-      "brand",
-      "description",
-      "name",
-      "url",
-      "images",
-      "currency",
-      "base_price",
       "applinks",
+      "base_price",
+      "brand",
+      "currency",
+      "description",
+      "guest_ratings",
+      "hotel_id",
+      "images",
+      "name",
       "phone",
       "star_rating",
-      "guest_ratings",
+      "url",
     };
 
     public static final String[] FIELDS = {
@@ -5369,11 +5773,6 @@ public class ProductCatalog extends APINode {
     }
 
 
-    public APIRequestCreateHotel setHotelId (String hotelId) {
-      this.setParam("hotel_id", hotelId);
-      return this;
-    }
-
     public APIRequestCreateHotel setAddress (Object address) {
       this.setParam("address", address);
       return this;
@@ -5383,37 +5782,12 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateHotel setBrand (String brand) {
-      this.setParam("brand", brand);
+    public APIRequestCreateHotel setApplinks (Object applinks) {
+      this.setParam("applinks", applinks);
       return this;
     }
-
-    public APIRequestCreateHotel setDescription (String description) {
-      this.setParam("description", description);
-      return this;
-    }
-
-    public APIRequestCreateHotel setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateHotel setUrl (String url) {
-      this.setParam("url", url);
-      return this;
-    }
-
-    public APIRequestCreateHotel setImages (List<Object> images) {
-      this.setParam("images", images);
-      return this;
-    }
-    public APIRequestCreateHotel setImages (String images) {
-      this.setParam("images", images);
-      return this;
-    }
-
-    public APIRequestCreateHotel setCurrency (String currency) {
-      this.setParam("currency", currency);
+    public APIRequestCreateHotel setApplinks (String applinks) {
+      this.setParam("applinks", applinks);
       return this;
     }
 
@@ -5426,12 +5800,46 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateHotel setApplinks (Object applinks) {
-      this.setParam("applinks", applinks);
+    public APIRequestCreateHotel setBrand (String brand) {
+      this.setParam("brand", brand);
       return this;
     }
-    public APIRequestCreateHotel setApplinks (String applinks) {
-      this.setParam("applinks", applinks);
+
+    public APIRequestCreateHotel setCurrency (String currency) {
+      this.setParam("currency", currency);
+      return this;
+    }
+
+    public APIRequestCreateHotel setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestCreateHotel setGuestRatings (List<Object> guestRatings) {
+      this.setParam("guest_ratings", guestRatings);
+      return this;
+    }
+    public APIRequestCreateHotel setGuestRatings (String guestRatings) {
+      this.setParam("guest_ratings", guestRatings);
+      return this;
+    }
+
+    public APIRequestCreateHotel setHotelId (String hotelId) {
+      this.setParam("hotel_id", hotelId);
+      return this;
+    }
+
+    public APIRequestCreateHotel setImages (List<Object> images) {
+      this.setParam("images", images);
+      return this;
+    }
+    public APIRequestCreateHotel setImages (String images) {
+      this.setParam("images", images);
+      return this;
+    }
+
+    public APIRequestCreateHotel setName (String name) {
+      this.setParam("name", name);
       return this;
     }
 
@@ -5449,12 +5857,8 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateHotel setGuestRatings (List<Object> guestRatings) {
-      this.setParam("guest_ratings", guestRatings);
-      return this;
-    }
-    public APIRequestCreateHotel setGuestRatings (String guestRatings) {
-      this.setParam("guest_ratings", guestRatings);
+    public APIRequestCreateHotel setUrl (String url) {
+      this.setParam("url", url);
       return this;
     }
 
@@ -5504,9 +5908,9 @@ public class ProductCatalog extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "requests",
-      "item_type",
       "allow_upsert",
+      "item_type",
+      "requests",
     };
 
     public static final String[] FIELDS = {
@@ -5565,12 +5969,12 @@ public class ProductCatalog extends APINode {
     }
 
 
-    public APIRequestCreateItemsBatch setRequests (Map<String, String> requests) {
-      this.setParam("requests", requests);
+    public APIRequestCreateItemsBatch setAllowUpsert (Boolean allowUpsert) {
+      this.setParam("allow_upsert", allowUpsert);
       return this;
     }
-    public APIRequestCreateItemsBatch setRequests (String requests) {
-      this.setParam("requests", requests);
+    public APIRequestCreateItemsBatch setAllowUpsert (String allowUpsert) {
+      this.setParam("allow_upsert", allowUpsert);
       return this;
     }
 
@@ -5579,12 +5983,12 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateItemsBatch setAllowUpsert (Boolean allowUpsert) {
-      this.setParam("allow_upsert", allowUpsert);
+    public APIRequestCreateItemsBatch setRequests (Map<String, String> requests) {
+      this.setParam("requests", requests);
       return this;
     }
-    public APIRequestCreateItemsBatch setAllowUpsert (String allowUpsert) {
-      this.setParam("allow_upsert", allowUpsert);
+    public APIRequestCreateItemsBatch setRequests (String requests) {
+      this.setParam("requests", requests);
       return this;
     }
 
@@ -5778,9 +6182,9 @@ public class ProductCatalog extends APINode {
     public static final String[] PARAMS = {
       "password",
       "standard",
+      "update_only",
       "url",
       "username",
-      "update_only",
       "file",
     };
 
@@ -5863,6 +6267,15 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreatePricingVariablesBatch setUpdateOnly (Boolean updateOnly) {
+      this.setParam("update_only", updateOnly);
+      return this;
+    }
+    public APIRequestCreatePricingVariablesBatch setUpdateOnly (String updateOnly) {
+      this.setParam("update_only", updateOnly);
+      return this;
+    }
+
     public APIRequestCreatePricingVariablesBatch setUrl (String url) {
       this.setParam("url", url);
       return this;
@@ -5870,15 +6283,6 @@ public class ProductCatalog extends APINode {
 
     public APIRequestCreatePricingVariablesBatch setUsername (String username) {
       this.setParam("username", username);
-      return this;
-    }
-
-    public APIRequestCreatePricingVariablesBatch setUpdateOnly (Boolean updateOnly) {
-      this.setParam("update_only", updateOnly);
-      return this;
-    }
-    public APIRequestCreatePricingVariablesBatch setUpdateOnly (String updateOnly) {
-      this.setParam("update_only", updateOnly);
       return this;
     }
 
@@ -6160,18 +6564,18 @@ public class ProductCatalog extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "country",
       "default_currency",
+      "deletion_enabled",
       "delimiter",
       "encoding",
-      "name",
-      "quoted_fields_mode",
-      "schedule",
-      "update_schedule",
-      "country",
-      "deletion_enabled",
       "feed_type",
       "file_name",
+      "name",
+      "quoted_fields_mode",
       "rules",
+      "schedule",
+      "update_schedule",
     };
 
     public static final String[] FIELDS = {
@@ -6230,8 +6634,22 @@ public class ProductCatalog extends APINode {
     }
 
 
+    public APIRequestCreateProductFeed setCountry (String country) {
+      this.setParam("country", country);
+      return this;
+    }
+
     public APIRequestCreateProductFeed setDefaultCurrency (String defaultCurrency) {
       this.setParam("default_currency", defaultCurrency);
+      return this;
+    }
+
+    public APIRequestCreateProductFeed setDeletionEnabled (Boolean deletionEnabled) {
+      this.setParam("deletion_enabled", deletionEnabled);
+      return this;
+    }
+    public APIRequestCreateProductFeed setDeletionEnabled (String deletionEnabled) {
+      this.setParam("deletion_enabled", deletionEnabled);
       return this;
     }
 
@@ -6253,44 +6671,6 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateProductFeed setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateProductFeed setQuotedFieldsMode (ProductFeed.EnumQuotedFieldsMode quotedFieldsMode) {
-      this.setParam("quoted_fields_mode", quotedFieldsMode);
-      return this;
-    }
-    public APIRequestCreateProductFeed setQuotedFieldsMode (String quotedFieldsMode) {
-      this.setParam("quoted_fields_mode", quotedFieldsMode);
-      return this;
-    }
-
-    public APIRequestCreateProductFeed setSchedule (String schedule) {
-      this.setParam("schedule", schedule);
-      return this;
-    }
-
-    public APIRequestCreateProductFeed setUpdateSchedule (String updateSchedule) {
-      this.setParam("update_schedule", updateSchedule);
-      return this;
-    }
-
-    public APIRequestCreateProductFeed setCountry (String country) {
-      this.setParam("country", country);
-      return this;
-    }
-
-    public APIRequestCreateProductFeed setDeletionEnabled (Boolean deletionEnabled) {
-      this.setParam("deletion_enabled", deletionEnabled);
-      return this;
-    }
-    public APIRequestCreateProductFeed setDeletionEnabled (String deletionEnabled) {
-      this.setParam("deletion_enabled", deletionEnabled);
-      return this;
-    }
-
     public APIRequestCreateProductFeed setFeedType (ProductFeed.EnumFeedType feedType) {
       this.setParam("feed_type", feedType);
       return this;
@@ -6305,12 +6685,36 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateProductFeed setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateProductFeed setQuotedFieldsMode (ProductFeed.EnumQuotedFieldsMode quotedFieldsMode) {
+      this.setParam("quoted_fields_mode", quotedFieldsMode);
+      return this;
+    }
+    public APIRequestCreateProductFeed setQuotedFieldsMode (String quotedFieldsMode) {
+      this.setParam("quoted_fields_mode", quotedFieldsMode);
+      return this;
+    }
+
     public APIRequestCreateProductFeed setRules (List<String> rules) {
       this.setParam("rules", rules);
       return this;
     }
     public APIRequestCreateProductFeed setRules (String rules) {
       this.setParam("rules", rules);
+      return this;
+    }
+
+    public APIRequestCreateProductFeed setSchedule (String schedule) {
+      this.setParam("schedule", schedule);
+      return this;
+    }
+
+    public APIRequestCreateProductFeed setUpdateSchedule (String updateSchedule) {
+      this.setParam("update_schedule", updateSchedule);
       return this;
     }
 
@@ -6616,9 +7020,9 @@ public class ProductCatalog extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "parent_id",
       "ancestor_id",
       "has_children",
+      "parent_id",
       "retailer_id",
     };
 
@@ -6684,11 +7088,6 @@ public class ProductCatalog extends APINode {
     }
 
 
-    public APIRequestGetProductSets setParentId (String parentId) {
-      this.setParam("parent_id", parentId);
-      return this;
-    }
-
     public APIRequestGetProductSets setAncestorId (String ancestorId) {
       this.setParam("ancestor_id", ancestorId);
       return this;
@@ -6700,6 +7099,11 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetProductSets setHasChildren (String hasChildren) {
       this.setParam("has_children", hasChildren);
+      return this;
+    }
+
+    public APIRequestGetProductSets setParentId (String parentId) {
+      this.setParam("parent_id", parentId);
       return this;
     }
 
@@ -7060,9 +7464,9 @@ public class ProductCatalog extends APINode {
     public static final String[] PARAMS = {
       "password",
       "standard",
+      "update_only",
       "url",
       "username",
-      "update_only",
       "file",
     };
 
@@ -7145,6 +7549,15 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateProductSetsBatch setUpdateOnly (Boolean updateOnly) {
+      this.setParam("update_only", updateOnly);
+      return this;
+    }
+    public APIRequestCreateProductSetsBatch setUpdateOnly (String updateOnly) {
+      this.setParam("update_only", updateOnly);
+      return this;
+    }
+
     public APIRequestCreateProductSetsBatch setUrl (String url) {
       this.setParam("url", url);
       return this;
@@ -7152,15 +7565,6 @@ public class ProductCatalog extends APINode {
 
     public APIRequestCreateProductSetsBatch setUsername (String username) {
       this.setParam("username", username);
-      return this;
-    }
-
-    public APIRequestCreateProductSetsBatch setUpdateOnly (Boolean updateOnly) {
-      this.setParam("update_only", updateOnly);
-      return this;
-    }
-    public APIRequestCreateProductSetsBatch setUpdateOnly (String updateOnly) {
-      this.setParam("update_only", updateOnly);
       return this;
     }
 
@@ -7211,8 +7615,8 @@ public class ProductCatalog extends APINode {
     }
     public static final String[] PARAMS = {
       "bulk_pagination",
-      "return_only_approved_products",
       "filter",
+      "return_only_approved_products",
     };
 
     public static final String[] FIELDS = {
@@ -7332,21 +7736,21 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestGetProducts setReturnOnlyApprovedProducts (Boolean returnOnlyApprovedProducts) {
-      this.setParam("return_only_approved_products", returnOnlyApprovedProducts);
-      return this;
-    }
-    public APIRequestGetProducts setReturnOnlyApprovedProducts (String returnOnlyApprovedProducts) {
-      this.setParam("return_only_approved_products", returnOnlyApprovedProducts);
-      return this;
-    }
-
     public APIRequestGetProducts setFilter (Object filter) {
       this.setParam("filter", filter);
       return this;
     }
     public APIRequestGetProducts setFilter (String filter) {
       this.setParam("filter", filter);
+      return this;
+    }
+
+    public APIRequestGetProducts setReturnOnlyApprovedProducts (Boolean returnOnlyApprovedProducts) {
+      this.setParam("return_only_approved_products", returnOnlyApprovedProducts);
+      return this;
+    }
+    public APIRequestGetProducts setReturnOnlyApprovedProducts (String returnOnlyApprovedProducts) {
+      this.setParam("return_only_approved_products", returnOnlyApprovedProducts);
       return this;
     }
 
@@ -7760,64 +8164,64 @@ public class ProductCatalog extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "retailer_id",
-      "retailer_product_group_id",
-      "availability",
-      "currency",
-      "condition",
-      "description",
-      "image_url",
-      "name",
-      "price",
-      "product_type",
-      "url",
-      "visibility",
       "additional_image_urls",
       "additional_variant_attributes",
+      "android_app_name",
+      "android_class",
+      "android_package",
+      "android_url",
+      "availability",
       "brand",
       "category",
       "checkout_url",
       "color",
+      "condition",
+      "currency",
       "custom_data",
       "custom_label_0",
       "custom_label_1",
       "custom_label_2",
       "custom_label_3",
       "custom_label_4",
+      "description",
       "expiration_date",
       "gender",
       "gtin",
+      "image_url",
       "inventory",
+      "ios_app_name",
+      "ios_app_store_id",
+      "ios_url",
+      "ipad_app_name",
+      "ipad_app_store_id",
+      "ipad_url",
+      "iphone_app_name",
+      "iphone_app_store_id",
+      "iphone_url",
       "manufacturer_part_number",
-      "mobile_link",
       "material",
+      "mobile_link",
+      "name",
       "offer_price_amount",
       "offer_price_end_date",
       "offer_price_start_date",
       "ordering_index",
       "pattern",
+      "price",
+      "product_type",
+      "retailer_id",
+      "retailer_product_group_id",
       "sale_price",
       "sale_price_end_date",
       "sale_price_start_date",
       "short_description",
       "size",
       "start_date",
-      "ios_url",
-      "ios_app_store_id",
-      "ios_app_name",
-      "iphone_url",
-      "iphone_app_store_id",
-      "iphone_app_name",
-      "ipad_url",
-      "ipad_app_store_id",
-      "ipad_app_name",
-      "android_url",
-      "android_package",
-      "android_class",
-      "android_app_name",
-      "windows_phone_url",
+      "url",
+      "visibility",
       "windows_phone_app_id",
       "windows_phone_app_name",
+      "windows_phone_url",
     };
 
     public static final String[] FIELDS = {
@@ -7876,82 +8280,6 @@ public class ProductCatalog extends APINode {
     }
 
 
-    public APIRequestCreateProduct setRetailerId (String retailerId) {
-      this.setParam("retailer_id", retailerId);
-      return this;
-    }
-
-    public APIRequestCreateProduct setRetailerProductGroupId (String retailerProductGroupId) {
-      this.setParam("retailer_product_group_id", retailerProductGroupId);
-      return this;
-    }
-
-    public APIRequestCreateProduct setAvailability (ProductItem.EnumAvailability availability) {
-      this.setParam("availability", availability);
-      return this;
-    }
-    public APIRequestCreateProduct setAvailability (String availability) {
-      this.setParam("availability", availability);
-      return this;
-    }
-
-    public APIRequestCreateProduct setCurrency (String currency) {
-      this.setParam("currency", currency);
-      return this;
-    }
-
-    public APIRequestCreateProduct setCondition (ProductItem.EnumCondition condition) {
-      this.setParam("condition", condition);
-      return this;
-    }
-    public APIRequestCreateProduct setCondition (String condition) {
-      this.setParam("condition", condition);
-      return this;
-    }
-
-    public APIRequestCreateProduct setDescription (String description) {
-      this.setParam("description", description);
-      return this;
-    }
-
-    public APIRequestCreateProduct setImageUrl (String imageUrl) {
-      this.setParam("image_url", imageUrl);
-      return this;
-    }
-
-    public APIRequestCreateProduct setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateProduct setPrice (Long price) {
-      this.setParam("price", price);
-      return this;
-    }
-    public APIRequestCreateProduct setPrice (String price) {
-      this.setParam("price", price);
-      return this;
-    }
-
-    public APIRequestCreateProduct setProductType (String productType) {
-      this.setParam("product_type", productType);
-      return this;
-    }
-
-    public APIRequestCreateProduct setUrl (String url) {
-      this.setParam("url", url);
-      return this;
-    }
-
-    public APIRequestCreateProduct setVisibility (ProductItem.EnumVisibility visibility) {
-      this.setParam("visibility", visibility);
-      return this;
-    }
-    public APIRequestCreateProduct setVisibility (String visibility) {
-      this.setParam("visibility", visibility);
-      return this;
-    }
-
     public APIRequestCreateProduct setAdditionalImageUrls (List<String> additionalImageUrls) {
       this.setParam("additional_image_urls", additionalImageUrls);
       return this;
@@ -7967,6 +8295,35 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestCreateProduct setAdditionalVariantAttributes (String additionalVariantAttributes) {
       this.setParam("additional_variant_attributes", additionalVariantAttributes);
+      return this;
+    }
+
+    public APIRequestCreateProduct setAndroidAppName (String androidAppName) {
+      this.setParam("android_app_name", androidAppName);
+      return this;
+    }
+
+    public APIRequestCreateProduct setAndroidClass (String androidClass) {
+      this.setParam("android_class", androidClass);
+      return this;
+    }
+
+    public APIRequestCreateProduct setAndroidPackage (String androidPackage) {
+      this.setParam("android_package", androidPackage);
+      return this;
+    }
+
+    public APIRequestCreateProduct setAndroidUrl (String androidUrl) {
+      this.setParam("android_url", androidUrl);
+      return this;
+    }
+
+    public APIRequestCreateProduct setAvailability (ProductItem.EnumAvailability availability) {
+      this.setParam("availability", availability);
+      return this;
+    }
+    public APIRequestCreateProduct setAvailability (String availability) {
+      this.setParam("availability", availability);
       return this;
     }
 
@@ -7987,6 +8344,20 @@ public class ProductCatalog extends APINode {
 
     public APIRequestCreateProduct setColor (String color) {
       this.setParam("color", color);
+      return this;
+    }
+
+    public APIRequestCreateProduct setCondition (ProductItem.EnumCondition condition) {
+      this.setParam("condition", condition);
+      return this;
+    }
+    public APIRequestCreateProduct setCondition (String condition) {
+      this.setParam("condition", condition);
+      return this;
+    }
+
+    public APIRequestCreateProduct setCurrency (String currency) {
+      this.setParam("currency", currency);
       return this;
     }
 
@@ -8024,6 +8395,11 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateProduct setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
     public APIRequestCreateProduct setExpirationDate (String expirationDate) {
       this.setParam("expiration_date", expirationDate);
       return this;
@@ -8043,6 +8419,11 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateProduct setImageUrl (String imageUrl) {
+      this.setParam("image_url", imageUrl);
+      return this;
+    }
+
     public APIRequestCreateProduct setInventory (Long inventory) {
       this.setParam("inventory", inventory);
       return this;
@@ -8052,8 +8433,70 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateProduct setIosAppName (String iosAppName) {
+      this.setParam("ios_app_name", iosAppName);
+      return this;
+    }
+
+    public APIRequestCreateProduct setIosAppStoreId (Long iosAppStoreId) {
+      this.setParam("ios_app_store_id", iosAppStoreId);
+      return this;
+    }
+    public APIRequestCreateProduct setIosAppStoreId (String iosAppStoreId) {
+      this.setParam("ios_app_store_id", iosAppStoreId);
+      return this;
+    }
+
+    public APIRequestCreateProduct setIosUrl (String iosUrl) {
+      this.setParam("ios_url", iosUrl);
+      return this;
+    }
+
+    public APIRequestCreateProduct setIpadAppName (String ipadAppName) {
+      this.setParam("ipad_app_name", ipadAppName);
+      return this;
+    }
+
+    public APIRequestCreateProduct setIpadAppStoreId (Long ipadAppStoreId) {
+      this.setParam("ipad_app_store_id", ipadAppStoreId);
+      return this;
+    }
+    public APIRequestCreateProduct setIpadAppStoreId (String ipadAppStoreId) {
+      this.setParam("ipad_app_store_id", ipadAppStoreId);
+      return this;
+    }
+
+    public APIRequestCreateProduct setIpadUrl (String ipadUrl) {
+      this.setParam("ipad_url", ipadUrl);
+      return this;
+    }
+
+    public APIRequestCreateProduct setIphoneAppName (String iphoneAppName) {
+      this.setParam("iphone_app_name", iphoneAppName);
+      return this;
+    }
+
+    public APIRequestCreateProduct setIphoneAppStoreId (Long iphoneAppStoreId) {
+      this.setParam("iphone_app_store_id", iphoneAppStoreId);
+      return this;
+    }
+    public APIRequestCreateProduct setIphoneAppStoreId (String iphoneAppStoreId) {
+      this.setParam("iphone_app_store_id", iphoneAppStoreId);
+      return this;
+    }
+
+    public APIRequestCreateProduct setIphoneUrl (String iphoneUrl) {
+      this.setParam("iphone_url", iphoneUrl);
+      return this;
+    }
+
     public APIRequestCreateProduct setManufacturerPartNumber (String manufacturerPartNumber) {
       this.setParam("manufacturer_part_number", manufacturerPartNumber);
+      return this;
+    }
+
+    public APIRequestCreateProduct setMaterial (String material) {
+      this.setParam("material", material);
       return this;
     }
 
@@ -8062,8 +8505,8 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateProduct setMaterial (String material) {
-      this.setParam("material", material);
+    public APIRequestCreateProduct setName (String name) {
+      this.setParam("name", name);
       return this;
     }
 
@@ -8097,6 +8540,30 @@ public class ProductCatalog extends APINode {
 
     public APIRequestCreateProduct setPattern (String pattern) {
       this.setParam("pattern", pattern);
+      return this;
+    }
+
+    public APIRequestCreateProduct setPrice (Long price) {
+      this.setParam("price", price);
+      return this;
+    }
+    public APIRequestCreateProduct setPrice (String price) {
+      this.setParam("price", price);
+      return this;
+    }
+
+    public APIRequestCreateProduct setProductType (String productType) {
+      this.setParam("product_type", productType);
+      return this;
+    }
+
+    public APIRequestCreateProduct setRetailerId (String retailerId) {
+      this.setParam("retailer_id", retailerId);
+      return this;
+    }
+
+    public APIRequestCreateProduct setRetailerProductGroupId (String retailerProductGroupId) {
+      this.setParam("retailer_product_group_id", retailerProductGroupId);
       return this;
     }
 
@@ -8134,85 +8601,17 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateProduct setIosUrl (String iosUrl) {
-      this.setParam("ios_url", iosUrl);
+    public APIRequestCreateProduct setUrl (String url) {
+      this.setParam("url", url);
       return this;
     }
 
-    public APIRequestCreateProduct setIosAppStoreId (Long iosAppStoreId) {
-      this.setParam("ios_app_store_id", iosAppStoreId);
+    public APIRequestCreateProduct setVisibility (ProductItem.EnumVisibility visibility) {
+      this.setParam("visibility", visibility);
       return this;
     }
-    public APIRequestCreateProduct setIosAppStoreId (String iosAppStoreId) {
-      this.setParam("ios_app_store_id", iosAppStoreId);
-      return this;
-    }
-
-    public APIRequestCreateProduct setIosAppName (String iosAppName) {
-      this.setParam("ios_app_name", iosAppName);
-      return this;
-    }
-
-    public APIRequestCreateProduct setIphoneUrl (String iphoneUrl) {
-      this.setParam("iphone_url", iphoneUrl);
-      return this;
-    }
-
-    public APIRequestCreateProduct setIphoneAppStoreId (Long iphoneAppStoreId) {
-      this.setParam("iphone_app_store_id", iphoneAppStoreId);
-      return this;
-    }
-    public APIRequestCreateProduct setIphoneAppStoreId (String iphoneAppStoreId) {
-      this.setParam("iphone_app_store_id", iphoneAppStoreId);
-      return this;
-    }
-
-    public APIRequestCreateProduct setIphoneAppName (String iphoneAppName) {
-      this.setParam("iphone_app_name", iphoneAppName);
-      return this;
-    }
-
-    public APIRequestCreateProduct setIpadUrl (String ipadUrl) {
-      this.setParam("ipad_url", ipadUrl);
-      return this;
-    }
-
-    public APIRequestCreateProduct setIpadAppStoreId (Long ipadAppStoreId) {
-      this.setParam("ipad_app_store_id", ipadAppStoreId);
-      return this;
-    }
-    public APIRequestCreateProduct setIpadAppStoreId (String ipadAppStoreId) {
-      this.setParam("ipad_app_store_id", ipadAppStoreId);
-      return this;
-    }
-
-    public APIRequestCreateProduct setIpadAppName (String ipadAppName) {
-      this.setParam("ipad_app_name", ipadAppName);
-      return this;
-    }
-
-    public APIRequestCreateProduct setAndroidUrl (String androidUrl) {
-      this.setParam("android_url", androidUrl);
-      return this;
-    }
-
-    public APIRequestCreateProduct setAndroidPackage (String androidPackage) {
-      this.setParam("android_package", androidPackage);
-      return this;
-    }
-
-    public APIRequestCreateProduct setAndroidClass (String androidClass) {
-      this.setParam("android_class", androidClass);
-      return this;
-    }
-
-    public APIRequestCreateProduct setAndroidAppName (String androidAppName) {
-      this.setParam("android_app_name", androidAppName);
-      return this;
-    }
-
-    public APIRequestCreateProduct setWindowsPhoneUrl (String windowsPhoneUrl) {
-      this.setParam("windows_phone_url", windowsPhoneUrl);
+    public APIRequestCreateProduct setVisibility (String visibility) {
+      this.setParam("visibility", visibility);
       return this;
     }
 
@@ -8223,6 +8622,11 @@ public class ProductCatalog extends APINode {
 
     public APIRequestCreateProduct setWindowsPhoneAppName (String windowsPhoneAppName) {
       this.setParam("windows_phone_app_name", windowsPhoneAppName);
+      return this;
+    }
+
+    public APIRequestCreateProduct setWindowsPhoneUrl (String windowsPhoneUrl) {
+      this.setParam("windows_phone_url", windowsPhoneUrl);
       return this;
     }
 
@@ -8272,9 +8676,9 @@ public class ProductCatalog extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "user",
-      "email",
       "business",
+      "email",
+      "user",
     };
 
     public static final String[] FIELDS = {
@@ -8333,12 +8737,8 @@ public class ProductCatalog extends APINode {
     }
 
 
-    public APIRequestDeleteUserPermissions setUser (Long user) {
-      this.setParam("user", user);
-      return this;
-    }
-    public APIRequestDeleteUserPermissions setUser (String user) {
-      this.setParam("user", user);
+    public APIRequestDeleteUserPermissions setBusiness (String business) {
+      this.setParam("business", business);
       return this;
     }
 
@@ -8347,8 +8747,12 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestDeleteUserPermissions setBusiness (String business) {
-      this.setParam("business", business);
+    public APIRequestDeleteUserPermissions setUser (Long user) {
+      this.setParam("user", user);
+      return this;
+    }
+    public APIRequestDeleteUserPermissions setUser (String user) {
+      this.setParam("user", user);
       return this;
     }
 
@@ -8598,10 +9002,10 @@ public class ProductCatalog extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "user",
+      "business",
       "email",
       "role",
-      "business",
+      "user",
     };
 
     public static final String[] FIELDS = {
@@ -8660,12 +9064,8 @@ public class ProductCatalog extends APINode {
     }
 
 
-    public APIRequestCreateUserPermission setUser (Long user) {
-      this.setParam("user", user);
-      return this;
-    }
-    public APIRequestCreateUserPermission setUser (String user) {
-      this.setParam("user", user);
+    public APIRequestCreateUserPermission setBusiness (String business) {
+      this.setParam("business", business);
       return this;
     }
 
@@ -8683,8 +9083,12 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateUserPermission setBusiness (String business) {
-      this.setParam("business", business);
+    public APIRequestCreateUserPermission setUser (Long user) {
+      this.setParam("user", user);
+      return this;
+    }
+    public APIRequestCreateUserPermission setUser (String user) {
+      this.setParam("user", user);
       return this;
     }
 
@@ -9210,35 +9614,35 @@ public class ProductCatalog extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "vehicle_id",
-      "body_style",
-      "description",
-      "exterior_color",
-      "make",
-      "mileage",
-      "model",
-      "state_of_vehicle",
-      "vin",
-      "url",
-      "year",
-      "images",
       "address",
-      "currency",
-      "price",
-      "title",
       "applinks",
-      "transmission",
-      "drivetrain",
-      "fuel_type",
-      "trim",
-      "interior_color",
-      "condition",
-      "date_first_on_lot",
       "availability",
+      "body_style",
+      "condition",
+      "currency",
+      "date_first_on_lot",
       "dealer_id",
       "dealer_name",
       "dealer_phone",
+      "description",
+      "drivetrain",
+      "exterior_color",
+      "fuel_type",
+      "images",
+      "interior_color",
+      "make",
+      "mileage",
+      "model",
+      "price",
+      "state_of_vehicle",
+      "title",
+      "transmission",
+      "trim",
+      "url",
+      "vehicle_id",
       "vehicle_type",
+      "vin",
+      "year",
     };
 
     public static final String[] FIELDS = {
@@ -9297,8 +9701,30 @@ public class ProductCatalog extends APINode {
     }
 
 
-    public APIRequestCreateVehicle setVehicleId (String vehicleId) {
-      this.setParam("vehicle_id", vehicleId);
+    public APIRequestCreateVehicle setAddress (Map<String, String> address) {
+      this.setParam("address", address);
+      return this;
+    }
+    public APIRequestCreateVehicle setAddress (String address) {
+      this.setParam("address", address);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setApplinks (Object applinks) {
+      this.setParam("applinks", applinks);
+      return this;
+    }
+    public APIRequestCreateVehicle setApplinks (String applinks) {
+      this.setParam("applinks", applinks);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setAvailability (Vehicle.EnumAvailability availability) {
+      this.setParam("availability", availability);
+      return this;
+    }
+    public APIRequestCreateVehicle setAvailability (String availability) {
+      this.setParam("availability", availability);
       return this;
     }
 
@@ -9311,13 +9737,79 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateVehicle setCondition (Vehicle.EnumCondition condition) {
+      this.setParam("condition", condition);
+      return this;
+    }
+    public APIRequestCreateVehicle setCondition (String condition) {
+      this.setParam("condition", condition);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setCurrency (String currency) {
+      this.setParam("currency", currency);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setDateFirstOnLot (String dateFirstOnLot) {
+      this.setParam("date_first_on_lot", dateFirstOnLot);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setDealerId (String dealerId) {
+      this.setParam("dealer_id", dealerId);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setDealerName (String dealerName) {
+      this.setParam("dealer_name", dealerName);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setDealerPhone (String dealerPhone) {
+      this.setParam("dealer_phone", dealerPhone);
+      return this;
+    }
+
     public APIRequestCreateVehicle setDescription (String description) {
       this.setParam("description", description);
       return this;
     }
 
+    public APIRequestCreateVehicle setDrivetrain (Vehicle.EnumDrivetrain drivetrain) {
+      this.setParam("drivetrain", drivetrain);
+      return this;
+    }
+    public APIRequestCreateVehicle setDrivetrain (String drivetrain) {
+      this.setParam("drivetrain", drivetrain);
+      return this;
+    }
+
     public APIRequestCreateVehicle setExteriorColor (String exteriorColor) {
       this.setParam("exterior_color", exteriorColor);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setFuelType (Vehicle.EnumFuelType fuelType) {
+      this.setParam("fuel_type", fuelType);
+      return this;
+    }
+    public APIRequestCreateVehicle setFuelType (String fuelType) {
+      this.setParam("fuel_type", fuelType);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setImages (List<Object> images) {
+      this.setParam("images", images);
+      return this;
+    }
+    public APIRequestCreateVehicle setImages (String images) {
+      this.setParam("images", images);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setInteriorColor (String interiorColor) {
+      this.setParam("interior_color", interiorColor);
       return this;
     }
 
@@ -9340,57 +9832,6 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateVehicle setStateOfVehicle (Vehicle.EnumStateOfVehicle stateOfVehicle) {
-      this.setParam("state_of_vehicle", stateOfVehicle);
-      return this;
-    }
-    public APIRequestCreateVehicle setStateOfVehicle (String stateOfVehicle) {
-      this.setParam("state_of_vehicle", stateOfVehicle);
-      return this;
-    }
-
-    public APIRequestCreateVehicle setVin (String vin) {
-      this.setParam("vin", vin);
-      return this;
-    }
-
-    public APIRequestCreateVehicle setUrl (String url) {
-      this.setParam("url", url);
-      return this;
-    }
-
-    public APIRequestCreateVehicle setYear (Long year) {
-      this.setParam("year", year);
-      return this;
-    }
-    public APIRequestCreateVehicle setYear (String year) {
-      this.setParam("year", year);
-      return this;
-    }
-
-    public APIRequestCreateVehicle setImages (List<Object> images) {
-      this.setParam("images", images);
-      return this;
-    }
-    public APIRequestCreateVehicle setImages (String images) {
-      this.setParam("images", images);
-      return this;
-    }
-
-    public APIRequestCreateVehicle setAddress (Map<String, String> address) {
-      this.setParam("address", address);
-      return this;
-    }
-    public APIRequestCreateVehicle setAddress (String address) {
-      this.setParam("address", address);
-      return this;
-    }
-
-    public APIRequestCreateVehicle setCurrency (String currency) {
-      this.setParam("currency", currency);
-      return this;
-    }
-
     public APIRequestCreateVehicle setPrice (Long price) {
       this.setParam("price", price);
       return this;
@@ -9400,17 +9841,17 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateVehicle setTitle (String title) {
-      this.setParam("title", title);
+    public APIRequestCreateVehicle setStateOfVehicle (Vehicle.EnumStateOfVehicle stateOfVehicle) {
+      this.setParam("state_of_vehicle", stateOfVehicle);
+      return this;
+    }
+    public APIRequestCreateVehicle setStateOfVehicle (String stateOfVehicle) {
+      this.setParam("state_of_vehicle", stateOfVehicle);
       return this;
     }
 
-    public APIRequestCreateVehicle setApplinks (Object applinks) {
-      this.setParam("applinks", applinks);
-      return this;
-    }
-    public APIRequestCreateVehicle setApplinks (String applinks) {
-      this.setParam("applinks", applinks);
+    public APIRequestCreateVehicle setTitle (String title) {
+      this.setParam("title", title);
       return this;
     }
 
@@ -9423,69 +9864,18 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateVehicle setDrivetrain (Vehicle.EnumDrivetrain drivetrain) {
-      this.setParam("drivetrain", drivetrain);
-      return this;
-    }
-    public APIRequestCreateVehicle setDrivetrain (String drivetrain) {
-      this.setParam("drivetrain", drivetrain);
-      return this;
-    }
-
-    public APIRequestCreateVehicle setFuelType (Vehicle.EnumFuelType fuelType) {
-      this.setParam("fuel_type", fuelType);
-      return this;
-    }
-    public APIRequestCreateVehicle setFuelType (String fuelType) {
-      this.setParam("fuel_type", fuelType);
-      return this;
-    }
-
     public APIRequestCreateVehicle setTrim (String trim) {
       this.setParam("trim", trim);
       return this;
     }
 
-    public APIRequestCreateVehicle setInteriorColor (String interiorColor) {
-      this.setParam("interior_color", interiorColor);
+    public APIRequestCreateVehicle setUrl (String url) {
+      this.setParam("url", url);
       return this;
     }
 
-    public APIRequestCreateVehicle setCondition (Vehicle.EnumCondition condition) {
-      this.setParam("condition", condition);
-      return this;
-    }
-    public APIRequestCreateVehicle setCondition (String condition) {
-      this.setParam("condition", condition);
-      return this;
-    }
-
-    public APIRequestCreateVehicle setDateFirstOnLot (String dateFirstOnLot) {
-      this.setParam("date_first_on_lot", dateFirstOnLot);
-      return this;
-    }
-
-    public APIRequestCreateVehicle setAvailability (Vehicle.EnumAvailability availability) {
-      this.setParam("availability", availability);
-      return this;
-    }
-    public APIRequestCreateVehicle setAvailability (String availability) {
-      this.setParam("availability", availability);
-      return this;
-    }
-
-    public APIRequestCreateVehicle setDealerId (String dealerId) {
-      this.setParam("dealer_id", dealerId);
-      return this;
-    }
-
-    public APIRequestCreateVehicle setDealerName (String dealerName) {
-      this.setParam("dealer_name", dealerName);
-      return this;
-    }
-
-    public APIRequestCreateVehicle setDealerPhone (String dealerPhone) {
-      this.setParam("dealer_phone", dealerPhone);
+    public APIRequestCreateVehicle setVehicleId (String vehicleId) {
+      this.setParam("vehicle_id", vehicleId);
       return this;
     }
 
@@ -9495,6 +9885,20 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestCreateVehicle setVehicleType (String vehicleType) {
       this.setParam("vehicle_type", vehicleType);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setVin (String vin) {
+      this.setParam("vin", vin);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setYear (Long year) {
+      this.setParam("year", year);
+      return this;
+    }
+    public APIRequestCreateVehicle setYear (String year) {
+      this.setParam("year", year);
       return this;
     }
 
@@ -9544,77 +9948,77 @@ public class ProductCatalog extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "title",
-      "source",
-      "unpublished_content_type",
-      "time_since_original_post",
-      "file_url",
-      "composer_session_id",
-      "waterfall_id",
-      "og_action_type_id",
-      "og_object_id",
-      "og_phrase",
-      "og_icon_id",
-      "og_suggestion_mechanism",
-      "thumb",
-      "spherical",
-      "original_projection_type",
-      "initial_heading",
-      "initial_pitch",
-      "fov",
-      "original_fov",
-      "fisheye_video_cropped",
-      "front_z_rotation",
-      "guide_enabled",
-      "guide",
-      "audio_story_wave_animation_handle",
-      "manual_privacy",
-      "is_explicit_share",
       "adaptive_type",
       "animated_effect_id",
+      "application_id",
       "asked_fun_fact_prompt_id",
+      "attribution_app_id",
+      "audio_story_wave_animation_handle",
       "composer_entry_picker",
       "composer_entry_point",
       "composer_entry_time",
       "composer_session_events_log",
+      "composer_session_id",
       "composer_source_surface",
       "composer_type",
+      "container_type",
+      "content_category",
+      "description",
+      "embeddable",
+      "end_offset",
+      "fbuploader_video_file_chunk",
+      "file_size",
+      "file_url",
+      "fisheye_video_cropped",
       "formatting",
+      "fov",
+      "front_z_rotation",
       "fun_fact_prompt_id",
       "fun_fact_toastee_id",
-      "is_group_linking_post",
+      "guide",
+      "guide_enabled",
       "has_nickname",
       "holiday_card",
+      "initial_heading",
+      "initial_pitch",
       "instant_game_entry_point_data",
       "is_boost_intended",
+      "is_explicit_share",
+      "is_group_linking_post",
+      "is_voice_clip",
       "location_source_id",
-      "description",
+      "manual_privacy",
       "offer_like_post_id",
+      "og_action_type_id",
+      "og_icon_id",
+      "og_object_id",
+      "og_phrase",
+      "og_suggestion_mechanism",
+      "original_fov",
+      "original_projection_type",
       "publish_event_id",
       "react_mode_metadata",
-      "sales_promo_id",
-      "text_format_metadata",
-      "throwback_camera_roll_media",
-      "video_start_time_ms",
-      "application_id",
-      "upload_phase",
-      "file_size",
-      "start_offset",
-      "end_offset",
-      "video_file_chunk",
-      "fbuploader_video_file_chunk",
-      "upload_session_id",
-      "is_voice_clip",
-      "attribution_app_id",
-      "content_category",
-      "embeddable",
-      "slideshow_spec",
-      "upload_setting_properties",
-      "transcode_setting_properties",
-      "container_type",
       "referenced_sticker_id",
       "replace_video_id",
+      "sales_promo_id",
+      "slideshow_spec",
+      "source",
+      "spherical",
+      "start_offset",
       "swap_mode",
+      "text_format_metadata",
+      "throwback_camera_roll_media",
+      "thumb",
+      "time_since_original_post",
+      "title",
+      "transcode_setting_properties",
+      "unpublished_content_type",
+      "upload_phase",
+      "upload_session_id",
+      "upload_setting_properties",
+      "video_file_chunk",
+      "video_start_time_ms",
+      "waterfall_id",
     };
 
     public static final String[] FIELDS = {
@@ -9673,196 +10077,6 @@ public class ProductCatalog extends APINode {
     }
 
 
-    public APIRequestCreateVideo setTitle (String title) {
-      this.setParam("title", title);
-      return this;
-    }
-
-    public APIRequestCreateVideo setSource (String source) {
-      this.setParam("source", source);
-      return this;
-    }
-
-    public APIRequestCreateVideo setUnpublishedContentType (AdVideo.EnumUnpublishedContentType unpublishedContentType) {
-      this.setParam("unpublished_content_type", unpublishedContentType);
-      return this;
-    }
-    public APIRequestCreateVideo setUnpublishedContentType (String unpublishedContentType) {
-      this.setParam("unpublished_content_type", unpublishedContentType);
-      return this;
-    }
-
-    public APIRequestCreateVideo setTimeSinceOriginalPost (Long timeSinceOriginalPost) {
-      this.setParam("time_since_original_post", timeSinceOriginalPost);
-      return this;
-    }
-    public APIRequestCreateVideo setTimeSinceOriginalPost (String timeSinceOriginalPost) {
-      this.setParam("time_since_original_post", timeSinceOriginalPost);
-      return this;
-    }
-
-    public APIRequestCreateVideo setFileUrl (String fileUrl) {
-      this.setParam("file_url", fileUrl);
-      return this;
-    }
-
-    public APIRequestCreateVideo setComposerSessionId (String composerSessionId) {
-      this.setParam("composer_session_id", composerSessionId);
-      return this;
-    }
-
-    public APIRequestCreateVideo setWaterfallId (String waterfallId) {
-      this.setParam("waterfall_id", waterfallId);
-      return this;
-    }
-
-    public APIRequestCreateVideo setOgActionTypeId (String ogActionTypeId) {
-      this.setParam("og_action_type_id", ogActionTypeId);
-      return this;
-    }
-
-    public APIRequestCreateVideo setOgObjectId (String ogObjectId) {
-      this.setParam("og_object_id", ogObjectId);
-      return this;
-    }
-
-    public APIRequestCreateVideo setOgPhrase (String ogPhrase) {
-      this.setParam("og_phrase", ogPhrase);
-      return this;
-    }
-
-    public APIRequestCreateVideo setOgIconId (String ogIconId) {
-      this.setParam("og_icon_id", ogIconId);
-      return this;
-    }
-
-    public APIRequestCreateVideo setOgSuggestionMechanism (String ogSuggestionMechanism) {
-      this.setParam("og_suggestion_mechanism", ogSuggestionMechanism);
-      return this;
-    }
-
-    public APIRequestCreateVideo setThumb (File thumb) {
-      this.setParam("thumb", thumb);
-      return this;
-    }
-    public APIRequestCreateVideo setThumb (String thumb) {
-      this.setParam("thumb", thumb);
-      return this;
-    }
-
-    public APIRequestCreateVideo setSpherical (Boolean spherical) {
-      this.setParam("spherical", spherical);
-      return this;
-    }
-    public APIRequestCreateVideo setSpherical (String spherical) {
-      this.setParam("spherical", spherical);
-      return this;
-    }
-
-    public APIRequestCreateVideo setOriginalProjectionType (AdVideo.EnumOriginalProjectionType originalProjectionType) {
-      this.setParam("original_projection_type", originalProjectionType);
-      return this;
-    }
-    public APIRequestCreateVideo setOriginalProjectionType (String originalProjectionType) {
-      this.setParam("original_projection_type", originalProjectionType);
-      return this;
-    }
-
-    public APIRequestCreateVideo setInitialHeading (Long initialHeading) {
-      this.setParam("initial_heading", initialHeading);
-      return this;
-    }
-    public APIRequestCreateVideo setInitialHeading (String initialHeading) {
-      this.setParam("initial_heading", initialHeading);
-      return this;
-    }
-
-    public APIRequestCreateVideo setInitialPitch (Long initialPitch) {
-      this.setParam("initial_pitch", initialPitch);
-      return this;
-    }
-    public APIRequestCreateVideo setInitialPitch (String initialPitch) {
-      this.setParam("initial_pitch", initialPitch);
-      return this;
-    }
-
-    public APIRequestCreateVideo setFov (Long fov) {
-      this.setParam("fov", fov);
-      return this;
-    }
-    public APIRequestCreateVideo setFov (String fov) {
-      this.setParam("fov", fov);
-      return this;
-    }
-
-    public APIRequestCreateVideo setOriginalFov (Long originalFov) {
-      this.setParam("original_fov", originalFov);
-      return this;
-    }
-    public APIRequestCreateVideo setOriginalFov (String originalFov) {
-      this.setParam("original_fov", originalFov);
-      return this;
-    }
-
-    public APIRequestCreateVideo setFisheyeVideoCropped (Boolean fisheyeVideoCropped) {
-      this.setParam("fisheye_video_cropped", fisheyeVideoCropped);
-      return this;
-    }
-    public APIRequestCreateVideo setFisheyeVideoCropped (String fisheyeVideoCropped) {
-      this.setParam("fisheye_video_cropped", fisheyeVideoCropped);
-      return this;
-    }
-
-    public APIRequestCreateVideo setFrontZRotation (Double frontZRotation) {
-      this.setParam("front_z_rotation", frontZRotation);
-      return this;
-    }
-    public APIRequestCreateVideo setFrontZRotation (String frontZRotation) {
-      this.setParam("front_z_rotation", frontZRotation);
-      return this;
-    }
-
-    public APIRequestCreateVideo setGuideEnabled (Boolean guideEnabled) {
-      this.setParam("guide_enabled", guideEnabled);
-      return this;
-    }
-    public APIRequestCreateVideo setGuideEnabled (String guideEnabled) {
-      this.setParam("guide_enabled", guideEnabled);
-      return this;
-    }
-
-    public APIRequestCreateVideo setGuide (List<List<Long>> guide) {
-      this.setParam("guide", guide);
-      return this;
-    }
-    public APIRequestCreateVideo setGuide (String guide) {
-      this.setParam("guide", guide);
-      return this;
-    }
-
-    public APIRequestCreateVideo setAudioStoryWaveAnimationHandle (String audioStoryWaveAnimationHandle) {
-      this.setParam("audio_story_wave_animation_handle", audioStoryWaveAnimationHandle);
-      return this;
-    }
-
-    public APIRequestCreateVideo setManualPrivacy (Boolean manualPrivacy) {
-      this.setParam("manual_privacy", manualPrivacy);
-      return this;
-    }
-    public APIRequestCreateVideo setManualPrivacy (String manualPrivacy) {
-      this.setParam("manual_privacy", manualPrivacy);
-      return this;
-    }
-
-    public APIRequestCreateVideo setIsExplicitShare (Boolean isExplicitShare) {
-      this.setParam("is_explicit_share", isExplicitShare);
-      return this;
-    }
-    public APIRequestCreateVideo setIsExplicitShare (String isExplicitShare) {
-      this.setParam("is_explicit_share", isExplicitShare);
-      return this;
-    }
-
     public APIRequestCreateVideo setAdaptiveType (String adaptiveType) {
       this.setParam("adaptive_type", adaptiveType);
       return this;
@@ -9877,12 +10091,27 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateVideo setApplicationId (String applicationId) {
+      this.setParam("application_id", applicationId);
+      return this;
+    }
+
     public APIRequestCreateVideo setAskedFunFactPromptId (Long askedFunFactPromptId) {
       this.setParam("asked_fun_fact_prompt_id", askedFunFactPromptId);
       return this;
     }
     public APIRequestCreateVideo setAskedFunFactPromptId (String askedFunFactPromptId) {
       this.setParam("asked_fun_fact_prompt_id", askedFunFactPromptId);
+      return this;
+    }
+
+    public APIRequestCreateVideo setAttributionAppId (String attributionAppId) {
+      this.setParam("attribution_app_id", attributionAppId);
+      return this;
+    }
+
+    public APIRequestCreateVideo setAudioStoryWaveAnimationHandle (String audioStoryWaveAnimationHandle) {
+      this.setParam("audio_story_wave_animation_handle", audioStoryWaveAnimationHandle);
       return this;
     }
 
@@ -9910,6 +10139,11 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateVideo setComposerSessionId (String composerSessionId) {
+      this.setParam("composer_session_id", composerSessionId);
+      return this;
+    }
+
     public APIRequestCreateVideo setComposerSourceSurface (String composerSourceSurface) {
       this.setParam("composer_source_surface", composerSourceSurface);
       return this;
@@ -9920,12 +10154,99 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateVideo setContainerType (AdVideo.EnumContainerType containerType) {
+      this.setParam("container_type", containerType);
+      return this;
+    }
+    public APIRequestCreateVideo setContainerType (String containerType) {
+      this.setParam("container_type", containerType);
+      return this;
+    }
+
+    public APIRequestCreateVideo setContentCategory (AdVideo.EnumContentCategory contentCategory) {
+      this.setParam("content_category", contentCategory);
+      return this;
+    }
+    public APIRequestCreateVideo setContentCategory (String contentCategory) {
+      this.setParam("content_category", contentCategory);
+      return this;
+    }
+
+    public APIRequestCreateVideo setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestCreateVideo setEmbeddable (Boolean embeddable) {
+      this.setParam("embeddable", embeddable);
+      return this;
+    }
+    public APIRequestCreateVideo setEmbeddable (String embeddable) {
+      this.setParam("embeddable", embeddable);
+      return this;
+    }
+
+    public APIRequestCreateVideo setEndOffset (Long endOffset) {
+      this.setParam("end_offset", endOffset);
+      return this;
+    }
+    public APIRequestCreateVideo setEndOffset (String endOffset) {
+      this.setParam("end_offset", endOffset);
+      return this;
+    }
+
+    public APIRequestCreateVideo setFbuploaderVideoFileChunk (String fbuploaderVideoFileChunk) {
+      this.setParam("fbuploader_video_file_chunk", fbuploaderVideoFileChunk);
+      return this;
+    }
+
+    public APIRequestCreateVideo setFileSize (Long fileSize) {
+      this.setParam("file_size", fileSize);
+      return this;
+    }
+    public APIRequestCreateVideo setFileSize (String fileSize) {
+      this.setParam("file_size", fileSize);
+      return this;
+    }
+
+    public APIRequestCreateVideo setFileUrl (String fileUrl) {
+      this.setParam("file_url", fileUrl);
+      return this;
+    }
+
+    public APIRequestCreateVideo setFisheyeVideoCropped (Boolean fisheyeVideoCropped) {
+      this.setParam("fisheye_video_cropped", fisheyeVideoCropped);
+      return this;
+    }
+    public APIRequestCreateVideo setFisheyeVideoCropped (String fisheyeVideoCropped) {
+      this.setParam("fisheye_video_cropped", fisheyeVideoCropped);
+      return this;
+    }
+
     public APIRequestCreateVideo setFormatting (AdVideo.EnumFormatting formatting) {
       this.setParam("formatting", formatting);
       return this;
     }
     public APIRequestCreateVideo setFormatting (String formatting) {
       this.setParam("formatting", formatting);
+      return this;
+    }
+
+    public APIRequestCreateVideo setFov (Long fov) {
+      this.setParam("fov", fov);
+      return this;
+    }
+    public APIRequestCreateVideo setFov (String fov) {
+      this.setParam("fov", fov);
+      return this;
+    }
+
+    public APIRequestCreateVideo setFrontZRotation (Double frontZRotation) {
+      this.setParam("front_z_rotation", frontZRotation);
+      return this;
+    }
+    public APIRequestCreateVideo setFrontZRotation (String frontZRotation) {
+      this.setParam("front_z_rotation", frontZRotation);
       return this;
     }
 
@@ -9947,12 +10268,21 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateVideo setIsGroupLinkingPost (Boolean isGroupLinkingPost) {
-      this.setParam("is_group_linking_post", isGroupLinkingPost);
+    public APIRequestCreateVideo setGuide (List<List<Long>> guide) {
+      this.setParam("guide", guide);
       return this;
     }
-    public APIRequestCreateVideo setIsGroupLinkingPost (String isGroupLinkingPost) {
-      this.setParam("is_group_linking_post", isGroupLinkingPost);
+    public APIRequestCreateVideo setGuide (String guide) {
+      this.setParam("guide", guide);
+      return this;
+    }
+
+    public APIRequestCreateVideo setGuideEnabled (Boolean guideEnabled) {
+      this.setParam("guide_enabled", guideEnabled);
+      return this;
+    }
+    public APIRequestCreateVideo setGuideEnabled (String guideEnabled) {
+      this.setParam("guide_enabled", guideEnabled);
       return this;
     }
 
@@ -9970,6 +10300,24 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateVideo setInitialHeading (Long initialHeading) {
+      this.setParam("initial_heading", initialHeading);
+      return this;
+    }
+    public APIRequestCreateVideo setInitialHeading (String initialHeading) {
+      this.setParam("initial_heading", initialHeading);
+      return this;
+    }
+
+    public APIRequestCreateVideo setInitialPitch (Long initialPitch) {
+      this.setParam("initial_pitch", initialPitch);
+      return this;
+    }
+    public APIRequestCreateVideo setInitialPitch (String initialPitch) {
+      this.setParam("initial_pitch", initialPitch);
+      return this;
+    }
+
     public APIRequestCreateVideo setInstantGameEntryPointData (String instantGameEntryPointData) {
       this.setParam("instant_game_entry_point_data", instantGameEntryPointData);
       return this;
@@ -9984,13 +10332,44 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateVideo setIsExplicitShare (Boolean isExplicitShare) {
+      this.setParam("is_explicit_share", isExplicitShare);
+      return this;
+    }
+    public APIRequestCreateVideo setIsExplicitShare (String isExplicitShare) {
+      this.setParam("is_explicit_share", isExplicitShare);
+      return this;
+    }
+
+    public APIRequestCreateVideo setIsGroupLinkingPost (Boolean isGroupLinkingPost) {
+      this.setParam("is_group_linking_post", isGroupLinkingPost);
+      return this;
+    }
+    public APIRequestCreateVideo setIsGroupLinkingPost (String isGroupLinkingPost) {
+      this.setParam("is_group_linking_post", isGroupLinkingPost);
+      return this;
+    }
+
+    public APIRequestCreateVideo setIsVoiceClip (Boolean isVoiceClip) {
+      this.setParam("is_voice_clip", isVoiceClip);
+      return this;
+    }
+    public APIRequestCreateVideo setIsVoiceClip (String isVoiceClip) {
+      this.setParam("is_voice_clip", isVoiceClip);
+      return this;
+    }
+
     public APIRequestCreateVideo setLocationSourceId (String locationSourceId) {
       this.setParam("location_source_id", locationSourceId);
       return this;
     }
 
-    public APIRequestCreateVideo setDescription (String description) {
-      this.setParam("description", description);
+    public APIRequestCreateVideo setManualPrivacy (Boolean manualPrivacy) {
+      this.setParam("manual_privacy", manualPrivacy);
+      return this;
+    }
+    public APIRequestCreateVideo setManualPrivacy (String manualPrivacy) {
+      this.setParam("manual_privacy", manualPrivacy);
       return this;
     }
 
@@ -10000,6 +10379,49 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestCreateVideo setOfferLikePostId (String offerLikePostId) {
       this.setParam("offer_like_post_id", offerLikePostId);
+      return this;
+    }
+
+    public APIRequestCreateVideo setOgActionTypeId (String ogActionTypeId) {
+      this.setParam("og_action_type_id", ogActionTypeId);
+      return this;
+    }
+
+    public APIRequestCreateVideo setOgIconId (String ogIconId) {
+      this.setParam("og_icon_id", ogIconId);
+      return this;
+    }
+
+    public APIRequestCreateVideo setOgObjectId (String ogObjectId) {
+      this.setParam("og_object_id", ogObjectId);
+      return this;
+    }
+
+    public APIRequestCreateVideo setOgPhrase (String ogPhrase) {
+      this.setParam("og_phrase", ogPhrase);
+      return this;
+    }
+
+    public APIRequestCreateVideo setOgSuggestionMechanism (String ogSuggestionMechanism) {
+      this.setParam("og_suggestion_mechanism", ogSuggestionMechanism);
+      return this;
+    }
+
+    public APIRequestCreateVideo setOriginalFov (Long originalFov) {
+      this.setParam("original_fov", originalFov);
+      return this;
+    }
+    public APIRequestCreateVideo setOriginalFov (String originalFov) {
+      this.setParam("original_fov", originalFov);
+      return this;
+    }
+
+    public APIRequestCreateVideo setOriginalProjectionType (AdVideo.EnumOriginalProjectionType originalProjectionType) {
+      this.setParam("original_projection_type", originalProjectionType);
+      return this;
+    }
+    public APIRequestCreateVideo setOriginalProjectionType (String originalProjectionType) {
+      this.setParam("original_projection_type", originalProjectionType);
       return this;
     }
 
@@ -10017,12 +10439,63 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateVideo setReferencedStickerId (String referencedStickerId) {
+      this.setParam("referenced_sticker_id", referencedStickerId);
+      return this;
+    }
+
+    public APIRequestCreateVideo setReplaceVideoId (String replaceVideoId) {
+      this.setParam("replace_video_id", replaceVideoId);
+      return this;
+    }
+
     public APIRequestCreateVideo setSalesPromoId (Long salesPromoId) {
       this.setParam("sales_promo_id", salesPromoId);
       return this;
     }
     public APIRequestCreateVideo setSalesPromoId (String salesPromoId) {
       this.setParam("sales_promo_id", salesPromoId);
+      return this;
+    }
+
+    public APIRequestCreateVideo setSlideshowSpec (Map<String, String> slideshowSpec) {
+      this.setParam("slideshow_spec", slideshowSpec);
+      return this;
+    }
+    public APIRequestCreateVideo setSlideshowSpec (String slideshowSpec) {
+      this.setParam("slideshow_spec", slideshowSpec);
+      return this;
+    }
+
+    public APIRequestCreateVideo setSource (String source) {
+      this.setParam("source", source);
+      return this;
+    }
+
+    public APIRequestCreateVideo setSpherical (Boolean spherical) {
+      this.setParam("spherical", spherical);
+      return this;
+    }
+    public APIRequestCreateVideo setSpherical (String spherical) {
+      this.setParam("spherical", spherical);
+      return this;
+    }
+
+    public APIRequestCreateVideo setStartOffset (Long startOffset) {
+      this.setParam("start_offset", startOffset);
+      return this;
+    }
+    public APIRequestCreateVideo setStartOffset (String startOffset) {
+      this.setParam("start_offset", startOffset);
+      return this;
+    }
+
+    public APIRequestCreateVideo setSwapMode (AdVideo.EnumSwapMode swapMode) {
+      this.setParam("swap_mode", swapMode);
+      return this;
+    }
+    public APIRequestCreateVideo setSwapMode (String swapMode) {
+      this.setParam("swap_mode", swapMode);
       return this;
     }
 
@@ -10036,17 +10509,40 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateVideo setVideoStartTimeMs (Long videoStartTimeMs) {
-      this.setParam("video_start_time_ms", videoStartTimeMs);
+    public APIRequestCreateVideo setThumb (File thumb) {
+      this.setParam("thumb", thumb);
       return this;
     }
-    public APIRequestCreateVideo setVideoStartTimeMs (String videoStartTimeMs) {
-      this.setParam("video_start_time_ms", videoStartTimeMs);
+    public APIRequestCreateVideo setThumb (String thumb) {
+      this.setParam("thumb", thumb);
       return this;
     }
 
-    public APIRequestCreateVideo setApplicationId (String applicationId) {
-      this.setParam("application_id", applicationId);
+    public APIRequestCreateVideo setTimeSinceOriginalPost (Long timeSinceOriginalPost) {
+      this.setParam("time_since_original_post", timeSinceOriginalPost);
+      return this;
+    }
+    public APIRequestCreateVideo setTimeSinceOriginalPost (String timeSinceOriginalPost) {
+      this.setParam("time_since_original_post", timeSinceOriginalPost);
+      return this;
+    }
+
+    public APIRequestCreateVideo setTitle (String title) {
+      this.setParam("title", title);
+      return this;
+    }
+
+    public APIRequestCreateVideo setTranscodeSettingProperties (String transcodeSettingProperties) {
+      this.setParam("transcode_setting_properties", transcodeSettingProperties);
+      return this;
+    }
+
+    public APIRequestCreateVideo setUnpublishedContentType (AdVideo.EnumUnpublishedContentType unpublishedContentType) {
+      this.setParam("unpublished_content_type", unpublishedContentType);
+      return this;
+    }
+    public APIRequestCreateVideo setUnpublishedContentType (String unpublishedContentType) {
+      this.setParam("unpublished_content_type", unpublishedContentType);
       return this;
     }
 
@@ -10059,86 +10555,8 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateVideo setFileSize (Long fileSize) {
-      this.setParam("file_size", fileSize);
-      return this;
-    }
-    public APIRequestCreateVideo setFileSize (String fileSize) {
-      this.setParam("file_size", fileSize);
-      return this;
-    }
-
-    public APIRequestCreateVideo setStartOffset (Long startOffset) {
-      this.setParam("start_offset", startOffset);
-      return this;
-    }
-    public APIRequestCreateVideo setStartOffset (String startOffset) {
-      this.setParam("start_offset", startOffset);
-      return this;
-    }
-
-    public APIRequestCreateVideo setEndOffset (Long endOffset) {
-      this.setParam("end_offset", endOffset);
-      return this;
-    }
-    public APIRequestCreateVideo setEndOffset (String endOffset) {
-      this.setParam("end_offset", endOffset);
-      return this;
-    }
-
-    public APIRequestCreateVideo setVideoFileChunk (String videoFileChunk) {
-      this.setParam("video_file_chunk", videoFileChunk);
-      return this;
-    }
-
-    public APIRequestCreateVideo setFbuploaderVideoFileChunk (String fbuploaderVideoFileChunk) {
-      this.setParam("fbuploader_video_file_chunk", fbuploaderVideoFileChunk);
-      return this;
-    }
-
     public APIRequestCreateVideo setUploadSessionId (String uploadSessionId) {
       this.setParam("upload_session_id", uploadSessionId);
-      return this;
-    }
-
-    public APIRequestCreateVideo setIsVoiceClip (Boolean isVoiceClip) {
-      this.setParam("is_voice_clip", isVoiceClip);
-      return this;
-    }
-    public APIRequestCreateVideo setIsVoiceClip (String isVoiceClip) {
-      this.setParam("is_voice_clip", isVoiceClip);
-      return this;
-    }
-
-    public APIRequestCreateVideo setAttributionAppId (String attributionAppId) {
-      this.setParam("attribution_app_id", attributionAppId);
-      return this;
-    }
-
-    public APIRequestCreateVideo setContentCategory (AdVideo.EnumContentCategory contentCategory) {
-      this.setParam("content_category", contentCategory);
-      return this;
-    }
-    public APIRequestCreateVideo setContentCategory (String contentCategory) {
-      this.setParam("content_category", contentCategory);
-      return this;
-    }
-
-    public APIRequestCreateVideo setEmbeddable (Boolean embeddable) {
-      this.setParam("embeddable", embeddable);
-      return this;
-    }
-    public APIRequestCreateVideo setEmbeddable (String embeddable) {
-      this.setParam("embeddable", embeddable);
-      return this;
-    }
-
-    public APIRequestCreateVideo setSlideshowSpec (Map<String, String> slideshowSpec) {
-      this.setParam("slideshow_spec", slideshowSpec);
-      return this;
-    }
-    public APIRequestCreateVideo setSlideshowSpec (String slideshowSpec) {
-      this.setParam("slideshow_spec", slideshowSpec);
       return this;
     }
 
@@ -10147,36 +10565,22 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateVideo setTranscodeSettingProperties (String transcodeSettingProperties) {
-      this.setParam("transcode_setting_properties", transcodeSettingProperties);
+    public APIRequestCreateVideo setVideoFileChunk (String videoFileChunk) {
+      this.setParam("video_file_chunk", videoFileChunk);
       return this;
     }
 
-    public APIRequestCreateVideo setContainerType (AdVideo.EnumContainerType containerType) {
-      this.setParam("container_type", containerType);
+    public APIRequestCreateVideo setVideoStartTimeMs (Long videoStartTimeMs) {
+      this.setParam("video_start_time_ms", videoStartTimeMs);
       return this;
     }
-    public APIRequestCreateVideo setContainerType (String containerType) {
-      this.setParam("container_type", containerType);
-      return this;
-    }
-
-    public APIRequestCreateVideo setReferencedStickerId (String referencedStickerId) {
-      this.setParam("referenced_sticker_id", referencedStickerId);
+    public APIRequestCreateVideo setVideoStartTimeMs (String videoStartTimeMs) {
+      this.setParam("video_start_time_ms", videoStartTimeMs);
       return this;
     }
 
-    public APIRequestCreateVideo setReplaceVideoId (String replaceVideoId) {
-      this.setParam("replace_video_id", replaceVideoId);
-      return this;
-    }
-
-    public APIRequestCreateVideo setSwapMode (AdVideo.EnumSwapMode swapMode) {
-      this.setParam("swap_mode", swapMode);
-      return this;
-    }
-    public APIRequestCreateVideo setSwapMode (String swapMode) {
-      this.setParam("swap_mode", swapMode);
+    public APIRequestCreateVideo setWaterfallId (String waterfallId) {
+      this.setParam("waterfall_id", waterfallId);
       return this;
     }
 
@@ -10530,12 +10934,12 @@ public class ProductCatalog extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "name",
+      "da_display_settings",
       "default_image_url",
+      "destination_catalog_settings",
       "fallback_image_url",
       "flight_catalog_settings",
-      "destination_catalog_settings",
-      "da_display_settings",
+      "name",
     };
 
     public static final String[] FIELDS = {
@@ -10594,13 +10998,26 @@ public class ProductCatalog extends APINode {
     }
 
 
-    public APIRequestUpdate setName (String name) {
-      this.setParam("name", name);
+    public APIRequestUpdate setDaDisplaySettings (Object daDisplaySettings) {
+      this.setParam("da_display_settings", daDisplaySettings);
+      return this;
+    }
+    public APIRequestUpdate setDaDisplaySettings (String daDisplaySettings) {
+      this.setParam("da_display_settings", daDisplaySettings);
       return this;
     }
 
     public APIRequestUpdate setDefaultImageUrl (String defaultImageUrl) {
       this.setParam("default_image_url", defaultImageUrl);
+      return this;
+    }
+
+    public APIRequestUpdate setDestinationCatalogSettings (Map<String, String> destinationCatalogSettings) {
+      this.setParam("destination_catalog_settings", destinationCatalogSettings);
+      return this;
+    }
+    public APIRequestUpdate setDestinationCatalogSettings (String destinationCatalogSettings) {
+      this.setParam("destination_catalog_settings", destinationCatalogSettings);
       return this;
     }
 
@@ -10618,21 +11035,8 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setDestinationCatalogSettings (Map<String, String> destinationCatalogSettings) {
-      this.setParam("destination_catalog_settings", destinationCatalogSettings);
-      return this;
-    }
-    public APIRequestUpdate setDestinationCatalogSettings (String destinationCatalogSettings) {
-      this.setParam("destination_catalog_settings", destinationCatalogSettings);
-      return this;
-    }
-
-    public APIRequestUpdate setDaDisplaySettings (Object daDisplaySettings) {
-      this.setParam("da_display_settings", daDisplaySettings);
-      return this;
-    }
-    public APIRequestUpdate setDaDisplaySettings (String daDisplaySettings) {
-      this.setParam("da_display_settings", daDisplaySettings);
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
       return this;
     }
 
@@ -10721,15 +11125,34 @@ public class ProductCatalog extends APINode {
   }
 
   public static enum EnumPermittedTasks {
-      @SerializedName("ADMIN")
-      VALUE_ADMIN("ADMIN"),
-      @SerializedName("ADVERTISER")
-      VALUE_ADVERTISER("ADVERTISER"),
+      @SerializedName("ADVERTISE")
+      VALUE_ADVERTISE("ADVERTISE"),
+      @SerializedName("MANAGE")
+      VALUE_MANAGE("MANAGE"),
       NULL(null);
 
       private String value;
 
       private EnumPermittedTasks(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumTasks {
+      @SerializedName("ADVERTISE")
+      VALUE_ADVERTISE("ADVERTISE"),
+      @SerializedName("MANAGE")
+      VALUE_MANAGE("MANAGE"),
+      NULL(null);
+
+      private String value;
+
+      private EnumTasks(String value) {
         this.value = value;
       }
 

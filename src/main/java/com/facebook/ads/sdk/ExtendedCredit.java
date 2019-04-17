@@ -663,8 +663,8 @@ public class ExtendedCredit extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "name",
       "emails",
+      "name",
     };
 
     public static final String[] FIELDS = {
@@ -723,17 +723,17 @@ public class ExtendedCredit extends APINode {
     }
 
 
-    public APIRequestCreateExtendedCreditInvoiceGroup setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
     public APIRequestCreateExtendedCreditInvoiceGroup setEmails (List<String> emails) {
       this.setParam("emails", emails);
       return this;
     }
     public APIRequestCreateExtendedCreditInvoiceGroup setEmails (String emails) {
       this.setParam("emails", emails);
+      return this;
+    }
+
+    public APIRequestCreateExtendedCreditInvoiceGroup setName (String name) {
+      this.setParam("name", name);
       return this;
     }
 
@@ -973,11 +973,11 @@ public class ExtendedCredit extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "receiving_business_id",
       "amount",
       "liability_type",
-      "send_bill_to",
       "partition_type",
+      "receiving_business_id",
+      "send_bill_to",
     };
 
     public static final String[] FIELDS = {
@@ -1036,11 +1036,6 @@ public class ExtendedCredit extends APINode {
     }
 
 
-    public APIRequestCreateOwningCreditAllocationConfig setReceivingBusinessId (String receivingBusinessId) {
-      this.setParam("receiving_business_id", receivingBusinessId);
-      return this;
-    }
-
     public APIRequestCreateOwningCreditAllocationConfig setAmount (Object amount) {
       this.setParam("amount", amount);
       return this;
@@ -1059,21 +1054,26 @@ public class ExtendedCredit extends APINode {
       return this;
     }
 
-    public APIRequestCreateOwningCreditAllocationConfig setSendBillTo (ExtendedCreditAllocationConfig.EnumSendBillTo sendBillTo) {
-      this.setParam("send_bill_to", sendBillTo);
-      return this;
-    }
-    public APIRequestCreateOwningCreditAllocationConfig setSendBillTo (String sendBillTo) {
-      this.setParam("send_bill_to", sendBillTo);
-      return this;
-    }
-
     public APIRequestCreateOwningCreditAllocationConfig setPartitionType (ExtendedCreditAllocationConfig.EnumPartitionType partitionType) {
       this.setParam("partition_type", partitionType);
       return this;
     }
     public APIRequestCreateOwningCreditAllocationConfig setPartitionType (String partitionType) {
       this.setParam("partition_type", partitionType);
+      return this;
+    }
+
+    public APIRequestCreateOwningCreditAllocationConfig setReceivingBusinessId (String receivingBusinessId) {
+      this.setParam("receiving_business_id", receivingBusinessId);
+      return this;
+    }
+
+    public APIRequestCreateOwningCreditAllocationConfig setSendBillTo (ExtendedCreditAllocationConfig.EnumSendBillTo sendBillTo) {
+      this.setParam("send_bill_to", sendBillTo);
+      return this;
+    }
+    public APIRequestCreateOwningCreditAllocationConfig setSendBillTo (String sendBillTo) {
+      this.setParam("send_bill_to", sendBillTo);
       return this;
     }
 

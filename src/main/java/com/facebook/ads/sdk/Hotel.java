@@ -598,17 +598,17 @@ public class Hotel extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "room_id",
-      "description",
-      "name",
-      "url",
-      "currency",
-      "base_price",
       "applinks",
+      "base_price",
+      "currency",
+      "description",
       "images",
       "margin_level",
+      "name",
       "pricing_variables",
+      "room_id",
       "sale_price",
+      "url",
     };
 
     public static final String[] FIELDS = {
@@ -667,28 +667,12 @@ public class Hotel extends APINode {
     }
 
 
-    public APIRequestCreateHotelRoom setRoomId (String roomId) {
-      this.setParam("room_id", roomId);
+    public APIRequestCreateHotelRoom setApplinks (Object applinks) {
+      this.setParam("applinks", applinks);
       return this;
     }
-
-    public APIRequestCreateHotelRoom setDescription (String description) {
-      this.setParam("description", description);
-      return this;
-    }
-
-    public APIRequestCreateHotelRoom setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateHotelRoom setUrl (String url) {
-      this.setParam("url", url);
-      return this;
-    }
-
-    public APIRequestCreateHotelRoom setCurrency (String currency) {
-      this.setParam("currency", currency);
+    public APIRequestCreateHotelRoom setApplinks (String applinks) {
+      this.setParam("applinks", applinks);
       return this;
     }
 
@@ -701,12 +685,13 @@ public class Hotel extends APINode {
       return this;
     }
 
-    public APIRequestCreateHotelRoom setApplinks (Object applinks) {
-      this.setParam("applinks", applinks);
+    public APIRequestCreateHotelRoom setCurrency (String currency) {
+      this.setParam("currency", currency);
       return this;
     }
-    public APIRequestCreateHotelRoom setApplinks (String applinks) {
-      this.setParam("applinks", applinks);
+
+    public APIRequestCreateHotelRoom setDescription (String description) {
+      this.setParam("description", description);
       return this;
     }
 
@@ -728,6 +713,11 @@ public class Hotel extends APINode {
       return this;
     }
 
+    public APIRequestCreateHotelRoom setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
     public APIRequestCreateHotelRoom setPricingVariables (List<Object> pricingVariables) {
       this.setParam("pricing_variables", pricingVariables);
       return this;
@@ -737,12 +727,22 @@ public class Hotel extends APINode {
       return this;
     }
 
+    public APIRequestCreateHotelRoom setRoomId (String roomId) {
+      this.setParam("room_id", roomId);
+      return this;
+    }
+
     public APIRequestCreateHotelRoom setSalePrice (Double salePrice) {
       this.setParam("sale_price", salePrice);
       return this;
     }
     public APIRequestCreateHotelRoom setSalePrice (String salePrice) {
       this.setParam("sale_price", salePrice);
+      return this;
+    }
+
+    public APIRequestCreateHotelRoom setUrl (String url) {
+      this.setParam("url", url);
       return this;
     }
 
@@ -1145,17 +1145,17 @@ public class Hotel extends APINode {
     }
     public static final String[] PARAMS = {
       "address",
-      "brand",
-      "description",
-      "name",
-      "url",
-      "images",
-      "currency",
-      "base_price",
       "applinks",
+      "base_price",
+      "brand",
+      "currency",
+      "description",
+      "guest_ratings",
+      "images",
+      "name",
       "phone",
       "star_rating",
-      "guest_ratings",
+      "url",
     };
 
     public static final String[] FIELDS = {
@@ -1223,37 +1223,12 @@ public class Hotel extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setBrand (String brand) {
-      this.setParam("brand", brand);
+    public APIRequestUpdate setApplinks (Object applinks) {
+      this.setParam("applinks", applinks);
       return this;
     }
-
-    public APIRequestUpdate setDescription (String description) {
-      this.setParam("description", description);
-      return this;
-    }
-
-    public APIRequestUpdate setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestUpdate setUrl (String url) {
-      this.setParam("url", url);
-      return this;
-    }
-
-    public APIRequestUpdate setImages (List<Object> images) {
-      this.setParam("images", images);
-      return this;
-    }
-    public APIRequestUpdate setImages (String images) {
-      this.setParam("images", images);
-      return this;
-    }
-
-    public APIRequestUpdate setCurrency (String currency) {
-      this.setParam("currency", currency);
+    public APIRequestUpdate setApplinks (String applinks) {
+      this.setParam("applinks", applinks);
       return this;
     }
 
@@ -1266,12 +1241,41 @@ public class Hotel extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setApplinks (Object applinks) {
-      this.setParam("applinks", applinks);
+    public APIRequestUpdate setBrand (String brand) {
+      this.setParam("brand", brand);
       return this;
     }
-    public APIRequestUpdate setApplinks (String applinks) {
-      this.setParam("applinks", applinks);
+
+    public APIRequestUpdate setCurrency (String currency) {
+      this.setParam("currency", currency);
+      return this;
+    }
+
+    public APIRequestUpdate setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestUpdate setGuestRatings (List<Object> guestRatings) {
+      this.setParam("guest_ratings", guestRatings);
+      return this;
+    }
+    public APIRequestUpdate setGuestRatings (String guestRatings) {
+      this.setParam("guest_ratings", guestRatings);
+      return this;
+    }
+
+    public APIRequestUpdate setImages (List<Object> images) {
+      this.setParam("images", images);
+      return this;
+    }
+    public APIRequestUpdate setImages (String images) {
+      this.setParam("images", images);
+      return this;
+    }
+
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
       return this;
     }
 
@@ -1289,12 +1293,8 @@ public class Hotel extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setGuestRatings (List<Object> guestRatings) {
-      this.setParam("guest_ratings", guestRatings);
-      return this;
-    }
-    public APIRequestUpdate setGuestRatings (String guestRatings) {
-      this.setParam("guest_ratings", guestRatings);
+    public APIRequestUpdate setUrl (String url) {
+      this.setParam("url", url);
       return this;
     }
 

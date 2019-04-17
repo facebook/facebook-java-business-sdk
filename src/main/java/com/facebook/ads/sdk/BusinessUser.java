@@ -415,7 +415,6 @@ public class BusinessUser extends APINode {
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
-      "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
       "funding_source",
@@ -709,13 +708,6 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGetAssignedAdAccounts requestEndAdvertiserNameField (boolean value) {
       this.requestField("end_advertiser_name", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestExtendedCreditInvoiceGroupField () {
-      return this.requestExtendedCreditInvoiceGroupField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestExtendedCreditInvoiceGroupField (boolean value) {
-      this.requestField("extended_credit_invoice_group", value);
       return this;
     }
     public APIRequestGetAssignedAdAccounts requestFailedDeliveryChecksField () {
@@ -2996,13 +2988,13 @@ public class BusinessUser extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "role",
+      "clear_pending_email",
+      "email",
       "first_name",
       "last_name",
-      "title",
-      "email",
       "pending_email",
-      "clear_pending_email",
+      "role",
+      "title",
     };
 
     public static final String[] FIELDS = {
@@ -3061,12 +3053,17 @@ public class BusinessUser extends APINode {
     }
 
 
-    public APIRequestUpdate setRole (BusinessUser.EnumRole role) {
-      this.setParam("role", role);
+    public APIRequestUpdate setClearPendingEmail (Boolean clearPendingEmail) {
+      this.setParam("clear_pending_email", clearPendingEmail);
       return this;
     }
-    public APIRequestUpdate setRole (String role) {
-      this.setParam("role", role);
+    public APIRequestUpdate setClearPendingEmail (String clearPendingEmail) {
+      this.setParam("clear_pending_email", clearPendingEmail);
+      return this;
+    }
+
+    public APIRequestUpdate setEmail (String email) {
+      this.setParam("email", email);
       return this;
     }
 
@@ -3080,27 +3077,22 @@ public class BusinessUser extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setTitle (String title) {
-      this.setParam("title", title);
-      return this;
-    }
-
-    public APIRequestUpdate setEmail (String email) {
-      this.setParam("email", email);
-      return this;
-    }
-
     public APIRequestUpdate setPendingEmail (String pendingEmail) {
       this.setParam("pending_email", pendingEmail);
       return this;
     }
 
-    public APIRequestUpdate setClearPendingEmail (Boolean clearPendingEmail) {
-      this.setParam("clear_pending_email", clearPendingEmail);
+    public APIRequestUpdate setRole (BusinessUser.EnumRole role) {
+      this.setParam("role", role);
       return this;
     }
-    public APIRequestUpdate setClearPendingEmail (String clearPendingEmail) {
-      this.setParam("clear_pending_email", clearPendingEmail);
+    public APIRequestUpdate setRole (String role) {
+      this.setParam("role", role);
+      return this;
+    }
+
+    public APIRequestUpdate setTitle (String title) {
+      this.setParam("title", title);
       return this;
     }
 

@@ -252,6 +252,8 @@ public class AdCreativeLinkDataCallToAction extends APINode {
       VALUE_CALL("CALL"),
       @SerializedName("CALL_ME")
       VALUE_CALL_ME("CALL_ME"),
+      @SerializedName("CONTACT")
+      VALUE_CONTACT("CONTACT"),
       @SerializedName("CONTACT_US")
       VALUE_CONTACT_US("CONTACT_US"),
       @SerializedName("DONATE")
@@ -262,6 +264,8 @@ public class AdCreativeLinkDataCallToAction extends APINode {
       VALUE_DOWNLOAD("DOWNLOAD"),
       @SerializedName("EVENT_RSVP")
       VALUE_EVENT_RSVP("EVENT_RSVP"),
+      @SerializedName("FIND_A_GROUP")
+      VALUE_FIND_A_GROUP("FIND_A_GROUP"),
       @SerializedName("FOLLOW_NEWS_STORYLINE")
       VALUE_FOLLOW_NEWS_STORYLINE("FOLLOW_NEWS_STORYLINE"),
       @SerializedName("GET_DIRECTIONS")

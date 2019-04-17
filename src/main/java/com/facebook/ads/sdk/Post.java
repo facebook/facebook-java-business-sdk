@@ -101,6 +101,8 @@ public class Post extends APINode {
   private String mInstagramEligibility = null;
   @SerializedName("is_app_share")
   private Boolean mIsAppShare = null;
+  @SerializedName("is_eligible_for_promotion")
+  private Boolean mIsEligibleForPromotion = null;
   @SerializedName("is_expired")
   private Boolean mIsExpired = null;
   @SerializedName("is_hidden")
@@ -561,6 +563,10 @@ public class Post extends APINode {
     return mIsAppShare;
   }
 
+  public Boolean getFieldIsEligibleForPromotion() {
+    return mIsEligibleForPromotion;
+  }
+
   public Boolean getFieldIsExpired() {
     return mIsExpired;
   }
@@ -826,8 +832,8 @@ public class Post extends APINode {
     }
     public static final String[] PARAMS = {
       "filter",
-      "order",
       "live_filter",
+      "order",
       "since",
     };
 
@@ -917,21 +923,21 @@ public class Post extends APINode {
       return this;
     }
 
-    public APIRequestGetComments setOrder (Comment.EnumOrder order) {
-      this.setParam("order", order);
-      return this;
-    }
-    public APIRequestGetComments setOrder (String order) {
-      this.setParam("order", order);
-      return this;
-    }
-
     public APIRequestGetComments setLiveFilter (Comment.EnumLiveFilter liveFilter) {
       this.setParam("live_filter", liveFilter);
       return this;
     }
     public APIRequestGetComments setLiveFilter (String liveFilter) {
       this.setParam("live_filter", liveFilter);
+      return this;
+    }
+
+    public APIRequestGetComments setOrder (Comment.EnumOrder order) {
+      this.setParam("order", order);
+      return this;
+    }
+    public APIRequestGetComments setOrder (String order) {
+      this.setParam("order", order);
       return this;
     }
 
@@ -1133,17 +1139,17 @@ public class Post extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "message",
-      "tracking",
-      "nectar_module",
       "attachment_id",
-      "attachment_url",
       "attachment_share_url",
-      "post_id",
-      "parent_comment_id",
+      "attachment_url",
       "comment",
-      "feedback_source",
       "comment_privacy_value",
+      "feedback_source",
+      "message",
+      "nectar_module",
+      "parent_comment_id",
+      "post_id",
+      "tracking",
     };
 
     public static final String[] FIELDS = {
@@ -1202,28 +1208,8 @@ public class Post extends APINode {
     }
 
 
-    public APIRequestCreateComment setMessage (String message) {
-      this.setParam("message", message);
-      return this;
-    }
-
-    public APIRequestCreateComment setTracking (String tracking) {
-      this.setParam("tracking", tracking);
-      return this;
-    }
-
-    public APIRequestCreateComment setNectarModule (String nectarModule) {
-      this.setParam("nectar_module", nectarModule);
-      return this;
-    }
-
     public APIRequestCreateComment setAttachmentId (String attachmentId) {
       this.setParam("attachment_id", attachmentId);
-      return this;
-    }
-
-    public APIRequestCreateComment setAttachmentUrl (String attachmentUrl) {
-      this.setParam("attachment_url", attachmentUrl);
       return this;
     }
 
@@ -1232,8 +1218,37 @@ public class Post extends APINode {
       return this;
     }
 
-    public APIRequestCreateComment setPostId (String postId) {
-      this.setParam("post_id", postId);
+    public APIRequestCreateComment setAttachmentUrl (String attachmentUrl) {
+      this.setParam("attachment_url", attachmentUrl);
+      return this;
+    }
+
+    public APIRequestCreateComment setComment (String comment) {
+      this.setParam("comment", comment);
+      return this;
+    }
+
+    public APIRequestCreateComment setCommentPrivacyValue (Comment.EnumCommentPrivacyValue commentPrivacyValue) {
+      this.setParam("comment_privacy_value", commentPrivacyValue);
+      return this;
+    }
+    public APIRequestCreateComment setCommentPrivacyValue (String commentPrivacyValue) {
+      this.setParam("comment_privacy_value", commentPrivacyValue);
+      return this;
+    }
+
+    public APIRequestCreateComment setFeedbackSource (String feedbackSource) {
+      this.setParam("feedback_source", feedbackSource);
+      return this;
+    }
+
+    public APIRequestCreateComment setMessage (String message) {
+      this.setParam("message", message);
+      return this;
+    }
+
+    public APIRequestCreateComment setNectarModule (String nectarModule) {
+      this.setParam("nectar_module", nectarModule);
       return this;
     }
 
@@ -1246,22 +1261,13 @@ public class Post extends APINode {
       return this;
     }
 
-    public APIRequestCreateComment setComment (String comment) {
-      this.setParam("comment", comment);
+    public APIRequestCreateComment setPostId (String postId) {
+      this.setParam("post_id", postId);
       return this;
     }
 
-    public APIRequestCreateComment setFeedbackSource (String feedbackSource) {
-      this.setParam("feedback_source", feedbackSource);
-      return this;
-    }
-
-    public APIRequestCreateComment setCommentPrivacyValue (Comment.EnumCommentPrivacyValue commentPrivacyValue) {
-      this.setParam("comment_privacy_value", commentPrivacyValue);
-      return this;
-    }
-    public APIRequestCreateComment setCommentPrivacyValue (String commentPrivacyValue) {
-      this.setParam("comment_privacy_value", commentPrivacyValue);
+    public APIRequestCreateComment setTracking (String tracking) {
+      this.setParam("tracking", tracking);
       return this;
     }
 
@@ -1607,11 +1613,11 @@ public class Post extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "since",
-      "until",
+      "date_preset",
       "metric",
       "period",
-      "date_preset",
+      "since",
+      "until",
     };
 
     public static final String[] FIELDS = {
@@ -1677,13 +1683,12 @@ public class Post extends APINode {
     }
 
 
-    public APIRequestGetInsights setSince (String since) {
-      this.setParam("since", since);
+    public APIRequestGetInsights setDatePreset (InsightsResult.EnumDatePreset datePreset) {
+      this.setParam("date_preset", datePreset);
       return this;
     }
-
-    public APIRequestGetInsights setUntil (String until) {
-      this.setParam("until", until);
+    public APIRequestGetInsights setDatePreset (String datePreset) {
+      this.setParam("date_preset", datePreset);
       return this;
     }
 
@@ -1705,12 +1710,13 @@ public class Post extends APINode {
       return this;
     }
 
-    public APIRequestGetInsights setDatePreset (InsightsResult.EnumDatePreset datePreset) {
-      this.setParam("date_preset", datePreset);
+    public APIRequestGetInsights setSince (String since) {
+      this.setParam("since", since);
       return this;
     }
-    public APIRequestGetInsights setDatePreset (String datePreset) {
-      this.setParam("date_preset", datePreset);
+
+    public APIRequestGetInsights setUntil (String until) {
+      this.setParam("until", until);
       return this;
     }
 
@@ -1809,8 +1815,8 @@ public class Post extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "tracking",
       "nectar_module",
+      "tracking",
     };
 
     public static final String[] FIELDS = {
@@ -1869,13 +1875,13 @@ public class Post extends APINode {
     }
 
 
-    public APIRequestDeleteLikes setTracking (String tracking) {
-      this.setParam("tracking", tracking);
+    public APIRequestDeleteLikes setNectarModule (String nectarModule) {
+      this.setParam("nectar_module", nectarModule);
       return this;
     }
 
-    public APIRequestDeleteLikes setNectarModule (String nectarModule) {
-      this.setParam("nectar_module", nectarModule);
+    public APIRequestDeleteLikes setTracking (String tracking) {
+      this.setParam("tracking", tracking);
       return this;
     }
 
@@ -2117,9 +2123,9 @@ public class Post extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "tracking",
-      "nectar_module",
       "feedback_source",
+      "nectar_module",
+      "tracking",
     };
 
     public static final String[] FIELDS = {
@@ -2178,8 +2184,8 @@ public class Post extends APINode {
     }
 
 
-    public APIRequestCreateLike setTracking (String tracking) {
-      this.setParam("tracking", tracking);
+    public APIRequestCreateLike setFeedbackSource (String feedbackSource) {
+      this.setParam("feedback_source", feedbackSource);
       return this;
     }
 
@@ -2188,8 +2194,8 @@ public class Post extends APINode {
       return this;
     }
 
-    public APIRequestCreateLike setFeedbackSource (String feedbackSource) {
-      this.setParam("feedback_source", feedbackSource);
+    public APIRequestCreateLike setTracking (String tracking) {
+      this.setParam("tracking", tracking);
       return this;
     }
 
@@ -2240,56 +2246,56 @@ public class Post extends APINode {
     }
     public static final String[] PARAMS = {
       "aid",
+      "allow_spherical_photo",
       "alt_text_custom",
-      "caption",
-      "url",
-      "uid",
-      "profile_id",
-      "target_id",
-      "vault_image_id",
-      "tags",
-      "place",
-      "is_explicit_place",
-      "is_explicit_location",
-      "og_action_type_id",
-      "og_object_id",
-      "og_phrase",
-      "og_icon_id",
-      "og_suggestion_mechanism",
-      "og_set_profile_badge",
-      "privacy",
-      "targeting",
-      "feed_targeting",
-      "no_story",
-      "published",
-      "offline_id",
+      "android_key_hash",
+      "application_id",
       "attempt",
+      "audience_exp",
       "backdated_time",
       "backdated_time_granularity",
-      "time_since_original_post",
-      "filter_type",
-      "scheduled_publish_time",
-      "unpublished_content_type",
-      "full_res_is_coming_later",
+      "caption",
       "composer_session_id",
-      "qn",
-      "manual_privacy",
-      "audience_exp",
-      "proxied_app_id",
-      "ios_bundle_id",
-      "android_key_hash",
-      "user_selected_tags",
-      "allow_spherical_photo",
-      "spherical_metadata",
+      "direct_share_status",
+      "feed_targeting",
+      "filter_type",
+      "full_res_is_coming_later",
       "initial_view_heading_override_degrees",
       "initial_view_pitch_override_degrees",
       "initial_view_vertical_fov_override_degrees",
-      "sponsor_id",
-      "direct_share_status",
-      "sponsor_relationship",
-      "application_id",
-      "name",
+      "ios_bundle_id",
+      "is_explicit_location",
+      "is_explicit_place",
+      "manual_privacy",
       "message",
+      "name",
+      "no_story",
+      "offline_id",
+      "og_action_type_id",
+      "og_icon_id",
+      "og_object_id",
+      "og_phrase",
+      "og_set_profile_badge",
+      "og_suggestion_mechanism",
+      "place",
+      "privacy",
+      "profile_id",
+      "proxied_app_id",
+      "published",
+      "qn",
+      "scheduled_publish_time",
+      "spherical_metadata",
+      "sponsor_id",
+      "sponsor_relationship",
+      "tags",
+      "target_id",
+      "targeting",
+      "time_since_original_post",
+      "uid",
+      "unpublished_content_type",
+      "url",
+      "user_selected_tags",
+      "vault_image_id",
     };
 
     public static final String[] FIELDS = {
@@ -2353,170 +2359,27 @@ public class Post extends APINode {
       return this;
     }
 
+    public APIRequestCreatePhoto setAllowSphericalPhoto (Boolean allowSphericalPhoto) {
+      this.setParam("allow_spherical_photo", allowSphericalPhoto);
+      return this;
+    }
+    public APIRequestCreatePhoto setAllowSphericalPhoto (String allowSphericalPhoto) {
+      this.setParam("allow_spherical_photo", allowSphericalPhoto);
+      return this;
+    }
+
     public APIRequestCreatePhoto setAltTextCustom (String altTextCustom) {
       this.setParam("alt_text_custom", altTextCustom);
       return this;
     }
 
-    public APIRequestCreatePhoto setCaption (String caption) {
-      this.setParam("caption", caption);
+    public APIRequestCreatePhoto setAndroidKeyHash (String androidKeyHash) {
+      this.setParam("android_key_hash", androidKeyHash);
       return this;
     }
 
-    public APIRequestCreatePhoto setUrl (String url) {
-      this.setParam("url", url);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setUid (Long uid) {
-      this.setParam("uid", uid);
-      return this;
-    }
-    public APIRequestCreatePhoto setUid (String uid) {
-      this.setParam("uid", uid);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setProfileId (Long profileId) {
-      this.setParam("profile_id", profileId);
-      return this;
-    }
-    public APIRequestCreatePhoto setProfileId (String profileId) {
-      this.setParam("profile_id", profileId);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setTargetId (Long targetId) {
-      this.setParam("target_id", targetId);
-      return this;
-    }
-    public APIRequestCreatePhoto setTargetId (String targetId) {
-      this.setParam("target_id", targetId);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setVaultImageId (String vaultImageId) {
-      this.setParam("vault_image_id", vaultImageId);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setTags (List<Object> tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-    public APIRequestCreatePhoto setTags (String tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setPlace (Object place) {
-      this.setParam("place", place);
-      return this;
-    }
-    public APIRequestCreatePhoto setPlace (String place) {
-      this.setParam("place", place);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setIsExplicitPlace (Boolean isExplicitPlace) {
-      this.setParam("is_explicit_place", isExplicitPlace);
-      return this;
-    }
-    public APIRequestCreatePhoto setIsExplicitPlace (String isExplicitPlace) {
-      this.setParam("is_explicit_place", isExplicitPlace);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setIsExplicitLocation (Boolean isExplicitLocation) {
-      this.setParam("is_explicit_location", isExplicitLocation);
-      return this;
-    }
-    public APIRequestCreatePhoto setIsExplicitLocation (String isExplicitLocation) {
-      this.setParam("is_explicit_location", isExplicitLocation);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setOgActionTypeId (String ogActionTypeId) {
-      this.setParam("og_action_type_id", ogActionTypeId);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setOgObjectId (String ogObjectId) {
-      this.setParam("og_object_id", ogObjectId);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setOgPhrase (String ogPhrase) {
-      this.setParam("og_phrase", ogPhrase);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setOgIconId (String ogIconId) {
-      this.setParam("og_icon_id", ogIconId);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setOgSuggestionMechanism (String ogSuggestionMechanism) {
-      this.setParam("og_suggestion_mechanism", ogSuggestionMechanism);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setOgSetProfileBadge (Boolean ogSetProfileBadge) {
-      this.setParam("og_set_profile_badge", ogSetProfileBadge);
-      return this;
-    }
-    public APIRequestCreatePhoto setOgSetProfileBadge (String ogSetProfileBadge) {
-      this.setParam("og_set_profile_badge", ogSetProfileBadge);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setPrivacy (String privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setTargeting (Object targeting) {
-      this.setParam("targeting", targeting);
-      return this;
-    }
-    public APIRequestCreatePhoto setTargeting (String targeting) {
-      this.setParam("targeting", targeting);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setFeedTargeting (Object feedTargeting) {
-      this.setParam("feed_targeting", feedTargeting);
-      return this;
-    }
-    public APIRequestCreatePhoto setFeedTargeting (String feedTargeting) {
-      this.setParam("feed_targeting", feedTargeting);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setNoStory (Boolean noStory) {
-      this.setParam("no_story", noStory);
-      return this;
-    }
-    public APIRequestCreatePhoto setNoStory (String noStory) {
-      this.setParam("no_story", noStory);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setPublished (Boolean published) {
-      this.setParam("published", published);
-      return this;
-    }
-    public APIRequestCreatePhoto setPublished (String published) {
-      this.setParam("published", published);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setOfflineId (Long offlineId) {
-      this.setParam("offline_id", offlineId);
-      return this;
-    }
-    public APIRequestCreatePhoto setOfflineId (String offlineId) {
-      this.setParam("offline_id", offlineId);
+    public APIRequestCreatePhoto setApplicationId (String applicationId) {
+      this.setParam("application_id", applicationId);
       return this;
     }
 
@@ -2526,6 +2389,15 @@ public class Post extends APINode {
     }
     public APIRequestCreatePhoto setAttempt (String attempt) {
       this.setParam("attempt", attempt);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setAudienceExp (Boolean audienceExp) {
+      this.setParam("audience_exp", audienceExp);
+      return this;
+    }
+    public APIRequestCreatePhoto setAudienceExp (String audienceExp) {
+      this.setParam("audience_exp", audienceExp);
       return this;
     }
 
@@ -2543,12 +2415,31 @@ public class Post extends APINode {
       return this;
     }
 
-    public APIRequestCreatePhoto setTimeSinceOriginalPost (Long timeSinceOriginalPost) {
-      this.setParam("time_since_original_post", timeSinceOriginalPost);
+    public APIRequestCreatePhoto setCaption (String caption) {
+      this.setParam("caption", caption);
       return this;
     }
-    public APIRequestCreatePhoto setTimeSinceOriginalPost (String timeSinceOriginalPost) {
-      this.setParam("time_since_original_post", timeSinceOriginalPost);
+
+    public APIRequestCreatePhoto setComposerSessionId (String composerSessionId) {
+      this.setParam("composer_session_id", composerSessionId);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setDirectShareStatus (Long directShareStatus) {
+      this.setParam("direct_share_status", directShareStatus);
+      return this;
+    }
+    public APIRequestCreatePhoto setDirectShareStatus (String directShareStatus) {
+      this.setParam("direct_share_status", directShareStatus);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setFeedTargeting (Object feedTargeting) {
+      this.setParam("feed_targeting", feedTargeting);
+      return this;
+    }
+    public APIRequestCreatePhoto setFeedTargeting (String feedTargeting) {
+      this.setParam("feed_targeting", feedTargeting);
       return this;
     }
 
@@ -2561,100 +2452,12 @@ public class Post extends APINode {
       return this;
     }
 
-    public APIRequestCreatePhoto setScheduledPublishTime (Long scheduledPublishTime) {
-      this.setParam("scheduled_publish_time", scheduledPublishTime);
-      return this;
-    }
-    public APIRequestCreatePhoto setScheduledPublishTime (String scheduledPublishTime) {
-      this.setParam("scheduled_publish_time", scheduledPublishTime);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setUnpublishedContentType (Photo.EnumUnpublishedContentType unpublishedContentType) {
-      this.setParam("unpublished_content_type", unpublishedContentType);
-      return this;
-    }
-    public APIRequestCreatePhoto setUnpublishedContentType (String unpublishedContentType) {
-      this.setParam("unpublished_content_type", unpublishedContentType);
-      return this;
-    }
-
     public APIRequestCreatePhoto setFullResIsComingLater (Boolean fullResIsComingLater) {
       this.setParam("full_res_is_coming_later", fullResIsComingLater);
       return this;
     }
     public APIRequestCreatePhoto setFullResIsComingLater (String fullResIsComingLater) {
       this.setParam("full_res_is_coming_later", fullResIsComingLater);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setComposerSessionId (String composerSessionId) {
-      this.setParam("composer_session_id", composerSessionId);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setQn (String qn) {
-      this.setParam("qn", qn);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setManualPrivacy (Boolean manualPrivacy) {
-      this.setParam("manual_privacy", manualPrivacy);
-      return this;
-    }
-    public APIRequestCreatePhoto setManualPrivacy (String manualPrivacy) {
-      this.setParam("manual_privacy", manualPrivacy);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setAudienceExp (Boolean audienceExp) {
-      this.setParam("audience_exp", audienceExp);
-      return this;
-    }
-    public APIRequestCreatePhoto setAudienceExp (String audienceExp) {
-      this.setParam("audience_exp", audienceExp);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setProxiedAppId (String proxiedAppId) {
-      this.setParam("proxied_app_id", proxiedAppId);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setIosBundleId (String iosBundleId) {
-      this.setParam("ios_bundle_id", iosBundleId);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setAndroidKeyHash (String androidKeyHash) {
-      this.setParam("android_key_hash", androidKeyHash);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setUserSelectedTags (Boolean userSelectedTags) {
-      this.setParam("user_selected_tags", userSelectedTags);
-      return this;
-    }
-    public APIRequestCreatePhoto setUserSelectedTags (String userSelectedTags) {
-      this.setParam("user_selected_tags", userSelectedTags);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setAllowSphericalPhoto (Boolean allowSphericalPhoto) {
-      this.setParam("allow_spherical_photo", allowSphericalPhoto);
-      return this;
-    }
-    public APIRequestCreatePhoto setAllowSphericalPhoto (String allowSphericalPhoto) {
-      this.setParam("allow_spherical_photo", allowSphericalPhoto);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setSphericalMetadata (Map<String, String> sphericalMetadata) {
-      this.setParam("spherical_metadata", sphericalMetadata);
-      return this;
-    }
-    public APIRequestCreatePhoto setSphericalMetadata (String sphericalMetadata) {
-      this.setParam("spherical_metadata", sphericalMetadata);
       return this;
     }
 
@@ -2685,17 +2488,162 @@ public class Post extends APINode {
       return this;
     }
 
-    public APIRequestCreatePhoto setSponsorId (String sponsorId) {
-      this.setParam("sponsor_id", sponsorId);
+    public APIRequestCreatePhoto setIosBundleId (String iosBundleId) {
+      this.setParam("ios_bundle_id", iosBundleId);
       return this;
     }
 
-    public APIRequestCreatePhoto setDirectShareStatus (Long directShareStatus) {
-      this.setParam("direct_share_status", directShareStatus);
+    public APIRequestCreatePhoto setIsExplicitLocation (Boolean isExplicitLocation) {
+      this.setParam("is_explicit_location", isExplicitLocation);
       return this;
     }
-    public APIRequestCreatePhoto setDirectShareStatus (String directShareStatus) {
-      this.setParam("direct_share_status", directShareStatus);
+    public APIRequestCreatePhoto setIsExplicitLocation (String isExplicitLocation) {
+      this.setParam("is_explicit_location", isExplicitLocation);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setIsExplicitPlace (Boolean isExplicitPlace) {
+      this.setParam("is_explicit_place", isExplicitPlace);
+      return this;
+    }
+    public APIRequestCreatePhoto setIsExplicitPlace (String isExplicitPlace) {
+      this.setParam("is_explicit_place", isExplicitPlace);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setManualPrivacy (Boolean manualPrivacy) {
+      this.setParam("manual_privacy", manualPrivacy);
+      return this;
+    }
+    public APIRequestCreatePhoto setManualPrivacy (String manualPrivacy) {
+      this.setParam("manual_privacy", manualPrivacy);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setMessage (String message) {
+      this.setParam("message", message);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setNoStory (Boolean noStory) {
+      this.setParam("no_story", noStory);
+      return this;
+    }
+    public APIRequestCreatePhoto setNoStory (String noStory) {
+      this.setParam("no_story", noStory);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setOfflineId (Long offlineId) {
+      this.setParam("offline_id", offlineId);
+      return this;
+    }
+    public APIRequestCreatePhoto setOfflineId (String offlineId) {
+      this.setParam("offline_id", offlineId);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setOgActionTypeId (String ogActionTypeId) {
+      this.setParam("og_action_type_id", ogActionTypeId);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setOgIconId (String ogIconId) {
+      this.setParam("og_icon_id", ogIconId);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setOgObjectId (String ogObjectId) {
+      this.setParam("og_object_id", ogObjectId);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setOgPhrase (String ogPhrase) {
+      this.setParam("og_phrase", ogPhrase);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setOgSetProfileBadge (Boolean ogSetProfileBadge) {
+      this.setParam("og_set_profile_badge", ogSetProfileBadge);
+      return this;
+    }
+    public APIRequestCreatePhoto setOgSetProfileBadge (String ogSetProfileBadge) {
+      this.setParam("og_set_profile_badge", ogSetProfileBadge);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setOgSuggestionMechanism (String ogSuggestionMechanism) {
+      this.setParam("og_suggestion_mechanism", ogSuggestionMechanism);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setPlace (Object place) {
+      this.setParam("place", place);
+      return this;
+    }
+    public APIRequestCreatePhoto setPlace (String place) {
+      this.setParam("place", place);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setPrivacy (String privacy) {
+      this.setParam("privacy", privacy);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setProfileId (Long profileId) {
+      this.setParam("profile_id", profileId);
+      return this;
+    }
+    public APIRequestCreatePhoto setProfileId (String profileId) {
+      this.setParam("profile_id", profileId);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setProxiedAppId (String proxiedAppId) {
+      this.setParam("proxied_app_id", proxiedAppId);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setPublished (Boolean published) {
+      this.setParam("published", published);
+      return this;
+    }
+    public APIRequestCreatePhoto setPublished (String published) {
+      this.setParam("published", published);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setQn (String qn) {
+      this.setParam("qn", qn);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setScheduledPublishTime (Long scheduledPublishTime) {
+      this.setParam("scheduled_publish_time", scheduledPublishTime);
+      return this;
+    }
+    public APIRequestCreatePhoto setScheduledPublishTime (String scheduledPublishTime) {
+      this.setParam("scheduled_publish_time", scheduledPublishTime);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setSphericalMetadata (Map<String, String> sphericalMetadata) {
+      this.setParam("spherical_metadata", sphericalMetadata);
+      return this;
+    }
+    public APIRequestCreatePhoto setSphericalMetadata (String sphericalMetadata) {
+      this.setParam("spherical_metadata", sphericalMetadata);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setSponsorId (String sponsorId) {
+      this.setParam("sponsor_id", sponsorId);
       return this;
     }
 
@@ -2708,18 +2656,76 @@ public class Post extends APINode {
       return this;
     }
 
-    public APIRequestCreatePhoto setApplicationId (String applicationId) {
-      this.setParam("application_id", applicationId);
+    public APIRequestCreatePhoto setTags (List<Object> tags) {
+      this.setParam("tags", tags);
+      return this;
+    }
+    public APIRequestCreatePhoto setTags (String tags) {
+      this.setParam("tags", tags);
       return this;
     }
 
-    public APIRequestCreatePhoto setName (String name) {
-      this.setParam("name", name);
+    public APIRequestCreatePhoto setTargetId (Long targetId) {
+      this.setParam("target_id", targetId);
+      return this;
+    }
+    public APIRequestCreatePhoto setTargetId (String targetId) {
+      this.setParam("target_id", targetId);
       return this;
     }
 
-    public APIRequestCreatePhoto setMessage (String message) {
-      this.setParam("message", message);
+    public APIRequestCreatePhoto setTargeting (Object targeting) {
+      this.setParam("targeting", targeting);
+      return this;
+    }
+    public APIRequestCreatePhoto setTargeting (String targeting) {
+      this.setParam("targeting", targeting);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setTimeSinceOriginalPost (Long timeSinceOriginalPost) {
+      this.setParam("time_since_original_post", timeSinceOriginalPost);
+      return this;
+    }
+    public APIRequestCreatePhoto setTimeSinceOriginalPost (String timeSinceOriginalPost) {
+      this.setParam("time_since_original_post", timeSinceOriginalPost);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setUid (Long uid) {
+      this.setParam("uid", uid);
+      return this;
+    }
+    public APIRequestCreatePhoto setUid (String uid) {
+      this.setParam("uid", uid);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setUnpublishedContentType (Photo.EnumUnpublishedContentType unpublishedContentType) {
+      this.setParam("unpublished_content_type", unpublishedContentType);
+      return this;
+    }
+    public APIRequestCreatePhoto setUnpublishedContentType (String unpublishedContentType) {
+      this.setParam("unpublished_content_type", unpublishedContentType);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setUrl (String url) {
+      this.setParam("url", url);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setUserSelectedTags (Boolean userSelectedTags) {
+      this.setParam("user_selected_tags", userSelectedTags);
+      return this;
+    }
+    public APIRequestCreatePhoto setUserSelectedTags (String userSelectedTags) {
+      this.setParam("user_selected_tags", userSelectedTags);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setVaultImageId (String vaultImageId) {
+      this.setParam("vault_image_id", vaultImageId);
       return this;
     }
 
@@ -2769,19 +2775,19 @@ public class Post extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "budget",
-      "currency",
       "ad_account_id",
-      "audience",
-      "targeting",
-      "start_time",
-      "stop_time",
       "ad_conversion_pixel_id",
-      "placement",
-      "flow_id",
+      "audience",
       "audience_id",
       "bid_amount",
+      "budget",
       "cta_type",
+      "currency",
+      "flow_id",
+      "placement",
+      "start_time",
+      "stop_time",
+      "targeting",
     };
 
     public static final String[] FIELDS = {
@@ -2840,22 +2846,17 @@ public class Post extends APINode {
     }
 
 
-    public APIRequestCreatePromotion setBudget (Long budget) {
-      this.setParam("budget", budget);
-      return this;
-    }
-    public APIRequestCreatePromotion setBudget (String budget) {
-      this.setParam("budget", budget);
-      return this;
-    }
-
-    public APIRequestCreatePromotion setCurrency (String currency) {
-      this.setParam("currency", currency);
-      return this;
-    }
-
     public APIRequestCreatePromotion setAdAccountId (String adAccountId) {
       this.setParam("ad_account_id", adAccountId);
+      return this;
+    }
+
+    public APIRequestCreatePromotion setAdConversionPixelId (Long adConversionPixelId) {
+      this.setParam("ad_conversion_pixel_id", adConversionPixelId);
+      return this;
+    }
+    public APIRequestCreatePromotion setAdConversionPixelId (String adConversionPixelId) {
+      this.setParam("ad_conversion_pixel_id", adConversionPixelId);
       return this;
     }
 
@@ -2868,12 +2869,50 @@ public class Post extends APINode {
       return this;
     }
 
-    public APIRequestCreatePromotion setTargeting (Targeting targeting) {
-      this.setParam("targeting", targeting);
+    public APIRequestCreatePromotion setAudienceId (String audienceId) {
+      this.setParam("audience_id", audienceId);
       return this;
     }
-    public APIRequestCreatePromotion setTargeting (String targeting) {
-      this.setParam("targeting", targeting);
+
+    public APIRequestCreatePromotion setBidAmount (Long bidAmount) {
+      this.setParam("bid_amount", bidAmount);
+      return this;
+    }
+    public APIRequestCreatePromotion setBidAmount (String bidAmount) {
+      this.setParam("bid_amount", bidAmount);
+      return this;
+    }
+
+    public APIRequestCreatePromotion setBudget (Long budget) {
+      this.setParam("budget", budget);
+      return this;
+    }
+    public APIRequestCreatePromotion setBudget (String budget) {
+      this.setParam("budget", budget);
+      return this;
+    }
+
+    public APIRequestCreatePromotion setCtaType (EnumCtaType ctaType) {
+      this.setParam("cta_type", ctaType);
+      return this;
+    }
+    public APIRequestCreatePromotion setCtaType (String ctaType) {
+      this.setParam("cta_type", ctaType);
+      return this;
+    }
+
+    public APIRequestCreatePromotion setCurrency (String currency) {
+      this.setParam("currency", currency);
+      return this;
+    }
+
+    public APIRequestCreatePromotion setFlowId (String flowId) {
+      this.setParam("flow_id", flowId);
+      return this;
+    }
+
+    public APIRequestCreatePromotion setPlacement (String placement) {
+      this.setParam("placement", placement);
       return this;
     }
 
@@ -2895,45 +2934,12 @@ public class Post extends APINode {
       return this;
     }
 
-    public APIRequestCreatePromotion setAdConversionPixelId (Long adConversionPixelId) {
-      this.setParam("ad_conversion_pixel_id", adConversionPixelId);
+    public APIRequestCreatePromotion setTargeting (Targeting targeting) {
+      this.setParam("targeting", targeting);
       return this;
     }
-    public APIRequestCreatePromotion setAdConversionPixelId (String adConversionPixelId) {
-      this.setParam("ad_conversion_pixel_id", adConversionPixelId);
-      return this;
-    }
-
-    public APIRequestCreatePromotion setPlacement (String placement) {
-      this.setParam("placement", placement);
-      return this;
-    }
-
-    public APIRequestCreatePromotion setFlowId (String flowId) {
-      this.setParam("flow_id", flowId);
-      return this;
-    }
-
-    public APIRequestCreatePromotion setAudienceId (String audienceId) {
-      this.setParam("audience_id", audienceId);
-      return this;
-    }
-
-    public APIRequestCreatePromotion setBidAmount (Long bidAmount) {
-      this.setParam("bid_amount", bidAmount);
-      return this;
-    }
-    public APIRequestCreatePromotion setBidAmount (String bidAmount) {
-      this.setParam("bid_amount", bidAmount);
-      return this;
-    }
-
-    public APIRequestCreatePromotion setCtaType (EnumCtaType ctaType) {
-      this.setParam("cta_type", ctaType);
-      return this;
-    }
-    public APIRequestCreatePromotion setCtaType (String ctaType) {
-      this.setParam("cta_type", ctaType);
+    public APIRequestCreatePromotion setTargeting (String targeting) {
+      this.setParam("targeting", targeting);
       return this;
     }
 
@@ -3795,6 +3801,7 @@ public class Post extends APINode {
       "id",
       "instagram_eligibility",
       "is_app_share",
+      "is_eligible_for_promotion",
       "is_expired",
       "is_hidden",
       "is_instagram_eligible",
@@ -4081,6 +4088,13 @@ public class Post extends APINode {
     }
     public APIRequestGetSharedPosts requestIsAppShareField (boolean value) {
       this.requestField("is_app_share", value);
+      return this;
+    }
+    public APIRequestGetSharedPosts requestIsEligibleForPromotionField () {
+      return this.requestIsEligibleForPromotionField(true);
+    }
+    public APIRequestGetSharedPosts requestIsEligibleForPromotionField (boolean value) {
+      this.requestField("is_eligible_for_promotion", value);
       return this;
     }
     public APIRequestGetSharedPosts requestIsExpiredField () {
@@ -6107,6 +6121,7 @@ public class Post extends APINode {
       "id",
       "instagram_eligibility",
       "is_app_share",
+      "is_eligible_for_promotion",
       "is_expired",
       "is_hidden",
       "is_instagram_eligible",
@@ -6395,6 +6410,13 @@ public class Post extends APINode {
       this.requestField("is_app_share", value);
       return this;
     }
+    public APIRequestGet requestIsEligibleForPromotionField () {
+      return this.requestIsEligibleForPromotionField(true);
+    }
+    public APIRequestGet requestIsEligibleForPromotionField (boolean value) {
+      this.requestField("is_eligible_for_promotion", value);
+      return this;
+    }
     public APIRequestGet requestIsExpiredField () {
       return this.requestIsExpiredField(true);
     }
@@ -6657,36 +6679,36 @@ public class Post extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "privacy",
-      "composer_session_id",
-      "message",
-      "is_hidden",
-      "is_published",
-      "scheduled_publish_time",
-      "is_pinned",
-      "timeline_visibility",
-      "feed_story_visibility",
+      "attached_media",
       "backdated_time",
       "backdated_time_granularity",
-      "tracking",
-      "source_type",
-      "attached_media",
+      "composer_session_id",
+      "direct_share_status",
+      "feed_story_visibility",
+      "is_explicit_location",
+      "is_hidden",
+      "is_pinned",
+      "is_published",
+      "message",
       "og_action_type_id",
+      "og_hide_object_attachment",
+      "og_icon_id",
       "og_object_id",
       "og_phrase",
-      "og_icon_id",
-      "og_suggestion_mechanism",
-      "og_hide_object_attachment",
-      "tags",
       "og_set_profile_badge",
+      "og_suggestion_mechanism",
       "place",
-      "is_explicit_location",
+      "privacy",
       "product_item",
+      "scheduled_publish_time",
       "should_sync_product_edit",
+      "source_type",
       "sponsor_id",
-      "direct_share_status",
       "sponsor_relationship",
+      "tags",
       "text_format_preset_id",
+      "timeline_visibility",
+      "tracking",
     };
 
     public static final String[] FIELDS = {
@@ -6745,72 +6767,12 @@ public class Post extends APINode {
     }
 
 
-    public APIRequestUpdate setPrivacy (String privacy) {
-      this.setParam("privacy", privacy);
+    public APIRequestUpdate setAttachedMedia (List<Object> attachedMedia) {
+      this.setParam("attached_media", attachedMedia);
       return this;
     }
-
-    public APIRequestUpdate setComposerSessionId (String composerSessionId) {
-      this.setParam("composer_session_id", composerSessionId);
-      return this;
-    }
-
-    public APIRequestUpdate setMessage (String message) {
-      this.setParam("message", message);
-      return this;
-    }
-
-    public APIRequestUpdate setIsHidden (Boolean isHidden) {
-      this.setParam("is_hidden", isHidden);
-      return this;
-    }
-    public APIRequestUpdate setIsHidden (String isHidden) {
-      this.setParam("is_hidden", isHidden);
-      return this;
-    }
-
-    public APIRequestUpdate setIsPublished (Boolean isPublished) {
-      this.setParam("is_published", isPublished);
-      return this;
-    }
-    public APIRequestUpdate setIsPublished (String isPublished) {
-      this.setParam("is_published", isPublished);
-      return this;
-    }
-
-    public APIRequestUpdate setScheduledPublishTime (Long scheduledPublishTime) {
-      this.setParam("scheduled_publish_time", scheduledPublishTime);
-      return this;
-    }
-    public APIRequestUpdate setScheduledPublishTime (String scheduledPublishTime) {
-      this.setParam("scheduled_publish_time", scheduledPublishTime);
-      return this;
-    }
-
-    public APIRequestUpdate setIsPinned (Boolean isPinned) {
-      this.setParam("is_pinned", isPinned);
-      return this;
-    }
-    public APIRequestUpdate setIsPinned (String isPinned) {
-      this.setParam("is_pinned", isPinned);
-      return this;
-    }
-
-    public APIRequestUpdate setTimelineVisibility (Post.EnumTimelineVisibility timelineVisibility) {
-      this.setParam("timeline_visibility", timelineVisibility);
-      return this;
-    }
-    public APIRequestUpdate setTimelineVisibility (String timelineVisibility) {
-      this.setParam("timeline_visibility", timelineVisibility);
-      return this;
-    }
-
-    public APIRequestUpdate setFeedStoryVisibility (Post.EnumFeedStoryVisibility feedStoryVisibility) {
-      this.setParam("feed_story_visibility", feedStoryVisibility);
-      return this;
-    }
-    public APIRequestUpdate setFeedStoryVisibility (String feedStoryVisibility) {
-      this.setParam("feed_story_visibility", feedStoryVisibility);
+    public APIRequestUpdate setAttachedMedia (String attachedMedia) {
+      this.setParam("attached_media", attachedMedia);
       return this;
     }
 
@@ -6828,27 +6790,86 @@ public class Post extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setTracking (String tracking) {
-      this.setParam("tracking", tracking);
+    public APIRequestUpdate setComposerSessionId (String composerSessionId) {
+      this.setParam("composer_session_id", composerSessionId);
       return this;
     }
 
-    public APIRequestUpdate setSourceType (String sourceType) {
-      this.setParam("source_type", sourceType);
+    public APIRequestUpdate setDirectShareStatus (Long directShareStatus) {
+      this.setParam("direct_share_status", directShareStatus);
+      return this;
+    }
+    public APIRequestUpdate setDirectShareStatus (String directShareStatus) {
+      this.setParam("direct_share_status", directShareStatus);
       return this;
     }
 
-    public APIRequestUpdate setAttachedMedia (List<Object> attachedMedia) {
-      this.setParam("attached_media", attachedMedia);
+    public APIRequestUpdate setFeedStoryVisibility (Post.EnumFeedStoryVisibility feedStoryVisibility) {
+      this.setParam("feed_story_visibility", feedStoryVisibility);
       return this;
     }
-    public APIRequestUpdate setAttachedMedia (String attachedMedia) {
-      this.setParam("attached_media", attachedMedia);
+    public APIRequestUpdate setFeedStoryVisibility (String feedStoryVisibility) {
+      this.setParam("feed_story_visibility", feedStoryVisibility);
+      return this;
+    }
+
+    public APIRequestUpdate setIsExplicitLocation (Boolean isExplicitLocation) {
+      this.setParam("is_explicit_location", isExplicitLocation);
+      return this;
+    }
+    public APIRequestUpdate setIsExplicitLocation (String isExplicitLocation) {
+      this.setParam("is_explicit_location", isExplicitLocation);
+      return this;
+    }
+
+    public APIRequestUpdate setIsHidden (Boolean isHidden) {
+      this.setParam("is_hidden", isHidden);
+      return this;
+    }
+    public APIRequestUpdate setIsHidden (String isHidden) {
+      this.setParam("is_hidden", isHidden);
+      return this;
+    }
+
+    public APIRequestUpdate setIsPinned (Boolean isPinned) {
+      this.setParam("is_pinned", isPinned);
+      return this;
+    }
+    public APIRequestUpdate setIsPinned (String isPinned) {
+      this.setParam("is_pinned", isPinned);
+      return this;
+    }
+
+    public APIRequestUpdate setIsPublished (Boolean isPublished) {
+      this.setParam("is_published", isPublished);
+      return this;
+    }
+    public APIRequestUpdate setIsPublished (String isPublished) {
+      this.setParam("is_published", isPublished);
+      return this;
+    }
+
+    public APIRequestUpdate setMessage (String message) {
+      this.setParam("message", message);
       return this;
     }
 
     public APIRequestUpdate setOgActionTypeId (String ogActionTypeId) {
       this.setParam("og_action_type_id", ogActionTypeId);
+      return this;
+    }
+
+    public APIRequestUpdate setOgHideObjectAttachment (Boolean ogHideObjectAttachment) {
+      this.setParam("og_hide_object_attachment", ogHideObjectAttachment);
+      return this;
+    }
+    public APIRequestUpdate setOgHideObjectAttachment (String ogHideObjectAttachment) {
+      this.setParam("og_hide_object_attachment", ogHideObjectAttachment);
+      return this;
+    }
+
+    public APIRequestUpdate setOgIconId (String ogIconId) {
+      this.setParam("og_icon_id", ogIconId);
       return this;
     }
 
@@ -6862,40 +6883,17 @@ public class Post extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setOgIconId (String ogIconId) {
-      this.setParam("og_icon_id", ogIconId);
-      return this;
-    }
-
-    public APIRequestUpdate setOgSuggestionMechanism (String ogSuggestionMechanism) {
-      this.setParam("og_suggestion_mechanism", ogSuggestionMechanism);
-      return this;
-    }
-
-    public APIRequestUpdate setOgHideObjectAttachment (Boolean ogHideObjectAttachment) {
-      this.setParam("og_hide_object_attachment", ogHideObjectAttachment);
-      return this;
-    }
-    public APIRequestUpdate setOgHideObjectAttachment (String ogHideObjectAttachment) {
-      this.setParam("og_hide_object_attachment", ogHideObjectAttachment);
-      return this;
-    }
-
-    public APIRequestUpdate setTags (List<Long> tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-    public APIRequestUpdate setTags (String tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-
     public APIRequestUpdate setOgSetProfileBadge (Boolean ogSetProfileBadge) {
       this.setParam("og_set_profile_badge", ogSetProfileBadge);
       return this;
     }
     public APIRequestUpdate setOgSetProfileBadge (String ogSetProfileBadge) {
       this.setParam("og_set_profile_badge", ogSetProfileBadge);
+      return this;
+    }
+
+    public APIRequestUpdate setOgSuggestionMechanism (String ogSuggestionMechanism) {
+      this.setParam("og_suggestion_mechanism", ogSuggestionMechanism);
       return this;
     }
 
@@ -6908,12 +6906,8 @@ public class Post extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setIsExplicitLocation (Boolean isExplicitLocation) {
-      this.setParam("is_explicit_location", isExplicitLocation);
-      return this;
-    }
-    public APIRequestUpdate setIsExplicitLocation (String isExplicitLocation) {
-      this.setParam("is_explicit_location", isExplicitLocation);
+    public APIRequestUpdate setPrivacy (String privacy) {
+      this.setParam("privacy", privacy);
       return this;
     }
 
@@ -6926,6 +6920,15 @@ public class Post extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setScheduledPublishTime (Long scheduledPublishTime) {
+      this.setParam("scheduled_publish_time", scheduledPublishTime);
+      return this;
+    }
+    public APIRequestUpdate setScheduledPublishTime (String scheduledPublishTime) {
+      this.setParam("scheduled_publish_time", scheduledPublishTime);
+      return this;
+    }
+
     public APIRequestUpdate setShouldSyncProductEdit (Boolean shouldSyncProductEdit) {
       this.setParam("should_sync_product_edit", shouldSyncProductEdit);
       return this;
@@ -6935,17 +6938,13 @@ public class Post extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setSponsorId (String sponsorId) {
-      this.setParam("sponsor_id", sponsorId);
+    public APIRequestUpdate setSourceType (String sourceType) {
+      this.setParam("source_type", sourceType);
       return this;
     }
 
-    public APIRequestUpdate setDirectShareStatus (Long directShareStatus) {
-      this.setParam("direct_share_status", directShareStatus);
-      return this;
-    }
-    public APIRequestUpdate setDirectShareStatus (String directShareStatus) {
-      this.setParam("direct_share_status", directShareStatus);
+    public APIRequestUpdate setSponsorId (String sponsorId) {
+      this.setParam("sponsor_id", sponsorId);
       return this;
     }
 
@@ -6958,8 +6957,31 @@ public class Post extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setTags (List<Long> tags) {
+      this.setParam("tags", tags);
+      return this;
+    }
+    public APIRequestUpdate setTags (String tags) {
+      this.setParam("tags", tags);
+      return this;
+    }
+
     public APIRequestUpdate setTextFormatPresetId (String textFormatPresetId) {
       this.setParam("text_format_preset_id", textFormatPresetId);
+      return this;
+    }
+
+    public APIRequestUpdate setTimelineVisibility (Post.EnumTimelineVisibility timelineVisibility) {
+      this.setParam("timeline_visibility", timelineVisibility);
+      return this;
+    }
+    public APIRequestUpdate setTimelineVisibility (String timelineVisibility) {
+      this.setParam("timeline_visibility", timelineVisibility);
+      return this;
+    }
+
+    public APIRequestUpdate setTracking (String tracking) {
+      this.setParam("tracking", tracking);
       return this;
     }
 
@@ -7134,6 +7156,8 @@ public class Post extends APINode {
       VALUE_CALL("CALL"),
       @SerializedName("CALL_ME")
       VALUE_CALL_ME("CALL_ME"),
+      @SerializedName("CONTACT")
+      VALUE_CONTACT("CONTACT"),
       @SerializedName("CONTACT_US")
       VALUE_CONTACT_US("CONTACT_US"),
       @SerializedName("DONATE")
@@ -7144,6 +7168,8 @@ public class Post extends APINode {
       VALUE_DOWNLOAD("DOWNLOAD"),
       @SerializedName("EVENT_RSVP")
       VALUE_EVENT_RSVP("EVENT_RSVP"),
+      @SerializedName("FIND_A_GROUP")
+      VALUE_FIND_A_GROUP("FIND_A_GROUP"),
       @SerializedName("FOLLOW_NEWS_STORYLINE")
       VALUE_FOLLOW_NEWS_STORYLINE("FOLLOW_NEWS_STORYLINE"),
       @SerializedName("GET_DIRECTIONS")
@@ -7268,6 +7294,7 @@ public class Post extends APINode {
     this.mId = instance.mId;
     this.mInstagramEligibility = instance.mInstagramEligibility;
     this.mIsAppShare = instance.mIsAppShare;
+    this.mIsEligibleForPromotion = instance.mIsEligibleForPromotion;
     this.mIsExpired = instance.mIsExpired;
     this.mIsHidden = instance.mIsHidden;
     this.mIsInstagramEligible = instance.mIsInstagramEligible;

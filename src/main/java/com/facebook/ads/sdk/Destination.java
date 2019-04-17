@@ -572,14 +572,14 @@ public class Destination extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "description",
-      "url",
-      "images",
-      "currency",
-      "price",
-      "name",
-      "types",
       "address",
+      "currency",
+      "description",
+      "images",
+      "name",
+      "price",
+      "types",
+      "url",
     };
 
     public static final String[] FIELDS = {
@@ -638,13 +638,22 @@ public class Destination extends APINode {
     }
 
 
-    public APIRequestUpdate setDescription (String description) {
-      this.setParam("description", description);
+    public APIRequestUpdate setAddress (Object address) {
+      this.setParam("address", address);
+      return this;
+    }
+    public APIRequestUpdate setAddress (String address) {
+      this.setParam("address", address);
       return this;
     }
 
-    public APIRequestUpdate setUrl (String url) {
-      this.setParam("url", url);
+    public APIRequestUpdate setCurrency (String currency) {
+      this.setParam("currency", currency);
+      return this;
+    }
+
+    public APIRequestUpdate setDescription (String description) {
+      this.setParam("description", description);
       return this;
     }
 
@@ -657,8 +666,8 @@ public class Destination extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setCurrency (String currency) {
-      this.setParam("currency", currency);
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
       return this;
     }
 
@@ -671,22 +680,13 @@ public class Destination extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
     public APIRequestUpdate setTypes (String types) {
       this.setParam("types", types);
       return this;
     }
 
-    public APIRequestUpdate setAddress (Object address) {
-      this.setParam("address", address);
-      return this;
-    }
-    public APIRequestUpdate setAddress (String address) {
-      this.setParam("address", address);
+    public APIRequestUpdate setUrl (String url) {
+      this.setParam("url", url);
       return this;
     }
 

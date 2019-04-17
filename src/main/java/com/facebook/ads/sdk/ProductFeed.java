@@ -3931,13 +3931,13 @@ public class ProductFeed extends APINode {
     }
     public static final String[] PARAMS = {
       "default_currency",
+      "deletion_enabled",
       "delimiter",
       "encoding",
       "name",
       "quoted_fields_mode",
       "schedule",
       "update_schedule",
-      "deletion_enabled",
     };
 
     public static final String[] FIELDS = {
@@ -4001,6 +4001,15 @@ public class ProductFeed extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setDeletionEnabled (Boolean deletionEnabled) {
+      this.setParam("deletion_enabled", deletionEnabled);
+      return this;
+    }
+    public APIRequestUpdate setDeletionEnabled (String deletionEnabled) {
+      this.setParam("deletion_enabled", deletionEnabled);
+      return this;
+    }
+
     public APIRequestUpdate setDelimiter (ProductFeed.EnumDelimiter delimiter) {
       this.setParam("delimiter", delimiter);
       return this;
@@ -4040,15 +4049,6 @@ public class ProductFeed extends APINode {
 
     public APIRequestUpdate setUpdateSchedule (String updateSchedule) {
       this.setParam("update_schedule", updateSchedule);
-      return this;
-    }
-
-    public APIRequestUpdate setDeletionEnabled (Boolean deletionEnabled) {
-      this.setParam("deletion_enabled", deletionEnabled);
-      return this;
-    }
-    public APIRequestUpdate setDeletionEnabled (String deletionEnabled) {
-      this.setParam("deletion_enabled", deletionEnabled);
       return this;
     }
 

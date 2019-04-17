@@ -466,9 +466,9 @@ public class AdRule extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "object_id",
       "action",
       "hide_no_changes",
+      "object_id",
     };
 
     public static final String[] FIELDS = {
@@ -535,11 +535,6 @@ public class AdRule extends APINode {
     }
 
 
-    public APIRequestGetHistory setObjectId (String objectId) {
-      this.setParam("object_id", objectId);
-      return this;
-    }
-
     public APIRequestGetHistory setAction (AdRuleHistory.EnumAction action) {
       this.setParam("action", action);
       return this;
@@ -555,6 +550,11 @@ public class AdRule extends APINode {
     }
     public APIRequestGetHistory setHideNoChanges (String hideNoChanges) {
       this.setParam("hide_no_changes", hideNoChanges);
+      return this;
+    }
+
+    public APIRequestGetHistory setObjectId (String objectId) {
+      this.setParam("object_id", objectId);
       return this;
     }
 
@@ -1054,8 +1054,8 @@ public class AdRule extends APINode {
     public static final String[] PARAMS = {
       "evaluation_spec",
       "execution_spec",
-      "schedule_spec",
       "name",
+      "schedule_spec",
       "status",
     };
 
@@ -1133,17 +1133,17 @@ public class AdRule extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
     public APIRequestUpdate setScheduleSpec (Object scheduleSpec) {
       this.setParam("schedule_spec", scheduleSpec);
       return this;
     }
     public APIRequestUpdate setScheduleSpec (String scheduleSpec) {
       this.setParam("schedule_spec", scheduleSpec);
-      return this;
-    }
-
-    public APIRequestUpdate setName (String name) {
-      this.setParam("name", name);
       return this;
     }
 

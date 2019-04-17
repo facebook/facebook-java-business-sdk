@@ -430,9 +430,9 @@ public class CustomConversion extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "start_time",
       "end_time",
       "event_type",
+      "start_time",
     };
 
     public static final String[] FIELDS = {
@@ -495,11 +495,6 @@ public class CustomConversion extends APINode {
     }
 
 
-    public APIRequestGetActivities setStartTime (String startTime) {
-      this.setParam("start_time", startTime);
-      return this;
-    }
-
     public APIRequestGetActivities setEndTime (String endTime) {
       this.setParam("end_time", endTime);
       return this;
@@ -511,6 +506,11 @@ public class CustomConversion extends APINode {
     }
     public APIRequestGetActivities setEventType (String eventType) {
       this.setParam("event_type", eventType);
+      return this;
+    }
+
+    public APIRequestGetActivities setStartTime (String startTime) {
+      this.setParam("start_time", startTime);
       return this;
     }
 
@@ -732,7 +732,6 @@ public class CustomConversion extends APINode {
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
-      "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
       "funding_source",
@@ -1031,13 +1030,6 @@ public class CustomConversion extends APINode {
     }
     public APIRequestGetAdAccounts requestEndAdvertiserNameField (boolean value) {
       this.requestField("end_advertiser_name", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestExtendedCreditInvoiceGroupField () {
-      return this.requestExtendedCreditInvoiceGroupField(true);
-    }
-    public APIRequestGetAdAccounts requestExtendedCreditInvoiceGroupField (boolean value) {
-      this.requestField("extended_credit_invoice_group", value);
       return this;
     }
     public APIRequestGetAdAccounts requestFailedDeliveryChecksField () {
@@ -1418,9 +1410,9 @@ public class CustomConversion extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "start_time",
-      "end_time",
       "aggregation",
+      "end_time",
+      "start_time",
     };
 
     public static final String[] FIELDS = {
@@ -1482,8 +1474,12 @@ public class CustomConversion extends APINode {
     }
 
 
-    public APIRequestGetStats setStartTime (String startTime) {
-      this.setParam("start_time", startTime);
+    public APIRequestGetStats setAggregation (CustomConversionStatsResult.EnumAggregation aggregation) {
+      this.setParam("aggregation", aggregation);
+      return this;
+    }
+    public APIRequestGetStats setAggregation (String aggregation) {
+      this.setParam("aggregation", aggregation);
       return this;
     }
 
@@ -1492,12 +1488,8 @@ public class CustomConversion extends APINode {
       return this;
     }
 
-    public APIRequestGetStats setAggregation (CustomConversionStatsResult.EnumAggregation aggregation) {
-      this.setParam("aggregation", aggregation);
-      return this;
-    }
-    public APIRequestGetStats setAggregation (String aggregation) {
-      this.setParam("aggregation", aggregation);
+    public APIRequestGetStats setStartTime (String startTime) {
+      this.setParam("start_time", startTime);
       return this;
     }
 
@@ -1928,9 +1920,9 @@ public class CustomConversion extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "name",
       "default_conversion_value",
       "description",
+      "name",
     };
 
     public static final String[] FIELDS = {
@@ -1989,11 +1981,6 @@ public class CustomConversion extends APINode {
     }
 
 
-    public APIRequestUpdate setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
     public APIRequestUpdate setDefaultConversionValue (Double defaultConversionValue) {
       this.setParam("default_conversion_value", defaultConversionValue);
       return this;
@@ -2005,6 +1992,11 @@ public class CustomConversion extends APINode {
 
     public APIRequestUpdate setDescription (String description) {
       this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
       return this;
     }
 

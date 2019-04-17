@@ -2547,15 +2547,15 @@ public class AdStudyObjective extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "adspixels",
+      "applications",
+      "customconversions",
       "is_primary",
       "name",
-      "type",
-      "adspixels",
-      "customconversions",
-      "applications",
-      "offsitepixels",
       "offline_conversion_data_sets",
+      "offsitepixels",
       "product_sets",
+      "type",
     };
 
     public static final String[] FIELDS = {
@@ -2614,6 +2614,33 @@ public class AdStudyObjective extends APINode {
     }
 
 
+    public APIRequestUpdate setAdspixels (List<Object> adspixels) {
+      this.setParam("adspixels", adspixels);
+      return this;
+    }
+    public APIRequestUpdate setAdspixels (String adspixels) {
+      this.setParam("adspixels", adspixels);
+      return this;
+    }
+
+    public APIRequestUpdate setApplications (List<Object> applications) {
+      this.setParam("applications", applications);
+      return this;
+    }
+    public APIRequestUpdate setApplications (String applications) {
+      this.setParam("applications", applications);
+      return this;
+    }
+
+    public APIRequestUpdate setCustomconversions (List<Object> customconversions) {
+      this.setParam("customconversions", customconversions);
+      return this;
+    }
+    public APIRequestUpdate setCustomconversions (String customconversions) {
+      this.setParam("customconversions", customconversions);
+      return this;
+    }
+
     public APIRequestUpdate setIsPrimary (Boolean isPrimary) {
       this.setParam("is_primary", isPrimary);
       return this;
@@ -2628,39 +2655,12 @@ public class AdStudyObjective extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setType (AdStudyObjective.EnumType type) {
-      this.setParam("type", type);
+    public APIRequestUpdate setOfflineConversionDataSets (List<Object> offlineConversionDataSets) {
+      this.setParam("offline_conversion_data_sets", offlineConversionDataSets);
       return this;
     }
-    public APIRequestUpdate setType (String type) {
-      this.setParam("type", type);
-      return this;
-    }
-
-    public APIRequestUpdate setAdspixels (List<Object> adspixels) {
-      this.setParam("adspixels", adspixels);
-      return this;
-    }
-    public APIRequestUpdate setAdspixels (String adspixels) {
-      this.setParam("adspixels", adspixels);
-      return this;
-    }
-
-    public APIRequestUpdate setCustomconversions (List<Object> customconversions) {
-      this.setParam("customconversions", customconversions);
-      return this;
-    }
-    public APIRequestUpdate setCustomconversions (String customconversions) {
-      this.setParam("customconversions", customconversions);
-      return this;
-    }
-
-    public APIRequestUpdate setApplications (List<Object> applications) {
-      this.setParam("applications", applications);
-      return this;
-    }
-    public APIRequestUpdate setApplications (String applications) {
-      this.setParam("applications", applications);
+    public APIRequestUpdate setOfflineConversionDataSets (String offlineConversionDataSets) {
+      this.setParam("offline_conversion_data_sets", offlineConversionDataSets);
       return this;
     }
 
@@ -2673,21 +2673,21 @@ public class AdStudyObjective extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setOfflineConversionDataSets (List<Object> offlineConversionDataSets) {
-      this.setParam("offline_conversion_data_sets", offlineConversionDataSets);
-      return this;
-    }
-    public APIRequestUpdate setOfflineConversionDataSets (String offlineConversionDataSets) {
-      this.setParam("offline_conversion_data_sets", offlineConversionDataSets);
-      return this;
-    }
-
     public APIRequestUpdate setProductSets (List<Object> productSets) {
       this.setParam("product_sets", productSets);
       return this;
     }
     public APIRequestUpdate setProductSets (String productSets) {
       this.setParam("product_sets", productSets);
+      return this;
+    }
+
+    public APIRequestUpdate setType (AdStudyObjective.EnumType type) {
+      this.setParam("type", type);
+      return this;
+    }
+    public APIRequestUpdate setType (String type) {
+      this.setParam("type", type);
       return this;
     }
 

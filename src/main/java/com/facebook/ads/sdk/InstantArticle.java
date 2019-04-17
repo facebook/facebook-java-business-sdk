@@ -341,11 +341,11 @@ public class InstantArticle extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "breakdown",
       "metric",
       "period",
       "since",
       "until",
-      "breakdown",
     };
 
     public static final String[] FIELDS = {
@@ -408,6 +408,15 @@ public class InstantArticle extends APINode {
     }
 
 
+    public APIRequestGetInsights setBreakdown (InstantArticleInsightsQueryResult.EnumBreakdown breakdown) {
+      this.setParam("breakdown", breakdown);
+      return this;
+    }
+    public APIRequestGetInsights setBreakdown (String breakdown) {
+      this.setParam("breakdown", breakdown);
+      return this;
+    }
+
     public APIRequestGetInsights setMetric (List<Object> metric) {
       this.setParam("metric", metric);
       return this;
@@ -433,15 +442,6 @@ public class InstantArticle extends APINode {
 
     public APIRequestGetInsights setUntil (String until) {
       this.setParam("until", until);
-      return this;
-    }
-
-    public APIRequestGetInsights setBreakdown (InstantArticleInsightsQueryResult.EnumBreakdown breakdown) {
-      this.setParam("breakdown", breakdown);
-      return this;
-    }
-    public APIRequestGetInsights setBreakdown (String breakdown) {
-      this.setParam("breakdown", breakdown);
       return this;
     }
 

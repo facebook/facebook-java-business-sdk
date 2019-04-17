@@ -614,22 +614,22 @@ public class LeadGenDataDraft extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "name",
-      "locale",
       "block_display_for_non_targeted_viewer",
-      "follow_up_action_url",
-      "legal_content_id",
-      "context_card_id",
-      "questions",
-      "privacy_policy",
-      "custom_disclaimer",
       "context_card",
+      "context_card_id",
+      "custom_disclaimer",
+      "delete_missing_parameters",
+      "follow_up_action_url",
+      "is_optimized_for_quality",
+      "legal_content_id",
+      "locale",
+      "name",
+      "privacy_policy",
+      "question_page_custom_headline",
+      "questions",
+      "status",
       "thank_you_page",
       "tracking_parameters",
-      "question_page_custom_headline",
-      "is_optimized_for_quality",
-      "status",
-      "delete_missing_parameters",
     };
 
     public static final String[] FIELDS = {
@@ -688,20 +688,6 @@ public class LeadGenDataDraft extends APINode {
     }
 
 
-    public APIRequestUpdate setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestUpdate setLocale (LeadGenDataDraft.EnumLocale locale) {
-      this.setParam("locale", locale);
-      return this;
-    }
-    public APIRequestUpdate setLocale (String locale) {
-      this.setParam("locale", locale);
-      return this;
-    }
-
     public APIRequestUpdate setBlockDisplayForNonTargetedViewer (Boolean blockDisplayForNonTargetedViewer) {
       this.setParam("block_display_for_non_targeted_viewer", blockDisplayForNonTargetedViewer);
       return this;
@@ -711,36 +697,17 @@ public class LeadGenDataDraft extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setFollowUpActionUrl (String followUpActionUrl) {
-      this.setParam("follow_up_action_url", followUpActionUrl);
+    public APIRequestUpdate setContextCard (Object contextCard) {
+      this.setParam("context_card", contextCard);
       return this;
     }
-
-    public APIRequestUpdate setLegalContentId (String legalContentId) {
-      this.setParam("legal_content_id", legalContentId);
+    public APIRequestUpdate setContextCard (String contextCard) {
+      this.setParam("context_card", contextCard);
       return this;
     }
 
     public APIRequestUpdate setContextCardId (String contextCardId) {
       this.setParam("context_card_id", contextCardId);
-      return this;
-    }
-
-    public APIRequestUpdate setQuestions (List<Object> questions) {
-      this.setParam("questions", questions);
-      return this;
-    }
-    public APIRequestUpdate setQuestions (String questions) {
-      this.setParam("questions", questions);
-      return this;
-    }
-
-    public APIRequestUpdate setPrivacyPolicy (Map<String, String> privacyPolicy) {
-      this.setParam("privacy_policy", privacyPolicy);
-      return this;
-    }
-    public APIRequestUpdate setPrivacyPolicy (String privacyPolicy) {
-      this.setParam("privacy_policy", privacyPolicy);
       return this;
     }
 
@@ -753,12 +720,77 @@ public class LeadGenDataDraft extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setContextCard (Object contextCard) {
-      this.setParam("context_card", contextCard);
+    public APIRequestUpdate setDeleteMissingParameters (Boolean deleteMissingParameters) {
+      this.setParam("delete_missing_parameters", deleteMissingParameters);
       return this;
     }
-    public APIRequestUpdate setContextCard (String contextCard) {
-      this.setParam("context_card", contextCard);
+    public APIRequestUpdate setDeleteMissingParameters (String deleteMissingParameters) {
+      this.setParam("delete_missing_parameters", deleteMissingParameters);
+      return this;
+    }
+
+    public APIRequestUpdate setFollowUpActionUrl (String followUpActionUrl) {
+      this.setParam("follow_up_action_url", followUpActionUrl);
+      return this;
+    }
+
+    public APIRequestUpdate setIsOptimizedForQuality (Boolean isOptimizedForQuality) {
+      this.setParam("is_optimized_for_quality", isOptimizedForQuality);
+      return this;
+    }
+    public APIRequestUpdate setIsOptimizedForQuality (String isOptimizedForQuality) {
+      this.setParam("is_optimized_for_quality", isOptimizedForQuality);
+      return this;
+    }
+
+    public APIRequestUpdate setLegalContentId (String legalContentId) {
+      this.setParam("legal_content_id", legalContentId);
+      return this;
+    }
+
+    public APIRequestUpdate setLocale (LeadGenDataDraft.EnumLocale locale) {
+      this.setParam("locale", locale);
+      return this;
+    }
+    public APIRequestUpdate setLocale (String locale) {
+      this.setParam("locale", locale);
+      return this;
+    }
+
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestUpdate setPrivacyPolicy (Map<String, String> privacyPolicy) {
+      this.setParam("privacy_policy", privacyPolicy);
+      return this;
+    }
+    public APIRequestUpdate setPrivacyPolicy (String privacyPolicy) {
+      this.setParam("privacy_policy", privacyPolicy);
+      return this;
+    }
+
+    public APIRequestUpdate setQuestionPageCustomHeadline (String questionPageCustomHeadline) {
+      this.setParam("question_page_custom_headline", questionPageCustomHeadline);
+      return this;
+    }
+
+    public APIRequestUpdate setQuestions (List<Object> questions) {
+      this.setParam("questions", questions);
+      return this;
+    }
+    public APIRequestUpdate setQuestions (String questions) {
+      this.setParam("questions", questions);
+      return this;
+    }
+
+    public APIRequestUpdate setStatus (LeadGenDataDraft.EnumStatus status) {
+      this.setParam("status", status);
+      return this;
+    }
+    public APIRequestUpdate setStatus (String status) {
+      this.setParam("status", status);
       return this;
     }
 
@@ -777,38 +809,6 @@ public class LeadGenDataDraft extends APINode {
     }
     public APIRequestUpdate setTrackingParameters (String trackingParameters) {
       this.setParam("tracking_parameters", trackingParameters);
-      return this;
-    }
-
-    public APIRequestUpdate setQuestionPageCustomHeadline (String questionPageCustomHeadline) {
-      this.setParam("question_page_custom_headline", questionPageCustomHeadline);
-      return this;
-    }
-
-    public APIRequestUpdate setIsOptimizedForQuality (Boolean isOptimizedForQuality) {
-      this.setParam("is_optimized_for_quality", isOptimizedForQuality);
-      return this;
-    }
-    public APIRequestUpdate setIsOptimizedForQuality (String isOptimizedForQuality) {
-      this.setParam("is_optimized_for_quality", isOptimizedForQuality);
-      return this;
-    }
-
-    public APIRequestUpdate setStatus (LeadGenDataDraft.EnumStatus status) {
-      this.setParam("status", status);
-      return this;
-    }
-    public APIRequestUpdate setStatus (String status) {
-      this.setParam("status", status);
-      return this;
-    }
-
-    public APIRequestUpdate setDeleteMissingParameters (Boolean deleteMissingParameters) {
-      this.setParam("delete_missing_parameters", deleteMissingParameters);
-      return this;
-    }
-    public APIRequestUpdate setDeleteMissingParameters (String deleteMissingParameters) {
-      this.setParam("delete_missing_parameters", deleteMissingParameters);
       return this;
     }
 

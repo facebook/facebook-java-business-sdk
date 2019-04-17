@@ -357,7 +357,6 @@ public class EventSourceGroup extends APINode {
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
-      "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
       "funding_source",
@@ -651,13 +650,6 @@ public class EventSourceGroup extends APINode {
     }
     public APIRequestGetSharedAccounts requestEndAdvertiserNameField (boolean value) {
       this.requestField("end_advertiser_name", value);
-      return this;
-    }
-    public APIRequestGetSharedAccounts requestExtendedCreditInvoiceGroupField () {
-      return this.requestExtendedCreditInvoiceGroupField(true);
-    }
-    public APIRequestGetSharedAccounts requestExtendedCreditInvoiceGroupField (boolean value) {
-      this.requestField("extended_credit_invoice_group", value);
       return this;
     }
     public APIRequestGetSharedAccounts requestFailedDeliveryChecksField () {
@@ -1264,8 +1256,8 @@ public class EventSourceGroup extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "user",
       "role",
+      "user",
     };
 
     public static final String[] FIELDS = {
@@ -1324,21 +1316,21 @@ public class EventSourceGroup extends APINode {
     }
 
 
-    public APIRequestCreateUserPermission setUser (Long user) {
-      this.setParam("user", user);
-      return this;
-    }
-    public APIRequestCreateUserPermission setUser (String user) {
-      this.setParam("user", user);
-      return this;
-    }
-
     public APIRequestCreateUserPermission setRole (EventSourceGroup.EnumRole role) {
       this.setParam("role", role);
       return this;
     }
     public APIRequestCreateUserPermission setRole (String role) {
       this.setParam("role", role);
+      return this;
+    }
+
+    public APIRequestCreateUserPermission setUser (Long user) {
+      this.setParam("user", user);
+      return this;
+    }
+    public APIRequestCreateUserPermission setUser (String user) {
+      this.setParam("user", user);
       return this;
     }
 

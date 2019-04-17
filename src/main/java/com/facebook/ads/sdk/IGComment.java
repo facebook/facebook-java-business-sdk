@@ -68,7 +68,7 @@ public class IGComment extends APINode {
   @SerializedName("timestamp")
   private String mTimestamp = null;
   @SerializedName("user")
-  private Object mUser = null;
+  private IGUser mUser = null;
   @SerializedName("username")
   private String mUsername = null;
   protected static Gson gson = null;
@@ -328,7 +328,10 @@ public class IGComment extends APINode {
     return mTimestamp;
   }
 
-  public Object getFieldUser() {
+  public IGUser getFieldUser() {
+    if (mUser != null) {
+      mUser.context = getContext();
+    }
     return mUser;
   }
 

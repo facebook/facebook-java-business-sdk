@@ -600,13 +600,13 @@ public class Flight extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "destination_airport",
-      "origin_airport",
-      "description",
-      "url",
-      "images",
       "currency",
+      "description",
+      "destination_airport",
+      "images",
+      "origin_airport",
       "price",
+      "url",
     };
 
     public static final String[] FIELDS = {
@@ -665,13 +665,8 @@ public class Flight extends APINode {
     }
 
 
-    public APIRequestUpdate setDestinationAirport (String destinationAirport) {
-      this.setParam("destination_airport", destinationAirport);
-      return this;
-    }
-
-    public APIRequestUpdate setOriginAirport (String originAirport) {
-      this.setParam("origin_airport", originAirport);
+    public APIRequestUpdate setCurrency (String currency) {
+      this.setParam("currency", currency);
       return this;
     }
 
@@ -680,8 +675,8 @@ public class Flight extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setUrl (String url) {
-      this.setParam("url", url);
+    public APIRequestUpdate setDestinationAirport (String destinationAirport) {
+      this.setParam("destination_airport", destinationAirport);
       return this;
     }
 
@@ -694,8 +689,8 @@ public class Flight extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setCurrency (String currency) {
-      this.setParam("currency", currency);
+    public APIRequestUpdate setOriginAirport (String originAirport) {
+      this.setParam("origin_airport", originAirport);
       return this;
     }
 
@@ -705,6 +700,11 @@ public class Flight extends APINode {
     }
     public APIRequestUpdate setPrice (String price) {
       this.setParam("price", price);
+      return this;
+    }
+
+    public APIRequestUpdate setUrl (String url) {
+      this.setParam("url", url);
       return this;
     }
 

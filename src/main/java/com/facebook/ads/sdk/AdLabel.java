@@ -366,6 +366,7 @@ public class AdLabel extends APINode {
       "instagram_actor_id",
       "instagram_permalink_url",
       "instagram_story_id",
+      "interactive_components_spec",
       "link_deep_link_url",
       "link_og_id",
       "link_url",
@@ -669,6 +670,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdCreatives requestInstagramStoryIdField (boolean value) {
       this.requestField("instagram_story_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestInteractiveComponentsSpecField () {
+      return this.requestInteractiveComponentsSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestInteractiveComponentsSpecField (boolean value) {
+      this.requestField("interactive_components_spec", value);
       return this;
     }
     public APIRequestGetAdCreatives requestLinkDeepLinkUrlField () {

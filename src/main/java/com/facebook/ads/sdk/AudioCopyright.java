@@ -558,13 +558,13 @@ public class AudioCopyright extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "update_source",
-      "match_rule",
-      "ownership_countries",
-      "whitelisted_fb_users",
-      "whitelisted_ig_users",
       "append_excluded_ownership_segments",
       "excluded_ownership_segments",
+      "match_rule",
+      "ownership_countries",
+      "update_source",
+      "whitelisted_fb_users",
+      "whitelisted_ig_users",
     };
 
     public static final String[] FIELDS = {
@@ -623,12 +623,21 @@ public class AudioCopyright extends APINode {
     }
 
 
-    public APIRequestUpdate setUpdateSource (AudioCopyright.EnumUpdateSource updateSource) {
-      this.setParam("update_source", updateSource);
+    public APIRequestUpdate setAppendExcludedOwnershipSegments (Boolean appendExcludedOwnershipSegments) {
+      this.setParam("append_excluded_ownership_segments", appendExcludedOwnershipSegments);
       return this;
     }
-    public APIRequestUpdate setUpdateSource (String updateSource) {
-      this.setParam("update_source", updateSource);
+    public APIRequestUpdate setAppendExcludedOwnershipSegments (String appendExcludedOwnershipSegments) {
+      this.setParam("append_excluded_ownership_segments", appendExcludedOwnershipSegments);
+      return this;
+    }
+
+    public APIRequestUpdate setExcludedOwnershipSegments (List<Object> excludedOwnershipSegments) {
+      this.setParam("excluded_ownership_segments", excludedOwnershipSegments);
+      return this;
+    }
+    public APIRequestUpdate setExcludedOwnershipSegments (String excludedOwnershipSegments) {
+      this.setParam("excluded_ownership_segments", excludedOwnershipSegments);
       return this;
     }
 
@@ -643,6 +652,15 @@ public class AudioCopyright extends APINode {
     }
     public APIRequestUpdate setOwnershipCountries (String ownershipCountries) {
       this.setParam("ownership_countries", ownershipCountries);
+      return this;
+    }
+
+    public APIRequestUpdate setUpdateSource (AudioCopyright.EnumUpdateSource updateSource) {
+      this.setParam("update_source", updateSource);
+      return this;
+    }
+    public APIRequestUpdate setUpdateSource (String updateSource) {
+      this.setParam("update_source", updateSource);
       return this;
     }
 
@@ -661,24 +679,6 @@ public class AudioCopyright extends APINode {
     }
     public APIRequestUpdate setWhitelistedIgUsers (String whitelistedIgUsers) {
       this.setParam("whitelisted_ig_users", whitelistedIgUsers);
-      return this;
-    }
-
-    public APIRequestUpdate setAppendExcludedOwnershipSegments (Boolean appendExcludedOwnershipSegments) {
-      this.setParam("append_excluded_ownership_segments", appendExcludedOwnershipSegments);
-      return this;
-    }
-    public APIRequestUpdate setAppendExcludedOwnershipSegments (String appendExcludedOwnershipSegments) {
-      this.setParam("append_excluded_ownership_segments", appendExcludedOwnershipSegments);
-      return this;
-    }
-
-    public APIRequestUpdate setExcludedOwnershipSegments (List<Object> excludedOwnershipSegments) {
-      this.setParam("excluded_ownership_segments", excludedOwnershipSegments);
-      return this;
-    }
-    public APIRequestUpdate setExcludedOwnershipSegments (String excludedOwnershipSegments) {
-      this.setParam("excluded_ownership_segments", excludedOwnershipSegments);
       return this;
     }
 

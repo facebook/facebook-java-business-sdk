@@ -530,8 +530,6 @@ public class OwnedDomain extends APINode {
   public static enum EnumPermittedRoles {
       @SerializedName("ADMIN")
       VALUE_ADMIN("ADMIN"),
-      @SerializedName("WEBMASTER_DEVELOPER")
-      VALUE_WEBMASTER_DEVELOPER("WEBMASTER_DEVELOPER"),
       NULL(null);
 
       private String value;

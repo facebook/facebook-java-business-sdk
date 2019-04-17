@@ -105,8 +105,6 @@ public class AdAccount extends APINode {
   private String mEndAdvertiser = null;
   @SerializedName("end_advertiser_name")
   private String mEndAdvertiserName = null;
-  @SerializedName("extended_credit_invoice_group")
-  private ExtendedCreditInvoiceGroup mExtendedCreditInvoiceGroup = null;
   @SerializedName("failed_delivery_checks")
   private List<DeliveryCheck> mFailedDeliveryChecks = null;
   @SerializedName("fb_entity")
@@ -1015,13 +1013,6 @@ public class AdAccount extends APINode {
     return mEndAdvertiserName;
   }
 
-  public ExtendedCreditInvoiceGroup getFieldExtendedCreditInvoiceGroup() {
-    if (mExtendedCreditInvoiceGroup != null) {
-      mExtendedCreditInvoiceGroup.context = getContext();
-    }
-    return mExtendedCreditInvoiceGroup;
-  }
-
   public List<DeliveryCheck> getFieldFailedDeliveryChecks() {
     return mFailedDeliveryChecks;
   }
@@ -1176,16 +1167,16 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "after",
-      "limit",
-      "since",
-      "category",
-      "until",
-      "uid",
-      "business_id",
-      "oid",
-      "extra_oids",
       "add_children",
+      "after",
+      "business_id",
+      "category",
+      "extra_oids",
+      "limit",
+      "oid",
+      "since",
+      "uid",
+      "until",
     };
 
     public static final String[] FIELDS = {
@@ -1256,22 +1247,22 @@ public class AdAccount extends APINode {
     }
 
 
+    public APIRequestGetActivities setAddChildren (Boolean addChildren) {
+      this.setParam("add_children", addChildren);
+      return this;
+    }
+    public APIRequestGetActivities setAddChildren (String addChildren) {
+      this.setParam("add_children", addChildren);
+      return this;
+    }
+
     public APIRequestGetActivities setAfter (String after) {
       this.setParam("after", after);
       return this;
     }
 
-    public APIRequestGetActivities setLimit (Long limit) {
-      this.setParam("limit", limit);
-      return this;
-    }
-    public APIRequestGetActivities setLimit (String limit) {
-      this.setParam("limit", limit);
-      return this;
-    }
-
-    public APIRequestGetActivities setSince (String since) {
-      this.setParam("since", since);
+    public APIRequestGetActivities setBusinessId (String businessId) {
+      this.setParam("business_id", businessId);
       return this;
     }
 
@@ -1284,8 +1275,31 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestGetActivities setUntil (String until) {
-      this.setParam("until", until);
+    public APIRequestGetActivities setExtraOids (List<String> extraOids) {
+      this.setParam("extra_oids", extraOids);
+      return this;
+    }
+    public APIRequestGetActivities setExtraOids (String extraOids) {
+      this.setParam("extra_oids", extraOids);
+      return this;
+    }
+
+    public APIRequestGetActivities setLimit (Long limit) {
+      this.setParam("limit", limit);
+      return this;
+    }
+    public APIRequestGetActivities setLimit (String limit) {
+      this.setParam("limit", limit);
+      return this;
+    }
+
+    public APIRequestGetActivities setOid (String oid) {
+      this.setParam("oid", oid);
+      return this;
+    }
+
+    public APIRequestGetActivities setSince (String since) {
+      this.setParam("since", since);
       return this;
     }
 
@@ -1298,31 +1312,8 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestGetActivities setBusinessId (String businessId) {
-      this.setParam("business_id", businessId);
-      return this;
-    }
-
-    public APIRequestGetActivities setOid (String oid) {
-      this.setParam("oid", oid);
-      return this;
-    }
-
-    public APIRequestGetActivities setExtraOids (List<String> extraOids) {
-      this.setParam("extra_oids", extraOids);
-      return this;
-    }
-    public APIRequestGetActivities setExtraOids (String extraOids) {
-      this.setParam("extra_oids", extraOids);
-      return this;
-    }
-
-    public APIRequestGetActivities setAddChildren (Boolean addChildren) {
-      this.setParam("add_children", addChildren);
-      return this;
-    }
-    public APIRequestGetActivities setAddChildren (String addChildren) {
-      this.setParam("add_children", addChildren);
+    public APIRequestGetActivities setUntil (String until) {
+      this.setParam("until", until);
       return this;
     }
 
@@ -1608,8 +1599,8 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "name",
       "location_types",
+      "name",
       "parent_page",
       "targeted_area_type",
     };
@@ -1670,17 +1661,17 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestCreateAdPlacePageSet setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
     public APIRequestCreateAdPlacePageSet setLocationTypes (List<AdPlacePageSet.EnumLocationTypes> locationTypes) {
       this.setParam("location_types", locationTypes);
       return this;
     }
     public APIRequestCreateAdPlacePageSet setLocationTypes (String locationTypes) {
       this.setParam("location_types", locationTypes);
+      return this;
+    }
+
+    public APIRequestCreateAdPlacePageSet setName (String name) {
+      this.setParam("name", name);
       return this;
     }
 
@@ -2438,6 +2429,7 @@ public class AdAccount extends APINode {
       "instagram_actor_id",
       "instagram_permalink_url",
       "instagram_story_id",
+      "interactive_components_spec",
       "link_deep_link_url",
       "link_og_id",
       "link_url",
@@ -2743,6 +2735,13 @@ public class AdAccount extends APINode {
       this.requestField("instagram_story_id", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestInteractiveComponentsSpecField () {
+      return this.requestInteractiveComponentsSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestInteractiveComponentsSpecField (boolean value) {
+      this.requestField("interactive_components_spec", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestLinkDeepLinkUrlField () {
       return this.requestLinkDeepLinkUrlField(true);
     }
@@ -2933,15 +2932,14 @@ public class AdAccount extends APINode {
       "applink_treatment",
       "asset_feed_spec",
       "authorization_category",
-      "is_dco_internal",
       "body",
       "branded_content_sponsor_page_id",
       "bundle_folder_id",
+      "call_to_action",
       "categorization_criteria",
       "category_media_source",
-      "call_to_action",
-      "dynamic_ad_voice",
       "destination_set_id",
+      "dynamic_ad_voice",
       "enable_direct_install",
       "enable_launch_instant_app",
       "image_crops",
@@ -2950,27 +2948,28 @@ public class AdAccount extends APINode {
       "image_url",
       "instagram_actor_id",
       "instagram_permalink_url",
-      "portrait_customizations",
       "interactive_components_spec",
+      "is_dco_internal",
       "link_og_id",
       "link_url",
+      "messenger_sponsored_message",
       "name",
       "object_id",
       "object_story_id",
+      "object_story_spec",
       "object_type",
       "object_url",
       "platform_customizations",
       "playable_asset_id",
+      "portrait_customizations",
       "product_set_id",
       "recommender_settings",
-      "messenger_sponsored_message",
       "template_url",
       "template_url_spec",
       "thumbnail_url",
       "title",
       "url_tags",
       "use_page_actor_override",
-      "object_story_spec",
     };
 
     public static final String[] FIELDS = {
@@ -3074,15 +3073,6 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdCreative setIsDcoInternal (Boolean isDcoInternal) {
-      this.setParam("is_dco_internal", isDcoInternal);
-      return this;
-    }
-    public APIRequestCreateAdCreative setIsDcoInternal (String isDcoInternal) {
-      this.setParam("is_dco_internal", isDcoInternal);
-      return this;
-    }
-
     public APIRequestCreateAdCreative setBody (String body) {
       this.setParam("body", body);
       return this;
@@ -3095,6 +3085,15 @@ public class AdAccount extends APINode {
 
     public APIRequestCreateAdCreative setBundleFolderId (String bundleFolderId) {
       this.setParam("bundle_folder_id", bundleFolderId);
+      return this;
+    }
+
+    public APIRequestCreateAdCreative setCallToAction (Object callToAction) {
+      this.setParam("call_to_action", callToAction);
+      return this;
+    }
+    public APIRequestCreateAdCreative setCallToAction (String callToAction) {
+      this.setParam("call_to_action", callToAction);
       return this;
     }
 
@@ -3116,12 +3115,8 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdCreative setCallToAction (Object callToAction) {
-      this.setParam("call_to_action", callToAction);
-      return this;
-    }
-    public APIRequestCreateAdCreative setCallToAction (String callToAction) {
-      this.setParam("call_to_action", callToAction);
+    public APIRequestCreateAdCreative setDestinationSetId (String destinationSetId) {
+      this.setParam("destination_set_id", destinationSetId);
       return this;
     }
 
@@ -3131,11 +3126,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdCreative setDynamicAdVoice (String dynamicAdVoice) {
       this.setParam("dynamic_ad_voice", dynamicAdVoice);
-      return this;
-    }
-
-    public APIRequestCreateAdCreative setDestinationSetId (String destinationSetId) {
-      this.setParam("destination_set_id", destinationSetId);
       return this;
     }
 
@@ -3191,21 +3181,21 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdCreative setPortraitCustomizations (Map<String, String> portraitCustomizations) {
-      this.setParam("portrait_customizations", portraitCustomizations);
-      return this;
-    }
-    public APIRequestCreateAdCreative setPortraitCustomizations (String portraitCustomizations) {
-      this.setParam("portrait_customizations", portraitCustomizations);
-      return this;
-    }
-
     public APIRequestCreateAdCreative setInteractiveComponentsSpec (Map<String, String> interactiveComponentsSpec) {
       this.setParam("interactive_components_spec", interactiveComponentsSpec);
       return this;
     }
     public APIRequestCreateAdCreative setInteractiveComponentsSpec (String interactiveComponentsSpec) {
       this.setParam("interactive_components_spec", interactiveComponentsSpec);
+      return this;
+    }
+
+    public APIRequestCreateAdCreative setIsDcoInternal (Boolean isDcoInternal) {
+      this.setParam("is_dco_internal", isDcoInternal);
+      return this;
+    }
+    public APIRequestCreateAdCreative setIsDcoInternal (String isDcoInternal) {
+      this.setParam("is_dco_internal", isDcoInternal);
       return this;
     }
 
@@ -3216,6 +3206,11 @@ public class AdAccount extends APINode {
 
     public APIRequestCreateAdCreative setLinkUrl (String linkUrl) {
       this.setParam("link_url", linkUrl);
+      return this;
+    }
+
+    public APIRequestCreateAdCreative setMessengerSponsoredMessage (String messengerSponsoredMessage) {
+      this.setParam("messenger_sponsored_message", messengerSponsoredMessage);
       return this;
     }
 
@@ -3235,6 +3230,15 @@ public class AdAccount extends APINode {
 
     public APIRequestCreateAdCreative setObjectStoryId (String objectStoryId) {
       this.setParam("object_story_id", objectStoryId);
+      return this;
+    }
+
+    public APIRequestCreateAdCreative setObjectStorySpec (AdCreativeObjectStorySpec objectStorySpec) {
+      this.setParam("object_story_spec", objectStorySpec);
+      return this;
+    }
+    public APIRequestCreateAdCreative setObjectStorySpec (String objectStorySpec) {
+      this.setParam("object_story_spec", objectStorySpec);
       return this;
     }
 
@@ -3262,6 +3266,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdCreative setPortraitCustomizations (Map<String, String> portraitCustomizations) {
+      this.setParam("portrait_customizations", portraitCustomizations);
+      return this;
+    }
+    public APIRequestCreateAdCreative setPortraitCustomizations (String portraitCustomizations) {
+      this.setParam("portrait_customizations", portraitCustomizations);
+      return this;
+    }
+
     public APIRequestCreateAdCreative setProductSetId (String productSetId) {
       this.setParam("product_set_id", productSetId);
       return this;
@@ -3273,11 +3286,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdCreative setRecommenderSettings (String recommenderSettings) {
       this.setParam("recommender_settings", recommenderSettings);
-      return this;
-    }
-
-    public APIRequestCreateAdCreative setMessengerSponsoredMessage (String messengerSponsoredMessage) {
-      this.setParam("messenger_sponsored_message", messengerSponsoredMessage);
       return this;
     }
 
@@ -3316,15 +3324,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdCreative setUsePageActorOverride (String usePageActorOverride) {
       this.setParam("use_page_actor_override", usePageActorOverride);
-      return this;
-    }
-
-    public APIRequestCreateAdCreative setObjectStorySpec (AdCreativeObjectStorySpec objectStorySpec) {
-      this.setParam("object_story_spec", objectStorySpec);
-      return this;
-    }
-    public APIRequestCreateAdCreative setObjectStorySpec (String objectStorySpec) {
-      this.setParam("object_story_spec", objectStorySpec);
       return this;
     }
 
@@ -3522,6 +3521,7 @@ public class AdAccount extends APINode {
       "instagram_actor_id",
       "instagram_permalink_url",
       "instagram_story_id",
+      "interactive_components_spec",
       "link_deep_link_url",
       "link_og_id",
       "link_url",
@@ -3845,6 +3845,13 @@ public class AdAccount extends APINode {
       this.requestField("instagram_story_id", value);
       return this;
     }
+    public APIRequestGetAdCreativesByLabels requestInteractiveComponentsSpecField () {
+      return this.requestInteractiveComponentsSpecField(true);
+    }
+    public APIRequestGetAdCreativesByLabels requestInteractiveComponentsSpecField (boolean value) {
+      this.requestField("interactive_components_spec", value);
+      return this;
+    }
     public APIRequestGetAdCreativesByLabels requestLinkDeepLinkUrlField () {
       return this.requestLinkDeepLinkUrlField(true);
     }
@@ -4140,12 +4147,12 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "hashes",
-      "minwidth",
-      "minheight",
-      "name",
       "biz_tag_id",
       "business_id",
+      "hashes",
+      "minheight",
+      "minwidth",
+      "name",
     };
 
     public static final String[] FIELDS = {
@@ -4220,21 +4227,26 @@ public class AdAccount extends APINode {
     }
 
 
+    public APIRequestGetAdImages setBizTagId (Long bizTagId) {
+      this.setParam("biz_tag_id", bizTagId);
+      return this;
+    }
+    public APIRequestGetAdImages setBizTagId (String bizTagId) {
+      this.setParam("biz_tag_id", bizTagId);
+      return this;
+    }
+
+    public APIRequestGetAdImages setBusinessId (String businessId) {
+      this.setParam("business_id", businessId);
+      return this;
+    }
+
     public APIRequestGetAdImages setHashes (List<String> hashes) {
       this.setParam("hashes", hashes);
       return this;
     }
     public APIRequestGetAdImages setHashes (String hashes) {
       this.setParam("hashes", hashes);
-      return this;
-    }
-
-    public APIRequestGetAdImages setMinwidth (Long minwidth) {
-      this.setParam("minwidth", minwidth);
-      return this;
-    }
-    public APIRequestGetAdImages setMinwidth (String minwidth) {
-      this.setParam("minwidth", minwidth);
       return this;
     }
 
@@ -4247,22 +4259,17 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetAdImages setMinwidth (Long minwidth) {
+      this.setParam("minwidth", minwidth);
+      return this;
+    }
+    public APIRequestGetAdImages setMinwidth (String minwidth) {
+      this.setParam("minwidth", minwidth);
+      return this;
+    }
+
     public APIRequestGetAdImages setName (String name) {
       this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestGetAdImages setBizTagId (Long bizTagId) {
-      this.setParam("biz_tag_id", bizTagId);
-      return this;
-    }
-    public APIRequestGetAdImages setBizTagId (String bizTagId) {
-      this.setParam("biz_tag_id", bizTagId);
-      return this;
-    }
-
-    public APIRequestGetAdImages setBusinessId (String businessId) {
-      this.setParam("business_id", businessId);
       return this;
     }
 
@@ -4930,11 +4937,11 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "app_id",
       "name",
       "source",
       "source_url",
       "source_zip",
-      "app_id",
     };
 
     public static final String[] FIELDS = {
@@ -4993,6 +5000,11 @@ public class AdAccount extends APINode {
     }
 
 
+    public APIRequestCreateAdPlayable setAppId (String appId) {
+      this.setParam("app_id", appId);
+      return this;
+    }
+
     public APIRequestCreateAdPlayable setName (String name) {
       this.setParam("name", name);
       return this;
@@ -5018,11 +5030,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdPlayable setSourceZip (String sourceZip) {
       this.setParam("source_zip", sourceZip);
-      return this;
-    }
-
-    public APIRequestCreateAdPlayable setAppId (String appId) {
-      this.setParam("app_id", appId);
       return this;
     }
 
@@ -5488,33 +5495,33 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "name",
-      "user_columns",
-      "user_attribution_windows",
-      "builtin_column_set",
-      "normalized_filter",
-      "user_filter",
-      "sort",
-      "breakdowns",
-      "insights_section",
-      "level",
-      "date_preset",
-      "date_interval",
-      "format_version",
-      "creation_source",
       "actions_group_by",
+      "breakdowns",
+      "builtin_column_set",
+      "creation_source",
       "custom_column_set_id",
       "data_columns",
+      "date_interval",
+      "date_preset",
       "emails",
       "export_columns",
       "filters",
+      "format_version",
+      "insights_section",
+      "level",
+      "name",
+      "normalized_filter",
       "schedule_frequency",
+      "sort",
       "sort_by",
       "sort_dir",
       "start_date",
       "status",
       "subscribers",
       "time_increment",
+      "user_attribution_windows",
+      "user_columns",
+      "user_filter",
     };
 
     public static final String[] FIELDS = {
@@ -5573,62 +5580,12 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestCreateAdReportSchedule setName (String name) {
-      this.setParam("name", name);
+    public APIRequestCreateAdReportSchedule setActionsGroupBy (List<EnumActionsGroupBy> actionsGroupBy) {
+      this.setParam("actions_group_by", actionsGroupBy);
       return this;
     }
-
-    public APIRequestCreateAdReportSchedule setUserColumns (List<String> userColumns) {
-      this.setParam("user_columns", userColumns);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setUserColumns (String userColumns) {
-      this.setParam("user_columns", userColumns);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setUserAttributionWindows (List<String> userAttributionWindows) {
-      this.setParam("user_attribution_windows", userAttributionWindows);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setUserAttributionWindows (String userAttributionWindows) {
-      this.setParam("user_attribution_windows", userAttributionWindows);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setBuiltinColumnSet (EnumBuiltinColumnSet builtinColumnSet) {
-      this.setParam("builtin_column_set", builtinColumnSet);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setBuiltinColumnSet (String builtinColumnSet) {
-      this.setParam("builtin_column_set", builtinColumnSet);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setNormalizedFilter (List<Object> normalizedFilter) {
-      this.setParam("normalized_filter", normalizedFilter);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setNormalizedFilter (String normalizedFilter) {
-      this.setParam("normalized_filter", normalizedFilter);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setUserFilter (List<Object> userFilter) {
-      this.setParam("user_filter", userFilter);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setUserFilter (String userFilter) {
-      this.setParam("user_filter", userFilter);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setSort (List<Object> sort) {
-      this.setParam("sort", sort);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setSort (String sort) {
-      this.setParam("sort", sort);
+    public APIRequestCreateAdReportSchedule setActionsGroupBy (String actionsGroupBy) {
+      this.setParam("actions_group_by", actionsGroupBy);
       return this;
     }
 
@@ -5641,48 +5598,12 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdReportSchedule setInsightsSection (Object insightsSection) {
-      this.setParam("insights_section", insightsSection);
+    public APIRequestCreateAdReportSchedule setBuiltinColumnSet (EnumBuiltinColumnSet builtinColumnSet) {
+      this.setParam("builtin_column_set", builtinColumnSet);
       return this;
     }
-    public APIRequestCreateAdReportSchedule setInsightsSection (String insightsSection) {
-      this.setParam("insights_section", insightsSection);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setLevel (EnumLevel level) {
-      this.setParam("level", level);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setLevel (String level) {
-      this.setParam("level", level);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setDatePreset (EnumDatePreset datePreset) {
-      this.setParam("date_preset", datePreset);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setDatePreset (String datePreset) {
-      this.setParam("date_preset", datePreset);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setDateInterval (Object dateInterval) {
-      this.setParam("date_interval", dateInterval);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setDateInterval (String dateInterval) {
-      this.setParam("date_interval", dateInterval);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setFormatVersion (Long formatVersion) {
-      this.setParam("format_version", formatVersion);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setFormatVersion (String formatVersion) {
-      this.setParam("format_version", formatVersion);
+    public APIRequestCreateAdReportSchedule setBuiltinColumnSet (String builtinColumnSet) {
+      this.setParam("builtin_column_set", builtinColumnSet);
       return this;
     }
 
@@ -5692,15 +5613,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdReportSchedule setCreationSource (String creationSource) {
       this.setParam("creation_source", creationSource);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setActionsGroupBy (List<EnumActionsGroupBy> actionsGroupBy) {
-      this.setParam("actions_group_by", actionsGroupBy);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setActionsGroupBy (String actionsGroupBy) {
-      this.setParam("actions_group_by", actionsGroupBy);
       return this;
     }
 
@@ -5715,6 +5627,24 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdReportSchedule setDataColumns (String dataColumns) {
       this.setParam("data_columns", dataColumns);
+      return this;
+    }
+
+    public APIRequestCreateAdReportSchedule setDateInterval (Object dateInterval) {
+      this.setParam("date_interval", dateInterval);
+      return this;
+    }
+    public APIRequestCreateAdReportSchedule setDateInterval (String dateInterval) {
+      this.setParam("date_interval", dateInterval);
+      return this;
+    }
+
+    public APIRequestCreateAdReportSchedule setDatePreset (EnumDatePreset datePreset) {
+      this.setParam("date_preset", datePreset);
+      return this;
+    }
+    public APIRequestCreateAdReportSchedule setDatePreset (String datePreset) {
+      this.setParam("date_preset", datePreset);
       return this;
     }
 
@@ -5745,12 +5675,62 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdReportSchedule setFormatVersion (Long formatVersion) {
+      this.setParam("format_version", formatVersion);
+      return this;
+    }
+    public APIRequestCreateAdReportSchedule setFormatVersion (String formatVersion) {
+      this.setParam("format_version", formatVersion);
+      return this;
+    }
+
+    public APIRequestCreateAdReportSchedule setInsightsSection (Object insightsSection) {
+      this.setParam("insights_section", insightsSection);
+      return this;
+    }
+    public APIRequestCreateAdReportSchedule setInsightsSection (String insightsSection) {
+      this.setParam("insights_section", insightsSection);
+      return this;
+    }
+
+    public APIRequestCreateAdReportSchedule setLevel (EnumLevel level) {
+      this.setParam("level", level);
+      return this;
+    }
+    public APIRequestCreateAdReportSchedule setLevel (String level) {
+      this.setParam("level", level);
+      return this;
+    }
+
+    public APIRequestCreateAdReportSchedule setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateAdReportSchedule setNormalizedFilter (List<Object> normalizedFilter) {
+      this.setParam("normalized_filter", normalizedFilter);
+      return this;
+    }
+    public APIRequestCreateAdReportSchedule setNormalizedFilter (String normalizedFilter) {
+      this.setParam("normalized_filter", normalizedFilter);
+      return this;
+    }
+
     public APIRequestCreateAdReportSchedule setScheduleFrequency (EnumScheduleFrequency scheduleFrequency) {
       this.setParam("schedule_frequency", scheduleFrequency);
       return this;
     }
     public APIRequestCreateAdReportSchedule setScheduleFrequency (String scheduleFrequency) {
       this.setParam("schedule_frequency", scheduleFrequency);
+      return this;
+    }
+
+    public APIRequestCreateAdReportSchedule setSort (List<Object> sort) {
+      this.setParam("sort", sort);
+      return this;
+    }
+    public APIRequestCreateAdReportSchedule setSort (String sort) {
+      this.setParam("sort", sort);
       return this;
     }
 
@@ -5793,6 +5773,33 @@ public class AdAccount extends APINode {
 
     public APIRequestCreateAdReportSchedule setTimeIncrement (String timeIncrement) {
       this.setParam("time_increment", timeIncrement);
+      return this;
+    }
+
+    public APIRequestCreateAdReportSchedule setUserAttributionWindows (List<String> userAttributionWindows) {
+      this.setParam("user_attribution_windows", userAttributionWindows);
+      return this;
+    }
+    public APIRequestCreateAdReportSchedule setUserAttributionWindows (String userAttributionWindows) {
+      this.setParam("user_attribution_windows", userAttributionWindows);
+      return this;
+    }
+
+    public APIRequestCreateAdReportSchedule setUserColumns (List<String> userColumns) {
+      this.setParam("user_columns", userColumns);
+      return this;
+    }
+    public APIRequestCreateAdReportSchedule setUserColumns (String userColumns) {
+      this.setParam("user_columns", userColumns);
+      return this;
+    }
+
+    public APIRequestCreateAdReportSchedule setUserFilter (List<Object> userFilter) {
+      this.setParam("user_filter", userFilter);
+      return this;
+    }
+    public APIRequestCreateAdReportSchedule setUserFilter (String userFilter) {
+      this.setParam("user_filter", userFilter);
       return this;
     }
 
@@ -5842,27 +5849,27 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "time_ranges",
-      "data_columns",
       "actions_group_by",
+      "business_id",
+      "bypass_async",
+      "creation_source",
+      "data_columns",
+      "date_preset",
+      "export_columns",
       "filters",
+      "format",
+      "format_version",
+      "insights_section",
+      "limit",
+      "name",
+      "report_run_id",
+      "report_schedule_id",
       "sort_by",
       "sort_dir",
       "time_increment",
       "time_interval",
-      "date_preset",
-      "format",
-      "export_columns",
-      "report_run_id",
-      "name",
+      "time_ranges",
       "user_report",
-      "business_id",
-      "limit",
-      "bypass_async",
-      "report_schedule_id",
-      "insights_section",
-      "creation_source",
-      "format_version",
     };
 
     public static final String[] FIELDS = {
@@ -5921,12 +5928,35 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestCreateAdReportSpec setTimeRanges (JsonArray timeRanges) {
-      this.setParam("time_ranges", timeRanges);
+    public APIRequestCreateAdReportSpec setActionsGroupBy (List<AdReportSpec.EnumActionsGroupBy> actionsGroupBy) {
+      this.setParam("actions_group_by", actionsGroupBy);
       return this;
     }
-    public APIRequestCreateAdReportSpec setTimeRanges (String timeRanges) {
-      this.setParam("time_ranges", timeRanges);
+    public APIRequestCreateAdReportSpec setActionsGroupBy (String actionsGroupBy) {
+      this.setParam("actions_group_by", actionsGroupBy);
+      return this;
+    }
+
+    public APIRequestCreateAdReportSpec setBusinessId (String businessId) {
+      this.setParam("business_id", businessId);
+      return this;
+    }
+
+    public APIRequestCreateAdReportSpec setBypassAsync (Boolean bypassAsync) {
+      this.setParam("bypass_async", bypassAsync);
+      return this;
+    }
+    public APIRequestCreateAdReportSpec setBypassAsync (String bypassAsync) {
+      this.setParam("bypass_async", bypassAsync);
+      return this;
+    }
+
+    public APIRequestCreateAdReportSpec setCreationSource (AdReportSpec.EnumCreationSource creationSource) {
+      this.setParam("creation_source", creationSource);
+      return this;
+    }
+    public APIRequestCreateAdReportSpec setCreationSource (String creationSource) {
+      this.setParam("creation_source", creationSource);
       return this;
     }
 
@@ -5939,12 +5969,21 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdReportSpec setActionsGroupBy (List<AdReportSpec.EnumActionsGroupBy> actionsGroupBy) {
-      this.setParam("actions_group_by", actionsGroupBy);
+    public APIRequestCreateAdReportSpec setDatePreset (AdReportSpec.EnumDatePreset datePreset) {
+      this.setParam("date_preset", datePreset);
       return this;
     }
-    public APIRequestCreateAdReportSpec setActionsGroupBy (String actionsGroupBy) {
-      this.setParam("actions_group_by", actionsGroupBy);
+    public APIRequestCreateAdReportSpec setDatePreset (String datePreset) {
+      this.setParam("date_preset", datePreset);
+      return this;
+    }
+
+    public APIRequestCreateAdReportSpec setExportColumns (Object exportColumns) {
+      this.setParam("export_columns", exportColumns);
+      return this;
+    }
+    public APIRequestCreateAdReportSpec setExportColumns (String exportColumns) {
+      this.setParam("export_columns", exportColumns);
       return this;
     }
 
@@ -5954,6 +5993,57 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdReportSpec setFilters (String filters) {
       this.setParam("filters", filters);
+      return this;
+    }
+
+    public APIRequestCreateAdReportSpec setFormat (AdReportSpec.EnumFormat format) {
+      this.setParam("format", format);
+      return this;
+    }
+    public APIRequestCreateAdReportSpec setFormat (String format) {
+      this.setParam("format", format);
+      return this;
+    }
+
+    public APIRequestCreateAdReportSpec setFormatVersion (Long formatVersion) {
+      this.setParam("format_version", formatVersion);
+      return this;
+    }
+    public APIRequestCreateAdReportSpec setFormatVersion (String formatVersion) {
+      this.setParam("format_version", formatVersion);
+      return this;
+    }
+
+    public APIRequestCreateAdReportSpec setInsightsSection (Object insightsSection) {
+      this.setParam("insights_section", insightsSection);
+      return this;
+    }
+    public APIRequestCreateAdReportSpec setInsightsSection (String insightsSection) {
+      this.setParam("insights_section", insightsSection);
+      return this;
+    }
+
+    public APIRequestCreateAdReportSpec setLimit (Long limit) {
+      this.setParam("limit", limit);
+      return this;
+    }
+    public APIRequestCreateAdReportSpec setLimit (String limit) {
+      this.setParam("limit", limit);
+      return this;
+    }
+
+    public APIRequestCreateAdReportSpec setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateAdReportSpec setReportRunId (String reportRunId) {
+      this.setParam("report_run_id", reportRunId);
+      return this;
+    }
+
+    public APIRequestCreateAdReportSpec setReportScheduleId (String reportScheduleId) {
+      this.setParam("report_schedule_id", reportScheduleId);
       return this;
     }
 
@@ -5981,40 +6071,12 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdReportSpec setDatePreset (AdReportSpec.EnumDatePreset datePreset) {
-      this.setParam("date_preset", datePreset);
+    public APIRequestCreateAdReportSpec setTimeRanges (JsonArray timeRanges) {
+      this.setParam("time_ranges", timeRanges);
       return this;
     }
-    public APIRequestCreateAdReportSpec setDatePreset (String datePreset) {
-      this.setParam("date_preset", datePreset);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSpec setFormat (AdReportSpec.EnumFormat format) {
-      this.setParam("format", format);
-      return this;
-    }
-    public APIRequestCreateAdReportSpec setFormat (String format) {
-      this.setParam("format", format);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSpec setExportColumns (Object exportColumns) {
-      this.setParam("export_columns", exportColumns);
-      return this;
-    }
-    public APIRequestCreateAdReportSpec setExportColumns (String exportColumns) {
-      this.setParam("export_columns", exportColumns);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSpec setReportRunId (String reportRunId) {
-      this.setParam("report_run_id", reportRunId);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSpec setName (String name) {
-      this.setParam("name", name);
+    public APIRequestCreateAdReportSpec setTimeRanges (String timeRanges) {
+      this.setParam("time_ranges", timeRanges);
       return this;
     }
 
@@ -6024,61 +6086,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdReportSpec setUserReport (String userReport) {
       this.setParam("user_report", userReport);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSpec setBusinessId (String businessId) {
-      this.setParam("business_id", businessId);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSpec setLimit (Long limit) {
-      this.setParam("limit", limit);
-      return this;
-    }
-    public APIRequestCreateAdReportSpec setLimit (String limit) {
-      this.setParam("limit", limit);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSpec setBypassAsync (Boolean bypassAsync) {
-      this.setParam("bypass_async", bypassAsync);
-      return this;
-    }
-    public APIRequestCreateAdReportSpec setBypassAsync (String bypassAsync) {
-      this.setParam("bypass_async", bypassAsync);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSpec setReportScheduleId (String reportScheduleId) {
-      this.setParam("report_schedule_id", reportScheduleId);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSpec setInsightsSection (Object insightsSection) {
-      this.setParam("insights_section", insightsSection);
-      return this;
-    }
-    public APIRequestCreateAdReportSpec setInsightsSection (String insightsSection) {
-      this.setParam("insights_section", insightsSection);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSpec setCreationSource (AdReportSpec.EnumCreationSource creationSource) {
-      this.setParam("creation_source", creationSource);
-      return this;
-    }
-    public APIRequestCreateAdReportSpec setCreationSource (String creationSource) {
-      this.setParam("creation_source", creationSource);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSpec setFormatVersion (Long formatVersion) {
-      this.setParam("format_version", formatVersion);
-      return this;
-    }
-    public APIRequestCreateAdReportSpec setFormatVersion (String formatVersion) {
-      this.setParam("format_version", formatVersion);
       return this;
     }
 
@@ -6128,10 +6135,10 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "object_id",
       "action",
-      "hide_no_changes",
       "evaluation_type",
+      "hide_no_changes",
+      "object_id",
     };
 
     public static final String[] FIELDS = {
@@ -6199,17 +6206,21 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestGetAdRulesHistory setObjectId (String objectId) {
-      this.setParam("object_id", objectId);
-      return this;
-    }
-
     public APIRequestGetAdRulesHistory setAction (AdAccountAdRulesHistory.EnumAction action) {
       this.setParam("action", action);
       return this;
     }
     public APIRequestGetAdRulesHistory setAction (String action) {
       this.setParam("action", action);
+      return this;
+    }
+
+    public APIRequestGetAdRulesHistory setEvaluationType (AdAccountAdRulesHistory.EnumEvaluationType evaluationType) {
+      this.setParam("evaluation_type", evaluationType);
+      return this;
+    }
+    public APIRequestGetAdRulesHistory setEvaluationType (String evaluationType) {
+      this.setParam("evaluation_type", evaluationType);
       return this;
     }
 
@@ -6222,12 +6233,8 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestGetAdRulesHistory setEvaluationType (AdAccountAdRulesHistory.EnumEvaluationType evaluationType) {
-      this.setParam("evaluation_type", evaluationType);
-      return this;
-    }
-    public APIRequestGetAdRulesHistory setEvaluationType (String evaluationType) {
-      this.setParam("evaluation_type", evaluationType);
+    public APIRequestGetAdRulesHistory setObjectId (String objectId) {
+      this.setParam("object_id", objectId);
       return this;
     }
 
@@ -6527,8 +6534,8 @@ public class AdAccount extends APINode {
       "account_id",
       "evaluation_spec",
       "execution_spec",
-      "schedule_spec",
       "name",
+      "schedule_spec",
       "status",
     };
 
@@ -6611,17 +6618,17 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdRulesLibrary setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
     public APIRequestCreateAdRulesLibrary setScheduleSpec (Object scheduleSpec) {
       this.setParam("schedule_spec", scheduleSpec);
       return this;
     }
     public APIRequestCreateAdRulesLibrary setScheduleSpec (String scheduleSpec) {
       this.setParam("schedule_spec", scheduleSpec);
-      return this;
-    }
-
-    public APIRequestCreateAdRulesLibrary setName (String name) {
-      this.setParam("name", name);
       return this;
     }
 
@@ -6680,10 +6687,10 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "delete_strategy",
-      "object_count",
       "before_date",
       "delete_offset",
+      "delete_strategy",
+      "object_count",
     };
 
     public static final String[] FIELDS = {
@@ -6742,6 +6749,20 @@ public class AdAccount extends APINode {
     }
 
 
+    public APIRequestDeleteAds setBeforeDate (String beforeDate) {
+      this.setParam("before_date", beforeDate);
+      return this;
+    }
+
+    public APIRequestDeleteAds setDeleteOffset (Long deleteOffset) {
+      this.setParam("delete_offset", deleteOffset);
+      return this;
+    }
+    public APIRequestDeleteAds setDeleteOffset (String deleteOffset) {
+      this.setParam("delete_offset", deleteOffset);
+      return this;
+    }
+
     public APIRequestDeleteAds setDeleteStrategy (EnumDeleteStrategy deleteStrategy) {
       this.setParam("delete_strategy", deleteStrategy);
       return this;
@@ -6757,20 +6778,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestDeleteAds setObjectCount (String objectCount) {
       this.setParam("object_count", objectCount);
-      return this;
-    }
-
-    public APIRequestDeleteAds setBeforeDate (String beforeDate) {
-      this.setParam("before_date", beforeDate);
-      return this;
-    }
-
-    public APIRequestDeleteAds setDeleteOffset (Long deleteOffset) {
-      this.setParam("delete_offset", deleteOffset);
-      return this;
-    }
-    public APIRequestDeleteAds setDeleteOffset (String deleteOffset) {
-      this.setParam("delete_offset", deleteOffset);
       return this;
     }
 
@@ -6820,13 +6827,13 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "ad_draft_id",
       "date_preset",
       "effective_status",
       "include_deleted",
+      "include_drafts",
       "time_range",
       "updated_since",
-      "ad_draft_id",
-      "include_drafts",
     };
 
     public static final String[] FIELDS = {
@@ -6917,6 +6924,11 @@ public class AdAccount extends APINode {
     }
 
 
+    public APIRequestGetAds setAdDraftId (String adDraftId) {
+      this.setParam("ad_draft_id", adDraftId);
+      return this;
+    }
+
     public APIRequestGetAds setDatePreset (Ad.EnumDatePreset datePreset) {
       this.setParam("date_preset", datePreset);
       return this;
@@ -6944,6 +6956,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetAds setIncludeDrafts (Boolean includeDrafts) {
+      this.setParam("include_drafts", includeDrafts);
+      return this;
+    }
+    public APIRequestGetAds setIncludeDrafts (String includeDrafts) {
+      this.setParam("include_drafts", includeDrafts);
+      return this;
+    }
+
     public APIRequestGetAds setTimeRange (Object timeRange) {
       this.setParam("time_range", timeRange);
       return this;
@@ -6959,20 +6980,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAds setUpdatedSince (String updatedSince) {
       this.setParam("updated_since", updatedSince);
-      return this;
-    }
-
-    public APIRequestGetAds setAdDraftId (String adDraftId) {
-      this.setParam("ad_draft_id", adDraftId);
-      return this;
-    }
-
-    public APIRequestGetAds setIncludeDrafts (Boolean includeDrafts) {
-      this.setParam("include_drafts", includeDrafts);
-      return this;
-    }
-    public APIRequestGetAds setIncludeDrafts (String includeDrafts) {
-      this.setParam("include_drafts", includeDrafts);
       return this;
     }
 
@@ -7246,23 +7253,23 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "audience_id",
-      "adset_id",
-      "date_format",
-      "include_demolink_hashes",
-      "creative",
-      "name",
-      "status",
-      "priority",
-      "tracking_specs",
-      "display_sequence",
-      "engagement_audience",
-      "adset_spec",
-      "draft_adgroup_id",
-      "execution_options",
       "adlabels",
+      "adset_id",
+      "adset_spec",
+      "audience_id",
       "bid_amount",
+      "creative",
+      "date_format",
+      "display_sequence",
+      "draft_adgroup_id",
+      "engagement_audience",
+      "execution_options",
+      "include_demolink_hashes",
+      "name",
+      "priority",
       "source_ad_id",
+      "status",
+      "tracking_specs",
       "file",
     };
 
@@ -7331,8 +7338,12 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateAd setAudienceId (String audienceId) {
-      this.setParam("audience_id", audienceId);
+    public APIRequestCreateAd setAdlabels (List<Object> adlabels) {
+      this.setParam("adlabels", adlabels);
+      return this;
+    }
+    public APIRequestCreateAd setAdlabels (String adlabels) {
+      this.setParam("adlabels", adlabels);
       return this;
     }
 
@@ -7345,79 +7356,6 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateAd setDateFormat (String dateFormat) {
-      this.setParam("date_format", dateFormat);
-      return this;
-    }
-
-    public APIRequestCreateAd setIncludeDemolinkHashes (Boolean includeDemolinkHashes) {
-      this.setParam("include_demolink_hashes", includeDemolinkHashes);
-      return this;
-    }
-    public APIRequestCreateAd setIncludeDemolinkHashes (String includeDemolinkHashes) {
-      this.setParam("include_demolink_hashes", includeDemolinkHashes);
-      return this;
-    }
-
-    public APIRequestCreateAd setCreative (AdCreative creative) {
-      this.setParam("creative", creative);
-      return this;
-    }
-    public APIRequestCreateAd setCreative (String creative) {
-      this.setParam("creative", creative);
-      return this;
-    }
-
-    public APIRequestCreateAd setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateAd setStatus (Ad.EnumStatus status) {
-      this.setParam("status", status);
-      return this;
-    }
-    public APIRequestCreateAd setStatus (String status) {
-      this.setParam("status", status);
-      return this;
-    }
-
-    public APIRequestCreateAd setPriority (Long priority) {
-      this.setParam("priority", priority);
-      return this;
-    }
-    public APIRequestCreateAd setPriority (String priority) {
-      this.setParam("priority", priority);
-      return this;
-    }
-
-    public APIRequestCreateAd setTrackingSpecs (Object trackingSpecs) {
-      this.setParam("tracking_specs", trackingSpecs);
-      return this;
-    }
-    public APIRequestCreateAd setTrackingSpecs (String trackingSpecs) {
-      this.setParam("tracking_specs", trackingSpecs);
-      return this;
-    }
-
-    public APIRequestCreateAd setDisplaySequence (Long displaySequence) {
-      this.setParam("display_sequence", displaySequence);
-      return this;
-    }
-    public APIRequestCreateAd setDisplaySequence (String displaySequence) {
-      this.setParam("display_sequence", displaySequence);
-      return this;
-    }
-
-    public APIRequestCreateAd setEngagementAudience (Boolean engagementAudience) {
-      this.setParam("engagement_audience", engagementAudience);
-      return this;
-    }
-    public APIRequestCreateAd setEngagementAudience (String engagementAudience) {
-      this.setParam("engagement_audience", engagementAudience);
-      return this;
-    }
-
     public APIRequestCreateAd setAdsetSpec (AdSet adsetSpec) {
       this.setParam("adset_spec", adsetSpec);
       return this;
@@ -7427,26 +7365,8 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateAd setDraftAdgroupId (String draftAdgroupId) {
-      this.setParam("draft_adgroup_id", draftAdgroupId);
-      return this;
-    }
-
-    public APIRequestCreateAd setExecutionOptions (List<Ad.EnumExecutionOptions> executionOptions) {
-      this.setParam("execution_options", executionOptions);
-      return this;
-    }
-    public APIRequestCreateAd setExecutionOptions (String executionOptions) {
-      this.setParam("execution_options", executionOptions);
-      return this;
-    }
-
-    public APIRequestCreateAd setAdlabels (List<Object> adlabels) {
-      this.setParam("adlabels", adlabels);
-      return this;
-    }
-    public APIRequestCreateAd setAdlabels (String adlabels) {
-      this.setParam("adlabels", adlabels);
+    public APIRequestCreateAd setAudienceId (String audienceId) {
+      this.setParam("audience_id", audienceId);
       return this;
     }
 
@@ -7459,8 +7379,95 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAd setCreative (AdCreative creative) {
+      this.setParam("creative", creative);
+      return this;
+    }
+    public APIRequestCreateAd setCreative (String creative) {
+      this.setParam("creative", creative);
+      return this;
+    }
+
+    public APIRequestCreateAd setDateFormat (String dateFormat) {
+      this.setParam("date_format", dateFormat);
+      return this;
+    }
+
+    public APIRequestCreateAd setDisplaySequence (Long displaySequence) {
+      this.setParam("display_sequence", displaySequence);
+      return this;
+    }
+    public APIRequestCreateAd setDisplaySequence (String displaySequence) {
+      this.setParam("display_sequence", displaySequence);
+      return this;
+    }
+
+    public APIRequestCreateAd setDraftAdgroupId (String draftAdgroupId) {
+      this.setParam("draft_adgroup_id", draftAdgroupId);
+      return this;
+    }
+
+    public APIRequestCreateAd setEngagementAudience (Boolean engagementAudience) {
+      this.setParam("engagement_audience", engagementAudience);
+      return this;
+    }
+    public APIRequestCreateAd setEngagementAudience (String engagementAudience) {
+      this.setParam("engagement_audience", engagementAudience);
+      return this;
+    }
+
+    public APIRequestCreateAd setExecutionOptions (List<Ad.EnumExecutionOptions> executionOptions) {
+      this.setParam("execution_options", executionOptions);
+      return this;
+    }
+    public APIRequestCreateAd setExecutionOptions (String executionOptions) {
+      this.setParam("execution_options", executionOptions);
+      return this;
+    }
+
+    public APIRequestCreateAd setIncludeDemolinkHashes (Boolean includeDemolinkHashes) {
+      this.setParam("include_demolink_hashes", includeDemolinkHashes);
+      return this;
+    }
+    public APIRequestCreateAd setIncludeDemolinkHashes (String includeDemolinkHashes) {
+      this.setParam("include_demolink_hashes", includeDemolinkHashes);
+      return this;
+    }
+
+    public APIRequestCreateAd setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateAd setPriority (Long priority) {
+      this.setParam("priority", priority);
+      return this;
+    }
+    public APIRequestCreateAd setPriority (String priority) {
+      this.setParam("priority", priority);
+      return this;
+    }
+
     public APIRequestCreateAd setSourceAdId (String sourceAdId) {
       this.setParam("source_ad_id", sourceAdId);
+      return this;
+    }
+
+    public APIRequestCreateAd setStatus (Ad.EnumStatus status) {
+      this.setParam("status", status);
+      return this;
+    }
+    public APIRequestCreateAd setStatus (String status) {
+      this.setParam("status", status);
+      return this;
+    }
+
+    public APIRequestCreateAd setTrackingSpecs (Object trackingSpecs) {
+      this.setParam("tracking_specs", trackingSpecs);
+      return this;
+    }
+    public APIRequestCreateAd setTrackingSpecs (String trackingSpecs) {
+      this.setParam("tracking_specs", trackingSpecs);
       return this;
     }
 
@@ -7890,10 +7897,10 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "delete_strategy",
-      "object_count",
       "before_date",
       "delete_offset",
+      "delete_strategy",
+      "object_count",
     };
 
     public static final String[] FIELDS = {
@@ -7952,6 +7959,20 @@ public class AdAccount extends APINode {
     }
 
 
+    public APIRequestDeleteAdSets setBeforeDate (String beforeDate) {
+      this.setParam("before_date", beforeDate);
+      return this;
+    }
+
+    public APIRequestDeleteAdSets setDeleteOffset (Long deleteOffset) {
+      this.setParam("delete_offset", deleteOffset);
+      return this;
+    }
+    public APIRequestDeleteAdSets setDeleteOffset (String deleteOffset) {
+      this.setParam("delete_offset", deleteOffset);
+      return this;
+    }
+
     public APIRequestDeleteAdSets setDeleteStrategy (EnumDeleteStrategy deleteStrategy) {
       this.setParam("delete_strategy", deleteStrategy);
       return this;
@@ -7967,20 +7988,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestDeleteAdSets setObjectCount (String objectCount) {
       this.setParam("object_count", objectCount);
-      return this;
-    }
-
-    public APIRequestDeleteAdSets setBeforeDate (String beforeDate) {
-      this.setParam("before_date", beforeDate);
-      return this;
-    }
-
-    public APIRequestDeleteAdSets setDeleteOffset (Long deleteOffset) {
-      this.setParam("delete_offset", deleteOffset);
-      return this;
-    }
-    public APIRequestDeleteAdSets setDeleteOffset (String deleteOffset) {
-      this.setParam("delete_offset", deleteOffset);
       return this;
     }
 
@@ -8030,13 +8037,13 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "effective_status",
+      "ad_draft_id",
       "date_preset",
+      "effective_status",
       "include_deleted",
+      "include_drafts",
       "is_completed",
       "time_range",
-      "ad_draft_id",
-      "include_drafts",
     };
 
     public static final String[] FIELDS = {
@@ -8147,12 +8154,8 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestGetAdSets setEffectiveStatus (List<AdSet.EnumEffectiveStatus> effectiveStatus) {
-      this.setParam("effective_status", effectiveStatus);
-      return this;
-    }
-    public APIRequestGetAdSets setEffectiveStatus (String effectiveStatus) {
-      this.setParam("effective_status", effectiveStatus);
+    public APIRequestGetAdSets setAdDraftId (String adDraftId) {
+      this.setParam("ad_draft_id", adDraftId);
       return this;
     }
 
@@ -8165,12 +8168,30 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetAdSets setEffectiveStatus (List<AdSet.EnumEffectiveStatus> effectiveStatus) {
+      this.setParam("effective_status", effectiveStatus);
+      return this;
+    }
+    public APIRequestGetAdSets setEffectiveStatus (String effectiveStatus) {
+      this.setParam("effective_status", effectiveStatus);
+      return this;
+    }
+
     public APIRequestGetAdSets setIncludeDeleted (Boolean includeDeleted) {
       this.setParam("include_deleted", includeDeleted);
       return this;
     }
     public APIRequestGetAdSets setIncludeDeleted (String includeDeleted) {
       this.setParam("include_deleted", includeDeleted);
+      return this;
+    }
+
+    public APIRequestGetAdSets setIncludeDrafts (Boolean includeDrafts) {
+      this.setParam("include_drafts", includeDrafts);
+      return this;
+    }
+    public APIRequestGetAdSets setIncludeDrafts (String includeDrafts) {
+      this.setParam("include_drafts", includeDrafts);
       return this;
     }
 
@@ -8189,20 +8210,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSets setTimeRange (String timeRange) {
       this.setParam("time_range", timeRange);
-      return this;
-    }
-
-    public APIRequestGetAdSets setAdDraftId (String adDraftId) {
-      this.setParam("ad_draft_id", adDraftId);
-      return this;
-    }
-
-    public APIRequestGetAdSets setIncludeDrafts (Boolean includeDrafts) {
-      this.setParam("include_drafts", includeDrafts);
-      return this;
-    }
-    public APIRequestGetAdSets setIncludeDrafts (String includeDrafts) {
-      this.setParam("include_drafts", includeDrafts);
       return this;
     }
 
@@ -8618,15 +8625,15 @@ public class AdAccount extends APINode {
     public static final String[] PARAMS = {
       "ad_keywords",
       "adlabels",
-      "bid_amount",
+      "adset_schedule",
+      "attribution_spec",
       "bid_adjustments",
+      "bid_amount",
       "bid_constraints",
       "bid_strategy",
       "billing_event",
       "campaign_id",
       "campaign_spec",
-      "adset_schedule",
-      "status",
       "creative_sequence",
       "daily_budget",
       "daily_imps",
@@ -8637,6 +8644,7 @@ public class AdAccount extends APINode {
       "end_time",
       "execution_options",
       "frequency_control_specs",
+      "full_funnel_exploration_mode",
       "is_dynamic_creative",
       "lifetime_budget",
       "lifetime_imps",
@@ -8651,6 +8659,7 @@ public class AdAccount extends APINode {
       "rf_prediction_id",
       "source_adset_id",
       "start_time",
+      "status",
       "targeting",
       "time_based_ad_rotation_id_blocks",
       "time_based_ad_rotation_intervals",
@@ -8658,8 +8667,6 @@ public class AdAccount extends APINode {
       "time_stop",
       "topline_id",
       "upstream_events",
-      "full_funnel_exploration_mode",
-      "attribution_spec",
     };
 
     public static final String[] FIELDS = {
@@ -8736,12 +8743,21 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdSet setBidAmount (Long bidAmount) {
-      this.setParam("bid_amount", bidAmount);
+    public APIRequestCreateAdSet setAdsetSchedule (List<Object> adsetSchedule) {
+      this.setParam("adset_schedule", adsetSchedule);
       return this;
     }
-    public APIRequestCreateAdSet setBidAmount (String bidAmount) {
-      this.setParam("bid_amount", bidAmount);
+    public APIRequestCreateAdSet setAdsetSchedule (String adsetSchedule) {
+      this.setParam("adset_schedule", adsetSchedule);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setAttributionSpec (List<Map<String, String>> attributionSpec) {
+      this.setParam("attribution_spec", attributionSpec);
+      return this;
+    }
+    public APIRequestCreateAdSet setAttributionSpec (String attributionSpec) {
+      this.setParam("attribution_spec", attributionSpec);
       return this;
     }
 
@@ -8751,6 +8767,15 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdSet setBidAdjustments (String bidAdjustments) {
       this.setParam("bid_adjustments", bidAdjustments);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setBidAmount (Long bidAmount) {
+      this.setParam("bid_amount", bidAmount);
+      return this;
+    }
+    public APIRequestCreateAdSet setBidAmount (String bidAmount) {
+      this.setParam("bid_amount", bidAmount);
       return this;
     }
 
@@ -8792,24 +8817,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdSet setCampaignSpec (String campaignSpec) {
       this.setParam("campaign_spec", campaignSpec);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setAdsetSchedule (List<Object> adsetSchedule) {
-      this.setParam("adset_schedule", adsetSchedule);
-      return this;
-    }
-    public APIRequestCreateAdSet setAdsetSchedule (String adsetSchedule) {
-      this.setParam("adset_schedule", adsetSchedule);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setStatus (AdSet.EnumStatus status) {
-      this.setParam("status", status);
-      return this;
-    }
-    public APIRequestCreateAdSet setStatus (String status) {
-      this.setParam("status", status);
       return this;
     }
 
@@ -8892,6 +8899,15 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdSet setFrequencyControlSpecs (String frequencyControlSpecs) {
       this.setParam("frequency_control_specs", frequencyControlSpecs);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setFullFunnelExplorationMode (AdSet.EnumFullFunnelExplorationMode fullFunnelExplorationMode) {
+      this.setParam("full_funnel_exploration_mode", fullFunnelExplorationMode);
+      return this;
+    }
+    public APIRequestCreateAdSet setFullFunnelExplorationMode (String fullFunnelExplorationMode) {
+      this.setParam("full_funnel_exploration_mode", fullFunnelExplorationMode);
       return this;
     }
 
@@ -9001,6 +9017,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdSet setStatus (AdSet.EnumStatus status) {
+      this.setParam("status", status);
+      return this;
+    }
+    public APIRequestCreateAdSet setStatus (String status) {
+      this.setParam("status", status);
+      return this;
+    }
+
     public APIRequestCreateAdSet setTargeting (Targeting targeting) {
       this.setParam("targeting", targeting);
       return this;
@@ -9049,24 +9074,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdSet setUpstreamEvents (String upstreamEvents) {
       this.setParam("upstream_events", upstreamEvents);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setFullFunnelExplorationMode (AdSet.EnumFullFunnelExplorationMode fullFunnelExplorationMode) {
-      this.setParam("full_funnel_exploration_mode", fullFunnelExplorationMode);
-      return this;
-    }
-    public APIRequestCreateAdSet setFullFunnelExplorationMode (String fullFunnelExplorationMode) {
-      this.setParam("full_funnel_exploration_mode", fullFunnelExplorationMode);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setAttributionSpec (List<Map<String, String>> attributionSpec) {
-      this.setParam("attribution_spec", attributionSpec);
-      return this;
-    }
-    public APIRequestCreateAdSet setAttributionSpec (String attributionSpec) {
-      this.setParam("attribution_spec", attributionSpec);
       return this;
     }
 
@@ -11500,15 +11507,15 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "title",
-      "minlength",
-      "maxlength",
-      "minheight",
+      "max_aspect_ratio",
       "maxheight",
-      "minwidth",
+      "maxlength",
       "maxwidth",
       "min_aspect_ratio",
-      "max_aspect_ratio",
+      "minheight",
+      "minlength",
+      "minwidth",
+      "title",
     };
 
     public static final String[] FIELDS = {
@@ -11604,35 +11611,12 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestGetAdVideos setTitle (String title) {
-      this.setParam("title", title);
+    public APIRequestGetAdVideos setMaxAspectRatio (Double maxAspectRatio) {
+      this.setParam("max_aspect_ratio", maxAspectRatio);
       return this;
     }
-
-    public APIRequestGetAdVideos setMinlength (Long minlength) {
-      this.setParam("minlength", minlength);
-      return this;
-    }
-    public APIRequestGetAdVideos setMinlength (String minlength) {
-      this.setParam("minlength", minlength);
-      return this;
-    }
-
-    public APIRequestGetAdVideos setMaxlength (Long maxlength) {
-      this.setParam("maxlength", maxlength);
-      return this;
-    }
-    public APIRequestGetAdVideos setMaxlength (String maxlength) {
-      this.setParam("maxlength", maxlength);
-      return this;
-    }
-
-    public APIRequestGetAdVideos setMinheight (Long minheight) {
-      this.setParam("minheight", minheight);
-      return this;
-    }
-    public APIRequestGetAdVideos setMinheight (String minheight) {
-      this.setParam("minheight", minheight);
+    public APIRequestGetAdVideos setMaxAspectRatio (String maxAspectRatio) {
+      this.setParam("max_aspect_ratio", maxAspectRatio);
       return this;
     }
 
@@ -11645,12 +11629,12 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestGetAdVideos setMinwidth (Long minwidth) {
-      this.setParam("minwidth", minwidth);
+    public APIRequestGetAdVideos setMaxlength (Long maxlength) {
+      this.setParam("maxlength", maxlength);
       return this;
     }
-    public APIRequestGetAdVideos setMinwidth (String minwidth) {
-      this.setParam("minwidth", minwidth);
+    public APIRequestGetAdVideos setMaxlength (String maxlength) {
+      this.setParam("maxlength", maxlength);
       return this;
     }
 
@@ -11672,12 +11656,35 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestGetAdVideos setMaxAspectRatio (Double maxAspectRatio) {
-      this.setParam("max_aspect_ratio", maxAspectRatio);
+    public APIRequestGetAdVideos setMinheight (Long minheight) {
+      this.setParam("minheight", minheight);
       return this;
     }
-    public APIRequestGetAdVideos setMaxAspectRatio (String maxAspectRatio) {
-      this.setParam("max_aspect_ratio", maxAspectRatio);
+    public APIRequestGetAdVideos setMinheight (String minheight) {
+      this.setParam("minheight", minheight);
+      return this;
+    }
+
+    public APIRequestGetAdVideos setMinlength (Long minlength) {
+      this.setParam("minlength", minlength);
+      return this;
+    }
+    public APIRequestGetAdVideos setMinlength (String minlength) {
+      this.setParam("minlength", minlength);
+      return this;
+    }
+
+    public APIRequestGetAdVideos setMinwidth (Long minwidth) {
+      this.setParam("minwidth", minwidth);
+      return this;
+    }
+    public APIRequestGetAdVideos setMinwidth (String minwidth) {
+      this.setParam("minwidth", minwidth);
+      return this;
+    }
+
+    public APIRequestGetAdVideos setTitle (String title) {
+      this.setParam("title", title);
       return this;
     }
 
@@ -11986,76 +11993,76 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "title",
-      "unpublished_content_type",
-      "time_since_original_post",
-      "file_url",
-      "composer_session_id",
-      "waterfall_id",
-      "og_action_type_id",
-      "og_object_id",
-      "og_phrase",
-      "og_icon_id",
-      "og_suggestion_mechanism",
-      "thumb",
-      "spherical",
-      "original_projection_type",
-      "initial_heading",
-      "initial_pitch",
-      "fov",
-      "original_fov",
-      "fisheye_video_cropped",
-      "front_z_rotation",
-      "guide_enabled",
-      "guide",
-      "audio_story_wave_animation_handle",
       "adaptive_type",
       "animated_effect_id",
+      "application_id",
       "asked_fun_fact_prompt_id",
+      "attribution_app_id",
+      "audio_story_wave_animation_handle",
+      "chunk_session_id",
       "composer_entry_picker",
       "composer_entry_point",
       "composer_entry_time",
       "composer_session_events_log",
+      "composer_session_id",
       "composer_source_surface",
       "composer_type",
+      "container_type",
+      "content_category",
+      "description",
+      "embeddable",
+      "end_offset",
+      "fbuploader_video_file_chunk",
+      "file_size",
+      "file_url",
+      "fisheye_video_cropped",
       "formatting",
+      "fov",
+      "front_z_rotation",
       "fun_fact_prompt_id",
       "fun_fact_toastee_id",
-      "is_group_linking_post",
+      "guide",
+      "guide_enabled",
       "has_nickname",
       "holiday_card",
+      "initial_heading",
+      "initial_pitch",
       "instant_game_entry_point_data",
       "is_boost_intended",
+      "is_group_linking_post",
+      "is_voice_clip",
       "location_source_id",
-      "description",
+      "name",
       "offer_like_post_id",
+      "og_action_type_id",
+      "og_icon_id",
+      "og_object_id",
+      "og_phrase",
+      "og_suggestion_mechanism",
+      "original_fov",
+      "original_projection_type",
       "publish_event_id",
       "react_mode_metadata",
-      "sales_promo_id",
-      "text_format_metadata",
-      "throwback_camera_roll_media",
-      "video_start_time_ms",
-      "application_id",
-      "upload_phase",
-      "file_size",
-      "start_offset",
-      "end_offset",
-      "video_file_chunk",
-      "fbuploader_video_file_chunk",
-      "upload_session_id",
-      "is_voice_clip",
-      "attribution_app_id",
-      "content_category",
-      "embeddable",
-      "slideshow_spec",
-      "upload_setting_properties",
-      "transcode_setting_properties",
-      "container_type",
       "referenced_sticker_id",
       "replace_video_id",
+      "sales_promo_id",
+      "slideshow_spec",
+      "spherical",
+      "start_offset",
       "swap_mode",
-      "name",
-      "chunk_session_id",
+      "text_format_metadata",
+      "throwback_camera_roll_media",
+      "thumb",
+      "time_since_original_post",
+      "title",
+      "transcode_setting_properties",
+      "unpublished_content_type",
+      "upload_phase",
+      "upload_session_id",
+      "upload_setting_properties",
+      "video_file_chunk",
+      "video_start_time_ms",
+      "waterfall_id",
       "file",
     };
 
@@ -12125,173 +12132,6 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdVideo setTitle (String title) {
-      this.setParam("title", title);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setUnpublishedContentType (AdVideo.EnumUnpublishedContentType unpublishedContentType) {
-      this.setParam("unpublished_content_type", unpublishedContentType);
-      return this;
-    }
-    public APIRequestCreateAdVideo setUnpublishedContentType (String unpublishedContentType) {
-      this.setParam("unpublished_content_type", unpublishedContentType);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setTimeSinceOriginalPost (Long timeSinceOriginalPost) {
-      this.setParam("time_since_original_post", timeSinceOriginalPost);
-      return this;
-    }
-    public APIRequestCreateAdVideo setTimeSinceOriginalPost (String timeSinceOriginalPost) {
-      this.setParam("time_since_original_post", timeSinceOriginalPost);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setFileUrl (String fileUrl) {
-      this.setParam("file_url", fileUrl);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setComposerSessionId (String composerSessionId) {
-      this.setParam("composer_session_id", composerSessionId);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setWaterfallId (String waterfallId) {
-      this.setParam("waterfall_id", waterfallId);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setOgActionTypeId (String ogActionTypeId) {
-      this.setParam("og_action_type_id", ogActionTypeId);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setOgObjectId (String ogObjectId) {
-      this.setParam("og_object_id", ogObjectId);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setOgPhrase (String ogPhrase) {
-      this.setParam("og_phrase", ogPhrase);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setOgIconId (String ogIconId) {
-      this.setParam("og_icon_id", ogIconId);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setOgSuggestionMechanism (String ogSuggestionMechanism) {
-      this.setParam("og_suggestion_mechanism", ogSuggestionMechanism);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setThumb (File thumb) {
-      this.setParam("thumb", thumb);
-      return this;
-    }
-    public APIRequestCreateAdVideo setThumb (String thumb) {
-      this.setParam("thumb", thumb);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setSpherical (Boolean spherical) {
-      this.setParam("spherical", spherical);
-      return this;
-    }
-    public APIRequestCreateAdVideo setSpherical (String spherical) {
-      this.setParam("spherical", spherical);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setOriginalProjectionType (AdVideo.EnumOriginalProjectionType originalProjectionType) {
-      this.setParam("original_projection_type", originalProjectionType);
-      return this;
-    }
-    public APIRequestCreateAdVideo setOriginalProjectionType (String originalProjectionType) {
-      this.setParam("original_projection_type", originalProjectionType);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setInitialHeading (Long initialHeading) {
-      this.setParam("initial_heading", initialHeading);
-      return this;
-    }
-    public APIRequestCreateAdVideo setInitialHeading (String initialHeading) {
-      this.setParam("initial_heading", initialHeading);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setInitialPitch (Long initialPitch) {
-      this.setParam("initial_pitch", initialPitch);
-      return this;
-    }
-    public APIRequestCreateAdVideo setInitialPitch (String initialPitch) {
-      this.setParam("initial_pitch", initialPitch);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setFov (Long fov) {
-      this.setParam("fov", fov);
-      return this;
-    }
-    public APIRequestCreateAdVideo setFov (String fov) {
-      this.setParam("fov", fov);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setOriginalFov (Long originalFov) {
-      this.setParam("original_fov", originalFov);
-      return this;
-    }
-    public APIRequestCreateAdVideo setOriginalFov (String originalFov) {
-      this.setParam("original_fov", originalFov);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setFisheyeVideoCropped (Boolean fisheyeVideoCropped) {
-      this.setParam("fisheye_video_cropped", fisheyeVideoCropped);
-      return this;
-    }
-    public APIRequestCreateAdVideo setFisheyeVideoCropped (String fisheyeVideoCropped) {
-      this.setParam("fisheye_video_cropped", fisheyeVideoCropped);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setFrontZRotation (Double frontZRotation) {
-      this.setParam("front_z_rotation", frontZRotation);
-      return this;
-    }
-    public APIRequestCreateAdVideo setFrontZRotation (String frontZRotation) {
-      this.setParam("front_z_rotation", frontZRotation);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setGuideEnabled (Boolean guideEnabled) {
-      this.setParam("guide_enabled", guideEnabled);
-      return this;
-    }
-    public APIRequestCreateAdVideo setGuideEnabled (String guideEnabled) {
-      this.setParam("guide_enabled", guideEnabled);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setGuide (List<List<Long>> guide) {
-      this.setParam("guide", guide);
-      return this;
-    }
-    public APIRequestCreateAdVideo setGuide (String guide) {
-      this.setParam("guide", guide);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setAudioStoryWaveAnimationHandle (String audioStoryWaveAnimationHandle) {
-      this.setParam("audio_story_wave_animation_handle", audioStoryWaveAnimationHandle);
-      return this;
-    }
-
     public APIRequestCreateAdVideo setAdaptiveType (String adaptiveType) {
       this.setParam("adaptive_type", adaptiveType);
       return this;
@@ -12306,12 +12146,32 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdVideo setApplicationId (String applicationId) {
+      this.setParam("application_id", applicationId);
+      return this;
+    }
+
     public APIRequestCreateAdVideo setAskedFunFactPromptId (Long askedFunFactPromptId) {
       this.setParam("asked_fun_fact_prompt_id", askedFunFactPromptId);
       return this;
     }
     public APIRequestCreateAdVideo setAskedFunFactPromptId (String askedFunFactPromptId) {
       this.setParam("asked_fun_fact_prompt_id", askedFunFactPromptId);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setAttributionAppId (String attributionAppId) {
+      this.setParam("attribution_app_id", attributionAppId);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setAudioStoryWaveAnimationHandle (String audioStoryWaveAnimationHandle) {
+      this.setParam("audio_story_wave_animation_handle", audioStoryWaveAnimationHandle);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setChunkSessionId (String chunkSessionId) {
+      this.setParam("chunk_session_id", chunkSessionId);
       return this;
     }
 
@@ -12339,6 +12199,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdVideo setComposerSessionId (String composerSessionId) {
+      this.setParam("composer_session_id", composerSessionId);
+      return this;
+    }
+
     public APIRequestCreateAdVideo setComposerSourceSurface (String composerSourceSurface) {
       this.setParam("composer_source_surface", composerSourceSurface);
       return this;
@@ -12349,12 +12214,99 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdVideo setContainerType (AdVideo.EnumContainerType containerType) {
+      this.setParam("container_type", containerType);
+      return this;
+    }
+    public APIRequestCreateAdVideo setContainerType (String containerType) {
+      this.setParam("container_type", containerType);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setContentCategory (AdVideo.EnumContentCategory contentCategory) {
+      this.setParam("content_category", contentCategory);
+      return this;
+    }
+    public APIRequestCreateAdVideo setContentCategory (String contentCategory) {
+      this.setParam("content_category", contentCategory);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setEmbeddable (Boolean embeddable) {
+      this.setParam("embeddable", embeddable);
+      return this;
+    }
+    public APIRequestCreateAdVideo setEmbeddable (String embeddable) {
+      this.setParam("embeddable", embeddable);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setEndOffset (Long endOffset) {
+      this.setParam("end_offset", endOffset);
+      return this;
+    }
+    public APIRequestCreateAdVideo setEndOffset (String endOffset) {
+      this.setParam("end_offset", endOffset);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setFbuploaderVideoFileChunk (String fbuploaderVideoFileChunk) {
+      this.setParam("fbuploader_video_file_chunk", fbuploaderVideoFileChunk);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setFileSize (Long fileSize) {
+      this.setParam("file_size", fileSize);
+      return this;
+    }
+    public APIRequestCreateAdVideo setFileSize (String fileSize) {
+      this.setParam("file_size", fileSize);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setFileUrl (String fileUrl) {
+      this.setParam("file_url", fileUrl);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setFisheyeVideoCropped (Boolean fisheyeVideoCropped) {
+      this.setParam("fisheye_video_cropped", fisheyeVideoCropped);
+      return this;
+    }
+    public APIRequestCreateAdVideo setFisheyeVideoCropped (String fisheyeVideoCropped) {
+      this.setParam("fisheye_video_cropped", fisheyeVideoCropped);
+      return this;
+    }
+
     public APIRequestCreateAdVideo setFormatting (AdVideo.EnumFormatting formatting) {
       this.setParam("formatting", formatting);
       return this;
     }
     public APIRequestCreateAdVideo setFormatting (String formatting) {
       this.setParam("formatting", formatting);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setFov (Long fov) {
+      this.setParam("fov", fov);
+      return this;
+    }
+    public APIRequestCreateAdVideo setFov (String fov) {
+      this.setParam("fov", fov);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setFrontZRotation (Double frontZRotation) {
+      this.setParam("front_z_rotation", frontZRotation);
+      return this;
+    }
+    public APIRequestCreateAdVideo setFrontZRotation (String frontZRotation) {
+      this.setParam("front_z_rotation", frontZRotation);
       return this;
     }
 
@@ -12376,12 +12328,21 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdVideo setIsGroupLinkingPost (Boolean isGroupLinkingPost) {
-      this.setParam("is_group_linking_post", isGroupLinkingPost);
+    public APIRequestCreateAdVideo setGuide (List<List<Long>> guide) {
+      this.setParam("guide", guide);
       return this;
     }
-    public APIRequestCreateAdVideo setIsGroupLinkingPost (String isGroupLinkingPost) {
-      this.setParam("is_group_linking_post", isGroupLinkingPost);
+    public APIRequestCreateAdVideo setGuide (String guide) {
+      this.setParam("guide", guide);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setGuideEnabled (Boolean guideEnabled) {
+      this.setParam("guide_enabled", guideEnabled);
+      return this;
+    }
+    public APIRequestCreateAdVideo setGuideEnabled (String guideEnabled) {
+      this.setParam("guide_enabled", guideEnabled);
       return this;
     }
 
@@ -12399,6 +12360,24 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdVideo setInitialHeading (Long initialHeading) {
+      this.setParam("initial_heading", initialHeading);
+      return this;
+    }
+    public APIRequestCreateAdVideo setInitialHeading (String initialHeading) {
+      this.setParam("initial_heading", initialHeading);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setInitialPitch (Long initialPitch) {
+      this.setParam("initial_pitch", initialPitch);
+      return this;
+    }
+    public APIRequestCreateAdVideo setInitialPitch (String initialPitch) {
+      this.setParam("initial_pitch", initialPitch);
+      return this;
+    }
+
     public APIRequestCreateAdVideo setInstantGameEntryPointData (String instantGameEntryPointData) {
       this.setParam("instant_game_entry_point_data", instantGameEntryPointData);
       return this;
@@ -12413,13 +12392,31 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdVideo setIsGroupLinkingPost (Boolean isGroupLinkingPost) {
+      this.setParam("is_group_linking_post", isGroupLinkingPost);
+      return this;
+    }
+    public APIRequestCreateAdVideo setIsGroupLinkingPost (String isGroupLinkingPost) {
+      this.setParam("is_group_linking_post", isGroupLinkingPost);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setIsVoiceClip (Boolean isVoiceClip) {
+      this.setParam("is_voice_clip", isVoiceClip);
+      return this;
+    }
+    public APIRequestCreateAdVideo setIsVoiceClip (String isVoiceClip) {
+      this.setParam("is_voice_clip", isVoiceClip);
+      return this;
+    }
+
     public APIRequestCreateAdVideo setLocationSourceId (String locationSourceId) {
       this.setParam("location_source_id", locationSourceId);
       return this;
     }
 
-    public APIRequestCreateAdVideo setDescription (String description) {
-      this.setParam("description", description);
+    public APIRequestCreateAdVideo setName (String name) {
+      this.setParam("name", name);
       return this;
     }
 
@@ -12429,6 +12426,49 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdVideo setOfferLikePostId (String offerLikePostId) {
       this.setParam("offer_like_post_id", offerLikePostId);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setOgActionTypeId (String ogActionTypeId) {
+      this.setParam("og_action_type_id", ogActionTypeId);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setOgIconId (String ogIconId) {
+      this.setParam("og_icon_id", ogIconId);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setOgObjectId (String ogObjectId) {
+      this.setParam("og_object_id", ogObjectId);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setOgPhrase (String ogPhrase) {
+      this.setParam("og_phrase", ogPhrase);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setOgSuggestionMechanism (String ogSuggestionMechanism) {
+      this.setParam("og_suggestion_mechanism", ogSuggestionMechanism);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setOriginalFov (Long originalFov) {
+      this.setParam("original_fov", originalFov);
+      return this;
+    }
+    public APIRequestCreateAdVideo setOriginalFov (String originalFov) {
+      this.setParam("original_fov", originalFov);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setOriginalProjectionType (AdVideo.EnumOriginalProjectionType originalProjectionType) {
+      this.setParam("original_projection_type", originalProjectionType);
+      return this;
+    }
+    public APIRequestCreateAdVideo setOriginalProjectionType (String originalProjectionType) {
+      this.setParam("original_projection_type", originalProjectionType);
       return this;
     }
 
@@ -12446,12 +12486,58 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdVideo setReferencedStickerId (String referencedStickerId) {
+      this.setParam("referenced_sticker_id", referencedStickerId);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setReplaceVideoId (String replaceVideoId) {
+      this.setParam("replace_video_id", replaceVideoId);
+      return this;
+    }
+
     public APIRequestCreateAdVideo setSalesPromoId (Long salesPromoId) {
       this.setParam("sales_promo_id", salesPromoId);
       return this;
     }
     public APIRequestCreateAdVideo setSalesPromoId (String salesPromoId) {
       this.setParam("sales_promo_id", salesPromoId);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setSlideshowSpec (Map<String, String> slideshowSpec) {
+      this.setParam("slideshow_spec", slideshowSpec);
+      return this;
+    }
+    public APIRequestCreateAdVideo setSlideshowSpec (String slideshowSpec) {
+      this.setParam("slideshow_spec", slideshowSpec);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setSpherical (Boolean spherical) {
+      this.setParam("spherical", spherical);
+      return this;
+    }
+    public APIRequestCreateAdVideo setSpherical (String spherical) {
+      this.setParam("spherical", spherical);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setStartOffset (Long startOffset) {
+      this.setParam("start_offset", startOffset);
+      return this;
+    }
+    public APIRequestCreateAdVideo setStartOffset (String startOffset) {
+      this.setParam("start_offset", startOffset);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setSwapMode (AdVideo.EnumSwapMode swapMode) {
+      this.setParam("swap_mode", swapMode);
+      return this;
+    }
+    public APIRequestCreateAdVideo setSwapMode (String swapMode) {
+      this.setParam("swap_mode", swapMode);
       return this;
     }
 
@@ -12465,17 +12551,40 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdVideo setVideoStartTimeMs (Long videoStartTimeMs) {
-      this.setParam("video_start_time_ms", videoStartTimeMs);
+    public APIRequestCreateAdVideo setThumb (File thumb) {
+      this.setParam("thumb", thumb);
       return this;
     }
-    public APIRequestCreateAdVideo setVideoStartTimeMs (String videoStartTimeMs) {
-      this.setParam("video_start_time_ms", videoStartTimeMs);
+    public APIRequestCreateAdVideo setThumb (String thumb) {
+      this.setParam("thumb", thumb);
       return this;
     }
 
-    public APIRequestCreateAdVideo setApplicationId (String applicationId) {
-      this.setParam("application_id", applicationId);
+    public APIRequestCreateAdVideo setTimeSinceOriginalPost (Long timeSinceOriginalPost) {
+      this.setParam("time_since_original_post", timeSinceOriginalPost);
+      return this;
+    }
+    public APIRequestCreateAdVideo setTimeSinceOriginalPost (String timeSinceOriginalPost) {
+      this.setParam("time_since_original_post", timeSinceOriginalPost);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setTitle (String title) {
+      this.setParam("title", title);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setTranscodeSettingProperties (String transcodeSettingProperties) {
+      this.setParam("transcode_setting_properties", transcodeSettingProperties);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setUnpublishedContentType (AdVideo.EnumUnpublishedContentType unpublishedContentType) {
+      this.setParam("unpublished_content_type", unpublishedContentType);
+      return this;
+    }
+    public APIRequestCreateAdVideo setUnpublishedContentType (String unpublishedContentType) {
+      this.setParam("unpublished_content_type", unpublishedContentType);
       return this;
     }
 
@@ -12488,30 +12597,13 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdVideo setFileSize (Long fileSize) {
-      this.setParam("file_size", fileSize);
-      return this;
-    }
-    public APIRequestCreateAdVideo setFileSize (String fileSize) {
-      this.setParam("file_size", fileSize);
+    public APIRequestCreateAdVideo setUploadSessionId (String uploadSessionId) {
+      this.setParam("upload_session_id", uploadSessionId);
       return this;
     }
 
-    public APIRequestCreateAdVideo setStartOffset (Long startOffset) {
-      this.setParam("start_offset", startOffset);
-      return this;
-    }
-    public APIRequestCreateAdVideo setStartOffset (String startOffset) {
-      this.setParam("start_offset", startOffset);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setEndOffset (Long endOffset) {
-      this.setParam("end_offset", endOffset);
-      return this;
-    }
-    public APIRequestCreateAdVideo setEndOffset (String endOffset) {
-      this.setParam("end_offset", endOffset);
+    public APIRequestCreateAdVideo setUploadSettingProperties (String uploadSettingProperties) {
+      this.setParam("upload_setting_properties", uploadSettingProperties);
       return this;
     }
 
@@ -12529,102 +12621,17 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdVideo setFbuploaderVideoFileChunk (String fbuploaderVideoFileChunk) {
-      this.setParam("fbuploader_video_file_chunk", fbuploaderVideoFileChunk);
+    public APIRequestCreateAdVideo setVideoStartTimeMs (Long videoStartTimeMs) {
+      this.setParam("video_start_time_ms", videoStartTimeMs);
+      return this;
+    }
+    public APIRequestCreateAdVideo setVideoStartTimeMs (String videoStartTimeMs) {
+      this.setParam("video_start_time_ms", videoStartTimeMs);
       return this;
     }
 
-    public APIRequestCreateAdVideo setUploadSessionId (String uploadSessionId) {
-      this.setParam("upload_session_id", uploadSessionId);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setIsVoiceClip (Boolean isVoiceClip) {
-      this.setParam("is_voice_clip", isVoiceClip);
-      return this;
-    }
-    public APIRequestCreateAdVideo setIsVoiceClip (String isVoiceClip) {
-      this.setParam("is_voice_clip", isVoiceClip);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setAttributionAppId (String attributionAppId) {
-      this.setParam("attribution_app_id", attributionAppId);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setContentCategory (AdVideo.EnumContentCategory contentCategory) {
-      this.setParam("content_category", contentCategory);
-      return this;
-    }
-    public APIRequestCreateAdVideo setContentCategory (String contentCategory) {
-      this.setParam("content_category", contentCategory);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setEmbeddable (Boolean embeddable) {
-      this.setParam("embeddable", embeddable);
-      return this;
-    }
-    public APIRequestCreateAdVideo setEmbeddable (String embeddable) {
-      this.setParam("embeddable", embeddable);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setSlideshowSpec (Map<String, String> slideshowSpec) {
-      this.setParam("slideshow_spec", slideshowSpec);
-      return this;
-    }
-    public APIRequestCreateAdVideo setSlideshowSpec (String slideshowSpec) {
-      this.setParam("slideshow_spec", slideshowSpec);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setUploadSettingProperties (String uploadSettingProperties) {
-      this.setParam("upload_setting_properties", uploadSettingProperties);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setTranscodeSettingProperties (String transcodeSettingProperties) {
-      this.setParam("transcode_setting_properties", transcodeSettingProperties);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setContainerType (AdVideo.EnumContainerType containerType) {
-      this.setParam("container_type", containerType);
-      return this;
-    }
-    public APIRequestCreateAdVideo setContainerType (String containerType) {
-      this.setParam("container_type", containerType);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setReferencedStickerId (String referencedStickerId) {
-      this.setParam("referenced_sticker_id", referencedStickerId);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setReplaceVideoId (String replaceVideoId) {
-      this.setParam("replace_video_id", replaceVideoId);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setSwapMode (AdVideo.EnumSwapMode swapMode) {
-      this.setParam("swap_mode", swapMode);
-      return this;
-    }
-    public APIRequestCreateAdVideo setSwapMode (String swapMode) {
-      this.setParam("swap_mode", swapMode);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setChunkSessionId (String chunkSessionId) {
-      this.setParam("chunk_session_id", chunkSessionId);
+    public APIRequestCreateAdVideo setWaterfallId (String waterfallId) {
+      this.setParam("waterfall_id", waterfallId);
       return this;
     }
 
@@ -14816,8 +14823,8 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "user",
       "tasks",
+      "user",
     };
 
     public static final String[] FIELDS = {
@@ -14876,21 +14883,21 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestCreateAssignedUser setUser (Long user) {
-      this.setParam("user", user);
-      return this;
-    }
-    public APIRequestCreateAssignedUser setUser (String user) {
-      this.setParam("user", user);
-      return this;
-    }
-
     public APIRequestCreateAssignedUser setTasks (List<AdAccount.EnumTasks> tasks) {
       this.setParam("tasks", tasks);
       return this;
     }
     public APIRequestCreateAssignedUser setTasks (String tasks) {
       this.setParam("tasks", tasks);
+      return this;
+    }
+
+    public APIRequestCreateAssignedUser setUser (Long user) {
+      this.setParam("user", user);
+      return this;
+    }
+    public APIRequestCreateAssignedUser setUser (String user) {
+      this.setParam("user", user);
       return this;
     }
 
@@ -14940,8 +14947,8 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "name",
       "adbatch",
+      "name",
     };
 
     public static final String[] FIELDS = {
@@ -15000,17 +15007,17 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestCreateAsyncBatchRequest setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
     public APIRequestCreateAsyncBatchRequest setAdbatch (List<Object> adbatch) {
       this.setParam("adbatch", adbatch);
       return this;
     }
     public APIRequestCreateAsyncBatchRequest setAdbatch (String adbatch) {
       this.setParam("adbatch", adbatch);
+      return this;
+    }
+
+    public APIRequestCreateAsyncBatchRequest setName (String name) {
+      this.setParam("name", name);
       return this;
     }
 
@@ -15460,8 +15467,8 @@ public class AdAccount extends APINode {
     public static final String[] PARAMS = {
       "ad_specs",
       "name",
-      "notification_uri",
       "notification_mode",
+      "notification_uri",
     };
 
     public static final String[] FIELDS = {
@@ -15534,17 +15541,17 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateAsyncAdRequestSet setNotificationUri (String notificationUri) {
-      this.setParam("notification_uri", notificationUri);
-      return this;
-    }
-
     public APIRequestCreateAsyncAdRequestSet setNotificationMode (AdAsyncRequestSet.EnumNotificationMode notificationMode) {
       this.setParam("notification_mode", notificationMode);
       return this;
     }
     public APIRequestCreateAsyncAdRequestSet setNotificationMode (String notificationMode) {
       this.setParam("notification_mode", notificationMode);
+      return this;
+    }
+
+    public APIRequestCreateAsyncAdRequestSet setNotificationUri (String notificationUri) {
+      this.setParam("notification_uri", notificationUri);
       return this;
     }
 
@@ -15594,8 +15601,8 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "session",
       "payload",
+      "session",
     };
 
     public static final String[] FIELDS = {
@@ -15654,21 +15661,21 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestCreateAudienceReplace setSession (Object session) {
-      this.setParam("session", session);
-      return this;
-    }
-    public APIRequestCreateAudienceReplace setSession (String session) {
-      this.setParam("session", session);
-      return this;
-    }
-
     public APIRequestCreateAudienceReplace setPayload (Object payload) {
       this.setParam("payload", payload);
       return this;
     }
     public APIRequestCreateAudienceReplace setPayload (String payload) {
       this.setParam("payload", payload);
+      return this;
+    }
+
+    public APIRequestCreateAudienceReplace setSession (Object session) {
+      this.setParam("session", session);
+      return this;
+    }
+    public APIRequestCreateAudienceReplace setSession (String session) {
+      this.setParam("session", session);
       return this;
     }
 
@@ -16244,10 +16251,10 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "name",
-      "targeting",
-      "target_size",
       "description",
+      "name",
+      "target_size",
+      "targeting",
     };
 
     public static final String[] FIELDS = {
@@ -16306,17 +16313,13 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestCreateBrandAudience setName (String name) {
-      this.setParam("name", name);
+    public APIRequestCreateBrandAudience setDescription (String description) {
+      this.setParam("description", description);
       return this;
     }
 
-    public APIRequestCreateBrandAudience setTargeting (Object targeting) {
-      this.setParam("targeting", targeting);
-      return this;
-    }
-    public APIRequestCreateBrandAudience setTargeting (String targeting) {
-      this.setParam("targeting", targeting);
+    public APIRequestCreateBrandAudience setName (String name) {
+      this.setParam("name", name);
       return this;
     }
 
@@ -16329,8 +16332,12 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateBrandAudience setDescription (String description) {
-      this.setParam("description", description);
+    public APIRequestCreateBrandAudience setTargeting (Object targeting) {
+      this.setParam("targeting", targeting);
+      return this;
+    }
+    public APIRequestCreateBrandAudience setTargeting (String targeting) {
+      this.setParam("targeting", targeting);
       return this;
     }
 
@@ -17138,10 +17145,10 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "delete_strategy",
-      "object_count",
       "before_date",
       "delete_offset",
+      "delete_strategy",
+      "object_count",
     };
 
     public static final String[] FIELDS = {
@@ -17200,6 +17207,20 @@ public class AdAccount extends APINode {
     }
 
 
+    public APIRequestDeleteCampaigns setBeforeDate (String beforeDate) {
+      this.setParam("before_date", beforeDate);
+      return this;
+    }
+
+    public APIRequestDeleteCampaigns setDeleteOffset (Long deleteOffset) {
+      this.setParam("delete_offset", deleteOffset);
+      return this;
+    }
+    public APIRequestDeleteCampaigns setDeleteOffset (String deleteOffset) {
+      this.setParam("delete_offset", deleteOffset);
+      return this;
+    }
+
     public APIRequestDeleteCampaigns setDeleteStrategy (EnumDeleteStrategy deleteStrategy) {
       this.setParam("delete_strategy", deleteStrategy);
       return this;
@@ -17215,20 +17236,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestDeleteCampaigns setObjectCount (String objectCount) {
       this.setParam("object_count", objectCount);
-      return this;
-    }
-
-    public APIRequestDeleteCampaigns setBeforeDate (String beforeDate) {
-      this.setParam("before_date", beforeDate);
-      return this;
-    }
-
-    public APIRequestDeleteCampaigns setDeleteOffset (Long deleteOffset) {
-      this.setParam("delete_offset", deleteOffset);
-      return this;
-    }
-    public APIRequestDeleteCampaigns setDeleteOffset (String deleteOffset) {
-      this.setParam("delete_offset", deleteOffset);
       return this;
     }
 
@@ -17278,10 +17285,12 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "effective_status",
       "date_preset",
+      "effective_status",
+      "include_drafts",
       "is_completed",
       "time_range",
+      "use_employee_draft",
     };
 
     public static final String[] FIELDS = {
@@ -17371,6 +17380,15 @@ public class AdAccount extends APINode {
     }
 
 
+    public APIRequestGetCampaigns setDatePreset (Campaign.EnumDatePreset datePreset) {
+      this.setParam("date_preset", datePreset);
+      return this;
+    }
+    public APIRequestGetCampaigns setDatePreset (String datePreset) {
+      this.setParam("date_preset", datePreset);
+      return this;
+    }
+
     public APIRequestGetCampaigns setEffectiveStatus (List<Campaign.EnumEffectiveStatus> effectiveStatus) {
       this.setParam("effective_status", effectiveStatus);
       return this;
@@ -17380,12 +17398,12 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestGetCampaigns setDatePreset (Campaign.EnumDatePreset datePreset) {
-      this.setParam("date_preset", datePreset);
+    public APIRequestGetCampaigns setIncludeDrafts (Boolean includeDrafts) {
+      this.setParam("include_drafts", includeDrafts);
       return this;
     }
-    public APIRequestGetCampaigns setDatePreset (String datePreset) {
-      this.setParam("date_preset", datePreset);
+    public APIRequestGetCampaigns setIncludeDrafts (String includeDrafts) {
+      this.setParam("include_drafts", includeDrafts);
       return this;
     }
 
@@ -17404,6 +17422,15 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetCampaigns setTimeRange (String timeRange) {
       this.setParam("time_range", timeRange);
+      return this;
+    }
+
+    public APIRequestGetCampaigns setUseEmployeeDraft (Boolean useEmployeeDraft) {
+      this.setParam("use_employee_draft", useEmployeeDraft);
+      return this;
+    }
+    public APIRequestGetCampaigns setUseEmployeeDraft (String useEmployeeDraft) {
+      this.setParam("use_employee_draft", useEmployeeDraft);
       return this;
     }
 
@@ -17670,23 +17697,23 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "name",
-      "objective",
-      "status",
+      "adlabels",
       "bid_strategy",
       "budget_rebalance_flag",
       "buying_type",
       "daily_budget",
+      "execution_options",
+      "iterative_split_test_configs",
       "lifetime_budget",
+      "name",
+      "objective",
       "pacing_type",
       "promoted_object",
-      "topline_id",
-      "spend_cap",
-      "execution_options",
-      "upstream_events",
-      "adlabels",
       "source_campaign_id",
-      "iterative_split_test_configs",
+      "spend_cap",
+      "status",
+      "topline_id",
+      "upstream_events",
     };
 
     public static final String[] FIELDS = {
@@ -17745,26 +17772,12 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestCreateCampaign setName (String name) {
-      this.setParam("name", name);
+    public APIRequestCreateCampaign setAdlabels (List<Object> adlabels) {
+      this.setParam("adlabels", adlabels);
       return this;
     }
-
-    public APIRequestCreateCampaign setObjective (Campaign.EnumObjective objective) {
-      this.setParam("objective", objective);
-      return this;
-    }
-    public APIRequestCreateCampaign setObjective (String objective) {
-      this.setParam("objective", objective);
-      return this;
-    }
-
-    public APIRequestCreateCampaign setStatus (Campaign.EnumStatus status) {
-      this.setParam("status", status);
-      return this;
-    }
-    public APIRequestCreateCampaign setStatus (String status) {
-      this.setParam("status", status);
+    public APIRequestCreateCampaign setAdlabels (String adlabels) {
+      this.setParam("adlabels", adlabels);
       return this;
     }
 
@@ -17800,12 +17813,44 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateCampaign setExecutionOptions (List<Campaign.EnumExecutionOptions> executionOptions) {
+      this.setParam("execution_options", executionOptions);
+      return this;
+    }
+    public APIRequestCreateCampaign setExecutionOptions (String executionOptions) {
+      this.setParam("execution_options", executionOptions);
+      return this;
+    }
+
+    public APIRequestCreateCampaign setIterativeSplitTestConfigs (List<Object> iterativeSplitTestConfigs) {
+      this.setParam("iterative_split_test_configs", iterativeSplitTestConfigs);
+      return this;
+    }
+    public APIRequestCreateCampaign setIterativeSplitTestConfigs (String iterativeSplitTestConfigs) {
+      this.setParam("iterative_split_test_configs", iterativeSplitTestConfigs);
+      return this;
+    }
+
     public APIRequestCreateCampaign setLifetimeBudget (Long lifetimeBudget) {
       this.setParam("lifetime_budget", lifetimeBudget);
       return this;
     }
     public APIRequestCreateCampaign setLifetimeBudget (String lifetimeBudget) {
       this.setParam("lifetime_budget", lifetimeBudget);
+      return this;
+    }
+
+    public APIRequestCreateCampaign setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateCampaign setObjective (Campaign.EnumObjective objective) {
+      this.setParam("objective", objective);
+      return this;
+    }
+    public APIRequestCreateCampaign setObjective (String objective) {
+      this.setParam("objective", objective);
       return this;
     }
 
@@ -17827,8 +17872,8 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateCampaign setToplineId (String toplineId) {
-      this.setParam("topline_id", toplineId);
+    public APIRequestCreateCampaign setSourceCampaignId (String sourceCampaignId) {
+      this.setParam("source_campaign_id", sourceCampaignId);
       return this;
     }
 
@@ -17841,12 +17886,17 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateCampaign setExecutionOptions (List<Campaign.EnumExecutionOptions> executionOptions) {
-      this.setParam("execution_options", executionOptions);
+    public APIRequestCreateCampaign setStatus (Campaign.EnumStatus status) {
+      this.setParam("status", status);
       return this;
     }
-    public APIRequestCreateCampaign setExecutionOptions (String executionOptions) {
-      this.setParam("execution_options", executionOptions);
+    public APIRequestCreateCampaign setStatus (String status) {
+      this.setParam("status", status);
+      return this;
+    }
+
+    public APIRequestCreateCampaign setToplineId (String toplineId) {
+      this.setParam("topline_id", toplineId);
       return this;
     }
 
@@ -17856,29 +17906,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateCampaign setUpstreamEvents (String upstreamEvents) {
       this.setParam("upstream_events", upstreamEvents);
-      return this;
-    }
-
-    public APIRequestCreateCampaign setAdlabels (List<Object> adlabels) {
-      this.setParam("adlabels", adlabels);
-      return this;
-    }
-    public APIRequestCreateCampaign setAdlabels (String adlabels) {
-      this.setParam("adlabels", adlabels);
-      return this;
-    }
-
-    public APIRequestCreateCampaign setSourceCampaignId (String sourceCampaignId) {
-      this.setParam("source_campaign_id", sourceCampaignId);
-      return this;
-    }
-
-    public APIRequestCreateCampaign setIterativeSplitTestConfigs (List<Object> iterativeSplitTestConfigs) {
-      this.setParam("iterative_split_test_configs", iterativeSplitTestConfigs);
-      return this;
-    }
-    public APIRequestCreateCampaign setIterativeSplitTestConfigs (String iterativeSplitTestConfigs) {
-      this.setParam("iterative_split_test_configs", iterativeSplitTestConfigs);
       return this;
     }
 
@@ -18578,10 +18605,10 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "pixel_id",
+      "business_id",
       "fields",
       "filtering",
-      "business_id",
+      "pixel_id",
     };
 
     public static final String[] FIELDS = {
@@ -18640,8 +18667,8 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestGetCustomAudiences setPixelId (String pixelId) {
-      this.setParam("pixel_id", pixelId);
+    public APIRequestGetCustomAudiences setBusinessId (String businessId) {
+      this.setParam("business_id", businessId);
       return this;
     }
 
@@ -18663,8 +18690,8 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestGetCustomAudiences setBusinessId (String businessId) {
-      this.setParam("business_id", businessId);
+    public APIRequestGetCustomAudiences setPixelId (String pixelId) {
+      this.setParam("pixel_id", pixelId);
       return this;
     }
 
@@ -18714,53 +18741,53 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "creation_params",
-      "description",
-      "name",
-      "opt_out_link",
-      "parent_audience_id",
-      "subtype",
-      "seed_audience",
-      "tags",
-      "associated_audience_id",
-      "is_household",
-      "is_household_exclusion",
-      "is_value_based",
-      "allowed_domains",
-      "is_snapshot",
-      "lookalike_spec",
-      "retention_days",
-      "customer_file_source",
-      "rev_share_policy_id",
-      "partner_reference_key",
-      "rule",
-      "prefill",
-      "pixel_id",
-      "rule_aggregation",
-      "inclusions",
-      "exclusions",
-      "countries",
-      "origin_audience_id",
-      "details",
-      "source",
-      "isPrivate",
-      "additionalMetadata",
-      "minAge",
-      "maxAge",
-      "expectedSize",
-      "gender",
-      "partnerID",
       "accountID",
+      "additionalMetadata",
+      "allowed_domains",
+      "associated_audience_id",
       "claim_objective",
       "content_type",
-      "event_source_group",
-      "product_set_id",
-      "event_sources",
-      "enable_fetch_or_create",
-      "video_group_ids",
-      "study_spec",
-      "list_of_accounts",
+      "countries",
+      "creation_params",
+      "customer_file_source",
       "dataset_id",
+      "description",
+      "details",
+      "enable_fetch_or_create",
+      "event_source_group",
+      "event_sources",
+      "exclusions",
+      "expectedSize",
+      "gender",
+      "inclusions",
+      "isPrivate",
+      "is_household",
+      "is_household_exclusion",
+      "is_snapshot",
+      "is_value_based",
+      "list_of_accounts",
+      "lookalike_spec",
+      "maxAge",
+      "minAge",
+      "name",
+      "opt_out_link",
+      "origin_audience_id",
+      "parent_audience_id",
+      "partnerID",
+      "partner_reference_key",
+      "pixel_id",
+      "prefill",
+      "product_set_id",
+      "retention_days",
+      "rev_share_policy_id",
+      "rule",
+      "rule_aggregation",
+      "seed_audience",
+      "source",
+      "study_spec",
+      "subtype",
+      "tags",
+      "video_group_ids",
     };
 
     public static final String[] FIELDS = {
@@ -18819,99 +18846,13 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestCreateCustomAudience setCreationParams (Map<String, String> creationParams) {
-      this.setParam("creation_params", creationParams);
-      return this;
-    }
-    public APIRequestCreateCustomAudience setCreationParams (String creationParams) {
-      this.setParam("creation_params", creationParams);
+    public APIRequestCreateCustomAudience setAccountid (String accountid) {
+      this.setParam("accountID", accountid);
       return this;
     }
 
-    public APIRequestCreateCustomAudience setDescription (String description) {
-      this.setParam("description", description);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setOptOutLink (String optOutLink) {
-      this.setParam("opt_out_link", optOutLink);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setParentAudienceId (Long parentAudienceId) {
-      this.setParam("parent_audience_id", parentAudienceId);
-      return this;
-    }
-    public APIRequestCreateCustomAudience setParentAudienceId (String parentAudienceId) {
-      this.setParam("parent_audience_id", parentAudienceId);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setSubtype (CustomAudience.EnumSubtype subtype) {
-      this.setParam("subtype", subtype);
-      return this;
-    }
-    public APIRequestCreateCustomAudience setSubtype (String subtype) {
-      this.setParam("subtype", subtype);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setSeedAudience (Long seedAudience) {
-      this.setParam("seed_audience", seedAudience);
-      return this;
-    }
-    public APIRequestCreateCustomAudience setSeedAudience (String seedAudience) {
-      this.setParam("seed_audience", seedAudience);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setTags (List<String> tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-    public APIRequestCreateCustomAudience setTags (String tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setAssociatedAudienceId (Long associatedAudienceId) {
-      this.setParam("associated_audience_id", associatedAudienceId);
-      return this;
-    }
-    public APIRequestCreateCustomAudience setAssociatedAudienceId (String associatedAudienceId) {
-      this.setParam("associated_audience_id", associatedAudienceId);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setIsHousehold (Boolean isHousehold) {
-      this.setParam("is_household", isHousehold);
-      return this;
-    }
-    public APIRequestCreateCustomAudience setIsHousehold (String isHousehold) {
-      this.setParam("is_household", isHousehold);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setIsHouseholdExclusion (Boolean isHouseholdExclusion) {
-      this.setParam("is_household_exclusion", isHouseholdExclusion);
-      return this;
-    }
-    public APIRequestCreateCustomAudience setIsHouseholdExclusion (String isHouseholdExclusion) {
-      this.setParam("is_household_exclusion", isHouseholdExclusion);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setIsValueBased (Boolean isValueBased) {
-      this.setParam("is_value_based", isValueBased);
-      return this;
-    }
-    public APIRequestCreateCustomAudience setIsValueBased (String isValueBased) {
-      this.setParam("is_value_based", isValueBased);
+    public APIRequestCreateCustomAudience setAdditionalmetadata (String additionalmetadata) {
+      this.setParam("additionalMetadata", additionalmetadata);
       return this;
     }
 
@@ -18924,167 +18865,12 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateCustomAudience setIsSnapshot (Boolean isSnapshot) {
-      this.setParam("is_snapshot", isSnapshot);
+    public APIRequestCreateCustomAudience setAssociatedAudienceId (Long associatedAudienceId) {
+      this.setParam("associated_audience_id", associatedAudienceId);
       return this;
     }
-    public APIRequestCreateCustomAudience setIsSnapshot (String isSnapshot) {
-      this.setParam("is_snapshot", isSnapshot);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setLookalikeSpec (String lookalikeSpec) {
-      this.setParam("lookalike_spec", lookalikeSpec);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setRetentionDays (Long retentionDays) {
-      this.setParam("retention_days", retentionDays);
-      return this;
-    }
-    public APIRequestCreateCustomAudience setRetentionDays (String retentionDays) {
-      this.setParam("retention_days", retentionDays);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setCustomerFileSource (CustomAudience.EnumCustomerFileSource customerFileSource) {
-      this.setParam("customer_file_source", customerFileSource);
-      return this;
-    }
-    public APIRequestCreateCustomAudience setCustomerFileSource (String customerFileSource) {
-      this.setParam("customer_file_source", customerFileSource);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setRevSharePolicyId (Long revSharePolicyId) {
-      this.setParam("rev_share_policy_id", revSharePolicyId);
-      return this;
-    }
-    public APIRequestCreateCustomAudience setRevSharePolicyId (String revSharePolicyId) {
-      this.setParam("rev_share_policy_id", revSharePolicyId);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setPartnerReferenceKey (String partnerReferenceKey) {
-      this.setParam("partner_reference_key", partnerReferenceKey);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setRule (String rule) {
-      this.setParam("rule", rule);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setPrefill (Boolean prefill) {
-      this.setParam("prefill", prefill);
-      return this;
-    }
-    public APIRequestCreateCustomAudience setPrefill (String prefill) {
-      this.setParam("prefill", prefill);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setPixelId (String pixelId) {
-      this.setParam("pixel_id", pixelId);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setRuleAggregation (String ruleAggregation) {
-      this.setParam("rule_aggregation", ruleAggregation);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setInclusions (List<Object> inclusions) {
-      this.setParam("inclusions", inclusions);
-      return this;
-    }
-    public APIRequestCreateCustomAudience setInclusions (String inclusions) {
-      this.setParam("inclusions", inclusions);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setExclusions (List<Object> exclusions) {
-      this.setParam("exclusions", exclusions);
-      return this;
-    }
-    public APIRequestCreateCustomAudience setExclusions (String exclusions) {
-      this.setParam("exclusions", exclusions);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setCountries (String countries) {
-      this.setParam("countries", countries);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setOriginAudienceId (String originAudienceId) {
-      this.setParam("origin_audience_id", originAudienceId);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setDetails (String details) {
-      this.setParam("details", details);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setSource (String source) {
-      this.setParam("source", source);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setIsprivate (Boolean isprivate) {
-      this.setParam("isPrivate", isprivate);
-      return this;
-    }
-    public APIRequestCreateCustomAudience setIsprivate (String isprivate) {
-      this.setParam("isPrivate", isprivate);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setAdditionalmetadata (String additionalmetadata) {
-      this.setParam("additionalMetadata", additionalmetadata);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setMinage (Long minage) {
-      this.setParam("minAge", minage);
-      return this;
-    }
-    public APIRequestCreateCustomAudience setMinage (String minage) {
-      this.setParam("minAge", minage);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setMaxage (Long maxage) {
-      this.setParam("maxAge", maxage);
-      return this;
-    }
-    public APIRequestCreateCustomAudience setMaxage (String maxage) {
-      this.setParam("maxAge", maxage);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setExpectedsize (Long expectedsize) {
-      this.setParam("expectedSize", expectedsize);
-      return this;
-    }
-    public APIRequestCreateCustomAudience setExpectedsize (String expectedsize) {
-      this.setParam("expectedSize", expectedsize);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setGender (String gender) {
-      this.setParam("gender", gender);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setPartnerid (String partnerid) {
-      this.setParam("partnerID", partnerid);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setAccountid (String accountid) {
-      this.setParam("accountID", accountid);
+    public APIRequestCreateCustomAudience setAssociatedAudienceId (String associatedAudienceId) {
+      this.setParam("associated_audience_id", associatedAudienceId);
       return this;
     }
 
@@ -19106,22 +18892,41 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateCustomAudience setEventSourceGroup (String eventSourceGroup) {
-      this.setParam("event_source_group", eventSourceGroup);
+    public APIRequestCreateCustomAudience setCountries (String countries) {
+      this.setParam("countries", countries);
       return this;
     }
 
-    public APIRequestCreateCustomAudience setProductSetId (String productSetId) {
-      this.setParam("product_set_id", productSetId);
+    public APIRequestCreateCustomAudience setCreationParams (Map<String, String> creationParams) {
+      this.setParam("creation_params", creationParams);
+      return this;
+    }
+    public APIRequestCreateCustomAudience setCreationParams (String creationParams) {
+      this.setParam("creation_params", creationParams);
       return this;
     }
 
-    public APIRequestCreateCustomAudience setEventSources (List<Map<String, String>> eventSources) {
-      this.setParam("event_sources", eventSources);
+    public APIRequestCreateCustomAudience setCustomerFileSource (CustomAudience.EnumCustomerFileSource customerFileSource) {
+      this.setParam("customer_file_source", customerFileSource);
       return this;
     }
-    public APIRequestCreateCustomAudience setEventSources (String eventSources) {
-      this.setParam("event_sources", eventSources);
+    public APIRequestCreateCustomAudience setCustomerFileSource (String customerFileSource) {
+      this.setParam("customer_file_source", customerFileSource);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setDatasetId (String datasetId) {
+      this.setParam("dataset_id", datasetId);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setDetails (String details) {
+      this.setParam("details", details);
       return this;
     }
 
@@ -19134,21 +18939,94 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateCustomAudience setVideoGroupIds (List<String> videoGroupIds) {
-      this.setParam("video_group_ids", videoGroupIds);
-      return this;
-    }
-    public APIRequestCreateCustomAudience setVideoGroupIds (String videoGroupIds) {
-      this.setParam("video_group_ids", videoGroupIds);
+    public APIRequestCreateCustomAudience setEventSourceGroup (String eventSourceGroup) {
+      this.setParam("event_source_group", eventSourceGroup);
       return this;
     }
 
-    public APIRequestCreateCustomAudience setStudySpec (Map<String, String> studySpec) {
-      this.setParam("study_spec", studySpec);
+    public APIRequestCreateCustomAudience setEventSources (List<Map<String, String>> eventSources) {
+      this.setParam("event_sources", eventSources);
       return this;
     }
-    public APIRequestCreateCustomAudience setStudySpec (String studySpec) {
-      this.setParam("study_spec", studySpec);
+    public APIRequestCreateCustomAudience setEventSources (String eventSources) {
+      this.setParam("event_sources", eventSources);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setExclusions (List<Object> exclusions) {
+      this.setParam("exclusions", exclusions);
+      return this;
+    }
+    public APIRequestCreateCustomAudience setExclusions (String exclusions) {
+      this.setParam("exclusions", exclusions);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setExpectedsize (Long expectedsize) {
+      this.setParam("expectedSize", expectedsize);
+      return this;
+    }
+    public APIRequestCreateCustomAudience setExpectedsize (String expectedsize) {
+      this.setParam("expectedSize", expectedsize);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setGender (String gender) {
+      this.setParam("gender", gender);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setInclusions (List<Object> inclusions) {
+      this.setParam("inclusions", inclusions);
+      return this;
+    }
+    public APIRequestCreateCustomAudience setInclusions (String inclusions) {
+      this.setParam("inclusions", inclusions);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setIsprivate (Boolean isprivate) {
+      this.setParam("isPrivate", isprivate);
+      return this;
+    }
+    public APIRequestCreateCustomAudience setIsprivate (String isprivate) {
+      this.setParam("isPrivate", isprivate);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setIsHousehold (Boolean isHousehold) {
+      this.setParam("is_household", isHousehold);
+      return this;
+    }
+    public APIRequestCreateCustomAudience setIsHousehold (String isHousehold) {
+      this.setParam("is_household", isHousehold);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setIsHouseholdExclusion (Boolean isHouseholdExclusion) {
+      this.setParam("is_household_exclusion", isHouseholdExclusion);
+      return this;
+    }
+    public APIRequestCreateCustomAudience setIsHouseholdExclusion (String isHouseholdExclusion) {
+      this.setParam("is_household_exclusion", isHouseholdExclusion);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setIsSnapshot (Boolean isSnapshot) {
+      this.setParam("is_snapshot", isSnapshot);
+      return this;
+    }
+    public APIRequestCreateCustomAudience setIsSnapshot (String isSnapshot) {
+      this.setParam("is_snapshot", isSnapshot);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setIsValueBased (Boolean isValueBased) {
+      this.setParam("is_value_based", isValueBased);
+      return this;
+    }
+    public APIRequestCreateCustomAudience setIsValueBased (String isValueBased) {
+      this.setParam("is_value_based", isValueBased);
       return this;
     }
 
@@ -19161,8 +19039,157 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateCustomAudience setDatasetId (String datasetId) {
-      this.setParam("dataset_id", datasetId);
+    public APIRequestCreateCustomAudience setLookalikeSpec (String lookalikeSpec) {
+      this.setParam("lookalike_spec", lookalikeSpec);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setMaxage (Long maxage) {
+      this.setParam("maxAge", maxage);
+      return this;
+    }
+    public APIRequestCreateCustomAudience setMaxage (String maxage) {
+      this.setParam("maxAge", maxage);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setMinage (Long minage) {
+      this.setParam("minAge", minage);
+      return this;
+    }
+    public APIRequestCreateCustomAudience setMinage (String minage) {
+      this.setParam("minAge", minage);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setOptOutLink (String optOutLink) {
+      this.setParam("opt_out_link", optOutLink);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setOriginAudienceId (String originAudienceId) {
+      this.setParam("origin_audience_id", originAudienceId);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setParentAudienceId (Long parentAudienceId) {
+      this.setParam("parent_audience_id", parentAudienceId);
+      return this;
+    }
+    public APIRequestCreateCustomAudience setParentAudienceId (String parentAudienceId) {
+      this.setParam("parent_audience_id", parentAudienceId);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setPartnerid (String partnerid) {
+      this.setParam("partnerID", partnerid);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setPartnerReferenceKey (String partnerReferenceKey) {
+      this.setParam("partner_reference_key", partnerReferenceKey);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setPixelId (String pixelId) {
+      this.setParam("pixel_id", pixelId);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setPrefill (Boolean prefill) {
+      this.setParam("prefill", prefill);
+      return this;
+    }
+    public APIRequestCreateCustomAudience setPrefill (String prefill) {
+      this.setParam("prefill", prefill);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setProductSetId (String productSetId) {
+      this.setParam("product_set_id", productSetId);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setRetentionDays (Long retentionDays) {
+      this.setParam("retention_days", retentionDays);
+      return this;
+    }
+    public APIRequestCreateCustomAudience setRetentionDays (String retentionDays) {
+      this.setParam("retention_days", retentionDays);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setRevSharePolicyId (Long revSharePolicyId) {
+      this.setParam("rev_share_policy_id", revSharePolicyId);
+      return this;
+    }
+    public APIRequestCreateCustomAudience setRevSharePolicyId (String revSharePolicyId) {
+      this.setParam("rev_share_policy_id", revSharePolicyId);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setRule (String rule) {
+      this.setParam("rule", rule);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setRuleAggregation (String ruleAggregation) {
+      this.setParam("rule_aggregation", ruleAggregation);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setSeedAudience (Long seedAudience) {
+      this.setParam("seed_audience", seedAudience);
+      return this;
+    }
+    public APIRequestCreateCustomAudience setSeedAudience (String seedAudience) {
+      this.setParam("seed_audience", seedAudience);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setSource (String source) {
+      this.setParam("source", source);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setStudySpec (Map<String, String> studySpec) {
+      this.setParam("study_spec", studySpec);
+      return this;
+    }
+    public APIRequestCreateCustomAudience setStudySpec (String studySpec) {
+      this.setParam("study_spec", studySpec);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setSubtype (CustomAudience.EnumSubtype subtype) {
+      this.setParam("subtype", subtype);
+      return this;
+    }
+    public APIRequestCreateCustomAudience setSubtype (String subtype) {
+      this.setParam("subtype", subtype);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setTags (List<String> tags) {
+      this.setParam("tags", tags);
+      return this;
+    }
+    public APIRequestCreateCustomAudience setTags (String tags) {
+      this.setParam("tags", tags);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setVideoGroupIds (List<String> videoGroupIds) {
+      this.setParam("video_group_ids", videoGroupIds);
+      return this;
+    }
+    public APIRequestCreateCustomAudience setVideoGroupIds (String videoGroupIds) {
+      this.setParam("video_group_ids", videoGroupIds);
       return this;
     }
 
@@ -19596,13 +19623,13 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "name",
+      "advanced_rule",
+      "custom_event_type",
+      "default_conversion_value",
       "description",
       "event_source_id",
+      "name",
       "rule",
-      "default_conversion_value",
-      "custom_event_type",
-      "advanced_rule",
     };
 
     public static final String[] FIELDS = {
@@ -19661,8 +19688,26 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestCreateCustomConversion setName (String name) {
-      this.setParam("name", name);
+    public APIRequestCreateCustomConversion setAdvancedRule (String advancedRule) {
+      this.setParam("advanced_rule", advancedRule);
+      return this;
+    }
+
+    public APIRequestCreateCustomConversion setCustomEventType (CustomConversion.EnumCustomEventType customEventType) {
+      this.setParam("custom_event_type", customEventType);
+      return this;
+    }
+    public APIRequestCreateCustomConversion setCustomEventType (String customEventType) {
+      this.setParam("custom_event_type", customEventType);
+      return this;
+    }
+
+    public APIRequestCreateCustomConversion setDefaultConversionValue (Double defaultConversionValue) {
+      this.setParam("default_conversion_value", defaultConversionValue);
+      return this;
+    }
+    public APIRequestCreateCustomConversion setDefaultConversionValue (String defaultConversionValue) {
+      this.setParam("default_conversion_value", defaultConversionValue);
       return this;
     }
 
@@ -19676,31 +19721,13 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateCustomConversion setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
     public APIRequestCreateCustomConversion setRule (String rule) {
       this.setParam("rule", rule);
-      return this;
-    }
-
-    public APIRequestCreateCustomConversion setDefaultConversionValue (Double defaultConversionValue) {
-      this.setParam("default_conversion_value", defaultConversionValue);
-      return this;
-    }
-    public APIRequestCreateCustomConversion setDefaultConversionValue (String defaultConversionValue) {
-      this.setParam("default_conversion_value", defaultConversionValue);
-      return this;
-    }
-
-    public APIRequestCreateCustomConversion setCustomEventType (CustomConversion.EnumCustomEventType customEventType) {
-      this.setParam("custom_event_type", customEventType);
-      return this;
-    }
-    public APIRequestCreateCustomConversion setCustomEventType (String customEventType) {
-      this.setParam("custom_event_type", customEventType);
-      return this;
-    }
-
-    public APIRequestCreateCustomConversion setAdvancedRule (String advancedRule) {
-      this.setParam("advanced_rule", advancedRule);
       return this;
     }
 
@@ -19854,9 +19881,9 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "targeting_spec",
       "optimization_goal",
       "promoted_object",
+      "targeting_spec",
     };
 
     public static final String[] FIELDS = {
@@ -19919,15 +19946,6 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestGetDeliveryEstimate setTargetingSpec (Targeting targetingSpec) {
-      this.setParam("targeting_spec", targetingSpec);
-      return this;
-    }
-    public APIRequestGetDeliveryEstimate setTargetingSpec (String targetingSpec) {
-      this.setParam("targeting_spec", targetingSpec);
-      return this;
-    }
-
     public APIRequestGetDeliveryEstimate setOptimizationGoal (AdAccountDeliveryEstimate.EnumOptimizationGoal optimizationGoal) {
       this.setParam("optimization_goal", optimizationGoal);
       return this;
@@ -19943,6 +19961,15 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetDeliveryEstimate setPromotedObject (String promotedObject) {
       this.setParam("promoted_object", promotedObject);
+      return this;
+    }
+
+    public APIRequestGetDeliveryEstimate setTargetingSpec (Targeting targetingSpec) {
+      this.setParam("targeting_spec", targetingSpec);
+      return this;
+    }
+    public APIRequestGetDeliveryEstimate setTargetingSpec (String targetingSpec) {
+      this.setParam("targeting_spec", targetingSpec);
       return this;
     }
 
@@ -21073,20 +21100,20 @@ public class AdAccount extends APINode {
     }
     public static final String[] PARAMS = {
       "ad_format",
+      "creative",
+      "dynamic_asset_label",
       "dynamic_creative_spec",
       "dynamic_customization",
-      "dynamic_asset_label",
-      "interactive",
-      "post",
-      "height",
-      "width",
-      "place_page_id",
-      "product_item_ids",
-      "start_date",
       "end_date",
+      "height",
+      "interactive",
       "locale",
+      "place_page_id",
+      "post",
+      "product_item_ids",
       "render_type",
-      "creative",
+      "start_date",
+      "width",
     };
 
     public static final String[] FIELDS = {
@@ -21155,6 +21182,20 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetGeneratePreviews setCreative (AdCreative creative) {
+      this.setParam("creative", creative);
+      return this;
+    }
+    public APIRequestGetGeneratePreviews setCreative (String creative) {
+      this.setParam("creative", creative);
+      return this;
+    }
+
+    public APIRequestGetGeneratePreviews setDynamicAssetLabel (String dynamicAssetLabel) {
+      this.setParam("dynamic_asset_label", dynamicAssetLabel);
+      return this;
+    }
+
     public APIRequestGetGeneratePreviews setDynamicCreativeSpec (Object dynamicCreativeSpec) {
       this.setParam("dynamic_creative_spec", dynamicCreativeSpec);
       return this;
@@ -21173,26 +21214,8 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestGetGeneratePreviews setDynamicAssetLabel (String dynamicAssetLabel) {
-      this.setParam("dynamic_asset_label", dynamicAssetLabel);
-      return this;
-    }
-
-    public APIRequestGetGeneratePreviews setInteractive (Boolean interactive) {
-      this.setParam("interactive", interactive);
-      return this;
-    }
-    public APIRequestGetGeneratePreviews setInteractive (String interactive) {
-      this.setParam("interactive", interactive);
-      return this;
-    }
-
-    public APIRequestGetGeneratePreviews setPost (Object post) {
-      this.setParam("post", post);
-      return this;
-    }
-    public APIRequestGetGeneratePreviews setPost (String post) {
-      this.setParam("post", post);
+    public APIRequestGetGeneratePreviews setEndDate (String endDate) {
+      this.setParam("end_date", endDate);
       return this;
     }
 
@@ -21205,12 +21228,17 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestGetGeneratePreviews setWidth (Long width) {
-      this.setParam("width", width);
+    public APIRequestGetGeneratePreviews setInteractive (Boolean interactive) {
+      this.setParam("interactive", interactive);
       return this;
     }
-    public APIRequestGetGeneratePreviews setWidth (String width) {
-      this.setParam("width", width);
+    public APIRequestGetGeneratePreviews setInteractive (String interactive) {
+      this.setParam("interactive", interactive);
+      return this;
+    }
+
+    public APIRequestGetGeneratePreviews setLocale (String locale) {
+      this.setParam("locale", locale);
       return this;
     }
 
@@ -21223,27 +21251,21 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetGeneratePreviews setPost (Object post) {
+      this.setParam("post", post);
+      return this;
+    }
+    public APIRequestGetGeneratePreviews setPost (String post) {
+      this.setParam("post", post);
+      return this;
+    }
+
     public APIRequestGetGeneratePreviews setProductItemIds (List<String> productItemIds) {
       this.setParam("product_item_ids", productItemIds);
       return this;
     }
     public APIRequestGetGeneratePreviews setProductItemIds (String productItemIds) {
       this.setParam("product_item_ids", productItemIds);
-      return this;
-    }
-
-    public APIRequestGetGeneratePreviews setStartDate (String startDate) {
-      this.setParam("start_date", startDate);
-      return this;
-    }
-
-    public APIRequestGetGeneratePreviews setEndDate (String endDate) {
-      this.setParam("end_date", endDate);
-      return this;
-    }
-
-    public APIRequestGetGeneratePreviews setLocale (String locale) {
-      this.setParam("locale", locale);
       return this;
     }
 
@@ -21256,12 +21278,17 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestGetGeneratePreviews setCreative (AdCreative creative) {
-      this.setParam("creative", creative);
+    public APIRequestGetGeneratePreviews setStartDate (String startDate) {
+      this.setParam("start_date", startDate);
       return this;
     }
-    public APIRequestGetGeneratePreviews setCreative (String creative) {
-      this.setParam("creative", creative);
+
+    public APIRequestGetGeneratePreviews setWidth (Long width) {
+      this.setParam("width", width);
+      return this;
+    }
+    public APIRequestGetGeneratePreviews setWidth (String width) {
+      this.setParam("width", width);
       return this;
     }
 
@@ -21542,21 +21569,21 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "default_summary",
-      "fields",
-      "filtering",
-      "summary",
-      "sort",
       "action_attribution_windows",
       "action_breakdowns",
       "action_report_time",
       "breakdowns",
       "date_preset",
+      "default_summary",
       "export_columns",
       "export_format",
       "export_name",
+      "fields",
+      "filtering",
       "level",
       "product_id_limit",
+      "sort",
+      "summary",
       "summary_action_breakdowns",
       "time_increment",
       "time_range",
@@ -21620,51 +21647,6 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestGetInsights setDefaultSummary (Boolean defaultSummary) {
-      this.setParam("default_summary", defaultSummary);
-      return this;
-    }
-    public APIRequestGetInsights setDefaultSummary (String defaultSummary) {
-      this.setParam("default_summary", defaultSummary);
-      return this;
-    }
-
-    public APIRequestGetInsights setFields (List<String> fields) {
-      this.setParam("fields", fields);
-      return this;
-    }
-    public APIRequestGetInsights setFields (String fields) {
-      this.setParam("fields", fields);
-      return this;
-    }
-
-    public APIRequestGetInsights setFiltering (List<Object> filtering) {
-      this.setParam("filtering", filtering);
-      return this;
-    }
-    public APIRequestGetInsights setFiltering (String filtering) {
-      this.setParam("filtering", filtering);
-      return this;
-    }
-
-    public APIRequestGetInsights setSummary (List<String> summary) {
-      this.setParam("summary", summary);
-      return this;
-    }
-    public APIRequestGetInsights setSummary (String summary) {
-      this.setParam("summary", summary);
-      return this;
-    }
-
-    public APIRequestGetInsights setSort (List<String> sort) {
-      this.setParam("sort", sort);
-      return this;
-    }
-    public APIRequestGetInsights setSort (String sort) {
-      this.setParam("sort", sort);
-      return this;
-    }
-
     public APIRequestGetInsights setActionAttributionWindows (List<AdsInsights.EnumActionAttributionWindows> actionAttributionWindows) {
       this.setParam("action_attribution_windows", actionAttributionWindows);
       return this;
@@ -21710,6 +21692,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetInsights setDefaultSummary (Boolean defaultSummary) {
+      this.setParam("default_summary", defaultSummary);
+      return this;
+    }
+    public APIRequestGetInsights setDefaultSummary (String defaultSummary) {
+      this.setParam("default_summary", defaultSummary);
+      return this;
+    }
+
     public APIRequestGetInsights setExportColumns (List<String> exportColumns) {
       this.setParam("export_columns", exportColumns);
       return this;
@@ -21729,6 +21720,24 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetInsights setFields (List<String> fields) {
+      this.setParam("fields", fields);
+      return this;
+    }
+    public APIRequestGetInsights setFields (String fields) {
+      this.setParam("fields", fields);
+      return this;
+    }
+
+    public APIRequestGetInsights setFiltering (List<Object> filtering) {
+      this.setParam("filtering", filtering);
+      return this;
+    }
+    public APIRequestGetInsights setFiltering (String filtering) {
+      this.setParam("filtering", filtering);
+      return this;
+    }
+
     public APIRequestGetInsights setLevel (AdsInsights.EnumLevel level) {
       this.setParam("level", level);
       return this;
@@ -21744,6 +21753,24 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetInsights setProductIdLimit (String productIdLimit) {
       this.setParam("product_id_limit", productIdLimit);
+      return this;
+    }
+
+    public APIRequestGetInsights setSort (List<String> sort) {
+      this.setParam("sort", sort);
+      return this;
+    }
+    public APIRequestGetInsights setSort (String sort) {
+      this.setParam("sort", sort);
+      return this;
+    }
+
+    public APIRequestGetInsights setSummary (List<String> summary) {
+      this.setParam("summary", summary);
+      return this;
+    }
+    public APIRequestGetInsights setSummary (String summary) {
+      this.setParam("summary", summary);
       return this;
     }
 
@@ -21834,21 +21861,21 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "default_summary",
-      "fields",
-      "filtering",
-      "summary",
-      "sort",
       "action_attribution_windows",
       "action_breakdowns",
       "action_report_time",
       "breakdowns",
       "date_preset",
+      "default_summary",
       "export_columns",
       "export_format",
       "export_name",
+      "fields",
+      "filtering",
       "level",
       "product_id_limit",
+      "sort",
+      "summary",
       "summary_action_breakdowns",
       "time_increment",
       "time_range",
@@ -21912,51 +21939,6 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestGetInsightsAsync setDefaultSummary (Boolean defaultSummary) {
-      this.setParam("default_summary", defaultSummary);
-      return this;
-    }
-    public APIRequestGetInsightsAsync setDefaultSummary (String defaultSummary) {
-      this.setParam("default_summary", defaultSummary);
-      return this;
-    }
-
-    public APIRequestGetInsightsAsync setFields (List<String> fields) {
-      this.setParam("fields", fields);
-      return this;
-    }
-    public APIRequestGetInsightsAsync setFields (String fields) {
-      this.setParam("fields", fields);
-      return this;
-    }
-
-    public APIRequestGetInsightsAsync setFiltering (List<Object> filtering) {
-      this.setParam("filtering", filtering);
-      return this;
-    }
-    public APIRequestGetInsightsAsync setFiltering (String filtering) {
-      this.setParam("filtering", filtering);
-      return this;
-    }
-
-    public APIRequestGetInsightsAsync setSummary (List<String> summary) {
-      this.setParam("summary", summary);
-      return this;
-    }
-    public APIRequestGetInsightsAsync setSummary (String summary) {
-      this.setParam("summary", summary);
-      return this;
-    }
-
-    public APIRequestGetInsightsAsync setSort (List<String> sort) {
-      this.setParam("sort", sort);
-      return this;
-    }
-    public APIRequestGetInsightsAsync setSort (String sort) {
-      this.setParam("sort", sort);
-      return this;
-    }
-
     public APIRequestGetInsightsAsync setActionAttributionWindows (List<AdsInsights.EnumActionAttributionWindows> actionAttributionWindows) {
       this.setParam("action_attribution_windows", actionAttributionWindows);
       return this;
@@ -22002,6 +21984,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetInsightsAsync setDefaultSummary (Boolean defaultSummary) {
+      this.setParam("default_summary", defaultSummary);
+      return this;
+    }
+    public APIRequestGetInsightsAsync setDefaultSummary (String defaultSummary) {
+      this.setParam("default_summary", defaultSummary);
+      return this;
+    }
+
     public APIRequestGetInsightsAsync setExportColumns (List<String> exportColumns) {
       this.setParam("export_columns", exportColumns);
       return this;
@@ -22021,6 +22012,24 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetInsightsAsync setFields (List<String> fields) {
+      this.setParam("fields", fields);
+      return this;
+    }
+    public APIRequestGetInsightsAsync setFields (String fields) {
+      this.setParam("fields", fields);
+      return this;
+    }
+
+    public APIRequestGetInsightsAsync setFiltering (List<Object> filtering) {
+      this.setParam("filtering", filtering);
+      return this;
+    }
+    public APIRequestGetInsightsAsync setFiltering (String filtering) {
+      this.setParam("filtering", filtering);
+      return this;
+    }
+
     public APIRequestGetInsightsAsync setLevel (AdsInsights.EnumLevel level) {
       this.setParam("level", level);
       return this;
@@ -22036,6 +22045,24 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetInsightsAsync setProductIdLimit (String productIdLimit) {
       this.setParam("product_id_limit", productIdLimit);
+      return this;
+    }
+
+    public APIRequestGetInsightsAsync setSort (List<String> sort) {
+      this.setParam("sort", sort);
+      return this;
+    }
+    public APIRequestGetInsightsAsync setSort (String sort) {
+      this.setParam("sort", sort);
+      return this;
+    }
+
+    public APIRequestGetInsightsAsync setSummary (List<String> summary) {
+      this.setParam("summary", summary);
+      return this;
+    }
+    public APIRequestGetInsightsAsync setSummary (String summary) {
+      this.setParam("summary", summary);
       return this;
     }
 
@@ -22766,11 +22793,11 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "allow_incomplete_app",
       "app_store",
       "app_store_country",
       "business_id",
       "query_term",
-      "allow_incomplete_app",
     };
 
     public static final String[] FIELDS = {
@@ -22836,6 +22863,15 @@ public class AdAccount extends APINode {
     }
 
 
+    public APIRequestGetMatchedSearchApplications setAllowIncompleteApp (Boolean allowIncompleteApp) {
+      this.setParam("allow_incomplete_app", allowIncompleteApp);
+      return this;
+    }
+    public APIRequestGetMatchedSearchApplications setAllowIncompleteApp (String allowIncompleteApp) {
+      this.setParam("allow_incomplete_app", allowIncompleteApp);
+      return this;
+    }
+
     public APIRequestGetMatchedSearchApplications setAppStore (AdAccountMatchedSearchApplicationsEdgeData.EnumAppStore appStore) {
       this.setParam("app_store", appStore);
       return this;
@@ -22857,15 +22893,6 @@ public class AdAccount extends APINode {
 
     public APIRequestGetMatchedSearchApplications setQueryTerm (String queryTerm) {
       this.setParam("query_term", queryTerm);
-      return this;
-    }
-
-    public APIRequestGetMatchedSearchApplications setAllowIncompleteApp (Boolean allowIncompleteApp) {
-      this.setParam("allow_incomplete_app", allowIncompleteApp);
-      return this;
-    }
-    public APIRequestGetMatchedSearchApplications setAllowIncompleteApp (String allowIncompleteApp) {
-      this.setParam("allow_incomplete_app", allowIncompleteApp);
       return this;
     }
 
@@ -23231,8 +23258,8 @@ public class AdAccount extends APINode {
     }
     public static final String[] PARAMS = {
       "mockup_access_token",
-      "source_mockup_id",
       "page_id",
+      "source_mockup_id",
     };
 
     public static final String[] FIELDS = {
@@ -23296,13 +23323,13 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateMockup setSourceMockupId (String sourceMockupId) {
-      this.setParam("source_mockup_id", sourceMockupId);
+    public APIRequestCreateMockup setPageId (String pageId) {
+      this.setParam("page_id", pageId);
       return this;
     }
 
-    public APIRequestCreateMockup setPageId (String pageId) {
-      this.setParam("page_id", pageId);
+    public APIRequestCreateMockup setSourceMockupId (String sourceMockupId) {
+      this.setParam("source_mockup_id", sourceMockupId);
       return this;
     }
 
@@ -24252,11 +24279,11 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "targeting_type",
-      "private_or_public",
       "hide_pc",
-      "limit",
       "is_exclusion",
+      "limit",
+      "private_or_public",
+      "targeting_type",
     };
 
     public static final String[] FIELDS = {
@@ -24326,26 +24353,21 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestGetPartnerCategories setTargetingType (String targetingType) {
-      this.setParam("targeting_type", targetingType);
-      return this;
-    }
-
-    public APIRequestGetPartnerCategories setPrivateOrPublic (PartnerCategory.EnumPrivateOrPublic privateOrPublic) {
-      this.setParam("private_or_public", privateOrPublic);
-      return this;
-    }
-    public APIRequestGetPartnerCategories setPrivateOrPublic (String privateOrPublic) {
-      this.setParam("private_or_public", privateOrPublic);
-      return this;
-    }
-
     public APIRequestGetPartnerCategories setHidePc (Boolean hidePc) {
       this.setParam("hide_pc", hidePc);
       return this;
     }
     public APIRequestGetPartnerCategories setHidePc (String hidePc) {
       this.setParam("hide_pc", hidePc);
+      return this;
+    }
+
+    public APIRequestGetPartnerCategories setIsExclusion (Boolean isExclusion) {
+      this.setParam("is_exclusion", isExclusion);
+      return this;
+    }
+    public APIRequestGetPartnerCategories setIsExclusion (String isExclusion) {
+      this.setParam("is_exclusion", isExclusion);
       return this;
     }
 
@@ -24358,12 +24380,17 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestGetPartnerCategories setIsExclusion (Boolean isExclusion) {
-      this.setParam("is_exclusion", isExclusion);
+    public APIRequestGetPartnerCategories setPrivateOrPublic (PartnerCategory.EnumPrivateOrPublic privateOrPublic) {
+      this.setParam("private_or_public", privateOrPublic);
       return this;
     }
-    public APIRequestGetPartnerCategories setIsExclusion (String isExclusion) {
-      this.setParam("is_exclusion", isExclusion);
+    public APIRequestGetPartnerCategories setPrivateOrPublic (String privateOrPublic) {
+      this.setParam("private_or_public", privateOrPublic);
+      return this;
+    }
+
+    public APIRequestGetPartnerCategories setTargetingType (String targetingType) {
+      this.setParam("targeting_type", targetingType);
       return this;
     }
 
@@ -24490,16 +24517,16 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "upload_id",
-      "type",
-      "start_new_upload",
-      "total_expected",
-      "upload_metadata",
-      "upload_complete",
-      "ignore_count_check",
       "abandon_upload",
+      "ignore_count_check",
       "payload",
       "payload_type",
+      "start_new_upload",
+      "total_expected",
+      "type",
+      "upload_complete",
+      "upload_id",
+      "upload_metadata",
     };
 
     public static final String[] FIELDS = {
@@ -24558,17 +24585,35 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestCreatePartnerDatum setUploadId (Long uploadId) {
-      this.setParam("upload_id", uploadId);
+    public APIRequestCreatePartnerDatum setAbandonUpload (Boolean abandonUpload) {
+      this.setParam("abandon_upload", abandonUpload);
       return this;
     }
-    public APIRequestCreatePartnerDatum setUploadId (String uploadId) {
-      this.setParam("upload_id", uploadId);
+    public APIRequestCreatePartnerDatum setAbandonUpload (String abandonUpload) {
+      this.setParam("abandon_upload", abandonUpload);
       return this;
     }
 
-    public APIRequestCreatePartnerDatum setType (String type) {
-      this.setParam("type", type);
+    public APIRequestCreatePartnerDatum setIgnoreCountCheck (Boolean ignoreCountCheck) {
+      this.setParam("ignore_count_check", ignoreCountCheck);
+      return this;
+    }
+    public APIRequestCreatePartnerDatum setIgnoreCountCheck (String ignoreCountCheck) {
+      this.setParam("ignore_count_check", ignoreCountCheck);
+      return this;
+    }
+
+    public APIRequestCreatePartnerDatum setPayload (List<String> payload) {
+      this.setParam("payload", payload);
+      return this;
+    }
+    public APIRequestCreatePartnerDatum setPayload (String payload) {
+      this.setParam("payload", payload);
+      return this;
+    }
+
+    public APIRequestCreatePartnerDatum setPayloadType (String payloadType) {
+      this.setParam("payload_type", payloadType);
       return this;
     }
 
@@ -24590,8 +24635,8 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreatePartnerDatum setUploadMetadata (String uploadMetadata) {
-      this.setParam("upload_metadata", uploadMetadata);
+    public APIRequestCreatePartnerDatum setType (String type) {
+      this.setParam("type", type);
       return this;
     }
 
@@ -24604,35 +24649,17 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreatePartnerDatum setIgnoreCountCheck (Boolean ignoreCountCheck) {
-      this.setParam("ignore_count_check", ignoreCountCheck);
+    public APIRequestCreatePartnerDatum setUploadId (Long uploadId) {
+      this.setParam("upload_id", uploadId);
       return this;
     }
-    public APIRequestCreatePartnerDatum setIgnoreCountCheck (String ignoreCountCheck) {
-      this.setParam("ignore_count_check", ignoreCountCheck);
-      return this;
-    }
-
-    public APIRequestCreatePartnerDatum setAbandonUpload (Boolean abandonUpload) {
-      this.setParam("abandon_upload", abandonUpload);
-      return this;
-    }
-    public APIRequestCreatePartnerDatum setAbandonUpload (String abandonUpload) {
-      this.setParam("abandon_upload", abandonUpload);
+    public APIRequestCreatePartnerDatum setUploadId (String uploadId) {
+      this.setParam("upload_id", uploadId);
       return this;
     }
 
-    public APIRequestCreatePartnerDatum setPayload (List<String> payload) {
-      this.setParam("payload", payload);
-      return this;
-    }
-    public APIRequestCreatePartnerDatum setPayload (String payload) {
-      this.setParam("payload", payload);
-      return this;
-    }
-
-    public APIRequestCreatePartnerDatum setPayloadType (String payloadType) {
-      this.setParam("payload_type", payloadType);
+    public APIRequestCreatePartnerDatum setUploadMetadata (String uploadMetadata) {
+      this.setParam("upload_metadata", uploadMetadata);
       return this;
     }
 
@@ -24682,8 +24709,8 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "category_ids",
       "account_ids",
+      "category_ids",
       "type",
     };
 
@@ -24743,21 +24770,21 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestCreatePartnerRequest setCategoryIds (List<String> categoryIds) {
-      this.setParam("category_ids", categoryIds);
-      return this;
-    }
-    public APIRequestCreatePartnerRequest setCategoryIds (String categoryIds) {
-      this.setParam("category_ids", categoryIds);
-      return this;
-    }
-
     public APIRequestCreatePartnerRequest setAccountIds (List<Long> accountIds) {
       this.setParam("account_ids", accountIds);
       return this;
     }
     public APIRequestCreatePartnerRequest setAccountIds (String accountIds) {
       this.setParam("account_ids", accountIds);
+      return this;
+    }
+
+    public APIRequestCreatePartnerRequest setCategoryIds (List<String> categoryIds) {
+      this.setParam("category_ids", categoryIds);
+      return this;
+    }
+    public APIRequestCreatePartnerRequest setCategoryIds (String categoryIds) {
+      this.setParam("category_ids", categoryIds);
       return this;
     }
 
@@ -24944,29 +24971,29 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "allowed_domains",
+      "associated_audience_id",
+      "claim_objective",
+      "content_type",
       "creation_params",
       "description",
+      "enable_fetch_or_create",
+      "event_source_group",
+      "event_sources",
+      "exclusions",
+      "inclusions",
+      "is_household",
+      "is_household_exclusion",
+      "is_snapshot",
+      "is_value_based",
       "name",
       "opt_out_link",
       "parent_audience_id",
-      "subtype",
-      "seed_audience",
-      "tags",
-      "associated_audience_id",
-      "is_household",
-      "is_household_exclusion",
-      "is_value_based",
-      "allowed_domains",
-      "is_snapshot",
-      "claim_objective",
-      "content_type",
-      "event_source_group",
       "product_set_id",
       "rev_share_policy_id",
-      "event_sources",
-      "enable_fetch_or_create",
-      "inclusions",
-      "exclusions",
+      "seed_audience",
+      "subtype",
+      "tags",
     };
 
     public static final String[] FIELDS = {
@@ -25025,6 +25052,42 @@ public class AdAccount extends APINode {
     }
 
 
+    public APIRequestCreateProductAudience setAllowedDomains (List<String> allowedDomains) {
+      this.setParam("allowed_domains", allowedDomains);
+      return this;
+    }
+    public APIRequestCreateProductAudience setAllowedDomains (String allowedDomains) {
+      this.setParam("allowed_domains", allowedDomains);
+      return this;
+    }
+
+    public APIRequestCreateProductAudience setAssociatedAudienceId (Long associatedAudienceId) {
+      this.setParam("associated_audience_id", associatedAudienceId);
+      return this;
+    }
+    public APIRequestCreateProductAudience setAssociatedAudienceId (String associatedAudienceId) {
+      this.setParam("associated_audience_id", associatedAudienceId);
+      return this;
+    }
+
+    public APIRequestCreateProductAudience setClaimObjective (AdAccount.EnumClaimObjective claimObjective) {
+      this.setParam("claim_objective", claimObjective);
+      return this;
+    }
+    public APIRequestCreateProductAudience setClaimObjective (String claimObjective) {
+      this.setParam("claim_objective", claimObjective);
+      return this;
+    }
+
+    public APIRequestCreateProductAudience setContentType (AdAccount.EnumContentType contentType) {
+      this.setParam("content_type", contentType);
+      return this;
+    }
+    public APIRequestCreateProductAudience setContentType (String contentType) {
+      this.setParam("content_type", contentType);
+      return this;
+    }
+
     public APIRequestCreateProductAudience setCreationParams (Map<String, String> creationParams) {
       this.setParam("creation_params", creationParams);
       return this;
@@ -25036,6 +25099,83 @@ public class AdAccount extends APINode {
 
     public APIRequestCreateProductAudience setDescription (String description) {
       this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestCreateProductAudience setEnableFetchOrCreate (Boolean enableFetchOrCreate) {
+      this.setParam("enable_fetch_or_create", enableFetchOrCreate);
+      return this;
+    }
+    public APIRequestCreateProductAudience setEnableFetchOrCreate (String enableFetchOrCreate) {
+      this.setParam("enable_fetch_or_create", enableFetchOrCreate);
+      return this;
+    }
+
+    public APIRequestCreateProductAudience setEventSourceGroup (String eventSourceGroup) {
+      this.setParam("event_source_group", eventSourceGroup);
+      return this;
+    }
+
+    public APIRequestCreateProductAudience setEventSources (List<Map<String, String>> eventSources) {
+      this.setParam("event_sources", eventSources);
+      return this;
+    }
+    public APIRequestCreateProductAudience setEventSources (String eventSources) {
+      this.setParam("event_sources", eventSources);
+      return this;
+    }
+
+    public APIRequestCreateProductAudience setExclusions (List<Object> exclusions) {
+      this.setParam("exclusions", exclusions);
+      return this;
+    }
+    public APIRequestCreateProductAudience setExclusions (String exclusions) {
+      this.setParam("exclusions", exclusions);
+      return this;
+    }
+
+    public APIRequestCreateProductAudience setInclusions (List<Object> inclusions) {
+      this.setParam("inclusions", inclusions);
+      return this;
+    }
+    public APIRequestCreateProductAudience setInclusions (String inclusions) {
+      this.setParam("inclusions", inclusions);
+      return this;
+    }
+
+    public APIRequestCreateProductAudience setIsHousehold (Boolean isHousehold) {
+      this.setParam("is_household", isHousehold);
+      return this;
+    }
+    public APIRequestCreateProductAudience setIsHousehold (String isHousehold) {
+      this.setParam("is_household", isHousehold);
+      return this;
+    }
+
+    public APIRequestCreateProductAudience setIsHouseholdExclusion (Boolean isHouseholdExclusion) {
+      this.setParam("is_household_exclusion", isHouseholdExclusion);
+      return this;
+    }
+    public APIRequestCreateProductAudience setIsHouseholdExclusion (String isHouseholdExclusion) {
+      this.setParam("is_household_exclusion", isHouseholdExclusion);
+      return this;
+    }
+
+    public APIRequestCreateProductAudience setIsSnapshot (Boolean isSnapshot) {
+      this.setParam("is_snapshot", isSnapshot);
+      return this;
+    }
+    public APIRequestCreateProductAudience setIsSnapshot (String isSnapshot) {
+      this.setParam("is_snapshot", isSnapshot);
+      return this;
+    }
+
+    public APIRequestCreateProductAudience setIsValueBased (Boolean isValueBased) {
+      this.setParam("is_value_based", isValueBased);
+      return this;
+    }
+    public APIRequestCreateProductAudience setIsValueBased (String isValueBased) {
+      this.setParam("is_value_based", isValueBased);
       return this;
     }
 
@@ -25058,110 +25198,6 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateProductAudience setSubtype (AdAccount.EnumSubtype subtype) {
-      this.setParam("subtype", subtype);
-      return this;
-    }
-    public APIRequestCreateProductAudience setSubtype (String subtype) {
-      this.setParam("subtype", subtype);
-      return this;
-    }
-
-    public APIRequestCreateProductAudience setSeedAudience (Long seedAudience) {
-      this.setParam("seed_audience", seedAudience);
-      return this;
-    }
-    public APIRequestCreateProductAudience setSeedAudience (String seedAudience) {
-      this.setParam("seed_audience", seedAudience);
-      return this;
-    }
-
-    public APIRequestCreateProductAudience setTags (List<String> tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-    public APIRequestCreateProductAudience setTags (String tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-
-    public APIRequestCreateProductAudience setAssociatedAudienceId (Long associatedAudienceId) {
-      this.setParam("associated_audience_id", associatedAudienceId);
-      return this;
-    }
-    public APIRequestCreateProductAudience setAssociatedAudienceId (String associatedAudienceId) {
-      this.setParam("associated_audience_id", associatedAudienceId);
-      return this;
-    }
-
-    public APIRequestCreateProductAudience setIsHousehold (Boolean isHousehold) {
-      this.setParam("is_household", isHousehold);
-      return this;
-    }
-    public APIRequestCreateProductAudience setIsHousehold (String isHousehold) {
-      this.setParam("is_household", isHousehold);
-      return this;
-    }
-
-    public APIRequestCreateProductAudience setIsHouseholdExclusion (Boolean isHouseholdExclusion) {
-      this.setParam("is_household_exclusion", isHouseholdExclusion);
-      return this;
-    }
-    public APIRequestCreateProductAudience setIsHouseholdExclusion (String isHouseholdExclusion) {
-      this.setParam("is_household_exclusion", isHouseholdExclusion);
-      return this;
-    }
-
-    public APIRequestCreateProductAudience setIsValueBased (Boolean isValueBased) {
-      this.setParam("is_value_based", isValueBased);
-      return this;
-    }
-    public APIRequestCreateProductAudience setIsValueBased (String isValueBased) {
-      this.setParam("is_value_based", isValueBased);
-      return this;
-    }
-
-    public APIRequestCreateProductAudience setAllowedDomains (List<String> allowedDomains) {
-      this.setParam("allowed_domains", allowedDomains);
-      return this;
-    }
-    public APIRequestCreateProductAudience setAllowedDomains (String allowedDomains) {
-      this.setParam("allowed_domains", allowedDomains);
-      return this;
-    }
-
-    public APIRequestCreateProductAudience setIsSnapshot (Boolean isSnapshot) {
-      this.setParam("is_snapshot", isSnapshot);
-      return this;
-    }
-    public APIRequestCreateProductAudience setIsSnapshot (String isSnapshot) {
-      this.setParam("is_snapshot", isSnapshot);
-      return this;
-    }
-
-    public APIRequestCreateProductAudience setClaimObjective (AdAccount.EnumClaimObjective claimObjective) {
-      this.setParam("claim_objective", claimObjective);
-      return this;
-    }
-    public APIRequestCreateProductAudience setClaimObjective (String claimObjective) {
-      this.setParam("claim_objective", claimObjective);
-      return this;
-    }
-
-    public APIRequestCreateProductAudience setContentType (AdAccount.EnumContentType contentType) {
-      this.setParam("content_type", contentType);
-      return this;
-    }
-    public APIRequestCreateProductAudience setContentType (String contentType) {
-      this.setParam("content_type", contentType);
-      return this;
-    }
-
-    public APIRequestCreateProductAudience setEventSourceGroup (String eventSourceGroup) {
-      this.setParam("event_source_group", eventSourceGroup);
-      return this;
-    }
-
     public APIRequestCreateProductAudience setProductSetId (String productSetId) {
       this.setParam("product_set_id", productSetId);
       return this;
@@ -25176,39 +25212,30 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateProductAudience setEventSources (List<Map<String, String>> eventSources) {
-      this.setParam("event_sources", eventSources);
+    public APIRequestCreateProductAudience setSeedAudience (Long seedAudience) {
+      this.setParam("seed_audience", seedAudience);
       return this;
     }
-    public APIRequestCreateProductAudience setEventSources (String eventSources) {
-      this.setParam("event_sources", eventSources);
-      return this;
-    }
-
-    public APIRequestCreateProductAudience setEnableFetchOrCreate (Boolean enableFetchOrCreate) {
-      this.setParam("enable_fetch_or_create", enableFetchOrCreate);
-      return this;
-    }
-    public APIRequestCreateProductAudience setEnableFetchOrCreate (String enableFetchOrCreate) {
-      this.setParam("enable_fetch_or_create", enableFetchOrCreate);
+    public APIRequestCreateProductAudience setSeedAudience (String seedAudience) {
+      this.setParam("seed_audience", seedAudience);
       return this;
     }
 
-    public APIRequestCreateProductAudience setInclusions (List<Object> inclusions) {
-      this.setParam("inclusions", inclusions);
+    public APIRequestCreateProductAudience setSubtype (AdAccount.EnumSubtype subtype) {
+      this.setParam("subtype", subtype);
       return this;
     }
-    public APIRequestCreateProductAudience setInclusions (String inclusions) {
-      this.setParam("inclusions", inclusions);
+    public APIRequestCreateProductAudience setSubtype (String subtype) {
+      this.setParam("subtype", subtype);
       return this;
     }
 
-    public APIRequestCreateProductAudience setExclusions (List<Object> exclusions) {
-      this.setParam("exclusions", exclusions);
+    public APIRequestCreateProductAudience setTags (List<String> tags) {
+      this.setParam("tags", tags);
       return this;
     }
-    public APIRequestCreateProductAudience setExclusions (String exclusions) {
-      this.setParam("exclusions", exclusions);
+    public APIRequestCreateProductAudience setTags (String tags) {
+      this.setParam("tags", tags);
       return this;
     }
 
@@ -26800,13 +26827,13 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "targeting_spec",
-      "is_debug",
-      "creative_action_spec",
       "adgroup_ids",
-      "concepts",
       "caller_id",
+      "concepts",
+      "creative_action_spec",
+      "is_debug",
       "object_store_url",
+      "targeting_spec",
     };
 
     public static final String[] FIELDS = {
@@ -26868,12 +26895,27 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestGetReachEstimate setTargetingSpec (Targeting targetingSpec) {
-      this.setParam("targeting_spec", targetingSpec);
+    public APIRequestGetReachEstimate setAdgroupIds (List<String> adgroupIds) {
+      this.setParam("adgroup_ids", adgroupIds);
       return this;
     }
-    public APIRequestGetReachEstimate setTargetingSpec (String targetingSpec) {
-      this.setParam("targeting_spec", targetingSpec);
+    public APIRequestGetReachEstimate setAdgroupIds (String adgroupIds) {
+      this.setParam("adgroup_ids", adgroupIds);
+      return this;
+    }
+
+    public APIRequestGetReachEstimate setCallerId (String callerId) {
+      this.setParam("caller_id", callerId);
+      return this;
+    }
+
+    public APIRequestGetReachEstimate setConcepts (String concepts) {
+      this.setParam("concepts", concepts);
+      return this;
+    }
+
+    public APIRequestGetReachEstimate setCreativeActionSpec (String creativeActionSpec) {
+      this.setParam("creative_action_spec", creativeActionSpec);
       return this;
     }
 
@@ -26886,32 +26928,17 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestGetReachEstimate setCreativeActionSpec (String creativeActionSpec) {
-      this.setParam("creative_action_spec", creativeActionSpec);
-      return this;
-    }
-
-    public APIRequestGetReachEstimate setAdgroupIds (List<String> adgroupIds) {
-      this.setParam("adgroup_ids", adgroupIds);
-      return this;
-    }
-    public APIRequestGetReachEstimate setAdgroupIds (String adgroupIds) {
-      this.setParam("adgroup_ids", adgroupIds);
-      return this;
-    }
-
-    public APIRequestGetReachEstimate setConcepts (String concepts) {
-      this.setParam("concepts", concepts);
-      return this;
-    }
-
-    public APIRequestGetReachEstimate setCallerId (String callerId) {
-      this.setParam("caller_id", callerId);
-      return this;
-    }
-
     public APIRequestGetReachEstimate setObjectStoreUrl (String objectStoreUrl) {
       this.setParam("object_store_url", objectStoreUrl);
+      return this;
+    }
+
+    public APIRequestGetReachEstimate setTargetingSpec (Targeting targetingSpec) {
+      this.setParam("targeting_spec", targetingSpec);
+      return this;
+    }
+    public APIRequestGetReachEstimate setTargetingSpec (String targetingSpec) {
+      this.setParam("targeting_spec", targetingSpec);
       return this;
     }
 
@@ -27021,7 +27048,6 @@ public class AdAccount extends APINode {
       "frequency_distribution",
       "frequency_distribution_map",
       "frequency_distribution_map_agg",
-      "full_view_ratio_00",
       "grp_audience_size",
       "grp_avg_probability_map",
       "grp_country_audience_size",
@@ -27415,13 +27441,6 @@ public class AdAccount extends APINode {
       this.requestField("frequency_distribution_map_agg", value);
       return this;
     }
-    public APIRequestGetReachFrequencyPredictions requestFullViewRatio00Field () {
-      return this.requestFullViewRatio00Field(true);
-    }
-    public APIRequestGetReachFrequencyPredictions requestFullViewRatio00Field (boolean value) {
-      this.requestField("full_view_ratio_00", value);
-      return this;
-    }
     public APIRequestGetReachFrequencyPredictions requestGrpAudienceSizeField () {
       return this.requestGrpAudienceSizeField(true);
     }
@@ -27784,42 +27803,42 @@ public class AdAccount extends APINode {
     public static final String[] PARAMS = {
       "action",
       "ad_formats",
-      "target_spec",
-      "start_time",
-      "stop_time",
-      "end_time",
-      "reach",
-      "impression",
-      "frequency_cap",
+      "auction_entry_option_index",
       "budget",
-      "prediction_mode",
+      "buying_type",
+      "campaign_group_id",
+      "day_parting_schedule",
       "deal_id",
       "destination_id",
       "destination_ids",
-      "story_event_type",
-      "day_parting_schedule",
-      "target_cpm",
-      "buying_type",
-      "objective",
-      "rf_prediction_id",
-      "rf_prediction_id_to_release",
-      "rf_prediction_id_to_share",
-      "num_curve_points",
-      "interval_frequency_cap_reset_period",
-      "campaign_group_id",
+      "end_time",
+      "exceptions",
+      "existing_campaign_id",
+      "expiration_time",
+      "frequency_cap",
       "grp_buying",
+      "impression",
       "instream_packages",
+      "interval_frequency_cap_reset_period",
       "is_bonus_media",
       "is_conversion_goal",
       "is_full_view",
       "is_higher_average_frequency",
       "is_reach_and_frequency_io_buying",
       "is_reserved_buying",
-      "expiration_time",
-      "existing_campaign_id",
+      "num_curve_points",
+      "objective",
+      "prediction_mode",
+      "reach",
+      "rf_prediction_id",
+      "rf_prediction_id_to_release",
+      "rf_prediction_id_to_share",
+      "start_time",
+      "stop_time",
+      "story_event_type",
+      "target_cpm",
+      "target_spec",
       "video_view_length_constraint",
-      "auction_entry_option_index",
-      "exceptions",
     };
 
     public static final String[] FIELDS = {
@@ -27896,66 +27915,12 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateReachFrequencyPrediction setTargetSpec (Targeting targetSpec) {
-      this.setParam("target_spec", targetSpec);
+    public APIRequestCreateReachFrequencyPrediction setAuctionEntryOptionIndex (Long auctionEntryOptionIndex) {
+      this.setParam("auction_entry_option_index", auctionEntryOptionIndex);
       return this;
     }
-    public APIRequestCreateReachFrequencyPrediction setTargetSpec (String targetSpec) {
-      this.setParam("target_spec", targetSpec);
-      return this;
-    }
-
-    public APIRequestCreateReachFrequencyPrediction setStartTime (Long startTime) {
-      this.setParam("start_time", startTime);
-      return this;
-    }
-    public APIRequestCreateReachFrequencyPrediction setStartTime (String startTime) {
-      this.setParam("start_time", startTime);
-      return this;
-    }
-
-    public APIRequestCreateReachFrequencyPrediction setStopTime (Long stopTime) {
-      this.setParam("stop_time", stopTime);
-      return this;
-    }
-    public APIRequestCreateReachFrequencyPrediction setStopTime (String stopTime) {
-      this.setParam("stop_time", stopTime);
-      return this;
-    }
-
-    public APIRequestCreateReachFrequencyPrediction setEndTime (Long endTime) {
-      this.setParam("end_time", endTime);
-      return this;
-    }
-    public APIRequestCreateReachFrequencyPrediction setEndTime (String endTime) {
-      this.setParam("end_time", endTime);
-      return this;
-    }
-
-    public APIRequestCreateReachFrequencyPrediction setReach (Long reach) {
-      this.setParam("reach", reach);
-      return this;
-    }
-    public APIRequestCreateReachFrequencyPrediction setReach (String reach) {
-      this.setParam("reach", reach);
-      return this;
-    }
-
-    public APIRequestCreateReachFrequencyPrediction setImpression (Long impression) {
-      this.setParam("impression", impression);
-      return this;
-    }
-    public APIRequestCreateReachFrequencyPrediction setImpression (String impression) {
-      this.setParam("impression", impression);
-      return this;
-    }
-
-    public APIRequestCreateReachFrequencyPrediction setFrequencyCap (Long frequencyCap) {
-      this.setParam("frequency_cap", frequencyCap);
-      return this;
-    }
-    public APIRequestCreateReachFrequencyPrediction setFrequencyCap (String frequencyCap) {
-      this.setParam("frequency_cap", frequencyCap);
+    public APIRequestCreateReachFrequencyPrediction setAuctionEntryOptionIndex (String auctionEntryOptionIndex) {
+      this.setParam("auction_entry_option_index", auctionEntryOptionIndex);
       return this;
     }
 
@@ -27968,12 +27933,26 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateReachFrequencyPrediction setPredictionMode (Long predictionMode) {
-      this.setParam("prediction_mode", predictionMode);
+    public APIRequestCreateReachFrequencyPrediction setBuyingType (ReachFrequencyPrediction.EnumBuyingType buyingType) {
+      this.setParam("buying_type", buyingType);
       return this;
     }
-    public APIRequestCreateReachFrequencyPrediction setPredictionMode (String predictionMode) {
-      this.setParam("prediction_mode", predictionMode);
+    public APIRequestCreateReachFrequencyPrediction setBuyingType (String buyingType) {
+      this.setParam("buying_type", buyingType);
+      return this;
+    }
+
+    public APIRequestCreateReachFrequencyPrediction setCampaignGroupId (String campaignGroupId) {
+      this.setParam("campaign_group_id", campaignGroupId);
+      return this;
+    }
+
+    public APIRequestCreateReachFrequencyPrediction setDayPartingSchedule (List<Object> dayPartingSchedule) {
+      this.setParam("day_parting_schedule", dayPartingSchedule);
+      return this;
+    }
+    public APIRequestCreateReachFrequencyPrediction setDayPartingSchedule (String dayPartingSchedule) {
+      this.setParam("day_parting_schedule", dayPartingSchedule);
       return this;
     }
 
@@ -28000,82 +27979,44 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateReachFrequencyPrediction setStoryEventType (Long storyEventType) {
-      this.setParam("story_event_type", storyEventType);
+    public APIRequestCreateReachFrequencyPrediction setEndTime (Long endTime) {
+      this.setParam("end_time", endTime);
       return this;
     }
-    public APIRequestCreateReachFrequencyPrediction setStoryEventType (String storyEventType) {
-      this.setParam("story_event_type", storyEventType);
-      return this;
-    }
-
-    public APIRequestCreateReachFrequencyPrediction setDayPartingSchedule (List<Object> dayPartingSchedule) {
-      this.setParam("day_parting_schedule", dayPartingSchedule);
-      return this;
-    }
-    public APIRequestCreateReachFrequencyPrediction setDayPartingSchedule (String dayPartingSchedule) {
-      this.setParam("day_parting_schedule", dayPartingSchedule);
+    public APIRequestCreateReachFrequencyPrediction setEndTime (String endTime) {
+      this.setParam("end_time", endTime);
       return this;
     }
 
-    public APIRequestCreateReachFrequencyPrediction setTargetCpm (Long targetCpm) {
-      this.setParam("target_cpm", targetCpm);
+    public APIRequestCreateReachFrequencyPrediction setExceptions (Boolean exceptions) {
+      this.setParam("exceptions", exceptions);
       return this;
     }
-    public APIRequestCreateReachFrequencyPrediction setTargetCpm (String targetCpm) {
-      this.setParam("target_cpm", targetCpm);
-      return this;
-    }
-
-    public APIRequestCreateReachFrequencyPrediction setBuyingType (ReachFrequencyPrediction.EnumBuyingType buyingType) {
-      this.setParam("buying_type", buyingType);
-      return this;
-    }
-    public APIRequestCreateReachFrequencyPrediction setBuyingType (String buyingType) {
-      this.setParam("buying_type", buyingType);
+    public APIRequestCreateReachFrequencyPrediction setExceptions (String exceptions) {
+      this.setParam("exceptions", exceptions);
       return this;
     }
 
-    public APIRequestCreateReachFrequencyPrediction setObjective (String objective) {
-      this.setParam("objective", objective);
+    public APIRequestCreateReachFrequencyPrediction setExistingCampaignId (String existingCampaignId) {
+      this.setParam("existing_campaign_id", existingCampaignId);
       return this;
     }
 
-    public APIRequestCreateReachFrequencyPrediction setRfPredictionId (String rfPredictionId) {
-      this.setParam("rf_prediction_id", rfPredictionId);
+    public APIRequestCreateReachFrequencyPrediction setExpirationTime (Long expirationTime) {
+      this.setParam("expiration_time", expirationTime);
+      return this;
+    }
+    public APIRequestCreateReachFrequencyPrediction setExpirationTime (String expirationTime) {
+      this.setParam("expiration_time", expirationTime);
       return this;
     }
 
-    public APIRequestCreateReachFrequencyPrediction setRfPredictionIdToRelease (String rfPredictionIdToRelease) {
-      this.setParam("rf_prediction_id_to_release", rfPredictionIdToRelease);
+    public APIRequestCreateReachFrequencyPrediction setFrequencyCap (Long frequencyCap) {
+      this.setParam("frequency_cap", frequencyCap);
       return this;
     }
-
-    public APIRequestCreateReachFrequencyPrediction setRfPredictionIdToShare (String rfPredictionIdToShare) {
-      this.setParam("rf_prediction_id_to_share", rfPredictionIdToShare);
-      return this;
-    }
-
-    public APIRequestCreateReachFrequencyPrediction setNumCurvePoints (Long numCurvePoints) {
-      this.setParam("num_curve_points", numCurvePoints);
-      return this;
-    }
-    public APIRequestCreateReachFrequencyPrediction setNumCurvePoints (String numCurvePoints) {
-      this.setParam("num_curve_points", numCurvePoints);
-      return this;
-    }
-
-    public APIRequestCreateReachFrequencyPrediction setIntervalFrequencyCapResetPeriod (Long intervalFrequencyCapResetPeriod) {
-      this.setParam("interval_frequency_cap_reset_period", intervalFrequencyCapResetPeriod);
-      return this;
-    }
-    public APIRequestCreateReachFrequencyPrediction setIntervalFrequencyCapResetPeriod (String intervalFrequencyCapResetPeriod) {
-      this.setParam("interval_frequency_cap_reset_period", intervalFrequencyCapResetPeriod);
-      return this;
-    }
-
-    public APIRequestCreateReachFrequencyPrediction setCampaignGroupId (String campaignGroupId) {
-      this.setParam("campaign_group_id", campaignGroupId);
+    public APIRequestCreateReachFrequencyPrediction setFrequencyCap (String frequencyCap) {
+      this.setParam("frequency_cap", frequencyCap);
       return this;
     }
 
@@ -28088,12 +28029,30 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateReachFrequencyPrediction setImpression (Long impression) {
+      this.setParam("impression", impression);
+      return this;
+    }
+    public APIRequestCreateReachFrequencyPrediction setImpression (String impression) {
+      this.setParam("impression", impression);
+      return this;
+    }
+
     public APIRequestCreateReachFrequencyPrediction setInstreamPackages (List<ReachFrequencyPrediction.EnumInstreamPackages> instreamPackages) {
       this.setParam("instream_packages", instreamPackages);
       return this;
     }
     public APIRequestCreateReachFrequencyPrediction setInstreamPackages (String instreamPackages) {
       this.setParam("instream_packages", instreamPackages);
+      return this;
+    }
+
+    public APIRequestCreateReachFrequencyPrediction setIntervalFrequencyCapResetPeriod (Long intervalFrequencyCapResetPeriod) {
+      this.setParam("interval_frequency_cap_reset_period", intervalFrequencyCapResetPeriod);
+      return this;
+    }
+    public APIRequestCreateReachFrequencyPrediction setIntervalFrequencyCapResetPeriod (String intervalFrequencyCapResetPeriod) {
+      this.setParam("interval_frequency_cap_reset_period", intervalFrequencyCapResetPeriod);
       return this;
     }
 
@@ -28151,17 +28110,95 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateReachFrequencyPrediction setExpirationTime (Long expirationTime) {
-      this.setParam("expiration_time", expirationTime);
+    public APIRequestCreateReachFrequencyPrediction setNumCurvePoints (Long numCurvePoints) {
+      this.setParam("num_curve_points", numCurvePoints);
       return this;
     }
-    public APIRequestCreateReachFrequencyPrediction setExpirationTime (String expirationTime) {
-      this.setParam("expiration_time", expirationTime);
+    public APIRequestCreateReachFrequencyPrediction setNumCurvePoints (String numCurvePoints) {
+      this.setParam("num_curve_points", numCurvePoints);
       return this;
     }
 
-    public APIRequestCreateReachFrequencyPrediction setExistingCampaignId (String existingCampaignId) {
-      this.setParam("existing_campaign_id", existingCampaignId);
+    public APIRequestCreateReachFrequencyPrediction setObjective (String objective) {
+      this.setParam("objective", objective);
+      return this;
+    }
+
+    public APIRequestCreateReachFrequencyPrediction setPredictionMode (Long predictionMode) {
+      this.setParam("prediction_mode", predictionMode);
+      return this;
+    }
+    public APIRequestCreateReachFrequencyPrediction setPredictionMode (String predictionMode) {
+      this.setParam("prediction_mode", predictionMode);
+      return this;
+    }
+
+    public APIRequestCreateReachFrequencyPrediction setReach (Long reach) {
+      this.setParam("reach", reach);
+      return this;
+    }
+    public APIRequestCreateReachFrequencyPrediction setReach (String reach) {
+      this.setParam("reach", reach);
+      return this;
+    }
+
+    public APIRequestCreateReachFrequencyPrediction setRfPredictionId (String rfPredictionId) {
+      this.setParam("rf_prediction_id", rfPredictionId);
+      return this;
+    }
+
+    public APIRequestCreateReachFrequencyPrediction setRfPredictionIdToRelease (String rfPredictionIdToRelease) {
+      this.setParam("rf_prediction_id_to_release", rfPredictionIdToRelease);
+      return this;
+    }
+
+    public APIRequestCreateReachFrequencyPrediction setRfPredictionIdToShare (String rfPredictionIdToShare) {
+      this.setParam("rf_prediction_id_to_share", rfPredictionIdToShare);
+      return this;
+    }
+
+    public APIRequestCreateReachFrequencyPrediction setStartTime (Long startTime) {
+      this.setParam("start_time", startTime);
+      return this;
+    }
+    public APIRequestCreateReachFrequencyPrediction setStartTime (String startTime) {
+      this.setParam("start_time", startTime);
+      return this;
+    }
+
+    public APIRequestCreateReachFrequencyPrediction setStopTime (Long stopTime) {
+      this.setParam("stop_time", stopTime);
+      return this;
+    }
+    public APIRequestCreateReachFrequencyPrediction setStopTime (String stopTime) {
+      this.setParam("stop_time", stopTime);
+      return this;
+    }
+
+    public APIRequestCreateReachFrequencyPrediction setStoryEventType (Long storyEventType) {
+      this.setParam("story_event_type", storyEventType);
+      return this;
+    }
+    public APIRequestCreateReachFrequencyPrediction setStoryEventType (String storyEventType) {
+      this.setParam("story_event_type", storyEventType);
+      return this;
+    }
+
+    public APIRequestCreateReachFrequencyPrediction setTargetCpm (Long targetCpm) {
+      this.setParam("target_cpm", targetCpm);
+      return this;
+    }
+    public APIRequestCreateReachFrequencyPrediction setTargetCpm (String targetCpm) {
+      this.setParam("target_cpm", targetCpm);
+      return this;
+    }
+
+    public APIRequestCreateReachFrequencyPrediction setTargetSpec (Targeting targetSpec) {
+      this.setParam("target_spec", targetSpec);
+      return this;
+    }
+    public APIRequestCreateReachFrequencyPrediction setTargetSpec (String targetSpec) {
+      this.setParam("target_spec", targetSpec);
       return this;
     }
 
@@ -28171,24 +28208,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateReachFrequencyPrediction setVideoViewLengthConstraint (String videoViewLengthConstraint) {
       this.setParam("video_view_length_constraint", videoViewLengthConstraint);
-      return this;
-    }
-
-    public APIRequestCreateReachFrequencyPrediction setAuctionEntryOptionIndex (Long auctionEntryOptionIndex) {
-      this.setParam("auction_entry_option_index", auctionEntryOptionIndex);
-      return this;
-    }
-    public APIRequestCreateReachFrequencyPrediction setAuctionEntryOptionIndex (String auctionEntryOptionIndex) {
-      this.setParam("auction_entry_option_index", auctionEntryOptionIndex);
-      return this;
-    }
-
-    public APIRequestCreateReachFrequencyPrediction setExceptions (Boolean exceptions) {
-      this.setParam("exceptions", exceptions);
-      return this;
-    }
-    public APIRequestCreateReachFrequencyPrediction setExceptions (String exceptions) {
-      this.setParam("exceptions", exceptions);
       return this;
     }
 
@@ -28606,10 +28625,10 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "time_increment",
-      "time_range",
       "fields",
       "filtering",
+      "time_increment",
+      "time_range",
     };
 
     public static final String[] FIELDS = {
@@ -28668,20 +28687,6 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestGetRoas setTimeIncrement (String timeIncrement) {
-      this.setParam("time_increment", timeIncrement);
-      return this;
-    }
-
-    public APIRequestGetRoas setTimeRange (Object timeRange) {
-      this.setParam("time_range", timeRange);
-      return this;
-    }
-    public APIRequestGetRoas setTimeRange (String timeRange) {
-      this.setParam("time_range", timeRange);
-      return this;
-    }
-
     public APIRequestGetRoas setFields (List<String> fields) {
       this.setParam("fields", fields);
       return this;
@@ -28697,6 +28702,20 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetRoas setFiltering (String filtering) {
       this.setParam("filtering", filtering);
+      return this;
+    }
+
+    public APIRequestGetRoas setTimeIncrement (String timeIncrement) {
+      this.setParam("time_increment", timeIncrement);
+      return this;
+    }
+
+    public APIRequestGetRoas setTimeRange (Object timeRange) {
+      this.setParam("time_range", timeRange);
+      return this;
+    }
+    public APIRequestGetRoas setTimeRange (String timeRange) {
+      this.setParam("time_range", timeRange);
       return this;
     }
 
@@ -28746,9 +28765,9 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "business_id",
       "fields",
       "filtering",
-      "business_id",
     };
 
     public static final String[] FIELDS = {
@@ -28807,6 +28826,11 @@ public class AdAccount extends APINode {
     }
 
 
+    public APIRequestGetSavedAudiences setBusinessId (String businessId) {
+      this.setParam("business_id", businessId);
+      return this;
+    }
+
     public APIRequestGetSavedAudiences setFields (List<String> fields) {
       this.setParam("fields", fields);
       return this;
@@ -28822,11 +28846,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetSavedAudiences setFiltering (String filtering) {
       this.setParam("filtering", filtering);
-      return this;
-    }
-
-    public APIRequestGetSavedAudiences setBusinessId (String businessId) {
-      this.setParam("business_id", businessId);
       return this;
     }
 
@@ -28876,9 +28895,9 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "message_creative_id",
-      "daily_budget",
       "bid_amount",
+      "daily_budget",
+      "message_creative_id",
       "targeting",
     };
 
@@ -28938,8 +28957,12 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestCreateSponsoredMessageAd setMessageCreativeId (String messageCreativeId) {
-      this.setParam("message_creative_id", messageCreativeId);
+    public APIRequestCreateSponsoredMessageAd setBidAmount (Long bidAmount) {
+      this.setParam("bid_amount", bidAmount);
+      return this;
+    }
+    public APIRequestCreateSponsoredMessageAd setBidAmount (String bidAmount) {
+      this.setParam("bid_amount", bidAmount);
       return this;
     }
 
@@ -28952,12 +28975,8 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateSponsoredMessageAd setBidAmount (Long bidAmount) {
-      this.setParam("bid_amount", bidAmount);
-      return this;
-    }
-    public APIRequestCreateSponsoredMessageAd setBidAmount (String bidAmount) {
-      this.setParam("bid_amount", bidAmount);
+    public APIRequestCreateSponsoredMessageAd setMessageCreativeId (String messageCreativeId) {
+      this.setParam("message_creative_id", messageCreativeId);
       return this;
     }
 
@@ -29016,10 +29035,10 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "include_nodes",
       "excluded_category",
-      "limit_type",
+      "include_nodes",
       "is_exclusion",
+      "limit_type",
       "whitelisted_types",
     };
 
@@ -29101,6 +29120,11 @@ public class AdAccount extends APINode {
     }
 
 
+    public APIRequestGetTargetingBrowse setExcludedCategory (String excludedCategory) {
+      this.setParam("excluded_category", excludedCategory);
+      return this;
+    }
+
     public APIRequestGetTargetingBrowse setIncludeNodes (Boolean includeNodes) {
       this.setParam("include_nodes", includeNodes);
       return this;
@@ -29110,8 +29134,12 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestGetTargetingBrowse setExcludedCategory (String excludedCategory) {
-      this.setParam("excluded_category", excludedCategory);
+    public APIRequestGetTargetingBrowse setIsExclusion (Boolean isExclusion) {
+      this.setParam("is_exclusion", isExclusion);
+      return this;
+    }
+    public APIRequestGetTargetingBrowse setIsExclusion (String isExclusion) {
+      this.setParam("is_exclusion", isExclusion);
       return this;
     }
 
@@ -29121,15 +29149,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetTargetingBrowse setLimitType (String limitType) {
       this.setParam("limit_type", limitType);
-      return this;
-    }
-
-    public APIRequestGetTargetingBrowse setIsExclusion (Boolean isExclusion) {
-      this.setParam("is_exclusion", isExclusion);
-      return this;
-    }
-    public APIRequestGetTargetingBrowse setIsExclusion (String isExclusion) {
-      this.setParam("is_exclusion", isExclusion);
       return this;
     }
 
@@ -29342,13 +29361,13 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "q",
-      "limit_type",
-      "whitelisted_types",
+      "countries",
       "is_exclusion",
+      "limit_type",
+      "q",
       "session_id",
       "targeting_list",
-      "countries",
+      "whitelisted_types",
     };
 
     public static final String[] FIELDS = {
@@ -29429,8 +29448,21 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestGetTargetingSearch setQ (String q) {
-      this.setParam("q", q);
+    public APIRequestGetTargetingSearch setCountries (List<String> countries) {
+      this.setParam("countries", countries);
+      return this;
+    }
+    public APIRequestGetTargetingSearch setCountries (String countries) {
+      this.setParam("countries", countries);
+      return this;
+    }
+
+    public APIRequestGetTargetingSearch setIsExclusion (Boolean isExclusion) {
+      this.setParam("is_exclusion", isExclusion);
+      return this;
+    }
+    public APIRequestGetTargetingSearch setIsExclusion (String isExclusion) {
+      this.setParam("is_exclusion", isExclusion);
       return this;
     }
 
@@ -29443,21 +29475,8 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestGetTargetingSearch setWhitelistedTypes (List<AdAccountTargetingUnified.EnumWhitelistedTypes> whitelistedTypes) {
-      this.setParam("whitelisted_types", whitelistedTypes);
-      return this;
-    }
-    public APIRequestGetTargetingSearch setWhitelistedTypes (String whitelistedTypes) {
-      this.setParam("whitelisted_types", whitelistedTypes);
-      return this;
-    }
-
-    public APIRequestGetTargetingSearch setIsExclusion (Boolean isExclusion) {
-      this.setParam("is_exclusion", isExclusion);
-      return this;
-    }
-    public APIRequestGetTargetingSearch setIsExclusion (String isExclusion) {
-      this.setParam("is_exclusion", isExclusion);
+    public APIRequestGetTargetingSearch setQ (String q) {
+      this.setParam("q", q);
       return this;
     }
 
@@ -29479,12 +29498,12 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestGetTargetingSearch setCountries (List<String> countries) {
-      this.setParam("countries", countries);
+    public APIRequestGetTargetingSearch setWhitelistedTypes (List<AdAccountTargetingUnified.EnumWhitelistedTypes> whitelistedTypes) {
+      this.setParam("whitelisted_types", whitelistedTypes);
       return this;
     }
-    public APIRequestGetTargetingSearch setCountries (String countries) {
-      this.setParam("countries", countries);
+    public APIRequestGetTargetingSearch setWhitelistedTypes (String whitelistedTypes) {
+      this.setParam("whitelisted_types", whitelistedTypes);
       return this;
     }
 
@@ -29688,10 +29707,10 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "targeting_spec",
       "discard_ages",
       "discard_placements",
       "hide_targeting_spec_from_return",
+      "targeting_spec",
     };
 
     public static final String[] FIELDS = {
@@ -29753,15 +29772,6 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestGetTargetingSentenceLines setTargetingSpec (Targeting targetingSpec) {
-      this.setParam("targeting_spec", targetingSpec);
-      return this;
-    }
-    public APIRequestGetTargetingSentenceLines setTargetingSpec (String targetingSpec) {
-      this.setParam("targeting_spec", targetingSpec);
-      return this;
-    }
-
     public APIRequestGetTargetingSentenceLines setDiscardAges (Boolean discardAges) {
       this.setParam("discard_ages", discardAges);
       return this;
@@ -29786,6 +29796,15 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetTargetingSentenceLines setHideTargetingSpecFromReturn (String hideTargetingSpecFromReturn) {
       this.setParam("hide_targeting_spec_from_return", hideTargetingSpecFromReturn);
+      return this;
+    }
+
+    public APIRequestGetTargetingSentenceLines setTargetingSpec (Targeting targetingSpec) {
+      this.setParam("targeting_spec", targetingSpec);
+      return this;
+    }
+    public APIRequestGetTargetingSentenceLines setTargetingSpec (String targetingSpec) {
+      this.setParam("targeting_spec", targetingSpec);
       return this;
     }
 
@@ -29856,14 +29875,14 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "targeting_list",
-      "objective",
-      "objects",
+      "countries",
       "limit_type",
       "mode",
+      "objective",
+      "objects",
       "session_id",
+      "targeting_list",
       "whitelisted_types",
-      "countries",
     };
 
     public static final String[] FIELDS = {
@@ -29944,30 +29963,12 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestGetTargetingSuggestions setTargetingList (List<Object> targetingList) {
-      this.setParam("targeting_list", targetingList);
+    public APIRequestGetTargetingSuggestions setCountries (List<String> countries) {
+      this.setParam("countries", countries);
       return this;
     }
-    public APIRequestGetTargetingSuggestions setTargetingList (String targetingList) {
-      this.setParam("targeting_list", targetingList);
-      return this;
-    }
-
-    public APIRequestGetTargetingSuggestions setObjective (AdAccountTargetingUnified.EnumObjective objective) {
-      this.setParam("objective", objective);
-      return this;
-    }
-    public APIRequestGetTargetingSuggestions setObjective (String objective) {
-      this.setParam("objective", objective);
-      return this;
-    }
-
-    public APIRequestGetTargetingSuggestions setObjects (Object objects) {
-      this.setParam("objects", objects);
-      return this;
-    }
-    public APIRequestGetTargetingSuggestions setObjects (String objects) {
-      this.setParam("objects", objects);
+    public APIRequestGetTargetingSuggestions setCountries (String countries) {
+      this.setParam("countries", countries);
       return this;
     }
 
@@ -29989,6 +29990,24 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetTargetingSuggestions setObjective (AdAccountTargetingUnified.EnumObjective objective) {
+      this.setParam("objective", objective);
+      return this;
+    }
+    public APIRequestGetTargetingSuggestions setObjective (String objective) {
+      this.setParam("objective", objective);
+      return this;
+    }
+
+    public APIRequestGetTargetingSuggestions setObjects (Object objects) {
+      this.setParam("objects", objects);
+      return this;
+    }
+    public APIRequestGetTargetingSuggestions setObjects (String objects) {
+      this.setParam("objects", objects);
+      return this;
+    }
+
     public APIRequestGetTargetingSuggestions setSessionId (Long sessionId) {
       this.setParam("session_id", sessionId);
       return this;
@@ -29998,21 +30017,21 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetTargetingSuggestions setTargetingList (List<Object> targetingList) {
+      this.setParam("targeting_list", targetingList);
+      return this;
+    }
+    public APIRequestGetTargetingSuggestions setTargetingList (String targetingList) {
+      this.setParam("targeting_list", targetingList);
+      return this;
+    }
+
     public APIRequestGetTargetingSuggestions setWhitelistedTypes (List<AdAccountTargetingUnified.EnumWhitelistedTypes> whitelistedTypes) {
       this.setParam("whitelisted_types", whitelistedTypes);
       return this;
     }
     public APIRequestGetTargetingSuggestions setWhitelistedTypes (String whitelistedTypes) {
       this.setParam("whitelisted_types", whitelistedTypes);
-      return this;
-    }
-
-    public APIRequestGetTargetingSuggestions setCountries (List<String> countries) {
-      this.setParam("countries", countries);
-      return this;
-    }
-    public APIRequestGetTargetingSuggestions setCountries (String countries) {
-      this.setParam("countries", countries);
       return this;
     }
 
@@ -30216,10 +30235,10 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "targeting_list",
       "id_list",
-      "name_list",
       "is_exclusion",
+      "name_list",
+      "targeting_list",
     };
 
     public static final String[] FIELDS = {
@@ -30300,21 +30319,21 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestGetTargetingValidation setTargetingList (List<Object> targetingList) {
-      this.setParam("targeting_list", targetingList);
-      return this;
-    }
-    public APIRequestGetTargetingValidation setTargetingList (String targetingList) {
-      this.setParam("targeting_list", targetingList);
-      return this;
-    }
-
     public APIRequestGetTargetingValidation setIdList (List<Long> idList) {
       this.setParam("id_list", idList);
       return this;
     }
     public APIRequestGetTargetingValidation setIdList (String idList) {
       this.setParam("id_list", idList);
+      return this;
+    }
+
+    public APIRequestGetTargetingValidation setIsExclusion (Boolean isExclusion) {
+      this.setParam("is_exclusion", isExclusion);
+      return this;
+    }
+    public APIRequestGetTargetingValidation setIsExclusion (String isExclusion) {
+      this.setParam("is_exclusion", isExclusion);
       return this;
     }
 
@@ -30327,12 +30346,12 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestGetTargetingValidation setIsExclusion (Boolean isExclusion) {
-      this.setParam("is_exclusion", isExclusion);
+    public APIRequestGetTargetingValidation setTargetingList (List<Object> targetingList) {
+      this.setParam("targeting_list", targetingList);
       return this;
     }
-    public APIRequestGetTargetingValidation setIsExclusion (String isExclusion) {
-      this.setParam("is_exclusion", isExclusion);
+    public APIRequestGetTargetingValidation setTargetingList (String targetingList) {
+      this.setParam("targeting_list", targetingList);
       return this;
     }
 
@@ -31030,9 +31049,9 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "payload",
-      "namespace",
       "bidirectional",
+      "namespace",
+      "payload",
     };
 
     public static final String[] FIELDS = {
@@ -31091,12 +31110,12 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestDeleteUserMatch setPayload (Object payload) {
-      this.setParam("payload", payload);
+    public APIRequestDeleteUserMatch setBidirectional (Boolean bidirectional) {
+      this.setParam("bidirectional", bidirectional);
       return this;
     }
-    public APIRequestDeleteUserMatch setPayload (String payload) {
-      this.setParam("payload", payload);
+    public APIRequestDeleteUserMatch setBidirectional (String bidirectional) {
+      this.setParam("bidirectional", bidirectional);
       return this;
     }
 
@@ -31105,12 +31124,12 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestDeleteUserMatch setBidirectional (Boolean bidirectional) {
-      this.setParam("bidirectional", bidirectional);
+    public APIRequestDeleteUserMatch setPayload (Object payload) {
+      this.setParam("payload", payload);
       return this;
     }
-    public APIRequestDeleteUserMatch setBidirectional (String bidirectional) {
-      this.setParam("bidirectional", bidirectional);
+    public APIRequestDeleteUserMatch setPayload (String payload) {
+      this.setParam("payload", payload);
       return this;
     }
 
@@ -31160,11 +31179,11 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "payload",
       "action",
-      "namespace",
-      "retention",
       "bidirectional",
+      "namespace",
+      "payload",
+      "retention",
     };
 
     public static final String[] FIELDS = {
@@ -31223,27 +31242,8 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestCreateUserMatch setPayload (Object payload) {
-      this.setParam("payload", payload);
-      return this;
-    }
-    public APIRequestCreateUserMatch setPayload (String payload) {
-      this.setParam("payload", payload);
-      return this;
-    }
-
     public APIRequestCreateUserMatch setAction (String action) {
       this.setParam("action", action);
-      return this;
-    }
-
-    public APIRequestCreateUserMatch setNamespace (String namespace) {
-      this.setParam("namespace", namespace);
-      return this;
-    }
-
-    public APIRequestCreateUserMatch setRetention (String retention) {
-      this.setParam("retention", retention);
       return this;
     }
 
@@ -31253,6 +31253,25 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateUserMatch setBidirectional (String bidirectional) {
       this.setParam("bidirectional", bidirectional);
+      return this;
+    }
+
+    public APIRequestCreateUserMatch setNamespace (String namespace) {
+      this.setParam("namespace", namespace);
+      return this;
+    }
+
+    public APIRequestCreateUserMatch setPayload (Object payload) {
+      this.setParam("payload", payload);
+      return this;
+    }
+    public APIRequestCreateUserMatch setPayload (String payload) {
+      this.setParam("payload", payload);
+      return this;
+    }
+
+    public APIRequestCreateUserMatch setRetention (String retention) {
+      this.setParam("retention", retention);
       return this;
     }
 
@@ -31554,8 +31573,8 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "uid",
       "tasks",
+      "uid",
     };
 
     public static final String[] FIELDS = {
@@ -31614,21 +31633,21 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestCreateUser setUid (Long uid) {
-      this.setParam("uid", uid);
-      return this;
-    }
-    public APIRequestCreateUser setUid (String uid) {
-      this.setParam("uid", uid);
-      return this;
-    }
-
     public APIRequestCreateUser setTasks (List<AdAccount.EnumTasks> tasks) {
       this.setParam("tasks", tasks);
       return this;
     }
     public APIRequestCreateUser setTasks (String tasks) {
       this.setParam("tasks", tasks);
+      return this;
+    }
+
+    public APIRequestCreateUser setUid (Long uid) {
+      this.setParam("uid", uid);
+      return this;
+    }
+    public APIRequestCreateUser setUid (String uid) {
+      this.setParam("uid", uid);
       return this;
     }
 
@@ -31678,9 +31697,9 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "session",
-      "payload",
       "namespace",
+      "payload",
+      "session",
     };
 
     public static final String[] FIELDS = {
@@ -31739,12 +31758,8 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestDeleteUsersOfAnyAudience setSession (Object session) {
-      this.setParam("session", session);
-      return this;
-    }
-    public APIRequestDeleteUsersOfAnyAudience setSession (String session) {
-      this.setParam("session", session);
+    public APIRequestDeleteUsersOfAnyAudience setNamespace (String namespace) {
+      this.setParam("namespace", namespace);
       return this;
     }
 
@@ -31757,8 +31772,12 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestDeleteUsersOfAnyAudience setNamespace (String namespace) {
-      this.setParam("namespace", namespace);
+    public APIRequestDeleteUsersOfAnyAudience setSession (Object session) {
+      this.setParam("session", session);
+      return this;
+    }
+    public APIRequestDeleteUsersOfAnyAudience setSession (String session) {
+      this.setParam("session", session);
       return this;
     }
 
@@ -31835,7 +31854,6 @@ public class AdAccount extends APINode {
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
-      "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
       "funding_source",
@@ -32131,13 +32149,6 @@ public class AdAccount extends APINode {
       this.requestField("end_advertiser_name", value);
       return this;
     }
-    public APIRequestGet requestExtendedCreditInvoiceGroupField () {
-      return this.requestExtendedCreditInvoiceGroupField(true);
-    }
-    public APIRequestGet requestExtendedCreditInvoiceGroupField (boolean value) {
-      this.requestField("extended_credit_invoice_group", value);
-      return this;
-    }
     public APIRequestGet requestFailedDeliveryChecksField () {
       return this.requestFailedDeliveryChecksField(true);
     }
@@ -32400,19 +32411,19 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "name",
-      "spend_cap_action",
-      "spend_cap",
       "agency_client_declaration",
-      "business_info",
-      "tos_accepted",
-      "currency",
-      "timezone_id",
-      "end_advertiser",
-      "media_agency",
-      "partner",
-      "is_notifications_enabled",
       "attribution_spec",
+      "business_info",
+      "currency",
+      "end_advertiser",
+      "is_notifications_enabled",
+      "media_agency",
+      "name",
+      "partner",
+      "spend_cap",
+      "spend_cap_action",
+      "timezone_id",
+      "tos_accepted",
     };
 
     public static final String[] FIELDS = {
@@ -32471,31 +32482,21 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestUpdate setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestUpdate setSpendCapAction (String spendCapAction) {
-      this.setParam("spend_cap_action", spendCapAction);
-      return this;
-    }
-
-    public APIRequestUpdate setSpendCap (Double spendCap) {
-      this.setParam("spend_cap", spendCap);
-      return this;
-    }
-    public APIRequestUpdate setSpendCap (String spendCap) {
-      this.setParam("spend_cap", spendCap);
-      return this;
-    }
-
     public APIRequestUpdate setAgencyClientDeclaration (Map<String, String> agencyClientDeclaration) {
       this.setParam("agency_client_declaration", agencyClientDeclaration);
       return this;
     }
     public APIRequestUpdate setAgencyClientDeclaration (String agencyClientDeclaration) {
       this.setParam("agency_client_declaration", agencyClientDeclaration);
+      return this;
+    }
+
+    public APIRequestUpdate setAttributionSpec (List<Object> attributionSpec) {
+      this.setParam("attribution_spec", attributionSpec);
+      return this;
+    }
+    public APIRequestUpdate setAttributionSpec (String attributionSpec) {
+      this.setParam("attribution_spec", attributionSpec);
       return this;
     }
 
@@ -32508,15 +32509,6 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setTosAccepted (Map<String, String> tosAccepted) {
-      this.setParam("tos_accepted", tosAccepted);
-      return this;
-    }
-    public APIRequestUpdate setTosAccepted (String tosAccepted) {
-      this.setParam("tos_accepted", tosAccepted);
-      return this;
-    }
-
     public APIRequestUpdate setCurrency (AdAccount.EnumCurrency currency) {
       this.setParam("currency", currency);
       return this;
@@ -32526,27 +32518,8 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setTimezoneId (Long timezoneId) {
-      this.setParam("timezone_id", timezoneId);
-      return this;
-    }
-    public APIRequestUpdate setTimezoneId (String timezoneId) {
-      this.setParam("timezone_id", timezoneId);
-      return this;
-    }
-
     public APIRequestUpdate setEndAdvertiser (String endAdvertiser) {
       this.setParam("end_advertiser", endAdvertiser);
-      return this;
-    }
-
-    public APIRequestUpdate setMediaAgency (String mediaAgency) {
-      this.setParam("media_agency", mediaAgency);
-      return this;
-    }
-
-    public APIRequestUpdate setPartner (String partner) {
-      this.setParam("partner", partner);
       return this;
     }
 
@@ -32559,12 +32532,50 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setAttributionSpec (List<Object> attributionSpec) {
-      this.setParam("attribution_spec", attributionSpec);
+    public APIRequestUpdate setMediaAgency (String mediaAgency) {
+      this.setParam("media_agency", mediaAgency);
       return this;
     }
-    public APIRequestUpdate setAttributionSpec (String attributionSpec) {
-      this.setParam("attribution_spec", attributionSpec);
+
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestUpdate setPartner (String partner) {
+      this.setParam("partner", partner);
+      return this;
+    }
+
+    public APIRequestUpdate setSpendCap (Double spendCap) {
+      this.setParam("spend_cap", spendCap);
+      return this;
+    }
+    public APIRequestUpdate setSpendCap (String spendCap) {
+      this.setParam("spend_cap", spendCap);
+      return this;
+    }
+
+    public APIRequestUpdate setSpendCapAction (String spendCapAction) {
+      this.setParam("spend_cap_action", spendCapAction);
+      return this;
+    }
+
+    public APIRequestUpdate setTimezoneId (Long timezoneId) {
+      this.setParam("timezone_id", timezoneId);
+      return this;
+    }
+    public APIRequestUpdate setTimezoneId (String timezoneId) {
+      this.setParam("timezone_id", timezoneId);
+      return this;
+    }
+
+    public APIRequestUpdate setTosAccepted (Map<String, String> tosAccepted) {
+      this.setParam("tos_accepted", tosAccepted);
+      return this;
+    }
+    public APIRequestUpdate setTosAccepted (String tosAccepted) {
+      this.setParam("tos_accepted", tosAccepted);
       return this;
     }
 
@@ -32878,6 +32889,49 @@ public class AdAccount extends APINode {
       }
   }
 
+  public static enum EnumActionsGroupBy {
+      @SerializedName("action_canvas_component_id")
+      VALUE_ACTION_CANVAS_COMPONENT_ID("action_canvas_component_id"),
+      @SerializedName("action_canvas_component_name")
+      VALUE_ACTION_CANVAS_COMPONENT_NAME("action_canvas_component_name"),
+      @SerializedName("action_carousel_card_id")
+      VALUE_ACTION_CAROUSEL_CARD_ID("action_carousel_card_id"),
+      @SerializedName("action_carousel_card_name")
+      VALUE_ACTION_CAROUSEL_CARD_NAME("action_carousel_card_name"),
+      @SerializedName("action_converted_product_id")
+      VALUE_ACTION_CONVERTED_PRODUCT_ID("action_converted_product_id"),
+      @SerializedName("action_destination")
+      VALUE_ACTION_DESTINATION("action_destination"),
+      @SerializedName("action_device")
+      VALUE_ACTION_DEVICE("action_device"),
+      @SerializedName("action_event_channel")
+      VALUE_ACTION_EVENT_CHANNEL("action_event_channel"),
+      @SerializedName("action_target_id")
+      VALUE_ACTION_TARGET_ID("action_target_id"),
+      @SerializedName("action_type")
+      VALUE_ACTION_TYPE("action_type"),
+      @SerializedName("action_video_sound")
+      VALUE_ACTION_VIDEO_SOUND("action_video_sound"),
+      @SerializedName("action_video_type")
+      VALUE_ACTION_VIDEO_TYPE("action_video_type"),
+      @SerializedName("interactive_component_sticker_id")
+      VALUE_INTERACTIVE_COMPONENT_STICKER_ID("interactive_component_sticker_id"),
+      @SerializedName("interactive_component_sticker_response")
+      VALUE_INTERACTIVE_COMPONENT_STICKER_RESPONSE("interactive_component_sticker_response"),
+      NULL(null);
+
+      private String value;
+
+      private EnumActionsGroupBy(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumBuiltinColumnSet {
       @SerializedName("APP_ENGAGEMENT")
       VALUE_APP_ENGAGEMENT("APP_ENGAGEMENT"),
@@ -32925,24 +32979,18 @@ public class AdAccount extends APINode {
       }
   }
 
-  public static enum EnumLevel {
-      @SerializedName("account")
-      VALUE_ACCOUNT("account"),
-      @SerializedName("ad")
-      VALUE_AD("ad"),
-      @SerializedName("adgroup")
-      VALUE_ADGROUP("adgroup"),
-      @SerializedName("campaign")
-      VALUE_CAMPAIGN("campaign"),
-      @SerializedName("campaign_group")
-      VALUE_CAMPAIGN_GROUP("campaign_group"),
-      @SerializedName("politicalad")
-      VALUE_POLITICALAD("politicalad"),
+  public static enum EnumCreationSource {
+      @SerializedName("adsExcelAddin")
+      VALUE_ADSEXCELADDIN("adsExcelAddin"),
+      @SerializedName("adsManagerReporting")
+      VALUE_ADSMANAGERREPORTING("adsManagerReporting"),
+      @SerializedName("newAdsManager")
+      VALUE_NEWADSMANAGER("newAdsManager"),
       NULL(null);
 
       private String value;
 
-      private EnumLevel(String value) {
+      private EnumCreationSource(String value) {
         this.value = value;
       }
 
@@ -33005,61 +33053,24 @@ public class AdAccount extends APINode {
       }
   }
 
-  public static enum EnumCreationSource {
-      @SerializedName("adsExcelAddin")
-      VALUE_ADSEXCELADDIN("adsExcelAddin"),
-      @SerializedName("adsManagerReporting")
-      VALUE_ADSMANAGERREPORTING("adsManagerReporting"),
-      @SerializedName("newAdsManager")
-      VALUE_NEWADSMANAGER("newAdsManager"),
+  public static enum EnumLevel {
+      @SerializedName("account")
+      VALUE_ACCOUNT("account"),
+      @SerializedName("ad")
+      VALUE_AD("ad"),
+      @SerializedName("adgroup")
+      VALUE_ADGROUP("adgroup"),
+      @SerializedName("campaign")
+      VALUE_CAMPAIGN("campaign"),
+      @SerializedName("campaign_group")
+      VALUE_CAMPAIGN_GROUP("campaign_group"),
+      @SerializedName("politicalad")
+      VALUE_POLITICALAD("politicalad"),
       NULL(null);
 
       private String value;
 
-      private EnumCreationSource(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumActionsGroupBy {
-      @SerializedName("action_canvas_component_id")
-      VALUE_ACTION_CANVAS_COMPONENT_ID("action_canvas_component_id"),
-      @SerializedName("action_canvas_component_name")
-      VALUE_ACTION_CANVAS_COMPONENT_NAME("action_canvas_component_name"),
-      @SerializedName("action_carousel_card_id")
-      VALUE_ACTION_CAROUSEL_CARD_ID("action_carousel_card_id"),
-      @SerializedName("action_carousel_card_name")
-      VALUE_ACTION_CAROUSEL_CARD_NAME("action_carousel_card_name"),
-      @SerializedName("action_converted_product_id")
-      VALUE_ACTION_CONVERTED_PRODUCT_ID("action_converted_product_id"),
-      @SerializedName("action_destination")
-      VALUE_ACTION_DESTINATION("action_destination"),
-      @SerializedName("action_device")
-      VALUE_ACTION_DEVICE("action_device"),
-      @SerializedName("action_event_channel")
-      VALUE_ACTION_EVENT_CHANNEL("action_event_channel"),
-      @SerializedName("action_target_id")
-      VALUE_ACTION_TARGET_ID("action_target_id"),
-      @SerializedName("action_type")
-      VALUE_ACTION_TYPE("action_type"),
-      @SerializedName("action_video_sound")
-      VALUE_ACTION_VIDEO_SOUND("action_video_sound"),
-      @SerializedName("action_video_type")
-      VALUE_ACTION_VIDEO_TYPE("action_video_type"),
-      @SerializedName("interactive_component_sticker_id")
-      VALUE_INTERACTIVE_COMPONENT_STICKER_ID("interactive_component_sticker_id"),
-      @SerializedName("interactive_component_sticker_response")
-      VALUE_INTERACTIVE_COMPONENT_STICKER_RESPONSE("interactive_component_sticker_response"),
-      NULL(null);
-
-      private String value;
-
-      private EnumActionsGroupBy(String value) {
+      private EnumLevel(String value) {
         this.value = value;
       }
 
@@ -33189,7 +33200,6 @@ public class AdAccount extends APINode {
     this.mDisableReason = instance.mDisableReason;
     this.mEndAdvertiser = instance.mEndAdvertiser;
     this.mEndAdvertiserName = instance.mEndAdvertiserName;
-    this.mExtendedCreditInvoiceGroup = instance.mExtendedCreditInvoiceGroup;
     this.mFailedDeliveryChecks = instance.mFailedDeliveryChecks;
     this.mFbEntity = instance.mFbEntity;
     this.mFundingSource = instance.mFundingSource;

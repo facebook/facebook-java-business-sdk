@@ -58,7 +58,7 @@ public class DirectDeal extends APINode {
   @SerializedName("adbreaks_enabled")
   private Boolean mAdbreaksEnabled = null;
   @SerializedName("adset")
-  private Object mAdset = null;
+  private AdSet mAdset = null;
   @SerializedName("advertiser")
   private Object mAdvertiser = null;
   @SerializedName("advertiser_lead_email")
@@ -325,7 +325,10 @@ public class DirectDeal extends APINode {
     return mAdbreaksEnabled;
   }
 
-  public Object getFieldAdset() {
+  public AdSet getFieldAdset() {
+    if (mAdset != null) {
+      mAdset.context = getContext();
+    }
     return mAdset;
   }
 

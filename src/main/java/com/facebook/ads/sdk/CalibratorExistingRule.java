@@ -343,9 +343,9 @@ public class CalibratorExistingRule extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "start_time",
       "end_time",
       "event_type",
+      "start_time",
     };
 
     public static final String[] FIELDS = {
@@ -404,11 +404,6 @@ public class CalibratorExistingRule extends APINode {
     }
 
 
-    public APIRequestGetActivities setStartTime (String startTime) {
-      this.setParam("start_time", startTime);
-      return this;
-    }
-
     public APIRequestGetActivities setEndTime (String endTime) {
       this.setParam("end_time", endTime);
       return this;
@@ -420,6 +415,11 @@ public class CalibratorExistingRule extends APINode {
     }
     public APIRequestGetActivities setEventType (String eventType) {
       this.setParam("event_type", eventType);
+      return this;
+    }
+
+    public APIRequestGetActivities setStartTime (String startTime) {
+      this.setParam("start_time", startTime);
       return this;
     }
 

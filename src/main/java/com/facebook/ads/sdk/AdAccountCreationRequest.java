@@ -538,7 +538,6 @@ public class AdAccountCreationRequest extends APINode {
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
-      "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
       "funding_source",
@@ -834,13 +833,6 @@ public class AdAccountCreationRequest extends APINode {
       this.requestField("end_advertiser_name", value);
       return this;
     }
-    public APIRequestGetAdAccounts requestExtendedCreditInvoiceGroupField () {
-      return this.requestExtendedCreditInvoiceGroupField(true);
-    }
-    public APIRequestGetAdAccounts requestExtendedCreditInvoiceGroupField (boolean value) {
-      this.requestField("extended_credit_invoice_group", value);
-      return this;
-    }
     public APIRequestGetAdAccounts requestFailedDeliveryChecksField () {
       return this.requestFailedDeliveryChecksField(true);
     }
@@ -1104,23 +1096,23 @@ public class AdAccountCreationRequest extends APINode {
     }
     public static final String[] PARAMS = {
       "ad_accounts_info",
-      "business_registration",
-      "planning_agency_business_id",
-      "english_legal_entity_name",
-      "address_in_english",
-      "official_website_url",
-      "business_registration_id",
-      "vertical",
-      "subvertical",
-      "promotable_page_urls",
-      "promotable_page_ids",
-      "promotable_app_ids",
-      "promotable_urls",
-      "contact",
       "additional_comment",
-      "advertiser_business_id",
+      "address_in_english",
       "address_in_local_language",
+      "advertiser_business_id",
+      "business_registration",
+      "business_registration_id",
+      "contact",
+      "english_legal_entity_name",
       "legal_entity_name_in_local_language",
+      "official_website_url",
+      "planning_agency_business_id",
+      "promotable_app_ids",
+      "promotable_page_ids",
+      "promotable_page_urls",
+      "promotable_urls",
+      "subvertical",
+      "vertical",
     };
 
     public static final String[] FIELDS = {
@@ -1188,22 +1180,8 @@ public class AdAccountCreationRequest extends APINode {
       return this;
     }
 
-    public APIRequestCreateVietnam setBusinessRegistration (File businessRegistration) {
-      this.setParam("business_registration", businessRegistration);
-      return this;
-    }
-    public APIRequestCreateVietnam setBusinessRegistration (String businessRegistration) {
-      this.setParam("business_registration", businessRegistration);
-      return this;
-    }
-
-    public APIRequestCreateVietnam setPlanningAgencyBusinessId (String planningAgencyBusinessId) {
-      this.setParam("planning_agency_business_id", planningAgencyBusinessId);
-      return this;
-    }
-
-    public APIRequestCreateVietnam setEnglishLegalEntityName (String englishLegalEntityName) {
-      this.setParam("english_legal_entity_name", englishLegalEntityName);
+    public APIRequestCreateVietnam setAdditionalComment (String additionalComment) {
+      this.setParam("additional_comment", additionalComment);
       return this;
     }
 
@@ -1216,67 +1194,27 @@ public class AdAccountCreationRequest extends APINode {
       return this;
     }
 
-    public APIRequestCreateVietnam setOfficialWebsiteUrl (String officialWebsiteUrl) {
-      this.setParam("official_website_url", officialWebsiteUrl);
+    public APIRequestCreateVietnam setAddressInLocalLanguage (String addressInLocalLanguage) {
+      this.setParam("address_in_local_language", addressInLocalLanguage);
+      return this;
+    }
+
+    public APIRequestCreateVietnam setAdvertiserBusinessId (String advertiserBusinessId) {
+      this.setParam("advertiser_business_id", advertiserBusinessId);
+      return this;
+    }
+
+    public APIRequestCreateVietnam setBusinessRegistration (File businessRegistration) {
+      this.setParam("business_registration", businessRegistration);
+      return this;
+    }
+    public APIRequestCreateVietnam setBusinessRegistration (String businessRegistration) {
+      this.setParam("business_registration", businessRegistration);
       return this;
     }
 
     public APIRequestCreateVietnam setBusinessRegistrationId (String businessRegistrationId) {
       this.setParam("business_registration_id", businessRegistrationId);
-      return this;
-    }
-
-    public APIRequestCreateVietnam setVertical (AdAccountCreationRequest.EnumVertical vertical) {
-      this.setParam("vertical", vertical);
-      return this;
-    }
-    public APIRequestCreateVietnam setVertical (String vertical) {
-      this.setParam("vertical", vertical);
-      return this;
-    }
-
-    public APIRequestCreateVietnam setSubvertical (AdAccountCreationRequest.EnumSubvertical subvertical) {
-      this.setParam("subvertical", subvertical);
-      return this;
-    }
-    public APIRequestCreateVietnam setSubvertical (String subvertical) {
-      this.setParam("subvertical", subvertical);
-      return this;
-    }
-
-    public APIRequestCreateVietnam setPromotablePageUrls (List<String> promotablePageUrls) {
-      this.setParam("promotable_page_urls", promotablePageUrls);
-      return this;
-    }
-    public APIRequestCreateVietnam setPromotablePageUrls (String promotablePageUrls) {
-      this.setParam("promotable_page_urls", promotablePageUrls);
-      return this;
-    }
-
-    public APIRequestCreateVietnam setPromotablePageIds (List<Long> promotablePageIds) {
-      this.setParam("promotable_page_ids", promotablePageIds);
-      return this;
-    }
-    public APIRequestCreateVietnam setPromotablePageIds (String promotablePageIds) {
-      this.setParam("promotable_page_ids", promotablePageIds);
-      return this;
-    }
-
-    public APIRequestCreateVietnam setPromotableAppIds (List<String> promotableAppIds) {
-      this.setParam("promotable_app_ids", promotableAppIds);
-      return this;
-    }
-    public APIRequestCreateVietnam setPromotableAppIds (String promotableAppIds) {
-      this.setParam("promotable_app_ids", promotableAppIds);
-      return this;
-    }
-
-    public APIRequestCreateVietnam setPromotableUrls (List<String> promotableUrls) {
-      this.setParam("promotable_urls", promotableUrls);
-      return this;
-    }
-    public APIRequestCreateVietnam setPromotableUrls (String promotableUrls) {
-      this.setParam("promotable_urls", promotableUrls);
       return this;
     }
 
@@ -1289,23 +1227,77 @@ public class AdAccountCreationRequest extends APINode {
       return this;
     }
 
-    public APIRequestCreateVietnam setAdditionalComment (String additionalComment) {
-      this.setParam("additional_comment", additionalComment);
-      return this;
-    }
-
-    public APIRequestCreateVietnam setAdvertiserBusinessId (String advertiserBusinessId) {
-      this.setParam("advertiser_business_id", advertiserBusinessId);
-      return this;
-    }
-
-    public APIRequestCreateVietnam setAddressInLocalLanguage (String addressInLocalLanguage) {
-      this.setParam("address_in_local_language", addressInLocalLanguage);
+    public APIRequestCreateVietnam setEnglishLegalEntityName (String englishLegalEntityName) {
+      this.setParam("english_legal_entity_name", englishLegalEntityName);
       return this;
     }
 
     public APIRequestCreateVietnam setLegalEntityNameInLocalLanguage (String legalEntityNameInLocalLanguage) {
       this.setParam("legal_entity_name_in_local_language", legalEntityNameInLocalLanguage);
+      return this;
+    }
+
+    public APIRequestCreateVietnam setOfficialWebsiteUrl (String officialWebsiteUrl) {
+      this.setParam("official_website_url", officialWebsiteUrl);
+      return this;
+    }
+
+    public APIRequestCreateVietnam setPlanningAgencyBusinessId (String planningAgencyBusinessId) {
+      this.setParam("planning_agency_business_id", planningAgencyBusinessId);
+      return this;
+    }
+
+    public APIRequestCreateVietnam setPromotableAppIds (List<String> promotableAppIds) {
+      this.setParam("promotable_app_ids", promotableAppIds);
+      return this;
+    }
+    public APIRequestCreateVietnam setPromotableAppIds (String promotableAppIds) {
+      this.setParam("promotable_app_ids", promotableAppIds);
+      return this;
+    }
+
+    public APIRequestCreateVietnam setPromotablePageIds (List<Long> promotablePageIds) {
+      this.setParam("promotable_page_ids", promotablePageIds);
+      return this;
+    }
+    public APIRequestCreateVietnam setPromotablePageIds (String promotablePageIds) {
+      this.setParam("promotable_page_ids", promotablePageIds);
+      return this;
+    }
+
+    public APIRequestCreateVietnam setPromotablePageUrls (List<String> promotablePageUrls) {
+      this.setParam("promotable_page_urls", promotablePageUrls);
+      return this;
+    }
+    public APIRequestCreateVietnam setPromotablePageUrls (String promotablePageUrls) {
+      this.setParam("promotable_page_urls", promotablePageUrls);
+      return this;
+    }
+
+    public APIRequestCreateVietnam setPromotableUrls (List<String> promotableUrls) {
+      this.setParam("promotable_urls", promotableUrls);
+      return this;
+    }
+    public APIRequestCreateVietnam setPromotableUrls (String promotableUrls) {
+      this.setParam("promotable_urls", promotableUrls);
+      return this;
+    }
+
+    public APIRequestCreateVietnam setSubvertical (AdAccountCreationRequest.EnumSubvertical subvertical) {
+      this.setParam("subvertical", subvertical);
+      return this;
+    }
+    public APIRequestCreateVietnam setSubvertical (String subvertical) {
+      this.setParam("subvertical", subvertical);
+      return this;
+    }
+
+    public APIRequestCreateVietnam setVertical (AdAccountCreationRequest.EnumVertical vertical) {
+      this.setParam("vertical", vertical);
+      return this;
+    }
+    public APIRequestCreateVietnam setVertical (String vertical) {
+      this.setParam("vertical", vertical);
       return this;
     }
 
@@ -1835,29 +1827,29 @@ public class AdAccountCreationRequest extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "extended_credit_id",
       "ad_accounts_info",
-      "business_registration",
-      "planning_agency_business_id",
-      "english_legal_entity_name",
-      "legal_entity_name_in_local_language",
-      "address_in_local_language",
-      "chinese_legal_entity_name",
+      "additional_comment",
       "address_in_chinese",
       "address_in_english",
-      "official_website_url",
-      "business_registration_id",
-      "vertical",
-      "subvertical",
-      "promotable_page_urls",
-      "promotable_page_ids",
-      "promotable_app_ids",
-      "promotable_urls",
-      "contact",
-      "additional_comment",
-      "is_smb",
+      "address_in_local_language",
       "advertiser_business_id",
+      "business_registration",
+      "business_registration_id",
+      "chinese_legal_entity_name",
+      "contact",
       "disapprove_appeal_comment",
+      "english_legal_entity_name",
+      "extended_credit_id",
+      "is_smb",
+      "legal_entity_name_in_local_language",
+      "official_website_url",
+      "planning_agency_business_id",
+      "promotable_app_ids",
+      "promotable_page_ids",
+      "promotable_page_urls",
+      "promotable_urls",
+      "subvertical",
+      "vertical",
     };
 
     public static final String[] FIELDS = {
@@ -1916,11 +1908,6 @@ public class AdAccountCreationRequest extends APINode {
     }
 
 
-    public APIRequestUpdate setExtendedCreditId (String extendedCreditId) {
-      this.setParam("extended_credit_id", extendedCreditId);
-      return this;
-    }
-
     public APIRequestUpdate setAdAccountsInfo (List<Object> adAccountsInfo) {
       this.setParam("ad_accounts_info", adAccountsInfo);
       return this;
@@ -1930,37 +1917,8 @@ public class AdAccountCreationRequest extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setBusinessRegistration (File businessRegistration) {
-      this.setParam("business_registration", businessRegistration);
-      return this;
-    }
-    public APIRequestUpdate setBusinessRegistration (String businessRegistration) {
-      this.setParam("business_registration", businessRegistration);
-      return this;
-    }
-
-    public APIRequestUpdate setPlanningAgencyBusinessId (String planningAgencyBusinessId) {
-      this.setParam("planning_agency_business_id", planningAgencyBusinessId);
-      return this;
-    }
-
-    public APIRequestUpdate setEnglishLegalEntityName (String englishLegalEntityName) {
-      this.setParam("english_legal_entity_name", englishLegalEntityName);
-      return this;
-    }
-
-    public APIRequestUpdate setLegalEntityNameInLocalLanguage (String legalEntityNameInLocalLanguage) {
-      this.setParam("legal_entity_name_in_local_language", legalEntityNameInLocalLanguage);
-      return this;
-    }
-
-    public APIRequestUpdate setAddressInLocalLanguage (String addressInLocalLanguage) {
-      this.setParam("address_in_local_language", addressInLocalLanguage);
-      return this;
-    }
-
-    public APIRequestUpdate setChineseLegalEntityName (String chineseLegalEntityName) {
-      this.setParam("chinese_legal_entity_name", chineseLegalEntityName);
+    public APIRequestUpdate setAdditionalComment (String additionalComment) {
+      this.setParam("additional_comment", additionalComment);
       return this;
     }
 
@@ -1978,8 +1936,22 @@ public class AdAccountCreationRequest extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setOfficialWebsiteUrl (String officialWebsiteUrl) {
-      this.setParam("official_website_url", officialWebsiteUrl);
+    public APIRequestUpdate setAddressInLocalLanguage (String addressInLocalLanguage) {
+      this.setParam("address_in_local_language", addressInLocalLanguage);
+      return this;
+    }
+
+    public APIRequestUpdate setAdvertiserBusinessId (String advertiserBusinessId) {
+      this.setParam("advertiser_business_id", advertiserBusinessId);
+      return this;
+    }
+
+    public APIRequestUpdate setBusinessRegistration (File businessRegistration) {
+      this.setParam("business_registration", businessRegistration);
+      return this;
+    }
+    public APIRequestUpdate setBusinessRegistration (String businessRegistration) {
+      this.setParam("business_registration", businessRegistration);
       return this;
     }
 
@@ -1988,57 +1960,8 @@ public class AdAccountCreationRequest extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setVertical (AdAccountCreationRequest.EnumVertical vertical) {
-      this.setParam("vertical", vertical);
-      return this;
-    }
-    public APIRequestUpdate setVertical (String vertical) {
-      this.setParam("vertical", vertical);
-      return this;
-    }
-
-    public APIRequestUpdate setSubvertical (AdAccountCreationRequest.EnumSubvertical subvertical) {
-      this.setParam("subvertical", subvertical);
-      return this;
-    }
-    public APIRequestUpdate setSubvertical (String subvertical) {
-      this.setParam("subvertical", subvertical);
-      return this;
-    }
-
-    public APIRequestUpdate setPromotablePageUrls (List<String> promotablePageUrls) {
-      this.setParam("promotable_page_urls", promotablePageUrls);
-      return this;
-    }
-    public APIRequestUpdate setPromotablePageUrls (String promotablePageUrls) {
-      this.setParam("promotable_page_urls", promotablePageUrls);
-      return this;
-    }
-
-    public APIRequestUpdate setPromotablePageIds (List<String> promotablePageIds) {
-      this.setParam("promotable_page_ids", promotablePageIds);
-      return this;
-    }
-    public APIRequestUpdate setPromotablePageIds (String promotablePageIds) {
-      this.setParam("promotable_page_ids", promotablePageIds);
-      return this;
-    }
-
-    public APIRequestUpdate setPromotableAppIds (List<String> promotableAppIds) {
-      this.setParam("promotable_app_ids", promotableAppIds);
-      return this;
-    }
-    public APIRequestUpdate setPromotableAppIds (String promotableAppIds) {
-      this.setParam("promotable_app_ids", promotableAppIds);
-      return this;
-    }
-
-    public APIRequestUpdate setPromotableUrls (List<String> promotableUrls) {
-      this.setParam("promotable_urls", promotableUrls);
-      return this;
-    }
-    public APIRequestUpdate setPromotableUrls (String promotableUrls) {
-      this.setParam("promotable_urls", promotableUrls);
+    public APIRequestUpdate setChineseLegalEntityName (String chineseLegalEntityName) {
+      this.setParam("chinese_legal_entity_name", chineseLegalEntityName);
       return this;
     }
 
@@ -2051,8 +1974,18 @@ public class AdAccountCreationRequest extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setAdditionalComment (String additionalComment) {
-      this.setParam("additional_comment", additionalComment);
+    public APIRequestUpdate setDisapproveAppealComment (String disapproveAppealComment) {
+      this.setParam("disapprove_appeal_comment", disapproveAppealComment);
+      return this;
+    }
+
+    public APIRequestUpdate setEnglishLegalEntityName (String englishLegalEntityName) {
+      this.setParam("english_legal_entity_name", englishLegalEntityName);
+      return this;
+    }
+
+    public APIRequestUpdate setExtendedCreditId (String extendedCreditId) {
+      this.setParam("extended_credit_id", extendedCreditId);
       return this;
     }
 
@@ -2065,13 +1998,72 @@ public class AdAccountCreationRequest extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setAdvertiserBusinessId (String advertiserBusinessId) {
-      this.setParam("advertiser_business_id", advertiserBusinessId);
+    public APIRequestUpdate setLegalEntityNameInLocalLanguage (String legalEntityNameInLocalLanguage) {
+      this.setParam("legal_entity_name_in_local_language", legalEntityNameInLocalLanguage);
       return this;
     }
 
-    public APIRequestUpdate setDisapproveAppealComment (String disapproveAppealComment) {
-      this.setParam("disapprove_appeal_comment", disapproveAppealComment);
+    public APIRequestUpdate setOfficialWebsiteUrl (String officialWebsiteUrl) {
+      this.setParam("official_website_url", officialWebsiteUrl);
+      return this;
+    }
+
+    public APIRequestUpdate setPlanningAgencyBusinessId (String planningAgencyBusinessId) {
+      this.setParam("planning_agency_business_id", planningAgencyBusinessId);
+      return this;
+    }
+
+    public APIRequestUpdate setPromotableAppIds (List<String> promotableAppIds) {
+      this.setParam("promotable_app_ids", promotableAppIds);
+      return this;
+    }
+    public APIRequestUpdate setPromotableAppIds (String promotableAppIds) {
+      this.setParam("promotable_app_ids", promotableAppIds);
+      return this;
+    }
+
+    public APIRequestUpdate setPromotablePageIds (List<String> promotablePageIds) {
+      this.setParam("promotable_page_ids", promotablePageIds);
+      return this;
+    }
+    public APIRequestUpdate setPromotablePageIds (String promotablePageIds) {
+      this.setParam("promotable_page_ids", promotablePageIds);
+      return this;
+    }
+
+    public APIRequestUpdate setPromotablePageUrls (List<String> promotablePageUrls) {
+      this.setParam("promotable_page_urls", promotablePageUrls);
+      return this;
+    }
+    public APIRequestUpdate setPromotablePageUrls (String promotablePageUrls) {
+      this.setParam("promotable_page_urls", promotablePageUrls);
+      return this;
+    }
+
+    public APIRequestUpdate setPromotableUrls (List<String> promotableUrls) {
+      this.setParam("promotable_urls", promotableUrls);
+      return this;
+    }
+    public APIRequestUpdate setPromotableUrls (String promotableUrls) {
+      this.setParam("promotable_urls", promotableUrls);
+      return this;
+    }
+
+    public APIRequestUpdate setSubvertical (AdAccountCreationRequest.EnumSubvertical subvertical) {
+      this.setParam("subvertical", subvertical);
+      return this;
+    }
+    public APIRequestUpdate setSubvertical (String subvertical) {
+      this.setParam("subvertical", subvertical);
+      return this;
+    }
+
+    public APIRequestUpdate setVertical (AdAccountCreationRequest.EnumVertical vertical) {
+      this.setParam("vertical", vertical);
+      return this;
+    }
+    public APIRequestUpdate setVertical (String vertical) {
+      this.setParam("vertical", vertical);
       return this;
     }
 
