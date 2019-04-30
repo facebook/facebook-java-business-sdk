@@ -274,6 +274,8 @@ public class AdNetworkAnalyticsSyncQueryResult extends APINode {
       VALUE_GENDER("GENDER"),
       @SerializedName("PLACEMENT")
       VALUE_PLACEMENT("PLACEMENT"),
+      @SerializedName("PLACEMENT_NAME")
+      VALUE_PLACEMENT_NAME("PLACEMENT_NAME"),
       @SerializedName("PLATFORM")
       VALUE_PLATFORM("PLATFORM"),
       @SerializedName("PROPERTY")

@@ -61,8 +61,6 @@ public class SavedAudience extends APINode {
   private Long mApproximateCount = null;
   @SerializedName("description")
   private String mDescription = null;
-  @SerializedName("expiry_time")
-  private String mExpiryTime = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("name")
@@ -316,10 +314,6 @@ public class SavedAudience extends APINode {
     return mDescription;
   }
 
-  public String getFieldExpiryTime() {
-    return mExpiryTime;
-  }
-
   public String getFieldId() {
     return mId;
   }
@@ -402,6 +396,7 @@ public class SavedAudience extends APINode {
       "lifetime_spend_cap",
       "name",
       "optimization_goal",
+      "optimization_sub_event",
       "pacing_type",
       "promoted_object",
       "recommendations",
@@ -767,6 +762,13 @@ public class SavedAudience extends APINode {
       this.requestField("optimization_goal", value);
       return this;
     }
+    public APIRequestGetAdSets requestOptimizationSubEventField () {
+      return this.requestOptimizationSubEventField(true);
+    }
+    public APIRequestGetAdSets requestOptimizationSubEventField (boolean value) {
+      this.requestField("optimization_sub_event", value);
+      return this;
+    }
     public APIRequestGetAdSets requestPacingTypeField () {
       return this.requestPacingTypeField(true);
     }
@@ -992,7 +994,6 @@ public class SavedAudience extends APINode {
       "account",
       "approximate_count",
       "description",
-      "expiry_time",
       "id",
       "name",
       "permission_for_actions",
@@ -1113,13 +1114,6 @@ public class SavedAudience extends APINode {
       this.requestField("description", value);
       return this;
     }
-    public APIRequestGet requestExpiryTimeField () {
-      return this.requestExpiryTimeField(true);
-    }
-    public APIRequestGet requestExpiryTimeField (boolean value) {
-      this.requestField("expiry_time", value);
-      return this;
-    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -1196,7 +1190,6 @@ public class SavedAudience extends APINode {
     this.mAccount = instance.mAccount;
     this.mApproximateCount = instance.mApproximateCount;
     this.mDescription = instance.mDescription;
-    this.mExpiryTime = instance.mExpiryTime;
     this.mId = instance.mId;
     this.mName = instance.mName;
     this.mPermissionForActions = instance.mPermissionForActions;

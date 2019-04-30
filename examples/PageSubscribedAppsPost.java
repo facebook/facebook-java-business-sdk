@@ -21,37 +21,4 @@
  *
  */
 
- import com.facebook.ads.sdk.*;
-import java.io.File;
-import java.util.Arrays;
-
-public class AdAccountAdSetsPostDailyBudget20 {
-  public static void main (String args[]) throws APIException {
-
-    String access_token = "<ACCESS_TOKEN>";
-    String app_secret = "<APP_SECRET>";
-    String app_id = "<APP_ID>";
-    String id = "<AD_ACCOUNT_ID>";
-    APIContext context = new APIContext(access_token).enableDebug(true);
-
-    new AdAccount(id, context).createAdSet()
-      .setName("My First Adset")
-      .setDailyBudget(2000L)
-      .setStartTime("2019-04-29T08:47:49-0700")
-      .setEndTime("2019-05-06T08:47:49-0700")
-      .setCampaignId("<adCampaignLinkClicksID>")
-      .setBidAmount(100L)
-      .setBillingEvent(AdSet.EnumBillingEvent.VALUE_LINK_CLICKS)
-      .setOptimizationGoal(AdSet.EnumOptimizationGoal.VALUE_LINK_CLICKS)
-      .setTargeting(
-          new Targeting()
-            .setFieldGeoLocations(
-              new TargetingGeoLocation()
-                .setFieldCountries(Arrays.asList("US"))
-            )
-        )
-      .setStatus(AdSet.EnumStatus.VALUE_PAUSED)
-      .execute();
-
-  }
-}
+ 

@@ -25,7 +25,7 @@
 import java.io.File;
 import java.util.Arrays;
 
-public class AdAccountAdSetsPostAdSetCreateCpa {
+public class AdAccountAdSetsPostCreateCampaign {
   public static void main (String args[]) throws APIException {
 
     String access_token = "<ACCESS_TOKEN>";
@@ -34,26 +34,10 @@ public class AdAccountAdSetsPostAdSetCreateCpa {
     String id = "<AD_ACCOUNT_ID>";
     APIContext context = new APIContext(access_token).enableDebug(true);
 
-    new AdAccount(id, context).createAdSet()
-      .setName("A CPA Ad Set")
-      .setCampaignId("<adCampaignLinkClicksID>")
-      .setDailyBudget(5000L)
-      .setStartTime("2019-05-06T08:46:40-0700")
-      .setEndTime("2019-05-13T08:46:40-0700")
-      .setBillingEvent(AdSet.EnumBillingEvent.VALUE_IMPRESSIONS)
-      .setOptimizationGoal(AdSet.EnumOptimizationGoal.VALUE_REACH)
-      .setBidAmount(1000L)
-      .setPromotedObject("{\"page_id\":\"<pageID>\"}")
-      .setTargeting(
-          new Targeting()
-            .setFieldGeoLocations(
-              new TargetingGeoLocation()
-                .setFieldCountries(Arrays.asList("US"))
-            )
-        )
-      .setParam("user_os", "iOS")
-      .setParam("publisher_platforms", "facebook")
-      .setParam("device_platforms", "mobile")
+    new AdAccount(id, context).createCampaign()
+      .setName("My campaign")
+      .setObjective(Campaign.EnumObjective.VALUE_LINK_CLICKS)
+      .setStatus(Campaign.EnumStatus.VALUE_PAUSED)
       .execute();
 
   }

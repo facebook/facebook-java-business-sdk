@@ -61,6 +61,8 @@ public class VideoCopyright extends APINode {
   private String mCopyrightContentId = null;
   @SerializedName("creator")
   private User mCreator = null;
+  @SerializedName("excluded_ownership_segments")
+  private List<VideoCopyrightSegment> mExcludedOwnershipSegments = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("in_conflict")
@@ -322,6 +324,10 @@ public class VideoCopyright extends APINode {
     return mCreator;
   }
 
+  public List<VideoCopyrightSegment> getFieldExcludedOwnershipSegments() {
+    return mExcludedOwnershipSegments;
+  }
+
   public String getFieldId() {
     return mId;
   }
@@ -490,6 +496,7 @@ public class VideoCopyright extends APINode {
       "content_category",
       "copyright_content_id",
       "creator",
+      "excluded_ownership_segments",
       "id",
       "in_conflict",
       "monitoring_status",
@@ -612,6 +619,13 @@ public class VideoCopyright extends APINode {
     }
     public APIRequestGet requestCreatorField (boolean value) {
       this.requestField("creator", value);
+      return this;
+    }
+    public APIRequestGet requestExcludedOwnershipSegmentsField () {
+      return this.requestExcludedOwnershipSegmentsField(true);
+    }
+    public APIRequestGet requestExcludedOwnershipSegmentsField (boolean value) {
+      this.requestField("excluded_ownership_segments", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -966,6 +980,7 @@ public class VideoCopyright extends APINode {
     this.mContentCategory = instance.mContentCategory;
     this.mCopyrightContentId = instance.mCopyrightContentId;
     this.mCreator = instance.mCreator;
+    this.mExcludedOwnershipSegments = instance.mExcludedOwnershipSegments;
     this.mId = instance.mId;
     this.mInConflict = instance.mInConflict;
     this.mMonitoringStatus = instance.mMonitoringStatus;

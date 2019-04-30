@@ -566,16 +566,16 @@ public class Page extends APINode {
     return new APIRequestCreateAdminSetting(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateAdminStickySetting createAdminStickySetting() {
+    return new APIRequestCreateAdminStickySetting(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestDeleteAdmins deleteAdmins() {
     return new APIRequestDeleteAdmins(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateAdmin createAdmin() {
     return new APIRequestCreateAdmin(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateAdminStickySetting createAdminStickySetting() {
-    return new APIRequestCreateAdminStickySetting(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetAdsPosts getAdsPosts() {
@@ -1016,10 +1016,6 @@ public class Page extends APINode {
 
   public APIRequestGetProductCatalogs getProductCatalogs() {
     return new APIRequestGetProductCatalogs(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetPromotablePosts getPromotablePosts() {
-    return new APIRequestGetPromotablePosts(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreatePromotion createPromotion() {
@@ -2355,6 +2351,158 @@ public class Page extends APINode {
 
   }
 
+  public static class APIRequestCreateAdminStickySetting extends APIRequest<Page> {
+
+    Page lastResponse = null;
+    @Override
+    public Page getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "ad_account_id",
+      "audience",
+      "budget",
+      "campaign_length",
+      "currency",
+      "targeting",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Page parseResponse(String response, String header) throws APIException {
+      return Page.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Page execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Page execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Page> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Page> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, Page>() {
+           public Page apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateAdminStickySetting.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateAdminStickySetting(String nodeId, APIContext context) {
+      super(context, nodeId, "/admin_sticky_settings", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateAdminStickySetting setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdminStickySetting setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateAdminStickySetting setAdAccountId (String adAccountId) {
+      this.setParam("ad_account_id", adAccountId);
+      return this;
+    }
+
+    public APIRequestCreateAdminStickySetting setAudience (Page.EnumAudience audience) {
+      this.setParam("audience", audience);
+      return this;
+    }
+    public APIRequestCreateAdminStickySetting setAudience (String audience) {
+      this.setParam("audience", audience);
+      return this;
+    }
+
+    public APIRequestCreateAdminStickySetting setBudget (Long budget) {
+      this.setParam("budget", budget);
+      return this;
+    }
+    public APIRequestCreateAdminStickySetting setBudget (String budget) {
+      this.setParam("budget", budget);
+      return this;
+    }
+
+    public APIRequestCreateAdminStickySetting setCampaignLength (String campaignLength) {
+      this.setParam("campaign_length", campaignLength);
+      return this;
+    }
+
+    public APIRequestCreateAdminStickySetting setCurrency (String currency) {
+      this.setParam("currency", currency);
+      return this;
+    }
+
+    public APIRequestCreateAdminStickySetting setTargeting (Targeting targeting) {
+      this.setParam("targeting", targeting);
+      return this;
+    }
+    public APIRequestCreateAdminStickySetting setTargeting (String targeting) {
+      this.setParam("targeting", targeting);
+      return this;
+    }
+
+    public APIRequestCreateAdminStickySetting requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateAdminStickySetting requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdminStickySetting requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateAdminStickySetting requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdminStickySetting requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdminStickySetting requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestDeleteAdmins extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -2613,158 +2761,6 @@ public class Page extends APINode {
 
   }
 
-  public static class APIRequestCreateAdminStickySetting extends APIRequest<Page> {
-
-    Page lastResponse = null;
-    @Override
-    public Page getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "ad_account_id",
-      "audience",
-      "budget",
-      "campaign_length",
-      "currency",
-      "targeting",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Page parseResponse(String response, String header) throws APIException {
-      return Page.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Page execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Page execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Page> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Page> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Page>() {
-           public Page apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateAdminStickySetting.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateAdminStickySetting(String nodeId, APIContext context) {
-      super(context, nodeId, "/adminstickysettings", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateAdminStickySetting setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdminStickySetting setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateAdminStickySetting setAdAccountId (String adAccountId) {
-      this.setParam("ad_account_id", adAccountId);
-      return this;
-    }
-
-    public APIRequestCreateAdminStickySetting setAudience (Page.EnumAudience audience) {
-      this.setParam("audience", audience);
-      return this;
-    }
-    public APIRequestCreateAdminStickySetting setAudience (String audience) {
-      this.setParam("audience", audience);
-      return this;
-    }
-
-    public APIRequestCreateAdminStickySetting setBudget (Long budget) {
-      this.setParam("budget", budget);
-      return this;
-    }
-    public APIRequestCreateAdminStickySetting setBudget (String budget) {
-      this.setParam("budget", budget);
-      return this;
-    }
-
-    public APIRequestCreateAdminStickySetting setCampaignLength (String campaignLength) {
-      this.setParam("campaign_length", campaignLength);
-      return this;
-    }
-
-    public APIRequestCreateAdminStickySetting setCurrency (String currency) {
-      this.setParam("currency", currency);
-      return this;
-    }
-
-    public APIRequestCreateAdminStickySetting setTargeting (Targeting targeting) {
-      this.setParam("targeting", targeting);
-      return this;
-    }
-    public APIRequestCreateAdminStickySetting setTargeting (String targeting) {
-      this.setParam("targeting", targeting);
-      return this;
-    }
-
-    public APIRequestCreateAdminStickySetting requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateAdminStickySetting requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdminStickySetting requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateAdminStickySetting requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdminStickySetting requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdminStickySetting requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetAdsPosts extends APIRequest<PagePost> {
 
     APINodeList<PagePost> lastResponse = null;
@@ -2786,12 +2782,10 @@ public class Page extends APINode {
       "backdated_time",
       "call_to_action",
       "can_reply_privately",
-      "caption",
       "child_attachments",
       "comments_mirroring_domain",
       "coordinates",
       "created_time",
-      "description",
       "event",
       "expanded_height",
       "expanded_width",
@@ -2810,13 +2804,10 @@ public class Page extends APINode {
       "is_popular",
       "is_published",
       "is_spherical",
-      "link",
       "message",
       "message_tags",
       "multi_share_end_card",
       "multi_share_optimized",
-      "name",
-      "object_id",
       "parent_id",
       "permalink_url",
       "picture",
@@ -2827,7 +2818,6 @@ public class Page extends APINode {
       "properties",
       "scheduled_publish_time",
       "shares",
-      "source",
       "status_type",
       "story",
       "story_tags",
@@ -2835,7 +2825,6 @@ public class Page extends APINode {
       "target",
       "targeting",
       "timeline_visibility",
-      "type",
       "updated_time",
       "via",
       "video_buying_eligibility",
@@ -2999,13 +2988,6 @@ public class Page extends APINode {
       this.requestField("can_reply_privately", value);
       return this;
     }
-    public APIRequestGetAdsPosts requestCaptionField () {
-      return this.requestCaptionField(true);
-    }
-    public APIRequestGetAdsPosts requestCaptionField (boolean value) {
-      this.requestField("caption", value);
-      return this;
-    }
     public APIRequestGetAdsPosts requestChildAttachmentsField () {
       return this.requestChildAttachmentsField(true);
     }
@@ -3032,13 +3014,6 @@ public class Page extends APINode {
     }
     public APIRequestGetAdsPosts requestCreatedTimeField (boolean value) {
       this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGetAdsPosts requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGetAdsPosts requestDescriptionField (boolean value) {
-      this.requestField("description", value);
       return this;
     }
     public APIRequestGetAdsPosts requestEventField () {
@@ -3167,13 +3142,6 @@ public class Page extends APINode {
       this.requestField("is_spherical", value);
       return this;
     }
-    public APIRequestGetAdsPosts requestLinkField () {
-      return this.requestLinkField(true);
-    }
-    public APIRequestGetAdsPosts requestLinkField (boolean value) {
-      this.requestField("link", value);
-      return this;
-    }
     public APIRequestGetAdsPosts requestMessageField () {
       return this.requestMessageField(true);
     }
@@ -3200,20 +3168,6 @@ public class Page extends APINode {
     }
     public APIRequestGetAdsPosts requestMultiShareOptimizedField (boolean value) {
       this.requestField("multi_share_optimized", value);
-      return this;
-    }
-    public APIRequestGetAdsPosts requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetAdsPosts requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetAdsPosts requestObjectIdField () {
-      return this.requestObjectIdField(true);
-    }
-    public APIRequestGetAdsPosts requestObjectIdField (boolean value) {
-      this.requestField("object_id", value);
       return this;
     }
     public APIRequestGetAdsPosts requestParentIdField () {
@@ -3286,13 +3240,6 @@ public class Page extends APINode {
       this.requestField("shares", value);
       return this;
     }
-    public APIRequestGetAdsPosts requestSourceField () {
-      return this.requestSourceField(true);
-    }
-    public APIRequestGetAdsPosts requestSourceField (boolean value) {
-      this.requestField("source", value);
-      return this;
-    }
     public APIRequestGetAdsPosts requestStatusTypeField () {
       return this.requestStatusTypeField(true);
     }
@@ -3340,13 +3287,6 @@ public class Page extends APINode {
     }
     public APIRequestGetAdsPosts requestTimelineVisibilityField (boolean value) {
       this.requestField("timeline_visibility", value);
-      return this;
-    }
-    public APIRequestGetAdsPosts requestTypeField () {
-      return this.requestTypeField(true);
-    }
-    public APIRequestGetAdsPosts requestTypeField (boolean value) {
-      this.requestField("type", value);
       return this;
     }
     public APIRequestGetAdsPosts requestUpdatedTimeField () {
@@ -13234,12 +13174,10 @@ public class Page extends APINode {
       "backdated_time",
       "call_to_action",
       "can_reply_privately",
-      "caption",
       "child_attachments",
       "comments_mirroring_domain",
       "coordinates",
       "created_time",
-      "description",
       "event",
       "expanded_height",
       "expanded_width",
@@ -13258,13 +13196,10 @@ public class Page extends APINode {
       "is_popular",
       "is_published",
       "is_spherical",
-      "link",
       "message",
       "message_tags",
       "multi_share_end_card",
       "multi_share_optimized",
-      "name",
-      "object_id",
       "parent_id",
       "permalink_url",
       "picture",
@@ -13275,7 +13210,6 @@ public class Page extends APINode {
       "properties",
       "scheduled_publish_time",
       "shares",
-      "source",
       "status_type",
       "story",
       "story_tags",
@@ -13283,7 +13217,6 @@ public class Page extends APINode {
       "target",
       "targeting",
       "timeline_visibility",
-      "type",
       "updated_time",
       "via",
       "video_buying_eligibility",
@@ -13455,13 +13388,6 @@ public class Page extends APINode {
       this.requestField("can_reply_privately", value);
       return this;
     }
-    public APIRequestGetFeed requestCaptionField () {
-      return this.requestCaptionField(true);
-    }
-    public APIRequestGetFeed requestCaptionField (boolean value) {
-      this.requestField("caption", value);
-      return this;
-    }
     public APIRequestGetFeed requestChildAttachmentsField () {
       return this.requestChildAttachmentsField(true);
     }
@@ -13488,13 +13414,6 @@ public class Page extends APINode {
     }
     public APIRequestGetFeed requestCreatedTimeField (boolean value) {
       this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGetFeed requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGetFeed requestDescriptionField (boolean value) {
-      this.requestField("description", value);
       return this;
     }
     public APIRequestGetFeed requestEventField () {
@@ -13623,13 +13542,6 @@ public class Page extends APINode {
       this.requestField("is_spherical", value);
       return this;
     }
-    public APIRequestGetFeed requestLinkField () {
-      return this.requestLinkField(true);
-    }
-    public APIRequestGetFeed requestLinkField (boolean value) {
-      this.requestField("link", value);
-      return this;
-    }
     public APIRequestGetFeed requestMessageField () {
       return this.requestMessageField(true);
     }
@@ -13656,20 +13568,6 @@ public class Page extends APINode {
     }
     public APIRequestGetFeed requestMultiShareOptimizedField (boolean value) {
       this.requestField("multi_share_optimized", value);
-      return this;
-    }
-    public APIRequestGetFeed requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetFeed requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetFeed requestObjectIdField () {
-      return this.requestObjectIdField(true);
-    }
-    public APIRequestGetFeed requestObjectIdField (boolean value) {
-      this.requestField("object_id", value);
       return this;
     }
     public APIRequestGetFeed requestParentIdField () {
@@ -13742,13 +13640,6 @@ public class Page extends APINode {
       this.requestField("shares", value);
       return this;
     }
-    public APIRequestGetFeed requestSourceField () {
-      return this.requestSourceField(true);
-    }
-    public APIRequestGetFeed requestSourceField (boolean value) {
-      this.requestField("source", value);
-      return this;
-    }
     public APIRequestGetFeed requestStatusTypeField () {
       return this.requestStatusTypeField(true);
     }
@@ -13796,13 +13687,6 @@ public class Page extends APINode {
     }
     public APIRequestGetFeed requestTimelineVisibilityField (boolean value) {
       this.requestField("timeline_visibility", value);
-      return this;
-    }
-    public APIRequestGetFeed requestTypeField () {
-      return this.requestTypeField(true);
-    }
-    public APIRequestGetFeed requestTypeField (boolean value) {
-      this.requestField("type", value);
       return this;
     }
     public APIRequestGetFeed requestUpdatedTimeField () {
@@ -16275,6 +16159,7 @@ public class Page extends APINode {
       "content_category",
       "copyright_content_id",
       "creator",
+      "excluded_ownership_segments",
       "id",
       "in_conflict",
       "monitoring_status",
@@ -16397,6 +16282,13 @@ public class Page extends APINode {
     }
     public APIRequestGetIndexedVideoCopyrights requestCreatorField (boolean value) {
       this.requestField("creator", value);
+      return this;
+    }
+    public APIRequestGetIndexedVideoCopyrights requestExcludedOwnershipSegmentsField () {
+      return this.requestExcludedOwnershipSegmentsField(true);
+    }
+    public APIRequestGetIndexedVideoCopyrights requestExcludedOwnershipSegmentsField (boolean value) {
+      this.requestField("excluded_ownership_segments", value);
       return this;
     }
     public APIRequestGetIndexedVideoCopyrights requestIdField () {
@@ -30031,12 +29923,10 @@ public class Page extends APINode {
       "backdated_time",
       "call_to_action",
       "can_reply_privately",
-      "caption",
       "child_attachments",
       "comments_mirroring_domain",
       "coordinates",
       "created_time",
-      "description",
       "event",
       "expanded_height",
       "expanded_width",
@@ -30055,13 +29945,10 @@ public class Page extends APINode {
       "is_popular",
       "is_published",
       "is_spherical",
-      "link",
       "message",
       "message_tags",
       "multi_share_end_card",
       "multi_share_optimized",
-      "name",
-      "object_id",
       "parent_id",
       "permalink_url",
       "picture",
@@ -30072,7 +29959,6 @@ public class Page extends APINode {
       "properties",
       "scheduled_publish_time",
       "shares",
-      "source",
       "status_type",
       "story",
       "story_tags",
@@ -30080,7 +29966,6 @@ public class Page extends APINode {
       "target",
       "targeting",
       "timeline_visibility",
-      "type",
       "updated_time",
       "via",
       "video_buying_eligibility",
@@ -30257,13 +30142,6 @@ public class Page extends APINode {
       this.requestField("can_reply_privately", value);
       return this;
     }
-    public APIRequestGetPosts requestCaptionField () {
-      return this.requestCaptionField(true);
-    }
-    public APIRequestGetPosts requestCaptionField (boolean value) {
-      this.requestField("caption", value);
-      return this;
-    }
     public APIRequestGetPosts requestChildAttachmentsField () {
       return this.requestChildAttachmentsField(true);
     }
@@ -30290,13 +30168,6 @@ public class Page extends APINode {
     }
     public APIRequestGetPosts requestCreatedTimeField (boolean value) {
       this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGetPosts requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGetPosts requestDescriptionField (boolean value) {
-      this.requestField("description", value);
       return this;
     }
     public APIRequestGetPosts requestEventField () {
@@ -30425,13 +30296,6 @@ public class Page extends APINode {
       this.requestField("is_spherical", value);
       return this;
     }
-    public APIRequestGetPosts requestLinkField () {
-      return this.requestLinkField(true);
-    }
-    public APIRequestGetPosts requestLinkField (boolean value) {
-      this.requestField("link", value);
-      return this;
-    }
     public APIRequestGetPosts requestMessageField () {
       return this.requestMessageField(true);
     }
@@ -30458,20 +30322,6 @@ public class Page extends APINode {
     }
     public APIRequestGetPosts requestMultiShareOptimizedField (boolean value) {
       this.requestField("multi_share_optimized", value);
-      return this;
-    }
-    public APIRequestGetPosts requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetPosts requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetPosts requestObjectIdField () {
-      return this.requestObjectIdField(true);
-    }
-    public APIRequestGetPosts requestObjectIdField (boolean value) {
-      this.requestField("object_id", value);
       return this;
     }
     public APIRequestGetPosts requestParentIdField () {
@@ -30544,13 +30394,6 @@ public class Page extends APINode {
       this.requestField("shares", value);
       return this;
     }
-    public APIRequestGetPosts requestSourceField () {
-      return this.requestSourceField(true);
-    }
-    public APIRequestGetPosts requestSourceField (boolean value) {
-      this.requestField("source", value);
-      return this;
-    }
     public APIRequestGetPosts requestStatusTypeField () {
       return this.requestStatusTypeField(true);
     }
@@ -30598,13 +30441,6 @@ public class Page extends APINode {
     }
     public APIRequestGetPosts requestTimelineVisibilityField (boolean value) {
       this.requestField("timeline_visibility", value);
-      return this;
-    }
-    public APIRequestGetPosts requestTypeField () {
-      return this.requestTypeField(true);
-    }
-    public APIRequestGetPosts requestTypeField (boolean value) {
-      this.requestField("type", value);
       return this;
     }
     public APIRequestGetPosts requestUpdatedTimeField () {
@@ -30837,654 +30673,6 @@ public class Page extends APINode {
     }
   }
 
-  public static class APIRequestGetPromotablePosts extends APIRequest<PagePost> {
-
-    APINodeList<PagePost> lastResponse = null;
-    @Override
-    public APINodeList<PagePost> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "include_hidden",
-      "include_inline",
-      "is_published",
-      "q",
-      "show_expired",
-      "with",
-    };
-
-    public static final String[] FIELDS = {
-      "actions",
-      "admin_creator",
-      "allowed_advertising_objectives",
-      "application",
-      "backdated_time",
-      "call_to_action",
-      "can_reply_privately",
-      "caption",
-      "child_attachments",
-      "comments_mirroring_domain",
-      "coordinates",
-      "created_time",
-      "description",
-      "event",
-      "expanded_height",
-      "expanded_width",
-      "feed_targeting",
-      "from",
-      "full_picture",
-      "height",
-      "icon",
-      "id",
-      "instagram_eligibility",
-      "is_app_share",
-      "is_eligible_for_promotion",
-      "is_expired",
-      "is_hidden",
-      "is_instagram_eligible",
-      "is_popular",
-      "is_published",
-      "is_spherical",
-      "link",
-      "message",
-      "message_tags",
-      "multi_share_end_card",
-      "multi_share_optimized",
-      "name",
-      "object_id",
-      "parent_id",
-      "permalink_url",
-      "picture",
-      "place",
-      "privacy",
-      "promotable_id",
-      "promotion_status",
-      "properties",
-      "scheduled_publish_time",
-      "shares",
-      "source",
-      "status_type",
-      "story",
-      "story_tags",
-      "subscribed",
-      "target",
-      "targeting",
-      "timeline_visibility",
-      "type",
-      "updated_time",
-      "via",
-      "video_buying_eligibility",
-      "width",
-    };
-
-    @Override
-    public APINodeList<PagePost> parseResponse(String response, String header) throws APIException {
-      return PagePost.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<PagePost> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<PagePost> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<PagePost>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<PagePost>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<PagePost>>() {
-           public APINodeList<PagePost> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetPromotablePosts.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetPromotablePosts(String nodeId, APIContext context) {
-      super(context, nodeId, "/promotable_posts", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetPromotablePosts setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPromotablePosts setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetPromotablePosts setIncludeHidden (Boolean includeHidden) {
-      this.setParam("include_hidden", includeHidden);
-      return this;
-    }
-    public APIRequestGetPromotablePosts setIncludeHidden (String includeHidden) {
-      this.setParam("include_hidden", includeHidden);
-      return this;
-    }
-
-    public APIRequestGetPromotablePosts setIncludeInline (Boolean includeInline) {
-      this.setParam("include_inline", includeInline);
-      return this;
-    }
-    public APIRequestGetPromotablePosts setIncludeInline (String includeInline) {
-      this.setParam("include_inline", includeInline);
-      return this;
-    }
-
-    public APIRequestGetPromotablePosts setIsPublished (Boolean isPublished) {
-      this.setParam("is_published", isPublished);
-      return this;
-    }
-    public APIRequestGetPromotablePosts setIsPublished (String isPublished) {
-      this.setParam("is_published", isPublished);
-      return this;
-    }
-
-    public APIRequestGetPromotablePosts setQ (String q) {
-      this.setParam("q", q);
-      return this;
-    }
-
-    public APIRequestGetPromotablePosts setShowExpired (Boolean showExpired) {
-      this.setParam("show_expired", showExpired);
-      return this;
-    }
-    public APIRequestGetPromotablePosts setShowExpired (String showExpired) {
-      this.setParam("show_expired", showExpired);
-      return this;
-    }
-
-    public APIRequestGetPromotablePosts setWith (PagePost.EnumWith with) {
-      this.setParam("with", with);
-      return this;
-    }
-    public APIRequestGetPromotablePosts setWith (String with) {
-      this.setParam("with", with);
-      return this;
-    }
-
-    public APIRequestGetPromotablePosts requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetPromotablePosts requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPromotablePosts requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetPromotablePosts requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPromotablePosts requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPromotablePosts requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetPromotablePosts requestActionsField () {
-      return this.requestActionsField(true);
-    }
-    public APIRequestGetPromotablePosts requestActionsField (boolean value) {
-      this.requestField("actions", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestAdminCreatorField () {
-      return this.requestAdminCreatorField(true);
-    }
-    public APIRequestGetPromotablePosts requestAdminCreatorField (boolean value) {
-      this.requestField("admin_creator", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestAllowedAdvertisingObjectivesField () {
-      return this.requestAllowedAdvertisingObjectivesField(true);
-    }
-    public APIRequestGetPromotablePosts requestAllowedAdvertisingObjectivesField (boolean value) {
-      this.requestField("allowed_advertising_objectives", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestApplicationField () {
-      return this.requestApplicationField(true);
-    }
-    public APIRequestGetPromotablePosts requestApplicationField (boolean value) {
-      this.requestField("application", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestBackdatedTimeField () {
-      return this.requestBackdatedTimeField(true);
-    }
-    public APIRequestGetPromotablePosts requestBackdatedTimeField (boolean value) {
-      this.requestField("backdated_time", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestCallToActionField () {
-      return this.requestCallToActionField(true);
-    }
-    public APIRequestGetPromotablePosts requestCallToActionField (boolean value) {
-      this.requestField("call_to_action", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestCanReplyPrivatelyField () {
-      return this.requestCanReplyPrivatelyField(true);
-    }
-    public APIRequestGetPromotablePosts requestCanReplyPrivatelyField (boolean value) {
-      this.requestField("can_reply_privately", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestCaptionField () {
-      return this.requestCaptionField(true);
-    }
-    public APIRequestGetPromotablePosts requestCaptionField (boolean value) {
-      this.requestField("caption", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestChildAttachmentsField () {
-      return this.requestChildAttachmentsField(true);
-    }
-    public APIRequestGetPromotablePosts requestChildAttachmentsField (boolean value) {
-      this.requestField("child_attachments", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestCommentsMirroringDomainField () {
-      return this.requestCommentsMirroringDomainField(true);
-    }
-    public APIRequestGetPromotablePosts requestCommentsMirroringDomainField (boolean value) {
-      this.requestField("comments_mirroring_domain", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestCoordinatesField () {
-      return this.requestCoordinatesField(true);
-    }
-    public APIRequestGetPromotablePosts requestCoordinatesField (boolean value) {
-      this.requestField("coordinates", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestCreatedTimeField () {
-      return this.requestCreatedTimeField(true);
-    }
-    public APIRequestGetPromotablePosts requestCreatedTimeField (boolean value) {
-      this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGetPromotablePosts requestDescriptionField (boolean value) {
-      this.requestField("description", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestEventField () {
-      return this.requestEventField(true);
-    }
-    public APIRequestGetPromotablePosts requestEventField (boolean value) {
-      this.requestField("event", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestExpandedHeightField () {
-      return this.requestExpandedHeightField(true);
-    }
-    public APIRequestGetPromotablePosts requestExpandedHeightField (boolean value) {
-      this.requestField("expanded_height", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestExpandedWidthField () {
-      return this.requestExpandedWidthField(true);
-    }
-    public APIRequestGetPromotablePosts requestExpandedWidthField (boolean value) {
-      this.requestField("expanded_width", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestFeedTargetingField () {
-      return this.requestFeedTargetingField(true);
-    }
-    public APIRequestGetPromotablePosts requestFeedTargetingField (boolean value) {
-      this.requestField("feed_targeting", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestFromField () {
-      return this.requestFromField(true);
-    }
-    public APIRequestGetPromotablePosts requestFromField (boolean value) {
-      this.requestField("from", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestFullPictureField () {
-      return this.requestFullPictureField(true);
-    }
-    public APIRequestGetPromotablePosts requestFullPictureField (boolean value) {
-      this.requestField("full_picture", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestHeightField () {
-      return this.requestHeightField(true);
-    }
-    public APIRequestGetPromotablePosts requestHeightField (boolean value) {
-      this.requestField("height", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestIconField () {
-      return this.requestIconField(true);
-    }
-    public APIRequestGetPromotablePosts requestIconField (boolean value) {
-      this.requestField("icon", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetPromotablePosts requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestInstagramEligibilityField () {
-      return this.requestInstagramEligibilityField(true);
-    }
-    public APIRequestGetPromotablePosts requestInstagramEligibilityField (boolean value) {
-      this.requestField("instagram_eligibility", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestIsAppShareField () {
-      return this.requestIsAppShareField(true);
-    }
-    public APIRequestGetPromotablePosts requestIsAppShareField (boolean value) {
-      this.requestField("is_app_share", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestIsEligibleForPromotionField () {
-      return this.requestIsEligibleForPromotionField(true);
-    }
-    public APIRequestGetPromotablePosts requestIsEligibleForPromotionField (boolean value) {
-      this.requestField("is_eligible_for_promotion", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestIsExpiredField () {
-      return this.requestIsExpiredField(true);
-    }
-    public APIRequestGetPromotablePosts requestIsExpiredField (boolean value) {
-      this.requestField("is_expired", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestIsHiddenField () {
-      return this.requestIsHiddenField(true);
-    }
-    public APIRequestGetPromotablePosts requestIsHiddenField (boolean value) {
-      this.requestField("is_hidden", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestIsInstagramEligibleField () {
-      return this.requestIsInstagramEligibleField(true);
-    }
-    public APIRequestGetPromotablePosts requestIsInstagramEligibleField (boolean value) {
-      this.requestField("is_instagram_eligible", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestIsPopularField () {
-      return this.requestIsPopularField(true);
-    }
-    public APIRequestGetPromotablePosts requestIsPopularField (boolean value) {
-      this.requestField("is_popular", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestIsPublishedField () {
-      return this.requestIsPublishedField(true);
-    }
-    public APIRequestGetPromotablePosts requestIsPublishedField (boolean value) {
-      this.requestField("is_published", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestIsSphericalField () {
-      return this.requestIsSphericalField(true);
-    }
-    public APIRequestGetPromotablePosts requestIsSphericalField (boolean value) {
-      this.requestField("is_spherical", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestLinkField () {
-      return this.requestLinkField(true);
-    }
-    public APIRequestGetPromotablePosts requestLinkField (boolean value) {
-      this.requestField("link", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestMessageField () {
-      return this.requestMessageField(true);
-    }
-    public APIRequestGetPromotablePosts requestMessageField (boolean value) {
-      this.requestField("message", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestMessageTagsField () {
-      return this.requestMessageTagsField(true);
-    }
-    public APIRequestGetPromotablePosts requestMessageTagsField (boolean value) {
-      this.requestField("message_tags", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestMultiShareEndCardField () {
-      return this.requestMultiShareEndCardField(true);
-    }
-    public APIRequestGetPromotablePosts requestMultiShareEndCardField (boolean value) {
-      this.requestField("multi_share_end_card", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestMultiShareOptimizedField () {
-      return this.requestMultiShareOptimizedField(true);
-    }
-    public APIRequestGetPromotablePosts requestMultiShareOptimizedField (boolean value) {
-      this.requestField("multi_share_optimized", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetPromotablePosts requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestObjectIdField () {
-      return this.requestObjectIdField(true);
-    }
-    public APIRequestGetPromotablePosts requestObjectIdField (boolean value) {
-      this.requestField("object_id", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestParentIdField () {
-      return this.requestParentIdField(true);
-    }
-    public APIRequestGetPromotablePosts requestParentIdField (boolean value) {
-      this.requestField("parent_id", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestPermalinkUrlField () {
-      return this.requestPermalinkUrlField(true);
-    }
-    public APIRequestGetPromotablePosts requestPermalinkUrlField (boolean value) {
-      this.requestField("permalink_url", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestPictureField () {
-      return this.requestPictureField(true);
-    }
-    public APIRequestGetPromotablePosts requestPictureField (boolean value) {
-      this.requestField("picture", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestPlaceField () {
-      return this.requestPlaceField(true);
-    }
-    public APIRequestGetPromotablePosts requestPlaceField (boolean value) {
-      this.requestField("place", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestPrivacyField () {
-      return this.requestPrivacyField(true);
-    }
-    public APIRequestGetPromotablePosts requestPrivacyField (boolean value) {
-      this.requestField("privacy", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestPromotableIdField () {
-      return this.requestPromotableIdField(true);
-    }
-    public APIRequestGetPromotablePosts requestPromotableIdField (boolean value) {
-      this.requestField("promotable_id", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestPromotionStatusField () {
-      return this.requestPromotionStatusField(true);
-    }
-    public APIRequestGetPromotablePosts requestPromotionStatusField (boolean value) {
-      this.requestField("promotion_status", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestPropertiesField () {
-      return this.requestPropertiesField(true);
-    }
-    public APIRequestGetPromotablePosts requestPropertiesField (boolean value) {
-      this.requestField("properties", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestScheduledPublishTimeField () {
-      return this.requestScheduledPublishTimeField(true);
-    }
-    public APIRequestGetPromotablePosts requestScheduledPublishTimeField (boolean value) {
-      this.requestField("scheduled_publish_time", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestSharesField () {
-      return this.requestSharesField(true);
-    }
-    public APIRequestGetPromotablePosts requestSharesField (boolean value) {
-      this.requestField("shares", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestSourceField () {
-      return this.requestSourceField(true);
-    }
-    public APIRequestGetPromotablePosts requestSourceField (boolean value) {
-      this.requestField("source", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestStatusTypeField () {
-      return this.requestStatusTypeField(true);
-    }
-    public APIRequestGetPromotablePosts requestStatusTypeField (boolean value) {
-      this.requestField("status_type", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestStoryField () {
-      return this.requestStoryField(true);
-    }
-    public APIRequestGetPromotablePosts requestStoryField (boolean value) {
-      this.requestField("story", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestStoryTagsField () {
-      return this.requestStoryTagsField(true);
-    }
-    public APIRequestGetPromotablePosts requestStoryTagsField (boolean value) {
-      this.requestField("story_tags", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestSubscribedField () {
-      return this.requestSubscribedField(true);
-    }
-    public APIRequestGetPromotablePosts requestSubscribedField (boolean value) {
-      this.requestField("subscribed", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestTargetField () {
-      return this.requestTargetField(true);
-    }
-    public APIRequestGetPromotablePosts requestTargetField (boolean value) {
-      this.requestField("target", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestTargetingField () {
-      return this.requestTargetingField(true);
-    }
-    public APIRequestGetPromotablePosts requestTargetingField (boolean value) {
-      this.requestField("targeting", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestTimelineVisibilityField () {
-      return this.requestTimelineVisibilityField(true);
-    }
-    public APIRequestGetPromotablePosts requestTimelineVisibilityField (boolean value) {
-      this.requestField("timeline_visibility", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestTypeField () {
-      return this.requestTypeField(true);
-    }
-    public APIRequestGetPromotablePosts requestTypeField (boolean value) {
-      this.requestField("type", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestUpdatedTimeField () {
-      return this.requestUpdatedTimeField(true);
-    }
-    public APIRequestGetPromotablePosts requestUpdatedTimeField (boolean value) {
-      this.requestField("updated_time", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestViaField () {
-      return this.requestViaField(true);
-    }
-    public APIRequestGetPromotablePosts requestViaField (boolean value) {
-      this.requestField("via", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestVideoBuyingEligibilityField () {
-      return this.requestVideoBuyingEligibilityField(true);
-    }
-    public APIRequestGetPromotablePosts requestVideoBuyingEligibilityField (boolean value) {
-      this.requestField("video_buying_eligibility", value);
-      return this;
-    }
-    public APIRequestGetPromotablePosts requestWidthField () {
-      return this.requestWidthField(true);
-    }
-    public APIRequestGetPromotablePosts requestWidthField (boolean value) {
-      this.requestField("width", value);
-      return this;
-    }
-  }
-
   public static class APIRequestCreatePromotion extends APIRequest<APINode> {
 
     APINode lastResponse = null;
@@ -31667,12 +30855,10 @@ public class Page extends APINode {
       "backdated_time",
       "call_to_action",
       "can_reply_privately",
-      "caption",
       "child_attachments",
       "comments_mirroring_domain",
       "coordinates",
       "created_time",
-      "description",
       "event",
       "expanded_height",
       "expanded_width",
@@ -31691,13 +30877,10 @@ public class Page extends APINode {
       "is_popular",
       "is_published",
       "is_spherical",
-      "link",
       "message",
       "message_tags",
       "multi_share_end_card",
       "multi_share_optimized",
-      "name",
-      "object_id",
       "parent_id",
       "permalink_url",
       "picture",
@@ -31708,7 +30891,6 @@ public class Page extends APINode {
       "properties",
       "scheduled_publish_time",
       "shares",
-      "source",
       "status_type",
       "story",
       "story_tags",
@@ -31716,7 +30898,6 @@ public class Page extends APINode {
       "target",
       "targeting",
       "timeline_visibility",
-      "type",
       "updated_time",
       "via",
       "video_buying_eligibility",
@@ -31871,13 +31052,6 @@ public class Page extends APINode {
       this.requestField("can_reply_privately", value);
       return this;
     }
-    public APIRequestGetPublishedPosts requestCaptionField () {
-      return this.requestCaptionField(true);
-    }
-    public APIRequestGetPublishedPosts requestCaptionField (boolean value) {
-      this.requestField("caption", value);
-      return this;
-    }
     public APIRequestGetPublishedPosts requestChildAttachmentsField () {
       return this.requestChildAttachmentsField(true);
     }
@@ -31904,13 +31078,6 @@ public class Page extends APINode {
     }
     public APIRequestGetPublishedPosts requestCreatedTimeField (boolean value) {
       this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGetPublishedPosts requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGetPublishedPosts requestDescriptionField (boolean value) {
-      this.requestField("description", value);
       return this;
     }
     public APIRequestGetPublishedPosts requestEventField () {
@@ -32039,13 +31206,6 @@ public class Page extends APINode {
       this.requestField("is_spherical", value);
       return this;
     }
-    public APIRequestGetPublishedPosts requestLinkField () {
-      return this.requestLinkField(true);
-    }
-    public APIRequestGetPublishedPosts requestLinkField (boolean value) {
-      this.requestField("link", value);
-      return this;
-    }
     public APIRequestGetPublishedPosts requestMessageField () {
       return this.requestMessageField(true);
     }
@@ -32072,20 +31232,6 @@ public class Page extends APINode {
     }
     public APIRequestGetPublishedPosts requestMultiShareOptimizedField (boolean value) {
       this.requestField("multi_share_optimized", value);
-      return this;
-    }
-    public APIRequestGetPublishedPosts requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetPublishedPosts requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetPublishedPosts requestObjectIdField () {
-      return this.requestObjectIdField(true);
-    }
-    public APIRequestGetPublishedPosts requestObjectIdField (boolean value) {
-      this.requestField("object_id", value);
       return this;
     }
     public APIRequestGetPublishedPosts requestParentIdField () {
@@ -32158,13 +31304,6 @@ public class Page extends APINode {
       this.requestField("shares", value);
       return this;
     }
-    public APIRequestGetPublishedPosts requestSourceField () {
-      return this.requestSourceField(true);
-    }
-    public APIRequestGetPublishedPosts requestSourceField (boolean value) {
-      this.requestField("source", value);
-      return this;
-    }
     public APIRequestGetPublishedPosts requestStatusTypeField () {
       return this.requestStatusTypeField(true);
     }
@@ -32212,13 +31351,6 @@ public class Page extends APINode {
     }
     public APIRequestGetPublishedPosts requestTimelineVisibilityField (boolean value) {
       this.requestField("timeline_visibility", value);
-      return this;
-    }
-    public APIRequestGetPublishedPosts requestTypeField () {
-      return this.requestTypeField(true);
-    }
-    public APIRequestGetPublishedPosts requestTypeField (boolean value) {
-      this.requestField("type", value);
       return this;
     }
     public APIRequestGetPublishedPosts requestUpdatedTimeField () {
@@ -34123,12 +33255,10 @@ public class Page extends APINode {
       "backdated_time",
       "call_to_action",
       "can_reply_privately",
-      "caption",
       "child_attachments",
       "comments_mirroring_domain",
       "coordinates",
       "created_time",
-      "description",
       "event",
       "expanded_height",
       "expanded_width",
@@ -34147,13 +33277,10 @@ public class Page extends APINode {
       "is_popular",
       "is_published",
       "is_spherical",
-      "link",
       "message",
       "message_tags",
       "multi_share_end_card",
       "multi_share_optimized",
-      "name",
-      "object_id",
       "parent_id",
       "permalink_url",
       "picture",
@@ -34164,7 +33291,6 @@ public class Page extends APINode {
       "properties",
       "scheduled_publish_time",
       "shares",
-      "source",
       "status_type",
       "story",
       "story_tags",
@@ -34172,7 +33298,6 @@ public class Page extends APINode {
       "target",
       "targeting",
       "timeline_visibility",
-      "type",
       "updated_time",
       "via",
       "video_buying_eligibility",
@@ -34317,13 +33442,6 @@ public class Page extends APINode {
       this.requestField("can_reply_privately", value);
       return this;
     }
-    public APIRequestGetScheduledPosts requestCaptionField () {
-      return this.requestCaptionField(true);
-    }
-    public APIRequestGetScheduledPosts requestCaptionField (boolean value) {
-      this.requestField("caption", value);
-      return this;
-    }
     public APIRequestGetScheduledPosts requestChildAttachmentsField () {
       return this.requestChildAttachmentsField(true);
     }
@@ -34350,13 +33468,6 @@ public class Page extends APINode {
     }
     public APIRequestGetScheduledPosts requestCreatedTimeField (boolean value) {
       this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGetScheduledPosts requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGetScheduledPosts requestDescriptionField (boolean value) {
-      this.requestField("description", value);
       return this;
     }
     public APIRequestGetScheduledPosts requestEventField () {
@@ -34485,13 +33596,6 @@ public class Page extends APINode {
       this.requestField("is_spherical", value);
       return this;
     }
-    public APIRequestGetScheduledPosts requestLinkField () {
-      return this.requestLinkField(true);
-    }
-    public APIRequestGetScheduledPosts requestLinkField (boolean value) {
-      this.requestField("link", value);
-      return this;
-    }
     public APIRequestGetScheduledPosts requestMessageField () {
       return this.requestMessageField(true);
     }
@@ -34518,20 +33622,6 @@ public class Page extends APINode {
     }
     public APIRequestGetScheduledPosts requestMultiShareOptimizedField (boolean value) {
       this.requestField("multi_share_optimized", value);
-      return this;
-    }
-    public APIRequestGetScheduledPosts requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetScheduledPosts requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetScheduledPosts requestObjectIdField () {
-      return this.requestObjectIdField(true);
-    }
-    public APIRequestGetScheduledPosts requestObjectIdField (boolean value) {
-      this.requestField("object_id", value);
       return this;
     }
     public APIRequestGetScheduledPosts requestParentIdField () {
@@ -34604,13 +33694,6 @@ public class Page extends APINode {
       this.requestField("shares", value);
       return this;
     }
-    public APIRequestGetScheduledPosts requestSourceField () {
-      return this.requestSourceField(true);
-    }
-    public APIRequestGetScheduledPosts requestSourceField (boolean value) {
-      this.requestField("source", value);
-      return this;
-    }
     public APIRequestGetScheduledPosts requestStatusTypeField () {
       return this.requestStatusTypeField(true);
     }
@@ -34658,13 +33741,6 @@ public class Page extends APINode {
     }
     public APIRequestGetScheduledPosts requestTimelineVisibilityField (boolean value) {
       this.requestField("timeline_visibility", value);
-      return this;
-    }
-    public APIRequestGetScheduledPosts requestTypeField () {
-      return this.requestTypeField(true);
-    }
-    public APIRequestGetScheduledPosts requestTypeField (boolean value) {
-      this.requestField("type", value);
       return this;
     }
     public APIRequestGetScheduledPosts requestUpdatedTimeField () {
@@ -38021,12 +37097,10 @@ public class Page extends APINode {
       "backdated_time",
       "call_to_action",
       "can_reply_privately",
-      "caption",
       "child_attachments",
       "comments_mirroring_domain",
       "coordinates",
       "created_time",
-      "description",
       "event",
       "expanded_height",
       "expanded_width",
@@ -38045,13 +37119,10 @@ public class Page extends APINode {
       "is_popular",
       "is_published",
       "is_spherical",
-      "link",
       "message",
       "message_tags",
       "multi_share_end_card",
       "multi_share_optimized",
-      "name",
-      "object_id",
       "parent_id",
       "permalink_url",
       "picture",
@@ -38062,7 +37133,6 @@ public class Page extends APINode {
       "properties",
       "scheduled_publish_time",
       "shares",
-      "source",
       "status_type",
       "story",
       "story_tags",
@@ -38070,7 +37140,6 @@ public class Page extends APINode {
       "target",
       "targeting",
       "timeline_visibility",
-      "type",
       "updated_time",
       "via",
       "video_buying_eligibility",
@@ -38215,13 +37284,6 @@ public class Page extends APINode {
       this.requestField("can_reply_privately", value);
       return this;
     }
-    public APIRequestGetTagged requestCaptionField () {
-      return this.requestCaptionField(true);
-    }
-    public APIRequestGetTagged requestCaptionField (boolean value) {
-      this.requestField("caption", value);
-      return this;
-    }
     public APIRequestGetTagged requestChildAttachmentsField () {
       return this.requestChildAttachmentsField(true);
     }
@@ -38248,13 +37310,6 @@ public class Page extends APINode {
     }
     public APIRequestGetTagged requestCreatedTimeField (boolean value) {
       this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGetTagged requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGetTagged requestDescriptionField (boolean value) {
-      this.requestField("description", value);
       return this;
     }
     public APIRequestGetTagged requestEventField () {
@@ -38383,13 +37438,6 @@ public class Page extends APINode {
       this.requestField("is_spherical", value);
       return this;
     }
-    public APIRequestGetTagged requestLinkField () {
-      return this.requestLinkField(true);
-    }
-    public APIRequestGetTagged requestLinkField (boolean value) {
-      this.requestField("link", value);
-      return this;
-    }
     public APIRequestGetTagged requestMessageField () {
       return this.requestMessageField(true);
     }
@@ -38416,20 +37464,6 @@ public class Page extends APINode {
     }
     public APIRequestGetTagged requestMultiShareOptimizedField (boolean value) {
       this.requestField("multi_share_optimized", value);
-      return this;
-    }
-    public APIRequestGetTagged requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetTagged requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetTagged requestObjectIdField () {
-      return this.requestObjectIdField(true);
-    }
-    public APIRequestGetTagged requestObjectIdField (boolean value) {
-      this.requestField("object_id", value);
       return this;
     }
     public APIRequestGetTagged requestParentIdField () {
@@ -38502,13 +37536,6 @@ public class Page extends APINode {
       this.requestField("shares", value);
       return this;
     }
-    public APIRequestGetTagged requestSourceField () {
-      return this.requestSourceField(true);
-    }
-    public APIRequestGetTagged requestSourceField (boolean value) {
-      this.requestField("source", value);
-      return this;
-    }
     public APIRequestGetTagged requestStatusTypeField () {
       return this.requestStatusTypeField(true);
     }
@@ -38556,13 +37583,6 @@ public class Page extends APINode {
     }
     public APIRequestGetTagged requestTimelineVisibilityField (boolean value) {
       this.requestField("timeline_visibility", value);
-      return this;
-    }
-    public APIRequestGetTagged requestTypeField () {
-      return this.requestTypeField(true);
-    }
-    public APIRequestGetTagged requestTypeField (boolean value) {
-      this.requestField("type", value);
       return this;
     }
     public APIRequestGetTagged requestUpdatedTimeField () {
@@ -40481,6 +39501,7 @@ public class Page extends APINode {
       "content_category",
       "copyright_content_id",
       "creator",
+      "excluded_ownership_segments",
       "id",
       "in_conflict",
       "monitoring_status",
@@ -40603,6 +39624,13 @@ public class Page extends APINode {
     }
     public APIRequestGetVideoCopyrights requestCreatorField (boolean value) {
       this.requestField("creator", value);
+      return this;
+    }
+    public APIRequestGetVideoCopyrights requestExcludedOwnershipSegmentsField () {
+      return this.requestExcludedOwnershipSegmentsField(true);
+    }
+    public APIRequestGetVideoCopyrights requestExcludedOwnershipSegmentsField (boolean value) {
+      this.requestField("excluded_ownership_segments", value);
       return this;
     }
     public APIRequestGetVideoCopyrights requestIdField () {
@@ -41325,6 +40353,7 @@ public class Page extends APINode {
       "content_category",
       "copyright_content_id",
       "creator",
+      "excluded_ownership_segments",
       "id",
       "in_conflict",
       "monitoring_status",
@@ -41447,6 +40476,13 @@ public class Page extends APINode {
     }
     public APIRequestGetVideoMediaCopyrights requestCreatorField (boolean value) {
       this.requestField("creator", value);
+      return this;
+    }
+    public APIRequestGetVideoMediaCopyrights requestExcludedOwnershipSegmentsField () {
+      return this.requestExcludedOwnershipSegmentsField(true);
+    }
+    public APIRequestGetVideoMediaCopyrights requestExcludedOwnershipSegmentsField (boolean value) {
+      this.requestField("excluded_ownership_segments", value);
       return this;
     }
     public APIRequestGetVideoMediaCopyrights requestIdField () {
@@ -42974,12 +42010,10 @@ public class Page extends APINode {
       "backdated_time",
       "call_to_action",
       "can_reply_privately",
-      "caption",
       "child_attachments",
       "comments_mirroring_domain",
       "coordinates",
       "created_time",
-      "description",
       "event",
       "expanded_height",
       "expanded_width",
@@ -42998,13 +42032,10 @@ public class Page extends APINode {
       "is_popular",
       "is_published",
       "is_spherical",
-      "link",
       "message",
       "message_tags",
       "multi_share_end_card",
       "multi_share_optimized",
-      "name",
-      "object_id",
       "parent_id",
       "permalink_url",
       "picture",
@@ -43015,7 +42046,6 @@ public class Page extends APINode {
       "properties",
       "scheduled_publish_time",
       "shares",
-      "source",
       "status_type",
       "story",
       "story_tags",
@@ -43023,7 +42053,6 @@ public class Page extends APINode {
       "target",
       "targeting",
       "timeline_visibility",
-      "type",
       "updated_time",
       "via",
       "video_buying_eligibility",
@@ -43177,13 +42206,6 @@ public class Page extends APINode {
       this.requestField("can_reply_privately", value);
       return this;
     }
-    public APIRequestGetVisitorPosts requestCaptionField () {
-      return this.requestCaptionField(true);
-    }
-    public APIRequestGetVisitorPosts requestCaptionField (boolean value) {
-      this.requestField("caption", value);
-      return this;
-    }
     public APIRequestGetVisitorPosts requestChildAttachmentsField () {
       return this.requestChildAttachmentsField(true);
     }
@@ -43210,13 +42232,6 @@ public class Page extends APINode {
     }
     public APIRequestGetVisitorPosts requestCreatedTimeField (boolean value) {
       this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGetVisitorPosts requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGetVisitorPosts requestDescriptionField (boolean value) {
-      this.requestField("description", value);
       return this;
     }
     public APIRequestGetVisitorPosts requestEventField () {
@@ -43345,13 +42360,6 @@ public class Page extends APINode {
       this.requestField("is_spherical", value);
       return this;
     }
-    public APIRequestGetVisitorPosts requestLinkField () {
-      return this.requestLinkField(true);
-    }
-    public APIRequestGetVisitorPosts requestLinkField (boolean value) {
-      this.requestField("link", value);
-      return this;
-    }
     public APIRequestGetVisitorPosts requestMessageField () {
       return this.requestMessageField(true);
     }
@@ -43378,20 +42386,6 @@ public class Page extends APINode {
     }
     public APIRequestGetVisitorPosts requestMultiShareOptimizedField (boolean value) {
       this.requestField("multi_share_optimized", value);
-      return this;
-    }
-    public APIRequestGetVisitorPosts requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetVisitorPosts requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetVisitorPosts requestObjectIdField () {
-      return this.requestObjectIdField(true);
-    }
-    public APIRequestGetVisitorPosts requestObjectIdField (boolean value) {
-      this.requestField("object_id", value);
       return this;
     }
     public APIRequestGetVisitorPosts requestParentIdField () {
@@ -43464,13 +42458,6 @@ public class Page extends APINode {
       this.requestField("shares", value);
       return this;
     }
-    public APIRequestGetVisitorPosts requestSourceField () {
-      return this.requestSourceField(true);
-    }
-    public APIRequestGetVisitorPosts requestSourceField (boolean value) {
-      this.requestField("source", value);
-      return this;
-    }
     public APIRequestGetVisitorPosts requestStatusTypeField () {
       return this.requestStatusTypeField(true);
     }
@@ -43518,13 +42505,6 @@ public class Page extends APINode {
     }
     public APIRequestGetVisitorPosts requestTimelineVisibilityField (boolean value) {
       this.requestField("timeline_visibility", value);
-      return this;
-    }
-    public APIRequestGetVisitorPosts requestTypeField () {
-      return this.requestTypeField(true);
-    }
-    public APIRequestGetVisitorPosts requestTypeField (boolean value) {
-      this.requestField("type", value);
       return this;
     }
     public APIRequestGetVisitorPosts requestUpdatedTimeField () {

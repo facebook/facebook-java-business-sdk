@@ -509,7 +509,6 @@ public class BusinessProject extends APINode {
       "capabilities",
       "created_time",
       "currency",
-      "direct_deals_tos_accepted",
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
@@ -778,13 +777,6 @@ public class BusinessProject extends APINode {
     }
     public APIRequestGetAdAccounts requestCurrencyField (boolean value) {
       this.requestField("currency", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestDirectDealsTosAcceptedField () {
-      return this.requestDirectDealsTosAcceptedField(true);
-    }
-    public APIRequestGetAdAccounts requestDirectDealsTosAcceptedField (boolean value) {
-      this.requestField("direct_deals_tos_accepted", value);
       return this;
     }
     public APIRequestGetAdAccounts requestDisableReasonField () {

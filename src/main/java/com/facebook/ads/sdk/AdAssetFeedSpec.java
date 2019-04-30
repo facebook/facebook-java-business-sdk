@@ -433,6 +433,8 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_EVENT_RSVP("EVENT_RSVP"),
       @SerializedName("FIND_A_GROUP")
       VALUE_FIND_A_GROUP("FIND_A_GROUP"),
+      @SerializedName("FIND_YOUR_GROUPS")
+      VALUE_FIND_YOUR_GROUPS("FIND_YOUR_GROUPS"),
       @SerializedName("FOLLOW_NEWS_STORYLINE")
       VALUE_FOLLOW_NEWS_STORYLINE("FOLLOW_NEWS_STORYLINE"),
       @SerializedName("GET_DIRECTIONS")
@@ -485,6 +487,8 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_SHOP_NOW("SHOP_NOW"),
       @SerializedName("SIGN_UP")
       VALUE_SIGN_UP("SIGN_UP"),
+      @SerializedName("SOTTO_SUBSCRIBE")
+      VALUE_SOTTO_SUBSCRIBE("SOTTO_SUBSCRIBE"),
       @SerializedName("SUBSCRIBE")
       VALUE_SUBSCRIBE("SUBSCRIBE"),
       @SerializedName("UPDATE_APP")

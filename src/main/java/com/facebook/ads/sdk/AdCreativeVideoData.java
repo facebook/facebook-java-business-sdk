@@ -67,8 +67,6 @@ public class AdCreativeVideoData extends APINode {
   private AdCreativeLinkDataCallToAction mCallToAction = null;
   @SerializedName("collection_thumbnails")
   private List<AdCreativeCollectionThumbnailInfo> mCollectionThumbnails = null;
-  @SerializedName("custom_overlay_spec")
-  private List<AdCreativeVideoDataCustomOverlaySpec> mCustomOverlaySpec = null;
   @SerializedName("image_hash")
   private String mImageHash = null;
   @SerializedName("image_url")
@@ -306,20 +304,6 @@ public class AdCreativeVideoData extends APINode {
     this.mCollectionThumbnails = AdCreativeCollectionThumbnailInfo.getGson().fromJson(value, type);
     return this;
   }
-  public List<AdCreativeVideoDataCustomOverlaySpec> getFieldCustomOverlaySpec() {
-    return mCustomOverlaySpec;
-  }
-
-  public AdCreativeVideoData setFieldCustomOverlaySpec(List<AdCreativeVideoDataCustomOverlaySpec> value) {
-    this.mCustomOverlaySpec = value;
-    return this;
-  }
-
-  public AdCreativeVideoData setFieldCustomOverlaySpec(String value) {
-    Type type = new TypeToken<List<AdCreativeVideoDataCustomOverlaySpec>>(){}.getType();
-    this.mCustomOverlaySpec = AdCreativeVideoDataCustomOverlaySpec.getGson().fromJson(value, type);
-    return this;
-  }
   public String getFieldImageHash() {
     return mImageHash;
   }
@@ -452,7 +436,6 @@ public class AdCreativeVideoData extends APINode {
     this.mBrandedContentSponsorRelationship = instance.mBrandedContentSponsorRelationship;
     this.mCallToAction = instance.mCallToAction;
     this.mCollectionThumbnails = instance.mCollectionThumbnails;
-    this.mCustomOverlaySpec = instance.mCustomOverlaySpec;
     this.mImageHash = instance.mImageHash;
     this.mImageUrl = instance.mImageUrl;
     this.mLinkDescription = instance.mLinkDescription;

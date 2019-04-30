@@ -75,8 +75,6 @@ public class AdCreativeLinkData extends APINode {
   private List<AdCreativeLinkDataChildAttachment> mChildAttachments = null;
   @SerializedName("collection_thumbnails")
   private List<AdCreativeCollectionThumbnailInfo> mCollectionThumbnails = null;
-  @SerializedName("custom_overlay_spec")
-  private AdCreativeLinkDataCustomOverlaySpec mCustomOverlaySpec = null;
   @SerializedName("customization_rules_spec")
   private List<AdCustomizationRuleSpec> mCustomizationRulesSpec = null;
   @SerializedName("description")
@@ -119,8 +117,6 @@ public class AdCreativeLinkData extends APINode {
   private List<String> mRetailerItemIds = null;
   @SerializedName("show_multiple_images")
   private Boolean mShowMultipleImages = null;
-  @SerializedName("sponsorship_info")
-  private AdCreativeLinkDataSponsorshipInfoSpec mSponsorshipInfo = null;
   @SerializedName("static_fallback_spec")
   private AdCreativeStaticFallbackSpec mStaticFallbackSpec = null;
   @SerializedName("use_flexible_image_aspect_ratio")
@@ -386,20 +382,6 @@ public class AdCreativeLinkData extends APINode {
     this.mCollectionThumbnails = AdCreativeCollectionThumbnailInfo.getGson().fromJson(value, type);
     return this;
   }
-  public AdCreativeLinkDataCustomOverlaySpec getFieldCustomOverlaySpec() {
-    return mCustomOverlaySpec;
-  }
-
-  public AdCreativeLinkData setFieldCustomOverlaySpec(AdCreativeLinkDataCustomOverlaySpec value) {
-    this.mCustomOverlaySpec = value;
-    return this;
-  }
-
-  public AdCreativeLinkData setFieldCustomOverlaySpec(String value) {
-    Type type = new TypeToken<AdCreativeLinkDataCustomOverlaySpec>(){}.getType();
-    this.mCustomOverlaySpec = AdCreativeLinkDataCustomOverlaySpec.getGson().fromJson(value, type);
-    return this;
-  }
   public List<AdCustomizationRuleSpec> getFieldCustomizationRulesSpec() {
     return mCustomizationRulesSpec;
   }
@@ -614,20 +596,6 @@ public class AdCreativeLinkData extends APINode {
     return this;
   }
 
-  public AdCreativeLinkDataSponsorshipInfoSpec getFieldSponsorshipInfo() {
-    return mSponsorshipInfo;
-  }
-
-  public AdCreativeLinkData setFieldSponsorshipInfo(AdCreativeLinkDataSponsorshipInfoSpec value) {
-    this.mSponsorshipInfo = value;
-    return this;
-  }
-
-  public AdCreativeLinkData setFieldSponsorshipInfo(String value) {
-    Type type = new TypeToken<AdCreativeLinkDataSponsorshipInfoSpec>(){}.getType();
-    this.mSponsorshipInfo = AdCreativeLinkDataSponsorshipInfoSpec.getGson().fromJson(value, type);
-    return this;
-  }
   public AdCreativeStaticFallbackSpec getFieldStaticFallbackSpec() {
     return mStaticFallbackSpec;
   }
@@ -720,7 +688,6 @@ public class AdCreativeLinkData extends APINode {
     this.mCaption = instance.mCaption;
     this.mChildAttachments = instance.mChildAttachments;
     this.mCollectionThumbnails = instance.mCollectionThumbnails;
-    this.mCustomOverlaySpec = instance.mCustomOverlaySpec;
     this.mCustomizationRulesSpec = instance.mCustomizationRulesSpec;
     this.mDescription = instance.mDescription;
     this.mEventId = instance.mEventId;
@@ -742,7 +709,6 @@ public class AdCreativeLinkData extends APINode {
     this.mPreferredImageTags = instance.mPreferredImageTags;
     this.mRetailerItemIds = instance.mRetailerItemIds;
     this.mShowMultipleImages = instance.mShowMultipleImages;
-    this.mSponsorshipInfo = instance.mSponsorshipInfo;
     this.mStaticFallbackSpec = instance.mStaticFallbackSpec;
     this.mUseFlexibleImageAspectRatio = instance.mUseFlexibleImageAspectRatio;
     this.context = instance.context;

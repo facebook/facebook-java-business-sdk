@@ -69,8 +69,6 @@ public class PagePost extends APINode {
   private Object mCallToAction = null;
   @SerializedName("can_reply_privately")
   private Boolean mCanReplyPrivately = null;
-  @SerializedName("caption")
-  private String mCaption = null;
   @SerializedName("child_attachments")
   private JsonArray mChildAttachments = null;
   @SerializedName("comments_mirroring_domain")
@@ -79,8 +77,6 @@ public class PagePost extends APINode {
   private Object mCoordinates = null;
   @SerializedName("created_time")
   private String mCreatedTime = null;
-  @SerializedName("description")
-  private String mDescription = null;
   @SerializedName("event")
   private Event mEvent = null;
   @SerializedName("expanded_height")
@@ -117,8 +113,6 @@ public class PagePost extends APINode {
   private Boolean mIsPublished = null;
   @SerializedName("is_spherical")
   private Boolean mIsSpherical = null;
-  @SerializedName("link")
-  private String mLink = null;
   @SerializedName("message")
   private String mMessage = null;
   @SerializedName("message_tags")
@@ -127,10 +121,6 @@ public class PagePost extends APINode {
   private Boolean mMultiShareEndCard = null;
   @SerializedName("multi_share_optimized")
   private Boolean mMultiShareOptimized = null;
-  @SerializedName("name")
-  private String mName = null;
-  @SerializedName("object_id")
-  private String mObjectId = null;
   @SerializedName("parent_id")
   private String mParentId = null;
   @SerializedName("permalink_url")
@@ -151,8 +141,6 @@ public class PagePost extends APINode {
   private Double mScheduledPublishTime = null;
   @SerializedName("shares")
   private Object mShares = null;
-  @SerializedName("source")
-  private String mSource = null;
   @SerializedName("status_type")
   private String mStatusType = null;
   @SerializedName("story")
@@ -167,8 +155,6 @@ public class PagePost extends APINode {
   private Object mTargeting = null;
   @SerializedName("timeline_visibility")
   private String mTimelineVisibility = null;
-  @SerializedName("type")
-  private String mType = null;
   @SerializedName("updated_time")
   private String mUpdatedTime = null;
   @SerializedName("via")
@@ -494,10 +480,6 @@ public class PagePost extends APINode {
     return mCanReplyPrivately;
   }
 
-  public String getFieldCaption() {
-    return mCaption;
-  }
-
   public JsonArray getFieldChildAttachments() {
     return mChildAttachments;
   }
@@ -512,10 +494,6 @@ public class PagePost extends APINode {
 
   public String getFieldCreatedTime() {
     return mCreatedTime;
-  }
-
-  public String getFieldDescription() {
-    return mDescription;
   }
 
   public Event getFieldEvent() {
@@ -593,10 +571,6 @@ public class PagePost extends APINode {
     return mIsSpherical;
   }
 
-  public String getFieldLink() {
-    return mLink;
-  }
-
   public String getFieldMessage() {
     return mMessage;
   }
@@ -611,14 +585,6 @@ public class PagePost extends APINode {
 
   public Boolean getFieldMultiShareOptimized() {
     return mMultiShareOptimized;
-  }
-
-  public String getFieldName() {
-    return mName;
-  }
-
-  public String getFieldObjectId() {
-    return mObjectId;
   }
 
   public String getFieldParentId() {
@@ -664,10 +630,6 @@ public class PagePost extends APINode {
     return mShares;
   }
 
-  public String getFieldSource() {
-    return mSource;
-  }
-
   public String getFieldStatusType() {
     return mStatusType;
   }
@@ -697,10 +659,6 @@ public class PagePost extends APINode {
 
   public String getFieldTimelineVisibility() {
     return mTimelineVisibility;
-  }
-
-  public String getFieldType() {
-    return mType;
   }
 
   public String getFieldUpdatedTime() {
@@ -5577,12 +5535,10 @@ public class PagePost extends APINode {
       "backdated_time",
       "call_to_action",
       "can_reply_privately",
-      "caption",
       "child_attachments",
       "comments_mirroring_domain",
       "coordinates",
       "created_time",
-      "description",
       "event",
       "expanded_height",
       "expanded_width",
@@ -5601,13 +5557,10 @@ public class PagePost extends APINode {
       "is_popular",
       "is_published",
       "is_spherical",
-      "link",
       "message",
       "message_tags",
       "multi_share_end_card",
       "multi_share_optimized",
-      "name",
-      "object_id",
       "parent_id",
       "permalink_url",
       "picture",
@@ -5618,7 +5571,6 @@ public class PagePost extends APINode {
       "properties",
       "scheduled_publish_time",
       "shares",
-      "source",
       "status_type",
       "story",
       "story_tags",
@@ -5626,7 +5578,6 @@ public class PagePost extends APINode {
       "target",
       "targeting",
       "timeline_visibility",
-      "type",
       "updated_time",
       "via",
       "video_buying_eligibility",
@@ -5771,13 +5722,6 @@ public class PagePost extends APINode {
       this.requestField("can_reply_privately", value);
       return this;
     }
-    public APIRequestGet requestCaptionField () {
-      return this.requestCaptionField(true);
-    }
-    public APIRequestGet requestCaptionField (boolean value) {
-      this.requestField("caption", value);
-      return this;
-    }
     public APIRequestGet requestChildAttachmentsField () {
       return this.requestChildAttachmentsField(true);
     }
@@ -5804,13 +5748,6 @@ public class PagePost extends APINode {
     }
     public APIRequestGet requestCreatedTimeField (boolean value) {
       this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGet requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGet requestDescriptionField (boolean value) {
-      this.requestField("description", value);
       return this;
     }
     public APIRequestGet requestEventField () {
@@ -5939,13 +5876,6 @@ public class PagePost extends APINode {
       this.requestField("is_spherical", value);
       return this;
     }
-    public APIRequestGet requestLinkField () {
-      return this.requestLinkField(true);
-    }
-    public APIRequestGet requestLinkField (boolean value) {
-      this.requestField("link", value);
-      return this;
-    }
     public APIRequestGet requestMessageField () {
       return this.requestMessageField(true);
     }
@@ -5972,20 +5902,6 @@ public class PagePost extends APINode {
     }
     public APIRequestGet requestMultiShareOptimizedField (boolean value) {
       this.requestField("multi_share_optimized", value);
-      return this;
-    }
-    public APIRequestGet requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGet requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGet requestObjectIdField () {
-      return this.requestObjectIdField(true);
-    }
-    public APIRequestGet requestObjectIdField (boolean value) {
-      this.requestField("object_id", value);
       return this;
     }
     public APIRequestGet requestParentIdField () {
@@ -6058,13 +5974,6 @@ public class PagePost extends APINode {
       this.requestField("shares", value);
       return this;
     }
-    public APIRequestGet requestSourceField () {
-      return this.requestSourceField(true);
-    }
-    public APIRequestGet requestSourceField (boolean value) {
-      this.requestField("source", value);
-      return this;
-    }
     public APIRequestGet requestStatusTypeField () {
       return this.requestStatusTypeField(true);
     }
@@ -6112,13 +6021,6 @@ public class PagePost extends APINode {
     }
     public APIRequestGet requestTimelineVisibilityField (boolean value) {
       this.requestField("timeline_visibility", value);
-      return this;
-    }
-    public APIRequestGet requestTypeField () {
-      return this.requestTypeField(true);
-    }
-    public APIRequestGet requestTypeField (boolean value) {
-      this.requestField("type", value);
       return this;
     }
     public APIRequestGet requestUpdatedTimeField () {
@@ -6816,6 +6718,8 @@ public class PagePost extends APINode {
       VALUE_EVENT_RSVP("EVENT_RSVP"),
       @SerializedName("FIND_A_GROUP")
       VALUE_FIND_A_GROUP("FIND_A_GROUP"),
+      @SerializedName("FIND_YOUR_GROUPS")
+      VALUE_FIND_YOUR_GROUPS("FIND_YOUR_GROUPS"),
       @SerializedName("FOLLOW_NEWS_STORYLINE")
       VALUE_FOLLOW_NEWS_STORYLINE("FOLLOW_NEWS_STORYLINE"),
       @SerializedName("GET_DIRECTIONS")
@@ -6868,6 +6772,8 @@ public class PagePost extends APINode {
       VALUE_SHOP_NOW("SHOP_NOW"),
       @SerializedName("SIGN_UP")
       VALUE_SIGN_UP("SIGN_UP"),
+      @SerializedName("SOTTO_SUBSCRIBE")
+      VALUE_SOTTO_SUBSCRIBE("SOTTO_SUBSCRIBE"),
       @SerializedName("SUBSCRIBE")
       VALUE_SUBSCRIBE("SUBSCRIBE"),
       @SerializedName("UPDATE_APP")
@@ -6924,12 +6830,10 @@ public class PagePost extends APINode {
     this.mBackdatedTime = instance.mBackdatedTime;
     this.mCallToAction = instance.mCallToAction;
     this.mCanReplyPrivately = instance.mCanReplyPrivately;
-    this.mCaption = instance.mCaption;
     this.mChildAttachments = instance.mChildAttachments;
     this.mCommentsMirroringDomain = instance.mCommentsMirroringDomain;
     this.mCoordinates = instance.mCoordinates;
     this.mCreatedTime = instance.mCreatedTime;
-    this.mDescription = instance.mDescription;
     this.mEvent = instance.mEvent;
     this.mExpandedHeight = instance.mExpandedHeight;
     this.mExpandedWidth = instance.mExpandedWidth;
@@ -6948,13 +6852,10 @@ public class PagePost extends APINode {
     this.mIsPopular = instance.mIsPopular;
     this.mIsPublished = instance.mIsPublished;
     this.mIsSpherical = instance.mIsSpherical;
-    this.mLink = instance.mLink;
     this.mMessage = instance.mMessage;
     this.mMessageTags = instance.mMessageTags;
     this.mMultiShareEndCard = instance.mMultiShareEndCard;
     this.mMultiShareOptimized = instance.mMultiShareOptimized;
-    this.mName = instance.mName;
-    this.mObjectId = instance.mObjectId;
     this.mParentId = instance.mParentId;
     this.mPermalinkUrl = instance.mPermalinkUrl;
     this.mPicture = instance.mPicture;
@@ -6965,7 +6866,6 @@ public class PagePost extends APINode {
     this.mProperties = instance.mProperties;
     this.mScheduledPublishTime = instance.mScheduledPublishTime;
     this.mShares = instance.mShares;
-    this.mSource = instance.mSource;
     this.mStatusType = instance.mStatusType;
     this.mStory = instance.mStory;
     this.mStoryTags = instance.mStoryTags;
@@ -6973,7 +6873,6 @@ public class PagePost extends APINode {
     this.mTarget = instance.mTarget;
     this.mTargeting = instance.mTargeting;
     this.mTimelineVisibility = instance.mTimelineVisibility;
-    this.mType = instance.mType;
     this.mUpdatedTime = instance.mUpdatedTime;
     this.mVia = instance.mVia;
     this.mVideoBuyingEligibility = instance.mVideoBuyingEligibility;

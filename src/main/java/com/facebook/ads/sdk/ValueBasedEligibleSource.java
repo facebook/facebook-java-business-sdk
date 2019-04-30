@@ -54,41 +54,27 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ProductCatalogUserPermissions extends APINode {
-  @SerializedName("business")
-  private Business mBusiness = null;
-  @SerializedName("business_persona")
-  private Object mBusinessPersona = null;
-  @SerializedName("created_by")
-  private User mCreatedBy = null;
-  @SerializedName("created_time")
-  private String mCreatedTime = null;
-  @SerializedName("email")
-  private String mEmail = null;
-  @SerializedName("role")
-  private String mRole = null;
-  @SerializedName("status")
-  private String mStatus = null;
-  @SerializedName("updated_by")
-  private User mUpdatedBy = null;
-  @SerializedName("updated_time")
-  private String mUpdatedTime = null;
-  @SerializedName("user")
-  private User mUser = null;
+public class ValueBasedEligibleSource extends APINode {
+  @SerializedName("id")
+  private String mId = null;
+  @SerializedName("title")
+  private String mTitle = null;
+  @SerializedName("type")
+  private String mType = null;
   protected static Gson gson = null;
 
-  public ProductCatalogUserPermissions() {
+  public ValueBasedEligibleSource() {
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
-  public static ProductCatalogUserPermissions loadJSON(String json, APIContext context, String header) {
-    ProductCatalogUserPermissions productCatalogUserPermissions = getGson().fromJson(json, ProductCatalogUserPermissions.class);
+  public static ValueBasedEligibleSource loadJSON(String json, APIContext context, String header) {
+    ValueBasedEligibleSource valueBasedEligibleSource = getGson().fromJson(json, ValueBasedEligibleSource.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(productCatalogUserPermissions.toString());
+      JsonElement o2 = parser.parse(valueBasedEligibleSource.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -98,14 +84,14 @@ public class ProductCatalogUserPermissions extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    productCatalogUserPermissions.context = context;
-    productCatalogUserPermissions.rawValue = json;
-    productCatalogUserPermissions.header = header;
-    return productCatalogUserPermissions;
+    valueBasedEligibleSource.context = context;
+    valueBasedEligibleSource.rawValue = json;
+    valueBasedEligibleSource.header = header;
+    return valueBasedEligibleSource;
   }
 
-  public static APINodeList<ProductCatalogUserPermissions> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ProductCatalogUserPermissions> productCatalogUserPermissionss = new APINodeList<ProductCatalogUserPermissions>(request, json, header);
+  public static APINodeList<ValueBasedEligibleSource> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ValueBasedEligibleSource> valueBasedEligibleSources = new APINodeList<ValueBasedEligibleSource>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -116,9 +102,9 @@ public class ProductCatalogUserPermissions extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productCatalogUserPermissionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          valueBasedEligibleSources.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return productCatalogUserPermissionss;
+        return valueBasedEligibleSources;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -128,20 +114,20 @@ public class ProductCatalogUserPermissions extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                productCatalogUserPermissionss.setCursors(before, after);
+                valueBasedEligibleSources.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            productCatalogUserPermissionss.setPaging(previous, next);
+            valueBasedEligibleSources.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              productCatalogUserPermissionss.setAppSecret(context.getAppSecretProof());
+              valueBasedEligibleSources.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productCatalogUserPermissionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              valueBasedEligibleSources.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -152,23 +138,23 @@ public class ProductCatalogUserPermissions extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productCatalogUserPermissionss.add(loadJSON(entry.getValue().toString(), context, header));
+                  valueBasedEligibleSources.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productCatalogUserPermissionss.add(loadJSON(obj.toString(), context, header));
+              valueBasedEligibleSources.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return productCatalogUserPermissionss;
+          return valueBasedEligibleSources;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productCatalogUserPermissionss.add(loadJSON(entry.getValue().toString(), context, header));
+              valueBasedEligibleSources.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return productCatalogUserPermissionss;
+          return valueBasedEligibleSources;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -185,20 +171,20 @@ public class ProductCatalogUserPermissions extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productCatalogUserPermissionss.add(loadJSON(value.toString(), context, header));
+              valueBasedEligibleSources.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return productCatalogUserPermissionss;
+            return valueBasedEligibleSources;
           }
 
           // Sixth, check if it's pure JsonObject
-          productCatalogUserPermissionss.clear();
-          productCatalogUserPermissionss.add(loadJSON(json, context, header));
-          return productCatalogUserPermissionss;
+          valueBasedEligibleSources.clear();
+          valueBasedEligibleSources.add(loadJSON(json, context, header));
+          return valueBasedEligibleSources;
         }
       }
     } catch (Exception e) {
@@ -226,128 +212,33 @@ public class ProductCatalogUserPermissions extends APINode {
   }
 
 
-  public Business getFieldBusiness() {
-    if (mBusiness != null) {
-      mBusiness.context = getContext();
-    }
-    return mBusiness;
+  public String getFieldId() {
+    return mId;
   }
 
-  public ProductCatalogUserPermissions setFieldBusiness(Business value) {
-    this.mBusiness = value;
+  public ValueBasedEligibleSource setFieldId(String value) {
+    this.mId = value;
     return this;
   }
 
-  public ProductCatalogUserPermissions setFieldBusiness(String value) {
-    Type type = new TypeToken<Business>(){}.getType();
-    this.mBusiness = Business.getGson().fromJson(value, type);
-    return this;
-  }
-  public Object getFieldBusinessPersona() {
-    return mBusinessPersona;
+  public String getFieldTitle() {
+    return mTitle;
   }
 
-  public ProductCatalogUserPermissions setFieldBusinessPersona(Object value) {
-    this.mBusinessPersona = value;
+  public ValueBasedEligibleSource setFieldTitle(String value) {
+    this.mTitle = value;
     return this;
   }
 
-  public User getFieldCreatedBy() {
-    if (mCreatedBy != null) {
-      mCreatedBy.context = getContext();
-    }
-    return mCreatedBy;
+  public String getFieldType() {
+    return mType;
   }
 
-  public ProductCatalogUserPermissions setFieldCreatedBy(User value) {
-    this.mCreatedBy = value;
+  public ValueBasedEligibleSource setFieldType(String value) {
+    this.mType = value;
     return this;
   }
 
-  public ProductCatalogUserPermissions setFieldCreatedBy(String value) {
-    Type type = new TypeToken<User>(){}.getType();
-    this.mCreatedBy = User.getGson().fromJson(value, type);
-    return this;
-  }
-  public String getFieldCreatedTime() {
-    return mCreatedTime;
-  }
-
-  public ProductCatalogUserPermissions setFieldCreatedTime(String value) {
-    this.mCreatedTime = value;
-    return this;
-  }
-
-  public String getFieldEmail() {
-    return mEmail;
-  }
-
-  public ProductCatalogUserPermissions setFieldEmail(String value) {
-    this.mEmail = value;
-    return this;
-  }
-
-  public String getFieldRole() {
-    return mRole;
-  }
-
-  public ProductCatalogUserPermissions setFieldRole(String value) {
-    this.mRole = value;
-    return this;
-  }
-
-  public String getFieldStatus() {
-    return mStatus;
-  }
-
-  public ProductCatalogUserPermissions setFieldStatus(String value) {
-    this.mStatus = value;
-    return this;
-  }
-
-  public User getFieldUpdatedBy() {
-    if (mUpdatedBy != null) {
-      mUpdatedBy.context = getContext();
-    }
-    return mUpdatedBy;
-  }
-
-  public ProductCatalogUserPermissions setFieldUpdatedBy(User value) {
-    this.mUpdatedBy = value;
-    return this;
-  }
-
-  public ProductCatalogUserPermissions setFieldUpdatedBy(String value) {
-    Type type = new TypeToken<User>(){}.getType();
-    this.mUpdatedBy = User.getGson().fromJson(value, type);
-    return this;
-  }
-  public String getFieldUpdatedTime() {
-    return mUpdatedTime;
-  }
-
-  public ProductCatalogUserPermissions setFieldUpdatedTime(String value) {
-    this.mUpdatedTime = value;
-    return this;
-  }
-
-  public User getFieldUser() {
-    if (mUser != null) {
-      mUser.context = getContext();
-    }
-    return mUser;
-  }
-
-  public ProductCatalogUserPermissions setFieldUser(User value) {
-    this.mUser = value;
-    return this;
-  }
-
-  public ProductCatalogUserPermissions setFieldUser(String value) {
-    Type type = new TypeToken<User>(){}.getType();
-    this.mUser = User.getGson().fromJson(value, type);
-    return this;
-  }
 
 
 
@@ -364,26 +255,19 @@ public class ProductCatalogUserPermissions extends APINode {
     return gson;
   }
 
-  public ProductCatalogUserPermissions copyFrom(ProductCatalogUserPermissions instance) {
-    this.mBusiness = instance.mBusiness;
-    this.mBusinessPersona = instance.mBusinessPersona;
-    this.mCreatedBy = instance.mCreatedBy;
-    this.mCreatedTime = instance.mCreatedTime;
-    this.mEmail = instance.mEmail;
-    this.mRole = instance.mRole;
-    this.mStatus = instance.mStatus;
-    this.mUpdatedBy = instance.mUpdatedBy;
-    this.mUpdatedTime = instance.mUpdatedTime;
-    this.mUser = instance.mUser;
+  public ValueBasedEligibleSource copyFrom(ValueBasedEligibleSource instance) {
+    this.mId = instance.mId;
+    this.mTitle = instance.mTitle;
+    this.mType = instance.mType;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ProductCatalogUserPermissions> getParser() {
-    return new APIRequest.ResponseParser<ProductCatalogUserPermissions>() {
-      public APINodeList<ProductCatalogUserPermissions> parseResponse(String response, APIContext context, APIRequest<ProductCatalogUserPermissions> request, String header) throws MalformedResponseException {
-        return ProductCatalogUserPermissions.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ValueBasedEligibleSource> getParser() {
+    return new APIRequest.ResponseParser<ValueBasedEligibleSource>() {
+      public APINodeList<ValueBasedEligibleSource> parseResponse(String response, APIContext context, APIRequest<ValueBasedEligibleSource> request, String header) throws MalformedResponseException {
+        return ValueBasedEligibleSource.parseResponse(response, context, request, header);
       }
     };
   }

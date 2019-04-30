@@ -73,8 +73,6 @@ public class CustomAudience extends APINode {
   private String mDescription = null;
   @SerializedName("excluded_custom_audiences")
   private List<CustomAudience> mExcludedCustomAudiences = null;
-  @SerializedName("expiry_time")
-  private Long mExpiryTime = null;
   @SerializedName("external_event_source")
   private AdsPixel mExternalEventSource = null;
   @SerializedName("household_audience")
@@ -89,8 +87,6 @@ public class CustomAudience extends APINode {
   private Boolean mIsSnapshot = null;
   @SerializedName("is_value_based")
   private Boolean mIsValueBased = null;
-  @SerializedName("list_of_accounts")
-  private List<String> mListOfAccounts = null;
   @SerializedName("lookalike_audience_ids")
   private List<String> mLookalikeAudienceIds = null;
   @SerializedName("lookalike_spec")
@@ -105,6 +101,8 @@ public class CustomAudience extends APINode {
   private AudiencePermissionForActions mPermissionForActions = null;
   @SerializedName("pixel_id")
   private String mPixelId = null;
+  @SerializedName("regulated_audience_spec")
+  private LookalikeSpec mRegulatedAudienceSpec = null;
   @SerializedName("retention_days")
   private Long mRetentionDays = null;
   @SerializedName("rev_share_policy_id")
@@ -119,8 +117,6 @@ public class CustomAudience extends APINode {
   private Long mSeedAudience = null;
   @SerializedName("sharing_status")
   private CustomAudienceSharingStatus mSharingStatus = null;
-  @SerializedName("study_spec")
-  private AudienceInsightsStudySpec mStudySpec = null;
   @SerializedName("subtype")
   private String mSubtype = null;
   @SerializedName("time_content_updated")
@@ -443,10 +439,6 @@ public class CustomAudience extends APINode {
     return mExcludedCustomAudiences;
   }
 
-  public Long getFieldExpiryTime() {
-    return mExpiryTime;
-  }
-
   public AdsPixel getFieldExternalEventSource() {
     if (mExternalEventSource != null) {
       mExternalEventSource.context = getContext();
@@ -478,10 +470,6 @@ public class CustomAudience extends APINode {
     return mIsValueBased;
   }
 
-  public List<String> getFieldListOfAccounts() {
-    return mListOfAccounts;
-  }
-
   public List<String> getFieldLookalikeAudienceIds() {
     return mLookalikeAudienceIds;
   }
@@ -510,6 +498,10 @@ public class CustomAudience extends APINode {
     return mPixelId;
   }
 
+  public LookalikeSpec getFieldRegulatedAudienceSpec() {
+    return mRegulatedAudienceSpec;
+  }
+
   public Long getFieldRetentionDays() {
     return mRetentionDays;
   }
@@ -536,10 +528,6 @@ public class CustomAudience extends APINode {
 
   public CustomAudienceSharingStatus getFieldSharingStatus() {
     return mSharingStatus;
-  }
-
-  public AudienceInsightsStudySpec getFieldStudySpec() {
-    return mStudySpec;
   }
 
   public String getFieldSubtype() {
@@ -706,7 +694,6 @@ public class CustomAudience extends APINode {
       "capabilities",
       "created_time",
       "currency",
-      "direct_deals_tos_accepted",
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
@@ -980,13 +967,6 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAdAccounts requestCurrencyField (boolean value) {
       this.requestField("currency", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestDirectDealsTosAcceptedField () {
-      return this.requestDirectDealsTosAcceptedField(true);
-    }
-    public APIRequestGetAdAccounts requestDirectDealsTosAcceptedField (boolean value) {
-      this.requestField("direct_deals_tos_accepted", value);
       return this;
     }
     public APIRequestGetAdAccounts requestDisableReasonField () {
@@ -3287,7 +3267,6 @@ public class CustomAudience extends APINode {
       "delivery_status",
       "description",
       "excluded_custom_audiences",
-      "expiry_time",
       "external_event_source",
       "household_audience",
       "id",
@@ -3295,7 +3274,6 @@ public class CustomAudience extends APINode {
       "is_household",
       "is_snapshot",
       "is_value_based",
-      "list_of_accounts",
       "lookalike_audience_ids",
       "lookalike_spec",
       "name",
@@ -3303,6 +3281,7 @@ public class CustomAudience extends APINode {
       "opt_out_link",
       "permission_for_actions",
       "pixel_id",
+      "regulated_audience_spec",
       "retention_days",
       "rev_share_policy_id",
       "rule",
@@ -3310,7 +3289,6 @@ public class CustomAudience extends APINode {
       "rule_v2",
       "seed_audience",
       "sharing_status",
-      "study_spec",
       "subtype",
       "time_content_updated",
       "time_created",
@@ -3474,13 +3452,6 @@ public class CustomAudience extends APINode {
       this.requestField("excluded_custom_audiences", value);
       return this;
     }
-    public APIRequestGet requestExpiryTimeField () {
-      return this.requestExpiryTimeField(true);
-    }
-    public APIRequestGet requestExpiryTimeField (boolean value) {
-      this.requestField("expiry_time", value);
-      return this;
-    }
     public APIRequestGet requestExternalEventSourceField () {
       return this.requestExternalEventSourceField(true);
     }
@@ -3528,13 +3499,6 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGet requestIsValueBasedField (boolean value) {
       this.requestField("is_value_based", value);
-      return this;
-    }
-    public APIRequestGet requestListOfAccountsField () {
-      return this.requestListOfAccountsField(true);
-    }
-    public APIRequestGet requestListOfAccountsField (boolean value) {
-      this.requestField("list_of_accounts", value);
       return this;
     }
     public APIRequestGet requestLookalikeAudienceIdsField () {
@@ -3586,6 +3550,13 @@ public class CustomAudience extends APINode {
       this.requestField("pixel_id", value);
       return this;
     }
+    public APIRequestGet requestRegulatedAudienceSpecField () {
+      return this.requestRegulatedAudienceSpecField(true);
+    }
+    public APIRequestGet requestRegulatedAudienceSpecField (boolean value) {
+      this.requestField("regulated_audience_spec", value);
+      return this;
+    }
     public APIRequestGet requestRetentionDaysField () {
       return this.requestRetentionDaysField(true);
     }
@@ -3633,13 +3604,6 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGet requestSharingStatusField (boolean value) {
       this.requestField("sharing_status", value);
-      return this;
-    }
-    public APIRequestGet requestStudySpecField () {
-      return this.requestStudySpecField(true);
-    }
-    public APIRequestGet requestStudySpecField (boolean value) {
-      this.requestField("study_spec", value);
       return this;
     }
     public APIRequestGet requestSubtypeField () {
@@ -4180,6 +4144,8 @@ public class CustomAudience extends APINode {
       VALUE_OFFLINE_CONVERSION("OFFLINE_CONVERSION"),
       @SerializedName("PARTNER")
       VALUE_PARTNER("PARTNER"),
+      @SerializedName("REGULATED_CATEGORIES_AUDIENCE")
+      VALUE_REGULATED_CATEGORIES_AUDIENCE("REGULATED_CATEGORIES_AUDIENCE"),
       @SerializedName("STUDY_RULE_AUDIENCE")
       VALUE_STUDY_RULE_AUDIENCE("STUDY_RULE_AUDIENCE"),
       @SerializedName("VIDEO")
@@ -4297,7 +4263,6 @@ public class CustomAudience extends APINode {
     this.mDeliveryStatus = instance.mDeliveryStatus;
     this.mDescription = instance.mDescription;
     this.mExcludedCustomAudiences = instance.mExcludedCustomAudiences;
-    this.mExpiryTime = instance.mExpiryTime;
     this.mExternalEventSource = instance.mExternalEventSource;
     this.mHouseholdAudience = instance.mHouseholdAudience;
     this.mId = instance.mId;
@@ -4305,7 +4270,6 @@ public class CustomAudience extends APINode {
     this.mIsHousehold = instance.mIsHousehold;
     this.mIsSnapshot = instance.mIsSnapshot;
     this.mIsValueBased = instance.mIsValueBased;
-    this.mListOfAccounts = instance.mListOfAccounts;
     this.mLookalikeAudienceIds = instance.mLookalikeAudienceIds;
     this.mLookalikeSpec = instance.mLookalikeSpec;
     this.mName = instance.mName;
@@ -4313,6 +4277,7 @@ public class CustomAudience extends APINode {
     this.mOptOutLink = instance.mOptOutLink;
     this.mPermissionForActions = instance.mPermissionForActions;
     this.mPixelId = instance.mPixelId;
+    this.mRegulatedAudienceSpec = instance.mRegulatedAudienceSpec;
     this.mRetentionDays = instance.mRetentionDays;
     this.mRevSharePolicyId = instance.mRevSharePolicyId;
     this.mRule = instance.mRule;
@@ -4320,7 +4285,6 @@ public class CustomAudience extends APINode {
     this.mRuleV2 = instance.mRuleV2;
     this.mSeedAudience = instance.mSeedAudience;
     this.mSharingStatus = instance.mSharingStatus;
-    this.mStudySpec = instance.mStudySpec;
     this.mSubtype = instance.mSubtype;
     this.mTimeContentUpdated = instance.mTimeContentUpdated;
     this.mTimeCreated = instance.mTimeCreated;

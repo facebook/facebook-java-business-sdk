@@ -756,7 +756,6 @@ public class OfflineConversionDataSet extends APINode {
       "capabilities",
       "created_time",
       "currency",
-      "direct_deals_tos_accepted",
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
@@ -1030,13 +1029,6 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetAdAccounts requestCurrencyField (boolean value) {
       this.requestField("currency", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestDirectDealsTosAcceptedField () {
-      return this.requestDirectDealsTosAcceptedField(true);
-    }
-    public APIRequestGetAdAccounts requestDirectDealsTosAcceptedField (boolean value) {
-      this.requestField("direct_deals_tos_accepted", value);
       return this;
     }
     public APIRequestGetAdAccounts requestDisableReasonField () {
@@ -1955,7 +1947,6 @@ public class OfflineConversionDataSet extends APINode {
       "delivery_status",
       "description",
       "excluded_custom_audiences",
-      "expiry_time",
       "external_event_source",
       "household_audience",
       "id",
@@ -1963,7 +1954,6 @@ public class OfflineConversionDataSet extends APINode {
       "is_household",
       "is_snapshot",
       "is_value_based",
-      "list_of_accounts",
       "lookalike_audience_ids",
       "lookalike_spec",
       "name",
@@ -1971,6 +1961,7 @@ public class OfflineConversionDataSet extends APINode {
       "opt_out_link",
       "permission_for_actions",
       "pixel_id",
+      "regulated_audience_spec",
       "retention_days",
       "rev_share_policy_id",
       "rule",
@@ -1978,7 +1969,6 @@ public class OfflineConversionDataSet extends APINode {
       "rule_v2",
       "seed_audience",
       "sharing_status",
-      "study_spec",
       "subtype",
       "time_content_updated",
       "time_created",
@@ -2142,13 +2132,6 @@ public class OfflineConversionDataSet extends APINode {
       this.requestField("excluded_custom_audiences", value);
       return this;
     }
-    public APIRequestGetAudiences requestExpiryTimeField () {
-      return this.requestExpiryTimeField(true);
-    }
-    public APIRequestGetAudiences requestExpiryTimeField (boolean value) {
-      this.requestField("expiry_time", value);
-      return this;
-    }
     public APIRequestGetAudiences requestExternalEventSourceField () {
       return this.requestExternalEventSourceField(true);
     }
@@ -2196,13 +2179,6 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetAudiences requestIsValueBasedField (boolean value) {
       this.requestField("is_value_based", value);
-      return this;
-    }
-    public APIRequestGetAudiences requestListOfAccountsField () {
-      return this.requestListOfAccountsField(true);
-    }
-    public APIRequestGetAudiences requestListOfAccountsField (boolean value) {
-      this.requestField("list_of_accounts", value);
       return this;
     }
     public APIRequestGetAudiences requestLookalikeAudienceIdsField () {
@@ -2254,6 +2230,13 @@ public class OfflineConversionDataSet extends APINode {
       this.requestField("pixel_id", value);
       return this;
     }
+    public APIRequestGetAudiences requestRegulatedAudienceSpecField () {
+      return this.requestRegulatedAudienceSpecField(true);
+    }
+    public APIRequestGetAudiences requestRegulatedAudienceSpecField (boolean value) {
+      this.requestField("regulated_audience_spec", value);
+      return this;
+    }
     public APIRequestGetAudiences requestRetentionDaysField () {
       return this.requestRetentionDaysField(true);
     }
@@ -2301,13 +2284,6 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetAudiences requestSharingStatusField (boolean value) {
       this.requestField("sharing_status", value);
-      return this;
-    }
-    public APIRequestGetAudiences requestStudySpecField () {
-      return this.requestStudySpecField(true);
-    }
-    public APIRequestGetAudiences requestStudySpecField (boolean value) {
-      this.requestField("study_spec", value);
       return this;
     }
     public APIRequestGetAudiences requestSubtypeField () {

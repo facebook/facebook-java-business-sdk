@@ -384,10 +384,6 @@ public class User extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestCreatePaymentCurrency createPaymentCurrency() {
-    return new APIRequestCreatePaymentCurrency(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestCreateAccessToken createAccessToken() {
     return new APIRequestCreateAccessToken(this.getPrefixedId().toString(), context);
   }
@@ -548,12 +544,12 @@ public class User extends APINode {
     return new APIRequestGetGames(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateGamesStat createGamesStat() {
-    return new APIRequestCreateGamesStat(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestCreateGamesAchieve createGamesAchieve() {
     return new APIRequestCreateGamesAchieve(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateGamesStat createGamesStat() {
+    return new APIRequestCreateGamesStat(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateGamesPlay createGamesPlay() {
@@ -654,6 +650,10 @@ public class User extends APINode {
 
   public APIRequestCreateOpenGraphActionFeed createOpenGraphActionFeed() {
     return new APIRequestCreateOpenGraphActionFeed(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreatePaymentCurrency createPaymentCurrency() {
+    return new APIRequestCreatePaymentCurrency(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestDeletePermissions deletePermissions() {
@@ -1018,116 +1018,6 @@ public class User extends APINode {
   }
 
 
-
-  public static class APIRequestCreatePaymentCurrency extends APIRequest<User> {
-
-    User lastResponse = null;
-    @Override
-    public User getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "currency",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public User parseResponse(String response, String header) throws APIException {
-      return User.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public User execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public User execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<User> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<User> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, User>() {
-           public User apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreatePaymentCurrency.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreatePaymentCurrency(String nodeId, APIContext context) {
-      super(context, nodeId, "/PaymentCurrencies", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreatePaymentCurrency setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePaymentCurrency setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreatePaymentCurrency setCurrency (String currency) {
-      this.setParam("currency", currency);
-      return this;
-    }
-
-    public APIRequestCreatePaymentCurrency requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreatePaymentCurrency requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePaymentCurrency requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreatePaymentCurrency requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePaymentCurrency requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePaymentCurrency requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
 
   public static class APIRequestCreateAccessToken extends APIRequest<User> {
 
@@ -3810,7 +3700,6 @@ public class User extends APINode {
       "capabilities",
       "created_time",
       "currency",
-      "direct_deals_tos_accepted",
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
@@ -4079,13 +3968,6 @@ public class User extends APINode {
     }
     public APIRequestGetAdAccounts requestCurrencyField (boolean value) {
       this.requestField("currency", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestDirectDealsTosAcceptedField () {
-      return this.requestDirectDealsTosAcceptedField(true);
-    }
-    public APIRequestGetAdAccounts requestDirectDealsTosAcceptedField (boolean value) {
-      this.requestField("direct_deals_tos_accepted", value);
       return this;
     }
     public APIRequestGetAdAccounts requestDisableReasonField () {
@@ -5970,7 +5852,6 @@ public class User extends APINode {
       "capabilities",
       "created_time",
       "currency",
-      "direct_deals_tos_accepted",
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
@@ -6239,13 +6120,6 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedAdAccounts requestCurrencyField (boolean value) {
       this.requestField("currency", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestDirectDealsTosAcceptedField () {
-      return this.requestDirectDealsTosAcceptedField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestDirectDealsTosAcceptedField (boolean value) {
-      this.requestField("direct_deals_tos_accepted", value);
       return this;
     }
     public APIRequestGetAssignedAdAccounts requestDisableReasonField () {
@@ -15243,136 +15117,6 @@ public class User extends APINode {
     }
   }
 
-  public static class APIRequestCreateGamesStat extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "inc",
-      "set",
-      "stat_name",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateGamesStat.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateGamesStat(String nodeId, APIContext context) {
-      super(context, nodeId, "/games_stats", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateGamesStat setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateGamesStat setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateGamesStat setInc (Long inc) {
-      this.setParam("inc", inc);
-      return this;
-    }
-    public APIRequestCreateGamesStat setInc (String inc) {
-      this.setParam("inc", inc);
-      return this;
-    }
-
-    public APIRequestCreateGamesStat setSet (Long set) {
-      this.setParam("set", set);
-      return this;
-    }
-    public APIRequestCreateGamesStat setSet (String set) {
-      this.setParam("set", set);
-      return this;
-    }
-
-    public APIRequestCreateGamesStat setStatName (String statName) {
-      this.setParam("stat_name", statName);
-      return this;
-    }
-
-    public APIRequestCreateGamesStat requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateGamesStat requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateGamesStat requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateGamesStat requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateGamesStat requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateGamesStat requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestCreateGamesAchieve extends APIRequest<APINode> {
 
     APINode lastResponse = null;
@@ -15454,7 +15198,7 @@ public class User extends APINode {
     };
 
     public APIRequestCreateGamesAchieve(String nodeId, APIContext context) {
-      super(context, nodeId, "/gamesachieves", "POST", Arrays.asList(PARAMS));
+      super(context, nodeId, "/games.achieves", "POST", Arrays.asList(PARAMS));
     }
 
     @Override
@@ -15709,6 +15453,136 @@ public class User extends APINode {
 
     @Override
     public APIRequestCreateGamesAchieve requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateGamesStat extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "inc",
+      "set",
+      "stat_name",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateGamesStat.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateGamesStat(String nodeId, APIContext context) {
+      super(context, nodeId, "/games_stats", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateGamesStat setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateGamesStat setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateGamesStat setInc (Long inc) {
+      this.setParam("inc", inc);
+      return this;
+    }
+    public APIRequestCreateGamesStat setInc (String inc) {
+      this.setParam("inc", inc);
+      return this;
+    }
+
+    public APIRequestCreateGamesStat setSet (Long set) {
+      this.setParam("set", set);
+      return this;
+    }
+    public APIRequestCreateGamesStat setSet (String set) {
+      this.setParam("set", set);
+      return this;
+    }
+
+    public APIRequestCreateGamesStat setStatName (String statName) {
+      this.setParam("stat_name", statName);
+      return this;
+    }
+
+    public APIRequestCreateGamesStat requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateGamesStat requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateGamesStat requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateGamesStat requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateGamesStat requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateGamesStat requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -23555,6 +23429,116 @@ public class User extends APINode {
 
   }
 
+  public static class APIRequestCreatePaymentCurrency extends APIRequest<User> {
+
+    User lastResponse = null;
+    @Override
+    public User getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "currency",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public User parseResponse(String response, String header) throws APIException {
+      return User.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public User execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public User execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<User> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<User> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, User>() {
+           public User apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreatePaymentCurrency.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreatePaymentCurrency(String nodeId, APIContext context) {
+      super(context, nodeId, "/payment_currencies", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreatePaymentCurrency setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePaymentCurrency setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreatePaymentCurrency setCurrency (String currency) {
+      this.setParam("currency", currency);
+      return this;
+    }
+
+    public APIRequestCreatePaymentCurrency requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreatePaymentCurrency requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePaymentCurrency requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreatePaymentCurrency requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePaymentCurrency requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePaymentCurrency requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestDeletePermissions extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -23832,7 +23816,6 @@ public class User extends APINode {
       "capabilities",
       "created_time",
       "currency",
-      "direct_deals_tos_accepted",
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
@@ -24101,13 +24084,6 @@ public class User extends APINode {
     }
     public APIRequestGetPersonalAdAccounts requestCurrencyField (boolean value) {
       this.requestField("currency", value);
-      return this;
-    }
-    public APIRequestGetPersonalAdAccounts requestDirectDealsTosAcceptedField () {
-      return this.requestDirectDealsTosAcceptedField(true);
-    }
-    public APIRequestGetPersonalAdAccounts requestDirectDealsTosAcceptedField (boolean value) {
-      this.requestField("direct_deals_tos_accepted", value);
       return this;
     }
     public APIRequestGetPersonalAdAccounts requestDisableReasonField () {
@@ -26954,7 +26930,7 @@ public class User extends APINode {
     };
 
     public APIRequestCreateStagingResource(String nodeId, APIContext context) {
-      super(context, nodeId, "/stagingresources", "POST", Arrays.asList(PARAMS));
+      super(context, nodeId, "/staging_resources", "POST", Arrays.asList(PARAMS));
     }
 
     @Override

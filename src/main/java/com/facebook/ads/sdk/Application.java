@@ -668,24 +668,16 @@ public class Application extends APINode {
     return new APIRequestCreateOzoneRelease(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreatePageActivity createPageActivity() {
+    return new APIRequestCreatePageActivity(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestDeletePaymentCurrencies deletePaymentCurrencies() {
     return new APIRequestDeletePaymentCurrencies(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreatePaymentCurrency createPaymentCurrency() {
     return new APIRequestCreatePaymentCurrency(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestDeletePaymentsTestUsers deletePaymentsTestUsers() {
-    return new APIRequestDeletePaymentsTestUsers(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetPaymentsTestUsers getPaymentsTestUsers() {
-    return new APIRequestGetPaymentsTestUsers(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreatePaymentsTestUser createPaymentsTestUser() {
-    return new APIRequestCreatePaymentsTestUser(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetPermissions getPermissions() {
@@ -4272,7 +4264,6 @@ public class Application extends APINode {
       "delivery_status",
       "description",
       "excluded_custom_audiences",
-      "expiry_time",
       "external_event_source",
       "household_audience",
       "id",
@@ -4280,7 +4271,6 @@ public class Application extends APINode {
       "is_household",
       "is_snapshot",
       "is_value_based",
-      "list_of_accounts",
       "lookalike_audience_ids",
       "lookalike_spec",
       "name",
@@ -4288,6 +4278,7 @@ public class Application extends APINode {
       "opt_out_link",
       "permission_for_actions",
       "pixel_id",
+      "regulated_audience_spec",
       "retention_days",
       "rev_share_policy_id",
       "rule",
@@ -4295,7 +4286,6 @@ public class Application extends APINode {
       "rule_v2",
       "seed_audience",
       "sharing_status",
-      "study_spec",
       "subtype",
       "time_content_updated",
       "time_created",
@@ -4459,13 +4449,6 @@ public class Application extends APINode {
       this.requestField("excluded_custom_audiences", value);
       return this;
     }
-    public APIRequestGetAudiences requestExpiryTimeField () {
-      return this.requestExpiryTimeField(true);
-    }
-    public APIRequestGetAudiences requestExpiryTimeField (boolean value) {
-      this.requestField("expiry_time", value);
-      return this;
-    }
     public APIRequestGetAudiences requestExternalEventSourceField () {
       return this.requestExternalEventSourceField(true);
     }
@@ -4513,13 +4496,6 @@ public class Application extends APINode {
     }
     public APIRequestGetAudiences requestIsValueBasedField (boolean value) {
       this.requestField("is_value_based", value);
-      return this;
-    }
-    public APIRequestGetAudiences requestListOfAccountsField () {
-      return this.requestListOfAccountsField(true);
-    }
-    public APIRequestGetAudiences requestListOfAccountsField (boolean value) {
-      this.requestField("list_of_accounts", value);
       return this;
     }
     public APIRequestGetAudiences requestLookalikeAudienceIdsField () {
@@ -4571,6 +4547,13 @@ public class Application extends APINode {
       this.requestField("pixel_id", value);
       return this;
     }
+    public APIRequestGetAudiences requestRegulatedAudienceSpecField () {
+      return this.requestRegulatedAudienceSpecField(true);
+    }
+    public APIRequestGetAudiences requestRegulatedAudienceSpecField (boolean value) {
+      this.requestField("regulated_audience_spec", value);
+      return this;
+    }
     public APIRequestGetAudiences requestRetentionDaysField () {
       return this.requestRetentionDaysField(true);
     }
@@ -4618,13 +4601,6 @@ public class Application extends APINode {
     }
     public APIRequestGetAudiences requestSharingStatusField (boolean value) {
       this.requestField("sharing_status", value);
-      return this;
-    }
-    public APIRequestGetAudiences requestStudySpecField () {
-      return this.requestStudySpecField(true);
-    }
-    public APIRequestGetAudiences requestStudySpecField (boolean value) {
-      this.requestField("study_spec", value);
       return this;
     }
     public APIRequestGetAudiences requestSubtypeField () {
@@ -4805,7 +4781,6 @@ public class Application extends APINode {
       "capabilities",
       "created_time",
       "currency",
-      "direct_deals_tos_accepted",
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
@@ -5079,13 +5054,6 @@ public class Application extends APINode {
     }
     public APIRequestGetAuthorizedAdAccounts requestCurrencyField (boolean value) {
       this.requestField("currency", value);
-      return this;
-    }
-    public APIRequestGetAuthorizedAdAccounts requestDirectDealsTosAcceptedField () {
-      return this.requestDirectDealsTosAcceptedField(true);
-    }
-    public APIRequestGetAuthorizedAdAccounts requestDirectDealsTosAcceptedField (boolean value) {
-      this.requestField("direct_deals_tos_accepted", value);
       return this;
     }
     public APIRequestGetAuthorizedAdAccounts requestDisableReasonField () {
@@ -9196,6 +9164,7 @@ public class Application extends APINode {
     }
     public static final String[] PARAMS = {
       "device_id",
+      "extinfo",
       "platform",
       "sdk_version",
     };
@@ -9258,6 +9227,15 @@ public class Application extends APINode {
 
     public APIRequestGetMobileSdkGk setDeviceId (String deviceId) {
       this.setParam("device_id", deviceId);
+      return this;
+    }
+
+    public APIRequestGetMobileSdkGk setExtinfo (Object extinfo) {
+      this.setParam("extinfo", extinfo);
+      return this;
+    }
+    public APIRequestGetMobileSdkGk setExtinfo (String extinfo) {
+      this.setParam("extinfo", extinfo);
       return this;
     }
 
@@ -10305,6 +10283,180 @@ public class Application extends APINode {
 
   }
 
+  public static class APIRequestCreatePageActivity extends APIRequest<Application> {
+
+    Application lastResponse = null;
+    @Override
+    public Application getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "advertiser_tracking_enabled",
+      "application_tracking_enabled",
+      "custom_events",
+      "logging_source",
+      "logging_target",
+      "page_id",
+      "page_scoped_user_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Application parseResponse(String response, String header) throws APIException {
+      return Application.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Application execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Application execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Application> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, Application>() {
+           public Application apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreatePageActivity.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreatePageActivity(String nodeId, APIContext context) {
+      super(context, nodeId, "/page_activities", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreatePageActivity setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePageActivity setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreatePageActivity setAdvertiserTrackingEnabled (Boolean advertiserTrackingEnabled) {
+      this.setParam("advertiser_tracking_enabled", advertiserTrackingEnabled);
+      return this;
+    }
+    public APIRequestCreatePageActivity setAdvertiserTrackingEnabled (String advertiserTrackingEnabled) {
+      this.setParam("advertiser_tracking_enabled", advertiserTrackingEnabled);
+      return this;
+    }
+
+    public APIRequestCreatePageActivity setApplicationTrackingEnabled (Boolean applicationTrackingEnabled) {
+      this.setParam("application_tracking_enabled", applicationTrackingEnabled);
+      return this;
+    }
+    public APIRequestCreatePageActivity setApplicationTrackingEnabled (String applicationTrackingEnabled) {
+      this.setParam("application_tracking_enabled", applicationTrackingEnabled);
+      return this;
+    }
+
+    public APIRequestCreatePageActivity setCustomEvents (List<Object> customEvents) {
+      this.setParam("custom_events", customEvents);
+      return this;
+    }
+    public APIRequestCreatePageActivity setCustomEvents (String customEvents) {
+      this.setParam("custom_events", customEvents);
+      return this;
+    }
+
+    public APIRequestCreatePageActivity setLoggingSource (Application.EnumLoggingSource loggingSource) {
+      this.setParam("logging_source", loggingSource);
+      return this;
+    }
+    public APIRequestCreatePageActivity setLoggingSource (String loggingSource) {
+      this.setParam("logging_source", loggingSource);
+      return this;
+    }
+
+    public APIRequestCreatePageActivity setLoggingTarget (Application.EnumLoggingTarget loggingTarget) {
+      this.setParam("logging_target", loggingTarget);
+      return this;
+    }
+    public APIRequestCreatePageActivity setLoggingTarget (String loggingTarget) {
+      this.setParam("logging_target", loggingTarget);
+      return this;
+    }
+
+    public APIRequestCreatePageActivity setPageId (Long pageId) {
+      this.setParam("page_id", pageId);
+      return this;
+    }
+    public APIRequestCreatePageActivity setPageId (String pageId) {
+      this.setParam("page_id", pageId);
+      return this;
+    }
+
+    public APIRequestCreatePageActivity setPageScopedUserId (Long pageScopedUserId) {
+      this.setParam("page_scoped_user_id", pageScopedUserId);
+      return this;
+    }
+    public APIRequestCreatePageActivity setPageScopedUserId (String pageScopedUserId) {
+      this.setParam("page_scoped_user_id", pageScopedUserId);
+      return this;
+    }
+
+    public APIRequestCreatePageActivity requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreatePageActivity requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePageActivity requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreatePageActivity requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePageActivity requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePageActivity requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestDeletePaymentCurrencies extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -10519,818 +10671,6 @@ public class Application extends APINode {
 
     @Override
     public APIRequestCreatePaymentCurrency requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestDeletePaymentsTestUsers extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "uids",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestDeletePaymentsTestUsers.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestDeletePaymentsTestUsers(String nodeId, APIContext context) {
-      super(context, nodeId, "/payments_test_users", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDeletePaymentsTestUsers setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeletePaymentsTestUsers setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDeletePaymentsTestUsers setUids (List<Long> uids) {
-      this.setParam("uids", uids);
-      return this;
-    }
-    public APIRequestDeletePaymentsTestUsers setUids (String uids) {
-      this.setParam("uids", uids);
-      return this;
-    }
-
-    public APIRequestDeletePaymentsTestUsers requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDeletePaymentsTestUsers requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeletePaymentsTestUsers requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDeletePaymentsTestUsers requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeletePaymentsTestUsers requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeletePaymentsTestUsers requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestGetPaymentsTestUsers extends APIRequest<User> {
-
-    APINodeList<User> lastResponse = null;
-    @Override
-    public APINodeList<User> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "about",
-      "address",
-      "admin_notes",
-      "age_range",
-      "birthday",
-      "can_review_measurement_request",
-      "context",
-      "cover",
-      "currency",
-      "devices",
-      "education",
-      "email",
-      "employee_number",
-      "favorite_athletes",
-      "favorite_teams",
-      "first_name",
-      "gender",
-      "hometown",
-      "id",
-      "inspirational_people",
-      "install_type",
-      "installed",
-      "interested_in",
-      "is_famedeeplinkinguser",
-      "is_shared_login",
-      "is_verified",
-      "labels",
-      "languages",
-      "last_name",
-      "link",
-      "local_news_megaphone_dismiss_status",
-      "local_news_subscription_status",
-      "locale",
-      "location",
-      "meeting_for",
-      "middle_name",
-      "name",
-      "name_format",
-      "payment_pricepoints",
-      "political",
-      "profile_pic",
-      "public_key",
-      "quotes",
-      "relationship_status",
-      "religion",
-      "security_settings",
-      "shared_login_upgrade_required_by",
-      "short_name",
-      "significant_other",
-      "sports",
-      "test_group",
-      "third_party_id",
-      "timezone",
-      "token_for_business",
-      "updated_time",
-      "verified",
-      "video_upload_limits",
-      "viewer_can_send_gift",
-      "website",
-      "work",
-    };
-
-    @Override
-    public APINodeList<User> parseResponse(String response, String header) throws APIException {
-      return User.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<User> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<User> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<User>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<User>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<User>>() {
-           public APINodeList<User> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetPaymentsTestUsers.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetPaymentsTestUsers(String nodeId, APIContext context) {
-      super(context, nodeId, "/payments_test_users", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetPaymentsTestUsers setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPaymentsTestUsers setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetPaymentsTestUsers requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetPaymentsTestUsers requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPaymentsTestUsers requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetPaymentsTestUsers requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPaymentsTestUsers requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPaymentsTestUsers requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetPaymentsTestUsers requestAboutField () {
-      return this.requestAboutField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestAboutField (boolean value) {
-      this.requestField("about", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestAddressField () {
-      return this.requestAddressField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestAddressField (boolean value) {
-      this.requestField("address", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestAdminNotesField () {
-      return this.requestAdminNotesField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestAdminNotesField (boolean value) {
-      this.requestField("admin_notes", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestAgeRangeField () {
-      return this.requestAgeRangeField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestAgeRangeField (boolean value) {
-      this.requestField("age_range", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestBirthdayField () {
-      return this.requestBirthdayField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestBirthdayField (boolean value) {
-      this.requestField("birthday", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestCanReviewMeasurementRequestField () {
-      return this.requestCanReviewMeasurementRequestField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestCanReviewMeasurementRequestField (boolean value) {
-      this.requestField("can_review_measurement_request", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestContextField () {
-      return this.requestContextField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestContextField (boolean value) {
-      this.requestField("context", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestCoverField () {
-      return this.requestCoverField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestCoverField (boolean value) {
-      this.requestField("cover", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestCurrencyField () {
-      return this.requestCurrencyField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestCurrencyField (boolean value) {
-      this.requestField("currency", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestDevicesField () {
-      return this.requestDevicesField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestDevicesField (boolean value) {
-      this.requestField("devices", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestEducationField () {
-      return this.requestEducationField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestEducationField (boolean value) {
-      this.requestField("education", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestEmailField () {
-      return this.requestEmailField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestEmailField (boolean value) {
-      this.requestField("email", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestEmployeeNumberField () {
-      return this.requestEmployeeNumberField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestEmployeeNumberField (boolean value) {
-      this.requestField("employee_number", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestFavoriteAthletesField () {
-      return this.requestFavoriteAthletesField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestFavoriteAthletesField (boolean value) {
-      this.requestField("favorite_athletes", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestFavoriteTeamsField () {
-      return this.requestFavoriteTeamsField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestFavoriteTeamsField (boolean value) {
-      this.requestField("favorite_teams", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestFirstNameField () {
-      return this.requestFirstNameField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestFirstNameField (boolean value) {
-      this.requestField("first_name", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestGenderField () {
-      return this.requestGenderField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestGenderField (boolean value) {
-      this.requestField("gender", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestHometownField () {
-      return this.requestHometownField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestHometownField (boolean value) {
-      this.requestField("hometown", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestInspirationalPeopleField () {
-      return this.requestInspirationalPeopleField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestInspirationalPeopleField (boolean value) {
-      this.requestField("inspirational_people", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestInstallTypeField () {
-      return this.requestInstallTypeField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestInstallTypeField (boolean value) {
-      this.requestField("install_type", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestInstalledField () {
-      return this.requestInstalledField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestInstalledField (boolean value) {
-      this.requestField("installed", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestInterestedInField () {
-      return this.requestInterestedInField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestInterestedInField (boolean value) {
-      this.requestField("interested_in", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestIsFamedeeplinkinguserField () {
-      return this.requestIsFamedeeplinkinguserField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestIsFamedeeplinkinguserField (boolean value) {
-      this.requestField("is_famedeeplinkinguser", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestIsSharedLoginField () {
-      return this.requestIsSharedLoginField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestIsSharedLoginField (boolean value) {
-      this.requestField("is_shared_login", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestIsVerifiedField () {
-      return this.requestIsVerifiedField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestIsVerifiedField (boolean value) {
-      this.requestField("is_verified", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestLabelsField () {
-      return this.requestLabelsField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestLabelsField (boolean value) {
-      this.requestField("labels", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestLanguagesField () {
-      return this.requestLanguagesField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestLanguagesField (boolean value) {
-      this.requestField("languages", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestLastNameField () {
-      return this.requestLastNameField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestLastNameField (boolean value) {
-      this.requestField("last_name", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestLinkField () {
-      return this.requestLinkField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestLinkField (boolean value) {
-      this.requestField("link", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestLocalNewsMegaphoneDismissStatusField () {
-      return this.requestLocalNewsMegaphoneDismissStatusField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestLocalNewsMegaphoneDismissStatusField (boolean value) {
-      this.requestField("local_news_megaphone_dismiss_status", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestLocalNewsSubscriptionStatusField () {
-      return this.requestLocalNewsSubscriptionStatusField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestLocalNewsSubscriptionStatusField (boolean value) {
-      this.requestField("local_news_subscription_status", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestLocaleField () {
-      return this.requestLocaleField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestLocaleField (boolean value) {
-      this.requestField("locale", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestLocationField () {
-      return this.requestLocationField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestLocationField (boolean value) {
-      this.requestField("location", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestMeetingForField () {
-      return this.requestMeetingForField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestMeetingForField (boolean value) {
-      this.requestField("meeting_for", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestMiddleNameField () {
-      return this.requestMiddleNameField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestMiddleNameField (boolean value) {
-      this.requestField("middle_name", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestNameFormatField () {
-      return this.requestNameFormatField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestNameFormatField (boolean value) {
-      this.requestField("name_format", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestPaymentPricepointsField () {
-      return this.requestPaymentPricepointsField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestPaymentPricepointsField (boolean value) {
-      this.requestField("payment_pricepoints", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestPoliticalField () {
-      return this.requestPoliticalField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestPoliticalField (boolean value) {
-      this.requestField("political", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestProfilePicField () {
-      return this.requestProfilePicField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestProfilePicField (boolean value) {
-      this.requestField("profile_pic", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestPublicKeyField () {
-      return this.requestPublicKeyField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestPublicKeyField (boolean value) {
-      this.requestField("public_key", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestQuotesField () {
-      return this.requestQuotesField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestQuotesField (boolean value) {
-      this.requestField("quotes", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestRelationshipStatusField () {
-      return this.requestRelationshipStatusField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestRelationshipStatusField (boolean value) {
-      this.requestField("relationship_status", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestReligionField () {
-      return this.requestReligionField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestReligionField (boolean value) {
-      this.requestField("religion", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestSecuritySettingsField () {
-      return this.requestSecuritySettingsField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestSecuritySettingsField (boolean value) {
-      this.requestField("security_settings", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestSharedLoginUpgradeRequiredByField () {
-      return this.requestSharedLoginUpgradeRequiredByField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestSharedLoginUpgradeRequiredByField (boolean value) {
-      this.requestField("shared_login_upgrade_required_by", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestShortNameField () {
-      return this.requestShortNameField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestShortNameField (boolean value) {
-      this.requestField("short_name", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestSignificantOtherField () {
-      return this.requestSignificantOtherField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestSignificantOtherField (boolean value) {
-      this.requestField("significant_other", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestSportsField () {
-      return this.requestSportsField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestSportsField (boolean value) {
-      this.requestField("sports", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestTestGroupField () {
-      return this.requestTestGroupField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestTestGroupField (boolean value) {
-      this.requestField("test_group", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestThirdPartyIdField () {
-      return this.requestThirdPartyIdField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestThirdPartyIdField (boolean value) {
-      this.requestField("third_party_id", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestTimezoneField () {
-      return this.requestTimezoneField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestTimezoneField (boolean value) {
-      this.requestField("timezone", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestTokenForBusinessField () {
-      return this.requestTokenForBusinessField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestTokenForBusinessField (boolean value) {
-      this.requestField("token_for_business", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestUpdatedTimeField () {
-      return this.requestUpdatedTimeField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestUpdatedTimeField (boolean value) {
-      this.requestField("updated_time", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestVerifiedField () {
-      return this.requestVerifiedField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestVerifiedField (boolean value) {
-      this.requestField("verified", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestVideoUploadLimitsField () {
-      return this.requestVideoUploadLimitsField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestVideoUploadLimitsField (boolean value) {
-      this.requestField("video_upload_limits", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestViewerCanSendGiftField () {
-      return this.requestViewerCanSendGiftField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestViewerCanSendGiftField (boolean value) {
-      this.requestField("viewer_can_send_gift", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestWebsiteField () {
-      return this.requestWebsiteField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestWebsiteField (boolean value) {
-      this.requestField("website", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestWorkField () {
-      return this.requestWorkField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestWorkField (boolean value) {
-      this.requestField("work", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestCreatePaymentsTestUser extends APIRequest<Application> {
-
-    Application lastResponse = null;
-    @Override
-    public Application getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "uids",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Application parseResponse(String response, String header) throws APIException {
-      return Application.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Application execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Application execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Application> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Application>() {
-           public Application apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreatePaymentsTestUser.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreatePaymentsTestUser(String nodeId, APIContext context) {
-      super(context, nodeId, "/payments_test_users", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreatePaymentsTestUser setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePaymentsTestUser setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreatePaymentsTestUser setUids (List<Long> uids) {
-      this.setParam("uids", uids);
-      return this;
-    }
-    public APIRequestCreatePaymentsTestUser setUids (String uids) {
-      this.setParam("uids", uids);
-      return this;
-    }
-
-    public APIRequestCreatePaymentsTestUser requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreatePaymentsTestUser requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePaymentsTestUser requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreatePaymentsTestUser requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePaymentsTestUser requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePaymentsTestUser requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -12830,7 +12170,7 @@ public class Application extends APINode {
     };
 
     public APIRequestCreateStagingResource(String nodeId, APIContext context) {
-      super(context, nodeId, "/stagingresources", "POST", Arrays.asList(PARAMS));
+      super(context, nodeId, "/staging_resources", "POST", Arrays.asList(PARAMS));
     }
 
     @Override
@@ -15532,6 +14872,44 @@ public class Application extends APINode {
       private String value;
 
       private EnumSortOrder(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumLoggingSource {
+      @SerializedName("MESSENGER_BOT")
+      VALUE_MESSENGER_BOT("MESSENGER_BOT"),
+      NULL(null);
+
+      private String value;
+
+      private EnumLoggingSource(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumLoggingTarget {
+      @SerializedName("APP")
+      VALUE_APP("APP"),
+      @SerializedName("APP_AND_PAGE")
+      VALUE_APP_AND_PAGE("APP_AND_PAGE"),
+      @SerializedName("PAGE")
+      VALUE_PAGE("PAGE"),
+      NULL(null);
+
+      private String value;
+
+      private EnumLoggingTarget(String value) {
         this.value = value;
       }
 

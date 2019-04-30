@@ -366,6 +366,10 @@ public class Business extends APINode {
     return new APIRequestGetAgencyPages(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetAnPlacements getAnPlacements() {
+    return new APIRequestGetAnPlacements(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestDeleteApps deleteApps() {
     return new APIRequestDeleteApps(this.getPrefixedId().toString(), context);
   }
@@ -452,10 +456,6 @@ public class Business extends APINode {
 
   public APIRequestGetClients getClients() {
     return new APIRequestGetClients(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetCreditCards getCreditCards() {
-    return new APIRequestGetCreditCards(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetCustomConversions getCustomConversions() {
@@ -5036,6 +5036,174 @@ public class Business extends APINode {
     }
   }
 
+  public static class APIRequestGetAnPlacements extends APIRequest<AdPlacement> {
+
+    APINodeList<AdPlacement> lastResponse = null;
+    @Override
+    public APINodeList<AdPlacement> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "bundle_id",
+      "display_format",
+      "external_placement_id",
+      "google_display_format",
+      "id",
+      "name",
+      "platform",
+      "status",
+    };
+
+    @Override
+    public APINodeList<AdPlacement> parseResponse(String response, String header) throws APIException {
+      return AdPlacement.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<AdPlacement> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdPlacement> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<AdPlacement>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdPlacement>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<AdPlacement>>() {
+           public APINodeList<AdPlacement> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetAnPlacements.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetAnPlacements(String nodeId, APIContext context) {
+      super(context, nodeId, "/an_placements", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetAnPlacements setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAnPlacements setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetAnPlacements requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetAnPlacements requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAnPlacements requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetAnPlacements requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAnPlacements requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAnPlacements requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetAnPlacements requestBundleIdField () {
+      return this.requestBundleIdField(true);
+    }
+    public APIRequestGetAnPlacements requestBundleIdField (boolean value) {
+      this.requestField("bundle_id", value);
+      return this;
+    }
+    public APIRequestGetAnPlacements requestDisplayFormatField () {
+      return this.requestDisplayFormatField(true);
+    }
+    public APIRequestGetAnPlacements requestDisplayFormatField (boolean value) {
+      this.requestField("display_format", value);
+      return this;
+    }
+    public APIRequestGetAnPlacements requestExternalPlacementIdField () {
+      return this.requestExternalPlacementIdField(true);
+    }
+    public APIRequestGetAnPlacements requestExternalPlacementIdField (boolean value) {
+      this.requestField("external_placement_id", value);
+      return this;
+    }
+    public APIRequestGetAnPlacements requestGoogleDisplayFormatField () {
+      return this.requestGoogleDisplayFormatField(true);
+    }
+    public APIRequestGetAnPlacements requestGoogleDisplayFormatField (boolean value) {
+      this.requestField("google_display_format", value);
+      return this;
+    }
+    public APIRequestGetAnPlacements requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetAnPlacements requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetAnPlacements requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetAnPlacements requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAnPlacements requestPlatformField () {
+      return this.requestPlatformField(true);
+    }
+    public APIRequestGetAnPlacements requestPlatformField (boolean value) {
+      this.requestField("platform", value);
+      return this;
+    }
+    public APIRequestGetAnPlacements requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetAnPlacements requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+  }
+
   public static class APIRequestDeleteApps extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -5397,7 +5565,10 @@ public class Business extends APINode {
     }
     public static final String[] PARAMS = {
       "end_date",
+      "issue_end_date",
+      "issue_start_date",
       "start_date",
+      "type",
     };
 
     public static final String[] FIELDS = {
@@ -5478,8 +5649,27 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestGetBusinessInvoices setIssueEndDate (String issueEndDate) {
+      this.setParam("issue_end_date", issueEndDate);
+      return this;
+    }
+
+    public APIRequestGetBusinessInvoices setIssueStartDate (String issueStartDate) {
+      this.setParam("issue_start_date", issueStartDate);
+      return this;
+    }
+
     public APIRequestGetBusinessInvoices setStartDate (String startDate) {
       this.setParam("start_date", startDate);
+      return this;
+    }
+
+    public APIRequestGetBusinessInvoices setType (OracleTransaction.EnumType type) {
+      this.setParam("type", type);
+      return this;
+    }
+    public APIRequestGetBusinessInvoices setType (String type) {
+      this.setParam("type", type);
       return this;
     }
 
@@ -6743,7 +6933,6 @@ public class Business extends APINode {
       "capabilities",
       "created_time",
       "currency",
-      "direct_deals_tos_accepted",
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
@@ -7012,13 +7201,6 @@ public class Business extends APINode {
     }
     public APIRequestGetClientAdAccounts requestCurrencyField (boolean value) {
       this.requestField("currency", value);
-      return this;
-    }
-    public APIRequestGetClientAdAccounts requestDirectDealsTosAcceptedField () {
-      return this.requestDirectDealsTosAcceptedField(true);
-    }
-    public APIRequestGetClientAdAccounts requestDirectDealsTosAcceptedField (boolean value) {
-      this.requestField("direct_deals_tos_accepted", value);
       return this;
     }
     public APIRequestGetClientAdAccounts requestDisableReasonField () {
@@ -10560,198 +10742,6 @@ public class Business extends APINode {
     }
     public APIRequestGetClients requestVerticalIdField (boolean value) {
       this.requestField("vertical_id", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestGetCreditCards extends APIRequest<BusinessCreditCardLegacy> {
-
-    APINodeList<BusinessCreditCardLegacy> lastResponse = null;
-    @Override
-    public APINodeList<BusinessCreditCardLegacy> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "address",
-      "business_id",
-      "credit_card_suffix",
-      "credit_card_type",
-      "expiration_month",
-      "expiration_year",
-      "first_name",
-      "fraud_status",
-      "id",
-      "last_name",
-      "middle_name",
-    };
-
-    @Override
-    public APINodeList<BusinessCreditCardLegacy> parseResponse(String response, String header) throws APIException {
-      return BusinessCreditCardLegacy.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<BusinessCreditCardLegacy> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<BusinessCreditCardLegacy> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<BusinessCreditCardLegacy>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<BusinessCreditCardLegacy>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<BusinessCreditCardLegacy>>() {
-           public APINodeList<BusinessCreditCardLegacy> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetCreditCards.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetCreditCards(String nodeId, APIContext context) {
-      super(context, nodeId, "/creditcards", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetCreditCards setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetCreditCards setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetCreditCards requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetCreditCards requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetCreditCards requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetCreditCards requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetCreditCards requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetCreditCards requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetCreditCards requestAddressField () {
-      return this.requestAddressField(true);
-    }
-    public APIRequestGetCreditCards requestAddressField (boolean value) {
-      this.requestField("address", value);
-      return this;
-    }
-    public APIRequestGetCreditCards requestBusinessIdField () {
-      return this.requestBusinessIdField(true);
-    }
-    public APIRequestGetCreditCards requestBusinessIdField (boolean value) {
-      this.requestField("business_id", value);
-      return this;
-    }
-    public APIRequestGetCreditCards requestCreditCardSuffixField () {
-      return this.requestCreditCardSuffixField(true);
-    }
-    public APIRequestGetCreditCards requestCreditCardSuffixField (boolean value) {
-      this.requestField("credit_card_suffix", value);
-      return this;
-    }
-    public APIRequestGetCreditCards requestCreditCardTypeField () {
-      return this.requestCreditCardTypeField(true);
-    }
-    public APIRequestGetCreditCards requestCreditCardTypeField (boolean value) {
-      this.requestField("credit_card_type", value);
-      return this;
-    }
-    public APIRequestGetCreditCards requestExpirationMonthField () {
-      return this.requestExpirationMonthField(true);
-    }
-    public APIRequestGetCreditCards requestExpirationMonthField (boolean value) {
-      this.requestField("expiration_month", value);
-      return this;
-    }
-    public APIRequestGetCreditCards requestExpirationYearField () {
-      return this.requestExpirationYearField(true);
-    }
-    public APIRequestGetCreditCards requestExpirationYearField (boolean value) {
-      this.requestField("expiration_year", value);
-      return this;
-    }
-    public APIRequestGetCreditCards requestFirstNameField () {
-      return this.requestFirstNameField(true);
-    }
-    public APIRequestGetCreditCards requestFirstNameField (boolean value) {
-      this.requestField("first_name", value);
-      return this;
-    }
-    public APIRequestGetCreditCards requestFraudStatusField () {
-      return this.requestFraudStatusField(true);
-    }
-    public APIRequestGetCreditCards requestFraudStatusField (boolean value) {
-      this.requestField("fraud_status", value);
-      return this;
-    }
-    public APIRequestGetCreditCards requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetCreditCards requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetCreditCards requestLastNameField () {
-      return this.requestLastNameField(true);
-    }
-    public APIRequestGetCreditCards requestLastNameField (boolean value) {
-      this.requestField("last_name", value);
-      return this;
-    }
-    public APIRequestGetCreditCards requestMiddleNameField () {
-      return this.requestMiddleNameField(true);
-    }
-    public APIRequestGetCreditCards requestMiddleNameField (boolean value) {
-      this.requestField("middle_name", value);
       return this;
     }
   }
@@ -15643,7 +15633,6 @@ public class Business extends APINode {
       "capabilities",
       "created_time",
       "currency",
-      "direct_deals_tos_accepted",
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
@@ -15912,13 +15901,6 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedAdAccounts requestCurrencyField (boolean value) {
       this.requestField("currency", value);
-      return this;
-    }
-    public APIRequestGetOwnedAdAccounts requestDirectDealsTosAcceptedField () {
-      return this.requestDirectDealsTosAcceptedField(true);
-    }
-    public APIRequestGetOwnedAdAccounts requestDirectDealsTosAcceptedField (boolean value) {
-      this.requestField("direct_deals_tos_accepted", value);
       return this;
     }
     public APIRequestGetOwnedAdAccounts requestDisableReasonField () {
@@ -17685,7 +17667,6 @@ public class Business extends APINode {
     }
     public static final String[] PARAMS = {
       "name",
-      "page_permitted_roles",
       "page_permitted_tasks",
       "sales_rep_email",
       "shared_page_id",
@@ -17754,15 +17735,6 @@ public class Business extends APINode {
 
     public APIRequestCreateOwnedBusiness setName (String name) {
       this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateOwnedBusiness setPagePermittedRoles (List<Business.EnumPagePermittedRoles> pagePermittedRoles) {
-      this.setParam("page_permitted_roles", pagePermittedRoles);
-      return this;
-    }
-    public APIRequestCreateOwnedBusiness setPagePermittedRoles (String pagePermittedRoles) {
-      this.setParam("page_permitted_roles", pagePermittedRoles);
       return this;
     }
 
@@ -26304,31 +26276,6 @@ public class Business extends APINode {
       private String value;
 
       private EnumSurveyBusinessType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumPagePermittedRoles {
-      @SerializedName("ADVERTISER")
-      VALUE_ADVERTISER("ADVERTISER"),
-      @SerializedName("CONTENT_CREATOR")
-      VALUE_CONTENT_CREATOR("CONTENT_CREATOR"),
-      @SerializedName("INSIGHTS_ANALYST")
-      VALUE_INSIGHTS_ANALYST("INSIGHTS_ANALYST"),
-      @SerializedName("MANAGER")
-      VALUE_MANAGER("MANAGER"),
-      @SerializedName("MODERATOR")
-      VALUE_MODERATOR("MODERATOR"),
-      NULL(null);
-
-      private String value;
-
-      private EnumPagePermittedRoles(String value) {
         this.value = value;
       }
 

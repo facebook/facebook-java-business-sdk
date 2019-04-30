@@ -1654,6 +1654,7 @@ public class Campaign extends APINode {
       "lifetime_spend_cap",
       "name",
       "optimization_goal",
+      "optimization_sub_event",
       "pacing_type",
       "promoted_object",
       "recommendations",
@@ -2067,6 +2068,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAdSets requestOptimizationGoalField (boolean value) {
       this.requestField("optimization_goal", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestOptimizationSubEventField () {
+      return this.requestOptimizationSubEventField(true);
+    }
+    public APIRequestGetAdSets requestOptimizationSubEventField (boolean value) {
+      this.requestField("optimization_sub_event", value);
       return this;
     }
     public APIRequestGetAdSets requestPacingTypeField () {

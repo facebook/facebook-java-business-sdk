@@ -352,7 +352,6 @@ public class AdStudyCell extends APINode {
       "capabilities",
       "created_time",
       "currency",
-      "direct_deals_tos_accepted",
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
@@ -621,13 +620,6 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetAdAccounts requestCurrencyField (boolean value) {
       this.requestField("currency", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestDirectDealsTosAcceptedField () {
-      return this.requestDirectDealsTosAcceptedField(true);
-    }
-    public APIRequestGetAdAccounts requestDirectDealsTosAcceptedField (boolean value) {
-      this.requestField("direct_deals_tos_accepted", value);
       return this;
     }
     public APIRequestGetAdAccounts requestDisableReasonField () {
@@ -953,6 +945,7 @@ public class AdStudyCell extends APINode {
       "lifetime_spend_cap",
       "name",
       "optimization_goal",
+      "optimization_sub_event",
       "pacing_type",
       "promoted_object",
       "recommendations",
@@ -1316,6 +1309,13 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetAdSets requestOptimizationGoalField (boolean value) {
       this.requestField("optimization_goal", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestOptimizationSubEventField () {
+      return this.requestOptimizationSubEventField(true);
+    }
+    public APIRequestGetAdSets requestOptimizationSubEventField (boolean value) {
+      this.requestField("optimization_sub_event", value);
       return this;
     }
     public APIRequestGetAdSets requestPacingTypeField () {

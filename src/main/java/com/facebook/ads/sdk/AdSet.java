@@ -129,6 +129,8 @@ public class AdSet extends APINode {
   private String mName = null;
   @SerializedName("optimization_goal")
   private EnumOptimizationGoal mOptimizationGoal = null;
+  @SerializedName("optimization_sub_event")
+  private String mOptimizationSubEvent = null;
   @SerializedName("pacing_type")
   private List<String> mPacingType = null;
   @SerializedName("promoted_object")
@@ -820,6 +822,15 @@ public class AdSet extends APINode {
 
   public AdSet setFieldOptimizationGoal(EnumOptimizationGoal value) {
     this.mOptimizationGoal = value;
+    return this;
+  }
+
+  public String getFieldOptimizationSubEvent() {
+    return mOptimizationSubEvent;
+  }
+
+  public AdSet setFieldOptimizationSubEvent(String value) {
+    this.mOptimizationSubEvent = value;
     return this;
   }
 
@@ -3095,6 +3106,7 @@ public class AdSet extends APINode {
       "lifetime_spend_cap",
       "name",
       "optimization_goal",
+      "optimization_sub_event",
       "pacing_type",
       "promoted_object",
       "recommendations",
@@ -3494,6 +3506,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestOptimizationGoalField (boolean value) {
       this.requestField("optimization_goal", value);
+      return this;
+    }
+    public APIRequestGetCopies requestOptimizationSubEventField () {
+      return this.requestOptimizationSubEventField(true);
+    }
+    public APIRequestGetCopies requestOptimizationSubEventField (boolean value) {
+      this.requestField("optimization_sub_event", value);
       return this;
     }
     public APIRequestGetCopies requestPacingTypeField () {
@@ -4799,6 +4818,7 @@ public class AdSet extends APINode {
       "lifetime_spend_cap",
       "name",
       "optimization_goal",
+      "optimization_sub_event",
       "pacing_type",
       "promoted_object",
       "recommendations",
@@ -5200,6 +5220,13 @@ public class AdSet extends APINode {
       this.requestField("optimization_goal", value);
       return this;
     }
+    public APIRequestGet requestOptimizationSubEventField () {
+      return this.requestOptimizationSubEventField(true);
+    }
+    public APIRequestGet requestOptimizationSubEventField (boolean value) {
+      this.requestField("optimization_sub_event", value);
+      return this;
+    }
     public APIRequestGet requestPacingTypeField () {
       return this.requestPacingTypeField(true);
     }
@@ -5342,6 +5369,7 @@ public class AdSet extends APINode {
       "lifetime_spend_cap",
       "name",
       "optimization_goal",
+      "optimization_sub_event",
       "pacing_type",
       "promoted_object",
       "rb_prediction_id",
@@ -5636,6 +5664,15 @@ public class AdSet extends APINode {
     }
     public APIRequestUpdate setOptimizationGoal (String optimizationGoal) {
       this.setParam("optimization_goal", optimizationGoal);
+      return this;
+    }
+
+    public APIRequestUpdate setOptimizationSubEvent (AdSet.EnumOptimizationSubEvent optimizationSubEvent) {
+      this.setParam("optimization_sub_event", optimizationSubEvent);
+      return this;
+    }
+    public APIRequestUpdate setOptimizationSubEvent (String optimizationSubEvent) {
+      this.setParam("optimization_sub_event", optimizationSubEvent);
       return this;
     }
 
@@ -6087,6 +6124,41 @@ public class AdSet extends APINode {
       }
   }
 
+  public static enum EnumOptimizationSubEvent {
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
+      @SerializedName("TRAVEL_INTENT")
+      VALUE_TRAVEL_INTENT("TRAVEL_INTENT"),
+      @SerializedName("TRAVEL_INTENT_BUCKET_01")
+      VALUE_TRAVEL_INTENT_BUCKET_01("TRAVEL_INTENT_BUCKET_01"),
+      @SerializedName("TRAVEL_INTENT_BUCKET_02")
+      VALUE_TRAVEL_INTENT_BUCKET_02("TRAVEL_INTENT_BUCKET_02"),
+      @SerializedName("TRAVEL_INTENT_BUCKET_03")
+      VALUE_TRAVEL_INTENT_BUCKET_03("TRAVEL_INTENT_BUCKET_03"),
+      @SerializedName("TRAVEL_INTENT_BUCKET_04")
+      VALUE_TRAVEL_INTENT_BUCKET_04("TRAVEL_INTENT_BUCKET_04"),
+      @SerializedName("TRAVEL_INTENT_BUCKET_05")
+      VALUE_TRAVEL_INTENT_BUCKET_05("TRAVEL_INTENT_BUCKET_05"),
+      @SerializedName("TRAVEL_INTENT_NO_DESTINATION_INTENT")
+      VALUE_TRAVEL_INTENT_NO_DESTINATION_INTENT("TRAVEL_INTENT_NO_DESTINATION_INTENT"),
+      @SerializedName("TRIP_CONSIDERATION")
+      VALUE_TRIP_CONSIDERATION("TRIP_CONSIDERATION"),
+      @SerializedName("VIDEO_SOUND_ON")
+      VALUE_VIDEO_SOUND_ON("VIDEO_SOUND_ON"),
+      NULL(null);
+
+      private String value;
+
+      private EnumOptimizationSubEvent(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumOperator {
       @SerializedName("ALL")
       VALUE_ALL("ALL"),
@@ -6179,6 +6251,7 @@ public class AdSet extends APINode {
     this.mLifetimeSpendCap = instance.mLifetimeSpendCap;
     this.mName = instance.mName;
     this.mOptimizationGoal = instance.mOptimizationGoal;
+    this.mOptimizationSubEvent = instance.mOptimizationSubEvent;
     this.mPacingType = instance.mPacingType;
     this.mPromotedObject = instance.mPromotedObject;
     this.mRecommendations = instance.mRecommendations;

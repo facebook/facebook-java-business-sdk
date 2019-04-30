@@ -25,7 +25,7 @@
 import java.io.File;
 import java.util.Arrays;
 
-public class AdAccountAdSetsPostAdSetCreateCpa {
+public class AdAccountAdSetsPostCreateAdSet {
   public static void main (String args[]) throws APIException {
 
     String access_token = "<ACCESS_TOKEN>";
@@ -35,25 +35,56 @@ public class AdAccountAdSetsPostAdSetCreateCpa {
     APIContext context = new APIContext(access_token).enableDebug(true);
 
     new AdAccount(id, context).createAdSet()
-      .setName("A CPA Ad Set")
+      .setName("My First AdSet")
+      .setLifetimeBudget(20000L)
+      .setStartTime("2019-05-06T08:44:23-0700")
+      .setEndTime("2019-05-13T08:44:23-0700")
       .setCampaignId("<adCampaignLinkClicksID>")
-      .setDailyBudget(5000L)
-      .setStartTime("2019-05-06T08:46:40-0700")
-      .setEndTime("2019-05-13T08:46:40-0700")
+      .setBidAmount(500L)
       .setBillingEvent(AdSet.EnumBillingEvent.VALUE_IMPRESSIONS)
-      .setOptimizationGoal(AdSet.EnumOptimizationGoal.VALUE_REACH)
-      .setBidAmount(1000L)
-      .setPromotedObject("{\"page_id\":\"<pageID>\"}")
+      .setOptimizationGoal(AdSet.EnumOptimizationGoal.VALUE_POST_ENGAGEMENT)
       .setTargeting(
           new Targeting()
+            .setFieldAgeMax(24L)
+            .setFieldAgeMin(20L)
+            .setFieldBehaviors(Arrays.asList(
+              new IDName()
+                .setFieldId(6002714895372L)
+                .setFieldName("All travelers")
+            ))
+            .setFieldGenders(Arrays.asList(1L))
             .setFieldGeoLocations(
               new TargetingGeoLocation()
+                .setFieldCities(Arrays.asList(
+                  new TargetingGeoLocationCity()
+                    .setFieldDistanceUnit("mile")
+                    .setFieldKey("777934")
+                    .setFieldRadius(10L)
+                ))
                 .setFieldCountries(Arrays.asList("US"))
+                .setFieldRegions(Arrays.asList(
+                  new TargetingGeoLocationRegion()
+                    .setFieldKey("4081")
+                ))
             )
+            .setFieldHomeOwnership(Arrays.asList(
+              new IDName()
+                .setFieldId(6006371327132L)
+                .setFieldName("Renters")
+            ))
+            .setFieldInterests(Arrays.asList(
+              new IDName()
+                .setFieldId("<adsInterestID>")
+                .setFieldName("<adsInterestName>")
+            ))
+            .setFieldLifeEvents(Arrays.asList(
+              new IDName()
+                .setFieldId(6002714398172L)
+                .setFieldName("Newlywed (1 year)")
+            ))
+            .setFieldPublisherPlatforms(Arrays.asList("facebook", "audience_network"))
         )
-      .setParam("user_os", "iOS")
-      .setParam("publisher_platforms", "facebook")
-      .setParam("device_platforms", "mobile")
+      .setStatus(AdSet.EnumStatus.VALUE_PAUSED)
       .execute();
 
   }

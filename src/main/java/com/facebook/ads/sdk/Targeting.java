@@ -71,8 +71,6 @@ public class Targeting extends APINode {
   private List<IDName> mBehaviors = null;
   @SerializedName("brand_safety_content_filter_levels")
   private List<String> mBrandSafetyContentFilterLevels = null;
-  @SerializedName("brand_safety_content_severity_levels")
-  private List<String> mBrandSafetyContentSeverityLevels = null;
   @SerializedName("catalog_based_targeting")
   private CatalogBasedTargeting mCatalogBasedTargeting = null;
   @SerializedName("cities")
@@ -460,15 +458,6 @@ public class Targeting extends APINode {
 
   public Targeting setFieldBrandSafetyContentFilterLevels(List<String> value) {
     this.mBrandSafetyContentFilterLevels = value;
-    return this;
-  }
-
-  public List<String> getFieldBrandSafetyContentSeverityLevels() {
-    return mBrandSafetyContentSeverityLevels;
-  }
-
-  public Targeting setFieldBrandSafetyContentSeverityLevels(List<String> value) {
-    this.mBrandSafetyContentSeverityLevels = value;
     return this;
   }
 
@@ -1458,7 +1447,6 @@ public class Targeting extends APINode {
     this.mAudienceNetworkPositions = instance.mAudienceNetworkPositions;
     this.mBehaviors = instance.mBehaviors;
     this.mBrandSafetyContentFilterLevels = instance.mBrandSafetyContentFilterLevels;
-    this.mBrandSafetyContentSeverityLevels = instance.mBrandSafetyContentSeverityLevels;
     this.mCatalogBasedTargeting = instance.mCatalogBasedTargeting;
     this.mCities = instance.mCities;
     this.mCollegeYears = instance.mCollegeYears;
