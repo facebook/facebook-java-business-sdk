@@ -294,14 +294,14 @@ This also works if you believe the type of the param is not correct in SDK.
 
 In this case, please help us make improvement by filing issues.
 
-####Missing Fields in Class Definition
+#### Missing Fields in Class Definition
 If you believe that certain fields are returned from server, but they are missing in class definition, then you can still access those fields by fetching it from raw response:
 
 	campaign.getRawResponseAsJsonObject().get("field").getAsString();
 
 This situation can occasionally happen if new fields are added to server response while SDK is not up-to-date. We'll update the SDK periodically to include new fields.
 
-####Ad-hoc APIRequest
+#### Ad-hoc APIRequest
 Most of Marketing API can be found in SDK classes. If you don't find the one you want to access, it is possible to construct an Ad-hoc APIRequest:
 
 ```java
@@ -318,7 +318,7 @@ When constructing the APIRequest, you need to provide
 * The parser for the expected response type. You can use null if it is not in the SDK, which will return APINodeList<APINode> when executed.
 
 
-####FailedRequestException Troubleshooting
+#### FailedRequestException Troubleshooting
 There are many possible causes for a failed request:
 
 * Incorrect parameters are provided in the API request (check <a href="https://developers.facebook.com/docs/graph-api" target="_blank">Graph API Docs</a>)
