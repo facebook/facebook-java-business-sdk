@@ -1171,7 +1171,6 @@ public class AdStudy extends APINode {
       "age_range",
       "birthday",
       "can_review_measurement_request",
-      "context",
       "cover",
       "currency",
       "devices",
@@ -1356,13 +1355,6 @@ public class AdStudy extends APINode {
     }
     public APIRequestGetViewers requestCanReviewMeasurementRequestField (boolean value) {
       this.requestField("can_review_measurement_request", value);
-      return this;
-    }
-    public APIRequestGetViewers requestContextField () {
-      return this.requestContextField(true);
-    }
-    public APIRequestGetViewers requestContextField (boolean value) {
-      this.requestField("context", value);
       return this;
     }
     public APIRequestGetViewers requestCoverField () {

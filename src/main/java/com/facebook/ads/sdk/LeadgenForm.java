@@ -59,8 +59,6 @@ public class LeadgenForm extends APINode {
   private Boolean mAllowOrganicLead = null;
   @SerializedName("block_display_for_non_targeted_viewer")
   private Boolean mBlockDisplayForNonTargetedViewer = null;
-  @SerializedName("context_card")
-  private LeadGenContextCard mContextCard = null;
   @SerializedName("created_time")
   private String mCreatedTime = null;
   @SerializedName("creator")
@@ -85,8 +83,6 @@ public class LeadgenForm extends APINode {
   private String mLeadgenExportCsvUrl = null;
   @SerializedName("leads_count")
   private Long mLeadsCount = null;
-  @SerializedName("legal_content")
-  private LeadGenLegalContent mLegalContent = null;
   @SerializedName("locale")
   private String mLocale = null;
   @SerializedName("messenger_welcome_message")
@@ -111,8 +107,6 @@ public class LeadgenForm extends APINode {
   private String mStatus = null;
   @SerializedName("tcpa_compliance")
   private Boolean mTcpaCompliance = null;
-  @SerializedName("thank_you_page")
-  private Object mThankYouPage = null;
   @SerializedName("tracking_parameters")
   private Map<String, String> mTrackingParameters = null;
   protected static Gson gson = null;
@@ -328,10 +322,6 @@ public class LeadgenForm extends APINode {
     return new APIRequestGetLeads(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateLead createLead() {
-    return new APIRequestCreateLead(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetTestLeads getTestLeads() {
     return new APIRequestGetTestLeads(this.getPrefixedId().toString(), context);
   }
@@ -359,13 +349,6 @@ public class LeadgenForm extends APINode {
 
   public Boolean getFieldBlockDisplayForNonTargetedViewer() {
     return mBlockDisplayForNonTargetedViewer;
-  }
-
-  public LeadGenContextCard getFieldContextCard() {
-    if (mContextCard != null) {
-      mContextCard.context = getContext();
-    }
-    return mContextCard;
   }
 
   public String getFieldCreatedTime() {
@@ -419,13 +402,6 @@ public class LeadgenForm extends APINode {
     return mLeadsCount;
   }
 
-  public LeadGenLegalContent getFieldLegalContent() {
-    if (mLegalContent != null) {
-      mLegalContent.context = getContext();
-    }
-    return mLegalContent;
-  }
-
   public String getFieldLocale() {
     return mLocale;
   }
@@ -475,10 +451,6 @@ public class LeadgenForm extends APINode {
 
   public Boolean getFieldTcpaCompliance() {
     return mTcpaCompliance;
-  }
-
-  public Object getFieldThankYouPage() {
-    return mThankYouPage;
   }
 
   public Map<String, String> getFieldTrackingParameters() {
@@ -717,128 +689,6 @@ public class LeadgenForm extends APINode {
       this.requestField("retailer_item_id", value);
       return this;
     }
-  }
-
-  public static class APIRequestCreateLead extends APIRequest<Lead> {
-
-    Lead lastResponse = null;
-    @Override
-    public Lead getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "end_time",
-      "session_id",
-      "start_time",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Lead parseResponse(String response, String header) throws APIException {
-      return Lead.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Lead execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Lead execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Lead> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Lead> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Lead>() {
-           public Lead apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateLead.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateLead(String nodeId, APIContext context) {
-      super(context, nodeId, "/leads", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateLead setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateLead setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateLead setEndTime (String endTime) {
-      this.setParam("end_time", endTime);
-      return this;
-    }
-
-    public APIRequestCreateLead setSessionId (String sessionId) {
-      this.setParam("session_id", sessionId);
-      return this;
-    }
-
-    public APIRequestCreateLead setStartTime (String startTime) {
-      this.setParam("start_time", startTime);
-      return this;
-    }
-
-    public APIRequestCreateLead requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateLead requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateLead requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateLead requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateLead requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateLead requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestGetTestLeads extends APIRequest<Lead> {
@@ -1314,7 +1164,6 @@ public class LeadgenForm extends APINode {
     public static final String[] FIELDS = {
       "allow_organic_lead",
       "block_display_for_non_targeted_viewer",
-      "context_card",
       "created_time",
       "creator",
       "creator_id",
@@ -1327,7 +1176,6 @@ public class LeadgenForm extends APINode {
       "is_optimized_for_quality",
       "leadgen_export_csv_url",
       "leads_count",
-      "legal_content",
       "locale",
       "messenger_welcome_message",
       "name",
@@ -1340,7 +1188,6 @@ public class LeadgenForm extends APINode {
       "questions",
       "status",
       "tcpa_compliance",
-      "thank_you_page",
       "tracking_parameters",
     };
 
@@ -1447,13 +1294,6 @@ public class LeadgenForm extends APINode {
       this.requestField("block_display_for_non_targeted_viewer", value);
       return this;
     }
-    public APIRequestGet requestContextCardField () {
-      return this.requestContextCardField(true);
-    }
-    public APIRequestGet requestContextCardField (boolean value) {
-      this.requestField("context_card", value);
-      return this;
-    }
     public APIRequestGet requestCreatedTimeField () {
       return this.requestCreatedTimeField(true);
     }
@@ -1538,13 +1378,6 @@ public class LeadgenForm extends APINode {
       this.requestField("leads_count", value);
       return this;
     }
-    public APIRequestGet requestLegalContentField () {
-      return this.requestLegalContentField(true);
-    }
-    public APIRequestGet requestLegalContentField (boolean value) {
-      this.requestField("legal_content", value);
-      return this;
-    }
     public APIRequestGet requestLocaleField () {
       return this.requestLocaleField(true);
     }
@@ -1627,13 +1460,6 @@ public class LeadgenForm extends APINode {
     }
     public APIRequestGet requestTcpaComplianceField (boolean value) {
       this.requestField("tcpa_compliance", value);
-      return this;
-    }
-    public APIRequestGet requestThankYouPageField () {
-      return this.requestThankYouPageField(true);
-    }
-    public APIRequestGet requestThankYouPageField (boolean value) {
-      this.requestField("thank_you_page", value);
       return this;
     }
     public APIRequestGet requestTrackingParametersField () {
@@ -1876,7 +1702,6 @@ public class LeadgenForm extends APINode {
   public LeadgenForm copyFrom(LeadgenForm instance) {
     this.mAllowOrganicLead = instance.mAllowOrganicLead;
     this.mBlockDisplayForNonTargetedViewer = instance.mBlockDisplayForNonTargetedViewer;
-    this.mContextCard = instance.mContextCard;
     this.mCreatedTime = instance.mCreatedTime;
     this.mCreator = instance.mCreator;
     this.mCreatorId = instance.mCreatorId;
@@ -1889,7 +1714,6 @@ public class LeadgenForm extends APINode {
     this.mIsOptimizedForQuality = instance.mIsOptimizedForQuality;
     this.mLeadgenExportCsvUrl = instance.mLeadgenExportCsvUrl;
     this.mLeadsCount = instance.mLeadsCount;
-    this.mLegalContent = instance.mLegalContent;
     this.mLocale = instance.mLocale;
     this.mMessengerWelcomeMessage = instance.mMessengerWelcomeMessage;
     this.mName = instance.mName;
@@ -1902,7 +1726,6 @@ public class LeadgenForm extends APINode {
     this.mQuestions = instance.mQuestions;
     this.mStatus = instance.mStatus;
     this.mTcpaCompliance = instance.mTcpaCompliance;
-    this.mThankYouPage = instance.mThankYouPage;
     this.mTrackingParameters = instance.mTrackingParameters;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

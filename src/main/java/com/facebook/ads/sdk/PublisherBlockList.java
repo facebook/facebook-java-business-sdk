@@ -284,12 +284,12 @@ public class PublisherBlockList extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGetPageDAppPublishers getPageDAppPublishers() {
-    return new APIRequestGetPageDAppPublishers(this.getPrefixedId().toString(), context);
+  public APIRequestGetPagedAppPublishers getPagedAppPublishers() {
+    return new APIRequestGetPagedAppPublishers(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetPageDWebPublishers getPageDWebPublishers() {
-    return new APIRequestGetPageDWebPublishers(this.getPrefixedId().toString(), context);
+  public APIRequestGetPagedWebPublishers getPagedWebPublishers() {
+    return new APIRequestGetPagedWebPublishers(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestDelete delete() {
@@ -347,7 +347,7 @@ public class PublisherBlockList extends APINode {
 
 
 
-  public static class APIRequestGetPageDAppPublishers extends APIRequest<APINode> {
+  public static class APIRequestGetPagedAppPublishers extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
     @Override
@@ -388,7 +388,7 @@ public class PublisherBlockList extends APINode {
         new Function<ResponseWrapper, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetPageDAppPublishers.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestGetPagedAppPublishers.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -397,33 +397,33 @@ public class PublisherBlockList extends APINode {
       );
     };
 
-    public APIRequestGetPageDAppPublishers(String nodeId, APIContext context) {
+    public APIRequestGetPagedAppPublishers(String nodeId, APIContext context) {
       super(context, nodeId, "/paged_app_publishers", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGetPageDAppPublishers setParam(String param, Object value) {
+    public APIRequestGetPagedAppPublishers setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGetPageDAppPublishers setParams(Map<String, Object> params) {
+    public APIRequestGetPagedAppPublishers setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGetPageDAppPublishers setDraftId (String draftId) {
+    public APIRequestGetPagedAppPublishers setDraftId (String draftId) {
       this.setParam("draft_id", draftId);
       return this;
     }
 
-    public APIRequestGetPageDAppPublishers requestAllFields () {
+    public APIRequestGetPagedAppPublishers requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGetPageDAppPublishers requestAllFields (boolean value) {
+    public APIRequestGetPagedAppPublishers requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -431,12 +431,12 @@ public class PublisherBlockList extends APINode {
     }
 
     @Override
-    public APIRequestGetPageDAppPublishers requestFields (List<String> fields) {
+    public APIRequestGetPagedAppPublishers requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGetPageDAppPublishers requestFields (List<String> fields, boolean value) {
+    public APIRequestGetPagedAppPublishers requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -444,20 +444,20 @@ public class PublisherBlockList extends APINode {
     }
 
     @Override
-    public APIRequestGetPageDAppPublishers requestField (String field) {
+    public APIRequestGetPagedAppPublishers requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGetPageDAppPublishers requestField (String field, boolean value) {
+    public APIRequestGetPagedAppPublishers requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
   }
 
-  public static class APIRequestGetPageDWebPublishers extends APIRequest<APINode> {
+  public static class APIRequestGetPagedWebPublishers extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
     @Override
@@ -498,7 +498,7 @@ public class PublisherBlockList extends APINode {
         new Function<ResponseWrapper, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetPageDWebPublishers.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestGetPagedWebPublishers.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -507,33 +507,33 @@ public class PublisherBlockList extends APINode {
       );
     };
 
-    public APIRequestGetPageDWebPublishers(String nodeId, APIContext context) {
+    public APIRequestGetPagedWebPublishers(String nodeId, APIContext context) {
       super(context, nodeId, "/paged_web_publishers", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGetPageDWebPublishers setParam(String param, Object value) {
+    public APIRequestGetPagedWebPublishers setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGetPageDWebPublishers setParams(Map<String, Object> params) {
+    public APIRequestGetPagedWebPublishers setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGetPageDWebPublishers setDraftId (String draftId) {
+    public APIRequestGetPagedWebPublishers setDraftId (String draftId) {
       this.setParam("draft_id", draftId);
       return this;
     }
 
-    public APIRequestGetPageDWebPublishers requestAllFields () {
+    public APIRequestGetPagedWebPublishers requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGetPageDWebPublishers requestAllFields (boolean value) {
+    public APIRequestGetPagedWebPublishers requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -541,12 +541,12 @@ public class PublisherBlockList extends APINode {
     }
 
     @Override
-    public APIRequestGetPageDWebPublishers requestFields (List<String> fields) {
+    public APIRequestGetPagedWebPublishers requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGetPageDWebPublishers requestFields (List<String> fields, boolean value) {
+    public APIRequestGetPagedWebPublishers requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -554,13 +554,13 @@ public class PublisherBlockList extends APINode {
     }
 
     @Override
-    public APIRequestGetPageDWebPublishers requestField (String field) {
+    public APIRequestGetPagedWebPublishers requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGetPageDWebPublishers requestField (String field, boolean value) {
+    public APIRequestGetPagedWebPublishers requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

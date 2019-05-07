@@ -294,20 +294,12 @@ public class BusinessUser extends APINode {
     return new APIRequestGetAssignedAdAccounts(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetAssignedMonetizationProperties getAssignedMonetizationProperties() {
-    return new APIRequestGetAssignedMonetizationProperties(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetAssignedPages getAssignedPages() {
     return new APIRequestGetAssignedPages(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetAssignedProductCatalogs getAssignedProductCatalogs() {
     return new APIRequestGetAssignedProductCatalogs(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetBusinessSettingLogs getBusinessSettingLogs() {
-    return new APIRequestGetBusinessSettingLogs(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestDelete delete() {
@@ -956,118 +948,6 @@ public class BusinessUser extends APINode {
     }
   }
 
-  public static class APIRequestGetAssignedMonetizationProperties extends APIRequest<AdMonetizationProperty> {
-
-    APINodeList<AdMonetizationProperty> lastResponse = null;
-    @Override
-    public APINodeList<AdMonetizationProperty> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "id",
-    };
-
-    @Override
-    public APINodeList<AdMonetizationProperty> parseResponse(String response, String header) throws APIException {
-      return AdMonetizationProperty.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<AdMonetizationProperty> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<AdMonetizationProperty> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<AdMonetizationProperty>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<AdMonetizationProperty>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<AdMonetizationProperty>>() {
-           public APINodeList<AdMonetizationProperty> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetAssignedMonetizationProperties.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetAssignedMonetizationProperties(String nodeId, APIContext context) {
-      super(context, nodeId, "/assigned_monetization_properties", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetAssignedMonetizationProperties setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAssignedMonetizationProperties setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetAssignedMonetizationProperties requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetAssignedMonetizationProperties requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAssignedMonetizationProperties requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetAssignedMonetizationProperties requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAssignedMonetizationProperties requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAssignedMonetizationProperties requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetAssignedMonetizationProperties requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetAssignedMonetizationProperties requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-  }
-
   public static class APIRequestGetAssignedPages extends APIRequest<Page> {
 
     APINodeList<Page> lastResponse = null;
@@ -1104,7 +984,6 @@ public class BusinessUser extends APINode {
       "company_overview",
       "connected_instagram_account",
       "contact_address",
-      "context",
       "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
@@ -1486,13 +1365,6 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGetAssignedPages requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
-      return this;
-    }
-    public APIRequestGetAssignedPages requestContextField () {
-      return this.requestContextField(true);
-    }
-    public APIRequestGetAssignedPages requestContextField (boolean value) {
-      this.requestField("context", value);
       return this;
     }
     public APIRequestGetAssignedPages requestCopyrightAttributionInsightsField () {
@@ -2333,7 +2205,6 @@ public class BusinessUser extends APINode {
       "default_image_url",
       "fallback_image_url",
       "feed_count",
-      "flight_catalog_settings",
       "id",
       "name",
       "product_count",
@@ -2472,13 +2343,6 @@ public class BusinessUser extends APINode {
       this.requestField("feed_count", value);
       return this;
     }
-    public APIRequestGetAssignedProductCatalogs requestFlightCatalogSettingsField () {
-      return this.requestFlightCatalogSettingsField(true);
-    }
-    public APIRequestGetAssignedProductCatalogs requestFlightCatalogSettingsField (boolean value) {
-      this.requestField("flight_catalog_settings", value);
-      return this;
-    }
     public APIRequestGetAssignedProductCatalogs requestIdField () {
       return this.requestIdField(true);
     }
@@ -2512,150 +2376,6 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGetAssignedProductCatalogs requestVerticalField (boolean value) {
       this.requestField("vertical", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestGetBusinessSettingLogs extends APIRequest<BusinessSettingLogsData> {
-
-    APINodeList<BusinessSettingLogsData> lastResponse = null;
-    @Override
-    public APINodeList<BusinessSettingLogsData> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "actor",
-      "event_object",
-      "event_time",
-      "event_type",
-      "extra_data",
-    };
-
-    @Override
-    public APINodeList<BusinessSettingLogsData> parseResponse(String response, String header) throws APIException {
-      return BusinessSettingLogsData.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<BusinessSettingLogsData> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<BusinessSettingLogsData> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<BusinessSettingLogsData>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<BusinessSettingLogsData>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<BusinessSettingLogsData>>() {
-           public APINodeList<BusinessSettingLogsData> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetBusinessSettingLogs.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetBusinessSettingLogs(String nodeId, APIContext context) {
-      super(context, nodeId, "/businesssettinglogs", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetBusinessSettingLogs setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBusinessSettingLogs setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetBusinessSettingLogs requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetBusinessSettingLogs requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBusinessSettingLogs requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetBusinessSettingLogs requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBusinessSettingLogs requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBusinessSettingLogs requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetBusinessSettingLogs requestActorField () {
-      return this.requestActorField(true);
-    }
-    public APIRequestGetBusinessSettingLogs requestActorField (boolean value) {
-      this.requestField("actor", value);
-      return this;
-    }
-    public APIRequestGetBusinessSettingLogs requestEventObjectField () {
-      return this.requestEventObjectField(true);
-    }
-    public APIRequestGetBusinessSettingLogs requestEventObjectField (boolean value) {
-      this.requestField("event_object", value);
-      return this;
-    }
-    public APIRequestGetBusinessSettingLogs requestEventTimeField () {
-      return this.requestEventTimeField(true);
-    }
-    public APIRequestGetBusinessSettingLogs requestEventTimeField (boolean value) {
-      this.requestField("event_time", value);
-      return this;
-    }
-    public APIRequestGetBusinessSettingLogs requestEventTypeField () {
-      return this.requestEventTypeField(true);
-    }
-    public APIRequestGetBusinessSettingLogs requestEventTypeField (boolean value) {
-      this.requestField("event_type", value);
-      return this;
-    }
-    public APIRequestGetBusinessSettingLogs requestExtraDataField () {
-      return this.requestExtraDataField(true);
-    }
-    public APIRequestGetBusinessSettingLogs requestExtraDataField (boolean value) {
-      this.requestField("extra_data", value);
       return this;
     }
   }

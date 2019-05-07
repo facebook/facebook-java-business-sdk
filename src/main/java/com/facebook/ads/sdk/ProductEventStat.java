@@ -385,6 +385,8 @@ public class ProductEventStat extends APINode {
       VALUE_PURCHASE("Purchase"),
       @SerializedName("Search")
       VALUE_SEARCH("Search"),
+      @SerializedName("Subscribe")
+      VALUE_SUBSCRIBE("Subscribe"),
       @SerializedName("ViewContent")
       VALUE_VIEWCONTENT("ViewContent"),
       NULL(null);

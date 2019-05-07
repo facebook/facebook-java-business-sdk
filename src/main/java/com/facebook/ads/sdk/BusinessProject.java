@@ -1316,7 +1316,6 @@ public class BusinessProject extends APINode {
       "company",
       "configured_ios_sso",
       "contact_email",
-      "context",
       "created_time",
       "creator_uid",
       "daily_active_users",
@@ -1689,13 +1688,6 @@ public class BusinessProject extends APINode {
     }
     public APIRequestGetApps requestContactEmailField (boolean value) {
       this.requestField("contact_email", value);
-      return this;
-    }
-    public APIRequestGetApps requestContextField () {
-      return this.requestContextField(true);
-    }
-    public APIRequestGetApps requestContextField (boolean value) {
-      this.requestField("context", value);
       return this;
     }
     public APIRequestGetApps requestCreatedTimeField () {
@@ -2642,7 +2634,6 @@ public class BusinessProject extends APINode {
       "company_overview",
       "connected_instagram_account",
       "contact_address",
-      "context",
       "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
@@ -3024,13 +3015,6 @@ public class BusinessProject extends APINode {
     }
     public APIRequestGetPages requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
-      return this;
-    }
-    public APIRequestGetPages requestContextField () {
-      return this.requestContextField(true);
-    }
-    public APIRequestGetPages requestContextField (boolean value) {
-      this.requestField("context", value);
       return this;
     }
     public APIRequestGetPages requestCopyrightAttributionInsightsField () {
@@ -4095,7 +4079,6 @@ public class BusinessProject extends APINode {
       "default_image_url",
       "fallback_image_url",
       "feed_count",
-      "flight_catalog_settings",
       "id",
       "name",
       "product_count",
@@ -4232,13 +4215,6 @@ public class BusinessProject extends APINode {
     }
     public APIRequestGetProductCatalogs requestFeedCountField (boolean value) {
       this.requestField("feed_count", value);
-      return this;
-    }
-    public APIRequestGetProductCatalogs requestFlightCatalogSettingsField () {
-      return this.requestFlightCatalogSettingsField(true);
-    }
-    public APIRequestGetProductCatalogs requestFlightCatalogSettingsField (boolean value) {
-      this.requestField("flight_catalog_settings", value);
       return this;
     }
     public APIRequestGetProductCatalogs requestIdField () {

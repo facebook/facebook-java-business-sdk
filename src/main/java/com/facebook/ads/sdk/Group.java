@@ -322,20 +322,12 @@ public class Group extends APINode {
     return new APIRequestGetDocs(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateDoc createDoc() {
-    return new APIRequestCreateDoc(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetEvents getEvents() {
     return new APIRequestGetEvents(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateFeed createFeed() {
     return new APIRequestCreateFeed(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateGroupThread createGroupThread() {
-    return new APIRequestCreateGroupThread(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetGroups getGroups() {
@@ -360,14 +352,6 @@ public class Group extends APINode {
 
   public APIRequestCreateMember createMember() {
     return new APIRequestCreateMember(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestDeleteModerators deleteModerators() {
-    return new APIRequestDeleteModerators(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateModerator createModerator() {
-    return new APIRequestCreateModerator(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateOpenGraphActionFeed createOpenGraphActionFeed() {
@@ -1285,122 +1269,6 @@ public class Group extends APINode {
 
     @Override
     public APIRequestGetDocs requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateDoc extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "body",
-      "title",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateDoc.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateDoc(String nodeId, APIContext context) {
-      super(context, nodeId, "/docs", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateDoc setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateDoc setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateDoc setBody (String body) {
-      this.setParam("body", body);
-      return this;
-    }
-
-    public APIRequestCreateDoc setTitle (String title) {
-      this.setParam("title", title);
-      return this;
-    }
-
-    public APIRequestCreateDoc requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateDoc requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateDoc requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateDoc requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateDoc requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateDoc requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -2761,130 +2629,6 @@ public class Group extends APINode {
 
     @Override
     public APIRequestCreateFeed requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateGroupThread extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "joinable",
-      "thread_id",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateGroupThread.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateGroupThread(String nodeId, APIContext context) {
-      super(context, nodeId, "/group_threads", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateGroupThread setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateGroupThread setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateGroupThread setJoinable (Boolean joinable) {
-      this.setParam("joinable", joinable);
-      return this;
-    }
-    public APIRequestCreateGroupThread setJoinable (String joinable) {
-      this.setParam("joinable", joinable);
-      return this;
-    }
-
-    public APIRequestCreateGroupThread setThreadId (Object threadId) {
-      this.setParam("thread_id", threadId);
-      return this;
-    }
-    public APIRequestCreateGroupThread setThreadId (String threadId) {
-      this.setParam("thread_id", threadId);
-      return this;
-    }
-
-    public APIRequestCreateGroupThread requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateGroupThread requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateGroupThread requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateGroupThread requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateGroupThread requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateGroupThread requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -4263,234 +4007,6 @@ public class Group extends APINode {
 
   }
 
-  public static class APIRequestDeleteModerators extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "uid",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestDeleteModerators.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestDeleteModerators(String nodeId, APIContext context) {
-      super(context, nodeId, "/moderators", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDeleteModerators setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteModerators setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDeleteModerators setUid (Long uid) {
-      this.setParam("uid", uid);
-      return this;
-    }
-    public APIRequestDeleteModerators setUid (String uid) {
-      this.setParam("uid", uid);
-      return this;
-    }
-
-    public APIRequestDeleteModerators requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDeleteModerators requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteModerators requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDeleteModerators requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteModerators requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteModerators requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateModerator extends APIRequest<Group> {
-
-    Group lastResponse = null;
-    @Override
-    public Group getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "uid",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Group parseResponse(String response, String header) throws APIException {
-      return Group.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Group execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Group execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Group> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Group> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Group>() {
-           public Group apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateModerator.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateModerator(String nodeId, APIContext context) {
-      super(context, nodeId, "/moderators", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateModerator setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateModerator setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateModerator setUid (Long uid) {
-      this.setParam("uid", uid);
-      return this;
-    }
-    public APIRequestCreateModerator setUid (String uid) {
-      this.setParam("uid", uid);
-      return this;
-    }
-
-    public APIRequestCreateModerator requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateModerator requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateModerator requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateModerator requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateModerator requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateModerator requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestCreateOpenGraphActionFeed extends APIRequest<APINode> {
 
     APINode lastResponse = null;
@@ -4850,7 +4366,6 @@ public class Group extends APINode {
       "age_range",
       "birthday",
       "can_review_measurement_request",
-      "context",
       "cover",
       "currency",
       "devices",
@@ -5035,13 +4550,6 @@ public class Group extends APINode {
     }
     public APIRequestGetOptedInMembers requestCanReviewMeasurementRequestField (boolean value) {
       this.requestField("can_review_measurement_request", value);
-      return this;
-    }
-    public APIRequestGetOptedInMembers requestContextField () {
-      return this.requestContextField(true);
-    }
-    public APIRequestGetOptedInMembers requestContextField (boolean value) {
-      this.requestField("context", value);
       return this;
     }
     public APIRequestGetOptedInMembers requestCoverField () {

@@ -1248,7 +1248,7 @@ public class EventSourceGroup extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "role",
+      "tasks",
       "user",
     };
 
@@ -1308,12 +1308,12 @@ public class EventSourceGroup extends APINode {
     }
 
 
-    public APIRequestCreateUserPermission setRole (EventSourceGroup.EnumRole role) {
-      this.setParam("role", role);
+    public APIRequestCreateUserPermission setTasks (List<EventSourceGroup.EnumTasks> tasks) {
+      this.setParam("tasks", tasks);
       return this;
     }
-    public APIRequestCreateUserPermission setRole (String role) {
-      this.setParam("role", role);
+    public APIRequestCreateUserPermission setTasks (String tasks) {
+      this.setParam("tasks", tasks);
       return this;
     }
 
@@ -1620,16 +1620,16 @@ public class EventSourceGroup extends APINode {
 
   }
 
-  public static enum EnumRole {
-      @SerializedName("ANALYST")
-      VALUE_ANALYST("ANALYST"),
-      @SerializedName("LIMITED_ANALYST")
-      VALUE_LIMITED_ANALYST("LIMITED_ANALYST"),
+  public static enum EnumTasks {
+      @SerializedName("ANALYZE")
+      VALUE_ANALYZE("ANALYZE"),
+      @SerializedName("ANALYZE_WITH_LIMITATIONS")
+      VALUE_ANALYZE_WITH_LIMITATIONS("ANALYZE_WITH_LIMITATIONS"),
       NULL(null);
 
       private String value;
 
-      private EnumRole(String value) {
+      private EnumTasks(String value) {
         this.value = value;
       }
 

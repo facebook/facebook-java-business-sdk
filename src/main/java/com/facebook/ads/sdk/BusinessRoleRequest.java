@@ -825,29 +825,6 @@ public class BusinessRoleRequest extends APINode {
       }
   }
 
-  public static enum EnumStatus {
-      @SerializedName("ACCEPTED")
-      VALUE_ACCEPTED("ACCEPTED"),
-      @SerializedName("DECLINED")
-      VALUE_DECLINED("DECLINED"),
-      @SerializedName("EXPIRED")
-      VALUE_EXPIRED("EXPIRED"),
-      @SerializedName("PENDING")
-      VALUE_PENDING("PENDING"),
-      NULL(null);
-
-      private String value;
-
-      private EnumStatus(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {

@@ -307,6 +307,8 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mVideoP95WatchedActions = null;
   @SerializedName("video_play_actions")
   private List<AdsActionStats> mVideoPlayActions = null;
+  @SerializedName("video_play_curve_actions")
+  private List<Object> mVideoPlayCurveActions = null;
   @SerializedName("video_play_retention_0_to_15s_actions")
   private List<Object> mVideoPlayRetention0To15sActions = null;
   @SerializedName("video_play_retention_20_to_60s_actions")
@@ -1818,6 +1820,15 @@ public class AdsInsights extends APINode {
     this.mVideoPlayActions = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
+  public List<Object> getFieldVideoPlayCurveActions() {
+    return mVideoPlayCurveActions;
+  }
+
+  public AdsInsights setFieldVideoPlayCurveActions(List<Object> value) {
+    this.mVideoPlayCurveActions = value;
+    return this;
+  }
+
   public List<Object> getFieldVideoPlayRetention0To15sActions() {
     return mVideoPlayRetention0To15sActions;
   }
@@ -2306,6 +2317,7 @@ public class AdsInsights extends APINode {
     this.mVideoP75WatchedActions = instance.mVideoP75WatchedActions;
     this.mVideoP95WatchedActions = instance.mVideoP95WatchedActions;
     this.mVideoPlayActions = instance.mVideoPlayActions;
+    this.mVideoPlayCurveActions = instance.mVideoPlayCurveActions;
     this.mVideoPlayRetention0To15sActions = instance.mVideoPlayRetention0To15sActions;
     this.mVideoPlayRetention20To60sActions = instance.mVideoPlayRetention20To60sActions;
     this.mVideoPlayRetentionGraphActions = instance.mVideoPlayRetentionGraphActions;

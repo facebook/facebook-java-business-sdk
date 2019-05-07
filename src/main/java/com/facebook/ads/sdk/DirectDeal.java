@@ -464,7 +464,6 @@ public class DirectDeal extends APINode {
       "company",
       "configured_ios_sso",
       "contact_email",
-      "context",
       "created_time",
       "creator_uid",
       "daily_active_users",
@@ -837,13 +836,6 @@ public class DirectDeal extends APINode {
     }
     public APIRequestGetApplications requestContactEmailField (boolean value) {
       this.requestField("contact_email", value);
-      return this;
-    }
-    public APIRequestGetApplications requestContextField () {
-      return this.requestContextField(true);
-    }
-    public APIRequestGetApplications requestContextField (boolean value) {
-      this.requestField("context", value);
       return this;
     }
     public APIRequestGetApplications requestCreatedTimeField () {

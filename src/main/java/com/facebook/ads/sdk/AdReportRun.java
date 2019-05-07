@@ -511,6 +511,7 @@ public class AdReportRun extends APINode {
       "video_p75_watched_actions",
       "video_p95_watched_actions",
       "video_play_actions",
+      "video_play_curve_actions",
       "video_play_retention_0_to_15s_actions",
       "video_play_retention_20_to_60s_actions",
       "video_play_retention_graph_actions",
@@ -1490,6 +1491,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestVideoPlayActionsField (boolean value) {
       this.requestField("video_play_actions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestVideoPlayCurveActionsField () {
+      return this.requestVideoPlayCurveActionsField(true);
+    }
+    public APIRequestGetInsights requestVideoPlayCurveActionsField (boolean value) {
+      this.requestField("video_play_curve_actions", value);
       return this;
     }
     public APIRequestGetInsights requestVideoPlayRetention0To15sActionsField () {
