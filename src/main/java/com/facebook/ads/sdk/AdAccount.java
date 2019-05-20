@@ -540,6 +540,10 @@ public class AdAccount extends APINode {
     return new APIRequestGetAdvertisableApplications(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestDeleteAdVideos deleteAdVideos() {
+    return new APIRequestDeleteAdVideos(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetAdVideos getAdVideos() {
     return new APIRequestGetAdVideos(this.getPrefixedId().toString(), context);
   }
@@ -10495,6 +10499,7 @@ public class AdAccount extends APINode {
       "property_id",
       "real_time_mode_devices",
       "restrictions",
+      "restrictive_data_filter_rules",
       "sdk_update_message",
       "seamless_login",
       "secure_canvas_url",
@@ -11155,6 +11160,13 @@ public class AdAccount extends APINode {
       this.requestField("restrictions", value);
       return this;
     }
+    public APIRequestGetAdvertisableApplications requestRestrictiveDataFilterRulesField () {
+      return this.requestRestrictiveDataFilterRulesField(true);
+    }
+    public APIRequestGetAdvertisableApplications requestRestrictiveDataFilterRulesField (boolean value) {
+      this.requestField("restrictive_data_filter_rules", value);
+      return this;
+    }
     public APIRequestGetAdvertisableApplications requestSdkUpdateMessageField () {
       return this.requestSdkUpdateMessageField(true);
     }
@@ -11295,6 +11307,116 @@ public class AdAccount extends APINode {
       this.requestField("weekly_active_users", value);
       return this;
     }
+  }
+
+  public static class APIRequestDeleteAdVideos extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "video_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestDeleteAdVideos.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDeleteAdVideos(String nodeId, APIContext context) {
+      super(context, nodeId, "/advideos", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDeleteAdVideos setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteAdVideos setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDeleteAdVideos setVideoId (String videoId) {
+      this.setParam("video_id", videoId);
+      return this;
+    }
+
+    public APIRequestDeleteAdVideos requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDeleteAdVideos requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteAdVideos requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDeleteAdVideos requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteAdVideos requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteAdVideos requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetAdVideos extends APIRequest<AdVideo> {
@@ -13037,6 +13159,7 @@ public class AdAccount extends APINode {
       "property_id",
       "real_time_mode_devices",
       "restrictions",
+      "restrictive_data_filter_rules",
       "sdk_update_message",
       "seamless_login",
       "secure_canvas_url",
@@ -13685,6 +13808,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetApplications requestRestrictionsField (boolean value) {
       this.requestField("restrictions", value);
+      return this;
+    }
+    public APIRequestGetApplications requestRestrictiveDataFilterRulesField () {
+      return this.requestRestrictiveDataFilterRulesField(true);
+    }
+    public APIRequestGetApplications requestRestrictiveDataFilterRulesField (boolean value) {
+      this.requestField("restrictive_data_filter_rules", value);
       return this;
     }
     public APIRequestGetApplications requestSdkUpdateMessageField () {

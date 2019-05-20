@@ -764,6 +764,10 @@ public class Page extends APINode {
     return new APIRequestGetLocations(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateLocation createLocation() {
+    return new APIRequestCreateLocation(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateMediaFingerprint createMediaFingerprint() {
     return new APIRequestCreateMediaFingerprint(this.getPrefixedId().toString(), context);
   }
@@ -16216,6 +16220,238 @@ public class Page extends APINode {
     }
   }
 
+  public static class APIRequestCreateLocation extends APIRequest<Page> {
+
+    Page lastResponse = null;
+    @Override
+    public Page getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "always_open",
+      "hours",
+      "ignore_warnings",
+      "location",
+      "location_page_id",
+      "old_store_number",
+      "page_username",
+      "permanently_closed",
+      "phone",
+      "place_topics",
+      "price_range",
+      "store_code",
+      "store_location_descriptor",
+      "store_name",
+      "store_number",
+      "website",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Page parseResponse(String response, String header) throws APIException {
+      return Page.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Page execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Page execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Page> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Page> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, Page>() {
+           public Page apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateLocation.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateLocation(String nodeId, APIContext context) {
+      super(context, nodeId, "/locations", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateLocation setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateLocation setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateLocation setAlwaysOpen (Boolean alwaysOpen) {
+      this.setParam("always_open", alwaysOpen);
+      return this;
+    }
+    public APIRequestCreateLocation setAlwaysOpen (String alwaysOpen) {
+      this.setParam("always_open", alwaysOpen);
+      return this;
+    }
+
+    public APIRequestCreateLocation setHours (Map<String, String> hours) {
+      this.setParam("hours", hours);
+      return this;
+    }
+    public APIRequestCreateLocation setHours (String hours) {
+      this.setParam("hours", hours);
+      return this;
+    }
+
+    public APIRequestCreateLocation setIgnoreWarnings (Boolean ignoreWarnings) {
+      this.setParam("ignore_warnings", ignoreWarnings);
+      return this;
+    }
+    public APIRequestCreateLocation setIgnoreWarnings (String ignoreWarnings) {
+      this.setParam("ignore_warnings", ignoreWarnings);
+      return this;
+    }
+
+    public APIRequestCreateLocation setLocation (Object location) {
+      this.setParam("location", location);
+      return this;
+    }
+    public APIRequestCreateLocation setLocation (String location) {
+      this.setParam("location", location);
+      return this;
+    }
+
+    public APIRequestCreateLocation setLocationPageId (String locationPageId) {
+      this.setParam("location_page_id", locationPageId);
+      return this;
+    }
+
+    public APIRequestCreateLocation setOldStoreNumber (Long oldStoreNumber) {
+      this.setParam("old_store_number", oldStoreNumber);
+      return this;
+    }
+    public APIRequestCreateLocation setOldStoreNumber (String oldStoreNumber) {
+      this.setParam("old_store_number", oldStoreNumber);
+      return this;
+    }
+
+    public APIRequestCreateLocation setPageUsername (String pageUsername) {
+      this.setParam("page_username", pageUsername);
+      return this;
+    }
+
+    public APIRequestCreateLocation setPermanentlyClosed (Boolean permanentlyClosed) {
+      this.setParam("permanently_closed", permanentlyClosed);
+      return this;
+    }
+    public APIRequestCreateLocation setPermanentlyClosed (String permanentlyClosed) {
+      this.setParam("permanently_closed", permanentlyClosed);
+      return this;
+    }
+
+    public APIRequestCreateLocation setPhone (String phone) {
+      this.setParam("phone", phone);
+      return this;
+    }
+
+    public APIRequestCreateLocation setPlaceTopics (List<String> placeTopics) {
+      this.setParam("place_topics", placeTopics);
+      return this;
+    }
+    public APIRequestCreateLocation setPlaceTopics (String placeTopics) {
+      this.setParam("place_topics", placeTopics);
+      return this;
+    }
+
+    public APIRequestCreateLocation setPriceRange (String priceRange) {
+      this.setParam("price_range", priceRange);
+      return this;
+    }
+
+    public APIRequestCreateLocation setStoreCode (String storeCode) {
+      this.setParam("store_code", storeCode);
+      return this;
+    }
+
+    public APIRequestCreateLocation setStoreLocationDescriptor (String storeLocationDescriptor) {
+      this.setParam("store_location_descriptor", storeLocationDescriptor);
+      return this;
+    }
+
+    public APIRequestCreateLocation setStoreName (String storeName) {
+      this.setParam("store_name", storeName);
+      return this;
+    }
+
+    public APIRequestCreateLocation setStoreNumber (Long storeNumber) {
+      this.setParam("store_number", storeNumber);
+      return this;
+    }
+    public APIRequestCreateLocation setStoreNumber (String storeNumber) {
+      this.setParam("store_number", storeNumber);
+      return this;
+    }
+
+    public APIRequestCreateLocation setWebsite (String website) {
+      this.setParam("website", website);
+      return this;
+    }
+
+    public APIRequestCreateLocation requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateLocation requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateLocation requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateLocation requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateLocation requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateLocation requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestCreateMediaFingerprint extends APIRequest<MediaFingerprint> {
 
     MediaFingerprint lastResponse = null;
@@ -22952,6 +23188,7 @@ public class Page extends APINode {
       "property_id",
       "real_time_mode_devices",
       "restrictions",
+      "restrictive_data_filter_rules",
       "sdk_update_message",
       "seamless_login",
       "secure_canvas_url",
@@ -23602,6 +23839,13 @@ public class Page extends APINode {
       this.requestField("restrictions", value);
       return this;
     }
+    public APIRequestGetSecondaryReceivers requestRestrictiveDataFilterRulesField () {
+      return this.requestRestrictiveDataFilterRulesField(true);
+    }
+    public APIRequestGetSecondaryReceivers requestRestrictiveDataFilterRulesField (boolean value) {
+      this.requestField("restrictive_data_filter_rules", value);
+      return this;
+    }
     public APIRequestGetSecondaryReceivers requestSdkUpdateMessageField () {
       return this.requestSdkUpdateMessageField(true);
     }
@@ -24170,6 +24414,7 @@ public class Page extends APINode {
       "property_id",
       "real_time_mode_devices",
       "restrictions",
+      "restrictive_data_filter_rules",
       "sdk_update_message",
       "seamless_login",
       "secure_canvas_url",
@@ -24818,6 +25063,13 @@ public class Page extends APINode {
     }
     public APIRequestGetSubscribedApps requestRestrictionsField (boolean value) {
       this.requestField("restrictions", value);
+      return this;
+    }
+    public APIRequestGetSubscribedApps requestRestrictiveDataFilterRulesField () {
+      return this.requestRestrictiveDataFilterRulesField(true);
+    }
+    public APIRequestGetSubscribedApps requestRestrictiveDataFilterRulesField (boolean value) {
+      this.requestField("restrictive_data_filter_rules", value);
       return this;
     }
     public APIRequestGetSubscribedApps requestSdkUpdateMessageField () {

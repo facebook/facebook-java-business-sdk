@@ -5122,26 +5122,12 @@ public class AdSet extends APINode {
   public static enum EnumEffectiveStatus {
       @SerializedName("ACTIVE")
       VALUE_ACTIVE("ACTIVE"),
-      @SerializedName("ADSET_PAUSED")
-      VALUE_ADSET_PAUSED("ADSET_PAUSED"),
       @SerializedName("ARCHIVED")
       VALUE_ARCHIVED("ARCHIVED"),
-      @SerializedName("CAMPAIGN_PAUSED")
-      VALUE_CAMPAIGN_PAUSED("CAMPAIGN_PAUSED"),
       @SerializedName("DELETED")
       VALUE_DELETED("DELETED"),
-      @SerializedName("DISAPPROVED")
-      VALUE_DISAPPROVED("DISAPPROVED"),
       @SerializedName("PAUSED")
       VALUE_PAUSED("PAUSED"),
-      @SerializedName("PENDING_BILLING_INFO")
-      VALUE_PENDING_BILLING_INFO("PENDING_BILLING_INFO"),
-      @SerializedName("PENDING_REVIEW")
-      VALUE_PENDING_REVIEW("PENDING_REVIEW"),
-      @SerializedName("PREAPPROVED")
-      VALUE_PREAPPROVED("PREAPPROVED"),
-      @SerializedName("WITH_ISSUES")
-      VALUE_WITH_ISSUES("WITH_ISSUES"),
       NULL(null);
 
       private String value;

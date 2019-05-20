@@ -510,6 +510,7 @@ public class DirectDeal extends APINode {
       "property_id",
       "real_time_mode_devices",
       "restrictions",
+      "restrictive_data_filter_rules",
       "sdk_update_message",
       "seamless_login",
       "secure_canvas_url",
@@ -1158,6 +1159,13 @@ public class DirectDeal extends APINode {
     }
     public APIRequestGetApplications requestRestrictionsField (boolean value) {
       this.requestField("restrictions", value);
+      return this;
+    }
+    public APIRequestGetApplications requestRestrictiveDataFilterRulesField () {
+      return this.requestRestrictiveDataFilterRulesField(true);
+    }
+    public APIRequestGetApplications requestRestrictiveDataFilterRulesField (boolean value) {
+      this.requestField("restrictive_data_filter_rules", value);
       return this;
     }
     public APIRequestGetApplications requestSdkUpdateMessageField () {

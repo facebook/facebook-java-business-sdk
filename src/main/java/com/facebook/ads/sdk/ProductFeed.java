@@ -4206,6 +4206,25 @@ public class ProductFeed extends APINode {
       }
   }
 
+  public static enum EnumOverrideType {
+      @SerializedName("COUNTRY")
+      VALUE_COUNTRY("COUNTRY"),
+      @SerializedName("LANGUAGE")
+      VALUE_LANGUAGE("LANGUAGE"),
+      NULL(null);
+
+      private String value;
+
+      private EnumOverrideType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {

@@ -7404,6 +7404,8 @@ public class Group extends APINode {
       VALUE_WORK_MENTORSHIP("WORK_MENTORSHIP"),
       @SerializedName("WORK_MULTI_COMPANY")
       VALUE_WORK_MULTI_COMPANY("WORK_MULTI_COMPANY"),
+      @SerializedName("WORK_RECRUITING")
+      VALUE_WORK_RECRUITING("WORK_RECRUITING"),
       @SerializedName("WORK_SOCIAL")
       VALUE_WORK_SOCIAL("WORK_SOCIAL"),
       @SerializedName("WORK_TEAM")
@@ -7507,6 +7509,8 @@ public class Group extends APINode {
       VALUE_WORK_MENTORSHIP("WORK_MENTORSHIP"),
       @SerializedName("WORK_MULTI_COMPANY")
       VALUE_WORK_MULTI_COMPANY("WORK_MULTI_COMPANY"),
+      @SerializedName("WORK_RECRUITING")
+      VALUE_WORK_RECRUITING("WORK_RECRUITING"),
       @SerializedName("WORK_SOCIAL")
       VALUE_WORK_SOCIAL("WORK_SOCIAL"),
       @SerializedName("WORK_TEAM")

@@ -370,6 +370,14 @@ public class AdVideo extends APINode {
     return new APIRequestCreateLike(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetPollSettings getPollSettings() {
+    return new APIRequestGetPollSettings(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreatePollSetting createPollSetting() {
+    return new APIRequestCreatePollSetting(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetPolls getPolls() {
     return new APIRequestGetPolls(this.getPrefixedId().toString(), context);
   }
@@ -2997,6 +3005,234 @@ public class AdVideo extends APINode {
 
     @Override
     public APIRequestCreateLike requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetPollSettings extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetPollSettings.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetPollSettings(String nodeId, APIContext context) {
+      super(context, nodeId, "/poll_settings", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetPollSettings setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPollSettings setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetPollSettings requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetPollSettings requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPollSettings requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetPollSettings requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPollSettings requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPollSettings requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreatePollSetting extends APIRequest<AdVideo> {
+
+    AdVideo lastResponse = null;
+    @Override
+    public AdVideo getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "enable_was_live_voting",
+      "video_poll_www_placement",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AdVideo parseResponse(String response, String header) throws APIException {
+      return AdVideo.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public AdVideo execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdVideo execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdVideo> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdVideo> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, AdVideo>() {
+           public AdVideo apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreatePollSetting.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreatePollSetting(String nodeId, APIContext context) {
+      super(context, nodeId, "/poll_settings", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreatePollSetting setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePollSetting setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreatePollSetting setEnableWasLiveVoting (Boolean enableWasLiveVoting) {
+      this.setParam("enable_was_live_voting", enableWasLiveVoting);
+      return this;
+    }
+    public APIRequestCreatePollSetting setEnableWasLiveVoting (String enableWasLiveVoting) {
+      this.setParam("enable_was_live_voting", enableWasLiveVoting);
+      return this;
+    }
+
+    public APIRequestCreatePollSetting setVideoPollWwwPlacement (AdVideo.EnumVideoPollWwwPlacement videoPollWwwPlacement) {
+      this.setParam("video_poll_www_placement", videoPollWwwPlacement);
+      return this;
+    }
+    public APIRequestCreatePollSetting setVideoPollWwwPlacement (String videoPollWwwPlacement) {
+      this.setParam("video_poll_www_placement", videoPollWwwPlacement);
+      return this;
+    }
+
+    public APIRequestCreatePollSetting requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreatePollSetting requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePollSetting requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreatePollSetting requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePollSetting requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePollSetting requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -6219,6 +6455,29 @@ public class AdVideo extends APINode {
       private String value;
 
       private EnumBackdatedTimeGranularity(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumVideoPollWwwPlacement {
+      @SerializedName("BOTTOM_LEFT")
+      VALUE_BOTTOM_LEFT("BOTTOM_LEFT"),
+      @SerializedName("BOTTOM_RIGHT")
+      VALUE_BOTTOM_RIGHT("BOTTOM_RIGHT"),
+      @SerializedName("TOP_LEFT")
+      VALUE_TOP_LEFT("TOP_LEFT"),
+      @SerializedName("TOP_RIGHT")
+      VALUE_TOP_RIGHT("TOP_RIGHT"),
+      NULL(null);
+
+      private String value;
+
+      private EnumVideoPollWwwPlacement(String value) {
         this.value = value;
       }
 

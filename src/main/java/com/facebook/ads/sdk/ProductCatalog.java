@@ -5727,6 +5727,7 @@ public class ProductCatalog extends APINode {
       "feed_type",
       "file_name",
       "name",
+      "override_type",
       "quoted_fields_mode",
       "rules",
       "schedule",
@@ -5842,6 +5843,15 @@ public class ProductCatalog extends APINode {
 
     public APIRequestCreateProductFeed setName (String name) {
       this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateProductFeed setOverrideType (ProductFeed.EnumOverrideType overrideType) {
+      this.setParam("override_type", overrideType);
+      return this;
+    }
+    public APIRequestCreateProductFeed setOverrideType (String overrideType) {
+      this.setParam("override_type", overrideType);
       return this;
     }
 

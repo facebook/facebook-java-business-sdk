@@ -1129,7 +1129,7 @@ public class LiveEncoder extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setCapAudioCodecs (Object capAudioCodecs) {
+    public APIRequestUpdate setCapAudioCodecs (List<String> capAudioCodecs) {
       this.setParam("cap_audio_codecs", capAudioCodecs);
       return this;
     }
@@ -1138,7 +1138,7 @@ public class LiveEncoder extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setCapStreamingProtocols (Object capStreamingProtocols) {
+    public APIRequestUpdate setCapStreamingProtocols (List<String> capStreamingProtocols) {
       this.setParam("cap_streaming_protocols", capStreamingProtocols);
       return this;
     }
@@ -1147,7 +1147,7 @@ public class LiveEncoder extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setCapVideoCodecs (Object capVideoCodecs) {
+    public APIRequestUpdate setCapVideoCodecs (List<String> capVideoCodecs) {
       this.setParam("cap_video_codecs", capVideoCodecs);
       return this;
     }
