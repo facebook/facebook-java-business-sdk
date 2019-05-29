@@ -61,8 +61,6 @@ public class OpenGraphObject extends APINode {
   private Object mApplication = null;
   @SerializedName("audio")
   private List<Object> mAudio = null;
-  @SerializedName("context")
-  private OpenGraphContext mContext = null;
   @SerializedName("created_time")
   private String mCreatedTime = null;
   @SerializedName("description")
@@ -327,13 +325,6 @@ public class OpenGraphObject extends APINode {
 
   public List<Object> getFieldAudio() {
     return mAudio;
-  }
-
-  public OpenGraphContext getFieldContext() {
-    if (mContext != null) {
-      mContext.context = getContext();
-    }
-    return mContext;
   }
 
   public String getFieldCreatedTime() {
@@ -620,7 +611,6 @@ public class OpenGraphObject extends APINode {
       "admins",
       "application",
       "audio",
-      "context",
       "created_time",
       "description",
       "determiner",
@@ -749,13 +739,6 @@ public class OpenGraphObject extends APINode {
     }
     public APIRequestGet requestAudioField (boolean value) {
       this.requestField("audio", value);
-      return this;
-    }
-    public APIRequestGet requestContextField () {
-      return this.requestContextField(true);
-    }
-    public APIRequestGet requestContextField (boolean value) {
-      this.requestField("context", value);
       return this;
     }
     public APIRequestGet requestCreatedTimeField () {
@@ -904,7 +887,6 @@ public class OpenGraphObject extends APINode {
     this.mAdmins = instance.mAdmins;
     this.mApplication = instance.mApplication;
     this.mAudio = instance.mAudio;
-    this.mContext = instance.mContext;
     this.mCreatedTime = instance.mCreatedTime;
     this.mDescription = instance.mDescription;
     this.mDeterminer = instance.mDeterminer;

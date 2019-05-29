@@ -517,6 +517,29 @@ public class AdAccountTargetingUnified extends APINode {
       }
   }
 
+  public static enum EnumRegulatedCategories {
+      @SerializedName("EMPLOYMENT")
+      VALUE_EMPLOYMENT("EMPLOYMENT"),
+      @SerializedName("FINANCING")
+      VALUE_FINANCING("FINANCING"),
+      @SerializedName("HOUSING")
+      VALUE_HOUSING("HOUSING"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
+      NULL(null);
+
+      private String value;
+
+      private EnumRegulatedCategories(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumWhitelistedTypes {
       @SerializedName("adgroup_id")
       VALUE_ADGROUP_ID("adgroup_id"),

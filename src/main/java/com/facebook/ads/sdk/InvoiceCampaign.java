@@ -54,37 +54,37 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class Recommendation extends APINode {
-  @SerializedName("created_time")
-  private String mCreatedTime = null;
-  @SerializedName("has_rating")
-  private Boolean mHasRating = null;
-  @SerializedName("has_review")
-  private Boolean mHasReview = null;
-  @SerializedName("open_graph_story")
-  private Object mOpenGraphStory = null;
-  @SerializedName("rating")
-  private Long mRating = null;
-  @SerializedName("recommendation_type")
-  private String mRecommendationType = null;
-  @SerializedName("review_text")
-  private String mReviewText = null;
-  @SerializedName("reviewer")
-  private User mReviewer = null;
+public class InvoiceCampaign extends APINode {
+  @SerializedName("ad_account_id")
+  private String mAdAccountId = null;
+  @SerializedName("billed_amount_details")
+  private BilledAmountDetails mBilledAmountDetails = null;
+  @SerializedName("campaign_id")
+  private String mCampaignId = null;
+  @SerializedName("campaign_name")
+  private String mCampaignName = null;
+  @SerializedName("clicks")
+  private Long mClicks = null;
+  @SerializedName("conversions")
+  private Long mConversions = null;
+  @SerializedName("impressions")
+  private Long mImpressions = null;
+  @SerializedName("tags")
+  private List<String> mTags = null;
   protected static Gson gson = null;
 
-  public Recommendation() {
+  public InvoiceCampaign() {
   }
 
   public String getId() {
     return null;
   }
-  public static Recommendation loadJSON(String json, APIContext context, String header) {
-    Recommendation recommendation = getGson().fromJson(json, Recommendation.class);
+  public static InvoiceCampaign loadJSON(String json, APIContext context, String header) {
+    InvoiceCampaign invoiceCampaign = getGson().fromJson(json, InvoiceCampaign.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(recommendation.toString());
+      JsonElement o2 = parser.parse(invoiceCampaign.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -94,14 +94,14 @@ public class Recommendation extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    recommendation.context = context;
-    recommendation.rawValue = json;
-    recommendation.header = header;
-    return recommendation;
+    invoiceCampaign.context = context;
+    invoiceCampaign.rawValue = json;
+    invoiceCampaign.header = header;
+    return invoiceCampaign;
   }
 
-  public static APINodeList<Recommendation> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<Recommendation> recommendations = new APINodeList<Recommendation>(request, json, header);
+  public static APINodeList<InvoiceCampaign> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<InvoiceCampaign> invoiceCampaigns = new APINodeList<InvoiceCampaign>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -112,9 +112,9 @@ public class Recommendation extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          recommendations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          invoiceCampaigns.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return recommendations;
+        return invoiceCampaigns;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -124,20 +124,20 @@ public class Recommendation extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                recommendations.setCursors(before, after);
+                invoiceCampaigns.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            recommendations.setPaging(previous, next);
+            invoiceCampaigns.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              recommendations.setAppSecret(context.getAppSecretProof());
+              invoiceCampaigns.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              recommendations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              invoiceCampaigns.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -148,23 +148,23 @@ public class Recommendation extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  recommendations.add(loadJSON(entry.getValue().toString(), context, header));
+                  invoiceCampaigns.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              recommendations.add(loadJSON(obj.toString(), context, header));
+              invoiceCampaigns.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return recommendations;
+          return invoiceCampaigns;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              recommendations.add(loadJSON(entry.getValue().toString(), context, header));
+              invoiceCampaigns.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return recommendations;
+          return invoiceCampaigns;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -181,20 +181,20 @@ public class Recommendation extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              recommendations.add(loadJSON(value.toString(), context, header));
+              invoiceCampaigns.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return recommendations;
+            return invoiceCampaigns;
           }
 
           // Sixth, check if it's pure JsonObject
-          recommendations.clear();
-          recommendations.add(loadJSON(json, context, header));
-          return recommendations;
+          invoiceCampaigns.clear();
+          invoiceCampaigns.add(loadJSON(json, context, header));
+          return invoiceCampaigns;
         }
       }
     } catch (Exception e) {
@@ -222,86 +222,83 @@ public class Recommendation extends APINode {
   }
 
 
-  public String getFieldCreatedTime() {
-    return mCreatedTime;
+  public String getFieldAdAccountId() {
+    return mAdAccountId;
   }
 
-  public Recommendation setFieldCreatedTime(String value) {
-    this.mCreatedTime = value;
+  public InvoiceCampaign setFieldAdAccountId(String value) {
+    this.mAdAccountId = value;
     return this;
   }
 
-  public Boolean getFieldHasRating() {
-    return mHasRating;
+  public BilledAmountDetails getFieldBilledAmountDetails() {
+    return mBilledAmountDetails;
   }
 
-  public Recommendation setFieldHasRating(Boolean value) {
-    this.mHasRating = value;
+  public InvoiceCampaign setFieldBilledAmountDetails(BilledAmountDetails value) {
+    this.mBilledAmountDetails = value;
     return this;
   }
 
-  public Boolean getFieldHasReview() {
-    return mHasReview;
+  public InvoiceCampaign setFieldBilledAmountDetails(String value) {
+    Type type = new TypeToken<BilledAmountDetails>(){}.getType();
+    this.mBilledAmountDetails = BilledAmountDetails.getGson().fromJson(value, type);
+    return this;
+  }
+  public String getFieldCampaignId() {
+    return mCampaignId;
   }
 
-  public Recommendation setFieldHasReview(Boolean value) {
-    this.mHasReview = value;
+  public InvoiceCampaign setFieldCampaignId(String value) {
+    this.mCampaignId = value;
     return this;
   }
 
-  public Object getFieldOpenGraphStory() {
-    return mOpenGraphStory;
+  public String getFieldCampaignName() {
+    return mCampaignName;
   }
 
-  public Recommendation setFieldOpenGraphStory(Object value) {
-    this.mOpenGraphStory = value;
+  public InvoiceCampaign setFieldCampaignName(String value) {
+    this.mCampaignName = value;
     return this;
   }
 
-  public Long getFieldRating() {
-    return mRating;
+  public Long getFieldClicks() {
+    return mClicks;
   }
 
-  public Recommendation setFieldRating(Long value) {
-    this.mRating = value;
+  public InvoiceCampaign setFieldClicks(Long value) {
+    this.mClicks = value;
     return this;
   }
 
-  public String getFieldRecommendationType() {
-    return mRecommendationType;
+  public Long getFieldConversions() {
+    return mConversions;
   }
 
-  public Recommendation setFieldRecommendationType(String value) {
-    this.mRecommendationType = value;
+  public InvoiceCampaign setFieldConversions(Long value) {
+    this.mConversions = value;
     return this;
   }
 
-  public String getFieldReviewText() {
-    return mReviewText;
+  public Long getFieldImpressions() {
+    return mImpressions;
   }
 
-  public Recommendation setFieldReviewText(String value) {
-    this.mReviewText = value;
+  public InvoiceCampaign setFieldImpressions(Long value) {
+    this.mImpressions = value;
     return this;
   }
 
-  public User getFieldReviewer() {
-    if (mReviewer != null) {
-      mReviewer.context = getContext();
-    }
-    return mReviewer;
+  public List<String> getFieldTags() {
+    return mTags;
   }
 
-  public Recommendation setFieldReviewer(User value) {
-    this.mReviewer = value;
+  public InvoiceCampaign setFieldTags(List<String> value) {
+    this.mTags = value;
     return this;
   }
 
-  public Recommendation setFieldReviewer(String value) {
-    Type type = new TypeToken<User>(){}.getType();
-    this.mReviewer = User.getGson().fromJson(value, type);
-    return this;
-  }
 
 
 
@@ -318,24 +315,24 @@ public class Recommendation extends APINode {
     return gson;
   }
 
-  public Recommendation copyFrom(Recommendation instance) {
-    this.mCreatedTime = instance.mCreatedTime;
-    this.mHasRating = instance.mHasRating;
-    this.mHasReview = instance.mHasReview;
-    this.mOpenGraphStory = instance.mOpenGraphStory;
-    this.mRating = instance.mRating;
-    this.mRecommendationType = instance.mRecommendationType;
-    this.mReviewText = instance.mReviewText;
-    this.mReviewer = instance.mReviewer;
+  public InvoiceCampaign copyFrom(InvoiceCampaign instance) {
+    this.mAdAccountId = instance.mAdAccountId;
+    this.mBilledAmountDetails = instance.mBilledAmountDetails;
+    this.mCampaignId = instance.mCampaignId;
+    this.mCampaignName = instance.mCampaignName;
+    this.mClicks = instance.mClicks;
+    this.mConversions = instance.mConversions;
+    this.mImpressions = instance.mImpressions;
+    this.mTags = instance.mTags;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<Recommendation> getParser() {
-    return new APIRequest.ResponseParser<Recommendation>() {
-      public APINodeList<Recommendation> parseResponse(String response, APIContext context, APIRequest<Recommendation> request, String header) throws MalformedResponseException {
-        return Recommendation.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<InvoiceCampaign> getParser() {
+    return new APIRequest.ResponseParser<InvoiceCampaign>() {
+      public APINodeList<InvoiceCampaign> parseResponse(String response, APIContext context, APIRequest<InvoiceCampaign> request, String header) throws MalformedResponseException {
+        return InvoiceCampaign.parseResponse(response, context, request, header);
       }
     };
   }

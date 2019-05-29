@@ -454,20 +454,12 @@ public class User extends APINode {
     return new APIRequestGetBusinesses(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetConversations getConversations() {
-    return new APIRequestGetConversations(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetEvents getEvents() {
     return new APIRequestGetEvents(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetFamily getFamily() {
     return new APIRequestGetFamily(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetFavoriteRequests getFavoriteRequests() {
-    return new APIRequestGetFavoriteRequests(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateFeed createFeed() {
@@ -8292,252 +8284,6 @@ public class User extends APINode {
     }
   }
 
-  public static class APIRequestGetConversations extends APIRequest<UnifiedThread> {
-
-    APINodeList<UnifiedThread> lastResponse = null;
-    @Override
-    public APINodeList<UnifiedThread> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "folder",
-      "tags",
-      "user_id",
-    };
-
-    public static final String[] FIELDS = {
-      "can_reply",
-      "former_participants",
-      "id",
-      "is_subscribed",
-      "link",
-      "message_count",
-      "name",
-      "participants",
-      "scoped_thread_key",
-      "senders",
-      "snippet",
-      "subject",
-      "unread_count",
-      "updated_time",
-      "wallpaper",
-    };
-
-    @Override
-    public APINodeList<UnifiedThread> parseResponse(String response, String header) throws APIException {
-      return UnifiedThread.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<UnifiedThread> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<UnifiedThread> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<UnifiedThread>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<UnifiedThread>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<UnifiedThread>>() {
-           public APINodeList<UnifiedThread> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetConversations.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetConversations(String nodeId, APIContext context) {
-      super(context, nodeId, "/conversations", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetConversations setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetConversations setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetConversations setFolder (String folder) {
-      this.setParam("folder", folder);
-      return this;
-    }
-
-    public APIRequestGetConversations setTags (List<String> tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-    public APIRequestGetConversations setTags (String tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-
-    public APIRequestGetConversations setUserId (String userId) {
-      this.setParam("user_id", userId);
-      return this;
-    }
-
-    public APIRequestGetConversations requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetConversations requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetConversations requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetConversations requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetConversations requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetConversations requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetConversations requestCanReplyField () {
-      return this.requestCanReplyField(true);
-    }
-    public APIRequestGetConversations requestCanReplyField (boolean value) {
-      this.requestField("can_reply", value);
-      return this;
-    }
-    public APIRequestGetConversations requestFormerParticipantsField () {
-      return this.requestFormerParticipantsField(true);
-    }
-    public APIRequestGetConversations requestFormerParticipantsField (boolean value) {
-      this.requestField("former_participants", value);
-      return this;
-    }
-    public APIRequestGetConversations requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetConversations requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetConversations requestIsSubscribedField () {
-      return this.requestIsSubscribedField(true);
-    }
-    public APIRequestGetConversations requestIsSubscribedField (boolean value) {
-      this.requestField("is_subscribed", value);
-      return this;
-    }
-    public APIRequestGetConversations requestLinkField () {
-      return this.requestLinkField(true);
-    }
-    public APIRequestGetConversations requestLinkField (boolean value) {
-      this.requestField("link", value);
-      return this;
-    }
-    public APIRequestGetConversations requestMessageCountField () {
-      return this.requestMessageCountField(true);
-    }
-    public APIRequestGetConversations requestMessageCountField (boolean value) {
-      this.requestField("message_count", value);
-      return this;
-    }
-    public APIRequestGetConversations requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetConversations requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetConversations requestParticipantsField () {
-      return this.requestParticipantsField(true);
-    }
-    public APIRequestGetConversations requestParticipantsField (boolean value) {
-      this.requestField("participants", value);
-      return this;
-    }
-    public APIRequestGetConversations requestScopedThreadKeyField () {
-      return this.requestScopedThreadKeyField(true);
-    }
-    public APIRequestGetConversations requestScopedThreadKeyField (boolean value) {
-      this.requestField("scoped_thread_key", value);
-      return this;
-    }
-    public APIRequestGetConversations requestSendersField () {
-      return this.requestSendersField(true);
-    }
-    public APIRequestGetConversations requestSendersField (boolean value) {
-      this.requestField("senders", value);
-      return this;
-    }
-    public APIRequestGetConversations requestSnippetField () {
-      return this.requestSnippetField(true);
-    }
-    public APIRequestGetConversations requestSnippetField (boolean value) {
-      this.requestField("snippet", value);
-      return this;
-    }
-    public APIRequestGetConversations requestSubjectField () {
-      return this.requestSubjectField(true);
-    }
-    public APIRequestGetConversations requestSubjectField (boolean value) {
-      this.requestField("subject", value);
-      return this;
-    }
-    public APIRequestGetConversations requestUnreadCountField () {
-      return this.requestUnreadCountField(true);
-    }
-    public APIRequestGetConversations requestUnreadCountField (boolean value) {
-      this.requestField("unread_count", value);
-      return this;
-    }
-    public APIRequestGetConversations requestUpdatedTimeField () {
-      return this.requestUpdatedTimeField(true);
-    }
-    public APIRequestGetConversations requestUpdatedTimeField (boolean value) {
-      this.requestField("updated_time", value);
-      return this;
-    }
-    public APIRequestGetConversations requestWallpaperField () {
-      return this.requestWallpaperField(true);
-    }
-    public APIRequestGetConversations requestWallpaperField (boolean value) {
-      this.requestField("wallpaper", value);
-      return this;
-    }
-  }
-
   public static class APIRequestGetEvents extends APIRequest<Event> {
 
     APINodeList<Event> lastResponse = null;
@@ -9476,110 +9222,6 @@ public class User extends APINode {
       this.requestField("work", value);
       return this;
     }
-  }
-
-  public static class APIRequestGetFavoriteRequests extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetFavoriteRequests.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetFavoriteRequests(String nodeId, APIContext context) {
-      super(context, nodeId, "/favorite_requests", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetFavoriteRequests setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetFavoriteRequests setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetFavoriteRequests requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetFavoriteRequests requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetFavoriteRequests requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetFavoriteRequests requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetFavoriteRequests requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetFavoriteRequests requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestCreateFeed extends APIRequest<APINode> {
@@ -26156,7 +25798,6 @@ public class User extends APINode {
     public static final String[] PARAMS = {
       "emoji_color_pref",
       "firstname",
-      "label_cohort",
       "lastname",
       "local_news_megaphone_dismiss_status",
       "local_news_subscription_status",
@@ -26231,15 +25872,6 @@ public class User extends APINode {
 
     public APIRequestUpdate setFirstname (String firstname) {
       this.setParam("firstname", firstname);
-      return this;
-    }
-
-    public APIRequestUpdate setLabelCohort (Object labelCohort) {
-      this.setParam("label_cohort", labelCohort);
-      return this;
-    }
-    public APIRequestUpdate setLabelCohort (String labelCohort) {
-      this.setParam("label_cohort", labelCohort);
       return this;
     }
 
@@ -26325,6 +25957,8 @@ public class User extends APINode {
       VALUE_MANAGE("MANAGE"),
       @SerializedName("MANAGE_JOBS")
       VALUE_MANAGE_JOBS("MANAGE_JOBS"),
+      @SerializedName("MANAGE_LEADS")
+      VALUE_MANAGE_LEADS("MANAGE_LEADS"),
       @SerializedName("MODERATE")
       VALUE_MODERATE("MODERATE"),
       @SerializedName("MODERATE_COMMUNITY")

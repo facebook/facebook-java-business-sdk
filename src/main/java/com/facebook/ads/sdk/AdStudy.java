@@ -2076,6 +2076,7 @@ public class AdStudy extends APINode {
       "objectives",
       "observation_end_time",
       "start_time",
+      "type",
       "viewers",
     };
 
@@ -2213,6 +2214,15 @@ public class AdStudy extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setType (AdStudy.EnumType type) {
+      this.setParam("type", type);
+      return this;
+    }
+    public APIRequestUpdate setType (String type) {
+      this.setParam("type", type);
+      return this;
+    }
+
     public APIRequestUpdate setViewers (List<Long> viewers) {
       this.setParam("viewers", viewers);
       return this;
@@ -2260,25 +2270,6 @@ public class AdStudy extends APINode {
 
   }
 
-  public static enum EnumAudienceType {
-      @SerializedName("MOST_RESPONSIVE")
-      VALUE_MOST_RESPONSIVE("MOST_RESPONSIVE"),
-      @SerializedName("NOT_MOST_RESPONSIVE")
-      VALUE_NOT_MOST_RESPONSIVE("NOT_MOST_RESPONSIVE"),
-      NULL(null);
-
-      private String value;
-
-      private EnumAudienceType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
   public static enum EnumType {
       @SerializedName("CONTINUOUS_LIFT_CONFIG")
       VALUE_CONTINUOUS_LIFT_CONFIG("CONTINUOUS_LIFT_CONFIG"),
@@ -2291,6 +2282,25 @@ public class AdStudy extends APINode {
       private String value;
 
       private EnumType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumAudienceType {
+      @SerializedName("MOST_RESPONSIVE")
+      VALUE_MOST_RESPONSIVE("MOST_RESPONSIVE"),
+      @SerializedName("NOT_MOST_RESPONSIVE")
+      VALUE_NOT_MOST_RESPONSIVE("NOT_MOST_RESPONSIVE"),
+      NULL(null);
+
+      private String value;
+
+      private EnumAudienceType(String value) {
         this.value = value;
       }
 

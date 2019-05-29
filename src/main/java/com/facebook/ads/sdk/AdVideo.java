@@ -398,10 +398,6 @@ public class AdVideo extends APINode {
     return new APIRequestCreateSummarization(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetTags getTags() {
-    return new APIRequestGetTags(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestCreateTag createTag() {
     return new APIRequestCreateTag(this.getPrefixedId().toString(), context);
   }
@@ -4473,126 +4469,6 @@ public class AdVideo extends APINode {
       return this;
     }
 
-  }
-
-  public static class APIRequestGetTags extends APIRequest<TaggableSubject> {
-
-    APINodeList<TaggableSubject> lastResponse = null;
-    @Override
-    public APINodeList<TaggableSubject> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "id",
-      "name",
-    };
-
-    @Override
-    public APINodeList<TaggableSubject> parseResponse(String response, String header) throws APIException {
-      return TaggableSubject.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<TaggableSubject> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<TaggableSubject> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<TaggableSubject>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<TaggableSubject>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<TaggableSubject>>() {
-           public APINodeList<TaggableSubject> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetTags.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetTags(String nodeId, APIContext context) {
-      super(context, nodeId, "/tags", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetTags setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetTags setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetTags requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetTags requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetTags requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetTags requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetTags requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetTags requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetTags requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetTags requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetTags requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetTags requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
   }
 
   public static class APIRequestCreateTag extends APIRequest<AdVideo> {

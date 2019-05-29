@@ -306,6 +306,10 @@ public class Business extends APINode {
     return new APIRequestCreateAccessToken(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestDeleteAdAccounts deleteAdAccounts() {
+    return new APIRequestDeleteAdAccounts(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetAdStudies getAdStudies() {
     return new APIRequestGetAdStudies(this.getPrefixedId().toString(), context);
   }
@@ -320,10 +324,6 @@ public class Business extends APINode {
 
   public APIRequestCreateAdAccountCreationRequest createAdAccountCreationRequest() {
     return new APIRequestCreateAdAccountCreationRequest(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestDeleteAdAccounts deleteAdAccounts() {
-    return new APIRequestDeleteAdAccounts(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetAdNetworkAnalytics getAdNetworkAnalytics() {
@@ -364,10 +364,6 @@ public class Business extends APINode {
 
   public APIRequestCreateBlockListDraft createBlockListDraft() {
     return new APIRequestCreateBlockListDraft(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetBusinessInvoices getBusinessInvoices() {
-    return new APIRequestGetBusinessInvoices(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetBusinessUsers getBusinessUsers() {
@@ -462,10 +458,6 @@ public class Business extends APINode {
     return new APIRequestGetExtendedCredits(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetInitiatedAudienceSharingRequests getInitiatedAudienceSharingRequests() {
-    return new APIRequestGetInitiatedAudienceSharingRequests(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetInitiatedSharingAgreements getInitiatedSharingAgreements() {
     return new APIRequestGetInitiatedSharingAgreements(this.getPrefixedId().toString(), context);
   }
@@ -480,10 +472,6 @@ public class Business extends APINode {
 
   public APIRequestCreateManagedBusiness createManagedBusiness() {
     return new APIRequestCreateManagedBusiness(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetMeasurementReports getMeasurementReports() {
-    return new APIRequestGetMeasurementReports(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetOfflineConversionDataSets getOfflineConversionDataSets() {
@@ -524,10 +512,6 @@ public class Business extends APINode {
 
   public APIRequestCreateOwnedBusiness createOwnedBusiness() {
     return new APIRequestCreateOwnedBusiness(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetOwnedDomains getOwnedDomains() {
-    return new APIRequestGetOwnedDomains(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateOwnedDomain createOwnedDomain() {
@@ -604,10 +588,6 @@ public class Business extends APINode {
 
   public APIRequestGetReceivedAudiencePermissions getReceivedAudiencePermissions() {
     return new APIRequestGetReceivedAudiencePermissions(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetReceivedAudienceSharingRequests getReceivedAudienceSharingRequests() {
-    return new APIRequestGetReceivedAudienceSharingRequests(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetReceivedInprogressOnBehalfRequests getReceivedInprogressOnBehalfRequests() {
@@ -854,6 +834,116 @@ public class Business extends APINode {
 
     @Override
     public APIRequestCreateAccessToken requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestDeleteAdAccounts extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "adaccount_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestDeleteAdAccounts.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDeleteAdAccounts(String nodeId, APIContext context) {
+      super(context, nodeId, "/ad_accounts", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDeleteAdAccounts setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteAdAccounts setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDeleteAdAccounts setAdaccountId (String adaccountId) {
+      this.setParam("adaccount_id", adaccountId);
+      return this;
+    }
+
+    public APIRequestDeleteAdAccounts requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDeleteAdAccounts requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteAdAccounts requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDeleteAdAccounts requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteAdAccounts requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteAdAccounts requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -1794,116 +1884,6 @@ public class Business extends APINode {
 
     @Override
     public APIRequestCreateAdAccountCreationRequest requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestDeleteAdAccounts extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "adaccount_id",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestDeleteAdAccounts.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestDeleteAdAccounts(String nodeId, APIContext context) {
-      super(context, nodeId, "/adaccounts", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDeleteAdAccounts setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAdAccounts setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDeleteAdAccounts setAdaccountId (String adaccountId) {
-      this.setParam("adaccount_id", adaccountId);
-      return this;
-    }
-
-    public APIRequestDeleteAdAccounts requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDeleteAdAccounts requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAdAccounts requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDeleteAdAccounts requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAdAccounts requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAdAccounts requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -3594,300 +3574,6 @@ public class Business extends APINode {
       return this;
     }
 
-  }
-
-  public static class APIRequestGetBusinessInvoices extends APIRequest<OracleTransaction> {
-
-    APINodeList<OracleTransaction> lastResponse = null;
-    @Override
-    public APINodeList<OracleTransaction> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "end_date",
-      "invoice_id",
-      "issue_end_date",
-      "issue_start_date",
-      "root_id",
-      "start_date",
-      "type",
-    };
-
-    public static final String[] FIELDS = {
-      "ad_account_ids",
-      "amount",
-      "amount_due",
-      "billed_amount_details",
-      "billing_period",
-      "currency",
-      "download_uri",
-      "due_date",
-      "entity",
-      "id",
-      "invoice_date",
-      "invoice_id",
-      "invoice_type",
-      "liability_type",
-      "payment_status",
-      "payment_term",
-      "type",
-    };
-
-    @Override
-    public APINodeList<OracleTransaction> parseResponse(String response, String header) throws APIException {
-      return OracleTransaction.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<OracleTransaction> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<OracleTransaction> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<OracleTransaction>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<OracleTransaction>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<OracleTransaction>>() {
-           public APINodeList<OracleTransaction> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetBusinessInvoices.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetBusinessInvoices(String nodeId, APIContext context) {
-      super(context, nodeId, "/business_invoices", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetBusinessInvoices setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBusinessInvoices setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetBusinessInvoices setEndDate (String endDate) {
-      this.setParam("end_date", endDate);
-      return this;
-    }
-
-    public APIRequestGetBusinessInvoices setInvoiceId (Long invoiceId) {
-      this.setParam("invoice_id", invoiceId);
-      return this;
-    }
-    public APIRequestGetBusinessInvoices setInvoiceId (String invoiceId) {
-      this.setParam("invoice_id", invoiceId);
-      return this;
-    }
-
-    public APIRequestGetBusinessInvoices setIssueEndDate (String issueEndDate) {
-      this.setParam("issue_end_date", issueEndDate);
-      return this;
-    }
-
-    public APIRequestGetBusinessInvoices setIssueStartDate (String issueStartDate) {
-      this.setParam("issue_start_date", issueStartDate);
-      return this;
-    }
-
-    public APIRequestGetBusinessInvoices setRootId (Long rootId) {
-      this.setParam("root_id", rootId);
-      return this;
-    }
-    public APIRequestGetBusinessInvoices setRootId (String rootId) {
-      this.setParam("root_id", rootId);
-      return this;
-    }
-
-    public APIRequestGetBusinessInvoices setStartDate (String startDate) {
-      this.setParam("start_date", startDate);
-      return this;
-    }
-
-    public APIRequestGetBusinessInvoices setType (OracleTransaction.EnumType type) {
-      this.setParam("type", type);
-      return this;
-    }
-    public APIRequestGetBusinessInvoices setType (String type) {
-      this.setParam("type", type);
-      return this;
-    }
-
-    public APIRequestGetBusinessInvoices requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetBusinessInvoices requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBusinessInvoices requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetBusinessInvoices requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBusinessInvoices requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBusinessInvoices requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetBusinessInvoices requestAdAccountIdsField () {
-      return this.requestAdAccountIdsField(true);
-    }
-    public APIRequestGetBusinessInvoices requestAdAccountIdsField (boolean value) {
-      this.requestField("ad_account_ids", value);
-      return this;
-    }
-    public APIRequestGetBusinessInvoices requestAmountField () {
-      return this.requestAmountField(true);
-    }
-    public APIRequestGetBusinessInvoices requestAmountField (boolean value) {
-      this.requestField("amount", value);
-      return this;
-    }
-    public APIRequestGetBusinessInvoices requestAmountDueField () {
-      return this.requestAmountDueField(true);
-    }
-    public APIRequestGetBusinessInvoices requestAmountDueField (boolean value) {
-      this.requestField("amount_due", value);
-      return this;
-    }
-    public APIRequestGetBusinessInvoices requestBilledAmountDetailsField () {
-      return this.requestBilledAmountDetailsField(true);
-    }
-    public APIRequestGetBusinessInvoices requestBilledAmountDetailsField (boolean value) {
-      this.requestField("billed_amount_details", value);
-      return this;
-    }
-    public APIRequestGetBusinessInvoices requestBillingPeriodField () {
-      return this.requestBillingPeriodField(true);
-    }
-    public APIRequestGetBusinessInvoices requestBillingPeriodField (boolean value) {
-      this.requestField("billing_period", value);
-      return this;
-    }
-    public APIRequestGetBusinessInvoices requestCurrencyField () {
-      return this.requestCurrencyField(true);
-    }
-    public APIRequestGetBusinessInvoices requestCurrencyField (boolean value) {
-      this.requestField("currency", value);
-      return this;
-    }
-    public APIRequestGetBusinessInvoices requestDownloadUriField () {
-      return this.requestDownloadUriField(true);
-    }
-    public APIRequestGetBusinessInvoices requestDownloadUriField (boolean value) {
-      this.requestField("download_uri", value);
-      return this;
-    }
-    public APIRequestGetBusinessInvoices requestDueDateField () {
-      return this.requestDueDateField(true);
-    }
-    public APIRequestGetBusinessInvoices requestDueDateField (boolean value) {
-      this.requestField("due_date", value);
-      return this;
-    }
-    public APIRequestGetBusinessInvoices requestEntityField () {
-      return this.requestEntityField(true);
-    }
-    public APIRequestGetBusinessInvoices requestEntityField (boolean value) {
-      this.requestField("entity", value);
-      return this;
-    }
-    public APIRequestGetBusinessInvoices requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetBusinessInvoices requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetBusinessInvoices requestInvoiceDateField () {
-      return this.requestInvoiceDateField(true);
-    }
-    public APIRequestGetBusinessInvoices requestInvoiceDateField (boolean value) {
-      this.requestField("invoice_date", value);
-      return this;
-    }
-    public APIRequestGetBusinessInvoices requestInvoiceIdField () {
-      return this.requestInvoiceIdField(true);
-    }
-    public APIRequestGetBusinessInvoices requestInvoiceIdField (boolean value) {
-      this.requestField("invoice_id", value);
-      return this;
-    }
-    public APIRequestGetBusinessInvoices requestInvoiceTypeField () {
-      return this.requestInvoiceTypeField(true);
-    }
-    public APIRequestGetBusinessInvoices requestInvoiceTypeField (boolean value) {
-      this.requestField("invoice_type", value);
-      return this;
-    }
-    public APIRequestGetBusinessInvoices requestLiabilityTypeField () {
-      return this.requestLiabilityTypeField(true);
-    }
-    public APIRequestGetBusinessInvoices requestLiabilityTypeField (boolean value) {
-      this.requestField("liability_type", value);
-      return this;
-    }
-    public APIRequestGetBusinessInvoices requestPaymentStatusField () {
-      return this.requestPaymentStatusField(true);
-    }
-    public APIRequestGetBusinessInvoices requestPaymentStatusField (boolean value) {
-      this.requestField("payment_status", value);
-      return this;
-    }
-    public APIRequestGetBusinessInvoices requestPaymentTermField () {
-      return this.requestPaymentTermField(true);
-    }
-    public APIRequestGetBusinessInvoices requestPaymentTermField (boolean value) {
-      this.requestField("payment_term", value);
-      return this;
-    }
-    public APIRequestGetBusinessInvoices requestTypeField () {
-      return this.requestTypeField(true);
-    }
-    public APIRequestGetBusinessInvoices requestTypeField (boolean value) {
-      this.requestField("type", value);
-      return this;
-    }
   }
 
   public static class APIRequestGetBusinessUsers extends APIRequest<BusinessUser> {
@@ -10982,126 +10668,6 @@ public class Business extends APINode {
     }
   }
 
-  public static class APIRequestGetInitiatedAudienceSharingRequests extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "recipient_id",
-      "request_status",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetInitiatedAudienceSharingRequests.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetInitiatedAudienceSharingRequests(String nodeId, APIContext context) {
-      super(context, nodeId, "/initiated_audience_sharing_requests", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetInitiatedAudienceSharingRequests setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetInitiatedAudienceSharingRequests setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetInitiatedAudienceSharingRequests setRecipientId (String recipientId) {
-      this.setParam("recipient_id", recipientId);
-      return this;
-    }
-
-    public APIRequestGetInitiatedAudienceSharingRequests setRequestStatus (EnumRequestStatus requestStatus) {
-      this.setParam("request_status", requestStatus);
-      return this;
-    }
-    public APIRequestGetInitiatedAudienceSharingRequests setRequestStatus (String requestStatus) {
-      this.setParam("request_status", requestStatus);
-      return this;
-    }
-
-    public APIRequestGetInitiatedAudienceSharingRequests requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetInitiatedAudienceSharingRequests requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetInitiatedAudienceSharingRequests requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetInitiatedAudienceSharingRequests requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetInitiatedAudienceSharingRequests requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetInitiatedAudienceSharingRequests requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetInitiatedSharingAgreements extends APIRequest<BusinessAgreement> {
 
     APINodeList<BusinessAgreement> lastResponse = null;
@@ -11694,178 +11260,6 @@ public class Business extends APINode {
       return this;
     }
 
-  }
-
-  public static class APIRequestGetMeasurementReports extends APIRequest<MeasurementReport> {
-
-    APINodeList<MeasurementReport> lastResponse = null;
-    @Override
-    public APINodeList<MeasurementReport> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "filters",
-      "report_type",
-    };
-
-    public static final String[] FIELDS = {
-      "download_urls",
-      "id",
-      "metadata",
-      "report_type",
-      "status",
-      "upload_urls",
-    };
-
-    @Override
-    public APINodeList<MeasurementReport> parseResponse(String response, String header) throws APIException {
-      return MeasurementReport.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<MeasurementReport> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<MeasurementReport> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<MeasurementReport>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<MeasurementReport>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<MeasurementReport>>() {
-           public APINodeList<MeasurementReport> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetMeasurementReports.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetMeasurementReports(String nodeId, APIContext context) {
-      super(context, nodeId, "/measurement_reports", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetMeasurementReports setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMeasurementReports setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetMeasurementReports setFilters (List<Object> filters) {
-      this.setParam("filters", filters);
-      return this;
-    }
-    public APIRequestGetMeasurementReports setFilters (String filters) {
-      this.setParam("filters", filters);
-      return this;
-    }
-
-    public APIRequestGetMeasurementReports setReportType (MeasurementReport.EnumReportType reportType) {
-      this.setParam("report_type", reportType);
-      return this;
-    }
-    public APIRequestGetMeasurementReports setReportType (String reportType) {
-      this.setParam("report_type", reportType);
-      return this;
-    }
-
-    public APIRequestGetMeasurementReports requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetMeasurementReports requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMeasurementReports requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetMeasurementReports requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMeasurementReports requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMeasurementReports requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetMeasurementReports requestDownloadUrlsField () {
-      return this.requestDownloadUrlsField(true);
-    }
-    public APIRequestGetMeasurementReports requestDownloadUrlsField (boolean value) {
-      this.requestField("download_urls", value);
-      return this;
-    }
-    public APIRequestGetMeasurementReports requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetMeasurementReports requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetMeasurementReports requestMetadataField () {
-      return this.requestMetadataField(true);
-    }
-    public APIRequestGetMeasurementReports requestMetadataField (boolean value) {
-      this.requestField("metadata", value);
-      return this;
-    }
-    public APIRequestGetMeasurementReports requestReportTypeField () {
-      return this.requestReportTypeField(true);
-    }
-    public APIRequestGetMeasurementReports requestReportTypeField (boolean value) {
-      this.requestField("report_type", value);
-      return this;
-    }
-    public APIRequestGetMeasurementReports requestStatusField () {
-      return this.requestStatusField(true);
-    }
-    public APIRequestGetMeasurementReports requestStatusField (boolean value) {
-      this.requestField("status", value);
-      return this;
-    }
-    public APIRequestGetMeasurementReports requestUploadUrlsField () {
-      return this.requestUploadUrlsField(true);
-    }
-    public APIRequestGetMeasurementReports requestUploadUrlsField (boolean value) {
-      this.requestField("upload_urls", value);
-      return this;
-    }
   }
 
   public static class APIRequestGetOfflineConversionDataSets extends APIRequest<OfflineConversionDataSet> {
@@ -14630,110 +14024,6 @@ public class Business extends APINode {
 
     @Override
     public APIRequestCreateOwnedBusiness requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestGetOwnedDomains extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetOwnedDomains.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetOwnedDomains(String nodeId, APIContext context) {
-      super(context, nodeId, "/owned_domains", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetOwnedDomains setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetOwnedDomains setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetOwnedDomains requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetOwnedDomains requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetOwnedDomains requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetOwnedDomains requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetOwnedDomains requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetOwnedDomains requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -18950,126 +18240,6 @@ public class Business extends APINode {
     }
   }
 
-  public static class APIRequestGetReceivedAudienceSharingRequests extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "initiator_id",
-      "request_status",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetReceivedAudienceSharingRequests.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetReceivedAudienceSharingRequests(String nodeId, APIContext context) {
-      super(context, nodeId, "/received_audience_sharing_requests", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetReceivedAudienceSharingRequests setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetReceivedAudienceSharingRequests setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetReceivedAudienceSharingRequests setInitiatorId (String initiatorId) {
-      this.setParam("initiator_id", initiatorId);
-      return this;
-    }
-
-    public APIRequestGetReceivedAudienceSharingRequests setRequestStatus (EnumRequestStatus requestStatus) {
-      this.setParam("request_status", requestStatus);
-      return this;
-    }
-    public APIRequestGetReceivedAudienceSharingRequests setRequestStatus (String requestStatus) {
-      this.setParam("request_status", requestStatus);
-      return this;
-    }
-
-    public APIRequestGetReceivedAudienceSharingRequests requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetReceivedAudienceSharingRequests requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetReceivedAudienceSharingRequests requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetReceivedAudienceSharingRequests requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetReceivedAudienceSharingRequests requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetReceivedAudienceSharingRequests requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetReceivedInprogressOnBehalfRequests extends APIRequest<BusinessOwnedObjectOnBehalfOfRequest> {
 
     APINodeList<BusinessOwnedObjectOnBehalfOfRequest> lastResponse = null;
@@ -21005,6 +20175,8 @@ public class Business extends APINode {
       VALUE_MANAGE("MANAGE"),
       @SerializedName("MANAGE_JOBS")
       VALUE_MANAGE_JOBS("MANAGE_JOBS"),
+      @SerializedName("MANAGE_LEADS")
+      VALUE_MANAGE_LEADS("MANAGE_LEADS"),
       @SerializedName("MODERATE")
       VALUE_MODERATE("MODERATE"),
       @SerializedName("MODERATE_COMMUNITY")
@@ -21022,29 +20194,6 @@ public class Business extends APINode {
       private String value;
 
       private EnumPagePermittedTasks(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumRequestStatus {
-      @SerializedName("APPROVE")
-      VALUE_APPROVE("APPROVE"),
-      @SerializedName("DECLINE")
-      VALUE_DECLINE("DECLINE"),
-      @SerializedName("EXPIRED")
-      VALUE_EXPIRED("EXPIRED"),
-      @SerializedName("IN_PROGRESS")
-      VALUE_IN_PROGRESS("IN_PROGRESS"),
-      NULL(null);
-
-      private String value;
-
-      private EnumRequestStatus(String value) {
         this.value = value;
       }
 

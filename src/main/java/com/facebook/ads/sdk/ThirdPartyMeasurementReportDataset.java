@@ -278,6 +278,10 @@ public class ThirdPartyMeasurementReportDataset extends APINode {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestUpdate update() {
+    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
+  }
+
 
   public String getFieldCategory() {
     return mCategory;
@@ -446,6 +450,120 @@ public class ThirdPartyMeasurementReportDataset extends APINode {
       this.requestField("schema", value);
       return this;
     }
+  }
+
+  public static class APIRequestUpdate extends APIRequest<ThirdPartyMeasurementReportDataset> {
+
+    ThirdPartyMeasurementReportDataset lastResponse = null;
+    @Override
+    public ThirdPartyMeasurementReportDataset getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "data",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public ThirdPartyMeasurementReportDataset parseResponse(String response, String header) throws APIException {
+      return ThirdPartyMeasurementReportDataset.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public ThirdPartyMeasurementReportDataset execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ThirdPartyMeasurementReportDataset execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<ThirdPartyMeasurementReportDataset> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ThirdPartyMeasurementReportDataset> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, ThirdPartyMeasurementReportDataset>() {
+           public ThirdPartyMeasurementReportDataset apply(ResponseWrapper result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestUpdate(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestUpdate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestUpdate setData (List<Map<String, String>> data) {
+      this.setParam("data", data);
+      return this;
+    }
+    public APIRequestUpdate setData (String data) {
+      this.setParam("data", data);
+      return this;
+    }
+
+    public APIRequestUpdate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestUpdate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static enum EnumCategory {

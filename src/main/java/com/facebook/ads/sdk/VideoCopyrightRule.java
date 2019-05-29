@@ -476,27 +476,6 @@ public class VideoCopyrightRule extends APINode {
     }
   }
 
-  public static enum EnumSource {
-      @SerializedName("MATCH_SETTINGS_DIALOG")
-      VALUE_MATCH_SETTINGS_DIALOG("MATCH_SETTINGS_DIALOG"),
-      @SerializedName("RULES_SELECTOR")
-      VALUE_RULES_SELECTOR("RULES_SELECTOR"),
-      @SerializedName("RULES_TAB")
-      VALUE_RULES_TAB("RULES_TAB"),
-      NULL(null);
-
-      private String value;
-
-      private EnumSource(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
