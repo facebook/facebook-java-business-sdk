@@ -3,4 +3,4 @@ jdk:
   - oraclejdk8
   - oraclejdk9
   
-install: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -Dpgp.skip-true -B -V
+install: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -Dpgp.skip=true -B -V
