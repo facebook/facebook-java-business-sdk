@@ -83,6 +83,8 @@ public class LeadgenForm extends APINode {
   private String mLeadgenExportCsvUrl = null;
   @SerializedName("leads_count")
   private Long mLeadsCount = null;
+  @SerializedName("legal_content")
+  private Object mLegalContent = null;
   @SerializedName("locale")
   private String mLocale = null;
   @SerializedName("messenger_welcome_message")
@@ -402,6 +404,10 @@ public class LeadgenForm extends APINode {
     return mLeadsCount;
   }
 
+  public Object getFieldLegalContent() {
+    return mLegalContent;
+  }
+
   public String getFieldLocale() {
     return mLocale;
   }
@@ -480,12 +486,14 @@ public class LeadgenForm extends APINode {
       "custom_disclaimer_responses",
       "field_data",
       "form_id",
+      "home_listing",
       "id",
       "is_organic",
       "partner_name",
       "platform",
       "post",
       "retailer_item_id",
+      "vehicle",
     };
 
     @Override
@@ -647,6 +655,13 @@ public class LeadgenForm extends APINode {
       this.requestField("form_id", value);
       return this;
     }
+    public APIRequestGetLeads requestHomeListingField () {
+      return this.requestHomeListingField(true);
+    }
+    public APIRequestGetLeads requestHomeListingField (boolean value) {
+      this.requestField("home_listing", value);
+      return this;
+    }
     public APIRequestGetLeads requestIdField () {
       return this.requestIdField(true);
     }
@@ -689,6 +704,13 @@ public class LeadgenForm extends APINode {
       this.requestField("retailer_item_id", value);
       return this;
     }
+    public APIRequestGetLeads requestVehicleField () {
+      return this.requestVehicleField(true);
+    }
+    public APIRequestGetLeads requestVehicleField (boolean value) {
+      this.requestField("vehicle", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetTestLeads extends APIRequest<Lead> {
@@ -712,12 +734,14 @@ public class LeadgenForm extends APINode {
       "custom_disclaimer_responses",
       "field_data",
       "form_id",
+      "home_listing",
       "id",
       "is_organic",
       "partner_name",
       "platform",
       "post",
       "retailer_item_id",
+      "vehicle",
     };
 
     @Override
@@ -879,6 +903,13 @@ public class LeadgenForm extends APINode {
       this.requestField("form_id", value);
       return this;
     }
+    public APIRequestGetTestLeads requestHomeListingField () {
+      return this.requestHomeListingField(true);
+    }
+    public APIRequestGetTestLeads requestHomeListingField (boolean value) {
+      this.requestField("home_listing", value);
+      return this;
+    }
     public APIRequestGetTestLeads requestIdField () {
       return this.requestIdField(true);
     }
@@ -919,6 +950,13 @@ public class LeadgenForm extends APINode {
     }
     public APIRequestGetTestLeads requestRetailerItemIdField (boolean value) {
       this.requestField("retailer_item_id", value);
+      return this;
+    }
+    public APIRequestGetTestLeads requestVehicleField () {
+      return this.requestVehicleField(true);
+    }
+    public APIRequestGetTestLeads requestVehicleField (boolean value) {
+      this.requestField("vehicle", value);
       return this;
     }
   }
@@ -1176,6 +1214,7 @@ public class LeadgenForm extends APINode {
       "is_optimized_for_quality",
       "leadgen_export_csv_url",
       "leads_count",
+      "legal_content",
       "locale",
       "messenger_welcome_message",
       "name",
@@ -1376,6 +1415,13 @@ public class LeadgenForm extends APINode {
     }
     public APIRequestGet requestLeadsCountField (boolean value) {
       this.requestField("leads_count", value);
+      return this;
+    }
+    public APIRequestGet requestLegalContentField () {
+      return this.requestLegalContentField(true);
+    }
+    public APIRequestGet requestLegalContentField (boolean value) {
+      this.requestField("legal_content", value);
       return this;
     }
     public APIRequestGet requestLocaleField () {
@@ -1714,6 +1760,7 @@ public class LeadgenForm extends APINode {
     this.mIsOptimizedForQuality = instance.mIsOptimizedForQuality;
     this.mLeadgenExportCsvUrl = instance.mLeadgenExportCsvUrl;
     this.mLeadsCount = instance.mLeadsCount;
+    this.mLegalContent = instance.mLegalContent;
     this.mLocale = instance.mLocale;
     this.mMessengerWelcomeMessage = instance.mMessengerWelcomeMessage;
     this.mName = instance.mName;

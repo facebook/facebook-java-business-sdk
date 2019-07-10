@@ -360,6 +360,7 @@ public class SystemUser extends APINode {
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
+      "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
       "funding_source",
@@ -646,6 +647,13 @@ public class SystemUser extends APINode {
     }
     public APIRequestGetAssignedAdAccounts requestEndAdvertiserNameField (boolean value) {
       this.requestField("end_advertiser_name", value);
+      return this;
+    }
+    public APIRequestGetAssignedAdAccounts requestExtendedCreditInvoiceGroupField () {
+      return this.requestExtendedCreditInvoiceGroupField(true);
+    }
+    public APIRequestGetAssignedAdAccounts requestExtendedCreditInvoiceGroupField (boolean value) {
+      this.requestField("extended_credit_invoice_group", value);
       return this;
     }
     public APIRequestGetAssignedAdAccounts requestFailedDeliveryChecksField () {
@@ -2349,6 +2357,7 @@ public class SystemUser extends APINode {
       "address",
       "admin_notes",
       "age_range",
+      "auth_method",
       "birthday",
       "can_review_measurement_request",
       "cover",
@@ -2356,7 +2365,6 @@ public class SystemUser extends APINode {
       "devices",
       "education",
       "email",
-      "employee_number",
       "favorite_athletes",
       "favorite_teams",
       "first_name",
@@ -2523,6 +2531,13 @@ public class SystemUser extends APINode {
       this.requestField("age_range", value);
       return this;
     }
+    public APIRequestGetUpdatedBy requestAuthMethodField () {
+      return this.requestAuthMethodField(true);
+    }
+    public APIRequestGetUpdatedBy requestAuthMethodField (boolean value) {
+      this.requestField("auth_method", value);
+      return this;
+    }
     public APIRequestGetUpdatedBy requestBirthdayField () {
       return this.requestBirthdayField(true);
     }
@@ -2570,13 +2585,6 @@ public class SystemUser extends APINode {
     }
     public APIRequestGetUpdatedBy requestEmailField (boolean value) {
       this.requestField("email", value);
-      return this;
-    }
-    public APIRequestGetUpdatedBy requestEmployeeNumberField () {
-      return this.requestEmployeeNumberField(true);
-    }
-    public APIRequestGetUpdatedBy requestEmployeeNumberField (boolean value) {
-      this.requestField("employee_number", value);
       return this;
     }
     public APIRequestGetUpdatedBy requestFavoriteAthletesField () {

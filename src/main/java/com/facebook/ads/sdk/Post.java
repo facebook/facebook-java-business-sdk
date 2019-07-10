@@ -2548,6 +2548,7 @@ public class Post extends APINode {
       "address",
       "admin_notes",
       "age_range",
+      "auth_method",
       "birthday",
       "can_review_measurement_request",
       "cover",
@@ -2555,7 +2556,6 @@ public class Post extends APINode {
       "devices",
       "education",
       "email",
-      "employee_number",
       "favorite_athletes",
       "favorite_teams",
       "first_name",
@@ -2722,6 +2722,13 @@ public class Post extends APINode {
       this.requestField("age_range", value);
       return this;
     }
+    public APIRequestGetSeen requestAuthMethodField () {
+      return this.requestAuthMethodField(true);
+    }
+    public APIRequestGetSeen requestAuthMethodField (boolean value) {
+      this.requestField("auth_method", value);
+      return this;
+    }
     public APIRequestGetSeen requestBirthdayField () {
       return this.requestBirthdayField(true);
     }
@@ -2769,13 +2776,6 @@ public class Post extends APINode {
     }
     public APIRequestGetSeen requestEmailField (boolean value) {
       this.requestField("email", value);
-      return this;
-    }
-    public APIRequestGetSeen requestEmployeeNumberField () {
-      return this.requestEmployeeNumberField(true);
-    }
-    public APIRequestGetSeen requestEmployeeNumberField (boolean value) {
-      this.requestField("employee_number", value);
       return this;
     }
     public APIRequestGetSeen requestFavoriteAthletesField () {
@@ -4992,6 +4992,23 @@ public class Post extends APINode {
       }
   }
 
+  public static enum EnumWith {
+      @SerializedName("LOCATION")
+      VALUE_LOCATION("LOCATION"),
+      NULL(null);
+
+      private String value;
+
+      private EnumWith(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumAudience {
       @SerializedName("AUTO_LOOKALIKE")
       VALUE_AUTO_LOOKALIKE("AUTO_LOOKALIKE"),
@@ -5013,6 +5030,8 @@ public class Post extends APINode {
       VALUE_FANS("FANS"),
       @SerializedName("GROUPER")
       VALUE_GROUPER("GROUPER"),
+      @SerializedName("HEC_AUDIENCE")
+      VALUE_HEC_AUDIENCE("HEC_AUDIENCE"),
       @SerializedName("IG_PROMOTED_POST_AUTO")
       VALUE_IG_PROMOTED_POST_AUTO("IG_PROMOTED_POST_AUTO"),
       @SerializedName("LOCAL")

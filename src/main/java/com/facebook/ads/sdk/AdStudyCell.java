@@ -355,6 +355,7 @@ public class AdStudyCell extends APINode {
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
+      "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
       "funding_source",
@@ -643,6 +644,13 @@ public class AdStudyCell extends APINode {
       this.requestField("end_advertiser_name", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestExtendedCreditInvoiceGroupField () {
+      return this.requestExtendedCreditInvoiceGroupField(true);
+    }
+    public APIRequestGetAdAccounts requestExtendedCreditInvoiceGroupField (boolean value) {
+      this.requestField("extended_credit_invoice_group", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestFailedDeliveryChecksField () {
       return this.requestFailedDeliveryChecksField(true);
     }
@@ -909,7 +917,6 @@ public class AdStudyCell extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
-      "ad_keywords",
       "adlabels",
       "adset_schedule",
       "asset_feed_id",
@@ -1057,13 +1064,6 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetAdSets requestAccountIdField (boolean value) {
       this.requestField("account_id", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestAdKeywordsField () {
-      return this.requestAdKeywordsField(true);
-    }
-    public APIRequestGetAdSets requestAdKeywordsField (boolean value) {
-      this.requestField("ad_keywords", value);
       return this;
     }
     public APIRequestGetAdSets requestAdlabelsField () {

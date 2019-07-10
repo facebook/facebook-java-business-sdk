@@ -4088,7 +4088,7 @@ public class Group extends APINode {
     };
 
     public APIRequestCreateOpenGraphActionFeed(String nodeId, APIContext context) {
-      super(context, nodeId, "/opengraphactionfeed", "POST", Arrays.asList(PARAMS));
+      super(context, nodeId, "/open_graph_action_feed", "POST", Arrays.asList(PARAMS));
     }
 
     @Override
@@ -4364,6 +4364,7 @@ public class Group extends APINode {
       "address",
       "admin_notes",
       "age_range",
+      "auth_method",
       "birthday",
       "can_review_measurement_request",
       "cover",
@@ -4371,7 +4372,6 @@ public class Group extends APINode {
       "devices",
       "education",
       "email",
-      "employee_number",
       "favorite_athletes",
       "favorite_teams",
       "first_name",
@@ -4538,6 +4538,13 @@ public class Group extends APINode {
       this.requestField("age_range", value);
       return this;
     }
+    public APIRequestGetOptedInMembers requestAuthMethodField () {
+      return this.requestAuthMethodField(true);
+    }
+    public APIRequestGetOptedInMembers requestAuthMethodField (boolean value) {
+      this.requestField("auth_method", value);
+      return this;
+    }
     public APIRequestGetOptedInMembers requestBirthdayField () {
       return this.requestBirthdayField(true);
     }
@@ -4585,13 +4592,6 @@ public class Group extends APINode {
     }
     public APIRequestGetOptedInMembers requestEmailField (boolean value) {
       this.requestField("email", value);
-      return this;
-    }
-    public APIRequestGetOptedInMembers requestEmployeeNumberField () {
-      return this.requestEmployeeNumberField(true);
-    }
-    public APIRequestGetOptedInMembers requestEmployeeNumberField (boolean value) {
-      this.requestField("employee_number", value);
       return this;
     }
     public APIRequestGetOptedInMembers requestFavoriteAthletesField () {

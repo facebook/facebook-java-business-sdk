@@ -75,6 +75,8 @@ public class Lead extends APINode {
   private List<UserLeadGenFieldData> mFieldData = null;
   @SerializedName("form_id")
   private String mFormId = null;
+  @SerializedName("home_listing")
+  private HomeListing mHomeListing = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("is_organic")
@@ -87,6 +89,8 @@ public class Lead extends APINode {
   private Link mPost = null;
   @SerializedName("retailer_item_id")
   private String mRetailerItemId = null;
+  @SerializedName("vehicle")
+  private Vehicle mVehicle = null;
   protected static Gson gson = null;
 
   Lead() {
@@ -341,6 +345,13 @@ public class Lead extends APINode {
     return mFormId;
   }
 
+  public HomeListing getFieldHomeListing() {
+    if (mHomeListing != null) {
+      mHomeListing.context = getContext();
+    }
+    return mHomeListing;
+  }
+
   public String getFieldId() {
     return mId;
   }
@@ -368,6 +379,13 @@ public class Lead extends APINode {
     return mRetailerItemId;
   }
 
+  public Vehicle getFieldVehicle() {
+    if (mVehicle != null) {
+      mVehicle.context = getContext();
+    }
+    return mVehicle;
+  }
+
 
 
   public static class APIRequestGet extends APIRequest<Lead> {
@@ -391,12 +409,14 @@ public class Lead extends APINode {
       "custom_disclaimer_responses",
       "field_data",
       "form_id",
+      "home_listing",
       "id",
       "is_organic",
       "partner_name",
       "platform",
       "post",
       "retailer_item_id",
+      "vehicle",
     };
 
     @Override
@@ -558,6 +578,13 @@ public class Lead extends APINode {
       this.requestField("form_id", value);
       return this;
     }
+    public APIRequestGet requestHomeListingField () {
+      return this.requestHomeListingField(true);
+    }
+    public APIRequestGet requestHomeListingField (boolean value) {
+      this.requestField("home_listing", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -600,6 +627,13 @@ public class Lead extends APINode {
       this.requestField("retailer_item_id", value);
       return this;
     }
+    public APIRequestGet requestVehicleField () {
+      return this.requestVehicleField(true);
+    }
+    public APIRequestGet requestVehicleField (boolean value) {
+      this.requestField("vehicle", value);
+      return this;
+    }
   }
 
 
@@ -627,12 +661,14 @@ public class Lead extends APINode {
     this.mCustomDisclaimerResponses = instance.mCustomDisclaimerResponses;
     this.mFieldData = instance.mFieldData;
     this.mFormId = instance.mFormId;
+    this.mHomeListing = instance.mHomeListing;
     this.mId = instance.mId;
     this.mIsOrganic = instance.mIsOrganic;
     this.mPartnerName = instance.mPartnerName;
     this.mPlatform = instance.mPlatform;
     this.mPost = instance.mPost;
     this.mRetailerItemId = instance.mRetailerItemId;
+    this.mVehicle = instance.mVehicle;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

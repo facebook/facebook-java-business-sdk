@@ -95,12 +95,16 @@ public class Ad extends APINode {
   private List<DeliveryCheck> mFailedDeliveryChecks = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("is_autobid")
+  private Boolean mIsAutobid = null;
   @SerializedName("issues_info")
   private List<AdgroupIssuesInfo> mIssuesInfo = null;
   @SerializedName("last_updated_by_app_id")
   private String mLastUpdatedByAppId = null;
   @SerializedName("name")
   private String mName = null;
+  @SerializedName("preview_shareable_link")
+  private String mPreviewShareableLink = null;
   @SerializedName("priority")
   private Long mPriority = null;
   @SerializedName("recommendations")
@@ -482,6 +486,10 @@ public class Ad extends APINode {
     return mId;
   }
 
+  public Boolean getFieldIsAutobid() {
+    return mIsAutobid;
+  }
+
   public List<AdgroupIssuesInfo> getFieldIssuesInfo() {
     return mIssuesInfo;
   }
@@ -492,6 +500,10 @@ public class Ad extends APINode {
 
   public String getFieldName() {
     return mName;
+  }
+
+  public String getFieldPreviewShareableLink() {
+    return mPreviewShareableLink;
   }
 
   public Long getFieldPriority() {
@@ -1541,9 +1553,11 @@ public class Ad extends APINode {
       "engagement_audience",
       "failed_delivery_checks",
       "id",
+      "is_autobid",
       "issues_info",
       "last_updated_by_app_id",
       "name",
+      "preview_shareable_link",
       "priority",
       "recommendations",
       "source_ad",
@@ -1829,6 +1843,13 @@ public class Ad extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetCopies requestIsAutobidField () {
+      return this.requestIsAutobidField(true);
+    }
+    public APIRequestGetCopies requestIsAutobidField (boolean value) {
+      this.requestField("is_autobid", value);
+      return this;
+    }
     public APIRequestGetCopies requestIssuesInfoField () {
       return this.requestIssuesInfoField(true);
     }
@@ -1848,6 +1869,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetCopies requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetCopies requestPreviewShareableLinkField () {
+      return this.requestPreviewShareableLinkField(true);
+    }
+    public APIRequestGetCopies requestPreviewShareableLinkField (boolean value) {
+      this.requestField("preview_shareable_link", value);
       return this;
     }
     public APIRequestGetCopies requestPriorityField () {
@@ -2920,12 +2948,14 @@ public class Ad extends APINode {
       "custom_disclaimer_responses",
       "field_data",
       "form_id",
+      "home_listing",
       "id",
       "is_organic",
       "partner_name",
       "platform",
       "post",
       "retailer_item_id",
+      "vehicle",
     };
 
     @Override
@@ -3087,6 +3117,13 @@ public class Ad extends APINode {
       this.requestField("form_id", value);
       return this;
     }
+    public APIRequestGetLeads requestHomeListingField () {
+      return this.requestHomeListingField(true);
+    }
+    public APIRequestGetLeads requestHomeListingField (boolean value) {
+      this.requestField("home_listing", value);
+      return this;
+    }
     public APIRequestGetLeads requestIdField () {
       return this.requestIdField(true);
     }
@@ -3127,6 +3164,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetLeads requestRetailerItemIdField (boolean value) {
       this.requestField("retailer_item_id", value);
+      return this;
+    }
+    public APIRequestGetLeads requestVehicleField () {
+      return this.requestVehicleField(true);
+    }
+    public APIRequestGetLeads requestVehicleField (boolean value) {
+      this.requestField("vehicle", value);
       return this;
     }
   }
@@ -3755,9 +3799,11 @@ public class Ad extends APINode {
       "engagement_audience",
       "failed_delivery_checks",
       "id",
+      "is_autobid",
       "issues_info",
       "last_updated_by_app_id",
       "name",
+      "preview_shareable_link",
       "priority",
       "recommendations",
       "source_ad",
@@ -4043,6 +4089,13 @@ public class Ad extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestIsAutobidField () {
+      return this.requestIsAutobidField(true);
+    }
+    public APIRequestGet requestIsAutobidField (boolean value) {
+      this.requestField("is_autobid", value);
+      return this;
+    }
     public APIRequestGet requestIssuesInfoField () {
       return this.requestIssuesInfoField(true);
     }
@@ -4062,6 +4115,13 @@ public class Ad extends APINode {
     }
     public APIRequestGet requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGet requestPreviewShareableLinkField () {
+      return this.requestPreviewShareableLinkField(true);
+    }
+    public APIRequestGet requestPreviewShareableLinkField (boolean value) {
+      this.requestField("preview_shareable_link", value);
       return this;
     }
     public APIRequestGet requestPriorityField () {
@@ -4618,9 +4678,11 @@ public class Ad extends APINode {
     this.mEngagementAudience = instance.mEngagementAudience;
     this.mFailedDeliveryChecks = instance.mFailedDeliveryChecks;
     this.mId = instance.mId;
+    this.mIsAutobid = instance.mIsAutobid;
     this.mIssuesInfo = instance.mIssuesInfo;
     this.mLastUpdatedByAppId = instance.mLastUpdatedByAppId;
     this.mName = instance.mName;
+    this.mPreviewShareableLink = instance.mPreviewShareableLink;
     this.mPriority = instance.mPriority;
     this.mRecommendations = instance.mRecommendations;
     this.mSourceAd = instance.mSourceAd;

@@ -65,6 +65,8 @@ public class OracleTransaction extends APINode {
   private BilledAmountDetails mBilledAmountDetails = null;
   @SerializedName("billing_period")
   private String mBillingPeriod = null;
+  @SerializedName("cdn_download_uri")
+  private String mCdnDownloadUri = null;
   @SerializedName("currency")
   private String mCurrency = null;
   @SerializedName("download_uri")
@@ -329,6 +331,10 @@ public class OracleTransaction extends APINode {
 
   public String getFieldBillingPeriod() {
     return mBillingPeriod;
+  }
+
+  public String getFieldCdnDownloadUri() {
+    return mCdnDownloadUri;
   }
 
   public String getFieldCurrency() {
@@ -687,6 +693,7 @@ public class OracleTransaction extends APINode {
       "amount_due",
       "billed_amount_details",
       "billing_period",
+      "cdn_download_uri",
       "currency",
       "download_uri",
       "due_date",
@@ -825,6 +832,13 @@ public class OracleTransaction extends APINode {
       this.requestField("billing_period", value);
       return this;
     }
+    public APIRequestGet requestCdnDownloadUriField () {
+      return this.requestCdnDownloadUriField(true);
+    }
+    public APIRequestGet requestCdnDownloadUriField (boolean value) {
+      this.requestField("cdn_download_uri", value);
+      return this;
+    }
     public APIRequestGet requestCurrencyField () {
       return this.requestCurrencyField(true);
     }
@@ -931,6 +945,7 @@ public class OracleTransaction extends APINode {
     this.mAmountDue = instance.mAmountDue;
     this.mBilledAmountDetails = instance.mBilledAmountDetails;
     this.mBillingPeriod = instance.mBillingPeriod;
+    this.mCdnDownloadUri = instance.mCdnDownloadUri;
     this.mCurrency = instance.mCurrency;
     this.mDownloadUri = instance.mDownloadUri;
     this.mDueDate = instance.mDueDate;

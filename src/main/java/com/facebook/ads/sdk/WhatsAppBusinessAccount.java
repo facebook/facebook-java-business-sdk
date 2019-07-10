@@ -359,6 +359,7 @@ public class WhatsAppBusinessAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "business",
     };
 
     public static final String[] FIELDS = {
@@ -420,6 +421,11 @@ public class WhatsAppBusinessAccount extends APINode {
       return this;
     }
 
+
+    public APIRequestGetAssignedUsers setBusiness (String business) {
+      this.setParam("business", business);
+      return this;
+    }
 
     public APIRequestGetAssignedUsers requestAllFields () {
       return this.requestAllFields(true);

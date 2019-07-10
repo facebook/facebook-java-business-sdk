@@ -221,8 +221,6 @@ public class ReachFrequencyPrediction extends APINode {
   private Long mToplineId = null;
   @SerializedName("tv_viewer_cluster_map")
   private Map<Long, Object> mTvViewerClusterMap = null;
-  @SerializedName("video_view_benchmark_map")
-  private Map<String, ReachFrequencyEstimatesCurve> mVideoViewBenchmarkMap = null;
   @SerializedName("video_view_length_constraint")
   private Long mVideoViewLengthConstraint = null;
   @SerializedName("viewtag")
@@ -773,10 +771,6 @@ public class ReachFrequencyPrediction extends APINode {
     return mTvViewerClusterMap;
   }
 
-  public Map<String, ReachFrequencyEstimatesCurve> getFieldVideoViewBenchmarkMap() {
-    return mVideoViewBenchmarkMap;
-  }
-
   public Long getFieldVideoViewLengthConstraint() {
     return mVideoViewLengthConstraint;
   }
@@ -881,7 +875,6 @@ public class ReachFrequencyPrediction extends APINode {
       "timezone_name",
       "topline_id",
       "tv_viewer_cluster_map",
-      "video_view_benchmark_map",
       "video_view_length_constraint",
       "viewtag",
     };
@@ -1556,13 +1549,6 @@ public class ReachFrequencyPrediction extends APINode {
       this.requestField("tv_viewer_cluster_map", value);
       return this;
     }
-    public APIRequestGet requestVideoViewBenchmarkMapField () {
-      return this.requestVideoViewBenchmarkMapField(true);
-    }
-    public APIRequestGet requestVideoViewBenchmarkMapField (boolean value) {
-      this.requestField("video_view_benchmark_map", value);
-      return this;
-    }
     public APIRequestGet requestVideoViewLengthConstraintField () {
       return this.requestVideoViewLengthConstraintField(true);
     }
@@ -1768,7 +1754,6 @@ public class ReachFrequencyPrediction extends APINode {
     this.mTimezoneName = instance.mTimezoneName;
     this.mToplineId = instance.mToplineId;
     this.mTvViewerClusterMap = instance.mTvViewerClusterMap;
-    this.mVideoViewBenchmarkMap = instance.mVideoViewBenchmarkMap;
     this.mVideoViewLengthConstraint = instance.mVideoViewLengthConstraint;
     this.mViewtag = instance.mViewtag;
     this.context = instance.context;

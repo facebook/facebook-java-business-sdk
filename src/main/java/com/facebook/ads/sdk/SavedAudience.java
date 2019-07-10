@@ -360,7 +360,6 @@ public class SavedAudience extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
-      "ad_keywords",
       "adlabels",
       "adset_schedule",
       "asset_feed_id",
@@ -508,13 +507,6 @@ public class SavedAudience extends APINode {
     }
     public APIRequestGetAdSets requestAccountIdField (boolean value) {
       this.requestField("account_id", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestAdKeywordsField () {
-      return this.requestAdKeywordsField(true);
-    }
-    public APIRequestGetAdSets requestAdKeywordsField (boolean value) {
-      this.requestField("ad_keywords", value);
       return this;
     }
     public APIRequestGetAdSets requestAdlabelsField () {

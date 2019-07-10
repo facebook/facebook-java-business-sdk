@@ -338,6 +338,10 @@ public class ProductCatalog extends APINode {
     return new APIRequestGetCheckBatchRequestStatus(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetCollaborativeAdsShareSettings getCollaborativeAdsShareSettings() {
+    return new APIRequestGetCollaborativeAdsShareSettings(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetDestinations getDestinations() {
     return new APIRequestGetDestinations(this.getPrefixedId().toString(), context);
   }
@@ -1007,7 +1011,6 @@ public class ProductCatalog extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "business",
       "user",
     };
 
@@ -1066,11 +1069,6 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-
-    public APIRequestDeleteAssignedUsers setBusiness (String business) {
-      this.setParam("business", business);
-      return this;
-    }
 
     public APIRequestDeleteAssignedUsers setUser (Long user) {
       this.setParam("user", user);
@@ -1269,7 +1267,6 @@ public class ProductCatalog extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "business",
       "tasks",
       "user",
     };
@@ -1329,11 +1326,6 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-
-    public APIRequestCreateAssignedUser setBusiness (String business) {
-      this.setParam("business", business);
-      return this;
-    }
 
     public APIRequestCreateAssignedUser setTasks (List<ProductCatalog.EnumTasks> tasks) {
       this.setParam("tasks", tasks);
@@ -2571,6 +2563,158 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetCheckBatchRequestStatus requestWarningsTotalCountField (boolean value) {
       this.requestField("warnings_total_count", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetCollaborativeAdsShareSettings extends APIRequest<CollaborativeAdsShareSettings> {
+
+    APINodeList<CollaborativeAdsShareSettings> lastResponse = null;
+    @Override
+    public APINodeList<CollaborativeAdsShareSettings> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "agency_business",
+      "id",
+      "product_catalog_proxy_id",
+      "utm_campaign",
+      "utm_medium",
+      "utm_source",
+    };
+
+    @Override
+    public APINodeList<CollaborativeAdsShareSettings> parseResponse(String response, String header) throws APIException {
+      return CollaborativeAdsShareSettings.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<CollaborativeAdsShareSettings> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<CollaborativeAdsShareSettings> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<CollaborativeAdsShareSettings>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<CollaborativeAdsShareSettings>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<CollaborativeAdsShareSettings>>() {
+           public APINodeList<CollaborativeAdsShareSettings> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetCollaborativeAdsShareSettings.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetCollaborativeAdsShareSettings(String nodeId, APIContext context) {
+      super(context, nodeId, "/collaborative_ads_share_settings", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCollaborativeAdsShareSettings setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCollaborativeAdsShareSettings setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCollaborativeAdsShareSettings requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCollaborativeAdsShareSettings requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCollaborativeAdsShareSettings requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCollaborativeAdsShareSettings requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCollaborativeAdsShareSettings requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCollaborativeAdsShareSettings requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetCollaborativeAdsShareSettings requestAgencyBusinessField () {
+      return this.requestAgencyBusinessField(true);
+    }
+    public APIRequestGetCollaborativeAdsShareSettings requestAgencyBusinessField (boolean value) {
+      this.requestField("agency_business", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeAdsShareSettings requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetCollaborativeAdsShareSettings requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeAdsShareSettings requestProductCatalogProxyIdField () {
+      return this.requestProductCatalogProxyIdField(true);
+    }
+    public APIRequestGetCollaborativeAdsShareSettings requestProductCatalogProxyIdField (boolean value) {
+      this.requestField("product_catalog_proxy_id", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeAdsShareSettings requestUtmCampaignField () {
+      return this.requestUtmCampaignField(true);
+    }
+    public APIRequestGetCollaborativeAdsShareSettings requestUtmCampaignField (boolean value) {
+      this.requestField("utm_campaign", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeAdsShareSettings requestUtmMediumField () {
+      return this.requestUtmMediumField(true);
+    }
+    public APIRequestGetCollaborativeAdsShareSettings requestUtmMediumField (boolean value) {
+      this.requestField("utm_medium", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeAdsShareSettings requestUtmSourceField () {
+      return this.requestUtmSourceField(true);
+    }
+    public APIRequestGetCollaborativeAdsShareSettings requestUtmSourceField (boolean value) {
+      this.requestField("utm_source", value);
       return this;
     }
   }
@@ -9092,6 +9236,8 @@ public class ProductCatalog extends APINode {
   }
 
   public static enum EnumVertical {
+      @SerializedName("bookable")
+      VALUE_BOOKABLE("bookable"),
       @SerializedName("commerce")
       VALUE_COMMERCE("commerce"),
       @SerializedName("destinations")
@@ -9102,6 +9248,10 @@ public class ProductCatalog extends APINode {
       VALUE_HOME_LISTINGS("home_listings"),
       @SerializedName("hotels")
       VALUE_HOTELS("hotels"),
+      @SerializedName("ticketed_experiences")
+      VALUE_TICKETED_EXPERIENCES("ticketed_experiences"),
+      @SerializedName("transactable_items")
+      VALUE_TRANSACTABLE_ITEMS("transactable_items"),
       @SerializedName("vehicles")
       VALUE_VEHICLES("vehicles"),
       NULL(null);

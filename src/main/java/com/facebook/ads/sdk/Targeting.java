@@ -119,6 +119,8 @@ public class Targeting extends APINode {
   private List<IDName> mEthnicAffinity = null;
   @SerializedName("exclude_reached_since")
   private List<String> mExcludeReachedSince = null;
+  @SerializedName("excluded_brand_safety_content_types")
+  private List<String> mExcludedBrandSafetyContentTypes = null;
   @SerializedName("excluded_connections")
   private List<IDName> mExcludedConnections = null;
   @SerializedName("excluded_custom_audiences")
@@ -719,6 +721,15 @@ public class Targeting extends APINode {
 
   public Targeting setFieldExcludeReachedSince(List<String> value) {
     this.mExcludeReachedSince = value;
+    return this;
+  }
+
+  public List<String> getFieldExcludedBrandSafetyContentTypes() {
+    return mExcludedBrandSafetyContentTypes;
+  }
+
+  public Targeting setFieldExcludedBrandSafetyContentTypes(List<String> value) {
+    this.mExcludedBrandSafetyContentTypes = value;
     return this;
   }
 
@@ -1471,6 +1482,7 @@ public class Targeting extends APINode {
     this.mEngagementSpecs = instance.mEngagementSpecs;
     this.mEthnicAffinity = instance.mEthnicAffinity;
     this.mExcludeReachedSince = instance.mExcludeReachedSince;
+    this.mExcludedBrandSafetyContentTypes = instance.mExcludedBrandSafetyContentTypes;
     this.mExcludedConnections = instance.mExcludedConnections;
     this.mExcludedCustomAudiences = instance.mExcludedCustomAudiences;
     this.mExcludedDynamicAudienceIds = instance.mExcludedDynamicAudienceIds;

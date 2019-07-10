@@ -1169,6 +1169,7 @@ public class AdStudy extends APINode {
       "address",
       "admin_notes",
       "age_range",
+      "auth_method",
       "birthday",
       "can_review_measurement_request",
       "cover",
@@ -1176,7 +1177,6 @@ public class AdStudy extends APINode {
       "devices",
       "education",
       "email",
-      "employee_number",
       "favorite_athletes",
       "favorite_teams",
       "first_name",
@@ -1343,6 +1343,13 @@ public class AdStudy extends APINode {
       this.requestField("age_range", value);
       return this;
     }
+    public APIRequestGetViewers requestAuthMethodField () {
+      return this.requestAuthMethodField(true);
+    }
+    public APIRequestGetViewers requestAuthMethodField (boolean value) {
+      this.requestField("auth_method", value);
+      return this;
+    }
     public APIRequestGetViewers requestBirthdayField () {
       return this.requestBirthdayField(true);
     }
@@ -1390,13 +1397,6 @@ public class AdStudy extends APINode {
     }
     public APIRequestGetViewers requestEmailField (boolean value) {
       this.requestField("email", value);
-      return this;
-    }
-    public APIRequestGetViewers requestEmployeeNumberField () {
-      return this.requestEmployeeNumberField(true);
-    }
-    public APIRequestGetViewers requestEmployeeNumberField (boolean value) {
-      this.requestField("employee_number", value);
       return this;
     }
     public APIRequestGetViewers requestFavoriteAthletesField () {

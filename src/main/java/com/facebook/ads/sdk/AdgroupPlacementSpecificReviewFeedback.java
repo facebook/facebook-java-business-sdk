@@ -99,6 +99,8 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
   private Map<String, String> mSeller = null;
   @SerializedName("shops")
   private Map<String, String> mShops = null;
+  @SerializedName("traffic_quality")
+  private Map<String, String> mTrafficQuality = null;
   @SerializedName("whatsapp")
   private Map<String, String> mWhatsapp = null;
   protected static Gson gson = null;
@@ -450,6 +452,15 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
     return this;
   }
 
+  public Map<String, String> getFieldTrafficQuality() {
+    return mTrafficQuality;
+  }
+
+  public AdgroupPlacementSpecificReviewFeedback setFieldTrafficQuality(Map<String, String> value) {
+    this.mTrafficQuality = value;
+    return this;
+  }
+
   public Map<String, String> getFieldWhatsapp() {
     return mWhatsapp;
   }
@@ -498,6 +509,7 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
     this.mProfile = instance.mProfile;
     this.mSeller = instance.mSeller;
     this.mShops = instance.mShops;
+    this.mTrafficQuality = instance.mTrafficQuality;
     this.mWhatsapp = instance.mWhatsapp;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

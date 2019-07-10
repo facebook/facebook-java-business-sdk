@@ -75,6 +75,8 @@ public class AdsPixel extends APINode {
   private String mId = null;
   @SerializedName("is_created_by_business")
   private Boolean mIsCreatedByBusiness = null;
+  @SerializedName("is_unavailable")
+  private Boolean mIsUnavailable = null;
   @SerializedName("last_fired_time")
   private String mLastFiredTime = null;
   @SerializedName("name")
@@ -384,6 +386,10 @@ public class AdsPixel extends APINode {
     return mIsCreatedByBusiness;
   }
 
+  public Boolean getFieldIsUnavailable() {
+    return mIsUnavailable;
+  }
+
   public String getFieldLastFiredTime() {
     return mLastFiredTime;
   }
@@ -416,7 +422,6 @@ public class AdsPixel extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "business",
       "user",
     };
 
@@ -475,11 +480,6 @@ public class AdsPixel extends APINode {
       return this;
     }
 
-
-    public APIRequestDeleteAssignedUsers setBusiness (String business) {
-      this.setParam("business", business);
-      return this;
-    }
 
     public APIRequestDeleteAssignedUsers setUser (Long user) {
       this.setParam("user", user);
@@ -678,7 +678,6 @@ public class AdsPixel extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "business",
       "tasks",
       "user",
     };
@@ -738,11 +737,6 @@ public class AdsPixel extends APINode {
       return this;
     }
 
-
-    public APIRequestCreateAssignedUser setBusiness (String business) {
-      this.setParam("business", business);
-      return this;
-    }
 
     public APIRequestCreateAssignedUser setTasks (List<AdsPixel.EnumTasks> tasks) {
       this.setParam("tasks", tasks);
@@ -1503,6 +1497,7 @@ public class AdsPixel extends APINode {
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
+      "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
       "funding_source",
@@ -1794,6 +1789,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetSharedAccounts requestEndAdvertiserNameField (boolean value) {
       this.requestField("end_advertiser_name", value);
+      return this;
+    }
+    public APIRequestGetSharedAccounts requestExtendedCreditInvoiceGroupField () {
+      return this.requestExtendedCreditInvoiceGroupField(true);
+    }
+    public APIRequestGetSharedAccounts requestExtendedCreditInvoiceGroupField (boolean value) {
+      this.requestField("extended_credit_invoice_group", value);
       return this;
     }
     public APIRequestGetSharedAccounts requestFailedDeliveryChecksField () {
@@ -2597,6 +2599,7 @@ public class AdsPixel extends APINode {
       "first_party_cookie_status",
       "id",
       "is_created_by_business",
+      "is_unavailable",
       "last_fired_time",
       "name",
       "owner_ad_account",
@@ -2760,6 +2763,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGet requestIsCreatedByBusinessField (boolean value) {
       this.requestField("is_created_by_business", value);
+      return this;
+    }
+    public APIRequestGet requestIsUnavailableField () {
+      return this.requestIsUnavailableField(true);
+    }
+    public APIRequestGet requestIsUnavailableField (boolean value) {
+      this.requestField("is_unavailable", value);
       return this;
     }
     public APIRequestGet requestLastFiredTimeField () {
@@ -3084,6 +3094,7 @@ public class AdsPixel extends APINode {
     this.mFirstPartyCookieStatus = instance.mFirstPartyCookieStatus;
     this.mId = instance.mId;
     this.mIsCreatedByBusiness = instance.mIsCreatedByBusiness;
+    this.mIsUnavailable = instance.mIsUnavailable;
     this.mLastFiredTime = instance.mLastFiredTime;
     this.mName = instance.mName;
     this.mOwnerAdAccount = instance.mOwnerAdAccount;

@@ -68,7 +68,7 @@ public class VideoPoll extends APINode {
   @SerializedName("show_results")
   private Boolean mShowResults = null;
   @SerializedName("status")
-  private String mStatus = null;
+  private EnumStatus mStatus = null;
   protected static Gson gson = null;
 
   VideoPoll() {
@@ -315,7 +315,7 @@ public class VideoPoll extends APINode {
     return mShowResults;
   }
 
-  public String getFieldStatus() {
+  public EnumStatus getFieldStatus() {
     return mStatus;
   }
 
@@ -737,6 +737,27 @@ public class VideoPoll extends APINode {
       return this;
     }
 
+  }
+
+  public static enum EnumStatus {
+      @SerializedName("closed")
+      VALUE_CLOSED("closed"),
+      @SerializedName("results_open")
+      VALUE_RESULTS_OPEN("results_open"),
+      @SerializedName("voting_open")
+      VALUE_VOTING_OPEN("voting_open"),
+      NULL(null);
+
+      private String value;
+
+      private EnumStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
   public static enum EnumAction {

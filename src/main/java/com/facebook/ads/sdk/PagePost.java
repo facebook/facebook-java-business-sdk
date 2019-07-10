@@ -2294,6 +2294,7 @@ public class PagePost extends APINode {
       "address",
       "admin_notes",
       "age_range",
+      "auth_method",
       "birthday",
       "can_review_measurement_request",
       "cover",
@@ -2301,7 +2302,6 @@ public class PagePost extends APINode {
       "devices",
       "education",
       "email",
-      "employee_number",
       "favorite_athletes",
       "favorite_teams",
       "first_name",
@@ -2468,6 +2468,13 @@ public class PagePost extends APINode {
       this.requestField("age_range", value);
       return this;
     }
+    public APIRequestGetSeen requestAuthMethodField () {
+      return this.requestAuthMethodField(true);
+    }
+    public APIRequestGetSeen requestAuthMethodField (boolean value) {
+      this.requestField("auth_method", value);
+      return this;
+    }
     public APIRequestGetSeen requestBirthdayField () {
       return this.requestBirthdayField(true);
     }
@@ -2515,13 +2522,6 @@ public class PagePost extends APINode {
     }
     public APIRequestGetSeen requestEmailField (boolean value) {
       this.requestField("email", value);
-      return this;
-    }
-    public APIRequestGetSeen requestEmployeeNumberField () {
-      return this.requestEmployeeNumberField(true);
-    }
-    public APIRequestGetSeen requestEmployeeNumberField (boolean value) {
-      this.requestField("employee_number", value);
       return this;
     }
     public APIRequestGetSeen requestFavoriteAthletesField () {

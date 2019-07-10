@@ -984,9 +984,11 @@ public class Campaign extends APINode {
       "engagement_audience",
       "failed_delivery_checks",
       "id",
+      "is_autobid",
       "issues_info",
       "last_updated_by_app_id",
       "name",
+      "preview_shareable_link",
       "priority",
       "recommendations",
       "source_ad",
@@ -1286,6 +1288,13 @@ public class Campaign extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetAds requestIsAutobidField () {
+      return this.requestIsAutobidField(true);
+    }
+    public APIRequestGetAds requestIsAutobidField (boolean value) {
+      this.requestField("is_autobid", value);
+      return this;
+    }
     public APIRequestGetAds requestIssuesInfoField () {
       return this.requestIssuesInfoField(true);
     }
@@ -1305,6 +1314,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAds requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAds requestPreviewShareableLinkField () {
+      return this.requestPreviewShareableLinkField(true);
+    }
+    public APIRequestGetAds requestPreviewShareableLinkField (boolean value) {
+      this.requestField("preview_shareable_link", value);
       return this;
     }
     public APIRequestGetAds requestPriorityField () {
@@ -1390,7 +1406,6 @@ public class Campaign extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
-      "ad_keywords",
       "adlabels",
       "adset_schedule",
       "asset_feed_id",
@@ -1588,13 +1603,6 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAdSets requestAccountIdField (boolean value) {
       this.requestField("account_id", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestAdKeywordsField () {
-      return this.requestAdKeywordsField(true);
-    }
-    public APIRequestGetAdSets requestAdKeywordsField (boolean value) {
-      this.requestField("ad_keywords", value);
       return this;
     }
     public APIRequestGetAdSets requestAdlabelsField () {

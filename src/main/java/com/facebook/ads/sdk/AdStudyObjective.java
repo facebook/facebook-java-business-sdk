@@ -302,6 +302,10 @@ public class AdStudyObjective extends APINode {
     return new APIRequestGetOffsitePixels(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetPartnerStudies getPartnerStudies() {
+    return new APIRequestGetPartnerStudies(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestDelete delete() {
     return new APIRequestDelete(this.getPrefixedId().toString(), context);
   }
@@ -518,6 +522,7 @@ public class AdStudyObjective extends APINode {
       "first_party_cookie_status",
       "id",
       "is_created_by_business",
+      "is_unavailable",
       "last_fired_time",
       "name",
       "owner_ad_account",
@@ -683,6 +688,13 @@ public class AdStudyObjective extends APINode {
       this.requestField("is_created_by_business", value);
       return this;
     }
+    public APIRequestGetAdsPixels requestIsUnavailableField () {
+      return this.requestIsUnavailableField(true);
+    }
+    public APIRequestGetAdsPixels requestIsUnavailableField (boolean value) {
+      this.requestField("is_unavailable", value);
+      return this;
+    }
     public APIRequestGetAdsPixels requestLastFiredTimeField () {
       return this.requestLastFiredTimeField(true);
     }
@@ -801,6 +813,7 @@ public class AdStudyObjective extends APINode {
       "property_id",
       "real_time_mode_devices",
       "restrictions",
+      "restrictive_data_filter_params",
       "restrictive_data_filter_rules",
       "sdk_update_message",
       "seamless_login",
@@ -1452,6 +1465,13 @@ public class AdStudyObjective extends APINode {
       this.requestField("restrictions", value);
       return this;
     }
+    public APIRequestGetApplications requestRestrictiveDataFilterParamsField () {
+      return this.requestRestrictiveDataFilterParamsField(true);
+    }
+    public APIRequestGetApplications requestRestrictiveDataFilterParamsField (boolean value) {
+      this.requestField("restrictive_data_filter_params", value);
+      return this;
+    }
     public APIRequestGetApplications requestRestrictiveDataFilterRulesField () {
       return this.requestRestrictiveDataFilterRulesField(true);
     }
@@ -1880,6 +1900,7 @@ public class AdStudyObjective extends APINode {
       "id",
       "is_mta_use",
       "is_restricted_use",
+      "is_unavailable",
       "last_upload_app",
       "last_upload_app_changed_time",
       "match_rate_approx",
@@ -2060,6 +2081,13 @@ public class AdStudyObjective extends APINode {
     }
     public APIRequestGetOfflineConversionDataSets requestIsRestrictedUseField (boolean value) {
       this.requestField("is_restricted_use", value);
+      return this;
+    }
+    public APIRequestGetOfflineConversionDataSets requestIsUnavailableField () {
+      return this.requestIsUnavailableField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestIsUnavailableField (boolean value) {
+      this.requestField("is_unavailable", value);
       return this;
     }
     public APIRequestGetOfflineConversionDataSets requestLastUploadAppField () {
@@ -2261,6 +2289,254 @@ public class AdStudyObjective extends APINode {
     }
     public APIRequestGetOffsitePixels requestTagField (boolean value) {
       this.requestField("tag", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetPartnerStudies extends APIRequest<PartnerStudy> {
+
+    APINodeList<PartnerStudy> lastResponse = null;
+    @Override
+    public APINodeList<PartnerStudy> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "additional_info",
+      "brand",
+      "client_name",
+      "emails",
+      "id",
+      "input_ids",
+      "is_export",
+      "lift_study",
+      "location",
+      "match_file_ds",
+      "name",
+      "partner_defined_id",
+      "partner_household_graph_dataset_id",
+      "status",
+      "study_end_date",
+      "study_start_date",
+      "study_type",
+      "submit_date",
+    };
+
+    @Override
+    public APINodeList<PartnerStudy> parseResponse(String response, String header) throws APIException {
+      return PartnerStudy.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<PartnerStudy> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<PartnerStudy> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<PartnerStudy>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<PartnerStudy>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<PartnerStudy>>() {
+           public APINodeList<PartnerStudy> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetPartnerStudies.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetPartnerStudies(String nodeId, APIContext context) {
+      super(context, nodeId, "/partnerstudies", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetPartnerStudies setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPartnerStudies setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetPartnerStudies requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetPartnerStudies requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPartnerStudies requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetPartnerStudies requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPartnerStudies requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPartnerStudies requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetPartnerStudies requestAdditionalInfoField () {
+      return this.requestAdditionalInfoField(true);
+    }
+    public APIRequestGetPartnerStudies requestAdditionalInfoField (boolean value) {
+      this.requestField("additional_info", value);
+      return this;
+    }
+    public APIRequestGetPartnerStudies requestBrandField () {
+      return this.requestBrandField(true);
+    }
+    public APIRequestGetPartnerStudies requestBrandField (boolean value) {
+      this.requestField("brand", value);
+      return this;
+    }
+    public APIRequestGetPartnerStudies requestClientNameField () {
+      return this.requestClientNameField(true);
+    }
+    public APIRequestGetPartnerStudies requestClientNameField (boolean value) {
+      this.requestField("client_name", value);
+      return this;
+    }
+    public APIRequestGetPartnerStudies requestEmailsField () {
+      return this.requestEmailsField(true);
+    }
+    public APIRequestGetPartnerStudies requestEmailsField (boolean value) {
+      this.requestField("emails", value);
+      return this;
+    }
+    public APIRequestGetPartnerStudies requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetPartnerStudies requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetPartnerStudies requestInputIdsField () {
+      return this.requestInputIdsField(true);
+    }
+    public APIRequestGetPartnerStudies requestInputIdsField (boolean value) {
+      this.requestField("input_ids", value);
+      return this;
+    }
+    public APIRequestGetPartnerStudies requestIsExportField () {
+      return this.requestIsExportField(true);
+    }
+    public APIRequestGetPartnerStudies requestIsExportField (boolean value) {
+      this.requestField("is_export", value);
+      return this;
+    }
+    public APIRequestGetPartnerStudies requestLiftStudyField () {
+      return this.requestLiftStudyField(true);
+    }
+    public APIRequestGetPartnerStudies requestLiftStudyField (boolean value) {
+      this.requestField("lift_study", value);
+      return this;
+    }
+    public APIRequestGetPartnerStudies requestLocationField () {
+      return this.requestLocationField(true);
+    }
+    public APIRequestGetPartnerStudies requestLocationField (boolean value) {
+      this.requestField("location", value);
+      return this;
+    }
+    public APIRequestGetPartnerStudies requestMatchFileDsField () {
+      return this.requestMatchFileDsField(true);
+    }
+    public APIRequestGetPartnerStudies requestMatchFileDsField (boolean value) {
+      this.requestField("match_file_ds", value);
+      return this;
+    }
+    public APIRequestGetPartnerStudies requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetPartnerStudies requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetPartnerStudies requestPartnerDefinedIdField () {
+      return this.requestPartnerDefinedIdField(true);
+    }
+    public APIRequestGetPartnerStudies requestPartnerDefinedIdField (boolean value) {
+      this.requestField("partner_defined_id", value);
+      return this;
+    }
+    public APIRequestGetPartnerStudies requestPartnerHouseholdGraphDatasetIdField () {
+      return this.requestPartnerHouseholdGraphDatasetIdField(true);
+    }
+    public APIRequestGetPartnerStudies requestPartnerHouseholdGraphDatasetIdField (boolean value) {
+      this.requestField("partner_household_graph_dataset_id", value);
+      return this;
+    }
+    public APIRequestGetPartnerStudies requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetPartnerStudies requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGetPartnerStudies requestStudyEndDateField () {
+      return this.requestStudyEndDateField(true);
+    }
+    public APIRequestGetPartnerStudies requestStudyEndDateField (boolean value) {
+      this.requestField("study_end_date", value);
+      return this;
+    }
+    public APIRequestGetPartnerStudies requestStudyStartDateField () {
+      return this.requestStudyStartDateField(true);
+    }
+    public APIRequestGetPartnerStudies requestStudyStartDateField (boolean value) {
+      this.requestField("study_start_date", value);
+      return this;
+    }
+    public APIRequestGetPartnerStudies requestStudyTypeField () {
+      return this.requestStudyTypeField(true);
+    }
+    public APIRequestGetPartnerStudies requestStudyTypeField (boolean value) {
+      this.requestField("study_type", value);
+      return this;
+    }
+    public APIRequestGetPartnerStudies requestSubmitDateField () {
+      return this.requestSubmitDateField(true);
+    }
+    public APIRequestGetPartnerStudies requestSubmitDateField (boolean value) {
+      this.requestField("submit_date", value);
       return this;
     }
   }

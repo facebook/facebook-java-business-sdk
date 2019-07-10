@@ -54,27 +54,43 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdCreativeOptimizationSpec extends APINode {
-  @SerializedName("bodies")
-  private List<String> mBodies = null;
-  @SerializedName("descriptions")
-  private List<String> mDescriptions = null;
-  @SerializedName("titles")
-  private List<String> mTitles = null;
+public class BusinessCreative extends APINode {
+  @SerializedName("creation_time")
+  private String mCreationTime = null;
+  @SerializedName("duration")
+  private Long mDuration = null;
+  @SerializedName("hash")
+  private String mHash = null;
+  @SerializedName("height")
+  private Long mHeight = null;
+  @SerializedName("id")
+  private String mId = null;
+  @SerializedName("name")
+  private String mName = null;
+  @SerializedName("thumbnail")
+  private String mThumbnail = null;
+  @SerializedName("type")
+  private String mType = null;
+  @SerializedName("url")
+  private String mUrl = null;
+  @SerializedName("video_id")
+  private String mVideoId = null;
+  @SerializedName("width")
+  private Long mWidth = null;
   protected static Gson gson = null;
 
-  public AdCreativeOptimizationSpec() {
+  public BusinessCreative() {
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
-  public static AdCreativeOptimizationSpec loadJSON(String json, APIContext context, String header) {
-    AdCreativeOptimizationSpec adCreativeOptimizationSpec = getGson().fromJson(json, AdCreativeOptimizationSpec.class);
+  public static BusinessCreative loadJSON(String json, APIContext context, String header) {
+    BusinessCreative businessCreative = getGson().fromJson(json, BusinessCreative.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adCreativeOptimizationSpec.toString());
+      JsonElement o2 = parser.parse(businessCreative.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -84,14 +100,14 @@ public class AdCreativeOptimizationSpec extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    adCreativeOptimizationSpec.context = context;
-    adCreativeOptimizationSpec.rawValue = json;
-    adCreativeOptimizationSpec.header = header;
-    return adCreativeOptimizationSpec;
+    businessCreative.context = context;
+    businessCreative.rawValue = json;
+    businessCreative.header = header;
+    return businessCreative;
   }
 
-  public static APINodeList<AdCreativeOptimizationSpec> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdCreativeOptimizationSpec> adCreativeOptimizationSpecs = new APINodeList<AdCreativeOptimizationSpec>(request, json, header);
+  public static APINodeList<BusinessCreative> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<BusinessCreative> businessCreatives = new APINodeList<BusinessCreative>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -102,9 +118,9 @@ public class AdCreativeOptimizationSpec extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCreativeOptimizationSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          businessCreatives.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adCreativeOptimizationSpecs;
+        return businessCreatives;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -114,20 +130,20 @@ public class AdCreativeOptimizationSpec extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adCreativeOptimizationSpecs.setCursors(before, after);
+                businessCreatives.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adCreativeOptimizationSpecs.setPaging(previous, next);
+            businessCreatives.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adCreativeOptimizationSpecs.setAppSecret(context.getAppSecretProof());
+              businessCreatives.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCreativeOptimizationSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              businessCreatives.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -138,23 +154,23 @@ public class AdCreativeOptimizationSpec extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCreativeOptimizationSpecs.add(loadJSON(entry.getValue().toString(), context, header));
+                  businessCreatives.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCreativeOptimizationSpecs.add(loadJSON(obj.toString(), context, header));
+              businessCreatives.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adCreativeOptimizationSpecs;
+          return businessCreatives;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCreativeOptimizationSpecs.add(loadJSON(entry.getValue().toString(), context, header));
+              businessCreatives.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adCreativeOptimizationSpecs;
+          return businessCreatives;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -171,20 +187,20 @@ public class AdCreativeOptimizationSpec extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCreativeOptimizationSpecs.add(loadJSON(value.toString(), context, header));
+              businessCreatives.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adCreativeOptimizationSpecs;
+            return businessCreatives;
           }
 
           // Sixth, check if it's pure JsonObject
-          adCreativeOptimizationSpecs.clear();
-          adCreativeOptimizationSpecs.add(loadJSON(json, context, header));
-          return adCreativeOptimizationSpecs;
+          businessCreatives.clear();
+          businessCreatives.add(loadJSON(json, context, header));
+          return businessCreatives;
         }
       }
     } catch (Exception e) {
@@ -212,30 +228,102 @@ public class AdCreativeOptimizationSpec extends APINode {
   }
 
 
-  public List<String> getFieldBodies() {
-    return mBodies;
+  public String getFieldCreationTime() {
+    return mCreationTime;
   }
 
-  public AdCreativeOptimizationSpec setFieldBodies(List<String> value) {
-    this.mBodies = value;
+  public BusinessCreative setFieldCreationTime(String value) {
+    this.mCreationTime = value;
     return this;
   }
 
-  public List<String> getFieldDescriptions() {
-    return mDescriptions;
+  public Long getFieldDuration() {
+    return mDuration;
   }
 
-  public AdCreativeOptimizationSpec setFieldDescriptions(List<String> value) {
-    this.mDescriptions = value;
+  public BusinessCreative setFieldDuration(Long value) {
+    this.mDuration = value;
     return this;
   }
 
-  public List<String> getFieldTitles() {
-    return mTitles;
+  public String getFieldHash() {
+    return mHash;
   }
 
-  public AdCreativeOptimizationSpec setFieldTitles(List<String> value) {
-    this.mTitles = value;
+  public BusinessCreative setFieldHash(String value) {
+    this.mHash = value;
+    return this;
+  }
+
+  public Long getFieldHeight() {
+    return mHeight;
+  }
+
+  public BusinessCreative setFieldHeight(Long value) {
+    this.mHeight = value;
+    return this;
+  }
+
+  public String getFieldId() {
+    return mId;
+  }
+
+  public BusinessCreative setFieldId(String value) {
+    this.mId = value;
+    return this;
+  }
+
+  public String getFieldName() {
+    return mName;
+  }
+
+  public BusinessCreative setFieldName(String value) {
+    this.mName = value;
+    return this;
+  }
+
+  public String getFieldThumbnail() {
+    return mThumbnail;
+  }
+
+  public BusinessCreative setFieldThumbnail(String value) {
+    this.mThumbnail = value;
+    return this;
+  }
+
+  public String getFieldType() {
+    return mType;
+  }
+
+  public BusinessCreative setFieldType(String value) {
+    this.mType = value;
+    return this;
+  }
+
+  public String getFieldUrl() {
+    return mUrl;
+  }
+
+  public BusinessCreative setFieldUrl(String value) {
+    this.mUrl = value;
+    return this;
+  }
+
+  public String getFieldVideoId() {
+    return mVideoId;
+  }
+
+  public BusinessCreative setFieldVideoId(String value) {
+    this.mVideoId = value;
+    return this;
+  }
+
+  public Long getFieldWidth() {
+    return mWidth;
+  }
+
+  public BusinessCreative setFieldWidth(Long value) {
+    this.mWidth = value;
     return this;
   }
 
@@ -255,19 +343,27 @@ public class AdCreativeOptimizationSpec extends APINode {
     return gson;
   }
 
-  public AdCreativeOptimizationSpec copyFrom(AdCreativeOptimizationSpec instance) {
-    this.mBodies = instance.mBodies;
-    this.mDescriptions = instance.mDescriptions;
-    this.mTitles = instance.mTitles;
+  public BusinessCreative copyFrom(BusinessCreative instance) {
+    this.mCreationTime = instance.mCreationTime;
+    this.mDuration = instance.mDuration;
+    this.mHash = instance.mHash;
+    this.mHeight = instance.mHeight;
+    this.mId = instance.mId;
+    this.mName = instance.mName;
+    this.mThumbnail = instance.mThumbnail;
+    this.mType = instance.mType;
+    this.mUrl = instance.mUrl;
+    this.mVideoId = instance.mVideoId;
+    this.mWidth = instance.mWidth;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdCreativeOptimizationSpec> getParser() {
-    return new APIRequest.ResponseParser<AdCreativeOptimizationSpec>() {
-      public APINodeList<AdCreativeOptimizationSpec> parseResponse(String response, APIContext context, APIRequest<AdCreativeOptimizationSpec> request, String header) throws MalformedResponseException {
-        return AdCreativeOptimizationSpec.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<BusinessCreative> getParser() {
+    return new APIRequest.ResponseParser<BusinessCreative>() {
+      public APINodeList<BusinessCreative> parseResponse(String response, APIContext context, APIRequest<BusinessCreative> request, String header) throws MalformedResponseException {
+        return BusinessCreative.parseResponse(response, context, request, header);
       }
     };
   }

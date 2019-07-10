@@ -25,16 +25,40 @@
 import java.io.File;
 import java.util.Arrays;
 
-public class CustomAudienceDelete {
+public class AdAccountGeneratePreviewsEdgeInstagramStandards {
   public static void main (String args[]) throws APIException {
 
     String access_token = "<ACCESS_TOKEN>";
     String app_secret = "<APP_SECRET>";
     String app_id = "<APP_ID>";
-    String id = "<CUSTOM_AUDIENCE_ID>";
+    String id = "<AD_ACCOUNT_ID>";
     APIContext context = new APIContext(access_token).enableDebug(true);
 
-    new CustomAudience(id, context).delete()
+    new AdAccount(id, context).getGeneratePreviews()
+      .setCreative(
+          new AdCreative()
+            .setFieldInstagramActorId("<instagramActorID>")
+            .setFieldObjectStorySpec(
+              new AdCreativeObjectStorySpec()
+                .setFieldLinkData(
+                  new AdCreativeLinkData()
+                    .setFieldCallToAction(
+                      new AdCreativeLinkDataCallToAction()
+                        .setFieldType(AdCreativeLinkDataCallToAction.EnumType.VALUE_LEARN_MORE)
+                        .setFieldValue(
+                          new AdCreativeLinkDataCallToActionValue()
+                            .setFieldLink("<url>")
+                        )
+                    )
+                    .setFieldCaption("www.example.com")
+                    .setFieldImageHash("<imageHash>")
+                    .setFieldLink("<url>")
+                    .setFieldMessage("Message")
+                )
+                .setFieldPageId("<pageID>")
+            )
+        )
+      .setAdFormat(AdPreview.EnumAdFormat.VALUE_INSTAGRAM_STANDARD)
       .execute();
 
   }

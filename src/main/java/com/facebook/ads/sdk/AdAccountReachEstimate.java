@@ -54,21 +54,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class NullNode extends APINode {
+public class AdAccountReachEstimate extends APINode {
+  @SerializedName("estimate_ready")
+  private Boolean mEstimateReady = null;
+  @SerializedName("users")
+  private Long mUsers = null;
   protected static Gson gson = null;
 
-  public NullNode() {
+  public AdAccountReachEstimate() {
   }
 
   public String getId() {
     return null;
   }
-  public static NullNode loadJSON(String json, APIContext context, String header) {
-    NullNode nullNode = getGson().fromJson(json, NullNode.class);
+  public static AdAccountReachEstimate loadJSON(String json, APIContext context, String header) {
+    AdAccountReachEstimate adAccountReachEstimate = getGson().fromJson(json, AdAccountReachEstimate.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(nullNode.toString());
+      JsonElement o2 = parser.parse(adAccountReachEstimate.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -78,14 +82,14 @@ public class NullNode extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    nullNode.context = context;
-    nullNode.rawValue = json;
-    nullNode.header = header;
-    return nullNode;
+    adAccountReachEstimate.context = context;
+    adAccountReachEstimate.rawValue = json;
+    adAccountReachEstimate.header = header;
+    return adAccountReachEstimate;
   }
 
-  public static APINodeList<NullNode> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<NullNode> nullNodes = new APINodeList<NullNode>(request, json, header);
+  public static APINodeList<AdAccountReachEstimate> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdAccountReachEstimate> adAccountReachEstimates = new APINodeList<AdAccountReachEstimate>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -96,9 +100,9 @@ public class NullNode extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          nullNodes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adAccountReachEstimates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return nullNodes;
+        return adAccountReachEstimates;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -108,20 +112,20 @@ public class NullNode extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                nullNodes.setCursors(before, after);
+                adAccountReachEstimates.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            nullNodes.setPaging(previous, next);
+            adAccountReachEstimates.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              nullNodes.setAppSecret(context.getAppSecretProof());
+              adAccountReachEstimates.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              nullNodes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adAccountReachEstimates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -132,23 +136,23 @@ public class NullNode extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  nullNodes.add(loadJSON(entry.getValue().toString(), context, header));
+                  adAccountReachEstimates.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              nullNodes.add(loadJSON(obj.toString(), context, header));
+              adAccountReachEstimates.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return nullNodes;
+          return adAccountReachEstimates;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              nullNodes.add(loadJSON(entry.getValue().toString(), context, header));
+              adAccountReachEstimates.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return nullNodes;
+          return adAccountReachEstimates;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -165,20 +169,20 @@ public class NullNode extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              nullNodes.add(loadJSON(value.toString(), context, header));
+              adAccountReachEstimates.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return nullNodes;
+            return adAccountReachEstimates;
           }
 
           // Sixth, check if it's pure JsonObject
-          nullNodes.clear();
-          nullNodes.add(loadJSON(json, context, header));
-          return nullNodes;
+          adAccountReachEstimates.clear();
+          adAccountReachEstimates.add(loadJSON(json, context, header));
+          return adAccountReachEstimates;
         }
       }
     } catch (Exception e) {
@@ -206,6 +210,24 @@ public class NullNode extends APINode {
   }
 
 
+  public Boolean getFieldEstimateReady() {
+    return mEstimateReady;
+  }
+
+  public AdAccountReachEstimate setFieldEstimateReady(Boolean value) {
+    this.mEstimateReady = value;
+    return this;
+  }
+
+  public Long getFieldUsers() {
+    return mUsers;
+  }
+
+  public AdAccountReachEstimate setFieldUsers(Long value) {
+    this.mUsers = value;
+    return this;
+  }
+
 
 
 
@@ -222,16 +244,18 @@ public class NullNode extends APINode {
     return gson;
   }
 
-  public NullNode copyFrom(NullNode instance) {
+  public AdAccountReachEstimate copyFrom(AdAccountReachEstimate instance) {
+    this.mEstimateReady = instance.mEstimateReady;
+    this.mUsers = instance.mUsers;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<NullNode> getParser() {
-    return new APIRequest.ResponseParser<NullNode>() {
-      public APINodeList<NullNode> parseResponse(String response, APIContext context, APIRequest<NullNode> request, String header) throws MalformedResponseException {
-        return NullNode.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdAccountReachEstimate> getParser() {
+    return new APIRequest.ResponseParser<AdAccountReachEstimate>() {
+      public APINodeList<AdAccountReachEstimate> parseResponse(String response, APIContext context, APIRequest<AdAccountReachEstimate> request, String header) throws MalformedResponseException {
+        return AdAccountReachEstimate.parseResponse(response, context, request, header);
       }
     };
   }

@@ -693,6 +693,7 @@ public class CustomAudience extends APINode {
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
+      "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
       "funding_source",
@@ -984,6 +985,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAdAccounts requestEndAdvertiserNameField (boolean value) {
       this.requestField("end_advertiser_name", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestExtendedCreditInvoiceGroupField () {
+      return this.requestExtendedCreditInvoiceGroupField(true);
+    }
+    public APIRequestGetAdAccounts requestExtendedCreditInvoiceGroupField (boolean value) {
+      this.requestField("extended_credit_invoice_group", value);
       return this;
     }
     public APIRequestGetAdAccounts requestFailedDeliveryChecksField () {
@@ -1413,9 +1421,11 @@ public class CustomAudience extends APINode {
       "engagement_audience",
       "failed_delivery_checks",
       "id",
+      "is_autobid",
       "issues_info",
       "last_updated_by_app_id",
       "name",
+      "preview_shareable_link",
       "priority",
       "recommendations",
       "source_ad",
@@ -1674,6 +1684,13 @@ public class CustomAudience extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetAds requestIsAutobidField () {
+      return this.requestIsAutobidField(true);
+    }
+    public APIRequestGetAds requestIsAutobidField (boolean value) {
+      this.requestField("is_autobid", value);
+      return this;
+    }
     public APIRequestGetAds requestIssuesInfoField () {
       return this.requestIssuesInfoField(true);
     }
@@ -1693,6 +1710,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAds requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAds requestPreviewShareableLinkField () {
+      return this.requestPreviewShareableLinkField(true);
+    }
+    public APIRequestGetAds requestPreviewShareableLinkField (boolean value) {
+      this.requestField("preview_shareable_link", value);
       return this;
     }
     public APIRequestGetAds requestPriorityField () {

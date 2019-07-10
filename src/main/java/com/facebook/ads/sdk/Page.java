@@ -552,14 +552,6 @@ public class Page extends APINode {
     return new APIRequestCreateAdminSetting(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestDeleteAdmins deleteAdmins() {
-    return new APIRequestDeleteAdmins(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateAdmin createAdmin() {
-    return new APIRequestCreateAdmin(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetAdsPosts getAdsPosts() {
     return new APIRequestGetAdsPosts(this.getPrefixedId().toString(), context);
   }
@@ -1694,264 +1686,6 @@ public class Page extends APINode {
 
     @Override
     public APIRequestCreateAdminSetting requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestDeleteAdmins extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "admin_id",
-      "trusted",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestDeleteAdmins.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestDeleteAdmins(String nodeId, APIContext context) {
-      super(context, nodeId, "/admins", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDeleteAdmins setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAdmins setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDeleteAdmins setAdminId (Long adminId) {
-      this.setParam("admin_id", adminId);
-      return this;
-    }
-    public APIRequestDeleteAdmins setAdminId (String adminId) {
-      this.setParam("admin_id", adminId);
-      return this;
-    }
-
-    public APIRequestDeleteAdmins setTrusted (Boolean trusted) {
-      this.setParam("trusted", trusted);
-      return this;
-    }
-    public APIRequestDeleteAdmins setTrusted (String trusted) {
-      this.setParam("trusted", trusted);
-      return this;
-    }
-
-    public APIRequestDeleteAdmins requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDeleteAdmins requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAdmins requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDeleteAdmins requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAdmins requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAdmins requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateAdmin extends APIRequest<User> {
-
-    User lastResponse = null;
-    @Override
-    public User getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "admin_id",
-      "tasks",
-      "trusted",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public User parseResponse(String response, String header) throws APIException {
-      return User.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public User execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public User execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<User> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<User> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, User>() {
-           public User apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateAdmin.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateAdmin(String nodeId, APIContext context) {
-      super(context, nodeId, "/admins", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateAdmin setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdmin setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateAdmin setAdminId (Long adminId) {
-      this.setParam("admin_id", adminId);
-      return this;
-    }
-    public APIRequestCreateAdmin setAdminId (String adminId) {
-      this.setParam("admin_id", adminId);
-      return this;
-    }
-
-    public APIRequestCreateAdmin setTasks (List<User.EnumTasks> tasks) {
-      this.setParam("tasks", tasks);
-      return this;
-    }
-    public APIRequestCreateAdmin setTasks (String tasks) {
-      this.setParam("tasks", tasks);
-      return this;
-    }
-
-    public APIRequestCreateAdmin setTrusted (Boolean trusted) {
-      this.setParam("trusted", trusted);
-      return this;
-    }
-    public APIRequestCreateAdmin setTrusted (String trusted) {
-      this.setParam("trusted", trusted);
-      return this;
-    }
-
-    public APIRequestCreateAdmin requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateAdmin requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdmin requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateAdmin requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdmin requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdmin requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -4063,6 +3797,7 @@ public class Page extends APINode {
     }
     public static final String[] PARAMS = {
       "asid",
+      "psid",
       "uid",
       "user",
     };
@@ -4123,7 +3858,7 @@ public class Page extends APINode {
     }
 
 
-    public APIRequestDeleteBlocked setAsid (Long asid) {
+    public APIRequestDeleteBlocked setAsid (Object asid) {
       this.setParam("asid", asid);
       return this;
     }
@@ -4132,7 +3867,16 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestDeleteBlocked setUid (Long uid) {
+    public APIRequestDeleteBlocked setPsid (Object psid) {
+      this.setParam("psid", psid);
+      return this;
+    }
+    public APIRequestDeleteBlocked setPsid (String psid) {
+      this.setParam("psid", psid);
+      return this;
+    }
+
+    public APIRequestDeleteBlocked setUid (Object uid) {
       this.setParam("uid", uid);
       return this;
     }
@@ -4141,7 +3885,7 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestDeleteBlocked setUser (Long user) {
+    public APIRequestDeleteBlocked setUser (Object user) {
       this.setParam("user", user);
       return this;
     }
@@ -4409,6 +4153,7 @@ public class Page extends APINode {
     }
     public static final String[] PARAMS = {
       "asid",
+      "psid",
       "uid",
       "user",
     };
@@ -4475,6 +4220,15 @@ public class Page extends APINode {
     }
     public APIRequestCreateBlocked setAsid (String asid) {
       this.setParam("asid", asid);
+      return this;
+    }
+
+    public APIRequestCreateBlocked setPsid (List<Object> psid) {
+      this.setParam("psid", psid);
+      return this;
+    }
+    public APIRequestCreateBlocked setPsid (String psid) {
+      this.setParam("psid", psid);
       return this;
     }
 
@@ -12043,6 +11797,7 @@ public class Page extends APINode {
       "is_optimized_for_quality",
       "leadgen_export_csv_url",
       "leads_count",
+      "legal_content",
       "locale",
       "messenger_welcome_message",
       "name",
@@ -12243,6 +11998,13 @@ public class Page extends APINode {
     }
     public APIRequestGetLeadGenForms requestLeadsCountField (boolean value) {
       this.requestField("leads_count", value);
+      return this;
+    }
+    public APIRequestGetLeadGenForms requestLegalContentField () {
+      return this.requestLegalContentField(true);
+    }
+    public APIRequestGetLeadGenForms requestLegalContentField (boolean value) {
+      this.requestField("legal_content", value);
       return this;
     }
     public APIRequestGetLeadGenForms requestLocaleField () {
@@ -22766,6 +22528,7 @@ public class Page extends APINode {
       "property_id",
       "real_time_mode_devices",
       "restrictions",
+      "restrictive_data_filter_params",
       "restrictive_data_filter_rules",
       "sdk_update_message",
       "seamless_login",
@@ -23417,6 +23180,13 @@ public class Page extends APINode {
       this.requestField("restrictions", value);
       return this;
     }
+    public APIRequestGetSecondaryReceivers requestRestrictiveDataFilterParamsField () {
+      return this.requestRestrictiveDataFilterParamsField(true);
+    }
+    public APIRequestGetSecondaryReceivers requestRestrictiveDataFilterParamsField (boolean value) {
+      this.requestField("restrictive_data_filter_params", value);
+      return this;
+    }
     public APIRequestGetSecondaryReceivers requestRestrictiveDataFilterRulesField () {
       return this.requestRestrictiveDataFilterRulesField(true);
     }
@@ -23992,6 +23762,7 @@ public class Page extends APINode {
       "property_id",
       "real_time_mode_devices",
       "restrictions",
+      "restrictive_data_filter_params",
       "restrictive_data_filter_rules",
       "sdk_update_message",
       "seamless_login",
@@ -24641,6 +24412,13 @@ public class Page extends APINode {
     }
     public APIRequestGetSubscribedApps requestRestrictionsField (boolean value) {
       this.requestField("restrictions", value);
+      return this;
+    }
+    public APIRequestGetSubscribedApps requestRestrictiveDataFilterParamsField () {
+      return this.requestRestrictiveDataFilterParamsField(true);
+    }
+    public APIRequestGetSubscribedApps requestRestrictiveDataFilterParamsField (boolean value) {
+      this.requestField("restrictive_data_filter_params", value);
       return this;
     }
     public APIRequestGetSubscribedApps requestRestrictiveDataFilterRulesField () {
@@ -31328,6 +31106,8 @@ public class Page extends APINode {
       VALUE_CATEGORY("category"),
       @SerializedName("checkins")
       VALUE_CHECKINS("checkins"),
+      @SerializedName("commerce_order")
+      VALUE_COMMERCE_ORDER("commerce_order"),
       @SerializedName("company_overview")
       VALUE_COMPANY_OVERVIEW("company_overview"),
       @SerializedName("conversations")

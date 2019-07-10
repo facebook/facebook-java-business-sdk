@@ -613,6 +613,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_EXCLUDE_PREVIOUS_DAYS("exclude_previous_days"),
       @SerializedName("exclude_reached_since")
       VALUE_EXCLUDE_REACHED_SINCE("exclude_reached_since"),
+      @SerializedName("excluded_brand_safety_content_types")
+      VALUE_EXCLUDED_BRAND_SAFETY_CONTENT_TYPES("excluded_brand_safety_content_types"),
       @SerializedName("excluded_connections")
       VALUE_EXCLUDED_CONNECTIONS("excluded_connections"),
       @SerializedName("excluded_custom_audiences")

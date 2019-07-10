@@ -25,16 +25,17 @@
 import java.io.File;
 import java.util.Arrays;
 
-public class CustomAudienceDelete {
+public class AdCreativePreviewsEdgePreview {
   public static void main (String args[]) throws APIException {
 
     String access_token = "<ACCESS_TOKEN>";
     String app_secret = "<APP_SECRET>";
     String app_id = "<APP_ID>";
-    String id = "<CUSTOM_AUDIENCE_ID>";
+    String id = "<AD_CREATIVE_ID>";
     APIContext context = new APIContext(access_token).enableDebug(true);
 
-    new CustomAudience(id, context).delete()
+    new AdCreative(id, context).getPreviews()
+      .setAdFormat(AdPreview.EnumAdFormat.VALUE_DESKTOP_FEED_STANDARD)
       .execute();
 
   }

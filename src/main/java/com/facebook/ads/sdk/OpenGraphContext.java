@@ -304,6 +304,7 @@ public class OpenGraphContext extends APINode {
       "address",
       "admin_notes",
       "age_range",
+      "auth_method",
       "birthday",
       "can_review_measurement_request",
       "cover",
@@ -311,7 +312,6 @@ public class OpenGraphContext extends APINode {
       "devices",
       "education",
       "email",
-      "employee_number",
       "favorite_athletes",
       "favorite_teams",
       "first_name",
@@ -478,6 +478,13 @@ public class OpenGraphContext extends APINode {
       this.requestField("age_range", value);
       return this;
     }
+    public APIRequestGetFriendsTaggedAt requestAuthMethodField () {
+      return this.requestAuthMethodField(true);
+    }
+    public APIRequestGetFriendsTaggedAt requestAuthMethodField (boolean value) {
+      this.requestField("auth_method", value);
+      return this;
+    }
     public APIRequestGetFriendsTaggedAt requestBirthdayField () {
       return this.requestBirthdayField(true);
     }
@@ -525,13 +532,6 @@ public class OpenGraphContext extends APINode {
     }
     public APIRequestGetFriendsTaggedAt requestEmailField (boolean value) {
       this.requestField("email", value);
-      return this;
-    }
-    public APIRequestGetFriendsTaggedAt requestEmployeeNumberField () {
-      return this.requestEmployeeNumberField(true);
-    }
-    public APIRequestGetFriendsTaggedAt requestEmployeeNumberField (boolean value) {
-      this.requestField("employee_number", value);
       return this;
     }
     public APIRequestGetFriendsTaggedAt requestFavoriteAthletesField () {
@@ -880,6 +880,7 @@ public class OpenGraphContext extends APINode {
       "address",
       "admin_notes",
       "age_range",
+      "auth_method",
       "birthday",
       "can_review_measurement_request",
       "cover",
@@ -887,7 +888,6 @@ public class OpenGraphContext extends APINode {
       "devices",
       "education",
       "email",
-      "employee_number",
       "favorite_athletes",
       "favorite_teams",
       "first_name",
@@ -1054,6 +1054,13 @@ public class OpenGraphContext extends APINode {
       this.requestField("age_range", value);
       return this;
     }
+    public APIRequestGetMusicListenFriends requestAuthMethodField () {
+      return this.requestAuthMethodField(true);
+    }
+    public APIRequestGetMusicListenFriends requestAuthMethodField (boolean value) {
+      this.requestField("auth_method", value);
+      return this;
+    }
     public APIRequestGetMusicListenFriends requestBirthdayField () {
       return this.requestBirthdayField(true);
     }
@@ -1101,13 +1108,6 @@ public class OpenGraphContext extends APINode {
     }
     public APIRequestGetMusicListenFriends requestEmailField (boolean value) {
       this.requestField("email", value);
-      return this;
-    }
-    public APIRequestGetMusicListenFriends requestEmployeeNumberField () {
-      return this.requestEmployeeNumberField(true);
-    }
-    public APIRequestGetMusicListenFriends requestEmployeeNumberField (boolean value) {
-      this.requestField("employee_number", value);
       return this;
     }
     public APIRequestGetMusicListenFriends requestFavoriteAthletesField () {
@@ -1456,6 +1456,7 @@ public class OpenGraphContext extends APINode {
       "address",
       "admin_notes",
       "age_range",
+      "auth_method",
       "birthday",
       "can_review_measurement_request",
       "cover",
@@ -1463,7 +1464,6 @@ public class OpenGraphContext extends APINode {
       "devices",
       "education",
       "email",
-      "employee_number",
       "favorite_athletes",
       "favorite_teams",
       "first_name",
@@ -1630,6 +1630,13 @@ public class OpenGraphContext extends APINode {
       this.requestField("age_range", value);
       return this;
     }
+    public APIRequestGetVideoWatchFriends requestAuthMethodField () {
+      return this.requestAuthMethodField(true);
+    }
+    public APIRequestGetVideoWatchFriends requestAuthMethodField (boolean value) {
+      this.requestField("auth_method", value);
+      return this;
+    }
     public APIRequestGetVideoWatchFriends requestBirthdayField () {
       return this.requestBirthdayField(true);
     }
@@ -1677,13 +1684,6 @@ public class OpenGraphContext extends APINode {
     }
     public APIRequestGetVideoWatchFriends requestEmailField (boolean value) {
       this.requestField("email", value);
-      return this;
-    }
-    public APIRequestGetVideoWatchFriends requestEmployeeNumberField () {
-      return this.requestEmployeeNumberField(true);
-    }
-    public APIRequestGetVideoWatchFriends requestEmployeeNumberField (boolean value) {
-      this.requestField("employee_number", value);
       return this;
     }
     public APIRequestGetVideoWatchFriends requestFavoriteAthletesField () {
