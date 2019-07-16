@@ -21,4 +21,25 @@
  *
  */
 
- 
+ import com.facebook.ads.sdk.*;
+import java.io.File;
+import java.util.Arrays;
+
+public class AdAccountGeneratePreviewsEdge {
+  public static void main (String args[]) throws APIException {
+
+    String access_token = "<ACCESS_TOKEN>";
+    String app_secret = "<APP_SECRET>";
+    String app_id = "<APP_ID>";
+    String id = "<AD_ACCOUNT_ID>";
+    APIContext context = new APIContext(access_token).enableDebug(true);
+
+    new AdAccount(id, context).getGeneratePreviews()
+      .setCreative(
+          new AdCreative()
+        )
+      .setAdFormat(AdPreview.EnumAdFormat.VALUE_<ADFORMAT>)
+      .execute();
+
+  }
+}

@@ -165,8 +165,6 @@ public class Application extends APINode {
   private String mIpadAppStoreId = null;
   @SerializedName("iphone_app_store_id")
   private String mIphoneAppStoreId = null;
-  @SerializedName("is_viewer_admin")
-  private Boolean mIsViewerAdmin = null;
   @SerializedName("latest_sdk_version")
   private Object mLatestSdkVersion = null;
   @SerializedName("link")
@@ -905,10 +903,6 @@ public class Application extends APINode {
 
   public String getFieldIphoneAppStoreId() {
     return mIphoneAppStoreId;
-  }
-
-  public Boolean getFieldIsViewerAdmin() {
-    return mIsViewerAdmin;
   }
 
   public Object getFieldLatestSdkVersion() {
@@ -9808,7 +9802,6 @@ public class Application extends APINode {
       "ios_supports_system_auth",
       "ipad_app_store_id",
       "iphone_app_store_id",
-      "is_viewer_admin",
       "latest_sdk_version",
       "link",
       "logging_token",
@@ -10331,13 +10324,6 @@ public class Application extends APINode {
     }
     public APIRequestGet requestIphoneAppStoreIdField (boolean value) {
       this.requestField("iphone_app_store_id", value);
-      return this;
-    }
-    public APIRequestGet requestIsViewerAdminField () {
-      return this.requestIsViewerAdminField(true);
-    }
-    public APIRequestGet requestIsViewerAdminField (boolean value) {
-      this.requestField("is_viewer_admin", value);
       return this;
     }
     public APIRequestGet requestLatestSdkVersionField () {
@@ -11490,7 +11476,6 @@ public class Application extends APINode {
     this.mIosSupportsSystemAuth = instance.mIosSupportsSystemAuth;
     this.mIpadAppStoreId = instance.mIpadAppStoreId;
     this.mIphoneAppStoreId = instance.mIphoneAppStoreId;
-    this.mIsViewerAdmin = instance.mIsViewerAdmin;
     this.mLatestSdkVersion = instance.mLatestSdkVersion;
     this.mLink = instance.mLink;
     this.mLoggingToken = instance.mLoggingToken;

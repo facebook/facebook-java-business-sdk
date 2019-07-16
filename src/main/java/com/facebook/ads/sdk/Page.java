@@ -11785,6 +11785,7 @@ public class Page extends APINode {
     public static final String[] FIELDS = {
       "allow_organic_lead",
       "block_display_for_non_targeted_viewer",
+      "context_card",
       "created_time",
       "creator",
       "creator_id",
@@ -11810,6 +11811,7 @@ public class Page extends APINode {
       "questions",
       "status",
       "tcpa_compliance",
+      "thank_you_page",
       "tracking_parameters",
     };
 
@@ -11914,6 +11916,13 @@ public class Page extends APINode {
     }
     public APIRequestGetLeadGenForms requestBlockDisplayForNonTargetedViewerField (boolean value) {
       this.requestField("block_display_for_non_targeted_viewer", value);
+      return this;
+    }
+    public APIRequestGetLeadGenForms requestContextCardField () {
+      return this.requestContextCardField(true);
+    }
+    public APIRequestGetLeadGenForms requestContextCardField (boolean value) {
+      this.requestField("context_card", value);
       return this;
     }
     public APIRequestGetLeadGenForms requestCreatedTimeField () {
@@ -12089,6 +12098,13 @@ public class Page extends APINode {
     }
     public APIRequestGetLeadGenForms requestTcpaComplianceField (boolean value) {
       this.requestField("tcpa_compliance", value);
+      return this;
+    }
+    public APIRequestGetLeadGenForms requestThankYouPageField () {
+      return this.requestThankYouPageField(true);
+    }
+    public APIRequestGetLeadGenForms requestThankYouPageField (boolean value) {
+      this.requestField("thank_you_page", value);
       return this;
     }
     public APIRequestGetLeadGenForms requestTrackingParametersField () {
@@ -22506,7 +22522,6 @@ public class Page extends APINode {
       "ios_supports_system_auth",
       "ipad_app_store_id",
       "iphone_app_store_id",
-      "is_viewer_admin",
       "latest_sdk_version",
       "link",
       "logging_token",
@@ -23024,13 +23039,6 @@ public class Page extends APINode {
     }
     public APIRequestGetSecondaryReceivers requestIphoneAppStoreIdField (boolean value) {
       this.requestField("iphone_app_store_id", value);
-      return this;
-    }
-    public APIRequestGetSecondaryReceivers requestIsViewerAdminField () {
-      return this.requestIsViewerAdminField(true);
-    }
-    public APIRequestGetSecondaryReceivers requestIsViewerAdminField (boolean value) {
-      this.requestField("is_viewer_admin", value);
       return this;
     }
     public APIRequestGetSecondaryReceivers requestLatestSdkVersionField () {
@@ -23740,7 +23748,6 @@ public class Page extends APINode {
       "ios_supports_system_auth",
       "ipad_app_store_id",
       "iphone_app_store_id",
-      "is_viewer_admin",
       "latest_sdk_version",
       "link",
       "logging_token",
@@ -24258,13 +24265,6 @@ public class Page extends APINode {
     }
     public APIRequestGetSubscribedApps requestIphoneAppStoreIdField (boolean value) {
       this.requestField("iphone_app_store_id", value);
-      return this;
-    }
-    public APIRequestGetSubscribedApps requestIsViewerAdminField () {
-      return this.requestIsViewerAdminField(true);
-    }
-    public APIRequestGetSubscribedApps requestIsViewerAdminField (boolean value) {
-      this.requestField("is_viewer_admin", value);
       return this;
     }
     public APIRequestGetSubscribedApps requestLatestSdkVersionField () {
@@ -31222,6 +31222,8 @@ public class Page extends APINode {
       VALUE_REGISTRATION("registration"),
       @SerializedName("standby")
       VALUE_STANDBY("standby"),
+      @SerializedName("video_text_question_responses")
+      VALUE_VIDEO_TEXT_QUESTION_RESPONSES("video_text_question_responses"),
       @SerializedName("videos")
       VALUE_VIDEOS("videos"),
       @SerializedName("website")

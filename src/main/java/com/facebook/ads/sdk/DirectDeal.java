@@ -488,7 +488,6 @@ public class DirectDeal extends APINode {
       "ios_supports_system_auth",
       "ipad_app_store_id",
       "iphone_app_store_id",
-      "is_viewer_admin",
       "latest_sdk_version",
       "link",
       "logging_token",
@@ -1006,13 +1005,6 @@ public class DirectDeal extends APINode {
     }
     public APIRequestGetApplications requestIphoneAppStoreIdField (boolean value) {
       this.requestField("iphone_app_store_id", value);
-      return this;
-    }
-    public APIRequestGetApplications requestIsViewerAdminField () {
-      return this.requestIsViewerAdminField(true);
-    }
-    public APIRequestGetApplications requestIsViewerAdminField (boolean value) {
-      this.requestField("is_viewer_admin", value);
       return this;
     }
     public APIRequestGetApplications requestLatestSdkVersionField () {

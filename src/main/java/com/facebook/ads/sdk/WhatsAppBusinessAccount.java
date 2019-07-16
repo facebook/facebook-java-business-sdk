@@ -71,6 +71,8 @@ public class WhatsAppBusinessAccount extends APINode {
   private String mName = null;
   @SerializedName("on_behalf_of_business_info")
   private Object mOnBehalfOfBusinessInfo = null;
+  @SerializedName("purchase_order_number")
+  private String mPurchaseOrderNumber = null;
   @SerializedName("status")
   private String mStatus = null;
   @SerializedName("timezone_id")
@@ -339,6 +341,10 @@ public class WhatsAppBusinessAccount extends APINode {
 
   public Object getFieldOnBehalfOfBusinessInfo() {
     return mOnBehalfOfBusinessInfo;
+  }
+
+  public String getFieldPurchaseOrderNumber() {
+    return mPurchaseOrderNumber;
   }
 
   public String getFieldStatus() {
@@ -1014,6 +1020,7 @@ public class WhatsAppBusinessAccount extends APINode {
       "message_template_namespace",
       "name",
       "on_behalf_of_business_info",
+      "purchase_order_number",
       "status",
       "timezone_id",
     };
@@ -1163,6 +1170,13 @@ public class WhatsAppBusinessAccount extends APINode {
       this.requestField("on_behalf_of_business_info", value);
       return this;
     }
+    public APIRequestGet requestPurchaseOrderNumberField () {
+      return this.requestPurchaseOrderNumberField(true);
+    }
+    public APIRequestGet requestPurchaseOrderNumberField (boolean value) {
+      this.requestField("purchase_order_number", value);
+      return this;
+    }
     public APIRequestGet requestStatusField () {
       return this.requestStatusField(true);
     }
@@ -1262,6 +1276,7 @@ public class WhatsAppBusinessAccount extends APINode {
     this.mMessageTemplateNamespace = instance.mMessageTemplateNamespace;
     this.mName = instance.mName;
     this.mOnBehalfOfBusinessInfo = instance.mOnBehalfOfBusinessInfo;
+    this.mPurchaseOrderNumber = instance.mPurchaseOrderNumber;
     this.mStatus = instance.mStatus;
     this.mTimezoneId = instance.mTimezoneId;
     this.context = instance.context;

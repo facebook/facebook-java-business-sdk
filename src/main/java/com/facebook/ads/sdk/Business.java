@@ -5176,7 +5176,6 @@ public class Business extends APINode {
       "ios_supports_system_auth",
       "ipad_app_store_id",
       "iphone_app_store_id",
-      "is_viewer_admin",
       "latest_sdk_version",
       "link",
       "logging_token",
@@ -5694,13 +5693,6 @@ public class Business extends APINode {
     }
     public APIRequestGetClientApps requestIphoneAppStoreIdField (boolean value) {
       this.requestField("iphone_app_store_id", value);
-      return this;
-    }
-    public APIRequestGetClientApps requestIsViewerAdminField () {
-      return this.requestIsViewerAdminField(true);
-    }
-    public APIRequestGetClientApps requestIsViewerAdminField (boolean value) {
-      this.requestField("is_viewer_admin", value);
       return this;
     }
     public APIRequestGetClientApps requestLatestSdkVersionField () {
@@ -13182,7 +13174,6 @@ public class Business extends APINode {
       "ios_supports_system_auth",
       "ipad_app_store_id",
       "iphone_app_store_id",
-      "is_viewer_admin",
       "latest_sdk_version",
       "link",
       "logging_token",
@@ -13700,13 +13691,6 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedApps requestIphoneAppStoreIdField (boolean value) {
       this.requestField("iphone_app_store_id", value);
-      return this;
-    }
-    public APIRequestGetOwnedApps requestIsViewerAdminField () {
-      return this.requestIsViewerAdminField(true);
-    }
-    public APIRequestGetOwnedApps requestIsViewerAdminField (boolean value) {
-      this.requestField("is_viewer_admin", value);
       return this;
     }
     public APIRequestGetOwnedApps requestLatestSdkVersionField () {

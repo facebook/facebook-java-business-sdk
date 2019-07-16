@@ -295,6 +295,8 @@ public class AdsInsights extends APINode {
   private String mDwell7Sec = null;
   @SerializedName("dwell_rate")
   private String mDwellRate = null;
+  @SerializedName("earned_impression")
+  private String mEarnedImpression = null;
   @SerializedName("estimated_ad_recall_rate")
   private String mEstimatedAdRecallRate = null;
   @SerializedName("estimated_ad_recall_rate_lower_bound")
@@ -1982,6 +1984,15 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public String getFieldEarnedImpression() {
+    return mEarnedImpression;
+  }
+
+  public AdsInsights setFieldEarnedImpression(String value) {
+    this.mEarnedImpression = value;
+    return this;
+  }
+
   public String getFieldEstimatedAdRecallRate() {
     return mEstimatedAdRecallRate;
   }
@@ -3603,6 +3614,7 @@ public class AdsInsights extends APINode {
     this.mDwell5Sec = instance.mDwell5Sec;
     this.mDwell7Sec = instance.mDwell7Sec;
     this.mDwellRate = instance.mDwellRate;
+    this.mEarnedImpression = instance.mEarnedImpression;
     this.mEstimatedAdRecallRate = instance.mEstimatedAdRecallRate;
     this.mEstimatedAdRecallRateLowerBound = instance.mEstimatedAdRecallRateLowerBound;
     this.mEstimatedAdRecallRateUpperBound = instance.mEstimatedAdRecallRateUpperBound;

@@ -59,6 +59,8 @@ public class LeadgenForm extends APINode {
   private Boolean mAllowOrganicLead = null;
   @SerializedName("block_display_for_non_targeted_viewer")
   private Boolean mBlockDisplayForNonTargetedViewer = null;
+  @SerializedName("context_card")
+  private Object mContextCard = null;
   @SerializedName("created_time")
   private String mCreatedTime = null;
   @SerializedName("creator")
@@ -109,6 +111,8 @@ public class LeadgenForm extends APINode {
   private String mStatus = null;
   @SerializedName("tcpa_compliance")
   private Boolean mTcpaCompliance = null;
+  @SerializedName("thank_you_page")
+  private Object mThankYouPage = null;
   @SerializedName("tracking_parameters")
   private Map<String, String> mTrackingParameters = null;
   protected static Gson gson = null;
@@ -353,6 +357,10 @@ public class LeadgenForm extends APINode {
     return mBlockDisplayForNonTargetedViewer;
   }
 
+  public Object getFieldContextCard() {
+    return mContextCard;
+  }
+
   public String getFieldCreatedTime() {
     return mCreatedTime;
   }
@@ -457,6 +465,10 @@ public class LeadgenForm extends APINode {
 
   public Boolean getFieldTcpaCompliance() {
     return mTcpaCompliance;
+  }
+
+  public Object getFieldThankYouPage() {
+    return mThankYouPage;
   }
 
   public Map<String, String> getFieldTrackingParameters() {
@@ -1202,6 +1214,7 @@ public class LeadgenForm extends APINode {
     public static final String[] FIELDS = {
       "allow_organic_lead",
       "block_display_for_non_targeted_viewer",
+      "context_card",
       "created_time",
       "creator",
       "creator_id",
@@ -1227,6 +1240,7 @@ public class LeadgenForm extends APINode {
       "questions",
       "status",
       "tcpa_compliance",
+      "thank_you_page",
       "tracking_parameters",
     };
 
@@ -1331,6 +1345,13 @@ public class LeadgenForm extends APINode {
     }
     public APIRequestGet requestBlockDisplayForNonTargetedViewerField (boolean value) {
       this.requestField("block_display_for_non_targeted_viewer", value);
+      return this;
+    }
+    public APIRequestGet requestContextCardField () {
+      return this.requestContextCardField(true);
+    }
+    public APIRequestGet requestContextCardField (boolean value) {
+      this.requestField("context_card", value);
       return this;
     }
     public APIRequestGet requestCreatedTimeField () {
@@ -1506,6 +1527,13 @@ public class LeadgenForm extends APINode {
     }
     public APIRequestGet requestTcpaComplianceField (boolean value) {
       this.requestField("tcpa_compliance", value);
+      return this;
+    }
+    public APIRequestGet requestThankYouPageField () {
+      return this.requestThankYouPageField(true);
+    }
+    public APIRequestGet requestThankYouPageField (boolean value) {
+      this.requestField("thank_you_page", value);
       return this;
     }
     public APIRequestGet requestTrackingParametersField () {
@@ -1748,6 +1776,7 @@ public class LeadgenForm extends APINode {
   public LeadgenForm copyFrom(LeadgenForm instance) {
     this.mAllowOrganicLead = instance.mAllowOrganicLead;
     this.mBlockDisplayForNonTargetedViewer = instance.mBlockDisplayForNonTargetedViewer;
+    this.mContextCard = instance.mContextCard;
     this.mCreatedTime = instance.mCreatedTime;
     this.mCreator = instance.mCreator;
     this.mCreatorId = instance.mCreatorId;
@@ -1773,6 +1802,7 @@ public class LeadgenForm extends APINode {
     this.mQuestions = instance.mQuestions;
     this.mStatus = instance.mStatus;
     this.mTcpaCompliance = instance.mTcpaCompliance;
+    this.mThankYouPage = instance.mThankYouPage;
     this.mTrackingParameters = instance.mTrackingParameters;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

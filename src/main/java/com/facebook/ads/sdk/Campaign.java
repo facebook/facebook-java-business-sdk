@@ -3895,6 +3895,8 @@ public class Campaign extends APINode {
       VALUE_DELETED("DELETED"),
       @SerializedName("PAUSED")
       VALUE_PAUSED("PAUSED"),
+      @SerializedName("WITH_ISSUES")
+      VALUE_WITH_ISSUES("WITH_ISSUES"),
       NULL(null);
 
       private String value;

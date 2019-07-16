@@ -1640,6 +1640,8 @@ public class ReachFrequencyPrediction extends APINode {
       VALUE_REGULAR_STYLE("REGULAR_STYLE"),
       @SerializedName("REGULAR_TV_MOVIES")
       VALUE_REGULAR_TV_MOVIES("REGULAR_TV_MOVIES"),
+      @SerializedName("SPANISH")
+      VALUE_SPANISH("SPANISH"),
       @SerializedName("SPORTS")
       VALUE_SPORTS("SPORTS"),
       NULL(null);

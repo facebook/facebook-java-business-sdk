@@ -501,6 +501,7 @@ public class AdReportRun extends APINode {
       "dwell_5_sec",
       "dwell_7_sec",
       "dwell_rate",
+      "earned_impression",
       "estimated_ad_recall_rate",
       "estimated_ad_recall_rate_lower_bound",
       "estimated_ad_recall_rate_upper_bound",
@@ -1543,6 +1544,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestDwellRateField (boolean value) {
       this.requestField("dwell_rate", value);
+      return this;
+    }
+    public APIRequestGetInsights requestEarnedImpressionField () {
+      return this.requestEarnedImpressionField(true);
+    }
+    public APIRequestGetInsights requestEarnedImpressionField (boolean value) {
+      this.requestField("earned_impression", value);
       return this;
     }
     public APIRequestGetInsights requestEstimatedAdRecallRateField () {

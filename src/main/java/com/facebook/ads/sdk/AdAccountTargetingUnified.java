@@ -518,10 +518,10 @@ public class AdAccountTargetingUnified extends APINode {
   }
 
   public static enum EnumRegulatedCategories {
+      @SerializedName("CREDIT")
+      VALUE_CREDIT("CREDIT"),
       @SerializedName("EMPLOYMENT")
       VALUE_EMPLOYMENT("EMPLOYMENT"),
-      @SerializedName("FINANCING")
-      VALUE_FINANCING("FINANCING"),
       @SerializedName("HOUSING")
       VALUE_HOUSING("HOUSING"),
       @SerializedName("NONE")

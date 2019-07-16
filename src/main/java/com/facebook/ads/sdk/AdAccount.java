@@ -10292,7 +10292,6 @@ public class AdAccount extends APINode {
       "ios_supports_system_auth",
       "ipad_app_store_id",
       "iphone_app_store_id",
-      "is_viewer_admin",
       "latest_sdk_version",
       "link",
       "logging_token",
@@ -10820,13 +10819,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdvertisableApplications requestIphoneAppStoreIdField (boolean value) {
       this.requestField("iphone_app_store_id", value);
-      return this;
-    }
-    public APIRequestGetAdvertisableApplications requestIsViewerAdminField () {
-      return this.requestIsViewerAdminField(true);
-    }
-    public APIRequestGetAdvertisableApplications requestIsViewerAdminField (boolean value) {
-      this.requestField("is_viewer_admin", value);
       return this;
     }
     public APIRequestGetAdvertisableApplications requestLatestSdkVersionField () {
@@ -12960,7 +12952,6 @@ public class AdAccount extends APINode {
       "ios_supports_system_auth",
       "ipad_app_store_id",
       "iphone_app_store_id",
-      "is_viewer_admin",
       "latest_sdk_version",
       "link",
       "logging_token",
@@ -13478,13 +13469,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetApplications requestIphoneAppStoreIdField (boolean value) {
       this.requestField("iphone_app_store_id", value);
-      return this;
-    }
-    public APIRequestGetApplications requestIsViewerAdminField () {
-      return this.requestIsViewerAdminField(true);
-    }
-    public APIRequestGetApplications requestIsViewerAdminField (boolean value) {
-      this.requestField("is_viewer_admin", value);
       return this;
     }
     public APIRequestGetApplications requestLatestSdkVersionField () {
@@ -20158,6 +20142,7 @@ public class AdAccount extends APINode {
     public static final String[] FIELDS = {
       "allow_organic_lead",
       "block_display_for_non_targeted_viewer",
+      "context_card",
       "created_time",
       "creator",
       "creator_id",
@@ -20183,6 +20168,7 @@ public class AdAccount extends APINode {
       "questions",
       "status",
       "tcpa_compliance",
+      "thank_you_page",
       "tracking_parameters",
     };
 
@@ -20292,6 +20278,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetLeadGenForms requestBlockDisplayForNonTargetedViewerField (boolean value) {
       this.requestField("block_display_for_non_targeted_viewer", value);
+      return this;
+    }
+    public APIRequestGetLeadGenForms requestContextCardField () {
+      return this.requestContextCardField(true);
+    }
+    public APIRequestGetLeadGenForms requestContextCardField (boolean value) {
+      this.requestField("context_card", value);
       return this;
     }
     public APIRequestGetLeadGenForms requestCreatedTimeField () {
@@ -20467,6 +20460,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetLeadGenForms requestTcpaComplianceField (boolean value) {
       this.requestField("tcpa_compliance", value);
+      return this;
+    }
+    public APIRequestGetLeadGenForms requestThankYouPageField () {
+      return this.requestThankYouPageField(true);
+    }
+    public APIRequestGetLeadGenForms requestThankYouPageField (boolean value) {
+      this.requestField("thank_you_page", value);
       return this;
     }
     public APIRequestGetLeadGenForms requestTrackingParametersField () {
@@ -28300,6 +28300,10 @@ public class AdAccount extends APINode {
       VALUE_ACTION_CAROUSEL_CARD_ID("action_carousel_card_id"),
       @SerializedName("action_carousel_card_name")
       VALUE_ACTION_CAROUSEL_CARD_NAME("action_carousel_card_name"),
+      @SerializedName("action_converted_brand_tag_id")
+      VALUE_ACTION_CONVERTED_BRAND_TAG_ID("action_converted_brand_tag_id"),
+      @SerializedName("action_converted_category_tag_id")
+      VALUE_ACTION_CONVERTED_CATEGORY_TAG_ID("action_converted_category_tag_id"),
       @SerializedName("action_converted_product_id")
       VALUE_ACTION_CONVERTED_PRODUCT_ID("action_converted_product_id"),
       @SerializedName("action_destination")
@@ -28316,6 +28320,10 @@ public class AdAccount extends APINode {
       VALUE_ACTION_VIDEO_SOUND("action_video_sound"),
       @SerializedName("action_video_type")
       VALUE_ACTION_VIDEO_TYPE("action_video_type"),
+      @SerializedName("brand")
+      VALUE_BRAND("brand"),
+      @SerializedName("category")
+      VALUE_CATEGORY("category"),
       @SerializedName("interactive_component_sticker_id")
       VALUE_INTERACTIVE_COMPONENT_STICKER_ID("interactive_component_sticker_id"),
       @SerializedName("interactive_component_sticker_response")

@@ -801,7 +801,9 @@ public class IGUser extends APINode {
       "caption",
       "children",
       "image_url",
+      "location_id",
       "media_type",
+      "user_tags",
     };
 
     public static final String[] FIELDS = {
@@ -879,8 +881,22 @@ public class IGUser extends APINode {
       return this;
     }
 
+    public APIRequestCreateMedia setLocationId (String locationId) {
+      this.setParam("location_id", locationId);
+      return this;
+    }
+
     public APIRequestCreateMedia setMediaType (String mediaType) {
       this.setParam("media_type", mediaType);
+      return this;
+    }
+
+    public APIRequestCreateMedia setUserTags (List<Map<String, String>> userTags) {
+      this.setParam("user_tags", userTags);
+      return this;
+    }
+    public APIRequestCreateMedia setUserTags (String userTags) {
+      this.setParam("user_tags", userTags);
       return this;
     }
 
