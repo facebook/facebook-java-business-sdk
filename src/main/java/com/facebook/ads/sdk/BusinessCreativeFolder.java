@@ -1436,6 +1436,7 @@ public class BusinessCreativeFolder extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "description",
       "name",
     };
 
@@ -1494,6 +1495,11 @@ public class BusinessCreativeFolder extends APINode {
       return this;
     }
 
+
+    public APIRequestUpdate setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
 
     public APIRequestUpdate setName (String name) {
       this.setParam("name", name);

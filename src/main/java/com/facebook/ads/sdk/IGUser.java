@@ -799,11 +799,12 @@ public class IGUser extends APINode {
     }
     public static final String[] PARAMS = {
       "caption",
-      "children",
       "image_url",
       "location_id",
       "media_type",
+      "thumb_offset",
       "user_tags",
+      "video_url",
     };
 
     public static final String[] FIELDS = {
@@ -867,15 +868,6 @@ public class IGUser extends APINode {
       return this;
     }
 
-    public APIRequestCreateMedia setChildren (List<Long> children) {
-      this.setParam("children", children);
-      return this;
-    }
-    public APIRequestCreateMedia setChildren (String children) {
-      this.setParam("children", children);
-      return this;
-    }
-
     public APIRequestCreateMedia setImageUrl (String imageUrl) {
       this.setParam("image_url", imageUrl);
       return this;
@@ -891,12 +883,22 @@ public class IGUser extends APINode {
       return this;
     }
 
+    public APIRequestCreateMedia setThumbOffset (String thumbOffset) {
+      this.setParam("thumb_offset", thumbOffset);
+      return this;
+    }
+
     public APIRequestCreateMedia setUserTags (List<Map<String, String>> userTags) {
       this.setParam("user_tags", userTags);
       return this;
     }
     public APIRequestCreateMedia setUserTags (String userTags) {
       this.setParam("user_tags", userTags);
+      return this;
+    }
+
+    public APIRequestCreateMedia setVideoUrl (String videoUrl) {
+      this.setParam("video_url", videoUrl);
       return this;
     }
 

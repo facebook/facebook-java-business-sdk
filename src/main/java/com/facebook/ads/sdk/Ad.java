@@ -3189,7 +3189,6 @@ public class Ad extends APINode {
       "dynamic_customization",
       "end_date",
       "height",
-      "interactive",
       "locale",
       "place_page_id",
       "post",
@@ -3299,15 +3298,6 @@ public class Ad extends APINode {
     }
     public APIRequestGetPreviews setHeight (String height) {
       this.setParam("height", height);
-      return this;
-    }
-
-    public APIRequestGetPreviews setInteractive (Boolean interactive) {
-      this.setParam("interactive", interactive);
-      return this;
-    }
-    public APIRequestGetPreviews setInteractive (String interactive) {
-      this.setParam("interactive", interactive);
       return this;
     }
 

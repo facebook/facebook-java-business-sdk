@@ -54,31 +54,37 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class CopyrightAttributionInsights extends APINode {
-  @SerializedName("l7_attribution_page_view")
-  private Long mL7AttributionPageView = null;
-  @SerializedName("l7_attribution_page_view_delta")
-  private Double mL7AttributionPageViewDelta = null;
-  @SerializedName("l7_attribution_video_view")
-  private Long mL7AttributionVideoView = null;
-  @SerializedName("l7_attribution_video_view_delta")
-  private Double mL7AttributionVideoViewDelta = null;
-  @SerializedName("metrics_ending_date")
-  private String mMetricsEndingDate = null;
+public class Recommendation extends APINode {
+  @SerializedName("created_time")
+  private String mCreatedTime = null;
+  @SerializedName("has_rating")
+  private Boolean mHasRating = null;
+  @SerializedName("has_review")
+  private Boolean mHasReview = null;
+  @SerializedName("open_graph_story")
+  private Object mOpenGraphStory = null;
+  @SerializedName("rating")
+  private Long mRating = null;
+  @SerializedName("recommendation_type")
+  private String mRecommendationType = null;
+  @SerializedName("review_text")
+  private String mReviewText = null;
+  @SerializedName("reviewer")
+  private User mReviewer = null;
   protected static Gson gson = null;
 
-  public CopyrightAttributionInsights() {
+  public Recommendation() {
   }
 
   public String getId() {
     return null;
   }
-  public static CopyrightAttributionInsights loadJSON(String json, APIContext context, String header) {
-    CopyrightAttributionInsights copyrightAttributionInsights = getGson().fromJson(json, CopyrightAttributionInsights.class);
+  public static Recommendation loadJSON(String json, APIContext context, String header) {
+    Recommendation recommendation = getGson().fromJson(json, Recommendation.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(copyrightAttributionInsights.toString());
+      JsonElement o2 = parser.parse(recommendation.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -88,14 +94,14 @@ public class CopyrightAttributionInsights extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    copyrightAttributionInsights.context = context;
-    copyrightAttributionInsights.rawValue = json;
-    copyrightAttributionInsights.header = header;
-    return copyrightAttributionInsights;
+    recommendation.context = context;
+    recommendation.rawValue = json;
+    recommendation.header = header;
+    return recommendation;
   }
 
-  public static APINodeList<CopyrightAttributionInsights> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<CopyrightAttributionInsights> copyrightAttributionInsightss = new APINodeList<CopyrightAttributionInsights>(request, json, header);
+  public static APINodeList<Recommendation> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<Recommendation> recommendations = new APINodeList<Recommendation>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -106,9 +112,9 @@ public class CopyrightAttributionInsights extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          copyrightAttributionInsightss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          recommendations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return copyrightAttributionInsightss;
+        return recommendations;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -118,20 +124,20 @@ public class CopyrightAttributionInsights extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                copyrightAttributionInsightss.setCursors(before, after);
+                recommendations.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            copyrightAttributionInsightss.setPaging(previous, next);
+            recommendations.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              copyrightAttributionInsightss.setAppSecret(context.getAppSecretProof());
+              recommendations.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              copyrightAttributionInsightss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              recommendations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -142,23 +148,23 @@ public class CopyrightAttributionInsights extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  copyrightAttributionInsightss.add(loadJSON(entry.getValue().toString(), context, header));
+                  recommendations.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              copyrightAttributionInsightss.add(loadJSON(obj.toString(), context, header));
+              recommendations.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return copyrightAttributionInsightss;
+          return recommendations;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              copyrightAttributionInsightss.add(loadJSON(entry.getValue().toString(), context, header));
+              recommendations.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return copyrightAttributionInsightss;
+          return recommendations;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -175,20 +181,20 @@ public class CopyrightAttributionInsights extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              copyrightAttributionInsightss.add(loadJSON(value.toString(), context, header));
+              recommendations.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return copyrightAttributionInsightss;
+            return recommendations;
           }
 
           // Sixth, check if it's pure JsonObject
-          copyrightAttributionInsightss.clear();
-          copyrightAttributionInsightss.add(loadJSON(json, context, header));
-          return copyrightAttributionInsightss;
+          recommendations.clear();
+          recommendations.add(loadJSON(json, context, header));
+          return recommendations;
         }
       }
     } catch (Exception e) {
@@ -216,51 +222,86 @@ public class CopyrightAttributionInsights extends APINode {
   }
 
 
-  public Long getFieldL7AttributionPageView() {
-    return mL7AttributionPageView;
+  public String getFieldCreatedTime() {
+    return mCreatedTime;
   }
 
-  public CopyrightAttributionInsights setFieldL7AttributionPageView(Long value) {
-    this.mL7AttributionPageView = value;
+  public Recommendation setFieldCreatedTime(String value) {
+    this.mCreatedTime = value;
     return this;
   }
 
-  public Double getFieldL7AttributionPageViewDelta() {
-    return mL7AttributionPageViewDelta;
+  public Boolean getFieldHasRating() {
+    return mHasRating;
   }
 
-  public CopyrightAttributionInsights setFieldL7AttributionPageViewDelta(Double value) {
-    this.mL7AttributionPageViewDelta = value;
+  public Recommendation setFieldHasRating(Boolean value) {
+    this.mHasRating = value;
     return this;
   }
 
-  public Long getFieldL7AttributionVideoView() {
-    return mL7AttributionVideoView;
+  public Boolean getFieldHasReview() {
+    return mHasReview;
   }
 
-  public CopyrightAttributionInsights setFieldL7AttributionVideoView(Long value) {
-    this.mL7AttributionVideoView = value;
+  public Recommendation setFieldHasReview(Boolean value) {
+    this.mHasReview = value;
     return this;
   }
 
-  public Double getFieldL7AttributionVideoViewDelta() {
-    return mL7AttributionVideoViewDelta;
+  public Object getFieldOpenGraphStory() {
+    return mOpenGraphStory;
   }
 
-  public CopyrightAttributionInsights setFieldL7AttributionVideoViewDelta(Double value) {
-    this.mL7AttributionVideoViewDelta = value;
+  public Recommendation setFieldOpenGraphStory(Object value) {
+    this.mOpenGraphStory = value;
     return this;
   }
 
-  public String getFieldMetricsEndingDate() {
-    return mMetricsEndingDate;
+  public Long getFieldRating() {
+    return mRating;
   }
 
-  public CopyrightAttributionInsights setFieldMetricsEndingDate(String value) {
-    this.mMetricsEndingDate = value;
+  public Recommendation setFieldRating(Long value) {
+    this.mRating = value;
     return this;
   }
 
+  public String getFieldRecommendationType() {
+    return mRecommendationType;
+  }
+
+  public Recommendation setFieldRecommendationType(String value) {
+    this.mRecommendationType = value;
+    return this;
+  }
+
+  public String getFieldReviewText() {
+    return mReviewText;
+  }
+
+  public Recommendation setFieldReviewText(String value) {
+    this.mReviewText = value;
+    return this;
+  }
+
+  public User getFieldReviewer() {
+    if (mReviewer != null) {
+      mReviewer.context = getContext();
+    }
+    return mReviewer;
+  }
+
+  public Recommendation setFieldReviewer(User value) {
+    this.mReviewer = value;
+    return this;
+  }
+
+  public Recommendation setFieldReviewer(String value) {
+    Type type = new TypeToken<User>(){}.getType();
+    this.mReviewer = User.getGson().fromJson(value, type);
+    return this;
+  }
 
 
 
@@ -277,21 +318,24 @@ public class CopyrightAttributionInsights extends APINode {
     return gson;
   }
 
-  public CopyrightAttributionInsights copyFrom(CopyrightAttributionInsights instance) {
-    this.mL7AttributionPageView = instance.mL7AttributionPageView;
-    this.mL7AttributionPageViewDelta = instance.mL7AttributionPageViewDelta;
-    this.mL7AttributionVideoView = instance.mL7AttributionVideoView;
-    this.mL7AttributionVideoViewDelta = instance.mL7AttributionVideoViewDelta;
-    this.mMetricsEndingDate = instance.mMetricsEndingDate;
+  public Recommendation copyFrom(Recommendation instance) {
+    this.mCreatedTime = instance.mCreatedTime;
+    this.mHasRating = instance.mHasRating;
+    this.mHasReview = instance.mHasReview;
+    this.mOpenGraphStory = instance.mOpenGraphStory;
+    this.mRating = instance.mRating;
+    this.mRecommendationType = instance.mRecommendationType;
+    this.mReviewText = instance.mReviewText;
+    this.mReviewer = instance.mReviewer;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<CopyrightAttributionInsights> getParser() {
-    return new APIRequest.ResponseParser<CopyrightAttributionInsights>() {
-      public APINodeList<CopyrightAttributionInsights> parseResponse(String response, APIContext context, APIRequest<CopyrightAttributionInsights> request, String header) throws MalformedResponseException {
-        return CopyrightAttributionInsights.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<Recommendation> getParser() {
+    return new APIRequest.ResponseParser<Recommendation>() {
+      public APINodeList<Recommendation> parseResponse(String response, APIContext context, APIRequest<Recommendation> request, String header) throws MalformedResponseException {
+        return Recommendation.parseResponse(response, context, request, header);
       }
     };
   }

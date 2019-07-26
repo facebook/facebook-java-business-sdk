@@ -522,7 +522,6 @@ public class AdReportRun extends APINode {
       "impression_device",
       "impressions",
       "impressions_auto_refresh",
-      "impressions_dummy",
       "impressions_gross",
       "inline_link_click_ctr",
       "inline_link_clicks",
@@ -1691,13 +1690,6 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestImpressionsAutoRefreshField (boolean value) {
       this.requestField("impressions_auto_refresh", value);
-      return this;
-    }
-    public APIRequestGetInsights requestImpressionsDummyField () {
-      return this.requestImpressionsDummyField(true);
-    }
-    public APIRequestGetInsights requestImpressionsDummyField (boolean value) {
-      this.requestField("impressions_dummy", value);
       return this;
     }
     public APIRequestGetInsights requestImpressionsGrossField () {

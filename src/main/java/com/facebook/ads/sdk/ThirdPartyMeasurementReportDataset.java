@@ -566,44 +566,6 @@ public class ThirdPartyMeasurementReportDataset extends APINode {
 
   }
 
-  public static enum EnumCategory {
-      @SerializedName("MTA")
-      VALUE_MTA("MTA"),
-      NULL(null);
-
-      private String value;
-
-      private EnumCategory(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumProduct {
-      @SerializedName("CUSTOM")
-      VALUE_CUSTOM("CUSTOM"),
-      @SerializedName("MTA")
-      VALUE_MTA("MTA"),
-      @SerializedName("VIEWABILITY")
-      VALUE_VIEWABILITY("VIEWABILITY"),
-      NULL(null);
-
-      private String value;
-
-      private EnumProduct(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {

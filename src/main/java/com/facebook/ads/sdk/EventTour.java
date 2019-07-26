@@ -749,7 +749,6 @@ public class EventTour extends APINode {
       "company_overview",
       "connected_instagram_account",
       "contact_address",
-      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -1130,13 +1129,6 @@ public class EventTour extends APINode {
     }
     public APIRequestGetPages requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
-      return this;
-    }
-    public APIRequestGetPages requestCopyrightAttributionInsightsField () {
-      return this.requestCopyrightAttributionInsightsField(true);
-    }
-    public APIRequestGetPages requestCopyrightAttributionInsightsField (boolean value) {
-      this.requestField("copyright_attribution_insights", value);
       return this;
     }
     public APIRequestGetPages requestCopyrightWhitelistedIgPartnersField () {

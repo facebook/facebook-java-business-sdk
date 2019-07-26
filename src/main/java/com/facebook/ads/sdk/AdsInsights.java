@@ -337,8 +337,6 @@ public class AdsInsights extends APINode {
   private String mImpressions = null;
   @SerializedName("impressions_auto_refresh")
   private String mImpressionsAutoRefresh = null;
-  @SerializedName("impressions_dummy")
-  private String mImpressionsDummy = null;
   @SerializedName("impressions_gross")
   private String mImpressionsGross = null;
   @SerializedName("inline_link_click_ctr")
@@ -2183,15 +2181,6 @@ public class AdsInsights extends APINode {
     return this;
   }
 
-  public String getFieldImpressionsDummy() {
-    return mImpressionsDummy;
-  }
-
-  public AdsInsights setFieldImpressionsDummy(String value) {
-    this.mImpressionsDummy = value;
-    return this;
-  }
-
   public String getFieldImpressionsGross() {
     return mImpressionsGross;
   }
@@ -3635,7 +3624,6 @@ public class AdsInsights extends APINode {
     this.mImpressionDevice = instance.mImpressionDevice;
     this.mImpressions = instance.mImpressions;
     this.mImpressionsAutoRefresh = instance.mImpressionsAutoRefresh;
-    this.mImpressionsDummy = instance.mImpressionsDummy;
     this.mImpressionsGross = instance.mImpressionsGross;
     this.mInlineLinkClickCtr = instance.mInlineLinkClickCtr;
     this.mInlineLinkClicks = instance.mInlineLinkClicks;

@@ -57,14 +57,10 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class MediaFingerprint extends APINode {
   @SerializedName("duration_in_sec")
   private Double mDurationInSec = null;
-  @SerializedName("expiration_time")
-  private String mExpirationTime = null;
   @SerializedName("fingerprint_content_type")
   private String mFingerprintContentType = null;
   @SerializedName("fingerprint_type")
   private String mFingerprintType = null;
-  @SerializedName("fingerprint_validity")
-  private String mFingerprintValidity = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("metadata")
@@ -295,20 +291,12 @@ public class MediaFingerprint extends APINode {
     return mDurationInSec;
   }
 
-  public String getFieldExpirationTime() {
-    return mExpirationTime;
-  }
-
   public String getFieldFingerprintContentType() {
     return mFingerprintContentType;
   }
 
   public String getFieldFingerprintType() {
     return mFingerprintType;
-  }
-
-  public String getFieldFingerprintValidity() {
-    return mFingerprintValidity;
   }
 
   public String getFieldId() {
@@ -341,10 +329,8 @@ public class MediaFingerprint extends APINode {
 
     public static final String[] FIELDS = {
       "duration_in_sec",
-      "expiration_time",
       "fingerprint_content_type",
       "fingerprint_type",
-      "fingerprint_validity",
       "id",
       "metadata",
       "title",
@@ -447,13 +433,6 @@ public class MediaFingerprint extends APINode {
       this.requestField("duration_in_sec", value);
       return this;
     }
-    public APIRequestGet requestExpirationTimeField () {
-      return this.requestExpirationTimeField(true);
-    }
-    public APIRequestGet requestExpirationTimeField (boolean value) {
-      this.requestField("expiration_time", value);
-      return this;
-    }
     public APIRequestGet requestFingerprintContentTypeField () {
       return this.requestFingerprintContentTypeField(true);
     }
@@ -466,13 +445,6 @@ public class MediaFingerprint extends APINode {
     }
     public APIRequestGet requestFingerprintTypeField (boolean value) {
       this.requestField("fingerprint_type", value);
-      return this;
-    }
-    public APIRequestGet requestFingerprintValidityField () {
-      return this.requestFingerprintValidityField(true);
-    }
-    public APIRequestGet requestFingerprintValidityField (boolean value) {
-      this.requestField("fingerprint_validity", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -672,10 +644,8 @@ public class MediaFingerprint extends APINode {
 
   public MediaFingerprint copyFrom(MediaFingerprint instance) {
     this.mDurationInSec = instance.mDurationInSec;
-    this.mExpirationTime = instance.mExpirationTime;
     this.mFingerprintContentType = instance.mFingerprintContentType;
     this.mFingerprintType = instance.mFingerprintType;
-    this.mFingerprintValidity = instance.mFingerprintValidity;
     this.mId = instance.mId;
     this.mMetadata = instance.mMetadata;
     this.mTitle = instance.mTitle;

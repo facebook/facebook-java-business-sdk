@@ -61,8 +61,6 @@ public class AdAssetFeedSpec extends APINode {
   private Object mAdditionalData = null;
   @SerializedName("asset_customization_rules")
   private List<Object> mAssetCustomizationRules = null;
-  @SerializedName("autotranslate")
-  private List<String> mAutotranslate = null;
   @SerializedName("bodies")
   private List<AdAssetFeedSpecBody> mBodies = null;
   @SerializedName("call_to_action_types")
@@ -258,15 +256,6 @@ public class AdAssetFeedSpec extends APINode {
 
   public AdAssetFeedSpec setFieldAssetCustomizationRules(List<Object> value) {
     this.mAssetCustomizationRules = value;
-    return this;
-  }
-
-  public List<String> getFieldAutotranslate() {
-    return mAutotranslate;
-  }
-
-  public AdAssetFeedSpec setFieldAutotranslate(List<String> value) {
-    this.mAutotranslate = value;
     return this;
   }
 
@@ -541,7 +530,6 @@ public class AdAssetFeedSpec extends APINode {
     this.mAdFormats = instance.mAdFormats;
     this.mAdditionalData = instance.mAdditionalData;
     this.mAssetCustomizationRules = instance.mAssetCustomizationRules;
-    this.mAutotranslate = instance.mAutotranslate;
     this.mBodies = instance.mBodies;
     this.mCallToActionTypes = instance.mCallToActionTypes;
     this.mCaptions = instance.mCaptions;

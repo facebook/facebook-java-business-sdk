@@ -65,8 +65,6 @@ public class PageChangeProposal extends APINode {
   private String mId = null;
   @SerializedName("proposed_value")
   private String mProposedValue = null;
-  @SerializedName("upcoming_change_info")
-  private PageUpcomingChange mUpcomingChangeInfo = null;
   protected static Gson gson = null;
 
   PageChangeProposal() {
@@ -305,13 +303,6 @@ public class PageChangeProposal extends APINode {
     return mProposedValue;
   }
 
-  public PageUpcomingChange getFieldUpcomingChangeInfo() {
-    if (mUpcomingChangeInfo != null) {
-      mUpcomingChangeInfo.context = getContext();
-    }
-    return mUpcomingChangeInfo;
-  }
-
 
 
   public static class APIRequestGet extends APIRequest<PageChangeProposal> {
@@ -330,7 +321,6 @@ public class PageChangeProposal extends APINode {
       "current_value",
       "id",
       "proposed_value",
-      "upcoming_change_info",
     };
 
     @Override
@@ -455,13 +445,6 @@ public class PageChangeProposal extends APINode {
     }
     public APIRequestGet requestProposedValueField (boolean value) {
       this.requestField("proposed_value", value);
-      return this;
-    }
-    public APIRequestGet requestUpcomingChangeInfoField () {
-      return this.requestUpcomingChangeInfoField(true);
-    }
-    public APIRequestGet requestUpcomingChangeInfoField (boolean value) {
-      this.requestField("upcoming_change_info", value);
       return this;
     }
   }
@@ -600,7 +583,6 @@ public class PageChangeProposal extends APINode {
     this.mCurrentValue = instance.mCurrentValue;
     this.mId = instance.mId;
     this.mProposedValue = instance.mProposedValue;
-    this.mUpcomingChangeInfo = instance.mUpcomingChangeInfo;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

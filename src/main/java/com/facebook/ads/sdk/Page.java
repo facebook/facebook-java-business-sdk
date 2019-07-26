@@ -105,8 +105,6 @@ public class Page extends APINode {
   private IGUser mConnectedInstagramAccount = null;
   @SerializedName("contact_address")
   private MailingAddress mContactAddress = null;
-  @SerializedName("copyright_attribution_insights")
-  private CopyrightAttributionInsights mCopyrightAttributionInsights = null;
   @SerializedName("copyright_whitelisted_ig_partners")
   private List<String> mCopyrightWhitelistedIgPartners = null;
   @SerializedName("country_page_likes")
@@ -548,8 +546,12 @@ public class Page extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestCreateAdminSetting createAdminSetting() {
-    return new APIRequestCreateAdminSetting(this.getPrefixedId().toString(), context);
+  public APIRequestDeleteAdmins deleteAdmins() {
+    return new APIRequestDeleteAdmins(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateAdmin createAdmin() {
+    return new APIRequestCreateAdmin(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetAdsPosts getAdsPosts() {
@@ -586,10 +588,6 @@ public class Page extends APINode {
 
   public APIRequestCreateAssignedUser createAssignedUser() {
     return new APIRequestCreateAssignedUser(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetAudioMediaCopyrights getAudioMediaCopyrights() {
-    return new APIRequestGetAudioMediaCopyrights(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestDeleteBlocked deleteBlocked() {
@@ -756,6 +754,10 @@ public class Page extends APINode {
     return new APIRequestGetLocations(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateLocation createLocation() {
+    return new APIRequestCreateLocation(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateMediaFingerprint createMediaFingerprint() {
     return new APIRequestCreateMediaFingerprint(this.getPrefixedId().toString(), context);
   }
@@ -858,6 +860,10 @@ public class Page extends APINode {
 
   public APIRequestGetPublishedPosts getPublishedPosts() {
     return new APIRequestGetPublishedPosts(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetRatings getRatings() {
+    return new APIRequestGetRatings(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateRequestThreadControl createRequestThreadControl() {
@@ -1078,10 +1084,6 @@ public class Page extends APINode {
       mContactAddress.context = getContext();
     }
     return mContactAddress;
-  }
-
-  public CopyrightAttributionInsights getFieldCopyrightAttributionInsights() {
-    return mCopyrightAttributionInsights;
   }
 
   public List<String> getFieldCopyrightWhitelistedIgPartners() {
@@ -1568,49 +1570,49 @@ public class Page extends APINode {
 
 
 
-  public static class APIRequestCreateAdminSetting extends APIRequest<Page> {
+  public static class APIRequestDeleteAdmins extends APIRequest<APINode> {
 
-    Page lastResponse = null;
+    APINodeList<APINode> lastResponse = null;
     @Override
-    public Page getLastResponse() {
+    public APINodeList<APINode> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "setting",
-      "value",
+      "admin_id",
+      "trusted",
     };
 
     public static final String[] FIELDS = {
     };
 
     @Override
-    public Page parseResponse(String response, String header) throws APIException {
-      return Page.parseResponse(response, getContext(), this, header).head();
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public Page execute() throws APIException {
+    public APINodeList<APINode> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public Page execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<Page> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<Page> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Page>() {
-           public Page apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAdminSetting.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestDeleteAdmins.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1619,46 +1621,46 @@ public class Page extends APINode {
       );
     };
 
-    public APIRequestCreateAdminSetting(String nodeId, APIContext context) {
-      super(context, nodeId, "/admin_settings", "POST", Arrays.asList(PARAMS));
+    public APIRequestDeleteAdmins(String nodeId, APIContext context) {
+      super(context, nodeId, "/admins", "DELETE", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestCreateAdminSetting setParam(String param, Object value) {
+    public APIRequestDeleteAdmins setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestCreateAdminSetting setParams(Map<String, Object> params) {
+    public APIRequestDeleteAdmins setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestCreateAdminSetting setSetting (Page.EnumSetting setting) {
-      this.setParam("setting", setting);
+    public APIRequestDeleteAdmins setAdminId (Long adminId) {
+      this.setParam("admin_id", adminId);
       return this;
     }
-    public APIRequestCreateAdminSetting setSetting (String setting) {
-      this.setParam("setting", setting);
-      return this;
-    }
-
-    public APIRequestCreateAdminSetting setValue (Boolean value) {
-      this.setParam("value", value);
-      return this;
-    }
-    public APIRequestCreateAdminSetting setValue (String value) {
-      this.setParam("value", value);
+    public APIRequestDeleteAdmins setAdminId (String adminId) {
+      this.setParam("admin_id", adminId);
       return this;
     }
 
-    public APIRequestCreateAdminSetting requestAllFields () {
+    public APIRequestDeleteAdmins setTrusted (Boolean trusted) {
+      this.setParam("trusted", trusted);
+      return this;
+    }
+    public APIRequestDeleteAdmins setTrusted (String trusted) {
+      this.setParam("trusted", trusted);
+      return this;
+    }
+
+    public APIRequestDeleteAdmins requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestCreateAdminSetting requestAllFields (boolean value) {
+    public APIRequestDeleteAdmins requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -1666,12 +1668,12 @@ public class Page extends APINode {
     }
 
     @Override
-    public APIRequestCreateAdminSetting requestFields (List<String> fields) {
+    public APIRequestDeleteAdmins requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestCreateAdminSetting requestFields (List<String> fields, boolean value) {
+    public APIRequestDeleteAdmins requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -1679,13 +1681,147 @@ public class Page extends APINode {
     }
 
     @Override
-    public APIRequestCreateAdminSetting requestField (String field) {
+    public APIRequestDeleteAdmins requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestCreateAdminSetting requestField (String field, boolean value) {
+    public APIRequestDeleteAdmins requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateAdmin extends APIRequest<User> {
+
+    User lastResponse = null;
+    @Override
+    public User getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "admin_id",
+      "tasks",
+      "trusted",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public User parseResponse(String response, String header) throws APIException {
+      return User.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public User execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public User execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<User> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<User> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, User>() {
+           public User apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateAdmin.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateAdmin(String nodeId, APIContext context) {
+      super(context, nodeId, "/admins", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateAdmin setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdmin setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateAdmin setAdminId (Long adminId) {
+      this.setParam("admin_id", adminId);
+      return this;
+    }
+    public APIRequestCreateAdmin setAdminId (String adminId) {
+      this.setParam("admin_id", adminId);
+      return this;
+    }
+
+    public APIRequestCreateAdmin setTasks (List<User.EnumTasks> tasks) {
+      this.setParam("tasks", tasks);
+      return this;
+    }
+    public APIRequestCreateAdmin setTasks (String tasks) {
+      this.setParam("tasks", tasks);
+      return this;
+    }
+
+    public APIRequestCreateAdmin setTrusted (Boolean trusted) {
+      this.setParam("trusted", trusted);
+      return this;
+    }
+    public APIRequestCreateAdmin setTrusted (String trusted) {
+      this.setParam("trusted", trusted);
+      return this;
+    }
+
+    public APIRequestCreateAdmin requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateAdmin requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdmin requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateAdmin requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdmin requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdmin requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -3596,198 +3732,6 @@ public class Page extends APINode {
 
   }
 
-  public static class APIRequestGetAudioMediaCopyrights extends APIRequest<AudioCopyright> {
-
-    APINodeList<AudioCopyright> lastResponse = null;
-    @Override
-    public APINodeList<AudioCopyright> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "creation_time",
-      "displayed_matches_count",
-      "id",
-      "in_conflict",
-      "isrc",
-      "ownership_countries",
-      "reference_file_status",
-      "ridge_monitoring_status",
-      "update_time",
-      "whitelisted_fb_users",
-      "whitelisted_ig_users",
-    };
-
-    @Override
-    public APINodeList<AudioCopyright> parseResponse(String response, String header) throws APIException {
-      return AudioCopyright.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<AudioCopyright> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<AudioCopyright> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<AudioCopyright>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<AudioCopyright>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<AudioCopyright>>() {
-           public APINodeList<AudioCopyright> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetAudioMediaCopyrights.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetAudioMediaCopyrights(String nodeId, APIContext context) {
-      super(context, nodeId, "/audio_media_copyrights", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetAudioMediaCopyrights setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAudioMediaCopyrights setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetAudioMediaCopyrights requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetAudioMediaCopyrights requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAudioMediaCopyrights requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetAudioMediaCopyrights requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAudioMediaCopyrights requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAudioMediaCopyrights requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetAudioMediaCopyrights requestCreationTimeField () {
-      return this.requestCreationTimeField(true);
-    }
-    public APIRequestGetAudioMediaCopyrights requestCreationTimeField (boolean value) {
-      this.requestField("creation_time", value);
-      return this;
-    }
-    public APIRequestGetAudioMediaCopyrights requestDisplayedMatchesCountField () {
-      return this.requestDisplayedMatchesCountField(true);
-    }
-    public APIRequestGetAudioMediaCopyrights requestDisplayedMatchesCountField (boolean value) {
-      this.requestField("displayed_matches_count", value);
-      return this;
-    }
-    public APIRequestGetAudioMediaCopyrights requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetAudioMediaCopyrights requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetAudioMediaCopyrights requestInConflictField () {
-      return this.requestInConflictField(true);
-    }
-    public APIRequestGetAudioMediaCopyrights requestInConflictField (boolean value) {
-      this.requestField("in_conflict", value);
-      return this;
-    }
-    public APIRequestGetAudioMediaCopyrights requestIsrcField () {
-      return this.requestIsrcField(true);
-    }
-    public APIRequestGetAudioMediaCopyrights requestIsrcField (boolean value) {
-      this.requestField("isrc", value);
-      return this;
-    }
-    public APIRequestGetAudioMediaCopyrights requestOwnershipCountriesField () {
-      return this.requestOwnershipCountriesField(true);
-    }
-    public APIRequestGetAudioMediaCopyrights requestOwnershipCountriesField (boolean value) {
-      this.requestField("ownership_countries", value);
-      return this;
-    }
-    public APIRequestGetAudioMediaCopyrights requestReferenceFileStatusField () {
-      return this.requestReferenceFileStatusField(true);
-    }
-    public APIRequestGetAudioMediaCopyrights requestReferenceFileStatusField (boolean value) {
-      this.requestField("reference_file_status", value);
-      return this;
-    }
-    public APIRequestGetAudioMediaCopyrights requestRidgeMonitoringStatusField () {
-      return this.requestRidgeMonitoringStatusField(true);
-    }
-    public APIRequestGetAudioMediaCopyrights requestRidgeMonitoringStatusField (boolean value) {
-      this.requestField("ridge_monitoring_status", value);
-      return this;
-    }
-    public APIRequestGetAudioMediaCopyrights requestUpdateTimeField () {
-      return this.requestUpdateTimeField(true);
-    }
-    public APIRequestGetAudioMediaCopyrights requestUpdateTimeField (boolean value) {
-      this.requestField("update_time", value);
-      return this;
-    }
-    public APIRequestGetAudioMediaCopyrights requestWhitelistedFbUsersField () {
-      return this.requestWhitelistedFbUsersField(true);
-    }
-    public APIRequestGetAudioMediaCopyrights requestWhitelistedFbUsersField (boolean value) {
-      this.requestField("whitelisted_fb_users", value);
-      return this;
-    }
-    public APIRequestGetAudioMediaCopyrights requestWhitelistedIgUsersField () {
-      return this.requestWhitelistedIgUsersField(true);
-    }
-    public APIRequestGetAudioMediaCopyrights requestWhitelistedIgUsersField (boolean value) {
-      this.requestField("whitelisted_ig_users", value);
-      return this;
-    }
-  }
-
   public static class APIRequestDeleteBlocked extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -4300,7 +4244,6 @@ public class Page extends APINode {
       "message_creative_id",
       "messaging_type",
       "notification_type",
-      "schedule_local_time",
       "schedule_time",
       "tag",
       "targeting",
@@ -4391,11 +4334,6 @@ public class Page extends APINode {
     }
     public APIRequestCreateBroadcastMessage setNotificationType (String notificationType) {
       this.setParam("notification_type", notificationType);
-      return this;
-    }
-
-    public APIRequestCreateBroadcastMessage setScheduleLocalTime (String scheduleLocalTime) {
-      this.setParam("schedule_local_time", scheduleLocalTime);
       return this;
     }
 
@@ -8964,7 +8902,6 @@ public class Page extends APINode {
       "company_overview",
       "connected_instagram_account",
       "contact_address",
-      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -9345,13 +9282,6 @@ public class Page extends APINode {
     }
     public APIRequestGetGlobalBrandChildren requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
-      return this;
-    }
-    public APIRequestGetGlobalBrandChildren requestCopyrightAttributionInsightsField () {
-      return this.requestCopyrightAttributionInsightsField(true);
-    }
-    public APIRequestGetGlobalBrandChildren requestCopyrightAttributionInsightsField (boolean value) {
-      this.requestField("copyright_attribution_insights", value);
       return this;
     }
     public APIRequestGetGlobalBrandChildren requestCopyrightWhitelistedIgPartnersField () {
@@ -10184,6 +10114,8 @@ public class Page extends APINode {
       "backdated_time_granularity",
       "content_category",
       "content_tags",
+      "copyright",
+      "copyright_monitoring_status",
       "created_time",
       "custom_labels",
       "description",
@@ -10199,9 +10131,11 @@ public class Page extends APINode {
       "is_crossposting_eligible",
       "is_episode",
       "is_instagram_eligible",
+      "is_reference_only",
       "length",
       "live_audience_count",
       "live_status",
+      "music_video_copyright",
       "permalink_url",
       "picture",
       "place",
@@ -10342,6 +10276,20 @@ public class Page extends APINode {
       this.requestField("content_tags", value);
       return this;
     }
+    public APIRequestGetIndexedVideos requestCopyrightField () {
+      return this.requestCopyrightField(true);
+    }
+    public APIRequestGetIndexedVideos requestCopyrightField (boolean value) {
+      this.requestField("copyright", value);
+      return this;
+    }
+    public APIRequestGetIndexedVideos requestCopyrightMonitoringStatusField () {
+      return this.requestCopyrightMonitoringStatusField(true);
+    }
+    public APIRequestGetIndexedVideos requestCopyrightMonitoringStatusField (boolean value) {
+      this.requestField("copyright_monitoring_status", value);
+      return this;
+    }
     public APIRequestGetIndexedVideos requestCreatedTimeField () {
       return this.requestCreatedTimeField(true);
     }
@@ -10447,6 +10395,13 @@ public class Page extends APINode {
       this.requestField("is_instagram_eligible", value);
       return this;
     }
+    public APIRequestGetIndexedVideos requestIsReferenceOnlyField () {
+      return this.requestIsReferenceOnlyField(true);
+    }
+    public APIRequestGetIndexedVideos requestIsReferenceOnlyField (boolean value) {
+      this.requestField("is_reference_only", value);
+      return this;
+    }
     public APIRequestGetIndexedVideos requestLengthField () {
       return this.requestLengthField(true);
     }
@@ -10466,6 +10421,13 @@ public class Page extends APINode {
     }
     public APIRequestGetIndexedVideos requestLiveStatusField (boolean value) {
       this.requestField("live_status", value);
+      return this;
+    }
+    public APIRequestGetIndexedVideos requestMusicVideoCopyrightField () {
+      return this.requestMusicVideoCopyrightField(true);
+    }
+    public APIRequestGetIndexedVideos requestMusicVideoCopyrightField (boolean value) {
+      this.requestField("music_video_copyright", value);
       return this;
     }
     public APIRequestGetIndexedVideos requestPermalinkUrlField () {
@@ -12395,7 +12357,6 @@ public class Page extends APINode {
       "company_overview",
       "connected_instagram_account",
       "contact_address",
-      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -12781,13 +12742,6 @@ public class Page extends APINode {
     }
     public APIRequestGetLikes requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
-      return this;
-    }
-    public APIRequestGetLikes requestCopyrightAttributionInsightsField () {
-      return this.requestCopyrightAttributionInsightsField(true);
-    }
-    public APIRequestGetLikes requestCopyrightAttributionInsightsField (boolean value) {
-      this.requestField("copyright_attribution_insights", value);
       return this;
     }
     public APIRequestGetLikes requestCopyrightWhitelistedIgPartnersField () {
@@ -14270,7 +14224,6 @@ public class Page extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "attribution_app_id",
       "content_tags",
       "crossposting_actions",
       "custom_labels",
@@ -14285,7 +14238,6 @@ public class Page extends APINode {
       "original_fov",
       "planned_start_time",
       "privacy",
-      "product_items",
       "projection",
       "published",
       "save_vod",
@@ -14354,11 +14306,6 @@ public class Page extends APINode {
       return this;
     }
 
-
-    public APIRequestCreateLiveVideo setAttributionAppId (String attributionAppId) {
-      this.setParam("attribution_app_id", attributionAppId);
-      return this;
-    }
 
     public APIRequestCreateLiveVideo setContentTags (List<String> contentTags) {
       this.setParam("content_tags", contentTags);
@@ -14471,15 +14418,6 @@ public class Page extends APINode {
 
     public APIRequestCreateLiveVideo setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
-      return this;
-    }
-
-    public APIRequestCreateLiveVideo setProductItems (List<String> productItems) {
-      this.setParam("product_items", productItems);
-      return this;
-    }
-    public APIRequestCreateLiveVideo setProductItems (String productItems) {
-      this.setParam("product_items", productItems);
       return this;
     }
 
@@ -14772,7 +14710,6 @@ public class Page extends APINode {
       "company_overview",
       "connected_instagram_account",
       "contact_address",
-      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -15153,13 +15090,6 @@ public class Page extends APINode {
     }
     public APIRequestGetLocations requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
-      return this;
-    }
-    public APIRequestGetLocations requestCopyrightAttributionInsightsField () {
-      return this.requestCopyrightAttributionInsightsField(true);
-    }
-    public APIRequestGetLocations requestCopyrightAttributionInsightsField (boolean value) {
-      this.requestField("copyright_attribution_insights", value);
       return this;
     }
     public APIRequestGetLocations requestCopyrightWhitelistedIgPartnersField () {
@@ -15974,6 +15904,238 @@ public class Page extends APINode {
       this.requestField("written_by", value);
       return this;
     }
+  }
+
+  public static class APIRequestCreateLocation extends APIRequest<Page> {
+
+    Page lastResponse = null;
+    @Override
+    public Page getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "always_open",
+      "hours",
+      "ignore_warnings",
+      "location",
+      "location_page_id",
+      "old_store_number",
+      "page_username",
+      "permanently_closed",
+      "phone",
+      "place_topics",
+      "price_range",
+      "store_code",
+      "store_location_descriptor",
+      "store_name",
+      "store_number",
+      "website",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Page parseResponse(String response, String header) throws APIException {
+      return Page.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Page execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Page execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Page> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Page> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, Page>() {
+           public Page apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateLocation.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateLocation(String nodeId, APIContext context) {
+      super(context, nodeId, "/locations", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateLocation setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateLocation setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateLocation setAlwaysOpen (Boolean alwaysOpen) {
+      this.setParam("always_open", alwaysOpen);
+      return this;
+    }
+    public APIRequestCreateLocation setAlwaysOpen (String alwaysOpen) {
+      this.setParam("always_open", alwaysOpen);
+      return this;
+    }
+
+    public APIRequestCreateLocation setHours (Map<String, String> hours) {
+      this.setParam("hours", hours);
+      return this;
+    }
+    public APIRequestCreateLocation setHours (String hours) {
+      this.setParam("hours", hours);
+      return this;
+    }
+
+    public APIRequestCreateLocation setIgnoreWarnings (Boolean ignoreWarnings) {
+      this.setParam("ignore_warnings", ignoreWarnings);
+      return this;
+    }
+    public APIRequestCreateLocation setIgnoreWarnings (String ignoreWarnings) {
+      this.setParam("ignore_warnings", ignoreWarnings);
+      return this;
+    }
+
+    public APIRequestCreateLocation setLocation (Object location) {
+      this.setParam("location", location);
+      return this;
+    }
+    public APIRequestCreateLocation setLocation (String location) {
+      this.setParam("location", location);
+      return this;
+    }
+
+    public APIRequestCreateLocation setLocationPageId (String locationPageId) {
+      this.setParam("location_page_id", locationPageId);
+      return this;
+    }
+
+    public APIRequestCreateLocation setOldStoreNumber (Long oldStoreNumber) {
+      this.setParam("old_store_number", oldStoreNumber);
+      return this;
+    }
+    public APIRequestCreateLocation setOldStoreNumber (String oldStoreNumber) {
+      this.setParam("old_store_number", oldStoreNumber);
+      return this;
+    }
+
+    public APIRequestCreateLocation setPageUsername (String pageUsername) {
+      this.setParam("page_username", pageUsername);
+      return this;
+    }
+
+    public APIRequestCreateLocation setPermanentlyClosed (Boolean permanentlyClosed) {
+      this.setParam("permanently_closed", permanentlyClosed);
+      return this;
+    }
+    public APIRequestCreateLocation setPermanentlyClosed (String permanentlyClosed) {
+      this.setParam("permanently_closed", permanentlyClosed);
+      return this;
+    }
+
+    public APIRequestCreateLocation setPhone (String phone) {
+      this.setParam("phone", phone);
+      return this;
+    }
+
+    public APIRequestCreateLocation setPlaceTopics (List<String> placeTopics) {
+      this.setParam("place_topics", placeTopics);
+      return this;
+    }
+    public APIRequestCreateLocation setPlaceTopics (String placeTopics) {
+      this.setParam("place_topics", placeTopics);
+      return this;
+    }
+
+    public APIRequestCreateLocation setPriceRange (String priceRange) {
+      this.setParam("price_range", priceRange);
+      return this;
+    }
+
+    public APIRequestCreateLocation setStoreCode (String storeCode) {
+      this.setParam("store_code", storeCode);
+      return this;
+    }
+
+    public APIRequestCreateLocation setStoreLocationDescriptor (String storeLocationDescriptor) {
+      this.setParam("store_location_descriptor", storeLocationDescriptor);
+      return this;
+    }
+
+    public APIRequestCreateLocation setStoreName (String storeName) {
+      this.setParam("store_name", storeName);
+      return this;
+    }
+
+    public APIRequestCreateLocation setStoreNumber (Long storeNumber) {
+      this.setParam("store_number", storeNumber);
+      return this;
+    }
+    public APIRequestCreateLocation setStoreNumber (String storeNumber) {
+      this.setParam("store_number", storeNumber);
+      return this;
+    }
+
+    public APIRequestCreateLocation setWebsite (String website) {
+      this.setParam("website", website);
+      return this;
+    }
+
+    public APIRequestCreateLocation requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateLocation requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateLocation requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateLocation requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateLocation requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateLocation requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestCreateMediaFingerprint extends APIRequest<MediaFingerprint> {
@@ -21608,6 +21770,174 @@ public class Page extends APINode {
     }
   }
 
+  public static class APIRequestGetRatings extends APIRequest<Recommendation> {
+
+    APINodeList<Recommendation> lastResponse = null;
+    @Override
+    public APINodeList<Recommendation> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "created_time",
+      "has_rating",
+      "has_review",
+      "open_graph_story",
+      "rating",
+      "recommendation_type",
+      "review_text",
+      "reviewer",
+    };
+
+    @Override
+    public APINodeList<Recommendation> parseResponse(String response, String header) throws APIException {
+      return Recommendation.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<Recommendation> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<Recommendation> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<Recommendation>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<Recommendation>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<Recommendation>>() {
+           public APINodeList<Recommendation> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetRatings.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetRatings(String nodeId, APIContext context) {
+      super(context, nodeId, "/ratings", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetRatings setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetRatings setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetRatings requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetRatings requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetRatings requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetRatings requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetRatings requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetRatings requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetRatings requestCreatedTimeField () {
+      return this.requestCreatedTimeField(true);
+    }
+    public APIRequestGetRatings requestCreatedTimeField (boolean value) {
+      this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGetRatings requestHasRatingField () {
+      return this.requestHasRatingField(true);
+    }
+    public APIRequestGetRatings requestHasRatingField (boolean value) {
+      this.requestField("has_rating", value);
+      return this;
+    }
+    public APIRequestGetRatings requestHasReviewField () {
+      return this.requestHasReviewField(true);
+    }
+    public APIRequestGetRatings requestHasReviewField (boolean value) {
+      this.requestField("has_review", value);
+      return this;
+    }
+    public APIRequestGetRatings requestOpenGraphStoryField () {
+      return this.requestOpenGraphStoryField(true);
+    }
+    public APIRequestGetRatings requestOpenGraphStoryField (boolean value) {
+      this.requestField("open_graph_story", value);
+      return this;
+    }
+    public APIRequestGetRatings requestRatingField () {
+      return this.requestRatingField(true);
+    }
+    public APIRequestGetRatings requestRatingField (boolean value) {
+      this.requestField("rating", value);
+      return this;
+    }
+    public APIRequestGetRatings requestRecommendationTypeField () {
+      return this.requestRecommendationTypeField(true);
+    }
+    public APIRequestGetRatings requestRecommendationTypeField (boolean value) {
+      this.requestField("recommendation_type", value);
+      return this;
+    }
+    public APIRequestGetRatings requestReviewTextField () {
+      return this.requestReviewTextField(true);
+    }
+    public APIRequestGetRatings requestReviewTextField (boolean value) {
+      this.requestField("review_text", value);
+      return this;
+    }
+    public APIRequestGetRatings requestReviewerField () {
+      return this.requestReviewerField(true);
+    }
+    public APIRequestGetRatings requestReviewerField (boolean value) {
+      this.requestField("reviewer", value);
+      return this;
+    }
+  }
+
   public static class APIRequestCreateRequestThreadControl extends APIRequest<Page> {
 
     Page lastResponse = null;
@@ -27071,6 +27401,8 @@ public class Page extends APINode {
       "backdated_time_granularity",
       "content_category",
       "content_tags",
+      "copyright",
+      "copyright_monitoring_status",
       "created_time",
       "custom_labels",
       "description",
@@ -27086,9 +27418,11 @@ public class Page extends APINode {
       "is_crossposting_eligible",
       "is_episode",
       "is_instagram_eligible",
+      "is_reference_only",
       "length",
       "live_audience_count",
       "live_status",
+      "music_video_copyright",
       "permalink_url",
       "picture",
       "place",
@@ -27238,6 +27572,20 @@ public class Page extends APINode {
       this.requestField("content_tags", value);
       return this;
     }
+    public APIRequestGetVideos requestCopyrightField () {
+      return this.requestCopyrightField(true);
+    }
+    public APIRequestGetVideos requestCopyrightField (boolean value) {
+      this.requestField("copyright", value);
+      return this;
+    }
+    public APIRequestGetVideos requestCopyrightMonitoringStatusField () {
+      return this.requestCopyrightMonitoringStatusField(true);
+    }
+    public APIRequestGetVideos requestCopyrightMonitoringStatusField (boolean value) {
+      this.requestField("copyright_monitoring_status", value);
+      return this;
+    }
     public APIRequestGetVideos requestCreatedTimeField () {
       return this.requestCreatedTimeField(true);
     }
@@ -27343,6 +27691,13 @@ public class Page extends APINode {
       this.requestField("is_instagram_eligible", value);
       return this;
     }
+    public APIRequestGetVideos requestIsReferenceOnlyField () {
+      return this.requestIsReferenceOnlyField(true);
+    }
+    public APIRequestGetVideos requestIsReferenceOnlyField (boolean value) {
+      this.requestField("is_reference_only", value);
+      return this;
+    }
     public APIRequestGetVideos requestLengthField () {
       return this.requestLengthField(true);
     }
@@ -27362,6 +27717,13 @@ public class Page extends APINode {
     }
     public APIRequestGetVideos requestLiveStatusField (boolean value) {
       this.requestField("live_status", value);
+      return this;
+    }
+    public APIRequestGetVideos requestMusicVideoCopyrightField () {
+      return this.requestMusicVideoCopyrightField(true);
+    }
+    public APIRequestGetVideos requestMusicVideoCopyrightField (boolean value) {
+      this.requestField("music_video_copyright", value);
       return this;
     }
     public APIRequestGetVideos requestPermalinkUrlField () {
@@ -28929,7 +29291,6 @@ public class Page extends APINode {
       "company_overview",
       "connected_instagram_account",
       "contact_address",
-      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -29315,13 +29676,6 @@ public class Page extends APINode {
     }
     public APIRequestGet requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
-      return this;
-    }
-    public APIRequestGet requestCopyrightAttributionInsightsField () {
-      return this.requestCopyrightAttributionInsightsField(true);
-    }
-    public APIRequestGet requestCopyrightAttributionInsightsField (boolean value) {
-      this.requestField("copyright_attribution_insights", value);
       return this;
     }
     public APIRequestGet requestCopyrightWhitelistedIgPartnersField () {
@@ -30828,27 +31182,6 @@ public class Page extends APINode {
       }
   }
 
-  public static enum EnumSetting {
-      @SerializedName("EMAIL_NOTIF")
-      VALUE_EMAIL_NOTIF("EMAIL_NOTIF"),
-      @SerializedName("MOBILE_NOTIF")
-      VALUE_MOBILE_NOTIF("MOBILE_NOTIF"),
-      @SerializedName("POST_AS_SELF")
-      VALUE_POST_AS_SELF("POST_AS_SELF"),
-      NULL(null);
-
-      private String value;
-
-      private EnumSetting(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
   public static enum EnumPermittedTasks {
       @SerializedName("ADVERTISE")
       VALUE_ADVERTISE("ADVERTISE"),
@@ -30870,6 +31203,8 @@ public class Page extends APINode {
       VALUE_PAGES_MESSAGING("PAGES_MESSAGING"),
       @SerializedName("PAGES_MESSAGING_SUBSCRIPTIONS")
       VALUE_PAGES_MESSAGING_SUBSCRIPTIONS("PAGES_MESSAGING_SUBSCRIPTIONS"),
+      @SerializedName("PLATFORM_MANAGE_PAGES")
+      VALUE_PLATFORM_MANAGE_PAGES("PLATFORM_MANAGE_PAGES"),
       @SerializedName("READ_PAGE_MAILBOXES")
       VALUE_READ_PAGE_MAILBOXES("READ_PAGE_MAILBOXES"),
       @SerializedName("VIEW_MONETIZATION_INSIGHTS")
@@ -30909,6 +31244,8 @@ public class Page extends APINode {
       VALUE_PAGES_MESSAGING("PAGES_MESSAGING"),
       @SerializedName("PAGES_MESSAGING_SUBSCRIPTIONS")
       VALUE_PAGES_MESSAGING_SUBSCRIPTIONS("PAGES_MESSAGING_SUBSCRIPTIONS"),
+      @SerializedName("PLATFORM_MANAGE_PAGES")
+      VALUE_PLATFORM_MANAGE_PAGES("PLATFORM_MANAGE_PAGES"),
       @SerializedName("READ_PAGE_MAILBOXES")
       VALUE_READ_PAGE_MAILBOXES("READ_PAGE_MAILBOXES"),
       @SerializedName("VIEW_MONETIZATION_INSIGHTS")
@@ -31470,7 +31807,6 @@ public class Page extends APINode {
     this.mCompanyOverview = instance.mCompanyOverview;
     this.mConnectedInstagramAccount = instance.mConnectedInstagramAccount;
     this.mContactAddress = instance.mContactAddress;
-    this.mCopyrightAttributionInsights = instance.mCopyrightAttributionInsights;
     this.mCopyrightWhitelistedIgPartners = instance.mCopyrightWhitelistedIgPartners;
     this.mCountryPageLikes = instance.mCountryPageLikes;
     this.mCover = instance.mCover;

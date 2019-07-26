@@ -173,8 +173,6 @@ public class Targeting extends APINode {
   private List<IDName> mIndustries = null;
   @SerializedName("instagram_positions")
   private List<String> mInstagramPositions = null;
-  @SerializedName("instream_video_sponsorship_placements")
-  private List<String> mInstreamVideoSponsorshipPlacements = null;
   @SerializedName("interested_in")
   private List<Long> mInterestedIn = null;
   @SerializedName("interests")
@@ -1052,15 +1050,6 @@ public class Targeting extends APINode {
     return this;
   }
 
-  public List<String> getFieldInstreamVideoSponsorshipPlacements() {
-    return mInstreamVideoSponsorshipPlacements;
-  }
-
-  public Targeting setFieldInstreamVideoSponsorshipPlacements(List<String> value) {
-    this.mInstreamVideoSponsorshipPlacements = value;
-    return this;
-  }
-
   public List<Long> getFieldInterestedIn() {
     return mInterestedIn;
   }
@@ -1509,7 +1498,6 @@ public class Targeting extends APINode {
     this.mIncome = instance.mIncome;
     this.mIndustries = instance.mIndustries;
     this.mInstagramPositions = instance.mInstagramPositions;
-    this.mInstreamVideoSponsorshipPlacements = instance.mInstreamVideoSponsorshipPlacements;
     this.mInterestedIn = instance.mInterestedIn;
     this.mInterests = instance.mInterests;
     this.mIsWhatsappDestinationAd = instance.mIsWhatsappDestinationAd;

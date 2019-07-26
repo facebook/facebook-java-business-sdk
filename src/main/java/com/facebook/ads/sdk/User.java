@@ -454,6 +454,10 @@ public class User extends APINode {
     return new APIRequestGetBusinesses(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetConversations getConversations() {
+    return new APIRequestGetConversations(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetCustomLabels getCustomLabels() {
     return new APIRequestGetCustomLabels(this.getPrefixedId().toString(), context);
   }
@@ -464,6 +468,10 @@ public class User extends APINode {
 
   public APIRequestGetFamily getFamily() {
     return new APIRequestGetFamily(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetFavoriteRequests getFavoriteRequests() {
+    return new APIRequestGetFavoriteRequests(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateFeed createFeed() {
@@ -1162,7 +1170,6 @@ public class User extends APINode {
       "company_overview",
       "connected_instagram_account",
       "contact_address",
-      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -1561,13 +1568,6 @@ public class User extends APINode {
     }
     public APIRequestGetAccounts requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
-      return this;
-    }
-    public APIRequestGetAccounts requestCopyrightAttributionInsightsField () {
-      return this.requestCopyrightAttributionInsightsField(true);
-    }
-    public APIRequestGetAccounts requestCopyrightAttributionInsightsField (boolean value) {
-      this.requestField("copyright_attribution_insights", value);
       return this;
     }
     public APIRequestGetAccounts requestCopyrightWhitelistedIgPartnersField () {
@@ -5076,7 +5076,6 @@ public class User extends APINode {
       "company_overview",
       "connected_instagram_account",
       "contact_address",
-      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -5457,13 +5456,6 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedPages requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
-      return this;
-    }
-    public APIRequestGetAssignedPages requestCopyrightAttributionInsightsField () {
-      return this.requestCopyrightAttributionInsightsField(true);
-    }
-    public APIRequestGetAssignedPages requestCopyrightAttributionInsightsField (boolean value) {
-      this.requestField("copyright_attribution_insights", value);
       return this;
     }
     public APIRequestGetAssignedPages requestCopyrightWhitelistedIgPartnersField () {
@@ -6300,7 +6292,6 @@ public class User extends APINode {
       "id",
       "name",
       "product_count",
-      "qualified_product_count",
       "vertical",
     };
 
@@ -6456,13 +6447,6 @@ public class User extends APINode {
       this.requestField("product_count", value);
       return this;
     }
-    public APIRequestGetAssignedProductCatalogs requestQualifiedProductCountField () {
-      return this.requestQualifiedProductCountField(true);
-    }
-    public APIRequestGetAssignedProductCatalogs requestQualifiedProductCountField (boolean value) {
-      this.requestField("qualified_product_count", value);
-      return this;
-    }
     public APIRequestGetAssignedProductCatalogs requestVerticalField () {
       return this.requestVerticalField(true);
     }
@@ -6509,7 +6493,6 @@ public class User extends APINode {
       "company_overview",
       "connected_instagram_account",
       "contact_address",
-      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -6895,13 +6878,6 @@ public class User extends APINode {
     }
     public APIRequestGetBooks requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
-      return this;
-    }
-    public APIRequestGetBooks requestCopyrightAttributionInsightsField () {
-      return this.requestCopyrightAttributionInsightsField(true);
-    }
-    public APIRequestGetBooks requestCopyrightAttributionInsightsField (boolean value) {
-      this.requestField("copyright_attribution_insights", value);
       return this;
     }
     public APIRequestGetBooks requestCopyrightWhitelistedIgPartnersField () {
@@ -8284,6 +8260,252 @@ public class User extends APINode {
     }
   }
 
+  public static class APIRequestGetConversations extends APIRequest<UnifiedThread> {
+
+    APINodeList<UnifiedThread> lastResponse = null;
+    @Override
+    public APINodeList<UnifiedThread> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "folder",
+      "tags",
+      "user_id",
+    };
+
+    public static final String[] FIELDS = {
+      "can_reply",
+      "former_participants",
+      "id",
+      "is_subscribed",
+      "link",
+      "message_count",
+      "name",
+      "participants",
+      "scoped_thread_key",
+      "senders",
+      "snippet",
+      "subject",
+      "unread_count",
+      "updated_time",
+      "wallpaper",
+    };
+
+    @Override
+    public APINodeList<UnifiedThread> parseResponse(String response, String header) throws APIException {
+      return UnifiedThread.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<UnifiedThread> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<UnifiedThread> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<UnifiedThread>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<UnifiedThread>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<UnifiedThread>>() {
+           public APINodeList<UnifiedThread> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetConversations.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetConversations(String nodeId, APIContext context) {
+      super(context, nodeId, "/conversations", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetConversations setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConversations setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetConversations setFolder (String folder) {
+      this.setParam("folder", folder);
+      return this;
+    }
+
+    public APIRequestGetConversations setTags (List<String> tags) {
+      this.setParam("tags", tags);
+      return this;
+    }
+    public APIRequestGetConversations setTags (String tags) {
+      this.setParam("tags", tags);
+      return this;
+    }
+
+    public APIRequestGetConversations setUserId (String userId) {
+      this.setParam("user_id", userId);
+      return this;
+    }
+
+    public APIRequestGetConversations requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetConversations requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConversations requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetConversations requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConversations requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConversations requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetConversations requestCanReplyField () {
+      return this.requestCanReplyField(true);
+    }
+    public APIRequestGetConversations requestCanReplyField (boolean value) {
+      this.requestField("can_reply", value);
+      return this;
+    }
+    public APIRequestGetConversations requestFormerParticipantsField () {
+      return this.requestFormerParticipantsField(true);
+    }
+    public APIRequestGetConversations requestFormerParticipantsField (boolean value) {
+      this.requestField("former_participants", value);
+      return this;
+    }
+    public APIRequestGetConversations requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetConversations requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetConversations requestIsSubscribedField () {
+      return this.requestIsSubscribedField(true);
+    }
+    public APIRequestGetConversations requestIsSubscribedField (boolean value) {
+      this.requestField("is_subscribed", value);
+      return this;
+    }
+    public APIRequestGetConversations requestLinkField () {
+      return this.requestLinkField(true);
+    }
+    public APIRequestGetConversations requestLinkField (boolean value) {
+      this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGetConversations requestMessageCountField () {
+      return this.requestMessageCountField(true);
+    }
+    public APIRequestGetConversations requestMessageCountField (boolean value) {
+      this.requestField("message_count", value);
+      return this;
+    }
+    public APIRequestGetConversations requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetConversations requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetConversations requestParticipantsField () {
+      return this.requestParticipantsField(true);
+    }
+    public APIRequestGetConversations requestParticipantsField (boolean value) {
+      this.requestField("participants", value);
+      return this;
+    }
+    public APIRequestGetConversations requestScopedThreadKeyField () {
+      return this.requestScopedThreadKeyField(true);
+    }
+    public APIRequestGetConversations requestScopedThreadKeyField (boolean value) {
+      this.requestField("scoped_thread_key", value);
+      return this;
+    }
+    public APIRequestGetConversations requestSendersField () {
+      return this.requestSendersField(true);
+    }
+    public APIRequestGetConversations requestSendersField (boolean value) {
+      this.requestField("senders", value);
+      return this;
+    }
+    public APIRequestGetConversations requestSnippetField () {
+      return this.requestSnippetField(true);
+    }
+    public APIRequestGetConversations requestSnippetField (boolean value) {
+      this.requestField("snippet", value);
+      return this;
+    }
+    public APIRequestGetConversations requestSubjectField () {
+      return this.requestSubjectField(true);
+    }
+    public APIRequestGetConversations requestSubjectField (boolean value) {
+      this.requestField("subject", value);
+      return this;
+    }
+    public APIRequestGetConversations requestUnreadCountField () {
+      return this.requestUnreadCountField(true);
+    }
+    public APIRequestGetConversations requestUnreadCountField (boolean value) {
+      this.requestField("unread_count", value);
+      return this;
+    }
+    public APIRequestGetConversations requestUpdatedTimeField () {
+      return this.requestUpdatedTimeField(true);
+    }
+    public APIRequestGetConversations requestUpdatedTimeField (boolean value) {
+      this.requestField("updated_time", value);
+      return this;
+    }
+    public APIRequestGetConversations requestWallpaperField () {
+      return this.requestWallpaperField(true);
+    }
+    public APIRequestGetConversations requestWallpaperField (boolean value) {
+      this.requestField("wallpaper", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetCustomLabels extends APIRequest<PageUserMessageThreadLabel> {
 
     APINodeList<PageUserMessageThreadLabel> lastResponse = null;
@@ -9342,6 +9564,110 @@ public class User extends APINode {
       this.requestField("work", value);
       return this;
     }
+  }
+
+  public static class APIRequestGetFavoriteRequests extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetFavoriteRequests.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetFavoriteRequests(String nodeId, APIContext context) {
+      super(context, nodeId, "/favorite_requests", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetFavoriteRequests setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFavoriteRequests setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetFavoriteRequests requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetFavoriteRequests requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFavoriteRequests requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetFavoriteRequests requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFavoriteRequests requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFavoriteRequests requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestCreateFeed extends APIRequest<APINode> {
@@ -11381,7 +11707,6 @@ public class User extends APINode {
       "company_overview",
       "connected_instagram_account",
       "contact_address",
-      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -11767,13 +12092,6 @@ public class User extends APINode {
     }
     public APIRequestGetGames requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
-      return this;
-    }
-    public APIRequestGetGames requestCopyrightAttributionInsightsField () {
-      return this.requestCopyrightAttributionInsightsField(true);
-    }
-    public APIRequestGetGames requestCopyrightAttributionInsightsField (boolean value) {
-      this.requestField("copyright_attribution_insights", value);
       return this;
     }
     public APIRequestGetGames requestCopyrightWhitelistedIgPartnersField () {
@@ -14315,7 +14633,6 @@ public class User extends APINode {
       "company_overview",
       "connected_instagram_account",
       "contact_address",
-      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -14701,13 +15018,6 @@ public class User extends APINode {
     }
     public APIRequestGetLikes requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
-      return this;
-    }
-    public APIRequestGetLikes requestCopyrightAttributionInsightsField () {
-      return this.requestCopyrightAttributionInsightsField(true);
-    }
-    public APIRequestGetLikes requestCopyrightAttributionInsightsField (boolean value) {
-      this.requestField("copyright_attribution_insights", value);
       return this;
     }
     public APIRequestGetLikes requestCopyrightWhitelistedIgPartnersField () {
@@ -16190,7 +16500,6 @@ public class User extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "attribution_app_id",
       "content_tags",
       "description",
       "encoding_settings",
@@ -16269,11 +16578,6 @@ public class User extends APINode {
       return this;
     }
 
-
-    public APIRequestCreateLiveVideo setAttributionAppId (String attributionAppId) {
-      this.setParam("attribution_app_id", attributionAppId);
-      return this;
-    }
 
     public APIRequestCreateLiveVideo setContentTags (List<String> contentTags) {
       this.setParam("content_tags", contentTags);
@@ -16665,7 +16969,6 @@ public class User extends APINode {
       "company_overview",
       "connected_instagram_account",
       "contact_address",
-      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -17051,13 +17354,6 @@ public class User extends APINode {
     }
     public APIRequestGetMovies requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
-      return this;
-    }
-    public APIRequestGetMovies requestCopyrightAttributionInsightsField () {
-      return this.requestCopyrightAttributionInsightsField(true);
-    }
-    public APIRequestGetMovies requestCopyrightAttributionInsightsField (boolean value) {
-      this.requestField("copyright_attribution_insights", value);
       return this;
     }
     public APIRequestGetMovies requestCopyrightWhitelistedIgPartnersField () {
@@ -17911,7 +18207,6 @@ public class User extends APINode {
       "company_overview",
       "connected_instagram_account",
       "contact_address",
-      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -18297,13 +18592,6 @@ public class User extends APINode {
     }
     public APIRequestGetMusic requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
-      return this;
-    }
-    public APIRequestGetMusic requestCopyrightAttributionInsightsField () {
-      return this.requestCopyrightAttributionInsightsField(true);
-    }
-    public APIRequestGetMusic requestCopyrightAttributionInsightsField (boolean value) {
-      this.requestField("copyright_attribution_insights", value);
       return this;
     }
     public APIRequestGetMusic requestCopyrightWhitelistedIgPartnersField () {
@@ -21454,6 +21742,7 @@ public class User extends APINode {
       "application",
       "backdated_time",
       "call_to_action",
+      "can_reply_privately",
       "caption",
       "child_attachments",
       "comments_mirroring_domain",
@@ -21666,6 +21955,13 @@ public class User extends APINode {
     }
     public APIRequestGetPosts requestCallToActionField (boolean value) {
       this.requestField("call_to_action", value);
+      return this;
+    }
+    public APIRequestGetPosts requestCanReplyPrivatelyField () {
+      return this.requestCanReplyPrivatelyField(true);
+    }
+    public APIRequestGetPosts requestCanReplyPrivatelyField (boolean value) {
+      this.requestField("can_reply_privately", value);
       return this;
     }
     public APIRequestGetPosts requestCaptionField () {
@@ -23135,7 +23431,6 @@ public class User extends APINode {
       "company_overview",
       "connected_instagram_account",
       "contact_address",
-      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -23521,13 +23816,6 @@ public class User extends APINode {
     }
     public APIRequestGetTelevision requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
-      return this;
-    }
-    public APIRequestGetTelevision requestCopyrightAttributionInsightsField () {
-      return this.requestCopyrightAttributionInsightsField(true);
-    }
-    public APIRequestGetTelevision requestCopyrightAttributionInsightsField (boolean value) {
-      this.requestField("copyright_attribution_insights", value);
       return this;
     }
     public APIRequestGetTelevision requestCopyrightWhitelistedIgPartnersField () {
@@ -24607,6 +24895,8 @@ public class User extends APINode {
       "backdated_time_granularity",
       "content_category",
       "content_tags",
+      "copyright",
+      "copyright_monitoring_status",
       "created_time",
       "custom_labels",
       "description",
@@ -24622,9 +24912,11 @@ public class User extends APINode {
       "is_crossposting_eligible",
       "is_episode",
       "is_instagram_eligible",
+      "is_reference_only",
       "length",
       "live_audience_count",
       "live_status",
+      "music_video_copyright",
       "permalink_url",
       "picture",
       "place",
@@ -24774,6 +25066,20 @@ public class User extends APINode {
       this.requestField("content_tags", value);
       return this;
     }
+    public APIRequestGetVideos requestCopyrightField () {
+      return this.requestCopyrightField(true);
+    }
+    public APIRequestGetVideos requestCopyrightField (boolean value) {
+      this.requestField("copyright", value);
+      return this;
+    }
+    public APIRequestGetVideos requestCopyrightMonitoringStatusField () {
+      return this.requestCopyrightMonitoringStatusField(true);
+    }
+    public APIRequestGetVideos requestCopyrightMonitoringStatusField (boolean value) {
+      this.requestField("copyright_monitoring_status", value);
+      return this;
+    }
     public APIRequestGetVideos requestCreatedTimeField () {
       return this.requestCreatedTimeField(true);
     }
@@ -24879,6 +25185,13 @@ public class User extends APINode {
       this.requestField("is_instagram_eligible", value);
       return this;
     }
+    public APIRequestGetVideos requestIsReferenceOnlyField () {
+      return this.requestIsReferenceOnlyField(true);
+    }
+    public APIRequestGetVideos requestIsReferenceOnlyField (boolean value) {
+      this.requestField("is_reference_only", value);
+      return this;
+    }
     public APIRequestGetVideos requestLengthField () {
       return this.requestLengthField(true);
     }
@@ -24898,6 +25211,13 @@ public class User extends APINode {
     }
     public APIRequestGetVideos requestLiveStatusField (boolean value) {
       this.requestField("live_status", value);
+      return this;
+    }
+    public APIRequestGetVideos requestMusicVideoCopyrightField () {
+      return this.requestMusicVideoCopyrightField(true);
+    }
+    public APIRequestGetVideos requestMusicVideoCopyrightField (boolean value) {
+      this.requestField("music_video_copyright", value);
       return this;
     }
     public APIRequestGetVideos requestPermalinkUrlField () {
@@ -26550,6 +26870,47 @@ public class User extends APINode {
       return this;
     }
 
+  }
+
+  public static enum EnumTasks {
+      @SerializedName("ADVERTISE")
+      VALUE_ADVERTISE("ADVERTISE"),
+      @SerializedName("ANALYZE")
+      VALUE_ANALYZE("ANALYZE"),
+      @SerializedName("CREATE_CONTENT")
+      VALUE_CREATE_CONTENT("CREATE_CONTENT"),
+      @SerializedName("MANAGE")
+      VALUE_MANAGE("MANAGE"),
+      @SerializedName("MANAGE_JOBS")
+      VALUE_MANAGE_JOBS("MANAGE_JOBS"),
+      @SerializedName("MANAGE_LEADS")
+      VALUE_MANAGE_LEADS("MANAGE_LEADS"),
+      @SerializedName("MODERATE")
+      VALUE_MODERATE("MODERATE"),
+      @SerializedName("MODERATE_COMMUNITY")
+      VALUE_MODERATE_COMMUNITY("MODERATE_COMMUNITY"),
+      @SerializedName("PAGES_MESSAGING")
+      VALUE_PAGES_MESSAGING("PAGES_MESSAGING"),
+      @SerializedName("PAGES_MESSAGING_SUBSCRIPTIONS")
+      VALUE_PAGES_MESSAGING_SUBSCRIPTIONS("PAGES_MESSAGING_SUBSCRIPTIONS"),
+      @SerializedName("PLATFORM_MANAGE_PAGES")
+      VALUE_PLATFORM_MANAGE_PAGES("PLATFORM_MANAGE_PAGES"),
+      @SerializedName("READ_PAGE_MAILBOXES")
+      VALUE_READ_PAGE_MAILBOXES("READ_PAGE_MAILBOXES"),
+      @SerializedName("VIEW_MONETIZATION_INSIGHTS")
+      VALUE_VIEW_MONETIZATION_INSIGHTS("VIEW_MONETIZATION_INSIGHTS"),
+      NULL(null);
+
+      private String value;
+
+      private EnumTasks(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
   public static enum EnumLocalNewsMegaphoneDismissStatus {

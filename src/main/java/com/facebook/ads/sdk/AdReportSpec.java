@@ -1026,6 +1026,8 @@ public class AdReportSpec extends APINode {
   }
 
   public static enum EnumActionsGroupBy {
+      @SerializedName("action_brand")
+      VALUE_ACTION_BRAND("action_brand"),
       @SerializedName("action_canvas_component_id")
       VALUE_ACTION_CANVAS_COMPONENT_ID("action_canvas_component_id"),
       @SerializedName("action_canvas_component_name")
@@ -1034,6 +1036,8 @@ public class AdReportSpec extends APINode {
       VALUE_ACTION_CAROUSEL_CARD_ID("action_carousel_card_id"),
       @SerializedName("action_carousel_card_name")
       VALUE_ACTION_CAROUSEL_CARD_NAME("action_carousel_card_name"),
+      @SerializedName("action_category")
+      VALUE_ACTION_CATEGORY("action_category"),
       @SerializedName("action_converted_brand_tag_id")
       VALUE_ACTION_CONVERTED_BRAND_TAG_ID("action_converted_brand_tag_id"),
       @SerializedName("action_converted_category_tag_id")
@@ -1054,10 +1058,6 @@ public class AdReportSpec extends APINode {
       VALUE_ACTION_VIDEO_SOUND("action_video_sound"),
       @SerializedName("action_video_type")
       VALUE_ACTION_VIDEO_TYPE("action_video_type"),
-      @SerializedName("brand")
-      VALUE_BRAND("brand"),
-      @SerializedName("category")
-      VALUE_CATEGORY("category"),
       @SerializedName("interactive_component_sticker_id")
       VALUE_INTERACTIVE_COMPONENT_STICKER_ID("interactive_component_sticker_id"),
       @SerializedName("interactive_component_sticker_response")

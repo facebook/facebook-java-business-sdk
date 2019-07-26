@@ -59,8 +59,6 @@ public class AdCreativePhotoData extends APINode {
   private String mBrandedContentSharedToSponsorStatus = null;
   @SerializedName("branded_content_sponsor_page_id")
   private String mBrandedContentSponsorPageId = null;
-  @SerializedName("branded_content_sponsor_relationship")
-  private String mBrandedContentSponsorRelationship = null;
   @SerializedName("caption")
   private String mCaption = null;
   @SerializedName("image_hash")
@@ -238,15 +236,6 @@ public class AdCreativePhotoData extends APINode {
     return this;
   }
 
-  public String getFieldBrandedContentSponsorRelationship() {
-    return mBrandedContentSponsorRelationship;
-  }
-
-  public AdCreativePhotoData setFieldBrandedContentSponsorRelationship(String value) {
-    this.mBrandedContentSponsorRelationship = value;
-    return this;
-  }
-
   public String getFieldCaption() {
     return mCaption;
   }
@@ -302,7 +291,6 @@ public class AdCreativePhotoData extends APINode {
   public AdCreativePhotoData copyFrom(AdCreativePhotoData instance) {
     this.mBrandedContentSharedToSponsorStatus = instance.mBrandedContentSharedToSponsorStatus;
     this.mBrandedContentSponsorPageId = instance.mBrandedContentSponsorPageId;
-    this.mBrandedContentSponsorRelationship = instance.mBrandedContentSponsorRelationship;
     this.mCaption = instance.mCaption;
     this.mImageHash = instance.mImageHash;
     this.mPageWelcomeMessage = instance.mPageWelcomeMessage;

@@ -992,7 +992,6 @@ public class BusinessUser extends APINode {
       "company_overview",
       "connected_instagram_account",
       "contact_address",
-      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -1373,13 +1372,6 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGetAssignedPages requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
-      return this;
-    }
-    public APIRequestGetAssignedPages requestCopyrightAttributionInsightsField () {
-      return this.requestCopyrightAttributionInsightsField(true);
-    }
-    public APIRequestGetAssignedPages requestCopyrightAttributionInsightsField (boolean value) {
-      this.requestField("copyright_attribution_insights", value);
       return this;
     }
     public APIRequestGetAssignedPages requestCopyrightWhitelistedIgPartnersField () {
@@ -2216,7 +2208,6 @@ public class BusinessUser extends APINode {
       "id",
       "name",
       "product_count",
-      "qualified_product_count",
       "vertical",
     };
 
@@ -2370,13 +2361,6 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGetAssignedProductCatalogs requestProductCountField (boolean value) {
       this.requestField("product_count", value);
-      return this;
-    }
-    public APIRequestGetAssignedProductCatalogs requestQualifiedProductCountField () {
-      return this.requestQualifiedProductCountField(true);
-    }
-    public APIRequestGetAssignedProductCatalogs requestQualifiedProductCountField (boolean value) {
-      this.requestField("qualified_product_count", value);
       return this;
     }
     public APIRequestGetAssignedProductCatalogs requestVerticalField () {

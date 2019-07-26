@@ -366,6 +366,10 @@ public class Business extends APINode {
     return new APIRequestCreateBlockListDraft(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetBusinessInvoices getBusinessInvoices() {
+    return new APIRequestGetBusinessInvoices(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetBusinessUsers getBusinessUsers() {
     return new APIRequestGetBusinessUsers(this.getPrefixedId().toString(), context);
   }
@@ -636,10 +640,6 @@ public class Business extends APINode {
 
   public APIRequestGetThirdPartyMeasurementReportDataset getThirdPartyMeasurementReportDataset() {
     return new APIRequestGetThirdPartyMeasurementReportDataset(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateThirdPartyMeasurementReportDataset createThirdPartyMeasurementReportDataset() {
-    return new APIRequestCreateThirdPartyMeasurementReportDataset(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateUploadEvent createUploadEvent() {
@@ -3604,6 +3604,308 @@ public class Business extends APINode {
 
   }
 
+  public static class APIRequestGetBusinessInvoices extends APIRequest<OracleTransaction> {
+
+    APINodeList<OracleTransaction> lastResponse = null;
+    @Override
+    public APINodeList<OracleTransaction> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "end_date",
+      "invoice_id",
+      "issue_end_date",
+      "issue_start_date",
+      "root_id",
+      "start_date",
+      "type",
+    };
+
+    public static final String[] FIELDS = {
+      "ad_account_ids",
+      "amount",
+      "amount_due",
+      "billed_amount_details",
+      "billing_period",
+      "cdn_download_uri",
+      "currency",
+      "download_uri",
+      "due_date",
+      "entity",
+      "id",
+      "invoice_date",
+      "invoice_id",
+      "invoice_type",
+      "liability_type",
+      "payment_status",
+      "payment_term",
+      "type",
+    };
+
+    @Override
+    public APINodeList<OracleTransaction> parseResponse(String response, String header) throws APIException {
+      return OracleTransaction.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<OracleTransaction> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<OracleTransaction> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<OracleTransaction>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<OracleTransaction>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<OracleTransaction>>() {
+           public APINodeList<OracleTransaction> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetBusinessInvoices.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetBusinessInvoices(String nodeId, APIContext context) {
+      super(context, nodeId, "/business_invoices", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetBusinessInvoices setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessInvoices setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetBusinessInvoices setEndDate (String endDate) {
+      this.setParam("end_date", endDate);
+      return this;
+    }
+
+    public APIRequestGetBusinessInvoices setInvoiceId (Long invoiceId) {
+      this.setParam("invoice_id", invoiceId);
+      return this;
+    }
+    public APIRequestGetBusinessInvoices setInvoiceId (String invoiceId) {
+      this.setParam("invoice_id", invoiceId);
+      return this;
+    }
+
+    public APIRequestGetBusinessInvoices setIssueEndDate (String issueEndDate) {
+      this.setParam("issue_end_date", issueEndDate);
+      return this;
+    }
+
+    public APIRequestGetBusinessInvoices setIssueStartDate (String issueStartDate) {
+      this.setParam("issue_start_date", issueStartDate);
+      return this;
+    }
+
+    public APIRequestGetBusinessInvoices setRootId (Long rootId) {
+      this.setParam("root_id", rootId);
+      return this;
+    }
+    public APIRequestGetBusinessInvoices setRootId (String rootId) {
+      this.setParam("root_id", rootId);
+      return this;
+    }
+
+    public APIRequestGetBusinessInvoices setStartDate (String startDate) {
+      this.setParam("start_date", startDate);
+      return this;
+    }
+
+    public APIRequestGetBusinessInvoices setType (OracleTransaction.EnumType type) {
+      this.setParam("type", type);
+      return this;
+    }
+    public APIRequestGetBusinessInvoices setType (String type) {
+      this.setParam("type", type);
+      return this;
+    }
+
+    public APIRequestGetBusinessInvoices requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetBusinessInvoices requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessInvoices requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetBusinessInvoices requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessInvoices requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessInvoices requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetBusinessInvoices requestAdAccountIdsField () {
+      return this.requestAdAccountIdsField(true);
+    }
+    public APIRequestGetBusinessInvoices requestAdAccountIdsField (boolean value) {
+      this.requestField("ad_account_ids", value);
+      return this;
+    }
+    public APIRequestGetBusinessInvoices requestAmountField () {
+      return this.requestAmountField(true);
+    }
+    public APIRequestGetBusinessInvoices requestAmountField (boolean value) {
+      this.requestField("amount", value);
+      return this;
+    }
+    public APIRequestGetBusinessInvoices requestAmountDueField () {
+      return this.requestAmountDueField(true);
+    }
+    public APIRequestGetBusinessInvoices requestAmountDueField (boolean value) {
+      this.requestField("amount_due", value);
+      return this;
+    }
+    public APIRequestGetBusinessInvoices requestBilledAmountDetailsField () {
+      return this.requestBilledAmountDetailsField(true);
+    }
+    public APIRequestGetBusinessInvoices requestBilledAmountDetailsField (boolean value) {
+      this.requestField("billed_amount_details", value);
+      return this;
+    }
+    public APIRequestGetBusinessInvoices requestBillingPeriodField () {
+      return this.requestBillingPeriodField(true);
+    }
+    public APIRequestGetBusinessInvoices requestBillingPeriodField (boolean value) {
+      this.requestField("billing_period", value);
+      return this;
+    }
+    public APIRequestGetBusinessInvoices requestCdnDownloadUriField () {
+      return this.requestCdnDownloadUriField(true);
+    }
+    public APIRequestGetBusinessInvoices requestCdnDownloadUriField (boolean value) {
+      this.requestField("cdn_download_uri", value);
+      return this;
+    }
+    public APIRequestGetBusinessInvoices requestCurrencyField () {
+      return this.requestCurrencyField(true);
+    }
+    public APIRequestGetBusinessInvoices requestCurrencyField (boolean value) {
+      this.requestField("currency", value);
+      return this;
+    }
+    public APIRequestGetBusinessInvoices requestDownloadUriField () {
+      return this.requestDownloadUriField(true);
+    }
+    public APIRequestGetBusinessInvoices requestDownloadUriField (boolean value) {
+      this.requestField("download_uri", value);
+      return this;
+    }
+    public APIRequestGetBusinessInvoices requestDueDateField () {
+      return this.requestDueDateField(true);
+    }
+    public APIRequestGetBusinessInvoices requestDueDateField (boolean value) {
+      this.requestField("due_date", value);
+      return this;
+    }
+    public APIRequestGetBusinessInvoices requestEntityField () {
+      return this.requestEntityField(true);
+    }
+    public APIRequestGetBusinessInvoices requestEntityField (boolean value) {
+      this.requestField("entity", value);
+      return this;
+    }
+    public APIRequestGetBusinessInvoices requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetBusinessInvoices requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetBusinessInvoices requestInvoiceDateField () {
+      return this.requestInvoiceDateField(true);
+    }
+    public APIRequestGetBusinessInvoices requestInvoiceDateField (boolean value) {
+      this.requestField("invoice_date", value);
+      return this;
+    }
+    public APIRequestGetBusinessInvoices requestInvoiceIdField () {
+      return this.requestInvoiceIdField(true);
+    }
+    public APIRequestGetBusinessInvoices requestInvoiceIdField (boolean value) {
+      this.requestField("invoice_id", value);
+      return this;
+    }
+    public APIRequestGetBusinessInvoices requestInvoiceTypeField () {
+      return this.requestInvoiceTypeField(true);
+    }
+    public APIRequestGetBusinessInvoices requestInvoiceTypeField (boolean value) {
+      this.requestField("invoice_type", value);
+      return this;
+    }
+    public APIRequestGetBusinessInvoices requestLiabilityTypeField () {
+      return this.requestLiabilityTypeField(true);
+    }
+    public APIRequestGetBusinessInvoices requestLiabilityTypeField (boolean value) {
+      this.requestField("liability_type", value);
+      return this;
+    }
+    public APIRequestGetBusinessInvoices requestPaymentStatusField () {
+      return this.requestPaymentStatusField(true);
+    }
+    public APIRequestGetBusinessInvoices requestPaymentStatusField (boolean value) {
+      this.requestField("payment_status", value);
+      return this;
+    }
+    public APIRequestGetBusinessInvoices requestPaymentTermField () {
+      return this.requestPaymentTermField(true);
+    }
+    public APIRequestGetBusinessInvoices requestPaymentTermField (boolean value) {
+      this.requestField("payment_term", value);
+      return this;
+    }
+    public APIRequestGetBusinessInvoices requestTypeField () {
+      return this.requestTypeField(true);
+    }
+    public APIRequestGetBusinessInvoices requestTypeField (boolean value) {
+      this.requestField("type", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetBusinessUsers extends APIRequest<BusinessUser> {
 
     APINodeList<BusinessUser> lastResponse = null;
@@ -6148,7 +6450,6 @@ public class Business extends APINode {
       "company_overview",
       "connected_instagram_account",
       "contact_address",
-      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -6529,13 +6830,6 @@ public class Business extends APINode {
     }
     public APIRequestGetClientPages requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
-      return this;
-    }
-    public APIRequestGetClientPages requestCopyrightAttributionInsightsField () {
-      return this.requestCopyrightAttributionInsightsField(true);
-    }
-    public APIRequestGetClientPages requestCopyrightAttributionInsightsField (boolean value) {
-      this.requestField("copyright_attribution_insights", value);
       return this;
     }
     public APIRequestGetClientPages requestCopyrightWhitelistedIgPartnersField () {
@@ -7720,7 +8014,6 @@ public class Business extends APINode {
       "id",
       "name",
       "product_count",
-      "qualified_product_count",
       "vertical",
     };
 
@@ -7874,13 +8167,6 @@ public class Business extends APINode {
     }
     public APIRequestGetClientProductCatalogs requestProductCountField (boolean value) {
       this.requestField("product_count", value);
-      return this;
-    }
-    public APIRequestGetClientProductCatalogs requestQualifiedProductCountField () {
-      return this.requestQualifiedProductCountField(true);
-    }
-    public APIRequestGetClientProductCatalogs requestQualifiedProductCountField (boolean value) {
-      this.requestField("qualified_product_count", value);
       return this;
     }
     public APIRequestGetClientProductCatalogs requestVerticalField () {
@@ -8394,6 +8680,7 @@ public class Business extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "description",
       "name",
     };
 
@@ -8452,6 +8739,11 @@ public class Business extends APINode {
       return this;
     }
 
+
+    public APIRequestCreateCreativeFolder setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
 
     public APIRequestCreateCreativeFolder setName (String name) {
       this.setParam("name", name);
@@ -9150,7 +9442,6 @@ public class Business extends APINode {
       "company_overview",
       "connected_instagram_account",
       "contact_address",
-      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -9531,13 +9822,6 @@ public class Business extends APINode {
     }
     public APIRequestGetDealShowsPages requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
-      return this;
-    }
-    public APIRequestGetDealShowsPages requestCopyrightAttributionInsightsField () {
-      return this.requestCopyrightAttributionInsightsField(true);
-    }
-    public APIRequestGetDealShowsPages requestCopyrightAttributionInsightsField (boolean value) {
-      this.requestField("copyright_attribution_insights", value);
       return this;
     }
     public APIRequestGetDealShowsPages requestCopyrightWhitelistedIgPartnersField () {
@@ -10942,7 +11226,6 @@ public class Business extends APINode {
       "owner_business",
       "owner_business_name",
       "partition_from",
-      "receiving_credit_allocation_config",
       "send_bill_to_biz_name",
     };
 
@@ -11138,13 +11421,6 @@ public class Business extends APINode {
     }
     public APIRequestGetExtendedCredits requestPartitionFromField (boolean value) {
       this.requestField("partition_from", value);
-      return this;
-    }
-    public APIRequestGetExtendedCredits requestReceivingCreditAllocationConfigField () {
-      return this.requestReceivingCreditAllocationConfigField(true);
-    }
-    public APIRequestGetExtendedCredits requestReceivingCreditAllocationConfigField (boolean value) {
-      this.requestField("receiving_credit_allocation_config", value);
       return this;
     }
     public APIRequestGetExtendedCredits requestSendBillToBizNameField () {
@@ -14982,7 +15258,6 @@ public class Business extends APINode {
       "company_overview",
       "connected_instagram_account",
       "contact_address",
-      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -15363,13 +15638,6 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedPages requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
-      return this;
-    }
-    public APIRequestGetOwnedPages requestCopyrightAttributionInsightsField () {
-      return this.requestCopyrightAttributionInsightsField(true);
-    }
-    public APIRequestGetOwnedPages requestCopyrightAttributionInsightsField (boolean value) {
-      this.requestField("copyright_attribution_insights", value);
       return this;
     }
     public APIRequestGetOwnedPages requestCopyrightWhitelistedIgPartnersField () {
@@ -16550,7 +16818,6 @@ public class Business extends APINode {
       "id",
       "name",
       "product_count",
-      "qualified_product_count",
       "vertical",
     };
 
@@ -16704,13 +16971,6 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedProductCatalogs requestProductCountField (boolean value) {
       this.requestField("product_count", value);
-      return this;
-    }
-    public APIRequestGetOwnedProductCatalogs requestQualifiedProductCountField () {
-      return this.requestQualifiedProductCountField(true);
-    }
-    public APIRequestGetOwnedProductCatalogs requestQualifiedProductCountField (boolean value) {
-      this.requestField("qualified_product_count", value);
       return this;
     }
     public APIRequestGetOwnedProductCatalogs requestVerticalField () {
@@ -19882,140 +20142,6 @@ public class Business extends APINode {
     }
   }
 
-  public static class APIRequestCreateThirdPartyMeasurementReportDataset extends APIRequest<ThirdPartyMeasurementReportDataset> {
-
-    ThirdPartyMeasurementReportDataset lastResponse = null;
-    @Override
-    public ThirdPartyMeasurementReportDataset getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "category",
-      "product",
-      "schema",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public ThirdPartyMeasurementReportDataset parseResponse(String response, String header) throws APIException {
-      return ThirdPartyMeasurementReportDataset.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public ThirdPartyMeasurementReportDataset execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public ThirdPartyMeasurementReportDataset execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<ThirdPartyMeasurementReportDataset> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<ThirdPartyMeasurementReportDataset> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, ThirdPartyMeasurementReportDataset>() {
-           public ThirdPartyMeasurementReportDataset apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateThirdPartyMeasurementReportDataset.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateThirdPartyMeasurementReportDataset(String nodeId, APIContext context) {
-      super(context, nodeId, "/third_party_measurement_report_dataset", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateThirdPartyMeasurementReportDataset setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateThirdPartyMeasurementReportDataset setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateThirdPartyMeasurementReportDataset setCategory (ThirdPartyMeasurementReportDataset.EnumCategory category) {
-      this.setParam("category", category);
-      return this;
-    }
-    public APIRequestCreateThirdPartyMeasurementReportDataset setCategory (String category) {
-      this.setParam("category", category);
-      return this;
-    }
-
-    public APIRequestCreateThirdPartyMeasurementReportDataset setProduct (ThirdPartyMeasurementReportDataset.EnumProduct product) {
-      this.setParam("product", product);
-      return this;
-    }
-    public APIRequestCreateThirdPartyMeasurementReportDataset setProduct (String product) {
-      this.setParam("product", product);
-      return this;
-    }
-
-    public APIRequestCreateThirdPartyMeasurementReportDataset setSchema (List<Map<String, String>> schema) {
-      this.setParam("schema", schema);
-      return this;
-    }
-    public APIRequestCreateThirdPartyMeasurementReportDataset setSchema (String schema) {
-      this.setParam("schema", schema);
-      return this;
-    }
-
-    public APIRequestCreateThirdPartyMeasurementReportDataset requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateThirdPartyMeasurementReportDataset requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateThirdPartyMeasurementReportDataset requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateThirdPartyMeasurementReportDataset requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateThirdPartyMeasurementReportDataset requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateThirdPartyMeasurementReportDataset requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestCreateUploadEvent extends APIRequest<MeasurementUploadEvent> {
 
     MeasurementUploadEvent lastResponse = null;
@@ -21343,6 +21469,8 @@ public class Business extends APINode {
       VALUE_ANALYZE("ANALYZE"),
       @SerializedName("CREATIVE")
       VALUE_CREATIVE("CREATIVE"),
+      @SerializedName("DRAFT")
+      VALUE_DRAFT("DRAFT"),
       @SerializedName("FB_EMPLOYEE_DSO_ADVERTISE")
       VALUE_FB_EMPLOYEE_DSO_ADVERTISE("FB_EMPLOYEE_DSO_ADVERTISE"),
       @SerializedName("MANAGE")
@@ -21405,6 +21533,8 @@ public class Business extends APINode {
       VALUE_PAGES_MESSAGING("PAGES_MESSAGING"),
       @SerializedName("PAGES_MESSAGING_SUBSCRIPTIONS")
       VALUE_PAGES_MESSAGING_SUBSCRIPTIONS("PAGES_MESSAGING_SUBSCRIPTIONS"),
+      @SerializedName("PLATFORM_MANAGE_PAGES")
+      VALUE_PLATFORM_MANAGE_PAGES("PLATFORM_MANAGE_PAGES"),
       @SerializedName("READ_PAGE_MAILBOXES")
       VALUE_READ_PAGE_MAILBOXES("READ_PAGE_MAILBOXES"),
       @SerializedName("VIEW_MONETIZATION_INSIGHTS")

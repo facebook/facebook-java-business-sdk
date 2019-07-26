@@ -3445,7 +3445,6 @@ public class Group extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "attribution_app_id",
       "content_tags",
       "description",
       "encoding_settings",
@@ -3524,11 +3523,6 @@ public class Group extends APINode {
       return this;
     }
 
-
-    public APIRequestCreateLiveVideo setAttributionAppId (String attributionAppId) {
-      this.setParam("attribution_app_id", attributionAppId);
-      return this;
-    }
 
     public APIRequestCreateLiveVideo setContentTags (List<String> contentTags) {
       this.setParam("content_tags", contentTags);
@@ -5688,6 +5682,8 @@ public class Group extends APINode {
       "backdated_time_granularity",
       "content_category",
       "content_tags",
+      "copyright",
+      "copyright_monitoring_status",
       "created_time",
       "custom_labels",
       "description",
@@ -5703,9 +5699,11 @@ public class Group extends APINode {
       "is_crossposting_eligible",
       "is_episode",
       "is_instagram_eligible",
+      "is_reference_only",
       "length",
       "live_audience_count",
       "live_status",
+      "music_video_copyright",
       "permalink_url",
       "picture",
       "place",
@@ -5855,6 +5853,20 @@ public class Group extends APINode {
       this.requestField("content_tags", value);
       return this;
     }
+    public APIRequestGetVideos requestCopyrightField () {
+      return this.requestCopyrightField(true);
+    }
+    public APIRequestGetVideos requestCopyrightField (boolean value) {
+      this.requestField("copyright", value);
+      return this;
+    }
+    public APIRequestGetVideos requestCopyrightMonitoringStatusField () {
+      return this.requestCopyrightMonitoringStatusField(true);
+    }
+    public APIRequestGetVideos requestCopyrightMonitoringStatusField (boolean value) {
+      this.requestField("copyright_monitoring_status", value);
+      return this;
+    }
     public APIRequestGetVideos requestCreatedTimeField () {
       return this.requestCreatedTimeField(true);
     }
@@ -5960,6 +5972,13 @@ public class Group extends APINode {
       this.requestField("is_instagram_eligible", value);
       return this;
     }
+    public APIRequestGetVideos requestIsReferenceOnlyField () {
+      return this.requestIsReferenceOnlyField(true);
+    }
+    public APIRequestGetVideos requestIsReferenceOnlyField (boolean value) {
+      this.requestField("is_reference_only", value);
+      return this;
+    }
     public APIRequestGetVideos requestLengthField () {
       return this.requestLengthField(true);
     }
@@ -5979,6 +5998,13 @@ public class Group extends APINode {
     }
     public APIRequestGetVideos requestLiveStatusField (boolean value) {
       this.requestField("live_status", value);
+      return this;
+    }
+    public APIRequestGetVideos requestMusicVideoCopyrightField () {
+      return this.requestMusicVideoCopyrightField(true);
+    }
+    public APIRequestGetVideos requestMusicVideoCopyrightField (boolean value) {
+      this.requestField("music_video_copyright", value);
       return this;
     }
     public APIRequestGetVideos requestPermalinkUrlField () {

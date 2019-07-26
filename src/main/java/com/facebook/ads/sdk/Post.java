@@ -67,6 +67,8 @@ public class Post extends APINode {
   private String mBackdatedTime = null;
   @SerializedName("call_to_action")
   private Object mCallToAction = null;
+  @SerializedName("can_reply_privately")
+  private Boolean mCanReplyPrivately = null;
   @SerializedName("caption")
   private String mCaption = null;
   @SerializedName("child_attachments")
@@ -476,6 +478,10 @@ public class Post extends APINode {
     return mCallToAction;
   }
 
+  public Boolean getFieldCanReplyPrivately() {
+    return mCanReplyPrivately;
+  }
+
   public String getFieldCaption() {
     return mCaption;
   }
@@ -829,6 +835,7 @@ public class Post extends APINode {
       "can_hide",
       "can_like",
       "can_remove",
+      "can_reply_privately",
       "comment_count",
       "created_time",
       "from",
@@ -842,6 +849,7 @@ public class Post extends APINode {
       "object",
       "parent",
       "permalink_url",
+      "private_reply_conversation",
       "user_likes",
     };
 
@@ -1015,6 +1023,13 @@ public class Post extends APINode {
       this.requestField("can_remove", value);
       return this;
     }
+    public APIRequestGetComments requestCanReplyPrivatelyField () {
+      return this.requestCanReplyPrivatelyField(true);
+    }
+    public APIRequestGetComments requestCanReplyPrivatelyField (boolean value) {
+      this.requestField("can_reply_privately", value);
+      return this;
+    }
     public APIRequestGetComments requestCommentCountField () {
       return this.requestCommentCountField(true);
     }
@@ -1104,6 +1119,13 @@ public class Post extends APINode {
     }
     public APIRequestGetComments requestPermalinkUrlField (boolean value) {
       this.requestField("permalink_url", value);
+      return this;
+    }
+    public APIRequestGetComments requestPrivateReplyConversationField () {
+      return this.requestPrivateReplyConversationField(true);
+    }
+    public APIRequestGetComments requestPrivateReplyConversationField (boolean value) {
+      this.requestField("private_reply_conversation", value);
       return this;
     }
     public APIRequestGetComments requestUserLikesField () {
@@ -3126,6 +3148,7 @@ public class Post extends APINode {
       "application",
       "backdated_time",
       "call_to_action",
+      "can_reply_privately",
       "caption",
       "child_attachments",
       "comments_mirroring_domain",
@@ -3311,6 +3334,13 @@ public class Post extends APINode {
     }
     public APIRequestGetSharedPosts requestCallToActionField (boolean value) {
       this.requestField("call_to_action", value);
+      return this;
+    }
+    public APIRequestGetSharedPosts requestCanReplyPrivatelyField () {
+      return this.requestCanReplyPrivatelyField(true);
+    }
+    public APIRequestGetSharedPosts requestCanReplyPrivatelyField (boolean value) {
+      this.requestField("can_reply_privately", value);
       return this;
     }
     public APIRequestGetSharedPosts requestCaptionField () {
@@ -4006,6 +4036,7 @@ public class Post extends APINode {
       "application",
       "backdated_time",
       "call_to_action",
+      "can_reply_privately",
       "caption",
       "child_attachments",
       "comments_mirroring_domain",
@@ -4191,6 +4222,13 @@ public class Post extends APINode {
     }
     public APIRequestGet requestCallToActionField (boolean value) {
       this.requestField("call_to_action", value);
+      return this;
+    }
+    public APIRequestGet requestCanReplyPrivatelyField () {
+      return this.requestCanReplyPrivatelyField(true);
+    }
+    public APIRequestGet requestCanReplyPrivatelyField (boolean value) {
+      this.requestField("can_reply_privately", value);
       return this;
     }
     public APIRequestGet requestCaptionField () {
@@ -5202,6 +5240,7 @@ public class Post extends APINode {
     this.mApplication = instance.mApplication;
     this.mBackdatedTime = instance.mBackdatedTime;
     this.mCallToAction = instance.mCallToAction;
+    this.mCanReplyPrivately = instance.mCanReplyPrivately;
     this.mCaption = instance.mCaption;
     this.mChildAttachments = instance.mChildAttachments;
     this.mCommentsMirroringDomain = instance.mCommentsMirroringDomain;

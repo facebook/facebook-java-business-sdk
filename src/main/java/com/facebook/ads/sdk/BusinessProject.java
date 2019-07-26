@@ -2650,7 +2650,6 @@ public class BusinessProject extends APINode {
       "company_overview",
       "connected_instagram_account",
       "contact_address",
-      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -3031,13 +3030,6 @@ public class BusinessProject extends APINode {
     }
     public APIRequestGetPages requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
-      return this;
-    }
-    public APIRequestGetPages requestCopyrightAttributionInsightsField () {
-      return this.requestCopyrightAttributionInsightsField(true);
-    }
-    public APIRequestGetPages requestCopyrightAttributionInsightsField (boolean value) {
-      this.requestField("copyright_attribution_insights", value);
       return this;
     }
     public APIRequestGetPages requestCopyrightWhitelistedIgPartnersField () {
@@ -4098,7 +4090,6 @@ public class BusinessProject extends APINode {
       "id",
       "name",
       "product_count",
-      "qualified_product_count",
       "vertical",
     };
 
@@ -4252,13 +4243,6 @@ public class BusinessProject extends APINode {
     }
     public APIRequestGetProductCatalogs requestProductCountField (boolean value) {
       this.requestField("product_count", value);
-      return this;
-    }
-    public APIRequestGetProductCatalogs requestQualifiedProductCountField () {
-      return this.requestQualifiedProductCountField(true);
-    }
-    public APIRequestGetProductCatalogs requestQualifiedProductCountField (boolean value) {
-      this.requestField("qualified_product_count", value);
       return this;
     }
     public APIRequestGetProductCatalogs requestVerticalField () {

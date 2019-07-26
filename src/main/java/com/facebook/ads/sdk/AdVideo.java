@@ -65,6 +65,10 @@ public class AdVideo extends APINode {
   private String mContentCategory = null;
   @SerializedName("content_tags")
   private List<String> mContentTags = null;
+  @SerializedName("copyright")
+  private VideoCopyright mCopyright = null;
+  @SerializedName("copyright_monitoring_status")
+  private String mCopyrightMonitoringStatus = null;
   @SerializedName("created_time")
   private String mCreatedTime = null;
   @SerializedName("custom_labels")
@@ -95,12 +99,16 @@ public class AdVideo extends APINode {
   private Boolean mIsEpisode = null;
   @SerializedName("is_instagram_eligible")
   private Boolean mIsInstagramEligible = null;
+  @SerializedName("is_reference_only")
+  private Boolean mIsReferenceOnly = null;
   @SerializedName("length")
   private Double mLength = null;
   @SerializedName("live_audience_count")
   private Long mLiveAudienceCount = null;
   @SerializedName("live_status")
   private String mLiveStatus = null;
+  @SerializedName("music_video_copyright")
+  private MusicVideoCopyright mMusicVideoCopyright = null;
   @SerializedName("permalink_url")
   private String mPermalinkUrl = null;
   @SerializedName("picture")
@@ -398,6 +406,10 @@ public class AdVideo extends APINode {
     return new APIRequestCreateSummarization(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetTags getTags() {
+    return new APIRequestGetTags(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateTag createTag() {
     return new APIRequestCreateTag(this.getPrefixedId().toString(), context);
   }
@@ -445,6 +457,17 @@ public class AdVideo extends APINode {
 
   public List<String> getFieldContentTags() {
     return mContentTags;
+  }
+
+  public VideoCopyright getFieldCopyright() {
+    if (mCopyright != null) {
+      mCopyright.context = getContext();
+    }
+    return mCopyright;
+  }
+
+  public String getFieldCopyrightMonitoringStatus() {
+    return mCopyrightMonitoringStatus;
   }
 
   public String getFieldCreatedTime() {
@@ -510,6 +533,10 @@ public class AdVideo extends APINode {
     return mIsInstagramEligible;
   }
 
+  public Boolean getFieldIsReferenceOnly() {
+    return mIsReferenceOnly;
+  }
+
   public Double getFieldLength() {
     return mLength;
   }
@@ -520,6 +547,13 @@ public class AdVideo extends APINode {
 
   public String getFieldLiveStatus() {
     return mLiveStatus;
+  }
+
+  public MusicVideoCopyright getFieldMusicVideoCopyright() {
+    if (mMusicVideoCopyright != null) {
+      mMusicVideoCopyright.context = getContext();
+    }
+    return mMusicVideoCopyright;
   }
 
   public String getFieldPermalinkUrl() {
@@ -959,6 +993,7 @@ public class AdVideo extends APINode {
       "can_hide",
       "can_like",
       "can_remove",
+      "can_reply_privately",
       "comment_count",
       "created_time",
       "from",
@@ -972,6 +1007,7 @@ public class AdVideo extends APINode {
       "object",
       "parent",
       "permalink_url",
+      "private_reply_conversation",
       "user_likes",
     };
 
@@ -1145,6 +1181,13 @@ public class AdVideo extends APINode {
       this.requestField("can_remove", value);
       return this;
     }
+    public APIRequestGetComments requestCanReplyPrivatelyField () {
+      return this.requestCanReplyPrivatelyField(true);
+    }
+    public APIRequestGetComments requestCanReplyPrivatelyField (boolean value) {
+      this.requestField("can_reply_privately", value);
+      return this;
+    }
     public APIRequestGetComments requestCommentCountField () {
       return this.requestCommentCountField(true);
     }
@@ -1234,6 +1277,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetComments requestPermalinkUrlField (boolean value) {
       this.requestField("permalink_url", value);
+      return this;
+    }
+    public APIRequestGetComments requestPrivateReplyConversationField () {
+      return this.requestPrivateReplyConversationField(true);
+    }
+    public APIRequestGetComments requestPrivateReplyConversationField (boolean value) {
+      this.requestField("private_reply_conversation", value);
       return this;
     }
     public APIRequestGetComments requestUserLikesField () {
@@ -1479,7 +1529,6 @@ public class AdVideo extends APINode {
       "company_overview",
       "connected_instagram_account",
       "contact_address",
-      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -1860,13 +1909,6 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
-      return this;
-    }
-    public APIRequestGetCrosspostSharedPages requestCopyrightAttributionInsightsField () {
-      return this.requestCopyrightAttributionInsightsField(true);
-    }
-    public APIRequestGetCrosspostSharedPages requestCopyrightAttributionInsightsField (boolean value) {
-      this.requestField("copyright_attribution_insights", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestCopyrightWhitelistedIgPartnersField () {
@@ -3784,6 +3826,7 @@ public class AdVideo extends APINode {
       "application",
       "backdated_time",
       "call_to_action",
+      "can_reply_privately",
       "caption",
       "child_attachments",
       "comments_mirroring_domain",
@@ -3969,6 +4012,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetSharedPosts requestCallToActionField (boolean value) {
       this.requestField("call_to_action", value);
+      return this;
+    }
+    public APIRequestGetSharedPosts requestCanReplyPrivatelyField () {
+      return this.requestCanReplyPrivatelyField(true);
+    }
+    public APIRequestGetSharedPosts requestCanReplyPrivatelyField (boolean value) {
+      this.requestField("can_reply_privately", value);
       return this;
     }
     public APIRequestGetSharedPosts requestCaptionField () {
@@ -4469,6 +4519,126 @@ public class AdVideo extends APINode {
       return this;
     }
 
+  }
+
+  public static class APIRequestGetTags extends APIRequest<TaggableSubject> {
+
+    APINodeList<TaggableSubject> lastResponse = null;
+    @Override
+    public APINodeList<TaggableSubject> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "id",
+      "name",
+    };
+
+    @Override
+    public APINodeList<TaggableSubject> parseResponse(String response, String header) throws APIException {
+      return TaggableSubject.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<TaggableSubject> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<TaggableSubject> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<TaggableSubject>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<TaggableSubject>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<TaggableSubject>>() {
+           public APINodeList<TaggableSubject> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetTags.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetTags(String nodeId, APIContext context) {
+      super(context, nodeId, "/tags", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetTags setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetTags setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetTags requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetTags requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetTags requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetTags requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetTags requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetTags requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetTags requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetTags requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetTags requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetTags requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
   }
 
   public static class APIRequestCreateTag extends APIRequest<AdVideo> {
@@ -5197,6 +5367,8 @@ public class AdVideo extends APINode {
       "backdated_time_granularity",
       "content_category",
       "content_tags",
+      "copyright",
+      "copyright_monitoring_status",
       "created_time",
       "custom_labels",
       "description",
@@ -5212,9 +5384,11 @@ public class AdVideo extends APINode {
       "is_crossposting_eligible",
       "is_episode",
       "is_instagram_eligible",
+      "is_reference_only",
       "length",
       "live_audience_count",
       "live_status",
+      "music_video_copyright",
       "permalink_url",
       "picture",
       "place",
@@ -5355,6 +5529,20 @@ public class AdVideo extends APINode {
       this.requestField("content_tags", value);
       return this;
     }
+    public APIRequestGet requestCopyrightField () {
+      return this.requestCopyrightField(true);
+    }
+    public APIRequestGet requestCopyrightField (boolean value) {
+      this.requestField("copyright", value);
+      return this;
+    }
+    public APIRequestGet requestCopyrightMonitoringStatusField () {
+      return this.requestCopyrightMonitoringStatusField(true);
+    }
+    public APIRequestGet requestCopyrightMonitoringStatusField (boolean value) {
+      this.requestField("copyright_monitoring_status", value);
+      return this;
+    }
     public APIRequestGet requestCreatedTimeField () {
       return this.requestCreatedTimeField(true);
     }
@@ -5460,6 +5648,13 @@ public class AdVideo extends APINode {
       this.requestField("is_instagram_eligible", value);
       return this;
     }
+    public APIRequestGet requestIsReferenceOnlyField () {
+      return this.requestIsReferenceOnlyField(true);
+    }
+    public APIRequestGet requestIsReferenceOnlyField (boolean value) {
+      this.requestField("is_reference_only", value);
+      return this;
+    }
     public APIRequestGet requestLengthField () {
       return this.requestLengthField(true);
     }
@@ -5479,6 +5674,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGet requestLiveStatusField (boolean value) {
       this.requestField("live_status", value);
+      return this;
+    }
+    public APIRequestGet requestMusicVideoCopyrightField () {
+      return this.requestMusicVideoCopyrightField(true);
+    }
+    public APIRequestGet requestMusicVideoCopyrightField (boolean value) {
+      this.requestField("music_video_copyright", value);
       return this;
     }
     public APIRequestGet requestPermalinkUrlField () {
@@ -5972,8 +6174,6 @@ public class AdVideo extends APINode {
       VALUE_CONTAINED_POST_AUDIO_BROADCAST("CONTAINED_POST_AUDIO_BROADCAST"),
       @SerializedName("CONTAINED_POST_BROADCAST")
       VALUE_CONTAINED_POST_BROADCAST("CONTAINED_POST_BROADCAST"),
-      @SerializedName("CONTAINED_YOUR_DAY")
-      VALUE_CONTAINED_YOUR_DAY("CONTAINED_YOUR_DAY"),
       @SerializedName("COPYRIGHT_REFERENCE_BROADCAST")
       VALUE_COPYRIGHT_REFERENCE_BROADCAST("COPYRIGHT_REFERENCE_BROADCAST"),
       @SerializedName("COPYRIGHT_REFERENCE_VIDEO")
@@ -6106,6 +6306,8 @@ public class AdVideo extends APINode {
       VALUE_SLIDESHOW_SHAKR("SLIDESHOW_SHAKR"),
       @SerializedName("SOTTO_CONTENT")
       VALUE_SOTTO_CONTENT("SOTTO_CONTENT"),
+      @SerializedName("STORIES_VIDEO")
+      VALUE_STORIES_VIDEO("STORIES_VIDEO"),
       @SerializedName("STORYLINE")
       VALUE_STORYLINE("STORYLINE"),
       @SerializedName("STORYLINE_WITH_EXTERNAL_MUSIC")
@@ -6122,6 +6324,8 @@ public class AdVideo extends APINode {
       VALUE_UNLISTED("UNLISTED"),
       @SerializedName("VIDEO_COMMENT")
       VALUE_VIDEO_COMMENT("VIDEO_COMMENT"),
+      @SerializedName("VIDEO_CREATIVE_EDITOR_AUTOGEN_AD_VIDEO")
+      VALUE_VIDEO_CREATIVE_EDITOR_AUTOGEN_AD_VIDEO("VIDEO_CREATIVE_EDITOR_AUTOGEN_AD_VIDEO"),
       @SerializedName("WOODHENGE")
       VALUE_WOODHENGE("WOODHENGE"),
       @SerializedName("YOUR_DAY")
@@ -6387,6 +6591,8 @@ public class AdVideo extends APINode {
     this.mBackdatedTimeGranularity = instance.mBackdatedTimeGranularity;
     this.mContentCategory = instance.mContentCategory;
     this.mContentTags = instance.mContentTags;
+    this.mCopyright = instance.mCopyright;
+    this.mCopyrightMonitoringStatus = instance.mCopyrightMonitoringStatus;
     this.mCreatedTime = instance.mCreatedTime;
     this.mCustomLabels = instance.mCustomLabels;
     this.mDescription = instance.mDescription;
@@ -6402,9 +6608,11 @@ public class AdVideo extends APINode {
     this.mIsCrosspostingEligible = instance.mIsCrosspostingEligible;
     this.mIsEpisode = instance.mIsEpisode;
     this.mIsInstagramEligible = instance.mIsInstagramEligible;
+    this.mIsReferenceOnly = instance.mIsReferenceOnly;
     this.mLength = instance.mLength;
     this.mLiveAudienceCount = instance.mLiveAudienceCount;
     this.mLiveStatus = instance.mLiveStatus;
+    this.mMusicVideoCopyright = instance.mMusicVideoCopyright;
     this.mPermalinkUrl = instance.mPermalinkUrl;
     this.mPicture = instance.mPicture;
     this.mPlace = instance.mPlace;

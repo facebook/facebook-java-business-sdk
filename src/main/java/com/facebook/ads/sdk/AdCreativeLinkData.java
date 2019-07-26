@@ -65,8 +65,6 @@ public class AdCreativeLinkData extends APINode {
   private String mBrandedContentSharedToSponsorStatus = null;
   @SerializedName("branded_content_sponsor_page_id")
   private String mBrandedContentSponsorPageId = null;
-  @SerializedName("branded_content_sponsor_relationship")
-  private String mBrandedContentSponsorRelationship = null;
   @SerializedName("call_to_action")
   private AdCreativeLinkDataCallToAction mCallToAction = null;
   @SerializedName("caption")
@@ -319,15 +317,6 @@ public class AdCreativeLinkData extends APINode {
 
   public AdCreativeLinkData setFieldBrandedContentSponsorPageId(String value) {
     this.mBrandedContentSponsorPageId = value;
-    return this;
-  }
-
-  public String getFieldBrandedContentSponsorRelationship() {
-    return mBrandedContentSponsorRelationship;
-  }
-
-  public AdCreativeLinkData setFieldBrandedContentSponsorRelationship(String value) {
-    this.mBrandedContentSponsorRelationship = value;
     return this;
   }
 
@@ -683,7 +672,6 @@ public class AdCreativeLinkData extends APINode {
     this.mAttachmentStyle = instance.mAttachmentStyle;
     this.mBrandedContentSharedToSponsorStatus = instance.mBrandedContentSharedToSponsorStatus;
     this.mBrandedContentSponsorPageId = instance.mBrandedContentSponsorPageId;
-    this.mBrandedContentSponsorRelationship = instance.mBrandedContentSponsorRelationship;
     this.mCallToAction = instance.mCallToAction;
     this.mCaption = instance.mCaption;
     this.mChildAttachments = instance.mChildAttachments;

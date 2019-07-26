@@ -55,8 +55,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdStudyObjective extends APINode {
-  @SerializedName("custom_attributes")
-  private List<String> mCustomAttributes = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("is_primary")
@@ -318,10 +316,6 @@ public class AdStudyObjective extends APINode {
     return new APIRequestUpdate(this.getPrefixedId().toString(), context);
   }
 
-
-  public List<String> getFieldCustomAttributes() {
-    return mCustomAttributes;
-  }
 
   public String getFieldId() {
     return mId;
@@ -2649,7 +2643,6 @@ public class AdStudyObjective extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "custom_attributes",
       "id",
       "is_primary",
       "last_updated_results",
@@ -2756,13 +2749,6 @@ public class AdStudyObjective extends APINode {
       return this;
     }
 
-    public APIRequestGet requestCustomAttributesField () {
-      return this.requestCustomAttributesField(true);
-    }
-    public APIRequestGet requestCustomAttributesField (boolean value) {
-      this.requestField("custom_attributes", value);
-      return this;
-    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -3068,7 +3054,6 @@ public class AdStudyObjective extends APINode {
   }
 
   public AdStudyObjective copyFrom(AdStudyObjective instance) {
-    this.mCustomAttributes = instance.mCustomAttributes;
     this.mId = instance.mId;
     this.mIsPrimary = instance.mIsPrimary;
     this.mLastUpdatedResults = instance.mLastUpdatedResults;

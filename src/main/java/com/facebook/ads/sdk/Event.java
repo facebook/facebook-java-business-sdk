@@ -60,7 +60,7 @@ public class Event extends APINode {
   @SerializedName("can_guests_invite")
   private Boolean mCanGuestsInvite = null;
   @SerializedName("category")
-  private String mCategory = null;
+  private EnumCategory mCategory = null;
   @SerializedName("cover")
   private CoverPhoto mCover = null;
   @SerializedName("declined_count")
@@ -361,7 +361,7 @@ public class Event extends APINode {
     return mCanGuestsInvite;
   }
 
-  public String getFieldCategory() {
+  public EnumCategory getFieldCategory() {
     return mCategory;
   }
 
@@ -1697,7 +1697,6 @@ public class Event extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "attribution_app_id",
       "content_tags",
       "description",
       "encoding_settings",
@@ -1776,11 +1775,6 @@ public class Event extends APINode {
       return this;
     }
 
-
-    public APIRequestCreateLiveVideo setAttributionAppId (String attributionAppId) {
-      this.setParam("attribution_app_id", attributionAppId);
-      return this;
-    }
 
     public APIRequestCreateLiveVideo setContentTags (List<String> contentTags) {
       this.setParam("content_tags", contentTags);
@@ -3273,6 +3267,71 @@ public class Event extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
+  }
+
+  public static enum EnumCategory {
+      @SerializedName("ART_EVENT")
+      VALUE_ART_EVENT("ART_EVENT"),
+      @SerializedName("BOOK_EVENT")
+      VALUE_BOOK_EVENT("BOOK_EVENT"),
+      @SerializedName("CLASS_EVENT")
+      VALUE_CLASS_EVENT("CLASS_EVENT"),
+      @SerializedName("COMEDY_EVENT")
+      VALUE_COMEDY_EVENT("COMEDY_EVENT"),
+      @SerializedName("CONFERENCE_EVENT")
+      VALUE_CONFERENCE_EVENT("CONFERENCE_EVENT"),
+      @SerializedName("DANCE_EVENT")
+      VALUE_DANCE_EVENT("DANCE_EVENT"),
+      @SerializedName("DINING_EVENT")
+      VALUE_DINING_EVENT("DINING_EVENT"),
+      @SerializedName("FAMILY_EVENT")
+      VALUE_FAMILY_EVENT("FAMILY_EVENT"),
+      @SerializedName("FESTIVAL_EVENT")
+      VALUE_FESTIVAL_EVENT("FESTIVAL_EVENT"),
+      @SerializedName("FITNESS")
+      VALUE_FITNESS("FITNESS"),
+      @SerializedName("FOOD_TASTING")
+      VALUE_FOOD_TASTING("FOOD_TASTING"),
+      @SerializedName("FUNDRAISER")
+      VALUE_FUNDRAISER("FUNDRAISER"),
+      @SerializedName("LECTURE")
+      VALUE_LECTURE("LECTURE"),
+      @SerializedName("MEETUP")
+      VALUE_MEETUP("MEETUP"),
+      @SerializedName("MOVIE_EVENT")
+      VALUE_MOVIE_EVENT("MOVIE_EVENT"),
+      @SerializedName("MUSIC_EVENT")
+      VALUE_MUSIC_EVENT("MUSIC_EVENT"),
+      @SerializedName("NEIGHBORHOOD")
+      VALUE_NEIGHBORHOOD("NEIGHBORHOOD"),
+      @SerializedName("NIGHTLIFE")
+      VALUE_NIGHTLIFE("NIGHTLIFE"),
+      @SerializedName("OTHER")
+      VALUE_OTHER("OTHER"),
+      @SerializedName("RELIGIOUS_EVENT")
+      VALUE_RELIGIOUS_EVENT("RELIGIOUS_EVENT"),
+      @SerializedName("SHOPPING")
+      VALUE_SHOPPING("SHOPPING"),
+      @SerializedName("SPORTS_EVENT")
+      VALUE_SPORTS_EVENT("SPORTS_EVENT"),
+      @SerializedName("THEATER_EVENT")
+      VALUE_THEATER_EVENT("THEATER_EVENT"),
+      @SerializedName("VOLUNTEERING")
+      VALUE_VOLUNTEERING("VOLUNTEERING"),
+      @SerializedName("WORKSHOP")
+      VALUE_WORKSHOP("WORKSHOP"),
+      NULL(null);
+
+      private String value;
+
+      private EnumCategory(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
   public static enum EnumType {

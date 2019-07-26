@@ -404,6 +404,10 @@ public class PagePost extends APINode {
     return new APIRequestCreateLike(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreatePrivateReply createPrivateReply() {
+    return new APIRequestCreatePrivateReply(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetReactions getReactions() {
     return new APIRequestGetReactions(this.getPrefixedId().toString(), context);
   }
@@ -789,6 +793,7 @@ public class PagePost extends APINode {
       "can_hide",
       "can_like",
       "can_remove",
+      "can_reply_privately",
       "comment_count",
       "created_time",
       "from",
@@ -802,6 +807,7 @@ public class PagePost extends APINode {
       "object",
       "parent",
       "permalink_url",
+      "private_reply_conversation",
       "user_likes",
     };
 
@@ -975,6 +981,13 @@ public class PagePost extends APINode {
       this.requestField("can_remove", value);
       return this;
     }
+    public APIRequestGetComments requestCanReplyPrivatelyField () {
+      return this.requestCanReplyPrivatelyField(true);
+    }
+    public APIRequestGetComments requestCanReplyPrivatelyField (boolean value) {
+      this.requestField("can_reply_privately", value);
+      return this;
+    }
     public APIRequestGetComments requestCommentCountField () {
       return this.requestCommentCountField(true);
     }
@@ -1064,6 +1077,13 @@ public class PagePost extends APINode {
     }
     public APIRequestGetComments requestPermalinkUrlField (boolean value) {
       this.requestField("permalink_url", value);
+      return this;
+    }
+    public APIRequestGetComments requestPrivateReplyConversationField () {
+      return this.requestPrivateReplyConversationField(true);
+    }
+    public APIRequestGetComments requestPrivateReplyConversationField (boolean value) {
+      this.requestField("private_reply_conversation", value);
       return this;
     }
     public APIRequestGetComments requestUserLikesField () {
@@ -2077,6 +2097,116 @@ public class PagePost extends APINode {
 
   }
 
+  public static class APIRequestCreatePrivateReply extends APIRequest<PagePost> {
+
+    PagePost lastResponse = null;
+    @Override
+    public PagePost getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "message",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public PagePost parseResponse(String response, String header) throws APIException {
+      return PagePost.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public PagePost execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public PagePost execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<PagePost> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<PagePost> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, PagePost>() {
+           public PagePost apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreatePrivateReply.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreatePrivateReply(String nodeId, APIContext context) {
+      super(context, nodeId, "/private_replies", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreatePrivateReply setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePrivateReply setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreatePrivateReply setMessage (String message) {
+      this.setParam("message", message);
+      return this;
+    }
+
+    public APIRequestCreatePrivateReply requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreatePrivateReply requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePrivateReply requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreatePrivateReply requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePrivateReply requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePrivateReply requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetReactions extends APIRequest<Profile> {
 
     APINodeList<Profile> lastResponse = null;
@@ -2872,6 +3002,7 @@ public class PagePost extends APINode {
       "application",
       "backdated_time",
       "call_to_action",
+      "can_reply_privately",
       "caption",
       "child_attachments",
       "comments_mirroring_domain",
@@ -3057,6 +3188,13 @@ public class PagePost extends APINode {
     }
     public APIRequestGetSharedPosts requestCallToActionField (boolean value) {
       this.requestField("call_to_action", value);
+      return this;
+    }
+    public APIRequestGetSharedPosts requestCanReplyPrivatelyField () {
+      return this.requestCanReplyPrivatelyField(true);
+    }
+    public APIRequestGetSharedPosts requestCanReplyPrivatelyField (boolean value) {
+      this.requestField("can_reply_privately", value);
       return this;
     }
     public APIRequestGetSharedPosts requestCaptionField () {

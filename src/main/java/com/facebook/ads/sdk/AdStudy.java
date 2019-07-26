@@ -298,10 +298,6 @@ public class AdStudy extends APINode {
     return new APIRequestGetCells(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateCustomAudience createCustomAudience() {
-    return new APIRequestCreateCustomAudience(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetHealthCheckErrors getHealthCheckErrors() {
     return new APIRequestGetHealthCheckErrors(this.getPrefixedId().toString(), context);
   }
@@ -546,144 +542,6 @@ public class AdStudy extends APINode {
     }
   }
 
-  public static class APIRequestCreateCustomAudience extends APIRequest<AdStudy> {
-
-    AdStudy lastResponse = null;
-    @Override
-    public AdStudy getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "account_id",
-      "audience_name",
-      "audience_type",
-      "cell_id",
-      "objective_id",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public AdStudy parseResponse(String response, String header) throws APIException {
-      return AdStudy.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public AdStudy execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdStudy execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdStudy> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdStudy> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, AdStudy>() {
-           public AdStudy apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateCustomAudience.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateCustomAudience(String nodeId, APIContext context) {
-      super(context, nodeId, "/customaudiences", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateCustomAudience setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateCustomAudience setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateCustomAudience setAccountId (String accountId) {
-      this.setParam("account_id", accountId);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setAudienceName (String audienceName) {
-      this.setParam("audience_name", audienceName);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setAudienceType (AdStudy.EnumAudienceType audienceType) {
-      this.setParam("audience_type", audienceType);
-      return this;
-    }
-    public APIRequestCreateCustomAudience setAudienceType (String audienceType) {
-      this.setParam("audience_type", audienceType);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setCellId (String cellId) {
-      this.setParam("cell_id", cellId);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setObjectiveId (String objectiveId) {
-      this.setParam("objective_id", objectiveId);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateCustomAudience requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateCustomAudience requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateCustomAudience requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateCustomAudience requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateCustomAudience requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetHealthCheckErrors extends APIRequest<AdsTALHealthCheckError> {
 
     APINodeList<AdsTALHealthCheckError> lastResponse = null;
@@ -815,7 +673,6 @@ public class AdStudy extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "custom_attributes",
       "id",
       "is_primary",
       "last_updated_results",
@@ -913,13 +770,6 @@ public class AdStudy extends APINode {
       return this;
     }
 
-    public APIRequestGetObjectives requestCustomAttributesField () {
-      return this.requestCustomAttributesField(true);
-    }
-    public APIRequestGetObjectives requestCustomAttributesField (boolean value) {
-      this.requestField("custom_attributes", value);
-      return this;
-    }
     public APIRequestGetObjectives requestIdField () {
       return this.requestIdField(true);
     }
@@ -2282,25 +2132,6 @@ public class AdStudy extends APINode {
       private String value;
 
       private EnumType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumAudienceType {
-      @SerializedName("MOST_RESPONSIVE")
-      VALUE_MOST_RESPONSIVE("MOST_RESPONSIVE"),
-      @SerializedName("NOT_MOST_RESPONSIVE")
-      VALUE_NOT_MOST_RESPONSIVE("NOT_MOST_RESPONSIVE"),
-      NULL(null);
-
-      private String value;
-
-      private EnumAudienceType(String value) {
         this.value = value;
       }
 
