@@ -320,6 +320,10 @@ public class NativeOffer extends APINode {
     return new APIRequestCreateNativeOfferView(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetViews getViews() {
+    return new APIRequestGetViews(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
@@ -668,6 +672,134 @@ public class NativeOffer extends APINode {
       return this;
     }
 
+  }
+
+  public static class APIRequestGetViews extends APIRequest<NativeOfferView> {
+
+    APINodeList<NativeOfferView> lastResponse = null;
+    @Override
+    public APINodeList<NativeOfferView> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "id",
+      "offer",
+      "save_count",
+    };
+
+    @Override
+    public APINodeList<NativeOfferView> parseResponse(String response, String header) throws APIException {
+      return NativeOfferView.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<NativeOfferView> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<NativeOfferView> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<NativeOfferView>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<NativeOfferView>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<NativeOfferView>>() {
+           public APINodeList<NativeOfferView> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetViews.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetViews(String nodeId, APIContext context) {
+      super(context, nodeId, "/views", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetViews setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetViews setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetViews requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetViews requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetViews requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetViews requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetViews requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetViews requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetViews requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetViews requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetViews requestOfferField () {
+      return this.requestOfferField(true);
+    }
+    public APIRequestGetViews requestOfferField (boolean value) {
+      this.requestField("offer", value);
+      return this;
+    }
+    public APIRequestGetViews requestSaveCountField () {
+      return this.requestSaveCountField(true);
+    }
+    public APIRequestGetViews requestSaveCountField (boolean value) {
+      this.requestField("save_count", value);
+      return this;
+    }
   }
 
   public static class APIRequestGet extends APIRequest<NativeOffer> {

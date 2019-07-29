@@ -462,6 +462,10 @@ public class User extends APINode {
     return new APIRequestGetCustomLabels(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetDomains getDomains() {
+    return new APIRequestGetDomains(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetEvents getEvents() {
     return new APIRequestGetEvents(this.getPrefixedId().toString(), context);
   }
@@ -610,8 +614,16 @@ public class User extends APINode {
     return new APIRequestGetRequestHistory(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetRichMediaDocuments getRichMediaDocuments() {
+    return new APIRequestGetRichMediaDocuments(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateScreenName createScreenName() {
     return new APIRequestCreateScreenName(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetSessionKeys getSessionKeys() {
+    return new APIRequestGetSessionKeys(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateStagingResource createStagingResource() {
@@ -8622,6 +8634,134 @@ public class User extends APINode {
     }
     public APIRequestGetCustomLabels requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetDomains extends APIRequest<Domain> {
+
+    APINodeList<Domain> lastResponse = null;
+    @Override
+    public APINodeList<Domain> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "id",
+      "name",
+      "url",
+    };
+
+    @Override
+    public APINodeList<Domain> parseResponse(String response, String header) throws APIException {
+      return Domain.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<Domain> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<Domain> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<Domain>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<Domain>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<Domain>>() {
+           public APINodeList<Domain> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetDomains.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetDomains(String nodeId, APIContext context) {
+      super(context, nodeId, "/domains", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetDomains setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDomains setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetDomains requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetDomains requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDomains requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetDomains requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDomains requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDomains requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetDomains requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetDomains requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetDomains requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetDomains requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetDomains requestUrlField () {
+      return this.requestUrlField(true);
+    }
+    public APIRequestGetDomains requestUrlField (boolean value) {
+      this.requestField("url", value);
       return this;
     }
   }
@@ -23016,6 +23156,196 @@ public class User extends APINode {
     }
   }
 
+  public static class APIRequestGetRichMediaDocuments extends APIRequest<Canvas> {
+
+    APINodeList<Canvas> lastResponse = null;
+    @Override
+    public APINodeList<Canvas> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "query",
+    };
+
+    public static final String[] FIELDS = {
+      "background_color",
+      "body_elements",
+      "canvas_link",
+      "id",
+      "is_hidden",
+      "is_published",
+      "last_editor",
+      "name",
+      "owner",
+      "update_time",
+    };
+
+    @Override
+    public APINodeList<Canvas> parseResponse(String response, String header) throws APIException {
+      return Canvas.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<Canvas> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<Canvas> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<Canvas>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<Canvas>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<Canvas>>() {
+           public APINodeList<Canvas> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetRichMediaDocuments.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetRichMediaDocuments(String nodeId, APIContext context) {
+      super(context, nodeId, "/rich_media_documents", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetRichMediaDocuments setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetRichMediaDocuments setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetRichMediaDocuments setQuery (String query) {
+      this.setParam("query", query);
+      return this;
+    }
+
+    public APIRequestGetRichMediaDocuments requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetRichMediaDocuments requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetRichMediaDocuments requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetRichMediaDocuments requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetRichMediaDocuments requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetRichMediaDocuments requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetRichMediaDocuments requestBackgroundColorField () {
+      return this.requestBackgroundColorField(true);
+    }
+    public APIRequestGetRichMediaDocuments requestBackgroundColorField (boolean value) {
+      this.requestField("background_color", value);
+      return this;
+    }
+    public APIRequestGetRichMediaDocuments requestBodyElementsField () {
+      return this.requestBodyElementsField(true);
+    }
+    public APIRequestGetRichMediaDocuments requestBodyElementsField (boolean value) {
+      this.requestField("body_elements", value);
+      return this;
+    }
+    public APIRequestGetRichMediaDocuments requestCanvasLinkField () {
+      return this.requestCanvasLinkField(true);
+    }
+    public APIRequestGetRichMediaDocuments requestCanvasLinkField (boolean value) {
+      this.requestField("canvas_link", value);
+      return this;
+    }
+    public APIRequestGetRichMediaDocuments requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetRichMediaDocuments requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetRichMediaDocuments requestIsHiddenField () {
+      return this.requestIsHiddenField(true);
+    }
+    public APIRequestGetRichMediaDocuments requestIsHiddenField (boolean value) {
+      this.requestField("is_hidden", value);
+      return this;
+    }
+    public APIRequestGetRichMediaDocuments requestIsPublishedField () {
+      return this.requestIsPublishedField(true);
+    }
+    public APIRequestGetRichMediaDocuments requestIsPublishedField (boolean value) {
+      this.requestField("is_published", value);
+      return this;
+    }
+    public APIRequestGetRichMediaDocuments requestLastEditorField () {
+      return this.requestLastEditorField(true);
+    }
+    public APIRequestGetRichMediaDocuments requestLastEditorField (boolean value) {
+      this.requestField("last_editor", value);
+      return this;
+    }
+    public APIRequestGetRichMediaDocuments requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetRichMediaDocuments requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetRichMediaDocuments requestOwnerField () {
+      return this.requestOwnerField(true);
+    }
+    public APIRequestGetRichMediaDocuments requestOwnerField (boolean value) {
+      this.requestField("owner", value);
+      return this;
+    }
+    public APIRequestGetRichMediaDocuments requestUpdateTimeField () {
+      return this.requestUpdateTimeField(true);
+    }
+    public APIRequestGetRichMediaDocuments requestUpdateTimeField (boolean value) {
+      this.requestField("update_time", value);
+      return this;
+    }
+  }
+
   public static class APIRequestCreateScreenName extends APIRequest<User> {
 
     User lastResponse = null;
@@ -23134,6 +23464,118 @@ public class User extends APINode {
       return this;
     }
 
+  }
+
+  public static class APIRequestGetSessionKeys extends APIRequest<PlatformSessionKey> {
+
+    APINodeList<PlatformSessionKey> lastResponse = null;
+    @Override
+    public APINodeList<PlatformSessionKey> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "id",
+    };
+
+    @Override
+    public APINodeList<PlatformSessionKey> parseResponse(String response, String header) throws APIException {
+      return PlatformSessionKey.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<PlatformSessionKey> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<PlatformSessionKey> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<PlatformSessionKey>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<PlatformSessionKey>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<PlatformSessionKey>>() {
+           public APINodeList<PlatformSessionKey> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetSessionKeys.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetSessionKeys(String nodeId, APIContext context) {
+      super(context, nodeId, "/session_keys", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetSessionKeys setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSessionKeys setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetSessionKeys requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetSessionKeys requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSessionKeys requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetSessionKeys requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSessionKeys requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSessionKeys requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetSessionKeys requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetSessionKeys requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
   }
 
   public static class APIRequestCreateStagingResource extends APIRequest<User> {
@@ -26870,47 +27312,6 @@ public class User extends APINode {
       return this;
     }
 
-  }
-
-  public static enum EnumTasks {
-      @SerializedName("ADVERTISE")
-      VALUE_ADVERTISE("ADVERTISE"),
-      @SerializedName("ANALYZE")
-      VALUE_ANALYZE("ANALYZE"),
-      @SerializedName("CREATE_CONTENT")
-      VALUE_CREATE_CONTENT("CREATE_CONTENT"),
-      @SerializedName("MANAGE")
-      VALUE_MANAGE("MANAGE"),
-      @SerializedName("MANAGE_JOBS")
-      VALUE_MANAGE_JOBS("MANAGE_JOBS"),
-      @SerializedName("MANAGE_LEADS")
-      VALUE_MANAGE_LEADS("MANAGE_LEADS"),
-      @SerializedName("MODERATE")
-      VALUE_MODERATE("MODERATE"),
-      @SerializedName("MODERATE_COMMUNITY")
-      VALUE_MODERATE_COMMUNITY("MODERATE_COMMUNITY"),
-      @SerializedName("PAGES_MESSAGING")
-      VALUE_PAGES_MESSAGING("PAGES_MESSAGING"),
-      @SerializedName("PAGES_MESSAGING_SUBSCRIPTIONS")
-      VALUE_PAGES_MESSAGING_SUBSCRIPTIONS("PAGES_MESSAGING_SUBSCRIPTIONS"),
-      @SerializedName("PLATFORM_MANAGE_PAGES")
-      VALUE_PLATFORM_MANAGE_PAGES("PLATFORM_MANAGE_PAGES"),
-      @SerializedName("READ_PAGE_MAILBOXES")
-      VALUE_READ_PAGE_MAILBOXES("READ_PAGE_MAILBOXES"),
-      @SerializedName("VIEW_MONETIZATION_INSIGHTS")
-      VALUE_VIEW_MONETIZATION_INSIGHTS("VIEW_MONETIZATION_INSIGHTS"),
-      NULL(null);
-
-      private String value;
-
-      private EnumTasks(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
   }
 
   public static enum EnumLocalNewsMegaphoneDismissStatus {

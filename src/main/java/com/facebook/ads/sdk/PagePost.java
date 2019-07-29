@@ -388,6 +388,10 @@ public class PagePost extends APINode {
     return new APIRequestGetDynamicPosts(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetEditActions getEditActions() {
+    return new APIRequestGetEditActions(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetInsights getInsights() {
     return new APIRequestGetInsights(this.getPrefixedId().toString(), context);
   }
@@ -420,8 +424,16 @@ public class PagePost extends APINode {
     return new APIRequestGetSharedPosts(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetSponsorTags getSponsorTags() {
+    return new APIRequestGetSponsorTags(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetTo getTo() {
     return new APIRequestGetTo(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetWithTags getWithTags() {
+    return new APIRequestGetWithTags(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestDelete delete() {
@@ -1463,6 +1475,110 @@ public class PagePost extends APINode {
       this.requestField("title", value);
       return this;
     }
+  }
+
+  public static class APIRequestGetEditActions extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetEditActions.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetEditActions(String nodeId, APIContext context) {
+      super(context, nodeId, "/edit_actions", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetEditActions setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetEditActions setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetEditActions requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetEditActions requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetEditActions requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetEditActions requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetEditActions requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetEditActions requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetInsights extends APIRequest<InsightsResult> {
@@ -3577,6 +3693,1238 @@ public class PagePost extends APINode {
     }
   }
 
+  public static class APIRequestGetSponsorTags extends APIRequest<Page> {
+
+    APINodeList<Page> lastResponse = null;
+    @Override
+    public APINodeList<Page> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "about",
+      "access_token",
+      "ad_campaign",
+      "affiliation",
+      "app_id",
+      "app_links",
+      "artists_we_like",
+      "attire",
+      "awards",
+      "band_interests",
+      "band_members",
+      "best_page",
+      "bio",
+      "birthday",
+      "booking_agent",
+      "built",
+      "business",
+      "can_checkin",
+      "can_post",
+      "category",
+      "category_list",
+      "checkins",
+      "company_overview",
+      "connected_instagram_account",
+      "contact_address",
+      "copyright_whitelisted_ig_partners",
+      "country_page_likes",
+      "cover",
+      "culinary_team",
+      "current_location",
+      "description",
+      "description_html",
+      "directed_by",
+      "display_subtext",
+      "displayed_message_response_time",
+      "emails",
+      "engagement",
+      "fan_count",
+      "featured_video",
+      "features",
+      "food_styles",
+      "founded",
+      "general_info",
+      "general_manager",
+      "genre",
+      "global_brand_page_name",
+      "global_brand_root_id",
+      "has_added_app",
+      "has_whatsapp_business_number",
+      "has_whatsapp_number",
+      "hometown",
+      "hours",
+      "id",
+      "impressum",
+      "influences",
+      "instagram_business_account",
+      "instant_articles_review_status",
+      "is_always_open",
+      "is_chain",
+      "is_community_page",
+      "is_eligible_for_branded_content",
+      "is_messenger_bot_get_started_enabled",
+      "is_messenger_platform_bot",
+      "is_owned",
+      "is_permanently_closed",
+      "is_published",
+      "is_unclaimed",
+      "is_verified",
+      "is_webhooks_subscribed",
+      "keywords",
+      "leadgen_form_preview_details",
+      "leadgen_has_crm_integration",
+      "leadgen_has_fat_ping_crm_integration",
+      "leadgen_tos_acceptance_time",
+      "leadgen_tos_accepted",
+      "leadgen_tos_accepting_user",
+      "link",
+      "location",
+      "members",
+      "merchant_id",
+      "merchant_review_status",
+      "messenger_ads_default_icebreakers",
+      "messenger_ads_default_page_welcome_message",
+      "messenger_ads_default_quick_replies",
+      "messenger_ads_quick_replies_type",
+      "mission",
+      "mpg",
+      "name",
+      "name_with_location_descriptor",
+      "network",
+      "new_like_count",
+      "offer_eligible",
+      "overall_star_rating",
+      "page_about_story",
+      "page_token",
+      "parent_page",
+      "parking",
+      "payment_options",
+      "personal_info",
+      "personal_interests",
+      "pharma_safety_info",
+      "phone",
+      "place_type",
+      "plot_outline",
+      "preferred_audience",
+      "press_contact",
+      "price_range",
+      "privacy_info_url",
+      "produced_by",
+      "products",
+      "promotion_eligible",
+      "promotion_ineligible_reason",
+      "public_transit",
+      "rating_count",
+      "recipient",
+      "record_label",
+      "release_date",
+      "restaurant_services",
+      "restaurant_specialties",
+      "schedule",
+      "screenplay_by",
+      "season",
+      "single_line_address",
+      "starring",
+      "start_info",
+      "store_code",
+      "store_location_descriptor",
+      "store_number",
+      "studio",
+      "supports_instant_articles",
+      "talking_about_count",
+      "unread_message_count",
+      "unread_notif_count",
+      "unseen_message_count",
+      "username",
+      "verification_status",
+      "voip_info",
+      "website",
+      "were_here_count",
+      "whatsapp_number",
+      "written_by",
+    };
+
+    @Override
+    public APINodeList<Page> parseResponse(String response, String header) throws APIException {
+      return Page.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<Page> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<Page> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<Page>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<Page>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<Page>>() {
+           public APINodeList<Page> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetSponsorTags.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetSponsorTags(String nodeId, APIContext context) {
+      super(context, nodeId, "/sponsor_tags", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetSponsorTags setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSponsorTags setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetSponsorTags requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetSponsorTags requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSponsorTags requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetSponsorTags requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSponsorTags requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSponsorTags requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetSponsorTags requestAboutField () {
+      return this.requestAboutField(true);
+    }
+    public APIRequestGetSponsorTags requestAboutField (boolean value) {
+      this.requestField("about", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestAccessTokenField () {
+      return this.requestAccessTokenField(true);
+    }
+    public APIRequestGetSponsorTags requestAccessTokenField (boolean value) {
+      this.requestField("access_token", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestAdCampaignField () {
+      return this.requestAdCampaignField(true);
+    }
+    public APIRequestGetSponsorTags requestAdCampaignField (boolean value) {
+      this.requestField("ad_campaign", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestAffiliationField () {
+      return this.requestAffiliationField(true);
+    }
+    public APIRequestGetSponsorTags requestAffiliationField (boolean value) {
+      this.requestField("affiliation", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestAppIdField () {
+      return this.requestAppIdField(true);
+    }
+    public APIRequestGetSponsorTags requestAppIdField (boolean value) {
+      this.requestField("app_id", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestAppLinksField () {
+      return this.requestAppLinksField(true);
+    }
+    public APIRequestGetSponsorTags requestAppLinksField (boolean value) {
+      this.requestField("app_links", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestArtistsWeLikeField () {
+      return this.requestArtistsWeLikeField(true);
+    }
+    public APIRequestGetSponsorTags requestArtistsWeLikeField (boolean value) {
+      this.requestField("artists_we_like", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestAttireField () {
+      return this.requestAttireField(true);
+    }
+    public APIRequestGetSponsorTags requestAttireField (boolean value) {
+      this.requestField("attire", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestAwardsField () {
+      return this.requestAwardsField(true);
+    }
+    public APIRequestGetSponsorTags requestAwardsField (boolean value) {
+      this.requestField("awards", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestBandInterestsField () {
+      return this.requestBandInterestsField(true);
+    }
+    public APIRequestGetSponsorTags requestBandInterestsField (boolean value) {
+      this.requestField("band_interests", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestBandMembersField () {
+      return this.requestBandMembersField(true);
+    }
+    public APIRequestGetSponsorTags requestBandMembersField (boolean value) {
+      this.requestField("band_members", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestBestPageField () {
+      return this.requestBestPageField(true);
+    }
+    public APIRequestGetSponsorTags requestBestPageField (boolean value) {
+      this.requestField("best_page", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestBioField () {
+      return this.requestBioField(true);
+    }
+    public APIRequestGetSponsorTags requestBioField (boolean value) {
+      this.requestField("bio", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestBirthdayField () {
+      return this.requestBirthdayField(true);
+    }
+    public APIRequestGetSponsorTags requestBirthdayField (boolean value) {
+      this.requestField("birthday", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestBookingAgentField () {
+      return this.requestBookingAgentField(true);
+    }
+    public APIRequestGetSponsorTags requestBookingAgentField (boolean value) {
+      this.requestField("booking_agent", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestBuiltField () {
+      return this.requestBuiltField(true);
+    }
+    public APIRequestGetSponsorTags requestBuiltField (boolean value) {
+      this.requestField("built", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestBusinessField () {
+      return this.requestBusinessField(true);
+    }
+    public APIRequestGetSponsorTags requestBusinessField (boolean value) {
+      this.requestField("business", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestCanCheckinField () {
+      return this.requestCanCheckinField(true);
+    }
+    public APIRequestGetSponsorTags requestCanCheckinField (boolean value) {
+      this.requestField("can_checkin", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestCanPostField () {
+      return this.requestCanPostField(true);
+    }
+    public APIRequestGetSponsorTags requestCanPostField (boolean value) {
+      this.requestField("can_post", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestCategoryField () {
+      return this.requestCategoryField(true);
+    }
+    public APIRequestGetSponsorTags requestCategoryField (boolean value) {
+      this.requestField("category", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestCategoryListField () {
+      return this.requestCategoryListField(true);
+    }
+    public APIRequestGetSponsorTags requestCategoryListField (boolean value) {
+      this.requestField("category_list", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestCheckinsField () {
+      return this.requestCheckinsField(true);
+    }
+    public APIRequestGetSponsorTags requestCheckinsField (boolean value) {
+      this.requestField("checkins", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestCompanyOverviewField () {
+      return this.requestCompanyOverviewField(true);
+    }
+    public APIRequestGetSponsorTags requestCompanyOverviewField (boolean value) {
+      this.requestField("company_overview", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestConnectedInstagramAccountField () {
+      return this.requestConnectedInstagramAccountField(true);
+    }
+    public APIRequestGetSponsorTags requestConnectedInstagramAccountField (boolean value) {
+      this.requestField("connected_instagram_account", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestContactAddressField () {
+      return this.requestContactAddressField(true);
+    }
+    public APIRequestGetSponsorTags requestContactAddressField (boolean value) {
+      this.requestField("contact_address", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestCopyrightWhitelistedIgPartnersField () {
+      return this.requestCopyrightWhitelistedIgPartnersField(true);
+    }
+    public APIRequestGetSponsorTags requestCopyrightWhitelistedIgPartnersField (boolean value) {
+      this.requestField("copyright_whitelisted_ig_partners", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestCountryPageLikesField () {
+      return this.requestCountryPageLikesField(true);
+    }
+    public APIRequestGetSponsorTags requestCountryPageLikesField (boolean value) {
+      this.requestField("country_page_likes", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestCoverField () {
+      return this.requestCoverField(true);
+    }
+    public APIRequestGetSponsorTags requestCoverField (boolean value) {
+      this.requestField("cover", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestCulinaryTeamField () {
+      return this.requestCulinaryTeamField(true);
+    }
+    public APIRequestGetSponsorTags requestCulinaryTeamField (boolean value) {
+      this.requestField("culinary_team", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestCurrentLocationField () {
+      return this.requestCurrentLocationField(true);
+    }
+    public APIRequestGetSponsorTags requestCurrentLocationField (boolean value) {
+      this.requestField("current_location", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetSponsorTags requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestDescriptionHtmlField () {
+      return this.requestDescriptionHtmlField(true);
+    }
+    public APIRequestGetSponsorTags requestDescriptionHtmlField (boolean value) {
+      this.requestField("description_html", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestDirectedByField () {
+      return this.requestDirectedByField(true);
+    }
+    public APIRequestGetSponsorTags requestDirectedByField (boolean value) {
+      this.requestField("directed_by", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestDisplaySubtextField () {
+      return this.requestDisplaySubtextField(true);
+    }
+    public APIRequestGetSponsorTags requestDisplaySubtextField (boolean value) {
+      this.requestField("display_subtext", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestDisplayedMessageResponseTimeField () {
+      return this.requestDisplayedMessageResponseTimeField(true);
+    }
+    public APIRequestGetSponsorTags requestDisplayedMessageResponseTimeField (boolean value) {
+      this.requestField("displayed_message_response_time", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestEmailsField () {
+      return this.requestEmailsField(true);
+    }
+    public APIRequestGetSponsorTags requestEmailsField (boolean value) {
+      this.requestField("emails", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestEngagementField () {
+      return this.requestEngagementField(true);
+    }
+    public APIRequestGetSponsorTags requestEngagementField (boolean value) {
+      this.requestField("engagement", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestFanCountField () {
+      return this.requestFanCountField(true);
+    }
+    public APIRequestGetSponsorTags requestFanCountField (boolean value) {
+      this.requestField("fan_count", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestFeaturedVideoField () {
+      return this.requestFeaturedVideoField(true);
+    }
+    public APIRequestGetSponsorTags requestFeaturedVideoField (boolean value) {
+      this.requestField("featured_video", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestFeaturesField () {
+      return this.requestFeaturesField(true);
+    }
+    public APIRequestGetSponsorTags requestFeaturesField (boolean value) {
+      this.requestField("features", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestFoodStylesField () {
+      return this.requestFoodStylesField(true);
+    }
+    public APIRequestGetSponsorTags requestFoodStylesField (boolean value) {
+      this.requestField("food_styles", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestFoundedField () {
+      return this.requestFoundedField(true);
+    }
+    public APIRequestGetSponsorTags requestFoundedField (boolean value) {
+      this.requestField("founded", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestGeneralInfoField () {
+      return this.requestGeneralInfoField(true);
+    }
+    public APIRequestGetSponsorTags requestGeneralInfoField (boolean value) {
+      this.requestField("general_info", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestGeneralManagerField () {
+      return this.requestGeneralManagerField(true);
+    }
+    public APIRequestGetSponsorTags requestGeneralManagerField (boolean value) {
+      this.requestField("general_manager", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestGenreField () {
+      return this.requestGenreField(true);
+    }
+    public APIRequestGetSponsorTags requestGenreField (boolean value) {
+      this.requestField("genre", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestGlobalBrandPageNameField () {
+      return this.requestGlobalBrandPageNameField(true);
+    }
+    public APIRequestGetSponsorTags requestGlobalBrandPageNameField (boolean value) {
+      this.requestField("global_brand_page_name", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestGlobalBrandRootIdField () {
+      return this.requestGlobalBrandRootIdField(true);
+    }
+    public APIRequestGetSponsorTags requestGlobalBrandRootIdField (boolean value) {
+      this.requestField("global_brand_root_id", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestHasAddedAppField () {
+      return this.requestHasAddedAppField(true);
+    }
+    public APIRequestGetSponsorTags requestHasAddedAppField (boolean value) {
+      this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestHasWhatsappBusinessNumberField () {
+      return this.requestHasWhatsappBusinessNumberField(true);
+    }
+    public APIRequestGetSponsorTags requestHasWhatsappBusinessNumberField (boolean value) {
+      this.requestField("has_whatsapp_business_number", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestHasWhatsappNumberField () {
+      return this.requestHasWhatsappNumberField(true);
+    }
+    public APIRequestGetSponsorTags requestHasWhatsappNumberField (boolean value) {
+      this.requestField("has_whatsapp_number", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestHometownField () {
+      return this.requestHometownField(true);
+    }
+    public APIRequestGetSponsorTags requestHometownField (boolean value) {
+      this.requestField("hometown", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestHoursField () {
+      return this.requestHoursField(true);
+    }
+    public APIRequestGetSponsorTags requestHoursField (boolean value) {
+      this.requestField("hours", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetSponsorTags requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestImpressumField () {
+      return this.requestImpressumField(true);
+    }
+    public APIRequestGetSponsorTags requestImpressumField (boolean value) {
+      this.requestField("impressum", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestInfluencesField () {
+      return this.requestInfluencesField(true);
+    }
+    public APIRequestGetSponsorTags requestInfluencesField (boolean value) {
+      this.requestField("influences", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestInstagramBusinessAccountField () {
+      return this.requestInstagramBusinessAccountField(true);
+    }
+    public APIRequestGetSponsorTags requestInstagramBusinessAccountField (boolean value) {
+      this.requestField("instagram_business_account", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestInstantArticlesReviewStatusField () {
+      return this.requestInstantArticlesReviewStatusField(true);
+    }
+    public APIRequestGetSponsorTags requestInstantArticlesReviewStatusField (boolean value) {
+      this.requestField("instant_articles_review_status", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestIsAlwaysOpenField () {
+      return this.requestIsAlwaysOpenField(true);
+    }
+    public APIRequestGetSponsorTags requestIsAlwaysOpenField (boolean value) {
+      this.requestField("is_always_open", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestIsChainField () {
+      return this.requestIsChainField(true);
+    }
+    public APIRequestGetSponsorTags requestIsChainField (boolean value) {
+      this.requestField("is_chain", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestIsCommunityPageField () {
+      return this.requestIsCommunityPageField(true);
+    }
+    public APIRequestGetSponsorTags requestIsCommunityPageField (boolean value) {
+      this.requestField("is_community_page", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestIsEligibleForBrandedContentField () {
+      return this.requestIsEligibleForBrandedContentField(true);
+    }
+    public APIRequestGetSponsorTags requestIsEligibleForBrandedContentField (boolean value) {
+      this.requestField("is_eligible_for_branded_content", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestIsMessengerBotGetStartedEnabledField () {
+      return this.requestIsMessengerBotGetStartedEnabledField(true);
+    }
+    public APIRequestGetSponsorTags requestIsMessengerBotGetStartedEnabledField (boolean value) {
+      this.requestField("is_messenger_bot_get_started_enabled", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestIsMessengerPlatformBotField () {
+      return this.requestIsMessengerPlatformBotField(true);
+    }
+    public APIRequestGetSponsorTags requestIsMessengerPlatformBotField (boolean value) {
+      this.requestField("is_messenger_platform_bot", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestIsOwnedField () {
+      return this.requestIsOwnedField(true);
+    }
+    public APIRequestGetSponsorTags requestIsOwnedField (boolean value) {
+      this.requestField("is_owned", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestIsPermanentlyClosedField () {
+      return this.requestIsPermanentlyClosedField(true);
+    }
+    public APIRequestGetSponsorTags requestIsPermanentlyClosedField (boolean value) {
+      this.requestField("is_permanently_closed", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestIsPublishedField () {
+      return this.requestIsPublishedField(true);
+    }
+    public APIRequestGetSponsorTags requestIsPublishedField (boolean value) {
+      this.requestField("is_published", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestIsUnclaimedField () {
+      return this.requestIsUnclaimedField(true);
+    }
+    public APIRequestGetSponsorTags requestIsUnclaimedField (boolean value) {
+      this.requestField("is_unclaimed", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestIsVerifiedField () {
+      return this.requestIsVerifiedField(true);
+    }
+    public APIRequestGetSponsorTags requestIsVerifiedField (boolean value) {
+      this.requestField("is_verified", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestIsWebhooksSubscribedField () {
+      return this.requestIsWebhooksSubscribedField(true);
+    }
+    public APIRequestGetSponsorTags requestIsWebhooksSubscribedField (boolean value) {
+      this.requestField("is_webhooks_subscribed", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestKeywordsField () {
+      return this.requestKeywordsField(true);
+    }
+    public APIRequestGetSponsorTags requestKeywordsField (boolean value) {
+      this.requestField("keywords", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestLeadgenFormPreviewDetailsField () {
+      return this.requestLeadgenFormPreviewDetailsField(true);
+    }
+    public APIRequestGetSponsorTags requestLeadgenFormPreviewDetailsField (boolean value) {
+      this.requestField("leadgen_form_preview_details", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestLeadgenHasCrmIntegrationField () {
+      return this.requestLeadgenHasCrmIntegrationField(true);
+    }
+    public APIRequestGetSponsorTags requestLeadgenHasCrmIntegrationField (boolean value) {
+      this.requestField("leadgen_has_crm_integration", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestLeadgenHasFatPingCrmIntegrationField () {
+      return this.requestLeadgenHasFatPingCrmIntegrationField(true);
+    }
+    public APIRequestGetSponsorTags requestLeadgenHasFatPingCrmIntegrationField (boolean value) {
+      this.requestField("leadgen_has_fat_ping_crm_integration", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestLeadgenTosAcceptanceTimeField () {
+      return this.requestLeadgenTosAcceptanceTimeField(true);
+    }
+    public APIRequestGetSponsorTags requestLeadgenTosAcceptanceTimeField (boolean value) {
+      this.requestField("leadgen_tos_acceptance_time", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestLeadgenTosAcceptedField () {
+      return this.requestLeadgenTosAcceptedField(true);
+    }
+    public APIRequestGetSponsorTags requestLeadgenTosAcceptedField (boolean value) {
+      this.requestField("leadgen_tos_accepted", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestLeadgenTosAcceptingUserField () {
+      return this.requestLeadgenTosAcceptingUserField(true);
+    }
+    public APIRequestGetSponsorTags requestLeadgenTosAcceptingUserField (boolean value) {
+      this.requestField("leadgen_tos_accepting_user", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestLinkField () {
+      return this.requestLinkField(true);
+    }
+    public APIRequestGetSponsorTags requestLinkField (boolean value) {
+      this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestLocationField () {
+      return this.requestLocationField(true);
+    }
+    public APIRequestGetSponsorTags requestLocationField (boolean value) {
+      this.requestField("location", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestMembersField () {
+      return this.requestMembersField(true);
+    }
+    public APIRequestGetSponsorTags requestMembersField (boolean value) {
+      this.requestField("members", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestMerchantIdField () {
+      return this.requestMerchantIdField(true);
+    }
+    public APIRequestGetSponsorTags requestMerchantIdField (boolean value) {
+      this.requestField("merchant_id", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestMerchantReviewStatusField () {
+      return this.requestMerchantReviewStatusField(true);
+    }
+    public APIRequestGetSponsorTags requestMerchantReviewStatusField (boolean value) {
+      this.requestField("merchant_review_status", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestMessengerAdsDefaultIcebreakersField () {
+      return this.requestMessengerAdsDefaultIcebreakersField(true);
+    }
+    public APIRequestGetSponsorTags requestMessengerAdsDefaultIcebreakersField (boolean value) {
+      this.requestField("messenger_ads_default_icebreakers", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestMessengerAdsDefaultPageWelcomeMessageField () {
+      return this.requestMessengerAdsDefaultPageWelcomeMessageField(true);
+    }
+    public APIRequestGetSponsorTags requestMessengerAdsDefaultPageWelcomeMessageField (boolean value) {
+      this.requestField("messenger_ads_default_page_welcome_message", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestMessengerAdsDefaultQuickRepliesField () {
+      return this.requestMessengerAdsDefaultQuickRepliesField(true);
+    }
+    public APIRequestGetSponsorTags requestMessengerAdsDefaultQuickRepliesField (boolean value) {
+      this.requestField("messenger_ads_default_quick_replies", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestMessengerAdsQuickRepliesTypeField () {
+      return this.requestMessengerAdsQuickRepliesTypeField(true);
+    }
+    public APIRequestGetSponsorTags requestMessengerAdsQuickRepliesTypeField (boolean value) {
+      this.requestField("messenger_ads_quick_replies_type", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestMissionField () {
+      return this.requestMissionField(true);
+    }
+    public APIRequestGetSponsorTags requestMissionField (boolean value) {
+      this.requestField("mission", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestMpgField () {
+      return this.requestMpgField(true);
+    }
+    public APIRequestGetSponsorTags requestMpgField (boolean value) {
+      this.requestField("mpg", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetSponsorTags requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestNameWithLocationDescriptorField () {
+      return this.requestNameWithLocationDescriptorField(true);
+    }
+    public APIRequestGetSponsorTags requestNameWithLocationDescriptorField (boolean value) {
+      this.requestField("name_with_location_descriptor", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestNetworkField () {
+      return this.requestNetworkField(true);
+    }
+    public APIRequestGetSponsorTags requestNetworkField (boolean value) {
+      this.requestField("network", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestNewLikeCountField () {
+      return this.requestNewLikeCountField(true);
+    }
+    public APIRequestGetSponsorTags requestNewLikeCountField (boolean value) {
+      this.requestField("new_like_count", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestOfferEligibleField () {
+      return this.requestOfferEligibleField(true);
+    }
+    public APIRequestGetSponsorTags requestOfferEligibleField (boolean value) {
+      this.requestField("offer_eligible", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestOverallStarRatingField () {
+      return this.requestOverallStarRatingField(true);
+    }
+    public APIRequestGetSponsorTags requestOverallStarRatingField (boolean value) {
+      this.requestField("overall_star_rating", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetSponsorTags requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPageTokenField () {
+      return this.requestPageTokenField(true);
+    }
+    public APIRequestGetSponsorTags requestPageTokenField (boolean value) {
+      this.requestField("page_token", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestParentPageField () {
+      return this.requestParentPageField(true);
+    }
+    public APIRequestGetSponsorTags requestParentPageField (boolean value) {
+      this.requestField("parent_page", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestParkingField () {
+      return this.requestParkingField(true);
+    }
+    public APIRequestGetSponsorTags requestParkingField (boolean value) {
+      this.requestField("parking", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPaymentOptionsField () {
+      return this.requestPaymentOptionsField(true);
+    }
+    public APIRequestGetSponsorTags requestPaymentOptionsField (boolean value) {
+      this.requestField("payment_options", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPersonalInfoField () {
+      return this.requestPersonalInfoField(true);
+    }
+    public APIRequestGetSponsorTags requestPersonalInfoField (boolean value) {
+      this.requestField("personal_info", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPersonalInterestsField () {
+      return this.requestPersonalInterestsField(true);
+    }
+    public APIRequestGetSponsorTags requestPersonalInterestsField (boolean value) {
+      this.requestField("personal_interests", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPharmaSafetyInfoField () {
+      return this.requestPharmaSafetyInfoField(true);
+    }
+    public APIRequestGetSponsorTags requestPharmaSafetyInfoField (boolean value) {
+      this.requestField("pharma_safety_info", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPhoneField () {
+      return this.requestPhoneField(true);
+    }
+    public APIRequestGetSponsorTags requestPhoneField (boolean value) {
+      this.requestField("phone", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPlaceTypeField () {
+      return this.requestPlaceTypeField(true);
+    }
+    public APIRequestGetSponsorTags requestPlaceTypeField (boolean value) {
+      this.requestField("place_type", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPlotOutlineField () {
+      return this.requestPlotOutlineField(true);
+    }
+    public APIRequestGetSponsorTags requestPlotOutlineField (boolean value) {
+      this.requestField("plot_outline", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPreferredAudienceField () {
+      return this.requestPreferredAudienceField(true);
+    }
+    public APIRequestGetSponsorTags requestPreferredAudienceField (boolean value) {
+      this.requestField("preferred_audience", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPressContactField () {
+      return this.requestPressContactField(true);
+    }
+    public APIRequestGetSponsorTags requestPressContactField (boolean value) {
+      this.requestField("press_contact", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPriceRangeField () {
+      return this.requestPriceRangeField(true);
+    }
+    public APIRequestGetSponsorTags requestPriceRangeField (boolean value) {
+      this.requestField("price_range", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPrivacyInfoUrlField () {
+      return this.requestPrivacyInfoUrlField(true);
+    }
+    public APIRequestGetSponsorTags requestPrivacyInfoUrlField (boolean value) {
+      this.requestField("privacy_info_url", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestProducedByField () {
+      return this.requestProducedByField(true);
+    }
+    public APIRequestGetSponsorTags requestProducedByField (boolean value) {
+      this.requestField("produced_by", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestProductsField () {
+      return this.requestProductsField(true);
+    }
+    public APIRequestGetSponsorTags requestProductsField (boolean value) {
+      this.requestField("products", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPromotionEligibleField () {
+      return this.requestPromotionEligibleField(true);
+    }
+    public APIRequestGetSponsorTags requestPromotionEligibleField (boolean value) {
+      this.requestField("promotion_eligible", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPromotionIneligibleReasonField () {
+      return this.requestPromotionIneligibleReasonField(true);
+    }
+    public APIRequestGetSponsorTags requestPromotionIneligibleReasonField (boolean value) {
+      this.requestField("promotion_ineligible_reason", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPublicTransitField () {
+      return this.requestPublicTransitField(true);
+    }
+    public APIRequestGetSponsorTags requestPublicTransitField (boolean value) {
+      this.requestField("public_transit", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestRatingCountField () {
+      return this.requestRatingCountField(true);
+    }
+    public APIRequestGetSponsorTags requestRatingCountField (boolean value) {
+      this.requestField("rating_count", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestRecipientField () {
+      return this.requestRecipientField(true);
+    }
+    public APIRequestGetSponsorTags requestRecipientField (boolean value) {
+      this.requestField("recipient", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestRecordLabelField () {
+      return this.requestRecordLabelField(true);
+    }
+    public APIRequestGetSponsorTags requestRecordLabelField (boolean value) {
+      this.requestField("record_label", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestReleaseDateField () {
+      return this.requestReleaseDateField(true);
+    }
+    public APIRequestGetSponsorTags requestReleaseDateField (boolean value) {
+      this.requestField("release_date", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestRestaurantServicesField () {
+      return this.requestRestaurantServicesField(true);
+    }
+    public APIRequestGetSponsorTags requestRestaurantServicesField (boolean value) {
+      this.requestField("restaurant_services", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestRestaurantSpecialtiesField () {
+      return this.requestRestaurantSpecialtiesField(true);
+    }
+    public APIRequestGetSponsorTags requestRestaurantSpecialtiesField (boolean value) {
+      this.requestField("restaurant_specialties", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestScheduleField () {
+      return this.requestScheduleField(true);
+    }
+    public APIRequestGetSponsorTags requestScheduleField (boolean value) {
+      this.requestField("schedule", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestScreenplayByField () {
+      return this.requestScreenplayByField(true);
+    }
+    public APIRequestGetSponsorTags requestScreenplayByField (boolean value) {
+      this.requestField("screenplay_by", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestSeasonField () {
+      return this.requestSeasonField(true);
+    }
+    public APIRequestGetSponsorTags requestSeasonField (boolean value) {
+      this.requestField("season", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestSingleLineAddressField () {
+      return this.requestSingleLineAddressField(true);
+    }
+    public APIRequestGetSponsorTags requestSingleLineAddressField (boolean value) {
+      this.requestField("single_line_address", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestStarringField () {
+      return this.requestStarringField(true);
+    }
+    public APIRequestGetSponsorTags requestStarringField (boolean value) {
+      this.requestField("starring", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestStartInfoField () {
+      return this.requestStartInfoField(true);
+    }
+    public APIRequestGetSponsorTags requestStartInfoField (boolean value) {
+      this.requestField("start_info", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestStoreCodeField () {
+      return this.requestStoreCodeField(true);
+    }
+    public APIRequestGetSponsorTags requestStoreCodeField (boolean value) {
+      this.requestField("store_code", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestStoreLocationDescriptorField () {
+      return this.requestStoreLocationDescriptorField(true);
+    }
+    public APIRequestGetSponsorTags requestStoreLocationDescriptorField (boolean value) {
+      this.requestField("store_location_descriptor", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestStoreNumberField () {
+      return this.requestStoreNumberField(true);
+    }
+    public APIRequestGetSponsorTags requestStoreNumberField (boolean value) {
+      this.requestField("store_number", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestStudioField () {
+      return this.requestStudioField(true);
+    }
+    public APIRequestGetSponsorTags requestStudioField (boolean value) {
+      this.requestField("studio", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestSupportsInstantArticlesField () {
+      return this.requestSupportsInstantArticlesField(true);
+    }
+    public APIRequestGetSponsorTags requestSupportsInstantArticlesField (boolean value) {
+      this.requestField("supports_instant_articles", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestTalkingAboutCountField () {
+      return this.requestTalkingAboutCountField(true);
+    }
+    public APIRequestGetSponsorTags requestTalkingAboutCountField (boolean value) {
+      this.requestField("talking_about_count", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestUnreadMessageCountField () {
+      return this.requestUnreadMessageCountField(true);
+    }
+    public APIRequestGetSponsorTags requestUnreadMessageCountField (boolean value) {
+      this.requestField("unread_message_count", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestUnreadNotifCountField () {
+      return this.requestUnreadNotifCountField(true);
+    }
+    public APIRequestGetSponsorTags requestUnreadNotifCountField (boolean value) {
+      this.requestField("unread_notif_count", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestUnseenMessageCountField () {
+      return this.requestUnseenMessageCountField(true);
+    }
+    public APIRequestGetSponsorTags requestUnseenMessageCountField (boolean value) {
+      this.requestField("unseen_message_count", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestUsernameField () {
+      return this.requestUsernameField(true);
+    }
+    public APIRequestGetSponsorTags requestUsernameField (boolean value) {
+      this.requestField("username", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestVerificationStatusField () {
+      return this.requestVerificationStatusField(true);
+    }
+    public APIRequestGetSponsorTags requestVerificationStatusField (boolean value) {
+      this.requestField("verification_status", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestVoipInfoField () {
+      return this.requestVoipInfoField(true);
+    }
+    public APIRequestGetSponsorTags requestVoipInfoField (boolean value) {
+      this.requestField("voip_info", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestWebsiteField () {
+      return this.requestWebsiteField(true);
+    }
+    public APIRequestGetSponsorTags requestWebsiteField (boolean value) {
+      this.requestField("website", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestWereHereCountField () {
+      return this.requestWereHereCountField(true);
+    }
+    public APIRequestGetSponsorTags requestWereHereCountField (boolean value) {
+      this.requestField("were_here_count", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestWhatsappNumberField () {
+      return this.requestWhatsappNumberField(true);
+    }
+    public APIRequestGetSponsorTags requestWhatsappNumberField (boolean value) {
+      this.requestField("whatsapp_number", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestWrittenByField () {
+      return this.requestWrittenByField(true);
+    }
+    public APIRequestGetSponsorTags requestWrittenByField (boolean value) {
+      this.requestField("written_by", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetTo extends APIRequest<Profile> {
 
     APINodeList<Profile> lastResponse = null;
@@ -3764,6 +5112,198 @@ public class PagePost extends APINode {
       return this.requestUsernameField(true);
     }
     public APIRequestGetTo requestUsernameField (boolean value) {
+      this.requestField("username", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetWithTags extends APIRequest<Profile> {
+
+    APINodeList<Profile> lastResponse = null;
+    @Override
+    public APINodeList<Profile> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "can_post",
+      "id",
+      "link",
+      "name",
+      "pic",
+      "pic_crop",
+      "pic_large",
+      "pic_small",
+      "pic_square",
+      "profile_type",
+      "username",
+    };
+
+    @Override
+    public APINodeList<Profile> parseResponse(String response, String header) throws APIException {
+      return Profile.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<Profile> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<Profile> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<Profile>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<Profile>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<Profile>>() {
+           public APINodeList<Profile> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetWithTags.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetWithTags(String nodeId, APIContext context) {
+      super(context, nodeId, "/with_tags", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetWithTags setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetWithTags setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetWithTags requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetWithTags requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetWithTags requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetWithTags requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetWithTags requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetWithTags requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetWithTags requestCanPostField () {
+      return this.requestCanPostField(true);
+    }
+    public APIRequestGetWithTags requestCanPostField (boolean value) {
+      this.requestField("can_post", value);
+      return this;
+    }
+    public APIRequestGetWithTags requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetWithTags requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetWithTags requestLinkField () {
+      return this.requestLinkField(true);
+    }
+    public APIRequestGetWithTags requestLinkField (boolean value) {
+      this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGetWithTags requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetWithTags requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetWithTags requestPicField () {
+      return this.requestPicField(true);
+    }
+    public APIRequestGetWithTags requestPicField (boolean value) {
+      this.requestField("pic", value);
+      return this;
+    }
+    public APIRequestGetWithTags requestPicCropField () {
+      return this.requestPicCropField(true);
+    }
+    public APIRequestGetWithTags requestPicCropField (boolean value) {
+      this.requestField("pic_crop", value);
+      return this;
+    }
+    public APIRequestGetWithTags requestPicLargeField () {
+      return this.requestPicLargeField(true);
+    }
+    public APIRequestGetWithTags requestPicLargeField (boolean value) {
+      this.requestField("pic_large", value);
+      return this;
+    }
+    public APIRequestGetWithTags requestPicSmallField () {
+      return this.requestPicSmallField(true);
+    }
+    public APIRequestGetWithTags requestPicSmallField (boolean value) {
+      this.requestField("pic_small", value);
+      return this;
+    }
+    public APIRequestGetWithTags requestPicSquareField () {
+      return this.requestPicSquareField(true);
+    }
+    public APIRequestGetWithTags requestPicSquareField (boolean value) {
+      this.requestField("pic_square", value);
+      return this;
+    }
+    public APIRequestGetWithTags requestProfileTypeField () {
+      return this.requestProfileTypeField(true);
+    }
+    public APIRequestGetWithTags requestProfileTypeField (boolean value) {
+      this.requestField("profile_type", value);
+      return this;
+    }
+    public APIRequestGetWithTags requestUsernameField () {
+      return this.requestUsernameField(true);
+    }
+    public APIRequestGetWithTags requestUsernameField (boolean value) {
       this.requestField("username", value);
       return this;
     }

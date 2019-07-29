@@ -593,7 +593,6 @@ public class AdReportRun extends APINode {
       "video_15_sec_watched_actions",
       "video_30_sec_watched_actions",
       "video_asset",
-      "video_avg_percent_watched_actions",
       "video_avg_time_watched_actions",
       "video_complete_watched_actions",
       "video_completed_view_or_15s_passed_actions",
@@ -602,7 +601,6 @@ public class AdReportRun extends APINode {
       "video_p25_watched_actions",
       "video_p50_watched_actions",
       "video_p75_watched_actions",
-      "video_p95_watched_actions",
       "video_play_actions",
       "video_play_curve_actions",
       "video_play_retention_0_to_15s_actions",
@@ -2189,13 +2187,6 @@ public class AdReportRun extends APINode {
       this.requestField("video_asset", value);
       return this;
     }
-    public APIRequestGetInsights requestVideoAvgPercentWatchedActionsField () {
-      return this.requestVideoAvgPercentWatchedActionsField(true);
-    }
-    public APIRequestGetInsights requestVideoAvgPercentWatchedActionsField (boolean value) {
-      this.requestField("video_avg_percent_watched_actions", value);
-      return this;
-    }
     public APIRequestGetInsights requestVideoAvgTimeWatchedActionsField () {
       return this.requestVideoAvgTimeWatchedActionsField(true);
     }
@@ -2250,13 +2241,6 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestVideoP75WatchedActionsField (boolean value) {
       this.requestField("video_p75_watched_actions", value);
-      return this;
-    }
-    public APIRequestGetInsights requestVideoP95WatchedActionsField () {
-      return this.requestVideoP95WatchedActionsField(true);
-    }
-    public APIRequestGetInsights requestVideoP95WatchedActionsField (boolean value) {
-      this.requestField("video_p95_watched_actions", value);
       return this;
     }
     public APIRequestGetInsights requestVideoPlayActionsField () {

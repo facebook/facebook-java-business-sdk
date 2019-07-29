@@ -504,6 +504,10 @@ public class Application extends APINode {
     return new APIRequestCreateAppIndexingSession(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetAppInsights getAppInsights() {
+    return new APIRequestGetAppInsights(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetAppInstalledGroups getAppInstalledGroups() {
     return new APIRequestGetAppInstalledGroups(this.getPrefixedId().toString(), context);
   }
@@ -2981,6 +2985,184 @@ public class Application extends APINode {
 
     @Override
     public APIRequestCreateAppIndexingSession requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetAppInsights extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "aggregateBy",
+      "breakdowns",
+      "ecosystem",
+      "event_name",
+      "intervals_to_aggregate",
+      "metric_key",
+      "period",
+      "since",
+      "until",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetAppInsights.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetAppInsights(String nodeId, APIContext context) {
+      super(context, nodeId, "/app_insights", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetAppInsights setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAppInsights setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetAppInsights setAggregateby (EnumAggregateby aggregateby) {
+      this.setParam("aggregateBy", aggregateby);
+      return this;
+    }
+    public APIRequestGetAppInsights setAggregateby (String aggregateby) {
+      this.setParam("aggregateBy", aggregateby);
+      return this;
+    }
+
+    public APIRequestGetAppInsights setBreakdowns (List<String> breakdowns) {
+      this.setParam("breakdowns", breakdowns);
+      return this;
+    }
+    public APIRequestGetAppInsights setBreakdowns (String breakdowns) {
+      this.setParam("breakdowns", breakdowns);
+      return this;
+    }
+
+    public APIRequestGetAppInsights setEcosystem (EnumEcosystem ecosystem) {
+      this.setParam("ecosystem", ecosystem);
+      return this;
+    }
+    public APIRequestGetAppInsights setEcosystem (String ecosystem) {
+      this.setParam("ecosystem", ecosystem);
+      return this;
+    }
+
+    public APIRequestGetAppInsights setEventName (String eventName) {
+      this.setParam("event_name", eventName);
+      return this;
+    }
+
+    public APIRequestGetAppInsights setIntervalsToAggregate (Long intervalsToAggregate) {
+      this.setParam("intervals_to_aggregate", intervalsToAggregate);
+      return this;
+    }
+    public APIRequestGetAppInsights setIntervalsToAggregate (String intervalsToAggregate) {
+      this.setParam("intervals_to_aggregate", intervalsToAggregate);
+      return this;
+    }
+
+    public APIRequestGetAppInsights setMetricKey (String metricKey) {
+      this.setParam("metric_key", metricKey);
+      return this;
+    }
+
+    public APIRequestGetAppInsights setPeriod (EnumPeriod period) {
+      this.setParam("period", period);
+      return this;
+    }
+    public APIRequestGetAppInsights setPeriod (String period) {
+      this.setParam("period", period);
+      return this;
+    }
+
+    public APIRequestGetAppInsights setSince (String since) {
+      this.setParam("since", since);
+      return this;
+    }
+
+    public APIRequestGetAppInsights setUntil (String until) {
+      this.setParam("until", until);
+      return this;
+    }
+
+    public APIRequestGetAppInsights requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetAppInsights requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAppInsights requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetAppInsights requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAppInsights requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAppInsights requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -11647,6 +11829,143 @@ public class Application extends APINode {
       private String value;
 
       private EnumUserIdType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumAggregateby {
+      @SerializedName("AVERAGE_JOURNEY_LENGTH")
+      VALUE_AVERAGE_JOURNEY_LENGTH("AVERAGE_JOURNEY_LENGTH"),
+      @SerializedName("CONVERTED_JOURNEY_PERCENT")
+      VALUE_CONVERTED_JOURNEY_PERCENT("CONVERTED_JOURNEY_PERCENT"),
+      @SerializedName("COUNT")
+      VALUE_COUNT("COUNT"),
+      @SerializedName("COUNT_IDENTIFIED_USERS")
+      VALUE_COUNT_IDENTIFIED_USERS("COUNT_IDENTIFIED_USERS"),
+      @SerializedName("COUNT_PER_USER")
+      VALUE_COUNT_PER_USER("COUNT_PER_USER"),
+      @SerializedName("DAU")
+      VALUE_DAU("DAU"),
+      @SerializedName("EVENT_SOURCE_IDS")
+      VALUE_EVENT_SOURCE_IDS("EVENT_SOURCE_IDS"),
+      @SerializedName("JOURNEY_CHANNEL_INCLUSION")
+      VALUE_JOURNEY_CHANNEL_INCLUSION("JOURNEY_CHANNEL_INCLUSION"),
+      @SerializedName("JOURNEY_INCLUSION")
+      VALUE_JOURNEY_INCLUSION("JOURNEY_INCLUSION"),
+      @SerializedName("MAU")
+      VALUE_MAU("MAU"),
+      @SerializedName("MEDIAN_JOURNEY_LENGTH")
+      VALUE_MEDIAN_JOURNEY_LENGTH("MEDIAN_JOURNEY_LENGTH"),
+      @SerializedName("MEDIAN_VALUE")
+      VALUE_MEDIAN_VALUE("MEDIAN_VALUE"),
+      @SerializedName("MEDIAN_VALUE_PER_USER")
+      VALUE_MEDIAN_VALUE_PER_USER("MEDIAN_VALUE_PER_USER"),
+      @SerializedName("OVERLAP")
+      VALUE_OVERLAP("OVERLAP"),
+      @SerializedName("PERCENTILES_COUNT")
+      VALUE_PERCENTILES_COUNT("PERCENTILES_COUNT"),
+      @SerializedName("PERCENTILES_USD_VALUE")
+      VALUE_PERCENTILES_USD_VALUE("PERCENTILES_USD_VALUE"),
+      @SerializedName("PERCENTILES_VALUE")
+      VALUE_PERCENTILES_VALUE("PERCENTILES_VALUE"),
+      @SerializedName("SCORE")
+      VALUE_SCORE("SCORE"),
+      @SerializedName("SESSIONS_PER_JOURNEY")
+      VALUE_SESSIONS_PER_JOURNEY("SESSIONS_PER_JOURNEY"),
+      @SerializedName("SESSION_BOUNCE_RATE")
+      VALUE_SESSION_BOUNCE_RATE("SESSION_BOUNCE_RATE"),
+      @SerializedName("SUM")
+      VALUE_SUM("SUM"),
+      @SerializedName("SUM_IDENTIFIED_USERS")
+      VALUE_SUM_IDENTIFIED_USERS("SUM_IDENTIFIED_USERS"),
+      @SerializedName("SUM_PER_EVENT")
+      VALUE_SUM_PER_EVENT("SUM_PER_EVENT"),
+      @SerializedName("TOPK")
+      VALUE_TOPK("TOPK"),
+      @SerializedName("UNKNOWN_USERS")
+      VALUE_UNKNOWN_USERS("UNKNOWN_USERS"),
+      @SerializedName("USD_SUM")
+      VALUE_USD_SUM("USD_SUM"),
+      @SerializedName("USD_SUM_IDENTIFIED_USERS")
+      VALUE_USD_SUM_IDENTIFIED_USERS("USD_SUM_IDENTIFIED_USERS"),
+      @SerializedName("USD_SUM_PER_EVENT")
+      VALUE_USD_SUM_PER_EVENT("USD_SUM_PER_EVENT"),
+      @SerializedName("USD_SUM_PER_USER")
+      VALUE_USD_SUM_PER_USER("USD_SUM_PER_USER"),
+      @SerializedName("USD_VALUE_PER_USER")
+      VALUE_USD_VALUE_PER_USER("USD_VALUE_PER_USER"),
+      @SerializedName("USERS")
+      VALUE_USERS("USERS"),
+      @SerializedName("USER_PROPERTY_USER_COUNT")
+      VALUE_USER_PROPERTY_USER_COUNT("USER_PROPERTY_USER_COUNT"),
+      @SerializedName("VALUE_PER_USER")
+      VALUE_VALUE_PER_USER("VALUE_PER_USER"),
+      @SerializedName("WAU")
+      VALUE_WAU("WAU"),
+      NULL(null);
+
+      private String value;
+
+      private EnumAggregateby(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumEcosystem {
+      @SerializedName("GAME")
+      VALUE_GAME("GAME"),
+      @SerializedName("NON_GAME")
+      VALUE_NON_GAME("NON_GAME"),
+      NULL(null);
+
+      private String value;
+
+      private EnumEcosystem(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumPeriod {
+      @SerializedName("daily")
+      VALUE_DAILY("daily"),
+      @SerializedName("days_28")
+      VALUE_DAYS_28("days_28"),
+      @SerializedName("days_60")
+      VALUE_DAYS_60("days_60"),
+      @SerializedName("days_90")
+      VALUE_DAYS_90("days_90"),
+      @SerializedName("hourly")
+      VALUE_HOURLY("hourly"),
+      @SerializedName("lifetime")
+      VALUE_LIFETIME("lifetime"),
+      @SerializedName("mins_15")
+      VALUE_MINS_15("mins_15"),
+      @SerializedName("monthly")
+      VALUE_MONTHLY("monthly"),
+      @SerializedName("range")
+      VALUE_RANGE("range"),
+      @SerializedName("weekly")
+      VALUE_WEEKLY("weekly"),
+      NULL(null);
+
+      private String value;
+
+      private EnumPeriod(String value) {
         this.value = value;
       }
 

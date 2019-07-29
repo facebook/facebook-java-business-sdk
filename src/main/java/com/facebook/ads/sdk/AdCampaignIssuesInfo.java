@@ -61,6 +61,8 @@ public class AdCampaignIssuesInfo extends APINode {
   private String mErrorMessage = null;
   @SerializedName("error_summary")
   private String mErrorSummary = null;
+  @SerializedName("error_type")
+  private String mErrorType = null;
   @SerializedName("level")
   private String mLevel = null;
   protected static Gson gson = null;
@@ -241,6 +243,15 @@ public class AdCampaignIssuesInfo extends APINode {
     return this;
   }
 
+  public String getFieldErrorType() {
+    return mErrorType;
+  }
+
+  public AdCampaignIssuesInfo setFieldErrorType(String value) {
+    this.mErrorType = value;
+    return this;
+  }
+
   public String getFieldLevel() {
     return mLevel;
   }
@@ -270,6 +281,7 @@ public class AdCampaignIssuesInfo extends APINode {
     this.mErrorCode = instance.mErrorCode;
     this.mErrorMessage = instance.mErrorMessage;
     this.mErrorSummary = instance.mErrorSummary;
+    this.mErrorType = instance.mErrorType;
     this.mLevel = instance.mLevel;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

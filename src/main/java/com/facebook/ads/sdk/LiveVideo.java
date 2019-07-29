@@ -336,6 +336,10 @@ public class LiveVideo extends APINode {
     return new APIRequestGetErrors(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateInputStream createInputStream() {
+    return new APIRequestCreateInputStream(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetLikes getLikes() {
     return new APIRequestGetLikes(this.getPrefixedId().toString(), context);
   }
@@ -3073,6 +3077,110 @@ public class LiveVideo extends APINode {
       this.requestField("id", value);
       return this;
     }
+  }
+
+  public static class APIRequestCreateInputStream extends APIRequest<LiveVideoInputStream> {
+
+    LiveVideoInputStream lastResponse = null;
+    @Override
+    public LiveVideoInputStream getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public LiveVideoInputStream parseResponse(String response, String header) throws APIException {
+      return LiveVideoInputStream.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public LiveVideoInputStream execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public LiveVideoInputStream execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<LiveVideoInputStream> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<LiveVideoInputStream> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, LiveVideoInputStream>() {
+           public LiveVideoInputStream apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateInputStream.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateInputStream(String nodeId, APIContext context) {
+      super(context, nodeId, "/input_streams", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateInputStream setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateInputStream setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateInputStream requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateInputStream requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateInputStream requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateInputStream requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateInputStream requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateInputStream requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetLikes extends APIRequest<Profile> {

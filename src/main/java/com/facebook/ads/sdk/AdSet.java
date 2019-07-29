@@ -65,8 +65,6 @@ public class AdSet extends APINode {
   private String mAssetFeedId = null;
   @SerializedName("attribution_spec")
   private List<AttributionSpec> mAttributionSpec = null;
-  @SerializedName("best_creative")
-  private AdDynamicCreative mBestCreative = null;
   @SerializedName("bid_adjustments")
   private AdBidAdjustments mBidAdjustments = null;
   @SerializedName("bid_amount")
@@ -388,6 +386,10 @@ public class AdSet extends APINode {
     return new APIRequestGetAds(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetAsyncAdRequests getAsyncAdRequests() {
+    return new APIRequestGetAsyncAdRequests(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetCopies getCopies() {
     return new APIRequestGetCopies(this.getPrefixedId().toString(), context);
   }
@@ -491,20 +493,6 @@ public class AdSet extends APINode {
   public AdSet setFieldAttributionSpec(String value) {
     Type type = new TypeToken<List<AttributionSpec>>(){}.getType();
     this.mAttributionSpec = AttributionSpec.getGson().fromJson(value, type);
-    return this;
-  }
-  public AdDynamicCreative getFieldBestCreative() {
-    return mBestCreative;
-  }
-
-  public AdSet setFieldBestCreative(AdDynamicCreative value) {
-    this.mBestCreative = value;
-    return this;
-  }
-
-  public AdSet setFieldBestCreative(String value) {
-    Type type = new TypeToken<AdDynamicCreative>(){}.getType();
-    this.mBestCreative = AdDynamicCreative.getGson().fromJson(value, type);
     return this;
   }
   public AdBidAdjustments getFieldBidAdjustments() {
@@ -2616,6 +2604,192 @@ public class AdSet extends APINode {
     }
   }
 
+  public static class APIRequestGetAsyncAdRequests extends APIRequest<AdAsyncRequest> {
+
+    APINodeList<AdAsyncRequest> lastResponse = null;
+    @Override
+    public APINodeList<AdAsyncRequest> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "statuses",
+    };
+
+    public static final String[] FIELDS = {
+      "async_request_set",
+      "created_time",
+      "id",
+      "input",
+      "result",
+      "scope_object_id",
+      "status",
+      "type",
+      "updated_time",
+    };
+
+    @Override
+    public APINodeList<AdAsyncRequest> parseResponse(String response, String header) throws APIException {
+      return AdAsyncRequest.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<AdAsyncRequest> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdAsyncRequest> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<AdAsyncRequest>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdAsyncRequest>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<AdAsyncRequest>>() {
+           public APINodeList<AdAsyncRequest> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetAsyncAdRequests.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetAsyncAdRequests(String nodeId, APIContext context) {
+      super(context, nodeId, "/asyncadrequests", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetAsyncAdRequests setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAsyncAdRequests setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetAsyncAdRequests setStatuses (List<AdAsyncRequest.EnumStatuses> statuses) {
+      this.setParam("statuses", statuses);
+      return this;
+    }
+    public APIRequestGetAsyncAdRequests setStatuses (String statuses) {
+      this.setParam("statuses", statuses);
+      return this;
+    }
+
+    public APIRequestGetAsyncAdRequests requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetAsyncAdRequests requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAsyncAdRequests requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetAsyncAdRequests requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAsyncAdRequests requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAsyncAdRequests requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetAsyncAdRequests requestAsyncRequestSetField () {
+      return this.requestAsyncRequestSetField(true);
+    }
+    public APIRequestGetAsyncAdRequests requestAsyncRequestSetField (boolean value) {
+      this.requestField("async_request_set", value);
+      return this;
+    }
+    public APIRequestGetAsyncAdRequests requestCreatedTimeField () {
+      return this.requestCreatedTimeField(true);
+    }
+    public APIRequestGetAsyncAdRequests requestCreatedTimeField (boolean value) {
+      this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGetAsyncAdRequests requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetAsyncAdRequests requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetAsyncAdRequests requestInputField () {
+      return this.requestInputField(true);
+    }
+    public APIRequestGetAsyncAdRequests requestInputField (boolean value) {
+      this.requestField("input", value);
+      return this;
+    }
+    public APIRequestGetAsyncAdRequests requestResultField () {
+      return this.requestResultField(true);
+    }
+    public APIRequestGetAsyncAdRequests requestResultField (boolean value) {
+      this.requestField("result", value);
+      return this;
+    }
+    public APIRequestGetAsyncAdRequests requestScopeObjectIdField () {
+      return this.requestScopeObjectIdField(true);
+    }
+    public APIRequestGetAsyncAdRequests requestScopeObjectIdField (boolean value) {
+      this.requestField("scope_object_id", value);
+      return this;
+    }
+    public APIRequestGetAsyncAdRequests requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetAsyncAdRequests requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGetAsyncAdRequests requestTypeField () {
+      return this.requestTypeField(true);
+    }
+    public APIRequestGetAsyncAdRequests requestTypeField (boolean value) {
+      this.requestField("type", value);
+      return this;
+    }
+    public APIRequestGetAsyncAdRequests requestUpdatedTimeField () {
+      return this.requestUpdatedTimeField(true);
+    }
+    public APIRequestGetAsyncAdRequests requestUpdatedTimeField (boolean value) {
+      this.requestField("updated_time", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetCopies extends APIRequest<AdSet> {
 
     APINodeList<AdSet> lastResponse = null;
@@ -2636,7 +2810,6 @@ public class AdSet extends APINode {
       "adset_schedule",
       "asset_feed_id",
       "attribution_spec",
-      "best_creative",
       "bid_adjustments",
       "bid_amount",
       "bid_constraints",
@@ -2843,13 +3016,6 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestAttributionSpecField (boolean value) {
       this.requestField("attribution_spec", value);
-      return this;
-    }
-    public APIRequestGetCopies requestBestCreativeField () {
-      return this.requestBestCreativeField(true);
-    }
-    public APIRequestGetCopies requestBestCreativeField (boolean value) {
-      this.requestField("best_creative", value);
       return this;
     }
     public APIRequestGetCopies requestBidAdjustmentsField () {
@@ -4588,7 +4754,6 @@ public class AdSet extends APINode {
       "adset_schedule",
       "asset_feed_id",
       "attribution_spec",
-      "best_creative",
       "bid_adjustments",
       "bid_amount",
       "bid_constraints",
@@ -4795,13 +4960,6 @@ public class AdSet extends APINode {
     }
     public APIRequestGet requestAttributionSpecField (boolean value) {
       this.requestField("attribution_spec", value);
-      return this;
-    }
-    public APIRequestGet requestBestCreativeField () {
-      return this.requestBestCreativeField(true);
-    }
-    public APIRequestGet requestBestCreativeField (boolean value) {
-      this.requestField("best_creative", value);
       return this;
     }
     public APIRequestGet requestBidAdjustmentsField () {
@@ -5991,7 +6149,6 @@ public class AdSet extends APINode {
     this.mAdsetSchedule = instance.mAdsetSchedule;
     this.mAssetFeedId = instance.mAssetFeedId;
     this.mAttributionSpec = instance.mAttributionSpec;
-    this.mBestCreative = instance.mBestCreative;
     this.mBidAdjustments = instance.mBidAdjustments;
     this.mBidAmount = instance.mBidAmount;
     this.mBidConstraints = instance.mBidConstraints;

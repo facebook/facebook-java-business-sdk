@@ -786,16 +786,8 @@ public class AdAccount extends APINode {
     return new APIRequestCreateTracking(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestDeleteUsers deleteUsers() {
-    return new APIRequestDeleteUsers(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetUsers getUsers() {
     return new APIRequestGetUsers(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateUser createUser() {
-    return new APIRequestCreateUser(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestDeleteUsersOfAnyAudience deleteUsersOfAnyAudience() {
@@ -8018,7 +8010,6 @@ public class AdAccount extends APINode {
       "adset_schedule",
       "asset_feed_id",
       "attribution_spec",
-      "best_creative",
       "bid_adjustments",
       "bid_amount",
       "bid_constraints",
@@ -8257,13 +8248,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSets requestAttributionSpecField (boolean value) {
       this.requestField("attribution_spec", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestBestCreativeField () {
-      return this.requestBestCreativeField(true);
-    }
-    public APIRequestGetAdSets requestBestCreativeField (boolean value) {
-      this.requestField("best_creative", value);
       return this;
     }
     public APIRequestGetAdSets requestBidAdjustmentsField () {
@@ -8608,7 +8592,6 @@ public class AdAccount extends APINode {
       "adset_schedule",
       "asset_feed_id",
       "attribution_spec",
-      "best_creative",
       "bid_adjustments",
       "bid_amount",
       "bid_constraints",
@@ -8797,13 +8780,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSetsByLabels requestAttributionSpecField (boolean value) {
       this.requestField("attribution_spec", value);
-      return this;
-    }
-    public APIRequestGetAdSetsByLabels requestBestCreativeField () {
-      return this.requestBestCreativeField(true);
-    }
-    public APIRequestGetAdSetsByLabels requestBestCreativeField (boolean value) {
-      this.requestField("best_creative", value);
       return this;
     }
     public APIRequestGetAdSetsByLabels requestBidAdjustmentsField () {
@@ -18279,7 +18255,6 @@ public class AdAccount extends APINode {
       "adset_schedule",
       "asset_feed_id",
       "attribution_spec",
-      "best_creative",
       "bid_adjustments",
       "bid_amount",
       "bid_constraints",
@@ -18455,13 +18430,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetDeprecatedTargetingAdSets requestAttributionSpecField (boolean value) {
       this.requestField("attribution_spec", value);
-      return this;
-    }
-    public APIRequestGetDeprecatedTargetingAdSets requestBestCreativeField () {
-      return this.requestBestCreativeField(true);
-    }
-    public APIRequestGetDeprecatedTargetingAdSets requestBestCreativeField (boolean value) {
-      this.requestField("best_creative", value);
       return this;
     }
     public APIRequestGetDeprecatedTargetingAdSets requestBidAdjustmentsField () {
@@ -26804,130 +26772,6 @@ public class AdAccount extends APINode {
 
   }
 
-  public static class APIRequestDeleteUsers extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "uid",
-      "uids",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestDeleteUsers.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestDeleteUsers(String nodeId, APIContext context) {
-      super(context, nodeId, "/users", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDeleteUsers setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteUsers setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDeleteUsers setUid (Long uid) {
-      this.setParam("uid", uid);
-      return this;
-    }
-    public APIRequestDeleteUsers setUid (String uid) {
-      this.setParam("uid", uid);
-      return this;
-    }
-
-    public APIRequestDeleteUsers setUids (List<String> uids) {
-      this.setParam("uids", uids);
-      return this;
-    }
-    public APIRequestDeleteUsers setUids (String uids) {
-      this.setParam("uids", uids);
-      return this;
-    }
-
-    public APIRequestDeleteUsers requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDeleteUsers requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteUsers requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDeleteUsers requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteUsers requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteUsers requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetUsers extends APIRequest<AdAccountUser> {
 
     APINodeList<AdAccountUser> lastResponse = null;
@@ -27054,130 +26898,6 @@ public class AdAccount extends APINode {
       this.requestField("tasks", value);
       return this;
     }
-  }
-
-  public static class APIRequestCreateUser extends APIRequest<AdAccount> {
-
-    AdAccount lastResponse = null;
-    @Override
-    public AdAccount getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "tasks",
-      "uid",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public AdAccount parseResponse(String response, String header) throws APIException {
-      return AdAccount.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public AdAccount execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdAccount execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdAccount> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdAccount> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, AdAccount>() {
-           public AdAccount apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateUser.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateUser(String nodeId, APIContext context) {
-      super(context, nodeId, "/users", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateUser setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateUser setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateUser setTasks (List<AdAccount.EnumTasks> tasks) {
-      this.setParam("tasks", tasks);
-      return this;
-    }
-    public APIRequestCreateUser setTasks (String tasks) {
-      this.setParam("tasks", tasks);
-      return this;
-    }
-
-    public APIRequestCreateUser setUid (Long uid) {
-      this.setParam("uid", uid);
-      return this;
-    }
-    public APIRequestCreateUser setUid (String uid) {
-      this.setParam("uid", uid);
-      return this;
-    }
-
-    public APIRequestCreateUser requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateUser requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateUser requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateUser requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateUser requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateUser requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestDeleteUsersOfAnyAudience extends APIRequest<APINode> {

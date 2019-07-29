@@ -54,31 +54,23 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdgroupIssuesInfo extends APINode {
-  @SerializedName("error_code")
-  private Long mErrorCode = null;
-  @SerializedName("error_message")
-  private String mErrorMessage = null;
-  @SerializedName("error_summary")
-  private String mErrorSummary = null;
-  @SerializedName("error_type")
-  private String mErrorType = null;
-  @SerializedName("level")
-  private String mLevel = null;
+public class PlatformSessionKey extends APINode {
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public AdgroupIssuesInfo() {
+  public PlatformSessionKey() {
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
-  public static AdgroupIssuesInfo loadJSON(String json, APIContext context, String header) {
-    AdgroupIssuesInfo adgroupIssuesInfo = getGson().fromJson(json, AdgroupIssuesInfo.class);
+  public static PlatformSessionKey loadJSON(String json, APIContext context, String header) {
+    PlatformSessionKey platformSessionKey = getGson().fromJson(json, PlatformSessionKey.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adgroupIssuesInfo.toString());
+      JsonElement o2 = parser.parse(platformSessionKey.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -88,14 +80,14 @@ public class AdgroupIssuesInfo extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    adgroupIssuesInfo.context = context;
-    adgroupIssuesInfo.rawValue = json;
-    adgroupIssuesInfo.header = header;
-    return adgroupIssuesInfo;
+    platformSessionKey.context = context;
+    platformSessionKey.rawValue = json;
+    platformSessionKey.header = header;
+    return platformSessionKey;
   }
 
-  public static APINodeList<AdgroupIssuesInfo> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdgroupIssuesInfo> adgroupIssuesInfos = new APINodeList<AdgroupIssuesInfo>(request, json, header);
+  public static APINodeList<PlatformSessionKey> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PlatformSessionKey> platformSessionKeys = new APINodeList<PlatformSessionKey>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -106,9 +98,9 @@ public class AdgroupIssuesInfo extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adgroupIssuesInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          platformSessionKeys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adgroupIssuesInfos;
+        return platformSessionKeys;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -118,20 +110,20 @@ public class AdgroupIssuesInfo extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adgroupIssuesInfos.setCursors(before, after);
+                platformSessionKeys.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adgroupIssuesInfos.setPaging(previous, next);
+            platformSessionKeys.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adgroupIssuesInfos.setAppSecret(context.getAppSecretProof());
+              platformSessionKeys.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adgroupIssuesInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              platformSessionKeys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -142,23 +134,23 @@ public class AdgroupIssuesInfo extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adgroupIssuesInfos.add(loadJSON(entry.getValue().toString(), context, header));
+                  platformSessionKeys.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adgroupIssuesInfos.add(loadJSON(obj.toString(), context, header));
+              platformSessionKeys.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adgroupIssuesInfos;
+          return platformSessionKeys;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adgroupIssuesInfos.add(loadJSON(entry.getValue().toString(), context, header));
+              platformSessionKeys.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adgroupIssuesInfos;
+          return platformSessionKeys;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -175,20 +167,20 @@ public class AdgroupIssuesInfo extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adgroupIssuesInfos.add(loadJSON(value.toString(), context, header));
+              platformSessionKeys.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adgroupIssuesInfos;
+            return platformSessionKeys;
           }
 
           // Sixth, check if it's pure JsonObject
-          adgroupIssuesInfos.clear();
-          adgroupIssuesInfos.add(loadJSON(json, context, header));
-          return adgroupIssuesInfos;
+          platformSessionKeys.clear();
+          platformSessionKeys.add(loadJSON(json, context, header));
+          return platformSessionKeys;
         }
       }
     } catch (Exception e) {
@@ -216,48 +208,12 @@ public class AdgroupIssuesInfo extends APINode {
   }
 
 
-  public Long getFieldErrorCode() {
-    return mErrorCode;
+  public String getFieldId() {
+    return mId;
   }
 
-  public AdgroupIssuesInfo setFieldErrorCode(Long value) {
-    this.mErrorCode = value;
-    return this;
-  }
-
-  public String getFieldErrorMessage() {
-    return mErrorMessage;
-  }
-
-  public AdgroupIssuesInfo setFieldErrorMessage(String value) {
-    this.mErrorMessage = value;
-    return this;
-  }
-
-  public String getFieldErrorSummary() {
-    return mErrorSummary;
-  }
-
-  public AdgroupIssuesInfo setFieldErrorSummary(String value) {
-    this.mErrorSummary = value;
-    return this;
-  }
-
-  public String getFieldErrorType() {
-    return mErrorType;
-  }
-
-  public AdgroupIssuesInfo setFieldErrorType(String value) {
-    this.mErrorType = value;
-    return this;
-  }
-
-  public String getFieldLevel() {
-    return mLevel;
-  }
-
-  public AdgroupIssuesInfo setFieldLevel(String value) {
-    this.mLevel = value;
+  public PlatformSessionKey setFieldId(String value) {
+    this.mId = value;
     return this;
   }
 
@@ -277,21 +233,17 @@ public class AdgroupIssuesInfo extends APINode {
     return gson;
   }
 
-  public AdgroupIssuesInfo copyFrom(AdgroupIssuesInfo instance) {
-    this.mErrorCode = instance.mErrorCode;
-    this.mErrorMessage = instance.mErrorMessage;
-    this.mErrorSummary = instance.mErrorSummary;
-    this.mErrorType = instance.mErrorType;
-    this.mLevel = instance.mLevel;
+  public PlatformSessionKey copyFrom(PlatformSessionKey instance) {
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdgroupIssuesInfo> getParser() {
-    return new APIRequest.ResponseParser<AdgroupIssuesInfo>() {
-      public APINodeList<AdgroupIssuesInfo> parseResponse(String response, APIContext context, APIRequest<AdgroupIssuesInfo> request, String header) throws MalformedResponseException {
-        return AdgroupIssuesInfo.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<PlatformSessionKey> getParser() {
+    return new APIRequest.ResponseParser<PlatformSessionKey>() {
+      public APINodeList<PlatformSessionKey> parseResponse(String response, APIContext context, APIRequest<PlatformSessionKey> request, String header) throws MalformedResponseException {
+        return PlatformSessionKey.parseResponse(response, context, request, header);
       }
     };
   }

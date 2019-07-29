@@ -1248,7 +1248,6 @@ public class AdLabel extends APINode {
       "adset_schedule",
       "asset_feed_id",
       "attribution_spec",
-      "best_creative",
       "bid_adjustments",
       "bid_amount",
       "bid_constraints",
@@ -1419,13 +1418,6 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdSets requestAttributionSpecField (boolean value) {
       this.requestField("attribution_spec", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestBestCreativeField () {
-      return this.requestBestCreativeField(true);
-    }
-    public APIRequestGetAdSets requestBestCreativeField (boolean value) {
-      this.requestField("best_creative", value);
       return this;
     }
     public APIRequestGetAdSets requestBidAdjustmentsField () {
