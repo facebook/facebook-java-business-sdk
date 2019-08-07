@@ -302,8 +302,16 @@ public class PageCallToAction extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestDelete delete() {
+    return new APIRequestDelete(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestUpdate update() {
+    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
   }
 
 
@@ -393,6 +401,110 @@ public class PageCallToAction extends APINode {
   }
 
 
+
+  public static class APIRequestDelete extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDelete(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDelete setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDelete requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDelete requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
 
   public static class APIRequestGet extends APIRequest<PageCallToAction> {
 
@@ -648,6 +760,218 @@ public class PageCallToAction extends APINode {
       this.requestField("web_url", value);
       return this;
     }
+  }
+
+  public static class APIRequestUpdate extends APIRequest<PageCallToAction> {
+
+    PageCallToAction lastResponse = null;
+    @Override
+    public PageCallToAction getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "android_app_id",
+      "android_deeplink",
+      "android_destination_type",
+      "android_package_name",
+      "android_url",
+      "email_address",
+      "intl_number_with_plus",
+      "iphone_app_id",
+      "iphone_deeplink",
+      "iphone_destination_type",
+      "iphone_url",
+      "type",
+      "web_destination_type",
+      "web_url",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public PageCallToAction parseResponse(String response, String header) throws APIException {
+      return PageCallToAction.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public PageCallToAction execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public PageCallToAction execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<PageCallToAction> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<PageCallToAction> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, PageCallToAction>() {
+           public PageCallToAction apply(ResponseWrapper result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestUpdate(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestUpdate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestUpdate setAndroidAppId (Long androidAppId) {
+      this.setParam("android_app_id", androidAppId);
+      return this;
+    }
+    public APIRequestUpdate setAndroidAppId (String androidAppId) {
+      this.setParam("android_app_id", androidAppId);
+      return this;
+    }
+
+    public APIRequestUpdate setAndroidDeeplink (String androidDeeplink) {
+      this.setParam("android_deeplink", androidDeeplink);
+      return this;
+    }
+
+    public APIRequestUpdate setAndroidDestinationType (PageCallToAction.EnumAndroidDestinationType androidDestinationType) {
+      this.setParam("android_destination_type", androidDestinationType);
+      return this;
+    }
+    public APIRequestUpdate setAndroidDestinationType (String androidDestinationType) {
+      this.setParam("android_destination_type", androidDestinationType);
+      return this;
+    }
+
+    public APIRequestUpdate setAndroidPackageName (String androidPackageName) {
+      this.setParam("android_package_name", androidPackageName);
+      return this;
+    }
+
+    public APIRequestUpdate setAndroidUrl (String androidUrl) {
+      this.setParam("android_url", androidUrl);
+      return this;
+    }
+
+    public APIRequestUpdate setEmailAddress (String emailAddress) {
+      this.setParam("email_address", emailAddress);
+      return this;
+    }
+
+    public APIRequestUpdate setIntlNumberWithPlus (String intlNumberWithPlus) {
+      this.setParam("intl_number_with_plus", intlNumberWithPlus);
+      return this;
+    }
+
+    public APIRequestUpdate setIphoneAppId (Long iphoneAppId) {
+      this.setParam("iphone_app_id", iphoneAppId);
+      return this;
+    }
+    public APIRequestUpdate setIphoneAppId (String iphoneAppId) {
+      this.setParam("iphone_app_id", iphoneAppId);
+      return this;
+    }
+
+    public APIRequestUpdate setIphoneDeeplink (String iphoneDeeplink) {
+      this.setParam("iphone_deeplink", iphoneDeeplink);
+      return this;
+    }
+
+    public APIRequestUpdate setIphoneDestinationType (PageCallToAction.EnumIphoneDestinationType iphoneDestinationType) {
+      this.setParam("iphone_destination_type", iphoneDestinationType);
+      return this;
+    }
+    public APIRequestUpdate setIphoneDestinationType (String iphoneDestinationType) {
+      this.setParam("iphone_destination_type", iphoneDestinationType);
+      return this;
+    }
+
+    public APIRequestUpdate setIphoneUrl (String iphoneUrl) {
+      this.setParam("iphone_url", iphoneUrl);
+      return this;
+    }
+
+    public APIRequestUpdate setType (PageCallToAction.EnumType type) {
+      this.setParam("type", type);
+      return this;
+    }
+    public APIRequestUpdate setType (String type) {
+      this.setParam("type", type);
+      return this;
+    }
+
+    public APIRequestUpdate setWebDestinationType (PageCallToAction.EnumWebDestinationType webDestinationType) {
+      this.setParam("web_destination_type", webDestinationType);
+      return this;
+    }
+    public APIRequestUpdate setWebDestinationType (String webDestinationType) {
+      this.setParam("web_destination_type", webDestinationType);
+      return this;
+    }
+
+    public APIRequestUpdate setWebUrl (String webUrl) {
+      this.setParam("web_url", webUrl);
+      return this;
+    }
+
+    public APIRequestUpdate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestUpdate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static enum EnumAndroidDestinationType {

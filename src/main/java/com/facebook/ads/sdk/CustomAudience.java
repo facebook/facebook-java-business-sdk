@@ -350,6 +350,10 @@ public class CustomAudience extends APINode {
     return new APIRequestGetAds(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestDeleteCapabilities deleteCapabilities() {
+    return new APIRequestDeleteCapabilities(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateCapability createCapability() {
     return new APIRequestCreateCapability(this.getPrefixedId().toString(), context);
   }
@@ -1778,6 +1782,120 @@ public class CustomAudience extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
+  }
+
+  public static class APIRequestDeleteCapabilities extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "adaccounts",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestDeleteCapabilities.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDeleteCapabilities(String nodeId, APIContext context) {
+      super(context, nodeId, "/capabilities", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDeleteCapabilities setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteCapabilities setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDeleteCapabilities setAdaccounts (List<String> adaccounts) {
+      this.setParam("adaccounts", adaccounts);
+      return this;
+    }
+    public APIRequestDeleteCapabilities setAdaccounts (String adaccounts) {
+      this.setParam("adaccounts", adaccounts);
+      return this;
+    }
+
+    public APIRequestDeleteCapabilities requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDeleteCapabilities requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteCapabilities requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDeleteCapabilities requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteCapabilities requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteCapabilities requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestCreateCapability extends APIRequest<APINode> {

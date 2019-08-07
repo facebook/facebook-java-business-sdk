@@ -4193,6 +4193,8 @@ public class ProductFeed extends APINode {
   }
 
   public static enum EnumOverrideType {
+      @SerializedName("CATALOG_SEGMENT_CUSTOMIZE_DEFAULT")
+      VALUE_CATALOG_SEGMENT_CUSTOMIZE_DEFAULT("CATALOG_SEGMENT_CUSTOMIZE_DEFAULT"),
       @SerializedName("COUNTRY")
       VALUE_COUNTRY("COUNTRY"),
       @SerializedName("LANGUAGE")

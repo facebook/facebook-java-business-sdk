@@ -2401,7 +2401,7 @@ public class ProductCatalog extends APINode {
       "errors",
       "errors_total_count",
       "handle",
-      "invalid_item_ids",
+      "ids_of_invalid_requests",
       "status",
       "warnings",
       "warnings_total_count",
@@ -2531,11 +2531,11 @@ public class ProductCatalog extends APINode {
       this.requestField("handle", value);
       return this;
     }
-    public APIRequestGetCheckBatchRequestStatus requestInvalidItemIdsField () {
-      return this.requestInvalidItemIdsField(true);
+    public APIRequestGetCheckBatchRequestStatus requestIdsOfInvalidRequestsField () {
+      return this.requestIdsOfInvalidRequestsField(true);
     }
-    public APIRequestGetCheckBatchRequestStatus requestInvalidItemIdsField (boolean value) {
-      this.requestField("invalid_item_ids", value);
+    public APIRequestGetCheckBatchRequestStatus requestIdsOfInvalidRequestsField (boolean value) {
+      this.requestField("ids_of_invalid_requests", value);
       return this;
     }
     public APIRequestGetCheckBatchRequestStatus requestStatusField () {

@@ -54,74 +54,74 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class PageChangeProposal extends APINode {
-  @SerializedName("acceptance_status")
-  private String mAcceptanceStatus = null;
-  @SerializedName("category")
-  private String mCategory = null;
-  @SerializedName("current_value")
-  private String mCurrentValue = null;
+public class BusinessAssetSharingAgreement extends APINode {
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("proposed_value")
-  private String mProposedValue = null;
-  @SerializedName("upcoming_change_info")
-  private PageUpcomingChange mUpcomingChangeInfo = null;
+  @SerializedName("initiator")
+  private Business mInitiator = null;
+  @SerializedName("recipient")
+  private Business mRecipient = null;
+  @SerializedName("relationship_type")
+  private List<String> mRelationshipType = null;
+  @SerializedName("request_status")
+  private String mRequestStatus = null;
+  @SerializedName("request_type")
+  private String mRequestType = null;
   protected static Gson gson = null;
 
-  PageChangeProposal() {
+  BusinessAssetSharingAgreement() {
   }
 
-  public PageChangeProposal(Long id, APIContext context) {
+  public BusinessAssetSharingAgreement(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public PageChangeProposal(String id, APIContext context) {
+  public BusinessAssetSharingAgreement(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public PageChangeProposal fetch() throws APIException{
-    PageChangeProposal newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public BusinessAssetSharingAgreement fetch() throws APIException{
+    BusinessAssetSharingAgreement newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static PageChangeProposal fetchById(Long id, APIContext context) throws APIException {
+  public static BusinessAssetSharingAgreement fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<PageChangeProposal> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<BusinessAssetSharingAgreement> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static PageChangeProposal fetchById(String id, APIContext context) throws APIException {
+  public static BusinessAssetSharingAgreement fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<PageChangeProposal> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<BusinessAssetSharingAgreement> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<PageChangeProposal> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<PageChangeProposal>)(
-      new APIRequest<PageChangeProposal>(context, "", "/", "GET", PageChangeProposal.getParser())
+  public static APINodeList<BusinessAssetSharingAgreement> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<BusinessAssetSharingAgreement>)(
+      new APIRequest<BusinessAssetSharingAgreement>(context, "", "/", "GET", BusinessAssetSharingAgreement.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<PageChangeProposal>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<BusinessAssetSharingAgreement>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", PageChangeProposal.getParser())
+      new APIRequest(context, "", "/", "GET", BusinessAssetSharingAgreement.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -134,12 +134,12 @@ public class PageChangeProposal extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PageChangeProposal loadJSON(String json, APIContext context, String header) {
-    PageChangeProposal pageChangeProposal = getGson().fromJson(json, PageChangeProposal.class);
+  public static BusinessAssetSharingAgreement loadJSON(String json, APIContext context, String header) {
+    BusinessAssetSharingAgreement businessAssetSharingAgreement = getGson().fromJson(json, BusinessAssetSharingAgreement.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(pageChangeProposal.toString());
+      JsonElement o2 = parser.parse(businessAssetSharingAgreement.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -149,14 +149,14 @@ public class PageChangeProposal extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    pageChangeProposal.context = context;
-    pageChangeProposal.rawValue = json;
-    pageChangeProposal.header = header;
-    return pageChangeProposal;
+    businessAssetSharingAgreement.context = context;
+    businessAssetSharingAgreement.rawValue = json;
+    businessAssetSharingAgreement.header = header;
+    return businessAssetSharingAgreement;
   }
 
-  public static APINodeList<PageChangeProposal> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<PageChangeProposal> pageChangeProposals = new APINodeList<PageChangeProposal>(request, json, header);
+  public static APINodeList<BusinessAssetSharingAgreement> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<BusinessAssetSharingAgreement> businessAssetSharingAgreements = new APINodeList<BusinessAssetSharingAgreement>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -167,9 +167,9 @@ public class PageChangeProposal extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          pageChangeProposals.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          businessAssetSharingAgreements.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return pageChangeProposals;
+        return businessAssetSharingAgreements;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -179,20 +179,20 @@ public class PageChangeProposal extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                pageChangeProposals.setCursors(before, after);
+                businessAssetSharingAgreements.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            pageChangeProposals.setPaging(previous, next);
+            businessAssetSharingAgreements.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              pageChangeProposals.setAppSecret(context.getAppSecretProof());
+              businessAssetSharingAgreements.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              pageChangeProposals.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              businessAssetSharingAgreements.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -203,23 +203,23 @@ public class PageChangeProposal extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  pageChangeProposals.add(loadJSON(entry.getValue().toString(), context, header));
+                  businessAssetSharingAgreements.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              pageChangeProposals.add(loadJSON(obj.toString(), context, header));
+              businessAssetSharingAgreements.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return pageChangeProposals;
+          return businessAssetSharingAgreements;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              pageChangeProposals.add(loadJSON(entry.getValue().toString(), context, header));
+              businessAssetSharingAgreements.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return pageChangeProposals;
+          return businessAssetSharingAgreements;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -236,20 +236,20 @@ public class PageChangeProposal extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              pageChangeProposals.add(loadJSON(value.toString(), context, header));
+              businessAssetSharingAgreements.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return pageChangeProposals;
+            return businessAssetSharingAgreements;
           }
 
           // Sixth, check if it's pure JsonObject
-          pageChangeProposals.clear();
-          pageChangeProposals.add(loadJSON(json, context, header));
-          return pageChangeProposals;
+          businessAssetSharingAgreements.clear();
+          businessAssetSharingAgreements.add(loadJSON(json, context, header));
+          return businessAssetSharingAgreements;
         }
       }
     } catch (Exception e) {
@@ -285,80 +285,83 @@ public class PageChangeProposal extends APINode {
   }
 
 
-  public String getFieldAcceptanceStatus() {
-    return mAcceptanceStatus;
-  }
-
-  public String getFieldCategory() {
-    return mCategory;
-  }
-
-  public String getFieldCurrentValue() {
-    return mCurrentValue;
-  }
-
   public String getFieldId() {
     return mId;
   }
 
-  public String getFieldProposedValue() {
-    return mProposedValue;
-  }
-
-  public PageUpcomingChange getFieldUpcomingChangeInfo() {
-    if (mUpcomingChangeInfo != null) {
-      mUpcomingChangeInfo.context = getContext();
+  public Business getFieldInitiator() {
+    if (mInitiator != null) {
+      mInitiator.context = getContext();
     }
-    return mUpcomingChangeInfo;
+    return mInitiator;
+  }
+
+  public Business getFieldRecipient() {
+    if (mRecipient != null) {
+      mRecipient.context = getContext();
+    }
+    return mRecipient;
+  }
+
+  public List<String> getFieldRelationshipType() {
+    return mRelationshipType;
+  }
+
+  public String getFieldRequestStatus() {
+    return mRequestStatus;
+  }
+
+  public String getFieldRequestType() {
+    return mRequestType;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<PageChangeProposal> {
+  public static class APIRequestGet extends APIRequest<BusinessAssetSharingAgreement> {
 
-    PageChangeProposal lastResponse = null;
+    BusinessAssetSharingAgreement lastResponse = null;
     @Override
-    public PageChangeProposal getLastResponse() {
+    public BusinessAssetSharingAgreement getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "acceptance_status",
-      "category",
-      "current_value",
       "id",
-      "proposed_value",
-      "upcoming_change_info",
+      "initiator",
+      "recipient",
+      "relationship_type",
+      "request_status",
+      "request_type",
     };
 
     @Override
-    public PageChangeProposal parseResponse(String response, String header) throws APIException {
-      return PageChangeProposal.parseResponse(response, getContext(), this, header).head();
+    public BusinessAssetSharingAgreement parseResponse(String response, String header) throws APIException {
+      return BusinessAssetSharingAgreement.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public PageChangeProposal execute() throws APIException {
+    public BusinessAssetSharingAgreement execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public PageChangeProposal execute(Map<String, Object> extraParams) throws APIException {
+    public BusinessAssetSharingAgreement execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<PageChangeProposal> executeAsync() throws APIException {
+    public ListenableFuture<BusinessAssetSharingAgreement> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<PageChangeProposal> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<BusinessAssetSharingAgreement> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, PageChangeProposal>() {
-           public PageChangeProposal apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, BusinessAssetSharingAgreement>() {
+           public BusinessAssetSharingAgreement apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -422,27 +425,6 @@ public class PageChangeProposal extends APINode {
       return this;
     }
 
-    public APIRequestGet requestAcceptanceStatusField () {
-      return this.requestAcceptanceStatusField(true);
-    }
-    public APIRequestGet requestAcceptanceStatusField (boolean value) {
-      this.requestField("acceptance_status", value);
-      return this;
-    }
-    public APIRequestGet requestCategoryField () {
-      return this.requestCategoryField(true);
-    }
-    public APIRequestGet requestCategoryField (boolean value) {
-      this.requestField("category", value);
-      return this;
-    }
-    public APIRequestGet requestCurrentValueField () {
-      return this.requestCurrentValueField(true);
-    }
-    public APIRequestGet requestCurrentValueField (boolean value) {
-      this.requestField("current_value", value);
-      return this;
-    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -450,62 +432,83 @@ public class PageChangeProposal extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestProposedValueField () {
-      return this.requestProposedValueField(true);
+    public APIRequestGet requestInitiatorField () {
+      return this.requestInitiatorField(true);
     }
-    public APIRequestGet requestProposedValueField (boolean value) {
-      this.requestField("proposed_value", value);
+    public APIRequestGet requestInitiatorField (boolean value) {
+      this.requestField("initiator", value);
       return this;
     }
-    public APIRequestGet requestUpcomingChangeInfoField () {
-      return this.requestUpcomingChangeInfoField(true);
+    public APIRequestGet requestRecipientField () {
+      return this.requestRecipientField(true);
     }
-    public APIRequestGet requestUpcomingChangeInfoField (boolean value) {
-      this.requestField("upcoming_change_info", value);
+    public APIRequestGet requestRecipientField (boolean value) {
+      this.requestField("recipient", value);
+      return this;
+    }
+    public APIRequestGet requestRelationshipTypeField () {
+      return this.requestRelationshipTypeField(true);
+    }
+    public APIRequestGet requestRelationshipTypeField (boolean value) {
+      this.requestField("relationship_type", value);
+      return this;
+    }
+    public APIRequestGet requestRequestStatusField () {
+      return this.requestRequestStatusField(true);
+    }
+    public APIRequestGet requestRequestStatusField (boolean value) {
+      this.requestField("request_status", value);
+      return this;
+    }
+    public APIRequestGet requestRequestTypeField () {
+      return this.requestRequestTypeField(true);
+    }
+    public APIRequestGet requestRequestTypeField (boolean value) {
+      this.requestField("request_type", value);
       return this;
     }
   }
 
-  public static class APIRequestUpdate extends APIRequest<PageChangeProposal> {
+  public static class APIRequestUpdate extends APIRequest<BusinessAssetSharingAgreement> {
 
-    PageChangeProposal lastResponse = null;
+    BusinessAssetSharingAgreement lastResponse = null;
     @Override
-    public PageChangeProposal getLastResponse() {
+    public BusinessAssetSharingAgreement getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "accept",
+      "request_response",
     };
 
     public static final String[] FIELDS = {
     };
 
     @Override
-    public PageChangeProposal parseResponse(String response, String header) throws APIException {
-      return PageChangeProposal.parseResponse(response, getContext(), this, header).head();
+    public BusinessAssetSharingAgreement parseResponse(String response, String header) throws APIException {
+      return BusinessAssetSharingAgreement.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public PageChangeProposal execute() throws APIException {
+    public BusinessAssetSharingAgreement execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public PageChangeProposal execute(Map<String, Object> extraParams) throws APIException {
+    public BusinessAssetSharingAgreement execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<PageChangeProposal> executeAsync() throws APIException {
+    public ListenableFuture<BusinessAssetSharingAgreement> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<PageChangeProposal> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<BusinessAssetSharingAgreement> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, PageChangeProposal>() {
-           public PageChangeProposal apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, BusinessAssetSharingAgreement>() {
+           public BusinessAssetSharingAgreement apply(ResponseWrapper result) {
              try {
                return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -533,12 +536,8 @@ public class PageChangeProposal extends APINode {
     }
 
 
-    public APIRequestUpdate setAccept (Boolean accept) {
-      this.setParam("accept", accept);
-      return this;
-    }
-    public APIRequestUpdate setAccept (String accept) {
-      this.setParam("accept", accept);
+    public APIRequestUpdate setRequestResponse (String requestResponse) {
+      this.setParam("request_response", requestResponse);
       return this;
     }
 
@@ -580,6 +579,29 @@ public class PageChangeProposal extends APINode {
 
   }
 
+  public static enum EnumRequestStatus {
+      @SerializedName("APPROVE")
+      VALUE_APPROVE("APPROVE"),
+      @SerializedName("DECLINE")
+      VALUE_DECLINE("DECLINE"),
+      @SerializedName("EXPIRED")
+      VALUE_EXPIRED("EXPIRED"),
+      @SerializedName("IN_PROGRESS")
+      VALUE_IN_PROGRESS("IN_PROGRESS"),
+      NULL(null);
+
+      private String value;
+
+      private EnumRequestStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -594,22 +616,22 @@ public class PageChangeProposal extends APINode {
     return gson;
   }
 
-  public PageChangeProposal copyFrom(PageChangeProposal instance) {
-    this.mAcceptanceStatus = instance.mAcceptanceStatus;
-    this.mCategory = instance.mCategory;
-    this.mCurrentValue = instance.mCurrentValue;
+  public BusinessAssetSharingAgreement copyFrom(BusinessAssetSharingAgreement instance) {
     this.mId = instance.mId;
-    this.mProposedValue = instance.mProposedValue;
-    this.mUpcomingChangeInfo = instance.mUpcomingChangeInfo;
+    this.mInitiator = instance.mInitiator;
+    this.mRecipient = instance.mRecipient;
+    this.mRelationshipType = instance.mRelationshipType;
+    this.mRequestStatus = instance.mRequestStatus;
+    this.mRequestType = instance.mRequestType;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<PageChangeProposal> getParser() {
-    return new APIRequest.ResponseParser<PageChangeProposal>() {
-      public APINodeList<PageChangeProposal> parseResponse(String response, APIContext context, APIRequest<PageChangeProposal> request, String header) throws MalformedResponseException {
-        return PageChangeProposal.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<BusinessAssetSharingAgreement> getParser() {
+    return new APIRequest.ResponseParser<BusinessAssetSharingAgreement>() {
+      public APINodeList<BusinessAssetSharingAgreement> parseResponse(String response, APIContext context, APIRequest<BusinessAssetSharingAgreement> request, String header) throws MalformedResponseException {
+        return BusinessAssetSharingAgreement.parseResponse(response, context, request, header);
       }
     };
   }

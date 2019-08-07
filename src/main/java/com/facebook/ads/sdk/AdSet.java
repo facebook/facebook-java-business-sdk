@@ -5830,6 +5830,8 @@ public class AdSet extends APINode {
       VALUE_ARCHIVED("ARCHIVED"),
       @SerializedName("DELETED")
       VALUE_DELETED("DELETED"),
+      @SerializedName("IN_PROCESS")
+      VALUE_IN_PROCESS("IN_PROCESS"),
       @SerializedName("PAUSED")
       VALUE_PAUSED("PAUSED"),
       @SerializedName("WITH_ISSUES")
@@ -5941,6 +5943,8 @@ public class AdSet extends APINode {
       VALUE_APP("APP"),
       @SerializedName("APPLINKS_AUTOMATIC")
       VALUE_APPLINKS_AUTOMATIC("APPLINKS_AUTOMATIC"),
+      @SerializedName("FACEBOOK")
+      VALUE_FACEBOOK("FACEBOOK"),
       @SerializedName("MESSENGER")
       VALUE_MESSENGER("MESSENGER"),
       @SerializedName("UNDEFINED")

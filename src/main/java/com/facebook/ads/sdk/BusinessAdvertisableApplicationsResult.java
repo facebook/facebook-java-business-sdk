@@ -55,6 +55,10 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class BusinessAdvertisableApplicationsResult extends APINode {
+  @SerializedName("are_app_events_unavailable")
+  private Boolean mAreAppEventsUnavailable = null;
+  @SerializedName("business")
+  private Business mBusiness = null;
   @SerializedName("has_insight_permission")
   private Boolean mHasInsightPermission = null;
   @SerializedName("id")
@@ -214,6 +218,32 @@ public class BusinessAdvertisableApplicationsResult extends APINode {
   }
 
 
+  public Boolean getFieldAreAppEventsUnavailable() {
+    return mAreAppEventsUnavailable;
+  }
+
+  public BusinessAdvertisableApplicationsResult setFieldAreAppEventsUnavailable(Boolean value) {
+    this.mAreAppEventsUnavailable = value;
+    return this;
+  }
+
+  public Business getFieldBusiness() {
+    if (mBusiness != null) {
+      mBusiness.context = getContext();
+    }
+    return mBusiness;
+  }
+
+  public BusinessAdvertisableApplicationsResult setFieldBusiness(Business value) {
+    this.mBusiness = value;
+    return this;
+  }
+
+  public BusinessAdvertisableApplicationsResult setFieldBusiness(String value) {
+    Type type = new TypeToken<Business>(){}.getType();
+    this.mBusiness = Business.getGson().fromJson(value, type);
+    return this;
+  }
   public Boolean getFieldHasInsightPermission() {
     return mHasInsightPermission;
   }
@@ -267,6 +297,8 @@ public class BusinessAdvertisableApplicationsResult extends APINode {
   }
 
   public BusinessAdvertisableApplicationsResult copyFrom(BusinessAdvertisableApplicationsResult instance) {
+    this.mAreAppEventsUnavailable = instance.mAreAppEventsUnavailable;
+    this.mBusiness = instance.mBusiness;
     this.mHasInsightPermission = instance.mHasInsightPermission;
     this.mId = instance.mId;
     this.mName = instance.mName;

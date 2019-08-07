@@ -2383,6 +2383,10 @@ public class AdCreative extends APINode {
       VALUE_ACTIVE("ACTIVE"),
       @SerializedName("DELETED")
       VALUE_DELETED("DELETED"),
+      @SerializedName("IN_PROCESS")
+      VALUE_IN_PROCESS("IN_PROCESS"),
+      @SerializedName("WITH_ISSUES")
+      VALUE_WITH_ISSUES("WITH_ISSUES"),
       NULL(null);
 
       private String value;

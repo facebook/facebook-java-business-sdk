@@ -550,6 +550,10 @@ public class AdAccount extends APINode {
     return new APIRequestCreateAdVideo(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetAffectedAdSets getAffectedAdSets() {
+    return new APIRequestGetAffectedAdSets(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestDeleteAgencies deleteAgencies() {
     return new APIRequestDeleteAgencies(this.getPrefixedId().toString(), context);
   }
@@ -610,6 +614,10 @@ public class AdAccount extends APINode {
     return new APIRequestCreateBlockListDraft(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetBrandAudiences getBrandAudiences() {
+    return new APIRequestGetBrandAudiences(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetBroadTargetingCategories getBroadTargetingCategories() {
     return new APIRequestGetBroadTargetingCategories(this.getPrefixedId().toString(), context);
   }
@@ -668,6 +676,10 @@ public class AdAccount extends APINode {
 
   public APIRequestGetDeprecatedTargetingAdSets getDeprecatedTargetingAdSets() {
     return new APIRequestGetDeprecatedTargetingAdSets(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateEmailImport createEmailImport() {
+    return new APIRequestCreateEmailImport(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetGeneratePreviews getGeneratePreviews() {
@@ -12274,6 +12286,518 @@ public class AdAccount extends APINode {
 
   }
 
+  public static class APIRequestGetAffectedAdSets extends APIRequest<AdSet> {
+
+    APINodeList<AdSet> lastResponse = null;
+    @Override
+    public APINodeList<AdSet> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "account_id",
+      "adlabels",
+      "adset_schedule",
+      "asset_feed_id",
+      "attribution_spec",
+      "bid_adjustments",
+      "bid_amount",
+      "bid_constraints",
+      "bid_info",
+      "bid_strategy",
+      "billing_event",
+      "budget_remaining",
+      "campaign",
+      "campaign_id",
+      "configured_status",
+      "created_time",
+      "creative_sequence",
+      "daily_budget",
+      "daily_min_spend_target",
+      "daily_spend_cap",
+      "destination_type",
+      "effective_status",
+      "end_time",
+      "frequency_control_specs",
+      "full_funnel_exploration_mode",
+      "id",
+      "instagram_actor_id",
+      "is_dynamic_creative",
+      "issues_info",
+      "lifetime_budget",
+      "lifetime_imps",
+      "lifetime_min_spend_target",
+      "lifetime_spend_cap",
+      "name",
+      "optimization_goal",
+      "optimization_sub_event",
+      "pacing_type",
+      "promoted_object",
+      "recommendations",
+      "recurring_budget_semantics",
+      "review_feedback",
+      "rf_prediction_id",
+      "source_adset",
+      "source_adset_id",
+      "start_time",
+      "status",
+      "targeting",
+      "time_based_ad_rotation_id_blocks",
+      "time_based_ad_rotation_intervals",
+      "updated_time",
+      "use_new_app_click",
+    };
+
+    @Override
+    public APINodeList<AdSet> parseResponse(String response, String header) throws APIException {
+      return AdSet.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<AdSet> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdSet> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<AdSet>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdSet>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<AdSet>>() {
+           public APINodeList<AdSet> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetAffectedAdSets.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetAffectedAdSets(String nodeId, APIContext context) {
+      super(context, nodeId, "/affectedadsets", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetAffectedAdSets setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAffectedAdSets setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetAffectedAdSets requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetAffectedAdSets requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAffectedAdSets requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetAffectedAdSets requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAffectedAdSets requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAffectedAdSets requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetAffectedAdSets requestAccountIdField () {
+      return this.requestAccountIdField(true);
+    }
+    public APIRequestGetAffectedAdSets requestAccountIdField (boolean value) {
+      this.requestField("account_id", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestAdlabelsField () {
+      return this.requestAdlabelsField(true);
+    }
+    public APIRequestGetAffectedAdSets requestAdlabelsField (boolean value) {
+      this.requestField("adlabels", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestAdsetScheduleField () {
+      return this.requestAdsetScheduleField(true);
+    }
+    public APIRequestGetAffectedAdSets requestAdsetScheduleField (boolean value) {
+      this.requestField("adset_schedule", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestAssetFeedIdField () {
+      return this.requestAssetFeedIdField(true);
+    }
+    public APIRequestGetAffectedAdSets requestAssetFeedIdField (boolean value) {
+      this.requestField("asset_feed_id", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestAttributionSpecField () {
+      return this.requestAttributionSpecField(true);
+    }
+    public APIRequestGetAffectedAdSets requestAttributionSpecField (boolean value) {
+      this.requestField("attribution_spec", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestBidAdjustmentsField () {
+      return this.requestBidAdjustmentsField(true);
+    }
+    public APIRequestGetAffectedAdSets requestBidAdjustmentsField (boolean value) {
+      this.requestField("bid_adjustments", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestBidAmountField () {
+      return this.requestBidAmountField(true);
+    }
+    public APIRequestGetAffectedAdSets requestBidAmountField (boolean value) {
+      this.requestField("bid_amount", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestBidConstraintsField () {
+      return this.requestBidConstraintsField(true);
+    }
+    public APIRequestGetAffectedAdSets requestBidConstraintsField (boolean value) {
+      this.requestField("bid_constraints", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestBidInfoField () {
+      return this.requestBidInfoField(true);
+    }
+    public APIRequestGetAffectedAdSets requestBidInfoField (boolean value) {
+      this.requestField("bid_info", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestBidStrategyField () {
+      return this.requestBidStrategyField(true);
+    }
+    public APIRequestGetAffectedAdSets requestBidStrategyField (boolean value) {
+      this.requestField("bid_strategy", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestBillingEventField () {
+      return this.requestBillingEventField(true);
+    }
+    public APIRequestGetAffectedAdSets requestBillingEventField (boolean value) {
+      this.requestField("billing_event", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestBudgetRemainingField () {
+      return this.requestBudgetRemainingField(true);
+    }
+    public APIRequestGetAffectedAdSets requestBudgetRemainingField (boolean value) {
+      this.requestField("budget_remaining", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestCampaignField () {
+      return this.requestCampaignField(true);
+    }
+    public APIRequestGetAffectedAdSets requestCampaignField (boolean value) {
+      this.requestField("campaign", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestCampaignIdField () {
+      return this.requestCampaignIdField(true);
+    }
+    public APIRequestGetAffectedAdSets requestCampaignIdField (boolean value) {
+      this.requestField("campaign_id", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestConfiguredStatusField () {
+      return this.requestConfiguredStatusField(true);
+    }
+    public APIRequestGetAffectedAdSets requestConfiguredStatusField (boolean value) {
+      this.requestField("configured_status", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestCreatedTimeField () {
+      return this.requestCreatedTimeField(true);
+    }
+    public APIRequestGetAffectedAdSets requestCreatedTimeField (boolean value) {
+      this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestCreativeSequenceField () {
+      return this.requestCreativeSequenceField(true);
+    }
+    public APIRequestGetAffectedAdSets requestCreativeSequenceField (boolean value) {
+      this.requestField("creative_sequence", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestDailyBudgetField () {
+      return this.requestDailyBudgetField(true);
+    }
+    public APIRequestGetAffectedAdSets requestDailyBudgetField (boolean value) {
+      this.requestField("daily_budget", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestDailyMinSpendTargetField () {
+      return this.requestDailyMinSpendTargetField(true);
+    }
+    public APIRequestGetAffectedAdSets requestDailyMinSpendTargetField (boolean value) {
+      this.requestField("daily_min_spend_target", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestDailySpendCapField () {
+      return this.requestDailySpendCapField(true);
+    }
+    public APIRequestGetAffectedAdSets requestDailySpendCapField (boolean value) {
+      this.requestField("daily_spend_cap", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestDestinationTypeField () {
+      return this.requestDestinationTypeField(true);
+    }
+    public APIRequestGetAffectedAdSets requestDestinationTypeField (boolean value) {
+      this.requestField("destination_type", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestEffectiveStatusField () {
+      return this.requestEffectiveStatusField(true);
+    }
+    public APIRequestGetAffectedAdSets requestEffectiveStatusField (boolean value) {
+      this.requestField("effective_status", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestEndTimeField () {
+      return this.requestEndTimeField(true);
+    }
+    public APIRequestGetAffectedAdSets requestEndTimeField (boolean value) {
+      this.requestField("end_time", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestFrequencyControlSpecsField () {
+      return this.requestFrequencyControlSpecsField(true);
+    }
+    public APIRequestGetAffectedAdSets requestFrequencyControlSpecsField (boolean value) {
+      this.requestField("frequency_control_specs", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestFullFunnelExplorationModeField () {
+      return this.requestFullFunnelExplorationModeField(true);
+    }
+    public APIRequestGetAffectedAdSets requestFullFunnelExplorationModeField (boolean value) {
+      this.requestField("full_funnel_exploration_mode", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetAffectedAdSets requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestInstagramActorIdField () {
+      return this.requestInstagramActorIdField(true);
+    }
+    public APIRequestGetAffectedAdSets requestInstagramActorIdField (boolean value) {
+      this.requestField("instagram_actor_id", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestIsDynamicCreativeField () {
+      return this.requestIsDynamicCreativeField(true);
+    }
+    public APIRequestGetAffectedAdSets requestIsDynamicCreativeField (boolean value) {
+      this.requestField("is_dynamic_creative", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestIssuesInfoField () {
+      return this.requestIssuesInfoField(true);
+    }
+    public APIRequestGetAffectedAdSets requestIssuesInfoField (boolean value) {
+      this.requestField("issues_info", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestLifetimeBudgetField () {
+      return this.requestLifetimeBudgetField(true);
+    }
+    public APIRequestGetAffectedAdSets requestLifetimeBudgetField (boolean value) {
+      this.requestField("lifetime_budget", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestLifetimeImpsField () {
+      return this.requestLifetimeImpsField(true);
+    }
+    public APIRequestGetAffectedAdSets requestLifetimeImpsField (boolean value) {
+      this.requestField("lifetime_imps", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestLifetimeMinSpendTargetField () {
+      return this.requestLifetimeMinSpendTargetField(true);
+    }
+    public APIRequestGetAffectedAdSets requestLifetimeMinSpendTargetField (boolean value) {
+      this.requestField("lifetime_min_spend_target", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestLifetimeSpendCapField () {
+      return this.requestLifetimeSpendCapField(true);
+    }
+    public APIRequestGetAffectedAdSets requestLifetimeSpendCapField (boolean value) {
+      this.requestField("lifetime_spend_cap", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetAffectedAdSets requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestOptimizationGoalField () {
+      return this.requestOptimizationGoalField(true);
+    }
+    public APIRequestGetAffectedAdSets requestOptimizationGoalField (boolean value) {
+      this.requestField("optimization_goal", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestOptimizationSubEventField () {
+      return this.requestOptimizationSubEventField(true);
+    }
+    public APIRequestGetAffectedAdSets requestOptimizationSubEventField (boolean value) {
+      this.requestField("optimization_sub_event", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestPacingTypeField () {
+      return this.requestPacingTypeField(true);
+    }
+    public APIRequestGetAffectedAdSets requestPacingTypeField (boolean value) {
+      this.requestField("pacing_type", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestPromotedObjectField () {
+      return this.requestPromotedObjectField(true);
+    }
+    public APIRequestGetAffectedAdSets requestPromotedObjectField (boolean value) {
+      this.requestField("promoted_object", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestRecommendationsField () {
+      return this.requestRecommendationsField(true);
+    }
+    public APIRequestGetAffectedAdSets requestRecommendationsField (boolean value) {
+      this.requestField("recommendations", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestRecurringBudgetSemanticsField () {
+      return this.requestRecurringBudgetSemanticsField(true);
+    }
+    public APIRequestGetAffectedAdSets requestRecurringBudgetSemanticsField (boolean value) {
+      this.requestField("recurring_budget_semantics", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestReviewFeedbackField () {
+      return this.requestReviewFeedbackField(true);
+    }
+    public APIRequestGetAffectedAdSets requestReviewFeedbackField (boolean value) {
+      this.requestField("review_feedback", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestRfPredictionIdField () {
+      return this.requestRfPredictionIdField(true);
+    }
+    public APIRequestGetAffectedAdSets requestRfPredictionIdField (boolean value) {
+      this.requestField("rf_prediction_id", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestSourceAdsetField () {
+      return this.requestSourceAdsetField(true);
+    }
+    public APIRequestGetAffectedAdSets requestSourceAdsetField (boolean value) {
+      this.requestField("source_adset", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestSourceAdsetIdField () {
+      return this.requestSourceAdsetIdField(true);
+    }
+    public APIRequestGetAffectedAdSets requestSourceAdsetIdField (boolean value) {
+      this.requestField("source_adset_id", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestStartTimeField () {
+      return this.requestStartTimeField(true);
+    }
+    public APIRequestGetAffectedAdSets requestStartTimeField (boolean value) {
+      this.requestField("start_time", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetAffectedAdSets requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestTargetingField () {
+      return this.requestTargetingField(true);
+    }
+    public APIRequestGetAffectedAdSets requestTargetingField (boolean value) {
+      this.requestField("targeting", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestTimeBasedAdRotationIdBlocksField () {
+      return this.requestTimeBasedAdRotationIdBlocksField(true);
+    }
+    public APIRequestGetAffectedAdSets requestTimeBasedAdRotationIdBlocksField (boolean value) {
+      this.requestField("time_based_ad_rotation_id_blocks", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestTimeBasedAdRotationIntervalsField () {
+      return this.requestTimeBasedAdRotationIntervalsField(true);
+    }
+    public APIRequestGetAffectedAdSets requestTimeBasedAdRotationIntervalsField (boolean value) {
+      this.requestField("time_based_ad_rotation_intervals", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestUpdatedTimeField () {
+      return this.requestUpdatedTimeField(true);
+    }
+    public APIRequestGetAffectedAdSets requestUpdatedTimeField (boolean value) {
+      this.requestField("updated_time", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestUseNewAppClickField () {
+      return this.requestUseNewAppClickField(true);
+    }
+    public APIRequestGetAffectedAdSets requestUseNewAppClickField (boolean value) {
+      this.requestField("use_new_app_click", value);
+      return this;
+    }
+  }
+
   public static class APIRequestDeleteAgencies extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -15138,6 +15662,190 @@ public class AdAccount extends APINode {
       return this;
     }
 
+  }
+
+  public static class APIRequestGetBrandAudiences extends APIRequest<BrandAudience> {
+
+    APINodeList<BrandAudience> lastResponse = null;
+    @Override
+    public APINodeList<BrandAudience> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "account",
+      "delivery_targeting",
+      "description",
+      "id",
+      "name",
+      "sentence_lines",
+      "status",
+      "targeting",
+      "time_created",
+      "time_updated",
+    };
+
+    @Override
+    public APINodeList<BrandAudience> parseResponse(String response, String header) throws APIException {
+      return BrandAudience.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<BrandAudience> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<BrandAudience> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<BrandAudience>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<BrandAudience>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<BrandAudience>>() {
+           public APINodeList<BrandAudience> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetBrandAudiences.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetBrandAudiences(String nodeId, APIContext context) {
+      super(context, nodeId, "/brand_audiences", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetBrandAudiences setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBrandAudiences setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetBrandAudiences requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetBrandAudiences requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBrandAudiences requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetBrandAudiences requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBrandAudiences requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBrandAudiences requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetBrandAudiences requestAccountField () {
+      return this.requestAccountField(true);
+    }
+    public APIRequestGetBrandAudiences requestAccountField (boolean value) {
+      this.requestField("account", value);
+      return this;
+    }
+    public APIRequestGetBrandAudiences requestDeliveryTargetingField () {
+      return this.requestDeliveryTargetingField(true);
+    }
+    public APIRequestGetBrandAudiences requestDeliveryTargetingField (boolean value) {
+      this.requestField("delivery_targeting", value);
+      return this;
+    }
+    public APIRequestGetBrandAudiences requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetBrandAudiences requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetBrandAudiences requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetBrandAudiences requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetBrandAudiences requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetBrandAudiences requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetBrandAudiences requestSentenceLinesField () {
+      return this.requestSentenceLinesField(true);
+    }
+    public APIRequestGetBrandAudiences requestSentenceLinesField (boolean value) {
+      this.requestField("sentence_lines", value);
+      return this;
+    }
+    public APIRequestGetBrandAudiences requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetBrandAudiences requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGetBrandAudiences requestTargetingField () {
+      return this.requestTargetingField(true);
+    }
+    public APIRequestGetBrandAudiences requestTargetingField (boolean value) {
+      this.requestField("targeting", value);
+      return this;
+    }
+    public APIRequestGetBrandAudiences requestTimeCreatedField () {
+      return this.requestTimeCreatedField(true);
+    }
+    public APIRequestGetBrandAudiences requestTimeCreatedField (boolean value) {
+      this.requestField("time_created", value);
+      return this;
+    }
+    public APIRequestGetBrandAudiences requestTimeUpdatedField () {
+      return this.requestTimeUpdatedField(true);
+    }
+    public APIRequestGetBrandAudiences requestTimeUpdatedField (boolean value) {
+      this.requestField("time_updated", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetBroadTargetingCategories extends APIRequest<BroadTargetingCategories> {
@@ -18754,6 +19462,122 @@ public class AdAccount extends APINode {
       this.requestField("use_new_app_click", value);
       return this;
     }
+  }
+
+  public static class APIRequestCreateEmailImport extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "name",
+      "third_party_data",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateEmailImport.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateEmailImport(String nodeId, APIContext context) {
+      super(context, nodeId, "/emailimport", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateEmailImport setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateEmailImport setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateEmailImport setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateEmailImport setThirdPartyData (String thirdPartyData) {
+      this.setParam("third_party_data", thirdPartyData);
+      return this;
+    }
+
+    public APIRequestCreateEmailImport requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateEmailImport requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateEmailImport requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateEmailImport requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateEmailImport requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateEmailImport requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetGeneratePreviews extends APIRequest<AdPreview> {

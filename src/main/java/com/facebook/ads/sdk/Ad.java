@@ -4472,6 +4472,8 @@ public class Ad extends APINode {
       VALUE_DELETED("DELETED"),
       @SerializedName("DISAPPROVED")
       VALUE_DISAPPROVED("DISAPPROVED"),
+      @SerializedName("IN_PROCESS")
+      VALUE_IN_PROCESS("IN_PROCESS"),
       @SerializedName("PAUSED")
       VALUE_PAUSED("PAUSED"),
       @SerializedName("PENDING_BILLING_INFO")

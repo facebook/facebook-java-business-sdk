@@ -478,6 +478,10 @@ public class Business extends APINode {
     return new APIRequestCreateImage(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetInitiatedAudienceSharingRequests getInitiatedAudienceSharingRequests() {
+    return new APIRequestGetInitiatedAudienceSharingRequests(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetInitiatedSharingAgreements getInitiatedSharingAgreements() {
     return new APIRequestGetInitiatedSharingAgreements(this.getPrefixedId().toString(), context);
   }
@@ -608,6 +612,10 @@ public class Business extends APINode {
 
   public APIRequestGetReceivedAudiencePermissions getReceivedAudiencePermissions() {
     return new APIRequestGetReceivedAudiencePermissions(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetReceivedAudienceSharingRequests getReceivedAudienceSharingRequests() {
+    return new APIRequestGetReceivedAudienceSharingRequests(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetReceivedInprogressOnBehalfRequests getReceivedInprogressOnBehalfRequests() {
@@ -2821,6 +2829,8 @@ public class Business extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "are_app_events_unavailable",
+      "business",
       "has_insight_permission",
       "id",
       "name",
@@ -2934,6 +2944,20 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestGetAdvertisableApplications requestAreAppEventsUnavailableField () {
+      return this.requestAreAppEventsUnavailableField(true);
+    }
+    public APIRequestGetAdvertisableApplications requestAreAppEventsUnavailableField (boolean value) {
+      this.requestField("are_app_events_unavailable", value);
+      return this;
+    }
+    public APIRequestGetAdvertisableApplications requestBusinessField () {
+      return this.requestBusinessField(true);
+    }
+    public APIRequestGetAdvertisableApplications requestBusinessField (boolean value) {
+      this.requestField("business", value);
+      return this;
+    }
     public APIRequestGetAdvertisableApplications requestHasInsightPermissionField () {
       return this.requestHasInsightPermissionField(true);
     }
@@ -11558,6 +11582,174 @@ public class Business extends APINode {
 
   }
 
+  public static class APIRequestGetInitiatedAudienceSharingRequests extends APIRequest<BusinessAssetSharingAgreement> {
+
+    APINodeList<BusinessAssetSharingAgreement> lastResponse = null;
+    @Override
+    public APINodeList<BusinessAssetSharingAgreement> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "recipient_id",
+      "request_status",
+    };
+
+    public static final String[] FIELDS = {
+      "id",
+      "initiator",
+      "recipient",
+      "relationship_type",
+      "request_status",
+      "request_type",
+    };
+
+    @Override
+    public APINodeList<BusinessAssetSharingAgreement> parseResponse(String response, String header) throws APIException {
+      return BusinessAssetSharingAgreement.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<BusinessAssetSharingAgreement> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<BusinessAssetSharingAgreement> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<BusinessAssetSharingAgreement>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<BusinessAssetSharingAgreement>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<BusinessAssetSharingAgreement>>() {
+           public APINodeList<BusinessAssetSharingAgreement> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetInitiatedAudienceSharingRequests.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetInitiatedAudienceSharingRequests(String nodeId, APIContext context) {
+      super(context, nodeId, "/initiated_audience_sharing_requests", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetInitiatedAudienceSharingRequests setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInitiatedAudienceSharingRequests setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetInitiatedAudienceSharingRequests setRecipientId (String recipientId) {
+      this.setParam("recipient_id", recipientId);
+      return this;
+    }
+
+    public APIRequestGetInitiatedAudienceSharingRequests setRequestStatus (BusinessAssetSharingAgreement.EnumRequestStatus requestStatus) {
+      this.setParam("request_status", requestStatus);
+      return this;
+    }
+    public APIRequestGetInitiatedAudienceSharingRequests setRequestStatus (String requestStatus) {
+      this.setParam("request_status", requestStatus);
+      return this;
+    }
+
+    public APIRequestGetInitiatedAudienceSharingRequests requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetInitiatedAudienceSharingRequests requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInitiatedAudienceSharingRequests requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetInitiatedAudienceSharingRequests requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInitiatedAudienceSharingRequests requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInitiatedAudienceSharingRequests requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetInitiatedAudienceSharingRequests requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetInitiatedAudienceSharingRequests requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetInitiatedAudienceSharingRequests requestInitiatorField () {
+      return this.requestInitiatorField(true);
+    }
+    public APIRequestGetInitiatedAudienceSharingRequests requestInitiatorField (boolean value) {
+      this.requestField("initiator", value);
+      return this;
+    }
+    public APIRequestGetInitiatedAudienceSharingRequests requestRecipientField () {
+      return this.requestRecipientField(true);
+    }
+    public APIRequestGetInitiatedAudienceSharingRequests requestRecipientField (boolean value) {
+      this.requestField("recipient", value);
+      return this;
+    }
+    public APIRequestGetInitiatedAudienceSharingRequests requestRelationshipTypeField () {
+      return this.requestRelationshipTypeField(true);
+    }
+    public APIRequestGetInitiatedAudienceSharingRequests requestRelationshipTypeField (boolean value) {
+      this.requestField("relationship_type", value);
+      return this;
+    }
+    public APIRequestGetInitiatedAudienceSharingRequests requestRequestStatusField () {
+      return this.requestRequestStatusField(true);
+    }
+    public APIRequestGetInitiatedAudienceSharingRequests requestRequestStatusField (boolean value) {
+      this.requestField("request_status", value);
+      return this;
+    }
+    public APIRequestGetInitiatedAudienceSharingRequests requestRequestTypeField () {
+      return this.requestRequestTypeField(true);
+    }
+    public APIRequestGetInitiatedAudienceSharingRequests requestRequestTypeField (boolean value) {
+      this.requestField("request_type", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetInitiatedSharingAgreements extends APIRequest<BusinessAgreement> {
 
     APINodeList<BusinessAgreement> lastResponse = null;
@@ -19038,6 +19230,174 @@ public class Business extends APINode {
     }
     public APIRequestGetReceivedAudiencePermissions requestShareAccountNameField (boolean value) {
       this.requestField("share_account_name", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetReceivedAudienceSharingRequests extends APIRequest<BusinessAssetSharingAgreement> {
+
+    APINodeList<BusinessAssetSharingAgreement> lastResponse = null;
+    @Override
+    public APINodeList<BusinessAssetSharingAgreement> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "initiator_id",
+      "request_status",
+    };
+
+    public static final String[] FIELDS = {
+      "id",
+      "initiator",
+      "recipient",
+      "relationship_type",
+      "request_status",
+      "request_type",
+    };
+
+    @Override
+    public APINodeList<BusinessAssetSharingAgreement> parseResponse(String response, String header) throws APIException {
+      return BusinessAssetSharingAgreement.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<BusinessAssetSharingAgreement> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<BusinessAssetSharingAgreement> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<BusinessAssetSharingAgreement>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<BusinessAssetSharingAgreement>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<BusinessAssetSharingAgreement>>() {
+           public APINodeList<BusinessAssetSharingAgreement> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetReceivedAudienceSharingRequests.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetReceivedAudienceSharingRequests(String nodeId, APIContext context) {
+      super(context, nodeId, "/received_audience_sharing_requests", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetReceivedAudienceSharingRequests setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetReceivedAudienceSharingRequests setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetReceivedAudienceSharingRequests setInitiatorId (String initiatorId) {
+      this.setParam("initiator_id", initiatorId);
+      return this;
+    }
+
+    public APIRequestGetReceivedAudienceSharingRequests setRequestStatus (BusinessAssetSharingAgreement.EnumRequestStatus requestStatus) {
+      this.setParam("request_status", requestStatus);
+      return this;
+    }
+    public APIRequestGetReceivedAudienceSharingRequests setRequestStatus (String requestStatus) {
+      this.setParam("request_status", requestStatus);
+      return this;
+    }
+
+    public APIRequestGetReceivedAudienceSharingRequests requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetReceivedAudienceSharingRequests requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetReceivedAudienceSharingRequests requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetReceivedAudienceSharingRequests requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetReceivedAudienceSharingRequests requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetReceivedAudienceSharingRequests requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetReceivedAudienceSharingRequests requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetReceivedAudienceSharingRequests requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetReceivedAudienceSharingRequests requestInitiatorField () {
+      return this.requestInitiatorField(true);
+    }
+    public APIRequestGetReceivedAudienceSharingRequests requestInitiatorField (boolean value) {
+      this.requestField("initiator", value);
+      return this;
+    }
+    public APIRequestGetReceivedAudienceSharingRequests requestRecipientField () {
+      return this.requestRecipientField(true);
+    }
+    public APIRequestGetReceivedAudienceSharingRequests requestRecipientField (boolean value) {
+      this.requestField("recipient", value);
+      return this;
+    }
+    public APIRequestGetReceivedAudienceSharingRequests requestRelationshipTypeField () {
+      return this.requestRelationshipTypeField(true);
+    }
+    public APIRequestGetReceivedAudienceSharingRequests requestRelationshipTypeField (boolean value) {
+      this.requestField("relationship_type", value);
+      return this;
+    }
+    public APIRequestGetReceivedAudienceSharingRequests requestRequestStatusField () {
+      return this.requestRequestStatusField(true);
+    }
+    public APIRequestGetReceivedAudienceSharingRequests requestRequestStatusField (boolean value) {
+      this.requestField("request_status", value);
+      return this;
+    }
+    public APIRequestGetReceivedAudienceSharingRequests requestRequestTypeField () {
+      return this.requestRequestTypeField(true);
+    }
+    public APIRequestGetReceivedAudienceSharingRequests requestRequestTypeField (boolean value) {
+      this.requestField("request_type", value);
       return this;
     }
   }

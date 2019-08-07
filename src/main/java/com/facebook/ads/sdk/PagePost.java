@@ -6463,6 +6463,8 @@ public class PagePost extends APINode {
       VALUE_PUBLISHED("PUBLISHED"),
       @SerializedName("SCHEDULED")
       VALUE_SCHEDULED("SCHEDULED"),
+      @SerializedName("SCHEDULED_RECURRING")
+      VALUE_SCHEDULED_RECURRING("SCHEDULED_RECURRING"),
       NULL(null);
 
       private String value;

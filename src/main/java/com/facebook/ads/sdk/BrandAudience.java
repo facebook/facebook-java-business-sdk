@@ -54,74 +54,82 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class PageChangeProposal extends APINode {
-  @SerializedName("acceptance_status")
-  private String mAcceptanceStatus = null;
-  @SerializedName("category")
-  private String mCategory = null;
-  @SerializedName("current_value")
-  private String mCurrentValue = null;
+public class BrandAudience extends APINode {
+  @SerializedName("account")
+  private AdAccount mAccount = null;
+  @SerializedName("delivery_targeting")
+  private Targeting mDeliveryTargeting = null;
+  @SerializedName("description")
+  private String mDescription = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("proposed_value")
-  private String mProposedValue = null;
-  @SerializedName("upcoming_change_info")
-  private PageUpcomingChange mUpcomingChangeInfo = null;
+  @SerializedName("name")
+  private String mName = null;
+  @SerializedName("sentence_lines")
+  private JsonArray mSentenceLines = null;
+  @SerializedName("status")
+  private String mStatus = null;
+  @SerializedName("targeting")
+  private Targeting mTargeting = null;
+  @SerializedName("time_created")
+  private String mTimeCreated = null;
+  @SerializedName("time_updated")
+  private String mTimeUpdated = null;
   protected static Gson gson = null;
 
-  PageChangeProposal() {
+  BrandAudience() {
   }
 
-  public PageChangeProposal(Long id, APIContext context) {
+  public BrandAudience(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public PageChangeProposal(String id, APIContext context) {
+  public BrandAudience(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public PageChangeProposal fetch() throws APIException{
-    PageChangeProposal newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public BrandAudience fetch() throws APIException{
+    BrandAudience newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static PageChangeProposal fetchById(Long id, APIContext context) throws APIException {
+  public static BrandAudience fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<PageChangeProposal> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<BrandAudience> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static PageChangeProposal fetchById(String id, APIContext context) throws APIException {
+  public static BrandAudience fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<PageChangeProposal> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<BrandAudience> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<PageChangeProposal> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<PageChangeProposal>)(
-      new APIRequest<PageChangeProposal>(context, "", "/", "GET", PageChangeProposal.getParser())
+  public static APINodeList<BrandAudience> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<BrandAudience>)(
+      new APIRequest<BrandAudience>(context, "", "/", "GET", BrandAudience.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<PageChangeProposal>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<BrandAudience>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", PageChangeProposal.getParser())
+      new APIRequest(context, "", "/", "GET", BrandAudience.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -134,12 +142,12 @@ public class PageChangeProposal extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PageChangeProposal loadJSON(String json, APIContext context, String header) {
-    PageChangeProposal pageChangeProposal = getGson().fromJson(json, PageChangeProposal.class);
+  public static BrandAudience loadJSON(String json, APIContext context, String header) {
+    BrandAudience brandAudience = getGson().fromJson(json, BrandAudience.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(pageChangeProposal.toString());
+      JsonElement o2 = parser.parse(brandAudience.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -149,14 +157,14 @@ public class PageChangeProposal extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    pageChangeProposal.context = context;
-    pageChangeProposal.rawValue = json;
-    pageChangeProposal.header = header;
-    return pageChangeProposal;
+    brandAudience.context = context;
+    brandAudience.rawValue = json;
+    brandAudience.header = header;
+    return brandAudience;
   }
 
-  public static APINodeList<PageChangeProposal> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<PageChangeProposal> pageChangeProposals = new APINodeList<PageChangeProposal>(request, json, header);
+  public static APINodeList<BrandAudience> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<BrandAudience> brandAudiences = new APINodeList<BrandAudience>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -167,9 +175,9 @@ public class PageChangeProposal extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          pageChangeProposals.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          brandAudiences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return pageChangeProposals;
+        return brandAudiences;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -179,20 +187,20 @@ public class PageChangeProposal extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                pageChangeProposals.setCursors(before, after);
+                brandAudiences.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            pageChangeProposals.setPaging(previous, next);
+            brandAudiences.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              pageChangeProposals.setAppSecret(context.getAppSecretProof());
+              brandAudiences.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              pageChangeProposals.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              brandAudiences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -203,23 +211,23 @@ public class PageChangeProposal extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  pageChangeProposals.add(loadJSON(entry.getValue().toString(), context, header));
+                  brandAudiences.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              pageChangeProposals.add(loadJSON(obj.toString(), context, header));
+              brandAudiences.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return pageChangeProposals;
+          return brandAudiences;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              pageChangeProposals.add(loadJSON(entry.getValue().toString(), context, header));
+              brandAudiences.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return pageChangeProposals;
+          return brandAudiences;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -236,20 +244,20 @@ public class PageChangeProposal extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              pageChangeProposals.add(loadJSON(value.toString(), context, header));
+              brandAudiences.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return pageChangeProposals;
+            return brandAudiences;
           }
 
           // Sixth, check if it's pure JsonObject
-          pageChangeProposals.clear();
-          pageChangeProposals.add(loadJSON(json, context, header));
-          return pageChangeProposals;
+          brandAudiences.clear();
+          brandAudiences.add(loadJSON(json, context, header));
+          return brandAudiences;
         }
       }
     } catch (Exception e) {
@@ -280,85 +288,101 @@ public class PageChangeProposal extends APINode {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestUpdate update() {
-    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
+
+  public AdAccount getFieldAccount() {
+    if (mAccount != null) {
+      mAccount.context = getContext();
+    }
+    return mAccount;
   }
 
-
-  public String getFieldAcceptanceStatus() {
-    return mAcceptanceStatus;
+  public Targeting getFieldDeliveryTargeting() {
+    return mDeliveryTargeting;
   }
 
-  public String getFieldCategory() {
-    return mCategory;
-  }
-
-  public String getFieldCurrentValue() {
-    return mCurrentValue;
+  public String getFieldDescription() {
+    return mDescription;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-  public String getFieldProposedValue() {
-    return mProposedValue;
+  public String getFieldName() {
+    return mName;
   }
 
-  public PageUpcomingChange getFieldUpcomingChangeInfo() {
-    if (mUpcomingChangeInfo != null) {
-      mUpcomingChangeInfo.context = getContext();
-    }
-    return mUpcomingChangeInfo;
+  public JsonArray getFieldSentenceLines() {
+    return mSentenceLines;
+  }
+
+  public String getFieldStatus() {
+    return mStatus;
+  }
+
+  public Targeting getFieldTargeting() {
+    return mTargeting;
+  }
+
+  public String getFieldTimeCreated() {
+    return mTimeCreated;
+  }
+
+  public String getFieldTimeUpdated() {
+    return mTimeUpdated;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<PageChangeProposal> {
+  public static class APIRequestGet extends APIRequest<BrandAudience> {
 
-    PageChangeProposal lastResponse = null;
+    BrandAudience lastResponse = null;
     @Override
-    public PageChangeProposal getLastResponse() {
+    public BrandAudience getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "acceptance_status",
-      "category",
-      "current_value",
+      "account",
+      "delivery_targeting",
+      "description",
       "id",
-      "proposed_value",
-      "upcoming_change_info",
+      "name",
+      "sentence_lines",
+      "status",
+      "targeting",
+      "time_created",
+      "time_updated",
     };
 
     @Override
-    public PageChangeProposal parseResponse(String response, String header) throws APIException {
-      return PageChangeProposal.parseResponse(response, getContext(), this, header).head();
+    public BrandAudience parseResponse(String response, String header) throws APIException {
+      return BrandAudience.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public PageChangeProposal execute() throws APIException {
+    public BrandAudience execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public PageChangeProposal execute(Map<String, Object> extraParams) throws APIException {
+    public BrandAudience execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<PageChangeProposal> executeAsync() throws APIException {
+    public ListenableFuture<BrandAudience> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<PageChangeProposal> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<BrandAudience> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, PageChangeProposal>() {
-           public PageChangeProposal apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, BrandAudience>() {
+           public BrandAudience apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -422,25 +446,25 @@ public class PageChangeProposal extends APINode {
       return this;
     }
 
-    public APIRequestGet requestAcceptanceStatusField () {
-      return this.requestAcceptanceStatusField(true);
+    public APIRequestGet requestAccountField () {
+      return this.requestAccountField(true);
     }
-    public APIRequestGet requestAcceptanceStatusField (boolean value) {
-      this.requestField("acceptance_status", value);
+    public APIRequestGet requestAccountField (boolean value) {
+      this.requestField("account", value);
       return this;
     }
-    public APIRequestGet requestCategoryField () {
-      return this.requestCategoryField(true);
+    public APIRequestGet requestDeliveryTargetingField () {
+      return this.requestDeliveryTargetingField(true);
     }
-    public APIRequestGet requestCategoryField (boolean value) {
-      this.requestField("category", value);
+    public APIRequestGet requestDeliveryTargetingField (boolean value) {
+      this.requestField("delivery_targeting", value);
       return this;
     }
-    public APIRequestGet requestCurrentValueField () {
-      return this.requestCurrentValueField(true);
+    public APIRequestGet requestDescriptionField () {
+      return this.requestDescriptionField(true);
     }
-    public APIRequestGet requestCurrentValueField (boolean value) {
-      this.requestField("current_value", value);
+    public APIRequestGet requestDescriptionField (boolean value) {
+      this.requestField("description", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -450,134 +474,48 @@ public class PageChangeProposal extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestProposedValueField () {
-      return this.requestProposedValueField(true);
+    public APIRequestGet requestNameField () {
+      return this.requestNameField(true);
     }
-    public APIRequestGet requestProposedValueField (boolean value) {
-      this.requestField("proposed_value", value);
+    public APIRequestGet requestNameField (boolean value) {
+      this.requestField("name", value);
       return this;
     }
-    public APIRequestGet requestUpcomingChangeInfoField () {
-      return this.requestUpcomingChangeInfoField(true);
+    public APIRequestGet requestSentenceLinesField () {
+      return this.requestSentenceLinesField(true);
     }
-    public APIRequestGet requestUpcomingChangeInfoField (boolean value) {
-      this.requestField("upcoming_change_info", value);
+    public APIRequestGet requestSentenceLinesField (boolean value) {
+      this.requestField("sentence_lines", value);
       return this;
     }
-  }
-
-  public static class APIRequestUpdate extends APIRequest<PageChangeProposal> {
-
-    PageChangeProposal lastResponse = null;
-    @Override
-    public PageChangeProposal getLastResponse() {
-      return lastResponse;
+    public APIRequestGet requestStatusField () {
+      return this.requestStatusField(true);
     }
-    public static final String[] PARAMS = {
-      "accept",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public PageChangeProposal parseResponse(String response, String header) throws APIException {
-      return PageChangeProposal.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public PageChangeProposal execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public PageChangeProposal execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<PageChangeProposal> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<PageChangeProposal> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, PageChangeProposal>() {
-           public PageChangeProposal apply(ResponseWrapper result) {
-             try {
-               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestUpdate(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestUpdate setParam(String param, Object value) {
-      setParamInternal(param, value);
+    public APIRequestGet requestStatusField (boolean value) {
+      this.requestField("status", value);
       return this;
     }
-
-    @Override
-    public APIRequestUpdate setParams(Map<String, Object> params) {
-      setParamsInternal(params);
+    public APIRequestGet requestTargetingField () {
+      return this.requestTargetingField(true);
+    }
+    public APIRequestGet requestTargetingField (boolean value) {
+      this.requestField("targeting", value);
       return this;
     }
-
-
-    public APIRequestUpdate setAccept (Boolean accept) {
-      this.setParam("accept", accept);
+    public APIRequestGet requestTimeCreatedField () {
+      return this.requestTimeCreatedField(true);
+    }
+    public APIRequestGet requestTimeCreatedField (boolean value) {
+      this.requestField("time_created", value);
       return this;
     }
-    public APIRequestUpdate setAccept (String accept) {
-      this.setParam("accept", accept);
+    public APIRequestGet requestTimeUpdatedField () {
+      return this.requestTimeUpdatedField(true);
+    }
+    public APIRequestGet requestTimeUpdatedField (boolean value) {
+      this.requestField("time_updated", value);
       return this;
     }
-
-    public APIRequestUpdate requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestUpdate requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
 
@@ -594,22 +532,26 @@ public class PageChangeProposal extends APINode {
     return gson;
   }
 
-  public PageChangeProposal copyFrom(PageChangeProposal instance) {
-    this.mAcceptanceStatus = instance.mAcceptanceStatus;
-    this.mCategory = instance.mCategory;
-    this.mCurrentValue = instance.mCurrentValue;
+  public BrandAudience copyFrom(BrandAudience instance) {
+    this.mAccount = instance.mAccount;
+    this.mDeliveryTargeting = instance.mDeliveryTargeting;
+    this.mDescription = instance.mDescription;
     this.mId = instance.mId;
-    this.mProposedValue = instance.mProposedValue;
-    this.mUpcomingChangeInfo = instance.mUpcomingChangeInfo;
+    this.mName = instance.mName;
+    this.mSentenceLines = instance.mSentenceLines;
+    this.mStatus = instance.mStatus;
+    this.mTargeting = instance.mTargeting;
+    this.mTimeCreated = instance.mTimeCreated;
+    this.mTimeUpdated = instance.mTimeUpdated;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<PageChangeProposal> getParser() {
-    return new APIRequest.ResponseParser<PageChangeProposal>() {
-      public APINodeList<PageChangeProposal> parseResponse(String response, APIContext context, APIRequest<PageChangeProposal> request, String header) throws MalformedResponseException {
-        return PageChangeProposal.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<BrandAudience> getParser() {
+    return new APIRequest.ResponseParser<BrandAudience>() {
+      public APINodeList<BrandAudience> parseResponse(String response, APIContext context, APIRequest<BrandAudience> request, String header) throws MalformedResponseException {
+        return BrandAudience.parseResponse(response, context, request, header);
       }
     };
   }
