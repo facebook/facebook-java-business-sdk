@@ -2,6 +2,8 @@ language: java
 jdk:
   - oraclejdk8
 
+dist: trusty
+
 branches:
   only:
   - master
