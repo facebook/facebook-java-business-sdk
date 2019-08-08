@@ -83,7 +83,7 @@ public class Campaign extends APINode {
   private String mDailyBudget = null;
   @SerializedName("effective_status")
   private EnumEffectiveStatus mEffectiveStatus = null;
-  @SerializedName("id")
+  @SerializedName(value="id", alternate={"copied_campaign_id"})
   private String mId = null;
   @SerializedName("issues_info")
   private List<AdCampaignIssuesInfo> mIssuesInfo = null;
