@@ -314,6 +314,10 @@ public class AdsPixel extends APINode {
     return new APIRequestGetDaChecks(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateEvent createEvent() {
+    return new APIRequestCreateEvent(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestDeleteSharedAccounts deleteSharedAccounts() {
     return new APIRequestDeleteSharedAccounts(this.getPrefixedId().toString(), context);
   }
@@ -1344,6 +1348,148 @@ public class AdsPixel extends APINode {
       this.requestField("user_message", value);
       return this;
     }
+  }
+
+  public static class APIRequestCreateEvent extends APIRequest<AdsPixel> {
+
+    AdsPixel lastResponse = null;
+    @Override
+    public AdsPixel getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "agent",
+      "data",
+      "test_event_code",
+      "trace",
+      "upload_tag",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AdsPixel parseResponse(String response, String header) throws APIException {
+      return AdsPixel.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public AdsPixel execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdsPixel execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdsPixel> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdsPixel> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, AdsPixel>() {
+           public AdsPixel apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateEvent.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateEvent(String nodeId, APIContext context) {
+      super(context, nodeId, "/events", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateEvent setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateEvent setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateEvent setAgent (String agent) {
+      this.setParam("agent", agent);
+      return this;
+    }
+
+    public APIRequestCreateEvent setData (List<String> data) {
+      this.setParam("data", data);
+      return this;
+    }
+    public APIRequestCreateEvent setData (String data) {
+      this.setParam("data", data);
+      return this;
+    }
+
+    public APIRequestCreateEvent setTestEventCode (String testEventCode) {
+      this.setParam("test_event_code", testEventCode);
+      return this;
+    }
+
+    public APIRequestCreateEvent setTrace (Long trace) {
+      this.setParam("trace", trace);
+      return this;
+    }
+    public APIRequestCreateEvent setTrace (String trace) {
+      this.setParam("trace", trace);
+      return this;
+    }
+
+    public APIRequestCreateEvent setUploadTag (String uploadTag) {
+      this.setParam("upload_tag", uploadTag);
+      return this;
+    }
+
+    public APIRequestCreateEvent requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateEvent requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateEvent requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateEvent requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateEvent requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateEvent requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestDeleteSharedAccounts extends APIRequest<APINode> {

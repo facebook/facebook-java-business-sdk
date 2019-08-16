@@ -37,8 +37,8 @@ public class AdAccountAdSetsPostOptimizePostEngagement {
     new AdAccount(id, context).createAdSet()
       .setName("My First Adset")
       .setLifetimeBudget(20000L)
-      .setStartTime("2019-04-29T08:48:35-0700")
-      .setEndTime("2019-05-09T08:48:35-0700")
+      .setStartTime("2019-08-07T02:19:37-0700")
+      .setEndTime("2019-08-17T02:19:37-0700")
       .setCampaignId("<adCampaignLinkClicksID>")
       .setBidAmount(500L)
       .setBillingEvent(AdSet.EnumBillingEvent.VALUE_IMPRESSIONS)
@@ -68,11 +68,6 @@ public class AdAccountAdSetsPostOptimizePostEngagement {
                     .setFieldKey("4081")
                 ))
             )
-            .setFieldHomeOwnership(Arrays.asList(
-              new IDName()
-                .setFieldId(6006371327132L)
-                .setFieldName("Renters")
-            ))
             .setFieldLifeEvents(Arrays.asList(
               new IDName()
                 .setFieldId(6002714398172L)

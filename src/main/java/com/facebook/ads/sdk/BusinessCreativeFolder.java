@@ -59,6 +59,8 @@ public class BusinessCreativeFolder extends APINode {
   private Business mBusiness = null;
   @SerializedName("creation_time")
   private String mCreationTime = null;
+  @SerializedName("description")
+  private String mDescription = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("name")
@@ -318,6 +320,10 @@ public class BusinessCreativeFolder extends APINode {
 
   public String getFieldCreationTime() {
     return mCreationTime;
+  }
+
+  public String getFieldDescription() {
+    return mDescription;
   }
 
   public String getFieldId() {
@@ -1305,6 +1311,7 @@ public class BusinessCreativeFolder extends APINode {
     public static final String[] FIELDS = {
       "business",
       "creation_time",
+      "description",
       "id",
       "name",
     };
@@ -1410,6 +1417,13 @@ public class BusinessCreativeFolder extends APINode {
     }
     public APIRequestGet requestCreationTimeField (boolean value) {
       this.requestField("creation_time", value);
+      return this;
+    }
+    public APIRequestGet requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGet requestDescriptionField (boolean value) {
+      this.requestField("description", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -1611,6 +1625,7 @@ public class BusinessCreativeFolder extends APINode {
   public BusinessCreativeFolder copyFrom(BusinessCreativeFolder instance) {
     this.mBusiness = instance.mBusiness;
     this.mCreationTime = instance.mCreationTime;
+    this.mDescription = instance.mDescription;
     this.mId = instance.mId;
     this.mName = instance.mName;
     this.context = instance.context;

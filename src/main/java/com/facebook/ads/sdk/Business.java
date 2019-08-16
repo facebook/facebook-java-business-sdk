@@ -366,6 +366,10 @@ public class Business extends APINode {
     return new APIRequestCreateBlockListDraft(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetBusinessAssetGroups getBusinessAssetGroups() {
+    return new APIRequestGetBusinessAssetGroups(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetBusinessInvoices getBusinessInvoices() {
     return new APIRequestGetBusinessInvoices(this.getPrefixedId().toString(), context);
   }
@@ -3626,6 +3630,126 @@ public class Business extends APINode {
       return this;
     }
 
+  }
+
+  public static class APIRequestGetBusinessAssetGroups extends APIRequest<BusinessAssetGroup> {
+
+    APINodeList<BusinessAssetGroup> lastResponse = null;
+    @Override
+    public APINodeList<BusinessAssetGroup> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "id",
+      "name",
+    };
+
+    @Override
+    public APINodeList<BusinessAssetGroup> parseResponse(String response, String header) throws APIException {
+      return BusinessAssetGroup.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<BusinessAssetGroup> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<BusinessAssetGroup> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<BusinessAssetGroup>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<BusinessAssetGroup>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<BusinessAssetGroup>>() {
+           public APINodeList<BusinessAssetGroup> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetBusinessAssetGroups.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetBusinessAssetGroups(String nodeId, APIContext context) {
+      super(context, nodeId, "/business_asset_groups", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetBusinessAssetGroups setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessAssetGroups setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetBusinessAssetGroups requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetBusinessAssetGroups requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessAssetGroups requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetBusinessAssetGroups requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessAssetGroups requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessAssetGroups requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetBusinessAssetGroups requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetBusinessAssetGroups requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetBusinessAssetGroups requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetBusinessAssetGroups requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetBusinessInvoices extends APIRequest<OracleTransaction> {
@@ -8573,6 +8697,7 @@ public class Business extends APINode {
     public static final String[] FIELDS = {
       "business",
       "creation_time",
+      "description",
       "id",
       "name",
     };
@@ -8678,6 +8803,13 @@ public class Business extends APINode {
     }
     public APIRequestGetCreativeFolders requestCreationTimeField (boolean value) {
       this.requestField("creation_time", value);
+      return this;
+    }
+    public APIRequestGetCreativeFolders requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetCreativeFolders requestDescriptionField (boolean value) {
+      this.requestField("description", value);
       return this;
     }
     public APIRequestGetCreativeFolders requestIdField () {
@@ -18315,6 +18447,7 @@ public class Business extends APINode {
     public static final String[] FIELDS = {
       "business",
       "creation_time",
+      "description",
       "id",
       "name",
     };
@@ -18420,6 +18553,13 @@ public class Business extends APINode {
     }
     public APIRequestGetPendingSharedCreativeFolders requestCreationTimeField (boolean value) {
       this.requestField("creation_time", value);
+      return this;
+    }
+    public APIRequestGetPendingSharedCreativeFolders requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetPendingSharedCreativeFolders requestDescriptionField (boolean value) {
+      this.requestField("description", value);
       return this;
     }
     public APIRequestGetPendingSharedCreativeFolders requestIdField () {

@@ -124,7 +124,7 @@ public class Targeting extends APINode {
   @SerializedName("excluded_connections")
   private List<IDName> mExcludedConnections = null;
   @SerializedName("excluded_custom_audiences")
-  private List<IDName> mExcludedCustomAudiences = null;
+  private List<RawCustomAudience> mExcludedCustomAudiences = null;
   @SerializedName("excluded_dynamic_audience_ids")
   private List<String> mExcludedDynamicAudienceIds = null;
   @SerializedName("excluded_engagement_specs")
@@ -745,18 +745,18 @@ public class Targeting extends APINode {
     this.mExcludedConnections = IDName.getGson().fromJson(value, type);
     return this;
   }
-  public List<IDName> getFieldExcludedCustomAudiences() {
+  public List<RawCustomAudience> getFieldExcludedCustomAudiences() {
     return mExcludedCustomAudiences;
   }
 
-  public Targeting setFieldExcludedCustomAudiences(List<IDName> value) {
+  public Targeting setFieldExcludedCustomAudiences(List<RawCustomAudience> value) {
     this.mExcludedCustomAudiences = value;
     return this;
   }
 
   public Targeting setFieldExcludedCustomAudiences(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mExcludedCustomAudiences = IDName.getGson().fromJson(value, type);
+    Type type = new TypeToken<List<RawCustomAudience>>(){}.getType();
+    this.mExcludedCustomAudiences = RawCustomAudience.getGson().fromJson(value, type);
     return this;
   }
   public List<String> getFieldExcludedDynamicAudienceIds() {

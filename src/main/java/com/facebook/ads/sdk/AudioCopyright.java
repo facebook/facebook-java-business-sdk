@@ -65,6 +65,8 @@ public class AudioCopyright extends APINode {
   private Boolean mInConflict = null;
   @SerializedName("isrc")
   private String mIsrc = null;
+  @SerializedName("match_rule")
+  private VideoCopyrightRule mMatchRule = null;
   @SerializedName("ownership_countries")
   private List<String> mOwnershipCountries = null;
   @SerializedName("reference_file_status")
@@ -311,6 +313,13 @@ public class AudioCopyright extends APINode {
     return mIsrc;
   }
 
+  public VideoCopyrightRule getFieldMatchRule() {
+    if (mMatchRule != null) {
+      mMatchRule.context = getContext();
+    }
+    return mMatchRule;
+  }
+
   public List<String> getFieldOwnershipCountries() {
     return mOwnershipCountries;
   }
@@ -353,6 +362,7 @@ public class AudioCopyright extends APINode {
       "id",
       "in_conflict",
       "isrc",
+      "match_rule",
       "ownership_countries",
       "reference_file_status",
       "ridge_monitoring_status",
@@ -485,6 +495,13 @@ public class AudioCopyright extends APINode {
       this.requestField("isrc", value);
       return this;
     }
+    public APIRequestGet requestMatchRuleField () {
+      return this.requestMatchRuleField(true);
+    }
+    public APIRequestGet requestMatchRuleField (boolean value) {
+      this.requestField("match_rule", value);
+      return this;
+    }
     public APIRequestGet requestOwnershipCountriesField () {
       return this.requestOwnershipCountriesField(true);
     }
@@ -549,6 +566,7 @@ public class AudioCopyright extends APINode {
     this.mId = instance.mId;
     this.mInConflict = instance.mInConflict;
     this.mIsrc = instance.mIsrc;
+    this.mMatchRule = instance.mMatchRule;
     this.mOwnershipCountries = instance.mOwnershipCountries;
     this.mReferenceFileStatus = instance.mReferenceFileStatus;
     this.mRidgeMonitoringStatus = instance.mRidgeMonitoringStatus;

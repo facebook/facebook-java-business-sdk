@@ -758,6 +758,10 @@ public class Page extends APINode {
     return new APIRequestCreateLocation(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetMediaFingerprints getMediaFingerprints() {
+    return new APIRequestGetMediaFingerprints(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateMediaFingerprint createMediaFingerprint() {
     return new APIRequestCreateMediaFingerprint(this.getPrefixedId().toString(), context);
   }
@@ -930,6 +934,10 @@ public class Page extends APINode {
     return new APIRequestGetTabs(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateTab createTab() {
+    return new APIRequestCreateTab(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetTagged getTagged() {
     return new APIRequestGetTagged(this.getPrefixedId().toString(), context);
   }
@@ -964,6 +972,10 @@ public class Page extends APINode {
 
   public APIRequestGetUpcomingChanges getUpcomingChanges() {
     return new APIRequestGetUpcomingChanges(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetVideoCopyrightRules getVideoCopyrightRules() {
+    return new APIRequestGetVideoCopyrightRules(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateVideoCopyright createVideoCopyright() {
@@ -17646,6 +17658,182 @@ public class Page extends APINode {
 
   }
 
+  public static class APIRequestGetMediaFingerprints extends APIRequest<MediaFingerprint> {
+
+    APINodeList<MediaFingerprint> lastResponse = null;
+    @Override
+    public APINodeList<MediaFingerprint> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "fingerprint_validity",
+      "universal_content_id",
+    };
+
+    public static final String[] FIELDS = {
+      "duration_in_sec",
+      "fingerprint_content_type",
+      "fingerprint_type",
+      "id",
+      "metadata",
+      "title",
+      "universal_content_id",
+    };
+
+    @Override
+    public APINodeList<MediaFingerprint> parseResponse(String response, String header) throws APIException {
+      return MediaFingerprint.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<MediaFingerprint> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<MediaFingerprint> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<MediaFingerprint>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<MediaFingerprint>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<MediaFingerprint>>() {
+           public APINodeList<MediaFingerprint> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetMediaFingerprints.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetMediaFingerprints(String nodeId, APIContext context) {
+      super(context, nodeId, "/media_fingerprints", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetMediaFingerprints setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMediaFingerprints setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetMediaFingerprints setFingerprintValidity (MediaFingerprint.EnumFingerprintValidity fingerprintValidity) {
+      this.setParam("fingerprint_validity", fingerprintValidity);
+      return this;
+    }
+    public APIRequestGetMediaFingerprints setFingerprintValidity (String fingerprintValidity) {
+      this.setParam("fingerprint_validity", fingerprintValidity);
+      return this;
+    }
+
+    public APIRequestGetMediaFingerprints setUniversalContentId (String universalContentId) {
+      this.setParam("universal_content_id", universalContentId);
+      return this;
+    }
+
+    public APIRequestGetMediaFingerprints requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetMediaFingerprints requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMediaFingerprints requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetMediaFingerprints requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMediaFingerprints requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMediaFingerprints requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetMediaFingerprints requestDurationInSecField () {
+      return this.requestDurationInSecField(true);
+    }
+    public APIRequestGetMediaFingerprints requestDurationInSecField (boolean value) {
+      this.requestField("duration_in_sec", value);
+      return this;
+    }
+    public APIRequestGetMediaFingerprints requestFingerprintContentTypeField () {
+      return this.requestFingerprintContentTypeField(true);
+    }
+    public APIRequestGetMediaFingerprints requestFingerprintContentTypeField (boolean value) {
+      this.requestField("fingerprint_content_type", value);
+      return this;
+    }
+    public APIRequestGetMediaFingerprints requestFingerprintTypeField () {
+      return this.requestFingerprintTypeField(true);
+    }
+    public APIRequestGetMediaFingerprints requestFingerprintTypeField (boolean value) {
+      this.requestField("fingerprint_type", value);
+      return this;
+    }
+    public APIRequestGetMediaFingerprints requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetMediaFingerprints requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetMediaFingerprints requestMetadataField () {
+      return this.requestMetadataField(true);
+    }
+    public APIRequestGetMediaFingerprints requestMetadataField (boolean value) {
+      this.requestField("metadata", value);
+      return this;
+    }
+    public APIRequestGetMediaFingerprints requestTitleField () {
+      return this.requestTitleField(true);
+    }
+    public APIRequestGetMediaFingerprints requestTitleField (boolean value) {
+      this.requestField("title", value);
+      return this;
+    }
+    public APIRequestGetMediaFingerprints requestUniversalContentIdField () {
+      return this.requestUniversalContentIdField(true);
+    }
+    public APIRequestGetMediaFingerprints requestUniversalContentIdField (boolean value) {
+      this.requestField("universal_content_id", value);
+      return this;
+    }
+  }
+
   public static class APIRequestCreateMediaFingerprint extends APIRequest<MediaFingerprint> {
 
     MediaFingerprint lastResponse = null;
@@ -28088,6 +28276,158 @@ public class Page extends APINode {
     }
   }
 
+  public static class APIRequestCreateTab extends APIRequest<Page> {
+
+    Page lastResponse = null;
+    @Override
+    public Page getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "app_id",
+      "custom_image_url",
+      "custom_name",
+      "is_non_connection_landing_tab",
+      "position",
+      "tab",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Page parseResponse(String response, String header) throws APIException {
+      return Page.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Page execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Page execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Page> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Page> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, Page>() {
+           public Page apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateTab.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateTab(String nodeId, APIContext context) {
+      super(context, nodeId, "/tabs", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateTab setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateTab setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateTab setAppId (Long appId) {
+      this.setParam("app_id", appId);
+      return this;
+    }
+    public APIRequestCreateTab setAppId (String appId) {
+      this.setParam("app_id", appId);
+      return this;
+    }
+
+    public APIRequestCreateTab setCustomImageUrl (String customImageUrl) {
+      this.setParam("custom_image_url", customImageUrl);
+      return this;
+    }
+
+    public APIRequestCreateTab setCustomName (String customName) {
+      this.setParam("custom_name", customName);
+      return this;
+    }
+
+    public APIRequestCreateTab setIsNonConnectionLandingTab (Boolean isNonConnectionLandingTab) {
+      this.setParam("is_non_connection_landing_tab", isNonConnectionLandingTab);
+      return this;
+    }
+    public APIRequestCreateTab setIsNonConnectionLandingTab (String isNonConnectionLandingTab) {
+      this.setParam("is_non_connection_landing_tab", isNonConnectionLandingTab);
+      return this;
+    }
+
+    public APIRequestCreateTab setPosition (Long position) {
+      this.setParam("position", position);
+      return this;
+    }
+    public APIRequestCreateTab setPosition (String position) {
+      this.setParam("position", position);
+      return this;
+    }
+
+    public APIRequestCreateTab setTab (String tab) {
+      this.setParam("tab", tab);
+      return this;
+    }
+
+    public APIRequestCreateTab requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateTab requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateTab requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateTab requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateTab requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateTab requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetTagged extends APIRequest<PagePost> {
 
     APINodeList<PagePost> lastResponse = null;
@@ -29910,6 +30250,182 @@ public class Page extends APINode {
     }
     public APIRequestGetUpcomingChanges requestTimerStatusField (boolean value) {
       this.requestField("timer_status", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetVideoCopyrightRules extends APIRequest<VideoCopyrightRule> {
+
+    APINodeList<VideoCopyrightRule> lastResponse = null;
+    @Override
+    public APINodeList<VideoCopyrightRule> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "selected_rule_id",
+      "source",
+    };
+
+    public static final String[] FIELDS = {
+      "condition_groups",
+      "copyrights",
+      "created_date",
+      "creator",
+      "id",
+      "is_in_migration",
+      "name",
+    };
+
+    @Override
+    public APINodeList<VideoCopyrightRule> parseResponse(String response, String header) throws APIException {
+      return VideoCopyrightRule.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<VideoCopyrightRule> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<VideoCopyrightRule> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<VideoCopyrightRule>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<VideoCopyrightRule>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<VideoCopyrightRule>>() {
+           public APINodeList<VideoCopyrightRule> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetVideoCopyrightRules.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetVideoCopyrightRules(String nodeId, APIContext context) {
+      super(context, nodeId, "/video_copyright_rules", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetVideoCopyrightRules setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVideoCopyrightRules setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetVideoCopyrightRules setSelectedRuleId (String selectedRuleId) {
+      this.setParam("selected_rule_id", selectedRuleId);
+      return this;
+    }
+
+    public APIRequestGetVideoCopyrightRules setSource (VideoCopyrightRule.EnumSource source) {
+      this.setParam("source", source);
+      return this;
+    }
+    public APIRequestGetVideoCopyrightRules setSource (String source) {
+      this.setParam("source", source);
+      return this;
+    }
+
+    public APIRequestGetVideoCopyrightRules requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetVideoCopyrightRules requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVideoCopyrightRules requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetVideoCopyrightRules requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVideoCopyrightRules requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVideoCopyrightRules requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetVideoCopyrightRules requestConditionGroupsField () {
+      return this.requestConditionGroupsField(true);
+    }
+    public APIRequestGetVideoCopyrightRules requestConditionGroupsField (boolean value) {
+      this.requestField("condition_groups", value);
+      return this;
+    }
+    public APIRequestGetVideoCopyrightRules requestCopyrightsField () {
+      return this.requestCopyrightsField(true);
+    }
+    public APIRequestGetVideoCopyrightRules requestCopyrightsField (boolean value) {
+      this.requestField("copyrights", value);
+      return this;
+    }
+    public APIRequestGetVideoCopyrightRules requestCreatedDateField () {
+      return this.requestCreatedDateField(true);
+    }
+    public APIRequestGetVideoCopyrightRules requestCreatedDateField (boolean value) {
+      this.requestField("created_date", value);
+      return this;
+    }
+    public APIRequestGetVideoCopyrightRules requestCreatorField () {
+      return this.requestCreatorField(true);
+    }
+    public APIRequestGetVideoCopyrightRules requestCreatorField (boolean value) {
+      this.requestField("creator", value);
+      return this;
+    }
+    public APIRequestGetVideoCopyrightRules requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetVideoCopyrightRules requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetVideoCopyrightRules requestIsInMigrationField () {
+      return this.requestIsInMigrationField(true);
+    }
+    public APIRequestGetVideoCopyrightRules requestIsInMigrationField (boolean value) {
+      this.requestField("is_in_migration", value);
+      return this;
+    }
+    public APIRequestGetVideoCopyrightRules requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetVideoCopyrightRules requestNameField (boolean value) {
+      this.requestField("name", value);
       return this;
     }
   }
