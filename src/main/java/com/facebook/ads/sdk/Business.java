@@ -1426,7 +1426,6 @@ public class Business extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "billing_address_id",
       "currency",
       "end_advertiser",
       "funding_id",
@@ -1434,12 +1433,10 @@ public class Business extends APINode {
       "invoice_group_id",
       "invoicing_emails",
       "io",
-      "liable_address_id",
       "media_agency",
       "name",
       "partner",
       "po_number",
-      "sold_to_address_id",
       "timezone_id",
     };
 
@@ -1499,11 +1496,6 @@ public class Business extends APINode {
     }
 
 
-    public APIRequestCreateAdAccount setBillingAddressId (String billingAddressId) {
-      this.setParam("billing_address_id", billingAddressId);
-      return this;
-    }
-
     public APIRequestCreateAdAccount setCurrency (String currency) {
       this.setParam("currency", currency);
       return this;
@@ -1555,11 +1547,6 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdAccount setLiableAddressId (String liableAddressId) {
-      this.setParam("liable_address_id", liableAddressId);
-      return this;
-    }
-
     public APIRequestCreateAdAccount setMediaAgency (String mediaAgency) {
       this.setParam("media_agency", mediaAgency);
       return this;
@@ -1577,11 +1564,6 @@ public class Business extends APINode {
 
     public APIRequestCreateAdAccount setPoNumber (String poNumber) {
       this.setParam("po_number", poNumber);
-      return this;
-    }
-
-    public APIRequestCreateAdAccount setSoldToAddressId (String soldToAddressId) {
-      this.setParam("sold_to_address_id", soldToAddressId);
       return this;
     }
 

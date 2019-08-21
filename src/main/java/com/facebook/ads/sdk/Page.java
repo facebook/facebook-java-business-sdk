@@ -5442,6 +5442,7 @@ public class Page extends APINode {
       "instant_article",
       "og_object",
       "ownership_permissions",
+      "scopes",
     };
 
     @Override
@@ -5580,6 +5581,13 @@ public class Page extends APINode {
     }
     public APIRequestGetClaimedUrls requestOwnershipPermissionsField (boolean value) {
       this.requestField("ownership_permissions", value);
+      return this;
+    }
+    public APIRequestGetClaimedUrls requestScopesField () {
+      return this.requestScopesField(true);
+    }
+    public APIRequestGetClaimedUrls requestScopesField (boolean value) {
+      this.requestField("scopes", value);
       return this;
     }
   }

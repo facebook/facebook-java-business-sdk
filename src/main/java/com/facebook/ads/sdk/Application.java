@@ -528,6 +528,10 @@ public class Application extends APINode {
     return new APIRequestGetAuthorizedAdAccounts(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestDeleteBanned deleteBanned() {
+    return new APIRequestDeleteBanned(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetBanned getBanned() {
     return new APIRequestGetBanned(this.getPrefixedId().toString(), context);
   }
@@ -566,6 +570,10 @@ public class Application extends APINode {
 
   public APIRequestCreateFullAppIndexingInfo createFullAppIndexingInfo() {
     return new APIRequestCreateFullAppIndexingInfo(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateInsightsPushSchedule createInsightsPushSchedule() {
+    return new APIRequestCreateInsightsPushSchedule(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetIosDialogConfigs getIosDialogConfigs() {
@@ -4377,6 +4385,120 @@ public class Application extends APINode {
     }
   }
 
+  public static class APIRequestDeleteBanned extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "uids",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestDeleteBanned.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDeleteBanned(String nodeId, APIContext context) {
+      super(context, nodeId, "/banned", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDeleteBanned setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteBanned setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDeleteBanned setUids (List<Long> uids) {
+      this.setParam("uids", uids);
+      return this;
+    }
+    public APIRequestDeleteBanned setUids (String uids) {
+      this.setParam("uids", uids);
+      return this;
+    }
+
+    public APIRequestDeleteBanned requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDeleteBanned requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteBanned requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDeleteBanned requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteBanned requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteBanned requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetBanned extends APIRequest<User> {
 
     APINodeList<User> lastResponse = null;
@@ -6353,6 +6475,244 @@ public class Application extends APINode {
 
     @Override
     public APIRequestCreateFullAppIndexingInfo requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateInsightsPushSchedule extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "ad_account_ids",
+      "breakdowns",
+      "date_preset",
+      "level",
+      "metrics",
+      "object_id",
+      "owner_id",
+      "schedule",
+      "status",
+      "time_created",
+      "time_increment",
+      "time_last_fail",
+      "time_last_run",
+      "time_last_success",
+      "time_start",
+      "time_stop",
+      "time_updated",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateInsightsPushSchedule.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateInsightsPushSchedule(String nodeId, APIContext context) {
+      super(context, nodeId, "/insights_push_schedule", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateInsightsPushSchedule setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateInsightsPushSchedule setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateInsightsPushSchedule setAdAccountIds (JsonArray adAccountIds) {
+      this.setParam("ad_account_ids", adAccountIds);
+      return this;
+    }
+    public APIRequestCreateInsightsPushSchedule setAdAccountIds (String adAccountIds) {
+      this.setParam("ad_account_ids", adAccountIds);
+      return this;
+    }
+
+    public APIRequestCreateInsightsPushSchedule setBreakdowns (List<String> breakdowns) {
+      this.setParam("breakdowns", breakdowns);
+      return this;
+    }
+    public APIRequestCreateInsightsPushSchedule setBreakdowns (String breakdowns) {
+      this.setParam("breakdowns", breakdowns);
+      return this;
+    }
+
+    public APIRequestCreateInsightsPushSchedule setDatePreset (String datePreset) {
+      this.setParam("date_preset", datePreset);
+      return this;
+    }
+
+    public APIRequestCreateInsightsPushSchedule setLevel (EnumLevel level) {
+      this.setParam("level", level);
+      return this;
+    }
+    public APIRequestCreateInsightsPushSchedule setLevel (String level) {
+      this.setParam("level", level);
+      return this;
+    }
+
+    public APIRequestCreateInsightsPushSchedule setMetrics (List<String> metrics) {
+      this.setParam("metrics", metrics);
+      return this;
+    }
+    public APIRequestCreateInsightsPushSchedule setMetrics (String metrics) {
+      this.setParam("metrics", metrics);
+      return this;
+    }
+
+    public APIRequestCreateInsightsPushSchedule setObjectId (String objectId) {
+      this.setParam("object_id", objectId);
+      return this;
+    }
+
+    public APIRequestCreateInsightsPushSchedule setOwnerId (Object ownerId) {
+      this.setParam("owner_id", ownerId);
+      return this;
+    }
+    public APIRequestCreateInsightsPushSchedule setOwnerId (String ownerId) {
+      this.setParam("owner_id", ownerId);
+      return this;
+    }
+
+    public APIRequestCreateInsightsPushSchedule setSchedule (EnumSchedule schedule) {
+      this.setParam("schedule", schedule);
+      return this;
+    }
+    public APIRequestCreateInsightsPushSchedule setSchedule (String schedule) {
+      this.setParam("schedule", schedule);
+      return this;
+    }
+
+    public APIRequestCreateInsightsPushSchedule setStatus (EnumStatus status) {
+      this.setParam("status", status);
+      return this;
+    }
+    public APIRequestCreateInsightsPushSchedule setStatus (String status) {
+      this.setParam("status", status);
+      return this;
+    }
+
+    public APIRequestCreateInsightsPushSchedule setTimeCreated (String timeCreated) {
+      this.setParam("time_created", timeCreated);
+      return this;
+    }
+
+    public APIRequestCreateInsightsPushSchedule setTimeIncrement (Long timeIncrement) {
+      this.setParam("time_increment", timeIncrement);
+      return this;
+    }
+    public APIRequestCreateInsightsPushSchedule setTimeIncrement (String timeIncrement) {
+      this.setParam("time_increment", timeIncrement);
+      return this;
+    }
+
+    public APIRequestCreateInsightsPushSchedule setTimeLastFail (String timeLastFail) {
+      this.setParam("time_last_fail", timeLastFail);
+      return this;
+    }
+
+    public APIRequestCreateInsightsPushSchedule setTimeLastRun (String timeLastRun) {
+      this.setParam("time_last_run", timeLastRun);
+      return this;
+    }
+
+    public APIRequestCreateInsightsPushSchedule setTimeLastSuccess (String timeLastSuccess) {
+      this.setParam("time_last_success", timeLastSuccess);
+      return this;
+    }
+
+    public APIRequestCreateInsightsPushSchedule setTimeStart (String timeStart) {
+      this.setParam("time_start", timeStart);
+      return this;
+    }
+
+    public APIRequestCreateInsightsPushSchedule setTimeStop (String timeStop) {
+      this.setParam("time_stop", timeStop);
+      return this;
+    }
+
+    public APIRequestCreateInsightsPushSchedule setTimeUpdated (String timeUpdated) {
+      this.setParam("time_updated", timeUpdated);
+      return this;
+    }
+
+    public APIRequestCreateInsightsPushSchedule requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateInsightsPushSchedule requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateInsightsPushSchedule requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateInsightsPushSchedule requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateInsightsPushSchedule requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateInsightsPushSchedule requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -11975,11 +12335,61 @@ public class Application extends APINode {
       }
   }
 
+  public static enum EnumLevel {
+      @SerializedName("ACCOUNT")
+      VALUE_ACCOUNT("ACCOUNT"),
+      @SerializedName("AD")
+      VALUE_AD("AD"),
+      @SerializedName("ADSET")
+      VALUE_ADSET("ADSET"),
+      @SerializedName("CAMPAIGN")
+      VALUE_CAMPAIGN("CAMPAIGN"),
+      NULL(null);
+
+      private String value;
+
+      private EnumLevel(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumSchedule {
+      @SerializedName("DAILY")
+      VALUE_DAILY("DAILY"),
+      @SerializedName("FINE_15_MIN")
+      VALUE_FINE_15_MIN("FINE_15_MIN"),
+      @SerializedName("FINE_5_MIN")
+      VALUE_FINE_5_MIN("FINE_5_MIN"),
+      @SerializedName("MONTHLY")
+      VALUE_MONTHLY("MONTHLY"),
+      @SerializedName("WEEKLY")
+      VALUE_WEEKLY("WEEKLY"),
+      NULL(null);
+
+      private String value;
+
+      private EnumSchedule(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumStatus {
-      @SerializedName("live")
-      VALUE_LIVE("live"),
-      @SerializedName("unapproved")
-      VALUE_UNAPPROVED("unapproved"),
+      @SerializedName("ACTIVE")
+      VALUE_ACTIVE("ACTIVE"),
+      @SerializedName("DISABLED")
+      VALUE_DISABLED("DISABLED"),
+      @SerializedName("ERROR")
+      VALUE_ERROR("ERROR"),
       NULL(null);
 
       private String value;

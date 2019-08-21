@@ -344,6 +344,7 @@ public class BusinessImage extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "time_range",
     };
 
     public static final String[] FIELDS = {
@@ -401,6 +402,15 @@ public class BusinessImage extends APINode {
       return this;
     }
 
+
+    public APIRequestGetInsights setTimeRange (Object timeRange) {
+      this.setParam("time_range", timeRange);
+      return this;
+    }
+    public APIRequestGetInsights setTimeRange (String timeRange) {
+      this.setParam("time_range", timeRange);
+      return this;
+    }
 
     public APIRequestGetInsights requestAllFields () {
       return this.requestAllFields(true);

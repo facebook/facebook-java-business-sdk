@@ -5828,6 +5828,8 @@ public class AdSet extends APINode {
       VALUE_ACTIVE("ACTIVE"),
       @SerializedName("ARCHIVED")
       VALUE_ARCHIVED("ARCHIVED"),
+      @SerializedName("CAMPAIGN_PAUSED")
+      VALUE_CAMPAIGN_PAUSED("CAMPAIGN_PAUSED"),
       @SerializedName("DELETED")
       VALUE_DELETED("DELETED"),
       @SerializedName("IN_PROCESS")
