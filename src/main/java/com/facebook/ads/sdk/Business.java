@@ -502,6 +502,10 @@ public class Business extends APINode {
     return new APIRequestCreateManagedBusiness(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateMoveAsset createMoveAsset() {
+    return new APIRequestCreateMoveAsset(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetOfflineConversionDataSets getOfflineConversionDataSets() {
     return new APIRequestGetOfflineConversionDataSets(this.getPrefixedId().toString(), context);
   }
@@ -11570,16 +11574,17 @@ public class Business extends APINode {
     }
   }
 
-  public static class APIRequestCreateImage extends APIRequest<APINode> {
+  public static class APIRequestCreateImage extends APIRequest<BusinessImage> {
 
-    APINode lastResponse = null;
+    BusinessImage lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public BusinessImage getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
       "creative_folder_id",
       "name",
+      "validation_ad_placements",
       "file",
     };
 
@@ -11587,31 +11592,31 @@ public class Business extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
+    public BusinessImage parseResponse(String response, String header) throws APIException {
+      return BusinessImage.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public BusinessImage execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public BusinessImage execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINode> executeAsync() throws APIException {
+    public ListenableFuture<BusinessImage> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<BusinessImage> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, BusinessImage>() {
+           public BusinessImage apply(ResponseWrapper result) {
              try {
                return APIRequestCreateImage.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -11655,6 +11660,15 @@ public class Business extends APINode {
 
     public APIRequestCreateImage setName (String name) {
       this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateImage setValidationAdPlacements (List<BusinessImage.EnumValidationAdPlacements> validationAdPlacements) {
+      this.setParam("validation_ad_placements", validationAdPlacements);
+      return this;
+    }
+    public APIRequestCreateImage setValidationAdPlacements (String validationAdPlacements) {
+      this.setParam("validation_ad_placements", validationAdPlacements);
       return this;
     }
 
@@ -12452,6 +12466,122 @@ public class Business extends APINode {
 
     @Override
     public APIRequestCreateManagedBusiness requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateMoveAsset extends APIRequest<Business> {
+
+    Business lastResponse = null;
+    @Override
+    public Business getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "asset_id",
+      "client_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Business parseResponse(String response, String header) throws APIException {
+      return Business.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Business execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Business execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Business> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Business> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, Business>() {
+           public Business apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateMoveAsset.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateMoveAsset(String nodeId, APIContext context) {
+      super(context, nodeId, "/move_asset", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateMoveAsset setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMoveAsset setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateMoveAsset setAssetId (String assetId) {
+      this.setParam("asset_id", assetId);
+      return this;
+    }
+
+    public APIRequestCreateMoveAsset setClientId (String clientId) {
+      this.setParam("client_id", clientId);
+      return this;
+    }
+
+    public APIRequestCreateMoveAsset requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateMoveAsset requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMoveAsset requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateMoveAsset requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMoveAsset requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMoveAsset requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -20872,6 +21002,7 @@ public class Business extends APINode {
       "upload_phase",
       "upload_session_id",
       "upload_setting_properties",
+      "validation_ad_placement",
       "video_file_chunk",
       "video_start_time_ms",
       "waterfall_id",
@@ -21410,6 +21541,15 @@ public class Business extends APINode {
 
     public APIRequestCreateVideo setUploadSettingProperties (String uploadSettingProperties) {
       this.setParam("upload_setting_properties", uploadSettingProperties);
+      return this;
+    }
+
+    public APIRequestCreateVideo setValidationAdPlacement (AdVideo.EnumValidationAdPlacement validationAdPlacement) {
+      this.setParam("validation_ad_placement", validationAdPlacement);
+      return this;
+    }
+    public APIRequestCreateVideo setValidationAdPlacement (String validationAdPlacement) {
+      this.setParam("validation_ad_placement", validationAdPlacement);
       return this;
     }
 
@@ -22017,6 +22157,8 @@ public class Business extends APINode {
       VALUE_PAGES_MESSAGING_SUBSCRIPTIONS("PAGES_MESSAGING_SUBSCRIPTIONS"),
       @SerializedName("PLATFORM_MANAGE_PAGES")
       VALUE_PLATFORM_MANAGE_PAGES("PLATFORM_MANAGE_PAGES"),
+      @SerializedName("PLATFORM_READ_INSIGHTS")
+      VALUE_PLATFORM_READ_INSIGHTS("PLATFORM_READ_INSIGHTS"),
       @SerializedName("READ_PAGE_MAILBOXES")
       VALUE_READ_PAGE_MAILBOXES("READ_PAGE_MAILBOXES"),
       @SerializedName("VIEW_MONETIZATION_INSIGHTS")

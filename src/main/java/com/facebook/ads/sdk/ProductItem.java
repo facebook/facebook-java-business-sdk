@@ -1445,6 +1445,7 @@ public class ProductItem extends APINode {
       "iphone_app_name",
       "iphone_app_store_id",
       "iphone_url",
+      "launch_date",
       "manufacturer_part_number",
       "material",
       "mobile_link",
@@ -1733,6 +1734,11 @@ public class ProductItem extends APINode {
 
     public APIRequestUpdate setIphoneUrl (String iphoneUrl) {
       this.setParam("iphone_url", iphoneUrl);
+      return this;
+    }
+
+    public APIRequestUpdate setLaunchDate (String launchDate) {
+      this.setParam("launch_date", launchDate);
       return this;
     }
 

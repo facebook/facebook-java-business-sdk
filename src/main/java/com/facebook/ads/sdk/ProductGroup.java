@@ -876,6 +876,7 @@ public class ProductGroup extends APINode {
       "iphone_app_name",
       "iphone_app_store_id",
       "iphone_url",
+      "launch_date",
       "manufacturer_part_number",
       "material",
       "mobile_link",
@@ -1164,6 +1165,11 @@ public class ProductGroup extends APINode {
 
     public APIRequestCreateProduct setIphoneUrl (String iphoneUrl) {
       this.setParam("iphone_url", iphoneUrl);
+      return this;
+    }
+
+    public APIRequestCreateProduct setLaunchDate (String launchDate) {
+      this.setParam("launch_date", launchDate);
       return this;
     }
 

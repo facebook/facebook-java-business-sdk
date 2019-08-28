@@ -826,6 +826,10 @@ public class Page extends APINode {
     return new APIRequestCreatePageBackedInstagramAccount(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetPartnerCouponOffer getPartnerCouponOffer() {
+    return new APIRequestGetPartnerCouponOffer(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreatePassThreadControl createPassThreadControl() {
     return new APIRequestCreatePassThreadControl(this.getPrefixedId().toString(), context);
   }
@@ -20414,6 +20418,158 @@ public class Page extends APINode {
 
   }
 
+  public static class APIRequestGetPartnerCouponOffer extends APIRequest<PartnerCouponOffer> {
+
+    APINodeList<PartnerCouponOffer> lastResponse = null;
+    @Override
+    public APINodeList<PartnerCouponOffer> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "claim_by",
+      "currency",
+      "expiration_days",
+      "id",
+      "minimum_spend",
+      "offer_amount",
+    };
+
+    @Override
+    public APINodeList<PartnerCouponOffer> parseResponse(String response, String header) throws APIException {
+      return PartnerCouponOffer.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<PartnerCouponOffer> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<PartnerCouponOffer> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<PartnerCouponOffer>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<PartnerCouponOffer>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<PartnerCouponOffer>>() {
+           public APINodeList<PartnerCouponOffer> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetPartnerCouponOffer.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetPartnerCouponOffer(String nodeId, APIContext context) {
+      super(context, nodeId, "/partner_coupon_offer", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetPartnerCouponOffer setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPartnerCouponOffer setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetPartnerCouponOffer requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetPartnerCouponOffer requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPartnerCouponOffer requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetPartnerCouponOffer requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPartnerCouponOffer requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPartnerCouponOffer requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetPartnerCouponOffer requestClaimByField () {
+      return this.requestClaimByField(true);
+    }
+    public APIRequestGetPartnerCouponOffer requestClaimByField (boolean value) {
+      this.requestField("claim_by", value);
+      return this;
+    }
+    public APIRequestGetPartnerCouponOffer requestCurrencyField () {
+      return this.requestCurrencyField(true);
+    }
+    public APIRequestGetPartnerCouponOffer requestCurrencyField (boolean value) {
+      this.requestField("currency", value);
+      return this;
+    }
+    public APIRequestGetPartnerCouponOffer requestExpirationDaysField () {
+      return this.requestExpirationDaysField(true);
+    }
+    public APIRequestGetPartnerCouponOffer requestExpirationDaysField (boolean value) {
+      this.requestField("expiration_days", value);
+      return this;
+    }
+    public APIRequestGetPartnerCouponOffer requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetPartnerCouponOffer requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetPartnerCouponOffer requestMinimumSpendField () {
+      return this.requestMinimumSpendField(true);
+    }
+    public APIRequestGetPartnerCouponOffer requestMinimumSpendField (boolean value) {
+      this.requestField("minimum_spend", value);
+      return this;
+    }
+    public APIRequestGetPartnerCouponOffer requestOfferAmountField () {
+      return this.requestOfferAmountField(true);
+    }
+    public APIRequestGetPartnerCouponOffer requestOfferAmountField (boolean value) {
+      this.requestField("offer_amount", value);
+      return this;
+    }
+  }
+
   public static class APIRequestCreatePassThreadControl extends APIRequest<Page> {
 
     Page lastResponse = null;
@@ -34653,6 +34809,8 @@ public class Page extends APINode {
       VALUE_PAGES_MESSAGING_SUBSCRIPTIONS("PAGES_MESSAGING_SUBSCRIPTIONS"),
       @SerializedName("PLATFORM_MANAGE_PAGES")
       VALUE_PLATFORM_MANAGE_PAGES("PLATFORM_MANAGE_PAGES"),
+      @SerializedName("PLATFORM_READ_INSIGHTS")
+      VALUE_PLATFORM_READ_INSIGHTS("PLATFORM_READ_INSIGHTS"),
       @SerializedName("READ_PAGE_MAILBOXES")
       VALUE_READ_PAGE_MAILBOXES("READ_PAGE_MAILBOXES"),
       @SerializedName("VIEW_MONETIZATION_INSIGHTS")
@@ -34694,6 +34852,8 @@ public class Page extends APINode {
       VALUE_PAGES_MESSAGING_SUBSCRIPTIONS("PAGES_MESSAGING_SUBSCRIPTIONS"),
       @SerializedName("PLATFORM_MANAGE_PAGES")
       VALUE_PLATFORM_MANAGE_PAGES("PLATFORM_MANAGE_PAGES"),
+      @SerializedName("PLATFORM_READ_INSIGHTS")
+      VALUE_PLATFORM_READ_INSIGHTS("PLATFORM_READ_INSIGHTS"),
       @SerializedName("READ_PAGE_MAILBOXES")
       VALUE_READ_PAGE_MAILBOXES("READ_PAGE_MAILBOXES"),
       @SerializedName("VIEW_MONETIZATION_INSIGHTS")
