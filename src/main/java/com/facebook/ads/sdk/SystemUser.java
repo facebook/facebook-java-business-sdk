@@ -2292,6 +2292,7 @@ public class SystemUser extends APINode {
       "id",
       "name",
       "product_count",
+      "store_catalog_settings",
       "vertical",
     };
 
@@ -2445,6 +2446,13 @@ public class SystemUser extends APINode {
     }
     public APIRequestGetAssignedProductCatalogs requestProductCountField (boolean value) {
       this.requestField("product_count", value);
+      return this;
+    }
+    public APIRequestGetAssignedProductCatalogs requestStoreCatalogSettingsField () {
+      return this.requestStoreCatalogSettingsField(true);
+    }
+    public APIRequestGetAssignedProductCatalogs requestStoreCatalogSettingsField (boolean value) {
+      this.requestField("store_catalog_settings", value);
       return this;
     }
     public APIRequestGetAssignedProductCatalogs requestVerticalField () {

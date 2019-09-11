@@ -440,6 +440,7 @@ public class AdReportRun extends APINode {
       "conditional_time_spent_ms_over_6s_actions",
       "contact_actions",
       "contact_value",
+      "conversion_rate_ranking",
       "conversion_values",
       "conversions",
       "cost_per_10_sec_video_view",
@@ -502,6 +503,7 @@ public class AdReportRun extends APINode {
       "dwell_7_sec",
       "dwell_rate",
       "earned_impression",
+      "engagement_rate_ranking",
       "estimated_ad_recall_rate",
       "estimated_ad_recall_rate_lower_bound",
       "estimated_ad_recall_rate_upper_bound",
@@ -550,6 +552,7 @@ public class AdReportRun extends APINode {
       "product_id",
       "publisher_platform",
       "purchase_roas",
+      "quality_ranking",
       "quality_score_ectr",
       "quality_score_ecvr",
       "quality_score_enfbr",
@@ -1116,6 +1119,13 @@ public class AdReportRun extends APINode {
       this.requestField("contact_value", value);
       return this;
     }
+    public APIRequestGetInsights requestConversionRateRankingField () {
+      return this.requestConversionRateRankingField(true);
+    }
+    public APIRequestGetInsights requestConversionRateRankingField (boolean value) {
+      this.requestField("conversion_rate_ranking", value);
+      return this;
+    }
     public APIRequestGetInsights requestConversionValuesField () {
       return this.requestConversionValuesField(true);
     }
@@ -1550,6 +1560,13 @@ public class AdReportRun extends APINode {
       this.requestField("earned_impression", value);
       return this;
     }
+    public APIRequestGetInsights requestEngagementRateRankingField () {
+      return this.requestEngagementRateRankingField(true);
+    }
+    public APIRequestGetInsights requestEngagementRateRankingField (boolean value) {
+      this.requestField("engagement_rate_ranking", value);
+      return this;
+    }
     public APIRequestGetInsights requestEstimatedAdRecallRateField () {
       return this.requestEstimatedAdRecallRateField(true);
     }
@@ -1884,6 +1901,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestPurchaseRoasField (boolean value) {
       this.requestField("purchase_roas", value);
+      return this;
+    }
+    public APIRequestGetInsights requestQualityRankingField () {
+      return this.requestQualityRankingField(true);
+    }
+    public APIRequestGetInsights requestQualityRankingField (boolean value) {
+      this.requestField("quality_ranking", value);
       return this;
     }
     public APIRequestGetInsights requestQualityScoreEctrField () {

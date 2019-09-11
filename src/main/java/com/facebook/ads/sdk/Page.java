@@ -3584,10 +3584,6 @@ public class Page extends APINode {
     }
 
 
-    public APIRequestDeleteBlocked setAsid (Object asid) {
-      this.setParam("asid", asid);
-      return this;
-    }
     public APIRequestDeleteBlocked setAsid (String asid) {
       this.setParam("asid", asid);
       return this;
@@ -8423,7 +8419,6 @@ public class Page extends APINode {
       "spherical",
       "status",
       "title",
-      "tv_banner_ad",
       "universal_video_id",
       "updated_time",
     };
@@ -8781,13 +8776,6 @@ public class Page extends APINode {
     }
     public APIRequestGetFeaturedVideosCollection requestTitleField (boolean value) {
       this.requestField("title", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestTvBannerAdField () {
-      return this.requestTvBannerAdField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestTvBannerAdField (boolean value) {
-      this.requestField("tv_banner_ad", value);
       return this;
     }
     public APIRequestGetFeaturedVideosCollection requestUniversalVideoIdField () {
@@ -11679,7 +11667,6 @@ public class Page extends APINode {
       "spherical",
       "status",
       "title",
-      "tv_banner_ad",
       "universal_video_id",
       "updated_time",
     };
@@ -12037,13 +12024,6 @@ public class Page extends APINode {
     }
     public APIRequestGetIndexedVideos requestTitleField (boolean value) {
       this.requestField("title", value);
-      return this;
-    }
-    public APIRequestGetIndexedVideos requestTvBannerAdField () {
-      return this.requestTvBannerAdField(true);
-    }
-    public APIRequestGetIndexedVideos requestTvBannerAdField (boolean value) {
-      this.requestField("tv_banner_ad", value);
       return this;
     }
     public APIRequestGetIndexedVideos requestUniversalVideoIdField () {
@@ -23118,6 +23098,7 @@ public class Page extends APINode {
       "id",
       "name",
       "product_count",
+      "store_catalog_settings",
       "vertical",
     };
 
@@ -23271,6 +23252,13 @@ public class Page extends APINode {
     }
     public APIRequestGetProductCatalogs requestProductCountField (boolean value) {
       this.requestField("product_count", value);
+      return this;
+    }
+    public APIRequestGetProductCatalogs requestStoreCatalogSettingsField () {
+      return this.requestStoreCatalogSettingsField(true);
+    }
+    public APIRequestGetProductCatalogs requestStoreCatalogSettingsField (boolean value) {
+      this.requestField("store_catalog_settings", value);
       return this;
     }
     public APIRequestGetProductCatalogs requestVerticalField () {
@@ -31038,7 +31026,6 @@ public class Page extends APINode {
       "spherical",
       "status",
       "title",
-      "tv_banner_ad",
       "universal_video_id",
       "updated_time",
     };
@@ -31405,13 +31392,6 @@ public class Page extends APINode {
     }
     public APIRequestGetVideos requestTitleField (boolean value) {
       this.requestField("title", value);
-      return this;
-    }
-    public APIRequestGetVideos requestTvBannerAdField () {
-      return this.requestTvBannerAdField(true);
-    }
-    public APIRequestGetVideos requestTvBannerAdField (boolean value) {
-      this.requestField("tv_banner_ad", value);
       return this;
     }
     public APIRequestGetVideos requestUniversalVideoIdField () {
@@ -34809,6 +34789,8 @@ public class Page extends APINode {
       VALUE_PAGES_MESSAGING_SUBSCRIPTIONS("PAGES_MESSAGING_SUBSCRIPTIONS"),
       @SerializedName("PLATFORM_MANAGE_PAGES")
       VALUE_PLATFORM_MANAGE_PAGES("PLATFORM_MANAGE_PAGES"),
+      @SerializedName("PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES")
+      VALUE_PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES("PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES"),
       @SerializedName("PLATFORM_READ_INSIGHTS")
       VALUE_PLATFORM_READ_INSIGHTS("PLATFORM_READ_INSIGHTS"),
       @SerializedName("READ_PAGE_MAILBOXES")
@@ -34852,6 +34834,8 @@ public class Page extends APINode {
       VALUE_PAGES_MESSAGING_SUBSCRIPTIONS("PAGES_MESSAGING_SUBSCRIPTIONS"),
       @SerializedName("PLATFORM_MANAGE_PAGES")
       VALUE_PLATFORM_MANAGE_PAGES("PLATFORM_MANAGE_PAGES"),
+      @SerializedName("PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES")
+      VALUE_PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES("PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES"),
       @SerializedName("PLATFORM_READ_INSIGHTS")
       VALUE_PLATFORM_READ_INSIGHTS("PLATFORM_READ_INSIGHTS"),
       @SerializedName("READ_PAGE_MAILBOXES")

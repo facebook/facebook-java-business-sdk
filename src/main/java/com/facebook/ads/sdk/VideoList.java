@@ -378,7 +378,6 @@ public class VideoList extends APINode {
       "spherical",
       "status",
       "title",
-      "tv_banner_ad",
       "universal_video_id",
       "updated_time",
     };
@@ -736,13 +735,6 @@ public class VideoList extends APINode {
     }
     public APIRequestGetVideos requestTitleField (boolean value) {
       this.requestField("title", value);
-      return this;
-    }
-    public APIRequestGetVideos requestTvBannerAdField () {
-      return this.requestTvBannerAdField(true);
-    }
-    public APIRequestGetVideos requestTvBannerAdField (boolean value) {
-      this.requestField("tv_banner_ad", value);
       return this;
     }
     public APIRequestGetVideos requestUniversalVideoIdField () {

@@ -131,8 +131,6 @@ public class AdVideo extends APINode {
   private Object mStatus = null;
   @SerializedName("title")
   private String mTitle = null;
-  @SerializedName("tv_banner_ad")
-  private Object mTvBannerAd = null;
   @SerializedName("universal_video_id")
   private String mUniversalVideoId = null;
   @SerializedName("updated_time")
@@ -605,10 +603,6 @@ public class AdVideo extends APINode {
 
   public String getFieldTitle() {
     return mTitle;
-  }
-
-  public Object getFieldTvBannerAd() {
-    return mTvBannerAd;
   }
 
   public String getFieldUniversalVideoId() {
@@ -6636,7 +6630,6 @@ public class AdVideo extends APINode {
       "spherical",
       "status",
       "title",
-      "tv_banner_ad",
       "universal_video_id",
       "updated_time",
     };
@@ -6994,13 +6987,6 @@ public class AdVideo extends APINode {
     }
     public APIRequestGet requestTitleField (boolean value) {
       this.requestField("title", value);
-      return this;
-    }
-    public APIRequestGet requestTvBannerAdField () {
-      return this.requestTvBannerAdField(true);
-    }
-    public APIRequestGet requestTvBannerAdField (boolean value) {
-      this.requestField("tv_banner_ad", value);
       return this;
     }
     public APIRequestGet requestUniversalVideoIdField () {
@@ -7538,6 +7524,8 @@ public class AdVideo extends APINode {
       VALUE_SALES_CLIENT_INTERACTION("SALES_CLIENT_INTERACTION"),
       @SerializedName("SAY_THANKS_DEPRECATED")
       VALUE_SAY_THANKS_DEPRECATED("SAY_THANKS_DEPRECATED"),
+      @SerializedName("SHOWREEL_NATIVE_DUMMY_VIDEO")
+      VALUE_SHOWREEL_NATIVE_DUMMY_VIDEO("SHOWREEL_NATIVE_DUMMY_VIDEO"),
       @SerializedName("SLIDESHOW_ANIMOTO")
       VALUE_SLIDESHOW_ANIMOTO("SLIDESHOW_ANIMOTO"),
       @SerializedName("SLIDESHOW_SHAKR")
@@ -7742,13 +7730,11 @@ public class AdVideo extends APINode {
       }
   }
 
-  public static enum EnumValidationAdPlacement {
+  public static enum EnumValidationAdPlacements {
       @SerializedName("AUDIENCE_NETWORK_INSTREAM_VIDEO")
       VALUE_AUDIENCE_NETWORK_INSTREAM_VIDEO("AUDIENCE_NETWORK_INSTREAM_VIDEO"),
       @SerializedName("AUDIENCE_NETWORK_INSTREAM_VIDEO_MOBILE")
       VALUE_AUDIENCE_NETWORK_INSTREAM_VIDEO_MOBILE("AUDIENCE_NETWORK_INSTREAM_VIDEO_MOBILE"),
-      @SerializedName("AUDIENCE_NETWORK_OUTSTREAM_VIDEO")
-      VALUE_AUDIENCE_NETWORK_OUTSTREAM_VIDEO("AUDIENCE_NETWORK_OUTSTREAM_VIDEO"),
       @SerializedName("AUDIENCE_NETWORK_REWARDED_VIDEO")
       VALUE_AUDIENCE_NETWORK_REWARDED_VIDEO("AUDIENCE_NETWORK_REWARDED_VIDEO"),
       @SerializedName("DESKTOP_FEED_STANDARD")
@@ -7759,24 +7745,16 @@ public class AdVideo extends APINode {
       VALUE_INSTAGRAM_STANDARD("INSTAGRAM_STANDARD"),
       @SerializedName("INSTAGRAM_STORY")
       VALUE_INSTAGRAM_STORY("INSTAGRAM_STORY"),
-      @SerializedName("INSTANT_ARTICLE_RECIRCULATION_AD")
-      VALUE_INSTANT_ARTICLE_RECIRCULATION_AD("INSTANT_ARTICLE_RECIRCULATION_AD"),
       @SerializedName("INSTANT_ARTICLE_STANDARD")
       VALUE_INSTANT_ARTICLE_STANDARD("INSTANT_ARTICLE_STANDARD"),
       @SerializedName("INSTREAM_VIDEO_DESKTOP")
       VALUE_INSTREAM_VIDEO_DESKTOP("INSTREAM_VIDEO_DESKTOP"),
       @SerializedName("INSTREAM_VIDEO_MOBILE")
       VALUE_INSTREAM_VIDEO_MOBILE("INSTREAM_VIDEO_MOBILE"),
-      @SerializedName("MARKETPLACE_MOBILE")
-      VALUE_MARKETPLACE_MOBILE("MARKETPLACE_MOBILE"),
       @SerializedName("MESSENGER_MOBILE_INBOX_MEDIA")
       VALUE_MESSENGER_MOBILE_INBOX_MEDIA("MESSENGER_MOBILE_INBOX_MEDIA"),
       @SerializedName("MESSENGER_MOBILE_STORY_MEDIA")
       VALUE_MESSENGER_MOBILE_STORY_MEDIA("MESSENGER_MOBILE_STORY_MEDIA"),
-      @SerializedName("MOBILE_BANNER")
-      VALUE_MOBILE_BANNER("MOBILE_BANNER"),
-      @SerializedName("MOBILE_FEED_BASIC")
-      VALUE_MOBILE_FEED_BASIC("MOBILE_FEED_BASIC"),
       @SerializedName("MOBILE_FEED_STANDARD")
       VALUE_MOBILE_FEED_STANDARD("MOBILE_FEED_STANDARD"),
       @SerializedName("MOBILE_FULLWIDTH")
@@ -7789,17 +7767,13 @@ public class AdVideo extends APINode {
       VALUE_MOBILE_NATIVE("MOBILE_NATIVE"),
       @SerializedName("RIGHT_COLUMN_STANDARD")
       VALUE_RIGHT_COLUMN_STANDARD("RIGHT_COLUMN_STANDARD"),
-      @SerializedName("SUGGESTED_VIDEO_DESKTOP")
-      VALUE_SUGGESTED_VIDEO_DESKTOP("SUGGESTED_VIDEO_DESKTOP"),
       @SerializedName("SUGGESTED_VIDEO_MOBILE")
       VALUE_SUGGESTED_VIDEO_MOBILE("SUGGESTED_VIDEO_MOBILE"),
-      @SerializedName("WATCH_FEED_MOBILE")
-      VALUE_WATCH_FEED_MOBILE("WATCH_FEED_MOBILE"),
       NULL(null);
 
       private String value;
 
-      private EnumValidationAdPlacement(String value) {
+      private EnumValidationAdPlacements(String value) {
         this.value = value;
       }
 
@@ -7931,7 +7905,6 @@ public class AdVideo extends APINode {
     this.mSpherical = instance.mSpherical;
     this.mStatus = instance.mStatus;
     this.mTitle = instance.mTitle;
-    this.mTvBannerAd = instance.mTvBannerAd;
     this.mUniversalVideoId = instance.mUniversalVideoId;
     this.mUpdatedTime = instance.mUpdatedTime;
     this.context = instance.context;

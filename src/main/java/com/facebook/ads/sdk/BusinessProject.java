@@ -4090,6 +4090,7 @@ public class BusinessProject extends APINode {
       "id",
       "name",
       "product_count",
+      "store_catalog_settings",
       "vertical",
     };
 
@@ -4243,6 +4244,13 @@ public class BusinessProject extends APINode {
     }
     public APIRequestGetProductCatalogs requestProductCountField (boolean value) {
       this.requestField("product_count", value);
+      return this;
+    }
+    public APIRequestGetProductCatalogs requestStoreCatalogSettingsField () {
+      return this.requestStoreCatalogSettingsField(true);
+    }
+    public APIRequestGetProductCatalogs requestStoreCatalogSettingsField (boolean value) {
+      this.requestField("store_catalog_settings", value);
       return this;
     }
     public APIRequestGetProductCatalogs requestVerticalField () {

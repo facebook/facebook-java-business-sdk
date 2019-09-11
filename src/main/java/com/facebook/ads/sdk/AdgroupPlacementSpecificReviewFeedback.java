@@ -85,6 +85,8 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
   private Map<String, String> mMarketplaceHomeSales = null;
   @SerializedName("marketplace_motors")
   private Map<String, String> mMarketplaceMotors = null;
+  @SerializedName("marketplace_shops")
+  private Map<String, String> mMarketplaceShops = null;
   @SerializedName("max_review_placements")
   private Map<String, String> mMaxReviewPlacements = null;
   @SerializedName("page_admin")
@@ -389,6 +391,15 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
     return this;
   }
 
+  public Map<String, String> getFieldMarketplaceShops() {
+    return mMarketplaceShops;
+  }
+
+  public AdgroupPlacementSpecificReviewFeedback setFieldMarketplaceShops(Map<String, String> value) {
+    this.mMarketplaceShops = value;
+    return this;
+  }
+
   public Map<String, String> getFieldMaxReviewPlacements() {
     return mMaxReviewPlacements;
   }
@@ -502,6 +513,7 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
     this.mMarketplaceHomeRentals = instance.mMarketplaceHomeRentals;
     this.mMarketplaceHomeSales = instance.mMarketplaceHomeSales;
     this.mMarketplaceMotors = instance.mMarketplaceMotors;
+    this.mMarketplaceShops = instance.mMarketplaceShops;
     this.mMaxReviewPlacements = instance.mMaxReviewPlacements;
     this.mPageAdmin = instance.mPageAdmin;
     this.mProduct = instance.mProduct;

@@ -73,6 +73,8 @@ public class ProductCatalog extends APINode {
   private String mName = null;
   @SerializedName("product_count")
   private Long mProductCount = null;
+  @SerializedName("store_catalog_settings")
+  private StoreCatalogSettings mStoreCatalogSettings = null;
   @SerializedName("vertical")
   private String mVertical = null;
   protected static Gson gson = null;
@@ -440,6 +442,10 @@ public class ProductCatalog extends APINode {
     return new APIRequestCreateProduct(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateStoreProductItemsBatch createStoreProductItemsBatch() {
+    return new APIRequestCreateStoreProductItemsBatch(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetVehicles getVehicles() {
     return new APIRequestGetVehicles(this.getPrefixedId().toString(), context);
   }
@@ -501,6 +507,13 @@ public class ProductCatalog extends APINode {
 
   public Long getFieldProductCount() {
     return mProductCount;
+  }
+
+  public StoreCatalogSettings getFieldStoreCatalogSettings() {
+    if (mStoreCatalogSettings != null) {
+      mStoreCatalogSettings.context = getContext();
+    }
+    return mStoreCatalogSettings;
   }
 
   public String getFieldVertical() {
@@ -7969,6 +7982,130 @@ public class ProductCatalog extends APINode {
 
   }
 
+  public static class APIRequestCreateStoreProductItemsBatch extends APIRequest<ProductCatalog> {
+
+    ProductCatalog lastResponse = null;
+    @Override
+    public ProductCatalog getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "allow_upsert",
+      "requests",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public ProductCatalog parseResponse(String response, String header) throws APIException {
+      return ProductCatalog.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public ProductCatalog execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ProductCatalog execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<ProductCatalog> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, ProductCatalog>() {
+           public ProductCatalog apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateStoreProductItemsBatch.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateStoreProductItemsBatch(String nodeId, APIContext context) {
+      super(context, nodeId, "/store_product_items_batch", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateStoreProductItemsBatch setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateStoreProductItemsBatch setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateStoreProductItemsBatch setAllowUpsert (Boolean allowUpsert) {
+      this.setParam("allow_upsert", allowUpsert);
+      return this;
+    }
+    public APIRequestCreateStoreProductItemsBatch setAllowUpsert (String allowUpsert) {
+      this.setParam("allow_upsert", allowUpsert);
+      return this;
+    }
+
+    public APIRequestCreateStoreProductItemsBatch setRequests (List<Map<String, String>> requests) {
+      this.setParam("requests", requests);
+      return this;
+    }
+    public APIRequestCreateStoreProductItemsBatch setRequests (String requests) {
+      this.setParam("requests", requests);
+      return this;
+    }
+
+    public APIRequestCreateStoreProductItemsBatch requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateStoreProductItemsBatch requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateStoreProductItemsBatch requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateStoreProductItemsBatch requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateStoreProductItemsBatch requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateStoreProductItemsBatch requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetVehicles extends APIRequest<Vehicle> {
 
     APINodeList<Vehicle> lastResponse = null;
@@ -8903,6 +9040,7 @@ public class ProductCatalog extends APINode {
       "id",
       "name",
       "product_count",
+      "store_catalog_settings",
       "vertical",
     };
 
@@ -9058,6 +9196,13 @@ public class ProductCatalog extends APINode {
       this.requestField("product_count", value);
       return this;
     }
+    public APIRequestGet requestStoreCatalogSettingsField () {
+      return this.requestStoreCatalogSettingsField(true);
+    }
+    public APIRequestGet requestStoreCatalogSettingsField (boolean value) {
+      this.requestField("store_catalog_settings", value);
+      return this;
+    }
     public APIRequestGet requestVerticalField () {
       return this.requestVerticalField(true);
     }
@@ -9081,6 +9226,7 @@ public class ProductCatalog extends APINode {
       "fallback_image_url",
       "flight_catalog_settings",
       "name",
+      "store_catalog_settings",
     };
 
     public static final String[] FIELDS = {
@@ -9181,6 +9327,15 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setStoreCatalogSettings (Map<String, String> storeCatalogSettings) {
+      this.setParam("store_catalog_settings", storeCatalogSettings);
+      return this;
+    }
+    public APIRequestUpdate setStoreCatalogSettings (String storeCatalogSettings) {
+      this.setParam("store_catalog_settings", storeCatalogSettings);
+      return this;
+    }
+
     public APIRequestUpdate requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -9232,6 +9387,8 @@ public class ProductCatalog extends APINode {
       VALUE_HOME_LISTINGS("home_listings"),
       @SerializedName("hotels")
       VALUE_HOTELS("hotels"),
+      @SerializedName("offline_commerce")
+      VALUE_OFFLINE_COMMERCE("offline_commerce"),
       @SerializedName("ticketed_experiences")
       VALUE_TICKETED_EXPERIENCES("ticketed_experiences"),
       @SerializedName("transactable_items")
@@ -9350,6 +9507,7 @@ public class ProductCatalog extends APINode {
     this.mId = instance.mId;
     this.mName = instance.mName;
     this.mProductCount = instance.mProductCount;
+    this.mStoreCatalogSettings = instance.mStoreCatalogSettings;
     this.mVertical = instance.mVertical;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

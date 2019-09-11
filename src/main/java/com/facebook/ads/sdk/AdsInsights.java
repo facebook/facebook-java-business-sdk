@@ -173,6 +173,8 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mContactActions = null;
   @SerializedName("contact_value")
   private List<AdsActionStats> mContactValue = null;
+  @SerializedName("conversion_rate_ranking")
+  private String mConversionRateRanking = null;
   @SerializedName("conversion_values")
   private List<AdsActionStats> mConversionValues = null;
   @SerializedName("conversions")
@@ -297,6 +299,8 @@ public class AdsInsights extends APINode {
   private String mDwellRate = null;
   @SerializedName("earned_impression")
   private String mEarnedImpression = null;
+  @SerializedName("engagement_rate_ranking")
+  private String mEngagementRateRanking = null;
   @SerializedName("estimated_ad_recall_rate")
   private String mEstimatedAdRecallRate = null;
   @SerializedName("estimated_ad_recall_rate_lower_bound")
@@ -393,6 +397,8 @@ public class AdsInsights extends APINode {
   private String mPublisherPlatform = null;
   @SerializedName("purchase_roas")
   private List<AdsActionStats> mPurchaseRoas = null;
+  @SerializedName("quality_ranking")
+  private String mQualityRanking = null;
   @SerializedName("quality_score_ectr")
   private String mQualityScoreEctr = null;
   @SerializedName("quality_score_ecvr")
@@ -1289,6 +1295,15 @@ public class AdsInsights extends APINode {
     this.mContactValue = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
+  public String getFieldConversionRateRanking() {
+    return mConversionRateRanking;
+  }
+
+  public AdsInsights setFieldConversionRateRanking(String value) {
+    this.mConversionRateRanking = value;
+    return this;
+  }
+
   public List<AdsActionStats> getFieldConversionValues() {
     return mConversionValues;
   }
@@ -1987,6 +2002,15 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public String getFieldEngagementRateRanking() {
+    return mEngagementRateRanking;
+  }
+
+  public AdsInsights setFieldEngagementRateRanking(String value) {
+    this.mEngagementRateRanking = value;
+    return this;
+  }
+
   public String getFieldEstimatedAdRecallRate() {
     return mEstimatedAdRecallRate;
   }
@@ -2454,6 +2478,15 @@ public class AdsInsights extends APINode {
     this.mPurchaseRoas = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
+  public String getFieldQualityRanking() {
+    return mQualityRanking;
+  }
+
+  public AdsInsights setFieldQualityRanking(String value) {
+    this.mQualityRanking = value;
+    return this;
+  }
+
   public String getFieldQualityScoreEctr() {
     return mQualityScoreEctr;
   }
@@ -3510,6 +3543,7 @@ public class AdsInsights extends APINode {
     this.mConditionalTimeSpentMsOver6sActions = instance.mConditionalTimeSpentMsOver6sActions;
     this.mContactActions = instance.mContactActions;
     this.mContactValue = instance.mContactValue;
+    this.mConversionRateRanking = instance.mConversionRateRanking;
     this.mConversionValues = instance.mConversionValues;
     this.mConversions = instance.mConversions;
     this.mCostPer10SecVideoView = instance.mCostPer10SecVideoView;
@@ -3572,6 +3606,7 @@ public class AdsInsights extends APINode {
     this.mDwell7Sec = instance.mDwell7Sec;
     this.mDwellRate = instance.mDwellRate;
     this.mEarnedImpression = instance.mEarnedImpression;
+    this.mEngagementRateRanking = instance.mEngagementRateRanking;
     this.mEstimatedAdRecallRate = instance.mEstimatedAdRecallRate;
     this.mEstimatedAdRecallRateLowerBound = instance.mEstimatedAdRecallRateLowerBound;
     this.mEstimatedAdRecallRateUpperBound = instance.mEstimatedAdRecallRateUpperBound;
@@ -3620,6 +3655,7 @@ public class AdsInsights extends APINode {
     this.mProductId = instance.mProductId;
     this.mPublisherPlatform = instance.mPublisherPlatform;
     this.mPurchaseRoas = instance.mPurchaseRoas;
+    this.mQualityRanking = instance.mQualityRanking;
     this.mQualityScoreEctr = instance.mQualityScoreEctr;
     this.mQualityScoreEcvr = instance.mQualityScoreEcvr;
     this.mQualityScoreEnfbr = instance.mQualityScoreEnfbr;

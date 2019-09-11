@@ -8148,6 +8148,7 @@ public class Business extends APINode {
       "id",
       "name",
       "product_count",
+      "store_catalog_settings",
       "vertical",
     };
 
@@ -8301,6 +8302,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientProductCatalogs requestProductCountField (boolean value) {
       this.requestField("product_count", value);
+      return this;
+    }
+    public APIRequestGetClientProductCatalogs requestStoreCatalogSettingsField () {
+      return this.requestStoreCatalogSettingsField(true);
+    }
+    public APIRequestGetClientProductCatalogs requestStoreCatalogSettingsField (boolean value) {
+      this.requestField("store_catalog_settings", value);
       return this;
     }
     public APIRequestGetClientProductCatalogs requestVerticalField () {
@@ -11582,6 +11590,7 @@ public class Business extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "ad_placements_validation_only",
       "creative_folder_id",
       "name",
       "validation_ad_placements",
@@ -11650,6 +11659,15 @@ public class Business extends APINode {
 
     public APIRequestCreateImage setUseVideoEndpoint(boolean useVideoEndpoint) {
       this.useVideoEndpoint = useVideoEndpoint;
+      return this;
+    }
+
+    public APIRequestCreateImage setAdPlacementsValidationOnly (Boolean adPlacementsValidationOnly) {
+      this.setParam("ad_placements_validation_only", adPlacementsValidationOnly);
+      return this;
+    }
+    public APIRequestCreateImage setAdPlacementsValidationOnly (String adPlacementsValidationOnly) {
+      this.setParam("ad_placements_validation_only", adPlacementsValidationOnly);
       return this;
     }
 
@@ -17254,6 +17272,7 @@ public class Business extends APINode {
       "id",
       "name",
       "product_count",
+      "store_catalog_settings",
       "vertical",
     };
 
@@ -17409,6 +17428,13 @@ public class Business extends APINode {
       this.requestField("product_count", value);
       return this;
     }
+    public APIRequestGetOwnedProductCatalogs requestStoreCatalogSettingsField () {
+      return this.requestStoreCatalogSettingsField(true);
+    }
+    public APIRequestGetOwnedProductCatalogs requestStoreCatalogSettingsField (boolean value) {
+      this.requestField("store_catalog_settings", value);
+      return this;
+    }
     public APIRequestGetOwnedProductCatalogs requestVerticalField () {
       return this.requestVerticalField(true);
     }
@@ -17430,6 +17456,7 @@ public class Business extends APINode {
       "destination_catalog_settings",
       "flight_catalog_settings",
       "name",
+      "store_catalog_settings",
       "vertical",
     };
 
@@ -17518,6 +17545,15 @@ public class Business extends APINode {
 
     public APIRequestCreateOwnedProductCatalog setName (String name) {
       this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateOwnedProductCatalog setStoreCatalogSettings (Map<String, String> storeCatalogSettings) {
+      this.setParam("store_catalog_settings", storeCatalogSettings);
+      return this;
+    }
+    public APIRequestCreateOwnedProductCatalog setStoreCatalogSettings (String storeCatalogSettings) {
+      this.setParam("store_catalog_settings", storeCatalogSettings);
       return this;
     }
 
@@ -20934,6 +20970,7 @@ public class Business extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "ad_placements_validation_only",
       "adaptive_type",
       "animated_effect_id",
       "application_id",
@@ -21002,7 +21039,7 @@ public class Business extends APINode {
       "upload_phase",
       "upload_session_id",
       "upload_setting_properties",
-      "validation_ad_placement",
+      "validation_ad_placements",
       "video_file_chunk",
       "video_start_time_ms",
       "waterfall_id",
@@ -21063,6 +21100,15 @@ public class Business extends APINode {
       return this;
     }
 
+
+    public APIRequestCreateVideo setAdPlacementsValidationOnly (Boolean adPlacementsValidationOnly) {
+      this.setParam("ad_placements_validation_only", adPlacementsValidationOnly);
+      return this;
+    }
+    public APIRequestCreateVideo setAdPlacementsValidationOnly (String adPlacementsValidationOnly) {
+      this.setParam("ad_placements_validation_only", adPlacementsValidationOnly);
+      return this;
+    }
 
     public APIRequestCreateVideo setAdaptiveType (String adaptiveType) {
       this.setParam("adaptive_type", adaptiveType);
@@ -21544,12 +21590,12 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestCreateVideo setValidationAdPlacement (AdVideo.EnumValidationAdPlacement validationAdPlacement) {
-      this.setParam("validation_ad_placement", validationAdPlacement);
+    public APIRequestCreateVideo setValidationAdPlacements (List<AdVideo.EnumValidationAdPlacements> validationAdPlacements) {
+      this.setParam("validation_ad_placements", validationAdPlacements);
       return this;
     }
-    public APIRequestCreateVideo setValidationAdPlacement (String validationAdPlacement) {
-      this.setParam("validation_ad_placement", validationAdPlacement);
+    public APIRequestCreateVideo setValidationAdPlacements (String validationAdPlacements) {
+      this.setParam("validation_ad_placements", validationAdPlacements);
       return this;
     }
 
@@ -22157,6 +22203,8 @@ public class Business extends APINode {
       VALUE_PAGES_MESSAGING_SUBSCRIPTIONS("PAGES_MESSAGING_SUBSCRIPTIONS"),
       @SerializedName("PLATFORM_MANAGE_PAGES")
       VALUE_PLATFORM_MANAGE_PAGES("PLATFORM_MANAGE_PAGES"),
+      @SerializedName("PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES")
+      VALUE_PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES("PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES"),
       @SerializedName("PLATFORM_READ_INSIGHTS")
       VALUE_PLATFORM_READ_INSIGHTS("PLATFORM_READ_INSIGHTS"),
       @SerializedName("READ_PAGE_MAILBOXES")

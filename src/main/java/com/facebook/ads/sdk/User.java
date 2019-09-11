@@ -6438,6 +6438,7 @@ public class User extends APINode {
       "id",
       "name",
       "product_count",
+      "store_catalog_settings",
       "vertical",
     };
 
@@ -6591,6 +6592,13 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedProductCatalogs requestProductCountField (boolean value) {
       this.requestField("product_count", value);
+      return this;
+    }
+    public APIRequestGetAssignedProductCatalogs requestStoreCatalogSettingsField () {
+      return this.requestStoreCatalogSettingsField(true);
+    }
+    public APIRequestGetAssignedProductCatalogs requestStoreCatalogSettingsField (boolean value) {
+      this.requestField("store_catalog_settings", value);
       return this;
     }
     public APIRequestGetAssignedProductCatalogs requestVerticalField () {
@@ -25656,7 +25664,6 @@ public class User extends APINode {
       "spherical",
       "status",
       "title",
-      "tv_banner_ad",
       "universal_video_id",
       "updated_time",
     };
@@ -26023,13 +26030,6 @@ public class User extends APINode {
     }
     public APIRequestGetVideos requestTitleField (boolean value) {
       this.requestField("title", value);
-      return this;
-    }
-    public APIRequestGetVideos requestTvBannerAdField () {
-      return this.requestTvBannerAdField(true);
-    }
-    public APIRequestGetVideos requestTvBannerAdField (boolean value) {
-      this.requestField("tv_banner_ad", value);
       return this;
     }
     public APIRequestGetVideos requestUniversalVideoIdField () {

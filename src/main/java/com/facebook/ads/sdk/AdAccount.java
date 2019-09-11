@@ -766,6 +766,14 @@ public class AdAccount extends APINode {
     return new APIRequestCreateSponsoredMessageAd(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestDeleteSubscribedApps deleteSubscribedApps() {
+    return new APIRequestDeleteSubscribedApps(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateSubscribedApp createSubscribedApp() {
+    return new APIRequestCreateSubscribedApp(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetTargetingBrowse getTargetingBrowse() {
     return new APIRequestGetTargetingBrowse(this.getPrefixedId().toString(), context);
   }
@@ -11138,7 +11146,6 @@ public class AdAccount extends APINode {
       "spherical",
       "status",
       "title",
-      "tv_banner_ad",
       "universal_video_id",
       "updated_time",
     };
@@ -11573,13 +11580,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdVideos requestTitleField (boolean value) {
       this.requestField("title", value);
-      return this;
-    }
-    public APIRequestGetAdVideos requestTvBannerAdField () {
-      return this.requestTvBannerAdField(true);
-    }
-    public APIRequestGetAdVideos requestTvBannerAdField (boolean value) {
-      this.requestField("tv_banner_ad", value);
       return this;
     }
     public APIRequestGetAdVideos requestUniversalVideoIdField () {
@@ -25690,6 +25690,226 @@ public class AdAccount extends APINode {
 
     @Override
     public APIRequestCreateSponsoredMessageAd requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestDeleteSubscribedApps extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "app_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestDeleteSubscribedApps.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDeleteSubscribedApps(String nodeId, APIContext context) {
+      super(context, nodeId, "/subscribed_apps", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDeleteSubscribedApps setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteSubscribedApps setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDeleteSubscribedApps setAppId (String appId) {
+      this.setParam("app_id", appId);
+      return this;
+    }
+
+    public APIRequestDeleteSubscribedApps requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDeleteSubscribedApps requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteSubscribedApps requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDeleteSubscribedApps requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteSubscribedApps requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteSubscribedApps requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateSubscribedApp extends APIRequest<Application> {
+
+    Application lastResponse = null;
+    @Override
+    public Application getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "app_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Application parseResponse(String response, String header) throws APIException {
+      return Application.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Application execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Application execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Application> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, Application>() {
+           public Application apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateSubscribedApp.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateSubscribedApp(String nodeId, APIContext context) {
+      super(context, nodeId, "/subscribed_apps", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateSubscribedApp setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSubscribedApp setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateSubscribedApp setAppId (String appId) {
+      this.setParam("app_id", appId);
+      return this;
+    }
+
+    public APIRequestCreateSubscribedApp requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateSubscribedApp requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSubscribedApp requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateSubscribedApp requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSubscribedApp requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSubscribedApp requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

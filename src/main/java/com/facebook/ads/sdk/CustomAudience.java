@@ -3101,6 +3101,7 @@ public class CustomAudience extends APINode {
     }
     public static final String[] PARAMS = {
       "ad_account_id",
+      "target_countries",
     };
 
     public static final String[] FIELDS = {
@@ -3196,6 +3197,15 @@ public class CustomAudience extends APINode {
 
     public APIRequestGet setAdAccountId (String adAccountId) {
       this.setParam("ad_account_id", adAccountId);
+      return this;
+    }
+
+    public APIRequestGet setTargetCountries (List<String> targetCountries) {
+      this.setParam("target_countries", targetCountries);
+      return this;
+    }
+    public APIRequestGet setTargetCountries (String targetCountries) {
+      this.setParam("target_countries", targetCountries);
       return this;
     }
 

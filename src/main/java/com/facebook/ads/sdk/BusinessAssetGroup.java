@@ -376,10 +376,6 @@ public class BusinessAssetGroup extends APINode {
     return new APIRequestCreateContainedProductCatalog(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestDelete delete() {
-    return new APIRequestDelete(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
@@ -6103,6 +6099,7 @@ public class BusinessAssetGroup extends APINode {
       "id",
       "name",
       "product_count",
+      "store_catalog_settings",
       "vertical",
     };
 
@@ -6258,6 +6255,13 @@ public class BusinessAssetGroup extends APINode {
       this.requestField("product_count", value);
       return this;
     }
+    public APIRequestGetContainedProductCatalogs requestStoreCatalogSettingsField () {
+      return this.requestStoreCatalogSettingsField(true);
+    }
+    public APIRequestGetContainedProductCatalogs requestStoreCatalogSettingsField (boolean value) {
+      this.requestField("store_catalog_settings", value);
+      return this;
+    }
     public APIRequestGetContainedProductCatalogs requestVerticalField () {
       return this.requestVerticalField(true);
     }
@@ -6371,110 +6375,6 @@ public class BusinessAssetGroup extends APINode {
 
     @Override
     public APIRequestCreateContainedProductCatalog requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestDelete extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestDelete(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDelete setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDelete setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDelete requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDelete requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDelete requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDelete requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDelete requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDelete requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -6782,6 +6682,8 @@ public class BusinessAssetGroup extends APINode {
       VALUE_PAGES_MESSAGING_SUBSCRIPTIONS("PAGES_MESSAGING_SUBSCRIPTIONS"),
       @SerializedName("PLATFORM_MANAGE_PAGES")
       VALUE_PLATFORM_MANAGE_PAGES("PLATFORM_MANAGE_PAGES"),
+      @SerializedName("PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES")
+      VALUE_PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES("PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES"),
       @SerializedName("PLATFORM_READ_INSIGHTS")
       VALUE_PLATFORM_READ_INSIGHTS("PLATFORM_READ_INSIGHTS"),
       @SerializedName("READ_PAGE_MAILBOXES")
