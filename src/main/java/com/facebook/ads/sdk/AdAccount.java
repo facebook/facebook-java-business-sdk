@@ -11660,6 +11660,7 @@ public class AdAccount extends APINode {
       "replace_video_id",
       "sales_promo_id",
       "slideshow_spec",
+      "source",
       "spherical",
       "start_offset",
       "swap_mode",
@@ -12124,6 +12125,20 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdVideo setSlideshowSpec (String slideshowSpec) {
       this.setParam("slideshow_spec", slideshowSpec);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setSource (String source) {
+      this.setParam("source", source);
+      return this;
+    }
+    public APIRequestCreateAdVideo setSource (File source) {
+      this.setParam("source", source);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setSource (byte[] source) {
+      this.setParam("source", source);
       return this;
     }
 

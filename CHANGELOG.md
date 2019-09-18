@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 
 ## Unreleased
+### Fixed
+ - Add back `source` param in `APIRequestCreateAdVideo`.
 
 ## v4.0.0
 ### Changed
