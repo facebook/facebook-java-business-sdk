@@ -649,7 +649,7 @@ public class URL extends APINode {
   public static enum EnumScopes {
       @SerializedName("NEWS_TAB")
       VALUE_NEWS_TAB("NEWS_TAB"),
-      NULL(null);
+      ;
 
       private String value;
 

@@ -6632,7 +6632,7 @@ public class BusinessAssetGroup extends APINode {
       VALUE_FB_EMPLOYEE_DSO_ADVERTISE("FB_EMPLOYEE_DSO_ADVERTISE"),
       @SerializedName("MANAGE")
       VALUE_MANAGE("MANAGE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -6653,7 +6653,7 @@ public class BusinessAssetGroup extends APINode {
       VALUE_MANAGE("MANAGE"),
       @SerializedName("UPLOAD")
       VALUE_UPLOAD("UPLOAD"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -6698,7 +6698,7 @@ public class BusinessAssetGroup extends APINode {
       VALUE_READ_PAGE_MAILBOXES("READ_PAGE_MAILBOXES"),
       @SerializedName("VIEW_MONETIZATION_INSIGHTS")
       VALUE_VIEW_MONETIZATION_INSIGHTS("VIEW_MONETIZATION_INSIGHTS"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -6717,7 +6717,7 @@ public class BusinessAssetGroup extends APINode {
       VALUE_ANALYZE("ANALYZE"),
       @SerializedName("EDIT")
       VALUE_EDIT("EDIT"),
-      NULL(null);
+      ;
 
       private String value;
 

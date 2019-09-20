@@ -297,7 +297,7 @@ public class AdRecommendation extends APINode {
       VALUE_LOW("LOW"),
       @SerializedName("MEDIUM")
       VALUE_MEDIUM("MEDIUM"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -318,7 +318,7 @@ public class AdRecommendation extends APINode {
       VALUE_LOW("LOW"),
       @SerializedName("MEDIUM")
       VALUE_MEDIUM("MEDIUM"),
-      NULL(null);
+      ;
 
       private String value;
 

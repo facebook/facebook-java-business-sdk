@@ -1257,7 +1257,7 @@ public class NativeOffer extends APINode {
       VALUE_INSTORE_DISCOUNT_CODES("instore_discount_codes"),
       @SerializedName("online_discount_codes")
       VALUE_ONLINE_DISCOUNT_CODES("online_discount_codes"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1298,7 +1298,7 @@ public class NativeOffer extends APINode {
       VALUE_UPC_A("UPC_A"),
       @SerializedName("UPC_E")
       VALUE_UPC_E("UPC_E"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1319,7 +1319,7 @@ public class NativeOffer extends APINode {
       VALUE_OFFLINE("offline"),
       @SerializedName("online")
       VALUE_ONLINE("online"),
-      NULL(null);
+      ;
 
       private String value;
 

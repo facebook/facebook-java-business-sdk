@@ -1318,7 +1318,7 @@ public class UnifiedThread extends APINode {
       VALUE_VOICE_MESSAGE("VOICE_MESSAGE"),
       @SerializedName("VOICE_MESSAGE_WITH_TRANSCRIPT")
       VALUE_VOICE_MESSAGE_WITH_TRANSCRIPT("VOICE_MESSAGE_WITH_TRANSCRIPT"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1339,7 +1339,7 @@ public class UnifiedThread extends APINode {
       VALUE_MESSENGER_CAM("MESSENGER_CAM"),
       @SerializedName("TRANSPARENT")
       VALUE_TRANSPARENT("TRANSPARENT"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1356,7 +1356,7 @@ public class UnifiedThread extends APINode {
   public static enum EnumMontageFrameStyle {
       @SerializedName("no_border")
       VALUE_NO_BORDER("no_border"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1375,7 +1375,7 @@ public class UnifiedThread extends APINode {
       VALUE_LIGHTWEIGHT_REPLY("LIGHTWEIGHT_REPLY"),
       @SerializedName("SHOW_STORY_IN_MESSENGER_THREAD")
       VALUE_SHOW_STORY_IN_MESSENGER_THREAD("SHOW_STORY_IN_MESSENGER_THREAD"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1400,7 +1400,7 @@ public class UnifiedThread extends APINode {
       VALUE_SPEAKING_STICKER("SPEAKING_STICKER"),
       @SerializedName("VIDEO_MAIL")
       VALUE_VIDEO_MAIL("VIDEO_MAIL"),
-      NULL(null);
+      ;
 
       private String value;
 

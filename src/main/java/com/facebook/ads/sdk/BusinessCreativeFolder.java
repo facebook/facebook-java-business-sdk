@@ -1569,7 +1569,7 @@ public class BusinessCreativeFolder extends APINode {
       VALUE_VIEW_CONTENT("VIEW_CONTENT"),
       @SerializedName("VIEW_INSIGHTS")
       VALUE_VIEW_INSIGHTS("VIEW_INSIGHTS"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1594,7 +1594,7 @@ public class BusinessCreativeFolder extends APINode {
       VALUE_VIEW_CONTENT("VIEW_CONTENT"),
       @SerializedName("VIEW_INSIGHTS")
       VALUE_VIEW_INSIGHTS("VIEW_INSIGHTS"),
-      NULL(null);
+      ;
 
       private String value;
 

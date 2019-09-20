@@ -4101,7 +4101,7 @@ public class Campaign extends APINode {
       VALUE_LOWEST_COST_WITH_BID_CAP("LOWEST_COST_WITH_BID_CAP"),
       @SerializedName("TARGET_COST")
       VALUE_TARGET_COST("TARGET_COST"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4124,7 +4124,7 @@ public class Campaign extends APINode {
       VALUE_DELETED("DELETED"),
       @SerializedName("PAUSED")
       VALUE_PAUSED("PAUSED"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4151,7 +4151,7 @@ public class Campaign extends APINode {
       VALUE_PAUSED("PAUSED"),
       @SerializedName("WITH_ISSUES")
       VALUE_WITH_ISSUES("WITH_ISSUES"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4174,7 +4174,7 @@ public class Campaign extends APINode {
       VALUE_DELETED("DELETED"),
       @SerializedName("PAUSED")
       VALUE_PAUSED("PAUSED"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4227,7 +4227,7 @@ public class Campaign extends APINode {
       VALUE_TODAY("today"),
       @SerializedName("yesterday")
       VALUE_YESTERDAY("yesterday"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4246,7 +4246,7 @@ public class Campaign extends APINode {
       VALUE_INCLUDE_RECOMMENDATIONS("include_recommendations"),
       @SerializedName("validate_only")
       VALUE_VALIDATE_ONLY("validate_only"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4289,7 +4289,7 @@ public class Campaign extends APINode {
       VALUE_REACH("REACH"),
       @SerializedName("VIDEO_VIEWS")
       VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4312,7 +4312,7 @@ public class Campaign extends APINode {
       VALUE_HOUSING("HOUSING"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4331,7 +4331,7 @@ public class Campaign extends APINode {
       VALUE_ALL("ALL"),
       @SerializedName("ANY")
       VALUE_ANY("ANY"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4352,7 +4352,7 @@ public class Campaign extends APINode {
       VALUE_INHERITED_FROM_SOURCE("INHERITED_FROM_SOURCE"),
       @SerializedName("PAUSED")
       VALUE_PAUSED("PAUSED"),
-      NULL(null);
+      ;
 
       private String value;
 

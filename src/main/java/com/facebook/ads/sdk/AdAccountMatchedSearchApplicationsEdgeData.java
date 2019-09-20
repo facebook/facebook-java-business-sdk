@@ -310,7 +310,7 @@ public class AdAccountMatchedSearchApplicationsEdgeData extends APINode {
       VALUE_WINDOWS_10_STORE("WINDOWS_10_STORE"),
       @SerializedName("WINDOWS_STORE")
       VALUE_WINDOWS_STORE("WINDOWS_STORE"),
-      NULL(null);
+      ;
 
       private String value;
 

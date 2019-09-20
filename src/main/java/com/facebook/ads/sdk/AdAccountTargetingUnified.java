@@ -503,7 +503,7 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_WORK_EMPLOYERS("work_employers"),
       @SerializedName("work_positions")
       VALUE_WORK_POSITIONS("work_positions"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -526,7 +526,7 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_HOUSING("HOUSING"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -765,7 +765,7 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_WORK_POSITIONS("work_positions"),
       @SerializedName("zips")
       VALUE_ZIPS("zips"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -788,7 +788,7 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_RELATED("related"),
       @SerializedName("suggestions")
       VALUE_SUGGESTIONS("suggestions"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -831,7 +831,7 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_REACH("REACH"),
       @SerializedName("VIDEO_VIEWS")
       VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
-      NULL(null);
+      ;
 
       private String value;
 

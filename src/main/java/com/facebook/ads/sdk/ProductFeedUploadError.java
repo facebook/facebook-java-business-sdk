@@ -744,7 +744,7 @@ public class ProductFeedUploadError extends APINode {
       VALUE_MARKETPLACE("Marketplace"),
       @SerializedName("US Marketplace")
       VALUE_US_MARKETPLACE("US Marketplace"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -763,7 +763,7 @@ public class ProductFeedUploadError extends APINode {
       VALUE_FATAL("fatal"),
       @SerializedName("warning")
       VALUE_WARNING("warning"),
-      NULL(null);
+      ;
 
       private String value;
 

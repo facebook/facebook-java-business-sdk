@@ -279,7 +279,7 @@ public class AdsPixelStatsResult extends APINode {
       VALUE_URL("url"),
       @SerializedName("url_by_rule")
       VALUE_URL_BY_RULE("url_by_rule"),
-      NULL(null);
+      ;
 
       private String value;
 

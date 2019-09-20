@@ -1629,7 +1629,7 @@ public class DirectDeal extends APINode {
       VALUE_5("5"),
       @SerializedName("6")
       VALUE_6("6"),
-      NULL(null);
+      ;
 
       private String value;
 

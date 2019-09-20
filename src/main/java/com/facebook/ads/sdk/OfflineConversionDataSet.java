@@ -3511,7 +3511,7 @@ public class OfflineConversionDataSet extends APINode {
       VALUE_ADVERTISER("ADVERTISER"),
       @SerializedName("UPLOADER")
       VALUE_UPLOADER("UPLOADER"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3536,7 +3536,7 @@ public class OfflineConversionDataSet extends APINode {
       VALUE_AUDIENCE_MANAGER("AUDIENCE_MANAGER"),
       @SerializedName("OTHER")
       VALUE_OTHER("OTHER"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3555,7 +3555,7 @@ public class OfflineConversionDataSet extends APINode {
       VALUE_EVENT_TIME("event_time"),
       @SerializedName("upload_time")
       VALUE_UPLOAD_TIME("upload_time"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3576,7 +3576,7 @@ public class OfflineConversionDataSet extends APINode {
       VALUE_HOURLY("hourly"),
       @SerializedName("six_hourly")
       VALUE_SIX_HOURLY("six_hourly"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3595,7 +3595,7 @@ public class OfflineConversionDataSet extends APINode {
       VALUE_ASCENDING("ASCENDING"),
       @SerializedName("DESCENDING")
       VALUE_DESCENDING("DESCENDING"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3624,7 +3624,7 @@ public class OfflineConversionDataSet extends APINode {
       VALUE_IS_EXCLUDED_FOR_LIFT("IS_EXCLUDED_FOR_LIFT"),
       @SerializedName("LAST_UPLOAD_TIME")
       VALUE_LAST_UPLOAD_TIME("LAST_UPLOAD_TIME"),
-      NULL(null);
+      ;
 
       private String value;
 

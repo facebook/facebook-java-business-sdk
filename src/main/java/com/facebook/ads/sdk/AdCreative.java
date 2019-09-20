@@ -2206,7 +2206,7 @@ public class AdCreative extends APINode {
       VALUE_DEEPLINK_WITH_WEB_FALLBACK("deeplink_with_web_fallback"),
       @SerializedName("web_only")
       VALUE_WEB_ONLY("web_only"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -2327,7 +2327,7 @@ public class AdCreative extends APINode {
       VALUE_WHATSAPP_MESSAGE("WHATSAPP_MESSAGE"),
       @SerializedName("WOODHENGE_SUPPORT")
       VALUE_WOODHENGE_SUPPORT("WOODHENGE_SUPPORT"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -2364,7 +2364,7 @@ public class AdCreative extends APINode {
       VALUE_STORE_ITEM("STORE_ITEM"),
       @SerializedName("VIDEO")
       VALUE_VIDEO("VIDEO"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -2387,7 +2387,7 @@ public class AdCreative extends APINode {
       VALUE_IN_PROCESS("IN_PROCESS"),
       @SerializedName("WITH_ISSUES")
       VALUE_WITH_ISSUES("WITH_ISSUES"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -2406,7 +2406,7 @@ public class AdCreative extends APINode {
       VALUE_NONE("NONE"),
       @SerializedName("POLITICAL")
       VALUE_POLITICAL("POLITICAL"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -2427,7 +2427,7 @@ public class AdCreative extends APINode {
       VALUE_CATEGORY("category"),
       @SerializedName("product_type")
       VALUE_PRODUCT_TYPE("product_type"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -2450,7 +2450,7 @@ public class AdCreative extends APINode {
       VALUE_PRODUCTS_COLLAGE("PRODUCTS_COLLAGE"),
       @SerializedName("PRODUCTS_SLIDESHOW")
       VALUE_PRODUCTS_SLIDESHOW("PRODUCTS_SLIDESHOW"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -2469,7 +2469,7 @@ public class AdCreative extends APINode {
       VALUE_DYNAMIC("DYNAMIC"),
       @SerializedName("STORY_OWNER")
       VALUE_STORY_OWNER("STORY_OWNER"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -2488,7 +2488,7 @@ public class AdCreative extends APINode {
       VALUE_ALL("ALL"),
       @SerializedName("ANY")
       VALUE_ANY("ANY"),
-      NULL(null);
+      ;
 
       private String value;
 

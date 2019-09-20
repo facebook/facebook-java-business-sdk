@@ -272,7 +272,7 @@ public class AdPreview extends APINode {
       VALUE_SUGGESTED_VIDEO_MOBILE("SUGGESTED_VIDEO_MOBILE"),
       @SerializedName("WATCH_FEED_MOBILE")
       VALUE_WATCH_FEED_MOBILE("WATCH_FEED_MOBILE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -289,7 +289,7 @@ public class AdPreview extends APINode {
   public static enum EnumRenderType {
       @SerializedName("FALLBACK")
       VALUE_FALLBACK("FALLBACK"),
-      NULL(null);
+      ;
 
       private String value;
 

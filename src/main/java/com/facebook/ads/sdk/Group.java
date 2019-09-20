@@ -7304,7 +7304,7 @@ public class Group extends APINode {
       VALUE_ANYONE("ANYONE"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7325,7 +7325,7 @@ public class Group extends APINode {
       VALUE_ANYONE("ANYONE"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7432,7 +7432,7 @@ public class Group extends APINode {
       VALUE_WORK_TEAM("WORK_TEAM"),
       @SerializedName("WORK_TEAMWORK")
       VALUE_WORK_TEAMWORK("WORK_TEAMWORK"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7539,7 +7539,7 @@ public class Group extends APINode {
       VALUE_WORK_TEAM("WORK_TEAM"),
       @SerializedName("WORK_TEAMWORK")
       VALUE_WORK_TEAMWORK("WORK_TEAMWORK"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7594,7 +7594,7 @@ public class Group extends APINode {
       VALUE_WORKPLACE_MANAGER("WORKPLACE_MANAGER"),
       @SerializedName("WORK_GENERIC")
       VALUE_WORK_GENERIC("WORK_GENERIC"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7621,7 +7621,7 @@ public class Group extends APINode {
       VALUE_NONE("none"),
       @SerializedName("year")
       VALUE_YEAR("year"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7644,7 +7644,7 @@ public class Group extends APINode {
       VALUE_BRANDING_PHOTO("BRANDING_PHOTO"),
       @SerializedName("BRANDING_STATUS")
       VALUE_BRANDING_STATUS("BRANDING_STATUS"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7663,7 +7663,7 @@ public class Group extends APINode {
       VALUE_MARKDOWN("MARKDOWN"),
       @SerializedName("PLAINTEXT")
       VALUE_PLAINTEXT("PLAINTEXT"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7682,7 +7682,7 @@ public class Group extends APINode {
       VALUE_1("1"),
       @SerializedName("2")
       VALUE_2("2"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7707,7 +7707,7 @@ public class Group extends APINode {
       VALUE_4("4"),
       @SerializedName("5")
       VALUE_5("5"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7726,7 +7726,7 @@ public class Group extends APINode {
       VALUE_DISABLED("disabled"),
       @SerializedName("enabled")
       VALUE_ENABLED("enabled"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7745,7 +7745,7 @@ public class Group extends APINode {
       VALUE_STORY("STORY"),
       @SerializedName("TIMELINE")
       VALUE_TIMELINE("TIMELINE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7774,7 +7774,7 @@ public class Group extends APINode {
       VALUE_SCHEDULED("SCHEDULED"),
       @SerializedName("SCHEDULED_RECURRING")
       VALUE_SCHEDULED_RECURRING("SCHEDULED_RECURRING"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7797,7 +7797,7 @@ public class Group extends APINode {
       VALUE_50("50"),
       @SerializedName("68")
       VALUE_68("68"),
-      NULL(null);
+      ;
 
       private String value;
 

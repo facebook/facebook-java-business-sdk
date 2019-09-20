@@ -642,7 +642,7 @@ public class ExtendedCreditAllocationConfig extends APINode {
       VALUE_NORMAL("Normal"),
       @SerializedName("Sequential")
       VALUE_SEQUENTIAL("Sequential"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -661,7 +661,7 @@ public class ExtendedCreditAllocationConfig extends APINode {
       VALUE_AUTH("AUTH"),
       @SerializedName("FIXED")
       VALUE_FIXED("FIXED"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -680,7 +680,7 @@ public class ExtendedCreditAllocationConfig extends APINode {
       VALUE_ADVERTISER("Advertiser"),
       @SerializedName("Agency")
       VALUE_AGENCY("Agency"),
-      NULL(null);
+      ;
 
       private String value;
 

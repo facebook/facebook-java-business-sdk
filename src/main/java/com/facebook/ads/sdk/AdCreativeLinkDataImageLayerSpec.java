@@ -358,7 +358,7 @@ public class AdCreativeLinkDataImageLayerSpec extends APINode {
       VALUE_MULTIPLY("multiply"),
       @SerializedName("normal")
       VALUE_NORMAL("normal"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -375,7 +375,7 @@ public class AdCreativeLinkDataImageLayerSpec extends APINode {
   public static enum EnumFrameSource {
       @SerializedName("custom")
       VALUE_CUSTOM("custom"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -392,7 +392,7 @@ public class AdCreativeLinkDataImageLayerSpec extends APINode {
   public static enum EnumImageSource {
       @SerializedName("catalog")
       VALUE_CATALOG("catalog"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -413,7 +413,7 @@ public class AdCreativeLinkDataImageLayerSpec extends APINode {
       VALUE_IMAGE("image"),
       @SerializedName("text_overlay")
       VALUE_TEXT_OVERLAY("text_overlay"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -446,7 +446,7 @@ public class AdCreativeLinkDataImageLayerSpec extends APINode {
       VALUE_TOP_LEFT("top_left"),
       @SerializedName("top_right")
       VALUE_TOP_RIGHT("top_right"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -471,7 +471,7 @@ public class AdCreativeLinkDataImageLayerSpec extends APINode {
       VALUE_RECTANGLE("rectangle"),
       @SerializedName("triangle")
       VALUE_TRIANGLE("triangle"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -504,7 +504,7 @@ public class AdCreativeLinkDataImageLayerSpec extends APINode {
       VALUE_ROBOTO_CONDENSED_REGULAR("roboto_condensed_regular"),
       @SerializedName("roboto_medium")
       VALUE_ROBOTO_MEDIUM("roboto_medium"),
-      NULL(null);
+      ;
 
       private String value;
 

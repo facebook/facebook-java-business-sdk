@@ -1378,7 +1378,7 @@ public class Targeting extends APINode {
       VALUE_DESKTOP("desktop"),
       @SerializedName("mobile")
       VALUE_MOBILE("mobile"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1399,7 +1399,7 @@ public class Targeting extends APINode {
       VALUE_DESKTOP("desktop"),
       @SerializedName("mobile")
       VALUE_MOBILE("mobile"),
-      NULL(null);
+      ;
 
       private String value;
 

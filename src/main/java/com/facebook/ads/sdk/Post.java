@@ -5936,7 +5936,7 @@ public class Post extends APINode {
       VALUE_NONE("none"),
       @SerializedName("year")
       VALUE_YEAR("year"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -5955,7 +5955,7 @@ public class Post extends APINode {
       VALUE_HIDDEN("hidden"),
       @SerializedName("visible")
       VALUE_VISIBLE("visible"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -5976,7 +5976,7 @@ public class Post extends APINode {
       VALUE_HIDDEN("hidden"),
       @SerializedName("normal")
       VALUE_NORMAL("normal"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -5993,7 +5993,7 @@ public class Post extends APINode {
   public static enum EnumWith {
       @SerializedName("LOCATION")
       VALUE_LOCATION("LOCATION"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -6044,7 +6044,7 @@ public class Post extends APINode {
       VALUE_SAVED_AUDIENCE("SAVED_AUDIENCE"),
       @SerializedName("SMART_AUDIENCE")
       VALUE_SMART_AUDIENCE("SMART_AUDIENCE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -6165,7 +6165,7 @@ public class Post extends APINode {
       VALUE_WHATSAPP_MESSAGE("WHATSAPP_MESSAGE"),
       @SerializedName("WOODHENGE_SUPPORT")
       VALUE_WOODHENGE_SUPPORT("WOODHENGE_SUPPORT"),
-      NULL(null);
+      ;
 
       private String value;
 

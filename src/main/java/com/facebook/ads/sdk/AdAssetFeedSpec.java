@@ -498,7 +498,7 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_WHATSAPP_MESSAGE("WHATSAPP_MESSAGE"),
       @SerializedName("WOODHENGE_SUPPORT")
       VALUE_WOODHENGE_SUPPORT("WOODHENGE_SUPPORT"),
-      NULL(null);
+      ;
 
       private String value;
 

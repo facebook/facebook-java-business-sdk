@@ -5734,7 +5734,7 @@ public class PagePost extends APINode {
       VALUE_NONE("none"),
       @SerializedName("year")
       VALUE_YEAR("year"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -5757,7 +5757,7 @@ public class PagePost extends APINode {
       VALUE_BRANDING_PHOTO("BRANDING_PHOTO"),
       @SerializedName("BRANDING_STATUS")
       VALUE_BRANDING_STATUS("BRANDING_STATUS"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -5776,7 +5776,7 @@ public class PagePost extends APINode {
       VALUE_MARKDOWN("MARKDOWN"),
       @SerializedName("PLAINTEXT")
       VALUE_PLAINTEXT("PLAINTEXT"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -5795,7 +5795,7 @@ public class PagePost extends APINode {
       VALUE_1("1"),
       @SerializedName("2")
       VALUE_2("2"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -5820,7 +5820,7 @@ public class PagePost extends APINode {
       VALUE_4("4"),
       @SerializedName("5")
       VALUE_5("5"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -5839,7 +5839,7 @@ public class PagePost extends APINode {
       VALUE_DISABLED("disabled"),
       @SerializedName("enabled")
       VALUE_ENABLED("enabled"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -5858,7 +5858,7 @@ public class PagePost extends APINode {
       VALUE_STORY("STORY"),
       @SerializedName("TIMELINE")
       VALUE_TIMELINE("TIMELINE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -5887,7 +5887,7 @@ public class PagePost extends APINode {
       VALUE_SCHEDULED("SCHEDULED"),
       @SerializedName("SCHEDULED_RECURRING")
       VALUE_SCHEDULED_RECURRING("SCHEDULED_RECURRING"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -5904,7 +5904,7 @@ public class PagePost extends APINode {
   public static enum EnumWith {
       @SerializedName("LOCATION")
       VALUE_LOCATION("LOCATION"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -5923,7 +5923,7 @@ public class PagePost extends APINode {
       VALUE_HIDDEN("hidden"),
       @SerializedName("visible")
       VALUE_VISIBLE("visible"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -5944,7 +5944,7 @@ public class PagePost extends APINode {
       VALUE_HIDDEN("hidden"),
       @SerializedName("normal")
       VALUE_NORMAL("normal"),
-      NULL(null);
+      ;
 
       private String value;
 

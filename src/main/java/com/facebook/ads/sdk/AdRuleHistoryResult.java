@@ -253,7 +253,7 @@ public class AdRuleHistoryResult extends APINode {
       VALUE_ADSET("ADSET"),
       @SerializedName("CAMPAIGN")
       VALUE_CAMPAIGN("CAMPAIGN"),
-      NULL(null);
+      ;
 
       private String value;
 

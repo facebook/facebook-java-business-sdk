@@ -3010,7 +3010,7 @@ public class AdStudyObjective extends APINode {
       VALUE_SALES("SALES"),
       @SerializedName("TELCO")
       VALUE_TELCO("TELCO"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3033,7 +3033,7 @@ public class AdStudyObjective extends APINode {
       VALUE_COUNTRY("country"),
       @SerializedName("gender")
       VALUE_GENDER("gender"),
-      NULL(null);
+      ;
 
       private String value;
 

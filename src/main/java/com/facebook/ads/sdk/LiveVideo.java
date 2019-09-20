@@ -4762,7 +4762,7 @@ public class LiveVideo extends APINode {
       VALUE_EQUIRECTANGULAR("EQUIRECTANGULAR"),
       @SerializedName("HALF_EQUIRECTANGULAR")
       VALUE_HALF_EQUIRECTANGULAR("HALF_EQUIRECTANGULAR"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4779,7 +4779,7 @@ public class LiveVideo extends APINode {
   public static enum EnumSpatialAudioFormat {
       @SerializedName("ambiX_4")
       VALUE_AMBIX_4("ambiX_4"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4804,7 +4804,7 @@ public class LiveVideo extends APINode {
       VALUE_SCHEDULED_UNPUBLISHED("SCHEDULED_UNPUBLISHED"),
       @SerializedName("UNPUBLISHED")
       VALUE_UNPUBLISHED("UNPUBLISHED"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4825,7 +4825,7 @@ public class LiveVideo extends APINode {
       VALUE_MONO("MONO"),
       @SerializedName("TOP_BOTTOM")
       VALUE_TOP_BOTTOM("TOP_BOTTOM"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4844,7 +4844,7 @@ public class LiveVideo extends APINode {
       VALUE_AMBIENT("AMBIENT"),
       @SerializedName("REGULAR")
       VALUE_REGULAR("REGULAR"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4877,7 +4877,7 @@ public class LiveVideo extends APINode {
       VALUE_UNPUBLISHED("UNPUBLISHED"),
       @SerializedName("VOD")
       VALUE_VOD("VOD"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4896,7 +4896,7 @@ public class LiveVideo extends APINode {
       VALUE_OWNER("owner"),
       @SerializedName("target")
       VALUE_TARGET("target"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4923,7 +4923,7 @@ public class LiveVideo extends APINode {
       VALUE_SLOW("SLOW"),
       @SerializedName("SUPPORTER")
       VALUE_SUPPORTER("SUPPORTER"),
-      NULL(null);
+      ;
 
       private String value;
 

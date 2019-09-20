@@ -11626,7 +11626,7 @@ public class Application extends APINode {
       VALUE_WEB("WEB"),
       @SerializedName("WINDOWS")
       VALUE_WINDOWS("WINDOWS"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -11653,7 +11653,7 @@ public class Application extends APINode {
       VALUE_MOBILE_WEB("MOBILE_WEB"),
       @SerializedName("UNKNOWN")
       VALUE_UNKNOWN("UNKNOWN"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -11672,7 +11672,7 @@ public class Application extends APINode {
       VALUE_ANDROID("ANDROID"),
       @SerializedName("IOS")
       VALUE_IOS("IOS"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -11693,7 +11693,7 @@ public class Application extends APINode {
       VALUE_BUTTON_SAMPLING("BUTTON_SAMPLING"),
       @SerializedName("PLUGIN")
       VALUE_PLUGIN("PLUGIN"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -11714,7 +11714,7 @@ public class Application extends APINode {
       VALUE_DELETE("DELETE"),
       @SerializedName("REPLACE")
       VALUE_REPLACE("REPLACE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -11733,7 +11733,7 @@ public class Application extends APINode {
       VALUE_CODELESS("CODELESS"),
       @SerializedName("EYMT")
       VALUE_EYMT("EYMT"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -11754,7 +11754,7 @@ public class Application extends APINode {
       VALUE_NUMERIC("NUMERIC"),
       @SerializedName("TIME")
       VALUE_TIME("TIME"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -11773,7 +11773,7 @@ public class Application extends APINode {
       VALUE_HIGHER_IS_BETTER("HIGHER_IS_BETTER"),
       @SerializedName("LOWER_IS_BETTER")
       VALUE_LOWER_IS_BETTER("LOWER_IS_BETTER"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -11790,7 +11790,7 @@ public class Application extends APINode {
   public static enum EnumLoggingSource {
       @SerializedName("MESSENGER_BOT")
       VALUE_MESSENGER_BOT("MESSENGER_BOT"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -11811,7 +11811,7 @@ public class Application extends APINode {
       VALUE_APP_AND_PAGE("APP_AND_PAGE"),
       @SerializedName("PAGE")
       VALUE_PAGE("PAGE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -11828,7 +11828,7 @@ public class Application extends APINode {
   public static enum EnumType {
       @SerializedName("test-users")
       VALUE_TEST_USERS("test-users"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -11849,7 +11849,7 @@ public class Application extends APINode {
       VALUE_DEFERRED_APP_LINK("DEFERRED_APP_LINK"),
       @SerializedName("MOBILE_APP_INSTALL")
       VALUE_MOBILE_APP_INSTALL("MOBILE_APP_INSTALL"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -11866,7 +11866,7 @@ public class Application extends APINode {
   public static enum EnumUserIdType {
       @SerializedName("INSTANT_GAMES_PLAYER_ID")
       VALUE_INSTANT_GAMES_PLAYER_ID("INSTANT_GAMES_PLAYER_ID"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -11949,7 +11949,7 @@ public class Application extends APINode {
       VALUE_VALUE_PER_USER("VALUE_PER_USER"),
       @SerializedName("WAU")
       VALUE_WAU("WAU"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -11968,7 +11968,7 @@ public class Application extends APINode {
       VALUE_GAME("GAME"),
       @SerializedName("NON_GAME")
       VALUE_NON_GAME("NON_GAME"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -12003,7 +12003,7 @@ public class Application extends APINode {
       VALUE_RANGE("range"),
       @SerializedName("weekly")
       VALUE_WEEKLY("weekly"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -12026,7 +12026,7 @@ public class Application extends APINode {
       VALUE_ADSET("ADSET"),
       @SerializedName("CAMPAIGN")
       VALUE_CAMPAIGN("CAMPAIGN"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -12051,7 +12051,7 @@ public class Application extends APINode {
       VALUE_MONTHLY("MONTHLY"),
       @SerializedName("WEEKLY")
       VALUE_WEEKLY("WEEKLY"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -12072,7 +12072,7 @@ public class Application extends APINode {
       VALUE_DISABLED("DISABLED"),
       @SerializedName("ERROR")
       VALUE_ERROR("ERROR"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -12089,7 +12089,7 @@ public class Application extends APINode {
   public static enum EnumSessionType {
       @SerializedName("attachment")
       VALUE_ATTACHMENT("attachment"),
-      NULL(null);
+      ;
 
       private String value;
 

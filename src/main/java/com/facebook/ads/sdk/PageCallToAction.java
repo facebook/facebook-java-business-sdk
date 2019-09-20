@@ -991,7 +991,7 @@ public class PageCallToAction extends APINode {
       VALUE_SHOP_ON_FACEBOOK("SHOP_ON_FACEBOOK"),
       @SerializedName("WEBSITE")
       VALUE_WEBSITE("WEBSITE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1022,7 +1022,7 @@ public class PageCallToAction extends APINode {
       VALUE_SHOP_ON_FACEBOOK("SHOP_ON_FACEBOOK"),
       @SerializedName("WEBSITE")
       VALUE_WEBSITE("WEBSITE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1091,7 +1091,7 @@ public class PageCallToAction extends APINode {
       VALUE_WATCH_NOW("WATCH_NOW"),
       @SerializedName("WOODHENGE_SUPPORT")
       VALUE_WOODHENGE_SUPPORT("WOODHENGE_SUPPORT"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1118,7 +1118,7 @@ public class PageCallToAction extends APINode {
       VALUE_SHOP_ON_FACEBOOK("SHOP_ON_FACEBOOK"),
       @SerializedName("WEBSITE")
       VALUE_WEBSITE("WEBSITE"),
-      NULL(null);
+      ;
 
       private String value;
 

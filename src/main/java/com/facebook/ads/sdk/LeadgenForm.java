@@ -1560,7 +1560,7 @@ public class LeadgenForm extends APINode {
       VALUE_DELETED("DELETED"),
       @SerializedName("DRAFT")
       VALUE_DRAFT("DRAFT"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1637,7 +1637,7 @@ public class LeadgenForm extends APINode {
       VALUE_ZH_HK("ZH_HK"),
       @SerializedName("ZH_TW")
       VALUE_ZH_TW("ZH_TW"),
-      NULL(null);
+      ;
 
       private String value;
 

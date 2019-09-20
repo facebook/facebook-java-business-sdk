@@ -463,7 +463,7 @@ public class AdPromotedObject extends APINode {
       VALUE_SUBSCRIBE("SUBSCRIBE"),
       @SerializedName("TUTORIAL_COMPLETION")
       VALUE_TUTORIAL_COMPLETION("TUTORIAL_COMPLETION"),
-      NULL(null);
+      ;
 
       private String value;
 

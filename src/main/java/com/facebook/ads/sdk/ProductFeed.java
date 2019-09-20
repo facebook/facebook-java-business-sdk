@@ -4089,7 +4089,7 @@ public class ProductFeed extends APINode {
       VALUE_TAB("TAB"),
       @SerializedName("TILDE")
       VALUE_TILDE("TILDE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4110,7 +4110,7 @@ public class ProductFeed extends APINode {
       VALUE_OFF("OFF"),
       @SerializedName("ON")
       VALUE_ON("ON"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4139,7 +4139,7 @@ public class ProductFeed extends APINode {
       VALUE_UTF32LE("UTF32LE"),
       @SerializedName("UTF8")
       VALUE_UTF8("UTF8"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4178,7 +4178,7 @@ public class ProductFeed extends APINode {
       VALUE_VEHICLES("VEHICLES"),
       @SerializedName("VEHICLE_OFFER")
       VALUE_VEHICLE_OFFER("VEHICLE_OFFER"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4199,7 +4199,7 @@ public class ProductFeed extends APINode {
       VALUE_COUNTRY("COUNTRY"),
       @SerializedName("LANGUAGE")
       VALUE_LANGUAGE("LANGUAGE"),
-      NULL(null);
+      ;
 
       private String value;
 

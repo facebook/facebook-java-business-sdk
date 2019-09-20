@@ -5761,7 +5761,7 @@ public class AdSet extends APINode {
       VALUE_LOWEST_COST_WITH_BID_CAP("LOWEST_COST_WITH_BID_CAP"),
       @SerializedName("TARGET_COST")
       VALUE_TARGET_COST("TARGET_COST"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -5796,7 +5796,7 @@ public class AdSet extends APINode {
       VALUE_THRUPLAY("THRUPLAY"),
       @SerializedName("VIDEO_VIEWS")
       VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -5819,7 +5819,7 @@ public class AdSet extends APINode {
       VALUE_DELETED("DELETED"),
       @SerializedName("PAUSED")
       VALUE_PAUSED("PAUSED"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -5848,7 +5848,7 @@ public class AdSet extends APINode {
       VALUE_PAUSED("PAUSED"),
       @SerializedName("WITH_ISSUES")
       VALUE_WITH_ISSUES("WITH_ISSUES"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -5913,7 +5913,7 @@ public class AdSet extends APINode {
       VALUE_VALUE("VALUE"),
       @SerializedName("VIDEO_VIEWS")
       VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -5936,7 +5936,7 @@ public class AdSet extends APINode {
       VALUE_DELETED("DELETED"),
       @SerializedName("PAUSED")
       VALUE_PAUSED("PAUSED"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -5963,7 +5963,7 @@ public class AdSet extends APINode {
       VALUE_UNDEFINED("UNDEFINED"),
       @SerializedName("WEBSITE")
       VALUE_WEBSITE("WEBSITE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -5982,7 +5982,7 @@ public class AdSet extends APINode {
       VALUE_INCLUDE_RECOMMENDATIONS("include_recommendations"),
       @SerializedName("validate_only")
       VALUE_VALIDATE_ONLY("validate_only"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -6003,7 +6003,7 @@ public class AdSet extends APINode {
       VALUE_LIMITED_EXPLORATION("LIMITED_EXPLORATION"),
       @SerializedName("NONE_EXPLORATION")
       VALUE_NONE_EXPLORATION("NONE_EXPLORATION"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -6038,7 +6038,7 @@ public class AdSet extends APINode {
       VALUE_TRIP_CONSIDERATION("TRIP_CONSIDERATION"),
       @SerializedName("VIDEO_SOUND_ON")
       VALUE_VIDEO_SOUND_ON("VIDEO_SOUND_ON"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -6061,7 +6061,7 @@ public class AdSet extends APINode {
       VALUE_HOUSING("HOUSING"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -6114,7 +6114,7 @@ public class AdSet extends APINode {
       VALUE_TODAY("TODAY"),
       @SerializedName("YESTERDAY")
       VALUE_YESTERDAY("YESTERDAY"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -6133,7 +6133,7 @@ public class AdSet extends APINode {
       VALUE_ALL("ALL"),
       @SerializedName("ANY")
       VALUE_ANY("ANY"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -6154,7 +6154,7 @@ public class AdSet extends APINode {
       VALUE_INHERITED_FROM_SOURCE("INHERITED_FROM_SOURCE"),
       @SerializedName("PAUSED")
       VALUE_PAUSED("PAUSED"),
-      NULL(null);
+      ;
 
       private String value;
 

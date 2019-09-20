@@ -1294,7 +1294,7 @@ public class LiveEncoder extends APINode {
   public static enum EnumCapAudioCodecs {
       @SerializedName("AAC")
       VALUE_AAC("AAC"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1315,7 +1315,7 @@ public class LiveEncoder extends APINode {
       VALUE_RTMPS("RTMPS"),
       @SerializedName("WEBRTC")
       VALUE_WEBRTC("WEBRTC"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1332,7 +1332,7 @@ public class LiveEncoder extends APINode {
   public static enum EnumCapVideoCodecs {
       @SerializedName("H264")
       VALUE_H264("H264"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1359,7 +1359,7 @@ public class LiveEncoder extends APINode {
       VALUE_READY("READY"),
       @SerializedName("REGISTER")
       VALUE_REGISTER("REGISTER"),
-      NULL(null);
+      ;
 
       private String value;
 

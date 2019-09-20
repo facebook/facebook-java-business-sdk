@@ -2218,7 +2218,7 @@ public class AdStudyCell extends APINode {
       VALUE_TV_FACEBOOK("TV_FACEBOOK"),
       @SerializedName("VIDEO_VIEW_OPTIMIZATION")
       VALUE_VIDEO_VIEW_OPTIMIZATION("VIDEO_VIEW_OPTIMIZATION"),
-      NULL(null);
+      ;
 
       private String value;
 

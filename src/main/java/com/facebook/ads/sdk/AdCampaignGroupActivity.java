@@ -734,7 +734,7 @@ public class AdCampaignGroupActivity extends APINode {
       VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
       @SerializedName("WEBSITE_CONVERSIONS")
       VALUE_WEBSITE_CONVERSIONS("WEBSITE_CONVERSIONS"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -785,7 +785,7 @@ public class AdCampaignGroupActivity extends APINode {
       VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
       @SerializedName("WEBSITE_CONVERSIONS")
       VALUE_WEBSITE_CONVERSIONS("WEBSITE_CONVERSIONS"),
-      NULL(null);
+      ;
 
       private String value;
 

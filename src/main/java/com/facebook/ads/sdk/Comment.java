@@ -2269,7 +2269,7 @@ public class Comment extends APINode {
       VALUE_SIDE_CONVERSATION("SIDE_CONVERSATION"),
       @SerializedName("SIDE_CONVERSATION_AND_POST_OWNER")
       VALUE_SIDE_CONVERSATION_AND_POST_OWNER("SIDE_CONVERSATION_AND_POST_OWNER"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -2288,7 +2288,7 @@ public class Comment extends APINode {
       VALUE_STREAM("stream"),
       @SerializedName("toplevel")
       VALUE_TOPLEVEL("toplevel"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -2307,7 +2307,7 @@ public class Comment extends APINode {
       VALUE_FILTER_LOW_QUALITY("filter_low_quality"),
       @SerializedName("no_filter")
       VALUE_NO_FILTER("no_filter"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -2326,7 +2326,7 @@ public class Comment extends APINode {
       VALUE_CHRONOLOGICAL("chronological"),
       @SerializedName("reverse_chronological")
       VALUE_REVERSE_CHRONOLOGICAL("reverse_chronological"),
-      NULL(null);
+      ;
 
       private String value;
 

@@ -746,7 +746,7 @@ public class VideoPoll extends APINode {
       VALUE_RESULTS_OPEN("results_open"),
       @SerializedName("voting_open")
       VALUE_VOTING_OPEN("voting_open"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -771,7 +771,7 @@ public class VideoPoll extends APINode {
       VALUE_SHOW_RESULTS("SHOW_RESULTS"),
       @SerializedName("SHOW_VOTING")
       VALUE_SHOW_VOTING("SHOW_VOTING"),
-      NULL(null);
+      ;
 
       private String value;
 

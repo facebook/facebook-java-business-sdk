@@ -483,7 +483,7 @@ public class AdActivity extends APINode {
       VALUE_UPDATE_CAMPAIGN_NAME("update_campaign_name"),
       @SerializedName("update_campaign_run_status")
       VALUE_UPDATE_CAMPAIGN_RUN_STATUS("update_campaign_run_status"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -520,7 +520,7 @@ public class AdActivity extends APINode {
       VALUE_STATUS("STATUS"),
       @SerializedName("TARGETING")
       VALUE_TARGETING("TARGETING"),
-      NULL(null);
+      ;
 
       private String value;
 

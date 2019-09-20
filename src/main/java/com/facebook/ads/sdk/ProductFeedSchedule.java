@@ -322,7 +322,7 @@ public class ProductFeedSchedule extends APINode {
       VALUE_TUESDAY("TUESDAY"),
       @SerializedName("WEDNESDAY")
       VALUE_WEDNESDAY("WEDNESDAY"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -345,7 +345,7 @@ public class ProductFeedSchedule extends APINode {
       VALUE_MONTHLY("MONTHLY"),
       @SerializedName("WEEKLY")
       VALUE_WEEKLY("WEEKLY"),
-      NULL(null);
+      ;
 
       private String value;
 

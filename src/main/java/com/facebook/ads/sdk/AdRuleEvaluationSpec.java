@@ -256,7 +256,7 @@ public class AdRuleEvaluationSpec extends APINode {
       VALUE_SCHEDULE("SCHEDULE"),
       @SerializedName("TRIGGER")
       VALUE_TRIGGER("TRIGGER"),
-      NULL(null);
+      ;
 
       private String value;
 

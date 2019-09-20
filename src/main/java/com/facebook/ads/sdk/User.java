@@ -27109,7 +27109,7 @@ public class User extends APINode {
       VALUE_NO("NO"),
       @SerializedName("YES")
       VALUE_YES("YES"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -27128,7 +27128,7 @@ public class User extends APINode {
       VALUE_STATUS_OFF("STATUS_OFF"),
       @SerializedName("STATUS_ON")
       VALUE_STATUS_ON("STATUS_ON"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -27147,7 +27147,7 @@ public class User extends APINode {
       VALUE_BOT_ACTION("BOT_ACTION"),
       @SerializedName("NATIVE")
       VALUE_NATIVE("NATIVE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -27168,7 +27168,7 @@ public class User extends APINode {
       VALUE_GROUPS("groups"),
       @SerializedName("groups_social")
       VALUE_GROUPS_SOCIAL("groups_social"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -27187,7 +27187,7 @@ public class User extends APINode {
       VALUE_CONTENT_UPDATE("content_update"),
       @SerializedName("generic")
       VALUE_GENERIC("generic"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -27296,7 +27296,7 @@ public class User extends APINode {
       VALUE_YAHOO_JP("YAHOO_JP"),
       @SerializedName("YOU_TUBE")
       VALUE_YOU_TUBE("YOU_TUBE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -27323,7 +27323,7 @@ public class User extends APINode {
       VALUE_NONE("none"),
       @SerializedName("year")
       VALUE_YEAR("year"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -27346,7 +27346,7 @@ public class User extends APINode {
       VALUE_BRANDING_PHOTO("BRANDING_PHOTO"),
       @SerializedName("BRANDING_STATUS")
       VALUE_BRANDING_STATUS("BRANDING_STATUS"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -27365,7 +27365,7 @@ public class User extends APINode {
       VALUE_MARKDOWN("MARKDOWN"),
       @SerializedName("PLAINTEXT")
       VALUE_PLAINTEXT("PLAINTEXT"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -27384,7 +27384,7 @@ public class User extends APINode {
       VALUE_1("1"),
       @SerializedName("2")
       VALUE_2("2"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -27409,7 +27409,7 @@ public class User extends APINode {
       VALUE_4("4"),
       @SerializedName("5")
       VALUE_5("5"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -27428,7 +27428,7 @@ public class User extends APINode {
       VALUE_DISABLED("disabled"),
       @SerializedName("enabled")
       VALUE_ENABLED("enabled"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -27447,7 +27447,7 @@ public class User extends APINode {
       VALUE_STORY("STORY"),
       @SerializedName("TIMELINE")
       VALUE_TIMELINE("TIMELINE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -27476,7 +27476,7 @@ public class User extends APINode {
       VALUE_SCHEDULED("SCHEDULED"),
       @SerializedName("SCHEDULED_RECURRING")
       VALUE_SCHEDULED_RECURRING("SCHEDULED_RECURRING"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -27497,7 +27497,7 @@ public class User extends APINode {
       VALUE_DROP("DROP"),
       @SerializedName("MARK")
       VALUE_MARK("MARK"),
-      NULL(null);
+      ;
 
       private String value;
 

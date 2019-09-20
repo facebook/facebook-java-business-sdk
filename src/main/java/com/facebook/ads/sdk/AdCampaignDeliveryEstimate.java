@@ -308,7 +308,7 @@ public class AdCampaignDeliveryEstimate extends APINode {
       VALUE_VALUE("VALUE"),
       @SerializedName("VIDEO_VIEWS")
       VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
-      NULL(null);
+      ;
 
       private String value;
 

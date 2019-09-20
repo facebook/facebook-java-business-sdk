@@ -1982,7 +1982,7 @@ public class AdAccountCreationRequest extends APINode {
       VALUE_WATER_AND_SOFT_DRINK_AND_BAVERAGE("WATER_AND_SOFT_DRINK_AND_BAVERAGE"),
       @SerializedName("WIRELESS_SERVICES")
       VALUE_WIRELESS_SERVICES("WIRELESS_SERVICES"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -2037,7 +2037,7 @@ public class AdAccountCreationRequest extends APINode {
       VALUE_TELECOM("TELECOM"),
       @SerializedName("TRAVEL")
       VALUE_TRAVEL("TRAVEL"),
-      NULL(null);
+      ;
 
       private String value;
 

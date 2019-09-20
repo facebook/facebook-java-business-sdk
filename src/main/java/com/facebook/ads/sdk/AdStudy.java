@@ -2127,7 +2127,7 @@ public class AdStudy extends APINode {
       VALUE_LIFT("LIFT"),
       @SerializedName("SPLIT_TEST")
       VALUE_SPLIT_TEST("SPLIT_TEST"),
-      NULL(null);
+      ;
 
       private String value;
 

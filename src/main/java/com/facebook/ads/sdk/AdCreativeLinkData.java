@@ -615,7 +615,7 @@ public class AdCreativeLinkData extends APINode {
       VALUE_DEFAULT("default"),
       @SerializedName("link")
       VALUE_LINK("link"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -638,7 +638,7 @@ public class AdCreativeLinkData extends APINode {
       VALUE_CAROUSEL_SLIDESHOWS("carousel_slideshows"),
       @SerializedName("single_image")
       VALUE_SINGLE_IMAGE("single_image"),
-      NULL(null);
+      ;
 
       private String value;
 

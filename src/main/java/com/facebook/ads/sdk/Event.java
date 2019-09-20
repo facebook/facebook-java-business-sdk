@@ -3320,7 +3320,7 @@ public class Event extends APINode {
       VALUE_VOLUNTEERING("VOLUNTEERING"),
       @SerializedName("WORKSHOP")
       VALUE_WORKSHOP("WORKSHOP"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3343,7 +3343,7 @@ public class Event extends APINode {
       VALUE_PRIVATE("private"),
       @SerializedName("public")
       VALUE_PUBLIC("public"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3366,7 +3366,7 @@ public class Event extends APINode {
       VALUE_PUBLISHED("published"),
       @SerializedName("scheduled_draft_for_publication")
       VALUE_SCHEDULED_DRAFT_FOR_PUBLICATION("scheduled_draft_for_publication"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3385,7 +3385,7 @@ public class Event extends APINode {
       VALUE_PAST("past"),
       @SerializedName("upcoming")
       VALUE_UPCOMING("upcoming"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3406,7 +3406,7 @@ public class Event extends APINode {
       VALUE_ONSITE_TICKET("ONSITE_TICKET"),
       @SerializedName("RSVP")
       VALUE_RSVP("RSVP"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3433,7 +3433,7 @@ public class Event extends APINode {
       VALUE_NONE("none"),
       @SerializedName("year")
       VALUE_YEAR("year"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3456,7 +3456,7 @@ public class Event extends APINode {
       VALUE_BRANDING_PHOTO("BRANDING_PHOTO"),
       @SerializedName("BRANDING_STATUS")
       VALUE_BRANDING_STATUS("BRANDING_STATUS"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3475,7 +3475,7 @@ public class Event extends APINode {
       VALUE_MARKDOWN("MARKDOWN"),
       @SerializedName("PLAINTEXT")
       VALUE_PLAINTEXT("PLAINTEXT"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3494,7 +3494,7 @@ public class Event extends APINode {
       VALUE_1("1"),
       @SerializedName("2")
       VALUE_2("2"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3519,7 +3519,7 @@ public class Event extends APINode {
       VALUE_4("4"),
       @SerializedName("5")
       VALUE_5("5"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3538,7 +3538,7 @@ public class Event extends APINode {
       VALUE_DISABLED("disabled"),
       @SerializedName("enabled")
       VALUE_ENABLED("enabled"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3557,7 +3557,7 @@ public class Event extends APINode {
       VALUE_STORY("STORY"),
       @SerializedName("TIMELINE")
       VALUE_TIMELINE("TIMELINE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3586,7 +3586,7 @@ public class Event extends APINode {
       VALUE_SCHEDULED("SCHEDULED"),
       @SerializedName("SCHEDULED_RECURRING")
       VALUE_SCHEDULED_RECURRING("SCHEDULED_RECURRING"),
-      NULL(null);
+      ;
 
       private String value;
 

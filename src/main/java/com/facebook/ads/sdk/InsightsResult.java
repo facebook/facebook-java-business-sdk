@@ -288,7 +288,7 @@ public class InsightsResult extends APINode {
   public static enum EnumMetric {
       @SerializedName("messages_sent")
       VALUE_MESSAGES_SENT("messages_sent"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -341,7 +341,7 @@ public class InsightsResult extends APINode {
       VALUE_TODAY("today"),
       @SerializedName("yesterday")
       VALUE_YESTERDAY("yesterday"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -366,7 +366,7 @@ public class InsightsResult extends APINode {
       VALUE_MONTH("month"),
       @SerializedName("week")
       VALUE_WEEK("week"),
-      NULL(null);
+      ;
 
       private String value;
 

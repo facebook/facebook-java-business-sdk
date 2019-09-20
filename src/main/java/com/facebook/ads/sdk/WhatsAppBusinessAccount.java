@@ -1214,7 +1214,7 @@ public class WhatsAppBusinessAccount extends APINode {
       VALUE_TICKET_UPDATE("TICKET_UPDATE"),
       @SerializedName("TRANSPORTATION_UPDATE")
       VALUE_TRANSPORTATION_UPDATE("TRANSPORTATION_UPDATE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1239,7 +1239,7 @@ public class WhatsAppBusinessAccount extends APINode {
       VALUE_PENDING_DELETION("PENDING_DELETION"),
       @SerializedName("REJECTED")
       VALUE_REJECTED("REJECTED"),
-      NULL(null);
+      ;
 
       private String value;
 

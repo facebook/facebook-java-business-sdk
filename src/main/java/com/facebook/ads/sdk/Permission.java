@@ -237,7 +237,7 @@ public class Permission extends APINode {
       VALUE_EXPIRED("expired"),
       @SerializedName("granted")
       VALUE_GRANTED("granted"),
-      NULL(null);
+      ;
 
       private String value;
 

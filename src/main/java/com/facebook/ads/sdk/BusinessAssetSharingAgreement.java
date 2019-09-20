@@ -588,7 +588,7 @@ public class BusinessAssetSharingAgreement extends APINode {
       VALUE_EXPIRED("EXPIRED"),
       @SerializedName("IN_PROGRESS")
       VALUE_IN_PROGRESS("IN_PROGRESS"),
-      NULL(null);
+      ;
 
       private String value;
 

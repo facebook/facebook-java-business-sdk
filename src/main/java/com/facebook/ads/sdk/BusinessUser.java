@@ -2987,7 +2987,7 @@ public class BusinessUser extends APINode {
       VALUE_FINANCE_ANALYST("FINANCE_ANALYST"),
       @SerializedName("FINANCE_EDITOR")
       VALUE_FINANCE_EDITOR("FINANCE_EDITOR"),
-      NULL(null);
+      ;
 
       private String value;
 

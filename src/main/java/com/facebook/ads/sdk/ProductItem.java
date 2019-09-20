@@ -1960,7 +1960,7 @@ public class ProductItem extends APINode {
       VALUE_TEEN("teen"),
       @SerializedName("toddler")
       VALUE_TODDLER("toddler"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1987,7 +1987,7 @@ public class ProductItem extends APINode {
       VALUE_PENDING("pending"),
       @SerializedName("preorder")
       VALUE_PREORDER("preorder"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -2012,7 +2012,7 @@ public class ProductItem extends APINode {
       VALUE_REFURBISHED("refurbished"),
       @SerializedName("used")
       VALUE_USED("used"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -2033,7 +2033,7 @@ public class ProductItem extends APINode {
       VALUE_MALE("male"),
       @SerializedName("unisex")
       VALUE_UNISEX("unisex"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -2056,7 +2056,7 @@ public class ProductItem extends APINode {
       VALUE_PENDING("pending"),
       @SerializedName("rejected")
       VALUE_REJECTED("rejected"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -2079,7 +2079,7 @@ public class ProductItem extends APINode {
       VALUE_LB("lb"),
       @SerializedName("oz")
       VALUE_OZ("oz"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -2098,7 +2098,7 @@ public class ProductItem extends APINode {
       VALUE_PUBLISHED("published"),
       @SerializedName("staging")
       VALUE_STAGING("staging"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -2517,7 +2517,7 @@ public class ProductItem extends APINode {
       VALUE_FB_VEHI("FB_VEHI"),
       @SerializedName("FB_VEHI_PART")
       VALUE_FB_VEHI_PART("FB_VEHI_PART"),
-      NULL(null);
+      ;
 
       private String value;
 

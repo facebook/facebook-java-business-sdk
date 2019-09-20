@@ -3097,7 +3097,7 @@ public class AdsPixel extends APINode {
       VALUE_LAST_FIRED_TIME("LAST_FIRED_TIME"),
       @SerializedName("NAME")
       VALUE_NAME("NAME"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3128,7 +3128,7 @@ public class AdsPixel extends APINode {
       VALUE_ST("st"),
       @SerializedName("zp")
       VALUE_ZP("zp"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3149,7 +3149,7 @@ public class AdsPixel extends APINode {
       VALUE_ANALYTICS_ONLY("ANALYTICS_ONLY"),
       @SerializedName("EMPTY")
       VALUE_EMPTY("EMPTY"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3170,7 +3170,7 @@ public class AdsPixel extends APINode {
       VALUE_FIRST_PARTY_COOKIE_DISABLED("FIRST_PARTY_COOKIE_DISABLED"),
       @SerializedName("FIRST_PARTY_COOKIE_ENABLED")
       VALUE_FIRST_PARTY_COOKIE_ENABLED("FIRST_PARTY_COOKIE_ENABLED"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3189,7 +3189,7 @@ public class AdsPixel extends APINode {
       VALUE_ANALYZE("ANALYZE"),
       @SerializedName("EDIT")
       VALUE_EDIT("EDIT"),
-      NULL(null);
+      ;
 
       private String value;
 

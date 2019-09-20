@@ -3243,7 +3243,7 @@ public class AdsInsights extends APINode {
       VALUE_7D_VIEW("7d_view"),
       @SerializedName("default")
       VALUE_DEFAULT("default"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3280,7 +3280,7 @@ public class AdsInsights extends APINode {
       VALUE_ACTION_VIDEO_SOUND("action_video_sound"),
       @SerializedName("action_video_type")
       VALUE_ACTION_VIDEO_TYPE("action_video_type"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3299,7 +3299,7 @@ public class AdsInsights extends APINode {
       VALUE_CONVERSION("conversion"),
       @SerializedName("impression")
       VALUE_IMPRESSION("impression"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3358,7 +3358,7 @@ public class AdsInsights extends APINode {
       VALUE_TITLE_ASSET("title_asset"),
       @SerializedName("video_asset")
       VALUE_VIDEO_ASSET("video_asset"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3411,7 +3411,7 @@ public class AdsInsights extends APINode {
       VALUE_TODAY("today"),
       @SerializedName("yesterday")
       VALUE_YESTERDAY("yesterday"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3434,7 +3434,7 @@ public class AdsInsights extends APINode {
       VALUE_ADSET("adset"),
       @SerializedName("campaign")
       VALUE_CAMPAIGN("campaign"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3471,7 +3471,7 @@ public class AdsInsights extends APINode {
       VALUE_ACTION_VIDEO_SOUND("action_video_sound"),
       @SerializedName("action_video_type")
       VALUE_ACTION_VIDEO_TYPE("action_video_type"),
-      NULL(null);
+      ;
 
       private String value;
 

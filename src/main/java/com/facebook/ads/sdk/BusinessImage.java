@@ -779,7 +779,7 @@ public class BusinessImage extends APINode {
       VALUE_RIGHT_COLUMN_STANDARD("RIGHT_COLUMN_STANDARD"),
       @SerializedName("SUGGESTED_VIDEO_MOBILE")
       VALUE_SUGGESTED_VIDEO_MOBILE("SUGGESTED_VIDEO_MOBILE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -800,7 +800,7 @@ public class BusinessImage extends APINode {
       VALUE_COUNTRY("country"),
       @SerializedName("gender")
       VALUE_GENDER("gender"),
-      NULL(null);
+      ;
 
       private String value;
 

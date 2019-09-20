@@ -760,7 +760,7 @@ public class Profile extends APINode {
       VALUE_PAGE("page"),
       @SerializedName("user")
       VALUE_USER("user"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -793,7 +793,7 @@ public class Profile extends APINode {
       VALUE_THANKFUL("THANKFUL"),
       @SerializedName("WOW")
       VALUE_WOW("WOW"),
-      NULL(null);
+      ;
 
       private String value;
 

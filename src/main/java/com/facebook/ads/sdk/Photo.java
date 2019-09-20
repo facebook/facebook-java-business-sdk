@@ -4122,7 +4122,7 @@ public class Photo extends APINode {
       VALUE_NONE("none"),
       @SerializedName("year")
       VALUE_YEAR("year"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4151,7 +4151,7 @@ public class Photo extends APINode {
       VALUE_SCHEDULED("SCHEDULED"),
       @SerializedName("SCHEDULED_RECURRING")
       VALUE_SCHEDULED_RECURRING("SCHEDULED_RECURRING"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4172,7 +4172,7 @@ public class Photo extends APINode {
       VALUE_TAGGED("tagged"),
       @SerializedName("uploaded")
       VALUE_UPLOADED("uploaded"),
-      NULL(null);
+      ;
 
       private String value;
 

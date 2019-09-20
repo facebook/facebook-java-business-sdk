@@ -722,7 +722,7 @@ public class MediaFingerprint extends APINode {
       VALUE_OTHER("OTHER"),
       @SerializedName("SONGTRACK")
       VALUE_SONGTRACK("SONGTRACK"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -743,7 +743,7 @@ public class MediaFingerprint extends APINode {
       VALUE_EXPIRING("EXPIRING"),
       @SerializedName("VALID")
       VALUE_VALID("VALID"),
-      NULL(null);
+      ;
 
       private String value;
 

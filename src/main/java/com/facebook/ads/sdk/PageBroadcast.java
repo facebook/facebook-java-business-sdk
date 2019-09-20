@@ -712,7 +712,7 @@ public class PageBroadcast extends APINode {
   public static enum EnumOperation {
       @SerializedName("CANCEL")
       VALUE_CANCEL("CANCEL"),
-      NULL(null);
+      ;
 
       private String value;
 

@@ -28940,7 +28940,7 @@ public class AdAccount extends APINode {
       VALUE_VND("VND"),
       @SerializedName("ZAR")
       VALUE_ZAR("ZAR"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -28967,7 +28967,7 @@ public class AdAccount extends APINode {
       VALUE_FB_EMPLOYEE_DSO_ADVERTISE("FB_EMPLOYEE_DSO_ADVERTISE"),
       @SerializedName("MANAGE")
       VALUE_MANAGE("MANAGE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -28994,7 +28994,7 @@ public class AdAccount extends APINode {
       VALUE_FB_EMPLOYEE_DSO_ADVERTISE("FB_EMPLOYEE_DSO_ADVERTISE"),
       @SerializedName("MANAGE")
       VALUE_MANAGE("MANAGE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -29025,7 +29025,7 @@ public class AdAccount extends APINode {
       VALUE_VEHICLE("VEHICLE"),
       @SerializedName("VEHICLE_OFFER")
       VALUE_VEHICLE_OFFER("VEHICLE_OFFER"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -29058,7 +29058,7 @@ public class AdAccount extends APINode {
       VALUE_VEHICLE("VEHICLE"),
       @SerializedName("VEHICLE_OFFER")
       VALUE_VEHICLE_OFFER("VEHICLE_OFFER"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -29103,7 +29103,7 @@ public class AdAccount extends APINode {
       VALUE_VIDEO("VIDEO"),
       @SerializedName("WEBSITE")
       VALUE_WEBSITE("WEBSITE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -29124,7 +29124,7 @@ public class AdAccount extends APINode {
       VALUE_DELETE_ARCHIVED_BEFORE("DELETE_ARCHIVED_BEFORE"),
       @SerializedName("DELETE_OLDEST")
       VALUE_DELETE_OLDEST("DELETE_OLDEST"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -29175,7 +29175,7 @@ public class AdAccount extends APINode {
       VALUE_INTERACTIVE_COMPONENT_STICKER_ID("interactive_component_sticker_id"),
       @SerializedName("interactive_component_sticker_response")
       VALUE_INTERACTIVE_COMPONENT_STICKER_RESPONSE("interactive_component_sticker_response"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -29222,7 +29222,7 @@ public class AdAccount extends APINode {
       VALUE_VALIDATION_VIEW("VALIDATION_VIEW"),
       @SerializedName("VIDEO_ENGAGEMENT")
       VALUE_VIDEO_ENGAGEMENT("VIDEO_ENGAGEMENT"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -29243,7 +29243,7 @@ public class AdAccount extends APINode {
       VALUE_ADSMANAGERREPORTING("adsManagerReporting"),
       @SerializedName("newAdsManager")
       VALUE_NEWADSMANAGER("newAdsManager"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -29296,7 +29296,7 @@ public class AdAccount extends APINode {
       VALUE_TODAY("today"),
       @SerializedName("yesterday")
       VALUE_YESTERDAY("yesterday"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -29323,7 +29323,7 @@ public class AdAccount extends APINode {
       VALUE_CAMPAIGN_GROUP("campaign_group"),
       @SerializedName("politicalad")
       VALUE_POLITICALAD("politicalad"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -29344,7 +29344,7 @@ public class AdAccount extends APINode {
       VALUE_MONTHLY("monthly"),
       @SerializedName("weekly")
       VALUE_WEEKLY("weekly"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -29365,7 +29365,7 @@ public class AdAccount extends APINode {
       VALUE_DELETED("Deleted"),
       @SerializedName("Paused")
       VALUE_PAUSED("Paused"),
-      NULL(null);
+      ;
 
       private String value;
 

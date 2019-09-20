@@ -7558,7 +7558,7 @@ public class AdVideo extends APINode {
       VALUE_WOODHENGE("WOODHENGE"),
       @SerializedName("YOUR_DAY")
       VALUE_YOUR_DAY("YOUR_DAY"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7609,7 +7609,7 @@ public class AdVideo extends APINode {
       VALUE_TECHNOLOGY("TECHNOLOGY"),
       @SerializedName("VIDEO_GAMING")
       VALUE_VIDEO_GAMING("VIDEO_GAMING"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7628,7 +7628,7 @@ public class AdVideo extends APINode {
       VALUE_MARKDOWN("MARKDOWN"),
       @SerializedName("PLAINTEXT")
       VALUE_PLAINTEXT("PLAINTEXT"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7651,7 +7651,7 @@ public class AdVideo extends APINode {
       VALUE_EQUIRECTANGULAR("equirectangular"),
       @SerializedName("half_equirectangular")
       VALUE_HALF_EQUIRECTANGULAR("half_equirectangular"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7668,7 +7668,7 @@ public class AdVideo extends APINode {
   public static enum EnumSwapMode {
       @SerializedName("replace")
       VALUE_REPLACE("replace"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7697,7 +7697,7 @@ public class AdVideo extends APINode {
       VALUE_SCHEDULED("SCHEDULED"),
       @SerializedName("SCHEDULED_RECURRING")
       VALUE_SCHEDULED_RECURRING("SCHEDULED_RECURRING"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7720,7 +7720,7 @@ public class AdVideo extends APINode {
       VALUE_START("start"),
       @SerializedName("transfer")
       VALUE_TRANSFER("transfer"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7773,7 +7773,7 @@ public class AdVideo extends APINode {
       VALUE_RIGHT_COLUMN_STANDARD("RIGHT_COLUMN_STANDARD"),
       @SerializedName("SUGGESTED_VIDEO_MOBILE")
       VALUE_SUGGESTED_VIDEO_MOBILE("SUGGESTED_VIDEO_MOBILE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7792,7 +7792,7 @@ public class AdVideo extends APINode {
       VALUE_TAGGED("tagged"),
       @SerializedName("uploaded")
       VALUE_UPLOADED("uploaded"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7819,7 +7819,7 @@ public class AdVideo extends APINode {
       VALUE_NONE("none"),
       @SerializedName("year")
       VALUE_YEAR("year"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7842,7 +7842,7 @@ public class AdVideo extends APINode {
       VALUE_TOP_LEFT("TOP_LEFT"),
       @SerializedName("TOP_RIGHT")
       VALUE_TOP_RIGHT("TOP_RIGHT"),
-      NULL(null);
+      ;
 
       private String value;
 

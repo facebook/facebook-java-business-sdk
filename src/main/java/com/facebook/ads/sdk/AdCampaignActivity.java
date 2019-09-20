@@ -1166,7 +1166,7 @@ public class AdCampaignActivity extends APINode {
       VALUE_LOWEST_COST_WITH_BID_CAP("LOWEST_COST_WITH_BID_CAP"),
       @SerializedName("TARGET_COST")
       VALUE_TARGET_COST("TARGET_COST"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1187,7 +1187,7 @@ public class AdCampaignActivity extends APINode {
       VALUE_LOWEST_COST_WITH_BID_CAP("LOWEST_COST_WITH_BID_CAP"),
       @SerializedName("TARGET_COST")
       VALUE_TARGET_COST("TARGET_COST"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1222,7 +1222,7 @@ public class AdCampaignActivity extends APINode {
       VALUE_THRUPLAY("THRUPLAY"),
       @SerializedName("VIDEO_VIEWS")
       VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1257,7 +1257,7 @@ public class AdCampaignActivity extends APINode {
       VALUE_THRUPLAY("THRUPLAY"),
       @SerializedName("VIDEO_VIEWS")
       VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1322,7 +1322,7 @@ public class AdCampaignActivity extends APINode {
       VALUE_VALUE("VALUE"),
       @SerializedName("VIDEO_VIEWS")
       VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1387,7 +1387,7 @@ public class AdCampaignActivity extends APINode {
       VALUE_VALUE("VALUE"),
       @SerializedName("VIDEO_VIEWS")
       VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
-      NULL(null);
+      ;
 
       private String value;
 

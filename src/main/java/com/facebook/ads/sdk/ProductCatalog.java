@@ -9425,7 +9425,7 @@ public class ProductCatalog extends APINode {
       VALUE_TRANSACTABLE_ITEMS("transactable_items"),
       @SerializedName("vehicles")
       VALUE_VEHICLES("vehicles"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -9444,7 +9444,7 @@ public class ProductCatalog extends APINode {
       VALUE_ADMIN("ADMIN"),
       @SerializedName("ADVERTISER")
       VALUE_ADVERTISER("ADVERTISER"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -9463,7 +9463,7 @@ public class ProductCatalog extends APINode {
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("MANAGE")
       VALUE_MANAGE("MANAGE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -9482,7 +9482,7 @@ public class ProductCatalog extends APINode {
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("MANAGE")
       VALUE_MANAGE("MANAGE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -9499,7 +9499,7 @@ public class ProductCatalog extends APINode {
   public static enum EnumStandard {
       @SerializedName("google")
       VALUE_GOOGLE("google"),
-      NULL(null);
+      ;
 
       private String value;
 

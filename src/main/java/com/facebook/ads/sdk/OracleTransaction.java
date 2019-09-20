@@ -930,7 +930,7 @@ public class OracleTransaction extends APINode {
       VALUE_CM("CM"),
       @SerializedName("INV")
       VALUE_INV("INV"),
-      NULL(null);
+      ;
 
       private String value;
 

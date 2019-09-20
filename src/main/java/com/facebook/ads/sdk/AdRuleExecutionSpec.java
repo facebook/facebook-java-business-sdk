@@ -254,7 +254,7 @@ public class AdRuleExecutionSpec extends APINode {
       VALUE_ROTATE("ROTATE"),
       @SerializedName("UNPAUSE")
       VALUE_UNPAUSE("UNPAUSE"),
-      NULL(null);
+      ;
 
       private String value;
 

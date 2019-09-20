@@ -3909,7 +3909,7 @@ public class CustomAudience extends APINode {
       VALUE_VEHICLE("VEHICLE"),
       @SerializedName("VEHICLE_OFFER")
       VALUE_VEHICLE_OFFER("VEHICLE_OFFER"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3942,7 +3942,7 @@ public class CustomAudience extends APINode {
       VALUE_VEHICLE("VEHICLE"),
       @SerializedName("VEHICLE_OFFER")
       VALUE_VEHICLE_OFFER("VEHICLE_OFFER"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3963,7 +3963,7 @@ public class CustomAudience extends APINode {
       VALUE_PARTNER_PROVIDED_ONLY("PARTNER_PROVIDED_ONLY"),
       @SerializedName("USER_PROVIDED_ONLY")
       VALUE_USER_PROVIDED_ONLY("USER_PROVIDED_ONLY"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4008,7 +4008,7 @@ public class CustomAudience extends APINode {
       VALUE_VIDEO("VIDEO"),
       @SerializedName("WEBSITE")
       VALUE_WEBSITE("WEBSITE"),
-      NULL(null);
+      ;
 
       private String value;
 

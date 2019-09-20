@@ -22073,7 +22073,7 @@ public class Business extends APINode {
       VALUE_ALL_REQUIRED("all_required"),
       @SerializedName("none")
       VALUE_NONE("none"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -22132,7 +22132,7 @@ public class Business extends APINode {
       VALUE_TELECOM("TELECOM"),
       @SerializedName("TRAVEL")
       VALUE_TRAVEL("TRAVEL"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -22159,7 +22159,7 @@ public class Business extends APINode {
       VALUE_FB_EMPLOYEE_DSO_ADVERTISE("FB_EMPLOYEE_DSO_ADVERTISE"),
       @SerializedName("MANAGE")
       VALUE_MANAGE("MANAGE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -22182,7 +22182,7 @@ public class Business extends APINode {
       VALUE_APP_DEVELOPER("APP_DEVELOPER"),
       @SerializedName("PUBLISHER")
       VALUE_PUBLISHER("PUBLISHER"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -22227,7 +22227,7 @@ public class Business extends APINode {
       VALUE_READ_PAGE_MAILBOXES("READ_PAGE_MAILBOXES"),
       @SerializedName("VIEW_MONETIZATION_INSIGHTS")
       VALUE_VIEW_MONETIZATION_INSIGHTS("VIEW_MONETIZATION_INSIGHTS"),
-      NULL(null);
+      ;
 
       private String value;
 

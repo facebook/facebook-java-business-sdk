@@ -635,7 +635,7 @@ public class AdAsyncRequest extends APINode {
       VALUE_USER_CANCELED("USER_CANCELED"),
       @SerializedName("USER_CANCELED_DEPENDENCY")
       VALUE_USER_CANCELED_DEPENDENCY("USER_CANCELED_DEPENDENCY"),
-      NULL(null);
+      ;
 
       private String value;
 

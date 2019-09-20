@@ -1062,7 +1062,7 @@ public class AdReportSpec extends APINode {
       VALUE_INTERACTIVE_COMPONENT_STICKER_ID("interactive_component_sticker_id"),
       @SerializedName("interactive_component_sticker_response")
       VALUE_INTERACTIVE_COMPONENT_STICKER_RESPONSE("interactive_component_sticker_response"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1083,7 +1083,7 @@ public class AdReportSpec extends APINode {
       VALUE_ADSMANAGERREPORTING("adsManagerReporting"),
       @SerializedName("newAdsManager")
       VALUE_NEWADSMANAGER("newAdsManager"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1136,7 +1136,7 @@ public class AdReportSpec extends APINode {
       VALUE_TODAY("today"),
       @SerializedName("yesterday")
       VALUE_YESTERDAY("yesterday"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1159,7 +1159,7 @@ public class AdReportSpec extends APINode {
       VALUE_XLS("XLS"),
       @SerializedName("XLSX")
       VALUE_XLSX("XLSX"),
-      NULL(null);
+      ;
 
       private String value;
 

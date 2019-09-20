@@ -1572,7 +1572,7 @@ public class ReachFrequencyPrediction extends APINode {
       VALUE_QUOTE("quote"),
       @SerializedName("reserve")
       VALUE_RESERVE("reserve"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1601,7 +1601,7 @@ public class ReachFrequencyPrediction extends APINode {
       VALUE_RESEARCH_POLL("RESEARCH_POLL"),
       @SerializedName("RESERVED")
       VALUE_RESERVED("RESERVED"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1644,7 +1644,7 @@ public class ReachFrequencyPrediction extends APINode {
       VALUE_SPANISH("SPANISH"),
       @SerializedName("SPORTS")
       VALUE_SPORTS("SPORTS"),
-      NULL(null);
+      ;
 
       private String value;
 

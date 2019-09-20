@@ -4422,7 +4422,7 @@ public class Ad extends APINode {
       VALUE_CPM("CPM"),
       @SerializedName("MULTI_PREMIUM")
       VALUE_MULTI_PREMIUM("MULTI_PREMIUM"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4445,7 +4445,7 @@ public class Ad extends APINode {
       VALUE_DELETED("DELETED"),
       @SerializedName("PAUSED")
       VALUE_PAUSED("PAUSED"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4484,7 +4484,7 @@ public class Ad extends APINode {
       VALUE_PREAPPROVED("PREAPPROVED"),
       @SerializedName("WITH_ISSUES")
       VALUE_WITH_ISSUES("WITH_ISSUES"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4507,7 +4507,7 @@ public class Ad extends APINode {
       VALUE_DELETED("DELETED"),
       @SerializedName("PAUSED")
       VALUE_PAUSED("PAUSED"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4560,7 +4560,7 @@ public class Ad extends APINode {
       VALUE_TODAY("today"),
       @SerializedName("yesterday")
       VALUE_YESTERDAY("yesterday"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4581,7 +4581,7 @@ public class Ad extends APINode {
       VALUE_SYNCHRONOUS_AD_REVIEW("synchronous_ad_review"),
       @SerializedName("validate_only")
       VALUE_VALIDATE_ONLY("validate_only"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4600,7 +4600,7 @@ public class Ad extends APINode {
       VALUE_ALL("ALL"),
       @SerializedName("ANY")
       VALUE_ANY("ANY"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4621,7 +4621,7 @@ public class Ad extends APINode {
       VALUE_INHERITED_FROM_SOURCE("INHERITED_FROM_SOURCE"),
       @SerializedName("PAUSED")
       VALUE_PAUSED("PAUSED"),
-      NULL(null);
+      ;
 
       private String value;
 
