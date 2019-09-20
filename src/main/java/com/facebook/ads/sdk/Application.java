@@ -55,6 +55,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class Application extends APINode {
+  @SerializedName("aam_rules")
+  private String mAamRules = null;
   @SerializedName("an_ad_space_limit")
   private Long mAnAdSpaceLimit = null;
   @SerializedName("an_platforms")
@@ -572,6 +574,10 @@ public class Application extends APINode {
     return new APIRequestCreateFullAppIndexingInfo(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetInsightsPushSchedule getInsightsPushSchedule() {
+    return new APIRequestGetInsightsPushSchedule(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateInsightsPushSchedule createInsightsPushSchedule() {
     return new APIRequestCreateInsightsPushSchedule(this.getPrefixedId().toString(), context);
   }
@@ -648,10 +654,6 @@ public class Application extends APINode {
     return new APIRequestGetRoles(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateStagingResource createStagingResource() {
-    return new APIRequestCreateStagingResource(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetSubscribedDomains getSubscribedDomains() {
     return new APIRequestGetSubscribedDomains(this.getPrefixedId().toString(), context);
   }
@@ -692,6 +694,10 @@ public class Application extends APINode {
     return new APIRequestUpdate(this.getPrefixedId().toString(), context);
   }
 
+
+  public String getFieldAamRules() {
+    return mAamRules;
+  }
 
   public Long getFieldAnAdSpaceLimit() {
     return mAnAdSpaceLimit;
@@ -6473,6 +6479,110 @@ public class Application extends APINode {
 
   }
 
+  public static class APIRequestGetInsightsPushSchedule extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetInsightsPushSchedule.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetInsightsPushSchedule(String nodeId, APIContext context) {
+      super(context, nodeId, "/insights_push_schedule", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetInsightsPushSchedule setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInsightsPushSchedule setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetInsightsPushSchedule requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetInsightsPushSchedule requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInsightsPushSchedule requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetInsightsPushSchedule requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInsightsPushSchedule requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInsightsPushSchedule requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestCreateInsightsPushSchedule extends APIRequest<APINode> {
 
     APINode lastResponse = null;
@@ -6490,14 +6600,9 @@ public class Application extends APINode {
       "owner_id",
       "schedule",
       "status",
-      "time_created",
       "time_increment",
-      "time_last_fail",
-      "time_last_run",
-      "time_last_success",
       "time_start",
       "time_stop",
-      "time_updated",
     };
 
     public static final String[] FIELDS = {
@@ -6629,32 +6734,12 @@ public class Application extends APINode {
       return this;
     }
 
-    public APIRequestCreateInsightsPushSchedule setTimeCreated (String timeCreated) {
-      this.setParam("time_created", timeCreated);
-      return this;
-    }
-
     public APIRequestCreateInsightsPushSchedule setTimeIncrement (Long timeIncrement) {
       this.setParam("time_increment", timeIncrement);
       return this;
     }
     public APIRequestCreateInsightsPushSchedule setTimeIncrement (String timeIncrement) {
       this.setParam("time_increment", timeIncrement);
-      return this;
-    }
-
-    public APIRequestCreateInsightsPushSchedule setTimeLastFail (String timeLastFail) {
-      this.setParam("time_last_fail", timeLastFail);
-      return this;
-    }
-
-    public APIRequestCreateInsightsPushSchedule setTimeLastRun (String timeLastRun) {
-      this.setParam("time_last_run", timeLastRun);
-      return this;
-    }
-
-    public APIRequestCreateInsightsPushSchedule setTimeLastSuccess (String timeLastSuccess) {
-      this.setParam("time_last_success", timeLastSuccess);
       return this;
     }
 
@@ -6665,11 +6750,6 @@ public class Application extends APINode {
 
     public APIRequestCreateInsightsPushSchedule setTimeStop (String timeStop) {
       this.setParam("time_stop", timeStop);
-      return this;
-    }
-
-    public APIRequestCreateInsightsPushSchedule setTimeUpdated (String timeUpdated) {
-      this.setParam("time_updated", timeUpdated);
       return this;
     }
 
@@ -9189,120 +9269,6 @@ public class Application extends APINode {
 
   }
 
-  public static class APIRequestCreateStagingResource extends APIRequest<Application> {
-
-    Application lastResponse = null;
-    @Override
-    public Application getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "file",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Application parseResponse(String response, String header) throws APIException {
-      return Application.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Application execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Application execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Application> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Application>() {
-           public Application apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateStagingResource.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateStagingResource(String nodeId, APIContext context) {
-      super(context, nodeId, "/staging_resources", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateStagingResource setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateStagingResource setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-    public APIRequestCreateStagingResource addUploadFile (String uploadName, File file) {
-      this.setParam(uploadName, file);
-      return this;
-    }
-
-    public APIRequestCreateStagingResource setUseVideoEndpoint(boolean useVideoEndpoint) {
-      this.useVideoEndpoint = useVideoEndpoint;
-      return this;
-    }
-
-    public APIRequestCreateStagingResource requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateStagingResource requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateStagingResource requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateStagingResource requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateStagingResource requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateStagingResource requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetSubscribedDomains extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -10283,6 +10249,7 @@ public class Application extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "aam_rules",
       "an_ad_space_limit",
       "an_platforms",
       "android_key_hash",
@@ -10477,6 +10444,13 @@ public class Application extends APINode {
       return this;
     }
 
+    public APIRequestGet requestAamRulesField () {
+      return this.requestAamRulesField(true);
+    }
+    public APIRequestGet requestAamRulesField (boolean value) {
+      this.requestField("aam_rules", value);
+      return this;
+    }
     public APIRequestGet requestAnAdSpaceLimitField () {
       return this.requestAnAdSpaceLimitField(true);
     }
@@ -12144,6 +12118,7 @@ public class Application extends APINode {
   }
 
   public Application copyFrom(Application instance) {
+    this.mAamRules = instance.mAamRules;
     this.mAnAdSpaceLimit = instance.mAnAdSpaceLimit;
     this.mAnPlatforms = instance.mAnPlatforms;
     this.mAndroidKeyHash = instance.mAndroidKeyHash;

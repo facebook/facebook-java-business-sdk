@@ -7472,6 +7472,7 @@ public class ProductCatalog extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "additional_image_files",
       "additional_image_urls",
       "additional_variant_attributes",
       "android_app_name",
@@ -7483,6 +7484,7 @@ public class ProductCatalog extends APINode {
       "category",
       "checkout_url",
       "color",
+      "commerce_tax_category",
       "condition",
       "currency",
       "custom_data",
@@ -7520,6 +7522,7 @@ public class ProductCatalog extends APINode {
       "product_type",
       "retailer_id",
       "retailer_product_group_id",
+      "return_policy_days",
       "sale_price",
       "sale_price_end_date",
       "sale_price_start_date",
@@ -7589,6 +7592,15 @@ public class ProductCatalog extends APINode {
     }
 
 
+    public APIRequestCreateProduct setAdditionalImageFiles (List<File> additionalImageFiles) {
+      this.setParam("additional_image_files", additionalImageFiles);
+      return this;
+    }
+    public APIRequestCreateProduct setAdditionalImageFiles (String additionalImageFiles) {
+      this.setParam("additional_image_files", additionalImageFiles);
+      return this;
+    }
+
     public APIRequestCreateProduct setAdditionalImageUrls (List<String> additionalImageUrls) {
       this.setParam("additional_image_urls", additionalImageUrls);
       return this;
@@ -7653,6 +7665,15 @@ public class ProductCatalog extends APINode {
 
     public APIRequestCreateProduct setColor (String color) {
       this.setParam("color", color);
+      return this;
+    }
+
+    public APIRequestCreateProduct setCommerceTaxCategory (ProductItem.EnumCommerceTaxCategory commerceTaxCategory) {
+      this.setParam("commerce_tax_category", commerceTaxCategory);
+      return this;
+    }
+    public APIRequestCreateProduct setCommerceTaxCategory (String commerceTaxCategory) {
+      this.setParam("commerce_tax_category", commerceTaxCategory);
       return this;
     }
 
@@ -7878,6 +7899,15 @@ public class ProductCatalog extends APINode {
 
     public APIRequestCreateProduct setRetailerProductGroupId (String retailerProductGroupId) {
       this.setParam("retailer_product_group_id", retailerProductGroupId);
+      return this;
+    }
+
+    public APIRequestCreateProduct setReturnPolicyDays (Long returnPolicyDays) {
+      this.setParam("return_policy_days", returnPolicyDays);
+      return this;
+    }
+    public APIRequestCreateProduct setReturnPolicyDays (String returnPolicyDays) {
+      this.setParam("return_policy_days", returnPolicyDays);
       return this;
     }
 

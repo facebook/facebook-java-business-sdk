@@ -730,6 +730,7 @@ public class AdStudyObjective extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "aam_rules",
       "an_ad_space_limit",
       "an_platforms",
       "android_key_hash",
@@ -919,6 +920,13 @@ public class AdStudyObjective extends APINode {
       return this;
     }
 
+    public APIRequestGetApplications requestAamRulesField () {
+      return this.requestAamRulesField(true);
+    }
+    public APIRequestGetApplications requestAamRulesField (boolean value) {
+      this.requestField("aam_rules", value);
+      return this;
+    }
     public APIRequestGetApplications requestAnAdSpaceLimitField () {
       return this.requestAnAdSpaceLimitField(true);
     }

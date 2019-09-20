@@ -344,6 +344,7 @@ public class BusinessImage extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "breakdowns",
       "time_range",
     };
 
@@ -402,6 +403,15 @@ public class BusinessImage extends APINode {
       return this;
     }
 
+
+    public APIRequestGetInsights setBreakdowns (List<EnumBreakdowns> breakdowns) {
+      this.setParam("breakdowns", breakdowns);
+      return this;
+    }
+    public APIRequestGetInsights setBreakdowns (String breakdowns) {
+      this.setParam("breakdowns", breakdowns);
+      return this;
+    }
 
     public APIRequestGetInsights setTimeRange (Object timeRange) {
       this.setParam("time_range", timeRange);
@@ -774,6 +784,27 @@ public class BusinessImage extends APINode {
       private String value;
 
       private EnumValidationAdPlacements(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumBreakdowns {
+      @SerializedName("age")
+      VALUE_AGE("age"),
+      @SerializedName("country")
+      VALUE_COUNTRY("country"),
+      @SerializedName("gender")
+      VALUE_GENDER("gender"),
+      NULL(null);
+
+      private String value;
+
+      private EnumBreakdowns(String value) {
         this.value = value;
       }
 

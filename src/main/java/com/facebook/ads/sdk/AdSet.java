@@ -5332,6 +5332,7 @@ public class AdSet extends APINode {
       "time_based_ad_rotation_intervals",
       "time_start",
       "time_stop",
+      "tune_for_category",
       "upstream_events",
     };
 
@@ -5697,6 +5698,15 @@ public class AdSet extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setTuneForCategory (AdSet.EnumTuneForCategory tuneForCategory) {
+      this.setParam("tune_for_category", tuneForCategory);
+      return this;
+    }
+    public APIRequestUpdate setTuneForCategory (String tuneForCategory) {
+      this.setParam("tune_for_category", tuneForCategory);
+      return this;
+    }
+
     public APIRequestUpdate setUpstreamEvents (Map<String, String> upstreamEvents) {
       this.setParam("upstream_events", upstreamEvents);
       return this;
@@ -6033,6 +6043,29 @@ public class AdSet extends APINode {
       private String value;
 
       private EnumOptimizationSubEvent(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumTuneForCategory {
+      @SerializedName("CREDIT")
+      VALUE_CREDIT("CREDIT"),
+      @SerializedName("EMPLOYMENT")
+      VALUE_EMPLOYMENT("EMPLOYMENT"),
+      @SerializedName("HOUSING")
+      VALUE_HOUSING("HOUSING"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
+      NULL(null);
+
+      private String value;
+
+      private EnumTuneForCategory(String value) {
         this.value = value;
       }
 

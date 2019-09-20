@@ -105,6 +105,8 @@ public class Campaign extends APINode {
   private Campaign mSourceCampaign = null;
   @SerializedName("source_campaign_id")
   private String mSourceCampaignId = null;
+  @SerializedName("special_ad_category")
+  private String mSpecialAdCategory = null;
   @SerializedName("spend_cap")
   private String mSpendCap = null;
   @SerializedName("start_time")
@@ -480,6 +482,10 @@ public class Campaign extends APINode {
 
   public String getFieldSourceCampaignId() {
     return mSourceCampaignId;
+  }
+
+  public String getFieldSpecialAdCategory() {
+    return mSpecialAdCategory;
   }
 
   public String getFieldSpendCap() {
@@ -2224,6 +2230,7 @@ public class Campaign extends APINode {
       "recommendations",
       "source_campaign",
       "source_campaign_id",
+      "special_ad_category",
       "spend_cap",
       "start_time",
       "status",
@@ -2530,6 +2537,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetCopies requestSourceCampaignIdField (boolean value) {
       this.requestField("source_campaign_id", value);
+      return this;
+    }
+    public APIRequestGetCopies requestSpecialAdCategoryField () {
+      return this.requestSpecialAdCategoryField(true);
+    }
+    public APIRequestGetCopies requestSpecialAdCategoryField (boolean value) {
+      this.requestField("special_ad_category", value);
       return this;
     }
     public APIRequestGetCopies requestSpendCapField () {
@@ -3450,6 +3464,7 @@ public class Campaign extends APINode {
       "recommendations",
       "source_campaign",
       "source_campaign_id",
+      "special_ad_category",
       "spend_cap",
       "start_time",
       "status",
@@ -3758,6 +3773,13 @@ public class Campaign extends APINode {
       this.requestField("source_campaign_id", value);
       return this;
     }
+    public APIRequestGet requestSpecialAdCategoryField () {
+      return this.requestSpecialAdCategoryField(true);
+    }
+    public APIRequestGet requestSpecialAdCategoryField (boolean value) {
+      this.requestField("special_ad_category", value);
+      return this;
+    }
     public APIRequestGet requestSpendCapField () {
       return this.requestSpendCapField(true);
     }
@@ -3823,6 +3845,7 @@ public class Campaign extends APINode {
       "objective",
       "pacing_type",
       "promoted_object",
+      "special_ad_category",
       "spend_cap",
       "status",
       "upstream_events",
@@ -3994,6 +4017,15 @@ public class Campaign extends APINode {
     }
     public APIRequestUpdate setPromotedObject (String promotedObject) {
       this.setParam("promoted_object", promotedObject);
+      return this;
+    }
+
+    public APIRequestUpdate setSpecialAdCategory (Campaign.EnumSpecialAdCategory specialAdCategory) {
+      this.setParam("special_ad_category", specialAdCategory);
+      return this;
+    }
+    public APIRequestUpdate setSpecialAdCategory (String specialAdCategory) {
+      this.setParam("special_ad_category", specialAdCategory);
       return this;
     }
 
@@ -4271,6 +4303,29 @@ public class Campaign extends APINode {
       }
   }
 
+  public static enum EnumSpecialAdCategory {
+      @SerializedName("CREDIT")
+      VALUE_CREDIT("CREDIT"),
+      @SerializedName("EMPLOYMENT")
+      VALUE_EMPLOYMENT("EMPLOYMENT"),
+      @SerializedName("HOUSING")
+      VALUE_HOUSING("HOUSING"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
+      NULL(null);
+
+      private String value;
+
+      private EnumSpecialAdCategory(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumOperator {
       @SerializedName("ALL")
       VALUE_ALL("ALL"),
@@ -4351,6 +4406,7 @@ public class Campaign extends APINode {
     this.mRecommendations = instance.mRecommendations;
     this.mSourceCampaign = instance.mSourceCampaign;
     this.mSourceCampaignId = instance.mSourceCampaignId;
+    this.mSpecialAdCategory = instance.mSpecialAdCategory;
     this.mSpendCap = instance.mSpendCap;
     this.mStartTime = instance.mStartTime;
     this.mStatus = instance.mStatus;

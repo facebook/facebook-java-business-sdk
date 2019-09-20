@@ -1358,11 +1358,9 @@ public class AdsPixel extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "agent",
       "data",
       "test_event_code",
       "trace",
-      "upload_tag",
     };
 
     public static final String[] FIELDS = {
@@ -1421,11 +1419,6 @@ public class AdsPixel extends APINode {
     }
 
 
-    public APIRequestCreateEvent setAgent (String agent) {
-      this.setParam("agent", agent);
-      return this;
-    }
-
     public APIRequestCreateEvent setData (List<String> data) {
       this.setParam("data", data);
       return this;
@@ -1446,11 +1439,6 @@ public class AdsPixel extends APINode {
     }
     public APIRequestCreateEvent setTrace (String trace) {
       this.setParam("trace", trace);
-      return this;
-    }
-
-    public APIRequestCreateEvent setUploadTag (String uploadTag) {
-      this.setParam("upload_tag", uploadTag);
       return this;
     }
 

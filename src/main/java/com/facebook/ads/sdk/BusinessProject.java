@@ -1293,6 +1293,7 @@ public class BusinessProject extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "aam_rules",
       "an_ad_space_limit",
       "an_platforms",
       "android_key_hash",
@@ -1482,6 +1483,13 @@ public class BusinessProject extends APINode {
       return this;
     }
 
+    public APIRequestGetApps requestAamRulesField () {
+      return this.requestAamRulesField(true);
+    }
+    public APIRequestGetApps requestAamRulesField (boolean value) {
+      this.requestField("aam_rules", value);
+      return this;
+    }
     public APIRequestGetApps requestAnAdSpaceLimitField () {
       return this.requestAnAdSpaceLimitField(true);
     }

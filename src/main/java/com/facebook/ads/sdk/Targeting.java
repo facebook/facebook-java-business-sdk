@@ -205,8 +205,6 @@ public class Targeting extends APINode {
   private TargetingProspectingAudience mProspectingAudience = null;
   @SerializedName("publisher_platforms")
   private List<String> mPublisherPlatforms = null;
-  @SerializedName("publisher_visibility_categories")
-  private List<String> mPublisherVisibilityCategories = null;
   @SerializedName("radius")
   private String mRadius = null;
   @SerializedName("regions")
@@ -1234,15 +1232,6 @@ public class Targeting extends APINode {
     return this;
   }
 
-  public List<String> getFieldPublisherVisibilityCategories() {
-    return mPublisherVisibilityCategories;
-  }
-
-  public Targeting setFieldPublisherVisibilityCategories(List<String> value) {
-    this.mPublisherVisibilityCategories = value;
-    return this;
-  }
-
   public String getFieldRadius() {
     return mRadius;
   }
@@ -1514,7 +1503,6 @@ public class Targeting extends APINode {
     this.mProductAudienceSpecs = instance.mProductAudienceSpecs;
     this.mProspectingAudience = instance.mProspectingAudience;
     this.mPublisherPlatforms = instance.mPublisherPlatforms;
-    this.mPublisherVisibilityCategories = instance.mPublisherVisibilityCategories;
     this.mRadius = instance.mRadius;
     this.mRegions = instance.mRegions;
     this.mRelationshipStatuses = instance.mRelationshipStatuses;

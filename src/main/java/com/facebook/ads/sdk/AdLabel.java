@@ -1780,6 +1780,7 @@ public class AdLabel extends APINode {
       "recommendations",
       "source_campaign",
       "source_campaign_id",
+      "special_ad_category",
       "spend_cap",
       "start_time",
       "status",
@@ -2050,6 +2051,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetCampaigns requestSourceCampaignIdField (boolean value) {
       this.requestField("source_campaign_id", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestSpecialAdCategoryField () {
+      return this.requestSpecialAdCategoryField(true);
+    }
+    public APIRequestGetCampaigns requestSpecialAdCategoryField (boolean value) {
+      this.requestField("special_ad_category", value);
       return this;
     }
     public APIRequestGetCampaigns requestSpendCapField () {

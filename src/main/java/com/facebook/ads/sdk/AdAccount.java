@@ -470,10 +470,6 @@ public class AdAccount extends APINode {
     return new APIRequestCreateAdPlayable(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestDeleteAdReportRuns deleteAdReportRuns() {
-    return new APIRequestDeleteAdReportRuns(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetAdReportSchedules getAdReportSchedules() {
     return new APIRequestGetAdReportSchedules(this.getPrefixedId().toString(), context);
   }
@@ -1973,6 +1969,7 @@ public class AdAccount extends APINode {
       "time_start",
       "time_stop",
       "topline_id",
+      "tune_for_category",
       "upstream_events",
     };
 
@@ -2372,6 +2369,15 @@ public class AdAccount extends APINode {
 
     public APIRequestCreateAdSet setToplineId (String toplineId) {
       this.setParam("topline_id", toplineId);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setTuneForCategory (AdSet.EnumTuneForCategory tuneForCategory) {
+      this.setParam("tune_for_category", tuneForCategory);
+      return this;
+    }
+    public APIRequestCreateAdSet setTuneForCategory (String tuneForCategory) {
+      this.setParam("tune_for_category", tuneForCategory);
       return this;
     }
 
@@ -5634,110 +5640,6 @@ public class AdAccount extends APINode {
 
     @Override
     public APIRequestCreateAdPlayable requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestDeleteAdReportRuns extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestDeleteAdReportRuns.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestDeleteAdReportRuns(String nodeId, APIContext context) {
-      super(context, nodeId, "/adreportruns", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDeleteAdReportRuns setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAdReportRuns setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDeleteAdReportRuns requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDeleteAdReportRuns requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAdReportRuns requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDeleteAdReportRuns requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAdReportRuns requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAdReportRuns requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -10091,6 +9993,7 @@ public class AdAccount extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "aam_rules",
       "an_ad_space_limit",
       "an_platforms",
       "android_key_hash",
@@ -10290,6 +10193,13 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetAdvertisableApplications requestAamRulesField () {
+      return this.requestAamRulesField(true);
+    }
+    public APIRequestGetAdvertisableApplications requestAamRulesField (boolean value) {
+      this.requestField("aam_rules", value);
+      return this;
+    }
     public APIRequestGetAdvertisableApplications requestAnAdSpaceLimitField () {
       return this.requestAnAdSpaceLimitField(true);
     }
@@ -13302,6 +13212,7 @@ public class AdAccount extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "aam_rules",
       "an_ad_space_limit",
       "an_platforms",
       "android_key_hash",
@@ -13491,6 +13402,13 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetApplications requestAamRulesField () {
+      return this.requestAamRulesField(true);
+    }
+    public APIRequestGetApplications requestAamRulesField (boolean value) {
+      this.requestField("aam_rules", value);
+      return this;
+    }
     public APIRequestGetApplications requestAnAdSpaceLimitField () {
       return this.requestAnAdSpaceLimitField(true);
     }
@@ -16397,6 +16315,7 @@ public class AdAccount extends APINode {
       "recommendations",
       "source_campaign",
       "source_campaign_id",
+      "special_ad_category",
       "spend_cap",
       "start_time",
       "status",
@@ -16723,6 +16642,13 @@ public class AdAccount extends APINode {
       this.requestField("source_campaign_id", value);
       return this;
     }
+    public APIRequestGetCampaigns requestSpecialAdCategoryField () {
+      return this.requestSpecialAdCategoryField(true);
+    }
+    public APIRequestGetCampaigns requestSpecialAdCategoryField (boolean value) {
+      this.requestField("special_ad_category", value);
+      return this;
+    }
     public APIRequestGetCampaigns requestSpendCapField () {
       return this.requestSpendCapField(true);
     }
@@ -16788,6 +16714,7 @@ public class AdAccount extends APINode {
       "pacing_type",
       "promoted_object",
       "source_campaign_id",
+      "special_ad_category",
       "spend_cap",
       "status",
       "topline_id",
@@ -16955,6 +16882,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateCampaign setSpecialAdCategory (Campaign.EnumSpecialAdCategory specialAdCategory) {
+      this.setParam("special_ad_category", specialAdCategory);
+      return this;
+    }
+    public APIRequestCreateCampaign setSpecialAdCategory (String specialAdCategory) {
+      this.setParam("special_ad_category", specialAdCategory);
+      return this;
+    }
+
     public APIRequestCreateCampaign setSpendCap (Long spendCap) {
       this.setParam("spend_cap", spendCap);
       return this;
@@ -17063,6 +16999,7 @@ public class AdAccount extends APINode {
       "recommendations",
       "source_campaign",
       "source_campaign_id",
+      "special_ad_category",
       "spend_cap",
       "start_time",
       "status",
@@ -17351,6 +17288,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetCampaignsByLabels requestSourceCampaignIdField (boolean value) {
       this.requestField("source_campaign_id", value);
+      return this;
+    }
+    public APIRequestGetCampaignsByLabels requestSpecialAdCategoryField () {
+      return this.requestSpecialAdCategoryField(true);
+    }
+    public APIRequestGetCampaignsByLabels requestSpecialAdCategoryField (boolean value) {
+      this.requestField("special_ad_category", value);
       return this;
     }
     public APIRequestGetCampaignsByLabels requestSpendCapField () {
@@ -25821,11 +25765,11 @@ public class AdAccount extends APINode {
 
   }
 
-  public static class APIRequestCreateSubscribedApp extends APIRequest<Application> {
+  public static class APIRequestCreateSubscribedApp extends APIRequest<APINode> {
 
-    Application lastResponse = null;
+    APINode lastResponse = null;
     @Override
-    public Application getLastResponse() {
+    public APINode getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -25836,31 +25780,31 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public Application parseResponse(String response, String header) throws APIException {
-      return Application.parseResponse(response, getContext(), this, header).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public Application execute() throws APIException {
+    public APINode execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public Application execute(Map<String, Object> extraParams) throws APIException {
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<Application> executeAsync() throws APIException {
+    public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Application>() {
-           public Application apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
                return APIRequestCreateSubscribedApp.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {

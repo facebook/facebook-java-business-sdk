@@ -7396,6 +7396,8 @@ public class Group extends APINode {
       VALUE_SCHOOL_CLASS("SCHOOL_CLASS"),
       @SerializedName("SORORITY")
       VALUE_SORORITY("SORORITY"),
+      @SerializedName("SPORTS")
+      VALUE_SPORTS("SPORTS"),
       @SerializedName("STUDY_GROUP")
       VALUE_STUDY_GROUP("STUDY_GROUP"),
       @SerializedName("SUPPORT")
@@ -7501,6 +7503,8 @@ public class Group extends APINode {
       VALUE_SCHOOL_CLASS("SCHOOL_CLASS"),
       @SerializedName("SORORITY")
       VALUE_SORORITY("SORORITY"),
+      @SerializedName("SPORTS")
+      VALUE_SPORTS("SPORTS"),
       @SerializedName("STUDY_GROUP")
       VALUE_STUDY_GROUP("STUDY_GROUP"),
       @SerializedName("SUPPORT")
@@ -7764,6 +7768,8 @@ public class Group extends APINode {
       VALUE_INLINE_CREATED("INLINE_CREATED"),
       @SerializedName("PUBLISHED")
       VALUE_PUBLISHED("PUBLISHED"),
+      @SerializedName("REVIEWABLE_BRANDED_CONTENT")
+      VALUE_REVIEWABLE_BRANDED_CONTENT("REVIEWABLE_BRANDED_CONTENT"),
       @SerializedName("SCHEDULED")
       VALUE_SCHEDULED("SCHEDULED"),
       @SerializedName("SCHEDULED_RECURRING")

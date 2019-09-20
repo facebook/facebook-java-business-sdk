@@ -5557,6 +5557,7 @@ public class Business extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "aam_rules",
       "an_ad_space_limit",
       "an_platforms",
       "android_key_hash",
@@ -5746,6 +5747,13 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestGetClientApps requestAamRulesField () {
+      return this.requestAamRulesField(true);
+    }
+    public APIRequestGetClientApps requestAamRulesField (boolean value) {
+      this.requestField("aam_rules", value);
+      return this;
+    }
     public APIRequestGetClientApps requestAnAdSpaceLimitField () {
       return this.requestAnAdSpaceLimitField(true);
     }
@@ -13849,6 +13857,7 @@ public class Business extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "aam_rules",
       "an_ad_space_limit",
       "an_platforms",
       "android_key_hash",
@@ -14038,6 +14047,13 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestGetOwnedApps requestAamRulesField () {
+      return this.requestAamRulesField(true);
+    }
+    public APIRequestGetOwnedApps requestAamRulesField (boolean value) {
+      this.requestField("aam_rules", value);
+      return this;
+    }
     public APIRequestGetOwnedApps requestAnAdSpaceLimitField () {
       return this.requestAnAdSpaceLimitField(true);
     }

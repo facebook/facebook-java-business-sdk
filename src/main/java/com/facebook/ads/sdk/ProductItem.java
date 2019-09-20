@@ -1411,6 +1411,7 @@ public class ProductItem extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "additional_image_files",
       "additional_image_urls",
       "additional_variant_attributes",
       "android_app_name",
@@ -1422,6 +1423,7 @@ public class ProductItem extends APINode {
       "category",
       "checkout_url",
       "color",
+      "commerce_tax_category",
       "condition",
       "currency",
       "custom_data",
@@ -1458,6 +1460,7 @@ public class ProductItem extends APINode {
       "price",
       "product_type",
       "retailer_id",
+      "return_policy_days",
       "sale_price",
       "sale_price_end_date",
       "sale_price_start_date",
@@ -1527,6 +1530,15 @@ public class ProductItem extends APINode {
     }
 
 
+    public APIRequestUpdate setAdditionalImageFiles (List<File> additionalImageFiles) {
+      this.setParam("additional_image_files", additionalImageFiles);
+      return this;
+    }
+    public APIRequestUpdate setAdditionalImageFiles (String additionalImageFiles) {
+      this.setParam("additional_image_files", additionalImageFiles);
+      return this;
+    }
+
     public APIRequestUpdate setAdditionalImageUrls (List<String> additionalImageUrls) {
       this.setParam("additional_image_urls", additionalImageUrls);
       return this;
@@ -1591,6 +1603,15 @@ public class ProductItem extends APINode {
 
     public APIRequestUpdate setColor (String color) {
       this.setParam("color", color);
+      return this;
+    }
+
+    public APIRequestUpdate setCommerceTaxCategory (ProductItem.EnumCommerceTaxCategory commerceTaxCategory) {
+      this.setParam("commerce_tax_category", commerceTaxCategory);
+      return this;
+    }
+    public APIRequestUpdate setCommerceTaxCategory (String commerceTaxCategory) {
+      this.setParam("commerce_tax_category", commerceTaxCategory);
       return this;
     }
 
@@ -1811,6 +1832,15 @@ public class ProductItem extends APINode {
 
     public APIRequestUpdate setRetailerId (String retailerId) {
       this.setParam("retailer_id", retailerId);
+      return this;
+    }
+
+    public APIRequestUpdate setReturnPolicyDays (Long returnPolicyDays) {
+      this.setParam("return_policy_days", returnPolicyDays);
+      return this;
+    }
+    public APIRequestUpdate setReturnPolicyDays (String returnPolicyDays) {
+      this.setParam("return_policy_days", returnPolicyDays);
       return this;
     }
 
@@ -2073,6 +2103,425 @@ public class ProductItem extends APINode {
       private String value;
 
       private EnumVisibility(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumCommerceTaxCategory {
+      @SerializedName("FB_ANIMAL")
+      VALUE_FB_ANIMAL("FB_ANIMAL"),
+      @SerializedName("FB_ANIMAL_SUPP")
+      VALUE_FB_ANIMAL_SUPP("FB_ANIMAL_SUPP"),
+      @SerializedName("FB_APRL")
+      VALUE_FB_APRL("FB_APRL"),
+      @SerializedName("FB_APRL_ACCESSORIES")
+      VALUE_FB_APRL_ACCESSORIES("FB_APRL_ACCESSORIES"),
+      @SerializedName("FB_APRL_ATHL_UNIF")
+      VALUE_FB_APRL_ATHL_UNIF("FB_APRL_ATHL_UNIF"),
+      @SerializedName("FB_APRL_CASES")
+      VALUE_FB_APRL_CASES("FB_APRL_CASES"),
+      @SerializedName("FB_APRL_CLOTHING")
+      VALUE_FB_APRL_CLOTHING("FB_APRL_CLOTHING"),
+      @SerializedName("FB_APRL_COSTUME")
+      VALUE_FB_APRL_COSTUME("FB_APRL_COSTUME"),
+      @SerializedName("FB_APRL_CSTM")
+      VALUE_FB_APRL_CSTM("FB_APRL_CSTM"),
+      @SerializedName("FB_APRL_HANDBAG")
+      VALUE_FB_APRL_HANDBAG("FB_APRL_HANDBAG"),
+      @SerializedName("FB_APRL_JEWELRY")
+      VALUE_FB_APRL_JEWELRY("FB_APRL_JEWELRY"),
+      @SerializedName("FB_APRL_SHOE")
+      VALUE_FB_APRL_SHOE("FB_APRL_SHOE"),
+      @SerializedName("FB_APRL_SHOE_ACC")
+      VALUE_FB_APRL_SHOE_ACC("FB_APRL_SHOE_ACC"),
+      @SerializedName("FB_APRL_SWIM")
+      VALUE_FB_APRL_SWIM("FB_APRL_SWIM"),
+      @SerializedName("FB_APRL_SWIM_CHIL")
+      VALUE_FB_APRL_SWIM_CHIL("FB_APRL_SWIM_CHIL"),
+      @SerializedName("FB_APRL_SWIM_CVR")
+      VALUE_FB_APRL_SWIM_CVR("FB_APRL_SWIM_CVR"),
+      @SerializedName("FB_ARTS")
+      VALUE_FB_ARTS("FB_ARTS"),
+      @SerializedName("FB_ARTS_HOBBY")
+      VALUE_FB_ARTS_HOBBY("FB_ARTS_HOBBY"),
+      @SerializedName("FB_ARTS_PARTY")
+      VALUE_FB_ARTS_PARTY("FB_ARTS_PARTY"),
+      @SerializedName("FB_ARTS_PARTY_GIFT_CARD")
+      VALUE_FB_ARTS_PARTY_GIFT_CARD("FB_ARTS_PARTY_GIFT_CARD"),
+      @SerializedName("FB_ARTS_TICKET")
+      VALUE_FB_ARTS_TICKET("FB_ARTS_TICKET"),
+      @SerializedName("FB_BABY")
+      VALUE_FB_BABY("FB_BABY"),
+      @SerializedName("FB_BABY_BATH")
+      VALUE_FB_BABY_BATH("FB_BABY_BATH"),
+      @SerializedName("FB_BABY_BLANKET")
+      VALUE_FB_BABY_BLANKET("FB_BABY_BLANKET"),
+      @SerializedName("FB_BABY_DIAPER")
+      VALUE_FB_BABY_DIAPER("FB_BABY_DIAPER"),
+      @SerializedName("FB_BABY_GIFT_SET")
+      VALUE_FB_BABY_GIFT_SET("FB_BABY_GIFT_SET"),
+      @SerializedName("FB_BABY_HEALTH")
+      VALUE_FB_BABY_HEALTH("FB_BABY_HEALTH"),
+      @SerializedName("FB_BABY_NURSING")
+      VALUE_FB_BABY_NURSING("FB_BABY_NURSING"),
+      @SerializedName("FB_BABY_POTTY_TRN")
+      VALUE_FB_BABY_POTTY_TRN("FB_BABY_POTTY_TRN"),
+      @SerializedName("FB_BABY_SAFE")
+      VALUE_FB_BABY_SAFE("FB_BABY_SAFE"),
+      @SerializedName("FB_BABY_TOYS")
+      VALUE_FB_BABY_TOYS("FB_BABY_TOYS"),
+      @SerializedName("FB_BABY_TRANSPORT")
+      VALUE_FB_BABY_TRANSPORT("FB_BABY_TRANSPORT"),
+      @SerializedName("FB_BABY_TRANSPORT_ACC")
+      VALUE_FB_BABY_TRANSPORT_ACC("FB_BABY_TRANSPORT_ACC"),
+      @SerializedName("FB_BAGS")
+      VALUE_FB_BAGS("FB_BAGS"),
+      @SerializedName("FB_BAGS_BKPK")
+      VALUE_FB_BAGS_BKPK("FB_BAGS_BKPK"),
+      @SerializedName("FB_BAGS_BOXES")
+      VALUE_FB_BAGS_BOXES("FB_BAGS_BOXES"),
+      @SerializedName("FB_BAGS_BRFCS")
+      VALUE_FB_BAGS_BRFCS("FB_BAGS_BRFCS"),
+      @SerializedName("FB_BAGS_CSMT_BAG")
+      VALUE_FB_BAGS_CSMT_BAG("FB_BAGS_CSMT_BAG"),
+      @SerializedName("FB_BAGS_DFFL")
+      VALUE_FB_BAGS_DFFL("FB_BAGS_DFFL"),
+      @SerializedName("FB_BAGS_DIPR")
+      VALUE_FB_BAGS_DIPR("FB_BAGS_DIPR"),
+      @SerializedName("FB_BAGS_FNNY")
+      VALUE_FB_BAGS_FNNY("FB_BAGS_FNNY"),
+      @SerializedName("FB_BAGS_GRMT")
+      VALUE_FB_BAGS_GRMT("FB_BAGS_GRMT"),
+      @SerializedName("FB_BAGS_LUGG")
+      VALUE_FB_BAGS_LUGG("FB_BAGS_LUGG"),
+      @SerializedName("FB_BAGS_LUG_ACC")
+      VALUE_FB_BAGS_LUG_ACC("FB_BAGS_LUG_ACC"),
+      @SerializedName("FB_BAGS_MSGR")
+      VALUE_FB_BAGS_MSGR("FB_BAGS_MSGR"),
+      @SerializedName("FB_BAGS_TOTE")
+      VALUE_FB_BAGS_TOTE("FB_BAGS_TOTE"),
+      @SerializedName("FB_BAGS_TRN_CAS")
+      VALUE_FB_BAGS_TRN_CAS("FB_BAGS_TRN_CAS"),
+      @SerializedName("FB_BLDG")
+      VALUE_FB_BLDG("FB_BLDG"),
+      @SerializedName("FB_BLDG_ACC")
+      VALUE_FB_BLDG_ACC("FB_BLDG_ACC"),
+      @SerializedName("FB_BLDG_CNSMB")
+      VALUE_FB_BLDG_CNSMB("FB_BLDG_CNSMB"),
+      @SerializedName("FB_BLDG_FENCE")
+      VALUE_FB_BLDG_FENCE("FB_BLDG_FENCE"),
+      @SerializedName("FB_BLDG_FUEL_TNK")
+      VALUE_FB_BLDG_FUEL_TNK("FB_BLDG_FUEL_TNK"),
+      @SerializedName("FB_BLDG_HT_VNT")
+      VALUE_FB_BLDG_HT_VNT("FB_BLDG_HT_VNT"),
+      @SerializedName("FB_BLDG_LOCK")
+      VALUE_FB_BLDG_LOCK("FB_BLDG_LOCK"),
+      @SerializedName("FB_BLDG_MATRL")
+      VALUE_FB_BLDG_MATRL("FB_BLDG_MATRL"),
+      @SerializedName("FB_BLDG_PLMB")
+      VALUE_FB_BLDG_PLMB("FB_BLDG_PLMB"),
+      @SerializedName("FB_BLDG_PUMP")
+      VALUE_FB_BLDG_PUMP("FB_BLDG_PUMP"),
+      @SerializedName("FB_BLDG_PWRS")
+      VALUE_FB_BLDG_PWRS("FB_BLDG_PWRS"),
+      @SerializedName("FB_BLDG_STR_TANK")
+      VALUE_FB_BLDG_STR_TANK("FB_BLDG_STR_TANK"),
+      @SerializedName("FB_BLDG_S_ENG")
+      VALUE_FB_BLDG_S_ENG("FB_BLDG_S_ENG"),
+      @SerializedName("FB_BLDG_TL_ACC")
+      VALUE_FB_BLDG_TL_ACC("FB_BLDG_TL_ACC"),
+      @SerializedName("FB_BLDG_TOOL")
+      VALUE_FB_BLDG_TOOL("FB_BLDG_TOOL"),
+      @SerializedName("FB_BUSIND")
+      VALUE_FB_BUSIND("FB_BUSIND"),
+      @SerializedName("FB_BUSIND_ADVERTISING")
+      VALUE_FB_BUSIND_ADVERTISING("FB_BUSIND_ADVERTISING"),
+      @SerializedName("FB_BUSIND_AGRICULTURE")
+      VALUE_FB_BUSIND_AGRICULTURE("FB_BUSIND_AGRICULTURE"),
+      @SerializedName("FB_BUSIND_AUTOMATION")
+      VALUE_FB_BUSIND_AUTOMATION("FB_BUSIND_AUTOMATION"),
+      @SerializedName("FB_BUSIND_HEAVY_MACH")
+      VALUE_FB_BUSIND_HEAVY_MACH("FB_BUSIND_HEAVY_MACH"),
+      @SerializedName("FB_BUSIND_LAB")
+      VALUE_FB_BUSIND_LAB("FB_BUSIND_LAB"),
+      @SerializedName("FB_BUSIND_MEDICAL")
+      VALUE_FB_BUSIND_MEDICAL("FB_BUSIND_MEDICAL"),
+      @SerializedName("FB_BUSIND_RETAIL")
+      VALUE_FB_BUSIND_RETAIL("FB_BUSIND_RETAIL"),
+      @SerializedName("FB_BUSIND_SANITARY_CT")
+      VALUE_FB_BUSIND_SANITARY_CT("FB_BUSIND_SANITARY_CT"),
+      @SerializedName("FB_BUSIND_SIGN")
+      VALUE_FB_BUSIND_SIGN("FB_BUSIND_SIGN"),
+      @SerializedName("FB_BUSIND_STORAGE")
+      VALUE_FB_BUSIND_STORAGE("FB_BUSIND_STORAGE"),
+      @SerializedName("FB_BUSIND_STORAGE_ACC")
+      VALUE_FB_BUSIND_STORAGE_ACC("FB_BUSIND_STORAGE_ACC"),
+      @SerializedName("FB_BUSIND_WORK_GEAR")
+      VALUE_FB_BUSIND_WORK_GEAR("FB_BUSIND_WORK_GEAR"),
+      @SerializedName("FB_CAMERA_ACC")
+      VALUE_FB_CAMERA_ACC("FB_CAMERA_ACC"),
+      @SerializedName("FB_CAMERA_CAMERA")
+      VALUE_FB_CAMERA_CAMERA("FB_CAMERA_CAMERA"),
+      @SerializedName("FB_CAMERA_OPTIC")
+      VALUE_FB_CAMERA_OPTIC("FB_CAMERA_OPTIC"),
+      @SerializedName("FB_CAMERA_OPTICS")
+      VALUE_FB_CAMERA_OPTICS("FB_CAMERA_OPTICS"),
+      @SerializedName("FB_CAMERA_PHOTO")
+      VALUE_FB_CAMERA_PHOTO("FB_CAMERA_PHOTO"),
+      @SerializedName("FB_ELEC")
+      VALUE_FB_ELEC("FB_ELEC"),
+      @SerializedName("FB_ELEC_ACC")
+      VALUE_FB_ELEC_ACC("FB_ELEC_ACC"),
+      @SerializedName("FB_ELEC_ARCDADE")
+      VALUE_FB_ELEC_ARCDADE("FB_ELEC_ARCDADE"),
+      @SerializedName("FB_ELEC_AUDIO")
+      VALUE_FB_ELEC_AUDIO("FB_ELEC_AUDIO"),
+      @SerializedName("FB_ELEC_CIRCUIT")
+      VALUE_FB_ELEC_CIRCUIT("FB_ELEC_CIRCUIT"),
+      @SerializedName("FB_ELEC_COMM")
+      VALUE_FB_ELEC_COMM("FB_ELEC_COMM"),
+      @SerializedName("FB_ELEC_COMPUTER")
+      VALUE_FB_ELEC_COMPUTER("FB_ELEC_COMPUTER"),
+      @SerializedName("FB_ELEC_GPS_ACC")
+      VALUE_FB_ELEC_GPS_ACC("FB_ELEC_GPS_ACC"),
+      @SerializedName("FB_ELEC_GPS_NAV")
+      VALUE_FB_ELEC_GPS_NAV("FB_ELEC_GPS_NAV"),
+      @SerializedName("FB_ELEC_GPS_TRK")
+      VALUE_FB_ELEC_GPS_TRK("FB_ELEC_GPS_TRK"),
+      @SerializedName("FB_ELEC_MARINE")
+      VALUE_FB_ELEC_MARINE("FB_ELEC_MARINE"),
+      @SerializedName("FB_ELEC_NETWORK")
+      VALUE_FB_ELEC_NETWORK("FB_ELEC_NETWORK"),
+      @SerializedName("FB_ELEC_PART")
+      VALUE_FB_ELEC_PART("FB_ELEC_PART"),
+      @SerializedName("FB_ELEC_PRINT")
+      VALUE_FB_ELEC_PRINT("FB_ELEC_PRINT"),
+      @SerializedName("FB_ELEC_RADAR")
+      VALUE_FB_ELEC_RADAR("FB_ELEC_RADAR"),
+      @SerializedName("FB_ELEC_SPEED_RDR")
+      VALUE_FB_ELEC_SPEED_RDR("FB_ELEC_SPEED_RDR"),
+      @SerializedName("FB_ELEC_TOLL")
+      VALUE_FB_ELEC_TOLL("FB_ELEC_TOLL"),
+      @SerializedName("FB_ELEC_VIDEO")
+      VALUE_FB_ELEC_VIDEO("FB_ELEC_VIDEO"),
+      @SerializedName("FB_ELEC_VID_GM_ACC")
+      VALUE_FB_ELEC_VID_GM_ACC("FB_ELEC_VID_GM_ACC"),
+      @SerializedName("FB_ELEC_VID_GM_CNSL")
+      VALUE_FB_ELEC_VID_GM_CNSL("FB_ELEC_VID_GM_CNSL"),
+      @SerializedName("FB_FOOD")
+      VALUE_FB_FOOD("FB_FOOD"),
+      @SerializedName("FB_FURN")
+      VALUE_FB_FURN("FB_FURN"),
+      @SerializedName("FB_FURN_BABY")
+      VALUE_FB_FURN_BABY("FB_FURN_BABY"),
+      @SerializedName("FB_FURN_BENCH")
+      VALUE_FB_FURN_BENCH("FB_FURN_BENCH"),
+      @SerializedName("FB_FURN_CART")
+      VALUE_FB_FURN_CART("FB_FURN_CART"),
+      @SerializedName("FB_FURN_CHAIR")
+      VALUE_FB_FURN_CHAIR("FB_FURN_CHAIR"),
+      @SerializedName("FB_FURN_CHAIR_ACC")
+      VALUE_FB_FURN_CHAIR_ACC("FB_FURN_CHAIR_ACC"),
+      @SerializedName("FB_FURN_DIVIDE")
+      VALUE_FB_FURN_DIVIDE("FB_FURN_DIVIDE"),
+      @SerializedName("FB_FURN_DIVIDE_ACC")
+      VALUE_FB_FURN_DIVIDE_ACC("FB_FURN_DIVIDE_ACC"),
+      @SerializedName("FB_FURN_ENT_CTR")
+      VALUE_FB_FURN_ENT_CTR("FB_FURN_ENT_CTR"),
+      @SerializedName("FB_FURN_FUTN")
+      VALUE_FB_FURN_FUTN("FB_FURN_FUTN"),
+      @SerializedName("FB_FURN_FUTN_PAD")
+      VALUE_FB_FURN_FUTN_PAD("FB_FURN_FUTN_PAD"),
+      @SerializedName("FB_FURN_OFFICE")
+      VALUE_FB_FURN_OFFICE("FB_FURN_OFFICE"),
+      @SerializedName("FB_FURN_OFFICE_ACC")
+      VALUE_FB_FURN_OFFICE_ACC("FB_FURN_OFFICE_ACC"),
+      @SerializedName("FB_FURN_OTTO")
+      VALUE_FB_FURN_OTTO("FB_FURN_OTTO"),
+      @SerializedName("FB_FURN_OUTDOOR")
+      VALUE_FB_FURN_OUTDOOR("FB_FURN_OUTDOOR"),
+      @SerializedName("FB_FURN_OUTDOOR_ACC")
+      VALUE_FB_FURN_OUTDOOR_ACC("FB_FURN_OUTDOOR_ACC"),
+      @SerializedName("FB_FURN_SETS")
+      VALUE_FB_FURN_SETS("FB_FURN_SETS"),
+      @SerializedName("FB_FURN_SHELVE_ACC")
+      VALUE_FB_FURN_SHELVE_ACC("FB_FURN_SHELVE_ACC"),
+      @SerializedName("FB_FURN_SHLF")
+      VALUE_FB_FURN_SHLF("FB_FURN_SHLF"),
+      @SerializedName("FB_FURN_SOFA")
+      VALUE_FB_FURN_SOFA("FB_FURN_SOFA"),
+      @SerializedName("FB_FURN_SOFA_ACC")
+      VALUE_FB_FURN_SOFA_ACC("FB_FURN_SOFA_ACC"),
+      @SerializedName("FB_FURN_STORAGE")
+      VALUE_FB_FURN_STORAGE("FB_FURN_STORAGE"),
+      @SerializedName("FB_FURN_TABL")
+      VALUE_FB_FURN_TABL("FB_FURN_TABL"),
+      @SerializedName("FB_FURN_TABL_ACC")
+      VALUE_FB_FURN_TABL_ACC("FB_FURN_TABL_ACC"),
+      @SerializedName("FB_GENERIC_TAXABLE")
+      VALUE_FB_GENERIC_TAXABLE("FB_GENERIC_TAXABLE"),
+      @SerializedName("FB_HLTH")
+      VALUE_FB_HLTH("FB_HLTH"),
+      @SerializedName("FB_HLTH_HLTH")
+      VALUE_FB_HLTH_HLTH("FB_HLTH_HLTH"),
+      @SerializedName("FB_HLTH_JWL_CR")
+      VALUE_FB_HLTH_JWL_CR("FB_HLTH_JWL_CR"),
+      @SerializedName("FB_HLTH_LILP_BLM")
+      VALUE_FB_HLTH_LILP_BLM("FB_HLTH_LILP_BLM"),
+      @SerializedName("FB_HLTH_LTN_SPF")
+      VALUE_FB_HLTH_LTN_SPF("FB_HLTH_LTN_SPF"),
+      @SerializedName("FB_HLTH_PRSL_CR")
+      VALUE_FB_HLTH_PRSL_CR("FB_HLTH_PRSL_CR"),
+      @SerializedName("FB_HLTH_SKN_CR")
+      VALUE_FB_HLTH_SKN_CR("FB_HLTH_SKN_CR"),
+      @SerializedName("FB_HMGN")
+      VALUE_FB_HMGN("FB_HMGN"),
+      @SerializedName("FB_HMGN_BATH")
+      VALUE_FB_HMGN_BATH("FB_HMGN_BATH"),
+      @SerializedName("FB_HMGN_DCOR")
+      VALUE_FB_HMGN_DCOR("FB_HMGN_DCOR"),
+      @SerializedName("FB_HMGN_EMGY")
+      VALUE_FB_HMGN_EMGY("FB_HMGN_EMGY"),
+      @SerializedName("FB_HMGN_FPLC")
+      VALUE_FB_HMGN_FPLC("FB_HMGN_FPLC"),
+      @SerializedName("FB_HMGN_FPLC_ACC")
+      VALUE_FB_HMGN_FPLC_ACC("FB_HMGN_FPLC_ACC"),
+      @SerializedName("FB_HMGN_GS_SFT")
+      VALUE_FB_HMGN_GS_SFT("FB_HMGN_GS_SFT"),
+      @SerializedName("FB_HMGN_HS_ACC")
+      VALUE_FB_HMGN_HS_ACC("FB_HMGN_HS_ACC"),
+      @SerializedName("FB_HMGN_HS_APP")
+      VALUE_FB_HMGN_HS_APP("FB_HMGN_HS_APP"),
+      @SerializedName("FB_HMGN_HS_SPL")
+      VALUE_FB_HMGN_HS_SPL("FB_HMGN_HS_SPL"),
+      @SerializedName("FB_HMGN_KTCN")
+      VALUE_FB_HMGN_KTCN("FB_HMGN_KTCN"),
+      @SerializedName("FB_HMGN_LAWN")
+      VALUE_FB_HMGN_LAWN("FB_HMGN_LAWN"),
+      @SerializedName("FB_HMGN_LGHT")
+      VALUE_FB_HMGN_LGHT("FB_HMGN_LGHT"),
+      @SerializedName("FB_HMGN_LINN")
+      VALUE_FB_HMGN_LINN("FB_HMGN_LINN"),
+      @SerializedName("FB_HMGN_LT_ACC")
+      VALUE_FB_HMGN_LT_ACC("FB_HMGN_LT_ACC"),
+      @SerializedName("FB_HMGN_OTDR")
+      VALUE_FB_HMGN_OTDR("FB_HMGN_OTDR"),
+      @SerializedName("FB_HMGN_POOL")
+      VALUE_FB_HMGN_POOL("FB_HMGN_POOL"),
+      @SerializedName("FB_HMGN_SCTY")
+      VALUE_FB_HMGN_SCTY("FB_HMGN_SCTY"),
+      @SerializedName("FB_HMGN_SMK_ACC")
+      VALUE_FB_HMGN_SMK_ACC("FB_HMGN_SMK_ACC"),
+      @SerializedName("FB_HMGN_UMBR")
+      VALUE_FB_HMGN_UMBR("FB_HMGN_UMBR"),
+      @SerializedName("FB_HMGN_UMBR_ACC")
+      VALUE_FB_HMGN_UMBR_ACC("FB_HMGN_UMBR_ACC"),
+      @SerializedName("FB_MDIA")
+      VALUE_FB_MDIA("FB_MDIA"),
+      @SerializedName("FB_MDIA_BOOK")
+      VALUE_FB_MDIA_BOOK("FB_MDIA_BOOK"),
+      @SerializedName("FB_MDIA_DVDS")
+      VALUE_FB_MDIA_DVDS("FB_MDIA_DVDS"),
+      @SerializedName("FB_MDIA_MAG")
+      VALUE_FB_MDIA_MAG("FB_MDIA_MAG"),
+      @SerializedName("FB_MDIA_MANL")
+      VALUE_FB_MDIA_MANL("FB_MDIA_MANL"),
+      @SerializedName("FB_MDIA_MUSC")
+      VALUE_FB_MDIA_MUSC("FB_MDIA_MUSC"),
+      @SerializedName("FB_MDIA_PRJ_PLN")
+      VALUE_FB_MDIA_PRJ_PLN("FB_MDIA_PRJ_PLN"),
+      @SerializedName("FB_MDIA_SHT_MUS")
+      VALUE_FB_MDIA_SHT_MUS("FB_MDIA_SHT_MUS"),
+      @SerializedName("FB_OFFC")
+      VALUE_FB_OFFC("FB_OFFC"),
+      @SerializedName("FB_OFFC_BKAC")
+      VALUE_FB_OFFC_BKAC("FB_OFFC_BKAC"),
+      @SerializedName("FB_OFFC_CRTS")
+      VALUE_FB_OFFC_CRTS("FB_OFFC_CRTS"),
+      @SerializedName("FB_OFFC_DSKP")
+      VALUE_FB_OFFC_DSKP("FB_OFFC_DSKP"),
+      @SerializedName("FB_OFFC_EQIP")
+      VALUE_FB_OFFC_EQIP("FB_OFFC_EQIP"),
+      @SerializedName("FB_OFFC_FLNG")
+      VALUE_FB_OFFC_FLNG("FB_OFFC_FLNG"),
+      @SerializedName("FB_OFFC_GNRL")
+      VALUE_FB_OFFC_GNRL("FB_OFFC_GNRL"),
+      @SerializedName("FB_OFFC_INSTM")
+      VALUE_FB_OFFC_INSTM("FB_OFFC_INSTM"),
+      @SerializedName("FB_OFFC_LP_DSK")
+      VALUE_FB_OFFC_LP_DSK("FB_OFFC_LP_DSK"),
+      @SerializedName("FB_OFFC_MATS")
+      VALUE_FB_OFFC_MATS("FB_OFFC_MATS"),
+      @SerializedName("FB_OFFC_NM_PLT")
+      VALUE_FB_OFFC_NM_PLT("FB_OFFC_NM_PLT"),
+      @SerializedName("FB_OFFC_PPR_HNDL")
+      VALUE_FB_OFFC_PPR_HNDL("FB_OFFC_PPR_HNDL"),
+      @SerializedName("FB_OFFC_PRSNT_SPL")
+      VALUE_FB_OFFC_PRSNT_SPL("FB_OFFC_PRSNT_SPL"),
+      @SerializedName("FB_OFFC_SEALR")
+      VALUE_FB_OFFC_SEALR("FB_OFFC_SEALR"),
+      @SerializedName("FB_OFFC_SHIP_SPL")
+      VALUE_FB_OFFC_SHIP_SPL("FB_OFFC_SHIP_SPL"),
+      @SerializedName("FB_RLGN")
+      VALUE_FB_RLGN("FB_RLGN"),
+      @SerializedName("FB_RLGN_CMNY")
+      VALUE_FB_RLGN_CMNY("FB_RLGN_CMNY"),
+      @SerializedName("FB_RLGN_ITEM")
+      VALUE_FB_RLGN_ITEM("FB_RLGN_ITEM"),
+      @SerializedName("FB_RLGN_WEDD")
+      VALUE_FB_RLGN_WEDD("FB_RLGN_WEDD"),
+      @SerializedName("FB_SFTWR")
+      VALUE_FB_SFTWR("FB_SFTWR"),
+      @SerializedName("FB_SFWR_CMPTR")
+      VALUE_FB_SFWR_CMPTR("FB_SFWR_CMPTR"),
+      @SerializedName("FB_SFWR_DGTL_GD")
+      VALUE_FB_SFWR_DGTL_GD("FB_SFWR_DGTL_GD"),
+      @SerializedName("FB_SFWR_GAME")
+      VALUE_FB_SFWR_GAME("FB_SFWR_GAME"),
+      @SerializedName("FB_SHIPPING")
+      VALUE_FB_SHIPPING("FB_SHIPPING"),
+      @SerializedName("FB_SPOR")
+      VALUE_FB_SPOR("FB_SPOR"),
+      @SerializedName("FB_SPORT_ATHL")
+      VALUE_FB_SPORT_ATHL("FB_SPORT_ATHL"),
+      @SerializedName("FB_SPORT_ATHL_CLTH")
+      VALUE_FB_SPORT_ATHL_CLTH("FB_SPORT_ATHL_CLTH"),
+      @SerializedName("FB_SPORT_ATHL_SHOE")
+      VALUE_FB_SPORT_ATHL_SHOE("FB_SPORT_ATHL_SHOE"),
+      @SerializedName("FB_SPORT_ATHL_SPRT")
+      VALUE_FB_SPORT_ATHL_SPRT("FB_SPORT_ATHL_SPRT"),
+      @SerializedName("FB_SPORT_EXRCS")
+      VALUE_FB_SPORT_EXRCS("FB_SPORT_EXRCS"),
+      @SerializedName("FB_SPORT_INDR_GM")
+      VALUE_FB_SPORT_INDR_GM("FB_SPORT_INDR_GM"),
+      @SerializedName("FB_SPORT_OTDR_GM")
+      VALUE_FB_SPORT_OTDR_GM("FB_SPORT_OTDR_GM"),
+      @SerializedName("FB_TOYS")
+      VALUE_FB_TOYS("FB_TOYS"),
+      @SerializedName("FB_TOYS_EQIP")
+      VALUE_FB_TOYS_EQIP("FB_TOYS_EQIP"),
+      @SerializedName("FB_TOYS_GAME")
+      VALUE_FB_TOYS_GAME("FB_TOYS_GAME"),
+      @SerializedName("FB_TOYS_PZZL")
+      VALUE_FB_TOYS_PZZL("FB_TOYS_PZZL"),
+      @SerializedName("FB_TOYS_TMRS")
+      VALUE_FB_TOYS_TMRS("FB_TOYS_TMRS"),
+      @SerializedName("FB_TOYS_TOYS")
+      VALUE_FB_TOYS_TOYS("FB_TOYS_TOYS"),
+      @SerializedName("FB_VEHI")
+      VALUE_FB_VEHI("FB_VEHI"),
+      @SerializedName("FB_VEHI_PART")
+      VALUE_FB_VEHI_PART("FB_VEHI_PART"),
+      NULL(null);
+
+      private String value;
+
+      private EnumCommerceTaxCategory(String value) {
         this.value = value;
       }
 

@@ -3530,6 +3530,8 @@ public class OfflineConversionDataSet extends APINode {
       VALUE_AD_MANAGER("AD_MANAGER"),
       @SerializedName("AGENCY")
       VALUE_AGENCY("AGENCY"),
+      @SerializedName("AGGREGATOR")
+      VALUE_AGGREGATOR("AGGREGATOR"),
       @SerializedName("AUDIENCE_MANAGER")
       VALUE_AUDIENCE_MANAGER("AUDIENCE_MANAGER"),
       @SerializedName("OTHER")

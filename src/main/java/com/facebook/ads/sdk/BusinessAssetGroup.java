@@ -1730,6 +1730,7 @@ public class BusinessAssetGroup extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "aam_rules",
       "an_ad_space_limit",
       "an_platforms",
       "android_key_hash",
@@ -1919,6 +1920,13 @@ public class BusinessAssetGroup extends APINode {
       return this;
     }
 
+    public APIRequestGetContainedApplications requestAamRulesField () {
+      return this.requestAamRulesField(true);
+    }
+    public APIRequestGetContainedApplications requestAamRulesField (boolean value) {
+      this.requestField("aam_rules", value);
+      return this;
+    }
     public APIRequestGetContainedApplications requestAnAdSpaceLimitField () {
       return this.requestAnAdSpaceLimitField(true);
     }
