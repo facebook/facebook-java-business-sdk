@@ -122,8 +122,8 @@ String name = campaign.getFieldName();
 
 ```java
 campaign.update()
-        .setName("Updated Java SDK Test Campaign") // set parameter for the API call
-        .execute();
+  .setName("Updated Java SDK Test Campaign") // set parameter for the API call
+  .execute();
 ```
 
 **Delete**:
@@ -145,7 +145,7 @@ Or, if you want to create a new campaign under this account, then you call POST 
 AdAccount account = new AdAccount(ACCOUNT_ID, context);
 APINodeList<Campaign> campaigns = account.getCampaigns().requestAllFields().execute();
 for(Campaign campaign : campaigns) {
-	System.out.println(campaign.getFieldName());
+  System.out.println(campaign.getFieldName());
 }
 ```
 
@@ -158,7 +158,7 @@ campaigns = campaigns.nextPage();
 
 - Or, enable auto pagination iterator with:
 
-```
+```java
 campaigns = campaigns.withAutoPaginationIterator(true);
 ```
 
@@ -167,7 +167,7 @@ In this case, campaigns.iterator() will return an iterator that can fetch the ne
 ```
 // Enhanced for loop
 for(Campaign campaign : campaigns) {
-	System.out.println(campaign.getFieldName());
+  System.out.println(campaign.getFieldName());
 }
 
 // Foreach with lambda is also supported
@@ -188,11 +188,11 @@ Most objects are under ad account. So you may always want to try account.createX
 ```java
 AdAccount account = new AdAccount(ACCOUNT_ID, context);
 Campaign campaign = account.createCampaign()
-        .setName("Java SDK Test Campaign")
-        .setObjective(Campaign.EnumObjective.VALUE_LINK_CLICKS)
-        .setSpendCap(10000L)
-        .setStatus(Campaign.EnumStatus.VALUE_PAUSED)
-        .execute();
+  .setName("Java SDK Test Campaign")
+  .setObjective(Campaign.EnumObjective.VALUE_LINK_CLICKS)
+  .setSpendCap(10000L)
+  .setStatus(Campaign.EnumStatus.VALUE_PAUSED)
+  .execute();
 // The create call only returns id of the new object.
 // So you want to fetch() to get all the data of the object.
 // fetch() is just another shortcut for
@@ -208,42 +208,42 @@ In this SDK, you can simply replace execute() with addToBatch() to prepare a bat
 
 Example:
 ```java
-      BatchRequest batch = new BatchRequest(context);
-      account.createCampaign()
-        .setName("Java SDK Batch Test Campaign")
-        .setObjective(Campaign.EnumObjective.VALUE_LINK_CLICKS)
-        .setSpendCap(10000L)
-        .setStatus(Campaign.EnumStatus.VALUE_PAUSED)
-        .addToBatch(batch, "campaignRequest");
-      account.createAdSet()
-        .setName("Java SDK Batch Test AdSet")
-        .setCampaignId("{result=campaignRequest:$.id}")
-        .setStatus(AdSet.EnumStatus.VALUE_PAUSED)
-        .setBillingEvent(AdSet.EnumBillingEvent.VALUE_IMPRESSIONS)
-        .setDailyBudget(1000L)
-        .setBidAmount(100L)
-        .setOptimizationGoal(AdSet.EnumOptimizationGoal.VALUE_IMPRESSIONS)
-        .setTargeting(targeting)
-        .addToBatch(batch, "adsetRequest");
-      account.createAdImage()
-        .addUploadFile("file", imageFile)
-        .addToBatch(batch, "imageRequest");
-      account.createAdCreative()
-        .setTitle("Java SDK Batch Test Creative")
-        .setBody("Java SDK Batch Test Creative")
-        .setImageHash("{result=imageRequest:$.images.*.hash}")
-        .setLinkUrl("www.facebook.com")
-        .setObjectUrl("www.facebook.com")
-        .addToBatch(batch, "creativeRequest");
-      account.createAd()
-        .setName("Java SDK Batch Test ad")
-        .setAdsetId("{result=adsetRequest:$.id}")
-        .setCreative("{creative_id:{result=creativeRequest:$.id}}")
-        .setStatus("PAUSED")
-        .setBidAmount(100L)
-        .addToBatch(batch);
-      List<APIResponse> responses = batch.execute();
-      // responses contains the result of each API call in order. However, if the API calls have dependency, then some result could be null.
+BatchRequest batch = new BatchRequest(context);
+account.createCampaign()
+  .setName("Java SDK Batch Test Campaign")
+  .setObjective(Campaign.EnumObjective.VALUE_LINK_CLICKS)
+  .setSpendCap(10000L)
+  .setStatus(Campaign.EnumStatus.VALUE_PAUSED)
+  .addToBatch(batch, "campaignRequest");
+account.createAdSet()
+  .setName("Java SDK Batch Test AdSet")
+  .setCampaignId("{result=campaignRequest:$.id}")
+  .setStatus(AdSet.EnumStatus.VALUE_PAUSED)
+  .setBillingEvent(AdSet.EnumBillingEvent.VALUE_IMPRESSIONS)
+  .setDailyBudget(1000L)
+  .setBidAmount(100L)
+  .setOptimizationGoal(AdSet.EnumOptimizationGoal.VALUE_IMPRESSIONS)
+  .setTargeting(targeting)
+  .addToBatch(batch, "adsetRequest");
+account.createAdImage()
+  .addUploadFile("file", imageFile)
+  .addToBatch(batch, "imageRequest");
+account.createAdCreative()
+  .setTitle("Java SDK Batch Test Creative")
+  .setBody("Java SDK Batch Test Creative")
+  .setImageHash("{result=imageRequest:$.images.*.hash}")
+  .setLinkUrl("www.facebook.com")
+  .setObjectUrl("www.facebook.com")
+  .addToBatch(batch, "creativeRequest");
+account.createAd()
+  .setName("Java SDK Batch Test ad")
+  .setAdsetId("{result=adsetRequest:$.id}")
+  .setCreative("{creative_id:{result=creativeRequest:$.id}}")
+  .setStatus("PAUSED")
+  .setBidAmount(100L)
+  .addToBatch(batch);
+List<APIResponse> responses = batch.execute();
+// responses contains the result of each API call in order. However, if the API calls have dependency, then some result could be null.
 ```
 
 ### Error Handling
@@ -259,8 +259,9 @@ We have a plan to improve this by adding more details and providing a convenient
 
 #### Enable debugging
 You can enable the debug output by setting the APIContext to debug mode:
-
-    public static final APIContext context = new APIContext(ACCESS_TOKEN, APP_SECRET).enableDebug(true).setLogger(System.out);
+```java
+public static final APIContext context = new APIContext(ACCESS_TOKEN, APP_SECRET).enableDebug(true).setLogger(System.out);
+```
 
 This will print out the network requests and responses. By default it prints on STDOUT, but you can customize by calling .setLogger(PrintSteam)
 
@@ -272,12 +273,12 @@ Currently this is a static method because it is likely to be a global setting. I
 The executor needs to implement ``IRequestExecutor`` interface:
 
 ```java
-    public static interface IRequestExecutor {
-        public String execute(String method, String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException;
-        public String sendGet(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException;
-        public String sendPost(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException;
-        public String sendDelete(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException;
-    }
+public static interface IRequestExecutor {
+  public String execute(String method, String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException;
+  public String sendGet(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException;
+  public String sendPost(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException;
+  public String sendDelete(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException;
+}
 ```
 
 ``DefaultRequestExecutor`` is used by default, and it is also a good starting point for Customization.
@@ -286,8 +287,8 @@ The executor needs to implement ``IRequestExecutor`` interface:
 It is recommended to use setXXX() or requestXXXField() to construct a proper APIRequest, which prevents mis-spelling of parameter/field names. However, if you believe that some needed params/fields are missing from these methods, you can call:
 
 ```java
-    APIRequest.setParam(param, value)
-    APIRequest.setParam.requestField(field, true)
+APIRequest.setParam(param, value)
+APIRequest.setParam.requestField(field, true)
 ```
 
 This also works if you believe the type of the param is not correct in SDK.
@@ -296,8 +297,9 @@ In this case, please help us make improvement by filing issues.
 
 #### Missing Fields in Class Definition
 If you believe that certain fields are returned from server, but they are missing in class definition, then you can still access those fields by fetching it from raw response:
-
-	campaign.getRawResponseAsJsonObject().get("field").getAsString();
+```java
+campaign.getRawResponseAsJsonObject().get("field").getAsString();
+```
 
 This situation can occasionally happen if new fields are added to server response while SDK is not up-to-date. We'll update the SDK periodically to include new fields.
 
@@ -305,8 +307,8 @@ This situation can occasionally happen if new fields are added to server respons
 Most of Marketing API can be found in SDK classes. If you don't find the one you want to access, it is possible to construct an Ad-hoc APIRequest:
 
 ```java
-    APIRequest<AdAccount> request = new APIRequest<AdAccount>(context, "me", "/adaccounts", "GET", AdAccount.getParser());
-    APINodeList<AdAccount> accounts = (APINodeList<AdAccount>)(request.execute());
+APIRequest<AdAccount> request = new APIRequest<AdAccount>(context, "me", "/adaccounts", "GET", AdAccount.getParser());
+APINodeList<AdAccount> accounts = (APINodeList<AdAccount>)(request.execute());
 ```
 
 When constructing the APIRequest, you need to provide
