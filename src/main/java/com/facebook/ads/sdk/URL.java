@@ -649,6 +649,8 @@ public class URL extends APINode {
   public static enum EnumScopes {
       @SerializedName("NEWS_TAB")
       VALUE_NEWS_TAB("NEWS_TAB"),
+      @SerializedName("NEWS_TAB_DEV_ENV")
+      VALUE_NEWS_TAB_DEV_ENV("NEWS_TAB_DEV_ENV"),
       ;
 
       private String value;

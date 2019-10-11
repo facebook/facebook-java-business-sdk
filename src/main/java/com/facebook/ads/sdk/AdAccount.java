@@ -175,6 +175,8 @@ public class AdAccount extends APINode {
   private Map<String, Long> mTosAccepted = null;
   @SerializedName("user_role")
   private String mUserRole = null;
+  @SerializedName("user_tasks")
+  private List<String> mUserTasks = null;
   @SerializedName("user_tos_accepted")
   private Map<String, Long> mUserTosAccepted = null;
   protected static Gson gson = null;
@@ -418,10 +420,6 @@ public class AdAccount extends APINode {
     return new APIRequestDeleteAdSets(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateAdSet createAdSet() {
-    return new APIRequestCreateAdSet(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetAdStudies getAdStudies() {
     return new APIRequestGetAdStudies(this.getPrefixedId().toString(), context);
   }
@@ -502,12 +500,20 @@ public class AdAccount extends APINode {
     return new APIRequestCreateAd(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetAdsVolume getAdsVolume() {
+    return new APIRequestGetAdsVolume(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetAdsByLabels getAdsByLabels() {
     return new APIRequestGetAdsByLabels(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetAdSets getAdSets() {
     return new APIRequestGetAdSets(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateAdSet createAdSet() {
+    return new APIRequestCreateAdSet(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetAdSetsByLabels getAdSetsByLabels() {
@@ -636,6 +642,10 @@ public class AdAccount extends APINode {
 
   public APIRequestGetCampaignsByLabels getCampaignsByLabels() {
     return new APIRequestGetCampaignsByLabels(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetContentDeliveryReport getContentDeliveryReport() {
+    return new APIRequestGetContentDeliveryReport(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetCustomAudiences getCustomAudiences() {
@@ -1066,6 +1076,10 @@ public class AdAccount extends APINode {
 
   public String getFieldUserRole() {
     return mUserRole;
+  }
+
+  public List<String> getFieldUserTasks() {
+    return mUserTasks;
   }
 
   public Map<String, Long> getFieldUserTosAccepted() {
@@ -1912,516 +1926,6 @@ public class AdAccount extends APINode {
 
     @Override
     public APIRequestDeleteAdSets requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateAdSet extends APIRequest<AdSet> {
-
-    AdSet lastResponse = null;
-    @Override
-    public AdSet getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "adlabels",
-      "adset_schedule",
-      "attribution_spec",
-      "bid_adjustments",
-      "bid_amount",
-      "bid_constraints",
-      "bid_strategy",
-      "billing_event",
-      "campaign_id",
-      "campaign_spec",
-      "creative_sequence",
-      "daily_budget",
-      "daily_imps",
-      "daily_min_spend_target",
-      "daily_spend_cap",
-      "date_format",
-      "destination_type",
-      "end_time",
-      "execution_options",
-      "frequency_control_specs",
-      "full_funnel_exploration_mode",
-      "is_dynamic_creative",
-      "lifetime_budget",
-      "lifetime_imps",
-      "lifetime_min_spend_target",
-      "lifetime_spend_cap",
-      "line_number",
-      "name",
-      "optimization_goal",
-      "optimization_sub_event",
-      "pacing_type",
-      "promoted_object",
-      "rb_prediction_id",
-      "rf_prediction_id",
-      "source_adset_id",
-      "start_time",
-      "status",
-      "targeting",
-      "time_based_ad_rotation_id_blocks",
-      "time_based_ad_rotation_intervals",
-      "time_start",
-      "time_stop",
-      "topline_id",
-      "tune_for_category",
-      "upstream_events",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public AdSet parseResponse(String response, String header) throws APIException {
-      return AdSet.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public AdSet execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdSet execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdSet> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdSet> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, AdSet>() {
-           public AdSet apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateAdSet.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateAdSet(String nodeId, APIContext context) {
-      super(context, nodeId, "/ad_sets", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateAdSet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdSet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateAdSet setAdlabels (List<Object> adlabels) {
-      this.setParam("adlabels", adlabels);
-      return this;
-    }
-    public APIRequestCreateAdSet setAdlabels (String adlabels) {
-      this.setParam("adlabels", adlabels);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setAdsetSchedule (List<Object> adsetSchedule) {
-      this.setParam("adset_schedule", adsetSchedule);
-      return this;
-    }
-    public APIRequestCreateAdSet setAdsetSchedule (String adsetSchedule) {
-      this.setParam("adset_schedule", adsetSchedule);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setAttributionSpec (List<Map<String, String>> attributionSpec) {
-      this.setParam("attribution_spec", attributionSpec);
-      return this;
-    }
-    public APIRequestCreateAdSet setAttributionSpec (String attributionSpec) {
-      this.setParam("attribution_spec", attributionSpec);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setBidAdjustments (Object bidAdjustments) {
-      this.setParam("bid_adjustments", bidAdjustments);
-      return this;
-    }
-    public APIRequestCreateAdSet setBidAdjustments (String bidAdjustments) {
-      this.setParam("bid_adjustments", bidAdjustments);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setBidAmount (Long bidAmount) {
-      this.setParam("bid_amount", bidAmount);
-      return this;
-    }
-    public APIRequestCreateAdSet setBidAmount (String bidAmount) {
-      this.setParam("bid_amount", bidAmount);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setBidConstraints (Map<String, Object> bidConstraints) {
-      this.setParam("bid_constraints", bidConstraints);
-      return this;
-    }
-    public APIRequestCreateAdSet setBidConstraints (String bidConstraints) {
-      this.setParam("bid_constraints", bidConstraints);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setBidStrategy (AdSet.EnumBidStrategy bidStrategy) {
-      this.setParam("bid_strategy", bidStrategy);
-      return this;
-    }
-    public APIRequestCreateAdSet setBidStrategy (String bidStrategy) {
-      this.setParam("bid_strategy", bidStrategy);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setBillingEvent (AdSet.EnumBillingEvent billingEvent) {
-      this.setParam("billing_event", billingEvent);
-      return this;
-    }
-    public APIRequestCreateAdSet setBillingEvent (String billingEvent) {
-      this.setParam("billing_event", billingEvent);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setCampaignId (String campaignId) {
-      this.setParam("campaign_id", campaignId);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setCampaignSpec (Object campaignSpec) {
-      this.setParam("campaign_spec", campaignSpec);
-      return this;
-    }
-    public APIRequestCreateAdSet setCampaignSpec (String campaignSpec) {
-      this.setParam("campaign_spec", campaignSpec);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setCreativeSequence (List<String> creativeSequence) {
-      this.setParam("creative_sequence", creativeSequence);
-      return this;
-    }
-    public APIRequestCreateAdSet setCreativeSequence (String creativeSequence) {
-      this.setParam("creative_sequence", creativeSequence);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setDailyBudget (Long dailyBudget) {
-      this.setParam("daily_budget", dailyBudget);
-      return this;
-    }
-    public APIRequestCreateAdSet setDailyBudget (String dailyBudget) {
-      this.setParam("daily_budget", dailyBudget);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setDailyImps (Long dailyImps) {
-      this.setParam("daily_imps", dailyImps);
-      return this;
-    }
-    public APIRequestCreateAdSet setDailyImps (String dailyImps) {
-      this.setParam("daily_imps", dailyImps);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setDailyMinSpendTarget (Long dailyMinSpendTarget) {
-      this.setParam("daily_min_spend_target", dailyMinSpendTarget);
-      return this;
-    }
-    public APIRequestCreateAdSet setDailyMinSpendTarget (String dailyMinSpendTarget) {
-      this.setParam("daily_min_spend_target", dailyMinSpendTarget);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setDailySpendCap (Long dailySpendCap) {
-      this.setParam("daily_spend_cap", dailySpendCap);
-      return this;
-    }
-    public APIRequestCreateAdSet setDailySpendCap (String dailySpendCap) {
-      this.setParam("daily_spend_cap", dailySpendCap);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setDateFormat (String dateFormat) {
-      this.setParam("date_format", dateFormat);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setDestinationType (AdSet.EnumDestinationType destinationType) {
-      this.setParam("destination_type", destinationType);
-      return this;
-    }
-    public APIRequestCreateAdSet setDestinationType (String destinationType) {
-      this.setParam("destination_type", destinationType);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setEndTime (String endTime) {
-      this.setParam("end_time", endTime);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setExecutionOptions (List<AdSet.EnumExecutionOptions> executionOptions) {
-      this.setParam("execution_options", executionOptions);
-      return this;
-    }
-    public APIRequestCreateAdSet setExecutionOptions (String executionOptions) {
-      this.setParam("execution_options", executionOptions);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setFrequencyControlSpecs (List<Object> frequencyControlSpecs) {
-      this.setParam("frequency_control_specs", frequencyControlSpecs);
-      return this;
-    }
-    public APIRequestCreateAdSet setFrequencyControlSpecs (String frequencyControlSpecs) {
-      this.setParam("frequency_control_specs", frequencyControlSpecs);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setFullFunnelExplorationMode (AdSet.EnumFullFunnelExplorationMode fullFunnelExplorationMode) {
-      this.setParam("full_funnel_exploration_mode", fullFunnelExplorationMode);
-      return this;
-    }
-    public APIRequestCreateAdSet setFullFunnelExplorationMode (String fullFunnelExplorationMode) {
-      this.setParam("full_funnel_exploration_mode", fullFunnelExplorationMode);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setIsDynamicCreative (Boolean isDynamicCreative) {
-      this.setParam("is_dynamic_creative", isDynamicCreative);
-      return this;
-    }
-    public APIRequestCreateAdSet setIsDynamicCreative (String isDynamicCreative) {
-      this.setParam("is_dynamic_creative", isDynamicCreative);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setLifetimeBudget (Long lifetimeBudget) {
-      this.setParam("lifetime_budget", lifetimeBudget);
-      return this;
-    }
-    public APIRequestCreateAdSet setLifetimeBudget (String lifetimeBudget) {
-      this.setParam("lifetime_budget", lifetimeBudget);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setLifetimeImps (Long lifetimeImps) {
-      this.setParam("lifetime_imps", lifetimeImps);
-      return this;
-    }
-    public APIRequestCreateAdSet setLifetimeImps (String lifetimeImps) {
-      this.setParam("lifetime_imps", lifetimeImps);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setLifetimeMinSpendTarget (Long lifetimeMinSpendTarget) {
-      this.setParam("lifetime_min_spend_target", lifetimeMinSpendTarget);
-      return this;
-    }
-    public APIRequestCreateAdSet setLifetimeMinSpendTarget (String lifetimeMinSpendTarget) {
-      this.setParam("lifetime_min_spend_target", lifetimeMinSpendTarget);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setLifetimeSpendCap (Long lifetimeSpendCap) {
-      this.setParam("lifetime_spend_cap", lifetimeSpendCap);
-      return this;
-    }
-    public APIRequestCreateAdSet setLifetimeSpendCap (String lifetimeSpendCap) {
-      this.setParam("lifetime_spend_cap", lifetimeSpendCap);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setLineNumber (Long lineNumber) {
-      this.setParam("line_number", lineNumber);
-      return this;
-    }
-    public APIRequestCreateAdSet setLineNumber (String lineNumber) {
-      this.setParam("line_number", lineNumber);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setOptimizationGoal (AdSet.EnumOptimizationGoal optimizationGoal) {
-      this.setParam("optimization_goal", optimizationGoal);
-      return this;
-    }
-    public APIRequestCreateAdSet setOptimizationGoal (String optimizationGoal) {
-      this.setParam("optimization_goal", optimizationGoal);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setOptimizationSubEvent (AdSet.EnumOptimizationSubEvent optimizationSubEvent) {
-      this.setParam("optimization_sub_event", optimizationSubEvent);
-      return this;
-    }
-    public APIRequestCreateAdSet setOptimizationSubEvent (String optimizationSubEvent) {
-      this.setParam("optimization_sub_event", optimizationSubEvent);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setPacingType (List<String> pacingType) {
-      this.setParam("pacing_type", pacingType);
-      return this;
-    }
-    public APIRequestCreateAdSet setPacingType (String pacingType) {
-      this.setParam("pacing_type", pacingType);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setPromotedObject (Object promotedObject) {
-      this.setParam("promoted_object", promotedObject);
-      return this;
-    }
-    public APIRequestCreateAdSet setPromotedObject (String promotedObject) {
-      this.setParam("promoted_object", promotedObject);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setRbPredictionId (String rbPredictionId) {
-      this.setParam("rb_prediction_id", rbPredictionId);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setRfPredictionId (String rfPredictionId) {
-      this.setParam("rf_prediction_id", rfPredictionId);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setSourceAdsetId (String sourceAdsetId) {
-      this.setParam("source_adset_id", sourceAdsetId);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setStartTime (String startTime) {
-      this.setParam("start_time", startTime);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setStatus (AdSet.EnumStatus status) {
-      this.setParam("status", status);
-      return this;
-    }
-    public APIRequestCreateAdSet setStatus (String status) {
-      this.setParam("status", status);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setTargeting (Targeting targeting) {
-      this.setParam("targeting", targeting);
-      return this;
-    }
-    public APIRequestCreateAdSet setTargeting (String targeting) {
-      this.setParam("targeting", targeting);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setTimeBasedAdRotationIdBlocks (List<List<Long>> timeBasedAdRotationIdBlocks) {
-      this.setParam("time_based_ad_rotation_id_blocks", timeBasedAdRotationIdBlocks);
-      return this;
-    }
-    public APIRequestCreateAdSet setTimeBasedAdRotationIdBlocks (String timeBasedAdRotationIdBlocks) {
-      this.setParam("time_based_ad_rotation_id_blocks", timeBasedAdRotationIdBlocks);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setTimeBasedAdRotationIntervals (List<Long> timeBasedAdRotationIntervals) {
-      this.setParam("time_based_ad_rotation_intervals", timeBasedAdRotationIntervals);
-      return this;
-    }
-    public APIRequestCreateAdSet setTimeBasedAdRotationIntervals (String timeBasedAdRotationIntervals) {
-      this.setParam("time_based_ad_rotation_intervals", timeBasedAdRotationIntervals);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setTimeStart (String timeStart) {
-      this.setParam("time_start", timeStart);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setTimeStop (String timeStop) {
-      this.setParam("time_stop", timeStop);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setToplineId (String toplineId) {
-      this.setParam("topline_id", toplineId);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setTuneForCategory (AdSet.EnumTuneForCategory tuneForCategory) {
-      this.setParam("tune_for_category", tuneForCategory);
-      return this;
-    }
-    public APIRequestCreateAdSet setTuneForCategory (String tuneForCategory) {
-      this.setParam("tune_for_category", tuneForCategory);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setUpstreamEvents (Map<String, String> upstreamEvents) {
-      this.setParam("upstream_events", upstreamEvents);
-      return this;
-    }
-    public APIRequestCreateAdSet setUpstreamEvents (String upstreamEvents) {
-      this.setParam("upstream_events", upstreamEvents);
-      return this;
-    }
-
-    public APIRequestCreateAdSet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateAdSet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdSet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateAdSet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdSet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdSet requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -7512,6 +7016,158 @@ public class AdAccount extends APINode {
 
   }
 
+  public static class APIRequestGetAdsVolume extends APIRequest<AdAccountAdVolume> {
+
+    APINodeList<AdAccountAdVolume> lastResponse = null;
+    @Override
+    public APINodeList<AdAccountAdVolume> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "actor_id",
+      "has_hit_total_live_ads_limit",
+      "live_ads_quota_left",
+      "total_live_ads",
+      "total_live_ads_in_current_account",
+      "total_live_ads_limit",
+    };
+
+    @Override
+    public APINodeList<AdAccountAdVolume> parseResponse(String response, String header) throws APIException {
+      return AdAccountAdVolume.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<AdAccountAdVolume> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdAccountAdVolume> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<AdAccountAdVolume>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdAccountAdVolume>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<AdAccountAdVolume>>() {
+           public APINodeList<AdAccountAdVolume> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetAdsVolume.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetAdsVolume(String nodeId, APIContext context) {
+      super(context, nodeId, "/ads_volume", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetAdsVolume setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdsVolume setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetAdsVolume requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetAdsVolume requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdsVolume requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetAdsVolume requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdsVolume requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdsVolume requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetAdsVolume requestActorIdField () {
+      return this.requestActorIdField(true);
+    }
+    public APIRequestGetAdsVolume requestActorIdField (boolean value) {
+      this.requestField("actor_id", value);
+      return this;
+    }
+    public APIRequestGetAdsVolume requestHasHitTotalLiveAdsLimitField () {
+      return this.requestHasHitTotalLiveAdsLimitField(true);
+    }
+    public APIRequestGetAdsVolume requestHasHitTotalLiveAdsLimitField (boolean value) {
+      this.requestField("has_hit_total_live_ads_limit", value);
+      return this;
+    }
+    public APIRequestGetAdsVolume requestLiveAdsQuotaLeftField () {
+      return this.requestLiveAdsQuotaLeftField(true);
+    }
+    public APIRequestGetAdsVolume requestLiveAdsQuotaLeftField (boolean value) {
+      this.requestField("live_ads_quota_left", value);
+      return this;
+    }
+    public APIRequestGetAdsVolume requestTotalLiveAdsField () {
+      return this.requestTotalLiveAdsField(true);
+    }
+    public APIRequestGetAdsVolume requestTotalLiveAdsField (boolean value) {
+      this.requestField("total_live_ads", value);
+      return this;
+    }
+    public APIRequestGetAdsVolume requestTotalLiveAdsInCurrentAccountField () {
+      return this.requestTotalLiveAdsInCurrentAccountField(true);
+    }
+    public APIRequestGetAdsVolume requestTotalLiveAdsInCurrentAccountField (boolean value) {
+      this.requestField("total_live_ads_in_current_account", value);
+      return this;
+    }
+    public APIRequestGetAdsVolume requestTotalLiveAdsLimitField () {
+      return this.requestTotalLiveAdsLimitField(true);
+    }
+    public APIRequestGetAdsVolume requestTotalLiveAdsLimitField (boolean value) {
+      this.requestField("total_live_ads_limit", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetAdsByLabels extends APIRequest<Ad> {
 
     APINodeList<Ad> lastResponse = null;
@@ -8494,6 +8150,516 @@ public class AdAccount extends APINode {
       this.requestField("use_new_app_click", value);
       return this;
     }
+  }
+
+  public static class APIRequestCreateAdSet extends APIRequest<AdSet> {
+
+    AdSet lastResponse = null;
+    @Override
+    public AdSet getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "adlabels",
+      "adset_schedule",
+      "attribution_spec",
+      "bid_adjustments",
+      "bid_amount",
+      "bid_constraints",
+      "bid_strategy",
+      "billing_event",
+      "campaign_id",
+      "campaign_spec",
+      "creative_sequence",
+      "daily_budget",
+      "daily_imps",
+      "daily_min_spend_target",
+      "daily_spend_cap",
+      "date_format",
+      "destination_type",
+      "end_time",
+      "execution_options",
+      "frequency_control_specs",
+      "full_funnel_exploration_mode",
+      "is_dynamic_creative",
+      "lifetime_budget",
+      "lifetime_imps",
+      "lifetime_min_spend_target",
+      "lifetime_spend_cap",
+      "line_number",
+      "name",
+      "optimization_goal",
+      "optimization_sub_event",
+      "pacing_type",
+      "promoted_object",
+      "rb_prediction_id",
+      "rf_prediction_id",
+      "source_adset_id",
+      "start_time",
+      "status",
+      "targeting",
+      "time_based_ad_rotation_id_blocks",
+      "time_based_ad_rotation_intervals",
+      "time_start",
+      "time_stop",
+      "topline_id",
+      "tune_for_category",
+      "upstream_events",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AdSet parseResponse(String response, String header) throws APIException {
+      return AdSet.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public AdSet execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdSet execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdSet> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdSet> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, AdSet>() {
+           public AdSet apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateAdSet.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateAdSet(String nodeId, APIContext context) {
+      super(context, nodeId, "/adsets", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateAdSet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdSet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateAdSet setAdlabels (List<Object> adlabels) {
+      this.setParam("adlabels", adlabels);
+      return this;
+    }
+    public APIRequestCreateAdSet setAdlabels (String adlabels) {
+      this.setParam("adlabels", adlabels);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setAdsetSchedule (List<Object> adsetSchedule) {
+      this.setParam("adset_schedule", adsetSchedule);
+      return this;
+    }
+    public APIRequestCreateAdSet setAdsetSchedule (String adsetSchedule) {
+      this.setParam("adset_schedule", adsetSchedule);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setAttributionSpec (List<Map<String, String>> attributionSpec) {
+      this.setParam("attribution_spec", attributionSpec);
+      return this;
+    }
+    public APIRequestCreateAdSet setAttributionSpec (String attributionSpec) {
+      this.setParam("attribution_spec", attributionSpec);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setBidAdjustments (Object bidAdjustments) {
+      this.setParam("bid_adjustments", bidAdjustments);
+      return this;
+    }
+    public APIRequestCreateAdSet setBidAdjustments (String bidAdjustments) {
+      this.setParam("bid_adjustments", bidAdjustments);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setBidAmount (Long bidAmount) {
+      this.setParam("bid_amount", bidAmount);
+      return this;
+    }
+    public APIRequestCreateAdSet setBidAmount (String bidAmount) {
+      this.setParam("bid_amount", bidAmount);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setBidConstraints (Map<String, Object> bidConstraints) {
+      this.setParam("bid_constraints", bidConstraints);
+      return this;
+    }
+    public APIRequestCreateAdSet setBidConstraints (String bidConstraints) {
+      this.setParam("bid_constraints", bidConstraints);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setBidStrategy (AdSet.EnumBidStrategy bidStrategy) {
+      this.setParam("bid_strategy", bidStrategy);
+      return this;
+    }
+    public APIRequestCreateAdSet setBidStrategy (String bidStrategy) {
+      this.setParam("bid_strategy", bidStrategy);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setBillingEvent (AdSet.EnumBillingEvent billingEvent) {
+      this.setParam("billing_event", billingEvent);
+      return this;
+    }
+    public APIRequestCreateAdSet setBillingEvent (String billingEvent) {
+      this.setParam("billing_event", billingEvent);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setCampaignId (String campaignId) {
+      this.setParam("campaign_id", campaignId);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setCampaignSpec (Object campaignSpec) {
+      this.setParam("campaign_spec", campaignSpec);
+      return this;
+    }
+    public APIRequestCreateAdSet setCampaignSpec (String campaignSpec) {
+      this.setParam("campaign_spec", campaignSpec);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setCreativeSequence (List<String> creativeSequence) {
+      this.setParam("creative_sequence", creativeSequence);
+      return this;
+    }
+    public APIRequestCreateAdSet setCreativeSequence (String creativeSequence) {
+      this.setParam("creative_sequence", creativeSequence);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setDailyBudget (Long dailyBudget) {
+      this.setParam("daily_budget", dailyBudget);
+      return this;
+    }
+    public APIRequestCreateAdSet setDailyBudget (String dailyBudget) {
+      this.setParam("daily_budget", dailyBudget);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setDailyImps (Long dailyImps) {
+      this.setParam("daily_imps", dailyImps);
+      return this;
+    }
+    public APIRequestCreateAdSet setDailyImps (String dailyImps) {
+      this.setParam("daily_imps", dailyImps);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setDailyMinSpendTarget (Long dailyMinSpendTarget) {
+      this.setParam("daily_min_spend_target", dailyMinSpendTarget);
+      return this;
+    }
+    public APIRequestCreateAdSet setDailyMinSpendTarget (String dailyMinSpendTarget) {
+      this.setParam("daily_min_spend_target", dailyMinSpendTarget);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setDailySpendCap (Long dailySpendCap) {
+      this.setParam("daily_spend_cap", dailySpendCap);
+      return this;
+    }
+    public APIRequestCreateAdSet setDailySpendCap (String dailySpendCap) {
+      this.setParam("daily_spend_cap", dailySpendCap);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setDateFormat (String dateFormat) {
+      this.setParam("date_format", dateFormat);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setDestinationType (AdSet.EnumDestinationType destinationType) {
+      this.setParam("destination_type", destinationType);
+      return this;
+    }
+    public APIRequestCreateAdSet setDestinationType (String destinationType) {
+      this.setParam("destination_type", destinationType);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setEndTime (String endTime) {
+      this.setParam("end_time", endTime);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setExecutionOptions (List<AdSet.EnumExecutionOptions> executionOptions) {
+      this.setParam("execution_options", executionOptions);
+      return this;
+    }
+    public APIRequestCreateAdSet setExecutionOptions (String executionOptions) {
+      this.setParam("execution_options", executionOptions);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setFrequencyControlSpecs (List<Object> frequencyControlSpecs) {
+      this.setParam("frequency_control_specs", frequencyControlSpecs);
+      return this;
+    }
+    public APIRequestCreateAdSet setFrequencyControlSpecs (String frequencyControlSpecs) {
+      this.setParam("frequency_control_specs", frequencyControlSpecs);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setFullFunnelExplorationMode (AdSet.EnumFullFunnelExplorationMode fullFunnelExplorationMode) {
+      this.setParam("full_funnel_exploration_mode", fullFunnelExplorationMode);
+      return this;
+    }
+    public APIRequestCreateAdSet setFullFunnelExplorationMode (String fullFunnelExplorationMode) {
+      this.setParam("full_funnel_exploration_mode", fullFunnelExplorationMode);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setIsDynamicCreative (Boolean isDynamicCreative) {
+      this.setParam("is_dynamic_creative", isDynamicCreative);
+      return this;
+    }
+    public APIRequestCreateAdSet setIsDynamicCreative (String isDynamicCreative) {
+      this.setParam("is_dynamic_creative", isDynamicCreative);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setLifetimeBudget (Long lifetimeBudget) {
+      this.setParam("lifetime_budget", lifetimeBudget);
+      return this;
+    }
+    public APIRequestCreateAdSet setLifetimeBudget (String lifetimeBudget) {
+      this.setParam("lifetime_budget", lifetimeBudget);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setLifetimeImps (Long lifetimeImps) {
+      this.setParam("lifetime_imps", lifetimeImps);
+      return this;
+    }
+    public APIRequestCreateAdSet setLifetimeImps (String lifetimeImps) {
+      this.setParam("lifetime_imps", lifetimeImps);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setLifetimeMinSpendTarget (Long lifetimeMinSpendTarget) {
+      this.setParam("lifetime_min_spend_target", lifetimeMinSpendTarget);
+      return this;
+    }
+    public APIRequestCreateAdSet setLifetimeMinSpendTarget (String lifetimeMinSpendTarget) {
+      this.setParam("lifetime_min_spend_target", lifetimeMinSpendTarget);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setLifetimeSpendCap (Long lifetimeSpendCap) {
+      this.setParam("lifetime_spend_cap", lifetimeSpendCap);
+      return this;
+    }
+    public APIRequestCreateAdSet setLifetimeSpendCap (String lifetimeSpendCap) {
+      this.setParam("lifetime_spend_cap", lifetimeSpendCap);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setLineNumber (Long lineNumber) {
+      this.setParam("line_number", lineNumber);
+      return this;
+    }
+    public APIRequestCreateAdSet setLineNumber (String lineNumber) {
+      this.setParam("line_number", lineNumber);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setOptimizationGoal (AdSet.EnumOptimizationGoal optimizationGoal) {
+      this.setParam("optimization_goal", optimizationGoal);
+      return this;
+    }
+    public APIRequestCreateAdSet setOptimizationGoal (String optimizationGoal) {
+      this.setParam("optimization_goal", optimizationGoal);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setOptimizationSubEvent (AdSet.EnumOptimizationSubEvent optimizationSubEvent) {
+      this.setParam("optimization_sub_event", optimizationSubEvent);
+      return this;
+    }
+    public APIRequestCreateAdSet setOptimizationSubEvent (String optimizationSubEvent) {
+      this.setParam("optimization_sub_event", optimizationSubEvent);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setPacingType (List<String> pacingType) {
+      this.setParam("pacing_type", pacingType);
+      return this;
+    }
+    public APIRequestCreateAdSet setPacingType (String pacingType) {
+      this.setParam("pacing_type", pacingType);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setPromotedObject (Object promotedObject) {
+      this.setParam("promoted_object", promotedObject);
+      return this;
+    }
+    public APIRequestCreateAdSet setPromotedObject (String promotedObject) {
+      this.setParam("promoted_object", promotedObject);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setRbPredictionId (String rbPredictionId) {
+      this.setParam("rb_prediction_id", rbPredictionId);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setRfPredictionId (String rfPredictionId) {
+      this.setParam("rf_prediction_id", rfPredictionId);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setSourceAdsetId (String sourceAdsetId) {
+      this.setParam("source_adset_id", sourceAdsetId);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setStartTime (String startTime) {
+      this.setParam("start_time", startTime);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setStatus (AdSet.EnumStatus status) {
+      this.setParam("status", status);
+      return this;
+    }
+    public APIRequestCreateAdSet setStatus (String status) {
+      this.setParam("status", status);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setTargeting (Targeting targeting) {
+      this.setParam("targeting", targeting);
+      return this;
+    }
+    public APIRequestCreateAdSet setTargeting (String targeting) {
+      this.setParam("targeting", targeting);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setTimeBasedAdRotationIdBlocks (List<List<Long>> timeBasedAdRotationIdBlocks) {
+      this.setParam("time_based_ad_rotation_id_blocks", timeBasedAdRotationIdBlocks);
+      return this;
+    }
+    public APIRequestCreateAdSet setTimeBasedAdRotationIdBlocks (String timeBasedAdRotationIdBlocks) {
+      this.setParam("time_based_ad_rotation_id_blocks", timeBasedAdRotationIdBlocks);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setTimeBasedAdRotationIntervals (List<Long> timeBasedAdRotationIntervals) {
+      this.setParam("time_based_ad_rotation_intervals", timeBasedAdRotationIntervals);
+      return this;
+    }
+    public APIRequestCreateAdSet setTimeBasedAdRotationIntervals (String timeBasedAdRotationIntervals) {
+      this.setParam("time_based_ad_rotation_intervals", timeBasedAdRotationIntervals);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setTimeStart (String timeStart) {
+      this.setParam("time_start", timeStart);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setTimeStop (String timeStop) {
+      this.setParam("time_stop", timeStop);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setToplineId (String toplineId) {
+      this.setParam("topline_id", toplineId);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setTuneForCategory (AdSet.EnumTuneForCategory tuneForCategory) {
+      this.setParam("tune_for_category", tuneForCategory);
+      return this;
+    }
+    public APIRequestCreateAdSet setTuneForCategory (String tuneForCategory) {
+      this.setParam("tune_for_category", tuneForCategory);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setUpstreamEvents (Map<String, String> upstreamEvents) {
+      this.setParam("upstream_events", upstreamEvents);
+      return this;
+    }
+    public APIRequestCreateAdSet setUpstreamEvents (String upstreamEvents) {
+      this.setParam("upstream_events", upstreamEvents);
+      return this;
+    }
+
+    public APIRequestCreateAdSet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateAdSet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdSet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateAdSet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdSet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdSet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetAdSetsByLabels extends APIRequest<AdSet> {
@@ -17341,6 +17507,192 @@ public class AdAccount extends APINode {
     }
   }
 
+  public static class APIRequestGetContentDeliveryReport extends APIRequest<ContentDeliveryReport> {
+
+    APINodeList<ContentDeliveryReport> lastResponse = null;
+    @Override
+    public APINodeList<ContentDeliveryReport> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "end_date",
+      "platform",
+      "position",
+      "start_date",
+      "summary",
+    };
+
+    public static final String[] FIELDS = {
+      "content_name",
+      "content_url",
+      "creator_name",
+      "creator_url",
+      "estimated_impressions",
+    };
+
+    @Override
+    public APINodeList<ContentDeliveryReport> parseResponse(String response, String header) throws APIException {
+      return ContentDeliveryReport.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<ContentDeliveryReport> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ContentDeliveryReport> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<ContentDeliveryReport>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<ContentDeliveryReport>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<ContentDeliveryReport>>() {
+           public APINodeList<ContentDeliveryReport> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetContentDeliveryReport.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetContentDeliveryReport(String nodeId, APIContext context) {
+      super(context, nodeId, "/content_delivery_report", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetContentDeliveryReport setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetContentDeliveryReport setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetContentDeliveryReport setEndDate (String endDate) {
+      this.setParam("end_date", endDate);
+      return this;
+    }
+
+    public APIRequestGetContentDeliveryReport setPlatform (ContentDeliveryReport.EnumPlatform platform) {
+      this.setParam("platform", platform);
+      return this;
+    }
+    public APIRequestGetContentDeliveryReport setPlatform (String platform) {
+      this.setParam("platform", platform);
+      return this;
+    }
+
+    public APIRequestGetContentDeliveryReport setPosition (ContentDeliveryReport.EnumPosition position) {
+      this.setParam("position", position);
+      return this;
+    }
+    public APIRequestGetContentDeliveryReport setPosition (String position) {
+      this.setParam("position", position);
+      return this;
+    }
+
+    public APIRequestGetContentDeliveryReport setStartDate (String startDate) {
+      this.setParam("start_date", startDate);
+      return this;
+    }
+
+    public APIRequestGetContentDeliveryReport setSummary (Boolean summary) {
+      this.setParam("summary", summary);
+      return this;
+    }
+    public APIRequestGetContentDeliveryReport setSummary (String summary) {
+      this.setParam("summary", summary);
+      return this;
+    }
+
+    public APIRequestGetContentDeliveryReport requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetContentDeliveryReport requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetContentDeliveryReport requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetContentDeliveryReport requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetContentDeliveryReport requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetContentDeliveryReport requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetContentDeliveryReport requestContentNameField () {
+      return this.requestContentNameField(true);
+    }
+    public APIRequestGetContentDeliveryReport requestContentNameField (boolean value) {
+      this.requestField("content_name", value);
+      return this;
+    }
+    public APIRequestGetContentDeliveryReport requestContentUrlField () {
+      return this.requestContentUrlField(true);
+    }
+    public APIRequestGetContentDeliveryReport requestContentUrlField (boolean value) {
+      this.requestField("content_url", value);
+      return this;
+    }
+    public APIRequestGetContentDeliveryReport requestCreatorNameField () {
+      return this.requestCreatorNameField(true);
+    }
+    public APIRequestGetContentDeliveryReport requestCreatorNameField (boolean value) {
+      this.requestField("creator_name", value);
+      return this;
+    }
+    public APIRequestGetContentDeliveryReport requestCreatorUrlField () {
+      return this.requestCreatorUrlField(true);
+    }
+    public APIRequestGetContentDeliveryReport requestCreatorUrlField (boolean value) {
+      this.requestField("creator_url", value);
+      return this;
+    }
+    public APIRequestGetContentDeliveryReport requestEstimatedImpressionsField () {
+      return this.requestEstimatedImpressionsField(true);
+    }
+    public APIRequestGetContentDeliveryReport requestEstimatedImpressionsField (boolean value) {
+      this.requestField("estimated_impressions", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetCustomAudiences extends APIRequest<CustomAudience> {
 
     APINodeList<CustomAudience> lastResponse = null;
@@ -21126,6 +21478,7 @@ public class AdAccount extends APINode {
 
     public static final String[] FIELDS = {
       "app_id",
+      "are_app_events_unavailable",
       "icon_url",
       "name",
       "search_source_store",
@@ -21261,6 +21614,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetMatchedSearchApplications requestAppIdField (boolean value) {
       this.requestField("app_id", value);
+      return this;
+    }
+    public APIRequestGetMatchedSearchApplications requestAreAppEventsUnavailableField () {
+      return this.requestAreAppEventsUnavailableField(true);
+    }
+    public APIRequestGetMatchedSearchApplications requestAreAppEventsUnavailableField (boolean value) {
+      this.requestField("are_app_events_unavailable", value);
       return this;
     }
     public APIRequestGetMatchedSearchApplications requestIconUrlField () {
@@ -28103,6 +28463,7 @@ public class AdAccount extends APINode {
       "timezone_offset_hours_utc",
       "tos_accepted",
       "user_role",
+      "user_tasks",
       "user_tos_accepted",
     };
 
@@ -28606,6 +28967,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGet requestUserRoleField (boolean value) {
       this.requestField("user_role", value);
+      return this;
+    }
+    public APIRequestGet requestUserTasksField () {
+      return this.requestUserTasksField(true);
+    }
+    public APIRequestGet requestUserTasksField (boolean value) {
+      this.requestField("user_tasks", value);
       return this;
     }
     public APIRequestGet requestUserTosAcceptedField () {
@@ -29171,6 +29539,8 @@ public class AdAccount extends APINode {
       VALUE_ACTION_VIDEO_SOUND("action_video_sound"),
       @SerializedName("action_video_type")
       VALUE_ACTION_VIDEO_TYPE("action_video_type"),
+      @SerializedName("attribution_model_type")
+      VALUE_ATTRIBUTION_MODEL_TYPE("attribution_model_type"),
       @SerializedName("interactive_component_sticker_id")
       VALUE_INTERACTIVE_COMPONENT_STICKER_ID("interactive_component_sticker_id"),
       @SerializedName("interactive_component_sticker_response")
@@ -29454,6 +29824,7 @@ public class AdAccount extends APINode {
     this.mTimezoneOffsetHoursUtc = instance.mTimezoneOffsetHoursUtc;
     this.mTosAccepted = instance.mTosAccepted;
     this.mUserRole = instance.mUserRole;
+    this.mUserTasks = instance.mUserTasks;
     this.mUserTosAccepted = instance.mUserTosAccepted;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

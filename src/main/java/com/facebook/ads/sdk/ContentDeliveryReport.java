@@ -54,33 +54,31 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class BusinessAdvertisableApplicationsResult extends APINode {
-  @SerializedName("are_app_events_unavailable")
-  private Boolean mAreAppEventsUnavailable = null;
-  @SerializedName("business")
-  private Business mBusiness = null;
-  @SerializedName("has_insight_permission")
-  private Boolean mHasInsightPermission = null;
-  @SerializedName("id")
-  private String mId = null;
-  @SerializedName("name")
-  private String mName = null;
-  @SerializedName("photo_url")
-  private String mPhotoUrl = null;
+public class ContentDeliveryReport extends APINode {
+  @SerializedName("content_name")
+  private String mContentName = null;
+  @SerializedName("content_url")
+  private String mContentUrl = null;
+  @SerializedName("creator_name")
+  private String mCreatorName = null;
+  @SerializedName("creator_url")
+  private String mCreatorUrl = null;
+  @SerializedName("estimated_impressions")
+  private Long mEstimatedImpressions = null;
   protected static Gson gson = null;
 
-  public BusinessAdvertisableApplicationsResult() {
+  public ContentDeliveryReport() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
-  public static BusinessAdvertisableApplicationsResult loadJSON(String json, APIContext context, String header) {
-    BusinessAdvertisableApplicationsResult businessAdvertisableApplicationsResult = getGson().fromJson(json, BusinessAdvertisableApplicationsResult.class);
+  public static ContentDeliveryReport loadJSON(String json, APIContext context, String header) {
+    ContentDeliveryReport contentDeliveryReport = getGson().fromJson(json, ContentDeliveryReport.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(businessAdvertisableApplicationsResult.toString());
+      JsonElement o2 = parser.parse(contentDeliveryReport.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -90,14 +88,14 @@ public class BusinessAdvertisableApplicationsResult extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    businessAdvertisableApplicationsResult.context = context;
-    businessAdvertisableApplicationsResult.rawValue = json;
-    businessAdvertisableApplicationsResult.header = header;
-    return businessAdvertisableApplicationsResult;
+    contentDeliveryReport.context = context;
+    contentDeliveryReport.rawValue = json;
+    contentDeliveryReport.header = header;
+    return contentDeliveryReport;
   }
 
-  public static APINodeList<BusinessAdvertisableApplicationsResult> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<BusinessAdvertisableApplicationsResult> businessAdvertisableApplicationsResults = new APINodeList<BusinessAdvertisableApplicationsResult>(request, json, header);
+  public static APINodeList<ContentDeliveryReport> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ContentDeliveryReport> contentDeliveryReports = new APINodeList<ContentDeliveryReport>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -108,9 +106,9 @@ public class BusinessAdvertisableApplicationsResult extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          businessAdvertisableApplicationsResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          contentDeliveryReports.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return businessAdvertisableApplicationsResults;
+        return contentDeliveryReports;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -120,20 +118,20 @@ public class BusinessAdvertisableApplicationsResult extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                businessAdvertisableApplicationsResults.setCursors(before, after);
+                contentDeliveryReports.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            businessAdvertisableApplicationsResults.setPaging(previous, next);
+            contentDeliveryReports.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              businessAdvertisableApplicationsResults.setAppSecret(context.getAppSecretProof());
+              contentDeliveryReports.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              businessAdvertisableApplicationsResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              contentDeliveryReports.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -144,23 +142,23 @@ public class BusinessAdvertisableApplicationsResult extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  businessAdvertisableApplicationsResults.add(loadJSON(entry.getValue().toString(), context, header));
+                  contentDeliveryReports.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              businessAdvertisableApplicationsResults.add(loadJSON(obj.toString(), context, header));
+              contentDeliveryReports.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return businessAdvertisableApplicationsResults;
+          return contentDeliveryReports;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              businessAdvertisableApplicationsResults.add(loadJSON(entry.getValue().toString(), context, header));
+              contentDeliveryReports.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return businessAdvertisableApplicationsResults;
+          return contentDeliveryReports;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -177,20 +175,20 @@ public class BusinessAdvertisableApplicationsResult extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              businessAdvertisableApplicationsResults.add(loadJSON(value.toString(), context, header));
+              contentDeliveryReports.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return businessAdvertisableApplicationsResults;
+            return contentDeliveryReports;
           }
 
           // Sixth, check if it's pure JsonObject
-          businessAdvertisableApplicationsResults.clear();
-          businessAdvertisableApplicationsResults.add(loadJSON(json, context, header));
-          return businessAdvertisableApplicationsResults;
+          contentDeliveryReports.clear();
+          contentDeliveryReports.add(loadJSON(json, context, header));
+          return contentDeliveryReports;
         }
       }
     } catch (Exception e) {
@@ -218,69 +216,138 @@ public class BusinessAdvertisableApplicationsResult extends APINode {
   }
 
 
-  public Boolean getFieldAreAppEventsUnavailable() {
-    return mAreAppEventsUnavailable;
+  public String getFieldContentName() {
+    return mContentName;
   }
 
-  public BusinessAdvertisableApplicationsResult setFieldAreAppEventsUnavailable(Boolean value) {
-    this.mAreAppEventsUnavailable = value;
+  public ContentDeliveryReport setFieldContentName(String value) {
+    this.mContentName = value;
     return this;
   }
 
-  public Business getFieldBusiness() {
-    if (mBusiness != null) {
-      mBusiness.context = getContext();
-    }
-    return mBusiness;
+  public String getFieldContentUrl() {
+    return mContentUrl;
   }
 
-  public BusinessAdvertisableApplicationsResult setFieldBusiness(Business value) {
-    this.mBusiness = value;
+  public ContentDeliveryReport setFieldContentUrl(String value) {
+    this.mContentUrl = value;
     return this;
   }
 
-  public BusinessAdvertisableApplicationsResult setFieldBusiness(String value) {
-    Type type = new TypeToken<Business>(){}.getType();
-    this.mBusiness = Business.getGson().fromJson(value, type);
-    return this;
-  }
-  public Boolean getFieldHasInsightPermission() {
-    return mHasInsightPermission;
+  public String getFieldCreatorName() {
+    return mCreatorName;
   }
 
-  public BusinessAdvertisableApplicationsResult setFieldHasInsightPermission(Boolean value) {
-    this.mHasInsightPermission = value;
+  public ContentDeliveryReport setFieldCreatorName(String value) {
+    this.mCreatorName = value;
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
+  public String getFieldCreatorUrl() {
+    return mCreatorUrl;
   }
 
-  public BusinessAdvertisableApplicationsResult setFieldId(String value) {
-    this.mId = value;
+  public ContentDeliveryReport setFieldCreatorUrl(String value) {
+    this.mCreatorUrl = value;
     return this;
   }
 
-  public String getFieldName() {
-    return mName;
+  public Long getFieldEstimatedImpressions() {
+    return mEstimatedImpressions;
   }
 
-  public BusinessAdvertisableApplicationsResult setFieldName(String value) {
-    this.mName = value;
-    return this;
-  }
-
-  public String getFieldPhotoUrl() {
-    return mPhotoUrl;
-  }
-
-  public BusinessAdvertisableApplicationsResult setFieldPhotoUrl(String value) {
-    this.mPhotoUrl = value;
+  public ContentDeliveryReport setFieldEstimatedImpressions(Long value) {
+    this.mEstimatedImpressions = value;
     return this;
   }
 
 
+
+  public static enum EnumPlatform {
+      @SerializedName("AUDIENCE_NETWORK")
+      VALUE_AUDIENCE_NETWORK("AUDIENCE_NETWORK"),
+      @SerializedName("FACEBOOK")
+      VALUE_FACEBOOK("FACEBOOK"),
+      @SerializedName("INSTAGRAM")
+      VALUE_INSTAGRAM("INSTAGRAM"),
+      @SerializedName("MESSENGER")
+      VALUE_MESSENGER("MESSENGER"),
+      @SerializedName("UNKNOWN")
+      VALUE_UNKNOWN("UNKNOWN"),
+      @SerializedName("WHATSAPP")
+      VALUE_WHATSAPP("WHATSAPP"),
+      ;
+
+      private String value;
+
+      private EnumPlatform(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumPosition {
+      @SerializedName("ALL_PLACEMENTS")
+      VALUE_ALL_PLACEMENTS("ALL_PLACEMENTS"),
+      @SerializedName("AN_CLASSIC")
+      VALUE_AN_CLASSIC("AN_CLASSIC"),
+      @SerializedName("FACEBOOK_GROUPS")
+      VALUE_FACEBOOK_GROUPS("FACEBOOK_GROUPS"),
+      @SerializedName("FACEBOOK_STORIES")
+      VALUE_FACEBOOK_STORIES("FACEBOOK_STORIES"),
+      @SerializedName("FEED")
+      VALUE_FEED("FEED"),
+      @SerializedName("GROUPS")
+      VALUE_GROUPS("GROUPS"),
+      @SerializedName("INSTAGRAM_EXPLORE")
+      VALUE_INSTAGRAM_EXPLORE("INSTAGRAM_EXPLORE"),
+      @SerializedName("INSTAGRAM_STORIES")
+      VALUE_INSTAGRAM_STORIES("INSTAGRAM_STORIES"),
+      @SerializedName("INSTANT_ARTICLE")
+      VALUE_INSTANT_ARTICLE("INSTANT_ARTICLE"),
+      @SerializedName("INSTREAM_VIDEO")
+      VALUE_INSTREAM_VIDEO("INSTREAM_VIDEO"),
+      @SerializedName("MARKETPLACE")
+      VALUE_MARKETPLACE("MARKETPLACE"),
+      @SerializedName("MESSENGER_INBOX")
+      VALUE_MESSENGER_INBOX("MESSENGER_INBOX"),
+      @SerializedName("MESSENGER_STORIES")
+      VALUE_MESSENGER_STORIES("MESSENGER_STORIES"),
+      @SerializedName("OTHERS")
+      VALUE_OTHERS("OTHERS"),
+      @SerializedName("REWARDED_VIDEO")
+      VALUE_REWARDED_VIDEO("REWARDED_VIDEO"),
+      @SerializedName("RIGHT_HAND_COLUMN")
+      VALUE_RIGHT_HAND_COLUMN("RIGHT_HAND_COLUMN"),
+      @SerializedName("SEARCH")
+      VALUE_SEARCH("SEARCH"),
+      @SerializedName("SEARCH_SERP")
+      VALUE_SEARCH_SERP("SEARCH_SERP"),
+      @SerializedName("STATUS")
+      VALUE_STATUS("STATUS"),
+      @SerializedName("SUGGESTED_VIDEO")
+      VALUE_SUGGESTED_VIDEO("SUGGESTED_VIDEO"),
+      @SerializedName("UNKNOWN")
+      VALUE_UNKNOWN("UNKNOWN"),
+      @SerializedName("VIDEO_FEEDS")
+      VALUE_VIDEO_FEEDS("VIDEO_FEEDS"),
+      ;
+
+      private String value;
+
+      private EnumPosition(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -296,22 +363,21 @@ public class BusinessAdvertisableApplicationsResult extends APINode {
     return gson;
   }
 
-  public BusinessAdvertisableApplicationsResult copyFrom(BusinessAdvertisableApplicationsResult instance) {
-    this.mAreAppEventsUnavailable = instance.mAreAppEventsUnavailable;
-    this.mBusiness = instance.mBusiness;
-    this.mHasInsightPermission = instance.mHasInsightPermission;
-    this.mId = instance.mId;
-    this.mName = instance.mName;
-    this.mPhotoUrl = instance.mPhotoUrl;
+  public ContentDeliveryReport copyFrom(ContentDeliveryReport instance) {
+    this.mContentName = instance.mContentName;
+    this.mContentUrl = instance.mContentUrl;
+    this.mCreatorName = instance.mCreatorName;
+    this.mCreatorUrl = instance.mCreatorUrl;
+    this.mEstimatedImpressions = instance.mEstimatedImpressions;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<BusinessAdvertisableApplicationsResult> getParser() {
-    return new APIRequest.ResponseParser<BusinessAdvertisableApplicationsResult>() {
-      public APINodeList<BusinessAdvertisableApplicationsResult> parseResponse(String response, APIContext context, APIRequest<BusinessAdvertisableApplicationsResult> request, String header) throws MalformedResponseException {
-        return BusinessAdvertisableApplicationsResult.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ContentDeliveryReport> getParser() {
+    return new APIRequest.ResponseParser<ContentDeliveryReport>() {
+      public APINodeList<ContentDeliveryReport> parseResponse(String response, APIContext context, APIRequest<ContentDeliveryReport> request, String header) throws MalformedResponseException {
+        return ContentDeliveryReport.parseResponse(response, context, request, header);
       }
     };
   }

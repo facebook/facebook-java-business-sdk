@@ -5875,6 +5875,7 @@ public class ProductCatalog extends APINode {
       "rules",
       "schedule",
       "update_schedule",
+      "upload_schedule",
     };
 
     public static final String[] FIELDS = {
@@ -6023,6 +6024,11 @@ public class ProductCatalog extends APINode {
 
     public APIRequestCreateProductFeed setUpdateSchedule (String updateSchedule) {
       this.setParam("update_schedule", updateSchedule);
+      return this;
+    }
+
+    public APIRequestCreateProductFeed setUploadSchedule (String uploadSchedule) {
+      this.setParam("upload_schedule", uploadSchedule);
       return this;
     }
 

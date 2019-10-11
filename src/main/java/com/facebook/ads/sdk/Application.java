@@ -610,10 +610,6 @@ public class Application extends APINode {
     return new APIRequestGetMobileSdkGk(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetMoodsForApplication getMoodsForApplication() {
-    return new APIRequestGetMoodsForApplication(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetObjects getObjects() {
     return new APIRequestGetObjects(this.getPrefixedId().toString(), context);
   }
@@ -3864,6 +3860,7 @@ public class Application extends APINode {
       "timezone_offset_hours_utc",
       "tos_accepted",
       "user_role",
+      "user_tasks",
       "user_tos_accepted",
     };
 
@@ -4372,6 +4369,13 @@ public class Application extends APINode {
     }
     public APIRequestGetAuthorizedAdAccounts requestUserRoleField (boolean value) {
       this.requestField("user_role", value);
+      return this;
+    }
+    public APIRequestGetAuthorizedAdAccounts requestUserTasksField () {
+      return this.requestUserTasksField(true);
+    }
+    public APIRequestGetAuthorizedAdAccounts requestUserTasksField (boolean value) {
+      this.requestField("user_tasks", value);
       return this;
     }
     public APIRequestGetAuthorizedAdAccounts requestUserTosAcceptedField () {
@@ -7761,110 +7765,6 @@ public class Application extends APINode {
 
     @Override
     public APIRequestGetMobileSdkGk requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestGetMoodsForApplication extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetMoodsForApplication.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetMoodsForApplication(String nodeId, APIContext context) {
-      super(context, nodeId, "/moods_for_application", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetMoodsForApplication setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMoodsForApplication setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetMoodsForApplication requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetMoodsForApplication requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMoodsForApplication requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetMoodsForApplication requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMoodsForApplication requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMoodsForApplication requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

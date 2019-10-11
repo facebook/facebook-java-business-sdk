@@ -61,6 +61,8 @@ public class SavedAudience extends APINode {
   private Long mApproximateCount = null;
   @SerializedName("description")
   private String mDescription = null;
+  @SerializedName("extra_info")
+  private String mExtraInfo = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("name")
@@ -312,6 +314,10 @@ public class SavedAudience extends APINode {
 
   public String getFieldDescription() {
     return mDescription;
+  }
+
+  public String getFieldExtraInfo() {
+    return mExtraInfo;
   }
 
   public String getFieldId() {
@@ -978,6 +984,7 @@ public class SavedAudience extends APINode {
       "account",
       "approximate_count",
       "description",
+      "extra_info",
       "id",
       "name",
       "permission_for_actions",
@@ -1098,6 +1105,13 @@ public class SavedAudience extends APINode {
       this.requestField("description", value);
       return this;
     }
+    public APIRequestGet requestExtraInfoField () {
+      return this.requestExtraInfoField(true);
+    }
+    public APIRequestGet requestExtraInfoField (boolean value) {
+      this.requestField("extra_info", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -1174,6 +1188,7 @@ public class SavedAudience extends APINode {
     this.mAccount = instance.mAccount;
     this.mApproximateCount = instance.mApproximateCount;
     this.mDescription = instance.mDescription;
+    this.mExtraInfo = instance.mExtraInfo;
     this.mId = instance.mId;
     this.mName = instance.mName;
     this.mPermissionForActions = instance.mPermissionForActions;

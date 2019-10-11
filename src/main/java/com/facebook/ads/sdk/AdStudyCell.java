@@ -391,6 +391,7 @@ public class AdStudyCell extends APINode {
       "timezone_offset_hours_utc",
       "tos_accepted",
       "user_role",
+      "user_tasks",
       "user_tos_accepted",
     };
 
@@ -894,6 +895,13 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetAdAccounts requestUserRoleField (boolean value) {
       this.requestField("user_role", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestUserTasksField () {
+      return this.requestUserTasksField(true);
+    }
+    public APIRequestGetAdAccounts requestUserTasksField (boolean value) {
+      this.requestField("user_tasks", value);
       return this;
     }
     public APIRequestGetAdAccounts requestUserTosAcceptedField () {

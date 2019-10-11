@@ -7382,6 +7382,8 @@ public class Group extends APINode {
       VALUE_NEIGHBORS("NEIGHBORS"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
+      @SerializedName("OCULUS")
+      VALUE_OCULUS("OCULUS"),
       @SerializedName("PARENTING")
       VALUE_PARENTING("PARENTING"),
       @SerializedName("PARENTS")
@@ -7489,6 +7491,8 @@ public class Group extends APINode {
       VALUE_NEIGHBORS("NEIGHBORS"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
+      @SerializedName("OCULUS")
+      VALUE_OCULUS("OCULUS"),
       @SerializedName("PARENTING")
       VALUE_PARENTING("PARENTING"),
       @SerializedName("PARENTS")

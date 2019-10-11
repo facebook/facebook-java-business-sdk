@@ -407,10 +407,16 @@ public class ProductFeed extends APINode {
   }
 
   public ProductFeedSchedule getFieldSchedule() {
+    if (mSchedule != null) {
+      mSchedule.context = getContext();
+    }
     return mSchedule;
   }
 
   public ProductFeedSchedule getFieldUpdateSchedule() {
+    if (mUpdateSchedule != null) {
+      mUpdateSchedule.context = getContext();
+    }
     return mUpdateSchedule;
   }
 
@@ -3924,6 +3930,7 @@ public class ProductFeed extends APINode {
       "quoted_fields_mode",
       "schedule",
       "update_schedule",
+      "upload_schedule",
     };
 
     public static final String[] FIELDS = {
@@ -4035,6 +4042,11 @@ public class ProductFeed extends APINode {
 
     public APIRequestUpdate setUpdateSchedule (String updateSchedule) {
       this.setParam("update_schedule", updateSchedule);
+      return this;
+    }
+
+    public APIRequestUpdate setUploadSchedule (String uploadSchedule) {
+      this.setParam("upload_schedule", uploadSchedule);
       return this;
     }
 

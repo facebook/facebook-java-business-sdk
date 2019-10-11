@@ -390,6 +390,10 @@ public class AdSet extends APINode {
     return new APIRequestGetAsyncAdRequests(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetContentDeliveryReport getContentDeliveryReport() {
+    return new APIRequestGetContentDeliveryReport(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetCopies getCopies() {
     return new APIRequestGetCopies(this.getPrefixedId().toString(), context);
   }
@@ -2786,6 +2790,192 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAsyncAdRequests requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetContentDeliveryReport extends APIRequest<ContentDeliveryReport> {
+
+    APINodeList<ContentDeliveryReport> lastResponse = null;
+    @Override
+    public APINodeList<ContentDeliveryReport> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "end_date",
+      "platform",
+      "position",
+      "start_date",
+      "summary",
+    };
+
+    public static final String[] FIELDS = {
+      "content_name",
+      "content_url",
+      "creator_name",
+      "creator_url",
+      "estimated_impressions",
+    };
+
+    @Override
+    public APINodeList<ContentDeliveryReport> parseResponse(String response, String header) throws APIException {
+      return ContentDeliveryReport.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<ContentDeliveryReport> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ContentDeliveryReport> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<ContentDeliveryReport>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<ContentDeliveryReport>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<ContentDeliveryReport>>() {
+           public APINodeList<ContentDeliveryReport> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetContentDeliveryReport.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetContentDeliveryReport(String nodeId, APIContext context) {
+      super(context, nodeId, "/content_delivery_report", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetContentDeliveryReport setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetContentDeliveryReport setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetContentDeliveryReport setEndDate (String endDate) {
+      this.setParam("end_date", endDate);
+      return this;
+    }
+
+    public APIRequestGetContentDeliveryReport setPlatform (ContentDeliveryReport.EnumPlatform platform) {
+      this.setParam("platform", platform);
+      return this;
+    }
+    public APIRequestGetContentDeliveryReport setPlatform (String platform) {
+      this.setParam("platform", platform);
+      return this;
+    }
+
+    public APIRequestGetContentDeliveryReport setPosition (ContentDeliveryReport.EnumPosition position) {
+      this.setParam("position", position);
+      return this;
+    }
+    public APIRequestGetContentDeliveryReport setPosition (String position) {
+      this.setParam("position", position);
+      return this;
+    }
+
+    public APIRequestGetContentDeliveryReport setStartDate (String startDate) {
+      this.setParam("start_date", startDate);
+      return this;
+    }
+
+    public APIRequestGetContentDeliveryReport setSummary (Boolean summary) {
+      this.setParam("summary", summary);
+      return this;
+    }
+    public APIRequestGetContentDeliveryReport setSummary (String summary) {
+      this.setParam("summary", summary);
+      return this;
+    }
+
+    public APIRequestGetContentDeliveryReport requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetContentDeliveryReport requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetContentDeliveryReport requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetContentDeliveryReport requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetContentDeliveryReport requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetContentDeliveryReport requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetContentDeliveryReport requestContentNameField () {
+      return this.requestContentNameField(true);
+    }
+    public APIRequestGetContentDeliveryReport requestContentNameField (boolean value) {
+      this.requestField("content_name", value);
+      return this;
+    }
+    public APIRequestGetContentDeliveryReport requestContentUrlField () {
+      return this.requestContentUrlField(true);
+    }
+    public APIRequestGetContentDeliveryReport requestContentUrlField (boolean value) {
+      this.requestField("content_url", value);
+      return this;
+    }
+    public APIRequestGetContentDeliveryReport requestCreatorNameField () {
+      return this.requestCreatorNameField(true);
+    }
+    public APIRequestGetContentDeliveryReport requestCreatorNameField (boolean value) {
+      this.requestField("creator_name", value);
+      return this;
+    }
+    public APIRequestGetContentDeliveryReport requestCreatorUrlField () {
+      return this.requestCreatorUrlField(true);
+    }
+    public APIRequestGetContentDeliveryReport requestCreatorUrlField (boolean value) {
+      this.requestField("creator_url", value);
+      return this;
+    }
+    public APIRequestGetContentDeliveryReport requestEstimatedImpressionsField () {
+      return this.requestEstimatedImpressionsField(true);
+    }
+    public APIRequestGetContentDeliveryReport requestEstimatedImpressionsField (boolean value) {
+      this.requestField("estimated_impressions", value);
       return this;
     }
   }
@@ -5950,6 +6140,59 @@ public class AdSet extends APINode {
       }
   }
 
+  public static enum EnumDatePreset {
+      @SerializedName("LAST_14D")
+      VALUE_LAST_14D("LAST_14D"),
+      @SerializedName("LAST_28D")
+      VALUE_LAST_28D("LAST_28D"),
+      @SerializedName("LAST_30D")
+      VALUE_LAST_30D("LAST_30D"),
+      @SerializedName("LAST_3D")
+      VALUE_LAST_3D("LAST_3D"),
+      @SerializedName("LAST_7D")
+      VALUE_LAST_7D("LAST_7D"),
+      @SerializedName("LAST_90D")
+      VALUE_LAST_90D("LAST_90D"),
+      @SerializedName("LAST_MONTH")
+      VALUE_LAST_MONTH("LAST_MONTH"),
+      @SerializedName("LAST_QUARTER")
+      VALUE_LAST_QUARTER("LAST_QUARTER"),
+      @SerializedName("LAST_WEEK_MON_SUN")
+      VALUE_LAST_WEEK_MON_SUN("LAST_WEEK_MON_SUN"),
+      @SerializedName("LAST_WEEK_SUN_SAT")
+      VALUE_LAST_WEEK_SUN_SAT("LAST_WEEK_SUN_SAT"),
+      @SerializedName("LAST_YEAR")
+      VALUE_LAST_YEAR("LAST_YEAR"),
+      @SerializedName("LIFETIME")
+      VALUE_LIFETIME("LIFETIME"),
+      @SerializedName("THIS_MONTH")
+      VALUE_THIS_MONTH("THIS_MONTH"),
+      @SerializedName("THIS_QUARTER")
+      VALUE_THIS_QUARTER("THIS_QUARTER"),
+      @SerializedName("THIS_WEEK_MON_TODAY")
+      VALUE_THIS_WEEK_MON_TODAY("THIS_WEEK_MON_TODAY"),
+      @SerializedName("THIS_WEEK_SUN_TODAY")
+      VALUE_THIS_WEEK_SUN_TODAY("THIS_WEEK_SUN_TODAY"),
+      @SerializedName("THIS_YEAR")
+      VALUE_THIS_YEAR("THIS_YEAR"),
+      @SerializedName("TODAY")
+      VALUE_TODAY("TODAY"),
+      @SerializedName("YESTERDAY")
+      VALUE_YESTERDAY("YESTERDAY"),
+      ;
+
+      private String value;
+
+      private EnumDatePreset(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumDestinationType {
       @SerializedName("APP")
       VALUE_APP("APP"),
@@ -6066,59 +6309,6 @@ public class AdSet extends APINode {
       private String value;
 
       private EnumTuneForCategory(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumDatePreset {
-      @SerializedName("LAST_14D")
-      VALUE_LAST_14D("LAST_14D"),
-      @SerializedName("LAST_28D")
-      VALUE_LAST_28D("LAST_28D"),
-      @SerializedName("LAST_30D")
-      VALUE_LAST_30D("LAST_30D"),
-      @SerializedName("LAST_3D")
-      VALUE_LAST_3D("LAST_3D"),
-      @SerializedName("LAST_7D")
-      VALUE_LAST_7D("LAST_7D"),
-      @SerializedName("LAST_90D")
-      VALUE_LAST_90D("LAST_90D"),
-      @SerializedName("LAST_MONTH")
-      VALUE_LAST_MONTH("LAST_MONTH"),
-      @SerializedName("LAST_QUARTER")
-      VALUE_LAST_QUARTER("LAST_QUARTER"),
-      @SerializedName("LAST_WEEK_MON_SUN")
-      VALUE_LAST_WEEK_MON_SUN("LAST_WEEK_MON_SUN"),
-      @SerializedName("LAST_WEEK_SUN_SAT")
-      VALUE_LAST_WEEK_SUN_SAT("LAST_WEEK_SUN_SAT"),
-      @SerializedName("LAST_YEAR")
-      VALUE_LAST_YEAR("LAST_YEAR"),
-      @SerializedName("LIFETIME")
-      VALUE_LIFETIME("LIFETIME"),
-      @SerializedName("THIS_MONTH")
-      VALUE_THIS_MONTH("THIS_MONTH"),
-      @SerializedName("THIS_QUARTER")
-      VALUE_THIS_QUARTER("THIS_QUARTER"),
-      @SerializedName("THIS_WEEK_MON_TODAY")
-      VALUE_THIS_WEEK_MON_TODAY("THIS_WEEK_MON_TODAY"),
-      @SerializedName("THIS_WEEK_SUN_TODAY")
-      VALUE_THIS_WEEK_SUN_TODAY("THIS_WEEK_SUN_TODAY"),
-      @SerializedName("THIS_YEAR")
-      VALUE_THIS_YEAR("THIS_YEAR"),
-      @SerializedName("TODAY")
-      VALUE_TODAY("TODAY"),
-      @SerializedName("YESTERDAY")
-      VALUE_YESTERDAY("YESTERDAY"),
-      ;
-
-      private String value;
-
-      private EnumDatePreset(String value) {
         this.value = value;
       }
 

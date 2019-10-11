@@ -54,37 +54,33 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdAccountMatchedSearchApplicationsEdgeData extends APINode {
-  @SerializedName("app_id")
-  private String mAppId = null;
-  @SerializedName("are_app_events_unavailable")
-  private Boolean mAreAppEventsUnavailable = null;
-  @SerializedName("icon_url")
-  private String mIconUrl = null;
-  @SerializedName("name")
-  private String mName = null;
-  @SerializedName("search_source_store")
-  private String mSearchSourceStore = null;
-  @SerializedName("store")
-  private String mStore = null;
-  @SerializedName("unique_id")
-  private String mUniqueId = null;
-  @SerializedName("url")
-  private String mUrl = null;
+public class AdAccountAdVolume extends APINode {
+  @SerializedName("actor_id")
+  private String mActorId = null;
+  @SerializedName("has_hit_total_live_ads_limit")
+  private Boolean mHasHitTotalLiveAdsLimit = null;
+  @SerializedName("live_ads_quota_left")
+  private Long mLiveAdsQuotaLeft = null;
+  @SerializedName("total_live_ads")
+  private Long mTotalLiveAds = null;
+  @SerializedName("total_live_ads_in_current_account")
+  private Long mTotalLiveAdsInCurrentAccount = null;
+  @SerializedName("total_live_ads_limit")
+  private Long mTotalLiveAdsLimit = null;
   protected static Gson gson = null;
 
-  public AdAccountMatchedSearchApplicationsEdgeData() {
+  public AdAccountAdVolume() {
   }
 
   public String getId() {
     return null;
   }
-  public static AdAccountMatchedSearchApplicationsEdgeData loadJSON(String json, APIContext context, String header) {
-    AdAccountMatchedSearchApplicationsEdgeData adAccountMatchedSearchApplicationsEdgeData = getGson().fromJson(json, AdAccountMatchedSearchApplicationsEdgeData.class);
+  public static AdAccountAdVolume loadJSON(String json, APIContext context, String header) {
+    AdAccountAdVolume adAccountAdVolume = getGson().fromJson(json, AdAccountAdVolume.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adAccountMatchedSearchApplicationsEdgeData.toString());
+      JsonElement o2 = parser.parse(adAccountAdVolume.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -94,14 +90,14 @@ public class AdAccountMatchedSearchApplicationsEdgeData extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    adAccountMatchedSearchApplicationsEdgeData.context = context;
-    adAccountMatchedSearchApplicationsEdgeData.rawValue = json;
-    adAccountMatchedSearchApplicationsEdgeData.header = header;
-    return adAccountMatchedSearchApplicationsEdgeData;
+    adAccountAdVolume.context = context;
+    adAccountAdVolume.rawValue = json;
+    adAccountAdVolume.header = header;
+    return adAccountAdVolume;
   }
 
-  public static APINodeList<AdAccountMatchedSearchApplicationsEdgeData> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdAccountMatchedSearchApplicationsEdgeData> adAccountMatchedSearchApplicationsEdgeDatas = new APINodeList<AdAccountMatchedSearchApplicationsEdgeData>(request, json, header);
+  public static APINodeList<AdAccountAdVolume> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdAccountAdVolume> adAccountAdVolumes = new APINodeList<AdAccountAdVolume>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -112,9 +108,9 @@ public class AdAccountMatchedSearchApplicationsEdgeData extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adAccountMatchedSearchApplicationsEdgeDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adAccountAdVolumes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adAccountMatchedSearchApplicationsEdgeDatas;
+        return adAccountAdVolumes;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -124,20 +120,20 @@ public class AdAccountMatchedSearchApplicationsEdgeData extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adAccountMatchedSearchApplicationsEdgeDatas.setCursors(before, after);
+                adAccountAdVolumes.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adAccountMatchedSearchApplicationsEdgeDatas.setPaging(previous, next);
+            adAccountAdVolumes.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adAccountMatchedSearchApplicationsEdgeDatas.setAppSecret(context.getAppSecretProof());
+              adAccountAdVolumes.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adAccountMatchedSearchApplicationsEdgeDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adAccountAdVolumes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -148,23 +144,23 @@ public class AdAccountMatchedSearchApplicationsEdgeData extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adAccountMatchedSearchApplicationsEdgeDatas.add(loadJSON(entry.getValue().toString(), context, header));
+                  adAccountAdVolumes.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adAccountMatchedSearchApplicationsEdgeDatas.add(loadJSON(obj.toString(), context, header));
+              adAccountAdVolumes.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adAccountMatchedSearchApplicationsEdgeDatas;
+          return adAccountAdVolumes;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adAccountMatchedSearchApplicationsEdgeDatas.add(loadJSON(entry.getValue().toString(), context, header));
+              adAccountAdVolumes.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adAccountMatchedSearchApplicationsEdgeDatas;
+          return adAccountAdVolumes;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -181,20 +177,20 @@ public class AdAccountMatchedSearchApplicationsEdgeData extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adAccountMatchedSearchApplicationsEdgeDatas.add(loadJSON(value.toString(), context, header));
+              adAccountAdVolumes.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adAccountMatchedSearchApplicationsEdgeDatas;
+            return adAccountAdVolumes;
           }
 
           // Sixth, check if it's pure JsonObject
-          adAccountMatchedSearchApplicationsEdgeDatas.clear();
-          adAccountMatchedSearchApplicationsEdgeDatas.add(loadJSON(json, context, header));
-          return adAccountMatchedSearchApplicationsEdgeDatas;
+          adAccountAdVolumes.clear();
+          adAccountAdVolumes.add(loadJSON(json, context, header));
+          return adAccountAdVolumes;
         }
       }
     } catch (Exception e) {
@@ -222,118 +218,61 @@ public class AdAccountMatchedSearchApplicationsEdgeData extends APINode {
   }
 
 
-  public String getFieldAppId() {
-    return mAppId;
+  public String getFieldActorId() {
+    return mActorId;
   }
 
-  public AdAccountMatchedSearchApplicationsEdgeData setFieldAppId(String value) {
-    this.mAppId = value;
+  public AdAccountAdVolume setFieldActorId(String value) {
+    this.mActorId = value;
     return this;
   }
 
-  public Boolean getFieldAreAppEventsUnavailable() {
-    return mAreAppEventsUnavailable;
+  public Boolean getFieldHasHitTotalLiveAdsLimit() {
+    return mHasHitTotalLiveAdsLimit;
   }
 
-  public AdAccountMatchedSearchApplicationsEdgeData setFieldAreAppEventsUnavailable(Boolean value) {
-    this.mAreAppEventsUnavailable = value;
+  public AdAccountAdVolume setFieldHasHitTotalLiveAdsLimit(Boolean value) {
+    this.mHasHitTotalLiveAdsLimit = value;
     return this;
   }
 
-  public String getFieldIconUrl() {
-    return mIconUrl;
+  public Long getFieldLiveAdsQuotaLeft() {
+    return mLiveAdsQuotaLeft;
   }
 
-  public AdAccountMatchedSearchApplicationsEdgeData setFieldIconUrl(String value) {
-    this.mIconUrl = value;
+  public AdAccountAdVolume setFieldLiveAdsQuotaLeft(Long value) {
+    this.mLiveAdsQuotaLeft = value;
     return this;
   }
 
-  public String getFieldName() {
-    return mName;
+  public Long getFieldTotalLiveAds() {
+    return mTotalLiveAds;
   }
 
-  public AdAccountMatchedSearchApplicationsEdgeData setFieldName(String value) {
-    this.mName = value;
+  public AdAccountAdVolume setFieldTotalLiveAds(Long value) {
+    this.mTotalLiveAds = value;
     return this;
   }
 
-  public String getFieldSearchSourceStore() {
-    return mSearchSourceStore;
+  public Long getFieldTotalLiveAdsInCurrentAccount() {
+    return mTotalLiveAdsInCurrentAccount;
   }
 
-  public AdAccountMatchedSearchApplicationsEdgeData setFieldSearchSourceStore(String value) {
-    this.mSearchSourceStore = value;
+  public AdAccountAdVolume setFieldTotalLiveAdsInCurrentAccount(Long value) {
+    this.mTotalLiveAdsInCurrentAccount = value;
     return this;
   }
 
-  public String getFieldStore() {
-    return mStore;
+  public Long getFieldTotalLiveAdsLimit() {
+    return mTotalLiveAdsLimit;
   }
 
-  public AdAccountMatchedSearchApplicationsEdgeData setFieldStore(String value) {
-    this.mStore = value;
-    return this;
-  }
-
-  public String getFieldUniqueId() {
-    return mUniqueId;
-  }
-
-  public AdAccountMatchedSearchApplicationsEdgeData setFieldUniqueId(String value) {
-    this.mUniqueId = value;
-    return this;
-  }
-
-  public String getFieldUrl() {
-    return mUrl;
-  }
-
-  public AdAccountMatchedSearchApplicationsEdgeData setFieldUrl(String value) {
-    this.mUrl = value;
+  public AdAccountAdVolume setFieldTotalLiveAdsLimit(Long value) {
+    this.mTotalLiveAdsLimit = value;
     return this;
   }
 
 
-
-  public static enum EnumAppStore {
-      @SerializedName("AMAZON_APP_STORE")
-      VALUE_AMAZON_APP_STORE("AMAZON_APP_STORE"),
-      @SerializedName("DOES_NOT_EXIST")
-      VALUE_DOES_NOT_EXIST("DOES_NOT_EXIST"),
-      @SerializedName("FB_ANDROID_STORE")
-      VALUE_FB_ANDROID_STORE("FB_ANDROID_STORE"),
-      @SerializedName("FB_CANVAS")
-      VALUE_FB_CANVAS("FB_CANVAS"),
-      @SerializedName("FB_GAMEROOM")
-      VALUE_FB_GAMEROOM("FB_GAMEROOM"),
-      @SerializedName("GOOGLE_PLAY")
-      VALUE_GOOGLE_PLAY("GOOGLE_PLAY"),
-      @SerializedName("INSTANT_GAME")
-      VALUE_INSTANT_GAME("INSTANT_GAME"),
-      @SerializedName("ITUNES")
-      VALUE_ITUNES("ITUNES"),
-      @SerializedName("ITUNES_IPAD")
-      VALUE_ITUNES_IPAD("ITUNES_IPAD"),
-      @SerializedName("ROKU_STORE")
-      VALUE_ROKU_STORE("ROKU_STORE"),
-      @SerializedName("WINDOWS_10_STORE")
-      VALUE_WINDOWS_10_STORE("WINDOWS_10_STORE"),
-      @SerializedName("WINDOWS_STORE")
-      VALUE_WINDOWS_STORE("WINDOWS_STORE"),
-      ;
-
-      private String value;
-
-      private EnumAppStore(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -349,24 +288,22 @@ public class AdAccountMatchedSearchApplicationsEdgeData extends APINode {
     return gson;
   }
 
-  public AdAccountMatchedSearchApplicationsEdgeData copyFrom(AdAccountMatchedSearchApplicationsEdgeData instance) {
-    this.mAppId = instance.mAppId;
-    this.mAreAppEventsUnavailable = instance.mAreAppEventsUnavailable;
-    this.mIconUrl = instance.mIconUrl;
-    this.mName = instance.mName;
-    this.mSearchSourceStore = instance.mSearchSourceStore;
-    this.mStore = instance.mStore;
-    this.mUniqueId = instance.mUniqueId;
-    this.mUrl = instance.mUrl;
+  public AdAccountAdVolume copyFrom(AdAccountAdVolume instance) {
+    this.mActorId = instance.mActorId;
+    this.mHasHitTotalLiveAdsLimit = instance.mHasHitTotalLiveAdsLimit;
+    this.mLiveAdsQuotaLeft = instance.mLiveAdsQuotaLeft;
+    this.mTotalLiveAds = instance.mTotalLiveAds;
+    this.mTotalLiveAdsInCurrentAccount = instance.mTotalLiveAdsInCurrentAccount;
+    this.mTotalLiveAdsLimit = instance.mTotalLiveAdsLimit;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdAccountMatchedSearchApplicationsEdgeData> getParser() {
-    return new APIRequest.ResponseParser<AdAccountMatchedSearchApplicationsEdgeData>() {
-      public APINodeList<AdAccountMatchedSearchApplicationsEdgeData> parseResponse(String response, APIContext context, APIRequest<AdAccountMatchedSearchApplicationsEdgeData> request, String header) throws MalformedResponseException {
-        return AdAccountMatchedSearchApplicationsEdgeData.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdAccountAdVolume> getParser() {
+    return new APIRequest.ResponseParser<AdAccountAdVolume>() {
+      public APINodeList<AdAccountAdVolume> parseResponse(String response, APIContext context, APIRequest<AdAccountAdVolume> request, String header) throws MalformedResponseException {
+        return AdAccountAdVolume.parseResponse(response, context, request, header);
       }
     };
   }

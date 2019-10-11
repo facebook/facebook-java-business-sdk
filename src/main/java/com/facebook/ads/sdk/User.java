@@ -406,6 +406,10 @@ public class User extends APINode {
     return new APIRequestGetAdStudies(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateAdStudy createAdStudy() {
+    return new APIRequestCreateAdStudy(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetAdAccounts getAdAccounts() {
     return new APIRequestGetAdAccounts(this.getPrefixedId().toString(), context);
   }
@@ -3182,6 +3186,218 @@ public class User extends APINode {
     }
   }
 
+  public static class APIRequestCreateAdStudy extends APIRequest<AdStudy> {
+
+    AdStudy lastResponse = null;
+    @Override
+    public AdStudy getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "cells",
+      "client_business",
+      "confidence_level",
+      "cooldown_start_time",
+      "description",
+      "end_time",
+      "name",
+      "objectives",
+      "observation_end_time",
+      "start_time",
+      "type",
+      "viewers",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AdStudy parseResponse(String response, String header) throws APIException {
+      return AdStudy.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public AdStudy execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdStudy execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdStudy> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdStudy> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, AdStudy>() {
+           public AdStudy apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateAdStudy.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateAdStudy(String nodeId, APIContext context) {
+      super(context, nodeId, "/ad_studies", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateAdStudy setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdStudy setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateAdStudy setCells (List<Object> cells) {
+      this.setParam("cells", cells);
+      return this;
+    }
+    public APIRequestCreateAdStudy setCells (String cells) {
+      this.setParam("cells", cells);
+      return this;
+    }
+
+    public APIRequestCreateAdStudy setClientBusiness (String clientBusiness) {
+      this.setParam("client_business", clientBusiness);
+      return this;
+    }
+
+    public APIRequestCreateAdStudy setConfidenceLevel (Double confidenceLevel) {
+      this.setParam("confidence_level", confidenceLevel);
+      return this;
+    }
+    public APIRequestCreateAdStudy setConfidenceLevel (String confidenceLevel) {
+      this.setParam("confidence_level", confidenceLevel);
+      return this;
+    }
+
+    public APIRequestCreateAdStudy setCooldownStartTime (Long cooldownStartTime) {
+      this.setParam("cooldown_start_time", cooldownStartTime);
+      return this;
+    }
+    public APIRequestCreateAdStudy setCooldownStartTime (String cooldownStartTime) {
+      this.setParam("cooldown_start_time", cooldownStartTime);
+      return this;
+    }
+
+    public APIRequestCreateAdStudy setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestCreateAdStudy setEndTime (Long endTime) {
+      this.setParam("end_time", endTime);
+      return this;
+    }
+    public APIRequestCreateAdStudy setEndTime (String endTime) {
+      this.setParam("end_time", endTime);
+      return this;
+    }
+
+    public APIRequestCreateAdStudy setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateAdStudy setObjectives (List<Object> objectives) {
+      this.setParam("objectives", objectives);
+      return this;
+    }
+    public APIRequestCreateAdStudy setObjectives (String objectives) {
+      this.setParam("objectives", objectives);
+      return this;
+    }
+
+    public APIRequestCreateAdStudy setObservationEndTime (Long observationEndTime) {
+      this.setParam("observation_end_time", observationEndTime);
+      return this;
+    }
+    public APIRequestCreateAdStudy setObservationEndTime (String observationEndTime) {
+      this.setParam("observation_end_time", observationEndTime);
+      return this;
+    }
+
+    public APIRequestCreateAdStudy setStartTime (Long startTime) {
+      this.setParam("start_time", startTime);
+      return this;
+    }
+    public APIRequestCreateAdStudy setStartTime (String startTime) {
+      this.setParam("start_time", startTime);
+      return this;
+    }
+
+    public APIRequestCreateAdStudy setType (AdStudy.EnumType type) {
+      this.setParam("type", type);
+      return this;
+    }
+    public APIRequestCreateAdStudy setType (String type) {
+      this.setParam("type", type);
+      return this;
+    }
+
+    public APIRequestCreateAdStudy setViewers (List<Long> viewers) {
+      this.setParam("viewers", viewers);
+      return this;
+    }
+    public APIRequestCreateAdStudy setViewers (String viewers) {
+      this.setParam("viewers", viewers);
+      return this;
+    }
+
+    public APIRequestCreateAdStudy requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateAdStudy requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdStudy requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateAdStudy requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdStudy requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdStudy requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetAdAccounts extends APIRequest<AdAccount> {
 
     APINodeList<AdAccount> lastResponse = null;
@@ -3252,6 +3468,7 @@ public class User extends APINode {
       "timezone_offset_hours_utc",
       "tos_accepted",
       "user_role",
+      "user_tasks",
       "user_tos_accepted",
     };
 
@@ -3755,6 +3972,13 @@ public class User extends APINode {
     }
     public APIRequestGetAdAccounts requestUserRoleField (boolean value) {
       this.requestField("user_role", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestUserTasksField () {
+      return this.requestUserTasksField(true);
+    }
+    public APIRequestGetAdAccounts requestUserTasksField (boolean value) {
+      this.requestField("user_tasks", value);
       return this;
     }
     public APIRequestGetAdAccounts requestUserTosAcceptedField () {
@@ -4534,6 +4758,7 @@ public class User extends APINode {
       "timezone_offset_hours_utc",
       "tos_accepted",
       "user_role",
+      "user_tasks",
       "user_tos_accepted",
     };
 
@@ -5037,6 +5262,13 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedAdAccounts requestUserRoleField (boolean value) {
       this.requestField("user_role", value);
+      return this;
+    }
+    public APIRequestGetAssignedAdAccounts requestUserTasksField () {
+      return this.requestUserTasksField(true);
+    }
+    public APIRequestGetAssignedAdAccounts requestUserTasksField (boolean value) {
+      this.requestField("user_tasks", value);
       return this;
     }
     public APIRequestGetAssignedAdAccounts requestUserTosAcceptedField () {
@@ -20070,6 +20302,7 @@ public class User extends APINode {
       "timezone_offset_hours_utc",
       "tos_accepted",
       "user_role",
+      "user_tasks",
       "user_tos_accepted",
     };
 
@@ -20573,6 +20806,13 @@ public class User extends APINode {
     }
     public APIRequestGetPersonalAdAccounts requestUserRoleField (boolean value) {
       this.requestField("user_role", value);
+      return this;
+    }
+    public APIRequestGetPersonalAdAccounts requestUserTasksField () {
+      return this.requestUserTasksField(true);
+    }
+    public APIRequestGetPersonalAdAccounts requestUserTasksField (boolean value) {
+      this.requestField("user_tasks", value);
       return this;
     }
     public APIRequestGetPersonalAdAccounts requestUserTosAcceptedField () {

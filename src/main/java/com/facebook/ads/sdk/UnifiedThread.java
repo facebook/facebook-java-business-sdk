@@ -1371,6 +1371,8 @@ public class UnifiedThread extends APINode {
   }
 
   public static enum EnumMontageSupportedFeatures {
+      @SerializedName("AUTHOR_IN_PRODUCER_QE_FOR_SMART_REPLIES")
+      VALUE_AUTHOR_IN_PRODUCER_QE_FOR_SMART_REPLIES("AUTHOR_IN_PRODUCER_QE_FOR_SMART_REPLIES"),
       @SerializedName("LIGHTWEIGHT_REPLY")
       VALUE_LIGHTWEIGHT_REPLY("LIGHTWEIGHT_REPLY"),
       @SerializedName("SHOW_STORY_IN_MESSENGER_THREAD")

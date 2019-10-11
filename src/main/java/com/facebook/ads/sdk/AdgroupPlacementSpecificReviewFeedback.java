@@ -77,6 +77,8 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
   private Map<String, String> mInstagram = null;
   @SerializedName("instagram_shop")
   private Map<String, String> mInstagramShop = null;
+  @SerializedName("lead_gen_honeypot")
+  private Map<String, String> mLeadGenHoneypot = null;
   @SerializedName("marketplace")
   private Map<String, String> mMarketplace = null;
   @SerializedName("marketplace_home_rentals")
@@ -355,6 +357,15 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
     return this;
   }
 
+  public Map<String, String> getFieldLeadGenHoneypot() {
+    return mLeadGenHoneypot;
+  }
+
+  public AdgroupPlacementSpecificReviewFeedback setFieldLeadGenHoneypot(Map<String, String> value) {
+    this.mLeadGenHoneypot = value;
+    return this;
+  }
+
   public Map<String, String> getFieldMarketplace() {
     return mMarketplace;
   }
@@ -509,6 +520,7 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
     this.mFacebook = instance.mFacebook;
     this.mInstagram = instance.mInstagram;
     this.mInstagramShop = instance.mInstagramShop;
+    this.mLeadGenHoneypot = instance.mLeadGenHoneypot;
     this.mMarketplace = instance.mMarketplace;
     this.mMarketplaceHomeRentals = instance.mMarketplaceHomeRentals;
     this.mMarketplaceHomeSales = instance.mMarketplaceHomeSales;

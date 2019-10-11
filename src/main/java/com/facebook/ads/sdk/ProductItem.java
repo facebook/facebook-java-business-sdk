@@ -2012,6 +2012,12 @@ public class ProductItem extends APINode {
       VALUE_REFURBISHED("refurbished"),
       @SerializedName("used")
       VALUE_USED("used"),
+      @SerializedName("used_fair")
+      VALUE_USED_FAIR("used_fair"),
+      @SerializedName("used_good")
+      VALUE_USED_GOOD("used_good"),
+      @SerializedName("used_like_new")
+      VALUE_USED_LIKE_NEW("used_like_new"),
       ;
 
       private String value;

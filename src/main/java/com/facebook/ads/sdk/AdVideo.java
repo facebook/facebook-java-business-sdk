@@ -7406,6 +7406,8 @@ public class AdVideo extends APINode {
       VALUE_DCO_AUTOGEN_VIDEO("DCO_AUTOGEN_VIDEO"),
       @SerializedName("DCO_TRIMMED_VIDEO")
       VALUE_DCO_TRIMMED_VIDEO("DCO_TRIMMED_VIDEO"),
+      @SerializedName("DIM_SUM")
+      VALUE_DIM_SUM("DIM_SUM"),
       @SerializedName("DIRECTED_POST_ATTACHMENT")
       VALUE_DIRECTED_POST_ATTACHMENT("DIRECTED_POST_ATTACHMENT"),
       @SerializedName("DIRECT_INBOX")

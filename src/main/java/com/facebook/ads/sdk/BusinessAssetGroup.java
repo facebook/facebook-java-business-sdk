@@ -985,6 +985,7 @@ public class BusinessAssetGroup extends APINode {
       "timezone_offset_hours_utc",
       "tos_accepted",
       "user_role",
+      "user_tasks",
       "user_tos_accepted",
     };
 
@@ -1488,6 +1489,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedAdAccounts requestUserRoleField (boolean value) {
       this.requestField("user_role", value);
+      return this;
+    }
+    public APIRequestGetContainedAdAccounts requestUserTasksField () {
+      return this.requestUserTasksField(true);
+    }
+    public APIRequestGetContainedAdAccounts requestUserTasksField (boolean value) {
+      this.requestField("user_tasks", value);
       return this;
     }
     public APIRequestGetContainedAdAccounts requestUserTosAcceptedField () {
@@ -6653,6 +6661,8 @@ public class BusinessAssetGroup extends APINode {
       VALUE_MANAGE("MANAGE"),
       @SerializedName("UPLOAD")
       VALUE_UPLOAD("UPLOAD"),
+      @SerializedName("VIEW")
+      VALUE_VIEW("VIEW"),
       ;
 
       private String value;
