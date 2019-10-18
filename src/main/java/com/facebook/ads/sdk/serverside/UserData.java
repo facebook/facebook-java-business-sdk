@@ -6,9 +6,8 @@
  * services and APIs provided by Facebook.
  *
  * <p>As with any software that integrates with the Facebook platform, your use of this software is
- * subject to the Facebook Developer Principles and Policies
- * [http://developers.facebook.com/policy/]. This copyright notice shall be included in all copies
- * or substantial portions of the software.
+ * subject to the Facebook Developer Principles and Policies [http://developers.facebook.com/policy/].
+ * This copyright notice shall be included in all copies or substantial portions of the software.
  *
  * <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
  * BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -93,6 +92,8 @@ public class UserData {
    *
    * <p>Example: joe@eg.com
    *
+   * @param email an email address
+   *
    * @return UserData
    */
   public UserData email(String email) {
@@ -113,6 +114,8 @@ public class UserData {
    * Set an email address, in lowercase.
    *
    * <p>Example: joe@eg.com
+   *
+   * @param email an email address
    */
   public void setEmail(String email) {
     this.email = email;
@@ -122,6 +125,8 @@ public class UserData {
    * Set a phone number. Include only digits with countryCode code, area code, and number.
    *
    * <p>Example: 16505551212
+   *
+   * @param phone a phone number
    *
    * @return UserData
    */
@@ -143,6 +148,8 @@ public class UserData {
    * Set a phone number. Include only digits with countryCode code, area code, and number.
    *
    * <p>Example: 16505551212
+   *
+   * @param phone a phone number
    */
   public void setPhone(String phone) {
     this.phone = phone;
@@ -150,6 +157,8 @@ public class UserData {
 
   /**
    * Gender. Male or Female.
+   *
+   * @param gender Male or Female.
    *
    * @return UserData
    */
@@ -167,7 +176,11 @@ public class UserData {
     return gender;
   }
 
-  /** Gender, Male or Female. */
+  /**
+   * Gender, Male or Female.
+   *
+   * @param gender Male or Female.
+   */
   public void setGender(GenderEnum gender) {
     this.gender = gender;
   }
@@ -176,6 +189,8 @@ public class UserData {
    * Set a date of birth given as year, month, and day.
    *
    * <p>Example: 19971226 for December 26, 1997.
+   *
+   * @param dateOfBirth a date of birth given as year, month, and day.
    *
    * @return UserData
    */
@@ -197,6 +212,8 @@ public class UserData {
    * A date of birth given as year, month, and day.
    *
    * <p>Example: 19971226 for December 26, 1997.
+   *
+   * @param dateOfBirth a date of birth given as year, month, and day.
    */
   public void setDateOfBirth(String dateOfBirth) {
     this.dateOfBirth = dateOfBirth;
@@ -207,10 +224,12 @@ public class UserData {
    *
    * <p>Example: smith
    *
+   * @param lastName last name
+   *
    * @return UserData
    */
-  public UserData ln(String ln) {
-    this.lastName = ln;
+  public UserData lastName(String lastName) {
+    this.lastName = lastName;
     return this;
   }
 
@@ -227,6 +246,8 @@ public class UserData {
    * Set a last name in lowercase.
    *
    * <p>Example: smith
+   *
+   * @param lastName last name
    */
   public void setLastName(String lastName) {
     this.lastName = lastName;
@@ -236,6 +257,8 @@ public class UserData {
    * Set a first name in lowercase.
    *
    * <p>Example: joe
+   *
+   * @param firstName first name
    *
    * @return firstName
    */
@@ -257,6 +280,8 @@ public class UserData {
    * Set a first name in lowercase.
    *
    * <p>Example: joe
+   *
+   * @param firstName first name
    */
   public void setFirstName(String firstName) {
     this.firstName = firstName;
@@ -266,6 +291,8 @@ public class UserData {
    * Set a city in lower-case without spaces or punctuation.
    *
    * <p>Example: menlopark
+   *
+   * @param city city
    *
    * @return UserData
    */
@@ -282,10 +309,13 @@ public class UserData {
   public String getCity() {
     return city;
   }
+
   /**
    * Set a city in lower-case without spaces or punctuation.
    *
    * <p>Example: menlopark
+   *
+   * @param city city
    */
   public void setCity(String city) {
     this.city = city;
@@ -295,6 +325,8 @@ public class UserData {
    * Set a two-letter state code in lowercase.
    *
    * <p>Example: ca
+   *
+   * @param state two-letter state code
    *
    * @return UserData
    */
@@ -316,6 +348,8 @@ public class UserData {
    * Set a two-letter state code in lowercase.
    *
    * <p>Example: ca
+   *
+   * @param state two-letter state code
    */
   public void setState(String state) {
     this.state = state;
@@ -325,6 +359,8 @@ public class UserData {
    * Set a five-digit zip code.
    *
    * <p>Example: 94035
+   *
+   * @param zipcode five-digit zip code
    *
    * @return UserData
    */
@@ -346,25 +382,29 @@ public class UserData {
    * Set a five-digit zip code.
    *
    * <p>Example: 94035
+   *
+   * @param zipcode five-digit zip code
    */
   public void setZipcode(String zipcode) {
     this.zipcode = zipcode;
   }
 
   /**
-   * Set a two-letter countryCode code in lowercase.
+   * Set a two-letter country code in lowercase.
    *
    * <p>Example: us
    *
-   * @return countryCode
+   * @param countryCode two-letter country code
+   *
+   * @return UserData
    */
-  public UserData country(String country) {
-    this.countryCode = country;
+  public UserData countryCode(String countryCode) {
+    this.countryCode = countryCode;
     return this;
   }
 
   /**
-   * A two-letter countryCode code in lowercase.
+   * A two-letter country code in lowercase.
    *
    * <p>Example: us
    *
@@ -375,9 +415,11 @@ public class UserData {
   }
 
   /**
-   * Set a two-letter countryCode code in lowercase.
+   * Set a two-letter country code in lowercase.
    *
    * <p>Example: us
+   *
+   * @param countryCode two-letter country code
    */
   public void setCountryCode(String countryCode) {
     this.countryCode = countryCode;
@@ -388,6 +430,8 @@ public class UserData {
    * cookie IDs. In the Offline Conversions API, this is known as extern_id. For more information,
    * see Offline Conversions, Providing External IDs. If External ID is being sent via other
    * channels, then it should be sent in the same format via the server-side API.
+   *
+   * @param externalId unique ID from the advertiser
    *
    * @return UserData
    */
@@ -413,6 +457,8 @@ public class UserData {
    * cookie IDs. In the Offline Conversions API, this is known as extern_id. For more information,
    * see Offline Conversions, Providing External IDs. If External ID is being sent via other
    * channels, then it should be sent in the same format via the server-side API.
+   *
+   * @param externalId unique ID from the advertiser
    */
   public void setExternalId(String externalId) {
     this.externalId = externalId;
@@ -420,6 +466,8 @@ public class UserData {
 
   /**
    * Set IP address of the browser corresponding to the event.
+   *
+   * @param clientIpAddress IP address of the browser corresponding to the event
    *
    * @return UserData
    */
@@ -437,13 +485,19 @@ public class UserData {
     return clientIpAddress;
   }
 
-  /** Set IP address of the browser corresponding to the event. */
+  /**
+   * Set IP address of the browser corresponding to the event.
+   *
+   * @param clientIpAddress IP address of the browser corresponding to the event
+   */
   public void setClientIpAddress(String clientIpAddress) {
     this.clientIpAddress = clientIpAddress;
   }
 
   /**
    * Set user agent for the browser corresponding to the event.
+   *
+   * @param clientUserAgent user agent for the browser corresponding to the event
    *
    * @return UserData
    */
@@ -461,7 +515,11 @@ public class UserData {
     return clientUserAgent;
   }
 
-  /** Set user agent for the browser corresponding to the event. */
+  /**
+   * Set user agent for the browser corresponding to the event.
+   *
+   * @param clientUserAgent user agent for the browser corresponding to the event
+   */
   public void setClientUserAgent(String clientUserAgent) {
     this.clientUserAgent = clientUserAgent;
   }
@@ -471,6 +529,8 @@ public class UserData {
    * fbc and fbp Parameters for how to get this value
    * (https://developers.facebook.com/docs/marketing-api/facebook-pixel/server-side-api/parameters#fbc),
    * or generate this value from a fbclid query parameter.
+   *
+   * @param fbc Facebook click ID
    *
    * @return UserData
    */
@@ -496,6 +556,8 @@ public class UserData {
    * fbc and fbp Parameters for how to get this value
    * (https://developers.facebook.com/docs/marketing-api/facebook-pixel/server-side-api/parameters#fbc),
    * or generate this value from a fbclid query parameter.
+   *
+   * @param fbc Facebook click ID
    */
   public void setFbc(String fbc) {
     this.fbc = fbc;
@@ -506,6 +568,8 @@ public class UserData {
    * fbc and fbp Parameters for how to get this value
    * (https://developers.facebook.com/docs/marketing-api/facebook-pixel/server-side-api/parameters#fbc),
    * or generate this value from a fbclid query parameter.
+   *
+   * @param fbp Facebook browser ID
    *
    * @return UserData
    */
@@ -530,6 +594,8 @@ public class UserData {
    * Set Facebook browser ID value stored in the _fbp browser cookie under your domain. See Managing
    * fbc and fbp Parameters for how to get this value
    * (https://developers.facebook.com/docs/marketing-api/facebook-pixel/server-side-api/parameters#fbc)
+   *
+   * @param fbp Facebook browser ID
    */
   public void setFbp(String fbp) {
     this.fbp = fbp;
@@ -538,6 +604,8 @@ public class UserData {
   /**
    * Set subscription ID for the user in this transaction. This is similar to the order ID for an
    * individual product.
+   *
+   * @param subscriptionId subscription ID for the user in this transaction
    *
    * @return UserData
    */
@@ -559,6 +627,8 @@ public class UserData {
   /**
    * Set subscription ID for the user in this transaction. This is similar to the order ID for an
    * individual product.
+   *
+   * @param subscriptionId subscription ID for the user in this transaction
    */
   public void setSubscriptionId(String subscriptionId) {
     this.subscriptionId = subscriptionId;

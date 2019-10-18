@@ -6,9 +6,8 @@
  * services and APIs provided by Facebook.
  *
  * <p>As with any software that integrates with the Facebook platform, your use of this software is
- * subject to the Facebook Developer Principles and Policies
- * [http://developers.facebook.com/policy/]. This copyright notice shall be included in all copies
- * or substantial portions of the software.
+ * subject to the Facebook Developer Principles and Policies [http://developers.facebook.com/policy/].
+ * This copyright notice shall be included in all copies or substantial portions of the software.
  *
  * <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
  * BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,6 +28,7 @@ import java.util.Objects;
  * optimization.
  */
 public class CustomData {
+
   @SerializedName("value")
   private BigDecimal value = null;
 
@@ -66,6 +66,7 @@ public class CustomData {
    * Set a numeric value associated with this event.
    * This could be a monetary value or a value in some other metric.
    * <p> Example: 142.54.
+   * @param value a numeric value associated with this event
    * @return CustomData
    */
   public CustomData value(BigDecimal value) {
@@ -89,6 +90,7 @@ public class CustomData {
    * This could be a monetary value or a value in some other metric.
    * <p> Example: 142.54.
    *
+   * @param value a numeric value associated with this event
    */
   public void setValue(BigDecimal value) {
     this.value = value;
@@ -98,6 +100,7 @@ public class CustomData {
    * Set currency code for the value specified, if applicable.
    * Currency must be a valid ISO 4217 three digit currency code.
    *
+   * @param currency currency code for the value specified
    * @return CustomData
    */
   public CustomData currency(String currency) {
@@ -119,6 +122,7 @@ public class CustomData {
    * Set currency code for the value specified, if applicable.
    * Currency must be a valid ISO 4217 three digit currency code.
    *
+   * @param currency currency code for the value specified
    */
   public void setCurrency(String currency) {
     this.currency = currency;
@@ -128,6 +132,8 @@ public class CustomData {
    * Set name of the page or product associated with the event.
    *
    * <p> Example: lettuce.
+   *
+   * @param contentName name of the page or product associated with the event
    *
    * @return CustomData
    */
@@ -152,6 +158,7 @@ public class CustomData {
    *
    * <p> Example: lettuce.
    *
+   * @param contentName name of the page or product associated with the event
    */
   public void setContentName(String contentName) {
     this.contentName = contentName;
@@ -161,6 +168,8 @@ public class CustomData {
    * Set category of the content associated with the event.
    *
    * <p>Example: grocery
+   *
+   * @param contentCategory category of the content associated with the event.
    *
    * @return CustomData
    */
@@ -184,6 +193,8 @@ public class CustomData {
    * Set category of the content associated with the event.
    *
    * <p>Example: grocery
+   *
+   * @param contentCategory category of the content associated with the event.
    */
   public void setContentCategory(String contentCategory) {
     this.contentCategory = contentCategory;
@@ -193,6 +204,8 @@ public class CustomData {
    * Set content IDs associated with the event, such as product SKUs for items in an AddToCart
    * event: [ABC123, XYZ789]. If content_type is a product, then your content IDs must be an array
    * with a single string value. Otherwise, this array can contain any number of string values.
+   *
+   * @param contentIds content IDs associated with the event
    *
    * @return CustomData
    */
@@ -216,6 +229,8 @@ public class CustomData {
    * Set content IDs associated with the event, such as product SKUs for items in an AddToCart
    * event: [ABC123, XYZ789]. If content_type is a product, then your content IDs must be an array
    * with a single string value. Otherwise, this array can contain any number of string values.
+   *
+   * @param contentIds content IDs associated with the event
    */
   public void setContentIds(List<String> contentIds) {
     this.contentIds = contentIds;
@@ -226,6 +241,8 @@ public class CustomData {
    * information about the products. id, quantity, and item_price are available fields.
    *
    * <p>Example: [{id:ABC123,quantity :2,item_price:5.99}, {id:XYZ789,quantity:2, item_price:9.99}]
+   *
+   * @param contents list of Content objects that contain the products associated with the event
    *
    * @return CustomData
    */
@@ -239,6 +256,8 @@ public class CustomData {
    * about the products. id, quantity, and item_price are available fields.
    *
    * <p>Example: {id:ABC123,quantity :2,item_price:5.99}
+   *
+   * @param content Content objects that contain the product associated with the event
    *
    * @return CustomData
    */
@@ -267,6 +286,8 @@ public class CustomData {
    * information about the products. id, quantity, and item_price are available fields.
    *
    * <p>Example: [{id:ABC123,quantity :2,item_price:5.99}, {id:XYZ789,quantity:2, item_price:9.99}]
+   *
+   * @param contents list of Content objects that contain the products associated with the event
    */
   public void setContents(List<Content> contents) {
     this.contents = contents;
@@ -277,6 +298,7 @@ public class CustomData {
    * content_ids or contents represent products. Set to product_group if the keys you send in
    * content_ids represent product groups.
    *
+   * @param contentType product or product_group
    * @return CustomData
    */
   public CustomData contentType(String contentType) {
@@ -299,6 +321,8 @@ public class CustomData {
    * Set a String equal to either product or product_group. Set to product if the keys you send
    * content_ids or contents represent products. Set to product_group if the keys you send in
    * content_ids represent product groups.
+   *
+   * @param contentType product or product_group
    */
   public void setContentType(String contentType) {
     this.contentType = contentType;
@@ -308,6 +332,8 @@ public class CustomData {
    * Set order ID for this transaction as a String.
    *
    * <p>Example: order1234.
+   *
+   * @param orderId order ID for this transaction
    *
    * @return CustomData
    */
@@ -332,7 +358,7 @@ public class CustomData {
    *
    * <p>Example: order1234.
    *
-   * @return CustomData
+   * @param orderId order ID for this transaction
    */
   public void setOrderId(String orderId) {
     this.orderId = orderId;
@@ -342,6 +368,8 @@ public class CustomData {
    * Set predicted lifetime value of a conversion event, as a String.
    *
    * <p>Example: 432.12.
+   *
+   * @param predictedLtv predicted lifetime value of a conversion event
    *
    * @return CustomData
    */
@@ -365,14 +393,18 @@ public class CustomData {
    * Set predicted lifetime value of a conversion event, as a String.
    *
    * <p>Example: 432.12.
+   *
+   * @param predictedLtv predicted lifetime value of a conversion event
    */
   public void setPredictedLtv(BigDecimal predictedLtv) {
     this.predictedLtv = predictedLtv;
   }
 
   /**
-   * Use only with InitiateCheckout events. Set number of items that a user tries to buy during
-   * checkout.
+   * Set number of items that a user tries to buy during checkout.
+   * Use only with InitiateCheckout events.
+   *
+   * @param numItems number of items that a user tries to buy during checkout
    *
    * @return CustomData
    */
@@ -382,8 +414,8 @@ public class CustomData {
   }
 
   /**
-   * Use only with InitiateCheckout events. The number of items that a user tries to buy during
-   * checkout.
+   * The number of items that a user tries to buy during checkout.
+   * Use only with InitiateCheckout events.
    *
    * @return numItems
    */
@@ -392,8 +424,10 @@ public class CustomData {
   }
 
   /**
-   * Use only with InitiateCheckout events. Set number of items that a user tries to buy during
-   * checkout.
+   * Set number of items that a user tries to buy during checkout.
+   * Use only with InitiateCheckout events.
+   *
+   * @param numItems number of items that a user tries to buy during checkout
    */
   public void setNumItems(String numItems) {
     this.numItems = numItems;
@@ -402,6 +436,8 @@ public class CustomData {
   /**
    * Set status of the registration event, as a String.
    * Use only with CompleteRegistration events.
+   *
+   * @param status status of the registration event
    *
    * @return CustomData
    */
@@ -423,6 +459,8 @@ public class CustomData {
   /**
    * Set status of the registration event, as a String.
    * Use only with CompleteRegistration events.
+   *
+   * @param status status of the registration event
    */
   public void setStatus(String status) {
     this.status = status;

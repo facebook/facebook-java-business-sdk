@@ -37,6 +37,12 @@ public class EventResponse {
   @SerializedName("fbtrace_id")
   private String fbTraceId = null;
 
+  /**
+   * Set number of events received.
+   *
+   * @param eventsReceived number of events received
+   * @return EventResponse
+   */
   public EventResponse eventsReceived(Integer eventsReceived) {
     this.eventsReceived = eventsReceived;
     return this;
@@ -53,22 +59,30 @@ public class EventResponse {
 
   /**
    * Set number of events received.
+   *
+   * @param eventsReceived number of events received
    */
   public void setEventsReceived(Integer eventsReceived) {
     this.eventsReceived = eventsReceived;
   }
 
   /**
-  * Set response messages.
-  */
+   * Set response messages.
+   *
+   * @param messages response messages
+   * @return EventResponse
+   */
   public EventResponse messages(List<String> messages) {
     this.messages = messages;
     return this;
   }
 
   /**
-  * Add response message.
-  */
+   * Add response message.
+   *
+   * @param messagesItem response messages
+   * @return EventResponse
+   */
   public EventResponse addMessagesItem(String messagesItem) {
     if (this.messages == null) {
       this.messages = new ArrayList<String>();
@@ -78,7 +92,7 @@ public class EventResponse {
   }
 
   /**
-   * Get messages
+   * Get response messages
    *
    * @return messages
    **/
@@ -87,7 +101,9 @@ public class EventResponse {
   }
 
   /**
-   * Set messages.
+   * Set response messages.
+   *
+   * @param messages response messages
    */
   public void setMessages(List<String> messages) {
     this.messages = messages;
@@ -104,6 +120,8 @@ public class EventResponse {
 
   /**
    * Set Facebook trace id
+   *
+   * @param fbTraceId Facebook trace id
    */
   public void setFbTraceId(String fbTraceId) {
     this.fbTraceId = fbTraceId;
@@ -111,6 +129,8 @@ public class EventResponse {
 
   /**
    * Set Facebook trace id
+   *
+   * @param fbTraceId Facebook trace id
    * @return EventResponse
    */
   public EventResponse fbTraceId(String fbTraceId) {
@@ -151,8 +171,8 @@ public class EventResponse {
   }
 
   /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
+   * Convert the given object to string with each line indented by 4 spaces (except the first
+   * line).
    */
   private String toIndentedString(Object o) {
     if (o == null) {

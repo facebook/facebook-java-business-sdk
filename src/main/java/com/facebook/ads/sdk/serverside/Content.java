@@ -6,9 +6,8 @@
  * services and APIs provided by Facebook.
  *
  * <p>As with any software that integrates with the Facebook platform, your use of this software is
- * subject to the Facebook Developer Principles and Policies
- * [http://developers.facebook.com/policy/]. This copyright notice shall be included in all copies
- * or substantial portions of the software.
+ * subject to the Facebook Developer Principles and Policies [http://developers.facebook.com/policy/].
+ * This copyright notice shall be included in all copies or substantial portions of the software.
  *
  * <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
  * BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,6 +40,7 @@ public class Content {
 
   /**
    * Set Product Id
+   * @param productId product Id
    */
   public void setProductId(String productId) {
     this.productId = productId;
@@ -48,6 +48,7 @@ public class Content {
 
   /**
    * Set Product Id
+   * @param productId product Id
    * @return Content
    */
   public Content productId(String productId) {
@@ -57,6 +58,7 @@ public class Content {
 
   /**
    * Get number of product.
+   * @return quantity
    */
   public long getQuantity() {
     return quantity;
@@ -64,6 +66,7 @@ public class Content {
 
   /**
    * Set number of product.
+   * @param quantity number of items
    */
   public void setQuantity(long quantity) {
     this.quantity = quantity;
@@ -71,6 +74,7 @@ public class Content {
 
   /**
    * Set number of product.
+   * @param quantity number of items
    * @return Content
    */
   public Content quantity(long quantity) {
@@ -80,6 +84,7 @@ public class Content {
 
   /**
    * Get Item Price.
+   * @return item price
    */
   public float getItemPrice() {
     return itemPrice;
@@ -87,6 +92,7 @@ public class Content {
 
   /**
    * Set Item Price.
+   * @param itemPrice single item price
    */
   public void setItemPrice(float itemPrice) {
     this.itemPrice = itemPrice;
@@ -94,6 +100,7 @@ public class Content {
 
   /**
    * Get Item Price.
+   * @param itemPrice single item price
    * @return Content
    */
   public Content itemPrice(float itemPrice) {

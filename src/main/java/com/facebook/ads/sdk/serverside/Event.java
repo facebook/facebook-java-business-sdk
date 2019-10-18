@@ -6,9 +6,8 @@
  * services and APIs provided by Facebook.
  *
  * <p>As with any software that integrates with the Facebook platform, your use of this software is
- * subject to the Facebook Developer Principles and Policies
- * [http://developers.facebook.com/policy/]. This copyright notice shall be included in all copies
- * or substantial portions of the software.
+ * subject to the Facebook Developer Principles and Policies [http://developers.facebook.com/policy/].
+ * This copyright notice shall be included in all copies or substantial portions of the software.
  *
  * <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
  * BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -48,6 +47,7 @@ public class Event {
   /**
    * Set Facebook pixel Standard Event or Custom Event name.
    *
+   * @param eventName Facebook pixel Standard Event or Custom Event name.
    * @return Event
    */
   public Event eventName(String eventName) {
@@ -64,13 +64,19 @@ public class Event {
     return eventName;
   }
 
-  /** Set Facebook pixel Standard Event or Custom Event name. */
+  /**
+   * Set Facebook pixel Standard Event or Custom Event name.
+   *
+   * @param eventName Facebook pixel Standard Event or Custom Event name.
+   */
   public void setEventName(String eventName) {
     this.eventName = eventName;
   }
+
   /**
    * Set Unix timestamp in seconds indicating when the actual event occurred.
    *
+   * @param eventTime Unix timestamp in seconds indicating when the actual event occurred
    * @return Event
    */
   public Event eventTime(Long eventTime) {
@@ -86,12 +92,20 @@ public class Event {
   public Long getEventTime() {
     return eventTime;
   }
-  /** Set Unix timestamp in seconds indicating when the actual event occurred. */
+
+  /**
+   * Set Unix timestamp in seconds indicating when the actual event occurred.
+   *
+   * @param eventTime Unix timestamp in seconds indicating when the actual event occurred
+   */
   public void setEventTime(Long eventTime) {
     this.eventTime = eventTime;
   }
+
   /**
    * Set browser URL where the event happened.
+   *
+   * @param eventSourceUrl rowser URL where the event happened
    *
    * @return Event
    */
@@ -109,7 +123,11 @@ public class Event {
     return eventSourceUrl;
   }
 
-  /** Set browser URL where the event happened. */
+  /**
+   * Set browser URL where the event happened.
+   *
+   * @param eventSourceUrl rowser URL where the event happened
+   */
   public void setEventSourceUrl(String eventSourceUrl) {
     this.eventSourceUrl = eventSourceUrl;
   }
@@ -118,6 +136,7 @@ public class Event {
    * Set flag that indicates we should not use this event for ads delivery optimization. If set to
    * true, we only use the event for attribution.
    *
+   * @param optOut indicates we should not use this event for ads delivery optimization
    * @return Event
    */
   public Event optOut(Boolean optOut) {
@@ -138,6 +157,8 @@ public class Event {
   /**
    * Set flag that indicates we should not use this event for ads delivery optimization. If set to
    * true, we only use the event for attribution.
+   *
+   * @param optOut indicates we should not use this event for ads delivery optimization
    */
   public void setOptOut(Boolean optOut) {
     this.optOut = optOut;
@@ -148,6 +169,8 @@ public class Event {
    * the same event sent from both server and browser. The ID sent by server and browser for a given
    * event should match. IDs cannot be reused elsewhere in your app, even with a different
    * event_name or event_time.
+   *
+   * @param eventId ID can be any string chosen by the advertiser
    *
    * @return Event
    */
@@ -173,6 +196,8 @@ public class Event {
    * the same event sent from both server and browser. The ID sent by server and browser for a given
    * event should match. IDs cannot be reused elsewhere in your app, even with a different
    * event_name or event_time.
+   *
+   * @param eventId ID can be any string chosen by the advertiser
    */
   public void setEventId(String eventId) {
     this.eventId = eventId;
@@ -180,6 +205,8 @@ public class Event {
 
   /**
    * Set UserData object that contains user data
+   *
+   * @param userData object that contains user data
    *
    * @return Event
    */
@@ -197,13 +224,19 @@ public class Event {
     return userData;
   }
 
-  /** Set UserData object that contains user data */
+  /**
+   * Set UserData object that contains user data
+   *
+   * @param userData object that contains user data
+   */
   public void setUserData(UserData userData) {
     this.userData = userData;
   }
 
   /**
    * Set customData object that includes additional business data about the event.
+   *
+   * @param customData object that includes additional business data about the event.
    *
    * @return Event
    */
@@ -221,7 +254,11 @@ public class Event {
     return customData;
   }
 
-  /** Set customData object that includes additional business data about the event. */
+  /**
+   * Set customData object that includes additional business data about the event.
+   *
+   * @param customData object that includes additional business data about the event.
+   */
   public void setCustomData(CustomData customData) {
     this.customData = customData;
   }

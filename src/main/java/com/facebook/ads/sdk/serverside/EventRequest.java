@@ -6,9 +6,8 @@
  * services and APIs provided by Facebook.
  *
  * <p>As with any software that integrates with the Facebook platform, your use of this software is
- * subject to the Facebook Developer Principles and Policies
- * [http://developers.facebook.com/policy/]. This copyright notice shall be included in all copies
- * or substantial portions of the software.
+ * subject to the Facebook Developer Principles and Policies [http://developers.facebook.com/policy/].
+ * This copyright notice shall be included in all copies or substantial portions of the software.
  *
  * <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
  * BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -70,6 +69,8 @@ public class EventRequest {
   /**
    * Set a list of Server Event objects
    *
+   * @param data list of Server Event
+   *
    * @return EventRequest
    */
   public EventRequest data(List<Event> data) {
@@ -80,7 +81,9 @@ public class EventRequest {
   /**
    * Add a Server Event object
    *
-   * @return data
+   * @param dataItem Server Event
+   *
+   * @return EventRequest
    */
   public EventRequest addDataItem(Event dataItem) {
     this.data.add(dataItem);
@@ -96,7 +99,11 @@ public class EventRequest {
     return data;
   }
 
-  /** Set a list of Server Event objects */
+  /**
+   * Set a list of Server Event objects
+   *
+   * @param data list of Server Event
+   */
   public void setData(List<Event> data) {
     this.data = data;
   }
@@ -107,6 +114,8 @@ public class EventRequest {
    * Tool
    * (https://developers.facebook.com/docs/marketing-api/facebook-pixel/server-side-api/using-the-api#testEvents)
    * for an example.
+   *
+   * @param testEventCode ode used to verify that your server events
    *
    * @return EventRequest
    */
@@ -133,6 +142,8 @@ public class EventRequest {
    * Tool
    * (https://developers.facebook.com/docs/marketing-api/facebook-pixel/server-side-api/using-the-api#testEvents)
    * for an example.
+   *
+   * @param testEventCode ode used to verify that your server events
    */
   public void setTestEventCode(String testEventCode) {
     this.testEventCode = testEventCode;
@@ -141,8 +152,8 @@ public class EventRequest {
   /**
    * Synchronously send Event to Facebook GraphAPI.
    *
-   * @return ListenableFuture<EventResponse>
-   * @throws APIException
+   * @return event response
+   * @throws APIException Api Exception
    */
   public EventResponse execute() throws APIException {
     APIRequestCreateEvent event = getPixelCreateEvent();
@@ -161,8 +172,8 @@ public class EventRequest {
   /**
    * Asynchronously send Event to Facebook GraphAPI.
    *
-   * @return ListenableFuture<EventResponse>
-   * @throws APIException
+   * @return ListenableFuture of event response
+   * @throws APIException Api Exception
    */
   public ListenableFuture<EventResponse> executeAsync() throws APIException {
     AdsPixel.APIRequestCreateEvent event = getPixelCreateEvent();
