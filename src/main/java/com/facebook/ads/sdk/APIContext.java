@@ -30,7 +30,8 @@ import java.util.List;
 import java.util.Map;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-
+import com.google.gson.JsonParser;
+import com.google.gson.JsonElement;
 
 public class APIContext {
   public static final String DEFAULT_API_BASE = APIConfig.DEFAULT_API_BASE;
@@ -40,24 +41,30 @@ public class APIContext {
   private String videoEndpointBase;
   private String accessToken;
   private String appSecret;
+  private String appID;
   private String version;
   protected boolean isDebug = false;
   protected PrintStream logger = System.out;
 
-  public APIContext(String endpointBase, String videoEndpointBase, String version, String accessToken, String appSecret) {
+  public APIContext(String endpointBase, String videoEndpointBase, String version, String accessToken, String appSecret, String appID) {
     this.version = version;
     this.endpointBase = endpointBase;
     this.videoEndpointBase = videoEndpointBase;
     this.accessToken = accessToken;
     this.appSecret = appSecret;
+    this.appID =  appID;
   }
 
   public APIContext(String accessToken) {
-    this(DEFAULT_API_BASE, DEFAULT_VIDEO_API_BASE, DEFAULT_API_VERSION, accessToken, null);
+    this(DEFAULT_API_BASE, DEFAULT_VIDEO_API_BASE, DEFAULT_API_VERSION, accessToken, null, null);
   }
 
   public APIContext(String accessToken, String appSecret) {
-    this(DEFAULT_API_BASE, DEFAULT_VIDEO_API_BASE, DEFAULT_API_VERSION, accessToken, appSecret);
+    this(DEFAULT_API_BASE, DEFAULT_VIDEO_API_BASE, DEFAULT_API_VERSION, accessToken, appSecret, null);
+  }
+
+  public APIContext(String accessToken, String appSecret, String appID) {
+    this(DEFAULT_API_BASE, DEFAULT_VIDEO_API_BASE, DEFAULT_API_VERSION, accessToken, appSecret, appID);
   }
 
   public String getEndpointBase() {
@@ -130,5 +137,36 @@ public class APIContext {
         sb.append(String.format("%1$02x", b));
     }
     return sb.toString();
+  }
+
+  public String getAppID() {
+    if (this.appID != null) {
+      return this.appID;
+    }
+    if (this.accessToken != null) {
+      try {
+        APIRequest.DefaultRequestExecutor executor = new APIRequest.DefaultRequestExecutor();
+        String apiUrl = this.endpointBase  + "/" + this.version  + "/debug_token";
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("input_token", this.accessToken);
+        params.put("access_token", this.accessToken);
+        params.put("fields", "app_id");
+
+        APIRequest.ResponseWrapper response = executor.execute("GET", apiUrl, params, this);
+        JsonParser parser = new JsonParser();
+        this.appID = parser.parse(response.getBody())
+          .getAsJsonObject()
+          .get("data")
+          .getAsJsonObject()
+          .get("app_id")
+          .getAsString();
+
+        return this.appID;
+      } catch (Exception e) {
+        log("Unable to fetch appID from the access token");
+      }
+    }
+
+    return null;
   }
 }

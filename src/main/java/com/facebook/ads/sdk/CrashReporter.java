@@ -24,20 +24,23 @@
 package com.facebook.ads.sdk;
 
 import java.io.PrintStream;
-import com.facebook.ads.sdk.APIContext;
+import java.util.HashMap;
+import java.util.Map;
+import java.lang.StackTraceElement;
+import java.util.Arrays;
 
 public class CrashReporter implements Thread.UncaughtExceptionHandler {
-	private static final String TAG = CrashReporter.class.getCanonicalName();
+	private static final String TAG = CrashReporter.class.getSimpleName();
 	private static CrashReporter instance = null;
 
 	private final Thread.UncaughtExceptionHandler prevHandler;
-	private final APIContext context;
+	private final String appID;
 
 	private static PrintStream logger = System.out;
 
-	private CrashReporter(Thread.UncaughtExceptionHandler prevHandler, APIContext context) {
+	private CrashReporter(Thread.UncaughtExceptionHandler prevHandler, String appID) {
 		this.prevHandler = prevHandler;
-		this.context = context;
+		this.appID = appID;
 	}
 
 	public static synchronized void enable(APIContext context) {
@@ -45,8 +48,13 @@ public class CrashReporter implements Thread.UncaughtExceptionHandler {
 			log("Already enabled!");
 			return;
 		}
-		Thread.UncaughtExceptionHandler prevHandler = Thread.getDefaultUncaughtExceptionHandler();
-		instance = new CrashReporter(prevHandler, context);
+		String appID = context.getAppID();
+		if (appID == null) {
+			log("Unrecognized appID, cannot enable CrashReporter!");
+			return;
+		}
+		Thread.UncaughtExceptionHandler mPrevHandler = Thread.getDefaultUncaughtExceptionHandler();
+		instance = new CrashReporter(mPrevHandler, appID);
 		Thread.setDefaultUncaughtExceptionHandler(instance);
 		log("Enabled!");
 	}
@@ -68,9 +76,12 @@ public class CrashReporter implements Thread.UncaughtExceptionHandler {
 
 	@Override
 	public void uncaughtException(Thread t, Throwable e) {
-		if (isSDKRelatedException(e)) {
-			// TODO send report
-			log("Send report..." + e.getMessage());
+		Map<String, Object> report = parseIfIsSDKException(e);
+		if (report != null) {
+			log("Crashes detected!");
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("bizsdk_crash_report", report);
+			sendOutReporter(params);
 		}
 		if (this.prevHandler != null) {
 			this.prevHandler.uncaughtException(t, e);
@@ -79,9 +90,44 @@ public class CrashReporter implements Thread.UncaughtExceptionHandler {
 		}
 	}
 
-	private static boolean isSDKRelatedException(Throwable e) {
-		// TODO implement this function
-		return true;
+	private void sendOutReporter(Map<String, Object> params) {
+		try {
+			APIRequest.DefaultRequestExecutor executor = new APIRequest.DefaultRequestExecutor();
+			APIContext anonymous = new APIContext(null);
+			String apiUrl = APIContext.DEFAULT_API_BASE + "/" + APIContext.DEFAULT_API_VERSION + "/" + this.appID + "/instruments";
+			APIRequest.ResponseWrapper response = executor.execute("POST", apiUrl, params, anonymous);
+			log("Sucess to send out crash reporter");
+		} catch (Exception e) {
+			log("Fail to send out crash reporter");
+		}
+	}
+
+	private static Map<String, Object> parseIfIsSDKException(Throwable e) {
+		String reason = null;
+		StackTraceElement[] eles = e.getStackTrace();
+		String[] stacktrace = new String[eles.length];
+		int i = 0;
+		for (StackTraceElement ele : eles) {
+			String str = ele.toString();
+			if (reason == null && str.contains("com.facebook.ads.")) {
+				reason = "SDK Exception:" + e.getClass().getSimpleName();
+			}
+			stacktrace[i++] = ele.toString();
+		}
+
+		if (e instanceof APIException) {
+			reason = "API Exception:" + e.getClass().getSimpleName();
+		}
+
+		if (reason != null) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("reason", reason);
+			map.put("platform", System.getProperty("java.version"));
+			map.put("callstack", stacktrace);
+			return map;
+		}
+
+		return null;
 	}
 
 	private static void log(String content) {
