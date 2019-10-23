@@ -446,6 +446,10 @@ public class ProductCatalog extends APINode {
     return new APIRequestCreateStoreProductItemsBatch(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetVehicleOffers getVehicleOffers() {
+    return new APIRequestGetVehicleOffers(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetVehicles getVehicles() {
     return new APIRequestGetVehicles(this.getPrefixedId().toString(), context);
   }
@@ -8142,6 +8146,378 @@ public class ProductCatalog extends APINode {
 
   }
 
+  public static class APIRequestGetVehicleOffers extends APIRequest<VehicleOffer> {
+
+    APINodeList<VehicleOffer> lastResponse = null;
+    @Override
+    public APINodeList<VehicleOffer> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "bulk_pagination",
+      "filter",
+    };
+
+    public static final String[] FIELDS = {
+      "amount_currency",
+      "amount_percentage",
+      "amount_price",
+      "amount_qualifier",
+      "applinks",
+      "body_style",
+      "cashback_currency",
+      "cashback_price",
+      "currency",
+      "dma_codes",
+      "downpayment_currency",
+      "downpayment_price",
+      "downpayment_qualifier",
+      "end_date",
+      "end_time",
+      "id",
+      "images",
+      "offer_description",
+      "offer_disclaimer",
+      "offer_type",
+      "price",
+      "sanitized_images",
+      "start_date",
+      "start_time",
+      "term_length",
+      "term_qualifier",
+      "title",
+      "trim",
+      "url",
+      "vehicle_offer_id",
+      "year",
+    };
+
+    @Override
+    public APINodeList<VehicleOffer> parseResponse(String response, String header) throws APIException {
+      return VehicleOffer.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<VehicleOffer> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<VehicleOffer> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<VehicleOffer>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<VehicleOffer>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<VehicleOffer>>() {
+           public APINodeList<VehicleOffer> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetVehicleOffers.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetVehicleOffers(String nodeId, APIContext context) {
+      super(context, nodeId, "/vehicle_offers", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetVehicleOffers setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVehicleOffers setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetVehicleOffers setBulkPagination (Boolean bulkPagination) {
+      this.setParam("bulk_pagination", bulkPagination);
+      return this;
+    }
+    public APIRequestGetVehicleOffers setBulkPagination (String bulkPagination) {
+      this.setParam("bulk_pagination", bulkPagination);
+      return this;
+    }
+
+    public APIRequestGetVehicleOffers setFilter (Object filter) {
+      this.setParam("filter", filter);
+      return this;
+    }
+    public APIRequestGetVehicleOffers setFilter (String filter) {
+      this.setParam("filter", filter);
+      return this;
+    }
+
+    public APIRequestGetVehicleOffers requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetVehicleOffers requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVehicleOffers requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetVehicleOffers requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVehicleOffers requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVehicleOffers requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetVehicleOffers requestAmountCurrencyField () {
+      return this.requestAmountCurrencyField(true);
+    }
+    public APIRequestGetVehicleOffers requestAmountCurrencyField (boolean value) {
+      this.requestField("amount_currency", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestAmountPercentageField () {
+      return this.requestAmountPercentageField(true);
+    }
+    public APIRequestGetVehicleOffers requestAmountPercentageField (boolean value) {
+      this.requestField("amount_percentage", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestAmountPriceField () {
+      return this.requestAmountPriceField(true);
+    }
+    public APIRequestGetVehicleOffers requestAmountPriceField (boolean value) {
+      this.requestField("amount_price", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestAmountQualifierField () {
+      return this.requestAmountQualifierField(true);
+    }
+    public APIRequestGetVehicleOffers requestAmountQualifierField (boolean value) {
+      this.requestField("amount_qualifier", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGetVehicleOffers requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestBodyStyleField () {
+      return this.requestBodyStyleField(true);
+    }
+    public APIRequestGetVehicleOffers requestBodyStyleField (boolean value) {
+      this.requestField("body_style", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestCashbackCurrencyField () {
+      return this.requestCashbackCurrencyField(true);
+    }
+    public APIRequestGetVehicleOffers requestCashbackCurrencyField (boolean value) {
+      this.requestField("cashback_currency", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestCashbackPriceField () {
+      return this.requestCashbackPriceField(true);
+    }
+    public APIRequestGetVehicleOffers requestCashbackPriceField (boolean value) {
+      this.requestField("cashback_price", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestCurrencyField () {
+      return this.requestCurrencyField(true);
+    }
+    public APIRequestGetVehicleOffers requestCurrencyField (boolean value) {
+      this.requestField("currency", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestDmaCodesField () {
+      return this.requestDmaCodesField(true);
+    }
+    public APIRequestGetVehicleOffers requestDmaCodesField (boolean value) {
+      this.requestField("dma_codes", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestDownpaymentCurrencyField () {
+      return this.requestDownpaymentCurrencyField(true);
+    }
+    public APIRequestGetVehicleOffers requestDownpaymentCurrencyField (boolean value) {
+      this.requestField("downpayment_currency", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestDownpaymentPriceField () {
+      return this.requestDownpaymentPriceField(true);
+    }
+    public APIRequestGetVehicleOffers requestDownpaymentPriceField (boolean value) {
+      this.requestField("downpayment_price", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestDownpaymentQualifierField () {
+      return this.requestDownpaymentQualifierField(true);
+    }
+    public APIRequestGetVehicleOffers requestDownpaymentQualifierField (boolean value) {
+      this.requestField("downpayment_qualifier", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestEndDateField () {
+      return this.requestEndDateField(true);
+    }
+    public APIRequestGetVehicleOffers requestEndDateField (boolean value) {
+      this.requestField("end_date", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestEndTimeField () {
+      return this.requestEndTimeField(true);
+    }
+    public APIRequestGetVehicleOffers requestEndTimeField (boolean value) {
+      this.requestField("end_time", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetVehicleOffers requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestImagesField () {
+      return this.requestImagesField(true);
+    }
+    public APIRequestGetVehicleOffers requestImagesField (boolean value) {
+      this.requestField("images", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestOfferDescriptionField () {
+      return this.requestOfferDescriptionField(true);
+    }
+    public APIRequestGetVehicleOffers requestOfferDescriptionField (boolean value) {
+      this.requestField("offer_description", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestOfferDisclaimerField () {
+      return this.requestOfferDisclaimerField(true);
+    }
+    public APIRequestGetVehicleOffers requestOfferDisclaimerField (boolean value) {
+      this.requestField("offer_disclaimer", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestOfferTypeField () {
+      return this.requestOfferTypeField(true);
+    }
+    public APIRequestGetVehicleOffers requestOfferTypeField (boolean value) {
+      this.requestField("offer_type", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestPriceField () {
+      return this.requestPriceField(true);
+    }
+    public APIRequestGetVehicleOffers requestPriceField (boolean value) {
+      this.requestField("price", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestSanitizedImagesField () {
+      return this.requestSanitizedImagesField(true);
+    }
+    public APIRequestGetVehicleOffers requestSanitizedImagesField (boolean value) {
+      this.requestField("sanitized_images", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestStartDateField () {
+      return this.requestStartDateField(true);
+    }
+    public APIRequestGetVehicleOffers requestStartDateField (boolean value) {
+      this.requestField("start_date", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestStartTimeField () {
+      return this.requestStartTimeField(true);
+    }
+    public APIRequestGetVehicleOffers requestStartTimeField (boolean value) {
+      this.requestField("start_time", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestTermLengthField () {
+      return this.requestTermLengthField(true);
+    }
+    public APIRequestGetVehicleOffers requestTermLengthField (boolean value) {
+      this.requestField("term_length", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestTermQualifierField () {
+      return this.requestTermQualifierField(true);
+    }
+    public APIRequestGetVehicleOffers requestTermQualifierField (boolean value) {
+      this.requestField("term_qualifier", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestTitleField () {
+      return this.requestTitleField(true);
+    }
+    public APIRequestGetVehicleOffers requestTitleField (boolean value) {
+      this.requestField("title", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestTrimField () {
+      return this.requestTrimField(true);
+    }
+    public APIRequestGetVehicleOffers requestTrimField (boolean value) {
+      this.requestField("trim", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestUrlField () {
+      return this.requestUrlField(true);
+    }
+    public APIRequestGetVehicleOffers requestUrlField (boolean value) {
+      this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestVehicleOfferIdField () {
+      return this.requestVehicleOfferIdField(true);
+    }
+    public APIRequestGetVehicleOffers requestVehicleOfferIdField (boolean value) {
+      this.requestField("vehicle_offer_id", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestYearField () {
+      return this.requestYearField(true);
+    }
+    public APIRequestGetVehicleOffers requestYearField (boolean value) {
+      this.requestField("year", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetVehicles extends APIRequest<Vehicle> {
 
     APINodeList<Vehicle> lastResponse = null;
@@ -8639,6 +9015,7 @@ public class ProductCatalog extends APINode {
       "description",
       "drivetrain",
       "exterior_color",
+      "fb_page_id",
       "fuel_type",
       "images",
       "interior_color",
@@ -8799,6 +9176,11 @@ public class ProductCatalog extends APINode {
 
     public APIRequestCreateVehicle setExteriorColor (String exteriorColor) {
       this.setParam("exterior_color", exteriorColor);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setFbPageId (String fbPageId) {
+      this.setParam("fb_page_id", fbPageId);
       return this;
     }
 

@@ -642,14 +642,6 @@ public class Page extends APINode {
     return new APIRequestCreateCopyrightManualClaim(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestDeleteCopyrightWhitelistedIgPartners deleteCopyrightWhitelistedIgPartners() {
-    return new APIRequestDeleteCopyrightWhitelistedIgPartners(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateCopyrightWhitelistedIgPartner createCopyrightWhitelistedIgPartner() {
-    return new APIRequestCreateCopyrightWhitelistedIgPartner(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetCopyrightWhitelistedPartners getCopyrightWhitelistedPartners() {
     return new APIRequestGetCopyrightWhitelistedPartners(this.getPrefixedId().toString(), context);
   }
@@ -824,6 +816,10 @@ public class Page extends APINode {
 
   public APIRequestCreatePageBackedInstagramAccount createPageBackedInstagramAccount() {
     return new APIRequestCreatePageBackedInstagramAccount(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreatePageWhatsappNumberVerification createPageWhatsappNumberVerification() {
+    return new APIRequestCreatePageWhatsappNumberVerification(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreatePassThreadControl createPassThreadControl() {
@@ -6094,234 +6090,6 @@ public class Page extends APINode {
 
     @Override
     public APIRequestCreateCopyrightManualClaim requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestDeleteCopyrightWhitelistedIgPartners extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "usernames",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestDeleteCopyrightWhitelistedIgPartners.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestDeleteCopyrightWhitelistedIgPartners(String nodeId, APIContext context) {
-      super(context, nodeId, "/copyright_whitelisted_ig_partners", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDeleteCopyrightWhitelistedIgPartners setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteCopyrightWhitelistedIgPartners setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDeleteCopyrightWhitelistedIgPartners setUsernames (List<String> usernames) {
-      this.setParam("usernames", usernames);
-      return this;
-    }
-    public APIRequestDeleteCopyrightWhitelistedIgPartners setUsernames (String usernames) {
-      this.setParam("usernames", usernames);
-      return this;
-    }
-
-    public APIRequestDeleteCopyrightWhitelistedIgPartners requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDeleteCopyrightWhitelistedIgPartners requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteCopyrightWhitelistedIgPartners requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDeleteCopyrightWhitelistedIgPartners requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteCopyrightWhitelistedIgPartners requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteCopyrightWhitelistedIgPartners requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateCopyrightWhitelistedIgPartner extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "usernames",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateCopyrightWhitelistedIgPartner.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateCopyrightWhitelistedIgPartner(String nodeId, APIContext context) {
-      super(context, nodeId, "/copyright_whitelisted_ig_partners", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateCopyrightWhitelistedIgPartner setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateCopyrightWhitelistedIgPartner setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateCopyrightWhitelistedIgPartner setUsernames (List<String> usernames) {
-      this.setParam("usernames", usernames);
-      return this;
-    }
-    public APIRequestCreateCopyrightWhitelistedIgPartner setUsernames (String usernames) {
-      this.setParam("usernames", usernames);
-      return this;
-    }
-
-    public APIRequestCreateCopyrightWhitelistedIgPartner requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateCopyrightWhitelistedIgPartner requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateCopyrightWhitelistedIgPartner requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateCopyrightWhitelistedIgPartner requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateCopyrightWhitelistedIgPartner requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateCopyrightWhitelistedIgPartner requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -18893,6 +18661,7 @@ public class Page extends APINode {
       "get_started",
       "greeting",
       "home_url",
+      "ice_breakers",
       "payment_settings",
       "persistent_menu",
       "target_audience",
@@ -19016,6 +18785,13 @@ public class Page extends APINode {
       this.requestField("home_url", value);
       return this;
     }
+    public APIRequestGetMessengerProfile requestIceBreakersField () {
+      return this.requestIceBreakersField(true);
+    }
+    public APIRequestGetMessengerProfile requestIceBreakersField (boolean value) {
+      this.requestField("ice_breakers", value);
+      return this;
+    }
     public APIRequestGetMessengerProfile requestPaymentSettingsField () {
       return this.requestPaymentSettingsField(true);
     }
@@ -19058,6 +18834,7 @@ public class Page extends APINode {
       "get_started",
       "greeting",
       "home_url",
+      "ice_breakers",
       "payment_settings",
       "persistent_menu",
       "target_audience",
@@ -19149,6 +18926,15 @@ public class Page extends APINode {
     }
     public APIRequestCreateMessengerProfile setHomeUrl (String homeUrl) {
       this.setParam("home_url", homeUrl);
+      return this;
+    }
+
+    public APIRequestCreateMessengerProfile setIceBreakers (List<Map<String, String>> iceBreakers) {
+      this.setParam("ice_breakers", iceBreakers);
+      return this;
+    }
+    public APIRequestCreateMessengerProfile setIceBreakers (String iceBreakers) {
+      this.setParam("ice_breakers", iceBreakers);
       return this;
     }
 
@@ -20388,6 +20174,122 @@ public class Page extends APINode {
 
     @Override
     public APIRequestCreatePageBackedInstagramAccount requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreatePageWhatsappNumberVerification extends APIRequest<Page> {
+
+    Page lastResponse = null;
+    @Override
+    public Page getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "verification_code",
+      "whatsapp_number",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Page parseResponse(String response, String header) throws APIException {
+      return Page.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Page execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Page execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Page> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Page> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, Page>() {
+           public Page apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreatePageWhatsappNumberVerification.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreatePageWhatsappNumberVerification(String nodeId, APIContext context) {
+      super(context, nodeId, "/page_whatsapp_number_verification", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreatePageWhatsappNumberVerification setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePageWhatsappNumberVerification setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreatePageWhatsappNumberVerification setVerificationCode (String verificationCode) {
+      this.setParam("verification_code", verificationCode);
+      return this;
+    }
+
+    public APIRequestCreatePageWhatsappNumberVerification setWhatsappNumber (String whatsappNumber) {
+      this.setParam("whatsapp_number", whatsappNumber);
+      return this;
+    }
+
+    public APIRequestCreatePageWhatsappNumberVerification requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreatePageWhatsappNumberVerification requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePageWhatsappNumberVerification requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreatePageWhatsappNumberVerification requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePageWhatsappNumberVerification requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePageWhatsappNumberVerification requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -34941,6 +34843,8 @@ public class Page extends APINode {
       VALUE_MESSAGE_DELIVERIES("message_deliveries"),
       @SerializedName("message_echoes")
       VALUE_MESSAGE_ECHOES("message_echoes"),
+      @SerializedName("message_mention")
+      VALUE_MESSAGE_MENTION("message_mention"),
       @SerializedName("message_reads")
       VALUE_MESSAGE_READS("message_reads"),
       @SerializedName("messages")
@@ -35197,6 +35101,8 @@ public class Page extends APINode {
       VALUE_GREETING("GREETING"),
       @SerializedName("HOME_URL")
       VALUE_HOME_URL("HOME_URL"),
+      @SerializedName("ICE_BREAKERS")
+      VALUE_ICE_BREAKERS("ICE_BREAKERS"),
       @SerializedName("PAYMENT_SETTINGS")
       VALUE_PAYMENT_SETTINGS("PAYMENT_SETTINGS"),
       @SerializedName("PERSISTENT_MENU")

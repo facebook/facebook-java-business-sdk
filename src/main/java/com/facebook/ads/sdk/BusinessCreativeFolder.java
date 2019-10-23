@@ -286,10 +286,6 @@ public class BusinessCreativeFolder extends APINode {
     return new APIRequestCreateAgency(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestDeleteAssignedUsers deleteAssignedUsers() {
-    return new APIRequestDeleteAssignedUsers(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetAssignedUsers getAssignedUsers() {
     return new APIRequestGetAssignedUsers(this.getPrefixedId().toString(), context);
   }
@@ -808,120 +804,6 @@ public class BusinessCreativeFolder extends APINode {
 
     @Override
     public APIRequestCreateAgency requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestDeleteAssignedUsers extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "user",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestDeleteAssignedUsers.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestDeleteAssignedUsers(String nodeId, APIContext context) {
-      super(context, nodeId, "/assigned_users", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDeleteAssignedUsers setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAssignedUsers setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDeleteAssignedUsers setUser (Long user) {
-      this.setParam("user", user);
-      return this;
-    }
-    public APIRequestDeleteAssignedUsers setUser (String user) {
-      this.setParam("user", user);
-      return this;
-    }
-
-    public APIRequestDeleteAssignedUsers requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDeleteAssignedUsers requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAssignedUsers requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDeleteAssignedUsers requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAssignedUsers requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAssignedUsers requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

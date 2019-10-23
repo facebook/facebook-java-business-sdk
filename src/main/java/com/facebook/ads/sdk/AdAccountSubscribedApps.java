@@ -54,39 +54,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class MessengerProfile extends APINode {
-  @SerializedName("account_linking_url")
-  private String mAccountLinkingUrl = null;
-  @SerializedName("get_started")
-  private Object mGetStarted = null;
-  @SerializedName("greeting")
-  private List<Object> mGreeting = null;
-  @SerializedName("home_url")
-  private Object mHomeUrl = null;
-  @SerializedName("ice_breakers")
-  private List<Object> mIceBreakers = null;
-  @SerializedName("payment_settings")
-  private Object mPaymentSettings = null;
-  @SerializedName("persistent_menu")
-  private List<Object> mPersistentMenu = null;
-  @SerializedName("target_audience")
-  private Object mTargetAudience = null;
-  @SerializedName("whitelisted_domains")
-  private List<String> mWhitelistedDomains = null;
+public class AdAccountSubscribedApps extends APINode {
+  @SerializedName("app_id")
+  private String mAppId = null;
+  @SerializedName("app_name")
+  private String mAppName = null;
   protected static Gson gson = null;
 
-  public MessengerProfile() {
+  public AdAccountSubscribedApps() {
   }
 
   public String getId() {
     return null;
   }
-  public static MessengerProfile loadJSON(String json, APIContext context, String header) {
-    MessengerProfile messengerProfile = getGson().fromJson(json, MessengerProfile.class);
+  public static AdAccountSubscribedApps loadJSON(String json, APIContext context, String header) {
+    AdAccountSubscribedApps adAccountSubscribedApps = getGson().fromJson(json, AdAccountSubscribedApps.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(messengerProfile.toString());
+      JsonElement o2 = parser.parse(adAccountSubscribedApps.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -96,14 +82,14 @@ public class MessengerProfile extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    messengerProfile.context = context;
-    messengerProfile.rawValue = json;
-    messengerProfile.header = header;
-    return messengerProfile;
+    adAccountSubscribedApps.context = context;
+    adAccountSubscribedApps.rawValue = json;
+    adAccountSubscribedApps.header = header;
+    return adAccountSubscribedApps;
   }
 
-  public static APINodeList<MessengerProfile> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<MessengerProfile> messengerProfiles = new APINodeList<MessengerProfile>(request, json, header);
+  public static APINodeList<AdAccountSubscribedApps> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdAccountSubscribedApps> adAccountSubscribedAppss = new APINodeList<AdAccountSubscribedApps>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -114,9 +100,9 @@ public class MessengerProfile extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          messengerProfiles.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adAccountSubscribedAppss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return messengerProfiles;
+        return adAccountSubscribedAppss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -126,20 +112,20 @@ public class MessengerProfile extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                messengerProfiles.setCursors(before, after);
+                adAccountSubscribedAppss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            messengerProfiles.setPaging(previous, next);
+            adAccountSubscribedAppss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              messengerProfiles.setAppSecret(context.getAppSecretProof());
+              adAccountSubscribedAppss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              messengerProfiles.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adAccountSubscribedAppss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -150,23 +136,23 @@ public class MessengerProfile extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  messengerProfiles.add(loadJSON(entry.getValue().toString(), context, header));
+                  adAccountSubscribedAppss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              messengerProfiles.add(loadJSON(obj.toString(), context, header));
+              adAccountSubscribedAppss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return messengerProfiles;
+          return adAccountSubscribedAppss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              messengerProfiles.add(loadJSON(entry.getValue().toString(), context, header));
+              adAccountSubscribedAppss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return messengerProfiles;
+          return adAccountSubscribedAppss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -183,20 +169,20 @@ public class MessengerProfile extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              messengerProfiles.add(loadJSON(value.toString(), context, header));
+              adAccountSubscribedAppss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return messengerProfiles;
+            return adAccountSubscribedAppss;
           }
 
           // Sixth, check if it's pure JsonObject
-          messengerProfiles.clear();
-          messengerProfiles.add(loadJSON(json, context, header));
-          return messengerProfiles;
+          adAccountSubscribedAppss.clear();
+          adAccountSubscribedAppss.add(loadJSON(json, context, header));
+          return adAccountSubscribedAppss;
         }
       }
     } catch (Exception e) {
@@ -224,84 +210,21 @@ public class MessengerProfile extends APINode {
   }
 
 
-  public String getFieldAccountLinkingUrl() {
-    return mAccountLinkingUrl;
+  public String getFieldAppId() {
+    return mAppId;
   }
 
-  public MessengerProfile setFieldAccountLinkingUrl(String value) {
-    this.mAccountLinkingUrl = value;
+  public AdAccountSubscribedApps setFieldAppId(String value) {
+    this.mAppId = value;
     return this;
   }
 
-  public Object getFieldGetStarted() {
-    return mGetStarted;
+  public String getFieldAppName() {
+    return mAppName;
   }
 
-  public MessengerProfile setFieldGetStarted(Object value) {
-    this.mGetStarted = value;
-    return this;
-  }
-
-  public List<Object> getFieldGreeting() {
-    return mGreeting;
-  }
-
-  public MessengerProfile setFieldGreeting(List<Object> value) {
-    this.mGreeting = value;
-    return this;
-  }
-
-  public Object getFieldHomeUrl() {
-    return mHomeUrl;
-  }
-
-  public MessengerProfile setFieldHomeUrl(Object value) {
-    this.mHomeUrl = value;
-    return this;
-  }
-
-  public List<Object> getFieldIceBreakers() {
-    return mIceBreakers;
-  }
-
-  public MessengerProfile setFieldIceBreakers(List<Object> value) {
-    this.mIceBreakers = value;
-    return this;
-  }
-
-  public Object getFieldPaymentSettings() {
-    return mPaymentSettings;
-  }
-
-  public MessengerProfile setFieldPaymentSettings(Object value) {
-    this.mPaymentSettings = value;
-    return this;
-  }
-
-  public List<Object> getFieldPersistentMenu() {
-    return mPersistentMenu;
-  }
-
-  public MessengerProfile setFieldPersistentMenu(List<Object> value) {
-    this.mPersistentMenu = value;
-    return this;
-  }
-
-  public Object getFieldTargetAudience() {
-    return mTargetAudience;
-  }
-
-  public MessengerProfile setFieldTargetAudience(Object value) {
-    this.mTargetAudience = value;
-    return this;
-  }
-
-  public List<String> getFieldWhitelistedDomains() {
-    return mWhitelistedDomains;
-  }
-
-  public MessengerProfile setFieldWhitelistedDomains(List<String> value) {
-    this.mWhitelistedDomains = value;
+  public AdAccountSubscribedApps setFieldAppName(String value) {
+    this.mAppName = value;
     return this;
   }
 
@@ -321,25 +244,18 @@ public class MessengerProfile extends APINode {
     return gson;
   }
 
-  public MessengerProfile copyFrom(MessengerProfile instance) {
-    this.mAccountLinkingUrl = instance.mAccountLinkingUrl;
-    this.mGetStarted = instance.mGetStarted;
-    this.mGreeting = instance.mGreeting;
-    this.mHomeUrl = instance.mHomeUrl;
-    this.mIceBreakers = instance.mIceBreakers;
-    this.mPaymentSettings = instance.mPaymentSettings;
-    this.mPersistentMenu = instance.mPersistentMenu;
-    this.mTargetAudience = instance.mTargetAudience;
-    this.mWhitelistedDomains = instance.mWhitelistedDomains;
+  public AdAccountSubscribedApps copyFrom(AdAccountSubscribedApps instance) {
+    this.mAppId = instance.mAppId;
+    this.mAppName = instance.mAppName;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<MessengerProfile> getParser() {
-    return new APIRequest.ResponseParser<MessengerProfile>() {
-      public APINodeList<MessengerProfile> parseResponse(String response, APIContext context, APIRequest<MessengerProfile> request, String header) throws MalformedResponseException {
-        return MessengerProfile.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdAccountSubscribedApps> getParser() {
+    return new APIRequest.ResponseParser<AdAccountSubscribedApps>() {
+      public APINodeList<AdAccountSubscribedApps> parseResponse(String response, APIContext context, APIRequest<AdAccountSubscribedApps> request, String header) throws MalformedResponseException {
+        return AdAccountSubscribedApps.parseResponse(response, context, request, header);
       }
     };
   }

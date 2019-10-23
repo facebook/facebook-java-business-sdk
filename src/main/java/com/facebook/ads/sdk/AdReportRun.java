@@ -2826,8 +2826,6 @@ public class AdReportRun extends APINode {
       VALUE_ACTION_CAROUSEL_CARD_ID("action_carousel_card_id"),
       @SerializedName("action_carousel_card_name")
       VALUE_ACTION_CAROUSEL_CARD_NAME("action_carousel_card_name"),
-      @SerializedName("action_converted_product_id")
-      VALUE_ACTION_CONVERTED_PRODUCT_ID("action_converted_product_id"),
       @SerializedName("action_destination")
       VALUE_ACTION_DESTINATION("action_destination"),
       @SerializedName("action_device")
@@ -3017,8 +3015,6 @@ public class AdReportRun extends APINode {
       VALUE_ACTION_CAROUSEL_CARD_ID("action_carousel_card_id"),
       @SerializedName("action_carousel_card_name")
       VALUE_ACTION_CAROUSEL_CARD_NAME("action_carousel_card_name"),
-      @SerializedName("action_converted_product_id")
-      VALUE_ACTION_CONVERTED_PRODUCT_ID("action_converted_product_id"),
       @SerializedName("action_destination")
       VALUE_ACTION_DESTINATION("action_destination"),
       @SerializedName("action_device")

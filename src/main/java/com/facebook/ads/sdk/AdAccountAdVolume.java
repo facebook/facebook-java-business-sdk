@@ -57,12 +57,12 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdAccountAdVolume extends APINode {
   @SerializedName("actor_id")
   private String mActorId = null;
+  @SerializedName("ads_running_or_in_review_count")
+  private Long mAdsRunningOrInReviewCount = null;
   @SerializedName("has_hit_total_live_ads_limit")
   private Boolean mHasHitTotalLiveAdsLimit = null;
   @SerializedName("live_ads_quota_left")
   private Long mLiveAdsQuotaLeft = null;
-  @SerializedName("total_live_ads")
-  private Long mTotalLiveAds = null;
   @SerializedName("total_live_ads_in_current_account")
   private Long mTotalLiveAdsInCurrentAccount = null;
   @SerializedName("total_live_ads_limit")
@@ -227,6 +227,15 @@ public class AdAccountAdVolume extends APINode {
     return this;
   }
 
+  public Long getFieldAdsRunningOrInReviewCount() {
+    return mAdsRunningOrInReviewCount;
+  }
+
+  public AdAccountAdVolume setFieldAdsRunningOrInReviewCount(Long value) {
+    this.mAdsRunningOrInReviewCount = value;
+    return this;
+  }
+
   public Boolean getFieldHasHitTotalLiveAdsLimit() {
     return mHasHitTotalLiveAdsLimit;
   }
@@ -242,15 +251,6 @@ public class AdAccountAdVolume extends APINode {
 
   public AdAccountAdVolume setFieldLiveAdsQuotaLeft(Long value) {
     this.mLiveAdsQuotaLeft = value;
-    return this;
-  }
-
-  public Long getFieldTotalLiveAds() {
-    return mTotalLiveAds;
-  }
-
-  public AdAccountAdVolume setFieldTotalLiveAds(Long value) {
-    this.mTotalLiveAds = value;
     return this;
   }
 
@@ -290,9 +290,9 @@ public class AdAccountAdVolume extends APINode {
 
   public AdAccountAdVolume copyFrom(AdAccountAdVolume instance) {
     this.mActorId = instance.mActorId;
+    this.mAdsRunningOrInReviewCount = instance.mAdsRunningOrInReviewCount;
     this.mHasHitTotalLiveAdsLimit = instance.mHasHitTotalLiveAdsLimit;
     this.mLiveAdsQuotaLeft = instance.mLiveAdsQuotaLeft;
-    this.mTotalLiveAds = instance.mTotalLiveAds;
     this.mTotalLiveAdsInCurrentAccount = instance.mTotalLiveAdsInCurrentAccount;
     this.mTotalLiveAdsLimit = instance.mTotalLiveAdsLimit;
     this.context = instance.context;

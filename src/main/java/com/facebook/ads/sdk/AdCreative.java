@@ -87,6 +87,8 @@ public class AdCreative extends APINode {
   private String mDynamicAdVoice = null;
   @SerializedName("effective_authorization_category")
   private String mEffectiveAuthorizationCategory = null;
+  @SerializedName("effective_instagram_media_id")
+  private String mEffectiveInstagramMediaId = null;
   @SerializedName("effective_instagram_story_id")
   private String mEffectiveInstagramStoryId = null;
   @SerializedName("effective_object_story_id")
@@ -383,6 +385,10 @@ public class AdCreative extends APINode {
     return new APIRequestCreateAdLabel(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetCreativeInsights getCreativeInsights() {
+    return new APIRequestGetCreativeInsights(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetPreviews getPreviews() {
     return new APIRequestGetPreviews(this.getPrefixedId().toString(), context);
   }
@@ -551,6 +557,15 @@ public class AdCreative extends APINode {
 
   public AdCreative setFieldEffectiveAuthorizationCategory(String value) {
     this.mEffectiveAuthorizationCategory = value;
+    return this;
+  }
+
+  public String getFieldEffectiveInstagramMediaId() {
+    return mEffectiveInstagramMediaId;
+  }
+
+  public AdCreative setFieldEffectiveInstagramMediaId(String value) {
+    this.mEffectiveInstagramMediaId = value;
     return this;
   }
 
@@ -1153,6 +1168,118 @@ public class AdCreative extends APINode {
 
   }
 
+  public static class APIRequestGetCreativeInsights extends APIRequest<AdCreativeInsights> {
+
+    APINodeList<AdCreativeInsights> lastResponse = null;
+    @Override
+    public APINodeList<AdCreativeInsights> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "aesthetics",
+    };
+
+    @Override
+    public APINodeList<AdCreativeInsights> parseResponse(String response, String header) throws APIException {
+      return AdCreativeInsights.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<AdCreativeInsights> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdCreativeInsights> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<AdCreativeInsights>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdCreativeInsights>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<AdCreativeInsights>>() {
+           public APINodeList<AdCreativeInsights> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetCreativeInsights.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetCreativeInsights(String nodeId, APIContext context) {
+      super(context, nodeId, "/creative_insights", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCreativeInsights setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCreativeInsights setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCreativeInsights requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCreativeInsights requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCreativeInsights requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCreativeInsights requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCreativeInsights requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCreativeInsights requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetCreativeInsights requestAestheticsField () {
+      return this.requestAestheticsField(true);
+    }
+    public APIRequestGetCreativeInsights requestAestheticsField (boolean value) {
+      this.requestField("aesthetics", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetPreviews extends APIRequest<AdPreview> {
 
     APINodeList<AdPreview> lastResponse = null;
@@ -1544,6 +1671,7 @@ public class AdCreative extends APINode {
       "destination_set_id",
       "dynamic_ad_voice",
       "effective_authorization_category",
+      "effective_instagram_media_id",
       "effective_instagram_story_id",
       "effective_object_story_id",
       "enable_direct_install",
@@ -1800,6 +1928,13 @@ public class AdCreative extends APINode {
     }
     public APIRequestGet requestEffectiveAuthorizationCategoryField (boolean value) {
       this.requestField("effective_authorization_category", value);
+      return this;
+    }
+    public APIRequestGet requestEffectiveInstagramMediaIdField () {
+      return this.requestEffectiveInstagramMediaIdField(true);
+    }
+    public APIRequestGet requestEffectiveInstagramMediaIdField (boolean value) {
+      this.requestField("effective_instagram_media_id", value);
       return this;
     }
     public APIRequestGet requestEffectiveInstagramStoryIdField () {
@@ -2533,6 +2668,7 @@ public class AdCreative extends APINode {
     this.mDestinationSetId = instance.mDestinationSetId;
     this.mDynamicAdVoice = instance.mDynamicAdVoice;
     this.mEffectiveAuthorizationCategory = instance.mEffectiveAuthorizationCategory;
+    this.mEffectiveInstagramMediaId = instance.mEffectiveInstagramMediaId;
     this.mEffectiveInstagramStoryId = instance.mEffectiveInstagramStoryId;
     this.mEffectiveObjectStoryId = instance.mEffectiveObjectStoryId;
     this.mEnableDirectInstall = instance.mEnableDirectInstall;

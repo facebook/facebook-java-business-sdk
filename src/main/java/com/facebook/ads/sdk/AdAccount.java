@@ -424,10 +424,6 @@ public class AdAccount extends APINode {
     return new APIRequestGetAdStudies(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetAdContracts getAdContracts() {
-    return new APIRequestGetAdContracts(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetAdCreatives getAdCreatives() {
     return new APIRequestGetAdCreatives(this.getPrefixedId().toString(), context);
   }
@@ -526,14 +522,6 @@ public class AdAccount extends APINode {
 
   public APIRequestCreateAdsPixel createAdsPixel() {
     return new APIRequestCreateAdsPixel(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetAdToplineDetails getAdToplineDetails() {
-    return new APIRequestGetAdToplineDetails(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetAdTopLines getAdTopLines() {
-    return new APIRequestGetAdTopLines(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetAdvertisableApplications getAdvertisableApplications() {
@@ -774,6 +762,10 @@ public class AdAccount extends APINode {
 
   public APIRequestDeleteSubscribedApps deleteSubscribedApps() {
     return new APIRequestDeleteSubscribedApps(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetSubscribedApps getSubscribedApps() {
+    return new APIRequestGetSubscribedApps(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateSubscribedApp createSubscribedApp() {
@@ -2156,446 +2148,6 @@ public class AdAccount extends APINode {
     }
   }
 
-  public static class APIRequestGetAdContracts extends APIRequest<AdContract> {
-
-    APINodeList<AdContract> lastResponse = null;
-    @Override
-    public APINodeList<AdContract> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "account_id",
-      "account_mgr_fbid",
-      "account_mgr_name",
-      "adops_person_name",
-      "advertiser_address_fbid",
-      "advertiser_fbid",
-      "advertiser_name",
-      "agency_discount",
-      "agency_name",
-      "bill_to_address_fbid",
-      "bill_to_fbid",
-      "campaign_name",
-      "created_by",
-      "created_date",
-      "customer_io",
-      "io_number",
-      "io_terms",
-      "io_type",
-      "last_updated_by",
-      "last_updated_date",
-      "max_end_date",
-      "mdc_fbid",
-      "media_plan_number",
-      "min_start_date",
-      "msa_contract",
-      "payment_terms",
-      "rev_hold_flag",
-      "rev_hold_released_by",
-      "rev_hold_released_on",
-      "salesrep_fbid",
-      "salesrep_name",
-      "sold_to_address_fbid",
-      "sold_to_fbid",
-      "status",
-      "subvertical",
-      "thirdparty_billed",
-      "thirdparty_password",
-      "thirdparty_uid",
-      "thirdparty_url",
-      "vat_country",
-      "version",
-      "vertical",
-    };
-
-    @Override
-    public APINodeList<AdContract> parseResponse(String response, String header) throws APIException {
-      return AdContract.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<AdContract> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<AdContract> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<AdContract>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<AdContract>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<AdContract>>() {
-           public APINodeList<AdContract> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetAdContracts.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetAdContracts(String nodeId, APIContext context) {
-      super(context, nodeId, "/adcontracts", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetAdContracts setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdContracts setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetAdContracts requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetAdContracts requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdContracts requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetAdContracts requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdContracts requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdContracts requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetAdContracts requestAccountIdField () {
-      return this.requestAccountIdField(true);
-    }
-    public APIRequestGetAdContracts requestAccountIdField (boolean value) {
-      this.requestField("account_id", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestAccountMgrFbidField () {
-      return this.requestAccountMgrFbidField(true);
-    }
-    public APIRequestGetAdContracts requestAccountMgrFbidField (boolean value) {
-      this.requestField("account_mgr_fbid", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestAccountMgrNameField () {
-      return this.requestAccountMgrNameField(true);
-    }
-    public APIRequestGetAdContracts requestAccountMgrNameField (boolean value) {
-      this.requestField("account_mgr_name", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestAdopsPersonNameField () {
-      return this.requestAdopsPersonNameField(true);
-    }
-    public APIRequestGetAdContracts requestAdopsPersonNameField (boolean value) {
-      this.requestField("adops_person_name", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestAdvertiserAddressFbidField () {
-      return this.requestAdvertiserAddressFbidField(true);
-    }
-    public APIRequestGetAdContracts requestAdvertiserAddressFbidField (boolean value) {
-      this.requestField("advertiser_address_fbid", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestAdvertiserFbidField () {
-      return this.requestAdvertiserFbidField(true);
-    }
-    public APIRequestGetAdContracts requestAdvertiserFbidField (boolean value) {
-      this.requestField("advertiser_fbid", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestAdvertiserNameField () {
-      return this.requestAdvertiserNameField(true);
-    }
-    public APIRequestGetAdContracts requestAdvertiserNameField (boolean value) {
-      this.requestField("advertiser_name", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestAgencyDiscountField () {
-      return this.requestAgencyDiscountField(true);
-    }
-    public APIRequestGetAdContracts requestAgencyDiscountField (boolean value) {
-      this.requestField("agency_discount", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestAgencyNameField () {
-      return this.requestAgencyNameField(true);
-    }
-    public APIRequestGetAdContracts requestAgencyNameField (boolean value) {
-      this.requestField("agency_name", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestBillToAddressFbidField () {
-      return this.requestBillToAddressFbidField(true);
-    }
-    public APIRequestGetAdContracts requestBillToAddressFbidField (boolean value) {
-      this.requestField("bill_to_address_fbid", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestBillToFbidField () {
-      return this.requestBillToFbidField(true);
-    }
-    public APIRequestGetAdContracts requestBillToFbidField (boolean value) {
-      this.requestField("bill_to_fbid", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestCampaignNameField () {
-      return this.requestCampaignNameField(true);
-    }
-    public APIRequestGetAdContracts requestCampaignNameField (boolean value) {
-      this.requestField("campaign_name", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestCreatedByField () {
-      return this.requestCreatedByField(true);
-    }
-    public APIRequestGetAdContracts requestCreatedByField (boolean value) {
-      this.requestField("created_by", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestCreatedDateField () {
-      return this.requestCreatedDateField(true);
-    }
-    public APIRequestGetAdContracts requestCreatedDateField (boolean value) {
-      this.requestField("created_date", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestCustomerIoField () {
-      return this.requestCustomerIoField(true);
-    }
-    public APIRequestGetAdContracts requestCustomerIoField (boolean value) {
-      this.requestField("customer_io", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestIoNumberField () {
-      return this.requestIoNumberField(true);
-    }
-    public APIRequestGetAdContracts requestIoNumberField (boolean value) {
-      this.requestField("io_number", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestIoTermsField () {
-      return this.requestIoTermsField(true);
-    }
-    public APIRequestGetAdContracts requestIoTermsField (boolean value) {
-      this.requestField("io_terms", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestIoTypeField () {
-      return this.requestIoTypeField(true);
-    }
-    public APIRequestGetAdContracts requestIoTypeField (boolean value) {
-      this.requestField("io_type", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestLastUpdatedByField () {
-      return this.requestLastUpdatedByField(true);
-    }
-    public APIRequestGetAdContracts requestLastUpdatedByField (boolean value) {
-      this.requestField("last_updated_by", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestLastUpdatedDateField () {
-      return this.requestLastUpdatedDateField(true);
-    }
-    public APIRequestGetAdContracts requestLastUpdatedDateField (boolean value) {
-      this.requestField("last_updated_date", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestMaxEndDateField () {
-      return this.requestMaxEndDateField(true);
-    }
-    public APIRequestGetAdContracts requestMaxEndDateField (boolean value) {
-      this.requestField("max_end_date", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestMdcFbidField () {
-      return this.requestMdcFbidField(true);
-    }
-    public APIRequestGetAdContracts requestMdcFbidField (boolean value) {
-      this.requestField("mdc_fbid", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestMediaPlanNumberField () {
-      return this.requestMediaPlanNumberField(true);
-    }
-    public APIRequestGetAdContracts requestMediaPlanNumberField (boolean value) {
-      this.requestField("media_plan_number", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestMinStartDateField () {
-      return this.requestMinStartDateField(true);
-    }
-    public APIRequestGetAdContracts requestMinStartDateField (boolean value) {
-      this.requestField("min_start_date", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestMsaContractField () {
-      return this.requestMsaContractField(true);
-    }
-    public APIRequestGetAdContracts requestMsaContractField (boolean value) {
-      this.requestField("msa_contract", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestPaymentTermsField () {
-      return this.requestPaymentTermsField(true);
-    }
-    public APIRequestGetAdContracts requestPaymentTermsField (boolean value) {
-      this.requestField("payment_terms", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestRevHoldFlagField () {
-      return this.requestRevHoldFlagField(true);
-    }
-    public APIRequestGetAdContracts requestRevHoldFlagField (boolean value) {
-      this.requestField("rev_hold_flag", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestRevHoldReleasedByField () {
-      return this.requestRevHoldReleasedByField(true);
-    }
-    public APIRequestGetAdContracts requestRevHoldReleasedByField (boolean value) {
-      this.requestField("rev_hold_released_by", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestRevHoldReleasedOnField () {
-      return this.requestRevHoldReleasedOnField(true);
-    }
-    public APIRequestGetAdContracts requestRevHoldReleasedOnField (boolean value) {
-      this.requestField("rev_hold_released_on", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestSalesrepFbidField () {
-      return this.requestSalesrepFbidField(true);
-    }
-    public APIRequestGetAdContracts requestSalesrepFbidField (boolean value) {
-      this.requestField("salesrep_fbid", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestSalesrepNameField () {
-      return this.requestSalesrepNameField(true);
-    }
-    public APIRequestGetAdContracts requestSalesrepNameField (boolean value) {
-      this.requestField("salesrep_name", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestSoldToAddressFbidField () {
-      return this.requestSoldToAddressFbidField(true);
-    }
-    public APIRequestGetAdContracts requestSoldToAddressFbidField (boolean value) {
-      this.requestField("sold_to_address_fbid", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestSoldToFbidField () {
-      return this.requestSoldToFbidField(true);
-    }
-    public APIRequestGetAdContracts requestSoldToFbidField (boolean value) {
-      this.requestField("sold_to_fbid", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestStatusField () {
-      return this.requestStatusField(true);
-    }
-    public APIRequestGetAdContracts requestStatusField (boolean value) {
-      this.requestField("status", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestSubverticalField () {
-      return this.requestSubverticalField(true);
-    }
-    public APIRequestGetAdContracts requestSubverticalField (boolean value) {
-      this.requestField("subvertical", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestThirdpartyBilledField () {
-      return this.requestThirdpartyBilledField(true);
-    }
-    public APIRequestGetAdContracts requestThirdpartyBilledField (boolean value) {
-      this.requestField("thirdparty_billed", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestThirdpartyPasswordField () {
-      return this.requestThirdpartyPasswordField(true);
-    }
-    public APIRequestGetAdContracts requestThirdpartyPasswordField (boolean value) {
-      this.requestField("thirdparty_password", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestThirdpartyUidField () {
-      return this.requestThirdpartyUidField(true);
-    }
-    public APIRequestGetAdContracts requestThirdpartyUidField (boolean value) {
-      this.requestField("thirdparty_uid", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestThirdpartyUrlField () {
-      return this.requestThirdpartyUrlField(true);
-    }
-    public APIRequestGetAdContracts requestThirdpartyUrlField (boolean value) {
-      this.requestField("thirdparty_url", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestVatCountryField () {
-      return this.requestVatCountryField(true);
-    }
-    public APIRequestGetAdContracts requestVatCountryField (boolean value) {
-      this.requestField("vat_country", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestVersionField () {
-      return this.requestVersionField(true);
-    }
-    public APIRequestGetAdContracts requestVersionField (boolean value) {
-      this.requestField("version", value);
-      return this;
-    }
-    public APIRequestGetAdContracts requestVerticalField () {
-      return this.requestVerticalField(true);
-    }
-    public APIRequestGetAdContracts requestVerticalField (boolean value) {
-      this.requestField("vertical", value);
-      return this;
-    }
-  }
-
   public static class APIRequestGetAdCreatives extends APIRequest<AdCreative> {
 
     APINodeList<AdCreative> lastResponse = null;
@@ -2623,6 +2175,7 @@ public class AdAccount extends APINode {
       "destination_set_id",
       "dynamic_ad_voice",
       "effective_authorization_category",
+      "effective_instagram_media_id",
       "effective_instagram_story_id",
       "effective_object_story_id",
       "enable_direct_install",
@@ -2861,6 +2414,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdCreatives requestEffectiveAuthorizationCategoryField (boolean value) {
       this.requestField("effective_authorization_category", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestEffectiveInstagramMediaIdField () {
+      return this.requestEffectiveInstagramMediaIdField(true);
+    }
+    public APIRequestGetAdCreatives requestEffectiveInstagramMediaIdField (boolean value) {
+      this.requestField("effective_instagram_media_id", value);
       return this;
     }
     public APIRequestGetAdCreatives requestEffectiveInstagramStoryIdField () {
@@ -3589,6 +3149,7 @@ public class AdAccount extends APINode {
       "destination_set_id",
       "dynamic_ad_voice",
       "effective_authorization_category",
+      "effective_instagram_media_id",
       "effective_instagram_story_id",
       "effective_object_story_id",
       "enable_direct_install",
@@ -3845,6 +3406,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdCreativesByLabels requestEffectiveAuthorizationCategoryField (boolean value) {
       this.requestField("effective_authorization_category", value);
+      return this;
+    }
+    public APIRequestGetAdCreativesByLabels requestEffectiveInstagramMediaIdField () {
+      return this.requestEffectiveInstagramMediaIdField(true);
+    }
+    public APIRequestGetAdCreativesByLabels requestEffectiveInstagramMediaIdField (boolean value) {
+      this.requestField("effective_instagram_media_id", value);
       return this;
     }
     public APIRequestGetAdCreativesByLabels requestEffectiveInstagramStoryIdField () {
@@ -7028,9 +6596,9 @@ public class AdAccount extends APINode {
 
     public static final String[] FIELDS = {
       "actor_id",
+      "ads_running_or_in_review_count",
       "has_hit_total_live_ads_limit",
       "live_ads_quota_left",
-      "total_live_ads",
       "total_live_ads_in_current_account",
       "total_live_ads_limit",
     };
@@ -7131,6 +6699,13 @@ public class AdAccount extends APINode {
       this.requestField("actor_id", value);
       return this;
     }
+    public APIRequestGetAdsVolume requestAdsRunningOrInReviewCountField () {
+      return this.requestAdsRunningOrInReviewCountField(true);
+    }
+    public APIRequestGetAdsVolume requestAdsRunningOrInReviewCountField (boolean value) {
+      this.requestField("ads_running_or_in_review_count", value);
+      return this;
+    }
     public APIRequestGetAdsVolume requestHasHitTotalLiveAdsLimitField () {
       return this.requestHasHitTotalLiveAdsLimitField(true);
     }
@@ -7143,13 +6718,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdsVolume requestLiveAdsQuotaLeftField (boolean value) {
       this.requestField("live_ads_quota_left", value);
-      return this;
-    }
-    public APIRequestGetAdsVolume requestTotalLiveAdsField () {
-      return this.requestTotalLiveAdsField(true);
-    }
-    public APIRequestGetAdsVolume requestTotalLiveAdsField (boolean value) {
-      this.requestField("total_live_ads", value);
       return this;
     }
     public APIRequestGetAdsVolume requestTotalLiveAdsInCurrentAccountField () {
@@ -9536,614 +9104,6 @@ public class AdAccount extends APINode {
       return this;
     }
 
-  }
-
-  public static class APIRequestGetAdToplineDetails extends APIRequest<AdToplineDetail> {
-
-    APINodeList<AdToplineDetail> lastResponse = null;
-    @Override
-    public APINodeList<AdToplineDetail> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "active_status",
-      "ad_account_id",
-      "flight_end_date",
-      "flight_start_date",
-      "id",
-      "io_number",
-      "line_number",
-      "price",
-      "quantity",
-      "sf_detail_line_id",
-      "subline_id",
-      "targets",
-      "time_created",
-      "time_updated",
-      "topline_id",
-    };
-
-    @Override
-    public APINodeList<AdToplineDetail> parseResponse(String response, String header) throws APIException {
-      return AdToplineDetail.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<AdToplineDetail> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<AdToplineDetail> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<AdToplineDetail>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<AdToplineDetail>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<AdToplineDetail>>() {
-           public APINodeList<AdToplineDetail> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetAdToplineDetails.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetAdToplineDetails(String nodeId, APIContext context) {
-      super(context, nodeId, "/adtoplinedetails", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetAdToplineDetails setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdToplineDetails setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetAdToplineDetails requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetAdToplineDetails requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdToplineDetails requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetAdToplineDetails requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdToplineDetails requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdToplineDetails requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetAdToplineDetails requestActiveStatusField () {
-      return this.requestActiveStatusField(true);
-    }
-    public APIRequestGetAdToplineDetails requestActiveStatusField (boolean value) {
-      this.requestField("active_status", value);
-      return this;
-    }
-    public APIRequestGetAdToplineDetails requestAdAccountIdField () {
-      return this.requestAdAccountIdField(true);
-    }
-    public APIRequestGetAdToplineDetails requestAdAccountIdField (boolean value) {
-      this.requestField("ad_account_id", value);
-      return this;
-    }
-    public APIRequestGetAdToplineDetails requestFlightEndDateField () {
-      return this.requestFlightEndDateField(true);
-    }
-    public APIRequestGetAdToplineDetails requestFlightEndDateField (boolean value) {
-      this.requestField("flight_end_date", value);
-      return this;
-    }
-    public APIRequestGetAdToplineDetails requestFlightStartDateField () {
-      return this.requestFlightStartDateField(true);
-    }
-    public APIRequestGetAdToplineDetails requestFlightStartDateField (boolean value) {
-      this.requestField("flight_start_date", value);
-      return this;
-    }
-    public APIRequestGetAdToplineDetails requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetAdToplineDetails requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetAdToplineDetails requestIoNumberField () {
-      return this.requestIoNumberField(true);
-    }
-    public APIRequestGetAdToplineDetails requestIoNumberField (boolean value) {
-      this.requestField("io_number", value);
-      return this;
-    }
-    public APIRequestGetAdToplineDetails requestLineNumberField () {
-      return this.requestLineNumberField(true);
-    }
-    public APIRequestGetAdToplineDetails requestLineNumberField (boolean value) {
-      this.requestField("line_number", value);
-      return this;
-    }
-    public APIRequestGetAdToplineDetails requestPriceField () {
-      return this.requestPriceField(true);
-    }
-    public APIRequestGetAdToplineDetails requestPriceField (boolean value) {
-      this.requestField("price", value);
-      return this;
-    }
-    public APIRequestGetAdToplineDetails requestQuantityField () {
-      return this.requestQuantityField(true);
-    }
-    public APIRequestGetAdToplineDetails requestQuantityField (boolean value) {
-      this.requestField("quantity", value);
-      return this;
-    }
-    public APIRequestGetAdToplineDetails requestSfDetailLineIdField () {
-      return this.requestSfDetailLineIdField(true);
-    }
-    public APIRequestGetAdToplineDetails requestSfDetailLineIdField (boolean value) {
-      this.requestField("sf_detail_line_id", value);
-      return this;
-    }
-    public APIRequestGetAdToplineDetails requestSublineIdField () {
-      return this.requestSublineIdField(true);
-    }
-    public APIRequestGetAdToplineDetails requestSublineIdField (boolean value) {
-      this.requestField("subline_id", value);
-      return this;
-    }
-    public APIRequestGetAdToplineDetails requestTargetsField () {
-      return this.requestTargetsField(true);
-    }
-    public APIRequestGetAdToplineDetails requestTargetsField (boolean value) {
-      this.requestField("targets", value);
-      return this;
-    }
-    public APIRequestGetAdToplineDetails requestTimeCreatedField () {
-      return this.requestTimeCreatedField(true);
-    }
-    public APIRequestGetAdToplineDetails requestTimeCreatedField (boolean value) {
-      this.requestField("time_created", value);
-      return this;
-    }
-    public APIRequestGetAdToplineDetails requestTimeUpdatedField () {
-      return this.requestTimeUpdatedField(true);
-    }
-    public APIRequestGetAdToplineDetails requestTimeUpdatedField (boolean value) {
-      this.requestField("time_updated", value);
-      return this;
-    }
-    public APIRequestGetAdToplineDetails requestToplineIdField () {
-      return this.requestToplineIdField(true);
-    }
-    public APIRequestGetAdToplineDetails requestToplineIdField (boolean value) {
-      this.requestField("topline_id", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestGetAdTopLines extends APIRequest<AdTopline> {
-
-    APINodeList<AdTopline> lastResponse = null;
-    @Override
-    public APINodeList<AdTopline> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "account_id",
-      "client_approval_date",
-      "created_by",
-      "created_date",
-      "description",
-      "flight_end_date",
-      "flight_start_date",
-      "func_cap_amount",
-      "func_cap_amount_with_offset",
-      "func_line_amount",
-      "func_line_amount_with_offset",
-      "func_price",
-      "func_price_with_offset",
-      "gender",
-      "id",
-      "impressions",
-      "io_number",
-      "is_bonus_line",
-      "keywords",
-      "last_updated_by",
-      "last_updated_date",
-      "line_number",
-      "line_position",
-      "line_type",
-      "location",
-      "max_age",
-      "max_budget",
-      "min_age",
-      "price_per_trp",
-      "product_type",
-      "rev_assurance_approval_date",
-      "targets",
-      "trp_updated_time",
-      "trp_value",
-      "uom",
-    };
-
-    @Override
-    public APINodeList<AdTopline> parseResponse(String response, String header) throws APIException {
-      return AdTopline.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<AdTopline> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<AdTopline> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<AdTopline>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<AdTopline>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<AdTopline>>() {
-           public APINodeList<AdTopline> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetAdTopLines.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetAdTopLines(String nodeId, APIContext context) {
-      super(context, nodeId, "/adtoplines", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetAdTopLines setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdTopLines setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetAdTopLines requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetAdTopLines requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdTopLines requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetAdTopLines requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdTopLines requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdTopLines requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetAdTopLines requestAccountIdField () {
-      return this.requestAccountIdField(true);
-    }
-    public APIRequestGetAdTopLines requestAccountIdField (boolean value) {
-      this.requestField("account_id", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestClientApprovalDateField () {
-      return this.requestClientApprovalDateField(true);
-    }
-    public APIRequestGetAdTopLines requestClientApprovalDateField (boolean value) {
-      this.requestField("client_approval_date", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestCreatedByField () {
-      return this.requestCreatedByField(true);
-    }
-    public APIRequestGetAdTopLines requestCreatedByField (boolean value) {
-      this.requestField("created_by", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestCreatedDateField () {
-      return this.requestCreatedDateField(true);
-    }
-    public APIRequestGetAdTopLines requestCreatedDateField (boolean value) {
-      this.requestField("created_date", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGetAdTopLines requestDescriptionField (boolean value) {
-      this.requestField("description", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestFlightEndDateField () {
-      return this.requestFlightEndDateField(true);
-    }
-    public APIRequestGetAdTopLines requestFlightEndDateField (boolean value) {
-      this.requestField("flight_end_date", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestFlightStartDateField () {
-      return this.requestFlightStartDateField(true);
-    }
-    public APIRequestGetAdTopLines requestFlightStartDateField (boolean value) {
-      this.requestField("flight_start_date", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestFuncCapAmountField () {
-      return this.requestFuncCapAmountField(true);
-    }
-    public APIRequestGetAdTopLines requestFuncCapAmountField (boolean value) {
-      this.requestField("func_cap_amount", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestFuncCapAmountWithOffsetField () {
-      return this.requestFuncCapAmountWithOffsetField(true);
-    }
-    public APIRequestGetAdTopLines requestFuncCapAmountWithOffsetField (boolean value) {
-      this.requestField("func_cap_amount_with_offset", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestFuncLineAmountField () {
-      return this.requestFuncLineAmountField(true);
-    }
-    public APIRequestGetAdTopLines requestFuncLineAmountField (boolean value) {
-      this.requestField("func_line_amount", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestFuncLineAmountWithOffsetField () {
-      return this.requestFuncLineAmountWithOffsetField(true);
-    }
-    public APIRequestGetAdTopLines requestFuncLineAmountWithOffsetField (boolean value) {
-      this.requestField("func_line_amount_with_offset", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestFuncPriceField () {
-      return this.requestFuncPriceField(true);
-    }
-    public APIRequestGetAdTopLines requestFuncPriceField (boolean value) {
-      this.requestField("func_price", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestFuncPriceWithOffsetField () {
-      return this.requestFuncPriceWithOffsetField(true);
-    }
-    public APIRequestGetAdTopLines requestFuncPriceWithOffsetField (boolean value) {
-      this.requestField("func_price_with_offset", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestGenderField () {
-      return this.requestGenderField(true);
-    }
-    public APIRequestGetAdTopLines requestGenderField (boolean value) {
-      this.requestField("gender", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetAdTopLines requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestImpressionsField () {
-      return this.requestImpressionsField(true);
-    }
-    public APIRequestGetAdTopLines requestImpressionsField (boolean value) {
-      this.requestField("impressions", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestIoNumberField () {
-      return this.requestIoNumberField(true);
-    }
-    public APIRequestGetAdTopLines requestIoNumberField (boolean value) {
-      this.requestField("io_number", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestIsBonusLineField () {
-      return this.requestIsBonusLineField(true);
-    }
-    public APIRequestGetAdTopLines requestIsBonusLineField (boolean value) {
-      this.requestField("is_bonus_line", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestKeywordsField () {
-      return this.requestKeywordsField(true);
-    }
-    public APIRequestGetAdTopLines requestKeywordsField (boolean value) {
-      this.requestField("keywords", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestLastUpdatedByField () {
-      return this.requestLastUpdatedByField(true);
-    }
-    public APIRequestGetAdTopLines requestLastUpdatedByField (boolean value) {
-      this.requestField("last_updated_by", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestLastUpdatedDateField () {
-      return this.requestLastUpdatedDateField(true);
-    }
-    public APIRequestGetAdTopLines requestLastUpdatedDateField (boolean value) {
-      this.requestField("last_updated_date", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestLineNumberField () {
-      return this.requestLineNumberField(true);
-    }
-    public APIRequestGetAdTopLines requestLineNumberField (boolean value) {
-      this.requestField("line_number", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestLinePositionField () {
-      return this.requestLinePositionField(true);
-    }
-    public APIRequestGetAdTopLines requestLinePositionField (boolean value) {
-      this.requestField("line_position", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestLineTypeField () {
-      return this.requestLineTypeField(true);
-    }
-    public APIRequestGetAdTopLines requestLineTypeField (boolean value) {
-      this.requestField("line_type", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestLocationField () {
-      return this.requestLocationField(true);
-    }
-    public APIRequestGetAdTopLines requestLocationField (boolean value) {
-      this.requestField("location", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestMaxAgeField () {
-      return this.requestMaxAgeField(true);
-    }
-    public APIRequestGetAdTopLines requestMaxAgeField (boolean value) {
-      this.requestField("max_age", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestMaxBudgetField () {
-      return this.requestMaxBudgetField(true);
-    }
-    public APIRequestGetAdTopLines requestMaxBudgetField (boolean value) {
-      this.requestField("max_budget", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestMinAgeField () {
-      return this.requestMinAgeField(true);
-    }
-    public APIRequestGetAdTopLines requestMinAgeField (boolean value) {
-      this.requestField("min_age", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestPricePerTrpField () {
-      return this.requestPricePerTrpField(true);
-    }
-    public APIRequestGetAdTopLines requestPricePerTrpField (boolean value) {
-      this.requestField("price_per_trp", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestProductTypeField () {
-      return this.requestProductTypeField(true);
-    }
-    public APIRequestGetAdTopLines requestProductTypeField (boolean value) {
-      this.requestField("product_type", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestRevAssuranceApprovalDateField () {
-      return this.requestRevAssuranceApprovalDateField(true);
-    }
-    public APIRequestGetAdTopLines requestRevAssuranceApprovalDateField (boolean value) {
-      this.requestField("rev_assurance_approval_date", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestTargetsField () {
-      return this.requestTargetsField(true);
-    }
-    public APIRequestGetAdTopLines requestTargetsField (boolean value) {
-      this.requestField("targets", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestTrpUpdatedTimeField () {
-      return this.requestTrpUpdatedTimeField(true);
-    }
-    public APIRequestGetAdTopLines requestTrpUpdatedTimeField (boolean value) {
-      this.requestField("trp_updated_time", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestTrpValueField () {
-      return this.requestTrpValueField(true);
-    }
-    public APIRequestGetAdTopLines requestTrpValueField (boolean value) {
-      this.requestField("trp_value", value);
-      return this;
-    }
-    public APIRequestGetAdTopLines requestUomField () {
-      return this.requestUomField(true);
-    }
-    public APIRequestGetAdTopLines requestUomField (boolean value) {
-      this.requestField("uom", value);
-      return this;
-    }
   }
 
   public static class APIRequestGetAdvertisableApplications extends APIRequest<Application> {
@@ -26125,11 +25085,131 @@ public class AdAccount extends APINode {
 
   }
 
-  public static class APIRequestCreateSubscribedApp extends APIRequest<APINode> {
+  public static class APIRequestGetSubscribedApps extends APIRequest<AdAccountSubscribedApps> {
 
-    APINode lastResponse = null;
+    APINodeList<AdAccountSubscribedApps> lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public APINodeList<AdAccountSubscribedApps> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "app_id",
+      "app_name",
+    };
+
+    @Override
+    public APINodeList<AdAccountSubscribedApps> parseResponse(String response, String header) throws APIException {
+      return AdAccountSubscribedApps.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<AdAccountSubscribedApps> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdAccountSubscribedApps> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<AdAccountSubscribedApps>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdAccountSubscribedApps>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<AdAccountSubscribedApps>>() {
+           public APINodeList<AdAccountSubscribedApps> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetSubscribedApps.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetSubscribedApps(String nodeId, APIContext context) {
+      super(context, nodeId, "/subscribed_apps", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetSubscribedApps setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSubscribedApps setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetSubscribedApps requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetSubscribedApps requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSubscribedApps requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetSubscribedApps requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSubscribedApps requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSubscribedApps requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetSubscribedApps requestAppIdField () {
+      return this.requestAppIdField(true);
+    }
+    public APIRequestGetSubscribedApps requestAppIdField (boolean value) {
+      this.requestField("app_id", value);
+      return this;
+    }
+    public APIRequestGetSubscribedApps requestAppNameField () {
+      return this.requestAppNameField(true);
+    }
+    public APIRequestGetSubscribedApps requestAppNameField (boolean value) {
+      this.requestField("app_name", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreateSubscribedApp extends APIRequest<AdAccountSubscribedApps> {
+
+    AdAccountSubscribedApps lastResponse = null;
+    @Override
+    public AdAccountSubscribedApps getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -26140,31 +25220,31 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
+    public AdAccountSubscribedApps parseResponse(String response, String header) throws APIException {
+      return AdAccountSubscribedApps.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public AdAccountSubscribedApps execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public AdAccountSubscribedApps execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINode> executeAsync() throws APIException {
+    public ListenableFuture<AdAccountSubscribedApps> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<AdAccountSubscribedApps> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, AdAccountSubscribedApps>() {
+           public AdAccountSubscribedApps apply(ResponseWrapper result) {
              try {
                return APIRequestCreateSubscribedApp.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {

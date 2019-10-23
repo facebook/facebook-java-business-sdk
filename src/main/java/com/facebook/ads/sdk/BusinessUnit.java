@@ -59,10 +59,20 @@ public class BusinessUnit extends APINode {
   private Business mBusiness = null;
   @SerializedName("creation_time")
   private String mCreationTime = null;
+  @SerializedName("currency")
+  private String mCurrency = null;
+  @SerializedName("excluded_sources")
+  private Object mExcludedSources = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("is_enabled_for_measurement")
+  private Boolean mIsEnabledForMeasurement = null;
   @SerializedName("name")
   private String mName = null;
+  @SerializedName("time_zone")
+  private String mTimeZone = null;
+  @SerializedName("visits_available_date")
+  private Long mVisitsAvailableDate = null;
   protected static Gson gson = null;
 
   BusinessUnit() {
@@ -296,12 +306,32 @@ public class BusinessUnit extends APINode {
     return mCreationTime;
   }
 
+  public String getFieldCurrency() {
+    return mCurrency;
+  }
+
+  public Object getFieldExcludedSources() {
+    return mExcludedSources;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
+  public Boolean getFieldIsEnabledForMeasurement() {
+    return mIsEnabledForMeasurement;
+  }
+
   public String getFieldName() {
     return mName;
+  }
+
+  public String getFieldTimeZone() {
+    return mTimeZone;
+  }
+
+  public Long getFieldVisitsAvailableDate() {
+    return mVisitsAvailableDate;
   }
 
 
@@ -539,8 +569,13 @@ public class BusinessUnit extends APINode {
     public static final String[] FIELDS = {
       "business",
       "creation_time",
+      "currency",
+      "excluded_sources",
       "id",
+      "is_enabled_for_measurement",
       "name",
+      "time_zone",
+      "visits_available_date",
     };
 
     @Override
@@ -646,6 +681,20 @@ public class BusinessUnit extends APINode {
       this.requestField("creation_time", value);
       return this;
     }
+    public APIRequestGet requestCurrencyField () {
+      return this.requestCurrencyField(true);
+    }
+    public APIRequestGet requestCurrencyField (boolean value) {
+      this.requestField("currency", value);
+      return this;
+    }
+    public APIRequestGet requestExcludedSourcesField () {
+      return this.requestExcludedSourcesField(true);
+    }
+    public APIRequestGet requestExcludedSourcesField (boolean value) {
+      this.requestField("excluded_sources", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -653,11 +702,32 @@ public class BusinessUnit extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestIsEnabledForMeasurementField () {
+      return this.requestIsEnabledForMeasurementField(true);
+    }
+    public APIRequestGet requestIsEnabledForMeasurementField (boolean value) {
+      this.requestField("is_enabled_for_measurement", value);
+      return this;
+    }
     public APIRequestGet requestNameField () {
       return this.requestNameField(true);
     }
     public APIRequestGet requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGet requestTimeZoneField () {
+      return this.requestTimeZoneField(true);
+    }
+    public APIRequestGet requestTimeZoneField (boolean value) {
+      this.requestField("time_zone", value);
+      return this;
+    }
+    public APIRequestGet requestVisitsAvailableDateField () {
+      return this.requestVisitsAvailableDateField(true);
+    }
+    public APIRequestGet requestVisitsAvailableDateField (boolean value) {
+      this.requestField("visits_available_date", value);
       return this;
     }
   }
@@ -679,8 +749,13 @@ public class BusinessUnit extends APINode {
   public BusinessUnit copyFrom(BusinessUnit instance) {
     this.mBusiness = instance.mBusiness;
     this.mCreationTime = instance.mCreationTime;
+    this.mCurrency = instance.mCurrency;
+    this.mExcludedSources = instance.mExcludedSources;
     this.mId = instance.mId;
+    this.mIsEnabledForMeasurement = instance.mIsEnabledForMeasurement;
     this.mName = instance.mName;
+    this.mTimeZone = instance.mTimeZone;
+    this.mVisitsAvailableDate = instance.mVisitsAvailableDate;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

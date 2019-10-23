@@ -671,6 +671,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_HOME_VALUE("home_value"),
       @SerializedName("household_composition")
       VALUE_HOUSEHOLD_COMPOSITION("household_composition"),
+      @SerializedName("id")
+      VALUE_ID("id"),
       @SerializedName("income")
       VALUE_INCOME("income"),
       @SerializedName("industries")
@@ -685,6 +687,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_INTERESTED_IN("interested_in"),
       @SerializedName("interests")
       VALUE_INTERESTS("interests"),
+      @SerializedName("is_instagram_destination_ad")
+      VALUE_IS_INSTAGRAM_DESTINATION_AD("is_instagram_destination_ad"),
       @SerializedName("is_whatsapp_destination_ad")
       VALUE_IS_WHATSAPP_DESTINATION_AD("is_whatsapp_destination_ad"),
       @SerializedName("keywords")

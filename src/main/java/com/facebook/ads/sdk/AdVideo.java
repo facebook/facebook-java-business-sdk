@@ -344,10 +344,6 @@ public class AdVideo extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestCreateAutoTrim createAutoTrim() {
-    return new APIRequestCreateAutoTrim(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetCaptions getCaptions() {
     return new APIRequestGetCaptions(this.getPrefixedId().toString(), context);
   }
@@ -402,10 +398,6 @@ public class AdVideo extends APINode {
 
   public APIRequestGetSponsorTags getSponsorTags() {
     return new APIRequestGetSponsorTags(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateSummarization createSummarization() {
-    return new APIRequestCreateSummarization(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetTags getTags() {
@@ -614,126 +606,6 @@ public class AdVideo extends APINode {
   }
 
 
-
-  public static class APIRequestCreateAutoTrim extends APIRequest<AdVideo> {
-
-    AdVideo lastResponse = null;
-    @Override
-    public AdVideo getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "auto_trim_type",
-      "target_id",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public AdVideo parseResponse(String response, String header) throws APIException {
-      return AdVideo.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public AdVideo execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdVideo execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdVideo> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdVideo> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, AdVideo>() {
-           public AdVideo apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateAutoTrim.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateAutoTrim(String nodeId, APIContext context) {
-      super(context, nodeId, "/auto_trims", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateAutoTrim setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAutoTrim setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateAutoTrim setAutoTrimType (String autoTrimType) {
-      this.setParam("auto_trim_type", autoTrimType);
-      return this;
-    }
-
-    public APIRequestCreateAutoTrim setTargetId (Long targetId) {
-      this.setParam("target_id", targetId);
-      return this;
-    }
-    public APIRequestCreateAutoTrim setTargetId (String targetId) {
-      this.setParam("target_id", targetId);
-      return this;
-    }
-
-    public APIRequestCreateAutoTrim requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateAutoTrim requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAutoTrim requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateAutoTrim requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAutoTrim requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAutoTrim requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
 
   public static class APIRequestGetCaptions extends APIRequest<APINode> {
 
@@ -5629,126 +5501,6 @@ public class AdVideo extends APINode {
       this.requestField("written_by", value);
       return this;
     }
-  }
-
-  public static class APIRequestCreateSummarization extends APIRequest<AdVideo> {
-
-    AdVideo lastResponse = null;
-    @Override
-    public AdVideo getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "summarization_type",
-      "target_id",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public AdVideo parseResponse(String response, String header) throws APIException {
-      return AdVideo.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public AdVideo execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdVideo execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdVideo> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdVideo> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, AdVideo>() {
-           public AdVideo apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateSummarization.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateSummarization(String nodeId, APIContext context) {
-      super(context, nodeId, "/summarizations", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateSummarization setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateSummarization setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateSummarization setSummarizationType (String summarizationType) {
-      this.setParam("summarization_type", summarizationType);
-      return this;
-    }
-
-    public APIRequestCreateSummarization setTargetId (Long targetId) {
-      this.setParam("target_id", targetId);
-      return this;
-    }
-    public APIRequestCreateSummarization setTargetId (String targetId) {
-      this.setParam("target_id", targetId);
-      return this;
-    }
-
-    public APIRequestCreateSummarization requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateSummarization requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateSummarization requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateSummarization requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateSummarization requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateSummarization requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestGetTags extends APIRequest<TaggableSubject> {

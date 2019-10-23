@@ -377,6 +377,7 @@ public class UnifiedThread extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "source",
       "user",
     };
 
@@ -435,6 +436,15 @@ public class UnifiedThread extends APINode {
       return this;
     }
 
+
+    public APIRequestGetMessages setSource (EnumSource source) {
+      this.setParam("source", source);
+      return this;
+    }
+    public APIRequestGetMessages setSource (String source) {
+      this.setParam("source", source);
+      return this;
+    }
 
     public APIRequestGetMessages setUser (Long user) {
       this.setParam("user", user);
@@ -1309,6 +1319,25 @@ public class UnifiedThread extends APINode {
       this.requestField("wallpaper", value);
       return this;
     }
+  }
+
+  public static enum EnumSource {
+      @SerializedName("ALL")
+      VALUE_ALL("ALL"),
+      @SerializedName("USER")
+      VALUE_USER("USER"),
+      ;
+
+      private String value;
+
+      private EnumSource(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
   public static enum EnumAudioType {

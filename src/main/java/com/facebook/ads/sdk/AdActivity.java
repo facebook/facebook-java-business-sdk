@@ -483,6 +483,8 @@ public class AdActivity extends APINode {
       VALUE_UPDATE_CAMPAIGN_NAME("update_campaign_name"),
       @SerializedName("update_campaign_run_status")
       VALUE_UPDATE_CAMPAIGN_RUN_STATUS("update_campaign_run_status"),
+      @SerializedName("update_campaign_schedule")
+      VALUE_UPDATE_CAMPAIGN_SCHEDULE("update_campaign_schedule"),
       ;
 
       private String value;

@@ -9966,11 +9966,19 @@ public class Application extends APINode {
       return this;
     }
 
+    public APIRequestCreateUpload setFileName (Object fileName) {
+      this.setParam("file_name", fileName);
+      return this;
+    }
     public APIRequestCreateUpload setFileName (String fileName) {
       this.setParam("file_name", fileName);
       return this;
     }
 
+    public APIRequestCreateUpload setFileType (Object fileType) {
+      this.setParam("file_type", fileType);
+      return this;
+    }
     public APIRequestCreateUpload setFileType (String fileType) {
       this.setParam("file_type", fileType);
       return this;
@@ -11793,6 +11801,8 @@ public class Application extends APINode {
       VALUE_COUNT_PER_USER("COUNT_PER_USER"),
       @SerializedName("DAU")
       VALUE_DAU("DAU"),
+      @SerializedName("EVENT_LATEST_FIRE_TIME")
+      VALUE_EVENT_LATEST_FIRE_TIME("EVENT_LATEST_FIRE_TIME"),
       @SerializedName("EVENT_SOURCE_IDS")
       VALUE_EVENT_SOURCE_IDS("EVENT_SOURCE_IDS"),
       @SerializedName("JOURNEY_CHANNEL_INCLUSION")

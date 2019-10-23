@@ -1022,6 +1022,7 @@ public class Vehicle extends APINode {
       "description",
       "drivetrain",
       "exterior_color",
+      "fb_page_id",
       "fuel_type",
       "images",
       "interior_color",
@@ -1181,6 +1182,11 @@ public class Vehicle extends APINode {
 
     public APIRequestUpdate setExteriorColor (String exteriorColor) {
       this.setParam("exterior_color", exteriorColor);
+      return this;
+    }
+
+    public APIRequestUpdate setFbPageId (String fbPageId) {
+      this.setParam("fb_page_id", fbPageId);
       return this;
     }
 

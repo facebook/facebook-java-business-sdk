@@ -1426,6 +1426,7 @@ public class Business extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "ad_account_created_from_bm_flag",
       "currency",
       "end_advertiser",
       "funding_id",
@@ -1495,6 +1496,15 @@ public class Business extends APINode {
       return this;
     }
 
+
+    public APIRequestCreateAdAccount setAdAccountCreatedFromBmFlag (Boolean adAccountCreatedFromBmFlag) {
+      this.setParam("ad_account_created_from_bm_flag", adAccountCreatedFromBmFlag);
+      return this;
+    }
+    public APIRequestCreateAdAccount setAdAccountCreatedFromBmFlag (String adAccountCreatedFromBmFlag) {
+      this.setParam("ad_account_created_from_bm_flag", adAccountCreatedFromBmFlag);
+      return this;
+    }
 
     public APIRequestCreateAdAccount setCurrency (String currency) {
       this.setParam("currency", currency);

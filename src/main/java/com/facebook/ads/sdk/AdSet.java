@@ -1471,6 +1471,7 @@ public class AdSet extends APINode {
       "destination_set_id",
       "dynamic_ad_voice",
       "effective_authorization_category",
+      "effective_instagram_media_id",
       "effective_instagram_story_id",
       "effective_object_story_id",
       "enable_direct_install",
@@ -1709,6 +1710,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAdCreatives requestEffectiveAuthorizationCategoryField (boolean value) {
       this.requestField("effective_authorization_category", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestEffectiveInstagramMediaIdField () {
+      return this.requestEffectiveInstagramMediaIdField(true);
+    }
+    public APIRequestGetAdCreatives requestEffectiveInstagramMediaIdField (boolean value) {
+      this.requestField("effective_instagram_media_id", value);
       return this;
     }
     public APIRequestGetAdCreatives requestEffectiveInstagramStoryIdField () {

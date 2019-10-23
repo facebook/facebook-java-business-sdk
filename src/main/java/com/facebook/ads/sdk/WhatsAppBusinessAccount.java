@@ -1200,6 +1200,8 @@ public class WhatsAppBusinessAccount extends APINode {
       VALUE_ALERT_UPDATE("ALERT_UPDATE"),
       @SerializedName("APPOINTMENT_UPDATE")
       VALUE_APPOINTMENT_UPDATE("APPOINTMENT_UPDATE"),
+      @SerializedName("AUTO_REPLY")
+      VALUE_AUTO_REPLY("AUTO_REPLY"),
       @SerializedName("ISSUE_RESOLUTION")
       VALUE_ISSUE_RESOLUTION("ISSUE_RESOLUTION"),
       @SerializedName("PAYMENT_UPDATE")
@@ -1233,6 +1235,8 @@ public class WhatsAppBusinessAccount extends APINode {
       VALUE_APPROVED("APPROVED"),
       @SerializedName("DELETED")
       VALUE_DELETED("DELETED"),
+      @SerializedName("DISABLED")
+      VALUE_DISABLED("DISABLED"),
       @SerializedName("PENDING")
       VALUE_PENDING("PENDING"),
       @SerializedName("PENDING_DELETION")
