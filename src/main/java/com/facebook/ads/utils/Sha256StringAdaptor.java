@@ -17,11 +17,11 @@
  */
 package com.facebook.ads.utils;
 
-
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.lang.reflect.Field;
 
 public class Sha256StringAdaptor extends TypeAdapter<String> {
 
@@ -34,9 +34,30 @@ public class Sha256StringAdaptor extends TypeAdapter<String> {
   public void write(JsonWriter writer, String input) throws IOException {
     String hashedValue = null;
     if (input != null) {
-      hashedValue = ServerSideApiUtil.hash(ServerSideApiUtil.normalize(input));
+      String fieldName = null;
+      try {
+        fieldName = this.getFieldName(writer);
+      } catch (NoSuchFieldException ex) {
+        ex.printStackTrace();
+        throw new RuntimeException("Error while reading current serializing field's name", ex);
+      }
+      catch (IllegalAccessException ex) {
+        ex.printStackTrace();
+        throw new RuntimeException("Error while reading current serializing field's name", ex);
+      }
+
+      String normalizedString = ServerSideApiUtil.normalize(input, fieldName);
+      hashedValue = ServerSideApiUtil.hash(normalizedString);
     }
+
     writer.value(hashedValue);
   }
 
+  private String getFieldName(JsonWriter writer)
+      throws NoSuchFieldException, IllegalAccessException {
+
+    Field nameField = JsonWriter.class.getDeclaredField("deferredName");
+    nameField.setAccessible(true);
+    return (String) nameField.get(writer);
+  }
 }

@@ -17,26 +17,29 @@
  */
 package com.facebook.ads.utils;
 
-import com.facebook.ads.sdk.serverside.GenderEnum;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+public class ServerSideApiConstants {
 
-public class Sha256GenderEnumAdaptor extends TypeAdapter<GenderEnum> {
+    public static final String EMAIL = "em";
 
-  @Override
-  public GenderEnum read(JsonReader reader) throws IOException {
-    throw new UnsupportedEncodingException();
-  }
+    public static final String PHONE_NUMBER = "ph";
 
-  @Override
-  public void write(JsonWriter writer, GenderEnum input) throws IOException {
-    String hashedValue = null;
-    if (input != null) {
-      hashedValue = ServerSideApiUtil.hash(input.toString());
-    }
-    writer.value(hashedValue);
-  }
+    public static final String GENDER = "ge";
+
+    public static final String DATE_OF_BIRTH = "db";
+
+    public static final String LAST_NAME = "ln";
+
+    public static final String FIRST_NAME = "fn";
+
+    public static final String CITY = "ct";
+
+    public static final String COUNTRY = "country";
+
+    public static final String STATE = "st";
+
+    public static final String ZIP_CODE = "zp";
+
+    public static final String EXTERNAL_ID = "external_id";
+
+    public static final String CURRENCY = "currency";
 }

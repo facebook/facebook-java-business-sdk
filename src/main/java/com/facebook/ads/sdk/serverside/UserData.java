@@ -17,6 +17,7 @@
  */
 package com.facebook.ads.sdk.serverside;
 
+import com.facebook.ads.utils.ServerSideApiConstants;
 import com.facebook.ads.utils.Sha256GenderEnumAdaptor;
 import com.facebook.ads.utils.Sha256StringAdaptor;
 import com.google.gson.annotations.JsonAdapter;
@@ -28,47 +29,47 @@ import java.util.Objects;
  */
 public class UserData {
 
-  @SerializedName("em")
+  @SerializedName(ServerSideApiConstants.EMAIL)
   @JsonAdapter(Sha256StringAdaptor.class)
   private String email = null;
 
-  @SerializedName("ph")
+  @SerializedName(ServerSideApiConstants.PHONE_NUMBER)
   @JsonAdapter(Sha256StringAdaptor.class)
   private String phone = null;
 
-  @SerializedName("ge")
+  @SerializedName(ServerSideApiConstants.GENDER)
   @JsonAdapter(Sha256GenderEnumAdaptor.class)
   private GenderEnum gender = null;
 
-  @SerializedName("db")
+  @SerializedName(ServerSideApiConstants.DATE_OF_BIRTH)
   @JsonAdapter(Sha256StringAdaptor.class)
   private String dateOfBirth = null;
 
-  @SerializedName("ln")
+  @SerializedName(ServerSideApiConstants.LAST_NAME)
   @JsonAdapter(Sha256StringAdaptor.class)
   private String lastName = null;
 
-  @SerializedName("fn")
+  @SerializedName(ServerSideApiConstants.FIRST_NAME)
   @JsonAdapter(Sha256StringAdaptor.class)
   private String firstName = null;
 
-  @SerializedName("ct")
+  @SerializedName(ServerSideApiConstants.CITY)
   @JsonAdapter(Sha256StringAdaptor.class)
   private String city = null;
 
-  @SerializedName("st")
+  @SerializedName(ServerSideApiConstants.STATE)
   @JsonAdapter(Sha256StringAdaptor.class)
   private String state = null;
 
-  @SerializedName("zp")
+  @SerializedName(ServerSideApiConstants.ZIP_CODE)
   @JsonAdapter(Sha256StringAdaptor.class)
   private String zipcode = null;
 
-  @SerializedName("country")
+  @SerializedName(ServerSideApiConstants.COUNTRY)
   @JsonAdapter(Sha256StringAdaptor.class)
   private String countryCode = null;
 
-  @SerializedName("external_id")
+  @SerializedName(ServerSideApiConstants.EXTERNAL_ID)
   @JsonAdapter(Sha256StringAdaptor.class)
   private String externalId = null;
 
