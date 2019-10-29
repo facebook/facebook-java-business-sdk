@@ -179,8 +179,6 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mConversionValues = null;
   @SerializedName("conversions")
   private List<AdsActionStats> mConversions = null;
-  @SerializedName("cost_per_10_sec_video_view")
-  private List<AdsActionStats> mCostPer10SecVideoView = null;
   @SerializedName("cost_per_15_sec_video_view")
   private List<AdsActionStats> mCostPer15SecVideoView = null;
   @SerializedName("cost_per_2_sec_continuous_video_view")
@@ -413,8 +411,6 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mRecurringSubscriptionPaymentActions = null;
   @SerializedName("region")
   private String mRegion = null;
-  @SerializedName("relevance_score")
-  private AdgroupRelevanceScore mRelevanceScore = null;
   @SerializedName("rule_asset")
   private Object mRuleAsset = null;
   @SerializedName("schedule_actions")
@@ -471,14 +467,10 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mUniqueOutboundClicksCtr = null;
   @SerializedName("unique_video_continuous_2_sec_watched_actions")
   private List<AdsActionStats> mUniqueVideoContinuous2SecWatchedActions = null;
-  @SerializedName("unique_video_view_10_sec")
-  private List<AdsActionStats> mUniqueVideoView10Sec = null;
   @SerializedName("unique_video_view_15_sec")
   private List<AdsActionStats> mUniqueVideoView15Sec = null;
   @SerializedName("updated_time")
   private String mUpdatedTime = null;
-  @SerializedName("video_10_sec_watched_actions")
-  private List<AdsActionStats> mVideo10SecWatchedActions = null;
   @SerializedName("video_15_sec_watched_actions")
   private List<AdsActionStats> mVideo15SecWatchedActions = null;
   @SerializedName("video_30_sec_watched_actions")
@@ -1332,20 +1324,6 @@ public class AdsInsights extends APINode {
   public AdsInsights setFieldConversions(String value) {
     Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
     this.mConversions = AdsActionStats.getGson().fromJson(value, type);
-    return this;
-  }
-  public List<AdsActionStats> getFieldCostPer10SecVideoView() {
-    return mCostPer10SecVideoView;
-  }
-
-  public AdsInsights setFieldCostPer10SecVideoView(List<AdsActionStats> value) {
-    this.mCostPer10SecVideoView = value;
-    return this;
-  }
-
-  public AdsInsights setFieldCostPer10SecVideoView(String value) {
-    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
-    this.mCostPer10SecVideoView = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
   public List<AdsActionStats> getFieldCostPer15SecVideoView() {
@@ -2557,20 +2535,6 @@ public class AdsInsights extends APINode {
     return this;
   }
 
-  public AdgroupRelevanceScore getFieldRelevanceScore() {
-    return mRelevanceScore;
-  }
-
-  public AdsInsights setFieldRelevanceScore(AdgroupRelevanceScore value) {
-    this.mRelevanceScore = value;
-    return this;
-  }
-
-  public AdsInsights setFieldRelevanceScore(String value) {
-    Type type = new TypeToken<AdgroupRelevanceScore>(){}.getType();
-    this.mRelevanceScore = AdgroupRelevanceScore.getGson().fromJson(value, type);
-    return this;
-  }
   public Object getFieldRuleAsset() {
     return mRuleAsset;
   }
@@ -2888,20 +2852,6 @@ public class AdsInsights extends APINode {
     this.mUniqueVideoContinuous2SecWatchedActions = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
-  public List<AdsActionStats> getFieldUniqueVideoView10Sec() {
-    return mUniqueVideoView10Sec;
-  }
-
-  public AdsInsights setFieldUniqueVideoView10Sec(List<AdsActionStats> value) {
-    this.mUniqueVideoView10Sec = value;
-    return this;
-  }
-
-  public AdsInsights setFieldUniqueVideoView10Sec(String value) {
-    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
-    this.mUniqueVideoView10Sec = AdsActionStats.getGson().fromJson(value, type);
-    return this;
-  }
   public List<AdsActionStats> getFieldUniqueVideoView15Sec() {
     return mUniqueVideoView15Sec;
   }
@@ -2925,20 +2875,6 @@ public class AdsInsights extends APINode {
     return this;
   }
 
-  public List<AdsActionStats> getFieldVideo10SecWatchedActions() {
-    return mVideo10SecWatchedActions;
-  }
-
-  public AdsInsights setFieldVideo10SecWatchedActions(List<AdsActionStats> value) {
-    this.mVideo10SecWatchedActions = value;
-    return this;
-  }
-
-  public AdsInsights setFieldVideo10SecWatchedActions(String value) {
-    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
-    this.mVideo10SecWatchedActions = AdsActionStats.getGson().fromJson(value, type);
-    return this;
-  }
   public List<AdsActionStats> getFieldVideo15SecWatchedActions() {
     return mVideo15SecWatchedActions;
   }
@@ -3558,7 +3494,6 @@ public class AdsInsights extends APINode {
     this.mConversionRateRanking = instance.mConversionRateRanking;
     this.mConversionValues = instance.mConversionValues;
     this.mConversions = instance.mConversions;
-    this.mCostPer10SecVideoView = instance.mCostPer10SecVideoView;
     this.mCostPer15SecVideoView = instance.mCostPer15SecVideoView;
     this.mCostPer2SecContinuousVideoView = instance.mCostPer2SecContinuousVideoView;
     this.mCostPerActionResult = instance.mCostPerActionResult;
@@ -3675,7 +3610,6 @@ public class AdsInsights extends APINode {
     this.mReach = instance.mReach;
     this.mRecurringSubscriptionPaymentActions = instance.mRecurringSubscriptionPaymentActions;
     this.mRegion = instance.mRegion;
-    this.mRelevanceScore = instance.mRelevanceScore;
     this.mRuleAsset = instance.mRuleAsset;
     this.mScheduleActions = instance.mScheduleActions;
     this.mScheduleValue = instance.mScheduleValue;
@@ -3704,10 +3638,8 @@ public class AdsInsights extends APINode {
     this.mUniqueOutboundClicks = instance.mUniqueOutboundClicks;
     this.mUniqueOutboundClicksCtr = instance.mUniqueOutboundClicksCtr;
     this.mUniqueVideoContinuous2SecWatchedActions = instance.mUniqueVideoContinuous2SecWatchedActions;
-    this.mUniqueVideoView10Sec = instance.mUniqueVideoView10Sec;
     this.mUniqueVideoView15Sec = instance.mUniqueVideoView15Sec;
     this.mUpdatedTime = instance.mUpdatedTime;
-    this.mVideo10SecWatchedActions = instance.mVideo10SecWatchedActions;
     this.mVideo15SecWatchedActions = instance.mVideo15SecWatchedActions;
     this.mVideo30SecWatchedActions = instance.mVideo30SecWatchedActions;
     this.mVideoAsset = instance.mVideoAsset;

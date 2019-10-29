@@ -173,8 +173,6 @@ public class AdAccount extends APINode {
   private Double mTimezoneOffsetHoursUtc = null;
   @SerializedName("tos_accepted")
   private Map<String, Long> mTosAccepted = null;
-  @SerializedName("user_role")
-  private String mUserRole = null;
   @SerializedName("user_tasks")
   private List<String> mUserTasks = null;
   @SerializedName("user_tos_accepted")
@@ -696,10 +694,6 @@ public class AdAccount extends APINode {
     return new APIRequestGetInstagramAccounts(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetLeadGenForms getLeadGenForms() {
-    return new APIRequestGetLeadGenForms(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetMatchedSearchApplications getMatchedSearchApplications() {
     return new APIRequestGetMatchedSearchApplications(this.getPrefixedId().toString(), context);
   }
@@ -1064,10 +1058,6 @@ public class AdAccount extends APINode {
 
   public Map<String, Long> getFieldTosAccepted() {
     return mTosAccepted;
-  }
-
-  public String getFieldUserRole() {
-    return mUserRole;
   }
 
   public List<String> getFieldUserTasks() {
@@ -20071,356 +20061,6 @@ public class AdAccount extends APINode {
     }
   }
 
-  public static class APIRequestGetLeadGenForms extends APIRequest<LeadgenForm> {
-
-    APINodeList<LeadgenForm> lastResponse = null;
-    @Override
-    public APINodeList<LeadgenForm> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "query",
-    };
-
-    public static final String[] FIELDS = {
-      "allow_organic_lead",
-      "block_display_for_non_targeted_viewer",
-      "context_card",
-      "created_time",
-      "creator",
-      "creator_id",
-      "cusomized_tcpa_content",
-      "expired_leads_count",
-      "extra_details",
-      "follow_up_action_text",
-      "follow_up_action_url",
-      "id",
-      "is_optimized_for_quality",
-      "leadgen_export_csv_url",
-      "leads_count",
-      "legal_content",
-      "locale",
-      "messenger_welcome_message",
-      "name",
-      "organic_leads_count",
-      "page",
-      "page_id",
-      "privacy_policy_url",
-      "qualifiers",
-      "question_page_custom_headline",
-      "questions",
-      "status",
-      "tcpa_compliance",
-      "thank_you_page",
-      "tracking_parameters",
-    };
-
-    @Override
-    public APINodeList<LeadgenForm> parseResponse(String response, String header) throws APIException {
-      return LeadgenForm.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<LeadgenForm> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<LeadgenForm> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<LeadgenForm>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<LeadgenForm>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<LeadgenForm>>() {
-           public APINodeList<LeadgenForm> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetLeadGenForms.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetLeadGenForms(String nodeId, APIContext context) {
-      super(context, nodeId, "/leadgen_forms", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetLeadGenForms setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetLeadGenForms setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetLeadGenForms setQuery (String query) {
-      this.setParam("query", query);
-      return this;
-    }
-
-    public APIRequestGetLeadGenForms requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetLeadGenForms requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetLeadGenForms requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetLeadGenForms requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetLeadGenForms requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetLeadGenForms requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetLeadGenForms requestAllowOrganicLeadField () {
-      return this.requestAllowOrganicLeadField(true);
-    }
-    public APIRequestGetLeadGenForms requestAllowOrganicLeadField (boolean value) {
-      this.requestField("allow_organic_lead", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestBlockDisplayForNonTargetedViewerField () {
-      return this.requestBlockDisplayForNonTargetedViewerField(true);
-    }
-    public APIRequestGetLeadGenForms requestBlockDisplayForNonTargetedViewerField (boolean value) {
-      this.requestField("block_display_for_non_targeted_viewer", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestContextCardField () {
-      return this.requestContextCardField(true);
-    }
-    public APIRequestGetLeadGenForms requestContextCardField (boolean value) {
-      this.requestField("context_card", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestCreatedTimeField () {
-      return this.requestCreatedTimeField(true);
-    }
-    public APIRequestGetLeadGenForms requestCreatedTimeField (boolean value) {
-      this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestCreatorField () {
-      return this.requestCreatorField(true);
-    }
-    public APIRequestGetLeadGenForms requestCreatorField (boolean value) {
-      this.requestField("creator", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestCreatorIdField () {
-      return this.requestCreatorIdField(true);
-    }
-    public APIRequestGetLeadGenForms requestCreatorIdField (boolean value) {
-      this.requestField("creator_id", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestCusomizedTcpaContentField () {
-      return this.requestCusomizedTcpaContentField(true);
-    }
-    public APIRequestGetLeadGenForms requestCusomizedTcpaContentField (boolean value) {
-      this.requestField("cusomized_tcpa_content", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestExpiredLeadsCountField () {
-      return this.requestExpiredLeadsCountField(true);
-    }
-    public APIRequestGetLeadGenForms requestExpiredLeadsCountField (boolean value) {
-      this.requestField("expired_leads_count", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestExtraDetailsField () {
-      return this.requestExtraDetailsField(true);
-    }
-    public APIRequestGetLeadGenForms requestExtraDetailsField (boolean value) {
-      this.requestField("extra_details", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestFollowUpActionTextField () {
-      return this.requestFollowUpActionTextField(true);
-    }
-    public APIRequestGetLeadGenForms requestFollowUpActionTextField (boolean value) {
-      this.requestField("follow_up_action_text", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestFollowUpActionUrlField () {
-      return this.requestFollowUpActionUrlField(true);
-    }
-    public APIRequestGetLeadGenForms requestFollowUpActionUrlField (boolean value) {
-      this.requestField("follow_up_action_url", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetLeadGenForms requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestIsOptimizedForQualityField () {
-      return this.requestIsOptimizedForQualityField(true);
-    }
-    public APIRequestGetLeadGenForms requestIsOptimizedForQualityField (boolean value) {
-      this.requestField("is_optimized_for_quality", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestLeadgenExportCsvUrlField () {
-      return this.requestLeadgenExportCsvUrlField(true);
-    }
-    public APIRequestGetLeadGenForms requestLeadgenExportCsvUrlField (boolean value) {
-      this.requestField("leadgen_export_csv_url", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestLeadsCountField () {
-      return this.requestLeadsCountField(true);
-    }
-    public APIRequestGetLeadGenForms requestLeadsCountField (boolean value) {
-      this.requestField("leads_count", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestLegalContentField () {
-      return this.requestLegalContentField(true);
-    }
-    public APIRequestGetLeadGenForms requestLegalContentField (boolean value) {
-      this.requestField("legal_content", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestLocaleField () {
-      return this.requestLocaleField(true);
-    }
-    public APIRequestGetLeadGenForms requestLocaleField (boolean value) {
-      this.requestField("locale", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestMessengerWelcomeMessageField () {
-      return this.requestMessengerWelcomeMessageField(true);
-    }
-    public APIRequestGetLeadGenForms requestMessengerWelcomeMessageField (boolean value) {
-      this.requestField("messenger_welcome_message", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetLeadGenForms requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestOrganicLeadsCountField () {
-      return this.requestOrganicLeadsCountField(true);
-    }
-    public APIRequestGetLeadGenForms requestOrganicLeadsCountField (boolean value) {
-      this.requestField("organic_leads_count", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestPageField () {
-      return this.requestPageField(true);
-    }
-    public APIRequestGetLeadGenForms requestPageField (boolean value) {
-      this.requestField("page", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestPageIdField () {
-      return this.requestPageIdField(true);
-    }
-    public APIRequestGetLeadGenForms requestPageIdField (boolean value) {
-      this.requestField("page_id", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestPrivacyPolicyUrlField () {
-      return this.requestPrivacyPolicyUrlField(true);
-    }
-    public APIRequestGetLeadGenForms requestPrivacyPolicyUrlField (boolean value) {
-      this.requestField("privacy_policy_url", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestQualifiersField () {
-      return this.requestQualifiersField(true);
-    }
-    public APIRequestGetLeadGenForms requestQualifiersField (boolean value) {
-      this.requestField("qualifiers", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestQuestionPageCustomHeadlineField () {
-      return this.requestQuestionPageCustomHeadlineField(true);
-    }
-    public APIRequestGetLeadGenForms requestQuestionPageCustomHeadlineField (boolean value) {
-      this.requestField("question_page_custom_headline", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestQuestionsField () {
-      return this.requestQuestionsField(true);
-    }
-    public APIRequestGetLeadGenForms requestQuestionsField (boolean value) {
-      this.requestField("questions", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestStatusField () {
-      return this.requestStatusField(true);
-    }
-    public APIRequestGetLeadGenForms requestStatusField (boolean value) {
-      this.requestField("status", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestTcpaComplianceField () {
-      return this.requestTcpaComplianceField(true);
-    }
-    public APIRequestGetLeadGenForms requestTcpaComplianceField (boolean value) {
-      this.requestField("tcpa_compliance", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestThankYouPageField () {
-      return this.requestThankYouPageField(true);
-    }
-    public APIRequestGetLeadGenForms requestThankYouPageField (boolean value) {
-      this.requestField("thank_you_page", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestTrackingParametersField () {
-      return this.requestTrackingParametersField(true);
-    }
-    public APIRequestGetLeadGenForms requestTrackingParametersField (boolean value) {
-      this.requestField("tracking_parameters", value);
-      return this;
-    }
-  }
-
   public static class APIRequestGetMatchedSearchApplications extends APIRequest<AdAccountMatchedSearchApplicationsEdgeData> {
 
     APINodeList<AdAccountMatchedSearchApplicationsEdgeData> lastResponse = null;
@@ -21707,8 +21347,6 @@ public class AdAccount extends APINode {
       "is_webhooks_subscribed",
       "keywords",
       "leadgen_form_preview_details",
-      "leadgen_has_crm_integration",
-      "leadgen_has_fat_ping_crm_integration",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -22363,20 +22001,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetPromotePages requestLeadgenFormPreviewDetailsField (boolean value) {
       this.requestField("leadgen_form_preview_details", value);
-      return this;
-    }
-    public APIRequestGetPromotePages requestLeadgenHasCrmIntegrationField () {
-      return this.requestLeadgenHasCrmIntegrationField(true);
-    }
-    public APIRequestGetPromotePages requestLeadgenHasCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_crm_integration", value);
-      return this;
-    }
-    public APIRequestGetPromotePages requestLeadgenHasFatPingCrmIntegrationField () {
-      return this.requestLeadgenHasFatPingCrmIntegrationField(true);
-    }
-    public APIRequestGetPromotePages requestLeadgenHasFatPingCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_fat_ping_crm_integration", value);
       return this;
     }
     public APIRequestGetPromotePages requestLeadgenTosAcceptanceTimeField () {
@@ -27542,7 +27166,6 @@ public class AdAccount extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
-      "user_role",
       "user_tasks",
       "user_tos_accepted",
     };
@@ -28040,13 +27663,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGet requestTosAcceptedField (boolean value) {
       this.requestField("tos_accepted", value);
-      return this;
-    }
-    public APIRequestGet requestUserRoleField () {
-      return this.requestUserRoleField(true);
-    }
-    public APIRequestGet requestUserRoleField (boolean value) {
-      this.requestField("user_role", value);
       return this;
     }
     public APIRequestGet requestUserTasksField () {
@@ -28903,7 +28519,6 @@ public class AdAccount extends APINode {
     this.mTimezoneName = instance.mTimezoneName;
     this.mTimezoneOffsetHoursUtc = instance.mTimezoneOffsetHoursUtc;
     this.mTosAccepted = instance.mTosAccepted;
-    this.mUserRole = instance.mUserRole;
     this.mUserTasks = instance.mUserTasks;
     this.mUserTosAccepted = instance.mUserTosAccepted;
     this.context = instance.context;

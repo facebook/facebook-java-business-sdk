@@ -1228,8 +1228,6 @@ public class User extends APINode {
       "is_webhooks_subscribed",
       "keywords",
       "leadgen_form_preview_details",
-      "leadgen_has_crm_integration",
-      "leadgen_has_fat_ping_crm_integration",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -1902,20 +1900,6 @@ public class User extends APINode {
     }
     public APIRequestGetAccounts requestLeadgenFormPreviewDetailsField (boolean value) {
       this.requestField("leadgen_form_preview_details", value);
-      return this;
-    }
-    public APIRequestGetAccounts requestLeadgenHasCrmIntegrationField () {
-      return this.requestLeadgenHasCrmIntegrationField(true);
-    }
-    public APIRequestGetAccounts requestLeadgenHasCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_crm_integration", value);
-      return this;
-    }
-    public APIRequestGetAccounts requestLeadgenHasFatPingCrmIntegrationField () {
-      return this.requestLeadgenHasFatPingCrmIntegrationField(true);
-    }
-    public APIRequestGetAccounts requestLeadgenHasFatPingCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_fat_ping_crm_integration", value);
       return this;
     }
     public APIRequestGetAccounts requestLeadgenTosAcceptanceTimeField () {
@@ -3467,7 +3451,6 @@ public class User extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
-      "user_role",
       "user_tasks",
       "user_tos_accepted",
     };
@@ -3965,13 +3948,6 @@ public class User extends APINode {
     }
     public APIRequestGetAdAccounts requestTosAcceptedField (boolean value) {
       this.requestField("tos_accepted", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestUserRoleField () {
-      return this.requestUserRoleField(true);
-    }
-    public APIRequestGetAdAccounts requestUserRoleField (boolean value) {
-      this.requestField("user_role", value);
       return this;
     }
     public APIRequestGetAdAccounts requestUserTasksField () {
@@ -4757,7 +4733,6 @@ public class User extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
-      "user_role",
       "user_tasks",
       "user_tos_accepted",
     };
@@ -5257,13 +5232,6 @@ public class User extends APINode {
       this.requestField("tos_accepted", value);
       return this;
     }
-    public APIRequestGetAssignedAdAccounts requestUserRoleField () {
-      return this.requestUserRoleField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestUserRoleField (boolean value) {
-      this.requestField("user_role", value);
-      return this;
-    }
     public APIRequestGetAssignedAdAccounts requestUserTasksField () {
       return this.requestUserTasksField(true);
     }
@@ -5488,8 +5456,6 @@ public class User extends APINode {
       "is_webhooks_subscribed",
       "keywords",
       "leadgen_form_preview_details",
-      "leadgen_has_crm_integration",
-      "leadgen_has_fat_ping_crm_integration",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -6144,20 +6110,6 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedPages requestLeadgenFormPreviewDetailsField (boolean value) {
       this.requestField("leadgen_form_preview_details", value);
-      return this;
-    }
-    public APIRequestGetAssignedPages requestLeadgenHasCrmIntegrationField () {
-      return this.requestLeadgenHasCrmIntegrationField(true);
-    }
-    public APIRequestGetAssignedPages requestLeadgenHasCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_crm_integration", value);
-      return this;
-    }
-    public APIRequestGetAssignedPages requestLeadgenHasFatPingCrmIntegrationField () {
-      return this.requestLeadgenHasFatPingCrmIntegrationField(true);
-    }
-    public APIRequestGetAssignedPages requestLeadgenHasFatPingCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_fat_ping_crm_integration", value);
       return this;
     }
     public APIRequestGetAssignedPages requestLeadgenTosAcceptanceTimeField () {
@@ -6913,8 +6865,6 @@ public class User extends APINode {
       "is_webhooks_subscribed",
       "keywords",
       "leadgen_form_preview_details",
-      "leadgen_has_crm_integration",
-      "leadgen_has_fat_ping_crm_integration",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -7574,20 +7524,6 @@ public class User extends APINode {
     }
     public APIRequestGetBooks requestLeadgenFormPreviewDetailsField (boolean value) {
       this.requestField("leadgen_form_preview_details", value);
-      return this;
-    }
-    public APIRequestGetBooks requestLeadgenHasCrmIntegrationField () {
-      return this.requestLeadgenHasCrmIntegrationField(true);
-    }
-    public APIRequestGetBooks requestLeadgenHasCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_crm_integration", value);
-      return this;
-    }
-    public APIRequestGetBooks requestLeadgenHasFatPingCrmIntegrationField () {
-      return this.requestLeadgenHasFatPingCrmIntegrationField(true);
-    }
-    public APIRequestGetBooks requestLeadgenHasFatPingCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_fat_ping_crm_integration", value);
       return this;
     }
     public APIRequestGetBooks requestLeadgenTosAcceptanceTimeField () {
@@ -12151,8 +12087,6 @@ public class User extends APINode {
       "is_webhooks_subscribed",
       "keywords",
       "leadgen_form_preview_details",
-      "leadgen_has_crm_integration",
-      "leadgen_has_fat_ping_crm_integration",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -12812,20 +12746,6 @@ public class User extends APINode {
     }
     public APIRequestGetGames requestLeadgenFormPreviewDetailsField (boolean value) {
       this.requestField("leadgen_form_preview_details", value);
-      return this;
-    }
-    public APIRequestGetGames requestLeadgenHasCrmIntegrationField () {
-      return this.requestLeadgenHasCrmIntegrationField(true);
-    }
-    public APIRequestGetGames requestLeadgenHasCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_crm_integration", value);
-      return this;
-    }
-    public APIRequestGetGames requestLeadgenHasFatPingCrmIntegrationField () {
-      return this.requestLeadgenHasFatPingCrmIntegrationField(true);
-    }
-    public APIRequestGetGames requestLeadgenHasFatPingCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_fat_ping_crm_integration", value);
       return this;
     }
     public APIRequestGetGames requestLeadgenTosAcceptanceTimeField () {
@@ -15077,8 +14997,6 @@ public class User extends APINode {
       "is_webhooks_subscribed",
       "keywords",
       "leadgen_form_preview_details",
-      "leadgen_has_crm_integration",
-      "leadgen_has_fat_ping_crm_integration",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -15738,20 +15656,6 @@ public class User extends APINode {
     }
     public APIRequestGetLikes requestLeadgenFormPreviewDetailsField (boolean value) {
       this.requestField("leadgen_form_preview_details", value);
-      return this;
-    }
-    public APIRequestGetLikes requestLeadgenHasCrmIntegrationField () {
-      return this.requestLeadgenHasCrmIntegrationField(true);
-    }
-    public APIRequestGetLikes requestLeadgenHasCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_crm_integration", value);
-      return this;
-    }
-    public APIRequestGetLikes requestLeadgenHasFatPingCrmIntegrationField () {
-      return this.requestLeadgenHasFatPingCrmIntegrationField(true);
-    }
-    public APIRequestGetLikes requestLeadgenHasFatPingCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_fat_ping_crm_integration", value);
       return this;
     }
     public APIRequestGetLikes requestLeadgenTosAcceptanceTimeField () {
@@ -17413,8 +17317,6 @@ public class User extends APINode {
       "is_webhooks_subscribed",
       "keywords",
       "leadgen_form_preview_details",
-      "leadgen_has_crm_integration",
-      "leadgen_has_fat_ping_crm_integration",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -18076,20 +17978,6 @@ public class User extends APINode {
       this.requestField("leadgen_form_preview_details", value);
       return this;
     }
-    public APIRequestGetMovies requestLeadgenHasCrmIntegrationField () {
-      return this.requestLeadgenHasCrmIntegrationField(true);
-    }
-    public APIRequestGetMovies requestLeadgenHasCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_crm_integration", value);
-      return this;
-    }
-    public APIRequestGetMovies requestLeadgenHasFatPingCrmIntegrationField () {
-      return this.requestLeadgenHasFatPingCrmIntegrationField(true);
-    }
-    public APIRequestGetMovies requestLeadgenHasFatPingCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_fat_ping_crm_integration", value);
-      return this;
-    }
     public APIRequestGetMovies requestLeadgenTosAcceptanceTimeField () {
       return this.requestLeadgenTosAcceptanceTimeField(true);
     }
@@ -18651,8 +18539,6 @@ public class User extends APINode {
       "is_webhooks_subscribed",
       "keywords",
       "leadgen_form_preview_details",
-      "leadgen_has_crm_integration",
-      "leadgen_has_fat_ping_crm_integration",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -19312,20 +19198,6 @@ public class User extends APINode {
     }
     public APIRequestGetMusic requestLeadgenFormPreviewDetailsField (boolean value) {
       this.requestField("leadgen_form_preview_details", value);
-      return this;
-    }
-    public APIRequestGetMusic requestLeadgenHasCrmIntegrationField () {
-      return this.requestLeadgenHasCrmIntegrationField(true);
-    }
-    public APIRequestGetMusic requestLeadgenHasCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_crm_integration", value);
-      return this;
-    }
-    public APIRequestGetMusic requestLeadgenHasFatPingCrmIntegrationField () {
-      return this.requestLeadgenHasFatPingCrmIntegrationField(true);
-    }
-    public APIRequestGetMusic requestLeadgenHasFatPingCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_fat_ping_crm_integration", value);
       return this;
     }
     public APIRequestGetMusic requestLeadgenTosAcceptanceTimeField () {
@@ -20301,7 +20173,6 @@ public class User extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
-      "user_role",
       "user_tasks",
       "user_tos_accepted",
     };
@@ -20799,13 +20670,6 @@ public class User extends APINode {
     }
     public APIRequestGetPersonalAdAccounts requestTosAcceptedField (boolean value) {
       this.requestField("tos_accepted", value);
-      return this;
-    }
-    public APIRequestGetPersonalAdAccounts requestUserRoleField () {
-      return this.requestUserRoleField(true);
-    }
-    public APIRequestGetPersonalAdAccounts requestUserRoleField (boolean value) {
-      this.requestField("user_role", value);
       return this;
     }
     public APIRequestGetPersonalAdAccounts requestUserTasksField () {
@@ -23957,8 +23821,6 @@ public class User extends APINode {
       "is_webhooks_subscribed",
       "keywords",
       "leadgen_form_preview_details",
-      "leadgen_has_crm_integration",
-      "leadgen_has_fat_ping_crm_integration",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -24618,20 +24480,6 @@ public class User extends APINode {
     }
     public APIRequestGetTelevision requestLeadgenFormPreviewDetailsField (boolean value) {
       this.requestField("leadgen_form_preview_details", value);
-      return this;
-    }
-    public APIRequestGetTelevision requestLeadgenHasCrmIntegrationField () {
-      return this.requestLeadgenHasCrmIntegrationField(true);
-    }
-    public APIRequestGetTelevision requestLeadgenHasCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_crm_integration", value);
-      return this;
-    }
-    public APIRequestGetTelevision requestLeadgenHasFatPingCrmIntegrationField () {
-      return this.requestLeadgenHasFatPingCrmIntegrationField(true);
-    }
-    public APIRequestGetTelevision requestLeadgenHasFatPingCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_fat_ping_crm_integration", value);
       return this;
     }
     public APIRequestGetTelevision requestLeadgenTosAcceptanceTimeField () {

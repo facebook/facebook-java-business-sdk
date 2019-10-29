@@ -542,10 +542,6 @@ public class Business extends APINode {
     return new APIRequestCreateOwnedBusiness(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateOwnedDomain createOwnedDomain() {
-    return new APIRequestCreateOwnedDomain(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetOwnedInstagramAccounts getOwnedInstagramAccounts() {
     return new APIRequestGetOwnedInstagramAccounts(this.getPrefixedId().toString(), context);
   }
@@ -612,6 +608,10 @@ public class Business extends APINode {
 
   public APIRequestGetPicture getPicture() {
     return new APIRequestGetPicture(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetPixelTos getPixelTos() {
+    return new APIRequestGetPixelTos(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetReceivedAudiencePermissions getReceivedAudiencePermissions() {
@@ -3305,6 +3305,7 @@ public class Business extends APINode {
       "amount_due",
       "billed_amount_details",
       "billing_period",
+      "campaign",
       "cdn_download_uri",
       "currency",
       "download_uri",
@@ -3489,6 +3490,13 @@ public class Business extends APINode {
     }
     public APIRequestGetBusinessInvoices requestBillingPeriodField (boolean value) {
       this.requestField("billing_period", value);
+      return this;
+    }
+    public APIRequestGetBusinessInvoices requestCampaignField () {
+      return this.requestCampaignField(true);
+    }
+    public APIRequestGetBusinessInvoices requestCampaignField (boolean value) {
+      this.requestField("campaign", value);
       return this;
     }
     public APIRequestGetBusinessInvoices requestCdnDownloadUriField () {
@@ -4455,7 +4463,6 @@ public class Business extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
-      "user_role",
       "user_tasks",
       "user_tos_accepted",
     };
@@ -4953,13 +4960,6 @@ public class Business extends APINode {
     }
     public APIRequestGetClientAdAccounts requestTosAcceptedField (boolean value) {
       this.requestField("tos_accepted", value);
-      return this;
-    }
-    public APIRequestGetClientAdAccounts requestUserRoleField () {
-      return this.requestUserRoleField(true);
-    }
-    public APIRequestGetClientAdAccounts requestUserRoleField (boolean value) {
-      this.requestField("user_role", value);
       return this;
     }
     public APIRequestGetClientAdAccounts requestUserTasksField () {
@@ -6190,8 +6190,6 @@ public class Business extends APINode {
       "is_webhooks_subscribed",
       "keywords",
       "leadgen_form_preview_details",
-      "leadgen_has_crm_integration",
-      "leadgen_has_fat_ping_crm_integration",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -6846,20 +6844,6 @@ public class Business extends APINode {
     }
     public APIRequestGetClientPages requestLeadgenFormPreviewDetailsField (boolean value) {
       this.requestField("leadgen_form_preview_details", value);
-      return this;
-    }
-    public APIRequestGetClientPages requestLeadgenHasCrmIntegrationField () {
-      return this.requestLeadgenHasCrmIntegrationField(true);
-    }
-    public APIRequestGetClientPages requestLeadgenHasCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_crm_integration", value);
-      return this;
-    }
-    public APIRequestGetClientPages requestLeadgenHasFatPingCrmIntegrationField () {
-      return this.requestLeadgenHasFatPingCrmIntegrationField(true);
-    }
-    public APIRequestGetClientPages requestLeadgenHasFatPingCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_fat_ping_crm_integration", value);
       return this;
     }
     public APIRequestGetClientPages requestLeadgenTosAcceptanceTimeField () {
@@ -9384,8 +9368,6 @@ public class Business extends APINode {
       "is_webhooks_subscribed",
       "keywords",
       "leadgen_form_preview_details",
-      "leadgen_has_crm_integration",
-      "leadgen_has_fat_ping_crm_integration",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -10040,20 +10022,6 @@ public class Business extends APINode {
     }
     public APIRequestGetDealShowsPages requestLeadgenFormPreviewDetailsField (boolean value) {
       this.requestField("leadgen_form_preview_details", value);
-      return this;
-    }
-    public APIRequestGetDealShowsPages requestLeadgenHasCrmIntegrationField () {
-      return this.requestLeadgenHasCrmIntegrationField(true);
-    }
-    public APIRequestGetDealShowsPages requestLeadgenHasCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_crm_integration", value);
-      return this;
-    }
-    public APIRequestGetDealShowsPages requestLeadgenHasFatPingCrmIntegrationField () {
-      return this.requestLeadgenHasFatPingCrmIntegrationField(true);
-    }
-    public APIRequestGetDealShowsPages requestLeadgenHasFatPingCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_fat_ping_crm_integration", value);
       return this;
     }
     public APIRequestGetDealShowsPages requestLeadgenTosAcceptanceTimeField () {
@@ -12959,7 +12927,6 @@ public class Business extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
-      "user_role",
       "user_tasks",
       "user_tos_accepted",
     };
@@ -13457,13 +13424,6 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedAdAccounts requestTosAcceptedField (boolean value) {
       this.requestField("tos_accepted", value);
-      return this;
-    }
-    public APIRequestGetOwnedAdAccounts requestUserRoleField () {
-      return this.requestUserRoleField(true);
-    }
-    public APIRequestGetOwnedAdAccounts requestUserRoleField (boolean value) {
-      this.requestField("user_role", value);
       return this;
     }
     public APIRequestGetOwnedAdAccounts requestUserTasksField () {
@@ -15152,116 +15112,6 @@ public class Business extends APINode {
 
   }
 
-  public static class APIRequestCreateOwnedDomain extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "domain_name",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateOwnedDomain.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateOwnedDomain(String nodeId, APIContext context) {
-      super(context, nodeId, "/owned_domains", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateOwnedDomain setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateOwnedDomain setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateOwnedDomain setDomainName (String domainName) {
-      this.setParam("domain_name", domainName);
-      return this;
-    }
-
-    public APIRequestCreateOwnedDomain requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateOwnedDomain requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateOwnedDomain requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateOwnedDomain requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateOwnedDomain requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateOwnedDomain requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetOwnedInstagramAccounts extends APIRequest<InstagramUser> {
 
     APINodeList<InstagramUser> lastResponse = null;
@@ -15520,8 +15370,6 @@ public class Business extends APINode {
       "is_webhooks_subscribed",
       "keywords",
       "leadgen_form_preview_details",
-      "leadgen_has_crm_integration",
-      "leadgen_has_fat_ping_crm_integration",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -16176,20 +16024,6 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedPages requestLeadgenFormPreviewDetailsField (boolean value) {
       this.requestField("leadgen_form_preview_details", value);
-      return this;
-    }
-    public APIRequestGetOwnedPages requestLeadgenHasCrmIntegrationField () {
-      return this.requestLeadgenHasCrmIntegrationField(true);
-    }
-    public APIRequestGetOwnedPages requestLeadgenHasCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_crm_integration", value);
-      return this;
-    }
-    public APIRequestGetOwnedPages requestLeadgenHasFatPingCrmIntegrationField () {
-      return this.requestLeadgenHasFatPingCrmIntegrationField(true);
-    }
-    public APIRequestGetOwnedPages requestLeadgenHasFatPingCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_fat_ping_crm_integration", value);
       return this;
     }
     public APIRequestGetOwnedPages requestLeadgenTosAcceptanceTimeField () {
@@ -19146,6 +18980,126 @@ public class Business extends APINode {
     }
     public APIRequestGetPicture requestWidthField (boolean value) {
       this.requestField("width", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetPixelTos extends APIRequest<BusinessPixelTOS> {
+
+    APINodeList<BusinessPixelTOS> lastResponse = null;
+    @Override
+    public APINodeList<BusinessPixelTOS> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "accept_time",
+      "id",
+    };
+
+    @Override
+    public APINodeList<BusinessPixelTOS> parseResponse(String response, String header) throws APIException {
+      return BusinessPixelTOS.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<BusinessPixelTOS> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<BusinessPixelTOS> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<BusinessPixelTOS>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<BusinessPixelTOS>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<BusinessPixelTOS>>() {
+           public APINodeList<BusinessPixelTOS> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetPixelTos.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetPixelTos(String nodeId, APIContext context) {
+      super(context, nodeId, "/pixel_tos", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetPixelTos setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPixelTos setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetPixelTos requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetPixelTos requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPixelTos requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetPixelTos requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPixelTos requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPixelTos requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetPixelTos requestAcceptTimeField () {
+      return this.requestAcceptTimeField(true);
+    }
+    public APIRequestGetPixelTos requestAcceptTimeField (boolean value) {
+      this.requestField("accept_time", value);
+      return this;
+    }
+    public APIRequestGetPixelTos requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetPixelTos requestIdField (boolean value) {
+      this.requestField("id", value);
       return this;
     }
   }

@@ -769,7 +769,6 @@ public class InstagramUser extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
-      "user_role",
       "user_tasks",
       "user_tos_accepted",
     };
@@ -1272,13 +1271,6 @@ public class InstagramUser extends APINode {
     }
     public APIRequestGetAuthorizedAdAccounts requestTosAcceptedField (boolean value) {
       this.requestField("tos_accepted", value);
-      return this;
-    }
-    public APIRequestGetAuthorizedAdAccounts requestUserRoleField () {
-      return this.requestUserRoleField(true);
-    }
-    public APIRequestGetAuthorizedAdAccounts requestUserRoleField (boolean value) {
-      this.requestField("user_role", value);
       return this;
     }
     public APIRequestGetAuthorizedAdAccounts requestUserTasksField () {

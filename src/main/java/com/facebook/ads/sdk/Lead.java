@@ -85,8 +85,6 @@ public class Lead extends APINode {
   private String mPartnerName = null;
   @SerializedName("platform")
   private String mPlatform = null;
-  @SerializedName("post")
-  private Link mPost = null;
   @SerializedName("retailer_item_id")
   private String mRetailerItemId = null;
   @SerializedName("vehicle")
@@ -372,13 +370,6 @@ public class Lead extends APINode {
     return mPlatform;
   }
 
-  public Link getFieldPost() {
-    if (mPost != null) {
-      mPost.context = getContext();
-    }
-    return mPost;
-  }
-
   public String getFieldRetailerItemId() {
     return mRetailerItemId;
   }
@@ -522,7 +513,6 @@ public class Lead extends APINode {
       "is_organic",
       "partner_name",
       "platform",
-      "post",
       "retailer_item_id",
       "vehicle",
     };
@@ -721,13 +711,6 @@ public class Lead extends APINode {
       this.requestField("platform", value);
       return this;
     }
-    public APIRequestGet requestPostField () {
-      return this.requestPostField(true);
-    }
-    public APIRequestGet requestPostField (boolean value) {
-      this.requestField("post", value);
-      return this;
-    }
     public APIRequestGet requestRetailerItemIdField () {
       return this.requestRetailerItemIdField(true);
     }
@@ -774,7 +757,6 @@ public class Lead extends APINode {
     this.mIsOrganic = instance.mIsOrganic;
     this.mPartnerName = instance.mPartnerName;
     this.mPlatform = instance.mPlatform;
-    this.mPost = instance.mPost;
     this.mRetailerItemId = instance.mRetailerItemId;
     this.mVehicle = instance.mVehicle;
     this.context = instance.context;

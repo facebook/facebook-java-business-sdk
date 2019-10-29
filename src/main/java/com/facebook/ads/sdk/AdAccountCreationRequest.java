@@ -560,7 +560,6 @@ public class AdAccountCreationRequest extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
-      "user_role",
       "user_tasks",
       "user_tos_accepted",
     };
@@ -1058,13 +1057,6 @@ public class AdAccountCreationRequest extends APINode {
     }
     public APIRequestGetAdAccounts requestTosAcceptedField (boolean value) {
       this.requestField("tos_accepted", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestUserRoleField () {
-      return this.requestUserRoleField(true);
-    }
-    public APIRequestGetAdAccounts requestUserRoleField (boolean value) {
-      this.requestField("user_role", value);
       return this;
     }
     public APIRequestGetAdAccounts requestUserTasksField () {

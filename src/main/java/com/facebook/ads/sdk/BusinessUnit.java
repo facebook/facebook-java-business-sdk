@@ -282,12 +282,28 @@ public class BusinessUnit extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGetAdPlatforms getAdPlatforms() {
+    return new APIRequestGetAdPlatforms(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetAtlasSalesAccesses getAtlasSalesAccesses() {
     return new APIRequestGetAtlasSalesAccesses(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateAtlasSalesAccess createAtlasSalesAccess() {
     return new APIRequestCreateAtlasSalesAccess(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetCustomBreakdowns getCustomBreakdowns() {
+    return new APIRequestGetCustomBreakdowns(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetDiagnostics getDiagnostics() {
+    return new APIRequestGetDiagnostics(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetExternalImportFile getExternalImportFile() {
+    return new APIRequestGetExternalImportFile(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGet get() {
@@ -335,6 +351,132 @@ public class BusinessUnit extends APINode {
   }
 
 
+
+  public static class APIRequestGetAdPlatforms extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "filter_by",
+      "metric_scope",
+      "order_by",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetAdPlatforms.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetAdPlatforms(String nodeId, APIContext context) {
+      super(context, nodeId, "/ad_platforms", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetAdPlatforms setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdPlatforms setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetAdPlatforms setFilterBy (String filterBy) {
+      this.setParam("filter_by", filterBy);
+      return this;
+    }
+
+    public APIRequestGetAdPlatforms setMetricScope (Map<String, String> metricScope) {
+      this.setParam("metric_scope", metricScope);
+      return this;
+    }
+    public APIRequestGetAdPlatforms setMetricScope (String metricScope) {
+      this.setParam("metric_scope", metricScope);
+      return this;
+    }
+
+    public APIRequestGetAdPlatforms setOrderBy (String orderBy) {
+      this.setParam("order_by", orderBy);
+      return this;
+    }
+
+    public APIRequestGetAdPlatforms requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetAdPlatforms requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdPlatforms requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetAdPlatforms requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdPlatforms requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdPlatforms requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
 
   public static class APIRequestGetAtlasSalesAccesses extends APIRequest<APINode> {
 
@@ -550,6 +692,354 @@ public class BusinessUnit extends APINode {
 
     @Override
     public APIRequestCreateAtlasSalesAccess requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetCustomBreakdowns extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "filter_by",
+      "order_by",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetCustomBreakdowns.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetCustomBreakdowns(String nodeId, APIContext context) {
+      super(context, nodeId, "/custom_breakdowns", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCustomBreakdowns setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCustomBreakdowns setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCustomBreakdowns setFilterBy (String filterBy) {
+      this.setParam("filter_by", filterBy);
+      return this;
+    }
+
+    public APIRequestGetCustomBreakdowns setOrderBy (String orderBy) {
+      this.setParam("order_by", orderBy);
+      return this;
+    }
+
+    public APIRequestGetCustomBreakdowns requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCustomBreakdowns requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCustomBreakdowns requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCustomBreakdowns requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCustomBreakdowns requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCustomBreakdowns requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetDiagnostics extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "filter_by",
+      "order_by",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetDiagnostics.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetDiagnostics(String nodeId, APIContext context) {
+      super(context, nodeId, "/diagnostics", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetDiagnostics setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDiagnostics setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetDiagnostics setFilterBy (String filterBy) {
+      this.setParam("filter_by", filterBy);
+      return this;
+    }
+
+    public APIRequestGetDiagnostics setOrderBy (String orderBy) {
+      this.setParam("order_by", orderBy);
+      return this;
+    }
+
+    public APIRequestGetDiagnostics requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetDiagnostics requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDiagnostics requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetDiagnostics requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDiagnostics requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDiagnostics requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetExternalImportFile extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "filter_by",
+      "order_by",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetExternalImportFile.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetExternalImportFile(String nodeId, APIContext context) {
+      super(context, nodeId, "/external_import_file", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetExternalImportFile setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetExternalImportFile setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetExternalImportFile setFilterBy (String filterBy) {
+      this.setParam("filter_by", filterBy);
+      return this;
+    }
+
+    public APIRequestGetExternalImportFile setOrderBy (String orderBy) {
+      this.setParam("order_by", orderBy);
+      return this;
+    }
+
+    public APIRequestGetExternalImportFile requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetExternalImportFile requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetExternalImportFile requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetExternalImportFile requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetExternalImportFile requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetExternalImportFile requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

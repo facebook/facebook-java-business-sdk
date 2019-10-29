@@ -445,7 +445,6 @@ public class BusinessUser extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
-      "user_role",
       "user_tasks",
       "user_tos_accepted",
     };
@@ -945,13 +944,6 @@ public class BusinessUser extends APINode {
       this.requestField("tos_accepted", value);
       return this;
     }
-    public APIRequestGetAssignedAdAccounts requestUserRoleField () {
-      return this.requestUserRoleField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestUserRoleField (boolean value) {
-      this.requestField("user_role", value);
-      return this;
-    }
     public APIRequestGetAssignedAdAccounts requestUserTasksField () {
       return this.requestUserTasksField(true);
     }
@@ -1176,8 +1168,6 @@ public class BusinessUser extends APINode {
       "is_webhooks_subscribed",
       "keywords",
       "leadgen_form_preview_details",
-      "leadgen_has_crm_integration",
-      "leadgen_has_fat_ping_crm_integration",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -1832,20 +1822,6 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGetAssignedPages requestLeadgenFormPreviewDetailsField (boolean value) {
       this.requestField("leadgen_form_preview_details", value);
-      return this;
-    }
-    public APIRequestGetAssignedPages requestLeadgenHasCrmIntegrationField () {
-      return this.requestLeadgenHasCrmIntegrationField(true);
-    }
-    public APIRequestGetAssignedPages requestLeadgenHasCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_crm_integration", value);
-      return this;
-    }
-    public APIRequestGetAssignedPages requestLeadgenHasFatPingCrmIntegrationField () {
-      return this.requestLeadgenHasFatPingCrmIntegrationField(true);
-    }
-    public APIRequestGetAssignedPages requestLeadgenHasFatPingCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_fat_ping_crm_integration", value);
       return this;
     }
     public APIRequestGetAssignedPages requestLeadgenTosAcceptanceTimeField () {

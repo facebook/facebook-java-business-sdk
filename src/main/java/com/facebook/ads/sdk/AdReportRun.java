@@ -443,7 +443,6 @@ public class AdReportRun extends APINode {
       "conversion_rate_ranking",
       "conversion_values",
       "conversions",
-      "cost_per_10_sec_video_view",
       "cost_per_15_sec_video_view",
       "cost_per_2_sec_continuous_video_view",
       "cost_per_action_result",
@@ -560,7 +559,6 @@ public class AdReportRun extends APINode {
       "reach",
       "recurring_subscription_payment_actions",
       "region",
-      "relevance_score",
       "rule_asset",
       "schedule_actions",
       "schedule_value",
@@ -589,10 +587,8 @@ public class AdReportRun extends APINode {
       "unique_outbound_clicks",
       "unique_outbound_clicks_ctr",
       "unique_video_continuous_2_sec_watched_actions",
-      "unique_video_view_10_sec",
       "unique_video_view_15_sec",
       "updated_time",
-      "video_10_sec_watched_actions",
       "video_15_sec_watched_actions",
       "video_30_sec_watched_actions",
       "video_asset",
@@ -1139,13 +1135,6 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestConversionsField (boolean value) {
       this.requestField("conversions", value);
-      return this;
-    }
-    public APIRequestGetInsights requestCostPer10SecVideoViewField () {
-      return this.requestCostPer10SecVideoViewField(true);
-    }
-    public APIRequestGetInsights requestCostPer10SecVideoViewField (boolean value) {
-      this.requestField("cost_per_10_sec_video_view", value);
       return this;
     }
     public APIRequestGetInsights requestCostPer15SecVideoViewField () {
@@ -1960,13 +1949,6 @@ public class AdReportRun extends APINode {
       this.requestField("region", value);
       return this;
     }
-    public APIRequestGetInsights requestRelevanceScoreField () {
-      return this.requestRelevanceScoreField(true);
-    }
-    public APIRequestGetInsights requestRelevanceScoreField (boolean value) {
-      this.requestField("relevance_score", value);
-      return this;
-    }
     public APIRequestGetInsights requestRuleAssetField () {
       return this.requestRuleAssetField(true);
     }
@@ -2163,13 +2145,6 @@ public class AdReportRun extends APINode {
       this.requestField("unique_video_continuous_2_sec_watched_actions", value);
       return this;
     }
-    public APIRequestGetInsights requestUniqueVideoView10SecField () {
-      return this.requestUniqueVideoView10SecField(true);
-    }
-    public APIRequestGetInsights requestUniqueVideoView10SecField (boolean value) {
-      this.requestField("unique_video_view_10_sec", value);
-      return this;
-    }
     public APIRequestGetInsights requestUniqueVideoView15SecField () {
       return this.requestUniqueVideoView15SecField(true);
     }
@@ -2182,13 +2157,6 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
-      return this;
-    }
-    public APIRequestGetInsights requestVideo10SecWatchedActionsField () {
-      return this.requestVideo10SecWatchedActionsField(true);
-    }
-    public APIRequestGetInsights requestVideo10SecWatchedActionsField (boolean value) {
-      this.requestField("video_10_sec_watched_actions", value);
       return this;
     }
     public APIRequestGetInsights requestVideo15SecWatchedActionsField () {

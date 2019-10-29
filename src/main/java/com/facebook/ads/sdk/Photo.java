@@ -2409,8 +2409,6 @@ public class Photo extends APINode {
       "is_webhooks_subscribed",
       "keywords",
       "leadgen_form_preview_details",
-      "leadgen_has_crm_integration",
-      "leadgen_has_fat_ping_crm_integration",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -3065,20 +3063,6 @@ public class Photo extends APINode {
     }
     public APIRequestGetSponsorTags requestLeadgenFormPreviewDetailsField (boolean value) {
       this.requestField("leadgen_form_preview_details", value);
-      return this;
-    }
-    public APIRequestGetSponsorTags requestLeadgenHasCrmIntegrationField () {
-      return this.requestLeadgenHasCrmIntegrationField(true);
-    }
-    public APIRequestGetSponsorTags requestLeadgenHasCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_crm_integration", value);
-      return this;
-    }
-    public APIRequestGetSponsorTags requestLeadgenHasFatPingCrmIntegrationField () {
-      return this.requestLeadgenHasFatPingCrmIntegrationField(true);
-    }
-    public APIRequestGetSponsorTags requestLeadgenHasFatPingCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_fat_ping_crm_integration", value);
       return this;
     }
     public APIRequestGetSponsorTags requestLeadgenTosAcceptanceTimeField () {

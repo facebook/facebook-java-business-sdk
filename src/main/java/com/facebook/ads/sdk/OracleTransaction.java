@@ -65,6 +65,8 @@ public class OracleTransaction extends APINode {
   private BilledAmountDetails mBilledAmountDetails = null;
   @SerializedName("billing_period")
   private String mBillingPeriod = null;
+  @SerializedName("campaign")
+  private AtlasCampaign mCampaign = null;
   @SerializedName("cdn_download_uri")
   private String mCdnDownloadUri = null;
   @SerializedName("currency")
@@ -331,6 +333,13 @@ public class OracleTransaction extends APINode {
 
   public String getFieldBillingPeriod() {
     return mBillingPeriod;
+  }
+
+  public AtlasCampaign getFieldCampaign() {
+    if (mCampaign != null) {
+      mCampaign.context = getContext();
+    }
+    return mCampaign;
   }
 
   public String getFieldCdnDownloadUri() {
@@ -693,6 +702,7 @@ public class OracleTransaction extends APINode {
       "amount_due",
       "billed_amount_details",
       "billing_period",
+      "campaign",
       "cdn_download_uri",
       "currency",
       "download_uri",
@@ -832,6 +842,13 @@ public class OracleTransaction extends APINode {
       this.requestField("billing_period", value);
       return this;
     }
+    public APIRequestGet requestCampaignField () {
+      return this.requestCampaignField(true);
+    }
+    public APIRequestGet requestCampaignField (boolean value) {
+      this.requestField("campaign", value);
+      return this;
+    }
     public APIRequestGet requestCdnDownloadUriField () {
       return this.requestCdnDownloadUriField(true);
     }
@@ -964,6 +981,7 @@ public class OracleTransaction extends APINode {
     this.mAmountDue = instance.mAmountDue;
     this.mBilledAmountDetails = instance.mBilledAmountDetails;
     this.mBillingPeriod = instance.mBillingPeriod;
+    this.mCampaign = instance.mCampaign;
     this.mCdnDownloadUri = instance.mCdnDownloadUri;
     this.mCurrency = instance.mCurrency;
     this.mDownloadUri = instance.mDownloadUri;

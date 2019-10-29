@@ -197,10 +197,6 @@ public class Page extends APINode {
   private Object mKeywords = null;
   @SerializedName("leadgen_form_preview_details")
   private LeadGenFormPreviewDetails mLeadgenFormPreviewDetails = null;
-  @SerializedName("leadgen_has_crm_integration")
-  private Boolean mLeadgenHasCrmIntegration = null;
-  @SerializedName("leadgen_has_fat_ping_crm_integration")
-  private Boolean mLeadgenHasFatPingCrmIntegration = null;
   @SerializedName("leadgen_tos_acceptance_time")
   private String mLeadgenTosAcceptanceTime = null;
   @SerializedName("leadgen_tos_accepted")
@@ -762,10 +758,6 @@ public class Page extends APINode {
     return new APIRequestCreateMessageAttachment(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateMessageCreative createMessageCreative() {
-    return new APIRequestCreateMessageCreative(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestCreateMessage createMessage() {
     return new APIRequestCreateMessage(this.getPrefixedId().toString(), context);
   }
@@ -1306,14 +1298,6 @@ public class Page extends APINode {
 
   public LeadGenFormPreviewDetails getFieldLeadgenFormPreviewDetails() {
     return mLeadgenFormPreviewDetails;
-  }
-
-  public Boolean getFieldLeadgenHasCrmIntegration() {
-    return mLeadgenHasCrmIntegration;
-  }
-
-  public Boolean getFieldLeadgenHasFatPingCrmIntegration() {
-    return mLeadgenHasFatPingCrmIntegration;
   }
 
   public String getFieldLeadgenTosAcceptanceTime() {
@@ -6370,8 +6354,6 @@ public class Page extends APINode {
       "is_webhooks_subscribed",
       "keywords",
       "leadgen_form_preview_details",
-      "leadgen_has_crm_integration",
-      "leadgen_has_fat_ping_crm_integration",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -7026,20 +7008,6 @@ public class Page extends APINode {
     }
     public APIRequestGetCrosspostWhitelistedPages requestLeadgenFormPreviewDetailsField (boolean value) {
       this.requestField("leadgen_form_preview_details", value);
-      return this;
-    }
-    public APIRequestGetCrosspostWhitelistedPages requestLeadgenHasCrmIntegrationField () {
-      return this.requestLeadgenHasCrmIntegrationField(true);
-    }
-    public APIRequestGetCrosspostWhitelistedPages requestLeadgenHasCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_crm_integration", value);
-      return this;
-    }
-    public APIRequestGetCrosspostWhitelistedPages requestLeadgenHasFatPingCrmIntegrationField () {
-      return this.requestLeadgenHasFatPingCrmIntegrationField(true);
-    }
-    public APIRequestGetCrosspostWhitelistedPages requestLeadgenHasFatPingCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_fat_ping_crm_integration", value);
       return this;
     }
     public APIRequestGetCrosspostWhitelistedPages requestLeadgenTosAcceptanceTimeField () {
@@ -10232,8 +10200,6 @@ public class Page extends APINode {
       "is_webhooks_subscribed",
       "keywords",
       "leadgen_form_preview_details",
-      "leadgen_has_crm_integration",
-      "leadgen_has_fat_ping_crm_integration",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -10888,20 +10854,6 @@ public class Page extends APINode {
     }
     public APIRequestGetGlobalBrandChildren requestLeadgenFormPreviewDetailsField (boolean value) {
       this.requestField("leadgen_form_preview_details", value);
-      return this;
-    }
-    public APIRequestGetGlobalBrandChildren requestLeadgenHasCrmIntegrationField () {
-      return this.requestLeadgenHasCrmIntegrationField(true);
-    }
-    public APIRequestGetGlobalBrandChildren requestLeadgenHasCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_crm_integration", value);
-      return this;
-    }
-    public APIRequestGetGlobalBrandChildren requestLeadgenHasFatPingCrmIntegrationField () {
-      return this.requestLeadgenHasFatPingCrmIntegrationField(true);
-    }
-    public APIRequestGetGlobalBrandChildren requestLeadgenHasFatPingCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_fat_ping_crm_integration", value);
       return this;
     }
     public APIRequestGetGlobalBrandChildren requestLeadgenTosAcceptanceTimeField () {
@@ -13025,30 +12977,22 @@ public class Page extends APINode {
       "block_display_for_non_targeted_viewer",
       "context_card",
       "created_time",
-      "creator",
-      "creator_id",
-      "cusomized_tcpa_content",
       "expired_leads_count",
-      "extra_details",
       "follow_up_action_text",
       "follow_up_action_url",
       "id",
       "is_optimized_for_quality",
-      "leadgen_export_csv_url",
       "leads_count",
       "legal_content",
       "locale",
-      "messenger_welcome_message",
       "name",
       "organic_leads_count",
       "page",
       "page_id",
       "privacy_policy_url",
-      "qualifiers",
       "question_page_custom_headline",
       "questions",
       "status",
-      "tcpa_compliance",
       "thank_you_page",
       "tracking_parameters",
     };
@@ -13170,39 +13114,11 @@ public class Page extends APINode {
       this.requestField("created_time", value);
       return this;
     }
-    public APIRequestGetLeadGenForms requestCreatorField () {
-      return this.requestCreatorField(true);
-    }
-    public APIRequestGetLeadGenForms requestCreatorField (boolean value) {
-      this.requestField("creator", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestCreatorIdField () {
-      return this.requestCreatorIdField(true);
-    }
-    public APIRequestGetLeadGenForms requestCreatorIdField (boolean value) {
-      this.requestField("creator_id", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestCusomizedTcpaContentField () {
-      return this.requestCusomizedTcpaContentField(true);
-    }
-    public APIRequestGetLeadGenForms requestCusomizedTcpaContentField (boolean value) {
-      this.requestField("cusomized_tcpa_content", value);
-      return this;
-    }
     public APIRequestGetLeadGenForms requestExpiredLeadsCountField () {
       return this.requestExpiredLeadsCountField(true);
     }
     public APIRequestGetLeadGenForms requestExpiredLeadsCountField (boolean value) {
       this.requestField("expired_leads_count", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestExtraDetailsField () {
-      return this.requestExtraDetailsField(true);
-    }
-    public APIRequestGetLeadGenForms requestExtraDetailsField (boolean value) {
-      this.requestField("extra_details", value);
       return this;
     }
     public APIRequestGetLeadGenForms requestFollowUpActionTextField () {
@@ -13233,13 +13149,6 @@ public class Page extends APINode {
       this.requestField("is_optimized_for_quality", value);
       return this;
     }
-    public APIRequestGetLeadGenForms requestLeadgenExportCsvUrlField () {
-      return this.requestLeadgenExportCsvUrlField(true);
-    }
-    public APIRequestGetLeadGenForms requestLeadgenExportCsvUrlField (boolean value) {
-      this.requestField("leadgen_export_csv_url", value);
-      return this;
-    }
     public APIRequestGetLeadGenForms requestLeadsCountField () {
       return this.requestLeadsCountField(true);
     }
@@ -13259,13 +13168,6 @@ public class Page extends APINode {
     }
     public APIRequestGetLeadGenForms requestLocaleField (boolean value) {
       this.requestField("locale", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestMessengerWelcomeMessageField () {
-      return this.requestMessengerWelcomeMessageField(true);
-    }
-    public APIRequestGetLeadGenForms requestMessengerWelcomeMessageField (boolean value) {
-      this.requestField("messenger_welcome_message", value);
       return this;
     }
     public APIRequestGetLeadGenForms requestNameField () {
@@ -13303,13 +13205,6 @@ public class Page extends APINode {
       this.requestField("privacy_policy_url", value);
       return this;
     }
-    public APIRequestGetLeadGenForms requestQualifiersField () {
-      return this.requestQualifiersField(true);
-    }
-    public APIRequestGetLeadGenForms requestQualifiersField (boolean value) {
-      this.requestField("qualifiers", value);
-      return this;
-    }
     public APIRequestGetLeadGenForms requestQuestionPageCustomHeadlineField () {
       return this.requestQuestionPageCustomHeadlineField(true);
     }
@@ -13329,13 +13224,6 @@ public class Page extends APINode {
     }
     public APIRequestGetLeadGenForms requestStatusField (boolean value) {
       this.requestField("status", value);
-      return this;
-    }
-    public APIRequestGetLeadGenForms requestTcpaComplianceField () {
-      return this.requestTcpaComplianceField(true);
-    }
-    public APIRequestGetLeadGenForms requestTcpaComplianceField (boolean value) {
-      this.requestField("tcpa_compliance", value);
       return this;
     }
     public APIRequestGetLeadGenForms requestThankYouPageField () {
@@ -13679,8 +13567,6 @@ public class Page extends APINode {
       "is_webhooks_subscribed",
       "keywords",
       "leadgen_form_preview_details",
-      "leadgen_has_crm_integration",
-      "leadgen_has_fat_ping_crm_integration",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -14340,20 +14226,6 @@ public class Page extends APINode {
     }
     public APIRequestGetLikes requestLeadgenFormPreviewDetailsField (boolean value) {
       this.requestField("leadgen_form_preview_details", value);
-      return this;
-    }
-    public APIRequestGetLikes requestLeadgenHasCrmIntegrationField () {
-      return this.requestLeadgenHasCrmIntegrationField(true);
-    }
-    public APIRequestGetLikes requestLeadgenHasCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_crm_integration", value);
-      return this;
-    }
-    public APIRequestGetLikes requestLeadgenHasFatPingCrmIntegrationField () {
-      return this.requestLeadgenHasFatPingCrmIntegrationField(true);
-    }
-    public APIRequestGetLikes requestLeadgenHasFatPingCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_fat_ping_crm_integration", value);
       return this;
     }
     public APIRequestGetLikes requestLeadgenTosAcceptanceTimeField () {
@@ -16032,8 +15904,6 @@ public class Page extends APINode {
       "is_webhooks_subscribed",
       "keywords",
       "leadgen_form_preview_details",
-      "leadgen_has_crm_integration",
-      "leadgen_has_fat_ping_crm_integration",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -16688,20 +16558,6 @@ public class Page extends APINode {
     }
     public APIRequestGetLocations requestLeadgenFormPreviewDetailsField (boolean value) {
       this.requestField("leadgen_form_preview_details", value);
-      return this;
-    }
-    public APIRequestGetLocations requestLeadgenHasCrmIntegrationField () {
-      return this.requestLeadgenHasCrmIntegrationField(true);
-    }
-    public APIRequestGetLocations requestLeadgenHasCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_crm_integration", value);
-      return this;
-    }
-    public APIRequestGetLocations requestLeadgenHasFatPingCrmIntegrationField () {
-      return this.requestLeadgenHasFatPingCrmIntegrationField(true);
-    }
-    public APIRequestGetLocations requestLeadgenHasFatPingCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_fat_ping_crm_integration", value);
       return this;
     }
     public APIRequestGetLocations requestLeadgenTosAcceptanceTimeField () {
@@ -17840,120 +17696,6 @@ public class Page extends APINode {
 
     @Override
     public APIRequestCreateMessageAttachment requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateMessageCreative extends APIRequest<Page> {
-
-    Page lastResponse = null;
-    @Override
-    public Page getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "messages",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Page parseResponse(String response, String header) throws APIException {
-      return Page.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Page execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Page execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Page> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Page> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Page>() {
-           public Page apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateMessageCreative.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateMessageCreative(String nodeId, APIContext context) {
-      super(context, nodeId, "/message_creatives", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateMessageCreative setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateMessageCreative setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateMessageCreative setMessages (List<Object> messages) {
-      this.setParam("messages", messages);
-      return this;
-    }
-    public APIRequestCreateMessageCreative setMessages (String messages) {
-      this.setParam("messages", messages);
-      return this;
-    }
-
-    public APIRequestCreateMessageCreative requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateMessageCreative requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateMessageCreative requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateMessageCreative requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateMessageCreative requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateMessageCreative requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -32683,8 +32425,6 @@ public class Page extends APINode {
       "is_webhooks_subscribed",
       "keywords",
       "leadgen_form_preview_details",
-      "leadgen_has_crm_integration",
-      "leadgen_has_fat_ping_crm_integration",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -33344,20 +33084,6 @@ public class Page extends APINode {
     }
     public APIRequestGet requestLeadgenFormPreviewDetailsField (boolean value) {
       this.requestField("leadgen_form_preview_details", value);
-      return this;
-    }
-    public APIRequestGet requestLeadgenHasCrmIntegrationField () {
-      return this.requestLeadgenHasCrmIntegrationField(true);
-    }
-    public APIRequestGet requestLeadgenHasCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_crm_integration", value);
-      return this;
-    }
-    public APIRequestGet requestLeadgenHasFatPingCrmIntegrationField () {
-      return this.requestLeadgenHasFatPingCrmIntegrationField(true);
-    }
-    public APIRequestGet requestLeadgenHasFatPingCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_fat_ping_crm_integration", value);
       return this;
     }
     public APIRequestGet requestLeadgenTosAcceptanceTimeField () {
@@ -34845,6 +34571,8 @@ public class Page extends APINode {
       VALUE_MESSAGE_ECHOES("message_echoes"),
       @SerializedName("message_mention")
       VALUE_MESSAGE_MENTION("message_mention"),
+      @SerializedName("message_reactions")
+      VALUE_MESSAGE_REACTIONS("message_reactions"),
       @SerializedName("message_reads")
       VALUE_MESSAGE_READS("message_reads"),
       @SerializedName("messages")
@@ -35211,8 +34939,6 @@ public class Page extends APINode {
     this.mIsWebhooksSubscribed = instance.mIsWebhooksSubscribed;
     this.mKeywords = instance.mKeywords;
     this.mLeadgenFormPreviewDetails = instance.mLeadgenFormPreviewDetails;
-    this.mLeadgenHasCrmIntegration = instance.mLeadgenHasCrmIntegration;
-    this.mLeadgenHasFatPingCrmIntegration = instance.mLeadgenHasFatPingCrmIntegration;
     this.mLeadgenTosAcceptanceTime = instance.mLeadgenTosAcceptanceTime;
     this.mLeadgenTosAccepted = instance.mLeadgenTosAccepted;
     this.mLeadgenTosAcceptingUser = instance.mLeadgenTosAcceptingUser;

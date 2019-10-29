@@ -408,10 +408,6 @@ public class PagePost extends APINode {
     return new APIRequestCreateLike(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreatePrivateReply createPrivateReply() {
-    return new APIRequestCreatePrivateReply(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetReactions getReactions() {
     return new APIRequestGetReactions(this.getPrefixedId().toString(), context);
   }
@@ -2209,116 +2205,6 @@ public class PagePost extends APINode {
 
   }
 
-  public static class APIRequestCreatePrivateReply extends APIRequest<PagePost> {
-
-    PagePost lastResponse = null;
-    @Override
-    public PagePost getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "message",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public PagePost parseResponse(String response, String header) throws APIException {
-      return PagePost.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public PagePost execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public PagePost execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<PagePost> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<PagePost> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, PagePost>() {
-           public PagePost apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreatePrivateReply.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreatePrivateReply(String nodeId, APIContext context) {
-      super(context, nodeId, "/private_replies", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreatePrivateReply setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePrivateReply setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreatePrivateReply setMessage (String message) {
-      this.setParam("message", message);
-      return this;
-    }
-
-    public APIRequestCreatePrivateReply requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreatePrivateReply requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePrivateReply requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreatePrivateReply requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePrivateReply requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePrivateReply requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetReactions extends APIRequest<Profile> {
 
     APINodeList<Profile> lastResponse = null;
@@ -3195,8 +3081,6 @@ public class PagePost extends APINode {
       "is_webhooks_subscribed",
       "keywords",
       "leadgen_form_preview_details",
-      "leadgen_has_crm_integration",
-      "leadgen_has_fat_ping_crm_integration",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -3851,20 +3735,6 @@ public class PagePost extends APINode {
     }
     public APIRequestGetSponsorTags requestLeadgenFormPreviewDetailsField (boolean value) {
       this.requestField("leadgen_form_preview_details", value);
-      return this;
-    }
-    public APIRequestGetSponsorTags requestLeadgenHasCrmIntegrationField () {
-      return this.requestLeadgenHasCrmIntegrationField(true);
-    }
-    public APIRequestGetSponsorTags requestLeadgenHasCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_crm_integration", value);
-      return this;
-    }
-    public APIRequestGetSponsorTags requestLeadgenHasFatPingCrmIntegrationField () {
-      return this.requestLeadgenHasFatPingCrmIntegrationField(true);
-    }
-    public APIRequestGetSponsorTags requestLeadgenHasFatPingCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_fat_ping_crm_integration", value);
       return this;
     }
     public APIRequestGetSponsorTags requestLeadgenTosAcceptanceTimeField () {

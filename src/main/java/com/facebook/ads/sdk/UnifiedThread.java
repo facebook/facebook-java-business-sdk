@@ -1324,8 +1324,8 @@ public class UnifiedThread extends APINode {
   public static enum EnumSource {
       @SerializedName("ALL")
       VALUE_ALL("ALL"),
-      @SerializedName("USER")
-      VALUE_USER("USER"),
+      @SerializedName("PARTICIPANTS")
+      VALUE_PARTICIPANTS("PARTICIPANTS"),
       ;
 
       private String value;
