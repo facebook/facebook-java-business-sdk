@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## v5.0.0
+### Changed
+- Graph API call upgrade to [v5.0](https://developers.facebook.com/docs/graph-api/changelog/version5.0)
+
 ## v4.0.8
 
  - Added strongly typed Server-Side API with normalization for Web (https://developers.facebook.com/docs/marketing-api/facebook-pixel/server-side-api/using-the-api)
@@ -25,5 +29,3 @@ All notable changes to this project will be documented in this file.
 ## v3.3.0
 ### Changed
 - Graph API call upgrade to [v3.3](https://developers.facebook.com/docs/graph-api/changelog/version3.3)
-
-
