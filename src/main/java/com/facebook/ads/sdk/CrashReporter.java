@@ -70,6 +70,10 @@ public class CrashReporter implements Thread.UncaughtExceptionHandler {
 		Thread.setDefaultUncaughtExceptionHandler(mPrevHandler);
 	}
 
+	public static synchronized boolean isEnabled() {
+		return instance != null;
+	}
+
   public static void setLogger(PrintStream logger) {
     logger = logger;
   }
@@ -93,7 +97,7 @@ public class CrashReporter implements Thread.UncaughtExceptionHandler {
 	private void sendOutReporter(Map<String, Object> params) {
 		try {
 			APIRequest.DefaultRequestExecutor executor = new APIRequest.DefaultRequestExecutor();
-			APIContext anonymous = new APIContext(null);
+			APIContext anonymous = new APIContext(null, null, null, false);
 			String apiUrl = APIContext.DEFAULT_API_BASE + "/" + APIContext.DEFAULT_API_VERSION + "/" + this.appID + "/instruments";
 			APIRequest.ResponseWrapper response = executor.execute("POST", apiUrl, params, anonymous);
 			log("Sucess to send out crash reporter");

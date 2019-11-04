@@ -46,25 +46,32 @@ public class APIContext {
   protected boolean isDebug = false;
   protected PrintStream logger = System.out;
 
-  public APIContext(String endpointBase, String videoEndpointBase, String version, String accessToken, String appSecret, String appID) {
+  public APIContext(String endpointBase, String videoEndpointBase, String version, String accessToken, String appSecret, String appID, boolean logCrash) {
     this.version = version;
     this.endpointBase = endpointBase;
     this.videoEndpointBase = videoEndpointBase;
     this.accessToken = accessToken;
     this.appSecret = appSecret;
     this.appID =  appID;
+    if (logCrash) {
+        CrashReporter.enable(this);
+    }
   }
 
   public APIContext(String accessToken) {
-    this(DEFAULT_API_BASE, DEFAULT_VIDEO_API_BASE, DEFAULT_API_VERSION, accessToken, null, null);
+    this(DEFAULT_API_BASE, DEFAULT_VIDEO_API_BASE, DEFAULT_API_VERSION, accessToken, null, null, true);
   }
 
   public APIContext(String accessToken, String appSecret) {
-    this(DEFAULT_API_BASE, DEFAULT_VIDEO_API_BASE, DEFAULT_API_VERSION, accessToken, appSecret, null);
+    this(DEFAULT_API_BASE, DEFAULT_VIDEO_API_BASE, DEFAULT_API_VERSION, accessToken, appSecret, null, true);
   }
 
   public APIContext(String accessToken, String appSecret, String appID) {
-    this(DEFAULT_API_BASE, DEFAULT_VIDEO_API_BASE, DEFAULT_API_VERSION, accessToken, appSecret, appID);
+    this(DEFAULT_API_BASE, DEFAULT_VIDEO_API_BASE, DEFAULT_API_VERSION, accessToken, appSecret, appID, true);
+  }
+
+  public APIContext(String accessToken, String appSecret, String appID, boolean logCrash) {
+    this(DEFAULT_API_BASE, DEFAULT_VIDEO_API_BASE, DEFAULT_API_VERSION, accessToken, appSecret, appID, logCrash);
   }
 
   public String getEndpointBase() {
@@ -168,5 +175,9 @@ public class APIContext {
     }
 
     return null;
+  }
+
+  public static void disableCrashReport() {
+    CrashReporter.disable();
   }
 }
