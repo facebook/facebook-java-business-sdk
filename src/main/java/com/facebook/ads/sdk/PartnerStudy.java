@@ -422,7 +422,6 @@ public class PartnerStudy extends APINode {
       "is_famedeeplinkinguser",
       "is_shared_login",
       "is_verified",
-      "labels",
       "languages",
       "last_name",
       "link",
@@ -720,13 +719,6 @@ public class PartnerStudy extends APINode {
     }
     public APIRequestGetSubmitters requestIsVerifiedField (boolean value) {
       this.requestField("is_verified", value);
-      return this;
-    }
-    public APIRequestGetSubmitters requestLabelsField () {
-      return this.requestLabelsField(true);
-    }
-    public APIRequestGetSubmitters requestLabelsField (boolean value) {
-      this.requestField("labels", value);
       return this;
     }
     public APIRequestGetSubmitters requestLanguagesField () {

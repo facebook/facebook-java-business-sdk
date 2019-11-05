@@ -1065,6 +1065,7 @@ public class LiveEncoder extends APINode {
       "input_video_width",
       "name",
       "status",
+      "target_token",
       "version",
     };
 
@@ -1245,6 +1246,11 @@ public class LiveEncoder extends APINode {
     }
     public APIRequestUpdate setStatus (String status) {
       this.setParam("status", status);
+      return this;
+    }
+
+    public APIRequestUpdate setTargetToken (String targetToken) {
+      this.setParam("target_token", targetToken);
       return this;
     }
 

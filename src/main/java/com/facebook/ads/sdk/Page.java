@@ -882,10 +882,6 @@ public class Page extends APINode {
     return new APIRequestGetScheduledPosts(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetScreenNames getScreenNames() {
-    return new APIRequestGetScreenNames(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetSecondaryReceivers getSecondaryReceivers() {
     return new APIRequestGetSecondaryReceivers(this.getPrefixedId().toString(), context);
   }
@@ -3565,7 +3561,7 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestDeleteBlocked setPsid (Object psid) {
+    public APIRequestDeleteBlocked setPsid (Long psid) {
       this.setParam("psid", psid);
       return this;
     }
@@ -3574,7 +3570,7 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestDeleteBlocked setUid (Object uid) {
+    public APIRequestDeleteBlocked setUid (Long uid) {
       this.setParam("uid", uid);
       return this;
     }
@@ -3583,7 +3579,7 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestDeleteBlocked setUser (Object user) {
+    public APIRequestDeleteBlocked setUser (Long user) {
       this.setParam("user", user);
       return this;
     }
@@ -3921,7 +3917,7 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateBlocked setPsid (List<Object> psid) {
+    public APIRequestCreateBlocked setPsid (List<Long> psid) {
       this.setParam("psid", psid);
       return this;
     }
@@ -23794,7 +23790,6 @@ public class Page extends APINode {
       "is_famedeeplinkinguser",
       "is_shared_login",
       "is_verified",
-      "labels",
       "languages",
       "last_name",
       "link",
@@ -23892,7 +23887,7 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestGetRoles setUid (Object uid) {
+    public APIRequestGetRoles setUid (Long uid) {
       this.setParam("uid", uid);
       return this;
     }
@@ -24110,13 +24105,6 @@ public class Page extends APINode {
     }
     public APIRequestGetRoles requestIsVerifiedField (boolean value) {
       this.requestField("is_verified", value);
-      return this;
-    }
-    public APIRequestGetRoles requestLabelsField () {
-      return this.requestLabelsField(true);
-    }
-    public APIRequestGetRoles requestLabelsField (boolean value) {
-      this.requestField("labels", value);
       return this;
     }
     public APIRequestGetRoles requestLanguagesField () {
@@ -25076,134 +25064,6 @@ public class Page extends APINode {
     }
     public APIRequestGetScheduledPosts requestWidthField (boolean value) {
       this.requestField("width", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestGetScreenNames extends APIRequest<ScreenName> {
-
-    APINodeList<ScreenName> lastResponse = null;
-    @Override
-    public APINodeList<ScreenName> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "service_name",
-      "service_type",
-      "value",
-    };
-
-    @Override
-    public APINodeList<ScreenName> parseResponse(String response, String header) throws APIException {
-      return ScreenName.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<ScreenName> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<ScreenName> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<ScreenName>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<ScreenName>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<ScreenName>>() {
-           public APINodeList<ScreenName> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetScreenNames.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetScreenNames(String nodeId, APIContext context) {
-      super(context, nodeId, "/screennames", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetScreenNames setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetScreenNames setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetScreenNames requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetScreenNames requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetScreenNames requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetScreenNames requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetScreenNames requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetScreenNames requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetScreenNames requestServiceNameField () {
-      return this.requestServiceNameField(true);
-    }
-    public APIRequestGetScreenNames requestServiceNameField (boolean value) {
-      this.requestField("service_name", value);
-      return this;
-    }
-    public APIRequestGetScreenNames requestServiceTypeField () {
-      return this.requestServiceTypeField(true);
-    }
-    public APIRequestGetScreenNames requestServiceTypeField (boolean value) {
-      this.requestField("service_type", value);
-      return this;
-    }
-    public APIRequestGetScreenNames requestValueField () {
-      return this.requestValueField(true);
-    }
-    public APIRequestGetScreenNames requestValueField (boolean value) {
-      this.requestField("value", value);
       return this;
     }
   }
@@ -34559,6 +34419,8 @@ public class Page extends APINode {
       VALUE_LIVE_VIDEOS("live_videos"),
       @SerializedName("location")
       VALUE_LOCATION("location"),
+      @SerializedName("mcom_invoice_change")
+      VALUE_MCOM_INVOICE_CHANGE("mcom_invoice_change"),
       @SerializedName("members")
       VALUE_MEMBERS("members"),
       @SerializedName("mention")

@@ -906,8 +906,14 @@ public class BusinessImage extends APINode {
       VALUE_AGE("age"),
       @SerializedName("country")
       VALUE_COUNTRY("country"),
+      @SerializedName("device_platform")
+      VALUE_DEVICE_PLATFORM("device_platform"),
       @SerializedName("gender")
       VALUE_GENDER("gender"),
+      @SerializedName("platform_position")
+      VALUE_PLATFORM_POSITION("platform_position"),
+      @SerializedName("publisher_platform")
+      VALUE_PUBLISHER_PLATFORM("publisher_platform"),
       ;
 
       private String value;

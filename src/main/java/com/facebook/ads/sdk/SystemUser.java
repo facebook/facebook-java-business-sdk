@@ -2484,7 +2484,6 @@ public class SystemUser extends APINode {
       "is_famedeeplinkinguser",
       "is_shared_login",
       "is_verified",
-      "labels",
       "languages",
       "last_name",
       "link",
@@ -2782,13 +2781,6 @@ public class SystemUser extends APINode {
     }
     public APIRequestGetUpdatedBy requestIsVerifiedField (boolean value) {
       this.requestField("is_verified", value);
-      return this;
-    }
-    public APIRequestGetUpdatedBy requestLabelsField () {
-      return this.requestLabelsField(true);
-    }
-    public APIRequestGetUpdatedBy requestLabelsField (boolean value) {
-      this.requestField("labels", value);
       return this;
     }
     public APIRequestGetUpdatedBy requestLanguagesField () {

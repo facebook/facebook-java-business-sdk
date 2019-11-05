@@ -105,8 +105,6 @@ public class User extends APINode {
   private Boolean mIsSharedLogin = null;
   @SerializedName("is_verified")
   private Boolean mIsVerified = null;
-  @SerializedName("labels")
-  private List<PageLabel> mLabels = null;
   @SerializedName("languages")
   private List<Experience> mLanguages = null;
   @SerializedName("last_name")
@@ -764,10 +762,6 @@ public class User extends APINode {
 
   public Boolean getFieldIsVerified() {
     return mIsVerified;
-  }
-
-  public List<PageLabel> getFieldLabels() {
-    return mLabels;
   }
 
   public List<Experience> getFieldLanguages() {
@@ -9464,7 +9458,6 @@ public class User extends APINode {
       "is_famedeeplinkinguser",
       "is_shared_login",
       "is_verified",
-      "labels",
       "languages",
       "last_name",
       "link",
@@ -9762,13 +9755,6 @@ public class User extends APINode {
     }
     public APIRequestGetFamily requestIsVerifiedField (boolean value) {
       this.requestField("is_verified", value);
-      return this;
-    }
-    public APIRequestGetFamily requestLabelsField () {
-      return this.requestLabelsField(true);
-    }
-    public APIRequestGetFamily requestLabelsField (boolean value) {
-      this.requestField("labels", value);
       return this;
     }
     public APIRequestGetFamily requestLanguagesField () {
@@ -11193,7 +11179,6 @@ public class User extends APINode {
       "is_famedeeplinkinguser",
       "is_shared_login",
       "is_verified",
-      "labels",
       "languages",
       "last_name",
       "link",
@@ -11500,13 +11485,6 @@ public class User extends APINode {
     }
     public APIRequestGetFriends requestIsVerifiedField (boolean value) {
       this.requestField("is_verified", value);
-      return this;
-    }
-    public APIRequestGetFriends requestLabelsField () {
-      return this.requestLabelsField(true);
-    }
-    public APIRequestGetFriends requestLabelsField (boolean value) {
-      this.requestField("labels", value);
       return this;
     }
     public APIRequestGetFriends requestLanguagesField () {
@@ -26494,7 +26472,6 @@ public class User extends APINode {
       "is_famedeeplinkinguser",
       "is_shared_login",
       "is_verified",
-      "labels",
       "languages",
       "last_name",
       "link",
@@ -26792,13 +26769,6 @@ public class User extends APINode {
     }
     public APIRequestGet requestIsVerifiedField (boolean value) {
       this.requestField("is_verified", value);
-      return this;
-    }
-    public APIRequestGet requestLabelsField () {
-      return this.requestLabelsField(true);
-    }
-    public APIRequestGet requestLabelsField (boolean value) {
-      this.requestField("labels", value);
       return this;
     }
     public APIRequestGet requestLanguagesField () {
@@ -27639,7 +27609,6 @@ public class User extends APINode {
     this.mIsFamedeeplinkinguser = instance.mIsFamedeeplinkinguser;
     this.mIsSharedLogin = instance.mIsSharedLogin;
     this.mIsVerified = instance.mIsVerified;
-    this.mLabels = instance.mLabels;
     this.mLanguages = instance.mLanguages;
     this.mLastName = instance.mLastName;
     this.mLink = instance.mLink;

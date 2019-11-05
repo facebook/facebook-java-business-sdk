@@ -1040,7 +1040,6 @@ public class AdStudy extends APINode {
       "is_famedeeplinkinguser",
       "is_shared_login",
       "is_verified",
-      "labels",
       "languages",
       "last_name",
       "link",
@@ -1338,13 +1337,6 @@ public class AdStudy extends APINode {
     }
     public APIRequestGetViewers requestIsVerifiedField (boolean value) {
       this.requestField("is_verified", value);
-      return this;
-    }
-    public APIRequestGetViewers requestLabelsField () {
-      return this.requestLabelsField(true);
-    }
-    public APIRequestGetViewers requestLabelsField (boolean value) {
-      this.requestField("labels", value);
       return this;
     }
     public APIRequestGetViewers requestLanguagesField () {

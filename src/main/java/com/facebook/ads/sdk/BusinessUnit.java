@@ -294,6 +294,14 @@ public class BusinessUnit extends APINode {
     return new APIRequestCreateAtlasSalesAccess(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetCampaigns getCampaigns() {
+    return new APIRequestGetCampaigns(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetConversionEvents getConversionEvents() {
+    return new APIRequestGetConversionEvents(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetCustomBreakdowns getCustomBreakdowns() {
     return new APIRequestGetCustomBreakdowns(this.getPrefixedId().toString(), context);
   }
@@ -304,6 +312,14 @@ public class BusinessUnit extends APINode {
 
   public APIRequestGetExternalImportFile getExternalImportFile() {
     return new APIRequestGetExternalImportFile(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetFbConversionEvents getFbConversionEvents() {
+    return new APIRequestGetFbConversionEvents(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetSources getSources() {
+    return new APIRequestGetSources(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGet get() {
@@ -698,6 +714,1042 @@ public class BusinessUnit extends APINode {
 
   }
 
+  public static class APIRequestGetCampaigns extends APIRequest<AtlasCampaign> {
+
+    APINodeList<AtlasCampaign> lastResponse = null;
+    @Override
+    public APINodeList<AtlasCampaign> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "filter_by",
+      "metric_scope",
+      "order_by",
+    };
+
+    public static final String[] FIELDS = {
+      "ad_platform",
+      "alias",
+      "cost_per_1k_impressions",
+      "cost_per_click",
+      "cost_per_visit",
+      "created_by",
+      "created_date",
+      "data_driven_convs",
+      "data_driven_convs_per_1k_impress",
+      "data_driven_convs_per_click",
+      "data_driven_convs_per_visit",
+      "data_driven_cpa",
+      "data_driven_nullable_convs",
+      "data_driven_revenue",
+      "data_driven_roas",
+      "even_credit_convs",
+      "even_credit_convs_per_1k_impress",
+      "even_credit_convs_per_click",
+      "even_credit_convs_per_visit",
+      "even_credit_cpa",
+      "even_credit_revenue",
+      "even_credit_roas",
+      "first_click_convs",
+      "first_click_convs_per_1k_impress",
+      "first_click_convs_per_click",
+      "first_click_convs_per_visit",
+      "first_click_cpa",
+      "first_click_revenue",
+      "first_click_roas",
+      "first_touch_convs",
+      "first_touch_convs_per_1k_impress",
+      "first_touch_convs_per_click",
+      "first_touch_convs_per_visit",
+      "first_touch_cpa",
+      "first_touch_revenue",
+      "first_touch_roas",
+      "id",
+      "is_archived",
+      "last_click_convs",
+      "last_click_convs_per_1k_impress",
+      "last_click_convs_per_click",
+      "last_click_convs_per_visit",
+      "last_click_cpa",
+      "last_click_revenue",
+      "last_click_roas",
+      "last_click_with_extrapolation_convs",
+      "last_click_with_extrapolation_convs_per_100_clicks",
+      "last_click_with_extrapolation_convs_per_1k_impress",
+      "last_click_with_extrapolation_convs_per_click",
+      "last_click_with_extrapolation_convs_per_visit",
+      "last_click_with_extrapolation_cpa",
+      "last_click_with_extrapolation_revenue",
+      "last_click_with_extrapolation_roas",
+      "last_click_with_extrapolation_unattributed",
+      "last_modified_by",
+      "last_modified_date",
+      "last_touch_convs",
+      "last_touch_convs_per_1k_impress",
+      "last_touch_convs_per_click",
+      "last_touch_convs_per_visit",
+      "last_touch_cpa",
+      "last_touch_revenue",
+      "last_touch_roas",
+      "name",
+      "net_media_cost",
+      "positional_30fl_convs",
+      "positional_30fl_convs_per_1k_impress",
+      "positional_30fl_convs_per_click",
+      "positional_30fl_convs_per_visit",
+      "positional_30fl_cpa",
+      "positional_30fl_revenue",
+      "positional_30fl_roas",
+      "positional_40fl_convs",
+      "positional_40fl_convs_per_1k_impress",
+      "positional_40fl_convs_per_click",
+      "positional_40fl_convs_per_visit",
+      "positional_40fl_cpa",
+      "positional_40fl_revenue",
+      "positional_40fl_roas",
+      "report_click_through_rate",
+      "report_clicks",
+      "report_impressions",
+      "report_visits",
+      "time_decay_1day_convs",
+      "time_decay_1day_convs_per_1k_impress",
+      "time_decay_1day_convs_per_click",
+      "time_decay_1day_convs_per_visit",
+      "time_decay_1day_cpa",
+      "time_decay_1day_revenue",
+      "time_decay_1day_roas",
+      "time_decay_7day_convs",
+      "time_decay_7day_convs_per_1k_impress",
+      "time_decay_7day_convs_per_click",
+      "time_decay_7day_convs_per_visit",
+      "time_decay_7day_cpa",
+      "time_decay_7day_revenue",
+      "time_decay_7day_roas",
+      "type",
+    };
+
+    @Override
+    public APINodeList<AtlasCampaign> parseResponse(String response, String header) throws APIException {
+      return AtlasCampaign.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<AtlasCampaign> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AtlasCampaign> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<AtlasCampaign>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AtlasCampaign>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<AtlasCampaign>>() {
+           public APINodeList<AtlasCampaign> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetCampaigns.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetCampaigns(String nodeId, APIContext context) {
+      super(context, nodeId, "/campaigns", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCampaigns setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCampaigns setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCampaigns setFilterBy (String filterBy) {
+      this.setParam("filter_by", filterBy);
+      return this;
+    }
+
+    public APIRequestGetCampaigns setMetricScope (Map<String, String> metricScope) {
+      this.setParam("metric_scope", metricScope);
+      return this;
+    }
+    public APIRequestGetCampaigns setMetricScope (String metricScope) {
+      this.setParam("metric_scope", metricScope);
+      return this;
+    }
+
+    public APIRequestGetCampaigns setOrderBy (String orderBy) {
+      this.setParam("order_by", orderBy);
+      return this;
+    }
+
+    public APIRequestGetCampaigns requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCampaigns requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCampaigns requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCampaigns requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCampaigns requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCampaigns requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetCampaigns requestAdPlatformField () {
+      return this.requestAdPlatformField(true);
+    }
+    public APIRequestGetCampaigns requestAdPlatformField (boolean value) {
+      this.requestField("ad_platform", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestAliasField () {
+      return this.requestAliasField(true);
+    }
+    public APIRequestGetCampaigns requestAliasField (boolean value) {
+      this.requestField("alias", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestCostPer1kImpressionsField () {
+      return this.requestCostPer1kImpressionsField(true);
+    }
+    public APIRequestGetCampaigns requestCostPer1kImpressionsField (boolean value) {
+      this.requestField("cost_per_1k_impressions", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestCostPerClickField () {
+      return this.requestCostPerClickField(true);
+    }
+    public APIRequestGetCampaigns requestCostPerClickField (boolean value) {
+      this.requestField("cost_per_click", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestCostPerVisitField () {
+      return this.requestCostPerVisitField(true);
+    }
+    public APIRequestGetCampaigns requestCostPerVisitField (boolean value) {
+      this.requestField("cost_per_visit", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestCreatedByField () {
+      return this.requestCreatedByField(true);
+    }
+    public APIRequestGetCampaigns requestCreatedByField (boolean value) {
+      this.requestField("created_by", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestCreatedDateField () {
+      return this.requestCreatedDateField(true);
+    }
+    public APIRequestGetCampaigns requestCreatedDateField (boolean value) {
+      this.requestField("created_date", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestDataDrivenConvsField () {
+      return this.requestDataDrivenConvsField(true);
+    }
+    public APIRequestGetCampaigns requestDataDrivenConvsField (boolean value) {
+      this.requestField("data_driven_convs", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestDataDrivenConvsPer1kImpressField () {
+      return this.requestDataDrivenConvsPer1kImpressField(true);
+    }
+    public APIRequestGetCampaigns requestDataDrivenConvsPer1kImpressField (boolean value) {
+      this.requestField("data_driven_convs_per_1k_impress", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestDataDrivenConvsPerClickField () {
+      return this.requestDataDrivenConvsPerClickField(true);
+    }
+    public APIRequestGetCampaigns requestDataDrivenConvsPerClickField (boolean value) {
+      this.requestField("data_driven_convs_per_click", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestDataDrivenConvsPerVisitField () {
+      return this.requestDataDrivenConvsPerVisitField(true);
+    }
+    public APIRequestGetCampaigns requestDataDrivenConvsPerVisitField (boolean value) {
+      this.requestField("data_driven_convs_per_visit", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestDataDrivenCpaField () {
+      return this.requestDataDrivenCpaField(true);
+    }
+    public APIRequestGetCampaigns requestDataDrivenCpaField (boolean value) {
+      this.requestField("data_driven_cpa", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestDataDrivenNullableConvsField () {
+      return this.requestDataDrivenNullableConvsField(true);
+    }
+    public APIRequestGetCampaigns requestDataDrivenNullableConvsField (boolean value) {
+      this.requestField("data_driven_nullable_convs", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestDataDrivenRevenueField () {
+      return this.requestDataDrivenRevenueField(true);
+    }
+    public APIRequestGetCampaigns requestDataDrivenRevenueField (boolean value) {
+      this.requestField("data_driven_revenue", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestDataDrivenRoasField () {
+      return this.requestDataDrivenRoasField(true);
+    }
+    public APIRequestGetCampaigns requestDataDrivenRoasField (boolean value) {
+      this.requestField("data_driven_roas", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestEvenCreditConvsField () {
+      return this.requestEvenCreditConvsField(true);
+    }
+    public APIRequestGetCampaigns requestEvenCreditConvsField (boolean value) {
+      this.requestField("even_credit_convs", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestEvenCreditConvsPer1kImpressField () {
+      return this.requestEvenCreditConvsPer1kImpressField(true);
+    }
+    public APIRequestGetCampaigns requestEvenCreditConvsPer1kImpressField (boolean value) {
+      this.requestField("even_credit_convs_per_1k_impress", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestEvenCreditConvsPerClickField () {
+      return this.requestEvenCreditConvsPerClickField(true);
+    }
+    public APIRequestGetCampaigns requestEvenCreditConvsPerClickField (boolean value) {
+      this.requestField("even_credit_convs_per_click", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestEvenCreditConvsPerVisitField () {
+      return this.requestEvenCreditConvsPerVisitField(true);
+    }
+    public APIRequestGetCampaigns requestEvenCreditConvsPerVisitField (boolean value) {
+      this.requestField("even_credit_convs_per_visit", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestEvenCreditCpaField () {
+      return this.requestEvenCreditCpaField(true);
+    }
+    public APIRequestGetCampaigns requestEvenCreditCpaField (boolean value) {
+      this.requestField("even_credit_cpa", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestEvenCreditRevenueField () {
+      return this.requestEvenCreditRevenueField(true);
+    }
+    public APIRequestGetCampaigns requestEvenCreditRevenueField (boolean value) {
+      this.requestField("even_credit_revenue", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestEvenCreditRoasField () {
+      return this.requestEvenCreditRoasField(true);
+    }
+    public APIRequestGetCampaigns requestEvenCreditRoasField (boolean value) {
+      this.requestField("even_credit_roas", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestFirstClickConvsField () {
+      return this.requestFirstClickConvsField(true);
+    }
+    public APIRequestGetCampaigns requestFirstClickConvsField (boolean value) {
+      this.requestField("first_click_convs", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestFirstClickConvsPer1kImpressField () {
+      return this.requestFirstClickConvsPer1kImpressField(true);
+    }
+    public APIRequestGetCampaigns requestFirstClickConvsPer1kImpressField (boolean value) {
+      this.requestField("first_click_convs_per_1k_impress", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestFirstClickConvsPerClickField () {
+      return this.requestFirstClickConvsPerClickField(true);
+    }
+    public APIRequestGetCampaigns requestFirstClickConvsPerClickField (boolean value) {
+      this.requestField("first_click_convs_per_click", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestFirstClickConvsPerVisitField () {
+      return this.requestFirstClickConvsPerVisitField(true);
+    }
+    public APIRequestGetCampaigns requestFirstClickConvsPerVisitField (boolean value) {
+      this.requestField("first_click_convs_per_visit", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestFirstClickCpaField () {
+      return this.requestFirstClickCpaField(true);
+    }
+    public APIRequestGetCampaigns requestFirstClickCpaField (boolean value) {
+      this.requestField("first_click_cpa", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestFirstClickRevenueField () {
+      return this.requestFirstClickRevenueField(true);
+    }
+    public APIRequestGetCampaigns requestFirstClickRevenueField (boolean value) {
+      this.requestField("first_click_revenue", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestFirstClickRoasField () {
+      return this.requestFirstClickRoasField(true);
+    }
+    public APIRequestGetCampaigns requestFirstClickRoasField (boolean value) {
+      this.requestField("first_click_roas", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestFirstTouchConvsField () {
+      return this.requestFirstTouchConvsField(true);
+    }
+    public APIRequestGetCampaigns requestFirstTouchConvsField (boolean value) {
+      this.requestField("first_touch_convs", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestFirstTouchConvsPer1kImpressField () {
+      return this.requestFirstTouchConvsPer1kImpressField(true);
+    }
+    public APIRequestGetCampaigns requestFirstTouchConvsPer1kImpressField (boolean value) {
+      this.requestField("first_touch_convs_per_1k_impress", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestFirstTouchConvsPerClickField () {
+      return this.requestFirstTouchConvsPerClickField(true);
+    }
+    public APIRequestGetCampaigns requestFirstTouchConvsPerClickField (boolean value) {
+      this.requestField("first_touch_convs_per_click", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestFirstTouchConvsPerVisitField () {
+      return this.requestFirstTouchConvsPerVisitField(true);
+    }
+    public APIRequestGetCampaigns requestFirstTouchConvsPerVisitField (boolean value) {
+      this.requestField("first_touch_convs_per_visit", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestFirstTouchCpaField () {
+      return this.requestFirstTouchCpaField(true);
+    }
+    public APIRequestGetCampaigns requestFirstTouchCpaField (boolean value) {
+      this.requestField("first_touch_cpa", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestFirstTouchRevenueField () {
+      return this.requestFirstTouchRevenueField(true);
+    }
+    public APIRequestGetCampaigns requestFirstTouchRevenueField (boolean value) {
+      this.requestField("first_touch_revenue", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestFirstTouchRoasField () {
+      return this.requestFirstTouchRoasField(true);
+    }
+    public APIRequestGetCampaigns requestFirstTouchRoasField (boolean value) {
+      this.requestField("first_touch_roas", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetCampaigns requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestIsArchivedField () {
+      return this.requestIsArchivedField(true);
+    }
+    public APIRequestGetCampaigns requestIsArchivedField (boolean value) {
+      this.requestField("is_archived", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestLastClickConvsField () {
+      return this.requestLastClickConvsField(true);
+    }
+    public APIRequestGetCampaigns requestLastClickConvsField (boolean value) {
+      this.requestField("last_click_convs", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestLastClickConvsPer1kImpressField () {
+      return this.requestLastClickConvsPer1kImpressField(true);
+    }
+    public APIRequestGetCampaigns requestLastClickConvsPer1kImpressField (boolean value) {
+      this.requestField("last_click_convs_per_1k_impress", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestLastClickConvsPerClickField () {
+      return this.requestLastClickConvsPerClickField(true);
+    }
+    public APIRequestGetCampaigns requestLastClickConvsPerClickField (boolean value) {
+      this.requestField("last_click_convs_per_click", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestLastClickConvsPerVisitField () {
+      return this.requestLastClickConvsPerVisitField(true);
+    }
+    public APIRequestGetCampaigns requestLastClickConvsPerVisitField (boolean value) {
+      this.requestField("last_click_convs_per_visit", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestLastClickCpaField () {
+      return this.requestLastClickCpaField(true);
+    }
+    public APIRequestGetCampaigns requestLastClickCpaField (boolean value) {
+      this.requestField("last_click_cpa", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestLastClickRevenueField () {
+      return this.requestLastClickRevenueField(true);
+    }
+    public APIRequestGetCampaigns requestLastClickRevenueField (boolean value) {
+      this.requestField("last_click_revenue", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestLastClickRoasField () {
+      return this.requestLastClickRoasField(true);
+    }
+    public APIRequestGetCampaigns requestLastClickRoasField (boolean value) {
+      this.requestField("last_click_roas", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestLastClickWithExtrapolationConvsField () {
+      return this.requestLastClickWithExtrapolationConvsField(true);
+    }
+    public APIRequestGetCampaigns requestLastClickWithExtrapolationConvsField (boolean value) {
+      this.requestField("last_click_with_extrapolation_convs", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestLastClickWithExtrapolationConvsPer100ClicksField () {
+      return this.requestLastClickWithExtrapolationConvsPer100ClicksField(true);
+    }
+    public APIRequestGetCampaigns requestLastClickWithExtrapolationConvsPer100ClicksField (boolean value) {
+      this.requestField("last_click_with_extrapolation_convs_per_100_clicks", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestLastClickWithExtrapolationConvsPer1kImpressField () {
+      return this.requestLastClickWithExtrapolationConvsPer1kImpressField(true);
+    }
+    public APIRequestGetCampaigns requestLastClickWithExtrapolationConvsPer1kImpressField (boolean value) {
+      this.requestField("last_click_with_extrapolation_convs_per_1k_impress", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestLastClickWithExtrapolationConvsPerClickField () {
+      return this.requestLastClickWithExtrapolationConvsPerClickField(true);
+    }
+    public APIRequestGetCampaigns requestLastClickWithExtrapolationConvsPerClickField (boolean value) {
+      this.requestField("last_click_with_extrapolation_convs_per_click", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestLastClickWithExtrapolationConvsPerVisitField () {
+      return this.requestLastClickWithExtrapolationConvsPerVisitField(true);
+    }
+    public APIRequestGetCampaigns requestLastClickWithExtrapolationConvsPerVisitField (boolean value) {
+      this.requestField("last_click_with_extrapolation_convs_per_visit", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestLastClickWithExtrapolationCpaField () {
+      return this.requestLastClickWithExtrapolationCpaField(true);
+    }
+    public APIRequestGetCampaigns requestLastClickWithExtrapolationCpaField (boolean value) {
+      this.requestField("last_click_with_extrapolation_cpa", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestLastClickWithExtrapolationRevenueField () {
+      return this.requestLastClickWithExtrapolationRevenueField(true);
+    }
+    public APIRequestGetCampaigns requestLastClickWithExtrapolationRevenueField (boolean value) {
+      this.requestField("last_click_with_extrapolation_revenue", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestLastClickWithExtrapolationRoasField () {
+      return this.requestLastClickWithExtrapolationRoasField(true);
+    }
+    public APIRequestGetCampaigns requestLastClickWithExtrapolationRoasField (boolean value) {
+      this.requestField("last_click_with_extrapolation_roas", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestLastClickWithExtrapolationUnattributedField () {
+      return this.requestLastClickWithExtrapolationUnattributedField(true);
+    }
+    public APIRequestGetCampaigns requestLastClickWithExtrapolationUnattributedField (boolean value) {
+      this.requestField("last_click_with_extrapolation_unattributed", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestLastModifiedByField () {
+      return this.requestLastModifiedByField(true);
+    }
+    public APIRequestGetCampaigns requestLastModifiedByField (boolean value) {
+      this.requestField("last_modified_by", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestLastModifiedDateField () {
+      return this.requestLastModifiedDateField(true);
+    }
+    public APIRequestGetCampaigns requestLastModifiedDateField (boolean value) {
+      this.requestField("last_modified_date", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestLastTouchConvsField () {
+      return this.requestLastTouchConvsField(true);
+    }
+    public APIRequestGetCampaigns requestLastTouchConvsField (boolean value) {
+      this.requestField("last_touch_convs", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestLastTouchConvsPer1kImpressField () {
+      return this.requestLastTouchConvsPer1kImpressField(true);
+    }
+    public APIRequestGetCampaigns requestLastTouchConvsPer1kImpressField (boolean value) {
+      this.requestField("last_touch_convs_per_1k_impress", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestLastTouchConvsPerClickField () {
+      return this.requestLastTouchConvsPerClickField(true);
+    }
+    public APIRequestGetCampaigns requestLastTouchConvsPerClickField (boolean value) {
+      this.requestField("last_touch_convs_per_click", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestLastTouchConvsPerVisitField () {
+      return this.requestLastTouchConvsPerVisitField(true);
+    }
+    public APIRequestGetCampaigns requestLastTouchConvsPerVisitField (boolean value) {
+      this.requestField("last_touch_convs_per_visit", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestLastTouchCpaField () {
+      return this.requestLastTouchCpaField(true);
+    }
+    public APIRequestGetCampaigns requestLastTouchCpaField (boolean value) {
+      this.requestField("last_touch_cpa", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestLastTouchRevenueField () {
+      return this.requestLastTouchRevenueField(true);
+    }
+    public APIRequestGetCampaigns requestLastTouchRevenueField (boolean value) {
+      this.requestField("last_touch_revenue", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestLastTouchRoasField () {
+      return this.requestLastTouchRoasField(true);
+    }
+    public APIRequestGetCampaigns requestLastTouchRoasField (boolean value) {
+      this.requestField("last_touch_roas", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetCampaigns requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestNetMediaCostField () {
+      return this.requestNetMediaCostField(true);
+    }
+    public APIRequestGetCampaigns requestNetMediaCostField (boolean value) {
+      this.requestField("net_media_cost", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestPositional30flConvsField () {
+      return this.requestPositional30flConvsField(true);
+    }
+    public APIRequestGetCampaigns requestPositional30flConvsField (boolean value) {
+      this.requestField("positional_30fl_convs", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestPositional30flConvsPer1kImpressField () {
+      return this.requestPositional30flConvsPer1kImpressField(true);
+    }
+    public APIRequestGetCampaigns requestPositional30flConvsPer1kImpressField (boolean value) {
+      this.requestField("positional_30fl_convs_per_1k_impress", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestPositional30flConvsPerClickField () {
+      return this.requestPositional30flConvsPerClickField(true);
+    }
+    public APIRequestGetCampaigns requestPositional30flConvsPerClickField (boolean value) {
+      this.requestField("positional_30fl_convs_per_click", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestPositional30flConvsPerVisitField () {
+      return this.requestPositional30flConvsPerVisitField(true);
+    }
+    public APIRequestGetCampaigns requestPositional30flConvsPerVisitField (boolean value) {
+      this.requestField("positional_30fl_convs_per_visit", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestPositional30flCpaField () {
+      return this.requestPositional30flCpaField(true);
+    }
+    public APIRequestGetCampaigns requestPositional30flCpaField (boolean value) {
+      this.requestField("positional_30fl_cpa", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestPositional30flRevenueField () {
+      return this.requestPositional30flRevenueField(true);
+    }
+    public APIRequestGetCampaigns requestPositional30flRevenueField (boolean value) {
+      this.requestField("positional_30fl_revenue", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestPositional30flRoasField () {
+      return this.requestPositional30flRoasField(true);
+    }
+    public APIRequestGetCampaigns requestPositional30flRoasField (boolean value) {
+      this.requestField("positional_30fl_roas", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestPositional40flConvsField () {
+      return this.requestPositional40flConvsField(true);
+    }
+    public APIRequestGetCampaigns requestPositional40flConvsField (boolean value) {
+      this.requestField("positional_40fl_convs", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestPositional40flConvsPer1kImpressField () {
+      return this.requestPositional40flConvsPer1kImpressField(true);
+    }
+    public APIRequestGetCampaigns requestPositional40flConvsPer1kImpressField (boolean value) {
+      this.requestField("positional_40fl_convs_per_1k_impress", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestPositional40flConvsPerClickField () {
+      return this.requestPositional40flConvsPerClickField(true);
+    }
+    public APIRequestGetCampaigns requestPositional40flConvsPerClickField (boolean value) {
+      this.requestField("positional_40fl_convs_per_click", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestPositional40flConvsPerVisitField () {
+      return this.requestPositional40flConvsPerVisitField(true);
+    }
+    public APIRequestGetCampaigns requestPositional40flConvsPerVisitField (boolean value) {
+      this.requestField("positional_40fl_convs_per_visit", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestPositional40flCpaField () {
+      return this.requestPositional40flCpaField(true);
+    }
+    public APIRequestGetCampaigns requestPositional40flCpaField (boolean value) {
+      this.requestField("positional_40fl_cpa", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestPositional40flRevenueField () {
+      return this.requestPositional40flRevenueField(true);
+    }
+    public APIRequestGetCampaigns requestPositional40flRevenueField (boolean value) {
+      this.requestField("positional_40fl_revenue", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestPositional40flRoasField () {
+      return this.requestPositional40flRoasField(true);
+    }
+    public APIRequestGetCampaigns requestPositional40flRoasField (boolean value) {
+      this.requestField("positional_40fl_roas", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestReportClickThroughRateField () {
+      return this.requestReportClickThroughRateField(true);
+    }
+    public APIRequestGetCampaigns requestReportClickThroughRateField (boolean value) {
+      this.requestField("report_click_through_rate", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestReportClicksField () {
+      return this.requestReportClicksField(true);
+    }
+    public APIRequestGetCampaigns requestReportClicksField (boolean value) {
+      this.requestField("report_clicks", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestReportImpressionsField () {
+      return this.requestReportImpressionsField(true);
+    }
+    public APIRequestGetCampaigns requestReportImpressionsField (boolean value) {
+      this.requestField("report_impressions", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestReportVisitsField () {
+      return this.requestReportVisitsField(true);
+    }
+    public APIRequestGetCampaigns requestReportVisitsField (boolean value) {
+      this.requestField("report_visits", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestTimeDecay1dayConvsField () {
+      return this.requestTimeDecay1dayConvsField(true);
+    }
+    public APIRequestGetCampaigns requestTimeDecay1dayConvsField (boolean value) {
+      this.requestField("time_decay_1day_convs", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestTimeDecay1dayConvsPer1kImpressField () {
+      return this.requestTimeDecay1dayConvsPer1kImpressField(true);
+    }
+    public APIRequestGetCampaigns requestTimeDecay1dayConvsPer1kImpressField (boolean value) {
+      this.requestField("time_decay_1day_convs_per_1k_impress", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestTimeDecay1dayConvsPerClickField () {
+      return this.requestTimeDecay1dayConvsPerClickField(true);
+    }
+    public APIRequestGetCampaigns requestTimeDecay1dayConvsPerClickField (boolean value) {
+      this.requestField("time_decay_1day_convs_per_click", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestTimeDecay1dayConvsPerVisitField () {
+      return this.requestTimeDecay1dayConvsPerVisitField(true);
+    }
+    public APIRequestGetCampaigns requestTimeDecay1dayConvsPerVisitField (boolean value) {
+      this.requestField("time_decay_1day_convs_per_visit", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestTimeDecay1dayCpaField () {
+      return this.requestTimeDecay1dayCpaField(true);
+    }
+    public APIRequestGetCampaigns requestTimeDecay1dayCpaField (boolean value) {
+      this.requestField("time_decay_1day_cpa", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestTimeDecay1dayRevenueField () {
+      return this.requestTimeDecay1dayRevenueField(true);
+    }
+    public APIRequestGetCampaigns requestTimeDecay1dayRevenueField (boolean value) {
+      this.requestField("time_decay_1day_revenue", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestTimeDecay1dayRoasField () {
+      return this.requestTimeDecay1dayRoasField(true);
+    }
+    public APIRequestGetCampaigns requestTimeDecay1dayRoasField (boolean value) {
+      this.requestField("time_decay_1day_roas", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestTimeDecay7dayConvsField () {
+      return this.requestTimeDecay7dayConvsField(true);
+    }
+    public APIRequestGetCampaigns requestTimeDecay7dayConvsField (boolean value) {
+      this.requestField("time_decay_7day_convs", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestTimeDecay7dayConvsPer1kImpressField () {
+      return this.requestTimeDecay7dayConvsPer1kImpressField(true);
+    }
+    public APIRequestGetCampaigns requestTimeDecay7dayConvsPer1kImpressField (boolean value) {
+      this.requestField("time_decay_7day_convs_per_1k_impress", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestTimeDecay7dayConvsPerClickField () {
+      return this.requestTimeDecay7dayConvsPerClickField(true);
+    }
+    public APIRequestGetCampaigns requestTimeDecay7dayConvsPerClickField (boolean value) {
+      this.requestField("time_decay_7day_convs_per_click", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestTimeDecay7dayConvsPerVisitField () {
+      return this.requestTimeDecay7dayConvsPerVisitField(true);
+    }
+    public APIRequestGetCampaigns requestTimeDecay7dayConvsPerVisitField (boolean value) {
+      this.requestField("time_decay_7day_convs_per_visit", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestTimeDecay7dayCpaField () {
+      return this.requestTimeDecay7dayCpaField(true);
+    }
+    public APIRequestGetCampaigns requestTimeDecay7dayCpaField (boolean value) {
+      this.requestField("time_decay_7day_cpa", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestTimeDecay7dayRevenueField () {
+      return this.requestTimeDecay7dayRevenueField(true);
+    }
+    public APIRequestGetCampaigns requestTimeDecay7dayRevenueField (boolean value) {
+      this.requestField("time_decay_7day_revenue", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestTimeDecay7dayRoasField () {
+      return this.requestTimeDecay7dayRoasField(true);
+    }
+    public APIRequestGetCampaigns requestTimeDecay7dayRoasField (boolean value) {
+      this.requestField("time_decay_7day_roas", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestTypeField () {
+      return this.requestTypeField(true);
+    }
+    public APIRequestGetCampaigns requestTypeField (boolean value) {
+      this.requestField("type", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetConversionEvents extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "filter_by",
+      "metric_scope",
+      "order_by",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetConversionEvents.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetConversionEvents(String nodeId, APIContext context) {
+      super(context, nodeId, "/conversion_events", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetConversionEvents setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConversionEvents setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetConversionEvents setFilterBy (String filterBy) {
+      this.setParam("filter_by", filterBy);
+      return this;
+    }
+
+    public APIRequestGetConversionEvents setMetricScope (Map<String, String> metricScope) {
+      this.setParam("metric_scope", metricScope);
+      return this;
+    }
+    public APIRequestGetConversionEvents setMetricScope (String metricScope) {
+      this.setParam("metric_scope", metricScope);
+      return this;
+    }
+
+    public APIRequestGetConversionEvents setOrderBy (String orderBy) {
+      this.setParam("order_by", orderBy);
+      return this;
+    }
+
+    public APIRequestGetConversionEvents requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetConversionEvents requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConversionEvents requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetConversionEvents requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConversionEvents requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConversionEvents requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetCustomBreakdowns extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -1040,6 +2092,258 @@ public class BusinessUnit extends APINode {
 
     @Override
     public APIRequestGetExternalImportFile requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetFbConversionEvents extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "filter_by",
+      "metric_scope",
+      "order_by",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetFbConversionEvents.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetFbConversionEvents(String nodeId, APIContext context) {
+      super(context, nodeId, "/fb_conversion_events", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetFbConversionEvents setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFbConversionEvents setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetFbConversionEvents setFilterBy (String filterBy) {
+      this.setParam("filter_by", filterBy);
+      return this;
+    }
+
+    public APIRequestGetFbConversionEvents setMetricScope (Map<String, String> metricScope) {
+      this.setParam("metric_scope", metricScope);
+      return this;
+    }
+    public APIRequestGetFbConversionEvents setMetricScope (String metricScope) {
+      this.setParam("metric_scope", metricScope);
+      return this;
+    }
+
+    public APIRequestGetFbConversionEvents setOrderBy (String orderBy) {
+      this.setParam("order_by", orderBy);
+      return this;
+    }
+
+    public APIRequestGetFbConversionEvents requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetFbConversionEvents requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFbConversionEvents requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetFbConversionEvents requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFbConversionEvents requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFbConversionEvents requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetSources extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "filter_by",
+      "metric_scope",
+      "order_by",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetSources.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetSources(String nodeId, APIContext context) {
+      super(context, nodeId, "/sources", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetSources setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSources setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetSources setFilterBy (String filterBy) {
+      this.setParam("filter_by", filterBy);
+      return this;
+    }
+
+    public APIRequestGetSources setMetricScope (Map<String, String> metricScope) {
+      this.setParam("metric_scope", metricScope);
+      return this;
+    }
+    public APIRequestGetSources setMetricScope (String metricScope) {
+      this.setParam("metric_scope", metricScope);
+      return this;
+    }
+
+    public APIRequestGetSources setOrderBy (String orderBy) {
+      this.setParam("order_by", orderBy);
+      return this;
+    }
+
+    public APIRequestGetSources requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetSources requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSources requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetSources requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSources requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSources requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

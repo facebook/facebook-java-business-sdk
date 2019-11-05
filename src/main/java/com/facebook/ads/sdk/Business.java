@@ -382,10 +382,6 @@ public class Business extends APINode {
     return new APIRequestCreateBusinessProject(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateCatalogSegmentProducerTo createCatalogSegmentProducerTo() {
-    return new APIRequestCreateCatalogSegmentProducerTo(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestCreateClaimCustomConversion createClaimCustomConversion() {
     return new APIRequestCreateClaimCustomConversion(this.getPrefixedId().toString(), context);
   }
@@ -612,6 +608,10 @@ public class Business extends APINode {
 
   public APIRequestGetPixelTos getPixelTos() {
     return new APIRequestGetPixelTos(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreatePixelTo createPixelTo() {
+    return new APIRequestCreatePixelTo(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetReceivedAudiencePermissions getReceivedAudiencePermissions() {
@@ -4168,116 +4168,6 @@ public class Business extends APINode {
 
     @Override
     public APIRequestCreateBusinessProject requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateCatalogSegmentProducerTo extends APIRequest<Business> {
-
-    Business lastResponse = null;
-    @Override
-    public Business getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "catalog_segment_id",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Business parseResponse(String response, String header) throws APIException {
-      return Business.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Business execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Business execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Business> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Business> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Business>() {
-           public Business apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateCatalogSegmentProducerTo.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateCatalogSegmentProducerTo(String nodeId, APIContext context) {
-      super(context, nodeId, "/catalog_segment_producer_tos", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateCatalogSegmentProducerTo setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateCatalogSegmentProducerTo setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateCatalogSegmentProducerTo setCatalogSegmentId (String catalogSegmentId) {
-      this.setParam("catalog_segment_id", catalogSegmentId);
-      return this;
-    }
-
-    public APIRequestCreateCatalogSegmentProducerTo requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateCatalogSegmentProducerTo requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateCatalogSegmentProducerTo requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateCatalogSegmentProducerTo requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateCatalogSegmentProducerTo requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateCatalogSegmentProducerTo requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -14757,7 +14647,7 @@ public class Business extends APINode {
     }
 
 
-    public APIRequestGetOwnedBusinesses setClientUserId (Object clientUserId) {
+    public APIRequestGetOwnedBusinesses setClientUserId (Long clientUserId) {
       this.setParam("client_user_id", clientUserId);
       return this;
     }
@@ -19102,6 +18992,110 @@ public class Business extends APINode {
       this.requestField("id", value);
       return this;
     }
+  }
+
+  public static class APIRequestCreatePixelTo extends APIRequest<BusinessPixelTOS> {
+
+    BusinessPixelTOS lastResponse = null;
+    @Override
+    public BusinessPixelTOS getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public BusinessPixelTOS parseResponse(String response, String header) throws APIException {
+      return BusinessPixelTOS.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public BusinessPixelTOS execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public BusinessPixelTOS execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<BusinessPixelTOS> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<BusinessPixelTOS> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, BusinessPixelTOS>() {
+           public BusinessPixelTOS apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreatePixelTo.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreatePixelTo(String nodeId, APIContext context) {
+      super(context, nodeId, "/pixel_tos", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreatePixelTo setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePixelTo setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreatePixelTo requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreatePixelTo requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePixelTo requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreatePixelTo requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePixelTo requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePixelTo requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetReceivedAudiencePermissions extends APIRequest<AudiencePermission> {

@@ -59,8 +59,6 @@ public class AtlasCampaign extends APINode {
   private Object mAdPlatform = null;
   @SerializedName("alias")
   private String mAlias = null;
-  @SerializedName("clicks")
-  private Long mClicks = null;
   @SerializedName("cost_per_1k_impressions")
   private Double mCostPer1kImpressions = null;
   @SerializedName("cost_per_click")
@@ -73,8 +71,6 @@ public class AtlasCampaign extends APINode {
   private String mCreatedDate = null;
   @SerializedName("data_driven_convs")
   private Double mDataDrivenConvs = null;
-  @SerializedName("data_driven_convs_per_100_clicks")
-  private Double mDataDrivenConvsPer100Clicks = null;
   @SerializedName("data_driven_convs_per_1k_impress")
   private Double mDataDrivenConvsPer1kImpress = null;
   @SerializedName("data_driven_convs_per_click")
@@ -85,18 +81,12 @@ public class AtlasCampaign extends APINode {
   private Double mDataDrivenCpa = null;
   @SerializedName("data_driven_nullable_convs")
   private Double mDataDrivenNullableConvs = null;
-  @SerializedName("data_driven_nullable_unattributed")
-  private Double mDataDrivenNullableUnattributed = null;
   @SerializedName("data_driven_revenue")
   private Double mDataDrivenRevenue = null;
   @SerializedName("data_driven_roas")
   private Double mDataDrivenRoas = null;
-  @SerializedName("data_driven_unattributed")
-  private Double mDataDrivenUnattributed = null;
   @SerializedName("even_credit_convs")
   private Double mEvenCreditConvs = null;
-  @SerializedName("even_credit_convs_per_100_clicks")
-  private Double mEvenCreditConvsPer100Clicks = null;
   @SerializedName("even_credit_convs_per_1k_impress")
   private Double mEvenCreditConvsPer1kImpress = null;
   @SerializedName("even_credit_convs_per_click")
@@ -109,12 +99,8 @@ public class AtlasCampaign extends APINode {
   private Double mEvenCreditRevenue = null;
   @SerializedName("even_credit_roas")
   private Double mEvenCreditRoas = null;
-  @SerializedName("even_credit_unattributed")
-  private Double mEvenCreditUnattributed = null;
   @SerializedName("first_click_convs")
   private Double mFirstClickConvs = null;
-  @SerializedName("first_click_convs_per_100_clicks")
-  private Double mFirstClickConvsPer100Clicks = null;
   @SerializedName("first_click_convs_per_1k_impress")
   private Double mFirstClickConvsPer1kImpress = null;
   @SerializedName("first_click_convs_per_click")
@@ -127,12 +113,8 @@ public class AtlasCampaign extends APINode {
   private Double mFirstClickRevenue = null;
   @SerializedName("first_click_roas")
   private Double mFirstClickRoas = null;
-  @SerializedName("first_click_unattributed")
-  private Double mFirstClickUnattributed = null;
   @SerializedName("first_touch_convs")
   private Double mFirstTouchConvs = null;
-  @SerializedName("first_touch_convs_per_100_clicks")
-  private Double mFirstTouchConvsPer100Clicks = null;
   @SerializedName("first_touch_convs_per_1k_impress")
   private Double mFirstTouchConvsPer1kImpress = null;
   @SerializedName("first_touch_convs_per_click")
@@ -145,16 +127,12 @@ public class AtlasCampaign extends APINode {
   private Double mFirstTouchRevenue = null;
   @SerializedName("first_touch_roas")
   private Double mFirstTouchRoas = null;
-  @SerializedName("first_touch_unattributed")
-  private Double mFirstTouchUnattributed = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("is_archived")
   private Boolean mIsArchived = null;
   @SerializedName("last_click_convs")
   private Double mLastClickConvs = null;
-  @SerializedName("last_click_convs_per_100_clicks")
-  private Double mLastClickConvsPer100Clicks = null;
   @SerializedName("last_click_convs_per_1k_impress")
   private Double mLastClickConvsPer1kImpress = null;
   @SerializedName("last_click_convs_per_click")
@@ -167,8 +145,6 @@ public class AtlasCampaign extends APINode {
   private Double mLastClickRevenue = null;
   @SerializedName("last_click_roas")
   private Double mLastClickRoas = null;
-  @SerializedName("last_click_unattributed")
-  private Double mLastClickUnattributed = null;
   @SerializedName("last_click_with_extrapolation_convs")
   private Double mLastClickWithExtrapolationConvs = null;
   @SerializedName("last_click_with_extrapolation_convs_per_100_clicks")
@@ -193,8 +169,6 @@ public class AtlasCampaign extends APINode {
   private String mLastModifiedDate = null;
   @SerializedName("last_touch_convs")
   private Double mLastTouchConvs = null;
-  @SerializedName("last_touch_convs_per_100_clicks")
-  private Double mLastTouchConvsPer100Clicks = null;
   @SerializedName("last_touch_convs_per_1k_impress")
   private Double mLastTouchConvsPer1kImpress = null;
   @SerializedName("last_touch_convs_per_click")
@@ -207,16 +181,12 @@ public class AtlasCampaign extends APINode {
   private Double mLastTouchRevenue = null;
   @SerializedName("last_touch_roas")
   private Double mLastTouchRoas = null;
-  @SerializedName("last_touch_unattributed")
-  private Double mLastTouchUnattributed = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("net_media_cost")
   private Double mNetMediaCost = null;
   @SerializedName("positional_30fl_convs")
   private Double mPositional30flConvs = null;
-  @SerializedName("positional_30fl_convs_per_100_clicks")
-  private Double mPositional30flConvsPer100Clicks = null;
   @SerializedName("positional_30fl_convs_per_1k_impress")
   private Double mPositional30flConvsPer1kImpress = null;
   @SerializedName("positional_30fl_convs_per_click")
@@ -229,12 +199,8 @@ public class AtlasCampaign extends APINode {
   private Double mPositional30flRevenue = null;
   @SerializedName("positional_30fl_roas")
   private Double mPositional30flRoas = null;
-  @SerializedName("positional_30fl_unattributed")
-  private Double mPositional30flUnattributed = null;
   @SerializedName("positional_40fl_convs")
   private Double mPositional40flConvs = null;
-  @SerializedName("positional_40fl_convs_per_100_clicks")
-  private Double mPositional40flConvsPer100Clicks = null;
   @SerializedName("positional_40fl_convs_per_1k_impress")
   private Double mPositional40flConvsPer1kImpress = null;
   @SerializedName("positional_40fl_convs_per_click")
@@ -247,8 +213,6 @@ public class AtlasCampaign extends APINode {
   private Double mPositional40flRevenue = null;
   @SerializedName("positional_40fl_roas")
   private Double mPositional40flRoas = null;
-  @SerializedName("positional_40fl_unattributed")
-  private Double mPositional40flUnattributed = null;
   @SerializedName("report_click_through_rate")
   private Double mReportClickThroughRate = null;
   @SerializedName("report_clicks")
@@ -257,12 +221,8 @@ public class AtlasCampaign extends APINode {
   private Long mReportImpressions = null;
   @SerializedName("report_visits")
   private Long mReportVisits = null;
-  @SerializedName("search_clicks")
-  private Long mSearchClicks = null;
   @SerializedName("time_decay_1day_convs")
   private Double mTimeDecay1dayConvs = null;
-  @SerializedName("time_decay_1day_convs_per_100_clicks")
-  private Double mTimeDecay1dayConvsPer100Clicks = null;
   @SerializedName("time_decay_1day_convs_per_1k_impress")
   private Double mTimeDecay1dayConvsPer1kImpress = null;
   @SerializedName("time_decay_1day_convs_per_click")
@@ -275,12 +235,8 @@ public class AtlasCampaign extends APINode {
   private Double mTimeDecay1dayRevenue = null;
   @SerializedName("time_decay_1day_roas")
   private Double mTimeDecay1dayRoas = null;
-  @SerializedName("time_decay_1day_unattributed")
-  private Double mTimeDecay1dayUnattributed = null;
   @SerializedName("time_decay_7day_convs")
   private Double mTimeDecay7dayConvs = null;
-  @SerializedName("time_decay_7day_convs_per_100_clicks")
-  private Double mTimeDecay7dayConvsPer100Clicks = null;
   @SerializedName("time_decay_7day_convs_per_1k_impress")
   private Double mTimeDecay7dayConvsPer1kImpress = null;
   @SerializedName("time_decay_7day_convs_per_click")
@@ -293,8 +249,6 @@ public class AtlasCampaign extends APINode {
   private Double mTimeDecay7dayRevenue = null;
   @SerializedName("time_decay_7day_roas")
   private Double mTimeDecay7dayRoas = null;
-  @SerializedName("time_decay_7day_unattributed")
-  private Double mTimeDecay7dayUnattributed = null;
   @SerializedName("type")
   private String mType = null;
   protected static Gson gson = null;
@@ -522,6 +476,10 @@ public class AtlasCampaign extends APINode {
     return new APIRequestGetMetricsBreakdown(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetSources getSources() {
+    return new APIRequestGetSources(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
@@ -533,10 +491,6 @@ public class AtlasCampaign extends APINode {
 
   public String getFieldAlias() {
     return mAlias;
-  }
-
-  public Long getFieldClicks() {
-    return mClicks;
   }
 
   public Double getFieldCostPer1kImpressions() {
@@ -563,10 +517,6 @@ public class AtlasCampaign extends APINode {
     return mDataDrivenConvs;
   }
 
-  public Double getFieldDataDrivenConvsPer100Clicks() {
-    return mDataDrivenConvsPer100Clicks;
-  }
-
   public Double getFieldDataDrivenConvsPer1kImpress() {
     return mDataDrivenConvsPer1kImpress;
   }
@@ -587,10 +537,6 @@ public class AtlasCampaign extends APINode {
     return mDataDrivenNullableConvs;
   }
 
-  public Double getFieldDataDrivenNullableUnattributed() {
-    return mDataDrivenNullableUnattributed;
-  }
-
   public Double getFieldDataDrivenRevenue() {
     return mDataDrivenRevenue;
   }
@@ -599,16 +545,8 @@ public class AtlasCampaign extends APINode {
     return mDataDrivenRoas;
   }
 
-  public Double getFieldDataDrivenUnattributed() {
-    return mDataDrivenUnattributed;
-  }
-
   public Double getFieldEvenCreditConvs() {
     return mEvenCreditConvs;
-  }
-
-  public Double getFieldEvenCreditConvsPer100Clicks() {
-    return mEvenCreditConvsPer100Clicks;
   }
 
   public Double getFieldEvenCreditConvsPer1kImpress() {
@@ -635,16 +573,8 @@ public class AtlasCampaign extends APINode {
     return mEvenCreditRoas;
   }
 
-  public Double getFieldEvenCreditUnattributed() {
-    return mEvenCreditUnattributed;
-  }
-
   public Double getFieldFirstClickConvs() {
     return mFirstClickConvs;
-  }
-
-  public Double getFieldFirstClickConvsPer100Clicks() {
-    return mFirstClickConvsPer100Clicks;
   }
 
   public Double getFieldFirstClickConvsPer1kImpress() {
@@ -671,16 +601,8 @@ public class AtlasCampaign extends APINode {
     return mFirstClickRoas;
   }
 
-  public Double getFieldFirstClickUnattributed() {
-    return mFirstClickUnattributed;
-  }
-
   public Double getFieldFirstTouchConvs() {
     return mFirstTouchConvs;
-  }
-
-  public Double getFieldFirstTouchConvsPer100Clicks() {
-    return mFirstTouchConvsPer100Clicks;
   }
 
   public Double getFieldFirstTouchConvsPer1kImpress() {
@@ -707,10 +629,6 @@ public class AtlasCampaign extends APINode {
     return mFirstTouchRoas;
   }
 
-  public Double getFieldFirstTouchUnattributed() {
-    return mFirstTouchUnattributed;
-  }
-
   public String getFieldId() {
     return mId;
   }
@@ -721,10 +639,6 @@ public class AtlasCampaign extends APINode {
 
   public Double getFieldLastClickConvs() {
     return mLastClickConvs;
-  }
-
-  public Double getFieldLastClickConvsPer100Clicks() {
-    return mLastClickConvsPer100Clicks;
   }
 
   public Double getFieldLastClickConvsPer1kImpress() {
@@ -749,10 +663,6 @@ public class AtlasCampaign extends APINode {
 
   public Double getFieldLastClickRoas() {
     return mLastClickRoas;
-  }
-
-  public Double getFieldLastClickUnattributed() {
-    return mLastClickUnattributed;
   }
 
   public Double getFieldLastClickWithExtrapolationConvs() {
@@ -803,10 +713,6 @@ public class AtlasCampaign extends APINode {
     return mLastTouchConvs;
   }
 
-  public Double getFieldLastTouchConvsPer100Clicks() {
-    return mLastTouchConvsPer100Clicks;
-  }
-
   public Double getFieldLastTouchConvsPer1kImpress() {
     return mLastTouchConvsPer1kImpress;
   }
@@ -831,10 +737,6 @@ public class AtlasCampaign extends APINode {
     return mLastTouchRoas;
   }
 
-  public Double getFieldLastTouchUnattributed() {
-    return mLastTouchUnattributed;
-  }
-
   public String getFieldName() {
     return mName;
   }
@@ -845,10 +747,6 @@ public class AtlasCampaign extends APINode {
 
   public Double getFieldPositional30flConvs() {
     return mPositional30flConvs;
-  }
-
-  public Double getFieldPositional30flConvsPer100Clicks() {
-    return mPositional30flConvsPer100Clicks;
   }
 
   public Double getFieldPositional30flConvsPer1kImpress() {
@@ -875,16 +773,8 @@ public class AtlasCampaign extends APINode {
     return mPositional30flRoas;
   }
 
-  public Double getFieldPositional30flUnattributed() {
-    return mPositional30flUnattributed;
-  }
-
   public Double getFieldPositional40flConvs() {
     return mPositional40flConvs;
-  }
-
-  public Double getFieldPositional40flConvsPer100Clicks() {
-    return mPositional40flConvsPer100Clicks;
   }
 
   public Double getFieldPositional40flConvsPer1kImpress() {
@@ -911,10 +801,6 @@ public class AtlasCampaign extends APINode {
     return mPositional40flRoas;
   }
 
-  public Double getFieldPositional40flUnattributed() {
-    return mPositional40flUnattributed;
-  }
-
   public Double getFieldReportClickThroughRate() {
     return mReportClickThroughRate;
   }
@@ -931,16 +817,8 @@ public class AtlasCampaign extends APINode {
     return mReportVisits;
   }
 
-  public Long getFieldSearchClicks() {
-    return mSearchClicks;
-  }
-
   public Double getFieldTimeDecay1dayConvs() {
     return mTimeDecay1dayConvs;
-  }
-
-  public Double getFieldTimeDecay1dayConvsPer100Clicks() {
-    return mTimeDecay1dayConvsPer100Clicks;
   }
 
   public Double getFieldTimeDecay1dayConvsPer1kImpress() {
@@ -967,16 +845,8 @@ public class AtlasCampaign extends APINode {
     return mTimeDecay1dayRoas;
   }
 
-  public Double getFieldTimeDecay1dayUnattributed() {
-    return mTimeDecay1dayUnattributed;
-  }
-
   public Double getFieldTimeDecay7dayConvs() {
     return mTimeDecay7dayConvs;
-  }
-
-  public Double getFieldTimeDecay7dayConvsPer100Clicks() {
-    return mTimeDecay7dayConvsPer100Clicks;
   }
 
   public Double getFieldTimeDecay7dayConvsPer1kImpress() {
@@ -1001,10 +871,6 @@ public class AtlasCampaign extends APINode {
 
   public Double getFieldTimeDecay7dayRoas() {
     return mTimeDecay7dayRoas;
-  }
-
-  public Double getFieldTimeDecay7dayUnattributed() {
-    return mTimeDecay7dayUnattributed;
   }
 
   public String getFieldType() {
@@ -1587,6 +1453,132 @@ public class AtlasCampaign extends APINode {
 
   }
 
+  public static class APIRequestGetSources extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "filter_by",
+      "metric_scope",
+      "order_by",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetSources.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetSources(String nodeId, APIContext context) {
+      super(context, nodeId, "/sources", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetSources setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSources setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetSources setFilterBy (String filterBy) {
+      this.setParam("filter_by", filterBy);
+      return this;
+    }
+
+    public APIRequestGetSources setMetricScope (Map<String, String> metricScope) {
+      this.setParam("metric_scope", metricScope);
+      return this;
+    }
+    public APIRequestGetSources setMetricScope (String metricScope) {
+      this.setParam("metric_scope", metricScope);
+      return this;
+    }
+
+    public APIRequestGetSources setOrderBy (String orderBy) {
+      this.setParam("order_by", orderBy);
+      return this;
+    }
+
+    public APIRequestGetSources requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetSources requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSources requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetSources requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSources requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSources requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGet extends APIRequest<AtlasCampaign> {
 
     AtlasCampaign lastResponse = null;
@@ -1601,61 +1593,49 @@ public class AtlasCampaign extends APINode {
     public static final String[] FIELDS = {
       "ad_platform",
       "alias",
-      "clicks",
       "cost_per_1k_impressions",
       "cost_per_click",
       "cost_per_visit",
       "created_by",
       "created_date",
       "data_driven_convs",
-      "data_driven_convs_per_100_clicks",
       "data_driven_convs_per_1k_impress",
       "data_driven_convs_per_click",
       "data_driven_convs_per_visit",
       "data_driven_cpa",
       "data_driven_nullable_convs",
-      "data_driven_nullable_unattributed",
       "data_driven_revenue",
       "data_driven_roas",
-      "data_driven_unattributed",
       "even_credit_convs",
-      "even_credit_convs_per_100_clicks",
       "even_credit_convs_per_1k_impress",
       "even_credit_convs_per_click",
       "even_credit_convs_per_visit",
       "even_credit_cpa",
       "even_credit_revenue",
       "even_credit_roas",
-      "even_credit_unattributed",
       "first_click_convs",
-      "first_click_convs_per_100_clicks",
       "first_click_convs_per_1k_impress",
       "first_click_convs_per_click",
       "first_click_convs_per_visit",
       "first_click_cpa",
       "first_click_revenue",
       "first_click_roas",
-      "first_click_unattributed",
       "first_touch_convs",
-      "first_touch_convs_per_100_clicks",
       "first_touch_convs_per_1k_impress",
       "first_touch_convs_per_click",
       "first_touch_convs_per_visit",
       "first_touch_cpa",
       "first_touch_revenue",
       "first_touch_roas",
-      "first_touch_unattributed",
       "id",
       "is_archived",
       "last_click_convs",
-      "last_click_convs_per_100_clicks",
       "last_click_convs_per_1k_impress",
       "last_click_convs_per_click",
       "last_click_convs_per_visit",
       "last_click_cpa",
       "last_click_revenue",
       "last_click_roas",
-      "last_click_unattributed",
       "last_click_with_extrapolation_convs",
       "last_click_with_extrapolation_convs_per_100_clicks",
       "last_click_with_extrapolation_convs_per_1k_impress",
@@ -1668,57 +1648,46 @@ public class AtlasCampaign extends APINode {
       "last_modified_by",
       "last_modified_date",
       "last_touch_convs",
-      "last_touch_convs_per_100_clicks",
       "last_touch_convs_per_1k_impress",
       "last_touch_convs_per_click",
       "last_touch_convs_per_visit",
       "last_touch_cpa",
       "last_touch_revenue",
       "last_touch_roas",
-      "last_touch_unattributed",
       "name",
       "net_media_cost",
       "positional_30fl_convs",
-      "positional_30fl_convs_per_100_clicks",
       "positional_30fl_convs_per_1k_impress",
       "positional_30fl_convs_per_click",
       "positional_30fl_convs_per_visit",
       "positional_30fl_cpa",
       "positional_30fl_revenue",
       "positional_30fl_roas",
-      "positional_30fl_unattributed",
       "positional_40fl_convs",
-      "positional_40fl_convs_per_100_clicks",
       "positional_40fl_convs_per_1k_impress",
       "positional_40fl_convs_per_click",
       "positional_40fl_convs_per_visit",
       "positional_40fl_cpa",
       "positional_40fl_revenue",
       "positional_40fl_roas",
-      "positional_40fl_unattributed",
       "report_click_through_rate",
       "report_clicks",
       "report_impressions",
       "report_visits",
-      "search_clicks",
       "time_decay_1day_convs",
-      "time_decay_1day_convs_per_100_clicks",
       "time_decay_1day_convs_per_1k_impress",
       "time_decay_1day_convs_per_click",
       "time_decay_1day_convs_per_visit",
       "time_decay_1day_cpa",
       "time_decay_1day_revenue",
       "time_decay_1day_roas",
-      "time_decay_1day_unattributed",
       "time_decay_7day_convs",
-      "time_decay_7day_convs_per_100_clicks",
       "time_decay_7day_convs_per_1k_impress",
       "time_decay_7day_convs_per_click",
       "time_decay_7day_convs_per_visit",
       "time_decay_7day_cpa",
       "time_decay_7day_revenue",
       "time_decay_7day_roas",
-      "time_decay_7day_unattributed",
       "type",
     };
 
@@ -1834,13 +1803,6 @@ public class AtlasCampaign extends APINode {
       this.requestField("alias", value);
       return this;
     }
-    public APIRequestGet requestClicksField () {
-      return this.requestClicksField(true);
-    }
-    public APIRequestGet requestClicksField (boolean value) {
-      this.requestField("clicks", value);
-      return this;
-    }
     public APIRequestGet requestCostPer1kImpressionsField () {
       return this.requestCostPer1kImpressionsField(true);
     }
@@ -1883,13 +1845,6 @@ public class AtlasCampaign extends APINode {
       this.requestField("data_driven_convs", value);
       return this;
     }
-    public APIRequestGet requestDataDrivenConvsPer100ClicksField () {
-      return this.requestDataDrivenConvsPer100ClicksField(true);
-    }
-    public APIRequestGet requestDataDrivenConvsPer100ClicksField (boolean value) {
-      this.requestField("data_driven_convs_per_100_clicks", value);
-      return this;
-    }
     public APIRequestGet requestDataDrivenConvsPer1kImpressField () {
       return this.requestDataDrivenConvsPer1kImpressField(true);
     }
@@ -1925,13 +1880,6 @@ public class AtlasCampaign extends APINode {
       this.requestField("data_driven_nullable_convs", value);
       return this;
     }
-    public APIRequestGet requestDataDrivenNullableUnattributedField () {
-      return this.requestDataDrivenNullableUnattributedField(true);
-    }
-    public APIRequestGet requestDataDrivenNullableUnattributedField (boolean value) {
-      this.requestField("data_driven_nullable_unattributed", value);
-      return this;
-    }
     public APIRequestGet requestDataDrivenRevenueField () {
       return this.requestDataDrivenRevenueField(true);
     }
@@ -1946,25 +1894,11 @@ public class AtlasCampaign extends APINode {
       this.requestField("data_driven_roas", value);
       return this;
     }
-    public APIRequestGet requestDataDrivenUnattributedField () {
-      return this.requestDataDrivenUnattributedField(true);
-    }
-    public APIRequestGet requestDataDrivenUnattributedField (boolean value) {
-      this.requestField("data_driven_unattributed", value);
-      return this;
-    }
     public APIRequestGet requestEvenCreditConvsField () {
       return this.requestEvenCreditConvsField(true);
     }
     public APIRequestGet requestEvenCreditConvsField (boolean value) {
       this.requestField("even_credit_convs", value);
-      return this;
-    }
-    public APIRequestGet requestEvenCreditConvsPer100ClicksField () {
-      return this.requestEvenCreditConvsPer100ClicksField(true);
-    }
-    public APIRequestGet requestEvenCreditConvsPer100ClicksField (boolean value) {
-      this.requestField("even_credit_convs_per_100_clicks", value);
       return this;
     }
     public APIRequestGet requestEvenCreditConvsPer1kImpressField () {
@@ -2009,25 +1943,11 @@ public class AtlasCampaign extends APINode {
       this.requestField("even_credit_roas", value);
       return this;
     }
-    public APIRequestGet requestEvenCreditUnattributedField () {
-      return this.requestEvenCreditUnattributedField(true);
-    }
-    public APIRequestGet requestEvenCreditUnattributedField (boolean value) {
-      this.requestField("even_credit_unattributed", value);
-      return this;
-    }
     public APIRequestGet requestFirstClickConvsField () {
       return this.requestFirstClickConvsField(true);
     }
     public APIRequestGet requestFirstClickConvsField (boolean value) {
       this.requestField("first_click_convs", value);
-      return this;
-    }
-    public APIRequestGet requestFirstClickConvsPer100ClicksField () {
-      return this.requestFirstClickConvsPer100ClicksField(true);
-    }
-    public APIRequestGet requestFirstClickConvsPer100ClicksField (boolean value) {
-      this.requestField("first_click_convs_per_100_clicks", value);
       return this;
     }
     public APIRequestGet requestFirstClickConvsPer1kImpressField () {
@@ -2072,25 +1992,11 @@ public class AtlasCampaign extends APINode {
       this.requestField("first_click_roas", value);
       return this;
     }
-    public APIRequestGet requestFirstClickUnattributedField () {
-      return this.requestFirstClickUnattributedField(true);
-    }
-    public APIRequestGet requestFirstClickUnattributedField (boolean value) {
-      this.requestField("first_click_unattributed", value);
-      return this;
-    }
     public APIRequestGet requestFirstTouchConvsField () {
       return this.requestFirstTouchConvsField(true);
     }
     public APIRequestGet requestFirstTouchConvsField (boolean value) {
       this.requestField("first_touch_convs", value);
-      return this;
-    }
-    public APIRequestGet requestFirstTouchConvsPer100ClicksField () {
-      return this.requestFirstTouchConvsPer100ClicksField(true);
-    }
-    public APIRequestGet requestFirstTouchConvsPer100ClicksField (boolean value) {
-      this.requestField("first_touch_convs_per_100_clicks", value);
       return this;
     }
     public APIRequestGet requestFirstTouchConvsPer1kImpressField () {
@@ -2135,13 +2041,6 @@ public class AtlasCampaign extends APINode {
       this.requestField("first_touch_roas", value);
       return this;
     }
-    public APIRequestGet requestFirstTouchUnattributedField () {
-      return this.requestFirstTouchUnattributedField(true);
-    }
-    public APIRequestGet requestFirstTouchUnattributedField (boolean value) {
-      this.requestField("first_touch_unattributed", value);
-      return this;
-    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -2161,13 +2060,6 @@ public class AtlasCampaign extends APINode {
     }
     public APIRequestGet requestLastClickConvsField (boolean value) {
       this.requestField("last_click_convs", value);
-      return this;
-    }
-    public APIRequestGet requestLastClickConvsPer100ClicksField () {
-      return this.requestLastClickConvsPer100ClicksField(true);
-    }
-    public APIRequestGet requestLastClickConvsPer100ClicksField (boolean value) {
-      this.requestField("last_click_convs_per_100_clicks", value);
       return this;
     }
     public APIRequestGet requestLastClickConvsPer1kImpressField () {
@@ -2210,13 +2102,6 @@ public class AtlasCampaign extends APINode {
     }
     public APIRequestGet requestLastClickRoasField (boolean value) {
       this.requestField("last_click_roas", value);
-      return this;
-    }
-    public APIRequestGet requestLastClickUnattributedField () {
-      return this.requestLastClickUnattributedField(true);
-    }
-    public APIRequestGet requestLastClickUnattributedField (boolean value) {
-      this.requestField("last_click_unattributed", value);
       return this;
     }
     public APIRequestGet requestLastClickWithExtrapolationConvsField () {
@@ -2303,13 +2188,6 @@ public class AtlasCampaign extends APINode {
       this.requestField("last_touch_convs", value);
       return this;
     }
-    public APIRequestGet requestLastTouchConvsPer100ClicksField () {
-      return this.requestLastTouchConvsPer100ClicksField(true);
-    }
-    public APIRequestGet requestLastTouchConvsPer100ClicksField (boolean value) {
-      this.requestField("last_touch_convs_per_100_clicks", value);
-      return this;
-    }
     public APIRequestGet requestLastTouchConvsPer1kImpressField () {
       return this.requestLastTouchConvsPer1kImpressField(true);
     }
@@ -2352,13 +2230,6 @@ public class AtlasCampaign extends APINode {
       this.requestField("last_touch_roas", value);
       return this;
     }
-    public APIRequestGet requestLastTouchUnattributedField () {
-      return this.requestLastTouchUnattributedField(true);
-    }
-    public APIRequestGet requestLastTouchUnattributedField (boolean value) {
-      this.requestField("last_touch_unattributed", value);
-      return this;
-    }
     public APIRequestGet requestNameField () {
       return this.requestNameField(true);
     }
@@ -2378,13 +2249,6 @@ public class AtlasCampaign extends APINode {
     }
     public APIRequestGet requestPositional30flConvsField (boolean value) {
       this.requestField("positional_30fl_convs", value);
-      return this;
-    }
-    public APIRequestGet requestPositional30flConvsPer100ClicksField () {
-      return this.requestPositional30flConvsPer100ClicksField(true);
-    }
-    public APIRequestGet requestPositional30flConvsPer100ClicksField (boolean value) {
-      this.requestField("positional_30fl_convs_per_100_clicks", value);
       return this;
     }
     public APIRequestGet requestPositional30flConvsPer1kImpressField () {
@@ -2429,25 +2293,11 @@ public class AtlasCampaign extends APINode {
       this.requestField("positional_30fl_roas", value);
       return this;
     }
-    public APIRequestGet requestPositional30flUnattributedField () {
-      return this.requestPositional30flUnattributedField(true);
-    }
-    public APIRequestGet requestPositional30flUnattributedField (boolean value) {
-      this.requestField("positional_30fl_unattributed", value);
-      return this;
-    }
     public APIRequestGet requestPositional40flConvsField () {
       return this.requestPositional40flConvsField(true);
     }
     public APIRequestGet requestPositional40flConvsField (boolean value) {
       this.requestField("positional_40fl_convs", value);
-      return this;
-    }
-    public APIRequestGet requestPositional40flConvsPer100ClicksField () {
-      return this.requestPositional40flConvsPer100ClicksField(true);
-    }
-    public APIRequestGet requestPositional40flConvsPer100ClicksField (boolean value) {
-      this.requestField("positional_40fl_convs_per_100_clicks", value);
       return this;
     }
     public APIRequestGet requestPositional40flConvsPer1kImpressField () {
@@ -2492,13 +2342,6 @@ public class AtlasCampaign extends APINode {
       this.requestField("positional_40fl_roas", value);
       return this;
     }
-    public APIRequestGet requestPositional40flUnattributedField () {
-      return this.requestPositional40flUnattributedField(true);
-    }
-    public APIRequestGet requestPositional40flUnattributedField (boolean value) {
-      this.requestField("positional_40fl_unattributed", value);
-      return this;
-    }
     public APIRequestGet requestReportClickThroughRateField () {
       return this.requestReportClickThroughRateField(true);
     }
@@ -2527,25 +2370,11 @@ public class AtlasCampaign extends APINode {
       this.requestField("report_visits", value);
       return this;
     }
-    public APIRequestGet requestSearchClicksField () {
-      return this.requestSearchClicksField(true);
-    }
-    public APIRequestGet requestSearchClicksField (boolean value) {
-      this.requestField("search_clicks", value);
-      return this;
-    }
     public APIRequestGet requestTimeDecay1dayConvsField () {
       return this.requestTimeDecay1dayConvsField(true);
     }
     public APIRequestGet requestTimeDecay1dayConvsField (boolean value) {
       this.requestField("time_decay_1day_convs", value);
-      return this;
-    }
-    public APIRequestGet requestTimeDecay1dayConvsPer100ClicksField () {
-      return this.requestTimeDecay1dayConvsPer100ClicksField(true);
-    }
-    public APIRequestGet requestTimeDecay1dayConvsPer100ClicksField (boolean value) {
-      this.requestField("time_decay_1day_convs_per_100_clicks", value);
       return this;
     }
     public APIRequestGet requestTimeDecay1dayConvsPer1kImpressField () {
@@ -2590,25 +2419,11 @@ public class AtlasCampaign extends APINode {
       this.requestField("time_decay_1day_roas", value);
       return this;
     }
-    public APIRequestGet requestTimeDecay1dayUnattributedField () {
-      return this.requestTimeDecay1dayUnattributedField(true);
-    }
-    public APIRequestGet requestTimeDecay1dayUnattributedField (boolean value) {
-      this.requestField("time_decay_1day_unattributed", value);
-      return this;
-    }
     public APIRequestGet requestTimeDecay7dayConvsField () {
       return this.requestTimeDecay7dayConvsField(true);
     }
     public APIRequestGet requestTimeDecay7dayConvsField (boolean value) {
       this.requestField("time_decay_7day_convs", value);
-      return this;
-    }
-    public APIRequestGet requestTimeDecay7dayConvsPer100ClicksField () {
-      return this.requestTimeDecay7dayConvsPer100ClicksField(true);
-    }
-    public APIRequestGet requestTimeDecay7dayConvsPer100ClicksField (boolean value) {
-      this.requestField("time_decay_7day_convs_per_100_clicks", value);
       return this;
     }
     public APIRequestGet requestTimeDecay7dayConvsPer1kImpressField () {
@@ -2651,13 +2466,6 @@ public class AtlasCampaign extends APINode {
     }
     public APIRequestGet requestTimeDecay7dayRoasField (boolean value) {
       this.requestField("time_decay_7day_roas", value);
-      return this;
-    }
-    public APIRequestGet requestTimeDecay7dayUnattributedField () {
-      return this.requestTimeDecay7dayUnattributedField(true);
-    }
-    public APIRequestGet requestTimeDecay7dayUnattributedField (boolean value) {
-      this.requestField("time_decay_7day_unattributed", value);
       return this;
     }
     public APIRequestGet requestTypeField () {
@@ -2730,61 +2538,49 @@ public class AtlasCampaign extends APINode {
   public AtlasCampaign copyFrom(AtlasCampaign instance) {
     this.mAdPlatform = instance.mAdPlatform;
     this.mAlias = instance.mAlias;
-    this.mClicks = instance.mClicks;
     this.mCostPer1kImpressions = instance.mCostPer1kImpressions;
     this.mCostPerClick = instance.mCostPerClick;
     this.mCostPerVisit = instance.mCostPerVisit;
     this.mCreatedBy = instance.mCreatedBy;
     this.mCreatedDate = instance.mCreatedDate;
     this.mDataDrivenConvs = instance.mDataDrivenConvs;
-    this.mDataDrivenConvsPer100Clicks = instance.mDataDrivenConvsPer100Clicks;
     this.mDataDrivenConvsPer1kImpress = instance.mDataDrivenConvsPer1kImpress;
     this.mDataDrivenConvsPerClick = instance.mDataDrivenConvsPerClick;
     this.mDataDrivenConvsPerVisit = instance.mDataDrivenConvsPerVisit;
     this.mDataDrivenCpa = instance.mDataDrivenCpa;
     this.mDataDrivenNullableConvs = instance.mDataDrivenNullableConvs;
-    this.mDataDrivenNullableUnattributed = instance.mDataDrivenNullableUnattributed;
     this.mDataDrivenRevenue = instance.mDataDrivenRevenue;
     this.mDataDrivenRoas = instance.mDataDrivenRoas;
-    this.mDataDrivenUnattributed = instance.mDataDrivenUnattributed;
     this.mEvenCreditConvs = instance.mEvenCreditConvs;
-    this.mEvenCreditConvsPer100Clicks = instance.mEvenCreditConvsPer100Clicks;
     this.mEvenCreditConvsPer1kImpress = instance.mEvenCreditConvsPer1kImpress;
     this.mEvenCreditConvsPerClick = instance.mEvenCreditConvsPerClick;
     this.mEvenCreditConvsPerVisit = instance.mEvenCreditConvsPerVisit;
     this.mEvenCreditCpa = instance.mEvenCreditCpa;
     this.mEvenCreditRevenue = instance.mEvenCreditRevenue;
     this.mEvenCreditRoas = instance.mEvenCreditRoas;
-    this.mEvenCreditUnattributed = instance.mEvenCreditUnattributed;
     this.mFirstClickConvs = instance.mFirstClickConvs;
-    this.mFirstClickConvsPer100Clicks = instance.mFirstClickConvsPer100Clicks;
     this.mFirstClickConvsPer1kImpress = instance.mFirstClickConvsPer1kImpress;
     this.mFirstClickConvsPerClick = instance.mFirstClickConvsPerClick;
     this.mFirstClickConvsPerVisit = instance.mFirstClickConvsPerVisit;
     this.mFirstClickCpa = instance.mFirstClickCpa;
     this.mFirstClickRevenue = instance.mFirstClickRevenue;
     this.mFirstClickRoas = instance.mFirstClickRoas;
-    this.mFirstClickUnattributed = instance.mFirstClickUnattributed;
     this.mFirstTouchConvs = instance.mFirstTouchConvs;
-    this.mFirstTouchConvsPer100Clicks = instance.mFirstTouchConvsPer100Clicks;
     this.mFirstTouchConvsPer1kImpress = instance.mFirstTouchConvsPer1kImpress;
     this.mFirstTouchConvsPerClick = instance.mFirstTouchConvsPerClick;
     this.mFirstTouchConvsPerVisit = instance.mFirstTouchConvsPerVisit;
     this.mFirstTouchCpa = instance.mFirstTouchCpa;
     this.mFirstTouchRevenue = instance.mFirstTouchRevenue;
     this.mFirstTouchRoas = instance.mFirstTouchRoas;
-    this.mFirstTouchUnattributed = instance.mFirstTouchUnattributed;
     this.mId = instance.mId;
     this.mIsArchived = instance.mIsArchived;
     this.mLastClickConvs = instance.mLastClickConvs;
-    this.mLastClickConvsPer100Clicks = instance.mLastClickConvsPer100Clicks;
     this.mLastClickConvsPer1kImpress = instance.mLastClickConvsPer1kImpress;
     this.mLastClickConvsPerClick = instance.mLastClickConvsPerClick;
     this.mLastClickConvsPerVisit = instance.mLastClickConvsPerVisit;
     this.mLastClickCpa = instance.mLastClickCpa;
     this.mLastClickRevenue = instance.mLastClickRevenue;
     this.mLastClickRoas = instance.mLastClickRoas;
-    this.mLastClickUnattributed = instance.mLastClickUnattributed;
     this.mLastClickWithExtrapolationConvs = instance.mLastClickWithExtrapolationConvs;
     this.mLastClickWithExtrapolationConvsPer100Clicks = instance.mLastClickWithExtrapolationConvsPer100Clicks;
     this.mLastClickWithExtrapolationConvsPer1kImpress = instance.mLastClickWithExtrapolationConvsPer1kImpress;
@@ -2797,57 +2593,46 @@ public class AtlasCampaign extends APINode {
     this.mLastModifiedBy = instance.mLastModifiedBy;
     this.mLastModifiedDate = instance.mLastModifiedDate;
     this.mLastTouchConvs = instance.mLastTouchConvs;
-    this.mLastTouchConvsPer100Clicks = instance.mLastTouchConvsPer100Clicks;
     this.mLastTouchConvsPer1kImpress = instance.mLastTouchConvsPer1kImpress;
     this.mLastTouchConvsPerClick = instance.mLastTouchConvsPerClick;
     this.mLastTouchConvsPerVisit = instance.mLastTouchConvsPerVisit;
     this.mLastTouchCpa = instance.mLastTouchCpa;
     this.mLastTouchRevenue = instance.mLastTouchRevenue;
     this.mLastTouchRoas = instance.mLastTouchRoas;
-    this.mLastTouchUnattributed = instance.mLastTouchUnattributed;
     this.mName = instance.mName;
     this.mNetMediaCost = instance.mNetMediaCost;
     this.mPositional30flConvs = instance.mPositional30flConvs;
-    this.mPositional30flConvsPer100Clicks = instance.mPositional30flConvsPer100Clicks;
     this.mPositional30flConvsPer1kImpress = instance.mPositional30flConvsPer1kImpress;
     this.mPositional30flConvsPerClick = instance.mPositional30flConvsPerClick;
     this.mPositional30flConvsPerVisit = instance.mPositional30flConvsPerVisit;
     this.mPositional30flCpa = instance.mPositional30flCpa;
     this.mPositional30flRevenue = instance.mPositional30flRevenue;
     this.mPositional30flRoas = instance.mPositional30flRoas;
-    this.mPositional30flUnattributed = instance.mPositional30flUnattributed;
     this.mPositional40flConvs = instance.mPositional40flConvs;
-    this.mPositional40flConvsPer100Clicks = instance.mPositional40flConvsPer100Clicks;
     this.mPositional40flConvsPer1kImpress = instance.mPositional40flConvsPer1kImpress;
     this.mPositional40flConvsPerClick = instance.mPositional40flConvsPerClick;
     this.mPositional40flConvsPerVisit = instance.mPositional40flConvsPerVisit;
     this.mPositional40flCpa = instance.mPositional40flCpa;
     this.mPositional40flRevenue = instance.mPositional40flRevenue;
     this.mPositional40flRoas = instance.mPositional40flRoas;
-    this.mPositional40flUnattributed = instance.mPositional40flUnattributed;
     this.mReportClickThroughRate = instance.mReportClickThroughRate;
     this.mReportClicks = instance.mReportClicks;
     this.mReportImpressions = instance.mReportImpressions;
     this.mReportVisits = instance.mReportVisits;
-    this.mSearchClicks = instance.mSearchClicks;
     this.mTimeDecay1dayConvs = instance.mTimeDecay1dayConvs;
-    this.mTimeDecay1dayConvsPer100Clicks = instance.mTimeDecay1dayConvsPer100Clicks;
     this.mTimeDecay1dayConvsPer1kImpress = instance.mTimeDecay1dayConvsPer1kImpress;
     this.mTimeDecay1dayConvsPerClick = instance.mTimeDecay1dayConvsPerClick;
     this.mTimeDecay1dayConvsPerVisit = instance.mTimeDecay1dayConvsPerVisit;
     this.mTimeDecay1dayCpa = instance.mTimeDecay1dayCpa;
     this.mTimeDecay1dayRevenue = instance.mTimeDecay1dayRevenue;
     this.mTimeDecay1dayRoas = instance.mTimeDecay1dayRoas;
-    this.mTimeDecay1dayUnattributed = instance.mTimeDecay1dayUnattributed;
     this.mTimeDecay7dayConvs = instance.mTimeDecay7dayConvs;
-    this.mTimeDecay7dayConvsPer100Clicks = instance.mTimeDecay7dayConvsPer100Clicks;
     this.mTimeDecay7dayConvsPer1kImpress = instance.mTimeDecay7dayConvsPer1kImpress;
     this.mTimeDecay7dayConvsPerClick = instance.mTimeDecay7dayConvsPerClick;
     this.mTimeDecay7dayConvsPerVisit = instance.mTimeDecay7dayConvsPerVisit;
     this.mTimeDecay7dayCpa = instance.mTimeDecay7dayCpa;
     this.mTimeDecay7dayRevenue = instance.mTimeDecay7dayRevenue;
     this.mTimeDecay7dayRoas = instance.mTimeDecay7dayRoas;
-    this.mTimeDecay7dayUnattributed = instance.mTimeDecay7dayUnattributed;
     this.mType = instance.mType;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

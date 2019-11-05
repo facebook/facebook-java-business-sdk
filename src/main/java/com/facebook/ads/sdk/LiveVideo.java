@@ -518,7 +518,6 @@ public class LiveVideo extends APINode {
       "is_famedeeplinkinguser",
       "is_shared_login",
       "is_verified",
-      "labels",
       "languages",
       "last_name",
       "link",
@@ -825,13 +824,6 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetBlockedUsers requestIsVerifiedField (boolean value) {
       this.requestField("is_verified", value);
-      return this;
-    }
-    public APIRequestGetBlockedUsers requestLabelsField () {
-      return this.requestLabelsField(true);
-    }
-    public APIRequestGetBlockedUsers requestLabelsField (boolean value) {
-      this.requestField("labels", value);
       return this;
     }
     public APIRequestGetBlockedUsers requestLanguagesField () {

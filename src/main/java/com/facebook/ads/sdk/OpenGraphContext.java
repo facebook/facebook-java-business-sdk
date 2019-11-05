@@ -325,7 +325,6 @@ public class OpenGraphContext extends APINode {
       "is_famedeeplinkinguser",
       "is_shared_login",
       "is_verified",
-      "labels",
       "languages",
       "last_name",
       "link",
@@ -625,13 +624,6 @@ public class OpenGraphContext extends APINode {
       this.requestField("is_verified", value);
       return this;
     }
-    public APIRequestGetFriendsTaggedAt requestLabelsField () {
-      return this.requestLabelsField(true);
-    }
-    public APIRequestGetFriendsTaggedAt requestLabelsField (boolean value) {
-      this.requestField("labels", value);
-      return this;
-    }
     public APIRequestGetFriendsTaggedAt requestLanguagesField () {
       return this.requestLanguagesField(true);
     }
@@ -901,7 +893,6 @@ public class OpenGraphContext extends APINode {
       "is_famedeeplinkinguser",
       "is_shared_login",
       "is_verified",
-      "labels",
       "languages",
       "last_name",
       "link",
@@ -1201,13 +1192,6 @@ public class OpenGraphContext extends APINode {
       this.requestField("is_verified", value);
       return this;
     }
-    public APIRequestGetMusicListenFriends requestLabelsField () {
-      return this.requestLabelsField(true);
-    }
-    public APIRequestGetMusicListenFriends requestLabelsField (boolean value) {
-      this.requestField("labels", value);
-      return this;
-    }
     public APIRequestGetMusicListenFriends requestLanguagesField () {
       return this.requestLanguagesField(true);
     }
@@ -1477,7 +1461,6 @@ public class OpenGraphContext extends APINode {
       "is_famedeeplinkinguser",
       "is_shared_login",
       "is_verified",
-      "labels",
       "languages",
       "last_name",
       "link",
@@ -1775,13 +1758,6 @@ public class OpenGraphContext extends APINode {
     }
     public APIRequestGetVideoWatchFriends requestIsVerifiedField (boolean value) {
       this.requestField("is_verified", value);
-      return this;
-    }
-    public APIRequestGetVideoWatchFriends requestLabelsField () {
-      return this.requestLabelsField(true);
-    }
-    public APIRequestGetVideoWatchFriends requestLabelsField (boolean value) {
-      this.requestField("labels", value);
       return this;
     }
     public APIRequestGetVideoWatchFriends requestLanguagesField () {

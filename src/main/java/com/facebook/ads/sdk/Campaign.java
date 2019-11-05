@@ -4500,6 +4500,8 @@ public class Campaign extends APINode {
       VALUE_EMPLOYMENT("EMPLOYMENT"),
       @SerializedName("HOUSING")
       VALUE_HOUSING("HOUSING"),
+      @SerializedName("ISSUES_ELECTIONS_POLITICS")
+      VALUE_ISSUES_ELECTIONS_POLITICS("ISSUES_ELECTIONS_POLITICS"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
       ;

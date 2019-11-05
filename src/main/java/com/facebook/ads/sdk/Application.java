@@ -4522,7 +4522,6 @@ public class Application extends APINode {
       "is_famedeeplinkinguser",
       "is_shared_login",
       "is_verified",
-      "labels",
       "languages",
       "last_name",
       "link",
@@ -4829,13 +4828,6 @@ public class Application extends APINode {
     }
     public APIRequestGetBanned requestIsVerifiedField (boolean value) {
       this.requestField("is_verified", value);
-      return this;
-    }
-    public APIRequestGetBanned requestLabelsField () {
-      return this.requestLabelsField(true);
-    }
-    public APIRequestGetBanned requestLabelsField (boolean value) {
-      this.requestField("labels", value);
       return this;
     }
     public APIRequestGetBanned requestLanguagesField () {
@@ -6695,7 +6687,7 @@ public class Application extends APINode {
       return this;
     }
 
-    public APIRequestCreateInsightsPushSchedule setOwnerId (Object ownerId) {
+    public APIRequestCreateInsightsPushSchedule setOwnerId (Long ownerId) {
       this.setParam("owner_id", ownerId);
       return this;
     }

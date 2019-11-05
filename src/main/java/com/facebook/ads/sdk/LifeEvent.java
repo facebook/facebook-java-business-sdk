@@ -55,8 +55,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class LifeEvent extends APINode {
-  @SerializedName("created_time")
-  private String mCreatedTime = null;
   @SerializedName("description")
   private String mDescription = null;
   @SerializedName("end_time")
@@ -302,10 +300,6 @@ public class LifeEvent extends APINode {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
-
-  public String getFieldCreatedTime() {
-    return mCreatedTime;
-  }
 
   public String getFieldDescription() {
     return mDescription;
@@ -1783,7 +1777,6 @@ public class LifeEvent extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "created_time",
       "description",
       "end_time",
       "from",
@@ -1883,13 +1876,6 @@ public class LifeEvent extends APINode {
       return this;
     }
 
-    public APIRequestGet requestCreatedTimeField () {
-      return this.requestCreatedTimeField(true);
-    }
-    public APIRequestGet requestCreatedTimeField (boolean value) {
-      this.requestField("created_time", value);
-      return this;
-    }
     public APIRequestGet requestDescriptionField () {
       return this.requestDescriptionField(true);
     }
@@ -1963,7 +1949,6 @@ public class LifeEvent extends APINode {
   }
 
   public LifeEvent copyFrom(LifeEvent instance) {
-    this.mCreatedTime = instance.mCreatedTime;
     this.mDescription = instance.mDescription;
     this.mEndTime = instance.mEndTime;
     this.mFrom = instance.mFrom;

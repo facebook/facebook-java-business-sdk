@@ -28116,6 +28116,8 @@ public class AdAccount extends APINode {
       VALUE_HOTEL("HOTEL"),
       @SerializedName("MEDIA_TITLE")
       VALUE_MEDIA_TITLE("MEDIA_TITLE"),
+      @SerializedName("OFFLINE_PRODUCT")
+      VALUE_OFFLINE_PRODUCT("OFFLINE_PRODUCT"),
       @SerializedName("PRODUCT")
       VALUE_PRODUCT("PRODUCT"),
       @SerializedName("VEHICLE")
