@@ -18,19 +18,17 @@
 package com.facebook.ads.sdk.serverside;
 
 import com.google.gson.annotations.SerializedName;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /**
- * CustomData contains parameters to send additional data we can use for ads delivery
- * optimization.
+ * CustomData contains parameters to send additional data we can use for ads delivery optimization.
  */
 public class CustomData {
 
   @SerializedName("value")
-  private BigDecimal value = null;
+  private Float value = null;
 
   @SerializedName("currency")
   private String currency = null;
@@ -54,7 +52,7 @@ public class CustomData {
   private String orderId = null;
 
   @SerializedName("predicted_ltv")
-  private BigDecimal predictedLtv = null;
+  private Float predictedLtv;
 
   @SerializedName("num_items")
   private String numItems = null;
@@ -63,42 +61,43 @@ public class CustomData {
   private String status = null;
 
   /**
-   * Set a numeric value associated with this event.
-   * This could be a monetary value or a value in some other metric.
+   * Set a numeric value associated with this event. This could be a monetary value or a value in
+   * some other metric.
    * <p> Example: 142.54.
+   *
    * @param value a numeric value associated with this event
    * @return CustomData
    */
-  public CustomData value(BigDecimal value) {
+  public CustomData value(Float value) {
     this.value = value;
     return this;
   }
 
   /**
-   * A numeric value associated with this event.
-   * This could be a monetary value or a value in some other metric.
+   * A numeric value associated with this event. This could be a monetary value or a value in some
+   * other metric.
    * <p> Example: 142.54.
    *
    * @return value
    */
-  public BigDecimal getValue() {
+  public Float getValue() {
     return value;
   }
 
   /**
-   * Set a numeric value associated with this event.
-   * This could be a monetary value or a value in some other metric.
+   * Set a numeric value associated with this event. This could be a monetary value or a value in
+   * some other metric.
    * <p> Example: 142.54.
    *
    * @param value a numeric value associated with this event
    */
-  public void setValue(BigDecimal value) {
+  public void setValue(Float value) {
     this.value = value;
   }
 
   /**
-   * Set currency code for the value specified, if applicable.
-   * Currency must be a valid ISO 4217 three digit currency code.
+   * Set currency code for the value specified, if applicable. Currency must be a valid ISO 4217
+   * three digit currency code.
    *
    * @param currency currency code for the value specified
    * @return CustomData
@@ -109,8 +108,8 @@ public class CustomData {
   }
 
   /**
-   * The currency code for the value specified, if applicable.
-   * Currency must be a valid ISO 4217 three digit currency code.
+   * The currency code for the value specified, if applicable. Currency must be a valid ISO 4217
+   * three digit currency code.
    *
    * @return currency
    */
@@ -119,8 +118,8 @@ public class CustomData {
   }
 
   /**
-   * Set currency code for the value specified, if applicable.
-   * Currency must be a valid ISO 4217 three digit currency code.
+   * Set currency code for the value specified, if applicable. Currency must be a valid ISO 4217
+   * three digit currency code.
    *
    * @param currency currency code for the value specified
    */
@@ -134,7 +133,6 @@ public class CustomData {
    * <p> Example: lettuce.
    *
    * @param contentName name of the page or product associated with the event
-   *
    * @return CustomData
    */
   public CustomData contentName(String contentName) {
@@ -170,7 +168,6 @@ public class CustomData {
    * <p>Example: grocery
    *
    * @param contentCategory category of the content associated with the event.
-   *
    * @return CustomData
    */
   public CustomData contentCategory(String contentCategory) {
@@ -206,7 +203,6 @@ public class CustomData {
    * with a single string value. Otherwise, this array can contain any number of string values.
    *
    * @param contentIds content IDs associated with the event
-   *
    * @return CustomData
    */
   public CustomData contentIds(List<String> contentIds) {
@@ -243,7 +239,6 @@ public class CustomData {
    * <p>Example: [{id:ABC123,quantity :2,item_price:5.99}, {id:XYZ789,quantity:2, item_price:9.99}]
    *
    * @param contents list of Content objects that contain the products associated with the event
-   *
    * @return CustomData
    */
   public CustomData contents(List<Content> contents) {
@@ -258,7 +253,6 @@ public class CustomData {
    * <p>Example: {id:ABC123,quantity :2,item_price:5.99}
    *
    * @param content Content objects that contain the product associated with the event
-   *
    * @return CustomData
    */
   public CustomData addContent(Content content) {
@@ -334,7 +328,6 @@ public class CustomData {
    * <p>Example: order1234.
    *
    * @param orderId order ID for this transaction
-   *
    * @return CustomData
    */
   public CustomData orderId(String orderId) {
@@ -370,10 +363,9 @@ public class CustomData {
    * <p>Example: 432.12.
    *
    * @param predictedLtv predicted lifetime value of a conversion event
-   *
    * @return CustomData
    */
-  public CustomData predictedLtv(BigDecimal predictedLtv) {
+  public CustomData predictedLtv(Float predictedLtv) {
     this.predictedLtv = predictedLtv;
     return this;
   }
@@ -385,7 +377,7 @@ public class CustomData {
    *
    * @return predictedLtv
    */
-  public BigDecimal getPredictedLtv() {
+  public Float getPredictedLtv() {
     return predictedLtv;
   }
 
@@ -396,16 +388,15 @@ public class CustomData {
    *
    * @param predictedLtv predicted lifetime value of a conversion event
    */
-  public void setPredictedLtv(BigDecimal predictedLtv) {
+  public void setPredictedLtv(Float predictedLtv) {
     this.predictedLtv = predictedLtv;
   }
 
   /**
-   * Set number of items that a user tries to buy during checkout.
-   * Use only with InitiateCheckout events.
+   * Set number of items that a user tries to buy during checkout. Use only with InitiateCheckout
+   * events.
    *
    * @param numItems number of items that a user tries to buy during checkout
-   *
    * @return CustomData
    */
   public CustomData numItems(String numItems) {
@@ -414,8 +405,8 @@ public class CustomData {
   }
 
   /**
-   * The number of items that a user tries to buy during checkout.
-   * Use only with InitiateCheckout events.
+   * The number of items that a user tries to buy during checkout. Use only with InitiateCheckout
+   * events.
    *
    * @return numItems
    */
@@ -424,8 +415,8 @@ public class CustomData {
   }
 
   /**
-   * Set number of items that a user tries to buy during checkout.
-   * Use only with InitiateCheckout events.
+   * Set number of items that a user tries to buy during checkout. Use only with InitiateCheckout
+   * events.
    *
    * @param numItems number of items that a user tries to buy during checkout
    */
@@ -434,11 +425,9 @@ public class CustomData {
   }
 
   /**
-   * Set status of the registration event, as a String.
-   * Use only with CompleteRegistration events.
+   * Set status of the registration event, as a String. Use only with CompleteRegistration events.
    *
    * @param status status of the registration event
-   *
    * @return CustomData
    */
   public CustomData status(String status) {
@@ -447,8 +436,7 @@ public class CustomData {
   }
 
   /**
-   * The status of the registration event, as a String.
-   * Use only with CompleteRegistration events.
+   * The status of the registration event, as a String. Use only with CompleteRegistration events.
    *
    * @return status
    */
@@ -457,8 +445,7 @@ public class CustomData {
   }
 
   /**
-   * Set status of the registration event, as a String.
-   * Use only with CompleteRegistration events.
+   * Set status of the registration event, as a String. Use only with CompleteRegistration events.
    *
    * @param status status of the registration event
    */
@@ -525,7 +512,8 @@ public class CustomData {
   }
 
   /**
-   * Convert the given object to string with each line indented by 4 spaces (except the first line).
+   * Convert the given object to string with each line indented by 4 spaces (except the first
+   * line).
    */
   private String toIndentedString(Object o) {
     if (o == null) {

@@ -24,14 +24,15 @@ import java.util.Objects;
 public class Content {
 
   @SerializedName("id")
-  private String productId;
+  private String productId = null;
   @SerializedName("quantity")
-  private long quantity;
+  private Long quantity = null;
   @SerializedName("item_price")
-  private float itemPrice;
+  private Float itemPrice = null;
 
   /**
    * Get Product Id.
+   *
    * @return Product Id
    */
   public String getProductId() {
@@ -40,6 +41,7 @@ public class Content {
 
   /**
    * Set Product Id
+   *
    * @param productId product Id
    */
   public void setProductId(String productId) {
@@ -48,6 +50,7 @@ public class Content {
 
   /**
    * Set Product Id
+   *
    * @param productId product Id
    * @return Content
    */
@@ -58,52 +61,58 @@ public class Content {
 
   /**
    * Get number of product.
+   *
    * @return quantity
    */
-  public long getQuantity() {
+  public Long getQuantity() {
     return quantity;
   }
 
   /**
    * Set number of product.
+   *
    * @param quantity number of items
    */
-  public void setQuantity(long quantity) {
+  public void setQuantity(Long quantity) {
     this.quantity = quantity;
   }
 
   /**
    * Set number of product.
+   *
    * @param quantity number of items
    * @return Content
    */
-  public Content quantity(long quantity) {
+  public Content quantity(Long quantity) {
     this.quantity = quantity;
     return this;
   }
 
   /**
    * Get Item Price.
+   *
    * @return item price
    */
-  public float getItemPrice() {
+  public Float getItemPrice() {
     return itemPrice;
   }
 
   /**
    * Set Item Price.
+   *
    * @param itemPrice single item price
    */
-  public void setItemPrice(float itemPrice) {
+  public void setItemPrice(Float itemPrice) {
     this.itemPrice = itemPrice;
   }
 
   /**
    * Get Item Price.
+   *
    * @param itemPrice single item price
    * @return Content
    */
-  public Content itemPrice(float itemPrice) {
+  public Content itemPrice(Float itemPrice) {
     this.itemPrice = itemPrice;
     return this;
   }
@@ -129,7 +138,8 @@ public class Content {
   }
 
   /**
-   * Convert the given object to string with each line indented by 4 spaces (except the first line).
+   * Convert the given object to string with each line indented by 4 spaces (except the first
+   * line).
    */
   private String toIndentedString(Object o) {
     if (o == null) {
