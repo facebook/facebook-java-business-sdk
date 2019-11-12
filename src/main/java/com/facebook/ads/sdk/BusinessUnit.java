@@ -302,6 +302,10 @@ public class BusinessUnit extends APINode {
     return new APIRequestGetConversionEvents(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetConversionPaths getConversionPaths() {
+    return new APIRequestGetConversionPaths(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetCustomBreakdowns getCustomBreakdowns() {
     return new APIRequestGetCustomBreakdowns(this.getPrefixedId().toString(), context);
   }
@@ -1750,6 +1754,180 @@ public class BusinessUnit extends APINode {
 
   }
 
+  public static class APIRequestGetConversionPaths extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "click_lookback_window",
+      "date_range",
+      "fb_conversion_event_id",
+      "limit",
+      "metric_context",
+      "time_period",
+      "view_lookback_window",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetConversionPaths.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetConversionPaths(String nodeId, APIContext context) {
+      super(context, nodeId, "/conversion_paths", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetConversionPaths setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConversionPaths setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetConversionPaths setClickLookbackWindow (Long clickLookbackWindow) {
+      this.setParam("click_lookback_window", clickLookbackWindow);
+      return this;
+    }
+    public APIRequestGetConversionPaths setClickLookbackWindow (String clickLookbackWindow) {
+      this.setParam("click_lookback_window", clickLookbackWindow);
+      return this;
+    }
+
+    public APIRequestGetConversionPaths setDateRange (Object dateRange) {
+      this.setParam("date_range", dateRange);
+      return this;
+    }
+    public APIRequestGetConversionPaths setDateRange (String dateRange) {
+      this.setParam("date_range", dateRange);
+      return this;
+    }
+
+    public APIRequestGetConversionPaths setFbConversionEventId (Long fbConversionEventId) {
+      this.setParam("fb_conversion_event_id", fbConversionEventId);
+      return this;
+    }
+    public APIRequestGetConversionPaths setFbConversionEventId (String fbConversionEventId) {
+      this.setParam("fb_conversion_event_id", fbConversionEventId);
+      return this;
+    }
+
+    public APIRequestGetConversionPaths setLimit (Long limit) {
+      this.setParam("limit", limit);
+      return this;
+    }
+    public APIRequestGetConversionPaths setLimit (String limit) {
+      this.setParam("limit", limit);
+      return this;
+    }
+
+    public APIRequestGetConversionPaths setMetricContext (Map<String, String> metricContext) {
+      this.setParam("metric_context", metricContext);
+      return this;
+    }
+    public APIRequestGetConversionPaths setMetricContext (String metricContext) {
+      this.setParam("metric_context", metricContext);
+      return this;
+    }
+
+    public APIRequestGetConversionPaths setTimePeriod (EnumTimePeriod timePeriod) {
+      this.setParam("time_period", timePeriod);
+      return this;
+    }
+    public APIRequestGetConversionPaths setTimePeriod (String timePeriod) {
+      this.setParam("time_period", timePeriod);
+      return this;
+    }
+
+    public APIRequestGetConversionPaths setViewLookbackWindow (Long viewLookbackWindow) {
+      this.setParam("view_lookback_window", viewLookbackWindow);
+      return this;
+    }
+    public APIRequestGetConversionPaths setViewLookbackWindow (String viewLookbackWindow) {
+      this.setParam("view_lookback_window", viewLookbackWindow);
+      return this;
+    }
+
+    public APIRequestGetConversionPaths requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetConversionPaths requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConversionPaths requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetConversionPaths requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConversionPaths requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConversionPaths requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetCustomBreakdowns extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -2524,6 +2702,69 @@ public class BusinessUnit extends APINode {
       this.requestField("visits_available_date", value);
       return this;
     }
+  }
+
+  public static enum EnumTimePeriod {
+      @SerializedName("all_available")
+      VALUE_ALL_AVAILABLE("all_available"),
+      @SerializedName("all_dates")
+      VALUE_ALL_DATES("all_dates"),
+      @SerializedName("custom")
+      VALUE_CUSTOM("custom"),
+      @SerializedName("date_range")
+      VALUE_DATE_RANGE("date_range"),
+      @SerializedName("fifteen_days")
+      VALUE_FIFTEEN_DAYS("fifteen_days"),
+      @SerializedName("last_fourteen_days")
+      VALUE_LAST_FOURTEEN_DAYS("last_fourteen_days"),
+      @SerializedName("last_hundred_fourty_four_hours")
+      VALUE_LAST_HUNDRED_FOURTY_FOUR_HOURS("last_hundred_fourty_four_hours"),
+      @SerializedName("last_month")
+      VALUE_LAST_MONTH("last_month"),
+      @SerializedName("last_ninety_days")
+      VALUE_LAST_NINETY_DAYS("last_ninety_days"),
+      @SerializedName("last_quarter")
+      VALUE_LAST_QUARTER("last_quarter"),
+      @SerializedName("last_seven_days")
+      VALUE_LAST_SEVEN_DAYS("last_seven_days"),
+      @SerializedName("last_sixty_days")
+      VALUE_LAST_SIXTY_DAYS("last_sixty_days"),
+      @SerializedName("last_thirty_days")
+      VALUE_LAST_THIRTY_DAYS("last_thirty_days"),
+      @SerializedName("last_twenty_four_hours")
+      VALUE_LAST_TWENTY_FOUR_HOURS("last_twenty_four_hours"),
+      @SerializedName("last_year")
+      VALUE_LAST_YEAR("last_year"),
+      @SerializedName("month_to_date")
+      VALUE_MONTH_TO_DATE("month_to_date"),
+      @SerializedName("quarter_to_date")
+      VALUE_QUARTER_TO_DATE("quarter_to_date"),
+      @SerializedName("seven_days")
+      VALUE_SEVEN_DAYS("seven_days"),
+      @SerializedName("thirty_days")
+      VALUE_THIRTY_DAYS("thirty_days"),
+      @SerializedName("this_month_whole_days")
+      VALUE_THIS_MONTH_WHOLE_DAYS("this_month_whole_days"),
+      @SerializedName("today")
+      VALUE_TODAY("today"),
+      @SerializedName("week_to_date")
+      VALUE_WEEK_TO_DATE("week_to_date"),
+      @SerializedName("year_to_date")
+      VALUE_YEAR_TO_DATE("year_to_date"),
+      @SerializedName("yesterday")
+      VALUE_YESTERDAY("yesterday"),
+      ;
+
+      private String value;
+
+      private EnumTimePeriod(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
 

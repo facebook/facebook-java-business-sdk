@@ -231,6 +231,8 @@ public class Application extends APINode {
   private Long mSocialDiscovery = null;
   @SerializedName("subcategory")
   private String mSubcategory = null;
+  @SerializedName("suggested_events_setting")
+  private String mSuggestedEventsSetting = null;
   @SerializedName("supported_platforms")
   private List<EnumSupportedPlatforms> mSupportedPlatforms = null;
   @SerializedName("supports_apprequests_fast_app_switch")
@@ -1033,6 +1035,10 @@ public class Application extends APINode {
 
   public String getFieldSubcategory() {
     return mSubcategory;
+  }
+
+  public String getFieldSuggestedEventsSetting() {
+    return mSuggestedEventsSetting;
   }
 
   public List<EnumSupportedPlatforms> getFieldSupportedPlatforms() {
@@ -9819,6 +9825,7 @@ public class Application extends APINode {
       "smart_login_menu_icon_url",
       "social_discovery",
       "subcategory",
+      "suggested_events_setting",
       "supported_platforms",
       "supports_apprequests_fast_app_switch",
       "supports_attribution",
@@ -10540,6 +10547,13 @@ public class Application extends APINode {
     }
     public APIRequestGet requestSubcategoryField (boolean value) {
       this.requestField("subcategory", value);
+      return this;
+    }
+    public APIRequestGet requestSuggestedEventsSettingField () {
+      return this.requestSuggestedEventsSettingField(true);
+    }
+    public APIRequestGet requestSuggestedEventsSettingField (boolean value) {
+      this.requestField("suggested_events_setting", value);
       return this;
     }
     public APIRequestGet requestSupportedPlatformsField () {
@@ -11690,6 +11704,7 @@ public class Application extends APINode {
     this.mSmartLoginMenuIconUrl = instance.mSmartLoginMenuIconUrl;
     this.mSocialDiscovery = instance.mSocialDiscovery;
     this.mSubcategory = instance.mSubcategory;
+    this.mSuggestedEventsSetting = instance.mSuggestedEventsSetting;
     this.mSupportedPlatforms = instance.mSupportedPlatforms;
     this.mSupportsApprequestsFastAppSwitch = instance.mSupportsApprequestsFastAppSwitch;
     this.mSupportsAttribution = instance.mSupportsAttribution;

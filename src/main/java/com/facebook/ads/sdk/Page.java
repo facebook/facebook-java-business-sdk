@@ -25167,6 +25167,7 @@ public class Page extends APINode {
       "smart_login_menu_icon_url",
       "social_discovery",
       "subcategory",
+      "suggested_events_setting",
       "supported_platforms",
       "supports_apprequests_fast_app_switch",
       "supports_attribution",
@@ -25885,6 +25886,13 @@ public class Page extends APINode {
       this.requestField("subcategory", value);
       return this;
     }
+    public APIRequestGetSecondaryReceivers requestSuggestedEventsSettingField () {
+      return this.requestSuggestedEventsSettingField(true);
+    }
+    public APIRequestGetSecondaryReceivers requestSuggestedEventsSettingField (boolean value) {
+      this.requestField("suggested_events_setting", value);
+      return this;
+    }
     public APIRequestGetSecondaryReceivers requestSupportedPlatformsField () {
       return this.requestSupportedPlatformsField(true);
     }
@@ -26577,6 +26585,7 @@ public class Page extends APINode {
       "smart_login_menu_icon_url",
       "social_discovery",
       "subcategory",
+      "suggested_events_setting",
       "supported_platforms",
       "supports_apprequests_fast_app_switch",
       "supports_attribution",
@@ -27293,6 +27302,13 @@ public class Page extends APINode {
     }
     public APIRequestGetSubscribedApps requestSubcategoryField (boolean value) {
       this.requestField("subcategory", value);
+      return this;
+    }
+    public APIRequestGetSubscribedApps requestSuggestedEventsSettingField () {
+      return this.requestSuggestedEventsSettingField(true);
+    }
+    public APIRequestGetSubscribedApps requestSuggestedEventsSettingField (boolean value) {
+      this.requestField("suggested_events_setting", value);
       return this;
     }
     public APIRequestGetSubscribedApps requestSupportedPlatformsField () {
@@ -34411,6 +34427,8 @@ public class Page extends APINode {
       VALUE_HOMETOWN("hometown"),
       @SerializedName("hours")
       VALUE_HOURS("hours"),
+      @SerializedName("invoice_access_invoice_change")
+      VALUE_INVOICE_ACCESS_INVOICE_CHANGE("invoice_access_invoice_change"),
       @SerializedName("leadgen")
       VALUE_LEADGEN("leadgen"),
       @SerializedName("leadgen_fat")
@@ -34419,8 +34437,6 @@ public class Page extends APINode {
       VALUE_LIVE_VIDEOS("live_videos"),
       @SerializedName("location")
       VALUE_LOCATION("location"),
-      @SerializedName("mcom_invoice_change")
-      VALUE_MCOM_INVOICE_CHANGE("mcom_invoice_change"),
       @SerializedName("members")
       VALUE_MEMBERS("members"),
       @SerializedName("mention")

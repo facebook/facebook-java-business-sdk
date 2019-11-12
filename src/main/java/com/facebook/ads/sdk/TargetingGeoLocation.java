@@ -73,8 +73,6 @@ public class TargetingGeoLocation extends APINode {
   private List<TargetingGeoLocationLocationCluster> mLocationClusterIds = null;
   @SerializedName("location_expansion")
   private TargetingGeoLocationLocationExpansion mLocationExpansion = null;
-  @SerializedName("location_set_ids")
-  private List<String> mLocationSetIds = null;
   @SerializedName("location_types")
   private List<String> mLocationTypes = null;
   @SerializedName("medium_geo_areas")
@@ -364,15 +362,6 @@ public class TargetingGeoLocation extends APINode {
     this.mLocationExpansion = TargetingGeoLocationLocationExpansion.getGson().fromJson(value, type);
     return this;
   }
-  public List<String> getFieldLocationSetIds() {
-    return mLocationSetIds;
-  }
-
-  public TargetingGeoLocation setFieldLocationSetIds(List<String> value) {
-    this.mLocationSetIds = value;
-    return this;
-  }
-
   public List<String> getFieldLocationTypes() {
     return mLocationTypes;
   }
@@ -548,7 +537,6 @@ public class TargetingGeoLocation extends APINode {
     this.mLargeGeoAreas = instance.mLargeGeoAreas;
     this.mLocationClusterIds = instance.mLocationClusterIds;
     this.mLocationExpansion = instance.mLocationExpansion;
-    this.mLocationSetIds = instance.mLocationSetIds;
     this.mLocationTypes = instance.mLocationTypes;
     this.mMediumGeoAreas = instance.mMediumGeoAreas;
     this.mMetroAreas = instance.mMetroAreas;

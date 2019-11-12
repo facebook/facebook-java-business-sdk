@@ -55,6 +55,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class WorkUserFrontline extends APINode {
+  @SerializedName("has_access")
+  private Boolean mHasAccess = null;
   @SerializedName("is_frontline")
   private Boolean mIsFrontline = null;
   protected static Gson gson = null;
@@ -208,6 +210,15 @@ public class WorkUserFrontline extends APINode {
   }
 
 
+  public Boolean getFieldHasAccess() {
+    return mHasAccess;
+  }
+
+  public WorkUserFrontline setFieldHasAccess(Boolean value) {
+    this.mHasAccess = value;
+    return this;
+  }
+
   public Boolean getFieldIsFrontline() {
     return mIsFrontline;
   }
@@ -234,6 +245,7 @@ public class WorkUserFrontline extends APINode {
   }
 
   public WorkUserFrontline copyFrom(WorkUserFrontline instance) {
+    this.mHasAccess = instance.mHasAccess;
     this.mIsFrontline = instance.mIsFrontline;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

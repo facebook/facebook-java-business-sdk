@@ -115,6 +115,8 @@ public class AdCreative extends APINode {
   private AdCreativeInteractiveComponentsSpec mInteractiveComponentsSpec = null;
   @SerializedName("link_deep_link_url")
   private String mLinkDeepLinkUrl = null;
+  @SerializedName("link_destination_display_url")
+  private String mLinkDestinationDisplayUrl = null;
   @SerializedName("link_og_id")
   private String mLinkOgId = null;
   @SerializedName("link_url")
@@ -694,6 +696,15 @@ public class AdCreative extends APINode {
 
   public AdCreative setFieldLinkDeepLinkUrl(String value) {
     this.mLinkDeepLinkUrl = value;
+    return this;
+  }
+
+  public String getFieldLinkDestinationDisplayUrl() {
+    return mLinkDestinationDisplayUrl;
+  }
+
+  public AdCreative setFieldLinkDestinationDisplayUrl(String value) {
+    this.mLinkDestinationDisplayUrl = value;
     return this;
   }
 
@@ -1685,6 +1696,7 @@ public class AdCreative extends APINode {
       "instagram_story_id",
       "interactive_components_spec",
       "link_deep_link_url",
+      "link_destination_display_url",
       "link_og_id",
       "link_url",
       "messenger_sponsored_message",
@@ -2026,6 +2038,13 @@ public class AdCreative extends APINode {
     }
     public APIRequestGet requestLinkDeepLinkUrlField (boolean value) {
       this.requestField("link_deep_link_url", value);
+      return this;
+    }
+    public APIRequestGet requestLinkDestinationDisplayUrlField () {
+      return this.requestLinkDestinationDisplayUrlField(true);
+    }
+    public APIRequestGet requestLinkDestinationDisplayUrlField (boolean value) {
+      this.requestField("link_destination_display_url", value);
       return this;
     }
     public APIRequestGet requestLinkOgIdField () {
@@ -2684,6 +2703,7 @@ public class AdCreative extends APINode {
     this.mInstagramStoryId = instance.mInstagramStoryId;
     this.mInteractiveComponentsSpec = instance.mInteractiveComponentsSpec;
     this.mLinkDeepLinkUrl = instance.mLinkDeepLinkUrl;
+    this.mLinkDestinationDisplayUrl = instance.mLinkDestinationDisplayUrl;
     this.mLinkOgId = instance.mLinkOgId;
     this.mLinkUrl = instance.mLinkUrl;
     this.mMessengerSponsoredMessage = instance.mMessengerSponsoredMessage;

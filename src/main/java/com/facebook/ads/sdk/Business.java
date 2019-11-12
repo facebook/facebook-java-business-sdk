@@ -366,6 +366,10 @@ public class Business extends APINode {
     return new APIRequestGetBusinessInvoices(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetBusinessUnits getBusinessUnits() {
+    return new APIRequestGetBusinessUnits(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetBusinessUsers getBusinessUsers() {
     return new APIRequestGetBusinessUsers(this.getPrefixedId().toString(), context);
   }
@@ -3592,6 +3596,182 @@ public class Business extends APINode {
     }
   }
 
+  public static class APIRequestGetBusinessUnits extends APIRequest<BusinessUnit> {
+
+    APINodeList<BusinessUnit> lastResponse = null;
+    @Override
+    public APINodeList<BusinessUnit> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "business",
+      "creation_time",
+      "currency",
+      "excluded_sources",
+      "id",
+      "is_enabled_for_measurement",
+      "name",
+      "time_zone",
+      "visits_available_date",
+    };
+
+    @Override
+    public APINodeList<BusinessUnit> parseResponse(String response, String header) throws APIException {
+      return BusinessUnit.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<BusinessUnit> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<BusinessUnit> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<BusinessUnit>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<BusinessUnit>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<BusinessUnit>>() {
+           public APINodeList<BusinessUnit> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetBusinessUnits.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetBusinessUnits(String nodeId, APIContext context) {
+      super(context, nodeId, "/business_units", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetBusinessUnits setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessUnits setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetBusinessUnits requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetBusinessUnits requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessUnits requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetBusinessUnits requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessUnits requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessUnits requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetBusinessUnits requestBusinessField () {
+      return this.requestBusinessField(true);
+    }
+    public APIRequestGetBusinessUnits requestBusinessField (boolean value) {
+      this.requestField("business", value);
+      return this;
+    }
+    public APIRequestGetBusinessUnits requestCreationTimeField () {
+      return this.requestCreationTimeField(true);
+    }
+    public APIRequestGetBusinessUnits requestCreationTimeField (boolean value) {
+      this.requestField("creation_time", value);
+      return this;
+    }
+    public APIRequestGetBusinessUnits requestCurrencyField () {
+      return this.requestCurrencyField(true);
+    }
+    public APIRequestGetBusinessUnits requestCurrencyField (boolean value) {
+      this.requestField("currency", value);
+      return this;
+    }
+    public APIRequestGetBusinessUnits requestExcludedSourcesField () {
+      return this.requestExcludedSourcesField(true);
+    }
+    public APIRequestGetBusinessUnits requestExcludedSourcesField (boolean value) {
+      this.requestField("excluded_sources", value);
+      return this;
+    }
+    public APIRequestGetBusinessUnits requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetBusinessUnits requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetBusinessUnits requestIsEnabledForMeasurementField () {
+      return this.requestIsEnabledForMeasurementField(true);
+    }
+    public APIRequestGetBusinessUnits requestIsEnabledForMeasurementField (boolean value) {
+      this.requestField("is_enabled_for_measurement", value);
+      return this;
+    }
+    public APIRequestGetBusinessUnits requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetBusinessUnits requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetBusinessUnits requestTimeZoneField () {
+      return this.requestTimeZoneField(true);
+    }
+    public APIRequestGetBusinessUnits requestTimeZoneField (boolean value) {
+      this.requestField("time_zone", value);
+      return this;
+    }
+    public APIRequestGetBusinessUnits requestVisitsAvailableDateField () {
+      return this.requestVisitsAvailableDateField(true);
+    }
+    public APIRequestGetBusinessUnits requestVisitsAvailableDateField (boolean value) {
+      this.requestField("visits_available_date", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetBusinessUsers extends APIRequest<BusinessUser> {
 
     APINodeList<BusinessUser> lastResponse = null;
@@ -5087,6 +5267,7 @@ public class Business extends APINode {
       "smart_login_menu_icon_url",
       "social_discovery",
       "subcategory",
+      "suggested_events_setting",
       "supported_platforms",
       "supports_apprequests_fast_app_switch",
       "supports_attribution",
@@ -5803,6 +5984,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientApps requestSubcategoryField (boolean value) {
       this.requestField("subcategory", value);
+      return this;
+    }
+    public APIRequestGetClientApps requestSuggestedEventsSettingField () {
+      return this.requestSuggestedEventsSettingField(true);
+    }
+    public APIRequestGetClientApps requestSuggestedEventsSettingField (boolean value) {
+      this.requestField("suggested_events_setting", value);
       return this;
     }
     public APIRequestGetClientApps requestSupportedPlatformsField () {
@@ -13541,6 +13729,7 @@ public class Business extends APINode {
       "smart_login_menu_icon_url",
       "social_discovery",
       "subcategory",
+      "suggested_events_setting",
       "supported_platforms",
       "supports_apprequests_fast_app_switch",
       "supports_attribution",
@@ -14257,6 +14446,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedApps requestSubcategoryField (boolean value) {
       this.requestField("subcategory", value);
+      return this;
+    }
+    public APIRequestGetOwnedApps requestSuggestedEventsSettingField () {
+      return this.requestSuggestedEventsSettingField(true);
+    }
+    public APIRequestGetOwnedApps requestSuggestedEventsSettingField (boolean value) {
+      this.requestField("suggested_events_setting", value);
       return this;
     }
     public APIRequestGetOwnedApps requestSupportedPlatformsField () {

@@ -7078,6 +7078,8 @@ public class AdVideo extends APINode {
   }
 
   public static enum EnumContainerType {
+      @SerializedName("ACO_VIDEO_VARIATION")
+      VALUE_ACO_VIDEO_VARIATION("ACO_VIDEO_VARIATION"),
       @SerializedName("AD_BREAK_PREVIEW")
       VALUE_AD_BREAK_PREVIEW("AD_BREAK_PREVIEW"),
       @SerializedName("AD_DERIVATIVE")
