@@ -38,6 +38,25 @@ public class EventResponse {
   private String fbTraceId = null;
 
   /**
+   * Default Constructor.
+   */
+  public EventResponse() {
+  }
+
+  /**
+   * Constructor.
+   *
+   * @param eventsReceived number of events received
+   * @param messages response messages
+   * @param fbTraceId Facebook trace id
+   */
+  public EventResponse(Integer eventsReceived, List<String> messages, String fbTraceId) {
+    this.eventsReceived = eventsReceived;
+    this.messages = messages;
+    this.fbTraceId = fbTraceId;
+  }
+
+  /**
    * Set number of events received.
    *
    * @param eventsReceived number of events received

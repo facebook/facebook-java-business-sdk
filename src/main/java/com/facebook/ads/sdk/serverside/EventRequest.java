@@ -32,7 +32,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/** Server side pixel event request */
+/**
+ * Server side pixel event request
+ */
 public class EventRequest {
 
   private static Gson gson = null;
@@ -46,7 +48,30 @@ public class EventRequest {
   private String pixelId;
   private APIContext context;
 
+  /**
+   * Constructor.
+   *
+   * @param pixelId Ad pixel id
+   * @param context Api context
+   */
   public EventRequest(String pixelId, APIContext context) {
+    this.pixelId = pixelId;
+    this.context = context;
+  }
+
+  /**
+   * Constructor.
+   *
+   * @param pixelId Ad pixel id
+   * @param context Api context
+   * @param data list of event
+   * @param testEventCode code used to verify that your server events are received correctly by
+   * Facebook
+   */
+  public EventRequest(String pixelId, APIContext context, List<Event> data,
+      String testEventCode) {
+    this.data = data;
+    this.testEventCode = testEventCode;
     this.pixelId = pixelId;
     this.context = context;
   }
@@ -70,7 +95,6 @@ public class EventRequest {
    * Set a list of Server Event objects
    *
    * @param data list of Server Event
-   *
    * @return EventRequest
    */
   public EventRequest data(List<Event> data) {
@@ -82,7 +106,6 @@ public class EventRequest {
    * Add a Server Event object
    *
    * @param dataItem Server Event
-   *
    * @return EventRequest
    */
   public EventRequest addDataItem(Event dataItem) {
@@ -111,12 +134,10 @@ public class EventRequest {
   /**
    * Set code used to verify that your server events are received correctly by Facebook. Use this
    * code to test your server events in the Test Events feature in Events Manager. See Test Events
-   * Tool
-   * (https://developers.facebook.com/docs/marketing-api/facebook-pixel/server-side-api/using-the-api#testEvents)
+   * Tool (https://developers.facebook.com/docs/marketing-api/facebook-pixel/server-side-api/using-the-api#testEvents)
    * for an example.
    *
    * @param testEventCode ode used to verify that your server events
-   *
    * @return EventRequest
    */
   public EventRequest testEventCode(String testEventCode) {
@@ -139,8 +160,7 @@ public class EventRequest {
   /**
    * Set code used to verify that your server events are received correctly by Facebook. Use this
    * code to test your server events in the Test Events feature in Events Manager. See Test Events
-   * Tool
-   * (https://developers.facebook.com/docs/marketing-api/facebook-pixel/server-side-api/using-the-api#testEvents)
+   * Tool (https://developers.facebook.com/docs/marketing-api/facebook-pixel/server-side-api/using-the-api#testEvents)
    * for an example.
    *
    * @param testEventCode ode used to verify that your server events
@@ -241,7 +261,8 @@ public class EventRequest {
   }
 
   /**
-   * Convert the given object to string with each line indented by 4 spaces (except the first line).
+   * Convert the given object to string with each line indented by 4 spaces (except the first
+   * line).
    */
   private String toIndentedString(Object o) {
     if (o == null) {

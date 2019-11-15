@@ -20,7 +20,9 @@ package com.facebook.ads.sdk.serverside;
 import com.google.gson.annotations.SerializedName;
 import java.util.Objects;
 
-/** Server side pixel event */
+/**
+ * Server side pixel event
+ */
 public class Event {
 
   @SerializedName("event_name")
@@ -43,6 +45,34 @@ public class Event {
 
   @SerializedName("custom_data")
   private CustomData customData = null;
+
+  /**
+   * Default Constructor.
+   */
+  public Event() {
+  }
+
+  /**
+   * Constructor.
+   *
+   * @param eventName Facebook pixel Standard Event or Custom Event name
+   * @param eventTime Unix timestamp in seconds indicating when the actual event occurred.
+   * @param eventSourceUrl browser URL where the event happened
+   * @param optOut flag that indicates to use this event for ads delivery optimization or not
+   * @param eventId any string chosen by the advertiser
+   * @param userData UserData object that contains user info
+   * @param customData customData object that includes additional business data
+   */
+  public Event(String eventName, Long eventTime, String eventSourceUrl, Boolean optOut,
+      String eventId, UserData userData, CustomData customData) {
+    this.eventName = eventName;
+    this.eventTime = eventTime;
+    this.eventSourceUrl = eventSourceUrl;
+    this.optOut = optOut;
+    this.eventId = eventId;
+    this.userData = userData;
+    this.customData = customData;
+  }
 
   /**
    * Set Facebook pixel Standard Event or Custom Event name.
@@ -106,7 +136,6 @@ public class Event {
    * Set browser URL where the event happened.
    *
    * @param eventSourceUrl rowser URL where the event happened
-   *
    * @return Event
    */
   public Event eventSourceUrl(String eventSourceUrl) {
@@ -171,7 +200,6 @@ public class Event {
    * event_name or event_time.
    *
    * @param eventId ID can be any string chosen by the advertiser
-   *
    * @return Event
    */
   public Event eventId(String eventId) {
@@ -207,7 +235,6 @@ public class Event {
    * Set UserData object that contains user data
    *
    * @param userData object that contains user data
-   *
    * @return Event
    */
   public Event userData(UserData userData) {
@@ -237,7 +264,6 @@ public class Event {
    * Set customData object that includes additional business data about the event.
    *
    * @param customData object that includes additional business data about the event.
-   *
    * @return Event
    */
   public Event customData(CustomData customData) {
@@ -304,7 +330,8 @@ public class Event {
   }
 
   /**
-   * Convert the given object to string with each line indented by 4 spaces (except the first line).
+   * Convert the given object to string with each line indented by 4 spaces (except the first
+   * line).
    */
   private String toIndentedString(Object o) {
     if (o == null) {

@@ -89,12 +89,58 @@ public class UserData {
   private String subscriptionId = null;
 
   /**
+   * Default Constructor.
+   */
+  public UserData() {
+  }
+
+  /**
+   * @param email an email address
+   * @param phone a phone number
+   * @param gender gender
+   * @param dateOfBirth date of birth
+   * @param lastName last name
+   * @param firstName first name
+   * @param city city
+   * @param state state
+   * @param zipcode zip code
+   * @param countryCode country code
+   * @param externalId any unique ID from the advertiser, such as loyalty membership IDs, user IDs,
+   * and external cookie IDs.
+   * @param clientIpAddress IP address of the browser corresponding to the event
+   * @param clientUserAgent user agent for the browser corresponding to the event
+   * @param fbc Facebook click ID value stored in the _fbc browser cookie under your domain
+   * @param fbp Facebook browser ID value stored in the _fbp browser cookie under your domain
+   * @param subscriptionId subscription ID for the user in this transaction
+   */
+  public UserData(String email, String phone, GenderEnum gender, String dateOfBirth,
+      String lastName, String firstName, String city, String state, String zipcode,
+      String countryCode, String externalId, String clientIpAddress, String clientUserAgent,
+      String fbc, String fbp, String subscriptionId) {
+    this.email = email;
+    this.phone = phone;
+    this.gender = gender;
+    this.dateOfBirth = dateOfBirth;
+    this.lastName = lastName;
+    this.firstName = firstName;
+    this.city = city;
+    this.state = state;
+    this.zipcode = zipcode;
+    this.countryCode = countryCode;
+    this.externalId = externalId;
+    this.clientIpAddress = clientIpAddress;
+    this.clientUserAgent = clientUserAgent;
+    this.fbc = fbc;
+    this.fbp = fbp;
+    this.subscriptionId = subscriptionId;
+  }
+
+  /**
    * Set an email address, in lowercase.
    *
    * <p>Example: joe@eg.com
    *
    * @param email an email address
-   *
    * @return UserData
    */
   public UserData email(String email) {
@@ -128,7 +174,6 @@ public class UserData {
    * <p>Example: 16505551212
    *
    * @param phone a phone number
-   *
    * @return UserData
    */
   public UserData phone(String phone) {
@@ -160,7 +205,6 @@ public class UserData {
    * Gender. Male or Female.
    *
    * @param gender Male or Female.
-   *
    * @return UserData
    */
   public UserData gender(GenderEnum gender) {
@@ -192,7 +236,6 @@ public class UserData {
    * <p>Example: 19971226 for December 26, 1997.
    *
    * @param dateOfBirth a date of birth given as year, month, and day.
-   *
    * @return UserData
    */
   public UserData dateOfBirth(String dateOfBirth) {
@@ -226,7 +269,6 @@ public class UserData {
    * <p>Example: smith
    *
    * @param lastName last name
-   *
    * @return UserData
    */
   public UserData lastName(String lastName) {
@@ -260,7 +302,6 @@ public class UserData {
    * <p>Example: joe
    *
    * @param firstName first name
-   *
    * @return firstName
    */
   public UserData firstName(String firstName) {
@@ -294,7 +335,6 @@ public class UserData {
    * <p>Example: menlopark
    *
    * @param city city
-   *
    * @return UserData
    */
   public UserData city(String city) {
@@ -328,7 +368,6 @@ public class UserData {
    * <p>Example: ca
    *
    * @param state two-letter state code
-   *
    * @return UserData
    */
   public UserData state(String state) {
@@ -362,7 +401,6 @@ public class UserData {
    * <p>Example: 94035
    *
    * @param zipcode five-digit zip code
-   *
    * @return UserData
    */
   public UserData zipcode(String zipcode) {
@@ -396,7 +434,6 @@ public class UserData {
    * <p>Example: us
    *
    * @param countryCode two-letter country code
-   *
    * @return UserData
    */
   public UserData countryCode(String countryCode) {
@@ -433,7 +470,6 @@ public class UserData {
    * channels, then it should be sent in the same format via the server-side API.
    *
    * @param externalId unique ID from the advertiser
-   *
    * @return UserData
    */
   public UserData externalId(String externalId) {
@@ -469,7 +505,6 @@ public class UserData {
    * Set IP address of the browser corresponding to the event.
    *
    * @param clientIpAddress IP address of the browser corresponding to the event
-   *
    * @return UserData
    */
   public UserData clientIpAddress(String clientIpAddress) {
@@ -499,7 +534,6 @@ public class UserData {
    * Set user agent for the browser corresponding to the event.
    *
    * @param clientUserAgent user agent for the browser corresponding to the event
-   *
    * @return UserData
    */
   public UserData clientUserAgent(String clientUserAgent) {
@@ -527,12 +561,10 @@ public class UserData {
 
   /**
    * Set Facebook click ID value stored in the _fbc browser cookie under your domain. See Managing
-   * fbc and fbp Parameters for how to get this value
-   * (https://developers.facebook.com/docs/marketing-api/facebook-pixel/server-side-api/parameters#fbc),
+   * fbc and fbp Parameters for how to get this value (https://developers.facebook.com/docs/marketing-api/facebook-pixel/server-side-api/parameters#fbc),
    * or generate this value from a fbclid query parameter.
    *
    * @param fbc Facebook click ID
-   *
    * @return UserData
    */
   public UserData fbc(String fbc) {
@@ -542,8 +574,7 @@ public class UserData {
 
   /**
    * The Facebook click ID value stored in the _fbc browser cookie under your domain. See Managing
-   * fbc and fbp Parameters for how to get this value
-   * (https://developers.facebook.com/docs/marketing-api/facebook-pixel/server-side-api/parameters#fbc),
+   * fbc and fbp Parameters for how to get this value (https://developers.facebook.com/docs/marketing-api/facebook-pixel/server-side-api/parameters#fbc),
    * or generate this value from a fbclid query parameter.
    *
    * @return fbc
@@ -554,8 +585,7 @@ public class UserData {
 
   /**
    * Set Facebook click ID value stored in the _fbc browser cookie under your domain. See Managing
-   * fbc and fbp Parameters for how to get this value
-   * (https://developers.facebook.com/docs/marketing-api/facebook-pixel/server-side-api/parameters#fbc),
+   * fbc and fbp Parameters for how to get this value (https://developers.facebook.com/docs/marketing-api/facebook-pixel/server-side-api/parameters#fbc),
    * or generate this value from a fbclid query parameter.
    *
    * @param fbc Facebook click ID
@@ -566,12 +596,10 @@ public class UserData {
 
   /**
    * Set Facebook browser ID value stored in the _fbp browser cookie under your domain. See Managing
-   * fbc and fbp Parameters for how to get this value
-   * (https://developers.facebook.com/docs/marketing-api/facebook-pixel/server-side-api/parameters#fbc),
+   * fbc and fbp Parameters for how to get this value (https://developers.facebook.com/docs/marketing-api/facebook-pixel/server-side-api/parameters#fbc),
    * or generate this value from a fbclid query parameter.
    *
    * @param fbp Facebook browser ID
-   *
    * @return UserData
    */
   public UserData fbp(String fbp) {
@@ -581,8 +609,7 @@ public class UserData {
 
   /**
    * The Facebook browser ID value stored in the _fbp browser cookie under your domain. See Managing
-   * fbc and fbp Parameters for how to get this value
-   * (https://developers.facebook.com/docs/marketing-api/facebook-pixel/server-side-api/parameters#fbc),
+   * fbc and fbp Parameters for how to get this value (https://developers.facebook.com/docs/marketing-api/facebook-pixel/server-side-api/parameters#fbc),
    * or generate this value from a fbclid query parameter.
    *
    * @return fbp
@@ -593,8 +620,7 @@ public class UserData {
 
   /**
    * Set Facebook browser ID value stored in the _fbp browser cookie under your domain. See Managing
-   * fbc and fbp Parameters for how to get this value
-   * (https://developers.facebook.com/docs/marketing-api/facebook-pixel/server-side-api/parameters#fbc)
+   * fbc and fbp Parameters for how to get this value (https://developers.facebook.com/docs/marketing-api/facebook-pixel/server-side-api/parameters#fbc)
    *
    * @param fbp Facebook browser ID
    */
@@ -607,7 +633,6 @@ public class UserData {
    * individual product.
    *
    * @param subscriptionId subscription ID for the user in this transaction
-   *
    * @return UserData
    */
   public UserData subscriptionId(String subscriptionId) {
@@ -709,7 +734,8 @@ public class UserData {
   }
 
   /**
-   * Convert the given object to string with each line indented by 4 spaces (except the first line).
+   * Convert the given object to string with each line indented by 4 spaces (except the first
+   * line).
    */
   private String toIndentedString(Object o) {
     if (o == null) {

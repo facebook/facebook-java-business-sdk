@@ -61,6 +61,45 @@ public class CustomData {
   private String status = null;
 
   /**
+   * Default Constructor.
+   */
+  public CustomData() {
+  }
+
+  /**
+   * Constructor.
+   *
+   * @param value a numeric value associated with this event
+   * @param currency currency code for the value specified
+   * @param contentName name of the page or product associated with the event
+   * @param contentCategory category of the content associated with the event
+   * @param contentIds content IDs associated with the event, such as product SKUs for items in an
+   * AddToCart
+   * @param contents list of Content objects that contain the product info
+   * @param contentType either 'product' or 'product_group'
+   * @param orderId order ID for this transaction
+   * @param predictedLtv predicted lifetime value of a conversion event
+   * @param numItems number of items that a user tries to buy during checkout
+   * @param status status of the registration event
+   */
+  public CustomData(Float value, String currency, String contentName,
+      String contentCategory, List<String> contentIds,
+      List<Content> contents, String contentType, String orderId, Float predictedLtv,
+      String numItems, String status) {
+    this.value = value;
+    this.currency = currency;
+    this.contentName = contentName;
+    this.contentCategory = contentCategory;
+    this.contentIds = contentIds;
+    this.contents = contents;
+    this.contentType = contentType;
+    this.orderId = orderId;
+    this.predictedLtv = predictedLtv;
+    this.numItems = numItems;
+    this.status = status;
+  }
+
+  /**
    * Set a numeric value associated with this event. This could be a monetary value or a value in
    * some other metric.
    * <p> Example: 142.54.

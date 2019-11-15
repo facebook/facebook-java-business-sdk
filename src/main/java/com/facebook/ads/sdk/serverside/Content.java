@@ -31,6 +31,25 @@ public class Content {
   private Float itemPrice = null;
 
   /**
+   * Default Constructor.
+   */
+  public Content() {
+  }
+
+  /**
+   * Constructor.
+   *
+   * @param productId product id
+   * @param quantity number of product
+   * @param itemPrice single item Price
+   */
+  public Content(String productId, Long quantity, Float itemPrice) {
+    this.productId = productId;
+    this.quantity = quantity;
+    this.itemPrice = itemPrice;
+  }
+
+  /**
    * Get Product Id.
    *
    * @return Product Id
