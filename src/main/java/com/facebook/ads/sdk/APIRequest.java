@@ -303,7 +303,9 @@ public class APIRequest<T extends APINode> {
         response.append(inputLine);
       }
       in.close();
-      throw new APIException.FailedRequestException(response.toString(), e);
+      throw new APIException.FailedRequestException(
+        convertToString(con.getHeaderFields()), response.toString(), e
+      );
     }
   }
 
