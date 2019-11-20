@@ -100,7 +100,7 @@ public class CrashReporter implements Thread.UncaughtExceptionHandler {
 			APIContext anonymous = new APIContext(null, null, null, false);
 			String apiUrl = APIContext.DEFAULT_API_BASE + "/" + APIContext.DEFAULT_API_VERSION + "/" + this.appID + "/instruments";
 			APIRequest.ResponseWrapper response = executor.execute("POST", apiUrl, params, anonymous);
-			log("Sucess to send out crash reporter");
+			log("Success to send out crash reporter");
 		} catch (Exception e) {
 			log("Fail to send out crash reporter");
 		}
