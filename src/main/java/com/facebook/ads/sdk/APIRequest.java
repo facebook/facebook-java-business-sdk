@@ -361,6 +361,11 @@ public class APIRequest<T extends APINode> {
     return this;
   }
 
+  public APIRequest addToBatch(BatchRequest batch, String name, boolean omitResponseOnSuccess) {
+    batch.addRequest(name, omitResponseOnSuccess, this);
+    return this;
+  }
+
   BatchRequest.BatchModeRequestInfo getBatchModeRequestInfo() throws IOException {
     BatchRequest.BatchModeRequestInfo info = new BatchRequest.BatchModeRequestInfo();
     Map<String, Object> allParams = new HashMap<String, Object>(params);

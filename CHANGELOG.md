@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
   - Added function `getHeader()` in APIException class which provides header information
+  - Made `omit_response_on_success` configurable for addToBatch method in APIRequest
 ## v5.0.1
 
 ### Added
