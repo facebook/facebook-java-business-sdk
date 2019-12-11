@@ -2482,6 +2482,7 @@ public class SystemUser extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
+      "is_guest_user",
       "is_shared_login",
       "is_verified",
       "languages",
@@ -2767,6 +2768,13 @@ public class SystemUser extends APINode {
     }
     public APIRequestGetUpdatedBy requestIsFamedeeplinkinguserField (boolean value) {
       this.requestField("is_famedeeplinkinguser", value);
+      return this;
+    }
+    public APIRequestGetUpdatedBy requestIsGuestUserField () {
+      return this.requestIsGuestUserField(true);
+    }
+    public APIRequestGetUpdatedBy requestIsGuestUserField (boolean value) {
+      this.requestField("is_guest_user", value);
       return this;
     }
     public APIRequestGetUpdatedBy requestIsSharedLoginField () {

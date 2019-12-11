@@ -35,6 +35,7 @@ public class AdAccountCampaignsPostLeadGen {
     APIContext context = new APIContext(access_token).enableDebug(true);
 
     new AdAccount(id, context).createCampaign()
+      .setSpecialAdCategory(Campaign.EnumSpecialAdCategory.VALUE_NONE)
       .setName("Lead generation campaign")
       .setObjective(Campaign.EnumObjective.VALUE_LEAD_GENERATION)
       .setStatus(Campaign.EnumStatus.VALUE_PAUSED)

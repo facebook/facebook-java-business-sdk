@@ -37,8 +37,8 @@ public class AdAccountAdSetsPostOfferClaim {
     new AdAccount(id, context).createAdSet()
       .setName("My Offer Claim AdSet")
       .setLifetimeBudget(56000L)
-      .setStartTime("2019-08-07T02:19:01-0700")
-      .setEndTime("2019-08-14T02:19:01-0700")
+      .setStartTime("2019-12-05T23:42:58-0800")
+      .setEndTime("2019-12-12T23:42:58-0800")
       .setCampaignId("<adCampaignLinkClicksID>")
       .setBillingEvent(AdSet.EnumBillingEvent.VALUE_LINK_CLICKS)
       .setOptimizationGoal(AdSet.EnumOptimizationGoal.VALUE_LINK_CLICKS)
@@ -48,6 +48,7 @@ public class AdAccountAdSetsPostOfferClaim {
           new Targeting()
             .setFieldAgeMax(55L)
             .setFieldAgeMin(25L)
+            .setFieldFacebookPositions(Arrays.asList("feed"))
             .setFieldGenders(Arrays.asList(1L))
             .setFieldGeoLocations(
               new TargetingGeoLocation()

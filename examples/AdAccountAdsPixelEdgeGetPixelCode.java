@@ -25,21 +25,17 @@
 import java.io.File;
 import java.util.Arrays;
 
-public class AdAccountCampaignsPostStoreCampaign {
+public class AdAccountAdsPixelEdgeGetPixelCode {
   public static void main (String args[]) throws APIException {
 
     String access_token = "<ACCESS_TOKEN>";
     String app_secret = "<APP_SECRET>";
     String app_id = "<APP_ID>";
-    String id = "<AD_ACCOUNT_ID>";
+    String id = "<ADS_PIXEL_ID>";
     APIContext context = new APIContext(access_token).enableDebug(true);
 
-    new AdAccount(id, context).createCampaign()
-      .setSpecialAdCategory(Campaign.EnumSpecialAdCategory.VALUE_NONE)
-      .setName("Store Visits Campaign")
-      .setObjective(Campaign.EnumObjective.VALUE_STORE_VISITS)
-      .setPromotedObject("{\"page_id\":\"<pageID>\"}")
-      .setStatus(Campaign.EnumStatus.VALUE_PAUSED)
+    new AdsPixel(id, context).get()
+      .requestCodeField()
       .execute();
 
   }

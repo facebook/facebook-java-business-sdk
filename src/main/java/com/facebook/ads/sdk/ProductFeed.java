@@ -326,6 +326,14 @@ public class ProductFeed extends APINode {
     return new APIRequestCreateRule(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetUploadSchedules getUploadSchedules() {
+    return new APIRequestGetUploadSchedules(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateUploadSchedule createUploadSchedule() {
+    return new APIRequestCreateUploadSchedule(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetUploads getUploads() {
     return new APIRequestGetUploads(this.getPrefixedId().toString(), context);
   }
@@ -2764,6 +2772,300 @@ public class ProductFeed extends APINode {
 
   }
 
+  public static class APIRequestGetUploadSchedules extends APIRequest<ProductFeedSchedule> {
+
+    APINodeList<ProductFeedSchedule> lastResponse = null;
+    @Override
+    public APINodeList<ProductFeedSchedule> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "day_of_month",
+      "day_of_week",
+      "hour",
+      "id",
+      "interval",
+      "interval_count",
+      "minute",
+      "timezone",
+      "url",
+      "username",
+    };
+
+    @Override
+    public APINodeList<ProductFeedSchedule> parseResponse(String response, String header) throws APIException {
+      return ProductFeedSchedule.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<ProductFeedSchedule> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ProductFeedSchedule> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<ProductFeedSchedule>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<ProductFeedSchedule>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<ProductFeedSchedule>>() {
+           public APINodeList<ProductFeedSchedule> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetUploadSchedules.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetUploadSchedules(String nodeId, APIContext context) {
+      super(context, nodeId, "/upload_schedules", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetUploadSchedules setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetUploadSchedules setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetUploadSchedules requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetUploadSchedules requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetUploadSchedules requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetUploadSchedules requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetUploadSchedules requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetUploadSchedules requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetUploadSchedules requestDayOfMonthField () {
+      return this.requestDayOfMonthField(true);
+    }
+    public APIRequestGetUploadSchedules requestDayOfMonthField (boolean value) {
+      this.requestField("day_of_month", value);
+      return this;
+    }
+    public APIRequestGetUploadSchedules requestDayOfWeekField () {
+      return this.requestDayOfWeekField(true);
+    }
+    public APIRequestGetUploadSchedules requestDayOfWeekField (boolean value) {
+      this.requestField("day_of_week", value);
+      return this;
+    }
+    public APIRequestGetUploadSchedules requestHourField () {
+      return this.requestHourField(true);
+    }
+    public APIRequestGetUploadSchedules requestHourField (boolean value) {
+      this.requestField("hour", value);
+      return this;
+    }
+    public APIRequestGetUploadSchedules requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetUploadSchedules requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetUploadSchedules requestIntervalField () {
+      return this.requestIntervalField(true);
+    }
+    public APIRequestGetUploadSchedules requestIntervalField (boolean value) {
+      this.requestField("interval", value);
+      return this;
+    }
+    public APIRequestGetUploadSchedules requestIntervalCountField () {
+      return this.requestIntervalCountField(true);
+    }
+    public APIRequestGetUploadSchedules requestIntervalCountField (boolean value) {
+      this.requestField("interval_count", value);
+      return this;
+    }
+    public APIRequestGetUploadSchedules requestMinuteField () {
+      return this.requestMinuteField(true);
+    }
+    public APIRequestGetUploadSchedules requestMinuteField (boolean value) {
+      this.requestField("minute", value);
+      return this;
+    }
+    public APIRequestGetUploadSchedules requestTimezoneField () {
+      return this.requestTimezoneField(true);
+    }
+    public APIRequestGetUploadSchedules requestTimezoneField (boolean value) {
+      this.requestField("timezone", value);
+      return this;
+    }
+    public APIRequestGetUploadSchedules requestUrlField () {
+      return this.requestUrlField(true);
+    }
+    public APIRequestGetUploadSchedules requestUrlField (boolean value) {
+      this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGetUploadSchedules requestUsernameField () {
+      return this.requestUsernameField(true);
+    }
+    public APIRequestGetUploadSchedules requestUsernameField (boolean value) {
+      this.requestField("username", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreateUploadSchedule extends APIRequest<ProductFeed> {
+
+    ProductFeed lastResponse = null;
+    @Override
+    public ProductFeed getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "upload_schedule",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public ProductFeed parseResponse(String response, String header) throws APIException {
+      return ProductFeed.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public ProductFeed execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ProductFeed execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<ProductFeed> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ProductFeed> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, ProductFeed>() {
+           public ProductFeed apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateUploadSchedule.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateUploadSchedule(String nodeId, APIContext context) {
+      super(context, nodeId, "/upload_schedules", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateUploadSchedule setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUploadSchedule setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateUploadSchedule setUploadSchedule (String uploadSchedule) {
+      this.setParam("upload_schedule", uploadSchedule);
+      return this;
+    }
+
+    public APIRequestCreateUploadSchedule requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateUploadSchedule requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUploadSchedule requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateUploadSchedule requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUploadSchedule requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUploadSchedule requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetUploads extends APIRequest<ProductFeedUpload> {
 
     APINodeList<ProductFeedUpload> lastResponse = null;
@@ -2980,6 +3282,7 @@ public class ProductFeed extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "fbe_external_business_id",
       "password",
       "update_only",
       "url",
@@ -3049,6 +3352,11 @@ public class ProductFeed extends APINode {
 
     public APIRequestCreateUpload setUseVideoEndpoint(boolean useVideoEndpoint) {
       this.useVideoEndpoint = useVideoEndpoint;
+      return this;
+    }
+
+    public APIRequestCreateUpload setFbeExternalBusinessId (String fbeExternalBusinessId) {
+      this.setParam("fbe_external_business_id", fbeExternalBusinessId);
       return this;
     }
 

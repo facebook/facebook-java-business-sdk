@@ -590,10 +590,6 @@ public class Page extends APINode {
     return new APIRequestCreateBlocked(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetBusinessProjects getBusinessProjects() {
-    return new APIRequestGetBusinessProjects(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetCallToActions getCallToActions() {
     return new APIRequestGetCallToActions(this.getPrefixedId().toString(), context);
   }
@@ -652,6 +648,14 @@ public class Page extends APINode {
 
   public APIRequestCreateCustomLabel createCustomLabel() {
     return new APIRequestCreateCustomLabel(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestDeleteCustomUserSettings deleteCustomUserSettings() {
+    return new APIRequestDeleteCustomUserSettings(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateCustomUserSetting createCustomUserSetting() {
+    return new APIRequestCreateCustomUserSetting(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetEvents getEvents() {
@@ -3980,156 +3984,6 @@ public class Page extends APINode {
       return this;
     }
 
-  }
-
-  public static class APIRequestGetBusinessProjects extends APIRequest<BusinessProject> {
-
-    APINodeList<BusinessProject> lastResponse = null;
-    @Override
-    public APINodeList<BusinessProject> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "business",
-    };
-
-    public static final String[] FIELDS = {
-      "business",
-      "created_time",
-      "creator",
-      "id",
-      "name",
-    };
-
-    @Override
-    public APINodeList<BusinessProject> parseResponse(String response, String header) throws APIException {
-      return BusinessProject.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<BusinessProject> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<BusinessProject> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<BusinessProject>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<BusinessProject>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<BusinessProject>>() {
-           public APINodeList<BusinessProject> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetBusinessProjects.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetBusinessProjects(String nodeId, APIContext context) {
-      super(context, nodeId, "/businessprojects", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetBusinessProjects setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBusinessProjects setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetBusinessProjects setBusiness (String business) {
-      this.setParam("business", business);
-      return this;
-    }
-
-    public APIRequestGetBusinessProjects requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetBusinessProjects requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBusinessProjects requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetBusinessProjects requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBusinessProjects requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBusinessProjects requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetBusinessProjects requestBusinessField () {
-      return this.requestBusinessField(true);
-    }
-    public APIRequestGetBusinessProjects requestBusinessField (boolean value) {
-      this.requestField("business", value);
-      return this;
-    }
-    public APIRequestGetBusinessProjects requestCreatedTimeField () {
-      return this.requestCreatedTimeField(true);
-    }
-    public APIRequestGetBusinessProjects requestCreatedTimeField (boolean value) {
-      this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGetBusinessProjects requestCreatorField () {
-      return this.requestCreatorField(true);
-    }
-    public APIRequestGetBusinessProjects requestCreatorField (boolean value) {
-      this.requestField("creator", value);
-      return this;
-    }
-    public APIRequestGetBusinessProjects requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetBusinessProjects requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetBusinessProjects requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetBusinessProjects requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
   }
 
   public static class APIRequestGetCallToActions extends APIRequest<PageCallToAction> {
@@ -7708,6 +7562,246 @@ public class Page extends APINode {
 
     @Override
     public APIRequestCreateCustomLabel requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestDeleteCustomUserSettings extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "params",
+      "psid",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestDeleteCustomUserSettings.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDeleteCustomUserSettings(String nodeId, APIContext context) {
+      super(context, nodeId, "/custom_user_settings", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDeleteCustomUserSettings setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteCustomUserSettings setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDeleteCustomUserSettings setparamParams (List<EnumParams> params) {
+      this.setParam("params", params);
+      return this;
+    }
+    public APIRequestDeleteCustomUserSettings setParams (String params) {
+      this.setParam("params", params);
+      return this;
+    }
+
+    public APIRequestDeleteCustomUserSettings setPsid (String psid) {
+      this.setParam("psid", psid);
+      return this;
+    }
+
+    public APIRequestDeleteCustomUserSettings requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDeleteCustomUserSettings requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteCustomUserSettings requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDeleteCustomUserSettings requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteCustomUserSettings requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteCustomUserSettings requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateCustomUserSetting extends APIRequest<Page> {
+
+    Page lastResponse = null;
+    @Override
+    public Page getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "persistent_menu",
+      "psid",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Page parseResponse(String response, String header) throws APIException {
+      return Page.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Page execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Page execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Page> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Page> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, Page>() {
+           public Page apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateCustomUserSetting.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateCustomUserSetting(String nodeId, APIContext context) {
+      super(context, nodeId, "/custom_user_settings", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateCustomUserSetting setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCustomUserSetting setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateCustomUserSetting setPersistentMenu (List<Object> persistentMenu) {
+      this.setParam("persistent_menu", persistentMenu);
+      return this;
+    }
+    public APIRequestCreateCustomUserSetting setPersistentMenu (String persistentMenu) {
+      this.setParam("persistent_menu", persistentMenu);
+      return this;
+    }
+
+    public APIRequestCreateCustomUserSetting setPsid (String psid) {
+      this.setParam("psid", psid);
+      return this;
+    }
+
+    public APIRequestCreateCustomUserSetting requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateCustomUserSetting requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCustomUserSetting requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateCustomUserSetting requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCustomUserSetting requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCustomUserSetting requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -15057,6 +15151,7 @@ public class Page extends APINode {
       "is_reference_only",
       "live_encoders",
       "live_views",
+      "overlay_url",
       "permalink_url",
       "planned_start_time",
       "seconds_left",
@@ -15286,6 +15381,13 @@ public class Page extends APINode {
     }
     public APIRequestGetLiveVideos requestLiveViewsField (boolean value) {
       this.requestField("live_views", value);
+      return this;
+    }
+    public APIRequestGetLiveVideos requestOverlayUrlField () {
+      return this.requestOverlayUrlField(true);
+    }
+    public APIRequestGetLiveVideos requestOverlayUrlField (boolean value) {
+      this.requestField("overlay_url", value);
       return this;
     }
     public APIRequestGetLiveVideos requestPermalinkUrlField () {
@@ -20783,6 +20885,7 @@ public class Page extends APINode {
       "ios_bundle_id",
       "is_explicit_location",
       "is_explicit_place",
+      "is_visual_search",
       "location_source_id",
       "manual_privacy",
       "message",
@@ -21028,6 +21131,15 @@ public class Page extends APINode {
     }
     public APIRequestCreatePhoto setIsExplicitPlace (String isExplicitPlace) {
       this.setParam("is_explicit_place", isExplicitPlace);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setIsVisualSearch (Boolean isVisualSearch) {
+      this.setParam("is_visual_search", isVisualSearch);
+      return this;
+    }
+    public APIRequestCreatePhoto setIsVisualSearch (String isVisualSearch) {
+      this.setParam("is_visual_search", isVisualSearch);
       return this;
     }
 
@@ -23788,6 +23900,7 @@ public class Page extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
+      "is_guest_user",
       "is_shared_login",
       "is_verified",
       "languages",
@@ -24091,6 +24204,13 @@ public class Page extends APINode {
     }
     public APIRequestGetRoles requestIsFamedeeplinkinguserField (boolean value) {
       this.requestField("is_famedeeplinkinguser", value);
+      return this;
+    }
+    public APIRequestGetRoles requestIsGuestUserField () {
+      return this.requestIsGuestUserField(true);
+    }
+    public APIRequestGetRoles requestIsGuestUserField (boolean value) {
+      this.requestField("is_guest_user", value);
       return this;
     }
     public APIRequestGetRoles requestIsSharedLoginField () {
@@ -34437,6 +34557,8 @@ public class Page extends APINode {
       VALUE_LIVE_VIDEOS("live_videos"),
       @SerializedName("location")
       VALUE_LOCATION("location"),
+      @SerializedName("mcom_invoice_change")
+      VALUE_MCOM_INVOICE_CHANGE("mcom_invoice_change"),
       @SerializedName("members")
       VALUE_MEMBERS("members"),
       @SerializedName("mention")
@@ -34689,6 +34811,23 @@ public class Page extends APINode {
       private String value;
 
       private EnumMatchContentType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumParams {
+      @SerializedName("PERSISTENT_MENU")
+      VALUE_PERSISTENT_MENU("PERSISTENT_MENU"),
+      ;
+
+      private String value;
+
+      private EnumParams(String value) {
         this.value = value;
       }
 

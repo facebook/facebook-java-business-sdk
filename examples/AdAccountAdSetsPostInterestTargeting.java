@@ -25,7 +25,7 @@
 import java.io.File;
 import java.util.Arrays;
 
-public class AdAccountAdSetsPostBehaviorTargeting {
+public class AdAccountAdSetsPostInterestTargeting {
   public static void main (String args[]) throws APIException {
 
     String access_token = "<ACCESS_TOKEN>";
@@ -35,29 +35,45 @@ public class AdAccountAdSetsPostBehaviorTargeting {
     APIContext context = new APIContext(access_token).enableDebug(true);
 
     new AdAccount(id, context).createAdSet()
-      .setName("My AdSet")
-      .setOptimizationGoal(AdSet.EnumOptimizationGoal.VALUE_REACH)
+      .setName("My First AdSet")
+      .setDailyBudget(10000L)
+      .setBidAmount(300L)
       .setBillingEvent(AdSet.EnumBillingEvent.VALUE_IMPRESSIONS)
-      .setBidAmount(2L)
-      .setDailyBudget(1000L)
-      .setCampaignId("<adCampaignConversionsID>")
+      .setOptimizationGoal(AdSet.EnumOptimizationGoal.VALUE_REACH)
+      .setCampaignId("<adCampaignLinkClicksID>")
+      .setPromotedObject("{\"page_id\":\"<pageID>\"}")
       .setTargeting(
           new Targeting()
-            .setFieldBehaviors(Arrays.asList(
-              new IDName()
-                .setFieldId(6007101597783L)
-                .setFieldName("Business Travelers")
-            , 
-              new IDName()
-                .setFieldId(6004386044572L)
-                .setFieldName("Android Owners (All)")
-            ))
+            .setFieldAgeMax(24L)
+            .setFieldAgeMin(20L)
+            .setFieldDevicePlatforms(Arrays.asList(Targeting.EnumDevicePlatforms.VALUE_MOBILE))
             .setFieldFacebookPositions(Arrays.asList("feed"))
+            .setFieldFlexibleSpec(Arrays.asList(
+              new FlexibleTargeting()
+                .setFieldInterests(Arrays.asList(
+                  new IDName()
+                    .setFieldId("<adsInterestID>")
+                    .setFieldName("<adsInterestName>")
+                ))
+            ))
+            .setFieldGenders(Arrays.asList(1L))
             .setFieldGeoLocations(
               new TargetingGeoLocation()
+                .setFieldCities(Arrays.asList(
+                  new TargetingGeoLocationCity()
+                    .setFieldDistanceUnit("mile")
+                    .setFieldKey(777934L)
+                    .setFieldRadius(10L)
+                ))
                 .setFieldCountries(Arrays.asList("US"))
+                .setFieldRegions(Arrays.asList(
+                  new TargetingGeoLocationRegion()
+                    .setFieldKey("4081")
+                ))
             )
+            .setFieldPublisherPlatforms(Arrays.asList("facebook", "audience_network"))
         )
+      .setStatus(AdSet.EnumStatus.VALUE_PAUSED)
       .execute();
 
   }

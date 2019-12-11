@@ -610,10 +610,6 @@ public class AdAccount extends APINode {
     return new APIRequestGetBroadTargetingCategories(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetBusinessProjects getBusinessProjects() {
-    return new APIRequestGetBusinessProjects(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestDeleteCampaigns deleteCampaigns() {
     return new APIRequestDeleteCampaigns(this.getPrefixedId().toString(), context);
   }
@@ -15131,156 +15127,6 @@ public class AdAccount extends APINode {
     }
   }
 
-  public static class APIRequestGetBusinessProjects extends APIRequest<BusinessProject> {
-
-    APINodeList<BusinessProject> lastResponse = null;
-    @Override
-    public APINodeList<BusinessProject> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "business",
-    };
-
-    public static final String[] FIELDS = {
-      "business",
-      "created_time",
-      "creator",
-      "id",
-      "name",
-    };
-
-    @Override
-    public APINodeList<BusinessProject> parseResponse(String response, String header) throws APIException {
-      return BusinessProject.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<BusinessProject> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<BusinessProject> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<BusinessProject>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<BusinessProject>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<BusinessProject>>() {
-           public APINodeList<BusinessProject> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetBusinessProjects.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetBusinessProjects(String nodeId, APIContext context) {
-      super(context, nodeId, "/businessprojects", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetBusinessProjects setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBusinessProjects setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetBusinessProjects setBusiness (String business) {
-      this.setParam("business", business);
-      return this;
-    }
-
-    public APIRequestGetBusinessProjects requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetBusinessProjects requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBusinessProjects requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetBusinessProjects requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBusinessProjects requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBusinessProjects requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetBusinessProjects requestBusinessField () {
-      return this.requestBusinessField(true);
-    }
-    public APIRequestGetBusinessProjects requestBusinessField (boolean value) {
-      this.requestField("business", value);
-      return this;
-    }
-    public APIRequestGetBusinessProjects requestCreatedTimeField () {
-      return this.requestCreatedTimeField(true);
-    }
-    public APIRequestGetBusinessProjects requestCreatedTimeField (boolean value) {
-      this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGetBusinessProjects requestCreatorField () {
-      return this.requestCreatorField(true);
-    }
-    public APIRequestGetBusinessProjects requestCreatorField (boolean value) {
-      this.requestField("creator", value);
-      return this;
-    }
-    public APIRequestGetBusinessProjects requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetBusinessProjects requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetBusinessProjects requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetBusinessProjects requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-  }
-
   public static class APIRequestDeleteCampaigns extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -23022,7 +22868,6 @@ public class AdAccount extends APINode {
       "external_minimum_impression",
       "external_minimum_reach",
       "external_reach",
-      "external_values_breakdown",
       "feed_ratio_0000",
       "frequency_cap",
       "frequency_distribution",
@@ -23376,13 +23221,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetReachFrequencyPredictions requestExternalReachField (boolean value) {
       this.requestField("external_reach", value);
-      return this;
-    }
-    public APIRequestGetReachFrequencyPredictions requestExternalValuesBreakdownField () {
-      return this.requestExternalValuesBreakdownField(true);
-    }
-    public APIRequestGetReachFrequencyPredictions requestExternalValuesBreakdownField (boolean value) {
-      this.requestField("external_values_breakdown", value);
       return this;
     }
     public APIRequestGetReachFrequencyPredictions requestFeedRatio0000Field () {

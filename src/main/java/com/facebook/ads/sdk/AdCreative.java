@@ -2512,6 +2512,8 @@ public class AdCreative extends APINode {
       VALUE_PHOTO("PHOTO"),
       @SerializedName("POST_DELETED")
       VALUE_POST_DELETED("POST_DELETED"),
+      @SerializedName("PRIVACY_CHECK_FAIL")
+      VALUE_PRIVACY_CHECK_FAIL("PRIVACY_CHECK_FAIL"),
       @SerializedName("SHARE")
       VALUE_SHARE("SHARE"),
       @SerializedName("STATUS")

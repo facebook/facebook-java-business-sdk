@@ -37,8 +37,8 @@ public class AdAccountAdSetsPostOptimizePostEngagement {
     new AdAccount(id, context).createAdSet()
       .setName("My First Adset")
       .setLifetimeBudget(20000L)
-      .setStartTime("2019-08-07T02:19:37-0700")
-      .setEndTime("2019-08-17T02:19:37-0700")
+      .setStartTime("2019-12-05T23:43:27-0800")
+      .setEndTime("2019-12-15T23:43:27-0800")
       .setCampaignId("<adCampaignLinkClicksID>")
       .setBidAmount(500L)
       .setBillingEvent(AdSet.EnumBillingEvent.VALUE_IMPRESSIONS)
@@ -53,6 +53,7 @@ public class AdAccountAdSetsPostOptimizePostEngagement {
                 .setFieldName("All travelers")
             ))
             .setFieldDevicePlatforms(Arrays.asList(Targeting.EnumDevicePlatforms.VALUE_DESKTOP))
+            .setFieldFacebookPositions(Arrays.asList("feed"))
             .setFieldGenders(Arrays.asList(1L))
             .setFieldGeoLocations(
               new TargetingGeoLocation()

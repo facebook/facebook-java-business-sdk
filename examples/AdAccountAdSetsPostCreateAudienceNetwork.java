@@ -44,6 +44,7 @@ public class AdAccountAdSetsPostCreateAudienceNetwork {
       .setTargeting(
           new Targeting()
             .setFieldDevicePlatforms(Arrays.asList(Targeting.EnumDevicePlatforms.VALUE_MOBILE))
+            .setFieldFacebookPositions(Arrays.asList("feed"))
             .setFieldGeoLocations(
               new TargetingGeoLocation()
                 .setFieldCountries(Arrays.asList("US"))

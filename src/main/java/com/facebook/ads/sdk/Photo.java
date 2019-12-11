@@ -3671,7 +3671,6 @@ public class Photo extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "pid",
     };
 
     public static final String[] FIELDS = {
@@ -3729,11 +3728,6 @@ public class Photo extends APINode {
       return this;
     }
 
-
-    public APIRequestDelete setPid (String pid) {
-      this.setParam("pid", pid);
-      return this;
-    }
 
     public APIRequestDelete requestAllFields () {
       return this.requestAllFields(true);

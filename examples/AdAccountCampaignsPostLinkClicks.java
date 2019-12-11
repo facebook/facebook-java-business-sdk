@@ -35,6 +35,7 @@ public class AdAccountCampaignsPostLinkClicks {
     APIContext context = new APIContext(access_token).enableDebug(true);
 
     new AdAccount(id, context).createCampaign()
+      .setSpecialAdCategory(Campaign.EnumSpecialAdCategory.VALUE_NONE)
       .setName("My campaign")
       .setObjective(Campaign.EnumObjective.VALUE_LINK_CLICKS)
       .setStatus(Campaign.EnumStatus.VALUE_PAUSED)

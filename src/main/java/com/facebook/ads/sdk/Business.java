@@ -370,20 +370,16 @@ public class Business extends APINode {
     return new APIRequestGetBusinessUnits(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateBusinessUnit createBusinessUnit() {
+    return new APIRequestCreateBusinessUnit(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetBusinessUsers getBusinessUsers() {
     return new APIRequestGetBusinessUsers(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateBusinessUser createBusinessUser() {
     return new APIRequestCreateBusinessUser(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetBusinessProjects getBusinessProjects() {
-    return new APIRequestGetBusinessProjects(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateBusinessProject createBusinessProject() {
-    return new APIRequestCreateBusinessProject(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateClaimCustomConversion createClaimCustomConversion() {
@@ -3772,6 +3768,120 @@ public class Business extends APINode {
     }
   }
 
+  public static class APIRequestCreateBusinessUnit extends APIRequest<BusinessUnit> {
+
+    BusinessUnit lastResponse = null;
+    @Override
+    public BusinessUnit getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "business_units",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public BusinessUnit parseResponse(String response, String header) throws APIException {
+      return BusinessUnit.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public BusinessUnit execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public BusinessUnit execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<BusinessUnit> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<BusinessUnit> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, BusinessUnit>() {
+           public BusinessUnit apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateBusinessUnit.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateBusinessUnit(String nodeId, APIContext context) {
+      super(context, nodeId, "/business_units", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateBusinessUnit setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBusinessUnit setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateBusinessUnit setBusinessUnits (List<Object> businessUnits) {
+      this.setParam("business_units", businessUnits);
+      return this;
+    }
+    public APIRequestCreateBusinessUnit setBusinessUnits (String businessUnits) {
+      this.setParam("business_units", businessUnits);
+      return this;
+    }
+
+    public APIRequestCreateBusinessUnit requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateBusinessUnit requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBusinessUnit requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateBusinessUnit requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBusinessUnit requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBusinessUnit requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetBusinessUsers extends APIRequest<BusinessUser> {
 
     APINodeList<BusinessUser> lastResponse = null;
@@ -4094,260 +4204,6 @@ public class Business extends APINode {
 
     @Override
     public APIRequestCreateBusinessUser requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestGetBusinessProjects extends APIRequest<BusinessProject> {
-
-    APINodeList<BusinessProject> lastResponse = null;
-    @Override
-    public APINodeList<BusinessProject> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "business",
-      "created_time",
-      "creator",
-      "id",
-      "name",
-    };
-
-    @Override
-    public APINodeList<BusinessProject> parseResponse(String response, String header) throws APIException {
-      return BusinessProject.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<BusinessProject> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<BusinessProject> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<BusinessProject>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<BusinessProject>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<BusinessProject>>() {
-           public APINodeList<BusinessProject> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetBusinessProjects.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetBusinessProjects(String nodeId, APIContext context) {
-      super(context, nodeId, "/businessprojects", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetBusinessProjects setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBusinessProjects setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetBusinessProjects requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetBusinessProjects requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBusinessProjects requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetBusinessProjects requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBusinessProjects requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBusinessProjects requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetBusinessProjects requestBusinessField () {
-      return this.requestBusinessField(true);
-    }
-    public APIRequestGetBusinessProjects requestBusinessField (boolean value) {
-      this.requestField("business", value);
-      return this;
-    }
-    public APIRequestGetBusinessProjects requestCreatedTimeField () {
-      return this.requestCreatedTimeField(true);
-    }
-    public APIRequestGetBusinessProjects requestCreatedTimeField (boolean value) {
-      this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGetBusinessProjects requestCreatorField () {
-      return this.requestCreatorField(true);
-    }
-    public APIRequestGetBusinessProjects requestCreatorField (boolean value) {
-      this.requestField("creator", value);
-      return this;
-    }
-    public APIRequestGetBusinessProjects requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetBusinessProjects requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetBusinessProjects requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetBusinessProjects requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestCreateBusinessProject extends APIRequest<BusinessProject> {
-
-    BusinessProject lastResponse = null;
-    @Override
-    public BusinessProject getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "name",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public BusinessProject parseResponse(String response, String header) throws APIException {
-      return BusinessProject.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public BusinessProject execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public BusinessProject execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<BusinessProject> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<BusinessProject> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, BusinessProject>() {
-           public BusinessProject apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateBusinessProject.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateBusinessProject(String nodeId, APIContext context) {
-      super(context, nodeId, "/businessprojects", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateBusinessProject setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateBusinessProject setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateBusinessProject setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateBusinessProject requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateBusinessProject requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateBusinessProject requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateBusinessProject requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateBusinessProject requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateBusinessProject requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

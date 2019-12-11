@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 
 ## Unreleased
+
+## v5.0.3
+
   - Added function `getHeader()` in APIException class which provides header information
   - Made `omit_response_on_success` configurable for addToBatch method in APIRequest
 ## v5.0.1
@@ -35,3 +38,4 @@ All notable changes to this project will be documented in this file.
 ## v3.3.0
 ### Changed
 - Graph API call upgrade to [v3.3](https://developers.facebook.com/docs/graph-api/changelog/version3.3)
+

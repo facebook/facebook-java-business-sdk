@@ -101,6 +101,8 @@ public class User extends APINode {
   private List<String> mInterestedIn = null;
   @SerializedName("is_famedeeplinkinguser")
   private Boolean mIsFamedeeplinkinguser = null;
+  @SerializedName("is_guest_user")
+  private Boolean mIsGuestUser = null;
   @SerializedName("is_shared_login")
   private Boolean mIsSharedLogin = null;
   @SerializedName("is_verified")
@@ -460,6 +462,10 @@ public class User extends APINode {
     return new APIRequestGetBusinesses(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateBusiness createBusiness() {
+    return new APIRequestCreateBusiness(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetConversations getConversations() {
     return new APIRequestGetConversations(this.getPrefixedId().toString(), context);
   }
@@ -754,6 +760,10 @@ public class User extends APINode {
 
   public Boolean getFieldIsFamedeeplinkinguser() {
     return mIsFamedeeplinkinguser;
+  }
+
+  public Boolean getFieldIsGuestUser() {
+    return mIsGuestUser;
   }
 
   public Boolean getFieldIsSharedLogin() {
@@ -8564,6 +8574,184 @@ public class User extends APINode {
     }
   }
 
+  public static class APIRequestCreateBusiness extends APIRequest<Business> {
+
+    Business lastResponse = null;
+    @Override
+    public Business getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "email",
+      "name",
+      "primary_page",
+      "sales_rep_email",
+      "survey_business_type",
+      "survey_num_assets",
+      "survey_num_people",
+      "timezone_id",
+      "vertical",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Business parseResponse(String response, String header) throws APIException {
+      return Business.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Business execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Business execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Business> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Business> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, Business>() {
+           public Business apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateBusiness.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateBusiness(String nodeId, APIContext context) {
+      super(context, nodeId, "/businesses", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateBusiness setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBusiness setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateBusiness setEmail (String email) {
+      this.setParam("email", email);
+      return this;
+    }
+
+    public APIRequestCreateBusiness setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateBusiness setPrimaryPage (String primaryPage) {
+      this.setParam("primary_page", primaryPage);
+      return this;
+    }
+
+    public APIRequestCreateBusiness setSalesRepEmail (String salesRepEmail) {
+      this.setParam("sales_rep_email", salesRepEmail);
+      return this;
+    }
+
+    public APIRequestCreateBusiness setSurveyBusinessType (Business.EnumSurveyBusinessType surveyBusinessType) {
+      this.setParam("survey_business_type", surveyBusinessType);
+      return this;
+    }
+    public APIRequestCreateBusiness setSurveyBusinessType (String surveyBusinessType) {
+      this.setParam("survey_business_type", surveyBusinessType);
+      return this;
+    }
+
+    public APIRequestCreateBusiness setSurveyNumAssets (Long surveyNumAssets) {
+      this.setParam("survey_num_assets", surveyNumAssets);
+      return this;
+    }
+    public APIRequestCreateBusiness setSurveyNumAssets (String surveyNumAssets) {
+      this.setParam("survey_num_assets", surveyNumAssets);
+      return this;
+    }
+
+    public APIRequestCreateBusiness setSurveyNumPeople (Long surveyNumPeople) {
+      this.setParam("survey_num_people", surveyNumPeople);
+      return this;
+    }
+    public APIRequestCreateBusiness setSurveyNumPeople (String surveyNumPeople) {
+      this.setParam("survey_num_people", surveyNumPeople);
+      return this;
+    }
+
+    public APIRequestCreateBusiness setTimezoneId (Long timezoneId) {
+      this.setParam("timezone_id", timezoneId);
+      return this;
+    }
+    public APIRequestCreateBusiness setTimezoneId (String timezoneId) {
+      this.setParam("timezone_id", timezoneId);
+      return this;
+    }
+
+    public APIRequestCreateBusiness setVertical (Business.EnumVertical vertical) {
+      this.setParam("vertical", vertical);
+      return this;
+    }
+    public APIRequestCreateBusiness setVertical (String vertical) {
+      this.setParam("vertical", vertical);
+      return this;
+    }
+
+    public APIRequestCreateBusiness requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateBusiness requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBusiness requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateBusiness requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBusiness requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBusiness requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetConversations extends APIRequest<UnifiedThread> {
 
     APINodeList<UnifiedThread> lastResponse = null;
@@ -9456,6 +9644,7 @@ public class User extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
+      "is_guest_user",
       "is_shared_login",
       "is_verified",
       "languages",
@@ -9741,6 +9930,13 @@ public class User extends APINode {
     }
     public APIRequestGetFamily requestIsFamedeeplinkinguserField (boolean value) {
       this.requestField("is_famedeeplinkinguser", value);
+      return this;
+    }
+    public APIRequestGetFamily requestIsGuestUserField () {
+      return this.requestIsGuestUserField(true);
+    }
+    public APIRequestGetFamily requestIsGuestUserField (boolean value) {
+      this.requestField("is_guest_user", value);
       return this;
     }
     public APIRequestGetFamily requestIsSharedLoginField () {
@@ -11177,6 +11373,7 @@ public class User extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
+      "is_guest_user",
       "is_shared_login",
       "is_verified",
       "languages",
@@ -11471,6 +11668,13 @@ public class User extends APINode {
     }
     public APIRequestGetFriends requestIsFamedeeplinkinguserField (boolean value) {
       this.requestField("is_famedeeplinkinguser", value);
+      return this;
+    }
+    public APIRequestGetFriends requestIsGuestUserField () {
+      return this.requestIsGuestUserField(true);
+    }
+    public APIRequestGetFriends requestIsGuestUserField (boolean value) {
+      this.requestField("is_guest_user", value);
       return this;
     }
     public APIRequestGetFriends requestIsSharedLoginField () {
@@ -16469,6 +16673,7 @@ public class User extends APINode {
       "is_reference_only",
       "live_encoders",
       "live_views",
+      "overlay_url",
       "permalink_url",
       "planned_start_time",
       "seconds_left",
@@ -16698,6 +16903,13 @@ public class User extends APINode {
     }
     public APIRequestGetLiveVideos requestLiveViewsField (boolean value) {
       this.requestField("live_views", value);
+      return this;
+    }
+    public APIRequestGetLiveVideos requestOverlayUrlField () {
+      return this.requestOverlayUrlField(true);
+    }
+    public APIRequestGetLiveVideos requestOverlayUrlField (boolean value) {
+      this.requestField("overlay_url", value);
       return this;
     }
     public APIRequestGetLiveVideos requestPermalinkUrlField () {
@@ -21025,6 +21237,7 @@ public class User extends APINode {
       "ios_bundle_id",
       "is_explicit_location",
       "is_explicit_place",
+      "is_visual_search",
       "manual_privacy",
       "message",
       "name",
@@ -21267,6 +21480,15 @@ public class User extends APINode {
     }
     public APIRequestCreatePhoto setIsExplicitPlace (String isExplicitPlace) {
       this.setParam("is_explicit_place", isExplicitPlace);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setIsVisualSearch (Boolean isVisualSearch) {
+      this.setParam("is_visual_search", isVisualSearch);
+      return this;
+    }
+    public APIRequestCreatePhoto setIsVisualSearch (String isVisualSearch) {
+      this.setParam("is_visual_search", isVisualSearch);
       return this;
     }
 
@@ -26470,6 +26692,7 @@ public class User extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
+      "is_guest_user",
       "is_shared_login",
       "is_verified",
       "languages",
@@ -26755,6 +26978,13 @@ public class User extends APINode {
     }
     public APIRequestGet requestIsFamedeeplinkinguserField (boolean value) {
       this.requestField("is_famedeeplinkinguser", value);
+      return this;
+    }
+    public APIRequestGet requestIsGuestUserField () {
+      return this.requestIsGuestUserField(true);
+    }
+    public APIRequestGet requestIsGuestUserField (boolean value) {
+      this.requestField("is_guest_user", value);
       return this;
     }
     public APIRequestGet requestIsSharedLoginField () {
@@ -27312,6 +27542,8 @@ public class User extends APINode {
       VALUE_MYSPACE("MYSPACE"),
       @SerializedName("NATEON")
       VALUE_NATEON("NATEON"),
+      @SerializedName("OCULUS")
+      VALUE_OCULUS("OCULUS"),
       @SerializedName("OK")
       VALUE_OK("OK"),
       @SerializedName("ORKUT")
@@ -27607,6 +27839,7 @@ public class User extends APINode {
     this.mInstalled = instance.mInstalled;
     this.mInterestedIn = instance.mInterestedIn;
     this.mIsFamedeeplinkinguser = instance.mIsFamedeeplinkinguser;
+    this.mIsGuestUser = instance.mIsGuestUser;
     this.mIsSharedLogin = instance.mIsSharedLogin;
     this.mIsVerified = instance.mIsVerified;
     this.mLanguages = instance.mLanguages;

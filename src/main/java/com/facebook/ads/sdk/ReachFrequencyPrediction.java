@@ -115,8 +115,6 @@ public class ReachFrequencyPrediction extends APINode {
   private Long mExternalMinimumReach = null;
   @SerializedName("external_reach")
   private Long mExternalReach = null;
-  @SerializedName("external_values_breakdown")
-  private String mExternalValuesBreakdown = null;
   @SerializedName("feed_ratio_0000")
   private Long mFeedRatio0000 = null;
   @SerializedName("frequency_cap")
@@ -559,10 +557,6 @@ public class ReachFrequencyPrediction extends APINode {
     return mExternalReach;
   }
 
-  public String getFieldExternalValuesBreakdown() {
-    return mExternalValuesBreakdown;
-  }
-
   public Long getFieldFeedRatio0000() {
     return mFeedRatio0000;
   }
@@ -822,7 +816,6 @@ public class ReachFrequencyPrediction extends APINode {
       "external_minimum_impression",
       "external_minimum_reach",
       "external_reach",
-      "external_values_breakdown",
       "feed_ratio_0000",
       "frequency_cap",
       "frequency_distribution",
@@ -1176,13 +1169,6 @@ public class ReachFrequencyPrediction extends APINode {
     }
     public APIRequestGet requestExternalReachField (boolean value) {
       this.requestField("external_reach", value);
-      return this;
-    }
-    public APIRequestGet requestExternalValuesBreakdownField () {
-      return this.requestExternalValuesBreakdownField(true);
-    }
-    public APIRequestGet requestExternalValuesBreakdownField (boolean value) {
-      this.requestField("external_values_breakdown", value);
       return this;
     }
     public APIRequestGet requestFeedRatio0000Field () {
@@ -1703,7 +1689,6 @@ public class ReachFrequencyPrediction extends APINode {
     this.mExternalMinimumImpression = instance.mExternalMinimumImpression;
     this.mExternalMinimumReach = instance.mExternalMinimumReach;
     this.mExternalReach = instance.mExternalReach;
-    this.mExternalValuesBreakdown = instance.mExternalValuesBreakdown;
     this.mFeedRatio0000 = instance.mFeedRatio0000;
     this.mFrequencyCap = instance.mFrequencyCap;
     this.mFrequencyDistribution = instance.mFrequencyDistribution;

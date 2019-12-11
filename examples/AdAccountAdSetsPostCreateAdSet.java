@@ -37,8 +37,8 @@ public class AdAccountAdSetsPostCreateAdSet {
     new AdAccount(id, context).createAdSet()
       .setName("My First AdSet")
       .setLifetimeBudget(20000L)
-      .setStartTime("2019-08-14T02:17:24-0700")
-      .setEndTime("2019-08-21T02:17:24-0700")
+      .setStartTime("2019-12-12T23:41:41-0800")
+      .setEndTime("2019-12-19T23:41:41-0800")
       .setCampaignId("<adCampaignLinkClicksID>")
       .setBidAmount(500L)
       .setBillingEvent(AdSet.EnumBillingEvent.VALUE_IMPRESSIONS)
@@ -52,6 +52,7 @@ public class AdAccountAdSetsPostCreateAdSet {
                 .setFieldId(6002714895372L)
                 .setFieldName("All travelers")
             ))
+            .setFieldFacebookPositions(Arrays.asList("feed"))
             .setFieldGenders(Arrays.asList(1L))
             .setFieldGeoLocations(
               new TargetingGeoLocation()

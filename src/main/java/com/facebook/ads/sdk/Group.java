@@ -3134,6 +3134,7 @@ public class Group extends APINode {
       "is_reference_only",
       "live_encoders",
       "live_views",
+      "overlay_url",
       "permalink_url",
       "planned_start_time",
       "seconds_left",
@@ -3363,6 +3364,13 @@ public class Group extends APINode {
     }
     public APIRequestGetLiveVideos requestLiveViewsField (boolean value) {
       this.requestField("live_views", value);
+      return this;
+    }
+    public APIRequestGetLiveVideos requestOverlayUrlField () {
+      return this.requestOverlayUrlField(true);
+    }
+    public APIRequestGetLiveVideos requestOverlayUrlField (boolean value) {
+      this.requestField("overlay_url", value);
       return this;
     }
     public APIRequestGetLiveVideos requestPermalinkUrlField () {
@@ -4377,6 +4385,7 @@ public class Group extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
+      "is_guest_user",
       "is_shared_login",
       "is_verified",
       "languages",
@@ -4664,6 +4673,13 @@ public class Group extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
+    public APIRequestGetOptedInMembers requestIsGuestUserField () {
+      return this.requestIsGuestUserField(true);
+    }
+    public APIRequestGetOptedInMembers requestIsGuestUserField (boolean value) {
+      this.requestField("is_guest_user", value);
+      return this;
+    }
     public APIRequestGetOptedInMembers requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -4940,6 +4956,7 @@ public class Group extends APINode {
       "ios_bundle_id",
       "is_explicit_location",
       "is_explicit_place",
+      "is_visual_search",
       "manual_privacy",
       "message",
       "name",
@@ -5182,6 +5199,15 @@ public class Group extends APINode {
     }
     public APIRequestCreatePhoto setIsExplicitPlace (String isExplicitPlace) {
       this.setParam("is_explicit_place", isExplicitPlace);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setIsVisualSearch (Boolean isVisualSearch) {
+      this.setParam("is_visual_search", isVisualSearch);
+      return this;
+    }
+    public APIRequestCreatePhoto setIsVisualSearch (String isVisualSearch) {
+      this.setParam("is_visual_search", isVisualSearch);
       return this;
     }
 
@@ -7311,12 +7337,12 @@ public class Group extends APINode {
   }
 
   public static enum EnumPostPermissions {
-      @SerializedName("ADMIN_ONLY")
-      VALUE_ADMIN_ONLY("ADMIN_ONLY"),
-      @SerializedName("ANYONE")
-      VALUE_ANYONE("ANYONE"),
-      @SerializedName("NONE")
-      VALUE_NONE("NONE"),
+      @SerializedName("0")
+      VALUE_0("0"),
+      @SerializedName("1")
+      VALUE_1("1"),
+      @SerializedName("2")
+      VALUE_2("2"),
       ;
 
       private String value;

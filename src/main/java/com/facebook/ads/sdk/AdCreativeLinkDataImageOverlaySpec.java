@@ -399,10 +399,14 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
       VALUE_DISCLAIMER("disclaimer"),
       @SerializedName("from_price")
       VALUE_FROM_PRICE("from_price"),
+      @SerializedName("guest_rating")
+      VALUE_GUEST_RATING("guest_rating"),
       @SerializedName("percentage_off")
       VALUE_PERCENTAGE_OFF("percentage_off"),
       @SerializedName("price")
       VALUE_PRICE("price"),
+      @SerializedName("star_rating")
+      VALUE_STAR_RATING("star_rating"),
       @SerializedName("strikethrough_price")
       VALUE_STRIKETHROUGH_PRICE("strikethrough_price"),
       ;

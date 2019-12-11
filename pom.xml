@@ -4,7 +4,7 @@
   <groupId>com.facebook.business.sdk</groupId>
   <artifactId>facebook-java-business-sdk</artifactId>
   <packaging>jar</packaging>
-  <version>5.0.2</version>
+  <version>5.0.3</version>
   <name>${project.groupId}:${project.artifactId}</name>
   <description>Facebook Business Solutions SDK for Java</description>
   <url>https://developers.facebook.com/docs/marketing-api/sdks</url>

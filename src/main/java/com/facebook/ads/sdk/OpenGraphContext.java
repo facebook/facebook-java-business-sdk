@@ -323,6 +323,7 @@ public class OpenGraphContext extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
+      "is_guest_user",
       "is_shared_login",
       "is_verified",
       "languages",
@@ -610,6 +611,13 @@ public class OpenGraphContext extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
+    public APIRequestGetFriendsTaggedAt requestIsGuestUserField () {
+      return this.requestIsGuestUserField(true);
+    }
+    public APIRequestGetFriendsTaggedAt requestIsGuestUserField (boolean value) {
+      this.requestField("is_guest_user", value);
+      return this;
+    }
     public APIRequestGetFriendsTaggedAt requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -891,6 +899,7 @@ public class OpenGraphContext extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
+      "is_guest_user",
       "is_shared_login",
       "is_verified",
       "languages",
@@ -1178,6 +1187,13 @@ public class OpenGraphContext extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
+    public APIRequestGetMusicListenFriends requestIsGuestUserField () {
+      return this.requestIsGuestUserField(true);
+    }
+    public APIRequestGetMusicListenFriends requestIsGuestUserField (boolean value) {
+      this.requestField("is_guest_user", value);
+      return this;
+    }
     public APIRequestGetMusicListenFriends requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -1459,6 +1475,7 @@ public class OpenGraphContext extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
+      "is_guest_user",
       "is_shared_login",
       "is_verified",
       "languages",
@@ -1744,6 +1761,13 @@ public class OpenGraphContext extends APINode {
     }
     public APIRequestGetVideoWatchFriends requestIsFamedeeplinkinguserField (boolean value) {
       this.requestField("is_famedeeplinkinguser", value);
+      return this;
+    }
+    public APIRequestGetVideoWatchFriends requestIsGuestUserField () {
+      return this.requestIsGuestUserField(true);
+    }
+    public APIRequestGetVideoWatchFriends requestIsGuestUserField (boolean value) {
+      this.requestField("is_guest_user", value);
       return this;
     }
     public APIRequestGetVideoWatchFriends requestIsSharedLoginField () {

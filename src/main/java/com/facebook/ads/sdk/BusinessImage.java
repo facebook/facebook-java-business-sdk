@@ -902,6 +902,8 @@ public class BusinessImage extends APINode {
   }
 
   public static enum EnumBreakdowns {
+      @SerializedName("ad_id")
+      VALUE_AD_ID("ad_id"),
       @SerializedName("age")
       VALUE_AGE("age"),
       @SerializedName("country")

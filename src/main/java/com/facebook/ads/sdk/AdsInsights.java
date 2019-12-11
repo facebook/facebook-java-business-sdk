@@ -401,8 +401,6 @@ public class AdsInsights extends APINode {
   private String mQualityScoreEctr = null;
   @SerializedName("quality_score_ecvr")
   private String mQualityScoreEcvr = null;
-  @SerializedName("quality_score_enfbr")
-  private String mQualityScoreEnfbr = null;
   @SerializedName("quality_score_organic")
   private String mQualityScoreOrganic = null;
   @SerializedName("reach")
@@ -2485,15 +2483,6 @@ public class AdsInsights extends APINode {
     return this;
   }
 
-  public String getFieldQualityScoreEnfbr() {
-    return mQualityScoreEnfbr;
-  }
-
-  public AdsInsights setFieldQualityScoreEnfbr(String value) {
-    this.mQualityScoreEnfbr = value;
-    return this;
-  }
-
   public String getFieldQualityScoreOrganic() {
     return mQualityScoreOrganic;
   }
@@ -3605,7 +3594,6 @@ public class AdsInsights extends APINode {
     this.mQualityRanking = instance.mQualityRanking;
     this.mQualityScoreEctr = instance.mQualityScoreEctr;
     this.mQualityScoreEcvr = instance.mQualityScoreEcvr;
-    this.mQualityScoreEnfbr = instance.mQualityScoreEnfbr;
     this.mQualityScoreOrganic = instance.mQualityScoreOrganic;
     this.mReach = instance.mReach;
     this.mRecurringSubscriptionPaymentActions = instance.mRecurringSubscriptionPaymentActions;

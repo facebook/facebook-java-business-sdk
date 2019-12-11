@@ -420,6 +420,7 @@ public class PartnerStudy extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
+      "is_guest_user",
       "is_shared_login",
       "is_verified",
       "languages",
@@ -705,6 +706,13 @@ public class PartnerStudy extends APINode {
     }
     public APIRequestGetSubmitters requestIsFamedeeplinkinguserField (boolean value) {
       this.requestField("is_famedeeplinkinguser", value);
+      return this;
+    }
+    public APIRequestGetSubmitters requestIsGuestUserField () {
+      return this.requestIsGuestUserField(true);
+    }
+    public APIRequestGetSubmitters requestIsGuestUserField (boolean value) {
+      this.requestField("is_guest_user", value);
       return this;
     }
     public APIRequestGetSubmitters requestIsSharedLoginField () {

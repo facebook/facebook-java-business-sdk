@@ -554,7 +554,6 @@ public class AdReportRun extends APINode {
       "quality_ranking",
       "quality_score_ectr",
       "quality_score_ecvr",
-      "quality_score_enfbr",
       "quality_score_organic",
       "reach",
       "recurring_subscription_payment_actions",
@@ -1912,13 +1911,6 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestQualityScoreEcvrField (boolean value) {
       this.requestField("quality_score_ecvr", value);
-      return this;
-    }
-    public APIRequestGetInsights requestQualityScoreEnfbrField () {
-      return this.requestQualityScoreEnfbrField(true);
-    }
-    public APIRequestGetInsights requestQualityScoreEnfbrField (boolean value) {
-      this.requestField("quality_score_enfbr", value);
       return this;
     }
     public APIRequestGetInsights requestQualityScoreOrganicField () {

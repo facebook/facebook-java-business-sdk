@@ -87,6 +87,8 @@ public class LiveVideo extends APINode {
   private List<LiveEncoder> mLiveEncoders = null;
   @SerializedName("live_views")
   private Long mLiveViews = null;
+  @SerializedName("overlay_url")
+  private String mOverlayUrl = null;
   @SerializedName("permalink_url")
   private String mPermalinkUrl = null;
   @SerializedName("planned_start_time")
@@ -436,6 +438,10 @@ public class LiveVideo extends APINode {
     return mLiveViews;
   }
 
+  public String getFieldOverlayUrl() {
+    return mOverlayUrl;
+  }
+
   public String getFieldPermalinkUrl() {
     return mPermalinkUrl;
   }
@@ -516,6 +522,7 @@ public class LiveVideo extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
+      "is_guest_user",
       "is_shared_login",
       "is_verified",
       "languages",
@@ -810,6 +817,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetBlockedUsers requestIsFamedeeplinkinguserField (boolean value) {
       this.requestField("is_famedeeplinkinguser", value);
+      return this;
+    }
+    public APIRequestGetBlockedUsers requestIsGuestUserField () {
+      return this.requestIsGuestUserField(true);
+    }
+    public APIRequestGetBlockedUsers requestIsGuestUserField (boolean value) {
+      this.requestField("is_guest_user", value);
       return this;
     }
     public APIRequestGetBlockedUsers requestIsSharedLoginField () {
@@ -2626,6 +2640,7 @@ public class LiveVideo extends APINode {
       "is_reference_only",
       "live_encoders",
       "live_views",
+      "overlay_url",
       "permalink_url",
       "planned_start_time",
       "seconds_left",
@@ -2837,6 +2852,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetCrosspostedBroadcasts requestLiveViewsField (boolean value) {
       this.requestField("live_views", value);
+      return this;
+    }
+    public APIRequestGetCrosspostedBroadcasts requestOverlayUrlField () {
+      return this.requestOverlayUrlField(true);
+    }
+    public APIRequestGetCrosspostedBroadcasts requestOverlayUrlField (boolean value) {
+      this.requestField("overlay_url", value);
       return this;
     }
     public APIRequestGetCrosspostedBroadcasts requestPermalinkUrlField () {
@@ -4015,6 +4037,7 @@ public class LiveVideo extends APINode {
       "is_reference_only",
       "live_encoders",
       "live_views",
+      "overlay_url",
       "permalink_url",
       "planned_start_time",
       "seconds_left",
@@ -4231,6 +4254,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGet requestLiveViewsField (boolean value) {
       this.requestField("live_views", value);
+      return this;
+    }
+    public APIRequestGet requestOverlayUrlField () {
+      return this.requestOverlayUrlField(true);
+    }
+    public APIRequestGet requestOverlayUrlField (boolean value) {
+      this.requestField("overlay_url", value);
       return this;
     }
     public APIRequestGet requestPermalinkUrlField () {
@@ -4944,6 +4974,7 @@ public class LiveVideo extends APINode {
     this.mIsReferenceOnly = instance.mIsReferenceOnly;
     this.mLiveEncoders = instance.mLiveEncoders;
     this.mLiveViews = instance.mLiveViews;
+    this.mOverlayUrl = instance.mOverlayUrl;
     this.mPermalinkUrl = instance.mPermalinkUrl;
     this.mPlannedStartTime = instance.mPlannedStartTime;
     this.mSecondsLeft = instance.mSecondsLeft;

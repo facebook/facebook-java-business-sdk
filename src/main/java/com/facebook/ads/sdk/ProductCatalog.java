@@ -1735,6 +1735,7 @@ public class ProductCatalog extends APINode {
     }
     public static final String[] PARAMS = {
       "allow_upsert",
+      "fbe_external_business_id",
       "requests",
     };
 
@@ -1800,6 +1801,11 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestCreateBatch setAllowUpsert (String allowUpsert) {
       this.setParam("allow_upsert", allowUpsert);
+      return this;
+    }
+
+    public APIRequestCreateBatch setFbeExternalBusinessId (String fbeExternalBusinessId) {
+      this.setParam("fbe_external_business_id", fbeExternalBusinessId);
       return this;
     }
 

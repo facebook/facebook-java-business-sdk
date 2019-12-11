@@ -35,6 +35,7 @@ public class AdAccountCampaignsPostEventResponses {
     APIContext context = new APIContext(access_token).enableDebug(true);
 
     new AdAccount(id, context).createCampaign()
+      .setSpecialAdCategory(Campaign.EnumSpecialAdCategory.VALUE_NONE)
       .setName("My First Event Campaign")
       .setObjective(Campaign.EnumObjective.VALUE_EVENT_RESPONSES)
       .setStatus(Campaign.EnumStatus.VALUE_PAUSED)

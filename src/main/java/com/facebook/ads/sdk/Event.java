@@ -328,12 +328,28 @@ public class Event extends APINode {
     return new APIRequestGetAdmins(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetComments getComments() {
+    return new APIRequestGetComments(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetFeed getFeed() {
+    return new APIRequestGetFeed(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateFeed createFeed() {
     return new APIRequestCreateFeed(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetLiveVideos getLiveVideos() {
+    return new APIRequestGetLiveVideos(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateLiveVideo createLiveVideo() {
     return new APIRequestCreateLiveVideo(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetPhotos getPhotos() {
+    return new APIRequestGetPhotos(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreatePhoto createPhoto() {
@@ -344,8 +360,16 @@ public class Event extends APINode {
     return new APIRequestGetPicture(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetPosts getPosts() {
+    return new APIRequestGetPosts(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetRoles getRoles() {
     return new APIRequestGetRoles(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetVideos getVideos() {
+    return new APIRequestGetVideos(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGet get() {
@@ -671,6 +695,214 @@ public class Event extends APINode {
       this.requestField("username", value);
       return this;
     }
+  }
+
+  public static class APIRequestGetComments extends APIRequest<NullNode> {
+
+    APINodeList<NullNode> lastResponse = null;
+    @Override
+    public APINodeList<NullNode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<NullNode> parseResponse(String response, String header) throws APIException {
+      return NullNode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<NullNode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<NullNode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<NullNode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<NullNode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<NullNode>>() {
+           public APINodeList<NullNode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetComments.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetComments(String nodeId, APIContext context) {
+      super(context, nodeId, "/comments", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetComments setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetComments setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetComments requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetComments requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetComments requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetComments requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetComments requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetComments requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetFeed extends APIRequest<NullNode> {
+
+    APINodeList<NullNode> lastResponse = null;
+    @Override
+    public APINodeList<NullNode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<NullNode> parseResponse(String response, String header) throws APIException {
+      return NullNode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<NullNode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<NullNode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<NullNode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<NullNode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<NullNode>>() {
+           public APINodeList<NullNode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetFeed.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetFeed(String nodeId, APIContext context) {
+      super(context, nodeId, "/feed", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetFeed setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFeed setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetFeed requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetFeed requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFeed requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetFeed requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFeed requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFeed requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestCreateFeed extends APIRequest<APINode> {
@@ -1689,6 +1921,110 @@ public class Event extends APINode {
 
   }
 
+  public static class APIRequestGetLiveVideos extends APIRequest<NullNode> {
+
+    APINodeList<NullNode> lastResponse = null;
+    @Override
+    public APINodeList<NullNode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<NullNode> parseResponse(String response, String header) throws APIException {
+      return NullNode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<NullNode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<NullNode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<NullNode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<NullNode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<NullNode>>() {
+           public APINodeList<NullNode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetLiveVideos.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetLiveVideos(String nodeId, APIContext context) {
+      super(context, nodeId, "/live_videos", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetLiveVideos setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetLiveVideos setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetLiveVideos requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetLiveVideos requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetLiveVideos requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetLiveVideos requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetLiveVideos requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetLiveVideos requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestCreateLiveVideo extends APIRequest<LiveVideo> {
 
     LiveVideo lastResponse = null;
@@ -1987,6 +2323,110 @@ public class Event extends APINode {
 
   }
 
+  public static class APIRequestGetPhotos extends APIRequest<NullNode> {
+
+    APINodeList<NullNode> lastResponse = null;
+    @Override
+    public APINodeList<NullNode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<NullNode> parseResponse(String response, String header) throws APIException {
+      return NullNode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<NullNode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<NullNode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<NullNode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<NullNode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<NullNode>>() {
+           public APINodeList<NullNode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetPhotos.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetPhotos(String nodeId, APIContext context) {
+      super(context, nodeId, "/photos", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetPhotos setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPhotos setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetPhotos requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetPhotos requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPhotos requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetPhotos requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPhotos requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPhotos requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestCreatePhoto extends APIRequest<Photo> {
 
     Photo lastResponse = null;
@@ -2016,6 +2456,7 @@ public class Event extends APINode {
       "ios_bundle_id",
       "is_explicit_location",
       "is_explicit_place",
+      "is_visual_search",
       "manual_privacy",
       "message",
       "name",
@@ -2258,6 +2699,15 @@ public class Event extends APINode {
     }
     public APIRequestCreatePhoto setIsExplicitPlace (String isExplicitPlace) {
       this.setParam("is_explicit_place", isExplicitPlace);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setIsVisualSearch (Boolean isVisualSearch) {
+      this.setParam("is_visual_search", isVisualSearch);
+      return this;
+    }
+    public APIRequestCreatePhoto setIsVisualSearch (String isVisualSearch) {
+      this.setParam("is_visual_search", isVisualSearch);
       return this;
     }
 
@@ -2517,58 +2967,45 @@ public class Event extends APINode {
 
   }
 
-  public static class APIRequestGetPicture extends APIRequest<ProfilePictureSource> {
+  public static class APIRequestGetPicture extends APIRequest<NullNode> {
 
-    APINodeList<ProfilePictureSource> lastResponse = null;
+    APINodeList<NullNode> lastResponse = null;
     @Override
-    public APINodeList<ProfilePictureSource> getLastResponse() {
+    public APINodeList<NullNode> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "height",
-      "redirect",
-      "type",
-      "width",
     };
 
     public static final String[] FIELDS = {
-      "bottom",
-      "cache_key",
-      "height",
-      "is_silhouette",
-      "left",
-      "right",
-      "top",
-      "url",
-      "width",
     };
 
     @Override
-    public APINodeList<ProfilePictureSource> parseResponse(String response, String header) throws APIException {
-      return ProfilePictureSource.parseResponse(response, getContext(), this, header);
+    public APINodeList<NullNode> parseResponse(String response, String header) throws APIException {
+      return NullNode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<ProfilePictureSource> execute() throws APIException {
+    public APINodeList<NullNode> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<ProfilePictureSource> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<NullNode> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<ProfilePictureSource>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<NullNode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<ProfilePictureSource>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<NullNode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<ProfilePictureSource>>() {
-           public APINodeList<ProfilePictureSource> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<NullNode>>() {
+           public APINodeList<NullNode> apply(ResponseWrapper result) {
              try {
                return APIRequestGetPicture.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -2595,42 +3032,6 @@ public class Event extends APINode {
       return this;
     }
 
-
-    public APIRequestGetPicture setHeight (Long height) {
-      this.setParam("height", height);
-      return this;
-    }
-    public APIRequestGetPicture setHeight (String height) {
-      this.setParam("height", height);
-      return this;
-    }
-
-    public APIRequestGetPicture setRedirect (Boolean redirect) {
-      this.setParam("redirect", redirect);
-      return this;
-    }
-    public APIRequestGetPicture setRedirect (String redirect) {
-      this.setParam("redirect", redirect);
-      return this;
-    }
-
-    public APIRequestGetPicture setType (ProfilePictureSource.EnumType type) {
-      this.setParam("type", type);
-      return this;
-    }
-    public APIRequestGetPicture setType (String type) {
-      this.setParam("type", type);
-      return this;
-    }
-
-    public APIRequestGetPicture setWidth (Long width) {
-      this.setParam("width", width);
-      return this;
-    }
-    public APIRequestGetPicture setWidth (String width) {
-      this.setParam("width", width);
-      return this;
-    }
 
     public APIRequestGetPicture requestAllFields () {
       return this.requestAllFields(true);
@@ -2668,69 +3069,110 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestGetPicture requestBottomField () {
-      return this.requestBottomField(true);
+  }
+
+  public static class APIRequestGetPosts extends APIRequest<NullNode> {
+
+    APINodeList<NullNode> lastResponse = null;
+    @Override
+    public APINodeList<NullNode> getLastResponse() {
+      return lastResponse;
     }
-    public APIRequestGetPicture requestBottomField (boolean value) {
-      this.requestField("bottom", value);
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<NullNode> parseResponse(String response, String header) throws APIException {
+      return NullNode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<NullNode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<NullNode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<NullNode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<NullNode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<NullNode>>() {
+           public APINodeList<NullNode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetPosts.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetPosts(String nodeId, APIContext context) {
+      super(context, nodeId, "/posts", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetPosts setParam(String param, Object value) {
+      setParamInternal(param, value);
       return this;
     }
-    public APIRequestGetPicture requestCacheKeyField () {
-      return this.requestCacheKeyField(true);
-    }
-    public APIRequestGetPicture requestCacheKeyField (boolean value) {
-      this.requestField("cache_key", value);
+
+    @Override
+    public APIRequestGetPosts setParams(Map<String, Object> params) {
+      setParamsInternal(params);
       return this;
     }
-    public APIRequestGetPicture requestHeightField () {
-      return this.requestHeightField(true);
+
+
+    public APIRequestGetPosts requestAllFields () {
+      return this.requestAllFields(true);
     }
-    public APIRequestGetPicture requestHeightField (boolean value) {
-      this.requestField("height", value);
+
+    public APIRequestGetPosts requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
       return this;
     }
-    public APIRequestGetPicture requestIsSilhouetteField () {
-      return this.requestIsSilhouetteField(true);
+
+    @Override
+    public APIRequestGetPosts requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
     }
-    public APIRequestGetPicture requestIsSilhouetteField (boolean value) {
-      this.requestField("is_silhouette", value);
+
+    @Override
+    public APIRequestGetPosts requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
       return this;
     }
-    public APIRequestGetPicture requestLeftField () {
-      return this.requestLeftField(true);
-    }
-    public APIRequestGetPicture requestLeftField (boolean value) {
-      this.requestField("left", value);
+
+    @Override
+    public APIRequestGetPosts requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
-    public APIRequestGetPicture requestRightField () {
-      return this.requestRightField(true);
-    }
-    public APIRequestGetPicture requestRightField (boolean value) {
-      this.requestField("right", value);
+
+    @Override
+    public APIRequestGetPosts requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
       return this;
     }
-    public APIRequestGetPicture requestTopField () {
-      return this.requestTopField(true);
-    }
-    public APIRequestGetPicture requestTopField (boolean value) {
-      this.requestField("top", value);
-      return this;
-    }
-    public APIRequestGetPicture requestUrlField () {
-      return this.requestUrlField(true);
-    }
-    public APIRequestGetPicture requestUrlField (boolean value) {
-      this.requestField("url", value);
-      return this;
-    }
-    public APIRequestGetPicture requestWidthField () {
-      return this.requestWidthField(true);
-    }
-    public APIRequestGetPicture requestWidthField (boolean value) {
-      this.requestField("width", value);
-      return this;
-    }
+
   }
 
   public static class APIRequestGetRoles extends APIRequest<Profile> {
@@ -2923,6 +3365,110 @@ public class Event extends APINode {
       this.requestField("username", value);
       return this;
     }
+  }
+
+  public static class APIRequestGetVideos extends APIRequest<NullNode> {
+
+    APINodeList<NullNode> lastResponse = null;
+    @Override
+    public APINodeList<NullNode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<NullNode> parseResponse(String response, String header) throws APIException {
+      return NullNode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<NullNode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<NullNode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<NullNode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<NullNode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<NullNode>>() {
+           public APINodeList<NullNode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetVideos.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetVideos(String nodeId, APIContext context) {
+      super(context, nodeId, "/videos", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetVideos setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVideos setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetVideos requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetVideos requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVideos requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetVideos requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVideos requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVideos requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGet extends APIRequest<Event> {
