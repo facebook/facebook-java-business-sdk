@@ -60,6 +60,9 @@ public class CustomData {
   @SerializedName("status")
   private String status = null;
 
+  @SerializedName("search_string")
+  private String searchString = null;
+
   /**
    * Default Constructor.
    */
@@ -81,11 +84,12 @@ public class CustomData {
    * @param predictedLtv predicted lifetime value of a conversion event
    * @param numItems number of items that a user tries to buy during checkout
    * @param status status of the registration event
+   * @param searchString a search query made by a user
    */
   public CustomData(Float value, String currency, String contentName,
       String contentCategory, List<String> contentIds,
       List<Content> contents, String contentType, String orderId, Float predictedLtv,
-      String numItems, String status) {
+      String numItems, String status, String searchString) {
     this.value = value;
     this.currency = currency;
     this.contentName = contentName;
@@ -97,6 +101,7 @@ public class CustomData {
     this.predictedLtv = predictedLtv;
     this.numItems = numItems;
     this.status = status;
+    this.searchString = searchString;
   }
 
   /**
@@ -492,6 +497,35 @@ public class CustomData {
     this.status = status;
   }
 
+  /**
+   * A search query made by a use. Use only with Search events. Example: 'lettuce'.
+   *
+   * @return searchString
+   */
+  public String getSearchString() {
+    return searchString;
+  }
+
+  /**
+   * Set a search query made by a use. Use only with Search events.
+   *
+   * @param searchString a search query made by a use
+   */
+  public void setSearchString(String searchString) {
+    this.searchString = searchString;
+  }
+
+  /**
+   * Set a search query made by a use. Use only with Search events.
+   *
+   * @param searchString a search query made by a use
+   * @return CustomData
+   */
+  public CustomData searchString(String searchString) {
+    this.searchString = searchString;
+    return this;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -511,7 +545,8 @@ public class CustomData {
         && Objects.equals(this.orderId, customData.orderId)
         && Objects.equals(this.predictedLtv, customData.predictedLtv)
         && Objects.equals(this.numItems, customData.numItems)
-        && Objects.equals(this.status, customData.status);
+        && Objects.equals(this.status, customData.status)
+        && Objects.equals(this.searchString, customData.searchString);
   }
 
   @Override
@@ -527,7 +562,8 @@ public class CustomData {
         orderId,
         predictedLtv,
         numItems,
-        status);
+        status,
+        searchString);
   }
 
   @Override
@@ -546,6 +582,7 @@ public class CustomData {
     sb.append("    predictedLtv: ").append(toIndentedString(predictedLtv)).append("\n");
     sb.append("    numItems: ").append(toIndentedString(numItems)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    searchString: ").append(toIndentedString(searchString)).append("\n");
     sb.append("}");
     return sb.toString();
   }

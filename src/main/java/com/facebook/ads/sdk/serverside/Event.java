@@ -194,12 +194,11 @@ public class Event {
   }
 
   /**
-   * Set Event ID can be any string chosen by the advertiser. It is used by Facebook to deduplicate
-   * the same event sent from both server and browser. The ID sent by server and browser for a given
-   * event should match. IDs cannot be reused elsewhere in your app, even with a different
-   * event_name or event_time.
+   * Sets an ID used by Facebook to deduplicate the same event sent from both server and browser.
    *
-   * @param eventId ID can be any string chosen by the advertiser
+   * @param eventId This ID can be any unique string chosen by the advertiser. eventId is used to
+   * deduplicate events sent by both Facebook Pixel and Server-Side API. eventName is also used in
+   * the deduplication process.
    * @return Event
    */
   public Event eventId(String eventId) {
@@ -208,10 +207,7 @@ public class Event {
   }
 
   /**
-   * Get Event ID can be any string chosen by the advertiser. It is used by Facebook to deduplicate
-   * the same event sent from both server and browser. The ID sent by server and browser for a given
-   * event should match. IDs cannot be reused elsewhere in your app, even with a different
-   * event_name or event_time.
+   * Get Event ID can be any string chosen by the advertiser.
    *
    * @return eventId
    */
@@ -220,12 +216,11 @@ public class Event {
   }
 
   /**
-   * Set Event ID can be any string chosen by the advertiser. It is used by Facebook to deduplicate
-   * the same event sent from both server and browser. The ID sent by server and browser for a given
-   * event should match. IDs cannot be reused elsewhere in your app, even with a different
-   * event_name or event_time.
+   * Sets an ID used by Facebook to deduplicate the same event sent from both server and browser.
    *
-   * @param eventId ID can be any string chosen by the advertiser
+   * @param eventId This ID can be any unique string chosen by the advertiser. eventId is used to
+   * deduplicate events sent by both Facebook Pixel and Server-Side API. eventName is also used in
+   * the deduplication process.
    */
   public void setEventId(String eventId) {
     this.eventId = eventId;
