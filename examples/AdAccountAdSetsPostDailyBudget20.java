@@ -37,14 +37,15 @@ public class AdAccountAdSetsPostDailyBudget20 {
     new AdAccount(id, context).createAdSet()
       .setName("My First Adset")
       .setDailyBudget(2000L)
-      .setStartTime("2019-04-29T08:47:49-0700")
-      .setEndTime("2019-05-06T08:47:49-0700")
+      .setStartTime("2019-12-05T23:43:07-0800")
+      .setEndTime("2019-12-12T23:43:07-0800")
       .setCampaignId("<adCampaignLinkClicksID>")
       .setBidAmount(100L)
       .setBillingEvent(AdSet.EnumBillingEvent.VALUE_LINK_CLICKS)
       .setOptimizationGoal(AdSet.EnumOptimizationGoal.VALUE_LINK_CLICKS)
       .setTargeting(
           new Targeting()
+            .setFieldFacebookPositions(Arrays.asList("feed"))
             .setFieldGeoLocations(
               new TargetingGeoLocation()
                 .setFieldCountries(Arrays.asList("US"))

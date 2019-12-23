@@ -246,7 +246,7 @@ public class AdRuleExecutionOptions extends APINode {
       VALUE_EQUAL("EQUAL"),
       @SerializedName("IN")
       VALUE_IN("IN"),
-      NULL(null);
+      ;
 
       private String value;
 

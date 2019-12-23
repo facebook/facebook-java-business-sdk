@@ -52,6 +52,7 @@ public class AdAccountAdSetsPostBehaviorTargeting {
                 .setFieldId(6004386044572L)
                 .setFieldName("Android Owners (All)")
             ))
+            .setFieldFacebookPositions(Arrays.asList("feed"))
             .setFieldGeoLocations(
               new TargetingGeoLocation()
                 .setFieldCountries(Arrays.asList("US"))

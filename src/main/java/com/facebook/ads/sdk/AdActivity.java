@@ -383,6 +383,8 @@ public class AdActivity extends APINode {
       VALUE_CAMPAIGN_ENDED("campaign_ended"),
       @SerializedName("campaign_spending_limit_reached")
       VALUE_CAMPAIGN_SPENDING_LIMIT_REACHED("campaign_spending_limit_reached"),
+      @SerializedName("conversion_event_updated")
+      VALUE_CONVERSION_EVENT_UPDATED("conversion_event_updated"),
       @SerializedName("create_ad")
       VALUE_CREATE_AD("create_ad"),
       @SerializedName("create_ad_set")
@@ -481,7 +483,9 @@ public class AdActivity extends APINode {
       VALUE_UPDATE_CAMPAIGN_NAME("update_campaign_name"),
       @SerializedName("update_campaign_run_status")
       VALUE_UPDATE_CAMPAIGN_RUN_STATUS("update_campaign_run_status"),
-      NULL(null);
+      @SerializedName("update_campaign_schedule")
+      VALUE_UPDATE_CAMPAIGN_SCHEDULE("update_campaign_schedule"),
+      ;
 
       private String value;
 
@@ -518,7 +522,7 @@ public class AdActivity extends APINode {
       VALUE_STATUS("STATUS"),
       @SerializedName("TARGETING")
       VALUE_TARGETING("TARGETING"),
-      NULL(null);
+      ;
 
       private String value;
 

@@ -54,80 +54,74 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class FoodDrinkOrder extends APINode {
-  @SerializedName("admin_note")
-  private String mAdminNote = null;
-  @SerializedName("creation_time")
-  private String mCreationTime = null;
-  @SerializedName("customer_name")
-  private String mCustomerName = null;
-  @SerializedName("customer_phone_number")
-  private String mCustomerPhoneNumber = null;
+public class CollaborativeAdsShareSettings extends APINode {
+  @SerializedName("agency_business")
+  private Business mAgencyBusiness = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("note")
-  private String mNote = null;
-  @SerializedName("order_details")
-  private List<Object> mOrderDetails = null;
-  @SerializedName("state")
-  private String mState = null;
-  @SerializedName("update_time")
-  private String mUpdateTime = null;
+  @SerializedName("product_catalog_proxy_id")
+  private String mProductCatalogProxyId = null;
+  @SerializedName("utm_campaign")
+  private String mUtmCampaign = null;
+  @SerializedName("utm_medium")
+  private String mUtmMedium = null;
+  @SerializedName("utm_source")
+  private String mUtmSource = null;
   protected static Gson gson = null;
 
-  FoodDrinkOrder() {
+  CollaborativeAdsShareSettings() {
   }
 
-  public FoodDrinkOrder(Long id, APIContext context) {
+  public CollaborativeAdsShareSettings(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public FoodDrinkOrder(String id, APIContext context) {
+  public CollaborativeAdsShareSettings(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public FoodDrinkOrder fetch() throws APIException{
-    FoodDrinkOrder newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public CollaborativeAdsShareSettings fetch() throws APIException{
+    CollaborativeAdsShareSettings newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static FoodDrinkOrder fetchById(Long id, APIContext context) throws APIException {
+  public static CollaborativeAdsShareSettings fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<FoodDrinkOrder> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<CollaborativeAdsShareSettings> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static FoodDrinkOrder fetchById(String id, APIContext context) throws APIException {
+  public static CollaborativeAdsShareSettings fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<FoodDrinkOrder> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<CollaborativeAdsShareSettings> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<FoodDrinkOrder> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<FoodDrinkOrder>)(
-      new APIRequest<FoodDrinkOrder>(context, "", "/", "GET", FoodDrinkOrder.getParser())
+  public static APINodeList<CollaborativeAdsShareSettings> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<CollaborativeAdsShareSettings>)(
+      new APIRequest<CollaborativeAdsShareSettings>(context, "", "/", "GET", CollaborativeAdsShareSettings.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<FoodDrinkOrder>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<CollaborativeAdsShareSettings>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", FoodDrinkOrder.getParser())
+      new APIRequest(context, "", "/", "GET", CollaborativeAdsShareSettings.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -140,12 +134,12 @@ public class FoodDrinkOrder extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static FoodDrinkOrder loadJSON(String json, APIContext context, String header) {
-    FoodDrinkOrder foodDrinkOrder = getGson().fromJson(json, FoodDrinkOrder.class);
+  public static CollaborativeAdsShareSettings loadJSON(String json, APIContext context, String header) {
+    CollaborativeAdsShareSettings collaborativeAdsShareSettings = getGson().fromJson(json, CollaborativeAdsShareSettings.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(foodDrinkOrder.toString());
+      JsonElement o2 = parser.parse(collaborativeAdsShareSettings.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -155,14 +149,14 @@ public class FoodDrinkOrder extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    foodDrinkOrder.context = context;
-    foodDrinkOrder.rawValue = json;
-    foodDrinkOrder.header = header;
-    return foodDrinkOrder;
+    collaborativeAdsShareSettings.context = context;
+    collaborativeAdsShareSettings.rawValue = json;
+    collaborativeAdsShareSettings.header = header;
+    return collaborativeAdsShareSettings;
   }
 
-  public static APINodeList<FoodDrinkOrder> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<FoodDrinkOrder> foodDrinkOrders = new APINodeList<FoodDrinkOrder>(request, json, header);
+  public static APINodeList<CollaborativeAdsShareSettings> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CollaborativeAdsShareSettings> collaborativeAdsShareSettingss = new APINodeList<CollaborativeAdsShareSettings>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -173,9 +167,9 @@ public class FoodDrinkOrder extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          foodDrinkOrders.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          collaborativeAdsShareSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return foodDrinkOrders;
+        return collaborativeAdsShareSettingss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -185,20 +179,20 @@ public class FoodDrinkOrder extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                foodDrinkOrders.setCursors(before, after);
+                collaborativeAdsShareSettingss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            foodDrinkOrders.setPaging(previous, next);
+            collaborativeAdsShareSettingss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              foodDrinkOrders.setAppSecret(context.getAppSecretProof());
+              collaborativeAdsShareSettingss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              foodDrinkOrders.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              collaborativeAdsShareSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -209,23 +203,23 @@ public class FoodDrinkOrder extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  foodDrinkOrders.add(loadJSON(entry.getValue().toString(), context, header));
+                  collaborativeAdsShareSettingss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              foodDrinkOrders.add(loadJSON(obj.toString(), context, header));
+              collaborativeAdsShareSettingss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return foodDrinkOrders;
+          return collaborativeAdsShareSettingss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              foodDrinkOrders.add(loadJSON(entry.getValue().toString(), context, header));
+              collaborativeAdsShareSettingss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return foodDrinkOrders;
+          return collaborativeAdsShareSettingss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -242,20 +236,20 @@ public class FoodDrinkOrder extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              foodDrinkOrders.add(loadJSON(value.toString(), context, header));
+              collaborativeAdsShareSettingss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return foodDrinkOrders;
+            return collaborativeAdsShareSettingss;
           }
 
           // Sixth, check if it's pure JsonObject
-          foodDrinkOrders.clear();
-          foodDrinkOrders.add(loadJSON(json, context, header));
-          return foodDrinkOrders;
+          collaborativeAdsShareSettingss.clear();
+          collaborativeAdsShareSettingss.add(loadJSON(json, context, header));
+          return collaborativeAdsShareSettingss;
         }
       }
     } catch (Exception e) {
@@ -291,92 +285,80 @@ public class FoodDrinkOrder extends APINode {
   }
 
 
-  public String getFieldAdminNote() {
-    return mAdminNote;
-  }
-
-  public String getFieldCreationTime() {
-    return mCreationTime;
-  }
-
-  public String getFieldCustomerName() {
-    return mCustomerName;
-  }
-
-  public String getFieldCustomerPhoneNumber() {
-    return mCustomerPhoneNumber;
+  public Business getFieldAgencyBusiness() {
+    if (mAgencyBusiness != null) {
+      mAgencyBusiness.context = getContext();
+    }
+    return mAgencyBusiness;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-  public String getFieldNote() {
-    return mNote;
+  public String getFieldProductCatalogProxyId() {
+    return mProductCatalogProxyId;
   }
 
-  public List<Object> getFieldOrderDetails() {
-    return mOrderDetails;
+  public String getFieldUtmCampaign() {
+    return mUtmCampaign;
   }
 
-  public String getFieldState() {
-    return mState;
+  public String getFieldUtmMedium() {
+    return mUtmMedium;
   }
 
-  public String getFieldUpdateTime() {
-    return mUpdateTime;
+  public String getFieldUtmSource() {
+    return mUtmSource;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<FoodDrinkOrder> {
+  public static class APIRequestGet extends APIRequest<CollaborativeAdsShareSettings> {
 
-    FoodDrinkOrder lastResponse = null;
+    CollaborativeAdsShareSettings lastResponse = null;
     @Override
-    public FoodDrinkOrder getLastResponse() {
+    public CollaborativeAdsShareSettings getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "admin_note",
-      "creation_time",
-      "customer_name",
-      "customer_phone_number",
+      "agency_business",
       "id",
-      "note",
-      "order_details",
-      "state",
-      "update_time",
+      "product_catalog_proxy_id",
+      "utm_campaign",
+      "utm_medium",
+      "utm_source",
     };
 
     @Override
-    public FoodDrinkOrder parseResponse(String response, String header) throws APIException {
-      return FoodDrinkOrder.parseResponse(response, getContext(), this, header).head();
+    public CollaborativeAdsShareSettings parseResponse(String response, String header) throws APIException {
+      return CollaborativeAdsShareSettings.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public FoodDrinkOrder execute() throws APIException {
+    public CollaborativeAdsShareSettings execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public FoodDrinkOrder execute(Map<String, Object> extraParams) throws APIException {
+    public CollaborativeAdsShareSettings execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<FoodDrinkOrder> executeAsync() throws APIException {
+    public ListenableFuture<CollaborativeAdsShareSettings> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<FoodDrinkOrder> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<CollaborativeAdsShareSettings> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, FoodDrinkOrder>() {
-           public FoodDrinkOrder apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, CollaborativeAdsShareSettings>() {
+           public CollaborativeAdsShareSettings apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -440,32 +422,11 @@ public class FoodDrinkOrder extends APINode {
       return this;
     }
 
-    public APIRequestGet requestAdminNoteField () {
-      return this.requestAdminNoteField(true);
+    public APIRequestGet requestAgencyBusinessField () {
+      return this.requestAgencyBusinessField(true);
     }
-    public APIRequestGet requestAdminNoteField (boolean value) {
-      this.requestField("admin_note", value);
-      return this;
-    }
-    public APIRequestGet requestCreationTimeField () {
-      return this.requestCreationTimeField(true);
-    }
-    public APIRequestGet requestCreationTimeField (boolean value) {
-      this.requestField("creation_time", value);
-      return this;
-    }
-    public APIRequestGet requestCustomerNameField () {
-      return this.requestCustomerNameField(true);
-    }
-    public APIRequestGet requestCustomerNameField (boolean value) {
-      this.requestField("customer_name", value);
-      return this;
-    }
-    public APIRequestGet requestCustomerPhoneNumberField () {
-      return this.requestCustomerPhoneNumberField(true);
-    }
-    public APIRequestGet requestCustomerPhoneNumberField (boolean value) {
-      this.requestField("customer_phone_number", value);
+    public APIRequestGet requestAgencyBusinessField (boolean value) {
+      this.requestField("agency_business", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -475,76 +436,78 @@ public class FoodDrinkOrder extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestNoteField () {
-      return this.requestNoteField(true);
+    public APIRequestGet requestProductCatalogProxyIdField () {
+      return this.requestProductCatalogProxyIdField(true);
     }
-    public APIRequestGet requestNoteField (boolean value) {
-      this.requestField("note", value);
+    public APIRequestGet requestProductCatalogProxyIdField (boolean value) {
+      this.requestField("product_catalog_proxy_id", value);
       return this;
     }
-    public APIRequestGet requestOrderDetailsField () {
-      return this.requestOrderDetailsField(true);
+    public APIRequestGet requestUtmCampaignField () {
+      return this.requestUtmCampaignField(true);
     }
-    public APIRequestGet requestOrderDetailsField (boolean value) {
-      this.requestField("order_details", value);
+    public APIRequestGet requestUtmCampaignField (boolean value) {
+      this.requestField("utm_campaign", value);
       return this;
     }
-    public APIRequestGet requestStateField () {
-      return this.requestStateField(true);
+    public APIRequestGet requestUtmMediumField () {
+      return this.requestUtmMediumField(true);
     }
-    public APIRequestGet requestStateField (boolean value) {
-      this.requestField("state", value);
+    public APIRequestGet requestUtmMediumField (boolean value) {
+      this.requestField("utm_medium", value);
       return this;
     }
-    public APIRequestGet requestUpdateTimeField () {
-      return this.requestUpdateTimeField(true);
+    public APIRequestGet requestUtmSourceField () {
+      return this.requestUtmSourceField(true);
     }
-    public APIRequestGet requestUpdateTimeField (boolean value) {
-      this.requestField("update_time", value);
+    public APIRequestGet requestUtmSourceField (boolean value) {
+      this.requestField("utm_source", value);
       return this;
     }
   }
 
-  public static class APIRequestUpdate extends APIRequest<FoodDrinkOrder> {
+  public static class APIRequestUpdate extends APIRequest<CollaborativeAdsShareSettings> {
 
-    FoodDrinkOrder lastResponse = null;
+    CollaborativeAdsShareSettings lastResponse = null;
     @Override
-    public FoodDrinkOrder getLastResponse() {
+    public CollaborativeAdsShareSettings getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "state",
+      "utm_campaign",
+      "utm_medium",
+      "utm_source",
     };
 
     public static final String[] FIELDS = {
     };
 
     @Override
-    public FoodDrinkOrder parseResponse(String response, String header) throws APIException {
-      return FoodDrinkOrder.parseResponse(response, getContext(), this, header).head();
+    public CollaborativeAdsShareSettings parseResponse(String response, String header) throws APIException {
+      return CollaborativeAdsShareSettings.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public FoodDrinkOrder execute() throws APIException {
+    public CollaborativeAdsShareSettings execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public FoodDrinkOrder execute(Map<String, Object> extraParams) throws APIException {
+    public CollaborativeAdsShareSettings execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<FoodDrinkOrder> executeAsync() throws APIException {
+    public ListenableFuture<CollaborativeAdsShareSettings> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<FoodDrinkOrder> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<CollaborativeAdsShareSettings> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, FoodDrinkOrder>() {
-           public FoodDrinkOrder apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, CollaborativeAdsShareSettings>() {
+           public CollaborativeAdsShareSettings apply(ResponseWrapper result) {
              try {
                return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -572,12 +535,18 @@ public class FoodDrinkOrder extends APINode {
     }
 
 
-    public APIRequestUpdate setState (FoodDrinkOrder.EnumState state) {
-      this.setParam("state", state);
+    public APIRequestUpdate setUtmCampaign (String utmCampaign) {
+      this.setParam("utm_campaign", utmCampaign);
       return this;
     }
-    public APIRequestUpdate setState (String state) {
-      this.setParam("state", state);
+
+    public APIRequestUpdate setUtmMedium (String utmMedium) {
+      this.setParam("utm_medium", utmMedium);
+      return this;
+    }
+
+    public APIRequestUpdate setUtmSource (String utmSource) {
+      this.setParam("utm_source", utmSource);
       return this;
     }
 
@@ -619,37 +588,6 @@ public class FoodDrinkOrder extends APINode {
 
   }
 
-  public static enum EnumState {
-      @SerializedName("CANCELLED")
-      VALUE_CANCELLED("CANCELLED"),
-      @SerializedName("CONFIRMED")
-      VALUE_CONFIRMED("CONFIRMED"),
-      @SerializedName("DRAFT")
-      VALUE_DRAFT("DRAFT"),
-      @SerializedName("EXPIRED")
-      VALUE_EXPIRED("EXPIRED"),
-      @SerializedName("ON_DELIVERY")
-      VALUE_ON_DELIVERY("ON_DELIVERY"),
-      @SerializedName("PENDING")
-      VALUE_PENDING("PENDING"),
-      @SerializedName("READY_FOR_PICKUP")
-      VALUE_READY_FOR_PICKUP("READY_FOR_PICKUP"),
-      @SerializedName("SERVING")
-      VALUE_SERVING("SERVING"),
-      NULL(null);
-
-      private String value;
-
-      private EnumState(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -664,25 +602,22 @@ public class FoodDrinkOrder extends APINode {
     return gson;
   }
 
-  public FoodDrinkOrder copyFrom(FoodDrinkOrder instance) {
-    this.mAdminNote = instance.mAdminNote;
-    this.mCreationTime = instance.mCreationTime;
-    this.mCustomerName = instance.mCustomerName;
-    this.mCustomerPhoneNumber = instance.mCustomerPhoneNumber;
+  public CollaborativeAdsShareSettings copyFrom(CollaborativeAdsShareSettings instance) {
+    this.mAgencyBusiness = instance.mAgencyBusiness;
     this.mId = instance.mId;
-    this.mNote = instance.mNote;
-    this.mOrderDetails = instance.mOrderDetails;
-    this.mState = instance.mState;
-    this.mUpdateTime = instance.mUpdateTime;
+    this.mProductCatalogProxyId = instance.mProductCatalogProxyId;
+    this.mUtmCampaign = instance.mUtmCampaign;
+    this.mUtmMedium = instance.mUtmMedium;
+    this.mUtmSource = instance.mUtmSource;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<FoodDrinkOrder> getParser() {
-    return new APIRequest.ResponseParser<FoodDrinkOrder>() {
-      public APINodeList<FoodDrinkOrder> parseResponse(String response, APIContext context, APIRequest<FoodDrinkOrder> request, String header) throws MalformedResponseException {
-        return FoodDrinkOrder.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<CollaborativeAdsShareSettings> getParser() {
+    return new APIRequest.ResponseParser<CollaborativeAdsShareSettings>() {
+      public APINodeList<CollaborativeAdsShareSettings> parseResponse(String response, APIContext context, APIRequest<CollaborativeAdsShareSettings> request, String header) throws MalformedResponseException {
+        return CollaborativeAdsShareSettings.parseResponse(response, context, request, header);
       }
     };
   }

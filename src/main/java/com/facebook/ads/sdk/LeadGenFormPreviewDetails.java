@@ -73,6 +73,8 @@ public class LeadGenFormPreviewDetails extends APINode {
   private String mPhoneNumberInlineContextText = null;
   @SerializedName("review_your_info_text")
   private String mReviewYourInfoText = null;
+  @SerializedName("secure_sharing_text")
+  private String mSecureSharingText = null;
   @SerializedName("slide_to_submit_text")
   private String mSlideToSubmitText = null;
   @SerializedName("submit_button_text")
@@ -309,6 +311,15 @@ public class LeadGenFormPreviewDetails extends APINode {
     return this;
   }
 
+  public String getFieldSecureSharingText() {
+    return mSecureSharingText;
+  }
+
+  public LeadGenFormPreviewDetails setFieldSecureSharingText(String value) {
+    this.mSecureSharingText = value;
+    return this;
+  }
+
   public String getFieldSlideToSubmitText() {
     return mSlideToSubmitText;
   }
@@ -353,6 +364,7 @@ public class LeadGenFormPreviewDetails extends APINode {
     this.mPersonalInfoText = instance.mPersonalInfoText;
     this.mPhoneNumberInlineContextText = instance.mPhoneNumberInlineContextText;
     this.mReviewYourInfoText = instance.mReviewYourInfoText;
+    this.mSecureSharingText = instance.mSecureSharingText;
     this.mSlideToSubmitText = instance.mSlideToSubmitText;
     this.mSubmitButtonText = instance.mSubmitButtonText;
     this.context = instance.context;

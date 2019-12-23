@@ -119,10 +119,12 @@ public class Targeting extends APINode {
   private List<IDName> mEthnicAffinity = null;
   @SerializedName("exclude_reached_since")
   private List<String> mExcludeReachedSince = null;
+  @SerializedName("excluded_brand_safety_content_types")
+  private List<String> mExcludedBrandSafetyContentTypes = null;
   @SerializedName("excluded_connections")
   private List<IDName> mExcludedConnections = null;
   @SerializedName("excluded_custom_audiences")
-  private List<IDName> mExcludedCustomAudiences = null;
+  private List<RawCustomAudience> mExcludedCustomAudiences = null;
   @SerializedName("excluded_dynamic_audience_ids")
   private List<String> mExcludedDynamicAudienceIds = null;
   @SerializedName("excluded_engagement_specs")
@@ -171,8 +173,6 @@ public class Targeting extends APINode {
   private List<IDName> mIndustries = null;
   @SerializedName("instagram_positions")
   private List<String> mInstagramPositions = null;
-  @SerializedName("instream_video_sponsorship_placements")
-  private List<String> mInstreamVideoSponsorshipPlacements = null;
   @SerializedName("interested_in")
   private List<Long> mInterestedIn = null;
   @SerializedName("interests")
@@ -205,8 +205,6 @@ public class Targeting extends APINode {
   private TargetingProspectingAudience mProspectingAudience = null;
   @SerializedName("publisher_platforms")
   private List<String> mPublisherPlatforms = null;
-  @SerializedName("publisher_visibility_categories")
-  private List<String> mPublisherVisibilityCategories = null;
   @SerializedName("radius")
   private String mRadius = null;
   @SerializedName("regions")
@@ -722,6 +720,15 @@ public class Targeting extends APINode {
     return this;
   }
 
+  public List<String> getFieldExcludedBrandSafetyContentTypes() {
+    return mExcludedBrandSafetyContentTypes;
+  }
+
+  public Targeting setFieldExcludedBrandSafetyContentTypes(List<String> value) {
+    this.mExcludedBrandSafetyContentTypes = value;
+    return this;
+  }
+
   public List<IDName> getFieldExcludedConnections() {
     return mExcludedConnections;
   }
@@ -736,18 +743,18 @@ public class Targeting extends APINode {
     this.mExcludedConnections = IDName.getGson().fromJson(value, type);
     return this;
   }
-  public List<IDName> getFieldExcludedCustomAudiences() {
+  public List<RawCustomAudience> getFieldExcludedCustomAudiences() {
     return mExcludedCustomAudiences;
   }
 
-  public Targeting setFieldExcludedCustomAudiences(List<IDName> value) {
+  public Targeting setFieldExcludedCustomAudiences(List<RawCustomAudience> value) {
     this.mExcludedCustomAudiences = value;
     return this;
   }
 
   public Targeting setFieldExcludedCustomAudiences(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mExcludedCustomAudiences = IDName.getGson().fromJson(value, type);
+    Type type = new TypeToken<List<RawCustomAudience>>(){}.getType();
+    this.mExcludedCustomAudiences = RawCustomAudience.getGson().fromJson(value, type);
     return this;
   }
   public List<String> getFieldExcludedDynamicAudienceIds() {
@@ -1041,15 +1048,6 @@ public class Targeting extends APINode {
     return this;
   }
 
-  public List<String> getFieldInstreamVideoSponsorshipPlacements() {
-    return mInstreamVideoSponsorshipPlacements;
-  }
-
-  public Targeting setFieldInstreamVideoSponsorshipPlacements(List<String> value) {
-    this.mInstreamVideoSponsorshipPlacements = value;
-    return this;
-  }
-
   public List<Long> getFieldInterestedIn() {
     return mInterestedIn;
   }
@@ -1234,15 +1232,6 @@ public class Targeting extends APINode {
     return this;
   }
 
-  public List<String> getFieldPublisherVisibilityCategories() {
-    return mPublisherVisibilityCategories;
-  }
-
-  public Targeting setFieldPublisherVisibilityCategories(List<String> value) {
-    this.mPublisherVisibilityCategories = value;
-    return this;
-  }
-
   public String getFieldRadius() {
     return mRadius;
   }
@@ -1389,7 +1378,7 @@ public class Targeting extends APINode {
       VALUE_DESKTOP("desktop"),
       @SerializedName("mobile")
       VALUE_MOBILE("mobile"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1410,7 +1399,7 @@ public class Targeting extends APINode {
       VALUE_DESKTOP("desktop"),
       @SerializedName("mobile")
       VALUE_MOBILE("mobile"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1471,6 +1460,7 @@ public class Targeting extends APINode {
     this.mEngagementSpecs = instance.mEngagementSpecs;
     this.mEthnicAffinity = instance.mEthnicAffinity;
     this.mExcludeReachedSince = instance.mExcludeReachedSince;
+    this.mExcludedBrandSafetyContentTypes = instance.mExcludedBrandSafetyContentTypes;
     this.mExcludedConnections = instance.mExcludedConnections;
     this.mExcludedCustomAudiences = instance.mExcludedCustomAudiences;
     this.mExcludedDynamicAudienceIds = instance.mExcludedDynamicAudienceIds;
@@ -1497,7 +1487,6 @@ public class Targeting extends APINode {
     this.mIncome = instance.mIncome;
     this.mIndustries = instance.mIndustries;
     this.mInstagramPositions = instance.mInstagramPositions;
-    this.mInstreamVideoSponsorshipPlacements = instance.mInstreamVideoSponsorshipPlacements;
     this.mInterestedIn = instance.mInterestedIn;
     this.mInterests = instance.mInterests;
     this.mIsWhatsappDestinationAd = instance.mIsWhatsappDestinationAd;
@@ -1514,7 +1503,6 @@ public class Targeting extends APINode {
     this.mProductAudienceSpecs = instance.mProductAudienceSpecs;
     this.mProspectingAudience = instance.mProspectingAudience;
     this.mPublisherPlatforms = instance.mPublisherPlatforms;
-    this.mPublisherVisibilityCategories = instance.mPublisherVisibilityCategories;
     this.mRadius = instance.mRadius;
     this.mRegions = instance.mRegions;
     this.mRelationshipStatuses = instance.mRelationshipStatuses;

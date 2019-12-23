@@ -61,8 +61,8 @@ public class CheckBatchRequestStatus extends APINode {
   private Long mErrorsTotalCount = null;
   @SerializedName("handle")
   private String mHandle = null;
-  @SerializedName("invalid_item_ids")
-  private List<String> mInvalidItemIds = null;
+  @SerializedName("ids_of_invalid_requests")
+  private List<String> mIdsOfInvalidRequests = null;
   @SerializedName("status")
   private String mStatus = null;
   @SerializedName("warnings")
@@ -247,12 +247,12 @@ public class CheckBatchRequestStatus extends APINode {
     return this;
   }
 
-  public List<String> getFieldInvalidItemIds() {
-    return mInvalidItemIds;
+  public List<String> getFieldIdsOfInvalidRequests() {
+    return mIdsOfInvalidRequests;
   }
 
-  public CheckBatchRequestStatus setFieldInvalidItemIds(List<String> value) {
-    this.mInvalidItemIds = value;
+  public CheckBatchRequestStatus setFieldIdsOfInvalidRequests(List<String> value) {
+    this.mIdsOfInvalidRequests = value;
     return this;
   }
 
@@ -303,7 +303,7 @@ public class CheckBatchRequestStatus extends APINode {
     this.mErrors = instance.mErrors;
     this.mErrorsTotalCount = instance.mErrorsTotalCount;
     this.mHandle = instance.mHandle;
-    this.mInvalidItemIds = instance.mInvalidItemIds;
+    this.mIdsOfInvalidRequests = instance.mIdsOfInvalidRequests;
     this.mStatus = instance.mStatus;
     this.mWarnings = instance.mWarnings;
     this.mWarningsTotalCount = instance.mWarningsTotalCount;

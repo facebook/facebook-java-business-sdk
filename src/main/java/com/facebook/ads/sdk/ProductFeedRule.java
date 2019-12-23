@@ -668,7 +668,7 @@ public class ProductFeedRule extends APINode {
       VALUE_REGEX_REPLACE_RULE("regex_replace_rule"),
       @SerializedName("value_mapping_rule")
       VALUE_VALUE_MAPPING_RULE("value_mapping_rule"),
-      NULL(null);
+      ;
 
       private String value;
 

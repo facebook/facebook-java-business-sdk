@@ -707,7 +707,7 @@ public class MeasurementUploadEvent extends APINode {
       VALUE_NONE("NONE"),
       @SerializedName("WEEKLY")
       VALUE_WEEKLY("WEEKLY"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -734,7 +734,7 @@ public class MeasurementUploadEvent extends APINode {
       VALUE_STARTED("STARTED"),
       @SerializedName("UPLOADED")
       VALUE_UPLOADED("UPLOADED"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -757,7 +757,7 @@ public class MeasurementUploadEvent extends APINode {
       VALUE_DAYS60("DAYS60"),
       @SerializedName("DAYS90")
       VALUE_DAYS90("DAYS90"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -778,7 +778,7 @@ public class MeasurementUploadEvent extends APINode {
       VALUE_PII("PII"),
       @SerializedName("PIXEL")
       VALUE_PIXEL("PIXEL"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1085,7 +1085,7 @@ public class MeasurementUploadEvent extends APINode {
       VALUE_TZ_PACIFIC_GALAPAGOS("TZ_PACIFIC_GALAPAGOS"),
       @SerializedName("TZ_PACIFIC_HONOLULU")
       VALUE_TZ_PACIFIC_HONOLULU("TZ_PACIFIC_HONOLULU"),
-      NULL(null);
+      ;
 
       private String value;
 

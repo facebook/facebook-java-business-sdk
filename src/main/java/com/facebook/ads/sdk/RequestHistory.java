@@ -292,7 +292,7 @@ public class RequestHistory extends APINode {
       VALUE_GET("GET"),
       @SerializedName("POST")
       VALUE_POST("POST"),
-      NULL(null);
+      ;
 
       private String value;
 

@@ -38,14 +38,15 @@ public class AdAccountAdSetsPostAdSetCreateCpa {
       .setName("A CPA Ad Set")
       .setCampaignId("<adCampaignLinkClicksID>")
       .setDailyBudget(5000L)
-      .setStartTime("2019-05-06T08:46:40-0700")
-      .setEndTime("2019-05-13T08:46:40-0700")
+      .setStartTime("2019-12-12T23:42:39-0800")
+      .setEndTime("2019-12-19T23:42:39-0800")
       .setBillingEvent(AdSet.EnumBillingEvent.VALUE_IMPRESSIONS)
       .setOptimizationGoal(AdSet.EnumOptimizationGoal.VALUE_REACH)
       .setBidAmount(1000L)
       .setPromotedObject("{\"page_id\":\"<pageID>\"}")
       .setTargeting(
           new Targeting()
+            .setFieldFacebookPositions(Arrays.asList("feed"))
             .setFieldGeoLocations(
               new TargetingGeoLocation()
                 .setFieldCountries(Arrays.asList("US"))

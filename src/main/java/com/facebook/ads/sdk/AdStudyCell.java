@@ -355,6 +355,7 @@ public class AdStudyCell extends APINode {
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
+      "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
       "funding_source",
@@ -389,7 +390,7 @@ public class AdStudyCell extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
-      "user_role",
+      "user_tasks",
       "user_tos_accepted",
     };
 
@@ -643,6 +644,13 @@ public class AdStudyCell extends APINode {
       this.requestField("end_advertiser_name", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestExtendedCreditInvoiceGroupField () {
+      return this.requestExtendedCreditInvoiceGroupField(true);
+    }
+    public APIRequestGetAdAccounts requestExtendedCreditInvoiceGroupField (boolean value) {
+      this.requestField("extended_credit_invoice_group", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestFailedDeliveryChecksField () {
       return this.requestFailedDeliveryChecksField(true);
     }
@@ -881,11 +889,11 @@ public class AdStudyCell extends APINode {
       this.requestField("tos_accepted", value);
       return this;
     }
-    public APIRequestGetAdAccounts requestUserRoleField () {
-      return this.requestUserRoleField(true);
+    public APIRequestGetAdAccounts requestUserTasksField () {
+      return this.requestUserTasksField(true);
     }
-    public APIRequestGetAdAccounts requestUserRoleField (boolean value) {
-      this.requestField("user_role", value);
+    public APIRequestGetAdAccounts requestUserTasksField (boolean value) {
+      this.requestField("user_tasks", value);
       return this;
     }
     public APIRequestGetAdAccounts requestUserTosAcceptedField () {
@@ -909,12 +917,10 @@ public class AdStudyCell extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
-      "ad_keywords",
       "adlabels",
       "adset_schedule",
       "asset_feed_id",
       "attribution_spec",
-      "best_creative",
       "bid_adjustments",
       "bid_amount",
       "bid_constraints",
@@ -1059,13 +1065,6 @@ public class AdStudyCell extends APINode {
       this.requestField("account_id", value);
       return this;
     }
-    public APIRequestGetAdSets requestAdKeywordsField () {
-      return this.requestAdKeywordsField(true);
-    }
-    public APIRequestGetAdSets requestAdKeywordsField (boolean value) {
-      this.requestField("ad_keywords", value);
-      return this;
-    }
     public APIRequestGetAdSets requestAdlabelsField () {
       return this.requestAdlabelsField(true);
     }
@@ -1092,13 +1091,6 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetAdSets requestAttributionSpecField (boolean value) {
       this.requestField("attribution_spec", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestBestCreativeField () {
-      return this.requestBestCreativeField(true);
-    }
-    public APIRequestGetAdSets requestBestCreativeField (boolean value) {
-      this.requestField("best_creative", value);
       return this;
     }
     public APIRequestGetAdSets requestBidAdjustmentsField () {
@@ -1461,6 +1453,7 @@ public class AdStudyCell extends APINode {
       "recommendations",
       "source_campaign",
       "source_campaign_id",
+      "special_ad_category",
       "spend_cap",
       "start_time",
       "status",
@@ -1731,6 +1724,13 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetCampaigns requestSourceCampaignIdField (boolean value) {
       this.requestField("source_campaign_id", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestSpecialAdCategoryField () {
+      return this.requestSpecialAdCategoryField(true);
+    }
+    public APIRequestGetCampaigns requestSpecialAdCategoryField (boolean value) {
+      this.requestField("special_ad_category", value);
       return this;
     }
     public APIRequestGetCampaigns requestSpendCapField () {
@@ -2218,7 +2218,7 @@ public class AdStudyCell extends APINode {
       VALUE_TV_FACEBOOK("TV_FACEBOOK"),
       @SerializedName("VIDEO_VIEW_OPTIMIZATION")
       VALUE_VIDEO_VIEW_OPTIMIZATION("VIDEO_VIEW_OPTIMIZATION"),
-      NULL(null);
+      ;
 
       private String value;
 

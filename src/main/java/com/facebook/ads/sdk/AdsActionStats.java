@@ -99,6 +99,8 @@ public class AdsActionStats extends APINode {
   private String mActionVideoSound = null;
   @SerializedName("action_video_type")
   private String mActionVideoType = null;
+  @SerializedName("dda")
+  private String mDda = null;
   @SerializedName("inline")
   private String mInline = null;
   @SerializedName("interactive_component_sticker_id")
@@ -456,6 +458,15 @@ public class AdsActionStats extends APINode {
     return this;
   }
 
+  public String getFieldDda() {
+    return mDda;
+  }
+
+  public AdsActionStats setFieldDda(String value) {
+    this.mDda = value;
+    return this;
+  }
+
   public String getFieldInline() {
     return mInline;
   }
@@ -531,6 +542,7 @@ public class AdsActionStats extends APINode {
     this.mActionVideoAssetId = instance.mActionVideoAssetId;
     this.mActionVideoSound = instance.mActionVideoSound;
     this.mActionVideoType = instance.mActionVideoType;
+    this.mDda = instance.mDda;
     this.mInline = instance.mInline;
     this.mInteractiveComponentStickerId = instance.mInteractiveComponentStickerId;
     this.mInteractiveComponentStickerResponse = instance.mInteractiveComponentStickerResponse;

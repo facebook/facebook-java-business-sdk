@@ -54,27 +54,23 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ReachEstimate extends APINode {
-  @SerializedName("estimate_ready")
-  private Boolean mEstimateReady = null;
-  @SerializedName("unsupported")
-  private Boolean mUnsupported = null;
-  @SerializedName("users")
-  private Long mUsers = null;
+public class TargetingGeoLocationLocationExpansion extends APINode {
+  @SerializedName("allowed")
+  private Boolean mAllowed = null;
   protected static Gson gson = null;
 
-  public ReachEstimate() {
+  public TargetingGeoLocationLocationExpansion() {
   }
 
   public String getId() {
     return null;
   }
-  public static ReachEstimate loadJSON(String json, APIContext context, String header) {
-    ReachEstimate reachEstimate = getGson().fromJson(json, ReachEstimate.class);
+  public static TargetingGeoLocationLocationExpansion loadJSON(String json, APIContext context, String header) {
+    TargetingGeoLocationLocationExpansion targetingGeoLocationLocationExpansion = getGson().fromJson(json, TargetingGeoLocationLocationExpansion.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(reachEstimate.toString());
+      JsonElement o2 = parser.parse(targetingGeoLocationLocationExpansion.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -84,14 +80,14 @@ public class ReachEstimate extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    reachEstimate.context = context;
-    reachEstimate.rawValue = json;
-    reachEstimate.header = header;
-    return reachEstimate;
+    targetingGeoLocationLocationExpansion.context = context;
+    targetingGeoLocationLocationExpansion.rawValue = json;
+    targetingGeoLocationLocationExpansion.header = header;
+    return targetingGeoLocationLocationExpansion;
   }
 
-  public static APINodeList<ReachEstimate> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ReachEstimate> reachEstimates = new APINodeList<ReachEstimate>(request, json, header);
+  public static APINodeList<TargetingGeoLocationLocationExpansion> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<TargetingGeoLocationLocationExpansion> targetingGeoLocationLocationExpansions = new APINodeList<TargetingGeoLocationLocationExpansion>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -102,9 +98,9 @@ public class ReachEstimate extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          reachEstimates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          targetingGeoLocationLocationExpansions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return reachEstimates;
+        return targetingGeoLocationLocationExpansions;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -114,20 +110,20 @@ public class ReachEstimate extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                reachEstimates.setCursors(before, after);
+                targetingGeoLocationLocationExpansions.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            reachEstimates.setPaging(previous, next);
+            targetingGeoLocationLocationExpansions.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              reachEstimates.setAppSecret(context.getAppSecretProof());
+              targetingGeoLocationLocationExpansions.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              reachEstimates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              targetingGeoLocationLocationExpansions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -138,23 +134,23 @@ public class ReachEstimate extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  reachEstimates.add(loadJSON(entry.getValue().toString(), context, header));
+                  targetingGeoLocationLocationExpansions.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              reachEstimates.add(loadJSON(obj.toString(), context, header));
+              targetingGeoLocationLocationExpansions.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return reachEstimates;
+          return targetingGeoLocationLocationExpansions;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              reachEstimates.add(loadJSON(entry.getValue().toString(), context, header));
+              targetingGeoLocationLocationExpansions.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return reachEstimates;
+          return targetingGeoLocationLocationExpansions;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -171,20 +167,20 @@ public class ReachEstimate extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              reachEstimates.add(loadJSON(value.toString(), context, header));
+              targetingGeoLocationLocationExpansions.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return reachEstimates;
+            return targetingGeoLocationLocationExpansions;
           }
 
           // Sixth, check if it's pure JsonObject
-          reachEstimates.clear();
-          reachEstimates.add(loadJSON(json, context, header));
-          return reachEstimates;
+          targetingGeoLocationLocationExpansions.clear();
+          targetingGeoLocationLocationExpansions.add(loadJSON(json, context, header));
+          return targetingGeoLocationLocationExpansions;
         }
       }
     } catch (Exception e) {
@@ -212,30 +208,12 @@ public class ReachEstimate extends APINode {
   }
 
 
-  public Boolean getFieldEstimateReady() {
-    return mEstimateReady;
+  public Boolean getFieldAllowed() {
+    return mAllowed;
   }
 
-  public ReachEstimate setFieldEstimateReady(Boolean value) {
-    this.mEstimateReady = value;
-    return this;
-  }
-
-  public Boolean getFieldUnsupported() {
-    return mUnsupported;
-  }
-
-  public ReachEstimate setFieldUnsupported(Boolean value) {
-    this.mUnsupported = value;
-    return this;
-  }
-
-  public Long getFieldUsers() {
-    return mUsers;
-  }
-
-  public ReachEstimate setFieldUsers(Long value) {
-    this.mUsers = value;
+  public TargetingGeoLocationLocationExpansion setFieldAllowed(Boolean value) {
+    this.mAllowed = value;
     return this;
   }
 
@@ -255,19 +233,17 @@ public class ReachEstimate extends APINode {
     return gson;
   }
 
-  public ReachEstimate copyFrom(ReachEstimate instance) {
-    this.mEstimateReady = instance.mEstimateReady;
-    this.mUnsupported = instance.mUnsupported;
-    this.mUsers = instance.mUsers;
+  public TargetingGeoLocationLocationExpansion copyFrom(TargetingGeoLocationLocationExpansion instance) {
+    this.mAllowed = instance.mAllowed;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ReachEstimate> getParser() {
-    return new APIRequest.ResponseParser<ReachEstimate>() {
-      public APINodeList<ReachEstimate> parseResponse(String response, APIContext context, APIRequest<ReachEstimate> request, String header) throws MalformedResponseException {
-        return ReachEstimate.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<TargetingGeoLocationLocationExpansion> getParser() {
+    return new APIRequest.ResponseParser<TargetingGeoLocationLocationExpansion>() {
+      public APINodeList<TargetingGeoLocationLocationExpansion> parseResponse(String response, APIContext context, APIRequest<TargetingGeoLocationLocationExpansion> request, String header) throws MalformedResponseException {
+        return TargetingGeoLocationLocationExpansion.parseResponse(response, context, request, header);
       }
     };
   }

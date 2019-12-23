@@ -75,6 +75,8 @@ public class Lead extends APINode {
   private List<UserLeadGenFieldData> mFieldData = null;
   @SerializedName("form_id")
   private String mFormId = null;
+  @SerializedName("home_listing")
+  private HomeListing mHomeListing = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("is_organic")
@@ -83,10 +85,10 @@ public class Lead extends APINode {
   private String mPartnerName = null;
   @SerializedName("platform")
   private String mPlatform = null;
-  @SerializedName("post")
-  private Link mPost = null;
   @SerializedName("retailer_item_id")
   private String mRetailerItemId = null;
+  @SerializedName("vehicle")
+  private Vehicle mVehicle = null;
   protected static Gson gson = null;
 
   Lead() {
@@ -296,6 +298,10 @@ public class Lead extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestDelete delete() {
+    return new APIRequestDelete(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
@@ -341,6 +347,13 @@ public class Lead extends APINode {
     return mFormId;
   }
 
+  public HomeListing getFieldHomeListing() {
+    if (mHomeListing != null) {
+      mHomeListing.context = getContext();
+    }
+    return mHomeListing;
+  }
+
   public String getFieldId() {
     return mId;
   }
@@ -357,18 +370,122 @@ public class Lead extends APINode {
     return mPlatform;
   }
 
-  public Link getFieldPost() {
-    if (mPost != null) {
-      mPost.context = getContext();
-    }
-    return mPost;
-  }
-
   public String getFieldRetailerItemId() {
     return mRetailerItemId;
   }
 
+  public Vehicle getFieldVehicle() {
+    if (mVehicle != null) {
+      mVehicle.context = getContext();
+    }
+    return mVehicle;
+  }
 
+
+
+  public static class APIRequestDelete extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDelete(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDelete setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDelete requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDelete requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
 
   public static class APIRequestGet extends APIRequest<Lead> {
 
@@ -391,12 +508,13 @@ public class Lead extends APINode {
       "custom_disclaimer_responses",
       "field_data",
       "form_id",
+      "home_listing",
       "id",
       "is_organic",
       "partner_name",
       "platform",
-      "post",
       "retailer_item_id",
+      "vehicle",
     };
 
     @Override
@@ -558,6 +676,13 @@ public class Lead extends APINode {
       this.requestField("form_id", value);
       return this;
     }
+    public APIRequestGet requestHomeListingField () {
+      return this.requestHomeListingField(true);
+    }
+    public APIRequestGet requestHomeListingField (boolean value) {
+      this.requestField("home_listing", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -586,18 +711,18 @@ public class Lead extends APINode {
       this.requestField("platform", value);
       return this;
     }
-    public APIRequestGet requestPostField () {
-      return this.requestPostField(true);
-    }
-    public APIRequestGet requestPostField (boolean value) {
-      this.requestField("post", value);
-      return this;
-    }
     public APIRequestGet requestRetailerItemIdField () {
       return this.requestRetailerItemIdField(true);
     }
     public APIRequestGet requestRetailerItemIdField (boolean value) {
       this.requestField("retailer_item_id", value);
+      return this;
+    }
+    public APIRequestGet requestVehicleField () {
+      return this.requestVehicleField(true);
+    }
+    public APIRequestGet requestVehicleField (boolean value) {
+      this.requestField("vehicle", value);
       return this;
     }
   }
@@ -627,12 +752,13 @@ public class Lead extends APINode {
     this.mCustomDisclaimerResponses = instance.mCustomDisclaimerResponses;
     this.mFieldData = instance.mFieldData;
     this.mFormId = instance.mFormId;
+    this.mHomeListing = instance.mHomeListing;
     this.mId = instance.mId;
     this.mIsOrganic = instance.mIsOrganic;
     this.mPartnerName = instance.mPartnerName;
     this.mPlatform = instance.mPlatform;
-    this.mPost = instance.mPost;
     this.mRetailerItemId = instance.mRetailerItemId;
+    this.mVehicle = instance.mVehicle;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

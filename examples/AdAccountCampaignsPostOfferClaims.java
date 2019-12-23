@@ -35,6 +35,7 @@ public class AdAccountCampaignsPostOfferClaims {
     APIContext context = new APIContext(access_token).enableDebug(true);
 
     new AdAccount(id, context).createCampaign()
+      .setSpecialAdCategory(Campaign.EnumSpecialAdCategory.VALUE_NONE)
       .setName("My Offer Claims Campaign")
       .setObjective(Campaign.EnumObjective.VALUE_OFFER_CLAIMS)
       .setStatus(Campaign.EnumStatus.VALUE_PAUSED)

@@ -581,7 +581,7 @@ public class AdPlacePageSet extends APINode {
       VALUE_HOME("home"),
       @SerializedName("recent")
       VALUE_RECENT("recent"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -602,7 +602,7 @@ public class AdPlacePageSet extends APINode {
       VALUE_MARKETING_AREA("MARKETING_AREA"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
-      NULL(null);
+      ;
 
       private String value;
 

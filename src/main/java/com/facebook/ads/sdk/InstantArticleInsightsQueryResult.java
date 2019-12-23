@@ -271,7 +271,7 @@ public class InstantArticleInsightsQueryResult extends APINode {
       VALUE_PLATFORM("platform"),
       @SerializedName("region")
       VALUE_REGION("region"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -296,7 +296,7 @@ public class InstantArticleInsightsQueryResult extends APINode {
       VALUE_MONTH("month"),
       @SerializedName("week")
       VALUE_WEEK("week"),
-      NULL(null);
+      ;
 
       private String value;
 

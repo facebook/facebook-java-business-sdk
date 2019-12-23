@@ -267,21 +267,19 @@ public class AdsPixelStatsResult extends APINode {
       VALUE_EVENT_TOTAL_COUNTS("event_total_counts"),
       @SerializedName("event_value_count")
       VALUE_EVENT_VALUE_COUNT("event_value_count"),
+      @SerializedName("had_pii")
+      VALUE_HAD_PII("had_pii"),
       @SerializedName("host")
       VALUE_HOST("host"),
-      @SerializedName("people_reached")
-      VALUE_PEOPLE_REACHED("people_reached"),
-      @SerializedName("pii_keys")
-      VALUE_PII_KEYS("pii_keys"),
-      @SerializedName("pii_lift")
-      VALUE_PII_LIFT("pii_lift"),
+      @SerializedName("match_keys")
+      VALUE_MATCH_KEYS("match_keys"),
       @SerializedName("pixel_fire")
       VALUE_PIXEL_FIRE("pixel_fire"),
       @SerializedName("url")
       VALUE_URL("url"),
       @SerializedName("url_by_rule")
       VALUE_URL_BY_RULE("url_by_rule"),
-      NULL(null);
+      ;
 
       private String value;
 

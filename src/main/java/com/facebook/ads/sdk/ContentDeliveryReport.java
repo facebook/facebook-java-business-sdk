@@ -54,31 +54,31 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class CopyrightAttributionInsights extends APINode {
-  @SerializedName("l7_attribution_page_view")
-  private Long mL7AttributionPageView = null;
-  @SerializedName("l7_attribution_page_view_delta")
-  private Double mL7AttributionPageViewDelta = null;
-  @SerializedName("l7_attribution_video_view")
-  private Long mL7AttributionVideoView = null;
-  @SerializedName("l7_attribution_video_view_delta")
-  private Double mL7AttributionVideoViewDelta = null;
-  @SerializedName("metrics_ending_date")
-  private String mMetricsEndingDate = null;
+public class ContentDeliveryReport extends APINode {
+  @SerializedName("content_name")
+  private String mContentName = null;
+  @SerializedName("content_url")
+  private String mContentUrl = null;
+  @SerializedName("creator_name")
+  private String mCreatorName = null;
+  @SerializedName("creator_url")
+  private String mCreatorUrl = null;
+  @SerializedName("estimated_impressions")
+  private Long mEstimatedImpressions = null;
   protected static Gson gson = null;
 
-  public CopyrightAttributionInsights() {
+  public ContentDeliveryReport() {
   }
 
   public String getId() {
     return null;
   }
-  public static CopyrightAttributionInsights loadJSON(String json, APIContext context, String header) {
-    CopyrightAttributionInsights copyrightAttributionInsights = getGson().fromJson(json, CopyrightAttributionInsights.class);
+  public static ContentDeliveryReport loadJSON(String json, APIContext context, String header) {
+    ContentDeliveryReport contentDeliveryReport = getGson().fromJson(json, ContentDeliveryReport.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(copyrightAttributionInsights.toString());
+      JsonElement o2 = parser.parse(contentDeliveryReport.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -88,14 +88,14 @@ public class CopyrightAttributionInsights extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    copyrightAttributionInsights.context = context;
-    copyrightAttributionInsights.rawValue = json;
-    copyrightAttributionInsights.header = header;
-    return copyrightAttributionInsights;
+    contentDeliveryReport.context = context;
+    contentDeliveryReport.rawValue = json;
+    contentDeliveryReport.header = header;
+    return contentDeliveryReport;
   }
 
-  public static APINodeList<CopyrightAttributionInsights> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<CopyrightAttributionInsights> copyrightAttributionInsightss = new APINodeList<CopyrightAttributionInsights>(request, json, header);
+  public static APINodeList<ContentDeliveryReport> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ContentDeliveryReport> contentDeliveryReports = new APINodeList<ContentDeliveryReport>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -106,9 +106,9 @@ public class CopyrightAttributionInsights extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          copyrightAttributionInsightss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          contentDeliveryReports.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return copyrightAttributionInsightss;
+        return contentDeliveryReports;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -118,20 +118,20 @@ public class CopyrightAttributionInsights extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                copyrightAttributionInsightss.setCursors(before, after);
+                contentDeliveryReports.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            copyrightAttributionInsightss.setPaging(previous, next);
+            contentDeliveryReports.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              copyrightAttributionInsightss.setAppSecret(context.getAppSecretProof());
+              contentDeliveryReports.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              copyrightAttributionInsightss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              contentDeliveryReports.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -142,23 +142,23 @@ public class CopyrightAttributionInsights extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  copyrightAttributionInsightss.add(loadJSON(entry.getValue().toString(), context, header));
+                  contentDeliveryReports.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              copyrightAttributionInsightss.add(loadJSON(obj.toString(), context, header));
+              contentDeliveryReports.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return copyrightAttributionInsightss;
+          return contentDeliveryReports;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              copyrightAttributionInsightss.add(loadJSON(entry.getValue().toString(), context, header));
+              contentDeliveryReports.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return copyrightAttributionInsightss;
+          return contentDeliveryReports;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -175,20 +175,20 @@ public class CopyrightAttributionInsights extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              copyrightAttributionInsightss.add(loadJSON(value.toString(), context, header));
+              contentDeliveryReports.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return copyrightAttributionInsightss;
+            return contentDeliveryReports;
           }
 
           // Sixth, check if it's pure JsonObject
-          copyrightAttributionInsightss.clear();
-          copyrightAttributionInsightss.add(loadJSON(json, context, header));
-          return copyrightAttributionInsightss;
+          contentDeliveryReports.clear();
+          contentDeliveryReports.add(loadJSON(json, context, header));
+          return contentDeliveryReports;
         }
       }
     } catch (Exception e) {
@@ -216,52 +216,138 @@ public class CopyrightAttributionInsights extends APINode {
   }
 
 
-  public Long getFieldL7AttributionPageView() {
-    return mL7AttributionPageView;
+  public String getFieldContentName() {
+    return mContentName;
   }
 
-  public CopyrightAttributionInsights setFieldL7AttributionPageView(Long value) {
-    this.mL7AttributionPageView = value;
+  public ContentDeliveryReport setFieldContentName(String value) {
+    this.mContentName = value;
     return this;
   }
 
-  public Double getFieldL7AttributionPageViewDelta() {
-    return mL7AttributionPageViewDelta;
+  public String getFieldContentUrl() {
+    return mContentUrl;
   }
 
-  public CopyrightAttributionInsights setFieldL7AttributionPageViewDelta(Double value) {
-    this.mL7AttributionPageViewDelta = value;
+  public ContentDeliveryReport setFieldContentUrl(String value) {
+    this.mContentUrl = value;
     return this;
   }
 
-  public Long getFieldL7AttributionVideoView() {
-    return mL7AttributionVideoView;
+  public String getFieldCreatorName() {
+    return mCreatorName;
   }
 
-  public CopyrightAttributionInsights setFieldL7AttributionVideoView(Long value) {
-    this.mL7AttributionVideoView = value;
+  public ContentDeliveryReport setFieldCreatorName(String value) {
+    this.mCreatorName = value;
     return this;
   }
 
-  public Double getFieldL7AttributionVideoViewDelta() {
-    return mL7AttributionVideoViewDelta;
+  public String getFieldCreatorUrl() {
+    return mCreatorUrl;
   }
 
-  public CopyrightAttributionInsights setFieldL7AttributionVideoViewDelta(Double value) {
-    this.mL7AttributionVideoViewDelta = value;
+  public ContentDeliveryReport setFieldCreatorUrl(String value) {
+    this.mCreatorUrl = value;
     return this;
   }
 
-  public String getFieldMetricsEndingDate() {
-    return mMetricsEndingDate;
+  public Long getFieldEstimatedImpressions() {
+    return mEstimatedImpressions;
   }
 
-  public CopyrightAttributionInsights setFieldMetricsEndingDate(String value) {
-    this.mMetricsEndingDate = value;
+  public ContentDeliveryReport setFieldEstimatedImpressions(Long value) {
+    this.mEstimatedImpressions = value;
     return this;
   }
 
 
+
+  public static enum EnumPlatform {
+      @SerializedName("AUDIENCE_NETWORK")
+      VALUE_AUDIENCE_NETWORK("AUDIENCE_NETWORK"),
+      @SerializedName("FACEBOOK")
+      VALUE_FACEBOOK("FACEBOOK"),
+      @SerializedName("INSTAGRAM")
+      VALUE_INSTAGRAM("INSTAGRAM"),
+      @SerializedName("MESSENGER")
+      VALUE_MESSENGER("MESSENGER"),
+      @SerializedName("UNKNOWN")
+      VALUE_UNKNOWN("UNKNOWN"),
+      @SerializedName("WHATSAPP")
+      VALUE_WHATSAPP("WHATSAPP"),
+      ;
+
+      private String value;
+
+      private EnumPlatform(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumPosition {
+      @SerializedName("ALL_PLACEMENTS")
+      VALUE_ALL_PLACEMENTS("ALL_PLACEMENTS"),
+      @SerializedName("AN_CLASSIC")
+      VALUE_AN_CLASSIC("AN_CLASSIC"),
+      @SerializedName("FACEBOOK_GROUPS")
+      VALUE_FACEBOOK_GROUPS("FACEBOOK_GROUPS"),
+      @SerializedName("FACEBOOK_STORIES")
+      VALUE_FACEBOOK_STORIES("FACEBOOK_STORIES"),
+      @SerializedName("FEED")
+      VALUE_FEED("FEED"),
+      @SerializedName("GROUPS")
+      VALUE_GROUPS("GROUPS"),
+      @SerializedName("INSTAGRAM_EXPLORE")
+      VALUE_INSTAGRAM_EXPLORE("INSTAGRAM_EXPLORE"),
+      @SerializedName("INSTAGRAM_STORIES")
+      VALUE_INSTAGRAM_STORIES("INSTAGRAM_STORIES"),
+      @SerializedName("INSTANT_ARTICLE")
+      VALUE_INSTANT_ARTICLE("INSTANT_ARTICLE"),
+      @SerializedName("INSTREAM_VIDEO")
+      VALUE_INSTREAM_VIDEO("INSTREAM_VIDEO"),
+      @SerializedName("MARKETPLACE")
+      VALUE_MARKETPLACE("MARKETPLACE"),
+      @SerializedName("MESSENGER_INBOX")
+      VALUE_MESSENGER_INBOX("MESSENGER_INBOX"),
+      @SerializedName("MESSENGER_STORIES")
+      VALUE_MESSENGER_STORIES("MESSENGER_STORIES"),
+      @SerializedName("OTHERS")
+      VALUE_OTHERS("OTHERS"),
+      @SerializedName("REWARDED_VIDEO")
+      VALUE_REWARDED_VIDEO("REWARDED_VIDEO"),
+      @SerializedName("RIGHT_HAND_COLUMN")
+      VALUE_RIGHT_HAND_COLUMN("RIGHT_HAND_COLUMN"),
+      @SerializedName("SEARCH")
+      VALUE_SEARCH("SEARCH"),
+      @SerializedName("SEARCH_SERP")
+      VALUE_SEARCH_SERP("SEARCH_SERP"),
+      @SerializedName("STATUS")
+      VALUE_STATUS("STATUS"),
+      @SerializedName("SUGGESTED_VIDEO")
+      VALUE_SUGGESTED_VIDEO("SUGGESTED_VIDEO"),
+      @SerializedName("UNKNOWN")
+      VALUE_UNKNOWN("UNKNOWN"),
+      @SerializedName("VIDEO_FEEDS")
+      VALUE_VIDEO_FEEDS("VIDEO_FEEDS"),
+      ;
+
+      private String value;
+
+      private EnumPosition(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -277,21 +363,21 @@ public class CopyrightAttributionInsights extends APINode {
     return gson;
   }
 
-  public CopyrightAttributionInsights copyFrom(CopyrightAttributionInsights instance) {
-    this.mL7AttributionPageView = instance.mL7AttributionPageView;
-    this.mL7AttributionPageViewDelta = instance.mL7AttributionPageViewDelta;
-    this.mL7AttributionVideoView = instance.mL7AttributionVideoView;
-    this.mL7AttributionVideoViewDelta = instance.mL7AttributionVideoViewDelta;
-    this.mMetricsEndingDate = instance.mMetricsEndingDate;
+  public ContentDeliveryReport copyFrom(ContentDeliveryReport instance) {
+    this.mContentName = instance.mContentName;
+    this.mContentUrl = instance.mContentUrl;
+    this.mCreatorName = instance.mCreatorName;
+    this.mCreatorUrl = instance.mCreatorUrl;
+    this.mEstimatedImpressions = instance.mEstimatedImpressions;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<CopyrightAttributionInsights> getParser() {
-    return new APIRequest.ResponseParser<CopyrightAttributionInsights>() {
-      public APINodeList<CopyrightAttributionInsights> parseResponse(String response, APIContext context, APIRequest<CopyrightAttributionInsights> request, String header) throws MalformedResponseException {
-        return CopyrightAttributionInsights.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ContentDeliveryReport> getParser() {
+    return new APIRequest.ResponseParser<ContentDeliveryReport>() {
+      public APINodeList<ContentDeliveryReport> parseResponse(String response, APIContext context, APIRequest<ContentDeliveryReport> request, String header) throws MalformedResponseException {
+        return ContentDeliveryReport.parseResponse(response, context, request, header);
       }
     };
   }

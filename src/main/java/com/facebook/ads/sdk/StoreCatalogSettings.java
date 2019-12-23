@@ -54,92 +54,66 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdToplineDetail extends APINode {
-  @SerializedName("active_status")
-  private Long mActiveStatus = null;
-  @SerializedName("ad_account_id")
-  private String mAdAccountId = null;
-  @SerializedName("flight_end_date")
-  private String mFlightEndDate = null;
-  @SerializedName("flight_start_date")
-  private String mFlightStartDate = null;
+public class StoreCatalogSettings extends APINode {
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("io_number")
-  private Long mIoNumber = null;
-  @SerializedName("line_number")
-  private Long mLineNumber = null;
-  @SerializedName("price")
-  private Double mPrice = null;
-  @SerializedName("quantity")
-  private Double mQuantity = null;
-  @SerializedName("sf_detail_line_id")
-  private String mSfDetailLineId = null;
-  @SerializedName("subline_id")
-  private String mSublineId = null;
-  @SerializedName("targets")
-  private String mTargets = null;
-  @SerializedName("time_created")
-  private String mTimeCreated = null;
-  @SerializedName("time_updated")
-  private String mTimeUpdated = null;
-  @SerializedName("topline_id")
-  private AdTopline mToplineId = null;
+  @SerializedName("page")
+  private Page mPage = null;
   protected static Gson gson = null;
 
-  AdToplineDetail() {
+  StoreCatalogSettings() {
   }
 
-  public AdToplineDetail(Long id, APIContext context) {
+  public StoreCatalogSettings(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public AdToplineDetail(String id, APIContext context) {
+  public StoreCatalogSettings(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public AdToplineDetail fetch() throws APIException{
-    AdToplineDetail newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public StoreCatalogSettings fetch() throws APIException{
+    StoreCatalogSettings newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static AdToplineDetail fetchById(Long id, APIContext context) throws APIException {
+  public static StoreCatalogSettings fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<AdToplineDetail> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<StoreCatalogSettings> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static AdToplineDetail fetchById(String id, APIContext context) throws APIException {
+  public static StoreCatalogSettings fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<AdToplineDetail> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<StoreCatalogSettings> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<AdToplineDetail> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdToplineDetail>)(
-      new APIRequest<AdToplineDetail>(context, "", "/", "GET", AdToplineDetail.getParser())
+  public static APINodeList<StoreCatalogSettings> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<StoreCatalogSettings>)(
+      new APIRequest<StoreCatalogSettings>(context, "", "/", "GET", StoreCatalogSettings.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<AdToplineDetail>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<StoreCatalogSettings>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", AdToplineDetail.getParser())
+      new APIRequest(context, "", "/", "GET", StoreCatalogSettings.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -152,12 +126,12 @@ public class AdToplineDetail extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdToplineDetail loadJSON(String json, APIContext context, String header) {
-    AdToplineDetail adToplineDetail = getGson().fromJson(json, AdToplineDetail.class);
+  public static StoreCatalogSettings loadJSON(String json, APIContext context, String header) {
+    StoreCatalogSettings storeCatalogSettings = getGson().fromJson(json, StoreCatalogSettings.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adToplineDetail.toString());
+      JsonElement o2 = parser.parse(storeCatalogSettings.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -167,14 +141,14 @@ public class AdToplineDetail extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    adToplineDetail.context = context;
-    adToplineDetail.rawValue = json;
-    adToplineDetail.header = header;
-    return adToplineDetail;
+    storeCatalogSettings.context = context;
+    storeCatalogSettings.rawValue = json;
+    storeCatalogSettings.header = header;
+    return storeCatalogSettings;
   }
 
-  public static APINodeList<AdToplineDetail> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdToplineDetail> adToplineDetails = new APINodeList<AdToplineDetail>(request, json, header);
+  public static APINodeList<StoreCatalogSettings> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<StoreCatalogSettings> storeCatalogSettingss = new APINodeList<StoreCatalogSettings>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -185,9 +159,9 @@ public class AdToplineDetail extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adToplineDetails.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          storeCatalogSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adToplineDetails;
+        return storeCatalogSettingss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -197,20 +171,20 @@ public class AdToplineDetail extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adToplineDetails.setCursors(before, after);
+                storeCatalogSettingss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adToplineDetails.setPaging(previous, next);
+            storeCatalogSettingss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adToplineDetails.setAppSecret(context.getAppSecretProof());
+              storeCatalogSettingss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adToplineDetails.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              storeCatalogSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -221,23 +195,23 @@ public class AdToplineDetail extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adToplineDetails.add(loadJSON(entry.getValue().toString(), context, header));
+                  storeCatalogSettingss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adToplineDetails.add(loadJSON(obj.toString(), context, header));
+              storeCatalogSettingss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adToplineDetails;
+          return storeCatalogSettingss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adToplineDetails.add(loadJSON(entry.getValue().toString(), context, header));
+              storeCatalogSettingss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adToplineDetails;
+          return storeCatalogSettingss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -254,20 +228,20 @@ public class AdToplineDetail extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adToplineDetails.add(loadJSON(value.toString(), context, header));
+              storeCatalogSettingss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adToplineDetails;
+            return storeCatalogSettingss;
           }
 
           // Sixth, check if it's pure JsonObject
-          adToplineDetails.clear();
-          adToplineDetails.add(loadJSON(json, context, header));
-          return adToplineDetails;
+          storeCatalogSettingss.clear();
+          storeCatalogSettingss.add(loadJSON(json, context, header));
+          return storeCatalogSettingss;
         }
       }
     } catch (Exception e) {
@@ -298,126 +272,65 @@ public class AdToplineDetail extends APINode {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
-
-  public Long getFieldActiveStatus() {
-    return mActiveStatus;
+  public APIRequestUpdate update() {
+    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
   }
 
-  public String getFieldAdAccountId() {
-    return mAdAccountId;
-  }
-
-  public String getFieldFlightEndDate() {
-    return mFlightEndDate;
-  }
-
-  public String getFieldFlightStartDate() {
-    return mFlightStartDate;
-  }
 
   public String getFieldId() {
     return mId;
   }
 
-  public Long getFieldIoNumber() {
-    return mIoNumber;
-  }
-
-  public Long getFieldLineNumber() {
-    return mLineNumber;
-  }
-
-  public Double getFieldPrice() {
-    return mPrice;
-  }
-
-  public Double getFieldQuantity() {
-    return mQuantity;
-  }
-
-  public String getFieldSfDetailLineId() {
-    return mSfDetailLineId;
-  }
-
-  public String getFieldSublineId() {
-    return mSublineId;
-  }
-
-  public String getFieldTargets() {
-    return mTargets;
-  }
-
-  public String getFieldTimeCreated() {
-    return mTimeCreated;
-  }
-
-  public String getFieldTimeUpdated() {
-    return mTimeUpdated;
-  }
-
-  public AdTopline getFieldToplineId() {
-    if (mToplineId != null) {
-      mToplineId.context = getContext();
+  public Page getFieldPage() {
+    if (mPage != null) {
+      mPage.context = getContext();
     }
-    return mToplineId;
+    return mPage;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<AdToplineDetail> {
+  public static class APIRequestGet extends APIRequest<StoreCatalogSettings> {
 
-    AdToplineDetail lastResponse = null;
+    StoreCatalogSettings lastResponse = null;
     @Override
-    public AdToplineDetail getLastResponse() {
+    public StoreCatalogSettings getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "active_status",
-      "ad_account_id",
-      "flight_end_date",
-      "flight_start_date",
       "id",
-      "io_number",
-      "line_number",
-      "price",
-      "quantity",
-      "sf_detail_line_id",
-      "subline_id",
-      "targets",
-      "time_created",
-      "time_updated",
-      "topline_id",
+      "page",
     };
 
     @Override
-    public AdToplineDetail parseResponse(String response, String header) throws APIException {
-      return AdToplineDetail.parseResponse(response, getContext(), this, header).head();
+    public StoreCatalogSettings parseResponse(String response, String header) throws APIException {
+      return StoreCatalogSettings.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public AdToplineDetail execute() throws APIException {
+    public StoreCatalogSettings execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public AdToplineDetail execute(Map<String, Object> extraParams) throws APIException {
+    public StoreCatalogSettings execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<AdToplineDetail> executeAsync() throws APIException {
+    public ListenableFuture<StoreCatalogSettings> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<AdToplineDetail> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<StoreCatalogSettings> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, AdToplineDetail>() {
-           public AdToplineDetail apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, StoreCatalogSettings>() {
+           public StoreCatalogSettings apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -481,34 +394,6 @@ public class AdToplineDetail extends APINode {
       return this;
     }
 
-    public APIRequestGet requestActiveStatusField () {
-      return this.requestActiveStatusField(true);
-    }
-    public APIRequestGet requestActiveStatusField (boolean value) {
-      this.requestField("active_status", value);
-      return this;
-    }
-    public APIRequestGet requestAdAccountIdField () {
-      return this.requestAdAccountIdField(true);
-    }
-    public APIRequestGet requestAdAccountIdField (boolean value) {
-      this.requestField("ad_account_id", value);
-      return this;
-    }
-    public APIRequestGet requestFlightEndDateField () {
-      return this.requestFlightEndDateField(true);
-    }
-    public APIRequestGet requestFlightEndDateField (boolean value) {
-      this.requestField("flight_end_date", value);
-      return this;
-    }
-    public APIRequestGet requestFlightStartDateField () {
-      return this.requestFlightStartDateField(true);
-    }
-    public APIRequestGet requestFlightStartDateField (boolean value) {
-      this.requestField("flight_start_date", value);
-      return this;
-    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -516,76 +401,127 @@ public class AdToplineDetail extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestIoNumberField () {
-      return this.requestIoNumberField(true);
+    public APIRequestGet requestPageField () {
+      return this.requestPageField(true);
     }
-    public APIRequestGet requestIoNumberField (boolean value) {
-      this.requestField("io_number", value);
+    public APIRequestGet requestPageField (boolean value) {
+      this.requestField("page", value);
       return this;
     }
-    public APIRequestGet requestLineNumberField () {
-      return this.requestLineNumberField(true);
+  }
+
+  public static class APIRequestUpdate extends APIRequest<StoreCatalogSettings> {
+
+    StoreCatalogSettings lastResponse = null;
+    @Override
+    public StoreCatalogSettings getLastResponse() {
+      return lastResponse;
     }
-    public APIRequestGet requestLineNumberField (boolean value) {
-      this.requestField("line_number", value);
+    public static final String[] PARAMS = {
+      "page",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public StoreCatalogSettings parseResponse(String response, String header) throws APIException {
+      return StoreCatalogSettings.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public StoreCatalogSettings execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public StoreCatalogSettings execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<StoreCatalogSettings> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<StoreCatalogSettings> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, StoreCatalogSettings>() {
+           public StoreCatalogSettings apply(ResponseWrapper result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestUpdate(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestUpdate setParam(String param, Object value) {
+      setParamInternal(param, value);
       return this;
     }
-    public APIRequestGet requestPriceField () {
-      return this.requestPriceField(true);
-    }
-    public APIRequestGet requestPriceField (boolean value) {
-      this.requestField("price", value);
+
+    @Override
+    public APIRequestUpdate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
       return this;
     }
-    public APIRequestGet requestQuantityField () {
-      return this.requestQuantityField(true);
-    }
-    public APIRequestGet requestQuantityField (boolean value) {
-      this.requestField("quantity", value);
+
+
+    public APIRequestUpdate setPage (Long page) {
+      this.setParam("page", page);
       return this;
     }
-    public APIRequestGet requestSfDetailLineIdField () {
-      return this.requestSfDetailLineIdField(true);
-    }
-    public APIRequestGet requestSfDetailLineIdField (boolean value) {
-      this.requestField("sf_detail_line_id", value);
+    public APIRequestUpdate setPage (String page) {
+      this.setParam("page", page);
       return this;
     }
-    public APIRequestGet requestSublineIdField () {
-      return this.requestSublineIdField(true);
+
+    public APIRequestUpdate requestAllFields () {
+      return this.requestAllFields(true);
     }
-    public APIRequestGet requestSublineIdField (boolean value) {
-      this.requestField("subline_id", value);
+
+    public APIRequestUpdate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
       return this;
     }
-    public APIRequestGet requestTargetsField () {
-      return this.requestTargetsField(true);
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
     }
-    public APIRequestGet requestTargetsField (boolean value) {
-      this.requestField("targets", value);
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
       return this;
     }
-    public APIRequestGet requestTimeCreatedField () {
-      return this.requestTimeCreatedField(true);
-    }
-    public APIRequestGet requestTimeCreatedField (boolean value) {
-      this.requestField("time_created", value);
+
+    @Override
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
-    public APIRequestGet requestTimeUpdatedField () {
-      return this.requestTimeUpdatedField(true);
-    }
-    public APIRequestGet requestTimeUpdatedField (boolean value) {
-      this.requestField("time_updated", value);
+
+    @Override
+    public APIRequestUpdate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
       return this;
     }
-    public APIRequestGet requestToplineIdField () {
-      return this.requestToplineIdField(true);
-    }
-    public APIRequestGet requestToplineIdField (boolean value) {
-      this.requestField("topline_id", value);
-      return this;
-    }
+
   }
 
 
@@ -602,31 +538,18 @@ public class AdToplineDetail extends APINode {
     return gson;
   }
 
-  public AdToplineDetail copyFrom(AdToplineDetail instance) {
-    this.mActiveStatus = instance.mActiveStatus;
-    this.mAdAccountId = instance.mAdAccountId;
-    this.mFlightEndDate = instance.mFlightEndDate;
-    this.mFlightStartDate = instance.mFlightStartDate;
+  public StoreCatalogSettings copyFrom(StoreCatalogSettings instance) {
     this.mId = instance.mId;
-    this.mIoNumber = instance.mIoNumber;
-    this.mLineNumber = instance.mLineNumber;
-    this.mPrice = instance.mPrice;
-    this.mQuantity = instance.mQuantity;
-    this.mSfDetailLineId = instance.mSfDetailLineId;
-    this.mSublineId = instance.mSublineId;
-    this.mTargets = instance.mTargets;
-    this.mTimeCreated = instance.mTimeCreated;
-    this.mTimeUpdated = instance.mTimeUpdated;
-    this.mToplineId = instance.mToplineId;
+    this.mPage = instance.mPage;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdToplineDetail> getParser() {
-    return new APIRequest.ResponseParser<AdToplineDetail>() {
-      public APINodeList<AdToplineDetail> parseResponse(String response, APIContext context, APIRequest<AdToplineDetail> request, String header) throws MalformedResponseException {
-        return AdToplineDetail.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<StoreCatalogSettings> getParser() {
+    return new APIRequest.ResponseParser<StoreCatalogSettings>() {
+      public APINodeList<StoreCatalogSettings> parseResponse(String response, APIContext context, APIRequest<StoreCatalogSettings> request, String header) throws MalformedResponseException {
+        return StoreCatalogSettings.parseResponse(response, context, request, header);
       }
     };
   }

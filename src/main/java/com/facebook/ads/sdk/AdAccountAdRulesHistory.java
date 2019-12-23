@@ -350,7 +350,7 @@ public class AdAccountAdRulesHistory extends APINode {
       VALUE_PAUSED("PAUSED"),
       @SerializedName("UNPAUSED")
       VALUE_UNPAUSED("UNPAUSED"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -369,7 +369,7 @@ public class AdAccountAdRulesHistory extends APINode {
       VALUE_SCHEDULE("SCHEDULE"),
       @SerializedName("TRIGGER")
       VALUE_TRIGGER("TRIGGER"),
-      NULL(null);
+      ;
 
       private String value;
 

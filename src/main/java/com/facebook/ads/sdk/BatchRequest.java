@@ -70,6 +70,14 @@ public class BatchRequest {
     return this;
   }
 
+  public BatchRequest addRequest(String name, boolean omitResponseOnSuccess, APIRequest request) {
+    if (request == null) {
+      throw new IllegalArgumentException("Cannot add null into batch request!");
+    }
+    this.requests.add(new Pair(name, omitResponseOnSuccess, request));
+    return this;
+  }
+
   public List<APIResponse> execute() throws APIException {
     try {
       List<APIResponse> responses = new ArrayList<APIResponse>();
@@ -120,6 +128,7 @@ public class BatchRequest {
       batchElement.addProperty("method", info.method);
       batchElement.addProperty("relative_url", info.relativeUrl);
       batchElement.addProperty("name", requestEntry.name);
+      batchElement.addProperty("omit_response_on_success", requestEntry.omitResponseOnSuccess);
 
       if (info.body != null) {
         batchElement.addProperty("body", info.body);
@@ -146,14 +155,22 @@ public class BatchRequest {
     public String method;
     public String body;
     public String relativeUrl;
+    public boolean omit_response_on_success;
     public Map<String, File> files;
   }
 
   private static class Pair {
     String name;
+    boolean omitResponseOnSuccess;
     APIRequest request;
     Pair(String name, APIRequest request) {
       this.name = name;
+      this.request = request;
+    }
+
+    Pair(String name, boolean omitResponseOnSuccess, APIRequest request) {
+      this.name = name;
+      this.omitResponseOnSuccess = omitResponseOnSuccess;
       this.request = request;
     }
   }

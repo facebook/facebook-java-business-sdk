@@ -303,7 +303,9 @@ public class APIRequest<T extends APINode> {
         response.append(inputLine);
       }
       in.close();
-      throw new APIException.FailedRequestException(response.toString(), e);
+      throw new APIException.FailedRequestException(
+        convertToString(con.getHeaderFields()), response.toString(), e
+      );
     }
   }
 
@@ -356,6 +358,11 @@ public class APIRequest<T extends APINode> {
 
   public APIRequest addToBatch(BatchRequest batch, String name) {
     batch.addRequest(name, this);
+    return this;
+  }
+
+  public APIRequest addToBatch(BatchRequest batch, String name, boolean omitResponseOnSuccess) {
+    batch.addRequest(name, omitResponseOnSuccess, this);
     return this;
   }
 

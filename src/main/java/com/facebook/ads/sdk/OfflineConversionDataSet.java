@@ -79,6 +79,8 @@ public class OfflineConversionDataSet extends APINode {
   private Boolean mIsMtaUse = null;
   @SerializedName("is_restricted_use")
   private Boolean mIsRestrictedUse = null;
+  @SerializedName("is_unavailable")
+  private Boolean mIsUnavailable = null;
   @SerializedName("last_upload_app")
   private String mLastUploadApp = null;
   @SerializedName("last_upload_app_changed_time")
@@ -310,10 +312,6 @@ public class OfflineConversionDataSet extends APINode {
     return new APIRequestCreateAdAccount(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestDeleteAgencies deleteAgencies() {
-    return new APIRequestDeleteAgencies(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetAgencies getAgencies() {
     return new APIRequestGetAgencies(this.getPrefixedId().toString(), context);
   }
@@ -418,6 +416,10 @@ public class OfflineConversionDataSet extends APINode {
     return mIsRestrictedUse;
   }
 
+  public Boolean getFieldIsUnavailable() {
+    return mIsUnavailable;
+  }
+
   public String getFieldLastUploadApp() {
     return mLastUploadApp;
   }
@@ -483,6 +485,7 @@ public class OfflineConversionDataSet extends APINode {
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
+      "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
       "funding_source",
@@ -517,7 +520,7 @@ public class OfflineConversionDataSet extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
-      "user_role",
+      "user_tasks",
       "user_tos_accepted",
     };
 
@@ -776,6 +779,13 @@ public class OfflineConversionDataSet extends APINode {
       this.requestField("end_advertiser_name", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestExtendedCreditInvoiceGroupField () {
+      return this.requestExtendedCreditInvoiceGroupField(true);
+    }
+    public APIRequestGetAdAccounts requestExtendedCreditInvoiceGroupField (boolean value) {
+      this.requestField("extended_credit_invoice_group", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestFailedDeliveryChecksField () {
       return this.requestFailedDeliveryChecksField(true);
     }
@@ -1014,11 +1024,11 @@ public class OfflineConversionDataSet extends APINode {
       this.requestField("tos_accepted", value);
       return this;
     }
-    public APIRequestGetAdAccounts requestUserRoleField () {
-      return this.requestUserRoleField(true);
+    public APIRequestGetAdAccounts requestUserTasksField () {
+      return this.requestUserTasksField(true);
     }
-    public APIRequestGetAdAccounts requestUserRoleField (boolean value) {
-      this.requestField("user_role", value);
+    public APIRequestGetAdAccounts requestUserTasksField (boolean value) {
+      this.requestField("user_tasks", value);
       return this;
     }
     public APIRequestGetAdAccounts requestUserTosAcceptedField () {
@@ -1150,116 +1160,6 @@ public class OfflineConversionDataSet extends APINode {
 
     @Override
     public APIRequestCreateAdAccount requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestDeleteAgencies extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "business",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestDeleteAgencies.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestDeleteAgencies(String nodeId, APIContext context) {
-      super(context, nodeId, "/agencies", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDeleteAgencies setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAgencies setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDeleteAgencies setBusiness (String business) {
-      this.setParam("business", business);
-      return this;
-    }
-
-    public APIRequestDeleteAgencies requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDeleteAgencies requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAgencies requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDeleteAgencies requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAgencies requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAgencies requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -3227,6 +3127,7 @@ public class OfflineConversionDataSet extends APINode {
       "id",
       "is_mta_use",
       "is_restricted_use",
+      "is_unavailable",
       "last_upload_app",
       "last_upload_app_changed_time",
       "match_rate_approx",
@@ -3407,6 +3308,13 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGet requestIsRestrictedUseField (boolean value) {
       this.requestField("is_restricted_use", value);
+      return this;
+    }
+    public APIRequestGet requestIsUnavailableField () {
+      return this.requestIsUnavailableField(true);
+    }
+    public APIRequestGet requestIsUnavailableField (boolean value) {
+      this.requestField("is_unavailable", value);
       return this;
     }
     public APIRequestGet requestLastUploadAppField () {
@@ -3603,7 +3511,7 @@ public class OfflineConversionDataSet extends APINode {
       VALUE_ADVERTISER("ADVERTISER"),
       @SerializedName("UPLOADER")
       VALUE_UPLOADER("UPLOADER"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3622,11 +3530,13 @@ public class OfflineConversionDataSet extends APINode {
       VALUE_AD_MANAGER("AD_MANAGER"),
       @SerializedName("AGENCY")
       VALUE_AGENCY("AGENCY"),
+      @SerializedName("AGGREGATOR")
+      VALUE_AGGREGATOR("AGGREGATOR"),
       @SerializedName("AUDIENCE_MANAGER")
       VALUE_AUDIENCE_MANAGER("AUDIENCE_MANAGER"),
       @SerializedName("OTHER")
       VALUE_OTHER("OTHER"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3645,7 +3555,7 @@ public class OfflineConversionDataSet extends APINode {
       VALUE_EVENT_TIME("event_time"),
       @SerializedName("upload_time")
       VALUE_UPLOAD_TIME("upload_time"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3666,7 +3576,7 @@ public class OfflineConversionDataSet extends APINode {
       VALUE_HOURLY("hourly"),
       @SerializedName("six_hourly")
       VALUE_SIX_HOURLY("six_hourly"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3685,7 +3595,7 @@ public class OfflineConversionDataSet extends APINode {
       VALUE_ASCENDING("ASCENDING"),
       @SerializedName("DESCENDING")
       VALUE_DESCENDING("DESCENDING"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3714,7 +3624,7 @@ public class OfflineConversionDataSet extends APINode {
       VALUE_IS_EXCLUDED_FOR_LIFT("IS_EXCLUDED_FOR_LIFT"),
       @SerializedName("LAST_UPLOAD_TIME")
       VALUE_LAST_UPLOAD_TIME("LAST_UPLOAD_TIME"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3755,6 +3665,7 @@ public class OfflineConversionDataSet extends APINode {
     this.mId = instance.mId;
     this.mIsMtaUse = instance.mIsMtaUse;
     this.mIsRestrictedUse = instance.mIsRestrictedUse;
+    this.mIsUnavailable = instance.mIsUnavailable;
     this.mLastUploadApp = instance.mLastUploadApp;
     this.mLastUploadAppChangedTime = instance.mLastUploadAppChangedTime;
     this.mMatchRateApprox = instance.mMatchRateApprox;

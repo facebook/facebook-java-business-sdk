@@ -57,8 +57,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class ReachFrequencyEstimatesCurve extends APINode {
   @SerializedName("budget")
   private List<Long> mBudget = null;
-  @SerializedName("click")
-  private List<Long> mClick = null;
   @SerializedName("conversion")
   private List<Long> mConversion = null;
   @SerializedName("impression")
@@ -233,15 +231,6 @@ public class ReachFrequencyEstimatesCurve extends APINode {
     return this;
   }
 
-  public List<Long> getFieldClick() {
-    return mClick;
-  }
-
-  public ReachFrequencyEstimatesCurve setFieldClick(List<Long> value) {
-    this.mClick = value;
-    return this;
-  }
-
   public List<Long> getFieldConversion() {
     return mConversion;
   }
@@ -323,7 +312,6 @@ public class ReachFrequencyEstimatesCurve extends APINode {
 
   public ReachFrequencyEstimatesCurve copyFrom(ReachFrequencyEstimatesCurve instance) {
     this.mBudget = instance.mBudget;
-    this.mClick = instance.mClick;
     this.mConversion = instance.mConversion;
     this.mImpression = instance.mImpression;
     this.mInterpolatedReach = instance.mInterpolatedReach;

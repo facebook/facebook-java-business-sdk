@@ -299,7 +299,7 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
   public static enum EnumCustomTextType {
       @SerializedName("free_shipping")
       VALUE_FREE_SHIPPING("free_shipping"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -320,7 +320,7 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
       VALUE_PILL_WITH_TEXT("pill_with_text"),
       @SerializedName("triangle_with_text")
       VALUE_TRIANGLE_WITH_TEXT("triangle_with_text"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -343,7 +343,7 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
       VALUE_TOP_LEFT("top_left"),
       @SerializedName("top_right")
       VALUE_TOP_RIGHT("top_right"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -378,7 +378,7 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
       VALUE_ROBOTO_CONDENSED_REGULAR("roboto_condensed_regular"),
       @SerializedName("roboto_medium")
       VALUE_ROBOTO_MEDIUM("roboto_medium"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -399,13 +399,17 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
       VALUE_DISCLAIMER("disclaimer"),
       @SerializedName("from_price")
       VALUE_FROM_PRICE("from_price"),
+      @SerializedName("guest_rating")
+      VALUE_GUEST_RATING("guest_rating"),
       @SerializedName("percentage_off")
       VALUE_PERCENTAGE_OFF("percentage_off"),
       @SerializedName("price")
       VALUE_PRICE("price"),
+      @SerializedName("star_rating")
+      VALUE_STAR_RATING("star_rating"),
       @SerializedName("strikethrough_price")
       VALUE_STRIKETHROUGH_PRICE("strikethrough_price"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -452,7 +456,7 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
       VALUE_BACKGROUND_FFFFFF_TEXT_F23474("background_ffffff_text_f23474"),
       @SerializedName("background_ffffff_text_f78400")
       VALUE_BACKGROUND_FFFFFF_TEXT_F78400("background_ffffff_text_f78400"),
-      NULL(null);
+      ;
 
       private String value;
 

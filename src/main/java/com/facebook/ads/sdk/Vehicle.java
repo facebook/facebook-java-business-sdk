@@ -1022,6 +1022,7 @@ public class Vehicle extends APINode {
       "description",
       "drivetrain",
       "exterior_color",
+      "fb_page_id",
       "fuel_type",
       "images",
       "interior_color",
@@ -1184,6 +1185,11 @@ public class Vehicle extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setFbPageId (String fbPageId) {
+      this.setParam("fb_page_id", fbPageId);
+      return this;
+    }
+
     public APIRequestUpdate setFuelType (Vehicle.EnumFuelType fuelType) {
       this.setParam("fuel_type", fuelType);
       return this;
@@ -1334,7 +1340,7 @@ public class Vehicle extends APINode {
       VALUE_AVAILABLE("AVAILABLE"),
       @SerializedName("NOT_AVAILABLE")
       VALUE_NOT_AVAILABLE("NOT_AVAILABLE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1375,7 +1381,7 @@ public class Vehicle extends APINode {
       VALUE_VAN("VAN"),
       @SerializedName("WAGON")
       VALUE_WAGON("WAGON"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1404,7 +1410,7 @@ public class Vehicle extends APINode {
       VALUE_POOR("POOR"),
       @SerializedName("VERY_GOOD")
       VALUE_VERY_GOOD("VERY_GOOD"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1433,7 +1439,7 @@ public class Vehicle extends APINode {
       VALUE_RWD("RWD"),
       @SerializedName("TWO_WD")
       VALUE_TWO_WD("TWO_WD"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1466,7 +1472,7 @@ public class Vehicle extends APINode {
       VALUE_PETROL("PETROL"),
       @SerializedName("PLUGIN_HYBRID")
       VALUE_PLUGIN_HYBRID("PLUGIN_HYBRID"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1487,7 +1493,7 @@ public class Vehicle extends APINode {
       VALUE_NEW("NEW"),
       @SerializedName("USED")
       VALUE_USED("USED"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1510,7 +1516,7 @@ public class Vehicle extends APINode {
       VALUE_NONE("NONE"),
       @SerializedName("OTHER")
       VALUE_OTHER("OTHER"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1541,7 +1547,7 @@ public class Vehicle extends APINode {
       VALUE_RV_CAMPER("RV_CAMPER"),
       @SerializedName("TRAILER")
       VALUE_TRAILER("TRAILER"),
-      NULL(null);
+      ;
 
       private String value;
 

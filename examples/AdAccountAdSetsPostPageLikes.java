@@ -43,6 +43,7 @@ public class AdAccountAdSetsPostPageLikes {
       .setCampaignId("<adCampaignLinkClicksID>")
       .setTargeting(
           new Targeting()
+            .setFieldFacebookPositions(Arrays.asList("feed"))
             .setFieldGeoLocations(
               new TargetingGeoLocation()
                 .setFieldCountries(Arrays.asList("US"))

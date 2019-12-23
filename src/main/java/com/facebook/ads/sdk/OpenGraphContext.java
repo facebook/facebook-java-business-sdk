@@ -304,6 +304,7 @@ public class OpenGraphContext extends APINode {
       "address",
       "admin_notes",
       "age_range",
+      "auth_method",
       "birthday",
       "can_review_measurement_request",
       "cover",
@@ -311,7 +312,6 @@ public class OpenGraphContext extends APINode {
       "devices",
       "education",
       "email",
-      "employee_number",
       "favorite_athletes",
       "favorite_teams",
       "first_name",
@@ -323,9 +323,9 @@ public class OpenGraphContext extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
+      "is_guest_user",
       "is_shared_login",
       "is_verified",
-      "labels",
       "languages",
       "last_name",
       "link",
@@ -478,6 +478,13 @@ public class OpenGraphContext extends APINode {
       this.requestField("age_range", value);
       return this;
     }
+    public APIRequestGetFriendsTaggedAt requestAuthMethodField () {
+      return this.requestAuthMethodField(true);
+    }
+    public APIRequestGetFriendsTaggedAt requestAuthMethodField (boolean value) {
+      this.requestField("auth_method", value);
+      return this;
+    }
     public APIRequestGetFriendsTaggedAt requestBirthdayField () {
       return this.requestBirthdayField(true);
     }
@@ -525,13 +532,6 @@ public class OpenGraphContext extends APINode {
     }
     public APIRequestGetFriendsTaggedAt requestEmailField (boolean value) {
       this.requestField("email", value);
-      return this;
-    }
-    public APIRequestGetFriendsTaggedAt requestEmployeeNumberField () {
-      return this.requestEmployeeNumberField(true);
-    }
-    public APIRequestGetFriendsTaggedAt requestEmployeeNumberField (boolean value) {
-      this.requestField("employee_number", value);
       return this;
     }
     public APIRequestGetFriendsTaggedAt requestFavoriteAthletesField () {
@@ -611,6 +611,13 @@ public class OpenGraphContext extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
+    public APIRequestGetFriendsTaggedAt requestIsGuestUserField () {
+      return this.requestIsGuestUserField(true);
+    }
+    public APIRequestGetFriendsTaggedAt requestIsGuestUserField (boolean value) {
+      this.requestField("is_guest_user", value);
+      return this;
+    }
     public APIRequestGetFriendsTaggedAt requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -623,13 +630,6 @@ public class OpenGraphContext extends APINode {
     }
     public APIRequestGetFriendsTaggedAt requestIsVerifiedField (boolean value) {
       this.requestField("is_verified", value);
-      return this;
-    }
-    public APIRequestGetFriendsTaggedAt requestLabelsField () {
-      return this.requestLabelsField(true);
-    }
-    public APIRequestGetFriendsTaggedAt requestLabelsField (boolean value) {
-      this.requestField("labels", value);
       return this;
     }
     public APIRequestGetFriendsTaggedAt requestLanguagesField () {
@@ -880,6 +880,7 @@ public class OpenGraphContext extends APINode {
       "address",
       "admin_notes",
       "age_range",
+      "auth_method",
       "birthday",
       "can_review_measurement_request",
       "cover",
@@ -887,7 +888,6 @@ public class OpenGraphContext extends APINode {
       "devices",
       "education",
       "email",
-      "employee_number",
       "favorite_athletes",
       "favorite_teams",
       "first_name",
@@ -899,9 +899,9 @@ public class OpenGraphContext extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
+      "is_guest_user",
       "is_shared_login",
       "is_verified",
-      "labels",
       "languages",
       "last_name",
       "link",
@@ -1054,6 +1054,13 @@ public class OpenGraphContext extends APINode {
       this.requestField("age_range", value);
       return this;
     }
+    public APIRequestGetMusicListenFriends requestAuthMethodField () {
+      return this.requestAuthMethodField(true);
+    }
+    public APIRequestGetMusicListenFriends requestAuthMethodField (boolean value) {
+      this.requestField("auth_method", value);
+      return this;
+    }
     public APIRequestGetMusicListenFriends requestBirthdayField () {
       return this.requestBirthdayField(true);
     }
@@ -1101,13 +1108,6 @@ public class OpenGraphContext extends APINode {
     }
     public APIRequestGetMusicListenFriends requestEmailField (boolean value) {
       this.requestField("email", value);
-      return this;
-    }
-    public APIRequestGetMusicListenFriends requestEmployeeNumberField () {
-      return this.requestEmployeeNumberField(true);
-    }
-    public APIRequestGetMusicListenFriends requestEmployeeNumberField (boolean value) {
-      this.requestField("employee_number", value);
       return this;
     }
     public APIRequestGetMusicListenFriends requestFavoriteAthletesField () {
@@ -1187,6 +1187,13 @@ public class OpenGraphContext extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
+    public APIRequestGetMusicListenFriends requestIsGuestUserField () {
+      return this.requestIsGuestUserField(true);
+    }
+    public APIRequestGetMusicListenFriends requestIsGuestUserField (boolean value) {
+      this.requestField("is_guest_user", value);
+      return this;
+    }
     public APIRequestGetMusicListenFriends requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -1199,13 +1206,6 @@ public class OpenGraphContext extends APINode {
     }
     public APIRequestGetMusicListenFriends requestIsVerifiedField (boolean value) {
       this.requestField("is_verified", value);
-      return this;
-    }
-    public APIRequestGetMusicListenFriends requestLabelsField () {
-      return this.requestLabelsField(true);
-    }
-    public APIRequestGetMusicListenFriends requestLabelsField (boolean value) {
-      this.requestField("labels", value);
       return this;
     }
     public APIRequestGetMusicListenFriends requestLanguagesField () {
@@ -1456,6 +1456,7 @@ public class OpenGraphContext extends APINode {
       "address",
       "admin_notes",
       "age_range",
+      "auth_method",
       "birthday",
       "can_review_measurement_request",
       "cover",
@@ -1463,7 +1464,6 @@ public class OpenGraphContext extends APINode {
       "devices",
       "education",
       "email",
-      "employee_number",
       "favorite_athletes",
       "favorite_teams",
       "first_name",
@@ -1475,9 +1475,9 @@ public class OpenGraphContext extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
+      "is_guest_user",
       "is_shared_login",
       "is_verified",
-      "labels",
       "languages",
       "last_name",
       "link",
@@ -1630,6 +1630,13 @@ public class OpenGraphContext extends APINode {
       this.requestField("age_range", value);
       return this;
     }
+    public APIRequestGetVideoWatchFriends requestAuthMethodField () {
+      return this.requestAuthMethodField(true);
+    }
+    public APIRequestGetVideoWatchFriends requestAuthMethodField (boolean value) {
+      this.requestField("auth_method", value);
+      return this;
+    }
     public APIRequestGetVideoWatchFriends requestBirthdayField () {
       return this.requestBirthdayField(true);
     }
@@ -1677,13 +1684,6 @@ public class OpenGraphContext extends APINode {
     }
     public APIRequestGetVideoWatchFriends requestEmailField (boolean value) {
       this.requestField("email", value);
-      return this;
-    }
-    public APIRequestGetVideoWatchFriends requestEmployeeNumberField () {
-      return this.requestEmployeeNumberField(true);
-    }
-    public APIRequestGetVideoWatchFriends requestEmployeeNumberField (boolean value) {
-      this.requestField("employee_number", value);
       return this;
     }
     public APIRequestGetVideoWatchFriends requestFavoriteAthletesField () {
@@ -1763,6 +1763,13 @@ public class OpenGraphContext extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
+    public APIRequestGetVideoWatchFriends requestIsGuestUserField () {
+      return this.requestIsGuestUserField(true);
+    }
+    public APIRequestGetVideoWatchFriends requestIsGuestUserField (boolean value) {
+      this.requestField("is_guest_user", value);
+      return this;
+    }
     public APIRequestGetVideoWatchFriends requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -1775,13 +1782,6 @@ public class OpenGraphContext extends APINode {
     }
     public APIRequestGetVideoWatchFriends requestIsVerifiedField (boolean value) {
       this.requestField("is_verified", value);
-      return this;
-    }
-    public APIRequestGetVideoWatchFriends requestLabelsField () {
-      return this.requestLabelsField(true);
-    }
-    public APIRequestGetVideoWatchFriends requestLabelsField (boolean value) {
-      this.requestField("labels", value);
       return this;
     }
     public APIRequestGetVideoWatchFriends requestLanguagesField () {

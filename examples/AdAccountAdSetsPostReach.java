@@ -50,6 +50,7 @@ public class AdAccountAdSetsPostReach {
                     .setFieldKey("3847")
                 ))
             )
+            .setFieldFacebookPositions(Arrays.asList("feed"))
             .setFieldGeoLocations(
               new TargetingGeoLocation()
                 .setFieldCountries(Arrays.asList("US"))

@@ -75,6 +75,8 @@ public class AdsPixel extends APINode {
   private String mId = null;
   @SerializedName("is_created_by_business")
   private Boolean mIsCreatedByBusiness = null;
+  @SerializedName("is_unavailable")
+  private Boolean mIsUnavailable = null;
   @SerializedName("last_fired_time")
   private String mLastFiredTime = null;
   @SerializedName("name")
@@ -312,6 +314,10 @@ public class AdsPixel extends APINode {
     return new APIRequestGetDaChecks(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateEvent createEvent() {
+    return new APIRequestCreateEvent(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestDeleteSharedAccounts deleteSharedAccounts() {
     return new APIRequestDeleteSharedAccounts(this.getPrefixedId().toString(), context);
   }
@@ -384,6 +390,10 @@ public class AdsPixel extends APINode {
     return mIsCreatedByBusiness;
   }
 
+  public Boolean getFieldIsUnavailable() {
+    return mIsUnavailable;
+  }
+
   public String getFieldLastFiredTime() {
     return mLastFiredTime;
   }
@@ -416,7 +426,6 @@ public class AdsPixel extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "business",
       "user",
     };
 
@@ -475,11 +484,6 @@ public class AdsPixel extends APINode {
       return this;
     }
 
-
-    public APIRequestDeleteAssignedUsers setBusiness (String business) {
-      this.setParam("business", business);
-      return this;
-    }
 
     public APIRequestDeleteAssignedUsers setUser (Long user) {
       this.setParam("user", user);
@@ -678,7 +682,6 @@ public class AdsPixel extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "business",
       "tasks",
       "user",
     };
@@ -738,11 +741,6 @@ public class AdsPixel extends APINode {
       return this;
     }
 
-
-    public APIRequestCreateAssignedUser setBusiness (String business) {
-      this.setParam("business", business);
-      return this;
-    }
 
     public APIRequestCreateAssignedUser setTasks (List<AdsPixel.EnumTasks> tasks) {
       this.setParam("tasks", tasks);
@@ -1352,6 +1350,136 @@ public class AdsPixel extends APINode {
     }
   }
 
+  public static class APIRequestCreateEvent extends APIRequest<AdsPixel> {
+
+    AdsPixel lastResponse = null;
+    @Override
+    public AdsPixel getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "data",
+      "test_event_code",
+      "trace",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AdsPixel parseResponse(String response, String header) throws APIException {
+      return AdsPixel.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public AdsPixel execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdsPixel execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdsPixel> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdsPixel> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, AdsPixel>() {
+           public AdsPixel apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateEvent.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateEvent(String nodeId, APIContext context) {
+      super(context, nodeId, "/events", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateEvent setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateEvent setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateEvent setData (List<String> data) {
+      this.setParam("data", data);
+      return this;
+    }
+    public APIRequestCreateEvent setData (String data) {
+      this.setParam("data", data);
+      return this;
+    }
+
+    public APIRequestCreateEvent setTestEventCode (String testEventCode) {
+      this.setParam("test_event_code", testEventCode);
+      return this;
+    }
+
+    public APIRequestCreateEvent setTrace (Long trace) {
+      this.setParam("trace", trace);
+      return this;
+    }
+    public APIRequestCreateEvent setTrace (String trace) {
+      this.setParam("trace", trace);
+      return this;
+    }
+
+    public APIRequestCreateEvent requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateEvent requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateEvent requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateEvent requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateEvent requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateEvent requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestDeleteSharedAccounts extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -1503,6 +1631,7 @@ public class AdsPixel extends APINode {
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
+      "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
       "funding_source",
@@ -1537,7 +1666,7 @@ public class AdsPixel extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
-      "user_role",
+      "user_tasks",
       "user_tos_accepted",
     };
 
@@ -1796,6 +1925,13 @@ public class AdsPixel extends APINode {
       this.requestField("end_advertiser_name", value);
       return this;
     }
+    public APIRequestGetSharedAccounts requestExtendedCreditInvoiceGroupField () {
+      return this.requestExtendedCreditInvoiceGroupField(true);
+    }
+    public APIRequestGetSharedAccounts requestExtendedCreditInvoiceGroupField (boolean value) {
+      this.requestField("extended_credit_invoice_group", value);
+      return this;
+    }
     public APIRequestGetSharedAccounts requestFailedDeliveryChecksField () {
       return this.requestFailedDeliveryChecksField(true);
     }
@@ -2034,11 +2170,11 @@ public class AdsPixel extends APINode {
       this.requestField("tos_accepted", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestUserRoleField () {
-      return this.requestUserRoleField(true);
+    public APIRequestGetSharedAccounts requestUserTasksField () {
+      return this.requestUserTasksField(true);
     }
-    public APIRequestGetSharedAccounts requestUserRoleField (boolean value) {
-      this.requestField("user_role", value);
+    public APIRequestGetSharedAccounts requestUserTasksField (boolean value) {
+      this.requestField("user_tasks", value);
       return this;
     }
     public APIRequestGetSharedAccounts requestUserTosAcceptedField () {
@@ -2597,6 +2733,7 @@ public class AdsPixel extends APINode {
       "first_party_cookie_status",
       "id",
       "is_created_by_business",
+      "is_unavailable",
       "last_fired_time",
       "name",
       "owner_ad_account",
@@ -2760,6 +2897,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGet requestIsCreatedByBusinessField (boolean value) {
       this.requestField("is_created_by_business", value);
+      return this;
+    }
+    public APIRequestGet requestIsUnavailableField () {
+      return this.requestIsUnavailableField(true);
+    }
+    public APIRequestGet requestIsUnavailableField (boolean value) {
+      this.requestField("is_unavailable", value);
       return this;
     }
     public APIRequestGet requestLastFiredTimeField () {
@@ -2953,7 +3097,7 @@ public class AdsPixel extends APINode {
       VALUE_LAST_FIRED_TIME("LAST_FIRED_TIME"),
       @SerializedName("NAME")
       VALUE_NAME("NAME"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -2984,7 +3128,7 @@ public class AdsPixel extends APINode {
       VALUE_ST("st"),
       @SerializedName("zp")
       VALUE_ZP("zp"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3005,7 +3149,7 @@ public class AdsPixel extends APINode {
       VALUE_ANALYTICS_ONLY("ANALYTICS_ONLY"),
       @SerializedName("EMPTY")
       VALUE_EMPTY("EMPTY"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3026,7 +3170,7 @@ public class AdsPixel extends APINode {
       VALUE_FIRST_PARTY_COOKIE_DISABLED("FIRST_PARTY_COOKIE_DISABLED"),
       @SerializedName("FIRST_PARTY_COOKIE_ENABLED")
       VALUE_FIRST_PARTY_COOKIE_ENABLED("FIRST_PARTY_COOKIE_ENABLED"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3045,7 +3189,7 @@ public class AdsPixel extends APINode {
       VALUE_ANALYZE("ANALYZE"),
       @SerializedName("EDIT")
       VALUE_EDIT("EDIT"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3084,6 +3228,7 @@ public class AdsPixel extends APINode {
     this.mFirstPartyCookieStatus = instance.mFirstPartyCookieStatus;
     this.mId = instance.mId;
     this.mIsCreatedByBusiness = instance.mIsCreatedByBusiness;
+    this.mIsUnavailable = instance.mIsUnavailable;
     this.mLastFiredTime = instance.mLastFiredTime;
     this.mName = instance.mName;
     this.mOwnerAdAccount = instance.mOwnerAdAccount;

@@ -61,6 +61,8 @@ public class ProductFeedSchedule extends APINode {
   private EnumDayOfWeek mDayOfWeek = null;
   @SerializedName("hour")
   private Long mHour = null;
+  @SerializedName("id")
+  private String mId = null;
   @SerializedName("interval")
   private EnumInterval mInterval = null;
   @SerializedName("interval_count")
@@ -75,11 +77,70 @@ public class ProductFeedSchedule extends APINode {
   private String mUsername = null;
   protected static Gson gson = null;
 
-  public ProductFeedSchedule() {
+  ProductFeedSchedule() {
+  }
+
+  public ProductFeedSchedule(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public ProductFeedSchedule(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public ProductFeedSchedule fetch() throws APIException{
+    ProductFeedSchedule newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static ProductFeedSchedule fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<ProductFeedSchedule> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static ProductFeedSchedule fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<ProductFeedSchedule> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<ProductFeedSchedule> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<ProductFeedSchedule>)(
+      new APIRequest<ProductFeedSchedule>(context, "", "/", "GET", ProductFeedSchedule.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<ProductFeedSchedule>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", ProductFeedSchedule.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static ProductFeedSchedule loadJSON(String json, APIContext context, String header) {
     ProductFeedSchedule productFeedSchedule = getGson().fromJson(json, ProductFeedSchedule.class);
@@ -223,89 +284,458 @@ public class ProductFeedSchedule extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestDelete delete() {
+    return new APIRequestDelete(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestUpdate update() {
+    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
+  }
+
 
   public Long getFieldDayOfMonth() {
     return mDayOfMonth;
-  }
-
-  public ProductFeedSchedule setFieldDayOfMonth(Long value) {
-    this.mDayOfMonth = value;
-    return this;
   }
 
   public EnumDayOfWeek getFieldDayOfWeek() {
     return mDayOfWeek;
   }
 
-  public ProductFeedSchedule setFieldDayOfWeek(EnumDayOfWeek value) {
-    this.mDayOfWeek = value;
-    return this;
-  }
-
   public Long getFieldHour() {
     return mHour;
   }
 
-  public ProductFeedSchedule setFieldHour(Long value) {
-    this.mHour = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
   public EnumInterval getFieldInterval() {
     return mInterval;
   }
 
-  public ProductFeedSchedule setFieldInterval(EnumInterval value) {
-    this.mInterval = value;
-    return this;
-  }
-
   public Long getFieldIntervalCount() {
     return mIntervalCount;
-  }
-
-  public ProductFeedSchedule setFieldIntervalCount(Long value) {
-    this.mIntervalCount = value;
-    return this;
   }
 
   public Long getFieldMinute() {
     return mMinute;
   }
 
-  public ProductFeedSchedule setFieldMinute(Long value) {
-    this.mMinute = value;
-    return this;
-  }
-
   public String getFieldTimezone() {
     return mTimezone;
-  }
-
-  public ProductFeedSchedule setFieldTimezone(String value) {
-    this.mTimezone = value;
-    return this;
   }
 
   public String getFieldUrl() {
     return mUrl;
   }
 
-  public ProductFeedSchedule setFieldUrl(String value) {
-    this.mUrl = value;
-    return this;
-  }
-
   public String getFieldUsername() {
     return mUsername;
   }
 
-  public ProductFeedSchedule setFieldUsername(String value) {
-    this.mUsername = value;
-    return this;
+
+
+  public static class APIRequestDelete extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDelete(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDelete setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDelete requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDelete requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
+  public static class APIRequestGet extends APIRequest<ProductFeedSchedule> {
 
+    ProductFeedSchedule lastResponse = null;
+    @Override
+    public ProductFeedSchedule getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "day_of_month",
+      "day_of_week",
+      "hour",
+      "id",
+      "interval",
+      "interval_count",
+      "minute",
+      "timezone",
+      "url",
+      "username",
+    };
+
+    @Override
+    public ProductFeedSchedule parseResponse(String response, String header) throws APIException {
+      return ProductFeedSchedule.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public ProductFeedSchedule execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ProductFeedSchedule execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<ProductFeedSchedule> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ProductFeedSchedule> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, ProductFeedSchedule>() {
+           public ProductFeedSchedule apply(ResponseWrapper result) {
+             try {
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestDayOfMonthField () {
+      return this.requestDayOfMonthField(true);
+    }
+    public APIRequestGet requestDayOfMonthField (boolean value) {
+      this.requestField("day_of_month", value);
+      return this;
+    }
+    public APIRequestGet requestDayOfWeekField () {
+      return this.requestDayOfWeekField(true);
+    }
+    public APIRequestGet requestDayOfWeekField (boolean value) {
+      this.requestField("day_of_week", value);
+      return this;
+    }
+    public APIRequestGet requestHourField () {
+      return this.requestHourField(true);
+    }
+    public APIRequestGet requestHourField (boolean value) {
+      this.requestField("hour", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestIntervalField () {
+      return this.requestIntervalField(true);
+    }
+    public APIRequestGet requestIntervalField (boolean value) {
+      this.requestField("interval", value);
+      return this;
+    }
+    public APIRequestGet requestIntervalCountField () {
+      return this.requestIntervalCountField(true);
+    }
+    public APIRequestGet requestIntervalCountField (boolean value) {
+      this.requestField("interval_count", value);
+      return this;
+    }
+    public APIRequestGet requestMinuteField () {
+      return this.requestMinuteField(true);
+    }
+    public APIRequestGet requestMinuteField (boolean value) {
+      this.requestField("minute", value);
+      return this;
+    }
+    public APIRequestGet requestTimezoneField () {
+      return this.requestTimezoneField(true);
+    }
+    public APIRequestGet requestTimezoneField (boolean value) {
+      this.requestField("timezone", value);
+      return this;
+    }
+    public APIRequestGet requestUrlField () {
+      return this.requestUrlField(true);
+    }
+    public APIRequestGet requestUrlField (boolean value) {
+      this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGet requestUsernameField () {
+      return this.requestUsernameField(true);
+    }
+    public APIRequestGet requestUsernameField (boolean value) {
+      this.requestField("username", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestUpdate extends APIRequest<ProductFeedSchedule> {
+
+    ProductFeedSchedule lastResponse = null;
+    @Override
+    public ProductFeedSchedule getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "upload_schedule",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public ProductFeedSchedule parseResponse(String response, String header) throws APIException {
+      return ProductFeedSchedule.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public ProductFeedSchedule execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ProductFeedSchedule execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<ProductFeedSchedule> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ProductFeedSchedule> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, ProductFeedSchedule>() {
+           public ProductFeedSchedule apply(ResponseWrapper result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestUpdate(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestUpdate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestUpdate setUploadSchedule (String uploadSchedule) {
+      this.setParam("upload_schedule", uploadSchedule);
+      return this;
+    }
+
+    public APIRequestUpdate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestUpdate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
 
   public static enum EnumDayOfWeek {
       @SerializedName("FRIDAY")
@@ -322,7 +752,7 @@ public class ProductFeedSchedule extends APINode {
       VALUE_TUESDAY("TUESDAY"),
       @SerializedName("WEDNESDAY")
       VALUE_WEDNESDAY("WEDNESDAY"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -345,7 +775,7 @@ public class ProductFeedSchedule extends APINode {
       VALUE_MONTHLY("MONTHLY"),
       @SerializedName("WEEKLY")
       VALUE_WEEKLY("WEEKLY"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -377,6 +807,7 @@ public class ProductFeedSchedule extends APINode {
     this.mDayOfMonth = instance.mDayOfMonth;
     this.mDayOfWeek = instance.mDayOfWeek;
     this.mHour = instance.mHour;
+    this.mId = instance.mId;
     this.mInterval = instance.mInterval;
     this.mIntervalCount = instance.mIntervalCount;
     this.mMinute = instance.mMinute;

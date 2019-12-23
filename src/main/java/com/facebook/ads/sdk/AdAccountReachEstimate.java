@@ -54,29 +54,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class BusinessAdvertisableApplicationsResult extends APINode {
-  @SerializedName("has_insight_permission")
-  private Boolean mHasInsightPermission = null;
-  @SerializedName("id")
-  private String mId = null;
-  @SerializedName("name")
-  private String mName = null;
-  @SerializedName("photo_url")
-  private String mPhotoUrl = null;
+public class AdAccountReachEstimate extends APINode {
+  @SerializedName("estimate_ready")
+  private Boolean mEstimateReady = null;
+  @SerializedName("users")
+  private Long mUsers = null;
   protected static Gson gson = null;
 
-  public BusinessAdvertisableApplicationsResult() {
+  public AdAccountReachEstimate() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
-  public static BusinessAdvertisableApplicationsResult loadJSON(String json, APIContext context, String header) {
-    BusinessAdvertisableApplicationsResult businessAdvertisableApplicationsResult = getGson().fromJson(json, BusinessAdvertisableApplicationsResult.class);
+  public static AdAccountReachEstimate loadJSON(String json, APIContext context, String header) {
+    AdAccountReachEstimate adAccountReachEstimate = getGson().fromJson(json, AdAccountReachEstimate.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(businessAdvertisableApplicationsResult.toString());
+      JsonElement o2 = parser.parse(adAccountReachEstimate.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -86,14 +82,14 @@ public class BusinessAdvertisableApplicationsResult extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    businessAdvertisableApplicationsResult.context = context;
-    businessAdvertisableApplicationsResult.rawValue = json;
-    businessAdvertisableApplicationsResult.header = header;
-    return businessAdvertisableApplicationsResult;
+    adAccountReachEstimate.context = context;
+    adAccountReachEstimate.rawValue = json;
+    adAccountReachEstimate.header = header;
+    return adAccountReachEstimate;
   }
 
-  public static APINodeList<BusinessAdvertisableApplicationsResult> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<BusinessAdvertisableApplicationsResult> businessAdvertisableApplicationsResults = new APINodeList<BusinessAdvertisableApplicationsResult>(request, json, header);
+  public static APINodeList<AdAccountReachEstimate> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdAccountReachEstimate> adAccountReachEstimates = new APINodeList<AdAccountReachEstimate>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -104,9 +100,9 @@ public class BusinessAdvertisableApplicationsResult extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          businessAdvertisableApplicationsResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adAccountReachEstimates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return businessAdvertisableApplicationsResults;
+        return adAccountReachEstimates;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -116,20 +112,20 @@ public class BusinessAdvertisableApplicationsResult extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                businessAdvertisableApplicationsResults.setCursors(before, after);
+                adAccountReachEstimates.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            businessAdvertisableApplicationsResults.setPaging(previous, next);
+            adAccountReachEstimates.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              businessAdvertisableApplicationsResults.setAppSecret(context.getAppSecretProof());
+              adAccountReachEstimates.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              businessAdvertisableApplicationsResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adAccountReachEstimates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -140,23 +136,23 @@ public class BusinessAdvertisableApplicationsResult extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  businessAdvertisableApplicationsResults.add(loadJSON(entry.getValue().toString(), context, header));
+                  adAccountReachEstimates.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              businessAdvertisableApplicationsResults.add(loadJSON(obj.toString(), context, header));
+              adAccountReachEstimates.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return businessAdvertisableApplicationsResults;
+          return adAccountReachEstimates;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              businessAdvertisableApplicationsResults.add(loadJSON(entry.getValue().toString(), context, header));
+              adAccountReachEstimates.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return businessAdvertisableApplicationsResults;
+          return adAccountReachEstimates;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -173,20 +169,20 @@ public class BusinessAdvertisableApplicationsResult extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              businessAdvertisableApplicationsResults.add(loadJSON(value.toString(), context, header));
+              adAccountReachEstimates.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return businessAdvertisableApplicationsResults;
+            return adAccountReachEstimates;
           }
 
           // Sixth, check if it's pure JsonObject
-          businessAdvertisableApplicationsResults.clear();
-          businessAdvertisableApplicationsResults.add(loadJSON(json, context, header));
-          return businessAdvertisableApplicationsResults;
+          adAccountReachEstimates.clear();
+          adAccountReachEstimates.add(loadJSON(json, context, header));
+          return adAccountReachEstimates;
         }
       }
     } catch (Exception e) {
@@ -214,39 +210,21 @@ public class BusinessAdvertisableApplicationsResult extends APINode {
   }
 
 
-  public Boolean getFieldHasInsightPermission() {
-    return mHasInsightPermission;
+  public Boolean getFieldEstimateReady() {
+    return mEstimateReady;
   }
 
-  public BusinessAdvertisableApplicationsResult setFieldHasInsightPermission(Boolean value) {
-    this.mHasInsightPermission = value;
+  public AdAccountReachEstimate setFieldEstimateReady(Boolean value) {
+    this.mEstimateReady = value;
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
+  public Long getFieldUsers() {
+    return mUsers;
   }
 
-  public BusinessAdvertisableApplicationsResult setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
-  public String getFieldName() {
-    return mName;
-  }
-
-  public BusinessAdvertisableApplicationsResult setFieldName(String value) {
-    this.mName = value;
-    return this;
-  }
-
-  public String getFieldPhotoUrl() {
-    return mPhotoUrl;
-  }
-
-  public BusinessAdvertisableApplicationsResult setFieldPhotoUrl(String value) {
-    this.mPhotoUrl = value;
+  public AdAccountReachEstimate setFieldUsers(Long value) {
+    this.mUsers = value;
     return this;
   }
 
@@ -266,20 +244,18 @@ public class BusinessAdvertisableApplicationsResult extends APINode {
     return gson;
   }
 
-  public BusinessAdvertisableApplicationsResult copyFrom(BusinessAdvertisableApplicationsResult instance) {
-    this.mHasInsightPermission = instance.mHasInsightPermission;
-    this.mId = instance.mId;
-    this.mName = instance.mName;
-    this.mPhotoUrl = instance.mPhotoUrl;
+  public AdAccountReachEstimate copyFrom(AdAccountReachEstimate instance) {
+    this.mEstimateReady = instance.mEstimateReady;
+    this.mUsers = instance.mUsers;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<BusinessAdvertisableApplicationsResult> getParser() {
-    return new APIRequest.ResponseParser<BusinessAdvertisableApplicationsResult>() {
-      public APINodeList<BusinessAdvertisableApplicationsResult> parseResponse(String response, APIContext context, APIRequest<BusinessAdvertisableApplicationsResult> request, String header) throws MalformedResponseException {
-        return BusinessAdvertisableApplicationsResult.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdAccountReachEstimate> getParser() {
+    return new APIRequest.ResponseParser<AdAccountReachEstimate>() {
+      public APINodeList<AdAccountReachEstimate> parseResponse(String response, APIContext context, APIRequest<AdAccountReachEstimate> request, String header) throws MalformedResponseException {
+        return AdAccountReachEstimate.parseResponse(response, context, request, header);
       }
     };
   }

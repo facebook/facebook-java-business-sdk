@@ -65,6 +65,10 @@ public class AdVideo extends APINode {
   private String mContentCategory = null;
   @SerializedName("content_tags")
   private List<String> mContentTags = null;
+  @SerializedName("copyright")
+  private VideoCopyright mCopyright = null;
+  @SerializedName("copyright_monitoring_status")
+  private String mCopyrightMonitoringStatus = null;
   @SerializedName("created_time")
   private String mCreatedTime = null;
   @SerializedName("custom_labels")
@@ -95,12 +99,16 @@ public class AdVideo extends APINode {
   private Boolean mIsEpisode = null;
   @SerializedName("is_instagram_eligible")
   private Boolean mIsInstagramEligible = null;
+  @SerializedName("is_reference_only")
+  private Boolean mIsReferenceOnly = null;
   @SerializedName("length")
   private Double mLength = null;
   @SerializedName("live_audience_count")
   private Long mLiveAudienceCount = null;
   @SerializedName("live_status")
   private String mLiveStatus = null;
+  @SerializedName("music_video_copyright")
+  private MusicVideoCopyright mMusicVideoCopyright = null;
   @SerializedName("permalink_url")
   private String mPermalinkUrl = null;
   @SerializedName("picture")
@@ -123,8 +131,6 @@ public class AdVideo extends APINode {
   private Object mStatus = null;
   @SerializedName("title")
   private String mTitle = null;
-  @SerializedName("tv_banner_ad")
-  private Object mTvBannerAd = null;
   @SerializedName("universal_video_id")
   private String mUniversalVideoId = null;
   @SerializedName("updated_time")
@@ -338,10 +344,6 @@ public class AdVideo extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestCreateAutoTrim createAutoTrim() {
-    return new APIRequestCreateAutoTrim(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetCaptions getCaptions() {
     return new APIRequestGetCaptions(this.getPrefixedId().toString(), context);
   }
@@ -370,6 +372,14 @@ public class AdVideo extends APINode {
     return new APIRequestCreateLike(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetPollSettings getPollSettings() {
+    return new APIRequestGetPollSettings(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreatePollSetting createPollSetting() {
+    return new APIRequestCreatePollSetting(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetPolls getPolls() {
     return new APIRequestGetPolls(this.getPrefixedId().toString(), context);
   }
@@ -386,8 +396,8 @@ public class AdVideo extends APINode {
     return new APIRequestGetSharedPosts(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateSummarization createSummarization() {
-    return new APIRequestCreateSummarization(this.getPrefixedId().toString(), context);
+  public APIRequestGetSponsorTags getSponsorTags() {
+    return new APIRequestGetSponsorTags(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetTags getTags() {
@@ -441,6 +451,17 @@ public class AdVideo extends APINode {
 
   public List<String> getFieldContentTags() {
     return mContentTags;
+  }
+
+  public VideoCopyright getFieldCopyright() {
+    if (mCopyright != null) {
+      mCopyright.context = getContext();
+    }
+    return mCopyright;
+  }
+
+  public String getFieldCopyrightMonitoringStatus() {
+    return mCopyrightMonitoringStatus;
   }
 
   public String getFieldCreatedTime() {
@@ -506,6 +527,10 @@ public class AdVideo extends APINode {
     return mIsInstagramEligible;
   }
 
+  public Boolean getFieldIsReferenceOnly() {
+    return mIsReferenceOnly;
+  }
+
   public Double getFieldLength() {
     return mLength;
   }
@@ -516,6 +541,13 @@ public class AdVideo extends APINode {
 
   public String getFieldLiveStatus() {
     return mLiveStatus;
+  }
+
+  public MusicVideoCopyright getFieldMusicVideoCopyright() {
+    if (mMusicVideoCopyright != null) {
+      mMusicVideoCopyright.context = getContext();
+    }
+    return mMusicVideoCopyright;
   }
 
   public String getFieldPermalinkUrl() {
@@ -565,10 +597,6 @@ public class AdVideo extends APINode {
     return mTitle;
   }
 
-  public Object getFieldTvBannerAd() {
-    return mTvBannerAd;
-  }
-
   public String getFieldUniversalVideoId() {
     return mUniversalVideoId;
   }
@@ -578,126 +606,6 @@ public class AdVideo extends APINode {
   }
 
 
-
-  public static class APIRequestCreateAutoTrim extends APIRequest<AdVideo> {
-
-    AdVideo lastResponse = null;
-    @Override
-    public AdVideo getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "auto_trim_type",
-      "target_id",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public AdVideo parseResponse(String response, String header) throws APIException {
-      return AdVideo.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public AdVideo execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdVideo execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdVideo> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdVideo> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, AdVideo>() {
-           public AdVideo apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateAutoTrim.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateAutoTrim(String nodeId, APIContext context) {
-      super(context, nodeId, "/auto_trims", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateAutoTrim setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAutoTrim setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateAutoTrim setAutoTrimType (String autoTrimType) {
-      this.setParam("auto_trim_type", autoTrimType);
-      return this;
-    }
-
-    public APIRequestCreateAutoTrim setTargetId (Long targetId) {
-      this.setParam("target_id", targetId);
-      return this;
-    }
-    public APIRequestCreateAutoTrim setTargetId (String targetId) {
-      this.setParam("target_id", targetId);
-      return this;
-    }
-
-    public APIRequestCreateAutoTrim requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateAutoTrim requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAutoTrim requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateAutoTrim requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAutoTrim requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAutoTrim requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
 
   public static class APIRequestGetCaptions extends APIRequest<APINode> {
 
@@ -955,6 +863,7 @@ public class AdVideo extends APINode {
       "can_hide",
       "can_like",
       "can_remove",
+      "can_reply_privately",
       "comment_count",
       "created_time",
       "from",
@@ -968,6 +877,7 @@ public class AdVideo extends APINode {
       "object",
       "parent",
       "permalink_url",
+      "private_reply_conversation",
       "user_likes",
     };
 
@@ -1141,6 +1051,13 @@ public class AdVideo extends APINode {
       this.requestField("can_remove", value);
       return this;
     }
+    public APIRequestGetComments requestCanReplyPrivatelyField () {
+      return this.requestCanReplyPrivatelyField(true);
+    }
+    public APIRequestGetComments requestCanReplyPrivatelyField (boolean value) {
+      this.requestField("can_reply_privately", value);
+      return this;
+    }
     public APIRequestGetComments requestCommentCountField () {
       return this.requestCommentCountField(true);
     }
@@ -1230,6 +1147,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetComments requestPermalinkUrlField (boolean value) {
       this.requestField("permalink_url", value);
+      return this;
+    }
+    public APIRequestGetComments requestPrivateReplyConversationField () {
+      return this.requestPrivateReplyConversationField(true);
+    }
+    public APIRequestGetComments requestPrivateReplyConversationField (boolean value) {
+      this.requestField("private_reply_conversation", value);
       return this;
     }
     public APIRequestGetComments requestUserLikesField () {
@@ -1475,7 +1399,6 @@ public class AdVideo extends APINode {
       "company_overview",
       "connected_instagram_account",
       "contact_address",
-      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -1522,8 +1445,6 @@ public class AdVideo extends APINode {
       "is_webhooks_subscribed",
       "keywords",
       "leadgen_form_preview_details",
-      "leadgen_has_crm_integration",
-      "leadgen_has_fat_ping_crm_integration",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -1858,13 +1779,6 @@ public class AdVideo extends APINode {
       this.requestField("contact_address", value);
       return this;
     }
-    public APIRequestGetCrosspostSharedPages requestCopyrightAttributionInsightsField () {
-      return this.requestCopyrightAttributionInsightsField(true);
-    }
-    public APIRequestGetCrosspostSharedPages requestCopyrightAttributionInsightsField (boolean value) {
-      this.requestField("copyright_attribution_insights", value);
-      return this;
-    }
     public APIRequestGetCrosspostSharedPages requestCopyrightWhitelistedIgPartnersField () {
       return this.requestCopyrightWhitelistedIgPartnersField(true);
     }
@@ -2185,20 +2099,6 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestLeadgenFormPreviewDetailsField (boolean value) {
       this.requestField("leadgen_form_preview_details", value);
-      return this;
-    }
-    public APIRequestGetCrosspostSharedPages requestLeadgenHasCrmIntegrationField () {
-      return this.requestLeadgenHasCrmIntegrationField(true);
-    }
-    public APIRequestGetCrosspostSharedPages requestLeadgenHasCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_crm_integration", value);
-      return this;
-    }
-    public APIRequestGetCrosspostSharedPages requestLeadgenHasFatPingCrmIntegrationField () {
-      return this.requestLeadgenHasFatPingCrmIntegrationField(true);
-    }
-    public APIRequestGetCrosspostSharedPages requestLeadgenHasFatPingCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_fat_ping_crm_integration", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestLeadgenTosAcceptanceTimeField () {
@@ -3003,6 +2903,234 @@ public class AdVideo extends APINode {
 
   }
 
+  public static class APIRequestGetPollSettings extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetPollSettings.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetPollSettings(String nodeId, APIContext context) {
+      super(context, nodeId, "/poll_settings", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetPollSettings setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPollSettings setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetPollSettings requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetPollSettings requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPollSettings requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetPollSettings requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPollSettings requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPollSettings requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreatePollSetting extends APIRequest<AdVideo> {
+
+    AdVideo lastResponse = null;
+    @Override
+    public AdVideo getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "enable_was_live_voting",
+      "video_poll_www_placement",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AdVideo parseResponse(String response, String header) throws APIException {
+      return AdVideo.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public AdVideo execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdVideo execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdVideo> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdVideo> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, AdVideo>() {
+           public AdVideo apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreatePollSetting.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreatePollSetting(String nodeId, APIContext context) {
+      super(context, nodeId, "/poll_settings", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreatePollSetting setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePollSetting setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreatePollSetting setEnableWasLiveVoting (Boolean enableWasLiveVoting) {
+      this.setParam("enable_was_live_voting", enableWasLiveVoting);
+      return this;
+    }
+    public APIRequestCreatePollSetting setEnableWasLiveVoting (String enableWasLiveVoting) {
+      this.setParam("enable_was_live_voting", enableWasLiveVoting);
+      return this;
+    }
+
+    public APIRequestCreatePollSetting setVideoPollWwwPlacement (AdVideo.EnumVideoPollWwwPlacement videoPollWwwPlacement) {
+      this.setParam("video_poll_www_placement", videoPollWwwPlacement);
+      return this;
+    }
+    public APIRequestCreatePollSetting setVideoPollWwwPlacement (String videoPollWwwPlacement) {
+      this.setParam("video_poll_www_placement", videoPollWwwPlacement);
+      return this;
+    }
+
+    public APIRequestCreatePollSetting requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreatePollSetting requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePollSetting requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreatePollSetting requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePollSetting requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePollSetting requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetPolls extends APIRequest<VideoPoll> {
 
     APINodeList<VideoPoll> lastResponse = null;
@@ -3552,6 +3680,7 @@ public class AdVideo extends APINode {
       "application",
       "backdated_time",
       "call_to_action",
+      "can_reply_privately",
       "caption",
       "child_attachments",
       "comments_mirroring_domain",
@@ -3737,6 +3866,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetSharedPosts requestCallToActionField (boolean value) {
       this.requestField("call_to_action", value);
+      return this;
+    }
+    public APIRequestGetSharedPosts requestCanReplyPrivatelyField () {
+      return this.requestCanReplyPrivatelyField(true);
+    }
+    public APIRequestGetSharedPosts requestCanReplyPrivatelyField (boolean value) {
+      this.requestField("can_reply_privately", value);
       return this;
     }
     public APIRequestGetSharedPosts requestCaptionField () {
@@ -4119,49 +4255,186 @@ public class AdVideo extends APINode {
     }
   }
 
-  public static class APIRequestCreateSummarization extends APIRequest<AdVideo> {
+  public static class APIRequestGetSponsorTags extends APIRequest<Page> {
 
-    AdVideo lastResponse = null;
+    APINodeList<Page> lastResponse = null;
     @Override
-    public AdVideo getLastResponse() {
+    public APINodeList<Page> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "summarization_type",
-      "target_id",
     };
 
     public static final String[] FIELDS = {
+      "about",
+      "access_token",
+      "ad_campaign",
+      "affiliation",
+      "app_id",
+      "app_links",
+      "artists_we_like",
+      "attire",
+      "awards",
+      "band_interests",
+      "band_members",
+      "best_page",
+      "bio",
+      "birthday",
+      "booking_agent",
+      "built",
+      "business",
+      "can_checkin",
+      "can_post",
+      "category",
+      "category_list",
+      "checkins",
+      "company_overview",
+      "connected_instagram_account",
+      "contact_address",
+      "copyright_whitelisted_ig_partners",
+      "country_page_likes",
+      "cover",
+      "culinary_team",
+      "current_location",
+      "description",
+      "description_html",
+      "directed_by",
+      "display_subtext",
+      "displayed_message_response_time",
+      "emails",
+      "engagement",
+      "fan_count",
+      "featured_video",
+      "features",
+      "food_styles",
+      "founded",
+      "general_info",
+      "general_manager",
+      "genre",
+      "global_brand_page_name",
+      "global_brand_root_id",
+      "has_added_app",
+      "has_whatsapp_business_number",
+      "has_whatsapp_number",
+      "hometown",
+      "hours",
+      "id",
+      "impressum",
+      "influences",
+      "instagram_business_account",
+      "instant_articles_review_status",
+      "is_always_open",
+      "is_chain",
+      "is_community_page",
+      "is_eligible_for_branded_content",
+      "is_messenger_bot_get_started_enabled",
+      "is_messenger_platform_bot",
+      "is_owned",
+      "is_permanently_closed",
+      "is_published",
+      "is_unclaimed",
+      "is_verified",
+      "is_webhooks_subscribed",
+      "keywords",
+      "leadgen_form_preview_details",
+      "leadgen_tos_acceptance_time",
+      "leadgen_tos_accepted",
+      "leadgen_tos_accepting_user",
+      "link",
+      "location",
+      "members",
+      "merchant_id",
+      "merchant_review_status",
+      "messenger_ads_default_icebreakers",
+      "messenger_ads_default_page_welcome_message",
+      "messenger_ads_default_quick_replies",
+      "messenger_ads_quick_replies_type",
+      "mission",
+      "mpg",
+      "name",
+      "name_with_location_descriptor",
+      "network",
+      "new_like_count",
+      "offer_eligible",
+      "overall_star_rating",
+      "page_about_story",
+      "page_token",
+      "parent_page",
+      "parking",
+      "payment_options",
+      "personal_info",
+      "personal_interests",
+      "pharma_safety_info",
+      "phone",
+      "place_type",
+      "plot_outline",
+      "preferred_audience",
+      "press_contact",
+      "price_range",
+      "privacy_info_url",
+      "produced_by",
+      "products",
+      "promotion_eligible",
+      "promotion_ineligible_reason",
+      "public_transit",
+      "rating_count",
+      "recipient",
+      "record_label",
+      "release_date",
+      "restaurant_services",
+      "restaurant_specialties",
+      "schedule",
+      "screenplay_by",
+      "season",
+      "single_line_address",
+      "starring",
+      "start_info",
+      "store_code",
+      "store_location_descriptor",
+      "store_number",
+      "studio",
+      "supports_instant_articles",
+      "talking_about_count",
+      "unread_message_count",
+      "unread_notif_count",
+      "unseen_message_count",
+      "username",
+      "verification_status",
+      "voip_info",
+      "website",
+      "were_here_count",
+      "whatsapp_number",
+      "written_by",
     };
 
     @Override
-    public AdVideo parseResponse(String response, String header) throws APIException {
-      return AdVideo.parseResponse(response, getContext(), this, header).head();
+    public APINodeList<Page> parseResponse(String response, String header) throws APIException {
+      return Page.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public AdVideo execute() throws APIException {
+    public APINodeList<Page> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public AdVideo execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<Page> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<AdVideo> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<Page>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<AdVideo> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<Page>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, AdVideo>() {
-           public AdVideo apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<Page>>() {
+           public APINodeList<Page> apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateSummarization.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestGetSponsorTags.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4170,42 +4443,28 @@ public class AdVideo extends APINode {
       );
     };
 
-    public APIRequestCreateSummarization(String nodeId, APIContext context) {
-      super(context, nodeId, "/summarizations", "POST", Arrays.asList(PARAMS));
+    public APIRequestGetSponsorTags(String nodeId, APIContext context) {
+      super(context, nodeId, "/sponsor_tags", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestCreateSummarization setParam(String param, Object value) {
+    public APIRequestGetSponsorTags setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestCreateSummarization setParams(Map<String, Object> params) {
+    public APIRequestGetSponsorTags setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestCreateSummarization setSummarizationType (String summarizationType) {
-      this.setParam("summarization_type", summarizationType);
-      return this;
-    }
-
-    public APIRequestCreateSummarization setTargetId (Long targetId) {
-      this.setParam("target_id", targetId);
-      return this;
-    }
-    public APIRequestCreateSummarization setTargetId (String targetId) {
-      this.setParam("target_id", targetId);
-      return this;
-    }
-
-    public APIRequestCreateSummarization requestAllFields () {
+    public APIRequestGetSponsorTags requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestCreateSummarization requestAllFields (boolean value) {
+    public APIRequestGetSponsorTags requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -4213,12 +4472,12 @@ public class AdVideo extends APINode {
     }
 
     @Override
-    public APIRequestCreateSummarization requestFields (List<String> fields) {
+    public APIRequestGetSponsorTags requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestCreateSummarization requestFields (List<String> fields, boolean value) {
+    public APIRequestGetSponsorTags requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -4226,17 +4485,990 @@ public class AdVideo extends APINode {
     }
 
     @Override
-    public APIRequestCreateSummarization requestField (String field) {
+    public APIRequestGetSponsorTags requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestCreateSummarization requestField (String field, boolean value) {
+    public APIRequestGetSponsorTags requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
+    public APIRequestGetSponsorTags requestAboutField () {
+      return this.requestAboutField(true);
+    }
+    public APIRequestGetSponsorTags requestAboutField (boolean value) {
+      this.requestField("about", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestAccessTokenField () {
+      return this.requestAccessTokenField(true);
+    }
+    public APIRequestGetSponsorTags requestAccessTokenField (boolean value) {
+      this.requestField("access_token", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestAdCampaignField () {
+      return this.requestAdCampaignField(true);
+    }
+    public APIRequestGetSponsorTags requestAdCampaignField (boolean value) {
+      this.requestField("ad_campaign", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestAffiliationField () {
+      return this.requestAffiliationField(true);
+    }
+    public APIRequestGetSponsorTags requestAffiliationField (boolean value) {
+      this.requestField("affiliation", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestAppIdField () {
+      return this.requestAppIdField(true);
+    }
+    public APIRequestGetSponsorTags requestAppIdField (boolean value) {
+      this.requestField("app_id", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestAppLinksField () {
+      return this.requestAppLinksField(true);
+    }
+    public APIRequestGetSponsorTags requestAppLinksField (boolean value) {
+      this.requestField("app_links", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestArtistsWeLikeField () {
+      return this.requestArtistsWeLikeField(true);
+    }
+    public APIRequestGetSponsorTags requestArtistsWeLikeField (boolean value) {
+      this.requestField("artists_we_like", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestAttireField () {
+      return this.requestAttireField(true);
+    }
+    public APIRequestGetSponsorTags requestAttireField (boolean value) {
+      this.requestField("attire", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestAwardsField () {
+      return this.requestAwardsField(true);
+    }
+    public APIRequestGetSponsorTags requestAwardsField (boolean value) {
+      this.requestField("awards", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestBandInterestsField () {
+      return this.requestBandInterestsField(true);
+    }
+    public APIRequestGetSponsorTags requestBandInterestsField (boolean value) {
+      this.requestField("band_interests", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestBandMembersField () {
+      return this.requestBandMembersField(true);
+    }
+    public APIRequestGetSponsorTags requestBandMembersField (boolean value) {
+      this.requestField("band_members", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestBestPageField () {
+      return this.requestBestPageField(true);
+    }
+    public APIRequestGetSponsorTags requestBestPageField (boolean value) {
+      this.requestField("best_page", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestBioField () {
+      return this.requestBioField(true);
+    }
+    public APIRequestGetSponsorTags requestBioField (boolean value) {
+      this.requestField("bio", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestBirthdayField () {
+      return this.requestBirthdayField(true);
+    }
+    public APIRequestGetSponsorTags requestBirthdayField (boolean value) {
+      this.requestField("birthday", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestBookingAgentField () {
+      return this.requestBookingAgentField(true);
+    }
+    public APIRequestGetSponsorTags requestBookingAgentField (boolean value) {
+      this.requestField("booking_agent", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestBuiltField () {
+      return this.requestBuiltField(true);
+    }
+    public APIRequestGetSponsorTags requestBuiltField (boolean value) {
+      this.requestField("built", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestBusinessField () {
+      return this.requestBusinessField(true);
+    }
+    public APIRequestGetSponsorTags requestBusinessField (boolean value) {
+      this.requestField("business", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestCanCheckinField () {
+      return this.requestCanCheckinField(true);
+    }
+    public APIRequestGetSponsorTags requestCanCheckinField (boolean value) {
+      this.requestField("can_checkin", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestCanPostField () {
+      return this.requestCanPostField(true);
+    }
+    public APIRequestGetSponsorTags requestCanPostField (boolean value) {
+      this.requestField("can_post", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestCategoryField () {
+      return this.requestCategoryField(true);
+    }
+    public APIRequestGetSponsorTags requestCategoryField (boolean value) {
+      this.requestField("category", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestCategoryListField () {
+      return this.requestCategoryListField(true);
+    }
+    public APIRequestGetSponsorTags requestCategoryListField (boolean value) {
+      this.requestField("category_list", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestCheckinsField () {
+      return this.requestCheckinsField(true);
+    }
+    public APIRequestGetSponsorTags requestCheckinsField (boolean value) {
+      this.requestField("checkins", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestCompanyOverviewField () {
+      return this.requestCompanyOverviewField(true);
+    }
+    public APIRequestGetSponsorTags requestCompanyOverviewField (boolean value) {
+      this.requestField("company_overview", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestConnectedInstagramAccountField () {
+      return this.requestConnectedInstagramAccountField(true);
+    }
+    public APIRequestGetSponsorTags requestConnectedInstagramAccountField (boolean value) {
+      this.requestField("connected_instagram_account", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestContactAddressField () {
+      return this.requestContactAddressField(true);
+    }
+    public APIRequestGetSponsorTags requestContactAddressField (boolean value) {
+      this.requestField("contact_address", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestCopyrightWhitelistedIgPartnersField () {
+      return this.requestCopyrightWhitelistedIgPartnersField(true);
+    }
+    public APIRequestGetSponsorTags requestCopyrightWhitelistedIgPartnersField (boolean value) {
+      this.requestField("copyright_whitelisted_ig_partners", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestCountryPageLikesField () {
+      return this.requestCountryPageLikesField(true);
+    }
+    public APIRequestGetSponsorTags requestCountryPageLikesField (boolean value) {
+      this.requestField("country_page_likes", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestCoverField () {
+      return this.requestCoverField(true);
+    }
+    public APIRequestGetSponsorTags requestCoverField (boolean value) {
+      this.requestField("cover", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestCulinaryTeamField () {
+      return this.requestCulinaryTeamField(true);
+    }
+    public APIRequestGetSponsorTags requestCulinaryTeamField (boolean value) {
+      this.requestField("culinary_team", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestCurrentLocationField () {
+      return this.requestCurrentLocationField(true);
+    }
+    public APIRequestGetSponsorTags requestCurrentLocationField (boolean value) {
+      this.requestField("current_location", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetSponsorTags requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestDescriptionHtmlField () {
+      return this.requestDescriptionHtmlField(true);
+    }
+    public APIRequestGetSponsorTags requestDescriptionHtmlField (boolean value) {
+      this.requestField("description_html", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestDirectedByField () {
+      return this.requestDirectedByField(true);
+    }
+    public APIRequestGetSponsorTags requestDirectedByField (boolean value) {
+      this.requestField("directed_by", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestDisplaySubtextField () {
+      return this.requestDisplaySubtextField(true);
+    }
+    public APIRequestGetSponsorTags requestDisplaySubtextField (boolean value) {
+      this.requestField("display_subtext", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestDisplayedMessageResponseTimeField () {
+      return this.requestDisplayedMessageResponseTimeField(true);
+    }
+    public APIRequestGetSponsorTags requestDisplayedMessageResponseTimeField (boolean value) {
+      this.requestField("displayed_message_response_time", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestEmailsField () {
+      return this.requestEmailsField(true);
+    }
+    public APIRequestGetSponsorTags requestEmailsField (boolean value) {
+      this.requestField("emails", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestEngagementField () {
+      return this.requestEngagementField(true);
+    }
+    public APIRequestGetSponsorTags requestEngagementField (boolean value) {
+      this.requestField("engagement", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestFanCountField () {
+      return this.requestFanCountField(true);
+    }
+    public APIRequestGetSponsorTags requestFanCountField (boolean value) {
+      this.requestField("fan_count", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestFeaturedVideoField () {
+      return this.requestFeaturedVideoField(true);
+    }
+    public APIRequestGetSponsorTags requestFeaturedVideoField (boolean value) {
+      this.requestField("featured_video", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestFeaturesField () {
+      return this.requestFeaturesField(true);
+    }
+    public APIRequestGetSponsorTags requestFeaturesField (boolean value) {
+      this.requestField("features", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestFoodStylesField () {
+      return this.requestFoodStylesField(true);
+    }
+    public APIRequestGetSponsorTags requestFoodStylesField (boolean value) {
+      this.requestField("food_styles", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestFoundedField () {
+      return this.requestFoundedField(true);
+    }
+    public APIRequestGetSponsorTags requestFoundedField (boolean value) {
+      this.requestField("founded", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestGeneralInfoField () {
+      return this.requestGeneralInfoField(true);
+    }
+    public APIRequestGetSponsorTags requestGeneralInfoField (boolean value) {
+      this.requestField("general_info", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestGeneralManagerField () {
+      return this.requestGeneralManagerField(true);
+    }
+    public APIRequestGetSponsorTags requestGeneralManagerField (boolean value) {
+      this.requestField("general_manager", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestGenreField () {
+      return this.requestGenreField(true);
+    }
+    public APIRequestGetSponsorTags requestGenreField (boolean value) {
+      this.requestField("genre", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestGlobalBrandPageNameField () {
+      return this.requestGlobalBrandPageNameField(true);
+    }
+    public APIRequestGetSponsorTags requestGlobalBrandPageNameField (boolean value) {
+      this.requestField("global_brand_page_name", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestGlobalBrandRootIdField () {
+      return this.requestGlobalBrandRootIdField(true);
+    }
+    public APIRequestGetSponsorTags requestGlobalBrandRootIdField (boolean value) {
+      this.requestField("global_brand_root_id", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestHasAddedAppField () {
+      return this.requestHasAddedAppField(true);
+    }
+    public APIRequestGetSponsorTags requestHasAddedAppField (boolean value) {
+      this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestHasWhatsappBusinessNumberField () {
+      return this.requestHasWhatsappBusinessNumberField(true);
+    }
+    public APIRequestGetSponsorTags requestHasWhatsappBusinessNumberField (boolean value) {
+      this.requestField("has_whatsapp_business_number", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestHasWhatsappNumberField () {
+      return this.requestHasWhatsappNumberField(true);
+    }
+    public APIRequestGetSponsorTags requestHasWhatsappNumberField (boolean value) {
+      this.requestField("has_whatsapp_number", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestHometownField () {
+      return this.requestHometownField(true);
+    }
+    public APIRequestGetSponsorTags requestHometownField (boolean value) {
+      this.requestField("hometown", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestHoursField () {
+      return this.requestHoursField(true);
+    }
+    public APIRequestGetSponsorTags requestHoursField (boolean value) {
+      this.requestField("hours", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetSponsorTags requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestImpressumField () {
+      return this.requestImpressumField(true);
+    }
+    public APIRequestGetSponsorTags requestImpressumField (boolean value) {
+      this.requestField("impressum", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestInfluencesField () {
+      return this.requestInfluencesField(true);
+    }
+    public APIRequestGetSponsorTags requestInfluencesField (boolean value) {
+      this.requestField("influences", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestInstagramBusinessAccountField () {
+      return this.requestInstagramBusinessAccountField(true);
+    }
+    public APIRequestGetSponsorTags requestInstagramBusinessAccountField (boolean value) {
+      this.requestField("instagram_business_account", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestInstantArticlesReviewStatusField () {
+      return this.requestInstantArticlesReviewStatusField(true);
+    }
+    public APIRequestGetSponsorTags requestInstantArticlesReviewStatusField (boolean value) {
+      this.requestField("instant_articles_review_status", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestIsAlwaysOpenField () {
+      return this.requestIsAlwaysOpenField(true);
+    }
+    public APIRequestGetSponsorTags requestIsAlwaysOpenField (boolean value) {
+      this.requestField("is_always_open", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestIsChainField () {
+      return this.requestIsChainField(true);
+    }
+    public APIRequestGetSponsorTags requestIsChainField (boolean value) {
+      this.requestField("is_chain", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestIsCommunityPageField () {
+      return this.requestIsCommunityPageField(true);
+    }
+    public APIRequestGetSponsorTags requestIsCommunityPageField (boolean value) {
+      this.requestField("is_community_page", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestIsEligibleForBrandedContentField () {
+      return this.requestIsEligibleForBrandedContentField(true);
+    }
+    public APIRequestGetSponsorTags requestIsEligibleForBrandedContentField (boolean value) {
+      this.requestField("is_eligible_for_branded_content", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestIsMessengerBotGetStartedEnabledField () {
+      return this.requestIsMessengerBotGetStartedEnabledField(true);
+    }
+    public APIRequestGetSponsorTags requestIsMessengerBotGetStartedEnabledField (boolean value) {
+      this.requestField("is_messenger_bot_get_started_enabled", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestIsMessengerPlatformBotField () {
+      return this.requestIsMessengerPlatformBotField(true);
+    }
+    public APIRequestGetSponsorTags requestIsMessengerPlatformBotField (boolean value) {
+      this.requestField("is_messenger_platform_bot", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestIsOwnedField () {
+      return this.requestIsOwnedField(true);
+    }
+    public APIRequestGetSponsorTags requestIsOwnedField (boolean value) {
+      this.requestField("is_owned", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestIsPermanentlyClosedField () {
+      return this.requestIsPermanentlyClosedField(true);
+    }
+    public APIRequestGetSponsorTags requestIsPermanentlyClosedField (boolean value) {
+      this.requestField("is_permanently_closed", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestIsPublishedField () {
+      return this.requestIsPublishedField(true);
+    }
+    public APIRequestGetSponsorTags requestIsPublishedField (boolean value) {
+      this.requestField("is_published", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestIsUnclaimedField () {
+      return this.requestIsUnclaimedField(true);
+    }
+    public APIRequestGetSponsorTags requestIsUnclaimedField (boolean value) {
+      this.requestField("is_unclaimed", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestIsVerifiedField () {
+      return this.requestIsVerifiedField(true);
+    }
+    public APIRequestGetSponsorTags requestIsVerifiedField (boolean value) {
+      this.requestField("is_verified", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestIsWebhooksSubscribedField () {
+      return this.requestIsWebhooksSubscribedField(true);
+    }
+    public APIRequestGetSponsorTags requestIsWebhooksSubscribedField (boolean value) {
+      this.requestField("is_webhooks_subscribed", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestKeywordsField () {
+      return this.requestKeywordsField(true);
+    }
+    public APIRequestGetSponsorTags requestKeywordsField (boolean value) {
+      this.requestField("keywords", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestLeadgenFormPreviewDetailsField () {
+      return this.requestLeadgenFormPreviewDetailsField(true);
+    }
+    public APIRequestGetSponsorTags requestLeadgenFormPreviewDetailsField (boolean value) {
+      this.requestField("leadgen_form_preview_details", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestLeadgenTosAcceptanceTimeField () {
+      return this.requestLeadgenTosAcceptanceTimeField(true);
+    }
+    public APIRequestGetSponsorTags requestLeadgenTosAcceptanceTimeField (boolean value) {
+      this.requestField("leadgen_tos_acceptance_time", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestLeadgenTosAcceptedField () {
+      return this.requestLeadgenTosAcceptedField(true);
+    }
+    public APIRequestGetSponsorTags requestLeadgenTosAcceptedField (boolean value) {
+      this.requestField("leadgen_tos_accepted", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestLeadgenTosAcceptingUserField () {
+      return this.requestLeadgenTosAcceptingUserField(true);
+    }
+    public APIRequestGetSponsorTags requestLeadgenTosAcceptingUserField (boolean value) {
+      this.requestField("leadgen_tos_accepting_user", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestLinkField () {
+      return this.requestLinkField(true);
+    }
+    public APIRequestGetSponsorTags requestLinkField (boolean value) {
+      this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestLocationField () {
+      return this.requestLocationField(true);
+    }
+    public APIRequestGetSponsorTags requestLocationField (boolean value) {
+      this.requestField("location", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestMembersField () {
+      return this.requestMembersField(true);
+    }
+    public APIRequestGetSponsorTags requestMembersField (boolean value) {
+      this.requestField("members", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestMerchantIdField () {
+      return this.requestMerchantIdField(true);
+    }
+    public APIRequestGetSponsorTags requestMerchantIdField (boolean value) {
+      this.requestField("merchant_id", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestMerchantReviewStatusField () {
+      return this.requestMerchantReviewStatusField(true);
+    }
+    public APIRequestGetSponsorTags requestMerchantReviewStatusField (boolean value) {
+      this.requestField("merchant_review_status", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestMessengerAdsDefaultIcebreakersField () {
+      return this.requestMessengerAdsDefaultIcebreakersField(true);
+    }
+    public APIRequestGetSponsorTags requestMessengerAdsDefaultIcebreakersField (boolean value) {
+      this.requestField("messenger_ads_default_icebreakers", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestMessengerAdsDefaultPageWelcomeMessageField () {
+      return this.requestMessengerAdsDefaultPageWelcomeMessageField(true);
+    }
+    public APIRequestGetSponsorTags requestMessengerAdsDefaultPageWelcomeMessageField (boolean value) {
+      this.requestField("messenger_ads_default_page_welcome_message", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestMessengerAdsDefaultQuickRepliesField () {
+      return this.requestMessengerAdsDefaultQuickRepliesField(true);
+    }
+    public APIRequestGetSponsorTags requestMessengerAdsDefaultQuickRepliesField (boolean value) {
+      this.requestField("messenger_ads_default_quick_replies", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestMessengerAdsQuickRepliesTypeField () {
+      return this.requestMessengerAdsQuickRepliesTypeField(true);
+    }
+    public APIRequestGetSponsorTags requestMessengerAdsQuickRepliesTypeField (boolean value) {
+      this.requestField("messenger_ads_quick_replies_type", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestMissionField () {
+      return this.requestMissionField(true);
+    }
+    public APIRequestGetSponsorTags requestMissionField (boolean value) {
+      this.requestField("mission", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestMpgField () {
+      return this.requestMpgField(true);
+    }
+    public APIRequestGetSponsorTags requestMpgField (boolean value) {
+      this.requestField("mpg", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetSponsorTags requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestNameWithLocationDescriptorField () {
+      return this.requestNameWithLocationDescriptorField(true);
+    }
+    public APIRequestGetSponsorTags requestNameWithLocationDescriptorField (boolean value) {
+      this.requestField("name_with_location_descriptor", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestNetworkField () {
+      return this.requestNetworkField(true);
+    }
+    public APIRequestGetSponsorTags requestNetworkField (boolean value) {
+      this.requestField("network", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestNewLikeCountField () {
+      return this.requestNewLikeCountField(true);
+    }
+    public APIRequestGetSponsorTags requestNewLikeCountField (boolean value) {
+      this.requestField("new_like_count", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestOfferEligibleField () {
+      return this.requestOfferEligibleField(true);
+    }
+    public APIRequestGetSponsorTags requestOfferEligibleField (boolean value) {
+      this.requestField("offer_eligible", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestOverallStarRatingField () {
+      return this.requestOverallStarRatingField(true);
+    }
+    public APIRequestGetSponsorTags requestOverallStarRatingField (boolean value) {
+      this.requestField("overall_star_rating", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetSponsorTags requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPageTokenField () {
+      return this.requestPageTokenField(true);
+    }
+    public APIRequestGetSponsorTags requestPageTokenField (boolean value) {
+      this.requestField("page_token", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestParentPageField () {
+      return this.requestParentPageField(true);
+    }
+    public APIRequestGetSponsorTags requestParentPageField (boolean value) {
+      this.requestField("parent_page", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestParkingField () {
+      return this.requestParkingField(true);
+    }
+    public APIRequestGetSponsorTags requestParkingField (boolean value) {
+      this.requestField("parking", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPaymentOptionsField () {
+      return this.requestPaymentOptionsField(true);
+    }
+    public APIRequestGetSponsorTags requestPaymentOptionsField (boolean value) {
+      this.requestField("payment_options", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPersonalInfoField () {
+      return this.requestPersonalInfoField(true);
+    }
+    public APIRequestGetSponsorTags requestPersonalInfoField (boolean value) {
+      this.requestField("personal_info", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPersonalInterestsField () {
+      return this.requestPersonalInterestsField(true);
+    }
+    public APIRequestGetSponsorTags requestPersonalInterestsField (boolean value) {
+      this.requestField("personal_interests", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPharmaSafetyInfoField () {
+      return this.requestPharmaSafetyInfoField(true);
+    }
+    public APIRequestGetSponsorTags requestPharmaSafetyInfoField (boolean value) {
+      this.requestField("pharma_safety_info", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPhoneField () {
+      return this.requestPhoneField(true);
+    }
+    public APIRequestGetSponsorTags requestPhoneField (boolean value) {
+      this.requestField("phone", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPlaceTypeField () {
+      return this.requestPlaceTypeField(true);
+    }
+    public APIRequestGetSponsorTags requestPlaceTypeField (boolean value) {
+      this.requestField("place_type", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPlotOutlineField () {
+      return this.requestPlotOutlineField(true);
+    }
+    public APIRequestGetSponsorTags requestPlotOutlineField (boolean value) {
+      this.requestField("plot_outline", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPreferredAudienceField () {
+      return this.requestPreferredAudienceField(true);
+    }
+    public APIRequestGetSponsorTags requestPreferredAudienceField (boolean value) {
+      this.requestField("preferred_audience", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPressContactField () {
+      return this.requestPressContactField(true);
+    }
+    public APIRequestGetSponsorTags requestPressContactField (boolean value) {
+      this.requestField("press_contact", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPriceRangeField () {
+      return this.requestPriceRangeField(true);
+    }
+    public APIRequestGetSponsorTags requestPriceRangeField (boolean value) {
+      this.requestField("price_range", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPrivacyInfoUrlField () {
+      return this.requestPrivacyInfoUrlField(true);
+    }
+    public APIRequestGetSponsorTags requestPrivacyInfoUrlField (boolean value) {
+      this.requestField("privacy_info_url", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestProducedByField () {
+      return this.requestProducedByField(true);
+    }
+    public APIRequestGetSponsorTags requestProducedByField (boolean value) {
+      this.requestField("produced_by", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestProductsField () {
+      return this.requestProductsField(true);
+    }
+    public APIRequestGetSponsorTags requestProductsField (boolean value) {
+      this.requestField("products", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPromotionEligibleField () {
+      return this.requestPromotionEligibleField(true);
+    }
+    public APIRequestGetSponsorTags requestPromotionEligibleField (boolean value) {
+      this.requestField("promotion_eligible", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPromotionIneligibleReasonField () {
+      return this.requestPromotionIneligibleReasonField(true);
+    }
+    public APIRequestGetSponsorTags requestPromotionIneligibleReasonField (boolean value) {
+      this.requestField("promotion_ineligible_reason", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPublicTransitField () {
+      return this.requestPublicTransitField(true);
+    }
+    public APIRequestGetSponsorTags requestPublicTransitField (boolean value) {
+      this.requestField("public_transit", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestRatingCountField () {
+      return this.requestRatingCountField(true);
+    }
+    public APIRequestGetSponsorTags requestRatingCountField (boolean value) {
+      this.requestField("rating_count", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestRecipientField () {
+      return this.requestRecipientField(true);
+    }
+    public APIRequestGetSponsorTags requestRecipientField (boolean value) {
+      this.requestField("recipient", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestRecordLabelField () {
+      return this.requestRecordLabelField(true);
+    }
+    public APIRequestGetSponsorTags requestRecordLabelField (boolean value) {
+      this.requestField("record_label", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestReleaseDateField () {
+      return this.requestReleaseDateField(true);
+    }
+    public APIRequestGetSponsorTags requestReleaseDateField (boolean value) {
+      this.requestField("release_date", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestRestaurantServicesField () {
+      return this.requestRestaurantServicesField(true);
+    }
+    public APIRequestGetSponsorTags requestRestaurantServicesField (boolean value) {
+      this.requestField("restaurant_services", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestRestaurantSpecialtiesField () {
+      return this.requestRestaurantSpecialtiesField(true);
+    }
+    public APIRequestGetSponsorTags requestRestaurantSpecialtiesField (boolean value) {
+      this.requestField("restaurant_specialties", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestScheduleField () {
+      return this.requestScheduleField(true);
+    }
+    public APIRequestGetSponsorTags requestScheduleField (boolean value) {
+      this.requestField("schedule", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestScreenplayByField () {
+      return this.requestScreenplayByField(true);
+    }
+    public APIRequestGetSponsorTags requestScreenplayByField (boolean value) {
+      this.requestField("screenplay_by", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestSeasonField () {
+      return this.requestSeasonField(true);
+    }
+    public APIRequestGetSponsorTags requestSeasonField (boolean value) {
+      this.requestField("season", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestSingleLineAddressField () {
+      return this.requestSingleLineAddressField(true);
+    }
+    public APIRequestGetSponsorTags requestSingleLineAddressField (boolean value) {
+      this.requestField("single_line_address", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestStarringField () {
+      return this.requestStarringField(true);
+    }
+    public APIRequestGetSponsorTags requestStarringField (boolean value) {
+      this.requestField("starring", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestStartInfoField () {
+      return this.requestStartInfoField(true);
+    }
+    public APIRequestGetSponsorTags requestStartInfoField (boolean value) {
+      this.requestField("start_info", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestStoreCodeField () {
+      return this.requestStoreCodeField(true);
+    }
+    public APIRequestGetSponsorTags requestStoreCodeField (boolean value) {
+      this.requestField("store_code", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestStoreLocationDescriptorField () {
+      return this.requestStoreLocationDescriptorField(true);
+    }
+    public APIRequestGetSponsorTags requestStoreLocationDescriptorField (boolean value) {
+      this.requestField("store_location_descriptor", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestStoreNumberField () {
+      return this.requestStoreNumberField(true);
+    }
+    public APIRequestGetSponsorTags requestStoreNumberField (boolean value) {
+      this.requestField("store_number", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestStudioField () {
+      return this.requestStudioField(true);
+    }
+    public APIRequestGetSponsorTags requestStudioField (boolean value) {
+      this.requestField("studio", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestSupportsInstantArticlesField () {
+      return this.requestSupportsInstantArticlesField(true);
+    }
+    public APIRequestGetSponsorTags requestSupportsInstantArticlesField (boolean value) {
+      this.requestField("supports_instant_articles", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestTalkingAboutCountField () {
+      return this.requestTalkingAboutCountField(true);
+    }
+    public APIRequestGetSponsorTags requestTalkingAboutCountField (boolean value) {
+      this.requestField("talking_about_count", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestUnreadMessageCountField () {
+      return this.requestUnreadMessageCountField(true);
+    }
+    public APIRequestGetSponsorTags requestUnreadMessageCountField (boolean value) {
+      this.requestField("unread_message_count", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestUnreadNotifCountField () {
+      return this.requestUnreadNotifCountField(true);
+    }
+    public APIRequestGetSponsorTags requestUnreadNotifCountField (boolean value) {
+      this.requestField("unread_notif_count", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestUnseenMessageCountField () {
+      return this.requestUnseenMessageCountField(true);
+    }
+    public APIRequestGetSponsorTags requestUnseenMessageCountField (boolean value) {
+      this.requestField("unseen_message_count", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestUsernameField () {
+      return this.requestUsernameField(true);
+    }
+    public APIRequestGetSponsorTags requestUsernameField (boolean value) {
+      this.requestField("username", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestVerificationStatusField () {
+      return this.requestVerificationStatusField(true);
+    }
+    public APIRequestGetSponsorTags requestVerificationStatusField (boolean value) {
+      this.requestField("verification_status", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestVoipInfoField () {
+      return this.requestVoipInfoField(true);
+    }
+    public APIRequestGetSponsorTags requestVoipInfoField (boolean value) {
+      this.requestField("voip_info", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestWebsiteField () {
+      return this.requestWebsiteField(true);
+    }
+    public APIRequestGetSponsorTags requestWebsiteField (boolean value) {
+      this.requestField("website", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestWereHereCountField () {
+      return this.requestWereHereCountField(true);
+    }
+    public APIRequestGetSponsorTags requestWereHereCountField (boolean value) {
+      this.requestField("were_here_count", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestWhatsappNumberField () {
+      return this.requestWhatsappNumberField(true);
+    }
+    public APIRequestGetSponsorTags requestWhatsappNumberField (boolean value) {
+      this.requestField("whatsapp_number", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestWrittenByField () {
+      return this.requestWrittenByField(true);
+    }
+    public APIRequestGetSponsorTags requestWrittenByField (boolean value) {
+      this.requestField("written_by", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetTags extends APIRequest<TaggableSubject> {
@@ -5085,6 +6317,8 @@ public class AdVideo extends APINode {
       "backdated_time_granularity",
       "content_category",
       "content_tags",
+      "copyright",
+      "copyright_monitoring_status",
       "created_time",
       "custom_labels",
       "description",
@@ -5100,9 +6334,11 @@ public class AdVideo extends APINode {
       "is_crossposting_eligible",
       "is_episode",
       "is_instagram_eligible",
+      "is_reference_only",
       "length",
       "live_audience_count",
       "live_status",
+      "music_video_copyright",
       "permalink_url",
       "picture",
       "place",
@@ -5114,7 +6350,6 @@ public class AdVideo extends APINode {
       "spherical",
       "status",
       "title",
-      "tv_banner_ad",
       "universal_video_id",
       "updated_time",
     };
@@ -5243,6 +6478,20 @@ public class AdVideo extends APINode {
       this.requestField("content_tags", value);
       return this;
     }
+    public APIRequestGet requestCopyrightField () {
+      return this.requestCopyrightField(true);
+    }
+    public APIRequestGet requestCopyrightField (boolean value) {
+      this.requestField("copyright", value);
+      return this;
+    }
+    public APIRequestGet requestCopyrightMonitoringStatusField () {
+      return this.requestCopyrightMonitoringStatusField(true);
+    }
+    public APIRequestGet requestCopyrightMonitoringStatusField (boolean value) {
+      this.requestField("copyright_monitoring_status", value);
+      return this;
+    }
     public APIRequestGet requestCreatedTimeField () {
       return this.requestCreatedTimeField(true);
     }
@@ -5348,6 +6597,13 @@ public class AdVideo extends APINode {
       this.requestField("is_instagram_eligible", value);
       return this;
     }
+    public APIRequestGet requestIsReferenceOnlyField () {
+      return this.requestIsReferenceOnlyField(true);
+    }
+    public APIRequestGet requestIsReferenceOnlyField (boolean value) {
+      this.requestField("is_reference_only", value);
+      return this;
+    }
     public APIRequestGet requestLengthField () {
       return this.requestLengthField(true);
     }
@@ -5367,6 +6623,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGet requestLiveStatusField (boolean value) {
       this.requestField("live_status", value);
+      return this;
+    }
+    public APIRequestGet requestMusicVideoCopyrightField () {
+      return this.requestMusicVideoCopyrightField(true);
+    }
+    public APIRequestGet requestMusicVideoCopyrightField (boolean value) {
+      this.requestField("music_video_copyright", value);
       return this;
     }
     public APIRequestGet requestPermalinkUrlField () {
@@ -5444,13 +6707,6 @@ public class AdVideo extends APINode {
     }
     public APIRequestGet requestTitleField (boolean value) {
       this.requestField("title", value);
-      return this;
-    }
-    public APIRequestGet requestTvBannerAdField () {
-      return this.requestTvBannerAdField(true);
-    }
-    public APIRequestGet requestTvBannerAdField (boolean value) {
-      this.requestField("tv_banner_ad", value);
       return this;
     }
     public APIRequestGet requestUniversalVideoIdField () {
@@ -5822,6 +7078,8 @@ public class AdVideo extends APINode {
   }
 
   public static enum EnumContainerType {
+      @SerializedName("ACO_VIDEO_VARIATION")
+      VALUE_ACO_VIDEO_VARIATION("ACO_VIDEO_VARIATION"),
       @SerializedName("AD_BREAK_PREVIEW")
       VALUE_AD_BREAK_PREVIEW("AD_BREAK_PREVIEW"),
       @SerializedName("AD_DERIVATIVE")
@@ -5852,8 +7110,6 @@ public class AdVideo extends APINode {
       VALUE_CANVAS("CANVAS"),
       @SerializedName("CFC_VIDEO")
       VALUE_CFC_VIDEO("CFC_VIDEO"),
-      @SerializedName("CIVIC_PROPOSAL_COVER_VIDEO")
-      VALUE_CIVIC_PROPOSAL_COVER_VIDEO("CIVIC_PROPOSAL_COVER_VIDEO"),
       @SerializedName("CONTAINED_POST_ATTACHMENT")
       VALUE_CONTAINED_POST_ATTACHMENT("CONTAINED_POST_ATTACHMENT"),
       @SerializedName("CONTAINED_POST_AUDIO_BROADCAST")
@@ -5872,6 +7128,8 @@ public class AdVideo extends APINode {
       VALUE_DCO_AUTOGEN_VIDEO("DCO_AUTOGEN_VIDEO"),
       @SerializedName("DCO_TRIMMED_VIDEO")
       VALUE_DCO_TRIMMED_VIDEO("DCO_TRIMMED_VIDEO"),
+      @SerializedName("DIM_SUM")
+      VALUE_DIM_SUM("DIM_SUM"),
       @SerializedName("DIRECTED_POST_ATTACHMENT")
       VALUE_DIRECTED_POST_ATTACHMENT("DIRECTED_POST_ATTACHMENT"),
       @SerializedName("DIRECT_INBOX")
@@ -5894,6 +7152,10 @@ public class AdVideo extends APINode {
       VALUE_FUNDRAISER_COVER_VIDEO("FUNDRAISER_COVER_VIDEO"),
       @SerializedName("GAME_CLIP")
       VALUE_GAME_CLIP("GAME_CLIP"),
+      @SerializedName("GAMING_UPDATE_VIDEO")
+      VALUE_GAMING_UPDATE_VIDEO("GAMING_UPDATE_VIDEO"),
+      @SerializedName("GEMSTONE")
+      VALUE_GEMSTONE("GEMSTONE"),
       @SerializedName("GOODWILL_ANNIVERSARY_DEPRECATED")
       VALUE_GOODWILL_ANNIVERSARY_DEPRECATED("GOODWILL_ANNIVERSARY_DEPRECATED"),
       @SerializedName("GOODWILL_ANNIVERSARY_PROMOTION_DEPRECATED")
@@ -5912,6 +7174,8 @@ public class AdVideo extends APINode {
       VALUE_HEURISTIC_CLUSTER_VIDEO("HEURISTIC_CLUSTER_VIDEO"),
       @SerializedName("HEURISTIC_PREVIEW")
       VALUE_HEURISTIC_PREVIEW("HEURISTIC_PREVIEW"),
+      @SerializedName("HIGHLIGHT_CLIP_VIDEO")
+      VALUE_HIGHLIGHT_CLIP_VIDEO("HIGHLIGHT_CLIP_VIDEO"),
       @SerializedName("INSPIRATION_VIDEO")
       VALUE_INSPIRATION_VIDEO("INSPIRATION_VIDEO"),
       @SerializedName("INSTAGRAM_VIDEO_COPY")
@@ -5944,6 +7208,8 @@ public class AdVideo extends APINode {
       VALUE_LOOK_NOW_DEPRECATED("LOOK_NOW_DEPRECATED"),
       @SerializedName("MOMENTS_VIDEO")
       VALUE_MOMENTS_VIDEO("MOMENTS_VIDEO"),
+      @SerializedName("NEO_ASYNC_GAME_VIDEO")
+      VALUE_NEO_ASYNC_GAME_VIDEO("NEO_ASYNC_GAME_VIDEO"),
       @SerializedName("NO_STORY")
       VALUE_NO_STORY("NO_STORY"),
       @SerializedName("OCULUS_CREATOR_PORTAL")
@@ -5984,12 +7250,18 @@ public class AdVideo extends APINode {
       VALUE_SALES_CLIENT_INTERACTION("SALES_CLIENT_INTERACTION"),
       @SerializedName("SAY_THANKS_DEPRECATED")
       VALUE_SAY_THANKS_DEPRECATED("SAY_THANKS_DEPRECATED"),
+      @SerializedName("SHOWREEL_NATIVE_DUMMY_VIDEO")
+      VALUE_SHOWREEL_NATIVE_DUMMY_VIDEO("SHOWREEL_NATIVE_DUMMY_VIDEO"),
       @SerializedName("SLIDESHOW_ANIMOTO")
       VALUE_SLIDESHOW_ANIMOTO("SLIDESHOW_ANIMOTO"),
       @SerializedName("SLIDESHOW_SHAKR")
       VALUE_SLIDESHOW_SHAKR("SLIDESHOW_SHAKR"),
+      @SerializedName("SLIDESHOW_VARIATION_VIDEO")
+      VALUE_SLIDESHOW_VARIATION_VIDEO("SLIDESHOW_VARIATION_VIDEO"),
       @SerializedName("SOTTO_CONTENT")
       VALUE_SOTTO_CONTENT("SOTTO_CONTENT"),
+      @SerializedName("STORIES_VIDEO")
+      VALUE_STORIES_VIDEO("STORIES_VIDEO"),
       @SerializedName("STORYLINE")
       VALUE_STORYLINE("STORYLINE"),
       @SerializedName("STORYLINE_WITH_EXTERNAL_MUSIC")
@@ -6006,11 +7278,15 @@ public class AdVideo extends APINode {
       VALUE_UNLISTED("UNLISTED"),
       @SerializedName("VIDEO_COMMENT")
       VALUE_VIDEO_COMMENT("VIDEO_COMMENT"),
+      @SerializedName("VIDEO_CREATIVE_EDITOR_AUTOGEN_AD_VIDEO")
+      VALUE_VIDEO_CREATIVE_EDITOR_AUTOGEN_AD_VIDEO("VIDEO_CREATIVE_EDITOR_AUTOGEN_AD_VIDEO"),
+      @SerializedName("VIDEO_SUPERRES")
+      VALUE_VIDEO_SUPERRES("VIDEO_SUPERRES"),
       @SerializedName("WOODHENGE")
       VALUE_WOODHENGE("WOODHENGE"),
       @SerializedName("YOUR_DAY")
       VALUE_YOUR_DAY("YOUR_DAY"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -6061,7 +7337,7 @@ public class AdVideo extends APINode {
       VALUE_TECHNOLOGY("TECHNOLOGY"),
       @SerializedName("VIDEO_GAMING")
       VALUE_VIDEO_GAMING("VIDEO_GAMING"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -6080,7 +7356,7 @@ public class AdVideo extends APINode {
       VALUE_MARKDOWN("MARKDOWN"),
       @SerializedName("PLAINTEXT")
       VALUE_PLAINTEXT("PLAINTEXT"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -6103,7 +7379,7 @@ public class AdVideo extends APINode {
       VALUE_EQUIRECTANGULAR("equirectangular"),
       @SerializedName("half_equirectangular")
       VALUE_HALF_EQUIRECTANGULAR("half_equirectangular"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -6120,7 +7396,7 @@ public class AdVideo extends APINode {
   public static enum EnumSwapMode {
       @SerializedName("replace")
       VALUE_REPLACE("replace"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -6143,9 +7419,13 @@ public class AdVideo extends APINode {
       VALUE_INLINE_CREATED("INLINE_CREATED"),
       @SerializedName("PUBLISHED")
       VALUE_PUBLISHED("PUBLISHED"),
+      @SerializedName("REVIEWABLE_BRANDED_CONTENT")
+      VALUE_REVIEWABLE_BRANDED_CONTENT("REVIEWABLE_BRANDED_CONTENT"),
       @SerializedName("SCHEDULED")
       VALUE_SCHEDULED("SCHEDULED"),
-      NULL(null);
+      @SerializedName("SCHEDULED_RECURRING")
+      VALUE_SCHEDULED_RECURRING("SCHEDULED_RECURRING"),
+      ;
 
       private String value;
 
@@ -6168,11 +7448,64 @@ public class AdVideo extends APINode {
       VALUE_START("start"),
       @SerializedName("transfer")
       VALUE_TRANSFER("transfer"),
-      NULL(null);
+      ;
 
       private String value;
 
       private EnumUploadPhase(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumValidationAdPlacements {
+      @SerializedName("AUDIENCE_NETWORK_INSTREAM_VIDEO")
+      VALUE_AUDIENCE_NETWORK_INSTREAM_VIDEO("AUDIENCE_NETWORK_INSTREAM_VIDEO"),
+      @SerializedName("AUDIENCE_NETWORK_INSTREAM_VIDEO_MOBILE")
+      VALUE_AUDIENCE_NETWORK_INSTREAM_VIDEO_MOBILE("AUDIENCE_NETWORK_INSTREAM_VIDEO_MOBILE"),
+      @SerializedName("AUDIENCE_NETWORK_REWARDED_VIDEO")
+      VALUE_AUDIENCE_NETWORK_REWARDED_VIDEO("AUDIENCE_NETWORK_REWARDED_VIDEO"),
+      @SerializedName("DESKTOP_FEED_STANDARD")
+      VALUE_DESKTOP_FEED_STANDARD("DESKTOP_FEED_STANDARD"),
+      @SerializedName("FACEBOOK_STORY_MOBILE")
+      VALUE_FACEBOOK_STORY_MOBILE("FACEBOOK_STORY_MOBILE"),
+      @SerializedName("INSTAGRAM_STANDARD")
+      VALUE_INSTAGRAM_STANDARD("INSTAGRAM_STANDARD"),
+      @SerializedName("INSTAGRAM_STORY")
+      VALUE_INSTAGRAM_STORY("INSTAGRAM_STORY"),
+      @SerializedName("INSTANT_ARTICLE_STANDARD")
+      VALUE_INSTANT_ARTICLE_STANDARD("INSTANT_ARTICLE_STANDARD"),
+      @SerializedName("INSTREAM_VIDEO_DESKTOP")
+      VALUE_INSTREAM_VIDEO_DESKTOP("INSTREAM_VIDEO_DESKTOP"),
+      @SerializedName("INSTREAM_VIDEO_MOBILE")
+      VALUE_INSTREAM_VIDEO_MOBILE("INSTREAM_VIDEO_MOBILE"),
+      @SerializedName("MESSENGER_MOBILE_INBOX_MEDIA")
+      VALUE_MESSENGER_MOBILE_INBOX_MEDIA("MESSENGER_MOBILE_INBOX_MEDIA"),
+      @SerializedName("MESSENGER_MOBILE_STORY_MEDIA")
+      VALUE_MESSENGER_MOBILE_STORY_MEDIA("MESSENGER_MOBILE_STORY_MEDIA"),
+      @SerializedName("MOBILE_FEED_STANDARD")
+      VALUE_MOBILE_FEED_STANDARD("MOBILE_FEED_STANDARD"),
+      @SerializedName("MOBILE_FULLWIDTH")
+      VALUE_MOBILE_FULLWIDTH("MOBILE_FULLWIDTH"),
+      @SerializedName("MOBILE_INTERSTITIAL")
+      VALUE_MOBILE_INTERSTITIAL("MOBILE_INTERSTITIAL"),
+      @SerializedName("MOBILE_MEDIUM_RECTANGLE")
+      VALUE_MOBILE_MEDIUM_RECTANGLE("MOBILE_MEDIUM_RECTANGLE"),
+      @SerializedName("MOBILE_NATIVE")
+      VALUE_MOBILE_NATIVE("MOBILE_NATIVE"),
+      @SerializedName("RIGHT_COLUMN_STANDARD")
+      VALUE_RIGHT_COLUMN_STANDARD("RIGHT_COLUMN_STANDARD"),
+      @SerializedName("SUGGESTED_VIDEO_MOBILE")
+      VALUE_SUGGESTED_VIDEO_MOBILE("SUGGESTED_VIDEO_MOBILE"),
+      ;
+
+      private String value;
+
+      private EnumValidationAdPlacements(String value) {
         this.value = value;
       }
 
@@ -6187,7 +7520,7 @@ public class AdVideo extends APINode {
       VALUE_TAGGED("tagged"),
       @SerializedName("uploaded")
       VALUE_UPLOADED("uploaded"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -6214,11 +7547,34 @@ public class AdVideo extends APINode {
       VALUE_NONE("none"),
       @SerializedName("year")
       VALUE_YEAR("year"),
-      NULL(null);
+      ;
 
       private String value;
 
       private EnumBackdatedTimeGranularity(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumVideoPollWwwPlacement {
+      @SerializedName("BOTTOM_LEFT")
+      VALUE_BOTTOM_LEFT("BOTTOM_LEFT"),
+      @SerializedName("BOTTOM_RIGHT")
+      VALUE_BOTTOM_RIGHT("BOTTOM_RIGHT"),
+      @SerializedName("TOP_LEFT")
+      VALUE_TOP_LEFT("TOP_LEFT"),
+      @SerializedName("TOP_RIGHT")
+      VALUE_TOP_RIGHT("TOP_RIGHT"),
+      ;
+
+      private String value;
+
+      private EnumVideoPollWwwPlacement(String value) {
         this.value = value;
       }
 
@@ -6248,6 +7604,8 @@ public class AdVideo extends APINode {
     this.mBackdatedTimeGranularity = instance.mBackdatedTimeGranularity;
     this.mContentCategory = instance.mContentCategory;
     this.mContentTags = instance.mContentTags;
+    this.mCopyright = instance.mCopyright;
+    this.mCopyrightMonitoringStatus = instance.mCopyrightMonitoringStatus;
     this.mCreatedTime = instance.mCreatedTime;
     this.mCustomLabels = instance.mCustomLabels;
     this.mDescription = instance.mDescription;
@@ -6263,9 +7621,11 @@ public class AdVideo extends APINode {
     this.mIsCrosspostingEligible = instance.mIsCrosspostingEligible;
     this.mIsEpisode = instance.mIsEpisode;
     this.mIsInstagramEligible = instance.mIsInstagramEligible;
+    this.mIsReferenceOnly = instance.mIsReferenceOnly;
     this.mLength = instance.mLength;
     this.mLiveAudienceCount = instance.mLiveAudienceCount;
     this.mLiveStatus = instance.mLiveStatus;
+    this.mMusicVideoCopyright = instance.mMusicVideoCopyright;
     this.mPermalinkUrl = instance.mPermalinkUrl;
     this.mPicture = instance.mPicture;
     this.mPlace = instance.mPlace;
@@ -6277,7 +7637,6 @@ public class AdVideo extends APINode {
     this.mSpherical = instance.mSpherical;
     this.mStatus = instance.mStatus;
     this.mTitle = instance.mTitle;
-    this.mTvBannerAd = instance.mTvBannerAd;
     this.mUniversalVideoId = instance.mUniversalVideoId;
     this.mUpdatedTime = instance.mUpdatedTime;
     this.context = instance.context;

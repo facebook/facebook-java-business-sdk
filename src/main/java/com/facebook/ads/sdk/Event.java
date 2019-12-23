@@ -60,7 +60,7 @@ public class Event extends APINode {
   @SerializedName("can_guests_invite")
   private Boolean mCanGuestsInvite = null;
   @SerializedName("category")
-  private String mCategory = null;
+  private EnumCategory mCategory = null;
   @SerializedName("cover")
   private CoverPhoto mCover = null;
   @SerializedName("declined_count")
@@ -385,7 +385,7 @@ public class Event extends APINode {
     return mCanGuestsInvite;
   }
 
-  public String getFieldCategory() {
+  public EnumCategory getFieldCategory() {
     return mCategory;
   }
 
@@ -2033,7 +2033,6 @@ public class Event extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "attribution_app_id",
       "content_tags",
       "description",
       "encoding_settings",
@@ -2112,11 +2111,6 @@ public class Event extends APINode {
       return this;
     }
 
-
-    public APIRequestCreateLiveVideo setAttributionAppId (String attributionAppId) {
-      this.setParam("attribution_app_id", attributionAppId);
-      return this;
-    }
 
     public APIRequestCreateLiveVideo setContentTags (List<String> contentTags) {
       this.setParam("content_tags", contentTags);
@@ -2462,6 +2456,7 @@ public class Event extends APINode {
       "ios_bundle_id",
       "is_explicit_location",
       "is_explicit_place",
+      "is_visual_search",
       "manual_privacy",
       "message",
       "name",
@@ -2704,6 +2699,15 @@ public class Event extends APINode {
     }
     public APIRequestCreatePhoto setIsExplicitPlace (String isExplicitPlace) {
       this.setParam("is_explicit_place", isExplicitPlace);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setIsVisualSearch (Boolean isVisualSearch) {
+      this.setParam("is_visual_search", isVisualSearch);
+      return this;
+    }
+    public APIRequestCreatePhoto setIsVisualSearch (String isVisualSearch) {
+      this.setParam("is_visual_search", isVisualSearch);
       return this;
     }
 
@@ -3811,6 +3815,71 @@ public class Event extends APINode {
     }
   }
 
+  public static enum EnumCategory {
+      @SerializedName("ART_EVENT")
+      VALUE_ART_EVENT("ART_EVENT"),
+      @SerializedName("BOOK_EVENT")
+      VALUE_BOOK_EVENT("BOOK_EVENT"),
+      @SerializedName("CLASS_EVENT")
+      VALUE_CLASS_EVENT("CLASS_EVENT"),
+      @SerializedName("COMEDY_EVENT")
+      VALUE_COMEDY_EVENT("COMEDY_EVENT"),
+      @SerializedName("CONFERENCE_EVENT")
+      VALUE_CONFERENCE_EVENT("CONFERENCE_EVENT"),
+      @SerializedName("DANCE_EVENT")
+      VALUE_DANCE_EVENT("DANCE_EVENT"),
+      @SerializedName("DINING_EVENT")
+      VALUE_DINING_EVENT("DINING_EVENT"),
+      @SerializedName("FAMILY_EVENT")
+      VALUE_FAMILY_EVENT("FAMILY_EVENT"),
+      @SerializedName("FESTIVAL_EVENT")
+      VALUE_FESTIVAL_EVENT("FESTIVAL_EVENT"),
+      @SerializedName("FITNESS")
+      VALUE_FITNESS("FITNESS"),
+      @SerializedName("FOOD_TASTING")
+      VALUE_FOOD_TASTING("FOOD_TASTING"),
+      @SerializedName("FUNDRAISER")
+      VALUE_FUNDRAISER("FUNDRAISER"),
+      @SerializedName("LECTURE")
+      VALUE_LECTURE("LECTURE"),
+      @SerializedName("MEETUP")
+      VALUE_MEETUP("MEETUP"),
+      @SerializedName("MOVIE_EVENT")
+      VALUE_MOVIE_EVENT("MOVIE_EVENT"),
+      @SerializedName("MUSIC_EVENT")
+      VALUE_MUSIC_EVENT("MUSIC_EVENT"),
+      @SerializedName("NEIGHBORHOOD")
+      VALUE_NEIGHBORHOOD("NEIGHBORHOOD"),
+      @SerializedName("NIGHTLIFE")
+      VALUE_NIGHTLIFE("NIGHTLIFE"),
+      @SerializedName("OTHER")
+      VALUE_OTHER("OTHER"),
+      @SerializedName("RELIGIOUS_EVENT")
+      VALUE_RELIGIOUS_EVENT("RELIGIOUS_EVENT"),
+      @SerializedName("SHOPPING")
+      VALUE_SHOPPING("SHOPPING"),
+      @SerializedName("SPORTS_EVENT")
+      VALUE_SPORTS_EVENT("SPORTS_EVENT"),
+      @SerializedName("THEATER_EVENT")
+      VALUE_THEATER_EVENT("THEATER_EVENT"),
+      @SerializedName("VOLUNTEERING")
+      VALUE_VOLUNTEERING("VOLUNTEERING"),
+      @SerializedName("WORKSHOP")
+      VALUE_WORKSHOP("WORKSHOP"),
+      ;
+
+      private String value;
+
+      private EnumCategory(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumType {
       @SerializedName("community")
       VALUE_COMMUNITY("community"),
@@ -3820,7 +3889,7 @@ public class Event extends APINode {
       VALUE_PRIVATE("private"),
       @SerializedName("public")
       VALUE_PUBLIC("public"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3843,7 +3912,7 @@ public class Event extends APINode {
       VALUE_PUBLISHED("published"),
       @SerializedName("scheduled_draft_for_publication")
       VALUE_SCHEDULED_DRAFT_FOR_PUBLICATION("scheduled_draft_for_publication"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3862,7 +3931,7 @@ public class Event extends APINode {
       VALUE_PAST("past"),
       @SerializedName("upcoming")
       VALUE_UPCOMING("upcoming"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3883,7 +3952,7 @@ public class Event extends APINode {
       VALUE_ONSITE_TICKET("ONSITE_TICKET"),
       @SerializedName("RSVP")
       VALUE_RSVP("RSVP"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3910,7 +3979,7 @@ public class Event extends APINode {
       VALUE_NONE("none"),
       @SerializedName("year")
       VALUE_YEAR("year"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3933,7 +4002,7 @@ public class Event extends APINode {
       VALUE_BRANDING_PHOTO("BRANDING_PHOTO"),
       @SerializedName("BRANDING_STATUS")
       VALUE_BRANDING_STATUS("BRANDING_STATUS"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3952,7 +4021,7 @@ public class Event extends APINode {
       VALUE_MARKDOWN("MARKDOWN"),
       @SerializedName("PLAINTEXT")
       VALUE_PLAINTEXT("PLAINTEXT"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3971,7 +4040,7 @@ public class Event extends APINode {
       VALUE_1("1"),
       @SerializedName("2")
       VALUE_2("2"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3996,7 +4065,7 @@ public class Event extends APINode {
       VALUE_4("4"),
       @SerializedName("5")
       VALUE_5("5"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4015,7 +4084,7 @@ public class Event extends APINode {
       VALUE_DISABLED("disabled"),
       @SerializedName("enabled")
       VALUE_ENABLED("enabled"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4034,7 +4103,7 @@ public class Event extends APINode {
       VALUE_STORY("STORY"),
       @SerializedName("TIMELINE")
       VALUE_TIMELINE("TIMELINE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4057,9 +4126,13 @@ public class Event extends APINode {
       VALUE_INLINE_CREATED("INLINE_CREATED"),
       @SerializedName("PUBLISHED")
       VALUE_PUBLISHED("PUBLISHED"),
+      @SerializedName("REVIEWABLE_BRANDED_CONTENT")
+      VALUE_REVIEWABLE_BRANDED_CONTENT("REVIEWABLE_BRANDED_CONTENT"),
       @SerializedName("SCHEDULED")
       VALUE_SCHEDULED("SCHEDULED"),
-      NULL(null);
+      @SerializedName("SCHEDULED_RECURRING")
+      VALUE_SCHEDULED_RECURRING("SCHEDULED_RECURRING"),
+      ;
 
       private String value;
 

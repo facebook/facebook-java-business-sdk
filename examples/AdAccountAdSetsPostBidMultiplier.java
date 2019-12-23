@@ -45,6 +45,7 @@ public class AdAccountAdSetsPostBidMultiplier {
       .setPromotedObject("{\"product_set_id\":\"<productSetID>\",\"custom_event_type\":\"ADD_TO_CART\"}")
       .setTargeting(
           new Targeting()
+            .setFieldFacebookPositions(Arrays.asList("feed"))
             .setFieldGeoLocations(
               new TargetingGeoLocation()
                 .setFieldCountries(Arrays.asList("US"))

@@ -550,7 +550,7 @@ public class CPASParentCatalogSettings extends APINode {
       VALUE_X7D_CLICK("X7D_CLICK"),
       @SerializedName("X7D_VIEW")
       VALUE_X7D_VIEW("X7D_VIEW"),
-      NULL(null);
+      ;
 
       private String value;
 

@@ -292,7 +292,7 @@ public class ProductCatalogCategory extends APINode {
       VALUE_CATEGORY("CATEGORY"),
       @SerializedName("PRODUCT_TYPE")
       VALUE_PRODUCT_TYPE("PRODUCT_TYPE"),
-      NULL(null);
+      ;
 
       private String value;
 

@@ -339,7 +339,7 @@ public class AdRuleHistory extends APINode {
       VALUE_PAUSED("PAUSED"),
       @SerializedName("UNPAUSED")
       VALUE_UNPAUSED("UNPAUSED"),
-      NULL(null);
+      ;
 
       private String value;
 

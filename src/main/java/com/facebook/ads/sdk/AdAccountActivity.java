@@ -67,10 +67,6 @@ public class AdAccountActivity extends APINode {
   private Object mCreditNew = null;
   @SerializedName("credit_old")
   private Object mCreditOld = null;
-  @SerializedName("credit_status_new")
-  private String mCreditStatusNew = null;
-  @SerializedName("credit_status_old")
-  private String mCreditStatusOld = null;
   @SerializedName("currency_new")
   private String mCurrencyNew = null;
   @SerializedName("currency_old")
@@ -359,14 +355,6 @@ public class AdAccountActivity extends APINode {
     return mCreditOld;
   }
 
-  public String getFieldCreditStatusNew() {
-    return mCreditStatusNew;
-  }
-
-  public String getFieldCreditStatusOld() {
-    return mCreditStatusOld;
-  }
-
   public String getFieldCurrencyNew() {
     return mCurrencyNew;
   }
@@ -486,8 +474,6 @@ public class AdAccountActivity extends APINode {
       "created_time",
       "credit_new",
       "credit_old",
-      "credit_status_new",
-      "credit_status_old",
       "currency_new",
       "currency_old",
       "daily_spend_limit_new",
@@ -644,20 +630,6 @@ public class AdAccountActivity extends APINode {
     }
     public APIRequestGet requestCreditOldField (boolean value) {
       this.requestField("credit_old", value);
-      return this;
-    }
-    public APIRequestGet requestCreditStatusNewField () {
-      return this.requestCreditStatusNewField(true);
-    }
-    public APIRequestGet requestCreditStatusNewField (boolean value) {
-      this.requestField("credit_status_new", value);
-      return this;
-    }
-    public APIRequestGet requestCreditStatusOldField () {
-      return this.requestCreditStatusOldField(true);
-    }
-    public APIRequestGet requestCreditStatusOldField (boolean value) {
-      this.requestField("credit_status_old", value);
       return this;
     }
     public APIRequestGet requestCurrencyNewField () {
@@ -858,8 +830,6 @@ public class AdAccountActivity extends APINode {
     this.mCreatedTime = instance.mCreatedTime;
     this.mCreditNew = instance.mCreditNew;
     this.mCreditOld = instance.mCreditOld;
-    this.mCreditStatusNew = instance.mCreditStatusNew;
-    this.mCreditStatusOld = instance.mCreditStatusOld;
     this.mCurrencyNew = instance.mCurrencyNew;
     this.mCurrencyOld = instance.mCurrencyOld;
     this.mDailySpendLimitNew = instance.mDailySpendLimitNew;

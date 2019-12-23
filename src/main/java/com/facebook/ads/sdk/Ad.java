@@ -95,12 +95,16 @@ public class Ad extends APINode {
   private List<DeliveryCheck> mFailedDeliveryChecks = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("is_autobid")
+  private Boolean mIsAutobid = null;
   @SerializedName("issues_info")
   private List<AdgroupIssuesInfo> mIssuesInfo = null;
   @SerializedName("last_updated_by_app_id")
   private String mLastUpdatedByAppId = null;
   @SerializedName("name")
   private String mName = null;
+  @SerializedName("preview_shareable_link")
+  private String mPreviewShareableLink = null;
   @SerializedName("priority")
   private Long mPriority = null;
   @SerializedName("recommendations")
@@ -360,10 +364,6 @@ public class Ad extends APINode {
     return new APIRequestGetInsightsAsync(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetKeywordStats getKeywordStats() {
-    return new APIRequestGetKeywordStats(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetLeads getLeads() {
     return new APIRequestGetLeads(this.getPrefixedId().toString(), context);
   }
@@ -482,6 +482,10 @@ public class Ad extends APINode {
     return mId;
   }
 
+  public Boolean getFieldIsAutobid() {
+    return mIsAutobid;
+  }
+
   public List<AdgroupIssuesInfo> getFieldIssuesInfo() {
     return mIssuesInfo;
   }
@@ -492,6 +496,10 @@ public class Ad extends APINode {
 
   public String getFieldName() {
     return mName;
+  }
+
+  public String getFieldPreviewShareableLink() {
+    return mPreviewShareableLink;
   }
 
   public Long getFieldPriority() {
@@ -562,6 +570,7 @@ public class Ad extends APINode {
       "destination_set_id",
       "dynamic_ad_voice",
       "effective_authorization_category",
+      "effective_instagram_media_id",
       "effective_instagram_story_id",
       "effective_object_story_id",
       "enable_direct_install",
@@ -575,6 +584,7 @@ public class Ad extends APINode {
       "instagram_story_id",
       "interactive_components_spec",
       "link_deep_link_url",
+      "link_destination_display_url",
       "link_og_id",
       "link_url",
       "messenger_sponsored_message",
@@ -802,6 +812,13 @@ public class Ad extends APINode {
       this.requestField("effective_authorization_category", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestEffectiveInstagramMediaIdField () {
+      return this.requestEffectiveInstagramMediaIdField(true);
+    }
+    public APIRequestGetAdCreatives requestEffectiveInstagramMediaIdField (boolean value) {
+      this.requestField("effective_instagram_media_id", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestEffectiveInstagramStoryIdField () {
       return this.requestEffectiveInstagramStoryIdField(true);
     }
@@ -891,6 +908,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetAdCreatives requestLinkDeepLinkUrlField (boolean value) {
       this.requestField("link_deep_link_url", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestLinkDestinationDisplayUrlField () {
+      return this.requestLinkDestinationDisplayUrlField(true);
+    }
+    public APIRequestGetAdCreatives requestLinkDestinationDisplayUrlField (boolean value) {
+      this.requestField("link_destination_display_url", value);
       return this;
     }
     public APIRequestGetAdCreatives requestLinkOgIdField () {
@@ -1541,9 +1565,11 @@ public class Ad extends APINode {
       "engagement_audience",
       "failed_delivery_checks",
       "id",
+      "is_autobid",
       "issues_info",
       "last_updated_by_app_id",
       "name",
+      "preview_shareable_link",
       "priority",
       "recommendations",
       "source_ad",
@@ -1829,6 +1855,13 @@ public class Ad extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetCopies requestIsAutobidField () {
+      return this.requestIsAutobidField(true);
+    }
+    public APIRequestGetCopies requestIsAutobidField (boolean value) {
+      this.requestField("is_autobid", value);
+      return this;
+    }
     public APIRequestGetCopies requestIssuesInfoField () {
       return this.requestIssuesInfoField(true);
     }
@@ -1848,6 +1881,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetCopies requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetCopies requestPreviewShareableLinkField () {
+      return this.requestPreviewShareableLinkField(true);
+    }
+    public APIRequestGetCopies requestPreviewShareableLinkField (boolean value) {
+      this.requestField("preview_shareable_link", value);
       return this;
     }
     public APIRequestGetCopies requestPriorityField () {
@@ -2629,276 +2669,6 @@ public class Ad extends APINode {
 
   }
 
-  public static class APIRequestGetKeywordStats extends APIRequest<AdKeywordStats> {
-
-    APINodeList<AdKeywordStats> lastResponse = null;
-    @Override
-    public APINodeList<AdKeywordStats> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "date",
-    };
-
-    public static final String[] FIELDS = {
-      "actions",
-      "clicks",
-      "cost_per_total_action",
-      "cost_per_unique_click",
-      "cpc",
-      "cpm",
-      "cpp",
-      "ctr",
-      "frequency",
-      "id",
-      "impressions",
-      "name",
-      "reach",
-      "spend",
-      "total_actions",
-      "total_unique_actions",
-      "unique_actions",
-      "unique_clicks",
-      "unique_ctr",
-      "unique_impressions",
-    };
-
-    @Override
-    public APINodeList<AdKeywordStats> parseResponse(String response, String header) throws APIException {
-      return AdKeywordStats.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<AdKeywordStats> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<AdKeywordStats> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<AdKeywordStats>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<AdKeywordStats>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<AdKeywordStats>>() {
-           public APINodeList<AdKeywordStats> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetKeywordStats.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetKeywordStats(String nodeId, APIContext context) {
-      super(context, nodeId, "/keywordstats", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetKeywordStats setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetKeywordStats setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetKeywordStats setDate (String date) {
-      this.setParam("date", date);
-      return this;
-    }
-
-    public APIRequestGetKeywordStats requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetKeywordStats requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetKeywordStats requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetKeywordStats requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetKeywordStats requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetKeywordStats requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetKeywordStats requestActionsField () {
-      return this.requestActionsField(true);
-    }
-    public APIRequestGetKeywordStats requestActionsField (boolean value) {
-      this.requestField("actions", value);
-      return this;
-    }
-    public APIRequestGetKeywordStats requestClicksField () {
-      return this.requestClicksField(true);
-    }
-    public APIRequestGetKeywordStats requestClicksField (boolean value) {
-      this.requestField("clicks", value);
-      return this;
-    }
-    public APIRequestGetKeywordStats requestCostPerTotalActionField () {
-      return this.requestCostPerTotalActionField(true);
-    }
-    public APIRequestGetKeywordStats requestCostPerTotalActionField (boolean value) {
-      this.requestField("cost_per_total_action", value);
-      return this;
-    }
-    public APIRequestGetKeywordStats requestCostPerUniqueClickField () {
-      return this.requestCostPerUniqueClickField(true);
-    }
-    public APIRequestGetKeywordStats requestCostPerUniqueClickField (boolean value) {
-      this.requestField("cost_per_unique_click", value);
-      return this;
-    }
-    public APIRequestGetKeywordStats requestCpcField () {
-      return this.requestCpcField(true);
-    }
-    public APIRequestGetKeywordStats requestCpcField (boolean value) {
-      this.requestField("cpc", value);
-      return this;
-    }
-    public APIRequestGetKeywordStats requestCpmField () {
-      return this.requestCpmField(true);
-    }
-    public APIRequestGetKeywordStats requestCpmField (boolean value) {
-      this.requestField("cpm", value);
-      return this;
-    }
-    public APIRequestGetKeywordStats requestCppField () {
-      return this.requestCppField(true);
-    }
-    public APIRequestGetKeywordStats requestCppField (boolean value) {
-      this.requestField("cpp", value);
-      return this;
-    }
-    public APIRequestGetKeywordStats requestCtrField () {
-      return this.requestCtrField(true);
-    }
-    public APIRequestGetKeywordStats requestCtrField (boolean value) {
-      this.requestField("ctr", value);
-      return this;
-    }
-    public APIRequestGetKeywordStats requestFrequencyField () {
-      return this.requestFrequencyField(true);
-    }
-    public APIRequestGetKeywordStats requestFrequencyField (boolean value) {
-      this.requestField("frequency", value);
-      return this;
-    }
-    public APIRequestGetKeywordStats requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetKeywordStats requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetKeywordStats requestImpressionsField () {
-      return this.requestImpressionsField(true);
-    }
-    public APIRequestGetKeywordStats requestImpressionsField (boolean value) {
-      this.requestField("impressions", value);
-      return this;
-    }
-    public APIRequestGetKeywordStats requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetKeywordStats requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetKeywordStats requestReachField () {
-      return this.requestReachField(true);
-    }
-    public APIRequestGetKeywordStats requestReachField (boolean value) {
-      this.requestField("reach", value);
-      return this;
-    }
-    public APIRequestGetKeywordStats requestSpendField () {
-      return this.requestSpendField(true);
-    }
-    public APIRequestGetKeywordStats requestSpendField (boolean value) {
-      this.requestField("spend", value);
-      return this;
-    }
-    public APIRequestGetKeywordStats requestTotalActionsField () {
-      return this.requestTotalActionsField(true);
-    }
-    public APIRequestGetKeywordStats requestTotalActionsField (boolean value) {
-      this.requestField("total_actions", value);
-      return this;
-    }
-    public APIRequestGetKeywordStats requestTotalUniqueActionsField () {
-      return this.requestTotalUniqueActionsField(true);
-    }
-    public APIRequestGetKeywordStats requestTotalUniqueActionsField (boolean value) {
-      this.requestField("total_unique_actions", value);
-      return this;
-    }
-    public APIRequestGetKeywordStats requestUniqueActionsField () {
-      return this.requestUniqueActionsField(true);
-    }
-    public APIRequestGetKeywordStats requestUniqueActionsField (boolean value) {
-      this.requestField("unique_actions", value);
-      return this;
-    }
-    public APIRequestGetKeywordStats requestUniqueClicksField () {
-      return this.requestUniqueClicksField(true);
-    }
-    public APIRequestGetKeywordStats requestUniqueClicksField (boolean value) {
-      this.requestField("unique_clicks", value);
-      return this;
-    }
-    public APIRequestGetKeywordStats requestUniqueCtrField () {
-      return this.requestUniqueCtrField(true);
-    }
-    public APIRequestGetKeywordStats requestUniqueCtrField (boolean value) {
-      this.requestField("unique_ctr", value);
-      return this;
-    }
-    public APIRequestGetKeywordStats requestUniqueImpressionsField () {
-      return this.requestUniqueImpressionsField(true);
-    }
-    public APIRequestGetKeywordStats requestUniqueImpressionsField (boolean value) {
-      this.requestField("unique_impressions", value);
-      return this;
-    }
-  }
-
   public static class APIRequestGetLeads extends APIRequest<Lead> {
 
     APINodeList<Lead> lastResponse = null;
@@ -2920,12 +2690,13 @@ public class Ad extends APINode {
       "custom_disclaimer_responses",
       "field_data",
       "form_id",
+      "home_listing",
       "id",
       "is_organic",
       "partner_name",
       "platform",
-      "post",
       "retailer_item_id",
+      "vehicle",
     };
 
     @Override
@@ -3087,6 +2858,13 @@ public class Ad extends APINode {
       this.requestField("form_id", value);
       return this;
     }
+    public APIRequestGetLeads requestHomeListingField () {
+      return this.requestHomeListingField(true);
+    }
+    public APIRequestGetLeads requestHomeListingField (boolean value) {
+      this.requestField("home_listing", value);
+      return this;
+    }
     public APIRequestGetLeads requestIdField () {
       return this.requestIdField(true);
     }
@@ -3115,18 +2893,18 @@ public class Ad extends APINode {
       this.requestField("platform", value);
       return this;
     }
-    public APIRequestGetLeads requestPostField () {
-      return this.requestPostField(true);
-    }
-    public APIRequestGetLeads requestPostField (boolean value) {
-      this.requestField("post", value);
-      return this;
-    }
     public APIRequestGetLeads requestRetailerItemIdField () {
       return this.requestRetailerItemIdField(true);
     }
     public APIRequestGetLeads requestRetailerItemIdField (boolean value) {
       this.requestField("retailer_item_id", value);
+      return this;
+    }
+    public APIRequestGetLeads requestVehicleField () {
+      return this.requestVehicleField(true);
+    }
+    public APIRequestGetLeads requestVehicleField (boolean value) {
+      this.requestField("vehicle", value);
       return this;
     }
   }
@@ -3145,7 +2923,6 @@ public class Ad extends APINode {
       "dynamic_customization",
       "end_date",
       "height",
-      "interactive",
       "locale",
       "place_page_id",
       "post",
@@ -3255,15 +3032,6 @@ public class Ad extends APINode {
     }
     public APIRequestGetPreviews setHeight (String height) {
       this.setParam("height", height);
-      return this;
-    }
-
-    public APIRequestGetPreviews setInteractive (Boolean interactive) {
-      this.setParam("interactive", interactive);
-      return this;
-    }
-    public APIRequestGetPreviews setInteractive (String interactive) {
-      this.setParam("interactive", interactive);
       return this;
     }
 
@@ -3755,9 +3523,11 @@ public class Ad extends APINode {
       "engagement_audience",
       "failed_delivery_checks",
       "id",
+      "is_autobid",
       "issues_info",
       "last_updated_by_app_id",
       "name",
+      "preview_shareable_link",
       "priority",
       "recommendations",
       "source_ad",
@@ -4043,6 +3813,13 @@ public class Ad extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestIsAutobidField () {
+      return this.requestIsAutobidField(true);
+    }
+    public APIRequestGet requestIsAutobidField (boolean value) {
+      this.requestField("is_autobid", value);
+      return this;
+    }
     public APIRequestGet requestIssuesInfoField () {
       return this.requestIssuesInfoField(true);
     }
@@ -4062,6 +3839,13 @@ public class Ad extends APINode {
     }
     public APIRequestGet requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGet requestPreviewShareableLinkField () {
+      return this.requestPreviewShareableLinkField(true);
+    }
+    public APIRequestGet requestPreviewShareableLinkField (boolean value) {
+      this.requestField("preview_shareable_link", value);
       return this;
     }
     public APIRequestGet requestPriorityField () {
@@ -4372,7 +4156,7 @@ public class Ad extends APINode {
       VALUE_CPM("CPM"),
       @SerializedName("MULTI_PREMIUM")
       VALUE_MULTI_PREMIUM("MULTI_PREMIUM"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4395,7 +4179,7 @@ public class Ad extends APINode {
       VALUE_DELETED("DELETED"),
       @SerializedName("PAUSED")
       VALUE_PAUSED("PAUSED"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4422,6 +4206,8 @@ public class Ad extends APINode {
       VALUE_DELETED("DELETED"),
       @SerializedName("DISAPPROVED")
       VALUE_DISAPPROVED("DISAPPROVED"),
+      @SerializedName("IN_PROCESS")
+      VALUE_IN_PROCESS("IN_PROCESS"),
       @SerializedName("PAUSED")
       VALUE_PAUSED("PAUSED"),
       @SerializedName("PENDING_BILLING_INFO")
@@ -4432,7 +4218,7 @@ public class Ad extends APINode {
       VALUE_PREAPPROVED("PREAPPROVED"),
       @SerializedName("WITH_ISSUES")
       VALUE_WITH_ISSUES("WITH_ISSUES"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4455,7 +4241,7 @@ public class Ad extends APINode {
       VALUE_DELETED("DELETED"),
       @SerializedName("PAUSED")
       VALUE_PAUSED("PAUSED"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4508,7 +4294,7 @@ public class Ad extends APINode {
       VALUE_TODAY("today"),
       @SerializedName("yesterday")
       VALUE_YESTERDAY("yesterday"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4529,7 +4315,7 @@ public class Ad extends APINode {
       VALUE_SYNCHRONOUS_AD_REVIEW("synchronous_ad_review"),
       @SerializedName("validate_only")
       VALUE_VALIDATE_ONLY("validate_only"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4548,7 +4334,7 @@ public class Ad extends APINode {
       VALUE_ALL("ALL"),
       @SerializedName("ANY")
       VALUE_ANY("ANY"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4569,7 +4355,7 @@ public class Ad extends APINode {
       VALUE_INHERITED_FROM_SOURCE("INHERITED_FROM_SOURCE"),
       @SerializedName("PAUSED")
       VALUE_PAUSED("PAUSED"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4618,9 +4404,11 @@ public class Ad extends APINode {
     this.mEngagementAudience = instance.mEngagementAudience;
     this.mFailedDeliveryChecks = instance.mFailedDeliveryChecks;
     this.mId = instance.mId;
+    this.mIsAutobid = instance.mIsAutobid;
     this.mIssuesInfo = instance.mIssuesInfo;
     this.mLastUpdatedByAppId = instance.mLastUpdatedByAppId;
     this.mName = instance.mName;
+    this.mPreviewShareableLink = instance.mPreviewShareableLink;
     this.mPriority = instance.mPriority;
     this.mRecommendations = instance.mRecommendations;
     this.mSourceAd = instance.mSourceAd;

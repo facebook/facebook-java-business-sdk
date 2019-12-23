@@ -38,6 +38,14 @@ public class AdCampaignPostAdsetUpdateCpa {
       .setBillingEvent(AdSet.EnumBillingEvent.VALUE_IMPRESSIONS)
       .setOptimizationGoal(AdSet.EnumOptimizationGoal.VALUE_LINK_CLICKS)
       .setBidAmount(200L)
+      .setTargeting(
+          new Targeting()
+            .setFieldFacebookPositions(Arrays.asList("feed"))
+            .setFieldGeoLocations(
+              new TargetingGeoLocation()
+                .setFieldCountries(Arrays.asList("US"))
+            )
+        )
       .execute();
 
   }

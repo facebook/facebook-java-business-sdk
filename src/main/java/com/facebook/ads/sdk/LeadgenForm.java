@@ -59,18 +59,12 @@ public class LeadgenForm extends APINode {
   private Boolean mAllowOrganicLead = null;
   @SerializedName("block_display_for_non_targeted_viewer")
   private Boolean mBlockDisplayForNonTargetedViewer = null;
+  @SerializedName("context_card")
+  private Object mContextCard = null;
   @SerializedName("created_time")
   private String mCreatedTime = null;
-  @SerializedName("creator")
-  private User mCreator = null;
-  @SerializedName("creator_id")
-  private Long mCreatorId = null;
-  @SerializedName("cusomized_tcpa_content")
-  private String mCusomizedTcpaContent = null;
   @SerializedName("expired_leads_count")
   private Long mExpiredLeadsCount = null;
-  @SerializedName("extra_details")
-  private List<String> mExtraDetails = null;
   @SerializedName("follow_up_action_text")
   private String mFollowUpActionText = null;
   @SerializedName("follow_up_action_url")
@@ -79,14 +73,12 @@ public class LeadgenForm extends APINode {
   private String mId = null;
   @SerializedName("is_optimized_for_quality")
   private Boolean mIsOptimizedForQuality = null;
-  @SerializedName("leadgen_export_csv_url")
-  private String mLeadgenExportCsvUrl = null;
   @SerializedName("leads_count")
   private Long mLeadsCount = null;
+  @SerializedName("legal_content")
+  private Object mLegalContent = null;
   @SerializedName("locale")
   private String mLocale = null;
-  @SerializedName("messenger_welcome_message")
-  private String mMessengerWelcomeMessage = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("organic_leads_count")
@@ -97,16 +89,14 @@ public class LeadgenForm extends APINode {
   private String mPageId = null;
   @SerializedName("privacy_policy_url")
   private String mPrivacyPolicyUrl = null;
-  @SerializedName("qualifiers")
-  private List<Object> mQualifiers = null;
   @SerializedName("question_page_custom_headline")
   private String mQuestionPageCustomHeadline = null;
   @SerializedName("questions")
   private List<LeadGenQuestion> mQuestions = null;
   @SerializedName("status")
   private String mStatus = null;
-  @SerializedName("tcpa_compliance")
-  private Boolean mTcpaCompliance = null;
+  @SerializedName("thank_you_page")
+  private Object mThankYouPage = null;
   @SerializedName("tracking_parameters")
   private Map<String, String> mTrackingParameters = null;
   protected static Gson gson = null;
@@ -330,10 +320,6 @@ public class LeadgenForm extends APINode {
     return new APIRequestCreateTestLead(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestDelete delete() {
-    return new APIRequestDelete(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
@@ -351,31 +337,16 @@ public class LeadgenForm extends APINode {
     return mBlockDisplayForNonTargetedViewer;
   }
 
+  public Object getFieldContextCard() {
+    return mContextCard;
+  }
+
   public String getFieldCreatedTime() {
     return mCreatedTime;
   }
 
-  public User getFieldCreator() {
-    if (mCreator != null) {
-      mCreator.context = getContext();
-    }
-    return mCreator;
-  }
-
-  public Long getFieldCreatorId() {
-    return mCreatorId;
-  }
-
-  public String getFieldCusomizedTcpaContent() {
-    return mCusomizedTcpaContent;
-  }
-
   public Long getFieldExpiredLeadsCount() {
     return mExpiredLeadsCount;
-  }
-
-  public List<String> getFieldExtraDetails() {
-    return mExtraDetails;
   }
 
   public String getFieldFollowUpActionText() {
@@ -394,20 +365,16 @@ public class LeadgenForm extends APINode {
     return mIsOptimizedForQuality;
   }
 
-  public String getFieldLeadgenExportCsvUrl() {
-    return mLeadgenExportCsvUrl;
-  }
-
   public Long getFieldLeadsCount() {
     return mLeadsCount;
   }
 
-  public String getFieldLocale() {
-    return mLocale;
+  public Object getFieldLegalContent() {
+    return mLegalContent;
   }
 
-  public String getFieldMessengerWelcomeMessage() {
-    return mMessengerWelcomeMessage;
+  public String getFieldLocale() {
+    return mLocale;
   }
 
   public String getFieldName() {
@@ -433,10 +400,6 @@ public class LeadgenForm extends APINode {
     return mPrivacyPolicyUrl;
   }
 
-  public List<Object> getFieldQualifiers() {
-    return mQualifiers;
-  }
-
   public String getFieldQuestionPageCustomHeadline() {
     return mQuestionPageCustomHeadline;
   }
@@ -449,8 +412,8 @@ public class LeadgenForm extends APINode {
     return mStatus;
   }
 
-  public Boolean getFieldTcpaCompliance() {
-    return mTcpaCompliance;
+  public Object getFieldThankYouPage() {
+    return mThankYouPage;
   }
 
   public Map<String, String> getFieldTrackingParameters() {
@@ -480,12 +443,13 @@ public class LeadgenForm extends APINode {
       "custom_disclaimer_responses",
       "field_data",
       "form_id",
+      "home_listing",
       "id",
       "is_organic",
       "partner_name",
       "platform",
-      "post",
       "retailer_item_id",
+      "vehicle",
     };
 
     @Override
@@ -647,6 +611,13 @@ public class LeadgenForm extends APINode {
       this.requestField("form_id", value);
       return this;
     }
+    public APIRequestGetLeads requestHomeListingField () {
+      return this.requestHomeListingField(true);
+    }
+    public APIRequestGetLeads requestHomeListingField (boolean value) {
+      this.requestField("home_listing", value);
+      return this;
+    }
     public APIRequestGetLeads requestIdField () {
       return this.requestIdField(true);
     }
@@ -675,18 +646,18 @@ public class LeadgenForm extends APINode {
       this.requestField("platform", value);
       return this;
     }
-    public APIRequestGetLeads requestPostField () {
-      return this.requestPostField(true);
-    }
-    public APIRequestGetLeads requestPostField (boolean value) {
-      this.requestField("post", value);
-      return this;
-    }
     public APIRequestGetLeads requestRetailerItemIdField () {
       return this.requestRetailerItemIdField(true);
     }
     public APIRequestGetLeads requestRetailerItemIdField (boolean value) {
       this.requestField("retailer_item_id", value);
+      return this;
+    }
+    public APIRequestGetLeads requestVehicleField () {
+      return this.requestVehicleField(true);
+    }
+    public APIRequestGetLeads requestVehicleField (boolean value) {
+      this.requestField("vehicle", value);
       return this;
     }
   }
@@ -712,12 +683,13 @@ public class LeadgenForm extends APINode {
       "custom_disclaimer_responses",
       "field_data",
       "form_id",
+      "home_listing",
       "id",
       "is_organic",
       "partner_name",
       "platform",
-      "post",
       "retailer_item_id",
+      "vehicle",
     };
 
     @Override
@@ -879,6 +851,13 @@ public class LeadgenForm extends APINode {
       this.requestField("form_id", value);
       return this;
     }
+    public APIRequestGetTestLeads requestHomeListingField () {
+      return this.requestHomeListingField(true);
+    }
+    public APIRequestGetTestLeads requestHomeListingField (boolean value) {
+      this.requestField("home_listing", value);
+      return this;
+    }
     public APIRequestGetTestLeads requestIdField () {
       return this.requestIdField(true);
     }
@@ -907,18 +886,18 @@ public class LeadgenForm extends APINode {
       this.requestField("platform", value);
       return this;
     }
-    public APIRequestGetTestLeads requestPostField () {
-      return this.requestPostField(true);
-    }
-    public APIRequestGetTestLeads requestPostField (boolean value) {
-      this.requestField("post", value);
-      return this;
-    }
     public APIRequestGetTestLeads requestRetailerItemIdField () {
       return this.requestRetailerItemIdField(true);
     }
     public APIRequestGetTestLeads requestRetailerItemIdField (boolean value) {
       this.requestField("retailer_item_id", value);
+      return this;
+    }
+    public APIRequestGetTestLeads requestVehicleField () {
+      return this.requestVehicleField(true);
+    }
+    public APIRequestGetTestLeads requestVehicleField (boolean value) {
+      this.requestField("vehicle", value);
       return this;
     }
   }
@@ -1047,110 +1026,6 @@ public class LeadgenForm extends APINode {
 
   }
 
-  public static class APIRequestDelete extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestDelete(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDelete setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDelete setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDelete requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDelete requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDelete requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDelete requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDelete requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDelete requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGet extends APIRequest<LeadgenForm> {
 
     LeadgenForm lastResponse = null;
@@ -1164,30 +1039,25 @@ public class LeadgenForm extends APINode {
     public static final String[] FIELDS = {
       "allow_organic_lead",
       "block_display_for_non_targeted_viewer",
+      "context_card",
       "created_time",
-      "creator",
-      "creator_id",
-      "cusomized_tcpa_content",
       "expired_leads_count",
-      "extra_details",
       "follow_up_action_text",
       "follow_up_action_url",
       "id",
       "is_optimized_for_quality",
-      "leadgen_export_csv_url",
       "leads_count",
+      "legal_content",
       "locale",
-      "messenger_welcome_message",
       "name",
       "organic_leads_count",
       "page",
       "page_id",
       "privacy_policy_url",
-      "qualifiers",
       "question_page_custom_headline",
       "questions",
       "status",
-      "tcpa_compliance",
+      "thank_you_page",
       "tracking_parameters",
     };
 
@@ -1294,6 +1164,13 @@ public class LeadgenForm extends APINode {
       this.requestField("block_display_for_non_targeted_viewer", value);
       return this;
     }
+    public APIRequestGet requestContextCardField () {
+      return this.requestContextCardField(true);
+    }
+    public APIRequestGet requestContextCardField (boolean value) {
+      this.requestField("context_card", value);
+      return this;
+    }
     public APIRequestGet requestCreatedTimeField () {
       return this.requestCreatedTimeField(true);
     }
@@ -1301,39 +1178,11 @@ public class LeadgenForm extends APINode {
       this.requestField("created_time", value);
       return this;
     }
-    public APIRequestGet requestCreatorField () {
-      return this.requestCreatorField(true);
-    }
-    public APIRequestGet requestCreatorField (boolean value) {
-      this.requestField("creator", value);
-      return this;
-    }
-    public APIRequestGet requestCreatorIdField () {
-      return this.requestCreatorIdField(true);
-    }
-    public APIRequestGet requestCreatorIdField (boolean value) {
-      this.requestField("creator_id", value);
-      return this;
-    }
-    public APIRequestGet requestCusomizedTcpaContentField () {
-      return this.requestCusomizedTcpaContentField(true);
-    }
-    public APIRequestGet requestCusomizedTcpaContentField (boolean value) {
-      this.requestField("cusomized_tcpa_content", value);
-      return this;
-    }
     public APIRequestGet requestExpiredLeadsCountField () {
       return this.requestExpiredLeadsCountField(true);
     }
     public APIRequestGet requestExpiredLeadsCountField (boolean value) {
       this.requestField("expired_leads_count", value);
-      return this;
-    }
-    public APIRequestGet requestExtraDetailsField () {
-      return this.requestExtraDetailsField(true);
-    }
-    public APIRequestGet requestExtraDetailsField (boolean value) {
-      this.requestField("extra_details", value);
       return this;
     }
     public APIRequestGet requestFollowUpActionTextField () {
@@ -1364,13 +1213,6 @@ public class LeadgenForm extends APINode {
       this.requestField("is_optimized_for_quality", value);
       return this;
     }
-    public APIRequestGet requestLeadgenExportCsvUrlField () {
-      return this.requestLeadgenExportCsvUrlField(true);
-    }
-    public APIRequestGet requestLeadgenExportCsvUrlField (boolean value) {
-      this.requestField("leadgen_export_csv_url", value);
-      return this;
-    }
     public APIRequestGet requestLeadsCountField () {
       return this.requestLeadsCountField(true);
     }
@@ -1378,18 +1220,18 @@ public class LeadgenForm extends APINode {
       this.requestField("leads_count", value);
       return this;
     }
+    public APIRequestGet requestLegalContentField () {
+      return this.requestLegalContentField(true);
+    }
+    public APIRequestGet requestLegalContentField (boolean value) {
+      this.requestField("legal_content", value);
+      return this;
+    }
     public APIRequestGet requestLocaleField () {
       return this.requestLocaleField(true);
     }
     public APIRequestGet requestLocaleField (boolean value) {
       this.requestField("locale", value);
-      return this;
-    }
-    public APIRequestGet requestMessengerWelcomeMessageField () {
-      return this.requestMessengerWelcomeMessageField(true);
-    }
-    public APIRequestGet requestMessengerWelcomeMessageField (boolean value) {
-      this.requestField("messenger_welcome_message", value);
       return this;
     }
     public APIRequestGet requestNameField () {
@@ -1427,13 +1269,6 @@ public class LeadgenForm extends APINode {
       this.requestField("privacy_policy_url", value);
       return this;
     }
-    public APIRequestGet requestQualifiersField () {
-      return this.requestQualifiersField(true);
-    }
-    public APIRequestGet requestQualifiersField (boolean value) {
-      this.requestField("qualifiers", value);
-      return this;
-    }
     public APIRequestGet requestQuestionPageCustomHeadlineField () {
       return this.requestQuestionPageCustomHeadlineField(true);
     }
@@ -1455,11 +1290,11 @@ public class LeadgenForm extends APINode {
       this.requestField("status", value);
       return this;
     }
-    public APIRequestGet requestTcpaComplianceField () {
-      return this.requestTcpaComplianceField(true);
+    public APIRequestGet requestThankYouPageField () {
+      return this.requestThankYouPageField(true);
     }
-    public APIRequestGet requestTcpaComplianceField (boolean value) {
-      this.requestField("tcpa_compliance", value);
+    public APIRequestGet requestThankYouPageField (boolean value) {
+      this.requestField("thank_you_page", value);
       return this;
     }
     public APIRequestGet requestTrackingParametersField () {
@@ -1594,7 +1429,7 @@ public class LeadgenForm extends APINode {
       VALUE_DELETED("DELETED"),
       @SerializedName("DRAFT")
       VALUE_DRAFT("DRAFT"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1671,7 +1506,7 @@ public class LeadgenForm extends APINode {
       VALUE_ZH_HK("ZH_HK"),
       @SerializedName("ZH_TW")
       VALUE_ZH_TW("ZH_TW"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1702,30 +1537,25 @@ public class LeadgenForm extends APINode {
   public LeadgenForm copyFrom(LeadgenForm instance) {
     this.mAllowOrganicLead = instance.mAllowOrganicLead;
     this.mBlockDisplayForNonTargetedViewer = instance.mBlockDisplayForNonTargetedViewer;
+    this.mContextCard = instance.mContextCard;
     this.mCreatedTime = instance.mCreatedTime;
-    this.mCreator = instance.mCreator;
-    this.mCreatorId = instance.mCreatorId;
-    this.mCusomizedTcpaContent = instance.mCusomizedTcpaContent;
     this.mExpiredLeadsCount = instance.mExpiredLeadsCount;
-    this.mExtraDetails = instance.mExtraDetails;
     this.mFollowUpActionText = instance.mFollowUpActionText;
     this.mFollowUpActionUrl = instance.mFollowUpActionUrl;
     this.mId = instance.mId;
     this.mIsOptimizedForQuality = instance.mIsOptimizedForQuality;
-    this.mLeadgenExportCsvUrl = instance.mLeadgenExportCsvUrl;
     this.mLeadsCount = instance.mLeadsCount;
+    this.mLegalContent = instance.mLegalContent;
     this.mLocale = instance.mLocale;
-    this.mMessengerWelcomeMessage = instance.mMessengerWelcomeMessage;
     this.mName = instance.mName;
     this.mOrganicLeadsCount = instance.mOrganicLeadsCount;
     this.mPage = instance.mPage;
     this.mPageId = instance.mPageId;
     this.mPrivacyPolicyUrl = instance.mPrivacyPolicyUrl;
-    this.mQualifiers = instance.mQualifiers;
     this.mQuestionPageCustomHeadline = instance.mQuestionPageCustomHeadline;
     this.mQuestions = instance.mQuestions;
     this.mStatus = instance.mStatus;
-    this.mTcpaCompliance = instance.mTcpaCompliance;
+    this.mThankYouPage = instance.mThankYouPage;
     this.mTrackingParameters = instance.mTrackingParameters;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

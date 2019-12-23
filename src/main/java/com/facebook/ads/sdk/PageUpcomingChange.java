@@ -63,8 +63,6 @@ public class PageUpcomingChange extends APINode {
   private String mId = null;
   @SerializedName("page")
   private Page mPage = null;
-  @SerializedName("proposal")
-  private PageChangeProposal mProposal = null;
   @SerializedName("timer_status")
   private String mTimerStatus = null;
   protected static Gson gson = null;
@@ -304,13 +302,6 @@ public class PageUpcomingChange extends APINode {
     return mPage;
   }
 
-  public PageChangeProposal getFieldProposal() {
-    if (mProposal != null) {
-      mProposal.context = getContext();
-    }
-    return mProposal;
-  }
-
   public String getFieldTimerStatus() {
     return mTimerStatus;
   }
@@ -332,7 +323,6 @@ public class PageUpcomingChange extends APINode {
       "effective_time",
       "id",
       "page",
-      "proposal",
       "timer_status",
     };
 
@@ -451,13 +441,6 @@ public class PageUpcomingChange extends APINode {
     }
     public APIRequestGet requestPageField (boolean value) {
       this.requestField("page", value);
-      return this;
-    }
-    public APIRequestGet requestProposalField () {
-      return this.requestProposalField(true);
-    }
-    public APIRequestGet requestProposalField (boolean value) {
-      this.requestField("proposal", value);
       return this;
     }
     public APIRequestGet requestTimerStatusField () {
@@ -602,7 +585,6 @@ public class PageUpcomingChange extends APINode {
     this.mEffectiveTime = instance.mEffectiveTime;
     this.mId = instance.mId;
     this.mPage = instance.mPage;
-    this.mProposal = instance.mProposal;
     this.mTimerStatus = instance.mTimerStatus;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

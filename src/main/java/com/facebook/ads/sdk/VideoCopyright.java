@@ -819,7 +819,7 @@ public class VideoCopyright extends APINode {
       VALUE_MOVIE("movie"),
       @SerializedName("web")
       VALUE_WEB("web"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -840,7 +840,7 @@ public class VideoCopyright extends APINode {
       VALUE_VIDEO_AND_AUDIO("VIDEO_AND_AUDIO"),
       @SerializedName("VIDEO_ONLY")
       VALUE_VIDEO_ONLY("VIDEO_ONLY"),
-      NULL(null);
+      ;
 
       private String value;
 

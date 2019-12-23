@@ -54,27 +54,23 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdCreativeOptimizationSpec extends APINode {
-  @SerializedName("bodies")
-  private List<String> mBodies = null;
-  @SerializedName("descriptions")
-  private List<String> mDescriptions = null;
-  @SerializedName("titles")
-  private List<String> mTitles = null;
+public class PlatformSessionKey extends APINode {
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public AdCreativeOptimizationSpec() {
+  public PlatformSessionKey() {
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
-  public static AdCreativeOptimizationSpec loadJSON(String json, APIContext context, String header) {
-    AdCreativeOptimizationSpec adCreativeOptimizationSpec = getGson().fromJson(json, AdCreativeOptimizationSpec.class);
+  public static PlatformSessionKey loadJSON(String json, APIContext context, String header) {
+    PlatformSessionKey platformSessionKey = getGson().fromJson(json, PlatformSessionKey.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adCreativeOptimizationSpec.toString());
+      JsonElement o2 = parser.parse(platformSessionKey.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -84,14 +80,14 @@ public class AdCreativeOptimizationSpec extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    adCreativeOptimizationSpec.context = context;
-    adCreativeOptimizationSpec.rawValue = json;
-    adCreativeOptimizationSpec.header = header;
-    return adCreativeOptimizationSpec;
+    platformSessionKey.context = context;
+    platformSessionKey.rawValue = json;
+    platformSessionKey.header = header;
+    return platformSessionKey;
   }
 
-  public static APINodeList<AdCreativeOptimizationSpec> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdCreativeOptimizationSpec> adCreativeOptimizationSpecs = new APINodeList<AdCreativeOptimizationSpec>(request, json, header);
+  public static APINodeList<PlatformSessionKey> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PlatformSessionKey> platformSessionKeys = new APINodeList<PlatformSessionKey>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -102,9 +98,9 @@ public class AdCreativeOptimizationSpec extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCreativeOptimizationSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          platformSessionKeys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adCreativeOptimizationSpecs;
+        return platformSessionKeys;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -114,20 +110,20 @@ public class AdCreativeOptimizationSpec extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adCreativeOptimizationSpecs.setCursors(before, after);
+                platformSessionKeys.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adCreativeOptimizationSpecs.setPaging(previous, next);
+            platformSessionKeys.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adCreativeOptimizationSpecs.setAppSecret(context.getAppSecretProof());
+              platformSessionKeys.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCreativeOptimizationSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              platformSessionKeys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -138,23 +134,23 @@ public class AdCreativeOptimizationSpec extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCreativeOptimizationSpecs.add(loadJSON(entry.getValue().toString(), context, header));
+                  platformSessionKeys.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCreativeOptimizationSpecs.add(loadJSON(obj.toString(), context, header));
+              platformSessionKeys.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adCreativeOptimizationSpecs;
+          return platformSessionKeys;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCreativeOptimizationSpecs.add(loadJSON(entry.getValue().toString(), context, header));
+              platformSessionKeys.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adCreativeOptimizationSpecs;
+          return platformSessionKeys;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -171,20 +167,20 @@ public class AdCreativeOptimizationSpec extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCreativeOptimizationSpecs.add(loadJSON(value.toString(), context, header));
+              platformSessionKeys.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adCreativeOptimizationSpecs;
+            return platformSessionKeys;
           }
 
           // Sixth, check if it's pure JsonObject
-          adCreativeOptimizationSpecs.clear();
-          adCreativeOptimizationSpecs.add(loadJSON(json, context, header));
-          return adCreativeOptimizationSpecs;
+          platformSessionKeys.clear();
+          platformSessionKeys.add(loadJSON(json, context, header));
+          return platformSessionKeys;
         }
       }
     } catch (Exception e) {
@@ -212,30 +208,12 @@ public class AdCreativeOptimizationSpec extends APINode {
   }
 
 
-  public List<String> getFieldBodies() {
-    return mBodies;
+  public String getFieldId() {
+    return mId;
   }
 
-  public AdCreativeOptimizationSpec setFieldBodies(List<String> value) {
-    this.mBodies = value;
-    return this;
-  }
-
-  public List<String> getFieldDescriptions() {
-    return mDescriptions;
-  }
-
-  public AdCreativeOptimizationSpec setFieldDescriptions(List<String> value) {
-    this.mDescriptions = value;
-    return this;
-  }
-
-  public List<String> getFieldTitles() {
-    return mTitles;
-  }
-
-  public AdCreativeOptimizationSpec setFieldTitles(List<String> value) {
-    this.mTitles = value;
+  public PlatformSessionKey setFieldId(String value) {
+    this.mId = value;
     return this;
   }
 
@@ -255,19 +233,17 @@ public class AdCreativeOptimizationSpec extends APINode {
     return gson;
   }
 
-  public AdCreativeOptimizationSpec copyFrom(AdCreativeOptimizationSpec instance) {
-    this.mBodies = instance.mBodies;
-    this.mDescriptions = instance.mDescriptions;
-    this.mTitles = instance.mTitles;
+  public PlatformSessionKey copyFrom(PlatformSessionKey instance) {
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdCreativeOptimizationSpec> getParser() {
-    return new APIRequest.ResponseParser<AdCreativeOptimizationSpec>() {
-      public APINodeList<AdCreativeOptimizationSpec> parseResponse(String response, APIContext context, APIRequest<AdCreativeOptimizationSpec> request, String header) throws MalformedResponseException {
-        return AdCreativeOptimizationSpec.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<PlatformSessionKey> getParser() {
+    return new APIRequest.ResponseParser<PlatformSessionKey>() {
+      public APINodeList<PlatformSessionKey> parseResponse(String response, APIContext context, APIRequest<PlatformSessionKey> request, String header) throws MalformedResponseException {
+        return PlatformSessionKey.parseResponse(response, context, request, header);
       }
     };
   }

@@ -810,7 +810,7 @@ public class VideoGameShow extends APINode {
       VALUE_END_GAME("END_GAME"),
       @SerializedName("START_GAME")
       VALUE_START_GAME("START_GAME"),
-      NULL(null);
+      ;
 
       private String value;
 

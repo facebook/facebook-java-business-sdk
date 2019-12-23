@@ -65,6 +65,10 @@ public class OracleTransaction extends APINode {
   private BilledAmountDetails mBilledAmountDetails = null;
   @SerializedName("billing_period")
   private String mBillingPeriod = null;
+  @SerializedName("campaign")
+  private AtlasCampaign mCampaign = null;
+  @SerializedName("cdn_download_uri")
+  private String mCdnDownloadUri = null;
   @SerializedName("currency")
   private String mCurrency = null;
   @SerializedName("download_uri")
@@ -298,6 +302,10 @@ public class OracleTransaction extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGetCampaigns getCampaigns() {
+    return new APIRequestGetCampaigns(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetData getData() {
     return new APIRequestGetData(this.getPrefixedId().toString(), context);
   }
@@ -325,6 +333,17 @@ public class OracleTransaction extends APINode {
 
   public String getFieldBillingPeriod() {
     return mBillingPeriod;
+  }
+
+  public AtlasCampaign getFieldCampaign() {
+    if (mCampaign != null) {
+      mCampaign.context = getContext();
+    }
+    return mCampaign;
+  }
+
+  public String getFieldCdnDownloadUri() {
+    return mCdnDownloadUri;
   }
 
   public String getFieldCurrency() {
@@ -376,6 +395,174 @@ public class OracleTransaction extends APINode {
   }
 
 
+
+  public static class APIRequestGetCampaigns extends APIRequest<InvoiceCampaign> {
+
+    APINodeList<InvoiceCampaign> lastResponse = null;
+    @Override
+    public APINodeList<InvoiceCampaign> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "ad_account_id",
+      "billed_amount_details",
+      "campaign_id",
+      "campaign_name",
+      "clicks",
+      "conversions",
+      "impressions",
+      "tags",
+    };
+
+    @Override
+    public APINodeList<InvoiceCampaign> parseResponse(String response, String header) throws APIException {
+      return InvoiceCampaign.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<InvoiceCampaign> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<InvoiceCampaign> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<InvoiceCampaign>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<InvoiceCampaign>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<InvoiceCampaign>>() {
+           public APINodeList<InvoiceCampaign> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetCampaigns.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetCampaigns(String nodeId, APIContext context) {
+      super(context, nodeId, "/campaigns", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCampaigns setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCampaigns setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCampaigns requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCampaigns requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCampaigns requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCampaigns requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCampaigns requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCampaigns requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetCampaigns requestAdAccountIdField () {
+      return this.requestAdAccountIdField(true);
+    }
+    public APIRequestGetCampaigns requestAdAccountIdField (boolean value) {
+      this.requestField("ad_account_id", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestBilledAmountDetailsField () {
+      return this.requestBilledAmountDetailsField(true);
+    }
+    public APIRequestGetCampaigns requestBilledAmountDetailsField (boolean value) {
+      this.requestField("billed_amount_details", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestCampaignIdField () {
+      return this.requestCampaignIdField(true);
+    }
+    public APIRequestGetCampaigns requestCampaignIdField (boolean value) {
+      this.requestField("campaign_id", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestCampaignNameField () {
+      return this.requestCampaignNameField(true);
+    }
+    public APIRequestGetCampaigns requestCampaignNameField (boolean value) {
+      this.requestField("campaign_name", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestClicksField () {
+      return this.requestClicksField(true);
+    }
+    public APIRequestGetCampaigns requestClicksField (boolean value) {
+      this.requestField("clicks", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestConversionsField () {
+      return this.requestConversionsField(true);
+    }
+    public APIRequestGetCampaigns requestConversionsField (boolean value) {
+      this.requestField("conversions", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestImpressionsField () {
+      return this.requestImpressionsField(true);
+    }
+    public APIRequestGetCampaigns requestImpressionsField (boolean value) {
+      this.requestField("impressions", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGetCampaigns requestTagsField (boolean value) {
+      this.requestField("tags", value);
+      return this;
+    }
+  }
 
   public static class APIRequestGetData extends APIRequest<AtlasURL> {
 
@@ -515,6 +702,8 @@ public class OracleTransaction extends APINode {
       "amount_due",
       "billed_amount_details",
       "billing_period",
+      "campaign",
+      "cdn_download_uri",
       "currency",
       "download_uri",
       "due_date",
@@ -653,6 +842,20 @@ public class OracleTransaction extends APINode {
       this.requestField("billing_period", value);
       return this;
     }
+    public APIRequestGet requestCampaignField () {
+      return this.requestCampaignField(true);
+    }
+    public APIRequestGet requestCampaignField (boolean value) {
+      this.requestField("campaign", value);
+      return this;
+    }
+    public APIRequestGet requestCdnDownloadUriField () {
+      return this.requestCdnDownloadUriField(true);
+    }
+    public APIRequestGet requestCdnDownloadUriField (boolean value) {
+      this.requestField("cdn_download_uri", value);
+      return this;
+    }
     public APIRequestGet requestCurrencyField () {
       return this.requestCurrencyField(true);
     }
@@ -744,7 +947,7 @@ public class OracleTransaction extends APINode {
       VALUE_CM("CM"),
       @SerializedName("INV")
       VALUE_INV("INV"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -778,6 +981,8 @@ public class OracleTransaction extends APINode {
     this.mAmountDue = instance.mAmountDue;
     this.mBilledAmountDetails = instance.mBilledAmountDetails;
     this.mBillingPeriod = instance.mBillingPeriod;
+    this.mCampaign = instance.mCampaign;
+    this.mCdnDownloadUri = instance.mCdnDownloadUri;
     this.mCurrency = instance.mCurrency;
     this.mDownloadUri = instance.mDownloadUri;
     this.mDueDate = instance.mDueDate;

@@ -483,7 +483,7 @@ public class VideoCopyrightRule extends APINode {
       VALUE_RULES_SELECTOR("RULES_SELECTOR"),
       @SerializedName("RULES_TAB")
       VALUE_RULES_TAB("RULES_TAB"),
-      NULL(null);
+      ;
 
       private String value;
 

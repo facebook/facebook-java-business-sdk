@@ -57,14 +57,10 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class MediaFingerprint extends APINode {
   @SerializedName("duration_in_sec")
   private Double mDurationInSec = null;
-  @SerializedName("expiration_time")
-  private String mExpirationTime = null;
   @SerializedName("fingerprint_content_type")
   private String mFingerprintContentType = null;
   @SerializedName("fingerprint_type")
   private String mFingerprintType = null;
-  @SerializedName("fingerprint_validity")
-  private String mFingerprintValidity = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("metadata")
@@ -282,21 +278,17 @@ public class MediaFingerprint extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  public APIRequestDelete delete() {
+    return new APIRequestDelete(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestUpdate update() {
-    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
 
   public Double getFieldDurationInSec() {
     return mDurationInSec;
-  }
-
-  public String getFieldExpirationTime() {
-    return mExpirationTime;
   }
 
   public String getFieldFingerprintContentType() {
@@ -305,10 +297,6 @@ public class MediaFingerprint extends APINode {
 
   public String getFieldFingerprintType() {
     return mFingerprintType;
-  }
-
-  public String getFieldFingerprintValidity() {
-    return mFingerprintValidity;
   }
 
   public String getFieldId() {
@@ -329,6 +317,110 @@ public class MediaFingerprint extends APINode {
 
 
 
+  public static class APIRequestDelete extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDelete(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDelete setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDelete requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDelete requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGet extends APIRequest<MediaFingerprint> {
 
     MediaFingerprint lastResponse = null;
@@ -341,10 +433,8 @@ public class MediaFingerprint extends APINode {
 
     public static final String[] FIELDS = {
       "duration_in_sec",
-      "expiration_time",
       "fingerprint_content_type",
       "fingerprint_type",
-      "fingerprint_validity",
       "id",
       "metadata",
       "title",
@@ -447,13 +537,6 @@ public class MediaFingerprint extends APINode {
       this.requestField("duration_in_sec", value);
       return this;
     }
-    public APIRequestGet requestExpirationTimeField () {
-      return this.requestExpirationTimeField(true);
-    }
-    public APIRequestGet requestExpirationTimeField (boolean value) {
-      this.requestField("expiration_time", value);
-      return this;
-    }
     public APIRequestGet requestFingerprintContentTypeField () {
       return this.requestFingerprintContentTypeField(true);
     }
@@ -466,13 +549,6 @@ public class MediaFingerprint extends APINode {
     }
     public APIRequestGet requestFingerprintTypeField (boolean value) {
       this.requestField("fingerprint_type", value);
-      return this;
-    }
-    public APIRequestGet requestFingerprintValidityField () {
-      return this.requestFingerprintValidityField(true);
-    }
-    public APIRequestGet requestFingerprintValidityField (boolean value) {
-      this.requestField("fingerprint_validity", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -505,132 +581,6 @@ public class MediaFingerprint extends APINode {
     }
   }
 
-  public static class APIRequestUpdate extends APIRequest<MediaFingerprint> {
-
-    MediaFingerprint lastResponse = null;
-    @Override
-    public MediaFingerprint getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "metadata",
-      "title",
-      "universal_content_id",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public MediaFingerprint parseResponse(String response, String header) throws APIException {
-      return MediaFingerprint.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public MediaFingerprint execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public MediaFingerprint execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<MediaFingerprint> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<MediaFingerprint> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, MediaFingerprint>() {
-           public MediaFingerprint apply(ResponseWrapper result) {
-             try {
-               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestUpdate(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestUpdate setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestUpdate setMetadata (JsonArray metadata) {
-      this.setParam("metadata", metadata);
-      return this;
-    }
-    public APIRequestUpdate setMetadata (String metadata) {
-      this.setParam("metadata", metadata);
-      return this;
-    }
-
-    public APIRequestUpdate setTitle (String title) {
-      this.setParam("title", title);
-      return this;
-    }
-
-    public APIRequestUpdate setUniversalContentId (String universalContentId) {
-      this.setParam("universal_content_id", universalContentId);
-      return this;
-    }
-
-    public APIRequestUpdate requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestUpdate requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static enum EnumFingerprintContentType {
       @SerializedName("AM_SONGTRACK")
       VALUE_AM_SONGTRACK("AM_SONGTRACK"),
@@ -642,11 +592,32 @@ public class MediaFingerprint extends APINode {
       VALUE_OTHER("OTHER"),
       @SerializedName("SONGTRACK")
       VALUE_SONGTRACK("SONGTRACK"),
-      NULL(null);
+      ;
 
       private String value;
 
       private EnumFingerprintContentType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumFingerprintValidity {
+      @SerializedName("EXPIRED")
+      VALUE_EXPIRED("EXPIRED"),
+      @SerializedName("EXPIRING")
+      VALUE_EXPIRING("EXPIRING"),
+      @SerializedName("VALID")
+      VALUE_VALID("VALID"),
+      ;
+
+      private String value;
+
+      private EnumFingerprintValidity(String value) {
         this.value = value;
       }
 
@@ -672,10 +643,8 @@ public class MediaFingerprint extends APINode {
 
   public MediaFingerprint copyFrom(MediaFingerprint instance) {
     this.mDurationInSec = instance.mDurationInSec;
-    this.mExpirationTime = instance.mExpirationTime;
     this.mFingerprintContentType = instance.mFingerprintContentType;
     this.mFingerprintType = instance.mFingerprintType;
-    this.mFingerprintValidity = instance.mFingerprintValidity;
     this.mId = instance.mId;
     this.mMetadata = instance.mMetadata;
     this.mTitle = instance.mTitle;

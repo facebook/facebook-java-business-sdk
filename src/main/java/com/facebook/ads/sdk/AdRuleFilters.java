@@ -268,7 +268,7 @@ public class AdRuleFilters extends APINode {
       VALUE_NOT_IN("NOT_IN"),
       @SerializedName("NOT_IN_RANGE")
       VALUE_NOT_IN_RANGE("NOT_IN_RANGE"),
-      NULL(null);
+      ;
 
       private String value;
 

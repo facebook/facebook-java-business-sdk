@@ -61,8 +61,6 @@ public class AdCreativeVideoData extends APINode {
   private String mBrandedContentSharedToSponsorStatus = null;
   @SerializedName("branded_content_sponsor_page_id")
   private String mBrandedContentSponsorPageId = null;
-  @SerializedName("branded_content_sponsor_relationship")
-  private String mBrandedContentSponsorRelationship = null;
   @SerializedName("call_to_action")
   private AdCreativeLinkDataCallToAction mCallToAction = null;
   @SerializedName("collection_thumbnails")
@@ -267,15 +265,6 @@ public class AdCreativeVideoData extends APINode {
     return this;
   }
 
-  public String getFieldBrandedContentSponsorRelationship() {
-    return mBrandedContentSponsorRelationship;
-  }
-
-  public AdCreativeVideoData setFieldBrandedContentSponsorRelationship(String value) {
-    this.mBrandedContentSponsorRelationship = value;
-    return this;
-  }
-
   public AdCreativeLinkDataCallToAction getFieldCallToAction() {
     return mCallToAction;
   }
@@ -433,7 +422,6 @@ public class AdCreativeVideoData extends APINode {
     this.mAdditionalImageIndex = instance.mAdditionalImageIndex;
     this.mBrandedContentSharedToSponsorStatus = instance.mBrandedContentSharedToSponsorStatus;
     this.mBrandedContentSponsorPageId = instance.mBrandedContentSponsorPageId;
-    this.mBrandedContentSponsorRelationship = instance.mBrandedContentSponsorRelationship;
     this.mCallToAction = instance.mCallToAction;
     this.mCollectionThumbnails = instance.mCollectionThumbnails;
     this.mImageHash = instance.mImageHash;

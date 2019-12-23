@@ -278,6 +278,14 @@ public class InstagramComment extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGetReplies getReplies() {
+    return new APIRequestGetReplies(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateReply createReply() {
+    return new APIRequestCreateReply(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestDelete delete() {
     return new APIRequestDelete(this.getPrefixedId().toString(), context);
   }
@@ -323,6 +331,286 @@ public class InstagramComment extends APINode {
   }
 
 
+
+  public static class APIRequestGetReplies extends APIRequest<InstagramComment> {
+
+    APINodeList<InstagramComment> lastResponse = null;
+    @Override
+    public APINodeList<InstagramComment> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "comment_type",
+      "created_at",
+      "id",
+      "instagram_comment_id",
+      "instagram_user",
+      "mentioned_instagram_users",
+      "message",
+    };
+
+    @Override
+    public APINodeList<InstagramComment> parseResponse(String response, String header) throws APIException {
+      return InstagramComment.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<InstagramComment> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<InstagramComment> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<InstagramComment>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<InstagramComment>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<InstagramComment>>() {
+           public APINodeList<InstagramComment> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetReplies.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetReplies(String nodeId, APIContext context) {
+      super(context, nodeId, "/replies", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetReplies setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetReplies setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetReplies requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetReplies requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetReplies requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetReplies requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetReplies requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetReplies requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetReplies requestCommentTypeField () {
+      return this.requestCommentTypeField(true);
+    }
+    public APIRequestGetReplies requestCommentTypeField (boolean value) {
+      this.requestField("comment_type", value);
+      return this;
+    }
+    public APIRequestGetReplies requestCreatedAtField () {
+      return this.requestCreatedAtField(true);
+    }
+    public APIRequestGetReplies requestCreatedAtField (boolean value) {
+      this.requestField("created_at", value);
+      return this;
+    }
+    public APIRequestGetReplies requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetReplies requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetReplies requestInstagramCommentIdField () {
+      return this.requestInstagramCommentIdField(true);
+    }
+    public APIRequestGetReplies requestInstagramCommentIdField (boolean value) {
+      this.requestField("instagram_comment_id", value);
+      return this;
+    }
+    public APIRequestGetReplies requestInstagramUserField () {
+      return this.requestInstagramUserField(true);
+    }
+    public APIRequestGetReplies requestInstagramUserField (boolean value) {
+      this.requestField("instagram_user", value);
+      return this;
+    }
+    public APIRequestGetReplies requestMentionedInstagramUsersField () {
+      return this.requestMentionedInstagramUsersField(true);
+    }
+    public APIRequestGetReplies requestMentionedInstagramUsersField (boolean value) {
+      this.requestField("mentioned_instagram_users", value);
+      return this;
+    }
+    public APIRequestGetReplies requestMessageField () {
+      return this.requestMessageField(true);
+    }
+    public APIRequestGetReplies requestMessageField (boolean value) {
+      this.requestField("message", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreateReply extends APIRequest<InstagramComment> {
+
+    InstagramComment lastResponse = null;
+    @Override
+    public InstagramComment getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "ad_id",
+      "message",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public InstagramComment parseResponse(String response, String header) throws APIException {
+      return InstagramComment.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public InstagramComment execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public InstagramComment execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<InstagramComment> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<InstagramComment> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, InstagramComment>() {
+           public InstagramComment apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateReply.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateReply(String nodeId, APIContext context) {
+      super(context, nodeId, "/replies", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateReply setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateReply setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateReply setAdId (Object adId) {
+      this.setParam("ad_id", adId);
+      return this;
+    }
+    public APIRequestCreateReply setAdId (String adId) {
+      this.setParam("ad_id", adId);
+      return this;
+    }
+
+    public APIRequestCreateReply setMessage (String message) {
+      this.setParam("message", message);
+      return this;
+    }
+
+    public APIRequestCreateReply requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateReply requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateReply requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateReply requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateReply requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateReply requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
 
   public static class APIRequestDelete extends APIRequest<APINode> {
 

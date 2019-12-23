@@ -47,6 +47,7 @@ public class AdAccountAdSetsPostInterestTargeting {
             .setFieldAgeMax(24L)
             .setFieldAgeMin(20L)
             .setFieldDevicePlatforms(Arrays.asList(Targeting.EnumDevicePlatforms.VALUE_MOBILE))
+            .setFieldFacebookPositions(Arrays.asList("feed"))
             .setFieldFlexibleSpec(Arrays.asList(
               new FlexibleTargeting()
                 .setFieldInterests(Arrays.asList(

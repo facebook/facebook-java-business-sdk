@@ -58,7 +58,7 @@ public class PageLabel extends APINode {
   @SerializedName("creation_time")
   private String mCreationTime = null;
   @SerializedName("creator_id")
-  private Profile mCreatorId = null;
+  private String mCreatorId = null;
   @SerializedName("from")
   private Page mFrom = null;
   @SerializedName("id")
@@ -283,10 +283,7 @@ public class PageLabel extends APINode {
     return mCreationTime;
   }
 
-  public Profile getFieldCreatorId() {
-    if (mCreatorId != null) {
-      mCreatorId.context = getContext();
-    }
+  public String getFieldCreatorId() {
     return mCreatorId;
   }
 

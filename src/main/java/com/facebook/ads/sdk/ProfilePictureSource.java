@@ -314,7 +314,7 @@ public class ProfilePictureSource extends APINode {
       VALUE_SMALL("small"),
       @SerializedName("thumbnail")
       VALUE_THUMBNAIL("thumbnail"),
-      NULL(null);
+      ;
 
       private String value;
 

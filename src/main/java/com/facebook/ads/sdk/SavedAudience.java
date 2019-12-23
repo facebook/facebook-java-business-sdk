@@ -61,6 +61,8 @@ public class SavedAudience extends APINode {
   private Long mApproximateCount = null;
   @SerializedName("description")
   private String mDescription = null;
+  @SerializedName("extra_info")
+  private String mExtraInfo = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("name")
@@ -314,6 +316,10 @@ public class SavedAudience extends APINode {
     return mDescription;
   }
 
+  public String getFieldExtraInfo() {
+    return mExtraInfo;
+  }
+
   public String getFieldId() {
     return mId;
   }
@@ -360,12 +366,10 @@ public class SavedAudience extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
-      "ad_keywords",
       "adlabels",
       "adset_schedule",
       "asset_feed_id",
       "attribution_spec",
-      "best_creative",
       "bid_adjustments",
       "bid_amount",
       "bid_constraints",
@@ -510,13 +514,6 @@ public class SavedAudience extends APINode {
       this.requestField("account_id", value);
       return this;
     }
-    public APIRequestGetAdSets requestAdKeywordsField () {
-      return this.requestAdKeywordsField(true);
-    }
-    public APIRequestGetAdSets requestAdKeywordsField (boolean value) {
-      this.requestField("ad_keywords", value);
-      return this;
-    }
     public APIRequestGetAdSets requestAdlabelsField () {
       return this.requestAdlabelsField(true);
     }
@@ -543,13 +540,6 @@ public class SavedAudience extends APINode {
     }
     public APIRequestGetAdSets requestAttributionSpecField (boolean value) {
       this.requestField("attribution_spec", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestBestCreativeField () {
-      return this.requestBestCreativeField(true);
-    }
-    public APIRequestGetAdSets requestBestCreativeField (boolean value) {
-      this.requestField("best_creative", value);
       return this;
     }
     public APIRequestGetAdSets requestBidAdjustmentsField () {
@@ -994,6 +984,7 @@ public class SavedAudience extends APINode {
       "account",
       "approximate_count",
       "description",
+      "extra_info",
       "id",
       "name",
       "permission_for_actions",
@@ -1114,6 +1105,13 @@ public class SavedAudience extends APINode {
       this.requestField("description", value);
       return this;
     }
+    public APIRequestGet requestExtraInfoField () {
+      return this.requestExtraInfoField(true);
+    }
+    public APIRequestGet requestExtraInfoField (boolean value) {
+      this.requestField("extra_info", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -1190,6 +1188,7 @@ public class SavedAudience extends APINode {
     this.mAccount = instance.mAccount;
     this.mApproximateCount = instance.mApproximateCount;
     this.mDescription = instance.mDescription;
+    this.mExtraInfo = instance.mExtraInfo;
     this.mId = instance.mId;
     this.mName = instance.mName;
     this.mPermissionForActions = instance.mPermissionForActions;

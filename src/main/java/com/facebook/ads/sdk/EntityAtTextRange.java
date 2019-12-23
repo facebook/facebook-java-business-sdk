@@ -293,7 +293,7 @@ public class EntityAtTextRange extends APINode {
       VALUE_PAGE("page"),
       @SerializedName("user")
       VALUE_USER("user"),
-      NULL(null);
+      ;
 
       private String value;
 

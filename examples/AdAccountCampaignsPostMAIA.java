@@ -35,6 +35,7 @@ public class AdAccountCampaignsPostMAIA {
     APIContext context = new APIContext(access_token).enableDebug(true);
 
     new AdAccount(id, context).createCampaign()
+      .setSpecialAdCategory(Campaign.EnumSpecialAdCategory.VALUE_NONE)
       .setName("Mobile App Installs Campaign")
       .setObjective(Campaign.EnumObjective.VALUE_APP_INSTALLS)
       .setStatus(Campaign.EnumStatus.VALUE_PAUSED)

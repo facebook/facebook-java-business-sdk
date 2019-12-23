@@ -57,6 +57,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdAccountMatchedSearchApplicationsEdgeData extends APINode {
   @SerializedName("app_id")
   private String mAppId = null;
+  @SerializedName("are_app_events_unavailable")
+  private Boolean mAreAppEventsUnavailable = null;
   @SerializedName("icon_url")
   private String mIconUrl = null;
   @SerializedName("name")
@@ -229,6 +231,15 @@ public class AdAccountMatchedSearchApplicationsEdgeData extends APINode {
     return this;
   }
 
+  public Boolean getFieldAreAppEventsUnavailable() {
+    return mAreAppEventsUnavailable;
+  }
+
+  public AdAccountMatchedSearchApplicationsEdgeData setFieldAreAppEventsUnavailable(Boolean value) {
+    this.mAreAppEventsUnavailable = value;
+    return this;
+  }
+
   public String getFieldIconUrl() {
     return mIconUrl;
   }
@@ -310,7 +321,7 @@ public class AdAccountMatchedSearchApplicationsEdgeData extends APINode {
       VALUE_WINDOWS_10_STORE("WINDOWS_10_STORE"),
       @SerializedName("WINDOWS_STORE")
       VALUE_WINDOWS_STORE("WINDOWS_STORE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -340,6 +351,7 @@ public class AdAccountMatchedSearchApplicationsEdgeData extends APINode {
 
   public AdAccountMatchedSearchApplicationsEdgeData copyFrom(AdAccountMatchedSearchApplicationsEdgeData instance) {
     this.mAppId = instance.mAppId;
+    this.mAreAppEventsUnavailable = instance.mAreAppEventsUnavailable;
     this.mIconUrl = instance.mIconUrl;
     this.mName = instance.mName;
     this.mSearchSourceStore = instance.mSearchSourceStore;

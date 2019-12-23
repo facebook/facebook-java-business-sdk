@@ -503,11 +503,34 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_WORK_EMPLOYERS("work_employers"),
       @SerializedName("work_positions")
       VALUE_WORK_POSITIONS("work_positions"),
-      NULL(null);
+      ;
 
       private String value;
 
       private EnumLimitType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumRegulatedCategories {
+      @SerializedName("CREDIT")
+      VALUE_CREDIT("CREDIT"),
+      @SerializedName("EMPLOYMENT")
+      VALUE_EMPLOYMENT("EMPLOYMENT"),
+      @SerializedName("HOUSING")
+      VALUE_HOUSING("HOUSING"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
+      ;
+
+      private String value;
+
+      private EnumRegulatedCategories(String value) {
         this.value = value;
       }
 
@@ -590,6 +613,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_EXCLUDE_PREVIOUS_DAYS("exclude_previous_days"),
       @SerializedName("exclude_reached_since")
       VALUE_EXCLUDE_REACHED_SINCE("exclude_reached_since"),
+      @SerializedName("excluded_brand_safety_content_types")
+      VALUE_EXCLUDED_BRAND_SAFETY_CONTENT_TYPES("excluded_brand_safety_content_types"),
       @SerializedName("excluded_connections")
       VALUE_EXCLUDED_CONNECTIONS("excluded_connections"),
       @SerializedName("excluded_custom_audiences")
@@ -646,6 +671,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_HOME_VALUE("home_value"),
       @SerializedName("household_composition")
       VALUE_HOUSEHOLD_COMPOSITION("household_composition"),
+      @SerializedName("id")
+      VALUE_ID("id"),
       @SerializedName("income")
       VALUE_INCOME("income"),
       @SerializedName("industries")
@@ -660,6 +687,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_INTERESTED_IN("interested_in"),
       @SerializedName("interests")
       VALUE_INTERESTS("interests"),
+      @SerializedName("is_instagram_destination_ad")
+      VALUE_IS_INSTAGRAM_DESTINATION_AD("is_instagram_destination_ad"),
       @SerializedName("is_whatsapp_destination_ad")
       VALUE_IS_WHATSAPP_DESTINATION_AD("is_whatsapp_destination_ad"),
       @SerializedName("keywords")
@@ -700,8 +729,6 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_PROSPECTING_AUDIENCE("prospecting_audience"),
       @SerializedName("publisher_platforms")
       VALUE_PUBLISHER_PLATFORMS("publisher_platforms"),
-      @SerializedName("publisher_visibility_categories")
-      VALUE_PUBLISHER_VISIBILITY_CATEGORIES("publisher_visibility_categories"),
       @SerializedName("radius")
       VALUE_RADIUS("radius"),
       @SerializedName("regions")
@@ -742,7 +769,7 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_WORK_POSITIONS("work_positions"),
       @SerializedName("zips")
       VALUE_ZIPS("zips"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -765,7 +792,7 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_RELATED("related"),
       @SerializedName("suggestions")
       VALUE_SUGGESTIONS("suggestions"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -808,7 +835,7 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_REACH("REACH"),
       @SerializedName("VIDEO_VIEWS")
       VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
-      NULL(null);
+      ;
 
       private String value;
 

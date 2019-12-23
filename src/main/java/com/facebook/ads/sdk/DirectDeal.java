@@ -433,6 +433,7 @@ public class DirectDeal extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "aam_rules",
       "an_ad_space_limit",
       "an_platforms",
       "android_key_hash",
@@ -488,7 +489,6 @@ public class DirectDeal extends APINode {
       "ios_supports_system_auth",
       "ipad_app_store_id",
       "iphone_app_store_id",
-      "is_viewer_admin",
       "latest_sdk_version",
       "link",
       "logging_token",
@@ -510,6 +510,8 @@ public class DirectDeal extends APINode {
       "property_id",
       "real_time_mode_devices",
       "restrictions",
+      "restrictive_data_filter_params",
+      "restrictive_data_filter_rules",
       "sdk_update_message",
       "seamless_login",
       "secure_canvas_url",
@@ -519,6 +521,7 @@ public class DirectDeal extends APINode {
       "smart_login_menu_icon_url",
       "social_discovery",
       "subcategory",
+      "suggested_events_setting",
       "supported_platforms",
       "supports_apprequests_fast_app_switch",
       "supports_attribution",
@@ -621,6 +624,13 @@ public class DirectDeal extends APINode {
       return this;
     }
 
+    public APIRequestGetApplications requestAamRulesField () {
+      return this.requestAamRulesField(true);
+    }
+    public APIRequestGetApplications requestAamRulesField (boolean value) {
+      this.requestField("aam_rules", value);
+      return this;
+    }
     public APIRequestGetApplications requestAnAdSpaceLimitField () {
       return this.requestAnAdSpaceLimitField(true);
     }
@@ -1006,13 +1016,6 @@ public class DirectDeal extends APINode {
       this.requestField("iphone_app_store_id", value);
       return this;
     }
-    public APIRequestGetApplications requestIsViewerAdminField () {
-      return this.requestIsViewerAdminField(true);
-    }
-    public APIRequestGetApplications requestIsViewerAdminField (boolean value) {
-      this.requestField("is_viewer_admin", value);
-      return this;
-    }
     public APIRequestGetApplications requestLatestSdkVersionField () {
       return this.requestLatestSdkVersionField(true);
     }
@@ -1160,6 +1163,20 @@ public class DirectDeal extends APINode {
       this.requestField("restrictions", value);
       return this;
     }
+    public APIRequestGetApplications requestRestrictiveDataFilterParamsField () {
+      return this.requestRestrictiveDataFilterParamsField(true);
+    }
+    public APIRequestGetApplications requestRestrictiveDataFilterParamsField (boolean value) {
+      this.requestField("restrictive_data_filter_params", value);
+      return this;
+    }
+    public APIRequestGetApplications requestRestrictiveDataFilterRulesField () {
+      return this.requestRestrictiveDataFilterRulesField(true);
+    }
+    public APIRequestGetApplications requestRestrictiveDataFilterRulesField (boolean value) {
+      this.requestField("restrictive_data_filter_rules", value);
+      return this;
+    }
     public APIRequestGetApplications requestSdkUpdateMessageField () {
       return this.requestSdkUpdateMessageField(true);
     }
@@ -1221,6 +1238,13 @@ public class DirectDeal extends APINode {
     }
     public APIRequestGetApplications requestSubcategoryField (boolean value) {
       this.requestField("subcategory", value);
+      return this;
+    }
+    public APIRequestGetApplications requestSuggestedEventsSettingField () {
+      return this.requestSuggestedEventsSettingField(true);
+    }
+    public APIRequestGetApplications requestSuggestedEventsSettingField (boolean value) {
+      this.requestField("suggested_events_setting", value);
       return this;
     }
     public APIRequestGetApplications requestSupportedPlatformsField () {
@@ -1613,7 +1637,7 @@ public class DirectDeal extends APINode {
       VALUE_5("5"),
       @SerializedName("6")
       VALUE_6("6"),
-      NULL(null);
+      ;
 
       private String value;
 

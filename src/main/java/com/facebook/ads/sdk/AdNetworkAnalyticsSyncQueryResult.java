@@ -235,7 +235,7 @@ public class AdNetworkAnalyticsSyncQueryResult extends APINode {
       VALUE_DAY("DAY"),
       @SerializedName("TOTAL")
       VALUE_TOTAL("TOTAL"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -282,7 +282,7 @@ public class AdNetworkAnalyticsSyncQueryResult extends APINode {
       VALUE_PROPERTY("PROPERTY"),
       @SerializedName("SDK_VERSION")
       VALUE_SDK_VERSION("SDK_VERSION"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -319,6 +319,8 @@ public class AdNetworkAnalyticsSyncQueryResult extends APINode {
       VALUE_FB_AD_NETWORK_FILL_RATE("FB_AD_NETWORK_FILL_RATE"),
       @SerializedName("FB_AD_NETWORK_IMP")
       VALUE_FB_AD_NETWORK_IMP("FB_AD_NETWORK_IMP"),
+      @SerializedName("FB_AD_NETWORK_IMPRESSION_RATE")
+      VALUE_FB_AD_NETWORK_IMPRESSION_RATE("FB_AD_NETWORK_IMPRESSION_RATE"),
       @SerializedName("FB_AD_NETWORK_REQUEST")
       VALUE_FB_AD_NETWORK_REQUEST("FB_AD_NETWORK_REQUEST"),
       @SerializedName("FB_AD_NETWORK_REVENUE")
@@ -335,7 +337,7 @@ public class AdNetworkAnalyticsSyncQueryResult extends APINode {
       VALUE_FB_AD_NETWORK_VIDEO_VIEW("FB_AD_NETWORK_VIDEO_VIEW"),
       @SerializedName("FB_AD_NETWORK_VIDEO_VIEW_RATE")
       VALUE_FB_AD_NETWORK_VIDEO_VIEW_RATE("FB_AD_NETWORK_VIDEO_VIEW_RATE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -356,7 +358,7 @@ public class AdNetworkAnalyticsSyncQueryResult extends APINode {
       VALUE_TIME("TIME"),
       @SerializedName("VALUE")
       VALUE_VALUE("VALUE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -375,7 +377,7 @@ public class AdNetworkAnalyticsSyncQueryResult extends APINode {
       VALUE_ASCENDING("ASCENDING"),
       @SerializedName("DESCENDING")
       VALUE_DESCENDING("DESCENDING"),
-      NULL(null);
+      ;
 
       private String value;
 

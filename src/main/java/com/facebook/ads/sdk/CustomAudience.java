@@ -350,14 +350,6 @@ public class CustomAudience extends APINode {
     return new APIRequestGetAds(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateCapability createCapability() {
-    return new APIRequestCreateCapability(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateDatum createDatum() {
-    return new APIRequestCreateDatum(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetPrefills getPrefills() {
     return new APIRequestGetPrefills(this.getPrefixedId().toString(), context);
   }
@@ -693,6 +685,7 @@ public class CustomAudience extends APINode {
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
+      "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
       "funding_source",
@@ -727,7 +720,7 @@ public class CustomAudience extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
-      "user_role",
+      "user_tasks",
       "user_tos_accepted",
     };
 
@@ -986,6 +979,13 @@ public class CustomAudience extends APINode {
       this.requestField("end_advertiser_name", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestExtendedCreditInvoiceGroupField () {
+      return this.requestExtendedCreditInvoiceGroupField(true);
+    }
+    public APIRequestGetAdAccounts requestExtendedCreditInvoiceGroupField (boolean value) {
+      this.requestField("extended_credit_invoice_group", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestFailedDeliveryChecksField () {
       return this.requestFailedDeliveryChecksField(true);
     }
@@ -1224,11 +1224,11 @@ public class CustomAudience extends APINode {
       this.requestField("tos_accepted", value);
       return this;
     }
-    public APIRequestGetAdAccounts requestUserRoleField () {
-      return this.requestUserRoleField(true);
+    public APIRequestGetAdAccounts requestUserTasksField () {
+      return this.requestUserTasksField(true);
     }
-    public APIRequestGetAdAccounts requestUserRoleField (boolean value) {
-      this.requestField("user_role", value);
+    public APIRequestGetAdAccounts requestUserTasksField (boolean value) {
+      this.requestField("user_tasks", value);
       return this;
     }
     public APIRequestGetAdAccounts requestUserTosAcceptedField () {
@@ -1413,9 +1413,11 @@ public class CustomAudience extends APINode {
       "engagement_audience",
       "failed_delivery_checks",
       "id",
+      "is_autobid",
       "issues_info",
       "last_updated_by_app_id",
       "name",
+      "preview_shareable_link",
       "priority",
       "recommendations",
       "source_ad",
@@ -1674,6 +1676,13 @@ public class CustomAudience extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetAds requestIsAutobidField () {
+      return this.requestIsAutobidField(true);
+    }
+    public APIRequestGetAds requestIsAutobidField (boolean value) {
+      this.requestField("is_autobid", value);
+      return this;
+    }
     public APIRequestGetAds requestIssuesInfoField () {
       return this.requestIssuesInfoField(true);
     }
@@ -1693,6 +1702,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAds requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAds requestPreviewShareableLinkField () {
+      return this.requestPreviewShareableLinkField(true);
+    }
+    public APIRequestGetAds requestPreviewShareableLinkField (boolean value) {
+      this.requestField("preview_shareable_link", value);
       return this;
     }
     public APIRequestGetAds requestPriorityField () {
@@ -1758,300 +1774,6 @@ public class CustomAudience extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-  }
-
-  public static class APIRequestCreateCapability extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "accounts_capabilities",
-      "relationship_type",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateCapability.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateCapability(String nodeId, APIContext context) {
-      super(context, nodeId, "/capabilities", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateCapability setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateCapability setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateCapability setAccountsCapabilities (String accountsCapabilities) {
-      this.setParam("accounts_capabilities", accountsCapabilities);
-      return this;
-    }
-
-    public APIRequestCreateCapability setRelationshipType (List<String> relationshipType) {
-      this.setParam("relationship_type", relationshipType);
-      return this;
-    }
-    public APIRequestCreateCapability setRelationshipType (String relationshipType) {
-      this.setParam("relationship_type", relationshipType);
-      return this;
-    }
-
-    public APIRequestCreateCapability requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateCapability requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateCapability requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateCapability requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateCapability requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateCapability requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateDatum extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "action_type",
-      "batch_seq",
-      "encoding",
-      "entries",
-      "entry_type",
-      "last_batch_flag",
-      "session_id",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateDatum.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateDatum(String nodeId, APIContext context) {
-      super(context, nodeId, "/data", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateDatum setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateDatum setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateDatum setActionType (EnumActionType actionType) {
-      this.setParam("action_type", actionType);
-      return this;
-    }
-    public APIRequestCreateDatum setActionType (String actionType) {
-      this.setParam("action_type", actionType);
-      return this;
-    }
-
-    public APIRequestCreateDatum setBatchSeq (Long batchSeq) {
-      this.setParam("batch_seq", batchSeq);
-      return this;
-    }
-    public APIRequestCreateDatum setBatchSeq (String batchSeq) {
-      this.setParam("batch_seq", batchSeq);
-      return this;
-    }
-
-    public APIRequestCreateDatum setEncoding (EnumEncoding encoding) {
-      this.setParam("encoding", encoding);
-      return this;
-    }
-    public APIRequestCreateDatum setEncoding (String encoding) {
-      this.setParam("encoding", encoding);
-      return this;
-    }
-
-    public APIRequestCreateDatum setEntries (List<String> entries) {
-      this.setParam("entries", entries);
-      return this;
-    }
-    public APIRequestCreateDatum setEntries (String entries) {
-      this.setParam("entries", entries);
-      return this;
-    }
-
-    public APIRequestCreateDatum setEntryType (EnumEntryType entryType) {
-      this.setParam("entry_type", entryType);
-      return this;
-    }
-    public APIRequestCreateDatum setEntryType (String entryType) {
-      this.setParam("entry_type", entryType);
-      return this;
-    }
-
-    public APIRequestCreateDatum setLastBatchFlag (Boolean lastBatchFlag) {
-      this.setParam("last_batch_flag", lastBatchFlag);
-      return this;
-    }
-    public APIRequestCreateDatum setLastBatchFlag (String lastBatchFlag) {
-      this.setParam("last_batch_flag", lastBatchFlag);
-      return this;
-    }
-
-    public APIRequestCreateDatum setSessionId (Long sessionId) {
-      this.setParam("session_id", sessionId);
-      return this;
-    }
-    public APIRequestCreateDatum setSessionId (String sessionId) {
-      this.setParam("session_id", sessionId);
-      return this;
-    }
-
-    public APIRequestCreateDatum requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateDatum requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateDatum requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateDatum requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateDatum requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateDatum requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestGetPrefills extends APIRequest<CustomAudiencePrefillState> {
@@ -3137,6 +2859,7 @@ public class CustomAudience extends APINode {
     }
     public static final String[] PARAMS = {
       "ad_account_id",
+      "target_countries",
     };
 
     public static final String[] FIELDS = {
@@ -3232,6 +2955,15 @@ public class CustomAudience extends APINode {
 
     public APIRequestGet setAdAccountId (String adAccountId) {
       this.setParam("ad_account_id", adAccountId);
+      return this;
+    }
+
+    public APIRequestGet setTargetCountries (List<String> targetCountries) {
+      this.setParam("target_countries", targetCountries);
+      return this;
+    }
+    public APIRequestGet setTargetCountries (String targetCountries) {
+      this.setParam("target_countries", targetCountries);
       return this;
     }
 
@@ -3935,7 +3667,7 @@ public class CustomAudience extends APINode {
       VALUE_VEHICLE("VEHICLE"),
       @SerializedName("VEHICLE_OFFER")
       VALUE_VEHICLE_OFFER("VEHICLE_OFFER"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3962,13 +3694,15 @@ public class CustomAudience extends APINode {
       VALUE_HOTEL("HOTEL"),
       @SerializedName("MEDIA_TITLE")
       VALUE_MEDIA_TITLE("MEDIA_TITLE"),
+      @SerializedName("OFFLINE_PRODUCT")
+      VALUE_OFFLINE_PRODUCT("OFFLINE_PRODUCT"),
       @SerializedName("PRODUCT")
       VALUE_PRODUCT("PRODUCT"),
       @SerializedName("VEHICLE")
       VALUE_VEHICLE("VEHICLE"),
       @SerializedName("VEHICLE_OFFER")
       VALUE_VEHICLE_OFFER("VEHICLE_OFFER"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -3989,7 +3723,7 @@ public class CustomAudience extends APINode {
       VALUE_PARTNER_PROVIDED_ONLY("PARTNER_PROVIDED_ONLY"),
       @SerializedName("USER_PROVIDED_ONLY")
       VALUE_USER_PROVIDED_ONLY("USER_PROVIDED_ONLY"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4034,84 +3768,11 @@ public class CustomAudience extends APINode {
       VALUE_VIDEO("VIDEO"),
       @SerializedName("WEBSITE")
       VALUE_WEBSITE("WEBSITE"),
-      NULL(null);
+      ;
 
       private String value;
 
       private EnumSubtype(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumActionType {
-      @SerializedName("add")
-      VALUE_ADD("add"),
-      @SerializedName("match")
-      VALUE_MATCH("match"),
-      @SerializedName("optout")
-      VALUE_OPTOUT("optout"),
-      @SerializedName("remove")
-      VALUE_REMOVE("remove"),
-      NULL(null);
-
-      private String value;
-
-      private EnumActionType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumEncoding {
-      @SerializedName("md5")
-      VALUE_MD5("md5"),
-      @SerializedName("plain")
-      VALUE_PLAIN("plain"),
-      @SerializedName("sha256")
-      VALUE_SHA256("sha256"),
-      NULL(null);
-
-      private String value;
-
-      private EnumEncoding(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumEntryType {
-      @SerializedName("0")
-      VALUE_0("0"),
-      @SerializedName("1")
-      VALUE_1("1"),
-      @SerializedName("2")
-      VALUE_2("2"),
-      @SerializedName("3")
-      VALUE_3("3"),
-      @SerializedName("4")
-      VALUE_4("4"),
-      @SerializedName("5")
-      VALUE_5("5"),
-      @SerializedName("6")
-      VALUE_6("6"),
-      NULL(null);
-
-      private String value;
-
-      private EnumEntryType(String value) {
         this.value = value;
       }
 

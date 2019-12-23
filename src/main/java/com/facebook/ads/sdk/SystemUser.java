@@ -280,6 +280,10 @@ public class SystemUser extends APINode {
     return new APIRequestGetAssignedAdAccounts(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetAssignedBusinessAssetGroups getAssignedBusinessAssetGroups() {
+    return new APIRequestGetAssignedBusinessAssetGroups(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetAssignedPages getAssignedPages() {
     return new APIRequestGetAssignedPages(this.getPrefixedId().toString(), context);
   }
@@ -360,6 +364,7 @@ public class SystemUser extends APINode {
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
+      "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
       "funding_source",
@@ -394,7 +399,7 @@ public class SystemUser extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
-      "user_role",
+      "user_tasks",
       "user_tos_accepted",
     };
 
@@ -648,6 +653,13 @@ public class SystemUser extends APINode {
       this.requestField("end_advertiser_name", value);
       return this;
     }
+    public APIRequestGetAssignedAdAccounts requestExtendedCreditInvoiceGroupField () {
+      return this.requestExtendedCreditInvoiceGroupField(true);
+    }
+    public APIRequestGetAssignedAdAccounts requestExtendedCreditInvoiceGroupField (boolean value) {
+      this.requestField("extended_credit_invoice_group", value);
+      return this;
+    }
     public APIRequestGetAssignedAdAccounts requestFailedDeliveryChecksField () {
       return this.requestFailedDeliveryChecksField(true);
     }
@@ -886,11 +898,11 @@ public class SystemUser extends APINode {
       this.requestField("tos_accepted", value);
       return this;
     }
-    public APIRequestGetAssignedAdAccounts requestUserRoleField () {
-      return this.requestUserRoleField(true);
+    public APIRequestGetAssignedAdAccounts requestUserTasksField () {
+      return this.requestUserTasksField(true);
     }
-    public APIRequestGetAssignedAdAccounts requestUserRoleField (boolean value) {
-      this.requestField("user_role", value);
+    public APIRequestGetAssignedAdAccounts requestUserTasksField (boolean value) {
+      this.requestField("user_tasks", value);
       return this;
     }
     public APIRequestGetAssignedAdAccounts requestUserTosAcceptedField () {
@@ -898,6 +910,132 @@ public class SystemUser extends APINode {
     }
     public APIRequestGetAssignedAdAccounts requestUserTosAcceptedField (boolean value) {
       this.requestField("user_tos_accepted", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetAssignedBusinessAssetGroups extends APIRequest<BusinessAssetGroup> {
+
+    APINodeList<BusinessAssetGroup> lastResponse = null;
+    @Override
+    public APINodeList<BusinessAssetGroup> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "contained_asset_id",
+    };
+
+    public static final String[] FIELDS = {
+      "id",
+      "name",
+    };
+
+    @Override
+    public APINodeList<BusinessAssetGroup> parseResponse(String response, String header) throws APIException {
+      return BusinessAssetGroup.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<BusinessAssetGroup> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<BusinessAssetGroup> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<BusinessAssetGroup>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<BusinessAssetGroup>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<BusinessAssetGroup>>() {
+           public APINodeList<BusinessAssetGroup> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetAssignedBusinessAssetGroups.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetAssignedBusinessAssetGroups(String nodeId, APIContext context) {
+      super(context, nodeId, "/assigned_business_asset_groups", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetAssignedBusinessAssetGroups setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAssignedBusinessAssetGroups setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetAssignedBusinessAssetGroups setContainedAssetId (String containedAssetId) {
+      this.setParam("contained_asset_id", containedAssetId);
+      return this;
+    }
+
+    public APIRequestGetAssignedBusinessAssetGroups requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetAssignedBusinessAssetGroups requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAssignedBusinessAssetGroups requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetAssignedBusinessAssetGroups requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAssignedBusinessAssetGroups requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAssignedBusinessAssetGroups requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetAssignedBusinessAssetGroups requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetAssignedBusinessAssetGroups requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetAssignedBusinessAssetGroups requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetAssignedBusinessAssetGroups requestNameField (boolean value) {
+      this.requestField("name", value);
       return this;
     }
   }
@@ -938,7 +1076,6 @@ public class SystemUser extends APINode {
       "company_overview",
       "connected_instagram_account",
       "contact_address",
-      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -985,8 +1122,6 @@ public class SystemUser extends APINode {
       "is_webhooks_subscribed",
       "keywords",
       "leadgen_form_preview_details",
-      "leadgen_has_crm_integration",
-      "leadgen_has_fat_ping_crm_integration",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -1321,13 +1456,6 @@ public class SystemUser extends APINode {
       this.requestField("contact_address", value);
       return this;
     }
-    public APIRequestGetAssignedPages requestCopyrightAttributionInsightsField () {
-      return this.requestCopyrightAttributionInsightsField(true);
-    }
-    public APIRequestGetAssignedPages requestCopyrightAttributionInsightsField (boolean value) {
-      this.requestField("copyright_attribution_insights", value);
-      return this;
-    }
     public APIRequestGetAssignedPages requestCopyrightWhitelistedIgPartnersField () {
       return this.requestCopyrightWhitelistedIgPartnersField(true);
     }
@@ -1648,20 +1776,6 @@ public class SystemUser extends APINode {
     }
     public APIRequestGetAssignedPages requestLeadgenFormPreviewDetailsField (boolean value) {
       this.requestField("leadgen_form_preview_details", value);
-      return this;
-    }
-    public APIRequestGetAssignedPages requestLeadgenHasCrmIntegrationField () {
-      return this.requestLeadgenHasCrmIntegrationField(true);
-    }
-    public APIRequestGetAssignedPages requestLeadgenHasCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_crm_integration", value);
-      return this;
-    }
-    public APIRequestGetAssignedPages requestLeadgenHasFatPingCrmIntegrationField () {
-      return this.requestLeadgenHasFatPingCrmIntegrationField(true);
-    }
-    public APIRequestGetAssignedPages requestLeadgenHasFatPingCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_fat_ping_crm_integration", value);
       return this;
     }
     public APIRequestGetAssignedPages requestLeadgenTosAcceptanceTimeField () {
@@ -2162,7 +2276,7 @@ public class SystemUser extends APINode {
       "id",
       "name",
       "product_count",
-      "qualified_product_count",
+      "store_catalog_settings",
       "vertical",
     };
 
@@ -2318,11 +2432,11 @@ public class SystemUser extends APINode {
       this.requestField("product_count", value);
       return this;
     }
-    public APIRequestGetAssignedProductCatalogs requestQualifiedProductCountField () {
-      return this.requestQualifiedProductCountField(true);
+    public APIRequestGetAssignedProductCatalogs requestStoreCatalogSettingsField () {
+      return this.requestStoreCatalogSettingsField(true);
     }
-    public APIRequestGetAssignedProductCatalogs requestQualifiedProductCountField (boolean value) {
-      this.requestField("qualified_product_count", value);
+    public APIRequestGetAssignedProductCatalogs requestStoreCatalogSettingsField (boolean value) {
+      this.requestField("store_catalog_settings", value);
       return this;
     }
     public APIRequestGetAssignedProductCatalogs requestVerticalField () {
@@ -2349,6 +2463,7 @@ public class SystemUser extends APINode {
       "address",
       "admin_notes",
       "age_range",
+      "auth_method",
       "birthday",
       "can_review_measurement_request",
       "cover",
@@ -2356,7 +2471,6 @@ public class SystemUser extends APINode {
       "devices",
       "education",
       "email",
-      "employee_number",
       "favorite_athletes",
       "favorite_teams",
       "first_name",
@@ -2368,9 +2482,9 @@ public class SystemUser extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
+      "is_guest_user",
       "is_shared_login",
       "is_verified",
-      "labels",
       "languages",
       "last_name",
       "link",
@@ -2523,6 +2637,13 @@ public class SystemUser extends APINode {
       this.requestField("age_range", value);
       return this;
     }
+    public APIRequestGetUpdatedBy requestAuthMethodField () {
+      return this.requestAuthMethodField(true);
+    }
+    public APIRequestGetUpdatedBy requestAuthMethodField (boolean value) {
+      this.requestField("auth_method", value);
+      return this;
+    }
     public APIRequestGetUpdatedBy requestBirthdayField () {
       return this.requestBirthdayField(true);
     }
@@ -2570,13 +2691,6 @@ public class SystemUser extends APINode {
     }
     public APIRequestGetUpdatedBy requestEmailField (boolean value) {
       this.requestField("email", value);
-      return this;
-    }
-    public APIRequestGetUpdatedBy requestEmployeeNumberField () {
-      return this.requestEmployeeNumberField(true);
-    }
-    public APIRequestGetUpdatedBy requestEmployeeNumberField (boolean value) {
-      this.requestField("employee_number", value);
       return this;
     }
     public APIRequestGetUpdatedBy requestFavoriteAthletesField () {
@@ -2656,6 +2770,13 @@ public class SystemUser extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
+    public APIRequestGetUpdatedBy requestIsGuestUserField () {
+      return this.requestIsGuestUserField(true);
+    }
+    public APIRequestGetUpdatedBy requestIsGuestUserField (boolean value) {
+      this.requestField("is_guest_user", value);
+      return this;
+    }
     public APIRequestGetUpdatedBy requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -2668,13 +2789,6 @@ public class SystemUser extends APINode {
     }
     public APIRequestGetUpdatedBy requestIsVerifiedField (boolean value) {
       this.requestField("is_verified", value);
-      return this;
-    }
-    public APIRequestGetUpdatedBy requestLabelsField () {
-      return this.requestLabelsField(true);
-    }
-    public APIRequestGetUpdatedBy requestLabelsField (boolean value) {
-      this.requestField("labels", value);
       return this;
     }
     public APIRequestGetUpdatedBy requestLanguagesField () {
@@ -3073,7 +3187,7 @@ public class SystemUser extends APINode {
       VALUE_FINANCE_ANALYST("FINANCE_ANALYST"),
       @SerializedName("FINANCE_EDITOR")
       VALUE_FINANCE_EDITOR("FINANCE_EDITOR"),
-      NULL(null);
+      ;
 
       private String value;
 

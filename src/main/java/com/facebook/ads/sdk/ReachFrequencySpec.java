@@ -71,8 +71,6 @@ public class ReachFrequencySpec extends APINode {
   private Object mMinCampaignDuration = null;
   @SerializedName("min_reach_limits")
   private Object mMinReachLimits = null;
-  @SerializedName("supports_video_view_benchmark_per_country")
-  private Object mSupportsVideoViewBenchmarkPerCountry = null;
   protected static Gson gson = null;
 
   public ReachFrequencySpec() {
@@ -296,15 +294,6 @@ public class ReachFrequencySpec extends APINode {
     return this;
   }
 
-  public Object getFieldSupportsVideoViewBenchmarkPerCountry() {
-    return mSupportsVideoViewBenchmarkPerCountry;
-  }
-
-  public ReachFrequencySpec setFieldSupportsVideoViewBenchmarkPerCountry(Object value) {
-    this.mSupportsVideoViewBenchmarkPerCountry = value;
-    return this;
-  }
-
 
 
 
@@ -330,7 +319,6 @@ public class ReachFrequencySpec extends APINode {
     this.mMaxPauseWithoutPredictionRerun = instance.mMaxPauseWithoutPredictionRerun;
     this.mMinCampaignDuration = instance.mMinCampaignDuration;
     this.mMinReachLimits = instance.mMinReachLimits;
-    this.mSupportsVideoViewBenchmarkPerCountry = instance.mSupportsVideoViewBenchmarkPerCountry;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

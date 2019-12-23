@@ -261,7 +261,7 @@ public class AsyncRequest extends APINode {
       VALUE_FINISHED("FINISHED"),
       @SerializedName("INITIALIZED")
       VALUE_INITIALIZED("INITIALIZED"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -282,7 +282,7 @@ public class AsyncRequest extends APINode {
       VALUE_BATCH_API("BATCH_API"),
       @SerializedName("DRAFTS")
       VALUE_DRAFTS("DRAFTS"),
-      NULL(null);
+      ;
 
       private String value;
 

@@ -316,8 +316,16 @@ public class NativeOffer extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestCreateCode createCode() {
+    return new APIRequestCreateCode(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateNativeOfferView createNativeOfferView() {
     return new APIRequestCreateNativeOfferView(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetViews getViews() {
+    return new APIRequestGetViews(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGet get() {
@@ -433,6 +441,130 @@ public class NativeOffer extends APINode {
   }
 
 
+
+  public static class APIRequestCreateCode extends APIRequest<NativeOffer> {
+
+    NativeOffer lastResponse = null;
+    @Override
+    public NativeOffer getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "unique_codes_file_code_type",
+      "file",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public NativeOffer parseResponse(String response, String header) throws APIException {
+      return NativeOffer.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public NativeOffer execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public NativeOffer execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<NativeOffer> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<NativeOffer> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, NativeOffer>() {
+           public NativeOffer apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateCode.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateCode(String nodeId, APIContext context) {
+      super(context, nodeId, "/codes", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateCode setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCode setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+    public APIRequestCreateCode addUploadFile (String uploadName, File file) {
+      this.setParam(uploadName, file);
+      return this;
+    }
+
+    public APIRequestCreateCode setUseVideoEndpoint(boolean useVideoEndpoint) {
+      this.useVideoEndpoint = useVideoEndpoint;
+      return this;
+    }
+
+    public APIRequestCreateCode setUniqueCodesFileCodeType (NativeOffer.EnumUniqueCodesFileCodeType uniqueCodesFileCodeType) {
+      this.setParam("unique_codes_file_code_type", uniqueCodesFileCodeType);
+      return this;
+    }
+    public APIRequestCreateCode setUniqueCodesFileCodeType (String uniqueCodesFileCodeType) {
+      this.setParam("unique_codes_file_code_type", uniqueCodesFileCodeType);
+      return this;
+    }
+
+    public APIRequestCreateCode requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateCode requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCode requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateCode requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCode requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCode requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
 
   public static class APIRequestCreateNativeOfferView extends APIRequest<NativeOffer> {
 
@@ -668,6 +800,134 @@ public class NativeOffer extends APINode {
       return this;
     }
 
+  }
+
+  public static class APIRequestGetViews extends APIRequest<NativeOfferView> {
+
+    APINodeList<NativeOfferView> lastResponse = null;
+    @Override
+    public APINodeList<NativeOfferView> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "id",
+      "offer",
+      "save_count",
+    };
+
+    @Override
+    public APINodeList<NativeOfferView> parseResponse(String response, String header) throws APIException {
+      return NativeOfferView.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<NativeOfferView> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<NativeOfferView> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<NativeOfferView>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<NativeOfferView>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<NativeOfferView>>() {
+           public APINodeList<NativeOfferView> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetViews.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetViews(String nodeId, APIContext context) {
+      super(context, nodeId, "/views", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetViews setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetViews setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetViews requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetViews requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetViews requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetViews requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetViews requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetViews requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetViews requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetViews requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetViews requestOfferField () {
+      return this.requestOfferField(true);
+    }
+    public APIRequestGetViews requestOfferField (boolean value) {
+      this.requestField("offer", value);
+      return this;
+    }
+    public APIRequestGetViews requestSaveCountField () {
+      return this.requestSaveCountField(true);
+    }
+    public APIRequestGetViews requestSaveCountField (boolean value) {
+      this.requestField("save_count", value);
+      return this;
+    }
   }
 
   public static class APIRequestGet extends APIRequest<NativeOffer> {
@@ -982,6 +1242,35 @@ public class NativeOffer extends APINode {
     }
   }
 
+  public static enum EnumUniqueCodesFileCodeType {
+      @SerializedName("barcodes")
+      VALUE_BARCODES("barcodes"),
+      @SerializedName("discount_and_barcodes")
+      VALUE_DISCOUNT_AND_BARCODES("discount_and_barcodes"),
+      @SerializedName("discount_and_discount")
+      VALUE_DISCOUNT_AND_DISCOUNT("discount_and_discount"),
+      @SerializedName("discount_codes")
+      VALUE_DISCOUNT_CODES("discount_codes"),
+      @SerializedName("instore_barcodes")
+      VALUE_INSTORE_BARCODES("instore_barcodes"),
+      @SerializedName("instore_discount_codes")
+      VALUE_INSTORE_DISCOUNT_CODES("instore_discount_codes"),
+      @SerializedName("online_discount_codes")
+      VALUE_ONLINE_DISCOUNT_CODES("online_discount_codes"),
+      ;
+
+      private String value;
+
+      private EnumUniqueCodesFileCodeType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumBarcodeType {
       @SerializedName("CODE128")
       VALUE_CODE128("CODE128"),
@@ -1009,7 +1298,7 @@ public class NativeOffer extends APINode {
       VALUE_UPC_A("UPC_A"),
       @SerializedName("UPC_E")
       VALUE_UPC_E("UPC_E"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1030,7 +1319,7 @@ public class NativeOffer extends APINode {
       VALUE_OFFLINE("offline"),
       @SerializedName("online")
       VALUE_ONLINE("online"),
-      NULL(null);
+      ;
 
       private String value;
 

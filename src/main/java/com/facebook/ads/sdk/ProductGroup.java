@@ -853,6 +853,7 @@ public class ProductGroup extends APINode {
       "category",
       "checkout_url",
       "color",
+      "commerce_tax_category",
       "condition",
       "currency",
       "custom_data",
@@ -876,6 +877,7 @@ public class ProductGroup extends APINode {
       "iphone_app_name",
       "iphone_app_store_id",
       "iphone_url",
+      "launch_date",
       "manufacturer_part_number",
       "material",
       "mobile_link",
@@ -888,6 +890,7 @@ public class ProductGroup extends APINode {
       "price",
       "product_type",
       "retailer_id",
+      "return_policy_days",
       "sale_price",
       "sale_price_end_date",
       "sale_price_start_date",
@@ -1021,6 +1024,15 @@ public class ProductGroup extends APINode {
 
     public APIRequestCreateProduct setColor (String color) {
       this.setParam("color", color);
+      return this;
+    }
+
+    public APIRequestCreateProduct setCommerceTaxCategory (ProductItem.EnumCommerceTaxCategory commerceTaxCategory) {
+      this.setParam("commerce_tax_category", commerceTaxCategory);
+      return this;
+    }
+    public APIRequestCreateProduct setCommerceTaxCategory (String commerceTaxCategory) {
+      this.setParam("commerce_tax_category", commerceTaxCategory);
       return this;
     }
 
@@ -1167,6 +1179,11 @@ public class ProductGroup extends APINode {
       return this;
     }
 
+    public APIRequestCreateProduct setLaunchDate (String launchDate) {
+      this.setParam("launch_date", launchDate);
+      return this;
+    }
+
     public APIRequestCreateProduct setManufacturerPartNumber (String manufacturerPartNumber) {
       this.setParam("manufacturer_part_number", manufacturerPartNumber);
       return this;
@@ -1236,6 +1253,15 @@ public class ProductGroup extends APINode {
 
     public APIRequestCreateProduct setRetailerId (String retailerId) {
       this.setParam("retailer_id", retailerId);
+      return this;
+    }
+
+    public APIRequestCreateProduct setReturnPolicyDays (Long returnPolicyDays) {
+      this.setParam("return_policy_days", returnPolicyDays);
+      return this;
+    }
+    public APIRequestCreateProduct setReturnPolicyDays (String returnPolicyDays) {
+      this.setParam("return_policy_days", returnPolicyDays);
       return this;
     }
 

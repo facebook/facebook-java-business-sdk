@@ -54,23 +54,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdCreativeDegreesOfFreedomSpec extends APINode {
-  @SerializedName("degrees_of_freedom_type")
-  private String mDegreesOfFreedomType = null;
+public class AdAccountSubscribedApps extends APINode {
+  @SerializedName("app_id")
+  private String mAppId = null;
+  @SerializedName("app_name")
+  private String mAppName = null;
   protected static Gson gson = null;
 
-  public AdCreativeDegreesOfFreedomSpec() {
+  public AdAccountSubscribedApps() {
   }
 
   public String getId() {
     return null;
   }
-  public static AdCreativeDegreesOfFreedomSpec loadJSON(String json, APIContext context, String header) {
-    AdCreativeDegreesOfFreedomSpec adCreativeDegreesOfFreedomSpec = getGson().fromJson(json, AdCreativeDegreesOfFreedomSpec.class);
+  public static AdAccountSubscribedApps loadJSON(String json, APIContext context, String header) {
+    AdAccountSubscribedApps adAccountSubscribedApps = getGson().fromJson(json, AdAccountSubscribedApps.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adCreativeDegreesOfFreedomSpec.toString());
+      JsonElement o2 = parser.parse(adAccountSubscribedApps.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -80,14 +82,14 @@ public class AdCreativeDegreesOfFreedomSpec extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    adCreativeDegreesOfFreedomSpec.context = context;
-    adCreativeDegreesOfFreedomSpec.rawValue = json;
-    adCreativeDegreesOfFreedomSpec.header = header;
-    return adCreativeDegreesOfFreedomSpec;
+    adAccountSubscribedApps.context = context;
+    adAccountSubscribedApps.rawValue = json;
+    adAccountSubscribedApps.header = header;
+    return adAccountSubscribedApps;
   }
 
-  public static APINodeList<AdCreativeDegreesOfFreedomSpec> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdCreativeDegreesOfFreedomSpec> adCreativeDegreesOfFreedomSpecs = new APINodeList<AdCreativeDegreesOfFreedomSpec>(request, json, header);
+  public static APINodeList<AdAccountSubscribedApps> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdAccountSubscribedApps> adAccountSubscribedAppss = new APINodeList<AdAccountSubscribedApps>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -98,9 +100,9 @@ public class AdCreativeDegreesOfFreedomSpec extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCreativeDegreesOfFreedomSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adAccountSubscribedAppss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adCreativeDegreesOfFreedomSpecs;
+        return adAccountSubscribedAppss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -110,20 +112,20 @@ public class AdCreativeDegreesOfFreedomSpec extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adCreativeDegreesOfFreedomSpecs.setCursors(before, after);
+                adAccountSubscribedAppss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adCreativeDegreesOfFreedomSpecs.setPaging(previous, next);
+            adAccountSubscribedAppss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adCreativeDegreesOfFreedomSpecs.setAppSecret(context.getAppSecretProof());
+              adAccountSubscribedAppss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCreativeDegreesOfFreedomSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adAccountSubscribedAppss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -134,23 +136,23 @@ public class AdCreativeDegreesOfFreedomSpec extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCreativeDegreesOfFreedomSpecs.add(loadJSON(entry.getValue().toString(), context, header));
+                  adAccountSubscribedAppss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCreativeDegreesOfFreedomSpecs.add(loadJSON(obj.toString(), context, header));
+              adAccountSubscribedAppss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adCreativeDegreesOfFreedomSpecs;
+          return adAccountSubscribedAppss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCreativeDegreesOfFreedomSpecs.add(loadJSON(entry.getValue().toString(), context, header));
+              adAccountSubscribedAppss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adCreativeDegreesOfFreedomSpecs;
+          return adAccountSubscribedAppss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -167,20 +169,20 @@ public class AdCreativeDegreesOfFreedomSpec extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCreativeDegreesOfFreedomSpecs.add(loadJSON(value.toString(), context, header));
+              adAccountSubscribedAppss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adCreativeDegreesOfFreedomSpecs;
+            return adAccountSubscribedAppss;
           }
 
           // Sixth, check if it's pure JsonObject
-          adCreativeDegreesOfFreedomSpecs.clear();
-          adCreativeDegreesOfFreedomSpecs.add(loadJSON(json, context, header));
-          return adCreativeDegreesOfFreedomSpecs;
+          adAccountSubscribedAppss.clear();
+          adAccountSubscribedAppss.add(loadJSON(json, context, header));
+          return adAccountSubscribedAppss;
         }
       }
     } catch (Exception e) {
@@ -208,12 +210,21 @@ public class AdCreativeDegreesOfFreedomSpec extends APINode {
   }
 
 
-  public String getFieldDegreesOfFreedomType() {
-    return mDegreesOfFreedomType;
+  public String getFieldAppId() {
+    return mAppId;
   }
 
-  public AdCreativeDegreesOfFreedomSpec setFieldDegreesOfFreedomType(String value) {
-    this.mDegreesOfFreedomType = value;
+  public AdAccountSubscribedApps setFieldAppId(String value) {
+    this.mAppId = value;
+    return this;
+  }
+
+  public String getFieldAppName() {
+    return mAppName;
+  }
+
+  public AdAccountSubscribedApps setFieldAppName(String value) {
+    this.mAppName = value;
     return this;
   }
 
@@ -233,17 +244,18 @@ public class AdCreativeDegreesOfFreedomSpec extends APINode {
     return gson;
   }
 
-  public AdCreativeDegreesOfFreedomSpec copyFrom(AdCreativeDegreesOfFreedomSpec instance) {
-    this.mDegreesOfFreedomType = instance.mDegreesOfFreedomType;
+  public AdAccountSubscribedApps copyFrom(AdAccountSubscribedApps instance) {
+    this.mAppId = instance.mAppId;
+    this.mAppName = instance.mAppName;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdCreativeDegreesOfFreedomSpec> getParser() {
-    return new APIRequest.ResponseParser<AdCreativeDegreesOfFreedomSpec>() {
-      public APINodeList<AdCreativeDegreesOfFreedomSpec> parseResponse(String response, APIContext context, APIRequest<AdCreativeDegreesOfFreedomSpec> request, String header) throws MalformedResponseException {
-        return AdCreativeDegreesOfFreedomSpec.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdAccountSubscribedApps> getParser() {
+    return new APIRequest.ResponseParser<AdAccountSubscribedApps>() {
+      public APINodeList<AdAccountSubscribedApps> parseResponse(String response, APIContext context, APIRequest<AdAccountSubscribedApps> request, String header) throws MalformedResponseException {
+        return AdAccountSubscribedApps.parseResponse(response, context, request, header);
       }
     };
   }

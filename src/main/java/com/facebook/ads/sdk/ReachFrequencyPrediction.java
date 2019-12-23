@@ -115,8 +115,6 @@ public class ReachFrequencyPrediction extends APINode {
   private Long mExternalMinimumReach = null;
   @SerializedName("external_reach")
   private Long mExternalReach = null;
-  @SerializedName("external_values_breakdown")
-  private String mExternalValuesBreakdown = null;
   @SerializedName("feed_ratio_0000")
   private Long mFeedRatio0000 = null;
   @SerializedName("frequency_cap")
@@ -221,8 +219,6 @@ public class ReachFrequencyPrediction extends APINode {
   private Long mToplineId = null;
   @SerializedName("tv_viewer_cluster_map")
   private Map<Long, Object> mTvViewerClusterMap = null;
-  @SerializedName("video_view_benchmark_map")
-  private Map<String, ReachFrequencyEstimatesCurve> mVideoViewBenchmarkMap = null;
   @SerializedName("video_view_length_constraint")
   private Long mVideoViewLengthConstraint = null;
   @SerializedName("viewtag")
@@ -561,10 +557,6 @@ public class ReachFrequencyPrediction extends APINode {
     return mExternalReach;
   }
 
-  public String getFieldExternalValuesBreakdown() {
-    return mExternalValuesBreakdown;
-  }
-
   public Long getFieldFeedRatio0000() {
     return mFeedRatio0000;
   }
@@ -773,10 +765,6 @@ public class ReachFrequencyPrediction extends APINode {
     return mTvViewerClusterMap;
   }
 
-  public Map<String, ReachFrequencyEstimatesCurve> getFieldVideoViewBenchmarkMap() {
-    return mVideoViewBenchmarkMap;
-  }
-
   public Long getFieldVideoViewLengthConstraint() {
     return mVideoViewLengthConstraint;
   }
@@ -828,7 +816,6 @@ public class ReachFrequencyPrediction extends APINode {
       "external_minimum_impression",
       "external_minimum_reach",
       "external_reach",
-      "external_values_breakdown",
       "feed_ratio_0000",
       "frequency_cap",
       "frequency_distribution",
@@ -881,7 +868,6 @@ public class ReachFrequencyPrediction extends APINode {
       "timezone_name",
       "topline_id",
       "tv_viewer_cluster_map",
-      "video_view_benchmark_map",
       "video_view_length_constraint",
       "viewtag",
     };
@@ -1183,13 +1169,6 @@ public class ReachFrequencyPrediction extends APINode {
     }
     public APIRequestGet requestExternalReachField (boolean value) {
       this.requestField("external_reach", value);
-      return this;
-    }
-    public APIRequestGet requestExternalValuesBreakdownField () {
-      return this.requestExternalValuesBreakdownField(true);
-    }
-    public APIRequestGet requestExternalValuesBreakdownField (boolean value) {
-      this.requestField("external_values_breakdown", value);
       return this;
     }
     public APIRequestGet requestFeedRatio0000Field () {
@@ -1556,13 +1535,6 @@ public class ReachFrequencyPrediction extends APINode {
       this.requestField("tv_viewer_cluster_map", value);
       return this;
     }
-    public APIRequestGet requestVideoViewBenchmarkMapField () {
-      return this.requestVideoViewBenchmarkMapField(true);
-    }
-    public APIRequestGet requestVideoViewBenchmarkMapField (boolean value) {
-      this.requestField("video_view_benchmark_map", value);
-      return this;
-    }
     public APIRequestGet requestVideoViewLengthConstraintField () {
       return this.requestVideoViewLengthConstraintField(true);
     }
@@ -1586,7 +1558,7 @@ public class ReachFrequencyPrediction extends APINode {
       VALUE_QUOTE("quote"),
       @SerializedName("reserve")
       VALUE_RESERVE("reserve"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1615,7 +1587,7 @@ public class ReachFrequencyPrediction extends APINode {
       VALUE_RESEARCH_POLL("RESEARCH_POLL"),
       @SerializedName("RESERVED")
       VALUE_RESERVED("RESERVED"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1654,9 +1626,11 @@ public class ReachFrequencyPrediction extends APINode {
       VALUE_REGULAR_STYLE("REGULAR_STYLE"),
       @SerializedName("REGULAR_TV_MOVIES")
       VALUE_REGULAR_TV_MOVIES("REGULAR_TV_MOVIES"),
+      @SerializedName("SPANISH")
+      VALUE_SPANISH("SPANISH"),
       @SerializedName("SPORTS")
       VALUE_SPORTS("SPORTS"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1715,7 +1689,6 @@ public class ReachFrequencyPrediction extends APINode {
     this.mExternalMinimumImpression = instance.mExternalMinimumImpression;
     this.mExternalMinimumReach = instance.mExternalMinimumReach;
     this.mExternalReach = instance.mExternalReach;
-    this.mExternalValuesBreakdown = instance.mExternalValuesBreakdown;
     this.mFeedRatio0000 = instance.mFeedRatio0000;
     this.mFrequencyCap = instance.mFrequencyCap;
     this.mFrequencyDistribution = instance.mFrequencyDistribution;
@@ -1768,7 +1741,6 @@ public class ReachFrequencyPrediction extends APINode {
     this.mTimezoneName = instance.mTimezoneName;
     this.mToplineId = instance.mToplineId;
     this.mTvViewerClusterMap = instance.mTvViewerClusterMap;
-    this.mVideoViewBenchmarkMap = instance.mVideoViewBenchmarkMap;
     this.mVideoViewLengthConstraint = instance.mVideoViewLengthConstraint;
     this.mViewtag = instance.mViewtag;
     this.context = instance.context;

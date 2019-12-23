@@ -1065,6 +1065,7 @@ public class LiveEncoder extends APINode {
       "input_video_width",
       "name",
       "status",
+      "target_token",
       "version",
     };
 
@@ -1129,7 +1130,7 @@ public class LiveEncoder extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setCapAudioCodecs (Object capAudioCodecs) {
+    public APIRequestUpdate setCapAudioCodecs (List<LiveEncoder.EnumCapAudioCodecs> capAudioCodecs) {
       this.setParam("cap_audio_codecs", capAudioCodecs);
       return this;
     }
@@ -1138,7 +1139,7 @@ public class LiveEncoder extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setCapStreamingProtocols (Object capStreamingProtocols) {
+    public APIRequestUpdate setCapStreamingProtocols (List<LiveEncoder.EnumCapStreamingProtocols> capStreamingProtocols) {
       this.setParam("cap_streaming_protocols", capStreamingProtocols);
       return this;
     }
@@ -1147,7 +1148,7 @@ public class LiveEncoder extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setCapVideoCodecs (Object capVideoCodecs) {
+    public APIRequestUpdate setCapVideoCodecs (List<LiveEncoder.EnumCapVideoCodecs> capVideoCodecs) {
       this.setParam("cap_video_codecs", capVideoCodecs);
       return this;
     }
@@ -1248,6 +1249,11 @@ public class LiveEncoder extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setTargetToken (String targetToken) {
+      this.setParam("target_token", targetToken);
+      return this;
+    }
+
     public APIRequestUpdate setVersion (String version) {
       this.setParam("version", version);
       return this;
@@ -1291,6 +1297,61 @@ public class LiveEncoder extends APINode {
 
   }
 
+  public static enum EnumCapAudioCodecs {
+      @SerializedName("AAC")
+      VALUE_AAC("AAC"),
+      ;
+
+      private String value;
+
+      private EnumCapAudioCodecs(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumCapStreamingProtocols {
+      @SerializedName("HTTPS_DASH")
+      VALUE_HTTPS_DASH("HTTPS_DASH"),
+      @SerializedName("RTMPS")
+      VALUE_RTMPS("RTMPS"),
+      @SerializedName("WEBRTC")
+      VALUE_WEBRTC("WEBRTC"),
+      ;
+
+      private String value;
+
+      private EnumCapStreamingProtocols(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumCapVideoCodecs {
+      @SerializedName("H264")
+      VALUE_H264("H264"),
+      ;
+
+      private String value;
+
+      private EnumCapVideoCodecs(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumStatus {
       @SerializedName("CAPTURE")
       VALUE_CAPTURE("CAPTURE"),
@@ -1304,7 +1365,7 @@ public class LiveEncoder extends APINode {
       VALUE_READY("READY"),
       @SerializedName("REGISTER")
       VALUE_REGISTER("REGISTER"),
-      NULL(null);
+      ;
 
       private String value;
 

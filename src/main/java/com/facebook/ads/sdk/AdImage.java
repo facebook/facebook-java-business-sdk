@@ -604,7 +604,7 @@ public class AdImage extends APINode {
       VALUE_ACTIVE("ACTIVE"),
       @SerializedName("DELETED")
       VALUE_DELETED("DELETED"),
-      NULL(null);
+      ;
 
       private String value;
 

@@ -85,8 +85,6 @@ public class ExtendedCredit extends APINode {
   private String mOwnerBusinessName = null;
   @SerializedName("partition_from")
   private String mPartitionFrom = null;
-  @SerializedName("receiving_credit_allocation_config")
-  private ExtendedCreditAllocationConfig mReceivingCreditAllocationConfig = null;
   @SerializedName("send_bill_to_biz_name")
   private String mSendBillToBizName = null;
   protected static Gson gson = null;
@@ -380,13 +378,6 @@ public class ExtendedCredit extends APINode {
 
   public String getFieldPartitionFrom() {
     return mPartitionFrom;
-  }
-
-  public ExtendedCreditAllocationConfig getFieldReceivingCreditAllocationConfig() {
-    if (mReceivingCreditAllocationConfig != null) {
-      mReceivingCreditAllocationConfig.context = getContext();
-    }
-    return mReceivingCreditAllocationConfig;
   }
 
   public String getFieldSendBillToBizName() {
@@ -1033,7 +1024,6 @@ public class ExtendedCredit extends APINode {
       "owner_business",
       "owner_business_name",
       "partition_from",
-      "receiving_credit_allocation_config",
       "send_bill_to_biz_name",
     };
 
@@ -1231,13 +1221,6 @@ public class ExtendedCredit extends APINode {
       this.requestField("partition_from", value);
       return this;
     }
-    public APIRequestGet requestReceivingCreditAllocationConfigField () {
-      return this.requestReceivingCreditAllocationConfigField(true);
-    }
-    public APIRequestGet requestReceivingCreditAllocationConfigField (boolean value) {
-      this.requestField("receiving_credit_allocation_config", value);
-      return this;
-    }
     public APIRequestGet requestSendBillToBizNameField () {
       return this.requestSendBillToBizNameField(true);
     }
@@ -1277,7 +1260,6 @@ public class ExtendedCredit extends APINode {
     this.mOwnerBusiness = instance.mOwnerBusiness;
     this.mOwnerBusinessName = instance.mOwnerBusinessName;
     this.mPartitionFrom = instance.mPartitionFrom;
-    this.mReceivingCreditAllocationConfig = instance.mReceivingCreditAllocationConfig;
     this.mSendBillToBizName = instance.mSendBillToBizName;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

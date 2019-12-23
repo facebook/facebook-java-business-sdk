@@ -87,6 +87,8 @@ public class LiveVideo extends APINode {
   private List<LiveEncoder> mLiveEncoders = null;
   @SerializedName("live_views")
   private Long mLiveViews = null;
+  @SerializedName("overlay_url")
+  private String mOverlayUrl = null;
   @SerializedName("permalink_url")
   private String mPermalinkUrl = null;
   @SerializedName("planned_start_time")
@@ -336,6 +338,10 @@ public class LiveVideo extends APINode {
     return new APIRequestGetErrors(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateInputStream createInputStream() {
+    return new APIRequestCreateInputStream(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetLikes getLikes() {
     return new APIRequestGetLikes(this.getPrefixedId().toString(), context);
   }
@@ -432,6 +438,10 @@ public class LiveVideo extends APINode {
     return mLiveViews;
   }
 
+  public String getFieldOverlayUrl() {
+    return mOverlayUrl;
+  }
+
   public String getFieldPermalinkUrl() {
     return mPermalinkUrl;
   }
@@ -493,6 +503,7 @@ public class LiveVideo extends APINode {
       "address",
       "admin_notes",
       "age_range",
+      "auth_method",
       "birthday",
       "can_review_measurement_request",
       "cover",
@@ -500,7 +511,6 @@ public class LiveVideo extends APINode {
       "devices",
       "education",
       "email",
-      "employee_number",
       "favorite_athletes",
       "favorite_teams",
       "first_name",
@@ -512,9 +522,9 @@ public class LiveVideo extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
+      "is_guest_user",
       "is_shared_login",
       "is_verified",
-      "labels",
       "languages",
       "last_name",
       "link",
@@ -676,6 +686,13 @@ public class LiveVideo extends APINode {
       this.requestField("age_range", value);
       return this;
     }
+    public APIRequestGetBlockedUsers requestAuthMethodField () {
+      return this.requestAuthMethodField(true);
+    }
+    public APIRequestGetBlockedUsers requestAuthMethodField (boolean value) {
+      this.requestField("auth_method", value);
+      return this;
+    }
     public APIRequestGetBlockedUsers requestBirthdayField () {
       return this.requestBirthdayField(true);
     }
@@ -723,13 +740,6 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetBlockedUsers requestEmailField (boolean value) {
       this.requestField("email", value);
-      return this;
-    }
-    public APIRequestGetBlockedUsers requestEmployeeNumberField () {
-      return this.requestEmployeeNumberField(true);
-    }
-    public APIRequestGetBlockedUsers requestEmployeeNumberField (boolean value) {
-      this.requestField("employee_number", value);
       return this;
     }
     public APIRequestGetBlockedUsers requestFavoriteAthletesField () {
@@ -809,6 +819,13 @@ public class LiveVideo extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
+    public APIRequestGetBlockedUsers requestIsGuestUserField () {
+      return this.requestIsGuestUserField(true);
+    }
+    public APIRequestGetBlockedUsers requestIsGuestUserField (boolean value) {
+      this.requestField("is_guest_user", value);
+      return this;
+    }
     public APIRequestGetBlockedUsers requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -821,13 +838,6 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetBlockedUsers requestIsVerifiedField (boolean value) {
       this.requestField("is_verified", value);
-      return this;
-    }
-    public APIRequestGetBlockedUsers requestLabelsField () {
-      return this.requestLabelsField(true);
-    }
-    public APIRequestGetBlockedUsers requestLabelsField (boolean value) {
-      this.requestField("labels", value);
       return this;
     }
     public APIRequestGetBlockedUsers requestLanguagesField () {
@@ -1085,6 +1095,7 @@ public class LiveVideo extends APINode {
       "can_hide",
       "can_like",
       "can_remove",
+      "can_reply_privately",
       "comment_count",
       "created_time",
       "from",
@@ -1098,6 +1109,7 @@ public class LiveVideo extends APINode {
       "object",
       "parent",
       "permalink_url",
+      "private_reply_conversation",
       "user_likes",
     };
 
@@ -1271,6 +1283,13 @@ public class LiveVideo extends APINode {
       this.requestField("can_remove", value);
       return this;
     }
+    public APIRequestGetComments requestCanReplyPrivatelyField () {
+      return this.requestCanReplyPrivatelyField(true);
+    }
+    public APIRequestGetComments requestCanReplyPrivatelyField (boolean value) {
+      this.requestField("can_reply_privately", value);
+      return this;
+    }
     public APIRequestGetComments requestCommentCountField () {
       return this.requestCommentCountField(true);
     }
@@ -1362,6 +1381,13 @@ public class LiveVideo extends APINode {
       this.requestField("permalink_url", value);
       return this;
     }
+    public APIRequestGetComments requestPrivateReplyConversationField () {
+      return this.requestPrivateReplyConversationField(true);
+    }
+    public APIRequestGetComments requestPrivateReplyConversationField (boolean value) {
+      this.requestField("private_reply_conversation", value);
+      return this;
+    }
     public APIRequestGetComments requestUserLikesField () {
       return this.requestUserLikesField(true);
     }
@@ -1407,7 +1433,6 @@ public class LiveVideo extends APINode {
       "company_overview",
       "connected_instagram_account",
       "contact_address",
-      "copyright_attribution_insights",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -1454,8 +1479,6 @@ public class LiveVideo extends APINode {
       "is_webhooks_subscribed",
       "keywords",
       "leadgen_form_preview_details",
-      "leadgen_has_crm_integration",
-      "leadgen_has_fat_ping_crm_integration",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -1790,13 +1813,6 @@ public class LiveVideo extends APINode {
       this.requestField("contact_address", value);
       return this;
     }
-    public APIRequestGetCrosspostSharedPages requestCopyrightAttributionInsightsField () {
-      return this.requestCopyrightAttributionInsightsField(true);
-    }
-    public APIRequestGetCrosspostSharedPages requestCopyrightAttributionInsightsField (boolean value) {
-      this.requestField("copyright_attribution_insights", value);
-      return this;
-    }
     public APIRequestGetCrosspostSharedPages requestCopyrightWhitelistedIgPartnersField () {
       return this.requestCopyrightWhitelistedIgPartnersField(true);
     }
@@ -2117,20 +2133,6 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestLeadgenFormPreviewDetailsField (boolean value) {
       this.requestField("leadgen_form_preview_details", value);
-      return this;
-    }
-    public APIRequestGetCrosspostSharedPages requestLeadgenHasCrmIntegrationField () {
-      return this.requestLeadgenHasCrmIntegrationField(true);
-    }
-    public APIRequestGetCrosspostSharedPages requestLeadgenHasCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_crm_integration", value);
-      return this;
-    }
-    public APIRequestGetCrosspostSharedPages requestLeadgenHasFatPingCrmIntegrationField () {
-      return this.requestLeadgenHasFatPingCrmIntegrationField(true);
-    }
-    public APIRequestGetCrosspostSharedPages requestLeadgenHasFatPingCrmIntegrationField (boolean value) {
-      this.requestField("leadgen_has_fat_ping_crm_integration", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestLeadgenTosAcceptanceTimeField () {
@@ -2638,6 +2640,7 @@ public class LiveVideo extends APINode {
       "is_reference_only",
       "live_encoders",
       "live_views",
+      "overlay_url",
       "permalink_url",
       "planned_start_time",
       "seconds_left",
@@ -2849,6 +2852,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetCrosspostedBroadcasts requestLiveViewsField (boolean value) {
       this.requestField("live_views", value);
+      return this;
+    }
+    public APIRequestGetCrosspostedBroadcasts requestOverlayUrlField () {
+      return this.requestOverlayUrlField(true);
+    }
+    public APIRequestGetCrosspostedBroadcasts requestOverlayUrlField (boolean value) {
+      this.requestField("overlay_url", value);
       return this;
     }
     public APIRequestGetCrosspostedBroadcasts requestPermalinkUrlField () {
@@ -3065,6 +3075,110 @@ public class LiveVideo extends APINode {
       this.requestField("id", value);
       return this;
     }
+  }
+
+  public static class APIRequestCreateInputStream extends APIRequest<LiveVideoInputStream> {
+
+    LiveVideoInputStream lastResponse = null;
+    @Override
+    public LiveVideoInputStream getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public LiveVideoInputStream parseResponse(String response, String header) throws APIException {
+      return LiveVideoInputStream.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public LiveVideoInputStream execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public LiveVideoInputStream execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<LiveVideoInputStream> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<LiveVideoInputStream> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, LiveVideoInputStream>() {
+           public LiveVideoInputStream apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateInputStream.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateInputStream(String nodeId, APIContext context) {
+      super(context, nodeId, "/input_streams", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateInputStream setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateInputStream setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateInputStream requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateInputStream requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateInputStream requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateInputStream requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateInputStream requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateInputStream requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetLikes extends APIRequest<Profile> {
@@ -3923,6 +4037,7 @@ public class LiveVideo extends APINode {
       "is_reference_only",
       "live_encoders",
       "live_views",
+      "overlay_url",
       "permalink_url",
       "planned_start_time",
       "seconds_left",
@@ -4141,6 +4256,13 @@ public class LiveVideo extends APINode {
       this.requestField("live_views", value);
       return this;
     }
+    public APIRequestGet requestOverlayUrlField () {
+      return this.requestOverlayUrlField(true);
+    }
+    public APIRequestGet requestOverlayUrlField (boolean value) {
+      this.requestField("overlay_url", value);
+      return this;
+    }
     public APIRequestGet requestPermalinkUrlField () {
       return this.requestPermalinkUrlField(true);
     }
@@ -4229,14 +4351,12 @@ public class LiveVideo extends APINode {
       "ad_break_time_offset",
       "allow_bm_crossposting",
       "attribution_app_id",
-      "attribution_app_metadata",
       "commercial_break_durations",
       "content_tags",
       "crossposting_actions",
       "custom_labels",
       "description",
       "direct_share_status",
-      "disturbing",
       "embeddable",
       "end_live_video",
       "is_audio_only",
@@ -4248,7 +4368,6 @@ public class LiveVideo extends APINode {
       "place",
       "planned_start_time",
       "privacy",
-      "product_items",
       "published",
       "schedule_custom_profile_image",
       "schedule_feed_background_image",
@@ -4385,11 +4504,6 @@ public class LiveVideo extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setAttributionAppMetadata (String attributionAppMetadata) {
-      this.setParam("attribution_app_metadata", attributionAppMetadata);
-      return this;
-    }
-
     public APIRequestUpdate setCommercialBreakDurations (List<Long> commercialBreakDurations) {
       this.setParam("commercial_break_durations", commercialBreakDurations);
       return this;
@@ -4437,15 +4551,6 @@ public class LiveVideo extends APINode {
     }
     public APIRequestUpdate setDirectShareStatus (String directShareStatus) {
       this.setParam("direct_share_status", directShareStatus);
-      return this;
-    }
-
-    public APIRequestUpdate setDisturbing (Boolean disturbing) {
-      this.setParam("disturbing", disturbing);
-      return this;
-    }
-    public APIRequestUpdate setDisturbing (String disturbing) {
-      this.setParam("disturbing", disturbing);
       return this;
     }
 
@@ -4533,15 +4638,6 @@ public class LiveVideo extends APINode {
 
     public APIRequestUpdate setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
-      return this;
-    }
-
-    public APIRequestUpdate setProductItems (List<String> productItems) {
-      this.setParam("product_items", productItems);
-      return this;
-    }
-    public APIRequestUpdate setProductItems (String productItems) {
-      this.setParam("product_items", productItems);
       return this;
     }
 
@@ -4672,7 +4768,7 @@ public class LiveVideo extends APINode {
       VALUE_EQUIRECTANGULAR("EQUIRECTANGULAR"),
       @SerializedName("HALF_EQUIRECTANGULAR")
       VALUE_HALF_EQUIRECTANGULAR("HALF_EQUIRECTANGULAR"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4689,7 +4785,7 @@ public class LiveVideo extends APINode {
   public static enum EnumSpatialAudioFormat {
       @SerializedName("ambiX_4")
       VALUE_AMBIX_4("ambiX_4"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4714,7 +4810,7 @@ public class LiveVideo extends APINode {
       VALUE_SCHEDULED_UNPUBLISHED("SCHEDULED_UNPUBLISHED"),
       @SerializedName("UNPUBLISHED")
       VALUE_UNPUBLISHED("UNPUBLISHED"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4735,7 +4831,7 @@ public class LiveVideo extends APINode {
       VALUE_MONO("MONO"),
       @SerializedName("TOP_BOTTOM")
       VALUE_TOP_BOTTOM("TOP_BOTTOM"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4754,7 +4850,7 @@ public class LiveVideo extends APINode {
       VALUE_AMBIENT("AMBIENT"),
       @SerializedName("REGULAR")
       VALUE_REGULAR("REGULAR"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4787,7 +4883,7 @@ public class LiveVideo extends APINode {
       VALUE_UNPUBLISHED("UNPUBLISHED"),
       @SerializedName("VOD")
       VALUE_VOD("VOD"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4806,7 +4902,7 @@ public class LiveVideo extends APINode {
       VALUE_OWNER("owner"),
       @SerializedName("target")
       VALUE_TARGET("target"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4833,7 +4929,7 @@ public class LiveVideo extends APINode {
       VALUE_SLOW("SLOW"),
       @SerializedName("SUPPORTER")
       VALUE_SUPPORTER("SUPPORTER"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -4878,6 +4974,7 @@ public class LiveVideo extends APINode {
     this.mIsReferenceOnly = instance.mIsReferenceOnly;
     this.mLiveEncoders = instance.mLiveEncoders;
     this.mLiveViews = instance.mLiveViews;
+    this.mOverlayUrl = instance.mOverlayUrl;
     this.mPermalinkUrl = instance.mPermalinkUrl;
     this.mPlannedStartTime = instance.mPlannedStartTime;
     this.mSecondsLeft = instance.mSecondsLeft;

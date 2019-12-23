@@ -308,7 +308,7 @@ public class InstagramInsightsResult extends APINode {
       VALUE_TAPS_FORWARD("taps_forward"),
       @SerializedName("video_views")
       VALUE_VIDEO_VIEWS("video_views"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -333,7 +333,7 @@ public class InstagramInsightsResult extends APINode {
       VALUE_MONTH("month"),
       @SerializedName("week")
       VALUE_WEEK("week"),
-      NULL(null);
+      ;
 
       private String value;
 

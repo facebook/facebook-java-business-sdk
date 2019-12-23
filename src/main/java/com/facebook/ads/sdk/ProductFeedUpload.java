@@ -838,7 +838,7 @@ public class ProductFeedUpload extends APINode {
       VALUE_SERVER_FETCH("Server Fetch"),
       @SerializedName("User initiated server fetch")
       VALUE_USER_INITIATED_SERVER_FETCH("User initiated server fetch"),
-      NULL(null);
+      ;
 
       private String value;
 
