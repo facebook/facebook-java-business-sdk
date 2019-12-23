@@ -7,5 +7,5 @@ dist: trusty
 branches:
   only:
   - master
-
-install: mvn package
+#travis_wait : avoid time out
+install: travis_wait mvn package
