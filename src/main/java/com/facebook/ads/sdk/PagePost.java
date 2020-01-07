@@ -408,6 +408,10 @@ public class PagePost extends APINode {
     return new APIRequestCreateLike(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreatePromotion createPromotion() {
+    return new APIRequestCreatePromotion(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetReactions getReactions() {
     return new APIRequestGetReactions(this.getPrefixedId().toString(), context);
   }
@@ -418,6 +422,14 @@ public class PagePost extends APINode {
 
   public APIRequestGetSponsorTags getSponsorTags() {
     return new APIRequestGetSponsorTags(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestDeleteSubscribed deleteSubscribed() {
+    return new APIRequestDeleteSubscribed(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateSubscribed createSubscribed() {
+    return new APIRequestCreateSubscribed(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetTo getTo() {
@@ -2205,6 +2217,220 @@ public class PagePost extends APINode {
 
   }
 
+  public static class APIRequestCreatePromotion extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "ad_account_id",
+      "ad_conversion_pixel_id",
+      "audience",
+      "audience_id",
+      "bid_amount",
+      "budget",
+      "cta_type",
+      "currency",
+      "flow_id",
+      "placement",
+      "start_time",
+      "stop_time",
+      "targeting",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreatePromotion.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreatePromotion(String nodeId, APIContext context) {
+      super(context, nodeId, "/promotions", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreatePromotion setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePromotion setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreatePromotion setAdAccountId (String adAccountId) {
+      this.setParam("ad_account_id", adAccountId);
+      return this;
+    }
+
+    public APIRequestCreatePromotion setAdConversionPixelId (Long adConversionPixelId) {
+      this.setParam("ad_conversion_pixel_id", adConversionPixelId);
+      return this;
+    }
+    public APIRequestCreatePromotion setAdConversionPixelId (String adConversionPixelId) {
+      this.setParam("ad_conversion_pixel_id", adConversionPixelId);
+      return this;
+    }
+
+    public APIRequestCreatePromotion setAudience (EnumAudience audience) {
+      this.setParam("audience", audience);
+      return this;
+    }
+    public APIRequestCreatePromotion setAudience (String audience) {
+      this.setParam("audience", audience);
+      return this;
+    }
+
+    public APIRequestCreatePromotion setAudienceId (String audienceId) {
+      this.setParam("audience_id", audienceId);
+      return this;
+    }
+
+    public APIRequestCreatePromotion setBidAmount (Long bidAmount) {
+      this.setParam("bid_amount", bidAmount);
+      return this;
+    }
+    public APIRequestCreatePromotion setBidAmount (String bidAmount) {
+      this.setParam("bid_amount", bidAmount);
+      return this;
+    }
+
+    public APIRequestCreatePromotion setBudget (Long budget) {
+      this.setParam("budget", budget);
+      return this;
+    }
+    public APIRequestCreatePromotion setBudget (String budget) {
+      this.setParam("budget", budget);
+      return this;
+    }
+
+    public APIRequestCreatePromotion setCtaType (EnumCtaType ctaType) {
+      this.setParam("cta_type", ctaType);
+      return this;
+    }
+    public APIRequestCreatePromotion setCtaType (String ctaType) {
+      this.setParam("cta_type", ctaType);
+      return this;
+    }
+
+    public APIRequestCreatePromotion setCurrency (String currency) {
+      this.setParam("currency", currency);
+      return this;
+    }
+
+    public APIRequestCreatePromotion setFlowId (String flowId) {
+      this.setParam("flow_id", flowId);
+      return this;
+    }
+
+    public APIRequestCreatePromotion setPlacement (String placement) {
+      this.setParam("placement", placement);
+      return this;
+    }
+
+    public APIRequestCreatePromotion setStartTime (Long startTime) {
+      this.setParam("start_time", startTime);
+      return this;
+    }
+    public APIRequestCreatePromotion setStartTime (String startTime) {
+      this.setParam("start_time", startTime);
+      return this;
+    }
+
+    public APIRequestCreatePromotion setStopTime (Long stopTime) {
+      this.setParam("stop_time", stopTime);
+      return this;
+    }
+    public APIRequestCreatePromotion setStopTime (String stopTime) {
+      this.setParam("stop_time", stopTime);
+      return this;
+    }
+
+    public APIRequestCreatePromotion setTargeting (Targeting targeting) {
+      this.setParam("targeting", targeting);
+      return this;
+    }
+    public APIRequestCreatePromotion setTargeting (String targeting) {
+      this.setParam("targeting", targeting);
+      return this;
+    }
+
+    public APIRequestCreatePromotion requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreatePromotion requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePromotion requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreatePromotion requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePromotion requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePromotion requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetReactions extends APIRequest<Profile> {
 
     APINodeList<Profile> lastResponse = null;
@@ -3035,6 +3261,7 @@ public class PagePost extends APINode {
       "company_overview",
       "connected_instagram_account",
       "contact_address",
+      "context",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -3413,6 +3640,13 @@ public class PagePost extends APINode {
     }
     public APIRequestGetSponsorTags requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestContextField () {
+      return this.requestContextField(true);
+    }
+    public APIRequestGetSponsorTags requestContextField (boolean value) {
+      this.requestField("context", value);
       return this;
     }
     public APIRequestGetSponsorTags requestCopyrightWhitelistedIgPartnersField () {
@@ -4213,6 +4447,214 @@ public class PagePost extends APINode {
       this.requestField("written_by", value);
       return this;
     }
+  }
+
+  public static class APIRequestDeleteSubscribed extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestDeleteSubscribed.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDeleteSubscribed(String nodeId, APIContext context) {
+      super(context, nodeId, "/subscribed", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDeleteSubscribed setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteSubscribed setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDeleteSubscribed requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDeleteSubscribed requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteSubscribed requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDeleteSubscribed requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteSubscribed requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteSubscribed requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateSubscribed extends APIRequest<PagePost> {
+
+    PagePost lastResponse = null;
+    @Override
+    public PagePost getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public PagePost parseResponse(String response, String header) throws APIException {
+      return PagePost.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public PagePost execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public PagePost execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<PagePost> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<PagePost> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, PagePost>() {
+           public PagePost apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateSubscribed.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateSubscribed(String nodeId, APIContext context) {
+      super(context, nodeId, "/subscribed", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateSubscribed setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSubscribed setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateSubscribed requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateSubscribed requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSubscribed requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateSubscribed requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSubscribed requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSubscribed requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetTo extends APIRequest<Profile> {
@@ -5819,6 +6261,178 @@ public class PagePost extends APINode {
       private String value;
 
       private EnumTimelineVisibility(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumAudience {
+      @SerializedName("AUTO_LOOKALIKE")
+      VALUE_AUTO_LOOKALIKE("AUTO_LOOKALIKE"),
+      @SerializedName("AUTO_PAGE_LOOKALIKE")
+      VALUE_AUTO_PAGE_LOOKALIKE("AUTO_PAGE_LOOKALIKE"),
+      @SerializedName("AUTO_TARGETING")
+      VALUE_AUTO_TARGETING("AUTO_TARGETING"),
+      @SerializedName("CREATE_NEW")
+      VALUE_CREATE_NEW("CREATE_NEW"),
+      @SerializedName("CUSTOM_AUDIENCE")
+      VALUE_CUSTOM_AUDIENCE("CUSTOM_AUDIENCE"),
+      @SerializedName("DISTRICT")
+      VALUE_DISTRICT("DISTRICT"),
+      @SerializedName("EVENT_CUSTOM_AUDIENCES")
+      VALUE_EVENT_CUSTOM_AUDIENCES("EVENT_CUSTOM_AUDIENCES"),
+      @SerializedName("EVENT_ENGAGEMENT")
+      VALUE_EVENT_ENGAGEMENT("EVENT_ENGAGEMENT"),
+      @SerializedName("FANS")
+      VALUE_FANS("FANS"),
+      @SerializedName("GROUPER")
+      VALUE_GROUPER("GROUPER"),
+      @SerializedName("HEC_AUDIENCE")
+      VALUE_HEC_AUDIENCE("HEC_AUDIENCE"),
+      @SerializedName("IG_PROMOTED_POST_AUTO")
+      VALUE_IG_PROMOTED_POST_AUTO("IG_PROMOTED_POST_AUTO"),
+      @SerializedName("LOCAL")
+      VALUE_LOCAL("LOCAL"),
+      @SerializedName("LOOKALIKE")
+      VALUE_LOOKALIKE("LOOKALIKE"),
+      @SerializedName("MULT_CUSTOM_AUDIENCES")
+      VALUE_MULT_CUSTOM_AUDIENCES("MULT_CUSTOM_AUDIENCES"),
+      @SerializedName("NCPP")
+      VALUE_NCPP("NCPP"),
+      @SerializedName("SAVED_AUDIENCE")
+      VALUE_SAVED_AUDIENCE("SAVED_AUDIENCE"),
+      @SerializedName("SMART_AUDIENCE")
+      VALUE_SMART_AUDIENCE("SMART_AUDIENCE"),
+      ;
+
+      private String value;
+
+      private EnumAudience(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumCtaType {
+      @SerializedName("ADD_TO_CART")
+      VALUE_ADD_TO_CART("ADD_TO_CART"),
+      @SerializedName("APPLY_NOW")
+      VALUE_APPLY_NOW("APPLY_NOW"),
+      @SerializedName("BOOK_TRAVEL")
+      VALUE_BOOK_TRAVEL("BOOK_TRAVEL"),
+      @SerializedName("BUY")
+      VALUE_BUY("BUY"),
+      @SerializedName("BUY_NOW")
+      VALUE_BUY_NOW("BUY_NOW"),
+      @SerializedName("BUY_TICKETS")
+      VALUE_BUY_TICKETS("BUY_TICKETS"),
+      @SerializedName("CALL")
+      VALUE_CALL("CALL"),
+      @SerializedName("CALL_ME")
+      VALUE_CALL_ME("CALL_ME"),
+      @SerializedName("CONTACT")
+      VALUE_CONTACT("CONTACT"),
+      @SerializedName("CONTACT_US")
+      VALUE_CONTACT_US("CONTACT_US"),
+      @SerializedName("DONATE")
+      VALUE_DONATE("DONATE"),
+      @SerializedName("DONATE_NOW")
+      VALUE_DONATE_NOW("DONATE_NOW"),
+      @SerializedName("DOWNLOAD")
+      VALUE_DOWNLOAD("DOWNLOAD"),
+      @SerializedName("EVENT_RSVP")
+      VALUE_EVENT_RSVP("EVENT_RSVP"),
+      @SerializedName("FIND_A_GROUP")
+      VALUE_FIND_A_GROUP("FIND_A_GROUP"),
+      @SerializedName("FIND_YOUR_GROUPS")
+      VALUE_FIND_YOUR_GROUPS("FIND_YOUR_GROUPS"),
+      @SerializedName("FOLLOW_NEWS_STORYLINE")
+      VALUE_FOLLOW_NEWS_STORYLINE("FOLLOW_NEWS_STORYLINE"),
+      @SerializedName("GET_DIRECTIONS")
+      VALUE_GET_DIRECTIONS("GET_DIRECTIONS"),
+      @SerializedName("GET_OFFER")
+      VALUE_GET_OFFER("GET_OFFER"),
+      @SerializedName("GET_OFFER_VIEW")
+      VALUE_GET_OFFER_VIEW("GET_OFFER_VIEW"),
+      @SerializedName("GET_QUOTE")
+      VALUE_GET_QUOTE("GET_QUOTE"),
+      @SerializedName("GET_SHOWTIMES")
+      VALUE_GET_SHOWTIMES("GET_SHOWTIMES"),
+      @SerializedName("INSTALL_APP")
+      VALUE_INSTALL_APP("INSTALL_APP"),
+      @SerializedName("INSTALL_MOBILE_APP")
+      VALUE_INSTALL_MOBILE_APP("INSTALL_MOBILE_APP"),
+      @SerializedName("LEARN_MORE")
+      VALUE_LEARN_MORE("LEARN_MORE"),
+      @SerializedName("LIKE_PAGE")
+      VALUE_LIKE_PAGE("LIKE_PAGE"),
+      @SerializedName("LISTEN_MUSIC")
+      VALUE_LISTEN_MUSIC("LISTEN_MUSIC"),
+      @SerializedName("LISTEN_NOW")
+      VALUE_LISTEN_NOW("LISTEN_NOW"),
+      @SerializedName("MESSAGE_PAGE")
+      VALUE_MESSAGE_PAGE("MESSAGE_PAGE"),
+      @SerializedName("MOBILE_DOWNLOAD")
+      VALUE_MOBILE_DOWNLOAD("MOBILE_DOWNLOAD"),
+      @SerializedName("MOMENTS")
+      VALUE_MOMENTS("MOMENTS"),
+      @SerializedName("NO_BUTTON")
+      VALUE_NO_BUTTON("NO_BUTTON"),
+      @SerializedName("OPEN_LINK")
+      VALUE_OPEN_LINK("OPEN_LINK"),
+      @SerializedName("ORDER_NOW")
+      VALUE_ORDER_NOW("ORDER_NOW"),
+      @SerializedName("PLAY_GAME")
+      VALUE_PLAY_GAME("PLAY_GAME"),
+      @SerializedName("RECORD_NOW")
+      VALUE_RECORD_NOW("RECORD_NOW"),
+      @SerializedName("SAY_THANKS")
+      VALUE_SAY_THANKS("SAY_THANKS"),
+      @SerializedName("SEE_MORE")
+      VALUE_SEE_MORE("SEE_MORE"),
+      @SerializedName("SELL_NOW")
+      VALUE_SELL_NOW("SELL_NOW"),
+      @SerializedName("SHARE")
+      VALUE_SHARE("SHARE"),
+      @SerializedName("SHOP_NOW")
+      VALUE_SHOP_NOW("SHOP_NOW"),
+      @SerializedName("SIGN_UP")
+      VALUE_SIGN_UP("SIGN_UP"),
+      @SerializedName("SOTTO_SUBSCRIBE")
+      VALUE_SOTTO_SUBSCRIBE("SOTTO_SUBSCRIBE"),
+      @SerializedName("SUBSCRIBE")
+      VALUE_SUBSCRIBE("SUBSCRIBE"),
+      @SerializedName("UPDATE_APP")
+      VALUE_UPDATE_APP("UPDATE_APP"),
+      @SerializedName("USE_APP")
+      VALUE_USE_APP("USE_APP"),
+      @SerializedName("USE_MOBILE_APP")
+      VALUE_USE_MOBILE_APP("USE_MOBILE_APP"),
+      @SerializedName("VIDEO_ANNOTATION")
+      VALUE_VIDEO_ANNOTATION("VIDEO_ANNOTATION"),
+      @SerializedName("VISIT_PAGES_FEED")
+      VALUE_VISIT_PAGES_FEED("VISIT_PAGES_FEED"),
+      @SerializedName("WATCH_MORE")
+      VALUE_WATCH_MORE("WATCH_MORE"),
+      @SerializedName("WATCH_VIDEO")
+      VALUE_WATCH_VIDEO("WATCH_VIDEO"),
+      @SerializedName("WHATSAPP_MESSAGE")
+      VALUE_WHATSAPP_MESSAGE("WHATSAPP_MESSAGE"),
+      @SerializedName("WOODHENGE_SUPPORT")
+      VALUE_WOODHENGE_SUPPORT("WOODHENGE_SUPPORT"),
+      ;
+
+      private String value;
+
+      private EnumCtaType(String value) {
         this.value = value;
       }
 

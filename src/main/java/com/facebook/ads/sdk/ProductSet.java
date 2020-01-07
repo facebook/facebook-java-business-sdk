@@ -280,6 +280,10 @@ public class ProductSet extends APINode {
     return new APIRequestGetAutomotiveModels(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetDaChecks getDaChecks() {
+    return new APIRequestGetDaChecks(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetDestinations getDestinations() {
     return new APIRequestGetDestinations(this.getPrefixedId().toString(), context);
   }
@@ -678,6 +682,168 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetAutomotiveModels requestYearField (boolean value) {
       this.requestField("year", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetDaChecks extends APIRequest<DACheck> {
+
+    APINodeList<DACheck> lastResponse = null;
+    @Override
+    public APINodeList<DACheck> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "checks",
+    };
+
+    public static final String[] FIELDS = {
+      "action_uri",
+      "description",
+      "key",
+      "result",
+      "title",
+      "user_message",
+    };
+
+    @Override
+    public APINodeList<DACheck> parseResponse(String response, String header) throws APIException {
+      return DACheck.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<DACheck> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<DACheck> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<DACheck>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<DACheck>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<DACheck>>() {
+           public APINodeList<DACheck> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetDaChecks.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetDaChecks(String nodeId, APIContext context) {
+      super(context, nodeId, "/da_checks", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetDaChecks setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDaChecks setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetDaChecks setChecks (List<String> checks) {
+      this.setParam("checks", checks);
+      return this;
+    }
+    public APIRequestGetDaChecks setChecks (String checks) {
+      this.setParam("checks", checks);
+      return this;
+    }
+
+    public APIRequestGetDaChecks requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetDaChecks requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDaChecks requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetDaChecks requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDaChecks requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDaChecks requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetDaChecks requestActionUriField () {
+      return this.requestActionUriField(true);
+    }
+    public APIRequestGetDaChecks requestActionUriField (boolean value) {
+      this.requestField("action_uri", value);
+      return this;
+    }
+    public APIRequestGetDaChecks requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetDaChecks requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetDaChecks requestKeyField () {
+      return this.requestKeyField(true);
+    }
+    public APIRequestGetDaChecks requestKeyField (boolean value) {
+      this.requestField("key", value);
+      return this;
+    }
+    public APIRequestGetDaChecks requestResultField () {
+      return this.requestResultField(true);
+    }
+    public APIRequestGetDaChecks requestResultField (boolean value) {
+      this.requestField("result", value);
+      return this;
+    }
+    public APIRequestGetDaChecks requestTitleField () {
+      return this.requestTitleField(true);
+    }
+    public APIRequestGetDaChecks requestTitleField (boolean value) {
+      this.requestField("title", value);
+      return this;
+    }
+    public APIRequestGetDaChecks requestUserMessageField () {
+      return this.requestUserMessageField(true);
+    }
+    public APIRequestGetDaChecks requestUserMessageField (boolean value) {
+      this.requestField("user_message", value);
       return this;
     }
   }

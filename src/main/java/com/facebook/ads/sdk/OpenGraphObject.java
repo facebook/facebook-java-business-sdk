@@ -61,6 +61,8 @@ public class OpenGraphObject extends APINode {
   private Object mApplication = null;
   @SerializedName("audio")
   private List<Object> mAudio = null;
+  @SerializedName("context")
+  private OpenGraphContext mContext = null;
   @SerializedName("created_time")
   private String mCreatedTime = null;
   @SerializedName("description")
@@ -310,8 +312,16 @@ public class OpenGraphObject extends APINode {
     return new APIRequestGetComments(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateComment createComment() {
+    return new APIRequestCreateComment(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetLikes getLikes() {
     return new APIRequestGetLikes(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateLike createLike() {
+    return new APIRequestCreateLike(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetPicture getPicture() {
@@ -326,6 +336,10 @@ public class OpenGraphObject extends APINode {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestUpdate update() {
+    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
+  }
+
 
   public List<Object> getFieldAdmins() {
     return mAdmins;
@@ -337,6 +351,13 @@ public class OpenGraphObject extends APINode {
 
   public List<Object> getFieldAudio() {
     return mAudio;
+  }
+
+  public OpenGraphContext getFieldContext() {
+    if (mContext != null) {
+      mContext.context = getContext();
+    }
+    return mContext;
   }
 
   public String getFieldCreatedTime() {
@@ -737,6 +758,204 @@ public class OpenGraphObject extends APINode {
     }
   }
 
+  public static class APIRequestCreateComment extends APIRequest<Comment> {
+
+    Comment lastResponse = null;
+    @Override
+    public Comment getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "attachment_id",
+      "attachment_share_url",
+      "attachment_url",
+      "comment_privacy_value",
+      "facepile_mentioned_ids",
+      "feedback_source",
+      "is_offline",
+      "message",
+      "nectar_module",
+      "object_id",
+      "parent_comment_id",
+      "text",
+      "tracking",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Comment parseResponse(String response, String header) throws APIException {
+      return Comment.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Comment execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Comment execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Comment> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Comment> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, Comment>() {
+           public Comment apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateComment.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateComment(String nodeId, APIContext context) {
+      super(context, nodeId, "/comments", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateComment setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateComment setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateComment setAttachmentId (String attachmentId) {
+      this.setParam("attachment_id", attachmentId);
+      return this;
+    }
+
+    public APIRequestCreateComment setAttachmentShareUrl (String attachmentShareUrl) {
+      this.setParam("attachment_share_url", attachmentShareUrl);
+      return this;
+    }
+
+    public APIRequestCreateComment setAttachmentUrl (String attachmentUrl) {
+      this.setParam("attachment_url", attachmentUrl);
+      return this;
+    }
+
+    public APIRequestCreateComment setCommentPrivacyValue (Comment.EnumCommentPrivacyValue commentPrivacyValue) {
+      this.setParam("comment_privacy_value", commentPrivacyValue);
+      return this;
+    }
+    public APIRequestCreateComment setCommentPrivacyValue (String commentPrivacyValue) {
+      this.setParam("comment_privacy_value", commentPrivacyValue);
+      return this;
+    }
+
+    public APIRequestCreateComment setFacepileMentionedIds (List<String> facepileMentionedIds) {
+      this.setParam("facepile_mentioned_ids", facepileMentionedIds);
+      return this;
+    }
+    public APIRequestCreateComment setFacepileMentionedIds (String facepileMentionedIds) {
+      this.setParam("facepile_mentioned_ids", facepileMentionedIds);
+      return this;
+    }
+
+    public APIRequestCreateComment setFeedbackSource (String feedbackSource) {
+      this.setParam("feedback_source", feedbackSource);
+      return this;
+    }
+
+    public APIRequestCreateComment setIsOffline (Boolean isOffline) {
+      this.setParam("is_offline", isOffline);
+      return this;
+    }
+    public APIRequestCreateComment setIsOffline (String isOffline) {
+      this.setParam("is_offline", isOffline);
+      return this;
+    }
+
+    public APIRequestCreateComment setMessage (String message) {
+      this.setParam("message", message);
+      return this;
+    }
+
+    public APIRequestCreateComment setNectarModule (String nectarModule) {
+      this.setParam("nectar_module", nectarModule);
+      return this;
+    }
+
+    public APIRequestCreateComment setObjectId (String objectId) {
+      this.setParam("object_id", objectId);
+      return this;
+    }
+
+    public APIRequestCreateComment setParentCommentId (Object parentCommentId) {
+      this.setParam("parent_comment_id", parentCommentId);
+      return this;
+    }
+    public APIRequestCreateComment setParentCommentId (String parentCommentId) {
+      this.setParam("parent_comment_id", parentCommentId);
+      return this;
+    }
+
+    public APIRequestCreateComment setText (String text) {
+      this.setParam("text", text);
+      return this;
+    }
+
+    public APIRequestCreateComment setTracking (String tracking) {
+      this.setParam("tracking", tracking);
+      return this;
+    }
+
+    public APIRequestCreateComment requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateComment requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateComment requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateComment requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateComment requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateComment requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetLikes extends APIRequest<Profile> {
 
     APINodeList<Profile> lastResponse = null;
@@ -927,6 +1146,134 @@ public class OpenGraphObject extends APINode {
       this.requestField("username", value);
       return this;
     }
+  }
+
+  public static class APIRequestCreateLike extends APIRequest<OpenGraphObject> {
+
+    OpenGraphObject lastResponse = null;
+    @Override
+    public OpenGraphObject getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "action",
+      "message",
+      "ref",
+      "url",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public OpenGraphObject parseResponse(String response, String header) throws APIException {
+      return OpenGraphObject.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public OpenGraphObject execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public OpenGraphObject execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<OpenGraphObject> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<OpenGraphObject> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, OpenGraphObject>() {
+           public OpenGraphObject apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateLike.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateLike(String nodeId, APIContext context) {
+      super(context, nodeId, "/likes", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateLike setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateLike setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateLike setAction (String action) {
+      this.setParam("action", action);
+      return this;
+    }
+
+    public APIRequestCreateLike setMessage (String message) {
+      this.setParam("message", message);
+      return this;
+    }
+
+    public APIRequestCreateLike setRef (String ref) {
+      this.setParam("ref", ref);
+      return this;
+    }
+
+    public APIRequestCreateLike setUrl (String url) {
+      this.setParam("url", url);
+      return this;
+    }
+
+    public APIRequestCreateLike requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateLike requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateLike requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateLike requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateLike requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateLike requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetPicture extends APIRequest<ProfilePictureSource> {
@@ -1341,6 +1688,7 @@ public class OpenGraphObject extends APINode {
       "admins",
       "application",
       "audio",
+      "context",
       "created_time",
       "description",
       "determiner",
@@ -1471,6 +1819,13 @@ public class OpenGraphObject extends APINode {
       this.requestField("audio", value);
       return this;
     }
+    public APIRequestGet requestContextField () {
+      return this.requestContextField(true);
+    }
+    public APIRequestGet requestContextField (boolean value) {
+      this.requestField("context", value);
+      return this;
+    }
     public APIRequestGet requestCreatedTimeField () {
       return this.requestCreatedTimeField(true);
     }
@@ -1599,6 +1954,130 @@ public class OpenGraphObject extends APINode {
     }
   }
 
+  public static class APIRequestUpdate extends APIRequest<OpenGraphObject> {
+
+    OpenGraphObject lastResponse = null;
+    @Override
+    public OpenGraphObject getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "locale",
+      "object",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public OpenGraphObject parseResponse(String response, String header) throws APIException {
+      return OpenGraphObject.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public OpenGraphObject execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public OpenGraphObject execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<OpenGraphObject> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<OpenGraphObject> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, OpenGraphObject>() {
+           public OpenGraphObject apply(ResponseWrapper result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestUpdate(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestUpdate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestUpdate setLocale (JsonArray locale) {
+      this.setParam("locale", locale);
+      return this;
+    }
+    public APIRequestUpdate setLocale (String locale) {
+      this.setParam("locale", locale);
+      return this;
+    }
+
+    public APIRequestUpdate setObject (Object object) {
+      this.setParam("object", object);
+      return this;
+    }
+    public APIRequestUpdate setObject (String object) {
+      this.setParam("object", object);
+      return this;
+    }
+
+    public APIRequestUpdate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestUpdate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -1617,6 +2096,7 @@ public class OpenGraphObject extends APINode {
     this.mAdmins = instance.mAdmins;
     this.mApplication = instance.mApplication;
     this.mAudio = instance.mAudio;
+    this.mContext = instance.mContext;
     this.mCreatedTime = instance.mCreatedTime;
     this.mDescription = instance.mDescription;
     this.mDeterminer = instance.mDeterminer;

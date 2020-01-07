@@ -338,6 +338,10 @@ public class LiveVideo extends APINode {
     return new APIRequestGetErrors(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetGameShows getGameShows() {
+    return new APIRequestGetGameShows(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateInputStream createInputStream() {
     return new APIRequestCreateInputStream(this.getPrefixedId().toString(), context);
   }
@@ -506,6 +510,7 @@ public class LiveVideo extends APINode {
       "auth_method",
       "birthday",
       "can_review_measurement_request",
+      "context",
       "cover",
       "currency",
       "devices",
@@ -705,6 +710,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetBlockedUsers requestCanReviewMeasurementRequestField (boolean value) {
       this.requestField("can_review_measurement_request", value);
+      return this;
+    }
+    public APIRequestGetBlockedUsers requestContextField () {
+      return this.requestContextField(true);
+    }
+    public APIRequestGetBlockedUsers requestContextField (boolean value) {
+      this.requestField("context", value);
       return this;
     }
     public APIRequestGetBlockedUsers requestCoverField () {
@@ -1433,6 +1445,7 @@ public class LiveVideo extends APINode {
       "company_overview",
       "connected_instagram_account",
       "contact_address",
+      "context",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -1811,6 +1824,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestContextField () {
+      return this.requestContextField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestContextField (boolean value) {
+      this.requestField("context", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestCopyrightWhitelistedIgPartnersField () {
@@ -3073,6 +3093,150 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetErrors requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetGameShows extends APIRequest<VideoGameShow> {
+
+    APINodeList<VideoGameShow> lastResponse = null;
+    @Override
+    public APINodeList<VideoGameShow> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "end_time",
+      "game_status",
+      "game_type",
+      "id",
+      "start_time",
+    };
+
+    @Override
+    public APINodeList<VideoGameShow> parseResponse(String response, String header) throws APIException {
+      return VideoGameShow.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<VideoGameShow> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<VideoGameShow> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<VideoGameShow>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<VideoGameShow>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<VideoGameShow>>() {
+           public APINodeList<VideoGameShow> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetGameShows.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetGameShows(String nodeId, APIContext context) {
+      super(context, nodeId, "/game_shows", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetGameShows setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetGameShows setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetGameShows requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetGameShows requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetGameShows requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetGameShows requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetGameShows requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetGameShows requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetGameShows requestEndTimeField () {
+      return this.requestEndTimeField(true);
+    }
+    public APIRequestGetGameShows requestEndTimeField (boolean value) {
+      this.requestField("end_time", value);
+      return this;
+    }
+    public APIRequestGetGameShows requestGameStatusField () {
+      return this.requestGameStatusField(true);
+    }
+    public APIRequestGetGameShows requestGameStatusField (boolean value) {
+      this.requestField("game_status", value);
+      return this;
+    }
+    public APIRequestGetGameShows requestGameTypeField () {
+      return this.requestGameTypeField(true);
+    }
+    public APIRequestGetGameShows requestGameTypeField (boolean value) {
+      this.requestField("game_type", value);
+      return this;
+    }
+    public APIRequestGetGameShows requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetGameShows requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetGameShows requestStartTimeField () {
+      return this.requestStartTimeField(true);
+    }
+    public APIRequestGetGameShows requestStartTimeField (boolean value) {
+      this.requestField("start_time", value);
       return this;
     }
   }

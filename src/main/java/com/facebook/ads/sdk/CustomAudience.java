@@ -3292,7 +3292,6 @@ public class CustomAudience extends APINode {
       "rule_aggregation",
       "seed_audience",
       "source",
-      "study_spec",
       "tags",
     };
 
@@ -3591,15 +3590,6 @@ public class CustomAudience extends APINode {
 
     public APIRequestUpdate setSource (String source) {
       this.setParam("source", source);
-      return this;
-    }
-
-    public APIRequestUpdate setStudySpec (Map<String, String> studySpec) {
-      this.setParam("study_spec", studySpec);
-      return this;
-    }
-    public APIRequestUpdate setStudySpec (String studySpec) {
-      this.setParam("study_spec", studySpec);
       return this;
     }
 

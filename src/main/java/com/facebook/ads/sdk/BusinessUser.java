@@ -298,6 +298,10 @@ public class BusinessUser extends APINode {
     return new APIRequestGetAssignedBusinessAssetGroups(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetAssignedMonetizationProperties getAssignedMonetizationProperties() {
+    return new APIRequestGetAssignedMonetizationProperties(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetAssignedPages getAssignedPages() {
     return new APIRequestGetAssignedPages(this.getPrefixedId().toString(), context);
   }
@@ -1086,6 +1090,118 @@ public class BusinessUser extends APINode {
     }
   }
 
+  public static class APIRequestGetAssignedMonetizationProperties extends APIRequest<AdMonetizationProperty> {
+
+    APINodeList<AdMonetizationProperty> lastResponse = null;
+    @Override
+    public APINodeList<AdMonetizationProperty> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "id",
+    };
+
+    @Override
+    public APINodeList<AdMonetizationProperty> parseResponse(String response, String header) throws APIException {
+      return AdMonetizationProperty.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<AdMonetizationProperty> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdMonetizationProperty> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<AdMonetizationProperty>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdMonetizationProperty>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<AdMonetizationProperty>>() {
+           public APINodeList<AdMonetizationProperty> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetAssignedMonetizationProperties.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetAssignedMonetizationProperties(String nodeId, APIContext context) {
+      super(context, nodeId, "/assigned_monetization_properties", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetAssignedMonetizationProperties setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAssignedMonetizationProperties setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetAssignedMonetizationProperties requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetAssignedMonetizationProperties requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAssignedMonetizationProperties requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetAssignedMonetizationProperties requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAssignedMonetizationProperties requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAssignedMonetizationProperties requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetAssignedMonetizationProperties requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetAssignedMonetizationProperties requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetAssignedPages extends APIRequest<Page> {
 
     APINodeList<Page> lastResponse = null;
@@ -1122,6 +1238,7 @@ public class BusinessUser extends APINode {
       "company_overview",
       "connected_instagram_account",
       "contact_address",
+      "context",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -1500,6 +1617,13 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGetAssignedPages requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
+      return this;
+    }
+    public APIRequestGetAssignedPages requestContextField () {
+      return this.requestContextField(true);
+    }
+    public APIRequestGetAssignedPages requestContextField (boolean value) {
+      this.requestField("context", value);
       return this;
     }
     public APIRequestGetAssignedPages requestCopyrightWhitelistedIgPartnersField () {
@@ -2319,6 +2443,7 @@ public class BusinessUser extends APINode {
       "default_image_url",
       "fallback_image_url",
       "feed_count",
+      "flight_catalog_settings",
       "id",
       "name",
       "product_count",
@@ -2455,6 +2580,13 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGetAssignedProductCatalogs requestFeedCountField (boolean value) {
       this.requestField("feed_count", value);
+      return this;
+    }
+    public APIRequestGetAssignedProductCatalogs requestFlightCatalogSettingsField () {
+      return this.requestFlightCatalogSettingsField(true);
+    }
+    public APIRequestGetAssignedProductCatalogs requestFlightCatalogSettingsField (boolean value) {
+      this.requestField("flight_catalog_settings", value);
       return this;
     }
     public APIRequestGetAssignedProductCatalogs requestIdField () {

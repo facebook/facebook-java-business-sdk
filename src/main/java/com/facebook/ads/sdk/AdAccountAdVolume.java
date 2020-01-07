@@ -59,14 +59,8 @@ public class AdAccountAdVolume extends APINode {
   private String mActorId = null;
   @SerializedName("ads_running_or_in_review_count")
   private Long mAdsRunningOrInReviewCount = null;
-  @SerializedName("has_hit_total_live_ads_limit")
-  private Boolean mHasHitTotalLiveAdsLimit = null;
-  @SerializedName("live_ads_quota_left")
-  private Long mLiveAdsQuotaLeft = null;
-  @SerializedName("total_live_ads_in_current_account")
-  private Long mTotalLiveAdsInCurrentAccount = null;
-  @SerializedName("total_live_ads_limit")
-  private Long mTotalLiveAdsLimit = null;
+  @SerializedName("current_account_ads_running_or_in_review_count")
+  private Long mCurrentAccountAdsRunningOrInReviewCount = null;
   protected static Gson gson = null;
 
   public AdAccountAdVolume() {
@@ -236,39 +230,12 @@ public class AdAccountAdVolume extends APINode {
     return this;
   }
 
-  public Boolean getFieldHasHitTotalLiveAdsLimit() {
-    return mHasHitTotalLiveAdsLimit;
+  public Long getFieldCurrentAccountAdsRunningOrInReviewCount() {
+    return mCurrentAccountAdsRunningOrInReviewCount;
   }
 
-  public AdAccountAdVolume setFieldHasHitTotalLiveAdsLimit(Boolean value) {
-    this.mHasHitTotalLiveAdsLimit = value;
-    return this;
-  }
-
-  public Long getFieldLiveAdsQuotaLeft() {
-    return mLiveAdsQuotaLeft;
-  }
-
-  public AdAccountAdVolume setFieldLiveAdsQuotaLeft(Long value) {
-    this.mLiveAdsQuotaLeft = value;
-    return this;
-  }
-
-  public Long getFieldTotalLiveAdsInCurrentAccount() {
-    return mTotalLiveAdsInCurrentAccount;
-  }
-
-  public AdAccountAdVolume setFieldTotalLiveAdsInCurrentAccount(Long value) {
-    this.mTotalLiveAdsInCurrentAccount = value;
-    return this;
-  }
-
-  public Long getFieldTotalLiveAdsLimit() {
-    return mTotalLiveAdsLimit;
-  }
-
-  public AdAccountAdVolume setFieldTotalLiveAdsLimit(Long value) {
-    this.mTotalLiveAdsLimit = value;
+  public AdAccountAdVolume setFieldCurrentAccountAdsRunningOrInReviewCount(Long value) {
+    this.mCurrentAccountAdsRunningOrInReviewCount = value;
     return this;
   }
 
@@ -291,10 +258,7 @@ public class AdAccountAdVolume extends APINode {
   public AdAccountAdVolume copyFrom(AdAccountAdVolume instance) {
     this.mActorId = instance.mActorId;
     this.mAdsRunningOrInReviewCount = instance.mAdsRunningOrInReviewCount;
-    this.mHasHitTotalLiveAdsLimit = instance.mHasHitTotalLiveAdsLimit;
-    this.mLiveAdsQuotaLeft = instance.mLiveAdsQuotaLeft;
-    this.mTotalLiveAdsInCurrentAccount = instance.mTotalLiveAdsInCurrentAccount;
-    this.mTotalLiveAdsLimit = instance.mTotalLiveAdsLimit;
+    this.mCurrentAccountAdsRunningOrInReviewCount = instance.mCurrentAccountAdsRunningOrInReviewCount;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

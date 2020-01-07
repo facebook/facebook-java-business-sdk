@@ -912,6 +912,10 @@ public class BusinessImage extends APINode {
       VALUE_DEVICE_PLATFORM("device_platform"),
       @SerializedName("gender")
       VALUE_GENDER("gender"),
+      @SerializedName("objective")
+      VALUE_OBJECTIVE("objective"),
+      @SerializedName("optimization_goal")
+      VALUE_OPTIMIZATION_GOAL("optimization_goal"),
       @SerializedName("platform_position")
       VALUE_PLATFORM_POSITION("platform_position"),
       @SerializedName("publisher_platform")

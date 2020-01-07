@@ -310,12 +310,20 @@ public class AdsPixel extends APINode {
     return new APIRequestGetAudiences(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateCreateServerToServerKey createCreateServerToServerKey() {
+    return new APIRequestCreateCreateServerToServerKey(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetDaChecks getDaChecks() {
     return new APIRequestGetDaChecks(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateEvent createEvent() {
     return new APIRequestCreateEvent(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateResetServerToServerKey createResetServerToServerKey() {
+    return new APIRequestCreateResetServerToServerKey(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestDeleteSharedAccounts deleteSharedAccounts() {
@@ -1188,6 +1196,110 @@ public class AdsPixel extends APINode {
     }
   }
 
+  public static class APIRequestCreateCreateServerToServerKey extends APIRequest<AdsPixel> {
+
+    AdsPixel lastResponse = null;
+    @Override
+    public AdsPixel getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AdsPixel parseResponse(String response, String header) throws APIException {
+      return AdsPixel.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public AdsPixel execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdsPixel execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdsPixel> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdsPixel> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, AdsPixel>() {
+           public AdsPixel apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateCreateServerToServerKey.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateCreateServerToServerKey(String nodeId, APIContext context) {
+      super(context, nodeId, "/create_server_to_server_keys", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateCreateServerToServerKey setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCreateServerToServerKey setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateCreateServerToServerKey requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateCreateServerToServerKey requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCreateServerToServerKey requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateCreateServerToServerKey requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCreateServerToServerKey requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCreateServerToServerKey requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetDaChecks extends APIRequest<DACheck> {
 
     APINodeList<DACheck> lastResponse = null;
@@ -1474,6 +1586,120 @@ public class AdsPixel extends APINode {
 
     @Override
     public APIRequestCreateEvent requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateResetServerToServerKey extends APIRequest<AdsPixel> {
+
+    AdsPixel lastResponse = null;
+    @Override
+    public AdsPixel getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "type",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AdsPixel parseResponse(String response, String header) throws APIException {
+      return AdsPixel.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public AdsPixel execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdsPixel execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdsPixel> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdsPixel> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, AdsPixel>() {
+           public AdsPixel apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateResetServerToServerKey.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateResetServerToServerKey(String nodeId, APIContext context) {
+      super(context, nodeId, "/reset_server_to_server_key", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateResetServerToServerKey setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateResetServerToServerKey setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateResetServerToServerKey setType (AdsPixel.EnumType type) {
+      this.setParam("type", type);
+      return this;
+    }
+    public APIRequestCreateResetServerToServerKey setType (String type) {
+      this.setParam("type", type);
+      return this;
+    }
+
+    public APIRequestCreateResetServerToServerKey requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateResetServerToServerKey requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateResetServerToServerKey requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateResetServerToServerKey requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateResetServerToServerKey requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateResetServerToServerKey requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -3194,6 +3420,25 @@ public class AdsPixel extends APINode {
       private String value;
 
       private EnumTasks(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumType {
+      @SerializedName("PRIMARY")
+      VALUE_PRIMARY("PRIMARY"),
+      @SerializedName("SECONDARY")
+      VALUE_SECONDARY("SECONDARY"),
+      ;
+
+      private String value;
+
+      private EnumType(String value) {
         this.value = value;
       }
 

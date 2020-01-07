@@ -1332,6 +1332,7 @@ public class BusinessCreativeFolder extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "creative_insight_permissions",
       "description",
       "name",
     };
@@ -1391,6 +1392,15 @@ public class BusinessCreativeFolder extends APINode {
       return this;
     }
 
+
+    public APIRequestUpdate setCreativeInsightPermissions (Map<String, String> creativeInsightPermissions) {
+      this.setParam("creative_insight_permissions", creativeInsightPermissions);
+      return this;
+    }
+    public APIRequestUpdate setCreativeInsightPermissions (String creativeInsightPermissions) {
+      this.setParam("creative_insight_permissions", creativeInsightPermissions);
+      return this;
+    }
 
     public APIRequestUpdate setDescription (String description) {
       this.setParam("description", description);

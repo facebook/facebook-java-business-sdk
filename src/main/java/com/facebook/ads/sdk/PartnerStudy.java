@@ -300,6 +300,10 @@ public class PartnerStudy extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGetPartners getPartners() {
+    return new APIRequestGetPartners(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetSubmitters getSubmitters() {
     return new APIRequestGetSubmitters(this.getPrefixedId().toString(), context);
   }
@@ -386,6 +390,134 @@ public class PartnerStudy extends APINode {
 
 
 
+  public static class APIRequestGetPartners extends APIRequest<AdsDataPartner> {
+
+    APINodeList<AdsDataPartner> lastResponse = null;
+    @Override
+    public APINodeList<AdsDataPartner> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "id",
+      "name",
+      "rev_share_policies",
+    };
+
+    @Override
+    public APINodeList<AdsDataPartner> parseResponse(String response, String header) throws APIException {
+      return AdsDataPartner.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<AdsDataPartner> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdsDataPartner> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<AdsDataPartner>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdsDataPartner>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<AdsDataPartner>>() {
+           public APINodeList<AdsDataPartner> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetPartners.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetPartners(String nodeId, APIContext context) {
+      super(context, nodeId, "/partners", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetPartners setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPartners setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetPartners requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetPartners requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPartners requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetPartners requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPartners requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPartners requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetPartners requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetPartners requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetPartners requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetPartners requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetPartners requestRevSharePoliciesField () {
+      return this.requestRevSharePoliciesField(true);
+    }
+    public APIRequestGetPartners requestRevSharePoliciesField (boolean value) {
+      this.requestField("rev_share_policies", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetSubmitters extends APIRequest<User> {
 
     APINodeList<User> lastResponse = null;
@@ -404,6 +536,7 @@ public class PartnerStudy extends APINode {
       "auth_method",
       "birthday",
       "can_review_measurement_request",
+      "context",
       "cover",
       "currency",
       "devices",
@@ -594,6 +727,13 @@ public class PartnerStudy extends APINode {
     }
     public APIRequestGetSubmitters requestCanReviewMeasurementRequestField (boolean value) {
       this.requestField("can_review_measurement_request", value);
+      return this;
+    }
+    public APIRequestGetSubmitters requestContextField () {
+      return this.requestContextField(true);
+    }
+    public APIRequestGetSubmitters requestContextField (boolean value) {
+      this.requestField("context", value);
       return this;
     }
     public APIRequestGetSubmitters requestCoverField () {

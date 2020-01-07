@@ -278,6 +278,10 @@ public class PageSavedFilter extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestDelete delete() {
+    return new APIRequestDelete(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
@@ -312,6 +316,110 @@ public class PageSavedFilter extends APINode {
   }
 
 
+
+  public static class APIRequestDelete extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDelete(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDelete setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDelete requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDelete requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
 
   public static class APIRequestGet extends APIRequest<PageSavedFilter> {
 
@@ -471,6 +579,249 @@ public class PageSavedFilter extends APINode {
       this.requestField("time_updated", value);
       return this;
     }
+  }
+
+  public static enum EnumSection {
+      @SerializedName("ACTIVE_FUNDRAISERS")
+      VALUE_ACTIVE_FUNDRAISERS("ACTIVE_FUNDRAISERS"),
+      @SerializedName("ADS_CANVAS")
+      VALUE_ADS_CANVAS("ADS_CANVAS"),
+      @SerializedName("ADS_POSTS")
+      VALUE_ADS_POSTS("ADS_POSTS"),
+      @SerializedName("ALLOWED")
+      VALUE_ALLOWED("ALLOWED"),
+      @SerializedName("ALL_REFERENCE_FILES")
+      VALUE_ALL_REFERENCE_FILES("ALL_REFERENCE_FILES"),
+      @SerializedName("ARCHIVED_EVENTS")
+      VALUE_ARCHIVED_EVENTS("ARCHIVED_EVENTS"),
+      @SerializedName("ATTRIBUTIONS")
+      VALUE_ATTRIBUTIONS("ATTRIBUTIONS"),
+      @SerializedName("AUDIO_RELEASES")
+      VALUE_AUDIO_RELEASES("AUDIO_RELEASES"),
+      @SerializedName("BLOCKED")
+      VALUE_BLOCKED("BLOCKED"),
+      @SerializedName("BRANDED_CONTENT")
+      VALUE_BRANDED_CONTENT("BRANDED_CONTENT"),
+      @SerializedName("BRANDED_CONTENT_CREATOR")
+      VALUE_BRANDED_CONTENT_CREATOR("BRANDED_CONTENT_CREATOR"),
+      @SerializedName("BRANDED_CONTENT_SUSPECTED")
+      VALUE_BRANDED_CONTENT_SUSPECTED("BRANDED_CONTENT_SUSPECTED"),
+      @SerializedName("CANDIDATE_VIDEOS")
+      VALUE_CANDIDATE_VIDEOS("CANDIDATE_VIDEOS"),
+      @SerializedName("CHEX_COMPLETED_ORDERS")
+      VALUE_CHEX_COMPLETED_ORDERS("CHEX_COMPLETED_ORDERS"),
+      @SerializedName("CHEX_PENDING_ORDERS")
+      VALUE_CHEX_PENDING_ORDERS("CHEX_PENDING_ORDERS"),
+      @SerializedName("CLAIMED")
+      VALUE_CLAIMED("CLAIMED"),
+      @SerializedName("COMMERCE_COLLECTIONS")
+      VALUE_COMMERCE_COLLECTIONS("COMMERCE_COLLECTIONS"),
+      @SerializedName("COMMERCE_MERCHANT_SETTINGS")
+      VALUE_COMMERCE_MERCHANT_SETTINGS("COMMERCE_MERCHANT_SETTINGS"),
+      @SerializedName("COMMERCE_PAST_ORDERS")
+      VALUE_COMMERCE_PAST_ORDERS("COMMERCE_PAST_ORDERS"),
+      @SerializedName("COMMERCE_PENDING_ORDERS")
+      VALUE_COMMERCE_PENDING_ORDERS("COMMERCE_PENDING_ORDERS"),
+      @SerializedName("COMMERCE_PLATFORM_SETTINGS")
+      VALUE_COMMERCE_PLATFORM_SETTINGS("COMMERCE_PLATFORM_SETTINGS"),
+      @SerializedName("COMMERCE_PRODUCTS")
+      VALUE_COMMERCE_PRODUCTS("COMMERCE_PRODUCTS"),
+      @SerializedName("COMMERCE_SHOP_LINK")
+      VALUE_COMMERCE_SHOP_LINK("COMMERCE_SHOP_LINK"),
+      @SerializedName("CONTENT_TESTS")
+      VALUE_CONTENT_TESTS("CONTENT_TESTS"),
+      @SerializedName("CREATOR_STUDIO")
+      VALUE_CREATOR_STUDIO("CREATOR_STUDIO"),
+      @SerializedName("CREATOR_STUDIO_ALL_MATCHES")
+      VALUE_CREATOR_STUDIO_ALL_MATCHES("CREATOR_STUDIO_ALL_MATCHES"),
+      @SerializedName("CREATOR_STUDIO_ALL_REFERENCE_FILES")
+      VALUE_CREATOR_STUDIO_ALL_REFERENCE_FILES("CREATOR_STUDIO_ALL_REFERENCE_FILES"),
+      @SerializedName("CREATOR_STUDIO_BLOCKED")
+      VALUE_CREATOR_STUDIO_BLOCKED("CREATOR_STUDIO_BLOCKED"),
+      @SerializedName("CREATOR_STUDIO_COLLECT_AD_EARNINGS")
+      VALUE_CREATOR_STUDIO_COLLECT_AD_EARNINGS("CREATOR_STUDIO_COLLECT_AD_EARNINGS"),
+      @SerializedName("CREATOR_STUDIO_DISPUTES")
+      VALUE_CREATOR_STUDIO_DISPUTES("CREATOR_STUDIO_DISPUTES"),
+      @SerializedName("CREATOR_STUDIO_PUBLISHED_ALL_REFERENCE_FILES")
+      VALUE_CREATOR_STUDIO_PUBLISHED_ALL_REFERENCE_FILES("CREATOR_STUDIO_PUBLISHED_ALL_REFERENCE_FILES"),
+      @SerializedName("CREATOR_STUDIO_PUBLISHED_BLOCKED")
+      VALUE_CREATOR_STUDIO_PUBLISHED_BLOCKED("CREATOR_STUDIO_PUBLISHED_BLOCKED"),
+      @SerializedName("CREATOR_STUDIO_PUBLISHED_DISPUTES")
+      VALUE_CREATOR_STUDIO_PUBLISHED_DISPUTES("CREATOR_STUDIO_PUBLISHED_DISPUTES"),
+      @SerializedName("CREATOR_STUDIO_PUBLISHED_MANUAL_REVIEW")
+      VALUE_CREATOR_STUDIO_PUBLISHED_MANUAL_REVIEW("CREATOR_STUDIO_PUBLISHED_MANUAL_REVIEW"),
+      @SerializedName("CREATOR_STUDIO_PUBLISHED_TRACKED")
+      VALUE_CREATOR_STUDIO_PUBLISHED_TRACKED("CREATOR_STUDIO_PUBLISHED_TRACKED"),
+      @SerializedName("CREATOR_STUDIO_REFERENCE_CONFLICTS")
+      VALUE_CREATOR_STUDIO_REFERENCE_CONFLICTS("CREATOR_STUDIO_REFERENCE_CONFLICTS"),
+      @SerializedName("CREATOR_STUDIO_REFERENCE_POSSIBLE_CONFLICTS")
+      VALUE_CREATOR_STUDIO_REFERENCE_POSSIBLE_CONFLICTS("CREATOR_STUDIO_REFERENCE_POSSIBLE_CONFLICTS"),
+      @SerializedName("CREATOR_STUDIO_REFERENCE_RESOLUTIONS")
+      VALUE_CREATOR_STUDIO_REFERENCE_RESOLUTIONS("CREATOR_STUDIO_REFERENCE_RESOLUTIONS"),
+      @SerializedName("CREATOR_STUDIO_TAKEDOWNS")
+      VALUE_CREATOR_STUDIO_TAKEDOWNS("CREATOR_STUDIO_TAKEDOWNS"),
+      @SerializedName("CREATOR_STUDIO_TAKEDOWN_REQUESTS")
+      VALUE_CREATOR_STUDIO_TAKEDOWN_REQUESTS("CREATOR_STUDIO_TAKEDOWN_REQUESTS"),
+      @SerializedName("CREATOR_STUDIO_TRACKED")
+      VALUE_CREATOR_STUDIO_TRACKED("CREATOR_STUDIO_TRACKED"),
+      @SerializedName("CROSSPOSTED_VIDEOS")
+      VALUE_CROSSPOSTED_VIDEOS("CROSSPOSTED_VIDEOS"),
+      @SerializedName("DISPUTES")
+      VALUE_DISPUTES("DISPUTES"),
+      @SerializedName("DONATIONS_SETTINGS")
+      VALUE_DONATIONS_SETTINGS("DONATIONS_SETTINGS"),
+      @SerializedName("DRAFTS")
+      VALUE_DRAFTS("DRAFTS"),
+      @SerializedName("DRAFT_EVENTS")
+      VALUE_DRAFT_EVENTS("DRAFT_EVENTS"),
+      @SerializedName("DRAFT_FUNDRAISERS")
+      VALUE_DRAFT_FUNDRAISERS("DRAFT_FUNDRAISERS"),
+      @SerializedName("ENDED_FUNDRAISERS")
+      VALUE_ENDED_FUNDRAISERS("ENDED_FUNDRAISERS"),
+      @SerializedName("EXPIRED_POSTS")
+      VALUE_EXPIRED_POSTS("EXPIRED_POSTS"),
+      @SerializedName("EXPIRING_POSTS")
+      VALUE_EXPIRING_POSTS("EXPIRING_POSTS"),
+      @SerializedName("GEM_PRODUCER_DASHBOARD")
+      VALUE_GEM_PRODUCER_DASHBOARD("GEM_PRODUCER_DASHBOARD"),
+      @SerializedName("IA_REGIWALL_SETTINGS")
+      VALUE_IA_REGIWALL_SETTINGS("IA_REGIWALL_SETTINGS"),
+      @SerializedName("INSTANT_ARTICLES")
+      VALUE_INSTANT_ARTICLES("INSTANT_ARTICLES"),
+      @SerializedName("INSTANT_ARTICLES_CTA_MANAGEMENT")
+      VALUE_INSTANT_ARTICLES_CTA_MANAGEMENT("INSTANT_ARTICLES_CTA_MANAGEMENT"),
+      @SerializedName("INSTANT_ARTICLES_DEVELOPMENT")
+      VALUE_INSTANT_ARTICLES_DEVELOPMENT("INSTANT_ARTICLES_DEVELOPMENT"),
+      @SerializedName("INSTANT_ARTICLES_MONETIZATION")
+      VALUE_INSTANT_ARTICLES_MONETIZATION("INSTANT_ARTICLES_MONETIZATION"),
+      @SerializedName("INSTANT_ARTICLES_SAMPLE")
+      VALUE_INSTANT_ARTICLES_SAMPLE("INSTANT_ARTICLES_SAMPLE"),
+      @SerializedName("INSTANT_ARTICLES_SETTINGS")
+      VALUE_INSTANT_ARTICLES_SETTINGS("INSTANT_ARTICLES_SETTINGS"),
+      @SerializedName("INSTANT_ARTICLES_SIGN_UP")
+      VALUE_INSTANT_ARTICLES_SIGN_UP("INSTANT_ARTICLES_SIGN_UP"),
+      @SerializedName("INSTANT_ARTICLES_TRAFFIC_LIFT")
+      VALUE_INSTANT_ARTICLES_TRAFFIC_LIFT("INSTANT_ARTICLES_TRAFFIC_LIFT"),
+      @SerializedName("INVOICES_ACTIVE")
+      VALUE_INVOICES_ACTIVE("INVOICES_ACTIVE"),
+      @SerializedName("INVOICES_HISTORY")
+      VALUE_INVOICES_HISTORY("INVOICES_HISTORY"),
+      @SerializedName("JOB_APPLICATIONS")
+      VALUE_JOB_APPLICATIONS("JOB_APPLICATIONS"),
+      @SerializedName("JOB_POSTS")
+      VALUE_JOB_POSTS("JOB_POSTS"),
+      @SerializedName("LEAD_ADS_CRM_SETUP")
+      VALUE_LEAD_ADS_CRM_SETUP("LEAD_ADS_CRM_SETUP"),
+      @SerializedName("LEAD_ADS_CUSTOM_CRM_SETUP")
+      VALUE_LEAD_ADS_CUSTOM_CRM_SETUP("LEAD_ADS_CUSTOM_CRM_SETUP"),
+      @SerializedName("LEAD_ADS_DRAFT_FORMS")
+      VALUE_LEAD_ADS_DRAFT_FORMS("LEAD_ADS_DRAFT_FORMS"),
+      @SerializedName("LEAD_ADS_FORMS")
+      VALUE_LEAD_ADS_FORMS("LEAD_ADS_FORMS"),
+      @SerializedName("LIVE_BROADCASTS")
+      VALUE_LIVE_BROADCASTS("LIVE_BROADCASTS"),
+      @SerializedName("MANUAL_CLAIMS")
+      VALUE_MANUAL_CLAIMS("MANUAL_CLAIMS"),
+      @SerializedName("MANUAL_CLAIM_FACEBOOK_VIDEOS")
+      VALUE_MANUAL_CLAIM_FACEBOOK_VIDEOS("MANUAL_CLAIM_FACEBOOK_VIDEOS"),
+      @SerializedName("MANUAL_CLAIM_INSTAGRAM_VIDEOS")
+      VALUE_MANUAL_CLAIM_INSTAGRAM_VIDEOS("MANUAL_CLAIM_INSTAGRAM_VIDEOS"),
+      @SerializedName("MANUAL_REVIEW")
+      VALUE_MANUAL_REVIEW("MANUAL_REVIEW"),
+      @SerializedName("MATCH_RULES")
+      VALUE_MATCH_RULES("MATCH_RULES"),
+      @SerializedName("MONETIZED_VIDEOS")
+      VALUE_MONETIZED_VIDEOS("MONETIZED_VIDEOS"),
+      @SerializedName("NEWS_SUBSCRIPTIONS")
+      VALUE_NEWS_SUBSCRIPTIONS("NEWS_SUBSCRIPTIONS"),
+      @SerializedName("NEWS_SUBSCRIPTIONS_PUBLISHER_INSIGHTS")
+      VALUE_NEWS_SUBSCRIPTIONS_PUBLISHER_INSIGHTS("NEWS_SUBSCRIPTIONS_PUBLISHER_INSIGHTS"),
+      @SerializedName("NEWS_SUBSCRIPTIONS_PUBLISHER_TEST_USERS")
+      VALUE_NEWS_SUBSCRIPTIONS_PUBLISHER_TEST_USERS("NEWS_SUBSCRIPTIONS_PUBLISHER_TEST_USERS"),
+      @SerializedName("NEW_MATCHES")
+      VALUE_NEW_MATCHES("NEW_MATCHES"),
+      @SerializedName("PENDING_PROFILE_PICTURE_FRAMES")
+      VALUE_PENDING_PROFILE_PICTURE_FRAMES("PENDING_PROFILE_PICTURE_FRAMES"),
+      @SerializedName("PLAYLISTS")
+      VALUE_PLAYLISTS("PLAYLISTS"),
+      @SerializedName("PLAYLIST_DETAILS")
+      VALUE_PLAYLIST_DETAILS("PLAYLIST_DETAILS"),
+      @SerializedName("POLLS_COMPOSER")
+      VALUE_POLLS_COMPOSER("POLLS_COMPOSER"),
+      @SerializedName("POSTS_CONFIG")
+      VALUE_POSTS_CONFIG("POSTS_CONFIG"),
+      @SerializedName("POST_IDEAS")
+      VALUE_POST_IDEAS("POST_IDEAS"),
+      @SerializedName("PREMIUM_MUSIC_VIDEOS")
+      VALUE_PREMIUM_MUSIC_VIDEOS("PREMIUM_MUSIC_VIDEOS"),
+      @SerializedName("PUBLISHED_EVENTS")
+      VALUE_PUBLISHED_EVENTS("PUBLISHED_EVENTS"),
+      @SerializedName("PUBLISHED_POSTS")
+      VALUE_PUBLISHED_POSTS("PUBLISHED_POSTS"),
+      @SerializedName("PUBLISHED_PROFILE_PICTURE_FRAMES")
+      VALUE_PUBLISHED_PROFILE_PICTURE_FRAMES("PUBLISHED_PROFILE_PICTURE_FRAMES"),
+      @SerializedName("QR_CODE")
+      VALUE_QR_CODE("QR_CODE"),
+      @SerializedName("READY_FUNDRAISERS")
+      VALUE_READY_FUNDRAISERS("READY_FUNDRAISERS"),
+      @SerializedName("REFERENCE_CONFLICTS")
+      VALUE_REFERENCE_CONFLICTS("REFERENCE_CONFLICTS"),
+      @SerializedName("REFERENCE_FILES")
+      VALUE_REFERENCE_FILES("REFERENCE_FILES"),
+      @SerializedName("REFERENCE_POSSIBLE_CONFLICTS")
+      VALUE_REFERENCE_POSSIBLE_CONFLICTS("REFERENCE_POSSIBLE_CONFLICTS"),
+      @SerializedName("REFERENCE_RESOLUTIONS")
+      VALUE_REFERENCE_RESOLUTIONS("REFERENCE_RESOLUTIONS"),
+      @SerializedName("REGISTRATIONS")
+      VALUE_REGISTRATIONS("REGISTRATIONS"),
+      @SerializedName("REPORTED")
+      VALUE_REPORTED("REPORTED"),
+      @SerializedName("REWARD_PROGRAM")
+      VALUE_REWARD_PROGRAM("REWARD_PROGRAM"),
+      @SerializedName("REWARD_PROGRAM_COLLATERAL_MANAGEMENT")
+      VALUE_REWARD_PROGRAM_COLLATERAL_MANAGEMENT("REWARD_PROGRAM_COLLATERAL_MANAGEMENT"),
+      @SerializedName("REWARD_PROGRAM_TRANSACTION_HISTORY")
+      VALUE_REWARD_PROGRAM_TRANSACTION_HISTORY("REWARD_PROGRAM_TRANSACTION_HISTORY"),
+      @SerializedName("SCHEDULED_EVENTS")
+      VALUE_SCHEDULED_EVENTS("SCHEDULED_EVENTS"),
+      @SerializedName("SCHEDULED_POSTS")
+      VALUE_SCHEDULED_POSTS("SCHEDULED_POSTS"),
+      @SerializedName("SEASONS")
+      VALUE_SEASONS("SEASONS"),
+      @SerializedName("SEASON_DETAILS")
+      VALUE_SEASON_DETAILS("SEASON_DETAILS"),
+      @SerializedName("SOUNDS_COLLECTION")
+      VALUE_SOUNDS_COLLECTION("SOUNDS_COLLECTION"),
+      @SerializedName("SOUND_RECORDINGS")
+      VALUE_SOUND_RECORDINGS("SOUND_RECORDINGS"),
+      @SerializedName("STORY_ARCHIVE")
+      VALUE_STORY_ARCHIVE("STORY_ARCHIVE"),
+      @SerializedName("STREAMER_DASHBOARD")
+      VALUE_STREAMER_DASHBOARD("STREAMER_DASHBOARD"),
+      @SerializedName("TAKEDOWNS")
+      VALUE_TAKEDOWNS("TAKEDOWNS"),
+      @SerializedName("TOURS")
+      VALUE_TOURS("TOURS"),
+      @SerializedName("TRACKED")
+      VALUE_TRACKED("TRACKED"),
+      @SerializedName("UNSENT_REPORTS")
+      VALUE_UNSENT_REPORTS("UNSENT_REPORTS"),
+      @SerializedName("VIDEOS")
+      VALUE_VIDEOS("VIDEOS"),
+      @SerializedName("VIDEOS_COPYRIGHT")
+      VALUE_VIDEOS_COPYRIGHT("VIDEOS_COPYRIGHT"),
+      ;
+
+      private String value;
+
+      private EnumSection(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
 

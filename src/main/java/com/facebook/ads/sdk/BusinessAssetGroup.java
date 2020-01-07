@@ -1762,6 +1762,7 @@ public class BusinessAssetGroup extends APINode {
       "company",
       "configured_ios_sso",
       "contact_email",
+      "context",
       "created_time",
       "creator_uid",
       "daily_active_users",
@@ -2143,6 +2144,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedApplications requestContactEmailField (boolean value) {
       this.requestField("contact_email", value);
+      return this;
+    }
+    public APIRequestGetContainedApplications requestContextField () {
+      return this.requestContextField(true);
+    }
+    public APIRequestGetContainedApplications requestContextField (boolean value) {
+      this.requestField("context", value);
       return this;
     }
     public APIRequestGetContainedApplications requestCreatedTimeField () {
@@ -4235,6 +4243,7 @@ public class BusinessAssetGroup extends APINode {
       "company_overview",
       "connected_instagram_account",
       "contact_address",
+      "context",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -4613,6 +4622,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedPages requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
+      return this;
+    }
+    public APIRequestGetContainedPages requestContextField () {
+      return this.requestContextField(true);
+    }
+    public APIRequestGetContainedPages requestContextField (boolean value) {
+      this.requestField("context", value);
       return this;
     }
     public APIRequestGetContainedPages requestCopyrightWhitelistedIgPartnersField () {
@@ -6096,6 +6112,7 @@ public class BusinessAssetGroup extends APINode {
       "default_image_url",
       "fallback_image_url",
       "feed_count",
+      "flight_catalog_settings",
       "id",
       "name",
       "product_count",
@@ -6232,6 +6249,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedProductCatalogs requestFeedCountField (boolean value) {
       this.requestField("feed_count", value);
+      return this;
+    }
+    public APIRequestGetContainedProductCatalogs requestFlightCatalogSettingsField () {
+      return this.requestFlightCatalogSettingsField(true);
+    }
+    public APIRequestGetContainedProductCatalogs requestFlightCatalogSettingsField (boolean value) {
+      this.requestField("flight_catalog_settings", value);
       return this;
     }
     public APIRequestGetContainedProductCatalogs requestIdField () {

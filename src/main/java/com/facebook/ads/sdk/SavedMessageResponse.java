@@ -276,8 +276,20 @@ public class SavedMessageResponse extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGetMacros getMacros() {
+    return new APIRequestGetMacros(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestDelete delete() {
+    return new APIRequestDelete(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestUpdate update() {
+    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
   }
 
 
@@ -306,6 +318,238 @@ public class SavedMessageResponse extends APINode {
   }
 
 
+
+  public static class APIRequestGetMacros extends APIRequest<SavedMessageResponseMacro> {
+
+    APINodeList<SavedMessageResponseMacro> lastResponse = null;
+    @Override
+    public APINodeList<SavedMessageResponseMacro> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "length",
+      "macro",
+      "offset",
+    };
+
+    @Override
+    public APINodeList<SavedMessageResponseMacro> parseResponse(String response, String header) throws APIException {
+      return SavedMessageResponseMacro.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<SavedMessageResponseMacro> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<SavedMessageResponseMacro> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<SavedMessageResponseMacro>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<SavedMessageResponseMacro>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<SavedMessageResponseMacro>>() {
+           public APINodeList<SavedMessageResponseMacro> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetMacros.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetMacros(String nodeId, APIContext context) {
+      super(context, nodeId, "/macros", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetMacros setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMacros setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetMacros requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetMacros requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMacros requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetMacros requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMacros requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMacros requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetMacros requestLengthField () {
+      return this.requestLengthField(true);
+    }
+    public APIRequestGetMacros requestLengthField (boolean value) {
+      this.requestField("length", value);
+      return this;
+    }
+    public APIRequestGetMacros requestMacroField () {
+      return this.requestMacroField(true);
+    }
+    public APIRequestGetMacros requestMacroField (boolean value) {
+      this.requestField("macro", value);
+      return this;
+    }
+    public APIRequestGetMacros requestOffsetField () {
+      return this.requestOffsetField(true);
+    }
+    public APIRequestGetMacros requestOffsetField (boolean value) {
+      this.requestField("offset", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestDelete extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDelete(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDelete setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDelete requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDelete requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
 
   public static class APIRequestGet extends APIRequest<SavedMessageResponse> {
 
@@ -457,6 +701,181 @@ public class SavedMessageResponse extends APINode {
       this.requestField("title", value);
       return this;
     }
+  }
+
+  public static class APIRequestUpdate extends APIRequest<SavedMessageResponse> {
+
+    SavedMessageResponse lastResponse = null;
+    @Override
+    public SavedMessageResponse getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "image",
+      "message",
+      "remove_image",
+      "title",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public SavedMessageResponse parseResponse(String response, String header) throws APIException {
+      return SavedMessageResponse.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public SavedMessageResponse execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public SavedMessageResponse execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<SavedMessageResponse> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<SavedMessageResponse> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, SavedMessageResponse>() {
+           public SavedMessageResponse apply(ResponseWrapper result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestUpdate(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestUpdate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestUpdate setImage (String image) {
+      this.setParam("image", image);
+      return this;
+    }
+
+    public APIRequestUpdate setMessage (String message) {
+      this.setParam("message", message);
+      return this;
+    }
+
+    public APIRequestUpdate setRemoveImage (Boolean removeImage) {
+      this.setParam("remove_image", removeImage);
+      return this;
+    }
+    public APIRequestUpdate setRemoveImage (String removeImage) {
+      this.setParam("remove_image", removeImage);
+      return this;
+    }
+
+    public APIRequestUpdate setTitle (String title) {
+      this.setParam("title", title);
+      return this;
+    }
+
+    public APIRequestUpdate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestUpdate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static enum EnumCategory {
+      @SerializedName("APPOINTMENT_REMINDER")
+      VALUE_APPOINTMENT_REMINDER("APPOINTMENT_REMINDER"),
+      @SerializedName("AWAY_MESSAGE")
+      VALUE_AWAY_MESSAGE("AWAY_MESSAGE"),
+      @SerializedName("FOLLOW_UP")
+      VALUE_FOLLOW_UP("FOLLOW_UP"),
+      @SerializedName("INSTANT_REPLY")
+      VALUE_INSTANT_REPLY("INSTANT_REPLY"),
+      @SerializedName("JOB_APPLICATION")
+      VALUE_JOB_APPLICATION("JOB_APPLICATION"),
+      @SerializedName("MESSENGER_CODE")
+      VALUE_MESSENGER_CODE("MESSENGER_CODE"),
+      @SerializedName("REFERRAL")
+      VALUE_REFERRAL("REFERRAL"),
+      @SerializedName("SMART_REPLY_CONTACT")
+      VALUE_SMART_REPLY_CONTACT("SMART_REPLY_CONTACT"),
+      @SerializedName("SMART_REPLY_HOURS")
+      VALUE_SMART_REPLY_HOURS("SMART_REPLY_HOURS"),
+      @SerializedName("SMART_REPLY_LOCATION")
+      VALUE_SMART_REPLY_LOCATION("SMART_REPLY_LOCATION"),
+      @SerializedName("SMART_REPLY_NEGATIVE_FEEDBACK")
+      VALUE_SMART_REPLY_NEGATIVE_FEEDBACK("SMART_REPLY_NEGATIVE_FEEDBACK"),
+      @SerializedName("SMART_REPLY_POSITIVE_FEEDBACK")
+      VALUE_SMART_REPLY_POSITIVE_FEEDBACK("SMART_REPLY_POSITIVE_FEEDBACK"),
+      @SerializedName("STANDARD")
+      VALUE_STANDARD("STANDARD"),
+      @SerializedName("WELCOME_MESSAGE")
+      VALUE_WELCOME_MESSAGE("WELCOME_MESSAGE"),
+      ;
+
+      private String value;
+
+      private EnumCategory(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
 

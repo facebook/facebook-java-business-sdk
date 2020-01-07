@@ -312,6 +312,10 @@ public class LeadgenForm extends APINode {
     return new APIRequestGetLeads(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateLead createLead() {
+    return new APIRequestCreateLead(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetTestLeads getTestLeads() {
     return new APIRequestGetTestLeads(this.getPrefixedId().toString(), context);
   }
@@ -660,6 +664,128 @@ public class LeadgenForm extends APINode {
       this.requestField("vehicle", value);
       return this;
     }
+  }
+
+  public static class APIRequestCreateLead extends APIRequest<Lead> {
+
+    Lead lastResponse = null;
+    @Override
+    public Lead getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "end_time",
+      "session_id",
+      "start_time",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Lead parseResponse(String response, String header) throws APIException {
+      return Lead.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Lead execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Lead execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Lead> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Lead> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, Lead>() {
+           public Lead apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateLead.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateLead(String nodeId, APIContext context) {
+      super(context, nodeId, "/leads", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateLead setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateLead setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateLead setEndTime (String endTime) {
+      this.setParam("end_time", endTime);
+      return this;
+    }
+
+    public APIRequestCreateLead setSessionId (String sessionId) {
+      this.setParam("session_id", sessionId);
+      return this;
+    }
+
+    public APIRequestCreateLead setStartTime (String startTime) {
+      this.setParam("start_time", startTime);
+      return this;
+    }
+
+    public APIRequestCreateLead requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateLead requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateLead requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateLead requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateLead requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateLead requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetTestLeads extends APIRequest<Lead> {

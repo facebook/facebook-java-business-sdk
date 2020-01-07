@@ -59,12 +59,8 @@ public class WhatsAppBusinessAccount extends APINode {
   private Object mAnalytics = null;
   @SerializedName("currency")
   private String mCurrency = null;
-  @SerializedName("eligible_for_sending_notifications")
-  private Boolean mEligibleForSendingNotifications = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("ineligible_for_sending_notifications_reason")
-  private String mIneligibleForSendingNotificationsReason = null;
   @SerializedName("message_template_namespace")
   private String mMessageTemplateNamespace = null;
   @SerializedName("name")
@@ -319,16 +315,8 @@ public class WhatsAppBusinessAccount extends APINode {
     return mCurrency;
   }
 
-  public Boolean getFieldEligibleForSendingNotifications() {
-    return mEligibleForSendingNotifications;
-  }
-
   public String getFieldId() {
     return mId;
-  }
-
-  public String getFieldIneligibleForSendingNotificationsReason() {
-    return mIneligibleForSendingNotificationsReason;
   }
 
   public String getFieldMessageTemplateNamespace() {
@@ -1014,9 +1002,7 @@ public class WhatsAppBusinessAccount extends APINode {
     public static final String[] FIELDS = {
       "analytics",
       "currency",
-      "eligible_for_sending_notifications",
       "id",
-      "ineligible_for_sending_notifications_reason",
       "message_template_namespace",
       "name",
       "on_behalf_of_business_info",
@@ -1128,25 +1114,11 @@ public class WhatsAppBusinessAccount extends APINode {
       this.requestField("currency", value);
       return this;
     }
-    public APIRequestGet requestEligibleForSendingNotificationsField () {
-      return this.requestEligibleForSendingNotificationsField(true);
-    }
-    public APIRequestGet requestEligibleForSendingNotificationsField (boolean value) {
-      this.requestField("eligible_for_sending_notifications", value);
-      return this;
-    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestIneligibleForSendingNotificationsReasonField () {
-      return this.requestIneligibleForSendingNotificationsReasonField(true);
-    }
-    public APIRequestGet requestIneligibleForSendingNotificationsReasonField (boolean value) {
-      this.requestField("ineligible_for_sending_notifications_reason", value);
       return this;
     }
     public APIRequestGet requestMessageTemplateNamespaceField () {
@@ -1274,9 +1246,7 @@ public class WhatsAppBusinessAccount extends APINode {
   public WhatsAppBusinessAccount copyFrom(WhatsAppBusinessAccount instance) {
     this.mAnalytics = instance.mAnalytics;
     this.mCurrency = instance.mCurrency;
-    this.mEligibleForSendingNotifications = instance.mEligibleForSendingNotifications;
     this.mId = instance.mId;
-    this.mIneligibleForSendingNotificationsReason = instance.mIneligibleForSendingNotificationsReason;
     this.mMessageTemplateNamespace = instance.mMessageTemplateNamespace;
     this.mName = instance.mName;
     this.mOnBehalfOfBusinessInfo = instance.mOnBehalfOfBusinessInfo;

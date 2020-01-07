@@ -563,6 +563,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_CATALOG_BASED_TARGETING("catalog_based_targeting"),
       @SerializedName("cities")
       VALUE_CITIES("cities"),
+      @SerializedName("city_keys")
+      VALUE_CITY_KEYS("city_keys"),
       @SerializedName("college_years")
       VALUE_COLLEGE_YEARS("college_years"),
       @SerializedName("conjunctive_user_adclusters")
@@ -731,6 +733,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_PUBLISHER_PLATFORMS("publisher_platforms"),
       @SerializedName("radius")
       VALUE_RADIUS("radius"),
+      @SerializedName("region_keys")
+      VALUE_REGION_KEYS("region_keys"),
       @SerializedName("regions")
       VALUE_REGIONS("regions"),
       @SerializedName("relationship_statuses")

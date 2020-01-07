@@ -749,6 +749,7 @@ public class EventTour extends APINode {
       "company_overview",
       "connected_instagram_account",
       "contact_address",
+      "context",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
@@ -1127,6 +1128,13 @@ public class EventTour extends APINode {
     }
     public APIRequestGetPages requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
+      return this;
+    }
+    public APIRequestGetPages requestContextField () {
+      return this.requestContextField(true);
+    }
+    public APIRequestGetPages requestContextField (boolean value) {
+      this.requestField("context", value);
       return this;
     }
     public APIRequestGetPages requestCopyrightWhitelistedIgPartnersField () {

@@ -75,6 +75,8 @@ public class Link extends APINode {
   private Boolean mMultiShareOptimized = null;
   @SerializedName("name")
   private String mName = null;
+  @SerializedName("picture")
+  private String mPicture = null;
   @SerializedName("privacy")
   private Privacy mPrivacy = null;
   @SerializedName("via")
@@ -296,8 +298,16 @@ public class Link extends APINode {
     return new APIRequestCreateComment(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestDeleteLikes deleteLikes() {
+    return new APIRequestDeleteLikes(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetLikes getLikes() {
     return new APIRequestGetLikes(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateLike createLike() {
+    return new APIRequestCreateLike(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetReactions getReactions() {
@@ -351,6 +361,10 @@ public class Link extends APINode {
 
   public String getFieldName() {
     return mName;
+  }
+
+  public String getFieldPicture() {
+    return mPicture;
   }
 
   public Privacy getFieldPrivacy() {
@@ -885,6 +899,138 @@ public class Link extends APINode {
 
   }
 
+  public static class APIRequestDeleteLikes extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "feedback_source",
+      "nectar_module",
+      "notify",
+      "tracking",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestDeleteLikes.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDeleteLikes(String nodeId, APIContext context) {
+      super(context, nodeId, "/likes", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDeleteLikes setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteLikes setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDeleteLikes setFeedbackSource (String feedbackSource) {
+      this.setParam("feedback_source", feedbackSource);
+      return this;
+    }
+
+    public APIRequestDeleteLikes setNectarModule (String nectarModule) {
+      this.setParam("nectar_module", nectarModule);
+      return this;
+    }
+
+    public APIRequestDeleteLikes setNotify (Boolean notify) {
+      this.setParam("notify", notify);
+      return this;
+    }
+    public APIRequestDeleteLikes setNotify (String notify) {
+      this.setParam("notify", notify);
+      return this;
+    }
+
+    public APIRequestDeleteLikes setTracking (String tracking) {
+      this.setParam("tracking", tracking);
+      return this;
+    }
+
+    public APIRequestDeleteLikes requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDeleteLikes requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteLikes requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDeleteLikes requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteLikes requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteLikes requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetLikes extends APIRequest<Profile> {
 
     APINodeList<Profile> lastResponse = null;
@@ -1075,6 +1221,138 @@ public class Link extends APINode {
       this.requestField("username", value);
       return this;
     }
+  }
+
+  public static class APIRequestCreateLike extends APIRequest<Link> {
+
+    Link lastResponse = null;
+    @Override
+    public Link getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "feedback_source",
+      "nectar_module",
+      "notify",
+      "tracking",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Link parseResponse(String response, String header) throws APIException {
+      return Link.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Link execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Link execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Link> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Link> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, Link>() {
+           public Link apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateLike.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateLike(String nodeId, APIContext context) {
+      super(context, nodeId, "/likes", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateLike setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateLike setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateLike setFeedbackSource (String feedbackSource) {
+      this.setParam("feedback_source", feedbackSource);
+      return this;
+    }
+
+    public APIRequestCreateLike setNectarModule (String nectarModule) {
+      this.setParam("nectar_module", nectarModule);
+      return this;
+    }
+
+    public APIRequestCreateLike setNotify (Boolean notify) {
+      this.setParam("notify", notify);
+      return this;
+    }
+    public APIRequestCreateLike setNotify (String notify) {
+      this.setParam("notify", notify);
+      return this;
+    }
+
+    public APIRequestCreateLike setTracking (String tracking) {
+      this.setParam("tracking", tracking);
+      return this;
+    }
+
+    public APIRequestCreateLike requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateLike requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateLike requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateLike requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateLike requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateLike requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetReactions extends APIRequest<Profile> {
@@ -1892,6 +2170,7 @@ public class Link extends APINode {
       "message",
       "multi_share_optimized",
       "name",
+      "picture",
       "privacy",
       "via",
     };
@@ -2055,6 +2334,13 @@ public class Link extends APINode {
       this.requestField("name", value);
       return this;
     }
+    public APIRequestGet requestPictureField () {
+      return this.requestPictureField(true);
+    }
+    public APIRequestGet requestPictureField (boolean value) {
+      this.requestField("picture", value);
+      return this;
+    }
     public APIRequestGet requestPrivacyField () {
       return this.requestPrivacyField(true);
     }
@@ -2096,6 +2382,7 @@ public class Link extends APINode {
     this.mMessage = instance.mMessage;
     this.mMultiShareOptimized = instance.mMultiShareOptimized;
     this.mName = instance.mName;
+    this.mPicture = instance.mPicture;
     this.mPrivacy = instance.mPrivacy;
     this.mVia = instance.mVia;
     this.context = instance.context;
