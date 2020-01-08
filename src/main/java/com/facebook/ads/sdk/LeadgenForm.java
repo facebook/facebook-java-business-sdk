@@ -98,7 +98,7 @@ public class LeadgenForm extends APINode {
   @SerializedName("thank_you_page")
   private Object mThankYouPage = null;
   @SerializedName("tracking_parameters")
-  private Map<String, String> mTrackingParameters = null;
+  private List<KeyValue> mTrackingParameters = null;
   protected static Gson gson = null;
 
   LeadgenForm() {
@@ -420,7 +420,7 @@ public class LeadgenForm extends APINode {
     return mThankYouPage;
   }
 
-  public Map<String, String> getFieldTrackingParameters() {
+  public List<KeyValue> getFieldTrackingParameters() {
     return mTrackingParameters;
   }
 
