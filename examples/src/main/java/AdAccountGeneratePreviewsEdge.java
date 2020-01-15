@@ -25,7 +25,7 @@
 import java.io.File;
 import java.util.Arrays;
 
-public class AdAccountAdsPostAdsRedownload {
+public class AdAccountGeneratePreviewsEdge {
   public static void main (String args[]) throws APIException {
 
     String access_token = "<ACCESS_TOKEN>";
@@ -34,15 +34,11 @@ public class AdAccountAdsPostAdsRedownload {
     String id = "<AD_ACCOUNT_ID>";
     APIContext context = new APIContext(access_token).enableDebug(true);
 
-    new AdAccount(id, context).createAd()
-      .setName("My AdGroup with Redownload")
-      .setAdsetId(<adSetID>L)
+    new AdAccount(id, context).getGeneratePreviews()
       .setCreative(
           new AdCreative()
-            .setFieldId("<adCreativeID>")
         )
-      .setParam("redownload", "1")
-      .setStatus(Ad.EnumStatus.VALUE_PAUSED)
+      .setAdFormat(AdPreview.EnumAdFormat.VALUE_DESKTOP_FEED_STANDARD)
       .execute();
 
   }

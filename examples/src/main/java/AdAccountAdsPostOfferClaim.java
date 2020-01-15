@@ -25,7 +25,7 @@
 import java.io.File;
 import java.util.Arrays;
 
-public class AdAccountAdsPostTrackingPostEngagement {
+public class AdAccountAdsPostOfferClaim {
   public static void main (String args[]) throws APIException {
 
     String access_token = "<ACCESS_TOKEN>";
@@ -35,13 +35,23 @@ public class AdAccountAdsPostTrackingPostEngagement {
     APIContext context = new APIContext(access_token).enableDebug(true);
 
     new AdAccount(id, context).createAd()
-      .setName("My First Ad")
-      .setAdsetId(<adSetID>L)
+      .setName("My New Offers Ad")
+      .setAdsetId("<adSetID>")
       .setCreative(
           new AdCreative()
-            .setFieldId("<adCreativeID>")
+            .setFieldObjectStorySpec(
+              new AdCreativeObjectStorySpec()
+                .setFieldLinkData(
+                  new AdCreativeLinkData()
+                    .setFieldImageHash("<imageHash>")
+                    .setFieldLink("https://www.facebook.com/")
+                    .setFieldMessage("Great Deal")
+                    .setFieldName("30% off")
+                    .setFieldOfferId("<offerID>")
+                )
+                .setFieldPageId("<pageID>")
+            )
         )
-      .setTrackingSpecs("{\"action.type\":\"post_engagement\",\"post\":\"<postID>\",\"page\":\"<pageID>\"}")
       .setStatus(Ad.EnumStatus.VALUE_PAUSED)
       .execute();
 

@@ -25,18 +25,24 @@
 import java.io.File;
 import java.util.Arrays;
 
-public class AdsPixelSharedAccountsPost {
+public class AdAccountAdsPostAdsRedownload {
   public static void main (String args[]) throws APIException {
 
     String access_token = "<ACCESS_TOKEN>";
     String app_secret = "<APP_SECRET>";
     String app_id = "<APP_ID>";
-    String id = "<PIXEL_ID>";
+    String id = "<AD_ACCOUNT_ID>";
     APIContext context = new APIContext(access_token).enableDebug(true);
 
-    new AdsPixel(id, context).createShareDAccount()
-      .setAccountId("<adAccountID>")
-      .setBusiness("<businessID>")
+    new AdAccount(id, context).createAd()
+      .setName("My AdGroup with Redownload")
+      .setAdsetId("<adSetID>")
+      .setCreative(
+          new AdCreative()
+            .setFieldId("<adCreativeID>")
+        )
+      .setParam("redownload", "1")
+      .setStatus(Ad.EnumStatus.VALUE_PAUSED)
       .execute();
 
   }

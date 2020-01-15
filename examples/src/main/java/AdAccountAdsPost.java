@@ -25,7 +25,7 @@
 import java.io.File;
 import java.util.Arrays;
 
-public class AdAccountAdsPostOfferClaim {
+public class AdAccountAdsPost {
   public static void main (String args[]) throws APIException {
 
     String access_token = "<ACCESS_TOKEN>";
@@ -35,22 +35,11 @@ public class AdAccountAdsPostOfferClaim {
     APIContext context = new APIContext(access_token).enableDebug(true);
 
     new AdAccount(id, context).createAd()
-      .setName("My New Offers Ad")
-      .setAdsetId(<adSetID>L)
+      .setName("My Ad")
+      .setAdsetId("<adSetID>")
       .setCreative(
           new AdCreative()
-            .setFieldObjectStorySpec(
-              new AdCreativeObjectStorySpec()
-                .setFieldLinkData(
-                  new AdCreativeLinkData()
-                    .setFieldImageHash("<imageHash>")
-                    .setFieldLink("https://www.facebook.com/")
-                    .setFieldMessage("Great Deal")
-                    .setFieldName("30% off")
-                    .setFieldOfferId("<offerID>")
-                )
-                .setFieldPageId("<pageID>")
-            )
+            .setFieldId("<adCreativeID>")
         )
       .setStatus(Ad.EnumStatus.VALUE_PAUSED)
       .execute();

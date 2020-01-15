@@ -25,7 +25,7 @@
 import java.io.File;
 import java.util.Arrays;
 
-public class AdAccountAdSetsPostCreateAdSet {
+public class AdAccountAdSetsPostDemographicTargeting {
   public static void main (String args[]) throws APIException {
 
     String access_token = "<ACCESS_TOKEN>";
@@ -36,22 +36,22 @@ public class AdAccountAdSetsPostCreateAdSet {
 
     new AdAccount(id, context).createAdSet()
       .setName("My First AdSet")
-      .setLifetimeBudget(20000L)
-      .setStartTime("2019-12-12T23:41:41-0800")
-      .setEndTime("2019-12-19T23:41:41-0800")
-      .setCampaignId("<adCampaignLinkClicksID>")
-      .setBidAmount(500L)
+      .setDailyBudget(10000L)
+      .setBidAmount(300L)
       .setBillingEvent(AdSet.EnumBillingEvent.VALUE_IMPRESSIONS)
-      .setOptimizationGoal(AdSet.EnumOptimizationGoal.VALUE_POST_ENGAGEMENT)
+      .setOptimizationGoal(AdSet.EnumOptimizationGoal.VALUE_REACH)
+      .setCampaignId("<adCampaignLinkClicksID>")
+      .setPromotedObject("{\"page_id\":\"<pageID>\"}")
       .setTargeting(
           new Targeting()
             .setFieldAgeMax(24L)
             .setFieldAgeMin(20L)
             .setFieldBehaviors(Arrays.asList(
               new IDName()
-                .setFieldId(6002714895372L)
+                .setFieldId("6002714895372")
                 .setFieldName("All travelers")
             ))
+            .setFieldDevicePlatforms(Arrays.asList(Targeting.EnumDevicePlatforms.VALUE_MOBILE))
             .setFieldFacebookPositions(Arrays.asList("feed"))
             .setFieldGenders(Arrays.asList(1L))
             .setFieldGeoLocations(
@@ -75,7 +75,7 @@ public class AdAccountAdSetsPostCreateAdSet {
             ))
             .setFieldLifeEvents(Arrays.asList(
               new IDName()
-                .setFieldId(6002714398172L)
+                .setFieldId("6002714398172")
                 .setFieldName("Newlywed (1 year)")
             ))
             .setFieldPublisherPlatforms(Arrays.asList("facebook", "audience_network"))

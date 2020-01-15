@@ -18,33 +18,31 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
- *
  */
+package com.facebook.ads.sdk.samples;
 
-import com.facebook.ads.sdk.APIContext;
+import com.facebook.ads.sdk.APIException;
 import com.facebook.ads.sdk.AdAccount;
 import com.facebook.ads.sdk.Campaign;
-import com.facebook.ads.sdk.APIException;
+
+import static com.facebook.ads.sdk.samples.ExampleConfig.ACCOUNT_ID;
+import static com.facebook.ads.sdk.samples.ExampleConfig.CONTEXT;
 
 public class QuickStartExample {
 
-  public static final String ACCESS_TOKEN = ExampleConfig.ACCESS_TOKEN;
-  public static final Long ACCOUNT_ID = ExampleConfig.ACCOUNT_ID;
-  public static final String APP_SECRET = ExampleConfig.APP_SECRET;
-  public static final APIContext context = new APIContext(ACCESS_TOKEN, APP_SECRET).enableDebug(true);
-
-  public static void main(String[] args) {
-    try {
-      AdAccount account = new AdAccount(ACCOUNT_ID, context);
-      Campaign campaign = account.createCampaign()
-        .setName("Java SDK Test Campaign")
-        .setObjective(Campaign.EnumObjective.VALUE_LINK_CLICKS)
-        .setSpendCap(10000L)
-        .setStatus(Campaign.EnumStatus.VALUE_PAUSED)
-        .execute();
-      System.out.println(campaign.fetch());
-    } catch (APIException e) {
-      e.printStackTrace();
+    public static void main(String[] args) {
+        try {
+            AdAccount account = new AdAccount(ACCOUNT_ID, CONTEXT);
+            Campaign campaign = account.createCampaign()
+                    .setName("Java SDK Test Campaign")
+                    .setObjective(Campaign.EnumObjective.VALUE_LINK_CLICKS)
+                    .setSpendCap(10000L)
+                    .setStatus(Campaign.EnumStatus.VALUE_PAUSED)
+                    .setSpecialAdCategory(Campaign.EnumSpecialAdCategory.VALUE_NONE)
+                    .execute();
+            System.out.println(campaign.fetch());
+        } catch (APIException e) {
+            e.printStackTrace();
+        }
     }
-  }
 }
