@@ -45,6 +45,9 @@ public class EventRequest {
   @SerializedName("test_event_code")
   private String testEventCode = null;
 
+  @SerializedName("partner_agent")
+  private String partnerAgent = null;
+
   private String pixelId;
   private APIContext context;
 
@@ -66,12 +69,14 @@ public class EventRequest {
    * @param context Api context
    * @param data list of event
    * @param testEventCode code used to verify that your server events are received correctly by
+   * @param partnerAgent A value that represents the platform that is sending the event
    * Facebook
    */
   public EventRequest(String pixelId, APIContext context, List<Event> data,
-      String testEventCode) {
+      String testEventCode, String partnerAgent) {
     this.data = data;
     this.testEventCode = testEventCode;
+    this.partnerAgent = partnerAgent;
     this.pixelId = pixelId;
     this.context = context;
   }
@@ -170,6 +175,35 @@ public class EventRequest {
   }
 
   /**
+   * Sets a value that represents the platform that is sending the event.
+   *
+   * @param partnerAgent a value that represents the platform that is sending the event
+   * @return EventRequest
+   */
+  public EventRequest partnerAgent(String partnerAgent) {
+    this.partnerAgent = partnerAgent;
+    return this;
+  }
+
+  /**
+   * A value that represents the platform that is sending the event.
+   *
+   * @return partnerAgent
+   */
+  public String getPartnerAgent() {
+    return partnerAgent;
+  }
+
+  /**
+   * Set a value that represents the platform that is sending the event.
+   *
+   * @param partnerAgent a value that represents the platform that is sending the event
+   */
+  public void setPartnerAgent(String partnerAgent) {
+    this.partnerAgent = partnerAgent;
+  }
+
+  /**
    * Synchronously send Event to Facebook GraphAPI.
    *
    * @return event response
@@ -228,6 +262,9 @@ public class EventRequest {
     if (getTestEventCode() != null) {
       event.setTestEventCode(getTestEventCode());
     }
+    if (getPartnerAgent() != null) {
+      event.setPartnerAgent(getPartnerAgent());
+    }
     return event;
   }
 
@@ -241,12 +278,13 @@ public class EventRequest {
     }
     EventRequest eventRequest = (EventRequest) o;
     return Objects.equals(this.data, eventRequest.data)
-        && Objects.equals(this.testEventCode, eventRequest.testEventCode);
+        && Objects.equals(this.testEventCode, eventRequest.testEventCode)
+        && Objects.equals(this.partnerAgent, eventRequest.partnerAgent);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(data, testEventCode);
+    return Objects.hash(data, testEventCode, partnerAgent);
   }
 
   @Override
@@ -256,6 +294,7 @@ public class EventRequest {
 
     sb.append("    data: ").append(toIndentedString(data)).append("\n");
     sb.append("    testEventCode: ").append(toIndentedString(testEventCode)).append("\n");
+    sb.append("    partnerAgent: ").append(toIndentedString(partnerAgent)).append("\n");
     sb.append("}");
     return sb.toString();
   }
