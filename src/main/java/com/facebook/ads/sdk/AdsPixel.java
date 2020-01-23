@@ -1471,6 +1471,7 @@ public class AdsPixel extends APINode {
     }
     public static final String[] PARAMS = {
       "data",
+      "partner_agent",
       "test_event_code",
       "trace",
     };
@@ -1537,6 +1538,11 @@ public class AdsPixel extends APINode {
     }
     public APIRequestCreateEvent setData (String data) {
       this.setParam("data", data);
+      return this;
+    }
+
+    public APIRequestCreateEvent setPartnerAgent (String partnerAgent) {
+      this.setParam("partner_agent", partnerAgent);
       return this;
     }
 
