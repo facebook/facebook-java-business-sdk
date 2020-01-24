@@ -46,8 +46,13 @@ public class Sha256StringAdaptor extends TypeAdapter<String> {
         throw new RuntimeException("Error while reading current serializing field's name", ex);
       }
 
-      String normalizedString = ServerSideApiUtil.normalize(input, fieldName);
-      hashedValue = ServerSideApiUtil.hash(normalizedString);
+      if(ServerSideApiUtil.isAlreadyHashed(input)) {
+        hashedValue = input;
+      }
+      else {
+        String normalizedString = ServerSideApiUtil.normalize(input, fieldName);
+        hashedValue = ServerSideApiUtil.hash(normalizedString);
+      }
     }
 
     writer.value(hashedValue);

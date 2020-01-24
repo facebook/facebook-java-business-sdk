@@ -33,13 +33,30 @@
        Pattern.compile(
            "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$");
 
+   private static Pattern SHA256RegEx = Pattern.compile("^[a-zA-Z0-9]{64}");
+   private static Pattern MD5RegEx = Pattern.compile("^[a-zA-Z0-9]{32}");
+
    private static final Set<String> ISO_COUNTRY_LIST = new HashSet<String> (Arrays.asList(Locale.getISOCountries()));
 
    private static final Set<String> ISO_CURRENCY_LIST = ServerSideApiUtil.GetISOCurrencyCodeList();
 
    public static String hash(String input) {
-
      return Hashing.sha256().hashString(input, StandardCharsets.UTF_8).toString();
+   }
+
+
+   /**
+    * Checks whether the input is already hashed with SHA256 or MD5.
+    *
+    * @param input value that need to be validated.
+    * @return bool representing the whether the input is hashed
+    */
+   public static boolean isAlreadyHashed(String input) {
+
+     Matcher md5Matcher = MD5RegEx.matcher(input);
+     Matcher shaMatcher = SHA256RegEx.matcher(input);
+
+     return md5Matcher.matches() || shaMatcher.matches();
    }
 
    /**
