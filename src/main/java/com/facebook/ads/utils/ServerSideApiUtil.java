@@ -121,12 +121,8 @@
 
    private static String validateCountry(String country) {
 
-     if (country.length() != 2 ) {
-       throw new IllegalArgumentException("country: '" + country + "' must be a 2-letter ISO code format");
-     }
-
      if (!ISO_COUNTRY_LIST.contains(country.toUpperCase())) {
-       throw new IllegalArgumentException("country: '" + country + "' is not in the allowed Country list");
+       throw new IllegalArgumentException("Invalid format for country:'" + country + "'. Please follow 2-letter ISO 3166-1 standard for representing country. eg: us");
      }
 
      return country;
@@ -134,12 +130,8 @@
 
    private static String validateCurrency(String currency) {
 
-     if (currency.length() != 3) {
-       throw new IllegalArgumentException("currency: '" + currency + "' must be a 3-letter ISO code format");
-     }
-
      if (!ISO_CURRENCY_LIST.contains(currency)) {
-       throw new IllegalArgumentException("currency: '" + currency + "' is not in the allowed Currency list");
+       throw new IllegalArgumentException("Invalid format for currency:'" + currency + "'. Please follow 3-letter ISO 4217 standard for representing currency. Eg: usd");
      }
 
      return currency;
