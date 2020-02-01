@@ -36,7 +36,7 @@
    private static Pattern SHA256RegEx = Pattern.compile("^[a-zA-Z0-9]{64}");
    private static Pattern MD5RegEx = Pattern.compile("^[a-zA-Z0-9]{32}");
 
-   private static final Set<String> ISO_COUNTRY_LIST = new HashSet<String> (Arrays.asList(Locale.getISOCountries()));
+   private static final Set<String> ISO_COUNTRY_LIST = ServerSideApiUtil.GetISOCountryCodeList();
 
    private static final Set<String> ISO_CURRENCY_LIST = ServerSideApiUtil.GetISOCurrencyCodeList();
 
@@ -71,12 +71,10 @@
        throw new IllegalArgumentException("fieldName is required for normalizing a particular type");
      }
 
+     token = token.trim().toLowerCase();
      String result = token;
 
-     token = token.trim().toLowerCase();
-
-
-       if(ServerSideApiConstants.EMAIL.equals(fieldName)){
+     if(ServerSideApiConstants.EMAIL.equals(fieldName)){
          result = validateEmail(token);
          }
 
@@ -93,7 +91,7 @@
          }
 
        else if(ServerSideApiConstants.COUNTRY.equals(fieldName)) {
-         result = validateCountry(token);
+         result = normalizeCountry(token);
          }
 
        else if(ServerSideApiConstants.STATE.equals(fieldName)) {
@@ -101,7 +99,7 @@
          }
 
        else if(ServerSideApiConstants.CURRENCY.equals(fieldName)) {
-         result = validateCurrency(token);
+         result = normalizeCurrency(token);
          }
 
      return result;
@@ -119,16 +117,22 @@
      return city;
    }
 
-   private static String validateCountry(String country) {
+   private static String normalizeCountry(String country) {
 
-     if (!ISO_COUNTRY_LIST.contains(country.toUpperCase())) {
+     // Retain only alpha characters bounded for ISO country code.
+     country = country.replaceAll("[^a-z]", "");
+
+     if (!ISO_COUNTRY_LIST.contains(country)) {
        throw new IllegalArgumentException("Invalid format for country:'" + country + "'. Please follow 2-letter ISO 3166-1 standard for representing country. eg: us");
      }
 
      return country;
    }
 
-   private static String validateCurrency(String currency) {
+   private static String normalizeCurrency(String currency) {
+
+     // Retain only alpha characters bounded for ISO currency code.
+     currency = currency.replaceAll("[^a-z]", "");
 
      if (!ISO_CURRENCY_LIST.contains(currency)) {
        throw new IllegalArgumentException("Invalid format for currency:'" + currency + "'. Please follow 3-letter ISO 4217 standard for representing currency. Eg: usd");
@@ -140,7 +144,11 @@
    private static String normalizePhoneNumber(String phoneNumber) {
 
      // Replace white spaces and hyphens
-     phoneNumber = phoneNumber.replaceAll("[\\-\\s]+", "");
+     phoneNumber = phoneNumber.replaceAll("[\\-\\s\\(\\)]+", "");
+
+     if(phoneNumber.length() < 6 || phoneNumber.length() > 15){
+       throw  new IllegalArgumentException("Invalid phone number format for the passed phone number:" + phoneNumber + ". Please check the passed phone number format.");
+     }
 
      return phoneNumber;
    }
@@ -148,7 +156,7 @@
    private static String validateEmail(String email) {
 
      if (!isValidEmail(email)) {
-       throw new IllegalArgumentException("Email should be a valid");
+      throw new IllegalArgumentException("Invalid email format for the passed email:" + email + ". Please check the passed email format.");
      }
 
      return email;
@@ -156,8 +164,16 @@
 
    private static String normalizePostalCode(String postalCode) {
 
+     // Remove space characters in the Zip Code
+     postalCode = postalCode.replaceAll("[\\s]+", "");
+
      // If the code has more than one part, retain the first part.
      postalCode = postalCode.split("-")[0];
+
+     if (postalCode.length() < 2) {
+       throw new IllegalArgumentException("Invalid postalcode format for the passed postalCode:" + postalCode + ". Please check the passed postalcode.");
+     }
+
      return postalCode;
    }
 
@@ -169,6 +185,11 @@
      return state;
    }
 
+   /**
+    * Validate email against RFC822 format
+    * @param email string representing an email
+    * @return the bool if the email is in valid format.
+    */
    private static boolean isValidEmail(String email) {
      Matcher m = emailPattern.matcher(email);
      return m.matches();
@@ -183,5 +204,16 @@
      }
 
      return currencyCodeList;
+   }
+
+   private static HashSet<String> GetISOCountryCodeList(){
+
+     List<String> availableCountries = Arrays.asList(Locale.getISOCountries());
+     HashSet<String> countryCodeList = new HashSet<String>();
+     for(String country: availableCountries){
+       countryCodeList.add(country.toLowerCase());
+     }
+
+     return countryCodeList;
    }
  }
