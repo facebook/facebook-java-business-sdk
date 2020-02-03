@@ -285,23 +285,6 @@ public class InsightsResult extends APINode {
 
 
 
-  public static enum EnumMetric {
-      @SerializedName("messages_sent")
-      VALUE_MESSAGES_SENT("messages_sent"),
-      ;
-
-      private String value;
-
-      private EnumMetric(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
   public static enum EnumDatePreset {
       @SerializedName("last_14d")
       VALUE_LAST_14D("last_14d"),

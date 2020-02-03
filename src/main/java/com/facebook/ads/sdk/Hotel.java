@@ -57,10 +57,10 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class Hotel extends APINode {
   @SerializedName("address")
   private String mAddress = null;
-  @SerializedName("applinks")
-  private AppLinks mApplinks = null;
   @SerializedName("brand")
   private String mBrand = null;
+  @SerializedName("category")
+  private String mCategory = null;
   @SerializedName("currency")
   private String mCurrency = null;
   @SerializedName("description")
@@ -304,10 +304,6 @@ public class Hotel extends APINode {
     return new APIRequestGetHotelRooms(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateHotelRoom createHotelRoom() {
-    return new APIRequestCreateHotelRoom(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestDelete delete() {
     return new APIRequestDelete(this.getPrefixedId().toString(), context);
   }
@@ -325,15 +321,12 @@ public class Hotel extends APINode {
     return mAddress;
   }
 
-  public AppLinks getFieldApplinks() {
-    if (mApplinks != null) {
-      mApplinks.context = getContext();
-    }
-    return mApplinks;
-  }
-
   public String getFieldBrand() {
     return mBrand;
+  }
+
+  public String getFieldCategory() {
+    return mCategory;
   }
 
   public String getFieldCurrency() {
@@ -409,7 +402,6 @@ public class Hotel extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "applinks",
       "base_price",
       "currency",
       "description",
@@ -511,13 +503,6 @@ public class Hotel extends APINode {
       return this;
     }
 
-    public APIRequestGetHotelRooms requestApplinksField () {
-      return this.requestApplinksField(true);
-    }
-    public APIRequestGetHotelRooms requestApplinksField (boolean value) {
-      this.requestField("applinks", value);
-      return this;
-    }
     public APIRequestGetHotelRooms requestBasePriceField () {
       return this.requestBasePriceField(true);
     }
@@ -588,200 +573,6 @@ public class Hotel extends APINode {
       this.requestField("url", value);
       return this;
     }
-  }
-
-  public static class APIRequestCreateHotelRoom extends APIRequest<HotelRoom> {
-
-    HotelRoom lastResponse = null;
-    @Override
-    public HotelRoom getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "applinks",
-      "base_price",
-      "currency",
-      "description",
-      "images",
-      "margin_level",
-      "name",
-      "pricing_variables",
-      "room_id",
-      "sale_price",
-      "url",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public HotelRoom parseResponse(String response, String header) throws APIException {
-      return HotelRoom.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public HotelRoom execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public HotelRoom execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<HotelRoom> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<HotelRoom> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, HotelRoom>() {
-           public HotelRoom apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateHotelRoom.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateHotelRoom(String nodeId, APIContext context) {
-      super(context, nodeId, "/hotel_rooms", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateHotelRoom setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateHotelRoom setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateHotelRoom setApplinks (Object applinks) {
-      this.setParam("applinks", applinks);
-      return this;
-    }
-    public APIRequestCreateHotelRoom setApplinks (String applinks) {
-      this.setParam("applinks", applinks);
-      return this;
-    }
-
-    public APIRequestCreateHotelRoom setBasePrice (Double basePrice) {
-      this.setParam("base_price", basePrice);
-      return this;
-    }
-    public APIRequestCreateHotelRoom setBasePrice (String basePrice) {
-      this.setParam("base_price", basePrice);
-      return this;
-    }
-
-    public APIRequestCreateHotelRoom setCurrency (String currency) {
-      this.setParam("currency", currency);
-      return this;
-    }
-
-    public APIRequestCreateHotelRoom setDescription (String description) {
-      this.setParam("description", description);
-      return this;
-    }
-
-    public APIRequestCreateHotelRoom setImages (List<Object> images) {
-      this.setParam("images", images);
-      return this;
-    }
-    public APIRequestCreateHotelRoom setImages (String images) {
-      this.setParam("images", images);
-      return this;
-    }
-
-    public APIRequestCreateHotelRoom setMarginLevel (Long marginLevel) {
-      this.setParam("margin_level", marginLevel);
-      return this;
-    }
-    public APIRequestCreateHotelRoom setMarginLevel (String marginLevel) {
-      this.setParam("margin_level", marginLevel);
-      return this;
-    }
-
-    public APIRequestCreateHotelRoom setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateHotelRoom setPricingVariables (List<Object> pricingVariables) {
-      this.setParam("pricing_variables", pricingVariables);
-      return this;
-    }
-    public APIRequestCreateHotelRoom setPricingVariables (String pricingVariables) {
-      this.setParam("pricing_variables", pricingVariables);
-      return this;
-    }
-
-    public APIRequestCreateHotelRoom setRoomId (String roomId) {
-      this.setParam("room_id", roomId);
-      return this;
-    }
-
-    public APIRequestCreateHotelRoom setSalePrice (Double salePrice) {
-      this.setParam("sale_price", salePrice);
-      return this;
-    }
-    public APIRequestCreateHotelRoom setSalePrice (String salePrice) {
-      this.setParam("sale_price", salePrice);
-      return this;
-    }
-
-    public APIRequestCreateHotelRoom setUrl (String url) {
-      this.setParam("url", url);
-      return this;
-    }
-
-    public APIRequestCreateHotelRoom requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateHotelRoom requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateHotelRoom requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateHotelRoom requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateHotelRoom requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateHotelRoom requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestDelete extends APIRequest<APINode> {
@@ -900,8 +691,8 @@ public class Hotel extends APINode {
 
     public static final String[] FIELDS = {
       "address",
-      "applinks",
       "brand",
+      "category",
       "currency",
       "description",
       "guest_ratings",
@@ -1015,18 +806,18 @@ public class Hotel extends APINode {
       this.requestField("address", value);
       return this;
     }
-    public APIRequestGet requestApplinksField () {
-      return this.requestApplinksField(true);
-    }
-    public APIRequestGet requestApplinksField (boolean value) {
-      this.requestField("applinks", value);
-      return this;
-    }
     public APIRequestGet requestBrandField () {
       return this.requestBrandField(true);
     }
     public APIRequestGet requestBrandField (boolean value) {
       this.requestField("brand", value);
+      return this;
+    }
+    public APIRequestGet requestCategoryField () {
+      return this.requestCategoryField(true);
+    }
+    public APIRequestGet requestCategoryField (boolean value) {
+      this.requestField("category", value);
       return this;
     }
     public APIRequestGet requestCurrencyField () {
@@ -1352,8 +1143,8 @@ public class Hotel extends APINode {
 
   public Hotel copyFrom(Hotel instance) {
     this.mAddress = instance.mAddress;
-    this.mApplinks = instance.mApplinks;
     this.mBrand = instance.mBrand;
+    this.mCategory = instance.mCategory;
     this.mCurrency = instance.mCurrency;
     this.mDescription = instance.mDescription;
     this.mGuestRatings = instance.mGuestRatings;

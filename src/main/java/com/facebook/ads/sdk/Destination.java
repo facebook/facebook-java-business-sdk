@@ -57,8 +57,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class Destination extends APINode {
   @SerializedName("address")
   private String mAddress = null;
-  @SerializedName("applinks")
-  private AppLinks mApplinks = null;
   @SerializedName("currency")
   private String mCurrency = null;
   @SerializedName("description")
@@ -294,20 +292,9 @@ public class Destination extends APINode {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestUpdate update() {
-    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldAddress() {
     return mAddress;
-  }
-
-  public AppLinks getFieldApplinks() {
-    if (mApplinks != null) {
-      mApplinks.context = getContext();
-    }
-    return mApplinks;
   }
 
   public String getFieldCurrency() {
@@ -368,7 +355,6 @@ public class Destination extends APINode {
 
     public static final String[] FIELDS = {
       "address",
-      "applinks",
       "currency",
       "description",
       "destination_id",
@@ -478,13 +464,6 @@ public class Destination extends APINode {
       this.requestField("address", value);
       return this;
     }
-    public APIRequestGet requestApplinksField () {
-      return this.requestApplinksField(true);
-    }
-    public APIRequestGet requestApplinksField (boolean value) {
-      this.requestField("applinks", value);
-      return this;
-    }
     public APIRequestGet requestCurrencyField () {
       return this.requestCurrencyField(true);
     }
@@ -564,180 +543,6 @@ public class Destination extends APINode {
     }
   }
 
-  public static class APIRequestUpdate extends APIRequest<Destination> {
-
-    Destination lastResponse = null;
-    @Override
-    public Destination getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "address",
-      "currency",
-      "description",
-      "images",
-      "name",
-      "price",
-      "target_radius_in_km",
-      "types",
-      "url",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Destination parseResponse(String response, String header) throws APIException {
-      return Destination.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Destination execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Destination execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Destination> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Destination> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Destination>() {
-           public Destination apply(ResponseWrapper result) {
-             try {
-               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestUpdate(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestUpdate setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestUpdate setAddress (Object address) {
-      this.setParam("address", address);
-      return this;
-    }
-    public APIRequestUpdate setAddress (String address) {
-      this.setParam("address", address);
-      return this;
-    }
-
-    public APIRequestUpdate setCurrency (String currency) {
-      this.setParam("currency", currency);
-      return this;
-    }
-
-    public APIRequestUpdate setDescription (String description) {
-      this.setParam("description", description);
-      return this;
-    }
-
-    public APIRequestUpdate setImages (List<Object> images) {
-      this.setParam("images", images);
-      return this;
-    }
-    public APIRequestUpdate setImages (String images) {
-      this.setParam("images", images);
-      return this;
-    }
-
-    public APIRequestUpdate setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestUpdate setPrice (Long price) {
-      this.setParam("price", price);
-      return this;
-    }
-    public APIRequestUpdate setPrice (String price) {
-      this.setParam("price", price);
-      return this;
-    }
-
-    public APIRequestUpdate setTargetRadiusInKm (Double targetRadiusInKm) {
-      this.setParam("target_radius_in_km", targetRadiusInKm);
-      return this;
-    }
-    public APIRequestUpdate setTargetRadiusInKm (String targetRadiusInKm) {
-      this.setParam("target_radius_in_km", targetRadiusInKm);
-      return this;
-    }
-
-    public APIRequestUpdate setTypes (String types) {
-      this.setParam("types", types);
-      return this;
-    }
-
-    public APIRequestUpdate setUrl (String url) {
-      this.setParam("url", url);
-      return this;
-    }
-
-    public APIRequestUpdate requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestUpdate requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -754,7 +559,6 @@ public class Destination extends APINode {
 
   public Destination copyFrom(Destination instance) {
     this.mAddress = instance.mAddress;
-    this.mApplinks = instance.mApplinks;
     this.mCurrency = instance.mCurrency;
     this.mDescription = instance.mDescription;
     this.mDestinationId = instance.mDestinationId;

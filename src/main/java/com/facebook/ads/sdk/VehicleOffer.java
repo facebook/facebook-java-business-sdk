@@ -63,8 +63,6 @@ public class VehicleOffer extends APINode {
   private String mAmountPrice = null;
   @SerializedName("amount_qualifier")
   private String mAmountQualifier = null;
-  @SerializedName("applinks")
-  private AppLinks mApplinks = null;
   @SerializedName("body_style")
   private String mBodyStyle = null;
   @SerializedName("cashback_currency")
@@ -89,6 +87,10 @@ public class VehicleOffer extends APINode {
   private String mId = null;
   @SerializedName("images")
   private List<String> mImages = null;
+  @SerializedName("make")
+  private String mMake = null;
+  @SerializedName("model")
+  private String mModel = null;
   @SerializedName("offer_description")
   private String mOfferDescription = null;
   @SerializedName("offer_disclaimer")
@@ -347,13 +349,6 @@ public class VehicleOffer extends APINode {
     return mAmountQualifier;
   }
 
-  public AppLinks getFieldApplinks() {
-    if (mApplinks != null) {
-      mApplinks.context = getContext();
-    }
-    return mApplinks;
-  }
-
   public String getFieldBodyStyle() {
     return mBodyStyle;
   }
@@ -400,6 +395,14 @@ public class VehicleOffer extends APINode {
 
   public List<String> getFieldImages() {
     return mImages;
+  }
+
+  public String getFieldMake() {
+    return mMake;
+  }
+
+  public String getFieldModel() {
+    return mModel;
   }
 
   public String getFieldOfferDescription() {
@@ -475,7 +478,6 @@ public class VehicleOffer extends APINode {
       "amount_percentage",
       "amount_price",
       "amount_qualifier",
-      "applinks",
       "body_style",
       "cashback_currency",
       "cashback_price",
@@ -488,6 +490,8 @@ public class VehicleOffer extends APINode {
       "end_time",
       "id",
       "images",
+      "make",
+      "model",
       "offer_description",
       "offer_disclaimer",
       "offer_type",
@@ -621,13 +625,6 @@ public class VehicleOffer extends APINode {
       this.requestField("amount_qualifier", value);
       return this;
     }
-    public APIRequestGet requestApplinksField () {
-      return this.requestApplinksField(true);
-    }
-    public APIRequestGet requestApplinksField (boolean value) {
-      this.requestField("applinks", value);
-      return this;
-    }
     public APIRequestGet requestBodyStyleField () {
       return this.requestBodyStyleField(true);
     }
@@ -710,6 +707,20 @@ public class VehicleOffer extends APINode {
     }
     public APIRequestGet requestImagesField (boolean value) {
       this.requestField("images", value);
+      return this;
+    }
+    public APIRequestGet requestMakeField () {
+      return this.requestMakeField(true);
+    }
+    public APIRequestGet requestMakeField (boolean value) {
+      this.requestField("make", value);
+      return this;
+    }
+    public APIRequestGet requestModelField () {
+      return this.requestModelField(true);
+    }
+    public APIRequestGet requestModelField (boolean value) {
+      this.requestField("model", value);
       return this;
     }
     public APIRequestGet requestOfferDescriptionField () {
@@ -831,7 +842,6 @@ public class VehicleOffer extends APINode {
     this.mAmountPercentage = instance.mAmountPercentage;
     this.mAmountPrice = instance.mAmountPrice;
     this.mAmountQualifier = instance.mAmountQualifier;
-    this.mApplinks = instance.mApplinks;
     this.mBodyStyle = instance.mBodyStyle;
     this.mCashbackCurrency = instance.mCashbackCurrency;
     this.mCashbackPrice = instance.mCashbackPrice;
@@ -844,6 +854,8 @@ public class VehicleOffer extends APINode {
     this.mEndTime = instance.mEndTime;
     this.mId = instance.mId;
     this.mImages = instance.mImages;
+    this.mMake = instance.mMake;
+    this.mModel = instance.mModel;
     this.mOfferDescription = instance.mOfferDescription;
     this.mOfferDisclaimer = instance.mOfferDisclaimer;
     this.mOfferType = instance.mOfferType;

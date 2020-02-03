@@ -55,8 +55,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AutomotiveModel extends APINode {
-  @SerializedName("applinks")
-  private AppLinks mApplinks = null;
   @SerializedName("automotive_model_id")
   private String mAutomotiveModelId = null;
   @SerializedName("availability")
@@ -321,13 +319,6 @@ public class AutomotiveModel extends APINode {
   }
 
 
-  public AppLinks getFieldApplinks() {
-    if (mApplinks != null) {
-      mApplinks.context = getContext();
-    }
-    return mApplinks;
-  }
-
   public String getFieldAutomotiveModelId() {
     return mAutomotiveModelId;
   }
@@ -441,7 +432,6 @@ public class AutomotiveModel extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "applinks",
       "automotive_model_id",
       "availability",
       "body_style",
@@ -558,13 +548,6 @@ public class AutomotiveModel extends APINode {
       return this;
     }
 
-    public APIRequestGet requestApplinksField () {
-      return this.requestApplinksField(true);
-    }
-    public APIRequestGet requestApplinksField (boolean value) {
-      this.requestField("applinks", value);
-      return this;
-    }
     public APIRequestGet requestAutomotiveModelIdField () {
       return this.requestAutomotiveModelIdField(true);
     }
@@ -757,7 +740,6 @@ public class AutomotiveModel extends APINode {
   }
 
   public AutomotiveModel copyFrom(AutomotiveModel instance) {
-    this.mApplinks = instance.mApplinks;
     this.mAutomotiveModelId = instance.mAutomotiveModelId;
     this.mAvailability = instance.mAvailability;
     this.mBodyStyle = instance.mBodyStyle;

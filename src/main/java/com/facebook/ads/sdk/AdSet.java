@@ -2441,7 +2441,6 @@ public class AdSet extends APINode {
       "ad_draft_id",
       "date_preset",
       "effective_status",
-      "include_deleted",
       "include_drafts",
       "time_range",
       "updated_since",
@@ -2557,15 +2556,6 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAds setEffectiveStatus (String effectiveStatus) {
       this.setParam("effective_status", effectiveStatus);
-      return this;
-    }
-
-    public APIRequestGetAds setIncludeDeleted (Boolean includeDeleted) {
-      this.setParam("include_deleted", includeDeleted);
-      return this;
-    }
-    public APIRequestGetAds setIncludeDeleted (String includeDeleted) {
-      this.setParam("include_deleted", includeDeleted);
       return this;
     }
 
@@ -6000,8 +5990,6 @@ public class AdSet extends APINode {
       VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
       @SerializedName("THRUPLAY")
       VALUE_THRUPLAY("THRUPLAY"),
-      @SerializedName("VIDEO_VIEWS")
-      VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
       ;
 
       private String value;
@@ -6117,8 +6105,6 @@ public class AdSet extends APINode {
       VALUE_TWO_SECOND_CONTINUOUS_VIDEO_VIEWS("TWO_SECOND_CONTINUOUS_VIDEO_VIEWS"),
       @SerializedName("VALUE")
       VALUE_VALUE("VALUE"),
-      @SerializedName("VIDEO_VIEWS")
-      VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
       ;
 
       private String value;

@@ -85,6 +85,8 @@ public class ExtendedCredit extends APINode {
   private String mOwnerBusinessName = null;
   @SerializedName("partition_from")
   private String mPartitionFrom = null;
+  @SerializedName("receiving_credit_allocation_config")
+  private ExtendedCreditAllocationConfig mReceivingCreditAllocationConfig = null;
   @SerializedName("send_bill_to_biz_name")
   private String mSendBillToBizName = null;
   protected static Gson gson = null;
@@ -296,10 +298,6 @@ public class ExtendedCredit extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGetExtendedCreditEmails getExtendedCreditEmails() {
-    return new APIRequestGetExtendedCreditEmails(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetExtendedCreditInvoiceGroups getExtendedCreditInvoiceGroups() {
     return new APIRequestGetExtendedCreditInvoiceGroups(this.getPrefixedId().toString(), context);
   }
@@ -384,115 +382,18 @@ public class ExtendedCredit extends APINode {
     return mPartitionFrom;
   }
 
+  public ExtendedCreditAllocationConfig getFieldReceivingCreditAllocationConfig() {
+    if (mReceivingCreditAllocationConfig != null) {
+      mReceivingCreditAllocationConfig.context = getContext();
+    }
+    return mReceivingCreditAllocationConfig;
+  }
+
   public String getFieldSendBillToBizName() {
     return mSendBillToBizName;
   }
 
 
-
-  public static class APIRequestGetExtendedCreditEmails extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetExtendedCreditEmails.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetExtendedCreditEmails(String nodeId, APIContext context) {
-      super(context, nodeId, "/extended_credit_emails", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetExtendedCreditEmails setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetExtendedCreditEmails setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetExtendedCreditEmails requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetExtendedCreditEmails requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetExtendedCreditEmails requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetExtendedCreditEmails requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetExtendedCreditEmails requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetExtendedCreditEmails requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
 
   public static class APIRequestGetExtendedCreditInvoiceGroups extends APIRequest<ExtendedCreditInvoiceGroup> {
 
@@ -1132,6 +1033,7 @@ public class ExtendedCredit extends APINode {
       "owner_business",
       "owner_business_name",
       "partition_from",
+      "receiving_credit_allocation_config",
       "send_bill_to_biz_name",
     };
 
@@ -1329,6 +1231,13 @@ public class ExtendedCredit extends APINode {
       this.requestField("partition_from", value);
       return this;
     }
+    public APIRequestGet requestReceivingCreditAllocationConfigField () {
+      return this.requestReceivingCreditAllocationConfigField(true);
+    }
+    public APIRequestGet requestReceivingCreditAllocationConfigField (boolean value) {
+      this.requestField("receiving_credit_allocation_config", value);
+      return this;
+    }
     public APIRequestGet requestSendBillToBizNameField () {
       return this.requestSendBillToBizNameField(true);
     }
@@ -1368,6 +1277,7 @@ public class ExtendedCredit extends APINode {
     this.mOwnerBusiness = instance.mOwnerBusiness;
     this.mOwnerBusinessName = instance.mOwnerBusinessName;
     this.mPartitionFrom = instance.mPartitionFrom;
+    this.mReceivingCreditAllocationConfig = instance.mReceivingCreditAllocationConfig;
     this.mSendBillToBizName = instance.mSendBillToBizName;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

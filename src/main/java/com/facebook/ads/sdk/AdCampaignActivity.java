@@ -1220,8 +1220,6 @@ public class AdCampaignActivity extends APINode {
       VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
       @SerializedName("THRUPLAY")
       VALUE_THRUPLAY("THRUPLAY"),
-      @SerializedName("VIDEO_VIEWS")
-      VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
       ;
 
       private String value;
@@ -1255,8 +1253,6 @@ public class AdCampaignActivity extends APINode {
       VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
       @SerializedName("THRUPLAY")
       VALUE_THRUPLAY("THRUPLAY"),
-      @SerializedName("VIDEO_VIEWS")
-      VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
       ;
 
       private String value;
@@ -1320,8 +1316,6 @@ public class AdCampaignActivity extends APINode {
       VALUE_TWO_SECOND_CONTINUOUS_VIDEO_VIEWS("TWO_SECOND_CONTINUOUS_VIDEO_VIEWS"),
       @SerializedName("VALUE")
       VALUE_VALUE("VALUE"),
-      @SerializedName("VIDEO_VIEWS")
-      VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
       ;
 
       private String value;
@@ -1385,8 +1379,6 @@ public class AdCampaignActivity extends APINode {
       VALUE_TWO_SECOND_CONTINUOUS_VIDEO_VIEWS("TWO_SECOND_CONTINUOUS_VIDEO_VIEWS"),
       @SerializedName("VALUE")
       VALUE_VALUE("VALUE"),
-      @SerializedName("VIDEO_VIEWS")
-      VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
       ;
 
       private String value;

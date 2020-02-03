@@ -306,8 +306,6 @@ public class AdAccountDeliveryEstimate extends APINode {
       VALUE_TWO_SECOND_CONTINUOUS_VIDEO_VIEWS("TWO_SECOND_CONTINUOUS_VIDEO_VIEWS"),
       @SerializedName("VALUE")
       VALUE_VALUE("VALUE"),
-      @SerializedName("VIDEO_VIEWS")
-      VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
       ;
 
       private String value;

@@ -55,8 +55,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class URL extends APINode {
-  @SerializedName("app_links")
-  private AppLinks mAppLinks = null;
   @SerializedName("development_instant_article")
   private InstantArticle mDevelopmentInstantArticle = null;
   @SerializedName("engagement")
@@ -289,13 +287,6 @@ public class URL extends APINode {
   }
 
 
-  public AppLinks getFieldAppLinks() {
-    if (mAppLinks != null) {
-      mAppLinks.context = getContext();
-    }
-    return mAppLinks;
-  }
-
   public InstantArticle getFieldDevelopmentInstantArticle() {
     if (mDevelopmentInstantArticle != null) {
       mDevelopmentInstantArticle.context = getContext();
@@ -343,7 +334,6 @@ public class URL extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "app_links",
       "development_instant_article",
       "engagement",
       "id",
@@ -442,13 +432,6 @@ public class URL extends APINode {
       return this;
     }
 
-    public APIRequestGet requestAppLinksField () {
-      return this.requestAppLinksField(true);
-    }
-    public APIRequestGet requestAppLinksField (boolean value) {
-      this.requestField("app_links", value);
-      return this;
-    }
     public APIRequestGet requestDevelopmentInstantArticleField () {
       return this.requestDevelopmentInstantArticleField(true);
     }
@@ -680,7 +663,6 @@ public class URL extends APINode {
   }
 
   public URL copyFrom(URL instance) {
-    this.mAppLinks = instance.mAppLinks;
     this.mDevelopmentInstantArticle = instance.mDevelopmentInstantArticle;
     this.mEngagement = instance.mEngagement;
     this.mId = instance.mId;

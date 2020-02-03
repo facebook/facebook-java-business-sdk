@@ -5,16 +5,20 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
-## v5.0.5
+## v6.0.0
+### Changed
+  - Graph API call upgrade to [v6.0](https://developers.facebook.com/docs/graph-api/changelog/version6.0)
 
-    - Server-side API added search_string to CustomData.
+## v5.0.5
+### Added
+  - Server-side API added search_string to CustomData.
 
 ## v5.0.3
-
+### Added
   - Added function `getHeader()` in APIException class which provides header information
   - Made `omit_response_on_success` configurable for addToBatch method in APIRequest
-## v5.0.1
 
+## v5.0.1
 ### Added
   - Added `CrashRepoter`, more context available [here](https://developers.facebook.com/docs/business-sdk/guides/crash-reports)
 

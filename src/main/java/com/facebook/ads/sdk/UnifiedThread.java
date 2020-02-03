@@ -378,7 +378,6 @@ public class UnifiedThread extends APINode {
     }
     public static final String[] PARAMS = {
       "source",
-      "user",
     };
 
     public static final String[] FIELDS = {
@@ -443,15 +442,6 @@ public class UnifiedThread extends APINode {
     }
     public APIRequestGetMessages setSource (String source) {
       this.setParam("source", source);
-      return this;
-    }
-
-    public APIRequestGetMessages setUser (Long user) {
-      this.setParam("user", user);
-      return this;
-    }
-    public APIRequestGetMessages setUser (String user) {
-      this.setParam("user", user);
       return this;
     }
 

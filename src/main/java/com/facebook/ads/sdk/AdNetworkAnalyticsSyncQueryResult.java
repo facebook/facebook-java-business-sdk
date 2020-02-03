@@ -250,6 +250,8 @@ public class AdNetworkAnalyticsSyncQueryResult extends APINode {
   }
 
   public static enum EnumBreakdowns {
+      @SerializedName("AD_SPACE")
+      VALUE_AD_SPACE("AD_SPACE"),
       @SerializedName("AGE")
       VALUE_AGE("AGE"),
       @SerializedName("APP")

@@ -59,12 +59,16 @@ public class BusinessCreativeFolder extends APINode {
   private Business mBusiness = null;
   @SerializedName("creation_time")
   private String mCreationTime = null;
+  @SerializedName("creative_insight_permissions")
+  private Map<String, String> mCreativeInsightPermissions = null;
   @SerializedName("description")
   private String mDescription = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("name")
   private String mName = null;
+  @SerializedName("parent_folder")
+  private BusinessCreativeFolder mParentFolder = null;
   protected static Gson gson = null;
 
   BusinessCreativeFolder() {
@@ -294,6 +298,10 @@ public class BusinessCreativeFolder extends APINode {
     return new APIRequestCreateAssignedUser(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetSubFolders getSubFolders() {
+    return new APIRequestGetSubFolders(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestDelete delete() {
     return new APIRequestDelete(this.getPrefixedId().toString(), context);
   }
@@ -318,6 +326,10 @@ public class BusinessCreativeFolder extends APINode {
     return mCreationTime;
   }
 
+  public Map<String, String> getFieldCreativeInsightPermissions() {
+    return mCreativeInsightPermissions;
+  }
+
   public String getFieldDescription() {
     return mDescription;
   }
@@ -328,6 +340,13 @@ public class BusinessCreativeFolder extends APINode {
 
   public String getFieldName() {
     return mName;
+  }
+
+  public BusinessCreativeFolder getFieldParentFolder() {
+    if (mParentFolder != null) {
+      mParentFolder.context = getContext();
+    }
+    return mParentFolder;
   }
 
 
@@ -1076,6 +1095,166 @@ public class BusinessCreativeFolder extends APINode {
 
   }
 
+  public static class APIRequestGetSubFolders extends APIRequest<BusinessCreativeFolder> {
+
+    APINodeList<BusinessCreativeFolder> lastResponse = null;
+    @Override
+    public APINodeList<BusinessCreativeFolder> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "business",
+      "creation_time",
+      "creative_insight_permissions",
+      "description",
+      "id",
+      "name",
+      "parent_folder",
+    };
+
+    @Override
+    public APINodeList<BusinessCreativeFolder> parseResponse(String response, String header) throws APIException {
+      return BusinessCreativeFolder.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<BusinessCreativeFolder> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<BusinessCreativeFolder> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<BusinessCreativeFolder>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<BusinessCreativeFolder>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<BusinessCreativeFolder>>() {
+           public APINodeList<BusinessCreativeFolder> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetSubFolders.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetSubFolders(String nodeId, APIContext context) {
+      super(context, nodeId, "/subfolders", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetSubFolders setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSubFolders setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetSubFolders requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetSubFolders requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSubFolders requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetSubFolders requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSubFolders requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSubFolders requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetSubFolders requestBusinessField () {
+      return this.requestBusinessField(true);
+    }
+    public APIRequestGetSubFolders requestBusinessField (boolean value) {
+      this.requestField("business", value);
+      return this;
+    }
+    public APIRequestGetSubFolders requestCreationTimeField () {
+      return this.requestCreationTimeField(true);
+    }
+    public APIRequestGetSubFolders requestCreationTimeField (boolean value) {
+      this.requestField("creation_time", value);
+      return this;
+    }
+    public APIRequestGetSubFolders requestCreativeInsightPermissionsField () {
+      return this.requestCreativeInsightPermissionsField(true);
+    }
+    public APIRequestGetSubFolders requestCreativeInsightPermissionsField (boolean value) {
+      this.requestField("creative_insight_permissions", value);
+      return this;
+    }
+    public APIRequestGetSubFolders requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetSubFolders requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetSubFolders requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetSubFolders requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetSubFolders requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetSubFolders requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetSubFolders requestParentFolderField () {
+      return this.requestParentFolderField(true);
+    }
+    public APIRequestGetSubFolders requestParentFolderField (boolean value) {
+      this.requestField("parent_folder", value);
+      return this;
+    }
+  }
+
   public static class APIRequestDelete extends APIRequest<APINode> {
 
     APINode lastResponse = null;
@@ -1193,9 +1372,11 @@ public class BusinessCreativeFolder extends APINode {
     public static final String[] FIELDS = {
       "business",
       "creation_time",
+      "creative_insight_permissions",
       "description",
       "id",
       "name",
+      "parent_folder",
     };
 
     @Override
@@ -1301,6 +1482,13 @@ public class BusinessCreativeFolder extends APINode {
       this.requestField("creation_time", value);
       return this;
     }
+    public APIRequestGet requestCreativeInsightPermissionsField () {
+      return this.requestCreativeInsightPermissionsField(true);
+    }
+    public APIRequestGet requestCreativeInsightPermissionsField (boolean value) {
+      this.requestField("creative_insight_permissions", value);
+      return this;
+    }
     public APIRequestGet requestDescriptionField () {
       return this.requestDescriptionField(true);
     }
@@ -1320,6 +1508,13 @@ public class BusinessCreativeFolder extends APINode {
     }
     public APIRequestGet requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGet requestParentFolderField () {
+      return this.requestParentFolderField(true);
+    }
+    public APIRequestGet requestParentFolderField (boolean value) {
+      this.requestField("parent_folder", value);
       return this;
     }
   }
@@ -1517,9 +1712,11 @@ public class BusinessCreativeFolder extends APINode {
   public BusinessCreativeFolder copyFrom(BusinessCreativeFolder instance) {
     this.mBusiness = instance.mBusiness;
     this.mCreationTime = instance.mCreationTime;
+    this.mCreativeInsightPermissions = instance.mCreativeInsightPermissions;
     this.mDescription = instance.mDescription;
     this.mId = instance.mId;
     this.mName = instance.mName;
+    this.mParentFolder = instance.mParentFolder;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

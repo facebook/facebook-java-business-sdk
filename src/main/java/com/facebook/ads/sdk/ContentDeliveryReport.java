@@ -295,8 +295,8 @@ public class ContentDeliveryReport extends APINode {
       VALUE_ALL_PLACEMENTS("ALL_PLACEMENTS"),
       @SerializedName("AN_CLASSIC")
       VALUE_AN_CLASSIC("AN_CLASSIC"),
-      @SerializedName("FACEBOOK_GROUPS")
-      VALUE_FACEBOOK_GROUPS("FACEBOOK_GROUPS"),
+      @SerializedName("FACEBOOK_GROUPS_FEED")
+      VALUE_FACEBOOK_GROUPS_FEED("FACEBOOK_GROUPS_FEED"),
       @SerializedName("FACEBOOK_STORIES")
       VALUE_FACEBOOK_STORIES("FACEBOOK_STORIES"),
       @SerializedName("FEED")

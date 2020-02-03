@@ -466,6 +466,7 @@ public class AdReportRun extends APINode {
       "cost_per_outbound_click",
       "cost_per_schedule",
       "cost_per_start_trial",
+      "cost_per_store_visit_action",
       "cost_per_submit_application",
       "cost_per_subscribe",
       "cost_per_thruplay",
@@ -565,6 +566,7 @@ public class AdReportRun extends APINode {
       "spend",
       "start_trial_actions",
       "start_trial_value",
+      "store_visit_actions",
       "submit_application_actions",
       "submit_application_value",
       "subscribe_actions",
@@ -1297,6 +1299,13 @@ public class AdReportRun extends APINode {
       this.requestField("cost_per_start_trial", value);
       return this;
     }
+    public APIRequestGetInsights requestCostPerStoreVisitActionField () {
+      return this.requestCostPerStoreVisitActionField(true);
+    }
+    public APIRequestGetInsights requestCostPerStoreVisitActionField (boolean value) {
+      this.requestField("cost_per_store_visit_action", value);
+      return this;
+    }
     public APIRequestGetInsights requestCostPerSubmitApplicationField () {
       return this.requestCostPerSubmitApplicationField(true);
     }
@@ -1988,6 +1997,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestStartTrialValueField (boolean value) {
       this.requestField("start_trial_value", value);
+      return this;
+    }
+    public APIRequestGetInsights requestStoreVisitActionsField () {
+      return this.requestStoreVisitActionsField(true);
+    }
+    public APIRequestGetInsights requestStoreVisitActionsField (boolean value) {
+      this.requestField("store_visit_actions", value);
       return this;
     }
     public APIRequestGetInsights requestSubmitApplicationActionsField () {

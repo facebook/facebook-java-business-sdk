@@ -89,8 +89,6 @@ public class ReachFrequencyPrediction extends APINode {
   private Map<Long, List<Double>> mDailyImpressionCurveMap = null;
   @SerializedName("day_parting_schedule")
   private List<ReachFrequencyDayPart> mDayPartingSchedule = null;
-  @SerializedName("demo_breakdown")
-  private ReachFrequencyEstimatesDemoBreakdown mDemoBreakdown = null;
   @SerializedName("destination_id")
   private String mDestinationId = null;
   @SerializedName("end_time")
@@ -505,10 +503,6 @@ public class ReachFrequencyPrediction extends APINode {
     return mDayPartingSchedule;
   }
 
-  public ReachFrequencyEstimatesDemoBreakdown getFieldDemoBreakdown() {
-    return mDemoBreakdown;
-  }
-
   public String getFieldDestinationId() {
     return mDestinationId;
   }
@@ -803,7 +797,6 @@ public class ReachFrequencyPrediction extends APINode {
       "daily_impression_curve",
       "daily_impression_curve_map",
       "day_parting_schedule",
-      "demo_breakdown",
       "destination_id",
       "end_time",
       "expiration_time",
@@ -1078,13 +1071,6 @@ public class ReachFrequencyPrediction extends APINode {
     }
     public APIRequestGet requestDayPartingScheduleField (boolean value) {
       this.requestField("day_parting_schedule", value);
-      return this;
-    }
-    public APIRequestGet requestDemoBreakdownField () {
-      return this.requestDemoBreakdownField(true);
-    }
-    public APIRequestGet requestDemoBreakdownField (boolean value) {
-      this.requestField("demo_breakdown", value);
       return this;
     }
     public APIRequestGet requestDestinationIdField () {
@@ -1676,7 +1662,6 @@ public class ReachFrequencyPrediction extends APINode {
     this.mDailyImpressionCurve = instance.mDailyImpressionCurve;
     this.mDailyImpressionCurveMap = instance.mDailyImpressionCurveMap;
     this.mDayPartingSchedule = instance.mDayPartingSchedule;
-    this.mDemoBreakdown = instance.mDemoBreakdown;
     this.mDestinationId = instance.mDestinationId;
     this.mEndTime = instance.mEndTime;
     this.mExpirationTime = instance.mExpirationTime;

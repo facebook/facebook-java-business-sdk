@@ -225,6 +225,8 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mCostPerSchedule = null;
   @SerializedName("cost_per_start_trial")
   private List<AdsActionStats> mCostPerStartTrial = null;
+  @SerializedName("cost_per_store_visit_action")
+  private List<AdsActionStats> mCostPerStoreVisitAction = null;
   @SerializedName("cost_per_submit_application")
   private List<AdsActionStats> mCostPerSubmitApplication = null;
   @SerializedName("cost_per_subscribe")
@@ -423,6 +425,8 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mStartTrialActions = null;
   @SerializedName("start_trial_value")
   private List<AdsActionStats> mStartTrialValue = null;
+  @SerializedName("store_visit_actions")
+  private List<AdsActionStats> mStoreVisitActions = null;
   @SerializedName("submit_application_actions")
   private List<AdsActionStats> mSubmitApplicationActions = null;
   @SerializedName("submit_application_value")
@@ -1606,6 +1610,20 @@ public class AdsInsights extends APINode {
     this.mCostPerStartTrial = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
+  public List<AdsActionStats> getFieldCostPerStoreVisitAction() {
+    return mCostPerStoreVisitAction;
+  }
+
+  public AdsInsights setFieldCostPerStoreVisitAction(List<AdsActionStats> value) {
+    this.mCostPerStoreVisitAction = value;
+    return this;
+  }
+
+  public AdsInsights setFieldCostPerStoreVisitAction(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mCostPerStoreVisitAction = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldCostPerSubmitApplication() {
     return mCostPerSubmitApplication;
   }
@@ -2607,6 +2625,20 @@ public class AdsInsights extends APINode {
     this.mStartTrialValue = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
+  public List<AdsActionStats> getFieldStoreVisitActions() {
+    return mStoreVisitActions;
+  }
+
+  public AdsInsights setFieldStoreVisitActions(List<AdsActionStats> value) {
+    this.mStoreVisitActions = value;
+    return this;
+  }
+
+  public AdsInsights setFieldStoreVisitActions(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mStoreVisitActions = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldSubmitApplicationActions() {
     return mSubmitApplicationActions;
   }
@@ -3506,6 +3538,7 @@ public class AdsInsights extends APINode {
     this.mCostPerOutboundClick = instance.mCostPerOutboundClick;
     this.mCostPerSchedule = instance.mCostPerSchedule;
     this.mCostPerStartTrial = instance.mCostPerStartTrial;
+    this.mCostPerStoreVisitAction = instance.mCostPerStoreVisitAction;
     this.mCostPerSubmitApplication = instance.mCostPerSubmitApplication;
     this.mCostPerSubscribe = instance.mCostPerSubscribe;
     this.mCostPerThruplay = instance.mCostPerThruplay;
@@ -3605,6 +3638,7 @@ public class AdsInsights extends APINode {
     this.mSpend = instance.mSpend;
     this.mStartTrialActions = instance.mStartTrialActions;
     this.mStartTrialValue = instance.mStartTrialValue;
+    this.mStoreVisitActions = instance.mStoreVisitActions;
     this.mSubmitApplicationActions = instance.mSubmitApplicationActions;
     this.mSubmitApplicationValue = instance.mSubmitApplicationValue;
     this.mSubscribeActions = instance.mSubscribeActions;

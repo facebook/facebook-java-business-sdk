@@ -1064,6 +1064,8 @@ public class LiveEncoder extends APINode {
       "input_video_interlace_mode",
       "input_video_width",
       "name",
+      "needs_transcoder_restart",
+      "needs_transcoder_restart_reason",
       "status",
       "target_token",
       "version",
@@ -1237,6 +1239,24 @@ public class LiveEncoder extends APINode {
 
     public APIRequestUpdate setName (String name) {
       this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestUpdate setNeedsTranscoderRestart (Boolean needsTranscoderRestart) {
+      this.setParam("needs_transcoder_restart", needsTranscoderRestart);
+      return this;
+    }
+    public APIRequestUpdate setNeedsTranscoderRestart (String needsTranscoderRestart) {
+      this.setParam("needs_transcoder_restart", needsTranscoderRestart);
+      return this;
+    }
+
+    public APIRequestUpdate setNeedsTranscoderRestartReason (List<String> needsTranscoderRestartReason) {
+      this.setParam("needs_transcoder_restart_reason", needsTranscoderRestartReason);
+      return this;
+    }
+    public APIRequestUpdate setNeedsTranscoderRestartReason (String needsTranscoderRestartReason) {
+      this.setParam("needs_transcoder_restart_reason", needsTranscoderRestartReason);
       return this;
     }
 

@@ -280,10 +280,6 @@ public class DynamicItemDisplayBundleFolder extends APINode {
     return new APIRequestDeleteBundles(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetBundles getBundles() {
-    return new APIRequestGetBundles(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestCreateBundle createBundle() {
     return new APIRequestCreateBundle(this.getPrefixedId().toString(), context);
   }
@@ -441,166 +437,6 @@ public class DynamicItemDisplayBundleFolder extends APINode {
       return this;
     }
 
-  }
-
-  public static class APIRequestGetBundles extends APIRequest<DynamicItemDisplayBundle> {
-
-    APINodeList<DynamicItemDisplayBundle> lastResponse = null;
-    @Override
-    public APINodeList<DynamicItemDisplayBundle> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "additional_urls",
-      "description",
-      "id",
-      "name",
-      "product_set",
-      "text_tokens",
-      "url",
-    };
-
-    @Override
-    public APINodeList<DynamicItemDisplayBundle> parseResponse(String response, String header) throws APIException {
-      return DynamicItemDisplayBundle.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<DynamicItemDisplayBundle> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<DynamicItemDisplayBundle> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<DynamicItemDisplayBundle>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<DynamicItemDisplayBundle>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<DynamicItemDisplayBundle>>() {
-           public APINodeList<DynamicItemDisplayBundle> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetBundles.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetBundles(String nodeId, APIContext context) {
-      super(context, nodeId, "/bundles", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetBundles setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBundles setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetBundles requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetBundles requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBundles requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetBundles requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBundles requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBundles requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetBundles requestAdditionalUrlsField () {
-      return this.requestAdditionalUrlsField(true);
-    }
-    public APIRequestGetBundles requestAdditionalUrlsField (boolean value) {
-      this.requestField("additional_urls", value);
-      return this;
-    }
-    public APIRequestGetBundles requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGetBundles requestDescriptionField (boolean value) {
-      this.requestField("description", value);
-      return this;
-    }
-    public APIRequestGetBundles requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetBundles requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetBundles requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetBundles requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetBundles requestProductSetField () {
-      return this.requestProductSetField(true);
-    }
-    public APIRequestGetBundles requestProductSetField (boolean value) {
-      this.requestField("product_set", value);
-      return this;
-    }
-    public APIRequestGetBundles requestTextTokensField () {
-      return this.requestTextTokensField(true);
-    }
-    public APIRequestGetBundles requestTextTokensField (boolean value) {
-      this.requestField("text_tokens", value);
-      return this;
-    }
-    public APIRequestGetBundles requestUrlField () {
-      return this.requestUrlField(true);
-    }
-    public APIRequestGetBundles requestUrlField (boolean value) {
-      this.requestField("url", value);
-      return this;
-    }
   }
 
   public static class APIRequestCreateBundle extends APIRequest<DynamicItemDisplayBundleFolder> {
@@ -977,7 +813,6 @@ public class DynamicItemDisplayBundleFolder extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "bundles",
       "name",
     };
 
@@ -1036,15 +871,6 @@ public class DynamicItemDisplayBundleFolder extends APINode {
       return this;
     }
 
-
-    public APIRequestUpdate setBundles (List<String> bundles) {
-      this.setParam("bundles", bundles);
-      return this;
-    }
-    public APIRequestUpdate setBundles (String bundles) {
-      this.setParam("bundles", bundles);
-      return this;
-    }
 
     public APIRequestUpdate setName (String name) {
       this.setParam("name", name);

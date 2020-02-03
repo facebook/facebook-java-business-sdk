@@ -332,10 +332,6 @@ public class Campaign extends APINode {
     return new APIRequestGetAdStudies(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestDeleteAdLabels deleteAdLabels() {
-    return new APIRequestDeleteAdLabels(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestCreateAdLabel createAdLabel() {
     return new APIRequestCreateAdLabel(this.getPrefixedId().toString(), context);
   }
@@ -742,130 +738,6 @@ public class Campaign extends APINode {
     }
   }
 
-  public static class APIRequestDeleteAdLabels extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "adlabels",
-      "execution_options",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestDeleteAdLabels.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestDeleteAdLabels(String nodeId, APIContext context) {
-      super(context, nodeId, "/adlabels", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDeleteAdLabels setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAdLabels setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDeleteAdLabels setAdlabels (List<Object> adlabels) {
-      this.setParam("adlabels", adlabels);
-      return this;
-    }
-    public APIRequestDeleteAdLabels setAdlabels (String adlabels) {
-      this.setParam("adlabels", adlabels);
-      return this;
-    }
-
-    public APIRequestDeleteAdLabels setExecutionOptions (List<Campaign.EnumExecutionOptions> executionOptions) {
-      this.setParam("execution_options", executionOptions);
-      return this;
-    }
-    public APIRequestDeleteAdLabels setExecutionOptions (String executionOptions) {
-      this.setParam("execution_options", executionOptions);
-      return this;
-    }
-
-    public APIRequestDeleteAdLabels requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDeleteAdLabels requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAdLabels requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDeleteAdLabels requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAdLabels requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAdLabels requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestCreateAdLabel extends APIRequest<Campaign> {
 
     Campaign lastResponse = null;
@@ -1195,7 +1067,6 @@ public class Campaign extends APINode {
       "ad_draft_id",
       "date_preset",
       "effective_status",
-      "include_deleted",
       "include_drafts",
       "time_range",
       "updated_since",
@@ -1311,15 +1182,6 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAds setEffectiveStatus (String effectiveStatus) {
       this.setParam("effective_status", effectiveStatus);
-      return this;
-    }
-
-    public APIRequestGetAds setIncludeDeleted (Boolean includeDeleted) {
-      this.setParam("include_deleted", includeDeleted);
-      return this;
-    }
-    public APIRequestGetAds setIncludeDeleted (String includeDeleted) {
-      this.setParam("include_deleted", includeDeleted);
       return this;
     }
 

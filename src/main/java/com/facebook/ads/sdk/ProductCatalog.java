@@ -67,8 +67,6 @@ public class ProductCatalog extends APINode {
   private List<String> mFallbackImageUrl = null;
   @SerializedName("feed_count")
   private Long mFeedCount = null;
-  @SerializedName("flight_catalog_settings")
-  private FlightCatalogSettings mFlightCatalogSettings = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("name")
@@ -320,16 +318,8 @@ public class ProductCatalog extends APINode {
     return new APIRequestCreateBatch(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetBundleFolders getBundleFolders() {
-    return new APIRequestGetBundleFolders(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestCreateBundleFolder createBundleFolder() {
     return new APIRequestCreateBundleFolder(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetBundles getBundles() {
-    return new APIRequestGetBundles(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateBundle createBundle() {
@@ -352,16 +342,8 @@ public class ProductCatalog extends APINode {
     return new APIRequestGetCollaborativeAdsShareSettings(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetDaEventSamples getDaEventSamples() {
-    return new APIRequestGetDaEventSamples(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetDestinations getDestinations() {
     return new APIRequestGetDestinations(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateDestination createDestination() {
-    return new APIRequestCreateDestination(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetEventStats getEventStats() {
@@ -382,10 +364,6 @@ public class ProductCatalog extends APINode {
 
   public APIRequestGetFlights getFlights() {
     return new APIRequestGetFlights(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateFlight createFlight() {
-    return new APIRequestCreateFlight(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetHomeListings getHomeListings() {
@@ -480,10 +458,6 @@ public class ProductCatalog extends APINode {
     return new APIRequestCreateVehicle(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateVideo createVideo() {
-    return new APIRequestCreateVideo(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestDelete delete() {
     return new APIRequestDelete(this.getPrefixedId().toString(), context);
   }
@@ -525,13 +499,6 @@ public class ProductCatalog extends APINode {
 
   public Long getFieldFeedCount() {
     return mFeedCount;
-  }
-
-  public FlightCatalogSettings getFieldFlightCatalogSettings() {
-    if (mFlightCatalogSettings != null) {
-      mFlightCatalogSettings.context = getContext();
-    }
-    return mFlightCatalogSettings;
   }
 
   public String getFieldId() {
@@ -1440,7 +1407,6 @@ public class ProductCatalog extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "applinks",
       "automotive_model_id",
       "availability",
       "body_style",
@@ -1575,13 +1541,6 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestGetAutomotiveModels requestApplinksField () {
-      return this.requestApplinksField(true);
-    }
-    public APIRequestGetAutomotiveModels requestApplinksField (boolean value) {
-      this.requestField("applinks", value);
-      return this;
-    }
     public APIRequestGetAutomotiveModels requestAutomotiveModelIdField () {
       return this.requestAutomotiveModelIdField(true);
     }
@@ -1889,158 +1848,6 @@ public class ProductCatalog extends APINode {
 
   }
 
-  public static class APIRequestGetBundleFolders extends APIRequest<DynamicItemDisplayBundleFolder> {
-
-    APINodeList<DynamicItemDisplayBundleFolder> lastResponse = null;
-    @Override
-    public APINodeList<DynamicItemDisplayBundleFolder> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "categorization_criteria",
-      "id",
-      "name",
-      "product_catalog",
-      "product_set",
-      "valid_labels",
-    };
-
-    @Override
-    public APINodeList<DynamicItemDisplayBundleFolder> parseResponse(String response, String header) throws APIException {
-      return DynamicItemDisplayBundleFolder.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<DynamicItemDisplayBundleFolder> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<DynamicItemDisplayBundleFolder> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<DynamicItemDisplayBundleFolder>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<DynamicItemDisplayBundleFolder>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<DynamicItemDisplayBundleFolder>>() {
-           public APINodeList<DynamicItemDisplayBundleFolder> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetBundleFolders.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetBundleFolders(String nodeId, APIContext context) {
-      super(context, nodeId, "/bundle_folders", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetBundleFolders setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBundleFolders setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetBundleFolders requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetBundleFolders requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBundleFolders requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetBundleFolders requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBundleFolders requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBundleFolders requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetBundleFolders requestCategorizationCriteriaField () {
-      return this.requestCategorizationCriteriaField(true);
-    }
-    public APIRequestGetBundleFolders requestCategorizationCriteriaField (boolean value) {
-      this.requestField("categorization_criteria", value);
-      return this;
-    }
-    public APIRequestGetBundleFolders requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetBundleFolders requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetBundleFolders requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetBundleFolders requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetBundleFolders requestProductCatalogField () {
-      return this.requestProductCatalogField(true);
-    }
-    public APIRequestGetBundleFolders requestProductCatalogField (boolean value) {
-      this.requestField("product_catalog", value);
-      return this;
-    }
-    public APIRequestGetBundleFolders requestProductSetField () {
-      return this.requestProductSetField(true);
-    }
-    public APIRequestGetBundleFolders requestProductSetField (boolean value) {
-      this.requestField("product_set", value);
-      return this;
-    }
-    public APIRequestGetBundleFolders requestValidLabelsField () {
-      return this.requestValidLabelsField(true);
-    }
-    public APIRequestGetBundleFolders requestValidLabelsField (boolean value) {
-      this.requestField("valid_labels", value);
-      return this;
-    }
-  }
-
   public static class APIRequestCreateBundleFolder extends APIRequest<DynamicItemDisplayBundleFolder> {
 
     DynamicItemDisplayBundleFolder lastResponse = null;
@@ -2049,7 +1856,6 @@ public class ProductCatalog extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "bundles",
       "name",
     };
 
@@ -2109,15 +1915,6 @@ public class ProductCatalog extends APINode {
     }
 
 
-    public APIRequestCreateBundleFolder setBundles (List<String> bundles) {
-      this.setParam("bundles", bundles);
-      return this;
-    }
-    public APIRequestCreateBundleFolder setBundles (String bundles) {
-      this.setParam("bundles", bundles);
-      return this;
-    }
-
     public APIRequestCreateBundleFolder setName (String name) {
       this.setParam("name", name);
       return this;
@@ -2159,166 +1956,6 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-  }
-
-  public static class APIRequestGetBundles extends APIRequest<DynamicItemDisplayBundle> {
-
-    APINodeList<DynamicItemDisplayBundle> lastResponse = null;
-    @Override
-    public APINodeList<DynamicItemDisplayBundle> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "additional_urls",
-      "description",
-      "id",
-      "name",
-      "product_set",
-      "text_tokens",
-      "url",
-    };
-
-    @Override
-    public APINodeList<DynamicItemDisplayBundle> parseResponse(String response, String header) throws APIException {
-      return DynamicItemDisplayBundle.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<DynamicItemDisplayBundle> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<DynamicItemDisplayBundle> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<DynamicItemDisplayBundle>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<DynamicItemDisplayBundle>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<DynamicItemDisplayBundle>>() {
-           public APINodeList<DynamicItemDisplayBundle> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetBundles.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetBundles(String nodeId, APIContext context) {
-      super(context, nodeId, "/bundles", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetBundles setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBundles setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetBundles requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetBundles requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBundles requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetBundles requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBundles requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBundles requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetBundles requestAdditionalUrlsField () {
-      return this.requestAdditionalUrlsField(true);
-    }
-    public APIRequestGetBundles requestAdditionalUrlsField (boolean value) {
-      this.requestField("additional_urls", value);
-      return this;
-    }
-    public APIRequestGetBundles requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGetBundles requestDescriptionField (boolean value) {
-      this.requestField("description", value);
-      return this;
-    }
-    public APIRequestGetBundles requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetBundles requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetBundles requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetBundles requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetBundles requestProductSetField () {
-      return this.requestProductSetField(true);
-    }
-    public APIRequestGetBundles requestProductSetField (boolean value) {
-      this.requestField("product_set", value);
-      return this;
-    }
-    public APIRequestGetBundles requestTextTokensField () {
-      return this.requestTextTokensField(true);
-    }
-    public APIRequestGetBundles requestTextTokensField (boolean value) {
-      this.requestField("text_tokens", value);
-      return this;
-    }
-    public APIRequestGetBundles requestUrlField () {
-      return this.requestUrlField(true);
-    }
-    public APIRequestGetBundles requestUrlField (boolean value) {
-      this.requestField("url", value);
-      return this;
-    }
   }
 
   public static class APIRequestCreateBundle extends APIRequest<DynamicItemDisplayBundle> {
@@ -3091,160 +2728,6 @@ public class ProductCatalog extends APINode {
     }
   }
 
-  public static class APIRequestGetDaEventSamples extends APIRequest<ProductDaEventSamplesBatch> {
-
-    APINodeList<ProductDaEventSamplesBatch> lastResponse = null;
-    @Override
-    public APINodeList<ProductDaEventSamplesBatch> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "aggregation_type",
-      "event",
-      "source_id",
-    };
-
-    public static final String[] FIELDS = {
-      "samples",
-      "time_start",
-      "time_stop",
-    };
-
-    @Override
-    public APINodeList<ProductDaEventSamplesBatch> parseResponse(String response, String header) throws APIException {
-      return ProductDaEventSamplesBatch.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<ProductDaEventSamplesBatch> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<ProductDaEventSamplesBatch> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<ProductDaEventSamplesBatch>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<ProductDaEventSamplesBatch>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<ProductDaEventSamplesBatch>>() {
-           public APINodeList<ProductDaEventSamplesBatch> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetDaEventSamples.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetDaEventSamples(String nodeId, APIContext context) {
-      super(context, nodeId, "/da_event_samples", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetDaEventSamples setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetDaEventSamples setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetDaEventSamples setAggregationType (ProductDaEventSamplesBatch.EnumAggregationType aggregationType) {
-      this.setParam("aggregation_type", aggregationType);
-      return this;
-    }
-    public APIRequestGetDaEventSamples setAggregationType (String aggregationType) {
-      this.setParam("aggregation_type", aggregationType);
-      return this;
-    }
-
-    public APIRequestGetDaEventSamples setEvent (ProductDaEventSamplesBatch.EnumEvent event) {
-      this.setParam("event", event);
-      return this;
-    }
-    public APIRequestGetDaEventSamples setEvent (String event) {
-      this.setParam("event", event);
-      return this;
-    }
-
-    public APIRequestGetDaEventSamples setSourceId (String sourceId) {
-      this.setParam("source_id", sourceId);
-      return this;
-    }
-
-    public APIRequestGetDaEventSamples requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetDaEventSamples requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetDaEventSamples requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetDaEventSamples requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetDaEventSamples requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetDaEventSamples requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetDaEventSamples requestSamplesField () {
-      return this.requestSamplesField(true);
-    }
-    public APIRequestGetDaEventSamples requestSamplesField (boolean value) {
-      this.requestField("samples", value);
-      return this;
-    }
-    public APIRequestGetDaEventSamples requestTimeStartField () {
-      return this.requestTimeStartField(true);
-    }
-    public APIRequestGetDaEventSamples requestTimeStartField (boolean value) {
-      this.requestField("time_start", value);
-      return this;
-    }
-    public APIRequestGetDaEventSamples requestTimeStopField () {
-      return this.requestTimeStopField(true);
-    }
-    public APIRequestGetDaEventSamples requestTimeStopField (boolean value) {
-      this.requestField("time_stop", value);
-      return this;
-    }
-  }
-
   public static class APIRequestGetDestinations extends APIRequest<Destination> {
 
     APINodeList<Destination> lastResponse = null;
@@ -3259,7 +2742,6 @@ public class ProductCatalog extends APINode {
 
     public static final String[] FIELDS = {
       "address",
-      "applinks",
       "currency",
       "description",
       "destination_id",
@@ -3387,13 +2869,6 @@ public class ProductCatalog extends APINode {
       this.requestField("address", value);
       return this;
     }
-    public APIRequestGetDestinations requestApplinksField () {
-      return this.requestApplinksField(true);
-    }
-    public APIRequestGetDestinations requestApplinksField (boolean value) {
-      this.requestField("applinks", value);
-      return this;
-    }
     public APIRequestGetDestinations requestCurrencyField () {
       return this.requestCurrencyField(true);
     }
@@ -3471,186 +2946,6 @@ public class ProductCatalog extends APINode {
       this.requestField("url", value);
       return this;
     }
-  }
-
-  public static class APIRequestCreateDestination extends APIRequest<Destination> {
-
-    Destination lastResponse = null;
-    @Override
-    public Destination getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "address",
-      "currency",
-      "description",
-      "destination_id",
-      "images",
-      "name",
-      "price",
-      "target_radius_in_km",
-      "types",
-      "url",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Destination parseResponse(String response, String header) throws APIException {
-      return Destination.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Destination execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Destination execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Destination> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Destination> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Destination>() {
-           public Destination apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateDestination.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateDestination(String nodeId, APIContext context) {
-      super(context, nodeId, "/destinations", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateDestination setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateDestination setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateDestination setAddress (Object address) {
-      this.setParam("address", address);
-      return this;
-    }
-    public APIRequestCreateDestination setAddress (String address) {
-      this.setParam("address", address);
-      return this;
-    }
-
-    public APIRequestCreateDestination setCurrency (String currency) {
-      this.setParam("currency", currency);
-      return this;
-    }
-
-    public APIRequestCreateDestination setDescription (String description) {
-      this.setParam("description", description);
-      return this;
-    }
-
-    public APIRequestCreateDestination setDestinationId (String destinationId) {
-      this.setParam("destination_id", destinationId);
-      return this;
-    }
-
-    public APIRequestCreateDestination setImages (List<Object> images) {
-      this.setParam("images", images);
-      return this;
-    }
-    public APIRequestCreateDestination setImages (String images) {
-      this.setParam("images", images);
-      return this;
-    }
-
-    public APIRequestCreateDestination setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateDestination setPrice (Long price) {
-      this.setParam("price", price);
-      return this;
-    }
-    public APIRequestCreateDestination setPrice (String price) {
-      this.setParam("price", price);
-      return this;
-    }
-
-    public APIRequestCreateDestination setTargetRadiusInKm (Double targetRadiusInKm) {
-      this.setParam("target_radius_in_km", targetRadiusInKm);
-      return this;
-    }
-    public APIRequestCreateDestination setTargetRadiusInKm (String targetRadiusInKm) {
-      this.setParam("target_radius_in_km", targetRadiusInKm);
-      return this;
-    }
-
-    public APIRequestCreateDestination setTypes (String types) {
-      this.setParam("types", types);
-      return this;
-    }
-
-    public APIRequestCreateDestination setUrl (String url) {
-      this.setParam("url", url);
-      return this;
-    }
-
-    public APIRequestCreateDestination requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateDestination requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateDestination requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateDestination requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateDestination requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateDestination requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestGetEventStats extends APIRequest<ProductEventStat> {
@@ -4224,7 +3519,6 @@ public class ProductCatalog extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "applinks",
       "currency",
       "description",
       "destination_airport",
@@ -4348,13 +3642,6 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestGetFlights requestApplinksField () {
-      return this.requestApplinksField(true);
-    }
-    public APIRequestGetFlights requestApplinksField (boolean value) {
-      this.requestField("applinks", value);
-      return this;
-    }
     public APIRequestGetFlights requestCurrencyField () {
       return this.requestCurrencyField(true);
     }
@@ -4455,160 +3742,6 @@ public class ProductCatalog extends APINode {
     }
   }
 
-  public static class APIRequestCreateFlight extends APIRequest<Flight> {
-
-    Flight lastResponse = null;
-    @Override
-    public Flight getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "currency",
-      "description",
-      "destination_airport",
-      "images",
-      "origin_airport",
-      "price",
-      "url",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Flight parseResponse(String response, String header) throws APIException {
-      return Flight.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Flight execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Flight execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Flight> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Flight> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Flight>() {
-           public Flight apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateFlight.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateFlight(String nodeId, APIContext context) {
-      super(context, nodeId, "/flights", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateFlight setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateFlight setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateFlight setCurrency (String currency) {
-      this.setParam("currency", currency);
-      return this;
-    }
-
-    public APIRequestCreateFlight setDescription (String description) {
-      this.setParam("description", description);
-      return this;
-    }
-
-    public APIRequestCreateFlight setDestinationAirport (String destinationAirport) {
-      this.setParam("destination_airport", destinationAirport);
-      return this;
-    }
-
-    public APIRequestCreateFlight setImages (List<Object> images) {
-      this.setParam("images", images);
-      return this;
-    }
-    public APIRequestCreateFlight setImages (String images) {
-      this.setParam("images", images);
-      return this;
-    }
-
-    public APIRequestCreateFlight setOriginAirport (String originAirport) {
-      this.setParam("origin_airport", originAirport);
-      return this;
-    }
-
-    public APIRequestCreateFlight setPrice (Long price) {
-      this.setParam("price", price);
-      return this;
-    }
-    public APIRequestCreateFlight setPrice (String price) {
-      this.setParam("price", price);
-      return this;
-    }
-
-    public APIRequestCreateFlight setUrl (String url) {
-      this.setParam("url", url);
-      return this;
-    }
-
-    public APIRequestCreateFlight requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateFlight requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateFlight requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateFlight requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateFlight requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateFlight requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetHomeListings extends APIRequest<HomeListing> {
 
     APINodeList<HomeListing> lastResponse = null;
@@ -4630,7 +3763,6 @@ public class ProductCatalog extends APINode {
       "agent_fb_page_id",
       "agent_name",
       "agent_phone",
-      "applinks",
       "area_size",
       "area_unit",
       "availability",
@@ -4827,13 +3959,6 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetHomeListings requestAgentPhoneField (boolean value) {
       this.requestField("agent_phone", value);
-      return this;
-    }
-    public APIRequestGetHomeListings requestApplinksField () {
-      return this.requestApplinksField(true);
-    }
-    public APIRequestGetHomeListings requestApplinksField (boolean value) {
-      this.requestField("applinks", value);
       return this;
     }
     public APIRequestGetHomeListings requestAreaSizeField () {
@@ -5599,8 +4724,8 @@ public class ProductCatalog extends APINode {
 
     public static final String[] FIELDS = {
       "address",
-      "applinks",
       "brand",
+      "category",
       "currency",
       "description",
       "guest_ratings",
@@ -5732,18 +4857,18 @@ public class ProductCatalog extends APINode {
       this.requestField("address", value);
       return this;
     }
-    public APIRequestGetHotels requestApplinksField () {
-      return this.requestApplinksField(true);
-    }
-    public APIRequestGetHotels requestApplinksField (boolean value) {
-      this.requestField("applinks", value);
-      return this;
-    }
     public APIRequestGetHotels requestBrandField () {
       return this.requestBrandField(true);
     }
     public APIRequestGetHotels requestBrandField (boolean value) {
       this.requestField("brand", value);
+      return this;
+    }
+    public APIRequestGetHotels requestCategoryField () {
+      return this.requestCategoryField(true);
+    }
+    public APIRequestGetHotels requestCategoryField (boolean value) {
+      this.requestField("category", value);
       return this;
     }
     public APIRequestGetHotels requestCurrencyField () {
@@ -7785,7 +6910,6 @@ public class ProductCatalog extends APINode {
       "additional_image_urls",
       "additional_variant_attributes",
       "age_group",
-      "applinks",
       "availability",
       "brand",
       "capability_to_review_status",
@@ -7977,13 +7101,6 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetProducts requestAgeGroupField (boolean value) {
       this.requestField("age_group", value);
-      return this;
-    }
-    public APIRequestGetProducts requestApplinksField () {
-      return this.requestApplinksField(true);
-    }
-    public APIRequestGetProducts requestApplinksField (boolean value) {
-      this.requestField("applinks", value);
       return this;
     }
     public APIRequestGetProducts requestAvailabilityField () {
@@ -9006,7 +8123,6 @@ public class ProductCatalog extends APINode {
       "amount_percentage",
       "amount_price",
       "amount_qualifier",
-      "applinks",
       "body_style",
       "cashback_currency",
       "cashback_price",
@@ -9019,6 +8135,8 @@ public class ProductCatalog extends APINode {
       "end_time",
       "id",
       "images",
+      "make",
+      "model",
       "offer_description",
       "offer_disclaimer",
       "offer_type",
@@ -9170,13 +8288,6 @@ public class ProductCatalog extends APINode {
       this.requestField("amount_qualifier", value);
       return this;
     }
-    public APIRequestGetVehicleOffers requestApplinksField () {
-      return this.requestApplinksField(true);
-    }
-    public APIRequestGetVehicleOffers requestApplinksField (boolean value) {
-      this.requestField("applinks", value);
-      return this;
-    }
     public APIRequestGetVehicleOffers requestBodyStyleField () {
       return this.requestBodyStyleField(true);
     }
@@ -9259,6 +8370,20 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetVehicleOffers requestImagesField (boolean value) {
       this.requestField("images", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestMakeField () {
+      return this.requestMakeField(true);
+    }
+    public APIRequestGetVehicleOffers requestMakeField (boolean value) {
+      this.requestField("make", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestModelField () {
+      return this.requestModelField(true);
+    }
+    public APIRequestGetVehicleOffers requestModelField (boolean value) {
+      this.requestField("model", value);
       return this;
     }
     public APIRequestGetVehicleOffers requestOfferDescriptionField () {
@@ -9375,7 +8500,6 @@ public class ProductCatalog extends APINode {
 
     public static final String[] FIELDS = {
       "address",
-      "applinks",
       "availability",
       "body_style",
       "condition",
@@ -9532,13 +8656,6 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetVehicles requestAddressField (boolean value) {
       this.requestField("address", value);
-      return this;
-    }
-    public APIRequestGetVehicles requestApplinksField () {
-      return this.requestApplinksField(true);
-    }
-    public APIRequestGetVehicles requestApplinksField (boolean value) {
-      this.requestField("applinks", value);
       return this;
     }
     public APIRequestGetVehicles requestAvailabilityField () {
@@ -10177,688 +9294,6 @@ public class ProductCatalog extends APINode {
 
   }
 
-  public static class APIRequestCreateVideo extends APIRequest<AdVideo> {
-
-    AdVideo lastResponse = null;
-    @Override
-    public AdVideo getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "adaptive_type",
-      "animated_effect_id",
-      "application_id",
-      "asked_fun_fact_prompt_id",
-      "attribution_app_id",
-      "audio_story_wave_animation_handle",
-      "composer_entry_picker",
-      "composer_entry_point",
-      "composer_entry_time",
-      "composer_session_events_log",
-      "composer_session_id",
-      "composer_source_surface",
-      "composer_type",
-      "container_type",
-      "content_category",
-      "description",
-      "embeddable",
-      "end_offset",
-      "fbuploader_video_file_chunk",
-      "file_size",
-      "file_url",
-      "fisheye_video_cropped",
-      "formatting",
-      "fov",
-      "front_z_rotation",
-      "fun_fact_prompt_id",
-      "fun_fact_toastee_id",
-      "guide",
-      "guide_enabled",
-      "has_nickname",
-      "holiday_card",
-      "initial_heading",
-      "initial_pitch",
-      "instant_game_entry_point_data",
-      "is_boost_intended",
-      "is_explicit_share",
-      "is_group_linking_post",
-      "is_voice_clip",
-      "location_source_id",
-      "manual_privacy",
-      "offer_like_post_id",
-      "og_action_type_id",
-      "og_icon_id",
-      "og_object_id",
-      "og_phrase",
-      "og_suggestion_mechanism",
-      "original_fov",
-      "original_projection_type",
-      "publish_event_id",
-      "react_mode_metadata",
-      "referenced_sticker_id",
-      "replace_video_id",
-      "sales_promo_id",
-      "slideshow_spec",
-      "source",
-      "spherical",
-      "start_offset",
-      "swap_mode",
-      "text_format_metadata",
-      "throwback_camera_roll_media",
-      "thumb",
-      "time_since_original_post",
-      "title",
-      "transcode_setting_properties",
-      "unpublished_content_type",
-      "upload_phase",
-      "upload_session_id",
-      "upload_setting_properties",
-      "video_file_chunk",
-      "video_start_time_ms",
-      "waterfall_id",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public AdVideo parseResponse(String response, String header) throws APIException {
-      return AdVideo.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public AdVideo execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdVideo execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdVideo> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdVideo> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, AdVideo>() {
-           public AdVideo apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateVideo.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateVideo(String nodeId, APIContext context) {
-      super(context, nodeId, "/videos", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateVideo setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateVideo setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateVideo setAdaptiveType (String adaptiveType) {
-      this.setParam("adaptive_type", adaptiveType);
-      return this;
-    }
-
-    public APIRequestCreateVideo setAnimatedEffectId (Long animatedEffectId) {
-      this.setParam("animated_effect_id", animatedEffectId);
-      return this;
-    }
-    public APIRequestCreateVideo setAnimatedEffectId (String animatedEffectId) {
-      this.setParam("animated_effect_id", animatedEffectId);
-      return this;
-    }
-
-    public APIRequestCreateVideo setApplicationId (String applicationId) {
-      this.setParam("application_id", applicationId);
-      return this;
-    }
-
-    public APIRequestCreateVideo setAskedFunFactPromptId (Long askedFunFactPromptId) {
-      this.setParam("asked_fun_fact_prompt_id", askedFunFactPromptId);
-      return this;
-    }
-    public APIRequestCreateVideo setAskedFunFactPromptId (String askedFunFactPromptId) {
-      this.setParam("asked_fun_fact_prompt_id", askedFunFactPromptId);
-      return this;
-    }
-
-    public APIRequestCreateVideo setAttributionAppId (String attributionAppId) {
-      this.setParam("attribution_app_id", attributionAppId);
-      return this;
-    }
-
-    public APIRequestCreateVideo setAudioStoryWaveAnimationHandle (String audioStoryWaveAnimationHandle) {
-      this.setParam("audio_story_wave_animation_handle", audioStoryWaveAnimationHandle);
-      return this;
-    }
-
-    public APIRequestCreateVideo setComposerEntryPicker (String composerEntryPicker) {
-      this.setParam("composer_entry_picker", composerEntryPicker);
-      return this;
-    }
-
-    public APIRequestCreateVideo setComposerEntryPoint (String composerEntryPoint) {
-      this.setParam("composer_entry_point", composerEntryPoint);
-      return this;
-    }
-
-    public APIRequestCreateVideo setComposerEntryTime (Long composerEntryTime) {
-      this.setParam("composer_entry_time", composerEntryTime);
-      return this;
-    }
-    public APIRequestCreateVideo setComposerEntryTime (String composerEntryTime) {
-      this.setParam("composer_entry_time", composerEntryTime);
-      return this;
-    }
-
-    public APIRequestCreateVideo setComposerSessionEventsLog (String composerSessionEventsLog) {
-      this.setParam("composer_session_events_log", composerSessionEventsLog);
-      return this;
-    }
-
-    public APIRequestCreateVideo setComposerSessionId (String composerSessionId) {
-      this.setParam("composer_session_id", composerSessionId);
-      return this;
-    }
-
-    public APIRequestCreateVideo setComposerSourceSurface (String composerSourceSurface) {
-      this.setParam("composer_source_surface", composerSourceSurface);
-      return this;
-    }
-
-    public APIRequestCreateVideo setComposerType (String composerType) {
-      this.setParam("composer_type", composerType);
-      return this;
-    }
-
-    public APIRequestCreateVideo setContainerType (AdVideo.EnumContainerType containerType) {
-      this.setParam("container_type", containerType);
-      return this;
-    }
-    public APIRequestCreateVideo setContainerType (String containerType) {
-      this.setParam("container_type", containerType);
-      return this;
-    }
-
-    public APIRequestCreateVideo setContentCategory (AdVideo.EnumContentCategory contentCategory) {
-      this.setParam("content_category", contentCategory);
-      return this;
-    }
-    public APIRequestCreateVideo setContentCategory (String contentCategory) {
-      this.setParam("content_category", contentCategory);
-      return this;
-    }
-
-    public APIRequestCreateVideo setDescription (String description) {
-      this.setParam("description", description);
-      return this;
-    }
-
-    public APIRequestCreateVideo setEmbeddable (Boolean embeddable) {
-      this.setParam("embeddable", embeddable);
-      return this;
-    }
-    public APIRequestCreateVideo setEmbeddable (String embeddable) {
-      this.setParam("embeddable", embeddable);
-      return this;
-    }
-
-    public APIRequestCreateVideo setEndOffset (Long endOffset) {
-      this.setParam("end_offset", endOffset);
-      return this;
-    }
-    public APIRequestCreateVideo setEndOffset (String endOffset) {
-      this.setParam("end_offset", endOffset);
-      return this;
-    }
-
-    public APIRequestCreateVideo setFbuploaderVideoFileChunk (String fbuploaderVideoFileChunk) {
-      this.setParam("fbuploader_video_file_chunk", fbuploaderVideoFileChunk);
-      return this;
-    }
-
-    public APIRequestCreateVideo setFileSize (Long fileSize) {
-      this.setParam("file_size", fileSize);
-      return this;
-    }
-    public APIRequestCreateVideo setFileSize (String fileSize) {
-      this.setParam("file_size", fileSize);
-      return this;
-    }
-
-    public APIRequestCreateVideo setFileUrl (String fileUrl) {
-      this.setParam("file_url", fileUrl);
-      return this;
-    }
-
-    public APIRequestCreateVideo setFisheyeVideoCropped (Boolean fisheyeVideoCropped) {
-      this.setParam("fisheye_video_cropped", fisheyeVideoCropped);
-      return this;
-    }
-    public APIRequestCreateVideo setFisheyeVideoCropped (String fisheyeVideoCropped) {
-      this.setParam("fisheye_video_cropped", fisheyeVideoCropped);
-      return this;
-    }
-
-    public APIRequestCreateVideo setFormatting (AdVideo.EnumFormatting formatting) {
-      this.setParam("formatting", formatting);
-      return this;
-    }
-    public APIRequestCreateVideo setFormatting (String formatting) {
-      this.setParam("formatting", formatting);
-      return this;
-    }
-
-    public APIRequestCreateVideo setFov (Long fov) {
-      this.setParam("fov", fov);
-      return this;
-    }
-    public APIRequestCreateVideo setFov (String fov) {
-      this.setParam("fov", fov);
-      return this;
-    }
-
-    public APIRequestCreateVideo setFrontZRotation (Double frontZRotation) {
-      this.setParam("front_z_rotation", frontZRotation);
-      return this;
-    }
-    public APIRequestCreateVideo setFrontZRotation (String frontZRotation) {
-      this.setParam("front_z_rotation", frontZRotation);
-      return this;
-    }
-
-    public APIRequestCreateVideo setFunFactPromptId (Long funFactPromptId) {
-      this.setParam("fun_fact_prompt_id", funFactPromptId);
-      return this;
-    }
-    public APIRequestCreateVideo setFunFactPromptId (String funFactPromptId) {
-      this.setParam("fun_fact_prompt_id", funFactPromptId);
-      return this;
-    }
-
-    public APIRequestCreateVideo setFunFactToasteeId (Long funFactToasteeId) {
-      this.setParam("fun_fact_toastee_id", funFactToasteeId);
-      return this;
-    }
-    public APIRequestCreateVideo setFunFactToasteeId (String funFactToasteeId) {
-      this.setParam("fun_fact_toastee_id", funFactToasteeId);
-      return this;
-    }
-
-    public APIRequestCreateVideo setGuide (List<List<Long>> guide) {
-      this.setParam("guide", guide);
-      return this;
-    }
-    public APIRequestCreateVideo setGuide (String guide) {
-      this.setParam("guide", guide);
-      return this;
-    }
-
-    public APIRequestCreateVideo setGuideEnabled (Boolean guideEnabled) {
-      this.setParam("guide_enabled", guideEnabled);
-      return this;
-    }
-    public APIRequestCreateVideo setGuideEnabled (String guideEnabled) {
-      this.setParam("guide_enabled", guideEnabled);
-      return this;
-    }
-
-    public APIRequestCreateVideo setHasNickname (Boolean hasNickname) {
-      this.setParam("has_nickname", hasNickname);
-      return this;
-    }
-    public APIRequestCreateVideo setHasNickname (String hasNickname) {
-      this.setParam("has_nickname", hasNickname);
-      return this;
-    }
-
-    public APIRequestCreateVideo setHolidayCard (String holidayCard) {
-      this.setParam("holiday_card", holidayCard);
-      return this;
-    }
-
-    public APIRequestCreateVideo setInitialHeading (Long initialHeading) {
-      this.setParam("initial_heading", initialHeading);
-      return this;
-    }
-    public APIRequestCreateVideo setInitialHeading (String initialHeading) {
-      this.setParam("initial_heading", initialHeading);
-      return this;
-    }
-
-    public APIRequestCreateVideo setInitialPitch (Long initialPitch) {
-      this.setParam("initial_pitch", initialPitch);
-      return this;
-    }
-    public APIRequestCreateVideo setInitialPitch (String initialPitch) {
-      this.setParam("initial_pitch", initialPitch);
-      return this;
-    }
-
-    public APIRequestCreateVideo setInstantGameEntryPointData (String instantGameEntryPointData) {
-      this.setParam("instant_game_entry_point_data", instantGameEntryPointData);
-      return this;
-    }
-
-    public APIRequestCreateVideo setIsBoostIntended (Boolean isBoostIntended) {
-      this.setParam("is_boost_intended", isBoostIntended);
-      return this;
-    }
-    public APIRequestCreateVideo setIsBoostIntended (String isBoostIntended) {
-      this.setParam("is_boost_intended", isBoostIntended);
-      return this;
-    }
-
-    public APIRequestCreateVideo setIsExplicitShare (Boolean isExplicitShare) {
-      this.setParam("is_explicit_share", isExplicitShare);
-      return this;
-    }
-    public APIRequestCreateVideo setIsExplicitShare (String isExplicitShare) {
-      this.setParam("is_explicit_share", isExplicitShare);
-      return this;
-    }
-
-    public APIRequestCreateVideo setIsGroupLinkingPost (Boolean isGroupLinkingPost) {
-      this.setParam("is_group_linking_post", isGroupLinkingPost);
-      return this;
-    }
-    public APIRequestCreateVideo setIsGroupLinkingPost (String isGroupLinkingPost) {
-      this.setParam("is_group_linking_post", isGroupLinkingPost);
-      return this;
-    }
-
-    public APIRequestCreateVideo setIsVoiceClip (Boolean isVoiceClip) {
-      this.setParam("is_voice_clip", isVoiceClip);
-      return this;
-    }
-    public APIRequestCreateVideo setIsVoiceClip (String isVoiceClip) {
-      this.setParam("is_voice_clip", isVoiceClip);
-      return this;
-    }
-
-    public APIRequestCreateVideo setLocationSourceId (String locationSourceId) {
-      this.setParam("location_source_id", locationSourceId);
-      return this;
-    }
-
-    public APIRequestCreateVideo setManualPrivacy (Boolean manualPrivacy) {
-      this.setParam("manual_privacy", manualPrivacy);
-      return this;
-    }
-    public APIRequestCreateVideo setManualPrivacy (String manualPrivacy) {
-      this.setParam("manual_privacy", manualPrivacy);
-      return this;
-    }
-
-    public APIRequestCreateVideo setOfferLikePostId (Long offerLikePostId) {
-      this.setParam("offer_like_post_id", offerLikePostId);
-      return this;
-    }
-    public APIRequestCreateVideo setOfferLikePostId (String offerLikePostId) {
-      this.setParam("offer_like_post_id", offerLikePostId);
-      return this;
-    }
-
-    public APIRequestCreateVideo setOgActionTypeId (String ogActionTypeId) {
-      this.setParam("og_action_type_id", ogActionTypeId);
-      return this;
-    }
-
-    public APIRequestCreateVideo setOgIconId (String ogIconId) {
-      this.setParam("og_icon_id", ogIconId);
-      return this;
-    }
-
-    public APIRequestCreateVideo setOgObjectId (String ogObjectId) {
-      this.setParam("og_object_id", ogObjectId);
-      return this;
-    }
-
-    public APIRequestCreateVideo setOgPhrase (String ogPhrase) {
-      this.setParam("og_phrase", ogPhrase);
-      return this;
-    }
-
-    public APIRequestCreateVideo setOgSuggestionMechanism (String ogSuggestionMechanism) {
-      this.setParam("og_suggestion_mechanism", ogSuggestionMechanism);
-      return this;
-    }
-
-    public APIRequestCreateVideo setOriginalFov (Long originalFov) {
-      this.setParam("original_fov", originalFov);
-      return this;
-    }
-    public APIRequestCreateVideo setOriginalFov (String originalFov) {
-      this.setParam("original_fov", originalFov);
-      return this;
-    }
-
-    public APIRequestCreateVideo setOriginalProjectionType (AdVideo.EnumOriginalProjectionType originalProjectionType) {
-      this.setParam("original_projection_type", originalProjectionType);
-      return this;
-    }
-    public APIRequestCreateVideo setOriginalProjectionType (String originalProjectionType) {
-      this.setParam("original_projection_type", originalProjectionType);
-      return this;
-    }
-
-    public APIRequestCreateVideo setPublishEventId (Long publishEventId) {
-      this.setParam("publish_event_id", publishEventId);
-      return this;
-    }
-    public APIRequestCreateVideo setPublishEventId (String publishEventId) {
-      this.setParam("publish_event_id", publishEventId);
-      return this;
-    }
-
-    public APIRequestCreateVideo setReactModeMetadata (String reactModeMetadata) {
-      this.setParam("react_mode_metadata", reactModeMetadata);
-      return this;
-    }
-
-    public APIRequestCreateVideo setReferencedStickerId (String referencedStickerId) {
-      this.setParam("referenced_sticker_id", referencedStickerId);
-      return this;
-    }
-
-    public APIRequestCreateVideo setReplaceVideoId (String replaceVideoId) {
-      this.setParam("replace_video_id", replaceVideoId);
-      return this;
-    }
-
-    public APIRequestCreateVideo setSalesPromoId (Long salesPromoId) {
-      this.setParam("sales_promo_id", salesPromoId);
-      return this;
-    }
-    public APIRequestCreateVideo setSalesPromoId (String salesPromoId) {
-      this.setParam("sales_promo_id", salesPromoId);
-      return this;
-    }
-
-    public APIRequestCreateVideo setSlideshowSpec (Map<String, String> slideshowSpec) {
-      this.setParam("slideshow_spec", slideshowSpec);
-      return this;
-    }
-    public APIRequestCreateVideo setSlideshowSpec (String slideshowSpec) {
-      this.setParam("slideshow_spec", slideshowSpec);
-      return this;
-    }
-
-    public APIRequestCreateVideo setSource (String source) {
-      this.setParam("source", source);
-      return this;
-    }
-
-    public APIRequestCreateVideo setSpherical (Boolean spherical) {
-      this.setParam("spherical", spherical);
-      return this;
-    }
-    public APIRequestCreateVideo setSpherical (String spherical) {
-      this.setParam("spherical", spherical);
-      return this;
-    }
-
-    public APIRequestCreateVideo setStartOffset (Long startOffset) {
-      this.setParam("start_offset", startOffset);
-      return this;
-    }
-    public APIRequestCreateVideo setStartOffset (String startOffset) {
-      this.setParam("start_offset", startOffset);
-      return this;
-    }
-
-    public APIRequestCreateVideo setSwapMode (AdVideo.EnumSwapMode swapMode) {
-      this.setParam("swap_mode", swapMode);
-      return this;
-    }
-    public APIRequestCreateVideo setSwapMode (String swapMode) {
-      this.setParam("swap_mode", swapMode);
-      return this;
-    }
-
-    public APIRequestCreateVideo setTextFormatMetadata (String textFormatMetadata) {
-      this.setParam("text_format_metadata", textFormatMetadata);
-      return this;
-    }
-
-    public APIRequestCreateVideo setThrowbackCameraRollMedia (String throwbackCameraRollMedia) {
-      this.setParam("throwback_camera_roll_media", throwbackCameraRollMedia);
-      return this;
-    }
-
-    public APIRequestCreateVideo setThumb (File thumb) {
-      this.setParam("thumb", thumb);
-      return this;
-    }
-    public APIRequestCreateVideo setThumb (String thumb) {
-      this.setParam("thumb", thumb);
-      return this;
-    }
-
-    public APIRequestCreateVideo setTimeSinceOriginalPost (Long timeSinceOriginalPost) {
-      this.setParam("time_since_original_post", timeSinceOriginalPost);
-      return this;
-    }
-    public APIRequestCreateVideo setTimeSinceOriginalPost (String timeSinceOriginalPost) {
-      this.setParam("time_since_original_post", timeSinceOriginalPost);
-      return this;
-    }
-
-    public APIRequestCreateVideo setTitle (String title) {
-      this.setParam("title", title);
-      return this;
-    }
-
-    public APIRequestCreateVideo setTranscodeSettingProperties (String transcodeSettingProperties) {
-      this.setParam("transcode_setting_properties", transcodeSettingProperties);
-      return this;
-    }
-
-    public APIRequestCreateVideo setUnpublishedContentType (AdVideo.EnumUnpublishedContentType unpublishedContentType) {
-      this.setParam("unpublished_content_type", unpublishedContentType);
-      return this;
-    }
-    public APIRequestCreateVideo setUnpublishedContentType (String unpublishedContentType) {
-      this.setParam("unpublished_content_type", unpublishedContentType);
-      return this;
-    }
-
-    public APIRequestCreateVideo setUploadPhase (AdVideo.EnumUploadPhase uploadPhase) {
-      this.setParam("upload_phase", uploadPhase);
-      return this;
-    }
-    public APIRequestCreateVideo setUploadPhase (String uploadPhase) {
-      this.setParam("upload_phase", uploadPhase);
-      return this;
-    }
-
-    public APIRequestCreateVideo setUploadSessionId (String uploadSessionId) {
-      this.setParam("upload_session_id", uploadSessionId);
-      return this;
-    }
-
-    public APIRequestCreateVideo setUploadSettingProperties (String uploadSettingProperties) {
-      this.setParam("upload_setting_properties", uploadSettingProperties);
-      return this;
-    }
-
-    public APIRequestCreateVideo setVideoFileChunk (String videoFileChunk) {
-      this.setParam("video_file_chunk", videoFileChunk);
-      return this;
-    }
-
-    public APIRequestCreateVideo setVideoStartTimeMs (Long videoStartTimeMs) {
-      this.setParam("video_start_time_ms", videoStartTimeMs);
-      return this;
-    }
-    public APIRequestCreateVideo setVideoStartTimeMs (String videoStartTimeMs) {
-      this.setParam("video_start_time_ms", videoStartTimeMs);
-      return this;
-    }
-
-    public APIRequestCreateVideo setWaterfallId (String waterfallId) {
-      this.setParam("waterfall_id", waterfallId);
-      return this;
-    }
-
-    public APIRequestCreateVideo requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateVideo requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateVideo requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateVideo requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateVideo requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateVideo requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestDelete extends APIRequest<APINode> {
 
     APINode lastResponse = null;
@@ -10980,7 +9415,6 @@ public class ProductCatalog extends APINode {
       "default_image_url",
       "fallback_image_url",
       "feed_count",
-      "flight_catalog_settings",
       "id",
       "name",
       "product_count",
@@ -11117,13 +9551,6 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGet requestFeedCountField (boolean value) {
       this.requestField("feed_count", value);
-      return this;
-    }
-    public APIRequestGet requestFlightCatalogSettingsField () {
-      return this.requestFlightCatalogSettingsField(true);
-    }
-    public APIRequestGet requestFlightCatalogSettingsField (boolean value) {
-      this.requestField("flight_catalog_settings", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -11455,7 +9882,6 @@ public class ProductCatalog extends APINode {
     this.mDefaultImageUrl = instance.mDefaultImageUrl;
     this.mFallbackImageUrl = instance.mFallbackImageUrl;
     this.mFeedCount = instance.mFeedCount;
-    this.mFlightCatalogSettings = instance.mFlightCatalogSettings;
     this.mId = instance.mId;
     this.mName = instance.mName;
     this.mProductCount = instance.mProductCount;

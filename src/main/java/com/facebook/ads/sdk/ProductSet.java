@@ -280,10 +280,6 @@ public class ProductSet extends APINode {
     return new APIRequestGetAutomotiveModels(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetDaChecks getDaChecks() {
-    return new APIRequestGetDaChecks(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetDestinations getDestinations() {
     return new APIRequestGetDestinations(this.getPrefixedId().toString(), context);
   }
@@ -367,7 +363,6 @@ public class ProductSet extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "applinks",
       "automotive_model_id",
       "availability",
       "body_style",
@@ -502,13 +497,6 @@ public class ProductSet extends APINode {
       return this;
     }
 
-    public APIRequestGetAutomotiveModels requestApplinksField () {
-      return this.requestApplinksField(true);
-    }
-    public APIRequestGetAutomotiveModels requestApplinksField (boolean value) {
-      this.requestField("applinks", value);
-      return this;
-    }
     public APIRequestGetAutomotiveModels requestAutomotiveModelIdField () {
       return this.requestAutomotiveModelIdField(true);
     }
@@ -686,168 +674,6 @@ public class ProductSet extends APINode {
     }
   }
 
-  public static class APIRequestGetDaChecks extends APIRequest<DACheck> {
-
-    APINodeList<DACheck> lastResponse = null;
-    @Override
-    public APINodeList<DACheck> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "checks",
-    };
-
-    public static final String[] FIELDS = {
-      "action_uri",
-      "description",
-      "key",
-      "result",
-      "title",
-      "user_message",
-    };
-
-    @Override
-    public APINodeList<DACheck> parseResponse(String response, String header) throws APIException {
-      return DACheck.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<DACheck> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<DACheck> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<DACheck>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<DACheck>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<DACheck>>() {
-           public APINodeList<DACheck> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetDaChecks.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetDaChecks(String nodeId, APIContext context) {
-      super(context, nodeId, "/da_checks", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetDaChecks setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetDaChecks setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetDaChecks setChecks (List<String> checks) {
-      this.setParam("checks", checks);
-      return this;
-    }
-    public APIRequestGetDaChecks setChecks (String checks) {
-      this.setParam("checks", checks);
-      return this;
-    }
-
-    public APIRequestGetDaChecks requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetDaChecks requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetDaChecks requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetDaChecks requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetDaChecks requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetDaChecks requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetDaChecks requestActionUriField () {
-      return this.requestActionUriField(true);
-    }
-    public APIRequestGetDaChecks requestActionUriField (boolean value) {
-      this.requestField("action_uri", value);
-      return this;
-    }
-    public APIRequestGetDaChecks requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGetDaChecks requestDescriptionField (boolean value) {
-      this.requestField("description", value);
-      return this;
-    }
-    public APIRequestGetDaChecks requestKeyField () {
-      return this.requestKeyField(true);
-    }
-    public APIRequestGetDaChecks requestKeyField (boolean value) {
-      this.requestField("key", value);
-      return this;
-    }
-    public APIRequestGetDaChecks requestResultField () {
-      return this.requestResultField(true);
-    }
-    public APIRequestGetDaChecks requestResultField (boolean value) {
-      this.requestField("result", value);
-      return this;
-    }
-    public APIRequestGetDaChecks requestTitleField () {
-      return this.requestTitleField(true);
-    }
-    public APIRequestGetDaChecks requestTitleField (boolean value) {
-      this.requestField("title", value);
-      return this;
-    }
-    public APIRequestGetDaChecks requestUserMessageField () {
-      return this.requestUserMessageField(true);
-    }
-    public APIRequestGetDaChecks requestUserMessageField (boolean value) {
-      this.requestField("user_message", value);
-      return this;
-    }
-  }
-
   public static class APIRequestGetDestinations extends APIRequest<Destination> {
 
     APINodeList<Destination> lastResponse = null;
@@ -862,7 +688,6 @@ public class ProductSet extends APINode {
 
     public static final String[] FIELDS = {
       "address",
-      "applinks",
       "currency",
       "description",
       "destination_id",
@@ -990,13 +815,6 @@ public class ProductSet extends APINode {
       this.requestField("address", value);
       return this;
     }
-    public APIRequestGetDestinations requestApplinksField () {
-      return this.requestApplinksField(true);
-    }
-    public APIRequestGetDestinations requestApplinksField (boolean value) {
-      this.requestField("applinks", value);
-      return this;
-    }
     public APIRequestGetDestinations requestCurrencyField () {
       return this.requestCurrencyField(true);
     }
@@ -1089,7 +907,6 @@ public class ProductSet extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "applinks",
       "currency",
       "description",
       "destination_airport",
@@ -1213,13 +1030,6 @@ public class ProductSet extends APINode {
       return this;
     }
 
-    public APIRequestGetFlights requestApplinksField () {
-      return this.requestApplinksField(true);
-    }
-    public APIRequestGetFlights requestApplinksField (boolean value) {
-      this.requestField("applinks", value);
-      return this;
-    }
     public APIRequestGetFlights requestCurrencyField () {
       return this.requestCurrencyField(true);
     }
@@ -1341,7 +1151,6 @@ public class ProductSet extends APINode {
       "agent_fb_page_id",
       "agent_name",
       "agent_phone",
-      "applinks",
       "area_size",
       "area_unit",
       "availability",
@@ -1538,13 +1347,6 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetHomeListings requestAgentPhoneField (boolean value) {
       this.requestField("agent_phone", value);
-      return this;
-    }
-    public APIRequestGetHomeListings requestApplinksField () {
-      return this.requestApplinksField(true);
-    }
-    public APIRequestGetHomeListings requestApplinksField (boolean value) {
-      this.requestField("applinks", value);
       return this;
     }
     public APIRequestGetHomeListings requestAreaSizeField () {
@@ -1794,8 +1596,8 @@ public class ProductSet extends APINode {
 
     public static final String[] FIELDS = {
       "address",
-      "applinks",
       "brand",
+      "category",
       "currency",
       "description",
       "guest_ratings",
@@ -1927,18 +1729,18 @@ public class ProductSet extends APINode {
       this.requestField("address", value);
       return this;
     }
-    public APIRequestGetHotels requestApplinksField () {
-      return this.requestApplinksField(true);
-    }
-    public APIRequestGetHotels requestApplinksField (boolean value) {
-      this.requestField("applinks", value);
-      return this;
-    }
     public APIRequestGetHotels requestBrandField () {
       return this.requestBrandField(true);
     }
     public APIRequestGetHotels requestBrandField (boolean value) {
       this.requestField("brand", value);
+      return this;
+    }
+    public APIRequestGetHotels requestCategoryField () {
+      return this.requestCategoryField(true);
+    }
+    public APIRequestGetHotels requestCategoryField (boolean value) {
+      this.requestField("category", value);
       return this;
     }
     public APIRequestGetHotels requestCurrencyField () {
@@ -2065,7 +1867,6 @@ public class ProductSet extends APINode {
       "additional_image_urls",
       "additional_variant_attributes",
       "age_group",
-      "applinks",
       "availability",
       "brand",
       "capability_to_review_status",
@@ -2248,13 +2049,6 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetProducts requestAgeGroupField (boolean value) {
       this.requestField("age_group", value);
-      return this;
-    }
-    public APIRequestGetProducts requestApplinksField () {
-      return this.requestApplinksField(true);
-    }
-    public APIRequestGetProducts requestApplinksField (boolean value) {
-      this.requestField("applinks", value);
       return this;
     }
     public APIRequestGetProducts requestAvailabilityField () {
@@ -2605,7 +2399,6 @@ public class ProductSet extends APINode {
       "amount_percentage",
       "amount_price",
       "amount_qualifier",
-      "applinks",
       "body_style",
       "cashback_currency",
       "cashback_price",
@@ -2618,6 +2411,8 @@ public class ProductSet extends APINode {
       "end_time",
       "id",
       "images",
+      "make",
+      "model",
       "offer_description",
       "offer_disclaimer",
       "offer_type",
@@ -2769,13 +2564,6 @@ public class ProductSet extends APINode {
       this.requestField("amount_qualifier", value);
       return this;
     }
-    public APIRequestGetVehicleOffers requestApplinksField () {
-      return this.requestApplinksField(true);
-    }
-    public APIRequestGetVehicleOffers requestApplinksField (boolean value) {
-      this.requestField("applinks", value);
-      return this;
-    }
     public APIRequestGetVehicleOffers requestBodyStyleField () {
       return this.requestBodyStyleField(true);
     }
@@ -2858,6 +2646,20 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetVehicleOffers requestImagesField (boolean value) {
       this.requestField("images", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestMakeField () {
+      return this.requestMakeField(true);
+    }
+    public APIRequestGetVehicleOffers requestMakeField (boolean value) {
+      this.requestField("make", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestModelField () {
+      return this.requestModelField(true);
+    }
+    public APIRequestGetVehicleOffers requestModelField (boolean value) {
+      this.requestField("model", value);
       return this;
     }
     public APIRequestGetVehicleOffers requestOfferDescriptionField () {
@@ -2974,7 +2776,6 @@ public class ProductSet extends APINode {
 
     public static final String[] FIELDS = {
       "address",
-      "applinks",
       "availability",
       "body_style",
       "condition",
@@ -3131,13 +2932,6 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetVehicles requestAddressField (boolean value) {
       this.requestField("address", value);
-      return this;
-    }
-    public APIRequestGetVehicles requestApplinksField () {
-      return this.requestApplinksField(true);
-    }
-    public APIRequestGetVehicles requestApplinksField (boolean value) {
-      this.requestField("applinks", value);
       return this;
     }
     public APIRequestGetVehicles requestAvailabilityField () {
