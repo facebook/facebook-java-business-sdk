@@ -25,7 +25,7 @@
 import java.io.File;
 import java.util.Arrays;
 
-public class AdAccountAdSetsPostInterestTargeting {
+public class AdAccountAdSetsPostOptimizePostEngagement {
   public static void main (String args[]) throws APIException {
 
     String access_token = "<ACCESS_TOKEN>";
@@ -35,34 +35,32 @@ public class AdAccountAdSetsPostInterestTargeting {
     APIContext context = new APIContext(access_token).enableDebug(true);
 
     new AdAccount(id, context).createAdSet()
-      .setName("My First AdSet")
-      .setDailyBudget(10000L)
-      .setBidAmount(300L)
-      .setBillingEvent(AdSet.EnumBillingEvent.VALUE_IMPRESSIONS)
-      .setOptimizationGoal(AdSet.EnumOptimizationGoal.VALUE_REACH)
+      .setName("My First Adset")
+      .setLifetimeBudget(20000L)
+      .setStartTime("2019-12-05T23:43:27-0800")
+      .setEndTime("2019-12-15T23:43:27-0800")
       .setCampaignId("<adCampaignLinkClicksID>")
-      .setPromotedObject("{\"page_id\":\"<pageID>\"}")
+      .setBidAmount(500L)
+      .setBillingEvent(AdSet.EnumBillingEvent.VALUE_IMPRESSIONS)
+      .setOptimizationGoal(AdSet.EnumOptimizationGoal.VALUE_POST_ENGAGEMENT)
       .setTargeting(
           new Targeting()
             .setFieldAgeMax(24L)
             .setFieldAgeMin(20L)
-            .setFieldDevicePlatforms(Arrays.asList(Targeting.EnumDevicePlatforms.VALUE_MOBILE))
-            .setFieldFacebookPositions(Arrays.asList("feed"))
-            .setFieldFlexibleSpec(Arrays.asList(
-              new FlexibleTargeting()
-                .setFieldInterests(Arrays.asList(
-                  new IDName()
-                    .setFieldId("<adsInterestID>")
-                    .setFieldName("<adsInterestName>")
-                ))
+            .setFieldBehaviors(Arrays.asList(
+              new IDName()
+                .setFieldId("6002714895372")
+                .setFieldName("All travelers")
             ))
+            .setFieldDevicePlatforms(Arrays.asList(Targeting.EnumDevicePlatforms.VALUE_DESKTOP))
+            .setFieldFacebookPositions(Arrays.asList("feed"))
             .setFieldGenders(Arrays.asList(1L))
             .setFieldGeoLocations(
               new TargetingGeoLocation()
                 .setFieldCities(Arrays.asList(
                   new TargetingGeoLocationCity()
                     .setFieldDistanceUnit("mile")
-                    .setFieldKey(777934L)
+                    .setFieldKey("777934")
                     .setFieldRadius(10L)
                 ))
                 .setFieldCountries(Arrays.asList("US"))
@@ -71,7 +69,12 @@ public class AdAccountAdSetsPostInterestTargeting {
                     .setFieldKey("4081")
                 ))
             )
-            .setFieldPublisherPlatforms(Arrays.asList("facebook", "audience_network"))
+            .setFieldLifeEvents(Arrays.asList(
+              new IDName()
+                .setFieldId("6002714398172")
+                .setFieldName("Newlywed (1 year)")
+            ))
+            .setFieldPublisherPlatforms(Arrays.asList("facebook"))
         )
       .setStatus(AdSet.EnumStatus.VALUE_PAUSED)
       .execute();

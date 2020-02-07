@@ -28,7 +28,7 @@ import com.facebook.ads.sdk.serverside.EventRequest;
 import com.facebook.ads.sdk.serverside.EventResponse;
 import com.facebook.ads.sdk.serverside.UserData;
 
-public class ServerSideApiExample {
+public class AdsPixelEventsPostCustom {
 
   public static final String ACCESS_TOKEN = "<ACCESS_TOKEN>";
   public static final String PIXEL_ID = "<ADS_PIXEL_ID>";

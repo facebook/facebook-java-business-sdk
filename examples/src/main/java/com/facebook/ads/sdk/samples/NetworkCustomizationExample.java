@@ -18,78 +18,74 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
- *
  */
+package com.facebook.ads.sdk.samples;
+
+import com.facebook.ads.sdk.APIContext;
+import com.facebook.ads.sdk.APIException;
+import com.facebook.ads.sdk.APIRequest;
+import com.facebook.ads.sdk.AdAccount;
+import com.facebook.ads.sdk.Campaign;
+import com.google.gson.JsonElement;
 
 import java.io.IOException;
 import java.util.Map;
 
-import com.facebook.ads.sdk.APIContext;
-import com.facebook.ads.sdk.AdAccount;
-import com.facebook.ads.sdk.Campaign;
-import com.google.gson.JsonElement;
-import com.facebook.ads.sdk.APIException;
-import com.facebook.ads.sdk.APIRequest;
-
 public class NetworkCustomizationExample {
 
-  public static final String ACCESS_TOKEN = ExampleConfig.ACCESS_TOKEN;
-  public static final Long ACCOUNT_ID = ExampleConfig.ACCOUNT_ID;
-  public static final String APP_SECRET = ExampleConfig.APP_SECRET;
-  public static final APIContext context = new APIContext(ACCESS_TOKEN, APP_SECRET).enableDebug(true);
+    public static void main(String[] args) {
+        try {
+            // IMPORTANT NOTE:
+            // This is an over-simplified code example.
+            // In real products, please log the error and determine
+            // whether a retry is needed to prevent duplicated API calls.
+            APIRequest.changeRequestExecutor(new APIRequest.DefaultRequestExecutor() {
+                public static final int MAX_RETRY = 3;
 
-  public static void main(String[] args) {
-    try {
-      // IMPORTANT NOTE:
-      // This is an over-simplified code example.
-      // In real products, please log the error and determine
-      // whether a retry is needed to prevent duplicated API calls.
-      APIRequest.changeRequestExecutor(new APIRequest.DefaultRequestExecutor(){
-        public static final int MAX_RETRY = 3;
-        @Override
-        public String sendPost(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException{
-          String response;
-          int retry = 0;
-          while(true) {
-            try {
-              response = super.sendPost(apiUrl, allParams, context);
-              break;
-            } catch (APIException e) {
-              retry++;
-              if (retry >= MAX_RETRY) throw e;
-              if (e instanceof APIException.FailedRequestException && e.getMessage() != null) {
-                JsonElement isTransient = e.getRawResponseAsJsonObject().get("is_transient");
-                if (isTransient != null && isTransient.getAsBoolean() == false) throw e;
-              }
-              try {
-                Thread.sleep(3000);
-              } catch (InterruptedException e1) {
-                e1.printStackTrace();
-              }
-            } catch (IOException e) {
-              retry++;
-              if (retry >= MAX_RETRY) throw e;
-              try {
-                Thread.sleep(3000);
-              } catch (InterruptedException e1) {
-                e1.printStackTrace();
-              }
-            }
-          }
-          return response;
+                @Override
+                public APIRequest.ResponseWrapper sendPost(String apiUrl, Map<String, Object> allParams, APIContext CONTEXT) throws APIException, IOException {
+                    APIRequest.ResponseWrapper response;
+                    int retry = 0;
+                    while (true) {
+                        try {
+                            response = super.sendPost(apiUrl, allParams, CONTEXT);
+                            break;
+                        } catch (APIException e) {
+                            retry++;
+                            if (retry >= MAX_RETRY) throw e;
+                            if (e instanceof APIException.FailedRequestException && e.getMessage() != null) {
+                                JsonElement isTransient = e.getRawResponseAsJsonObject().get("is_transient");
+                                if (isTransient != null && isTransient.getAsBoolean() == false) throw e;
+                            }
+                            try {
+                                Thread.sleep(3000);
+                            } catch (InterruptedException e1) {
+                                e1.printStackTrace();
+                            }
+                        } catch (IOException e) {
+                            retry++;
+                            if (retry >= MAX_RETRY) throw e;
+                            try {
+                                Thread.sleep(3000);
+                            } catch (InterruptedException e1) {
+                                e1.printStackTrace();
+                            }
+                        }
+                    }
+                    return response;
+                }
+            });
+
+            AdAccount account = new AdAccount(ExampleConfig.ACCOUNT_ID, ExampleConfig.CONTEXT);
+            Campaign campaign = account.createCampaign()
+                    .setName("Java SDK Test Campaign")
+                    .setObjective(Campaign.EnumObjective.VALUE_LINK_CLICKS)
+                    .setSpendCap(10000L)
+                    .setStatus(Campaign.EnumStatus.VALUE_PAUSED)
+                    .execute();
+            System.out.println(campaign.fetch());
+        } catch (APIException e) {
+            e.printStackTrace();
         }
-      });
-
-      AdAccount account = new AdAccount(ACCOUNT_ID, context);
-      Campaign campaign = account.createCampaign()
-        .setName("Java SDK Test Campaign")
-        .setObjective(Campaign.EnumObjective.VALUE_LINK_CLICKS)
-        .setSpendCap(10000L)
-        .setStatus(Campaign.EnumStatus.VALUE_PAUSED)
-        .execute();
-      System.out.println(campaign.fetch());
-    } catch (APIException e) {
-      e.printStackTrace();
     }
-  }
 }

@@ -18,24 +18,29 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
+ *
  */
-package com.facebook.ads.sdk.samples;
 
-import com.facebook.ads.sdk.APIException;
-import com.facebook.ads.sdk.APINodeList;
-import com.facebook.ads.sdk.AdAccount;
-import com.facebook.ads.sdk.Campaign;
+ import com.facebook.ads.sdk.*;
+import java.io.File;
+import java.util.Arrays;
 
-public class PagingExample {
+public class AdAccountCampaignsPostStoreCampaign {
+  public static void main (String args[]) throws APIException {
 
-    public static void main(String[] args) throws APIException {
-        AdAccount account = new AdAccount(ExampleConfig.ACCOUNT_ID, ExampleConfig.CONTEXT);
-        APINodeList<Campaign> campaigns = account.getCampaigns().requestAllFields().execute();
-        while (campaigns != null) {
-            for (Campaign campaign : campaigns) {
-                System.out.println(campaign);
-            }
-            campaigns = campaigns.nextPage();
-        }
-    }
+    String access_token = "<ACCESS_TOKEN>";
+    String app_secret = "<APP_SECRET>";
+    String app_id = "<APP_ID>";
+    String id = "<AD_ACCOUNT_ID>";
+    APIContext context = new APIContext(access_token).enableDebug(true);
+
+    new AdAccount(id, context).createCampaign()
+      .setSpecialAdCategory(Campaign.EnumSpecialAdCategory.VALUE_NONE)
+      .setName("Link Clicks Campaign")
+      .setObjective(Campaign.EnumObjective.VALUE_LINK_CLICKS)
+      .setPromotedObject("{\"page_id\":\"<pageID>\"}")
+      .setStatus(Campaign.EnumStatus.VALUE_PAUSED)
+      .execute();
+
+  }
 }

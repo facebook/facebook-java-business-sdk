@@ -25,23 +25,16 @@
 import java.io.File;
 import java.util.Arrays;
 
-public class AdAccountAdsPost {
+public class AdsPixelSharedAgenciesEdge {
   public static void main (String args[]) throws APIException {
 
     String access_token = "<ACCESS_TOKEN>";
     String app_secret = "<APP_SECRET>";
     String app_id = "<APP_ID>";
-    String id = "<AD_ACCOUNT_ID>";
+    String id = "<PIXEL_ID>";
     APIContext context = new APIContext(access_token).enableDebug(true);
 
-    new AdAccount(id, context).createAd()
-      .setName("My Ad")
-      .setAdsetId(<adSetID>L)
-      .setCreative(
-          new AdCreative()
-            .setFieldId("<adCreativeID>")
-        )
-      .setStatus(Ad.EnumStatus.VALUE_PAUSED)
+    new AdsPixel(id, context).getSharedAgencies()
       .execute();
 
   }

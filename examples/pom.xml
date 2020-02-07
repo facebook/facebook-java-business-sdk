@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.facebook.ads.sdk</groupId>
-  <artifactId>samples</artifactId>
+  <groupId>com.facebook.business.sdk</groupId>
+  <artifactId>facebook-java-business-sdk-samples</artifactId>
   <packaging>jar</packaging>
-  <version>3.0.0</version>
+  <version>5.0.6</version>
   <name>${project.groupId}:${project.artifactId}</name>
   <description>Facebook Business Solutions SDK samples for Java</description>
   <url>https://developers.facebook.com/docs/marketing-api/sdks</url>
@@ -38,7 +38,7 @@
             <configuration>
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>BasicExample</mainClass>
+                  <mainClass>com.facebook.ads.sdk.samples.BasicExample</mainClass>
                 </transformer>
               </transformers>
               <finalName>BasicExample</finalName>
@@ -53,7 +53,7 @@
             <configuration>
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>AsyncBasicExample</mainClass>
+                  <mainClass>com.facebook.ads.sdk.samples.AsyncBasicExample</mainClass>
                 </transformer>
               </transformers>
               <finalName>AsyncBasicExample</finalName>
@@ -68,7 +68,7 @@
             <configuration>
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>AdhocAPIRequestExample</mainClass>
+                  <mainClass>com.facebook.ads.sdk.samples.AdhocAPIRequestExample</mainClass>
                 </transformer>
               </transformers>
               <finalName>AdhocAPIRequestExample</finalName>
@@ -83,7 +83,7 @@
             <configuration>
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>AsyncAdhocAPIRequestExample</mainClass>
+                  <mainClass>com.facebook.ads.sdk.samples.AsyncAdhocAPIRequestExample</mainClass>
                 </transformer>
               </transformers>
               <finalName>AsyncAdhocAPIRequestExample</finalName>
@@ -98,7 +98,7 @@
             <configuration>
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>AsyncInsightsExample</mainClass>
+                  <mainClass>com.facebook.business.sdk.samples.AsyncInsightsExample</mainClass>
                 </transformer>
               </transformers>
               <finalName>AsyncInsightsExample</finalName>
@@ -113,7 +113,7 @@
             <configuration>
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>BatchModeExample</mainClass>
+                  <mainClass>com.facebook.ads.sdk.samples.BatchModeExample</mainClass>
                 </transformer>
               </transformers>
               <finalName>BatchModeExample</finalName>
@@ -128,7 +128,7 @@
             <configuration>
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>CarouselAdsExample</mainClass>
+                  <mainClass>com.facebook.ads.sdk.samples.CarouselAdsExample</mainClass>
                 </transformer>
               </transformers>
               <finalName>CarouselAdsExample</finalName>
@@ -143,7 +143,7 @@
             <configuration>
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>CustomAudienceExample</mainClass>
+                  <mainClass>com.facebook.ads.sdk.samples.CustomAudienceExample</mainClass>
                 </transformer>
               </transformers>
               <finalName>CustomAudienceExample</finalName>
@@ -158,7 +158,7 @@
             <configuration>
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>FetchByIdsExample</mainClass>
+                  <mainClass>com.facebook.ads.sdk.samples.FetchByIdsExample</mainClass>
                 </transformer>
               </transformers>
               <finalName>FetchByIdsExample</finalName>
@@ -173,7 +173,7 @@
             <configuration>
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>NetworkCustomizationExample</mainClass>
+                  <mainClass>com.facebook.ads.sdk.samples.NetworkCustomizationExample</mainClass>
                 </transformer>
               </transformers>
               <finalName>NetworkCustomizationExample</finalName>
@@ -188,7 +188,7 @@
             <configuration>
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>PagingExample</mainClass>
+                  <mainClass>com.facebook.ads.sdk.samples.PagingExample</mainClass>
                 </transformer>
               </transformers>
               <finalName>PagingExample</finalName>
@@ -203,7 +203,7 @@
             <configuration>
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>QuickStartExample</mainClass>
+                  <mainClass>com.facebook.ads.sdk.samples.QuickStartExample</mainClass>
                 </transformer>
               </transformers>
               <finalName>QuickStartExample</finalName>
@@ -218,7 +218,7 @@
             <configuration>
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>TargetingExample</mainClass>
+                  <mainClass>com.facebook.ads.sdk.samples.TargetingExample</mainClass>
                 </transformer>
               </transformers>
               <finalName>TargetingExample</finalName>
@@ -233,7 +233,7 @@
             <configuration>
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>VideoUtilsUploadExample</mainClass>
+                  <mainClass>com.facebook.business.sdk.samples.VideoUtilsUploadExample</mainClass>
                 </transformer>
               </transformers>
               <finalName>VideoUtilsUploadExample</finalName>
@@ -245,9 +245,9 @@
   </build>
   <dependencies>
     <dependency>
-      <groupId>com.facebook.ads.sdk</groupId>
+      <groupId>com.facebook.business.sdk</groupId>
       <artifactId>facebook-java-business-sdk</artifactId>
-      <version>3.0.0</version>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>com.google.code.gson</groupId>

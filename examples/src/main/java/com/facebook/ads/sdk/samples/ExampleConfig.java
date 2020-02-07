@@ -18,17 +18,36 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
- *
  */
+package com.facebook.ads.sdk.samples;
+
+import com.facebook.ads.sdk.APIContext;
+import com.google.common.io.Resources;
+
+import java.io.File;
+import java.net.URISyntaxException;
 
 public class ExampleConfig {
   public static final String ACCESS_TOKEN = "Your Access Token";
-  public static final Long ACCOUNT_ID = "Your Account ID";
+  public static final String ACCOUNT_ID = "Your Account ID";
   public static final String APP_SECRET = "Your app secret";
-  public static final String IMAGE_FILE = "image.png";
-  public static final String VIDEO_FILE = "video.mp4";
   public static final String PAGE_ID = "Your Page ID";
-  public static final Long BUSINESS_ID = "Your Business ID";
+
+  public static final APIContext CONTEXT = new APIContext(ACCESS_TOKEN, APP_SECRET).enableDebug(true);
+
+  public static final String VIDEO_FILE = "video.mp4";
+  public static final String BUSINESS_ID = "Your Business ID";
   public static final String DPA_FEED_FILE_PATH = "dpa-feed-example.xml";
   public static final String CAMPAIGN_ID = "Your campaign ID";
+
+  public static File IMAGE_FILE = null;
+
+  static {
+    try {
+      IMAGE_FILE = new File(Resources.getResource("image.png").toURI());
+    } catch (URISyntaxException e) {
+      e.printStackTrace();
+    }
+  }
+
 }

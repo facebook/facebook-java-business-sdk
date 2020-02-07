@@ -25,7 +25,7 @@
 import java.io.File;
 import java.util.Arrays;
 
-public class AdAccountCampaignsPostStoreCampaign {
+public class AdAccountAdsPostTrackingPostEngagement {
   public static void main (String args[]) throws APIException {
 
     String access_token = "<ACCESS_TOKEN>";
@@ -34,12 +34,15 @@ public class AdAccountCampaignsPostStoreCampaign {
     String id = "<AD_ACCOUNT_ID>";
     APIContext context = new APIContext(access_token).enableDebug(true);
 
-    new AdAccount(id, context).createCampaign()
-      .setSpecialAdCategory(Campaign.EnumSpecialAdCategory.VALUE_NONE)
-      .setName("Store Visits Campaign")
-      .setObjective(Campaign.EnumObjective.VALUE_STORE_VISITS)
-      .setPromotedObject("{\"page_id\":\"<pageID>\"}")
-      .setStatus(Campaign.EnumStatus.VALUE_PAUSED)
+    new AdAccount(id, context).createAd()
+      .setName("My First Ad")
+      .setAdsetId("<adSetID>")
+      .setCreative(
+          new AdCreative()
+            .setFieldId("<adCreativeID>")
+        )
+      .setTrackingSpecs("{\"action.type\":\"post_engagement\",\"post\":\"<postID>\",\"page\":\"<pageID>\"}")
+      .setStatus(Ad.EnumStatus.VALUE_PAUSED)
       .execute();
 
   }

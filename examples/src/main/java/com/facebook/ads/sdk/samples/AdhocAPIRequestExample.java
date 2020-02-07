@@ -18,42 +18,34 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
- *
  */
+package com.facebook.ads.sdk.samples;
 
-import java.io.File;
-
-import com.facebook.ads.sdk.APIContext;
-import com.facebook.ads.sdk.AdAccount;
-import com.facebook.ads.sdk.Campaign;
 import com.facebook.ads.sdk.APIException;
 import com.facebook.ads.sdk.APINodeList;
 import com.facebook.ads.sdk.APIRequest;
+import com.facebook.ads.sdk.AdAccount;
+import com.facebook.ads.sdk.Campaign;
 
 public class AdhocAPIRequestExample {
 
-  public static final String ACCESS_TOKEN = ExampleConfig.ACCESS_TOKEN;
-  public static final Long ACCOUNT_ID = ExampleConfig.ACCOUNT_ID;
-  public static final String APP_SECRET = ExampleConfig.APP_SECRET;
-  public static final APIContext context = new APIContext(ACCESS_TOKEN, APP_SECRET).enableDebug(true);
-  public static final File imageFile = new File(ExampleConfig.IMAGE_FILE);
-
-  public static void main(String[] args) {
-    try {
-      APIRequest<AdAccount> request = new APIRequest<AdAccount>(context, "me", "/adaccounts", "GET", AdAccount.getParser());
-      APINodeList<AdAccount> accounts = (APINodeList<AdAccount>)(request.execute());
-      for (AdAccount account : accounts) {
-        System.out.println("account: " + account);
-        APIRequest<Campaign> campaigns_request = new APIRequest<Campaign>(context, "act_" + account.getId(), "/campaigns", "GET", null, Campaign.getParser())
-            .requestField("name");
-        APINodeList<Campaign> campaigns = (APINodeList<Campaign>)(campaigns_request.execute());
-        System.out.println("campaigns: " + campaigns);
-        for (Campaign campaign : campaigns) {
-          System.out.println("campaign: " + campaign);
+    public static void main(String[] args) {
+        try {
+            APIRequest<AdAccount> request = new APIRequest<AdAccount>(ExampleConfig.CONTEXT, "me", "/adaccounts", "GET", AdAccount.getParser());
+            APINodeList<AdAccount> accounts = (APINodeList<AdAccount>) (request.execute());
+            for (AdAccount account : accounts) {
+                System.out.println("account: " + account);
+                APIRequest<Campaign> campaigns_request = new APIRequest<Campaign>(ExampleConfig.CONTEXT, "act_" + account.getId(), "/campaigns", "GET", null, Campaign.getParser())
+                        .requestField("name");
+                APINodeList<Campaign> campaigns = (APINodeList<Campaign>) (campaigns_request.execute());
+                System.out.println("campaigns: " + campaigns);
+                for (Campaign campaign : campaigns) {
+                    System.out.println("campaign: " + campaign);
+                }
+            }
+            ;
+        } catch (APIException e) {
+            e.printStackTrace();
         }
-      };
-    } catch (APIException e) {
-      e.printStackTrace();
     }
-  }
 }
