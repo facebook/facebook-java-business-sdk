@@ -153,7 +153,7 @@ public class InstantArticle extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     instantArticle.context = context;
     instantArticle.rawValue = json;
@@ -174,8 +174,8 @@ public class InstantArticle extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           instantArticles.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return instantArticles;
+        }
+          return instantArticles;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -199,7 +199,7 @@ public class InstantArticle extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               instantArticles.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -374,9 +374,9 @@ public class InstantArticle extends APINode {
 
     public ListenableFuture<APINodeList<InstantArticleInsightsQueryResult>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<InstantArticleInsightsQueryResult>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<InstantArticleInsightsQueryResult>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<InstantArticleInsightsQueryResult>>() {
@@ -389,9 +389,9 @@ public class InstantArticle extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetInsights(String nodeId, APIContext context) {
+      public APIRequestGetInsights(String nodeId, APIContext context) {
       super(context, nodeId, "/insights", "GET", Arrays.asList(PARAMS));
     }
 
@@ -543,9 +543,9 @@ public class InstantArticle extends APINode {
 
     public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINode>() {
@@ -558,9 +558,9 @@ public class InstantArticle extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestDelete(String nodeId, APIContext context) {
+      public APIRequestDelete(String nodeId, APIContext context) {
       super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
     }
 
@@ -656,9 +656,9 @@ public class InstantArticle extends APINode {
 
     public ListenableFuture<InstantArticle> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<InstantArticle> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<InstantArticle> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, InstantArticle>() {
@@ -671,9 +671,9 @@ public class InstantArticle extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGet(String nodeId, APIContext context) {
+      public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 

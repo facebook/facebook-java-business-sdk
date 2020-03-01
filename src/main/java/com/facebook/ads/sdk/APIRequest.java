@@ -110,31 +110,31 @@ public class APIRequest<T extends APINode> {
 
   public APIResponse getLastResponse() {
     return lastResponse;
-  };
+  }
 
-  public APIResponse parseResponse(String response, String header) throws APIException {
+    public APIResponse parseResponse(String response, String header) throws APIException {
     if (parser != null) {
       return parser.parseResponse(response, context, this, header);
     } else {
       return APINode.parseResponse(response, context, new APIRequest<APINode>(context, nodeId, endpoint, method, paramNames), header);
     }
-  };
+  }
 
-  public APIResponse execute() throws APIException {
+    public APIResponse execute() throws APIException {
     return execute(new HashMap<String, Object>());
-  };
+  }
 
-  public APIResponse execute(Map<String, Object> extraParams) throws APIException {
+    public APIResponse execute(Map<String, Object> extraParams) throws APIException {
     ResponseWrapper rw = executeInternal(extraParams);
     lastResponse = parseResponse(rw.getBody(), rw.getHeader());
     return lastResponse;
-  };
+  }
 
-  public ListenableFuture<APIResponse> executeAsyncBase() throws APIException {
+    public ListenableFuture<APIResponse> executeAsyncBase() throws APIException {
     return executeAsyncBase(new HashMap<String, Object>());
-  };
+  }
 
-  public ListenableFuture<APIResponse> executeAsyncBase(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APIResponse> executeAsyncBase(Map<String, Object> extraParams) throws APIException {
     return Futures.transform(
       executeAsyncInternal(extraParams),
       new Function<ResponseWrapper, APIResponse>() {
@@ -147,9 +147,9 @@ public class APIRequest<T extends APINode> {
          }
        }
     );
-  };
+  }
 
-  public APIRequest<T> setParam(String param, Object value) {
+    public APIRequest<T> setParam(String param, Object value) {
     setParamInternal(param, value);
     return this;
   }

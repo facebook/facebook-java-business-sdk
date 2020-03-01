@@ -181,7 +181,7 @@ public class Comment extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     comment.context = context;
     comment.rawValue = json;
@@ -202,8 +202,8 @@ public class Comment extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           comments.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return comments;
+        }
+          return comments;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -227,7 +227,7 @@ public class Comment extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               comments.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -505,9 +505,9 @@ public class Comment extends APINode {
 
     public ListenableFuture<APINodeList<Comment>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Comment>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Comment>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Comment>>() {
@@ -520,9 +520,9 @@ public class Comment extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetComments(String nodeId, APIContext context) {
+      public APIRequestGetComments(String nodeId, APIContext context) {
       super(context, nodeId, "/comments", "GET", Arrays.asList(PARAMS));
     }
 
@@ -815,9 +815,9 @@ public class Comment extends APINode {
 
     public ListenableFuture<Comment> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<Comment> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<Comment> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, Comment>() {
@@ -830,9 +830,9 @@ public class Comment extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateComment(String nodeId, APIContext context) {
+      public APIRequestCreateComment(String nodeId, APIContext context) {
       super(context, nodeId, "/comments", "POST", Arrays.asList(PARAMS));
     }
 
@@ -1003,9 +1003,9 @@ public class Comment extends APINode {
 
     public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<APINode>>() {
@@ -1018,9 +1018,9 @@ public class Comment extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestDeleteLikes(String nodeId, APIContext context) {
+      public APIRequestDeleteLikes(String nodeId, APIContext context) {
       super(context, nodeId, "/likes", "DELETE", Arrays.asList(PARAMS));
     }
 
@@ -1125,9 +1125,9 @@ public class Comment extends APINode {
 
     public ListenableFuture<Comment> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<Comment> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<Comment> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, Comment>() {
@@ -1140,9 +1140,9 @@ public class Comment extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateLike(String nodeId, APIContext context) {
+      public APIRequestCreateLike(String nodeId, APIContext context) {
       super(context, nodeId, "/likes", "POST", Arrays.asList(PARAMS));
     }
 
@@ -1256,9 +1256,9 @@ public class Comment extends APINode {
 
     public ListenableFuture<APINodeList<Profile>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Profile>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Profile>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Profile>>() {
@@ -1271,9 +1271,9 @@ public class Comment extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetReactions(String nodeId, APIContext context) {
+      public APIRequestGetReactions(String nodeId, APIContext context) {
       super(context, nodeId, "/reactions", "GET", Arrays.asList(PARAMS));
     }
 
@@ -1446,9 +1446,9 @@ public class Comment extends APINode {
 
     public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINode>() {
@@ -1461,9 +1461,9 @@ public class Comment extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestDelete(String nodeId, APIContext context) {
+      public APIRequestDelete(String nodeId, APIContext context) {
       super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
     }
 
@@ -1573,9 +1573,9 @@ public class Comment extends APINode {
 
     public ListenableFuture<Comment> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<Comment> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<Comment> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, Comment>() {
@@ -1588,9 +1588,9 @@ public class Comment extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGet(String nodeId, APIContext context) {
+      public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 
@@ -1843,9 +1843,9 @@ public class Comment extends APINode {
 
     public ListenableFuture<Comment> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<Comment> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<Comment> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, Comment>() {
@@ -1858,9 +1858,9 @@ public class Comment extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestUpdate(String nodeId, APIContext context) {
+      public APIRequestUpdate(String nodeId, APIContext context) {
       super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
     }
 

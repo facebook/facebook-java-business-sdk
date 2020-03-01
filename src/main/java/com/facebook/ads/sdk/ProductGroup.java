@@ -143,7 +143,7 @@ public class ProductGroup extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     productGroup.context = context;
     productGroup.rawValue = json;
@@ -164,8 +164,8 @@ public class ProductGroup extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           productGroups.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return productGroups;
+        }
+          return productGroups;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -189,7 +189,7 @@ public class ProductGroup extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               productGroups.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -397,9 +397,9 @@ public class ProductGroup extends APINode {
 
     public ListenableFuture<APINodeList<ProductItem>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<ProductItem>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<ProductItem>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<ProductItem>>() {
@@ -412,9 +412,9 @@ public class ProductGroup extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetProducts(String nodeId, APIContext context) {
+      public APIRequestGetProducts(String nodeId, APIContext context) {
       super(context, nodeId, "/products", "GET", Arrays.asList(PARAMS));
     }
 
@@ -918,9 +918,9 @@ public class ProductGroup extends APINode {
 
     public ListenableFuture<ProductItem> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<ProductItem> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<ProductItem> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, ProductItem>() {
@@ -933,9 +933,9 @@ public class ProductGroup extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateProduct(String nodeId, APIContext context) {
+      public APIRequestCreateProduct(String nodeId, APIContext context) {
       super(context, nodeId, "/products", "POST", Arrays.asList(PARAMS));
     }
 
@@ -1390,9 +1390,9 @@ public class ProductGroup extends APINode {
 
     public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINode>() {
@@ -1405,9 +1405,9 @@ public class ProductGroup extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestDelete(String nodeId, APIContext context) {
+      public APIRequestDelete(String nodeId, APIContext context) {
       super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
     }
 
@@ -1498,9 +1498,9 @@ public class ProductGroup extends APINode {
 
     public ListenableFuture<ProductGroup> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<ProductGroup> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<ProductGroup> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, ProductGroup>() {
@@ -1513,9 +1513,9 @@ public class ProductGroup extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGet(String nodeId, APIContext context) {
+      public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 
@@ -1632,9 +1632,9 @@ public class ProductGroup extends APINode {
 
     public ListenableFuture<ProductGroup> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<ProductGroup> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<ProductGroup> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, ProductGroup>() {
@@ -1647,9 +1647,9 @@ public class ProductGroup extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestUpdate(String nodeId, APIContext context) {
+      public APIRequestUpdate(String nodeId, APIContext context) {
       super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
     }
 

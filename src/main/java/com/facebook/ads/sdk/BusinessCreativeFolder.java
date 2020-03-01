@@ -149,7 +149,7 @@ public class BusinessCreativeFolder extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     businessCreativeFolder.context = context;
     businessCreativeFolder.rawValue = json;
@@ -170,8 +170,8 @@ public class BusinessCreativeFolder extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           businessCreativeFolders.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return businessCreativeFolders;
+        }
+          return businessCreativeFolders;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -195,7 +195,7 @@ public class BusinessCreativeFolder extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               businessCreativeFolders.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -384,9 +384,9 @@ public class BusinessCreativeFolder extends APINode {
 
     public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<APINode>>() {
@@ -399,9 +399,9 @@ public class BusinessCreativeFolder extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestDeleteAgencies(String nodeId, APIContext context) {
+      public APIRequestDeleteAgencies(String nodeId, APIContext context) {
       super(context, nodeId, "/agencies", "DELETE", Arrays.asList(PARAMS));
     }
 
@@ -511,9 +511,9 @@ public class BusinessCreativeFolder extends APINode {
 
     public ListenableFuture<APINodeList<Business>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Business>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Business>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Business>>() {
@@ -526,9 +526,9 @@ public class BusinessCreativeFolder extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetAgencies(String nodeId, APIContext context) {
+      public APIRequestGetAgencies(String nodeId, APIContext context) {
       super(context, nodeId, "/agencies", "GET", Arrays.asList(PARAMS));
     }
 
@@ -743,9 +743,9 @@ public class BusinessCreativeFolder extends APINode {
 
     public ListenableFuture<BusinessCreativeFolder> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<BusinessCreativeFolder> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<BusinessCreativeFolder> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, BusinessCreativeFolder>() {
@@ -758,9 +758,9 @@ public class BusinessCreativeFolder extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateAgency(String nodeId, APIContext context) {
+      public APIRequestCreateAgency(String nodeId, APIContext context) {
       super(context, nodeId, "/agencies", "POST", Arrays.asList(PARAMS));
     }
 
@@ -866,9 +866,9 @@ public class BusinessCreativeFolder extends APINode {
 
     public ListenableFuture<APINodeList<AssignedUser>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<AssignedUser>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<AssignedUser>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<AssignedUser>>() {
@@ -881,9 +881,9 @@ public class BusinessCreativeFolder extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetAssignedUsers(String nodeId, APIContext context) {
+      public APIRequestGetAssignedUsers(String nodeId, APIContext context) {
       super(context, nodeId, "/assigned_users", "GET", Arrays.asList(PARAMS));
     }
 
@@ -1005,9 +1005,9 @@ public class BusinessCreativeFolder extends APINode {
 
     public ListenableFuture<BusinessCreativeFolder> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<BusinessCreativeFolder> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<BusinessCreativeFolder> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, BusinessCreativeFolder>() {
@@ -1020,9 +1020,9 @@ public class BusinessCreativeFolder extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateAssignedUser(String nodeId, APIContext context) {
+      public APIRequestCreateAssignedUser(String nodeId, APIContext context) {
       super(context, nodeId, "/assigned_users", "POST", Arrays.asList(PARAMS));
     }
 
@@ -1134,9 +1134,9 @@ public class BusinessCreativeFolder extends APINode {
 
     public ListenableFuture<APINodeList<BusinessCreativeFolder>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<BusinessCreativeFolder>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<BusinessCreativeFolder>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<BusinessCreativeFolder>>() {
@@ -1149,9 +1149,9 @@ public class BusinessCreativeFolder extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetSubFolders(String nodeId, APIContext context) {
+      public APIRequestGetSubFolders(String nodeId, APIContext context) {
       super(context, nodeId, "/subfolders", "GET", Arrays.asList(PARAMS));
     }
 
@@ -1287,9 +1287,9 @@ public class BusinessCreativeFolder extends APINode {
 
     public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINode>() {
@@ -1302,9 +1302,9 @@ public class BusinessCreativeFolder extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestDelete(String nodeId, APIContext context) {
+      public APIRequestDelete(String nodeId, APIContext context) {
       super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
     }
 
@@ -1398,9 +1398,9 @@ public class BusinessCreativeFolder extends APINode {
 
     public ListenableFuture<BusinessCreativeFolder> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<BusinessCreativeFolder> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<BusinessCreativeFolder> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, BusinessCreativeFolder>() {
@@ -1413,9 +1413,9 @@ public class BusinessCreativeFolder extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGet(String nodeId, APIContext context) {
+      public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 
@@ -1554,9 +1554,9 @@ public class BusinessCreativeFolder extends APINode {
 
     public ListenableFuture<BusinessCreativeFolder> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<BusinessCreativeFolder> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<BusinessCreativeFolder> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, BusinessCreativeFolder>() {
@@ -1569,9 +1569,9 @@ public class BusinessCreativeFolder extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestUpdate(String nodeId, APIContext context) {
+      public APIRequestUpdate(String nodeId, APIContext context) {
       super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
     }
 

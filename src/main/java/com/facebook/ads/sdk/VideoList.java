@@ -153,7 +153,7 @@ public class VideoList extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     videoList.context = context;
     videoList.rawValue = json;
@@ -174,8 +174,8 @@ public class VideoList extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           videoLists.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return videoLists;
+        }
+          return videoLists;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -199,7 +199,7 @@ public class VideoList extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               videoLists.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -401,9 +401,9 @@ public class VideoList extends APINode {
 
     public ListenableFuture<APINodeList<AdVideo>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<AdVideo>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<AdVideo>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<AdVideo>>() {
@@ -416,9 +416,9 @@ public class VideoList extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetVideos(String nodeId, APIContext context) {
+      public APIRequestGetVideos(String nodeId, APIContext context) {
       super(context, nodeId, "/videos", "GET", Arrays.asList(PARAMS));
     }
 
@@ -794,9 +794,9 @@ public class VideoList extends APINode {
 
     public ListenableFuture<VideoList> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<VideoList> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<VideoList> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, VideoList>() {
@@ -809,9 +809,9 @@ public class VideoList extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGet(String nodeId, APIContext context) {
+      public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 

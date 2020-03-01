@@ -331,7 +331,7 @@ public class AtlasCampaign extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     atlasCampaign.context = context;
     atlasCampaign.rawValue = json;
@@ -352,8 +352,8 @@ public class AtlasCampaign extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           atlasCampaigns.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return atlasCampaigns;
+        }
+          return atlasCampaigns;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -377,7 +377,7 @@ public class AtlasCampaign extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               atlasCampaigns.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -910,9 +910,9 @@ public class AtlasCampaign extends APINode {
 
     public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<APINode>>() {
@@ -925,9 +925,9 @@ public class AtlasCampaign extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetAdSets(String nodeId, APIContext context) {
+      public APIRequestGetAdSets(String nodeId, APIContext context) {
       super(context, nodeId, "/ad_sets", "GET", Arrays.asList(PARAMS));
     }
 
@@ -1042,9 +1042,9 @@ public class AtlasCampaign extends APINode {
 
     public ListenableFuture<APINodeList<BusinessUnit>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<BusinessUnit>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<BusinessUnit>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<BusinessUnit>>() {
@@ -1057,9 +1057,9 @@ public class AtlasCampaign extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetBusinessUnit(String nodeId, APIContext context) {
+      public APIRequestGetBusinessUnit(String nodeId, APIContext context) {
       super(context, nodeId, "/business_unit", "GET", Arrays.asList(PARAMS));
     }
 
@@ -1213,9 +1213,9 @@ public class AtlasCampaign extends APINode {
 
     public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<APINode>>() {
@@ -1228,9 +1228,9 @@ public class AtlasCampaign extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetMetricsBreakdown(String nodeId, APIContext context) {
+      public APIRequestGetMetricsBreakdown(String nodeId, APIContext context) {
       super(context, nodeId, "/metrics_breakdown", "GET", Arrays.asList(PARAMS));
     }
 
@@ -1356,9 +1356,9 @@ public class AtlasCampaign extends APINode {
 
     public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<APINode>>() {
@@ -1371,9 +1371,9 @@ public class AtlasCampaign extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetSources(String nodeId, APIContext context) {
+      public APIRequestGetSources(String nodeId, APIContext context) {
       super(context, nodeId, "/sources", "GET", Arrays.asList(PARAMS));
     }
 
@@ -1578,9 +1578,9 @@ public class AtlasCampaign extends APINode {
 
     public ListenableFuture<AtlasCampaign> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<AtlasCampaign> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<AtlasCampaign> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, AtlasCampaign>() {
@@ -1593,9 +1593,9 @@ public class AtlasCampaign extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGet(String nodeId, APIContext context) {
+      public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 

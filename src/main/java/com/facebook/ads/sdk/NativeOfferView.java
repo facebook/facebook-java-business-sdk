@@ -141,7 +141,7 @@ public class NativeOfferView extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     nativeOfferView.context = context;
     nativeOfferView.rawValue = json;
@@ -162,8 +162,8 @@ public class NativeOfferView extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           nativeOfferViews.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return nativeOfferViews;
+        }
+          return nativeOfferViews;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -187,7 +187,7 @@ public class NativeOfferView extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               nativeOfferViews.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -367,9 +367,9 @@ public class NativeOfferView extends APINode {
 
     public ListenableFuture<APINodeList<Photo>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Photo>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Photo>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Photo>>() {
@@ -382,9 +382,9 @@ public class NativeOfferView extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetPhotos(String nodeId, APIContext context) {
+      public APIRequestGetPhotos(String nodeId, APIContext context) {
       super(context, nodeId, "/photos", "GET", Arrays.asList(PARAMS));
     }
 
@@ -666,9 +666,9 @@ public class NativeOfferView extends APINode {
 
     public ListenableFuture<NativeOfferView> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<NativeOfferView> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<NativeOfferView> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, NativeOfferView>() {
@@ -681,9 +681,9 @@ public class NativeOfferView extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreatePhoto(String nodeId, APIContext context) {
+      public APIRequestCreatePhoto(String nodeId, APIContext context) {
       super(context, nodeId, "/photos", "POST", Arrays.asList(PARAMS));
     }
 
@@ -821,9 +821,9 @@ public class NativeOfferView extends APINode {
 
     public ListenableFuture<NativeOfferView> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<NativeOfferView> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<NativeOfferView> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, NativeOfferView>() {
@@ -836,9 +836,9 @@ public class NativeOfferView extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateVideo(String nodeId, APIContext context) {
+      public APIRequestCreateVideo(String nodeId, APIContext context) {
       super(context, nodeId, "/videos", "POST", Arrays.asList(PARAMS));
     }
 
@@ -937,9 +937,9 @@ public class NativeOfferView extends APINode {
 
     public ListenableFuture<NativeOfferView> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<NativeOfferView> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<NativeOfferView> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, NativeOfferView>() {
@@ -952,9 +952,9 @@ public class NativeOfferView extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGet(String nodeId, APIContext context) {
+      public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 
@@ -1065,9 +1065,9 @@ public class NativeOfferView extends APINode {
 
     public ListenableFuture<NativeOfferView> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<NativeOfferView> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<NativeOfferView> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, NativeOfferView>() {
@@ -1080,9 +1080,9 @@ public class NativeOfferView extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestUpdate(String nodeId, APIContext context) {
+      public APIRequestUpdate(String nodeId, APIContext context) {
       super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
     }
 

@@ -177,7 +177,7 @@ public class OpenGraphObject extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     openGraphObject.context = context;
     openGraphObject.rawValue = json;
@@ -198,8 +198,8 @@ public class OpenGraphObject extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           openGraphObjects.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return openGraphObjects;
+        }
+          return openGraphObjects;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -223,7 +223,7 @@ public class OpenGraphObject extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               openGraphObjects.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -445,9 +445,9 @@ public class OpenGraphObject extends APINode {
 
     public ListenableFuture<APINodeList<Profile>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Profile>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Profile>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Profile>>() {
@@ -460,9 +460,9 @@ public class OpenGraphObject extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetReactions(String nodeId, APIContext context) {
+      public APIRequestGetReactions(String nodeId, APIContext context) {
       super(context, nodeId, "/reactions", "GET", Arrays.asList(PARAMS));
     }
 
@@ -656,9 +656,9 @@ public class OpenGraphObject extends APINode {
 
     public ListenableFuture<OpenGraphObject> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<OpenGraphObject> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<OpenGraphObject> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, OpenGraphObject>() {
@@ -671,9 +671,9 @@ public class OpenGraphObject extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGet(String nodeId, APIContext context) {
+      public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 

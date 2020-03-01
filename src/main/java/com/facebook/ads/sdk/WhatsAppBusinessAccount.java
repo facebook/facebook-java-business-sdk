@@ -153,7 +153,7 @@ public class WhatsAppBusinessAccount extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     whatsAppBusinessAccount.context = context;
     whatsAppBusinessAccount.rawValue = json;
@@ -174,8 +174,8 @@ public class WhatsAppBusinessAccount extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           whatsAppBusinessAccounts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return whatsAppBusinessAccounts;
+        }
+          return whatsAppBusinessAccounts;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -199,7 +199,7 @@ public class WhatsAppBusinessAccount extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               whatsAppBusinessAccounts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -374,9 +374,9 @@ public class WhatsAppBusinessAccount extends APINode {
 
     public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<APINode>>() {
@@ -389,9 +389,9 @@ public class WhatsAppBusinessAccount extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestDeleteMessageTemplates(String nodeId, APIContext context) {
+      public APIRequestDeleteMessageTemplates(String nodeId, APIContext context) {
       super(context, nodeId, "/message_templates", "DELETE", Arrays.asList(PARAMS));
     }
 
@@ -489,9 +489,9 @@ public class WhatsAppBusinessAccount extends APINode {
 
     public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<APINode>>() {
@@ -504,9 +504,9 @@ public class WhatsAppBusinessAccount extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetMessageTemplates(String nodeId, APIContext context) {
+      public APIRequestGetMessageTemplates(String nodeId, APIContext context) {
       super(context, nodeId, "/message_templates", "GET", Arrays.asList(PARAMS));
     }
 
@@ -639,9 +639,9 @@ public class WhatsAppBusinessAccount extends APINode {
 
     public ListenableFuture<WhatsAppBusinessAccount> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<WhatsAppBusinessAccount> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<WhatsAppBusinessAccount> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, WhatsAppBusinessAccount>() {
@@ -654,9 +654,9 @@ public class WhatsAppBusinessAccount extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateMessageTemplate(String nodeId, APIContext context) {
+      public APIRequestCreateMessageTemplate(String nodeId, APIContext context) {
       super(context, nodeId, "/message_templates", "POST", Arrays.asList(PARAMS));
     }
 
@@ -771,9 +771,9 @@ public class WhatsAppBusinessAccount extends APINode {
 
     public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<APINode>>() {
@@ -786,9 +786,9 @@ public class WhatsAppBusinessAccount extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetPhoneNumbers(String nodeId, APIContext context) {
+      public APIRequestGetPhoneNumbers(String nodeId, APIContext context) {
       super(context, nodeId, "/phone_numbers", "GET", Arrays.asList(PARAMS));
     }
 
@@ -884,9 +884,9 @@ public class WhatsAppBusinessAccount extends APINode {
 
     public ListenableFuture<WhatsAppBusinessAccount> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<WhatsAppBusinessAccount> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<WhatsAppBusinessAccount> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, WhatsAppBusinessAccount>() {
@@ -899,9 +899,9 @@ public class WhatsAppBusinessAccount extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGet(String nodeId, APIContext context) {
+      public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 

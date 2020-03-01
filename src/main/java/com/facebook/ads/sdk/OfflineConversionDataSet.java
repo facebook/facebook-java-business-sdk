@@ -175,7 +175,7 @@ public class OfflineConversionDataSet extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     offlineConversionDataSet.context = context;
     offlineConversionDataSet.rawValue = json;
@@ -196,8 +196,8 @@ public class OfflineConversionDataSet extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           offlineConversionDataSets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return offlineConversionDataSets;
+        }
+          return offlineConversionDataSets;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -221,7 +221,7 @@ public class OfflineConversionDataSet extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               offlineConversionDataSets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -543,9 +543,9 @@ public class OfflineConversionDataSet extends APINode {
 
     public ListenableFuture<APINodeList<AdAccount>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<AdAccount>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<AdAccount>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<AdAccount>>() {
@@ -558,9 +558,9 @@ public class OfflineConversionDataSet extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetAdAccounts(String nodeId, APIContext context) {
+      public APIRequestGetAdAccounts(String nodeId, APIContext context) {
       super(context, nodeId, "/adaccounts", "GET", Arrays.asList(PARAMS));
     }
 
@@ -1075,9 +1075,9 @@ public class OfflineConversionDataSet extends APINode {
 
     public ListenableFuture<OfflineConversionDataSet> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<OfflineConversionDataSet> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<OfflineConversionDataSet> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, OfflineConversionDataSet>() {
@@ -1090,9 +1090,9 @@ public class OfflineConversionDataSet extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateAdAccount(String nodeId, APIContext context) {
+      public APIRequestCreateAdAccount(String nodeId, APIContext context) {
       super(context, nodeId, "/adaccounts", "POST", Arrays.asList(PARAMS));
     }
 
@@ -1216,9 +1216,9 @@ public class OfflineConversionDataSet extends APINode {
 
     public ListenableFuture<APINodeList<Business>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Business>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Business>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Business>>() {
@@ -1231,9 +1231,9 @@ public class OfflineConversionDataSet extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetAgencies(String nodeId, APIContext context) {
+      public APIRequestGetAgencies(String nodeId, APIContext context) {
       super(context, nodeId, "/agencies", "GET", Arrays.asList(PARAMS));
     }
 
@@ -1450,9 +1450,9 @@ public class OfflineConversionDataSet extends APINode {
 
     public ListenableFuture<OfflineConversionDataSet> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<OfflineConversionDataSet> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<OfflineConversionDataSet> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, OfflineConversionDataSet>() {
@@ -1465,9 +1465,9 @@ public class OfflineConversionDataSet extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateAgency(String nodeId, APIContext context) {
+      public APIRequestCreateAgency(String nodeId, APIContext context) {
       super(context, nodeId, "/agencies", "POST", Arrays.asList(PARAMS));
     }
 
@@ -1618,9 +1618,9 @@ public class OfflineConversionDataSet extends APINode {
 
     public ListenableFuture<APINodeList<CustomAudience>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<CustomAudience>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<CustomAudience>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<CustomAudience>>() {
@@ -1633,9 +1633,9 @@ public class OfflineConversionDataSet extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetAudiences(String nodeId, APIContext context) {
+      public APIRequestGetAudiences(String nodeId, APIContext context) {
       super(context, nodeId, "/audiences", "GET", Arrays.asList(PARAMS));
     }
 
@@ -1992,9 +1992,9 @@ public class OfflineConversionDataSet extends APINode {
 
     public ListenableFuture<APINodeList<CustomConversion>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<CustomConversion>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<CustomConversion>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<CustomConversion>>() {
@@ -2007,9 +2007,9 @@ public class OfflineConversionDataSet extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetCustomConversions(String nodeId, APIContext context) {
+      public APIRequestGetCustomConversions(String nodeId, APIContext context) {
       super(context, nodeId, "/customconversions", "GET", Arrays.asList(PARAMS));
     }
 
@@ -2240,9 +2240,9 @@ public class OfflineConversionDataSet extends APINode {
 
     public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINode>() {
@@ -2255,9 +2255,9 @@ public class OfflineConversionDataSet extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateEvent(String nodeId, APIContext context) {
+      public APIRequestCreateEvent(String nodeId, APIContext context) {
       super(context, nodeId, "/events", "POST", Arrays.asList(PARAMS));
     }
 
@@ -2388,9 +2388,9 @@ public class OfflineConversionDataSet extends APINode {
 
     public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<APINode>>() {
@@ -2403,9 +2403,9 @@ public class OfflineConversionDataSet extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetStats(String nodeId, APIContext context) {
+      public APIRequestGetStats(String nodeId, APIContext context) {
       super(context, nodeId, "/stats", "GET", Arrays.asList(PARAMS));
     }
 
@@ -2551,9 +2551,9 @@ public class OfflineConversionDataSet extends APINode {
 
     public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<APINode>>() {
@@ -2566,9 +2566,9 @@ public class OfflineConversionDataSet extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetUploads(String nodeId, APIContext context) {
+      public APIRequestGetUploads(String nodeId, APIContext context) {
       super(context, nodeId, "/uploads", "GET", Arrays.asList(PARAMS));
     }
 
@@ -2689,9 +2689,9 @@ public class OfflineConversionDataSet extends APINode {
 
     public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINode>() {
@@ -2704,9 +2704,9 @@ public class OfflineConversionDataSet extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateUpload(String nodeId, APIContext context) {
+      public APIRequestCreateUpload(String nodeId, APIContext context) {
       super(context, nodeId, "/uploads", "POST", Arrays.asList(PARAMS));
     }
 
@@ -2799,9 +2799,9 @@ public class OfflineConversionDataSet extends APINode {
 
     public ListenableFuture<OfflineConversionDataSet> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<OfflineConversionDataSet> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<OfflineConversionDataSet> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, OfflineConversionDataSet>() {
@@ -2814,9 +2814,9 @@ public class OfflineConversionDataSet extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateUser(String nodeId, APIContext context) {
+      public APIRequestCreateUser(String nodeId, APIContext context) {
       super(context, nodeId, "/users", "POST", Arrays.asList(PARAMS));
     }
 
@@ -2914,9 +2914,9 @@ public class OfflineConversionDataSet extends APINode {
 
     public ListenableFuture<OfflineConversionDataSet> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<OfflineConversionDataSet> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<OfflineConversionDataSet> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, OfflineConversionDataSet>() {
@@ -2929,9 +2929,9 @@ public class OfflineConversionDataSet extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateValidate(String nodeId, APIContext context) {
+      public APIRequestCreateValidate(String nodeId, APIContext context) {
       super(context, nodeId, "/validate", "POST", Arrays.asList(PARAMS));
     }
 
@@ -3032,9 +3032,9 @@ public class OfflineConversionDataSet extends APINode {
 
     public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINode>() {
@@ -3047,9 +3047,9 @@ public class OfflineConversionDataSet extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestDelete(String nodeId, APIContext context) {
+      public APIRequestDelete(String nodeId, APIContext context) {
       super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
     }
 
@@ -3156,9 +3156,9 @@ public class OfflineConversionDataSet extends APINode {
 
     public ListenableFuture<OfflineConversionDataSet> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<OfflineConversionDataSet> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<OfflineConversionDataSet> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, OfflineConversionDataSet>() {
@@ -3171,9 +3171,9 @@ public class OfflineConversionDataSet extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGet(String nodeId, APIContext context) {
+      public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 
@@ -3404,9 +3404,9 @@ public class OfflineConversionDataSet extends APINode {
 
     public ListenableFuture<OfflineConversionDataSet> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<OfflineConversionDataSet> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<OfflineConversionDataSet> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, OfflineConversionDataSet>() {
@@ -3419,9 +3419,9 @@ public class OfflineConversionDataSet extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestUpdate(String nodeId, APIContext context) {
+      public APIRequestUpdate(String nodeId, APIContext context) {
       super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
     }
 

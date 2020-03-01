@@ -147,7 +147,7 @@ public class DynamicItemDisplayBundleFolder extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     dynamicItemDisplayBundleFolder.context = context;
     dynamicItemDisplayBundleFolder.rawValue = json;
@@ -168,8 +168,8 @@ public class DynamicItemDisplayBundleFolder extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           dynamicItemDisplayBundleFolders.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return dynamicItemDisplayBundleFolders;
+        }
+          return dynamicItemDisplayBundleFolders;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -193,7 +193,7 @@ public class DynamicItemDisplayBundleFolder extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               dynamicItemDisplayBundleFolders.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -362,9 +362,9 @@ public class DynamicItemDisplayBundleFolder extends APINode {
 
     public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<APINode>>() {
@@ -377,9 +377,9 @@ public class DynamicItemDisplayBundleFolder extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestDeleteBundles(String nodeId, APIContext context) {
+      public APIRequestDeleteBundles(String nodeId, APIContext context) {
       super(context, nodeId, "/bundles", "DELETE", Arrays.asList(PARAMS));
     }
 
@@ -472,9 +472,9 @@ public class DynamicItemDisplayBundleFolder extends APINode {
 
     public ListenableFuture<DynamicItemDisplayBundleFolder> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<DynamicItemDisplayBundleFolder> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<DynamicItemDisplayBundleFolder> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, DynamicItemDisplayBundleFolder>() {
@@ -487,9 +487,9 @@ public class DynamicItemDisplayBundleFolder extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateBundle(String nodeId, APIContext context) {
+      public APIRequestCreateBundle(String nodeId, APIContext context) {
       super(context, nodeId, "/bundles", "POST", Arrays.asList(PARAMS));
     }
 
@@ -581,9 +581,9 @@ public class DynamicItemDisplayBundleFolder extends APINode {
 
     public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINode>() {
@@ -596,9 +596,9 @@ public class DynamicItemDisplayBundleFolder extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestDelete(String nodeId, APIContext context) {
+      public APIRequestDelete(String nodeId, APIContext context) {
       super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
     }
 
@@ -691,9 +691,9 @@ public class DynamicItemDisplayBundleFolder extends APINode {
 
     public ListenableFuture<DynamicItemDisplayBundleFolder> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<DynamicItemDisplayBundleFolder> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<DynamicItemDisplayBundleFolder> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, DynamicItemDisplayBundleFolder>() {
@@ -706,9 +706,9 @@ public class DynamicItemDisplayBundleFolder extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGet(String nodeId, APIContext context) {
+      public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 
@@ -838,9 +838,9 @@ public class DynamicItemDisplayBundleFolder extends APINode {
 
     public ListenableFuture<DynamicItemDisplayBundleFolder> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<DynamicItemDisplayBundleFolder> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<DynamicItemDisplayBundleFolder> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, DynamicItemDisplayBundleFolder>() {
@@ -853,9 +853,9 @@ public class DynamicItemDisplayBundleFolder extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestUpdate(String nodeId, APIContext context) {
+      public APIRequestUpdate(String nodeId, APIContext context) {
       super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
     }
 

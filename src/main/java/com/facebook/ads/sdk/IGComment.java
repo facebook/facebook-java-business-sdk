@@ -151,7 +151,7 @@ public class IGComment extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     igComment.context = context;
     igComment.rawValue = json;
@@ -172,8 +172,8 @@ public class IGComment extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           igComments.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return igComments;
+        }
+          return igComments;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -197,7 +197,7 @@ public class IGComment extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               igComments.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -381,9 +381,9 @@ public class IGComment extends APINode {
 
     public ListenableFuture<APINodeList<IGComment>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<IGComment>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<IGComment>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<IGComment>>() {
@@ -396,9 +396,9 @@ public class IGComment extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetReplies(String nodeId, APIContext context) {
+      public APIRequestGetReplies(String nodeId, APIContext context) {
       super(context, nodeId, "/replies", "GET", Arrays.asList(PARAMS));
     }
 
@@ -542,9 +542,9 @@ public class IGComment extends APINode {
 
     public ListenableFuture<IGComment> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<IGComment> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<IGComment> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, IGComment>() {
@@ -557,9 +557,9 @@ public class IGComment extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateReply(String nodeId, APIContext context) {
+      public APIRequestCreateReply(String nodeId, APIContext context) {
       super(context, nodeId, "/replies", "POST", Arrays.asList(PARAMS));
     }
 
@@ -651,9 +651,9 @@ public class IGComment extends APINode {
 
     public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINode>() {
@@ -666,9 +666,9 @@ public class IGComment extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestDelete(String nodeId, APIContext context) {
+      public APIRequestDelete(String nodeId, APIContext context) {
       super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
     }
 
@@ -763,9 +763,9 @@ public class IGComment extends APINode {
 
     public ListenableFuture<IGComment> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<IGComment> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<IGComment> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, IGComment>() {
@@ -778,9 +778,9 @@ public class IGComment extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGet(String nodeId, APIContext context) {
+      public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 
@@ -924,9 +924,9 @@ public class IGComment extends APINode {
 
     public ListenableFuture<IGComment> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<IGComment> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<IGComment> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, IGComment>() {
@@ -939,9 +939,9 @@ public class IGComment extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestUpdate(String nodeId, APIContext context) {
+      public APIRequestUpdate(String nodeId, APIContext context) {
       super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
     }
 

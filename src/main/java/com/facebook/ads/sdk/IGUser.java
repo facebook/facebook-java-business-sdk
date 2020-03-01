@@ -161,7 +161,7 @@ public class IGUser extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     igUser.context = context;
     igUser.rawValue = json;
@@ -182,8 +182,8 @@ public class IGUser extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           igUsers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return igUsers;
+        }
+          return igUsers;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -207,7 +207,7 @@ public class IGUser extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               igUsers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -432,9 +432,9 @@ public class IGUser extends APINode {
 
     public ListenableFuture<APINodeList<InstagramInsightsResult>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<InstagramInsightsResult>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<InstagramInsightsResult>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<InstagramInsightsResult>>() {
@@ -447,9 +447,9 @@ public class IGUser extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetInsights(String nodeId, APIContext context) {
+      public APIRequestGetInsights(String nodeId, APIContext context) {
       super(context, nodeId, "/insights", "GET", Arrays.asList(PARAMS));
     }
 
@@ -620,9 +620,9 @@ public class IGUser extends APINode {
 
     public ListenableFuture<APINodeList<IGMedia>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<IGMedia>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<IGMedia>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<IGMedia>>() {
@@ -635,9 +635,9 @@ public class IGUser extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetMedia(String nodeId, APIContext context) {
+      public APIRequestGetMedia(String nodeId, APIContext context) {
       super(context, nodeId, "/media", "GET", Arrays.asList(PARAMS));
     }
 
@@ -829,9 +829,9 @@ public class IGUser extends APINode {
 
     public ListenableFuture<IGMedia> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<IGMedia> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<IGMedia> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, IGMedia>() {
@@ -844,9 +844,9 @@ public class IGUser extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateMedia(String nodeId, APIContext context) {
+      public APIRequestCreateMedia(String nodeId, APIContext context) {
       super(context, nodeId, "/media", "POST", Arrays.asList(PARAMS));
     }
 
@@ -973,9 +973,9 @@ public class IGUser extends APINode {
 
     public ListenableFuture<IGMedia> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<IGMedia> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<IGMedia> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, IGMedia>() {
@@ -988,9 +988,9 @@ public class IGUser extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateMediaPublish(String nodeId, APIContext context) {
+      public APIRequestCreateMediaPublish(String nodeId, APIContext context) {
       super(context, nodeId, "/media_publish", "POST", Arrays.asList(PARAMS));
     }
 
@@ -1089,9 +1089,9 @@ public class IGUser extends APINode {
 
     public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINode>() {
@@ -1104,9 +1104,9 @@ public class IGUser extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateMention(String nodeId, APIContext context) {
+      public APIRequestCreateMention(String nodeId, APIContext context) {
       super(context, nodeId, "/mentions", "POST", Arrays.asList(PARAMS));
     }
 
@@ -1208,9 +1208,9 @@ public class IGUser extends APINode {
 
     public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<APINode>>() {
@@ -1223,9 +1223,9 @@ public class IGUser extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetRecentlySearchedHashtags(String nodeId, APIContext context) {
+      public APIRequestGetRecentlySearchedHashtags(String nodeId, APIContext context) {
       super(context, nodeId, "/recently_searched_hashtags", "GET", Arrays.asList(PARAMS));
     }
 
@@ -1326,9 +1326,9 @@ public class IGUser extends APINode {
 
     public ListenableFuture<APINodeList<IGMedia>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<IGMedia>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<IGMedia>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<IGMedia>>() {
@@ -1341,9 +1341,9 @@ public class IGUser extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetStories(String nodeId, APIContext context) {
+      public APIRequestGetStories(String nodeId, APIContext context) {
       super(context, nodeId, "/stories", "GET", Arrays.asList(PARAMS));
     }
 
@@ -1542,9 +1542,9 @@ public class IGUser extends APINode {
 
     public ListenableFuture<APINodeList<IGMedia>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<IGMedia>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<IGMedia>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<IGMedia>>() {
@@ -1557,9 +1557,9 @@ public class IGUser extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetTags(String nodeId, APIContext context) {
+      public APIRequestGetTags(String nodeId, APIContext context) {
       super(context, nodeId, "/tags", "GET", Arrays.asList(PARAMS));
     }
 
@@ -1757,9 +1757,9 @@ public class IGUser extends APINode {
 
     public ListenableFuture<IGUser> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<IGUser> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<IGUser> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, IGUser>() {
@@ -1772,9 +1772,9 @@ public class IGUser extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGet(String nodeId, APIContext context) {
+      public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 

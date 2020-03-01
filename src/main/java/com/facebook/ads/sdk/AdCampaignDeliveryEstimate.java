@@ -84,7 +84,7 @@ public class AdCampaignDeliveryEstimate extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     adCampaignDeliveryEstimate.context = context;
     adCampaignDeliveryEstimate.rawValue = json;
@@ -105,8 +105,8 @@ public class AdCampaignDeliveryEstimate extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           adCampaignDeliveryEstimates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return adCampaignDeliveryEstimates;
+        }
+          return adCampaignDeliveryEstimates;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -130,7 +130,7 @@ public class AdCampaignDeliveryEstimate extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               adCampaignDeliveryEstimates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();

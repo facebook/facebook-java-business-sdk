@@ -78,7 +78,7 @@ public class AdCampaignBidConstraint extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     adCampaignBidConstraint.context = context;
     adCampaignBidConstraint.rawValue = json;
@@ -99,8 +99,8 @@ public class AdCampaignBidConstraint extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           adCampaignBidConstraints.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return adCampaignBidConstraints;
+        }
+          return adCampaignBidConstraints;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -124,7 +124,7 @@ public class AdCampaignBidConstraint extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               adCampaignBidConstraints.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();

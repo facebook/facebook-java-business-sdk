@@ -161,7 +161,7 @@ public class ProductFeedUpload extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     productFeedUpload.context = context;
     productFeedUpload.rawValue = json;
@@ -182,8 +182,8 @@ public class ProductFeedUpload extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           productFeedUploads.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return productFeedUploads;
+        }
+          return productFeedUploads;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -207,7 +207,7 @@ public class ProductFeedUpload extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               productFeedUploads.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -389,9 +389,9 @@ public class ProductFeedUpload extends APINode {
 
     public ListenableFuture<ProductFeedUpload> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<ProductFeedUpload> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<ProductFeedUpload> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, ProductFeedUpload>() {
@@ -404,9 +404,9 @@ public class ProductFeedUpload extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateErrorReport(String nodeId, APIContext context) {
+      public APIRequestCreateErrorReport(String nodeId, APIContext context) {
       super(context, nodeId, "/error_report", "POST", Arrays.asList(PARAMS));
     }
 
@@ -500,9 +500,9 @@ public class ProductFeedUpload extends APINode {
 
     public ListenableFuture<APINodeList<ProductFeedUploadError>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<ProductFeedUploadError>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<ProductFeedUploadError>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<ProductFeedUploadError>>() {
@@ -515,9 +515,9 @@ public class ProductFeedUpload extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetErrors(String nodeId, APIContext context) {
+      public APIRequestGetErrors(String nodeId, APIContext context) {
       super(context, nodeId, "/errors", "GET", Arrays.asList(PARAMS));
     }
 
@@ -666,9 +666,9 @@ public class ProductFeedUpload extends APINode {
 
     public ListenableFuture<ProductFeedUpload> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<ProductFeedUpload> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<ProductFeedUpload> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, ProductFeedUpload>() {
@@ -681,9 +681,9 @@ public class ProductFeedUpload extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGet(String nodeId, APIContext context) {
+      public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 

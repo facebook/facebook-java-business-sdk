@@ -159,7 +159,7 @@ public class Destination extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     destination.context = context;
     destination.rawValue = json;
@@ -180,8 +180,8 @@ public class Destination extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           destinations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return destinations;
+        }
+          return destinations;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -205,7 +205,7 @@ public class Destination extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               destinations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -387,9 +387,9 @@ public class Destination extends APINode {
 
     public ListenableFuture<Destination> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<Destination> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<Destination> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, Destination>() {
@@ -402,9 +402,9 @@ public class Destination extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGet(String nodeId, APIContext context) {
+      public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 

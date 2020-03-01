@@ -147,7 +147,7 @@ public class SystemUser extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     systemUser.context = context;
     systemUser.rawValue = json;
@@ -168,8 +168,8 @@ public class SystemUser extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           systemUsers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return systemUsers;
+        }
+          return systemUsers;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -193,7 +193,7 @@ public class SystemUser extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               systemUsers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -422,9 +422,9 @@ public class SystemUser extends APINode {
 
     public ListenableFuture<APINodeList<AdAccount>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<AdAccount>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<AdAccount>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<AdAccount>>() {
@@ -437,9 +437,9 @@ public class SystemUser extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetAssignedAdAccounts(String nodeId, APIContext context) {
+      public APIRequestGetAssignedAdAccounts(String nodeId, APIContext context) {
       super(context, nodeId, "/assigned_ad_accounts", "GET", Arrays.asList(PARAMS));
     }
 
@@ -949,9 +949,9 @@ public class SystemUser extends APINode {
 
     public ListenableFuture<APINodeList<BusinessAssetGroup>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<BusinessAssetGroup>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<BusinessAssetGroup>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<BusinessAssetGroup>>() {
@@ -964,9 +964,9 @@ public class SystemUser extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetAssignedBusinessAssetGroups(String nodeId, APIContext context) {
+      public APIRequestGetAssignedBusinessAssetGroups(String nodeId, APIContext context) {
       super(context, nodeId, "/assigned_business_asset_groups", "GET", Arrays.asList(PARAMS));
     }
 
@@ -1210,9 +1210,9 @@ public class SystemUser extends APINode {
 
     public ListenableFuture<APINodeList<Page>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Page>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Page>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Page>>() {
@@ -1225,9 +1225,9 @@ public class SystemUser extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetAssignedPages(String nodeId, APIContext context) {
+      public APIRequestGetAssignedPages(String nodeId, APIContext context) {
       super(context, nodeId, "/assigned_pages", "GET", Arrays.asList(PARAMS));
     }
 
@@ -2291,9 +2291,9 @@ public class SystemUser extends APINode {
 
     public ListenableFuture<APINodeList<ProductCatalog>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<ProductCatalog>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<ProductCatalog>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<ProductCatalog>>() {
@@ -2306,9 +2306,9 @@ public class SystemUser extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetAssignedProductCatalogs(String nodeId, APIContext context) {
+      public APIRequestGetAssignedProductCatalogs(String nodeId, APIContext context) {
       super(context, nodeId, "/assigned_product_catalogs", "GET", Arrays.asList(PARAMS));
     }
 
@@ -2531,9 +2531,9 @@ public class SystemUser extends APINode {
 
     public ListenableFuture<APINodeList<User>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<User>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<User>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<User>>() {
@@ -2546,9 +2546,9 @@ public class SystemUser extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetUpdatedBy(String nodeId, APIContext context) {
+      public APIRequestGetUpdatedBy(String nodeId, APIContext context) {
       super(context, nodeId, "/updated_by", "GET", Arrays.asList(PARAMS));
     }
 
@@ -3054,9 +3054,9 @@ public class SystemUser extends APINode {
 
     public ListenableFuture<SystemUser> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<SystemUser> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<SystemUser> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, SystemUser>() {
@@ -3069,9 +3069,9 @@ public class SystemUser extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGet(String nodeId, APIContext context) {
+      public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 

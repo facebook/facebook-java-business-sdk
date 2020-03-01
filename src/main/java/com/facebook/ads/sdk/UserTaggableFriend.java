@@ -86,7 +86,7 @@ public class UserTaggableFriend extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     userTaggableFriend.context = context;
     userTaggableFriend.rawValue = json;
@@ -107,8 +107,8 @@ public class UserTaggableFriend extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           userTaggableFriends.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return userTaggableFriends;
+        }
+          return userTaggableFriends;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -132,7 +132,7 @@ public class UserTaggableFriend extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               userTaggableFriends.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -312,9 +312,9 @@ public class UserTaggableFriend extends APINode {
 
     public ListenableFuture<APINodeList<ProfilePictureSource>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<ProfilePictureSource>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<ProfilePictureSource>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<ProfilePictureSource>>() {
@@ -327,9 +327,9 @@ public class UserTaggableFriend extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetPicture(String nodeId, APIContext context) {
+      public APIRequestGetPicture(String nodeId, APIContext context) {
       super(context, nodeId, "/picture", "GET", Arrays.asList(PARAMS));
     }
 

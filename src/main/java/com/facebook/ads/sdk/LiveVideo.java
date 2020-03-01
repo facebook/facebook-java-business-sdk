@@ -189,7 +189,7 @@ public class LiveVideo extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     liveVideo.context = context;
     liveVideo.rawValue = json;
@@ -210,8 +210,8 @@ public class LiveVideo extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           liveVideos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return liveVideos;
+        }
+          return liveVideos;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -235,7 +235,7 @@ public class LiveVideo extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               liveVideos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -579,9 +579,9 @@ public class LiveVideo extends APINode {
 
     public ListenableFuture<APINodeList<User>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<User>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<User>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<User>>() {
@@ -594,9 +594,9 @@ public class LiveVideo extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetBlockedUsers(String nodeId, APIContext context) {
+      public APIRequestGetBlockedUsers(String nodeId, APIContext context) {
       super(context, nodeId, "/blocked_users", "GET", Arrays.asList(PARAMS));
     }
 
@@ -1132,9 +1132,9 @@ public class LiveVideo extends APINode {
 
     public ListenableFuture<APINodeList<Comment>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Comment>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Comment>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Comment>>() {
@@ -1147,9 +1147,9 @@ public class LiveVideo extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetComments(String nodeId, APIContext context) {
+      public APIRequestGetComments(String nodeId, APIContext context) {
       super(context, nodeId, "/comments", "GET", Arrays.asList(PARAMS));
     }
 
@@ -1567,9 +1567,9 @@ public class LiveVideo extends APINode {
 
     public ListenableFuture<APINodeList<Page>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Page>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Page>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Page>>() {
@@ -1582,9 +1582,9 @@ public class LiveVideo extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetCrosspostSharedPages(String nodeId, APIContext context) {
+      public APIRequestGetCrosspostSharedPages(String nodeId, APIContext context) {
       super(context, nodeId, "/crosspost_shared_pages", "GET", Arrays.asList(PARAMS));
     }
 
@@ -2664,9 +2664,9 @@ public class LiveVideo extends APINode {
 
     public ListenableFuture<APINodeList<LiveVideo>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<LiveVideo>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<LiveVideo>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<LiveVideo>>() {
@@ -2679,9 +2679,9 @@ public class LiveVideo extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetCrosspostedBroadcasts(String nodeId, APIContext context) {
+      public APIRequestGetCrosspostedBroadcasts(String nodeId, APIContext context) {
       super(context, nodeId, "/crossposted_broadcasts", "GET", Arrays.asList(PARAMS));
     }
 
@@ -2962,9 +2962,9 @@ public class LiveVideo extends APINode {
 
     public ListenableFuture<APINodeList<LiveVideoError>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<LiveVideoError>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<LiveVideoError>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<LiveVideoError>>() {
@@ -2977,9 +2977,9 @@ public class LiveVideo extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetErrors(String nodeId, APIContext context) {
+      public APIRequestGetErrors(String nodeId, APIContext context) {
       super(context, nodeId, "/errors", "GET", Arrays.asList(PARAMS));
     }
 
@@ -3101,9 +3101,9 @@ public class LiveVideo extends APINode {
 
     public ListenableFuture<LiveVideoInputStream> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<LiveVideoInputStream> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<LiveVideoInputStream> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, LiveVideoInputStream>() {
@@ -3116,9 +3116,9 @@ public class LiveVideo extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateInputStream(String nodeId, APIContext context) {
+      public APIRequestCreateInputStream(String nodeId, APIContext context) {
       super(context, nodeId, "/input_streams", "POST", Arrays.asList(PARAMS));
     }
 
@@ -3216,9 +3216,9 @@ public class LiveVideo extends APINode {
 
     public ListenableFuture<APINodeList<Profile>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Profile>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Profile>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Profile>>() {
@@ -3231,9 +3231,9 @@ public class LiveVideo extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetLikes(String nodeId, APIContext context) {
+      public APIRequestGetLikes(String nodeId, APIContext context) {
       super(context, nodeId, "/likes", "GET", Arrays.asList(PARAMS));
     }
 
@@ -3404,9 +3404,9 @@ public class LiveVideo extends APINode {
 
     public ListenableFuture<APINodeList<VideoPoll>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<VideoPoll>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<VideoPoll>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<VideoPoll>>() {
@@ -3419,9 +3419,9 @@ public class LiveVideo extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetPolls(String nodeId, APIContext context) {
+      public APIRequestGetPolls(String nodeId, APIContext context) {
       super(context, nodeId, "/polls", "GET", Arrays.asList(PARAMS));
     }
 
@@ -3564,9 +3564,9 @@ public class LiveVideo extends APINode {
 
     public ListenableFuture<VideoPoll> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<VideoPoll> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<VideoPoll> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, VideoPoll>() {
@@ -3579,9 +3579,9 @@ public class LiveVideo extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreatePoll(String nodeId, APIContext context) {
+      public APIRequestCreatePoll(String nodeId, APIContext context) {
       super(context, nodeId, "/polls", "POST", Arrays.asList(PARAMS));
     }
 
@@ -3739,9 +3739,9 @@ public class LiveVideo extends APINode {
 
     public ListenableFuture<APINodeList<Profile>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Profile>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Profile>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Profile>>() {
@@ -3754,9 +3754,9 @@ public class LiveVideo extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetReactions(String nodeId, APIContext context) {
+      public APIRequestGetReactions(String nodeId, APIContext context) {
       super(context, nodeId, "/reactions", "GET", Arrays.asList(PARAMS));
     }
 
@@ -3929,9 +3929,9 @@ public class LiveVideo extends APINode {
 
     public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINode>() {
@@ -3944,9 +3944,9 @@ public class LiveVideo extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestDelete(String nodeId, APIContext context) {
+      public APIRequestDelete(String nodeId, APIContext context) {
       super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
     }
 
@@ -4061,9 +4061,9 @@ public class LiveVideo extends APINode {
 
     public ListenableFuture<LiveVideo> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<LiveVideo> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<LiveVideo> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, LiveVideo>() {
@@ -4076,9 +4076,9 @@ public class LiveVideo extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGet(String nodeId, APIContext context) {
+      public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 
@@ -4394,9 +4394,9 @@ public class LiveVideo extends APINode {
 
     public ListenableFuture<LiveVideo> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<LiveVideo> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<LiveVideo> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, LiveVideo>() {
@@ -4409,9 +4409,9 @@ public class LiveVideo extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestUpdate(String nodeId, APIContext context) {
+      public APIRequestUpdate(String nodeId, APIContext context) {
       super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
     }
 
