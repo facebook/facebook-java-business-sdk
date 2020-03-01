@@ -253,7 +253,7 @@ public class User extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     user.context = context;
     user.rawValue = json;
@@ -274,8 +274,8 @@ public class User extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           users.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return users;
+        }
+          return users;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -299,7 +299,7 @@ public class User extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               users.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -918,9 +918,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<APINode>>() {
@@ -933,9 +933,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestDeleteAccessTokens(String nodeId, APIContext context) {
+      public APIRequestDeleteAccessTokens(String nodeId, APIContext context) {
       super(context, nodeId, "/access_tokens", "DELETE", Arrays.asList(PARAMS));
     }
 
@@ -1025,9 +1025,9 @@ public class User extends APINode {
 
     public ListenableFuture<User> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<User> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<User> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, User>() {
@@ -1040,9 +1040,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateAccessToken(String nodeId, APIContext context) {
+      public APIRequestCreateAccessToken(String nodeId, APIContext context) {
       super(context, nodeId, "/access_tokens", "POST", Arrays.asList(PARAMS));
     }
 
@@ -1292,9 +1292,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<Page>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Page>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Page>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Page>>() {
@@ -1307,9 +1307,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetAccounts(String nodeId, APIContext context) {
+      public APIRequestGetAccounts(String nodeId, APIContext context) {
       super(context, nodeId, "/accounts", "GET", Arrays.asList(PARAMS));
     }
 
@@ -2396,9 +2396,9 @@ public class User extends APINode {
 
     public ListenableFuture<Page> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<Page> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<Page> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, Page>() {
@@ -2411,9 +2411,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateAccount(String nodeId, APIContext context) {
+      public APIRequestCreateAccount(String nodeId, APIContext context) {
       super(context, nodeId, "/accounts", "POST", Arrays.asList(PARAMS));
     }
 
@@ -2635,9 +2635,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINode>() {
@@ -2650,9 +2650,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateAchievement(String nodeId, APIContext context) {
+      public APIRequestCreateAchievement(String nodeId, APIContext context) {
       super(context, nodeId, "/achievements", "POST", Arrays.asList(PARAMS));
     }
 
@@ -2961,9 +2961,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<AdStudy>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<AdStudy>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<AdStudy>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<AdStudy>>() {
@@ -2976,9 +2976,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetAdStudies(String nodeId, APIContext context) {
+      public APIRequestGetAdStudies(String nodeId, APIContext context) {
       super(context, nodeId, "/ad_studies", "GET", Arrays.asList(PARAMS));
     }
 
@@ -3182,9 +3182,9 @@ public class User extends APINode {
 
     public ListenableFuture<AdStudy> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<AdStudy> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<AdStudy> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, AdStudy>() {
@@ -3197,9 +3197,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateAdStudy(String nodeId, APIContext context) {
+      public APIRequestCreateAdStudy(String nodeId, APIContext context) {
       super(context, nodeId, "/ad_studies", "POST", Arrays.asList(PARAMS));
     }
 
@@ -3442,9 +3442,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<AdAccount>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<AdAccount>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<AdAccount>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<AdAccount>>() {
@@ -3457,9 +3457,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetAdAccounts(String nodeId, APIContext context) {
+      public APIRequestGetAdAccounts(String nodeId, APIContext context) {
       super(context, nodeId, "/adaccounts", "GET", Arrays.asList(PARAMS));
     }
 
@@ -3989,9 +3989,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<Album>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Album>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Album>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Album>>() {
@@ -4004,9 +4004,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetAlbums(String nodeId, APIContext context) {
+      public APIRequestGetAlbums(String nodeId, APIContext context) {
       super(context, nodeId, "/albums", "GET", Arrays.asList(PARAMS));
     }
 
@@ -4255,9 +4255,9 @@ public class User extends APINode {
 
     public ListenableFuture<User> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<User> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<User> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, User>() {
@@ -4270,9 +4270,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateApplication(String nodeId, APIContext context) {
+      public APIRequestCreateApplication(String nodeId, APIContext context) {
       super(context, nodeId, "/applications", "POST", Arrays.asList(PARAMS));
     }
 
@@ -4370,9 +4370,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<AppRequestFormerRecipient>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<AppRequestFormerRecipient>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<AppRequestFormerRecipient>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<AppRequestFormerRecipient>>() {
@@ -4385,9 +4385,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetAppRequestFormerRecipients(String nodeId, APIContext context) {
+      public APIRequestGetAppRequestFormerRecipients(String nodeId, APIContext context) {
       super(context, nodeId, "/apprequestformerrecipients", "GET", Arrays.asList(PARAMS));
     }
 
@@ -4497,9 +4497,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<AppRequest>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<AppRequest>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<AppRequest>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<AppRequest>>() {
@@ -4512,9 +4512,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetAppRequests(String nodeId, APIContext context) {
+      public APIRequestGetAppRequests(String nodeId, APIContext context) {
       super(context, nodeId, "/apprequests", "GET", Arrays.asList(PARAMS));
     }
 
@@ -4724,9 +4724,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<AdAccount>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<AdAccount>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<AdAccount>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<AdAccount>>() {
@@ -4739,9 +4739,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetAssignedAdAccounts(String nodeId, APIContext context) {
+      public APIRequestGetAssignedAdAccounts(String nodeId, APIContext context) {
       super(context, nodeId, "/assigned_ad_accounts", "GET", Arrays.asList(PARAMS));
     }
 
@@ -5251,9 +5251,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<BusinessAssetGroup>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<BusinessAssetGroup>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<BusinessAssetGroup>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<BusinessAssetGroup>>() {
@@ -5266,9 +5266,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetAssignedBusinessAssetGroups(String nodeId, APIContext context) {
+      public APIRequestGetAssignedBusinessAssetGroups(String nodeId, APIContext context) {
       super(context, nodeId, "/assigned_business_asset_groups", "GET", Arrays.asList(PARAMS));
     }
 
@@ -5512,9 +5512,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<Page>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Page>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Page>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Page>>() {
@@ -5527,9 +5527,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetAssignedPages(String nodeId, APIContext context) {
+      public APIRequestGetAssignedPages(String nodeId, APIContext context) {
       super(context, nodeId, "/assigned_pages", "GET", Arrays.asList(PARAMS));
     }
 
@@ -6593,9 +6593,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<ProductCatalog>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<ProductCatalog>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<ProductCatalog>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<ProductCatalog>>() {
@@ -6608,9 +6608,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetAssignedProductCatalogs(String nodeId, APIContext context) {
+      public APIRequestGetAssignedProductCatalogs(String nodeId, APIContext context) {
       super(context, nodeId, "/assigned_product_catalogs", "GET", Arrays.asList(PARAMS));
     }
 
@@ -6913,9 +6913,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<Page>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Page>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Page>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Page>>() {
@@ -6928,9 +6928,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetBooks(String nodeId, APIContext context) {
+      public APIRequestGetBooks(String nodeId, APIContext context) {
       super(context, nodeId, "/books", "GET", Arrays.asList(PARAMS));
     }
 
@@ -8001,9 +8001,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<BusinessUser>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<BusinessUser>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<BusinessUser>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<BusinessUser>>() {
@@ -8016,9 +8016,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetBusinessUsers(String nodeId, APIContext context) {
+      public APIRequestGetBusinessUsers(String nodeId, APIContext context) {
       super(context, nodeId, "/business_users", "GET", Arrays.asList(PARAMS));
     }
 
@@ -8197,9 +8197,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<APINode>>() {
@@ -8212,9 +8212,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestDeleteBusinesses(String nodeId, APIContext context) {
+      public APIRequestDeleteBusinesses(String nodeId, APIContext context) {
       super(context, nodeId, "/businesses", "DELETE", Arrays.asList(PARAMS));
     }
 
@@ -8324,9 +8324,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<Business>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Business>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Business>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Business>>() {
@@ -8339,9 +8339,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetBusinesses(String nodeId, APIContext context) {
+      public APIRequestGetBusinesses(String nodeId, APIContext context) {
       super(context, nodeId, "/businesses", "GET", Arrays.asList(PARAMS));
     }
 
@@ -8563,9 +8563,9 @@ public class User extends APINode {
 
     public ListenableFuture<Business> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<Business> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<Business> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, Business>() {
@@ -8578,9 +8578,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateBusiness(String nodeId, APIContext context) {
+      public APIRequestCreateBusiness(String nodeId, APIContext context) {
       super(context, nodeId, "/businesses", "POST", Arrays.asList(PARAMS));
     }
 
@@ -8750,9 +8750,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<UnifiedThread>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<UnifiedThread>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<UnifiedThread>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<UnifiedThread>>() {
@@ -8765,9 +8765,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetConversations(String nodeId, APIContext context) {
+      public APIRequestGetConversations(String nodeId, APIContext context) {
       super(context, nodeId, "/conversations", "GET", Arrays.asList(PARAMS));
     }
 
@@ -8980,9 +8980,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<PageUserMessageThreadLabel>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<PageUserMessageThreadLabel>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<PageUserMessageThreadLabel>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<PageUserMessageThreadLabel>>() {
@@ -8995,9 +8995,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetCustomLabels(String nodeId, APIContext context) {
+      public APIRequestGetCustomLabels(String nodeId, APIContext context) {
       super(context, nodeId, "/custom_labels", "GET", Arrays.asList(PARAMS));
     }
 
@@ -9130,9 +9130,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<Event>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Event>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Event>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Event>>() {
@@ -9145,9 +9145,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetEvents(String nodeId, APIContext context) {
+      public APIRequestGetEvents(String nodeId, APIContext context) {
       super(context, nodeId, "/events", "GET", Arrays.asList(PARAMS));
     }
 
@@ -9574,9 +9574,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINode>() {
@@ -9589,9 +9589,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateFeed(String nodeId, APIContext context) {
+      public APIRequestCreateFeed(String nodeId, APIContext context) {
       super(context, nodeId, "/feed", "POST", Arrays.asList(PARAMS));
     }
 
@@ -10482,9 +10482,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<FriendList>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<FriendList>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<FriendList>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<FriendList>>() {
@@ -10497,9 +10497,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetFriendLists(String nodeId, APIContext context) {
+      public APIRequestGetFriendLists(String nodeId, APIContext context) {
       super(context, nodeId, "/friendlists", "GET", Arrays.asList(PARAMS));
     }
 
@@ -10674,9 +10674,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<User>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<User>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<User>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<User>>() {
@@ -10689,9 +10689,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetFriends(String nodeId, APIContext context) {
+      public APIRequestGetFriends(String nodeId, APIContext context) {
       super(context, nodeId, "/friends", "GET", Arrays.asList(PARAMS));
     }
 
@@ -11206,9 +11206,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINode>() {
@@ -11221,9 +11221,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateGameItem(String nodeId, APIContext context) {
+      public APIRequestCreateGameItem(String nodeId, APIContext context) {
       super(context, nodeId, "/game_items", "POST", Arrays.asList(PARAMS));
     }
 
@@ -11349,9 +11349,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINode>() {
@@ -11364,9 +11364,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateGameTime(String nodeId, APIContext context) {
+      public APIRequestCreateGameTime(String nodeId, APIContext context) {
       super(context, nodeId, "/game_times", "POST", Arrays.asList(PARAMS));
     }
 
@@ -11601,9 +11601,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<Page>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Page>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Page>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Page>>() {
@@ -11616,9 +11616,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetGames(String nodeId, APIContext context) {
+      public APIRequestGetGames(String nodeId, APIContext context) {
       super(context, nodeId, "/games", "GET", Arrays.asList(PARAMS));
     }
 
@@ -12707,9 +12707,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINode>() {
@@ -12722,9 +12722,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateGamesPlay(String nodeId, APIContext context) {
+      public APIRequestCreateGamesPlay(String nodeId, APIContext context) {
       super(context, nodeId, "/games_plays", "POST", Arrays.asList(PARAMS));
     }
 
@@ -13021,9 +13021,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINode>() {
@@ -13036,9 +13036,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateGamesStat(String nodeId, APIContext context) {
+      public APIRequestCreateGamesStat(String nodeId, APIContext context) {
       super(context, nodeId, "/games_stats", "POST", Arrays.asList(PARAMS));
     }
 
@@ -13169,9 +13169,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<Group>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Group>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Group>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Group>>() {
@@ -13184,9 +13184,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetGroups(String nodeId, APIContext context) {
+      public APIRequestGetGroups(String nodeId, APIContext context) {
       super(context, nodeId, "/groups", "GET", Arrays.asList(PARAMS));
     }
 
@@ -13423,9 +13423,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<UserIDForApp>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<UserIDForApp>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<UserIDForApp>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<UserIDForApp>>() {
@@ -13438,9 +13438,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetIdsForApps(String nodeId, APIContext context) {
+      public APIRequestGetIdsForApps(String nodeId, APIContext context) {
       super(context, nodeId, "/ids_for_apps", "GET", Arrays.asList(PARAMS));
     }
 
@@ -13553,9 +13553,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<UserIDForApp>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<UserIDForApp>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<UserIDForApp>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<UserIDForApp>>() {
@@ -13568,9 +13568,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetIdsForBusiness(String nodeId, APIContext context) {
+      public APIRequestGetIdsForBusiness(String nodeId, APIContext context) {
       super(context, nodeId, "/ids_for_business", "GET", Arrays.asList(PARAMS));
     }
 
@@ -13683,9 +13683,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<UserIDForPage>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<UserIDForPage>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<UserIDForPage>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<UserIDForPage>>() {
@@ -13698,9 +13698,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetIdsForPages(String nodeId, APIContext context) {
+      public APIRequestGetIdsForPages(String nodeId, APIContext context) {
       super(context, nodeId, "/ids_for_pages", "GET", Arrays.asList(PARAMS));
     }
 
@@ -13823,9 +13823,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<InsightsResult>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<InsightsResult>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<InsightsResult>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<InsightsResult>>() {
@@ -13838,9 +13838,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetInsights(String nodeId, APIContext context) {
+      public APIRequestGetInsights(String nodeId, APIContext context) {
       super(context, nodeId, "/insights", "GET", Arrays.asList(PARAMS));
     }
 
@@ -14161,9 +14161,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<Page>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Page>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Page>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Page>>() {
@@ -14176,9 +14176,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetLikes(String nodeId, APIContext context) {
+      public APIRequestGetLikes(String nodeId, APIContext context) {
       super(context, nodeId, "/likes", "GET", Arrays.asList(PARAMS));
     }
 
@@ -15247,9 +15247,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<LiveEncoder>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<LiveEncoder>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<LiveEncoder>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<LiveEncoder>>() {
@@ -15262,9 +15262,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetLiveEncoders(String nodeId, APIContext context) {
+      public APIRequestGetLiveEncoders(String nodeId, APIContext context) {
       super(context, nodeId, "/live_encoders", "GET", Arrays.asList(PARAMS));
     }
 
@@ -15433,9 +15433,9 @@ public class User extends APINode {
 
     public ListenableFuture<LiveEncoder> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<LiveEncoder> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<LiveEncoder> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, LiveEncoder>() {
@@ -15448,9 +15448,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateLiveEncoder(String nodeId, APIContext context) {
+      public APIRequestCreateLiveEncoder(String nodeId, APIContext context) {
       super(context, nodeId, "/live_encoders", "POST", Arrays.asList(PARAMS));
     }
 
@@ -15591,9 +15591,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<LiveVideo>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<LiveVideo>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<LiveVideo>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<LiveVideo>>() {
@@ -15606,9 +15606,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetLiveVideos(String nodeId, APIContext context) {
+      public APIRequestGetLiveVideos(String nodeId, APIContext context) {
       super(context, nodeId, "/live_videos", "GET", Arrays.asList(PARAMS));
     }
 
@@ -15923,9 +15923,9 @@ public class User extends APINode {
 
     public ListenableFuture<LiveVideo> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<LiveVideo> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<LiveVideo> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, LiveVideo>() {
@@ -15938,9 +15938,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateLiveVideo(String nodeId, APIContext context) {
+      public APIRequestCreateLiveVideo(String nodeId, APIContext context) {
       super(context, nodeId, "/live_videos", "POST", Arrays.asList(PARAMS));
     }
 
@@ -16205,9 +16205,9 @@ public class User extends APINode {
 
     public ListenableFuture<User> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<User> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<User> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, User>() {
@@ -16220,9 +16220,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateMfsAccountPinReset(String nodeId, APIContext context) {
+      public APIRequestCreateMfsAccountPinReset(String nodeId, APIContext context) {
       super(context, nodeId, "/mfs_account_pin_reset", "POST", Arrays.asList(PARAMS));
     }
 
@@ -16481,9 +16481,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<Page>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Page>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Page>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Page>>() {
@@ -16496,9 +16496,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetMovies(String nodeId, APIContext context) {
+      public APIRequestGetMovies(String nodeId, APIContext context) {
       super(context, nodeId, "/movies", "GET", Arrays.asList(PARAMS));
     }
 
@@ -17695,9 +17695,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<Page>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Page>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Page>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Page>>() {
@@ -17710,9 +17710,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetMusic(String nodeId, APIContext context) {
+      public APIRequestGetMusic(String nodeId, APIContext context) {
       super(context, nodeId, "/music", "GET", Arrays.asList(PARAMS));
     }
 
@@ -18778,9 +18778,9 @@ public class User extends APINode {
 
     public ListenableFuture<User> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<User> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<User> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, User>() {
@@ -18793,9 +18793,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateNotification(String nodeId, APIContext context) {
+      public APIRequestCreateNotification(String nodeId, APIContext context) {
       super(context, nodeId, "/notifications", "POST", Arrays.asList(PARAMS));
     }
 
@@ -18951,9 +18951,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<APINode>>() {
@@ -18966,9 +18966,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestDeletePermissions(String nodeId, APIContext context) {
+      public APIRequestDeletePermissions(String nodeId, APIContext context) {
       super(context, nodeId, "/permissions", "DELETE", Arrays.asList(PARAMS));
     }
 
@@ -19064,9 +19064,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<Permission>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Permission>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Permission>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Permission>>() {
@@ -19079,9 +19079,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetPermissions(String nodeId, APIContext context) {
+      public APIRequestGetPermissions(String nodeId, APIContext context) {
       super(context, nodeId, "/permissions", "GET", Arrays.asList(PARAMS));
     }
 
@@ -19256,9 +19256,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<AdAccount>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<AdAccount>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<AdAccount>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<AdAccount>>() {
@@ -19271,9 +19271,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetPersonalAdAccounts(String nodeId, APIContext context) {
+      public APIRequestGetPersonalAdAccounts(String nodeId, APIContext context) {
       super(context, nodeId, "/personal_ad_accounts", "GET", Arrays.asList(PARAMS));
     }
 
@@ -19808,9 +19808,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<Photo>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Photo>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Photo>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Photo>>() {
@@ -19823,9 +19823,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetPhotos(String nodeId, APIContext context) {
+      public APIRequestGetPhotos(String nodeId, APIContext context) {
       super(context, nodeId, "/photos", "GET", Arrays.asList(PARAMS));
     }
 
@@ -20162,9 +20162,9 @@ public class User extends APINode {
 
     public ListenableFuture<Photo> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<Photo> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<Photo> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, Photo>() {
@@ -20177,9 +20177,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreatePhoto(String nodeId, APIContext context) {
+      public APIRequestCreatePhoto(String nodeId, APIContext context) {
       super(context, nodeId, "/photos", "POST", Arrays.asList(PARAMS));
     }
 
@@ -20663,9 +20663,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<ProfilePictureSource>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<ProfilePictureSource>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<ProfilePictureSource>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<ProfilePictureSource>>() {
@@ -20678,9 +20678,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetPicture(String nodeId, APIContext context) {
+      public APIRequestGetPicture(String nodeId, APIContext context) {
       super(context, nodeId, "/picture", "GET", Arrays.asList(PARAMS));
     }
 
@@ -20930,9 +20930,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<Post>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Post>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Post>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Post>>() {
@@ -20945,9 +20945,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetPosts(String nodeId, APIContext context) {
+      public APIRequestGetPosts(String nodeId, APIContext context) {
       super(context, nodeId, "/posts", "GET", Arrays.asList(PARAMS));
     }
 
@@ -21495,9 +21495,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<RequestHistory>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<RequestHistory>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<RequestHistory>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<RequestHistory>>() {
@@ -21510,9 +21510,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetRequestHistory(String nodeId, APIContext context) {
+      public APIRequestGetRequestHistory(String nodeId, APIContext context) {
       super(context, nodeId, "/request_history", "GET", Arrays.asList(PARAMS));
     }
 
@@ -21659,9 +21659,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<Canvas>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Canvas>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Canvas>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Canvas>>() {
@@ -21674,9 +21674,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetRichMediaDocuments(String nodeId, APIContext context) {
+      public APIRequestGetRichMediaDocuments(String nodeId, APIContext context) {
       super(context, nodeId, "/rich_media_documents", "GET", Arrays.asList(PARAMS));
     }
 
@@ -21840,9 +21840,9 @@ public class User extends APINode {
 
     public ListenableFuture<User> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<User> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<User> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, User>() {
@@ -21855,9 +21855,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateScreenName(String nodeId, APIContext context) {
+      public APIRequestCreateScreenName(String nodeId, APIContext context) {
       super(context, nodeId, "/screennames", "POST", Arrays.asList(PARAMS));
     }
 
@@ -21959,9 +21959,9 @@ public class User extends APINode {
 
     public ListenableFuture<User> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<User> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<User> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, User>() {
@@ -21974,9 +21974,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateStagingResource(String nodeId, APIContext context) {
+      public APIRequestCreateStagingResource(String nodeId, APIContext context) {
       super(context, nodeId, "/staging_resources", "POST", Arrays.asList(PARAMS));
     }
 
@@ -22077,9 +22077,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<UserTaggableFriend>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<UserTaggableFriend>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<UserTaggableFriend>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<UserTaggableFriend>>() {
@@ -22092,9 +22092,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetTaggableFriends(String nodeId, APIContext context) {
+      public APIRequestGetTaggableFriends(String nodeId, APIContext context) {
       super(context, nodeId, "/taggable_friends", "GET", Arrays.asList(PARAMS));
     }
 
@@ -22355,9 +22355,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<Page>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Page>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Page>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Page>>() {
@@ -22370,9 +22370,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetTelevision(String nodeId, APIContext context) {
+      public APIRequestGetTelevision(String nodeId, APIContext context) {
       super(context, nodeId, "/television", "GET", Arrays.asList(PARAMS));
     }
 
@@ -23471,9 +23471,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINodeList<AdVideo>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<AdVideo>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<AdVideo>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<AdVideo>>() {
@@ -23486,9 +23486,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetVideos(String nodeId, APIContext context) {
+      public APIRequestGetVideos(String nodeId, APIContext context) {
       super(context, nodeId, "/videos", "GET", Arrays.asList(PARAMS));
     }
 
@@ -23939,9 +23939,9 @@ public class User extends APINode {
 
     public ListenableFuture<AdVideo> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<AdVideo> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<AdVideo> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, AdVideo>() {
@@ -23954,9 +23954,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateVideo(String nodeId, APIContext context) {
+      public APIRequestCreateVideo(String nodeId, APIContext context) {
       super(context, nodeId, "/videos", "POST", Arrays.asList(PARAMS));
     }
 
@@ -24578,9 +24578,9 @@ public class User extends APINode {
 
     public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINode>() {
@@ -24593,9 +24593,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestDelete(String nodeId, APIContext context) {
+      public APIRequestDelete(String nodeId, APIContext context) {
       super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
     }
 
@@ -24741,9 +24741,9 @@ public class User extends APINode {
 
     public ListenableFuture<User> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<User> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<User> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, User>() {
@@ -24756,9 +24756,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGet(String nodeId, APIContext context) {
+      public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 
@@ -25265,9 +25265,9 @@ public class User extends APINode {
 
     public ListenableFuture<User> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<User> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<User> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, User>() {
@@ -25280,9 +25280,9 @@ public class User extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestUpdate(String nodeId, APIContext context) {
+      public APIRequestUpdate(String nodeId, APIContext context) {
       super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
     }
 

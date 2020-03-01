@@ -86,7 +86,7 @@ public class TargetingGeoLocationZip extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     targetingGeoLocationZip.context = context;
     targetingGeoLocationZip.rawValue = json;
@@ -107,8 +107,8 @@ public class TargetingGeoLocationZip extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           targetingGeoLocationZips.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return targetingGeoLocationZips;
+        }
+          return targetingGeoLocationZips;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -132,7 +132,7 @@ public class TargetingGeoLocationZip extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               targetingGeoLocationZips.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();

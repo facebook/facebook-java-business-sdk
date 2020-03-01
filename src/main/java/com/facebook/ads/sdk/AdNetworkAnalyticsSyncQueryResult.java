@@ -80,7 +80,7 @@ public class AdNetworkAnalyticsSyncQueryResult extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     adNetworkAnalyticsSyncQueryResult.context = context;
     adNetworkAnalyticsSyncQueryResult.rawValue = json;
@@ -101,8 +101,8 @@ public class AdNetworkAnalyticsSyncQueryResult extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           adNetworkAnalyticsSyncQueryResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return adNetworkAnalyticsSyncQueryResults;
+        }
+          return adNetworkAnalyticsSyncQueryResults;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -126,7 +126,7 @@ public class AdNetworkAnalyticsSyncQueryResult extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               adNetworkAnalyticsSyncQueryResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();

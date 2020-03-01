@@ -137,7 +137,7 @@ public class AdMonetizationProperty extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     adMonetizationProperty.context = context;
     adMonetizationProperty.rawValue = json;
@@ -158,8 +158,8 @@ public class AdMonetizationProperty extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           adMonetizationPropertys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return adMonetizationPropertys;
+        }
+          return adMonetizationPropertys;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -183,7 +183,7 @@ public class AdMonetizationProperty extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               adMonetizationPropertys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -332,9 +332,9 @@ public class AdMonetizationProperty extends APINode {
 
     public ListenableFuture<APINodeList<AdNetworkAnalyticsSyncQueryResult>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<AdNetworkAnalyticsSyncQueryResult>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<AdNetworkAnalyticsSyncQueryResult>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<AdNetworkAnalyticsSyncQueryResult>>() {
@@ -347,9 +347,9 @@ public class AdMonetizationProperty extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetAdNetworkAnalytics(String nodeId, APIContext context) {
+      public APIRequestGetAdNetworkAnalytics(String nodeId, APIContext context) {
       super(context, nodeId, "/adnetworkanalytics", "GET", Arrays.asList(PARAMS));
     }
 
@@ -532,9 +532,9 @@ public class AdMonetizationProperty extends APINode {
 
     public ListenableFuture<AdMonetizationProperty> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<AdMonetizationProperty> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<AdMonetizationProperty> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, AdMonetizationProperty>() {
@@ -547,9 +547,9 @@ public class AdMonetizationProperty extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateAdNetworkAnalytic(String nodeId, APIContext context) {
+      public APIRequestCreateAdNetworkAnalytic(String nodeId, APIContext context) {
       super(context, nodeId, "/adnetworkanalytics", "POST", Arrays.asList(PARAMS));
     }
 
@@ -715,9 +715,9 @@ public class AdMonetizationProperty extends APINode {
 
     public ListenableFuture<APINodeList<AdNetworkAnalyticsAsyncQueryResult>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<AdNetworkAnalyticsAsyncQueryResult>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<AdNetworkAnalyticsAsyncQueryResult>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<AdNetworkAnalyticsAsyncQueryResult>>() {
@@ -730,9 +730,9 @@ public class AdMonetizationProperty extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetAdNetworkAnalyticsResults(String nodeId, APIContext context) {
+      public APIRequestGetAdNetworkAnalyticsResults(String nodeId, APIContext context) {
       super(context, nodeId, "/adnetworkanalytics_results", "GET", Arrays.asList(PARAMS));
     }
 
@@ -864,9 +864,9 @@ public class AdMonetizationProperty extends APINode {
 
     public ListenableFuture<AdMonetizationProperty> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<AdMonetizationProperty> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<AdMonetizationProperty> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, AdMonetizationProperty>() {
@@ -879,9 +879,9 @@ public class AdMonetizationProperty extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGet(String nodeId, APIContext context) {
+      public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 

@@ -149,7 +149,7 @@ public class PageSavedFilter extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     pageSavedFilter.context = context;
     pageSavedFilter.rawValue = json;
@@ -170,8 +170,8 @@ public class PageSavedFilter extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           pageSavedFilters.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return pageSavedFilters;
+        }
+          return pageSavedFilters;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -195,7 +195,7 @@ public class PageSavedFilter extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               pageSavedFilters.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -352,9 +352,9 @@ public class PageSavedFilter extends APINode {
 
     public ListenableFuture<PageSavedFilter> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<PageSavedFilter> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<PageSavedFilter> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, PageSavedFilter>() {
@@ -367,9 +367,9 @@ public class PageSavedFilter extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGet(String nodeId, APIContext context) {
+      public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 

@@ -28,4 +28,4 @@ public class APIConfig {
   public static final String DEFAULT_API_BASE = "https://graph.facebook.com";
   public static final String DEFAULT_VIDEO_API_BASE = "https://graph-video.facebook.com";
   public static final String USER_AGENT = "fbbizsdk-java-v6.0";
-};
+}

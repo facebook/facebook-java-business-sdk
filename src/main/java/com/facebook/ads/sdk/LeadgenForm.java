@@ -179,7 +179,7 @@ public class LeadgenForm extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     leadgenForm.context = context;
     leadgenForm.rawValue = json;
@@ -200,8 +200,8 @@ public class LeadgenForm extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           leadgenForms.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return leadgenForms;
+        }
+          return leadgenForms;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -225,7 +225,7 @@ public class LeadgenForm extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               leadgenForms.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -471,9 +471,9 @@ public class LeadgenForm extends APINode {
 
     public ListenableFuture<APINodeList<Lead>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Lead>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Lead>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Lead>>() {
@@ -486,9 +486,9 @@ public class LeadgenForm extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetLeads(String nodeId, APIContext context) {
+      public APIRequestGetLeads(String nodeId, APIContext context) {
       super(context, nodeId, "/leads", "GET", Arrays.asList(PARAMS));
     }
 
@@ -711,9 +711,9 @@ public class LeadgenForm extends APINode {
 
     public ListenableFuture<APINodeList<Lead>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Lead>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Lead>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Lead>>() {
@@ -726,9 +726,9 @@ public class LeadgenForm extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetTestLeads(String nodeId, APIContext context) {
+      public APIRequestGetTestLeads(String nodeId, APIContext context) {
       super(context, nodeId, "/test_leads", "GET", Arrays.asList(PARAMS));
     }
 
@@ -936,9 +936,9 @@ public class LeadgenForm extends APINode {
 
     public ListenableFuture<Lead> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<Lead> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<Lead> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, Lead>() {
@@ -951,9 +951,9 @@ public class LeadgenForm extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateTestLead(String nodeId, APIContext context) {
+      public APIRequestCreateTestLead(String nodeId, APIContext context) {
       super(context, nodeId, "/test_leads", "POST", Arrays.asList(PARAMS));
     }
 
@@ -1080,9 +1080,9 @@ public class LeadgenForm extends APINode {
 
     public ListenableFuture<LeadgenForm> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<LeadgenForm> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<LeadgenForm> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, LeadgenForm>() {
@@ -1095,9 +1095,9 @@ public class LeadgenForm extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGet(String nodeId, APIContext context) {
+      public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 
@@ -1339,9 +1339,9 @@ public class LeadgenForm extends APINode {
 
     public ListenableFuture<LeadgenForm> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<LeadgenForm> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<LeadgenForm> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, LeadgenForm>() {
@@ -1354,9 +1354,9 @@ public class LeadgenForm extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestUpdate(String nodeId, APIContext context) {
+      public APIRequestUpdate(String nodeId, APIContext context) {
       super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
     }
 

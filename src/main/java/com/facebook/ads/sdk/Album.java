@@ -181,7 +181,7 @@ public class Album extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     album.context = context;
     album.rawValue = json;
@@ -202,8 +202,8 @@ public class Album extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           albums.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return albums;
+        }
+          return albums;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -227,7 +227,7 @@ public class Album extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               albums.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -505,9 +505,9 @@ public class Album extends APINode {
 
     public ListenableFuture<APINodeList<Comment>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Comment>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Comment>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Comment>>() {
@@ -520,9 +520,9 @@ public class Album extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetComments(String nodeId, APIContext context) {
+      public APIRequestGetComments(String nodeId, APIContext context) {
       super(context, nodeId, "/comments", "GET", Arrays.asList(PARAMS));
     }
 
@@ -815,9 +815,9 @@ public class Album extends APINode {
 
     public ListenableFuture<Comment> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<Comment> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<Comment> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, Comment>() {
@@ -830,9 +830,9 @@ public class Album extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateComment(String nodeId, APIContext context) {
+      public APIRequestCreateComment(String nodeId, APIContext context) {
       super(context, nodeId, "/comments", "POST", Arrays.asList(PARAMS));
     }
 
@@ -1004,9 +1004,9 @@ public class Album extends APINode {
 
     public ListenableFuture<Album> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<Album> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<Album> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, Album>() {
@@ -1019,9 +1019,9 @@ public class Album extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateLike(String nodeId, APIContext context) {
+      public APIRequestCreateLike(String nodeId, APIContext context) {
       super(context, nodeId, "/likes", "POST", Arrays.asList(PARAMS));
     }
 
@@ -1159,9 +1159,9 @@ public class Album extends APINode {
 
     public ListenableFuture<APINodeList<Photo>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Photo>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Photo>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Photo>>() {
@@ -1174,9 +1174,9 @@ public class Album extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetPhotos(String nodeId, APIContext context) {
+      public APIRequestGetPhotos(String nodeId, APIContext context) {
       super(context, nodeId, "/photos", "GET", Arrays.asList(PARAMS));
     }
 
@@ -1504,9 +1504,9 @@ public class Album extends APINode {
 
     public ListenableFuture<Photo> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<Photo> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<Photo> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, Photo>() {
@@ -1519,9 +1519,9 @@ public class Album extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreatePhoto(String nodeId, APIContext context) {
+      public APIRequestCreatePhoto(String nodeId, APIContext context) {
       super(context, nodeId, "/photos", "POST", Arrays.asList(PARAMS));
     }
 
@@ -2003,9 +2003,9 @@ public class Album extends APINode {
 
     public ListenableFuture<APINodeList<ProfilePictureSource>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<ProfilePictureSource>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<ProfilePictureSource>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<ProfilePictureSource>>() {
@@ -2018,9 +2018,9 @@ public class Album extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetPicture(String nodeId, APIContext context) {
+      public APIRequestGetPicture(String nodeId, APIContext context) {
       super(context, nodeId, "/picture", "GET", Arrays.asList(PARAMS));
     }
 
@@ -2249,9 +2249,9 @@ public class Album extends APINode {
 
     public ListenableFuture<APINodeList<Post>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Post>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Post>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Post>>() {
@@ -2264,9 +2264,9 @@ public class Album extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetSharedPosts(String nodeId, APIContext context) {
+      public APIRequestGetSharedPosts(String nodeId, APIContext context) {
       super(context, nodeId, "/sharedposts", "GET", Arrays.asList(PARAMS));
     }
 
@@ -2803,9 +2803,9 @@ public class Album extends APINode {
 
     public ListenableFuture<Album> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<Album> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<Album> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, Album>() {
@@ -2818,9 +2818,9 @@ public class Album extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGet(String nodeId, APIContext context) {
+      public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 

@@ -157,7 +157,7 @@ public class ProductCatalog extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     productCatalog.context = context;
     productCatalog.rawValue = json;
@@ -178,8 +178,8 @@ public class ProductCatalog extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           productCatalogs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return productCatalogs;
+        }
+          return productCatalogs;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -203,7 +203,7 @@ public class ProductCatalog extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               productCatalogs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -559,9 +559,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<APINode>>() {
@@ -574,9 +574,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestDeleteAgencies(String nodeId, APIContext context) {
+      public APIRequestDeleteAgencies(String nodeId, APIContext context) {
       super(context, nodeId, "/agencies", "DELETE", Arrays.asList(PARAMS));
     }
 
@@ -686,9 +686,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<APINodeList<Business>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Business>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Business>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Business>>() {
@@ -701,9 +701,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetAgencies(String nodeId, APIContext context) {
+      public APIRequestGetAgencies(String nodeId, APIContext context) {
       super(context, nodeId, "/agencies", "GET", Arrays.asList(PARAMS));
     }
 
@@ -919,9 +919,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<ProductCatalog> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, ProductCatalog>() {
@@ -934,9 +934,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateAgency(String nodeId, APIContext context) {
+      public APIRequestCreateAgency(String nodeId, APIContext context) {
       super(context, nodeId, "/agencies", "POST", Arrays.asList(PARAMS));
     }
 
@@ -1047,9 +1047,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<APINode>>() {
@@ -1062,9 +1062,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestDeleteAssignedUsers(String nodeId, APIContext context) {
+      public APIRequestDeleteAssignedUsers(String nodeId, APIContext context) {
       super(context, nodeId, "/assigned_users", "DELETE", Arrays.asList(PARAMS));
     }
 
@@ -1165,9 +1165,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<APINodeList<AssignedUser>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<AssignedUser>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<AssignedUser>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<AssignedUser>>() {
@@ -1180,9 +1180,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetAssignedUsers(String nodeId, APIContext context) {
+      public APIRequestGetAssignedUsers(String nodeId, APIContext context) {
       super(context, nodeId, "/assigned_users", "GET", Arrays.asList(PARAMS));
     }
 
@@ -1304,9 +1304,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<ProductCatalog> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, ProductCatalog>() {
@@ -1319,9 +1319,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateAssignedUser(String nodeId, APIContext context) {
+      public APIRequestCreateAssignedUser(String nodeId, APIContext context) {
       super(context, nodeId, "/assigned_users", "POST", Arrays.asList(PARAMS));
     }
 
@@ -1453,9 +1453,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<APINodeList<AutomotiveModel>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<AutomotiveModel>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<AutomotiveModel>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<AutomotiveModel>>() {
@@ -1468,9 +1468,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetAutomotiveModels(String nodeId, APIContext context) {
+      public APIRequestGetAutomotiveModels(String nodeId, APIContext context) {
       super(context, nodeId, "/automotive_models", "GET", Arrays.asList(PARAMS));
     }
 
@@ -1753,9 +1753,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<ProductCatalog> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, ProductCatalog>() {
@@ -1768,9 +1768,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateBatch(String nodeId, APIContext context) {
+      public APIRequestCreateBatch(String nodeId, APIContext context) {
       super(context, nodeId, "/batch", "POST", Arrays.asList(PARAMS));
     }
 
@@ -1881,9 +1881,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<DynamicItemDisplayBundleFolder> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<DynamicItemDisplayBundleFolder> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<DynamicItemDisplayBundleFolder> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, DynamicItemDisplayBundleFolder>() {
@@ -1896,9 +1896,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateBundleFolder(String nodeId, APIContext context) {
+      public APIRequestCreateBundleFolder(String nodeId, APIContext context) {
       super(context, nodeId, "/bundle_folders", "POST", Arrays.asList(PARAMS));
     }
 
@@ -1996,9 +1996,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<DynamicItemDisplayBundle> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<DynamicItemDisplayBundle> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<DynamicItemDisplayBundle> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, DynamicItemDisplayBundle>() {
@@ -2011,9 +2011,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateBundle(String nodeId, APIContext context) {
+      public APIRequestCreateBundle(String nodeId, APIContext context) {
       super(context, nodeId, "/bundles", "POST", Arrays.asList(PARAMS));
     }
 
@@ -2147,9 +2147,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<APINodeList<ProductCatalogCategory>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<ProductCatalogCategory>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<ProductCatalogCategory>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<ProductCatalogCategory>>() {
@@ -2162,9 +2162,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetCategories(String nodeId, APIContext context) {
+      public APIRequestGetCategories(String nodeId, APIContext context) {
       super(context, nodeId, "/categories", "GET", Arrays.asList(PARAMS));
     }
 
@@ -2319,9 +2319,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<ProductCatalogCategory> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<ProductCatalogCategory> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<ProductCatalogCategory> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, ProductCatalogCategory>() {
@@ -2334,9 +2334,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateCategory(String nodeId, APIContext context) {
+      public APIRequestCreateCategory(String nodeId, APIContext context) {
       super(context, nodeId, "/categories", "POST", Arrays.asList(PARAMS));
     }
 
@@ -2441,9 +2441,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<APINodeList<CheckBatchRequestStatus>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<CheckBatchRequestStatus>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<CheckBatchRequestStatus>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<CheckBatchRequestStatus>>() {
@@ -2456,9 +2456,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetCheckBatchRequestStatus(String nodeId, APIContext context) {
+      public APIRequestGetCheckBatchRequestStatus(String nodeId, APIContext context) {
       super(context, nodeId, "/check_batch_request_status", "GET", Arrays.asList(PARAMS));
     }
 
@@ -2614,9 +2614,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<APINodeList<CollaborativeAdsShareSettings>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<CollaborativeAdsShareSettings>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<CollaborativeAdsShareSettings>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<CollaborativeAdsShareSettings>>() {
@@ -2629,9 +2629,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetCollaborativeAdsShareSettings(String nodeId, APIContext context) {
+      public APIRequestGetCollaborativeAdsShareSettings(String nodeId, APIContext context) {
       super(context, nodeId, "/collaborative_ads_share_settings", "GET", Arrays.asList(PARAMS));
     }
 
@@ -2774,9 +2774,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<APINodeList<Destination>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Destination>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Destination>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Destination>>() {
@@ -2789,9 +2789,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetDestinations(String nodeId, APIContext context) {
+      public APIRequestGetDestinations(String nodeId, APIContext context) {
       super(context, nodeId, "/destinations", "GET", Arrays.asList(PARAMS));
     }
 
@@ -2992,9 +2992,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<APINodeList<ProductEventStat>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<ProductEventStat>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<ProductEventStat>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<ProductEventStat>>() {
@@ -3007,9 +3007,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetEventStats(String nodeId, APIContext context) {
+      public APIRequestGetEventStats(String nodeId, APIContext context) {
       super(context, nodeId, "/event_stats", "GET", Arrays.asList(PARAMS));
     }
 
@@ -3183,9 +3183,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<APINode>>() {
@@ -3198,9 +3198,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestDeleteExternalEventSources(String nodeId, APIContext context) {
+      public APIRequestDeleteExternalEventSources(String nodeId, APIContext context) {
       super(context, nodeId, "/external_event_sources", "DELETE", Arrays.asList(PARAMS));
     }
 
@@ -3299,9 +3299,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<APINodeList<ExternalEventSource>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<ExternalEventSource>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<ExternalEventSource>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<ExternalEventSource>>() {
@@ -3314,9 +3314,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetExternalEventSources(String nodeId, APIContext context) {
+      public APIRequestGetExternalEventSources(String nodeId, APIContext context) {
       super(context, nodeId, "/external_event_sources", "GET", Arrays.asList(PARAMS));
     }
 
@@ -3425,9 +3425,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<ProductCatalog> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, ProductCatalog>() {
@@ -3440,9 +3440,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateExternalEventSource(String nodeId, APIContext context) {
+      public APIRequestCreateExternalEventSource(String nodeId, APIContext context) {
       super(context, nodeId, "/external_event_sources", "POST", Arrays.asList(PARAMS));
     }
 
@@ -3554,9 +3554,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<APINodeList<Flight>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Flight>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Flight>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Flight>>() {
@@ -3569,9 +3569,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetFlights(String nodeId, APIContext context) {
+      public APIRequestGetFlights(String nodeId, APIContext context) {
       super(context, nodeId, "/flights", "GET", Arrays.asList(PARAMS));
     }
 
@@ -3817,9 +3817,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<APINodeList<HomeListing>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<HomeListing>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<HomeListing>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<HomeListing>>() {
@@ -3832,9 +3832,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetHomeListings(String nodeId, APIContext context) {
+      public APIRequestGetHomeListings(String nodeId, APIContext context) {
       super(context, nodeId, "/home_listings", "GET", Arrays.asList(PARAMS));
     }
 
@@ -4241,9 +4241,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<HomeListing> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<HomeListing> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<HomeListing> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, HomeListing>() {
@@ -4256,9 +4256,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateHomeListing(String nodeId, APIContext context) {
+      public APIRequestCreateHomeListing(String nodeId, APIContext context) {
       super(context, nodeId, "/home_listings", "POST", Arrays.asList(PARAMS));
     }
 
@@ -4453,9 +4453,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<APINodeList<ProductCatalogHotelRoomsBatch>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<ProductCatalogHotelRoomsBatch>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<ProductCatalogHotelRoomsBatch>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<ProductCatalogHotelRoomsBatch>>() {
@@ -4468,9 +4468,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetHotelRoomsBatch(String nodeId, APIContext context) {
+      public APIRequestGetHotelRoomsBatch(String nodeId, APIContext context) {
       super(context, nodeId, "/hotel_rooms_batch", "GET", Arrays.asList(PARAMS));
     }
 
@@ -4596,9 +4596,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<ProductCatalog> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, ProductCatalog>() {
@@ -4611,9 +4611,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateHotelRoomsBatch(String nodeId, APIContext context) {
+      public APIRequestCreateHotelRoomsBatch(String nodeId, APIContext context) {
       super(context, nodeId, "/hotel_rooms_batch", "POST", Arrays.asList(PARAMS));
     }
 
@@ -4762,9 +4762,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<APINodeList<Hotel>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Hotel>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Hotel>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Hotel>>() {
@@ -4777,9 +4777,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetHotels(String nodeId, APIContext context) {
+      public APIRequestGetHotels(String nodeId, APIContext context) {
       super(context, nodeId, "/hotels", "GET", Arrays.asList(PARAMS));
     }
 
@@ -5023,9 +5023,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<Hotel> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<Hotel> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<Hotel> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, Hotel>() {
@@ -5038,9 +5038,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateHotel(String nodeId, APIContext context) {
+      public APIRequestCreateHotel(String nodeId, APIContext context) {
       super(context, nodeId, "/hotels", "POST", Arrays.asList(PARAMS));
     }
 
@@ -5219,9 +5219,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<ProductCatalog> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, ProductCatalog>() {
@@ -5234,9 +5234,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateItemsBatch(String nodeId, APIContext context) {
+      public APIRequestCreateItemsBatch(String nodeId, APIContext context) {
       super(context, nodeId, "/items_batch", "POST", Arrays.asList(PARAMS));
     }
 
@@ -5351,9 +5351,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<APINodeList<ProductCatalogPricingVariablesBatch>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<ProductCatalogPricingVariablesBatch>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<ProductCatalogPricingVariablesBatch>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<ProductCatalogPricingVariablesBatch>>() {
@@ -5366,9 +5366,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetPricingVariablesBatch(String nodeId, APIContext context) {
+      public APIRequestGetPricingVariablesBatch(String nodeId, APIContext context) {
       super(context, nodeId, "/pricing_variables_batch", "GET", Arrays.asList(PARAMS));
     }
 
@@ -5494,9 +5494,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<ProductCatalog> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, ProductCatalog>() {
@@ -5509,9 +5509,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreatePricingVariablesBatch(String nodeId, APIContext context) {
+      public APIRequestCreatePricingVariablesBatch(String nodeId, APIContext context) {
       super(context, nodeId, "/pricing_variables_batch", "POST", Arrays.asList(PARAMS));
     }
 
@@ -5655,9 +5655,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<APINodeList<ProductFeed>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<ProductFeed>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<ProductFeed>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<ProductFeed>>() {
@@ -5670,9 +5670,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetProductFeeds(String nodeId, APIContext context) {
+      public APIRequestGetProductFeeds(String nodeId, APIContext context) {
       super(context, nodeId, "/product_feeds", "GET", Arrays.asList(PARAMS));
     }
 
@@ -5877,9 +5877,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<ProductFeed> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<ProductFeed> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<ProductFeed> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, ProductFeed>() {
@@ -5892,9 +5892,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateProductFeed(String nodeId, APIContext context) {
+      public APIRequestCreateProductFeed(String nodeId, APIContext context) {
       super(context, nodeId, "/product_feeds", "POST", Arrays.asList(PARAMS));
     }
 
@@ -6078,9 +6078,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<APINodeList<ProductGroup>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<ProductGroup>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<ProductGroup>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<ProductGroup>>() {
@@ -6093,9 +6093,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetProductGroups(String nodeId, APIContext context) {
+      public APIRequestGetProductGroups(String nodeId, APIContext context) {
       super(context, nodeId, "/product_groups", "GET", Arrays.asList(PARAMS));
     }
 
@@ -6212,9 +6212,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<ProductGroup> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<ProductGroup> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<ProductGroup> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, ProductGroup>() {
@@ -6227,9 +6227,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateProductGroup(String nodeId, APIContext context) {
+      public APIRequestCreateProductGroup(String nodeId, APIContext context) {
       super(context, nodeId, "/product_groups", "POST", Arrays.asList(PARAMS));
     }
 
@@ -6340,9 +6340,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<APINodeList<ProductSet>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<ProductSet>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<ProductSet>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<ProductSet>>() {
@@ -6355,9 +6355,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetProductSets(String nodeId, APIContext context) {
+      public APIRequestGetProductSets(String nodeId, APIContext context) {
       super(context, nodeId, "/product_sets", "GET", Arrays.asList(PARAMS));
     }
 
@@ -6512,9 +6512,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<ProductSet> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<ProductSet> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<ProductSet> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, ProductSet>() {
@@ -6527,9 +6527,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateProductSet(String nodeId, APIContext context) {
+      public APIRequestCreateProductSet(String nodeId, APIContext context) {
       super(context, nodeId, "/product_sets", "POST", Arrays.asList(PARAMS));
     }
 
@@ -6635,9 +6635,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<APINodeList<ProductCatalogProductSetsBatch>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<ProductCatalogProductSetsBatch>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<ProductCatalogProductSetsBatch>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<ProductCatalogProductSetsBatch>>() {
@@ -6650,9 +6650,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetProductSetsBatch(String nodeId, APIContext context) {
+      public APIRequestGetProductSetsBatch(String nodeId, APIContext context) {
       super(context, nodeId, "/product_sets_batch", "GET", Arrays.asList(PARAMS));
     }
 
@@ -6778,9 +6778,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<ProductCatalog> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, ProductCatalog>() {
@@ -6793,9 +6793,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateProductSetsBatch(String nodeId, APIContext context) {
+      public APIRequestCreateProductSetsBatch(String nodeId, APIContext context) {
       super(context, nodeId, "/product_sets_batch", "POST", Arrays.asList(PARAMS));
     }
 
@@ -6978,9 +6978,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<APINodeList<ProductItem>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<ProductItem>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<ProductItem>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<ProductItem>>() {
@@ -6993,9 +6993,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetProducts(String nodeId, APIContext context) {
+      public APIRequestGetProducts(String nodeId, APIContext context) {
       super(context, nodeId, "/products", "GET", Arrays.asList(PARAMS));
     }
 
@@ -7528,9 +7528,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<ProductItem> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<ProductItem> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<ProductItem> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, ProductItem>() {
@@ -7543,9 +7543,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateProduct(String nodeId, APIContext context) {
+      public APIRequestCreateProduct(String nodeId, APIContext context) {
       super(context, nodeId, "/products", "POST", Arrays.asList(PARAMS));
     }
 
@@ -8016,9 +8016,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<ProductCatalog> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, ProductCatalog>() {
@@ -8031,9 +8031,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateStoreProductItemsBatch(String nodeId, APIContext context) {
+      public APIRequestCreateStoreProductItemsBatch(String nodeId, APIContext context) {
       super(context, nodeId, "/store_product_items_batch", "POST", Arrays.asList(PARAMS));
     }
 
@@ -8172,9 +8172,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<APINodeList<VehicleOffer>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<VehicleOffer>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<VehicleOffer>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<VehicleOffer>>() {
@@ -8187,9 +8187,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetVehicleOffers(String nodeId, APIContext context) {
+      public APIRequestGetVehicleOffers(String nodeId, APIContext context) {
       super(context, nodeId, "/vehicle_offers", "GET", Arrays.asList(PARAMS));
     }
 
@@ -8563,9 +8563,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<APINodeList<Vehicle>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Vehicle>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Vehicle>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Vehicle>>() {
@@ -8578,9 +8578,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetVehicles(String nodeId, APIContext context) {
+      public APIRequestGetVehicles(String nodeId, APIContext context) {
       super(context, nodeId, "/vehicles", "GET", Arrays.asList(PARAMS));
     }
 
@@ -9016,9 +9016,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<Vehicle> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<Vehicle> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<Vehicle> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, Vehicle>() {
@@ -9031,9 +9031,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateVehicle(String nodeId, APIContext context) {
+      public APIRequestCreateVehicle(String nodeId, APIContext context) {
       super(context, nodeId, "/vehicles", "POST", Arrays.asList(PARAMS));
     }
 
@@ -9326,9 +9326,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINode>() {
@@ -9341,9 +9341,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestDelete(String nodeId, APIContext context) {
+      public APIRequestDelete(String nodeId, APIContext context) {
       super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
     }
 
@@ -9441,9 +9441,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<ProductCatalog> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, ProductCatalog>() {
@@ -9456,9 +9456,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGet(String nodeId, APIContext context) {
+      public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 
@@ -9629,9 +9629,9 @@ public class ProductCatalog extends APINode {
 
     public ListenableFuture<ProductCatalog> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, ProductCatalog>() {
@@ -9644,9 +9644,9 @@ public class ProductCatalog extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestUpdate(String nodeId, APIContext context) {
+      public APIRequestUpdate(String nodeId, APIContext context) {
       super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
     }
 

@@ -173,7 +173,7 @@ public class CustomConversion extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     customConversion.context = context;
     customConversion.rawValue = json;
@@ -194,8 +194,8 @@ public class CustomConversion extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           customConversions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return customConversions;
+        }
+          return customConversions;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -219,7 +219,7 @@ public class CustomConversion extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               customConversions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -444,9 +444,9 @@ public class CustomConversion extends APINode {
 
     public ListenableFuture<APINodeList<CustomConversionStatsResult>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<CustomConversionStatsResult>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<CustomConversionStatsResult>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<CustomConversionStatsResult>>() {
@@ -459,9 +459,9 @@ public class CustomConversion extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetStats(String nodeId, APIContext context) {
+      public APIRequestGetStats(String nodeId, APIContext context) {
       super(context, nodeId, "/stats", "GET", Arrays.asList(PARAMS));
     }
 
@@ -588,9 +588,9 @@ public class CustomConversion extends APINode {
 
     public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINode>() {
@@ -603,9 +603,9 @@ public class CustomConversion extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestDelete(String nodeId, APIContext context) {
+      public APIRequestDelete(String nodeId, APIContext context) {
       super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
     }
 
@@ -711,9 +711,9 @@ public class CustomConversion extends APINode {
 
     public ListenableFuture<CustomConversion> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<CustomConversion> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<CustomConversion> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, CustomConversion>() {
@@ -726,9 +726,9 @@ public class CustomConversion extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGet(String nodeId, APIContext context) {
+      public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 
@@ -951,9 +951,9 @@ public class CustomConversion extends APINode {
 
     public ListenableFuture<CustomConversion> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<CustomConversion> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<CustomConversion> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, CustomConversion>() {
@@ -966,9 +966,9 @@ public class CustomConversion extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestUpdate(String nodeId, APIContext context) {
+      public APIRequestUpdate(String nodeId, APIContext context) {
       super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
     }
 

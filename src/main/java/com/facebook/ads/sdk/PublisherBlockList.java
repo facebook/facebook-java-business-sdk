@@ -155,7 +155,7 @@ public class PublisherBlockList extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     publisherBlockList.context = context;
     publisherBlockList.rawValue = json;
@@ -176,8 +176,8 @@ public class PublisherBlockList extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           publisherBlockLists.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return publisherBlockLists;
+        }
+          return publisherBlockLists;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -201,7 +201,7 @@ public class PublisherBlockList extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               publisherBlockLists.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -380,9 +380,9 @@ public class PublisherBlockList extends APINode {
 
     public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<APINode>>() {
@@ -395,9 +395,9 @@ public class PublisherBlockList extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetPagedAppPublishers(String nodeId, APIContext context) {
+      public APIRequestGetPagedAppPublishers(String nodeId, APIContext context) {
       super(context, nodeId, "/paged_app_publishers", "GET", Arrays.asList(PARAMS));
     }
 
@@ -490,9 +490,9 @@ public class PublisherBlockList extends APINode {
 
     public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<APINode>>() {
@@ -505,9 +505,9 @@ public class PublisherBlockList extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetPagedWebPublishers(String nodeId, APIContext context) {
+      public APIRequestGetPagedWebPublishers(String nodeId, APIContext context) {
       super(context, nodeId, "/paged_web_publishers", "GET", Arrays.asList(PARAMS));
     }
 
@@ -599,9 +599,9 @@ public class PublisherBlockList extends APINode {
 
     public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINode>() {
@@ -614,9 +614,9 @@ public class PublisherBlockList extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestDelete(String nodeId, APIContext context) {
+      public APIRequestDelete(String nodeId, APIContext context) {
       super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
     }
 
@@ -716,9 +716,9 @@ public class PublisherBlockList extends APINode {
 
     public ListenableFuture<PublisherBlockList> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<PublisherBlockList> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<PublisherBlockList> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, PublisherBlockList>() {
@@ -731,9 +731,9 @@ public class PublisherBlockList extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGet(String nodeId, APIContext context) {
+      public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 
@@ -910,9 +910,9 @@ public class PublisherBlockList extends APINode {
 
     public ListenableFuture<PublisherBlockList> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<PublisherBlockList> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<PublisherBlockList> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, PublisherBlockList>() {
@@ -925,9 +925,9 @@ public class PublisherBlockList extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestUpdate(String nodeId, APIContext context) {
+      public APIRequestUpdate(String nodeId, APIContext context) {
       super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
     }
 

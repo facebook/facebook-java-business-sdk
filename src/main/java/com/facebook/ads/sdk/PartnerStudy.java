@@ -171,7 +171,7 @@ public class PartnerStudy extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     partnerStudy.context = context;
     partnerStudy.rawValue = json;
@@ -192,8 +192,8 @@ public class PartnerStudy extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           partnerStudys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return partnerStudys;
+        }
+          return partnerStudys;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -217,7 +217,7 @@ public class PartnerStudy extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               partnerStudys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -477,9 +477,9 @@ public class PartnerStudy extends APINode {
 
     public ListenableFuture<APINodeList<User>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<User>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<User>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<User>>() {
@@ -492,9 +492,9 @@ public class PartnerStudy extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetSubmitters(String nodeId, APIContext context) {
+      public APIRequestGetSubmitters(String nodeId, APIContext context) {
       super(context, nodeId, "/submitters", "GET", Arrays.asList(PARAMS));
     }
 
@@ -1012,9 +1012,9 @@ public class PartnerStudy extends APINode {
 
     public ListenableFuture<PartnerStudy> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<PartnerStudy> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<PartnerStudy> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, PartnerStudy>() {
@@ -1027,9 +1027,9 @@ public class PartnerStudy extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGet(String nodeId, APIContext context) {
+      public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 

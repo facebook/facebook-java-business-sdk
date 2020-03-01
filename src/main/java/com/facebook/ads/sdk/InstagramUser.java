@@ -153,7 +153,7 @@ public class InstagramUser extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     instagramUser.context = context;
     instagramUser.rawValue = json;
@@ -174,8 +174,8 @@ public class InstagramUser extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           instagramUsers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return instagramUsers;
+        }
+          return instagramUsers;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -199,7 +199,7 @@ public class InstagramUser extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               instagramUsers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -374,9 +374,9 @@ public class InstagramUser extends APINode {
 
     public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<APINode>>() {
@@ -389,9 +389,9 @@ public class InstagramUser extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestDeleteAgencies(String nodeId, APIContext context) {
+      public APIRequestDeleteAgencies(String nodeId, APIContext context) {
       super(context, nodeId, "/agencies", "DELETE", Arrays.asList(PARAMS));
     }
 
@@ -501,9 +501,9 @@ public class InstagramUser extends APINode {
 
     public ListenableFuture<APINodeList<Business>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Business>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Business>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Business>>() {
@@ -516,9 +516,9 @@ public class InstagramUser extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetAgencies(String nodeId, APIContext context) {
+      public APIRequestGetAgencies(String nodeId, APIContext context) {
       super(context, nodeId, "/agencies", "GET", Arrays.asList(PARAMS));
     }
 
@@ -792,9 +792,9 @@ public class InstagramUser extends APINode {
 
     public ListenableFuture<APINodeList<AdAccount>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<AdAccount>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<AdAccount>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<AdAccount>>() {
@@ -807,9 +807,9 @@ public class InstagramUser extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetAuthorizedAdAccounts(String nodeId, APIContext context) {
+      public APIRequestGetAuthorizedAdAccounts(String nodeId, APIContext context) {
       super(context, nodeId, "/authorized_adaccounts", "GET", Arrays.asList(PARAMS));
     }
 
@@ -1323,9 +1323,9 @@ public class InstagramUser extends APINode {
 
     public ListenableFuture<InstagramUser> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<InstagramUser> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<InstagramUser> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, InstagramUser>() {
@@ -1338,9 +1338,9 @@ public class InstagramUser extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateAuthorizedAdAccount(String nodeId, APIContext context) {
+      public APIRequestCreateAuthorizedAdAccount(String nodeId, APIContext context) {
       super(context, nodeId, "/authorized_adaccounts", "POST", Arrays.asList(PARAMS));
     }
 
@@ -1446,9 +1446,9 @@ public class InstagramUser extends APINode {
 
     public ListenableFuture<InstagramUser> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<InstagramUser> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<InstagramUser> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, InstagramUser>() {
@@ -1461,9 +1461,9 @@ public class InstagramUser extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGet(String nodeId, APIContext context) {
+      public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 

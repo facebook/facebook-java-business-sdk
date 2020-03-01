@@ -187,7 +187,7 @@ public class NativeOffer extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     nativeOffer.context = context;
     nativeOffer.rawValue = json;
@@ -208,8 +208,8 @@ public class NativeOffer extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           nativeOffers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return nativeOffers;
+        }
+          return nativeOffers;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -233,7 +233,7 @@ public class NativeOffer extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               nativeOffers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -476,9 +476,9 @@ public class NativeOffer extends APINode {
 
     public ListenableFuture<NativeOffer> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<NativeOffer> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<NativeOffer> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, NativeOffer>() {
@@ -491,9 +491,9 @@ public class NativeOffer extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateCode(String nodeId, APIContext context) {
+      public APIRequestCreateCode(String nodeId, APIContext context) {
       super(context, nodeId, "/codes", "POST", Arrays.asList(PARAMS));
     }
 
@@ -612,9 +612,9 @@ public class NativeOffer extends APINode {
 
     public ListenableFuture<NativeOffer> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<NativeOffer> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<NativeOffer> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, NativeOffer>() {
@@ -627,9 +627,9 @@ public class NativeOffer extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateNativeOfferView(String nodeId, APIContext context) {
+      public APIRequestCreateNativeOfferView(String nodeId, APIContext context) {
       super(context, nodeId, "/nativeofferviews", "POST", Arrays.asList(PARAMS));
     }
 
@@ -837,9 +837,9 @@ public class NativeOffer extends APINode {
 
     public ListenableFuture<APINodeList<NativeOfferView>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<NativeOfferView>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<NativeOfferView>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<NativeOfferView>>() {
@@ -852,9 +852,9 @@ public class NativeOffer extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetViews(String nodeId, APIContext context) {
+      public APIRequestGetViews(String nodeId, APIContext context) {
       super(context, nodeId, "/views", "GET", Arrays.asList(PARAMS));
     }
 
@@ -988,9 +988,9 @@ public class NativeOffer extends APINode {
 
     public ListenableFuture<NativeOffer> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<NativeOffer> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<NativeOffer> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, NativeOffer>() {
@@ -1003,9 +1003,9 @@ public class NativeOffer extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGet(String nodeId, APIContext context) {
+      public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 

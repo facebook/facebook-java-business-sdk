@@ -143,7 +143,7 @@ public class EventSourceGroup extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     eventSourceGroup.context = context;
     eventSourceGroup.rawValue = json;
@@ -164,8 +164,8 @@ public class EventSourceGroup extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           eventSourceGroups.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return eventSourceGroups;
+        }
+          return eventSourceGroups;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -189,7 +189,7 @@ public class EventSourceGroup extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               eventSourceGroups.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -402,9 +402,9 @@ public class EventSourceGroup extends APINode {
 
     public ListenableFuture<APINodeList<AdAccount>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<AdAccount>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<AdAccount>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<AdAccount>>() {
@@ -417,9 +417,9 @@ public class EventSourceGroup extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetSharedAccounts(String nodeId, APIContext context) {
+      public APIRequestGetSharedAccounts(String nodeId, APIContext context) {
       super(context, nodeId, "/shared_accounts", "GET", Arrays.asList(PARAMS));
     }
 
@@ -927,9 +927,9 @@ public class EventSourceGroup extends APINode {
 
     public ListenableFuture<EventSourceGroup> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<EventSourceGroup> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<EventSourceGroup> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, EventSourceGroup>() {
@@ -942,9 +942,9 @@ public class EventSourceGroup extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateSharedAccount(String nodeId, APIContext context) {
+      public APIRequestCreateSharedAccount(String nodeId, APIContext context) {
       super(context, nodeId, "/shared_accounts", "POST", Arrays.asList(PARAMS));
     }
 
@@ -1044,9 +1044,9 @@ public class EventSourceGroup extends APINode {
 
     public ListenableFuture<EventSourceGroup> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<EventSourceGroup> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<EventSourceGroup> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, EventSourceGroup>() {
@@ -1059,9 +1059,9 @@ public class EventSourceGroup extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGet(String nodeId, APIContext context) {
+      public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 
@@ -1178,9 +1178,9 @@ public class EventSourceGroup extends APINode {
 
     public ListenableFuture<EventSourceGroup> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<EventSourceGroup> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<EventSourceGroup> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, EventSourceGroup>() {
@@ -1193,9 +1193,9 @@ public class EventSourceGroup extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestUpdate(String nodeId, APIContext context) {
+      public APIRequestUpdate(String nodeId, APIContext context) {
       super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
     }
 

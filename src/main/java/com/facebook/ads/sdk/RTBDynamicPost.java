@@ -157,7 +157,7 @@ public class RTBDynamicPost extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     rtbDynamicPost.context = context;
     rtbDynamicPost.rawValue = json;
@@ -178,8 +178,8 @@ public class RTBDynamicPost extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           rtbDynamicPosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return rtbDynamicPosts;
+        }
+          return rtbDynamicPosts;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -203,7 +203,7 @@ public class RTBDynamicPost extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               rtbDynamicPosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -408,9 +408,9 @@ public class RTBDynamicPost extends APINode {
 
     public ListenableFuture<APINodeList<Comment>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Comment>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Comment>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Comment>>() {
@@ -423,9 +423,9 @@ public class RTBDynamicPost extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetComments(String nodeId, APIContext context) {
+      public APIRequestGetComments(String nodeId, APIContext context) {
       super(context, nodeId, "/comments", "GET", Arrays.asList(PARAMS));
     }
 
@@ -712,9 +712,9 @@ public class RTBDynamicPost extends APINode {
 
     public ListenableFuture<APINodeList<InstagramComment>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<InstagramComment>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<InstagramComment>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<InstagramComment>>() {
@@ -727,9 +727,9 @@ public class RTBDynamicPost extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetInstagramComments(String nodeId, APIContext context) {
+      public APIRequestGetInstagramComments(String nodeId, APIContext context) {
       super(context, nodeId, "/instagram_comments", "GET", Arrays.asList(PARAMS));
     }
 
@@ -876,9 +876,9 @@ public class RTBDynamicPost extends APINode {
 
     public ListenableFuture<APINodeList<Profile>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<Profile>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<Profile>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<Profile>>() {
@@ -891,9 +891,9 @@ public class RTBDynamicPost extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetLikes(String nodeId, APIContext context) {
+      public APIRequestGetLikes(String nodeId, APIContext context) {
       super(context, nodeId, "/likes", "GET", Arrays.asList(PARAMS));
     }
 
@@ -1068,9 +1068,9 @@ public class RTBDynamicPost extends APINode {
 
     public ListenableFuture<RTBDynamicPost> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<RTBDynamicPost> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<RTBDynamicPost> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, RTBDynamicPost>() {
@@ -1083,9 +1083,9 @@ public class RTBDynamicPost extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGet(String nodeId, APIContext context) {
+      public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 

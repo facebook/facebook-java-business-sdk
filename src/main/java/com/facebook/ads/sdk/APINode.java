@@ -68,7 +68,7 @@ public class APINode implements APIResponse {
     } catch (Exception e) {
       return null;
     }
-  };
+  }
 
   public String getRawValue() {
     return rawValue;
@@ -112,7 +112,7 @@ public class APINode implements APIResponse {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           nodes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
+        }
         return nodes;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
@@ -138,7 +138,7 @@ public class APINode implements APIResponse {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               nodes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();

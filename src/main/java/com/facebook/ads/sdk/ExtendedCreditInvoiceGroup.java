@@ -147,7 +147,7 @@ public class ExtendedCreditInvoiceGroup extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     extendedCreditInvoiceGroup.context = context;
     extendedCreditInvoiceGroup.rawValue = json;
@@ -168,8 +168,8 @@ public class ExtendedCreditInvoiceGroup extends APINode {
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
           extendedCreditInvoiceGroups.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-        };
-        return extendedCreditInvoiceGroups;
+        }
+          return extendedCreditInvoiceGroups;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -193,7 +193,7 @@ public class ExtendedCreditInvoiceGroup extends APINode {
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
               extendedCreditInvoiceGroups.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
-            };
+            }
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
@@ -360,9 +360,9 @@ public class ExtendedCreditInvoiceGroup extends APINode {
 
     public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<APINode>>() {
@@ -375,9 +375,9 @@ public class ExtendedCreditInvoiceGroup extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestDeleteAdAccounts(String nodeId, APIContext context) {
+      public APIRequestDeleteAdAccounts(String nodeId, APIContext context) {
       super(context, nodeId, "/ad_accounts", "DELETE", Arrays.asList(PARAMS));
     }
 
@@ -529,9 +529,9 @@ public class ExtendedCreditInvoiceGroup extends APINode {
 
     public ListenableFuture<APINodeList<AdAccount>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINodeList<AdAccount>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINodeList<AdAccount>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINodeList<AdAccount>>() {
@@ -544,9 +544,9 @@ public class ExtendedCreditInvoiceGroup extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGetAdAccounts(String nodeId, APIContext context) {
+      public APIRequestGetAdAccounts(String nodeId, APIContext context) {
       super(context, nodeId, "/ad_accounts", "GET", Arrays.asList(PARAMS));
     }
 
@@ -1054,9 +1054,9 @@ public class ExtendedCreditInvoiceGroup extends APINode {
 
     public ListenableFuture<AdAccount> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<AdAccount> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<AdAccount> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, AdAccount>() {
@@ -1069,9 +1069,9 @@ public class ExtendedCreditInvoiceGroup extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestCreateAdAccount(String nodeId, APIContext context) {
+      public APIRequestCreateAdAccount(String nodeId, APIContext context) {
       super(context, nodeId, "/ad_accounts", "POST", Arrays.asList(PARAMS));
     }
 
@@ -1163,9 +1163,9 @@ public class ExtendedCreditInvoiceGroup extends APINode {
 
     public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, APINode>() {
@@ -1178,9 +1178,9 @@ public class ExtendedCreditInvoiceGroup extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestDelete(String nodeId, APIContext context) {
+      public APIRequestDelete(String nodeId, APIContext context) {
       super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
     }
 
@@ -1273,9 +1273,9 @@ public class ExtendedCreditInvoiceGroup extends APINode {
 
     public ListenableFuture<ExtendedCreditInvoiceGroup> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<ExtendedCreditInvoiceGroup> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<ExtendedCreditInvoiceGroup> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, ExtendedCreditInvoiceGroup>() {
@@ -1288,9 +1288,9 @@ public class ExtendedCreditInvoiceGroup extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestGet(String nodeId, APIContext context) {
+      public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 
@@ -1421,9 +1421,9 @@ public class ExtendedCreditInvoiceGroup extends APINode {
 
     public ListenableFuture<ExtendedCreditInvoiceGroup> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
-    };
+    }
 
-    public ListenableFuture<ExtendedCreditInvoiceGroup> executeAsync(Map<String, Object> extraParams) throws APIException {
+      public ListenableFuture<ExtendedCreditInvoiceGroup> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
         new Function<ResponseWrapper, ExtendedCreditInvoiceGroup>() {
@@ -1436,9 +1436,9 @@ public class ExtendedCreditInvoiceGroup extends APINode {
            }
          }
       );
-    };
+    }
 
-    public APIRequestUpdate(String nodeId, APIContext context) {
+      public APIRequestUpdate(String nodeId, APIContext context) {
       super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
     }
 
