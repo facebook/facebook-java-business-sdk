@@ -23,8 +23,6 @@
 package com.facebook.ads.sdk;
 
 import com.google.gson.JsonObject;
-import java.util.Map;
-import java.util.List;
 
 public interface APIResponse {
   public String getRawResponse();

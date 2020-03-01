@@ -24,8 +24,6 @@ package com.facebook.ads.sdk;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import java.util.Map;
-import java.util.List;
 
 public class APIException extends Exception implements APIResponse {
   private String header;
