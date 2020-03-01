@@ -27,7 +27,6 @@ import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.lang.StackTraceElement;
-import java.util.Arrays;
 
 public class CrashReporter implements Thread.UncaughtExceptionHandler {
 	private static final String TAG = CrashReporter.class.getSimpleName();

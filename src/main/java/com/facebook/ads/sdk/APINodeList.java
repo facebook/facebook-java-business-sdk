@@ -25,7 +25,6 @@ package com.facebook.ads.sdk;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.net.URL;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
