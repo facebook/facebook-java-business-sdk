@@ -23,15 +23,11 @@
 package com.facebook.ads.sdk;
 
 import java.io.PrintStream;
-import java.util.Arrays;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import com.google.gson.JsonParser;
-import com.google.gson.JsonElement;
 
 public class APIContext {
   public static final String DEFAULT_API_BASE = APIConfig.DEFAULT_API_BASE;
