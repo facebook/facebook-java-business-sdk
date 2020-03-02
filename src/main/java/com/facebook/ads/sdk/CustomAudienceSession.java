@@ -92,7 +92,7 @@ public class CustomAudienceSession extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     customAudienceSession.context = context;
     customAudienceSession.rawValue = json;

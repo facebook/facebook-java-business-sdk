@@ -82,7 +82,7 @@ public class CreditPartitionActionOptions extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     creditPartitionActionOptions.context = context;
     creditPartitionActionOptions.rawValue = json;

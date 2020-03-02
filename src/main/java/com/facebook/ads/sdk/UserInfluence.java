@@ -82,7 +82,7 @@ public class UserInfluence extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     userInfluence.context = context;
     userInfluence.rawValue = json;

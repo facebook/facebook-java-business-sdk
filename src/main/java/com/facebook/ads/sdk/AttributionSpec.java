@@ -80,7 +80,7 @@ public class AttributionSpec extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     attributionSpec.context = context;
     attributionSpec.rawValue = json;

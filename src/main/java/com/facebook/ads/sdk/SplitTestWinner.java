@@ -82,7 +82,7 @@ public class SplitTestWinner extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     splitTestWinner.context = context;
     splitTestWinner.rawValue = json;

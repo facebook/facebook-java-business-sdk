@@ -217,7 +217,7 @@ public class HomeListing extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     homeListing.context = context;
     homeListing.rawValue = json;

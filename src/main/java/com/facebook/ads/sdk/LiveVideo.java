@@ -189,7 +189,7 @@ public class LiveVideo extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     liveVideo.context = context;
     liveVideo.rawValue = json;

@@ -90,7 +90,7 @@ public class Engagement extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     engagement.context = context;
     engagement.rawValue = json;

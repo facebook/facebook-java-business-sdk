@@ -155,7 +155,7 @@ public class HotelRoom extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     hotelRoom.context = context;
     hotelRoom.rawValue = json;

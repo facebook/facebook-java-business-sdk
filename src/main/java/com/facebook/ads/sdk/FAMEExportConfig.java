@@ -84,7 +84,7 @@ public class FAMEExportConfig extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     fameExportConfig.context = context;
     fameExportConfig.rawValue = json;

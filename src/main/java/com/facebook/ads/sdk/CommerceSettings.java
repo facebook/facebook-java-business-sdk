@@ -80,7 +80,7 @@ public class CommerceSettings extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     commerceSettings.context = context;
     commerceSettings.rawValue = json;

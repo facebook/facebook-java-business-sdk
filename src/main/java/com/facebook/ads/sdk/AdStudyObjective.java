@@ -147,7 +147,7 @@ public class AdStudyObjective extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     adStudyObjective.context = context;
     adStudyObjective.rawValue = json;

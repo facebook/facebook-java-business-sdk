@@ -147,7 +147,7 @@ public class MessengerDestinationPageWelcomeMessage extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     messengerDestinationPageWelcomeMessage.context = context;
     messengerDestinationPageWelcomeMessage.rawValue = json;

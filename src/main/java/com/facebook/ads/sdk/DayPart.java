@@ -84,7 +84,7 @@ public class DayPart extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     dayPart.context = context;
     dayPart.rawValue = json;

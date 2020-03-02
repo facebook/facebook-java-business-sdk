@@ -149,7 +149,7 @@ public class URL extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     url.context = context;
     url.rawValue = json;

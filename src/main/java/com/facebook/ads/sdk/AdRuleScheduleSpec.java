@@ -80,7 +80,7 @@ public class AdRuleScheduleSpec extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     adRuleScheduleSpec.context = context;
     adRuleScheduleSpec.rawValue = json;

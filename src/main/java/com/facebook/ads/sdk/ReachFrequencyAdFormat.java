@@ -80,7 +80,7 @@ public class ReachFrequencyAdFormat extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     reachFrequencyAdFormat.context = context;
     reachFrequencyAdFormat.rawValue = json;

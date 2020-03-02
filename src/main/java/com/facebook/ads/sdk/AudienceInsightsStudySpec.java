@@ -92,7 +92,7 @@ public class AudienceInsightsStudySpec extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     audienceInsightsStudySpec.context = context;
     audienceInsightsStudySpec.rawValue = json;

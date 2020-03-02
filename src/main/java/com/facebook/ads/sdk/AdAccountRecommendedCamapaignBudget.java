@@ -82,7 +82,7 @@ public class AdAccountRecommendedCamapaignBudget extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     adAccountRecommendedCamapaignBudget.context = context;
     adAccountRecommendedCamapaignBudget.rawValue = json;

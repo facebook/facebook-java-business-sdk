@@ -153,7 +153,7 @@ public class AdAsyncRequest extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     adAsyncRequest.context = context;
     adAsyncRequest.rawValue = json;

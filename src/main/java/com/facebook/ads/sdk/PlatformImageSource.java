@@ -82,7 +82,7 @@ public class PlatformImageSource extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     platformImageSource.context = context;
     platformImageSource.rawValue = json;

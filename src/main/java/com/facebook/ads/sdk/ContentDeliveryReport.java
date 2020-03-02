@@ -86,7 +86,7 @@ public class ContentDeliveryReport extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     contentDeliveryReport.context = context;
     contentDeliveryReport.rawValue = json;

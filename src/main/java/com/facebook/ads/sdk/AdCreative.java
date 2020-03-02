@@ -249,7 +249,7 @@ public class AdCreative extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     adCreative.context = context;
     adCreative.rawValue = json;

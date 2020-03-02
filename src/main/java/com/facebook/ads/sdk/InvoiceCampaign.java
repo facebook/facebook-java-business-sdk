@@ -92,7 +92,7 @@ public class InvoiceCampaign extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     invoiceCampaign.context = context;
     invoiceCampaign.rawValue = json;
