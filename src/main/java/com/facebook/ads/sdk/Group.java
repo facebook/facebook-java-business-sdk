@@ -4411,6 +4411,7 @@ public class Group extends APINode {
       "short_name",
       "significant_other",
       "sports",
+      "supports_donate_button_in_live_video",
       "test_group",
       "third_party_id",
       "timezone",
@@ -4853,6 +4854,13 @@ public class Group extends APINode {
     }
     public APIRequestGetOptedInMembers requestSportsField (boolean value) {
       this.requestField("sports", value);
+      return this;
+    }
+    public APIRequestGetOptedInMembers requestSupportsDonateButtonInLiveVideoField () {
+      return this.requestSupportsDonateButtonInLiveVideoField(true);
+    }
+    public APIRequestGetOptedInMembers requestSupportsDonateButtonInLiveVideoField (boolean value) {
+      this.requestField("supports_donate_button_in_live_video", value);
       return this;
     }
     public APIRequestGetOptedInMembers requestTestGroupField () {
@@ -7370,6 +7378,8 @@ public class Group extends APINode {
       VALUE_COWORKERS("COWORKERS"),
       @SerializedName("CUSTOM")
       VALUE_CUSTOM("CUSTOM"),
+      @SerializedName("DEALS")
+      VALUE_DEALS("DEALS"),
       @SerializedName("EPHEMERAL")
       VALUE_EPHEMERAL("EPHEMERAL"),
       @SerializedName("EVENT_PLANNING")
@@ -7479,6 +7489,8 @@ public class Group extends APINode {
       VALUE_COWORKERS("COWORKERS"),
       @SerializedName("CUSTOM")
       VALUE_CUSTOM("CUSTOM"),
+      @SerializedName("DEALS")
+      VALUE_DEALS("DEALS"),
       @SerializedName("EPHEMERAL")
       VALUE_EPHEMERAL("EPHEMERAL"),
       @SerializedName("EVENT_PLANNING")
@@ -7576,36 +7588,16 @@ public class Group extends APINode {
   }
 
   public static enum EnumSuggestionCategory {
-      @SerializedName("CLOSE_FRIENDS")
-      VALUE_CLOSE_FRIENDS("CLOSE_FRIENDS"),
       @SerializedName("CLOSE_FRIENDS_GENERIC")
       VALUE_CLOSE_FRIENDS_GENERIC("CLOSE_FRIENDS_GENERIC"),
-      @SerializedName("CURRENT_CITY")
-      VALUE_CURRENT_CITY("CURRENT_CITY"),
       @SerializedName("EVENT")
       VALUE_EVENT("EVENT"),
       @SerializedName("FAMILY")
       VALUE_FAMILY("FAMILY"),
-      @SerializedName("FRIEND_LIST")
-      VALUE_FRIEND_LIST("FRIEND_LIST"),
-      @SerializedName("GAMES")
-      VALUE_GAMES("GAMES"),
       @SerializedName("LIFE_EVENT")
       VALUE_LIFE_EVENT("LIFE_EVENT"),
       @SerializedName("MESSENGER")
       VALUE_MESSENGER("MESSENGER"),
-      @SerializedName("MESSENGER_THREAD")
-      VALUE_MESSENGER_THREAD("MESSENGER_THREAD"),
-      @SerializedName("NEARBY_FRIENDS")
-      VALUE_NEARBY_FRIENDS("NEARBY_FRIENDS"),
-      @SerializedName("PAGE_ADMIN")
-      VALUE_PAGE_ADMIN("PAGE_ADMIN"),
-      @SerializedName("SCHOOL")
-      VALUE_SCHOOL("SCHOOL"),
-      @SerializedName("SCHOOL_GENERIC")
-      VALUE_SCHOOL_GENERIC("SCHOOL_GENERIC"),
-      @SerializedName("TOP_PAGE")
-      VALUE_TOP_PAGE("TOP_PAGE"),
       @SerializedName("WORK")
       VALUE_WORK("WORK"),
       @SerializedName("WORKPLACE")

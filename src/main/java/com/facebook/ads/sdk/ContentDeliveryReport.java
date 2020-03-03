@@ -305,6 +305,8 @@ public class ContentDeliveryReport extends APINode {
       VALUE_GROUPS("GROUPS"),
       @SerializedName("INSTAGRAM_EXPLORE")
       VALUE_INSTAGRAM_EXPLORE("INSTAGRAM_EXPLORE"),
+      @SerializedName("INSTAGRAM_IGTV")
+      VALUE_INSTAGRAM_IGTV("INSTAGRAM_IGTV"),
       @SerializedName("INSTAGRAM_STORIES")
       VALUE_INSTAGRAM_STORIES("INSTAGRAM_STORIES"),
       @SerializedName("INSTANT_ARTICLE")
@@ -325,8 +327,6 @@ public class ContentDeliveryReport extends APINode {
       VALUE_RIGHT_HAND_COLUMN("RIGHT_HAND_COLUMN"),
       @SerializedName("SEARCH")
       VALUE_SEARCH("SEARCH"),
-      @SerializedName("SEARCH_SERP")
-      VALUE_SEARCH_SERP("SEARCH_SERP"),
       @SerializedName("STATUS")
       VALUE_STATUS("STATUS"),
       @SerializedName("SUGGESTED_VIDEO")

@@ -965,9 +965,13 @@ public class AdsPixel extends APINode {
     }
     public static final String[] PARAMS = {
       "data",
+      "namespace_id",
       "partner_agent",
       "test_event_code",
       "trace",
+      "upload_id",
+      "upload_source",
+      "upload_tag",
     };
 
     public static final String[] FIELDS = {
@@ -1035,6 +1039,11 @@ public class AdsPixel extends APINode {
       return this;
     }
 
+    public APIRequestCreateEvent setNamespaceId (String namespaceId) {
+      this.setParam("namespace_id", namespaceId);
+      return this;
+    }
+
     public APIRequestCreateEvent setPartnerAgent (String partnerAgent) {
       this.setParam("partner_agent", partnerAgent);
       return this;
@@ -1051,6 +1060,21 @@ public class AdsPixel extends APINode {
     }
     public APIRequestCreateEvent setTrace (String trace) {
       this.setParam("trace", trace);
+      return this;
+    }
+
+    public APIRequestCreateEvent setUploadId (String uploadId) {
+      this.setParam("upload_id", uploadId);
+      return this;
+    }
+
+    public APIRequestCreateEvent setUploadSource (String uploadSource) {
+      this.setParam("upload_source", uploadSource);
+      return this;
+    }
+
+    public APIRequestCreateEvent setUploadTag (String uploadTag) {
+      this.setParam("upload_tag", uploadTag);
       return this;
     }
 
@@ -2561,7 +2585,7 @@ public class AdsPixel extends APINode {
       "enable_automatic_matching",
       "first_party_cookie_status",
       "name",
-      "server_events_business_id",
+      "server_events_business_ids",
     };
 
     public static final String[] FIELDS = {
@@ -2661,8 +2685,12 @@ public class AdsPixel extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setServerEventsBusinessId (String serverEventsBusinessId) {
-      this.setParam("server_events_business_id", serverEventsBusinessId);
+    public APIRequestUpdate setServerEventsBusinessIds (List<String> serverEventsBusinessIds) {
+      this.setParam("server_events_business_ids", serverEventsBusinessIds);
+      return this;
+    }
+    public APIRequestUpdate setServerEventsBusinessIds (String serverEventsBusinessIds) {
+      this.setParam("server_events_business_ids", serverEventsBusinessIds);
       return this;
     }
 

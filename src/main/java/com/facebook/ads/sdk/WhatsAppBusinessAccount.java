@@ -1063,6 +1063,8 @@ public class WhatsAppBusinessAccount extends APINode {
       VALUE_DELETED("DELETED"),
       @SerializedName("DISABLED")
       VALUE_DISABLED("DISABLED"),
+      @SerializedName("IN_APPEAL")
+      VALUE_IN_APPEAL("IN_APPEAL"),
       @SerializedName("PENDING")
       VALUE_PENDING("PENDING"),
       @SerializedName("PENDING_DELETION")

@@ -36,7 +36,7 @@ public class AdAccountCampaignsPostStoreCampaign {
 
     new AdAccount(id, context).createCampaign()
       .setSpecialAdCategory(Campaign.EnumSpecialAdCategory.VALUE_NONE)
-      .setName("Store Visits Campaign")
+      .setName("Store Traffic Campaign")
       .setObjective(Campaign.EnumObjective.VALUE_STORE_VISITS)
       .setPromotedObject("{\"page_id\":\"<pageID>\"}")
       .setStatus(Campaign.EnumStatus.VALUE_PAUSED)

@@ -298,10 +298,6 @@ public class AdStudy extends APINode {
     return new APIRequestGetCells(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetHealthCheckErrors getHealthCheckErrors() {
-    return new APIRequestGetHealthCheckErrors(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetObjectives getObjectives() {
     return new APIRequestGetObjectives(this.getPrefixedId().toString(), context);
   }
@@ -534,126 +530,6 @@ public class AdStudy extends APINode {
     }
     public APIRequestGetCells requestTreatmentPercentageField (boolean value) {
       this.requestField("treatment_percentage", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestGetHealthCheckErrors extends APIRequest<AdsTALHealthCheckError> {
-
-    APINodeList<AdsTALHealthCheckError> lastResponse = null;
-    @Override
-    public APINodeList<AdsTALHealthCheckError> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "error_code",
-      "target_id",
-    };
-
-    @Override
-    public APINodeList<AdsTALHealthCheckError> parseResponse(String response, String header) throws APIException {
-      return AdsTALHealthCheckError.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<AdsTALHealthCheckError> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<AdsTALHealthCheckError> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<AdsTALHealthCheckError>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<AdsTALHealthCheckError>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<AdsTALHealthCheckError>>() {
-           public APINodeList<AdsTALHealthCheckError> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetHealthCheckErrors.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetHealthCheckErrors(String nodeId, APIContext context) {
-      super(context, nodeId, "/health_check_errors", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetHealthCheckErrors setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetHealthCheckErrors setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetHealthCheckErrors requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetHealthCheckErrors requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetHealthCheckErrors requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetHealthCheckErrors requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetHealthCheckErrors requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetHealthCheckErrors requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetHealthCheckErrors requestErrorCodeField () {
-      return this.requestErrorCodeField(true);
-    }
-    public APIRequestGetHealthCheckErrors requestErrorCodeField (boolean value) {
-      this.requestField("error_code", value);
-      return this;
-    }
-    public APIRequestGetHealthCheckErrors requestTargetIdField () {
-      return this.requestTargetIdField(true);
-    }
-    public APIRequestGetHealthCheckErrors requestTargetIdField (boolean value) {
-      this.requestField("target_id", value);
       return this;
     }
   }
@@ -1543,6 +1419,8 @@ public class AdStudy extends APINode {
   public static enum EnumType {
       @SerializedName("CONTINUOUS_LIFT_CONFIG")
       VALUE_CONTINUOUS_LIFT_CONFIG("CONTINUOUS_LIFT_CONFIG"),
+      @SerializedName("GEO_LIFT")
+      VALUE_GEO_LIFT("GEO_LIFT"),
       @SerializedName("LIFT")
       VALUE_LIFT("LIFT"),
       @SerializedName("SPLIT_TEST")

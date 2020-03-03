@@ -945,6 +945,7 @@ public class AdStudyCell extends APINode {
       "instagram_actor_id",
       "is_dynamic_creative",
       "issues_info",
+      "learning_stage_info",
       "lifetime_budget",
       "lifetime_imps",
       "lifetime_min_spend_target",
@@ -1259,6 +1260,13 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetAdSets requestIssuesInfoField (boolean value) {
       this.requestField("issues_info", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestLearningStageInfoField () {
+      return this.requestLearningStageInfoField(true);
+    }
+    public APIRequestGetAdSets requestLearningStageInfoField (boolean value) {
+      this.requestField("learning_stage_info", value);
       return this;
     }
     public APIRequestGetAdSets requestLifetimeBudgetField () {

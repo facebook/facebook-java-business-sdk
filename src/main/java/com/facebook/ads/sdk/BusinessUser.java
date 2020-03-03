@@ -1166,7 +1166,6 @@ public class BusinessUser extends APINode {
       "is_verified",
       "is_webhooks_subscribed",
       "keywords",
-      "leadgen_form_preview_details",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -1223,6 +1222,7 @@ public class BusinessUser extends APINode {
       "store_location_descriptor",
       "store_number",
       "studio",
+      "supports_donate_button_in_live_video",
       "supports_instant_articles",
       "talking_about_count",
       "unread_message_count",
@@ -1809,13 +1809,6 @@ public class BusinessUser extends APINode {
       this.requestField("keywords", value);
       return this;
     }
-    public APIRequestGetAssignedPages requestLeadgenFormPreviewDetailsField () {
-      return this.requestLeadgenFormPreviewDetailsField(true);
-    }
-    public APIRequestGetAssignedPages requestLeadgenFormPreviewDetailsField (boolean value) {
-      this.requestField("leadgen_form_preview_details", value);
-      return this;
-    }
     public APIRequestGetAssignedPages requestLeadgenTosAcceptanceTimeField () {
       return this.requestLeadgenTosAcceptanceTimeField(true);
     }
@@ -2206,6 +2199,13 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGetAssignedPages requestStudioField (boolean value) {
       this.requestField("studio", value);
+      return this;
+    }
+    public APIRequestGetAssignedPages requestSupportsDonateButtonInLiveVideoField () {
+      return this.requestSupportsDonateButtonInLiveVideoField(true);
+    }
+    public APIRequestGetAssignedPages requestSupportsDonateButtonInLiveVideoField (boolean value) {
+      this.requestField("supports_donate_button_in_live_video", value);
       return this;
     }
     public APIRequestGetAssignedPages requestSupportsInstantArticlesField () {

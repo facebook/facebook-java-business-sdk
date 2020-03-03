@@ -193,8 +193,6 @@ public class Page extends APINode {
   private Boolean mIsWebhooksSubscribed = null;
   @SerializedName("keywords")
   private Object mKeywords = null;
-  @SerializedName("leadgen_form_preview_details")
-  private LeadGenFormPreviewDetails mLeadgenFormPreviewDetails = null;
   @SerializedName("leadgen_tos_acceptance_time")
   private String mLeadgenTosAcceptanceTime = null;
   @SerializedName("leadgen_tos_accepted")
@@ -307,6 +305,8 @@ public class Page extends APINode {
   private Long mStoreNumber = null;
   @SerializedName("studio")
   private String mStudio = null;
+  @SerializedName("supports_donate_button_in_live_video")
+  private Boolean mSupportsDonateButtonInLiveVideo = null;
   @SerializedName("supports_instant_articles")
   private Boolean mSupportsInstantArticles = null;
   @SerializedName("talking_about_count")
@@ -1275,10 +1275,6 @@ public class Page extends APINode {
     return mKeywords;
   }
 
-  public LeadGenFormPreviewDetails getFieldLeadgenFormPreviewDetails() {
-    return mLeadgenFormPreviewDetails;
-  }
-
   public String getFieldLeadgenTosAcceptanceTime() {
     return mLeadgenTosAcceptanceTime;
   }
@@ -1513,6 +1509,10 @@ public class Page extends APINode {
 
   public String getFieldStudio() {
     return mStudio;
+  }
+
+  public Boolean getFieldSupportsDonateButtonInLiveVideo() {
+    return mSupportsDonateButtonInLiveVideo;
   }
 
   public Boolean getFieldSupportsInstantArticles() {
@@ -5961,7 +5961,6 @@ public class Page extends APINode {
       "is_verified",
       "is_webhooks_subscribed",
       "keywords",
-      "leadgen_form_preview_details",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -6018,6 +6017,7 @@ public class Page extends APINode {
       "store_location_descriptor",
       "store_number",
       "studio",
+      "supports_donate_button_in_live_video",
       "supports_instant_articles",
       "talking_about_count",
       "unread_message_count",
@@ -6604,13 +6604,6 @@ public class Page extends APINode {
       this.requestField("keywords", value);
       return this;
     }
-    public APIRequestGetCrosspostWhitelistedPages requestLeadgenFormPreviewDetailsField () {
-      return this.requestLeadgenFormPreviewDetailsField(true);
-    }
-    public APIRequestGetCrosspostWhitelistedPages requestLeadgenFormPreviewDetailsField (boolean value) {
-      this.requestField("leadgen_form_preview_details", value);
-      return this;
-    }
     public APIRequestGetCrosspostWhitelistedPages requestLeadgenTosAcceptanceTimeField () {
       return this.requestLeadgenTosAcceptanceTimeField(true);
     }
@@ -7001,6 +6994,13 @@ public class Page extends APINode {
     }
     public APIRequestGetCrosspostWhitelistedPages requestStudioField (boolean value) {
       this.requestField("studio", value);
+      return this;
+    }
+    public APIRequestGetCrosspostWhitelistedPages requestSupportsDonateButtonInLiveVideoField () {
+      return this.requestSupportsDonateButtonInLiveVideoField(true);
+    }
+    public APIRequestGetCrosspostWhitelistedPages requestSupportsDonateButtonInLiveVideoField (boolean value) {
+      this.requestField("supports_donate_button_in_live_video", value);
       return this;
     }
     public APIRequestGetCrosspostWhitelistedPages requestSupportsInstantArticlesField () {
@@ -10175,7 +10175,6 @@ public class Page extends APINode {
       "is_verified",
       "is_webhooks_subscribed",
       "keywords",
-      "leadgen_form_preview_details",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -10232,6 +10231,7 @@ public class Page extends APINode {
       "store_location_descriptor",
       "store_number",
       "studio",
+      "supports_donate_button_in_live_video",
       "supports_instant_articles",
       "talking_about_count",
       "unread_message_count",
@@ -10818,13 +10818,6 @@ public class Page extends APINode {
       this.requestField("keywords", value);
       return this;
     }
-    public APIRequestGetGlobalBrandChildren requestLeadgenFormPreviewDetailsField () {
-      return this.requestLeadgenFormPreviewDetailsField(true);
-    }
-    public APIRequestGetGlobalBrandChildren requestLeadgenFormPreviewDetailsField (boolean value) {
-      this.requestField("leadgen_form_preview_details", value);
-      return this;
-    }
     public APIRequestGetGlobalBrandChildren requestLeadgenTosAcceptanceTimeField () {
       return this.requestLeadgenTosAcceptanceTimeField(true);
     }
@@ -11215,6 +11208,13 @@ public class Page extends APINode {
     }
     public APIRequestGetGlobalBrandChildren requestStudioField (boolean value) {
       this.requestField("studio", value);
+      return this;
+    }
+    public APIRequestGetGlobalBrandChildren requestSupportsDonateButtonInLiveVideoField () {
+      return this.requestSupportsDonateButtonInLiveVideoField(true);
+    }
+    public APIRequestGetGlobalBrandChildren requestSupportsDonateButtonInLiveVideoField (boolean value) {
+      this.requestField("supports_donate_button_in_live_video", value);
       return this;
     }
     public APIRequestGetGlobalBrandChildren requestSupportsInstantArticlesField () {
@@ -13342,7 +13342,6 @@ public class Page extends APINode {
       "is_verified",
       "is_webhooks_subscribed",
       "keywords",
-      "leadgen_form_preview_details",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -13399,6 +13398,7 @@ public class Page extends APINode {
       "store_location_descriptor",
       "store_number",
       "studio",
+      "supports_donate_button_in_live_video",
       "supports_instant_articles",
       "talking_about_count",
       "unread_message_count",
@@ -13990,13 +13990,6 @@ public class Page extends APINode {
       this.requestField("keywords", value);
       return this;
     }
-    public APIRequestGetLikes requestLeadgenFormPreviewDetailsField () {
-      return this.requestLeadgenFormPreviewDetailsField(true);
-    }
-    public APIRequestGetLikes requestLeadgenFormPreviewDetailsField (boolean value) {
-      this.requestField("leadgen_form_preview_details", value);
-      return this;
-    }
     public APIRequestGetLikes requestLeadgenTosAcceptanceTimeField () {
       return this.requestLeadgenTosAcceptanceTimeField(true);
     }
@@ -14387,6 +14380,13 @@ public class Page extends APINode {
     }
     public APIRequestGetLikes requestStudioField (boolean value) {
       this.requestField("studio", value);
+      return this;
+    }
+    public APIRequestGetLikes requestSupportsDonateButtonInLiveVideoField () {
+      return this.requestSupportsDonateButtonInLiveVideoField(true);
+    }
+    public APIRequestGetLikes requestSupportsDonateButtonInLiveVideoField (boolean value) {
+      this.requestField("supports_donate_button_in_live_video", value);
       return this;
     }
     public APIRequestGetLikes requestSupportsInstantArticlesField () {
@@ -15679,7 +15679,6 @@ public class Page extends APINode {
       "is_verified",
       "is_webhooks_subscribed",
       "keywords",
-      "leadgen_form_preview_details",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -15736,6 +15735,7 @@ public class Page extends APINode {
       "store_location_descriptor",
       "store_number",
       "studio",
+      "supports_donate_button_in_live_video",
       "supports_instant_articles",
       "talking_about_count",
       "unread_message_count",
@@ -16322,13 +16322,6 @@ public class Page extends APINode {
       this.requestField("keywords", value);
       return this;
     }
-    public APIRequestGetLocations requestLeadgenFormPreviewDetailsField () {
-      return this.requestLeadgenFormPreviewDetailsField(true);
-    }
-    public APIRequestGetLocations requestLeadgenFormPreviewDetailsField (boolean value) {
-      this.requestField("leadgen_form_preview_details", value);
-      return this;
-    }
     public APIRequestGetLocations requestLeadgenTosAcceptanceTimeField () {
       return this.requestLeadgenTosAcceptanceTimeField(true);
     }
@@ -16719,6 +16712,13 @@ public class Page extends APINode {
     }
     public APIRequestGetLocations requestStudioField (boolean value) {
       this.requestField("studio", value);
+      return this;
+    }
+    public APIRequestGetLocations requestSupportsDonateButtonInLiveVideoField () {
+      return this.requestSupportsDonateButtonInLiveVideoField(true);
+    }
+    public APIRequestGetLocations requestSupportsDonateButtonInLiveVideoField (boolean value) {
+      this.requestField("supports_donate_button_in_live_video", value);
       return this;
     }
     public APIRequestGetLocations requestSupportsInstantArticlesField () {
@@ -23477,6 +23477,7 @@ public class Page extends APINode {
       "short_name",
       "significant_other",
       "sports",
+      "supports_donate_button_in_live_video",
       "test_group",
       "third_party_id",
       "timezone",
@@ -23937,6 +23938,13 @@ public class Page extends APINode {
     }
     public APIRequestGetRoles requestSportsField (boolean value) {
       this.requestField("sports", value);
+      return this;
+    }
+    public APIRequestGetRoles requestSupportsDonateButtonInLiveVideoField () {
+      return this.requestSupportsDonateButtonInLiveVideoField(true);
+    }
+    public APIRequestGetRoles requestSupportsDonateButtonInLiveVideoField (boolean value) {
+      this.requestField("supports_donate_button_in_live_video", value);
       return this;
     }
     public APIRequestGetRoles requestTestGroupField () {
@@ -29484,6 +29492,7 @@ public class Page extends APINode {
       "monitoring_type",
       "ownership_countries",
       "rule_id",
+      "tags",
       "whitelisted_ids",
       "whitelisted_ig_user_ids",
     };
@@ -29624,6 +29633,15 @@ public class Page extends APINode {
 
     public APIRequestCreateVideoCopyright setRuleId (String ruleId) {
       this.setParam("rule_id", ruleId);
+      return this;
+    }
+
+    public APIRequestCreateVideoCopyright setTags (List<String> tags) {
+      this.setParam("tags", tags);
+      return this;
+    }
+    public APIRequestCreateVideoCopyright setTags (String tags) {
+      this.setParam("tags", tags);
       return this;
     }
 
@@ -31802,7 +31820,6 @@ public class Page extends APINode {
       "is_verified",
       "is_webhooks_subscribed",
       "keywords",
-      "leadgen_form_preview_details",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -31859,6 +31876,7 @@ public class Page extends APINode {
       "store_location_descriptor",
       "store_number",
       "studio",
+      "supports_donate_button_in_live_video",
       "supports_instant_articles",
       "talking_about_count",
       "unread_message_count",
@@ -32450,13 +32468,6 @@ public class Page extends APINode {
       this.requestField("keywords", value);
       return this;
     }
-    public APIRequestGet requestLeadgenFormPreviewDetailsField () {
-      return this.requestLeadgenFormPreviewDetailsField(true);
-    }
-    public APIRequestGet requestLeadgenFormPreviewDetailsField (boolean value) {
-      this.requestField("leadgen_form_preview_details", value);
-      return this;
-    }
     public APIRequestGet requestLeadgenTosAcceptanceTimeField () {
       return this.requestLeadgenTosAcceptanceTimeField(true);
     }
@@ -32847,6 +32858,13 @@ public class Page extends APINode {
     }
     public APIRequestGet requestStudioField (boolean value) {
       this.requestField("studio", value);
+      return this;
+    }
+    public APIRequestGet requestSupportsDonateButtonInLiveVideoField () {
+      return this.requestSupportsDonateButtonInLiveVideoField(true);
+    }
+    public APIRequestGet requestSupportsDonateButtonInLiveVideoField (boolean value) {
+      this.requestField("supports_donate_button_in_live_video", value);
       return this;
     }
     public APIRequestGet requestSupportsInstantArticlesField () {
@@ -33652,6 +33670,18 @@ public class Page extends APINode {
       VALUE_PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES("PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES"),
       @SerializedName("PLATFORM_READ_INSIGHTS")
       VALUE_PLATFORM_READ_INSIGHTS("PLATFORM_READ_INSIGHTS"),
+      @SerializedName("PROFILE_PLUS_ADVERTISE")
+      VALUE_PROFILE_PLUS_ADVERTISE("PROFILE_PLUS_ADVERTISE"),
+      @SerializedName("PROFILE_PLUS_ANALYZE")
+      VALUE_PROFILE_PLUS_ANALYZE("PROFILE_PLUS_ANALYZE"),
+      @SerializedName("PROFILE_PLUS_CREATE_CONTENT")
+      VALUE_PROFILE_PLUS_CREATE_CONTENT("PROFILE_PLUS_CREATE_CONTENT"),
+      @SerializedName("PROFILE_PLUS_MANAGE")
+      VALUE_PROFILE_PLUS_MANAGE("PROFILE_PLUS_MANAGE"),
+      @SerializedName("PROFILE_PLUS_MESSAGING")
+      VALUE_PROFILE_PLUS_MESSAGING("PROFILE_PLUS_MESSAGING"),
+      @SerializedName("PROFILE_PLUS_MODERATE")
+      VALUE_PROFILE_PLUS_MODERATE("PROFILE_PLUS_MODERATE"),
       @SerializedName("READ_PAGE_MAILBOXES")
       VALUE_READ_PAGE_MAILBOXES("READ_PAGE_MAILBOXES"),
       @SerializedName("VIEW_MONETIZATION_INSIGHTS")
@@ -33697,6 +33727,18 @@ public class Page extends APINode {
       VALUE_PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES("PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES"),
       @SerializedName("PLATFORM_READ_INSIGHTS")
       VALUE_PLATFORM_READ_INSIGHTS("PLATFORM_READ_INSIGHTS"),
+      @SerializedName("PROFILE_PLUS_ADVERTISE")
+      VALUE_PROFILE_PLUS_ADVERTISE("PROFILE_PLUS_ADVERTISE"),
+      @SerializedName("PROFILE_PLUS_ANALYZE")
+      VALUE_PROFILE_PLUS_ANALYZE("PROFILE_PLUS_ANALYZE"),
+      @SerializedName("PROFILE_PLUS_CREATE_CONTENT")
+      VALUE_PROFILE_PLUS_CREATE_CONTENT("PROFILE_PLUS_CREATE_CONTENT"),
+      @SerializedName("PROFILE_PLUS_MANAGE")
+      VALUE_PROFILE_PLUS_MANAGE("PROFILE_PLUS_MANAGE"),
+      @SerializedName("PROFILE_PLUS_MESSAGING")
+      VALUE_PROFILE_PLUS_MESSAGING("PROFILE_PLUS_MESSAGING"),
+      @SerializedName("PROFILE_PLUS_MODERATE")
+      VALUE_PROFILE_PLUS_MODERATE("PROFILE_PLUS_MODERATE"),
       @SerializedName("READ_PAGE_MAILBOXES")
       VALUE_READ_PAGE_MAILBOXES("READ_PAGE_MAILBOXES"),
       @SerializedName("VIEW_MONETIZATION_INSIGHTS")
@@ -33779,10 +33821,14 @@ public class Page extends APINode {
   public static enum EnumSenderAction {
       @SerializedName("MARK_SEEN")
       VALUE_MARK_SEEN("MARK_SEEN"),
+      @SerializedName("REACT")
+      VALUE_REACT("REACT"),
       @SerializedName("TYPING_OFF")
       VALUE_TYPING_OFF("TYPING_OFF"),
       @SerializedName("TYPING_ON")
       VALUE_TYPING_ON("TYPING_ON"),
+      @SerializedName("UNREACT")
+      VALUE_UNREACT("UNREACT"),
       ;
 
       private String value;
@@ -34310,7 +34356,6 @@ public class Page extends APINode {
     this.mIsVerified = instance.mIsVerified;
     this.mIsWebhooksSubscribed = instance.mIsWebhooksSubscribed;
     this.mKeywords = instance.mKeywords;
-    this.mLeadgenFormPreviewDetails = instance.mLeadgenFormPreviewDetails;
     this.mLeadgenTosAcceptanceTime = instance.mLeadgenTosAcceptanceTime;
     this.mLeadgenTosAccepted = instance.mLeadgenTosAccepted;
     this.mLeadgenTosAcceptingUser = instance.mLeadgenTosAcceptingUser;
@@ -34367,6 +34412,7 @@ public class Page extends APINode {
     this.mStoreLocationDescriptor = instance.mStoreLocationDescriptor;
     this.mStoreNumber = instance.mStoreNumber;
     this.mStudio = instance.mStudio;
+    this.mSupportsDonateButtonInLiveVideo = instance.mSupportsDonateButtonInLiveVideo;
     this.mSupportsInstantArticles = instance.mSupportsInstantArticles;
     this.mTalkingAboutCount = instance.mTalkingAboutCount;
     this.mUnreadMessageCount = instance.mUnreadMessageCount;

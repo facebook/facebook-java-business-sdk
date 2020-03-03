@@ -3031,7 +3031,6 @@ public class Post extends APINode {
       "is_verified",
       "is_webhooks_subscribed",
       "keywords",
-      "leadgen_form_preview_details",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -3088,6 +3087,7 @@ public class Post extends APINode {
       "store_location_descriptor",
       "store_number",
       "studio",
+      "supports_donate_button_in_live_video",
       "supports_instant_articles",
       "talking_about_count",
       "unread_message_count",
@@ -3674,13 +3674,6 @@ public class Post extends APINode {
       this.requestField("keywords", value);
       return this;
     }
-    public APIRequestGetSponsorTags requestLeadgenFormPreviewDetailsField () {
-      return this.requestLeadgenFormPreviewDetailsField(true);
-    }
-    public APIRequestGetSponsorTags requestLeadgenFormPreviewDetailsField (boolean value) {
-      this.requestField("leadgen_form_preview_details", value);
-      return this;
-    }
     public APIRequestGetSponsorTags requestLeadgenTosAcceptanceTimeField () {
       return this.requestLeadgenTosAcceptanceTimeField(true);
     }
@@ -4071,6 +4064,13 @@ public class Post extends APINode {
     }
     public APIRequestGetSponsorTags requestStudioField (boolean value) {
       this.requestField("studio", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestSupportsDonateButtonInLiveVideoField () {
+      return this.requestSupportsDonateButtonInLiveVideoField(true);
+    }
+    public APIRequestGetSponsorTags requestSupportsDonateButtonInLiveVideoField (boolean value) {
+      this.requestField("supports_donate_button_in_live_video", value);
       return this;
     }
     public APIRequestGetSponsorTags requestSupportsInstantArticlesField () {
@@ -5457,23 +5457,6 @@ public class Post extends APINode {
       private String value;
 
       private EnumTimelineVisibility(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumWith {
-      @SerializedName("LOCATION")
-      VALUE_LOCATION("LOCATION"),
-      ;
-
-      private String value;
-
-      private EnumWith(String value) {
         this.value = value;
       }
 

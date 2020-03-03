@@ -7011,6 +7011,7 @@ public class AdAccount extends APINode {
       "instagram_actor_id",
       "is_dynamic_creative",
       "issues_info",
+      "learning_stage_info",
       "lifetime_budget",
       "lifetime_imps",
       "lifetime_min_spend_target",
@@ -7384,6 +7385,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSets requestIssuesInfoField (boolean value) {
       this.requestField("issues_info", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestLearningStageInfoField () {
+      return this.requestLearningStageInfoField(true);
+    }
+    public APIRequestGetAdSets requestLearningStageInfoField (boolean value) {
+      this.requestField("learning_stage_info", value);
       return this;
     }
     public APIRequestGetAdSets requestLifetimeBudgetField () {
@@ -8094,6 +8102,7 @@ public class AdAccount extends APINode {
       "instagram_actor_id",
       "is_dynamic_creative",
       "issues_info",
+      "learning_stage_info",
       "lifetime_budget",
       "lifetime_imps",
       "lifetime_min_spend_target",
@@ -8426,6 +8435,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSetsByLabels requestIssuesInfoField (boolean value) {
       this.requestField("issues_info", value);
+      return this;
+    }
+    public APIRequestGetAdSetsByLabels requestLearningStageInfoField () {
+      return this.requestLearningStageInfoField(true);
+    }
+    public APIRequestGetAdSetsByLabels requestLearningStageInfoField (boolean value) {
+      this.requestField("learning_stage_info", value);
       return this;
     }
     public APIRequestGetAdSetsByLabels requestLifetimeBudgetField () {
@@ -11207,6 +11223,7 @@ public class AdAccount extends APINode {
       "instagram_actor_id",
       "is_dynamic_creative",
       "issues_info",
+      "learning_stage_info",
       "lifetime_budget",
       "lifetime_imps",
       "lifetime_min_spend_target",
@@ -11521,6 +11538,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAffectedAdSets requestIssuesInfoField (boolean value) {
       this.requestField("issues_info", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestLearningStageInfoField () {
+      return this.requestLearningStageInfoField(true);
+    }
+    public APIRequestGetAffectedAdSets requestLearningStageInfoField (boolean value) {
+      this.requestField("learning_stage_info", value);
       return this;
     }
     public APIRequestGetAffectedAdSets requestLifetimeBudgetField () {
@@ -17648,6 +17672,7 @@ public class AdAccount extends APINode {
       "instagram_actor_id",
       "is_dynamic_creative",
       "issues_info",
+      "learning_stage_info",
       "lifetime_budget",
       "lifetime_imps",
       "lifetime_min_spend_target",
@@ -17967,6 +17992,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetDeprecatedTargetingAdSets requestIssuesInfoField (boolean value) {
       this.requestField("issues_info", value);
+      return this;
+    }
+    public APIRequestGetDeprecatedTargetingAdSets requestLearningStageInfoField () {
+      return this.requestLearningStageInfoField(true);
+    }
+    public APIRequestGetDeprecatedTargetingAdSets requestLearningStageInfoField (boolean value) {
+      this.requestField("learning_stage_info", value);
       return this;
     }
     public APIRequestGetDeprecatedTargetingAdSets requestLifetimeBudgetField () {
@@ -20629,7 +20661,6 @@ public class AdAccount extends APINode {
       "is_verified",
       "is_webhooks_subscribed",
       "keywords",
-      "leadgen_form_preview_details",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -20686,6 +20717,7 @@ public class AdAccount extends APINode {
       "store_location_descriptor",
       "store_number",
       "studio",
+      "supports_donate_button_in_live_video",
       "supports_instant_articles",
       "talking_about_count",
       "unread_message_count",
@@ -21272,13 +21304,6 @@ public class AdAccount extends APINode {
       this.requestField("keywords", value);
       return this;
     }
-    public APIRequestGetPromotePages requestLeadgenFormPreviewDetailsField () {
-      return this.requestLeadgenFormPreviewDetailsField(true);
-    }
-    public APIRequestGetPromotePages requestLeadgenFormPreviewDetailsField (boolean value) {
-      this.requestField("leadgen_form_preview_details", value);
-      return this;
-    }
     public APIRequestGetPromotePages requestLeadgenTosAcceptanceTimeField () {
       return this.requestLeadgenTosAcceptanceTimeField(true);
     }
@@ -21669,6 +21694,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetPromotePages requestStudioField (boolean value) {
       this.requestField("studio", value);
+      return this;
+    }
+    public APIRequestGetPromotePages requestSupportsDonateButtonInLiveVideoField () {
+      return this.requestSupportsDonateButtonInLiveVideoField(true);
+    }
+    public APIRequestGetPromotePages requestSupportsDonateButtonInLiveVideoField (boolean value) {
+      this.requestField("supports_donate_button_in_live_video", value);
       return this;
     }
     public APIRequestGetPromotePages requestSupportsInstantArticlesField () {
@@ -22267,7 +22299,6 @@ public class AdAccount extends APINode {
       "external_reach",
       "feed_ratio_0000",
       "frequency_cap",
-      "frequency_distribution",
       "frequency_distribution_map",
       "frequency_distribution_map_agg",
       "grp_audience_size",
@@ -22625,13 +22656,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetReachFrequencyPredictions requestFrequencyCapField (boolean value) {
       this.requestField("frequency_cap", value);
-      return this;
-    }
-    public APIRequestGetReachFrequencyPredictions requestFrequencyDistributionField () {
-      return this.requestFrequencyDistributionField(true);
-    }
-    public APIRequestGetReachFrequencyPredictions requestFrequencyDistributionField (boolean value) {
-      this.requestField("frequency_distribution", value);
       return this;
     }
     public APIRequestGetReachFrequencyPredictions requestFrequencyDistributionMapField () {

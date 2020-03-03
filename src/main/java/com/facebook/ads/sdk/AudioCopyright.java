@@ -73,6 +73,8 @@ public class AudioCopyright extends APINode {
   private String mReferenceFileStatus = null;
   @SerializedName("ridge_monitoring_status")
   private String mRidgeMonitoringStatus = null;
+  @SerializedName("tags")
+  private List<String> mTags = null;
   @SerializedName("update_time")
   private String mUpdateTime = null;
   @SerializedName("whitelisted_fb_users")
@@ -332,6 +334,10 @@ public class AudioCopyright extends APINode {
     return mRidgeMonitoringStatus;
   }
 
+  public List<String> getFieldTags() {
+    return mTags;
+  }
+
   public String getFieldUpdateTime() {
     return mUpdateTime;
   }
@@ -366,6 +372,7 @@ public class AudioCopyright extends APINode {
       "ownership_countries",
       "reference_file_status",
       "ridge_monitoring_status",
+      "tags",
       "update_time",
       "whitelisted_fb_users",
       "whitelisted_ig_users",
@@ -523,6 +530,13 @@ public class AudioCopyright extends APINode {
       this.requestField("ridge_monitoring_status", value);
       return this;
     }
+    public APIRequestGet requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGet requestTagsField (boolean value) {
+      this.requestField("tags", value);
+      return this;
+    }
     public APIRequestGet requestUpdateTimeField () {
       return this.requestUpdateTimeField(true);
     }
@@ -570,6 +584,7 @@ public class AudioCopyright extends APINode {
     this.mOwnershipCountries = instance.mOwnershipCountries;
     this.mReferenceFileStatus = instance.mReferenceFileStatus;
     this.mRidgeMonitoringStatus = instance.mRidgeMonitoringStatus;
+    this.mTags = instance.mTags;
     this.mUpdateTime = instance.mUpdateTime;
     this.mWhitelistedFbUsers = instance.mWhitelistedFbUsers;
     this.mWhitelistedIgUsers = instance.mWhitelistedIgUsers;

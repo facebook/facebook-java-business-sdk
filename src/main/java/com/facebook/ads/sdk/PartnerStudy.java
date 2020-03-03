@@ -446,6 +446,7 @@ public class PartnerStudy extends APINode {
       "short_name",
       "significant_other",
       "sports",
+      "supports_donate_button_in_live_video",
       "test_group",
       "third_party_id",
       "timezone",
@@ -888,6 +889,13 @@ public class PartnerStudy extends APINode {
     }
     public APIRequestGetSubmitters requestSportsField (boolean value) {
       this.requestField("sports", value);
+      return this;
+    }
+    public APIRequestGetSubmitters requestSupportsDonateButtonInLiveVideoField () {
+      return this.requestSupportsDonateButtonInLiveVideoField(true);
+    }
+    public APIRequestGetSubmitters requestSupportsDonateButtonInLiveVideoField (boolean value) {
+      this.requestField("supports_donate_button_in_live_video", value);
       return this;
     }
     public APIRequestGetSubmitters requestTestGroupField () {

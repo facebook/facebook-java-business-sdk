@@ -349,6 +349,7 @@ public class OpenGraphContext extends APINode {
       "short_name",
       "significant_other",
       "sports",
+      "supports_donate_button_in_live_video",
       "test_group",
       "third_party_id",
       "timezone",
@@ -793,6 +794,13 @@ public class OpenGraphContext extends APINode {
       this.requestField("sports", value);
       return this;
     }
+    public APIRequestGetFriendsTaggedAt requestSupportsDonateButtonInLiveVideoField () {
+      return this.requestSupportsDonateButtonInLiveVideoField(true);
+    }
+    public APIRequestGetFriendsTaggedAt requestSupportsDonateButtonInLiveVideoField (boolean value) {
+      this.requestField("supports_donate_button_in_live_video", value);
+      return this;
+    }
     public APIRequestGetFriendsTaggedAt requestTestGroupField () {
       return this.requestTestGroupField(true);
     }
@@ -925,6 +933,7 @@ public class OpenGraphContext extends APINode {
       "short_name",
       "significant_other",
       "sports",
+      "supports_donate_button_in_live_video",
       "test_group",
       "third_party_id",
       "timezone",
@@ -1369,6 +1378,13 @@ public class OpenGraphContext extends APINode {
       this.requestField("sports", value);
       return this;
     }
+    public APIRequestGetMusicListenFriends requestSupportsDonateButtonInLiveVideoField () {
+      return this.requestSupportsDonateButtonInLiveVideoField(true);
+    }
+    public APIRequestGetMusicListenFriends requestSupportsDonateButtonInLiveVideoField (boolean value) {
+      this.requestField("supports_donate_button_in_live_video", value);
+      return this;
+    }
     public APIRequestGetMusicListenFriends requestTestGroupField () {
       return this.requestTestGroupField(true);
     }
@@ -1501,6 +1517,7 @@ public class OpenGraphContext extends APINode {
       "short_name",
       "significant_other",
       "sports",
+      "supports_donate_button_in_live_video",
       "test_group",
       "third_party_id",
       "timezone",
@@ -1943,6 +1960,13 @@ public class OpenGraphContext extends APINode {
     }
     public APIRequestGetVideoWatchFriends requestSportsField (boolean value) {
       this.requestField("sports", value);
+      return this;
+    }
+    public APIRequestGetVideoWatchFriends requestSupportsDonateButtonInLiveVideoField () {
+      return this.requestSupportsDonateButtonInLiveVideoField(true);
+    }
+    public APIRequestGetVideoWatchFriends requestSupportsDonateButtonInLiveVideoField (boolean value) {
+      this.requestField("supports_donate_button_in_live_video", value);
       return this;
     }
     public APIRequestGetVideoWatchFriends requestTestGroupField () {

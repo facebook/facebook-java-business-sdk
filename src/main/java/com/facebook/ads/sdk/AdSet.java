@@ -113,6 +113,8 @@ public class AdSet extends APINode {
   private Boolean mIsDynamicCreative = null;
   @SerializedName("issues_info")
   private List<AdCampaignIssuesInfo> mIssuesInfo = null;
+  @SerializedName("learning_stage_info")
+  private AdCampaignLearningStageInfo mLearningStageInfo = null;
   @SerializedName("lifetime_budget")
   private String mLifetimeBudget = null;
   @SerializedName("lifetime_imps")
@@ -741,6 +743,20 @@ public class AdSet extends APINode {
   public AdSet setFieldIssuesInfo(String value) {
     Type type = new TypeToken<List<AdCampaignIssuesInfo>>(){}.getType();
     this.mIssuesInfo = AdCampaignIssuesInfo.getGson().fromJson(value, type);
+    return this;
+  }
+  public AdCampaignLearningStageInfo getFieldLearningStageInfo() {
+    return mLearningStageInfo;
+  }
+
+  public AdSet setFieldLearningStageInfo(AdCampaignLearningStageInfo value) {
+    this.mLearningStageInfo = value;
+    return this;
+  }
+
+  public AdSet setFieldLearningStageInfo(String value) {
+    Type type = new TypeToken<AdCampaignLearningStageInfo>(){}.getType();
+    this.mLearningStageInfo = AdCampaignLearningStageInfo.getGson().fromJson(value, type);
     return this;
   }
   public String getFieldLifetimeBudget() {
@@ -3278,6 +3294,7 @@ public class AdSet extends APINode {
       "instagram_actor_id",
       "is_dynamic_creative",
       "issues_info",
+      "learning_stage_info",
       "lifetime_budget",
       "lifetime_imps",
       "lifetime_min_spend_target",
@@ -3628,6 +3645,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestIssuesInfoField (boolean value) {
       this.requestField("issues_info", value);
+      return this;
+    }
+    public APIRequestGetCopies requestLearningStageInfoField () {
+      return this.requestLearningStageInfoField(true);
+    }
+    public APIRequestGetCopies requestLearningStageInfoField (boolean value) {
+      this.requestField("learning_stage_info", value);
       return this;
     }
     public APIRequestGetCopies requestLifetimeBudgetField () {
@@ -4974,6 +4998,7 @@ public class AdSet extends APINode {
       "instagram_actor_id",
       "is_dynamic_creative",
       "issues_info",
+      "learning_stage_info",
       "lifetime_budget",
       "lifetime_imps",
       "lifetime_min_spend_target",
@@ -5324,6 +5349,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGet requestIssuesInfoField (boolean value) {
       this.requestField("issues_info", value);
+      return this;
+    }
+    public APIRequestGet requestLearningStageInfoField () {
+      return this.requestLearningStageInfoField(true);
+    }
+    public APIRequestGet requestLearningStageInfoField (boolean value) {
+      this.requestField("learning_stage_info", value);
       return this;
     }
     public APIRequestGet requestLifetimeBudgetField () {
@@ -6404,6 +6436,7 @@ public class AdSet extends APINode {
     this.mInstagramActorId = instance.mInstagramActorId;
     this.mIsDynamicCreative = instance.mIsDynamicCreative;
     this.mIssuesInfo = instance.mIssuesInfo;
+    this.mLearningStageInfo = instance.mLearningStageInfo;
     this.mLifetimeBudget = instance.mLifetimeBudget;
     this.mLifetimeImps = instance.mLifetimeImps;
     this.mLifetimeMinSpendTarget = instance.mLifetimeMinSpendTarget;

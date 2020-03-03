@@ -4279,7 +4279,6 @@ public class BusinessAssetGroup extends APINode {
       "is_verified",
       "is_webhooks_subscribed",
       "keywords",
-      "leadgen_form_preview_details",
       "leadgen_tos_acceptance_time",
       "leadgen_tos_accepted",
       "leadgen_tos_accepting_user",
@@ -4336,6 +4335,7 @@ public class BusinessAssetGroup extends APINode {
       "store_location_descriptor",
       "store_number",
       "studio",
+      "supports_donate_button_in_live_video",
       "supports_instant_articles",
       "talking_about_count",
       "unread_message_count",
@@ -4922,13 +4922,6 @@ public class BusinessAssetGroup extends APINode {
       this.requestField("keywords", value);
       return this;
     }
-    public APIRequestGetContainedPages requestLeadgenFormPreviewDetailsField () {
-      return this.requestLeadgenFormPreviewDetailsField(true);
-    }
-    public APIRequestGetContainedPages requestLeadgenFormPreviewDetailsField (boolean value) {
-      this.requestField("leadgen_form_preview_details", value);
-      return this;
-    }
     public APIRequestGetContainedPages requestLeadgenTosAcceptanceTimeField () {
       return this.requestLeadgenTosAcceptanceTimeField(true);
     }
@@ -5319,6 +5312,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedPages requestStudioField (boolean value) {
       this.requestField("studio", value);
+      return this;
+    }
+    public APIRequestGetContainedPages requestSupportsDonateButtonInLiveVideoField () {
+      return this.requestSupportsDonateButtonInLiveVideoField(true);
+    }
+    public APIRequestGetContainedPages requestSupportsDonateButtonInLiveVideoField (boolean value) {
+      this.requestField("supports_donate_button_in_live_video", value);
       return this;
     }
     public APIRequestGetContainedPages requestSupportsInstantArticlesField () {
@@ -6680,6 +6680,18 @@ public class BusinessAssetGroup extends APINode {
       VALUE_PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES("PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES"),
       @SerializedName("PLATFORM_READ_INSIGHTS")
       VALUE_PLATFORM_READ_INSIGHTS("PLATFORM_READ_INSIGHTS"),
+      @SerializedName("PROFILE_PLUS_ADVERTISE")
+      VALUE_PROFILE_PLUS_ADVERTISE("PROFILE_PLUS_ADVERTISE"),
+      @SerializedName("PROFILE_PLUS_ANALYZE")
+      VALUE_PROFILE_PLUS_ANALYZE("PROFILE_PLUS_ANALYZE"),
+      @SerializedName("PROFILE_PLUS_CREATE_CONTENT")
+      VALUE_PROFILE_PLUS_CREATE_CONTENT("PROFILE_PLUS_CREATE_CONTENT"),
+      @SerializedName("PROFILE_PLUS_MANAGE")
+      VALUE_PROFILE_PLUS_MANAGE("PROFILE_PLUS_MANAGE"),
+      @SerializedName("PROFILE_PLUS_MESSAGING")
+      VALUE_PROFILE_PLUS_MESSAGING("PROFILE_PLUS_MESSAGING"),
+      @SerializedName("PROFILE_PLUS_MODERATE")
+      VALUE_PROFILE_PLUS_MODERATE("PROFILE_PLUS_MODERATE"),
       @SerializedName("READ_PAGE_MAILBOXES")
       VALUE_READ_PAGE_MAILBOXES("READ_PAGE_MAILBOXES"),
       @SerializedName("VIEW_MONETIZATION_INSIGHTS")

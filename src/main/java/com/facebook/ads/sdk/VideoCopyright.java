@@ -85,6 +85,8 @@ public class VideoCopyright extends APINode {
   private String mReferenceOwnerId = null;
   @SerializedName("rule_ids")
   private List<VideoCopyrightRule> mRuleIds = null;
+  @SerializedName("tags")
+  private List<String> mTags = null;
   @SerializedName("whitelisted_ids")
   private List<String> mWhitelistedIds = null;
   protected static Gson gson = null;
@@ -368,6 +370,10 @@ public class VideoCopyright extends APINode {
     return mRuleIds;
   }
 
+  public List<String> getFieldTags() {
+    return mTags;
+  }
+
   public List<String> getFieldWhitelistedIds() {
     return mWhitelistedIds;
   }
@@ -400,6 +406,7 @@ public class VideoCopyright extends APINode {
       "reference_file_expired",
       "reference_owner_id",
       "rule_ids",
+      "tags",
       "whitelisted_ids",
     };
 
@@ -595,6 +602,13 @@ public class VideoCopyright extends APINode {
     }
     public APIRequestGet requestRuleIdsField (boolean value) {
       this.requestField("rule_ids", value);
+      return this;
+    }
+    public APIRequestGet requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGet requestTagsField (boolean value) {
+      this.requestField("tags", value);
       return this;
     }
     public APIRequestGet requestWhitelistedIdsField () {
@@ -884,6 +898,7 @@ public class VideoCopyright extends APINode {
     this.mReferenceFileExpired = instance.mReferenceFileExpired;
     this.mReferenceOwnerId = instance.mReferenceOwnerId;
     this.mRuleIds = instance.mRuleIds;
+    this.mTags = instance.mTags;
     this.mWhitelistedIds = instance.mWhitelistedIds;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

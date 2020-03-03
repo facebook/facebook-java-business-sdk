@@ -27,6 +27,7 @@ import com.facebook.ads.sdk.serverside.Event;
 import com.facebook.ads.sdk.serverside.EventRequest;
 import com.facebook.ads.sdk.serverside.EventResponse;
 import com.facebook.ads.sdk.serverside.UserData;
+import com.facebook.ads.sdk.serverside.CustomData;
 
 public class ServerSideApiExample {
 
@@ -42,10 +43,15 @@ public class ServerSideApiExample {
         .fbp("fb.1.1558571054389.1098115397")
         .email("joe@eg.com");
 
+    CustomData customData = new CustomData()
+        .currency("usd")
+        .value(123.45F);
+
     Event pageViewEvent = new Event();
-    pageViewEvent.eventName("PageView")
+    pageViewEvent.eventName("Purchase")
         .eventTime(System.currentTimeMillis() / 1000L)
-        .userData(userData);
+        .userData(userData)
+        .customData(customData);
 
     EventRequest eventRequest = new EventRequest(PIXEL_ID, context);
     eventRequest.addDataItem(pageViewEvent);

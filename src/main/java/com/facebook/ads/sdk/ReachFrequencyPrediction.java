@@ -117,8 +117,6 @@ public class ReachFrequencyPrediction extends APINode {
   private Long mFeedRatio0000 = null;
   @SerializedName("frequency_cap")
   private Long mFrequencyCap = null;
-  @SerializedName("frequency_distribution")
-  private List<Double> mFrequencyDistribution = null;
   @SerializedName("frequency_distribution_map")
   private Map<Long, List<Double>> mFrequencyDistributionMap = null;
   @SerializedName("frequency_distribution_map_agg")
@@ -559,10 +557,6 @@ public class ReachFrequencyPrediction extends APINode {
     return mFrequencyCap;
   }
 
-  public List<Double> getFieldFrequencyDistribution() {
-    return mFrequencyDistribution;
-  }
-
   public Map<Long, List<Double>> getFieldFrequencyDistributionMap() {
     return mFrequencyDistributionMap;
   }
@@ -811,7 +805,6 @@ public class ReachFrequencyPrediction extends APINode {
       "external_reach",
       "feed_ratio_0000",
       "frequency_cap",
-      "frequency_distribution",
       "frequency_distribution_map",
       "frequency_distribution_map_agg",
       "grp_audience_size",
@@ -1169,13 +1162,6 @@ public class ReachFrequencyPrediction extends APINode {
     }
     public APIRequestGet requestFrequencyCapField (boolean value) {
       this.requestField("frequency_cap", value);
-      return this;
-    }
-    public APIRequestGet requestFrequencyDistributionField () {
-      return this.requestFrequencyDistributionField(true);
-    }
-    public APIRequestGet requestFrequencyDistributionField (boolean value) {
-      this.requestField("frequency_distribution", value);
       return this;
     }
     public APIRequestGet requestFrequencyDistributionMapField () {
@@ -1676,7 +1662,6 @@ public class ReachFrequencyPrediction extends APINode {
     this.mExternalReach = instance.mExternalReach;
     this.mFeedRatio0000 = instance.mFeedRatio0000;
     this.mFrequencyCap = instance.mFrequencyCap;
-    this.mFrequencyDistribution = instance.mFrequencyDistribution;
     this.mFrequencyDistributionMap = instance.mFrequencyDistributionMap;
     this.mFrequencyDistributionMapAgg = instance.mFrequencyDistributionMapAgg;
     this.mGrpAudienceSize = instance.mGrpAudienceSize;

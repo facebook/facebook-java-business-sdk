@@ -63,18 +63,6 @@ public class ReachFrequencyActivity extends APINode {
   private Boolean mCampaignStarted = null;
   @SerializedName("creative_uploaded")
   private Boolean mCreativeUploaded = null;
-  @SerializedName("delivered_budget")
-  private Long mDeliveredBudget = null;
-  @SerializedName("delivered_daily_grp")
-  private List<Double> mDeliveredDailyGrp = null;
-  @SerializedName("delivered_daily_impression")
-  private List<Double> mDeliveredDailyImpression = null;
-  @SerializedName("delivered_impression")
-  private Long mDeliveredImpression = null;
-  @SerializedName("delivered_reach")
-  private Long mDeliveredReach = null;
-  @SerializedName("delivered_total_impression")
-  private Long mDeliveredTotalImpression = null;
   @SerializedName("io_approved")
   private Boolean mIoApproved = null;
   @SerializedName("sf_link")
@@ -266,60 +254,6 @@ public class ReachFrequencyActivity extends APINode {
     return this;
   }
 
-  public Long getFieldDeliveredBudget() {
-    return mDeliveredBudget;
-  }
-
-  public ReachFrequencyActivity setFieldDeliveredBudget(Long value) {
-    this.mDeliveredBudget = value;
-    return this;
-  }
-
-  public List<Double> getFieldDeliveredDailyGrp() {
-    return mDeliveredDailyGrp;
-  }
-
-  public ReachFrequencyActivity setFieldDeliveredDailyGrp(List<Double> value) {
-    this.mDeliveredDailyGrp = value;
-    return this;
-  }
-
-  public List<Double> getFieldDeliveredDailyImpression() {
-    return mDeliveredDailyImpression;
-  }
-
-  public ReachFrequencyActivity setFieldDeliveredDailyImpression(List<Double> value) {
-    this.mDeliveredDailyImpression = value;
-    return this;
-  }
-
-  public Long getFieldDeliveredImpression() {
-    return mDeliveredImpression;
-  }
-
-  public ReachFrequencyActivity setFieldDeliveredImpression(Long value) {
-    this.mDeliveredImpression = value;
-    return this;
-  }
-
-  public Long getFieldDeliveredReach() {
-    return mDeliveredReach;
-  }
-
-  public ReachFrequencyActivity setFieldDeliveredReach(Long value) {
-    this.mDeliveredReach = value;
-    return this;
-  }
-
-  public Long getFieldDeliveredTotalImpression() {
-    return mDeliveredTotalImpression;
-  }
-
-  public ReachFrequencyActivity setFieldDeliveredTotalImpression(Long value) {
-    this.mDeliveredTotalImpression = value;
-    return this;
-  }
-
   public Boolean getFieldIoApproved() {
     return mIoApproved;
   }
@@ -359,12 +293,6 @@ public class ReachFrequencyActivity extends APINode {
     this.mCampaignActive = instance.mCampaignActive;
     this.mCampaignStarted = instance.mCampaignStarted;
     this.mCreativeUploaded = instance.mCreativeUploaded;
-    this.mDeliveredBudget = instance.mDeliveredBudget;
-    this.mDeliveredDailyGrp = instance.mDeliveredDailyGrp;
-    this.mDeliveredDailyImpression = instance.mDeliveredDailyImpression;
-    this.mDeliveredImpression = instance.mDeliveredImpression;
-    this.mDeliveredReach = instance.mDeliveredReach;
-    this.mDeliveredTotalImpression = instance.mDeliveredTotalImpression;
     this.mIoApproved = instance.mIoApproved;
     this.mSfLink = instance.mSfLink;
     this.context = instance.context;

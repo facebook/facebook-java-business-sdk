@@ -59,14 +59,10 @@ public class AdCampaignLearningStageInfo extends APINode {
   private List<String> mAttributionWindows = null;
   @SerializedName("conversions")
   private Long mConversions = null;
-  @SerializedName("exit_reason")
-  private String mExitReason = null;
   @SerializedName("last_sig_edit_ts")
   private Long mLastSigEditTs = null;
   @SerializedName("status")
   private String mStatus = null;
-  @SerializedName("types")
-  private List<String> mTypes = null;
   protected static Gson gson = null;
 
   public AdCampaignLearningStageInfo() {
@@ -236,15 +232,6 @@ public class AdCampaignLearningStageInfo extends APINode {
     return this;
   }
 
-  public String getFieldExitReason() {
-    return mExitReason;
-  }
-
-  public AdCampaignLearningStageInfo setFieldExitReason(String value) {
-    this.mExitReason = value;
-    return this;
-  }
-
   public Long getFieldLastSigEditTs() {
     return mLastSigEditTs;
   }
@@ -260,15 +247,6 @@ public class AdCampaignLearningStageInfo extends APINode {
 
   public AdCampaignLearningStageInfo setFieldStatus(String value) {
     this.mStatus = value;
-    return this;
-  }
-
-  public List<String> getFieldTypes() {
-    return mTypes;
-  }
-
-  public AdCampaignLearningStageInfo setFieldTypes(List<String> value) {
-    this.mTypes = value;
     return this;
   }
 
@@ -291,10 +269,8 @@ public class AdCampaignLearningStageInfo extends APINode {
   public AdCampaignLearningStageInfo copyFrom(AdCampaignLearningStageInfo instance) {
     this.mAttributionWindows = instance.mAttributionWindows;
     this.mConversions = instance.mConversions;
-    this.mExitReason = instance.mExitReason;
     this.mLastSigEditTs = instance.mLastSigEditTs;
     this.mStatus = instance.mStatus;
-    this.mTypes = instance.mTypes;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

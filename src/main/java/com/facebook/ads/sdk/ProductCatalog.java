@@ -5849,10 +5849,12 @@ public class ProductCatalog extends APINode {
       "file_name",
       "name",
       "override_type",
+      "override_value",
       "quoted_fields_mode",
       "rules",
       "schedule",
       "update_schedule",
+      "whitelisted_properties",
     };
 
     public static final String[] FIELDS = {
@@ -5976,6 +5978,11 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateProductFeed setOverrideValue (String overrideValue) {
+      this.setParam("override_value", overrideValue);
+      return this;
+    }
+
     public APIRequestCreateProductFeed setQuotedFieldsMode (ProductFeed.EnumQuotedFieldsMode quotedFieldsMode) {
       this.setParam("quoted_fields_mode", quotedFieldsMode);
       return this;
@@ -6001,6 +6008,15 @@ public class ProductCatalog extends APINode {
 
     public APIRequestCreateProductFeed setUpdateSchedule (String updateSchedule) {
       this.setParam("update_schedule", updateSchedule);
+      return this;
+    }
+
+    public APIRequestCreateProductFeed setWhitelistedProperties (List<String> whitelistedProperties) {
+      this.setParam("whitelisted_properties", whitelistedProperties);
+      return this;
+    }
+    public APIRequestCreateProductFeed setWhitelistedProperties (String whitelistedProperties) {
+      this.setParam("whitelisted_properties", whitelistedProperties);
       return this;
     }
 
@@ -9765,6 +9781,8 @@ public class ProductCatalog extends APINode {
       VALUE_HOME_LISTINGS("home_listings"),
       @SerializedName("hotels")
       VALUE_HOTELS("hotels"),
+      @SerializedName("offer_items")
+      VALUE_OFFER_ITEMS("offer_items"),
       @SerializedName("offline_commerce")
       VALUE_OFFLINE_COMMERCE("offline_commerce"),
       @SerializedName("ticketed_experiences")
