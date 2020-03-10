@@ -5,6 +5,11 @@
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
+      <properties>
+        <gpg.executable>gpg</gpg.executable>
+        <gpg.keyname>${GPG_KEYNAME}</gpg.keyname>
+        <gpg.passphrase>${GPG_PASSPHRASE}</gpg.passphrase>
+      </properties>
     </profile>
   </profiles>
   <servers>
