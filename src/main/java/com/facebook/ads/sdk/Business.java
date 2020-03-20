@@ -350,6 +350,10 @@ public class Business extends APINode {
     return new APIRequestGetAnPlacements(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetAttemptedSharingAgreements getAttemptedSharingAgreements() {
+    return new APIRequestGetAttemptedSharingAgreements(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateBlockListDraft createBlockListDraft() {
     return new APIRequestCreateBlockListDraft(this.getPrefixedId().toString(), context);
   }
@@ -424,6 +428,10 @@ public class Business extends APINode {
 
   public APIRequestGetContentDeliveryReport getContentDeliveryReport() {
     return new APIRequestGetContentDeliveryReport(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetCreativeAssetTags getCreativeAssetTags() {
+    return new APIRequestGetCreativeAssetTags(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetCreativeFolders getCreativeFolders() {
@@ -2887,6 +2895,158 @@ public class Business extends APINode {
       return this.requestStatusField(true);
     }
     public APIRequestGetAnPlacements requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetAttemptedSharingAgreements extends APIRequest<BusinessCreativeFolderSharingAgreement> {
+
+    APINodeList<BusinessCreativeFolderSharingAgreement> lastResponse = null;
+    @Override
+    public APINodeList<BusinessCreativeFolderSharingAgreement> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "request_status",
+      "requesting_business_id",
+    };
+
+    public static final String[] FIELDS = {
+      "folder_id",
+      "id",
+      "requesting_business",
+      "status",
+    };
+
+    @Override
+    public APINodeList<BusinessCreativeFolderSharingAgreement> parseResponse(String response, String header) throws APIException {
+      return BusinessCreativeFolderSharingAgreement.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<BusinessCreativeFolderSharingAgreement> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<BusinessCreativeFolderSharingAgreement> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<BusinessCreativeFolderSharingAgreement>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<BusinessCreativeFolderSharingAgreement>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<BusinessCreativeFolderSharingAgreement>>() {
+           public APINodeList<BusinessCreativeFolderSharingAgreement> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetAttemptedSharingAgreements.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetAttemptedSharingAgreements(String nodeId, APIContext context) {
+      super(context, nodeId, "/attempted_sharing_agreements", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetAttemptedSharingAgreements setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAttemptedSharingAgreements setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetAttemptedSharingAgreements setRequestStatus (BusinessCreativeFolderSharingAgreement.EnumRequestStatus requestStatus) {
+      this.setParam("request_status", requestStatus);
+      return this;
+    }
+    public APIRequestGetAttemptedSharingAgreements setRequestStatus (String requestStatus) {
+      this.setParam("request_status", requestStatus);
+      return this;
+    }
+
+    public APIRequestGetAttemptedSharingAgreements setRequestingBusinessId (String requestingBusinessId) {
+      this.setParam("requesting_business_id", requestingBusinessId);
+      return this;
+    }
+
+    public APIRequestGetAttemptedSharingAgreements requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetAttemptedSharingAgreements requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAttemptedSharingAgreements requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetAttemptedSharingAgreements requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAttemptedSharingAgreements requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAttemptedSharingAgreements requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetAttemptedSharingAgreements requestFolderIdField () {
+      return this.requestFolderIdField(true);
+    }
+    public APIRequestGetAttemptedSharingAgreements requestFolderIdField (boolean value) {
+      this.requestField("folder_id", value);
+      return this;
+    }
+    public APIRequestGetAttemptedSharingAgreements requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetAttemptedSharingAgreements requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetAttemptedSharingAgreements requestRequestingBusinessField () {
+      return this.requestRequestingBusinessField(true);
+    }
+    public APIRequestGetAttemptedSharingAgreements requestRequestingBusinessField (boolean value) {
+      this.requestField("requesting_business", value);
+      return this;
+    }
+    public APIRequestGetAttemptedSharingAgreements requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetAttemptedSharingAgreements requestStatusField (boolean value) {
       this.requestField("status", value);
       return this;
     }
@@ -6025,6 +6185,7 @@ public class Business extends APINode {
       "supports_donate_button_in_live_video",
       "supports_instant_articles",
       "talking_about_count",
+      "temporary_status",
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
@@ -7022,6 +7183,13 @@ public class Business extends APINode {
       this.requestField("talking_about_count", value);
       return this;
     }
+    public APIRequestGetClientPages requestTemporaryStatusField () {
+      return this.requestTemporaryStatusField(true);
+    }
+    public APIRequestGetClientPages requestTemporaryStatusField (boolean value) {
+      this.requestField("temporary_status", value);
+      return this;
+    }
     public APIRequestGetClientPages requestUnreadMessageCountField () {
       return this.requestUnreadMessageCountField(true);
     }
@@ -7460,6 +7628,7 @@ public class Business extends APINode {
       "fallback_image_url",
       "feed_count",
       "id",
+      "is_catalog_segment",
       "name",
       "product_count",
       "store_catalog_settings",
@@ -7602,6 +7771,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientProductCatalogs requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetClientProductCatalogs requestIsCatalogSegmentField () {
+      return this.requestIsCatalogSegmentField(true);
+    }
+    public APIRequestGetClientProductCatalogs requestIsCatalogSegmentField (boolean value) {
+      this.requestField("is_catalog_segment", value);
       return this;
     }
     public APIRequestGetClientProductCatalogs requestNameField () {
@@ -8001,6 +8177,7 @@ public class Business extends APINode {
     }
     public static final String[] PARAMS = {
       "end_date",
+      "page_id",
       "platform",
       "position",
       "start_date",
@@ -8070,6 +8247,15 @@ public class Business extends APINode {
 
     public APIRequestGetContentDeliveryReport setEndDate (String endDate) {
       this.setParam("end_date", endDate);
+      return this;
+    }
+
+    public APIRequestGetContentDeliveryReport setPageId (Long pageId) {
+      this.setParam("page_id", pageId);
+      return this;
+    }
+    public APIRequestGetContentDeliveryReport setPageId (String pageId) {
+      this.setParam("page_id", pageId);
       return this;
     }
 
@@ -8178,6 +8364,118 @@ public class Business extends APINode {
     }
   }
 
+  public static class APIRequestGetCreativeAssetTags extends APIRequest<CreativeAssetTag> {
+
+    APINodeList<CreativeAssetTag> lastResponse = null;
+    @Override
+    public APINodeList<CreativeAssetTag> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "name",
+    };
+
+    @Override
+    public APINodeList<CreativeAssetTag> parseResponse(String response, String header) throws APIException {
+      return CreativeAssetTag.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<CreativeAssetTag> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<CreativeAssetTag> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<CreativeAssetTag>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<CreativeAssetTag>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<CreativeAssetTag>>() {
+           public APINodeList<CreativeAssetTag> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetCreativeAssetTags.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetCreativeAssetTags(String nodeId, APIContext context) {
+      super(context, nodeId, "/creative_asset_tags", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCreativeAssetTags setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCreativeAssetTags setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCreativeAssetTags requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCreativeAssetTags requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCreativeAssetTags requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCreativeAssetTags requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCreativeAssetTags requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCreativeAssetTags requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetCreativeAssetTags requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetCreativeAssetTags requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetCreativeFolders extends APIRequest<BusinessCreativeFolder> {
 
     APINodeList<BusinessCreativeFolder> lastResponse = null;
@@ -8194,6 +8492,7 @@ public class Business extends APINode {
       "creative_insight_permissions",
       "description",
       "id",
+      "media_library_url",
       "name",
       "parent_folder",
     };
@@ -8320,6 +8619,13 @@ public class Business extends APINode {
     }
     public APIRequestGetCreativeFolders requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetCreativeFolders requestMediaLibraryUrlField () {
+      return this.requestMediaLibraryUrlField(true);
+    }
+    public APIRequestGetCreativeFolders requestMediaLibraryUrlField (boolean value) {
+      this.requestField("media_library_url", value);
       return this;
     }
     public APIRequestGetCreativeFolders requestNameField () {
@@ -13293,6 +13599,7 @@ public class Business extends APINode {
       "supports_donate_button_in_live_video",
       "supports_instant_articles",
       "talking_about_count",
+      "temporary_status",
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
@@ -14290,6 +14597,13 @@ public class Business extends APINode {
       this.requestField("talking_about_count", value);
       return this;
     }
+    public APIRequestGetOwnedPages requestTemporaryStatusField () {
+      return this.requestTemporaryStatusField(true);
+    }
+    public APIRequestGetOwnedPages requestTemporaryStatusField (boolean value) {
+      this.requestField("temporary_status", value);
+      return this;
+    }
     public APIRequestGetOwnedPages requestUnreadMessageCountField () {
       return this.requestUnreadMessageCountField(true);
     }
@@ -14730,6 +15044,7 @@ public class Business extends APINode {
       "fallback_image_url",
       "feed_count",
       "id",
+      "is_catalog_segment",
       "name",
       "product_count",
       "store_catalog_settings",
@@ -14872,6 +15187,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedProductCatalogs requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetOwnedProductCatalogs requestIsCatalogSegmentField () {
+      return this.requestIsCatalogSegmentField(true);
+    }
+    public APIRequestGetOwnedProductCatalogs requestIsCatalogSegmentField (boolean value) {
+      this.requestField("is_catalog_segment", value);
       return this;
     }
     public APIRequestGetOwnedProductCatalogs requestNameField () {
@@ -15794,6 +16116,7 @@ public class Business extends APINode {
       "creative_insight_permissions",
       "description",
       "id",
+      "media_library_url",
       "name",
       "parent_folder",
     };
@@ -15920,6 +16243,13 @@ public class Business extends APINode {
     }
     public APIRequestGetPendingSharedCreativeFolders requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetPendingSharedCreativeFolders requestMediaLibraryUrlField () {
+      return this.requestMediaLibraryUrlField(true);
+    }
+    public APIRequestGetPendingSharedCreativeFolders requestMediaLibraryUrlField (boolean value) {
+      this.requestField("media_library_url", value);
       return this;
     }
     public APIRequestGetPendingSharedCreativeFolders requestNameField () {
@@ -18589,6 +18919,8 @@ public class Business extends APINode {
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("ANALYZE")
       VALUE_ANALYZE("ANALYZE"),
+      @SerializedName("CASHIER_ROLE")
+      VALUE_CASHIER_ROLE("CASHIER_ROLE"),
       @SerializedName("CREATE_CONTENT")
       VALUE_CREATE_CONTENT("CREATE_CONTENT"),
       @SerializedName("MANAGE")

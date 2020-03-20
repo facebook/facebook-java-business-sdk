@@ -679,6 +679,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_INCOME("income"),
       @SerializedName("industries")
       VALUE_INDUSTRIES("industries"),
+      @SerializedName("instagram_hashtags")
+      VALUE_INSTAGRAM_HASHTAGS("instagram_hashtags"),
       @SerializedName("instagram_positions")
       VALUE_INSTAGRAM_POSITIONS("instagram_positions"),
       @SerializedName("instream_video_sponsorship_placements")

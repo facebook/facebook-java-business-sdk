@@ -54,29 +54,29 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdAccountDeliveryEstimate extends APINode {
-  @SerializedName("daily_outcomes_curve")
-  private List<OutcomePredictionPoint> mDailyOutcomesCurve = null;
-  @SerializedName("estimate_dau")
-  private Long mEstimateDau = null;
-  @SerializedName("estimate_mau")
-  private Long mEstimateMau = null;
-  @SerializedName("estimate_ready")
-  private Boolean mEstimateReady = null;
+public class AdCreativePhotoDataMediaElements extends APINode {
+  @SerializedName("element_id")
+  private String mElementId = null;
+  @SerializedName("element_type")
+  private String mElementType = null;
+  @SerializedName("x")
+  private Double mX = null;
+  @SerializedName("y")
+  private Double mY = null;
   protected static Gson gson = null;
 
-  public AdAccountDeliveryEstimate() {
+  public AdCreativePhotoDataMediaElements() {
   }
 
   public String getId() {
     return null;
   }
-  public static AdAccountDeliveryEstimate loadJSON(String json, APIContext context, String header) {
-    AdAccountDeliveryEstimate adAccountDeliveryEstimate = getGson().fromJson(json, AdAccountDeliveryEstimate.class);
+  public static AdCreativePhotoDataMediaElements loadJSON(String json, APIContext context, String header) {
+    AdCreativePhotoDataMediaElements adCreativePhotoDataMediaElements = getGson().fromJson(json, AdCreativePhotoDataMediaElements.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adAccountDeliveryEstimate.toString());
+      JsonElement o2 = parser.parse(adCreativePhotoDataMediaElements.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -86,14 +86,14 @@ public class AdAccountDeliveryEstimate extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    adAccountDeliveryEstimate.context = context;
-    adAccountDeliveryEstimate.rawValue = json;
-    adAccountDeliveryEstimate.header = header;
-    return adAccountDeliveryEstimate;
+    adCreativePhotoDataMediaElements.context = context;
+    adCreativePhotoDataMediaElements.rawValue = json;
+    adCreativePhotoDataMediaElements.header = header;
+    return adCreativePhotoDataMediaElements;
   }
 
-  public static APINodeList<AdAccountDeliveryEstimate> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdAccountDeliveryEstimate> adAccountDeliveryEstimates = new APINodeList<AdAccountDeliveryEstimate>(request, json, header);
+  public static APINodeList<AdCreativePhotoDataMediaElements> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCreativePhotoDataMediaElements> adCreativePhotoDataMediaElementss = new APINodeList<AdCreativePhotoDataMediaElements>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -104,9 +104,9 @@ public class AdAccountDeliveryEstimate extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adAccountDeliveryEstimates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adCreativePhotoDataMediaElementss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adAccountDeliveryEstimates;
+        return adCreativePhotoDataMediaElementss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -116,20 +116,20 @@ public class AdAccountDeliveryEstimate extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adAccountDeliveryEstimates.setCursors(before, after);
+                adCreativePhotoDataMediaElementss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adAccountDeliveryEstimates.setPaging(previous, next);
+            adCreativePhotoDataMediaElementss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adAccountDeliveryEstimates.setAppSecret(context.getAppSecretProof());
+              adCreativePhotoDataMediaElementss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adAccountDeliveryEstimates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adCreativePhotoDataMediaElementss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -140,23 +140,23 @@ public class AdAccountDeliveryEstimate extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adAccountDeliveryEstimates.add(loadJSON(entry.getValue().toString(), context, header));
+                  adCreativePhotoDataMediaElementss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adAccountDeliveryEstimates.add(loadJSON(obj.toString(), context, header));
+              adCreativePhotoDataMediaElementss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adAccountDeliveryEstimates;
+          return adCreativePhotoDataMediaElementss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adAccountDeliveryEstimates.add(loadJSON(entry.getValue().toString(), context, header));
+              adCreativePhotoDataMediaElementss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adAccountDeliveryEstimates;
+          return adCreativePhotoDataMediaElementss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -173,20 +173,20 @@ public class AdAccountDeliveryEstimate extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adAccountDeliveryEstimates.add(loadJSON(value.toString(), context, header));
+              adCreativePhotoDataMediaElementss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adAccountDeliveryEstimates;
+            return adCreativePhotoDataMediaElementss;
           }
 
           // Sixth, check if it's pure JsonObject
-          adAccountDeliveryEstimates.clear();
-          adAccountDeliveryEstimates.add(loadJSON(json, context, header));
-          return adAccountDeliveryEstimates;
+          adCreativePhotoDataMediaElementss.clear();
+          adCreativePhotoDataMediaElementss.add(loadJSON(json, context, header));
+          return adCreativePhotoDataMediaElementss;
         }
       }
     } catch (Exception e) {
@@ -214,113 +214,43 @@ public class AdAccountDeliveryEstimate extends APINode {
   }
 
 
-  public List<OutcomePredictionPoint> getFieldDailyOutcomesCurve() {
-    return mDailyOutcomesCurve;
+  public String getFieldElementId() {
+    return mElementId;
   }
 
-  public AdAccountDeliveryEstimate setFieldDailyOutcomesCurve(List<OutcomePredictionPoint> value) {
-    this.mDailyOutcomesCurve = value;
+  public AdCreativePhotoDataMediaElements setFieldElementId(String value) {
+    this.mElementId = value;
     return this;
   }
 
-  public AdAccountDeliveryEstimate setFieldDailyOutcomesCurve(String value) {
-    Type type = new TypeToken<List<OutcomePredictionPoint>>(){}.getType();
-    this.mDailyOutcomesCurve = OutcomePredictionPoint.getGson().fromJson(value, type);
-    return this;
-  }
-  public Long getFieldEstimateDau() {
-    return mEstimateDau;
+  public String getFieldElementType() {
+    return mElementType;
   }
 
-  public AdAccountDeliveryEstimate setFieldEstimateDau(Long value) {
-    this.mEstimateDau = value;
+  public AdCreativePhotoDataMediaElements setFieldElementType(String value) {
+    this.mElementType = value;
     return this;
   }
 
-  public Long getFieldEstimateMau() {
-    return mEstimateMau;
+  public Double getFieldX() {
+    return mX;
   }
 
-  public AdAccountDeliveryEstimate setFieldEstimateMau(Long value) {
-    this.mEstimateMau = value;
+  public AdCreativePhotoDataMediaElements setFieldX(Double value) {
+    this.mX = value;
     return this;
   }
 
-  public Boolean getFieldEstimateReady() {
-    return mEstimateReady;
+  public Double getFieldY() {
+    return mY;
   }
 
-  public AdAccountDeliveryEstimate setFieldEstimateReady(Boolean value) {
-    this.mEstimateReady = value;
+  public AdCreativePhotoDataMediaElements setFieldY(Double value) {
+    this.mY = value;
     return this;
   }
 
 
-
-  public static enum EnumOptimizationGoal {
-      @SerializedName("AD_RECALL_LIFT")
-      VALUE_AD_RECALL_LIFT("AD_RECALL_LIFT"),
-      @SerializedName("APP_DOWNLOADS")
-      VALUE_APP_DOWNLOADS("APP_DOWNLOADS"),
-      @SerializedName("APP_INSTALLS")
-      VALUE_APP_INSTALLS("APP_INSTALLS"),
-      @SerializedName("BRAND_AWARENESS")
-      VALUE_BRAND_AWARENESS("BRAND_AWARENESS"),
-      @SerializedName("CLICKS")
-      VALUE_CLICKS("CLICKS"),
-      @SerializedName("DERIVED_EVENTS")
-      VALUE_DERIVED_EVENTS("DERIVED_EVENTS"),
-      @SerializedName("ENGAGED_USERS")
-      VALUE_ENGAGED_USERS("ENGAGED_USERS"),
-      @SerializedName("EVENT_RESPONSES")
-      VALUE_EVENT_RESPONSES("EVENT_RESPONSES"),
-      @SerializedName("IMPRESSIONS")
-      VALUE_IMPRESSIONS("IMPRESSIONS"),
-      @SerializedName("LANDING_PAGE_VIEWS")
-      VALUE_LANDING_PAGE_VIEWS("LANDING_PAGE_VIEWS"),
-      @SerializedName("LEAD_GENERATION")
-      VALUE_LEAD_GENERATION("LEAD_GENERATION"),
-      @SerializedName("LINK_CLICKS")
-      VALUE_LINK_CLICKS("LINK_CLICKS"),
-      @SerializedName("NONE")
-      VALUE_NONE("NONE"),
-      @SerializedName("OFFER_CLAIMS")
-      VALUE_OFFER_CLAIMS("OFFER_CLAIMS"),
-      @SerializedName("OFFSITE_CONVERSIONS")
-      VALUE_OFFSITE_CONVERSIONS("OFFSITE_CONVERSIONS"),
-      @SerializedName("PAGE_ENGAGEMENT")
-      VALUE_PAGE_ENGAGEMENT("PAGE_ENGAGEMENT"),
-      @SerializedName("PAGE_LIKES")
-      VALUE_PAGE_LIKES("PAGE_LIKES"),
-      @SerializedName("POST_ENGAGEMENT")
-      VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
-      @SerializedName("REACH")
-      VALUE_REACH("REACH"),
-      @SerializedName("REPLIES")
-      VALUE_REPLIES("REPLIES"),
-      @SerializedName("SOCIAL_IMPRESSIONS")
-      VALUE_SOCIAL_IMPRESSIONS("SOCIAL_IMPRESSIONS"),
-      @SerializedName("THRUPLAY")
-      VALUE_THRUPLAY("THRUPLAY"),
-      @SerializedName("TWO_SECOND_CONTINUOUS_VIDEO_VIEWS")
-      VALUE_TWO_SECOND_CONTINUOUS_VIDEO_VIEWS("TWO_SECOND_CONTINUOUS_VIDEO_VIEWS"),
-      @SerializedName("VALUE")
-      VALUE_VALUE("VALUE"),
-      @SerializedName("VISIT_INSTAGRAM_PROFILE")
-      VALUE_VISIT_INSTAGRAM_PROFILE("VISIT_INSTAGRAM_PROFILE"),
-      ;
-
-      private String value;
-
-      private EnumOptimizationGoal(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -336,20 +266,20 @@ public class AdAccountDeliveryEstimate extends APINode {
     return gson;
   }
 
-  public AdAccountDeliveryEstimate copyFrom(AdAccountDeliveryEstimate instance) {
-    this.mDailyOutcomesCurve = instance.mDailyOutcomesCurve;
-    this.mEstimateDau = instance.mEstimateDau;
-    this.mEstimateMau = instance.mEstimateMau;
-    this.mEstimateReady = instance.mEstimateReady;
+  public AdCreativePhotoDataMediaElements copyFrom(AdCreativePhotoDataMediaElements instance) {
+    this.mElementId = instance.mElementId;
+    this.mElementType = instance.mElementType;
+    this.mX = instance.mX;
+    this.mY = instance.mY;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdAccountDeliveryEstimate> getParser() {
-    return new APIRequest.ResponseParser<AdAccountDeliveryEstimate>() {
-      public APINodeList<AdAccountDeliveryEstimate> parseResponse(String response, APIContext context, APIRequest<AdAccountDeliveryEstimate> request, String header) throws MalformedResponseException {
-        return AdAccountDeliveryEstimate.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdCreativePhotoDataMediaElements> getParser() {
+    return new APIRequest.ResponseParser<AdCreativePhotoDataMediaElements>() {
+      public APINodeList<AdCreativePhotoDataMediaElements> parseResponse(String response, APIContext context, APIRequest<AdCreativePhotoDataMediaElements> request, String header) throws MalformedResponseException {
+        return AdCreativePhotoDataMediaElements.parseResponse(response, context, request, header);
       }
     };
   }

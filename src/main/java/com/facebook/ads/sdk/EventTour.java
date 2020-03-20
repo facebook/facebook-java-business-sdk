@@ -852,6 +852,7 @@ public class EventTour extends APINode {
       "supports_donate_button_in_live_video",
       "supports_instant_articles",
       "talking_about_count",
+      "temporary_status",
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
@@ -1847,6 +1848,13 @@ public class EventTour extends APINode {
     }
     public APIRequestGetPages requestTalkingAboutCountField (boolean value) {
       this.requestField("talking_about_count", value);
+      return this;
+    }
+    public APIRequestGetPages requestTemporaryStatusField () {
+      return this.requestTemporaryStatusField(true);
+    }
+    public APIRequestGetPages requestTemporaryStatusField (boolean value) {
+      this.requestField("temporary_status", value);
       return this;
     }
     public APIRequestGetPages requestUnreadMessageCountField () {

@@ -400,10 +400,6 @@ public class User extends APINode {
     return new APIRequestCreateAccount(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateAchievement createAchievement() {
-    return new APIRequestCreateAchievement(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetAdStudies getAdStudies() {
     return new APIRequestGetAdStudies(this.getPrefixedId().toString(), context);
   }
@@ -1251,6 +1247,7 @@ public class User extends APINode {
       "supports_donate_button_in_live_video",
       "supports_instant_articles",
       "talking_about_count",
+      "temporary_status",
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
@@ -2266,6 +2263,13 @@ public class User extends APINode {
       this.requestField("talking_about_count", value);
       return this;
     }
+    public APIRequestGetAccounts requestTemporaryStatusField () {
+      return this.requestTemporaryStatusField(true);
+    }
+    public APIRequestGetAccounts requestTemporaryStatusField (boolean value) {
+      this.requestField("temporary_status", value);
+      return this;
+    }
     public APIRequestGetAccounts requestUnreadMessageCountField () {
       return this.requestUnreadMessageCountField(true);
     }
@@ -2556,348 +2560,6 @@ public class User extends APINode {
 
     @Override
     public APIRequestCreateAccount requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateAchievement extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "added",
-      "alias",
-      "android_key_hash",
-      "client_secret",
-      "created_time",
-      "end_time",
-      "expires_in",
-      "fb:channel",
-      "fb:explicitly_shared",
-      "image:height",
-      "image:secure_url",
-      "image:type",
-      "image:url",
-      "image:user_generated",
-      "image:width",
-      "ios_bundle_id",
-      "message",
-      "no_action_link",
-      "no_feed_story",
-      "notify",
-      "place",
-      "preview",
-      "privacy",
-      "proxied_app_id",
-      "ref",
-      "scrape",
-      "start_time",
-      "tags",
-      "to",
-      "user_selected_place",
-      "user_selected_tags",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateAchievement.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateAchievement(String nodeId, APIContext context) {
-      super(context, nodeId, "/achievements", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateAchievement setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAchievement setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateAchievement setAdded (String added) {
-      this.setParam("added", added);
-      return this;
-    }
-
-    public APIRequestCreateAchievement setAlias (String alias) {
-      this.setParam("alias", alias);
-      return this;
-    }
-
-    public APIRequestCreateAchievement setAndroidKeyHash (String androidKeyHash) {
-      this.setParam("android_key_hash", androidKeyHash);
-      return this;
-    }
-
-    public APIRequestCreateAchievement setClientSecret (String clientSecret) {
-      this.setParam("client_secret", clientSecret);
-      return this;
-    }
-
-    public APIRequestCreateAchievement setCreatedTime (String createdTime) {
-      this.setParam("created_time", createdTime);
-      return this;
-    }
-
-    public APIRequestCreateAchievement setEndTime (String endTime) {
-      this.setParam("end_time", endTime);
-      return this;
-    }
-
-    public APIRequestCreateAchievement setExpiresIn (Long expiresIn) {
-      this.setParam("expires_in", expiresIn);
-      return this;
-    }
-    public APIRequestCreateAchievement setExpiresIn (String expiresIn) {
-      this.setParam("expires_in", expiresIn);
-      return this;
-    }
-
-    public APIRequestCreateAchievement setFbChannel (String fbChannel) {
-      this.setParam("fb:channel", fbChannel);
-      return this;
-    }
-
-    public APIRequestCreateAchievement setFbExplicitlyShared (Boolean fbExplicitlyShared) {
-      this.setParam("fb:explicitly_shared", fbExplicitlyShared);
-      return this;
-    }
-    public APIRequestCreateAchievement setFbExplicitlyShared (String fbExplicitlyShared) {
-      this.setParam("fb:explicitly_shared", fbExplicitlyShared);
-      return this;
-    }
-
-    public APIRequestCreateAchievement setImageHeight (Long imageHeight) {
-      this.setParam("image:height", imageHeight);
-      return this;
-    }
-    public APIRequestCreateAchievement setImageHeight (String imageHeight) {
-      this.setParam("image:height", imageHeight);
-      return this;
-    }
-
-    public APIRequestCreateAchievement setImageSecureUrl (String imageSecureUrl) {
-      this.setParam("image:secure_url", imageSecureUrl);
-      return this;
-    }
-
-    public APIRequestCreateAchievement setImageType (String imageType) {
-      this.setParam("image:type", imageType);
-      return this;
-    }
-
-    public APIRequestCreateAchievement setImageUrl (String imageUrl) {
-      this.setParam("image:url", imageUrl);
-      return this;
-    }
-
-    public APIRequestCreateAchievement setImageUserGenerated (Boolean imageUserGenerated) {
-      this.setParam("image:user_generated", imageUserGenerated);
-      return this;
-    }
-    public APIRequestCreateAchievement setImageUserGenerated (String imageUserGenerated) {
-      this.setParam("image:user_generated", imageUserGenerated);
-      return this;
-    }
-
-    public APIRequestCreateAchievement setImageWidth (Long imageWidth) {
-      this.setParam("image:width", imageWidth);
-      return this;
-    }
-    public APIRequestCreateAchievement setImageWidth (String imageWidth) {
-      this.setParam("image:width", imageWidth);
-      return this;
-    }
-
-    public APIRequestCreateAchievement setIosBundleId (String iosBundleId) {
-      this.setParam("ios_bundle_id", iosBundleId);
-      return this;
-    }
-
-    public APIRequestCreateAchievement setMessage (String message) {
-      this.setParam("message", message);
-      return this;
-    }
-
-    public APIRequestCreateAchievement setNoActionLink (Boolean noActionLink) {
-      this.setParam("no_action_link", noActionLink);
-      return this;
-    }
-    public APIRequestCreateAchievement setNoActionLink (String noActionLink) {
-      this.setParam("no_action_link", noActionLink);
-      return this;
-    }
-
-    public APIRequestCreateAchievement setNoFeedStory (Boolean noFeedStory) {
-      this.setParam("no_feed_story", noFeedStory);
-      return this;
-    }
-    public APIRequestCreateAchievement setNoFeedStory (String noFeedStory) {
-      this.setParam("no_feed_story", noFeedStory);
-      return this;
-    }
-
-    public APIRequestCreateAchievement setNotify (Boolean notify) {
-      this.setParam("notify", notify);
-      return this;
-    }
-    public APIRequestCreateAchievement setNotify (String notify) {
-      this.setParam("notify", notify);
-      return this;
-    }
-
-    public APIRequestCreateAchievement setPlace (String place) {
-      this.setParam("place", place);
-      return this;
-    }
-
-    public APIRequestCreateAchievement setPreview (Boolean preview) {
-      this.setParam("preview", preview);
-      return this;
-    }
-    public APIRequestCreateAchievement setPreview (String preview) {
-      this.setParam("preview", preview);
-      return this;
-    }
-
-    public APIRequestCreateAchievement setPrivacy (String privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
-
-    public APIRequestCreateAchievement setProxiedAppId (String proxiedAppId) {
-      this.setParam("proxied_app_id", proxiedAppId);
-      return this;
-    }
-
-    public APIRequestCreateAchievement setRef (String ref) {
-      this.setParam("ref", ref);
-      return this;
-    }
-
-    public APIRequestCreateAchievement setScrape (Boolean scrape) {
-      this.setParam("scrape", scrape);
-      return this;
-    }
-    public APIRequestCreateAchievement setScrape (String scrape) {
-      this.setParam("scrape", scrape);
-      return this;
-    }
-
-    public APIRequestCreateAchievement setStartTime (String startTime) {
-      this.setParam("start_time", startTime);
-      return this;
-    }
-
-    public APIRequestCreateAchievement setTags (List<Long> tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-    public APIRequestCreateAchievement setTags (String tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-
-    public APIRequestCreateAchievement setTo (String to) {
-      this.setParam("to", to);
-      return this;
-    }
-
-    public APIRequestCreateAchievement setUserSelectedPlace (Boolean userSelectedPlace) {
-      this.setParam("user_selected_place", userSelectedPlace);
-      return this;
-    }
-    public APIRequestCreateAchievement setUserSelectedPlace (String userSelectedPlace) {
-      this.setParam("user_selected_place", userSelectedPlace);
-      return this;
-    }
-
-    public APIRequestCreateAchievement setUserSelectedTags (Boolean userSelectedTags) {
-      this.setParam("user_selected_tags", userSelectedTags);
-      return this;
-    }
-    public APIRequestCreateAchievement setUserSelectedTags (String userSelectedTags) {
-      this.setParam("user_selected_tags", userSelectedTags);
-      return this;
-    }
-
-    public APIRequestCreateAchievement requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateAchievement requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAchievement requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateAchievement requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAchievement requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAchievement requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -5471,6 +5133,7 @@ public class User extends APINode {
       "supports_donate_button_in_live_video",
       "supports_instant_articles",
       "talking_about_count",
+      "temporary_status",
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
@@ -6468,6 +6131,13 @@ public class User extends APINode {
       this.requestField("talking_about_count", value);
       return this;
     }
+    public APIRequestGetAssignedPages requestTemporaryStatusField () {
+      return this.requestTemporaryStatusField(true);
+    }
+    public APIRequestGetAssignedPages requestTemporaryStatusField (boolean value) {
+      this.requestField("temporary_status", value);
+      return this;
+    }
     public APIRequestGetAssignedPages requestUnreadMessageCountField () {
       return this.requestUnreadMessageCountField(true);
     }
@@ -6558,6 +6228,7 @@ public class User extends APINode {
       "fallback_image_url",
       "feed_count",
       "id",
+      "is_catalog_segment",
       "name",
       "product_count",
       "store_catalog_settings",
@@ -6700,6 +6371,13 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedProductCatalogs requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetAssignedProductCatalogs requestIsCatalogSegmentField () {
+      return this.requestIsCatalogSegmentField(true);
+    }
+    public APIRequestGetAssignedProductCatalogs requestIsCatalogSegmentField (boolean value) {
+      this.requestField("is_catalog_segment", value);
       return this;
     }
     public APIRequestGetAssignedProductCatalogs requestNameField () {
@@ -6872,6 +6550,7 @@ public class User extends APINode {
       "supports_donate_button_in_live_video",
       "supports_instant_articles",
       "talking_about_count",
+      "temporary_status",
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
@@ -7872,6 +7551,13 @@ public class User extends APINode {
     }
     public APIRequestGetBooks requestTalkingAboutCountField (boolean value) {
       this.requestField("talking_about_count", value);
+      return this;
+    }
+    public APIRequestGetBooks requestTemporaryStatusField () {
+      return this.requestTemporaryStatusField(true);
+    }
+    public APIRequestGetBooks requestTemporaryStatusField (boolean value) {
+      this.requestField("temporary_status", value);
       return this;
     }
     public APIRequestGetBooks requestUnreadMessageCountField () {
@@ -11568,6 +11254,7 @@ public class User extends APINode {
       "supports_donate_button_in_live_video",
       "supports_instant_articles",
       "talking_about_count",
+      "temporary_status",
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
@@ -12568,6 +12255,13 @@ public class User extends APINode {
     }
     public APIRequestGetGames requestTalkingAboutCountField (boolean value) {
       this.requestField("talking_about_count", value);
+      return this;
+    }
+    public APIRequestGetGames requestTemporaryStatusField () {
+      return this.requestTemporaryStatusField(true);
+    }
+    public APIRequestGetGames requestTemporaryStatusField (boolean value) {
+      this.requestField("temporary_status", value);
       return this;
     }
     public APIRequestGetGames requestUnreadMessageCountField () {
@@ -13916,6 +13610,7 @@ public class User extends APINode {
       "supports_donate_button_in_live_video",
       "supports_instant_articles",
       "talking_about_count",
+      "temporary_status",
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
@@ -14916,6 +14611,13 @@ public class User extends APINode {
     }
     public APIRequestGetLikes requestTalkingAboutCountField (boolean value) {
       this.requestField("talking_about_count", value);
+      return this;
+    }
+    public APIRequestGetLikes requestTemporaryStatusField () {
+      return this.requestTemporaryStatusField(true);
+    }
+    public APIRequestGetLikes requestTemporaryStatusField (boolean value) {
+      this.requestField("temporary_status", value);
       return this;
     }
     public APIRequestGetLikes requestUnreadMessageCountField () {
@@ -16094,6 +15796,7 @@ public class User extends APINode {
       "supports_donate_button_in_live_video",
       "supports_instant_articles",
       "talking_about_count",
+      "temporary_status",
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
@@ -17096,6 +16799,13 @@ public class User extends APINode {
       this.requestField("talking_about_count", value);
       return this;
     }
+    public APIRequestGetMovies requestTemporaryStatusField () {
+      return this.requestTemporaryStatusField(true);
+    }
+    public APIRequestGetMovies requestTemporaryStatusField (boolean value) {
+      this.requestField("temporary_status", value);
+      return this;
+    }
     public APIRequestGetMovies requestUnreadMessageCountField () {
       return this.requestUnreadMessageCountField(true);
     }
@@ -17308,6 +17018,7 @@ public class User extends APINode {
       "supports_donate_button_in_live_video",
       "supports_instant_articles",
       "talking_about_count",
+      "temporary_status",
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
@@ -18308,6 +18019,13 @@ public class User extends APINode {
     }
     public APIRequestGetMusic requestTalkingAboutCountField (boolean value) {
       this.requestField("talking_about_count", value);
+      return this;
+    }
+    public APIRequestGetMusic requestTemporaryStatusField () {
+      return this.requestTemporaryStatusField(true);
+    }
+    public APIRequestGetMusic requestTemporaryStatusField (boolean value) {
+      this.requestField("temporary_status", value);
       return this;
     }
     public APIRequestGetMusic requestUnreadMessageCountField () {
@@ -21226,6 +20944,7 @@ public class User extends APINode {
       "supports_donate_button_in_live_video",
       "supports_instant_articles",
       "talking_about_count",
+      "temporary_status",
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
@@ -22226,6 +21945,13 @@ public class User extends APINode {
     }
     public APIRequestGetTelevision requestTalkingAboutCountField (boolean value) {
       this.requestField("talking_about_count", value);
+      return this;
+    }
+    public APIRequestGetTelevision requestTemporaryStatusField () {
+      return this.requestTemporaryStatusField(true);
+    }
+    public APIRequestGetTelevision requestTemporaryStatusField (boolean value) {
+      this.requestField("temporary_status", value);
       return this;
     }
     public APIRequestGetTelevision requestUnreadMessageCountField () {

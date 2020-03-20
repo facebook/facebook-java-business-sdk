@@ -2073,6 +2073,7 @@ public class Campaign extends APINode {
     }
     public static final String[] PARAMS = {
       "end_date",
+      "page_id",
       "platform",
       "position",
       "start_date",
@@ -2142,6 +2143,15 @@ public class Campaign extends APINode {
 
     public APIRequestGetContentDeliveryReport setEndDate (String endDate) {
       this.setParam("end_date", endDate);
+      return this;
+    }
+
+    public APIRequestGetContentDeliveryReport setPageId (Long pageId) {
+      this.setParam("page_id", pageId);
+      return this;
+    }
+    public APIRequestGetContentDeliveryReport setPageId (String pageId) {
+      this.setParam("page_id", pageId);
       return this;
     }
 

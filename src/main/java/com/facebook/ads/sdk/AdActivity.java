@@ -451,12 +451,16 @@ public class AdActivity extends APINode {
       VALUE_UPDATE_AD_SET_BUDGET("update_ad_set_budget"),
       @SerializedName("update_ad_set_duration")
       VALUE_UPDATE_AD_SET_DURATION("update_ad_set_duration"),
+      @SerializedName("update_ad_set_min_spend_target")
+      VALUE_UPDATE_AD_SET_MIN_SPEND_TARGET("update_ad_set_min_spend_target"),
       @SerializedName("update_ad_set_name")
       VALUE_UPDATE_AD_SET_NAME("update_ad_set_name"),
       @SerializedName("update_ad_set_optimization_goal")
       VALUE_UPDATE_AD_SET_OPTIMIZATION_GOAL("update_ad_set_optimization_goal"),
       @SerializedName("update_ad_set_run_status")
       VALUE_UPDATE_AD_SET_RUN_STATUS("update_ad_set_run_status"),
+      @SerializedName("update_ad_set_spend_cap")
+      VALUE_UPDATE_AD_SET_SPEND_CAP("update_ad_set_spend_cap"),
       @SerializedName("update_ad_set_target_spec")
       VALUE_UPDATE_AD_SET_TARGET_SPEC("update_ad_set_target_spec"),
       @SerializedName("update_ad_targets_spec")

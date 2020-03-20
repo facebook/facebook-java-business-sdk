@@ -34,7 +34,7 @@ public class AdsPixelSharedAccountsPost {
     String id = "<PIXEL_ID>";
     APIContext context = new APIContext(access_token).enableDebug(true);
 
-    new AdsPixel(id, context).createShareDAccount()
+    new AdsPixel(id, context).createSharedAccount()
       .setAccountId("<adAccountID>")
       .setBusiness("<businessID>")
       .execute();

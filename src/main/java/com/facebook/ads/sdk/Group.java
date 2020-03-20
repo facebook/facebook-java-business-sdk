@@ -7588,14 +7588,8 @@ public class Group extends APINode {
   }
 
   public static enum EnumSuggestionCategory {
-      @SerializedName("CLOSE_FRIENDS_GENERIC")
-      VALUE_CLOSE_FRIENDS_GENERIC("CLOSE_FRIENDS_GENERIC"),
       @SerializedName("EVENT")
       VALUE_EVENT("EVENT"),
-      @SerializedName("FAMILY")
-      VALUE_FAMILY("FAMILY"),
-      @SerializedName("LIFE_EVENT")
-      VALUE_LIFE_EVENT("LIFE_EVENT"),
       @SerializedName("MESSENGER")
       VALUE_MESSENGER("MESSENGER"),
       @SerializedName("WORK")
@@ -7606,8 +7600,6 @@ public class Group extends APINode {
       VALUE_WORKPLACE_1_1("WORKPLACE_1_1"),
       @SerializedName("WORKPLACE_MANAGER")
       VALUE_WORKPLACE_MANAGER("WORKPLACE_MANAGER"),
-      @SerializedName("WORK_GENERIC")
-      VALUE_WORK_GENERIC("WORK_GENERIC"),
       ;
 
       private String value;

@@ -556,14 +556,6 @@ public class Application extends APINode {
     return new APIRequestGetEvents(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetFullAppIndexingInfos getFullAppIndexingInfos() {
-    return new APIRequestGetFullAppIndexingInfos(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateFullAppIndexingInfo createFullAppIndexingInfo() {
-    return new APIRequestCreateFullAppIndexingInfo(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetInsightsPushSchedule getInsightsPushSchedule() {
     return new APIRequestGetInsightsPushSchedule(this.getPrefixedId().toString(), context);
   }
@@ -1515,6 +1507,7 @@ public class Application extends APINode {
       "include_video_data",
       "install_referrer",
       "installer_package",
+      "limited_data_use",
       "migration_bundle",
       "page_id",
       "page_scoped_user_id",
@@ -1719,6 +1712,15 @@ public class Application extends APINode {
 
     public APIRequestCreateActivity setInstallerPackage (String installerPackage) {
       this.setParam("installer_package", installerPackage);
+      return this;
+    }
+
+    public APIRequestCreateActivity setLimitedDataUse (Boolean limitedDataUse) {
+      this.setParam("limited_data_use", limitedDataUse);
+      return this;
+    }
+    public APIRequestCreateActivity setLimitedDataUse (String limitedDataUse) {
+      this.setParam("limited_data_use", limitedDataUse);
       return this;
     }
 
@@ -5399,236 +5401,6 @@ public class Application extends APINode {
     }
   }
 
-  public static class APIRequestGetFullAppIndexingInfos extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "app_version",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetFullAppIndexingInfos.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetFullAppIndexingInfos(String nodeId, APIContext context) {
-      super(context, nodeId, "/full_app_indexing_infos", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetFullAppIndexingInfos setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetFullAppIndexingInfos setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetFullAppIndexingInfos setAppVersion (String appVersion) {
-      this.setParam("app_version", appVersion);
-      return this;
-    }
-
-    public APIRequestGetFullAppIndexingInfos requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetFullAppIndexingInfos requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetFullAppIndexingInfos requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetFullAppIndexingInfos requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetFullAppIndexingInfos requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetFullAppIndexingInfos requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateFullAppIndexingInfo extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "app_version",
-      "full_app_indexing_info_classes",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateFullAppIndexingInfo.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateFullAppIndexingInfo(String nodeId, APIContext context) {
-      super(context, nodeId, "/full_app_indexing_infos", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateFullAppIndexingInfo setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateFullAppIndexingInfo setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateFullAppIndexingInfo setAppVersion (String appVersion) {
-      this.setParam("app_version", appVersion);
-      return this;
-    }
-
-    public APIRequestCreateFullAppIndexingInfo setFullAppIndexingInfoClasses (List<Map<String, String>> fullAppIndexingInfoClasses) {
-      this.setParam("full_app_indexing_info_classes", fullAppIndexingInfoClasses);
-      return this;
-    }
-    public APIRequestCreateFullAppIndexingInfo setFullAppIndexingInfoClasses (String fullAppIndexingInfoClasses) {
-      this.setParam("full_app_indexing_info_classes", fullAppIndexingInfoClasses);
-      return this;
-    }
-
-    public APIRequestCreateFullAppIndexingInfo requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateFullAppIndexingInfo requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateFullAppIndexingInfo requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateFullAppIndexingInfo requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateFullAppIndexingInfo requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateFullAppIndexingInfo requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetInsightsPushSchedule extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -9042,6 +8814,7 @@ public class Application extends APINode {
     }
     public static final String[] PARAMS = {
       "data",
+      "limited_data_use",
     };
 
     public static final String[] FIELDS = {
@@ -9106,6 +8879,15 @@ public class Application extends APINode {
     }
     public APIRequestCreateUserProperty setData (String data) {
       this.setParam("data", data);
+      return this;
+    }
+
+    public APIRequestCreateUserProperty setLimitedDataUse (Boolean limitedDataUse) {
+      this.setParam("limited_data_use", limitedDataUse);
+      return this;
+    }
+    public APIRequestCreateUserProperty setLimitedDataUse (String limitedDataUse) {
+      this.setParam("limited_data_use", limitedDataUse);
       return this;
     }
 

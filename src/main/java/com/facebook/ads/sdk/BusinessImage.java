@@ -65,6 +65,8 @@ public class BusinessImage extends APINode {
   private Long mHeight = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("media_library_url")
+  private String mMediaLibraryUrl = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("url")
@@ -286,6 +288,18 @@ public class BusinessImage extends APINode {
     return new APIRequestGetAdPlacementValidationResults(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestDeleteCreativeAssetTags deleteCreativeAssetTags() {
+    return new APIRequestDeleteCreativeAssetTags(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetCreativeAssetTags getCreativeAssetTags() {
+    return new APIRequestGetCreativeAssetTags(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateCreativeAssetTag createCreativeAssetTag() {
+    return new APIRequestCreateCreativeAssetTag(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetInsights getInsights() {
     return new APIRequestGetInsights(this.getPrefixedId().toString(), context);
   }
@@ -320,6 +334,10 @@ public class BusinessImage extends APINode {
 
   public String getFieldId() {
     return mId;
+  }
+
+  public String getFieldMediaLibraryUrl() {
+    return mMediaLibraryUrl;
   }
 
   public String getFieldName() {
@@ -438,6 +456,356 @@ public class BusinessImage extends APINode {
 
     @Override
     public APIRequestGetAdPlacementValidationResults requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestDeleteCreativeAssetTags extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "business_id",
+      "tag_name",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestDeleteCreativeAssetTags.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDeleteCreativeAssetTags(String nodeId, APIContext context) {
+      super(context, nodeId, "/creative_asset_tags", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDeleteCreativeAssetTags setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteCreativeAssetTags setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDeleteCreativeAssetTags setBusinessId (String businessId) {
+      this.setParam("business_id", businessId);
+      return this;
+    }
+
+    public APIRequestDeleteCreativeAssetTags setTagName (String tagName) {
+      this.setParam("tag_name", tagName);
+      return this;
+    }
+
+    public APIRequestDeleteCreativeAssetTags requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDeleteCreativeAssetTags requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteCreativeAssetTags requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDeleteCreativeAssetTags requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteCreativeAssetTags requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteCreativeAssetTags requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetCreativeAssetTags extends APIRequest<CreativeAssetTag> {
+
+    APINodeList<CreativeAssetTag> lastResponse = null;
+    @Override
+    public APINodeList<CreativeAssetTag> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "business_id",
+    };
+
+    public static final String[] FIELDS = {
+      "name",
+    };
+
+    @Override
+    public APINodeList<CreativeAssetTag> parseResponse(String response, String header) throws APIException {
+      return CreativeAssetTag.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<CreativeAssetTag> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<CreativeAssetTag> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<CreativeAssetTag>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<CreativeAssetTag>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<CreativeAssetTag>>() {
+           public APINodeList<CreativeAssetTag> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetCreativeAssetTags.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetCreativeAssetTags(String nodeId, APIContext context) {
+      super(context, nodeId, "/creative_asset_tags", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCreativeAssetTags setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCreativeAssetTags setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCreativeAssetTags setBusinessId (String businessId) {
+      this.setParam("business_id", businessId);
+      return this;
+    }
+
+    public APIRequestGetCreativeAssetTags requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCreativeAssetTags requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCreativeAssetTags requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCreativeAssetTags requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCreativeAssetTags requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCreativeAssetTags requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetCreativeAssetTags requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetCreativeAssetTags requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreateCreativeAssetTag extends APIRequest<BusinessImage> {
+
+    BusinessImage lastResponse = null;
+    @Override
+    public BusinessImage getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "business_id",
+      "tag_name",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public BusinessImage parseResponse(String response, String header) throws APIException {
+      return BusinessImage.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public BusinessImage execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public BusinessImage execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<BusinessImage> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<BusinessImage> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, BusinessImage>() {
+           public BusinessImage apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateCreativeAssetTag.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateCreativeAssetTag(String nodeId, APIContext context) {
+      super(context, nodeId, "/creative_asset_tags", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateCreativeAssetTag setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCreativeAssetTag setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateCreativeAssetTag setBusinessId (String businessId) {
+      this.setParam("business_id", businessId);
+      return this;
+    }
+
+    public APIRequestCreateCreativeAssetTag setTagName (String tagName) {
+      this.setParam("tag_name", tagName);
+      return this;
+    }
+
+    public APIRequestCreateCreativeAssetTag requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateCreativeAssetTag requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCreativeAssetTag requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateCreativeAssetTag requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCreativeAssetTag requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCreativeAssetTag requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -688,6 +1056,7 @@ public class BusinessImage extends APINode {
       "hash",
       "height",
       "id",
+      "media_library_url",
       "name",
       "url",
       "url_128",
@@ -816,6 +1185,13 @@ public class BusinessImage extends APINode {
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestMediaLibraryUrlField () {
+      return this.requestMediaLibraryUrlField(true);
+    }
+    public APIRequestGet requestMediaLibraryUrlField (boolean value) {
+      this.requestField("media_library_url", value);
       return this;
     }
     public APIRequestGet requestNameField () {
@@ -954,6 +1330,7 @@ public class BusinessImage extends APINode {
     this.mHash = instance.mHash;
     this.mHeight = instance.mHeight;
     this.mId = instance.mId;
+    this.mMediaLibraryUrl = instance.mMediaLibraryUrl;
     this.mName = instance.mName;
     this.mUrl = instance.mUrl;
     this.mUrl128 = instance.mUrl128;

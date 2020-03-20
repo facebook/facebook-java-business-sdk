@@ -830,6 +830,8 @@ public class ProductFeedUpload extends APINode {
   }
 
   public static enum EnumInputMethod {
+      @SerializedName("Google Sheets Fetch")
+      VALUE_GOOGLE_SHEETS_FETCH("Google Sheets Fetch"),
       @SerializedName("Manual Upload")
       VALUE_MANUAL_UPLOAD("Manual Upload"),
       @SerializedName("Reupload Last File")

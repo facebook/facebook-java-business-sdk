@@ -4338,6 +4338,7 @@ public class BusinessAssetGroup extends APINode {
       "supports_donate_button_in_live_video",
       "supports_instant_articles",
       "talking_about_count",
+      "temporary_status",
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
@@ -5335,6 +5336,13 @@ public class BusinessAssetGroup extends APINode {
       this.requestField("talking_about_count", value);
       return this;
     }
+    public APIRequestGetContainedPages requestTemporaryStatusField () {
+      return this.requestTemporaryStatusField(true);
+    }
+    public APIRequestGetContainedPages requestTemporaryStatusField (boolean value) {
+      this.requestField("temporary_status", value);
+      return this;
+    }
     public APIRequestGetContainedPages requestUnreadMessageCountField () {
       return this.requestUnreadMessageCountField(true);
     }
@@ -6089,6 +6097,7 @@ public class BusinessAssetGroup extends APINode {
       "fallback_image_url",
       "feed_count",
       "id",
+      "is_catalog_segment",
       "name",
       "product_count",
       "store_catalog_settings",
@@ -6231,6 +6240,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedProductCatalogs requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetContainedProductCatalogs requestIsCatalogSegmentField () {
+      return this.requestIsCatalogSegmentField(true);
+    }
+    public APIRequestGetContainedProductCatalogs requestIsCatalogSegmentField (boolean value) {
+      this.requestField("is_catalog_segment", value);
       return this;
     }
     public APIRequestGetContainedProductCatalogs requestNameField () {
@@ -6658,6 +6674,8 @@ public class BusinessAssetGroup extends APINode {
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("ANALYZE")
       VALUE_ANALYZE("ANALYZE"),
+      @SerializedName("CASHIER_ROLE")
+      VALUE_CASHIER_ROLE("CASHIER_ROLE"),
       @SerializedName("CREATE_CONTENT")
       VALUE_CREATE_CONTENT("CREATE_CONTENT"),
       @SerializedName("MANAGE")

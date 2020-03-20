@@ -977,6 +977,8 @@ public class PageCallToAction extends APINode {
   public static enum EnumAndroidDestinationType {
       @SerializedName("APP_DEEPLINK")
       VALUE_APP_DEEPLINK("APP_DEEPLINK"),
+      @SerializedName("BECOME_A_VOLUNTEER")
+      VALUE_BECOME_A_VOLUNTEER("BECOME_A_VOLUNTEER"),
       @SerializedName("EMAIL")
       VALUE_EMAIL("EMAIL"),
       @SerializedName("FACEBOOK_APP")
@@ -1037,6 +1039,8 @@ public class PageCallToAction extends APINode {
   }
 
   public static enum EnumType {
+      @SerializedName("BECOME_A_VOLUNTEER")
+      VALUE_BECOME_A_VOLUNTEER("BECOME_A_VOLUNTEER"),
       @SerializedName("BOOK_APPOINTMENT")
       VALUE_BOOK_APPOINTMENT("BOOK_APPOINTMENT"),
       @SerializedName("BOOK_NOW")
@@ -1106,6 +1110,8 @@ public class PageCallToAction extends APINode {
   }
 
   public static enum EnumWebDestinationType {
+      @SerializedName("BECOME_A_VOLUNTEER")
+      VALUE_BECOME_A_VOLUNTEER("BECOME_A_VOLUNTEER"),
       @SerializedName("BECOME_SUPPORTER")
       VALUE_BECOME_SUPPORTER("BECOME_SUPPORTER"),
       @SerializedName("EMAIL")

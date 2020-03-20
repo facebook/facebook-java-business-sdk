@@ -3414,6 +3414,8 @@ public class CustomAudience extends APINode {
       VALUE_HOME_LISTING("HOME_LISTING"),
       @SerializedName("HOTEL")
       VALUE_HOTEL("HOTEL"),
+      @SerializedName("LOCATION_BASED_ITEM")
+      VALUE_LOCATION_BASED_ITEM("LOCATION_BASED_ITEM"),
       @SerializedName("MEDIA_TITLE")
       VALUE_MEDIA_TITLE("MEDIA_TITLE"),
       @SerializedName("OFFLINE_PRODUCT")

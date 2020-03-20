@@ -1179,6 +1179,7 @@ public class SystemUser extends APINode {
       "supports_donate_button_in_live_video",
       "supports_instant_articles",
       "talking_about_count",
+      "temporary_status",
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
@@ -2176,6 +2177,13 @@ public class SystemUser extends APINode {
       this.requestField("talking_about_count", value);
       return this;
     }
+    public APIRequestGetAssignedPages requestTemporaryStatusField () {
+      return this.requestTemporaryStatusField(true);
+    }
+    public APIRequestGetAssignedPages requestTemporaryStatusField (boolean value) {
+      this.requestField("temporary_status", value);
+      return this;
+    }
     public APIRequestGetAssignedPages requestUnreadMessageCountField () {
       return this.requestUnreadMessageCountField(true);
     }
@@ -2266,6 +2274,7 @@ public class SystemUser extends APINode {
       "fallback_image_url",
       "feed_count",
       "id",
+      "is_catalog_segment",
       "name",
       "product_count",
       "store_catalog_settings",
@@ -2408,6 +2417,13 @@ public class SystemUser extends APINode {
     }
     public APIRequestGetAssignedProductCatalogs requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetAssignedProductCatalogs requestIsCatalogSegmentField () {
+      return this.requestIsCatalogSegmentField(true);
+    }
+    public APIRequestGetAssignedProductCatalogs requestIsCatalogSegmentField (boolean value) {
+      this.requestField("is_catalog_segment", value);
       return this;
     }
     public APIRequestGetAssignedProductCatalogs requestNameField () {

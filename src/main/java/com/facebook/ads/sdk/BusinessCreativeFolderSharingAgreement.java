@@ -54,72 +54,70 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class VideoGameShow extends APINode {
-  @SerializedName("end_time")
-  private String mEndTime = null;
-  @SerializedName("game_status")
-  private String mGameStatus = null;
-  @SerializedName("game_type")
-  private String mGameType = null;
+public class BusinessCreativeFolderSharingAgreement extends APINode {
+  @SerializedName("folder_id")
+  private String mFolderId = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("start_time")
-  private String mStartTime = null;
+  @SerializedName("requesting_business")
+  private Business mRequestingBusiness = null;
+  @SerializedName("status")
+  private String mStatus = null;
   protected static Gson gson = null;
 
-  VideoGameShow() {
+  BusinessCreativeFolderSharingAgreement() {
   }
 
-  public VideoGameShow(Long id, APIContext context) {
+  public BusinessCreativeFolderSharingAgreement(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public VideoGameShow(String id, APIContext context) {
+  public BusinessCreativeFolderSharingAgreement(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public VideoGameShow fetch() throws APIException{
-    VideoGameShow newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public BusinessCreativeFolderSharingAgreement fetch() throws APIException{
+    BusinessCreativeFolderSharingAgreement newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static VideoGameShow fetchById(Long id, APIContext context) throws APIException {
+  public static BusinessCreativeFolderSharingAgreement fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<VideoGameShow> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<BusinessCreativeFolderSharingAgreement> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static VideoGameShow fetchById(String id, APIContext context) throws APIException {
+  public static BusinessCreativeFolderSharingAgreement fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<VideoGameShow> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<BusinessCreativeFolderSharingAgreement> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<VideoGameShow> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<VideoGameShow>)(
-      new APIRequest<VideoGameShow>(context, "", "/", "GET", VideoGameShow.getParser())
+  public static APINodeList<BusinessCreativeFolderSharingAgreement> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<BusinessCreativeFolderSharingAgreement>)(
+      new APIRequest<BusinessCreativeFolderSharingAgreement>(context, "", "/", "GET", BusinessCreativeFolderSharingAgreement.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<VideoGameShow>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<BusinessCreativeFolderSharingAgreement>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", VideoGameShow.getParser())
+      new APIRequest(context, "", "/", "GET", BusinessCreativeFolderSharingAgreement.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -132,12 +130,12 @@ public class VideoGameShow extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static VideoGameShow loadJSON(String json, APIContext context, String header) {
-    VideoGameShow videoGameShow = getGson().fromJson(json, VideoGameShow.class);
+  public static BusinessCreativeFolderSharingAgreement loadJSON(String json, APIContext context, String header) {
+    BusinessCreativeFolderSharingAgreement businessCreativeFolderSharingAgreement = getGson().fromJson(json, BusinessCreativeFolderSharingAgreement.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(videoGameShow.toString());
+      JsonElement o2 = parser.parse(businessCreativeFolderSharingAgreement.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -147,14 +145,14 @@ public class VideoGameShow extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    videoGameShow.context = context;
-    videoGameShow.rawValue = json;
-    videoGameShow.header = header;
-    return videoGameShow;
+    businessCreativeFolderSharingAgreement.context = context;
+    businessCreativeFolderSharingAgreement.rawValue = json;
+    businessCreativeFolderSharingAgreement.header = header;
+    return businessCreativeFolderSharingAgreement;
   }
 
-  public static APINodeList<VideoGameShow> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<VideoGameShow> videoGameShows = new APINodeList<VideoGameShow>(request, json, header);
+  public static APINodeList<BusinessCreativeFolderSharingAgreement> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<BusinessCreativeFolderSharingAgreement> businessCreativeFolderSharingAgreements = new APINodeList<BusinessCreativeFolderSharingAgreement>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -165,9 +163,9 @@ public class VideoGameShow extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          videoGameShows.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          businessCreativeFolderSharingAgreements.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return videoGameShows;
+        return businessCreativeFolderSharingAgreements;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -177,20 +175,20 @@ public class VideoGameShow extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                videoGameShows.setCursors(before, after);
+                businessCreativeFolderSharingAgreements.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            videoGameShows.setPaging(previous, next);
+            businessCreativeFolderSharingAgreements.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              videoGameShows.setAppSecret(context.getAppSecretProof());
+              businessCreativeFolderSharingAgreements.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              videoGameShows.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              businessCreativeFolderSharingAgreements.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -201,23 +199,23 @@ public class VideoGameShow extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  videoGameShows.add(loadJSON(entry.getValue().toString(), context, header));
+                  businessCreativeFolderSharingAgreements.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              videoGameShows.add(loadJSON(obj.toString(), context, header));
+              businessCreativeFolderSharingAgreements.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return videoGameShows;
+          return businessCreativeFolderSharingAgreements;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              videoGameShows.add(loadJSON(entry.getValue().toString(), context, header));
+              businessCreativeFolderSharingAgreements.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return videoGameShows;
+          return businessCreativeFolderSharingAgreements;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -234,20 +232,20 @@ public class VideoGameShow extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              videoGameShows.add(loadJSON(value.toString(), context, header));
+              businessCreativeFolderSharingAgreements.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return videoGameShows;
+            return businessCreativeFolderSharingAgreements;
           }
 
           // Sixth, check if it's pure JsonObject
-          videoGameShows.clear();
-          videoGameShows.add(loadJSON(json, context, header));
-          return videoGameShows;
+          businessCreativeFolderSharingAgreements.clear();
+          businessCreativeFolderSharingAgreements.add(loadJSON(json, context, header));
+          return businessCreativeFolderSharingAgreements;
         }
       }
     } catch (Exception e) {
@@ -278,77 +276,71 @@ public class VideoGameShow extends APINode {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestUpdate update() {
-    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
-  }
 
-
-  public String getFieldEndTime() {
-    return mEndTime;
-  }
-
-  public String getFieldGameStatus() {
-    return mGameStatus;
-  }
-
-  public String getFieldGameType() {
-    return mGameType;
+  public String getFieldFolderId() {
+    return mFolderId;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-  public String getFieldStartTime() {
-    return mStartTime;
+  public Business getFieldRequestingBusiness() {
+    if (mRequestingBusiness != null) {
+      mRequestingBusiness.context = getContext();
+    }
+    return mRequestingBusiness;
+  }
+
+  public String getFieldStatus() {
+    return mStatus;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<VideoGameShow> {
+  public static class APIRequestGet extends APIRequest<BusinessCreativeFolderSharingAgreement> {
 
-    VideoGameShow lastResponse = null;
+    BusinessCreativeFolderSharingAgreement lastResponse = null;
     @Override
-    public VideoGameShow getLastResponse() {
+    public BusinessCreativeFolderSharingAgreement getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "end_time",
-      "game_status",
-      "game_type",
+      "folder_id",
       "id",
-      "start_time",
+      "requesting_business",
+      "status",
     };
 
     @Override
-    public VideoGameShow parseResponse(String response, String header) throws APIException {
-      return VideoGameShow.parseResponse(response, getContext(), this, header).head();
+    public BusinessCreativeFolderSharingAgreement parseResponse(String response, String header) throws APIException {
+      return BusinessCreativeFolderSharingAgreement.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public VideoGameShow execute() throws APIException {
+    public BusinessCreativeFolderSharingAgreement execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public VideoGameShow execute(Map<String, Object> extraParams) throws APIException {
+    public BusinessCreativeFolderSharingAgreement execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<VideoGameShow> executeAsync() throws APIException {
+    public ListenableFuture<BusinessCreativeFolderSharingAgreement> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<VideoGameShow> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<BusinessCreativeFolderSharingAgreement> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, VideoGameShow>() {
-           public VideoGameShow apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, BusinessCreativeFolderSharingAgreement>() {
+           public BusinessCreativeFolderSharingAgreement apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -412,25 +404,11 @@ public class VideoGameShow extends APINode {
       return this;
     }
 
-    public APIRequestGet requestEndTimeField () {
-      return this.requestEndTimeField(true);
+    public APIRequestGet requestFolderIdField () {
+      return this.requestFolderIdField(true);
     }
-    public APIRequestGet requestEndTimeField (boolean value) {
-      this.requestField("end_time", value);
-      return this;
-    }
-    public APIRequestGet requestGameStatusField () {
-      return this.requestGameStatusField(true);
-    }
-    public APIRequestGet requestGameStatusField (boolean value) {
-      this.requestField("game_status", value);
-      return this;
-    }
-    public APIRequestGet requestGameTypeField () {
-      return this.requestGameTypeField(true);
-    }
-    public APIRequestGet requestGameTypeField (boolean value) {
-      this.requestField("game_type", value);
+    public APIRequestGet requestFolderIdField (boolean value) {
+      this.requestField("folder_id", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -440,139 +418,38 @@ public class VideoGameShow extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestStartTimeField () {
-      return this.requestStartTimeField(true);
+    public APIRequestGet requestRequestingBusinessField () {
+      return this.requestRequestingBusinessField(true);
     }
-    public APIRequestGet requestStartTimeField (boolean value) {
-      this.requestField("start_time", value);
+    public APIRequestGet requestRequestingBusinessField (boolean value) {
+      this.requestField("requesting_business", value);
+      return this;
+    }
+    public APIRequestGet requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGet requestStatusField (boolean value) {
+      this.requestField("status", value);
       return this;
     }
   }
 
-  public static class APIRequestUpdate extends APIRequest<VideoGameShow> {
-
-    VideoGameShow lastResponse = null;
-    @Override
-    public VideoGameShow getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "action",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public VideoGameShow parseResponse(String response, String header) throws APIException {
-      return VideoGameShow.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public VideoGameShow execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public VideoGameShow execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<VideoGameShow> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<VideoGameShow> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, VideoGameShow>() {
-           public VideoGameShow apply(ResponseWrapper result) {
-             try {
-               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestUpdate(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestUpdate setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestUpdate setAction (VideoGameShow.EnumAction action) {
-      this.setParam("action", action);
-      return this;
-    }
-    public APIRequestUpdate setAction (String action) {
-      this.setParam("action", action);
-      return this;
-    }
-
-    public APIRequestUpdate requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestUpdate requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static enum EnumAction {
-      @SerializedName("END_GAME")
-      VALUE_END_GAME("END_GAME"),
-      @SerializedName("START_GAME")
-      VALUE_START_GAME("START_GAME"),
+  public static enum EnumRequestStatus {
+      @SerializedName("APPROVE")
+      VALUE_APPROVE("APPROVE"),
+      @SerializedName("DECLINE")
+      VALUE_DECLINE("DECLINE"),
+      @SerializedName("EXPIRED")
+      VALUE_EXPIRED("EXPIRED"),
+      @SerializedName("IN_PROGRESS")
+      VALUE_IN_PROGRESS("IN_PROGRESS"),
+      @SerializedName("PENDING")
+      VALUE_PENDING("PENDING"),
       ;
 
       private String value;
 
-      private EnumAction(String value) {
+      private EnumRequestStatus(String value) {
         this.value = value;
       }
 
@@ -596,21 +473,20 @@ public class VideoGameShow extends APINode {
     return gson;
   }
 
-  public VideoGameShow copyFrom(VideoGameShow instance) {
-    this.mEndTime = instance.mEndTime;
-    this.mGameStatus = instance.mGameStatus;
-    this.mGameType = instance.mGameType;
+  public BusinessCreativeFolderSharingAgreement copyFrom(BusinessCreativeFolderSharingAgreement instance) {
+    this.mFolderId = instance.mFolderId;
     this.mId = instance.mId;
-    this.mStartTime = instance.mStartTime;
+    this.mRequestingBusiness = instance.mRequestingBusiness;
+    this.mStatus = instance.mStatus;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<VideoGameShow> getParser() {
-    return new APIRequest.ResponseParser<VideoGameShow>() {
-      public APINodeList<VideoGameShow> parseResponse(String response, APIContext context, APIRequest<VideoGameShow> request, String header) throws MalformedResponseException {
-        return VideoGameShow.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<BusinessCreativeFolderSharingAgreement> getParser() {
+    return new APIRequest.ResponseParser<BusinessCreativeFolderSharingAgreement>() {
+      public APINodeList<BusinessCreativeFolderSharingAgreement> parseResponse(String response, APIContext context, APIRequest<BusinessCreativeFolderSharingAgreement> request, String header) throws MalformedResponseException {
+        return BusinessCreativeFolderSharingAgreement.parseResponse(response, context, request, header);
       }
     };
   }

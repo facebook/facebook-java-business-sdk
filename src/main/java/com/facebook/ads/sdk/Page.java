@@ -311,6 +311,8 @@ public class Page extends APINode {
   private Boolean mSupportsInstantArticles = null;
   @SerializedName("talking_about_count")
   private Long mTalkingAboutCount = null;
+  @SerializedName("temporary_status")
+  private String mTemporaryStatus = null;
   @SerializedName("unread_message_count")
   private Long mUnreadMessageCount = null;
   @SerializedName("unread_notif_count")
@@ -1521,6 +1523,10 @@ public class Page extends APINode {
 
   public Long getFieldTalkingAboutCount() {
     return mTalkingAboutCount;
+  }
+
+  public String getFieldTemporaryStatus() {
+    return mTemporaryStatus;
   }
 
   public Long getFieldUnreadMessageCount() {
@@ -6020,6 +6026,7 @@ public class Page extends APINode {
       "supports_donate_button_in_live_video",
       "supports_instant_articles",
       "talking_about_count",
+      "temporary_status",
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
@@ -7015,6 +7022,13 @@ public class Page extends APINode {
     }
     public APIRequestGetCrosspostWhitelistedPages requestTalkingAboutCountField (boolean value) {
       this.requestField("talking_about_count", value);
+      return this;
+    }
+    public APIRequestGetCrosspostWhitelistedPages requestTemporaryStatusField () {
+      return this.requestTemporaryStatusField(true);
+    }
+    public APIRequestGetCrosspostWhitelistedPages requestTemporaryStatusField (boolean value) {
+      this.requestField("temporary_status", value);
       return this;
     }
     public APIRequestGetCrosspostWhitelistedPages requestUnreadMessageCountField () {
@@ -10234,6 +10248,7 @@ public class Page extends APINode {
       "supports_donate_button_in_live_video",
       "supports_instant_articles",
       "talking_about_count",
+      "temporary_status",
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
@@ -11229,6 +11244,13 @@ public class Page extends APINode {
     }
     public APIRequestGetGlobalBrandChildren requestTalkingAboutCountField (boolean value) {
       this.requestField("talking_about_count", value);
+      return this;
+    }
+    public APIRequestGetGlobalBrandChildren requestTemporaryStatusField () {
+      return this.requestTemporaryStatusField(true);
+    }
+    public APIRequestGetGlobalBrandChildren requestTemporaryStatusField (boolean value) {
+      this.requestField("temporary_status", value);
       return this;
     }
     public APIRequestGetGlobalBrandChildren requestUnreadMessageCountField () {
@@ -13401,6 +13423,7 @@ public class Page extends APINode {
       "supports_donate_button_in_live_video",
       "supports_instant_articles",
       "talking_about_count",
+      "temporary_status",
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
@@ -14401,6 +14424,13 @@ public class Page extends APINode {
     }
     public APIRequestGetLikes requestTalkingAboutCountField (boolean value) {
       this.requestField("talking_about_count", value);
+      return this;
+    }
+    public APIRequestGetLikes requestTemporaryStatusField () {
+      return this.requestTemporaryStatusField(true);
+    }
+    public APIRequestGetLikes requestTemporaryStatusField (boolean value) {
+      this.requestField("temporary_status", value);
       return this;
     }
     public APIRequestGetLikes requestUnreadMessageCountField () {
@@ -15738,6 +15768,7 @@ public class Page extends APINode {
       "supports_donate_button_in_live_video",
       "supports_instant_articles",
       "talking_about_count",
+      "temporary_status",
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
@@ -16733,6 +16764,13 @@ public class Page extends APINode {
     }
     public APIRequestGetLocations requestTalkingAboutCountField (boolean value) {
       this.requestField("talking_about_count", value);
+      return this;
+    }
+    public APIRequestGetLocations requestTemporaryStatusField () {
+      return this.requestTemporaryStatusField(true);
+    }
+    public APIRequestGetLocations requestTemporaryStatusField (boolean value) {
+      this.requestField("temporary_status", value);
       return this;
     }
     public APIRequestGetLocations requestUnreadMessageCountField () {
@@ -22243,6 +22281,7 @@ public class Page extends APINode {
       "fallback_image_url",
       "feed_count",
       "id",
+      "is_catalog_segment",
       "name",
       "product_count",
       "store_catalog_settings",
@@ -22385,6 +22424,13 @@ public class Page extends APINode {
     }
     public APIRequestGetProductCatalogs requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetProductCatalogs requestIsCatalogSegmentField () {
+      return this.requestIsCatalogSegmentField(true);
+    }
+    public APIRequestGetProductCatalogs requestIsCatalogSegmentField (boolean value) {
+      this.requestField("is_catalog_segment", value);
       return this;
     }
     public APIRequestGetProductCatalogs requestNameField () {
@@ -31879,6 +31925,7 @@ public class Page extends APINode {
       "supports_donate_button_in_live_video",
       "supports_instant_articles",
       "talking_about_count",
+      "temporary_status",
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
@@ -32881,6 +32928,13 @@ public class Page extends APINode {
       this.requestField("talking_about_count", value);
       return this;
     }
+    public APIRequestGet requestTemporaryStatusField () {
+      return this.requestTemporaryStatusField(true);
+    }
+    public APIRequestGet requestTemporaryStatusField (boolean value) {
+      this.requestField("temporary_status", value);
+      return this;
+    }
     public APIRequestGet requestUnreadMessageCountField () {
       return this.requestUnreadMessageCountField(true);
     }
@@ -33010,6 +33064,7 @@ public class Page extends APINode {
       "spherical_metadata",
       "start_info",
       "store_location_descriptor",
+      "temporary_status",
       "website",
       "zoom_scale_x",
       "zoom_scale_y",
@@ -33432,6 +33487,15 @@ public class Page extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setTemporaryStatus (Page.EnumTemporaryStatus temporaryStatus) {
+      this.setParam("temporary_status", temporaryStatus);
+      return this;
+    }
+    public APIRequestUpdate setTemporaryStatus (String temporaryStatus) {
+      this.setParam("temporary_status", temporaryStatus);
+      return this;
+    }
+
     public APIRequestUpdate setWebsite (String website) {
       this.setParam("website", website);
       return this;
@@ -33643,11 +33707,34 @@ public class Page extends APINode {
       }
   }
 
+  public static enum EnumTemporaryStatus {
+      @SerializedName("DIFFERENTLY_OPEN")
+      VALUE_DIFFERENTLY_OPEN("DIFFERENTLY_OPEN"),
+      @SerializedName("OPERATING_AS_USUAL")
+      VALUE_OPERATING_AS_USUAL("OPERATING_AS_USUAL"),
+      @SerializedName("TEMPORARILY_CLOSED")
+      VALUE_TEMPORARILY_CLOSED("TEMPORARILY_CLOSED"),
+      ;
+
+      private String value;
+
+      private EnumTemporaryStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumPermittedTasks {
       @SerializedName("ADVERTISE")
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("ANALYZE")
       VALUE_ANALYZE("ANALYZE"),
+      @SerializedName("CASHIER_ROLE")
+      VALUE_CASHIER_ROLE("CASHIER_ROLE"),
       @SerializedName("CREATE_CONTENT")
       VALUE_CREATE_CONTENT("CREATE_CONTENT"),
       @SerializedName("MANAGE")
@@ -33705,6 +33792,8 @@ public class Page extends APINode {
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("ANALYZE")
       VALUE_ANALYZE("ANALYZE"),
+      @SerializedName("CASHIER_ROLE")
+      VALUE_CASHIER_ROLE("CASHIER_ROLE"),
       @SerializedName("CREATE_CONTENT")
       VALUE_CREATE_CONTENT("CREATE_CONTENT"),
       @SerializedName("MANAGE")
@@ -34415,6 +34504,7 @@ public class Page extends APINode {
     this.mSupportsDonateButtonInLiveVideo = instance.mSupportsDonateButtonInLiveVideo;
     this.mSupportsInstantArticles = instance.mSupportsInstantArticles;
     this.mTalkingAboutCount = instance.mTalkingAboutCount;
+    this.mTemporaryStatus = instance.mTemporaryStatus;
     this.mUnreadMessageCount = instance.mUnreadMessageCount;
     this.mUnreadNotifCount = instance.mUnreadNotifCount;
     this.mUnseenMessageCount = instance.mUnseenMessageCount;

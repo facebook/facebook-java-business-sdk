@@ -65,6 +65,8 @@ public class BusinessCreativeFolder extends APINode {
   private String mDescription = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("media_library_url")
+  private String mMediaLibraryUrl = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("parent_folder")
@@ -336,6 +338,10 @@ public class BusinessCreativeFolder extends APINode {
 
   public String getFieldId() {
     return mId;
+  }
+
+  public String getFieldMediaLibraryUrl() {
+    return mMediaLibraryUrl;
   }
 
   public String getFieldName() {
@@ -1111,6 +1117,7 @@ public class BusinessCreativeFolder extends APINode {
       "creative_insight_permissions",
       "description",
       "id",
+      "media_library_url",
       "name",
       "parent_folder",
     };
@@ -1237,6 +1244,13 @@ public class BusinessCreativeFolder extends APINode {
     }
     public APIRequestGetSubFolders requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetSubFolders requestMediaLibraryUrlField () {
+      return this.requestMediaLibraryUrlField(true);
+    }
+    public APIRequestGetSubFolders requestMediaLibraryUrlField (boolean value) {
+      this.requestField("media_library_url", value);
       return this;
     }
     public APIRequestGetSubFolders requestNameField () {
@@ -1375,6 +1389,7 @@ public class BusinessCreativeFolder extends APINode {
       "creative_insight_permissions",
       "description",
       "id",
+      "media_library_url",
       "name",
       "parent_folder",
     };
@@ -1501,6 +1516,13 @@ public class BusinessCreativeFolder extends APINode {
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestMediaLibraryUrlField () {
+      return this.requestMediaLibraryUrlField(true);
+    }
+    public APIRequestGet requestMediaLibraryUrlField (boolean value) {
+      this.requestField("media_library_url", value);
       return this;
     }
     public APIRequestGet requestNameField () {
@@ -1715,6 +1737,7 @@ public class BusinessCreativeFolder extends APINode {
     this.mCreativeInsightPermissions = instance.mCreativeInsightPermissions;
     this.mDescription = instance.mDescription;
     this.mId = instance.mId;
+    this.mMediaLibraryUrl = instance.mMediaLibraryUrl;
     this.mName = instance.mName;
     this.mParentFolder = instance.mParentFolder;
     this.context = instance.context;

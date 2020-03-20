@@ -69,6 +69,8 @@ public class ProductCatalog extends APINode {
   private Long mFeedCount = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("is_catalog_segment")
+  private Boolean mIsCatalogSegment = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("product_count")
@@ -430,20 +432,12 @@ public class ProductCatalog extends APINode {
     return new APIRequestGetProductSetsBatch(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateProductSetsBatch createProductSetsBatch() {
-    return new APIRequestCreateProductSetsBatch(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetProducts getProducts() {
     return new APIRequestGetProducts(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateProduct createProduct() {
     return new APIRequestCreateProduct(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateStoreProductItemsBatch createStoreProductItemsBatch() {
-    return new APIRequestCreateStoreProductItemsBatch(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetVehicleOffers getVehicleOffers() {
@@ -503,6 +497,10 @@ public class ProductCatalog extends APINode {
 
   public String getFieldId() {
     return mId;
+  }
+
+  public Boolean getFieldIsCatalogSegment() {
+    return mIsCatalogSegment;
   }
 
   public String getFieldName() {
@@ -6756,158 +6754,6 @@ public class ProductCatalog extends APINode {
     }
   }
 
-  public static class APIRequestCreateProductSetsBatch extends APIRequest<ProductCatalog> {
-
-    ProductCatalog lastResponse = null;
-    @Override
-    public ProductCatalog getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "password",
-      "standard",
-      "update_only",
-      "url",
-      "username",
-      "file",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public ProductCatalog parseResponse(String response, String header) throws APIException {
-      return ProductCatalog.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public ProductCatalog execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public ProductCatalog execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<ProductCatalog> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, ProductCatalog>() {
-           public ProductCatalog apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateProductSetsBatch.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateProductSetsBatch(String nodeId, APIContext context) {
-      super(context, nodeId, "/product_sets_batch", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateProductSetsBatch setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateProductSetsBatch setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-    public APIRequestCreateProductSetsBatch addUploadFile (String uploadName, File file) {
-      this.setParam(uploadName, file);
-      return this;
-    }
-
-    public APIRequestCreateProductSetsBatch setUseVideoEndpoint(boolean useVideoEndpoint) {
-      this.useVideoEndpoint = useVideoEndpoint;
-      return this;
-    }
-
-    public APIRequestCreateProductSetsBatch setPassword (String password) {
-      this.setParam("password", password);
-      return this;
-    }
-
-    public APIRequestCreateProductSetsBatch setStandard (ProductCatalog.EnumStandard standard) {
-      this.setParam("standard", standard);
-      return this;
-    }
-    public APIRequestCreateProductSetsBatch setStandard (String standard) {
-      this.setParam("standard", standard);
-      return this;
-    }
-
-    public APIRequestCreateProductSetsBatch setUpdateOnly (Boolean updateOnly) {
-      this.setParam("update_only", updateOnly);
-      return this;
-    }
-    public APIRequestCreateProductSetsBatch setUpdateOnly (String updateOnly) {
-      this.setParam("update_only", updateOnly);
-      return this;
-    }
-
-    public APIRequestCreateProductSetsBatch setUrl (String url) {
-      this.setParam("url", url);
-      return this;
-    }
-
-    public APIRequestCreateProductSetsBatch setUsername (String username) {
-      this.setParam("username", username);
-      return this;
-    }
-
-    public APIRequestCreateProductSetsBatch requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateProductSetsBatch requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateProductSetsBatch requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateProductSetsBatch requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateProductSetsBatch requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateProductSetsBatch requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetProducts extends APIRequest<ProductItem> {
 
     APINodeList<ProductItem> lastResponse = null;
@@ -7992,130 +7838,6 @@ public class ProductCatalog extends APINode {
 
     @Override
     public APIRequestCreateProduct requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateStoreProductItemsBatch extends APIRequest<ProductCatalog> {
-
-    ProductCatalog lastResponse = null;
-    @Override
-    public ProductCatalog getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "allow_upsert",
-      "requests",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public ProductCatalog parseResponse(String response, String header) throws APIException {
-      return ProductCatalog.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public ProductCatalog execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public ProductCatalog execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<ProductCatalog> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, ProductCatalog>() {
-           public ProductCatalog apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateStoreProductItemsBatch.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateStoreProductItemsBatch(String nodeId, APIContext context) {
-      super(context, nodeId, "/store_product_items_batch", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateStoreProductItemsBatch setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateStoreProductItemsBatch setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateStoreProductItemsBatch setAllowUpsert (Boolean allowUpsert) {
-      this.setParam("allow_upsert", allowUpsert);
-      return this;
-    }
-    public APIRequestCreateStoreProductItemsBatch setAllowUpsert (String allowUpsert) {
-      this.setParam("allow_upsert", allowUpsert);
-      return this;
-    }
-
-    public APIRequestCreateStoreProductItemsBatch setRequests (List<Map<String, String>> requests) {
-      this.setParam("requests", requests);
-      return this;
-    }
-    public APIRequestCreateStoreProductItemsBatch setRequests (String requests) {
-      this.setParam("requests", requests);
-      return this;
-    }
-
-    public APIRequestCreateStoreProductItemsBatch requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateStoreProductItemsBatch requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateStoreProductItemsBatch requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateStoreProductItemsBatch requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateStoreProductItemsBatch requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateStoreProductItemsBatch requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -9432,6 +9154,7 @@ public class ProductCatalog extends APINode {
       "fallback_image_url",
       "feed_count",
       "id",
+      "is_catalog_segment",
       "name",
       "product_count",
       "store_catalog_settings",
@@ -9574,6 +9297,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestIsCatalogSegmentField () {
+      return this.requestIsCatalogSegmentField(true);
+    }
+    public APIRequestGet requestIsCatalogSegmentField (boolean value) {
+      this.requestField("is_catalog_segment", value);
       return this;
     }
     public APIRequestGet requestNameField () {
@@ -9901,6 +9631,7 @@ public class ProductCatalog extends APINode {
     this.mFallbackImageUrl = instance.mFallbackImageUrl;
     this.mFeedCount = instance.mFeedCount;
     this.mId = instance.mId;
+    this.mIsCatalogSegment = instance.mIsCatalogSegment;
     this.mName = instance.mName;
     this.mProductCount = instance.mProductCount;
     this.mStoreCatalogSettings = instance.mStoreCatalogSettings;

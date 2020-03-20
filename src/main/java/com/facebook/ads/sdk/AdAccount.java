@@ -466,10 +466,6 @@ public class AdAccount extends APINode {
     return new APIRequestGetAdReportSchedules(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateAdReportSchedule createAdReportSchedule() {
-    return new APIRequestCreateAdReportSchedule(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetAdRulesHistory getAdRulesHistory() {
     return new APIRequestGetAdRulesHistory(this.getPrefixedId().toString(), context);
   }
@@ -4802,360 +4798,6 @@ public class AdAccount extends APINode {
 
     @Override
     public APIRequestGetAdReportSchedules requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateAdReportSchedule extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "actions_group_by",
-      "breakdowns",
-      "builtin_column_set",
-      "creation_source",
-      "custom_column_set_id",
-      "data_columns",
-      "date_interval",
-      "date_preset",
-      "emails",
-      "export_columns",
-      "filters",
-      "format_version",
-      "insights_section",
-      "level",
-      "name",
-      "normalized_filter",
-      "schedule_frequency",
-      "sort",
-      "sort_by",
-      "sort_dir",
-      "start_date",
-      "status",
-      "subscribers",
-      "time_increment",
-      "user_attribution_windows",
-      "user_columns",
-      "user_filter",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateAdReportSchedule.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateAdReportSchedule(String nodeId, APIContext context) {
-      super(context, nodeId, "/adreportschedules", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateAdReportSchedule setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdReportSchedule setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateAdReportSchedule setActionsGroupBy (List<EnumActionsGroupBy> actionsGroupBy) {
-      this.setParam("actions_group_by", actionsGroupBy);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setActionsGroupBy (String actionsGroupBy) {
-      this.setParam("actions_group_by", actionsGroupBy);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setBreakdowns (List<String> breakdowns) {
-      this.setParam("breakdowns", breakdowns);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setBreakdowns (String breakdowns) {
-      this.setParam("breakdowns", breakdowns);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setBuiltinColumnSet (EnumBuiltinColumnSet builtinColumnSet) {
-      this.setParam("builtin_column_set", builtinColumnSet);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setBuiltinColumnSet (String builtinColumnSet) {
-      this.setParam("builtin_column_set", builtinColumnSet);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setCreationSource (EnumCreationSource creationSource) {
-      this.setParam("creation_source", creationSource);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setCreationSource (String creationSource) {
-      this.setParam("creation_source", creationSource);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setCustomColumnSetId (String customColumnSetId) {
-      this.setParam("custom_column_set_id", customColumnSetId);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setDataColumns (List<String> dataColumns) {
-      this.setParam("data_columns", dataColumns);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setDataColumns (String dataColumns) {
-      this.setParam("data_columns", dataColumns);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setDateInterval (Object dateInterval) {
-      this.setParam("date_interval", dateInterval);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setDateInterval (String dateInterval) {
-      this.setParam("date_interval", dateInterval);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setDatePreset (EnumDatePreset datePreset) {
-      this.setParam("date_preset", datePreset);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setDatePreset (String datePreset) {
-      this.setParam("date_preset", datePreset);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setEmails (List<String> emails) {
-      this.setParam("emails", emails);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setEmails (String emails) {
-      this.setParam("emails", emails);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setExportColumns (Object exportColumns) {
-      this.setParam("export_columns", exportColumns);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setExportColumns (String exportColumns) {
-      this.setParam("export_columns", exportColumns);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setFilters (List<Object> filters) {
-      this.setParam("filters", filters);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setFilters (String filters) {
-      this.setParam("filters", filters);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setFormatVersion (Long formatVersion) {
-      this.setParam("format_version", formatVersion);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setFormatVersion (String formatVersion) {
-      this.setParam("format_version", formatVersion);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setInsightsSection (Object insightsSection) {
-      this.setParam("insights_section", insightsSection);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setInsightsSection (String insightsSection) {
-      this.setParam("insights_section", insightsSection);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setLevel (EnumLevel level) {
-      this.setParam("level", level);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setLevel (String level) {
-      this.setParam("level", level);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setNormalizedFilter (List<Object> normalizedFilter) {
-      this.setParam("normalized_filter", normalizedFilter);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setNormalizedFilter (String normalizedFilter) {
-      this.setParam("normalized_filter", normalizedFilter);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setScheduleFrequency (EnumScheduleFrequency scheduleFrequency) {
-      this.setParam("schedule_frequency", scheduleFrequency);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setScheduleFrequency (String scheduleFrequency) {
-      this.setParam("schedule_frequency", scheduleFrequency);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setSort (List<Object> sort) {
-      this.setParam("sort", sort);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setSort (String sort) {
-      this.setParam("sort", sort);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setSortBy (String sortBy) {
-      this.setParam("sort_by", sortBy);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setSortDir (String sortDir) {
-      this.setParam("sort_dir", sortDir);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setStartDate (Object startDate) {
-      this.setParam("start_date", startDate);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setStartDate (String startDate) {
-      this.setParam("start_date", startDate);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setStatus (EnumStatus status) {
-      this.setParam("status", status);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setStatus (String status) {
-      this.setParam("status", status);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setSubscribers (List<Long> subscribers) {
-      this.setParam("subscribers", subscribers);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setSubscribers (String subscribers) {
-      this.setParam("subscribers", subscribers);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setTimeIncrement (String timeIncrement) {
-      this.setParam("time_increment", timeIncrement);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setUserAttributionWindows (List<String> userAttributionWindows) {
-      this.setParam("user_attribution_windows", userAttributionWindows);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setUserAttributionWindows (String userAttributionWindows) {
-      this.setParam("user_attribution_windows", userAttributionWindows);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setUserColumns (List<String> userColumns) {
-      this.setParam("user_columns", userColumns);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setUserColumns (String userColumns) {
-      this.setParam("user_columns", userColumns);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule setUserFilter (List<Object> userFilter) {
-      this.setParam("user_filter", userFilter);
-      return this;
-    }
-    public APIRequestCreateAdReportSchedule setUserFilter (String userFilter) {
-      this.setParam("user_filter", userFilter);
-      return this;
-    }
-
-    public APIRequestCreateAdReportSchedule requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateAdReportSchedule requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdReportSchedule requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateAdReportSchedule requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdReportSchedule requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdReportSchedule requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -16004,6 +15646,7 @@ public class AdAccount extends APINode {
     }
     public static final String[] PARAMS = {
       "end_date",
+      "page_id",
       "platform",
       "position",
       "start_date",
@@ -16073,6 +15716,15 @@ public class AdAccount extends APINode {
 
     public APIRequestGetContentDeliveryReport setEndDate (String endDate) {
       this.setParam("end_date", endDate);
+      return this;
+    }
+
+    public APIRequestGetContentDeliveryReport setPageId (Long pageId) {
+      this.setParam("page_id", pageId);
+      return this;
+    }
+    public APIRequestGetContentDeliveryReport setPageId (String pageId) {
+      this.setParam("page_id", pageId);
       return this;
     }
 
@@ -20720,6 +20372,7 @@ public class AdAccount extends APINode {
       "supports_donate_button_in_live_video",
       "supports_instant_articles",
       "talking_about_count",
+      "temporary_status",
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
@@ -21715,6 +21368,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetPromotePages requestTalkingAboutCountField (boolean value) {
       this.requestField("talking_about_count", value);
+      return this;
+    }
+    public APIRequestGetPromotePages requestTemporaryStatusField () {
+      return this.requestTemporaryStatusField(true);
+    }
+    public APIRequestGetPromotePages requestTemporaryStatusField (boolean value) {
+      this.requestField("temporary_status", value);
       return this;
     }
     public APIRequestGetPromotePages requestUnreadMessageCountField () {
@@ -27398,6 +27058,8 @@ public class AdAccount extends APINode {
       VALUE_HOME_LISTING("HOME_LISTING"),
       @SerializedName("HOTEL")
       VALUE_HOTEL("HOTEL"),
+      @SerializedName("LOCATION_BASED_ITEM")
+      VALUE_LOCATION_BASED_ITEM("LOCATION_BASED_ITEM"),
       @SerializedName("MEDIA_TITLE")
       VALUE_MEDIA_TITLE("MEDIA_TITLE"),
       @SerializedName("OFFLINE_PRODUCT")
@@ -27479,249 +27141,6 @@ public class AdAccount extends APINode {
       private String value;
 
       private EnumDeleteStrategy(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumActionsGroupBy {
-      @SerializedName("action_brand")
-      VALUE_ACTION_BRAND("action_brand"),
-      @SerializedName("action_canvas_component_id")
-      VALUE_ACTION_CANVAS_COMPONENT_ID("action_canvas_component_id"),
-      @SerializedName("action_canvas_component_name")
-      VALUE_ACTION_CANVAS_COMPONENT_NAME("action_canvas_component_name"),
-      @SerializedName("action_carousel_card_id")
-      VALUE_ACTION_CAROUSEL_CARD_ID("action_carousel_card_id"),
-      @SerializedName("action_carousel_card_name")
-      VALUE_ACTION_CAROUSEL_CARD_NAME("action_carousel_card_name"),
-      @SerializedName("action_category")
-      VALUE_ACTION_CATEGORY("action_category"),
-      @SerializedName("action_converted_brand_tag_id")
-      VALUE_ACTION_CONVERTED_BRAND_TAG_ID("action_converted_brand_tag_id"),
-      @SerializedName("action_converted_category_tag_id")
-      VALUE_ACTION_CONVERTED_CATEGORY_TAG_ID("action_converted_category_tag_id"),
-      @SerializedName("action_converted_product_id")
-      VALUE_ACTION_CONVERTED_PRODUCT_ID("action_converted_product_id"),
-      @SerializedName("action_destination")
-      VALUE_ACTION_DESTINATION("action_destination"),
-      @SerializedName("action_device")
-      VALUE_ACTION_DEVICE("action_device"),
-      @SerializedName("action_event_channel")
-      VALUE_ACTION_EVENT_CHANNEL("action_event_channel"),
-      @SerializedName("action_target_id")
-      VALUE_ACTION_TARGET_ID("action_target_id"),
-      @SerializedName("action_type")
-      VALUE_ACTION_TYPE("action_type"),
-      @SerializedName("action_video_sound")
-      VALUE_ACTION_VIDEO_SOUND("action_video_sound"),
-      @SerializedName("action_video_type")
-      VALUE_ACTION_VIDEO_TYPE("action_video_type"),
-      @SerializedName("attribution_model_type")
-      VALUE_ATTRIBUTION_MODEL_TYPE("attribution_model_type"),
-      @SerializedName("interactive_component_sticker_id")
-      VALUE_INTERACTIVE_COMPONENT_STICKER_ID("interactive_component_sticker_id"),
-      @SerializedName("interactive_component_sticker_response")
-      VALUE_INTERACTIVE_COMPONENT_STICKER_RESPONSE("interactive_component_sticker_response"),
-      ;
-
-      private String value;
-
-      private EnumActionsGroupBy(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumBuiltinColumnSet {
-      @SerializedName("APP_ENGAGEMENT")
-      VALUE_APP_ENGAGEMENT("APP_ENGAGEMENT"),
-      @SerializedName("AUDIENCE_DIRECT")
-      VALUE_AUDIENCE_DIRECT("AUDIENCE_DIRECT"),
-      @SerializedName("BIDDING_AND_OPTIMIZATION")
-      VALUE_BIDDING_AND_OPTIMIZATION("BIDDING_AND_OPTIMIZATION"),
-      @SerializedName("CAROUSEL_ENGAGEMENT")
-      VALUE_CAROUSEL_ENGAGEMENT("CAROUSEL_ENGAGEMENT"),
-      @SerializedName("CROSS_DEVICE")
-      VALUE_CROSS_DEVICE("CROSS_DEVICE"),
-      @SerializedName("DELIVERY")
-      VALUE_DELIVERY("DELIVERY"),
-      @SerializedName("ENGAGEMENT")
-      VALUE_ENGAGEMENT("ENGAGEMENT"),
-      @SerializedName("HOUSEHOLD")
-      VALUE_HOUSEHOLD("HOUSEHOLD"),
-      @SerializedName("MESSAGING_ENGAGEMENT")
-      VALUE_MESSAGING_ENGAGEMENT("MESSAGING_ENGAGEMENT"),
-      @SerializedName("MESSENGER")
-      VALUE_MESSENGER("MESSENGER"),
-      @SerializedName("OFFLINE_CONVERSIONS")
-      VALUE_OFFLINE_CONVERSIONS("OFFLINE_CONVERSIONS"),
-      @SerializedName("PERFORMANCE")
-      VALUE_PERFORMANCE("PERFORMANCE"),
-      @SerializedName("PERFORMANCE_LEGACY")
-      VALUE_PERFORMANCE_LEGACY("PERFORMANCE_LEGACY"),
-      @SerializedName("TARGETING_AND_CREATIVE")
-      VALUE_TARGETING_AND_CREATIVE("TARGETING_AND_CREATIVE"),
-      @SerializedName("VALIDATION_VIEW")
-      VALUE_VALIDATION_VIEW("VALIDATION_VIEW"),
-      @SerializedName("VIDEO_ENGAGEMENT")
-      VALUE_VIDEO_ENGAGEMENT("VIDEO_ENGAGEMENT"),
-      ;
-
-      private String value;
-
-      private EnumBuiltinColumnSet(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumCreationSource {
-      @SerializedName("adsExcelAddin")
-      VALUE_ADSEXCELADDIN("adsExcelAddin"),
-      @SerializedName("adsManagerReporting")
-      VALUE_ADSMANAGERREPORTING("adsManagerReporting"),
-      @SerializedName("newAdsManager")
-      VALUE_NEWADSMANAGER("newAdsManager"),
-      ;
-
-      private String value;
-
-      private EnumCreationSource(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumDatePreset {
-      @SerializedName("last_14d")
-      VALUE_LAST_14D("last_14d"),
-      @SerializedName("last_28d")
-      VALUE_LAST_28D("last_28d"),
-      @SerializedName("last_30d")
-      VALUE_LAST_30D("last_30d"),
-      @SerializedName("last_3d")
-      VALUE_LAST_3D("last_3d"),
-      @SerializedName("last_7d")
-      VALUE_LAST_7D("last_7d"),
-      @SerializedName("last_90d")
-      VALUE_LAST_90D("last_90d"),
-      @SerializedName("last_month")
-      VALUE_LAST_MONTH("last_month"),
-      @SerializedName("last_quarter")
-      VALUE_LAST_QUARTER("last_quarter"),
-      @SerializedName("last_week_mon_sun")
-      VALUE_LAST_WEEK_MON_SUN("last_week_mon_sun"),
-      @SerializedName("last_week_sun_sat")
-      VALUE_LAST_WEEK_SUN_SAT("last_week_sun_sat"),
-      @SerializedName("last_year")
-      VALUE_LAST_YEAR("last_year"),
-      @SerializedName("lifetime")
-      VALUE_LIFETIME("lifetime"),
-      @SerializedName("this_month")
-      VALUE_THIS_MONTH("this_month"),
-      @SerializedName("this_quarter")
-      VALUE_THIS_QUARTER("this_quarter"),
-      @SerializedName("this_week_mon_today")
-      VALUE_THIS_WEEK_MON_TODAY("this_week_mon_today"),
-      @SerializedName("this_week_sun_today")
-      VALUE_THIS_WEEK_SUN_TODAY("this_week_sun_today"),
-      @SerializedName("this_year")
-      VALUE_THIS_YEAR("this_year"),
-      @SerializedName("today")
-      VALUE_TODAY("today"),
-      @SerializedName("yesterday")
-      VALUE_YESTERDAY("yesterday"),
-      ;
-
-      private String value;
-
-      private EnumDatePreset(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumLevel {
-      @SerializedName("account")
-      VALUE_ACCOUNT("account"),
-      @SerializedName("ad")
-      VALUE_AD("ad"),
-      @SerializedName("adgroup")
-      VALUE_ADGROUP("adgroup"),
-      @SerializedName("campaign")
-      VALUE_CAMPAIGN("campaign"),
-      @SerializedName("campaign_group")
-      VALUE_CAMPAIGN_GROUP("campaign_group"),
-      @SerializedName("politicalad")
-      VALUE_POLITICALAD("politicalad"),
-      ;
-
-      private String value;
-
-      private EnumLevel(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumScheduleFrequency {
-      @SerializedName("daily")
-      VALUE_DAILY("daily"),
-      @SerializedName("monthly")
-      VALUE_MONTHLY("monthly"),
-      @SerializedName("weekly")
-      VALUE_WEEKLY("weekly"),
-      ;
-
-      private String value;
-
-      private EnumScheduleFrequency(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumStatus {
-      @SerializedName("Active")
-      VALUE_ACTIVE("Active"),
-      @SerializedName("Deleted")
-      VALUE_DELETED("Deleted"),
-      @SerializedName("Paused")
-      VALUE_PAUSED("Paused"),
-      ;
-
-      private String value;
-
-      private EnumStatus(String value) {
         this.value = value;
       }
 

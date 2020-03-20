@@ -64,7 +64,7 @@ public class AppRequest extends APINode {
   @SerializedName("data")
   private String mData = null;
   @SerializedName("from")
-  private User mFrom = null;
+  private Object mFrom = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("message")
@@ -72,7 +72,7 @@ public class AppRequest extends APINode {
   @SerializedName("object")
   private Object mObject = null;
   @SerializedName("to")
-  private User mTo = null;
+  private Object mTo = null;
   protected static Gson gson = null;
 
   AppRequest() {
@@ -310,10 +310,7 @@ public class AppRequest extends APINode {
     return mData;
   }
 
-  public User getFieldFrom() {
-    if (mFrom != null) {
-      mFrom.context = getContext();
-    }
+  public Object getFieldFrom() {
     return mFrom;
   }
 
@@ -329,10 +326,7 @@ public class AppRequest extends APINode {
     return mObject;
   }
 
-  public User getFieldTo() {
-    if (mTo != null) {
-      mTo.context = getContext();
-    }
+  public Object getFieldTo() {
     return mTo;
   }
 
