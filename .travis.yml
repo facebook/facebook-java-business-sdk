@@ -2,9 +2,6 @@ language: java
 jdk:
 - oraclejdk8
 dist: trusty
-branches:
-  only:
-  - master
 install: mvn package
 before_deploy:
 - openssl aes-256-cbc -K $encrypted_1285e1ddfb82_key -iv $encrypted_1285e1ddfb82_iv -in keyring.gpg.enc -out keyring.gpg -d
