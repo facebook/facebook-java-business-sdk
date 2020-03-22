@@ -30,6 +30,8 @@ import java.util.List;
 import java.util.Map;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+
+import com.facebook.ads.utils.HttpMethods;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonElement;
 
@@ -159,7 +161,7 @@ public class APIContext {
         params.put("access_token", this.accessToken);
         params.put("fields", "app_id");
 
-        APIRequest.ResponseWrapper response = executor.execute("GET", apiUrl, params, this);
+        APIRequest.ResponseWrapper response = executor.execute(HttpMethods.GET, apiUrl, params, this);
         JsonParser parser = new JsonParser();
         this.appID = parser.parse(response.getBody())
           .getAsJsonObject()

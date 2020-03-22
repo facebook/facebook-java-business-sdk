@@ -31,6 +31,8 @@ import java.util.Map;
 import java.net.URL;
 import java.net.URLEncoder;
 import javax.net.ssl.HttpsURLConnection;
+
+import com.facebook.ads.utils.HttpMethods;
 import org.omg.CORBA.Request;
 import java.io.BufferedReader;
 import java.lang.reflect.Modifier;
@@ -87,12 +89,24 @@ public class APIRequest<T extends APINode> {
     return asyncExecutor;
   }
 
+  public APIRequest(APIContext context, String nodeId, String endpoint, HttpMethods method) {
+    this(context, nodeId, endpoint, method.toString(), null, null);
+  }
+
   public APIRequest(APIContext context, String nodeId, String endpoint, String method) {
     this(context, nodeId, endpoint, method, null, null);
   }
 
+  public APIRequest(APIContext context, String nodeId, String endpoint, HttpMethods method, ResponseParser<T> parser) {
+    this(context, nodeId, endpoint, method.toString(), null, parser);
+  }
+
   public APIRequest(APIContext context, String nodeId, String endpoint, String method, ResponseParser<T> parser) {
     this(context, nodeId, endpoint, method, null, parser);
+  }
+
+  public APIRequest(APIContext context, String nodeId, String endpoint, HttpMethods method, List<String> paramNames) {
+    this(context, nodeId, endpoint, method.toString(), paramNames, null);
   }
 
   public APIRequest(APIContext context, String nodeId, String endpoint, String method, List<String> paramNames) {
@@ -372,7 +386,7 @@ public class APIRequest<T extends APINode> {
     if (returnFields != null) allParams.put("fields", joinStringList(returnFields));
     info.method = this.method;
     StringBuilder relativeUrl = new StringBuilder(context.getVersion() + "/" + nodeId + endpoint);
-    if (this.method.equals("POST")) {
+    if (this.method.equals(HttpMethods.POST)) {
       info.files = new HashMap<String, File>();
       info.relativeUrl = relativeUrl.toString();
       StringBuilder body = new StringBuilder();
@@ -514,10 +528,14 @@ public class APIRequest<T extends APINode> {
   public static class DefaultRequestExecutor implements IRequestExecutor {
 
     public ResponseWrapper execute(String method, String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException {
-      if ("GET".equals(method)) return sendGet(apiUrl, allParams, context);
-      else if ("POST".equals(method)) return sendPost(apiUrl, allParams, context);
-      else if ("DELETE".equals(method)) return sendDelete(apiUrl, allParams, context);
+      if (HttpMethods.GET.equals(method)) return sendGet(apiUrl, allParams, context);
+      else if (HttpMethods.POST.equals(method)) return sendPost(apiUrl, allParams, context);
+      else if (HttpMethods.DELETE.equals(method)) return sendDelete(apiUrl, allParams, context);
       else throw new IllegalArgumentException("Unsupported http method. Currently only GET, POST, and DELETE are supported");
+    }
+
+    public ResponseWrapper execute(HttpMethods method, String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException {
+      return execute(method.toString(), apiUrl, allParams, context);
     }
 
     public ResponseWrapper sendGet(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException {
@@ -526,7 +544,7 @@ public class APIRequest<T extends APINode> {
       context.log("GET: " + url.toString());
       HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
 
-      con.setRequestMethod("GET");
+      con.setRequestMethod(HttpMethods.GET.toString());
       con.setRequestProperty("User-Agent", USER_AGENT);
       con.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
 
@@ -539,7 +557,7 @@ public class APIRequest<T extends APINode> {
       context.log("Post: " + url.toString());
       HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
 
-      con.setRequestMethod("POST");
+      con.setRequestMethod(HttpMethods.POST.toString());
       con.setRequestProperty("User-Agent", USER_AGENT);
       con.setRequestProperty("Content-Type","multipart/form-data; boundary=" + boundary);
       con.setDoOutput(true);
@@ -591,7 +609,7 @@ public class APIRequest<T extends APINode> {
       context.log("Delete: " + url.toString());
       HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
 
-      con.setRequestMethod("DELETE");
+      con.setRequestMethod(HttpMethods.DELETE.toString());
       con.setRequestProperty("User-Agent", USER_AGENT);
 
       return readResponse(con);
@@ -612,9 +630,9 @@ public class APIRequest<T extends APINode> {
     }
 
     public ListenableFuture<ResponseWrapper> execute(String method, String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException {
-      if ("GET".equals(method)) return sendGet(apiUrl, allParams, context);
-      else if ("POST".equals(method)) return sendPost(apiUrl, allParams, context);
-      else if ("DELETE".equals(method)) return sendDelete(apiUrl, allParams, context);
+      if (HttpMethods.GET.equals(method)) return sendGet(apiUrl, allParams, context);
+      else if (HttpMethods.POST.equals(method)) return sendPost(apiUrl, allParams, context);
+      else if (HttpMethods.DELETE.equals(method)) return sendDelete(apiUrl, allParams, context);
       else throw new IllegalArgumentException("Unsupported http method. Currently only GET, POST, and DELETE are supported");
     }
 

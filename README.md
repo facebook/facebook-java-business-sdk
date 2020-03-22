@@ -305,7 +305,7 @@ This situation can occasionally happen if new fields are added to server respons
 Most of Marketing API can be found in SDK classes. If you don't find the one you want to access, it is possible to construct an Ad-hoc APIRequest:
 
 ```java
-    APIRequest<AdAccount> request = new APIRequest<AdAccount>(context, "me", "/adaccounts", "GET", AdAccount.getParser());
+    APIRequest<AdAccount> request = new APIRequest<AdAccount>(context, "me", "/adaccounts", HttpMethods.GET, AdAccount.getParser());
     APINodeList<AdAccount> accounts = (APINodeList<AdAccount>)(request.execute());
 ```
 

@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.facebook.ads.utils.HttpMethods;
 import com.google.common.base.Function;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -114,7 +115,7 @@ public class URL extends APINode {
 
   public static APINodeList<URL> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return (APINodeList<URL>)(
-      new APIRequest<URL>(context, "", "/", "GET", URL.getParser())
+      new APIRequest<URL>(context, "", "/", HttpMethods.GET, URL.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
@@ -123,7 +124,7 @@ public class URL extends APINode {
 
   public static ListenableFuture<APINodeList<URL>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", URL.getParser())
+      new APIRequest(context, "", "/", HttpMethods.GET, URL.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -380,7 +381,7 @@ public class URL extends APINode {
     };
 
     public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+      super(context, nodeId, "/", HttpMethods.GET, Arrays.asList(PARAMS));
     }
 
     @Override
@@ -538,7 +539,7 @@ public class URL extends APINode {
     };
 
     public APIRequestUpdate(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
+      super(context, nodeId, "/", HttpMethods.POST, Arrays.asList(PARAMS));
     }
 
     @Override
