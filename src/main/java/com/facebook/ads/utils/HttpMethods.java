@@ -1,7 +1,7 @@
 package com.facebook.ads.utils;
 
 /**
- * HTTP Request Methods collections
+ * HTTP Request Methods
  */
 public enum HttpMethods {
     GET,

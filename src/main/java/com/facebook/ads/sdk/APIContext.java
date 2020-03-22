@@ -30,10 +30,8 @@ import java.util.List;
 import java.util.Map;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-
 import com.google.gson.JsonParser;
 import com.google.gson.JsonElement;
-
 import com.facebook.ads.utils.HttpMethods;
 
 public class APIContext {
