@@ -31,7 +31,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.facebook.ads.utils.HttpMethods;
 import com.google.common.base.Function;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -46,6 +45,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
+import com.facebook.ads.utils.HttpMethods;
 
 /**
  * This class is auto-generated.

@@ -32,7 +32,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import javax.net.ssl.HttpsURLConnection;
 
-import com.facebook.ads.utils.HttpMethods;
 import org.omg.CORBA.Request;
 import java.io.BufferedReader;
 import java.lang.reflect.Modifier;
@@ -51,6 +50,8 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import com.facebook.ads.utils.HttpMethods;
 
 public class APIRequest<T extends APINode> {
 
@@ -535,7 +536,16 @@ public class APIRequest<T extends APINode> {
     }
 
     public ResponseWrapper execute(HttpMethods method, String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException {
-      return execute(method.toString(), apiUrl, allParams, context);
+      switch (method) {
+        case GET:
+          return sendGet(apiUrl, allParams, context);
+        case POST:
+          return sendPost(apiUrl, allParams, context);
+        case DELETE:
+          return sendDelete(apiUrl, allParams, context);
+        default:
+          throw new IllegalArgumentException("Unsupported http method. Currently only GET, POST, and DELETE are supported");
+      }
     }
 
     public ResponseWrapper sendGet(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException {

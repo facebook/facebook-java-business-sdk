@@ -31,9 +31,10 @@ import java.util.Map;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
-import com.facebook.ads.utils.HttpMethods;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonElement;
+
+import com.facebook.ads.utils.HttpMethods;
 
 public class APIContext {
   public static final String DEFAULT_API_BASE = APIConfig.DEFAULT_API_BASE;
