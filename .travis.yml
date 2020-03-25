@@ -10,6 +10,7 @@ before_deploy:
 deploy:
   provider: script
   script:
+  - echo 'testing'
   - cp .travis.settings.xml $HOME/.m2/settings.xml 
   - mvn -Djava.net.preferIPv6Addresses=true clean deploy
   on:
