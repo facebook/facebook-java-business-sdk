@@ -9,6 +9,7 @@ before_deploy:
 - gpg --import keyring.gpg
 deploy:
   provider: script
+  skip_cleanup: true
   script:
   - echo 'testing'
   - cp .travis.settings.xml $HOME/.m2/settings.xml 
