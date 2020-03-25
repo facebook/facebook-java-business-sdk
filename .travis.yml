@@ -5,12 +5,12 @@ dist: trusty
 install: mvn package
 before_deploy:
 - openssl aes-256-cbc -K $encrypted_1285e1ddfb82_key -iv $encrypted_1285e1ddfb82_iv -in keyring.gpg.enc -out keyring.gpg -d
+- gpg --import keyring.gpg
 deploy:
   provider: script
+  skip_cleanup: true
   script:
-  - gpg --fast-import keyring.gpg
-  - cp .travis.settings.xml $HOME/.m2/settings.xml 
-  - mvn -Djava.net.preferIPv6Addresses=true clean deploy
+  - mvn -Djava.net.preferIPv6Addresses=true clean deploy --settings=".travis.settings.xml"
   on:
     tags: true
 after_deploy:
