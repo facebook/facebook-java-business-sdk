@@ -13,8 +13,7 @@ deploy:
   script:
   - mvn -Djava.net.preferIPv6Addresses=true clean deploy --settings=".travis.settings.xml"
   on:
-    # tags: true
-    all_branches: true
+    tags: true
 after_deploy:
   rm keyring.gpg
 env:
