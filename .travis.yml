@@ -11,7 +11,6 @@ deploy:
   provider: script
   skip_cleanup: true
   script:
-  - echo 'testing'
   - mvn -Djava.net.preferIPv6Addresses=true clean deploy --settings=".travis.settings.xml"
   on:
     # tags: true
