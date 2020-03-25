@@ -8,11 +8,12 @@ before_deploy:
 deploy:
   provider: script
   script:
-  - gpg --fast-import keyring.gpg
+  - gpg --import keyring.gpg
   - cp .travis.settings.xml $HOME/.m2/settings.xml 
   - mvn -Djava.net.preferIPv6Addresses=true clean deploy
   on:
-    tags: true
+    # tags: true
+    all_branches: true
 after_deploy:
   rm keyring.gpg
 env:
