@@ -5,7 +5,6 @@ dist: trusty
 install: mvn package
 before_deploy:
 - openssl aes-256-cbc -K $encrypted_1285e1ddfb82_key -iv $encrypted_1285e1ddfb82_iv -in keyring.gpg.enc -out keyring.gpg -d
-- ls keyring.gpg
 - gpg --import keyring.gpg
 deploy:
   provider: script
