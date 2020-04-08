@@ -5064,6 +5064,7 @@ public class Application extends APINode {
       "interested_count",
       "is_canceled",
       "is_draft",
+      "is_online",
       "is_page_owned",
       "maybe_count",
       "name",
@@ -5285,6 +5286,13 @@ public class Application extends APINode {
     }
     public APIRequestGetEvents requestIsDraftField (boolean value) {
       this.requestField("is_draft", value);
+      return this;
+    }
+    public APIRequestGetEvents requestIsOnlineField () {
+      return this.requestIsOnlineField(true);
+    }
+    public APIRequestGetEvents requestIsOnlineField (boolean value) {
+      this.requestField("is_online", value);
       return this;
     }
     public APIRequestGetEvents requestIsPageOwnedField () {

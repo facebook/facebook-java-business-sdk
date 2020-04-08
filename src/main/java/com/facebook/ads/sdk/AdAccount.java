@@ -582,14 +582,6 @@ public class AdAccount extends APINode {
     return new APIRequestCreateAudienceReplace(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateBatchReplace createBatchReplace() {
-    return new APIRequestCreateBatchReplace(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateBatchUpload createBatchUpload() {
-    return new APIRequestCreateBatchUpload(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestCreateBlockListDraft createBlockListDraft() {
     return new APIRequestCreateBlockListDraft(this.getPrefixedId().toString(), context);
   }
@@ -2686,6 +2678,7 @@ public class AdAccount extends APINode {
       "image_url",
       "instagram_actor_id",
       "instagram_permalink_url",
+      "instant_checkout_setting",
       "interactive_components_spec",
       "is_dco_internal",
       "link_og_id",
@@ -2907,6 +2900,15 @@ public class AdAccount extends APINode {
 
     public APIRequestCreateAdCreative setInstagramPermalinkUrl (String instagramPermalinkUrl) {
       this.setParam("instagram_permalink_url", instagramPermalinkUrl);
+      return this;
+    }
+
+    public APIRequestCreateAdCreative setInstantCheckoutSetting (AdCreative.EnumInstantCheckoutSetting instantCheckoutSetting) {
+      this.setParam("instant_checkout_setting", instantCheckoutSetting);
+      return this;
+    }
+    public APIRequestCreateAdCreative setInstantCheckoutSetting (String instantCheckoutSetting) {
+      this.setParam("instant_checkout_setting", instantCheckoutSetting);
       return this;
     }
 
@@ -6071,7 +6073,7 @@ public class AdAccount extends APINode {
     }
     public static final String[] PARAMS = {
       "page_id",
-      "show_ad_limit_by_actor",
+      "show_breakdown_by_actor",
     };
 
     public static final String[] FIELDS = {
@@ -6142,12 +6144,12 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestGetAdsVolume setShowAdLimitByActor (Boolean showAdLimitByActor) {
-      this.setParam("show_ad_limit_by_actor", showAdLimitByActor);
+    public APIRequestGetAdsVolume setShowBreakdownByActor (Boolean showBreakdownByActor) {
+      this.setParam("show_breakdown_by_actor", showBreakdownByActor);
       return this;
     }
-    public APIRequestGetAdsVolume setShowAdLimitByActor (String showAdLimitByActor) {
-      this.setParam("show_ad_limit_by_actor", showAdLimitByActor);
+    public APIRequestGetAdsVolume setShowBreakdownByActor (String showBreakdownByActor) {
+      this.setParam("show_breakdown_by_actor", showBreakdownByActor);
       return this;
     }
 
@@ -13885,234 +13887,6 @@ public class AdAccount extends APINode {
 
   }
 
-  public static class APIRequestCreateBatchReplace extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "payload",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateBatchReplace.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateBatchReplace(String nodeId, APIContext context) {
-      super(context, nodeId, "/batchreplace", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateBatchReplace setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateBatchReplace setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateBatchReplace setPayload (List<String> payload) {
-      this.setParam("payload", payload);
-      return this;
-    }
-    public APIRequestCreateBatchReplace setPayload (String payload) {
-      this.setParam("payload", payload);
-      return this;
-    }
-
-    public APIRequestCreateBatchReplace requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateBatchReplace requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateBatchReplace requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateBatchReplace requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateBatchReplace requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateBatchReplace requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateBatchUpload extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "payload",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateBatchUpload.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateBatchUpload(String nodeId, APIContext context) {
-      super(context, nodeId, "/batchupload", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateBatchUpload setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateBatchUpload setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateBatchUpload setPayload (List<String> payload) {
-      this.setParam("payload", payload);
-      return this;
-    }
-    public APIRequestCreateBatchUpload setPayload (String payload) {
-      this.setParam("payload", payload);
-      return this;
-    }
-
-    public APIRequestCreateBatchUpload requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateBatchUpload requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateBatchUpload requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateBatchUpload requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateBatchUpload requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateBatchUpload requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestCreateBlockListDraft extends APIRequest<AdAccount> {
 
     AdAccount lastResponse = null;
@@ -20275,6 +20049,7 @@ public class AdAccount extends APINode {
       "current_location",
       "description",
       "description_html",
+      "differently_open_offerings",
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
@@ -20689,6 +20464,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetPromotePages requestDescriptionHtmlField (boolean value) {
       this.requestField("description_html", value);
+      return this;
+    }
+    public APIRequestGetPromotePages requestDifferentlyOpenOfferingsField () {
+      return this.requestDifferentlyOpenOfferingsField(true);
+    }
+    public APIRequestGetPromotePages requestDifferentlyOpenOfferingsField (boolean value) {
+      this.requestField("differently_open_offerings", value);
       return this;
     }
     public APIRequestGetPromotePages requestDirectedByField () {
@@ -22007,7 +21789,6 @@ public class AdAccount extends APINode {
       "timezone_id",
       "timezone_name",
       "topline_id",
-      "tv_viewer_cluster_map",
       "video_view_length_constraint",
       "viewtag",
     };
@@ -22652,13 +22433,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetReachFrequencyPredictions requestToplineIdField (boolean value) {
       this.requestField("topline_id", value);
-      return this;
-    }
-    public APIRequestGetReachFrequencyPredictions requestTvViewerClusterMapField () {
-      return this.requestTvViewerClusterMapField(true);
-    }
-    public APIRequestGetReachFrequencyPredictions requestTvViewerClusterMapField (boolean value) {
-      this.requestField("tv_viewer_cluster_map", value);
       return this;
     }
     public APIRequestGetReachFrequencyPredictions requestVideoViewLengthConstraintField () {

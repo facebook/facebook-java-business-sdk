@@ -1160,6 +1160,8 @@ public class AdCampaignActivity extends APINode {
   }
 
   public static enum EnumBidStrategyNew {
+      @SerializedName("COST_CAP")
+      VALUE_COST_CAP("COST_CAP"),
       @SerializedName("LOWEST_COST_WITHOUT_CAP")
       VALUE_LOWEST_COST_WITHOUT_CAP("LOWEST_COST_WITHOUT_CAP"),
       @SerializedName("LOWEST_COST_WITH_BID_CAP")
@@ -1181,6 +1183,8 @@ public class AdCampaignActivity extends APINode {
   }
 
   public static enum EnumBidStrategyOld {
+      @SerializedName("COST_CAP")
+      VALUE_COST_CAP("COST_CAP"),
       @SerializedName("LOWEST_COST_WITHOUT_CAP")
       VALUE_LOWEST_COST_WITHOUT_CAP("LOWEST_COST_WITHOUT_CAP"),
       @SerializedName("LOWEST_COST_WITH_BID_CAP")

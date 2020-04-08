@@ -79,8 +79,6 @@ public class VideoCopyright extends APINode {
   private Boolean mReferenceFileDisabled = null;
   @SerializedName("reference_file_disabled_by_ops")
   private Boolean mReferenceFileDisabledByOps = null;
-  @SerializedName("reference_file_expired")
-  private Boolean mReferenceFileExpired = null;
   @SerializedName("reference_owner_id")
   private String mReferenceOwnerId = null;
   @SerializedName("rule_ids")
@@ -358,10 +356,6 @@ public class VideoCopyright extends APINode {
     return mReferenceFileDisabledByOps;
   }
 
-  public Boolean getFieldReferenceFileExpired() {
-    return mReferenceFileExpired;
-  }
-
   public String getFieldReferenceOwnerId() {
     return mReferenceOwnerId;
   }
@@ -403,7 +397,6 @@ public class VideoCopyright extends APINode {
       "reference_file",
       "reference_file_disabled",
       "reference_file_disabled_by_ops",
-      "reference_file_expired",
       "reference_owner_id",
       "rule_ids",
       "tags",
@@ -581,13 +574,6 @@ public class VideoCopyright extends APINode {
     }
     public APIRequestGet requestReferenceFileDisabledByOpsField (boolean value) {
       this.requestField("reference_file_disabled_by_ops", value);
-      return this;
-    }
-    public APIRequestGet requestReferenceFileExpiredField () {
-      return this.requestReferenceFileExpiredField(true);
-    }
-    public APIRequestGet requestReferenceFileExpiredField (boolean value) {
-      this.requestField("reference_file_expired", value);
       return this;
     }
     public APIRequestGet requestReferenceOwnerIdField () {
@@ -895,7 +881,6 @@ public class VideoCopyright extends APINode {
     this.mReferenceFile = instance.mReferenceFile;
     this.mReferenceFileDisabled = instance.mReferenceFileDisabled;
     this.mReferenceFileDisabledByOps = instance.mReferenceFileDisabledByOps;
-    this.mReferenceFileExpired = instance.mReferenceFileExpired;
     this.mReferenceOwnerId = instance.mReferenceOwnerId;
     this.mRuleIds = instance.mRuleIds;
     this.mTags = instance.mTags;

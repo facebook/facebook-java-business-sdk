@@ -1150,6 +1150,7 @@ public class User extends APINode {
       "current_location",
       "description",
       "description_html",
+      "differently_open_offerings",
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
@@ -1582,6 +1583,13 @@ public class User extends APINode {
     }
     public APIRequestGetAccounts requestDescriptionHtmlField (boolean value) {
       this.requestField("description_html", value);
+      return this;
+    }
+    public APIRequestGetAccounts requestDifferentlyOpenOfferingsField () {
+      return this.requestDifferentlyOpenOfferingsField(true);
+    }
+    public APIRequestGetAccounts requestDifferentlyOpenOfferingsField (boolean value) {
+      this.requestField("differently_open_offerings", value);
       return this;
     }
     public APIRequestGetAccounts requestDirectedByField () {
@@ -5036,6 +5044,7 @@ public class User extends APINode {
       "current_location",
       "description",
       "description_html",
+      "differently_open_offerings",
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
@@ -5450,6 +5459,13 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedPages requestDescriptionHtmlField (boolean value) {
       this.requestField("description_html", value);
+      return this;
+    }
+    public APIRequestGetAssignedPages requestDifferentlyOpenOfferingsField () {
+      return this.requestDifferentlyOpenOfferingsField(true);
+    }
+    public APIRequestGetAssignedPages requestDifferentlyOpenOfferingsField (boolean value) {
+      this.requestField("differently_open_offerings", value);
       return this;
     }
     public APIRequestGetAssignedPages requestDirectedByField () {
@@ -6453,6 +6469,7 @@ public class User extends APINode {
       "current_location",
       "description",
       "description_html",
+      "differently_open_offerings",
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
@@ -6872,6 +6889,13 @@ public class User extends APINode {
     }
     public APIRequestGetBooks requestDescriptionHtmlField (boolean value) {
       this.requestField("description_html", value);
+      return this;
+    }
+    public APIRequestGetBooks requestDifferentlyOpenOfferingsField () {
+      return this.requestDifferentlyOpenOfferingsField(true);
+    }
+    public APIRequestGetBooks requestDifferentlyOpenOfferingsField (boolean value) {
+      this.requestField("differently_open_offerings", value);
       return this;
     }
     public APIRequestGetBooks requestDirectedByField () {
@@ -8769,6 +8793,7 @@ public class User extends APINode {
       "interested_count",
       "is_canceled",
       "is_draft",
+      "is_online",
       "is_page_owned",
       "maybe_count",
       "name",
@@ -8990,6 +9015,13 @@ public class User extends APINode {
     }
     public APIRequestGetEvents requestIsDraftField (boolean value) {
       this.requestField("is_draft", value);
+      return this;
+    }
+    public APIRequestGetEvents requestIsOnlineField () {
+      return this.requestIsOnlineField(true);
+    }
+    public APIRequestGetEvents requestIsOnlineField (boolean value) {
+      this.requestField("is_online", value);
       return this;
     }
     public APIRequestGetEvents requestIsPageOwnedField () {
@@ -11157,6 +11189,7 @@ public class User extends APINode {
       "current_location",
       "description",
       "description_html",
+      "differently_open_offerings",
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
@@ -11576,6 +11609,13 @@ public class User extends APINode {
     }
     public APIRequestGetGames requestDescriptionHtmlField (boolean value) {
       this.requestField("description_html", value);
+      return this;
+    }
+    public APIRequestGetGames requestDifferentlyOpenOfferingsField () {
+      return this.requestDifferentlyOpenOfferingsField(true);
+    }
+    public APIRequestGetGames requestDifferentlyOpenOfferingsField (boolean value) {
+      this.requestField("differently_open_offerings", value);
       return this;
     }
     public APIRequestGetGames requestDirectedByField () {
@@ -13513,6 +13553,7 @@ public class User extends APINode {
       "current_location",
       "description",
       "description_html",
+      "differently_open_offerings",
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
@@ -13932,6 +13973,13 @@ public class User extends APINode {
     }
     public APIRequestGetLikes requestDescriptionHtmlField (boolean value) {
       this.requestField("description_html", value);
+      return this;
+    }
+    public APIRequestGetLikes requestDifferentlyOpenOfferingsField () {
+      return this.requestDifferentlyOpenOfferingsField(true);
+    }
+    public APIRequestGetLikes requestDifferentlyOpenOfferingsField (boolean value) {
+      this.requestField("differently_open_offerings", value);
       return this;
     }
     public APIRequestGetLikes requestDirectedByField () {
@@ -15699,6 +15747,7 @@ public class User extends APINode {
       "current_location",
       "description",
       "description_html",
+      "differently_open_offerings",
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
@@ -16118,6 +16167,13 @@ public class User extends APINode {
     }
     public APIRequestGetMovies requestDescriptionHtmlField (boolean value) {
       this.requestField("description_html", value);
+      return this;
+    }
+    public APIRequestGetMovies requestDifferentlyOpenOfferingsField () {
+      return this.requestDifferentlyOpenOfferingsField(true);
+    }
+    public APIRequestGetMovies requestDifferentlyOpenOfferingsField (boolean value) {
+      this.requestField("differently_open_offerings", value);
       return this;
     }
     public APIRequestGetMovies requestDirectedByField () {
@@ -16921,6 +16977,7 @@ public class User extends APINode {
       "current_location",
       "description",
       "description_html",
+      "differently_open_offerings",
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
@@ -17340,6 +17397,13 @@ public class User extends APINode {
     }
     public APIRequestGetMusic requestDescriptionHtmlField (boolean value) {
       this.requestField("description_html", value);
+      return this;
+    }
+    public APIRequestGetMusic requestDifferentlyOpenOfferingsField () {
+      return this.requestDifferentlyOpenOfferingsField(true);
+    }
+    public APIRequestGetMusic requestDifferentlyOpenOfferingsField (boolean value) {
+      this.requestField("differently_open_offerings", value);
       return this;
     }
     public APIRequestGetMusic requestDirectedByField () {
@@ -20847,6 +20911,7 @@ public class User extends APINode {
       "current_location",
       "description",
       "description_html",
+      "differently_open_offerings",
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
@@ -21266,6 +21331,13 @@ public class User extends APINode {
     }
     public APIRequestGetTelevision requestDescriptionHtmlField (boolean value) {
       this.requestField("description_html", value);
+      return this;
+    }
+    public APIRequestGetTelevision requestDifferentlyOpenOfferingsField () {
+      return this.requestDifferentlyOpenOfferingsField(true);
+    }
+    public APIRequestGetTelevision requestDifferentlyOpenOfferingsField (boolean value) {
+      this.requestField("differently_open_offerings", value);
       return this;
     }
     public APIRequestGetTelevision requestDirectedByField () {

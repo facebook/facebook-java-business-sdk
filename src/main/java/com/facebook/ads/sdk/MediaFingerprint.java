@@ -606,27 +606,6 @@ public class MediaFingerprint extends APINode {
       }
   }
 
-  public static enum EnumFingerprintValidity {
-      @SerializedName("EXPIRED")
-      VALUE_EXPIRED("EXPIRED"),
-      @SerializedName("EXPIRING")
-      VALUE_EXPIRING("EXPIRING"),
-      @SerializedName("VALID")
-      VALUE_VALID("VALID"),
-      ;
-
-      private String value;
-
-      private EnumFingerprintValidity(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {

@@ -394,6 +394,7 @@ public class EventTour extends APINode {
       "interested_count",
       "is_canceled",
       "is_draft",
+      "is_online",
       "is_page_owned",
       "maybe_count",
       "name",
@@ -599,6 +600,13 @@ public class EventTour extends APINode {
       this.requestField("is_draft", value);
       return this;
     }
+    public APIRequestGetEvents requestIsOnlineField () {
+      return this.requestIsOnlineField(true);
+    }
+    public APIRequestGetEvents requestIsOnlineField (boolean value) {
+      this.requestField("is_online", value);
+      return this;
+    }
     public APIRequestGetEvents requestIsPageOwnedField () {
       return this.requestIsPageOwnedField(true);
     }
@@ -755,6 +763,7 @@ public class EventTour extends APINode {
       "current_location",
       "description",
       "description_html",
+      "differently_open_offerings",
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
@@ -1169,6 +1178,13 @@ public class EventTour extends APINode {
     }
     public APIRequestGetPages requestDescriptionHtmlField (boolean value) {
       this.requestField("description_html", value);
+      return this;
+    }
+    public APIRequestGetPages requestDifferentlyOpenOfferingsField () {
+      return this.requestDifferentlyOpenOfferingsField(true);
+    }
+    public APIRequestGetPages requestDifferentlyOpenOfferingsField (boolean value) {
+      this.requestField("differently_open_offerings", value);
       return this;
     }
     public APIRequestGetPages requestDirectedByField () {

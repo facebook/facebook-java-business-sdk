@@ -2929,6 +2929,7 @@ public class PagePost extends APINode {
       "current_location",
       "description",
       "description_html",
+      "differently_open_offerings",
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
@@ -3343,6 +3344,13 @@ public class PagePost extends APINode {
     }
     public APIRequestGetSponsorTags requestDescriptionHtmlField (boolean value) {
       this.requestField("description_html", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestDifferentlyOpenOfferingsField () {
+      return this.requestDifferentlyOpenOfferingsField(true);
+    }
+    public APIRequestGetSponsorTags requestDifferentlyOpenOfferingsField (boolean value) {
+      this.requestField("differently_open_offerings", value);
       return this;
     }
     public APIRequestGetSponsorTags requestDirectedByField () {
@@ -5287,6 +5295,23 @@ public class PagePost extends APINode {
 
   }
 
+  public static enum EnumWith {
+      @SerializedName("LOCATION")
+      VALUE_LOCATION("LOCATION"),
+      ;
+
+      private String value;
+
+      private EnumWith(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumBackdatedTimeGranularity {
       @SerializedName("day")
       VALUE_DAY("day"),
@@ -5305,176 +5330,6 @@ public class PagePost extends APINode {
       private String value;
 
       private EnumBackdatedTimeGranularity(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumCheckinEntryPoint {
-      @SerializedName("BRANDING_CHECKIN")
-      VALUE_BRANDING_CHECKIN("BRANDING_CHECKIN"),
-      @SerializedName("BRANDING_OTHER")
-      VALUE_BRANDING_OTHER("BRANDING_OTHER"),
-      @SerializedName("BRANDING_PHOTO")
-      VALUE_BRANDING_PHOTO("BRANDING_PHOTO"),
-      @SerializedName("BRANDING_STATUS")
-      VALUE_BRANDING_STATUS("BRANDING_STATUS"),
-      ;
-
-      private String value;
-
-      private EnumCheckinEntryPoint(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumFormatting {
-      @SerializedName("MARKDOWN")
-      VALUE_MARKDOWN("MARKDOWN"),
-      @SerializedName("PLAINTEXT")
-      VALUE_PLAINTEXT("PLAINTEXT"),
-      ;
-
-      private String value;
-
-      private EnumFormatting(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumPlaceAttachmentSetting {
-      @SerializedName("1")
-      VALUE_1("1"),
-      @SerializedName("2")
-      VALUE_2("2"),
-      ;
-
-      private String value;
-
-      private EnumPlaceAttachmentSetting(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumPostSurfacesBlacklist {
-      @SerializedName("1")
-      VALUE_1("1"),
-      @SerializedName("2")
-      VALUE_2("2"),
-      @SerializedName("3")
-      VALUE_3("3"),
-      @SerializedName("4")
-      VALUE_4("4"),
-      @SerializedName("5")
-      VALUE_5("5"),
-      ;
-
-      private String value;
-
-      private EnumPostSurfacesBlacklist(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumPostingToRedspace {
-      @SerializedName("disabled")
-      VALUE_DISABLED("disabled"),
-      @SerializedName("enabled")
-      VALUE_ENABLED("enabled"),
-      ;
-
-      private String value;
-
-      private EnumPostingToRedspace(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumTargetSurface {
-      @SerializedName("STORY")
-      VALUE_STORY("STORY"),
-      @SerializedName("TIMELINE")
-      VALUE_TIMELINE("TIMELINE"),
-      ;
-
-      private String value;
-
-      private EnumTargetSurface(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumUnpublishedContentType {
-      @SerializedName("ADS_POST")
-      VALUE_ADS_POST("ADS_POST"),
-      @SerializedName("DRAFT")
-      VALUE_DRAFT("DRAFT"),
-      @SerializedName("INLINE_CREATED")
-      VALUE_INLINE_CREATED("INLINE_CREATED"),
-      @SerializedName("PUBLISHED")
-      VALUE_PUBLISHED("PUBLISHED"),
-      @SerializedName("REVIEWABLE_BRANDED_CONTENT")
-      VALUE_REVIEWABLE_BRANDED_CONTENT("REVIEWABLE_BRANDED_CONTENT"),
-      @SerializedName("SCHEDULED")
-      VALUE_SCHEDULED("SCHEDULED"),
-      @SerializedName("SCHEDULED_RECURRING")
-      VALUE_SCHEDULED_RECURRING("SCHEDULED_RECURRING"),
-      ;
-
-      private String value;
-
-      private EnumUnpublishedContentType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumWith {
-      @SerializedName("LOCATION")
-      VALUE_LOCATION("LOCATION"),
-      ;
-
-      private String value;
-
-      private EnumWith(String value) {
         this.value = value;
       }
 

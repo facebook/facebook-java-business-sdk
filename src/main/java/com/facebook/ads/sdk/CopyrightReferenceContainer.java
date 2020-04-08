@@ -63,8 +63,6 @@ public class CopyrightReferenceContainer extends APINode {
   private String mDownloadHdUrl = null;
   @SerializedName("duration_in_sec")
   private Double mDurationInSec = null;
-  @SerializedName("fingerprint_validity")
-  private String mFingerprintValidity = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("iswc")
@@ -268,15 +266,6 @@ public class CopyrightReferenceContainer extends APINode {
     return this;
   }
 
-  public String getFieldFingerprintValidity() {
-    return mFingerprintValidity;
-  }
-
-  public CopyrightReferenceContainer setFieldFingerprintValidity(String value) {
-    this.mFingerprintValidity = value;
-    return this;
-  }
-
   public String getFieldId() {
     return mId;
   }
@@ -370,7 +359,6 @@ public class CopyrightReferenceContainer extends APINode {
     this.mCopyrightCreationTime = instance.mCopyrightCreationTime;
     this.mDownloadHdUrl = instance.mDownloadHdUrl;
     this.mDurationInSec = instance.mDurationInSec;
-    this.mFingerprintValidity = instance.mFingerprintValidity;
     this.mId = instance.mId;
     this.mIswc = instance.mIswc;
     this.mMetadata = instance.mMetadata;

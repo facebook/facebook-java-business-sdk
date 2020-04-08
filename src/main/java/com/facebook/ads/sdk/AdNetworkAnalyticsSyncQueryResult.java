@@ -274,6 +274,10 @@ public class AdNetworkAnalyticsSyncQueryResult extends APINode {
       VALUE_FAIL_REASON("FAIL_REASON"),
       @SerializedName("GENDER")
       VALUE_GENDER("GENDER"),
+      @SerializedName("INSTANT_ARTICLE_ID")
+      VALUE_INSTANT_ARTICLE_ID("INSTANT_ARTICLE_ID"),
+      @SerializedName("INSTANT_ARTICLE_PAGE_ID")
+      VALUE_INSTANT_ARTICLE_PAGE_ID("INSTANT_ARTICLE_PAGE_ID"),
       @SerializedName("PLACEMENT")
       VALUE_PLACEMENT("PLACEMENT"),
       @SerializedName("PLACEMENT_NAME")

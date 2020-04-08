@@ -268,6 +268,8 @@ public class ContentDeliveryReport extends APINode {
       VALUE_AUDIENCE_NETWORK("AUDIENCE_NETWORK"),
       @SerializedName("FACEBOOK")
       VALUE_FACEBOOK("FACEBOOK"),
+      @SerializedName("HIDDEN_AAA")
+      VALUE_HIDDEN_AAA("HIDDEN_AAA"),
       @SerializedName("INSTAGRAM")
       VALUE_INSTAGRAM("INSTAGRAM"),
       @SerializedName("MESSENGER")
@@ -303,6 +305,8 @@ public class ContentDeliveryReport extends APINode {
       VALUE_FEED("FEED"),
       @SerializedName("GROUPS")
       VALUE_GROUPS("GROUPS"),
+      @SerializedName("HIDDEN_AAA")
+      VALUE_HIDDEN_AAA("HIDDEN_AAA"),
       @SerializedName("INSTAGRAM_EXPLORE")
       VALUE_INSTAGRAM_EXPLORE("INSTAGRAM_EXPLORE"),
       @SerializedName("INSTAGRAM_IGTV")
@@ -313,6 +317,8 @@ public class ContentDeliveryReport extends APINode {
       VALUE_INSTANT_ARTICLE("INSTANT_ARTICLE"),
       @SerializedName("INSTREAM_VIDEO")
       VALUE_INSTREAM_VIDEO("INSTREAM_VIDEO"),
+      @SerializedName("JOBS_BROWSER")
+      VALUE_JOBS_BROWSER("JOBS_BROWSER"),
       @SerializedName("MARKETPLACE")
       VALUE_MARKETPLACE("MARKETPLACE"),
       @SerializedName("MESSENGER_INBOX")

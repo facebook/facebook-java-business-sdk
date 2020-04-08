@@ -213,8 +213,6 @@ public class ReachFrequencyPrediction extends APINode {
   private String mTimezoneName = null;
   @SerializedName("topline_id")
   private Long mToplineId = null;
-  @SerializedName("tv_viewer_cluster_map")
-  private Map<Long, Object> mTvViewerClusterMap = null;
   @SerializedName("video_view_length_constraint")
   private Long mVideoViewLengthConstraint = null;
   @SerializedName("viewtag")
@@ -749,10 +747,6 @@ public class ReachFrequencyPrediction extends APINode {
     return mToplineId;
   }
 
-  public Map<Long, Object> getFieldTvViewerClusterMap() {
-    return mTvViewerClusterMap;
-  }
-
   public Long getFieldVideoViewLengthConstraint() {
     return mVideoViewLengthConstraint;
   }
@@ -853,7 +847,6 @@ public class ReachFrequencyPrediction extends APINode {
       "timezone_id",
       "timezone_name",
       "topline_id",
-      "tv_viewer_cluster_map",
       "video_view_length_constraint",
       "viewtag",
     };
@@ -1500,13 +1493,6 @@ public class ReachFrequencyPrediction extends APINode {
       this.requestField("topline_id", value);
       return this;
     }
-    public APIRequestGet requestTvViewerClusterMapField () {
-      return this.requestTvViewerClusterMapField(true);
-    }
-    public APIRequestGet requestTvViewerClusterMapField (boolean value) {
-      this.requestField("tv_viewer_cluster_map", value);
-      return this;
-    }
     public APIRequestGet requestVideoViewLengthConstraintField () {
       return this.requestVideoViewLengthConstraintField(true);
     }
@@ -1710,7 +1696,6 @@ public class ReachFrequencyPrediction extends APINode {
     this.mTimezoneId = instance.mTimezoneId;
     this.mTimezoneName = instance.mTimezoneName;
     this.mToplineId = instance.mToplineId;
-    this.mTvViewerClusterMap = instance.mTvViewerClusterMap;
     this.mVideoViewLengthConstraint = instance.mVideoViewLengthConstraint;
     this.mViewtag = instance.mViewtag;
     this.context = instance.context;

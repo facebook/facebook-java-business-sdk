@@ -2159,6 +2159,7 @@ public class Photo extends APINode {
       "current_location",
       "description",
       "description_html",
+      "differently_open_offerings",
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
@@ -2573,6 +2574,13 @@ public class Photo extends APINode {
     }
     public APIRequestGetSponsorTags requestDescriptionHtmlField (boolean value) {
       this.requestField("description_html", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestDifferentlyOpenOfferingsField () {
+      return this.requestDifferentlyOpenOfferingsField(true);
+    }
+    public APIRequestGetSponsorTags requestDifferentlyOpenOfferingsField (boolean value) {
+      this.requestField("differently_open_offerings", value);
       return this;
     }
     public APIRequestGetSponsorTags requestDirectedByField () {

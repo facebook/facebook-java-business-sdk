@@ -117,6 +117,8 @@ public class Page extends APINode {
   private String mDescription = null;
   @SerializedName("description_html")
   private String mDescriptionHtml = null;
+  @SerializedName("differently_open_offerings")
+  private Map<String, Boolean> mDifferentlyOpenOfferings = null;
   @SerializedName("directed_by")
   private String mDirectedBy = null;
   @SerializedName("display_subtext")
@@ -954,6 +956,10 @@ public class Page extends APINode {
     return new APIRequestGetVideoCopyrightRules(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateVideoCopyrightRule createVideoCopyrightRule() {
+    return new APIRequestCreateVideoCopyrightRule(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateVideoCopyright createVideoCopyright() {
     return new APIRequestCreateVideoCopyright(this.getPrefixedId().toString(), context);
   }
@@ -1117,6 +1123,10 @@ public class Page extends APINode {
 
   public String getFieldDescriptionHtml() {
     return mDescriptionHtml;
+  }
+
+  public Map<String, Boolean> getFieldDifferentlyOpenOfferings() {
+    return mDifferentlyOpenOfferings;
   }
 
   public String getFieldDirectedBy() {
@@ -5929,6 +5939,7 @@ public class Page extends APINode {
       "current_location",
       "description",
       "description_html",
+      "differently_open_offerings",
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
@@ -6343,6 +6354,13 @@ public class Page extends APINode {
     }
     public APIRequestGetCrosspostWhitelistedPages requestDescriptionHtmlField (boolean value) {
       this.requestField("description_html", value);
+      return this;
+    }
+    public APIRequestGetCrosspostWhitelistedPages requestDifferentlyOpenOfferingsField () {
+      return this.requestDifferentlyOpenOfferingsField(true);
+    }
+    public APIRequestGetCrosspostWhitelistedPages requestDifferentlyOpenOfferingsField (boolean value) {
+      this.requestField("differently_open_offerings", value);
       return this;
     }
     public APIRequestGetCrosspostWhitelistedPages requestDirectedByField () {
@@ -7728,6 +7746,7 @@ public class Page extends APINode {
       "interested_count",
       "is_canceled",
       "is_draft",
+      "is_online",
       "is_page_owned",
       "maybe_count",
       "name",
@@ -7967,6 +7986,13 @@ public class Page extends APINode {
     }
     public APIRequestGetEvents requestIsDraftField (boolean value) {
       this.requestField("is_draft", value);
+      return this;
+    }
+    public APIRequestGetEvents requestIsOnlineField () {
+      return this.requestIsOnlineField(true);
+    }
+    public APIRequestGetEvents requestIsOnlineField (boolean value) {
+      this.requestField("is_online", value);
       return this;
     }
     public APIRequestGetEvents requestIsPageOwnedField () {
@@ -9083,11 +9109,11 @@ public class Page extends APINode {
     }
   }
 
-  public static class APIRequestCreateFeed extends APIRequest<PagePost> {
+  public static class APIRequestCreateFeed extends APIRequest<Page> {
 
-    PagePost lastResponse = null;
+    Page lastResponse = null;
     @Override
-    public PagePost getLastResponse() {
+    public Page getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -9210,31 +9236,31 @@ public class Page extends APINode {
     };
 
     @Override
-    public PagePost parseResponse(String response, String header) throws APIException {
-      return PagePost.parseResponse(response, getContext(), this, header).head();
+    public Page parseResponse(String response, String header) throws APIException {
+      return Page.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public PagePost execute() throws APIException {
+    public Page execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public PagePost execute(Map<String, Object> extraParams) throws APIException {
+    public Page execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<PagePost> executeAsync() throws APIException {
+    public ListenableFuture<Page> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<PagePost> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<Page> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, PagePost>() {
-           public PagePost apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, Page>() {
+           public Page apply(ResponseWrapper result) {
              try {
                return APIRequestCreateFeed.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -9355,7 +9381,7 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setBackdatedTimeGranularity (PagePost.EnumBackdatedTimeGranularity backdatedTimeGranularity) {
+    public APIRequestCreateFeed setBackdatedTimeGranularity (Page.EnumBackdatedTimeGranularity backdatedTimeGranularity) {
       this.setParam("backdated_time_granularity", backdatedTimeGranularity);
       return this;
     }
@@ -9378,7 +9404,7 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setCheckinEntryPoint (PagePost.EnumCheckinEntryPoint checkinEntryPoint) {
+    public APIRequestCreateFeed setCheckinEntryPoint (Page.EnumCheckinEntryPoint checkinEntryPoint) {
       this.setParam("checkin_entry_point", checkinEntryPoint);
       return this;
     }
@@ -9519,7 +9545,7 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setFormatting (PagePost.EnumFormatting formatting) {
+    public APIRequestCreateFeed setFormatting (Page.EnumFormatting formatting) {
       this.setParam("formatting", formatting);
       return this;
     }
@@ -9788,7 +9814,7 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setPlaceAttachmentSetting (PagePost.EnumPlaceAttachmentSetting placeAttachmentSetting) {
+    public APIRequestCreateFeed setPlaceAttachmentSetting (Page.EnumPlaceAttachmentSetting placeAttachmentSetting) {
       this.setParam("place_attachment_setting", placeAttachmentSetting);
       return this;
     }
@@ -9811,7 +9837,7 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setPostSurfacesBlacklist (List<PagePost.EnumPostSurfacesBlacklist> postSurfacesBlacklist) {
+    public APIRequestCreateFeed setPostSurfacesBlacklist (List<Page.EnumPostSurfacesBlacklist> postSurfacesBlacklist) {
       this.setParam("post_surfaces_blacklist", postSurfacesBlacklist);
       return this;
     }
@@ -9820,7 +9846,7 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setPostingToRedspace (PagePost.EnumPostingToRedspace postingToRedspace) {
+    public APIRequestCreateFeed setPostingToRedspace (Page.EnumPostingToRedspace postingToRedspace) {
       this.setParam("posting_to_redspace", postingToRedspace);
       return this;
     }
@@ -9960,7 +9986,7 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setTargetSurface (PagePost.EnumTargetSurface targetSurface) {
+    public APIRequestCreateFeed setTargetSurface (Page.EnumTargetSurface targetSurface) {
       this.setParam("target_surface", targetSurface);
       return this;
     }
@@ -10026,7 +10052,7 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setUnpublishedContentType (PagePost.EnumUnpublishedContentType unpublishedContentType) {
+    public APIRequestCreateFeed setUnpublishedContentType (Page.EnumUnpublishedContentType unpublishedContentType) {
       this.setParam("unpublished_content_type", unpublishedContentType);
       return this;
     }
@@ -10151,6 +10177,7 @@ public class Page extends APINode {
       "current_location",
       "description",
       "description_html",
+      "differently_open_offerings",
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
@@ -10565,6 +10592,13 @@ public class Page extends APINode {
     }
     public APIRequestGetGlobalBrandChildren requestDescriptionHtmlField (boolean value) {
       this.requestField("description_html", value);
+      return this;
+    }
+    public APIRequestGetGlobalBrandChildren requestDifferentlyOpenOfferingsField () {
+      return this.requestDifferentlyOpenOfferingsField(true);
+    }
+    public APIRequestGetGlobalBrandChildren requestDifferentlyOpenOfferingsField (boolean value) {
+      this.requestField("differently_open_offerings", value);
       return this;
     }
     public APIRequestGetGlobalBrandChildren requestDirectedByField () {
@@ -13326,6 +13360,7 @@ public class Page extends APINode {
       "current_location",
       "description",
       "description_html",
+      "differently_open_offerings",
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
@@ -13745,6 +13780,13 @@ public class Page extends APINode {
     }
     public APIRequestGetLikes requestDescriptionHtmlField (boolean value) {
       this.requestField("description_html", value);
+      return this;
+    }
+    public APIRequestGetLikes requestDifferentlyOpenOfferingsField () {
+      return this.requestDifferentlyOpenOfferingsField(true);
+    }
+    public APIRequestGetLikes requestDifferentlyOpenOfferingsField (boolean value) {
+      this.requestField("differently_open_offerings", value);
       return this;
     }
     public APIRequestGetLikes requestDirectedByField () {
@@ -15671,6 +15713,7 @@ public class Page extends APINode {
       "current_location",
       "description",
       "description_html",
+      "differently_open_offerings",
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
@@ -16085,6 +16128,13 @@ public class Page extends APINode {
     }
     public APIRequestGetLocations requestDescriptionHtmlField (boolean value) {
       this.requestField("description_html", value);
+      return this;
+    }
+    public APIRequestGetLocations requestDifferentlyOpenOfferingsField () {
+      return this.requestDifferentlyOpenOfferingsField(true);
+    }
+    public APIRequestGetLocations requestDifferentlyOpenOfferingsField (boolean value) {
+      this.requestField("differently_open_offerings", value);
       return this;
     }
     public APIRequestGetLocations requestDirectedByField () {
@@ -16854,6 +16904,7 @@ public class Page extends APINode {
     }
     public static final String[] PARAMS = {
       "always_open",
+      "differently_open_offerings",
       "hours",
       "ignore_warnings",
       "location",
@@ -16868,6 +16919,7 @@ public class Page extends APINode {
       "store_location_descriptor",
       "store_name",
       "store_number",
+      "temporary_status",
       "website",
     };
 
@@ -16933,6 +16985,15 @@ public class Page extends APINode {
     }
     public APIRequestCreateLocation setAlwaysOpen (String alwaysOpen) {
       this.setParam("always_open", alwaysOpen);
+      return this;
+    }
+
+    public APIRequestCreateLocation setDifferentlyOpenOfferings (Map<String, String> differentlyOpenOfferings) {
+      this.setParam("differently_open_offerings", differentlyOpenOfferings);
+      return this;
+    }
+    public APIRequestCreateLocation setDifferentlyOpenOfferings (String differentlyOpenOfferings) {
+      this.setParam("differently_open_offerings", differentlyOpenOfferings);
       return this;
     }
 
@@ -17034,6 +17095,15 @@ public class Page extends APINode {
       return this;
     }
 
+    public APIRequestCreateLocation setTemporaryStatus (Page.EnumTemporaryStatus temporaryStatus) {
+      this.setParam("temporary_status", temporaryStatus);
+      return this;
+    }
+    public APIRequestCreateLocation setTemporaryStatus (String temporaryStatus) {
+      this.setParam("temporary_status", temporaryStatus);
+      return this;
+    }
+
     public APIRequestCreateLocation setWebsite (String website) {
       this.setParam("website", website);
       return this;
@@ -17085,7 +17155,6 @@ public class Page extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "fingerprint_validity",
       "universal_content_id",
     };
 
@@ -17151,15 +17220,6 @@ public class Page extends APINode {
       return this;
     }
 
-
-    public APIRequestGetMediaFingerprints setFingerprintValidity (MediaFingerprint.EnumFingerprintValidity fingerprintValidity) {
-      this.setParam("fingerprint_validity", fingerprintValidity);
-      return this;
-    }
-    public APIRequestGetMediaFingerprints setFingerprintValidity (String fingerprintValidity) {
-      this.setParam("fingerprint_validity", fingerprintValidity);
-      return this;
-    }
 
     public APIRequestGetMediaFingerprints setUniversalContentId (String universalContentId) {
       this.setParam("universal_content_id", universalContentId);
@@ -20461,6 +20521,7 @@ public class Page extends APINode {
       "initial_view_heading_override_degrees",
       "initial_view_pitch_override_degrees",
       "initial_view_vertical_fov_override_degrees",
+      "instagram_product_tags",
       "ios_bundle_id",
       "is_explicit_location",
       "is_explicit_place",
@@ -20478,6 +20539,7 @@ public class Page extends APINode {
       "og_phrase",
       "og_set_profile_badge",
       "og_suggestion_mechanism",
+      "parent_media_id",
       "place",
       "privacy",
       "profile_id",
@@ -20690,6 +20752,15 @@ public class Page extends APINode {
       return this;
     }
 
+    public APIRequestCreatePhoto setInstagramProductTags (List<Map<String, String>> instagramProductTags) {
+      this.setParam("instagram_product_tags", instagramProductTags);
+      return this;
+    }
+    public APIRequestCreatePhoto setInstagramProductTags (String instagramProductTags) {
+      this.setParam("instagram_product_tags", instagramProductTags);
+      return this;
+    }
+
     public APIRequestCreatePhoto setIosBundleId (String iosBundleId) {
       this.setParam("ios_bundle_id", iosBundleId);
       return this;
@@ -20800,6 +20871,15 @@ public class Page extends APINode {
 
     public APIRequestCreatePhoto setOgSuggestionMechanism (String ogSuggestionMechanism) {
       this.setParam("og_suggestion_mechanism", ogSuggestionMechanism);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setParentMediaId (Long parentMediaId) {
+      this.setParam("parent_media_id", parentMediaId);
+      return this;
+    }
+    public APIRequestCreatePhoto setParentMediaId (String parentMediaId) {
+      this.setParam("parent_media_id", parentMediaId);
       return this;
     }
 
@@ -29519,6 +29599,126 @@ public class Page extends APINode {
     }
   }
 
+  public static class APIRequestCreateVideoCopyrightRule extends APIRequest<VideoCopyrightRule> {
+
+    VideoCopyrightRule lastResponse = null;
+    @Override
+    public VideoCopyrightRule getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "condition_groups",
+      "name",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public VideoCopyrightRule parseResponse(String response, String header) throws APIException {
+      return VideoCopyrightRule.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public VideoCopyrightRule execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public VideoCopyrightRule execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<VideoCopyrightRule> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<VideoCopyrightRule> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, VideoCopyrightRule>() {
+           public VideoCopyrightRule apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateVideoCopyrightRule.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateVideoCopyrightRule(String nodeId, APIContext context) {
+      super(context, nodeId, "/video_copyright_rules", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateVideoCopyrightRule setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateVideoCopyrightRule setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateVideoCopyrightRule setConditionGroups (List<Object> conditionGroups) {
+      this.setParam("condition_groups", conditionGroups);
+      return this;
+    }
+    public APIRequestCreateVideoCopyrightRule setConditionGroups (String conditionGroups) {
+      this.setParam("condition_groups", conditionGroups);
+      return this;
+    }
+
+    public APIRequestCreateVideoCopyrightRule setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateVideoCopyrightRule requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateVideoCopyrightRule requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateVideoCopyrightRule requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateVideoCopyrightRule requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateVideoCopyrightRule requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateVideoCopyrightRule requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestCreateVideoCopyright extends APIRequest<VideoCopyright> {
 
     VideoCopyright lastResponse = null;
@@ -29532,7 +29732,6 @@ public class Page extends APINode {
       "copyright_content_id",
       "excluded_ownership_countries",
       "excluded_ownership_segments",
-      "fingerprint_id",
       "is_reference_disabled",
       "is_reference_video",
       "monitoring_type",
@@ -29633,11 +29832,6 @@ public class Page extends APINode {
     }
     public APIRequestCreateVideoCopyright setExcludedOwnershipSegments (String excludedOwnershipSegments) {
       this.setParam("excluded_ownership_segments", excludedOwnershipSegments);
-      return this;
-    }
-
-    public APIRequestCreateVideoCopyright setFingerprintId (String fingerprintId) {
-      this.setParam("fingerprint_id", fingerprintId);
       return this;
     }
 
@@ -31828,6 +32022,7 @@ public class Page extends APINode {
       "current_location",
       "description",
       "description_html",
+      "differently_open_offerings",
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
@@ -32247,6 +32442,13 @@ public class Page extends APINode {
     }
     public APIRequestGet requestDescriptionHtmlField (boolean value) {
       this.requestField("description_html", value);
+      return this;
+    }
+    public APIRequestGet requestDifferentlyOpenOfferingsField () {
+      return this.requestDifferentlyOpenOfferingsField(true);
+    }
+    public APIRequestGet requestDifferentlyOpenOfferingsField (boolean value) {
+      this.requestField("differently_open_offerings", value);
       return this;
     }
     public APIRequestGet requestDirectedByField () {
@@ -33027,6 +33229,7 @@ public class Page extends APINode {
       "cover",
       "culinary_team",
       "description",
+      "differently_open_offerings",
       "directed_by",
       "displayed_message_response_time",
       "emails",
@@ -33207,6 +33410,15 @@ public class Page extends APINode {
 
     public APIRequestUpdate setDescription (String description) {
       this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestUpdate setDifferentlyOpenOfferings (Map<String, String> differentlyOpenOfferings) {
+      this.setParam("differently_open_offerings", differentlyOpenOfferings);
+      return this;
+    }
+    public APIRequestUpdate setDifferentlyOpenOfferings (String differentlyOpenOfferings) {
+      this.setParam("differently_open_offerings", differentlyOpenOfferings);
       return this;
     }
 
@@ -33710,6 +33922,8 @@ public class Page extends APINode {
   public static enum EnumTemporaryStatus {
       @SerializedName("DIFFERENTLY_OPEN")
       VALUE_DIFFERENTLY_OPEN("DIFFERENTLY_OPEN"),
+      @SerializedName("NO_DATA")
+      VALUE_NO_DATA("NO_DATA"),
       @SerializedName("OPERATING_AS_USUAL")
       VALUE_OPERATING_AS_USUAL("OPERATING_AS_USUAL"),
       @SerializedName("TEMPORARILY_CLOSED")
@@ -33751,10 +33965,12 @@ public class Page extends APINode {
       VALUE_PAGES_MESSAGING("PAGES_MESSAGING"),
       @SerializedName("PAGES_MESSAGING_SUBSCRIPTIONS")
       VALUE_PAGES_MESSAGING_SUBSCRIPTIONS("PAGES_MESSAGING_SUBSCRIPTIONS"),
-      @SerializedName("PLATFORM_MANAGE_PAGES")
-      VALUE_PLATFORM_MANAGE_PAGES("PLATFORM_MANAGE_PAGES"),
       @SerializedName("PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES")
       VALUE_PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES("PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES"),
+      @SerializedName("PLATFORM_PAGE_ADMINISTER")
+      VALUE_PLATFORM_PAGE_ADMINISTER("PLATFORM_PAGE_ADMINISTER"),
+      @SerializedName("PLATFORM_PAGE_BASIC_ADMIN")
+      VALUE_PLATFORM_PAGE_BASIC_ADMIN("PLATFORM_PAGE_BASIC_ADMIN"),
       @SerializedName("PLATFORM_READ_INSIGHTS")
       VALUE_PLATFORM_READ_INSIGHTS("PLATFORM_READ_INSIGHTS"),
       @SerializedName("PROFILE_PLUS_ADVERTISE")
@@ -33810,10 +34026,12 @@ public class Page extends APINode {
       VALUE_PAGES_MESSAGING("PAGES_MESSAGING"),
       @SerializedName("PAGES_MESSAGING_SUBSCRIPTIONS")
       VALUE_PAGES_MESSAGING_SUBSCRIPTIONS("PAGES_MESSAGING_SUBSCRIPTIONS"),
-      @SerializedName("PLATFORM_MANAGE_PAGES")
-      VALUE_PLATFORM_MANAGE_PAGES("PLATFORM_MANAGE_PAGES"),
       @SerializedName("PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES")
       VALUE_PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES("PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES"),
+      @SerializedName("PLATFORM_PAGE_ADMINISTER")
+      VALUE_PLATFORM_PAGE_ADMINISTER("PLATFORM_PAGE_ADMINISTER"),
+      @SerializedName("PLATFORM_PAGE_BASIC_ADMIN")
+      VALUE_PLATFORM_PAGE_BASIC_ADMIN("PLATFORM_PAGE_BASIC_ADMIN"),
       @SerializedName("PLATFORM_READ_INSIGHTS")
       VALUE_PLATFORM_READ_INSIGHTS("PLATFORM_READ_INSIGHTS"),
       @SerializedName("PROFILE_PLUS_ADVERTISE")
@@ -33837,6 +34055,186 @@ public class Page extends APINode {
       private String value;
 
       private EnumTasks(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumBackdatedTimeGranularity {
+      @SerializedName("day")
+      VALUE_DAY("day"),
+      @SerializedName("hour")
+      VALUE_HOUR("hour"),
+      @SerializedName("min")
+      VALUE_MIN("min"),
+      @SerializedName("month")
+      VALUE_MONTH("month"),
+      @SerializedName("none")
+      VALUE_NONE("none"),
+      @SerializedName("year")
+      VALUE_YEAR("year"),
+      ;
+
+      private String value;
+
+      private EnumBackdatedTimeGranularity(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumCheckinEntryPoint {
+      @SerializedName("BRANDING_CHECKIN")
+      VALUE_BRANDING_CHECKIN("BRANDING_CHECKIN"),
+      @SerializedName("BRANDING_OTHER")
+      VALUE_BRANDING_OTHER("BRANDING_OTHER"),
+      @SerializedName("BRANDING_PHOTO")
+      VALUE_BRANDING_PHOTO("BRANDING_PHOTO"),
+      @SerializedName("BRANDING_STATUS")
+      VALUE_BRANDING_STATUS("BRANDING_STATUS"),
+      ;
+
+      private String value;
+
+      private EnumCheckinEntryPoint(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumFormatting {
+      @SerializedName("MARKDOWN")
+      VALUE_MARKDOWN("MARKDOWN"),
+      @SerializedName("PLAINTEXT")
+      VALUE_PLAINTEXT("PLAINTEXT"),
+      ;
+
+      private String value;
+
+      private EnumFormatting(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumPlaceAttachmentSetting {
+      @SerializedName("1")
+      VALUE_1("1"),
+      @SerializedName("2")
+      VALUE_2("2"),
+      ;
+
+      private String value;
+
+      private EnumPlaceAttachmentSetting(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumPostSurfacesBlacklist {
+      @SerializedName("1")
+      VALUE_1("1"),
+      @SerializedName("2")
+      VALUE_2("2"),
+      @SerializedName("3")
+      VALUE_3("3"),
+      @SerializedName("4")
+      VALUE_4("4"),
+      @SerializedName("5")
+      VALUE_5("5"),
+      ;
+
+      private String value;
+
+      private EnumPostSurfacesBlacklist(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumPostingToRedspace {
+      @SerializedName("disabled")
+      VALUE_DISABLED("disabled"),
+      @SerializedName("enabled")
+      VALUE_ENABLED("enabled"),
+      ;
+
+      private String value;
+
+      private EnumPostingToRedspace(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumTargetSurface {
+      @SerializedName("STORY")
+      VALUE_STORY("STORY"),
+      @SerializedName("TIMELINE")
+      VALUE_TIMELINE("TIMELINE"),
+      ;
+
+      private String value;
+
+      private EnumTargetSurface(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumUnpublishedContentType {
+      @SerializedName("ADS_POST")
+      VALUE_ADS_POST("ADS_POST"),
+      @SerializedName("DRAFT")
+      VALUE_DRAFT("DRAFT"),
+      @SerializedName("INLINE_CREATED")
+      VALUE_INLINE_CREATED("INLINE_CREATED"),
+      @SerializedName("PUBLISHED")
+      VALUE_PUBLISHED("PUBLISHED"),
+      @SerializedName("REVIEWABLE_BRANDED_CONTENT")
+      VALUE_REVIEWABLE_BRANDED_CONTENT("REVIEWABLE_BRANDED_CONTENT"),
+      @SerializedName("SCHEDULED")
+      VALUE_SCHEDULED("SCHEDULED"),
+      @SerializedName("SCHEDULED_RECURRING")
+      VALUE_SCHEDULED_RECURRING("SCHEDULED_RECURRING"),
+      ;
+
+      private String value;
+
+      private EnumUnpublishedContentType(String value) {
         this.value = value;
       }
 
@@ -34407,6 +34805,7 @@ public class Page extends APINode {
     this.mCurrentLocation = instance.mCurrentLocation;
     this.mDescription = instance.mDescription;
     this.mDescriptionHtml = instance.mDescriptionHtml;
+    this.mDifferentlyOpenOfferings = instance.mDifferentlyOpenOfferings;
     this.mDirectedBy = instance.mDirectedBy;
     this.mDisplaySubtext = instance.mDisplaySubtext;
     this.mDisplayedMessageResponseTime = instance.mDisplayedMessageResponseTime;

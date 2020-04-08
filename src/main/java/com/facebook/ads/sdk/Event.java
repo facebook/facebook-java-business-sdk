@@ -83,6 +83,8 @@ public class Event extends APINode {
   private Boolean mIsCanceled = null;
   @SerializedName("is_draft")
   private Boolean mIsDraft = null;
+  @SerializedName("is_online")
+  private Boolean mIsOnline = null;
   @SerializedName("is_page_owned")
   private Boolean mIsPageOwned = null;
   @SerializedName("maybe_count")
@@ -419,6 +421,10 @@ public class Event extends APINode {
 
   public Boolean getFieldIsDraft() {
     return mIsDraft;
+  }
+
+  public Boolean getFieldIsOnline() {
+    return mIsOnline;
   }
 
   public Boolean getFieldIsPageOwned() {
@@ -1736,6 +1742,7 @@ public class Event extends APINode {
       "interested_count",
       "is_canceled",
       "is_draft",
+      "is_online",
       "is_page_owned",
       "maybe_count",
       "name",
@@ -1939,6 +1946,13 @@ public class Event extends APINode {
     }
     public APIRequestGet requestIsDraftField (boolean value) {
       this.requestField("is_draft", value);
+      return this;
+    }
+    public APIRequestGet requestIsOnlineField () {
+      return this.requestIsOnlineField(true);
+    }
+    public APIRequestGet requestIsOnlineField (boolean value) {
+      this.requestField("is_online", value);
       return this;
     }
     public APIRequestGet requestIsPageOwnedField () {
@@ -2214,6 +2228,7 @@ public class Event extends APINode {
     this.mInterestedCount = instance.mInterestedCount;
     this.mIsCanceled = instance.mIsCanceled;
     this.mIsDraft = instance.mIsDraft;
+    this.mIsOnline = instance.mIsOnline;
     this.mIsPageOwned = instance.mIsPageOwned;
     this.mMaybeCount = instance.mMaybeCount;
     this.mName = instance.mName;

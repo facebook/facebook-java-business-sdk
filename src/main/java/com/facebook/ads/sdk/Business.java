@@ -6088,6 +6088,7 @@ public class Business extends APINode {
       "current_location",
       "description",
       "description_html",
+      "differently_open_offerings",
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
@@ -6502,6 +6503,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientPages requestDescriptionHtmlField (boolean value) {
       this.requestField("description_html", value);
+      return this;
+    }
+    public APIRequestGetClientPages requestDifferentlyOpenOfferingsField () {
+      return this.requestDifferentlyOpenOfferingsField(true);
+    }
+    public APIRequestGetClientPages requestDifferentlyOpenOfferingsField (boolean value) {
+      this.requestField("differently_open_offerings", value);
       return this;
     }
     public APIRequestGetClientPages requestDirectedByField () {
@@ -13502,6 +13510,7 @@ public class Business extends APINode {
       "current_location",
       "description",
       "description_html",
+      "differently_open_offerings",
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
@@ -13916,6 +13925,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedPages requestDescriptionHtmlField (boolean value) {
       this.requestField("description_html", value);
+      return this;
+    }
+    public APIRequestGetOwnedPages requestDifferentlyOpenOfferingsField () {
+      return this.requestDifferentlyOpenOfferingsField(true);
+    }
+    public APIRequestGetOwnedPages requestDifferentlyOpenOfferingsField (boolean value) {
+      this.requestField("differently_open_offerings", value);
       return this;
     }
     public APIRequestGetOwnedPages requestDirectedByField () {
@@ -18937,10 +18953,12 @@ public class Business extends APINode {
       VALUE_PAGES_MESSAGING("PAGES_MESSAGING"),
       @SerializedName("PAGES_MESSAGING_SUBSCRIPTIONS")
       VALUE_PAGES_MESSAGING_SUBSCRIPTIONS("PAGES_MESSAGING_SUBSCRIPTIONS"),
-      @SerializedName("PLATFORM_MANAGE_PAGES")
-      VALUE_PLATFORM_MANAGE_PAGES("PLATFORM_MANAGE_PAGES"),
       @SerializedName("PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES")
       VALUE_PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES("PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES"),
+      @SerializedName("PLATFORM_PAGE_ADMINISTER")
+      VALUE_PLATFORM_PAGE_ADMINISTER("PLATFORM_PAGE_ADMINISTER"),
+      @SerializedName("PLATFORM_PAGE_BASIC_ADMIN")
+      VALUE_PLATFORM_PAGE_BASIC_ADMIN("PLATFORM_PAGE_BASIC_ADMIN"),
       @SerializedName("PLATFORM_READ_INSIGHTS")
       VALUE_PLATFORM_READ_INSIGHTS("PLATFORM_READ_INSIGHTS"),
       @SerializedName("PROFILE_PLUS_ADVERTISE")

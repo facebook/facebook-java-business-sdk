@@ -1010,6 +1010,8 @@ public class PageCallToAction extends APINode {
   public static enum EnumIphoneDestinationType {
       @SerializedName("APP_DEEPLINK")
       VALUE_APP_DEEPLINK("APP_DEEPLINK"),
+      @SerializedName("BECOME_A_VOLUNTEER")
+      VALUE_BECOME_A_VOLUNTEER("BECOME_A_VOLUNTEER"),
       @SerializedName("EMAIL")
       VALUE_EMAIL("EMAIL"),
       @SerializedName("FACEBOOK_APP")

@@ -2641,6 +2641,25 @@ public class AdCreative extends APINode {
       }
   }
 
+  public static enum EnumInstantCheckoutSetting {
+      @SerializedName("off")
+      VALUE_OFF("off"),
+      @SerializedName("on")
+      VALUE_ON("on"),
+      ;
+
+      private String value;
+
+      private EnumInstantCheckoutSetting(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumOperator {
       @SerializedName("ALL")
       VALUE_ALL("ALL"),

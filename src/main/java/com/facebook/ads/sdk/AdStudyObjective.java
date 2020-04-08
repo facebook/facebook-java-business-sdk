@@ -2656,6 +2656,7 @@ public class AdStudyObjective extends APINode {
     }
     public static final String[] PARAMS = {
       "breakdowns",
+      "ds",
     };
 
     public static final String[] FIELDS = {
@@ -2726,6 +2727,11 @@ public class AdStudyObjective extends APINode {
     }
     public APIRequestGet setBreakdowns (String breakdowns) {
       this.setParam("breakdowns", breakdowns);
+      return this;
+    }
+
+    public APIRequestGet setDs (String ds) {
+      this.setParam("ds", ds);
       return this;
     }
 
