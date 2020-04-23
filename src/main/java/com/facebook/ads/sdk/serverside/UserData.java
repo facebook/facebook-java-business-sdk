@@ -88,6 +88,9 @@ public class UserData {
   @SerializedName("subscription_id")
   private String subscriptionId = null;
 
+  @SerializedName("fb_login_id")
+  private String fbLoginId = null;
+
   /**
    * Default Constructor.
    */
@@ -112,11 +115,13 @@ public class UserData {
    * @param fbc Facebook click ID value stored in the _fbc browser cookie under your domain
    * @param fbp Facebook browser ID value stored in the _fbp browser cookie under your domain
    * @param subscriptionId subscription ID for the user in this transaction
+   * @param fbLoginId ID issued when a person first logs into an instance of the app,
+   * also known as App-Scoped Id
    */
   public UserData(String email, String phone, GenderEnum gender, String dateOfBirth,
       String lastName, String firstName, String city, String state, String zipcode,
       String countryCode, String externalId, String clientIpAddress, String clientUserAgent,
-      String fbc, String fbp, String subscriptionId) {
+      String fbc, String fbp, String subscriptionId, String fbLoginId) {
     this.email = email;
     this.phone = phone;
     this.gender = gender;
@@ -133,6 +138,7 @@ public class UserData {
     this.fbc = fbc;
     this.fbp = fbp;
     this.subscriptionId = subscriptionId;
+    this.fbLoginId = fbLoginId;
   }
 
   /**
@@ -660,6 +666,36 @@ public class UserData {
     this.subscriptionId = subscriptionId;
   }
 
+
+  /**
+   * Set Facebook Login ID for the user in this event.
+   *
+   * @param fbLoginId Facebook Login ID for the user in this event
+   * @return UserData
+   */
+  public UserData fbLoginId(String fbLoginId) {
+    this.fbLoginId = fbLoginId;
+    return this;
+  }
+
+  /**
+   * The Facebook Login ID for the user in this event.
+   *
+   * @return fbLoginId
+   */
+  public String getFbLoginId() {
+    return fbLoginId;
+  }
+
+  /**
+   * Set Facebook Login ID for the user in this event
+   *
+   * @param fbLoginId Facebook Login ID for the user in this event
+   */
+  public void setFbLoginId(String fbLoginId) {
+    this.fbLoginId = fbLoginId;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -684,7 +720,8 @@ public class UserData {
         && Objects.equals(this.clientUserAgent, userData.clientUserAgent)
         && Objects.equals(this.fbc, userData.fbc)
         && Objects.equals(this.fbp, userData.fbp)
-        && Objects.equals(this.subscriptionId, userData.subscriptionId);
+        && Objects.equals(this.subscriptionId, userData.subscriptionId)
+        && Objects.equals(this.fbLoginId, userData.fbLoginId);
   }
 
   @Override
@@ -705,7 +742,8 @@ public class UserData {
         clientUserAgent,
         fbc,
         fbp,
-        subscriptionId);
+        subscriptionId,
+        fbLoginId);
   }
 
   @Override
@@ -729,6 +767,7 @@ public class UserData {
     sb.append("    fbc: ").append(toIndentedString(fbc)).append("\n");
     sb.append("    fbp: ").append(toIndentedString(fbp)).append("\n");
     sb.append("    subscriptionId: ").append(toIndentedString(subscriptionId)).append("\n");
+    sb.append("    fbLoginId: ").append(toIndentedString(fbLoginId)).append("\n");
     sb.append("}");
     return sb.toString();
   }
