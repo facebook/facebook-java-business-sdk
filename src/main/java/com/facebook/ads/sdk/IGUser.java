@@ -77,6 +77,8 @@ public class IGUser extends APINode {
   private String mName = null;
   @SerializedName("profile_picture_url")
   private String mProfilePictureUrl = null;
+  @SerializedName("shopping_review_status")
+  private String mShoppingReviewStatus = null;
   @SerializedName("username")
   private String mUsername = null;
   @SerializedName("website")
@@ -378,6 +380,10 @@ public class IGUser extends APINode {
 
   public String getFieldProfilePictureUrl() {
     return mProfilePictureUrl;
+  }
+
+  public String getFieldShoppingReviewStatus() {
+    return mShoppingReviewStatus;
   }
 
   public String getFieldUsername() {
@@ -1734,6 +1740,7 @@ public class IGUser extends APINode {
       "mentioned_media",
       "name",
       "profile_picture_url",
+      "shopping_review_status",
       "username",
       "website",
     };
@@ -1904,6 +1911,13 @@ public class IGUser extends APINode {
       this.requestField("profile_picture_url", value);
       return this;
     }
+    public APIRequestGet requestShoppingReviewStatusField () {
+      return this.requestShoppingReviewStatusField(true);
+    }
+    public APIRequestGet requestShoppingReviewStatusField (boolean value) {
+      this.requestField("shopping_review_status", value);
+      return this;
+    }
     public APIRequestGet requestUsernameField () {
       return this.requestUsernameField(true);
     }
@@ -1946,6 +1960,7 @@ public class IGUser extends APINode {
     this.mMentionedMedia = instance.mMentionedMedia;
     this.mName = instance.mName;
     this.mProfilePictureUrl = instance.mProfilePictureUrl;
+    this.mShoppingReviewStatus = instance.mShoppingReviewStatus;
     this.mUsername = instance.mUsername;
     this.mWebsite = instance.mWebsite;
     this.context = instance.context;

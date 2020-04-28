@@ -950,6 +950,7 @@ public class AdStudyCell extends APINode {
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
+      "multi_optimization_goal_weight",
       "name",
       "optimization_goal",
       "optimization_sub_event",
@@ -1295,6 +1296,13 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetAdSets requestLifetimeSpendCapField (boolean value) {
       this.requestField("lifetime_spend_cap", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestMultiOptimizationGoalWeightField () {
+      return this.requestMultiOptimizationGoalWeightField(true);
+    }
+    public APIRequestGetAdSets requestMultiOptimizationGoalWeightField (boolean value) {
+      this.requestField("multi_optimization_goal_weight", value);
       return this;
     }
     public APIRequestGetAdSets requestNameField () {

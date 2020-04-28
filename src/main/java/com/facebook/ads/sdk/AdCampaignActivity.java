@@ -88,9 +88,9 @@ public class AdCampaignActivity extends APINode {
   @SerializedName("billing_event_old")
   private EnumBillingEventOld mBillingEventOld = null;
   @SerializedName("brande_audience_id_new")
-  private String mBrandeAudienceIdNew = null;
+  private BrandAudience mBrandeAudienceIdNew = null;
   @SerializedName("brande_audience_id_old")
-  private String mBrandeAudienceIdOld = null;
+  private BrandAudience mBrandeAudienceIdOld = null;
   @SerializedName("budget_limit_new")
   private Object mBudgetLimitNew = null;
   @SerializedName("budget_limit_old")
@@ -445,11 +445,17 @@ public class AdCampaignActivity extends APINode {
     return mBillingEventOld;
   }
 
-  public String getFieldBrandeAudienceIdNew() {
+  public BrandAudience getFieldBrandeAudienceIdNew() {
+    if (mBrandeAudienceIdNew != null) {
+      mBrandeAudienceIdNew.context = getContext();
+    }
     return mBrandeAudienceIdNew;
   }
 
-  public String getFieldBrandeAudienceIdOld() {
+  public BrandAudience getFieldBrandeAudienceIdOld() {
+    if (mBrandeAudienceIdOld != null) {
+      mBrandeAudienceIdOld.context = getContext();
+    }
     return mBrandeAudienceIdOld;
   }
 

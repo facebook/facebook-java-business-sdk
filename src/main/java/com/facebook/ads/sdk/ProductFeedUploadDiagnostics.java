@@ -54,41 +54,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdCustomizationRuleSpec extends APINode {
-  @SerializedName("caption")
-  private String mCaption = null;
-  @SerializedName("customization_spec")
-  private Object mCustomizationSpec = null;
-  @SerializedName("description")
-  private String mDescription = null;
-  @SerializedName("image_hash")
-  private String mImageHash = null;
-  @SerializedName("link")
-  private String mLink = null;
-  @SerializedName("message")
-  private String mMessage = null;
-  @SerializedName("name")
-  private String mName = null;
-  @SerializedName("priority")
-  private Long mPriority = null;
-  @SerializedName("template_url_spec")
-  private AdCreativeTemplateURLSpec mTemplateUrlSpec = null;
-  @SerializedName("video_id")
-  private Long mVideoId = null;
+public class ProductFeedUploadDiagnostics extends APINode {
+  @SerializedName("last_modified_time")
+  private String mLastModifiedTime = null;
+  @SerializedName("report_url")
+  private String mReportUrl = null;
   protected static Gson gson = null;
 
-  public AdCustomizationRuleSpec() {
+  public ProductFeedUploadDiagnostics() {
   }
 
   public String getId() {
     return null;
   }
-  public static AdCustomizationRuleSpec loadJSON(String json, APIContext context, String header) {
-    AdCustomizationRuleSpec adCustomizationRuleSpec = getGson().fromJson(json, AdCustomizationRuleSpec.class);
+  public static ProductFeedUploadDiagnostics loadJSON(String json, APIContext context, String header) {
+    ProductFeedUploadDiagnostics productFeedUploadDiagnostics = getGson().fromJson(json, ProductFeedUploadDiagnostics.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adCustomizationRuleSpec.toString());
+      JsonElement o2 = parser.parse(productFeedUploadDiagnostics.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -98,14 +82,14 @@ public class AdCustomizationRuleSpec extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    adCustomizationRuleSpec.context = context;
-    adCustomizationRuleSpec.rawValue = json;
-    adCustomizationRuleSpec.header = header;
-    return adCustomizationRuleSpec;
+    productFeedUploadDiagnostics.context = context;
+    productFeedUploadDiagnostics.rawValue = json;
+    productFeedUploadDiagnostics.header = header;
+    return productFeedUploadDiagnostics;
   }
 
-  public static APINodeList<AdCustomizationRuleSpec> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdCustomizationRuleSpec> adCustomizationRuleSpecs = new APINodeList<AdCustomizationRuleSpec>(request, json, header);
+  public static APINodeList<ProductFeedUploadDiagnostics> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ProductFeedUploadDiagnostics> productFeedUploadDiagnosticss = new APINodeList<ProductFeedUploadDiagnostics>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -116,9 +100,9 @@ public class AdCustomizationRuleSpec extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCustomizationRuleSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          productFeedUploadDiagnosticss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adCustomizationRuleSpecs;
+        return productFeedUploadDiagnosticss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -128,20 +112,20 @@ public class AdCustomizationRuleSpec extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adCustomizationRuleSpecs.setCursors(before, after);
+                productFeedUploadDiagnosticss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adCustomizationRuleSpecs.setPaging(previous, next);
+            productFeedUploadDiagnosticss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adCustomizationRuleSpecs.setAppSecret(context.getAppSecretProof());
+              productFeedUploadDiagnosticss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCustomizationRuleSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              productFeedUploadDiagnosticss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -152,23 +136,23 @@ public class AdCustomizationRuleSpec extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCustomizationRuleSpecs.add(loadJSON(entry.getValue().toString(), context, header));
+                  productFeedUploadDiagnosticss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCustomizationRuleSpecs.add(loadJSON(obj.toString(), context, header));
+              productFeedUploadDiagnosticss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adCustomizationRuleSpecs;
+          return productFeedUploadDiagnosticss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCustomizationRuleSpecs.add(loadJSON(entry.getValue().toString(), context, header));
+              productFeedUploadDiagnosticss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adCustomizationRuleSpecs;
+          return productFeedUploadDiagnosticss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -185,20 +169,20 @@ public class AdCustomizationRuleSpec extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCustomizationRuleSpecs.add(loadJSON(value.toString(), context, header));
+              productFeedUploadDiagnosticss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adCustomizationRuleSpecs;
+            return productFeedUploadDiagnosticss;
           }
 
           // Sixth, check if it's pure JsonObject
-          adCustomizationRuleSpecs.clear();
-          adCustomizationRuleSpecs.add(loadJSON(json, context, header));
-          return adCustomizationRuleSpecs;
+          productFeedUploadDiagnosticss.clear();
+          productFeedUploadDiagnosticss.add(loadJSON(json, context, header));
+          return productFeedUploadDiagnosticss;
         }
       }
     } catch (Exception e) {
@@ -226,98 +210,21 @@ public class AdCustomizationRuleSpec extends APINode {
   }
 
 
-  public String getFieldCaption() {
-    return mCaption;
+  public String getFieldLastModifiedTime() {
+    return mLastModifiedTime;
   }
 
-  public AdCustomizationRuleSpec setFieldCaption(String value) {
-    this.mCaption = value;
+  public ProductFeedUploadDiagnostics setFieldLastModifiedTime(String value) {
+    this.mLastModifiedTime = value;
     return this;
   }
 
-  public Object getFieldCustomizationSpec() {
-    return mCustomizationSpec;
+  public String getFieldReportUrl() {
+    return mReportUrl;
   }
 
-  public AdCustomizationRuleSpec setFieldCustomizationSpec(Object value) {
-    this.mCustomizationSpec = value;
-    return this;
-  }
-
-  public String getFieldDescription() {
-    return mDescription;
-  }
-
-  public AdCustomizationRuleSpec setFieldDescription(String value) {
-    this.mDescription = value;
-    return this;
-  }
-
-  public String getFieldImageHash() {
-    return mImageHash;
-  }
-
-  public AdCustomizationRuleSpec setFieldImageHash(String value) {
-    this.mImageHash = value;
-    return this;
-  }
-
-  public String getFieldLink() {
-    return mLink;
-  }
-
-  public AdCustomizationRuleSpec setFieldLink(String value) {
-    this.mLink = value;
-    return this;
-  }
-
-  public String getFieldMessage() {
-    return mMessage;
-  }
-
-  public AdCustomizationRuleSpec setFieldMessage(String value) {
-    this.mMessage = value;
-    return this;
-  }
-
-  public String getFieldName() {
-    return mName;
-  }
-
-  public AdCustomizationRuleSpec setFieldName(String value) {
-    this.mName = value;
-    return this;
-  }
-
-  public Long getFieldPriority() {
-    return mPriority;
-  }
-
-  public AdCustomizationRuleSpec setFieldPriority(Long value) {
-    this.mPriority = value;
-    return this;
-  }
-
-  public AdCreativeTemplateURLSpec getFieldTemplateUrlSpec() {
-    return mTemplateUrlSpec;
-  }
-
-  public AdCustomizationRuleSpec setFieldTemplateUrlSpec(AdCreativeTemplateURLSpec value) {
-    this.mTemplateUrlSpec = value;
-    return this;
-  }
-
-  public AdCustomizationRuleSpec setFieldTemplateUrlSpec(String value) {
-    Type type = new TypeToken<AdCreativeTemplateURLSpec>(){}.getType();
-    this.mTemplateUrlSpec = AdCreativeTemplateURLSpec.getGson().fromJson(value, type);
-    return this;
-  }
-  public Long getFieldVideoId() {
-    return mVideoId;
-  }
-
-  public AdCustomizationRuleSpec setFieldVideoId(Long value) {
-    this.mVideoId = value;
+  public ProductFeedUploadDiagnostics setFieldReportUrl(String value) {
+    this.mReportUrl = value;
     return this;
   }
 
@@ -337,26 +244,18 @@ public class AdCustomizationRuleSpec extends APINode {
     return gson;
   }
 
-  public AdCustomizationRuleSpec copyFrom(AdCustomizationRuleSpec instance) {
-    this.mCaption = instance.mCaption;
-    this.mCustomizationSpec = instance.mCustomizationSpec;
-    this.mDescription = instance.mDescription;
-    this.mImageHash = instance.mImageHash;
-    this.mLink = instance.mLink;
-    this.mMessage = instance.mMessage;
-    this.mName = instance.mName;
-    this.mPriority = instance.mPriority;
-    this.mTemplateUrlSpec = instance.mTemplateUrlSpec;
-    this.mVideoId = instance.mVideoId;
+  public ProductFeedUploadDiagnostics copyFrom(ProductFeedUploadDiagnostics instance) {
+    this.mLastModifiedTime = instance.mLastModifiedTime;
+    this.mReportUrl = instance.mReportUrl;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdCustomizationRuleSpec> getParser() {
-    return new APIRequest.ResponseParser<AdCustomizationRuleSpec>() {
-      public APINodeList<AdCustomizationRuleSpec> parseResponse(String response, APIContext context, APIRequest<AdCustomizationRuleSpec> request, String header) throws MalformedResponseException {
-        return AdCustomizationRuleSpec.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ProductFeedUploadDiagnostics> getParser() {
+    return new APIRequest.ResponseParser<ProductFeedUploadDiagnostics>() {
+      public APINodeList<ProductFeedUploadDiagnostics> parseResponse(String response, APIContext context, APIRequest<ProductFeedUploadDiagnostics> request, String header) throws MalformedResponseException {
+        return ProductFeedUploadDiagnostics.parseResponse(response, context, request, header);
       }
     };
   }

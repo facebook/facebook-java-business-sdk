@@ -985,6 +985,8 @@ public class PageCallToAction extends APINode {
       VALUE_FACEBOOK_APP("FACEBOOK_APP"),
       @SerializedName("MESSENGER")
       VALUE_MESSENGER("MESSENGER"),
+      @SerializedName("MINI_SHOP")
+      VALUE_MINI_SHOP("MINI_SHOP"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
       @SerializedName("PHONE_CALL")
@@ -1018,6 +1020,8 @@ public class PageCallToAction extends APINode {
       VALUE_FACEBOOK_APP("FACEBOOK_APP"),
       @SerializedName("MESSENGER")
       VALUE_MESSENGER("MESSENGER"),
+      @SerializedName("MINI_SHOP")
+      VALUE_MINI_SHOP("MINI_SHOP"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
       @SerializedName("PHONE_CALL")
@@ -1081,6 +1085,8 @@ public class PageCallToAction extends APINode {
       VALUE_PLAY_MUSIC("PLAY_MUSIC"),
       @SerializedName("PLAY_NOW")
       VALUE_PLAY_NOW("PLAY_NOW"),
+      @SerializedName("PURCHASE_GIFT_CARDS")
+      VALUE_PURCHASE_GIFT_CARDS("PURCHASE_GIFT_CARDS"),
       @SerializedName("REQUEST_APPOINTMENT")
       VALUE_REQUEST_APPOINTMENT("REQUEST_APPOINTMENT"),
       @SerializedName("REQUEST_QUOTE")
@@ -1091,6 +1097,8 @@ public class PageCallToAction extends APINode {
       VALUE_SHOP_ON_FACEBOOK("SHOP_ON_FACEBOOK"),
       @SerializedName("SIGN_UP")
       VALUE_SIGN_UP("SIGN_UP"),
+      @SerializedName("VIEW_SHOP")
+      VALUE_VIEW_SHOP("VIEW_SHOP"),
       @SerializedName("VISIT_GROUP")
       VALUE_VISIT_GROUP("VISIT_GROUP"),
       @SerializedName("WATCH_NOW")

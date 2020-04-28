@@ -9245,6 +9245,8 @@ public class ProductCatalog extends APINode {
       VALUE_HOME_LISTINGS("home_listings"),
       @SerializedName("hotels")
       VALUE_HOTELS("hotels"),
+      @SerializedName("jobs")
+      VALUE_JOBS("jobs"),
       @SerializedName("offer_items")
       VALUE_OFFER_ITEMS("offer_items"),
       @SerializedName("offline_commerce")

@@ -4239,6 +4239,7 @@ public class BusinessAssetGroup extends APINode {
       "cover",
       "culinary_team",
       "current_location",
+      "delivery_and_pickup_option_info",
       "description",
       "description_html",
       "differently_open_offerings",
@@ -4642,6 +4643,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedPages requestCurrentLocationField (boolean value) {
       this.requestField("current_location", value);
+      return this;
+    }
+    public APIRequestGetContainedPages requestDeliveryAndPickupOptionInfoField () {
+      return this.requestDeliveryAndPickupOptionInfoField(true);
+    }
+    public APIRequestGetContainedPages requestDeliveryAndPickupOptionInfoField (boolean value) {
+      this.requestField("delivery_and_pickup_option_info", value);
       return this;
     }
     public APIRequestGetContainedPages requestDescriptionField () {
@@ -6700,14 +6708,6 @@ public class BusinessAssetGroup extends APINode {
       VALUE_PAGES_MESSAGING("PAGES_MESSAGING"),
       @SerializedName("PAGES_MESSAGING_SUBSCRIPTIONS")
       VALUE_PAGES_MESSAGING_SUBSCRIPTIONS("PAGES_MESSAGING_SUBSCRIPTIONS"),
-      @SerializedName("PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES")
-      VALUE_PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES("PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES"),
-      @SerializedName("PLATFORM_PAGE_ADMINISTER")
-      VALUE_PLATFORM_PAGE_ADMINISTER("PLATFORM_PAGE_ADMINISTER"),
-      @SerializedName("PLATFORM_PAGE_BASIC_ADMIN")
-      VALUE_PLATFORM_PAGE_BASIC_ADMIN("PLATFORM_PAGE_BASIC_ADMIN"),
-      @SerializedName("PLATFORM_READ_INSIGHTS")
-      VALUE_PLATFORM_READ_INSIGHTS("PLATFORM_READ_INSIGHTS"),
       @SerializedName("PROFILE_PLUS_ADVERTISE")
       VALUE_PROFILE_PLUS_ADVERTISE("PROFILE_PLUS_ADVERTISE"),
       @SerializedName("PROFILE_PLUS_ANALYZE")

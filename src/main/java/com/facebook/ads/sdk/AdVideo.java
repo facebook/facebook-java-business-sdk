@@ -1395,6 +1395,7 @@ public class AdVideo extends APINode {
       "cover",
       "culinary_team",
       "current_location",
+      "delivery_and_pickup_option_info",
       "description",
       "description_html",
       "differently_open_offerings",
@@ -1798,6 +1799,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestCurrentLocationField (boolean value) {
       this.requestField("current_location", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestDeliveryAndPickupOptionInfoField () {
+      return this.requestDeliveryAndPickupOptionInfoField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestDeliveryAndPickupOptionInfoField (boolean value) {
+      this.requestField("delivery_and_pickup_option_info", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestDescriptionField () {
@@ -3375,6 +3383,7 @@ public class AdVideo extends APINode {
       "is_eligible_for_promotion",
       "is_expired",
       "is_hidden",
+      "is_inline_created",
       "is_instagram_eligible",
       "is_popular",
       "is_published",
@@ -3689,6 +3698,13 @@ public class AdVideo extends APINode {
       this.requestField("is_hidden", value);
       return this;
     }
+    public APIRequestGetSharedPosts requestIsInlineCreatedField () {
+      return this.requestIsInlineCreatedField(true);
+    }
+    public APIRequestGetSharedPosts requestIsInlineCreatedField (boolean value) {
+      this.requestField("is_inline_created", value);
+      return this;
+    }
     public APIRequestGetSharedPosts requestIsInstagramEligibleField () {
       return this.requestIsInstagramEligibleField(true);
     }
@@ -3969,6 +3985,7 @@ public class AdVideo extends APINode {
       "cover",
       "culinary_team",
       "current_location",
+      "delivery_and_pickup_option_info",
       "description",
       "description_html",
       "differently_open_offerings",
@@ -4372,6 +4389,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetSponsorTags requestCurrentLocationField (boolean value) {
       this.requestField("current_location", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestDeliveryAndPickupOptionInfoField () {
+      return this.requestDeliveryAndPickupOptionInfoField(true);
+    }
+    public APIRequestGetSponsorTags requestDeliveryAndPickupOptionInfoField (boolean value) {
+      this.requestField("delivery_and_pickup_option_info", value);
       return this;
     }
     public APIRequestGetSponsorTags requestDescriptionField () {
@@ -6876,6 +6900,8 @@ public class AdVideo extends APINode {
       VALUE_LOOK_NOW_DEPRECATED("LOOK_NOW_DEPRECATED"),
       @SerializedName("MARKETPLACE_LISTING_VIDEO")
       VALUE_MARKETPLACE_LISTING_VIDEO("MARKETPLACE_LISTING_VIDEO"),
+      @SerializedName("MARKETPLACE_PRE_RECORDED_VIDEO")
+      VALUE_MARKETPLACE_PRE_RECORDED_VIDEO("MARKETPLACE_PRE_RECORDED_VIDEO"),
       @SerializedName("MOMENTS_VIDEO")
       VALUE_MOMENTS_VIDEO("MOMENTS_VIDEO"),
       @SerializedName("NEO_ASYNC_GAME_VIDEO")
@@ -6930,6 +6956,8 @@ public class AdVideo extends APINode {
       VALUE_SLIDESHOW_VARIATION_VIDEO("SLIDESHOW_VARIATION_VIDEO"),
       @SerializedName("SOTTO_CONTENT")
       VALUE_SOTTO_CONTENT("SOTTO_CONTENT"),
+      @SerializedName("SOUND_PLATFORM_STREAM")
+      VALUE_SOUND_PLATFORM_STREAM("SOUND_PLATFORM_STREAM"),
       @SerializedName("STORIES_VIDEO")
       VALUE_STORIES_VIDEO("STORIES_VIDEO"),
       @SerializedName("STORYLINE")

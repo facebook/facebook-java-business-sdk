@@ -1064,10 +1064,8 @@ public class Campaign extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "ad_draft_id",
       "date_preset",
       "effective_status",
-      "include_drafts",
       "time_range",
       "updated_since",
     };
@@ -1162,11 +1160,6 @@ public class Campaign extends APINode {
     }
 
 
-    public APIRequestGetAds setAdDraftId (String adDraftId) {
-      this.setParam("ad_draft_id", adDraftId);
-      return this;
-    }
-
     public APIRequestGetAds setDatePreset (Ad.EnumDatePreset datePreset) {
       this.setParam("date_preset", datePreset);
       return this;
@@ -1182,15 +1175,6 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAds setEffectiveStatus (String effectiveStatus) {
       this.setParam("effective_status", effectiveStatus);
-      return this;
-    }
-
-    public APIRequestGetAds setIncludeDrafts (Boolean includeDrafts) {
-      this.setParam("include_drafts", includeDrafts);
-      return this;
-    }
-    public APIRequestGetAds setIncludeDrafts (String includeDrafts) {
-      this.setParam("include_drafts", includeDrafts);
       return this;
     }
 
@@ -1496,10 +1480,8 @@ public class Campaign extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "ad_draft_id",
       "date_preset",
       "effective_status",
-      "include_drafts",
       "is_completed",
       "time_range",
     };
@@ -1539,6 +1521,7 @@ public class Campaign extends APINode {
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
+      "multi_optimization_goal_weight",
       "name",
       "optimization_goal",
       "optimization_sub_event",
@@ -1612,11 +1595,6 @@ public class Campaign extends APINode {
     }
 
 
-    public APIRequestGetAdSets setAdDraftId (String adDraftId) {
-      this.setParam("ad_draft_id", adDraftId);
-      return this;
-    }
-
     public APIRequestGetAdSets setDatePreset (AdSet.EnumDatePreset datePreset) {
       this.setParam("date_preset", datePreset);
       return this;
@@ -1632,15 +1610,6 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAdSets setEffectiveStatus (String effectiveStatus) {
       this.setParam("effective_status", effectiveStatus);
-      return this;
-    }
-
-    public APIRequestGetAdSets setIncludeDrafts (Boolean includeDrafts) {
-      this.setParam("include_drafts", includeDrafts);
-      return this;
-    }
-    public APIRequestGetAdSets setIncludeDrafts (String includeDrafts) {
-      this.setParam("include_drafts", includeDrafts);
       return this;
     }
 
@@ -1934,6 +1903,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAdSets requestLifetimeSpendCapField (boolean value) {
       this.requestField("lifetime_spend_cap", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestMultiOptimizationGoalWeightField () {
+      return this.requestMultiOptimizationGoalWeightField(true);
+    }
+    public APIRequestGetAdSets requestMultiOptimizationGoalWeightField (boolean value) {
+      this.requestField("multi_optimization_goal_weight", value);
       return this;
     }
     public APIRequestGetAdSets requestNameField () {

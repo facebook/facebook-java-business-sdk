@@ -35,10 +35,10 @@ public class AdAccountCampaignsPostConversions {
     APIContext context = new APIContext(access_token).enableDebug(true);
 
     new AdAccount(id, context).createCampaign()
-      .setSpecialAdCategory(Campaign.EnumSpecialAdCategory.VALUE_NONE)
       .setName("Conversions Campaign")
       .setObjective(Campaign.EnumObjective.VALUE_CONVERSIONS)
       .setStatus(Campaign.EnumStatus.VALUE_PAUSED)
+      .setParam("special_ad_categories", "[]")
       .execute();
 
   }

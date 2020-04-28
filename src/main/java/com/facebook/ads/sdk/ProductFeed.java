@@ -4822,6 +4822,8 @@ public class ProductFeed extends APINode {
       VALUE_MARKET("MARKET"),
       @SerializedName("MEDIA_TITLE")
       VALUE_MEDIA_TITLE("MEDIA_TITLE"),
+      @SerializedName("OFFER")
+      VALUE_OFFER("OFFER"),
       @SerializedName("PRODUCTS")
       VALUE_PRODUCTS("PRODUCTS"),
       @SerializedName("VEHICLES")

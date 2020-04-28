@@ -25,7 +25,7 @@
 import java.io.File;
 import java.util.Arrays;
 
-public class AdAccountCampaignsPostStoreCampaign {
+public class AdAccountAdCreativesPost2CreateLinkAdCallToActionAppInstall {
   public static void main (String args[]) throws APIException {
 
     String access_token = "<ACCESS_TOKEN>";
@@ -34,12 +34,26 @@ public class AdAccountCampaignsPostStoreCampaign {
     String id = "<AD_ACCOUNT_ID>";
     APIContext context = new APIContext(access_token).enableDebug(true);
 
-    new AdAccount(id, context).createCampaign()
-      .setName("Store Traffic Campaign")
-      .setObjective(Campaign.EnumObjective.VALUE_STORE_VISITS)
-      .setPromotedObject("{\"page_id\":\"<pageID>\"}")
-      .setStatus(Campaign.EnumStatus.VALUE_PAUSED)
-      .setParam("special_ad_categories", "[]")
+    new AdAccount(id, context).createAdCreative()
+      .setName("Sample Creative")
+      .setObjectStorySpec(
+          new AdCreativeObjectStorySpec()
+            .setFieldLinkData(
+              new AdCreativeLinkData()
+                .setFieldCallToAction(
+                  new AdCreativeLinkDataCallToAction()
+                    .setFieldType(AdCreativeLinkDataCallToAction.EnumType.VALUE_INSTALL_MOBILE_APP)
+                    .setFieldValue(
+                      new AdCreativeLinkDataCallToActionValue()
+                        .setFieldLink("<appLink>")
+                    )
+                )
+                .setFieldImageHash("<imageHash>")
+                .setFieldLink("<appLink>")
+                .setFieldMessage("Try it out")
+            )
+            .setFieldPageId("<pageID>")
+        )
       .execute();
 
   }

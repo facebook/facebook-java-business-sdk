@@ -1212,6 +1212,7 @@ public class LifeEvent extends APINode {
       "is_eligible_for_promotion",
       "is_expired",
       "is_hidden",
+      "is_inline_created",
       "is_instagram_eligible",
       "is_popular",
       "is_published",
@@ -1524,6 +1525,13 @@ public class LifeEvent extends APINode {
     }
     public APIRequestGetSharedPosts requestIsHiddenField (boolean value) {
       this.requestField("is_hidden", value);
+      return this;
+    }
+    public APIRequestGetSharedPosts requestIsInlineCreatedField () {
+      return this.requestIsInlineCreatedField(true);
+    }
+    public APIRequestGetSharedPosts requestIsInlineCreatedField (boolean value) {
+      this.requestField("is_inline_created", value);
       return this;
     }
     public APIRequestGetSharedPosts requestIsInstagramEligibleField () {

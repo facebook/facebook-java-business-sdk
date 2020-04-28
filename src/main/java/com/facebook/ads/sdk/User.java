@@ -1148,6 +1148,7 @@ public class User extends APINode {
       "cover",
       "culinary_team",
       "current_location",
+      "delivery_and_pickup_option_info",
       "description",
       "description_html",
       "differently_open_offerings",
@@ -1569,6 +1570,13 @@ public class User extends APINode {
     }
     public APIRequestGetAccounts requestCurrentLocationField (boolean value) {
       this.requestField("current_location", value);
+      return this;
+    }
+    public APIRequestGetAccounts requestDeliveryAndPickupOptionInfoField () {
+      return this.requestDeliveryAndPickupOptionInfoField(true);
+    }
+    public APIRequestGetAccounts requestDeliveryAndPickupOptionInfoField (boolean value) {
+      this.requestField("delivery_and_pickup_option_info", value);
       return this;
     }
     public APIRequestGetAccounts requestDescriptionField () {
@@ -5042,6 +5050,7 @@ public class User extends APINode {
       "cover",
       "culinary_team",
       "current_location",
+      "delivery_and_pickup_option_info",
       "description",
       "description_html",
       "differently_open_offerings",
@@ -5445,6 +5454,13 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedPages requestCurrentLocationField (boolean value) {
       this.requestField("current_location", value);
+      return this;
+    }
+    public APIRequestGetAssignedPages requestDeliveryAndPickupOptionInfoField () {
+      return this.requestDeliveryAndPickupOptionInfoField(true);
+    }
+    public APIRequestGetAssignedPages requestDeliveryAndPickupOptionInfoField (boolean value) {
+      this.requestField("delivery_and_pickup_option_info", value);
       return this;
     }
     public APIRequestGetAssignedPages requestDescriptionField () {
@@ -6467,6 +6483,7 @@ public class User extends APINode {
       "cover",
       "culinary_team",
       "current_location",
+      "delivery_and_pickup_option_info",
       "description",
       "description_html",
       "differently_open_offerings",
@@ -6875,6 +6892,13 @@ public class User extends APINode {
     }
     public APIRequestGetBooks requestCurrentLocationField (boolean value) {
       this.requestField("current_location", value);
+      return this;
+    }
+    public APIRequestGetBooks requestDeliveryAndPickupOptionInfoField () {
+      return this.requestDeliveryAndPickupOptionInfoField(true);
+    }
+    public APIRequestGetBooks requestDeliveryAndPickupOptionInfoField (boolean value) {
+      this.requestField("delivery_and_pickup_option_info", value);
       return this;
     }
     public APIRequestGetBooks requestDescriptionField () {
@@ -11187,6 +11211,7 @@ public class User extends APINode {
       "cover",
       "culinary_team",
       "current_location",
+      "delivery_and_pickup_option_info",
       "description",
       "description_html",
       "differently_open_offerings",
@@ -11595,6 +11620,13 @@ public class User extends APINode {
     }
     public APIRequestGetGames requestCurrentLocationField (boolean value) {
       this.requestField("current_location", value);
+      return this;
+    }
+    public APIRequestGetGames requestDeliveryAndPickupOptionInfoField () {
+      return this.requestDeliveryAndPickupOptionInfoField(true);
+    }
+    public APIRequestGetGames requestDeliveryAndPickupOptionInfoField (boolean value) {
+      this.requestField("delivery_and_pickup_option_info", value);
       return this;
     }
     public APIRequestGetGames requestDescriptionField () {
@@ -13551,6 +13583,7 @@ public class User extends APINode {
       "cover",
       "culinary_team",
       "current_location",
+      "delivery_and_pickup_option_info",
       "description",
       "description_html",
       "differently_open_offerings",
@@ -13959,6 +13992,13 @@ public class User extends APINode {
     }
     public APIRequestGetLikes requestCurrentLocationField (boolean value) {
       this.requestField("current_location", value);
+      return this;
+    }
+    public APIRequestGetLikes requestDeliveryAndPickupOptionInfoField () {
+      return this.requestDeliveryAndPickupOptionInfoField(true);
+    }
+    public APIRequestGetLikes requestDeliveryAndPickupOptionInfoField (boolean value) {
+      this.requestField("delivery_and_pickup_option_info", value);
       return this;
     }
     public APIRequestGetLikes requestDescriptionField () {
@@ -15745,6 +15785,7 @@ public class User extends APINode {
       "cover",
       "culinary_team",
       "current_location",
+      "delivery_and_pickup_option_info",
       "description",
       "description_html",
       "differently_open_offerings",
@@ -16153,6 +16194,13 @@ public class User extends APINode {
     }
     public APIRequestGetMovies requestCurrentLocationField (boolean value) {
       this.requestField("current_location", value);
+      return this;
+    }
+    public APIRequestGetMovies requestDeliveryAndPickupOptionInfoField () {
+      return this.requestDeliveryAndPickupOptionInfoField(true);
+    }
+    public APIRequestGetMovies requestDeliveryAndPickupOptionInfoField (boolean value) {
+      this.requestField("delivery_and_pickup_option_info", value);
       return this;
     }
     public APIRequestGetMovies requestDescriptionField () {
@@ -16975,6 +17023,7 @@ public class User extends APINode {
       "cover",
       "culinary_team",
       "current_location",
+      "delivery_and_pickup_option_info",
       "description",
       "description_html",
       "differently_open_offerings",
@@ -17383,6 +17432,13 @@ public class User extends APINode {
     }
     public APIRequestGetMusic requestCurrentLocationField (boolean value) {
       this.requestField("current_location", value);
+      return this;
+    }
+    public APIRequestGetMusic requestDeliveryAndPickupOptionInfoField () {
+      return this.requestDeliveryAndPickupOptionInfoField(true);
+    }
+    public APIRequestGetMusic requestDeliveryAndPickupOptionInfoField (boolean value) {
+      this.requestField("delivery_and_pickup_option_info", value);
       return this;
     }
     public APIRequestGetMusic requestDescriptionField () {
@@ -20909,6 +20965,7 @@ public class User extends APINode {
       "cover",
       "culinary_team",
       "current_location",
+      "delivery_and_pickup_option_info",
       "description",
       "description_html",
       "differently_open_offerings",
@@ -21317,6 +21374,13 @@ public class User extends APINode {
     }
     public APIRequestGetTelevision requestCurrentLocationField (boolean value) {
       this.requestField("current_location", value);
+      return this;
+    }
+    public APIRequestGetTelevision requestDeliveryAndPickupOptionInfoField () {
+      return this.requestDeliveryAndPickupOptionInfoField(true);
+    }
+    public APIRequestGetTelevision requestDeliveryAndPickupOptionInfoField (boolean value) {
+      this.requestField("delivery_and_pickup_option_info", value);
       return this;
     }
     public APIRequestGetTelevision requestDescriptionField () {

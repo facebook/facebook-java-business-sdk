@@ -5366,13 +5366,10 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "ad_draft_id",
       "date_preset",
       "effective_status",
-      "include_drafts",
       "time_range",
       "updated_since",
-      "use_employee_draft",
     };
 
     public static final String[] FIELDS = {
@@ -5465,11 +5462,6 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestGetAds setAdDraftId (String adDraftId) {
-      this.setParam("ad_draft_id", adDraftId);
-      return this;
-    }
-
     public APIRequestGetAds setDatePreset (Ad.EnumDatePreset datePreset) {
       this.setParam("date_preset", datePreset);
       return this;
@@ -5488,15 +5480,6 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestGetAds setIncludeDrafts (Boolean includeDrafts) {
-      this.setParam("include_drafts", includeDrafts);
-      return this;
-    }
-    public APIRequestGetAds setIncludeDrafts (String includeDrafts) {
-      this.setParam("include_drafts", includeDrafts);
-      return this;
-    }
-
     public APIRequestGetAds setTimeRange (Object timeRange) {
       this.setParam("time_range", timeRange);
       return this;
@@ -5512,15 +5495,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAds setUpdatedSince (String updatedSince) {
       this.setParam("updated_since", updatedSince);
-      return this;
-    }
-
-    public APIRequestGetAds setUseEmployeeDraft (Boolean useEmployeeDraft) {
-      this.setParam("use_employee_draft", useEmployeeDraft);
-      return this;
-    }
-    public APIRequestGetAds setUseEmployeeDraft (String useEmployeeDraft) {
-      this.setParam("use_employee_draft", useEmployeeDraft);
       return this;
     }
 
@@ -6616,13 +6590,10 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "ad_draft_id",
       "date_preset",
       "effective_status",
-      "include_drafts",
       "is_completed",
       "time_range",
-      "use_employee_draft",
     };
 
     public static final String[] FIELDS = {
@@ -6660,6 +6631,7 @@ public class AdAccount extends APINode {
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
+      "multi_optimization_goal_weight",
       "name",
       "optimization_goal",
       "optimization_sub_event",
@@ -6733,11 +6705,6 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestGetAdSets setAdDraftId (String adDraftId) {
-      this.setParam("ad_draft_id", adDraftId);
-      return this;
-    }
-
     public APIRequestGetAdSets setDatePreset (AdSet.EnumDatePreset datePreset) {
       this.setParam("date_preset", datePreset);
       return this;
@@ -6756,15 +6723,6 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestGetAdSets setIncludeDrafts (Boolean includeDrafts) {
-      this.setParam("include_drafts", includeDrafts);
-      return this;
-    }
-    public APIRequestGetAdSets setIncludeDrafts (String includeDrafts) {
-      this.setParam("include_drafts", includeDrafts);
-      return this;
-    }
-
     public APIRequestGetAdSets setIsCompleted (Boolean isCompleted) {
       this.setParam("is_completed", isCompleted);
       return this;
@@ -6780,15 +6738,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSets setTimeRange (String timeRange) {
       this.setParam("time_range", timeRange);
-      return this;
-    }
-
-    public APIRequestGetAdSets setUseEmployeeDraft (Boolean useEmployeeDraft) {
-      this.setParam("use_employee_draft", useEmployeeDraft);
-      return this;
-    }
-    public APIRequestGetAdSets setUseEmployeeDraft (String useEmployeeDraft) {
-      this.setParam("use_employee_draft", useEmployeeDraft);
       return this;
     }
 
@@ -7066,6 +7015,13 @@ public class AdAccount extends APINode {
       this.requestField("lifetime_spend_cap", value);
       return this;
     }
+    public APIRequestGetAdSets requestMultiOptimizationGoalWeightField () {
+      return this.requestMultiOptimizationGoalWeightField(true);
+    }
+    public APIRequestGetAdSets requestMultiOptimizationGoalWeightField (boolean value) {
+      this.requestField("multi_optimization_goal_weight", value);
+      return this;
+    }
     public APIRequestGetAdSets requestNameField () {
       return this.requestNameField(true);
     }
@@ -7229,6 +7185,7 @@ public class AdAccount extends APINode {
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
       "line_number",
+      "multi_optimization_goal_weight",
       "name",
       "optimization_goal",
       "optimization_sub_event",
@@ -7536,6 +7493,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdSet setMultiOptimizationGoalWeight (AdSet.EnumMultiOptimizationGoalWeight multiOptimizationGoalWeight) {
+      this.setParam("multi_optimization_goal_weight", multiOptimizationGoalWeight);
+      return this;
+    }
+    public APIRequestCreateAdSet setMultiOptimizationGoalWeight (String multiOptimizationGoalWeight) {
+      this.setParam("multi_optimization_goal_weight", multiOptimizationGoalWeight);
+      return this;
+    }
+
     public APIRequestCreateAdSet setName (String name) {
       this.setParam("name", name);
       return this;
@@ -7751,6 +7717,7 @@ public class AdAccount extends APINode {
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
+      "multi_optimization_goal_weight",
       "name",
       "optimization_goal",
       "optimization_sub_event",
@@ -8114,6 +8081,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSetsByLabels requestLifetimeSpendCapField (boolean value) {
       this.requestField("lifetime_spend_cap", value);
+      return this;
+    }
+    public APIRequestGetAdSetsByLabels requestMultiOptimizationGoalWeightField () {
+      return this.requestMultiOptimizationGoalWeightField(true);
+    }
+    public APIRequestGetAdSetsByLabels requestMultiOptimizationGoalWeightField (boolean value) {
+      this.requestField("multi_optimization_goal_weight", value);
       return this;
     }
     public APIRequestGetAdSetsByLabels requestNameField () {
@@ -10872,6 +10846,7 @@ public class AdAccount extends APINode {
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
+      "multi_optimization_goal_weight",
       "name",
       "optimization_goal",
       "optimization_sub_event",
@@ -11217,6 +11192,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAffectedAdSets requestLifetimeSpendCapField (boolean value) {
       this.requestField("lifetime_spend_cap", value);
+      return this;
+    }
+    public APIRequestGetAffectedAdSets requestMultiOptimizationGoalWeightField () {
+      return this.requestMultiOptimizationGoalWeightField(true);
+    }
+    public APIRequestGetAffectedAdSets requestMultiOptimizationGoalWeightField (boolean value) {
+      this.requestField("multi_optimization_goal_weight", value);
       return this;
     }
     public APIRequestGetAffectedAdSets requestNameField () {
@@ -14353,10 +14335,8 @@ public class AdAccount extends APINode {
     public static final String[] PARAMS = {
       "date_preset",
       "effective_status",
-      "include_drafts",
       "is_completed",
       "time_range",
-      "use_employee_draft",
     };
 
     public static final String[] FIELDS = {
@@ -14465,15 +14445,6 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestGetCampaigns setIncludeDrafts (Boolean includeDrafts) {
-      this.setParam("include_drafts", includeDrafts);
-      return this;
-    }
-    public APIRequestGetCampaigns setIncludeDrafts (String includeDrafts) {
-      this.setParam("include_drafts", includeDrafts);
-      return this;
-    }
-
     public APIRequestGetCampaigns setIsCompleted (Boolean isCompleted) {
       this.setParam("is_completed", isCompleted);
       return this;
@@ -14489,15 +14460,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetCampaigns setTimeRange (String timeRange) {
       this.setParam("time_range", timeRange);
-      return this;
-    }
-
-    public APIRequestGetCampaigns setUseEmployeeDraft (Boolean useEmployeeDraft) {
-      this.setParam("use_employee_draft", useEmployeeDraft);
-      return this;
-    }
-    public APIRequestGetCampaigns setUseEmployeeDraft (String useEmployeeDraft) {
-      this.setParam("use_employee_draft", useEmployeeDraft);
       return this;
     }
 
@@ -17103,6 +17065,7 @@ public class AdAccount extends APINode {
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
+      "multi_optimization_goal_weight",
       "name",
       "optimization_goal",
       "optimization_sub_event",
@@ -17453,6 +17416,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetDeprecatedTargetingAdSets requestLifetimeSpendCapField (boolean value) {
       this.requestField("lifetime_spend_cap", value);
+      return this;
+    }
+    public APIRequestGetDeprecatedTargetingAdSets requestMultiOptimizationGoalWeightField () {
+      return this.requestMultiOptimizationGoalWeightField(true);
+    }
+    public APIRequestGetDeprecatedTargetingAdSets requestMultiOptimizationGoalWeightField (boolean value) {
+      this.requestField("multi_optimization_goal_weight", value);
       return this;
     }
     public APIRequestGetDeprecatedTargetingAdSets requestNameField () {
@@ -20047,6 +20017,7 @@ public class AdAccount extends APINode {
       "cover",
       "culinary_team",
       "current_location",
+      "delivery_and_pickup_option_info",
       "description",
       "description_html",
       "differently_open_offerings",
@@ -20450,6 +20421,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetPromotePages requestCurrentLocationField (boolean value) {
       this.requestField("current_location", value);
+      return this;
+    }
+    public APIRequestGetPromotePages requestDeliveryAndPickupOptionInfoField () {
+      return this.requestDeliveryAndPickupOptionInfoField(true);
+    }
+    public APIRequestGetPromotePages requestDeliveryAndPickupOptionInfoField (boolean value) {
+      this.requestField("delivery_and_pickup_option_info", value);
       return this;
     }
     public APIRequestGetPromotePages requestDescriptionField () {

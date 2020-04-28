@@ -1126,6 +1126,7 @@ public class BusinessUser extends APINode {
       "cover",
       "culinary_team",
       "current_location",
+      "delivery_and_pickup_option_info",
       "description",
       "description_html",
       "differently_open_offerings",
@@ -1529,6 +1530,13 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGetAssignedPages requestCurrentLocationField (boolean value) {
       this.requestField("current_location", value);
+      return this;
+    }
+    public APIRequestGetAssignedPages requestDeliveryAndPickupOptionInfoField () {
+      return this.requestDeliveryAndPickupOptionInfoField(true);
+    }
+    public APIRequestGetAssignedPages requestDeliveryAndPickupOptionInfoField (boolean value) {
+      this.requestField("delivery_and_pickup_option_info", value);
       return this;
     }
     public APIRequestGetAssignedPages requestDescriptionField () {

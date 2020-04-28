@@ -1445,6 +1445,7 @@ public class LiveVideo extends APINode {
       "cover",
       "culinary_team",
       "current_location",
+      "delivery_and_pickup_option_info",
       "description",
       "description_html",
       "differently_open_offerings",
@@ -1848,6 +1849,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestCurrentLocationField (boolean value) {
       this.requestField("current_location", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestDeliveryAndPickupOptionInfoField () {
+      return this.requestDeliveryAndPickupOptionInfoField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestDeliveryAndPickupOptionInfoField (boolean value) {
+      this.requestField("delivery_and_pickup_option_info", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestDescriptionField () {

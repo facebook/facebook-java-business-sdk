@@ -35,10 +35,10 @@ public class AdAccountCampaignsPostMAIDPA {
     APIContext context = new APIContext(access_token).enableDebug(true);
 
     new AdAccount(id, context).createCampaign()
-      .setSpecialAdCategory(Campaign.EnumSpecialAdCategory.VALUE_NONE)
       .setName("App Installs Campaign with Dynamic Product Ads")
       .setObjective(Campaign.EnumObjective.VALUE_APP_INSTALLS)
       .setStatus(Campaign.EnumStatus.VALUE_PAUSED)
+      .setParam("special_ad_categories", "[]")
       .execute();
 
   }

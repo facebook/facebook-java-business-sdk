@@ -586,10 +586,6 @@ public class Business extends APINode {
     return new APIRequestGetPicture(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetPixelTos getPixelTos() {
-    return new APIRequestGetPixelTos(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestCreatePixelTo createPixelTo() {
     return new APIRequestCreatePixelTo(this.getPrefixedId().toString(), context);
   }
@@ -6086,6 +6082,7 @@ public class Business extends APINode {
       "cover",
       "culinary_team",
       "current_location",
+      "delivery_and_pickup_option_info",
       "description",
       "description_html",
       "differently_open_offerings",
@@ -6489,6 +6486,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientPages requestCurrentLocationField (boolean value) {
       this.requestField("current_location", value);
+      return this;
+    }
+    public APIRequestGetClientPages requestDeliveryAndPickupOptionInfoField () {
+      return this.requestDeliveryAndPickupOptionInfoField(true);
+    }
+    public APIRequestGetClientPages requestDeliveryAndPickupOptionInfoField (boolean value) {
+      this.requestField("delivery_and_pickup_option_info", value);
       return this;
     }
     public APIRequestGetClientPages requestDescriptionField () {
@@ -9390,6 +9394,7 @@ public class Business extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "order_by_is_owned_credential",
     };
 
     public static final String[] FIELDS = {
@@ -9464,6 +9469,15 @@ public class Business extends APINode {
       return this;
     }
 
+
+    public APIRequestGetExtendedCredits setOrderByIsOwnedCredential (Boolean orderByIsOwnedCredential) {
+      this.setParam("order_by_is_owned_credential", orderByIsOwnedCredential);
+      return this;
+    }
+    public APIRequestGetExtendedCredits setOrderByIsOwnedCredential (String orderByIsOwnedCredential) {
+      this.setParam("order_by_is_owned_credential", orderByIsOwnedCredential);
+      return this;
+    }
 
     public APIRequestGetExtendedCredits requestAllFields () {
       return this.requestAllFields(true);
@@ -13508,6 +13522,7 @@ public class Business extends APINode {
       "cover",
       "culinary_team",
       "current_location",
+      "delivery_and_pickup_option_info",
       "description",
       "description_html",
       "differently_open_offerings",
@@ -13911,6 +13926,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedPages requestCurrentLocationField (boolean value) {
       this.requestField("current_location", value);
+      return this;
+    }
+    public APIRequestGetOwnedPages requestDeliveryAndPickupOptionInfoField () {
+      return this.requestDeliveryAndPickupOptionInfoField(true);
+    }
+    public APIRequestGetOwnedPages requestDeliveryAndPickupOptionInfoField (boolean value) {
+      this.requestField("delivery_and_pickup_option_info", value);
       return this;
     }
     public APIRequestGetOwnedPages requestDescriptionField () {
@@ -16722,131 +16744,11 @@ public class Business extends APINode {
     }
   }
 
-  public static class APIRequestGetPixelTos extends APIRequest<BusinessPixelTOS> {
+  public static class APIRequestCreatePixelTo extends APIRequest<APINode> {
 
-    APINodeList<BusinessPixelTOS> lastResponse = null;
+    APINode lastResponse = null;
     @Override
-    public APINodeList<BusinessPixelTOS> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "accept_time",
-      "id",
-    };
-
-    @Override
-    public APINodeList<BusinessPixelTOS> parseResponse(String response, String header) throws APIException {
-      return BusinessPixelTOS.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<BusinessPixelTOS> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<BusinessPixelTOS> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<BusinessPixelTOS>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<BusinessPixelTOS>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<BusinessPixelTOS>>() {
-           public APINodeList<BusinessPixelTOS> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetPixelTos.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetPixelTos(String nodeId, APIContext context) {
-      super(context, nodeId, "/pixel_tos", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetPixelTos setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPixelTos setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetPixelTos requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetPixelTos requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPixelTos requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetPixelTos requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPixelTos requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPixelTos requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetPixelTos requestAcceptTimeField () {
-      return this.requestAcceptTimeField(true);
-    }
-    public APIRequestGetPixelTos requestAcceptTimeField (boolean value) {
-      this.requestField("accept_time", value);
-      return this;
-    }
-    public APIRequestGetPixelTos requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetPixelTos requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestCreatePixelTo extends APIRequest<BusinessPixelTOS> {
-
-    BusinessPixelTOS lastResponse = null;
-    @Override
-    public BusinessPixelTOS getLastResponse() {
+    public APINode getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -16856,31 +16758,31 @@ public class Business extends APINode {
     };
 
     @Override
-    public BusinessPixelTOS parseResponse(String response, String header) throws APIException {
-      return BusinessPixelTOS.parseResponse(response, getContext(), this, header).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public BusinessPixelTOS execute() throws APIException {
+    public APINode execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public BusinessPixelTOS execute(Map<String, Object> extraParams) throws APIException {
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<BusinessPixelTOS> executeAsync() throws APIException {
+    public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<BusinessPixelTOS> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, BusinessPixelTOS>() {
-           public BusinessPixelTOS apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
                return APIRequestCreatePixelTo.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -18953,14 +18855,6 @@ public class Business extends APINode {
       VALUE_PAGES_MESSAGING("PAGES_MESSAGING"),
       @SerializedName("PAGES_MESSAGING_SUBSCRIPTIONS")
       VALUE_PAGES_MESSAGING_SUBSCRIPTIONS("PAGES_MESSAGING_SUBSCRIPTIONS"),
-      @SerializedName("PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES")
-      VALUE_PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES("PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES"),
-      @SerializedName("PLATFORM_PAGE_ADMINISTER")
-      VALUE_PLATFORM_PAGE_ADMINISTER("PLATFORM_PAGE_ADMINISTER"),
-      @SerializedName("PLATFORM_PAGE_BASIC_ADMIN")
-      VALUE_PLATFORM_PAGE_BASIC_ADMIN("PLATFORM_PAGE_BASIC_ADMIN"),
-      @SerializedName("PLATFORM_READ_INSIGHTS")
-      VALUE_PLATFORM_READ_INSIGHTS("PLATFORM_READ_INSIGHTS"),
       @SerializedName("PROFILE_PLUS_ADVERTISE")
       VALUE_PROFILE_PLUS_ADVERTISE("PROFILE_PLUS_ADVERTISE"),
       @SerializedName("PROFILE_PLUS_ANALYZE")

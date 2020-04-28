@@ -62,7 +62,7 @@ public class CatalogItemAppealStatus extends APINode {
   @SerializedName("status")
   private String mStatus = null;
   @SerializedName("use_cases")
-  private Map<Object, Object> mUseCases = null;
+  private List<Object> mUseCases = null;
   protected static Gson gson = null;
 
   public CatalogItemAppealStatus() {
@@ -241,11 +241,11 @@ public class CatalogItemAppealStatus extends APINode {
     return this;
   }
 
-  public Map<Object, Object> getFieldUseCases() {
+  public List<Object> getFieldUseCases() {
     return mUseCases;
   }
 
-  public CatalogItemAppealStatus setFieldUseCases(Map<Object, Object> value) {
+  public CatalogItemAppealStatus setFieldUseCases(List<Object> value) {
     this.mUseCases = value;
     return this;
   }

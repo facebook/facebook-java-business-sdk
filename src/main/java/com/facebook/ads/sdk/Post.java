@@ -109,6 +109,8 @@ public class Post extends APINode {
   private Boolean mIsExpired = null;
   @SerializedName("is_hidden")
   private Boolean mIsHidden = null;
+  @SerializedName("is_inline_created")
+  private Boolean mIsInlineCreated = null;
   @SerializedName("is_instagram_eligible")
   private Boolean mIsInstagramEligible = null;
   @SerializedName("is_popular")
@@ -559,6 +561,10 @@ public class Post extends APINode {
 
   public Boolean getFieldIsHidden() {
     return mIsHidden;
+  }
+
+  public Boolean getFieldIsInlineCreated() {
+    return mIsInlineCreated;
   }
 
   public Boolean getFieldIsInstagramEligible() {
@@ -2397,6 +2403,7 @@ public class Post extends APINode {
       "is_eligible_for_promotion",
       "is_expired",
       "is_hidden",
+      "is_inline_created",
       "is_instagram_eligible",
       "is_popular",
       "is_published",
@@ -2711,6 +2718,13 @@ public class Post extends APINode {
       this.requestField("is_hidden", value);
       return this;
     }
+    public APIRequestGetSharedPosts requestIsInlineCreatedField () {
+      return this.requestIsInlineCreatedField(true);
+    }
+    public APIRequestGetSharedPosts requestIsInlineCreatedField (boolean value) {
+      this.requestField("is_inline_created", value);
+      return this;
+    }
     public APIRequestGetSharedPosts requestIsInstagramEligibleField () {
       return this.requestIsInstagramEligibleField(true);
     }
@@ -2991,6 +3005,7 @@ public class Post extends APINode {
       "cover",
       "culinary_team",
       "current_location",
+      "delivery_and_pickup_option_info",
       "description",
       "description_html",
       "differently_open_offerings",
@@ -3394,6 +3409,13 @@ public class Post extends APINode {
     }
     public APIRequestGetSponsorTags requestCurrentLocationField (boolean value) {
       this.requestField("current_location", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestDeliveryAndPickupOptionInfoField () {
+      return this.requestDeliveryAndPickupOptionInfoField(true);
+    }
+    public APIRequestGetSponsorTags requestDeliveryAndPickupOptionInfoField (boolean value) {
+      this.requestField("delivery_and_pickup_option_info", value);
       return this;
     }
     public APIRequestGetSponsorTags requestDescriptionField () {
@@ -4509,6 +4531,7 @@ public class Post extends APINode {
       "is_eligible_for_promotion",
       "is_expired",
       "is_hidden",
+      "is_inline_created",
       "is_instagram_eligible",
       "is_popular",
       "is_published",
@@ -4821,6 +4844,13 @@ public class Post extends APINode {
     }
     public APIRequestGet requestIsHiddenField (boolean value) {
       this.requestField("is_hidden", value);
+      return this;
+    }
+    public APIRequestGet requestIsInlineCreatedField () {
+      return this.requestIsInlineCreatedField(true);
+    }
+    public APIRequestGet requestIsInlineCreatedField (boolean value) {
+      this.requestField("is_inline_created", value);
       return this;
     }
     public APIRequestGet requestIsInstagramEligibleField () {
@@ -5489,6 +5519,8 @@ public class Post extends APINode {
       VALUE_AUTO_PAGE_LOOKALIKE("AUTO_PAGE_LOOKALIKE"),
       @SerializedName("AUTO_TARGETING")
       VALUE_AUTO_TARGETING("AUTO_TARGETING"),
+      @SerializedName("COUNTRY_AND_INTEREST")
+      VALUE_COUNTRY_AND_INTEREST("COUNTRY_AND_INTEREST"),
       @SerializedName("CREATE_NEW")
       VALUE_CREATE_NEW("CREATE_NEW"),
       @SerializedName("CUSTOM_AUDIENCE")
@@ -5511,6 +5543,8 @@ public class Post extends APINode {
       VALUE_LOCAL("LOCAL"),
       @SerializedName("LOOKALIKE")
       VALUE_LOOKALIKE("LOOKALIKE"),
+      @SerializedName("MARKETPLACE_DEFAULT")
+      VALUE_MARKETPLACE_DEFAULT("MARKETPLACE_DEFAULT"),
       @SerializedName("MULT_CUSTOM_AUDIENCES")
       VALUE_MULT_CUSTOM_AUDIENCES("MULT_CUSTOM_AUDIENCES"),
       @SerializedName("NCPP")
@@ -5568,6 +5602,8 @@ public class Post extends APINode {
       VALUE_FIND_YOUR_GROUPS("FIND_YOUR_GROUPS"),
       @SerializedName("FOLLOW_NEWS_STORYLINE")
       VALUE_FOLLOW_NEWS_STORYLINE("FOLLOW_NEWS_STORYLINE"),
+      @SerializedName("FOLLOW_USER")
+      VALUE_FOLLOW_USER("FOLLOW_USER"),
       @SerializedName("GET_DIRECTIONS")
       VALUE_GET_DIRECTIONS("GET_DIRECTIONS"),
       @SerializedName("GET_OFFER")
@@ -5602,10 +5638,14 @@ public class Post extends APINode {
       VALUE_OPEN_LINK("OPEN_LINK"),
       @SerializedName("ORDER_NOW")
       VALUE_ORDER_NOW("ORDER_NOW"),
+      @SerializedName("PAY_TO_ACCESS")
+      VALUE_PAY_TO_ACCESS("PAY_TO_ACCESS"),
       @SerializedName("PLAY_GAME")
       VALUE_PLAY_GAME("PLAY_GAME"),
       @SerializedName("RECORD_NOW")
       VALUE_RECORD_NOW("RECORD_NOW"),
+      @SerializedName("REQUEST_TIME")
+      VALUE_REQUEST_TIME("REQUEST_TIME"),
       @SerializedName("SAY_THANKS")
       VALUE_SAY_THANKS("SAY_THANKS"),
       @SerializedName("SEE_MORE")
@@ -5696,6 +5736,7 @@ public class Post extends APINode {
     this.mIsEligibleForPromotion = instance.mIsEligibleForPromotion;
     this.mIsExpired = instance.mIsExpired;
     this.mIsHidden = instance.mIsHidden;
+    this.mIsInlineCreated = instance.mIsInlineCreated;
     this.mIsInstagramEligible = instance.mIsInstagramEligible;
     this.mIsPopular = instance.mIsPopular;
     this.mIsPublished = instance.mIsPublished;

@@ -592,10 +592,6 @@ public class Application extends APINode {
     return new APIRequestGetMobileSdkGk(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateMonetization createMonetization() {
-    return new APIRequestCreateMonetization(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestCreateOccludesPopup createOccludesPopup() {
     return new APIRequestCreateOccludesPopup(this.getPrefixedId().toString(), context);
   }
@@ -6697,160 +6693,6 @@ public class Application extends APINode {
 
   }
 
-  public static class APIRequestCreateMonetization extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "breakdowns",
-      "campaign_id",
-      "device_list",
-      "query_id",
-      "request_id",
-      "since",
-      "until",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateMonetization.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateMonetization(String nodeId, APIContext context) {
-      super(context, nodeId, "/monetization", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateMonetization setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateMonetization setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateMonetization setBreakdowns (List<EnumBreakdowns> breakdowns) {
-      this.setParam("breakdowns", breakdowns);
-      return this;
-    }
-    public APIRequestCreateMonetization setBreakdowns (String breakdowns) {
-      this.setParam("breakdowns", breakdowns);
-      return this;
-    }
-
-    public APIRequestCreateMonetization setCampaignId (String campaignId) {
-      this.setParam("campaign_id", campaignId);
-      return this;
-    }
-
-    public APIRequestCreateMonetization setDeviceList (List<String> deviceList) {
-      this.setParam("device_list", deviceList);
-      return this;
-    }
-    public APIRequestCreateMonetization setDeviceList (String deviceList) {
-      this.setParam("device_list", deviceList);
-      return this;
-    }
-
-    public APIRequestCreateMonetization setQueryId (String queryId) {
-      this.setParam("query_id", queryId);
-      return this;
-    }
-
-    public APIRequestCreateMonetization setRequestId (String requestId) {
-      this.setParam("request_id", requestId);
-      return this;
-    }
-
-    public APIRequestCreateMonetization setSince (String since) {
-      this.setParam("since", since);
-      return this;
-    }
-
-    public APIRequestCreateMonetization setUntil (String until) {
-      this.setParam("until", until);
-      return this;
-    }
-
-    public APIRequestCreateMonetization requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateMonetization requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateMonetization requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateMonetization requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateMonetization requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateMonetization requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestCreateOccludesPopup extends APIRequest<APINode> {
 
     APINode lastResponse = null;
@@ -10787,23 +10629,6 @@ public class Application extends APINode {
       private String value;
 
       private EnumStatus(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumBreakdowns {
-      @SerializedName("COUNTRY")
-      VALUE_COUNTRY("COUNTRY"),
-      ;
-
-      private String value;
-
-      private EnumBreakdowns(String value) {
         this.value = value;
       }
 

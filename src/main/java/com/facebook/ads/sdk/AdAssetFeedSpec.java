@@ -67,6 +67,8 @@ public class AdAssetFeedSpec extends APINode {
   private List<AdAssetFeedSpecBody> mBodies = null;
   @SerializedName("call_to_action_types")
   private List<EnumCallToActionTypes> mCallToActionTypes = null;
+  @SerializedName("call_to_actions")
+  private List<Object> mCallToActions = null;
   @SerializedName("captions")
   private List<AdAssetFeedSpecCaption> mCaptions = null;
   @SerializedName("carousels")
@@ -295,6 +297,15 @@ public class AdAssetFeedSpec extends APINode {
     return this;
   }
 
+  public List<Object> getFieldCallToActions() {
+    return mCallToActions;
+  }
+
+  public AdAssetFeedSpec setFieldCallToActions(List<Object> value) {
+    this.mCallToActions = value;
+    return this;
+  }
+
   public List<AdAssetFeedSpecCaption> getFieldCaptions() {
     return mCaptions;
   }
@@ -448,6 +459,8 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_FIND_YOUR_GROUPS("FIND_YOUR_GROUPS"),
       @SerializedName("FOLLOW_NEWS_STORYLINE")
       VALUE_FOLLOW_NEWS_STORYLINE("FOLLOW_NEWS_STORYLINE"),
+      @SerializedName("FOLLOW_USER")
+      VALUE_FOLLOW_USER("FOLLOW_USER"),
       @SerializedName("GET_DIRECTIONS")
       VALUE_GET_DIRECTIONS("GET_DIRECTIONS"),
       @SerializedName("GET_OFFER")
@@ -482,10 +495,14 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_OPEN_LINK("OPEN_LINK"),
       @SerializedName("ORDER_NOW")
       VALUE_ORDER_NOW("ORDER_NOW"),
+      @SerializedName("PAY_TO_ACCESS")
+      VALUE_PAY_TO_ACCESS("PAY_TO_ACCESS"),
       @SerializedName("PLAY_GAME")
       VALUE_PLAY_GAME("PLAY_GAME"),
       @SerializedName("RECORD_NOW")
       VALUE_RECORD_NOW("RECORD_NOW"),
+      @SerializedName("REQUEST_TIME")
+      VALUE_REQUEST_TIME("REQUEST_TIME"),
       @SerializedName("SAY_THANKS")
       VALUE_SAY_THANKS("SAY_THANKS"),
       @SerializedName("SEE_MORE")
@@ -555,6 +572,7 @@ public class AdAssetFeedSpec extends APINode {
     this.mAutotranslate = instance.mAutotranslate;
     this.mBodies = instance.mBodies;
     this.mCallToActionTypes = instance.mCallToActionTypes;
+    this.mCallToActions = instance.mCallToActions;
     this.mCaptions = instance.mCaptions;
     this.mCarousels = instance.mCarousels;
     this.mDescriptions = instance.mDescriptions;

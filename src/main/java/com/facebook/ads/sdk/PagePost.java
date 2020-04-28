@@ -105,6 +105,8 @@ public class PagePost extends APINode {
   private Boolean mIsExpired = null;
   @SerializedName("is_hidden")
   private Boolean mIsHidden = null;
+  @SerializedName("is_inline_created")
+  private Boolean mIsInlineCreated = null;
   @SerializedName("is_instagram_eligible")
   private Boolean mIsInstagramEligible = null;
   @SerializedName("is_popular")
@@ -537,6 +539,10 @@ public class PagePost extends APINode {
 
   public Boolean getFieldIsHidden() {
     return mIsHidden;
+  }
+
+  public Boolean getFieldIsInlineCreated() {
+    return mIsInlineCreated;
   }
 
   public Boolean getFieldIsInstagramEligible() {
@@ -2333,6 +2339,7 @@ public class PagePost extends APINode {
       "is_eligible_for_promotion",
       "is_expired",
       "is_hidden",
+      "is_inline_created",
       "is_instagram_eligible",
       "is_popular",
       "is_published",
@@ -2647,6 +2654,13 @@ public class PagePost extends APINode {
       this.requestField("is_hidden", value);
       return this;
     }
+    public APIRequestGetSharedPosts requestIsInlineCreatedField () {
+      return this.requestIsInlineCreatedField(true);
+    }
+    public APIRequestGetSharedPosts requestIsInlineCreatedField (boolean value) {
+      this.requestField("is_inline_created", value);
+      return this;
+    }
     public APIRequestGetSharedPosts requestIsInstagramEligibleField () {
       return this.requestIsInstagramEligibleField(true);
     }
@@ -2927,6 +2941,7 @@ public class PagePost extends APINode {
       "cover",
       "culinary_team",
       "current_location",
+      "delivery_and_pickup_option_info",
       "description",
       "description_html",
       "differently_open_offerings",
@@ -3330,6 +3345,13 @@ public class PagePost extends APINode {
     }
     public APIRequestGetSponsorTags requestCurrentLocationField (boolean value) {
       this.requestField("current_location", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestDeliveryAndPickupOptionInfoField () {
+      return this.requestDeliveryAndPickupOptionInfoField(true);
+    }
+    public APIRequestGetSponsorTags requestDeliveryAndPickupOptionInfoField (boolean value) {
+      this.requestField("delivery_and_pickup_option_info", value);
       return this;
     }
     public APIRequestGetSponsorTags requestDescriptionField () {
@@ -4443,6 +4465,7 @@ public class PagePost extends APINode {
       "is_eligible_for_promotion",
       "is_expired",
       "is_hidden",
+      "is_inline_created",
       "is_instagram_eligible",
       "is_popular",
       "is_published",
@@ -4736,6 +4759,13 @@ public class PagePost extends APINode {
     }
     public APIRequestGet requestIsHiddenField (boolean value) {
       this.requestField("is_hidden", value);
+      return this;
+    }
+    public APIRequestGet requestIsInlineCreatedField () {
+      return this.requestIsInlineCreatedField(true);
+    }
+    public APIRequestGet requestIsInlineCreatedField (boolean value) {
+      this.requestField("is_inline_created", value);
       return this;
     }
     public APIRequestGet requestIsInstagramEligibleField () {
@@ -5419,6 +5449,7 @@ public class PagePost extends APINode {
     this.mIsEligibleForPromotion = instance.mIsEligibleForPromotion;
     this.mIsExpired = instance.mIsExpired;
     this.mIsHidden = instance.mIsHidden;
+    this.mIsInlineCreated = instance.mIsInlineCreated;
     this.mIsInstagramEligible = instance.mIsInstagramEligible;
     this.mIsPopular = instance.mIsPopular;
     this.mIsPublished = instance.mIsPublished;

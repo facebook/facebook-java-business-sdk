@@ -747,6 +747,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_SITE_CATEGORY("site_category"),
       @SerializedName("targeting_optimization")
       VALUE_TARGETING_OPTIMIZATION("targeting_optimization"),
+      @SerializedName("targeting_relaxation_types")
+      VALUE_TARGETING_RELAXATION_TYPES("targeting_relaxation_types"),
       @SerializedName("timezones")
       VALUE_TIMEZONES("timezones"),
       @SerializedName("topic")

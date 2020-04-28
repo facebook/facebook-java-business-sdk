@@ -35,10 +35,10 @@ public class AdAccountCampaignsPostVideoViews {
     APIContext context = new APIContext(access_token).enableDebug(true);
 
     new AdAccount(id, context).createCampaign()
-      .setSpecialAdCategory(Campaign.EnumSpecialAdCategory.VALUE_NONE)
       .setName("Video Views campaign")
       .setObjective(Campaign.EnumObjective.VALUE_VIDEO_VIEWS)
       .setStatus(Campaign.EnumStatus.VALUE_PAUSED)
+      .setParam("special_ad_categories", "[]")
       .execute();
 
   }

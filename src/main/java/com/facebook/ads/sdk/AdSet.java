@@ -123,6 +123,8 @@ public class AdSet extends APINode {
   private String mLifetimeMinSpendTarget = null;
   @SerializedName("lifetime_spend_cap")
   private String mLifetimeSpendCap = null;
+  @SerializedName("multi_optimization_goal_weight")
+  private String mMultiOptimizationGoalWeight = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("optimization_goal")
@@ -792,6 +794,15 @@ public class AdSet extends APINode {
 
   public AdSet setFieldLifetimeSpendCap(String value) {
     this.mLifetimeSpendCap = value;
+    return this;
+  }
+
+  public String getFieldMultiOptimizationGoalWeight() {
+    return mMultiOptimizationGoalWeight;
+  }
+
+  public AdSet setFieldMultiOptimizationGoalWeight(String value) {
+    this.mMultiOptimizationGoalWeight = value;
     return this;
   }
 
@@ -2454,10 +2465,8 @@ public class AdSet extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "ad_draft_id",
       "date_preset",
       "effective_status",
-      "include_drafts",
       "time_range",
       "updated_since",
     };
@@ -2552,11 +2561,6 @@ public class AdSet extends APINode {
     }
 
 
-    public APIRequestGetAds setAdDraftId (String adDraftId) {
-      this.setParam("ad_draft_id", adDraftId);
-      return this;
-    }
-
     public APIRequestGetAds setDatePreset (Ad.EnumDatePreset datePreset) {
       this.setParam("date_preset", datePreset);
       return this;
@@ -2572,15 +2576,6 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAds setEffectiveStatus (String effectiveStatus) {
       this.setParam("effective_status", effectiveStatus);
-      return this;
-    }
-
-    public APIRequestGetAds setIncludeDrafts (Boolean includeDrafts) {
-      this.setParam("include_drafts", includeDrafts);
-      return this;
-    }
-    public APIRequestGetAds setIncludeDrafts (String includeDrafts) {
-      this.setParam("include_drafts", includeDrafts);
       return this;
     }
 
@@ -3299,6 +3294,7 @@ public class AdSet extends APINode {
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
+      "multi_optimization_goal_weight",
       "name",
       "optimization_goal",
       "optimization_sub_event",
@@ -3680,6 +3676,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestLifetimeSpendCapField (boolean value) {
       this.requestField("lifetime_spend_cap", value);
+      return this;
+    }
+    public APIRequestGetCopies requestMultiOptimizationGoalWeightField () {
+      return this.requestMultiOptimizationGoalWeightField(true);
+    }
+    public APIRequestGetCopies requestMultiOptimizationGoalWeightField (boolean value) {
+      this.requestField("multi_optimization_goal_weight", value);
       return this;
     }
     public APIRequestGetCopies requestNameField () {
@@ -5003,6 +5006,7 @@ public class AdSet extends APINode {
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
+      "multi_optimization_goal_weight",
       "name",
       "optimization_goal",
       "optimization_sub_event",
@@ -5386,6 +5390,13 @@ public class AdSet extends APINode {
       this.requestField("lifetime_spend_cap", value);
       return this;
     }
+    public APIRequestGet requestMultiOptimizationGoalWeightField () {
+      return this.requestMultiOptimizationGoalWeightField(true);
+    }
+    public APIRequestGet requestMultiOptimizationGoalWeightField (boolean value) {
+      this.requestField("multi_optimization_goal_weight", value);
+      return this;
+    }
     public APIRequestGet requestNameField () {
       return this.requestNameField(true);
     }
@@ -5546,6 +5557,7 @@ public class AdSet extends APINode {
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
+      "multi_optimization_goal_weight",
       "name",
       "optimization_goal",
       "optimization_sub_event",
@@ -5821,6 +5833,15 @@ public class AdSet extends APINode {
     }
     public APIRequestUpdate setLifetimeSpendCap (String lifetimeSpendCap) {
       this.setParam("lifetime_spend_cap", lifetimeSpendCap);
+      return this;
+    }
+
+    public APIRequestUpdate setMultiOptimizationGoalWeight (AdSet.EnumMultiOptimizationGoalWeight multiOptimizationGoalWeight) {
+      this.setParam("multi_optimization_goal_weight", multiOptimizationGoalWeight);
+      return this;
+    }
+    public APIRequestUpdate setMultiOptimizationGoalWeight (String multiOptimizationGoalWeight) {
+      this.setParam("multi_optimization_goal_weight", multiOptimizationGoalWeight);
       return this;
     }
 
@@ -6298,6 +6319,29 @@ public class AdSet extends APINode {
       }
   }
 
+  public static enum EnumMultiOptimizationGoalWeight {
+      @SerializedName("BALANCED")
+      VALUE_BALANCED("BALANCED"),
+      @SerializedName("PREFER_EVENT")
+      VALUE_PREFER_EVENT("PREFER_EVENT"),
+      @SerializedName("PREFER_INSTALL")
+      VALUE_PREFER_INSTALL("PREFER_INSTALL"),
+      @SerializedName("UNDEFINED")
+      VALUE_UNDEFINED("UNDEFINED"),
+      ;
+
+      private String value;
+
+      private EnumMultiOptimizationGoalWeight(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumOptimizationSubEvent {
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
@@ -6445,6 +6489,7 @@ public class AdSet extends APINode {
     this.mLifetimeImps = instance.mLifetimeImps;
     this.mLifetimeMinSpendTarget = instance.mLifetimeMinSpendTarget;
     this.mLifetimeSpendCap = instance.mLifetimeSpendCap;
+    this.mMultiOptimizationGoalWeight = instance.mMultiOptimizationGoalWeight;
     this.mName = instance.mName;
     this.mOptimizationGoal = instance.mOptimizationGoal;
     this.mOptimizationSubEvent = instance.mOptimizationSubEvent;
