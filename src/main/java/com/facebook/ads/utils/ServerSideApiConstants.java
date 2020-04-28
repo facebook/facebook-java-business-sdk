@@ -42,4 +42,18 @@ public class ServerSideApiConstants {
     public static final String EXTERNAL_ID = "external_id";
 
     public static final String CURRENCY = "currency";
+
+    public static final String CLIENT_IP_ADDRESS = "client_ip_address";
+
+    public static final String CLIENT_USER_AGENT = "client_user_agent";
+
+    public static final String FBC = "fbc";
+
+    public static final String FBP = "fbp";
+
+    public static final String SUBSCRIPTION_ID = "subscription_id";
+
+    public static final String FB_LOGIN_ID = "fb_login_id";
+
+    public static final String LEAD_ID = "lead_id";
 }
