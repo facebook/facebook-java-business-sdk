@@ -71,6 +71,8 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
   private Map<String, String> mDailyDealsLegacy = null;
   @SerializedName("dpa")
   private Map<String, String> mDpa = null;
+  @SerializedName("dri_counterfeit")
+  private Map<String, String> mDriCounterfeit = null;
   @SerializedName("facebook")
   private Map<String, String> mFacebook = null;
   @SerializedName("facebook_pages_live_shopping")
@@ -332,6 +334,15 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
     return this;
   }
 
+  public Map<String, String> getFieldDriCounterfeit() {
+    return mDriCounterfeit;
+  }
+
+  public AdgroupPlacementSpecificReviewFeedback setFieldDriCounterfeit(Map<String, String> value) {
+    this.mDriCounterfeit = value;
+    return this;
+  }
+
   public Map<String, String> getFieldFacebook() {
     return mFacebook;
   }
@@ -528,6 +539,7 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
     this.mDailyDeals = instance.mDailyDeals;
     this.mDailyDealsLegacy = instance.mDailyDealsLegacy;
     this.mDpa = instance.mDpa;
+    this.mDriCounterfeit = instance.mDriCounterfeit;
     this.mFacebook = instance.mFacebook;
     this.mFacebookPagesLiveShopping = instance.mFacebookPagesLiveShopping;
     this.mInstagram = instance.mInstagram;

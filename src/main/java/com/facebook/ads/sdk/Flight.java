@@ -55,6 +55,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class Flight extends APINode {
+  @SerializedName("applinks")
+  private CatalogItemAppLinks mApplinks = null;
   @SerializedName("currency")
   private String mCurrency = null;
   @SerializedName("description")
@@ -301,6 +303,10 @@ public class Flight extends APINode {
   }
 
 
+  public CatalogItemAppLinks getFieldApplinks() {
+    return mApplinks;
+  }
+
   public String getFieldCurrency() {
     return mCurrency;
   }
@@ -370,6 +376,7 @@ public class Flight extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "applinks",
       "currency",
       "description",
       "destination_airport",
@@ -475,6 +482,13 @@ public class Flight extends APINode {
       return this;
     }
 
+    public APIRequestGet requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGet requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
+      return this;
+    }
     public APIRequestGet requestCurrencyField () {
       return this.requestCurrencyField(true);
     }
@@ -744,6 +758,7 @@ public class Flight extends APINode {
   }
 
   public Flight copyFrom(Flight instance) {
+    this.mApplinks = instance.mApplinks;
     this.mCurrency = instance.mCurrency;
     this.mDescription = instance.mDescription;
     this.mDestinationAirport = instance.mDestinationAirport;

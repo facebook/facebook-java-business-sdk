@@ -55,12 +55,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdAccountActivity extends APINode {
-  @SerializedName("billing_address_new")
-  private String mBillingAddressNew = null;
-  @SerializedName("billing_address_old")
-  private String mBillingAddressOld = null;
   @SerializedName("created_by")
-  private String mCreatedBy = null;
+  private Profile mCreatedBy = null;
   @SerializedName("created_time")
   private String mCreatedTime = null;
   @SerializedName("credit_new")
@@ -90,9 +86,9 @@ public class AdAccountActivity extends APINode {
   @SerializedName("id")
   private String mId = null;
   @SerializedName("manager_id_new")
-  private String mManagerIdNew = null;
+  private Profile mManagerIdNew = null;
   @SerializedName("manager_id_old")
-  private String mManagerIdOld = null;
+  private Profile mManagerIdOld = null;
   @SerializedName("name_new")
   private String mNameNew = null;
   @SerializedName("name_old")
@@ -331,15 +327,10 @@ public class AdAccountActivity extends APINode {
   }
 
 
-  public String getFieldBillingAddressNew() {
-    return mBillingAddressNew;
-  }
-
-  public String getFieldBillingAddressOld() {
-    return mBillingAddressOld;
-  }
-
-  public String getFieldCreatedBy() {
+  public Profile getFieldCreatedBy() {
+    if (mCreatedBy != null) {
+      mCreatedBy.context = getContext();
+    }
     return mCreatedBy;
   }
 
@@ -399,11 +390,17 @@ public class AdAccountActivity extends APINode {
     return mId;
   }
 
-  public String getFieldManagerIdNew() {
+  public Profile getFieldManagerIdNew() {
+    if (mManagerIdNew != null) {
+      mManagerIdNew.context = getContext();
+    }
     return mManagerIdNew;
   }
 
-  public String getFieldManagerIdOld() {
+  public Profile getFieldManagerIdOld() {
+    if (mManagerIdOld != null) {
+      mManagerIdOld.context = getContext();
+    }
     return mManagerIdOld;
   }
 
@@ -468,8 +465,6 @@ public class AdAccountActivity extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "billing_address_new",
-      "billing_address_old",
       "created_by",
       "created_time",
       "credit_new",
@@ -590,20 +585,6 @@ public class AdAccountActivity extends APINode {
       return this;
     }
 
-    public APIRequestGet requestBillingAddressNewField () {
-      return this.requestBillingAddressNewField(true);
-    }
-    public APIRequestGet requestBillingAddressNewField (boolean value) {
-      this.requestField("billing_address_new", value);
-      return this;
-    }
-    public APIRequestGet requestBillingAddressOldField () {
-      return this.requestBillingAddressOldField(true);
-    }
-    public APIRequestGet requestBillingAddressOldField (boolean value) {
-      this.requestField("billing_address_old", value);
-      return this;
-    }
     public APIRequestGet requestCreatedByField () {
       return this.requestCreatedByField(true);
     }
@@ -824,8 +805,6 @@ public class AdAccountActivity extends APINode {
   }
 
   public AdAccountActivity copyFrom(AdAccountActivity instance) {
-    this.mBillingAddressNew = instance.mBillingAddressNew;
-    this.mBillingAddressOld = instance.mBillingAddressOld;
     this.mCreatedBy = instance.mCreatedBy;
     this.mCreatedTime = instance.mCreatedTime;
     this.mCreditNew = instance.mCreditNew;

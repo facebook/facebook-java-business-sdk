@@ -329,6 +329,7 @@ public class ProductGroup extends APINode {
       "additional_image_urls",
       "additional_variant_attributes",
       "age_group",
+      "applinks",
       "availability",
       "brand",
       "capability_to_review_status",
@@ -493,6 +494,13 @@ public class ProductGroup extends APINode {
     }
     public APIRequestGetProducts requestAgeGroupField (boolean value) {
       this.requestField("age_group", value);
+      return this;
+    }
+    public APIRequestGetProducts requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGetProducts requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
       return this;
     }
     public APIRequestGetProducts requestAvailabilityField () {

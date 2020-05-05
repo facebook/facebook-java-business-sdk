@@ -57,6 +57,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class Vehicle extends APINode {
   @SerializedName("address")
   private Object mAddress = null;
+  @SerializedName("applinks")
+  private CatalogItemAppLinks mApplinks = null;
   @SerializedName("availability")
   private String mAvailability = null;
   @SerializedName("body_style")
@@ -363,6 +365,10 @@ public class Vehicle extends APINode {
     return mAddress;
   }
 
+  public CatalogItemAppLinks getFieldApplinks() {
+    return mApplinks;
+  }
+
   public String getFieldAvailability() {
     return mAvailability;
   }
@@ -548,6 +554,7 @@ public class Vehicle extends APINode {
 
     public static final String[] FIELDS = {
       "address",
+      "applinks",
       "availability",
       "body_style",
       "condition",
@@ -686,6 +693,13 @@ public class Vehicle extends APINode {
     }
     public APIRequestGet requestAddressField (boolean value) {
       this.requestField("address", value);
+      return this;
+    }
+    public APIRequestGet requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGet requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
       return this;
     }
     public APIRequestGet requestAvailabilityField () {
@@ -1560,6 +1574,7 @@ public class Vehicle extends APINode {
 
   public Vehicle copyFrom(Vehicle instance) {
     this.mAddress = instance.mAddress;
+    this.mApplinks = instance.mApplinks;
     this.mAvailability = instance.mAvailability;
     this.mBodyStyle = instance.mBodyStyle;
     this.mCondition = instance.mCondition;

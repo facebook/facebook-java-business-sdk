@@ -54,37 +54,37 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class MessengerProfile extends APINode {
-  @SerializedName("account_linking_url")
-  private String mAccountLinkingUrl = null;
-  @SerializedName("get_started")
-  private Object mGetStarted = null;
-  @SerializedName("greeting")
-  private List<Object> mGreeting = null;
-  @SerializedName("ice_breakers")
-  private List<Object> mIceBreakers = null;
-  @SerializedName("payment_settings")
-  private Object mPaymentSettings = null;
-  @SerializedName("persistent_menu")
-  private List<Object> mPersistentMenu = null;
-  @SerializedName("target_audience")
-  private Object mTargetAudience = null;
-  @SerializedName("whitelisted_domains")
-  private List<String> mWhitelistedDomains = null;
+public class CatalogItemAppLinks extends APINode {
+  @SerializedName("android")
+  private List<AndroidAppLink> mAndroid = null;
+  @SerializedName("ios")
+  private List<IosAppLink> mIos = null;
+  @SerializedName("ipad")
+  private List<IosAppLink> mIpad = null;
+  @SerializedName("iphone")
+  private List<IosAppLink> mIphone = null;
+  @SerializedName("web")
+  private WebAppLink mWeb = null;
+  @SerializedName("windows")
+  private List<WindowsAppLink> mWindows = null;
+  @SerializedName("windows_phone")
+  private List<WindowsPhoneAppLink> mWindowsPhone = null;
+  @SerializedName("windows_universal")
+  private List<WindowsAppLink> mWindowsUniversal = null;
   protected static Gson gson = null;
 
-  public MessengerProfile() {
+  public CatalogItemAppLinks() {
   }
 
   public String getId() {
     return null;
   }
-  public static MessengerProfile loadJSON(String json, APIContext context, String header) {
-    MessengerProfile messengerProfile = getGson().fromJson(json, MessengerProfile.class);
+  public static CatalogItemAppLinks loadJSON(String json, APIContext context, String header) {
+    CatalogItemAppLinks catalogItemAppLinks = getGson().fromJson(json, CatalogItemAppLinks.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(messengerProfile.toString());
+      JsonElement o2 = parser.parse(catalogItemAppLinks.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -94,14 +94,14 @@ public class MessengerProfile extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    messengerProfile.context = context;
-    messengerProfile.rawValue = json;
-    messengerProfile.header = header;
-    return messengerProfile;
+    catalogItemAppLinks.context = context;
+    catalogItemAppLinks.rawValue = json;
+    catalogItemAppLinks.header = header;
+    return catalogItemAppLinks;
   }
 
-  public static APINodeList<MessengerProfile> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<MessengerProfile> messengerProfiles = new APINodeList<MessengerProfile>(request, json, header);
+  public static APINodeList<CatalogItemAppLinks> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CatalogItemAppLinks> catalogItemAppLinkss = new APINodeList<CatalogItemAppLinks>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -112,9 +112,9 @@ public class MessengerProfile extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          messengerProfiles.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          catalogItemAppLinkss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return messengerProfiles;
+        return catalogItemAppLinkss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -124,20 +124,20 @@ public class MessengerProfile extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                messengerProfiles.setCursors(before, after);
+                catalogItemAppLinkss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            messengerProfiles.setPaging(previous, next);
+            catalogItemAppLinkss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              messengerProfiles.setAppSecret(context.getAppSecretProof());
+              catalogItemAppLinkss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              messengerProfiles.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              catalogItemAppLinkss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -148,23 +148,23 @@ public class MessengerProfile extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  messengerProfiles.add(loadJSON(entry.getValue().toString(), context, header));
+                  catalogItemAppLinkss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              messengerProfiles.add(loadJSON(obj.toString(), context, header));
+              catalogItemAppLinkss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return messengerProfiles;
+          return catalogItemAppLinkss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              messengerProfiles.add(loadJSON(entry.getValue().toString(), context, header));
+              catalogItemAppLinkss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return messengerProfiles;
+          return catalogItemAppLinkss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -181,20 +181,20 @@ public class MessengerProfile extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              messengerProfiles.add(loadJSON(value.toString(), context, header));
+              catalogItemAppLinkss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return messengerProfiles;
+            return catalogItemAppLinkss;
           }
 
           // Sixth, check if it's pure JsonObject
-          messengerProfiles.clear();
-          messengerProfiles.add(loadJSON(json, context, header));
-          return messengerProfiles;
+          catalogItemAppLinkss.clear();
+          catalogItemAppLinkss.add(loadJSON(json, context, header));
+          return catalogItemAppLinkss;
         }
       }
     } catch (Exception e) {
@@ -222,78 +222,118 @@ public class MessengerProfile extends APINode {
   }
 
 
-  public String getFieldAccountLinkingUrl() {
-    return mAccountLinkingUrl;
+  public List<AndroidAppLink> getFieldAndroid() {
+    return mAndroid;
   }
 
-  public MessengerProfile setFieldAccountLinkingUrl(String value) {
-    this.mAccountLinkingUrl = value;
+  public CatalogItemAppLinks setFieldAndroid(List<AndroidAppLink> value) {
+    this.mAndroid = value;
     return this;
   }
 
-  public Object getFieldGetStarted() {
-    return mGetStarted;
+  public CatalogItemAppLinks setFieldAndroid(String value) {
+    Type type = new TypeToken<List<AndroidAppLink>>(){}.getType();
+    this.mAndroid = AndroidAppLink.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<IosAppLink> getFieldIos() {
+    return mIos;
   }
 
-  public MessengerProfile setFieldGetStarted(Object value) {
-    this.mGetStarted = value;
+  public CatalogItemAppLinks setFieldIos(List<IosAppLink> value) {
+    this.mIos = value;
     return this;
   }
 
-  public List<Object> getFieldGreeting() {
-    return mGreeting;
+  public CatalogItemAppLinks setFieldIos(String value) {
+    Type type = new TypeToken<List<IosAppLink>>(){}.getType();
+    this.mIos = IosAppLink.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<IosAppLink> getFieldIpad() {
+    return mIpad;
   }
 
-  public MessengerProfile setFieldGreeting(List<Object> value) {
-    this.mGreeting = value;
+  public CatalogItemAppLinks setFieldIpad(List<IosAppLink> value) {
+    this.mIpad = value;
     return this;
   }
 
-  public List<Object> getFieldIceBreakers() {
-    return mIceBreakers;
+  public CatalogItemAppLinks setFieldIpad(String value) {
+    Type type = new TypeToken<List<IosAppLink>>(){}.getType();
+    this.mIpad = IosAppLink.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<IosAppLink> getFieldIphone() {
+    return mIphone;
   }
 
-  public MessengerProfile setFieldIceBreakers(List<Object> value) {
-    this.mIceBreakers = value;
+  public CatalogItemAppLinks setFieldIphone(List<IosAppLink> value) {
+    this.mIphone = value;
     return this;
   }
 
-  public Object getFieldPaymentSettings() {
-    return mPaymentSettings;
+  public CatalogItemAppLinks setFieldIphone(String value) {
+    Type type = new TypeToken<List<IosAppLink>>(){}.getType();
+    this.mIphone = IosAppLink.getGson().fromJson(value, type);
+    return this;
+  }
+  public WebAppLink getFieldWeb() {
+    return mWeb;
   }
 
-  public MessengerProfile setFieldPaymentSettings(Object value) {
-    this.mPaymentSettings = value;
+  public CatalogItemAppLinks setFieldWeb(WebAppLink value) {
+    this.mWeb = value;
     return this;
   }
 
-  public List<Object> getFieldPersistentMenu() {
-    return mPersistentMenu;
+  public CatalogItemAppLinks setFieldWeb(String value) {
+    Type type = new TypeToken<WebAppLink>(){}.getType();
+    this.mWeb = WebAppLink.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<WindowsAppLink> getFieldWindows() {
+    return mWindows;
   }
 
-  public MessengerProfile setFieldPersistentMenu(List<Object> value) {
-    this.mPersistentMenu = value;
+  public CatalogItemAppLinks setFieldWindows(List<WindowsAppLink> value) {
+    this.mWindows = value;
     return this;
   }
 
-  public Object getFieldTargetAudience() {
-    return mTargetAudience;
+  public CatalogItemAppLinks setFieldWindows(String value) {
+    Type type = new TypeToken<List<WindowsAppLink>>(){}.getType();
+    this.mWindows = WindowsAppLink.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<WindowsPhoneAppLink> getFieldWindowsPhone() {
+    return mWindowsPhone;
   }
 
-  public MessengerProfile setFieldTargetAudience(Object value) {
-    this.mTargetAudience = value;
+  public CatalogItemAppLinks setFieldWindowsPhone(List<WindowsPhoneAppLink> value) {
+    this.mWindowsPhone = value;
     return this;
   }
 
-  public List<String> getFieldWhitelistedDomains() {
-    return mWhitelistedDomains;
+  public CatalogItemAppLinks setFieldWindowsPhone(String value) {
+    Type type = new TypeToken<List<WindowsPhoneAppLink>>(){}.getType();
+    this.mWindowsPhone = WindowsPhoneAppLink.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<WindowsAppLink> getFieldWindowsUniversal() {
+    return mWindowsUniversal;
   }
 
-  public MessengerProfile setFieldWhitelistedDomains(List<String> value) {
-    this.mWhitelistedDomains = value;
+  public CatalogItemAppLinks setFieldWindowsUniversal(List<WindowsAppLink> value) {
+    this.mWindowsUniversal = value;
     return this;
   }
 
+  public CatalogItemAppLinks setFieldWindowsUniversal(String value) {
+    Type type = new TypeToken<List<WindowsAppLink>>(){}.getType();
+    this.mWindowsUniversal = WindowsAppLink.getGson().fromJson(value, type);
+    return this;
+  }
 
 
 
@@ -310,24 +350,24 @@ public class MessengerProfile extends APINode {
     return gson;
   }
 
-  public MessengerProfile copyFrom(MessengerProfile instance) {
-    this.mAccountLinkingUrl = instance.mAccountLinkingUrl;
-    this.mGetStarted = instance.mGetStarted;
-    this.mGreeting = instance.mGreeting;
-    this.mIceBreakers = instance.mIceBreakers;
-    this.mPaymentSettings = instance.mPaymentSettings;
-    this.mPersistentMenu = instance.mPersistentMenu;
-    this.mTargetAudience = instance.mTargetAudience;
-    this.mWhitelistedDomains = instance.mWhitelistedDomains;
+  public CatalogItemAppLinks copyFrom(CatalogItemAppLinks instance) {
+    this.mAndroid = instance.mAndroid;
+    this.mIos = instance.mIos;
+    this.mIpad = instance.mIpad;
+    this.mIphone = instance.mIphone;
+    this.mWeb = instance.mWeb;
+    this.mWindows = instance.mWindows;
+    this.mWindowsPhone = instance.mWindowsPhone;
+    this.mWindowsUniversal = instance.mWindowsUniversal;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<MessengerProfile> getParser() {
-    return new APIRequest.ResponseParser<MessengerProfile>() {
-      public APINodeList<MessengerProfile> parseResponse(String response, APIContext context, APIRequest<MessengerProfile> request, String header) throws MalformedResponseException {
-        return MessengerProfile.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<CatalogItemAppLinks> getParser() {
+    return new APIRequest.ResponseParser<CatalogItemAppLinks>() {
+      public APINodeList<CatalogItemAppLinks> parseResponse(String response, APIContext context, APIRequest<CatalogItemAppLinks> request, String header) throws MalformedResponseException {
+        return CatalogItemAppLinks.parseResponse(response, context, request, header);
       }
     };
   }

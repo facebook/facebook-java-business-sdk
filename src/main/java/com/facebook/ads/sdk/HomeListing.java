@@ -71,6 +71,8 @@ public class HomeListing extends APINode {
   private String mAgentName = null;
   @SerializedName("agent_phone")
   private String mAgentPhone = null;
+  @SerializedName("applinks")
+  private CatalogItemAppLinks mApplinks = null;
   @SerializedName("area_size")
   private Long mAreaSize = null;
   @SerializedName("area_unit")
@@ -394,6 +396,10 @@ public class HomeListing extends APINode {
     return mAgentPhone;
   }
 
+  public CatalogItemAppLinks getFieldApplinks() {
+    return mApplinks;
+  }
+
   public Long getFieldAreaSize() {
     return mAreaSize;
   }
@@ -651,6 +657,7 @@ public class HomeListing extends APINode {
       "agent_fb_page_id",
       "agent_name",
       "agent_phone",
+      "applinks",
       "area_size",
       "area_unit",
       "availability",
@@ -829,6 +836,13 @@ public class HomeListing extends APINode {
     }
     public APIRequestGet requestAgentPhoneField (boolean value) {
       this.requestField("agent_phone", value);
+      return this;
+    }
+    public APIRequestGet requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGet requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
       return this;
     }
     public APIRequestGet requestAreaSizeField () {
@@ -1303,6 +1317,7 @@ public class HomeListing extends APINode {
     this.mAgentFbPageId = instance.mAgentFbPageId;
     this.mAgentName = instance.mAgentName;
     this.mAgentPhone = instance.mAgentPhone;
+    this.mApplinks = instance.mApplinks;
     this.mAreaSize = instance.mAreaSize;
     this.mAreaUnit = instance.mAreaUnit;
     this.mAvailability = instance.mAvailability;

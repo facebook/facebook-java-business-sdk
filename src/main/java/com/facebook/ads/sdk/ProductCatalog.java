@@ -57,8 +57,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class ProductCatalog extends APINode {
   @SerializedName("business")
   private Business mBusiness = null;
-  @SerializedName("cpas_parent_catalog_settings")
-  private CPASParentCatalogSettings mCpasParentCatalogSettings = null;
   @SerializedName("da_display_settings")
   private ProductCatalogImageSettings mDaDisplaySettings = null;
   @SerializedName("default_image_url")
@@ -462,13 +460,6 @@ public class ProductCatalog extends APINode {
       mBusiness.context = getContext();
     }
     return mBusiness;
-  }
-
-  public CPASParentCatalogSettings getFieldCpasParentCatalogSettings() {
-    if (mCpasParentCatalogSettings != null) {
-      mCpasParentCatalogSettings.context = getContext();
-    }
-    return mCpasParentCatalogSettings;
   }
 
   public ProductCatalogImageSettings getFieldDaDisplaySettings() {
@@ -1397,6 +1388,7 @@ public class ProductCatalog extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "applinks",
       "automotive_model_id",
       "availability",
       "body_style",
@@ -1531,6 +1523,13 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestGetAutomotiveModels requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGetAutomotiveModels requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
+      return this;
+    }
     public APIRequestGetAutomotiveModels requestAutomotiveModelIdField () {
       return this.requestAutomotiveModelIdField(true);
     }
@@ -2474,6 +2473,7 @@ public class ProductCatalog extends APINode {
 
     public static final String[] FIELDS = {
       "address",
+      "applinks",
       "currency",
       "description",
       "destination_id",
@@ -2599,6 +2599,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetDestinations requestAddressField (boolean value) {
       this.requestField("address", value);
+      return this;
+    }
+    public APIRequestGetDestinations requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGetDestinations requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
       return this;
     }
     public APIRequestGetDestinations requestCurrencyField () {
@@ -3251,6 +3258,7 @@ public class ProductCatalog extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "applinks",
       "currency",
       "description",
       "destination_airport",
@@ -3374,6 +3382,13 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestGetFlights requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGetFlights requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
+      return this;
+    }
     public APIRequestGetFlights requestCurrencyField () {
       return this.requestCurrencyField(true);
     }
@@ -3495,6 +3510,7 @@ public class ProductCatalog extends APINode {
       "agent_fb_page_id",
       "agent_name",
       "agent_phone",
+      "applinks",
       "area_size",
       "area_unit",
       "availability",
@@ -3691,6 +3707,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetHomeListings requestAgentPhoneField (boolean value) {
       this.requestField("agent_phone", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGetHomeListings requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
       return this;
     }
     public APIRequestGetHomeListings requestAreaSizeField () {
@@ -4456,6 +4479,7 @@ public class ProductCatalog extends APINode {
 
     public static final String[] FIELDS = {
       "address",
+      "applinks",
       "brand",
       "category",
       "currency",
@@ -4587,6 +4611,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetHotels requestAddressField (boolean value) {
       this.requestField("address", value);
+      return this;
+    }
+    public APIRequestGetHotels requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGetHotels requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
       return this;
     }
     public APIRequestGetHotels requestBrandField () {
@@ -6506,6 +6537,7 @@ public class ProductCatalog extends APINode {
       "additional_image_urls",
       "additional_variant_attributes",
       "age_group",
+      "applinks",
       "availability",
       "brand",
       "capability_to_review_status",
@@ -6697,6 +6729,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetProducts requestAgeGroupField (boolean value) {
       this.requestField("age_group", value);
+      return this;
+    }
+    public APIRequestGetProducts requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGetProducts requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
       return this;
     }
     public APIRequestGetProducts requestAvailabilityField () {
@@ -7595,6 +7634,7 @@ public class ProductCatalog extends APINode {
       "amount_percentage",
       "amount_price",
       "amount_qualifier",
+      "applinks",
       "body_style",
       "cashback_currency",
       "cashback_price",
@@ -7758,6 +7798,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetVehicleOffers requestAmountQualifierField (boolean value) {
       this.requestField("amount_qualifier", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGetVehicleOffers requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
       return this;
     }
     public APIRequestGetVehicleOffers requestBodyStyleField () {
@@ -7972,6 +8019,7 @@ public class ProductCatalog extends APINode {
 
     public static final String[] FIELDS = {
       "address",
+      "applinks",
       "availability",
       "body_style",
       "condition",
@@ -8128,6 +8176,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetVehicles requestAddressField (boolean value) {
       this.requestField("address", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGetVehicles requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
       return this;
     }
     public APIRequestGetVehicles requestAvailabilityField () {
@@ -8882,7 +8937,6 @@ public class ProductCatalog extends APINode {
 
     public static final String[] FIELDS = {
       "business",
-      "cpas_parent_catalog_settings",
       "da_display_settings",
       "default_image_url",
       "fallback_image_url",
@@ -8989,13 +9043,6 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGet requestBusinessField (boolean value) {
       this.requestField("business", value);
-      return this;
-    }
-    public APIRequestGet requestCpasParentCatalogSettingsField () {
-      return this.requestCpasParentCatalogSettingsField(true);
-    }
-    public APIRequestGet requestCpasParentCatalogSettingsField (boolean value) {
-      this.requestField("cpas_parent_catalog_settings", value);
       return this;
     }
     public APIRequestGet requestDaDisplaySettingsField () {
@@ -9247,6 +9294,8 @@ public class ProductCatalog extends APINode {
       VALUE_HOTELS("hotels"),
       @SerializedName("jobs")
       VALUE_JOBS("jobs"),
+      @SerializedName("local_service_businesses")
+      VALUE_LOCAL_SERVICE_BUSINESSES("local_service_businesses"),
       @SerializedName("offer_items")
       VALUE_OFFER_ITEMS("offer_items"),
       @SerializedName("offline_commerce")
@@ -9361,7 +9410,6 @@ public class ProductCatalog extends APINode {
 
   public ProductCatalog copyFrom(ProductCatalog instance) {
     this.mBusiness = instance.mBusiness;
-    this.mCpasParentCatalogSettings = instance.mCpasParentCatalogSettings;
     this.mDaDisplaySettings = instance.mDaDisplaySettings;
     this.mDefaultImageUrl = instance.mDefaultImageUrl;
     this.mFallbackImageUrl = instance.mFallbackImageUrl;

@@ -459,6 +459,7 @@ public class AdReportRun extends APINode {
       "outbound_clicks_ctr",
       "place_page_name",
       "purchase_roas",
+      "qualifying_question_qualify_answer_rate",
       "quality_ranking",
       "quality_score_ectr",
       "quality_score_ecvr",
@@ -1189,6 +1190,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestPurchaseRoasField (boolean value) {
       this.requestField("purchase_roas", value);
+      return this;
+    }
+    public APIRequestGetInsights requestQualifyingQuestionQualifyAnswerRateField () {
+      return this.requestQualifyingQuestionQualifyAnswerRateField(true);
+    }
+    public APIRequestGetInsights requestQualifyingQuestionQualifyAnswerRateField (boolean value) {
+      this.requestField("qualifying_question_qualify_answer_rate", value);
       return this;
     }
     public APIRequestGetInsights requestQualityRankingField () {

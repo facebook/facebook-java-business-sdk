@@ -7634,7 +7634,6 @@ public class Business extends APINode {
 
     public static final String[] FIELDS = {
       "business",
-      "cpas_parent_catalog_settings",
       "da_display_settings",
       "default_image_url",
       "fallback_image_url",
@@ -7741,13 +7740,6 @@ public class Business extends APINode {
     }
     public APIRequestGetClientProductCatalogs requestBusinessField (boolean value) {
       this.requestField("business", value);
-      return this;
-    }
-    public APIRequestGetClientProductCatalogs requestCpasParentCatalogSettingsField () {
-      return this.requestCpasParentCatalogSettingsField(true);
-    }
-    public APIRequestGetClientProductCatalogs requestCpasParentCatalogSettingsField (boolean value) {
-      this.requestField("cpas_parent_catalog_settings", value);
       return this;
     }
     public APIRequestGetClientProductCatalogs requestDaDisplaySettingsField () {
@@ -15076,7 +15068,6 @@ public class Business extends APINode {
 
     public static final String[] FIELDS = {
       "business",
-      "cpas_parent_catalog_settings",
       "da_display_settings",
       "default_image_url",
       "fallback_image_url",
@@ -15183,13 +15174,6 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedProductCatalogs requestBusinessField (boolean value) {
       this.requestField("business", value);
-      return this;
-    }
-    public APIRequestGetOwnedProductCatalogs requestCpasParentCatalogSettingsField () {
-      return this.requestCpasParentCatalogSettingsField(true);
-    }
-    public APIRequestGetOwnedProductCatalogs requestCpasParentCatalogSettingsField (boolean value) {
-      this.requestField("cpas_parent_catalog_settings", value);
       return this;
     }
     public APIRequestGetOwnedProductCatalogs requestDaDisplaySettingsField () {

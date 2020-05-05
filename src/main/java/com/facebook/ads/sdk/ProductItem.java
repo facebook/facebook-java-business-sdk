@@ -63,6 +63,8 @@ public class ProductItem extends APINode {
   private Map<String, String> mAdditionalVariantAttributes = null;
   @SerializedName("age_group")
   private EnumAgeGroup mAgeGroup = null;
+  @SerializedName("applinks")
+  private CatalogItemAppLinks mApplinks = null;
   @SerializedName("availability")
   private EnumAvailability mAvailability = null;
   @SerializedName("brand")
@@ -397,6 +399,10 @@ public class ProductItem extends APINode {
 
   public EnumAgeGroup getFieldAgeGroup() {
     return mAgeGroup;
+  }
+
+  public CatalogItemAppLinks getFieldApplinks() {
+    return mApplinks;
   }
 
   public EnumAvailability getFieldAvailability() {
@@ -871,6 +877,7 @@ public class ProductItem extends APINode {
       "additional_image_urls",
       "additional_variant_attributes",
       "age_group",
+      "applinks",
       "availability",
       "brand",
       "capability_to_review_status",
@@ -1053,6 +1060,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestAgeGroupField (boolean value) {
       this.requestField("age_group", value);
+      return this;
+    }
+    public APIRequestGet requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGet requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
       return this;
     }
     public APIRequestGet requestAvailabilityField () {
@@ -2539,6 +2553,7 @@ public class ProductItem extends APINode {
     this.mAdditionalImageUrls = instance.mAdditionalImageUrls;
     this.mAdditionalVariantAttributes = instance.mAdditionalVariantAttributes;
     this.mAgeGroup = instance.mAgeGroup;
+    this.mApplinks = instance.mApplinks;
     this.mAvailability = instance.mAvailability;
     this.mBrand = instance.mBrand;
     this.mCapabilityToReviewStatus = instance.mCapabilityToReviewStatus;

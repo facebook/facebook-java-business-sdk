@@ -284,10 +284,6 @@ public class PublisherBlockList extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGetPagedAppPublishers getPagedAppPublishers() {
-    return new APIRequestGetPagedAppPublishers(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetPagedWebPublishers getPagedWebPublishers() {
     return new APIRequestGetPagedWebPublishers(this.getPrefixedId().toString(), context);
   }
@@ -346,116 +342,6 @@ public class PublisherBlockList extends APINode {
   }
 
 
-
-  public static class APIRequestGetPagedAppPublishers extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "draft_id",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetPagedAppPublishers.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetPagedAppPublishers(String nodeId, APIContext context) {
-      super(context, nodeId, "/paged_app_publishers", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetPagedAppPublishers setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPagedAppPublishers setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetPagedAppPublishers setDraftId (String draftId) {
-      this.setParam("draft_id", draftId);
-      return this;
-    }
-
-    public APIRequestGetPagedAppPublishers requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetPagedAppPublishers requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPagedAppPublishers requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetPagedAppPublishers requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPagedAppPublishers requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPagedAppPublishers requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
 
   public static class APIRequestGetPagedWebPublishers extends APIRequest<APINode> {
 

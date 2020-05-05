@@ -55,6 +55,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class HotelRoom extends APINode {
+  @SerializedName("applinks")
+  private CatalogItemAppLinks mApplinks = null;
   @SerializedName("base_price")
   private String mBasePrice = null;
   @SerializedName("currency")
@@ -300,6 +302,10 @@ public class HotelRoom extends APINode {
     return new APIRequestUpdate(this.getPrefixedId().toString(), context);
   }
 
+
+  public CatalogItemAppLinks getFieldApplinks() {
+    return mApplinks;
+  }
 
   public String getFieldBasePrice() {
     return mBasePrice;
@@ -594,6 +600,7 @@ public class HotelRoom extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "applinks",
       "base_price",
       "currency",
       "description",
@@ -695,6 +702,13 @@ public class HotelRoom extends APINode {
       return this;
     }
 
+    public APIRequestGet requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGet requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
+      return this;
+    }
     public APIRequestGet requestBasePriceField () {
       return this.requestBasePriceField(true);
     }
@@ -970,6 +984,7 @@ public class HotelRoom extends APINode {
   }
 
   public HotelRoom copyFrom(HotelRoom instance) {
+    this.mApplinks = instance.mApplinks;
     this.mBasePrice = instance.mBasePrice;
     this.mCurrency = instance.mCurrency;
     this.mDescription = instance.mDescription;

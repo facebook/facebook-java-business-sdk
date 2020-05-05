@@ -63,6 +63,8 @@ public class VehicleOffer extends APINode {
   private String mAmountPrice = null;
   @SerializedName("amount_qualifier")
   private String mAmountQualifier = null;
+  @SerializedName("applinks")
+  private CatalogItemAppLinks mApplinks = null;
   @SerializedName("body_style")
   private String mBodyStyle = null;
   @SerializedName("cashback_currency")
@@ -349,6 +351,10 @@ public class VehicleOffer extends APINode {
     return mAmountQualifier;
   }
 
+  public CatalogItemAppLinks getFieldApplinks() {
+    return mApplinks;
+  }
+
   public String getFieldBodyStyle() {
     return mBodyStyle;
   }
@@ -478,6 +484,7 @@ public class VehicleOffer extends APINode {
       "amount_percentage",
       "amount_price",
       "amount_qualifier",
+      "applinks",
       "body_style",
       "cashback_currency",
       "cashback_price",
@@ -623,6 +630,13 @@ public class VehicleOffer extends APINode {
     }
     public APIRequestGet requestAmountQualifierField (boolean value) {
       this.requestField("amount_qualifier", value);
+      return this;
+    }
+    public APIRequestGet requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGet requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
       return this;
     }
     public APIRequestGet requestBodyStyleField () {
@@ -842,6 +856,7 @@ public class VehicleOffer extends APINode {
     this.mAmountPercentage = instance.mAmountPercentage;
     this.mAmountPrice = instance.mAmountPrice;
     this.mAmountQualifier = instance.mAmountQualifier;
+    this.mApplinks = instance.mApplinks;
     this.mBodyStyle = instance.mBodyStyle;
     this.mCashbackCurrency = instance.mCashbackCurrency;
     this.mCashbackPrice = instance.mCashbackPrice;

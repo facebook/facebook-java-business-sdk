@@ -227,6 +227,8 @@ public class AdsInsights extends APINode {
   private String mPlacePageName = null;
   @SerializedName("purchase_roas")
   private List<AdsActionStats> mPurchaseRoas = null;
+  @SerializedName("qualifying_question_qualify_answer_rate")
+  private String mQualifyingQuestionQualifyAnswerRate = null;
   @SerializedName("quality_ranking")
   private String mQualityRanking = null;
   @SerializedName("quality_score_ectr")
@@ -1340,6 +1342,15 @@ public class AdsInsights extends APINode {
     this.mPurchaseRoas = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
+  public String getFieldQualifyingQuestionQualifyAnswerRate() {
+    return mQualifyingQuestionQualifyAnswerRate;
+  }
+
+  public AdsInsights setFieldQualifyingQuestionQualifyAnswerRate(String value) {
+    this.mQualifyingQuestionQualifyAnswerRate = value;
+    return this;
+  }
+
   public String getFieldQualityRanking() {
     return mQualityRanking;
   }
@@ -2152,6 +2163,7 @@ public class AdsInsights extends APINode {
     this.mOutboundClicksCtr = instance.mOutboundClicksCtr;
     this.mPlacePageName = instance.mPlacePageName;
     this.mPurchaseRoas = instance.mPurchaseRoas;
+    this.mQualifyingQuestionQualifyAnswerRate = instance.mQualifyingQuestionQualifyAnswerRate;
     this.mQualityRanking = instance.mQualityRanking;
     this.mQualityScoreEctr = instance.mQualityScoreEctr;
     this.mQualityScoreEcvr = instance.mQualityScoreEcvr;

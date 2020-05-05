@@ -14365,6 +14365,7 @@ public class AdAccount extends APINode {
       "recommendations",
       "source_campaign",
       "source_campaign_id",
+      "special_ad_categories",
       "special_ad_category",
       "spend_cap",
       "start_time",
@@ -14674,6 +14675,13 @@ public class AdAccount extends APINode {
       this.requestField("source_campaign_id", value);
       return this;
     }
+    public APIRequestGetCampaigns requestSpecialAdCategoriesField () {
+      return this.requestSpecialAdCategoriesField(true);
+    }
+    public APIRequestGetCampaigns requestSpecialAdCategoriesField (boolean value) {
+      this.requestField("special_ad_categories", value);
+      return this;
+    }
     public APIRequestGetCampaigns requestSpecialAdCategoryField () {
       return this.requestSpecialAdCategoryField(true);
     }
@@ -14735,7 +14743,6 @@ public class AdAccount extends APINode {
     public static final String[] PARAMS = {
       "adlabels",
       "bid_strategy",
-      "budget_rebalance_flag",
       "buying_type",
       "daily_budget",
       "execution_options",
@@ -14746,7 +14753,7 @@ public class AdAccount extends APINode {
       "pacing_type",
       "promoted_object",
       "source_campaign_id",
-      "special_ad_category",
+      "special_ad_categories",
       "spend_cap",
       "status",
       "topline_id",
@@ -14824,15 +14831,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateCampaign setBidStrategy (String bidStrategy) {
       this.setParam("bid_strategy", bidStrategy);
-      return this;
-    }
-
-    public APIRequestCreateCampaign setBudgetRebalanceFlag (Boolean budgetRebalanceFlag) {
-      this.setParam("budget_rebalance_flag", budgetRebalanceFlag);
-      return this;
-    }
-    public APIRequestCreateCampaign setBudgetRebalanceFlag (String budgetRebalanceFlag) {
-      this.setParam("budget_rebalance_flag", budgetRebalanceFlag);
       return this;
     }
 
@@ -14914,12 +14912,12 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateCampaign setSpecialAdCategory (Campaign.EnumSpecialAdCategory specialAdCategory) {
-      this.setParam("special_ad_category", specialAdCategory);
+    public APIRequestCreateCampaign setSpecialAdCategories (List<Campaign.EnumSpecialAdCategories> specialAdCategories) {
+      this.setParam("special_ad_categories", specialAdCategories);
       return this;
     }
-    public APIRequestCreateCampaign setSpecialAdCategory (String specialAdCategory) {
-      this.setParam("special_ad_category", specialAdCategory);
+    public APIRequestCreateCampaign setSpecialAdCategories (String specialAdCategories) {
+      this.setParam("special_ad_categories", specialAdCategories);
       return this;
     }
 
@@ -15031,6 +15029,7 @@ public class AdAccount extends APINode {
       "recommendations",
       "source_campaign",
       "source_campaign_id",
+      "special_ad_categories",
       "special_ad_category",
       "spend_cap",
       "start_time",
@@ -15320,6 +15319,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetCampaignsByLabels requestSourceCampaignIdField (boolean value) {
       this.requestField("source_campaign_id", value);
+      return this;
+    }
+    public APIRequestGetCampaignsByLabels requestSpecialAdCategoriesField () {
+      return this.requestSpecialAdCategoriesField(true);
+    }
+    public APIRequestGetCampaignsByLabels requestSpecialAdCategoriesField (boolean value) {
+      this.requestField("special_ad_categories", value);
       return this;
     }
     public APIRequestGetCampaignsByLabels requestSpecialAdCategoryField () {

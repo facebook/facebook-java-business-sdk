@@ -447,6 +447,7 @@ public class ProductFeed extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "applinks",
       "automotive_model_id",
       "availability",
       "body_style",
@@ -581,6 +582,13 @@ public class ProductFeed extends APINode {
       return this;
     }
 
+    public APIRequestGetAutomotiveModels requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGetAutomotiveModels requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
+      return this;
+    }
     public APIRequestGetAutomotiveModels requestAutomotiveModelIdField () {
       return this.requestAutomotiveModelIdField(true);
     }
@@ -772,6 +780,7 @@ public class ProductFeed extends APINode {
 
     public static final String[] FIELDS = {
       "address",
+      "applinks",
       "currency",
       "description",
       "destination_id",
@@ -899,6 +908,13 @@ public class ProductFeed extends APINode {
       this.requestField("address", value);
       return this;
     }
+    public APIRequestGetDestinations requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGetDestinations requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
+      return this;
+    }
     public APIRequestGetDestinations requestCurrencyField () {
       return this.requestCurrencyField(true);
     }
@@ -991,6 +1007,7 @@ public class ProductFeed extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "applinks",
       "currency",
       "description",
       "destination_airport",
@@ -1114,6 +1131,13 @@ public class ProductFeed extends APINode {
       return this;
     }
 
+    public APIRequestGetFlights requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGetFlights requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
+      return this;
+    }
     public APIRequestGetFlights requestCurrencyField () {
       return this.requestCurrencyField(true);
     }
@@ -1235,6 +1259,7 @@ public class ProductFeed extends APINode {
       "agent_fb_page_id",
       "agent_name",
       "agent_phone",
+      "applinks",
       "area_size",
       "area_unit",
       "availability",
@@ -1431,6 +1456,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetHomeListings requestAgentPhoneField (boolean value) {
       this.requestField("agent_phone", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGetHomeListings requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
       return this;
     }
     public APIRequestGetHomeListings requestAreaSizeField () {
@@ -1680,6 +1712,7 @@ public class ProductFeed extends APINode {
 
     public static final String[] FIELDS = {
       "address",
+      "applinks",
       "brand",
       "category",
       "currency",
@@ -1811,6 +1844,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetHotels requestAddressField (boolean value) {
       this.requestField("address", value);
+      return this;
+    }
+    public APIRequestGetHotels requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGetHotels requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
       return this;
     }
     public APIRequestGetHotels requestBrandField () {
@@ -1951,6 +1991,7 @@ public class ProductFeed extends APINode {
       "additional_image_urls",
       "additional_variant_attributes",
       "age_group",
+      "applinks",
       "availability",
       "brand",
       "capability_to_review_status",
@@ -2133,6 +2174,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetProducts requestAgeGroupField (boolean value) {
       this.requestField("age_group", value);
+      return this;
+    }
+    public APIRequestGetProducts requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGetProducts requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
       return this;
     }
     public APIRequestGetProducts requestAvailabilityField () {
@@ -3399,6 +3447,7 @@ public class ProductFeed extends APINode {
       "amount_percentage",
       "amount_price",
       "amount_qualifier",
+      "applinks",
       "body_style",
       "cashback_currency",
       "cashback_price",
@@ -3562,6 +3611,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetVehicleOffers requestAmountQualifierField (boolean value) {
       this.requestField("amount_qualifier", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGetVehicleOffers requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
       return this;
     }
     public APIRequestGetVehicleOffers requestBodyStyleField () {
@@ -3776,6 +3832,7 @@ public class ProductFeed extends APINode {
 
     public static final String[] FIELDS = {
       "address",
+      "applinks",
       "availability",
       "body_style",
       "condition",
@@ -3932,6 +3989,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetVehicles requestAddressField (boolean value) {
       this.requestField("address", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGetVehicles requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
       return this;
     }
     public APIRequestGetVehicles requestAvailabilityField () {

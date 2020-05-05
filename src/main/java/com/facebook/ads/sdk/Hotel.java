@@ -57,6 +57,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class Hotel extends APINode {
   @SerializedName("address")
   private String mAddress = null;
+  @SerializedName("applinks")
+  private CatalogItemAppLinks mApplinks = null;
   @SerializedName("brand")
   private String mBrand = null;
   @SerializedName("category")
@@ -321,6 +323,10 @@ public class Hotel extends APINode {
     return mAddress;
   }
 
+  public CatalogItemAppLinks getFieldApplinks() {
+    return mApplinks;
+  }
+
   public String getFieldBrand() {
     return mBrand;
   }
@@ -402,6 +408,7 @@ public class Hotel extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "applinks",
       "base_price",
       "currency",
       "description",
@@ -503,6 +510,13 @@ public class Hotel extends APINode {
       return this;
     }
 
+    public APIRequestGetHotelRooms requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGetHotelRooms requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
+      return this;
+    }
     public APIRequestGetHotelRooms requestBasePriceField () {
       return this.requestBasePriceField(true);
     }
@@ -691,6 +705,7 @@ public class Hotel extends APINode {
 
     public static final String[] FIELDS = {
       "address",
+      "applinks",
       "brand",
       "category",
       "currency",
@@ -804,6 +819,13 @@ public class Hotel extends APINode {
     }
     public APIRequestGet requestAddressField (boolean value) {
       this.requestField("address", value);
+      return this;
+    }
+    public APIRequestGet requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGet requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
       return this;
     }
     public APIRequestGet requestBrandField () {
@@ -1143,6 +1165,7 @@ public class Hotel extends APINode {
 
   public Hotel copyFrom(Hotel instance) {
     this.mAddress = instance.mAddress;
+    this.mApplinks = instance.mApplinks;
     this.mBrand = instance.mBrand;
     this.mCategory = instance.mCategory;
     this.mCurrency = instance.mCurrency;

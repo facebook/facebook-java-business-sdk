@@ -566,10 +566,6 @@ public class Page extends APINode {
     return new APIRequestGetAlbums(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateAlbum createAlbum() {
-    return new APIRequestCreateAlbum(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestDeleteAssignedUsers deleteAssignedUsers() {
     return new APIRequestDeleteAssignedUsers(this.getPrefixedId().toString(), context);
   }
@@ -664,10 +660,6 @@ public class Page extends APINode {
 
   public APIRequestGetEvents getEvents() {
     return new APIRequestGetEvents(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetFeaturedVideosCollection getFeaturedVideosCollection() {
-    return new APIRequestGetFeaturedVideosCollection(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetFeed getFeed() {
@@ -948,10 +940,6 @@ public class Page extends APINode {
 
   public APIRequestCreateUnlinkAccount createUnlinkAccount() {
     return new APIRequestCreateUnlinkAccount(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetUpcomingChanges getUpcomingChanges() {
-    return new APIRequestGetUpcomingChanges(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetVideoCopyrightRules getVideoCopyrightRules() {
@@ -2927,196 +2915,6 @@ public class Page extends APINode {
       this.requestField("video_count", value);
       return this;
     }
-  }
-
-  public static class APIRequestCreateAlbum extends APIRequest<Album> {
-
-    Album lastResponse = null;
-    @Override
-    public Album getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "contributors",
-      "description",
-      "is_default",
-      "location",
-      "make_shared_album",
-      "message",
-      "name",
-      "place",
-      "privacy",
-      "tags",
-      "visible",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Album parseResponse(String response, String header) throws APIException {
-      return Album.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Album execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Album execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Album> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Album> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Album>() {
-           public Album apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateAlbum.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateAlbum(String nodeId, APIContext context) {
-      super(context, nodeId, "/albums", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateAlbum setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAlbum setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateAlbum setContributors (List<Long> contributors) {
-      this.setParam("contributors", contributors);
-      return this;
-    }
-    public APIRequestCreateAlbum setContributors (String contributors) {
-      this.setParam("contributors", contributors);
-      return this;
-    }
-
-    public APIRequestCreateAlbum setDescription (String description) {
-      this.setParam("description", description);
-      return this;
-    }
-
-    public APIRequestCreateAlbum setIsDefault (Boolean isDefault) {
-      this.setParam("is_default", isDefault);
-      return this;
-    }
-    public APIRequestCreateAlbum setIsDefault (String isDefault) {
-      this.setParam("is_default", isDefault);
-      return this;
-    }
-
-    public APIRequestCreateAlbum setLocation (String location) {
-      this.setParam("location", location);
-      return this;
-    }
-
-    public APIRequestCreateAlbum setMakeSharedAlbum (Boolean makeSharedAlbum) {
-      this.setParam("make_shared_album", makeSharedAlbum);
-      return this;
-    }
-    public APIRequestCreateAlbum setMakeSharedAlbum (String makeSharedAlbum) {
-      this.setParam("make_shared_album", makeSharedAlbum);
-      return this;
-    }
-
-    public APIRequestCreateAlbum setMessage (String message) {
-      this.setParam("message", message);
-      return this;
-    }
-
-    public APIRequestCreateAlbum setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateAlbum setPlace (Object place) {
-      this.setParam("place", place);
-      return this;
-    }
-    public APIRequestCreateAlbum setPlace (String place) {
-      this.setParam("place", place);
-      return this;
-    }
-
-    public APIRequestCreateAlbum setPrivacy (String privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
-
-    public APIRequestCreateAlbum setTags (List<Long> tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-    public APIRequestCreateAlbum setTags (String tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-
-    public APIRequestCreateAlbum setVisible (String visible) {
-      this.setParam("visible", visible);
-      return this;
-    }
-
-    public APIRequestCreateAlbum requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateAlbum requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAlbum requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateAlbum requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAlbum requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAlbum requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestDeleteAssignedUsers extends APIRequest<APINode> {
@@ -8126,430 +7924,6 @@ public class Page extends APINode {
       return this.requestUpdatedTimeField(true);
     }
     public APIRequestGetEvents requestUpdatedTimeField (boolean value) {
-      this.requestField("updated_time", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestGetFeaturedVideosCollection extends APIRequest<AdVideo> {
-
-    APINodeList<AdVideo> lastResponse = null;
-    @Override
-    public APINodeList<AdVideo> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "ad_breaks",
-      "backdated_time",
-      "backdated_time_granularity",
-      "content_category",
-      "content_tags",
-      "copyright",
-      "copyright_monitoring_status",
-      "created_time",
-      "custom_labels",
-      "description",
-      "embed_html",
-      "embeddable",
-      "event",
-      "expiration",
-      "format",
-      "from",
-      "icon",
-      "id",
-      "is_crosspost_video",
-      "is_crossposting_eligible",
-      "is_episode",
-      "is_instagram_eligible",
-      "is_reference_only",
-      "length",
-      "live_audience_count",
-      "live_status",
-      "music_video_copyright",
-      "permalink_url",
-      "picture",
-      "place",
-      "premiere_living_room_status",
-      "privacy",
-      "published",
-      "scheduled_publish_time",
-      "source",
-      "spherical",
-      "status",
-      "title",
-      "universal_video_id",
-      "updated_time",
-    };
-
-    @Override
-    public APINodeList<AdVideo> parseResponse(String response, String header) throws APIException {
-      return AdVideo.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<AdVideo> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<AdVideo> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<AdVideo>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<AdVideo>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<AdVideo>>() {
-           public APINodeList<AdVideo> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetFeaturedVideosCollection.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetFeaturedVideosCollection(String nodeId, APIContext context) {
-      super(context, nodeId, "/featured_videos_collection", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetFeaturedVideosCollection setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetFeaturedVideosCollection setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetFeaturedVideosCollection requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetFeaturedVideosCollection requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetFeaturedVideosCollection requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetFeaturedVideosCollection requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetFeaturedVideosCollection requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetFeaturedVideosCollection requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetFeaturedVideosCollection requestAdBreaksField () {
-      return this.requestAdBreaksField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestAdBreaksField (boolean value) {
-      this.requestField("ad_breaks", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestBackdatedTimeField () {
-      return this.requestBackdatedTimeField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestBackdatedTimeField (boolean value) {
-      this.requestField("backdated_time", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestBackdatedTimeGranularityField () {
-      return this.requestBackdatedTimeGranularityField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestBackdatedTimeGranularityField (boolean value) {
-      this.requestField("backdated_time_granularity", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestContentCategoryField () {
-      return this.requestContentCategoryField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestContentCategoryField (boolean value) {
-      this.requestField("content_category", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestContentTagsField () {
-      return this.requestContentTagsField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestContentTagsField (boolean value) {
-      this.requestField("content_tags", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestCopyrightField () {
-      return this.requestCopyrightField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestCopyrightField (boolean value) {
-      this.requestField("copyright", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestCopyrightMonitoringStatusField () {
-      return this.requestCopyrightMonitoringStatusField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestCopyrightMonitoringStatusField (boolean value) {
-      this.requestField("copyright_monitoring_status", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestCreatedTimeField () {
-      return this.requestCreatedTimeField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestCreatedTimeField (boolean value) {
-      this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestCustomLabelsField () {
-      return this.requestCustomLabelsField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestCustomLabelsField (boolean value) {
-      this.requestField("custom_labels", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestDescriptionField (boolean value) {
-      this.requestField("description", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestEmbedHtmlField () {
-      return this.requestEmbedHtmlField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestEmbedHtmlField (boolean value) {
-      this.requestField("embed_html", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestEmbeddableField () {
-      return this.requestEmbeddableField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestEmbeddableField (boolean value) {
-      this.requestField("embeddable", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestEventField () {
-      return this.requestEventField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestEventField (boolean value) {
-      this.requestField("event", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestExpirationField () {
-      return this.requestExpirationField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestExpirationField (boolean value) {
-      this.requestField("expiration", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestFormatField () {
-      return this.requestFormatField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestFormatField (boolean value) {
-      this.requestField("format", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestFromField () {
-      return this.requestFromField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestFromField (boolean value) {
-      this.requestField("from", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestIconField () {
-      return this.requestIconField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestIconField (boolean value) {
-      this.requestField("icon", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestIsCrosspostVideoField () {
-      return this.requestIsCrosspostVideoField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestIsCrosspostVideoField (boolean value) {
-      this.requestField("is_crosspost_video", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestIsCrosspostingEligibleField () {
-      return this.requestIsCrosspostingEligibleField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestIsCrosspostingEligibleField (boolean value) {
-      this.requestField("is_crossposting_eligible", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestIsEpisodeField () {
-      return this.requestIsEpisodeField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestIsEpisodeField (boolean value) {
-      this.requestField("is_episode", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestIsInstagramEligibleField () {
-      return this.requestIsInstagramEligibleField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestIsInstagramEligibleField (boolean value) {
-      this.requestField("is_instagram_eligible", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestIsReferenceOnlyField () {
-      return this.requestIsReferenceOnlyField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestIsReferenceOnlyField (boolean value) {
-      this.requestField("is_reference_only", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestLengthField () {
-      return this.requestLengthField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestLengthField (boolean value) {
-      this.requestField("length", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestLiveAudienceCountField () {
-      return this.requestLiveAudienceCountField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestLiveAudienceCountField (boolean value) {
-      this.requestField("live_audience_count", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestLiveStatusField () {
-      return this.requestLiveStatusField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestLiveStatusField (boolean value) {
-      this.requestField("live_status", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestMusicVideoCopyrightField () {
-      return this.requestMusicVideoCopyrightField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestMusicVideoCopyrightField (boolean value) {
-      this.requestField("music_video_copyright", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestPermalinkUrlField () {
-      return this.requestPermalinkUrlField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestPermalinkUrlField (boolean value) {
-      this.requestField("permalink_url", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestPictureField () {
-      return this.requestPictureField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestPictureField (boolean value) {
-      this.requestField("picture", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestPlaceField () {
-      return this.requestPlaceField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestPlaceField (boolean value) {
-      this.requestField("place", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestPremiereLivingRoomStatusField () {
-      return this.requestPremiereLivingRoomStatusField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestPremiereLivingRoomStatusField (boolean value) {
-      this.requestField("premiere_living_room_status", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestPrivacyField () {
-      return this.requestPrivacyField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestPrivacyField (boolean value) {
-      this.requestField("privacy", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestPublishedField () {
-      return this.requestPublishedField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestPublishedField (boolean value) {
-      this.requestField("published", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestScheduledPublishTimeField () {
-      return this.requestScheduledPublishTimeField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestScheduledPublishTimeField (boolean value) {
-      this.requestField("scheduled_publish_time", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestSourceField () {
-      return this.requestSourceField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestSourceField (boolean value) {
-      this.requestField("source", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestSphericalField () {
-      return this.requestSphericalField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestSphericalField (boolean value) {
-      this.requestField("spherical", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestStatusField () {
-      return this.requestStatusField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestStatusField (boolean value) {
-      this.requestField("status", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestTitleField () {
-      return this.requestTitleField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestTitleField (boolean value) {
-      this.requestField("title", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestUniversalVideoIdField () {
-      return this.requestUniversalVideoIdField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestUniversalVideoIdField (boolean value) {
-      this.requestField("universal_video_id", value);
-      return this;
-    }
-    public APIRequestGetFeaturedVideosCollection requestUpdatedTimeField () {
-      return this.requestUpdatedTimeField(true);
-    }
-    public APIRequestGetFeaturedVideosCollection requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
       return this;
     }
@@ -18193,7 +17567,6 @@ public class Page extends APINode {
       "account_linking_url",
       "get_started",
       "greeting",
-      "home_url",
       "ice_breakers",
       "payment_settings",
       "persistent_menu",
@@ -18311,13 +17684,6 @@ public class Page extends APINode {
       this.requestField("greeting", value);
       return this;
     }
-    public APIRequestGetMessengerProfile requestHomeUrlField () {
-      return this.requestHomeUrlField(true);
-    }
-    public APIRequestGetMessengerProfile requestHomeUrlField (boolean value) {
-      this.requestField("home_url", value);
-      return this;
-    }
     public APIRequestGetMessengerProfile requestIceBreakersField () {
       return this.requestIceBreakersField(true);
     }
@@ -18366,7 +17732,6 @@ public class Page extends APINode {
       "account_linking_url",
       "get_started",
       "greeting",
-      "home_url",
       "ice_breakers",
       "payment_settings",
       "persistent_menu",
@@ -18450,15 +17815,6 @@ public class Page extends APINode {
     }
     public APIRequestCreateMessengerProfile setGreeting (String greeting) {
       this.setParam("greeting", greeting);
-      return this;
-    }
-
-    public APIRequestCreateMessengerProfile setHomeUrl (Object homeUrl) {
-      this.setParam("home_url", homeUrl);
-      return this;
-    }
-    public APIRequestCreateMessengerProfile setHomeUrl (String homeUrl) {
-      this.setParam("home_url", homeUrl);
       return this;
     }
 
@@ -22417,7 +21773,6 @@ public class Page extends APINode {
 
     public static final String[] FIELDS = {
       "business",
-      "cpas_parent_catalog_settings",
       "da_display_settings",
       "default_image_url",
       "fallback_image_url",
@@ -22524,13 +21879,6 @@ public class Page extends APINode {
     }
     public APIRequestGetProductCatalogs requestBusinessField (boolean value) {
       this.requestField("business", value);
-      return this;
-    }
-    public APIRequestGetProductCatalogs requestCpasParentCatalogSettingsField () {
-      return this.requestCpasParentCatalogSettingsField(true);
-    }
-    public APIRequestGetProductCatalogs requestCpasParentCatalogSettingsField (boolean value) {
-      this.requestField("cpas_parent_catalog_settings", value);
       return this;
     }
     public APIRequestGetProductCatalogs requestDaDisplaySettingsField () {
@@ -29347,168 +28695,6 @@ public class Page extends APINode {
 
   }
 
-  public static class APIRequestGetUpcomingChanges extends APIRequest<PageUpcomingChange> {
-
-    APINodeList<PageUpcomingChange> lastResponse = null;
-    @Override
-    public APINodeList<PageUpcomingChange> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "include_inactive",
-    };
-
-    public static final String[] FIELDS = {
-      "change_type",
-      "effective_time",
-      "id",
-      "page",
-      "proposal",
-      "timer_status",
-    };
-
-    @Override
-    public APINodeList<PageUpcomingChange> parseResponse(String response, String header) throws APIException {
-      return PageUpcomingChange.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<PageUpcomingChange> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<PageUpcomingChange> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<PageUpcomingChange>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<PageUpcomingChange>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<PageUpcomingChange>>() {
-           public APINodeList<PageUpcomingChange> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetUpcomingChanges.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetUpcomingChanges(String nodeId, APIContext context) {
-      super(context, nodeId, "/upcoming_changes", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetUpcomingChanges setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetUpcomingChanges setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetUpcomingChanges setIncludeInactive (Boolean includeInactive) {
-      this.setParam("include_inactive", includeInactive);
-      return this;
-    }
-    public APIRequestGetUpcomingChanges setIncludeInactive (String includeInactive) {
-      this.setParam("include_inactive", includeInactive);
-      return this;
-    }
-
-    public APIRequestGetUpcomingChanges requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetUpcomingChanges requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetUpcomingChanges requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetUpcomingChanges requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetUpcomingChanges requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetUpcomingChanges requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetUpcomingChanges requestChangeTypeField () {
-      return this.requestChangeTypeField(true);
-    }
-    public APIRequestGetUpcomingChanges requestChangeTypeField (boolean value) {
-      this.requestField("change_type", value);
-      return this;
-    }
-    public APIRequestGetUpcomingChanges requestEffectiveTimeField () {
-      return this.requestEffectiveTimeField(true);
-    }
-    public APIRequestGetUpcomingChanges requestEffectiveTimeField (boolean value) {
-      this.requestField("effective_time", value);
-      return this;
-    }
-    public APIRequestGetUpcomingChanges requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetUpcomingChanges requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetUpcomingChanges requestPageField () {
-      return this.requestPageField(true);
-    }
-    public APIRequestGetUpcomingChanges requestPageField (boolean value) {
-      this.requestField("page", value);
-      return this;
-    }
-    public APIRequestGetUpcomingChanges requestProposalField () {
-      return this.requestProposalField(true);
-    }
-    public APIRequestGetUpcomingChanges requestProposalField (boolean value) {
-      this.requestField("proposal", value);
-      return this;
-    }
-    public APIRequestGetUpcomingChanges requestTimerStatusField () {
-      return this.requestTimerStatusField(true);
-    }
-    public APIRequestGetUpcomingChanges requestTimerStatusField (boolean value) {
-      this.requestField("timer_status", value);
-      return this;
-    }
-  }
-
   public static class APIRequestGetVideoCopyrightRules extends APIRequest<VideoCopyrightRule> {
 
     APINodeList<VideoCopyrightRule> lastResponse = null;
@@ -34522,6 +33708,8 @@ public class Page extends APINode {
       VALUE_HOMETOWN("hometown"),
       @SerializedName("hours")
       VALUE_HOURS("hours"),
+      @SerializedName("inbox_labels")
+      VALUE_INBOX_LABELS("inbox_labels"),
       @SerializedName("invoice_access_invoice_change")
       VALUE_INVOICE_ACCESS_INVOICE_CHANGE("invoice_access_invoice_change"),
       @SerializedName("invoice_access_onboarding_status_active")
