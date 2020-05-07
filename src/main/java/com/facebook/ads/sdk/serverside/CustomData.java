@@ -19,6 +19,7 @@ package com.facebook.ads.sdk.serverside;
 
 import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -63,6 +64,8 @@ public class CustomData {
   @SerializedName("search_string")
   private String searchString = null;
 
+  private HashMap<String, String> customProperties = null;
+
   /**
    * Default Constructor.
    */
@@ -85,11 +88,12 @@ public class CustomData {
    * @param numItems number of items that a user tries to buy during checkout
    * @param status status of the registration event
    * @param searchString a search query made by a user
+   * @param customProperties Custom Properties to be added to the Custom Data
    */
   public CustomData(Float value, String currency, String contentName,
       String contentCategory, List<String> contentIds,
       List<Content> contents, String contentType, String orderId, Float predictedLtv,
-      String numItems, String status, String searchString) {
+      String numItems, String status, String searchString, HashMap<String, String> customProperties) {
     this.value = value;
     this.currency = currency;
     this.contentName = contentName;
@@ -102,6 +106,7 @@ public class CustomData {
     this.numItems = numItems;
     this.status = status;
     this.searchString = searchString;
+    this.customProperties = customProperties;
   }
 
   /**
@@ -526,6 +531,42 @@ public class CustomData {
     return this;
   }
 
+  /**
+   * Gets the custom properties to be included in the Custom Data.
+   * If our predefined object properties don't suit your needs, you can include your own, custom properties.
+   * Custom properties can be used with both standard and custom events, and can help you further define custom audiences.
+   * This behavior is the same for Server-Side API and Facebook Pixel. See (https://developers.facebook.com/docs/marketing-api/server-side-api/parameters/custom-data#custom-properties)
+   * Eg: '{ 'warehouse_location' : 'washington', 'package_size' : 'L'}'
+   *
+   * @return customProperties
+   */
+  public HashMap<String, String> getCustomProperties() {
+    return customProperties;
+  }
+
+  /**
+   * Sets the custom properties to be included in the Custom Data.
+   *
+   * @param customProperties custom properties property bag to be included in the Custom Data.
+   * Eg: '{ 'warehouse_location' : 'washington', 'package_size' : 'L'}'
+   */
+  public void setCustomProperties(HashMap<String,String> customProperties) {
+    this.customProperties = customProperties;
+  }
+
+  /**
+   * Sets the custom properties to be included in the Custom Data.
+   *
+   * @param customProperties custom properties property bag to be included in the Custom Data.
+   * Eg: '{ 'warehouse_location' : 'washington', 'package_size' : 'L'}'
+   *
+   * @return CustomData
+   */
+  public CustomData customProperties(HashMap<String,String> customProperties) {
+    this.customProperties = customProperties;
+    return this;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -546,7 +587,8 @@ public class CustomData {
         && Objects.equals(this.predictedLtv, customData.predictedLtv)
         && Objects.equals(this.numItems, customData.numItems)
         && Objects.equals(this.status, customData.status)
-        && Objects.equals(this.searchString, customData.searchString);
+        && Objects.equals(this.searchString, customData.searchString)
+        && Objects.equals(this.customProperties, customData.customProperties);
   }
 
   @Override
@@ -563,7 +605,8 @@ public class CustomData {
         predictedLtv,
         numItems,
         status,
-        searchString);
+        searchString,
+        customProperties);
   }
 
   @Override
@@ -583,6 +626,7 @@ public class CustomData {
     sb.append("    numItems: ").append(toIndentedString(numItems)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    searchString: ").append(toIndentedString(searchString)).append("\n");
+    sb.append("    customProperties: ").append(toIndentedString(customProperties)).append("\n");
     sb.append("}");
     return sb.toString();
   }

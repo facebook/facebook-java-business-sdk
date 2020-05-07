@@ -21,6 +21,7 @@ import com.facebook.ads.sdk.APIContext;
 import com.facebook.ads.sdk.APIException;
 import com.facebook.ads.sdk.AdsPixel;
 import com.facebook.ads.sdk.AdsPixel.APIRequestCreateEvent;
+import com.facebook.ads.utils.CustomDataAdapter;
 import com.google.common.util.concurrent.AsyncFunction;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -90,6 +91,7 @@ public class EventRequest {
               .excludeFieldsWithModifiers(Modifier.STATIC)
               .excludeFieldsWithModifiers(Modifier.PROTECTED)
               .disableHtmlEscaping()
+              .registerTypeAdapter(CustomData.class, new CustomDataAdapter())
               .create();
     }
 
@@ -253,6 +255,12 @@ public class EventRequest {
       context.log(e.getMessage());
       throw e;
     }
+  }
+
+
+  public String getSerializedPayload() {
+    List<Event> s2sData = getData();
+    return getGson().toJson(s2sData);
   }
 
   private AdsPixel.APIRequestCreateEvent getPixelCreateEvent() {
