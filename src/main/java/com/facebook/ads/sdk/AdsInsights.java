@@ -115,6 +115,14 @@ public class AdsInsights extends APINode {
   private String mCanvasAvgViewPercent = null;
   @SerializedName("canvas_avg_view_time")
   private String mCanvasAvgViewTime = null;
+  @SerializedName("catalog_segment_value")
+  private List<AdsActionStats> mCatalogSegmentValue = null;
+  @SerializedName("catalog_segment_value_mobile_purchase_roas")
+  private List<AdsActionStats> mCatalogSegmentValueMobilePurchaseRoas = null;
+  @SerializedName("catalog_segment_value_omni_purchase_roas")
+  private List<AdsActionStats> mCatalogSegmentValueOmniPurchaseRoas = null;
+  @SerializedName("catalog_segment_value_website_purchase_roas")
+  private List<AdsActionStats> mCatalogSegmentValueWebsitePurchaseRoas = null;
   @SerializedName("clicks")
   private String mClicks = null;
   @SerializedName("conversion_rate_ranking")
@@ -748,6 +756,62 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public List<AdsActionStats> getFieldCatalogSegmentValue() {
+    return mCatalogSegmentValue;
+  }
+
+  public AdsInsights setFieldCatalogSegmentValue(List<AdsActionStats> value) {
+    this.mCatalogSegmentValue = value;
+    return this;
+  }
+
+  public AdsInsights setFieldCatalogSegmentValue(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mCatalogSegmentValue = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<AdsActionStats> getFieldCatalogSegmentValueMobilePurchaseRoas() {
+    return mCatalogSegmentValueMobilePurchaseRoas;
+  }
+
+  public AdsInsights setFieldCatalogSegmentValueMobilePurchaseRoas(List<AdsActionStats> value) {
+    this.mCatalogSegmentValueMobilePurchaseRoas = value;
+    return this;
+  }
+
+  public AdsInsights setFieldCatalogSegmentValueMobilePurchaseRoas(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mCatalogSegmentValueMobilePurchaseRoas = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<AdsActionStats> getFieldCatalogSegmentValueOmniPurchaseRoas() {
+    return mCatalogSegmentValueOmniPurchaseRoas;
+  }
+
+  public AdsInsights setFieldCatalogSegmentValueOmniPurchaseRoas(List<AdsActionStats> value) {
+    this.mCatalogSegmentValueOmniPurchaseRoas = value;
+    return this;
+  }
+
+  public AdsInsights setFieldCatalogSegmentValueOmniPurchaseRoas(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mCatalogSegmentValueOmniPurchaseRoas = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<AdsActionStats> getFieldCatalogSegmentValueWebsitePurchaseRoas() {
+    return mCatalogSegmentValueWebsitePurchaseRoas;
+  }
+
+  public AdsInsights setFieldCatalogSegmentValueWebsitePurchaseRoas(List<AdsActionStats> value) {
+    this.mCatalogSegmentValueWebsitePurchaseRoas = value;
+    return this;
+  }
+
+  public AdsInsights setFieldCatalogSegmentValueWebsitePurchaseRoas(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mCatalogSegmentValueWebsitePurchaseRoas = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldClicks() {
     return mClicks;
   }
@@ -1822,6 +1886,8 @@ public class AdsInsights extends APINode {
       VALUE_7D_CLICK("7d_click"),
       @SerializedName("7d_view")
       VALUE_7D_VIEW("7d_view"),
+      @SerializedName("dda")
+      VALUE_DDA("dda"),
       @SerializedName("default")
       VALUE_DEFAULT("default"),
       ;
@@ -2107,6 +2173,10 @@ public class AdsInsights extends APINode {
     this.mCampaignName = instance.mCampaignName;
     this.mCanvasAvgViewPercent = instance.mCanvasAvgViewPercent;
     this.mCanvasAvgViewTime = instance.mCanvasAvgViewTime;
+    this.mCatalogSegmentValue = instance.mCatalogSegmentValue;
+    this.mCatalogSegmentValueMobilePurchaseRoas = instance.mCatalogSegmentValueMobilePurchaseRoas;
+    this.mCatalogSegmentValueOmniPurchaseRoas = instance.mCatalogSegmentValueOmniPurchaseRoas;
+    this.mCatalogSegmentValueWebsitePurchaseRoas = instance.mCatalogSegmentValueWebsitePurchaseRoas;
     this.mClicks = instance.mClicks;
     this.mConversionRateRanking = instance.mConversionRateRanking;
     this.mConversionValues = instance.mConversionValues;

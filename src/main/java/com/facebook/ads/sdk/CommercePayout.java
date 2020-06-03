@@ -54,35 +54,31 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class RequestHistory extends APINode {
-  @SerializedName("api_version")
-  private String mApiVersion = null;
-  @SerializedName("created_time")
-  private String mCreatedTime = null;
-  @SerializedName("error_code")
-  private Long mErrorCode = null;
-  @SerializedName("graph_path")
-  private String mGraphPath = null;
-  @SerializedName("http_method")
-  private EnumHttpMethod mHttpMethod = null;
-  @SerializedName("post_params")
-  private Map<String, String> mPostParams = null;
-  @SerializedName("query_params")
-  private Map<String, String> mQueryParams = null;
+public class CommercePayout extends APINode {
+  @SerializedName("amount")
+  private Object mAmount = null;
+  @SerializedName("payout_date")
+  private String mPayoutDate = null;
+  @SerializedName("payout_reference_id")
+  private String mPayoutReferenceId = null;
+  @SerializedName("status")
+  private String mStatus = null;
+  @SerializedName("transfer_id")
+  private String mTransferId = null;
   protected static Gson gson = null;
 
-  public RequestHistory() {
+  public CommercePayout() {
   }
 
   public String getId() {
     return null;
   }
-  public static RequestHistory loadJSON(String json, APIContext context, String header) {
-    RequestHistory requestHistory = getGson().fromJson(json, RequestHistory.class);
+  public static CommercePayout loadJSON(String json, APIContext context, String header) {
+    CommercePayout commercePayout = getGson().fromJson(json, CommercePayout.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(requestHistory.toString());
+      JsonElement o2 = parser.parse(commercePayout.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -92,14 +88,14 @@ public class RequestHistory extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    requestHistory.context = context;
-    requestHistory.rawValue = json;
-    requestHistory.header = header;
-    return requestHistory;
+    commercePayout.context = context;
+    commercePayout.rawValue = json;
+    commercePayout.header = header;
+    return commercePayout;
   }
 
-  public static APINodeList<RequestHistory> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<RequestHistory> requestHistorys = new APINodeList<RequestHistory>(request, json, header);
+  public static APINodeList<CommercePayout> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CommercePayout> commercePayouts = new APINodeList<CommercePayout>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -110,9 +106,9 @@ public class RequestHistory extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          requestHistorys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          commercePayouts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return requestHistorys;
+        return commercePayouts;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -122,20 +118,20 @@ public class RequestHistory extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                requestHistorys.setCursors(before, after);
+                commercePayouts.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            requestHistorys.setPaging(previous, next);
+            commercePayouts.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              requestHistorys.setAppSecret(context.getAppSecretProof());
+              commercePayouts.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              requestHistorys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              commercePayouts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -146,23 +142,23 @@ public class RequestHistory extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  requestHistorys.add(loadJSON(entry.getValue().toString(), context, header));
+                  commercePayouts.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              requestHistorys.add(loadJSON(obj.toString(), context, header));
+              commercePayouts.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return requestHistorys;
+          return commercePayouts;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              requestHistorys.add(loadJSON(entry.getValue().toString(), context, header));
+              commercePayouts.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return requestHistorys;
+          return commercePayouts;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -179,20 +175,20 @@ public class RequestHistory extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              requestHistorys.add(loadJSON(value.toString(), context, header));
+              commercePayouts.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return requestHistorys;
+            return commercePayouts;
           }
 
           // Sixth, check if it's pure JsonObject
-          requestHistorys.clear();
-          requestHistorys.add(loadJSON(json, context, header));
-          return requestHistorys;
+          commercePayouts.clear();
+          commercePayouts.add(loadJSON(json, context, header));
+          return commercePayouts;
         }
       }
     } catch (Exception e) {
@@ -220,91 +216,52 @@ public class RequestHistory extends APINode {
   }
 
 
-  public String getFieldApiVersion() {
-    return mApiVersion;
+  public Object getFieldAmount() {
+    return mAmount;
   }
 
-  public RequestHistory setFieldApiVersion(String value) {
-    this.mApiVersion = value;
+  public CommercePayout setFieldAmount(Object value) {
+    this.mAmount = value;
     return this;
   }
 
-  public String getFieldCreatedTime() {
-    return mCreatedTime;
+  public String getFieldPayoutDate() {
+    return mPayoutDate;
   }
 
-  public RequestHistory setFieldCreatedTime(String value) {
-    this.mCreatedTime = value;
+  public CommercePayout setFieldPayoutDate(String value) {
+    this.mPayoutDate = value;
     return this;
   }
 
-  public Long getFieldErrorCode() {
-    return mErrorCode;
+  public String getFieldPayoutReferenceId() {
+    return mPayoutReferenceId;
   }
 
-  public RequestHistory setFieldErrorCode(Long value) {
-    this.mErrorCode = value;
+  public CommercePayout setFieldPayoutReferenceId(String value) {
+    this.mPayoutReferenceId = value;
     return this;
   }
 
-  public String getFieldGraphPath() {
-    return mGraphPath;
+  public String getFieldStatus() {
+    return mStatus;
   }
 
-  public RequestHistory setFieldGraphPath(String value) {
-    this.mGraphPath = value;
+  public CommercePayout setFieldStatus(String value) {
+    this.mStatus = value;
     return this;
   }
 
-  public EnumHttpMethod getFieldHttpMethod() {
-    return mHttpMethod;
+  public String getFieldTransferId() {
+    return mTransferId;
   }
 
-  public RequestHistory setFieldHttpMethod(EnumHttpMethod value) {
-    this.mHttpMethod = value;
-    return this;
-  }
-
-  public Map<String, String> getFieldPostParams() {
-    return mPostParams;
-  }
-
-  public RequestHistory setFieldPostParams(Map<String, String> value) {
-    this.mPostParams = value;
-    return this;
-  }
-
-  public Map<String, String> getFieldQueryParams() {
-    return mQueryParams;
-  }
-
-  public RequestHistory setFieldQueryParams(Map<String, String> value) {
-    this.mQueryParams = value;
+  public CommercePayout setFieldTransferId(String value) {
+    this.mTransferId = value;
     return this;
   }
 
 
-
-  public static enum EnumHttpMethod {
-      @SerializedName("DELETE")
-      VALUE_DELETE("DELETE"),
-      @SerializedName("GET")
-      VALUE_GET("GET"),
-      @SerializedName("POST")
-      VALUE_POST("POST"),
-      ;
-
-      private String value;
-
-      private EnumHttpMethod(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -320,23 +277,21 @@ public class RequestHistory extends APINode {
     return gson;
   }
 
-  public RequestHistory copyFrom(RequestHistory instance) {
-    this.mApiVersion = instance.mApiVersion;
-    this.mCreatedTime = instance.mCreatedTime;
-    this.mErrorCode = instance.mErrorCode;
-    this.mGraphPath = instance.mGraphPath;
-    this.mHttpMethod = instance.mHttpMethod;
-    this.mPostParams = instance.mPostParams;
-    this.mQueryParams = instance.mQueryParams;
+  public CommercePayout copyFrom(CommercePayout instance) {
+    this.mAmount = instance.mAmount;
+    this.mPayoutDate = instance.mPayoutDate;
+    this.mPayoutReferenceId = instance.mPayoutReferenceId;
+    this.mStatus = instance.mStatus;
+    this.mTransferId = instance.mTransferId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<RequestHistory> getParser() {
-    return new APIRequest.ResponseParser<RequestHistory>() {
-      public APINodeList<RequestHistory> parseResponse(String response, APIContext context, APIRequest<RequestHistory> request, String header) throws MalformedResponseException {
-        return RequestHistory.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<CommercePayout> getParser() {
+    return new APIRequest.ResponseParser<CommercePayout>() {
+      public APINodeList<CommercePayout> parseResponse(String response, APIContext context, APIRequest<CommercePayout> request, String header) throws MalformedResponseException {
+        return CommercePayout.parseResponse(response, context, request, header);
       }
     };
   }

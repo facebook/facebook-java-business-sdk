@@ -95,8 +95,6 @@ public class Ad extends APINode {
   private List<DeliveryCheck> mFailedDeliveryChecks = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("is_autobid")
-  private Boolean mIsAutobid = null;
   @SerializedName("issues_info")
   private List<AdgroupIssuesInfo> mIssuesInfo = null;
   @SerializedName("last_updated_by_app_id")
@@ -472,10 +470,6 @@ public class Ad extends APINode {
 
   public String getFieldId() {
     return mId;
-  }
-
-  public Boolean getFieldIsAutobid() {
-    return mIsAutobid;
   }
 
   public List<AdgroupIssuesInfo> getFieldIssuesInfo() {
@@ -1432,7 +1426,6 @@ public class Ad extends APINode {
       "engagement_audience",
       "failed_delivery_checks",
       "id",
-      "is_autobid",
       "issues_info",
       "last_updated_by_app_id",
       "name",
@@ -1711,13 +1704,6 @@ public class Ad extends APINode {
     }
     public APIRequestGetCopies requestIdField (boolean value) {
       this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetCopies requestIsAutobidField () {
-      return this.requestIsAutobidField(true);
-    }
-    public APIRequestGetCopies requestIsAutobidField (boolean value) {
-      this.requestField("is_autobid", value);
       return this;
     }
     public APIRequestGetCopies requestIssuesInfoField () {
@@ -3261,7 +3247,6 @@ public class Ad extends APINode {
       "engagement_audience",
       "failed_delivery_checks",
       "id",
-      "is_autobid",
       "issues_info",
       "last_updated_by_app_id",
       "name",
@@ -3549,13 +3534,6 @@ public class Ad extends APINode {
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestIsAutobidField () {
-      return this.requestIsAutobidField(true);
-    }
-    public APIRequestGet requestIsAutobidField (boolean value) {
-      this.requestField("is_autobid", value);
       return this;
     }
     public APIRequestGet requestIssuesInfoField () {
@@ -4142,7 +4120,6 @@ public class Ad extends APINode {
     this.mEngagementAudience = instance.mEngagementAudience;
     this.mFailedDeliveryChecks = instance.mFailedDeliveryChecks;
     this.mId = instance.mId;
-    this.mIsAutobid = instance.mIsAutobid;
     this.mIssuesInfo = instance.mIssuesInfo;
     this.mLastUpdatedByAppId = instance.mLastUpdatedByAppId;
     this.mName = instance.mName;

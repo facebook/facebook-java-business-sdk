@@ -536,6 +536,8 @@ public class CPASParentCatalogSettings extends APINode {
   }
 
   public static enum EnumAttributionWindows {
+      @SerializedName("DDA")
+      VALUE_DDA("DDA"),
       @SerializedName("DEFAULT")
       VALUE_DEFAULT("DEFAULT"),
       @SerializedName("X1D_CLICK")

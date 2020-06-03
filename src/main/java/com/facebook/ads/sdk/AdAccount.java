@@ -5393,7 +5393,6 @@ public class AdAccount extends APINode {
       "engagement_audience",
       "failed_delivery_checks",
       "id",
-      "is_autobid",
       "issues_info",
       "last_updated_by_app_id",
       "name",
@@ -5672,13 +5671,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAds requestIdField (boolean value) {
       this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetAds requestIsAutobidField () {
-      return this.requestIsAutobidField(true);
-    }
-    public APIRequestGetAds requestIsAutobidField (boolean value) {
-      this.requestField("is_autobid", value);
       return this;
     }
     public APIRequestGetAds requestIssuesInfoField () {
@@ -6219,7 +6211,6 @@ public class AdAccount extends APINode {
       "engagement_audience",
       "failed_delivery_checks",
       "id",
-      "is_autobid",
       "issues_info",
       "last_updated_by_app_id",
       "name",
@@ -6480,13 +6471,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdsByLabels requestIdField (boolean value) {
       this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetAdsByLabels requestIsAutobidField () {
-      return this.requestIsAutobidField(true);
-    }
-    public APIRequestGetAdsByLabels requestIsAutobidField (boolean value) {
-      this.requestField("is_autobid", value);
       return this;
     }
     public APIRequestGetAdsByLabels requestIssuesInfoField () {
@@ -26816,6 +26800,8 @@ public class AdAccount extends APINode {
       VALUE_HOME_LISTING("HOME_LISTING"),
       @SerializedName("HOTEL")
       VALUE_HOTEL("HOTEL"),
+      @SerializedName("LOCAL_SERVICE_BUSINESS")
+      VALUE_LOCAL_SERVICE_BUSINESS("LOCAL_SERVICE_BUSINESS"),
       @SerializedName("LOCATION_BASED_ITEM")
       VALUE_LOCATION_BASED_ITEM("LOCATION_BASED_ITEM"),
       @SerializedName("MEDIA_TITLE")

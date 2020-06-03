@@ -403,6 +403,10 @@ public class AdReportRun extends APINode {
       "campaign_name",
       "canvas_avg_view_percent",
       "canvas_avg_view_time",
+      "catalog_segment_value",
+      "catalog_segment_value_mobile_purchase_roas",
+      "catalog_segment_value_omni_purchase_roas",
+      "catalog_segment_value_website_purchase_roas",
       "clicks",
       "conversion_rate_ranking",
       "conversion_values",
@@ -798,6 +802,34 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestCanvasAvgViewTimeField (boolean value) {
       this.requestField("canvas_avg_view_time", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCatalogSegmentValueField () {
+      return this.requestCatalogSegmentValueField(true);
+    }
+    public APIRequestGetInsights requestCatalogSegmentValueField (boolean value) {
+      this.requestField("catalog_segment_value", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCatalogSegmentValueMobilePurchaseRoasField () {
+      return this.requestCatalogSegmentValueMobilePurchaseRoasField(true);
+    }
+    public APIRequestGetInsights requestCatalogSegmentValueMobilePurchaseRoasField (boolean value) {
+      this.requestField("catalog_segment_value_mobile_purchase_roas", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCatalogSegmentValueOmniPurchaseRoasField () {
+      return this.requestCatalogSegmentValueOmniPurchaseRoasField(true);
+    }
+    public APIRequestGetInsights requestCatalogSegmentValueOmniPurchaseRoasField (boolean value) {
+      this.requestField("catalog_segment_value_omni_purchase_roas", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCatalogSegmentValueWebsitePurchaseRoasField () {
+      return this.requestCatalogSegmentValueWebsitePurchaseRoasField(true);
+    }
+    public APIRequestGetInsights requestCatalogSegmentValueWebsitePurchaseRoasField (boolean value) {
+      this.requestField("catalog_segment_value_website_purchase_roas", value);
       return this;
     }
     public APIRequestGetInsights requestClicksField () {
@@ -1695,6 +1727,8 @@ public class AdReportRun extends APINode {
       VALUE_7D_CLICK("7d_click"),
       @SerializedName("7d_view")
       VALUE_7D_VIEW("7d_view"),
+      @SerializedName("dda")
+      VALUE_DDA("dda"),
       @SerializedName("default")
       VALUE_DEFAULT("default"),
       ;

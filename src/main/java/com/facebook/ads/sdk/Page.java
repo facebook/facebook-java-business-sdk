@@ -546,6 +546,10 @@ public class Page extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestCreateAcknowledgeOrder createAcknowledgeOrder() {
+    return new APIRequestCreateAcknowledgeOrder(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetAdsPosts getAdsPosts() {
     return new APIRequestGetAdsPosts(this.getPrefixedId().toString(), context);
   }
@@ -620,6 +624,22 @@ public class Page extends APINode {
 
   public APIRequestCreateClaimedUrl createClaimedUrl() {
     return new APIRequestCreateClaimedUrl(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetCommerceMerchantSettings getCommerceMerchantSettings() {
+    return new APIRequestGetCommerceMerchantSettings(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetCommerceOrders getCommerceOrders() {
+    return new APIRequestGetCommerceOrders(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetCommercePayouts getCommercePayouts() {
+    return new APIRequestGetCommercePayouts(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetCommerceTransactions getCommerceTransactions() {
+    return new APIRequestGetCommerceTransactions(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetConversations getConversations() {
@@ -846,10 +866,6 @@ public class Page extends APINode {
     return new APIRequestGetProductCatalogs(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreatePromotion createPromotion() {
-    return new APIRequestCreatePromotion(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetPublishedPosts getPublishedPosts() {
     return new APIRequestGetPublishedPosts(this.getPrefixedId().toString(), context);
   }
@@ -884,6 +900,10 @@ public class Page extends APINode {
 
   public APIRequestCreateSetting createSetting() {
     return new APIRequestCreateSetting(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetShopSetupStatus getShopSetupStatus() {
+    return new APIRequestGetShopSetupStatus(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestDeleteSubscribedApps deleteSubscribedApps() {
@@ -944,10 +964,6 @@ public class Page extends APINode {
 
   public APIRequestGetVideoCopyrightRules getVideoCopyrightRules() {
     return new APIRequestGetVideoCopyrightRules(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateVideoCopyrightRule createVideoCopyrightRule() {
-    return new APIRequestCreateVideoCopyrightRule(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateVideoCopyright createVideoCopyright() {
@@ -1575,6 +1591,126 @@ public class Page extends APINode {
 
 
 
+  public static class APIRequestCreateAcknowledgeOrder extends APIRequest<Page> {
+
+    Page lastResponse = null;
+    @Override
+    public Page getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "idempotency_key",
+      "orders",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Page parseResponse(String response, String header) throws APIException {
+      return Page.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Page execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Page execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Page> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Page> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, Page>() {
+           public Page apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateAcknowledgeOrder.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateAcknowledgeOrder(String nodeId, APIContext context) {
+      super(context, nodeId, "/acknowledge_orders", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateAcknowledgeOrder setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAcknowledgeOrder setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateAcknowledgeOrder setIdempotencyKey (String idempotencyKey) {
+      this.setParam("idempotency_key", idempotencyKey);
+      return this;
+    }
+
+    public APIRequestCreateAcknowledgeOrder setOrders (List<Map<String, String>> orders) {
+      this.setParam("orders", orders);
+      return this;
+    }
+    public APIRequestCreateAcknowledgeOrder setOrders (String orders) {
+      this.setParam("orders", orders);
+      return this;
+    }
+
+    public APIRequestCreateAcknowledgeOrder requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateAcknowledgeOrder requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAcknowledgeOrder requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateAcknowledgeOrder requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAcknowledgeOrder requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAcknowledgeOrder requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetAdsPosts extends APIRequest<PagePost> {
 
     APINodeList<PagePost> lastResponse = null;
@@ -1601,15 +1737,19 @@ public class Page extends APINode {
       "comments_mirroring_domain",
       "coordinates",
       "created_time",
+      "delivery_growth_optimizations",
+      "entities",
       "event",
       "expanded_height",
       "expanded_width",
       "feed_targeting",
+      "formatting",
       "from",
       "full_picture",
       "height",
       "icon",
       "id",
+      "implicit_place",
       "instagram_eligibility",
       "is_app_share",
       "is_eligible_for_promotion",
@@ -1620,6 +1760,7 @@ public class Page extends APINode {
       "is_popular",
       "is_published",
       "is_spherical",
+      "live_video_eligibility",
       "message",
       "message_tags",
       "multi_share_end_card",
@@ -1632,6 +1773,7 @@ public class Page extends APINode {
       "promotable_id",
       "promotion_status",
       "properties",
+      "publishing_stats",
       "scheduled_publish_time",
       "shares",
       "status_type",
@@ -1641,10 +1783,12 @@ public class Page extends APINode {
       "target",
       "targeting",
       "timeline_visibility",
+      "translations",
       "updated_time",
       "via",
       "video_buying_eligibility",
       "width",
+      "will_be_autocropped_when_deliver_to_instagram",
     };
 
     @Override
@@ -1841,6 +1985,20 @@ public class Page extends APINode {
       this.requestField("created_time", value);
       return this;
     }
+    public APIRequestGetAdsPosts requestDeliveryGrowthOptimizationsField () {
+      return this.requestDeliveryGrowthOptimizationsField(true);
+    }
+    public APIRequestGetAdsPosts requestDeliveryGrowthOptimizationsField (boolean value) {
+      this.requestField("delivery_growth_optimizations", value);
+      return this;
+    }
+    public APIRequestGetAdsPosts requestEntitiesField () {
+      return this.requestEntitiesField(true);
+    }
+    public APIRequestGetAdsPosts requestEntitiesField (boolean value) {
+      this.requestField("entities", value);
+      return this;
+    }
     public APIRequestGetAdsPosts requestEventField () {
       return this.requestEventField(true);
     }
@@ -1867,6 +2025,13 @@ public class Page extends APINode {
     }
     public APIRequestGetAdsPosts requestFeedTargetingField (boolean value) {
       this.requestField("feed_targeting", value);
+      return this;
+    }
+    public APIRequestGetAdsPosts requestFormattingField () {
+      return this.requestFormattingField(true);
+    }
+    public APIRequestGetAdsPosts requestFormattingField (boolean value) {
+      this.requestField("formatting", value);
       return this;
     }
     public APIRequestGetAdsPosts requestFromField () {
@@ -1902,6 +2067,13 @@ public class Page extends APINode {
     }
     public APIRequestGetAdsPosts requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetAdsPosts requestImplicitPlaceField () {
+      return this.requestImplicitPlaceField(true);
+    }
+    public APIRequestGetAdsPosts requestImplicitPlaceField (boolean value) {
+      this.requestField("implicit_place", value);
       return this;
     }
     public APIRequestGetAdsPosts requestInstagramEligibilityField () {
@@ -1972,6 +2144,13 @@ public class Page extends APINode {
     }
     public APIRequestGetAdsPosts requestIsSphericalField (boolean value) {
       this.requestField("is_spherical", value);
+      return this;
+    }
+    public APIRequestGetAdsPosts requestLiveVideoEligibilityField () {
+      return this.requestLiveVideoEligibilityField(true);
+    }
+    public APIRequestGetAdsPosts requestLiveVideoEligibilityField (boolean value) {
+      this.requestField("live_video_eligibility", value);
       return this;
     }
     public APIRequestGetAdsPosts requestMessageField () {
@@ -2058,6 +2237,13 @@ public class Page extends APINode {
       this.requestField("properties", value);
       return this;
     }
+    public APIRequestGetAdsPosts requestPublishingStatsField () {
+      return this.requestPublishingStatsField(true);
+    }
+    public APIRequestGetAdsPosts requestPublishingStatsField (boolean value) {
+      this.requestField("publishing_stats", value);
+      return this;
+    }
     public APIRequestGetAdsPosts requestScheduledPublishTimeField () {
       return this.requestScheduledPublishTimeField(true);
     }
@@ -2121,6 +2307,13 @@ public class Page extends APINode {
       this.requestField("timeline_visibility", value);
       return this;
     }
+    public APIRequestGetAdsPosts requestTranslationsField () {
+      return this.requestTranslationsField(true);
+    }
+    public APIRequestGetAdsPosts requestTranslationsField (boolean value) {
+      this.requestField("translations", value);
+      return this;
+    }
     public APIRequestGetAdsPosts requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -2147,6 +2340,13 @@ public class Page extends APINode {
     }
     public APIRequestGetAdsPosts requestWidthField (boolean value) {
       this.requestField("width", value);
+      return this;
+    }
+    public APIRequestGetAdsPosts requestWillBeAutocroppedWhenDeliverToInstagramField () {
+      return this.requestWillBeAutocroppedWhenDeliverToInstagramField(true);
+    }
+    public APIRequestGetAdsPosts requestWillBeAutocroppedWhenDeliverToInstagramField (boolean value) {
+      this.requestField("will_be_autocropped_when_deliver_to_instagram", value);
       return this;
     }
   }
@@ -5115,6 +5315,860 @@ public class Page extends APINode {
 
   }
 
+  public static class APIRequestGetCommerceMerchantSettings extends APIRequest<CommerceMerchantSettings> {
+
+    APINodeList<CommerceMerchantSettings> lastResponse = null;
+    @Override
+    public APINodeList<CommerceMerchantSettings> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "braintree_merchant_id",
+      "checkout_message",
+      "contact_email",
+      "disable_checkout_urls",
+      "display_name",
+      "facebook_channel",
+      "has_discount_code",
+      "id",
+      "instagram_channel",
+      "merchant_alert_email",
+      "merchant_page",
+      "merchant_status",
+      "onsite_commerce_merchant",
+      "payment_provider",
+      "privacy_url_by_locale",
+      "review_rejection_messages",
+      "review_rejection_reasons",
+      "review_status",
+      "supported_card_types",
+      "terms",
+      "terms_url_by_locale",
+    };
+
+    @Override
+    public APINodeList<CommerceMerchantSettings> parseResponse(String response, String header) throws APIException {
+      return CommerceMerchantSettings.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<CommerceMerchantSettings> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<CommerceMerchantSettings> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<CommerceMerchantSettings>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<CommerceMerchantSettings>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<CommerceMerchantSettings>>() {
+           public APINodeList<CommerceMerchantSettings> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetCommerceMerchantSettings.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetCommerceMerchantSettings(String nodeId, APIContext context) {
+      super(context, nodeId, "/commerce_merchant_settings", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCommerceMerchantSettings setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCommerceMerchantSettings setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCommerceMerchantSettings requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCommerceMerchantSettings requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCommerceMerchantSettings requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCommerceMerchantSettings requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCommerceMerchantSettings requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCommerceMerchantSettings requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetCommerceMerchantSettings requestBraintreeMerchantIdField () {
+      return this.requestBraintreeMerchantIdField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestBraintreeMerchantIdField (boolean value) {
+      this.requestField("braintree_merchant_id", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestCheckoutMessageField () {
+      return this.requestCheckoutMessageField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestCheckoutMessageField (boolean value) {
+      this.requestField("checkout_message", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestContactEmailField () {
+      return this.requestContactEmailField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestContactEmailField (boolean value) {
+      this.requestField("contact_email", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestDisableCheckoutUrlsField () {
+      return this.requestDisableCheckoutUrlsField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestDisableCheckoutUrlsField (boolean value) {
+      this.requestField("disable_checkout_urls", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestDisplayNameField () {
+      return this.requestDisplayNameField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestDisplayNameField (boolean value) {
+      this.requestField("display_name", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestFacebookChannelField () {
+      return this.requestFacebookChannelField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestFacebookChannelField (boolean value) {
+      this.requestField("facebook_channel", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestHasDiscountCodeField () {
+      return this.requestHasDiscountCodeField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestHasDiscountCodeField (boolean value) {
+      this.requestField("has_discount_code", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestInstagramChannelField () {
+      return this.requestInstagramChannelField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestInstagramChannelField (boolean value) {
+      this.requestField("instagram_channel", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestMerchantAlertEmailField () {
+      return this.requestMerchantAlertEmailField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestMerchantAlertEmailField (boolean value) {
+      this.requestField("merchant_alert_email", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestMerchantPageField () {
+      return this.requestMerchantPageField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestMerchantPageField (boolean value) {
+      this.requestField("merchant_page", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestMerchantStatusField () {
+      return this.requestMerchantStatusField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestMerchantStatusField (boolean value) {
+      this.requestField("merchant_status", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestOnsiteCommerceMerchantField () {
+      return this.requestOnsiteCommerceMerchantField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestOnsiteCommerceMerchantField (boolean value) {
+      this.requestField("onsite_commerce_merchant", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestPaymentProviderField () {
+      return this.requestPaymentProviderField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestPaymentProviderField (boolean value) {
+      this.requestField("payment_provider", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestPrivacyUrlByLocaleField () {
+      return this.requestPrivacyUrlByLocaleField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestPrivacyUrlByLocaleField (boolean value) {
+      this.requestField("privacy_url_by_locale", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestReviewRejectionMessagesField () {
+      return this.requestReviewRejectionMessagesField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestReviewRejectionMessagesField (boolean value) {
+      this.requestField("review_rejection_messages", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestReviewRejectionReasonsField () {
+      return this.requestReviewRejectionReasonsField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestReviewRejectionReasonsField (boolean value) {
+      this.requestField("review_rejection_reasons", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestReviewStatusField () {
+      return this.requestReviewStatusField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestReviewStatusField (boolean value) {
+      this.requestField("review_status", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestSupportedCardTypesField () {
+      return this.requestSupportedCardTypesField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestSupportedCardTypesField (boolean value) {
+      this.requestField("supported_card_types", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestTermsField () {
+      return this.requestTermsField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestTermsField (boolean value) {
+      this.requestField("terms", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestTermsUrlByLocaleField () {
+      return this.requestTermsUrlByLocaleField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestTermsUrlByLocaleField (boolean value) {
+      this.requestField("terms_url_by_locale", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetCommerceOrders extends APIRequest<CommerceOrder> {
+
+    APINodeList<CommerceOrder> lastResponse = null;
+    @Override
+    public APINodeList<CommerceOrder> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "filters",
+      "state",
+      "updated_after",
+      "updated_before",
+    };
+
+    public static final String[] FIELDS = {
+      "buyer_details",
+      "channel",
+      "created",
+      "estimated_payment_details",
+      "id",
+      "is_group_buy",
+      "last_updated",
+      "merchant_order_id",
+      "order_status",
+      "selected_shipping_option",
+      "ship_by_date",
+      "shipping_address",
+    };
+
+    @Override
+    public APINodeList<CommerceOrder> parseResponse(String response, String header) throws APIException {
+      return CommerceOrder.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<CommerceOrder> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<CommerceOrder> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<CommerceOrder>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<CommerceOrder>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<CommerceOrder>>() {
+           public APINodeList<CommerceOrder> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetCommerceOrders.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetCommerceOrders(String nodeId, APIContext context) {
+      super(context, nodeId, "/commerce_orders", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCommerceOrders setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCommerceOrders setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCommerceOrders setFilters (List<CommerceOrder.EnumFilters> filters) {
+      this.setParam("filters", filters);
+      return this;
+    }
+    public APIRequestGetCommerceOrders setFilters (String filters) {
+      this.setParam("filters", filters);
+      return this;
+    }
+
+    public APIRequestGetCommerceOrders setState (List<CommerceOrder.EnumState> state) {
+      this.setParam("state", state);
+      return this;
+    }
+    public APIRequestGetCommerceOrders setState (String state) {
+      this.setParam("state", state);
+      return this;
+    }
+
+    public APIRequestGetCommerceOrders setUpdatedAfter (String updatedAfter) {
+      this.setParam("updated_after", updatedAfter);
+      return this;
+    }
+
+    public APIRequestGetCommerceOrders setUpdatedBefore (String updatedBefore) {
+      this.setParam("updated_before", updatedBefore);
+      return this;
+    }
+
+    public APIRequestGetCommerceOrders requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCommerceOrders requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCommerceOrders requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCommerceOrders requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCommerceOrders requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCommerceOrders requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetCommerceOrders requestBuyerDetailsField () {
+      return this.requestBuyerDetailsField(true);
+    }
+    public APIRequestGetCommerceOrders requestBuyerDetailsField (boolean value) {
+      this.requestField("buyer_details", value);
+      return this;
+    }
+    public APIRequestGetCommerceOrders requestChannelField () {
+      return this.requestChannelField(true);
+    }
+    public APIRequestGetCommerceOrders requestChannelField (boolean value) {
+      this.requestField("channel", value);
+      return this;
+    }
+    public APIRequestGetCommerceOrders requestCreatedField () {
+      return this.requestCreatedField(true);
+    }
+    public APIRequestGetCommerceOrders requestCreatedField (boolean value) {
+      this.requestField("created", value);
+      return this;
+    }
+    public APIRequestGetCommerceOrders requestEstimatedPaymentDetailsField () {
+      return this.requestEstimatedPaymentDetailsField(true);
+    }
+    public APIRequestGetCommerceOrders requestEstimatedPaymentDetailsField (boolean value) {
+      this.requestField("estimated_payment_details", value);
+      return this;
+    }
+    public APIRequestGetCommerceOrders requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetCommerceOrders requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetCommerceOrders requestIsGroupBuyField () {
+      return this.requestIsGroupBuyField(true);
+    }
+    public APIRequestGetCommerceOrders requestIsGroupBuyField (boolean value) {
+      this.requestField("is_group_buy", value);
+      return this;
+    }
+    public APIRequestGetCommerceOrders requestLastUpdatedField () {
+      return this.requestLastUpdatedField(true);
+    }
+    public APIRequestGetCommerceOrders requestLastUpdatedField (boolean value) {
+      this.requestField("last_updated", value);
+      return this;
+    }
+    public APIRequestGetCommerceOrders requestMerchantOrderIdField () {
+      return this.requestMerchantOrderIdField(true);
+    }
+    public APIRequestGetCommerceOrders requestMerchantOrderIdField (boolean value) {
+      this.requestField("merchant_order_id", value);
+      return this;
+    }
+    public APIRequestGetCommerceOrders requestOrderStatusField () {
+      return this.requestOrderStatusField(true);
+    }
+    public APIRequestGetCommerceOrders requestOrderStatusField (boolean value) {
+      this.requestField("order_status", value);
+      return this;
+    }
+    public APIRequestGetCommerceOrders requestSelectedShippingOptionField () {
+      return this.requestSelectedShippingOptionField(true);
+    }
+    public APIRequestGetCommerceOrders requestSelectedShippingOptionField (boolean value) {
+      this.requestField("selected_shipping_option", value);
+      return this;
+    }
+    public APIRequestGetCommerceOrders requestShipByDateField () {
+      return this.requestShipByDateField(true);
+    }
+    public APIRequestGetCommerceOrders requestShipByDateField (boolean value) {
+      this.requestField("ship_by_date", value);
+      return this;
+    }
+    public APIRequestGetCommerceOrders requestShippingAddressField () {
+      return this.requestShippingAddressField(true);
+    }
+    public APIRequestGetCommerceOrders requestShippingAddressField (boolean value) {
+      this.requestField("shipping_address", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetCommercePayouts extends APIRequest<CommercePayout> {
+
+    APINodeList<CommercePayout> lastResponse = null;
+    @Override
+    public APINodeList<CommercePayout> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "end_time",
+      "start_time",
+    };
+
+    public static final String[] FIELDS = {
+      "amount",
+      "payout_date",
+      "payout_reference_id",
+      "status",
+      "transfer_id",
+    };
+
+    @Override
+    public APINodeList<CommercePayout> parseResponse(String response, String header) throws APIException {
+      return CommercePayout.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<CommercePayout> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<CommercePayout> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<CommercePayout>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<CommercePayout>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<CommercePayout>>() {
+           public APINodeList<CommercePayout> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetCommercePayouts.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetCommercePayouts(String nodeId, APIContext context) {
+      super(context, nodeId, "/commerce_payouts", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCommercePayouts setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCommercePayouts setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCommercePayouts setEndTime (String endTime) {
+      this.setParam("end_time", endTime);
+      return this;
+    }
+
+    public APIRequestGetCommercePayouts setStartTime (String startTime) {
+      this.setParam("start_time", startTime);
+      return this;
+    }
+
+    public APIRequestGetCommercePayouts requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCommercePayouts requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCommercePayouts requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCommercePayouts requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCommercePayouts requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCommercePayouts requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetCommercePayouts requestAmountField () {
+      return this.requestAmountField(true);
+    }
+    public APIRequestGetCommercePayouts requestAmountField (boolean value) {
+      this.requestField("amount", value);
+      return this;
+    }
+    public APIRequestGetCommercePayouts requestPayoutDateField () {
+      return this.requestPayoutDateField(true);
+    }
+    public APIRequestGetCommercePayouts requestPayoutDateField (boolean value) {
+      this.requestField("payout_date", value);
+      return this;
+    }
+    public APIRequestGetCommercePayouts requestPayoutReferenceIdField () {
+      return this.requestPayoutReferenceIdField(true);
+    }
+    public APIRequestGetCommercePayouts requestPayoutReferenceIdField (boolean value) {
+      this.requestField("payout_reference_id", value);
+      return this;
+    }
+    public APIRequestGetCommercePayouts requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetCommercePayouts requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGetCommercePayouts requestTransferIdField () {
+      return this.requestTransferIdField(true);
+    }
+    public APIRequestGetCommercePayouts requestTransferIdField (boolean value) {
+      this.requestField("transfer_id", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetCommerceTransactions extends APIRequest<CommerceOrderTransactionDetail> {
+
+    APINodeList<CommerceOrderTransactionDetail> lastResponse = null;
+    @Override
+    public APINodeList<CommerceOrderTransactionDetail> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "end_time",
+      "payout_reference_id",
+      "start_time",
+    };
+
+    public static final String[] FIELDS = {
+      "net_payment_amount",
+      "order_details",
+      "payout_reference_id",
+      "processing_fee",
+      "tax_rate",
+      "transaction_date",
+      "transaction_type",
+      "transfer_id",
+      "id",
+    };
+
+    @Override
+    public APINodeList<CommerceOrderTransactionDetail> parseResponse(String response, String header) throws APIException {
+      return CommerceOrderTransactionDetail.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<CommerceOrderTransactionDetail> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<CommerceOrderTransactionDetail> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<CommerceOrderTransactionDetail>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<CommerceOrderTransactionDetail>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<CommerceOrderTransactionDetail>>() {
+           public APINodeList<CommerceOrderTransactionDetail> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetCommerceTransactions.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetCommerceTransactions(String nodeId, APIContext context) {
+      super(context, nodeId, "/commerce_transactions", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCommerceTransactions setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCommerceTransactions setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCommerceTransactions setEndTime (String endTime) {
+      this.setParam("end_time", endTime);
+      return this;
+    }
+
+    public APIRequestGetCommerceTransactions setPayoutReferenceId (String payoutReferenceId) {
+      this.setParam("payout_reference_id", payoutReferenceId);
+      return this;
+    }
+
+    public APIRequestGetCommerceTransactions setStartTime (String startTime) {
+      this.setParam("start_time", startTime);
+      return this;
+    }
+
+    public APIRequestGetCommerceTransactions requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCommerceTransactions requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCommerceTransactions requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCommerceTransactions requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCommerceTransactions requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCommerceTransactions requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetCommerceTransactions requestNetPaymentAmountField () {
+      return this.requestNetPaymentAmountField(true);
+    }
+    public APIRequestGetCommerceTransactions requestNetPaymentAmountField (boolean value) {
+      this.requestField("net_payment_amount", value);
+      return this;
+    }
+    public APIRequestGetCommerceTransactions requestOrderDetailsField () {
+      return this.requestOrderDetailsField(true);
+    }
+    public APIRequestGetCommerceTransactions requestOrderDetailsField (boolean value) {
+      this.requestField("order_details", value);
+      return this;
+    }
+    public APIRequestGetCommerceTransactions requestPayoutReferenceIdField () {
+      return this.requestPayoutReferenceIdField(true);
+    }
+    public APIRequestGetCommerceTransactions requestPayoutReferenceIdField (boolean value) {
+      this.requestField("payout_reference_id", value);
+      return this;
+    }
+    public APIRequestGetCommerceTransactions requestProcessingFeeField () {
+      return this.requestProcessingFeeField(true);
+    }
+    public APIRequestGetCommerceTransactions requestProcessingFeeField (boolean value) {
+      this.requestField("processing_fee", value);
+      return this;
+    }
+    public APIRequestGetCommerceTransactions requestTaxRateField () {
+      return this.requestTaxRateField(true);
+    }
+    public APIRequestGetCommerceTransactions requestTaxRateField (boolean value) {
+      this.requestField("tax_rate", value);
+      return this;
+    }
+    public APIRequestGetCommerceTransactions requestTransactionDateField () {
+      return this.requestTransactionDateField(true);
+    }
+    public APIRequestGetCommerceTransactions requestTransactionDateField (boolean value) {
+      this.requestField("transaction_date", value);
+      return this;
+    }
+    public APIRequestGetCommerceTransactions requestTransactionTypeField () {
+      return this.requestTransactionTypeField(true);
+    }
+    public APIRequestGetCommerceTransactions requestTransactionTypeField (boolean value) {
+      this.requestField("transaction_type", value);
+      return this;
+    }
+    public APIRequestGetCommerceTransactions requestTransferIdField () {
+      return this.requestTransferIdField(true);
+    }
+    public APIRequestGetCommerceTransactions requestTransferIdField (boolean value) {
+      this.requestField("transfer_id", value);
+      return this;
+    }
+    public APIRequestGetCommerceTransactions requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetCommerceTransactions requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetConversations extends APIRequest<UnifiedThread> {
 
     APINodeList<UnifiedThread> lastResponse = null;
@@ -7955,15 +9009,19 @@ public class Page extends APINode {
       "comments_mirroring_domain",
       "coordinates",
       "created_time",
+      "delivery_growth_optimizations",
+      "entities",
       "event",
       "expanded_height",
       "expanded_width",
       "feed_targeting",
+      "formatting",
       "from",
       "full_picture",
       "height",
       "icon",
       "id",
+      "implicit_place",
       "instagram_eligibility",
       "is_app_share",
       "is_eligible_for_promotion",
@@ -7974,6 +9032,7 @@ public class Page extends APINode {
       "is_popular",
       "is_published",
       "is_spherical",
+      "live_video_eligibility",
       "message",
       "message_tags",
       "multi_share_end_card",
@@ -7986,6 +9045,7 @@ public class Page extends APINode {
       "promotable_id",
       "promotion_status",
       "properties",
+      "publishing_stats",
       "scheduled_publish_time",
       "shares",
       "status_type",
@@ -7995,10 +9055,12 @@ public class Page extends APINode {
       "target",
       "targeting",
       "timeline_visibility",
+      "translations",
       "updated_time",
       "via",
       "video_buying_eligibility",
       "width",
+      "will_be_autocropped_when_deliver_to_instagram",
     };
 
     @Override
@@ -8203,6 +9265,20 @@ public class Page extends APINode {
       this.requestField("created_time", value);
       return this;
     }
+    public APIRequestGetFeed requestDeliveryGrowthOptimizationsField () {
+      return this.requestDeliveryGrowthOptimizationsField(true);
+    }
+    public APIRequestGetFeed requestDeliveryGrowthOptimizationsField (boolean value) {
+      this.requestField("delivery_growth_optimizations", value);
+      return this;
+    }
+    public APIRequestGetFeed requestEntitiesField () {
+      return this.requestEntitiesField(true);
+    }
+    public APIRequestGetFeed requestEntitiesField (boolean value) {
+      this.requestField("entities", value);
+      return this;
+    }
     public APIRequestGetFeed requestEventField () {
       return this.requestEventField(true);
     }
@@ -8229,6 +9305,13 @@ public class Page extends APINode {
     }
     public APIRequestGetFeed requestFeedTargetingField (boolean value) {
       this.requestField("feed_targeting", value);
+      return this;
+    }
+    public APIRequestGetFeed requestFormattingField () {
+      return this.requestFormattingField(true);
+    }
+    public APIRequestGetFeed requestFormattingField (boolean value) {
+      this.requestField("formatting", value);
       return this;
     }
     public APIRequestGetFeed requestFromField () {
@@ -8264,6 +9347,13 @@ public class Page extends APINode {
     }
     public APIRequestGetFeed requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetFeed requestImplicitPlaceField () {
+      return this.requestImplicitPlaceField(true);
+    }
+    public APIRequestGetFeed requestImplicitPlaceField (boolean value) {
+      this.requestField("implicit_place", value);
       return this;
     }
     public APIRequestGetFeed requestInstagramEligibilityField () {
@@ -8334,6 +9424,13 @@ public class Page extends APINode {
     }
     public APIRequestGetFeed requestIsSphericalField (boolean value) {
       this.requestField("is_spherical", value);
+      return this;
+    }
+    public APIRequestGetFeed requestLiveVideoEligibilityField () {
+      return this.requestLiveVideoEligibilityField(true);
+    }
+    public APIRequestGetFeed requestLiveVideoEligibilityField (boolean value) {
+      this.requestField("live_video_eligibility", value);
       return this;
     }
     public APIRequestGetFeed requestMessageField () {
@@ -8420,6 +9517,13 @@ public class Page extends APINode {
       this.requestField("properties", value);
       return this;
     }
+    public APIRequestGetFeed requestPublishingStatsField () {
+      return this.requestPublishingStatsField(true);
+    }
+    public APIRequestGetFeed requestPublishingStatsField (boolean value) {
+      this.requestField("publishing_stats", value);
+      return this;
+    }
     public APIRequestGetFeed requestScheduledPublishTimeField () {
       return this.requestScheduledPublishTimeField(true);
     }
@@ -8483,6 +9587,13 @@ public class Page extends APINode {
       this.requestField("timeline_visibility", value);
       return this;
     }
+    public APIRequestGetFeed requestTranslationsField () {
+      return this.requestTranslationsField(true);
+    }
+    public APIRequestGetFeed requestTranslationsField (boolean value) {
+      this.requestField("translations", value);
+      return this;
+    }
     public APIRequestGetFeed requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -8509,6 +9620,13 @@ public class Page extends APINode {
     }
     public APIRequestGetFeed requestWidthField (boolean value) {
       this.requestField("width", value);
+      return this;
+    }
+    public APIRequestGetFeed requestWillBeAutocroppedWhenDeliverToInstagramField () {
+      return this.requestWillBeAutocroppedWhenDeliverToInstagramField(true);
+    }
+    public APIRequestGetFeed requestWillBeAutocroppedWhenDeliverToInstagramField (boolean value) {
+      this.requestField("will_be_autocropped_when_deliver_to_instagram", value);
       return this;
     }
   }
@@ -16332,6 +17450,7 @@ public class Page extends APINode {
     }
     public static final String[] PARAMS = {
       "always_open",
+      "delivery_and_pickup_option_info",
       "differently_open_offerings",
       "hours",
       "ignore_warnings",
@@ -16413,6 +17532,15 @@ public class Page extends APINode {
     }
     public APIRequestCreateLocation setAlwaysOpen (String alwaysOpen) {
       this.setParam("always_open", alwaysOpen);
+      return this;
+    }
+
+    public APIRequestCreateLocation setDeliveryAndPickupOptionInfo (List<String> deliveryAndPickupOptionInfo) {
+      this.setParam("delivery_and_pickup_option_info", deliveryAndPickupOptionInfo);
+      return this;
+    }
+    public APIRequestCreateLocation setDeliveryAndPickupOptionInfo (String deliveryAndPickupOptionInfo) {
+      this.setParam("delivery_and_pickup_option_info", deliveryAndPickupOptionInfo);
       return this;
     }
 
@@ -21198,15 +22326,19 @@ public class Page extends APINode {
       "comments_mirroring_domain",
       "coordinates",
       "created_time",
+      "delivery_growth_optimizations",
+      "entities",
       "event",
       "expanded_height",
       "expanded_width",
       "feed_targeting",
+      "formatting",
       "from",
       "full_picture",
       "height",
       "icon",
       "id",
+      "implicit_place",
       "instagram_eligibility",
       "is_app_share",
       "is_eligible_for_promotion",
@@ -21217,6 +22349,7 @@ public class Page extends APINode {
       "is_popular",
       "is_published",
       "is_spherical",
+      "live_video_eligibility",
       "message",
       "message_tags",
       "multi_share_end_card",
@@ -21229,6 +22362,7 @@ public class Page extends APINode {
       "promotable_id",
       "promotion_status",
       "properties",
+      "publishing_stats",
       "scheduled_publish_time",
       "shares",
       "status_type",
@@ -21238,10 +22372,12 @@ public class Page extends APINode {
       "target",
       "targeting",
       "timeline_visibility",
+      "translations",
       "updated_time",
       "via",
       "video_buying_eligibility",
       "width",
+      "will_be_autocropped_when_deliver_to_instagram",
     };
 
     @Override
@@ -21451,6 +22587,20 @@ public class Page extends APINode {
       this.requestField("created_time", value);
       return this;
     }
+    public APIRequestGetPosts requestDeliveryGrowthOptimizationsField () {
+      return this.requestDeliveryGrowthOptimizationsField(true);
+    }
+    public APIRequestGetPosts requestDeliveryGrowthOptimizationsField (boolean value) {
+      this.requestField("delivery_growth_optimizations", value);
+      return this;
+    }
+    public APIRequestGetPosts requestEntitiesField () {
+      return this.requestEntitiesField(true);
+    }
+    public APIRequestGetPosts requestEntitiesField (boolean value) {
+      this.requestField("entities", value);
+      return this;
+    }
     public APIRequestGetPosts requestEventField () {
       return this.requestEventField(true);
     }
@@ -21477,6 +22627,13 @@ public class Page extends APINode {
     }
     public APIRequestGetPosts requestFeedTargetingField (boolean value) {
       this.requestField("feed_targeting", value);
+      return this;
+    }
+    public APIRequestGetPosts requestFormattingField () {
+      return this.requestFormattingField(true);
+    }
+    public APIRequestGetPosts requestFormattingField (boolean value) {
+      this.requestField("formatting", value);
       return this;
     }
     public APIRequestGetPosts requestFromField () {
@@ -21512,6 +22669,13 @@ public class Page extends APINode {
     }
     public APIRequestGetPosts requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetPosts requestImplicitPlaceField () {
+      return this.requestImplicitPlaceField(true);
+    }
+    public APIRequestGetPosts requestImplicitPlaceField (boolean value) {
+      this.requestField("implicit_place", value);
       return this;
     }
     public APIRequestGetPosts requestInstagramEligibilityField () {
@@ -21582,6 +22746,13 @@ public class Page extends APINode {
     }
     public APIRequestGetPosts requestIsSphericalField (boolean value) {
       this.requestField("is_spherical", value);
+      return this;
+    }
+    public APIRequestGetPosts requestLiveVideoEligibilityField () {
+      return this.requestLiveVideoEligibilityField(true);
+    }
+    public APIRequestGetPosts requestLiveVideoEligibilityField (boolean value) {
+      this.requestField("live_video_eligibility", value);
       return this;
     }
     public APIRequestGetPosts requestMessageField () {
@@ -21668,6 +22839,13 @@ public class Page extends APINode {
       this.requestField("properties", value);
       return this;
     }
+    public APIRequestGetPosts requestPublishingStatsField () {
+      return this.requestPublishingStatsField(true);
+    }
+    public APIRequestGetPosts requestPublishingStatsField (boolean value) {
+      this.requestField("publishing_stats", value);
+      return this;
+    }
     public APIRequestGetPosts requestScheduledPublishTimeField () {
       return this.requestScheduledPublishTimeField(true);
     }
@@ -21731,6 +22909,13 @@ public class Page extends APINode {
       this.requestField("timeline_visibility", value);
       return this;
     }
+    public APIRequestGetPosts requestTranslationsField () {
+      return this.requestTranslationsField(true);
+    }
+    public APIRequestGetPosts requestTranslationsField (boolean value) {
+      this.requestField("translations", value);
+      return this;
+    }
     public APIRequestGetPosts requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -21759,6 +22944,13 @@ public class Page extends APINode {
       this.requestField("width", value);
       return this;
     }
+    public APIRequestGetPosts requestWillBeAutocroppedWhenDeliverToInstagramField () {
+      return this.requestWillBeAutocroppedWhenDeliverToInstagramField(true);
+    }
+    public APIRequestGetPosts requestWillBeAutocroppedWhenDeliverToInstagramField (boolean value) {
+      this.requestField("will_be_autocropped_when_deliver_to_instagram", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetProductCatalogs extends APIRequest<ProductCatalog> {
@@ -21773,6 +22965,7 @@ public class Page extends APINode {
 
     public static final String[] FIELDS = {
       "business",
+      "commerce_merchant_settings",
       "da_display_settings",
       "default_image_url",
       "fallback_image_url",
@@ -21881,6 +23074,13 @@ public class Page extends APINode {
       this.requestField("business", value);
       return this;
     }
+    public APIRequestGetProductCatalogs requestCommerceMerchantSettingsField () {
+      return this.requestCommerceMerchantSettingsField(true);
+    }
+    public APIRequestGetProductCatalogs requestCommerceMerchantSettingsField (boolean value) {
+      this.requestField("commerce_merchant_settings", value);
+      return this;
+    }
     public APIRequestGetProductCatalogs requestDaDisplaySettingsField () {
       return this.requestDaDisplaySettingsField(true);
     }
@@ -21953,168 +23153,6 @@ public class Page extends APINode {
     }
   }
 
-  public static class APIRequestCreatePromotion extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "ad_account_id",
-      "budget",
-      "duration",
-      "gender",
-      "geo_level",
-      "max_age",
-      "min_age",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreatePromotion.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreatePromotion(String nodeId, APIContext context) {
-      super(context, nodeId, "/promotions", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreatePromotion setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePromotion setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreatePromotion setAdAccountId (String adAccountId) {
-      this.setParam("ad_account_id", adAccountId);
-      return this;
-    }
-
-    public APIRequestCreatePromotion setBudget (Long budget) {
-      this.setParam("budget", budget);
-      return this;
-    }
-    public APIRequestCreatePromotion setBudget (String budget) {
-      this.setParam("budget", budget);
-      return this;
-    }
-
-    public APIRequestCreatePromotion setDuration (String duration) {
-      this.setParam("duration", duration);
-      return this;
-    }
-
-    public APIRequestCreatePromotion setGender (Long gender) {
-      this.setParam("gender", gender);
-      return this;
-    }
-    public APIRequestCreatePromotion setGender (String gender) {
-      this.setParam("gender", gender);
-      return this;
-    }
-
-    public APIRequestCreatePromotion setGeoLevel (String geoLevel) {
-      this.setParam("geo_level", geoLevel);
-      return this;
-    }
-
-    public APIRequestCreatePromotion setMaxAge (Long maxAge) {
-      this.setParam("max_age", maxAge);
-      return this;
-    }
-    public APIRequestCreatePromotion setMaxAge (String maxAge) {
-      this.setParam("max_age", maxAge);
-      return this;
-    }
-
-    public APIRequestCreatePromotion setMinAge (Long minAge) {
-      this.setParam("min_age", minAge);
-      return this;
-    }
-    public APIRequestCreatePromotion setMinAge (String minAge) {
-      this.setParam("min_age", minAge);
-      return this;
-    }
-
-    public APIRequestCreatePromotion requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreatePromotion requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePromotion requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreatePromotion requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePromotion requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePromotion requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetPublishedPosts extends APIRequest<PagePost> {
 
     APINodeList<PagePost> lastResponse = null;
@@ -22139,15 +23177,19 @@ public class Page extends APINode {
       "comments_mirroring_domain",
       "coordinates",
       "created_time",
+      "delivery_growth_optimizations",
+      "entities",
       "event",
       "expanded_height",
       "expanded_width",
       "feed_targeting",
+      "formatting",
       "from",
       "full_picture",
       "height",
       "icon",
       "id",
+      "implicit_place",
       "instagram_eligibility",
       "is_app_share",
       "is_eligible_for_promotion",
@@ -22158,6 +23200,7 @@ public class Page extends APINode {
       "is_popular",
       "is_published",
       "is_spherical",
+      "live_video_eligibility",
       "message",
       "message_tags",
       "multi_share_end_card",
@@ -22170,6 +23213,7 @@ public class Page extends APINode {
       "promotable_id",
       "promotion_status",
       "properties",
+      "publishing_stats",
       "scheduled_publish_time",
       "shares",
       "status_type",
@@ -22179,10 +23223,12 @@ public class Page extends APINode {
       "target",
       "targeting",
       "timeline_visibility",
+      "translations",
       "updated_time",
       "via",
       "video_buying_eligibility",
       "width",
+      "will_be_autocropped_when_deliver_to_instagram",
     };
 
     @Override
@@ -22361,6 +23407,20 @@ public class Page extends APINode {
       this.requestField("created_time", value);
       return this;
     }
+    public APIRequestGetPublishedPosts requestDeliveryGrowthOptimizationsField () {
+      return this.requestDeliveryGrowthOptimizationsField(true);
+    }
+    public APIRequestGetPublishedPosts requestDeliveryGrowthOptimizationsField (boolean value) {
+      this.requestField("delivery_growth_optimizations", value);
+      return this;
+    }
+    public APIRequestGetPublishedPosts requestEntitiesField () {
+      return this.requestEntitiesField(true);
+    }
+    public APIRequestGetPublishedPosts requestEntitiesField (boolean value) {
+      this.requestField("entities", value);
+      return this;
+    }
     public APIRequestGetPublishedPosts requestEventField () {
       return this.requestEventField(true);
     }
@@ -22387,6 +23447,13 @@ public class Page extends APINode {
     }
     public APIRequestGetPublishedPosts requestFeedTargetingField (boolean value) {
       this.requestField("feed_targeting", value);
+      return this;
+    }
+    public APIRequestGetPublishedPosts requestFormattingField () {
+      return this.requestFormattingField(true);
+    }
+    public APIRequestGetPublishedPosts requestFormattingField (boolean value) {
+      this.requestField("formatting", value);
       return this;
     }
     public APIRequestGetPublishedPosts requestFromField () {
@@ -22422,6 +23489,13 @@ public class Page extends APINode {
     }
     public APIRequestGetPublishedPosts requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetPublishedPosts requestImplicitPlaceField () {
+      return this.requestImplicitPlaceField(true);
+    }
+    public APIRequestGetPublishedPosts requestImplicitPlaceField (boolean value) {
+      this.requestField("implicit_place", value);
       return this;
     }
     public APIRequestGetPublishedPosts requestInstagramEligibilityField () {
@@ -22492,6 +23566,13 @@ public class Page extends APINode {
     }
     public APIRequestGetPublishedPosts requestIsSphericalField (boolean value) {
       this.requestField("is_spherical", value);
+      return this;
+    }
+    public APIRequestGetPublishedPosts requestLiveVideoEligibilityField () {
+      return this.requestLiveVideoEligibilityField(true);
+    }
+    public APIRequestGetPublishedPosts requestLiveVideoEligibilityField (boolean value) {
+      this.requestField("live_video_eligibility", value);
       return this;
     }
     public APIRequestGetPublishedPosts requestMessageField () {
@@ -22578,6 +23659,13 @@ public class Page extends APINode {
       this.requestField("properties", value);
       return this;
     }
+    public APIRequestGetPublishedPosts requestPublishingStatsField () {
+      return this.requestPublishingStatsField(true);
+    }
+    public APIRequestGetPublishedPosts requestPublishingStatsField (boolean value) {
+      this.requestField("publishing_stats", value);
+      return this;
+    }
     public APIRequestGetPublishedPosts requestScheduledPublishTimeField () {
       return this.requestScheduledPublishTimeField(true);
     }
@@ -22641,6 +23729,13 @@ public class Page extends APINode {
       this.requestField("timeline_visibility", value);
       return this;
     }
+    public APIRequestGetPublishedPosts requestTranslationsField () {
+      return this.requestTranslationsField(true);
+    }
+    public APIRequestGetPublishedPosts requestTranslationsField (boolean value) {
+      this.requestField("translations", value);
+      return this;
+    }
     public APIRequestGetPublishedPosts requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -22667,6 +23762,13 @@ public class Page extends APINode {
     }
     public APIRequestGetPublishedPosts requestWidthField (boolean value) {
       this.requestField("width", value);
+      return this;
+    }
+    public APIRequestGetPublishedPosts requestWillBeAutocroppedWhenDeliverToInstagramField () {
+      return this.requestWillBeAutocroppedWhenDeliverToInstagramField(true);
+    }
+    public APIRequestGetPublishedPosts requestWillBeAutocroppedWhenDeliverToInstagramField (boolean value) {
+      this.requestField("will_be_autocropped_when_deliver_to_instagram", value);
       return this;
     }
   }
@@ -23777,15 +24879,19 @@ public class Page extends APINode {
       "comments_mirroring_domain",
       "coordinates",
       "created_time",
+      "delivery_growth_optimizations",
+      "entities",
       "event",
       "expanded_height",
       "expanded_width",
       "feed_targeting",
+      "formatting",
       "from",
       "full_picture",
       "height",
       "icon",
       "id",
+      "implicit_place",
       "instagram_eligibility",
       "is_app_share",
       "is_eligible_for_promotion",
@@ -23796,6 +24902,7 @@ public class Page extends APINode {
       "is_popular",
       "is_published",
       "is_spherical",
+      "live_video_eligibility",
       "message",
       "message_tags",
       "multi_share_end_card",
@@ -23808,6 +24915,7 @@ public class Page extends APINode {
       "promotable_id",
       "promotion_status",
       "properties",
+      "publishing_stats",
       "scheduled_publish_time",
       "shares",
       "status_type",
@@ -23817,10 +24925,12 @@ public class Page extends APINode {
       "target",
       "targeting",
       "timeline_visibility",
+      "translations",
       "updated_time",
       "via",
       "video_buying_eligibility",
       "width",
+      "will_be_autocropped_when_deliver_to_instagram",
     };
 
     @Override
@@ -23989,6 +25099,20 @@ public class Page extends APINode {
       this.requestField("created_time", value);
       return this;
     }
+    public APIRequestGetScheduledPosts requestDeliveryGrowthOptimizationsField () {
+      return this.requestDeliveryGrowthOptimizationsField(true);
+    }
+    public APIRequestGetScheduledPosts requestDeliveryGrowthOptimizationsField (boolean value) {
+      this.requestField("delivery_growth_optimizations", value);
+      return this;
+    }
+    public APIRequestGetScheduledPosts requestEntitiesField () {
+      return this.requestEntitiesField(true);
+    }
+    public APIRequestGetScheduledPosts requestEntitiesField (boolean value) {
+      this.requestField("entities", value);
+      return this;
+    }
     public APIRequestGetScheduledPosts requestEventField () {
       return this.requestEventField(true);
     }
@@ -24015,6 +25139,13 @@ public class Page extends APINode {
     }
     public APIRequestGetScheduledPosts requestFeedTargetingField (boolean value) {
       this.requestField("feed_targeting", value);
+      return this;
+    }
+    public APIRequestGetScheduledPosts requestFormattingField () {
+      return this.requestFormattingField(true);
+    }
+    public APIRequestGetScheduledPosts requestFormattingField (boolean value) {
+      this.requestField("formatting", value);
       return this;
     }
     public APIRequestGetScheduledPosts requestFromField () {
@@ -24050,6 +25181,13 @@ public class Page extends APINode {
     }
     public APIRequestGetScheduledPosts requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetScheduledPosts requestImplicitPlaceField () {
+      return this.requestImplicitPlaceField(true);
+    }
+    public APIRequestGetScheduledPosts requestImplicitPlaceField (boolean value) {
+      this.requestField("implicit_place", value);
       return this;
     }
     public APIRequestGetScheduledPosts requestInstagramEligibilityField () {
@@ -24120,6 +25258,13 @@ public class Page extends APINode {
     }
     public APIRequestGetScheduledPosts requestIsSphericalField (boolean value) {
       this.requestField("is_spherical", value);
+      return this;
+    }
+    public APIRequestGetScheduledPosts requestLiveVideoEligibilityField () {
+      return this.requestLiveVideoEligibilityField(true);
+    }
+    public APIRequestGetScheduledPosts requestLiveVideoEligibilityField (boolean value) {
+      this.requestField("live_video_eligibility", value);
       return this;
     }
     public APIRequestGetScheduledPosts requestMessageField () {
@@ -24206,6 +25351,13 @@ public class Page extends APINode {
       this.requestField("properties", value);
       return this;
     }
+    public APIRequestGetScheduledPosts requestPublishingStatsField () {
+      return this.requestPublishingStatsField(true);
+    }
+    public APIRequestGetScheduledPosts requestPublishingStatsField (boolean value) {
+      this.requestField("publishing_stats", value);
+      return this;
+    }
     public APIRequestGetScheduledPosts requestScheduledPublishTimeField () {
       return this.requestScheduledPublishTimeField(true);
     }
@@ -24269,6 +25421,13 @@ public class Page extends APINode {
       this.requestField("timeline_visibility", value);
       return this;
     }
+    public APIRequestGetScheduledPosts requestTranslationsField () {
+      return this.requestTranslationsField(true);
+    }
+    public APIRequestGetScheduledPosts requestTranslationsField (boolean value) {
+      this.requestField("translations", value);
+      return this;
+    }
     public APIRequestGetScheduledPosts requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -24295,6 +25454,13 @@ public class Page extends APINode {
     }
     public APIRequestGetScheduledPosts requestWidthField (boolean value) {
       this.requestField("width", value);
+      return this;
+    }
+    public APIRequestGetScheduledPosts requestWillBeAutocroppedWhenDeliverToInstagramField () {
+      return this.requestWillBeAutocroppedWhenDeliverToInstagramField(true);
+    }
+    public APIRequestGetScheduledPosts requestWillBeAutocroppedWhenDeliverToInstagramField (boolean value) {
+      this.requestField("will_be_autocropped_when_deliver_to_instagram", value);
       return this;
     }
   }
@@ -25435,6 +26601,150 @@ public class Page extends APINode {
       return this;
     }
 
+  }
+
+  public static class APIRequestGetShopSetupStatus extends APIRequest<CommerceMerchantSettingsSetupStatus> {
+
+    APINodeList<CommerceMerchantSettingsSetupStatus> lastResponse = null;
+    @Override
+    public APINodeList<CommerceMerchantSettingsSetupStatus> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "deals_setup",
+      "marketplace_approval_status",
+      "marketplace_approval_status_details",
+      "payment_setup",
+      "shop_setup",
+    };
+
+    @Override
+    public APINodeList<CommerceMerchantSettingsSetupStatus> parseResponse(String response, String header) throws APIException {
+      return CommerceMerchantSettingsSetupStatus.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<CommerceMerchantSettingsSetupStatus> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<CommerceMerchantSettingsSetupStatus> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<CommerceMerchantSettingsSetupStatus>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<CommerceMerchantSettingsSetupStatus>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<CommerceMerchantSettingsSetupStatus>>() {
+           public APINodeList<CommerceMerchantSettingsSetupStatus> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetShopSetupStatus.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetShopSetupStatus(String nodeId, APIContext context) {
+      super(context, nodeId, "/shop_setup_status", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetShopSetupStatus setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetShopSetupStatus setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetShopSetupStatus requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetShopSetupStatus requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetShopSetupStatus requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetShopSetupStatus requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetShopSetupStatus requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetShopSetupStatus requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetShopSetupStatus requestDealsSetupField () {
+      return this.requestDealsSetupField(true);
+    }
+    public APIRequestGetShopSetupStatus requestDealsSetupField (boolean value) {
+      this.requestField("deals_setup", value);
+      return this;
+    }
+    public APIRequestGetShopSetupStatus requestMarketplaceApprovalStatusField () {
+      return this.requestMarketplaceApprovalStatusField(true);
+    }
+    public APIRequestGetShopSetupStatus requestMarketplaceApprovalStatusField (boolean value) {
+      this.requestField("marketplace_approval_status", value);
+      return this;
+    }
+    public APIRequestGetShopSetupStatus requestMarketplaceApprovalStatusDetailsField () {
+      return this.requestMarketplaceApprovalStatusDetailsField(true);
+    }
+    public APIRequestGetShopSetupStatus requestMarketplaceApprovalStatusDetailsField (boolean value) {
+      this.requestField("marketplace_approval_status_details", value);
+      return this;
+    }
+    public APIRequestGetShopSetupStatus requestPaymentSetupField () {
+      return this.requestPaymentSetupField(true);
+    }
+    public APIRequestGetShopSetupStatus requestPaymentSetupField (boolean value) {
+      this.requestField("payment_setup", value);
+      return this;
+    }
+    public APIRequestGetShopSetupStatus requestShopSetupField () {
+      return this.requestShopSetupField(true);
+    }
+    public APIRequestGetShopSetupStatus requestShopSetupField (boolean value) {
+      this.requestField("shop_setup", value);
+      return this;
+    }
   }
 
   public static class APIRequestDeleteSubscribedApps extends APIRequest<APINode> {
@@ -27037,15 +28347,19 @@ public class Page extends APINode {
       "comments_mirroring_domain",
       "coordinates",
       "created_time",
+      "delivery_growth_optimizations",
+      "entities",
       "event",
       "expanded_height",
       "expanded_width",
       "feed_targeting",
+      "formatting",
       "from",
       "full_picture",
       "height",
       "icon",
       "id",
+      "implicit_place",
       "instagram_eligibility",
       "is_app_share",
       "is_eligible_for_promotion",
@@ -27056,6 +28370,7 @@ public class Page extends APINode {
       "is_popular",
       "is_published",
       "is_spherical",
+      "live_video_eligibility",
       "message",
       "message_tags",
       "multi_share_end_card",
@@ -27068,6 +28383,7 @@ public class Page extends APINode {
       "promotable_id",
       "promotion_status",
       "properties",
+      "publishing_stats",
       "scheduled_publish_time",
       "shares",
       "status_type",
@@ -27077,10 +28393,12 @@ public class Page extends APINode {
       "target",
       "targeting",
       "timeline_visibility",
+      "translations",
       "updated_time",
       "via",
       "video_buying_eligibility",
       "width",
+      "will_be_autocropped_when_deliver_to_instagram",
     };
 
     @Override
@@ -27249,6 +28567,20 @@ public class Page extends APINode {
       this.requestField("created_time", value);
       return this;
     }
+    public APIRequestGetTagged requestDeliveryGrowthOptimizationsField () {
+      return this.requestDeliveryGrowthOptimizationsField(true);
+    }
+    public APIRequestGetTagged requestDeliveryGrowthOptimizationsField (boolean value) {
+      this.requestField("delivery_growth_optimizations", value);
+      return this;
+    }
+    public APIRequestGetTagged requestEntitiesField () {
+      return this.requestEntitiesField(true);
+    }
+    public APIRequestGetTagged requestEntitiesField (boolean value) {
+      this.requestField("entities", value);
+      return this;
+    }
     public APIRequestGetTagged requestEventField () {
       return this.requestEventField(true);
     }
@@ -27275,6 +28607,13 @@ public class Page extends APINode {
     }
     public APIRequestGetTagged requestFeedTargetingField (boolean value) {
       this.requestField("feed_targeting", value);
+      return this;
+    }
+    public APIRequestGetTagged requestFormattingField () {
+      return this.requestFormattingField(true);
+    }
+    public APIRequestGetTagged requestFormattingField (boolean value) {
+      this.requestField("formatting", value);
       return this;
     }
     public APIRequestGetTagged requestFromField () {
@@ -27310,6 +28649,13 @@ public class Page extends APINode {
     }
     public APIRequestGetTagged requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetTagged requestImplicitPlaceField () {
+      return this.requestImplicitPlaceField(true);
+    }
+    public APIRequestGetTagged requestImplicitPlaceField (boolean value) {
+      this.requestField("implicit_place", value);
       return this;
     }
     public APIRequestGetTagged requestInstagramEligibilityField () {
@@ -27380,6 +28726,13 @@ public class Page extends APINode {
     }
     public APIRequestGetTagged requestIsSphericalField (boolean value) {
       this.requestField("is_spherical", value);
+      return this;
+    }
+    public APIRequestGetTagged requestLiveVideoEligibilityField () {
+      return this.requestLiveVideoEligibilityField(true);
+    }
+    public APIRequestGetTagged requestLiveVideoEligibilityField (boolean value) {
+      this.requestField("live_video_eligibility", value);
       return this;
     }
     public APIRequestGetTagged requestMessageField () {
@@ -27466,6 +28819,13 @@ public class Page extends APINode {
       this.requestField("properties", value);
       return this;
     }
+    public APIRequestGetTagged requestPublishingStatsField () {
+      return this.requestPublishingStatsField(true);
+    }
+    public APIRequestGetTagged requestPublishingStatsField (boolean value) {
+      this.requestField("publishing_stats", value);
+      return this;
+    }
     public APIRequestGetTagged requestScheduledPublishTimeField () {
       return this.requestScheduledPublishTimeField(true);
     }
@@ -27529,6 +28889,13 @@ public class Page extends APINode {
       this.requestField("timeline_visibility", value);
       return this;
     }
+    public APIRequestGetTagged requestTranslationsField () {
+      return this.requestTranslationsField(true);
+    }
+    public APIRequestGetTagged requestTranslationsField (boolean value) {
+      this.requestField("translations", value);
+      return this;
+    }
     public APIRequestGetTagged requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -27555,6 +28922,13 @@ public class Page extends APINode {
     }
     public APIRequestGetTagged requestWidthField (boolean value) {
       this.requestField("width", value);
+      return this;
+    }
+    public APIRequestGetTagged requestWillBeAutocroppedWhenDeliverToInstagramField () {
+      return this.requestWillBeAutocroppedWhenDeliverToInstagramField(true);
+    }
+    public APIRequestGetTagged requestWillBeAutocroppedWhenDeliverToInstagramField (boolean value) {
+      this.requestField("will_be_autocropped_when_deliver_to_instagram", value);
       return this;
     }
   }
@@ -28869,126 +30243,6 @@ public class Page extends APINode {
       this.requestField("name", value);
       return this;
     }
-  }
-
-  public static class APIRequestCreateVideoCopyrightRule extends APIRequest<VideoCopyrightRule> {
-
-    VideoCopyrightRule lastResponse = null;
-    @Override
-    public VideoCopyrightRule getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "condition_groups",
-      "name",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public VideoCopyrightRule parseResponse(String response, String header) throws APIException {
-      return VideoCopyrightRule.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public VideoCopyrightRule execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public VideoCopyrightRule execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<VideoCopyrightRule> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<VideoCopyrightRule> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, VideoCopyrightRule>() {
-           public VideoCopyrightRule apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateVideoCopyrightRule.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateVideoCopyrightRule(String nodeId, APIContext context) {
-      super(context, nodeId, "/video_copyright_rules", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateVideoCopyrightRule setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateVideoCopyrightRule setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateVideoCopyrightRule setConditionGroups (List<Object> conditionGroups) {
-      this.setParam("condition_groups", conditionGroups);
-      return this;
-    }
-    public APIRequestCreateVideoCopyrightRule setConditionGroups (String conditionGroups) {
-      this.setParam("condition_groups", conditionGroups);
-      return this;
-    }
-
-    public APIRequestCreateVideoCopyrightRule setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateVideoCopyrightRule requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateVideoCopyrightRule requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateVideoCopyrightRule requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateVideoCopyrightRule requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateVideoCopyrightRule requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateVideoCopyrightRule requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestCreateVideoCopyright extends APIRequest<VideoCopyright> {
@@ -30728,15 +31982,19 @@ public class Page extends APINode {
       "comments_mirroring_domain",
       "coordinates",
       "created_time",
+      "delivery_growth_optimizations",
+      "entities",
       "event",
       "expanded_height",
       "expanded_width",
       "feed_targeting",
+      "formatting",
       "from",
       "full_picture",
       "height",
       "icon",
       "id",
+      "implicit_place",
       "instagram_eligibility",
       "is_app_share",
       "is_eligible_for_promotion",
@@ -30747,6 +32005,7 @@ public class Page extends APINode {
       "is_popular",
       "is_published",
       "is_spherical",
+      "live_video_eligibility",
       "message",
       "message_tags",
       "multi_share_end_card",
@@ -30759,6 +32018,7 @@ public class Page extends APINode {
       "promotable_id",
       "promotion_status",
       "properties",
+      "publishing_stats",
       "scheduled_publish_time",
       "shares",
       "status_type",
@@ -30768,10 +32028,12 @@ public class Page extends APINode {
       "target",
       "targeting",
       "timeline_visibility",
+      "translations",
       "updated_time",
       "via",
       "video_buying_eligibility",
       "width",
+      "will_be_autocropped_when_deliver_to_instagram",
     };
 
     @Override
@@ -30949,6 +32211,20 @@ public class Page extends APINode {
       this.requestField("created_time", value);
       return this;
     }
+    public APIRequestGetVisitorPosts requestDeliveryGrowthOptimizationsField () {
+      return this.requestDeliveryGrowthOptimizationsField(true);
+    }
+    public APIRequestGetVisitorPosts requestDeliveryGrowthOptimizationsField (boolean value) {
+      this.requestField("delivery_growth_optimizations", value);
+      return this;
+    }
+    public APIRequestGetVisitorPosts requestEntitiesField () {
+      return this.requestEntitiesField(true);
+    }
+    public APIRequestGetVisitorPosts requestEntitiesField (boolean value) {
+      this.requestField("entities", value);
+      return this;
+    }
     public APIRequestGetVisitorPosts requestEventField () {
       return this.requestEventField(true);
     }
@@ -30975,6 +32251,13 @@ public class Page extends APINode {
     }
     public APIRequestGetVisitorPosts requestFeedTargetingField (boolean value) {
       this.requestField("feed_targeting", value);
+      return this;
+    }
+    public APIRequestGetVisitorPosts requestFormattingField () {
+      return this.requestFormattingField(true);
+    }
+    public APIRequestGetVisitorPosts requestFormattingField (boolean value) {
+      this.requestField("formatting", value);
       return this;
     }
     public APIRequestGetVisitorPosts requestFromField () {
@@ -31010,6 +32293,13 @@ public class Page extends APINode {
     }
     public APIRequestGetVisitorPosts requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetVisitorPosts requestImplicitPlaceField () {
+      return this.requestImplicitPlaceField(true);
+    }
+    public APIRequestGetVisitorPosts requestImplicitPlaceField (boolean value) {
+      this.requestField("implicit_place", value);
       return this;
     }
     public APIRequestGetVisitorPosts requestInstagramEligibilityField () {
@@ -31080,6 +32370,13 @@ public class Page extends APINode {
     }
     public APIRequestGetVisitorPosts requestIsSphericalField (boolean value) {
       this.requestField("is_spherical", value);
+      return this;
+    }
+    public APIRequestGetVisitorPosts requestLiveVideoEligibilityField () {
+      return this.requestLiveVideoEligibilityField(true);
+    }
+    public APIRequestGetVisitorPosts requestLiveVideoEligibilityField (boolean value) {
+      this.requestField("live_video_eligibility", value);
       return this;
     }
     public APIRequestGetVisitorPosts requestMessageField () {
@@ -31166,6 +32463,13 @@ public class Page extends APINode {
       this.requestField("properties", value);
       return this;
     }
+    public APIRequestGetVisitorPosts requestPublishingStatsField () {
+      return this.requestPublishingStatsField(true);
+    }
+    public APIRequestGetVisitorPosts requestPublishingStatsField (boolean value) {
+      this.requestField("publishing_stats", value);
+      return this;
+    }
     public APIRequestGetVisitorPosts requestScheduledPublishTimeField () {
       return this.requestScheduledPublishTimeField(true);
     }
@@ -31229,6 +32533,13 @@ public class Page extends APINode {
       this.requestField("timeline_visibility", value);
       return this;
     }
+    public APIRequestGetVisitorPosts requestTranslationsField () {
+      return this.requestTranslationsField(true);
+    }
+    public APIRequestGetVisitorPosts requestTranslationsField (boolean value) {
+      this.requestField("translations", value);
+      return this;
+    }
     public APIRequestGetVisitorPosts requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -31255,6 +32566,13 @@ public class Page extends APINode {
     }
     public APIRequestGetVisitorPosts requestWidthField (boolean value) {
       this.requestField("width", value);
+      return this;
+    }
+    public APIRequestGetVisitorPosts requestWillBeAutocroppedWhenDeliverToInstagramField () {
+      return this.requestWillBeAutocroppedWhenDeliverToInstagramField(true);
+    }
+    public APIRequestGetVisitorPosts requestWillBeAutocroppedWhenDeliverToInstagramField (boolean value) {
+      this.requestField("will_be_autocropped_when_deliver_to_instagram", value);
       return this;
     }
   }
@@ -32516,6 +33834,7 @@ public class Page extends APINode {
       "contact_address",
       "cover",
       "culinary_team",
+      "delivery_and_pickup_option_info",
       "description",
       "differently_open_offerings",
       "directed_by",
@@ -32693,6 +34012,15 @@ public class Page extends APINode {
 
     public APIRequestUpdate setCulinaryTeam (String culinaryTeam) {
       this.setParam("culinary_team", culinaryTeam);
+      return this;
+    }
+
+    public APIRequestUpdate setDeliveryAndPickupOptionInfo (List<String> deliveryAndPickupOptionInfo) {
+      this.setParam("delivery_and_pickup_option_info", deliveryAndPickupOptionInfo);
+      return this;
+    }
+    public APIRequestUpdate setDeliveryAndPickupOptionInfo (String deliveryAndPickupOptionInfo) {
+      this.setParam("delivery_and_pickup_option_info", deliveryAndPickupOptionInfo);
       return this;
     }
 
@@ -33750,6 +35078,8 @@ public class Page extends APINode {
       VALUE_MESSAGING_CHECKOUT_UPDATES("messaging_checkout_updates"),
       @SerializedName("messaging_direct_sends")
       VALUE_MESSAGING_DIRECT_SENDS("messaging_direct_sends"),
+      @SerializedName("messaging_fblogin_account_linking")
+      VALUE_MESSAGING_FBLOGIN_ACCOUNT_LINKING("messaging_fblogin_account_linking"),
       @SerializedName("messaging_game_plays")
       VALUE_MESSAGING_GAME_PLAYS("messaging_game_plays"),
       @SerializedName("messaging_handovers")

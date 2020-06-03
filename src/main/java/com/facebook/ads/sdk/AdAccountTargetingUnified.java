@@ -683,6 +683,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_INSTAGRAM_HASHTAGS("instagram_hashtags"),
       @SerializedName("instagram_positions")
       VALUE_INSTAGRAM_POSITIONS("instagram_positions"),
+      @SerializedName("instream_video_skippable_excluded")
+      VALUE_INSTREAM_VIDEO_SKIPPABLE_EXCLUDED("instream_video_skippable_excluded"),
       @SerializedName("instream_video_sponsorship_placements")
       VALUE_INSTREAM_VIDEO_SPONSORSHIP_PLACEMENTS("instream_video_sponsorship_placements"),
       @SerializedName("interest_defaults_source")
@@ -841,6 +843,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_PRODUCT_CATALOG_SALES("PRODUCT_CATALOG_SALES"),
       @SerializedName("REACH")
       VALUE_REACH("REACH"),
+      @SerializedName("STORE_VISITS")
+      VALUE_STORE_VISITS("STORE_VISITS"),
       @SerializedName("VIDEO_VIEWS")
       VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
       ;

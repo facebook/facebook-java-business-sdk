@@ -350,10 +350,6 @@ public class CustomAudience extends APINode {
     return new APIRequestGetAds(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetPrefills getPrefills() {
-    return new APIRequestGetPrefills(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetSessions getSessions() {
     return new APIRequestGetSessions(this.getPrefixedId().toString(), context);
   }
@@ -1405,7 +1401,6 @@ public class CustomAudience extends APINode {
       "engagement_audience",
       "failed_delivery_checks",
       "id",
-      "is_autobid",
       "issues_info",
       "last_updated_by_app_id",
       "name",
@@ -1668,13 +1663,6 @@ public class CustomAudience extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetAds requestIsAutobidField () {
-      return this.requestIsAutobidField(true);
-    }
-    public APIRequestGetAds requestIsAutobidField (boolean value) {
-      this.requestField("is_autobid", value);
-      return this;
-    }
     public APIRequestGetAds requestIssuesInfoField () {
       return this.requestIssuesInfoField(true);
     }
@@ -1764,134 +1752,6 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAds requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestGetPrefills extends APIRequest<CustomAudiencePrefillState> {
-
-    APINodeList<CustomAudiencePrefillState> lastResponse = null;
-    @Override
-    public APINodeList<CustomAudiencePrefillState> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "description",
-      "num_added",
-      "status",
-    };
-
-    @Override
-    public APINodeList<CustomAudiencePrefillState> parseResponse(String response, String header) throws APIException {
-      return CustomAudiencePrefillState.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<CustomAudiencePrefillState> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<CustomAudiencePrefillState> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<CustomAudiencePrefillState>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<CustomAudiencePrefillState>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<CustomAudiencePrefillState>>() {
-           public APINodeList<CustomAudiencePrefillState> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetPrefills.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetPrefills(String nodeId, APIContext context) {
-      super(context, nodeId, "/prefills", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetPrefills setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPrefills setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetPrefills requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetPrefills requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPrefills requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetPrefills requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPrefills requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPrefills requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetPrefills requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGetPrefills requestDescriptionField (boolean value) {
-      this.requestField("description", value);
-      return this;
-    }
-    public APIRequestGetPrefills requestNumAddedField () {
-      return this.requestNumAddedField(true);
-    }
-    public APIRequestGetPrefills requestNumAddedField (boolean value) {
-      this.requestField("num_added", value);
-      return this;
-    }
-    public APIRequestGetPrefills requestStatusField () {
-      return this.requestStatusField(true);
-    }
-    public APIRequestGetPrefills requestStatusField (boolean value) {
-      this.requestField("status", value);
       return this;
     }
   }
@@ -3414,6 +3274,8 @@ public class CustomAudience extends APINode {
       VALUE_HOME_LISTING("HOME_LISTING"),
       @SerializedName("HOTEL")
       VALUE_HOTEL("HOTEL"),
+      @SerializedName("LOCAL_SERVICE_BUSINESS")
+      VALUE_LOCAL_SERVICE_BUSINESS("LOCAL_SERVICE_BUSINESS"),
       @SerializedName("LOCATION_BASED_ITEM")
       VALUE_LOCATION_BASED_ITEM("LOCATION_BASED_ITEM"),
       @SerializedName("MEDIA_TITLE")

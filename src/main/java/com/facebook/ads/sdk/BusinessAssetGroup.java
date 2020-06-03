@@ -6107,6 +6107,7 @@ public class BusinessAssetGroup extends APINode {
 
     public static final String[] FIELDS = {
       "business",
+      "commerce_merchant_settings",
       "da_display_settings",
       "default_image_url",
       "fallback_image_url",
@@ -6213,6 +6214,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedProductCatalogs requestBusinessField (boolean value) {
       this.requestField("business", value);
+      return this;
+    }
+    public APIRequestGetContainedProductCatalogs requestCommerceMerchantSettingsField () {
+      return this.requestCommerceMerchantSettingsField(true);
+    }
+    public APIRequestGetContainedProductCatalogs requestCommerceMerchantSettingsField (boolean value) {
+      this.requestField("commerce_merchant_settings", value);
       return this;
     }
     public APIRequestGetContainedProductCatalogs requestDaDisplaySettingsField () {

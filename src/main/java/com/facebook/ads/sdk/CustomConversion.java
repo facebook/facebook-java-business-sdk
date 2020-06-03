@@ -1059,6 +1059,8 @@ public class CustomConversion extends APINode {
       VALUE_CUSTOMIZE_PRODUCT("CUSTOMIZE_PRODUCT"),
       @SerializedName("DONATE")
       VALUE_DONATE("DONATE"),
+      @SerializedName("FACEBOOK_SELECTED")
+      VALUE_FACEBOOK_SELECTED("FACEBOOK_SELECTED"),
       @SerializedName("FIND_LOCATION")
       VALUE_FIND_LOCATION("FIND_LOCATION"),
       @SerializedName("INITIATED_CHECKOUT")

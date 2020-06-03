@@ -95,8 +95,6 @@ public class AdAccountCreationRequest extends APINode {
   private Boolean mIsSmb = null;
   @SerializedName("is_test")
   private Boolean mIsTest = null;
-  @SerializedName("is_under_authorization")
-  private Boolean mIsUnderAuthorization = null;
   @SerializedName("legal_entity_name_in_local_language")
   private String mLegalEntityNameInLocalLanguage = null;
   @SerializedName("oe_request_id")
@@ -428,10 +426,6 @@ public class AdAccountCreationRequest extends APINode {
 
   public Boolean getFieldIsTest() {
     return mIsTest;
-  }
-
-  public Boolean getFieldIsUnderAuthorization() {
-    return mIsUnderAuthorization;
   }
 
   public String getFieldLegalEntityNameInLocalLanguage() {
@@ -1106,7 +1100,6 @@ public class AdAccountCreationRequest extends APINode {
       "id",
       "is_smb",
       "is_test",
-      "is_under_authorization",
       "legal_entity_name_in_local_language",
       "oe_request_id",
       "official_website_url",
@@ -1351,13 +1344,6 @@ public class AdAccountCreationRequest extends APINode {
       this.requestField("is_test", value);
       return this;
     }
-    public APIRequestGet requestIsUnderAuthorizationField () {
-      return this.requestIsUnderAuthorizationField(true);
-    }
-    public APIRequestGet requestIsUnderAuthorizationField (boolean value) {
-      this.requestField("is_under_authorization", value);
-      return this;
-    }
     public APIRequestGet requestLegalEntityNameInLocalLanguageField () {
       return this.requestLegalEntityNameInLocalLanguageField(true);
     }
@@ -1486,7 +1472,6 @@ public class AdAccountCreationRequest extends APINode {
     this.mId = instance.mId;
     this.mIsSmb = instance.mIsSmb;
     this.mIsTest = instance.mIsTest;
-    this.mIsUnderAuthorization = instance.mIsUnderAuthorization;
     this.mLegalEntityNameInLocalLanguage = instance.mLegalEntityNameInLocalLanguage;
     this.mOeRequestId = instance.mOeRequestId;
     this.mOfficialWebsiteUrl = instance.mOfficialWebsiteUrl;

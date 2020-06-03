@@ -473,6 +473,8 @@ public class AdActivity extends APINode {
       VALUE_UPDATE_CAMPAIGN_AD_SCHEDULING("update_campaign_ad_scheduling"),
       @SerializedName("update_campaign_budget")
       VALUE_UPDATE_CAMPAIGN_BUDGET("update_campaign_budget"),
+      @SerializedName("update_campaign_budget_optimization_toggling_status")
+      VALUE_UPDATE_CAMPAIGN_BUDGET_OPTIMIZATION_TOGGLING_STATUS("update_campaign_budget_optimization_toggling_status"),
       @SerializedName("update_campaign_delivery_type")
       VALUE_UPDATE_CAMPAIGN_DELIVERY_TYPE("update_campaign_delivery_type"),
       @SerializedName("update_campaign_duration")

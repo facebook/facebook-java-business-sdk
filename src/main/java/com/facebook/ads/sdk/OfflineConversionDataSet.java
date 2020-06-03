@@ -344,10 +344,6 @@ public class OfflineConversionDataSet extends APINode {
     return new APIRequestCreateUpload(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateUser createUser() {
-    return new APIRequestCreateUser(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestCreateValidate createValidate() {
     return new APIRequestCreateValidate(this.getPrefixedId().toString(), context);
   }
@@ -2760,120 +2756,6 @@ public class OfflineConversionDataSet extends APINode {
 
     @Override
     public APIRequestCreateUpload requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateUser extends APIRequest<OfflineConversionDataSet> {
-
-    OfflineConversionDataSet lastResponse = null;
-    @Override
-    public OfflineConversionDataSet getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "data",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public OfflineConversionDataSet parseResponse(String response, String header) throws APIException {
-      return OfflineConversionDataSet.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public OfflineConversionDataSet execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public OfflineConversionDataSet execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<OfflineConversionDataSet> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<OfflineConversionDataSet> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, OfflineConversionDataSet>() {
-           public OfflineConversionDataSet apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateUser.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateUser(String nodeId, APIContext context) {
-      super(context, nodeId, "/users", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateUser setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateUser setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateUser setData (List<Object> data) {
-      this.setParam("data", data);
-      return this;
-    }
-    public APIRequestCreateUser setData (String data) {
-      this.setParam("data", data);
-      return this;
-    }
-
-    public APIRequestCreateUser requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateUser requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateUser requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateUser requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateUser requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateUser requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

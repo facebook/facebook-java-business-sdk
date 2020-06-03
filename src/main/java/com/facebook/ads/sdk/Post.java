@@ -79,8 +79,12 @@ public class Post extends APINode {
   private Object mCoordinates = null;
   @SerializedName("created_time")
   private String mCreatedTime = null;
+  @SerializedName("delivery_growth_optimizations")
+  private List<String> mDeliveryGrowthOptimizations = null;
   @SerializedName("description")
   private String mDescription = null;
+  @SerializedName("entities")
+  private Object mEntities = null;
   @SerializedName("event")
   private Event mEvent = null;
   @SerializedName("expanded_height")
@@ -89,6 +93,8 @@ public class Post extends APINode {
   private Long mExpandedWidth = null;
   @SerializedName("feed_targeting")
   private Object mFeedTargeting = null;
+  @SerializedName("formatting")
+  private String mFormatting = null;
   @SerializedName("from")
   private Object mFrom = null;
   @SerializedName("full_picture")
@@ -99,6 +105,8 @@ public class Post extends APINode {
   private String mIcon = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("implicit_place")
+  private Place mImplicitPlace = null;
   @SerializedName("instagram_eligibility")
   private String mInstagramEligibility = null;
   @SerializedName("is_app_share")
@@ -121,6 +129,8 @@ public class Post extends APINode {
   private Boolean mIsSpherical = null;
   @SerializedName("link")
   private String mLink = null;
+  @SerializedName("live_video_eligibility")
+  private List<String> mLiveVideoEligibility = null;
   @SerializedName("message")
   private String mMessage = null;
   @SerializedName("message_tags")
@@ -149,6 +159,8 @@ public class Post extends APINode {
   private String mPromotionStatus = null;
   @SerializedName("properties")
   private JsonArray mProperties = null;
+  @SerializedName("publishing_stats")
+  private Long mPublishingStats = null;
   @SerializedName("scheduled_publish_time")
   private Double mScheduledPublishTime = null;
   @SerializedName("shares")
@@ -169,6 +181,8 @@ public class Post extends APINode {
   private Object mTargeting = null;
   @SerializedName("timeline_visibility")
   private String mTimelineVisibility = null;
+  @SerializedName("translations")
+  private Map<String, String> mTranslations = null;
   @SerializedName("type")
   private String mType = null;
   @SerializedName("updated_time")
@@ -179,6 +193,8 @@ public class Post extends APINode {
   private List<String> mVideoBuyingEligibility = null;
   @SerializedName("width")
   private Long mWidth = null;
+  @SerializedName("will_be_autocropped_when_deliver_to_instagram")
+  private Boolean mWillBeAutocroppedWhenDeliverToInstagram = null;
   protected static Gson gson = null;
 
   Post() {
@@ -500,8 +516,16 @@ public class Post extends APINode {
     return mCreatedTime;
   }
 
+  public List<String> getFieldDeliveryGrowthOptimizations() {
+    return mDeliveryGrowthOptimizations;
+  }
+
   public String getFieldDescription() {
     return mDescription;
+  }
+
+  public Object getFieldEntities() {
+    return mEntities;
   }
 
   public Event getFieldEvent() {
@@ -523,6 +547,10 @@ public class Post extends APINode {
     return mFeedTargeting;
   }
 
+  public String getFieldFormatting() {
+    return mFormatting;
+  }
+
   public Object getFieldFrom() {
     return mFrom;
   }
@@ -541,6 +569,13 @@ public class Post extends APINode {
 
   public String getFieldId() {
     return mId;
+  }
+
+  public Place getFieldImplicitPlace() {
+    if (mImplicitPlace != null) {
+      mImplicitPlace.context = getContext();
+    }
+    return mImplicitPlace;
   }
 
   public String getFieldInstagramEligibility() {
@@ -585,6 +620,10 @@ public class Post extends APINode {
 
   public String getFieldLink() {
     return mLink;
+  }
+
+  public List<String> getFieldLiveVideoEligibility() {
+    return mLiveVideoEligibility;
   }
 
   public String getFieldMessage() {
@@ -646,6 +685,10 @@ public class Post extends APINode {
     return mProperties;
   }
 
+  public Long getFieldPublishingStats() {
+    return mPublishingStats;
+  }
+
   public Double getFieldScheduledPublishTime() {
     return mScheduledPublishTime;
   }
@@ -689,6 +732,10 @@ public class Post extends APINode {
     return mTimelineVisibility;
   }
 
+  public Map<String, String> getFieldTranslations() {
+    return mTranslations;
+  }
+
   public String getFieldType() {
     return mType;
   }
@@ -707,6 +754,10 @@ public class Post extends APINode {
 
   public Long getFieldWidth() {
     return mWidth;
+  }
+
+  public Boolean getFieldWillBeAutocroppedWhenDeliverToInstagram() {
+    return mWillBeAutocroppedWhenDeliverToInstagram;
   }
 
 
@@ -2388,16 +2439,20 @@ public class Post extends APINode {
       "comments_mirroring_domain",
       "coordinates",
       "created_time",
+      "delivery_growth_optimizations",
       "description",
+      "entities",
       "event",
       "expanded_height",
       "expanded_width",
       "feed_targeting",
+      "formatting",
       "from",
       "full_picture",
       "height",
       "icon",
       "id",
+      "implicit_place",
       "instagram_eligibility",
       "is_app_share",
       "is_eligible_for_promotion",
@@ -2409,6 +2464,7 @@ public class Post extends APINode {
       "is_published",
       "is_spherical",
       "link",
+      "live_video_eligibility",
       "message",
       "message_tags",
       "multi_share_end_card",
@@ -2423,6 +2479,7 @@ public class Post extends APINode {
       "promotable_id",
       "promotion_status",
       "properties",
+      "publishing_stats",
       "scheduled_publish_time",
       "shares",
       "source",
@@ -2433,11 +2490,13 @@ public class Post extends APINode {
       "target",
       "targeting",
       "timeline_visibility",
+      "translations",
       "type",
       "updated_time",
       "via",
       "video_buying_eligibility",
       "width",
+      "will_be_autocropped_when_deliver_to_instagram",
     };
 
     @Override
@@ -2613,11 +2672,25 @@ public class Post extends APINode {
       this.requestField("created_time", value);
       return this;
     }
+    public APIRequestGetSharedPosts requestDeliveryGrowthOptimizationsField () {
+      return this.requestDeliveryGrowthOptimizationsField(true);
+    }
+    public APIRequestGetSharedPosts requestDeliveryGrowthOptimizationsField (boolean value) {
+      this.requestField("delivery_growth_optimizations", value);
+      return this;
+    }
     public APIRequestGetSharedPosts requestDescriptionField () {
       return this.requestDescriptionField(true);
     }
     public APIRequestGetSharedPosts requestDescriptionField (boolean value) {
       this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetSharedPosts requestEntitiesField () {
+      return this.requestEntitiesField(true);
+    }
+    public APIRequestGetSharedPosts requestEntitiesField (boolean value) {
+      this.requestField("entities", value);
       return this;
     }
     public APIRequestGetSharedPosts requestEventField () {
@@ -2646,6 +2719,13 @@ public class Post extends APINode {
     }
     public APIRequestGetSharedPosts requestFeedTargetingField (boolean value) {
       this.requestField("feed_targeting", value);
+      return this;
+    }
+    public APIRequestGetSharedPosts requestFormattingField () {
+      return this.requestFormattingField(true);
+    }
+    public APIRequestGetSharedPosts requestFormattingField (boolean value) {
+      this.requestField("formatting", value);
       return this;
     }
     public APIRequestGetSharedPosts requestFromField () {
@@ -2681,6 +2761,13 @@ public class Post extends APINode {
     }
     public APIRequestGetSharedPosts requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetSharedPosts requestImplicitPlaceField () {
+      return this.requestImplicitPlaceField(true);
+    }
+    public APIRequestGetSharedPosts requestImplicitPlaceField (boolean value) {
+      this.requestField("implicit_place", value);
       return this;
     }
     public APIRequestGetSharedPosts requestInstagramEligibilityField () {
@@ -2758,6 +2845,13 @@ public class Post extends APINode {
     }
     public APIRequestGetSharedPosts requestLinkField (boolean value) {
       this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGetSharedPosts requestLiveVideoEligibilityField () {
+      return this.requestLiveVideoEligibilityField(true);
+    }
+    public APIRequestGetSharedPosts requestLiveVideoEligibilityField (boolean value) {
+      this.requestField("live_video_eligibility", value);
       return this;
     }
     public APIRequestGetSharedPosts requestMessageField () {
@@ -2858,6 +2952,13 @@ public class Post extends APINode {
       this.requestField("properties", value);
       return this;
     }
+    public APIRequestGetSharedPosts requestPublishingStatsField () {
+      return this.requestPublishingStatsField(true);
+    }
+    public APIRequestGetSharedPosts requestPublishingStatsField (boolean value) {
+      this.requestField("publishing_stats", value);
+      return this;
+    }
     public APIRequestGetSharedPosts requestScheduledPublishTimeField () {
       return this.requestScheduledPublishTimeField(true);
     }
@@ -2928,6 +3029,13 @@ public class Post extends APINode {
       this.requestField("timeline_visibility", value);
       return this;
     }
+    public APIRequestGetSharedPosts requestTranslationsField () {
+      return this.requestTranslationsField(true);
+    }
+    public APIRequestGetSharedPosts requestTranslationsField (boolean value) {
+      this.requestField("translations", value);
+      return this;
+    }
     public APIRequestGetSharedPosts requestTypeField () {
       return this.requestTypeField(true);
     }
@@ -2961,6 +3069,13 @@ public class Post extends APINode {
     }
     public APIRequestGetSharedPosts requestWidthField (boolean value) {
       this.requestField("width", value);
+      return this;
+    }
+    public APIRequestGetSharedPosts requestWillBeAutocroppedWhenDeliverToInstagramField () {
+      return this.requestWillBeAutocroppedWhenDeliverToInstagramField(true);
+    }
+    public APIRequestGetSharedPosts requestWillBeAutocroppedWhenDeliverToInstagramField (boolean value) {
+      this.requestField("will_be_autocropped_when_deliver_to_instagram", value);
       return this;
     }
   }
@@ -4516,16 +4631,20 @@ public class Post extends APINode {
       "comments_mirroring_domain",
       "coordinates",
       "created_time",
+      "delivery_growth_optimizations",
       "description",
+      "entities",
       "event",
       "expanded_height",
       "expanded_width",
       "feed_targeting",
+      "formatting",
       "from",
       "full_picture",
       "height",
       "icon",
       "id",
+      "implicit_place",
       "instagram_eligibility",
       "is_app_share",
       "is_eligible_for_promotion",
@@ -4537,6 +4656,7 @@ public class Post extends APINode {
       "is_published",
       "is_spherical",
       "link",
+      "live_video_eligibility",
       "message",
       "message_tags",
       "multi_share_end_card",
@@ -4551,6 +4671,7 @@ public class Post extends APINode {
       "promotable_id",
       "promotion_status",
       "properties",
+      "publishing_stats",
       "scheduled_publish_time",
       "shares",
       "source",
@@ -4561,11 +4682,13 @@ public class Post extends APINode {
       "target",
       "targeting",
       "timeline_visibility",
+      "translations",
       "type",
       "updated_time",
       "via",
       "video_buying_eligibility",
       "width",
+      "will_be_autocropped_when_deliver_to_instagram",
     };
 
     @Override
@@ -4741,11 +4864,25 @@ public class Post extends APINode {
       this.requestField("created_time", value);
       return this;
     }
+    public APIRequestGet requestDeliveryGrowthOptimizationsField () {
+      return this.requestDeliveryGrowthOptimizationsField(true);
+    }
+    public APIRequestGet requestDeliveryGrowthOptimizationsField (boolean value) {
+      this.requestField("delivery_growth_optimizations", value);
+      return this;
+    }
     public APIRequestGet requestDescriptionField () {
       return this.requestDescriptionField(true);
     }
     public APIRequestGet requestDescriptionField (boolean value) {
       this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGet requestEntitiesField () {
+      return this.requestEntitiesField(true);
+    }
+    public APIRequestGet requestEntitiesField (boolean value) {
+      this.requestField("entities", value);
       return this;
     }
     public APIRequestGet requestEventField () {
@@ -4774,6 +4911,13 @@ public class Post extends APINode {
     }
     public APIRequestGet requestFeedTargetingField (boolean value) {
       this.requestField("feed_targeting", value);
+      return this;
+    }
+    public APIRequestGet requestFormattingField () {
+      return this.requestFormattingField(true);
+    }
+    public APIRequestGet requestFormattingField (boolean value) {
+      this.requestField("formatting", value);
       return this;
     }
     public APIRequestGet requestFromField () {
@@ -4809,6 +4953,13 @@ public class Post extends APINode {
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestImplicitPlaceField () {
+      return this.requestImplicitPlaceField(true);
+    }
+    public APIRequestGet requestImplicitPlaceField (boolean value) {
+      this.requestField("implicit_place", value);
       return this;
     }
     public APIRequestGet requestInstagramEligibilityField () {
@@ -4886,6 +5037,13 @@ public class Post extends APINode {
     }
     public APIRequestGet requestLinkField (boolean value) {
       this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGet requestLiveVideoEligibilityField () {
+      return this.requestLiveVideoEligibilityField(true);
+    }
+    public APIRequestGet requestLiveVideoEligibilityField (boolean value) {
+      this.requestField("live_video_eligibility", value);
       return this;
     }
     public APIRequestGet requestMessageField () {
@@ -4986,6 +5144,13 @@ public class Post extends APINode {
       this.requestField("properties", value);
       return this;
     }
+    public APIRequestGet requestPublishingStatsField () {
+      return this.requestPublishingStatsField(true);
+    }
+    public APIRequestGet requestPublishingStatsField (boolean value) {
+      this.requestField("publishing_stats", value);
+      return this;
+    }
     public APIRequestGet requestScheduledPublishTimeField () {
       return this.requestScheduledPublishTimeField(true);
     }
@@ -5056,6 +5221,13 @@ public class Post extends APINode {
       this.requestField("timeline_visibility", value);
       return this;
     }
+    public APIRequestGet requestTranslationsField () {
+      return this.requestTranslationsField(true);
+    }
+    public APIRequestGet requestTranslationsField (boolean value) {
+      this.requestField("translations", value);
+      return this;
+    }
     public APIRequestGet requestTypeField () {
       return this.requestTypeField(true);
     }
@@ -5089,6 +5261,13 @@ public class Post extends APINode {
     }
     public APIRequestGet requestWidthField (boolean value) {
       this.requestField("width", value);
+      return this;
+    }
+    public APIRequestGet requestWillBeAutocroppedWhenDeliverToInstagramField () {
+      return this.requestWillBeAutocroppedWhenDeliverToInstagramField(true);
+    }
+    public APIRequestGet requestWillBeAutocroppedWhenDeliverToInstagramField (boolean value) {
+      this.requestField("will_be_autocropped_when_deliver_to_instagram", value);
       return this;
     }
   }
@@ -5602,6 +5781,8 @@ public class Post extends APINode {
       VALUE_FIND_YOUR_GROUPS("FIND_YOUR_GROUPS"),
       @SerializedName("FOLLOW_NEWS_STORYLINE")
       VALUE_FOLLOW_NEWS_STORYLINE("FOLLOW_NEWS_STORYLINE"),
+      @SerializedName("FOLLOW_PAGE")
+      VALUE_FOLLOW_PAGE("FOLLOW_PAGE"),
       @SerializedName("FOLLOW_USER")
       VALUE_FOLLOW_USER("FOLLOW_USER"),
       @SerializedName("GET_DIRECTIONS")
@@ -5723,16 +5904,20 @@ public class Post extends APINode {
     this.mCommentsMirroringDomain = instance.mCommentsMirroringDomain;
     this.mCoordinates = instance.mCoordinates;
     this.mCreatedTime = instance.mCreatedTime;
+    this.mDeliveryGrowthOptimizations = instance.mDeliveryGrowthOptimizations;
     this.mDescription = instance.mDescription;
+    this.mEntities = instance.mEntities;
     this.mEvent = instance.mEvent;
     this.mExpandedHeight = instance.mExpandedHeight;
     this.mExpandedWidth = instance.mExpandedWidth;
     this.mFeedTargeting = instance.mFeedTargeting;
+    this.mFormatting = instance.mFormatting;
     this.mFrom = instance.mFrom;
     this.mFullPicture = instance.mFullPicture;
     this.mHeight = instance.mHeight;
     this.mIcon = instance.mIcon;
     this.mId = instance.mId;
+    this.mImplicitPlace = instance.mImplicitPlace;
     this.mInstagramEligibility = instance.mInstagramEligibility;
     this.mIsAppShare = instance.mIsAppShare;
     this.mIsEligibleForPromotion = instance.mIsEligibleForPromotion;
@@ -5744,6 +5929,7 @@ public class Post extends APINode {
     this.mIsPublished = instance.mIsPublished;
     this.mIsSpherical = instance.mIsSpherical;
     this.mLink = instance.mLink;
+    this.mLiveVideoEligibility = instance.mLiveVideoEligibility;
     this.mMessage = instance.mMessage;
     this.mMessageTags = instance.mMessageTags;
     this.mMultiShareEndCard = instance.mMultiShareEndCard;
@@ -5758,6 +5944,7 @@ public class Post extends APINode {
     this.mPromotableId = instance.mPromotableId;
     this.mPromotionStatus = instance.mPromotionStatus;
     this.mProperties = instance.mProperties;
+    this.mPublishingStats = instance.mPublishingStats;
     this.mScheduledPublishTime = instance.mScheduledPublishTime;
     this.mShares = instance.mShares;
     this.mSource = instance.mSource;
@@ -5768,11 +5955,13 @@ public class Post extends APINode {
     this.mTarget = instance.mTarget;
     this.mTargeting = instance.mTargeting;
     this.mTimelineVisibility = instance.mTimelineVisibility;
+    this.mTranslations = instance.mTranslations;
     this.mType = instance.mType;
     this.mUpdatedTime = instance.mUpdatedTime;
     this.mVia = instance.mVia;
     this.mVideoBuyingEligibility = instance.mVideoBuyingEligibility;
     this.mWidth = instance.mWidth;
+    this.mWillBeAutocroppedWhenDeliverToInstagram = instance.mWillBeAutocroppedWhenDeliverToInstagram;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

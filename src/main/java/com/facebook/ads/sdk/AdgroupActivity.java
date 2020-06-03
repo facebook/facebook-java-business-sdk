@@ -56,9 +56,9 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  */
 public class AdgroupActivity extends APINode {
   @SerializedName("ad_creative_id_new")
-  private String mAdCreativeIdNew = null;
+  private AdCreative mAdCreativeIdNew = null;
   @SerializedName("ad_creative_id_old")
-  private String mAdCreativeIdOld = null;
+  private AdCreative mAdCreativeIdOld = null;
   @SerializedName("asset_feed_id_new")
   private String mAssetFeedIdNew = null;
   @SerializedName("asset_feed_id_old")
@@ -128,9 +128,9 @@ public class AdgroupActivity extends APINode {
   @SerializedName("run_status_old")
   private String mRunStatusOld = null;
   @SerializedName("source_adgroup_id_new")
-  private String mSourceAdgroupIdNew = null;
+  private Ad mSourceAdgroupIdNew = null;
   @SerializedName("source_adgroup_id_old")
-  private String mSourceAdgroupIdOld = null;
+  private Ad mSourceAdgroupIdOld = null;
   @SerializedName("start_time_new")
   private String mStartTimeNew = null;
   @SerializedName("start_time_old")
@@ -373,11 +373,17 @@ public class AdgroupActivity extends APINode {
   }
 
 
-  public String getFieldAdCreativeIdNew() {
+  public AdCreative getFieldAdCreativeIdNew() {
+    if (mAdCreativeIdNew != null) {
+      mAdCreativeIdNew.context = getContext();
+    }
     return mAdCreativeIdNew;
   }
 
-  public String getFieldAdCreativeIdOld() {
+  public AdCreative getFieldAdCreativeIdOld() {
+    if (mAdCreativeIdOld != null) {
+      mAdCreativeIdOld.context = getContext();
+    }
     return mAdCreativeIdOld;
   }
 
@@ -517,11 +523,17 @@ public class AdgroupActivity extends APINode {
     return mRunStatusOld;
   }
 
-  public String getFieldSourceAdgroupIdNew() {
+  public Ad getFieldSourceAdgroupIdNew() {
+    if (mSourceAdgroupIdNew != null) {
+      mSourceAdgroupIdNew.context = getContext();
+    }
     return mSourceAdgroupIdNew;
   }
 
-  public String getFieldSourceAdgroupIdOld() {
+  public Ad getFieldSourceAdgroupIdOld() {
+    if (mSourceAdgroupIdOld != null) {
+      mSourceAdgroupIdOld.context = getContext();
+    }
     return mSourceAdgroupIdOld;
   }
 

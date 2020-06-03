@@ -54,27 +54,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class CustomAudiencePrefillState extends APINode {
-  @SerializedName("description")
-  private String mDescription = null;
-  @SerializedName("num_added")
-  private Long mNumAdded = null;
-  @SerializedName("status")
-  private String mStatus = null;
+public class ProductFeedUploadDiagnosticsReport extends APINode {
+  @SerializedName("last_updated_time")
+  private String mLastUpdatedTime = null;
+  @SerializedName("report_url")
+  private String mReportUrl = null;
   protected static Gson gson = null;
 
-  public CustomAudiencePrefillState() {
+  public ProductFeedUploadDiagnosticsReport() {
   }
 
   public String getId() {
     return null;
   }
-  public static CustomAudiencePrefillState loadJSON(String json, APIContext context, String header) {
-    CustomAudiencePrefillState customAudiencePrefillState = getGson().fromJson(json, CustomAudiencePrefillState.class);
+  public static ProductFeedUploadDiagnosticsReport loadJSON(String json, APIContext context, String header) {
+    ProductFeedUploadDiagnosticsReport productFeedUploadDiagnosticsReport = getGson().fromJson(json, ProductFeedUploadDiagnosticsReport.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(customAudiencePrefillState.toString());
+      JsonElement o2 = parser.parse(productFeedUploadDiagnosticsReport.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -84,14 +82,14 @@ public class CustomAudiencePrefillState extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    customAudiencePrefillState.context = context;
-    customAudiencePrefillState.rawValue = json;
-    customAudiencePrefillState.header = header;
-    return customAudiencePrefillState;
+    productFeedUploadDiagnosticsReport.context = context;
+    productFeedUploadDiagnosticsReport.rawValue = json;
+    productFeedUploadDiagnosticsReport.header = header;
+    return productFeedUploadDiagnosticsReport;
   }
 
-  public static APINodeList<CustomAudiencePrefillState> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<CustomAudiencePrefillState> customAudiencePrefillStates = new APINodeList<CustomAudiencePrefillState>(request, json, header);
+  public static APINodeList<ProductFeedUploadDiagnosticsReport> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ProductFeedUploadDiagnosticsReport> productFeedUploadDiagnosticsReports = new APINodeList<ProductFeedUploadDiagnosticsReport>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -102,9 +100,9 @@ public class CustomAudiencePrefillState extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          customAudiencePrefillStates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          productFeedUploadDiagnosticsReports.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return customAudiencePrefillStates;
+        return productFeedUploadDiagnosticsReports;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -114,20 +112,20 @@ public class CustomAudiencePrefillState extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                customAudiencePrefillStates.setCursors(before, after);
+                productFeedUploadDiagnosticsReports.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            customAudiencePrefillStates.setPaging(previous, next);
+            productFeedUploadDiagnosticsReports.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              customAudiencePrefillStates.setAppSecret(context.getAppSecretProof());
+              productFeedUploadDiagnosticsReports.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              customAudiencePrefillStates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              productFeedUploadDiagnosticsReports.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -138,23 +136,23 @@ public class CustomAudiencePrefillState extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  customAudiencePrefillStates.add(loadJSON(entry.getValue().toString(), context, header));
+                  productFeedUploadDiagnosticsReports.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              customAudiencePrefillStates.add(loadJSON(obj.toString(), context, header));
+              productFeedUploadDiagnosticsReports.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return customAudiencePrefillStates;
+          return productFeedUploadDiagnosticsReports;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              customAudiencePrefillStates.add(loadJSON(entry.getValue().toString(), context, header));
+              productFeedUploadDiagnosticsReports.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return customAudiencePrefillStates;
+          return productFeedUploadDiagnosticsReports;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -171,20 +169,20 @@ public class CustomAudiencePrefillState extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              customAudiencePrefillStates.add(loadJSON(value.toString(), context, header));
+              productFeedUploadDiagnosticsReports.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return customAudiencePrefillStates;
+            return productFeedUploadDiagnosticsReports;
           }
 
           // Sixth, check if it's pure JsonObject
-          customAudiencePrefillStates.clear();
-          customAudiencePrefillStates.add(loadJSON(json, context, header));
-          return customAudiencePrefillStates;
+          productFeedUploadDiagnosticsReports.clear();
+          productFeedUploadDiagnosticsReports.add(loadJSON(json, context, header));
+          return productFeedUploadDiagnosticsReports;
         }
       }
     } catch (Exception e) {
@@ -212,30 +210,21 @@ public class CustomAudiencePrefillState extends APINode {
   }
 
 
-  public String getFieldDescription() {
-    return mDescription;
+  public String getFieldLastUpdatedTime() {
+    return mLastUpdatedTime;
   }
 
-  public CustomAudiencePrefillState setFieldDescription(String value) {
-    this.mDescription = value;
+  public ProductFeedUploadDiagnosticsReport setFieldLastUpdatedTime(String value) {
+    this.mLastUpdatedTime = value;
     return this;
   }
 
-  public Long getFieldNumAdded() {
-    return mNumAdded;
+  public String getFieldReportUrl() {
+    return mReportUrl;
   }
 
-  public CustomAudiencePrefillState setFieldNumAdded(Long value) {
-    this.mNumAdded = value;
-    return this;
-  }
-
-  public String getFieldStatus() {
-    return mStatus;
-  }
-
-  public CustomAudiencePrefillState setFieldStatus(String value) {
-    this.mStatus = value;
+  public ProductFeedUploadDiagnosticsReport setFieldReportUrl(String value) {
+    this.mReportUrl = value;
     return this;
   }
 
@@ -255,19 +244,18 @@ public class CustomAudiencePrefillState extends APINode {
     return gson;
   }
 
-  public CustomAudiencePrefillState copyFrom(CustomAudiencePrefillState instance) {
-    this.mDescription = instance.mDescription;
-    this.mNumAdded = instance.mNumAdded;
-    this.mStatus = instance.mStatus;
+  public ProductFeedUploadDiagnosticsReport copyFrom(ProductFeedUploadDiagnosticsReport instance) {
+    this.mLastUpdatedTime = instance.mLastUpdatedTime;
+    this.mReportUrl = instance.mReportUrl;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<CustomAudiencePrefillState> getParser() {
-    return new APIRequest.ResponseParser<CustomAudiencePrefillState>() {
-      public APINodeList<CustomAudiencePrefillState> parseResponse(String response, APIContext context, APIRequest<CustomAudiencePrefillState> request, String header) throws MalformedResponseException {
-        return CustomAudiencePrefillState.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ProductFeedUploadDiagnosticsReport> getParser() {
+    return new APIRequest.ResponseParser<ProductFeedUploadDiagnosticsReport>() {
+      public APINodeList<ProductFeedUploadDiagnosticsReport> parseResponse(String response, APIContext context, APIRequest<ProductFeedUploadDiagnosticsReport> request, String header) throws MalformedResponseException {
+        return ProductFeedUploadDiagnosticsReport.parseResponse(response, context, request, header);
       }
     };
   }

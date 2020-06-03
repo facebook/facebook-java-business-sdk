@@ -2330,6 +2330,7 @@ public class BusinessUser extends APINode {
 
     public static final String[] FIELDS = {
       "business",
+      "commerce_merchant_settings",
       "da_display_settings",
       "default_image_url",
       "fallback_image_url",
@@ -2436,6 +2437,13 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGetAssignedProductCatalogs requestBusinessField (boolean value) {
       this.requestField("business", value);
+      return this;
+    }
+    public APIRequestGetAssignedProductCatalogs requestCommerceMerchantSettingsField () {
+      return this.requestCommerceMerchantSettingsField(true);
+    }
+    public APIRequestGetAssignedProductCatalogs requestCommerceMerchantSettingsField (boolean value) {
+      this.requestField("commerce_merchant_settings", value);
       return this;
     }
     public APIRequestGetAssignedProductCatalogs requestDaDisplaySettingsField () {
@@ -2981,6 +2989,8 @@ public class BusinessUser extends APINode {
       VALUE_ADMIN("ADMIN"),
       @SerializedName("ADS_RIGHTS_REVIEWER")
       VALUE_ADS_RIGHTS_REVIEWER("ADS_RIGHTS_REVIEWER"),
+      @SerializedName("DEVELOPER")
+      VALUE_DEVELOPER("DEVELOPER"),
       @SerializedName("EMPLOYEE")
       VALUE_EMPLOYEE("EMPLOYEE"),
       @SerializedName("FINANCE_ANALYST")

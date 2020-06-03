@@ -426,6 +426,10 @@ public class Business extends APINode {
     return new APIRequestGetClients(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetCommerceMerchantSettings getCommerceMerchantSettings() {
+    return new APIRequestGetCommerceMerchantSettings(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetContentDeliveryReport getContentDeliveryReport() {
     return new APIRequestGetContentDeliveryReport(this.getPrefixedId().toString(), context);
   }
@@ -468,6 +472,10 @@ public class Business extends APINode {
 
   public APIRequestGetInitiatedAudienceSharingRequests getInitiatedAudienceSharingRequests() {
     return new APIRequestGetInitiatedAudienceSharingRequests(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetInitiatedSharingAgreements getInitiatedSharingAgreements() {
+    return new APIRequestGetInitiatedSharingAgreements(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestDeleteInstagramAccounts deleteInstagramAccounts() {
@@ -592,6 +600,10 @@ public class Business extends APINode {
 
   public APIRequestGetReceivedAudienceSharingRequests getReceivedAudienceSharingRequests() {
     return new APIRequestGetReceivedAudienceSharingRequests(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetReceivedSharingAgreements getReceivedSharingAgreements() {
+    return new APIRequestGetReceivedSharingAgreements(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetSystemUsers getSystemUsers() {
@@ -7634,6 +7646,7 @@ public class Business extends APINode {
 
     public static final String[] FIELDS = {
       "business",
+      "commerce_merchant_settings",
       "da_display_settings",
       "default_image_url",
       "fallback_image_url",
@@ -7740,6 +7753,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientProductCatalogs requestBusinessField (boolean value) {
       this.requestField("business", value);
+      return this;
+    }
+    public APIRequestGetClientProductCatalogs requestCommerceMerchantSettingsField () {
+      return this.requestCommerceMerchantSettingsField(true);
+    }
+    public APIRequestGetClientProductCatalogs requestCommerceMerchantSettingsField (boolean value) {
+      this.requestField("commerce_merchant_settings", value);
       return this;
     }
     public APIRequestGetClientProductCatalogs requestDaDisplaySettingsField () {
@@ -8168,6 +8188,278 @@ public class Business extends APINode {
     }
     public APIRequestGetClients requestVerticalIdField (boolean value) {
       this.requestField("vertical_id", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetCommerceMerchantSettings extends APIRequest<CommerceMerchantSettings> {
+
+    APINodeList<CommerceMerchantSettings> lastResponse = null;
+    @Override
+    public APINodeList<CommerceMerchantSettings> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "braintree_merchant_id",
+      "checkout_message",
+      "contact_email",
+      "disable_checkout_urls",
+      "display_name",
+      "facebook_channel",
+      "has_discount_code",
+      "id",
+      "instagram_channel",
+      "merchant_alert_email",
+      "merchant_page",
+      "merchant_status",
+      "onsite_commerce_merchant",
+      "payment_provider",
+      "privacy_url_by_locale",
+      "review_rejection_messages",
+      "review_rejection_reasons",
+      "review_status",
+      "supported_card_types",
+      "terms",
+      "terms_url_by_locale",
+    };
+
+    @Override
+    public APINodeList<CommerceMerchantSettings> parseResponse(String response, String header) throws APIException {
+      return CommerceMerchantSettings.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<CommerceMerchantSettings> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<CommerceMerchantSettings> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<CommerceMerchantSettings>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<CommerceMerchantSettings>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<CommerceMerchantSettings>>() {
+           public APINodeList<CommerceMerchantSettings> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetCommerceMerchantSettings.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetCommerceMerchantSettings(String nodeId, APIContext context) {
+      super(context, nodeId, "/commerce_merchant_settings", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCommerceMerchantSettings setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCommerceMerchantSettings setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCommerceMerchantSettings requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCommerceMerchantSettings requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCommerceMerchantSettings requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCommerceMerchantSettings requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCommerceMerchantSettings requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCommerceMerchantSettings requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetCommerceMerchantSettings requestBraintreeMerchantIdField () {
+      return this.requestBraintreeMerchantIdField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestBraintreeMerchantIdField (boolean value) {
+      this.requestField("braintree_merchant_id", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestCheckoutMessageField () {
+      return this.requestCheckoutMessageField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestCheckoutMessageField (boolean value) {
+      this.requestField("checkout_message", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestContactEmailField () {
+      return this.requestContactEmailField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestContactEmailField (boolean value) {
+      this.requestField("contact_email", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestDisableCheckoutUrlsField () {
+      return this.requestDisableCheckoutUrlsField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestDisableCheckoutUrlsField (boolean value) {
+      this.requestField("disable_checkout_urls", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestDisplayNameField () {
+      return this.requestDisplayNameField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestDisplayNameField (boolean value) {
+      this.requestField("display_name", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestFacebookChannelField () {
+      return this.requestFacebookChannelField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestFacebookChannelField (boolean value) {
+      this.requestField("facebook_channel", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestHasDiscountCodeField () {
+      return this.requestHasDiscountCodeField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestHasDiscountCodeField (boolean value) {
+      this.requestField("has_discount_code", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestInstagramChannelField () {
+      return this.requestInstagramChannelField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestInstagramChannelField (boolean value) {
+      this.requestField("instagram_channel", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestMerchantAlertEmailField () {
+      return this.requestMerchantAlertEmailField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestMerchantAlertEmailField (boolean value) {
+      this.requestField("merchant_alert_email", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestMerchantPageField () {
+      return this.requestMerchantPageField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestMerchantPageField (boolean value) {
+      this.requestField("merchant_page", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestMerchantStatusField () {
+      return this.requestMerchantStatusField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestMerchantStatusField (boolean value) {
+      this.requestField("merchant_status", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestOnsiteCommerceMerchantField () {
+      return this.requestOnsiteCommerceMerchantField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestOnsiteCommerceMerchantField (boolean value) {
+      this.requestField("onsite_commerce_merchant", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestPaymentProviderField () {
+      return this.requestPaymentProviderField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestPaymentProviderField (boolean value) {
+      this.requestField("payment_provider", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestPrivacyUrlByLocaleField () {
+      return this.requestPrivacyUrlByLocaleField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestPrivacyUrlByLocaleField (boolean value) {
+      this.requestField("privacy_url_by_locale", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestReviewRejectionMessagesField () {
+      return this.requestReviewRejectionMessagesField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestReviewRejectionMessagesField (boolean value) {
+      this.requestField("review_rejection_messages", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestReviewRejectionReasonsField () {
+      return this.requestReviewRejectionReasonsField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestReviewRejectionReasonsField (boolean value) {
+      this.requestField("review_rejection_reasons", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestReviewStatusField () {
+      return this.requestReviewStatusField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestReviewStatusField (boolean value) {
+      this.requestField("review_status", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestSupportedCardTypesField () {
+      return this.requestSupportedCardTypesField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestSupportedCardTypesField (boolean value) {
+      this.requestField("supported_card_types", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestTermsField () {
+      return this.requestTermsField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestTermsField (boolean value) {
+      this.requestField("terms", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestTermsUrlByLocaleField () {
+      return this.requestTermsUrlByLocaleField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestTermsUrlByLocaleField (boolean value) {
+      this.requestField("terms_url_by_locale", value);
       return this;
     }
   }
@@ -9938,6 +10230,142 @@ public class Business extends APINode {
     }
     public APIRequestGetInitiatedAudienceSharingRequests requestRequestTypeField (boolean value) {
       this.requestField("request_type", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetInitiatedSharingAgreements extends APIRequest<BusinessAgreement> {
+
+    APINodeList<BusinessAgreement> lastResponse = null;
+    @Override
+    public APINodeList<BusinessAgreement> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "receiving_business_id",
+      "request_status",
+    };
+
+    public static final String[] FIELDS = {
+      "id",
+      "request_status",
+    };
+
+    @Override
+    public APINodeList<BusinessAgreement> parseResponse(String response, String header) throws APIException {
+      return BusinessAgreement.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<BusinessAgreement> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<BusinessAgreement> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<BusinessAgreement>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<BusinessAgreement>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<BusinessAgreement>>() {
+           public APINodeList<BusinessAgreement> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetInitiatedSharingAgreements.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetInitiatedSharingAgreements(String nodeId, APIContext context) {
+      super(context, nodeId, "/initiated_sharing_agreements", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetInitiatedSharingAgreements setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInitiatedSharingAgreements setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetInitiatedSharingAgreements setReceivingBusinessId (String receivingBusinessId) {
+      this.setParam("receiving_business_id", receivingBusinessId);
+      return this;
+    }
+
+    public APIRequestGetInitiatedSharingAgreements setRequestStatus (BusinessAgreement.EnumRequestStatus requestStatus) {
+      this.setParam("request_status", requestStatus);
+      return this;
+    }
+    public APIRequestGetInitiatedSharingAgreements setRequestStatus (String requestStatus) {
+      this.setParam("request_status", requestStatus);
+      return this;
+    }
+
+    public APIRequestGetInitiatedSharingAgreements requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetInitiatedSharingAgreements requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInitiatedSharingAgreements requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetInitiatedSharingAgreements requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInitiatedSharingAgreements requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInitiatedSharingAgreements requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetInitiatedSharingAgreements requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetInitiatedSharingAgreements requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetInitiatedSharingAgreements requestRequestStatusField () {
+      return this.requestRequestStatusField(true);
+    }
+    public APIRequestGetInitiatedSharingAgreements requestRequestStatusField (boolean value) {
+      this.requestField("request_status", value);
       return this;
     }
   }
@@ -14715,7 +15143,6 @@ public class Business extends APINode {
     }
     public static final String[] PARAMS = {
       "code",
-      "ig_password",
       "page_id",
     };
 
@@ -14777,11 +15204,6 @@ public class Business extends APINode {
 
     public APIRequestCreateOwnedPage setCode (String code) {
       this.setParam("code", code);
-      return this;
-    }
-
-    public APIRequestCreateOwnedPage setIgPassword (String igPassword) {
-      this.setParam("ig_password", igPassword);
       return this;
     }
 
@@ -15068,6 +15490,7 @@ public class Business extends APINode {
 
     public static final String[] FIELDS = {
       "business",
+      "commerce_merchant_settings",
       "da_display_settings",
       "default_image_url",
       "fallback_image_url",
@@ -15176,6 +15599,13 @@ public class Business extends APINode {
       this.requestField("business", value);
       return this;
     }
+    public APIRequestGetOwnedProductCatalogs requestCommerceMerchantSettingsField () {
+      return this.requestCommerceMerchantSettingsField(true);
+    }
+    public APIRequestGetOwnedProductCatalogs requestCommerceMerchantSettingsField (boolean value) {
+      this.requestField("commerce_merchant_settings", value);
+      return this;
+    }
     public APIRequestGetOwnedProductCatalogs requestDaDisplaySettingsField () {
       return this.requestDaDisplaySettingsField(true);
     }
@@ -15256,10 +15686,12 @@ public class Business extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "commerce_merchant_settings",
       "da_display_settings",
       "destination_catalog_settings",
       "flight_catalog_settings",
       "name",
+      "onsite_commerce_merchant",
       "store_catalog_settings",
       "vertical",
     };
@@ -15320,6 +15752,15 @@ public class Business extends APINode {
     }
 
 
+    public APIRequestCreateOwnedProductCatalog setCommerceMerchantSettings (Object commerceMerchantSettings) {
+      this.setParam("commerce_merchant_settings", commerceMerchantSettings);
+      return this;
+    }
+    public APIRequestCreateOwnedProductCatalog setCommerceMerchantSettings (String commerceMerchantSettings) {
+      this.setParam("commerce_merchant_settings", commerceMerchantSettings);
+      return this;
+    }
+
     public APIRequestCreateOwnedProductCatalog setDaDisplaySettings (Object daDisplaySettings) {
       this.setParam("da_display_settings", daDisplaySettings);
       return this;
@@ -15349,6 +15790,15 @@ public class Business extends APINode {
 
     public APIRequestCreateOwnedProductCatalog setName (String name) {
       this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateOwnedProductCatalog setOnsiteCommerceMerchant (Object onsiteCommerceMerchant) {
+      this.setParam("onsite_commerce_merchant", onsiteCommerceMerchant);
+      return this;
+    }
+    public APIRequestCreateOwnedProductCatalog setOnsiteCommerceMerchant (String onsiteCommerceMerchant) {
+      this.setParam("onsite_commerce_merchant", onsiteCommerceMerchant);
       return this;
     }
 
@@ -16996,6 +17446,142 @@ public class Business extends APINode {
     }
     public APIRequestGetReceivedAudienceSharingRequests requestRequestTypeField (boolean value) {
       this.requestField("request_type", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetReceivedSharingAgreements extends APIRequest<BusinessAgreement> {
+
+    APINodeList<BusinessAgreement> lastResponse = null;
+    @Override
+    public APINodeList<BusinessAgreement> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "request_status",
+      "requesting_business_id",
+    };
+
+    public static final String[] FIELDS = {
+      "id",
+      "request_status",
+    };
+
+    @Override
+    public APINodeList<BusinessAgreement> parseResponse(String response, String header) throws APIException {
+      return BusinessAgreement.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<BusinessAgreement> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<BusinessAgreement> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<BusinessAgreement>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<BusinessAgreement>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<BusinessAgreement>>() {
+           public APINodeList<BusinessAgreement> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetReceivedSharingAgreements.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetReceivedSharingAgreements(String nodeId, APIContext context) {
+      super(context, nodeId, "/received_sharing_agreements", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetReceivedSharingAgreements setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetReceivedSharingAgreements setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetReceivedSharingAgreements setRequestStatus (BusinessAgreement.EnumRequestStatus requestStatus) {
+      this.setParam("request_status", requestStatus);
+      return this;
+    }
+    public APIRequestGetReceivedSharingAgreements setRequestStatus (String requestStatus) {
+      this.setParam("request_status", requestStatus);
+      return this;
+    }
+
+    public APIRequestGetReceivedSharingAgreements setRequestingBusinessId (String requestingBusinessId) {
+      this.setParam("requesting_business_id", requestingBusinessId);
+      return this;
+    }
+
+    public APIRequestGetReceivedSharingAgreements requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetReceivedSharingAgreements requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetReceivedSharingAgreements requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetReceivedSharingAgreements requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetReceivedSharingAgreements requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetReceivedSharingAgreements requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetReceivedSharingAgreements requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetReceivedSharingAgreements requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetReceivedSharingAgreements requestRequestStatusField () {
+      return this.requestRequestStatusField(true);
+    }
+    public APIRequestGetReceivedSharingAgreements requestRequestStatusField (boolean value) {
+      this.requestField("request_status", value);
       return this;
     }
   }

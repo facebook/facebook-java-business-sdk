@@ -298,6 +298,10 @@ public class WhatsAppBusinessAccount extends APINode {
     return new APIRequestGetPhoneNumbers(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateSubscribedApp createSubscribedApp() {
+    return new APIRequestCreateSubscribedApp(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
@@ -837,6 +841,110 @@ public class WhatsAppBusinessAccount extends APINode {
 
     @Override
     public APIRequestGetPhoneNumbers requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateSubscribedApp extends APIRequest<WhatsAppBusinessAccount> {
+
+    WhatsAppBusinessAccount lastResponse = null;
+    @Override
+    public WhatsAppBusinessAccount getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public WhatsAppBusinessAccount parseResponse(String response, String header) throws APIException {
+      return WhatsAppBusinessAccount.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public WhatsAppBusinessAccount execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public WhatsAppBusinessAccount execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<WhatsAppBusinessAccount> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<WhatsAppBusinessAccount> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, WhatsAppBusinessAccount>() {
+           public WhatsAppBusinessAccount apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateSubscribedApp.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateSubscribedApp(String nodeId, APIContext context) {
+      super(context, nodeId, "/subscribed_apps", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateSubscribedApp setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSubscribedApp setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateSubscribedApp requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateSubscribedApp requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSubscribedApp requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateSubscribedApp requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSubscribedApp requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSubscribedApp requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

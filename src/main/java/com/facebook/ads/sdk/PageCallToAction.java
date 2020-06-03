@@ -983,6 +983,8 @@ public class PageCallToAction extends APINode {
       VALUE_EMAIL("EMAIL"),
       @SerializedName("FACEBOOK_APP")
       VALUE_FACEBOOK_APP("FACEBOOK_APP"),
+      @SerializedName("FOLLOW")
+      VALUE_FOLLOW("FOLLOW"),
       @SerializedName("MESSENGER")
       VALUE_MESSENGER("MESSENGER"),
       @SerializedName("MINI_SHOP")
@@ -1018,6 +1020,8 @@ public class PageCallToAction extends APINode {
       VALUE_EMAIL("EMAIL"),
       @SerializedName("FACEBOOK_APP")
       VALUE_FACEBOOK_APP("FACEBOOK_APP"),
+      @SerializedName("FOLLOW")
+      VALUE_FOLLOW("FOLLOW"),
       @SerializedName("MESSENGER")
       VALUE_MESSENGER("MESSENGER"),
       @SerializedName("MINI_SHOP")
@@ -1063,6 +1067,8 @@ public class PageCallToAction extends APINode {
       VALUE_DONATE_NOW("DONATE_NOW"),
       @SerializedName("EMAIL")
       VALUE_EMAIL("EMAIL"),
+      @SerializedName("FOLLOW_PAGE")
+      VALUE_FOLLOW_PAGE("FOLLOW_PAGE"),
       @SerializedName("GET_DIRECTIONS")
       VALUE_GET_DIRECTIONS("GET_DIRECTIONS"),
       @SerializedName("GET_OFFER")
@@ -1081,6 +1087,8 @@ public class PageCallToAction extends APINode {
       VALUE_MESSAGE("MESSAGE"),
       @SerializedName("OPEN_APP")
       VALUE_OPEN_APP("OPEN_APP"),
+      @SerializedName("ORDER_FOOD")
+      VALUE_ORDER_FOOD("ORDER_FOOD"),
       @SerializedName("PLAY_MUSIC")
       VALUE_PLAY_MUSIC("PLAY_MUSIC"),
       @SerializedName("PLAY_NOW")
@@ -1126,6 +1134,8 @@ public class PageCallToAction extends APINode {
       VALUE_BECOME_SUPPORTER("BECOME_SUPPORTER"),
       @SerializedName("EMAIL")
       VALUE_EMAIL("EMAIL"),
+      @SerializedName("FOLLOW")
+      VALUE_FOLLOW("FOLLOW"),
       @SerializedName("MESSENGER")
       VALUE_MESSENGER("MESSENGER"),
       @SerializedName("NONE")

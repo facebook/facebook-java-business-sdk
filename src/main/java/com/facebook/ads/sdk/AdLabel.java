@@ -903,7 +903,6 @@ public class AdLabel extends APINode {
       "engagement_audience",
       "failed_delivery_checks",
       "id",
-      "is_autobid",
       "issues_info",
       "last_updated_by_app_id",
       "name",
@@ -1146,13 +1145,6 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAds requestIdField (boolean value) {
       this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetAds requestIsAutobidField () {
-      return this.requestIsAutobidField(true);
-    }
-    public APIRequestGetAds requestIsAutobidField (boolean value) {
-      this.requestField("is_autobid", value);
       return this;
     }
     public APIRequestGetAds requestIssuesInfoField () {

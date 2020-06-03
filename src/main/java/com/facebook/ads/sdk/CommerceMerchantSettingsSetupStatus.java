@@ -54,25 +54,31 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ProductFeedUploadDiagnostics extends APINode {
-  @SerializedName("last_modified_time")
-  private String mLastModifiedTime = null;
-  @SerializedName("report_url")
-  private String mReportUrl = null;
+public class CommerceMerchantSettingsSetupStatus extends APINode {
+  @SerializedName("deals_setup")
+  private String mDealsSetup = null;
+  @SerializedName("marketplace_approval_status")
+  private String mMarketplaceApprovalStatus = null;
+  @SerializedName("marketplace_approval_status_details")
+  private Object mMarketplaceApprovalStatusDetails = null;
+  @SerializedName("payment_setup")
+  private String mPaymentSetup = null;
+  @SerializedName("shop_setup")
+  private String mShopSetup = null;
   protected static Gson gson = null;
 
-  public ProductFeedUploadDiagnostics() {
+  public CommerceMerchantSettingsSetupStatus() {
   }
 
   public String getId() {
     return null;
   }
-  public static ProductFeedUploadDiagnostics loadJSON(String json, APIContext context, String header) {
-    ProductFeedUploadDiagnostics productFeedUploadDiagnostics = getGson().fromJson(json, ProductFeedUploadDiagnostics.class);
+  public static CommerceMerchantSettingsSetupStatus loadJSON(String json, APIContext context, String header) {
+    CommerceMerchantSettingsSetupStatus commerceMerchantSettingsSetupStatus = getGson().fromJson(json, CommerceMerchantSettingsSetupStatus.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(productFeedUploadDiagnostics.toString());
+      JsonElement o2 = parser.parse(commerceMerchantSettingsSetupStatus.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -82,14 +88,14 @@ public class ProductFeedUploadDiagnostics extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    productFeedUploadDiagnostics.context = context;
-    productFeedUploadDiagnostics.rawValue = json;
-    productFeedUploadDiagnostics.header = header;
-    return productFeedUploadDiagnostics;
+    commerceMerchantSettingsSetupStatus.context = context;
+    commerceMerchantSettingsSetupStatus.rawValue = json;
+    commerceMerchantSettingsSetupStatus.header = header;
+    return commerceMerchantSettingsSetupStatus;
   }
 
-  public static APINodeList<ProductFeedUploadDiagnostics> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ProductFeedUploadDiagnostics> productFeedUploadDiagnosticss = new APINodeList<ProductFeedUploadDiagnostics>(request, json, header);
+  public static APINodeList<CommerceMerchantSettingsSetupStatus> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CommerceMerchantSettingsSetupStatus> commerceMerchantSettingsSetupStatuss = new APINodeList<CommerceMerchantSettingsSetupStatus>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -100,9 +106,9 @@ public class ProductFeedUploadDiagnostics extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productFeedUploadDiagnosticss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          commerceMerchantSettingsSetupStatuss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return productFeedUploadDiagnosticss;
+        return commerceMerchantSettingsSetupStatuss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -112,20 +118,20 @@ public class ProductFeedUploadDiagnostics extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                productFeedUploadDiagnosticss.setCursors(before, after);
+                commerceMerchantSettingsSetupStatuss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            productFeedUploadDiagnosticss.setPaging(previous, next);
+            commerceMerchantSettingsSetupStatuss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              productFeedUploadDiagnosticss.setAppSecret(context.getAppSecretProof());
+              commerceMerchantSettingsSetupStatuss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productFeedUploadDiagnosticss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              commerceMerchantSettingsSetupStatuss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -136,23 +142,23 @@ public class ProductFeedUploadDiagnostics extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productFeedUploadDiagnosticss.add(loadJSON(entry.getValue().toString(), context, header));
+                  commerceMerchantSettingsSetupStatuss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productFeedUploadDiagnosticss.add(loadJSON(obj.toString(), context, header));
+              commerceMerchantSettingsSetupStatuss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return productFeedUploadDiagnosticss;
+          return commerceMerchantSettingsSetupStatuss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productFeedUploadDiagnosticss.add(loadJSON(entry.getValue().toString(), context, header));
+              commerceMerchantSettingsSetupStatuss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return productFeedUploadDiagnosticss;
+          return commerceMerchantSettingsSetupStatuss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -169,20 +175,20 @@ public class ProductFeedUploadDiagnostics extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productFeedUploadDiagnosticss.add(loadJSON(value.toString(), context, header));
+              commerceMerchantSettingsSetupStatuss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return productFeedUploadDiagnosticss;
+            return commerceMerchantSettingsSetupStatuss;
           }
 
           // Sixth, check if it's pure JsonObject
-          productFeedUploadDiagnosticss.clear();
-          productFeedUploadDiagnosticss.add(loadJSON(json, context, header));
-          return productFeedUploadDiagnosticss;
+          commerceMerchantSettingsSetupStatuss.clear();
+          commerceMerchantSettingsSetupStatuss.add(loadJSON(json, context, header));
+          return commerceMerchantSettingsSetupStatuss;
         }
       }
     } catch (Exception e) {
@@ -210,21 +216,48 @@ public class ProductFeedUploadDiagnostics extends APINode {
   }
 
 
-  public String getFieldLastModifiedTime() {
-    return mLastModifiedTime;
+  public String getFieldDealsSetup() {
+    return mDealsSetup;
   }
 
-  public ProductFeedUploadDiagnostics setFieldLastModifiedTime(String value) {
-    this.mLastModifiedTime = value;
+  public CommerceMerchantSettingsSetupStatus setFieldDealsSetup(String value) {
+    this.mDealsSetup = value;
     return this;
   }
 
-  public String getFieldReportUrl() {
-    return mReportUrl;
+  public String getFieldMarketplaceApprovalStatus() {
+    return mMarketplaceApprovalStatus;
   }
 
-  public ProductFeedUploadDiagnostics setFieldReportUrl(String value) {
-    this.mReportUrl = value;
+  public CommerceMerchantSettingsSetupStatus setFieldMarketplaceApprovalStatus(String value) {
+    this.mMarketplaceApprovalStatus = value;
+    return this;
+  }
+
+  public Object getFieldMarketplaceApprovalStatusDetails() {
+    return mMarketplaceApprovalStatusDetails;
+  }
+
+  public CommerceMerchantSettingsSetupStatus setFieldMarketplaceApprovalStatusDetails(Object value) {
+    this.mMarketplaceApprovalStatusDetails = value;
+    return this;
+  }
+
+  public String getFieldPaymentSetup() {
+    return mPaymentSetup;
+  }
+
+  public CommerceMerchantSettingsSetupStatus setFieldPaymentSetup(String value) {
+    this.mPaymentSetup = value;
+    return this;
+  }
+
+  public String getFieldShopSetup() {
+    return mShopSetup;
+  }
+
+  public CommerceMerchantSettingsSetupStatus setFieldShopSetup(String value) {
+    this.mShopSetup = value;
     return this;
   }
 
@@ -244,18 +277,21 @@ public class ProductFeedUploadDiagnostics extends APINode {
     return gson;
   }
 
-  public ProductFeedUploadDiagnostics copyFrom(ProductFeedUploadDiagnostics instance) {
-    this.mLastModifiedTime = instance.mLastModifiedTime;
-    this.mReportUrl = instance.mReportUrl;
+  public CommerceMerchantSettingsSetupStatus copyFrom(CommerceMerchantSettingsSetupStatus instance) {
+    this.mDealsSetup = instance.mDealsSetup;
+    this.mMarketplaceApprovalStatus = instance.mMarketplaceApprovalStatus;
+    this.mMarketplaceApprovalStatusDetails = instance.mMarketplaceApprovalStatusDetails;
+    this.mPaymentSetup = instance.mPaymentSetup;
+    this.mShopSetup = instance.mShopSetup;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ProductFeedUploadDiagnostics> getParser() {
-    return new APIRequest.ResponseParser<ProductFeedUploadDiagnostics>() {
-      public APINodeList<ProductFeedUploadDiagnostics> parseResponse(String response, APIContext context, APIRequest<ProductFeedUploadDiagnostics> request, String header) throws MalformedResponseException {
-        return ProductFeedUploadDiagnostics.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<CommerceMerchantSettingsSetupStatus> getParser() {
+    return new APIRequest.ResponseParser<CommerceMerchantSettingsSetupStatus>() {
+      public APINodeList<CommerceMerchantSettingsSetupStatus> parseResponse(String response, APIContext context, APIRequest<CommerceMerchantSettingsSetupStatus> request, String header) throws MalformedResponseException {
+        return CommerceMerchantSettingsSetupStatus.parseResponse(response, context, request, header);
       }
     };
   }

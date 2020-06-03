@@ -1097,7 +1097,6 @@ public class Campaign extends APINode {
       "engagement_audience",
       "failed_delivery_checks",
       "id",
-      "is_autobid",
       "issues_info",
       "last_updated_by_app_id",
       "name",
@@ -1376,13 +1375,6 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAds requestIdField (boolean value) {
       this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetAds requestIsAutobidField () {
-      return this.requestIsAutobidField(true);
-    }
-    public APIRequestGetAds requestIsAutobidField (boolean value) {
-      this.requestField("is_autobid", value);
       return this;
     }
     public APIRequestGetAds requestIssuesInfoField () {
@@ -4367,6 +4359,8 @@ public class Campaign extends APINode {
       VALUE_PRODUCT_CATALOG_SALES("PRODUCT_CATALOG_SALES"),
       @SerializedName("REACH")
       VALUE_REACH("REACH"),
+      @SerializedName("STORE_VISITS")
+      VALUE_STORE_VISITS("STORE_VISITS"),
       @SerializedName("VIDEO_VIEWS")
       VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
       ;

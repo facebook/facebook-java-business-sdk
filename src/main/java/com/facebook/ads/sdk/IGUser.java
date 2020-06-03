@@ -67,6 +67,8 @@ public class IGUser extends APINode {
   private String mId = null;
   @SerializedName("ig_id")
   private Long mIgId = null;
+  @SerializedName("is_ig_shopping_seller_policy_enabled")
+  private Boolean mIsIgShoppingSellerPolicyEnabled = null;
   @SerializedName("media_count")
   private Long mMediaCount = null;
   @SerializedName("mentioned_comment")
@@ -354,6 +356,10 @@ public class IGUser extends APINode {
 
   public Long getFieldIgId() {
     return mIgId;
+  }
+
+  public Boolean getFieldIsIgShoppingSellerPolicyEnabled() {
+    return mIsIgShoppingSellerPolicyEnabled;
   }
 
   public Long getFieldMediaCount() {
@@ -1735,6 +1741,7 @@ public class IGUser extends APINode {
       "follows_count",
       "id",
       "ig_id",
+      "is_ig_shopping_seller_policy_enabled",
       "media_count",
       "mentioned_comment",
       "mentioned_media",
@@ -1876,6 +1883,13 @@ public class IGUser extends APINode {
       this.requestField("ig_id", value);
       return this;
     }
+    public APIRequestGet requestIsIgShoppingSellerPolicyEnabledField () {
+      return this.requestIsIgShoppingSellerPolicyEnabledField(true);
+    }
+    public APIRequestGet requestIsIgShoppingSellerPolicyEnabledField (boolean value) {
+      this.requestField("is_ig_shopping_seller_policy_enabled", value);
+      return this;
+    }
     public APIRequestGet requestMediaCountField () {
       return this.requestMediaCountField(true);
     }
@@ -1955,6 +1969,7 @@ public class IGUser extends APINode {
     this.mFollowsCount = instance.mFollowsCount;
     this.mId = instance.mId;
     this.mIgId = instance.mIgId;
+    this.mIsIgShoppingSellerPolicyEnabled = instance.mIsIgShoppingSellerPolicyEnabled;
     this.mMediaCount = instance.mMediaCount;
     this.mMentionedComment = instance.mMentionedComment;
     this.mMentionedMedia = instance.mMentionedMedia;

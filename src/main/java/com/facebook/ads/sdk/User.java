@@ -496,10 +496,6 @@ public class User extends APINode {
     return new APIRequestCreateGamesPlay(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateGamesStat createGamesStat() {
-    return new APIRequestCreateGamesStat(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetGroups getGroups() {
     return new APIRequestGetGroups(this.getPrefixedId().toString(), context);
   }
@@ -566,10 +562,6 @@ public class User extends APINode {
 
   public APIRequestGetPicture getPicture() {
     return new APIRequestGetPicture(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetRequestHistory getRequestHistory() {
-    return new APIRequestGetRequestHistory(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetRichMediaDocuments getRichMediaDocuments() {
@@ -6238,6 +6230,7 @@ public class User extends APINode {
 
     public static final String[] FIELDS = {
       "business",
+      "commerce_merchant_settings",
       "da_display_settings",
       "default_image_url",
       "fallback_image_url",
@@ -6344,6 +6337,13 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedProductCatalogs requestBusinessField (boolean value) {
       this.requestField("business", value);
+      return this;
+    }
+    public APIRequestGetAssignedProductCatalogs requestCommerceMerchantSettingsField () {
+      return this.requestCommerceMerchantSettingsField(true);
+    }
+    public APIRequestGetAssignedProductCatalogs requestCommerceMerchantSettingsField (boolean value) {
+      this.requestField("commerce_merchant_settings", value);
       return this;
     }
     public APIRequestGetAssignedProductCatalogs requestDaDisplaySettingsField () {
@@ -10244,136 +10244,6 @@ public class User extends APINode {
 
     @Override
     public APIRequestCreateGamesPlay requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateGamesStat extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "inc",
-      "set",
-      "stat_name",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateGamesStat.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateGamesStat(String nodeId, APIContext context) {
-      super(context, nodeId, "/games_stats", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateGamesStat setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateGamesStat setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateGamesStat setInc (Long inc) {
-      this.setParam("inc", inc);
-      return this;
-    }
-    public APIRequestCreateGamesStat setInc (String inc) {
-      this.setParam("inc", inc);
-      return this;
-    }
-
-    public APIRequestCreateGamesStat setSet (Long set) {
-      this.setParam("set", set);
-      return this;
-    }
-    public APIRequestCreateGamesStat setSet (String set) {
-      this.setParam("set", set);
-      return this;
-    }
-
-    public APIRequestCreateGamesStat setStatName (String statName) {
-      this.setParam("stat_name", statName);
-      return this;
-    }
-
-    public APIRequestCreateGamesStat requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateGamesStat requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateGamesStat requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateGamesStat requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateGamesStat requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateGamesStat requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -16574,166 +16444,6 @@ public class User extends APINode {
     }
     public APIRequestGetPicture requestWidthField (boolean value) {
       this.requestField("width", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestGetRequestHistory extends APIRequest<RequestHistory> {
-
-    APINodeList<RequestHistory> lastResponse = null;
-    @Override
-    public APINodeList<RequestHistory> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "api_version",
-      "created_time",
-      "error_code",
-      "graph_path",
-      "http_method",
-      "post_params",
-      "query_params",
-    };
-
-    @Override
-    public APINodeList<RequestHistory> parseResponse(String response, String header) throws APIException {
-      return RequestHistory.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<RequestHistory> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<RequestHistory> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<RequestHistory>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<RequestHistory>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<RequestHistory>>() {
-           public APINodeList<RequestHistory> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetRequestHistory.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetRequestHistory(String nodeId, APIContext context) {
-      super(context, nodeId, "/request_history", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetRequestHistory setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetRequestHistory setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetRequestHistory requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetRequestHistory requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetRequestHistory requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetRequestHistory requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetRequestHistory requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetRequestHistory requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetRequestHistory requestApiVersionField () {
-      return this.requestApiVersionField(true);
-    }
-    public APIRequestGetRequestHistory requestApiVersionField (boolean value) {
-      this.requestField("api_version", value);
-      return this;
-    }
-    public APIRequestGetRequestHistory requestCreatedTimeField () {
-      return this.requestCreatedTimeField(true);
-    }
-    public APIRequestGetRequestHistory requestCreatedTimeField (boolean value) {
-      this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGetRequestHistory requestErrorCodeField () {
-      return this.requestErrorCodeField(true);
-    }
-    public APIRequestGetRequestHistory requestErrorCodeField (boolean value) {
-      this.requestField("error_code", value);
-      return this;
-    }
-    public APIRequestGetRequestHistory requestGraphPathField () {
-      return this.requestGraphPathField(true);
-    }
-    public APIRequestGetRequestHistory requestGraphPathField (boolean value) {
-      this.requestField("graph_path", value);
-      return this;
-    }
-    public APIRequestGetRequestHistory requestHttpMethodField () {
-      return this.requestHttpMethodField(true);
-    }
-    public APIRequestGetRequestHistory requestHttpMethodField (boolean value) {
-      this.requestField("http_method", value);
-      return this;
-    }
-    public APIRequestGetRequestHistory requestPostParamsField () {
-      return this.requestPostParamsField(true);
-    }
-    public APIRequestGetRequestHistory requestPostParamsField (boolean value) {
-      this.requestField("post_params", value);
-      return this;
-    }
-    public APIRequestGetRequestHistory requestQueryParamsField () {
-      return this.requestQueryParamsField(true);
-    }
-    public APIRequestGetRequestHistory requestQueryParamsField (boolean value) {
-      this.requestField("query_params", value);
       return this;
     }
   }

@@ -777,6 +777,8 @@ public class Profile extends APINode {
   public static enum EnumType {
       @SerializedName("ANGRY")
       VALUE_ANGRY("ANGRY"),
+      @SerializedName("CARE")
+      VALUE_CARE("CARE"),
       @SerializedName("HAHA")
       VALUE_HAHA("HAHA"),
       @SerializedName("LIKE")

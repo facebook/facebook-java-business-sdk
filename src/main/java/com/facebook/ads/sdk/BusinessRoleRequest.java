@@ -805,6 +805,8 @@ public class BusinessRoleRequest extends APINode {
       VALUE_ADMIN("ADMIN"),
       @SerializedName("ADS_RIGHTS_REVIEWER")
       VALUE_ADS_RIGHTS_REVIEWER("ADS_RIGHTS_REVIEWER"),
+      @SerializedName("DEVELOPER")
+      VALUE_DEVELOPER("DEVELOPER"),
       @SerializedName("EMPLOYEE")
       VALUE_EMPLOYEE("EMPLOYEE"),
       @SerializedName("FINANCE_ANALYST")

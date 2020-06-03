@@ -974,16 +974,20 @@ public class Link extends APINode {
       "comments_mirroring_domain",
       "coordinates",
       "created_time",
+      "delivery_growth_optimizations",
       "description",
+      "entities",
       "event",
       "expanded_height",
       "expanded_width",
       "feed_targeting",
+      "formatting",
       "from",
       "full_picture",
       "height",
       "icon",
       "id",
+      "implicit_place",
       "instagram_eligibility",
       "is_app_share",
       "is_eligible_for_promotion",
@@ -995,6 +999,7 @@ public class Link extends APINode {
       "is_published",
       "is_spherical",
       "link",
+      "live_video_eligibility",
       "message",
       "message_tags",
       "multi_share_end_card",
@@ -1009,6 +1014,7 @@ public class Link extends APINode {
       "promotable_id",
       "promotion_status",
       "properties",
+      "publishing_stats",
       "scheduled_publish_time",
       "shares",
       "source",
@@ -1019,11 +1025,13 @@ public class Link extends APINode {
       "target",
       "targeting",
       "timeline_visibility",
+      "translations",
       "type",
       "updated_time",
       "via",
       "video_buying_eligibility",
       "width",
+      "will_be_autocropped_when_deliver_to_instagram",
     };
 
     @Override
@@ -1199,11 +1207,25 @@ public class Link extends APINode {
       this.requestField("created_time", value);
       return this;
     }
+    public APIRequestGetSharedPosts requestDeliveryGrowthOptimizationsField () {
+      return this.requestDeliveryGrowthOptimizationsField(true);
+    }
+    public APIRequestGetSharedPosts requestDeliveryGrowthOptimizationsField (boolean value) {
+      this.requestField("delivery_growth_optimizations", value);
+      return this;
+    }
     public APIRequestGetSharedPosts requestDescriptionField () {
       return this.requestDescriptionField(true);
     }
     public APIRequestGetSharedPosts requestDescriptionField (boolean value) {
       this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetSharedPosts requestEntitiesField () {
+      return this.requestEntitiesField(true);
+    }
+    public APIRequestGetSharedPosts requestEntitiesField (boolean value) {
+      this.requestField("entities", value);
       return this;
     }
     public APIRequestGetSharedPosts requestEventField () {
@@ -1232,6 +1254,13 @@ public class Link extends APINode {
     }
     public APIRequestGetSharedPosts requestFeedTargetingField (boolean value) {
       this.requestField("feed_targeting", value);
+      return this;
+    }
+    public APIRequestGetSharedPosts requestFormattingField () {
+      return this.requestFormattingField(true);
+    }
+    public APIRequestGetSharedPosts requestFormattingField (boolean value) {
+      this.requestField("formatting", value);
       return this;
     }
     public APIRequestGetSharedPosts requestFromField () {
@@ -1267,6 +1296,13 @@ public class Link extends APINode {
     }
     public APIRequestGetSharedPosts requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetSharedPosts requestImplicitPlaceField () {
+      return this.requestImplicitPlaceField(true);
+    }
+    public APIRequestGetSharedPosts requestImplicitPlaceField (boolean value) {
+      this.requestField("implicit_place", value);
       return this;
     }
     public APIRequestGetSharedPosts requestInstagramEligibilityField () {
@@ -1344,6 +1380,13 @@ public class Link extends APINode {
     }
     public APIRequestGetSharedPosts requestLinkField (boolean value) {
       this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGetSharedPosts requestLiveVideoEligibilityField () {
+      return this.requestLiveVideoEligibilityField(true);
+    }
+    public APIRequestGetSharedPosts requestLiveVideoEligibilityField (boolean value) {
+      this.requestField("live_video_eligibility", value);
       return this;
     }
     public APIRequestGetSharedPosts requestMessageField () {
@@ -1444,6 +1487,13 @@ public class Link extends APINode {
       this.requestField("properties", value);
       return this;
     }
+    public APIRequestGetSharedPosts requestPublishingStatsField () {
+      return this.requestPublishingStatsField(true);
+    }
+    public APIRequestGetSharedPosts requestPublishingStatsField (boolean value) {
+      this.requestField("publishing_stats", value);
+      return this;
+    }
     public APIRequestGetSharedPosts requestScheduledPublishTimeField () {
       return this.requestScheduledPublishTimeField(true);
     }
@@ -1514,6 +1564,13 @@ public class Link extends APINode {
       this.requestField("timeline_visibility", value);
       return this;
     }
+    public APIRequestGetSharedPosts requestTranslationsField () {
+      return this.requestTranslationsField(true);
+    }
+    public APIRequestGetSharedPosts requestTranslationsField (boolean value) {
+      this.requestField("translations", value);
+      return this;
+    }
     public APIRequestGetSharedPosts requestTypeField () {
       return this.requestTypeField(true);
     }
@@ -1547,6 +1604,13 @@ public class Link extends APINode {
     }
     public APIRequestGetSharedPosts requestWidthField (boolean value) {
       this.requestField("width", value);
+      return this;
+    }
+    public APIRequestGetSharedPosts requestWillBeAutocroppedWhenDeliverToInstagramField () {
+      return this.requestWillBeAutocroppedWhenDeliverToInstagramField(true);
+    }
+    public APIRequestGetSharedPosts requestWillBeAutocroppedWhenDeliverToInstagramField (boolean value) {
+      this.requestField("will_be_autocropped_when_deliver_to_instagram", value);
       return this;
     }
   }

@@ -9706,7 +9706,6 @@ public class Application extends APINode {
       "app_domains",
       "app_name",
       "app_type",
-      "auth_dialog_data_help_url",
       "auth_dialog_headline",
       "auth_dialog_perms_explanation",
       "auth_referral_default_activity_privacy",
@@ -9718,28 +9717,20 @@ public class Application extends APINode {
       "canvas_fluid_height",
       "canvas_fluid_width",
       "canvas_url",
-      "category",
       "configured_ios_sso",
       "contact_email",
-      "created_time",
-      "creator_uid",
       "deauth_callback_url",
-      "hosting_url",
       "ios_bundle_id",
       "ipad_app_store_id",
       "iphone_app_store_id",
-      "migrations",
       "mobile_web_url",
       "namespace",
       "page_tab_default_name",
-      "page_tab_url",
       "privacy_policy_url",
       "restrictions",
       "secure_canvas_url",
       "secure_page_tab_url",
       "server_ip_whitelist",
-      "social_discovery",
-      "subcategory",
       "terms_of_service_url",
       "url_scheme_suffix",
       "user_support_email",
@@ -9872,11 +9863,6 @@ public class Application extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setAuthDialogDataHelpUrl (String authDialogDataHelpUrl) {
-      this.setParam("auth_dialog_data_help_url", authDialogDataHelpUrl);
-      return this;
-    }
-
     public APIRequestUpdate setAuthDialogHeadline (String authDialogHeadline) {
       this.setParam("auth_dialog_headline", authDialogHeadline);
       return this;
@@ -9956,11 +9942,6 @@ public class Application extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setCategory (String category) {
-      this.setParam("category", category);
-      return this;
-    }
-
     public APIRequestUpdate setConfiguredIosSso (Boolean configuredIosSso) {
       this.setParam("configured_ios_sso", configuredIosSso);
       return this;
@@ -9975,31 +9956,8 @@ public class Application extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setCreatedTime (Object createdTime) {
-      this.setParam("created_time", createdTime);
-      return this;
-    }
-    public APIRequestUpdate setCreatedTime (String createdTime) {
-      this.setParam("created_time", createdTime);
-      return this;
-    }
-
-    public APIRequestUpdate setCreatorUid (Long creatorUid) {
-      this.setParam("creator_uid", creatorUid);
-      return this;
-    }
-    public APIRequestUpdate setCreatorUid (String creatorUid) {
-      this.setParam("creator_uid", creatorUid);
-      return this;
-    }
-
     public APIRequestUpdate setDeauthCallbackUrl (String deauthCallbackUrl) {
       this.setParam("deauth_callback_url", deauthCallbackUrl);
-      return this;
-    }
-
-    public APIRequestUpdate setHostingUrl (String hostingUrl) {
-      this.setParam("hosting_url", hostingUrl);
       return this;
     }
 
@@ -10022,11 +9980,6 @@ public class Application extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setMigrations (String migrations) {
-      this.setParam("migrations", migrations);
-      return this;
-    }
-
     public APIRequestUpdate setMobileWebUrl (String mobileWebUrl) {
       this.setParam("mobile_web_url", mobileWebUrl);
       return this;
@@ -10039,11 +9992,6 @@ public class Application extends APINode {
 
     public APIRequestUpdate setPageTabDefaultName (String pageTabDefaultName) {
       this.setParam("page_tab_default_name", pageTabDefaultName);
-      return this;
-    }
-
-    public APIRequestUpdate setPageTabUrl (String pageTabUrl) {
-      this.setParam("page_tab_url", pageTabUrl);
       return this;
     }
 
@@ -10073,20 +10021,6 @@ public class Application extends APINode {
     }
     public APIRequestUpdate setServerIpWhitelist (String serverIpWhitelist) {
       this.setParam("server_ip_whitelist", serverIpWhitelist);
-      return this;
-    }
-
-    public APIRequestUpdate setSocialDiscovery (Boolean socialDiscovery) {
-      this.setParam("social_discovery", socialDiscovery);
-      return this;
-    }
-    public APIRequestUpdate setSocialDiscovery (String socialDiscovery) {
-      this.setParam("social_discovery", socialDiscovery);
-      return this;
-    }
-
-    public APIRequestUpdate setSubcategory (String subcategory) {
-      this.setParam("subcategory", subcategory);
       return this;
     }
 

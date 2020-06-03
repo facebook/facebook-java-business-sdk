@@ -233,6 +233,8 @@ public class StreamingReaction extends APINode {
   public static enum EnumReactionType {
       @SerializedName("ANGRY")
       VALUE_ANGRY("ANGRY"),
+      @SerializedName("CARE")
+      VALUE_CARE("CARE"),
       @SerializedName("HAHA")
       VALUE_HAHA("HAHA"),
       @SerializedName("LIKE")

@@ -459,6 +459,8 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_FIND_YOUR_GROUPS("FIND_YOUR_GROUPS"),
       @SerializedName("FOLLOW_NEWS_STORYLINE")
       VALUE_FOLLOW_NEWS_STORYLINE("FOLLOW_NEWS_STORYLINE"),
+      @SerializedName("FOLLOW_PAGE")
+      VALUE_FOLLOW_PAGE("FOLLOW_PAGE"),
       @SerializedName("FOLLOW_USER")
       VALUE_FOLLOW_USER("FOLLOW_USER"),
       @SerializedName("GET_DIRECTIONS")

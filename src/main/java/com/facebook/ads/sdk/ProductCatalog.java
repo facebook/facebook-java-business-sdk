@@ -57,6 +57,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class ProductCatalog extends APINode {
   @SerializedName("business")
   private Business mBusiness = null;
+  @SerializedName("commerce_merchant_settings")
+  private CommerceMerchantSettings mCommerceMerchantSettings = null;
   @SerializedName("da_display_settings")
   private ProductCatalogImageSettings mDaDisplaySettings = null;
   @SerializedName("default_image_url")
@@ -386,6 +388,10 @@ public class ProductCatalog extends APINode {
     return new APIRequestCreateItemsBatch(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateOnsiteCommerceMerchant createOnsiteCommerceMerchant() {
+    return new APIRequestCreateOnsiteCommerceMerchant(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetPricingVariablesBatch getPricingVariablesBatch() {
     return new APIRequestGetPricingVariablesBatch(this.getPrefixedId().toString(), context);
   }
@@ -460,6 +466,13 @@ public class ProductCatalog extends APINode {
       mBusiness.context = getContext();
     }
     return mBusiness;
+  }
+
+  public CommerceMerchantSettings getFieldCommerceMerchantSettings() {
+    if (mCommerceMerchantSettings != null) {
+      mCommerceMerchantSettings.context = getContext();
+    }
+    return mCommerceMerchantSettings;
   }
 
   public ProductCatalogImageSettings getFieldDaDisplaySettings() {
@@ -5077,6 +5090,120 @@ public class ProductCatalog extends APINode {
 
   }
 
+  public static class APIRequestCreateOnsiteCommerceMerchant extends APIRequest<ProductCatalog> {
+
+    ProductCatalog lastResponse = null;
+    @Override
+    public ProductCatalog getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "onsite_commerce_merchant",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public ProductCatalog parseResponse(String response, String header) throws APIException {
+      return ProductCatalog.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public ProductCatalog execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ProductCatalog execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<ProductCatalog> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, ProductCatalog>() {
+           public ProductCatalog apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateOnsiteCommerceMerchant.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateOnsiteCommerceMerchant(String nodeId, APIContext context) {
+      super(context, nodeId, "/onsite_commerce_merchant", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateOnsiteCommerceMerchant setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateOnsiteCommerceMerchant setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateOnsiteCommerceMerchant setOnsiteCommerceMerchant (Object onsiteCommerceMerchant) {
+      this.setParam("onsite_commerce_merchant", onsiteCommerceMerchant);
+      return this;
+    }
+    public APIRequestCreateOnsiteCommerceMerchant setOnsiteCommerceMerchant (String onsiteCommerceMerchant) {
+      this.setParam("onsite_commerce_merchant", onsiteCommerceMerchant);
+      return this;
+    }
+
+    public APIRequestCreateOnsiteCommerceMerchant requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateOnsiteCommerceMerchant requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateOnsiteCommerceMerchant requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateOnsiteCommerceMerchant requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateOnsiteCommerceMerchant requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateOnsiteCommerceMerchant requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetPricingVariablesBatch extends APIRequest<ProductCatalogPricingVariablesBatch> {
 
     APINodeList<ProductCatalogPricingVariablesBatch> lastResponse = null;
@@ -8937,6 +9064,7 @@ public class ProductCatalog extends APINode {
 
     public static final String[] FIELDS = {
       "business",
+      "commerce_merchant_settings",
       "da_display_settings",
       "default_image_url",
       "fallback_image_url",
@@ -9043,6 +9171,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGet requestBusinessField (boolean value) {
       this.requestField("business", value);
+      return this;
+    }
+    public APIRequestGet requestCommerceMerchantSettingsField () {
+      return this.requestCommerceMerchantSettingsField(true);
+    }
+    public APIRequestGet requestCommerceMerchantSettingsField (boolean value) {
+      this.requestField("commerce_merchant_settings", value);
       return this;
     }
     public APIRequestGet requestDaDisplaySettingsField () {
@@ -9410,6 +9545,7 @@ public class ProductCatalog extends APINode {
 
   public ProductCatalog copyFrom(ProductCatalog instance) {
     this.mBusiness = instance.mBusiness;
+    this.mCommerceMerchantSettings = instance.mCommerceMerchantSettings;
     this.mDaDisplaySettings = instance.mDaDisplaySettings;
     this.mDefaultImageUrl = instance.mDefaultImageUrl;
     this.mFallbackImageUrl = instance.mFallbackImageUrl;
