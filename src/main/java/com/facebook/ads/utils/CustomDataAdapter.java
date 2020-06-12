@@ -20,16 +20,26 @@ package com.facebook.ads.utils;
 
 import com.facebook.ads.sdk.serverside.CustomData;
 
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import com.google.gson.annotations.SerializedName;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 
 public class CustomDataAdapter implements JsonSerializer<CustomData> {
+
+    private Gson gson = new Gson();
+
+    public Gson getGsonInstance() {
+        if (gson == null) {
+            gson = new Gson();
+        }
+        return gson;
+    }
 
     @Override
     public JsonElement serialize(final CustomData src, Type typeOfSrc, final JsonSerializationContext context) {
@@ -40,7 +50,11 @@ public class CustomDataAdapter implements JsonSerializer<CustomData> {
             try {
                 field.setAccessible(true);
                 SerializedName serializedName = field.getAnnotation(SerializedName.class);
-                if (null != serializedName && null != field.get(src)) {
+
+                // Serializing Content Array
+                if (field.getName() == "contents") {
+                    serializedObject.addProperty(serializedName.value(),this.getGsonInstance().toJson(field.get(src)));
+                } else if (null != serializedName && null != field.get(src)) {
                     String propertyValue = String.valueOf(field.get(src));
 
                     // Normalizing Currency Parameter
