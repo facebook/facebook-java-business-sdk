@@ -46,6 +46,15 @@ public class Event {
   @SerializedName("custom_data")
   private CustomData customData = null;
 
+  @SerializedName("data_processing_options")
+  private String[] dataProcessingOptions = null;
+
+  @SerializedName("data_processing_options_country")
+  private Integer dataProcessingOptionsCountry = null;
+
+  @SerializedName("data_processing_options_state")
+  private Integer dataProcessingOptionsState = null;
+
   /**
    * Default Constructor.
    */
@@ -62,9 +71,12 @@ public class Event {
    * @param eventId any string chosen by the advertiser
    * @param userData UserData object that contains user info
    * @param customData customData object that includes additional business data
+   * @param dataProcessingOptions Processing options you would like to enable for a specific event.
+   * @param dataProcessingOptionsCountry country that you want to associate to this data processing option.
+   * @param dataProcessingOptionsState state that you want to associate with this data processing option.
    */
   public Event(String eventName, Long eventTime, String eventSourceUrl, Boolean optOut,
-      String eventId, UserData userData, CustomData customData) {
+      String eventId, UserData userData, CustomData customData, String[] dataProcessingOptions, Integer dataProcessingOptionsCountry, Integer dataProcessingOptionsState) {
     this.eventName = eventName;
     this.eventTime = eventTime;
     this.eventSourceUrl = eventSourceUrl;
@@ -72,6 +84,9 @@ public class Event {
     this.eventId = eventId;
     this.userData = userData;
     this.customData = customData;
+    this.dataProcessingOptions = dataProcessingOptions;
+    this.dataProcessingOptionsCountry = dataProcessingOptionsCountry;
+    this.dataProcessingOptionsState = dataProcessingOptionsState;
   }
 
   /**
@@ -284,6 +299,99 @@ public class Event {
     this.customData = customData;
   }
 
+   /**
+   * Set dataProcessingOptions Processing options you would like to enable for a specific event.
+   *
+   * @param dataProcessingOptions specfies the data processing options you would like to enable for a specific event, e.g. `new String[] {}` or `new String[] {"LDU"}`;
+   * @see <a href="https://developers.facebook.com/docs/marketing-apis/data-processing-options">Data Processing Options for the event</a>
+   * @return Event
+   */
+  public Event dataProcessingOptions(String[] dataProcessingOptions) {
+    this.dataProcessingOptions = dataProcessingOptions;
+    return this;
+  }
+
+  /**
+   * Get dataProcessingOptions
+   *
+   * @return dataProcessingOptions
+   */
+  public String[] getDataProcessingOptions() {
+    return dataProcessingOptions;
+  }
+
+  /**
+   * Set dataProcessingOptions Processing options you would like to enable for a specific event.
+   *
+   * @param dataProcessingOptions specfies the data processing options you would like to enable for a specific event, e.g. `new String[] {}` or `new String[] {"LDU"}`;
+   * @see <a href="https://developers.facebook.com/docs/marketing-apis/data-processing-options">Data Processing Options for the event</a>
+   */
+  public void setDataProcessingOptions(String[] dataProcessingOptions) {
+    this.dataProcessingOptions = dataProcessingOptions;
+  }
+
+   /**
+   * Set dataProcessingOptionsCountry for the event.
+   *
+   * @param dataProcessingOptionsCountry represents country that you want to associate to this data processing option. If you set a country, you must also set a state.
+   * @return Event
+   */
+  public Event dataProcessingOptionsCountry(Integer dataProcessingOptionsCountry) {
+    this.dataProcessingOptionsCountry = dataProcessingOptionsCountry;
+    return this;
+  }
+
+  /**
+   * Get dataProcessingOptionsCountry
+   *
+   * @return dataProcessingOptionsCountry
+   */
+  public Integer getDataProcessingOptionsCountry() {
+    return dataProcessingOptionsCountry;
+  }
+
+  /**
+   * Set dataProcessingOptionsCountry for the event.
+   *
+   * @param dataProcessingOptionsCountry represents country that you want to associate to this data processing option. If you set a country, you must also set a state.
+   * @see <a href="https://developers.facebook.com/docs/marketing-apis/data-processing-options">Data Processing Options for the event</a>
+   *
+   */
+  public void setDataProcessingOptionsCountry(Integer dataProcessingOptionsCountry) {
+    this.dataProcessingOptionsCountry = dataProcessingOptionsCountry;
+  }
+
+   /**
+   * Set dataProcessingOptionsState for the event.
+   *
+   * @param dataProcessingOptionsState represents the state that you want to associate with this data processing option.
+   * @see <a href="https://developers.facebook.com/docs/marketing-apis/data-processing-options">Data Processing Options for the event</a>
+   * @return Event
+   */
+  public Event dataProcessingOptionsState(Integer dataProcessingOptionsState) {
+    this.dataProcessingOptionsState = dataProcessingOptionsState;
+    return this;
+  }
+
+  /**
+   * Get dataProcessingOptionsState
+   *
+   * @return dataProcessingOptionsState
+   */
+  public Integer getDataProcessingOptionsState() {
+    return dataProcessingOptionsState;
+  }
+
+  /**
+   * Set dataProcessingOptionsState for the event.
+   *
+   * @param dataProcessingOptionsState represents the state that you want to associate with this data processing option.
+   * @see <a href="https://developers.facebook.com/docs/marketing-apis/data-processing-options">Data Processing Options for the event</a>
+   */
+  public void setDataProcessingOptionsState(Integer dataProcessingOptionsState) {
+    this.dataProcessingOptionsState = dataProcessingOptionsState;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -299,13 +407,16 @@ public class Event {
         && Objects.equals(this.optOut, event.optOut)
         && Objects.equals(this.eventId, event.eventId)
         && Objects.equals(this.userData, event.userData)
-        && Objects.equals(this.customData, event.customData);
+        && Objects.equals(this.customData, event.customData)
+        && Objects.equals(this.dataProcessingOptions, event.dataProcessingOptions)
+        && Objects.equals(this.dataProcessingOptionsCountry, event.dataProcessingOptionsCountry)
+        && Objects.equals(this.dataProcessingOptionsState, event.dataProcessingOptionsState);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(
-        eventName, eventTime, eventSourceUrl, optOut, eventId, userData, customData);
+        eventName, eventTime, eventSourceUrl, optOut, eventId, userData, customData, dataProcessingOptions, dataProcessingOptionsCountry, dataProcessingOptionsState);
   }
 
   @Override
@@ -320,6 +431,9 @@ public class Event {
     sb.append("    eventId: ").append(toIndentedString(eventId)).append("\n");
     sb.append("    userData: ").append(toIndentedString(userData)).append("\n");
     sb.append("    customData: ").append(toIndentedString(customData)).append("\n");
+    sb.append("    dataProcessingOptions: ").append(toIndentedString(dataProcessingOptions)).append("\n");
+    sb.append("    dataProcessingOptionsCountry: ").append(toIndentedString(dataProcessingOptionsCountry)).append("\n");
+    sb.append("    dataProcessingOptionsState: ").append(toIndentedString(dataProcessingOptionsState)).append("\n");
     sb.append("}");
     return sb.toString();
   }
