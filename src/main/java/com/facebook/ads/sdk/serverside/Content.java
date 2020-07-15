@@ -29,6 +29,14 @@ public class Content {
   private Long quantity = null;
   @SerializedName("item_price")
   private Float itemPrice = null;
+  @SerializedName("title")
+  private String title = null;
+  @SerializedName("description")
+  private String description = null;
+  @SerializedName("brand")
+  private String brand = null;
+  @SerializedName("category")
+  private String category = null;
 
   /**
    * Default Constructor.
@@ -42,11 +50,19 @@ public class Content {
    * @param productId product id
    * @param quantity number of product
    * @param itemPrice single item Price
+   * @param title product title
+   * @param description product description
+   * @param brand product brand
+   * @param category product category
    */
-  public Content(String productId, Long quantity, Float itemPrice) {
+  public Content(String productId, Long quantity, Float itemPrice, String title, String description, String brand, String category) {
     this.productId = productId;
     this.quantity = quantity;
     this.itemPrice = itemPrice;
+    this.title = title;
+    this.description = description;
+    this.brand = brand;
+    this.category = category;
   }
 
   /**
@@ -126,7 +142,7 @@ public class Content {
   }
 
   /**
-   * Get Item Price.
+   * Set Item Price.
    *
    * @param itemPrice single item price
    * @return Content
@@ -136,12 +152,132 @@ public class Content {
     return this;
   }
 
+  /**
+   * Get title.
+   *
+   * @return title
+   */
+  public String getTitle() {
+    return title;
+  }
+
+  /**
+   * Set title
+   *
+   * @param title Title
+   */
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  /**
+   * Set Title
+   *
+   * @param title Title
+   * @return Content
+   */
+  public Content title(String title) {
+    this.title = title;
+    return this;
+  }
+
+  /**
+   * Get description.
+   *
+   * @return description
+   */
+  public String getDescription() {
+    return description;
+  }
+
+  /**
+   * Set description
+   *
+   * @param description Description
+   */
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  /**
+   * Set description
+   *
+   * @param description Description
+   * @return Content
+   */
+  public Content description(String description) {
+    this.description = description;
+    return this;
+  }
+
+  /**
+   * Get brand.
+   *
+   * @return brand
+   */
+  public String getBrand() {
+    return brand;
+  }
+
+  /**
+   * Set brand
+   *
+   * @param brand Brand
+   */
+  public void setBrand(String brand) {
+    this.brand = brand;
+  }
+
+  /**
+   * Set brand
+   *
+   * @param brand Brand
+   * @return Content
+   */
+  public Content brand(String brand) {
+    this.brand = brand;
+    return this;
+  }
+
+  /**
+   * Get category.
+   *
+   * @return category
+   */
+  public String getCategory() {
+    return category;
+  }
+
+  /**
+   * Set category
+   *
+   * @param category Category
+   */
+  public void setCategory(String category) {
+    this.category = category;
+  }
+
+  /**
+   * Set category
+   *
+   * @param category Category
+   * @return Content
+   */
+  public Content category(String category) {
+    this.category = category;
+    return this;
+  }
+
   @Override
   public int hashCode() {
     return Objects.hash(
         productId,
         quantity,
-        itemPrice);
+        itemPrice,
+        title,
+        description,
+        brand,
+        category);
   }
 
   @Override
@@ -152,6 +288,10 @@ public class Content {
     sb.append("    productId: ").append(toIndentedString(productId)).append("\n");
     sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
     sb.append("    itemPrice: ").append(toIndentedString(itemPrice)).append("\n");
+    sb.append("    title: ").append(toIndentedString(title)).append("\n");
+    sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    brand: ").append(toIndentedString(brand)).append("\n");
+    sb.append("    category: ").append(toIndentedString(category)).append("\n");
     sb.append("}");
     return sb.toString();
   }
