@@ -64,6 +64,9 @@ public class CustomData {
   @SerializedName("search_string")
   private String searchString = null;
 
+  @SerializedName("item_number")
+  private String itemNumber = null;
+
   private HashMap<String, String> customProperties = null;
 
   /**
@@ -88,12 +91,14 @@ public class CustomData {
    * @param numItems number of items that a user tries to buy during checkout
    * @param status status of the registration event
    * @param searchString a search query made by a user
+   * @param itemNumber the item number
    * @param customProperties Custom Properties to be added to the Custom Data
    */
   public CustomData(Float value, String currency, String contentName,
       String contentCategory, List<String> contentIds,
       List<Content> contents, String contentType, String orderId, Float predictedLtv,
-      String numItems, String status, String searchString, HashMap<String, String> customProperties) {
+      String numItems, String status, String searchString, String itemNumber,
+      HashMap<String, String> customProperties) {
     this.value = value;
     this.currency = currency;
     this.contentName = contentName;
@@ -106,6 +111,7 @@ public class CustomData {
     this.numItems = numItems;
     this.status = status;
     this.searchString = searchString;
+    this.itemNumber = itemNumber;
     this.customProperties = customProperties;
   }
 
@@ -532,6 +538,35 @@ public class CustomData {
   }
 
   /**
+   * Set the item number
+   *
+   * @param itemNumber Item number
+   * @return CustomData
+   */
+  public CustomData itemNumber(String itemNumber) {
+    this.itemNumber = itemNumber;
+    return this;
+  }
+
+  /**
+   * Get the item number
+   *
+   * @return itemNumber
+   */
+  public String getItemNumber() {
+    return itemNumber;
+  }
+
+  /**
+   * Set the item number
+   *
+   * @param itemNumber Item number
+   */
+  public void setItemNumber(String itemNumber) {
+    this.itemNumber = itemNumber;
+  }
+
+  /**
    * Gets the custom properties to be included in the Custom Data.
    * If our predefined object properties don't suit your needs, you can include your own, custom properties.
    * Custom properties can be used with both standard and custom events, and can help you further define custom audiences.
@@ -588,6 +623,7 @@ public class CustomData {
         && Objects.equals(this.numItems, customData.numItems)
         && Objects.equals(this.status, customData.status)
         && Objects.equals(this.searchString, customData.searchString)
+        && Objects.equals(this.itemNumber, customData.itemNumber)
         && Objects.equals(this.customProperties, customData.customProperties);
   }
 
@@ -606,6 +642,7 @@ public class CustomData {
         numItems,
         status,
         searchString,
+        itemNumber,
         customProperties);
   }
 
@@ -626,6 +663,7 @@ public class CustomData {
     sb.append("    numItems: ").append(toIndentedString(numItems)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    searchString: ").append(toIndentedString(searchString)).append("\n");
+    sb.append("    itemNumber: ").append(toIndentedString(itemNumber)).append("\n");
     sb.append("    customProperties: ").append(toIndentedString(customProperties)).append("\n");
     sb.append("}");
     return sb.toString();
