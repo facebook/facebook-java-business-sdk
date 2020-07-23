@@ -49,6 +49,18 @@ public class EventRequest {
   @SerializedName("partner_agent")
   private String partnerAgent = null;
 
+  @SerializedName("namespace_id")
+  private String namespaceId = null;
+
+  @SerializedName("upload_id")
+  private String uploadId = null;
+
+  @SerializedName("upload_tag")
+  private String uploadTag = null;
+
+  @SerializedName("upload_source")
+  private String uploadSource = null;
+
   private String pixelId;
   private APIContext context;
 
@@ -71,15 +83,24 @@ public class EventRequest {
    * @param data list of event
    * @param testEventCode code used to verify that your server events are received correctly by
    * @param partnerAgent A value that represents the platform that is sending the event
+   * @param namespaceId Scope used to resolve extern_id or Third-party ID. Can be another data set or data partner ID.
+   * @param uploadId Unique id used to denote the current set being uploaded.
+   * @param uploadTag Tag string added to track your Offline event uploads.
+   * @param uploadSource The origin/source of data for the dataset to be uploaded.
    * Facebook
    */
   public EventRequest(String pixelId, APIContext context, List<Event> data,
-      String testEventCode, String partnerAgent) {
+                      String testEventCode, String partnerAgent, String namespaceId, String uploadId,
+                      String uploadTag, String uploadSource) {
     this.data = data;
     this.testEventCode = testEventCode;
     this.partnerAgent = partnerAgent;
     this.pixelId = pixelId;
     this.context = context;
+    this.namespaceId = namespaceId;
+    this.uploadId = uploadId;
+    this.uploadTag = uploadTag;
+    this.uploadSource = uploadSource;
   }
 
   static /*package*/ synchronized Gson getGson() {
@@ -136,6 +157,123 @@ public class EventRequest {
    */
   public void setData(List<Event> data) {
     this.data = data;
+  }
+
+  /**
+   * The namespace id is a scope used to resolve extern_id or Third-party ID.
+   * Can be another data set or data partner ID.
+   *
+   * @return namespaceId
+   */
+  public String getNamespaceId() {
+    return namespaceId;
+  }
+
+  /**
+   * Set namespace id
+   *
+   * @param namespaceId Scope used to resolve extern_id or Third-party ID. Can be another data set or data partner ID.
+   */
+  public void setNamespaceId(String namespaceId) {
+    this.namespaceId = namespaceId;
+  }
+
+  /**
+   * Set namespace id
+   *
+   * @param namespaceId Scope used to resolve extern_id or Third-party ID. Can be another data set or data partner ID.
+   * @return EventRequest
+   */
+  public EventRequest namespaceId(String namespaceId) {
+    this.namespaceId = namespaceId;
+    return this;
+  }
+
+  /**
+   * The upload id is a unique id used to denote the current set being uploaded.
+   *
+   * @return uploadId
+   */
+  public String getUploadId() {
+    return uploadId;
+  }
+
+  /**
+   * Set upload id
+   *
+   * @param uploadId Unique id used to denote the current set being uploaded.
+   */
+  public void setUploadId(String uploadId) {
+    this.uploadId = uploadId;
+  }
+
+  /**
+   * Set upload id
+   *
+   * @param uploadId Unique id used to denote the current set being uploaded.
+   * @return EventRequest
+   */
+  public EventRequest uploadId(String uploadId) {
+    this.uploadId = uploadId;
+    return this;
+  }
+
+  /**
+   * The upload tag is a tag string added to track your Offline event uploads.
+   *
+   * @return uploadTag
+   */
+  public String getUploadTag() {
+    return uploadTag;
+  }
+
+  /**
+   * Set upload tag
+   *
+   * @param uploadTag Tag string added to track your Offline event uploads.
+   */
+  public void setUploadTag(String uploadTag) {
+    this.uploadTag = uploadTag;
+  }
+
+  /**
+   * Set upload tag
+   *
+   * @param uploadTag Tag string added to track your Offline event uploads.
+   * @return EventRequest
+   */
+  public EventRequest uploadTag(String uploadTag) {
+    this.uploadTag = uploadTag;
+    return this;
+  }
+
+  /**
+   * The upload source is the origin/source of data for the dataset to be uploaded.
+   *
+   * @return uploadSource
+   */
+  public String getUploadSource() {
+    return uploadSource;
+  }
+
+  /**
+   * Set upload source
+   *
+   * @param uploadSource The origin/source of data for the dataset to be uploaded.
+   */
+  public void setUploadSource(String uploadSource) {
+    this.uploadSource = uploadSource;
+  }
+
+  /**
+   * Set upload source
+   *
+   * @param uploadSource The origin/source of data for the dataset to be uploaded.
+   * @return EventRequest
+   */
+  public EventRequest uploadSource(String uploadSource) {
+    this.uploadSource = uploadSource;
+    return this;
   }
 
   /**
@@ -272,6 +410,18 @@ public class EventRequest {
     }
     if (getPartnerAgent() != null) {
       event.setPartnerAgent(getPartnerAgent());
+    }
+    if (getNamespaceId() != null) {
+      event.setNamespaceId(getNamespaceId());
+    }
+    if (getUploadId() != null) {
+      event.setUploadId(getUploadId());
+    }
+    if (getUploadTag() != null) {
+      event.setUploadTag(getUploadTag());
+    }
+    if (getUploadSource() != null) {
+      event.setUploadSource(getUploadSource());
     }
     return event;
   }
