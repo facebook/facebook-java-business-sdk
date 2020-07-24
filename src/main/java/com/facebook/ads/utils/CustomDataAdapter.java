@@ -51,18 +51,16 @@ public class CustomDataAdapter implements JsonSerializer<CustomData> {
                 field.setAccessible(true);
                 SerializedName serializedName = field.getAnnotation(SerializedName.class);
 
-                // Serializing Content Array
-                if (field.getName() == "contents") {
-                    serializedObject.addProperty(serializedName.value(),this.getGsonInstance().toJson(field.get(src)));
-                } else if (null != serializedName && null != field.get(src)) {
-                    String propertyValue = String.valueOf(field.get(src));
+                // Serializing custom_data fields
+                if (null != serializedName && null != field.get(src)) {
 
                     // Normalizing Currency Parameter
                     if (field.getName() == ServerSideApiConstants.CURRENCY) {
-                        propertyValue = ServerSideApiUtil.normalize(propertyValue, ServerSideApiConstants.CURRENCY);
+                        String normalizedCurrency = ServerSideApiUtil.normalize(String.valueOf(field.get(src)), ServerSideApiConstants.CURRENCY);
+                        serializedObject.addProperty(serializedName.value(), normalizedCurrency);
+                    } else {
+                        serializedObject.add(serializedName.value(),this.getGsonInstance().toJsonTree(field.get(src)));
                     }
-
-                    serializedObject.addProperty(serializedName.value(), propertyValue);
                 }
             } catch (IllegalAccessException ex) {
                 ex.printStackTrace();

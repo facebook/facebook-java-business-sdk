@@ -36,9 +36,8 @@ import java.util.List;
 
 
 public class ServerSideTest {
-
   @Test
-  public void CustomPropertiesTest() {
+  public void CustomDataParametersTest() {
 
     // ARRANGE
     APIContext context = new APIContext("ACCESS_TOKEN").enableDebug(true);
@@ -50,14 +49,32 @@ public class ServerSideTest {
     customProperties.put("Key1", "Value1");
     customProperties.put("Key2", "Value2");
 
+    List<Content> contents = new ArrayList<Content>();
+    contents.add(new Content().productId("1").brand("brandA"));
+    contents.add(new Content().productId("2").brand("brandB"));
+
+    List<String> contentIds = new ArrayList<String>();
+    contentIds.add("123");
+    contentIds.add("456");
+
+    String contentCategory = "content_categoryA";
+    String contentName = "content_nameA";
+    String currency = "USD";
+
     CustomData customData = new CustomData()
+            .contentIds(contentIds)
             .customProperties(customProperties)
+            .contents(contents)
+            .contentCategory(contentCategory)
+            .contentName(contentName)
+            .currency(currency)
             .value(123.45F);
 
     Event testEvent = new Event();
     testEvent.eventName("Purchase")
             .eventTime(System.currentTimeMillis() / 1000L)
             .userData(userData)
+            .dataProcessingOptions(new String[]{})
             .customData(customData);
 
     EventRequest eventRequest = new EventRequest("123", context);
@@ -68,7 +85,14 @@ public class ServerSideTest {
 
     // ASSERT
     String cpString = (new Gson()).toJson(customProperties);
+    String serializedContents = (new Gson()).toJson(contents);
+    String serializedContentIds = (new Gson()).toJson(contentIds);
     Assert.assertTrue(serializedPayload.contains(cpString.substring(1, cpString.length() - 1)));
+    Assert.assertTrue(serializedPayload.contains(serializedContents));
+    Assert.assertTrue(serializedPayload.contains(serializedContentIds));
+    Assert.assertTrue(serializedPayload.contains(currency.toLowerCase()));
+    Assert.assertTrue(serializedPayload.contains(contentCategory));
+    Assert.assertTrue(serializedPayload.contains(contentName));
   }
 }
 
