@@ -74,33 +74,33 @@
      token = token.trim().toLowerCase();
      String result = token;
 
-     if(ServerSideApiConstants.EMAIL.equals(fieldName)){
-         result = validateEmail(token);
-         }
-
-       else if(ServerSideApiConstants.PHONE_NUMBER.equals(fieldName)) {
-         result = normalizePhoneNumber(token);
-         }
-
-       else if(ServerSideApiConstants.ZIP_CODE.equals(fieldName)) {
-         result = normalizePostalCode(token);
-         }
-
-       else if( ServerSideApiConstants.CITY.equals(fieldName)){
-         result = normalizeCity(token);
-         }
-
-       else if(ServerSideApiConstants.COUNTRY.equals(fieldName)) {
-         result = normalizeCountry(token);
-         }
-
-       else if(ServerSideApiConstants.STATE.equals(fieldName)) {
-         result = normalizeState(token);
-         }
-
-       else if(ServerSideApiConstants.CURRENCY.equals(fieldName)) {
-         result = normalizeCurrency(token);
-         }
+     if(ServerSideApiConstants.EMAIL.equals(fieldName)) {
+       result = validateEmail(token);
+     } else if (ServerSideApiConstants.PHONE_NUMBER.equals(fieldName)) {
+       result = normalizePhoneNumber(token);
+     } else if (ServerSideApiConstants.ZIP_CODE.equals(fieldName)) {
+       result = normalizePostalCode(token);
+     } else if (ServerSideApiConstants.CITY.equals(fieldName)) {
+       result = normalizeCity(token);
+     } else if (ServerSideApiConstants.COUNTRY.equals(fieldName)) {
+       result = normalizeCountry(token);
+     } else if (ServerSideApiConstants.STATE.equals(fieldName)) {
+       result = normalizeState(token);
+     } else if (ServerSideApiConstants.CURRENCY.equals(fieldName)) {
+       result = normalizeCurrency(token);
+     } else if (ServerSideApiConstants.F5FIRST.equals(fieldName)) {
+       result = normalizeF5name(token);
+     } else if (ServerSideApiConstants.F5LAST.equals(fieldName)) {
+       result = normalizeF5name(token);
+     } else if (ServerSideApiConstants.FI.equals(fieldName)) {
+       result = normalizeFi(token);
+     } else if (ServerSideApiConstants.DOBD.equals(fieldName)) {
+       result = normalizeDobd(token);
+     } else if (ServerSideApiConstants.DOBM.equals(fieldName)) {
+       result = normalizeDobm(token);
+     } else if (ServerSideApiConstants.DOBY.equals(fieldName)) {
+       result = normalizeDoby(token);
+     }
 
      return result;
    }
@@ -183,6 +183,48 @@
      // Also for US, It should be 2 Character codes.
      state = state.replaceAll("[^a-z]", "");
      return state;
+   }
+
+   private static String normalizeF5name(String name) {
+     return name.substring(0, Math.min(5, name.length()));
+   }
+
+   private static String normalizeFi(String token) {
+     if (token.length() > 1) {
+       token = token.substring(0, 1);
+     }
+
+     return token;
+   }
+
+   private static String normalizeDobd(String dobd) {
+     if (dobd.length() == 1) {
+       dobd = "0" + dobd;
+     }
+     if (dobd.length() > 2 || dobd.compareTo("01") < 0 || dobd.compareTo("31") > 0) {
+       throw new IllegalArgumentException("Invalid dobd: '" + dobd + "'. Please specify the day in 'DD' format.");
+     }
+
+     return dobd;
+   }
+
+   private static String normalizeDobm(String dobm) {
+     if (dobm.length() == 1) {
+       dobm = "0" + dobm;
+     }
+     if (dobm.length() > 2 || dobm.compareTo("01") < 0 || dobm.compareTo("12") > 0) {
+       throw new IllegalArgumentException("Invalid dobm: '" + dobm + "'. Please specify the month in 'MM' format.");
+     }
+
+     return dobm;
+   }
+
+   private static String normalizeDoby(String doby) {
+     if (!doby.matches("^[0-9]{4}$")) {
+       throw new IllegalArgumentException("Invalid doby: '" + doby + "'. Please specify the year in 'YYYY' format.");
+     }
+
+     return doby;
    }
 
    /**

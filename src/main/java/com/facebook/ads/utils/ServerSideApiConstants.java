@@ -56,4 +56,16 @@ public class ServerSideApiConstants {
     public static final String FB_LOGIN_ID = "fb_login_id";
 
     public static final String LEAD_ID = "lead_id";
+
+    public static final String F5FIRST = "f5first";
+
+    public static final String F5LAST = "f5last";
+
+    public static final String FI = "fi";
+
+    public static final String DOBD = "dobd";
+
+    public static final String DOBM = "dobm";
+
+    public static final String DOBY = "doby";
 }
