@@ -68,6 +68,7 @@ public class ServerSideTest {
             .contentCategory(contentCategory)
             .contentName(contentName)
             .currency(currency)
+            .deliveryCategory(DeliveryCategory.curbside)
             .value(123.45F);
 
     Event testEvent = new Event();
@@ -93,6 +94,6 @@ public class ServerSideTest {
     Assert.assertTrue(serializedPayload.contains(currency.toLowerCase()));
     Assert.assertTrue(serializedPayload.contains(contentCategory));
     Assert.assertTrue(serializedPayload.contains(contentName));
+    Assert.assertTrue(serializedPayload.contains(DeliveryCategory.curbside.toString()));
   }
 }
-
