@@ -476,10 +476,6 @@ public class User extends APINode {
     return new APIRequestCreateFeed(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetFriendLists getFriendLists() {
-    return new APIRequestGetFriendLists(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetFriends getFriends() {
     return new APIRequestGetFriends(this.getPrefixedId().toString(), context);
   }
@@ -530,6 +526,14 @@ public class User extends APINode {
 
   public APIRequestCreateLiveVideo createLiveVideo() {
     return new APIRequestCreateLiveVideo(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetMeetingLink getMeetingLink() {
+    return new APIRequestGetMeetingLink(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateMeetingLink createMeetingLink() {
+    return new APIRequestCreateMeetingLink(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetMusic getMusic() {
@@ -7560,6 +7564,8 @@ public class User extends APINode {
       "maybe_count",
       "name",
       "noreply_count",
+      "online_event_format",
+      "online_event_third_party_url",
       "owner",
       "parent_group",
       "place",
@@ -7812,6 +7818,20 @@ public class User extends APINode {
     }
     public APIRequestGetEvents requestNoreplyCountField (boolean value) {
       this.requestField("noreply_count", value);
+      return this;
+    }
+    public APIRequestGetEvents requestOnlineEventFormatField () {
+      return this.requestOnlineEventFormatField(true);
+    }
+    public APIRequestGetEvents requestOnlineEventFormatField (boolean value) {
+      this.requestField("online_event_format", value);
+      return this;
+    }
+    public APIRequestGetEvents requestOnlineEventThirdPartyUrlField () {
+      return this.requestOnlineEventThirdPartyUrlField(true);
+    }
+    public APIRequestGetEvents requestOnlineEventThirdPartyUrlField (boolean value) {
+      this.requestField("online_event_third_party_url", value);
       return this;
     }
     public APIRequestGetEvents requestOwnerField () {
@@ -8914,142 +8934,6 @@ public class User extends APINode {
       return this;
     }
 
-  }
-
-  public static class APIRequestGetFriendLists extends APIRequest<FriendList> {
-
-    APINodeList<FriendList> lastResponse = null;
-    @Override
-    public APINodeList<FriendList> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "id",
-      "list_type",
-      "name",
-      "owner",
-    };
-
-    @Override
-    public APINodeList<FriendList> parseResponse(String response, String header) throws APIException {
-      return FriendList.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<FriendList> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<FriendList> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<FriendList>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<FriendList>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<FriendList>>() {
-           public APINodeList<FriendList> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetFriendLists.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetFriendLists(String nodeId, APIContext context) {
-      super(context, nodeId, "/friendlists", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetFriendLists setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetFriendLists setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetFriendLists requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetFriendLists requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetFriendLists requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetFriendLists requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetFriendLists requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetFriendLists requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetFriendLists requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetFriendLists requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetFriendLists requestListTypeField () {
-      return this.requestListTypeField(true);
-    }
-    public APIRequestGetFriendLists requestListTypeField (boolean value) {
-      this.requestField("list_type", value);
-      return this;
-    }
-    public APIRequestGetFriendLists requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetFriendLists requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetFriendLists requestOwnerField () {
-      return this.requestOwnerField(true);
-    }
-    public APIRequestGetFriendLists requestOwnerField (boolean value) {
-      this.requestField("owner", value);
-      return this;
-    }
   }
 
   public static class APIRequestGetFriends extends APIRequest<User> {
@@ -13114,6 +12998,230 @@ public class User extends APINode {
 
   }
 
+  public static class APIRequestGetMeetingLink extends APIRequest<WorkMeetingLink> {
+
+    APINodeList<WorkMeetingLink> lastResponse = null;
+    @Override
+    public APINodeList<WorkMeetingLink> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "id",
+      "owner",
+    };
+
+    @Override
+    public APINodeList<WorkMeetingLink> parseResponse(String response, String header) throws APIException {
+      return WorkMeetingLink.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<WorkMeetingLink> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<WorkMeetingLink> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<WorkMeetingLink>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<WorkMeetingLink>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<WorkMeetingLink>>() {
+           public APINodeList<WorkMeetingLink> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetMeetingLink.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetMeetingLink(String nodeId, APIContext context) {
+      super(context, nodeId, "/meeting_link", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetMeetingLink setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMeetingLink setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetMeetingLink requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetMeetingLink requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMeetingLink requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetMeetingLink requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMeetingLink requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMeetingLink requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetMeetingLink requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetMeetingLink requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetMeetingLink requestOwnerField () {
+      return this.requestOwnerField(true);
+    }
+    public APIRequestGetMeetingLink requestOwnerField (boolean value) {
+      this.requestField("owner", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreateMeetingLink extends APIRequest<WorkMeetingLink> {
+
+    WorkMeetingLink lastResponse = null;
+    @Override
+    public WorkMeetingLink getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public WorkMeetingLink parseResponse(String response, String header) throws APIException {
+      return WorkMeetingLink.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public WorkMeetingLink execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public WorkMeetingLink execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<WorkMeetingLink> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<WorkMeetingLink> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, WorkMeetingLink>() {
+           public WorkMeetingLink apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateMeetingLink.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateMeetingLink(String nodeId, APIContext context) {
+      super(context, nodeId, "/meeting_link", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateMeetingLink setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMeetingLink setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateMeetingLink requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateMeetingLink requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMeetingLink requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateMeetingLink requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMeetingLink requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMeetingLink requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetMusic extends APIRequest<Page> {
 
     APINodeList<Page> lastResponse = null;
@@ -16240,6 +16348,7 @@ public class User extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "breaking_change",
       "height",
       "redirect",
       "type",
@@ -16310,6 +16419,15 @@ public class User extends APINode {
       return this;
     }
 
+
+    public APIRequestGetPicture setBreakingChange (ProfilePictureSource.EnumBreakingChange breakingChange) {
+      this.setParam("breaking_change", breakingChange);
+      return this;
+    }
+    public APIRequestGetPicture setBreakingChange (String breakingChange) {
+      this.setParam("breaking_change", breakingChange);
+      return this;
+    }
 
     public APIRequestGetPicture setHeight (Long height) {
       this.setParam("height", height);
@@ -17353,6 +17471,7 @@ public class User extends APINode {
       "composer_type",
       "container_type",
       "content_category",
+      "creative_tools",
       "description",
       "direct_share_status",
       "embeddable",
@@ -17411,6 +17530,7 @@ public class User extends APINode {
       "upload_session_id",
       "upload_setting_properties",
       "video_file_chunk",
+      "video_id_original",
       "video_start_time_ms",
       "waterfall_id",
     };
@@ -17563,6 +17683,11 @@ public class User extends APINode {
     }
     public APIRequestCreateVideo setContentCategory (String contentCategory) {
       this.setParam("content_category", contentCategory);
+      return this;
+    }
+
+    public APIRequestCreateVideo setCreativeTools (String creativeTools) {
+      this.setParam("creative_tools", creativeTools);
       return this;
     }
 
@@ -17989,6 +18114,11 @@ public class User extends APINode {
 
     public APIRequestCreateVideo setVideoFileChunk (String videoFileChunk) {
       this.setParam("video_file_chunk", videoFileChunk);
+      return this;
+    }
+
+    public APIRequestCreateVideo setVideoIdOriginal (String videoIdOriginal) {
+      this.setParam("video_id_original", videoIdOriginal);
       return this;
     }
 

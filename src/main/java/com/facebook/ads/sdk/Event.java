@@ -93,6 +93,10 @@ public class Event extends APINode {
   private String mName = null;
   @SerializedName("noreply_count")
   private Long mNoreplyCount = null;
+  @SerializedName("online_event_format")
+  private EnumOnlineEventFormat mOnlineEventFormat = null;
+  @SerializedName("online_event_third_party_url")
+  private String mOnlineEventThirdPartyUrl = null;
   @SerializedName("owner")
   private Object mOwner = null;
   @SerializedName("parent_group")
@@ -441,6 +445,14 @@ public class Event extends APINode {
 
   public Long getFieldNoreplyCount() {
     return mNoreplyCount;
+  }
+
+  public EnumOnlineEventFormat getFieldOnlineEventFormat() {
+    return mOnlineEventFormat;
+  }
+
+  public String getFieldOnlineEventThirdPartyUrl() {
+    return mOnlineEventThirdPartyUrl;
   }
 
   public Object getFieldOwner() {
@@ -1747,6 +1759,8 @@ public class Event extends APINode {
       "maybe_count",
       "name",
       "noreply_count",
+      "online_event_format",
+      "online_event_third_party_url",
       "owner",
       "parent_group",
       "place",
@@ -1983,6 +1997,20 @@ public class Event extends APINode {
       this.requestField("noreply_count", value);
       return this;
     }
+    public APIRequestGet requestOnlineEventFormatField () {
+      return this.requestOnlineEventFormatField(true);
+    }
+    public APIRequestGet requestOnlineEventFormatField (boolean value) {
+      this.requestField("online_event_format", value);
+      return this;
+    }
+    public APIRequestGet requestOnlineEventThirdPartyUrlField () {
+      return this.requestOnlineEventThirdPartyUrlField(true);
+    }
+    public APIRequestGet requestOnlineEventThirdPartyUrlField (boolean value) {
+      this.requestField("online_event_third_party_url", value);
+      return this;
+    }
     public APIRequestGet requestOwnerField () {
       return this.requestOwnerField(true);
     }
@@ -2134,9 +2162,36 @@ public class Event extends APINode {
       }
   }
 
+  public static enum EnumOnlineEventFormat {
+      @SerializedName("fb_live")
+      VALUE_FB_LIVE("fb_live"),
+      @SerializedName("messenger_room")
+      VALUE_MESSENGER_ROOM("messenger_room"),
+      @SerializedName("none")
+      VALUE_NONE("none"),
+      @SerializedName("other")
+      VALUE_OTHER("other"),
+      @SerializedName("third_party")
+      VALUE_THIRD_PARTY("third_party"),
+      ;
+
+      private String value;
+
+      private EnumOnlineEventFormat(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumType {
       @SerializedName("community")
       VALUE_COMMUNITY("community"),
+      @SerializedName("friends")
+      VALUE_FRIENDS("friends"),
       @SerializedName("group")
       VALUE_GROUP("group"),
       @SerializedName("private")
@@ -2233,6 +2288,8 @@ public class Event extends APINode {
     this.mMaybeCount = instance.mMaybeCount;
     this.mName = instance.mName;
     this.mNoreplyCount = instance.mNoreplyCount;
+    this.mOnlineEventFormat = instance.mOnlineEventFormat;
+    this.mOnlineEventThirdPartyUrl = instance.mOnlineEventThirdPartyUrl;
     this.mOwner = instance.mOwner;
     this.mParentGroup = instance.mParentGroup;
     this.mPlace = instance.mPlace;

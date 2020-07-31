@@ -399,6 +399,8 @@ public class EventTour extends APINode {
       "maybe_count",
       "name",
       "noreply_count",
+      "online_event_format",
+      "online_event_third_party_url",
       "owner",
       "parent_group",
       "place",
@@ -633,6 +635,20 @@ public class EventTour extends APINode {
     }
     public APIRequestGetEvents requestNoreplyCountField (boolean value) {
       this.requestField("noreply_count", value);
+      return this;
+    }
+    public APIRequestGetEvents requestOnlineEventFormatField () {
+      return this.requestOnlineEventFormatField(true);
+    }
+    public APIRequestGetEvents requestOnlineEventFormatField (boolean value) {
+      this.requestField("online_event_format", value);
+      return this;
+    }
+    public APIRequestGetEvents requestOnlineEventThirdPartyUrlField () {
+      return this.requestOnlineEventThirdPartyUrlField(true);
+    }
+    public APIRequestGetEvents requestOnlineEventThirdPartyUrlField (boolean value) {
+      this.requestField("online_event_third_party_url", value);
       return this;
     }
     public APIRequestGetEvents requestOwnerField () {

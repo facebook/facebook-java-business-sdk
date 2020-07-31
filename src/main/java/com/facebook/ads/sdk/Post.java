@@ -5835,6 +5835,8 @@ public class Post extends APINode {
       VALUE_SEE_MORE("SEE_MORE"),
       @SerializedName("SELL_NOW")
       VALUE_SELL_NOW("SELL_NOW"),
+      @SerializedName("SEND_A_GIFT")
+      VALUE_SEND_A_GIFT("SEND_A_GIFT"),
       @SerializedName("SHARE")
       VALUE_SHARE("SHARE"),
       @SerializedName("SHOP_NOW")

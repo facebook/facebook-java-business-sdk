@@ -54,29 +54,27 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ClientTransparencyStatus extends APINode {
-  @SerializedName("grace_period_expiration_date")
-  private String mGracePeriodExpirationDate = null;
-  @SerializedName("has_owning_business")
-  private Boolean mHasOwningBusiness = null;
-  @SerializedName("is_satisfied")
-  private Boolean mIsSatisfied = null;
-  @SerializedName("owning_business_requirements")
-  private Object mOwningBusinessRequirements = null;
+public class ProductSetMetadata extends APINode {
+  @SerializedName("cover_image_url")
+  private String mCoverImageUrl = null;
+  @SerializedName("description")
+  private String mDescription = null;
+  @SerializedName("integrity_review_status")
+  private String mIntegrityReviewStatus = null;
   protected static Gson gson = null;
 
-  public ClientTransparencyStatus() {
+  public ProductSetMetadata() {
   }
 
   public String getId() {
     return null;
   }
-  public static ClientTransparencyStatus loadJSON(String json, APIContext context, String header) {
-    ClientTransparencyStatus clientTransparencyStatus = getGson().fromJson(json, ClientTransparencyStatus.class);
+  public static ProductSetMetadata loadJSON(String json, APIContext context, String header) {
+    ProductSetMetadata productSetMetadata = getGson().fromJson(json, ProductSetMetadata.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(clientTransparencyStatus.toString());
+      JsonElement o2 = parser.parse(productSetMetadata.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -86,14 +84,14 @@ public class ClientTransparencyStatus extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    clientTransparencyStatus.context = context;
-    clientTransparencyStatus.rawValue = json;
-    clientTransparencyStatus.header = header;
-    return clientTransparencyStatus;
+    productSetMetadata.context = context;
+    productSetMetadata.rawValue = json;
+    productSetMetadata.header = header;
+    return productSetMetadata;
   }
 
-  public static APINodeList<ClientTransparencyStatus> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ClientTransparencyStatus> clientTransparencyStatuss = new APINodeList<ClientTransparencyStatus>(request, json, header);
+  public static APINodeList<ProductSetMetadata> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ProductSetMetadata> productSetMetadatas = new APINodeList<ProductSetMetadata>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -104,9 +102,9 @@ public class ClientTransparencyStatus extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          clientTransparencyStatuss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          productSetMetadatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return clientTransparencyStatuss;
+        return productSetMetadatas;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -116,20 +114,20 @@ public class ClientTransparencyStatus extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                clientTransparencyStatuss.setCursors(before, after);
+                productSetMetadatas.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            clientTransparencyStatuss.setPaging(previous, next);
+            productSetMetadatas.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              clientTransparencyStatuss.setAppSecret(context.getAppSecretProof());
+              productSetMetadatas.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              clientTransparencyStatuss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              productSetMetadatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -140,23 +138,23 @@ public class ClientTransparencyStatus extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  clientTransparencyStatuss.add(loadJSON(entry.getValue().toString(), context, header));
+                  productSetMetadatas.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              clientTransparencyStatuss.add(loadJSON(obj.toString(), context, header));
+              productSetMetadatas.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return clientTransparencyStatuss;
+          return productSetMetadatas;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              clientTransparencyStatuss.add(loadJSON(entry.getValue().toString(), context, header));
+              productSetMetadatas.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return clientTransparencyStatuss;
+          return productSetMetadatas;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -173,20 +171,20 @@ public class ClientTransparencyStatus extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              clientTransparencyStatuss.add(loadJSON(value.toString(), context, header));
+              productSetMetadatas.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return clientTransparencyStatuss;
+            return productSetMetadatas;
           }
 
           // Sixth, check if it's pure JsonObject
-          clientTransparencyStatuss.clear();
-          clientTransparencyStatuss.add(loadJSON(json, context, header));
-          return clientTransparencyStatuss;
+          productSetMetadatas.clear();
+          productSetMetadatas.add(loadJSON(json, context, header));
+          return productSetMetadatas;
         }
       }
     } catch (Exception e) {
@@ -214,39 +212,30 @@ public class ClientTransparencyStatus extends APINode {
   }
 
 
-  public String getFieldGracePeriodExpirationDate() {
-    return mGracePeriodExpirationDate;
+  public String getFieldCoverImageUrl() {
+    return mCoverImageUrl;
   }
 
-  public ClientTransparencyStatus setFieldGracePeriodExpirationDate(String value) {
-    this.mGracePeriodExpirationDate = value;
+  public ProductSetMetadata setFieldCoverImageUrl(String value) {
+    this.mCoverImageUrl = value;
     return this;
   }
 
-  public Boolean getFieldHasOwningBusiness() {
-    return mHasOwningBusiness;
+  public String getFieldDescription() {
+    return mDescription;
   }
 
-  public ClientTransparencyStatus setFieldHasOwningBusiness(Boolean value) {
-    this.mHasOwningBusiness = value;
+  public ProductSetMetadata setFieldDescription(String value) {
+    this.mDescription = value;
     return this;
   }
 
-  public Boolean getFieldIsSatisfied() {
-    return mIsSatisfied;
+  public String getFieldIntegrityReviewStatus() {
+    return mIntegrityReviewStatus;
   }
 
-  public ClientTransparencyStatus setFieldIsSatisfied(Boolean value) {
-    this.mIsSatisfied = value;
-    return this;
-  }
-
-  public Object getFieldOwningBusinessRequirements() {
-    return mOwningBusinessRequirements;
-  }
-
-  public ClientTransparencyStatus setFieldOwningBusinessRequirements(Object value) {
-    this.mOwningBusinessRequirements = value;
+  public ProductSetMetadata setFieldIntegrityReviewStatus(String value) {
+    this.mIntegrityReviewStatus = value;
     return this;
   }
 
@@ -266,20 +255,19 @@ public class ClientTransparencyStatus extends APINode {
     return gson;
   }
 
-  public ClientTransparencyStatus copyFrom(ClientTransparencyStatus instance) {
-    this.mGracePeriodExpirationDate = instance.mGracePeriodExpirationDate;
-    this.mHasOwningBusiness = instance.mHasOwningBusiness;
-    this.mIsSatisfied = instance.mIsSatisfied;
-    this.mOwningBusinessRequirements = instance.mOwningBusinessRequirements;
+  public ProductSetMetadata copyFrom(ProductSetMetadata instance) {
+    this.mCoverImageUrl = instance.mCoverImageUrl;
+    this.mDescription = instance.mDescription;
+    this.mIntegrityReviewStatus = instance.mIntegrityReviewStatus;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ClientTransparencyStatus> getParser() {
-    return new APIRequest.ResponseParser<ClientTransparencyStatus>() {
-      public APINodeList<ClientTransparencyStatus> parseResponse(String response, APIContext context, APIRequest<ClientTransparencyStatus> request, String header) throws MalformedResponseException {
-        return ClientTransparencyStatus.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ProductSetMetadata> getParser() {
+    return new APIRequest.ResponseParser<ProductSetMetadata>() {
+      public APINodeList<ProductSetMetadata> parseResponse(String response, APIContext context, APIRequest<ProductSetMetadata> request, String header) throws MalformedResponseException {
+        return ProductSetMetadata.parseResponse(response, context, request, header);
       }
     };
   }

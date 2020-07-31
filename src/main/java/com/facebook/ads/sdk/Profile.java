@@ -349,6 +349,7 @@ public class Profile extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "breaking_change",
       "height",
       "redirect",
       "type",
@@ -419,6 +420,15 @@ public class Profile extends APINode {
       return this;
     }
 
+
+    public APIRequestGetPicture setBreakingChange (ProfilePictureSource.EnumBreakingChange breakingChange) {
+      this.setParam("breaking_change", breakingChange);
+      return this;
+    }
+    public APIRequestGetPicture setBreakingChange (String breakingChange) {
+      this.setParam("breaking_change", breakingChange);
+      return this;
+    }
 
     public APIRequestGetPicture setHeight (Long height) {
       this.setParam("height", height);

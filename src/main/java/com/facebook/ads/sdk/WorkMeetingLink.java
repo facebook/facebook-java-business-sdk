@@ -54,68 +54,66 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class WhatsAppBusinessProfile extends APINode {
+public class WorkMeetingLink extends APINode {
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("name_verification")
-  private Object mNameVerification = null;
-  @SerializedName("verified_name")
-  private String mVerifiedName = null;
+  @SerializedName("owner")
+  private User mOwner = null;
   protected static Gson gson = null;
 
-  WhatsAppBusinessProfile() {
+  WorkMeetingLink() {
   }
 
-  public WhatsAppBusinessProfile(Long id, APIContext context) {
+  public WorkMeetingLink(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public WhatsAppBusinessProfile(String id, APIContext context) {
+  public WorkMeetingLink(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public WhatsAppBusinessProfile fetch() throws APIException{
-    WhatsAppBusinessProfile newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public WorkMeetingLink fetch() throws APIException{
+    WorkMeetingLink newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static WhatsAppBusinessProfile fetchById(Long id, APIContext context) throws APIException {
+  public static WorkMeetingLink fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<WhatsAppBusinessProfile> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<WorkMeetingLink> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static WhatsAppBusinessProfile fetchById(String id, APIContext context) throws APIException {
+  public static WorkMeetingLink fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<WhatsAppBusinessProfile> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<WorkMeetingLink> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<WhatsAppBusinessProfile> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<WhatsAppBusinessProfile>)(
-      new APIRequest<WhatsAppBusinessProfile>(context, "", "/", "GET", WhatsAppBusinessProfile.getParser())
+  public static APINodeList<WorkMeetingLink> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<WorkMeetingLink>)(
+      new APIRequest<WorkMeetingLink>(context, "", "/", "GET", WorkMeetingLink.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<WhatsAppBusinessProfile>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<WorkMeetingLink>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", WhatsAppBusinessProfile.getParser())
+      new APIRequest(context, "", "/", "GET", WorkMeetingLink.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -128,12 +126,12 @@ public class WhatsAppBusinessProfile extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static WhatsAppBusinessProfile loadJSON(String json, APIContext context, String header) {
-    WhatsAppBusinessProfile whatsAppBusinessProfile = getGson().fromJson(json, WhatsAppBusinessProfile.class);
+  public static WorkMeetingLink loadJSON(String json, APIContext context, String header) {
+    WorkMeetingLink workMeetingLink = getGson().fromJson(json, WorkMeetingLink.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(whatsAppBusinessProfile.toString());
+      JsonElement o2 = parser.parse(workMeetingLink.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -143,14 +141,14 @@ public class WhatsAppBusinessProfile extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    whatsAppBusinessProfile.context = context;
-    whatsAppBusinessProfile.rawValue = json;
-    whatsAppBusinessProfile.header = header;
-    return whatsAppBusinessProfile;
+    workMeetingLink.context = context;
+    workMeetingLink.rawValue = json;
+    workMeetingLink.header = header;
+    return workMeetingLink;
   }
 
-  public static APINodeList<WhatsAppBusinessProfile> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<WhatsAppBusinessProfile> whatsAppBusinessProfiles = new APINodeList<WhatsAppBusinessProfile>(request, json, header);
+  public static APINodeList<WorkMeetingLink> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<WorkMeetingLink> workMeetingLinks = new APINodeList<WorkMeetingLink>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -161,9 +159,9 @@ public class WhatsAppBusinessProfile extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          whatsAppBusinessProfiles.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          workMeetingLinks.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return whatsAppBusinessProfiles;
+        return workMeetingLinks;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -173,20 +171,20 @@ public class WhatsAppBusinessProfile extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                whatsAppBusinessProfiles.setCursors(before, after);
+                workMeetingLinks.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            whatsAppBusinessProfiles.setPaging(previous, next);
+            workMeetingLinks.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              whatsAppBusinessProfiles.setAppSecret(context.getAppSecretProof());
+              workMeetingLinks.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              whatsAppBusinessProfiles.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              workMeetingLinks.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -197,23 +195,23 @@ public class WhatsAppBusinessProfile extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  whatsAppBusinessProfiles.add(loadJSON(entry.getValue().toString(), context, header));
+                  workMeetingLinks.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              whatsAppBusinessProfiles.add(loadJSON(obj.toString(), context, header));
+              workMeetingLinks.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return whatsAppBusinessProfiles;
+          return workMeetingLinks;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              whatsAppBusinessProfiles.add(loadJSON(entry.getValue().toString(), context, header));
+              workMeetingLinks.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return whatsAppBusinessProfiles;
+          return workMeetingLinks;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -230,20 +228,20 @@ public class WhatsAppBusinessProfile extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              whatsAppBusinessProfiles.add(loadJSON(value.toString(), context, header));
+              workMeetingLinks.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return whatsAppBusinessProfiles;
+            return workMeetingLinks;
           }
 
           // Sixth, check if it's pure JsonObject
-          whatsAppBusinessProfiles.clear();
-          whatsAppBusinessProfiles.add(loadJSON(json, context, header));
-          return whatsAppBusinessProfiles;
+          workMeetingLinks.clear();
+          workMeetingLinks.add(loadJSON(json, context, header));
+          return workMeetingLinks;
         }
       }
     } catch (Exception e) {
@@ -274,30 +272,25 @@ public class WhatsAppBusinessProfile extends APINode {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestUpdate update() {
-    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldId() {
     return mId;
   }
 
-  public Object getFieldNameVerification() {
-    return mNameVerification;
+  public User getFieldOwner() {
+    if (mOwner != null) {
+      mOwner.context = getContext();
+    }
+    return mOwner;
   }
 
-  public String getFieldVerifiedName() {
-    return mVerifiedName;
-  }
 
 
+  public static class APIRequestGet extends APIRequest<WorkMeetingLink> {
 
-  public static class APIRequestGet extends APIRequest<WhatsAppBusinessProfile> {
-
-    WhatsAppBusinessProfile lastResponse = null;
+    WorkMeetingLink lastResponse = null;
     @Override
-    public WhatsAppBusinessProfile getLastResponse() {
+    public WorkMeetingLink getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -305,36 +298,35 @@ public class WhatsAppBusinessProfile extends APINode {
 
     public static final String[] FIELDS = {
       "id",
-      "name_verification",
-      "verified_name",
+      "owner",
     };
 
     @Override
-    public WhatsAppBusinessProfile parseResponse(String response, String header) throws APIException {
-      return WhatsAppBusinessProfile.parseResponse(response, getContext(), this, header).head();
+    public WorkMeetingLink parseResponse(String response, String header) throws APIException {
+      return WorkMeetingLink.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public WhatsAppBusinessProfile execute() throws APIException {
+    public WorkMeetingLink execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public WhatsAppBusinessProfile execute(Map<String, Object> extraParams) throws APIException {
+    public WorkMeetingLink execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<WhatsAppBusinessProfile> executeAsync() throws APIException {
+    public ListenableFuture<WorkMeetingLink> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<WhatsAppBusinessProfile> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<WorkMeetingLink> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, WhatsAppBusinessProfile>() {
-           public WhatsAppBusinessProfile apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, WorkMeetingLink>() {
+           public WorkMeetingLink apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -405,130 +397,13 @@ public class WhatsAppBusinessProfile extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestNameVerificationField () {
-      return this.requestNameVerificationField(true);
+    public APIRequestGet requestOwnerField () {
+      return this.requestOwnerField(true);
     }
-    public APIRequestGet requestNameVerificationField (boolean value) {
-      this.requestField("name_verification", value);
+    public APIRequestGet requestOwnerField (boolean value) {
+      this.requestField("owner", value);
       return this;
     }
-    public APIRequestGet requestVerifiedNameField () {
-      return this.requestVerifiedNameField(true);
-    }
-    public APIRequestGet requestVerifiedNameField (boolean value) {
-      this.requestField("verified_name", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestUpdate extends APIRequest<WhatsAppBusinessProfile> {
-
-    WhatsAppBusinessProfile lastResponse = null;
-    @Override
-    public WhatsAppBusinessProfile getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "verified_name",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public WhatsAppBusinessProfile parseResponse(String response, String header) throws APIException {
-      return WhatsAppBusinessProfile.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public WhatsAppBusinessProfile execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public WhatsAppBusinessProfile execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<WhatsAppBusinessProfile> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<WhatsAppBusinessProfile> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, WhatsAppBusinessProfile>() {
-           public WhatsAppBusinessProfile apply(ResponseWrapper result) {
-             try {
-               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestUpdate(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestUpdate setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestUpdate setVerifiedName (String verifiedName) {
-      this.setParam("verified_name", verifiedName);
-      return this;
-    }
-
-    public APIRequestUpdate requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestUpdate requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
 
@@ -545,19 +420,18 @@ public class WhatsAppBusinessProfile extends APINode {
     return gson;
   }
 
-  public WhatsAppBusinessProfile copyFrom(WhatsAppBusinessProfile instance) {
+  public WorkMeetingLink copyFrom(WorkMeetingLink instance) {
     this.mId = instance.mId;
-    this.mNameVerification = instance.mNameVerification;
-    this.mVerifiedName = instance.mVerifiedName;
+    this.mOwner = instance.mOwner;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<WhatsAppBusinessProfile> getParser() {
-    return new APIRequest.ResponseParser<WhatsAppBusinessProfile>() {
-      public APINodeList<WhatsAppBusinessProfile> parseResponse(String response, APIContext context, APIRequest<WhatsAppBusinessProfile> request, String header) throws MalformedResponseException {
-        return WhatsAppBusinessProfile.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<WorkMeetingLink> getParser() {
+    return new APIRequest.ResponseParser<WorkMeetingLink>() {
+      public APINodeList<WorkMeetingLink> parseResponse(String response, APIContext context, APIRequest<WorkMeetingLink> request, String header) throws MalformedResponseException {
+        return WorkMeetingLink.parseResponse(response, context, request, header);
       }
     };
   }

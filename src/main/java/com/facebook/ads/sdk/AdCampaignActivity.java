@@ -87,10 +87,6 @@ public class AdCampaignActivity extends APINode {
   private EnumBillingEventNew mBillingEventNew = null;
   @SerializedName("billing_event_old")
   private EnumBillingEventOld mBillingEventOld = null;
-  @SerializedName("brande_audience_id_new")
-  private BrandAudience mBrandeAudienceIdNew = null;
-  @SerializedName("brande_audience_id_old")
-  private BrandAudience mBrandeAudienceIdOld = null;
   @SerializedName("budget_limit_new")
   private Object mBudgetLimitNew = null;
   @SerializedName("budget_limit_old")
@@ -445,20 +441,6 @@ public class AdCampaignActivity extends APINode {
     return mBillingEventOld;
   }
 
-  public BrandAudience getFieldBrandeAudienceIdNew() {
-    if (mBrandeAudienceIdNew != null) {
-      mBrandeAudienceIdNew.context = getContext();
-    }
-    return mBrandeAudienceIdNew;
-  }
-
-  public BrandAudience getFieldBrandeAudienceIdOld() {
-    if (mBrandeAudienceIdOld != null) {
-      mBrandeAudienceIdOld.context = getContext();
-    }
-    return mBrandeAudienceIdOld;
-  }
-
   public Object getFieldBudgetLimitNew() {
     return mBudgetLimitNew;
   }
@@ -640,8 +622,6 @@ public class AdCampaignActivity extends APINode {
       "bid_type_old",
       "billing_event_new",
       "billing_event_old",
-      "brande_audience_id_new",
-      "brande_audience_id_old",
       "budget_limit_new",
       "budget_limit_old",
       "created_time",
@@ -881,20 +861,6 @@ public class AdCampaignActivity extends APINode {
     }
     public APIRequestGet requestBillingEventOldField (boolean value) {
       this.requestField("billing_event_old", value);
-      return this;
-    }
-    public APIRequestGet requestBrandeAudienceIdNewField () {
-      return this.requestBrandeAudienceIdNewField(true);
-    }
-    public APIRequestGet requestBrandeAudienceIdNewField (boolean value) {
-      this.requestField("brande_audience_id_new", value);
-      return this;
-    }
-    public APIRequestGet requestBrandeAudienceIdOldField () {
-      return this.requestBrandeAudienceIdOldField(true);
-    }
-    public APIRequestGet requestBrandeAudienceIdOldField (boolean value) {
-      this.requestField("brande_audience_id_old", value);
       return this;
     }
     public APIRequestGet requestBudgetLimitNewField () {
@@ -1314,6 +1280,8 @@ public class AdCampaignActivity extends APINode {
       VALUE_PAGE_LIKES("PAGE_LIKES"),
       @SerializedName("POST_ENGAGEMENT")
       VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
+      @SerializedName("QUALITY_LEAD")
+      VALUE_QUALITY_LEAD("QUALITY_LEAD"),
       @SerializedName("REACH")
       VALUE_REACH("REACH"),
       @SerializedName("REPLIES")
@@ -1379,6 +1347,8 @@ public class AdCampaignActivity extends APINode {
       VALUE_PAGE_LIKES("PAGE_LIKES"),
       @SerializedName("POST_ENGAGEMENT")
       VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
+      @SerializedName("QUALITY_LEAD")
+      VALUE_QUALITY_LEAD("QUALITY_LEAD"),
       @SerializedName("REACH")
       VALUE_REACH("REACH"),
       @SerializedName("REPLIES")
@@ -1438,8 +1408,6 @@ public class AdCampaignActivity extends APINode {
     this.mBidTypeOld = instance.mBidTypeOld;
     this.mBillingEventNew = instance.mBillingEventNew;
     this.mBillingEventOld = instance.mBillingEventOld;
-    this.mBrandeAudienceIdNew = instance.mBrandeAudienceIdNew;
-    this.mBrandeAudienceIdOld = instance.mBrandeAudienceIdOld;
     this.mBudgetLimitNew = instance.mBudgetLimitNew;
     this.mBudgetLimitOld = instance.mBudgetLimitOld;
     this.mCreatedTime = instance.mCreatedTime;

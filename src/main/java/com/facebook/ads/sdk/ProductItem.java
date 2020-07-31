@@ -618,6 +618,8 @@ public class ProductItem extends APINode {
       "auto_creation_url",
       "filter",
       "id",
+      "latest_metadata",
+      "live_metadata",
       "name",
       "product_catalog",
       "product_count",
@@ -731,6 +733,20 @@ public class ProductItem extends APINode {
     }
     public APIRequestGetProductSets requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetProductSets requestLatestMetadataField () {
+      return this.requestLatestMetadataField(true);
+    }
+    public APIRequestGetProductSets requestLatestMetadataField (boolean value) {
+      this.requestField("latest_metadata", value);
+      return this;
+    }
+    public APIRequestGetProductSets requestLiveMetadataField () {
+      return this.requestLiveMetadataField(true);
+    }
+    public APIRequestGetProductSets requestLiveMetadataField (boolean value) {
+      this.requestField("live_metadata", value);
       return this;
     }
     public APIRequestGetProductSets requestNameField () {

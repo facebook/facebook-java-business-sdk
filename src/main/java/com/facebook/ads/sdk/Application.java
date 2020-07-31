@@ -1496,6 +1496,9 @@ public class Application extends APINode {
       "consider_views",
       "custom_events",
       "custom_events_file",
+      "data_processing_options",
+      "data_processing_options_country",
+      "data_processing_options_state",
       "device_token",
       "event",
       "extinfo",
@@ -1657,6 +1660,33 @@ public class Application extends APINode {
     }
     public APIRequestCreateActivity setCustomEventsFile (String customEventsFile) {
       this.setParam("custom_events_file", customEventsFile);
+      return this;
+    }
+
+    public APIRequestCreateActivity setDataProcessingOptions (List<String> dataProcessingOptions) {
+      this.setParam("data_processing_options", dataProcessingOptions);
+      return this;
+    }
+    public APIRequestCreateActivity setDataProcessingOptions (String dataProcessingOptions) {
+      this.setParam("data_processing_options", dataProcessingOptions);
+      return this;
+    }
+
+    public APIRequestCreateActivity setDataProcessingOptionsCountry (Long dataProcessingOptionsCountry) {
+      this.setParam("data_processing_options_country", dataProcessingOptionsCountry);
+      return this;
+    }
+    public APIRequestCreateActivity setDataProcessingOptionsCountry (String dataProcessingOptionsCountry) {
+      this.setParam("data_processing_options_country", dataProcessingOptionsCountry);
+      return this;
+    }
+
+    public APIRequestCreateActivity setDataProcessingOptionsState (Long dataProcessingOptionsState) {
+      this.setParam("data_processing_options_state", dataProcessingOptionsState);
+      return this;
+    }
+    public APIRequestCreateActivity setDataProcessingOptionsState (String dataProcessingOptionsState) {
+      this.setParam("data_processing_options_state", dataProcessingOptionsState);
       return this;
     }
 
@@ -5065,6 +5095,8 @@ public class Application extends APINode {
       "maybe_count",
       "name",
       "noreply_count",
+      "online_event_format",
+      "online_event_third_party_url",
       "owner",
       "parent_group",
       "place",
@@ -5317,6 +5349,20 @@ public class Application extends APINode {
     }
     public APIRequestGetEvents requestNoreplyCountField (boolean value) {
       this.requestField("noreply_count", value);
+      return this;
+    }
+    public APIRequestGetEvents requestOnlineEventFormatField () {
+      return this.requestOnlineEventFormatField(true);
+    }
+    public APIRequestGetEvents requestOnlineEventFormatField (boolean value) {
+      this.requestField("online_event_format", value);
+      return this;
+    }
+    public APIRequestGetEvents requestOnlineEventThirdPartyUrlField () {
+      return this.requestOnlineEventThirdPartyUrlField(true);
+    }
+    public APIRequestGetEvents requestOnlineEventThirdPartyUrlField (boolean value) {
+      this.requestField("online_event_third_party_url", value);
       return this;
     }
     public APIRequestGetEvents requestOwnerField () {
@@ -9699,7 +9745,6 @@ public class Application extends APINode {
     public static final String[] PARAMS = {
       "an_platforms",
       "android_class_name",
-      "android_key_hash",
       "android_key_hashes",
       "android_package_name",
       "android_sso",
@@ -9717,12 +9762,9 @@ public class Application extends APINode {
       "canvas_fluid_height",
       "canvas_fluid_width",
       "canvas_url",
-      "configured_ios_sso",
       "contact_email",
       "deauth_callback_url",
       "ios_bundle_id",
-      "ipad_app_store_id",
-      "iphone_app_store_id",
       "mobile_web_url",
       "namespace",
       "page_tab_default_name",
@@ -9805,15 +9847,6 @@ public class Application extends APINode {
 
     public APIRequestUpdate setAndroidClassName (String androidClassName) {
       this.setParam("android_class_name", androidClassName);
-      return this;
-    }
-
-    public APIRequestUpdate setAndroidKeyHash (List<String> androidKeyHash) {
-      this.setParam("android_key_hash", androidKeyHash);
-      return this;
-    }
-    public APIRequestUpdate setAndroidKeyHash (String androidKeyHash) {
-      this.setParam("android_key_hash", androidKeyHash);
       return this;
     }
 
@@ -9942,15 +9975,6 @@ public class Application extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setConfiguredIosSso (Boolean configuredIosSso) {
-      this.setParam("configured_ios_sso", configuredIosSso);
-      return this;
-    }
-    public APIRequestUpdate setConfiguredIosSso (String configuredIosSso) {
-      this.setParam("configured_ios_sso", configuredIosSso);
-      return this;
-    }
-
     public APIRequestUpdate setContactEmail (String contactEmail) {
       this.setParam("contact_email", contactEmail);
       return this;
@@ -9967,16 +9991,6 @@ public class Application extends APINode {
     }
     public APIRequestUpdate setIosBundleId (String iosBundleId) {
       this.setParam("ios_bundle_id", iosBundleId);
-      return this;
-    }
-
-    public APIRequestUpdate setIpadAppStoreId (String ipadAppStoreId) {
-      this.setParam("ipad_app_store_id", ipadAppStoreId);
-      return this;
-    }
-
-    public APIRequestUpdate setIphoneAppStoreId (String iphoneAppStoreId) {
-      this.setParam("iphone_app_store_id", iphoneAppStoreId);
       return this;
     }
 
@@ -10104,6 +10118,8 @@ public class Application extends APINode {
       VALUE_IPHONE("IPHONE"),
       @SerializedName("MOBILE_WEB")
       VALUE_MOBILE_WEB("MOBILE_WEB"),
+      @SerializedName("OCULUS")
+      VALUE_OCULUS("OCULUS"),
       @SerializedName("SUPPLEMENTARY_IMAGES")
       VALUE_SUPPLEMENTARY_IMAGES("SUPPLEMENTARY_IMAGES"),
       @SerializedName("WEB")

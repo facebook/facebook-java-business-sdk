@@ -305,9 +305,6 @@ public class PageUpcomingChange extends APINode {
   }
 
   public PageChangeProposal getFieldProposal() {
-    if (mProposal != null) {
-      mProposal.context = getContext();
-    }
     return mProposal;
   }
 

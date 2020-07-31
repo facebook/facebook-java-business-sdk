@@ -1301,6 +1301,8 @@ public class Group extends APINode {
       "maybe_count",
       "name",
       "noreply_count",
+      "online_event_format",
+      "online_event_third_party_url",
       "owner",
       "parent_group",
       "place",
@@ -1535,6 +1537,20 @@ public class Group extends APINode {
     }
     public APIRequestGetEvents requestNoreplyCountField (boolean value) {
       this.requestField("noreply_count", value);
+      return this;
+    }
+    public APIRequestGetEvents requestOnlineEventFormatField () {
+      return this.requestOnlineEventFormatField(true);
+    }
+    public APIRequestGetEvents requestOnlineEventFormatField (boolean value) {
+      this.requestField("online_event_format", value);
+      return this;
+    }
+    public APIRequestGetEvents requestOnlineEventThirdPartyUrlField () {
+      return this.requestOnlineEventThirdPartyUrlField(true);
+    }
+    public APIRequestGetEvents requestOnlineEventThirdPartyUrlField (boolean value) {
+      this.requestField("online_event_third_party_url", value);
       return this;
     }
     public APIRequestGetEvents requestOwnerField () {
@@ -5145,6 +5161,7 @@ public class Group extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "breaking_change",
       "height",
       "redirect",
       "type",
@@ -5215,6 +5232,15 @@ public class Group extends APINode {
       return this;
     }
 
+
+    public APIRequestGetPicture setBreakingChange (ProfilePictureSource.EnumBreakingChange breakingChange) {
+      this.setParam("breaking_change", breakingChange);
+      return this;
+    }
+    public APIRequestGetPicture setBreakingChange (String breakingChange) {
+      this.setParam("breaking_change", breakingChange);
+      return this;
+    }
 
     public APIRequestGetPicture setHeight (Long height) {
       this.setParam("height", height);
@@ -5810,6 +5836,7 @@ public class Group extends APINode {
       "composer_type",
       "container_type",
       "content_category",
+      "creative_tools",
       "description",
       "embeddable",
       "end_offset",
@@ -5865,6 +5892,7 @@ public class Group extends APINode {
       "upload_session_id",
       "upload_setting_properties",
       "video_file_chunk",
+      "video_id_original",
       "video_start_time_ms",
       "waterfall_id",
     };
@@ -6017,6 +6045,11 @@ public class Group extends APINode {
     }
     public APIRequestCreateVideo setContentCategory (String contentCategory) {
       this.setParam("content_category", contentCategory);
+      return this;
+    }
+
+    public APIRequestCreateVideo setCreativeTools (String creativeTools) {
+      this.setParam("creative_tools", creativeTools);
       return this;
     }
 
@@ -6424,6 +6457,11 @@ public class Group extends APINode {
 
     public APIRequestCreateVideo setVideoFileChunk (String videoFileChunk) {
       this.setParam("video_file_chunk", videoFileChunk);
+      return this;
+    }
+
+    public APIRequestCreateVideo setVideoIdOriginal (String videoIdOriginal) {
+      this.setParam("video_id_original", videoIdOriginal);
       return this;
     }
 
@@ -7118,6 +7156,8 @@ public class Group extends APINode {
       VALUE_WORK_MULTI_COMPANY("WORK_MULTI_COMPANY"),
       @SerializedName("WORK_RECRUITING")
       VALUE_WORK_RECRUITING("WORK_RECRUITING"),
+      @SerializedName("WORK_RESUME_REVIEW")
+      VALUE_WORK_RESUME_REVIEW("WORK_RESUME_REVIEW"),
       @SerializedName("WORK_SOCIAL")
       VALUE_WORK_SOCIAL("WORK_SOCIAL"),
       @SerializedName("WORK_TEAM")
@@ -7231,6 +7271,8 @@ public class Group extends APINode {
       VALUE_WORK_MULTI_COMPANY("WORK_MULTI_COMPANY"),
       @SerializedName("WORK_RECRUITING")
       VALUE_WORK_RECRUITING("WORK_RECRUITING"),
+      @SerializedName("WORK_RESUME_REVIEW")
+      VALUE_WORK_RESUME_REVIEW("WORK_RESUME_REVIEW"),
       @SerializedName("WORK_SOCIAL")
       VALUE_WORK_SOCIAL("WORK_SOCIAL"),
       @SerializedName("WORK_TEAM")

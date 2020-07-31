@@ -1471,6 +1471,7 @@ public class AdStudyCell extends APINode {
       "source_campaign_id",
       "special_ad_categories",
       "special_ad_category",
+      "special_ad_category_country",
       "spend_cap",
       "start_time",
       "status",
@@ -1755,6 +1756,13 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetCampaigns requestSpecialAdCategoryField (boolean value) {
       this.requestField("special_ad_category", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestSpecialAdCategoryCountryField () {
+      return this.requestSpecialAdCategoryCountryField(true);
+    }
+    public APIRequestGetCampaigns requestSpecialAdCategoryCountryField (boolean value) {
+      this.requestField("special_ad_category_country", value);
       return this;
     }
     public APIRequestGetCampaigns requestSpendCapField () {

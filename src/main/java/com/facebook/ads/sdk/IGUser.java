@@ -597,6 +597,7 @@ public class IGUser extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "alt_text",
       "caption",
       "comments_count",
       "id",
@@ -702,6 +703,13 @@ public class IGUser extends APINode {
       return this;
     }
 
+    public APIRequestGetMedia requestAltTextField () {
+      return this.requestAltTextField(true);
+    }
+    public APIRequestGetMedia requestAltTextField (boolean value) {
+      this.requestField("alt_text", value);
+      return this;
+    }
     public APIRequestGetMedia requestCaptionField () {
       return this.requestCaptionField(true);
     }
@@ -1303,6 +1311,7 @@ public class IGUser extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "alt_text",
       "caption",
       "comments_count",
       "id",
@@ -1408,6 +1417,13 @@ public class IGUser extends APINode {
       return this;
     }
 
+    public APIRequestGetStories requestAltTextField () {
+      return this.requestAltTextField(true);
+    }
+    public APIRequestGetStories requestAltTextField (boolean value) {
+      this.requestField("alt_text", value);
+      return this;
+    }
     public APIRequestGetStories requestCaptionField () {
       return this.requestCaptionField(true);
     }
@@ -1519,6 +1535,7 @@ public class IGUser extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "alt_text",
       "caption",
       "comments_count",
       "id",
@@ -1624,6 +1641,13 @@ public class IGUser extends APINode {
       return this;
     }
 
+    public APIRequestGetTags requestAltTextField () {
+      return this.requestAltTextField(true);
+    }
+    public APIRequestGetTags requestAltTextField (boolean value) {
+      this.requestField("alt_text", value);
+      return this;
+    }
     public APIRequestGetTags requestCaptionField () {
       return this.requestCaptionField(true);
     }

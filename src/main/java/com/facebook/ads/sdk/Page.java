@@ -5347,6 +5347,7 @@ public class Page extends APINode {
       "supported_card_types",
       "terms",
       "terms_url_by_locale",
+      "whatsapp_channel",
     };
 
     @Override
@@ -5583,6 +5584,13 @@ public class Page extends APINode {
     }
     public APIRequestGetCommerceMerchantSettings requestTermsUrlByLocaleField (boolean value) {
       this.requestField("terms_url_by_locale", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestWhatsappChannelField () {
+      return this.requestWhatsappChannelField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestWhatsappChannelField (boolean value) {
+      this.requestField("whatsapp_channel", value);
       return this;
     }
   }
@@ -8625,6 +8633,8 @@ public class Page extends APINode {
       "maybe_count",
       "name",
       "noreply_count",
+      "online_event_format",
+      "online_event_third_party_url",
       "owner",
       "parent_group",
       "place",
@@ -8895,6 +8905,20 @@ public class Page extends APINode {
     }
     public APIRequestGetEvents requestNoreplyCountField (boolean value) {
       this.requestField("noreply_count", value);
+      return this;
+    }
+    public APIRequestGetEvents requestOnlineEventFormatField () {
+      return this.requestOnlineEventFormatField(true);
+    }
+    public APIRequestGetEvents requestOnlineEventFormatField (boolean value) {
+      this.requestField("online_event_format", value);
+      return this;
+    }
+    public APIRequestGetEvents requestOnlineEventThirdPartyUrlField () {
+      return this.requestOnlineEventThirdPartyUrlField(true);
+    }
+    public APIRequestGetEvents requestOnlineEventThirdPartyUrlField (boolean value) {
+      this.requestField("online_event_third_party_url", value);
       return this;
     }
     public APIRequestGetEvents requestOwnerField () {
@@ -19615,6 +19639,7 @@ public class Page extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "api_version",
       "custom_token",
       "model",
       "n_best",
@@ -19678,6 +19703,15 @@ public class Page extends APINode {
       return this;
     }
 
+
+    public APIRequestCreateNlpConfig setApiVersion (Object apiVersion) {
+      this.setParam("api_version", apiVersion);
+      return this;
+    }
+    public APIRequestCreateNlpConfig setApiVersion (String apiVersion) {
+      this.setParam("api_version", apiVersion);
+      return this;
+    }
 
     public APIRequestCreateNlpConfig setCustomToken (String customToken) {
       this.setParam("custom_token", customToken);
@@ -21059,7 +21093,6 @@ public class Page extends APINode {
       "initial_view_heading_override_degrees",
       "initial_view_pitch_override_degrees",
       "initial_view_vertical_fov_override_degrees",
-      "instagram_product_tags",
       "ios_bundle_id",
       "is_explicit_location",
       "is_explicit_place",
@@ -21287,15 +21320,6 @@ public class Page extends APINode {
     }
     public APIRequestCreatePhoto setInitialViewVerticalFovOverrideDegrees (String initialViewVerticalFovOverrideDegrees) {
       this.setParam("initial_view_vertical_fov_override_degrees", initialViewVerticalFovOverrideDegrees);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setInstagramProductTags (List<Map<String, String>> instagramProductTags) {
-      this.setParam("instagram_product_tags", instagramProductTags);
-      return this;
-    }
-    public APIRequestCreatePhoto setInstagramProductTags (String instagramProductTags) {
-      this.setParam("instagram_product_tags", instagramProductTags);
       return this;
     }
 
@@ -21623,6 +21647,7 @@ public class Page extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "breaking_change",
       "height",
       "redirect",
       "type",
@@ -21693,6 +21718,15 @@ public class Page extends APINode {
       return this;
     }
 
+
+    public APIRequestGetPicture setBreakingChange (ProfilePictureSource.EnumBreakingChange breakingChange) {
+      this.setParam("breaking_change", breakingChange);
+      return this;
+    }
+    public APIRequestGetPicture setBreakingChange (String breakingChange) {
+      this.setParam("breaking_change", breakingChange);
+      return this;
+    }
 
     public APIRequestGetPicture setHeight (Long height) {
       this.setParam("height", height);
@@ -31104,6 +31138,7 @@ public class Page extends APINode {
       "container_type",
       "content_category",
       "content_tags",
+      "creative_tools",
       "crossposted_video_id",
       "custom_labels",
       "description",
@@ -31176,6 +31211,7 @@ public class Page extends APINode {
       "upload_setting_properties",
       "video_asset_id",
       "video_file_chunk",
+      "video_id_original",
       "video_start_time_ms",
       "waterfall_id",
     };
@@ -31364,6 +31400,11 @@ public class Page extends APINode {
     }
     public APIRequestCreateVideo setContentTags (String contentTags) {
       this.setParam("content_tags", contentTags);
+      return this;
+    }
+
+    public APIRequestCreateVideo setCreativeTools (String creativeTools) {
+      this.setParam("creative_tools", creativeTools);
       return this;
     }
 
@@ -31904,6 +31945,11 @@ public class Page extends APINode {
 
     public APIRequestCreateVideo setVideoFileChunk (String videoFileChunk) {
       this.setParam("video_file_chunk", videoFileChunk);
+      return this;
+    }
+
+    public APIRequestCreateVideo setVideoIdOriginal (String videoIdOriginal) {
+      this.setParam("video_id_original", videoIdOriginal);
       return this;
     }
 
@@ -35008,8 +35054,6 @@ public class Page extends APINode {
       VALUE_CATEGORY("category"),
       @SerializedName("checkins")
       VALUE_CHECKINS("checkins"),
-      @SerializedName("commerce_order")
-      VALUE_COMMERCE_ORDER("commerce_order"),
       @SerializedName("company_overview")
       VALUE_COMPANY_OVERVIEW("company_overview"),
       @SerializedName("conversations")
@@ -35080,6 +35124,8 @@ public class Page extends APINode {
       VALUE_MESSAGING_DIRECT_SENDS("messaging_direct_sends"),
       @SerializedName("messaging_fblogin_account_linking")
       VALUE_MESSAGING_FBLOGIN_ACCOUNT_LINKING("messaging_fblogin_account_linking"),
+      @SerializedName("messaging_feedback")
+      VALUE_MESSAGING_FEEDBACK("messaging_feedback"),
       @SerializedName("messaging_game_plays")
       VALUE_MESSAGING_GAME_PLAYS("messaging_game_plays"),
       @SerializedName("messaging_handovers")

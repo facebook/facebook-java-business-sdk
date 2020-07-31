@@ -403,6 +403,7 @@ public class AdReportRun extends APINode {
       "campaign_name",
       "canvas_avg_view_percent",
       "canvas_avg_view_time",
+      "catalog_segment_actions",
       "catalog_segment_value",
       "catalog_segment_value_mobile_purchase_roas",
       "catalog_segment_value_omni_purchase_roas",
@@ -411,6 +412,8 @@ public class AdReportRun extends APINode {
       "conversion_rate_ranking",
       "conversion_values",
       "conversions",
+      "converted_product_quantity",
+      "converted_product_value",
       "cost_per_15_sec_video_view",
       "cost_per_2_sec_continuous_video_view",
       "cost_per_action_type",
@@ -455,6 +458,7 @@ public class AdReportRun extends APINode {
       "instant_experience_clicks_to_open",
       "instant_experience_clicks_to_start",
       "instant_experience_outbound_clicks",
+      "interactive_component_tap",
       "labels",
       "location",
       "mobile_app_purchase_roas",
@@ -804,6 +808,13 @@ public class AdReportRun extends APINode {
       this.requestField("canvas_avg_view_time", value);
       return this;
     }
+    public APIRequestGetInsights requestCatalogSegmentActionsField () {
+      return this.requestCatalogSegmentActionsField(true);
+    }
+    public APIRequestGetInsights requestCatalogSegmentActionsField (boolean value) {
+      this.requestField("catalog_segment_actions", value);
+      return this;
+    }
     public APIRequestGetInsights requestCatalogSegmentValueField () {
       return this.requestCatalogSegmentValueField(true);
     }
@@ -858,6 +869,20 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestConversionsField (boolean value) {
       this.requestField("conversions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestConvertedProductQuantityField () {
+      return this.requestConvertedProductQuantityField(true);
+    }
+    public APIRequestGetInsights requestConvertedProductQuantityField (boolean value) {
+      this.requestField("converted_product_quantity", value);
+      return this;
+    }
+    public APIRequestGetInsights requestConvertedProductValueField () {
+      return this.requestConvertedProductValueField(true);
+    }
+    public APIRequestGetInsights requestConvertedProductValueField (boolean value) {
+      this.requestField("converted_product_value", value);
       return this;
     }
     public APIRequestGetInsights requestCostPer15SecVideoViewField () {
@@ -1166,6 +1191,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestInstantExperienceOutboundClicksField (boolean value) {
       this.requestField("instant_experience_outbound_clicks", value);
+      return this;
+    }
+    public APIRequestGetInsights requestInteractiveComponentTapField () {
+      return this.requestInteractiveComponentTapField(true);
+    }
+    public APIRequestGetInsights requestInteractiveComponentTapField (boolean value) {
+      this.requestField("interactive_component_tap", value);
       return this;
     }
     public APIRequestGetInsights requestLabelsField () {

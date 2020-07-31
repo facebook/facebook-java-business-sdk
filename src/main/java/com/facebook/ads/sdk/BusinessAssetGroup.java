@@ -6640,12 +6640,6 @@ public class BusinessAssetGroup extends APINode {
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("ANALYZE")
       VALUE_ANALYZE("ANALYZE"),
-      @SerializedName("CREATIVE")
-      VALUE_CREATIVE("CREATIVE"),
-      @SerializedName("DRAFT")
-      VALUE_DRAFT("DRAFT"),
-      @SerializedName("FB_EMPLOYEE_DSO_ADVERTISE")
-      VALUE_FB_EMPLOYEE_DSO_ADVERTISE("FB_EMPLOYEE_DSO_ADVERTISE"),
       @SerializedName("MANAGE")
       VALUE_MANAGE("MANAGE"),
       ;

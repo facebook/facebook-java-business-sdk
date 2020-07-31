@@ -265,9 +265,6 @@ public class ProductEventStat extends APINode {
   }
 
   public ExternalEventSource getFieldEventSource() {
-    if (mEventSource != null) {
-      mEventSource.context = getContext();
-    }
     return mEventSource;
   }
 

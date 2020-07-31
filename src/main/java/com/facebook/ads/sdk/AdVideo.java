@@ -6932,6 +6932,8 @@ public class AdVideo extends APINode {
       VALUE_HEURISTIC_PREVIEW("HEURISTIC_PREVIEW"),
       @SerializedName("HIGHLIGHT_CLIP_VIDEO")
       VALUE_HIGHLIGHT_CLIP_VIDEO("HIGHLIGHT_CLIP_VIDEO"),
+      @SerializedName("IG_STORIES_READER")
+      VALUE_IG_STORIES_READER("IG_STORIES_READER"),
       @SerializedName("INSPIRATION_VIDEO")
       VALUE_INSPIRATION_VIDEO("INSPIRATION_VIDEO"),
       @SerializedName("INSTAGRAM_VIDEO_COPY")
@@ -6972,6 +6974,8 @@ public class AdVideo extends APINode {
       VALUE_NEO_ASYNC_GAME_VIDEO("NEO_ASYNC_GAME_VIDEO"),
       @SerializedName("NO_STORY")
       VALUE_NO_STORY("NO_STORY"),
+      @SerializedName("NO_STORY_WITH_ENTPOST")
+      VALUE_NO_STORY_WITH_ENTPOST("NO_STORY_WITH_ENTPOST"),
       @SerializedName("OCULUS_CREATOR_PORTAL")
       VALUE_OCULUS_CREATOR_PORTAL("OCULUS_CREATOR_PORTAL"),
       @SerializedName("OCULUS_VENUES_BROADCAST")
@@ -7046,6 +7050,8 @@ public class AdVideo extends APINode {
       VALUE_VIDEO_SUPERRES("VIDEO_SUPERRES"),
       @SerializedName("WOODHENGE")
       VALUE_WOODHENGE("WOODHENGE"),
+      @SerializedName("WORK_KNOWLEDGE_VIDEO")
+      VALUE_WORK_KNOWLEDGE_VIDEO("WORK_KNOWLEDGE_VIDEO"),
       @SerializedName("YOUR_DAY")
       VALUE_YOUR_DAY("YOUR_DAY"),
       ;
@@ -7135,8 +7141,6 @@ public class AdVideo extends APINode {
   public static enum EnumOriginalProjectionType {
       @SerializedName("cubemap")
       VALUE_CUBEMAP("cubemap"),
-      @SerializedName("equiangular_cubemap")
-      VALUE_EQUIANGULAR_CUBEMAP("equiangular_cubemap"),
       @SerializedName("equirectangular")
       VALUE_EQUIRECTANGULAR("equirectangular"),
       @SerializedName("half_equirectangular")
@@ -7215,61 +7219,6 @@ public class AdVideo extends APINode {
       private String value;
 
       private EnumUploadPhase(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumValidationAdPlacements {
-      @SerializedName("AUDIENCE_NETWORK_INSTREAM_VIDEO")
-      VALUE_AUDIENCE_NETWORK_INSTREAM_VIDEO("AUDIENCE_NETWORK_INSTREAM_VIDEO"),
-      @SerializedName("AUDIENCE_NETWORK_INSTREAM_VIDEO_MOBILE")
-      VALUE_AUDIENCE_NETWORK_INSTREAM_VIDEO_MOBILE("AUDIENCE_NETWORK_INSTREAM_VIDEO_MOBILE"),
-      @SerializedName("AUDIENCE_NETWORK_REWARDED_VIDEO")
-      VALUE_AUDIENCE_NETWORK_REWARDED_VIDEO("AUDIENCE_NETWORK_REWARDED_VIDEO"),
-      @SerializedName("DESKTOP_FEED_STANDARD")
-      VALUE_DESKTOP_FEED_STANDARD("DESKTOP_FEED_STANDARD"),
-      @SerializedName("FACEBOOK_STORY_MOBILE")
-      VALUE_FACEBOOK_STORY_MOBILE("FACEBOOK_STORY_MOBILE"),
-      @SerializedName("INSTAGRAM_STANDARD")
-      VALUE_INSTAGRAM_STANDARD("INSTAGRAM_STANDARD"),
-      @SerializedName("INSTAGRAM_STORY")
-      VALUE_INSTAGRAM_STORY("INSTAGRAM_STORY"),
-      @SerializedName("INSTANT_ARTICLE_STANDARD")
-      VALUE_INSTANT_ARTICLE_STANDARD("INSTANT_ARTICLE_STANDARD"),
-      @SerializedName("INSTREAM_VIDEO_DESKTOP")
-      VALUE_INSTREAM_VIDEO_DESKTOP("INSTREAM_VIDEO_DESKTOP"),
-      @SerializedName("INSTREAM_VIDEO_IMAGE")
-      VALUE_INSTREAM_VIDEO_IMAGE("INSTREAM_VIDEO_IMAGE"),
-      @SerializedName("INSTREAM_VIDEO_MOBILE")
-      VALUE_INSTREAM_VIDEO_MOBILE("INSTREAM_VIDEO_MOBILE"),
-      @SerializedName("MESSENGER_MOBILE_INBOX_MEDIA")
-      VALUE_MESSENGER_MOBILE_INBOX_MEDIA("MESSENGER_MOBILE_INBOX_MEDIA"),
-      @SerializedName("MESSENGER_MOBILE_STORY_MEDIA")
-      VALUE_MESSENGER_MOBILE_STORY_MEDIA("MESSENGER_MOBILE_STORY_MEDIA"),
-      @SerializedName("MOBILE_FEED_STANDARD")
-      VALUE_MOBILE_FEED_STANDARD("MOBILE_FEED_STANDARD"),
-      @SerializedName("MOBILE_FULLWIDTH")
-      VALUE_MOBILE_FULLWIDTH("MOBILE_FULLWIDTH"),
-      @SerializedName("MOBILE_INTERSTITIAL")
-      VALUE_MOBILE_INTERSTITIAL("MOBILE_INTERSTITIAL"),
-      @SerializedName("MOBILE_MEDIUM_RECTANGLE")
-      VALUE_MOBILE_MEDIUM_RECTANGLE("MOBILE_MEDIUM_RECTANGLE"),
-      @SerializedName("MOBILE_NATIVE")
-      VALUE_MOBILE_NATIVE("MOBILE_NATIVE"),
-      @SerializedName("RIGHT_COLUMN_STANDARD")
-      VALUE_RIGHT_COLUMN_STANDARD("RIGHT_COLUMN_STANDARD"),
-      @SerializedName("SUGGESTED_VIDEO_MOBILE")
-      VALUE_SUGGESTED_VIDEO_MOBILE("SUGGESTED_VIDEO_MOBILE"),
-      ;
-
-      private String value;
-
-      private EnumValidationAdPlacements(String value) {
         this.value = value;
       }
 

@@ -173,6 +173,8 @@ public class Targeting extends APINode {
   private List<IDName> mIndustries = null;
   @SerializedName("instagram_positions")
   private List<String> mInstagramPositions = null;
+  @SerializedName("instream_video_skippable_excluded")
+  private Boolean mInstreamVideoSkippableExcluded = null;
   @SerializedName("interested_in")
   private List<Long> mInterestedIn = null;
   @SerializedName("interests")
@@ -1048,6 +1050,15 @@ public class Targeting extends APINode {
     return this;
   }
 
+  public Boolean getFieldInstreamVideoSkippableExcluded() {
+    return mInstreamVideoSkippableExcluded;
+  }
+
+  public Targeting setFieldInstreamVideoSkippableExcluded(Boolean value) {
+    this.mInstreamVideoSkippableExcluded = value;
+    return this;
+  }
+
   public List<Long> getFieldInterestedIn() {
     return mInterestedIn;
   }
@@ -1487,6 +1498,7 @@ public class Targeting extends APINode {
     this.mIncome = instance.mIncome;
     this.mIndustries = instance.mIndustries;
     this.mInstagramPositions = instance.mInstagramPositions;
+    this.mInstreamVideoSkippableExcluded = instance.mInstreamVideoSkippableExcluded;
     this.mInterestedIn = instance.mInterestedIn;
     this.mInterests = instance.mInterests;
     this.mIsWhatsappDestinationAd = instance.mIsWhatsappDestinationAd;

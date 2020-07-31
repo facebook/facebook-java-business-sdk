@@ -61,6 +61,10 @@ public class ProductSet extends APINode {
   private String mFilter = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("latest_metadata")
+  private ProductSetMetadata mLatestMetadata = null;
+  @SerializedName("live_metadata")
+  private ProductSetMetadata mLiveMetadata = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("product_catalog")
@@ -331,6 +335,14 @@ public class ProductSet extends APINode {
 
   public String getFieldId() {
     return mId;
+  }
+
+  public ProductSetMetadata getFieldLatestMetadata() {
+    return mLatestMetadata;
+  }
+
+  public ProductSetMetadata getFieldLiveMetadata() {
+    return mLiveMetadata;
   }
 
   public String getFieldName() {
@@ -3412,6 +3424,8 @@ public class ProductSet extends APINode {
       "auto_creation_url",
       "filter",
       "id",
+      "latest_metadata",
+      "live_metadata",
       "name",
       "product_catalog",
       "product_count",
@@ -3527,6 +3541,20 @@ public class ProductSet extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestLatestMetadataField () {
+      return this.requestLatestMetadataField(true);
+    }
+    public APIRequestGet requestLatestMetadataField (boolean value) {
+      this.requestField("latest_metadata", value);
+      return this;
+    }
+    public APIRequestGet requestLiveMetadataField () {
+      return this.requestLiveMetadataField(true);
+    }
+    public APIRequestGet requestLiveMetadataField (boolean value) {
+      this.requestField("live_metadata", value);
+      return this;
+    }
     public APIRequestGet requestNameField () {
       return this.requestNameField(true);
     }
@@ -3559,6 +3587,7 @@ public class ProductSet extends APINode {
     }
     public static final String[] PARAMS = {
       "filter",
+      "metadata",
       "name",
     };
 
@@ -3627,6 +3656,15 @@ public class ProductSet extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setMetadata (Map<String, String> metadata) {
+      this.setParam("metadata", metadata);
+      return this;
+    }
+    public APIRequestUpdate setMetadata (String metadata) {
+      this.setParam("metadata", metadata);
+      return this;
+    }
+
     public APIRequestUpdate setName (String name) {
       this.setParam("name", name);
       return this;
@@ -3688,6 +3726,8 @@ public class ProductSet extends APINode {
     this.mAutoCreationUrl = instance.mAutoCreationUrl;
     this.mFilter = instance.mFilter;
     this.mId = instance.mId;
+    this.mLatestMetadata = instance.mLatestMetadata;
+    this.mLiveMetadata = instance.mLiveMetadata;
     this.mName = instance.mName;
     this.mProductCatalog = instance.mProductCatalog;
     this.mProductCount = instance.mProductCount;

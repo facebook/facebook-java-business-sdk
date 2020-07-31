@@ -6222,6 +6222,8 @@ public class ProductCatalog extends APINode {
       "auto_creation_url",
       "filter",
       "id",
+      "latest_metadata",
+      "live_metadata",
       "name",
       "product_catalog",
       "product_count",
@@ -6361,6 +6363,20 @@ public class ProductCatalog extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetProductSets requestLatestMetadataField () {
+      return this.requestLatestMetadataField(true);
+    }
+    public APIRequestGetProductSets requestLatestMetadataField (boolean value) {
+      this.requestField("latest_metadata", value);
+      return this;
+    }
+    public APIRequestGetProductSets requestLiveMetadataField () {
+      return this.requestLiveMetadataField(true);
+    }
+    public APIRequestGetProductSets requestLiveMetadataField (boolean value) {
+      this.requestField("live_metadata", value);
+      return this;
+    }
     public APIRequestGetProductSets requestNameField () {
       return this.requestNameField(true);
     }
@@ -6393,6 +6409,7 @@ public class ProductCatalog extends APINode {
     }
     public static final String[] PARAMS = {
       "filter",
+      "metadata",
       "name",
     };
 
@@ -6458,6 +6475,15 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestCreateProductSet setFilter (String filter) {
       this.setParam("filter", filter);
+      return this;
+    }
+
+    public APIRequestCreateProductSet setMetadata (Map<String, String> metadata) {
+      this.setParam("metadata", metadata);
+      return this;
+    }
+    public APIRequestCreateProductSet setMetadata (String metadata) {
+      this.setParam("metadata", metadata);
       return this;
     }
 
@@ -9060,6 +9086,7 @@ public class ProductCatalog extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "segment_use_cases",
     };
 
     public static final String[] FIELDS = {
@@ -9129,6 +9156,15 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+
+    public APIRequestGet setSegmentUseCases (List<EnumSegmentUseCases> segmentUseCases) {
+      this.setParam("segment_use_cases", segmentUseCases);
+      return this;
+    }
+    public APIRequestGet setSegmentUseCases (String segmentUseCases) {
+      this.setParam("segment_use_cases", segmentUseCases);
+      return this;
+    }
 
     public APIRequestGet requestAllFields () {
       return this.requestAllFields(true);
@@ -9415,6 +9451,8 @@ public class ProductCatalog extends APINode {
   }
 
   public static enum EnumVertical {
+      @SerializedName("adoptable_pets")
+      VALUE_ADOPTABLE_PETS("adoptable_pets"),
       @SerializedName("bookable")
       VALUE_BOOKABLE("bookable"),
       @SerializedName("commerce")
@@ -9520,6 +9558,29 @@ public class ProductCatalog extends APINode {
       private String value;
 
       private EnumStandard(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumSegmentUseCases {
+      @SerializedName("COLLAB_ADS")
+      VALUE_COLLAB_ADS("COLLAB_ADS"),
+      @SerializedName("COLLAB_ADS_FOR_MARKETPLACE_PARTNER")
+      VALUE_COLLAB_ADS_FOR_MARKETPLACE_PARTNER("COLLAB_ADS_FOR_MARKETPLACE_PARTNER"),
+      @SerializedName("IG_SHOPPING")
+      VALUE_IG_SHOPPING("IG_SHOPPING"),
+      @SerializedName("TEST")
+      VALUE_TEST("TEST"),
+      ;
+
+      private String value;
+
+      private EnumSegmentUseCases(String value) {
         this.value = value;
       }
 

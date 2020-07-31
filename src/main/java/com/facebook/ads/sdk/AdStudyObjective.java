@@ -2830,6 +2830,7 @@ public class AdStudyObjective extends APINode {
       "name",
       "offline_conversion_data_sets",
       "offsitepixels",
+      "product_catalogs",
       "product_sets",
       "type",
     };
@@ -2946,6 +2947,15 @@ public class AdStudyObjective extends APINode {
     }
     public APIRequestUpdate setOffsitepixels (String offsitepixels) {
       this.setParam("offsitepixels", offsitepixels);
+      return this;
+    }
+
+    public APIRequestUpdate setProductCatalogs (List<Object> productCatalogs) {
+      this.setParam("product_catalogs", productCatalogs);
+      return this;
+    }
+    public APIRequestUpdate setProductCatalogs (String productCatalogs) {
+      this.setParam("product_catalogs", productCatalogs);
       return this;
     }
 

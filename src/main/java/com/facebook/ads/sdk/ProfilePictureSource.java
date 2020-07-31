@@ -328,6 +328,23 @@ public class ProfilePictureSource extends APINode {
       }
   }
 
+  public static enum EnumBreakingChange {
+      @SerializedName("PROFILE_PICTURE")
+      VALUE_PROFILE_PICTURE("PROFILE_PICTURE"),
+      ;
+
+      private String value;
+
+      private EnumBreakingChange(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {

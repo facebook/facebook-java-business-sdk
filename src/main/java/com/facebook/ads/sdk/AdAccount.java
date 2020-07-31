@@ -1050,6 +1050,7 @@ public class AdAccount extends APINode {
       "after",
       "business_id",
       "category",
+      "data_source",
       "extra_oids",
       "limit",
       "oid",
@@ -1151,6 +1152,15 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetActivities setCategory (String category) {
       this.setParam("category", category);
+      return this;
+    }
+
+    public APIRequestGetActivities setDataSource (AdActivity.EnumDataSource dataSource) {
+      this.setParam("data_source", dataSource);
+      return this;
+    }
+    public APIRequestGetActivities setDataSource (String dataSource) {
+      this.setParam("data_source", dataSource);
       return this;
     }
 
@@ -10106,6 +10116,7 @@ public class AdAccount extends APINode {
       "composer_type",
       "container_type",
       "content_category",
+      "creative_tools",
       "description",
       "embeddable",
       "end_offset",
@@ -10159,6 +10170,7 @@ public class AdAccount extends APINode {
       "upload_session_id",
       "upload_setting_properties",
       "video_file_chunk",
+      "video_id_original",
       "video_start_time_ms",
       "waterfall_id",
       "file",
@@ -10327,6 +10339,11 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdVideo setContentCategory (String contentCategory) {
       this.setParam("content_category", contentCategory);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setCreativeTools (String creativeTools) {
+      this.setParam("creative_tools", creativeTools);
       return this;
     }
 
@@ -10730,6 +10747,11 @@ public class AdAccount extends APINode {
 
     public APIRequestCreateAdVideo setVideoFileChunk (byte[] videoFileChunk) {
       this.setParam("video_file_chunk", videoFileChunk);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setVideoIdOriginal (String videoIdOriginal) {
+      this.setParam("video_id_original", videoIdOriginal);
       return this;
     }
 
@@ -14351,6 +14373,7 @@ public class AdAccount extends APINode {
       "source_campaign_id",
       "special_ad_categories",
       "special_ad_category",
+      "special_ad_category_country",
       "spend_cap",
       "start_time",
       "status",
@@ -14673,6 +14696,13 @@ public class AdAccount extends APINode {
       this.requestField("special_ad_category", value);
       return this;
     }
+    public APIRequestGetCampaigns requestSpecialAdCategoryCountryField () {
+      return this.requestSpecialAdCategoryCountryField(true);
+    }
+    public APIRequestGetCampaigns requestSpecialAdCategoryCountryField (boolean value) {
+      this.requestField("special_ad_category_country", value);
+      return this;
+    }
     public APIRequestGetCampaigns requestSpendCapField () {
       return this.requestSpendCapField(true);
     }
@@ -14738,6 +14768,7 @@ public class AdAccount extends APINode {
       "promoted_object",
       "source_campaign_id",
       "special_ad_categories",
+      "special_ad_category_country",
       "spend_cap",
       "status",
       "topline_id",
@@ -14905,6 +14936,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateCampaign setSpecialAdCategoryCountry (List<Campaign.EnumSpecialAdCategoryCountry> specialAdCategoryCountry) {
+      this.setParam("special_ad_category_country", specialAdCategoryCountry);
+      return this;
+    }
+    public APIRequestCreateCampaign setSpecialAdCategoryCountry (String specialAdCategoryCountry) {
+      this.setParam("special_ad_category_country", specialAdCategoryCountry);
+      return this;
+    }
+
     public APIRequestCreateCampaign setSpendCap (Long spendCap) {
       this.setParam("spend_cap", spendCap);
       return this;
@@ -15015,6 +15055,7 @@ public class AdAccount extends APINode {
       "source_campaign_id",
       "special_ad_categories",
       "special_ad_category",
+      "special_ad_category_country",
       "spend_cap",
       "start_time",
       "status",
@@ -15317,6 +15358,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetCampaignsByLabels requestSpecialAdCategoryField (boolean value) {
       this.requestField("special_ad_category", value);
+      return this;
+    }
+    public APIRequestGetCampaignsByLabels requestSpecialAdCategoryCountryField () {
+      return this.requestSpecialAdCategoryCountryField(true);
+    }
+    public APIRequestGetCampaignsByLabels requestSpecialAdCategoryCountryField (boolean value) {
+      this.requestField("special_ad_category_country", value);
       return this;
     }
     public APIRequestGetCampaignsByLabels requestSpendCapField () {
@@ -26682,6 +26730,8 @@ public class AdAccount extends APINode {
       VALUE_TRY("TRY"),
       @SerializedName("TWD")
       VALUE_TWD("TWD"),
+      @SerializedName("UAH")
+      VALUE_UAH("UAH"),
       @SerializedName("USD")
       VALUE_USD("USD"),
       @SerializedName("UYU")
@@ -26709,12 +26759,6 @@ public class AdAccount extends APINode {
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("ANALYZE")
       VALUE_ANALYZE("ANALYZE"),
-      @SerializedName("CREATIVE")
-      VALUE_CREATIVE("CREATIVE"),
-      @SerializedName("DRAFT")
-      VALUE_DRAFT("DRAFT"),
-      @SerializedName("FB_EMPLOYEE_DSO_ADVERTISE")
-      VALUE_FB_EMPLOYEE_DSO_ADVERTISE("FB_EMPLOYEE_DSO_ADVERTISE"),
       @SerializedName("MANAGE")
       VALUE_MANAGE("MANAGE"),
       ;
@@ -26736,12 +26780,6 @@ public class AdAccount extends APINode {
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("ANALYZE")
       VALUE_ANALYZE("ANALYZE"),
-      @SerializedName("CREATIVE")
-      VALUE_CREATIVE("CREATIVE"),
-      @SerializedName("DRAFT")
-      VALUE_DRAFT("DRAFT"),
-      @SerializedName("FB_EMPLOYEE_DSO_ADVERTISE")
-      VALUE_FB_EMPLOYEE_DSO_ADVERTISE("FB_EMPLOYEE_DSO_ADVERTISE"),
       @SerializedName("MANAGE")
       VALUE_MANAGE("MANAGE"),
       ;
