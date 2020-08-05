@@ -9517,6 +9517,8 @@ public class ProductCatalog extends APINode {
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("MANAGE")
       VALUE_MANAGE("MANAGE"),
+      @SerializedName("MANAGE_AR")
+      VALUE_MANAGE_AR("MANAGE_AR"),
       ;
 
       private String value;
@@ -9536,6 +9538,8 @@ public class ProductCatalog extends APINode {
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("MANAGE")
       VALUE_MANAGE("MANAGE"),
+      @SerializedName("MANAGE_AR")
+      VALUE_MANAGE_AR("MANAGE_AR"),
       ;
 
       private String value;

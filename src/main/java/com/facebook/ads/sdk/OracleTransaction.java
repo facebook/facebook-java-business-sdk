@@ -65,8 +65,6 @@ public class OracleTransaction extends APINode {
   private BilledAmountDetails mBilledAmountDetails = null;
   @SerializedName("billing_period")
   private String mBillingPeriod = null;
-  @SerializedName("campaign")
-  private AtlasCampaign mCampaign = null;
   @SerializedName("cdn_download_uri")
   private String mCdnDownloadUri = null;
   @SerializedName("currency")
@@ -306,10 +304,6 @@ public class OracleTransaction extends APINode {
     return new APIRequestGetCampaigns(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetData getData() {
-    return new APIRequestGetData(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
@@ -333,13 +327,6 @@ public class OracleTransaction extends APINode {
 
   public String getFieldBillingPeriod() {
     return mBillingPeriod;
-  }
-
-  public AtlasCampaign getFieldCampaign() {
-    if (mCampaign != null) {
-      mCampaign.context = getContext();
-    }
-    return mCampaign;
   }
 
   public String getFieldCdnDownloadUri() {
@@ -564,128 +551,6 @@ public class OracleTransaction extends APINode {
     }
   }
 
-  public static class APIRequestGetData extends APIRequest<AtlasURL> {
-
-    APINodeList<AtlasURL> lastResponse = null;
-    @Override
-    public APINodeList<AtlasURL> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "redirect",
-    };
-
-    public static final String[] FIELDS = {
-      "url",
-    };
-
-    @Override
-    public APINodeList<AtlasURL> parseResponse(String response, String header) throws APIException {
-      return AtlasURL.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<AtlasURL> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<AtlasURL> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<AtlasURL>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<AtlasURL>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<AtlasURL>>() {
-           public APINodeList<AtlasURL> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetData.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetData(String nodeId, APIContext context) {
-      super(context, nodeId, "/data", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetData setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetData setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetData setRedirect (Boolean redirect) {
-      this.setParam("redirect", redirect);
-      return this;
-    }
-    public APIRequestGetData setRedirect (String redirect) {
-      this.setParam("redirect", redirect);
-      return this;
-    }
-
-    public APIRequestGetData requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetData requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetData requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetData requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetData requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetData requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetData requestUrlField () {
-      return this.requestUrlField(true);
-    }
-    public APIRequestGetData requestUrlField (boolean value) {
-      this.requestField("url", value);
-      return this;
-    }
-  }
-
   public static class APIRequestGet extends APIRequest<OracleTransaction> {
 
     OracleTransaction lastResponse = null;
@@ -702,7 +567,6 @@ public class OracleTransaction extends APINode {
       "amount_due",
       "billed_amount_details",
       "billing_period",
-      "campaign",
       "cdn_download_uri",
       "currency",
       "download_uri",
@@ -842,13 +706,6 @@ public class OracleTransaction extends APINode {
       this.requestField("billing_period", value);
       return this;
     }
-    public APIRequestGet requestCampaignField () {
-      return this.requestCampaignField(true);
-    }
-    public APIRequestGet requestCampaignField (boolean value) {
-      this.requestField("campaign", value);
-      return this;
-    }
     public APIRequestGet requestCdnDownloadUriField () {
       return this.requestCdnDownloadUriField(true);
     }
@@ -981,7 +838,6 @@ public class OracleTransaction extends APINode {
     this.mAmountDue = instance.mAmountDue;
     this.mBilledAmountDetails = instance.mBilledAmountDetails;
     this.mBillingPeriod = instance.mBillingPeriod;
-    this.mCampaign = instance.mCampaign;
     this.mCdnDownloadUri = instance.mCdnDownloadUri;
     this.mCurrency = instance.mCurrency;
     this.mDownloadUri = instance.mDownloadUri;

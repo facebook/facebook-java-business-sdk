@@ -1188,7 +1188,6 @@ public class BusinessUser extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
-      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -1197,6 +1196,7 @@ public class BusinessUser extends APINode {
       "personal_interests",
       "pharma_safety_info",
       "phone",
+      "pickup_options",
       "place_type",
       "plot_outline",
       "preferred_audience",
@@ -1966,13 +1966,6 @@ public class BusinessUser extends APINode {
       this.requestField("overall_star_rating", value);
       return this;
     }
-    public APIRequestGetAssignedPages requestPageAboutStoryField () {
-      return this.requestPageAboutStoryField(true);
-    }
-    public APIRequestGetAssignedPages requestPageAboutStoryField (boolean value) {
-      this.requestField("page_about_story", value);
-      return this;
-    }
     public APIRequestGetAssignedPages requestPageTokenField () {
       return this.requestPageTokenField(true);
     }
@@ -2027,6 +2020,13 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGetAssignedPages requestPhoneField (boolean value) {
       this.requestField("phone", value);
+      return this;
+    }
+    public APIRequestGetAssignedPages requestPickupOptionsField () {
+      return this.requestPickupOptionsField(true);
+    }
+    public APIRequestGetAssignedPages requestPickupOptionsField (boolean value) {
+      this.requestField("pickup_options", value);
       return this;
     }
     public APIRequestGetAssignedPages requestPlaceTypeField () {

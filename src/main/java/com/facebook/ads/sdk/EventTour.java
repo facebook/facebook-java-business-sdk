@@ -839,7 +839,6 @@ public class EventTour extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
-      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -848,6 +847,7 @@ public class EventTour extends APINode {
       "personal_interests",
       "pharma_safety_info",
       "phone",
+      "pickup_options",
       "place_type",
       "plot_outline",
       "preferred_audience",
@@ -1617,13 +1617,6 @@ public class EventTour extends APINode {
       this.requestField("overall_star_rating", value);
       return this;
     }
-    public APIRequestGetPages requestPageAboutStoryField () {
-      return this.requestPageAboutStoryField(true);
-    }
-    public APIRequestGetPages requestPageAboutStoryField (boolean value) {
-      this.requestField("page_about_story", value);
-      return this;
-    }
     public APIRequestGetPages requestPageTokenField () {
       return this.requestPageTokenField(true);
     }
@@ -1678,6 +1671,13 @@ public class EventTour extends APINode {
     }
     public APIRequestGetPages requestPhoneField (boolean value) {
       this.requestField("phone", value);
+      return this;
+    }
+    public APIRequestGetPages requestPickupOptionsField () {
+      return this.requestPickupOptionsField(true);
+    }
+    public APIRequestGetPages requestPickupOptionsField (boolean value) {
+      this.requestField("pickup_options", value);
       return this;
     }
     public APIRequestGetPages requestPlaceTypeField () {

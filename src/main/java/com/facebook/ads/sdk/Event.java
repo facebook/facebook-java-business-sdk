@@ -844,7 +844,6 @@ public class Event extends APINode {
       "privacy",
       "projection",
       "published",
-      "save_vod",
       "schedule_custom_profile_image",
       "spatial_audio_format",
       "status",
@@ -1012,15 +1011,6 @@ public class Event extends APINode {
     }
     public APIRequestCreateLiveVideo setPublished (String published) {
       this.setParam("published", published);
-      return this;
-    }
-
-    public APIRequestCreateLiveVideo setSaveVod (Boolean saveVod) {
-      this.setParam("save_vod", saveVod);
-      return this;
-    }
-    public APIRequestCreateLiveVideo setSaveVod (String saveVod) {
-      this.setParam("save_vod", saveVod);
       return this;
     }
 

@@ -237,8 +237,6 @@ public class Page extends APINode {
   private Boolean mOfferEligible = null;
   @SerializedName("overall_star_rating")
   private Double mOverallStarRating = null;
-  @SerializedName("page_about_story")
-  private PageAboutStory mPageAboutStory = null;
   @SerializedName("page_token")
   private String mPageToken = null;
   @SerializedName("parent_page")
@@ -255,6 +253,8 @@ public class Page extends APINode {
   private String mPharmaSafetyInfo = null;
   @SerializedName("phone")
   private String mPhone = null;
+  @SerializedName("pickup_options")
+  private List<String> mPickupOptions = null;
   @SerializedName("place_type")
   private String mPlaceType = null;
   @SerializedName("plot_outline")
@@ -810,10 +810,6 @@ public class Page extends APINode {
     return new APIRequestCreateNlpConfig(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreatePageAboutStory createPageAboutStory() {
-    return new APIRequestCreatePageAboutStory(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetPageBackedInstagramAccounts getPageBackedInstagramAccounts() {
     return new APIRequestGetPageBackedInstagramAccounts(this.getPrefixedId().toString(), context);
   }
@@ -852,10 +848,6 @@ public class Page extends APINode {
 
   public APIRequestCreatePicture createPicture() {
     return new APIRequestCreatePicture(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetPlaceTopics getPlaceTopics() {
-    return new APIRequestGetPlaceTopics(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetPosts getPosts() {
@@ -918,10 +910,6 @@ public class Page extends APINode {
     return new APIRequestCreateSubscribedApp(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestDeleteTabs deleteTabs() {
-    return new APIRequestDeleteTabs(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetTabs getTabs() {
     return new APIRequestGetTabs(this.getPrefixedId().toString(), context);
   }
@@ -940,14 +928,6 @@ public class Page extends APINode {
 
   public APIRequestGetThreadOwner getThreadOwner() {
     return new APIRequestGetThreadOwner(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestDeleteThreadSettings deleteThreadSettings() {
-    return new APIRequestDeleteThreadSettings(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateThreadSetting createThreadSetting() {
-    return new APIRequestCreateThreadSetting(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetThreads getThreads() {
@@ -1383,13 +1363,6 @@ public class Page extends APINode {
     return mOverallStarRating;
   }
 
-  public PageAboutStory getFieldPageAboutStory() {
-    if (mPageAboutStory != null) {
-      mPageAboutStory.context = getContext();
-    }
-    return mPageAboutStory;
-  }
-
   public String getFieldPageToken() {
     return mPageToken;
   }
@@ -1423,6 +1396,10 @@ public class Page extends APINode {
 
   public String getFieldPhone() {
     return mPhone;
+  }
+
+  public List<String> getFieldPickupOptions() {
+    return mPickupOptions;
   }
 
   public String getFieldPlaceType() {
@@ -6873,7 +6850,6 @@ public class Page extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
-      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -6882,6 +6858,7 @@ public class Page extends APINode {
       "personal_interests",
       "pharma_safety_info",
       "phone",
+      "pickup_options",
       "place_type",
       "plot_outline",
       "preferred_audience",
@@ -7651,13 +7628,6 @@ public class Page extends APINode {
       this.requestField("overall_star_rating", value);
       return this;
     }
-    public APIRequestGetCrosspostWhitelistedPages requestPageAboutStoryField () {
-      return this.requestPageAboutStoryField(true);
-    }
-    public APIRequestGetCrosspostWhitelistedPages requestPageAboutStoryField (boolean value) {
-      this.requestField("page_about_story", value);
-      return this;
-    }
     public APIRequestGetCrosspostWhitelistedPages requestPageTokenField () {
       return this.requestPageTokenField(true);
     }
@@ -7712,6 +7682,13 @@ public class Page extends APINode {
     }
     public APIRequestGetCrosspostWhitelistedPages requestPhoneField (boolean value) {
       this.requestField("phone", value);
+      return this;
+    }
+    public APIRequestGetCrosspostWhitelistedPages requestPickupOptionsField () {
+      return this.requestPickupOptionsField(true);
+    }
+    public APIRequestGetCrosspostWhitelistedPages requestPickupOptionsField (boolean value) {
+      this.requestField("pickup_options", value);
       return this;
     }
     public APIRequestGetCrosspostWhitelistedPages requestPlaceTypeField () {
@@ -10783,7 +10760,6 @@ public class Page extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
-      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -10792,6 +10768,7 @@ public class Page extends APINode {
       "personal_interests",
       "pharma_safety_info",
       "phone",
+      "pickup_options",
       "place_type",
       "plot_outline",
       "preferred_audience",
@@ -11561,13 +11538,6 @@ public class Page extends APINode {
       this.requestField("overall_star_rating", value);
       return this;
     }
-    public APIRequestGetGlobalBrandChildren requestPageAboutStoryField () {
-      return this.requestPageAboutStoryField(true);
-    }
-    public APIRequestGetGlobalBrandChildren requestPageAboutStoryField (boolean value) {
-      this.requestField("page_about_story", value);
-      return this;
-    }
     public APIRequestGetGlobalBrandChildren requestPageTokenField () {
       return this.requestPageTokenField(true);
     }
@@ -11622,6 +11592,13 @@ public class Page extends APINode {
     }
     public APIRequestGetGlobalBrandChildren requestPhoneField (boolean value) {
       this.requestField("phone", value);
+      return this;
+    }
+    public APIRequestGetGlobalBrandChildren requestPickupOptionsField () {
+      return this.requestPickupOptionsField(true);
+    }
+    public APIRequestGetGlobalBrandChildren requestPickupOptionsField (boolean value) {
+      this.requestField("pickup_options", value);
       return this;
     }
     public APIRequestGetGlobalBrandChildren requestPlaceTypeField () {
@@ -13974,7 +13951,6 @@ public class Page extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
-      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -13983,6 +13959,7 @@ public class Page extends APINode {
       "personal_interests",
       "pharma_safety_info",
       "phone",
+      "pickup_options",
       "place_type",
       "plot_outline",
       "preferred_audience",
@@ -14757,13 +14734,6 @@ public class Page extends APINode {
       this.requestField("overall_star_rating", value);
       return this;
     }
-    public APIRequestGetLikes requestPageAboutStoryField () {
-      return this.requestPageAboutStoryField(true);
-    }
-    public APIRequestGetLikes requestPageAboutStoryField (boolean value) {
-      this.requestField("page_about_story", value);
-      return this;
-    }
     public APIRequestGetLikes requestPageTokenField () {
       return this.requestPageTokenField(true);
     }
@@ -14818,6 +14788,13 @@ public class Page extends APINode {
     }
     public APIRequestGetLikes requestPhoneField (boolean value) {
       this.requestField("phone", value);
+      return this;
+    }
+    public APIRequestGetLikes requestPickupOptionsField () {
+      return this.requestPickupOptionsField(true);
+    }
+    public APIRequestGetLikes requestPickupOptionsField (boolean value) {
+      this.requestField("pickup_options", value);
       return this;
     }
     public APIRequestGetLikes requestPlaceTypeField () {
@@ -15799,7 +15776,6 @@ public class Page extends APINode {
       "privacy",
       "projection",
       "published",
-      "save_vod",
       "schedule_custom_profile_image",
       "spatial_audio_format",
       "status",
@@ -15995,15 +15971,6 @@ public class Page extends APINode {
     }
     public APIRequestCreateLiveVideo setPublished (String published) {
       this.setParam("published", published);
-      return this;
-    }
-
-    public APIRequestCreateLiveVideo setSaveVod (Boolean saveVod) {
-      this.setParam("save_vod", saveVod);
-      return this;
-    }
-    public APIRequestCreateLiveVideo setSaveVod (String saveVod) {
-      this.setParam("save_vod", saveVod);
       return this;
     }
 
@@ -16335,7 +16302,6 @@ public class Page extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
-      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -16344,6 +16310,7 @@ public class Page extends APINode {
       "personal_interests",
       "pharma_safety_info",
       "phone",
+      "pickup_options",
       "place_type",
       "plot_outline",
       "preferred_audience",
@@ -17113,13 +17080,6 @@ public class Page extends APINode {
       this.requestField("overall_star_rating", value);
       return this;
     }
-    public APIRequestGetLocations requestPageAboutStoryField () {
-      return this.requestPageAboutStoryField(true);
-    }
-    public APIRequestGetLocations requestPageAboutStoryField (boolean value) {
-      this.requestField("page_about_story", value);
-      return this;
-    }
     public APIRequestGetLocations requestPageTokenField () {
       return this.requestPageTokenField(true);
     }
@@ -17174,6 +17134,13 @@ public class Page extends APINode {
     }
     public APIRequestGetLocations requestPhoneField (boolean value) {
       this.requestField("phone", value);
+      return this;
+    }
+    public APIRequestGetLocations requestPickupOptionsField () {
+      return this.requestPickupOptionsField(true);
+    }
+    public APIRequestGetLocations requestPickupOptionsField (boolean value) {
+      this.requestField("pickup_options", value);
       return this;
     }
     public APIRequestGetLocations requestPlaceTypeField () {
@@ -17484,6 +17451,7 @@ public class Page extends APINode {
       "page_username",
       "permanently_closed",
       "phone",
+      "pickup_options",
       "place_topics",
       "price_range",
       "store_code",
@@ -17634,6 +17602,15 @@ public class Page extends APINode {
 
     public APIRequestCreateLocation setPhone (String phone) {
       this.setParam("phone", phone);
+      return this;
+    }
+
+    public APIRequestCreateLocation setPickupOptions (List<Page.EnumPickupOptions> pickupOptions) {
+      this.setParam("pickup_options", pickupOptions);
+      return this;
+    }
+    public APIRequestCreateLocation setPickupOptions (String pickupOptions) {
+      this.setParam("pickup_options", pickupOptions);
       return this;
     }
 
@@ -19795,156 +19772,6 @@ public class Page extends APINode {
 
     @Override
     public APIRequestCreateNlpConfig requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreatePageAboutStory extends APIRequest<Page> {
-
-    Page lastResponse = null;
-    @Override
-    public Page getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "composed_text",
-      "cover_photo",
-      "entity_map",
-      "is_published",
-      "title",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Page parseResponse(String response, String header) throws APIException {
-      return Page.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Page execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Page execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Page> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Page> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Page>() {
-           public Page apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreatePageAboutStory.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreatePageAboutStory(String nodeId, APIContext context) {
-      super(context, nodeId, "/page_about_story", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreatePageAboutStory setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePageAboutStory setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreatePageAboutStory setComposedText (List<Map<String, String>> composedText) {
-      this.setParam("composed_text", composedText);
-      return this;
-    }
-    public APIRequestCreatePageAboutStory setComposedText (String composedText) {
-      this.setParam("composed_text", composedText);
-      return this;
-    }
-
-    public APIRequestCreatePageAboutStory setCoverPhoto (Map<String, String> coverPhoto) {
-      this.setParam("cover_photo", coverPhoto);
-      return this;
-    }
-    public APIRequestCreatePageAboutStory setCoverPhoto (String coverPhoto) {
-      this.setParam("cover_photo", coverPhoto);
-      return this;
-    }
-
-    public APIRequestCreatePageAboutStory setEntityMap (List<Map<String, String>> entityMap) {
-      this.setParam("entity_map", entityMap);
-      return this;
-    }
-    public APIRequestCreatePageAboutStory setEntityMap (String entityMap) {
-      this.setParam("entity_map", entityMap);
-      return this;
-    }
-
-    public APIRequestCreatePageAboutStory setIsPublished (Boolean isPublished) {
-      this.setParam("is_published", isPublished);
-      return this;
-    }
-    public APIRequestCreatePageAboutStory setIsPublished (String isPublished) {
-      this.setParam("is_published", isPublished);
-      return this;
-    }
-
-    public APIRequestCreatePageAboutStory setTitle (String title) {
-      this.setParam("title", title);
-      return this;
-    }
-
-    public APIRequestCreatePageAboutStory requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreatePageAboutStory requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePageAboutStory requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreatePageAboutStory requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePageAboutStory requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePageAboutStory requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -22163,174 +21990,6 @@ public class Page extends APINode {
       return this;
     }
 
-  }
-
-  public static class APIRequestGetPlaceTopics extends APIRequest<PlaceTopic> {
-
-    APINodeList<PlaceTopic> lastResponse = null;
-    @Override
-    public APINodeList<PlaceTopic> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "count",
-      "has_children",
-      "icon_url",
-      "id",
-      "name",
-      "parent_ids",
-      "plural_name",
-      "top_subtopic_names",
-    };
-
-    @Override
-    public APINodeList<PlaceTopic> parseResponse(String response, String header) throws APIException {
-      return PlaceTopic.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<PlaceTopic> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<PlaceTopic> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<PlaceTopic>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<PlaceTopic>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<PlaceTopic>>() {
-           public APINodeList<PlaceTopic> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetPlaceTopics.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetPlaceTopics(String nodeId, APIContext context) {
-      super(context, nodeId, "/place_topics", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetPlaceTopics setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPlaceTopics setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetPlaceTopics requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetPlaceTopics requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPlaceTopics requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetPlaceTopics requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPlaceTopics requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPlaceTopics requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetPlaceTopics requestCountField () {
-      return this.requestCountField(true);
-    }
-    public APIRequestGetPlaceTopics requestCountField (boolean value) {
-      this.requestField("count", value);
-      return this;
-    }
-    public APIRequestGetPlaceTopics requestHasChildrenField () {
-      return this.requestHasChildrenField(true);
-    }
-    public APIRequestGetPlaceTopics requestHasChildrenField (boolean value) {
-      this.requestField("has_children", value);
-      return this;
-    }
-    public APIRequestGetPlaceTopics requestIconUrlField () {
-      return this.requestIconUrlField(true);
-    }
-    public APIRequestGetPlaceTopics requestIconUrlField (boolean value) {
-      this.requestField("icon_url", value);
-      return this;
-    }
-    public APIRequestGetPlaceTopics requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetPlaceTopics requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetPlaceTopics requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetPlaceTopics requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetPlaceTopics requestParentIdsField () {
-      return this.requestParentIdsField(true);
-    }
-    public APIRequestGetPlaceTopics requestParentIdsField (boolean value) {
-      this.requestField("parent_ids", value);
-      return this;
-    }
-    public APIRequestGetPlaceTopics requestPluralNameField () {
-      return this.requestPluralNameField(true);
-    }
-    public APIRequestGetPlaceTopics requestPluralNameField (boolean value) {
-      this.requestField("plural_name", value);
-      return this;
-    }
-    public APIRequestGetPlaceTopics requestTopSubtopicNamesField () {
-      return this.requestTopSubtopicNamesField(true);
-    }
-    public APIRequestGetPlaceTopics requestTopSubtopicNamesField (boolean value) {
-      this.requestField("top_subtopic_names", value);
-      return this;
-    }
   }
 
   public static class APIRequestGetPosts extends APIRequest<PagePost> {
@@ -27903,116 +27562,6 @@ public class Page extends APINode {
 
   }
 
-  public static class APIRequestDeleteTabs extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "tab",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestDeleteTabs.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestDeleteTabs(String nodeId, APIContext context) {
-      super(context, nodeId, "/tabs", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDeleteTabs setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteTabs setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDeleteTabs setTab (String tab) {
-      this.setParam("tab", tab);
-      return this;
-    }
-
-    public APIRequestDeleteTabs requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDeleteTabs requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteTabs requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDeleteTabs requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteTabs requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteTabs requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetTabs extends APIRequest<Tab> {
 
     APINodeList<Tab> lastResponse = null;
@@ -29203,332 +28752,6 @@ public class Page extends APINode {
       this.requestField("thread_owner", value);
       return this;
     }
-  }
-
-  public static class APIRequestDeleteThreadSettings extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "setting_type",
-      "thread_state",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestDeleteThreadSettings.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestDeleteThreadSettings(String nodeId, APIContext context) {
-      super(context, nodeId, "/thread_settings", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDeleteThreadSettings setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteThreadSettings setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDeleteThreadSettings setSettingType (Page.EnumSettingType settingType) {
-      this.setParam("setting_type", settingType);
-      return this;
-    }
-    public APIRequestDeleteThreadSettings setSettingType (String settingType) {
-      this.setParam("setting_type", settingType);
-      return this;
-    }
-
-    public APIRequestDeleteThreadSettings setThreadState (Page.EnumThreadState threadState) {
-      this.setParam("thread_state", threadState);
-      return this;
-    }
-    public APIRequestDeleteThreadSettings setThreadState (String threadState) {
-      this.setParam("thread_state", threadState);
-      return this;
-    }
-
-    public APIRequestDeleteThreadSettings requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDeleteThreadSettings requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteThreadSettings requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDeleteThreadSettings requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteThreadSettings requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteThreadSettings requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateThreadSetting extends APIRequest<Page> {
-
-    Page lastResponse = null;
-    @Override
-    public Page getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "account_linking_url",
-      "call_to_actions",
-      "domain_action_type",
-      "greeting",
-      "payment_dev_mode_action",
-      "payment_privacy_url",
-      "payment_public_key",
-      "payment_testers",
-      "setting_type",
-      "thread_state",
-      "whitelisted_domains",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Page parseResponse(String response, String header) throws APIException {
-      return Page.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Page execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Page execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Page> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Page> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Page>() {
-           public Page apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateThreadSetting.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateThreadSetting(String nodeId, APIContext context) {
-      super(context, nodeId, "/thread_settings", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateThreadSetting setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateThreadSetting setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateThreadSetting setAccountLinkingUrl (String accountLinkingUrl) {
-      this.setParam("account_linking_url", accountLinkingUrl);
-      return this;
-    }
-
-    public APIRequestCreateThreadSetting setCallToActions (List<Object> callToActions) {
-      this.setParam("call_to_actions", callToActions);
-      return this;
-    }
-    public APIRequestCreateThreadSetting setCallToActions (String callToActions) {
-      this.setParam("call_to_actions", callToActions);
-      return this;
-    }
-
-    public APIRequestCreateThreadSetting setDomainActionType (Page.EnumDomainActionType domainActionType) {
-      this.setParam("domain_action_type", domainActionType);
-      return this;
-    }
-    public APIRequestCreateThreadSetting setDomainActionType (String domainActionType) {
-      this.setParam("domain_action_type", domainActionType);
-      return this;
-    }
-
-    public APIRequestCreateThreadSetting setGreeting (Object greeting) {
-      this.setParam("greeting", greeting);
-      return this;
-    }
-    public APIRequestCreateThreadSetting setGreeting (String greeting) {
-      this.setParam("greeting", greeting);
-      return this;
-    }
-
-    public APIRequestCreateThreadSetting setPaymentDevModeAction (Page.EnumPaymentDevModeAction paymentDevModeAction) {
-      this.setParam("payment_dev_mode_action", paymentDevModeAction);
-      return this;
-    }
-    public APIRequestCreateThreadSetting setPaymentDevModeAction (String paymentDevModeAction) {
-      this.setParam("payment_dev_mode_action", paymentDevModeAction);
-      return this;
-    }
-
-    public APIRequestCreateThreadSetting setPaymentPrivacyUrl (String paymentPrivacyUrl) {
-      this.setParam("payment_privacy_url", paymentPrivacyUrl);
-      return this;
-    }
-
-    public APIRequestCreateThreadSetting setPaymentPublicKey (String paymentPublicKey) {
-      this.setParam("payment_public_key", paymentPublicKey);
-      return this;
-    }
-
-    public APIRequestCreateThreadSetting setPaymentTesters (List<String> paymentTesters) {
-      this.setParam("payment_testers", paymentTesters);
-      return this;
-    }
-    public APIRequestCreateThreadSetting setPaymentTesters (String paymentTesters) {
-      this.setParam("payment_testers", paymentTesters);
-      return this;
-    }
-
-    public APIRequestCreateThreadSetting setSettingType (Page.EnumSettingType settingType) {
-      this.setParam("setting_type", settingType);
-      return this;
-    }
-    public APIRequestCreateThreadSetting setSettingType (String settingType) {
-      this.setParam("setting_type", settingType);
-      return this;
-    }
-
-    public APIRequestCreateThreadSetting setThreadState (Page.EnumThreadState threadState) {
-      this.setParam("thread_state", threadState);
-      return this;
-    }
-    public APIRequestCreateThreadSetting setThreadState (String threadState) {
-      this.setParam("thread_state", threadState);
-      return this;
-    }
-
-    public APIRequestCreateThreadSetting setWhitelistedDomains (List<String> whitelistedDomains) {
-      this.setParam("whitelisted_domains", whitelistedDomains);
-      return this;
-    }
-    public APIRequestCreateThreadSetting setWhitelistedDomains (String whitelistedDomains) {
-      this.setParam("whitelisted_domains", whitelistedDomains);
-      return this;
-    }
-
-    public APIRequestCreateThreadSetting requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateThreadSetting requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateThreadSetting requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateThreadSetting requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateThreadSetting requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateThreadSetting requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestGetThreads extends APIRequest<UnifiedThread> {
@@ -32726,7 +31949,6 @@ public class Page extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
-      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -32735,6 +31957,7 @@ public class Page extends APINode {
       "personal_interests",
       "pharma_safety_info",
       "phone",
+      "pickup_options",
       "place_type",
       "plot_outline",
       "preferred_audience",
@@ -33509,13 +32732,6 @@ public class Page extends APINode {
       this.requestField("overall_star_rating", value);
       return this;
     }
-    public APIRequestGet requestPageAboutStoryField () {
-      return this.requestPageAboutStoryField(true);
-    }
-    public APIRequestGet requestPageAboutStoryField (boolean value) {
-      this.requestField("page_about_story", value);
-      return this;
-    }
     public APIRequestGet requestPageTokenField () {
       return this.requestPageTokenField(true);
     }
@@ -33570,6 +32786,13 @@ public class Page extends APINode {
     }
     public APIRequestGet requestPhoneField (boolean value) {
       this.requestField("phone", value);
+      return this;
+    }
+    public APIRequestGet requestPickupOptionsField () {
+      return this.requestPickupOptionsField(true);
+    }
+    public APIRequestGet requestPickupOptionsField (boolean value) {
+      this.requestField("pickup_options", value);
       return this;
     }
     public APIRequestGet requestPlaceTypeField () {
@@ -33910,6 +33133,7 @@ public class Page extends APINode {
       "parking",
       "payment_options",
       "phone",
+      "pickup_options",
       "plot_outline",
       "price_range",
       "public_transit",
@@ -34291,6 +33515,15 @@ public class Page extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setPickupOptions (List<Page.EnumPickupOptions> pickupOptions) {
+      this.setParam("pickup_options", pickupOptions);
+      return this;
+    }
+    public APIRequestUpdate setPickupOptions (String pickupOptions) {
+      this.setParam("pickup_options", pickupOptions);
+      return this;
+    }
+
     public APIRequestUpdate setPlotOutline (String plotOutline) {
       this.setParam("plot_outline", plotOutline);
       return this;
@@ -34572,6 +33805,27 @@ public class Page extends APINode {
       private String value;
 
       private EnumFoodStyles(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumPickupOptions {
+      @SerializedName("CURBSIDE")
+      VALUE_CURBSIDE("CURBSIDE"),
+      @SerializedName("IN_STORE")
+      VALUE_IN_STORE("IN_STORE"),
+      @SerializedName("OTHER")
+      VALUE_OTHER("OTHER"),
+      ;
+
+      private String value;
+
+      private EnumPickupOptions(String value) {
         this.value = value;
       }
 
@@ -35206,88 +34460,6 @@ public class Page extends APINode {
       }
   }
 
-  public static enum EnumDomainActionType {
-      @SerializedName("ADD")
-      VALUE_ADD("ADD"),
-      @SerializedName("REMOVE")
-      VALUE_REMOVE("REMOVE"),
-      ;
-
-      private String value;
-
-      private EnumDomainActionType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumPaymentDevModeAction {
-      @SerializedName("ADD")
-      VALUE_ADD("ADD"),
-      @SerializedName("REMOVE")
-      VALUE_REMOVE("REMOVE"),
-      ;
-
-      private String value;
-
-      private EnumPaymentDevModeAction(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumSettingType {
-      @SerializedName("ACCOUNT_LINKING")
-      VALUE_ACCOUNT_LINKING("ACCOUNT_LINKING"),
-      @SerializedName("CALL_TO_ACTIONS")
-      VALUE_CALL_TO_ACTIONS("CALL_TO_ACTIONS"),
-      @SerializedName("DOMAIN_WHITELISTING")
-      VALUE_DOMAIN_WHITELISTING("DOMAIN_WHITELISTING"),
-      @SerializedName("GREETING")
-      VALUE_GREETING("GREETING"),
-      @SerializedName("PAYMENT")
-      VALUE_PAYMENT("PAYMENT"),
-      ;
-
-      private String value;
-
-      private EnumSettingType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumThreadState {
-      @SerializedName("EXISTING_THREAD")
-      VALUE_EXISTING_THREAD("EXISTING_THREAD"),
-      @SerializedName("NEW_THREAD")
-      VALUE_NEW_THREAD("NEW_THREAD"),
-      ;
-
-      private String value;
-
-      private EnumThreadState(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
   public static enum EnumAction {
       @SerializedName("BLOCK")
       VALUE_BLOCK("BLOCK"),
@@ -35519,7 +34691,6 @@ public class Page extends APINode {
     this.mNewLikeCount = instance.mNewLikeCount;
     this.mOfferEligible = instance.mOfferEligible;
     this.mOverallStarRating = instance.mOverallStarRating;
-    this.mPageAboutStory = instance.mPageAboutStory;
     this.mPageToken = instance.mPageToken;
     this.mParentPage = instance.mParentPage;
     this.mParking = instance.mParking;
@@ -35528,6 +34699,7 @@ public class Page extends APINode {
     this.mPersonalInterests = instance.mPersonalInterests;
     this.mPharmaSafetyInfo = instance.mPharmaSafetyInfo;
     this.mPhone = instance.mPhone;
+    this.mPickupOptions = instance.mPickupOptions;
     this.mPlaceType = instance.mPlaceType;
     this.mPlotOutline = instance.mPlotOutline;
     this.mPreferredAudience = instance.mPreferredAudience;

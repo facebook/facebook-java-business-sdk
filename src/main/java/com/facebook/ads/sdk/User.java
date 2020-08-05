@@ -576,10 +576,6 @@ public class User extends APINode {
     return new APIRequestCreateStagingResource(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetTaggableFriends getTaggableFriends() {
-    return new APIRequestGetTaggableFriends(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetVideos getVideos() {
     return new APIRequestGetVideos(this.getPrefixedId().toString(), context);
   }
@@ -1190,7 +1186,6 @@ public class User extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
-      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -1199,6 +1194,7 @@ public class User extends APINode {
       "personal_interests",
       "pharma_safety_info",
       "phone",
+      "pickup_options",
       "place_type",
       "plot_outline",
       "preferred_audience",
@@ -1986,13 +1982,6 @@ public class User extends APINode {
       this.requestField("overall_star_rating", value);
       return this;
     }
-    public APIRequestGetAccounts requestPageAboutStoryField () {
-      return this.requestPageAboutStoryField(true);
-    }
-    public APIRequestGetAccounts requestPageAboutStoryField (boolean value) {
-      this.requestField("page_about_story", value);
-      return this;
-    }
     public APIRequestGetAccounts requestPageTokenField () {
       return this.requestPageTokenField(true);
     }
@@ -2047,6 +2036,13 @@ public class User extends APINode {
     }
     public APIRequestGetAccounts requestPhoneField (boolean value) {
       this.requestField("phone", value);
+      return this;
+    }
+    public APIRequestGetAccounts requestPickupOptionsField () {
+      return this.requestPickupOptionsField(true);
+    }
+    public APIRequestGetAccounts requestPickupOptionsField (boolean value) {
+      this.requestField("pickup_options", value);
       return this;
     }
     public APIRequestGetAccounts requestPlaceTypeField () {
@@ -5092,7 +5088,6 @@ public class User extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
-      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -5101,6 +5096,7 @@ public class User extends APINode {
       "personal_interests",
       "pharma_safety_info",
       "phone",
+      "pickup_options",
       "place_type",
       "plot_outline",
       "preferred_audience",
@@ -5870,13 +5866,6 @@ public class User extends APINode {
       this.requestField("overall_star_rating", value);
       return this;
     }
-    public APIRequestGetAssignedPages requestPageAboutStoryField () {
-      return this.requestPageAboutStoryField(true);
-    }
-    public APIRequestGetAssignedPages requestPageAboutStoryField (boolean value) {
-      this.requestField("page_about_story", value);
-      return this;
-    }
     public APIRequestGetAssignedPages requestPageTokenField () {
       return this.requestPageTokenField(true);
     }
@@ -5931,6 +5920,13 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedPages requestPhoneField (boolean value) {
       this.requestField("phone", value);
+      return this;
+    }
+    public APIRequestGetAssignedPages requestPickupOptionsField () {
+      return this.requestPickupOptionsField(true);
+    }
+    public APIRequestGetAssignedPages requestPickupOptionsField (boolean value) {
+      this.requestField("pickup_options", value);
       return this;
     }
     public APIRequestGetAssignedPages requestPlaceTypeField () {
@@ -10899,7 +10895,6 @@ public class User extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
-      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -10908,6 +10903,7 @@ public class User extends APINode {
       "personal_interests",
       "pharma_safety_info",
       "phone",
+      "pickup_options",
       "place_type",
       "plot_outline",
       "preferred_audience",
@@ -11682,13 +11678,6 @@ public class User extends APINode {
       this.requestField("overall_star_rating", value);
       return this;
     }
-    public APIRequestGetLikes requestPageAboutStoryField () {
-      return this.requestPageAboutStoryField(true);
-    }
-    public APIRequestGetLikes requestPageAboutStoryField (boolean value) {
-      this.requestField("page_about_story", value);
-      return this;
-    }
     public APIRequestGetLikes requestPageTokenField () {
       return this.requestPageTokenField(true);
     }
@@ -11743,6 +11732,13 @@ public class User extends APINode {
     }
     public APIRequestGetLikes requestPhoneField (boolean value) {
       this.requestField("phone", value);
+      return this;
+    }
+    public APIRequestGetLikes requestPickupOptionsField () {
+      return this.requestPickupOptionsField(true);
+    }
+    public APIRequestGetLikes requestPickupOptionsField (boolean value) {
+      this.requestField("pickup_options", value);
       return this;
     }
     public APIRequestGetLikes requestPlaceTypeField () {
@@ -12721,7 +12717,6 @@ public class User extends APINode {
       "privacy",
       "projection",
       "published",
-      "save_vod",
       "schedule_custom_profile_image",
       "spatial_audio_format",
       "status",
@@ -12889,15 +12884,6 @@ public class User extends APINode {
     }
     public APIRequestCreateLiveVideo setPublished (String published) {
       this.setParam("published", published);
-      return this;
-    }
-
-    public APIRequestCreateLiveVideo setSaveVod (Boolean saveVod) {
-      this.setParam("save_vod", saveVod);
-      return this;
-    }
-    public APIRequestCreateLiveVideo setSaveVod (String saveVod) {
-      this.setParam("save_vod", saveVod);
       return this;
     }
 
@@ -13325,7 +13311,6 @@ public class User extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
-      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -13334,6 +13319,7 @@ public class User extends APINode {
       "personal_interests",
       "pharma_safety_info",
       "phone",
+      "pickup_options",
       "place_type",
       "plot_outline",
       "preferred_audience",
@@ -14108,13 +14094,6 @@ public class User extends APINode {
       this.requestField("overall_star_rating", value);
       return this;
     }
-    public APIRequestGetMusic requestPageAboutStoryField () {
-      return this.requestPageAboutStoryField(true);
-    }
-    public APIRequestGetMusic requestPageAboutStoryField (boolean value) {
-      this.requestField("page_about_story", value);
-      return this;
-    }
     public APIRequestGetMusic requestPageTokenField () {
       return this.requestPageTokenField(true);
     }
@@ -14169,6 +14148,13 @@ public class User extends APINode {
     }
     public APIRequestGetMusic requestPhoneField (boolean value) {
       this.requestField("phone", value);
+      return this;
+    }
+    public APIRequestGetMusic requestPickupOptionsField () {
+      return this.requestPickupOptionsField(true);
+    }
+    public APIRequestGetMusic requestPickupOptionsField (boolean value) {
+      this.requestField("pickup_options", value);
       return this;
     }
     public APIRequestGetMusic requestPlaceTypeField () {
@@ -16868,150 +16854,6 @@ public class User extends APINode {
       return this;
     }
 
-  }
-
-  public static class APIRequestGetTaggableFriends extends APIRequest<UserTaggableFriend> {
-
-    APINodeList<UserTaggableFriend> lastResponse = null;
-    @Override
-    public APINodeList<UserTaggableFriend> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "first_name",
-      "id",
-      "last_name",
-      "middle_name",
-      "name",
-    };
-
-    @Override
-    public APINodeList<UserTaggableFriend> parseResponse(String response, String header) throws APIException {
-      return UserTaggableFriend.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<UserTaggableFriend> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<UserTaggableFriend> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<UserTaggableFriend>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<UserTaggableFriend>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<UserTaggableFriend>>() {
-           public APINodeList<UserTaggableFriend> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetTaggableFriends.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetTaggableFriends(String nodeId, APIContext context) {
-      super(context, nodeId, "/taggable_friends", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetTaggableFriends setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetTaggableFriends setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetTaggableFriends requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetTaggableFriends requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetTaggableFriends requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetTaggableFriends requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetTaggableFriends requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetTaggableFriends requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetTaggableFriends requestFirstNameField () {
-      return this.requestFirstNameField(true);
-    }
-    public APIRequestGetTaggableFriends requestFirstNameField (boolean value) {
-      this.requestField("first_name", value);
-      return this;
-    }
-    public APIRequestGetTaggableFriends requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetTaggableFriends requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetTaggableFriends requestLastNameField () {
-      return this.requestLastNameField(true);
-    }
-    public APIRequestGetTaggableFriends requestLastNameField (boolean value) {
-      this.requestField("last_name", value);
-      return this;
-    }
-    public APIRequestGetTaggableFriends requestMiddleNameField () {
-      return this.requestMiddleNameField(true);
-    }
-    public APIRequestGetTaggableFriends requestMiddleNameField (boolean value) {
-      this.requestField("middle_name", value);
-      return this;
-    }
-    public APIRequestGetTaggableFriends requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetTaggableFriends requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
   }
 
   public static class APIRequestGetVideos extends APIRequest<AdVideo> {

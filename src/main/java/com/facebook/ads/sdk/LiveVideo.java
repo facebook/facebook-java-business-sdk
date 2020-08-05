@@ -342,10 +342,6 @@ public class LiveVideo extends APINode {
     return new APIRequestCreateInputStream(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetLikes getLikes() {
-    return new APIRequestGetLikes(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetPolls getPolls() {
     return new APIRequestGetPolls(this.getPrefixedId().toString(), context);
   }
@@ -1507,7 +1503,6 @@ public class LiveVideo extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
-      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -1516,6 +1511,7 @@ public class LiveVideo extends APINode {
       "personal_interests",
       "pharma_safety_info",
       "phone",
+      "pickup_options",
       "place_type",
       "plot_outline",
       "preferred_audience",
@@ -2285,13 +2281,6 @@ public class LiveVideo extends APINode {
       this.requestField("overall_star_rating", value);
       return this;
     }
-    public APIRequestGetCrosspostSharedPages requestPageAboutStoryField () {
-      return this.requestPageAboutStoryField(true);
-    }
-    public APIRequestGetCrosspostSharedPages requestPageAboutStoryField (boolean value) {
-      this.requestField("page_about_story", value);
-      return this;
-    }
     public APIRequestGetCrosspostSharedPages requestPageTokenField () {
       return this.requestPageTokenField(true);
     }
@@ -2346,6 +2335,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestPhoneField (boolean value) {
       this.requestField("phone", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestPickupOptionsField () {
+      return this.requestPickupOptionsField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestPickupOptionsField (boolean value) {
+      this.requestField("pickup_options", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestPlaceTypeField () {
@@ -3203,198 +3199,6 @@ public class LiveVideo extends APINode {
       return this;
     }
 
-  }
-
-  public static class APIRequestGetLikes extends APIRequest<Profile> {
-
-    APINodeList<Profile> lastResponse = null;
-    @Override
-    public APINodeList<Profile> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "can_post",
-      "id",
-      "link",
-      "name",
-      "pic",
-      "pic_crop",
-      "pic_large",
-      "pic_small",
-      "pic_square",
-      "profile_type",
-      "username",
-    };
-
-    @Override
-    public APINodeList<Profile> parseResponse(String response, String header) throws APIException {
-      return Profile.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<Profile> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<Profile> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<Profile>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<Profile>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<Profile>>() {
-           public APINodeList<Profile> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetLikes.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetLikes(String nodeId, APIContext context) {
-      super(context, nodeId, "/likes", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetLikes setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetLikes setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetLikes requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetLikes requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetLikes requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetLikes requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetLikes requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetLikes requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetLikes requestCanPostField () {
-      return this.requestCanPostField(true);
-    }
-    public APIRequestGetLikes requestCanPostField (boolean value) {
-      this.requestField("can_post", value);
-      return this;
-    }
-    public APIRequestGetLikes requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetLikes requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetLikes requestLinkField () {
-      return this.requestLinkField(true);
-    }
-    public APIRequestGetLikes requestLinkField (boolean value) {
-      this.requestField("link", value);
-      return this;
-    }
-    public APIRequestGetLikes requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetLikes requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetLikes requestPicField () {
-      return this.requestPicField(true);
-    }
-    public APIRequestGetLikes requestPicField (boolean value) {
-      this.requestField("pic", value);
-      return this;
-    }
-    public APIRequestGetLikes requestPicCropField () {
-      return this.requestPicCropField(true);
-    }
-    public APIRequestGetLikes requestPicCropField (boolean value) {
-      this.requestField("pic_crop", value);
-      return this;
-    }
-    public APIRequestGetLikes requestPicLargeField () {
-      return this.requestPicLargeField(true);
-    }
-    public APIRequestGetLikes requestPicLargeField (boolean value) {
-      this.requestField("pic_large", value);
-      return this;
-    }
-    public APIRequestGetLikes requestPicSmallField () {
-      return this.requestPicSmallField(true);
-    }
-    public APIRequestGetLikes requestPicSmallField (boolean value) {
-      this.requestField("pic_small", value);
-      return this;
-    }
-    public APIRequestGetLikes requestPicSquareField () {
-      return this.requestPicSquareField(true);
-    }
-    public APIRequestGetLikes requestPicSquareField (boolean value) {
-      this.requestField("pic_square", value);
-      return this;
-    }
-    public APIRequestGetLikes requestProfileTypeField () {
-      return this.requestProfileTypeField(true);
-    }
-    public APIRequestGetLikes requestProfileTypeField (boolean value) {
-      this.requestField("profile_type", value);
-      return this;
-    }
-    public APIRequestGetLikes requestUsernameField () {
-      return this.requestUsernameField(true);
-    }
-    public APIRequestGetLikes requestUsernameField (boolean value) {
-      this.requestField("username", value);
-      return this;
-    }
   }
 
   public static class APIRequestGetPolls extends APIRequest<VideoPoll> {
