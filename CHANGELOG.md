@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 
 ## Unreleased
+
+## v8.0.0
+### Changed
+- Graph API call upgrade to [v8.0](https://developers.facebook.com/docs/graph-api/changelog/version8.0)
+
 ## v7.2.1
 ### Added
 - Added support for data processing options in Serverside API. For more details see : https://developers.facebook.com/docs/marketing-apis/data-processing-options
