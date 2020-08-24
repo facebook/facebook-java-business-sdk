@@ -399,6 +399,8 @@ public class EventTour extends APINode {
       "maybe_count",
       "name",
       "noreply_count",
+      "online_event_format",
+      "online_event_third_party_url",
       "owner",
       "parent_group",
       "place",
@@ -635,6 +637,20 @@ public class EventTour extends APINode {
       this.requestField("noreply_count", value);
       return this;
     }
+    public APIRequestGetEvents requestOnlineEventFormatField () {
+      return this.requestOnlineEventFormatField(true);
+    }
+    public APIRequestGetEvents requestOnlineEventFormatField (boolean value) {
+      this.requestField("online_event_format", value);
+      return this;
+    }
+    public APIRequestGetEvents requestOnlineEventThirdPartyUrlField () {
+      return this.requestOnlineEventThirdPartyUrlField(true);
+    }
+    public APIRequestGetEvents requestOnlineEventThirdPartyUrlField (boolean value) {
+      this.requestField("online_event_third_party_url", value);
+      return this;
+    }
     public APIRequestGetEvents requestOwnerField () {
       return this.requestOwnerField(true);
     }
@@ -823,7 +839,6 @@ public class EventTour extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
-      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -832,6 +847,7 @@ public class EventTour extends APINode {
       "personal_interests",
       "pharma_safety_info",
       "phone",
+      "pickup_options",
       "place_type",
       "plot_outline",
       "preferred_audience",
@@ -1601,13 +1617,6 @@ public class EventTour extends APINode {
       this.requestField("overall_star_rating", value);
       return this;
     }
-    public APIRequestGetPages requestPageAboutStoryField () {
-      return this.requestPageAboutStoryField(true);
-    }
-    public APIRequestGetPages requestPageAboutStoryField (boolean value) {
-      this.requestField("page_about_story", value);
-      return this;
-    }
     public APIRequestGetPages requestPageTokenField () {
       return this.requestPageTokenField(true);
     }
@@ -1662,6 +1671,13 @@ public class EventTour extends APINode {
     }
     public APIRequestGetPages requestPhoneField (boolean value) {
       this.requestField("phone", value);
+      return this;
+    }
+    public APIRequestGetPages requestPickupOptionsField () {
+      return this.requestPickupOptionsField(true);
+    }
+    public APIRequestGetPages requestPickupOptionsField (boolean value) {
+      this.requestField("pickup_options", value);
       return this;
     }
     public APIRequestGetPages requestPlaceTypeField () {

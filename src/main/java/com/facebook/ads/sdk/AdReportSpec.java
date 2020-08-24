@@ -77,8 +77,6 @@ public class AdReportSpec extends APINode {
   private Object mInsightsSection = null;
   @SerializedName("name")
   private String mName = null;
-  @SerializedName("report_schedule")
-  private Object mReportSchedule = null;
   @SerializedName("report_schedule_id")
   private String mReportScheduleId = null;
   @SerializedName("sort_by")
@@ -349,10 +347,6 @@ public class AdReportSpec extends APINode {
     return mName;
   }
 
-  public Object getFieldReportSchedule() {
-    return mReportSchedule;
-  }
-
   public String getFieldReportScheduleId() {
     return mReportScheduleId;
   }
@@ -401,7 +395,6 @@ public class AdReportSpec extends APINode {
       "id",
       "insights_section",
       "name",
-      "report_schedule",
       "report_schedule_id",
       "sort_by",
       "sort_dir",
@@ -576,13 +569,6 @@ public class AdReportSpec extends APINode {
       this.requestField("name", value);
       return this;
     }
-    public APIRequestGet requestReportScheduleField () {
-      return this.requestReportScheduleField(true);
-    }
-    public APIRequestGet requestReportScheduleField (boolean value) {
-      this.requestField("report_schedule", value);
-      return this;
-    }
     public APIRequestGet requestReportScheduleIdField () {
       return this.requestReportScheduleIdField(true);
     }
@@ -653,7 +639,6 @@ public class AdReportSpec extends APINode {
     this.mId = instance.mId;
     this.mInsightsSection = instance.mInsightsSection;
     this.mName = instance.mName;
-    this.mReportSchedule = instance.mReportSchedule;
     this.mReportScheduleId = instance.mReportScheduleId;
     this.mSortBy = instance.mSortBy;
     this.mSortDir = instance.mSortDir;

@@ -6140,6 +6140,8 @@ public class AdSet extends APINode {
       VALUE_PAGE_LIKES("PAGE_LIKES"),
       @SerializedName("POST_ENGAGEMENT")
       VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
+      @SerializedName("QUALITY_LEAD")
+      VALUE_QUALITY_LEAD("QUALITY_LEAD"),
       @SerializedName("REACH")
       VALUE_REACH("REACH"),
       @SerializedName("REPLIES")
@@ -6376,6 +6378,8 @@ public class AdSet extends APINode {
       VALUE_EMPLOYMENT("EMPLOYMENT"),
       @SerializedName("HOUSING")
       VALUE_HOUSING("HOUSING"),
+      @SerializedName("ISSUES_ELECTIONS_POLITICS")
+      VALUE_ISSUES_ELECTIONS_POLITICS("ISSUES_ELECTIONS_POLITICS"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
       ;

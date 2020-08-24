@@ -4890,6 +4890,8 @@ public class ProductFeed extends APINode {
       VALUE_OFFER("OFFER"),
       @SerializedName("PRODUCTS")
       VALUE_PRODUCTS("PRODUCTS"),
+      @SerializedName("TRANSACTABLE_ITEMS")
+      VALUE_TRANSACTABLE_ITEMS("TRANSACTABLE_ITEMS"),
       @SerializedName("VEHICLES")
       VALUE_VEHICLES("VEHICLES"),
       @SerializedName("VEHICLE_OFFER")

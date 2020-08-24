@@ -67,6 +67,9 @@ public class CustomData {
   @SerializedName("item_number")
   private String itemNumber = null;
 
+  @SerializedName("delivery_category")
+  private DeliveryCategory deliveryCategory = null;
+
   private HashMap<String, String> customProperties = null;
 
   /**
@@ -91,13 +94,14 @@ public class CustomData {
    * @param numItems number of items that a user tries to buy during checkout
    * @param status status of the registration event
    * @param searchString a search query made by a user
+   * @param deliveryCategory type of delivery for a purchase event.
    * @param itemNumber the item number
    * @param customProperties Custom Properties to be added to the Custom Data
    */
   public CustomData(Float value, String currency, String contentName,
       String contentCategory, List<String> contentIds,
       List<Content> contents, String contentType, String orderId, Float predictedLtv,
-      String numItems, String status, String searchString, String itemNumber,
+      String numItems, String status, String searchString, DeliveryCategory deliveryCategory, String itemNumber,
       HashMap<String, String> customProperties) {
     this.value = value;
     this.currency = currency;
@@ -111,6 +115,7 @@ public class CustomData {
     this.numItems = numItems;
     this.status = status;
     this.searchString = searchString;
+    this.deliveryCategory = deliveryCategory;
     this.itemNumber = itemNumber;
     this.customProperties = customProperties;
   }
@@ -538,6 +543,35 @@ public class CustomData {
   }
 
   /**
+   * Type of delivery for a purchase event. Example: in_store.
+   *
+   * @return deliveryCategory
+   */
+  public DeliveryCategory getDeliveryCategory() {
+    return deliveryCategory;
+  }
+
+  /**
+   * Set a Type of delivery for a purchase event.
+   *
+   * @param deliveryCategory type of delivery
+   */
+  public void setDeliveryCategory(DeliveryCategory deliveryCategory) {
+    this.deliveryCategory = deliveryCategory;
+  }
+
+  /**
+   * Set a Type of delivery for a purchase event.
+   *
+   * @param deliveryCategory type of delivery
+   * @return CustomData
+   */
+  public CustomData deliveryCategory(DeliveryCategory deliveryCategory) {
+    this.deliveryCategory = deliveryCategory;
+    return this;
+  }
+
+  /**
    * Set the item number
    *
    * @param itemNumber Item number
@@ -623,6 +657,7 @@ public class CustomData {
         && Objects.equals(this.numItems, customData.numItems)
         && Objects.equals(this.status, customData.status)
         && Objects.equals(this.searchString, customData.searchString)
+        && Objects.equals(this.deliveryCategory, customData.deliveryCategory)
         && Objects.equals(this.itemNumber, customData.itemNumber)
         && Objects.equals(this.customProperties, customData.customProperties);
   }
@@ -642,6 +677,7 @@ public class CustomData {
         numItems,
         status,
         searchString,
+        deliveryCategory,
         itemNumber,
         customProperties);
   }
@@ -663,6 +699,7 @@ public class CustomData {
     sb.append("    numItems: ").append(toIndentedString(numItems)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    searchString: ").append(toIndentedString(searchString)).append("\n");
+    sb.append("    deliveryCategory: ").append(toIndentedString(deliveryCategory)).append("\n");
     sb.append("    itemNumber: ").append(toIndentedString(itemNumber)).append("\n");
     sb.append("    customProperties: ").append(toIndentedString(customProperties)).append("\n");
     sb.append("}");

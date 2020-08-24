@@ -2346,6 +2346,12 @@ public class AtlasCampaign extends APINode {
   }
 
   public static enum EnumDimensions {
+      @SerializedName("AD_ID")
+      VALUE_AD_ID("AD_ID"),
+      @SerializedName("AD_SET_ID")
+      VALUE_AD_SET_ID("AD_SET_ID"),
+      @SerializedName("CAMPAIGN_ID")
+      VALUE_CAMPAIGN_ID("CAMPAIGN_ID"),
       @SerializedName("DEVICE_TYPE")
       VALUE_DEVICE_TYPE("DEVICE_TYPE"),
       @SerializedName("SOURCE_CHANNEL")
@@ -2371,8 +2377,8 @@ public class AtlasCampaign extends APINode {
       VALUE_HOUR("HOUR"),
       @SerializedName("MONTH")
       VALUE_MONTH("MONTH"),
-      @SerializedName("WEEK")
-      VALUE_WEEK("WEEK"),
+      @SerializedName("WEEK_SUNDAY")
+      VALUE_WEEK_SUNDAY("WEEK_SUNDAY"),
       @SerializedName("YEAR")
       VALUE_YEAR("YEAR"),
       ;

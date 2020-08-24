@@ -55,6 +55,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class IGMedia extends APINode {
+  @SerializedName("alt_text")
+  private String mAltText = null;
   @SerializedName("caption")
   private String mCaption = null;
   @SerializedName("comments_count")
@@ -317,6 +319,10 @@ public class IGMedia extends APINode {
   }
 
 
+  public String getFieldAltText() {
+    return mAltText;
+  }
+
   public String getFieldCaption() {
     return mCaption;
   }
@@ -389,6 +395,7 @@ public class IGMedia extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "alt_text",
       "caption",
       "comments_count",
       "id",
@@ -494,6 +501,13 @@ public class IGMedia extends APINode {
       return this;
     }
 
+    public APIRequestGetChildren requestAltTextField () {
+      return this.requestAltTextField(true);
+    }
+    public APIRequestGetChildren requestAltTextField (boolean value) {
+      this.requestField("alt_text", value);
+      return this;
+    }
     public APIRequestGetChildren requestCaptionField () {
       return this.requestCaptionField(true);
     }
@@ -1055,6 +1069,7 @@ public class IGMedia extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "alt_text",
       "caption",
       "comments_count",
       "id",
@@ -1160,6 +1175,13 @@ public class IGMedia extends APINode {
       return this;
     }
 
+    public APIRequestGet requestAltTextField () {
+      return this.requestAltTextField(true);
+    }
+    public APIRequestGet requestAltTextField (boolean value) {
+      this.requestField("alt_text", value);
+      return this;
+    }
     public APIRequestGet requestCaptionField () {
       return this.requestCaptionField(true);
     }
@@ -1389,6 +1411,7 @@ public class IGMedia extends APINode {
   }
 
   public IGMedia copyFrom(IGMedia instance) {
+    this.mAltText = instance.mAltText;
     this.mCaption = instance.mCaption;
     this.mCommentsCount = instance.mCommentsCount;
     this.mId = instance.mId;

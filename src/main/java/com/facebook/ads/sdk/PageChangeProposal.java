@@ -69,66 +69,7 @@ public class PageChangeProposal extends APINode {
   private PageUpcomingChange mUpcomingChangeInfo = null;
   protected static Gson gson = null;
 
-  PageChangeProposal() {
-  }
-
-  public PageChangeProposal(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public PageChangeProposal(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public PageChangeProposal fetch() throws APIException{
-    PageChangeProposal newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static PageChangeProposal fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<PageChangeProposal> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static PageChangeProposal fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<PageChangeProposal> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<PageChangeProposal> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<PageChangeProposal>)(
-      new APIRequest<PageChangeProposal>(context, "", "/", "GET", PageChangeProposal.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<PageChangeProposal>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", PageChangeProposal.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public PageChangeProposal() {
   }
 
   public String getId() {
@@ -276,33 +217,50 @@ public class PageChangeProposal extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestUpdate update() {
-    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldAcceptanceStatus() {
     return mAcceptanceStatus;
+  }
+
+  public PageChangeProposal setFieldAcceptanceStatus(String value) {
+    this.mAcceptanceStatus = value;
+    return this;
   }
 
   public String getFieldCategory() {
     return mCategory;
   }
 
+  public PageChangeProposal setFieldCategory(String value) {
+    this.mCategory = value;
+    return this;
+  }
+
   public String getFieldCurrentValue() {
     return mCurrentValue;
+  }
+
+  public PageChangeProposal setFieldCurrentValue(String value) {
+    this.mCurrentValue = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
+  public PageChangeProposal setFieldId(String value) {
+    this.mId = value;
+    return this;
+  }
+
   public String getFieldProposedValue() {
     return mProposedValue;
+  }
+
+  public PageChangeProposal setFieldProposedValue(String value) {
+    this.mProposedValue = value;
+    return this;
   }
 
   public PageUpcomingChange getFieldUpcomingChangeInfo() {
@@ -312,273 +270,17 @@ public class PageChangeProposal extends APINode {
     return mUpcomingChangeInfo;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<PageChangeProposal> {
-
-    PageChangeProposal lastResponse = null;
-    @Override
-    public PageChangeProposal getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "acceptance_status",
-      "category",
-      "current_value",
-      "id",
-      "proposed_value",
-      "upcoming_change_info",
-    };
-
-    @Override
-    public PageChangeProposal parseResponse(String response, String header) throws APIException {
-      return PageChangeProposal.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public PageChangeProposal execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public PageChangeProposal execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<PageChangeProposal> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<PageChangeProposal> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, PageChangeProposal>() {
-           public PageChangeProposal apply(ResponseWrapper result) {
-             try {
-               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAcceptanceStatusField () {
-      return this.requestAcceptanceStatusField(true);
-    }
-    public APIRequestGet requestAcceptanceStatusField (boolean value) {
-      this.requestField("acceptance_status", value);
-      return this;
-    }
-    public APIRequestGet requestCategoryField () {
-      return this.requestCategoryField(true);
-    }
-    public APIRequestGet requestCategoryField (boolean value) {
-      this.requestField("category", value);
-      return this;
-    }
-    public APIRequestGet requestCurrentValueField () {
-      return this.requestCurrentValueField(true);
-    }
-    public APIRequestGet requestCurrentValueField (boolean value) {
-      this.requestField("current_value", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestProposedValueField () {
-      return this.requestProposedValueField(true);
-    }
-    public APIRequestGet requestProposedValueField (boolean value) {
-      this.requestField("proposed_value", value);
-      return this;
-    }
-    public APIRequestGet requestUpcomingChangeInfoField () {
-      return this.requestUpcomingChangeInfoField(true);
-    }
-    public APIRequestGet requestUpcomingChangeInfoField (boolean value) {
-      this.requestField("upcoming_change_info", value);
-      return this;
-    }
+  public PageChangeProposal setFieldUpcomingChangeInfo(PageUpcomingChange value) {
+    this.mUpcomingChangeInfo = value;
+    return this;
   }
 
-  public static class APIRequestUpdate extends APIRequest<PageChangeProposal> {
-
-    PageChangeProposal lastResponse = null;
-    @Override
-    public PageChangeProposal getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "accept",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public PageChangeProposal parseResponse(String response, String header) throws APIException {
-      return PageChangeProposal.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public PageChangeProposal execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public PageChangeProposal execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<PageChangeProposal> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<PageChangeProposal> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, PageChangeProposal>() {
-           public PageChangeProposal apply(ResponseWrapper result) {
-             try {
-               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestUpdate(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestUpdate setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestUpdate setAccept (Boolean accept) {
-      this.setParam("accept", accept);
-      return this;
-    }
-    public APIRequestUpdate setAccept (String accept) {
-      this.setParam("accept", accept);
-      return this;
-    }
-
-    public APIRequestUpdate requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestUpdate requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
+  public PageChangeProposal setFieldUpcomingChangeInfo(String value) {
+    Type type = new TypeToken<PageUpcomingChange>(){}.getType();
+    this.mUpcomingChangeInfo = PageUpcomingChange.getGson().fromJson(value, type);
+    return this;
   }
+
 
 
   synchronized /*package*/ static Gson getGson() {

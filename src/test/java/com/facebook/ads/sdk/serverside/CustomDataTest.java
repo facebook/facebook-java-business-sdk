@@ -48,6 +48,7 @@ public class CustomDataTest {
                 .status("status-9")
                 .searchString("search-string-10")
                 .itemNumber("item-number-11")
+                .deliveryCategory(DeliveryCategory.home_delivery)
                 .customProperties(customProperties);
 
         assertEquals(customData.getValue(), 0.123f, 0);
@@ -63,6 +64,7 @@ public class CustomDataTest {
         assertEquals(customData.getStatus(), "status-9");
         assertEquals(customData.getSearchString(), "search-string-10");
         assertEquals(customData.getItemNumber(), "item-number-11");
+        assertEquals(customData.getDeliveryCategory(), DeliveryCategory.home_delivery);
         assertEquals(customData.getCustomProperties(), customProperties);
     }
 
@@ -84,6 +86,7 @@ public class CustomDataTest {
                 .status("status-9")
                 .searchString("search-string-10")
                 .itemNumber("item-number-11")
+                .deliveryCategory(DeliveryCategory.in_store)
                 .customProperties(customProperties);
 
         CustomData customData2 = new CustomData();
@@ -100,6 +103,7 @@ public class CustomDataTest {
                 .status("status-9")
                 .searchString("search-string-10")
                 .itemNumber("item-number-11")
+                .deliveryCategory(DeliveryCategory.in_store)
                 .customProperties(customProperties);
 
         assertEquals(customData1, customData2);
@@ -124,6 +128,7 @@ public class CustomDataTest {
                 .status("status-9")
                 .searchString("search-string-10")
                 .itemNumber("item-number-11")
+                .deliveryCategory(DeliveryCategory.curbside)
                 .customProperties(customProperties);
 
         CustomData customData2 = new CustomData();
@@ -141,6 +146,7 @@ public class CustomDataTest {
                 .searchString("search-string-10")
                 // itemNumber is different
                 .itemNumber("item-number-12345")
+                .deliveryCategory(DeliveryCategory.curbside)
                 .customProperties(customProperties);
 
         assertNotEquals(customData1, customData2);

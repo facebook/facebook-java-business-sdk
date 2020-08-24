@@ -59,18 +59,26 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
   private Map<String, String> mAccountAdmin = null;
   @SerializedName("ad")
   private Map<String, String> mAd = null;
+  @SerializedName("ads_conversion_experiences")
+  private Map<String, String> mAdsConversionExperiences = null;
   @SerializedName("b2c")
   private Map<String, String> mB2c = null;
+  @SerializedName("b2c_commerce_unified")
+  private Map<String, String> mB2cCommerceUnified = null;
   @SerializedName("bsg")
   private Map<String, String> mBsg = null;
   @SerializedName("city_community")
   private Map<String, String> mCityCommunity = null;
+  @SerializedName("commerce")
+  private Map<String, String> mCommerce = null;
   @SerializedName("daily_deals")
   private Map<String, String> mDailyDeals = null;
   @SerializedName("daily_deals_legacy")
   private Map<String, String> mDailyDealsLegacy = null;
   @SerializedName("dpa")
   private Map<String, String> mDpa = null;
+  @SerializedName("dri_copyright")
+  private Map<String, String> mDriCopyright = null;
   @SerializedName("dri_counterfeit")
   private Map<String, String> mDriCounterfeit = null;
   @SerializedName("facebook")
@@ -280,12 +288,30 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
     return this;
   }
 
+  public Map<String, String> getFieldAdsConversionExperiences() {
+    return mAdsConversionExperiences;
+  }
+
+  public AdgroupPlacementSpecificReviewFeedback setFieldAdsConversionExperiences(Map<String, String> value) {
+    this.mAdsConversionExperiences = value;
+    return this;
+  }
+
   public Map<String, String> getFieldB2c() {
     return mB2c;
   }
 
   public AdgroupPlacementSpecificReviewFeedback setFieldB2c(Map<String, String> value) {
     this.mB2c = value;
+    return this;
+  }
+
+  public Map<String, String> getFieldB2cCommerceUnified() {
+    return mB2cCommerceUnified;
+  }
+
+  public AdgroupPlacementSpecificReviewFeedback setFieldB2cCommerceUnified(Map<String, String> value) {
+    this.mB2cCommerceUnified = value;
     return this;
   }
 
@@ -304,6 +330,15 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
 
   public AdgroupPlacementSpecificReviewFeedback setFieldCityCommunity(Map<String, String> value) {
     this.mCityCommunity = value;
+    return this;
+  }
+
+  public Map<String, String> getFieldCommerce() {
+    return mCommerce;
+  }
+
+  public AdgroupPlacementSpecificReviewFeedback setFieldCommerce(Map<String, String> value) {
+    this.mCommerce = value;
     return this;
   }
 
@@ -331,6 +366,15 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
 
   public AdgroupPlacementSpecificReviewFeedback setFieldDpa(Map<String, String> value) {
     this.mDpa = value;
+    return this;
+  }
+
+  public Map<String, String> getFieldDriCopyright() {
+    return mDriCopyright;
+  }
+
+  public AdgroupPlacementSpecificReviewFeedback setFieldDriCopyright(Map<String, String> value) {
+    this.mDriCopyright = value;
     return this;
   }
 
@@ -533,12 +577,16 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
   public AdgroupPlacementSpecificReviewFeedback copyFrom(AdgroupPlacementSpecificReviewFeedback instance) {
     this.mAccountAdmin = instance.mAccountAdmin;
     this.mAd = instance.mAd;
+    this.mAdsConversionExperiences = instance.mAdsConversionExperiences;
     this.mB2c = instance.mB2c;
+    this.mB2cCommerceUnified = instance.mB2cCommerceUnified;
     this.mBsg = instance.mBsg;
     this.mCityCommunity = instance.mCityCommunity;
+    this.mCommerce = instance.mCommerce;
     this.mDailyDeals = instance.mDailyDeals;
     this.mDailyDealsLegacy = instance.mDailyDealsLegacy;
     this.mDpa = instance.mDpa;
+    this.mDriCopyright = instance.mDriCopyright;
     this.mDriCounterfeit = instance.mDriCounterfeit;
     this.mFacebook = instance.mFacebook;
     this.mFacebookPagesLiveShopping = instance.mFacebookPagesLiveShopping;

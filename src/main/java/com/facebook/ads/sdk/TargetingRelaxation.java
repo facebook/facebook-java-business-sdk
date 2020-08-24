@@ -54,23 +54,23 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class CreativeAssetTag extends APINode {
-  @SerializedName("name")
-  private String mName = null;
+public class TargetingRelaxation extends APINode {
+  @SerializedName("lookalike")
+  private Long mLookalike = null;
   protected static Gson gson = null;
 
-  public CreativeAssetTag() {
+  public TargetingRelaxation() {
   }
 
   public String getId() {
     return null;
   }
-  public static CreativeAssetTag loadJSON(String json, APIContext context, String header) {
-    CreativeAssetTag creativeAssetTag = getGson().fromJson(json, CreativeAssetTag.class);
+  public static TargetingRelaxation loadJSON(String json, APIContext context, String header) {
+    TargetingRelaxation targetingRelaxation = getGson().fromJson(json, TargetingRelaxation.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(creativeAssetTag.toString());
+      JsonElement o2 = parser.parse(targetingRelaxation.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -80,14 +80,14 @@ public class CreativeAssetTag extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    creativeAssetTag.context = context;
-    creativeAssetTag.rawValue = json;
-    creativeAssetTag.header = header;
-    return creativeAssetTag;
+    targetingRelaxation.context = context;
+    targetingRelaxation.rawValue = json;
+    targetingRelaxation.header = header;
+    return targetingRelaxation;
   }
 
-  public static APINodeList<CreativeAssetTag> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<CreativeAssetTag> creativeAssetTags = new APINodeList<CreativeAssetTag>(request, json, header);
+  public static APINodeList<TargetingRelaxation> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<TargetingRelaxation> targetingRelaxations = new APINodeList<TargetingRelaxation>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -98,9 +98,9 @@ public class CreativeAssetTag extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          creativeAssetTags.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          targetingRelaxations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return creativeAssetTags;
+        return targetingRelaxations;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -110,20 +110,20 @@ public class CreativeAssetTag extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                creativeAssetTags.setCursors(before, after);
+                targetingRelaxations.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            creativeAssetTags.setPaging(previous, next);
+            targetingRelaxations.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              creativeAssetTags.setAppSecret(context.getAppSecretProof());
+              targetingRelaxations.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              creativeAssetTags.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              targetingRelaxations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -134,23 +134,23 @@ public class CreativeAssetTag extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  creativeAssetTags.add(loadJSON(entry.getValue().toString(), context, header));
+                  targetingRelaxations.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              creativeAssetTags.add(loadJSON(obj.toString(), context, header));
+              targetingRelaxations.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return creativeAssetTags;
+          return targetingRelaxations;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              creativeAssetTags.add(loadJSON(entry.getValue().toString(), context, header));
+              targetingRelaxations.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return creativeAssetTags;
+          return targetingRelaxations;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -167,20 +167,20 @@ public class CreativeAssetTag extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              creativeAssetTags.add(loadJSON(value.toString(), context, header));
+              targetingRelaxations.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return creativeAssetTags;
+            return targetingRelaxations;
           }
 
           // Sixth, check if it's pure JsonObject
-          creativeAssetTags.clear();
-          creativeAssetTags.add(loadJSON(json, context, header));
-          return creativeAssetTags;
+          targetingRelaxations.clear();
+          targetingRelaxations.add(loadJSON(json, context, header));
+          return targetingRelaxations;
         }
       }
     } catch (Exception e) {
@@ -208,12 +208,12 @@ public class CreativeAssetTag extends APINode {
   }
 
 
-  public String getFieldName() {
-    return mName;
+  public Long getFieldLookalike() {
+    return mLookalike;
   }
 
-  public CreativeAssetTag setFieldName(String value) {
-    this.mName = value;
+  public TargetingRelaxation setFieldLookalike(Long value) {
+    this.mLookalike = value;
     return this;
   }
 
@@ -233,17 +233,17 @@ public class CreativeAssetTag extends APINode {
     return gson;
   }
 
-  public CreativeAssetTag copyFrom(CreativeAssetTag instance) {
-    this.mName = instance.mName;
+  public TargetingRelaxation copyFrom(TargetingRelaxation instance) {
+    this.mLookalike = instance.mLookalike;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<CreativeAssetTag> getParser() {
-    return new APIRequest.ResponseParser<CreativeAssetTag>() {
-      public APINodeList<CreativeAssetTag> parseResponse(String response, APIContext context, APIRequest<CreativeAssetTag> request, String header) throws MalformedResponseException {
-        return CreativeAssetTag.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<TargetingRelaxation> getParser() {
+    return new APIRequest.ResponseParser<TargetingRelaxation>() {
+      public APINodeList<TargetingRelaxation> parseResponse(String response, APIContext context, APIRequest<TargetingRelaxation> request, String header) throws MalformedResponseException {
+        return TargetingRelaxation.parseResponse(response, context, request, header);
       }
     };
   }

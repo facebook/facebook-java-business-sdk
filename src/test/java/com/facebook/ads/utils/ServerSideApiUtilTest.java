@@ -19,13 +19,18 @@
 package com.facebook.ads.utils;
 
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static com.facebook.ads.utils.ServerSideApiConstants.*;
 import static com.facebook.ads.utils.ServerSideApiUtil.normalize;
 import static org.junit.Assert.assertEquals;
 
 public class ServerSideApiUtilTest {
+  @Rule
+  public ExpectedException thrown = ExpectedException.none();
+
   @Test
   public void NormalizeF5firstTest() {
     assertEquals(normalize("George", F5FIRST), "georg");
@@ -55,29 +60,46 @@ public class ServerSideApiUtilTest {
     assertEquals(normalize("31", DOBD), "31");
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void NormalizeDobdWhenInvalidThrowsException1() {
+    thrown.expect(IllegalArgumentException.class);
+    thrown.expectMessage("Invalid dobd: '32'. Please specify the day in 'DD' format.");
     normalize("32", DOBD);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void NormalizeDobdWhenInvalidThrowsException2() {
+    thrown.expect(IllegalArgumentException.class);
+    thrown.expectMessage("Invalid dobd: '00'. Please specify the day in 'DD' format.");
     normalize("00", DOBD);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void NormalizeDobdWhenInvalidThrowsException3() {
+    thrown.expect(IllegalArgumentException.class);
+    thrown.expectMessage("Invalid dobd: '-1'. Please specify the day in 'DD' format.");
     normalize("-1", DOBD);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void NormalizeDobdWhenInvalidThrowsException4() {
+    thrown.expect(IllegalArgumentException.class);
+    thrown.expectMessage("Invalid dobd: '001'. Please specify the day in 'DD' format.");
     normalize("001", DOBD);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void NormalizeDobdWhenInvalidThrowsException5() {
-    normalize("ab", DOBD);
+    thrown.expect(IllegalArgumentException.class);
+    thrown.expectMessage("Invalid dobd: 'a'. Please specify the day in 'DD' format.");
+    normalize("a", DOBD);
+  }
+
+  @Test
+  public void NormalizeDobdWhenInvalidThrowsException6() {
+    thrown.expect(IllegalArgumentException.class);
+    thrown.expectMessage("Invalid dobd: '1b'. Please specify the day in 'DD' format.");
+    normalize("1b", DOBD);
   }
 
   @Test
@@ -87,29 +109,46 @@ public class ServerSideApiUtilTest {
     assertEquals(normalize("12", DOBM), "12");
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void NormalizeDobmWhenInvalidThrowsException1() {
+    thrown.expect(IllegalArgumentException.class);
+    thrown.expectMessage("Invalid dobm: '13'. Please specify the month in 'MM' format.");
     normalize("13", DOBM);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void NormalizeDobmWhenInvalidThrowsException2() {
+    thrown.expect(IllegalArgumentException.class);
+    thrown.expectMessage("Invalid dobm: '00'. Please specify the month in 'MM' format.");
     normalize("00", DOBM);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void NormalizeDobmWhenInvalidThrowsException3() {
+    thrown.expect(IllegalArgumentException.class);
+    thrown.expectMessage("Invalid dobm: '-1'. Please specify the month in 'MM' format.");
     normalize("-1", DOBM);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void NormalizeDobmWhenInvalidThrowsException4() {
+    thrown.expect(IllegalArgumentException.class);
+    thrown.expectMessage("Invalid dobm: '001'. Please specify the month in 'MM' format.");
     normalize("001", DOBM);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void NormalizeDobmWhenInvalidThrowsException5() {
-    normalize("ab", DOBM);
+    thrown.expect(IllegalArgumentException.class);
+    thrown.expectMessage("Invalid dobm: 'a'. Please specify the month in 'MM' format.");
+    normalize("a", DOBM);
+  }
+
+  @Test
+  public void NormalizeDobmWhenInvalidThrowsException6() {
+    thrown.expect(IllegalArgumentException.class);
+    thrown.expectMessage("Invalid dobm: '0a'. Please specify the month in 'MM' format.");
+    normalize("0a", DOBM);
   }
 
   @Test
@@ -119,18 +158,24 @@ public class ServerSideApiUtilTest {
     assertEquals(normalize("9999", DOBY), "9999");
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void NormalizeDobyWhenInvalidThrowsException1() {
+    thrown.expect(IllegalArgumentException.class);
+    thrown.expectMessage("Invalid doby: '10'. Please specify the year in 'YYYY' format.");
     normalize("10", DOBY);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void NormalizeDobyWhenInvalidThrowsException2() {
+    thrown.expect(IllegalArgumentException.class);
+    thrown.expectMessage("Invalid doby: '12345'. Please specify the year in 'YYYY' format.");
     normalize("12345", DOBY);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void NormalizeDobyWhenInvalidThrowsException3() {
+    thrown.expect(IllegalArgumentException.class);
+    thrown.expectMessage("Invalid doby: '-123'. Please specify the year in 'YYYY' format.");
     normalize("-123", DOBY);
   }
 }

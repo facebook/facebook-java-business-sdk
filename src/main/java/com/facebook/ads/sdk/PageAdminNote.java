@@ -61,6 +61,8 @@ public class PageAdminNote extends APINode {
   private Page mFrom = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("note_label")
+  private String mNoteLabel = null;
   @SerializedName("user")
   private User mUser = null;
   protected static Gson gson = null;
@@ -292,6 +294,10 @@ public class PageAdminNote extends APINode {
     return mId;
   }
 
+  public String getFieldNoteLabel() {
+    return mNoteLabel;
+  }
+
   public User getFieldUser() {
     if (mUser != null) {
       mUser.context = getContext();
@@ -315,6 +321,7 @@ public class PageAdminNote extends APINode {
       "body",
       "from",
       "id",
+      "note_label",
       "user",
     };
 
@@ -428,6 +435,13 @@ public class PageAdminNote extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestNoteLabelField () {
+      return this.requestNoteLabelField(true);
+    }
+    public APIRequestGet requestNoteLabelField (boolean value) {
+      this.requestField("note_label", value);
+      return this;
+    }
     public APIRequestGet requestUserField () {
       return this.requestUserField(true);
     }
@@ -455,6 +469,7 @@ public class PageAdminNote extends APINode {
     this.mBody = instance.mBody;
     this.mFrom = instance.mFrom;
     this.mId = instance.mId;
+    this.mNoteLabel = instance.mNoteLabel;
     this.mUser = instance.mUser;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

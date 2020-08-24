@@ -451,6 +451,8 @@ public class AdActivity extends APINode {
       VALUE_UPDATE_AD_SET_BUDGET("update_ad_set_budget"),
       @SerializedName("update_ad_set_duration")
       VALUE_UPDATE_AD_SET_DURATION("update_ad_set_duration"),
+      @SerializedName("update_ad_set_learning_stage_status")
+      VALUE_UPDATE_AD_SET_LEARNING_STAGE_STATUS("update_ad_set_learning_stage_status"),
       @SerializedName("update_ad_set_min_spend_target")
       VALUE_UPDATE_AD_SET_MIN_SPEND_TARGET("update_ad_set_min_spend_target"),
       @SerializedName("update_ad_set_name")
@@ -491,6 +493,8 @@ public class AdActivity extends APINode {
       VALUE_UPDATE_CAMPAIGN_RUN_STATUS("update_campaign_run_status"),
       @SerializedName("update_campaign_schedule")
       VALUE_UPDATE_CAMPAIGN_SCHEDULE("update_campaign_schedule"),
+      @SerializedName("update_delivery_type_cross_level_shift")
+      VALUE_UPDATE_DELIVERY_TYPE_CROSS_LEVEL_SHIFT("update_delivery_type_cross_level_shift"),
       ;
 
       private String value;
@@ -533,6 +537,25 @@ public class AdActivity extends APINode {
       private String value;
 
       private EnumCategory(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumDataSource {
+      @SerializedName("CALYPSO")
+      VALUE_CALYPSO("CALYPSO"),
+      @SerializedName("TAO")
+      VALUE_TAO("TAO"),
+      ;
+
+      private String value;
+
+      private EnumDataSource(String value) {
         this.value = value;
       }
 

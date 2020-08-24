@@ -315,6 +315,8 @@ public class AdAccountMatchedSearchApplicationsEdgeData extends APINode {
       VALUE_ITUNES("ITUNES"),
       @SerializedName("ITUNES_IPAD")
       VALUE_ITUNES_IPAD("ITUNES_IPAD"),
+      @SerializedName("OCULUS_APP_STORE")
+      VALUE_OCULUS_APP_STORE("OCULUS_APP_STORE"),
       @SerializedName("ROKU_STORE")
       VALUE_ROKU_STORE("ROKU_STORE"),
       @SerializedName("WINDOWS_10_STORE")

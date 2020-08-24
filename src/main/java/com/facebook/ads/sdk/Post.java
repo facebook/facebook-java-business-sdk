@@ -3182,7 +3182,6 @@ public class Post extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
-      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -3191,6 +3190,7 @@ public class Post extends APINode {
       "personal_interests",
       "pharma_safety_info",
       "phone",
+      "pickup_options",
       "place_type",
       "plot_outline",
       "preferred_audience",
@@ -3960,13 +3960,6 @@ public class Post extends APINode {
       this.requestField("overall_star_rating", value);
       return this;
     }
-    public APIRequestGetSponsorTags requestPageAboutStoryField () {
-      return this.requestPageAboutStoryField(true);
-    }
-    public APIRequestGetSponsorTags requestPageAboutStoryField (boolean value) {
-      this.requestField("page_about_story", value);
-      return this;
-    }
     public APIRequestGetSponsorTags requestPageTokenField () {
       return this.requestPageTokenField(true);
     }
@@ -4021,6 +4014,13 @@ public class Post extends APINode {
     }
     public APIRequestGetSponsorTags requestPhoneField (boolean value) {
       this.requestField("phone", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPickupOptionsField () {
+      return this.requestPickupOptionsField(true);
+    }
+    public APIRequestGetSponsorTags requestPickupOptionsField (boolean value) {
+      this.requestField("pickup_options", value);
       return this;
     }
     public APIRequestGetSponsorTags requestPlaceTypeField () {
@@ -5835,6 +5835,8 @@ public class Post extends APINode {
       VALUE_SEE_MORE("SEE_MORE"),
       @SerializedName("SELL_NOW")
       VALUE_SELL_NOW("SELL_NOW"),
+      @SerializedName("SEND_A_GIFT")
+      VALUE_SEND_A_GIFT("SEND_A_GIFT"),
       @SerializedName("SHARE")
       VALUE_SHARE("SHARE"),
       @SerializedName("SHOP_NOW")

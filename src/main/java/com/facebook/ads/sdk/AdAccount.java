@@ -414,10 +414,6 @@ public class AdAccount extends APINode {
     return new APIRequestCreateAdPlacePageSetsAsync(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestDeleteAdSets deleteAdSets() {
-    return new APIRequestDeleteAdSets(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetAdStudies getAdStudies() {
     return new APIRequestGetAdStudies(this.getPrefixedId().toString(), context);
   }
@@ -460,10 +456,6 @@ public class AdAccount extends APINode {
 
   public APIRequestCreateAdPlayable createAdPlayable() {
     return new APIRequestCreateAdPlayable(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetAdReportSchedules getAdReportSchedules() {
-    return new APIRequestGetAdReportSchedules(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetAdRulesHistory getAdRulesHistory() {
@@ -1050,6 +1042,7 @@ public class AdAccount extends APINode {
       "after",
       "business_id",
       "category",
+      "data_source",
       "extra_oids",
       "limit",
       "oid",
@@ -1151,6 +1144,15 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetActivities setCategory (String category) {
       this.setParam("category", category);
+      return this;
+    }
+
+    public APIRequestGetActivities setDataSource (AdActivity.EnumDataSource dataSource) {
+      this.setParam("data_source", dataSource);
+      return this;
+    }
+    public APIRequestGetActivities setDataSource (String dataSource) {
+      this.setParam("data_source", dataSource);
       return this;
     }
 
@@ -1478,6 +1480,7 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "category",
       "location_types",
       "name",
       "parent_page",
@@ -1539,6 +1542,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+
+    public APIRequestCreateAdPlacePageSet setCategory (AdPlacePageSet.EnumCategory category) {
+      this.setParam("category", category);
+      return this;
+    }
+    public APIRequestCreateAdPlacePageSet setCategory (String category) {
+      this.setParam("category", category);
+      return this;
+    }
 
     public APIRequestCreateAdPlacePageSet setLocationTypes (List<AdPlacePageSet.EnumLocationTypes> locationTypes) {
       this.setParam("location_types", locationTypes);
@@ -1614,6 +1626,7 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "category",
       "location_types",
       "name",
       "parent_page",
@@ -1676,6 +1689,15 @@ public class AdAccount extends APINode {
     }
 
 
+    public APIRequestCreateAdPlacePageSetsAsync setCategory (AdPlacePageSet.EnumCategory category) {
+      this.setParam("category", category);
+      return this;
+    }
+    public APIRequestCreateAdPlacePageSetsAsync setCategory (String category) {
+      this.setParam("category", category);
+      return this;
+    }
+
     public APIRequestCreateAdPlacePageSetsAsync setLocationTypes (List<AdPlacePageSet.EnumLocationTypes> locationTypes) {
       this.setParam("location_types", locationTypes);
       return this;
@@ -1736,146 +1758,6 @@ public class AdAccount extends APINode {
 
     @Override
     public APIRequestCreateAdPlacePageSetsAsync requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestDeleteAdSets extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "before_date",
-      "delete_offset",
-      "delete_strategy",
-      "object_count",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestDeleteAdSets.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestDeleteAdSets(String nodeId, APIContext context) {
-      super(context, nodeId, "/ad_sets", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDeleteAdSets setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAdSets setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDeleteAdSets setBeforeDate (String beforeDate) {
-      this.setParam("before_date", beforeDate);
-      return this;
-    }
-
-    public APIRequestDeleteAdSets setDeleteOffset (Long deleteOffset) {
-      this.setParam("delete_offset", deleteOffset);
-      return this;
-    }
-    public APIRequestDeleteAdSets setDeleteOffset (String deleteOffset) {
-      this.setParam("delete_offset", deleteOffset);
-      return this;
-    }
-
-    public APIRequestDeleteAdSets setDeleteStrategy (EnumDeleteStrategy deleteStrategy) {
-      this.setParam("delete_strategy", deleteStrategy);
-      return this;
-    }
-    public APIRequestDeleteAdSets setDeleteStrategy (String deleteStrategy) {
-      this.setParam("delete_strategy", deleteStrategy);
-      return this;
-    }
-
-    public APIRequestDeleteAdSets setObjectCount (Long objectCount) {
-      this.setParam("object_count", objectCount);
-      return this;
-    }
-    public APIRequestDeleteAdSets setObjectCount (String objectCount) {
-      this.setParam("object_count", objectCount);
-      return this;
-    }
-
-    public APIRequestDeleteAdSets requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDeleteAdSets requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAdSets requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDeleteAdSets requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAdSets requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAdSets requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -4696,110 +4578,6 @@ public class AdAccount extends APINode {
 
     @Override
     public APIRequestCreateAdPlayable requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestGetAdReportSchedules extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetAdReportSchedules.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetAdReportSchedules(String nodeId, APIContext context) {
-      super(context, nodeId, "/adreportschedules", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetAdReportSchedules setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdReportSchedules setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetAdReportSchedules requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetAdReportSchedules requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdReportSchedules requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetAdReportSchedules requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdReportSchedules requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdReportSchedules requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -10106,6 +9884,7 @@ public class AdAccount extends APINode {
       "composer_type",
       "container_type",
       "content_category",
+      "creative_tools",
       "description",
       "embeddable",
       "end_offset",
@@ -10159,6 +9938,7 @@ public class AdAccount extends APINode {
       "upload_session_id",
       "upload_setting_properties",
       "video_file_chunk",
+      "video_id_original",
       "video_start_time_ms",
       "waterfall_id",
       "file",
@@ -10327,6 +10107,11 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdVideo setContentCategory (String contentCategory) {
       this.setParam("content_category", contentCategory);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setCreativeTools (String creativeTools) {
+      this.setParam("creative_tools", creativeTools);
       return this;
     }
 
@@ -10730,6 +10515,11 @@ public class AdAccount extends APINode {
 
     public APIRequestCreateAdVideo setVideoFileChunk (byte[] videoFileChunk) {
       this.setParam("video_file_chunk", videoFileChunk);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setVideoIdOriginal (String videoIdOriginal) {
+      this.setParam("video_id_original", videoIdOriginal);
       return this;
     }
 
@@ -14351,6 +14141,7 @@ public class AdAccount extends APINode {
       "source_campaign_id",
       "special_ad_categories",
       "special_ad_category",
+      "special_ad_category_country",
       "spend_cap",
       "start_time",
       "status",
@@ -14673,6 +14464,13 @@ public class AdAccount extends APINode {
       this.requestField("special_ad_category", value);
       return this;
     }
+    public APIRequestGetCampaigns requestSpecialAdCategoryCountryField () {
+      return this.requestSpecialAdCategoryCountryField(true);
+    }
+    public APIRequestGetCampaigns requestSpecialAdCategoryCountryField (boolean value) {
+      this.requestField("special_ad_category_country", value);
+      return this;
+    }
     public APIRequestGetCampaigns requestSpendCapField () {
       return this.requestSpendCapField(true);
     }
@@ -14738,6 +14536,7 @@ public class AdAccount extends APINode {
       "promoted_object",
       "source_campaign_id",
       "special_ad_categories",
+      "special_ad_category_country",
       "spend_cap",
       "status",
       "topline_id",
@@ -14905,6 +14704,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateCampaign setSpecialAdCategoryCountry (List<Campaign.EnumSpecialAdCategoryCountry> specialAdCategoryCountry) {
+      this.setParam("special_ad_category_country", specialAdCategoryCountry);
+      return this;
+    }
+    public APIRequestCreateCampaign setSpecialAdCategoryCountry (String specialAdCategoryCountry) {
+      this.setParam("special_ad_category_country", specialAdCategoryCountry);
+      return this;
+    }
+
     public APIRequestCreateCampaign setSpendCap (Long spendCap) {
       this.setParam("spend_cap", spendCap);
       return this;
@@ -15015,6 +14823,7 @@ public class AdAccount extends APINode {
       "source_campaign_id",
       "special_ad_categories",
       "special_ad_category",
+      "special_ad_category_country",
       "spend_cap",
       "start_time",
       "status",
@@ -15317,6 +15126,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetCampaignsByLabels requestSpecialAdCategoryField (boolean value) {
       this.requestField("special_ad_category", value);
+      return this;
+    }
+    public APIRequestGetCampaignsByLabels requestSpecialAdCategoryCountryField () {
+      return this.requestSpecialAdCategoryCountryField(true);
+    }
+    public APIRequestGetCampaignsByLabels requestSpecialAdCategoryCountryField (boolean value) {
+      this.requestField("special_ad_category_country", value);
       return this;
     }
     public APIRequestGetCampaignsByLabels requestSpendCapField () {
@@ -20069,7 +19885,6 @@ public class AdAccount extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
-      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -20078,6 +19893,7 @@ public class AdAccount extends APINode {
       "personal_interests",
       "pharma_safety_info",
       "phone",
+      "pickup_options",
       "place_type",
       "plot_outline",
       "preferred_audience",
@@ -20847,13 +20663,6 @@ public class AdAccount extends APINode {
       this.requestField("overall_star_rating", value);
       return this;
     }
-    public APIRequestGetPromotePages requestPageAboutStoryField () {
-      return this.requestPageAboutStoryField(true);
-    }
-    public APIRequestGetPromotePages requestPageAboutStoryField (boolean value) {
-      this.requestField("page_about_story", value);
-      return this;
-    }
     public APIRequestGetPromotePages requestPageTokenField () {
       return this.requestPageTokenField(true);
     }
@@ -20908,6 +20717,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetPromotePages requestPhoneField (boolean value) {
       this.requestField("phone", value);
+      return this;
+    }
+    public APIRequestGetPromotePages requestPickupOptionsField () {
+      return this.requestPickupOptionsField(true);
+    }
+    public APIRequestGetPromotePages requestPickupOptionsField (boolean value) {
+      this.requestField("pickup_options", value);
       return this;
     }
     public APIRequestGetPromotePages requestPlaceTypeField () {
@@ -26682,6 +26498,8 @@ public class AdAccount extends APINode {
       VALUE_TRY("TRY"),
       @SerializedName("TWD")
       VALUE_TWD("TWD"),
+      @SerializedName("UAH")
+      VALUE_UAH("UAH"),
       @SerializedName("USD")
       VALUE_USD("USD"),
       @SerializedName("UYU")
@@ -26709,12 +26527,6 @@ public class AdAccount extends APINode {
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("ANALYZE")
       VALUE_ANALYZE("ANALYZE"),
-      @SerializedName("CREATIVE")
-      VALUE_CREATIVE("CREATIVE"),
-      @SerializedName("DRAFT")
-      VALUE_DRAFT("DRAFT"),
-      @SerializedName("FB_EMPLOYEE_DSO_ADVERTISE")
-      VALUE_FB_EMPLOYEE_DSO_ADVERTISE("FB_EMPLOYEE_DSO_ADVERTISE"),
       @SerializedName("MANAGE")
       VALUE_MANAGE("MANAGE"),
       ;
@@ -26736,12 +26548,6 @@ public class AdAccount extends APINode {
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("ANALYZE")
       VALUE_ANALYZE("ANALYZE"),
-      @SerializedName("CREATIVE")
-      VALUE_CREATIVE("CREATIVE"),
-      @SerializedName("DRAFT")
-      VALUE_DRAFT("DRAFT"),
-      @SerializedName("FB_EMPLOYEE_DSO_ADVERTISE")
-      VALUE_FB_EMPLOYEE_DSO_ADVERTISE("FB_EMPLOYEE_DSO_ADVERTISE"),
       @SerializedName("MANAGE")
       VALUE_MANAGE("MANAGE"),
       ;

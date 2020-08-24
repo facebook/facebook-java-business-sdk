@@ -197,23 +197,41 @@
      return token;
    }
 
-   private static String normalizeDobd(String dobd) {
+   private static String normalizeDobd(String input) {
+     String dobd = input;
      if (dobd.length() == 1) {
        dobd = "0" + dobd;
      }
-     if (dobd.length() > 2 || dobd.compareTo("01") < 0 || dobd.compareTo("31") > 0) {
-       throw new IllegalArgumentException("Invalid dobd: '" + dobd + "'. Please specify the day in 'DD' format.");
+
+     int dobdInt;
+     try {
+       dobdInt = Integer.parseInt(dobd);
+     } catch (NumberFormatException e) {
+       throw new IllegalArgumentException("Invalid dobd: '" + input + "'. Please specify the day in 'DD' format.");
+     }
+
+     if (dobd.length() > 2 || dobdInt < 1 || dobdInt > 31) {
+       throw new IllegalArgumentException("Invalid dobd: '" + input + "'. Please specify the day in 'DD' format.");
      }
 
      return dobd;
    }
 
-   private static String normalizeDobm(String dobm) {
+   private static String normalizeDobm(String input) {
+     String dobm = input;
      if (dobm.length() == 1) {
        dobm = "0" + dobm;
      }
-     if (dobm.length() > 2 || dobm.compareTo("01") < 0 || dobm.compareTo("12") > 0) {
-       throw new IllegalArgumentException("Invalid dobm: '" + dobm + "'. Please specify the month in 'MM' format.");
+
+     int dobmInt;
+     try {
+       dobmInt = Integer.parseInt(dobm);
+     } catch (NumberFormatException e) {
+       throw new IllegalArgumentException("Invalid dobm: '" + input + "'. Please specify the month in 'MM' format.");
+     }
+
+     if (dobm.length() > 2 || dobmInt < 1 || dobmInt > 12) {
+       throw new IllegalArgumentException("Invalid dobm: '" + input + "'. Please specify the month in 'MM' format.");
      }
 
      return dobm;
