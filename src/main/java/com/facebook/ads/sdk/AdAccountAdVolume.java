@@ -57,10 +57,28 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdAccountAdVolume extends APINode {
   @SerializedName("actor_id")
   private String mActorId = null;
+  @SerializedName("actor_name")
+  private String mActorName = null;
+  @SerializedName("ad_limit_scope_business")
+  private Business mAdLimitScopeBusiness = null;
+  @SerializedName("ad_limit_scope_business_manager_id")
+  private String mAdLimitScopeBusinessManagerId = null;
+  @SerializedName("ad_limit_set_by_page_admin")
+  private Long mAdLimitSetByPageAdmin = null;
   @SerializedName("ads_running_or_in_review_count")
   private Long mAdsRunningOrInReviewCount = null;
+  @SerializedName("ads_running_or_in_review_count_subject_to_limit_set_by_page")
+  private Long mAdsRunningOrInReviewCountSubjectToLimitSetByPage = null;
   @SerializedName("current_account_ads_running_or_in_review_count")
   private Long mCurrentAccountAdsRunningOrInReviewCount = null;
+  @SerializedName("future_limit_activation_date")
+  private String mFutureLimitActivationDate = null;
+  @SerializedName("future_limit_on_ads_running_or_in_review")
+  private Long mFutureLimitOnAdsRunningOrInReview = null;
+  @SerializedName("limit_on_ads_running_or_in_review")
+  private Long mLimitOnAdsRunningOrInReview = null;
+  @SerializedName("recommendations")
+  private List<Object> mRecommendations = null;
   protected static Gson gson = null;
 
   public AdAccountAdVolume() {
@@ -221,12 +239,65 @@ public class AdAccountAdVolume extends APINode {
     return this;
   }
 
+  public String getFieldActorName() {
+    return mActorName;
+  }
+
+  public AdAccountAdVolume setFieldActorName(String value) {
+    this.mActorName = value;
+    return this;
+  }
+
+  public Business getFieldAdLimitScopeBusiness() {
+    if (mAdLimitScopeBusiness != null) {
+      mAdLimitScopeBusiness.context = getContext();
+    }
+    return mAdLimitScopeBusiness;
+  }
+
+  public AdAccountAdVolume setFieldAdLimitScopeBusiness(Business value) {
+    this.mAdLimitScopeBusiness = value;
+    return this;
+  }
+
+  public AdAccountAdVolume setFieldAdLimitScopeBusiness(String value) {
+    Type type = new TypeToken<Business>(){}.getType();
+    this.mAdLimitScopeBusiness = Business.getGson().fromJson(value, type);
+    return this;
+  }
+  public String getFieldAdLimitScopeBusinessManagerId() {
+    return mAdLimitScopeBusinessManagerId;
+  }
+
+  public AdAccountAdVolume setFieldAdLimitScopeBusinessManagerId(String value) {
+    this.mAdLimitScopeBusinessManagerId = value;
+    return this;
+  }
+
+  public Long getFieldAdLimitSetByPageAdmin() {
+    return mAdLimitSetByPageAdmin;
+  }
+
+  public AdAccountAdVolume setFieldAdLimitSetByPageAdmin(Long value) {
+    this.mAdLimitSetByPageAdmin = value;
+    return this;
+  }
+
   public Long getFieldAdsRunningOrInReviewCount() {
     return mAdsRunningOrInReviewCount;
   }
 
   public AdAccountAdVolume setFieldAdsRunningOrInReviewCount(Long value) {
     this.mAdsRunningOrInReviewCount = value;
+    return this;
+  }
+
+  public Long getFieldAdsRunningOrInReviewCountSubjectToLimitSetByPage() {
+    return mAdsRunningOrInReviewCountSubjectToLimitSetByPage;
+  }
+
+  public AdAccountAdVolume setFieldAdsRunningOrInReviewCountSubjectToLimitSetByPage(Long value) {
+    this.mAdsRunningOrInReviewCountSubjectToLimitSetByPage = value;
     return this;
   }
 
@@ -239,7 +310,80 @@ public class AdAccountAdVolume extends APINode {
     return this;
   }
 
+  public String getFieldFutureLimitActivationDate() {
+    return mFutureLimitActivationDate;
+  }
 
+  public AdAccountAdVolume setFieldFutureLimitActivationDate(String value) {
+    this.mFutureLimitActivationDate = value;
+    return this;
+  }
+
+  public Long getFieldFutureLimitOnAdsRunningOrInReview() {
+    return mFutureLimitOnAdsRunningOrInReview;
+  }
+
+  public AdAccountAdVolume setFieldFutureLimitOnAdsRunningOrInReview(Long value) {
+    this.mFutureLimitOnAdsRunningOrInReview = value;
+    return this;
+  }
+
+  public Long getFieldLimitOnAdsRunningOrInReview() {
+    return mLimitOnAdsRunningOrInReview;
+  }
+
+  public AdAccountAdVolume setFieldLimitOnAdsRunningOrInReview(Long value) {
+    this.mLimitOnAdsRunningOrInReview = value;
+    return this;
+  }
+
+  public List<Object> getFieldRecommendations() {
+    return mRecommendations;
+  }
+
+  public AdAccountAdVolume setFieldRecommendations(List<Object> value) {
+    this.mRecommendations = value;
+    return this;
+  }
+
+
+
+  public static enum EnumRecommendationType {
+      @SerializedName("AGGREGATED_BID_LIMITED")
+      VALUE_AGGREGATED_BID_LIMITED("AGGREGATED_BID_LIMITED"),
+      @SerializedName("AGGREGATED_BUDGET_LIMITED")
+      VALUE_AGGREGATED_BUDGET_LIMITED("AGGREGATED_BUDGET_LIMITED"),
+      @SerializedName("AGGREGATED_COST_LIMITED")
+      VALUE_AGGREGATED_COST_LIMITED("AGGREGATED_COST_LIMITED"),
+      @SerializedName("AUCTION_OVERLAP")
+      VALUE_AUCTION_OVERLAP("AUCTION_OVERLAP"),
+      @SerializedName("CREATIVE_FATIGUE")
+      VALUE_CREATIVE_FATIGUE("CREATIVE_FATIGUE"),
+      @SerializedName("FRAGMENTATION")
+      VALUE_FRAGMENTATION("FRAGMENTATION"),
+      @SerializedName("LEARNING_LIMITED")
+      VALUE_LEARNING_LIMITED("LEARNING_LIMITED"),
+      @SerializedName("TOP_ADSETS_WITH_ADS_UNDER_CAP")
+      VALUE_TOP_ADSETS_WITH_ADS_UNDER_CAP("TOP_ADSETS_WITH_ADS_UNDER_CAP"),
+      @SerializedName("TOP_CAMPAIGNS_WITH_ADS_UNDER_CAP")
+      VALUE_TOP_CAMPAIGNS_WITH_ADS_UNDER_CAP("TOP_CAMPAIGNS_WITH_ADS_UNDER_CAP"),
+      @SerializedName("UNECONOMICAL_ADS_THROTTLING")
+      VALUE_UNECONOMICAL_ADS_THROTTLING("UNECONOMICAL_ADS_THROTTLING"),
+      @SerializedName("ZERO_IMPRESSION")
+      VALUE_ZERO_IMPRESSION("ZERO_IMPRESSION"),
+      ;
+
+      private String value;
+
+      private EnumRecommendationType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -257,8 +401,17 @@ public class AdAccountAdVolume extends APINode {
 
   public AdAccountAdVolume copyFrom(AdAccountAdVolume instance) {
     this.mActorId = instance.mActorId;
+    this.mActorName = instance.mActorName;
+    this.mAdLimitScopeBusiness = instance.mAdLimitScopeBusiness;
+    this.mAdLimitScopeBusinessManagerId = instance.mAdLimitScopeBusinessManagerId;
+    this.mAdLimitSetByPageAdmin = instance.mAdLimitSetByPageAdmin;
     this.mAdsRunningOrInReviewCount = instance.mAdsRunningOrInReviewCount;
+    this.mAdsRunningOrInReviewCountSubjectToLimitSetByPage = instance.mAdsRunningOrInReviewCountSubjectToLimitSetByPage;
     this.mCurrentAccountAdsRunningOrInReviewCount = instance.mCurrentAccountAdsRunningOrInReviewCount;
+    this.mFutureLimitActivationDate = instance.mFutureLimitActivationDate;
+    this.mFutureLimitOnAdsRunningOrInReview = instance.mFutureLimitOnAdsRunningOrInReview;
+    this.mLimitOnAdsRunningOrInReview = instance.mLimitOnAdsRunningOrInReview;
+    this.mRecommendations = instance.mRecommendations;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

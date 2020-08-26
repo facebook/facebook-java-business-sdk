@@ -3475,6 +3475,7 @@ public class Group extends APINode {
     public static final String[] PARAMS = {
       "content_tags",
       "description",
+      "enable_backup_ingest",
       "encoding_settings",
       "fisheye_video_cropped",
       "front_z_rotation",
@@ -3562,6 +3563,15 @@ public class Group extends APINode {
 
     public APIRequestCreateLiveVideo setDescription (String description) {
       this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestCreateLiveVideo setEnableBackupIngest (Boolean enableBackupIngest) {
+      this.setParam("enable_backup_ingest", enableBackupIngest);
+      return this;
+    }
+    public APIRequestCreateLiveVideo setEnableBackupIngest (String enableBackupIngest) {
+      this.setParam("enable_backup_ingest", enableBackupIngest);
       return this;
     }
 
@@ -4036,7 +4046,6 @@ public class Group extends APINode {
       "age_range",
       "auth_method",
       "birthday",
-      "can_review_measurement_request",
       "cover",
       "currency",
       "devices",
@@ -4052,9 +4061,7 @@ public class Group extends APINode {
       "install_type",
       "installed",
       "interested_in",
-      "is_famedeeplinkinguser",
       "is_guest_user",
-      "is_shared_login",
       "is_verified",
       "languages",
       "last_name",
@@ -4074,20 +4081,17 @@ public class Group extends APINode {
       "quotes",
       "relationship_status",
       "religion",
-      "security_settings",
       "shared_login_upgrade_required_by",
       "short_name",
       "significant_other",
       "sports",
       "supports_donate_button_in_live_video",
-      "test_group",
       "third_party_id",
       "timezone",
       "token_for_business",
       "updated_time",
       "verified",
       "video_upload_limits",
-      "viewer_can_send_gift",
       "website",
       "work",
     };
@@ -4223,13 +4227,6 @@ public class Group extends APINode {
       this.requestField("birthday", value);
       return this;
     }
-    public APIRequestGetOptedInMembers requestCanReviewMeasurementRequestField () {
-      return this.requestCanReviewMeasurementRequestField(true);
-    }
-    public APIRequestGetOptedInMembers requestCanReviewMeasurementRequestField (boolean value) {
-      this.requestField("can_review_measurement_request", value);
-      return this;
-    }
     public APIRequestGetOptedInMembers requestCoverField () {
       return this.requestCoverField(true);
     }
@@ -4335,25 +4332,11 @@ public class Group extends APINode {
       this.requestField("interested_in", value);
       return this;
     }
-    public APIRequestGetOptedInMembers requestIsFamedeeplinkinguserField () {
-      return this.requestIsFamedeeplinkinguserField(true);
-    }
-    public APIRequestGetOptedInMembers requestIsFamedeeplinkinguserField (boolean value) {
-      this.requestField("is_famedeeplinkinguser", value);
-      return this;
-    }
     public APIRequestGetOptedInMembers requestIsGuestUserField () {
       return this.requestIsGuestUserField(true);
     }
     public APIRequestGetOptedInMembers requestIsGuestUserField (boolean value) {
       this.requestField("is_guest_user", value);
-      return this;
-    }
-    public APIRequestGetOptedInMembers requestIsSharedLoginField () {
-      return this.requestIsSharedLoginField(true);
-    }
-    public APIRequestGetOptedInMembers requestIsSharedLoginField (boolean value) {
-      this.requestField("is_shared_login", value);
       return this;
     }
     public APIRequestGetOptedInMembers requestIsVerifiedField () {
@@ -4489,13 +4472,6 @@ public class Group extends APINode {
       this.requestField("religion", value);
       return this;
     }
-    public APIRequestGetOptedInMembers requestSecuritySettingsField () {
-      return this.requestSecuritySettingsField(true);
-    }
-    public APIRequestGetOptedInMembers requestSecuritySettingsField (boolean value) {
-      this.requestField("security_settings", value);
-      return this;
-    }
     public APIRequestGetOptedInMembers requestSharedLoginUpgradeRequiredByField () {
       return this.requestSharedLoginUpgradeRequiredByField(true);
     }
@@ -4529,13 +4505,6 @@ public class Group extends APINode {
     }
     public APIRequestGetOptedInMembers requestSupportsDonateButtonInLiveVideoField (boolean value) {
       this.requestField("supports_donate_button_in_live_video", value);
-      return this;
-    }
-    public APIRequestGetOptedInMembers requestTestGroupField () {
-      return this.requestTestGroupField(true);
-    }
-    public APIRequestGetOptedInMembers requestTestGroupField (boolean value) {
-      this.requestField("test_group", value);
       return this;
     }
     public APIRequestGetOptedInMembers requestThirdPartyIdField () {
@@ -4578,13 +4547,6 @@ public class Group extends APINode {
     }
     public APIRequestGetOptedInMembers requestVideoUploadLimitsField (boolean value) {
       this.requestField("video_upload_limits", value);
-      return this;
-    }
-    public APIRequestGetOptedInMembers requestViewerCanSendGiftField () {
-      return this.requestViewerCanSendGiftField(true);
-    }
-    public APIRequestGetOptedInMembers requestViewerCanSendGiftField (boolean value) {
-      this.requestField("viewer_can_send_gift", value);
       return this;
     }
     public APIRequestGetOptedInMembers requestWebsiteField () {
@@ -7138,6 +7100,8 @@ public class Group extends APINode {
       VALUE_WORK_FEEDBACK("WORK_FEEDBACK"),
       @SerializedName("WORK_FOR_SALE")
       VALUE_WORK_FOR_SALE("WORK_FOR_SALE"),
+      @SerializedName("WORK_GARDEN")
+      VALUE_WORK_GARDEN("WORK_GARDEN"),
       @SerializedName("WORK_LEARNING")
       VALUE_WORK_LEARNING("WORK_LEARNING"),
       @SerializedName("WORK_MENTORSHIP")
@@ -7253,6 +7217,8 @@ public class Group extends APINode {
       VALUE_WORK_FEEDBACK("WORK_FEEDBACK"),
       @SerializedName("WORK_FOR_SALE")
       VALUE_WORK_FOR_SALE("WORK_FOR_SALE"),
+      @SerializedName("WORK_GARDEN")
+      VALUE_WORK_GARDEN("WORK_GARDEN"),
       @SerializedName("WORK_LEARNING")
       VALUE_WORK_LEARNING("WORK_LEARNING"),
       @SerializedName("WORK_MENTORSHIP")

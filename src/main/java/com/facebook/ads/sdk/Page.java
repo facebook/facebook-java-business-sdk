@@ -594,6 +594,10 @@ public class Page extends APINode {
     return new APIRequestCreateBlocked(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateBusinessDatum createBusinessDatum() {
+    return new APIRequestCreateBusinessDatum(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetCallToActions getCallToActions() {
     return new APIRequestGetCallToActions(this.getPrefixedId().toString(), context);
   }
@@ -1746,6 +1750,7 @@ public class Page extends APINode {
       "permalink_url",
       "picture",
       "place",
+      "poll",
       "privacy",
       "promotable_id",
       "promotion_status",
@@ -2184,6 +2189,13 @@ public class Page extends APINode {
     }
     public APIRequestGetAdsPosts requestPlaceField (boolean value) {
       this.requestField("place", value);
+      return this;
+    }
+    public APIRequestGetAdsPosts requestPollField () {
+      return this.requestPollField(true);
+    }
+    public APIRequestGetAdsPosts requestPollField (boolean value) {
+      this.requestField("poll", value);
       return this;
     }
     public APIRequestGetAdsPosts requestPrivacyField () {
@@ -3970,6 +3982,126 @@ public class Page extends APINode {
 
   }
 
+  public static class APIRequestCreateBusinessDatum extends APIRequest<Page> {
+
+    Page lastResponse = null;
+    @Override
+    public Page getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "data",
+      "partner_agent",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Page parseResponse(String response, String header) throws APIException {
+      return Page.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Page execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Page execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Page> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Page> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, Page>() {
+           public Page apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateBusinessDatum.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateBusinessDatum(String nodeId, APIContext context) {
+      super(context, nodeId, "/business_data", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateBusinessDatum setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBusinessDatum setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateBusinessDatum setData (List<String> data) {
+      this.setParam("data", data);
+      return this;
+    }
+    public APIRequestCreateBusinessDatum setData (String data) {
+      this.setParam("data", data);
+      return this;
+    }
+
+    public APIRequestCreateBusinessDatum setPartnerAgent (String partnerAgent) {
+      this.setParam("partner_agent", partnerAgent);
+      return this;
+    }
+
+    public APIRequestCreateBusinessDatum requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateBusinessDatum requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBusinessDatum requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateBusinessDatum requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBusinessDatum requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBusinessDatum requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetCallToActions extends APIRequest<PageCallToAction> {
 
     APINodeList<PageCallToAction> lastResponse = null;
@@ -5306,6 +5438,7 @@ public class Page extends APINode {
       "braintree_merchant_id",
       "checkout_message",
       "contact_email",
+      "cta",
       "disable_checkout_urls",
       "display_name",
       "facebook_channel",
@@ -5435,6 +5568,13 @@ public class Page extends APINode {
     }
     public APIRequestGetCommerceMerchantSettings requestContactEmailField (boolean value) {
       this.requestField("contact_email", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestCtaField () {
+      return this.requestCtaField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestCtaField (boolean value) {
+      this.requestField("cta", value);
       return this;
     }
     public APIRequestGetCommerceMerchantSettings requestDisableCheckoutUrlsField () {
@@ -5593,6 +5733,7 @@ public class Page extends APINode {
       "estimated_payment_details",
       "id",
       "is_group_buy",
+      "is_test_order",
       "last_updated",
       "merchant_order_id",
       "order_status",
@@ -5758,6 +5899,13 @@ public class Page extends APINode {
     }
     public APIRequestGetCommerceOrders requestIsGroupBuyField (boolean value) {
       this.requestField("is_group_buy", value);
+      return this;
+    }
+    public APIRequestGetCommerceOrders requestIsTestOrderField () {
+      return this.requestIsTestOrderField(true);
+    }
+    public APIRequestGetCommerceOrders requestIsTestOrderField (boolean value) {
+      this.requestField("is_test_order", value);
       return this;
     }
     public APIRequestGetCommerceOrders requestLastUpdatedField () {
@@ -9042,6 +9190,7 @@ public class Page extends APINode {
       "permalink_url",
       "picture",
       "place",
+      "poll",
       "privacy",
       "promotable_id",
       "promotion_status",
@@ -9488,6 +9637,13 @@ public class Page extends APINode {
     }
     public APIRequestGetFeed requestPlaceField (boolean value) {
       this.requestField("place", value);
+      return this;
+    }
+    public APIRequestGetFeed requestPollField () {
+      return this.requestPollField(true);
+    }
+    public APIRequestGetFeed requestPollField (boolean value) {
+      this.requestField("poll", value);
       return this;
     }
     public APIRequestGetFeed requestPrivacyField () {
@@ -15764,6 +15920,7 @@ public class Page extends APINode {
       "crossposting_actions",
       "custom_labels",
       "description",
+      "enable_backup_ingest",
       "encoding_settings",
       "fisheye_video_cropped",
       "front_z_rotation",
@@ -15871,6 +16028,15 @@ public class Page extends APINode {
 
     public APIRequestCreateLiveVideo setDescription (String description) {
       this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestCreateLiveVideo setEnableBackupIngest (Boolean enableBackupIngest) {
+      this.setParam("enable_backup_ingest", enableBackupIngest);
+      return this;
+    }
+    public APIRequestCreateLiveVideo setEnableBackupIngest (String enableBackupIngest) {
+      this.setParam("enable_backup_ingest", enableBackupIngest);
       return this;
     }
 
@@ -22051,6 +22217,7 @@ public class Page extends APINode {
       "permalink_url",
       "picture",
       "place",
+      "poll",
       "privacy",
       "promotable_id",
       "promotion_status",
@@ -22504,6 +22671,13 @@ public class Page extends APINode {
       this.requestField("place", value);
       return this;
     }
+    public APIRequestGetPosts requestPollField () {
+      return this.requestPollField(true);
+    }
+    public APIRequestGetPosts requestPollField (boolean value) {
+      this.requestField("poll", value);
+      return this;
+    }
     public APIRequestGetPosts requestPrivacyField () {
       return this.requestPrivacyField(true);
     }
@@ -22902,6 +23076,7 @@ public class Page extends APINode {
       "permalink_url",
       "picture",
       "place",
+      "poll",
       "privacy",
       "promotable_id",
       "promotion_status",
@@ -23322,6 +23497,13 @@ public class Page extends APINode {
     }
     public APIRequestGetPublishedPosts requestPlaceField (boolean value) {
       this.requestField("place", value);
+      return this;
+    }
+    public APIRequestGetPublishedPosts requestPollField () {
+      return this.requestPollField(true);
+    }
+    public APIRequestGetPublishedPosts requestPollField (boolean value) {
+      this.requestField("poll", value);
       return this;
     }
     public APIRequestGetPublishedPosts requestPrivacyField () {
@@ -23773,7 +23955,6 @@ public class Page extends APINode {
       "age_range",
       "auth_method",
       "birthday",
-      "can_review_measurement_request",
       "cover",
       "currency",
       "devices",
@@ -23789,9 +23970,7 @@ public class Page extends APINode {
       "install_type",
       "installed",
       "interested_in",
-      "is_famedeeplinkinguser",
       "is_guest_user",
-      "is_shared_login",
       "is_verified",
       "languages",
       "last_name",
@@ -23811,20 +23990,17 @@ public class Page extends APINode {
       "quotes",
       "relationship_status",
       "religion",
-      "security_settings",
       "shared_login_upgrade_required_by",
       "short_name",
       "significant_other",
       "sports",
       "supports_donate_button_in_live_video",
-      "test_group",
       "third_party_id",
       "timezone",
       "token_for_business",
       "updated_time",
       "verified",
       "video_upload_limits",
-      "viewer_can_send_gift",
       "website",
       "work",
     };
@@ -23978,13 +24154,6 @@ public class Page extends APINode {
       this.requestField("birthday", value);
       return this;
     }
-    public APIRequestGetRoles requestCanReviewMeasurementRequestField () {
-      return this.requestCanReviewMeasurementRequestField(true);
-    }
-    public APIRequestGetRoles requestCanReviewMeasurementRequestField (boolean value) {
-      this.requestField("can_review_measurement_request", value);
-      return this;
-    }
     public APIRequestGetRoles requestCoverField () {
       return this.requestCoverField(true);
     }
@@ -24090,25 +24259,11 @@ public class Page extends APINode {
       this.requestField("interested_in", value);
       return this;
     }
-    public APIRequestGetRoles requestIsFamedeeplinkinguserField () {
-      return this.requestIsFamedeeplinkinguserField(true);
-    }
-    public APIRequestGetRoles requestIsFamedeeplinkinguserField (boolean value) {
-      this.requestField("is_famedeeplinkinguser", value);
-      return this;
-    }
     public APIRequestGetRoles requestIsGuestUserField () {
       return this.requestIsGuestUserField(true);
     }
     public APIRequestGetRoles requestIsGuestUserField (boolean value) {
       this.requestField("is_guest_user", value);
-      return this;
-    }
-    public APIRequestGetRoles requestIsSharedLoginField () {
-      return this.requestIsSharedLoginField(true);
-    }
-    public APIRequestGetRoles requestIsSharedLoginField (boolean value) {
-      this.requestField("is_shared_login", value);
       return this;
     }
     public APIRequestGetRoles requestIsVerifiedField () {
@@ -24244,13 +24399,6 @@ public class Page extends APINode {
       this.requestField("religion", value);
       return this;
     }
-    public APIRequestGetRoles requestSecuritySettingsField () {
-      return this.requestSecuritySettingsField(true);
-    }
-    public APIRequestGetRoles requestSecuritySettingsField (boolean value) {
-      this.requestField("security_settings", value);
-      return this;
-    }
     public APIRequestGetRoles requestSharedLoginUpgradeRequiredByField () {
       return this.requestSharedLoginUpgradeRequiredByField(true);
     }
@@ -24284,13 +24432,6 @@ public class Page extends APINode {
     }
     public APIRequestGetRoles requestSupportsDonateButtonInLiveVideoField (boolean value) {
       this.requestField("supports_donate_button_in_live_video", value);
-      return this;
-    }
-    public APIRequestGetRoles requestTestGroupField () {
-      return this.requestTestGroupField(true);
-    }
-    public APIRequestGetRoles requestTestGroupField (boolean value) {
-      this.requestField("test_group", value);
       return this;
     }
     public APIRequestGetRoles requestThirdPartyIdField () {
@@ -24333,13 +24474,6 @@ public class Page extends APINode {
     }
     public APIRequestGetRoles requestVideoUploadLimitsField (boolean value) {
       this.requestField("video_upload_limits", value);
-      return this;
-    }
-    public APIRequestGetRoles requestViewerCanSendGiftField () {
-      return this.requestViewerCanSendGiftField(true);
-    }
-    public APIRequestGetRoles requestViewerCanSendGiftField (boolean value) {
-      this.requestField("viewer_can_send_gift", value);
       return this;
     }
     public APIRequestGetRoles requestWebsiteField () {
@@ -24604,6 +24738,7 @@ public class Page extends APINode {
       "permalink_url",
       "picture",
       "place",
+      "poll",
       "privacy",
       "promotable_id",
       "promotion_status",
@@ -25014,6 +25149,13 @@ public class Page extends APINode {
     }
     public APIRequestGetScheduledPosts requestPlaceField (boolean value) {
       this.requestField("place", value);
+      return this;
+    }
+    public APIRequestGetScheduledPosts requestPollField () {
+      return this.requestPollField(true);
+    }
+    public APIRequestGetScheduledPosts requestPollField (boolean value) {
+      this.requestField("poll", value);
       return this;
     }
     public APIRequestGetScheduledPosts requestPrivacyField () {
@@ -27962,6 +28104,7 @@ public class Page extends APINode {
       "permalink_url",
       "picture",
       "place",
+      "poll",
       "privacy",
       "promotable_id",
       "promotion_status",
@@ -28372,6 +28515,13 @@ public class Page extends APINode {
     }
     public APIRequestGetTagged requestPlaceField (boolean value) {
       this.requestField("place", value);
+      return this;
+    }
+    public APIRequestGetTagged requestPollField () {
+      return this.requestPollField(true);
+    }
+    public APIRequestGetTagged requestPollField (boolean value) {
+      this.requestField("poll", value);
       return this;
     }
     public APIRequestGetTagged requestPrivacyField () {
@@ -31283,6 +31433,7 @@ public class Page extends APINode {
       "permalink_url",
       "picture",
       "place",
+      "poll",
       "privacy",
       "promotable_id",
       "promotion_status",
@@ -31702,6 +31853,13 @@ public class Page extends APINode {
     }
     public APIRequestGetVisitorPosts requestPlaceField (boolean value) {
       this.requestField("place", value);
+      return this;
+    }
+    public APIRequestGetVisitorPosts requestPollField () {
+      return this.requestPollField(true);
+    }
+    public APIRequestGetVisitorPosts requestPollField (boolean value) {
+      this.requestField("poll", value);
       return this;
     }
     public APIRequestGetVisitorPosts requestPrivacyField () {

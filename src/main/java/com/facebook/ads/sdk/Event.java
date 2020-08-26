@@ -833,6 +833,7 @@ public class Event extends APINode {
     public static final String[] PARAMS = {
       "content_tags",
       "description",
+      "enable_backup_ingest",
       "encoding_settings",
       "fisheye_video_cropped",
       "front_z_rotation",
@@ -920,6 +921,15 @@ public class Event extends APINode {
 
     public APIRequestCreateLiveVideo setDescription (String description) {
       this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestCreateLiveVideo setEnableBackupIngest (Boolean enableBackupIngest) {
+      this.setParam("enable_backup_ingest", enableBackupIngest);
+      return this;
+    }
+    public APIRequestCreateLiveVideo setEnableBackupIngest (String enableBackupIngest) {
+      this.setParam("enable_backup_ingest", enableBackupIngest);
       return this;
     }
 

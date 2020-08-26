@@ -4317,6 +4317,8 @@ public class Campaign extends APINode {
       VALUE_LAST_YEAR("last_year"),
       @SerializedName("lifetime")
       VALUE_LIFETIME("lifetime"),
+      @SerializedName("maximum")
+      VALUE_MAXIMUM("maximum"),
       @SerializedName("this_month")
       VALUE_THIS_MONTH("this_month"),
       @SerializedName("this_quarter")

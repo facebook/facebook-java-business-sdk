@@ -67,8 +67,6 @@ public class User extends APINode {
   private String mAuthMethod = null;
   @SerializedName("birthday")
   private String mBirthday = null;
-  @SerializedName("can_review_measurement_request")
-  private Boolean mCanReviewMeasurementRequest = null;
   @SerializedName("cover")
   private UserCoverPhoto mCover = null;
   @SerializedName("currency")
@@ -99,12 +97,8 @@ public class User extends APINode {
   private Boolean mInstalled = null;
   @SerializedName("interested_in")
   private List<String> mInterestedIn = null;
-  @SerializedName("is_famedeeplinkinguser")
-  private Boolean mIsFamedeeplinkinguser = null;
   @SerializedName("is_guest_user")
   private Boolean mIsGuestUser = null;
-  @SerializedName("is_shared_login")
-  private Boolean mIsSharedLogin = null;
   @SerializedName("is_verified")
   private Boolean mIsVerified = null;
   @SerializedName("languages")
@@ -143,8 +137,6 @@ public class User extends APINode {
   private String mRelationshipStatus = null;
   @SerializedName("religion")
   private String mReligion = null;
-  @SerializedName("security_settings")
-  private SecuritySettings mSecuritySettings = null;
   @SerializedName("shared_login_upgrade_required_by")
   private String mSharedLoginUpgradeRequiredBy = null;
   @SerializedName("short_name")
@@ -155,8 +147,6 @@ public class User extends APINode {
   private List<Experience> mSports = null;
   @SerializedName("supports_donate_button_in_live_video")
   private Boolean mSupportsDonateButtonInLiveVideo = null;
-  @SerializedName("test_group")
-  private Long mTestGroup = null;
   @SerializedName("third_party_id")
   private String mThirdPartyId = null;
   @SerializedName("timezone")
@@ -169,8 +159,6 @@ public class User extends APINode {
   private Boolean mVerified = null;
   @SerializedName("video_upload_limits")
   private VideoUploadLimits mVideoUploadLimits = null;
-  @SerializedName("viewer_can_send_gift")
-  private Boolean mViewerCanSendGift = null;
   @SerializedName("website")
   private String mWebsite = null;
   @SerializedName("work")
@@ -528,20 +516,16 @@ public class User extends APINode {
     return new APIRequestCreateLiveVideo(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetMeetingLink getMeetingLink() {
-    return new APIRequestGetMeetingLink(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateMeetingLink createMeetingLink() {
-    return new APIRequestCreateMeetingLink(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetMusic getMusic() {
     return new APIRequestGetMusic(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateNotification createNotification() {
     return new APIRequestCreateNotification(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetOwnedProductCatalogs getOwnedProductCatalogs() {
+    return new APIRequestGetOwnedProductCatalogs(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestDeletePermissions deletePermissions() {
@@ -621,10 +605,6 @@ public class User extends APINode {
     return mBirthday;
   }
 
-  public Boolean getFieldCanReviewMeasurementRequest() {
-    return mCanReviewMeasurementRequest;
-  }
-
   public UserCoverPhoto getFieldCover() {
     return mCover;
   }
@@ -688,16 +668,8 @@ public class User extends APINode {
     return mInterestedIn;
   }
 
-  public Boolean getFieldIsFamedeeplinkinguser() {
-    return mIsFamedeeplinkinguser;
-  }
-
   public Boolean getFieldIsGuestUser() {
     return mIsGuestUser;
-  }
-
-  public Boolean getFieldIsSharedLogin() {
-    return mIsSharedLogin;
   }
 
   public Boolean getFieldIsVerified() {
@@ -779,10 +751,6 @@ public class User extends APINode {
     return mReligion;
   }
 
-  public SecuritySettings getFieldSecuritySettings() {
-    return mSecuritySettings;
-  }
-
   public String getFieldSharedLoginUpgradeRequiredBy() {
     return mSharedLoginUpgradeRequiredBy;
   }
@@ -804,10 +772,6 @@ public class User extends APINode {
 
   public Boolean getFieldSupportsDonateButtonInLiveVideo() {
     return mSupportsDonateButtonInLiveVideo;
-  }
-
-  public Long getFieldTestGroup() {
-    return mTestGroup;
   }
 
   public String getFieldThirdPartyId() {
@@ -832,10 +796,6 @@ public class User extends APINode {
 
   public VideoUploadLimits getFieldVideoUploadLimits() {
     return mVideoUploadLimits;
-  }
-
-  public Boolean getFieldViewerCanSendGift() {
-    return mViewerCanSendGift;
   }
 
   public String getFieldWebsite() {
@@ -6992,6 +6952,7 @@ public class User extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "child_business_external_id",
       "email",
       "name",
       "primary_page",
@@ -7058,6 +7019,11 @@ public class User extends APINode {
       return this;
     }
 
+
+    public APIRequestCreateBusiness setChildBusinessExternalId (String childBusinessExternalId) {
+      this.setParam("child_business_external_id", childBusinessExternalId);
+      return this;
+    }
 
     public APIRequestCreateBusiness setEmail (String email) {
       this.setParam("email", email);
@@ -8950,7 +8916,6 @@ public class User extends APINode {
       "age_range",
       "auth_method",
       "birthday",
-      "can_review_measurement_request",
       "cover",
       "currency",
       "devices",
@@ -8966,9 +8931,7 @@ public class User extends APINode {
       "install_type",
       "installed",
       "interested_in",
-      "is_famedeeplinkinguser",
       "is_guest_user",
-      "is_shared_login",
       "is_verified",
       "languages",
       "last_name",
@@ -8988,20 +8951,17 @@ public class User extends APINode {
       "quotes",
       "relationship_status",
       "religion",
-      "security_settings",
       "shared_login_upgrade_required_by",
       "short_name",
       "significant_other",
       "sports",
       "supports_donate_button_in_live_video",
-      "test_group",
       "third_party_id",
       "timezone",
       "token_for_business",
       "updated_time",
       "verified",
       "video_upload_limits",
-      "viewer_can_send_gift",
       "website",
       "work",
     };
@@ -9146,13 +9106,6 @@ public class User extends APINode {
       this.requestField("birthday", value);
       return this;
     }
-    public APIRequestGetFriends requestCanReviewMeasurementRequestField () {
-      return this.requestCanReviewMeasurementRequestField(true);
-    }
-    public APIRequestGetFriends requestCanReviewMeasurementRequestField (boolean value) {
-      this.requestField("can_review_measurement_request", value);
-      return this;
-    }
     public APIRequestGetFriends requestCoverField () {
       return this.requestCoverField(true);
     }
@@ -9258,25 +9211,11 @@ public class User extends APINode {
       this.requestField("interested_in", value);
       return this;
     }
-    public APIRequestGetFriends requestIsFamedeeplinkinguserField () {
-      return this.requestIsFamedeeplinkinguserField(true);
-    }
-    public APIRequestGetFriends requestIsFamedeeplinkinguserField (boolean value) {
-      this.requestField("is_famedeeplinkinguser", value);
-      return this;
-    }
     public APIRequestGetFriends requestIsGuestUserField () {
       return this.requestIsGuestUserField(true);
     }
     public APIRequestGetFriends requestIsGuestUserField (boolean value) {
       this.requestField("is_guest_user", value);
-      return this;
-    }
-    public APIRequestGetFriends requestIsSharedLoginField () {
-      return this.requestIsSharedLoginField(true);
-    }
-    public APIRequestGetFriends requestIsSharedLoginField (boolean value) {
-      this.requestField("is_shared_login", value);
       return this;
     }
     public APIRequestGetFriends requestIsVerifiedField () {
@@ -9412,13 +9351,6 @@ public class User extends APINode {
       this.requestField("religion", value);
       return this;
     }
-    public APIRequestGetFriends requestSecuritySettingsField () {
-      return this.requestSecuritySettingsField(true);
-    }
-    public APIRequestGetFriends requestSecuritySettingsField (boolean value) {
-      this.requestField("security_settings", value);
-      return this;
-    }
     public APIRequestGetFriends requestSharedLoginUpgradeRequiredByField () {
       return this.requestSharedLoginUpgradeRequiredByField(true);
     }
@@ -9452,13 +9384,6 @@ public class User extends APINode {
     }
     public APIRequestGetFriends requestSupportsDonateButtonInLiveVideoField (boolean value) {
       this.requestField("supports_donate_button_in_live_video", value);
-      return this;
-    }
-    public APIRequestGetFriends requestTestGroupField () {
-      return this.requestTestGroupField(true);
-    }
-    public APIRequestGetFriends requestTestGroupField (boolean value) {
-      this.requestField("test_group", value);
       return this;
     }
     public APIRequestGetFriends requestThirdPartyIdField () {
@@ -9501,13 +9426,6 @@ public class User extends APINode {
     }
     public APIRequestGetFriends requestVideoUploadLimitsField (boolean value) {
       this.requestField("video_upload_limits", value);
-      return this;
-    }
-    public APIRequestGetFriends requestViewerCanSendGiftField () {
-      return this.requestViewerCanSendGiftField(true);
-    }
-    public APIRequestGetFriends requestViewerCanSendGiftField (boolean value) {
-      this.requestField("viewer_can_send_gift", value);
       return this;
     }
     public APIRequestGetFriends requestWebsiteField () {
@@ -12706,6 +12624,7 @@ public class User extends APINode {
     public static final String[] PARAMS = {
       "content_tags",
       "description",
+      "enable_backup_ingest",
       "encoding_settings",
       "fisheye_video_cropped",
       "front_z_rotation",
@@ -12793,6 +12712,15 @@ public class User extends APINode {
 
     public APIRequestCreateLiveVideo setDescription (String description) {
       this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestCreateLiveVideo setEnableBackupIngest (Boolean enableBackupIngest) {
+      this.setParam("enable_backup_ingest", enableBackupIngest);
+      return this;
+    }
+    public APIRequestCreateLiveVideo setEnableBackupIngest (String enableBackupIngest) {
+      this.setParam("enable_backup_ingest", enableBackupIngest);
       return this;
     }
 
@@ -12978,230 +12906,6 @@ public class User extends APINode {
 
     @Override
     public APIRequestCreateLiveVideo requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestGetMeetingLink extends APIRequest<WorkMeetingLink> {
-
-    APINodeList<WorkMeetingLink> lastResponse = null;
-    @Override
-    public APINodeList<WorkMeetingLink> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "id",
-      "owner",
-    };
-
-    @Override
-    public APINodeList<WorkMeetingLink> parseResponse(String response, String header) throws APIException {
-      return WorkMeetingLink.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<WorkMeetingLink> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<WorkMeetingLink> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<WorkMeetingLink>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<WorkMeetingLink>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<WorkMeetingLink>>() {
-           public APINodeList<WorkMeetingLink> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetMeetingLink.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetMeetingLink(String nodeId, APIContext context) {
-      super(context, nodeId, "/meeting_link", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetMeetingLink setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMeetingLink setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetMeetingLink requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetMeetingLink requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMeetingLink requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetMeetingLink requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMeetingLink requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMeetingLink requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetMeetingLink requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetMeetingLink requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetMeetingLink requestOwnerField () {
-      return this.requestOwnerField(true);
-    }
-    public APIRequestGetMeetingLink requestOwnerField (boolean value) {
-      this.requestField("owner", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestCreateMeetingLink extends APIRequest<WorkMeetingLink> {
-
-    WorkMeetingLink lastResponse = null;
-    @Override
-    public WorkMeetingLink getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public WorkMeetingLink parseResponse(String response, String header) throws APIException {
-      return WorkMeetingLink.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public WorkMeetingLink execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public WorkMeetingLink execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<WorkMeetingLink> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<WorkMeetingLink> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, WorkMeetingLink>() {
-           public WorkMeetingLink apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateMeetingLink.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateMeetingLink(String nodeId, APIContext context) {
-      super(context, nodeId, "/meeting_link", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateMeetingLink setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateMeetingLink setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateMeetingLink requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateMeetingLink requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateMeetingLink requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateMeetingLink requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateMeetingLink requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateMeetingLink requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -14624,6 +14328,206 @@ public class User extends APINode {
       return this;
     }
 
+  }
+
+  public static class APIRequestGetOwnedProductCatalogs extends APIRequest<ProductCatalog> {
+
+    APINodeList<ProductCatalog> lastResponse = null;
+    @Override
+    public APINodeList<ProductCatalog> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "business",
+      "commerce_merchant_settings",
+      "da_display_settings",
+      "default_image_url",
+      "fallback_image_url",
+      "feed_count",
+      "id",
+      "is_catalog_segment",
+      "name",
+      "product_count",
+      "store_catalog_settings",
+      "vertical",
+    };
+
+    @Override
+    public APINodeList<ProductCatalog> parseResponse(String response, String header) throws APIException {
+      return ProductCatalog.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<ProductCatalog> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ProductCatalog> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<ProductCatalog>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<ProductCatalog>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<ProductCatalog>>() {
+           public APINodeList<ProductCatalog> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetOwnedProductCatalogs.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetOwnedProductCatalogs(String nodeId, APIContext context) {
+      super(context, nodeId, "/owned_product_catalogs", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetOwnedProductCatalogs setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOwnedProductCatalogs setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetOwnedProductCatalogs requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetOwnedProductCatalogs requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOwnedProductCatalogs requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetOwnedProductCatalogs requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOwnedProductCatalogs requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOwnedProductCatalogs requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetOwnedProductCatalogs requestBusinessField () {
+      return this.requestBusinessField(true);
+    }
+    public APIRequestGetOwnedProductCatalogs requestBusinessField (boolean value) {
+      this.requestField("business", value);
+      return this;
+    }
+    public APIRequestGetOwnedProductCatalogs requestCommerceMerchantSettingsField () {
+      return this.requestCommerceMerchantSettingsField(true);
+    }
+    public APIRequestGetOwnedProductCatalogs requestCommerceMerchantSettingsField (boolean value) {
+      this.requestField("commerce_merchant_settings", value);
+      return this;
+    }
+    public APIRequestGetOwnedProductCatalogs requestDaDisplaySettingsField () {
+      return this.requestDaDisplaySettingsField(true);
+    }
+    public APIRequestGetOwnedProductCatalogs requestDaDisplaySettingsField (boolean value) {
+      this.requestField("da_display_settings", value);
+      return this;
+    }
+    public APIRequestGetOwnedProductCatalogs requestDefaultImageUrlField () {
+      return this.requestDefaultImageUrlField(true);
+    }
+    public APIRequestGetOwnedProductCatalogs requestDefaultImageUrlField (boolean value) {
+      this.requestField("default_image_url", value);
+      return this;
+    }
+    public APIRequestGetOwnedProductCatalogs requestFallbackImageUrlField () {
+      return this.requestFallbackImageUrlField(true);
+    }
+    public APIRequestGetOwnedProductCatalogs requestFallbackImageUrlField (boolean value) {
+      this.requestField("fallback_image_url", value);
+      return this;
+    }
+    public APIRequestGetOwnedProductCatalogs requestFeedCountField () {
+      return this.requestFeedCountField(true);
+    }
+    public APIRequestGetOwnedProductCatalogs requestFeedCountField (boolean value) {
+      this.requestField("feed_count", value);
+      return this;
+    }
+    public APIRequestGetOwnedProductCatalogs requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetOwnedProductCatalogs requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetOwnedProductCatalogs requestIsCatalogSegmentField () {
+      return this.requestIsCatalogSegmentField(true);
+    }
+    public APIRequestGetOwnedProductCatalogs requestIsCatalogSegmentField (boolean value) {
+      this.requestField("is_catalog_segment", value);
+      return this;
+    }
+    public APIRequestGetOwnedProductCatalogs requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetOwnedProductCatalogs requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetOwnedProductCatalogs requestProductCountField () {
+      return this.requestProductCountField(true);
+    }
+    public APIRequestGetOwnedProductCatalogs requestProductCountField (boolean value) {
+      this.requestField("product_count", value);
+      return this;
+    }
+    public APIRequestGetOwnedProductCatalogs requestStoreCatalogSettingsField () {
+      return this.requestStoreCatalogSettingsField(true);
+    }
+    public APIRequestGetOwnedProductCatalogs requestStoreCatalogSettingsField (boolean value) {
+      this.requestField("store_catalog_settings", value);
+      return this;
+    }
+    public APIRequestGetOwnedProductCatalogs requestVerticalField () {
+      return this.requestVerticalField(true);
+    }
+    public APIRequestGetOwnedProductCatalogs requestVerticalField (boolean value) {
+      this.requestField("vertical", value);
+      return this;
+    }
   }
 
   public static class APIRequestDeletePermissions extends APIRequest<APINode> {
@@ -18137,7 +18041,6 @@ public class User extends APINode {
       "age_range",
       "auth_method",
       "birthday",
-      "can_review_measurement_request",
       "cover",
       "currency",
       "devices",
@@ -18153,9 +18056,7 @@ public class User extends APINode {
       "install_type",
       "installed",
       "interested_in",
-      "is_famedeeplinkinguser",
       "is_guest_user",
-      "is_shared_login",
       "is_verified",
       "languages",
       "last_name",
@@ -18175,20 +18076,17 @@ public class User extends APINode {
       "quotes",
       "relationship_status",
       "religion",
-      "security_settings",
       "shared_login_upgrade_required_by",
       "short_name",
       "significant_other",
       "sports",
       "supports_donate_button_in_live_video",
-      "test_group",
       "third_party_id",
       "timezone",
       "token_for_business",
       "updated_time",
       "verified",
       "video_upload_limits",
-      "viewer_can_send_gift",
       "website",
       "work",
     };
@@ -18324,13 +18222,6 @@ public class User extends APINode {
       this.requestField("birthday", value);
       return this;
     }
-    public APIRequestGet requestCanReviewMeasurementRequestField () {
-      return this.requestCanReviewMeasurementRequestField(true);
-    }
-    public APIRequestGet requestCanReviewMeasurementRequestField (boolean value) {
-      this.requestField("can_review_measurement_request", value);
-      return this;
-    }
     public APIRequestGet requestCoverField () {
       return this.requestCoverField(true);
     }
@@ -18436,25 +18327,11 @@ public class User extends APINode {
       this.requestField("interested_in", value);
       return this;
     }
-    public APIRequestGet requestIsFamedeeplinkinguserField () {
-      return this.requestIsFamedeeplinkinguserField(true);
-    }
-    public APIRequestGet requestIsFamedeeplinkinguserField (boolean value) {
-      this.requestField("is_famedeeplinkinguser", value);
-      return this;
-    }
     public APIRequestGet requestIsGuestUserField () {
       return this.requestIsGuestUserField(true);
     }
     public APIRequestGet requestIsGuestUserField (boolean value) {
       this.requestField("is_guest_user", value);
-      return this;
-    }
-    public APIRequestGet requestIsSharedLoginField () {
-      return this.requestIsSharedLoginField(true);
-    }
-    public APIRequestGet requestIsSharedLoginField (boolean value) {
-      this.requestField("is_shared_login", value);
       return this;
     }
     public APIRequestGet requestIsVerifiedField () {
@@ -18590,13 +18467,6 @@ public class User extends APINode {
       this.requestField("religion", value);
       return this;
     }
-    public APIRequestGet requestSecuritySettingsField () {
-      return this.requestSecuritySettingsField(true);
-    }
-    public APIRequestGet requestSecuritySettingsField (boolean value) {
-      this.requestField("security_settings", value);
-      return this;
-    }
     public APIRequestGet requestSharedLoginUpgradeRequiredByField () {
       return this.requestSharedLoginUpgradeRequiredByField(true);
     }
@@ -18630,13 +18500,6 @@ public class User extends APINode {
     }
     public APIRequestGet requestSupportsDonateButtonInLiveVideoField (boolean value) {
       this.requestField("supports_donate_button_in_live_video", value);
-      return this;
-    }
-    public APIRequestGet requestTestGroupField () {
-      return this.requestTestGroupField(true);
-    }
-    public APIRequestGet requestTestGroupField (boolean value) {
-      this.requestField("test_group", value);
       return this;
     }
     public APIRequestGet requestThirdPartyIdField () {
@@ -18679,13 +18542,6 @@ public class User extends APINode {
     }
     public APIRequestGet requestVideoUploadLimitsField (boolean value) {
       this.requestField("video_upload_limits", value);
-      return this;
-    }
-    public APIRequestGet requestViewerCanSendGiftField () {
-      return this.requestViewerCanSendGiftField(true);
-    }
-    public APIRequestGet requestViewerCanSendGiftField (boolean value) {
-      this.requestField("viewer_can_send_gift", value);
       return this;
     }
     public APIRequestGet requestWebsiteField () {
@@ -19162,7 +19018,6 @@ public class User extends APINode {
     this.mAgeRange = instance.mAgeRange;
     this.mAuthMethod = instance.mAuthMethod;
     this.mBirthday = instance.mBirthday;
-    this.mCanReviewMeasurementRequest = instance.mCanReviewMeasurementRequest;
     this.mCover = instance.mCover;
     this.mCurrency = instance.mCurrency;
     this.mDevices = instance.mDevices;
@@ -19178,9 +19033,7 @@ public class User extends APINode {
     this.mInstallType = instance.mInstallType;
     this.mInstalled = instance.mInstalled;
     this.mInterestedIn = instance.mInterestedIn;
-    this.mIsFamedeeplinkinguser = instance.mIsFamedeeplinkinguser;
     this.mIsGuestUser = instance.mIsGuestUser;
-    this.mIsSharedLogin = instance.mIsSharedLogin;
     this.mIsVerified = instance.mIsVerified;
     this.mLanguages = instance.mLanguages;
     this.mLastName = instance.mLastName;
@@ -19200,20 +19053,17 @@ public class User extends APINode {
     this.mQuotes = instance.mQuotes;
     this.mRelationshipStatus = instance.mRelationshipStatus;
     this.mReligion = instance.mReligion;
-    this.mSecuritySettings = instance.mSecuritySettings;
     this.mSharedLoginUpgradeRequiredBy = instance.mSharedLoginUpgradeRequiredBy;
     this.mShortName = instance.mShortName;
     this.mSignificantOther = instance.mSignificantOther;
     this.mSports = instance.mSports;
     this.mSupportsDonateButtonInLiveVideo = instance.mSupportsDonateButtonInLiveVideo;
-    this.mTestGroup = instance.mTestGroup;
     this.mThirdPartyId = instance.mThirdPartyId;
     this.mTimezone = instance.mTimezone;
     this.mTokenForBusiness = instance.mTokenForBusiness;
     this.mUpdatedTime = instance.mUpdatedTime;
     this.mVerified = instance.mVerified;
     this.mVideoUploadLimits = instance.mVideoUploadLimits;
-    this.mViewerCanSendGift = instance.mViewerCanSendGift;
     this.mWebsite = instance.mWebsite;
     this.mWork = instance.mWork;
     this.context = instance.context;

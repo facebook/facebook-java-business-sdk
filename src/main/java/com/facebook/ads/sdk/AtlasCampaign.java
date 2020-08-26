@@ -1274,7 +1274,7 @@ public class AtlasCampaign extends APINode {
       return this;
     }
 
-    public APIRequestGetMetricsBreakdown setOrderBy (JsonArray orderBy) {
+    public APIRequestGetMetricsBreakdown setOrderBy (List<Map<String, String>> orderBy) {
       this.setParam("order_by", orderBy);
       return this;
     }

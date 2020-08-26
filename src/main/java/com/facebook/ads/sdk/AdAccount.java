@@ -602,6 +602,10 @@ public class AdAccount extends APINode {
     return new APIRequestGetContentDeliveryReport(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateCreateAndApplyPublisherBlockList createCreateAndApplyPublisherBlockList() {
+    return new APIRequestCreateCreateAndApplyPublisherBlockList(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetCustomAudiences getCustomAudiences() {
     return new APIRequestGetCustomAudiences(this.getPrefixedId().toString(), context);
   }
@@ -5817,13 +5821,23 @@ public class AdAccount extends APINode {
     }
     public static final String[] PARAMS = {
       "page_id",
+      "recommendation_type",
       "show_breakdown_by_actor",
     };
 
     public static final String[] FIELDS = {
       "actor_id",
+      "actor_name",
+      "ad_limit_scope_business",
+      "ad_limit_scope_business_manager_id",
+      "ad_limit_set_by_page_admin",
       "ads_running_or_in_review_count",
+      "ads_running_or_in_review_count_subject_to_limit_set_by_page",
       "current_account_ads_running_or_in_review_count",
+      "future_limit_activation_date",
+      "future_limit_on_ads_running_or_in_review",
+      "limit_on_ads_running_or_in_review",
+      "recommendations",
     };
 
     @Override
@@ -5888,6 +5902,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetAdsVolume setRecommendationType (AdAccountAdVolume.EnumRecommendationType recommendationType) {
+      this.setParam("recommendation_type", recommendationType);
+      return this;
+    }
+    public APIRequestGetAdsVolume setRecommendationType (String recommendationType) {
+      this.setParam("recommendation_type", recommendationType);
+      return this;
+    }
+
     public APIRequestGetAdsVolume setShowBreakdownByActor (Boolean showBreakdownByActor) {
       this.setParam("show_breakdown_by_actor", showBreakdownByActor);
       return this;
@@ -5940,6 +5963,34 @@ public class AdAccount extends APINode {
       this.requestField("actor_id", value);
       return this;
     }
+    public APIRequestGetAdsVolume requestActorNameField () {
+      return this.requestActorNameField(true);
+    }
+    public APIRequestGetAdsVolume requestActorNameField (boolean value) {
+      this.requestField("actor_name", value);
+      return this;
+    }
+    public APIRequestGetAdsVolume requestAdLimitScopeBusinessField () {
+      return this.requestAdLimitScopeBusinessField(true);
+    }
+    public APIRequestGetAdsVolume requestAdLimitScopeBusinessField (boolean value) {
+      this.requestField("ad_limit_scope_business", value);
+      return this;
+    }
+    public APIRequestGetAdsVolume requestAdLimitScopeBusinessManagerIdField () {
+      return this.requestAdLimitScopeBusinessManagerIdField(true);
+    }
+    public APIRequestGetAdsVolume requestAdLimitScopeBusinessManagerIdField (boolean value) {
+      this.requestField("ad_limit_scope_business_manager_id", value);
+      return this;
+    }
+    public APIRequestGetAdsVolume requestAdLimitSetByPageAdminField () {
+      return this.requestAdLimitSetByPageAdminField(true);
+    }
+    public APIRequestGetAdsVolume requestAdLimitSetByPageAdminField (boolean value) {
+      this.requestField("ad_limit_set_by_page_admin", value);
+      return this;
+    }
     public APIRequestGetAdsVolume requestAdsRunningOrInReviewCountField () {
       return this.requestAdsRunningOrInReviewCountField(true);
     }
@@ -5947,11 +5998,46 @@ public class AdAccount extends APINode {
       this.requestField("ads_running_or_in_review_count", value);
       return this;
     }
+    public APIRequestGetAdsVolume requestAdsRunningOrInReviewCountSubjectToLimitSetByPageField () {
+      return this.requestAdsRunningOrInReviewCountSubjectToLimitSetByPageField(true);
+    }
+    public APIRequestGetAdsVolume requestAdsRunningOrInReviewCountSubjectToLimitSetByPageField (boolean value) {
+      this.requestField("ads_running_or_in_review_count_subject_to_limit_set_by_page", value);
+      return this;
+    }
     public APIRequestGetAdsVolume requestCurrentAccountAdsRunningOrInReviewCountField () {
       return this.requestCurrentAccountAdsRunningOrInReviewCountField(true);
     }
     public APIRequestGetAdsVolume requestCurrentAccountAdsRunningOrInReviewCountField (boolean value) {
       this.requestField("current_account_ads_running_or_in_review_count", value);
+      return this;
+    }
+    public APIRequestGetAdsVolume requestFutureLimitActivationDateField () {
+      return this.requestFutureLimitActivationDateField(true);
+    }
+    public APIRequestGetAdsVolume requestFutureLimitActivationDateField (boolean value) {
+      this.requestField("future_limit_activation_date", value);
+      return this;
+    }
+    public APIRequestGetAdsVolume requestFutureLimitOnAdsRunningOrInReviewField () {
+      return this.requestFutureLimitOnAdsRunningOrInReviewField(true);
+    }
+    public APIRequestGetAdsVolume requestFutureLimitOnAdsRunningOrInReviewField (boolean value) {
+      this.requestField("future_limit_on_ads_running_or_in_review", value);
+      return this;
+    }
+    public APIRequestGetAdsVolume requestLimitOnAdsRunningOrInReviewField () {
+      return this.requestLimitOnAdsRunningOrInReviewField(true);
+    }
+    public APIRequestGetAdsVolume requestLimitOnAdsRunningOrInReviewField (boolean value) {
+      this.requestField("limit_on_ads_running_or_in_review", value);
+      return this;
+    }
+    public APIRequestGetAdsVolume requestRecommendationsField () {
+      return this.requestRecommendationsField(true);
+    }
+    public APIRequestGetAdsVolume requestRecommendationsField (boolean value) {
+      this.requestField("recommendations", value);
       return this;
     }
   }
@@ -15373,6 +15459,136 @@ public class AdAccount extends APINode {
       this.requestField("estimated_impressions", value);
       return this;
     }
+  }
+
+  public static class APIRequestCreateCreateAndApplyPublisherBlockList extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "is_auto_blocking_on",
+      "name",
+      "publisher_urls",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateCreateAndApplyPublisherBlockList.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateCreateAndApplyPublisherBlockList(String nodeId, APIContext context) {
+      super(context, nodeId, "/create_and_apply_publisher_block_list", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateCreateAndApplyPublisherBlockList setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCreateAndApplyPublisherBlockList setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateCreateAndApplyPublisherBlockList setIsAutoBlockingOn (Boolean isAutoBlockingOn) {
+      this.setParam("is_auto_blocking_on", isAutoBlockingOn);
+      return this;
+    }
+    public APIRequestCreateCreateAndApplyPublisherBlockList setIsAutoBlockingOn (String isAutoBlockingOn) {
+      this.setParam("is_auto_blocking_on", isAutoBlockingOn);
+      return this;
+    }
+
+    public APIRequestCreateCreateAndApplyPublisherBlockList setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateCreateAndApplyPublisherBlockList setPublisherUrls (List<String> publisherUrls) {
+      this.setParam("publisher_urls", publisherUrls);
+      return this;
+    }
+    public APIRequestCreateCreateAndApplyPublisherBlockList setPublisherUrls (String publisherUrls) {
+      this.setParam("publisher_urls", publisherUrls);
+      return this;
+    }
+
+    public APIRequestCreateCreateAndApplyPublisherBlockList requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateCreateAndApplyPublisherBlockList requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCreateAndApplyPublisherBlockList requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateCreateAndApplyPublisherBlockList requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCreateAndApplyPublisherBlockList requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCreateAndApplyPublisherBlockList requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetCustomAudiences extends APIRequest<CustomAudience> {

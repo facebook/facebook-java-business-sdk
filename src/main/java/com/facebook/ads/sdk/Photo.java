@@ -1584,6 +1584,7 @@ public class Photo extends APINode {
       "permalink_url",
       "picture",
       "place",
+      "poll",
       "privacy",
       "promotable_id",
       "promotion_status",
@@ -2031,6 +2032,13 @@ public class Photo extends APINode {
     }
     public APIRequestGetSharedPosts requestPlaceField (boolean value) {
       this.requestField("place", value);
+      return this;
+    }
+    public APIRequestGetSharedPosts requestPollField () {
+      return this.requestPollField(true);
+    }
+    public APIRequestGetSharedPosts requestPollField (boolean value) {
+      this.requestField("poll", value);
       return this;
     }
     public APIRequestGetSharedPosts requestPrivacyField () {

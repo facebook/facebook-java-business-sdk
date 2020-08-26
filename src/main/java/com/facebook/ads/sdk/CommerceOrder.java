@@ -67,6 +67,8 @@ public class CommerceOrder extends APINode {
   private String mId = null;
   @SerializedName("is_group_buy")
   private Boolean mIsGroupBuy = null;
+  @SerializedName("is_test_order")
+  private Boolean mIsTestOrder = null;
   @SerializedName("last_updated")
   private String mLastUpdated = null;
   @SerializedName("merchant_order_id")
@@ -365,6 +367,10 @@ public class CommerceOrder extends APINode {
     return mIsGroupBuy;
   }
 
+  public Boolean getFieldIsTestOrder() {
+    return mIsTestOrder;
+  }
+
   public String getFieldLastUpdated() {
     return mLastUpdated;
   }
@@ -401,6 +407,7 @@ public class CommerceOrder extends APINode {
     public static final String[] PARAMS = {
       "idempotency_key",
       "merchant_order_reference",
+      "return_error_response",
     };
 
     public static final String[] FIELDS = {
@@ -466,6 +473,15 @@ public class CommerceOrder extends APINode {
 
     public APIRequestCreateAcknowledgeOrder setMerchantOrderReference (String merchantOrderReference) {
       this.setParam("merchant_order_reference", merchantOrderReference);
+      return this;
+    }
+
+    public APIRequestCreateAcknowledgeOrder setReturnErrorResponse (Boolean returnErrorResponse) {
+      this.setParam("return_error_response", returnErrorResponse);
+      return this;
+    }
+    public APIRequestCreateAcknowledgeOrder setReturnErrorResponse (String returnErrorResponse) {
+      this.setParam("return_error_response", returnErrorResponse);
       return this;
     }
 
@@ -1870,6 +1886,7 @@ public class CommerceOrder extends APINode {
       "estimated_payment_details",
       "id",
       "is_group_buy",
+      "is_test_order",
       "last_updated",
       "merchant_order_id",
       "order_status",
@@ -2007,6 +2024,13 @@ public class CommerceOrder extends APINode {
     }
     public APIRequestGet requestIsGroupBuyField (boolean value) {
       this.requestField("is_group_buy", value);
+      return this;
+    }
+    public APIRequestGet requestIsTestOrderField () {
+      return this.requestIsTestOrderField(true);
+    }
+    public APIRequestGet requestIsTestOrderField (boolean value) {
+      this.requestField("is_test_order", value);
       return this;
     }
     public APIRequestGet requestLastUpdatedField () {
@@ -2184,6 +2208,7 @@ public class CommerceOrder extends APINode {
     this.mEstimatedPaymentDetails = instance.mEstimatedPaymentDetails;
     this.mId = instance.mId;
     this.mIsGroupBuy = instance.mIsGroupBuy;
+    this.mIsTestOrder = instance.mIsTestOrder;
     this.mLastUpdated = instance.mLastUpdated;
     this.mMerchantOrderId = instance.mMerchantOrderId;
     this.mOrderStatus = instance.mOrderStatus;

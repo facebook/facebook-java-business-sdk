@@ -61,6 +61,8 @@ public class CommerceMerchantSettings extends APINode {
   private String mCheckoutMessage = null;
   @SerializedName("contact_email")
   private String mContactEmail = null;
+  @SerializedName("cta")
+  private String mCta = null;
   @SerializedName("disable_checkout_urls")
   private Boolean mDisableCheckoutUrls = null;
   @SerializedName("display_name")
@@ -367,6 +369,10 @@ public class CommerceMerchantSettings extends APINode {
 
   public String getFieldContactEmail() {
     return mContactEmail;
+  }
+
+  public String getFieldCta() {
+    return mCta;
   }
 
   public Boolean getFieldDisableCheckoutUrls() {
@@ -2518,6 +2524,7 @@ public class CommerceMerchantSettings extends APINode {
       "braintree_merchant_id",
       "checkout_message",
       "contact_email",
+      "cta",
       "disable_checkout_urls",
       "display_name",
       "facebook_channel",
@@ -2647,6 +2654,13 @@ public class CommerceMerchantSettings extends APINode {
     }
     public APIRequestGet requestContactEmailField (boolean value) {
       this.requestField("contact_email", value);
+      return this;
+    }
+    public APIRequestGet requestCtaField () {
+      return this.requestCtaField(true);
+    }
+    public APIRequestGet requestCtaField (boolean value) {
+      this.requestField("cta", value);
       return this;
     }
     public APIRequestGet requestDisableCheckoutUrlsField () {
@@ -2793,6 +2807,7 @@ public class CommerceMerchantSettings extends APINode {
     }
     public static final String[] PARAMS = {
       "contact_email",
+      "cta",
       "merchant_alert_email",
       "merchant_status",
       "onsite_commerce_merchant",
@@ -2860,6 +2875,15 @@ public class CommerceMerchantSettings extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setCta (CommerceMerchantSettings.EnumCta cta) {
+      this.setParam("cta", cta);
+      return this;
+    }
+    public APIRequestUpdate setCta (String cta) {
+      this.setParam("cta", cta);
+      return this;
+    }
+
     public APIRequestUpdate setMerchantAlertEmail (String merchantAlertEmail) {
       this.setParam("merchant_alert_email", merchantAlertEmail);
       return this;
@@ -2924,6 +2948,25 @@ public class CommerceMerchantSettings extends APINode {
       return this;
     }
 
+  }
+
+  public static enum EnumCta {
+      @SerializedName("CONTACT_MERCHANT")
+      VALUE_CONTACT_MERCHANT("CONTACT_MERCHANT"),
+      @SerializedName("OFFSITE_LINK")
+      VALUE_OFFSITE_LINK("OFFSITE_LINK"),
+      ;
+
+      private String value;
+
+      private EnumCta(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
   public static enum EnumMerchantStatus {
@@ -3007,6 +3050,7 @@ public class CommerceMerchantSettings extends APINode {
     this.mBraintreeMerchantId = instance.mBraintreeMerchantId;
     this.mCheckoutMessage = instance.mCheckoutMessage;
     this.mContactEmail = instance.mContactEmail;
+    this.mCta = instance.mCta;
     this.mDisableCheckoutUrls = instance.mDisableCheckoutUrls;
     this.mDisplayName = instance.mDisplayName;
     this.mFacebookChannel = instance.mFacebookChannel;

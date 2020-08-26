@@ -71,6 +71,8 @@ public class VehicleOffer extends APINode {
   private String mCashbackCurrency = null;
   @SerializedName("cashback_price")
   private String mCashbackPrice = null;
+  @SerializedName("category_specific_fields")
+  private CatalogSubVerticalList mCategorySpecificFields = null;
   @SerializedName("currency")
   private String mCurrency = null;
   @SerializedName("dma_codes")
@@ -367,6 +369,10 @@ public class VehicleOffer extends APINode {
     return mCashbackPrice;
   }
 
+  public CatalogSubVerticalList getFieldCategorySpecificFields() {
+    return mCategorySpecificFields;
+  }
+
   public String getFieldCurrency() {
     return mCurrency;
   }
@@ -488,6 +494,7 @@ public class VehicleOffer extends APINode {
       "body_style",
       "cashback_currency",
       "cashback_price",
+      "category_specific_fields",
       "currency",
       "dma_codes",
       "downpayment_currency",
@@ -658,6 +665,13 @@ public class VehicleOffer extends APINode {
     }
     public APIRequestGet requestCashbackPriceField (boolean value) {
       this.requestField("cashback_price", value);
+      return this;
+    }
+    public APIRequestGet requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGet requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGet requestCurrencyField () {
@@ -860,6 +874,7 @@ public class VehicleOffer extends APINode {
     this.mBodyStyle = instance.mBodyStyle;
     this.mCashbackCurrency = instance.mCashbackCurrency;
     this.mCashbackPrice = instance.mCashbackPrice;
+    this.mCategorySpecificFields = instance.mCategorySpecificFields;
     this.mCurrency = instance.mCurrency;
     this.mDmaCodes = instance.mDmaCodes;
     this.mDownpaymentCurrency = instance.mDownpaymentCurrency;

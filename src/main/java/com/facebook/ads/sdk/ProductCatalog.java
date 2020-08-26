@@ -889,6 +889,7 @@ public class ProductCatalog extends APINode {
       "business",
       "permitted_roles",
       "permitted_tasks",
+      "utm_settings",
     };
 
     public static final String[] FIELDS = {
@@ -967,6 +968,15 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestCreateAgency setPermittedTasks (String permittedTasks) {
       this.setParam("permitted_tasks", permittedTasks);
+      return this;
+    }
+
+    public APIRequestCreateAgency setUtmSettings (Map<String, String> utmSettings) {
+      this.setParam("utm_settings", utmSettings);
+      return this;
+    }
+    public APIRequestCreateAgency setUtmSettings (String utmSettings) {
+      this.setParam("utm_settings", utmSettings);
       return this;
     }
 
@@ -1405,6 +1415,7 @@ public class ProductCatalog extends APINode {
       "automotive_model_id",
       "availability",
       "body_style",
+      "category_specific_fields",
       "currency",
       "custom_label_0",
       "description",
@@ -1562,6 +1573,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetAutomotiveModels requestBodyStyleField (boolean value) {
       this.requestField("body_style", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGetAutomotiveModels requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGetAutomotiveModels requestCurrencyField () {
@@ -2487,6 +2505,7 @@ public class ProductCatalog extends APINode {
     public static final String[] FIELDS = {
       "address",
       "applinks",
+      "category_specific_fields",
       "currency",
       "description",
       "destination_id",
@@ -2619,6 +2638,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetDestinations requestApplinksField (boolean value) {
       this.requestField("applinks", value);
+      return this;
+    }
+    public APIRequestGetDestinations requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGetDestinations requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGetDestinations requestCurrencyField () {
@@ -3272,6 +3298,7 @@ public class ProductCatalog extends APINode {
 
     public static final String[] FIELDS = {
       "applinks",
+      "category_specific_fields",
       "currency",
       "description",
       "destination_airport",
@@ -3402,6 +3429,13 @@ public class ProductCatalog extends APINode {
       this.requestField("applinks", value);
       return this;
     }
+    public APIRequestGetFlights requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGetFlights requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
+      return this;
+    }
     public APIRequestGetFlights requestCurrencyField () {
       return this.requestCurrencyField(true);
     }
@@ -3527,6 +3561,7 @@ public class ProductCatalog extends APINode {
       "area_size",
       "area_unit",
       "availability",
+      "category_specific_fields",
       "co_2_emission_rating_eu",
       "currency",
       "days_on_market",
@@ -3748,6 +3783,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetHomeListings requestAvailabilityField (boolean value) {
       this.requestField("availability", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGetHomeListings requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGetHomeListings requestCo2EmissionRatingEuField () {
@@ -4495,6 +4537,7 @@ public class ProductCatalog extends APINode {
       "applinks",
       "brand",
       "category",
+      "category_specific_fields",
       "currency",
       "description",
       "guest_ratings",
@@ -4645,6 +4688,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetHotels requestCategoryField (boolean value) {
       this.requestField("category", value);
+      return this;
+    }
+    public APIRequestGetHotels requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGetHotels requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGetHotels requestCurrencyField () {
@@ -4969,6 +5019,7 @@ public class ProductCatalog extends APINode {
     }
     public static final String[] PARAMS = {
       "allow_upsert",
+      "item_sub_type",
       "item_type",
       "requests",
     };
@@ -5035,6 +5086,15 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestCreateItemsBatch setAllowUpsert (String allowUpsert) {
       this.setParam("allow_upsert", allowUpsert);
+      return this;
+    }
+
+    public APIRequestCreateItemsBatch setItemSubType (ProductCatalog.EnumItemSubType itemSubType) {
+      this.setParam("item_sub_type", itemSubType);
+      return this;
+    }
+    public APIRequestCreateItemsBatch setItemSubType (String itemSubType) {
+      this.setParam("item_sub_type", itemSubType);
       return this;
     }
 
@@ -5517,6 +5577,7 @@ public class ProductCatalog extends APINode {
       "encoding",
       "file_name",
       "id",
+      "item_sub_type",
       "latest_upload",
       "name",
       "override_type",
@@ -5671,6 +5732,13 @@ public class ProductCatalog extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetProductFeeds requestItemSubTypeField () {
+      return this.requestItemSubTypeField(true);
+    }
+    public APIRequestGetProductFeeds requestItemSubTypeField (boolean value) {
+      this.requestField("item_sub_type", value);
+      return this;
+    }
     public APIRequestGetProductFeeds requestLatestUploadField () {
       return this.requestLatestUploadField(true);
     }
@@ -5737,6 +5805,7 @@ public class ProductCatalog extends APINode {
       "encoding",
       "feed_type",
       "file_name",
+      "item_sub_type",
       "name",
       "override_type",
       "override_value",
@@ -5851,6 +5920,15 @@ public class ProductCatalog extends APINode {
 
     public APIRequestCreateProductFeed setFileName (String fileName) {
       this.setParam("file_name", fileName);
+      return this;
+    }
+
+    public APIRequestCreateProductFeed setItemSubType (ProductFeed.EnumItemSubType itemSubType) {
+      this.setParam("item_sub_type", itemSubType);
+      return this;
+    }
+    public APIRequestCreateProductFeed setItemSubType (String itemSubType) {
+      this.setParam("item_sub_type", itemSubType);
       return this;
     }
 
@@ -6695,6 +6773,7 @@ public class ProductCatalog extends APINode {
       "brand",
       "capability_to_review_status",
       "category",
+      "category_specific_fields",
       "color",
       "commerce_insights",
       "condition",
@@ -6707,6 +6786,7 @@ public class ProductCatalog extends APINode {
       "custom_label_4",
       "description",
       "expiration_date",
+      "fb_product_category",
       "gender",
       "gtin",
       "id",
@@ -6919,6 +6999,13 @@ public class ProductCatalog extends APINode {
       this.requestField("category", value);
       return this;
     }
+    public APIRequestGetProducts requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGetProducts requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
+      return this;
+    }
     public APIRequestGetProducts requestColorField () {
       return this.requestColorField(true);
     }
@@ -7001,6 +7088,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetProducts requestExpirationDateField (boolean value) {
       this.requestField("expiration_date", value);
+      return this;
+    }
+    public APIRequestGetProducts requestFbProductCategoryField () {
+      return this.requestFbProductCategoryField(true);
+    }
+    public APIRequestGetProducts requestFbProductCategoryField (boolean value) {
+      this.requestField("fb_product_category", value);
       return this;
     }
     public APIRequestGetProducts requestGenderField () {
@@ -7240,6 +7334,7 @@ public class ProductCatalog extends APINode {
       "availability",
       "brand",
       "category",
+      "category_specific_fields",
       "checkout_url",
       "color",
       "commerce_tax_category",
@@ -7253,6 +7348,7 @@ public class ProductCatalog extends APINode {
       "custom_label_4",
       "description",
       "expiration_date",
+      "fb_product_category",
       "gender",
       "gtin",
       "image_url",
@@ -7416,6 +7512,15 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateProduct setCategorySpecificFields (Map<String, String> categorySpecificFields) {
+      this.setParam("category_specific_fields", categorySpecificFields);
+      return this;
+    }
+    public APIRequestCreateProduct setCategorySpecificFields (String categorySpecificFields) {
+      this.setParam("category_specific_fields", categorySpecificFields);
+      return this;
+    }
+
     public APIRequestCreateProduct setCheckoutUrl (String checkoutUrl) {
       this.setParam("checkout_url", checkoutUrl);
       return this;
@@ -7490,6 +7595,11 @@ public class ProductCatalog extends APINode {
 
     public APIRequestCreateProduct setExpirationDate (String expirationDate) {
       this.setParam("expiration_date", expirationDate);
+      return this;
+    }
+
+    public APIRequestCreateProduct setFbProductCategory (String fbProductCategory) {
+      this.setParam("fb_product_category", fbProductCategory);
       return this;
     }
 
@@ -7791,6 +7901,7 @@ public class ProductCatalog extends APINode {
       "body_style",
       "cashback_currency",
       "cashback_price",
+      "category_specific_fields",
       "currency",
       "dma_codes",
       "downpayment_currency",
@@ -7979,6 +8090,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetVehicleOffers requestCashbackPriceField (boolean value) {
       this.requestField("cashback_price", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGetVehicleOffers requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGetVehicleOffers requestCurrencyField () {
@@ -8175,6 +8293,7 @@ public class ProductCatalog extends APINode {
       "applinks",
       "availability",
       "body_style",
+      "category_specific_fields",
       "condition",
       "currency",
       "custom_label_0",
@@ -8350,6 +8469,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetVehicles requestBodyStyleField (boolean value) {
       this.requestField("body_style", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGetVehicles requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGetVehicles requestConditionField () {
@@ -9571,6 +9697,73 @@ public class ProductCatalog extends APINode {
       }
   }
 
+  public static enum EnumItemSubType {
+      @SerializedName("APPLIANCES")
+      VALUE_APPLIANCES("APPLIANCES"),
+      @SerializedName("BABY_FEEDING")
+      VALUE_BABY_FEEDING("BABY_FEEDING"),
+      @SerializedName("BABY_TRANSPORT")
+      VALUE_BABY_TRANSPORT("BABY_TRANSPORT"),
+      @SerializedName("BEAUTY")
+      VALUE_BEAUTY("BEAUTY"),
+      @SerializedName("BEDDING")
+      VALUE_BEDDING("BEDDING"),
+      @SerializedName("CAMERAS")
+      VALUE_CAMERAS("CAMERAS"),
+      @SerializedName("CELL_PHONES_AND_SMART_WATCHES")
+      VALUE_CELL_PHONES_AND_SMART_WATCHES("CELL_PHONES_AND_SMART_WATCHES"),
+      @SerializedName("CLEANING_SUPPLIES")
+      VALUE_CLEANING_SUPPLIES("CLEANING_SUPPLIES"),
+      @SerializedName("CLOTHING")
+      VALUE_CLOTHING("CLOTHING"),
+      @SerializedName("CLOTHING_ACCESSORIES")
+      VALUE_CLOTHING_ACCESSORIES("CLOTHING_ACCESSORIES"),
+      @SerializedName("COMPUTERS_AND_TABLETS")
+      VALUE_COMPUTERS_AND_TABLETS("COMPUTERS_AND_TABLETS"),
+      @SerializedName("DIAPERING_AND_POTTY_TRAINING")
+      VALUE_DIAPERING_AND_POTTY_TRAINING("DIAPERING_AND_POTTY_TRAINING"),
+      @SerializedName("ELECTRONICS_ACCESSORIES")
+      VALUE_ELECTRONICS_ACCESSORIES("ELECTRONICS_ACCESSORIES"),
+      @SerializedName("FURNITURE")
+      VALUE_FURNITURE("FURNITURE"),
+      @SerializedName("HEALTH")
+      VALUE_HEALTH("HEALTH"),
+      @SerializedName("HOME_GOODS")
+      VALUE_HOME_GOODS("HOME_GOODS"),
+      @SerializedName("JEWELRY")
+      VALUE_JEWELRY("JEWELRY"),
+      @SerializedName("NURSERY")
+      VALUE_NURSERY("NURSERY"),
+      @SerializedName("PRINTERS_AND_SCANNERS")
+      VALUE_PRINTERS_AND_SCANNERS("PRINTERS_AND_SCANNERS"),
+      @SerializedName("PROJECTORS")
+      VALUE_PROJECTORS("PROJECTORS"),
+      @SerializedName("SHOES_AND_FOOTWEAR")
+      VALUE_SHOES_AND_FOOTWEAR("SHOES_AND_FOOTWEAR"),
+      @SerializedName("SOFTWARE")
+      VALUE_SOFTWARE("SOFTWARE"),
+      @SerializedName("TOYS")
+      VALUE_TOYS("TOYS"),
+      @SerializedName("TVS_AND_MONITORS")
+      VALUE_TVS_AND_MONITORS("TVS_AND_MONITORS"),
+      @SerializedName("VIDEO_GAME_CONSOLES_AND_VIDEO_GAMES")
+      VALUE_VIDEO_GAME_CONSOLES_AND_VIDEO_GAMES("VIDEO_GAME_CONSOLES_AND_VIDEO_GAMES"),
+      @SerializedName("WATCHES")
+      VALUE_WATCHES("WATCHES"),
+      ;
+
+      private String value;
+
+      private EnumItemSubType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumSegmentUseCases {
       @SerializedName("COLLAB_ADS")
       VALUE_COLLAB_ADS("COLLAB_ADS"),
@@ -9578,6 +9771,8 @@ public class ProductCatalog extends APINode {
       VALUE_COLLAB_ADS_FOR_MARKETPLACE_PARTNER("COLLAB_ADS_FOR_MARKETPLACE_PARTNER"),
       @SerializedName("IG_SHOPPING")
       VALUE_IG_SHOPPING("IG_SHOPPING"),
+      @SerializedName("MARKETPLACE_SHOPS")
+      VALUE_MARKETPLACE_SHOPS("MARKETPLACE_SHOPS"),
       @SerializedName("TEST")
       VALUE_TEST("TEST"),
       ;

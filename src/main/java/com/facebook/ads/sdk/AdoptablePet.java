@@ -71,6 +71,8 @@ public class AdoptablePet extends APINode {
   private String mAvailability = null;
   @SerializedName("breed")
   private String mBreed = null;
+  @SerializedName("category_specific_fields")
+  private CatalogSubVerticalList mCategorySpecificFields = null;
   @SerializedName("currency")
   private String mCurrency = null;
   @SerializedName("description")
@@ -341,6 +343,10 @@ public class AdoptablePet extends APINode {
     return mBreed;
   }
 
+  public CatalogSubVerticalList getFieldCategorySpecificFields() {
+    return mCategorySpecificFields;
+  }
+
   public String getFieldCurrency() {
     return mCurrency;
   }
@@ -413,6 +419,7 @@ public class AdoptablePet extends APINode {
       "applinks",
       "availability",
       "breed",
+      "category_specific_fields",
       "currency",
       "description",
       "gender",
@@ -572,6 +579,13 @@ public class AdoptablePet extends APINode {
       this.requestField("breed", value);
       return this;
     }
+    public APIRequestGet requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGet requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
+      return this;
+    }
     public APIRequestGet requestCurrencyField () {
       return this.requestCurrencyField(true);
     }
@@ -681,6 +695,7 @@ public class AdoptablePet extends APINode {
     this.mApplinks = instance.mApplinks;
     this.mAvailability = instance.mAvailability;
     this.mBreed = instance.mBreed;
+    this.mCategorySpecificFields = instance.mCategorySpecificFields;
     this.mCurrency = instance.mCurrency;
     this.mDescription = instance.mDescription;
     this.mGender = instance.mGender;

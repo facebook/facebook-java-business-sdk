@@ -422,12 +422,28 @@ public class Business extends APINode {
     return new APIRequestGetClients(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetCollaborativeAdsCollaborationRequests getCollaborativeAdsCollaborationRequests() {
+    return new APIRequestGetCollaborativeAdsCollaborationRequests(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateCollaborativeAdsCollaborationRequest createCollaborativeAdsCollaborationRequest() {
+    return new APIRequestCreateCollaborativeAdsCollaborationRequest(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetCollaborativeAdsSuggestedPartners getCollaborativeAdsSuggestedPartners() {
+    return new APIRequestGetCollaborativeAdsSuggestedPartners(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetCommerceMerchantSettings getCommerceMerchantSettings() {
     return new APIRequestGetCommerceMerchantSettings(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetContentDeliveryReport getContentDeliveryReport() {
     return new APIRequestGetContentDeliveryReport(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateCreateAndApplyPublisherBlockList createCreateAndApplyPublisherBlockList() {
+    return new APIRequestCreateCreateAndApplyPublisherBlockList(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateCustomConversion createCustomConversion() {
@@ -8000,6 +8016,532 @@ public class Business extends APINode {
     }
   }
 
+  public static class APIRequestGetCollaborativeAdsCollaborationRequests extends APIRequest<CPASCollaborationRequest> {
+
+    APINodeList<CPASCollaborationRequest> lastResponse = null;
+    @Override
+    public APINodeList<CPASCollaborationRequest> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "status",
+    };
+
+    public static final String[] FIELDS = {
+      "brands",
+      "contact_email",
+      "contact_first_name",
+      "contact_last_name",
+      "id",
+      "phone_number",
+      "receiver_business",
+      "requester_agency_or_brand",
+      "sender_client_business",
+      "status",
+    };
+
+    @Override
+    public APINodeList<CPASCollaborationRequest> parseResponse(String response, String header) throws APIException {
+      return CPASCollaborationRequest.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<CPASCollaborationRequest> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<CPASCollaborationRequest> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<CPASCollaborationRequest>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<CPASCollaborationRequest>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<CPASCollaborationRequest>>() {
+           public APINodeList<CPASCollaborationRequest> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetCollaborativeAdsCollaborationRequests.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetCollaborativeAdsCollaborationRequests(String nodeId, APIContext context) {
+      super(context, nodeId, "/collaborative_ads_collaboration_requests", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCollaborativeAdsCollaborationRequests setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCollaborativeAdsCollaborationRequests setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCollaborativeAdsCollaborationRequests setStatus (String status) {
+      this.setParam("status", status);
+      return this;
+    }
+
+    public APIRequestGetCollaborativeAdsCollaborationRequests requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCollaborativeAdsCollaborationRequests requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCollaborativeAdsCollaborationRequests requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCollaborativeAdsCollaborationRequests requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCollaborativeAdsCollaborationRequests requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCollaborativeAdsCollaborationRequests requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetCollaborativeAdsCollaborationRequests requestBrandsField () {
+      return this.requestBrandsField(true);
+    }
+    public APIRequestGetCollaborativeAdsCollaborationRequests requestBrandsField (boolean value) {
+      this.requestField("brands", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeAdsCollaborationRequests requestContactEmailField () {
+      return this.requestContactEmailField(true);
+    }
+    public APIRequestGetCollaborativeAdsCollaborationRequests requestContactEmailField (boolean value) {
+      this.requestField("contact_email", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeAdsCollaborationRequests requestContactFirstNameField () {
+      return this.requestContactFirstNameField(true);
+    }
+    public APIRequestGetCollaborativeAdsCollaborationRequests requestContactFirstNameField (boolean value) {
+      this.requestField("contact_first_name", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeAdsCollaborationRequests requestContactLastNameField () {
+      return this.requestContactLastNameField(true);
+    }
+    public APIRequestGetCollaborativeAdsCollaborationRequests requestContactLastNameField (boolean value) {
+      this.requestField("contact_last_name", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeAdsCollaborationRequests requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetCollaborativeAdsCollaborationRequests requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeAdsCollaborationRequests requestPhoneNumberField () {
+      return this.requestPhoneNumberField(true);
+    }
+    public APIRequestGetCollaborativeAdsCollaborationRequests requestPhoneNumberField (boolean value) {
+      this.requestField("phone_number", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeAdsCollaborationRequests requestReceiverBusinessField () {
+      return this.requestReceiverBusinessField(true);
+    }
+    public APIRequestGetCollaborativeAdsCollaborationRequests requestReceiverBusinessField (boolean value) {
+      this.requestField("receiver_business", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeAdsCollaborationRequests requestRequesterAgencyOrBrandField () {
+      return this.requestRequesterAgencyOrBrandField(true);
+    }
+    public APIRequestGetCollaborativeAdsCollaborationRequests requestRequesterAgencyOrBrandField (boolean value) {
+      this.requestField("requester_agency_or_brand", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeAdsCollaborationRequests requestSenderClientBusinessField () {
+      return this.requestSenderClientBusinessField(true);
+    }
+    public APIRequestGetCollaborativeAdsCollaborationRequests requestSenderClientBusinessField (boolean value) {
+      this.requestField("sender_client_business", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeAdsCollaborationRequests requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetCollaborativeAdsCollaborationRequests requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreateCollaborativeAdsCollaborationRequest extends APIRequest<CPASCollaborationRequest> {
+
+    CPASCollaborationRequest lastResponse = null;
+    @Override
+    public CPASCollaborationRequest getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "brands",
+      "contact_email",
+      "contact_first_name",
+      "contact_last_name",
+      "phone_number",
+      "receiver_business",
+      "requester_agency_or_brand",
+      "sender_client_business",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public CPASCollaborationRequest parseResponse(String response, String header) throws APIException {
+      return CPASCollaborationRequest.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public CPASCollaborationRequest execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public CPASCollaborationRequest execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<CPASCollaborationRequest> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<CPASCollaborationRequest> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, CPASCollaborationRequest>() {
+           public CPASCollaborationRequest apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateCollaborativeAdsCollaborationRequest.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateCollaborativeAdsCollaborationRequest(String nodeId, APIContext context) {
+      super(context, nodeId, "/collaborative_ads_collaboration_requests", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateCollaborativeAdsCollaborationRequest setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCollaborativeAdsCollaborationRequest setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateCollaborativeAdsCollaborationRequest setBrands (List<String> brands) {
+      this.setParam("brands", brands);
+      return this;
+    }
+    public APIRequestCreateCollaborativeAdsCollaborationRequest setBrands (String brands) {
+      this.setParam("brands", brands);
+      return this;
+    }
+
+    public APIRequestCreateCollaborativeAdsCollaborationRequest setContactEmail (String contactEmail) {
+      this.setParam("contact_email", contactEmail);
+      return this;
+    }
+
+    public APIRequestCreateCollaborativeAdsCollaborationRequest setContactFirstName (String contactFirstName) {
+      this.setParam("contact_first_name", contactFirstName);
+      return this;
+    }
+
+    public APIRequestCreateCollaborativeAdsCollaborationRequest setContactLastName (String contactLastName) {
+      this.setParam("contact_last_name", contactLastName);
+      return this;
+    }
+
+    public APIRequestCreateCollaborativeAdsCollaborationRequest setPhoneNumber (String phoneNumber) {
+      this.setParam("phone_number", phoneNumber);
+      return this;
+    }
+
+    public APIRequestCreateCollaborativeAdsCollaborationRequest setReceiverBusiness (String receiverBusiness) {
+      this.setParam("receiver_business", receiverBusiness);
+      return this;
+    }
+
+    public APIRequestCreateCollaborativeAdsCollaborationRequest setRequesterAgencyOrBrand (CPASCollaborationRequest.EnumRequesterAgencyOrBrand requesterAgencyOrBrand) {
+      this.setParam("requester_agency_or_brand", requesterAgencyOrBrand);
+      return this;
+    }
+    public APIRequestCreateCollaborativeAdsCollaborationRequest setRequesterAgencyOrBrand (String requesterAgencyOrBrand) {
+      this.setParam("requester_agency_or_brand", requesterAgencyOrBrand);
+      return this;
+    }
+
+    public APIRequestCreateCollaborativeAdsCollaborationRequest setSenderClientBusiness (String senderClientBusiness) {
+      this.setParam("sender_client_business", senderClientBusiness);
+      return this;
+    }
+
+    public APIRequestCreateCollaborativeAdsCollaborationRequest requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateCollaborativeAdsCollaborationRequest requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCollaborativeAdsCollaborationRequest requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateCollaborativeAdsCollaborationRequest requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCollaborativeAdsCollaborationRequest requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCollaborativeAdsCollaborationRequest requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetCollaborativeAdsSuggestedPartners extends APIRequest<CPASAdvertiserPartnershipRecommendation> {
+
+    APINodeList<CPASAdvertiserPartnershipRecommendation> lastResponse = null;
+    @Override
+    public APINodeList<CPASAdvertiserPartnershipRecommendation> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "advertiser_business_id",
+      "brand_business_id",
+      "brands",
+      "countries",
+      "id",
+      "merchant_business_id",
+      "merchant_categories",
+      "status",
+      "status_reason",
+    };
+
+    @Override
+    public APINodeList<CPASAdvertiserPartnershipRecommendation> parseResponse(String response, String header) throws APIException {
+      return CPASAdvertiserPartnershipRecommendation.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<CPASAdvertiserPartnershipRecommendation> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<CPASAdvertiserPartnershipRecommendation> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<CPASAdvertiserPartnershipRecommendation>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<CPASAdvertiserPartnershipRecommendation>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<CPASAdvertiserPartnershipRecommendation>>() {
+           public APINodeList<CPASAdvertiserPartnershipRecommendation> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetCollaborativeAdsSuggestedPartners.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetCollaborativeAdsSuggestedPartners(String nodeId, APIContext context) {
+      super(context, nodeId, "/collaborative_ads_suggested_partners", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCollaborativeAdsSuggestedPartners setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCollaborativeAdsSuggestedPartners setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCollaborativeAdsSuggestedPartners requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCollaborativeAdsSuggestedPartners requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCollaborativeAdsSuggestedPartners requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCollaborativeAdsSuggestedPartners requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCollaborativeAdsSuggestedPartners requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCollaborativeAdsSuggestedPartners requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetCollaborativeAdsSuggestedPartners requestAdvertiserBusinessIdField () {
+      return this.requestAdvertiserBusinessIdField(true);
+    }
+    public APIRequestGetCollaborativeAdsSuggestedPartners requestAdvertiserBusinessIdField (boolean value) {
+      this.requestField("advertiser_business_id", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeAdsSuggestedPartners requestBrandBusinessIdField () {
+      return this.requestBrandBusinessIdField(true);
+    }
+    public APIRequestGetCollaborativeAdsSuggestedPartners requestBrandBusinessIdField (boolean value) {
+      this.requestField("brand_business_id", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeAdsSuggestedPartners requestBrandsField () {
+      return this.requestBrandsField(true);
+    }
+    public APIRequestGetCollaborativeAdsSuggestedPartners requestBrandsField (boolean value) {
+      this.requestField("brands", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeAdsSuggestedPartners requestCountriesField () {
+      return this.requestCountriesField(true);
+    }
+    public APIRequestGetCollaborativeAdsSuggestedPartners requestCountriesField (boolean value) {
+      this.requestField("countries", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeAdsSuggestedPartners requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetCollaborativeAdsSuggestedPartners requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeAdsSuggestedPartners requestMerchantBusinessIdField () {
+      return this.requestMerchantBusinessIdField(true);
+    }
+    public APIRequestGetCollaborativeAdsSuggestedPartners requestMerchantBusinessIdField (boolean value) {
+      this.requestField("merchant_business_id", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeAdsSuggestedPartners requestMerchantCategoriesField () {
+      return this.requestMerchantCategoriesField(true);
+    }
+    public APIRequestGetCollaborativeAdsSuggestedPartners requestMerchantCategoriesField (boolean value) {
+      this.requestField("merchant_categories", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeAdsSuggestedPartners requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetCollaborativeAdsSuggestedPartners requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeAdsSuggestedPartners requestStatusReasonField () {
+      return this.requestStatusReasonField(true);
+    }
+    public APIRequestGetCollaborativeAdsSuggestedPartners requestStatusReasonField (boolean value) {
+      this.requestField("status_reason", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetCommerceMerchantSettings extends APIRequest<CommerceMerchantSettings> {
 
     APINodeList<CommerceMerchantSettings> lastResponse = null;
@@ -8014,6 +8556,7 @@ public class Business extends APINode {
       "braintree_merchant_id",
       "checkout_message",
       "contact_email",
+      "cta",
       "disable_checkout_urls",
       "display_name",
       "facebook_channel",
@@ -8143,6 +8686,13 @@ public class Business extends APINode {
     }
     public APIRequestGetCommerceMerchantSettings requestContactEmailField (boolean value) {
       this.requestField("contact_email", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestCtaField () {
+      return this.requestCtaField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestCtaField (boolean value) {
+      this.requestField("cta", value);
       return this;
     }
     public APIRequestGetCommerceMerchantSettings requestDisableCheckoutUrlsField () {
@@ -8474,6 +9024,136 @@ public class Business extends APINode {
       this.requestField("estimated_impressions", value);
       return this;
     }
+  }
+
+  public static class APIRequestCreateCreateAndApplyPublisherBlockList extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "is_auto_blocking_on",
+      "name",
+      "publisher_urls",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateCreateAndApplyPublisherBlockList.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateCreateAndApplyPublisherBlockList(String nodeId, APIContext context) {
+      super(context, nodeId, "/create_and_apply_publisher_block_list", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateCreateAndApplyPublisherBlockList setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCreateAndApplyPublisherBlockList setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateCreateAndApplyPublisherBlockList setIsAutoBlockingOn (Boolean isAutoBlockingOn) {
+      this.setParam("is_auto_blocking_on", isAutoBlockingOn);
+      return this;
+    }
+    public APIRequestCreateCreateAndApplyPublisherBlockList setIsAutoBlockingOn (String isAutoBlockingOn) {
+      this.setParam("is_auto_blocking_on", isAutoBlockingOn);
+      return this;
+    }
+
+    public APIRequestCreateCreateAndApplyPublisherBlockList setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateCreateAndApplyPublisherBlockList setPublisherUrls (List<String> publisherUrls) {
+      this.setParam("publisher_urls", publisherUrls);
+      return this;
+    }
+    public APIRequestCreateCreateAndApplyPublisherBlockList setPublisherUrls (String publisherUrls) {
+      this.setParam("publisher_urls", publisherUrls);
+      return this;
+    }
+
+    public APIRequestCreateCreateAndApplyPublisherBlockList requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateCreateAndApplyPublisherBlockList requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCreateAndApplyPublisherBlockList requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateCreateAndApplyPublisherBlockList requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCreateAndApplyPublisherBlockList requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCreateAndApplyPublisherBlockList requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestCreateCustomConversion extends APIRequest<CustomConversion> {
@@ -9844,6 +10524,7 @@ public class Business extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "child_business_external_id",
       "existing_client_business_id",
       "name",
       "sales_rep_email",
@@ -9909,6 +10590,11 @@ public class Business extends APINode {
       return this;
     }
 
+
+    public APIRequestCreateManagedBusiness setChildBusinessExternalId (String childBusinessExternalId) {
+      this.setParam("child_business_external_id", childBusinessExternalId);
+      return this;
+    }
 
     public APIRequestCreateManagedBusiness setExistingClientBusinessId (String existingClientBusinessId) {
       this.setParam("existing_client_business_id", existingClientBusinessId);
@@ -12622,6 +13308,7 @@ public class Business extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "child_business_external_id",
       "name",
       "page_permitted_tasks",
       "sales_rep_email",
@@ -12688,6 +13375,11 @@ public class Business extends APINode {
       return this;
     }
 
+
+    public APIRequestCreateOwnedBusiness setChildBusinessExternalId (String childBusinessExternalId) {
+      this.setParam("child_business_external_id", childBusinessExternalId);
+      return this;
+    }
 
     public APIRequestCreateOwnedBusiness setName (String name) {
       this.setParam("name", name);
@@ -14756,12 +15448,15 @@ public class Business extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "catalog_segment_filter",
+      "catalog_segment_product_set_id",
       "commerce_merchant_settings",
       "da_display_settings",
       "destination_catalog_settings",
       "flight_catalog_settings",
       "name",
       "onsite_commerce_merchant",
+      "parent_catalog_id",
       "store_catalog_settings",
       "vertical",
     };
@@ -14822,6 +15517,20 @@ public class Business extends APINode {
     }
 
 
+    public APIRequestCreateOwnedProductCatalog setCatalogSegmentFilter (Object catalogSegmentFilter) {
+      this.setParam("catalog_segment_filter", catalogSegmentFilter);
+      return this;
+    }
+    public APIRequestCreateOwnedProductCatalog setCatalogSegmentFilter (String catalogSegmentFilter) {
+      this.setParam("catalog_segment_filter", catalogSegmentFilter);
+      return this;
+    }
+
+    public APIRequestCreateOwnedProductCatalog setCatalogSegmentProductSetId (String catalogSegmentProductSetId) {
+      this.setParam("catalog_segment_product_set_id", catalogSegmentProductSetId);
+      return this;
+    }
+
     public APIRequestCreateOwnedProductCatalog setCommerceMerchantSettings (Object commerceMerchantSettings) {
       this.setParam("commerce_merchant_settings", commerceMerchantSettings);
       return this;
@@ -14869,6 +15578,11 @@ public class Business extends APINode {
     }
     public APIRequestCreateOwnedProductCatalog setOnsiteCommerceMerchant (String onsiteCommerceMerchant) {
       this.setParam("onsite_commerce_merchant", onsiteCommerceMerchant);
+      return this;
+    }
+
+    public APIRequestCreateOwnedProductCatalog setParentCatalogId (String parentCatalogId) {
+      this.setParam("parent_catalog_id", parentCatalogId);
       return this;
     }
 

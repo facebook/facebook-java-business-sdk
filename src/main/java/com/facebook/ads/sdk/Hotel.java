@@ -63,6 +63,8 @@ public class Hotel extends APINode {
   private String mBrand = null;
   @SerializedName("category")
   private String mCategory = null;
+  @SerializedName("category_specific_fields")
+  private CatalogSubVerticalList mCategorySpecificFields = null;
   @SerializedName("currency")
   private String mCurrency = null;
   @SerializedName("description")
@@ -333,6 +335,10 @@ public class Hotel extends APINode {
 
   public String getFieldCategory() {
     return mCategory;
+  }
+
+  public CatalogSubVerticalList getFieldCategorySpecificFields() {
+    return mCategorySpecificFields;
   }
 
   public String getFieldCurrency() {
@@ -708,6 +714,7 @@ public class Hotel extends APINode {
       "applinks",
       "brand",
       "category",
+      "category_specific_fields",
       "currency",
       "description",
       "guest_ratings",
@@ -840,6 +847,13 @@ public class Hotel extends APINode {
     }
     public APIRequestGet requestCategoryField (boolean value) {
       this.requestField("category", value);
+      return this;
+    }
+    public APIRequestGet requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGet requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGet requestCurrencyField () {
@@ -1168,6 +1182,7 @@ public class Hotel extends APINode {
     this.mApplinks = instance.mApplinks;
     this.mBrand = instance.mBrand;
     this.mCategory = instance.mCategory;
+    this.mCategorySpecificFields = instance.mCategorySpecificFields;
     this.mCurrency = instance.mCurrency;
     this.mDescription = instance.mDescription;
     this.mGuestRatings = instance.mGuestRatings;

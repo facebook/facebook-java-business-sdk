@@ -151,6 +151,8 @@ public class Post extends APINode {
   private String mPicture = null;
   @SerializedName("place")
   private Place mPlace = null;
+  @SerializedName("poll")
+  private Object mPoll = null;
   @SerializedName("privacy")
   private Privacy mPrivacy = null;
   @SerializedName("promotable_id")
@@ -667,6 +669,10 @@ public class Post extends APINode {
       mPlace.context = getContext();
     }
     return mPlace;
+  }
+
+  public Object getFieldPoll() {
+    return mPoll;
   }
 
   public Privacy getFieldPrivacy() {
@@ -2475,6 +2481,7 @@ public class Post extends APINode {
       "permalink_url",
       "picture",
       "place",
+      "poll",
       "privacy",
       "promotable_id",
       "promotion_status",
@@ -2922,6 +2929,13 @@ public class Post extends APINode {
     }
     public APIRequestGetSharedPosts requestPlaceField (boolean value) {
       this.requestField("place", value);
+      return this;
+    }
+    public APIRequestGetSharedPosts requestPollField () {
+      return this.requestPollField(true);
+    }
+    public APIRequestGetSharedPosts requestPollField (boolean value) {
+      this.requestField("poll", value);
       return this;
     }
     public APIRequestGetSharedPosts requestPrivacyField () {
@@ -4667,6 +4681,7 @@ public class Post extends APINode {
       "permalink_url",
       "picture",
       "place",
+      "poll",
       "privacy",
       "promotable_id",
       "promotion_status",
@@ -5114,6 +5129,13 @@ public class Post extends APINode {
     }
     public APIRequestGet requestPlaceField (boolean value) {
       this.requestField("place", value);
+      return this;
+    }
+    public APIRequestGet requestPollField () {
+      return this.requestPollField(true);
+    }
+    public APIRequestGet requestPollField (boolean value) {
+      this.requestField("poll", value);
       return this;
     }
     public APIRequestGet requestPrivacyField () {
@@ -5942,6 +5964,7 @@ public class Post extends APINode {
     this.mPermalinkUrl = instance.mPermalinkUrl;
     this.mPicture = instance.mPicture;
     this.mPlace = instance.mPlace;
+    this.mPoll = instance.mPoll;
     this.mPrivacy = instance.mPrivacy;
     this.mPromotableId = instance.mPromotableId;
     this.mPromotionStatus = instance.mPromotionStatus;

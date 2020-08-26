@@ -54,90 +54,82 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class Destination extends APINode {
-  @SerializedName("address")
-  private String mAddress = null;
-  @SerializedName("applinks")
-  private CatalogItemAppLinks mApplinks = null;
-  @SerializedName("category_specific_fields")
-  private CatalogSubVerticalList mCategorySpecificFields = null;
-  @SerializedName("currency")
-  private String mCurrency = null;
-  @SerializedName("description")
-  private String mDescription = null;
-  @SerializedName("destination_id")
-  private String mDestinationId = null;
+public class CPASCollaborationRequest extends APINode {
+  @SerializedName("brands")
+  private List<String> mBrands = null;
+  @SerializedName("contact_email")
+  private String mContactEmail = null;
+  @SerializedName("contact_first_name")
+  private String mContactFirstName = null;
+  @SerializedName("contact_last_name")
+  private String mContactLastName = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("images")
-  private List<String> mImages = null;
-  @SerializedName("name")
-  private String mName = null;
-  @SerializedName("price")
-  private String mPrice = null;
-  @SerializedName("price_change")
-  private String mPriceChange = null;
-  @SerializedName("sanitized_images")
-  private List<String> mSanitizedImages = null;
-  @SerializedName("types")
-  private List<String> mTypes = null;
-  @SerializedName("url")
-  private String mUrl = null;
+  @SerializedName("phone_number")
+  private String mPhoneNumber = null;
+  @SerializedName("receiver_business")
+  private Business mReceiverBusiness = null;
+  @SerializedName("requester_agency_or_brand")
+  private String mRequesterAgencyOrBrand = null;
+  @SerializedName("sender_client_business")
+  private Business mSenderClientBusiness = null;
+  @SerializedName("status")
+  private String mStatus = null;
   protected static Gson gson = null;
 
-  Destination() {
+  CPASCollaborationRequest() {
   }
 
-  public Destination(Long id, APIContext context) {
+  public CPASCollaborationRequest(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public Destination(String id, APIContext context) {
+  public CPASCollaborationRequest(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public Destination fetch() throws APIException{
-    Destination newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public CPASCollaborationRequest fetch() throws APIException{
+    CPASCollaborationRequest newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static Destination fetchById(Long id, APIContext context) throws APIException {
+  public static CPASCollaborationRequest fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<Destination> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<CPASCollaborationRequest> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static Destination fetchById(String id, APIContext context) throws APIException {
+  public static CPASCollaborationRequest fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<Destination> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<CPASCollaborationRequest> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<Destination> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<Destination>)(
-      new APIRequest<Destination>(context, "", "/", "GET", Destination.getParser())
+  public static APINodeList<CPASCollaborationRequest> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<CPASCollaborationRequest>)(
+      new APIRequest<CPASCollaborationRequest>(context, "", "/", "GET", CPASCollaborationRequest.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<Destination>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<CPASCollaborationRequest>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", Destination.getParser())
+      new APIRequest(context, "", "/", "GET", CPASCollaborationRequest.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -150,12 +142,12 @@ public class Destination extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static Destination loadJSON(String json, APIContext context, String header) {
-    Destination destination = getGson().fromJson(json, Destination.class);
+  public static CPASCollaborationRequest loadJSON(String json, APIContext context, String header) {
+    CPASCollaborationRequest cpasCollaborationRequest = getGson().fromJson(json, CPASCollaborationRequest.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(destination.toString());
+      JsonElement o2 = parser.parse(cpasCollaborationRequest.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -165,14 +157,14 @@ public class Destination extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    destination.context = context;
-    destination.rawValue = json;
-    destination.header = header;
-    return destination;
+    cpasCollaborationRequest.context = context;
+    cpasCollaborationRequest.rawValue = json;
+    cpasCollaborationRequest.header = header;
+    return cpasCollaborationRequest;
   }
 
-  public static APINodeList<Destination> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<Destination> destinations = new APINodeList<Destination>(request, json, header);
+  public static APINodeList<CPASCollaborationRequest> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CPASCollaborationRequest> cpasCollaborationRequests = new APINodeList<CPASCollaborationRequest>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -183,9 +175,9 @@ public class Destination extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          destinations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          cpasCollaborationRequests.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return destinations;
+        return cpasCollaborationRequests;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -195,20 +187,20 @@ public class Destination extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                destinations.setCursors(before, after);
+                cpasCollaborationRequests.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            destinations.setPaging(previous, next);
+            cpasCollaborationRequests.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              destinations.setAppSecret(context.getAppSecretProof());
+              cpasCollaborationRequests.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              destinations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              cpasCollaborationRequests.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -219,23 +211,23 @@ public class Destination extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  destinations.add(loadJSON(entry.getValue().toString(), context, header));
+                  cpasCollaborationRequests.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              destinations.add(loadJSON(obj.toString(), context, header));
+              cpasCollaborationRequests.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return destinations;
+          return cpasCollaborationRequests;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              destinations.add(loadJSON(entry.getValue().toString(), context, header));
+              cpasCollaborationRequests.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return destinations;
+          return cpasCollaborationRequests;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -252,20 +244,20 @@ public class Destination extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              destinations.add(loadJSON(value.toString(), context, header));
+              cpasCollaborationRequests.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return destinations;
+            return cpasCollaborationRequests;
           }
 
           // Sixth, check if it's pure JsonObject
-          destinations.clear();
-          destinations.add(loadJSON(json, context, header));
-          return destinations;
+          cpasCollaborationRequests.clear();
+          cpasCollaborationRequests.add(loadJSON(json, context, header));
+          return cpasCollaborationRequests;
         }
       }
     } catch (Exception e) {
@@ -297,117 +289,103 @@ public class Destination extends APINode {
   }
 
 
-  public String getFieldAddress() {
-    return mAddress;
+  public List<String> getFieldBrands() {
+    return mBrands;
   }
 
-  public CatalogItemAppLinks getFieldApplinks() {
-    return mApplinks;
+  public String getFieldContactEmail() {
+    return mContactEmail;
   }
 
-  public CatalogSubVerticalList getFieldCategorySpecificFields() {
-    return mCategorySpecificFields;
+  public String getFieldContactFirstName() {
+    return mContactFirstName;
   }
 
-  public String getFieldCurrency() {
-    return mCurrency;
-  }
-
-  public String getFieldDescription() {
-    return mDescription;
-  }
-
-  public String getFieldDestinationId() {
-    return mDestinationId;
+  public String getFieldContactLastName() {
+    return mContactLastName;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-  public List<String> getFieldImages() {
-    return mImages;
+  public String getFieldPhoneNumber() {
+    return mPhoneNumber;
   }
 
-  public String getFieldName() {
-    return mName;
+  public Business getFieldReceiverBusiness() {
+    if (mReceiverBusiness != null) {
+      mReceiverBusiness.context = getContext();
+    }
+    return mReceiverBusiness;
   }
 
-  public String getFieldPrice() {
-    return mPrice;
+  public String getFieldRequesterAgencyOrBrand() {
+    return mRequesterAgencyOrBrand;
   }
 
-  public String getFieldPriceChange() {
-    return mPriceChange;
+  public Business getFieldSenderClientBusiness() {
+    if (mSenderClientBusiness != null) {
+      mSenderClientBusiness.context = getContext();
+    }
+    return mSenderClientBusiness;
   }
 
-  public List<String> getFieldSanitizedImages() {
-    return mSanitizedImages;
-  }
-
-  public List<String> getFieldTypes() {
-    return mTypes;
-  }
-
-  public String getFieldUrl() {
-    return mUrl;
+  public String getFieldStatus() {
+    return mStatus;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<Destination> {
+  public static class APIRequestGet extends APIRequest<CPASCollaborationRequest> {
 
-    Destination lastResponse = null;
+    CPASCollaborationRequest lastResponse = null;
     @Override
-    public Destination getLastResponse() {
+    public CPASCollaborationRequest getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "address",
-      "applinks",
-      "category_specific_fields",
-      "currency",
-      "description",
-      "destination_id",
+      "brands",
+      "contact_email",
+      "contact_first_name",
+      "contact_last_name",
       "id",
-      "images",
-      "name",
-      "price",
-      "price_change",
-      "sanitized_images",
-      "types",
-      "url",
+      "phone_number",
+      "receiver_business",
+      "requester_agency_or_brand",
+      "sender_client_business",
+      "status",
     };
 
     @Override
-    public Destination parseResponse(String response, String header) throws APIException {
-      return Destination.parseResponse(response, getContext(), this, header).head();
+    public CPASCollaborationRequest parseResponse(String response, String header) throws APIException {
+      return CPASCollaborationRequest.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public Destination execute() throws APIException {
+    public CPASCollaborationRequest execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public Destination execute(Map<String, Object> extraParams) throws APIException {
+    public CPASCollaborationRequest execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<Destination> executeAsync() throws APIException {
+    public ListenableFuture<CPASCollaborationRequest> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<Destination> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<CPASCollaborationRequest> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Destination>() {
-           public Destination apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, CPASCollaborationRequest>() {
+           public CPASCollaborationRequest apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -471,46 +449,32 @@ public class Destination extends APINode {
       return this;
     }
 
-    public APIRequestGet requestAddressField () {
-      return this.requestAddressField(true);
+    public APIRequestGet requestBrandsField () {
+      return this.requestBrandsField(true);
     }
-    public APIRequestGet requestAddressField (boolean value) {
-      this.requestField("address", value);
+    public APIRequestGet requestBrandsField (boolean value) {
+      this.requestField("brands", value);
       return this;
     }
-    public APIRequestGet requestApplinksField () {
-      return this.requestApplinksField(true);
+    public APIRequestGet requestContactEmailField () {
+      return this.requestContactEmailField(true);
     }
-    public APIRequestGet requestApplinksField (boolean value) {
-      this.requestField("applinks", value);
+    public APIRequestGet requestContactEmailField (boolean value) {
+      this.requestField("contact_email", value);
       return this;
     }
-    public APIRequestGet requestCategorySpecificFieldsField () {
-      return this.requestCategorySpecificFieldsField(true);
+    public APIRequestGet requestContactFirstNameField () {
+      return this.requestContactFirstNameField(true);
     }
-    public APIRequestGet requestCategorySpecificFieldsField (boolean value) {
-      this.requestField("category_specific_fields", value);
+    public APIRequestGet requestContactFirstNameField (boolean value) {
+      this.requestField("contact_first_name", value);
       return this;
     }
-    public APIRequestGet requestCurrencyField () {
-      return this.requestCurrencyField(true);
+    public APIRequestGet requestContactLastNameField () {
+      return this.requestContactLastNameField(true);
     }
-    public APIRequestGet requestCurrencyField (boolean value) {
-      this.requestField("currency", value);
-      return this;
-    }
-    public APIRequestGet requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGet requestDescriptionField (boolean value) {
-      this.requestField("description", value);
-      return this;
-    }
-    public APIRequestGet requestDestinationIdField () {
-      return this.requestDestinationIdField(true);
-    }
-    public APIRequestGet requestDestinationIdField (boolean value) {
-      this.requestField("destination_id", value);
+    public APIRequestGet requestContactLastNameField (boolean value) {
+      this.requestField("contact_last_name", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -520,55 +484,62 @@ public class Destination extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestImagesField () {
-      return this.requestImagesField(true);
+    public APIRequestGet requestPhoneNumberField () {
+      return this.requestPhoneNumberField(true);
     }
-    public APIRequestGet requestImagesField (boolean value) {
-      this.requestField("images", value);
+    public APIRequestGet requestPhoneNumberField (boolean value) {
+      this.requestField("phone_number", value);
       return this;
     }
-    public APIRequestGet requestNameField () {
-      return this.requestNameField(true);
+    public APIRequestGet requestReceiverBusinessField () {
+      return this.requestReceiverBusinessField(true);
     }
-    public APIRequestGet requestNameField (boolean value) {
-      this.requestField("name", value);
+    public APIRequestGet requestReceiverBusinessField (boolean value) {
+      this.requestField("receiver_business", value);
       return this;
     }
-    public APIRequestGet requestPriceField () {
-      return this.requestPriceField(true);
+    public APIRequestGet requestRequesterAgencyOrBrandField () {
+      return this.requestRequesterAgencyOrBrandField(true);
     }
-    public APIRequestGet requestPriceField (boolean value) {
-      this.requestField("price", value);
+    public APIRequestGet requestRequesterAgencyOrBrandField (boolean value) {
+      this.requestField("requester_agency_or_brand", value);
       return this;
     }
-    public APIRequestGet requestPriceChangeField () {
-      return this.requestPriceChangeField(true);
+    public APIRequestGet requestSenderClientBusinessField () {
+      return this.requestSenderClientBusinessField(true);
     }
-    public APIRequestGet requestPriceChangeField (boolean value) {
-      this.requestField("price_change", value);
+    public APIRequestGet requestSenderClientBusinessField (boolean value) {
+      this.requestField("sender_client_business", value);
       return this;
     }
-    public APIRequestGet requestSanitizedImagesField () {
-      return this.requestSanitizedImagesField(true);
+    public APIRequestGet requestStatusField () {
+      return this.requestStatusField(true);
     }
-    public APIRequestGet requestSanitizedImagesField (boolean value) {
-      this.requestField("sanitized_images", value);
+    public APIRequestGet requestStatusField (boolean value) {
+      this.requestField("status", value);
       return this;
     }
-    public APIRequestGet requestTypesField () {
-      return this.requestTypesField(true);
-    }
-    public APIRequestGet requestTypesField (boolean value) {
-      this.requestField("types", value);
-      return this;
-    }
-    public APIRequestGet requestUrlField () {
-      return this.requestUrlField(true);
-    }
-    public APIRequestGet requestUrlField (boolean value) {
-      this.requestField("url", value);
-      return this;
-    }
+  }
+
+  public static enum EnumRequesterAgencyOrBrand {
+      @SerializedName("AGENCY")
+      VALUE_AGENCY("AGENCY"),
+      @SerializedName("BRAND")
+      VALUE_BRAND("BRAND"),
+      @SerializedName("MERCHANT")
+      VALUE_MERCHANT("MERCHANT"),
+      ;
+
+      private String value;
+
+      private EnumRequesterAgencyOrBrand(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
 
@@ -585,30 +556,26 @@ public class Destination extends APINode {
     return gson;
   }
 
-  public Destination copyFrom(Destination instance) {
-    this.mAddress = instance.mAddress;
-    this.mApplinks = instance.mApplinks;
-    this.mCategorySpecificFields = instance.mCategorySpecificFields;
-    this.mCurrency = instance.mCurrency;
-    this.mDescription = instance.mDescription;
-    this.mDestinationId = instance.mDestinationId;
+  public CPASCollaborationRequest copyFrom(CPASCollaborationRequest instance) {
+    this.mBrands = instance.mBrands;
+    this.mContactEmail = instance.mContactEmail;
+    this.mContactFirstName = instance.mContactFirstName;
+    this.mContactLastName = instance.mContactLastName;
     this.mId = instance.mId;
-    this.mImages = instance.mImages;
-    this.mName = instance.mName;
-    this.mPrice = instance.mPrice;
-    this.mPriceChange = instance.mPriceChange;
-    this.mSanitizedImages = instance.mSanitizedImages;
-    this.mTypes = instance.mTypes;
-    this.mUrl = instance.mUrl;
+    this.mPhoneNumber = instance.mPhoneNumber;
+    this.mReceiverBusiness = instance.mReceiverBusiness;
+    this.mRequesterAgencyOrBrand = instance.mRequesterAgencyOrBrand;
+    this.mSenderClientBusiness = instance.mSenderClientBusiness;
+    this.mStatus = instance.mStatus;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<Destination> getParser() {
-    return new APIRequest.ResponseParser<Destination>() {
-      public APINodeList<Destination> parseResponse(String response, APIContext context, APIRequest<Destination> request, String header) throws MalformedResponseException {
-        return Destination.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<CPASCollaborationRequest> getParser() {
+    return new APIRequest.ResponseParser<CPASCollaborationRequest>() {
+      public APINodeList<CPASCollaborationRequest> parseResponse(String response, APIContext context, APIRequest<CPASCollaborationRequest> request, String header) throws MalformedResponseException {
+        return CPASCollaborationRequest.parseResponse(response, context, request, header);
       }
     };
   }

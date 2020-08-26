@@ -2428,7 +2428,7 @@ public class BusinessUnit extends APINode {
       return this;
     }
 
-    public APIRequestGetConversionPaths setDateRange (Object dateRange) {
+    public APIRequestGetConversionPaths setDateRange (Map<String, String> dateRange) {
       this.setParam("date_range", dateRange);
       return this;
     }
