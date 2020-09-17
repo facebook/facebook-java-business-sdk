@@ -686,6 +686,10 @@ public class Page extends APINode {
     return new APIRequestGetEvents(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateExtendThreadControl createExtendThreadControl() {
+    return new APIRequestCreateExtendThreadControl(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetFeed getFeed() {
     return new APIRequestGetFeed(this.getPrefixedId().toString(), context);
   }
@@ -1732,6 +1736,7 @@ public class Page extends APINode {
       "id",
       "implicit_place",
       "instagram_eligibility",
+      "instream_eligibility",
       "is_app_share",
       "is_eligible_for_promotion",
       "is_expired",
@@ -2063,6 +2068,13 @@ public class Page extends APINode {
     }
     public APIRequestGetAdsPosts requestInstagramEligibilityField (boolean value) {
       this.requestField("instagram_eligibility", value);
+      return this;
+    }
+    public APIRequestGetAdsPosts requestInstreamEligibilityField () {
+      return this.requestInstreamEligibilityField(true);
+    }
+    public APIRequestGetAdsPosts requestInstreamEligibilityField (boolean value) {
+      this.requestField("instream_eligibility", value);
       return this;
     }
     public APIRequestGetAdsPosts requestIsAppShareField () {
@@ -6321,6 +6333,7 @@ public class Page extends APINode {
       "id",
       "is_subscribed",
       "link",
+      "linked_group",
       "message_count",
       "name",
       "participants",
@@ -6474,6 +6487,13 @@ public class Page extends APINode {
     }
     public APIRequestGetConversations requestLinkField (boolean value) {
       this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGetConversations requestLinkedGroupField () {
+      return this.requestLinkedGroupField(true);
+    }
+    public APIRequestGetConversations requestLinkedGroupField (boolean value) {
+      this.requestField("linked_group", value);
       return this;
     }
     public APIRequestGetConversations requestMessageCountField () {
@@ -9132,6 +9152,130 @@ public class Page extends APINode {
     }
   }
 
+  public static class APIRequestCreateExtendThreadControl extends APIRequest<Page> {
+
+    Page lastResponse = null;
+    @Override
+    public Page getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "duration",
+      "recipient",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Page parseResponse(String response, String header) throws APIException {
+      return Page.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Page execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Page execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Page> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Page> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, Page>() {
+           public Page apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateExtendThreadControl.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateExtendThreadControl(String nodeId, APIContext context) {
+      super(context, nodeId, "/extend_thread_control", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateExtendThreadControl setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateExtendThreadControl setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateExtendThreadControl setDuration (Long duration) {
+      this.setParam("duration", duration);
+      return this;
+    }
+    public APIRequestCreateExtendThreadControl setDuration (String duration) {
+      this.setParam("duration", duration);
+      return this;
+    }
+
+    public APIRequestCreateExtendThreadControl setRecipient (Object recipient) {
+      this.setParam("recipient", recipient);
+      return this;
+    }
+    public APIRequestCreateExtendThreadControl setRecipient (String recipient) {
+      this.setParam("recipient", recipient);
+      return this;
+    }
+
+    public APIRequestCreateExtendThreadControl requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateExtendThreadControl requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateExtendThreadControl requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateExtendThreadControl requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateExtendThreadControl requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateExtendThreadControl requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetFeed extends APIRequest<PagePost> {
 
     APINodeList<PagePost> lastResponse = null;
@@ -9172,6 +9316,7 @@ public class Page extends APINode {
       "id",
       "implicit_place",
       "instagram_eligibility",
+      "instream_eligibility",
       "is_app_share",
       "is_eligible_for_promotion",
       "is_expired",
@@ -9511,6 +9656,13 @@ public class Page extends APINode {
     }
     public APIRequestGetFeed requestInstagramEligibilityField (boolean value) {
       this.requestField("instagram_eligibility", value);
+      return this;
+    }
+    public APIRequestGetFeed requestInstreamEligibilityField () {
+      return this.requestInstreamEligibilityField(true);
+    }
+    public APIRequestGetFeed requestInstreamEligibilityField (boolean value) {
+      this.requestField("instream_eligibility", value);
       return this;
     }
     public APIRequestGetFeed requestIsAppShareField () {
@@ -21867,6 +22019,7 @@ public class Page extends APINode {
     }
     public static final String[] PARAMS = {
       "android_key_hash",
+      "burn_media_effect",
       "caption",
       "composer_session_id",
       "has_umg",
@@ -21950,6 +22103,15 @@ public class Page extends APINode {
 
     public APIRequestCreatePicture setAndroidKeyHash (String androidKeyHash) {
       this.setParam("android_key_hash", androidKeyHash);
+      return this;
+    }
+
+    public APIRequestCreatePicture setBurnMediaEffect (Boolean burnMediaEffect) {
+      this.setParam("burn_media_effect", burnMediaEffect);
+      return this;
+    }
+    public APIRequestCreatePicture setBurnMediaEffect (String burnMediaEffect) {
+      this.setParam("burn_media_effect", burnMediaEffect);
       return this;
     }
 
@@ -22199,6 +22361,7 @@ public class Page extends APINode {
       "id",
       "implicit_place",
       "instagram_eligibility",
+      "instream_eligibility",
       "is_app_share",
       "is_eligible_for_promotion",
       "is_expired",
@@ -22543,6 +22706,13 @@ public class Page extends APINode {
     }
     public APIRequestGetPosts requestInstagramEligibilityField (boolean value) {
       this.requestField("instagram_eligibility", value);
+      return this;
+    }
+    public APIRequestGetPosts requestInstreamEligibilityField () {
+      return this.requestInstreamEligibilityField(true);
+    }
+    public APIRequestGetPosts requestInstreamEligibilityField (boolean value) {
+      this.requestField("instream_eligibility", value);
       return this;
     }
     public APIRequestGetPosts requestIsAppShareField () {
@@ -23058,6 +23228,7 @@ public class Page extends APINode {
       "id",
       "implicit_place",
       "instagram_eligibility",
+      "instream_eligibility",
       "is_app_share",
       "is_eligible_for_promotion",
       "is_expired",
@@ -23371,6 +23542,13 @@ public class Page extends APINode {
     }
     public APIRequestGetPublishedPosts requestInstagramEligibilityField (boolean value) {
       this.requestField("instagram_eligibility", value);
+      return this;
+    }
+    public APIRequestGetPublishedPosts requestInstreamEligibilityField () {
+      return this.requestInstreamEligibilityField(true);
+    }
+    public APIRequestGetPublishedPosts requestInstreamEligibilityField (boolean value) {
+      this.requestField("instream_eligibility", value);
       return this;
     }
     public APIRequestGetPublishedPosts requestIsAppShareField () {
@@ -24720,6 +24898,7 @@ public class Page extends APINode {
       "id",
       "implicit_place",
       "instagram_eligibility",
+      "instream_eligibility",
       "is_app_share",
       "is_eligible_for_promotion",
       "is_expired",
@@ -25023,6 +25202,13 @@ public class Page extends APINode {
     }
     public APIRequestGetScheduledPosts requestInstagramEligibilityField (boolean value) {
       this.requestField("instagram_eligibility", value);
+      return this;
+    }
+    public APIRequestGetScheduledPosts requestInstreamEligibilityField () {
+      return this.requestInstreamEligibilityField(true);
+    }
+    public APIRequestGetScheduledPosts requestInstreamEligibilityField (boolean value) {
+      this.requestField("instream_eligibility", value);
       return this;
     }
     public APIRequestGetScheduledPosts requestIsAppShareField () {
@@ -28086,6 +28272,7 @@ public class Page extends APINode {
       "id",
       "implicit_place",
       "instagram_eligibility",
+      "instream_eligibility",
       "is_app_share",
       "is_eligible_for_promotion",
       "is_expired",
@@ -28389,6 +28576,13 @@ public class Page extends APINode {
     }
     public APIRequestGetTagged requestInstagramEligibilityField (boolean value) {
       this.requestField("instagram_eligibility", value);
+      return this;
+    }
+    public APIRequestGetTagged requestInstreamEligibilityField () {
+      return this.requestInstreamEligibilityField(true);
+    }
+    public APIRequestGetTagged requestInstreamEligibilityField (boolean value) {
+      this.requestField("instream_eligibility", value);
       return this;
     }
     public APIRequestGetTagged requestIsAppShareField () {
@@ -28923,6 +29117,7 @@ public class Page extends APINode {
       "id",
       "is_subscribed",
       "link",
+      "linked_group",
       "message_count",
       "name",
       "participants",
@@ -29076,6 +29271,13 @@ public class Page extends APINode {
     }
     public APIRequestGetThreads requestLinkField (boolean value) {
       this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGetThreads requestLinkedGroupField () {
+      return this.requestLinkedGroupField(true);
+    }
+    public APIRequestGetThreads requestLinkedGroupField (boolean value) {
+      this.requestField("linked_group", value);
       return this;
     }
     public APIRequestGetThreads requestMessageCountField () {
@@ -31415,6 +31617,7 @@ public class Page extends APINode {
       "id",
       "implicit_place",
       "instagram_eligibility",
+      "instream_eligibility",
       "is_app_share",
       "is_eligible_for_promotion",
       "is_expired",
@@ -31727,6 +31930,13 @@ public class Page extends APINode {
     }
     public APIRequestGetVisitorPosts requestInstagramEligibilityField (boolean value) {
       this.requestField("instagram_eligibility", value);
+      return this;
+    }
+    public APIRequestGetVisitorPosts requestInstreamEligibilityField () {
+      return this.requestInstreamEligibilityField(true);
+    }
+    public APIRequestGetVisitorPosts requestInstreamEligibilityField (boolean value) {
+      this.requestField("instream_eligibility", value);
       return this;
     }
     public APIRequestGetVisitorPosts requestIsAppShareField () {
@@ -34031,6 +34241,8 @@ public class Page extends APINode {
       VALUE_MANAGE_JOBS("MANAGE_JOBS"),
       @SerializedName("MANAGE_LEADS")
       VALUE_MANAGE_LEADS("MANAGE_LEADS"),
+      @SerializedName("MESSAGING")
+      VALUE_MESSAGING("MESSAGING"),
       @SerializedName("MODERATE")
       VALUE_MODERATE("MODERATE"),
       @SerializedName("MODERATE_COMMUNITY")
@@ -34045,6 +34257,8 @@ public class Page extends APINode {
       VALUE_PROFILE_PLUS_ANALYZE("PROFILE_PLUS_ANALYZE"),
       @SerializedName("PROFILE_PLUS_CREATE_CONTENT")
       VALUE_PROFILE_PLUS_CREATE_CONTENT("PROFILE_PLUS_CREATE_CONTENT"),
+      @SerializedName("PROFILE_PLUS_LIVE_STREAM_MODERATION")
+      VALUE_PROFILE_PLUS_LIVE_STREAM_MODERATION("PROFILE_PLUS_LIVE_STREAM_MODERATION"),
       @SerializedName("PROFILE_PLUS_MANAGE")
       VALUE_PROFILE_PLUS_MANAGE("PROFILE_PLUS_MANAGE"),
       @SerializedName("PROFILE_PLUS_MESSAGING")
@@ -34084,6 +34298,8 @@ public class Page extends APINode {
       VALUE_MANAGE_JOBS("MANAGE_JOBS"),
       @SerializedName("MANAGE_LEADS")
       VALUE_MANAGE_LEADS("MANAGE_LEADS"),
+      @SerializedName("MESSAGING")
+      VALUE_MESSAGING("MESSAGING"),
       @SerializedName("MODERATE")
       VALUE_MODERATE("MODERATE"),
       @SerializedName("MODERATE_COMMUNITY")
@@ -34098,6 +34314,8 @@ public class Page extends APINode {
       VALUE_PROFILE_PLUS_ANALYZE("PROFILE_PLUS_ANALYZE"),
       @SerializedName("PROFILE_PLUS_CREATE_CONTENT")
       VALUE_PROFILE_PLUS_CREATE_CONTENT("PROFILE_PLUS_CREATE_CONTENT"),
+      @SerializedName("PROFILE_PLUS_LIVE_STREAM_MODERATION")
+      VALUE_PROFILE_PLUS_LIVE_STREAM_MODERATION("PROFILE_PLUS_LIVE_STREAM_MODERATION"),
       @SerializedName("PROFILE_PLUS_MANAGE")
       VALUE_PROFILE_PLUS_MANAGE("PROFILE_PLUS_MANAGE"),
       @SerializedName("PROFILE_PLUS_MESSAGING")
@@ -34725,6 +34943,8 @@ public class Page extends APINode {
       VALUE_PAYMENT_SETTINGS("PAYMENT_SETTINGS"),
       @SerializedName("PERSISTENT_MENU")
       VALUE_PERSISTENT_MENU("PERSISTENT_MENU"),
+      @SerializedName("PLATFORM")
+      VALUE_PLATFORM("PLATFORM"),
       @SerializedName("TARGET_AUDIENCE")
       VALUE_TARGET_AUDIENCE("TARGET_AUDIENCE"),
       @SerializedName("WHITELISTED_DOMAINS")

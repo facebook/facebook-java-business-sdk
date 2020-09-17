@@ -274,6 +274,29 @@ public class DACheck extends APINode {
 
 
 
+  public static enum EnumConnectionMethod {
+      @SerializedName("ALL")
+      VALUE_ALL("ALL"),
+      @SerializedName("APP")
+      VALUE_APP("APP"),
+      @SerializedName("BROWSER")
+      VALUE_BROWSER("BROWSER"),
+      @SerializedName("SERVER")
+      VALUE_SERVER("SERVER"),
+      ;
+
+      private String value;
+
+      private EnumConnectionMethod(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {

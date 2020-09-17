@@ -105,6 +105,8 @@ public class PagePost extends APINode {
   private Place mImplicitPlace = null;
   @SerializedName("instagram_eligibility")
   private String mInstagramEligibility = null;
+  @SerializedName("instream_eligibility")
+  private String mInstreamEligibility = null;
   @SerializedName("is_app_share")
   private Boolean mIsAppShare = null;
   @SerializedName("is_eligible_for_promotion")
@@ -560,6 +562,10 @@ public class PagePost extends APINode {
 
   public String getFieldInstagramEligibility() {
     return mInstagramEligibility;
+  }
+
+  public String getFieldInstreamEligibility() {
+    return mInstreamEligibility;
   }
 
   public Boolean getFieldIsAppShare() {
@@ -2396,6 +2402,7 @@ public class PagePost extends APINode {
       "id",
       "implicit_place",
       "instagram_eligibility",
+      "instream_eligibility",
       "is_app_share",
       "is_eligible_for_promotion",
       "is_expired",
@@ -2718,6 +2725,13 @@ public class PagePost extends APINode {
     }
     public APIRequestGetSharedPosts requestInstagramEligibilityField (boolean value) {
       this.requestField("instagram_eligibility", value);
+      return this;
+    }
+    public APIRequestGetSharedPosts requestInstreamEligibilityField () {
+      return this.requestInstreamEligibilityField(true);
+    }
+    public APIRequestGetSharedPosts requestInstreamEligibilityField (boolean value) {
+      this.requestField("instream_eligibility", value);
       return this;
     }
     public APIRequestGetSharedPosts requestIsAppShareField () {
@@ -4594,6 +4608,7 @@ public class PagePost extends APINode {
       "id",
       "implicit_place",
       "instagram_eligibility",
+      "instream_eligibility",
       "is_app_share",
       "is_eligible_for_promotion",
       "is_expired",
@@ -4897,6 +4912,13 @@ public class PagePost extends APINode {
     }
     public APIRequestGet requestInstagramEligibilityField (boolean value) {
       this.requestField("instagram_eligibility", value);
+      return this;
+    }
+    public APIRequestGet requestInstreamEligibilityField () {
+      return this.requestInstreamEligibilityField(true);
+    }
+    public APIRequestGet requestInstreamEligibilityField (boolean value) {
+      this.requestField("instream_eligibility", value);
       return this;
     }
     public APIRequestGet requestIsAppShareField () {
@@ -5650,6 +5672,7 @@ public class PagePost extends APINode {
     this.mId = instance.mId;
     this.mImplicitPlace = instance.mImplicitPlace;
     this.mInstagramEligibility = instance.mInstagramEligibility;
+    this.mInstreamEligibility = instance.mInstreamEligibility;
     this.mIsAppShare = instance.mIsAppShare;
     this.mIsEligibleForPromotion = instance.mIsEligibleForPromotion;
     this.mIsExpired = instance.mIsExpired;

@@ -71,6 +71,8 @@ public class ProductSet extends APINode {
   private ProductCatalog mProductCatalog = null;
   @SerializedName("product_count")
   private Long mProductCount = null;
+  @SerializedName("retailer_id")
+  private String mRetailerId = null;
   protected static Gson gson = null;
 
   ProductSet() {
@@ -358,6 +360,10 @@ public class ProductSet extends APINode {
 
   public Long getFieldProductCount() {
     return mProductCount;
+  }
+
+  public String getFieldRetailerId() {
+    return mRetailerId;
   }
 
 
@@ -3501,6 +3507,7 @@ public class ProductSet extends APINode {
       "name",
       "product_catalog",
       "product_count",
+      "retailer_id",
     };
 
     @Override
@@ -3648,6 +3655,13 @@ public class ProductSet extends APINode {
       this.requestField("product_count", value);
       return this;
     }
+    public APIRequestGet requestRetailerIdField () {
+      return this.requestRetailerIdField(true);
+    }
+    public APIRequestGet requestRetailerIdField (boolean value) {
+      this.requestField("retailer_id", value);
+      return this;
+    }
   }
 
   public static class APIRequestUpdate extends APIRequest<ProductSet> {
@@ -3661,6 +3675,7 @@ public class ProductSet extends APINode {
       "filter",
       "metadata",
       "name",
+      "retailer_id",
     };
 
     public static final String[] FIELDS = {
@@ -3742,6 +3757,11 @@ public class ProductSet extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setRetailerId (String retailerId) {
+      this.setParam("retailer_id", retailerId);
+      return this;
+    }
+
     public APIRequestUpdate requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -3803,6 +3823,7 @@ public class ProductSet extends APINode {
     this.mName = instance.mName;
     this.mProductCatalog = instance.mProductCatalog;
     this.mProductCount = instance.mProductCount;
+    this.mRetailerId = instance.mRetailerId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

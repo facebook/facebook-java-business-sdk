@@ -6305,6 +6305,7 @@ public class ProductCatalog extends APINode {
       "name",
       "product_catalog",
       "product_count",
+      "retailer_id",
     };
 
     @Override
@@ -6476,6 +6477,13 @@ public class ProductCatalog extends APINode {
       this.requestField("product_count", value);
       return this;
     }
+    public APIRequestGetProductSets requestRetailerIdField () {
+      return this.requestRetailerIdField(true);
+    }
+    public APIRequestGetProductSets requestRetailerIdField (boolean value) {
+      this.requestField("retailer_id", value);
+      return this;
+    }
   }
 
   public static class APIRequestCreateProductSet extends APIRequest<ProductSet> {
@@ -6489,6 +6497,7 @@ public class ProductCatalog extends APINode {
       "filter",
       "metadata",
       "name",
+      "retailer_id",
     };
 
     public static final String[] FIELDS = {
@@ -6567,6 +6576,11 @@ public class ProductCatalog extends APINode {
 
     public APIRequestCreateProductSet setName (String name) {
       this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateProductSet setRetailerId (String retailerId) {
+      this.setParam("retailer_id", retailerId);
       return this;
     }
 

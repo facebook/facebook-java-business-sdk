@@ -54,25 +54,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdCreativeInteractiveComponentsSpec extends APINode {
-  @SerializedName("child_attachments")
-  private List<Object> mChildAttachments = null;
-  @SerializedName("components")
-  private List<Object> mComponents = null;
+public class ConnectionsTargeting extends APINode {
+  @SerializedName("id")
+  private String mId = null;
+  @SerializedName("name")
+  private String mName = null;
   protected static Gson gson = null;
 
-  public AdCreativeInteractiveComponentsSpec() {
+  public ConnectionsTargeting() {
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
-  public static AdCreativeInteractiveComponentsSpec loadJSON(String json, APIContext context, String header) {
-    AdCreativeInteractiveComponentsSpec adCreativeInteractiveComponentsSpec = getGson().fromJson(json, AdCreativeInteractiveComponentsSpec.class);
+  public static ConnectionsTargeting loadJSON(String json, APIContext context, String header) {
+    ConnectionsTargeting connectionsTargeting = getGson().fromJson(json, ConnectionsTargeting.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adCreativeInteractiveComponentsSpec.toString());
+      JsonElement o2 = parser.parse(connectionsTargeting.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -82,14 +82,14 @@ public class AdCreativeInteractiveComponentsSpec extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    adCreativeInteractiveComponentsSpec.context = context;
-    adCreativeInteractiveComponentsSpec.rawValue = json;
-    adCreativeInteractiveComponentsSpec.header = header;
-    return adCreativeInteractiveComponentsSpec;
+    connectionsTargeting.context = context;
+    connectionsTargeting.rawValue = json;
+    connectionsTargeting.header = header;
+    return connectionsTargeting;
   }
 
-  public static APINodeList<AdCreativeInteractiveComponentsSpec> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdCreativeInteractiveComponentsSpec> adCreativeInteractiveComponentsSpecs = new APINodeList<AdCreativeInteractiveComponentsSpec>(request, json, header);
+  public static APINodeList<ConnectionsTargeting> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ConnectionsTargeting> connectionsTargetings = new APINodeList<ConnectionsTargeting>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -100,9 +100,9 @@ public class AdCreativeInteractiveComponentsSpec extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCreativeInteractiveComponentsSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          connectionsTargetings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adCreativeInteractiveComponentsSpecs;
+        return connectionsTargetings;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -112,20 +112,20 @@ public class AdCreativeInteractiveComponentsSpec extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adCreativeInteractiveComponentsSpecs.setCursors(before, after);
+                connectionsTargetings.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adCreativeInteractiveComponentsSpecs.setPaging(previous, next);
+            connectionsTargetings.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adCreativeInteractiveComponentsSpecs.setAppSecret(context.getAppSecretProof());
+              connectionsTargetings.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCreativeInteractiveComponentsSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              connectionsTargetings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -136,23 +136,23 @@ public class AdCreativeInteractiveComponentsSpec extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCreativeInteractiveComponentsSpecs.add(loadJSON(entry.getValue().toString(), context, header));
+                  connectionsTargetings.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCreativeInteractiveComponentsSpecs.add(loadJSON(obj.toString(), context, header));
+              connectionsTargetings.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adCreativeInteractiveComponentsSpecs;
+          return connectionsTargetings;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCreativeInteractiveComponentsSpecs.add(loadJSON(entry.getValue().toString(), context, header));
+              connectionsTargetings.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adCreativeInteractiveComponentsSpecs;
+          return connectionsTargetings;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -169,20 +169,20 @@ public class AdCreativeInteractiveComponentsSpec extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCreativeInteractiveComponentsSpecs.add(loadJSON(value.toString(), context, header));
+              connectionsTargetings.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adCreativeInteractiveComponentsSpecs;
+            return connectionsTargetings;
           }
 
           // Sixth, check if it's pure JsonObject
-          adCreativeInteractiveComponentsSpecs.clear();
-          adCreativeInteractiveComponentsSpecs.add(loadJSON(json, context, header));
-          return adCreativeInteractiveComponentsSpecs;
+          connectionsTargetings.clear();
+          connectionsTargetings.add(loadJSON(json, context, header));
+          return connectionsTargetings;
         }
       }
     } catch (Exception e) {
@@ -210,21 +210,21 @@ public class AdCreativeInteractiveComponentsSpec extends APINode {
   }
 
 
-  public List<Object> getFieldChildAttachments() {
-    return mChildAttachments;
+  public String getFieldId() {
+    return mId;
   }
 
-  public AdCreativeInteractiveComponentsSpec setFieldChildAttachments(List<Object> value) {
-    this.mChildAttachments = value;
+  public ConnectionsTargeting setFieldId(String value) {
+    this.mId = value;
     return this;
   }
 
-  public List<Object> getFieldComponents() {
-    return mComponents;
+  public String getFieldName() {
+    return mName;
   }
 
-  public AdCreativeInteractiveComponentsSpec setFieldComponents(List<Object> value) {
-    this.mComponents = value;
+  public ConnectionsTargeting setFieldName(String value) {
+    this.mName = value;
     return this;
   }
 
@@ -244,18 +244,18 @@ public class AdCreativeInteractiveComponentsSpec extends APINode {
     return gson;
   }
 
-  public AdCreativeInteractiveComponentsSpec copyFrom(AdCreativeInteractiveComponentsSpec instance) {
-    this.mChildAttachments = instance.mChildAttachments;
-    this.mComponents = instance.mComponents;
+  public ConnectionsTargeting copyFrom(ConnectionsTargeting instance) {
+    this.mId = instance.mId;
+    this.mName = instance.mName;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdCreativeInteractiveComponentsSpec> getParser() {
-    return new APIRequest.ResponseParser<AdCreativeInteractiveComponentsSpec>() {
-      public APINodeList<AdCreativeInteractiveComponentsSpec> parseResponse(String response, APIContext context, APIRequest<AdCreativeInteractiveComponentsSpec> request, String header) throws MalformedResponseException {
-        return AdCreativeInteractiveComponentsSpec.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ConnectionsTargeting> getParser() {
+    return new APIRequest.ResponseParser<ConnectionsTargeting>() {
+      public APINodeList<ConnectionsTargeting> parseResponse(String response, APIContext context, APIRequest<ConnectionsTargeting> request, String header) throws MalformedResponseException {
+        return ConnectionsTargeting.parseResponse(response, context, request, header);
       }
     };
   }

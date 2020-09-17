@@ -384,6 +384,10 @@ public class AdVideo extends APINode {
     return new APIRequestCreatePoll(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetReactions getReactions() {
+    return new APIRequestGetReactions(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetSharedPosts getSharedPosts() {
     return new APIRequestGetSharedPosts(this.getPrefixedId().toString(), context);
   }
@@ -3345,6 +3349,208 @@ public class AdVideo extends APINode {
 
   }
 
+  public static class APIRequestGetReactions extends APIRequest<Profile> {
+
+    APINodeList<Profile> lastResponse = null;
+    @Override
+    public APINodeList<Profile> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "type",
+    };
+
+    public static final String[] FIELDS = {
+      "can_post",
+      "id",
+      "link",
+      "name",
+      "pic",
+      "pic_crop",
+      "pic_large",
+      "pic_small",
+      "pic_square",
+      "profile_type",
+      "username",
+    };
+
+    @Override
+    public APINodeList<Profile> parseResponse(String response, String header) throws APIException {
+      return Profile.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<Profile> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<Profile> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<Profile>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<Profile>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<Profile>>() {
+           public APINodeList<Profile> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetReactions.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetReactions(String nodeId, APIContext context) {
+      super(context, nodeId, "/reactions", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetReactions setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetReactions setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetReactions setType (Profile.EnumType type) {
+      this.setParam("type", type);
+      return this;
+    }
+    public APIRequestGetReactions setType (String type) {
+      this.setParam("type", type);
+      return this;
+    }
+
+    public APIRequestGetReactions requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetReactions requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetReactions requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetReactions requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetReactions requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetReactions requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetReactions requestCanPostField () {
+      return this.requestCanPostField(true);
+    }
+    public APIRequestGetReactions requestCanPostField (boolean value) {
+      this.requestField("can_post", value);
+      return this;
+    }
+    public APIRequestGetReactions requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetReactions requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetReactions requestLinkField () {
+      return this.requestLinkField(true);
+    }
+    public APIRequestGetReactions requestLinkField (boolean value) {
+      this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGetReactions requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetReactions requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetReactions requestPicField () {
+      return this.requestPicField(true);
+    }
+    public APIRequestGetReactions requestPicField (boolean value) {
+      this.requestField("pic", value);
+      return this;
+    }
+    public APIRequestGetReactions requestPicCropField () {
+      return this.requestPicCropField(true);
+    }
+    public APIRequestGetReactions requestPicCropField (boolean value) {
+      this.requestField("pic_crop", value);
+      return this;
+    }
+    public APIRequestGetReactions requestPicLargeField () {
+      return this.requestPicLargeField(true);
+    }
+    public APIRequestGetReactions requestPicLargeField (boolean value) {
+      this.requestField("pic_large", value);
+      return this;
+    }
+    public APIRequestGetReactions requestPicSmallField () {
+      return this.requestPicSmallField(true);
+    }
+    public APIRequestGetReactions requestPicSmallField (boolean value) {
+      this.requestField("pic_small", value);
+      return this;
+    }
+    public APIRequestGetReactions requestPicSquareField () {
+      return this.requestPicSquareField(true);
+    }
+    public APIRequestGetReactions requestPicSquareField (boolean value) {
+      this.requestField("pic_square", value);
+      return this;
+    }
+    public APIRequestGetReactions requestProfileTypeField () {
+      return this.requestProfileTypeField(true);
+    }
+    public APIRequestGetReactions requestProfileTypeField (boolean value) {
+      this.requestField("profile_type", value);
+      return this;
+    }
+    public APIRequestGetReactions requestUsernameField () {
+      return this.requestUsernameField(true);
+    }
+    public APIRequestGetReactions requestUsernameField (boolean value) {
+      this.requestField("username", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetSharedPosts extends APIRequest<Post> {
 
     APINodeList<Post> lastResponse = null;
@@ -3383,6 +3589,7 @@ public class AdVideo extends APINode {
       "id",
       "implicit_place",
       "instagram_eligibility",
+      "instream_eligibility",
       "is_app_share",
       "is_eligible_for_promotion",
       "is_expired",
@@ -3705,6 +3912,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetSharedPosts requestInstagramEligibilityField (boolean value) {
       this.requestField("instagram_eligibility", value);
+      return this;
+    }
+    public APIRequestGetSharedPosts requestInstreamEligibilityField () {
+      return this.requestInstreamEligibilityField(true);
+    }
+    public APIRequestGetSharedPosts requestInstreamEligibilityField (boolean value) {
+      this.requestField("instream_eligibility", value);
       return this;
     }
     public APIRequestGetSharedPosts requestIsAppShareField () {
@@ -7056,6 +7270,8 @@ public class AdVideo extends APINode {
       VALUE_VIDEO_CREATIVE_EDITOR_AUTOGEN_AD_VIDEO("VIDEO_CREATIVE_EDITOR_AUTOGEN_AD_VIDEO"),
       @SerializedName("VIDEO_SUPERRES")
       VALUE_VIDEO_SUPERRES("VIDEO_SUPERRES"),
+      @SerializedName("VU_GENERATED_VIDEO")
+      VALUE_VU_GENERATED_VIDEO("VU_GENERATED_VIDEO"),
       @SerializedName("WOODHENGE")
       VALUE_WOODHENGE("WOODHENGE"),
       @SerializedName("WORK_KNOWLEDGE_VIDEO")

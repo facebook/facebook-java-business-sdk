@@ -685,6 +685,7 @@ public class AdsPixel extends APINode {
     }
     public static final String[] PARAMS = {
       "checks",
+      "connection_method",
     };
 
     public static final String[] FIELDS = {
@@ -755,6 +756,15 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetDaChecks setChecks (String checks) {
       this.setParam("checks", checks);
+      return this;
+    }
+
+    public APIRequestGetDaChecks setConnectionMethod (DACheck.EnumConnectionMethod connectionMethod) {
+      this.setParam("connection_method", connectionMethod);
+      return this;
+    }
+    public APIRequestGetDaChecks setConnectionMethod (String connectionMethod) {
+      this.setParam("connection_method", connectionMethod);
       return this;
     }
 
@@ -2634,8 +2644,12 @@ public class AdsPixel extends APINode {
   }
 
   public static enum EnumAutomaticMatchingFields {
+      @SerializedName("country")
+      VALUE_COUNTRY("country"),
       @SerializedName("ct")
       VALUE_CT("ct"),
+      @SerializedName("db")
+      VALUE_DB("db"),
       @SerializedName("em")
       VALUE_EM("em"),
       @SerializedName("fn")

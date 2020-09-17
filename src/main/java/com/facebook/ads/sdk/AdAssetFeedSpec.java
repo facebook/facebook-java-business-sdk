@@ -83,6 +83,8 @@ public class AdAssetFeedSpec extends APINode {
   private List<AdAssetFeedSpecLinkURL> mLinkUrls = null;
   @SerializedName("optimization_type")
   private String mOptimizationType = null;
+  @SerializedName("posts")
+  private List<Object> mPosts = null;
   @SerializedName("titles")
   private List<AdAssetFeedSpecTitle> mTitles = null;
   @SerializedName("videos")
@@ -394,6 +396,15 @@ public class AdAssetFeedSpec extends APINode {
     return this;
   }
 
+  public List<Object> getFieldPosts() {
+    return mPosts;
+  }
+
+  public AdAssetFeedSpec setFieldPosts(List<Object> value) {
+    this.mPosts = value;
+    return this;
+  }
+
   public List<AdAssetFeedSpecTitle> getFieldTitles() {
     return mTitles;
   }
@@ -586,6 +597,7 @@ public class AdAssetFeedSpec extends APINode {
     this.mImages = instance.mImages;
     this.mLinkUrls = instance.mLinkUrls;
     this.mOptimizationType = instance.mOptimizationType;
+    this.mPosts = instance.mPosts;
     this.mTitles = instance.mTitles;
     this.mVideos = instance.mVideos;
     this.context = instance.context;

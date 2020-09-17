@@ -783,6 +783,7 @@ public class Link extends APINode {
       "id",
       "implicit_place",
       "instagram_eligibility",
+      "instream_eligibility",
       "is_app_share",
       "is_eligible_for_promotion",
       "is_expired",
@@ -1105,6 +1106,13 @@ public class Link extends APINode {
     }
     public APIRequestGetSharedPosts requestInstagramEligibilityField (boolean value) {
       this.requestField("instagram_eligibility", value);
+      return this;
+    }
+    public APIRequestGetSharedPosts requestInstreamEligibilityField () {
+      return this.requestInstreamEligibilityField(true);
+    }
+    public APIRequestGetSharedPosts requestInstreamEligibilityField (boolean value) {
+      this.requestField("instream_eligibility", value);
       return this;
     }
     public APIRequestGetSharedPosts requestIsAppShareField () {

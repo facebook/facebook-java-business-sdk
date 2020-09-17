@@ -342,6 +342,14 @@ public class CommerceMerchantSettings extends APINode {
     return new APIRequestGetSetupStatus(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetShippingProfiles getShippingProfiles() {
+    return new APIRequestGetShippingProfiles(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateShippingProfile createShippingProfile() {
+    return new APIRequestCreateShippingProfile(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetTaxSettings getTaxSettings() {
     return new APIRequestGetTaxSettings(this.getPrefixedId().toString(), context);
   }
@@ -2280,6 +2288,262 @@ public class CommerceMerchantSettings extends APINode {
       this.requestField("shop_setup", value);
       return this;
     }
+  }
+
+  public static class APIRequestGetShippingProfiles extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "reference_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetShippingProfiles.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetShippingProfiles(String nodeId, APIContext context) {
+      super(context, nodeId, "/shipping_profiles", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetShippingProfiles setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetShippingProfiles setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetShippingProfiles setReferenceId (String referenceId) {
+      this.setParam("reference_id", referenceId);
+      return this;
+    }
+
+    public APIRequestGetShippingProfiles requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetShippingProfiles requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetShippingProfiles requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetShippingProfiles requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetShippingProfiles requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetShippingProfiles requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateShippingProfile extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "handling_time",
+      "is_default_shipping_profile",
+      "name",
+      "reference_id",
+      "shipping_destinations",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateShippingProfile.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateShippingProfile(String nodeId, APIContext context) {
+      super(context, nodeId, "/shipping_profiles", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateShippingProfile setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateShippingProfile setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateShippingProfile setHandlingTime (Map<String, String> handlingTime) {
+      this.setParam("handling_time", handlingTime);
+      return this;
+    }
+    public APIRequestCreateShippingProfile setHandlingTime (String handlingTime) {
+      this.setParam("handling_time", handlingTime);
+      return this;
+    }
+
+    public APIRequestCreateShippingProfile setIsDefaultShippingProfile (Boolean isDefaultShippingProfile) {
+      this.setParam("is_default_shipping_profile", isDefaultShippingProfile);
+      return this;
+    }
+    public APIRequestCreateShippingProfile setIsDefaultShippingProfile (String isDefaultShippingProfile) {
+      this.setParam("is_default_shipping_profile", isDefaultShippingProfile);
+      return this;
+    }
+
+    public APIRequestCreateShippingProfile setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateShippingProfile setReferenceId (String referenceId) {
+      this.setParam("reference_id", referenceId);
+      return this;
+    }
+
+    public APIRequestCreateShippingProfile setShippingDestinations (List<Map<String, String>> shippingDestinations) {
+      this.setParam("shipping_destinations", shippingDestinations);
+      return this;
+    }
+    public APIRequestCreateShippingProfile setShippingDestinations (String shippingDestinations) {
+      this.setParam("shipping_destinations", shippingDestinations);
+      return this;
+    }
+
+    public APIRequestCreateShippingProfile requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateShippingProfile requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateShippingProfile requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateShippingProfile requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateShippingProfile requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateShippingProfile requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetTaxSettings extends APIRequest<APINode> {

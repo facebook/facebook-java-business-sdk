@@ -7086,6 +7086,8 @@ public class Group extends APINode {
       VALUE_SUPPORT("SUPPORT"),
       @SerializedName("TEAMMATES")
       VALUE_TEAMMATES("TEAMMATES"),
+      @SerializedName("THEME")
+      VALUE_THEME("THEME"),
       @SerializedName("TRAVEL_PLANNING")
       VALUE_TRAVEL_PLANNING("TRAVEL_PLANNING"),
       @SerializedName("WORK_ANNOUNCEMENT")
@@ -7203,6 +7205,8 @@ public class Group extends APINode {
       VALUE_SUPPORT("SUPPORT"),
       @SerializedName("TEAMMATES")
       VALUE_TEAMMATES("TEAMMATES"),
+      @SerializedName("THEME")
+      VALUE_THEME("THEME"),
       @SerializedName("TRAVEL_PLANNING")
       VALUE_TRAVEL_PLANNING("TRAVEL_PLANNING"),
       @SerializedName("WORK_ANNOUNCEMENT")

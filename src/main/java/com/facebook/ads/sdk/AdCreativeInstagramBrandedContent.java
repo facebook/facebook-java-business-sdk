@@ -54,25 +54,21 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdCreativeInteractiveComponentsSpec extends APINode {
-  @SerializedName("child_attachments")
-  private List<Object> mChildAttachments = null;
-  @SerializedName("components")
-  private List<Object> mComponents = null;
+public class AdCreativeInstagramBrandedContent extends APINode {
   protected static Gson gson = null;
 
-  public AdCreativeInteractiveComponentsSpec() {
+  public AdCreativeInstagramBrandedContent() {
   }
 
   public String getId() {
     return null;
   }
-  public static AdCreativeInteractiveComponentsSpec loadJSON(String json, APIContext context, String header) {
-    AdCreativeInteractiveComponentsSpec adCreativeInteractiveComponentsSpec = getGson().fromJson(json, AdCreativeInteractiveComponentsSpec.class);
+  public static AdCreativeInstagramBrandedContent loadJSON(String json, APIContext context, String header) {
+    AdCreativeInstagramBrandedContent adCreativeInstagramBrandedContent = getGson().fromJson(json, AdCreativeInstagramBrandedContent.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adCreativeInteractiveComponentsSpec.toString());
+      JsonElement o2 = parser.parse(adCreativeInstagramBrandedContent.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -82,14 +78,14 @@ public class AdCreativeInteractiveComponentsSpec extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    adCreativeInteractiveComponentsSpec.context = context;
-    adCreativeInteractiveComponentsSpec.rawValue = json;
-    adCreativeInteractiveComponentsSpec.header = header;
-    return adCreativeInteractiveComponentsSpec;
+    adCreativeInstagramBrandedContent.context = context;
+    adCreativeInstagramBrandedContent.rawValue = json;
+    adCreativeInstagramBrandedContent.header = header;
+    return adCreativeInstagramBrandedContent;
   }
 
-  public static APINodeList<AdCreativeInteractiveComponentsSpec> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdCreativeInteractiveComponentsSpec> adCreativeInteractiveComponentsSpecs = new APINodeList<AdCreativeInteractiveComponentsSpec>(request, json, header);
+  public static APINodeList<AdCreativeInstagramBrandedContent> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCreativeInstagramBrandedContent> adCreativeInstagramBrandedContents = new APINodeList<AdCreativeInstagramBrandedContent>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -100,9 +96,9 @@ public class AdCreativeInteractiveComponentsSpec extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCreativeInteractiveComponentsSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adCreativeInstagramBrandedContents.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adCreativeInteractiveComponentsSpecs;
+        return adCreativeInstagramBrandedContents;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -112,20 +108,20 @@ public class AdCreativeInteractiveComponentsSpec extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adCreativeInteractiveComponentsSpecs.setCursors(before, after);
+                adCreativeInstagramBrandedContents.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adCreativeInteractiveComponentsSpecs.setPaging(previous, next);
+            adCreativeInstagramBrandedContents.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adCreativeInteractiveComponentsSpecs.setAppSecret(context.getAppSecretProof());
+              adCreativeInstagramBrandedContents.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCreativeInteractiveComponentsSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adCreativeInstagramBrandedContents.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -136,23 +132,23 @@ public class AdCreativeInteractiveComponentsSpec extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCreativeInteractiveComponentsSpecs.add(loadJSON(entry.getValue().toString(), context, header));
+                  adCreativeInstagramBrandedContents.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCreativeInteractiveComponentsSpecs.add(loadJSON(obj.toString(), context, header));
+              adCreativeInstagramBrandedContents.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adCreativeInteractiveComponentsSpecs;
+          return adCreativeInstagramBrandedContents;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCreativeInteractiveComponentsSpecs.add(loadJSON(entry.getValue().toString(), context, header));
+              adCreativeInstagramBrandedContents.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adCreativeInteractiveComponentsSpecs;
+          return adCreativeInstagramBrandedContents;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -169,20 +165,20 @@ public class AdCreativeInteractiveComponentsSpec extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCreativeInteractiveComponentsSpecs.add(loadJSON(value.toString(), context, header));
+              adCreativeInstagramBrandedContents.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adCreativeInteractiveComponentsSpecs;
+            return adCreativeInstagramBrandedContents;
           }
 
           // Sixth, check if it's pure JsonObject
-          adCreativeInteractiveComponentsSpecs.clear();
-          adCreativeInteractiveComponentsSpecs.add(loadJSON(json, context, header));
-          return adCreativeInteractiveComponentsSpecs;
+          adCreativeInstagramBrandedContents.clear();
+          adCreativeInstagramBrandedContents.add(loadJSON(json, context, header));
+          return adCreativeInstagramBrandedContents;
         }
       }
     } catch (Exception e) {
@@ -210,24 +206,6 @@ public class AdCreativeInteractiveComponentsSpec extends APINode {
   }
 
 
-  public List<Object> getFieldChildAttachments() {
-    return mChildAttachments;
-  }
-
-  public AdCreativeInteractiveComponentsSpec setFieldChildAttachments(List<Object> value) {
-    this.mChildAttachments = value;
-    return this;
-  }
-
-  public List<Object> getFieldComponents() {
-    return mComponents;
-  }
-
-  public AdCreativeInteractiveComponentsSpec setFieldComponents(List<Object> value) {
-    this.mComponents = value;
-    return this;
-  }
-
 
 
 
@@ -244,18 +222,16 @@ public class AdCreativeInteractiveComponentsSpec extends APINode {
     return gson;
   }
 
-  public AdCreativeInteractiveComponentsSpec copyFrom(AdCreativeInteractiveComponentsSpec instance) {
-    this.mChildAttachments = instance.mChildAttachments;
-    this.mComponents = instance.mComponents;
+  public AdCreativeInstagramBrandedContent copyFrom(AdCreativeInstagramBrandedContent instance) {
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdCreativeInteractiveComponentsSpec> getParser() {
-    return new APIRequest.ResponseParser<AdCreativeInteractiveComponentsSpec>() {
-      public APINodeList<AdCreativeInteractiveComponentsSpec> parseResponse(String response, APIContext context, APIRequest<AdCreativeInteractiveComponentsSpec> request, String header) throws MalformedResponseException {
-        return AdCreativeInteractiveComponentsSpec.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdCreativeInstagramBrandedContent> getParser() {
+    return new APIRequest.ResponseParser<AdCreativeInstagramBrandedContent>() {
+      public APINodeList<AdCreativeInstagramBrandedContent> parseResponse(String response, APIContext context, APIRequest<AdCreativeInstagramBrandedContent> request, String header) throws MalformedResponseException {
+        return AdCreativeInstagramBrandedContent.parseResponse(response, context, request, header);
       }
     };
   }

@@ -280,6 +280,8 @@ public class AdNetworkAnalyticsSyncQueryResult extends APINode {
       VALUE_INSTANT_ARTICLE_ID("INSTANT_ARTICLE_ID"),
       @SerializedName("INSTANT_ARTICLE_PAGE_ID")
       VALUE_INSTANT_ARTICLE_PAGE_ID("INSTANT_ARTICLE_PAGE_ID"),
+      @SerializedName("IS_DEAL_BACKFILL")
+      VALUE_IS_DEAL_BACKFILL("IS_DEAL_BACKFILL"),
       @SerializedName("PLACEMENT")
       VALUE_PLACEMENT("PLACEMENT"),
       @SerializedName("PLACEMENT_NAME")

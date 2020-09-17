@@ -496,6 +496,10 @@ public class Application extends APINode {
     return new APIRequestGetAgencies(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateAggregateRevenue createAggregateRevenue() {
+    return new APIRequestCreateAggregateRevenue(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetAndroidDialogConfigs getAndroidDialogConfigs() {
     return new APIRequestGetAndroidDialogConfigs(this.getPrefixedId().toString(), context);
   }
@@ -1501,6 +1505,7 @@ public class Application extends APINode {
       "bundle_id",
       "bundle_short_version",
       "bundle_version",
+      "click_id",
       "consider_views",
       "custom_events",
       "custom_events_file",
@@ -1513,6 +1518,7 @@ public class Application extends APINode {
       "include_dwell_data",
       "include_video_data",
       "install_referrer",
+      "install_timestamp",
       "installer_package",
       "limited_data_use",
       "migration_bundle",
@@ -1644,6 +1650,11 @@ public class Application extends APINode {
       return this;
     }
 
+    public APIRequestCreateActivity setClickId (String clickId) {
+      this.setParam("click_id", clickId);
+      return this;
+    }
+
     public APIRequestCreateActivity setConsiderViews (Boolean considerViews) {
       this.setParam("consider_views", considerViews);
       return this;
@@ -1741,6 +1752,15 @@ public class Application extends APINode {
 
     public APIRequestCreateActivity setInstallReferrer (String installReferrer) {
       this.setParam("install_referrer", installReferrer);
+      return this;
+    }
+
+    public APIRequestCreateActivity setInstallTimestamp (Long installTimestamp) {
+      this.setParam("install_timestamp", installTimestamp);
+      return this;
+    }
+    public APIRequestCreateActivity setInstallTimestamp (String installTimestamp) {
+      this.setParam("install_timestamp", installTimestamp);
       return this;
     }
 
@@ -2649,6 +2669,136 @@ public class Application extends APINode {
       this.requestField("vertical_id", value);
       return this;
     }
+  }
+
+  public static class APIRequestCreateAggregateRevenue extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "ecpms",
+      "query_ids",
+      "request_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateAggregateRevenue.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateAggregateRevenue(String nodeId, APIContext context) {
+      super(context, nodeId, "/aggregate_revenue", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateAggregateRevenue setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAggregateRevenue setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateAggregateRevenue setEcpms (List<String> ecpms) {
+      this.setParam("ecpms", ecpms);
+      return this;
+    }
+    public APIRequestCreateAggregateRevenue setEcpms (String ecpms) {
+      this.setParam("ecpms", ecpms);
+      return this;
+    }
+
+    public APIRequestCreateAggregateRevenue setQueryIds (List<String> queryIds) {
+      this.setParam("query_ids", queryIds);
+      return this;
+    }
+    public APIRequestCreateAggregateRevenue setQueryIds (String queryIds) {
+      this.setParam("query_ids", queryIds);
+      return this;
+    }
+
+    public APIRequestCreateAggregateRevenue setRequestId (String requestId) {
+      this.setParam("request_id", requestId);
+      return this;
+    }
+
+    public APIRequestCreateAggregateRevenue requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateAggregateRevenue requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAggregateRevenue requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateAggregateRevenue requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAggregateRevenue requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAggregateRevenue requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetAndroidDialogConfigs extends APIRequest<APINode> {
@@ -5022,6 +5172,7 @@ public class Application extends APINode {
     }
     public static final String[] PARAMS = {
       "checks",
+      "connection_method",
     };
 
     public static final String[] FIELDS = {
@@ -5092,6 +5243,15 @@ public class Application extends APINode {
     }
     public APIRequestGetDaChecks setChecks (String checks) {
       this.setParam("checks", checks);
+      return this;
+    }
+
+    public APIRequestGetDaChecks setConnectionMethod (DACheck.EnumConnectionMethod connectionMethod) {
+      this.setParam("connection_method", connectionMethod);
+      return this;
+    }
+    public APIRequestGetDaChecks setConnectionMethod (String connectionMethod) {
+      this.setParam("connection_method", connectionMethod);
       return this;
     }
 
@@ -7055,6 +7215,7 @@ public class Application extends APINode {
     public static final String[] PARAMS = {
       "device_id",
       "extinfo",
+      "os_version",
       "platform",
       "sdk_version",
     };
@@ -7126,6 +7287,11 @@ public class Application extends APINode {
     }
     public APIRequestGetMobileSdkGk setExtinfo (String extinfo) {
       this.setParam("extinfo", extinfo);
+      return this;
+    }
+
+    public APIRequestGetMobileSdkGk setOsVersion (String osVersion) {
+      this.setParam("os_version", osVersion);
       return this;
     }
 

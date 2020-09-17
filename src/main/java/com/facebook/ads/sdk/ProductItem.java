@@ -635,6 +635,7 @@ public class ProductItem extends APINode {
       "name",
       "product_catalog",
       "product_count",
+      "retailer_id",
     };
 
     @Override
@@ -780,6 +781,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGetProductSets requestProductCountField (boolean value) {
       this.requestField("product_count", value);
+      return this;
+    }
+    public APIRequestGetProductSets requestRetailerIdField () {
+      return this.requestRetailerIdField(true);
+    }
+    public APIRequestGetProductSets requestRetailerIdField (boolean value) {
+      this.requestField("retailer_id", value);
       return this;
     }
   }
