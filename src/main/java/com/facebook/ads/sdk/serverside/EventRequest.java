@@ -17,6 +17,7 @@
  */
 package com.facebook.ads.sdk.serverside;
 
+import com.facebook.ads.sdk.APIConfig;
 import com.facebook.ads.sdk.APIContext;
 import com.facebook.ads.sdk.APIException;
 import com.facebook.ads.sdk.AdsPixel;
@@ -28,9 +29,12 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
+
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -63,6 +67,7 @@ public class EventRequest {
 
   private String pixelId;
   private APIContext context;
+  private HttpServiceInterface httpServiceClient;
 
   /**
    * Constructor.
@@ -87,11 +92,12 @@ public class EventRequest {
    * @param uploadId Unique id used to denote the current set being uploaded.
    * @param uploadTag Tag string added to track your Offline event uploads.
    * @param uploadSource The origin/source of data for the dataset to be uploaded.
+   * @param httpServiceClient The HttpServiceInterface client to use for executing the request.
    * Facebook
    */
   public EventRequest(String pixelId, APIContext context, List<Event> data,
                       String testEventCode, String partnerAgent, String namespaceId, String uploadId,
-                      String uploadTag, String uploadSource) {
+                      String uploadTag, String uploadSource, HttpServiceInterface httpServiceClient) {
     this.data = data;
     this.testEventCode = testEventCode;
     this.partnerAgent = partnerAgent;
@@ -101,6 +107,7 @@ public class EventRequest {
     this.uploadId = uploadId;
     this.uploadTag = uploadTag;
     this.uploadSource = uploadSource;
+    this.httpServiceClient = httpServiceClient;
   }
 
   static /*package*/ synchronized Gson getGson() {
@@ -344,6 +351,24 @@ public class EventRequest {
   }
 
   /**
+   * Get the httpServiceClient.
+   *
+   * @return httpServiceClient
+   */
+  public HttpServiceInterface getHttpServiceClient() {
+    return httpServiceClient;
+  }
+
+  /**
+   * Set a custom http client that will be used to send the event request.
+   *
+   * @param httpServiceClient the object implementing HttpServiceInterface
+   */
+  public void setHttpServiceClient(HttpServiceInterface httpServiceClient) {
+    this.httpServiceClient = httpServiceClient;
+  }
+
+  /**
    * Synchronously send Event to Facebook GraphAPI.
    *
    * @return event response
@@ -353,6 +378,9 @@ public class EventRequest {
     APIRequestCreateEvent event = getPixelCreateEvent();
     EventResponse response = null;
     try {
+      if (httpServiceClient != null) {
+        return executeCustomHttpService(httpServiceClient, event);
+      }
       AdsPixel pixel = event.execute();
       response = gson.fromJson(pixel.getRawResponse(), EventResponse.class);
       context.log(String.format("Successfully sent %d event(s)", response.getEventsReceived()));
@@ -395,6 +423,32 @@ public class EventRequest {
     }
   }
 
+  private EventResponse executeCustomHttpService(HttpServiceInterface httpClient, APIRequestCreateEvent event) {
+    String url = String.format("%s/%s/%s/events",
+        APIConfig.DEFAULT_API_BASE,
+        APIConfig.DEFAULT_API_VERSION,
+        pixelId
+    );
+    Map<String, String> headers = new HashMap<String, String>();
+    headers.put("User-Agent", APIConfig.USER_AGENT);
+    HttpServiceParams params = new HttpServiceParams(
+        context.getAccessToken(),
+        context.getAppSecretProof(),
+        data,
+        testEventCode,
+        partnerAgent,
+        namespaceId,
+        uploadId,
+        uploadTag,
+        uploadSource
+    );
+    return httpClient.executeRequest(
+        url,
+        HttpMethodEnum.POST,
+        headers,
+        params
+    );
+  }
 
   public String getSerializedPayload() {
     List<Event> s2sData = getData();

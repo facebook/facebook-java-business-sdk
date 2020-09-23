@@ -17,9 +17,20 @@
  */
 package com.facebook.ads.sdk.serverside;
 
+import com.facebook.ads.sdk.APIConfig;
+import com.facebook.ads.sdk.APIContext;
+import com.facebook.ads.sdk.APIException;
 import org.junit.Test;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class EventRequestTest {
   @Test
@@ -38,5 +49,61 @@ public class EventRequestTest {
     assertEquals(eventRequest.getUploadSource(), "upload-source-4");
     assertEquals(eventRequest.getTestEventCode(), "test-event-code-5");
     assertEquals(eventRequest.getPartnerAgent(), "partner-agent-6");
+  }
+
+  @Test
+  public void SetHttpClientTest() throws APIException {
+    HttpServiceInterface mockClient = mock(HttpServiceInterface.class);
+    APIContext mockApiContext = mock(APIContext.class);
+    String accessToken = "access-token-0";
+    String appSecretProof = "app-secret-proof-01";
+    doReturn(accessToken).when(mockApiContext).getAccessToken();
+    doReturn(appSecretProof).when(mockApiContext).getAppSecretProof();
+    String pixelId = "pixel-id-1";
+    String testEventCode = "test-code-2";
+    String partnerAgent = "partnerAgent-3";
+    String namespaceId = "namespaceId-4";
+    String uploadId = "uploadId-5";
+    String uploadTag = "uploadTag-6";
+    String uploadSource = "uploadSource-7";
+    Event event = new Event();
+    UserData userData = new UserData();
+    userData.email("joe@eg.com");
+    event
+        .userData(userData)
+        .eventTime(System.currentTimeMillis() / 1000L);
+    EventRequest eventRequest = new EventRequest(pixelId, mockApiContext);
+    List<Event> data = Collections.singletonList(event);
+    eventRequest
+        .testEventCode(testEventCode)
+        .partnerAgent(partnerAgent)
+        .namespaceId(namespaceId)
+        .uploadId(uploadId)
+        .uploadTag(uploadTag)
+        .uploadSource(uploadSource)
+        .data(data);
+
+    eventRequest.setHttpServiceClient(mockClient);
+    String expectedUrl = String.format("%s/%s/%s/events",
+        APIConfig.DEFAULT_API_BASE,
+        APIConfig.DEFAULT_API_VERSION,
+        pixelId
+    );
+    HttpServiceParams params = new HttpServiceParams(
+        accessToken,
+        appSecretProof,
+        data,
+        testEventCode,
+        partnerAgent,
+        namespaceId,
+        uploadId,
+        uploadTag,
+        uploadSource
+    );
+    Map<String, String> expectedHeaders = new HashMap<String, String>();
+    expectedHeaders.put("User-Agent", APIConfig.USER_AGENT);
+    eventRequest.execute();
+
+    verify(mockClient).executeRequest(expectedUrl, HttpMethodEnum.POST, expectedHeaders, params);
   }
 }
