@@ -480,6 +480,19 @@ public class EventRequest {
     return event;
   }
 
+  public EventRequest cloneWithoutData() {
+    EventRequest cloned = new EventRequest(pixelId, context);
+    cloned
+        .testEventCode(testEventCode)
+        .partnerAgent(partnerAgent)
+        .namespaceId(namespaceId)
+        .uploadId(uploadId)
+        .uploadTag(uploadTag)
+        .uploadSource(uploadSource);
+
+    return cloned;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -491,7 +504,11 @@ public class EventRequest {
     EventRequest eventRequest = (EventRequest) o;
     return Objects.equals(this.data, eventRequest.data)
         && Objects.equals(this.testEventCode, eventRequest.testEventCode)
-        && Objects.equals(this.partnerAgent, eventRequest.partnerAgent);
+        && Objects.equals(this.partnerAgent, eventRequest.partnerAgent)
+        && Objects.equals(this.namespaceId, eventRequest.namespaceId)
+        && Objects.equals(this.uploadId, eventRequest.uploadId)
+        && Objects.equals(this.uploadTag, eventRequest.uploadTag)
+        && Objects.equals(this.uploadSource, eventRequest.uploadSource);
   }
 
   @Override
@@ -507,6 +524,10 @@ public class EventRequest {
     sb.append("    data: ").append(toIndentedString(data)).append("\n");
     sb.append("    testEventCode: ").append(toIndentedString(testEventCode)).append("\n");
     sb.append("    partnerAgent: ").append(toIndentedString(partnerAgent)).append("\n");
+    sb.append("    namespaceId: ").append(toIndentedString(namespaceId)).append("\n");
+    sb.append("    uploadId: ").append(toIndentedString(uploadId)).append("\n");
+    sb.append("    uploadTag: ").append(toIndentedString(uploadTag)).append("\n");
+    sb.append("    uploadSource: ").append(toIndentedString(uploadSource)).append("\n");
     sb.append("}");
     return sb.toString();
   }

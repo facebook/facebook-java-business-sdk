@@ -106,4 +106,27 @@ public class EventRequestTest {
 
     verify(mockClient).executeRequest(expectedUrl, HttpMethodEnum.POST, expectedHeaders, params);
   }
+
+  @Test
+  public void CloneWithoutDataTest() {
+    String pixelId = "pixelid";
+    APIContext mockApiContext = mock(APIContext.class);
+    EventRequest eventRequest = new EventRequest(pixelId, mockApiContext);
+    eventRequest.namespaceId("11")
+        .data(Collections.singletonList(mock(Event.class)))
+        .uploadId("222")
+        .uploadTag("upload-tag-3")
+        .uploadSource("upload-source-4")
+        .testEventCode("test-event-code-5")
+        .partnerAgent("partner-agent-6");
+    EventRequest expectedEventRequest = new EventRequest(pixelId, mockApiContext);
+    expectedEventRequest.namespaceId(eventRequest.getNamespaceId())
+        .uploadId(eventRequest.getUploadId())
+        .uploadTag(eventRequest.getUploadTag())
+        .uploadSource(eventRequest.getUploadSource())
+        .testEventCode(eventRequest.getTestEventCode())
+        .partnerAgent(eventRequest.getPartnerAgent());
+
+    assertEquals(expectedEventRequest, eventRequest.cloneWithoutData());
+  }
 }
