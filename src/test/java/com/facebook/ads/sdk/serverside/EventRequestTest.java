@@ -21,6 +21,7 @@ import com.facebook.ads.sdk.APIConfig;
 import com.facebook.ads.sdk.APIContext;
 import com.facebook.ads.sdk.APIException;
 import org.junit.Test;
+import org.mockito.ArgumentMatchers;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -31,6 +32,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.times;
 
 public class EventRequestTest {
   @Test
@@ -55,10 +57,18 @@ public class EventRequestTest {
   public void SetHttpClientTest() throws APIException {
     HttpServiceInterface mockClient = mock(HttpServiceInterface.class);
     APIContext mockApiContext = mock(APIContext.class);
+    EventResponse mockEventResponse = mock(EventResponse.class);
     String accessToken = "access-token-0";
     String appSecretProof = "app-secret-proof-01";
     doReturn(accessToken).when(mockApiContext).getAccessToken();
+    doReturn(true).when(mockApiContext).hasAppSecret();
     doReturn(appSecretProof).when(mockApiContext).getAppSecretProof();
+    doReturn(mockEventResponse).when(mockClient).executeRequest(
+        ArgumentMatchers.<String>any(),
+        ArgumentMatchers.<HttpMethodEnum>any(),
+        ArgumentMatchers.<Map<String, String>>any(),
+        ArgumentMatchers.<HttpServiceParams>any()
+    );
     String pixelId = "pixel-id-1";
     String testEventCode = "test-code-2";
     String partnerAgent = "partnerAgent-3";
@@ -102,9 +112,58 @@ public class EventRequestTest {
     );
     Map<String, String> expectedHeaders = new HashMap<String, String>();
     expectedHeaders.put("User-Agent", APIConfig.USER_AGENT);
+    EventResponse actualEventResponse = eventRequest.execute();
+
+    verify(mockClient).executeRequest(expectedUrl, HttpMethodEnum.POST, expectedHeaders, params);
+    assertEquals(mockEventResponse, actualEventResponse);
+  }
+
+  @Test
+  public void SetHttpClientWhenThereIsNoAppSecretProofTest() throws APIException {
+    HttpServiceInterface mockClient = mock(HttpServiceInterface.class);
+    APIContext mockApiContext = mock(APIContext.class);
+    String accessToken = "access-token-0";
+    doReturn(accessToken).when(mockApiContext).getAccessToken();
+    doReturn(false).when(mockApiContext).hasAppSecret();
+    doReturn(mock(EventResponse.class)).when(mockClient).executeRequest(
+        ArgumentMatchers.<String>any(),
+        ArgumentMatchers.<HttpMethodEnum>any(),
+        ArgumentMatchers.<Map<String, String>>any(),
+        ArgumentMatchers.<HttpServiceParams>any()
+    );
+    String pixelId = "pixel-id-1";
+    Event event = new Event();
+    UserData userData = new UserData();
+    userData.email("joe@eg.com");
+    event
+        .userData(userData)
+        .eventTime(System.currentTimeMillis() / 1000L);
+    EventRequest eventRequest = new EventRequest(pixelId, mockApiContext);
+    List<Event> data = Collections.singletonList(event);
+    eventRequest.data(data);
+    eventRequest.setHttpServiceClient(mockClient);
+    String expectedUrl = String.format("%s/%s/%s/events",
+        APIConfig.DEFAULT_API_BASE,
+        APIConfig.DEFAULT_API_VERSION,
+        pixelId
+    );
+    HttpServiceParams params = new HttpServiceParams(
+        accessToken,
+        null,
+        data,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+    );
+    Map<String, String> expectedHeaders = new HashMap<String, String>();
+    expectedHeaders.put("User-Agent", APIConfig.USER_AGENT);
     eventRequest.execute();
 
     verify(mockClient).executeRequest(expectedUrl, HttpMethodEnum.POST, expectedHeaders, params);
+    verify(mockApiContext, times(0)).getAppSecretProof();
   }
 
   @Test

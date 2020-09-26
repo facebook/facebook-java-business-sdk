@@ -375,14 +375,15 @@ public class EventRequest {
    * @throws APIException Api Exception
    */
   public EventResponse execute() throws APIException {
-    APIRequestCreateEvent event = getPixelCreateEvent();
-    EventResponse response = null;
     try {
-      if (httpServiceClient != null) {
-        return executeCustomHttpService(httpServiceClient, event);
+      EventResponse response = null;
+      if (httpServiceClient == null) {
+        APIRequestCreateEvent event = getPixelCreateEvent();
+        AdsPixel pixel = event.execute();
+        response = gson.fromJson(pixel.getRawResponse(), EventResponse.class);
+      } else {
+        response = executeCustomHttpService(httpServiceClient);
       }
-      AdsPixel pixel = event.execute();
-      response = gson.fromJson(pixel.getRawResponse(), EventResponse.class);
       context.log(String.format("Successfully sent %d event(s)", response.getEventsReceived()));
       return response;
     } catch (APIException e) {
@@ -423,7 +424,7 @@ public class EventRequest {
     }
   }
 
-  private EventResponse executeCustomHttpService(HttpServiceInterface httpClient, APIRequestCreateEvent event) {
+  private EventResponse executeCustomHttpService(HttpServiceInterface httpClient) {
     String url = String.format("%s/%s/%s/events",
         APIConfig.DEFAULT_API_BASE,
         APIConfig.DEFAULT_API_VERSION,
@@ -431,9 +432,13 @@ public class EventRequest {
     );
     Map<String, String> headers = new HashMap<String, String>();
     headers.put("User-Agent", APIConfig.USER_AGENT);
+    String appSecretProof = null;
+    if (context.hasAppSecret()) {
+      appSecretProof = context.getAppSecretProof();
+    }
     HttpServiceParams params = new HttpServiceParams(
         context.getAccessToken(),
-        context.getAppSecretProof(),
+        appSecretProof,
         data,
         testEventCode,
         partnerAgent,
