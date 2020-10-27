@@ -51,14 +51,16 @@ public class Sha256StringAdaptor extends TypeAdapter<String> {
       }
       else {
         String normalizedString = ServerSideApiUtil.normalize(input, fieldName);
-        hashedValue = ServerSideApiUtil.hash(normalizedString);
+        if (normalizedString != null) {
+          hashedValue = ServerSideApiUtil.hash(normalizedString);
+        }
       }
     }
 
     writer.value(hashedValue);
   }
 
-  private String getFieldName(JsonWriter writer)
+  protected String getFieldName(JsonWriter writer)
       throws NoSuchFieldException, IllegalAccessException {
 
     Field nameField = JsonWriter.class.getDeclaredField("deferredName");

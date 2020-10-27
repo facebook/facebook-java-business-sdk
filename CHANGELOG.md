@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 
 ## Unreleased
+### Fixed
+- Stop sending empty hashed strings when normalizing params.
 
 ## v8.0.3
 

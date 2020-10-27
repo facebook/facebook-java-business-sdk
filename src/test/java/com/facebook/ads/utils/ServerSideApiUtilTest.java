@@ -23,9 +23,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static com.facebook.ads.utils.ServerSideApiConstants.*;
 import static com.facebook.ads.utils.ServerSideApiUtil.normalize;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class ServerSideApiUtilTest {
   @Rule
@@ -35,14 +39,12 @@ public class ServerSideApiUtilTest {
   public void NormalizeF5firstTest() {
     assertEquals(normalize("George", F5FIRST), "georg");
     assertEquals(normalize(" John ", F5FIRST), "john");
-    assertEquals(normalize("", F5FIRST), "");
   }
 
   @Test
   public void NormalizeF5lastTest() {
     assertEquals(normalize("Washington", F5LAST), "washi");
     assertEquals(normalize(" Adams ", F5LAST), "adams");
-    assertEquals(normalize("", F5LAST), "");
   }
 
   @Test
@@ -50,7 +52,6 @@ public class ServerSideApiUtilTest {
     assertEquals(normalize("g", FI), "g");
     assertEquals(normalize(" G ", FI), "g");
     assertEquals(normalize("GW", FI), "g");
-    assertEquals(normalize("", FI), "");
   }
 
   @Test
@@ -177,5 +178,42 @@ public class ServerSideApiUtilTest {
     thrown.expect(IllegalArgumentException.class);
     thrown.expectMessage("Invalid doby: '-123'. Please specify the year in 'YYYY' format.");
     normalize("-123", DOBY);
+  }
+
+  @Test
+  public void NormalizeSanitizesEmptyFieldsToNull() {
+    List<String> params = Arrays.asList(
+      EMAIL,
+      PHONE_NUMBER,
+      GENDER,
+      DATE_OF_BIRTH,
+      LAST_NAME,
+      FIRST_NAME,
+      CITY,
+      COUNTRY,
+      STATE,
+      ZIP_CODE,
+      EXTERNAL_ID,
+      CURRENCY,
+      CLIENT_IP_ADDRESS,
+      CLIENT_USER_AGENT,
+      FBC,
+      FBP,
+      SUBSCRIPTION_ID,
+      FB_LOGIN_ID,
+      LEAD_ID,
+      F5FIRST,
+      F5LAST,
+      FI,
+      DOBD,
+      DOBM,
+      DOBY
+    );
+
+    for (String param : params) {
+      assertNull(normalize("", param));
+      assertNull(normalize("\n", param));
+      assertNull(normalize(" \t   ", param));
+    }
   }
 }
