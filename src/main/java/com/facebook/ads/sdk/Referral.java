@@ -69,6 +69,8 @@ public class Referral extends APINode {
   private Boolean mNeedPromoCode = null;
   @SerializedName("offer_origin")
   private String mOfferOrigin = null;
+  @SerializedName("privacy_policy_link")
+  private String mPrivacyPolicyLink = null;
   @SerializedName("promotion_text")
   private String mPromotionText = null;
   @SerializedName("receiver_benefits_text")
@@ -77,6 +79,8 @@ public class Referral extends APINode {
   private String mReferralLinkUri = null;
   @SerializedName("sender_benefits_text")
   private String mSenderBenefitsText = null;
+  @SerializedName("terms_and_condition_link")
+  private String mTermsAndConditionLink = null;
   protected static Gson gson = null;
 
   Referral() {
@@ -327,6 +331,10 @@ public class Referral extends APINode {
     return mOfferOrigin;
   }
 
+  public String getFieldPrivacyPolicyLink() {
+    return mPrivacyPolicyLink;
+  }
+
   public String getFieldPromotionText() {
     return mPromotionText;
   }
@@ -341,6 +349,10 @@ public class Referral extends APINode {
 
   public String getFieldSenderBenefitsText() {
     return mSenderBenefitsText;
+  }
+
+  public String getFieldTermsAndConditionLink() {
+    return mTermsAndConditionLink;
   }
 
 
@@ -467,10 +479,12 @@ public class Referral extends APINode {
       "namespace",
       "need_promo_code",
       "offer_origin",
+      "privacy_policy_link",
       "promotion_text",
       "receiver_benefits_text",
       "referral_link_uri",
       "sender_benefits_text",
+      "terms_and_condition_link",
     };
 
     @Override
@@ -611,6 +625,13 @@ public class Referral extends APINode {
       this.requestField("offer_origin", value);
       return this;
     }
+    public APIRequestGet requestPrivacyPolicyLinkField () {
+      return this.requestPrivacyPolicyLinkField(true);
+    }
+    public APIRequestGet requestPrivacyPolicyLinkField (boolean value) {
+      this.requestField("privacy_policy_link", value);
+      return this;
+    }
     public APIRequestGet requestPromotionTextField () {
       return this.requestPromotionTextField(true);
     }
@@ -639,6 +660,13 @@ public class Referral extends APINode {
       this.requestField("sender_benefits_text", value);
       return this;
     }
+    public APIRequestGet requestTermsAndConditionLinkField () {
+      return this.requestTermsAndConditionLinkField(true);
+    }
+    public APIRequestGet requestTermsAndConditionLinkField (boolean value) {
+      this.requestField("terms_and_condition_link", value);
+      return this;
+    }
   }
 
   public static class APIRequestUpdate extends APIRequest<Referral> {
@@ -655,10 +683,12 @@ public class Referral extends APINode {
       "namespace",
       "need_promo_code",
       "offer_origin",
+      "privacy_policy_link",
       "promotion_text",
       "receiver_benefits_text",
       "referral_link_uri",
       "sender_benefits_text",
+      "terms_and_condition_link",
     };
 
     public static final String[] FIELDS = {
@@ -759,6 +789,11 @@ public class Referral extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setPrivacyPolicyLink (String privacyPolicyLink) {
+      this.setParam("privacy_policy_link", privacyPolicyLink);
+      return this;
+    }
+
     public APIRequestUpdate setPromotionText (String promotionText) {
       this.setParam("promotion_text", promotionText);
       return this;
@@ -776,6 +811,11 @@ public class Referral extends APINode {
 
     public APIRequestUpdate setSenderBenefitsText (String senderBenefitsText) {
       this.setParam("sender_benefits_text", senderBenefitsText);
+      return this;
+    }
+
+    public APIRequestUpdate setTermsAndConditionLink (String termsAndConditionLink) {
+      this.setParam("terms_and_condition_link", termsAndConditionLink);
       return this;
     }
 
@@ -839,10 +879,12 @@ public class Referral extends APINode {
     this.mNamespace = instance.mNamespace;
     this.mNeedPromoCode = instance.mNeedPromoCode;
     this.mOfferOrigin = instance.mOfferOrigin;
+    this.mPrivacyPolicyLink = instance.mPrivacyPolicyLink;
     this.mPromotionText = instance.mPromotionText;
     this.mReceiverBenefitsText = instance.mReceiverBenefitsText;
     this.mReferralLinkUri = instance.mReferralLinkUri;
     this.mSenderBenefitsText = instance.mSenderBenefitsText;
+    this.mTermsAndConditionLink = instance.mTermsAndConditionLink;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

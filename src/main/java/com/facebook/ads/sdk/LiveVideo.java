@@ -526,6 +526,7 @@ public class LiveVideo extends APINode {
       "locale",
       "location",
       "meeting_for",
+      "messenger_join_notifications_enabled",
       "middle_name",
       "name",
       "name_format",
@@ -533,6 +534,7 @@ public class LiveVideo extends APINode {
       "political",
       "profile_pic",
       "public_key",
+      "published_timeline",
       "quotes",
       "relationship_status",
       "religion",
@@ -545,6 +547,8 @@ public class LiveVideo extends APINode {
       "timezone",
       "token_for_business",
       "updated_time",
+      "user_storage_key",
+      "username",
       "verified",
       "video_upload_limits",
       "website",
@@ -866,6 +870,13 @@ public class LiveVideo extends APINode {
       this.requestField("meeting_for", value);
       return this;
     }
+    public APIRequestGetBlockedUsers requestMessengerJoinNotificationsEnabledField () {
+      return this.requestMessengerJoinNotificationsEnabledField(true);
+    }
+    public APIRequestGetBlockedUsers requestMessengerJoinNotificationsEnabledField (boolean value) {
+      this.requestField("messenger_join_notifications_enabled", value);
+      return this;
+    }
     public APIRequestGetBlockedUsers requestMiddleNameField () {
       return this.requestMiddleNameField(true);
     }
@@ -913,6 +924,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetBlockedUsers requestPublicKeyField (boolean value) {
       this.requestField("public_key", value);
+      return this;
+    }
+    public APIRequestGetBlockedUsers requestPublishedTimelineField () {
+      return this.requestPublishedTimelineField(true);
+    }
+    public APIRequestGetBlockedUsers requestPublishedTimelineField (boolean value) {
+      this.requestField("published_timeline", value);
       return this;
     }
     public APIRequestGetBlockedUsers requestQuotesField () {
@@ -997,6 +1015,20 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetBlockedUsers requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
+      return this;
+    }
+    public APIRequestGetBlockedUsers requestUserStorageKeyField () {
+      return this.requestUserStorageKeyField(true);
+    }
+    public APIRequestGetBlockedUsers requestUserStorageKeyField (boolean value) {
+      this.requestField("user_storage_key", value);
+      return this;
+    }
+    public APIRequestGetBlockedUsers requestUsernameField () {
+      return this.requestUsernameField(true);
+    }
+    public APIRequestGetBlockedUsers requestUsernameField (boolean value) {
+      this.requestField("username", value);
       return this;
     }
     public APIRequestGetBlockedUsers requestVerifiedField () {
@@ -1387,6 +1419,7 @@ public class LiveVideo extends APINode {
       "checkins",
       "company_overview",
       "connected_instagram_account",
+      "connected_page_backed_instagram_account",
       "contact_address",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
@@ -1755,6 +1788,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestConnectedInstagramAccountField (boolean value) {
       this.requestField("connected_instagram_account", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestConnectedPageBackedInstagramAccountField () {
+      return this.requestConnectedPageBackedInstagramAccountField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestConnectedPageBackedInstagramAccountField (boolean value) {
+      this.requestField("connected_page_backed_instagram_account", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestContactAddressField () {
@@ -4123,15 +4163,7 @@ public class LiveVideo extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "ad_break_drop_live_stream",
-      "ad_break_duration",
-      "ad_break_encoder_drops_live_stream",
-      "ad_break_intent",
-      "ad_break_start_now",
-      "ad_break_time_offset",
       "allow_bm_crossposting",
-      "attribution_app_id",
-      "commercial_break_durations",
       "content_tags",
       "crossposting_actions",
       "custom_labels",
@@ -4217,80 +4249,12 @@ public class LiveVideo extends APINode {
     }
 
 
-    public APIRequestUpdate setAdBreakDropLiveStream (Boolean adBreakDropLiveStream) {
-      this.setParam("ad_break_drop_live_stream", adBreakDropLiveStream);
-      return this;
-    }
-    public APIRequestUpdate setAdBreakDropLiveStream (String adBreakDropLiveStream) {
-      this.setParam("ad_break_drop_live_stream", adBreakDropLiveStream);
-      return this;
-    }
-
-    public APIRequestUpdate setAdBreakDuration (Long adBreakDuration) {
-      this.setParam("ad_break_duration", adBreakDuration);
-      return this;
-    }
-    public APIRequestUpdate setAdBreakDuration (String adBreakDuration) {
-      this.setParam("ad_break_duration", adBreakDuration);
-      return this;
-    }
-
-    public APIRequestUpdate setAdBreakEncoderDropsLiveStream (Boolean adBreakEncoderDropsLiveStream) {
-      this.setParam("ad_break_encoder_drops_live_stream", adBreakEncoderDropsLiveStream);
-      return this;
-    }
-    public APIRequestUpdate setAdBreakEncoderDropsLiveStream (String adBreakEncoderDropsLiveStream) {
-      this.setParam("ad_break_encoder_drops_live_stream", adBreakEncoderDropsLiveStream);
-      return this;
-    }
-
-    public APIRequestUpdate setAdBreakIntent (Boolean adBreakIntent) {
-      this.setParam("ad_break_intent", adBreakIntent);
-      return this;
-    }
-    public APIRequestUpdate setAdBreakIntent (String adBreakIntent) {
-      this.setParam("ad_break_intent", adBreakIntent);
-      return this;
-    }
-
-    public APIRequestUpdate setAdBreakStartNow (Boolean adBreakStartNow) {
-      this.setParam("ad_break_start_now", adBreakStartNow);
-      return this;
-    }
-    public APIRequestUpdate setAdBreakStartNow (String adBreakStartNow) {
-      this.setParam("ad_break_start_now", adBreakStartNow);
-      return this;
-    }
-
-    public APIRequestUpdate setAdBreakTimeOffset (Double adBreakTimeOffset) {
-      this.setParam("ad_break_time_offset", adBreakTimeOffset);
-      return this;
-    }
-    public APIRequestUpdate setAdBreakTimeOffset (String adBreakTimeOffset) {
-      this.setParam("ad_break_time_offset", adBreakTimeOffset);
-      return this;
-    }
-
     public APIRequestUpdate setAllowBmCrossposting (Boolean allowBmCrossposting) {
       this.setParam("allow_bm_crossposting", allowBmCrossposting);
       return this;
     }
     public APIRequestUpdate setAllowBmCrossposting (String allowBmCrossposting) {
       this.setParam("allow_bm_crossposting", allowBmCrossposting);
-      return this;
-    }
-
-    public APIRequestUpdate setAttributionAppId (String attributionAppId) {
-      this.setParam("attribution_app_id", attributionAppId);
-      return this;
-    }
-
-    public APIRequestUpdate setCommercialBreakDurations (List<Long> commercialBreakDurations) {
-      this.setParam("commercial_break_durations", commercialBreakDurations);
-      return this;
-    }
-    public APIRequestUpdate setCommercialBreakDurations (String commercialBreakDurations) {
-      this.setParam("commercial_break_durations", commercialBreakDurations);
       return this;
     }
 

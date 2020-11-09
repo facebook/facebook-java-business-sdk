@@ -4071,6 +4071,7 @@ public class Group extends APINode {
       "locale",
       "location",
       "meeting_for",
+      "messenger_join_notifications_enabled",
       "middle_name",
       "name",
       "name_format",
@@ -4078,6 +4079,7 @@ public class Group extends APINode {
       "political",
       "profile_pic",
       "public_key",
+      "published_timeline",
       "quotes",
       "relationship_status",
       "religion",
@@ -4090,6 +4092,8 @@ public class Group extends APINode {
       "timezone",
       "token_for_business",
       "updated_time",
+      "user_storage_key",
+      "username",
       "verified",
       "video_upload_limits",
       "website",
@@ -4402,6 +4406,13 @@ public class Group extends APINode {
       this.requestField("meeting_for", value);
       return this;
     }
+    public APIRequestGetOptedInMembers requestMessengerJoinNotificationsEnabledField () {
+      return this.requestMessengerJoinNotificationsEnabledField(true);
+    }
+    public APIRequestGetOptedInMembers requestMessengerJoinNotificationsEnabledField (boolean value) {
+      this.requestField("messenger_join_notifications_enabled", value);
+      return this;
+    }
     public APIRequestGetOptedInMembers requestMiddleNameField () {
       return this.requestMiddleNameField(true);
     }
@@ -4449,6 +4460,13 @@ public class Group extends APINode {
     }
     public APIRequestGetOptedInMembers requestPublicKeyField (boolean value) {
       this.requestField("public_key", value);
+      return this;
+    }
+    public APIRequestGetOptedInMembers requestPublishedTimelineField () {
+      return this.requestPublishedTimelineField(true);
+    }
+    public APIRequestGetOptedInMembers requestPublishedTimelineField (boolean value) {
+      this.requestField("published_timeline", value);
       return this;
     }
     public APIRequestGetOptedInMembers requestQuotesField () {
@@ -4533,6 +4551,20 @@ public class Group extends APINode {
     }
     public APIRequestGetOptedInMembers requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
+      return this;
+    }
+    public APIRequestGetOptedInMembers requestUserStorageKeyField () {
+      return this.requestUserStorageKeyField(true);
+    }
+    public APIRequestGetOptedInMembers requestUserStorageKeyField (boolean value) {
+      this.requestField("user_storage_key", value);
+      return this;
+    }
+    public APIRequestGetOptedInMembers requestUsernameField () {
+      return this.requestUsernameField(true);
+    }
+    public APIRequestGetOptedInMembers requestUsernameField (boolean value) {
+      this.requestField("username", value);
       return this;
     }
     public APIRequestGetOptedInMembers requestVerifiedField () {
@@ -7080,6 +7112,8 @@ public class Group extends APINode {
       VALUE_SORORITY("SORORITY"),
       @SerializedName("SPORTS")
       VALUE_SPORTS("SPORTS"),
+      @SerializedName("STREAMER")
+      VALUE_STREAMER("STREAMER"),
       @SerializedName("STUDY_GROUP")
       VALUE_STUDY_GROUP("STUDY_GROUP"),
       @SerializedName("SUPPORT")
@@ -7199,6 +7233,8 @@ public class Group extends APINode {
       VALUE_SORORITY("SORORITY"),
       @SerializedName("SPORTS")
       VALUE_SPORTS("SPORTS"),
+      @SerializedName("STREAMER")
+      VALUE_STREAMER("STREAMER"),
       @SerializedName("STUDY_GROUP")
       VALUE_STUDY_GROUP("STUDY_GROUP"),
       @SerializedName("SUPPORT")

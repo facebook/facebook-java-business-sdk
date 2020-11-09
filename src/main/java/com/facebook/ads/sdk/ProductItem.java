@@ -111,6 +111,8 @@ public class ProductItem extends APINode {
   private Map<String, String> mImageCdnUrls = null;
   @SerializedName("image_url")
   private String mImageUrl = null;
+  @SerializedName("images")
+  private List<String> mImages = null;
   @SerializedName("inventory")
   private Long mInventory = null;
   @SerializedName("manufacturer_part_number")
@@ -499,6 +501,10 @@ public class ProductItem extends APINode {
 
   public String getFieldImageUrl() {
     return mImageUrl;
+  }
+
+  public List<String> getFieldImages() {
+    return mImages;
   }
 
   public Long getFieldInventory() {
@@ -937,6 +943,7 @@ public class ProductItem extends APINode {
       "id",
       "image_cdn_urls",
       "image_url",
+      "images",
       "inventory",
       "manufacturer_part_number",
       "material",
@@ -1266,6 +1273,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestImageUrlField (boolean value) {
       this.requestField("image_url", value);
+      return this;
+    }
+    public APIRequestGet requestImagesField () {
+      return this.requestImagesField(true);
+    }
+    public APIRequestGet requestImagesField (boolean value) {
+      this.requestField("images", value);
       return this;
     }
     public APIRequestGet requestInventoryField () {
@@ -2645,6 +2659,7 @@ public class ProductItem extends APINode {
     this.mId = instance.mId;
     this.mImageCdnUrls = instance.mImageCdnUrls;
     this.mImageUrl = instance.mImageUrl;
+    this.mImages = instance.mImages;
     this.mInventory = instance.mInventory;
     this.mManufacturerPartNumber = instance.mManufacturerPartNumber;
     this.mMaterial = instance.mMaterial;

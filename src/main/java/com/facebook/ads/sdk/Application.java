@@ -67,6 +67,8 @@ public class Application extends APINode {
   private List<Object> mAndroidSdkErrorCategories = null;
   @SerializedName("app_domains")
   private List<String> mAppDomains = null;
+  @SerializedName("app_events_config")
+  private Object mAppEventsConfig = null;
   @SerializedName("app_events_feature_bitmask")
   private Long mAppEventsFeatureBitmask = null;
   @SerializedName("app_events_session_timeout")
@@ -703,6 +705,10 @@ public class Application extends APINode {
 
   public List<String> getFieldAppDomains() {
     return mAppDomains;
+  }
+
+  public Object getFieldAppEventsConfig() {
+    return mAppEventsConfig;
   }
 
   public Long getFieldAppEventsFeatureBitmask() {
@@ -9451,6 +9457,7 @@ public class Application extends APINode {
       "android_key_hash",
       "android_sdk_error_categories",
       "app_domains",
+      "app_events_config",
       "app_events_feature_bitmask",
       "app_events_session_timeout",
       "app_install_tracked",
@@ -9681,6 +9688,13 @@ public class Application extends APINode {
     }
     public APIRequestGet requestAppDomainsField (boolean value) {
       this.requestField("app_domains", value);
+      return this;
+    }
+    public APIRequestGet requestAppEventsConfigField () {
+      return this.requestAppEventsConfigField(true);
+    }
+    public APIRequestGet requestAppEventsConfigField (boolean value) {
+      this.requestField("app_events_config", value);
       return this;
     }
     public APIRequestGet requestAppEventsFeatureBitmaskField () {
@@ -11234,6 +11248,7 @@ public class Application extends APINode {
     this.mAndroidKeyHash = instance.mAndroidKeyHash;
     this.mAndroidSdkErrorCategories = instance.mAndroidSdkErrorCategories;
     this.mAppDomains = instance.mAppDomains;
+    this.mAppEventsConfig = instance.mAppEventsConfig;
     this.mAppEventsFeatureBitmask = instance.mAppEventsFeatureBitmask;
     this.mAppEventsSessionTimeout = instance.mAppEventsSessionTimeout;
     this.mAppInstallTracked = instance.mAppInstallTracked;

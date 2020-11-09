@@ -296,10 +296,6 @@ public class AdStudyObjective extends APINode {
     return new APIRequestGetOfflineConversionDataSets(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetOffsitePixels getOffsitePixels() {
-    return new APIRequestGetOffsitePixels(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetPartnerStudies getPartnerStudies() {
     return new APIRequestGetPartnerStudies(this.getPrefixedId().toString(), context);
   }
@@ -736,6 +732,7 @@ public class AdStudyObjective extends APINode {
       "android_key_hash",
       "android_sdk_error_categories",
       "app_domains",
+      "app_events_config",
       "app_events_feature_bitmask",
       "app_events_session_timeout",
       "app_install_tracked",
@@ -961,6 +958,13 @@ public class AdStudyObjective extends APINode {
     }
     public APIRequestGetApplications requestAppDomainsField (boolean value) {
       this.requestField("app_domains", value);
+      return this;
+    }
+    public APIRequestGetApplications requestAppEventsConfigField () {
+      return this.requestAppEventsConfigField(true);
+    }
+    public APIRequestGetApplications requestAppEventsConfigField (boolean value) {
+      this.requestField("app_events_config", value);
       return this;
     }
     public APIRequestGetApplications requestAppEventsFeatureBitmaskField () {
@@ -2143,158 +2147,6 @@ public class AdStudyObjective extends APINode {
     }
   }
 
-  public static class APIRequestGetOffsitePixels extends APIRequest<OffsitePixel> {
-
-    APINodeList<OffsitePixel> lastResponse = null;
-    @Override
-    public APINodeList<OffsitePixel> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "creator",
-      "id",
-      "js_pixel",
-      "last_firing_time",
-      "name",
-      "tag",
-    };
-
-    @Override
-    public APINodeList<OffsitePixel> parseResponse(String response, String header) throws APIException {
-      return OffsitePixel.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<OffsitePixel> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<OffsitePixel> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<OffsitePixel>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<OffsitePixel>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<OffsitePixel>>() {
-           public APINodeList<OffsitePixel> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetOffsitePixels.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetOffsitePixels(String nodeId, APIContext context) {
-      super(context, nodeId, "/offsitepixels", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetOffsitePixels setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetOffsitePixels setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetOffsitePixels requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetOffsitePixels requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetOffsitePixels requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetOffsitePixels requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetOffsitePixels requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetOffsitePixels requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetOffsitePixels requestCreatorField () {
-      return this.requestCreatorField(true);
-    }
-    public APIRequestGetOffsitePixels requestCreatorField (boolean value) {
-      this.requestField("creator", value);
-      return this;
-    }
-    public APIRequestGetOffsitePixels requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetOffsitePixels requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetOffsitePixels requestJsPixelField () {
-      return this.requestJsPixelField(true);
-    }
-    public APIRequestGetOffsitePixels requestJsPixelField (boolean value) {
-      this.requestField("js_pixel", value);
-      return this;
-    }
-    public APIRequestGetOffsitePixels requestLastFiringTimeField () {
-      return this.requestLastFiringTimeField(true);
-    }
-    public APIRequestGetOffsitePixels requestLastFiringTimeField (boolean value) {
-      this.requestField("last_firing_time", value);
-      return this;
-    }
-    public APIRequestGetOffsitePixels requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetOffsitePixels requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetOffsitePixels requestTagField () {
-      return this.requestTagField(true);
-    }
-    public APIRequestGetOffsitePixels requestTagField (boolean value) {
-      this.requestField("tag", value);
-      return this;
-    }
-  }
-
   public static class APIRequestGetPartnerStudies extends APIRequest<PartnerStudy> {
 
     APINodeList<PartnerStudy> lastResponse = null;
@@ -2829,7 +2681,6 @@ public class AdStudyObjective extends APINode {
       "is_primary",
       "name",
       "offline_conversion_data_sets",
-      "offsitepixels",
       "product_catalogs",
       "product_sets",
       "type",
@@ -2938,15 +2789,6 @@ public class AdStudyObjective extends APINode {
     }
     public APIRequestUpdate setOfflineConversionDataSets (String offlineConversionDataSets) {
       this.setParam("offline_conversion_data_sets", offlineConversionDataSets);
-      return this;
-    }
-
-    public APIRequestUpdate setOffsitepixels (List<Object> offsitepixels) {
-      this.setParam("offsitepixels", offsitepixels);
-      return this;
-    }
-    public APIRequestUpdate setOffsitepixels (String offsitepixels) {
-      this.setParam("offsitepixels", offsitepixels);
       return this;
     }
 

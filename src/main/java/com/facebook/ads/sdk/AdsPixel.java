@@ -2652,6 +2652,8 @@ public class AdsPixel extends APINode {
       VALUE_DB("db"),
       @SerializedName("em")
       VALUE_EM("em"),
+      @SerializedName("external_id")
+      VALUE_EXTERNAL_ID("external_id"),
       @SerializedName("fn")
       VALUE_FN("fn"),
       @SerializedName("ge")

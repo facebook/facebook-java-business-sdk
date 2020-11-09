@@ -750,10 +750,6 @@ public class AdAccount extends APINode {
     return new APIRequestGetTargetingValidation(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestDeleteTracking deleteTracking() {
-    return new APIRequestDeleteTracking(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetTracking getTracking() {
     return new APIRequestGetTracking(this.getPrefixedId().toString(), context);
   }
@@ -4456,6 +4452,7 @@ public class AdAccount extends APINode {
     public static final String[] PARAMS = {
       "app_id",
       "name",
+      "session_id",
       "source",
       "source_url",
       "source_zip",
@@ -4524,6 +4521,11 @@ public class AdAccount extends APINode {
 
     public APIRequestCreateAdPlayable setName (String name) {
       this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateAdPlayable setSessionId (String sessionId) {
+      this.setParam("session_id", sessionId);
       return this;
     }
 
@@ -8429,6 +8431,7 @@ public class AdAccount extends APINode {
       "android_key_hash",
       "android_sdk_error_categories",
       "app_domains",
+      "app_events_config",
       "app_events_feature_bitmask",
       "app_events_session_timeout",
       "app_install_tracked",
@@ -8664,6 +8667,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdvertisableApplications requestAppDomainsField (boolean value) {
       this.requestField("app_domains", value);
+      return this;
+    }
+    public APIRequestGetAdvertisableApplications requestAppEventsConfigField () {
+      return this.requestAppEventsConfigField(true);
+    }
+    public APIRequestGetAdvertisableApplications requestAppEventsConfigField (boolean value) {
+      this.requestField("app_events_config", value);
       return this;
     }
     public APIRequestGetAdvertisableApplications requestAppEventsFeatureBitmaskField () {
@@ -11684,6 +11694,7 @@ public class AdAccount extends APINode {
       "android_key_hash",
       "android_sdk_error_categories",
       "app_domains",
+      "app_events_config",
       "app_events_feature_bitmask",
       "app_events_session_timeout",
       "app_install_tracked",
@@ -11909,6 +11920,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetApplications requestAppDomainsField (boolean value) {
       this.requestField("app_domains", value);
+      return this;
+    }
+    public APIRequestGetApplications requestAppEventsConfigField () {
+      return this.requestAppEventsConfigField(true);
+    }
+    public APIRequestGetApplications requestAppEventsConfigField (boolean value) {
+      this.requestField("app_events_config", value);
       return this;
     }
     public APIRequestGetApplications requestAppEventsFeatureBitmaskField () {
@@ -14201,6 +14219,7 @@ public class AdAccount extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
+      "ad_strategy_id",
       "adlabels",
       "bid_strategy",
       "boosted_object_id",
@@ -14366,6 +14385,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetCampaigns requestAccountIdField (boolean value) {
       this.requestField("account_id", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestAdStrategyIdField () {
+      return this.requestAdStrategyIdField(true);
+    }
+    public APIRequestGetCampaigns requestAdStrategyIdField (boolean value) {
+      this.requestField("ad_strategy_id", value);
       return this;
     }
     public APIRequestGetCampaigns requestAdlabelsField () {
@@ -14883,6 +14909,7 @@ public class AdAccount extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
+      "ad_strategy_id",
       "adlabels",
       "bid_strategy",
       "boosted_object_id",
@@ -15030,6 +15057,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetCampaignsByLabels requestAccountIdField (boolean value) {
       this.requestField("account_id", value);
+      return this;
+    }
+    public APIRequestGetCampaignsByLabels requestAdStrategyIdField () {
+      return this.requestAdStrategyIdField(true);
+    }
+    public APIRequestGetCampaignsByLabels requestAdStrategyIdField (boolean value) {
+      this.requestField("ad_strategy_id", value);
       return this;
     }
     public APIRequestGetCampaignsByLabels requestAdlabelsField () {
@@ -20033,6 +20067,7 @@ public class AdAccount extends APINode {
       "checkins",
       "company_overview",
       "connected_instagram_account",
+      "connected_page_backed_instagram_account",
       "contact_address",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
@@ -20401,6 +20436,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetPromotePages requestConnectedInstagramAccountField (boolean value) {
       this.requestField("connected_instagram_account", value);
+      return this;
+    }
+    public APIRequestGetPromotePages requestConnectedPageBackedInstagramAccountField () {
+      return this.requestConnectedPageBackedInstagramAccountField(true);
+    }
+    public APIRequestGetPromotePages requestConnectedPageBackedInstagramAccountField (boolean value) {
+      this.requestField("connected_page_backed_instagram_account", value);
       return this;
     }
     public APIRequestGetPromotePages requestContactAddressField () {
@@ -24002,9 +24044,12 @@ public class AdAccount extends APINode {
     }
     public static final String[] PARAMS = {
       "allow_only_fat_head_interests",
+      "app_store",
       "countries",
       "is_exclusion",
       "limit_type",
+      "objective",
+      "promoted_object",
       "q",
       "regulated_categories",
       "session_id",
@@ -24099,6 +24144,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetTargetingSearch setAppStore (AdAccountTargetingUnified.EnumAppStore appStore) {
+      this.setParam("app_store", appStore);
+      return this;
+    }
+    public APIRequestGetTargetingSearch setAppStore (String appStore) {
+      this.setParam("app_store", appStore);
+      return this;
+    }
+
     public APIRequestGetTargetingSearch setCountries (List<String> countries) {
       this.setParam("countries", countries);
       return this;
@@ -24123,6 +24177,24 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetTargetingSearch setLimitType (String limitType) {
       this.setParam("limit_type", limitType);
+      return this;
+    }
+
+    public APIRequestGetTargetingSearch setObjective (AdAccountTargetingUnified.EnumObjective objective) {
+      this.setParam("objective", objective);
+      return this;
+    }
+    public APIRequestGetTargetingSearch setObjective (String objective) {
+      this.setParam("objective", objective);
+      return this;
+    }
+
+    public APIRequestGetTargetingSearch setPromotedObject (Object promotedObject) {
+      this.setParam("promoted_object", promotedObject);
+      return this;
+    }
+    public APIRequestGetTargetingSearch setPromotedObject (String promotedObject) {
+      this.setParam("promoted_object", promotedObject);
       return this;
     }
 
@@ -24535,6 +24607,7 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "app_store",
       "countries",
       "limit_type",
       "mode",
@@ -24623,6 +24696,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+
+    public APIRequestGetTargetingSuggestions setAppStore (AdAccountTargetingUnified.EnumAppStore appStore) {
+      this.setParam("app_store", appStore);
+      return this;
+    }
+    public APIRequestGetTargetingSuggestions setAppStore (String appStore) {
+      this.setParam("app_store", appStore);
+      return this;
+    }
 
     public APIRequestGetTargetingSuggestions setCountries (List<String> countries) {
       this.setParam("countries", countries);
@@ -25215,120 +25297,6 @@ public class AdAccount extends APINode {
       this.requestField("valid", value);
       return this;
     }
-  }
-
-  public static class APIRequestDeleteTracking extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "tracking_specs",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestDeleteTracking.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestDeleteTracking(String nodeId, APIContext context) {
-      super(context, nodeId, "/tracking", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDeleteTracking setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteTracking setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDeleteTracking setTrackingSpecs (Object trackingSpecs) {
-      this.setParam("tracking_specs", trackingSpecs);
-      return this;
-    }
-    public APIRequestDeleteTracking setTrackingSpecs (String trackingSpecs) {
-      this.setParam("tracking_specs", trackingSpecs);
-      return this;
-    }
-
-    public APIRequestDeleteTracking requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDeleteTracking requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteTracking requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDeleteTracking requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteTracking requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteTracking requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestGetTracking extends APIRequest<AdAccountTrackingData> {

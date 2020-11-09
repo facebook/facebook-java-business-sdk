@@ -1989,6 +1989,7 @@ public class ProductSet extends APINode {
       "id",
       "image_cdn_urls",
       "image_url",
+      "images",
       "inventory",
       "manufacturer_part_number",
       "material",
@@ -2318,6 +2319,13 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetProducts requestImageUrlField (boolean value) {
       this.requestField("image_url", value);
+      return this;
+    }
+    public APIRequestGetProducts requestImagesField () {
+      return this.requestImagesField(true);
+    }
+    public APIRequestGetProducts requestImagesField (boolean value) {
+      this.requestField("images", value);
       return this;
     }
     public APIRequestGetProducts requestInventoryField () {
@@ -3392,6 +3400,7 @@ public class ProductSet extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "allow_live_product_set_deletion",
     };
 
     public static final String[] FIELDS = {
@@ -3449,6 +3458,15 @@ public class ProductSet extends APINode {
       return this;
     }
 
+
+    public APIRequestDelete setAllowLiveProductSetDeletion (Boolean allowLiveProductSetDeletion) {
+      this.setParam("allow_live_product_set_deletion", allowLiveProductSetDeletion);
+      return this;
+    }
+    public APIRequestDelete setAllowLiveProductSetDeletion (String allowLiveProductSetDeletion) {
+      this.setParam("allow_live_product_set_deletion", allowLiveProductSetDeletion);
+      return this;
+    }
 
     public APIRequestDelete requestAllFields () {
       return this.requestAllFields(true);

@@ -1817,6 +1817,8 @@ public class AdReportRun extends APINode {
       VALUE_CONVERSION("conversion"),
       @SerializedName("impression")
       VALUE_IMPRESSION("impression"),
+      @SerializedName("mixed")
+      VALUE_MIXED("mixed"),
       ;
 
       private String value;

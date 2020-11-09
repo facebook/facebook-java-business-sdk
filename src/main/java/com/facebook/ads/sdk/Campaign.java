@@ -57,6 +57,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class Campaign extends APINode {
   @SerializedName("account_id")
   private String mAccountId = null;
+  @SerializedName("ad_strategy_id")
+  private String mAdStrategyId = null;
   @SerializedName("adlabels")
   private List<AdLabel> mAdlabels = null;
   @SerializedName("bid_strategy")
@@ -387,6 +389,10 @@ public class Campaign extends APINode {
 
   public String getFieldAccountId() {
     return mAccountId;
+  }
+
+  public String getFieldAdStrategyId() {
+    return mAdStrategyId;
   }
 
   public List<AdLabel> getFieldAdlabels() {
@@ -2256,6 +2262,7 @@ public class Campaign extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
+      "ad_strategy_id",
       "adlabels",
       "bid_strategy",
       "boosted_object_id",
@@ -2421,6 +2428,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetCopies requestAccountIdField (boolean value) {
       this.requestField("account_id", value);
+      return this;
+    }
+    public APIRequestGetCopies requestAdStrategyIdField () {
+      return this.requestAdStrategyIdField(true);
+    }
+    public APIRequestGetCopies requestAdStrategyIdField (boolean value) {
+      this.requestField("ad_strategy_id", value);
       return this;
     }
     public APIRequestGetCopies requestAdlabelsField () {
@@ -3506,6 +3520,7 @@ public class Campaign extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
+      "ad_strategy_id",
       "adlabels",
       "bid_strategy",
       "boosted_object_id",
@@ -3671,6 +3686,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGet requestAccountIdField (boolean value) {
       this.requestField("account_id", value);
+      return this;
+    }
+    public APIRequestGet requestAdStrategyIdField () {
+      return this.requestAdStrategyIdField(true);
+    }
+    public APIRequestGet requestAdStrategyIdField (boolean value) {
+      this.requestField("ad_strategy_id", value);
       return this;
     }
     public APIRequestGet requestAdlabelsField () {
@@ -5032,6 +5054,7 @@ public class Campaign extends APINode {
 
   public Campaign copyFrom(Campaign instance) {
     this.mAccountId = instance.mAccountId;
+    this.mAdStrategyId = instance.mAdStrategyId;
     this.mAdlabels = instance.mAdlabels;
     this.mBidStrategy = instance.mBidStrategy;
     this.mBoostedObjectId = instance.mBoostedObjectId;

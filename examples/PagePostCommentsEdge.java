@@ -25,7 +25,7 @@
 import java.io.File;
 import java.util.Arrays;
 
-public class PagePostPost {
+public class PagePostCommentsEdge {
   public static void main (String args[]) throws APIException {
 
     String access_token = "<ACCESS_TOKEN>";
@@ -34,8 +34,7 @@ public class PagePostPost {
     String id = "<PAGE_POST_ID>";
     APIContext context = new APIContext(access_token).enableDebug(true);
 
-    new PagePost(id, context).update()
-      .setMessage("This is a test value")
+    new PagePost(id, context).getComments()
       .execute();
 
   }

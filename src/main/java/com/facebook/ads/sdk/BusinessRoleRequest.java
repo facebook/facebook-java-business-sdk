@@ -805,22 +805,22 @@ public class BusinessRoleRequest extends APINode {
       VALUE_ADMIN("ADMIN"),
       @SerializedName("ADS_RIGHTS_REVIEWER")
       VALUE_ADS_RIGHTS_REVIEWER("ADS_RIGHTS_REVIEWER"),
+      @SerializedName("DEFAULT")
+      VALUE_DEFAULT("DEFAULT"),
       @SerializedName("DEVELOPER")
       VALUE_DEVELOPER("DEVELOPER"),
       @SerializedName("EMPLOYEE")
       VALUE_EMPLOYEE("EMPLOYEE"),
       @SerializedName("FINANCE_ANALYST")
       VALUE_FINANCE_ANALYST("FINANCE_ANALYST"),
+      @SerializedName("FINANCE_EDIT")
+      VALUE_FINANCE_EDIT("FINANCE_EDIT"),
       @SerializedName("FINANCE_EDITOR")
       VALUE_FINANCE_EDITOR("FINANCE_EDITOR"),
-      @SerializedName("FINANCE_EDIT_TASK")
-      VALUE_FINANCE_EDIT_TASK("FINANCE_EDIT_TASK"),
-      @SerializedName("FINANCE_VIEW_TASK")
-      VALUE_FINANCE_VIEW_TASK("FINANCE_VIEW_TASK"),
-      @SerializedName("MODERATE_TASK")
-      VALUE_MODERATE_TASK("MODERATE_TASK"),
-      @SerializedName("OPERATE_TASK")
-      VALUE_OPERATE_TASK("OPERATE_TASK"),
+      @SerializedName("FINANCE_VIEW")
+      VALUE_FINANCE_VIEW("FINANCE_VIEW"),
+      @SerializedName("MANAGE")
+      VALUE_MANAGE("MANAGE"),
       @SerializedName("PARTNER_CENTER_ADMIN")
       VALUE_PARTNER_CENTER_ADMIN("PARTNER_CENTER_ADMIN"),
       @SerializedName("PARTNER_CENTER_ANALYST")

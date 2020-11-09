@@ -135,6 +135,10 @@ public class AdCampaignActivity extends APINode {
   private Long mPacingTypeNew = null;
   @SerializedName("pacing_type_old")
   private Long mPacingTypeOld = null;
+  @SerializedName("promoted_object_id_new")
+  private String mPromotedObjectIdNew = null;
+  @SerializedName("promoted_object_id_old")
+  private String mPromotedObjectIdOld = null;
   @SerializedName("run_status_new")
   private String mRunStatusNew = null;
   @SerializedName("run_status_old")
@@ -537,6 +541,14 @@ public class AdCampaignActivity extends APINode {
     return mPacingTypeOld;
   }
 
+  public String getFieldPromotedObjectIdNew() {
+    return mPromotedObjectIdNew;
+  }
+
+  public String getFieldPromotedObjectIdOld() {
+    return mPromotedObjectIdOld;
+  }
+
   public String getFieldRunStatusNew() {
     return mRunStatusNew;
   }
@@ -646,6 +658,8 @@ public class AdCampaignActivity extends APINode {
       "optimization_goal_old",
       "pacing_type_new",
       "pacing_type_old",
+      "promoted_object_id_new",
+      "promoted_object_id_old",
       "run_status_new",
       "run_status_old",
       "schedule_new",
@@ -1029,6 +1043,20 @@ public class AdCampaignActivity extends APINode {
     }
     public APIRequestGet requestPacingTypeOldField (boolean value) {
       this.requestField("pacing_type_old", value);
+      return this;
+    }
+    public APIRequestGet requestPromotedObjectIdNewField () {
+      return this.requestPromotedObjectIdNewField(true);
+    }
+    public APIRequestGet requestPromotedObjectIdNewField (boolean value) {
+      this.requestField("promoted_object_id_new", value);
+      return this;
+    }
+    public APIRequestGet requestPromotedObjectIdOldField () {
+      return this.requestPromotedObjectIdOldField(true);
+    }
+    public APIRequestGet requestPromotedObjectIdOldField (boolean value) {
+      this.requestField("promoted_object_id_old", value);
       return this;
     }
     public APIRequestGet requestRunStatusNewField () {
@@ -1432,6 +1460,8 @@ public class AdCampaignActivity extends APINode {
     this.mOptimizationGoalOld = instance.mOptimizationGoalOld;
     this.mPacingTypeNew = instance.mPacingTypeNew;
     this.mPacingTypeOld = instance.mPacingTypeOld;
+    this.mPromotedObjectIdNew = instance.mPromotedObjectIdNew;
+    this.mPromotedObjectIdOld = instance.mPromotedObjectIdOld;
     this.mRunStatusNew = instance.mRunStatusNew;
     this.mRunStatusOld = instance.mRunStatusOld;
     this.mScheduleNew = instance.mScheduleNew;

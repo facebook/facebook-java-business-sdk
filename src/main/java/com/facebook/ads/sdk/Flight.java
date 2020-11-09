@@ -614,8 +614,10 @@ public class Flight extends APINode {
       "currency",
       "description",
       "destination_airport",
+      "destination_city",
       "images",
       "origin_airport",
+      "origin_city",
       "price",
       "url",
     };
@@ -691,6 +693,11 @@ public class Flight extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setDestinationCity (String destinationCity) {
+      this.setParam("destination_city", destinationCity);
+      return this;
+    }
+
     public APIRequestUpdate setImages (List<Object> images) {
       this.setParam("images", images);
       return this;
@@ -702,6 +709,11 @@ public class Flight extends APINode {
 
     public APIRequestUpdate setOriginAirport (String originAirport) {
       this.setParam("origin_airport", originAirport);
+      return this;
+    }
+
+    public APIRequestUpdate setOriginCity (String originCity) {
+      this.setParam("origin_city", originCity);
       return this;
     }
 

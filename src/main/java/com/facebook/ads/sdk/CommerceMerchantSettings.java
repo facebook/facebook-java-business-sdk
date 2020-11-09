@@ -67,6 +67,8 @@ public class CommerceMerchantSettings extends APINode {
   private Boolean mDisableCheckoutUrls = null;
   @SerializedName("display_name")
   private String mDisplayName = null;
+  @SerializedName("external_merchant_id")
+  private String mExternalMerchantId = null;
   @SerializedName("facebook_channel")
   private Object mFacebookChannel = null;
   @SerializedName("has_discount_code")
@@ -310,18 +312,6 @@ public class CommerceMerchantSettings extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestCreateFacebookChannel createFacebookChannel() {
-    return new APIRequestCreateFacebookChannel(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestDeleteInstagramChannel deleteInstagramChannel() {
-    return new APIRequestDeleteInstagramChannel(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateInstagramChannel createInstagramChannel() {
-    return new APIRequestCreateInstagramChannel(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetOrderManagementApps getOrderManagementApps() {
     return new APIRequestGetOrderManagementApps(this.getPrefixedId().toString(), context);
   }
@@ -362,10 +352,6 @@ public class CommerceMerchantSettings extends APINode {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestUpdate update() {
-    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldBraintreeMerchantId() {
     return mBraintreeMerchantId;
@@ -389,6 +375,10 @@ public class CommerceMerchantSettings extends APINode {
 
   public String getFieldDisplayName() {
     return mDisplayName;
+  }
+
+  public String getFieldExternalMerchantId() {
+    return mExternalMerchantId;
   }
 
   public Object getFieldFacebookChannel() {
@@ -464,348 +454,6 @@ public class CommerceMerchantSettings extends APINode {
 
 
 
-  public static class APIRequestCreateFacebookChannel extends APIRequest<CommerceMerchantSettings> {
-
-    CommerceMerchantSettings lastResponse = null;
-    @Override
-    public CommerceMerchantSettings getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "pages",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public CommerceMerchantSettings parseResponse(String response, String header) throws APIException {
-      return CommerceMerchantSettings.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public CommerceMerchantSettings execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public CommerceMerchantSettings execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<CommerceMerchantSettings> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<CommerceMerchantSettings> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, CommerceMerchantSettings>() {
-           public CommerceMerchantSettings apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateFacebookChannel.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateFacebookChannel(String nodeId, APIContext context) {
-      super(context, nodeId, "/facebook_channel", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateFacebookChannel setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateFacebookChannel setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateFacebookChannel setPages (List<String> pages) {
-      this.setParam("pages", pages);
-      return this;
-    }
-    public APIRequestCreateFacebookChannel setPages (String pages) {
-      this.setParam("pages", pages);
-      return this;
-    }
-
-    public APIRequestCreateFacebookChannel requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateFacebookChannel requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateFacebookChannel requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateFacebookChannel requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateFacebookChannel requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateFacebookChannel requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestDeleteInstagramChannel extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestDeleteInstagramChannel.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestDeleteInstagramChannel(String nodeId, APIContext context) {
-      super(context, nodeId, "/instagram_channel", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDeleteInstagramChannel setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteInstagramChannel setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDeleteInstagramChannel requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDeleteInstagramChannel requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteInstagramChannel requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDeleteInstagramChannel requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteInstagramChannel requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteInstagramChannel requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateInstagramChannel extends APIRequest<CommerceMerchantSettings> {
-
-    CommerceMerchantSettings lastResponse = null;
-    @Override
-    public CommerceMerchantSettings getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "instagram_business_accounts",
-      "instagram_users",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public CommerceMerchantSettings parseResponse(String response, String header) throws APIException {
-      return CommerceMerchantSettings.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public CommerceMerchantSettings execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public CommerceMerchantSettings execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<CommerceMerchantSettings> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<CommerceMerchantSettings> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, CommerceMerchantSettings>() {
-           public CommerceMerchantSettings apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateInstagramChannel.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateInstagramChannel(String nodeId, APIContext context) {
-      super(context, nodeId, "/instagram_channel", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateInstagramChannel setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateInstagramChannel setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateInstagramChannel setInstagramBusinessAccounts (List<String> instagramBusinessAccounts) {
-      this.setParam("instagram_business_accounts", instagramBusinessAccounts);
-      return this;
-    }
-    public APIRequestCreateInstagramChannel setInstagramBusinessAccounts (String instagramBusinessAccounts) {
-      this.setParam("instagram_business_accounts", instagramBusinessAccounts);
-      return this;
-    }
-
-    public APIRequestCreateInstagramChannel setInstagramUsers (List<String> instagramUsers) {
-      this.setParam("instagram_users", instagramUsers);
-      return this;
-    }
-    public APIRequestCreateInstagramChannel setInstagramUsers (String instagramUsers) {
-      this.setParam("instagram_users", instagramUsers);
-      return this;
-    }
-
-    public APIRequestCreateInstagramChannel requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateInstagramChannel requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateInstagramChannel requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateInstagramChannel requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateInstagramChannel requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateInstagramChannel requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetOrderManagementApps extends APIRequest<Application> {
 
     APINodeList<Application> lastResponse = null;
@@ -823,6 +471,7 @@ public class CommerceMerchantSettings extends APINode {
       "android_key_hash",
       "android_sdk_error_categories",
       "app_domains",
+      "app_events_config",
       "app_events_feature_bitmask",
       "app_events_session_timeout",
       "app_install_tracked",
@@ -1048,6 +697,13 @@ public class CommerceMerchantSettings extends APINode {
     }
     public APIRequestGetOrderManagementApps requestAppDomainsField (boolean value) {
       this.requestField("app_domains", value);
+      return this;
+    }
+    public APIRequestGetOrderManagementApps requestAppEventsConfigField () {
+      return this.requestAppEventsConfigField(true);
+    }
+    public APIRequestGetOrderManagementApps requestAppEventsConfigField (boolean value) {
+      this.requestField("app_events_config", value);
       return this;
     }
     public APIRequestGetOrderManagementApps requestAppEventsFeatureBitmaskField () {
@@ -2161,6 +1817,7 @@ public class CommerceMerchantSettings extends APINode {
       "marketplace_approval_status",
       "marketplace_approval_status_details",
       "payment_setup",
+      "review_status",
       "shop_setup",
     };
 
@@ -2279,6 +1936,13 @@ public class CommerceMerchantSettings extends APINode {
     }
     public APIRequestGetSetupStatus requestPaymentSetupField (boolean value) {
       this.requestField("payment_setup", value);
+      return this;
+    }
+    public APIRequestGetSetupStatus requestReviewStatusField () {
+      return this.requestReviewStatusField(true);
+    }
+    public APIRequestGetSetupStatus requestReviewStatusField (boolean value) {
+      this.requestField("review_status", value);
       return this;
     }
     public APIRequestGetSetupStatus requestShopSetupField () {
@@ -2791,6 +2455,7 @@ public class CommerceMerchantSettings extends APINode {
       "cta",
       "disable_checkout_urls",
       "display_name",
+      "external_merchant_id",
       "facebook_channel",
       "has_discount_code",
       "id",
@@ -2941,6 +2606,13 @@ public class CommerceMerchantSettings extends APINode {
       this.requestField("display_name", value);
       return this;
     }
+    public APIRequestGet requestExternalMerchantIdField () {
+      return this.requestExternalMerchantIdField(true);
+    }
+    public APIRequestGet requestExternalMerchantIdField (boolean value) {
+      this.requestField("external_merchant_id", value);
+      return this;
+    }
     public APIRequestGet requestFacebookChannelField () {
       return this.requestFacebookChannelField(true);
     }
@@ -3062,196 +2734,6 @@ public class CommerceMerchantSettings extends APINode {
     }
   }
 
-  public static class APIRequestUpdate extends APIRequest<CommerceMerchantSettings> {
-
-    CommerceMerchantSettings lastResponse = null;
-    @Override
-    public CommerceMerchantSettings getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "contact_email",
-      "cta",
-      "merchant_alert_email",
-      "merchant_status",
-      "onsite_commerce_merchant",
-      "terms",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public CommerceMerchantSettings parseResponse(String response, String header) throws APIException {
-      return CommerceMerchantSettings.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public CommerceMerchantSettings execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public CommerceMerchantSettings execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<CommerceMerchantSettings> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<CommerceMerchantSettings> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, CommerceMerchantSettings>() {
-           public CommerceMerchantSettings apply(ResponseWrapper result) {
-             try {
-               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestUpdate(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestUpdate setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestUpdate setContactEmail (String contactEmail) {
-      this.setParam("contact_email", contactEmail);
-      return this;
-    }
-
-    public APIRequestUpdate setCta (CommerceMerchantSettings.EnumCta cta) {
-      this.setParam("cta", cta);
-      return this;
-    }
-    public APIRequestUpdate setCta (String cta) {
-      this.setParam("cta", cta);
-      return this;
-    }
-
-    public APIRequestUpdate setMerchantAlertEmail (String merchantAlertEmail) {
-      this.setParam("merchant_alert_email", merchantAlertEmail);
-      return this;
-    }
-
-    public APIRequestUpdate setMerchantStatus (CommerceMerchantSettings.EnumMerchantStatus merchantStatus) {
-      this.setParam("merchant_status", merchantStatus);
-      return this;
-    }
-    public APIRequestUpdate setMerchantStatus (String merchantStatus) {
-      this.setParam("merchant_status", merchantStatus);
-      return this;
-    }
-
-    public APIRequestUpdate setOnsiteCommerceMerchant (Object onsiteCommerceMerchant) {
-      this.setParam("onsite_commerce_merchant", onsiteCommerceMerchant);
-      return this;
-    }
-    public APIRequestUpdate setOnsiteCommerceMerchant (String onsiteCommerceMerchant) {
-      this.setParam("onsite_commerce_merchant", onsiteCommerceMerchant);
-      return this;
-    }
-
-    public APIRequestUpdate setTerms (String terms) {
-      this.setParam("terms", terms);
-      return this;
-    }
-
-    public APIRequestUpdate requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestUpdate requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static enum EnumCta {
-      @SerializedName("CONTACT_MERCHANT")
-      VALUE_CONTACT_MERCHANT("CONTACT_MERCHANT"),
-      @SerializedName("OFFSITE_LINK")
-      VALUE_OFFSITE_LINK("OFFSITE_LINK"),
-      ;
-
-      private String value;
-
-      private EnumCta(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumMerchantStatus {
-      @SerializedName("ENABLED")
-      VALUE_ENABLED("ENABLED"),
-      @SerializedName("EXTERNALLY_DISABLED")
-      VALUE_EXTERNALLY_DISABLED("EXTERNALLY_DISABLED"),
-      ;
-
-      private String value;
-
-      private EnumMerchantStatus(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
   public static enum EnumStatuses {
       @SerializedName("APPROVED")
       VALUE_APPROVED("APPROVED"),
@@ -3317,6 +2799,7 @@ public class CommerceMerchantSettings extends APINode {
     this.mCta = instance.mCta;
     this.mDisableCheckoutUrls = instance.mDisableCheckoutUrls;
     this.mDisplayName = instance.mDisplayName;
+    this.mExternalMerchantId = instance.mExternalMerchantId;
     this.mFacebookChannel = instance.mFacebookChannel;
     this.mHasDiscountCode = instance.mHasDiscountCode;
     this.mId = instance.mId;

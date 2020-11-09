@@ -1756,6 +1756,7 @@ public class IGUser extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "adgroup_id",
     };
 
     public static final String[] FIELDS = {
@@ -1828,6 +1829,11 @@ public class IGUser extends APINode {
       return this;
     }
 
+
+    public APIRequestGet setAdgroupId (String adgroupId) {
+      this.setParam("adgroup_id", adgroupId);
+      return this;
+    }
 
     public APIRequestGet requestAllFields () {
       return this.requestAllFields(true);

@@ -1351,6 +1351,8 @@ public class Vehicle extends APINode {
       VALUE_AVAILABLE("AVAILABLE"),
       @SerializedName("NOT_AVAILABLE")
       VALUE_NOT_AVAILABLE("NOT_AVAILABLE"),
+      @SerializedName("PENDING")
+      VALUE_PENDING("PENDING"),
       ;
 
       private String value;

@@ -1393,6 +1393,7 @@ public class AdVideo extends APINode {
       "checkins",
       "company_overview",
       "connected_instagram_account",
+      "connected_page_backed_instagram_account",
       "contact_address",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
@@ -1761,6 +1762,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestConnectedInstagramAccountField (boolean value) {
       this.requestField("connected_instagram_account", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestConnectedPageBackedInstagramAccountField () {
+      return this.requestConnectedPageBackedInstagramAccountField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestConnectedPageBackedInstagramAccountField (boolean value) {
+      this.requestField("connected_page_backed_instagram_account", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestContactAddressField () {
@@ -4265,6 +4273,7 @@ public class AdVideo extends APINode {
       "checkins",
       "company_overview",
       "connected_instagram_account",
+      "connected_page_backed_instagram_account",
       "contact_address",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
@@ -4633,6 +4642,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetSponsorTags requestConnectedInstagramAccountField (boolean value) {
       this.requestField("connected_instagram_account", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestConnectedPageBackedInstagramAccountField () {
+      return this.requestConnectedPageBackedInstagramAccountField(true);
+    }
+    public APIRequestGetSponsorTags requestConnectedPageBackedInstagramAccountField (boolean value) {
+      this.requestField("connected_page_backed_instagram_account", value);
       return this;
     }
     public APIRequestGetSponsorTags requestContactAddressField () {
@@ -7086,6 +7102,8 @@ public class AdVideo extends APINode {
       VALUE_CANVAS("CANVAS"),
       @SerializedName("CFC_VIDEO")
       VALUE_CFC_VIDEO("CFC_VIDEO"),
+      @SerializedName("CMS_MEDIA_MANAGER")
+      VALUE_CMS_MEDIA_MANAGER("CMS_MEDIA_MANAGER"),
       @SerializedName("CONTAINED_POST_ATTACHMENT")
       VALUE_CONTAINED_POST_ATTACHMENT("CONTAINED_POST_ATTACHMENT"),
       @SerializedName("CONTAINED_POST_AUDIO_BROADCAST")
@@ -7154,6 +7172,8 @@ public class AdVideo extends APINode {
       VALUE_HEURISTIC_PREVIEW("HEURISTIC_PREVIEW"),
       @SerializedName("HIGHLIGHT_CLIP_VIDEO")
       VALUE_HIGHLIGHT_CLIP_VIDEO("HIGHLIGHT_CLIP_VIDEO"),
+      @SerializedName("IG_REELS_XPV")
+      VALUE_IG_REELS_XPV("IG_REELS_XPV"),
       @SerializedName("IG_STORIES_READER")
       VALUE_IG_STORIES_READER("IG_STORIES_READER"),
       @SerializedName("INSPIRATION_VIDEO")
@@ -7258,6 +7278,8 @@ public class AdVideo extends APINode {
       VALUE_STORY_ARCHIVE_VIDEO("STORY_ARCHIVE_VIDEO"),
       @SerializedName("STORY_CARD_TEMPLATE")
       VALUE_STORY_CARD_TEMPLATE("STORY_CARD_TEMPLATE"),
+      @SerializedName("STREAM_HIGHLIGHTS_VIDEO")
+      VALUE_STREAM_HIGHLIGHTS_VIDEO("STREAM_HIGHLIGHTS_VIDEO"),
       @SerializedName("TAROT_DIGEST")
       VALUE_TAROT_DIGEST("TAROT_DIGEST"),
       @SerializedName("TEMP_MULTIMEDIA_POST")

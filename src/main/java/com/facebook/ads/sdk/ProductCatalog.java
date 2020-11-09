@@ -388,10 +388,6 @@ public class ProductCatalog extends APINode {
     return new APIRequestCreateItemsBatch(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateOnsiteCommerceMerchant createOnsiteCommerceMerchant() {
-    return new APIRequestCreateOnsiteCommerceMerchant(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetPricingVariablesBatch getPricingVariablesBatch() {
     return new APIRequestGetPricingVariablesBatch(this.getPrefixedId().toString(), context);
   }
@@ -5150,120 +5146,6 @@ public class ProductCatalog extends APINode {
 
   }
 
-  public static class APIRequestCreateOnsiteCommerceMerchant extends APIRequest<ProductCatalog> {
-
-    ProductCatalog lastResponse = null;
-    @Override
-    public ProductCatalog getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "onsite_commerce_merchant",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public ProductCatalog parseResponse(String response, String header) throws APIException {
-      return ProductCatalog.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public ProductCatalog execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public ProductCatalog execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<ProductCatalog> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, ProductCatalog>() {
-           public ProductCatalog apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateOnsiteCommerceMerchant.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateOnsiteCommerceMerchant(String nodeId, APIContext context) {
-      super(context, nodeId, "/onsite_commerce_merchant", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateOnsiteCommerceMerchant setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateOnsiteCommerceMerchant setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateOnsiteCommerceMerchant setOnsiteCommerceMerchant (Object onsiteCommerceMerchant) {
-      this.setParam("onsite_commerce_merchant", onsiteCommerceMerchant);
-      return this;
-    }
-    public APIRequestCreateOnsiteCommerceMerchant setOnsiteCommerceMerchant (String onsiteCommerceMerchant) {
-      this.setParam("onsite_commerce_merchant", onsiteCommerceMerchant);
-      return this;
-    }
-
-    public APIRequestCreateOnsiteCommerceMerchant requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateOnsiteCommerceMerchant requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateOnsiteCommerceMerchant requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateOnsiteCommerceMerchant requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateOnsiteCommerceMerchant requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateOnsiteCommerceMerchant requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetPricingVariablesBatch extends APIRequest<ProductCatalogPricingVariablesBatch> {
 
     APINodeList<ProductCatalogPricingVariablesBatch> lastResponse = null;
@@ -5579,6 +5461,7 @@ public class ProductCatalog extends APINode {
       "id",
       "item_sub_type",
       "latest_upload",
+      "migrated_from_feed_id",
       "name",
       "override_type",
       "product_count",
@@ -5746,6 +5629,13 @@ public class ProductCatalog extends APINode {
       this.requestField("latest_upload", value);
       return this;
     }
+    public APIRequestGetProductFeeds requestMigratedFromFeedIdField () {
+      return this.requestMigratedFromFeedIdField(true);
+    }
+    public APIRequestGetProductFeeds requestMigratedFromFeedIdField (boolean value) {
+      this.requestField("migrated_from_feed_id", value);
+      return this;
+    }
     public APIRequestGetProductFeeds requestNameField () {
       return this.requestNameField(true);
     }
@@ -5806,6 +5696,7 @@ public class ProductCatalog extends APINode {
       "feed_type",
       "file_name",
       "item_sub_type",
+      "migrated_from_feed_id",
       "name",
       "override_type",
       "override_value",
@@ -5929,6 +5820,11 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestCreateProductFeed setItemSubType (String itemSubType) {
       this.setParam("item_sub_type", itemSubType);
+      return this;
+    }
+
+    public APIRequestCreateProductFeed setMigratedFromFeedId (String migratedFromFeedId) {
+      this.setParam("migrated_from_feed_id", migratedFromFeedId);
       return this;
     }
 
@@ -6806,6 +6702,7 @@ public class ProductCatalog extends APINode {
       "id",
       "image_cdn_urls",
       "image_url",
+      "images",
       "inventory",
       "manufacturer_part_number",
       "material",
@@ -7144,6 +7041,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetProducts requestImageUrlField (boolean value) {
       this.requestField("image_url", value);
+      return this;
+    }
+    public APIRequestGetProducts requestImagesField () {
+      return this.requestImagesField(true);
+    }
+    public APIRequestGetProducts requestImagesField (boolean value) {
+      this.requestField("images", value);
       return this;
     }
     public APIRequestGetProducts requestInventoryField () {
@@ -9607,6 +9511,8 @@ public class ProductCatalog extends APINode {
       VALUE_HOTELS("hotels"),
       @SerializedName("jobs")
       VALUE_JOBS("jobs"),
+      @SerializedName("local_delivery_shipping_profiles")
+      VALUE_LOCAL_DELIVERY_SHIPPING_PROFILES("local_delivery_shipping_profiles"),
       @SerializedName("local_service_businesses")
       VALUE_LOCAL_SERVICE_BUSINESSES("local_service_businesses"),
       @SerializedName("offer_items")
@@ -9783,8 +9689,12 @@ public class ProductCatalog extends APINode {
       VALUE_COLLAB_ADS("COLLAB_ADS"),
       @SerializedName("COLLAB_ADS_FOR_MARKETPLACE_PARTNER")
       VALUE_COLLAB_ADS_FOR_MARKETPLACE_PARTNER("COLLAB_ADS_FOR_MARKETPLACE_PARTNER"),
+      @SerializedName("COLLAB_ADS_SEGMENT_WITHOUT_SEGMENT_SYNCING")
+      VALUE_COLLAB_ADS_SEGMENT_WITHOUT_SEGMENT_SYNCING("COLLAB_ADS_SEGMENT_WITHOUT_SEGMENT_SYNCING"),
       @SerializedName("IG_SHOPPING")
       VALUE_IG_SHOPPING("IG_SHOPPING"),
+      @SerializedName("IG_SHOPPING_SUGGESTED_PRODUCTS")
+      VALUE_IG_SHOPPING_SUGGESTED_PRODUCTS("IG_SHOPPING_SUGGESTED_PRODUCTS"),
       @SerializedName("MARKETPLACE_SHOPS")
       VALUE_MARKETPLACE_SHOPS("MARKETPLACE_SHOPS"),
       @SerializedName("TEST")

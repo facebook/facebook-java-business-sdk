@@ -34,7 +34,7 @@ public class AdsPixelSharedAgenciesEdge {
     String id = "<PIXEL_ID>";
     APIContext context = new APIContext(access_token).enableDebug(true);
 
-    new AdsPixel(id, context).getShareDAgencies()
+    new AdsPixel(id, context).getSharedAgencies()
       .execute();
 
   }

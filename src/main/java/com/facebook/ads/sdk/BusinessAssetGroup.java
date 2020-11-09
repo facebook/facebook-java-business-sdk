@@ -1736,6 +1736,7 @@ public class BusinessAssetGroup extends APINode {
       "android_key_hash",
       "android_sdk_error_categories",
       "app_domains",
+      "app_events_config",
       "app_events_feature_bitmask",
       "app_events_session_timeout",
       "app_install_tracked",
@@ -1961,6 +1962,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedApplications requestAppDomainsField (boolean value) {
       this.requestField("app_domains", value);
+      return this;
+    }
+    public APIRequestGetContainedApplications requestAppEventsConfigField () {
+      return this.requestAppEventsConfigField(true);
+    }
+    public APIRequestGetContainedApplications requestAppEventsConfigField (boolean value) {
+      this.requestField("app_events_config", value);
       return this;
     }
     public APIRequestGetContainedApplications requestAppEventsFeatureBitmaskField () {
@@ -4233,6 +4241,7 @@ public class BusinessAssetGroup extends APINode {
       "checkins",
       "company_overview",
       "connected_instagram_account",
+      "connected_page_backed_instagram_account",
       "contact_address",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
@@ -4601,6 +4610,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedPages requestConnectedInstagramAccountField (boolean value) {
       this.requestField("connected_instagram_account", value);
+      return this;
+    }
+    public APIRequestGetContainedPages requestConnectedPageBackedInstagramAccountField () {
+      return this.requestConnectedPageBackedInstagramAccountField(true);
+    }
+    public APIRequestGetContainedPages requestConnectedPageBackedInstagramAccountField (boolean value) {
+      this.requestField("connected_page_backed_instagram_account", value);
       return this;
     }
     public APIRequestGetContainedPages requestContactAddressField () {
@@ -6710,8 +6726,6 @@ public class BusinessAssetGroup extends APINode {
       VALUE_PROFILE_PLUS_ANALYZE("PROFILE_PLUS_ANALYZE"),
       @SerializedName("PROFILE_PLUS_CREATE_CONTENT")
       VALUE_PROFILE_PLUS_CREATE_CONTENT("PROFILE_PLUS_CREATE_CONTENT"),
-      @SerializedName("PROFILE_PLUS_LIVE_STREAM_MODERATION")
-      VALUE_PROFILE_PLUS_LIVE_STREAM_MODERATION("PROFILE_PLUS_LIVE_STREAM_MODERATION"),
       @SerializedName("PROFILE_PLUS_MANAGE")
       VALUE_PROFILE_PLUS_MANAGE("PROFILE_PLUS_MANAGE"),
       @SerializedName("PROFILE_PLUS_MESSAGING")

@@ -1545,7 +1545,6 @@ public class AdCreative extends APINode {
     public static final String[] PARAMS = {
       "thumbnail_height",
       "thumbnail_width",
-      "with_unified_spec",
     };
 
     public static final String[] FIELDS = {
@@ -1674,15 +1673,6 @@ public class AdCreative extends APINode {
     }
     public APIRequestGet setThumbnailWidth (String thumbnailWidth) {
       this.setParam("thumbnail_width", thumbnailWidth);
-      return this;
-    }
-
-    public APIRequestGet setWithUnifiedSpec (Boolean withUnifiedSpec) {
-      this.setParam("with_unified_spec", withUnifiedSpec);
-      return this;
-    }
-    public APIRequestGet setWithUnifiedSpec (String withUnifiedSpec) {
-      this.setParam("with_unified_spec", withUnifiedSpec);
       return this;
     }
 
@@ -2347,6 +2337,8 @@ public class AdCreative extends APINode {
       VALUE_PURCHASE_GIFT_CARDS("PURCHASE_GIFT_CARDS"),
       @SerializedName("RECORD_NOW")
       VALUE_RECORD_NOW("RECORD_NOW"),
+      @SerializedName("REFER_FRIENDS")
+      VALUE_REFER_FRIENDS("REFER_FRIENDS"),
       @SerializedName("REQUEST_TIME")
       VALUE_REQUEST_TIME("REQUEST_TIME"),
       @SerializedName("SAY_THANKS")
@@ -2367,6 +2359,10 @@ public class AdCreative extends APINode {
       VALUE_SOTTO_SUBSCRIBE("SOTTO_SUBSCRIBE"),
       @SerializedName("SUBSCRIBE")
       VALUE_SUBSCRIBE("SUBSCRIBE"),
+      @SerializedName("SWIPE_UP_PRODUCT")
+      VALUE_SWIPE_UP_PRODUCT("SWIPE_UP_PRODUCT"),
+      @SerializedName("SWIPE_UP_SHOP")
+      VALUE_SWIPE_UP_SHOP("SWIPE_UP_SHOP"),
       @SerializedName("UPDATE_APP")
       VALUE_UPDATE_APP("UPDATE_APP"),
       @SerializedName("USE_APP")

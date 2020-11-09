@@ -236,12 +236,18 @@ public class AdRuleExecutionSpec extends APINode {
 
 
   public static enum EnumExecutionType {
+      @SerializedName("ADD_INTEREST_RELAXATION")
+      VALUE_ADD_INTEREST_RELAXATION("ADD_INTEREST_RELAXATION"),
+      @SerializedName("ADD_QUESTIONNAIRE_INTERESTS")
+      VALUE_ADD_QUESTIONNAIRE_INTERESTS("ADD_QUESTIONNAIRE_INTERESTS"),
       @SerializedName("CHANGE_BID")
       VALUE_CHANGE_BID("CHANGE_BID"),
       @SerializedName("CHANGE_BUDGET")
       VALUE_CHANGE_BUDGET("CHANGE_BUDGET"),
       @SerializedName("CHANGE_CAMPAIGN_BUDGET")
       VALUE_CHANGE_CAMPAIGN_BUDGET("CHANGE_CAMPAIGN_BUDGET"),
+      @SerializedName("INCREASE_RADIUS")
+      VALUE_INCREASE_RADIUS("INCREASE_RADIUS"),
       @SerializedName("NOTIFICATION")
       VALUE_NOTIFICATION("NOTIFICATION"),
       @SerializedName("PAUSE")
@@ -254,6 +260,8 @@ public class AdRuleExecutionSpec extends APINode {
       VALUE_ROTATE("ROTATE"),
       @SerializedName("UNPAUSE")
       VALUE_UNPAUSE("UNPAUSE"),
+      @SerializedName("UPDATE_CREATIVE")
+      VALUE_UPDATE_CREATIVE("UPDATE_CREATIVE"),
       ;
 
       private String value;
