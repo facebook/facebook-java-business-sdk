@@ -35,7 +35,8 @@ public class ContentTest {
                 .title("4-title")
                 .description("5-description")
                 .brand("6-brand")
-                .category("7-category");
+                .category("7-category")
+                .deliveryCategory(DeliveryCategory.in_store);
         String expected = String.join("\n", "class Content {",
                 "    productId: 1-id",
                 "    quantity: 2",
@@ -44,6 +45,7 @@ public class ContentTest {
                 "    description: 5-description",
                 "    brand: 6-brand",
                 "    category: 7-category",
+                "    deliveryCategory: in_store",
                 "}");
 
         assertEquals(content.toString(), expected);
