@@ -5862,6 +5862,7 @@ public class Group extends APINode {
       "scheduled_publish_time",
       "slideshow_spec",
       "source",
+      "source_instagram_media_id",
       "spherical",
       "start_offset",
       "swap_mode",
@@ -6343,6 +6344,11 @@ public class Group extends APINode {
 
     public APIRequestCreateVideo setSource (String source) {
       this.setParam("source", source);
+      return this;
+    }
+
+    public APIRequestCreateVideo setSourceInstagramMediaId (String sourceInstagramMediaId) {
+      this.setParam("source_instagram_media_id", sourceInstagramMediaId);
       return this;
     }
 

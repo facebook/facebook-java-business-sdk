@@ -536,6 +536,8 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_SIGN_UP("SIGN_UP"),
       @SerializedName("SOTTO_SUBSCRIBE")
       VALUE_SOTTO_SUBSCRIBE("SOTTO_SUBSCRIBE"),
+      @SerializedName("START_ORDER")
+      VALUE_START_ORDER("START_ORDER"),
       @SerializedName("SUBSCRIBE")
       VALUE_SUBSCRIBE("SUBSCRIBE"),
       @SerializedName("SWIPE_UP_PRODUCT")

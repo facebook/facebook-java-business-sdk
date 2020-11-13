@@ -598,6 +598,10 @@ public class AdAccount extends APINode {
     return new APIRequestGetCampaignsByLabels(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetConnectedInstagramAccounts getConnectedInstagramAccounts() {
+    return new APIRequestGetConnectedInstagramAccounts(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetContentDeliveryReport getContentDeliveryReport() {
     return new APIRequestGetContentDeliveryReport(this.getPrefixedId().toString(), context);
   }
@@ -2027,6 +2031,7 @@ public class AdAccount extends APINode {
       "instagram_actor_id",
       "instagram_permalink_url",
       "instagram_story_id",
+      "instagram_user_id",
       "interactive_components_spec",
       "link_deep_link_url",
       "link_destination_display_url",
@@ -2046,6 +2051,7 @@ public class AdAccount extends APINode {
       "portrait_customizations",
       "product_set_id",
       "recommender_settings",
+      "source_instagram_media_id",
       "status",
       "template_url",
       "template_url_spec",
@@ -2341,6 +2347,13 @@ public class AdAccount extends APINode {
       this.requestField("instagram_story_id", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestInstagramUserIdField () {
+      return this.requestInstagramUserIdField(true);
+    }
+    public APIRequestGetAdCreatives requestInstagramUserIdField (boolean value) {
+      this.requestField("instagram_user_id", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestInteractiveComponentsSpecField () {
       return this.requestInteractiveComponentsSpecField(true);
     }
@@ -2474,6 +2487,13 @@ public class AdAccount extends APINode {
       this.requestField("recommender_settings", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestSourceInstagramMediaIdField () {
+      return this.requestSourceInstagramMediaIdField(true);
+    }
+    public APIRequestGetAdCreatives requestSourceInstagramMediaIdField (boolean value) {
+      this.requestField("source_instagram_media_id", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestStatusField () {
       return this.requestStatusField(true);
     }
@@ -2560,6 +2580,7 @@ public class AdAccount extends APINode {
       "image_url",
       "instagram_actor_id",
       "instagram_permalink_url",
+      "instagram_user_id",
       "instant_checkout_setting",
       "interactive_components_spec",
       "is_dco_internal",
@@ -2577,6 +2598,7 @@ public class AdAccount extends APINode {
       "portrait_customizations",
       "product_set_id",
       "recommender_settings",
+      "source_instagram_media_id",
       "template_url",
       "template_url_spec",
       "thumbnail_url",
@@ -2785,6 +2807,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdCreative setInstagramUserId (String instagramUserId) {
+      this.setParam("instagram_user_id", instagramUserId);
+      return this;
+    }
+
     public APIRequestCreateAdCreative setInstantCheckoutSetting (AdCreative.EnumInstantCheckoutSetting instantCheckoutSetting) {
       this.setParam("instant_checkout_setting", instantCheckoutSetting);
       return this;
@@ -2899,6 +2926,11 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdCreative setRecommenderSettings (String recommenderSettings) {
       this.setParam("recommender_settings", recommenderSettings);
+      return this;
+    }
+
+    public APIRequestCreateAdCreative setSourceInstagramMediaId (String sourceInstagramMediaId) {
+      this.setParam("source_instagram_media_id", sourceInstagramMediaId);
       return this;
     }
 
@@ -3019,6 +3051,7 @@ public class AdAccount extends APINode {
       "instagram_actor_id",
       "instagram_permalink_url",
       "instagram_story_id",
+      "instagram_user_id",
       "interactive_components_spec",
       "link_deep_link_url",
       "link_destination_display_url",
@@ -3038,6 +3071,7 @@ public class AdAccount extends APINode {
       "portrait_customizations",
       "product_set_id",
       "recommender_settings",
+      "source_instagram_media_id",
       "status",
       "template_url",
       "template_url_spec",
@@ -3351,6 +3385,13 @@ public class AdAccount extends APINode {
       this.requestField("instagram_story_id", value);
       return this;
     }
+    public APIRequestGetAdCreativesByLabels requestInstagramUserIdField () {
+      return this.requestInstagramUserIdField(true);
+    }
+    public APIRequestGetAdCreativesByLabels requestInstagramUserIdField (boolean value) {
+      this.requestField("instagram_user_id", value);
+      return this;
+    }
     public APIRequestGetAdCreativesByLabels requestInteractiveComponentsSpecField () {
       return this.requestInteractiveComponentsSpecField(true);
     }
@@ -3482,6 +3523,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdCreativesByLabels requestRecommenderSettingsField (boolean value) {
       this.requestField("recommender_settings", value);
+      return this;
+    }
+    public APIRequestGetAdCreativesByLabels requestSourceInstagramMediaIdField () {
+      return this.requestSourceInstagramMediaIdField(true);
+    }
+    public APIRequestGetAdCreativesByLabels requestSourceInstagramMediaIdField (boolean value) {
+      this.requestField("source_instagram_media_id", value);
       return this;
     }
     public APIRequestGetAdCreativesByLabels requestStatusField () {
@@ -10020,6 +10068,7 @@ public class AdAccount extends APINode {
       "sales_promo_id",
       "slideshow_spec",
       "source",
+      "source_instagram_media_id",
       "spherical",
       "start_offset",
       "swap_mode",
@@ -10504,6 +10553,11 @@ public class AdAccount extends APINode {
 
     public APIRequestCreateAdVideo setSource (byte[] source) {
       this.setParam("source", source);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setSourceInstagramMediaId (String sourceInstagramMediaId) {
+      this.setParam("source_instagram_media_id", sourceInstagramMediaId);
       return this;
     }
 
@@ -14646,6 +14700,7 @@ public class AdAccount extends APINode {
       "objective",
       "pacing_type",
       "promoted_object",
+      "smart_promotion_type",
       "source_campaign_id",
       "special_ad_categories",
       "special_ad_category_country",
@@ -14799,6 +14854,15 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateCampaign setPromotedObject (String promotedObject) {
       this.setParam("promoted_object", promotedObject);
+      return this;
+    }
+
+    public APIRequestCreateCampaign setSmartPromotionType (Campaign.EnumSmartPromotionType smartPromotionType) {
+      this.setParam("smart_promotion_type", smartPromotionType);
+      return this;
+    }
+    public APIRequestCreateCampaign setSmartPromotionType (String smartPromotionType) {
+      this.setParam("smart_promotion_type", smartPromotionType);
       return this;
     }
 
@@ -15295,6 +15359,230 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetCampaignsByLabels requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetConnectedInstagramAccounts extends APIRequest<IGUser> {
+
+    APINodeList<IGUser> lastResponse = null;
+    @Override
+    public APINodeList<IGUser> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "biography",
+      "business_discovery",
+      "followers_count",
+      "follows_count",
+      "id",
+      "ig_id",
+      "is_ig_shopping_seller_policy_enabled",
+      "media_count",
+      "mentioned_comment",
+      "mentioned_media",
+      "name",
+      "profile_picture_url",
+      "shopping_review_status",
+      "username",
+      "website",
+    };
+
+    @Override
+    public APINodeList<IGUser> parseResponse(String response, String header) throws APIException {
+      return IGUser.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<IGUser> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<IGUser> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<IGUser>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<IGUser>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<IGUser>>() {
+           public APINodeList<IGUser> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetConnectedInstagramAccounts.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetConnectedInstagramAccounts(String nodeId, APIContext context) {
+      super(context, nodeId, "/connected_instagram_accounts", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetConnectedInstagramAccounts setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConnectedInstagramAccounts setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetConnectedInstagramAccounts requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetConnectedInstagramAccounts requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConnectedInstagramAccounts requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetConnectedInstagramAccounts requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConnectedInstagramAccounts requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConnectedInstagramAccounts requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetConnectedInstagramAccounts requestBiographyField () {
+      return this.requestBiographyField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestBiographyField (boolean value) {
+      this.requestField("biography", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccounts requestBusinessDiscoveryField () {
+      return this.requestBusinessDiscoveryField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestBusinessDiscoveryField (boolean value) {
+      this.requestField("business_discovery", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccounts requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccounts requestFollowsCountField () {
+      return this.requestFollowsCountField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestFollowsCountField (boolean value) {
+      this.requestField("follows_count", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccounts requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccounts requestIgIdField () {
+      return this.requestIgIdField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestIgIdField (boolean value) {
+      this.requestField("ig_id", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccounts requestIsIgShoppingSellerPolicyEnabledField () {
+      return this.requestIsIgShoppingSellerPolicyEnabledField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestIsIgShoppingSellerPolicyEnabledField (boolean value) {
+      this.requestField("is_ig_shopping_seller_policy_enabled", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccounts requestMediaCountField () {
+      return this.requestMediaCountField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestMediaCountField (boolean value) {
+      this.requestField("media_count", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccounts requestMentionedCommentField () {
+      return this.requestMentionedCommentField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestMentionedCommentField (boolean value) {
+      this.requestField("mentioned_comment", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccounts requestMentionedMediaField () {
+      return this.requestMentionedMediaField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestMentionedMediaField (boolean value) {
+      this.requestField("mentioned_media", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccounts requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccounts requestProfilePictureUrlField () {
+      return this.requestProfilePictureUrlField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestProfilePictureUrlField (boolean value) {
+      this.requestField("profile_picture_url", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccounts requestShoppingReviewStatusField () {
+      return this.requestShoppingReviewStatusField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestShoppingReviewStatusField (boolean value) {
+      this.requestField("shopping_review_status", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccounts requestUsernameField () {
+      return this.requestUsernameField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestUsernameField (boolean value) {
+      this.requestField("username", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccounts requestWebsiteField () {
+      return this.requestWebsiteField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestWebsiteField (boolean value) {
+      this.requestField("website", value);
       return this;
     }
   }

@@ -2628,51 +2628,6 @@ public class SystemUser extends APINode {
     }
   }
 
-  public static enum EnumRole {
-      @SerializedName("ADMIN")
-      VALUE_ADMIN("ADMIN"),
-      @SerializedName("ADS_RIGHTS_REVIEWER")
-      VALUE_ADS_RIGHTS_REVIEWER("ADS_RIGHTS_REVIEWER"),
-      @SerializedName("DEFAULT")
-      VALUE_DEFAULT("DEFAULT"),
-      @SerializedName("DEVELOPER")
-      VALUE_DEVELOPER("DEVELOPER"),
-      @SerializedName("EMPLOYEE")
-      VALUE_EMPLOYEE("EMPLOYEE"),
-      @SerializedName("FINANCE_ANALYST")
-      VALUE_FINANCE_ANALYST("FINANCE_ANALYST"),
-      @SerializedName("FINANCE_EDIT")
-      VALUE_FINANCE_EDIT("FINANCE_EDIT"),
-      @SerializedName("FINANCE_EDITOR")
-      VALUE_FINANCE_EDITOR("FINANCE_EDITOR"),
-      @SerializedName("FINANCE_VIEW")
-      VALUE_FINANCE_VIEW("FINANCE_VIEW"),
-      @SerializedName("MANAGE")
-      VALUE_MANAGE("MANAGE"),
-      @SerializedName("PARTNER_CENTER_ADMIN")
-      VALUE_PARTNER_CENTER_ADMIN("PARTNER_CENTER_ADMIN"),
-      @SerializedName("PARTNER_CENTER_ANALYST")
-      VALUE_PARTNER_CENTER_ANALYST("PARTNER_CENTER_ANALYST"),
-      @SerializedName("PARTNER_CENTER_EDUCATION")
-      VALUE_PARTNER_CENTER_EDUCATION("PARTNER_CENTER_EDUCATION"),
-      @SerializedName("PARTNER_CENTER_MARKETING")
-      VALUE_PARTNER_CENTER_MARKETING("PARTNER_CENTER_MARKETING"),
-      @SerializedName("PARTNER_CENTER_OPERATIONS")
-      VALUE_PARTNER_CENTER_OPERATIONS("PARTNER_CENTER_OPERATIONS"),
-      ;
-
-      private String value;
-
-      private EnumRole(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {

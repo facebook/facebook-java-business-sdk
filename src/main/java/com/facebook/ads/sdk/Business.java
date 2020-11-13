@@ -382,10 +382,6 @@ public class Business extends APINode {
     return new APIRequestGetBusinessUsers(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateBusinessUser createBusinessUser() {
-    return new APIRequestCreateBusinessUser(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestCreateClaimCustomConversion createClaimCustomConversion() {
     return new APIRequestCreateClaimCustomConversion(this.getPrefixedId().toString(), context);
   }
@@ -488,6 +484,10 @@ public class Business extends APINode {
 
   public APIRequestGetInstagramAccounts getInstagramAccounts() {
     return new APIRequestGetInstagramAccounts(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetInstagramBusinessAccounts getInstagramBusinessAccounts() {
+    return new APIRequestGetInstagramBusinessAccounts(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestDeleteManagedBusinesses deleteManagedBusinesses() {
@@ -612,10 +612,6 @@ public class Business extends APINode {
 
   public APIRequestGetSystemUsers getSystemUsers() {
     return new APIRequestGetSystemUsers(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateSystemUser createSystemUser() {
-    return new APIRequestCreateSystemUser(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetThirdPartyMeasurementReportDataset getThirdPartyMeasurementReportDataset() {
@@ -4186,126 +4182,6 @@ public class Business extends APINode {
       this.requestField("two_fac_status", value);
       return this;
     }
-  }
-
-  public static class APIRequestCreateBusinessUser extends APIRequest<BusinessUser> {
-
-    BusinessUser lastResponse = null;
-    @Override
-    public BusinessUser getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "email",
-      "role",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public BusinessUser parseResponse(String response, String header) throws APIException {
-      return BusinessUser.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public BusinessUser execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public BusinessUser execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<BusinessUser> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<BusinessUser> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, BusinessUser>() {
-           public BusinessUser apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateBusinessUser.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateBusinessUser(String nodeId, APIContext context) {
-      super(context, nodeId, "/business_users", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateBusinessUser setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateBusinessUser setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateBusinessUser setEmail (String email) {
-      this.setParam("email", email);
-      return this;
-    }
-
-    public APIRequestCreateBusinessUser setRole (BusinessUser.EnumRole role) {
-      this.setParam("role", role);
-      return this;
-    }
-    public APIRequestCreateBusinessUser setRole (String role) {
-      this.setParam("role", role);
-      return this;
-    }
-
-    public APIRequestCreateBusinessUser requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateBusinessUser requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateBusinessUser requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateBusinessUser requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateBusinessUser requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateBusinessUser requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestCreateClaimCustomConversion extends APIRequest<CustomConversion> {
@@ -10063,7 +9939,6 @@ public class Business extends APINode {
       "id",
       "is_access_revoked",
       "is_automated_experience",
-      "last_payment_time",
       "legal_entity_name",
       "liable_biz_name",
       "max_balance",
@@ -10220,13 +10095,6 @@ public class Business extends APINode {
     }
     public APIRequestGetExtendedCredits requestIsAutomatedExperienceField (boolean value) {
       this.requestField("is_automated_experience", value);
-      return this;
-    }
-    public APIRequestGetExtendedCredits requestLastPaymentTimeField () {
-      return this.requestLastPaymentTimeField(true);
-    }
-    public APIRequestGetExtendedCredits requestLastPaymentTimeField (boolean value) {
-      this.requestField("last_payment_time", value);
       return this;
     }
     public APIRequestGetExtendedCredits requestLegalEntityNameField () {
@@ -10880,6 +10748,230 @@ public class Business extends APINode {
     }
     public APIRequestGetInstagramAccounts requestUsernameField (boolean value) {
       this.requestField("username", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetInstagramBusinessAccounts extends APIRequest<IGUser> {
+
+    APINodeList<IGUser> lastResponse = null;
+    @Override
+    public APINodeList<IGUser> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "biography",
+      "business_discovery",
+      "followers_count",
+      "follows_count",
+      "id",
+      "ig_id",
+      "is_ig_shopping_seller_policy_enabled",
+      "media_count",
+      "mentioned_comment",
+      "mentioned_media",
+      "name",
+      "profile_picture_url",
+      "shopping_review_status",
+      "username",
+      "website",
+    };
+
+    @Override
+    public APINodeList<IGUser> parseResponse(String response, String header) throws APIException {
+      return IGUser.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<IGUser> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<IGUser> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<IGUser>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<IGUser>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<IGUser>>() {
+           public APINodeList<IGUser> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetInstagramBusinessAccounts.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetInstagramBusinessAccounts(String nodeId, APIContext context) {
+      super(context, nodeId, "/instagram_business_accounts", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetInstagramBusinessAccounts setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInstagramBusinessAccounts setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetInstagramBusinessAccounts requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetInstagramBusinessAccounts requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInstagramBusinessAccounts requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetInstagramBusinessAccounts requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInstagramBusinessAccounts requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInstagramBusinessAccounts requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetInstagramBusinessAccounts requestBiographyField () {
+      return this.requestBiographyField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestBiographyField (boolean value) {
+      this.requestField("biography", value);
+      return this;
+    }
+    public APIRequestGetInstagramBusinessAccounts requestBusinessDiscoveryField () {
+      return this.requestBusinessDiscoveryField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestBusinessDiscoveryField (boolean value) {
+      this.requestField("business_discovery", value);
+      return this;
+    }
+    public APIRequestGetInstagramBusinessAccounts requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
+      return this;
+    }
+    public APIRequestGetInstagramBusinessAccounts requestFollowsCountField () {
+      return this.requestFollowsCountField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestFollowsCountField (boolean value) {
+      this.requestField("follows_count", value);
+      return this;
+    }
+    public APIRequestGetInstagramBusinessAccounts requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetInstagramBusinessAccounts requestIgIdField () {
+      return this.requestIgIdField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestIgIdField (boolean value) {
+      this.requestField("ig_id", value);
+      return this;
+    }
+    public APIRequestGetInstagramBusinessAccounts requestIsIgShoppingSellerPolicyEnabledField () {
+      return this.requestIsIgShoppingSellerPolicyEnabledField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestIsIgShoppingSellerPolicyEnabledField (boolean value) {
+      this.requestField("is_ig_shopping_seller_policy_enabled", value);
+      return this;
+    }
+    public APIRequestGetInstagramBusinessAccounts requestMediaCountField () {
+      return this.requestMediaCountField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestMediaCountField (boolean value) {
+      this.requestField("media_count", value);
+      return this;
+    }
+    public APIRequestGetInstagramBusinessAccounts requestMentionedCommentField () {
+      return this.requestMentionedCommentField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestMentionedCommentField (boolean value) {
+      this.requestField("mentioned_comment", value);
+      return this;
+    }
+    public APIRequestGetInstagramBusinessAccounts requestMentionedMediaField () {
+      return this.requestMentionedMediaField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestMentionedMediaField (boolean value) {
+      this.requestField("mentioned_media", value);
+      return this;
+    }
+    public APIRequestGetInstagramBusinessAccounts requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetInstagramBusinessAccounts requestProfilePictureUrlField () {
+      return this.requestProfilePictureUrlField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestProfilePictureUrlField (boolean value) {
+      this.requestField("profile_picture_url", value);
+      return this;
+    }
+    public APIRequestGetInstagramBusinessAccounts requestShoppingReviewStatusField () {
+      return this.requestShoppingReviewStatusField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestShoppingReviewStatusField (boolean value) {
+      this.requestField("shopping_review_status", value);
+      return this;
+    }
+    public APIRequestGetInstagramBusinessAccounts requestUsernameField () {
+      return this.requestUsernameField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestUsernameField (boolean value) {
+      this.requestField("username", value);
+      return this;
+    }
+    public APIRequestGetInstagramBusinessAccounts requestWebsiteField () {
+      return this.requestWebsiteField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestWebsiteField (boolean value) {
+      this.requestField("website", value);
       return this;
     }
   }
@@ -18034,136 +18126,6 @@ public class Business extends APINode {
       this.requestField("name", value);
       return this;
     }
-  }
-
-  public static class APIRequestCreateSystemUser extends APIRequest<SystemUser> {
-
-    SystemUser lastResponse = null;
-    @Override
-    public SystemUser getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "name",
-      "role",
-      "system_user_id",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public SystemUser parseResponse(String response, String header) throws APIException {
-      return SystemUser.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public SystemUser execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public SystemUser execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<SystemUser> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<SystemUser> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, SystemUser>() {
-           public SystemUser apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateSystemUser.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateSystemUser(String nodeId, APIContext context) {
-      super(context, nodeId, "/system_users", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateSystemUser setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateSystemUser setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateSystemUser setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateSystemUser setRole (SystemUser.EnumRole role) {
-      this.setParam("role", role);
-      return this;
-    }
-    public APIRequestCreateSystemUser setRole (String role) {
-      this.setParam("role", role);
-      return this;
-    }
-
-    public APIRequestCreateSystemUser setSystemUserId (Long systemUserId) {
-      this.setParam("system_user_id", systemUserId);
-      return this;
-    }
-    public APIRequestCreateSystemUser setSystemUserId (String systemUserId) {
-      this.setParam("system_user_id", systemUserId);
-      return this;
-    }
-
-    public APIRequestCreateSystemUser requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateSystemUser requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateSystemUser requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateSystemUser requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateSystemUser requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateSystemUser requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestGetThirdPartyMeasurementReportDataset extends APIRequest<ThirdPartyMeasurementReportDataset> {

@@ -1476,6 +1476,7 @@ public class ProductItem extends APINode {
     public static final String[] PARAMS = {
       "additional_image_files",
       "additional_image_urls",
+      "additional_uploaded_image_ids",
       "additional_variant_attributes",
       "android_app_name",
       "android_class",
@@ -1610,6 +1611,15 @@ public class ProductItem extends APINode {
     }
     public APIRequestUpdate setAdditionalImageUrls (String additionalImageUrls) {
       this.setParam("additional_image_urls", additionalImageUrls);
+      return this;
+    }
+
+    public APIRequestUpdate setAdditionalUploadedImageIds (List<String> additionalUploadedImageIds) {
+      this.setParam("additional_uploaded_image_ids", additionalUploadedImageIds);
+      return this;
+    }
+    public APIRequestUpdate setAdditionalUploadedImageIds (String additionalUploadedImageIds) {
+      this.setParam("additional_uploaded_image_ids", additionalUploadedImageIds);
       return this;
     }
 

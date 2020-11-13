@@ -163,6 +163,10 @@ public class AdCampaignActivity extends APINode {
   private Object mTargetingExpansionNew = null;
   @SerializedName("targeting_expansion_old")
   private Object mTargetingExpansionOld = null;
+  @SerializedName("targeting_new")
+  private Object mTargetingNew = null;
+  @SerializedName("targeting_old")
+  private Object mTargetingOld = null;
   @SerializedName("updated_time_new")
   private String mUpdatedTimeNew = null;
   @SerializedName("updated_time_old")
@@ -597,6 +601,14 @@ public class AdCampaignActivity extends APINode {
     return mTargetingExpansionOld;
   }
 
+  public Object getFieldTargetingNew() {
+    return mTargetingNew;
+  }
+
+  public Object getFieldTargetingOld() {
+    return mTargetingOld;
+  }
+
   public String getFieldUpdatedTimeNew() {
     return mUpdatedTimeNew;
   }
@@ -672,6 +684,8 @@ public class AdCampaignActivity extends APINode {
       "stop_time_old",
       "targeting_expansion_new",
       "targeting_expansion_old",
+      "targeting_new",
+      "targeting_old",
       "updated_time_new",
       "updated_time_old",
     };
@@ -1143,6 +1157,20 @@ public class AdCampaignActivity extends APINode {
       this.requestField("targeting_expansion_old", value);
       return this;
     }
+    public APIRequestGet requestTargetingNewField () {
+      return this.requestTargetingNewField(true);
+    }
+    public APIRequestGet requestTargetingNewField (boolean value) {
+      this.requestField("targeting_new", value);
+      return this;
+    }
+    public APIRequestGet requestTargetingOldField () {
+      return this.requestTargetingOldField(true);
+    }
+    public APIRequestGet requestTargetingOldField (boolean value) {
+      this.requestField("targeting_old", value);
+      return this;
+    }
     public APIRequestGet requestUpdatedTimeNewField () {
       return this.requestUpdatedTimeNewField(true);
     }
@@ -1474,6 +1502,8 @@ public class AdCampaignActivity extends APINode {
     this.mStopTimeOld = instance.mStopTimeOld;
     this.mTargetingExpansionNew = instance.mTargetingExpansionNew;
     this.mTargetingExpansionOld = instance.mTargetingExpansionOld;
+    this.mTargetingNew = instance.mTargetingNew;
+    this.mTargetingOld = instance.mTargetingOld;
     this.mUpdatedTimeNew = instance.mUpdatedTimeNew;
     this.mUpdatedTimeOld = instance.mUpdatedTimeOld;
     this.context = instance.context;

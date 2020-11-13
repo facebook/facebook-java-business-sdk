@@ -367,6 +367,7 @@ public class AdLabel extends APINode {
       "instagram_actor_id",
       "instagram_permalink_url",
       "instagram_story_id",
+      "instagram_user_id",
       "interactive_components_spec",
       "link_deep_link_url",
       "link_destination_display_url",
@@ -386,6 +387,7 @@ public class AdLabel extends APINode {
       "portrait_customizations",
       "product_set_id",
       "recommender_settings",
+      "source_instagram_media_id",
       "status",
       "template_url",
       "template_url_spec",
@@ -681,6 +683,13 @@ public class AdLabel extends APINode {
       this.requestField("instagram_story_id", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestInstagramUserIdField () {
+      return this.requestInstagramUserIdField(true);
+    }
+    public APIRequestGetAdCreatives requestInstagramUserIdField (boolean value) {
+      this.requestField("instagram_user_id", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestInteractiveComponentsSpecField () {
       return this.requestInteractiveComponentsSpecField(true);
     }
@@ -812,6 +821,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdCreatives requestRecommenderSettingsField (boolean value) {
       this.requestField("recommender_settings", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestSourceInstagramMediaIdField () {
+      return this.requestSourceInstagramMediaIdField(true);
+    }
+    public APIRequestGetAdCreatives requestSourceInstagramMediaIdField (boolean value) {
+      this.requestField("source_instagram_media_id", value);
       return this;
     }
     public APIRequestGetAdCreatives requestStatusField () {

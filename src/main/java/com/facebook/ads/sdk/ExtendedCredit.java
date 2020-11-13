@@ -69,8 +69,6 @@ public class ExtendedCredit extends APINode {
   private Boolean mIsAccessRevoked = null;
   @SerializedName("is_automated_experience")
   private Boolean mIsAutomatedExperience = null;
-  @SerializedName("last_payment_time")
-  private String mLastPaymentTime = null;
   @SerializedName("legal_entity_name")
   private String mLegalEntityName = null;
   @SerializedName("liable_biz_name")
@@ -349,10 +347,6 @@ public class ExtendedCredit extends APINode {
 
   public Boolean getFieldIsAutomatedExperience() {
     return mIsAutomatedExperience;
-  }
-
-  public String getFieldLastPaymentTime() {
-    return mLastPaymentTime;
   }
 
   public String getFieldLegalEntityName() {
@@ -1145,7 +1139,6 @@ public class ExtendedCredit extends APINode {
       "id",
       "is_access_revoked",
       "is_automated_experience",
-      "last_payment_time",
       "legal_entity_name",
       "liable_biz_name",
       "max_balance",
@@ -1295,13 +1288,6 @@ public class ExtendedCredit extends APINode {
       this.requestField("is_automated_experience", value);
       return this;
     }
-    public APIRequestGet requestLastPaymentTimeField () {
-      return this.requestLastPaymentTimeField(true);
-    }
-    public APIRequestGet requestLastPaymentTimeField (boolean value) {
-      this.requestField("last_payment_time", value);
-      return this;
-    }
     public APIRequestGet requestLegalEntityNameField () {
       return this.requestLegalEntityNameField(true);
     }
@@ -1389,7 +1375,6 @@ public class ExtendedCredit extends APINode {
     this.mId = instance.mId;
     this.mIsAccessRevoked = instance.mIsAccessRevoked;
     this.mIsAutomatedExperience = instance.mIsAutomatedExperience;
-    this.mLastPaymentTime = instance.mLastPaymentTime;
     this.mLegalEntityName = instance.mLegalEntityName;
     this.mLiableBizName = instance.mLiableBizName;
     this.mMaxBalance = instance.mMaxBalance;

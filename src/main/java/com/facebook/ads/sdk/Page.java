@@ -30977,6 +30977,7 @@ public class Page extends APINode {
       "slideshow_spec",
       "social_actions",
       "source",
+      "source_instagram_media_id",
       "specified_dialect",
       "spherical",
       "sponsor_id",
@@ -31595,6 +31596,11 @@ public class Page extends APINode {
 
     public APIRequestCreateVideo setSource (String source) {
       this.setParam("source", source);
+      return this;
+    }
+
+    public APIRequestCreateVideo setSourceInstagramMediaId (String sourceInstagramMediaId) {
+      this.setParam("source_instagram_media_id", sourceInstagramMediaId);
       return this;
     }
 

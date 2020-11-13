@@ -384,10 +384,6 @@ public class User extends APINode {
     return new APIRequestDeleteAccessTokens(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateAccessToken createAccessToken() {
-    return new APIRequestCreateAccessToken(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetAccounts getAccounts() {
     return new APIRequestGetAccounts(this.getPrefixedId().toString(), context);
   }
@@ -934,136 +930,6 @@ public class User extends APINode {
 
     @Override
     public APIRequestDeleteAccessTokens requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateAccessToken extends APIRequest<User> {
-
-    User lastResponse = null;
-    @Override
-    public User getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "business_app",
-      "page_id",
-      "scope",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public User parseResponse(String response, String header) throws APIException {
-      return User.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public User execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public User execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<User> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<User> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, User>() {
-           public User apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateAccessToken.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateAccessToken(String nodeId, APIContext context) {
-      super(context, nodeId, "/access_tokens", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateAccessToken setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAccessToken setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateAccessToken setBusinessApp (Long businessApp) {
-      this.setParam("business_app", businessApp);
-      return this;
-    }
-    public APIRequestCreateAccessToken setBusinessApp (String businessApp) {
-      this.setParam("business_app", businessApp);
-      return this;
-    }
-
-    public APIRequestCreateAccessToken setPageId (String pageId) {
-      this.setParam("page_id", pageId);
-      return this;
-    }
-
-    public APIRequestCreateAccessToken setScope (List<Permission> scope) {
-      this.setParam("scope", scope);
-      return this;
-    }
-    public APIRequestCreateAccessToken setScope (String scope) {
-      this.setParam("scope", scope);
-      return this;
-    }
-
-    public APIRequestCreateAccessToken requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateAccessToken requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAccessToken requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateAccessToken requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAccessToken requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAccessToken requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -18085,6 +17951,7 @@ public class User extends APINode {
       "sales_promo_id",
       "slideshow_spec",
       "source",
+      "source_instagram_media_id",
       "spherical",
       "sponsor_id",
       "start_offset",
@@ -18581,6 +18448,11 @@ public class User extends APINode {
 
     public APIRequestCreateVideo setSource (String source) {
       this.setParam("source", source);
+      return this;
+    }
+
+    public APIRequestCreateVideo setSourceInstagramMediaId (String sourceInstagramMediaId) {
+      this.setParam("source_instagram_media_id", sourceInstagramMediaId);
       return this;
     }
 
