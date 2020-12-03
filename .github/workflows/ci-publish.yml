@@ -18,8 +18,10 @@ jobs:
           server-password: MAVEN_PASSWORD
       - name: Publish package
         run: |
-          openssl aes-256-cbc -K $encrypted_1285e1ddfb82_key -iv $encrypted_1285e1ddfb82_iv -in keyring.gpg.enc -out keyring.gpg -d
-          gpg --import keyring.gpg
+          print "${GPG_SIGNING_KEY}" | base64 --decode > ~/keyring.gpg
+          gpg --import ~/keyring.gpg
+        env:
+          GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
       - name: Publish package
         run: mvn -B deploy
         env:
