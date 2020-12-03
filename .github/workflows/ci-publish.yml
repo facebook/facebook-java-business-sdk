@@ -24,7 +24,7 @@ jobs:
         env:
           GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
       - name: Publish package
-        run: mvn -B deploy
+        run: mvn -Djava.net.preferIPv6Addresses=true clean deploy --settings="settings.xml"
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
