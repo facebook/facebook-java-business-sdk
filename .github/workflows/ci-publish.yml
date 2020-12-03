@@ -16,10 +16,11 @@ jobs:
           server-id: ossrh
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
-      - name: Publish package
+      - name: Configure GPG Key
         run: |
-          print "${GPG_SIGNING_KEY}" | base64 --decode > ~/keyring.gpg
-          gpg --import ~/keyring.gpg
+          mkdir -p ~/.gnupg/
+          printf "${GPG_SIGNING_KEY}" | base64 --decode > ~/.gnupg/private.key
+          gpg --import ~/.gnupg/private.key
         env:
           GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
       - name: Publish package
