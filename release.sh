@@ -1,5 +1,6 @@
 main() {
   echo "start config"
+  set -e
   case $1 in
     "config_maven") config_maven "$@" ;;
   esac
@@ -7,12 +8,12 @@ main() {
 
 
 config_maven(){
-  if [ "$OSSRH_USERNAME" = "" -o "$OSSRH_PASSWORD" = "" ]; then
+  if [[ -z "${OSSRH_USERNAME}" || -z "${OSSRH_PASSWORD}" ]]; then
     die "ERROR: Variables OSSRH_USERNAME or OSSRH_PASSWORD not defined"
     exit 201
   fi
 
-  if [ "$GPG_KEYNAME" = "" -o "$GPG_PASSPHRASE" = "" ]; then
+  if [[ -z "${GPG_KEYNAME}" || -z "${GPG_PASSPHRASE}" ]]; then
     die "ERROR: Variables GPG_KEYNAME or GPG_PASSPHRASE not defined"
     exit 201
   fi
