@@ -1,3 +1,19 @@
+main() {
+  echo "start config"
+  case $1 in
+    "config_maven") config_maven "$@" ;;
+  esac
+}
+
+
+config_maven(){
+  if [ "$OSSRH_USERNAME" = "" -o "$OSSRH_PASSWORD" = "" ]; then
+    die "ERROR: Variables OSSRH_USERNAME or OSSRH_PASSWORD not defined"
+    exit 201
+
+  fi
+
+  cat <<EOF> ./.github/workflows/settings.xml
 <settings>
   <profiles>
     <profile>
@@ -20,3 +36,13 @@
     </server>
   </servers>
 </settings>
+EOF
+}
+
+die() {
+  echo ""
+  echo "FATAL: $*" >&2
+  exit 1
+}
+
+main "$@"
