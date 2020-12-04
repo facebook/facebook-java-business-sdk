@@ -10,7 +10,11 @@ config_maven(){
   if [ "$OSSRH_USERNAME" = "" -o "$OSSRH_PASSWORD" = "" ]; then
     die "ERROR: Variables OSSRH_USERNAME or OSSRH_PASSWORD not defined"
     exit 201
+  fi
 
+  if [ "$GPG_KEYNAME" = "" -o "$GPG_PASSPHRASE" = "" ]; then
+    die "ERROR: Variables GPG_KEYNAME or GPG_PASSPHRASE not defined"
+    exit 201
   fi
 
   cat <<EOF> ./.github/workflows/settings.xml
@@ -31,8 +35,8 @@ config_maven(){
   <servers>
     <server>
       <id>ossrh</id>
-      <username>${MAVEN_USERNAME}</username>
-      <password>${MAVEN_PASSWORD}</password>
+      <username>${OSSRH_USERNAME}</username>
+      <password>${OSSRH_PASSWORD}</password>
     </server>
   </servers>
 </settings>
