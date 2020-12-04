@@ -1,9 +1,8 @@
 name: Publish package to the Maven Central Repository
-on: [push, pull_request]
-  #release:
-  #  types: [created]
-  #pull_request:
-  #  types: [opened, edited]
+on:
+  release:
+    tags:
+    - 'v*'
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -13,9 +12,6 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-          # server-id: ossrh
-          # server-username: MAVEN_USERNAME
-          # server-password: MAVEN_PASSWORD
       - name: Configure GPG Key
         run: |
           mkdir -p ~/.gnupg/
