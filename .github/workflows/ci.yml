@@ -12,7 +12,5 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-      - name: Build and Verify
-        run: |
-          mvn package
-          mvn verify
+      - name: Build
+        run: mvn package
