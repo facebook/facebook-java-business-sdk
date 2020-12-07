@@ -12,6 +12,13 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
+      - name: Configure GPG Key
+        run: |
+          mkdir -p ~/.gnupg/
+          printf "${GPG_SIGNING_KEY}" | base64 --decode > ~/.gnupg/private.key
+          gpg --import --no-tty --batch --yes ~/.gnupg/private.key
+        env:
+          GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
       - name: Build and Verify
         run: |
           mvn package
