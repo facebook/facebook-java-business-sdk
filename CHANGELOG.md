@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Added
+- `action_source` field to Event for Conversions API.
+
 ## v9.0.0
 
 
