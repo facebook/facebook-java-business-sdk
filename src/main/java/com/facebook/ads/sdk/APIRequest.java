@@ -260,10 +260,13 @@ public class APIRequest<T extends APINode> {
     this.overrideUrl = url;
   }
 
-  protected void requestFieldInternal(String field, boolean value) {
+  protected void requestFieldInternal(String field, boolean addField) {
     if (returnFields == null) returnFields = new ArrayList<String>();
-    if (value == true && !returnFields.contains(field)) returnFields.add(field);
-    else returnFields.remove(field);
+    if (addField) {
+      if(!returnFields.contains(field)) returnFields.add(field);
+    } else {
+      returnFields.remove(field);
+    }
   }
 
   private Map<String, Object> getAllParams(Map<String, Object> extraParams) {
