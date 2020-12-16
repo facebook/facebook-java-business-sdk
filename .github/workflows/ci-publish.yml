@@ -1,8 +1,10 @@
 name: Publish package to the Maven Central Repository
+
 on:
-  release:
+  push:
     tags:
-    - 'v*'
+      - v*
+
 jobs:
   publish:
     runs-on: ubuntu-latest
