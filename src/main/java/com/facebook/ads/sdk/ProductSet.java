@@ -71,6 +71,8 @@ public class ProductSet extends APINode {
   private ProductCatalog mProductCatalog = null;
   @SerializedName("product_count")
   private Long mProductCount = null;
+  @SerializedName("retailer_id")
+  private String mRetailerId = null;
   protected static Gson gson = null;
 
   ProductSet() {
@@ -360,6 +362,10 @@ public class ProductSet extends APINode {
     return mProductCount;
   }
 
+  public String getFieldRetailerId() {
+    return mRetailerId;
+  }
+
 
 
   public static class APIRequestGetAutomotiveModels extends APIRequest<AutomotiveModel> {
@@ -379,6 +385,7 @@ public class ProductSet extends APINode {
       "automotive_model_id",
       "availability",
       "body_style",
+      "category_specific_fields",
       "currency",
       "custom_label_0",
       "description",
@@ -536,6 +543,13 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetAutomotiveModels requestBodyStyleField (boolean value) {
       this.requestField("body_style", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGetAutomotiveModels requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGetAutomotiveModels requestCurrencyField () {
@@ -709,6 +723,7 @@ public class ProductSet extends APINode {
     public static final String[] FIELDS = {
       "address",
       "applinks",
+      "category_specific_fields",
       "currency",
       "description",
       "destination_id",
@@ -843,6 +858,13 @@ public class ProductSet extends APINode {
       this.requestField("applinks", value);
       return this;
     }
+    public APIRequestGetDestinations requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGetDestinations requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
+      return this;
+    }
     public APIRequestGetDestinations requestCurrencyField () {
       return this.requestCurrencyField(true);
     }
@@ -936,6 +958,7 @@ public class ProductSet extends APINode {
 
     public static final String[] FIELDS = {
       "applinks",
+      "category_specific_fields",
       "currency",
       "description",
       "destination_airport",
@@ -1066,6 +1089,13 @@ public class ProductSet extends APINode {
       this.requestField("applinks", value);
       return this;
     }
+    public APIRequestGetFlights requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGetFlights requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
+      return this;
+    }
     public APIRequestGetFlights requestCurrencyField () {
       return this.requestCurrencyField(true);
     }
@@ -1191,6 +1221,7 @@ public class ProductSet extends APINode {
       "area_size",
       "area_unit",
       "availability",
+      "category_specific_fields",
       "co_2_emission_rating_eu",
       "currency",
       "days_on_market",
@@ -1412,6 +1443,13 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetHomeListings requestAvailabilityField (boolean value) {
       this.requestField("availability", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGetHomeListings requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGetHomeListings requestCo2EmissionRatingEuField () {
@@ -1643,6 +1681,7 @@ public class ProductSet extends APINode {
       "applinks",
       "brand",
       "category",
+      "category_specific_fields",
       "currency",
       "description",
       "guest_ratings",
@@ -1795,6 +1834,13 @@ public class ProductSet extends APINode {
       this.requestField("category", value);
       return this;
     }
+    public APIRequestGetHotels requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGetHotels requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
+      return this;
+    }
     public APIRequestGetHotels requestCurrencyField () {
       return this.requestCurrencyField(true);
     }
@@ -1924,6 +1970,7 @@ public class ProductSet extends APINode {
       "brand",
       "capability_to_review_status",
       "category",
+      "category_specific_fields",
       "color",
       "commerce_insights",
       "condition",
@@ -1936,11 +1983,13 @@ public class ProductSet extends APINode {
       "custom_label_4",
       "description",
       "expiration_date",
+      "fb_product_category",
       "gender",
       "gtin",
       "id",
       "image_cdn_urls",
       "image_url",
+      "images",
       "inventory",
       "manufacturer_part_number",
       "material",
@@ -2139,6 +2188,13 @@ public class ProductSet extends APINode {
       this.requestField("category", value);
       return this;
     }
+    public APIRequestGetProducts requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGetProducts requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
+      return this;
+    }
     public APIRequestGetProducts requestColorField () {
       return this.requestColorField(true);
     }
@@ -2223,6 +2279,13 @@ public class ProductSet extends APINode {
       this.requestField("expiration_date", value);
       return this;
     }
+    public APIRequestGetProducts requestFbProductCategoryField () {
+      return this.requestFbProductCategoryField(true);
+    }
+    public APIRequestGetProducts requestFbProductCategoryField (boolean value) {
+      this.requestField("fb_product_category", value);
+      return this;
+    }
     public APIRequestGetProducts requestGenderField () {
       return this.requestGenderField(true);
     }
@@ -2256,6 +2319,13 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetProducts requestImageUrlField (boolean value) {
       this.requestField("image_url", value);
+      return this;
+    }
+    public APIRequestGetProducts requestImagesField () {
+      return this.requestImagesField(true);
+    }
+    public APIRequestGetProducts requestImagesField (boolean value) {
+      this.requestField("images", value);
       return this;
     }
     public APIRequestGetProducts requestInventoryField () {
@@ -2463,6 +2533,7 @@ public class ProductSet extends APINode {
       "body_style",
       "cashback_currency",
       "cashback_price",
+      "category_specific_fields",
       "currency",
       "dma_codes",
       "downpayment_currency",
@@ -2651,6 +2722,13 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetVehicleOffers requestCashbackPriceField (boolean value) {
       this.requestField("cashback_price", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGetVehicleOffers requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGetVehicleOffers requestCurrencyField () {
@@ -2847,6 +2925,7 @@ public class ProductSet extends APINode {
       "applinks",
       "availability",
       "body_style",
+      "category_specific_fields",
       "condition",
       "currency",
       "custom_label_0",
@@ -3022,6 +3101,13 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetVehicles requestBodyStyleField (boolean value) {
       this.requestField("body_style", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGetVehicles requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGetVehicles requestConditionField () {
@@ -3314,6 +3400,7 @@ public class ProductSet extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "allow_live_product_set_deletion",
     };
 
     public static final String[] FIELDS = {
@@ -3372,6 +3459,15 @@ public class ProductSet extends APINode {
     }
 
 
+    public APIRequestDelete setAllowLiveProductSetDeletion (Boolean allowLiveProductSetDeletion) {
+      this.setParam("allow_live_product_set_deletion", allowLiveProductSetDeletion);
+      return this;
+    }
+    public APIRequestDelete setAllowLiveProductSetDeletion (String allowLiveProductSetDeletion) {
+      this.setParam("allow_live_product_set_deletion", allowLiveProductSetDeletion);
+      return this;
+    }
+
     public APIRequestDelete requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -3429,6 +3525,7 @@ public class ProductSet extends APINode {
       "name",
       "product_catalog",
       "product_count",
+      "retailer_id",
     };
 
     @Override
@@ -3576,6 +3673,13 @@ public class ProductSet extends APINode {
       this.requestField("product_count", value);
       return this;
     }
+    public APIRequestGet requestRetailerIdField () {
+      return this.requestRetailerIdField(true);
+    }
+    public APIRequestGet requestRetailerIdField (boolean value) {
+      this.requestField("retailer_id", value);
+      return this;
+    }
   }
 
   public static class APIRequestUpdate extends APIRequest<ProductSet> {
@@ -3589,6 +3693,7 @@ public class ProductSet extends APINode {
       "filter",
       "metadata",
       "name",
+      "retailer_id",
     };
 
     public static final String[] FIELDS = {
@@ -3670,6 +3775,11 @@ public class ProductSet extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setRetailerId (String retailerId) {
+      this.setParam("retailer_id", retailerId);
+      return this;
+    }
+
     public APIRequestUpdate requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -3731,6 +3841,7 @@ public class ProductSet extends APINode {
     this.mName = instance.mName;
     this.mProductCatalog = instance.mProductCatalog;
     this.mProductCount = instance.mProductCount;
+    this.mRetailerId = instance.mRetailerId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

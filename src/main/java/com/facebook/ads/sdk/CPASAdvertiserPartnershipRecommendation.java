@@ -54,66 +54,80 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class WorkMeetingLink extends APINode {
+public class CPASAdvertiserPartnershipRecommendation extends APINode {
+  @SerializedName("advertiser_business_id")
+  private String mAdvertiserBusinessId = null;
+  @SerializedName("brand_business_id")
+  private String mBrandBusinessId = null;
+  @SerializedName("brands")
+  private List<String> mBrands = null;
+  @SerializedName("countries")
+  private List<String> mCountries = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("owner")
-  private User mOwner = null;
+  @SerializedName("merchant_business_id")
+  private String mMerchantBusinessId = null;
+  @SerializedName("merchant_categories")
+  private List<String> mMerchantCategories = null;
+  @SerializedName("status")
+  private String mStatus = null;
+  @SerializedName("status_reason")
+  private String mStatusReason = null;
   protected static Gson gson = null;
 
-  WorkMeetingLink() {
+  CPASAdvertiserPartnershipRecommendation() {
   }
 
-  public WorkMeetingLink(Long id, APIContext context) {
+  public CPASAdvertiserPartnershipRecommendation(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public WorkMeetingLink(String id, APIContext context) {
+  public CPASAdvertiserPartnershipRecommendation(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public WorkMeetingLink fetch() throws APIException{
-    WorkMeetingLink newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public CPASAdvertiserPartnershipRecommendation fetch() throws APIException{
+    CPASAdvertiserPartnershipRecommendation newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static WorkMeetingLink fetchById(Long id, APIContext context) throws APIException {
+  public static CPASAdvertiserPartnershipRecommendation fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<WorkMeetingLink> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<CPASAdvertiserPartnershipRecommendation> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static WorkMeetingLink fetchById(String id, APIContext context) throws APIException {
+  public static CPASAdvertiserPartnershipRecommendation fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<WorkMeetingLink> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<CPASAdvertiserPartnershipRecommendation> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<WorkMeetingLink> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<WorkMeetingLink>)(
-      new APIRequest<WorkMeetingLink>(context, "", "/", "GET", WorkMeetingLink.getParser())
+  public static APINodeList<CPASAdvertiserPartnershipRecommendation> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<CPASAdvertiserPartnershipRecommendation>)(
+      new APIRequest<CPASAdvertiserPartnershipRecommendation>(context, "", "/", "GET", CPASAdvertiserPartnershipRecommendation.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<WorkMeetingLink>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<CPASAdvertiserPartnershipRecommendation>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", WorkMeetingLink.getParser())
+      new APIRequest(context, "", "/", "GET", CPASAdvertiserPartnershipRecommendation.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -126,12 +140,12 @@ public class WorkMeetingLink extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static WorkMeetingLink loadJSON(String json, APIContext context, String header) {
-    WorkMeetingLink workMeetingLink = getGson().fromJson(json, WorkMeetingLink.class);
+  public static CPASAdvertiserPartnershipRecommendation loadJSON(String json, APIContext context, String header) {
+    CPASAdvertiserPartnershipRecommendation cpasAdvertiserPartnershipRecommendation = getGson().fromJson(json, CPASAdvertiserPartnershipRecommendation.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(workMeetingLink.toString());
+      JsonElement o2 = parser.parse(cpasAdvertiserPartnershipRecommendation.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -141,14 +155,14 @@ public class WorkMeetingLink extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    workMeetingLink.context = context;
-    workMeetingLink.rawValue = json;
-    workMeetingLink.header = header;
-    return workMeetingLink;
+    cpasAdvertiserPartnershipRecommendation.context = context;
+    cpasAdvertiserPartnershipRecommendation.rawValue = json;
+    cpasAdvertiserPartnershipRecommendation.header = header;
+    return cpasAdvertiserPartnershipRecommendation;
   }
 
-  public static APINodeList<WorkMeetingLink> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<WorkMeetingLink> workMeetingLinks = new APINodeList<WorkMeetingLink>(request, json, header);
+  public static APINodeList<CPASAdvertiserPartnershipRecommendation> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CPASAdvertiserPartnershipRecommendation> cpasAdvertiserPartnershipRecommendations = new APINodeList<CPASAdvertiserPartnershipRecommendation>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -159,9 +173,9 @@ public class WorkMeetingLink extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          workMeetingLinks.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          cpasAdvertiserPartnershipRecommendations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return workMeetingLinks;
+        return cpasAdvertiserPartnershipRecommendations;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -171,20 +185,20 @@ public class WorkMeetingLink extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                workMeetingLinks.setCursors(before, after);
+                cpasAdvertiserPartnershipRecommendations.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            workMeetingLinks.setPaging(previous, next);
+            cpasAdvertiserPartnershipRecommendations.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              workMeetingLinks.setAppSecret(context.getAppSecretProof());
+              cpasAdvertiserPartnershipRecommendations.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              workMeetingLinks.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              cpasAdvertiserPartnershipRecommendations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -195,23 +209,23 @@ public class WorkMeetingLink extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  workMeetingLinks.add(loadJSON(entry.getValue().toString(), context, header));
+                  cpasAdvertiserPartnershipRecommendations.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              workMeetingLinks.add(loadJSON(obj.toString(), context, header));
+              cpasAdvertiserPartnershipRecommendations.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return workMeetingLinks;
+          return cpasAdvertiserPartnershipRecommendations;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              workMeetingLinks.add(loadJSON(entry.getValue().toString(), context, header));
+              cpasAdvertiserPartnershipRecommendations.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return workMeetingLinks;
+          return cpasAdvertiserPartnershipRecommendations;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -228,20 +242,20 @@ public class WorkMeetingLink extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              workMeetingLinks.add(loadJSON(value.toString(), context, header));
+              cpasAdvertiserPartnershipRecommendations.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return workMeetingLinks;
+            return cpasAdvertiserPartnershipRecommendations;
           }
 
           // Sixth, check if it's pure JsonObject
-          workMeetingLinks.clear();
-          workMeetingLinks.add(loadJSON(json, context, header));
-          return workMeetingLinks;
+          cpasAdvertiserPartnershipRecommendations.clear();
+          cpasAdvertiserPartnershipRecommendations.add(loadJSON(json, context, header));
+          return cpasAdvertiserPartnershipRecommendations;
         }
       }
     } catch (Exception e) {
@@ -273,60 +287,92 @@ public class WorkMeetingLink extends APINode {
   }
 
 
+  public String getFieldAdvertiserBusinessId() {
+    return mAdvertiserBusinessId;
+  }
+
+  public String getFieldBrandBusinessId() {
+    return mBrandBusinessId;
+  }
+
+  public List<String> getFieldBrands() {
+    return mBrands;
+  }
+
+  public List<String> getFieldCountries() {
+    return mCountries;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-  public User getFieldOwner() {
-    if (mOwner != null) {
-      mOwner.context = getContext();
-    }
-    return mOwner;
+  public String getFieldMerchantBusinessId() {
+    return mMerchantBusinessId;
+  }
+
+  public List<String> getFieldMerchantCategories() {
+    return mMerchantCategories;
+  }
+
+  public String getFieldStatus() {
+    return mStatus;
+  }
+
+  public String getFieldStatusReason() {
+    return mStatusReason;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<WorkMeetingLink> {
+  public static class APIRequestGet extends APIRequest<CPASAdvertiserPartnershipRecommendation> {
 
-    WorkMeetingLink lastResponse = null;
+    CPASAdvertiserPartnershipRecommendation lastResponse = null;
     @Override
-    public WorkMeetingLink getLastResponse() {
+    public CPASAdvertiserPartnershipRecommendation getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
+      "advertiser_business_id",
+      "brand_business_id",
+      "brands",
+      "countries",
       "id",
-      "owner",
+      "merchant_business_id",
+      "merchant_categories",
+      "status",
+      "status_reason",
     };
 
     @Override
-    public WorkMeetingLink parseResponse(String response, String header) throws APIException {
-      return WorkMeetingLink.parseResponse(response, getContext(), this, header).head();
+    public CPASAdvertiserPartnershipRecommendation parseResponse(String response, String header) throws APIException {
+      return CPASAdvertiserPartnershipRecommendation.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public WorkMeetingLink execute() throws APIException {
+    public CPASAdvertiserPartnershipRecommendation execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public WorkMeetingLink execute(Map<String, Object> extraParams) throws APIException {
+    public CPASAdvertiserPartnershipRecommendation execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<WorkMeetingLink> executeAsync() throws APIException {
+    public ListenableFuture<CPASAdvertiserPartnershipRecommendation> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<WorkMeetingLink> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<CPASAdvertiserPartnershipRecommendation> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, WorkMeetingLink>() {
-           public WorkMeetingLink apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, CPASAdvertiserPartnershipRecommendation>() {
+           public CPASAdvertiserPartnershipRecommendation apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -390,6 +436,34 @@ public class WorkMeetingLink extends APINode {
       return this;
     }
 
+    public APIRequestGet requestAdvertiserBusinessIdField () {
+      return this.requestAdvertiserBusinessIdField(true);
+    }
+    public APIRequestGet requestAdvertiserBusinessIdField (boolean value) {
+      this.requestField("advertiser_business_id", value);
+      return this;
+    }
+    public APIRequestGet requestBrandBusinessIdField () {
+      return this.requestBrandBusinessIdField(true);
+    }
+    public APIRequestGet requestBrandBusinessIdField (boolean value) {
+      this.requestField("brand_business_id", value);
+      return this;
+    }
+    public APIRequestGet requestBrandsField () {
+      return this.requestBrandsField(true);
+    }
+    public APIRequestGet requestBrandsField (boolean value) {
+      this.requestField("brands", value);
+      return this;
+    }
+    public APIRequestGet requestCountriesField () {
+      return this.requestCountriesField(true);
+    }
+    public APIRequestGet requestCountriesField (boolean value) {
+      this.requestField("countries", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -397,11 +471,32 @@ public class WorkMeetingLink extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestOwnerField () {
-      return this.requestOwnerField(true);
+    public APIRequestGet requestMerchantBusinessIdField () {
+      return this.requestMerchantBusinessIdField(true);
     }
-    public APIRequestGet requestOwnerField (boolean value) {
-      this.requestField("owner", value);
+    public APIRequestGet requestMerchantBusinessIdField (boolean value) {
+      this.requestField("merchant_business_id", value);
+      return this;
+    }
+    public APIRequestGet requestMerchantCategoriesField () {
+      return this.requestMerchantCategoriesField(true);
+    }
+    public APIRequestGet requestMerchantCategoriesField (boolean value) {
+      this.requestField("merchant_categories", value);
+      return this;
+    }
+    public APIRequestGet requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGet requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGet requestStatusReasonField () {
+      return this.requestStatusReasonField(true);
+    }
+    public APIRequestGet requestStatusReasonField (boolean value) {
+      this.requestField("status_reason", value);
       return this;
     }
   }
@@ -420,18 +515,25 @@ public class WorkMeetingLink extends APINode {
     return gson;
   }
 
-  public WorkMeetingLink copyFrom(WorkMeetingLink instance) {
+  public CPASAdvertiserPartnershipRecommendation copyFrom(CPASAdvertiserPartnershipRecommendation instance) {
+    this.mAdvertiserBusinessId = instance.mAdvertiserBusinessId;
+    this.mBrandBusinessId = instance.mBrandBusinessId;
+    this.mBrands = instance.mBrands;
+    this.mCountries = instance.mCountries;
     this.mId = instance.mId;
-    this.mOwner = instance.mOwner;
+    this.mMerchantBusinessId = instance.mMerchantBusinessId;
+    this.mMerchantCategories = instance.mMerchantCategories;
+    this.mStatus = instance.mStatus;
+    this.mStatusReason = instance.mStatusReason;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<WorkMeetingLink> getParser() {
-    return new APIRequest.ResponseParser<WorkMeetingLink>() {
-      public APINodeList<WorkMeetingLink> parseResponse(String response, APIContext context, APIRequest<WorkMeetingLink> request, String header) throws MalformedResponseException {
-        return WorkMeetingLink.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<CPASAdvertiserPartnershipRecommendation> getParser() {
+    return new APIRequest.ResponseParser<CPASAdvertiserPartnershipRecommendation>() {
+      public APINodeList<CPASAdvertiserPartnershipRecommendation> parseResponse(String response, APIContext context, APIRequest<CPASAdvertiserPartnershipRecommendation> request, String header) throws MalformedResponseException {
+        return CPASAdvertiserPartnershipRecommendation.parseResponse(response, context, request, header);
       }
     };
   }

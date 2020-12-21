@@ -700,7 +700,6 @@ public class AdStudy extends APINode {
       "is_primary",
       "name",
       "offline_conversion_data_sets",
-      "offsitepixels",
       "product_catalogs",
       "product_sets",
       "type",
@@ -809,15 +808,6 @@ public class AdStudy extends APINode {
     }
     public APIRequestCreateObjective setOfflineConversionDataSets (String offlineConversionDataSets) {
       this.setParam("offline_conversion_data_sets", offlineConversionDataSets);
-      return this;
-    }
-
-    public APIRequestCreateObjective setOffsitepixels (List<Object> offsitepixels) {
-      this.setParam("offsitepixels", offsitepixels);
-      return this;
-    }
-    public APIRequestCreateObjective setOffsitepixels (String offsitepixels) {
-      this.setParam("offsitepixels", offsitepixels);
       return this;
     }
 
@@ -1433,6 +1423,8 @@ public class AdStudy extends APINode {
       VALUE_GEO_LIFT("GEO_LIFT"),
       @SerializedName("LIFT")
       VALUE_LIFT("LIFT"),
+      @SerializedName("PRIVATE_LIFT")
+      VALUE_PRIVATE_LIFT("PRIVATE_LIFT"),
       @SerializedName("SPLIT_TEST")
       VALUE_SPLIT_TEST("SPLIT_TEST"),
       ;

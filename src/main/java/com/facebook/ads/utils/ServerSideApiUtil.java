@@ -72,6 +72,9 @@
      }
 
      token = token.trim().toLowerCase();
+     if ("".equals(token)) {
+       return null;
+     }
      String result = token;
 
      if(ServerSideApiConstants.EMAIL.equals(fieldName)) {

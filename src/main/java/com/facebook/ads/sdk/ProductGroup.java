@@ -334,6 +334,7 @@ public class ProductGroup extends APINode {
       "brand",
       "capability_to_review_status",
       "category",
+      "category_specific_fields",
       "color",
       "commerce_insights",
       "condition",
@@ -346,11 +347,13 @@ public class ProductGroup extends APINode {
       "custom_label_4",
       "description",
       "expiration_date",
+      "fb_product_category",
       "gender",
       "gtin",
       "id",
       "image_cdn_urls",
       "image_url",
+      "images",
       "inventory",
       "manufacturer_part_number",
       "material",
@@ -531,6 +534,13 @@ public class ProductGroup extends APINode {
       this.requestField("category", value);
       return this;
     }
+    public APIRequestGetProducts requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGetProducts requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
+      return this;
+    }
     public APIRequestGetProducts requestColorField () {
       return this.requestColorField(true);
     }
@@ -615,6 +625,13 @@ public class ProductGroup extends APINode {
       this.requestField("expiration_date", value);
       return this;
     }
+    public APIRequestGetProducts requestFbProductCategoryField () {
+      return this.requestFbProductCategoryField(true);
+    }
+    public APIRequestGetProducts requestFbProductCategoryField (boolean value) {
+      this.requestField("fb_product_category", value);
+      return this;
+    }
     public APIRequestGetProducts requestGenderField () {
       return this.requestGenderField(true);
     }
@@ -648,6 +665,13 @@ public class ProductGroup extends APINode {
     }
     public APIRequestGetProducts requestImageUrlField (boolean value) {
       this.requestField("image_url", value);
+      return this;
+    }
+    public APIRequestGetProducts requestImagesField () {
+      return this.requestImagesField(true);
+    }
+    public APIRequestGetProducts requestImagesField (boolean value) {
+      this.requestField("images", value);
       return this;
     }
     public APIRequestGetProducts requestInventoryField () {
@@ -864,6 +888,7 @@ public class ProductGroup extends APINode {
       "custom_label_4",
       "description",
       "expiration_date",
+      "fb_product_category",
       "gender",
       "gtin",
       "image_url",
@@ -1091,6 +1116,11 @@ public class ProductGroup extends APINode {
 
     public APIRequestCreateProduct setExpirationDate (String expirationDate) {
       this.setParam("expiration_date", expirationDate);
+      return this;
+    }
+
+    public APIRequestCreateProduct setFbProductCategory (String fbProductCategory) {
+      this.setParam("fb_product_category", fbProductCategory);
       return this;
     }
 

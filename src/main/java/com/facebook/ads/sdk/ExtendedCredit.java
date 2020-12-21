@@ -69,8 +69,6 @@ public class ExtendedCredit extends APINode {
   private Boolean mIsAccessRevoked = null;
   @SerializedName("is_automated_experience")
   private Boolean mIsAutomatedExperience = null;
-  @SerializedName("last_payment_time")
-  private String mLastPaymentTime = null;
   @SerializedName("legal_entity_name")
   private String mLegalEntityName = null;
   @SerializedName("liable_biz_name")
@@ -314,6 +312,10 @@ public class ExtendedCredit extends APINode {
     return new APIRequestCreateOwningCreditAllocationConfig(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateWhatsappCreditSharingAndAttach createWhatsappCreditSharingAndAttach() {
+    return new APIRequestCreateWhatsappCreditSharingAndAttach(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
@@ -345,10 +347,6 @@ public class ExtendedCredit extends APINode {
 
   public Boolean getFieldIsAutomatedExperience() {
     return mIsAutomatedExperience;
-  }
-
-  public String getFieldLastPaymentTime() {
-    return mLastPaymentTime;
   }
 
   public String getFieldLegalEntityName() {
@@ -1007,6 +1005,122 @@ public class ExtendedCredit extends APINode {
 
   }
 
+  public static class APIRequestCreateWhatsappCreditSharingAndAttach extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "waba_currency",
+      "waba_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateWhatsappCreditSharingAndAttach.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateWhatsappCreditSharingAndAttach(String nodeId, APIContext context) {
+      super(context, nodeId, "/whatsapp_credit_sharing_and_attach", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateWhatsappCreditSharingAndAttach setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateWhatsappCreditSharingAndAttach setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateWhatsappCreditSharingAndAttach setWabaCurrency (String wabaCurrency) {
+      this.setParam("waba_currency", wabaCurrency);
+      return this;
+    }
+
+    public APIRequestCreateWhatsappCreditSharingAndAttach setWabaId (String wabaId) {
+      this.setParam("waba_id", wabaId);
+      return this;
+    }
+
+    public APIRequestCreateWhatsappCreditSharingAndAttach requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateWhatsappCreditSharingAndAttach requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateWhatsappCreditSharingAndAttach requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateWhatsappCreditSharingAndAttach requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateWhatsappCreditSharingAndAttach requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateWhatsappCreditSharingAndAttach requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGet extends APIRequest<ExtendedCredit> {
 
     ExtendedCredit lastResponse = null;
@@ -1025,7 +1139,6 @@ public class ExtendedCredit extends APINode {
       "id",
       "is_access_revoked",
       "is_automated_experience",
-      "last_payment_time",
       "legal_entity_name",
       "liable_biz_name",
       "max_balance",
@@ -1175,13 +1288,6 @@ public class ExtendedCredit extends APINode {
       this.requestField("is_automated_experience", value);
       return this;
     }
-    public APIRequestGet requestLastPaymentTimeField () {
-      return this.requestLastPaymentTimeField(true);
-    }
-    public APIRequestGet requestLastPaymentTimeField (boolean value) {
-      this.requestField("last_payment_time", value);
-      return this;
-    }
     public APIRequestGet requestLegalEntityNameField () {
       return this.requestLegalEntityNameField(true);
     }
@@ -1269,7 +1375,6 @@ public class ExtendedCredit extends APINode {
     this.mId = instance.mId;
     this.mIsAccessRevoked = instance.mIsAccessRevoked;
     this.mIsAutomatedExperience = instance.mIsAutomatedExperience;
-    this.mLastPaymentTime = instance.mLastPaymentTime;
     this.mLegalEntityName = instance.mLegalEntityName;
     this.mLiableBizName = instance.mLiableBizName;
     this.mMaxBalance = instance.mMaxBalance;

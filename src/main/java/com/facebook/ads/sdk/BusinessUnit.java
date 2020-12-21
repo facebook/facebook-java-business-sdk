@@ -2428,7 +2428,7 @@ public class BusinessUnit extends APINode {
       return this;
     }
 
-    public APIRequestGetConversionPaths setDateRange (Object dateRange) {
+    public APIRequestGetConversionPaths setDateRange (Map<String, String> dateRange) {
       this.setParam("date_range", dateRange);
       return this;
     }
@@ -2877,7 +2877,6 @@ public class BusinessUnit extends APINode {
     }
     public static final String[] PARAMS = {
       "filter_by",
-      "metric_scope",
       "order_by",
     };
 
@@ -2939,15 +2938,6 @@ public class BusinessUnit extends APINode {
 
     public APIRequestGetReports setFilterBy (String filterBy) {
       this.setParam("filter_by", filterBy);
-      return this;
-    }
-
-    public APIRequestGetReports setMetricScope (Map<String, String> metricScope) {
-      this.setParam("metric_scope", metricScope);
-      return this;
-    }
-    public APIRequestGetReports setMetricScope (String metricScope) {
-      this.setParam("metric_scope", metricScope);
       return this;
     }
 

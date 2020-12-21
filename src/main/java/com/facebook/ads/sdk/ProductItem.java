@@ -73,6 +73,8 @@ public class ProductItem extends APINode {
   private Map<Object, Object> mCapabilityToReviewStatus = null;
   @SerializedName("category")
   private String mCategory = null;
+  @SerializedName("category_specific_fields")
+  private CatalogSubVerticalList mCategorySpecificFields = null;
   @SerializedName("color")
   private String mColor = null;
   @SerializedName("commerce_insights")
@@ -97,6 +99,8 @@ public class ProductItem extends APINode {
   private String mDescription = null;
   @SerializedName("expiration_date")
   private String mExpirationDate = null;
+  @SerializedName("fb_product_category")
+  private String mFbProductCategory = null;
   @SerializedName("gender")
   private EnumGender mGender = null;
   @SerializedName("gtin")
@@ -107,6 +111,8 @@ public class ProductItem extends APINode {
   private Map<String, String> mImageCdnUrls = null;
   @SerializedName("image_url")
   private String mImageUrl = null;
+  @SerializedName("images")
+  private List<String> mImages = null;
   @SerializedName("inventory")
   private Long mInventory = null;
   @SerializedName("manufacturer_part_number")
@@ -421,6 +427,10 @@ public class ProductItem extends APINode {
     return mCategory;
   }
 
+  public CatalogSubVerticalList getFieldCategorySpecificFields() {
+    return mCategorySpecificFields;
+  }
+
   public String getFieldColor() {
     return mColor;
   }
@@ -469,6 +479,10 @@ public class ProductItem extends APINode {
     return mExpirationDate;
   }
 
+  public String getFieldFbProductCategory() {
+    return mFbProductCategory;
+  }
+
   public EnumGender getFieldGender() {
     return mGender;
   }
@@ -487,6 +501,10 @@ public class ProductItem extends APINode {
 
   public String getFieldImageUrl() {
     return mImageUrl;
+  }
+
+  public List<String> getFieldImages() {
+    return mImages;
   }
 
   public Long getFieldInventory() {
@@ -623,6 +641,7 @@ public class ProductItem extends APINode {
       "name",
       "product_catalog",
       "product_count",
+      "retailer_id",
     };
 
     @Override
@@ -770,6 +789,13 @@ public class ProductItem extends APINode {
       this.requestField("product_count", value);
       return this;
     }
+    public APIRequestGetProductSets requestRetailerIdField () {
+      return this.requestRetailerIdField(true);
+    }
+    public APIRequestGetProductSets requestRetailerIdField (boolean value) {
+      this.requestField("retailer_id", value);
+      return this;
+    }
   }
 
   public static class APIRequestDelete extends APIRequest<APINode> {
@@ -898,6 +924,7 @@ public class ProductItem extends APINode {
       "brand",
       "capability_to_review_status",
       "category",
+      "category_specific_fields",
       "color",
       "commerce_insights",
       "condition",
@@ -910,11 +937,13 @@ public class ProductItem extends APINode {
       "custom_label_4",
       "description",
       "expiration_date",
+      "fb_product_category",
       "gender",
       "gtin",
       "id",
       "image_cdn_urls",
       "image_url",
+      "images",
       "inventory",
       "manufacturer_part_number",
       "material",
@@ -1113,6 +1142,13 @@ public class ProductItem extends APINode {
       this.requestField("category", value);
       return this;
     }
+    public APIRequestGet requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGet requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
+      return this;
+    }
     public APIRequestGet requestColorField () {
       return this.requestColorField(true);
     }
@@ -1197,6 +1233,13 @@ public class ProductItem extends APINode {
       this.requestField("expiration_date", value);
       return this;
     }
+    public APIRequestGet requestFbProductCategoryField () {
+      return this.requestFbProductCategoryField(true);
+    }
+    public APIRequestGet requestFbProductCategoryField (boolean value) {
+      this.requestField("fb_product_category", value);
+      return this;
+    }
     public APIRequestGet requestGenderField () {
       return this.requestGenderField(true);
     }
@@ -1230,6 +1273,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestImageUrlField (boolean value) {
       this.requestField("image_url", value);
+      return this;
+    }
+    public APIRequestGet requestImagesField () {
+      return this.requestImagesField(true);
+    }
+    public APIRequestGet requestImagesField (boolean value) {
+      this.requestField("images", value);
       return this;
     }
     public APIRequestGet requestInventoryField () {
@@ -1426,6 +1476,7 @@ public class ProductItem extends APINode {
     public static final String[] PARAMS = {
       "additional_image_files",
       "additional_image_urls",
+      "additional_uploaded_image_ids",
       "additional_variant_attributes",
       "android_app_name",
       "android_class",
@@ -1434,6 +1485,7 @@ public class ProductItem extends APINode {
       "availability",
       "brand",
       "category",
+      "category_specific_fields",
       "checkout_url",
       "color",
       "commerce_tax_category",
@@ -1447,6 +1499,7 @@ public class ProductItem extends APINode {
       "custom_label_4",
       "description",
       "expiration_date",
+      "fb_product_category",
       "gender",
       "gtin",
       "image_url",
@@ -1561,6 +1614,15 @@ public class ProductItem extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setAdditionalUploadedImageIds (List<String> additionalUploadedImageIds) {
+      this.setParam("additional_uploaded_image_ids", additionalUploadedImageIds);
+      return this;
+    }
+    public APIRequestUpdate setAdditionalUploadedImageIds (String additionalUploadedImageIds) {
+      this.setParam("additional_uploaded_image_ids", additionalUploadedImageIds);
+      return this;
+    }
+
     public APIRequestUpdate setAdditionalVariantAttributes (Map<String, String> additionalVariantAttributes) {
       this.setParam("additional_variant_attributes", additionalVariantAttributes);
       return this;
@@ -1606,6 +1668,15 @@ public class ProductItem extends APINode {
 
     public APIRequestUpdate setCategory (String category) {
       this.setParam("category", category);
+      return this;
+    }
+
+    public APIRequestUpdate setCategorySpecificFields (Map<String, String> categorySpecificFields) {
+      this.setParam("category_specific_fields", categorySpecificFields);
+      return this;
+    }
+    public APIRequestUpdate setCategorySpecificFields (String categorySpecificFields) {
+      this.setParam("category_specific_fields", categorySpecificFields);
       return this;
     }
 
@@ -1683,6 +1754,11 @@ public class ProductItem extends APINode {
 
     public APIRequestUpdate setExpirationDate (String expirationDate) {
       this.setParam("expiration_date", expirationDate);
+      return this;
+    }
+
+    public APIRequestUpdate setFbProductCategory (String fbProductCategory) {
+      this.setParam("fb_product_category", fbProductCategory);
       return this;
     }
 
@@ -2574,6 +2650,7 @@ public class ProductItem extends APINode {
     this.mBrand = instance.mBrand;
     this.mCapabilityToReviewStatus = instance.mCapabilityToReviewStatus;
     this.mCategory = instance.mCategory;
+    this.mCategorySpecificFields = instance.mCategorySpecificFields;
     this.mColor = instance.mColor;
     this.mCommerceInsights = instance.mCommerceInsights;
     this.mCondition = instance.mCondition;
@@ -2586,11 +2663,13 @@ public class ProductItem extends APINode {
     this.mCustomLabel4 = instance.mCustomLabel4;
     this.mDescription = instance.mDescription;
     this.mExpirationDate = instance.mExpirationDate;
+    this.mFbProductCategory = instance.mFbProductCategory;
     this.mGender = instance.mGender;
     this.mGtin = instance.mGtin;
     this.mId = instance.mId;
     this.mImageCdnUrls = instance.mImageCdnUrls;
     this.mImageUrl = instance.mImageUrl;
+    this.mImages = instance.mImages;
     this.mInventory = instance.mInventory;
     this.mManufacturerPartNumber = instance.mManufacturerPartNumber;
     this.mMaterial = instance.mMaterial;

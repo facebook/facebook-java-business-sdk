@@ -59,6 +59,8 @@ public class Destination extends APINode {
   private String mAddress = null;
   @SerializedName("applinks")
   private CatalogItemAppLinks mApplinks = null;
+  @SerializedName("category_specific_fields")
+  private CatalogSubVerticalList mCategorySpecificFields = null;
   @SerializedName("currency")
   private String mCurrency = null;
   @SerializedName("description")
@@ -303,6 +305,10 @@ public class Destination extends APINode {
     return mApplinks;
   }
 
+  public CatalogSubVerticalList getFieldCategorySpecificFields() {
+    return mCategorySpecificFields;
+  }
+
   public String getFieldCurrency() {
     return mCurrency;
   }
@@ -362,6 +368,7 @@ public class Destination extends APINode {
     public static final String[] FIELDS = {
       "address",
       "applinks",
+      "category_specific_fields",
       "currency",
       "description",
       "destination_id",
@@ -478,6 +485,13 @@ public class Destination extends APINode {
       this.requestField("applinks", value);
       return this;
     }
+    public APIRequestGet requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGet requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
+      return this;
+    }
     public APIRequestGet requestCurrencyField () {
       return this.requestCurrencyField(true);
     }
@@ -574,6 +588,7 @@ public class Destination extends APINode {
   public Destination copyFrom(Destination instance) {
     this.mAddress = instance.mAddress;
     this.mApplinks = instance.mApplinks;
+    this.mCategorySpecificFields = instance.mCategorySpecificFields;
     this.mCurrency = instance.mCurrency;
     this.mDescription = instance.mDescription;
     this.mDestinationId = instance.mDestinationId;

@@ -55,6 +55,9 @@ public class Event {
   @SerializedName("data_processing_options_state")
   private Integer dataProcessingOptionsState = null;
 
+  @SerializedName("action_source")
+  private ActionSource actionSource = null;
+
   /**
    * Default Constructor.
    */
@@ -74,9 +77,11 @@ public class Event {
    * @param dataProcessingOptions Processing options you would like to enable for a specific event.
    * @param dataProcessingOptionsCountry country that you want to associate to this data processing option.
    * @param dataProcessingOptionsState state that you want to associate with this data processing option.
+   * @param actionSource Where the conversion occurred.
    */
   public Event(String eventName, Long eventTime, String eventSourceUrl, Boolean optOut,
-      String eventId, UserData userData, CustomData customData, String[] dataProcessingOptions, Integer dataProcessingOptionsCountry, Integer dataProcessingOptionsState) {
+      String eventId, UserData userData, CustomData customData, String[] dataProcessingOptions,
+      Integer dataProcessingOptionsCountry, Integer dataProcessingOptionsState, ActionSource actionSource) {
     this.eventName = eventName;
     this.eventTime = eventTime;
     this.eventSourceUrl = eventSourceUrl;
@@ -87,6 +92,7 @@ public class Event {
     this.dataProcessingOptions = dataProcessingOptions;
     this.dataProcessingOptionsCountry = dataProcessingOptionsCountry;
     this.dataProcessingOptionsState = dataProcessingOptionsState;
+    this.actionSource = actionSource;
   }
 
   /**
@@ -189,16 +195,6 @@ public class Event {
   }
 
   /**
-   * Get flag that indicates we should not use this event for ads delivery optimization. If set to
-   * true, we only use the event for attribution.
-   *
-   * @return optOut
-   */
-  public Boolean isOptOut() {
-    return optOut;
-  }
-
-  /**
    * Set flag that indicates we should not use this event for ads delivery optimization. If set to
    * true, we only use the event for attribution.
    *
@@ -206,6 +202,16 @@ public class Event {
    */
   public void setOptOut(Boolean optOut) {
     this.optOut = optOut;
+  }
+
+  /**
+   * Get flag that indicates we should not use this event for ads delivery optimization. If set to
+   * true, we only use the event for attribution.
+   *
+   * @return boolean
+   */
+  public boolean getOptOut() {
+    return this.optOut;
   }
 
   /**
@@ -390,6 +396,37 @@ public class Event {
    */
   public void setDataProcessingOptionsState(Integer dataProcessingOptionsState) {
     this.dataProcessingOptionsState = dataProcessingOptionsState;
+  }
+
+  /**
+   * Set actionSource for the event.
+   *
+   * @param actionSource represents where the conversion occurred.
+   * @see <a href="https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/server-event#action-source">Action source for the event</a>
+   * @return Event
+   */
+  public Event actionSource(ActionSource actionSource) {
+    this.actionSource = actionSource;
+    return this;
+  }
+
+  /**
+   * Get actionSource
+   *
+   * @return actionSource
+   */
+  public ActionSource getActionSource() {
+    return actionSource;
+  }
+
+  /**
+   * Set actionSource for the event.
+   *
+   * @param actionSource represents where the conversion occurred.
+   * @see <a href="https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/server-event#action-source">Action source for the event</a>
+   */
+  public void setActionSource(ActionSource actionSource) {
+    this.actionSource = actionSource;
   }
 
   @Override

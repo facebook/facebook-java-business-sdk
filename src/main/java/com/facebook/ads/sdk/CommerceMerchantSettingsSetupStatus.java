@@ -63,6 +63,8 @@ public class CommerceMerchantSettingsSetupStatus extends APINode {
   private Object mMarketplaceApprovalStatusDetails = null;
   @SerializedName("payment_setup")
   private String mPaymentSetup = null;
+  @SerializedName("review_status")
+  private Object mReviewStatus = null;
   @SerializedName("shop_setup")
   private String mShopSetup = null;
   protected static Gson gson = null;
@@ -252,6 +254,15 @@ public class CommerceMerchantSettingsSetupStatus extends APINode {
     return this;
   }
 
+  public Object getFieldReviewStatus() {
+    return mReviewStatus;
+  }
+
+  public CommerceMerchantSettingsSetupStatus setFieldReviewStatus(Object value) {
+    this.mReviewStatus = value;
+    return this;
+  }
+
   public String getFieldShopSetup() {
     return mShopSetup;
   }
@@ -282,6 +293,7 @@ public class CommerceMerchantSettingsSetupStatus extends APINode {
     this.mMarketplaceApprovalStatus = instance.mMarketplaceApprovalStatus;
     this.mMarketplaceApprovalStatusDetails = instance.mMarketplaceApprovalStatusDetails;
     this.mPaymentSetup = instance.mPaymentSetup;
+    this.mReviewStatus = instance.mReviewStatus;
     this.mShopSetup = instance.mShopSetup;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

@@ -55,6 +55,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdCreativeInteractiveComponentsSpec extends APINode {
+  @SerializedName("child_attachments")
+  private List<Object> mChildAttachments = null;
   @SerializedName("components")
   private List<Object> mComponents = null;
   protected static Gson gson = null;
@@ -208,6 +210,15 @@ public class AdCreativeInteractiveComponentsSpec extends APINode {
   }
 
 
+  public List<Object> getFieldChildAttachments() {
+    return mChildAttachments;
+  }
+
+  public AdCreativeInteractiveComponentsSpec setFieldChildAttachments(List<Object> value) {
+    this.mChildAttachments = value;
+    return this;
+  }
+
   public List<Object> getFieldComponents() {
     return mComponents;
   }
@@ -234,6 +245,7 @@ public class AdCreativeInteractiveComponentsSpec extends APINode {
   }
 
   public AdCreativeInteractiveComponentsSpec copyFrom(AdCreativeInteractiveComponentsSpec instance) {
+    this.mChildAttachments = instance.mChildAttachments;
     this.mComponents = instance.mComponents;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

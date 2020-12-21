@@ -492,6 +492,7 @@ public class URL extends APINode {
     }
     public static final String[] PARAMS = {
       "blacklist",
+      "denylist",
       "hmac",
       "locale",
       "scopes",
@@ -560,6 +561,15 @@ public class URL extends APINode {
     }
     public APIRequestUpdate setBlacklist (String blacklist) {
       this.setParam("blacklist", blacklist);
+      return this;
+    }
+
+    public APIRequestUpdate setDenylist (Boolean denylist) {
+      this.setParam("denylist", denylist);
+      return this;
+    }
+    public APIRequestUpdate setDenylist (String denylist) {
+      this.setParam("denylist", denylist);
       return this;
     }
 

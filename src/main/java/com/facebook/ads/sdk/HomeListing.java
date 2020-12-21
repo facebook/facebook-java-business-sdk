@@ -79,6 +79,8 @@ public class HomeListing extends APINode {
   private String mAreaUnit = null;
   @SerializedName("availability")
   private String mAvailability = null;
+  @SerializedName("category_specific_fields")
+  private CatalogSubVerticalList mCategorySpecificFields = null;
   @SerializedName("co_2_emission_rating_eu")
   private Object mCo2EmissionRatingEu = null;
   @SerializedName("currency")
@@ -412,6 +414,10 @@ public class HomeListing extends APINode {
     return mAvailability;
   }
 
+  public CatalogSubVerticalList getFieldCategorySpecificFields() {
+    return mCategorySpecificFields;
+  }
+
   public Object getFieldCo2EmissionRatingEu() {
     return mCo2EmissionRatingEu;
   }
@@ -661,6 +667,7 @@ public class HomeListing extends APINode {
       "area_size",
       "area_unit",
       "availability",
+      "category_specific_fields",
       "co_2_emission_rating_eu",
       "currency",
       "days_on_market",
@@ -864,6 +871,13 @@ public class HomeListing extends APINode {
     }
     public APIRequestGet requestAvailabilityField (boolean value) {
       this.requestField("availability", value);
+      return this;
+    }
+    public APIRequestGet requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGet requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGet requestCo2EmissionRatingEuField () {
@@ -1321,6 +1335,7 @@ public class HomeListing extends APINode {
     this.mAreaSize = instance.mAreaSize;
     this.mAreaUnit = instance.mAreaUnit;
     this.mAvailability = instance.mAvailability;
+    this.mCategorySpecificFields = instance.mCategorySpecificFields;
     this.mCo2EmissionRatingEu = instance.mCo2EmissionRatingEu;
     this.mCurrency = instance.mCurrency;
     this.mDaysOnMarket = instance.mDaysOnMarket;

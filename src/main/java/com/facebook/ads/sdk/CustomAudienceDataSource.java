@@ -326,6 +326,8 @@ public class CustomAudienceDataSource extends APINode {
       VALUE_PLATFORM_USERS("PLATFORM_USERS"),
       @SerializedName("SEED_LIST")
       VALUE_SEED_LIST("SEED_LIST"),
+      @SerializedName("SIGNAL_SOURCE")
+      VALUE_SIGNAL_SOURCE("SIGNAL_SOURCE"),
       @SerializedName("SMART_AUDIENCE")
       VALUE_SMART_AUDIENCE("SMART_AUDIENCE"),
       @SerializedName("STORE_VISIT_EVENTS")

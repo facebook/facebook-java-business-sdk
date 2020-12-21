@@ -111,6 +111,8 @@ public class AdCreative extends APINode {
   private String mInstagramPermalinkUrl = null;
   @SerializedName("instagram_story_id")
   private String mInstagramStoryId = null;
+  @SerializedName("instagram_user_id")
+  private String mInstagramUserId = null;
   @SerializedName("interactive_components_spec")
   private AdCreativeInteractiveComponentsSpec mInteractiveComponentsSpec = null;
   @SerializedName("link_deep_link_url")
@@ -149,6 +151,8 @@ public class AdCreative extends APINode {
   private String mProductSetId = null;
   @SerializedName("recommender_settings")
   private AdCreativeRecommenderSettings mRecommenderSettings = null;
+  @SerializedName("source_instagram_media_id")
+  private String mSourceInstagramMediaId = null;
   @SerializedName("status")
   private EnumStatus mStatus = null;
   @SerializedName("template_url")
@@ -672,6 +676,15 @@ public class AdCreative extends APINode {
     return this;
   }
 
+  public String getFieldInstagramUserId() {
+    return mInstagramUserId;
+  }
+
+  public AdCreative setFieldInstagramUserId(String value) {
+    this.mInstagramUserId = value;
+    return this;
+  }
+
   public AdCreativeInteractiveComponentsSpec getFieldInteractiveComponentsSpec() {
     return mInteractiveComponentsSpec;
   }
@@ -868,6 +881,15 @@ public class AdCreative extends APINode {
     this.mRecommenderSettings = AdCreativeRecommenderSettings.getGson().fromJson(value, type);
     return this;
   }
+  public String getFieldSourceInstagramMediaId() {
+    return mSourceInstagramMediaId;
+  }
+
+  public AdCreative setFieldSourceInstagramMediaId(String value) {
+    this.mSourceInstagramMediaId = value;
+    return this;
+  }
+
   public EnumStatus getFieldStatus() {
     return mStatus;
   }
@@ -1576,6 +1598,7 @@ public class AdCreative extends APINode {
       "instagram_actor_id",
       "instagram_permalink_url",
       "instagram_story_id",
+      "instagram_user_id",
       "interactive_components_spec",
       "link_deep_link_url",
       "link_destination_display_url",
@@ -1595,6 +1618,7 @@ public class AdCreative extends APINode {
       "portrait_customizations",
       "product_set_id",
       "recommender_settings",
+      "source_instagram_media_id",
       "status",
       "template_url",
       "template_url_spec",
@@ -1908,6 +1932,13 @@ public class AdCreative extends APINode {
       this.requestField("instagram_story_id", value);
       return this;
     }
+    public APIRequestGet requestInstagramUserIdField () {
+      return this.requestInstagramUserIdField(true);
+    }
+    public APIRequestGet requestInstagramUserIdField (boolean value) {
+      this.requestField("instagram_user_id", value);
+      return this;
+    }
     public APIRequestGet requestInteractiveComponentsSpecField () {
       return this.requestInteractiveComponentsSpecField(true);
     }
@@ -2039,6 +2070,13 @@ public class AdCreative extends APINode {
     }
     public APIRequestGet requestRecommenderSettingsField (boolean value) {
       this.requestField("recommender_settings", value);
+      return this;
+    }
+    public APIRequestGet requestSourceInstagramMediaIdField () {
+      return this.requestSourceInstagramMediaIdField(true);
+    }
+    public APIRequestGet requestSourceInstagramMediaIdField (boolean value) {
+      this.requestField("source_instagram_media_id", value);
       return this;
     }
     public APIRequestGet requestStatusField () {
@@ -2337,6 +2375,8 @@ public class AdCreative extends APINode {
       VALUE_PURCHASE_GIFT_CARDS("PURCHASE_GIFT_CARDS"),
       @SerializedName("RECORD_NOW")
       VALUE_RECORD_NOW("RECORD_NOW"),
+      @SerializedName("REFER_FRIENDS")
+      VALUE_REFER_FRIENDS("REFER_FRIENDS"),
       @SerializedName("REQUEST_TIME")
       VALUE_REQUEST_TIME("REQUEST_TIME"),
       @SerializedName("SAY_THANKS")
@@ -2355,8 +2395,14 @@ public class AdCreative extends APINode {
       VALUE_SIGN_UP("SIGN_UP"),
       @SerializedName("SOTTO_SUBSCRIBE")
       VALUE_SOTTO_SUBSCRIBE("SOTTO_SUBSCRIBE"),
+      @SerializedName("START_ORDER")
+      VALUE_START_ORDER("START_ORDER"),
       @SerializedName("SUBSCRIBE")
       VALUE_SUBSCRIBE("SUBSCRIBE"),
+      @SerializedName("SWIPE_UP_PRODUCT")
+      VALUE_SWIPE_UP_PRODUCT("SWIPE_UP_PRODUCT"),
+      @SerializedName("SWIPE_UP_SHOP")
+      VALUE_SWIPE_UP_SHOP("SWIPE_UP_SHOP"),
       @SerializedName("UPDATE_APP")
       VALUE_UPDATE_APP("UPDATE_APP"),
       @SerializedName("USE_APP")
@@ -2616,6 +2662,7 @@ public class AdCreative extends APINode {
     this.mInstagramActorId = instance.mInstagramActorId;
     this.mInstagramPermalinkUrl = instance.mInstagramPermalinkUrl;
     this.mInstagramStoryId = instance.mInstagramStoryId;
+    this.mInstagramUserId = instance.mInstagramUserId;
     this.mInteractiveComponentsSpec = instance.mInteractiveComponentsSpec;
     this.mLinkDeepLinkUrl = instance.mLinkDeepLinkUrl;
     this.mLinkDestinationDisplayUrl = instance.mLinkDestinationDisplayUrl;
@@ -2635,6 +2682,7 @@ public class AdCreative extends APINode {
     this.mPortraitCustomizations = instance.mPortraitCustomizations;
     this.mProductSetId = instance.mProductSetId;
     this.mRecommenderSettings = instance.mRecommenderSettings;
+    this.mSourceInstagramMediaId = instance.mSourceInstagramMediaId;
     this.mStatus = instance.mStatus;
     this.mTemplateUrl = instance.mTemplateUrl;
     this.mTemplateUrlSpec = instance.mTemplateUrlSpec;

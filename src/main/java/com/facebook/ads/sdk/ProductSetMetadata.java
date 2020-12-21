@@ -59,6 +59,8 @@ public class ProductSetMetadata extends APINode {
   private String mCoverImageUrl = null;
   @SerializedName("description")
   private String mDescription = null;
+  @SerializedName("external_url")
+  private String mExternalUrl = null;
   @SerializedName("integrity_review_status")
   private String mIntegrityReviewStatus = null;
   protected static Gson gson = null;
@@ -230,6 +232,15 @@ public class ProductSetMetadata extends APINode {
     return this;
   }
 
+  public String getFieldExternalUrl() {
+    return mExternalUrl;
+  }
+
+  public ProductSetMetadata setFieldExternalUrl(String value) {
+    this.mExternalUrl = value;
+    return this;
+  }
+
   public String getFieldIntegrityReviewStatus() {
     return mIntegrityReviewStatus;
   }
@@ -258,6 +269,7 @@ public class ProductSetMetadata extends APINode {
   public ProductSetMetadata copyFrom(ProductSetMetadata instance) {
     this.mCoverImageUrl = instance.mCoverImageUrl;
     this.mDescription = instance.mDescription;
+    this.mExternalUrl = instance.mExternalUrl;
     this.mIntegrityReviewStatus = instance.mIntegrityReviewStatus;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

@@ -71,10 +71,18 @@ public class AdoptablePet extends APINode {
   private String mAvailability = null;
   @SerializedName("breed")
   private String mBreed = null;
+  @SerializedName("category_specific_fields")
+  private CatalogSubVerticalList mCategorySpecificFields = null;
+  @SerializedName("coat_length")
+  private String mCoatLength = null;
+  @SerializedName("color")
+  private String mColor = null;
   @SerializedName("currency")
   private String mCurrency = null;
   @SerializedName("description")
   private String mDescription = null;
+  @SerializedName("features")
+  private List<String> mFeatures = null;
   @SerializedName("gender")
   private String mGender = null;
   @SerializedName("id")
@@ -87,12 +95,20 @@ public class AdoptablePet extends APINode {
   private String mPrice = null;
   @SerializedName("sanitized_images")
   private List<String> mSanitizedImages = null;
+  @SerializedName("secondary_color")
+  private String mSecondaryColor = null;
+  @SerializedName("shelter_email")
+  private String mShelterEmail = null;
   @SerializedName("shelter_name")
   private String mShelterName = null;
   @SerializedName("shelter_page_id")
   private Page mShelterPageId = null;
+  @SerializedName("shelter_phone")
+  private String mShelterPhone = null;
   @SerializedName("size")
   private String mSize = null;
+  @SerializedName("tertiary_color")
+  private String mTertiaryColor = null;
   @SerializedName("url")
   private String mUrl = null;
   protected static Gson gson = null;
@@ -341,12 +357,28 @@ public class AdoptablePet extends APINode {
     return mBreed;
   }
 
+  public CatalogSubVerticalList getFieldCategorySpecificFields() {
+    return mCategorySpecificFields;
+  }
+
+  public String getFieldCoatLength() {
+    return mCoatLength;
+  }
+
+  public String getFieldColor() {
+    return mColor;
+  }
+
   public String getFieldCurrency() {
     return mCurrency;
   }
 
   public String getFieldDescription() {
     return mDescription;
+  }
+
+  public List<String> getFieldFeatures() {
+    return mFeatures;
   }
 
   public String getFieldGender() {
@@ -373,6 +405,14 @@ public class AdoptablePet extends APINode {
     return mSanitizedImages;
   }
 
+  public String getFieldSecondaryColor() {
+    return mSecondaryColor;
+  }
+
+  public String getFieldShelterEmail() {
+    return mShelterEmail;
+  }
+
   public String getFieldShelterName() {
     return mShelterName;
   }
@@ -384,8 +424,16 @@ public class AdoptablePet extends APINode {
     return mShelterPageId;
   }
 
+  public String getFieldShelterPhone() {
+    return mShelterPhone;
+  }
+
   public String getFieldSize() {
     return mSize;
+  }
+
+  public String getFieldTertiaryColor() {
+    return mTertiaryColor;
   }
 
   public String getFieldUrl() {
@@ -413,17 +461,25 @@ public class AdoptablePet extends APINode {
       "applinks",
       "availability",
       "breed",
+      "category_specific_fields",
+      "coat_length",
+      "color",
       "currency",
       "description",
+      "features",
       "gender",
       "id",
       "images",
       "name",
       "price",
       "sanitized_images",
+      "secondary_color",
+      "shelter_email",
       "shelter_name",
       "shelter_page_id",
+      "shelter_phone",
       "size",
+      "tertiary_color",
       "url",
     };
 
@@ -572,6 +628,27 @@ public class AdoptablePet extends APINode {
       this.requestField("breed", value);
       return this;
     }
+    public APIRequestGet requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGet requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
+      return this;
+    }
+    public APIRequestGet requestCoatLengthField () {
+      return this.requestCoatLengthField(true);
+    }
+    public APIRequestGet requestCoatLengthField (boolean value) {
+      this.requestField("coat_length", value);
+      return this;
+    }
+    public APIRequestGet requestColorField () {
+      return this.requestColorField(true);
+    }
+    public APIRequestGet requestColorField (boolean value) {
+      this.requestField("color", value);
+      return this;
+    }
     public APIRequestGet requestCurrencyField () {
       return this.requestCurrencyField(true);
     }
@@ -584,6 +661,13 @@ public class AdoptablePet extends APINode {
     }
     public APIRequestGet requestDescriptionField (boolean value) {
       this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGet requestFeaturesField () {
+      return this.requestFeaturesField(true);
+    }
+    public APIRequestGet requestFeaturesField (boolean value) {
+      this.requestField("features", value);
       return this;
     }
     public APIRequestGet requestGenderField () {
@@ -628,6 +712,20 @@ public class AdoptablePet extends APINode {
       this.requestField("sanitized_images", value);
       return this;
     }
+    public APIRequestGet requestSecondaryColorField () {
+      return this.requestSecondaryColorField(true);
+    }
+    public APIRequestGet requestSecondaryColorField (boolean value) {
+      this.requestField("secondary_color", value);
+      return this;
+    }
+    public APIRequestGet requestShelterEmailField () {
+      return this.requestShelterEmailField(true);
+    }
+    public APIRequestGet requestShelterEmailField (boolean value) {
+      this.requestField("shelter_email", value);
+      return this;
+    }
     public APIRequestGet requestShelterNameField () {
       return this.requestShelterNameField(true);
     }
@@ -642,11 +740,25 @@ public class AdoptablePet extends APINode {
       this.requestField("shelter_page_id", value);
       return this;
     }
+    public APIRequestGet requestShelterPhoneField () {
+      return this.requestShelterPhoneField(true);
+    }
+    public APIRequestGet requestShelterPhoneField (boolean value) {
+      this.requestField("shelter_phone", value);
+      return this;
+    }
     public APIRequestGet requestSizeField () {
       return this.requestSizeField(true);
     }
     public APIRequestGet requestSizeField (boolean value) {
       this.requestField("size", value);
+      return this;
+    }
+    public APIRequestGet requestTertiaryColorField () {
+      return this.requestTertiaryColorField(true);
+    }
+    public APIRequestGet requestTertiaryColorField (boolean value) {
+      this.requestField("tertiary_color", value);
       return this;
     }
     public APIRequestGet requestUrlField () {
@@ -681,17 +793,25 @@ public class AdoptablePet extends APINode {
     this.mApplinks = instance.mApplinks;
     this.mAvailability = instance.mAvailability;
     this.mBreed = instance.mBreed;
+    this.mCategorySpecificFields = instance.mCategorySpecificFields;
+    this.mCoatLength = instance.mCoatLength;
+    this.mColor = instance.mColor;
     this.mCurrency = instance.mCurrency;
     this.mDescription = instance.mDescription;
+    this.mFeatures = instance.mFeatures;
     this.mGender = instance.mGender;
     this.mId = instance.mId;
     this.mImages = instance.mImages;
     this.mName = instance.mName;
     this.mPrice = instance.mPrice;
     this.mSanitizedImages = instance.mSanitizedImages;
+    this.mSecondaryColor = instance.mSecondaryColor;
+    this.mShelterEmail = instance.mShelterEmail;
     this.mShelterName = instance.mShelterName;
     this.mShelterPageId = instance.mShelterPageId;
+    this.mShelterPhone = instance.mShelterPhone;
     this.mSize = instance.mSize;
+    this.mTertiaryColor = instance.mTertiaryColor;
     this.mUrl = instance.mUrl;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

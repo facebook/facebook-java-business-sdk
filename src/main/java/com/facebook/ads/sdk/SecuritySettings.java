@@ -55,8 +55,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class SecuritySettings extends APINode {
-  @SerializedName("secure_browsing")
-  private Object mSecureBrowsing = null;
   protected static Gson gson = null;
 
   public SecuritySettings() {
@@ -208,15 +206,6 @@ public class SecuritySettings extends APINode {
   }
 
 
-  public Object getFieldSecureBrowsing() {
-    return mSecureBrowsing;
-  }
-
-  public SecuritySettings setFieldSecureBrowsing(Object value) {
-    this.mSecureBrowsing = value;
-    return this;
-  }
-
 
 
 
@@ -234,7 +223,6 @@ public class SecuritySettings extends APINode {
   }
 
   public SecuritySettings copyFrom(SecuritySettings instance) {
-    this.mSecureBrowsing = instance.mSecureBrowsing;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

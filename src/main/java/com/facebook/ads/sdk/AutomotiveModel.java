@@ -63,6 +63,8 @@ public class AutomotiveModel extends APINode {
   private String mAvailability = null;
   @SerializedName("body_style")
   private String mBodyStyle = null;
+  @SerializedName("category_specific_fields")
+  private CatalogSubVerticalList mCategorySpecificFields = null;
   @SerializedName("currency")
   private String mCurrency = null;
   @SerializedName("custom_label_0")
@@ -337,6 +339,10 @@ public class AutomotiveModel extends APINode {
     return mBodyStyle;
   }
 
+  public CatalogSubVerticalList getFieldCategorySpecificFields() {
+    return mCategorySpecificFields;
+  }
+
   public String getFieldCurrency() {
     return mCurrency;
   }
@@ -442,6 +448,7 @@ public class AutomotiveModel extends APINode {
       "automotive_model_id",
       "availability",
       "body_style",
+      "category_specific_fields",
       "currency",
       "custom_label_0",
       "description",
@@ -581,6 +588,13 @@ public class AutomotiveModel extends APINode {
     }
     public APIRequestGet requestBodyStyleField (boolean value) {
       this.requestField("body_style", value);
+      return this;
+    }
+    public APIRequestGet requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGet requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGet requestCurrencyField () {
@@ -758,6 +772,7 @@ public class AutomotiveModel extends APINode {
     this.mAutomotiveModelId = instance.mAutomotiveModelId;
     this.mAvailability = instance.mAvailability;
     this.mBodyStyle = instance.mBodyStyle;
+    this.mCategorySpecificFields = instance.mCategorySpecificFields;
     this.mCurrency = instance.mCurrency;
     this.mCustomLabel0 = instance.mCustomLabel0;
     this.mDescription = instance.mDescription;

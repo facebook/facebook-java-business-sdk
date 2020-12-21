@@ -63,6 +63,8 @@ public class Vehicle extends APINode {
   private String mAvailability = null;
   @SerializedName("body_style")
   private String mBodyStyle = null;
+  @SerializedName("category_specific_fields")
+  private CatalogSubVerticalList mCategorySpecificFields = null;
   @SerializedName("condition")
   private String mCondition = null;
   @SerializedName("currency")
@@ -377,6 +379,10 @@ public class Vehicle extends APINode {
     return mBodyStyle;
   }
 
+  public CatalogSubVerticalList getFieldCategorySpecificFields() {
+    return mCategorySpecificFields;
+  }
+
   public String getFieldCondition() {
     return mCondition;
   }
@@ -557,6 +563,7 @@ public class Vehicle extends APINode {
       "applinks",
       "availability",
       "body_style",
+      "category_specific_fields",
       "condition",
       "currency",
       "custom_label_0",
@@ -714,6 +721,13 @@ public class Vehicle extends APINode {
     }
     public APIRequestGet requestBodyStyleField (boolean value) {
       this.requestField("body_style", value);
+      return this;
+    }
+    public APIRequestGet requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGet requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGet requestConditionField () {
@@ -1337,6 +1351,8 @@ public class Vehicle extends APINode {
       VALUE_AVAILABLE("AVAILABLE"),
       @SerializedName("NOT_AVAILABLE")
       VALUE_NOT_AVAILABLE("NOT_AVAILABLE"),
+      @SerializedName("PENDING")
+      VALUE_PENDING("PENDING"),
       ;
 
       private String value;
@@ -1577,6 +1593,7 @@ public class Vehicle extends APINode {
     this.mApplinks = instance.mApplinks;
     this.mAvailability = instance.mAvailability;
     this.mBodyStyle = instance.mBodyStyle;
+    this.mCategorySpecificFields = instance.mCategorySpecificFields;
     this.mCondition = instance.mCondition;
     this.mCurrency = instance.mCurrency;
     this.mCustomLabel0 = instance.mCustomLabel0;

@@ -284,6 +284,10 @@ public class PublisherBlockList extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestCreateAppendPublisherUrl createAppendPublisherUrl() {
+    return new APIRequestCreateAppendPublisherUrl(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetPagedWebPublishers getPagedWebPublishers() {
     return new APIRequestGetPagedWebPublishers(this.getPrefixedId().toString(), context);
   }
@@ -342,6 +346,120 @@ public class PublisherBlockList extends APINode {
   }
 
 
+
+  public static class APIRequestCreateAppendPublisherUrl extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "publisher_urls",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateAppendPublisherUrl.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateAppendPublisherUrl(String nodeId, APIContext context) {
+      super(context, nodeId, "/append_publisher_urls", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateAppendPublisherUrl setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAppendPublisherUrl setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateAppendPublisherUrl setPublisherUrls (List<String> publisherUrls) {
+      this.setParam("publisher_urls", publisherUrls);
+      return this;
+    }
+    public APIRequestCreateAppendPublisherUrl setPublisherUrls (String publisherUrls) {
+      this.setParam("publisher_urls", publisherUrls);
+      return this;
+    }
+
+    public APIRequestCreateAppendPublisherUrl requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateAppendPublisherUrl requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAppendPublisherUrl requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateAppendPublisherUrl requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAppendPublisherUrl requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAppendPublisherUrl requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
 
   public static class APIRequestGetPagedWebPublishers extends APIRequest<APINode> {
 

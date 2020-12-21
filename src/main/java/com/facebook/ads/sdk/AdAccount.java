@@ -598,8 +598,16 @@ public class AdAccount extends APINode {
     return new APIRequestGetCampaignsByLabels(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetConnectedInstagramAccounts getConnectedInstagramAccounts() {
+    return new APIRequestGetConnectedInstagramAccounts(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetContentDeliveryReport getContentDeliveryReport() {
     return new APIRequestGetContentDeliveryReport(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateCreateAndApplyPublisherBlockList createCreateAndApplyPublisherBlockList() {
+    return new APIRequestCreateCreateAndApplyPublisherBlockList(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetCustomAudiences getCustomAudiences() {
@@ -744,10 +752,6 @@ public class AdAccount extends APINode {
 
   public APIRequestGetTargetingValidation getTargetingValidation() {
     return new APIRequestGetTargetingValidation(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestDeleteTracking deleteTracking() {
-    return new APIRequestDeleteTracking(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetTracking getTracking() {
@@ -2027,6 +2031,7 @@ public class AdAccount extends APINode {
       "instagram_actor_id",
       "instagram_permalink_url",
       "instagram_story_id",
+      "instagram_user_id",
       "interactive_components_spec",
       "link_deep_link_url",
       "link_destination_display_url",
@@ -2046,6 +2051,7 @@ public class AdAccount extends APINode {
       "portrait_customizations",
       "product_set_id",
       "recommender_settings",
+      "source_instagram_media_id",
       "status",
       "template_url",
       "template_url_spec",
@@ -2341,6 +2347,13 @@ public class AdAccount extends APINode {
       this.requestField("instagram_story_id", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestInstagramUserIdField () {
+      return this.requestInstagramUserIdField(true);
+    }
+    public APIRequestGetAdCreatives requestInstagramUserIdField (boolean value) {
+      this.requestField("instagram_user_id", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestInteractiveComponentsSpecField () {
       return this.requestInteractiveComponentsSpecField(true);
     }
@@ -2474,6 +2487,13 @@ public class AdAccount extends APINode {
       this.requestField("recommender_settings", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestSourceInstagramMediaIdField () {
+      return this.requestSourceInstagramMediaIdField(true);
+    }
+    public APIRequestGetAdCreatives requestSourceInstagramMediaIdField (boolean value) {
+      this.requestField("source_instagram_media_id", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestStatusField () {
       return this.requestStatusField(true);
     }
@@ -2560,6 +2580,7 @@ public class AdAccount extends APINode {
       "image_url",
       "instagram_actor_id",
       "instagram_permalink_url",
+      "instagram_user_id",
       "instant_checkout_setting",
       "interactive_components_spec",
       "is_dco_internal",
@@ -2577,6 +2598,7 @@ public class AdAccount extends APINode {
       "portrait_customizations",
       "product_set_id",
       "recommender_settings",
+      "source_instagram_media_id",
       "template_url",
       "template_url_spec",
       "thumbnail_url",
@@ -2785,6 +2807,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdCreative setInstagramUserId (String instagramUserId) {
+      this.setParam("instagram_user_id", instagramUserId);
+      return this;
+    }
+
     public APIRequestCreateAdCreative setInstantCheckoutSetting (AdCreative.EnumInstantCheckoutSetting instantCheckoutSetting) {
       this.setParam("instant_checkout_setting", instantCheckoutSetting);
       return this;
@@ -2899,6 +2926,11 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdCreative setRecommenderSettings (String recommenderSettings) {
       this.setParam("recommender_settings", recommenderSettings);
+      return this;
+    }
+
+    public APIRequestCreateAdCreative setSourceInstagramMediaId (String sourceInstagramMediaId) {
+      this.setParam("source_instagram_media_id", sourceInstagramMediaId);
       return this;
     }
 
@@ -3019,6 +3051,7 @@ public class AdAccount extends APINode {
       "instagram_actor_id",
       "instagram_permalink_url",
       "instagram_story_id",
+      "instagram_user_id",
       "interactive_components_spec",
       "link_deep_link_url",
       "link_destination_display_url",
@@ -3038,6 +3071,7 @@ public class AdAccount extends APINode {
       "portrait_customizations",
       "product_set_id",
       "recommender_settings",
+      "source_instagram_media_id",
       "status",
       "template_url",
       "template_url_spec",
@@ -3351,6 +3385,13 @@ public class AdAccount extends APINode {
       this.requestField("instagram_story_id", value);
       return this;
     }
+    public APIRequestGetAdCreativesByLabels requestInstagramUserIdField () {
+      return this.requestInstagramUserIdField(true);
+    }
+    public APIRequestGetAdCreativesByLabels requestInstagramUserIdField (boolean value) {
+      this.requestField("instagram_user_id", value);
+      return this;
+    }
     public APIRequestGetAdCreativesByLabels requestInteractiveComponentsSpecField () {
       return this.requestInteractiveComponentsSpecField(true);
     }
@@ -3482,6 +3523,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdCreativesByLabels requestRecommenderSettingsField (boolean value) {
       this.requestField("recommender_settings", value);
+      return this;
+    }
+    public APIRequestGetAdCreativesByLabels requestSourceInstagramMediaIdField () {
+      return this.requestSourceInstagramMediaIdField(true);
+    }
+    public APIRequestGetAdCreativesByLabels requestSourceInstagramMediaIdField (boolean value) {
+      this.requestField("source_instagram_media_id", value);
       return this;
     }
     public APIRequestGetAdCreativesByLabels requestStatusField () {
@@ -4452,6 +4500,7 @@ public class AdAccount extends APINode {
     public static final String[] PARAMS = {
       "app_id",
       "name",
+      "session_id",
       "source",
       "source_url",
       "source_zip",
@@ -4520,6 +4569,11 @@ public class AdAccount extends APINode {
 
     public APIRequestCreateAdPlayable setName (String name) {
       this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateAdPlayable setSessionId (String sessionId) {
+      this.setParam("session_id", sessionId);
       return this;
     }
 
@@ -5817,13 +5871,23 @@ public class AdAccount extends APINode {
     }
     public static final String[] PARAMS = {
       "page_id",
+      "recommendation_type",
       "show_breakdown_by_actor",
     };
 
     public static final String[] FIELDS = {
       "actor_id",
+      "actor_name",
+      "ad_limit_scope_business",
+      "ad_limit_scope_business_manager_id",
+      "ad_limit_set_by_page_admin",
       "ads_running_or_in_review_count",
+      "ads_running_or_in_review_count_subject_to_limit_set_by_page",
       "current_account_ads_running_or_in_review_count",
+      "future_limit_activation_date",
+      "future_limit_on_ads_running_or_in_review",
+      "limit_on_ads_running_or_in_review",
+      "recommendations",
     };
 
     @Override
@@ -5888,6 +5952,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetAdsVolume setRecommendationType (AdAccountAdVolume.EnumRecommendationType recommendationType) {
+      this.setParam("recommendation_type", recommendationType);
+      return this;
+    }
+    public APIRequestGetAdsVolume setRecommendationType (String recommendationType) {
+      this.setParam("recommendation_type", recommendationType);
+      return this;
+    }
+
     public APIRequestGetAdsVolume setShowBreakdownByActor (Boolean showBreakdownByActor) {
       this.setParam("show_breakdown_by_actor", showBreakdownByActor);
       return this;
@@ -5940,6 +6013,34 @@ public class AdAccount extends APINode {
       this.requestField("actor_id", value);
       return this;
     }
+    public APIRequestGetAdsVolume requestActorNameField () {
+      return this.requestActorNameField(true);
+    }
+    public APIRequestGetAdsVolume requestActorNameField (boolean value) {
+      this.requestField("actor_name", value);
+      return this;
+    }
+    public APIRequestGetAdsVolume requestAdLimitScopeBusinessField () {
+      return this.requestAdLimitScopeBusinessField(true);
+    }
+    public APIRequestGetAdsVolume requestAdLimitScopeBusinessField (boolean value) {
+      this.requestField("ad_limit_scope_business", value);
+      return this;
+    }
+    public APIRequestGetAdsVolume requestAdLimitScopeBusinessManagerIdField () {
+      return this.requestAdLimitScopeBusinessManagerIdField(true);
+    }
+    public APIRequestGetAdsVolume requestAdLimitScopeBusinessManagerIdField (boolean value) {
+      this.requestField("ad_limit_scope_business_manager_id", value);
+      return this;
+    }
+    public APIRequestGetAdsVolume requestAdLimitSetByPageAdminField () {
+      return this.requestAdLimitSetByPageAdminField(true);
+    }
+    public APIRequestGetAdsVolume requestAdLimitSetByPageAdminField (boolean value) {
+      this.requestField("ad_limit_set_by_page_admin", value);
+      return this;
+    }
     public APIRequestGetAdsVolume requestAdsRunningOrInReviewCountField () {
       return this.requestAdsRunningOrInReviewCountField(true);
     }
@@ -5947,11 +6048,46 @@ public class AdAccount extends APINode {
       this.requestField("ads_running_or_in_review_count", value);
       return this;
     }
+    public APIRequestGetAdsVolume requestAdsRunningOrInReviewCountSubjectToLimitSetByPageField () {
+      return this.requestAdsRunningOrInReviewCountSubjectToLimitSetByPageField(true);
+    }
+    public APIRequestGetAdsVolume requestAdsRunningOrInReviewCountSubjectToLimitSetByPageField (boolean value) {
+      this.requestField("ads_running_or_in_review_count_subject_to_limit_set_by_page", value);
+      return this;
+    }
     public APIRequestGetAdsVolume requestCurrentAccountAdsRunningOrInReviewCountField () {
       return this.requestCurrentAccountAdsRunningOrInReviewCountField(true);
     }
     public APIRequestGetAdsVolume requestCurrentAccountAdsRunningOrInReviewCountField (boolean value) {
       this.requestField("current_account_ads_running_or_in_review_count", value);
+      return this;
+    }
+    public APIRequestGetAdsVolume requestFutureLimitActivationDateField () {
+      return this.requestFutureLimitActivationDateField(true);
+    }
+    public APIRequestGetAdsVolume requestFutureLimitActivationDateField (boolean value) {
+      this.requestField("future_limit_activation_date", value);
+      return this;
+    }
+    public APIRequestGetAdsVolume requestFutureLimitOnAdsRunningOrInReviewField () {
+      return this.requestFutureLimitOnAdsRunningOrInReviewField(true);
+    }
+    public APIRequestGetAdsVolume requestFutureLimitOnAdsRunningOrInReviewField (boolean value) {
+      this.requestField("future_limit_on_ads_running_or_in_review", value);
+      return this;
+    }
+    public APIRequestGetAdsVolume requestLimitOnAdsRunningOrInReviewField () {
+      return this.requestLimitOnAdsRunningOrInReviewField(true);
+    }
+    public APIRequestGetAdsVolume requestLimitOnAdsRunningOrInReviewField (boolean value) {
+      this.requestField("limit_on_ads_running_or_in_review", value);
+      return this;
+    }
+    public APIRequestGetAdsVolume requestRecommendationsField () {
+      return this.requestRecommendationsField(true);
+    }
+    public APIRequestGetAdsVolume requestRecommendationsField (boolean value) {
+      this.requestField("recommendations", value);
       return this;
     }
   }
@@ -8343,6 +8479,7 @@ public class AdAccount extends APINode {
       "android_key_hash",
       "android_sdk_error_categories",
       "app_domains",
+      "app_events_config",
       "app_events_feature_bitmask",
       "app_events_session_timeout",
       "app_install_tracked",
@@ -8578,6 +8715,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdvertisableApplications requestAppDomainsField (boolean value) {
       this.requestField("app_domains", value);
+      return this;
+    }
+    public APIRequestGetAdvertisableApplications requestAppEventsConfigField () {
+      return this.requestAppEventsConfigField(true);
+    }
+    public APIRequestGetAdvertisableApplications requestAppEventsConfigField (boolean value) {
+      this.requestField("app_events_config", value);
       return this;
     }
     public APIRequestGetAdvertisableApplications requestAppEventsFeatureBitmaskField () {
@@ -9924,6 +10068,7 @@ public class AdAccount extends APINode {
       "sales_promo_id",
       "slideshow_spec",
       "source",
+      "source_instagram_media_id",
       "spherical",
       "start_offset",
       "swap_mode",
@@ -10408,6 +10553,11 @@ public class AdAccount extends APINode {
 
     public APIRequestCreateAdVideo setSource (byte[] source) {
       this.setParam("source", source);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setSourceInstagramMediaId (String sourceInstagramMediaId) {
+      this.setParam("source_instagram_media_id", sourceInstagramMediaId);
       return this;
     }
 
@@ -11598,6 +11748,7 @@ public class AdAccount extends APINode {
       "android_key_hash",
       "android_sdk_error_categories",
       "app_domains",
+      "app_events_config",
       "app_events_feature_bitmask",
       "app_events_session_timeout",
       "app_install_tracked",
@@ -11823,6 +11974,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetApplications requestAppDomainsField (boolean value) {
       this.requestField("app_domains", value);
+      return this;
+    }
+    public APIRequestGetApplications requestAppEventsConfigField () {
+      return this.requestAppEventsConfigField(true);
+    }
+    public APIRequestGetApplications requestAppEventsConfigField (boolean value) {
+      this.requestField("app_events_config", value);
       return this;
     }
     public APIRequestGetApplications requestAppEventsFeatureBitmaskField () {
@@ -14115,6 +14273,7 @@ public class AdAccount extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
+      "ad_strategy_id",
       "adlabels",
       "bid_strategy",
       "boosted_object_id",
@@ -14280,6 +14439,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetCampaigns requestAccountIdField (boolean value) {
       this.requestField("account_id", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestAdStrategyIdField () {
+      return this.requestAdStrategyIdField(true);
+    }
+    public APIRequestGetCampaigns requestAdStrategyIdField (boolean value) {
+      this.requestField("ad_strategy_id", value);
       return this;
     }
     public APIRequestGetCampaigns requestAdlabelsField () {
@@ -14534,6 +14700,7 @@ public class AdAccount extends APINode {
       "objective",
       "pacing_type",
       "promoted_object",
+      "smart_promotion_type",
       "source_campaign_id",
       "special_ad_categories",
       "special_ad_category_country",
@@ -14690,6 +14857,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateCampaign setSmartPromotionType (Campaign.EnumSmartPromotionType smartPromotionType) {
+      this.setParam("smart_promotion_type", smartPromotionType);
+      return this;
+    }
+    public APIRequestCreateCampaign setSmartPromotionType (String smartPromotionType) {
+      this.setParam("smart_promotion_type", smartPromotionType);
+      return this;
+    }
+
     public APIRequestCreateCampaign setSourceCampaignId (String sourceCampaignId) {
       this.setParam("source_campaign_id", sourceCampaignId);
       return this;
@@ -14797,6 +14973,7 @@ public class AdAccount extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
+      "ad_strategy_id",
       "adlabels",
       "bid_strategy",
       "boosted_object_id",
@@ -14944,6 +15121,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetCampaignsByLabels requestAccountIdField (boolean value) {
       this.requestField("account_id", value);
+      return this;
+    }
+    public APIRequestGetCampaignsByLabels requestAdStrategyIdField () {
+      return this.requestAdStrategyIdField(true);
+    }
+    public APIRequestGetCampaignsByLabels requestAdStrategyIdField (boolean value) {
+      this.requestField("ad_strategy_id", value);
       return this;
     }
     public APIRequestGetCampaignsByLabels requestAdlabelsField () {
@@ -15179,6 +15363,230 @@ public class AdAccount extends APINode {
     }
   }
 
+  public static class APIRequestGetConnectedInstagramAccounts extends APIRequest<IGUser> {
+
+    APINodeList<IGUser> lastResponse = null;
+    @Override
+    public APINodeList<IGUser> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "biography",
+      "business_discovery",
+      "followers_count",
+      "follows_count",
+      "id",
+      "ig_id",
+      "is_ig_shopping_seller_policy_enabled",
+      "media_count",
+      "mentioned_comment",
+      "mentioned_media",
+      "name",
+      "profile_picture_url",
+      "shopping_review_status",
+      "username",
+      "website",
+    };
+
+    @Override
+    public APINodeList<IGUser> parseResponse(String response, String header) throws APIException {
+      return IGUser.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<IGUser> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<IGUser> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<IGUser>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<IGUser>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<IGUser>>() {
+           public APINodeList<IGUser> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetConnectedInstagramAccounts.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetConnectedInstagramAccounts(String nodeId, APIContext context) {
+      super(context, nodeId, "/connected_instagram_accounts", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetConnectedInstagramAccounts setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConnectedInstagramAccounts setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetConnectedInstagramAccounts requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetConnectedInstagramAccounts requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConnectedInstagramAccounts requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetConnectedInstagramAccounts requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConnectedInstagramAccounts requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConnectedInstagramAccounts requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetConnectedInstagramAccounts requestBiographyField () {
+      return this.requestBiographyField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestBiographyField (boolean value) {
+      this.requestField("biography", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccounts requestBusinessDiscoveryField () {
+      return this.requestBusinessDiscoveryField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestBusinessDiscoveryField (boolean value) {
+      this.requestField("business_discovery", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccounts requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccounts requestFollowsCountField () {
+      return this.requestFollowsCountField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestFollowsCountField (boolean value) {
+      this.requestField("follows_count", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccounts requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccounts requestIgIdField () {
+      return this.requestIgIdField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestIgIdField (boolean value) {
+      this.requestField("ig_id", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccounts requestIsIgShoppingSellerPolicyEnabledField () {
+      return this.requestIsIgShoppingSellerPolicyEnabledField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestIsIgShoppingSellerPolicyEnabledField (boolean value) {
+      this.requestField("is_ig_shopping_seller_policy_enabled", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccounts requestMediaCountField () {
+      return this.requestMediaCountField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestMediaCountField (boolean value) {
+      this.requestField("media_count", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccounts requestMentionedCommentField () {
+      return this.requestMentionedCommentField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestMentionedCommentField (boolean value) {
+      this.requestField("mentioned_comment", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccounts requestMentionedMediaField () {
+      return this.requestMentionedMediaField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestMentionedMediaField (boolean value) {
+      this.requestField("mentioned_media", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccounts requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccounts requestProfilePictureUrlField () {
+      return this.requestProfilePictureUrlField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestProfilePictureUrlField (boolean value) {
+      this.requestField("profile_picture_url", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccounts requestShoppingReviewStatusField () {
+      return this.requestShoppingReviewStatusField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestShoppingReviewStatusField (boolean value) {
+      this.requestField("shopping_review_status", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccounts requestUsernameField () {
+      return this.requestUsernameField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestUsernameField (boolean value) {
+      this.requestField("username", value);
+      return this;
+    }
+    public APIRequestGetConnectedInstagramAccounts requestWebsiteField () {
+      return this.requestWebsiteField(true);
+    }
+    public APIRequestGetConnectedInstagramAccounts requestWebsiteField (boolean value) {
+      this.requestField("website", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetContentDeliveryReport extends APIRequest<ContentDeliveryReport> {
 
     APINodeList<ContentDeliveryReport> lastResponse = null;
@@ -15373,6 +15781,136 @@ public class AdAccount extends APINode {
       this.requestField("estimated_impressions", value);
       return this;
     }
+  }
+
+  public static class APIRequestCreateCreateAndApplyPublisherBlockList extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "is_auto_blocking_on",
+      "name",
+      "publisher_urls",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateCreateAndApplyPublisherBlockList.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateCreateAndApplyPublisherBlockList(String nodeId, APIContext context) {
+      super(context, nodeId, "/create_and_apply_publisher_block_list", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateCreateAndApplyPublisherBlockList setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCreateAndApplyPublisherBlockList setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateCreateAndApplyPublisherBlockList setIsAutoBlockingOn (Boolean isAutoBlockingOn) {
+      this.setParam("is_auto_blocking_on", isAutoBlockingOn);
+      return this;
+    }
+    public APIRequestCreateCreateAndApplyPublisherBlockList setIsAutoBlockingOn (String isAutoBlockingOn) {
+      this.setParam("is_auto_blocking_on", isAutoBlockingOn);
+      return this;
+    }
+
+    public APIRequestCreateCreateAndApplyPublisherBlockList setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateCreateAndApplyPublisherBlockList setPublisherUrls (List<String> publisherUrls) {
+      this.setParam("publisher_urls", publisherUrls);
+      return this;
+    }
+    public APIRequestCreateCreateAndApplyPublisherBlockList setPublisherUrls (String publisherUrls) {
+      this.setParam("publisher_urls", publisherUrls);
+      return this;
+    }
+
+    public APIRequestCreateCreateAndApplyPublisherBlockList requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateCreateAndApplyPublisherBlockList requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCreateAndApplyPublisherBlockList requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateCreateAndApplyPublisherBlockList requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCreateAndApplyPublisherBlockList requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCreateAndApplyPublisherBlockList requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetCustomAudiences extends APIRequest<CustomAudience> {
@@ -19817,6 +20355,7 @@ public class AdAccount extends APINode {
       "checkins",
       "company_overview",
       "connected_instagram_account",
+      "connected_page_backed_instagram_account",
       "contact_address",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
@@ -20185,6 +20724,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetPromotePages requestConnectedInstagramAccountField (boolean value) {
       this.requestField("connected_instagram_account", value);
+      return this;
+    }
+    public APIRequestGetPromotePages requestConnectedPageBackedInstagramAccountField () {
+      return this.requestConnectedPageBackedInstagramAccountField(true);
+    }
+    public APIRequestGetPromotePages requestConnectedPageBackedInstagramAccountField (boolean value) {
+      this.requestField("connected_page_backed_instagram_account", value);
       return this;
     }
     public APIRequestGetPromotePages requestContactAddressField () {
@@ -23786,9 +24332,12 @@ public class AdAccount extends APINode {
     }
     public static final String[] PARAMS = {
       "allow_only_fat_head_interests",
+      "app_store",
       "countries",
       "is_exclusion",
       "limit_type",
+      "objective",
+      "promoted_object",
       "q",
       "regulated_categories",
       "session_id",
@@ -23883,6 +24432,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetTargetingSearch setAppStore (AdAccountTargetingUnified.EnumAppStore appStore) {
+      this.setParam("app_store", appStore);
+      return this;
+    }
+    public APIRequestGetTargetingSearch setAppStore (String appStore) {
+      this.setParam("app_store", appStore);
+      return this;
+    }
+
     public APIRequestGetTargetingSearch setCountries (List<String> countries) {
       this.setParam("countries", countries);
       return this;
@@ -23907,6 +24465,24 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetTargetingSearch setLimitType (String limitType) {
       this.setParam("limit_type", limitType);
+      return this;
+    }
+
+    public APIRequestGetTargetingSearch setObjective (AdAccountTargetingUnified.EnumObjective objective) {
+      this.setParam("objective", objective);
+      return this;
+    }
+    public APIRequestGetTargetingSearch setObjective (String objective) {
+      this.setParam("objective", objective);
+      return this;
+    }
+
+    public APIRequestGetTargetingSearch setPromotedObject (Object promotedObject) {
+      this.setParam("promoted_object", promotedObject);
+      return this;
+    }
+    public APIRequestGetTargetingSearch setPromotedObject (String promotedObject) {
+      this.setParam("promoted_object", promotedObject);
       return this;
     }
 
@@ -24319,6 +24895,7 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "app_store",
       "countries",
       "limit_type",
       "mode",
@@ -24407,6 +24984,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+
+    public APIRequestGetTargetingSuggestions setAppStore (AdAccountTargetingUnified.EnumAppStore appStore) {
+      this.setParam("app_store", appStore);
+      return this;
+    }
+    public APIRequestGetTargetingSuggestions setAppStore (String appStore) {
+      this.setParam("app_store", appStore);
+      return this;
+    }
 
     public APIRequestGetTargetingSuggestions setCountries (List<String> countries) {
       this.setParam("countries", countries);
@@ -24999,120 +25585,6 @@ public class AdAccount extends APINode {
       this.requestField("valid", value);
       return this;
     }
-  }
-
-  public static class APIRequestDeleteTracking extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "tracking_specs",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestDeleteTracking.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestDeleteTracking(String nodeId, APIContext context) {
-      super(context, nodeId, "/tracking", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDeleteTracking setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteTracking setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDeleteTracking setTrackingSpecs (Object trackingSpecs) {
-      this.setParam("tracking_specs", trackingSpecs);
-      return this;
-    }
-    public APIRequestDeleteTracking setTrackingSpecs (String trackingSpecs) {
-      this.setParam("tracking_specs", trackingSpecs);
-      return this;
-    }
-
-    public APIRequestDeleteTracking requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDeleteTracking requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteTracking requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDeleteTracking requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteTracking requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteTracking requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestGetTracking extends APIRequest<AdAccountTrackingData> {

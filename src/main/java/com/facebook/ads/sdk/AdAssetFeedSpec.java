@@ -83,6 +83,8 @@ public class AdAssetFeedSpec extends APINode {
   private List<AdAssetFeedSpecLinkURL> mLinkUrls = null;
   @SerializedName("optimization_type")
   private String mOptimizationType = null;
+  @SerializedName("posts")
+  private List<Object> mPosts = null;
   @SerializedName("titles")
   private List<AdAssetFeedSpecTitle> mTitles = null;
   @SerializedName("videos")
@@ -394,6 +396,15 @@ public class AdAssetFeedSpec extends APINode {
     return this;
   }
 
+  public List<Object> getFieldPosts() {
+    return mPosts;
+  }
+
+  public AdAssetFeedSpec setFieldPosts(List<Object> value) {
+    this.mPosts = value;
+    return this;
+  }
+
   public List<AdAssetFeedSpecTitle> getFieldTitles() {
     return mTitles;
   }
@@ -505,6 +516,8 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_PURCHASE_GIFT_CARDS("PURCHASE_GIFT_CARDS"),
       @SerializedName("RECORD_NOW")
       VALUE_RECORD_NOW("RECORD_NOW"),
+      @SerializedName("REFER_FRIENDS")
+      VALUE_REFER_FRIENDS("REFER_FRIENDS"),
       @SerializedName("REQUEST_TIME")
       VALUE_REQUEST_TIME("REQUEST_TIME"),
       @SerializedName("SAY_THANKS")
@@ -523,8 +536,14 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_SIGN_UP("SIGN_UP"),
       @SerializedName("SOTTO_SUBSCRIBE")
       VALUE_SOTTO_SUBSCRIBE("SOTTO_SUBSCRIBE"),
+      @SerializedName("START_ORDER")
+      VALUE_START_ORDER("START_ORDER"),
       @SerializedName("SUBSCRIBE")
       VALUE_SUBSCRIBE("SUBSCRIBE"),
+      @SerializedName("SWIPE_UP_PRODUCT")
+      VALUE_SWIPE_UP_PRODUCT("SWIPE_UP_PRODUCT"),
+      @SerializedName("SWIPE_UP_SHOP")
+      VALUE_SWIPE_UP_SHOP("SWIPE_UP_SHOP"),
       @SerializedName("UPDATE_APP")
       VALUE_UPDATE_APP("UPDATE_APP"),
       @SerializedName("USE_APP")
@@ -586,6 +605,7 @@ public class AdAssetFeedSpec extends APINode {
     this.mImages = instance.mImages;
     this.mLinkUrls = instance.mLinkUrls;
     this.mOptimizationType = instance.mOptimizationType;
+    this.mPosts = instance.mPosts;
     this.mTitles = instance.mTitles;
     this.mVideos = instance.mVideos;
     this.context = instance.context;

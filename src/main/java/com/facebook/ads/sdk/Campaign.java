@@ -57,6 +57,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class Campaign extends APINode {
   @SerializedName("account_id")
   private String mAccountId = null;
+  @SerializedName("ad_strategy_id")
+  private String mAdStrategyId = null;
   @SerializedName("adlabels")
   private List<AdLabel> mAdlabels = null;
   @SerializedName("bid_strategy")
@@ -387,6 +389,10 @@ public class Campaign extends APINode {
 
   public String getFieldAccountId() {
     return mAccountId;
+  }
+
+  public String getFieldAdStrategyId() {
+    return mAdStrategyId;
   }
 
   public List<AdLabel> getFieldAdlabels() {
@@ -2256,6 +2262,7 @@ public class Campaign extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
+      "ad_strategy_id",
       "adlabels",
       "bid_strategy",
       "boosted_object_id",
@@ -2421,6 +2428,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetCopies requestAccountIdField (boolean value) {
       this.requestField("account_id", value);
+      return this;
+    }
+    public APIRequestGetCopies requestAdStrategyIdField () {
+      return this.requestAdStrategyIdField(true);
+    }
+    public APIRequestGetCopies requestAdStrategyIdField (boolean value) {
+      this.requestField("ad_strategy_id", value);
       return this;
     }
     public APIRequestGetCopies requestAdlabelsField () {
@@ -3506,6 +3520,7 @@ public class Campaign extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
+      "ad_strategy_id",
       "adlabels",
       "bid_strategy",
       "boosted_object_id",
@@ -3671,6 +3686,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGet requestAccountIdField (boolean value) {
       this.requestField("account_id", value);
+      return this;
+    }
+    public APIRequestGet requestAdStrategyIdField () {
+      return this.requestAdStrategyIdField(true);
+    }
+    public APIRequestGet requestAdStrategyIdField (boolean value) {
+      this.requestField("ad_strategy_id", value);
       return this;
     }
     public APIRequestGet requestAdlabelsField () {
@@ -3927,6 +3949,7 @@ public class Campaign extends APINode {
       "objective",
       "pacing_type",
       "promoted_object",
+      "smart_promotion_type",
       "special_ad_categories",
       "special_ad_category",
       "special_ad_category_country",
@@ -4101,6 +4124,15 @@ public class Campaign extends APINode {
     }
     public APIRequestUpdate setPromotedObject (String promotedObject) {
       this.setParam("promoted_object", promotedObject);
+      return this;
+    }
+
+    public APIRequestUpdate setSmartPromotionType (Campaign.EnumSmartPromotionType smartPromotionType) {
+      this.setParam("smart_promotion_type", smartPromotionType);
+      return this;
+    }
+    public APIRequestUpdate setSmartPromotionType (String smartPromotionType) {
+      this.setParam("smart_promotion_type", smartPromotionType);
       return this;
     }
 
@@ -4383,6 +4415,8 @@ public class Campaign extends APINode {
       VALUE_MESSAGES("MESSAGES"),
       @SerializedName("OFFER_CLAIMS")
       VALUE_OFFER_CLAIMS("OFFER_CLAIMS"),
+      @SerializedName("OUTCOME_LEADS")
+      VALUE_OUTCOME_LEADS("OUTCOME_LEADS"),
       @SerializedName("PAGE_LIKES")
       VALUE_PAGE_LIKES("PAGE_LIKES"),
       @SerializedName("POST_ENGAGEMENT")
@@ -4400,6 +4434,25 @@ public class Campaign extends APINode {
       private String value;
 
       private EnumObjective(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumSmartPromotionType {
+      @SerializedName("GUIDED_CREATION")
+      VALUE_GUIDED_CREATION("GUIDED_CREATION"),
+      @SerializedName("SMART_APP_PROMOTION")
+      VALUE_SMART_APP_PROMOTION("SMART_APP_PROMOTION"),
+      ;
+
+      private String value;
+
+      private EnumSmartPromotionType(String value) {
         this.value = value;
       }
 
@@ -5032,6 +5085,7 @@ public class Campaign extends APINode {
 
   public Campaign copyFrom(Campaign instance) {
     this.mAccountId = instance.mAccountId;
+    this.mAdStrategyId = instance.mAdStrategyId;
     this.mAdlabels = instance.mAdlabels;
     this.mBidStrategy = instance.mBidStrategy;
     this.mBoostedObjectId = instance.mBoostedObjectId;

@@ -109,6 +109,8 @@ public class Post extends APINode {
   private Place mImplicitPlace = null;
   @SerializedName("instagram_eligibility")
   private String mInstagramEligibility = null;
+  @SerializedName("instream_eligibility")
+  private String mInstreamEligibility = null;
   @SerializedName("is_app_share")
   private Boolean mIsAppShare = null;
   @SerializedName("is_eligible_for_promotion")
@@ -151,6 +153,8 @@ public class Post extends APINode {
   private String mPicture = null;
   @SerializedName("place")
   private Place mPlace = null;
+  @SerializedName("poll")
+  private Object mPoll = null;
   @SerializedName("privacy")
   private Privacy mPrivacy = null;
   @SerializedName("promotable_id")
@@ -582,6 +586,10 @@ public class Post extends APINode {
     return mInstagramEligibility;
   }
 
+  public String getFieldInstreamEligibility() {
+    return mInstreamEligibility;
+  }
+
   public Boolean getFieldIsAppShare() {
     return mIsAppShare;
   }
@@ -667,6 +675,10 @@ public class Post extends APINode {
       mPlace.context = getContext();
     }
     return mPlace;
+  }
+
+  public Object getFieldPoll() {
+    return mPoll;
   }
 
   public Privacy getFieldPrivacy() {
@@ -2454,6 +2466,7 @@ public class Post extends APINode {
       "id",
       "implicit_place",
       "instagram_eligibility",
+      "instream_eligibility",
       "is_app_share",
       "is_eligible_for_promotion",
       "is_expired",
@@ -2475,6 +2488,7 @@ public class Post extends APINode {
       "permalink_url",
       "picture",
       "place",
+      "poll",
       "privacy",
       "promotable_id",
       "promotion_status",
@@ -2777,6 +2791,13 @@ public class Post extends APINode {
       this.requestField("instagram_eligibility", value);
       return this;
     }
+    public APIRequestGetSharedPosts requestInstreamEligibilityField () {
+      return this.requestInstreamEligibilityField(true);
+    }
+    public APIRequestGetSharedPosts requestInstreamEligibilityField (boolean value) {
+      this.requestField("instream_eligibility", value);
+      return this;
+    }
     public APIRequestGetSharedPosts requestIsAppShareField () {
       return this.requestIsAppShareField(true);
     }
@@ -2922,6 +2943,13 @@ public class Post extends APINode {
     }
     public APIRequestGetSharedPosts requestPlaceField (boolean value) {
       this.requestField("place", value);
+      return this;
+    }
+    public APIRequestGetSharedPosts requestPollField () {
+      return this.requestPollField(true);
+    }
+    public APIRequestGetSharedPosts requestPollField (boolean value) {
+      this.requestField("poll", value);
       return this;
     }
     public APIRequestGetSharedPosts requestPrivacyField () {
@@ -3114,6 +3142,7 @@ public class Post extends APINode {
       "checkins",
       "company_overview",
       "connected_instagram_account",
+      "connected_page_backed_instagram_account",
       "contact_address",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
@@ -3482,6 +3511,13 @@ public class Post extends APINode {
     }
     public APIRequestGetSponsorTags requestConnectedInstagramAccountField (boolean value) {
       this.requestField("connected_instagram_account", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestConnectedPageBackedInstagramAccountField () {
+      return this.requestConnectedPageBackedInstagramAccountField(true);
+    }
+    public APIRequestGetSponsorTags requestConnectedPageBackedInstagramAccountField (boolean value) {
+      this.requestField("connected_page_backed_instagram_account", value);
       return this;
     }
     public APIRequestGetSponsorTags requestContactAddressField () {
@@ -4646,6 +4682,7 @@ public class Post extends APINode {
       "id",
       "implicit_place",
       "instagram_eligibility",
+      "instream_eligibility",
       "is_app_share",
       "is_eligible_for_promotion",
       "is_expired",
@@ -4667,6 +4704,7 @@ public class Post extends APINode {
       "permalink_url",
       "picture",
       "place",
+      "poll",
       "privacy",
       "promotable_id",
       "promotion_status",
@@ -4969,6 +5007,13 @@ public class Post extends APINode {
       this.requestField("instagram_eligibility", value);
       return this;
     }
+    public APIRequestGet requestInstreamEligibilityField () {
+      return this.requestInstreamEligibilityField(true);
+    }
+    public APIRequestGet requestInstreamEligibilityField (boolean value) {
+      this.requestField("instream_eligibility", value);
+      return this;
+    }
     public APIRequestGet requestIsAppShareField () {
       return this.requestIsAppShareField(true);
     }
@@ -5114,6 +5159,13 @@ public class Post extends APINode {
     }
     public APIRequestGet requestPlaceField (boolean value) {
       this.requestField("place", value);
+      return this;
+    }
+    public APIRequestGet requestPollField () {
+      return this.requestPollField(true);
+    }
+    public APIRequestGet requestPollField (boolean value) {
+      this.requestField("poll", value);
       return this;
     }
     public APIRequestGet requestPrivacyField () {
@@ -5691,6 +5743,159 @@ public class Post extends APINode {
       }
   }
 
+  public static enum EnumCheckinEntryPoint {
+      @SerializedName("BRANDING_CHECKIN")
+      VALUE_BRANDING_CHECKIN("BRANDING_CHECKIN"),
+      @SerializedName("BRANDING_OTHER")
+      VALUE_BRANDING_OTHER("BRANDING_OTHER"),
+      @SerializedName("BRANDING_PHOTO")
+      VALUE_BRANDING_PHOTO("BRANDING_PHOTO"),
+      @SerializedName("BRANDING_STATUS")
+      VALUE_BRANDING_STATUS("BRANDING_STATUS"),
+      ;
+
+      private String value;
+
+      private EnumCheckinEntryPoint(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumFormatting {
+      @SerializedName("MARKDOWN")
+      VALUE_MARKDOWN("MARKDOWN"),
+      @SerializedName("PLAINTEXT")
+      VALUE_PLAINTEXT("PLAINTEXT"),
+      ;
+
+      private String value;
+
+      private EnumFormatting(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumPlaceAttachmentSetting {
+      @SerializedName("1")
+      VALUE_1("1"),
+      @SerializedName("2")
+      VALUE_2("2"),
+      ;
+
+      private String value;
+
+      private EnumPlaceAttachmentSetting(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumPostSurfacesBlacklist {
+      @SerializedName("1")
+      VALUE_1("1"),
+      @SerializedName("2")
+      VALUE_2("2"),
+      @SerializedName("3")
+      VALUE_3("3"),
+      @SerializedName("4")
+      VALUE_4("4"),
+      @SerializedName("5")
+      VALUE_5("5"),
+      ;
+
+      private String value;
+
+      private EnumPostSurfacesBlacklist(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumPostingToRedspace {
+      @SerializedName("disabled")
+      VALUE_DISABLED("disabled"),
+      @SerializedName("enabled")
+      VALUE_ENABLED("enabled"),
+      ;
+
+      private String value;
+
+      private EnumPostingToRedspace(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumTargetSurface {
+      @SerializedName("STORY")
+      VALUE_STORY("STORY"),
+      @SerializedName("TIMELINE")
+      VALUE_TIMELINE("TIMELINE"),
+      ;
+
+      private String value;
+
+      private EnumTargetSurface(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumUnpublishedContentType {
+      @SerializedName("ADS_POST")
+      VALUE_ADS_POST("ADS_POST"),
+      @SerializedName("DRAFT")
+      VALUE_DRAFT("DRAFT"),
+      @SerializedName("INLINE_CREATED")
+      VALUE_INLINE_CREATED("INLINE_CREATED"),
+      @SerializedName("PUBLISHED")
+      VALUE_PUBLISHED("PUBLISHED"),
+      @SerializedName("REVIEWABLE_BRANDED_CONTENT")
+      VALUE_REVIEWABLE_BRANDED_CONTENT("REVIEWABLE_BRANDED_CONTENT"),
+      @SerializedName("SCHEDULED")
+      VALUE_SCHEDULED("SCHEDULED"),
+      @SerializedName("SCHEDULED_RECURRING")
+      VALUE_SCHEDULED_RECURRING("SCHEDULED_RECURRING"),
+      ;
+
+      private String value;
+
+      private EnumUnpublishedContentType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumAudience {
       @SerializedName("AUTO_LOOKALIKE")
       VALUE_AUTO_LOOKALIKE("AUTO_LOOKALIKE"),
@@ -5724,6 +5929,10 @@ public class Post extends APINode {
       VALUE_LOOKALIKE("LOOKALIKE"),
       @SerializedName("MARKETPLACE_DEFAULT")
       VALUE_MARKETPLACE_DEFAULT("MARKETPLACE_DEFAULT"),
+      @SerializedName("MARKETPLACE_NATIONWIDE_AUDIENCE")
+      VALUE_MARKETPLACE_NATIONWIDE_AUDIENCE("MARKETPLACE_NATIONWIDE_AUDIENCE"),
+      @SerializedName("MARKETPLACE_SAVED_AUDIENCE")
+      VALUE_MARKETPLACE_SAVED_AUDIENCE("MARKETPLACE_SAVED_AUDIENCE"),
       @SerializedName("MULT_CUSTOM_AUDIENCES")
       VALUE_MULT_CUSTOM_AUDIENCES("MULT_CUSTOM_AUDIENCES"),
       @SerializedName("NCPP")
@@ -5827,6 +6036,8 @@ public class Post extends APINode {
       VALUE_PURCHASE_GIFT_CARDS("PURCHASE_GIFT_CARDS"),
       @SerializedName("RECORD_NOW")
       VALUE_RECORD_NOW("RECORD_NOW"),
+      @SerializedName("REFER_FRIENDS")
+      VALUE_REFER_FRIENDS("REFER_FRIENDS"),
       @SerializedName("REQUEST_TIME")
       VALUE_REQUEST_TIME("REQUEST_TIME"),
       @SerializedName("SAY_THANKS")
@@ -5845,8 +6056,14 @@ public class Post extends APINode {
       VALUE_SIGN_UP("SIGN_UP"),
       @SerializedName("SOTTO_SUBSCRIBE")
       VALUE_SOTTO_SUBSCRIBE("SOTTO_SUBSCRIBE"),
+      @SerializedName("START_ORDER")
+      VALUE_START_ORDER("START_ORDER"),
       @SerializedName("SUBSCRIBE")
       VALUE_SUBSCRIBE("SUBSCRIBE"),
+      @SerializedName("SWIPE_UP_PRODUCT")
+      VALUE_SWIPE_UP_PRODUCT("SWIPE_UP_PRODUCT"),
+      @SerializedName("SWIPE_UP_SHOP")
+      VALUE_SWIPE_UP_SHOP("SWIPE_UP_SHOP"),
       @SerializedName("UPDATE_APP")
       VALUE_UPDATE_APP("UPDATE_APP"),
       @SerializedName("USE_APP")
@@ -5921,6 +6138,7 @@ public class Post extends APINode {
     this.mId = instance.mId;
     this.mImplicitPlace = instance.mImplicitPlace;
     this.mInstagramEligibility = instance.mInstagramEligibility;
+    this.mInstreamEligibility = instance.mInstreamEligibility;
     this.mIsAppShare = instance.mIsAppShare;
     this.mIsEligibleForPromotion = instance.mIsEligibleForPromotion;
     this.mIsExpired = instance.mIsExpired;
@@ -5942,6 +6160,7 @@ public class Post extends APINode {
     this.mPermalinkUrl = instance.mPermalinkUrl;
     this.mPicture = instance.mPicture;
     this.mPlace = instance.mPlace;
+    this.mPoll = instance.mPoll;
     this.mPrivacy = instance.mPrivacy;
     this.mPromotableId = instance.mPromotableId;
     this.mPromotionStatus = instance.mPromotionStatus;

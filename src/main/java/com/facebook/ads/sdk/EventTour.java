@@ -771,6 +771,7 @@ public class EventTour extends APINode {
       "checkins",
       "company_overview",
       "connected_instagram_account",
+      "connected_page_backed_instagram_account",
       "contact_address",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
@@ -1139,6 +1140,13 @@ public class EventTour extends APINode {
     }
     public APIRequestGetPages requestConnectedInstagramAccountField (boolean value) {
       this.requestField("connected_instagram_account", value);
+      return this;
+    }
+    public APIRequestGetPages requestConnectedPageBackedInstagramAccountField () {
+      return this.requestConnectedPageBackedInstagramAccountField(true);
+    }
+    public APIRequestGetPages requestConnectedPageBackedInstagramAccountField (boolean value) {
+      this.requestField("connected_page_backed_instagram_account", value);
       return this;
     }
     public APIRequestGetPages requestContactAddressField () {

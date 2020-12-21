@@ -2596,6 +2596,7 @@ public class Album extends APINode {
       "id",
       "implicit_place",
       "instagram_eligibility",
+      "instream_eligibility",
       "is_app_share",
       "is_eligible_for_promotion",
       "is_expired",
@@ -2617,6 +2618,7 @@ public class Album extends APINode {
       "permalink_url",
       "picture",
       "place",
+      "poll",
       "privacy",
       "promotable_id",
       "promotion_status",
@@ -2919,6 +2921,13 @@ public class Album extends APINode {
       this.requestField("instagram_eligibility", value);
       return this;
     }
+    public APIRequestGetSharedPosts requestInstreamEligibilityField () {
+      return this.requestInstreamEligibilityField(true);
+    }
+    public APIRequestGetSharedPosts requestInstreamEligibilityField (boolean value) {
+      this.requestField("instream_eligibility", value);
+      return this;
+    }
     public APIRequestGetSharedPosts requestIsAppShareField () {
       return this.requestIsAppShareField(true);
     }
@@ -3064,6 +3073,13 @@ public class Album extends APINode {
     }
     public APIRequestGetSharedPosts requestPlaceField (boolean value) {
       this.requestField("place", value);
+      return this;
+    }
+    public APIRequestGetSharedPosts requestPollField () {
+      return this.requestPollField(true);
+    }
+    public APIRequestGetSharedPosts requestPollField (boolean value) {
+      this.requestField("poll", value);
       return this;
     }
     public APIRequestGetSharedPosts requestPrivacyField () {

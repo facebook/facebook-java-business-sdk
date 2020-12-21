@@ -71,8 +71,12 @@ public class ProductFeed extends APINode {
   private String mFileName = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("item_sub_type")
+  private String mItemSubType = null;
   @SerializedName("latest_upload")
   private ProductFeedUpload mLatestUpload = null;
+  @SerializedName("migrated_from_feed_id")
+  private String mMigratedFromFeedId = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("override_type")
@@ -395,11 +399,19 @@ public class ProductFeed extends APINode {
     return mId;
   }
 
+  public String getFieldItemSubType() {
+    return mItemSubType;
+  }
+
   public ProductFeedUpload getFieldLatestUpload() {
     if (mLatestUpload != null) {
       mLatestUpload.context = getContext();
     }
     return mLatestUpload;
+  }
+
+  public String getFieldMigratedFromFeedId() {
+    return mMigratedFromFeedId;
   }
 
   public String getFieldName() {
@@ -451,6 +463,7 @@ public class ProductFeed extends APINode {
       "automotive_model_id",
       "availability",
       "body_style",
+      "category_specific_fields",
       "currency",
       "custom_label_0",
       "description",
@@ -608,6 +621,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetAutomotiveModels requestBodyStyleField (boolean value) {
       this.requestField("body_style", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGetAutomotiveModels requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGetAutomotiveModels requestCurrencyField () {
@@ -781,6 +801,7 @@ public class ProductFeed extends APINode {
     public static final String[] FIELDS = {
       "address",
       "applinks",
+      "category_specific_fields",
       "currency",
       "description",
       "destination_id",
@@ -915,6 +936,13 @@ public class ProductFeed extends APINode {
       this.requestField("applinks", value);
       return this;
     }
+    public APIRequestGetDestinations requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGetDestinations requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
+      return this;
+    }
     public APIRequestGetDestinations requestCurrencyField () {
       return this.requestCurrencyField(true);
     }
@@ -1008,6 +1036,7 @@ public class ProductFeed extends APINode {
 
     public static final String[] FIELDS = {
       "applinks",
+      "category_specific_fields",
       "currency",
       "description",
       "destination_airport",
@@ -1138,6 +1167,13 @@ public class ProductFeed extends APINode {
       this.requestField("applinks", value);
       return this;
     }
+    public APIRequestGetFlights requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGetFlights requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
+      return this;
+    }
     public APIRequestGetFlights requestCurrencyField () {
       return this.requestCurrencyField(true);
     }
@@ -1263,6 +1299,7 @@ public class ProductFeed extends APINode {
       "area_size",
       "area_unit",
       "availability",
+      "category_specific_fields",
       "co_2_emission_rating_eu",
       "currency",
       "days_on_market",
@@ -1484,6 +1521,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetHomeListings requestAvailabilityField (boolean value) {
       this.requestField("availability", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGetHomeListings requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGetHomeListings requestCo2EmissionRatingEuField () {
@@ -1715,6 +1759,7 @@ public class ProductFeed extends APINode {
       "applinks",
       "brand",
       "category",
+      "category_specific_fields",
       "currency",
       "description",
       "guest_ratings",
@@ -1867,6 +1912,13 @@ public class ProductFeed extends APINode {
       this.requestField("category", value);
       return this;
     }
+    public APIRequestGetHotels requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGetHotels requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
+      return this;
+    }
     public APIRequestGetHotels requestCurrencyField () {
       return this.requestCurrencyField(true);
     }
@@ -1996,6 +2048,7 @@ public class ProductFeed extends APINode {
       "brand",
       "capability_to_review_status",
       "category",
+      "category_specific_fields",
       "color",
       "commerce_insights",
       "condition",
@@ -2008,11 +2061,13 @@ public class ProductFeed extends APINode {
       "custom_label_4",
       "description",
       "expiration_date",
+      "fb_product_category",
       "gender",
       "gtin",
       "id",
       "image_cdn_urls",
       "image_url",
+      "images",
       "inventory",
       "manufacturer_part_number",
       "material",
@@ -2211,6 +2266,13 @@ public class ProductFeed extends APINode {
       this.requestField("category", value);
       return this;
     }
+    public APIRequestGetProducts requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGetProducts requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
+      return this;
+    }
     public APIRequestGetProducts requestColorField () {
       return this.requestColorField(true);
     }
@@ -2295,6 +2357,13 @@ public class ProductFeed extends APINode {
       this.requestField("expiration_date", value);
       return this;
     }
+    public APIRequestGetProducts requestFbProductCategoryField () {
+      return this.requestFbProductCategoryField(true);
+    }
+    public APIRequestGetProducts requestFbProductCategoryField (boolean value) {
+      this.requestField("fb_product_category", value);
+      return this;
+    }
     public APIRequestGetProducts requestGenderField () {
       return this.requestGenderField(true);
     }
@@ -2328,6 +2397,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetProducts requestImageUrlField (boolean value) {
       this.requestField("image_url", value);
+      return this;
+    }
+    public APIRequestGetProducts requestImagesField () {
+      return this.requestImagesField(true);
+    }
+    public APIRequestGetProducts requestImagesField (boolean value) {
+      this.requestField("images", value);
       return this;
     }
     public APIRequestGetProducts requestInventoryField () {
@@ -3451,6 +3527,7 @@ public class ProductFeed extends APINode {
       "body_style",
       "cashback_currency",
       "cashback_price",
+      "category_specific_fields",
       "currency",
       "dma_codes",
       "downpayment_currency",
@@ -3639,6 +3716,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetVehicleOffers requestCashbackPriceField (boolean value) {
       this.requestField("cashback_price", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGetVehicleOffers requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGetVehicleOffers requestCurrencyField () {
@@ -3835,6 +3919,7 @@ public class ProductFeed extends APINode {
       "applinks",
       "availability",
       "body_style",
+      "category_specific_fields",
       "condition",
       "currency",
       "custom_label_0",
@@ -4010,6 +4095,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetVehicles requestBodyStyleField (boolean value) {
       this.requestField("body_style", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestCategorySpecificFieldsField () {
+      return this.requestCategorySpecificFieldsField(true);
+    }
+    public APIRequestGetVehicles requestCategorySpecificFieldsField (boolean value) {
+      this.requestField("category_specific_fields", value);
       return this;
     }
     public APIRequestGetVehicles requestConditionField () {
@@ -4417,7 +4509,9 @@ public class ProductFeed extends APINode {
       "encoding",
       "file_name",
       "id",
+      "item_sub_type",
       "latest_upload",
+      "migrated_from_feed_id",
       "name",
       "override_type",
       "product_count",
@@ -4571,11 +4665,25 @@ public class ProductFeed extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestItemSubTypeField () {
+      return this.requestItemSubTypeField(true);
+    }
+    public APIRequestGet requestItemSubTypeField (boolean value) {
+      this.requestField("item_sub_type", value);
+      return this;
+    }
     public APIRequestGet requestLatestUploadField () {
       return this.requestLatestUploadField(true);
     }
     public APIRequestGet requestLatestUploadField (boolean value) {
       this.requestField("latest_upload", value);
+      return this;
+    }
+    public APIRequestGet requestMigratedFromFeedIdField () {
+      return this.requestMigratedFromFeedIdField(true);
+    }
+    public APIRequestGet requestMigratedFromFeedIdField (boolean value) {
+      this.requestField("migrated_from_feed_id", value);
       return this;
     }
     public APIRequestGet requestNameField () {
@@ -4634,6 +4742,7 @@ public class ProductFeed extends APINode {
       "deletion_enabled",
       "delimiter",
       "encoding",
+      "migrated_from_feed_id",
       "name",
       "quoted_fields_mode",
       "schedule",
@@ -4725,6 +4834,11 @@ public class ProductFeed extends APINode {
     }
     public APIRequestUpdate setEncoding (String encoding) {
       this.setParam("encoding", encoding);
+      return this;
+    }
+
+    public APIRequestUpdate setMigratedFromFeedId (String migratedFromFeedId) {
+      this.setParam("migrated_from_feed_id", migratedFromFeedId);
       return this;
     }
 
@@ -4910,6 +5024,73 @@ public class ProductFeed extends APINode {
       }
   }
 
+  public static enum EnumItemSubType {
+      @SerializedName("APPLIANCES")
+      VALUE_APPLIANCES("APPLIANCES"),
+      @SerializedName("BABY_FEEDING")
+      VALUE_BABY_FEEDING("BABY_FEEDING"),
+      @SerializedName("BABY_TRANSPORT")
+      VALUE_BABY_TRANSPORT("BABY_TRANSPORT"),
+      @SerializedName("BEAUTY")
+      VALUE_BEAUTY("BEAUTY"),
+      @SerializedName("BEDDING")
+      VALUE_BEDDING("BEDDING"),
+      @SerializedName("CAMERAS")
+      VALUE_CAMERAS("CAMERAS"),
+      @SerializedName("CELL_PHONES_AND_SMART_WATCHES")
+      VALUE_CELL_PHONES_AND_SMART_WATCHES("CELL_PHONES_AND_SMART_WATCHES"),
+      @SerializedName("CLEANING_SUPPLIES")
+      VALUE_CLEANING_SUPPLIES("CLEANING_SUPPLIES"),
+      @SerializedName("CLOTHING")
+      VALUE_CLOTHING("CLOTHING"),
+      @SerializedName("CLOTHING_ACCESSORIES")
+      VALUE_CLOTHING_ACCESSORIES("CLOTHING_ACCESSORIES"),
+      @SerializedName("COMPUTERS_AND_TABLETS")
+      VALUE_COMPUTERS_AND_TABLETS("COMPUTERS_AND_TABLETS"),
+      @SerializedName("DIAPERING_AND_POTTY_TRAINING")
+      VALUE_DIAPERING_AND_POTTY_TRAINING("DIAPERING_AND_POTTY_TRAINING"),
+      @SerializedName("ELECTRONICS_ACCESSORIES")
+      VALUE_ELECTRONICS_ACCESSORIES("ELECTRONICS_ACCESSORIES"),
+      @SerializedName("FURNITURE")
+      VALUE_FURNITURE("FURNITURE"),
+      @SerializedName("HEALTH")
+      VALUE_HEALTH("HEALTH"),
+      @SerializedName("HOME_GOODS")
+      VALUE_HOME_GOODS("HOME_GOODS"),
+      @SerializedName("JEWELRY")
+      VALUE_JEWELRY("JEWELRY"),
+      @SerializedName("NURSERY")
+      VALUE_NURSERY("NURSERY"),
+      @SerializedName("PRINTERS_AND_SCANNERS")
+      VALUE_PRINTERS_AND_SCANNERS("PRINTERS_AND_SCANNERS"),
+      @SerializedName("PROJECTORS")
+      VALUE_PROJECTORS("PROJECTORS"),
+      @SerializedName("SHOES_AND_FOOTWEAR")
+      VALUE_SHOES_AND_FOOTWEAR("SHOES_AND_FOOTWEAR"),
+      @SerializedName("SOFTWARE")
+      VALUE_SOFTWARE("SOFTWARE"),
+      @SerializedName("TOYS")
+      VALUE_TOYS("TOYS"),
+      @SerializedName("TVS_AND_MONITORS")
+      VALUE_TVS_AND_MONITORS("TVS_AND_MONITORS"),
+      @SerializedName("VIDEO_GAME_CONSOLES_AND_VIDEO_GAMES")
+      VALUE_VIDEO_GAME_CONSOLES_AND_VIDEO_GAMES("VIDEO_GAME_CONSOLES_AND_VIDEO_GAMES"),
+      @SerializedName("WATCHES")
+      VALUE_WATCHES("WATCHES"),
+      ;
+
+      private String value;
+
+      private EnumItemSubType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumOverrideType {
       @SerializedName("CATALOG_SEGMENT_CUSTOMIZE_DEFAULT")
       VALUE_CATALOG_SEGMENT_CUSTOMIZE_DEFAULT("CATALOG_SEGMENT_CUSTOMIZE_DEFAULT"),
@@ -4958,7 +5139,9 @@ public class ProductFeed extends APINode {
     this.mEncoding = instance.mEncoding;
     this.mFileName = instance.mFileName;
     this.mId = instance.mId;
+    this.mItemSubType = instance.mItemSubType;
     this.mLatestUpload = instance.mLatestUpload;
+    this.mMigratedFromFeedId = instance.mMigratedFromFeedId;
     this.mName = instance.mName;
     this.mOverrideType = instance.mOverrideType;
     this.mProductCount = instance.mProductCount;

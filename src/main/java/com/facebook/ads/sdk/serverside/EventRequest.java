@@ -17,6 +17,7 @@
  */
 package com.facebook.ads.sdk.serverside;
 
+import com.facebook.ads.sdk.APIConfig;
 import com.facebook.ads.sdk.APIContext;
 import com.facebook.ads.sdk.APIException;
 import com.facebook.ads.sdk.AdsPixel;
@@ -28,9 +29,12 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
+
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -63,6 +67,7 @@ public class EventRequest {
 
   private String pixelId;
   private APIContext context;
+  private HttpServiceInterface httpServiceClient;
 
   /**
    * Constructor.
@@ -87,11 +92,12 @@ public class EventRequest {
    * @param uploadId Unique id used to denote the current set being uploaded.
    * @param uploadTag Tag string added to track your Offline event uploads.
    * @param uploadSource The origin/source of data for the dataset to be uploaded.
+   * @param httpServiceClient The HttpServiceInterface client to use for executing the request.
    * Facebook
    */
   public EventRequest(String pixelId, APIContext context, List<Event> data,
                       String testEventCode, String partnerAgent, String namespaceId, String uploadId,
-                      String uploadTag, String uploadSource) {
+                      String uploadTag, String uploadSource, HttpServiceInterface httpServiceClient) {
     this.data = data;
     this.testEventCode = testEventCode;
     this.partnerAgent = partnerAgent;
@@ -101,6 +107,7 @@ public class EventRequest {
     this.uploadId = uploadId;
     this.uploadTag = uploadTag;
     this.uploadSource = uploadSource;
+    this.httpServiceClient = httpServiceClient;
   }
 
   static /*package*/ synchronized Gson getGson() {
@@ -344,17 +351,39 @@ public class EventRequest {
   }
 
   /**
+   * Get the httpServiceClient.
+   *
+   * @return httpServiceClient
+   */
+  public HttpServiceInterface getHttpServiceClient() {
+    return httpServiceClient;
+  }
+
+  /**
+   * Set a custom http client that will be used to send the event request.
+   *
+   * @param httpServiceClient the object implementing HttpServiceInterface
+   */
+  public void setHttpServiceClient(HttpServiceInterface httpServiceClient) {
+    this.httpServiceClient = httpServiceClient;
+  }
+
+  /**
    * Synchronously send Event to Facebook GraphAPI.
    *
    * @return event response
    * @throws APIException Api Exception
    */
   public EventResponse execute() throws APIException {
-    APIRequestCreateEvent event = getPixelCreateEvent();
-    EventResponse response = null;
     try {
-      AdsPixel pixel = event.execute();
-      response = gson.fromJson(pixel.getRawResponse(), EventResponse.class);
+      EventResponse response = null;
+      if (httpServiceClient == null) {
+        APIRequestCreateEvent event = getPixelCreateEvent();
+        AdsPixel pixel = event.execute();
+        response = gson.fromJson(pixel.getRawResponse(), EventResponse.class);
+      } else {
+        response = executeCustomHttpService(httpServiceClient);
+      }
       context.log(String.format("Successfully sent %d event(s)", response.getEventsReceived()));
       return response;
     } catch (APIException e) {
@@ -395,6 +424,36 @@ public class EventRequest {
     }
   }
 
+  private EventResponse executeCustomHttpService(HttpServiceInterface httpClient) {
+    String url = String.format("%s/%s/%s/events",
+        APIConfig.DEFAULT_API_BASE,
+        APIConfig.DEFAULT_API_VERSION,
+        pixelId
+    );
+    Map<String, String> headers = new HashMap<String, String>();
+    headers.put("User-Agent", APIConfig.USER_AGENT);
+    String appSecretProof = null;
+    if (context.hasAppSecret()) {
+      appSecretProof = context.getAppSecretProof();
+    }
+    HttpServiceParams params = new HttpServiceParams(
+        context.getAccessToken(),
+        appSecretProof,
+        data,
+        testEventCode,
+        partnerAgent,
+        namespaceId,
+        uploadId,
+        uploadTag,
+        uploadSource
+    );
+    return httpClient.executeRequest(
+        url,
+        HttpMethodEnum.POST,
+        headers,
+        params
+    );
+  }
 
   public String getSerializedPayload() {
     List<Event> s2sData = getData();
@@ -426,6 +485,19 @@ public class EventRequest {
     return event;
   }
 
+  public EventRequest cloneWithoutData() {
+    EventRequest cloned = new EventRequest(pixelId, context);
+    cloned
+        .testEventCode(testEventCode)
+        .partnerAgent(partnerAgent)
+        .namespaceId(namespaceId)
+        .uploadId(uploadId)
+        .uploadTag(uploadTag)
+        .uploadSource(uploadSource);
+
+    return cloned;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -437,7 +509,11 @@ public class EventRequest {
     EventRequest eventRequest = (EventRequest) o;
     return Objects.equals(this.data, eventRequest.data)
         && Objects.equals(this.testEventCode, eventRequest.testEventCode)
-        && Objects.equals(this.partnerAgent, eventRequest.partnerAgent);
+        && Objects.equals(this.partnerAgent, eventRequest.partnerAgent)
+        && Objects.equals(this.namespaceId, eventRequest.namespaceId)
+        && Objects.equals(this.uploadId, eventRequest.uploadId)
+        && Objects.equals(this.uploadTag, eventRequest.uploadTag)
+        && Objects.equals(this.uploadSource, eventRequest.uploadSource);
   }
 
   @Override
@@ -453,6 +529,10 @@ public class EventRequest {
     sb.append("    data: ").append(toIndentedString(data)).append("\n");
     sb.append("    testEventCode: ").append(toIndentedString(testEventCode)).append("\n");
     sb.append("    partnerAgent: ").append(toIndentedString(partnerAgent)).append("\n");
+    sb.append("    namespaceId: ").append(toIndentedString(namespaceId)).append("\n");
+    sb.append("    uploadId: ").append(toIndentedString(uploadId)).append("\n");
+    sb.append("    uploadTag: ").append(toIndentedString(uploadTag)).append("\n");
+    sb.append("    uploadSource: ").append(toIndentedString(uploadSource)).append("\n");
     sb.append("}");
     return sb.toString();
   }

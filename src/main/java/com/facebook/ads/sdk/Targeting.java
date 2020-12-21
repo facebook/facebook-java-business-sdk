@@ -78,7 +78,7 @@ public class Targeting extends APINode {
   @SerializedName("college_years")
   private List<Long> mCollegeYears = null;
   @SerializedName("connections")
-  private List<IDName> mConnections = null;
+  private List<ConnectionsTargeting> mConnections = null;
   @SerializedName("contextual_targeting_categories")
   private List<IDName> mContextualTargetingCategories = null;
   @SerializedName("countries")
@@ -122,7 +122,7 @@ public class Targeting extends APINode {
   @SerializedName("excluded_brand_safety_content_types")
   private List<String> mExcludedBrandSafetyContentTypes = null;
   @SerializedName("excluded_connections")
-  private List<IDName> mExcludedConnections = null;
+  private List<ConnectionsTargeting> mExcludedConnections = null;
   @SerializedName("excluded_custom_audiences")
   private List<RawCustomAudience> mExcludedCustomAudiences = null;
   @SerializedName("excluded_dynamic_audience_ids")
@@ -152,7 +152,7 @@ public class Targeting extends APINode {
   @SerializedName("flexible_spec")
   private List<FlexibleTargeting> mFlexibleSpec = null;
   @SerializedName("friends_of_connections")
-  private List<IDName> mFriendsOfConnections = null;
+  private List<ConnectionsTargeting> mFriendsOfConnections = null;
   @SerializedName("genders")
   private List<Long> mGenders = null;
   @SerializedName("generation")
@@ -498,18 +498,18 @@ public class Targeting extends APINode {
     return this;
   }
 
-  public List<IDName> getFieldConnections() {
+  public List<ConnectionsTargeting> getFieldConnections() {
     return mConnections;
   }
 
-  public Targeting setFieldConnections(List<IDName> value) {
+  public Targeting setFieldConnections(List<ConnectionsTargeting> value) {
     this.mConnections = value;
     return this;
   }
 
   public Targeting setFieldConnections(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mConnections = IDName.getGson().fromJson(value, type);
+    Type type = new TypeToken<List<ConnectionsTargeting>>(){}.getType();
+    this.mConnections = ConnectionsTargeting.getGson().fromJson(value, type);
     return this;
   }
   public List<IDName> getFieldContextualTargetingCategories() {
@@ -731,18 +731,18 @@ public class Targeting extends APINode {
     return this;
   }
 
-  public List<IDName> getFieldExcludedConnections() {
+  public List<ConnectionsTargeting> getFieldExcludedConnections() {
     return mExcludedConnections;
   }
 
-  public Targeting setFieldExcludedConnections(List<IDName> value) {
+  public Targeting setFieldExcludedConnections(List<ConnectionsTargeting> value) {
     this.mExcludedConnections = value;
     return this;
   }
 
   public Targeting setFieldExcludedConnections(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mExcludedConnections = IDName.getGson().fromJson(value, type);
+    Type type = new TypeToken<List<ConnectionsTargeting>>(){}.getType();
+    this.mExcludedConnections = ConnectionsTargeting.getGson().fromJson(value, type);
     return this;
   }
   public List<RawCustomAudience> getFieldExcludedCustomAudiences() {
@@ -906,18 +906,18 @@ public class Targeting extends APINode {
     this.mFlexibleSpec = FlexibleTargeting.getGson().fromJson(value, type);
     return this;
   }
-  public List<IDName> getFieldFriendsOfConnections() {
+  public List<ConnectionsTargeting> getFieldFriendsOfConnections() {
     return mFriendsOfConnections;
   }
 
-  public Targeting setFieldFriendsOfConnections(List<IDName> value) {
+  public Targeting setFieldFriendsOfConnections(List<ConnectionsTargeting> value) {
     this.mFriendsOfConnections = value;
     return this;
   }
 
   public Targeting setFieldFriendsOfConnections(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mFriendsOfConnections = IDName.getGson().fromJson(value, type);
+    Type type = new TypeToken<List<ConnectionsTargeting>>(){}.getType();
+    this.mFriendsOfConnections = ConnectionsTargeting.getGson().fromJson(value, type);
     return this;
   }
   public List<Long> getFieldGenders() {

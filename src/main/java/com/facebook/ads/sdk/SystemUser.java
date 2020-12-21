@@ -1070,6 +1070,7 @@ public class SystemUser extends APINode {
       "checkins",
       "company_overview",
       "connected_instagram_account",
+      "connected_page_backed_instagram_account",
       "contact_address",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
@@ -1438,6 +1439,13 @@ public class SystemUser extends APINode {
     }
     public APIRequestGetAssignedPages requestConnectedInstagramAccountField (boolean value) {
       this.requestField("connected_instagram_account", value);
+      return this;
+    }
+    public APIRequestGetAssignedPages requestConnectedPageBackedInstagramAccountField () {
+      return this.requestConnectedPageBackedInstagramAccountField(true);
+    }
+    public APIRequestGetAssignedPages requestConnectedPageBackedInstagramAccountField (boolean value) {
+      this.requestField("connected_page_backed_instagram_account", value);
       return this;
     }
     public APIRequestGetAssignedPages requestContactAddressField () {
@@ -2618,43 +2626,6 @@ public class SystemUser extends APINode {
       this.requestField("name", value);
       return this;
     }
-  }
-
-  public static enum EnumRole {
-      @SerializedName("ADMIN")
-      VALUE_ADMIN("ADMIN"),
-      @SerializedName("ADS_RIGHTS_REVIEWER")
-      VALUE_ADS_RIGHTS_REVIEWER("ADS_RIGHTS_REVIEWER"),
-      @SerializedName("DEVELOPER")
-      VALUE_DEVELOPER("DEVELOPER"),
-      @SerializedName("EMPLOYEE")
-      VALUE_EMPLOYEE("EMPLOYEE"),
-      @SerializedName("FINANCE_ANALYST")
-      VALUE_FINANCE_ANALYST("FINANCE_ANALYST"),
-      @SerializedName("FINANCE_EDITOR")
-      VALUE_FINANCE_EDITOR("FINANCE_EDITOR"),
-      @SerializedName("PARTNER_CENTER_ADMIN")
-      VALUE_PARTNER_CENTER_ADMIN("PARTNER_CENTER_ADMIN"),
-      @SerializedName("PARTNER_CENTER_ANALYST")
-      VALUE_PARTNER_CENTER_ANALYST("PARTNER_CENTER_ANALYST"),
-      @SerializedName("PARTNER_CENTER_EDUCATION")
-      VALUE_PARTNER_CENTER_EDUCATION("PARTNER_CENTER_EDUCATION"),
-      @SerializedName("PARTNER_CENTER_MARKETING")
-      VALUE_PARTNER_CENTER_MARKETING("PARTNER_CENTER_MARKETING"),
-      @SerializedName("PARTNER_CENTER_OPERATIONS")
-      VALUE_PARTNER_CENTER_OPERATIONS("PARTNER_CENTER_OPERATIONS"),
-      ;
-
-      private String value;
-
-      private EnumRole(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
   }
 
 

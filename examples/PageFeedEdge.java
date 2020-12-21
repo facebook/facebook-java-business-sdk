@@ -31,7 +31,7 @@ public class PageFeedEdge {
     String access_token = "<ACCESS_TOKEN>";
     String app_secret = "<APP_SECRET>";
     String app_id = "<APP_ID>";
-    String id = "<ID>";
+    String id = "<PAGE_ID>";
     APIContext context = new APIContext(access_token).enableDebug(true);
 
     new Page(id, context).getFeed()

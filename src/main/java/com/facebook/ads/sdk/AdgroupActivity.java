@@ -143,6 +143,10 @@ public class AdgroupActivity extends APINode {
   private String mTargetSpecIdNew = null;
   @SerializedName("target_spec_id_old")
   private String mTargetSpecIdOld = null;
+  @SerializedName("targets_spec_new")
+  private Object mTargetsSpecNew = null;
+  @SerializedName("targets_spec_old")
+  private Object mTargetsSpecOld = null;
   @SerializedName("tracking_pixel_ids_new")
   private List<String> mTrackingPixelIdsNew = null;
   @SerializedName("tracking_pixel_ids_old")
@@ -561,6 +565,14 @@ public class AdgroupActivity extends APINode {
     return mTargetSpecIdOld;
   }
 
+  public Object getFieldTargetsSpecNew() {
+    return mTargetsSpecNew;
+  }
+
+  public Object getFieldTargetsSpecOld() {
+    return mTargetsSpecOld;
+  }
+
   public List<String> getFieldTrackingPixelIdsNew() {
     return mTrackingPixelIdsNew;
   }
@@ -650,6 +662,8 @@ public class AdgroupActivity extends APINode {
       "stop_time_old",
       "target_spec_id_new",
       "target_spec_id_old",
+      "targets_spec_new",
+      "targets_spec_old",
       "tracking_pixel_ids_new",
       "tracking_pixel_ids_old",
       "tracking_specs_new",
@@ -1057,6 +1071,20 @@ public class AdgroupActivity extends APINode {
       this.requestField("target_spec_id_old", value);
       return this;
     }
+    public APIRequestGet requestTargetsSpecNewField () {
+      return this.requestTargetsSpecNewField(true);
+    }
+    public APIRequestGet requestTargetsSpecNewField (boolean value) {
+      this.requestField("targets_spec_new", value);
+      return this;
+    }
+    public APIRequestGet requestTargetsSpecOldField () {
+      return this.requestTargetsSpecOldField(true);
+    }
+    public APIRequestGet requestTargetsSpecOldField (boolean value) {
+      this.requestField("targets_spec_old", value);
+      return this;
+    }
     public APIRequestGet requestTrackingPixelIdsNewField () {
       return this.requestTrackingPixelIdsNewField(true);
     }
@@ -1276,6 +1304,8 @@ public class AdgroupActivity extends APINode {
     this.mStopTimeOld = instance.mStopTimeOld;
     this.mTargetSpecIdNew = instance.mTargetSpecIdNew;
     this.mTargetSpecIdOld = instance.mTargetSpecIdOld;
+    this.mTargetsSpecNew = instance.mTargetsSpecNew;
+    this.mTargetsSpecOld = instance.mTargetsSpecOld;
     this.mTrackingPixelIdsNew = instance.mTrackingPixelIdsNew;
     this.mTrackingPixelIdsOld = instance.mTrackingPixelIdsOld;
     this.mTrackingSpecsNew = instance.mTrackingSpecsNew;
