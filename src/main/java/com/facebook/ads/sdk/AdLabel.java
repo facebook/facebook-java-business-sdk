@@ -910,6 +910,7 @@ public class AdLabel extends APINode {
       "campaign",
       "campaign_id",
       "configured_status",
+      "conversion_domain",
       "conversion_specs",
       "created_time",
       "creative",
@@ -1098,6 +1099,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAds requestConfiguredStatusField (boolean value) {
       this.requestField("configured_status", value);
+      return this;
+    }
+    public APIRequestGetAds requestConversionDomainField () {
+      return this.requestConversionDomainField(true);
+    }
+    public APIRequestGetAds requestConversionDomainField (boolean value) {
+      this.requestField("conversion_domain", value);
       return this;
     }
     public APIRequestGetAds requestConversionSpecsField () {
@@ -1811,6 +1819,7 @@ public class AdLabel extends APINode {
       "daily_budget",
       "effective_status",
       "id",
+      "is_skadnetwork_attribution",
       "issues_info",
       "last_budget_toggling_time",
       "lifetime_budget",
@@ -1819,6 +1828,7 @@ public class AdLabel extends APINode {
       "pacing_type",
       "promoted_object",
       "recommendations",
+      "smart_promotion_type",
       "source_campaign",
       "source_campaign_id",
       "special_ad_categories",
@@ -2033,6 +2043,13 @@ public class AdLabel extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetCampaigns requestIsSkadnetworkAttributionField () {
+      return this.requestIsSkadnetworkAttributionField(true);
+    }
+    public APIRequestGetCampaigns requestIsSkadnetworkAttributionField (boolean value) {
+      this.requestField("is_skadnetwork_attribution", value);
+      return this;
+    }
     public APIRequestGetCampaigns requestIssuesInfoField () {
       return this.requestIssuesInfoField(true);
     }
@@ -2087,6 +2104,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetCampaigns requestRecommendationsField (boolean value) {
       this.requestField("recommendations", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestSmartPromotionTypeField () {
+      return this.requestSmartPromotionTypeField(true);
+    }
+    public APIRequestGetCampaigns requestSmartPromotionTypeField (boolean value) {
+      this.requestField("smart_promotion_type", value);
       return this;
     }
     public APIRequestGetCampaigns requestSourceCampaignField () {

@@ -620,10 +620,6 @@ public class Page extends APINode {
     return new APIRequestCreateCanvase(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestDeleteClaimedUrls deleteClaimedUrls() {
-    return new APIRequestDeleteClaimedUrls(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetClaimedUrls getClaimedUrls() {
     return new APIRequestGetClaimedUrls(this.getPrefixedId().toString(), context);
   }
@@ -1735,21 +1731,16 @@ public class Page extends APINode {
       "comments_mirroring_domain",
       "coordinates",
       "created_time",
-      "delivery_growth_optimizations",
-      "entities",
       "event",
       "expanded_height",
       "expanded_width",
       "feed_targeting",
-      "formatting",
       "from",
       "full_picture",
       "height",
       "icon",
       "id",
-      "implicit_place",
       "instagram_eligibility",
-      "instream_eligibility",
       "is_app_share",
       "is_eligible_for_promotion",
       "is_expired",
@@ -1759,7 +1750,6 @@ public class Page extends APINode {
       "is_popular",
       "is_published",
       "is_spherical",
-      "live_video_eligibility",
       "message",
       "message_tags",
       "multi_share_end_card",
@@ -1768,12 +1758,10 @@ public class Page extends APINode {
       "permalink_url",
       "picture",
       "place",
-      "poll",
       "privacy",
       "promotable_id",
       "promotion_status",
       "properties",
-      "publishing_stats",
       "scheduled_publish_time",
       "shares",
       "status_type",
@@ -1783,12 +1771,10 @@ public class Page extends APINode {
       "target",
       "targeting",
       "timeline_visibility",
-      "translations",
       "updated_time",
       "via",
       "video_buying_eligibility",
       "width",
-      "will_be_autocropped_when_deliver_to_instagram",
     };
 
     @Override
@@ -1985,20 +1971,6 @@ public class Page extends APINode {
       this.requestField("created_time", value);
       return this;
     }
-    public APIRequestGetAdsPosts requestDeliveryGrowthOptimizationsField () {
-      return this.requestDeliveryGrowthOptimizationsField(true);
-    }
-    public APIRequestGetAdsPosts requestDeliveryGrowthOptimizationsField (boolean value) {
-      this.requestField("delivery_growth_optimizations", value);
-      return this;
-    }
-    public APIRequestGetAdsPosts requestEntitiesField () {
-      return this.requestEntitiesField(true);
-    }
-    public APIRequestGetAdsPosts requestEntitiesField (boolean value) {
-      this.requestField("entities", value);
-      return this;
-    }
     public APIRequestGetAdsPosts requestEventField () {
       return this.requestEventField(true);
     }
@@ -2025,13 +1997,6 @@ public class Page extends APINode {
     }
     public APIRequestGetAdsPosts requestFeedTargetingField (boolean value) {
       this.requestField("feed_targeting", value);
-      return this;
-    }
-    public APIRequestGetAdsPosts requestFormattingField () {
-      return this.requestFormattingField(true);
-    }
-    public APIRequestGetAdsPosts requestFormattingField (boolean value) {
-      this.requestField("formatting", value);
       return this;
     }
     public APIRequestGetAdsPosts requestFromField () {
@@ -2069,25 +2034,11 @@ public class Page extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetAdsPosts requestImplicitPlaceField () {
-      return this.requestImplicitPlaceField(true);
-    }
-    public APIRequestGetAdsPosts requestImplicitPlaceField (boolean value) {
-      this.requestField("implicit_place", value);
-      return this;
-    }
     public APIRequestGetAdsPosts requestInstagramEligibilityField () {
       return this.requestInstagramEligibilityField(true);
     }
     public APIRequestGetAdsPosts requestInstagramEligibilityField (boolean value) {
       this.requestField("instagram_eligibility", value);
-      return this;
-    }
-    public APIRequestGetAdsPosts requestInstreamEligibilityField () {
-      return this.requestInstreamEligibilityField(true);
-    }
-    public APIRequestGetAdsPosts requestInstreamEligibilityField (boolean value) {
-      this.requestField("instream_eligibility", value);
       return this;
     }
     public APIRequestGetAdsPosts requestIsAppShareField () {
@@ -2153,13 +2104,6 @@ public class Page extends APINode {
       this.requestField("is_spherical", value);
       return this;
     }
-    public APIRequestGetAdsPosts requestLiveVideoEligibilityField () {
-      return this.requestLiveVideoEligibilityField(true);
-    }
-    public APIRequestGetAdsPosts requestLiveVideoEligibilityField (boolean value) {
-      this.requestField("live_video_eligibility", value);
-      return this;
-    }
     public APIRequestGetAdsPosts requestMessageField () {
       return this.requestMessageField(true);
     }
@@ -2216,13 +2160,6 @@ public class Page extends APINode {
       this.requestField("place", value);
       return this;
     }
-    public APIRequestGetAdsPosts requestPollField () {
-      return this.requestPollField(true);
-    }
-    public APIRequestGetAdsPosts requestPollField (boolean value) {
-      this.requestField("poll", value);
-      return this;
-    }
     public APIRequestGetAdsPosts requestPrivacyField () {
       return this.requestPrivacyField(true);
     }
@@ -2249,13 +2186,6 @@ public class Page extends APINode {
     }
     public APIRequestGetAdsPosts requestPropertiesField (boolean value) {
       this.requestField("properties", value);
-      return this;
-    }
-    public APIRequestGetAdsPosts requestPublishingStatsField () {
-      return this.requestPublishingStatsField(true);
-    }
-    public APIRequestGetAdsPosts requestPublishingStatsField (boolean value) {
-      this.requestField("publishing_stats", value);
       return this;
     }
     public APIRequestGetAdsPosts requestScheduledPublishTimeField () {
@@ -2321,13 +2251,6 @@ public class Page extends APINode {
       this.requestField("timeline_visibility", value);
       return this;
     }
-    public APIRequestGetAdsPosts requestTranslationsField () {
-      return this.requestTranslationsField(true);
-    }
-    public APIRequestGetAdsPosts requestTranslationsField (boolean value) {
-      this.requestField("translations", value);
-      return this;
-    }
     public APIRequestGetAdsPosts requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -2354,13 +2277,6 @@ public class Page extends APINode {
     }
     public APIRequestGetAdsPosts requestWidthField (boolean value) {
       this.requestField("width", value);
-      return this;
-    }
-    public APIRequestGetAdsPosts requestWillBeAutocroppedWhenDeliverToInstagramField () {
-      return this.requestWillBeAutocroppedWhenDeliverToInstagramField(true);
-    }
-    public APIRequestGetAdsPosts requestWillBeAutocroppedWhenDeliverToInstagramField (boolean value) {
-      this.requestField("will_be_autocropped_when_deliver_to_instagram", value);
       return this;
     }
   }
@@ -5069,116 +4985,6 @@ public class Page extends APINode {
 
   }
 
-  public static class APIRequestDeleteClaimedUrls extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "url",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestDeleteClaimedUrls.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestDeleteClaimedUrls(String nodeId, APIContext context) {
-      super(context, nodeId, "/claimed_urls", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDeleteClaimedUrls setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteClaimedUrls setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDeleteClaimedUrls setUrl (String url) {
-      this.setParam("url", url);
-      return this;
-    }
-
-    public APIRequestDeleteClaimedUrls requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDeleteClaimedUrls requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteClaimedUrls requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDeleteClaimedUrls requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteClaimedUrls requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteClaimedUrls requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetClaimedUrls extends APIRequest<URL> {
 
     APINodeList<URL> lastResponse = null;
@@ -6244,7 +6050,6 @@ public class Page extends APINode {
       "id",
       "is_subscribed",
       "link",
-      "linked_group",
       "message_count",
       "name",
       "participants",
@@ -6398,13 +6203,6 @@ public class Page extends APINode {
     }
     public APIRequestGetConversations requestLinkField (boolean value) {
       this.requestField("link", value);
-      return this;
-    }
-    public APIRequestGetConversations requestLinkedGroupField () {
-      return this.requestLinkedGroupField(true);
-    }
-    public APIRequestGetConversations requestLinkedGroupField (boolean value) {
-      this.requestField("linked_group", value);
       return this;
     }
     public APIRequestGetConversations requestMessageCountField () {
@@ -9221,21 +9019,16 @@ public class Page extends APINode {
       "comments_mirroring_domain",
       "coordinates",
       "created_time",
-      "delivery_growth_optimizations",
-      "entities",
       "event",
       "expanded_height",
       "expanded_width",
       "feed_targeting",
-      "formatting",
       "from",
       "full_picture",
       "height",
       "icon",
       "id",
-      "implicit_place",
       "instagram_eligibility",
-      "instream_eligibility",
       "is_app_share",
       "is_eligible_for_promotion",
       "is_expired",
@@ -9245,7 +9038,6 @@ public class Page extends APINode {
       "is_popular",
       "is_published",
       "is_spherical",
-      "live_video_eligibility",
       "message",
       "message_tags",
       "multi_share_end_card",
@@ -9254,12 +9046,10 @@ public class Page extends APINode {
       "permalink_url",
       "picture",
       "place",
-      "poll",
       "privacy",
       "promotable_id",
       "promotion_status",
       "properties",
-      "publishing_stats",
       "scheduled_publish_time",
       "shares",
       "status_type",
@@ -9269,12 +9059,10 @@ public class Page extends APINode {
       "target",
       "targeting",
       "timeline_visibility",
-      "translations",
       "updated_time",
       "via",
       "video_buying_eligibility",
       "width",
-      "will_be_autocropped_when_deliver_to_instagram",
     };
 
     @Override
@@ -9479,20 +9267,6 @@ public class Page extends APINode {
       this.requestField("created_time", value);
       return this;
     }
-    public APIRequestGetFeed requestDeliveryGrowthOptimizationsField () {
-      return this.requestDeliveryGrowthOptimizationsField(true);
-    }
-    public APIRequestGetFeed requestDeliveryGrowthOptimizationsField (boolean value) {
-      this.requestField("delivery_growth_optimizations", value);
-      return this;
-    }
-    public APIRequestGetFeed requestEntitiesField () {
-      return this.requestEntitiesField(true);
-    }
-    public APIRequestGetFeed requestEntitiesField (boolean value) {
-      this.requestField("entities", value);
-      return this;
-    }
     public APIRequestGetFeed requestEventField () {
       return this.requestEventField(true);
     }
@@ -9519,13 +9293,6 @@ public class Page extends APINode {
     }
     public APIRequestGetFeed requestFeedTargetingField (boolean value) {
       this.requestField("feed_targeting", value);
-      return this;
-    }
-    public APIRequestGetFeed requestFormattingField () {
-      return this.requestFormattingField(true);
-    }
-    public APIRequestGetFeed requestFormattingField (boolean value) {
-      this.requestField("formatting", value);
       return this;
     }
     public APIRequestGetFeed requestFromField () {
@@ -9563,25 +9330,11 @@ public class Page extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetFeed requestImplicitPlaceField () {
-      return this.requestImplicitPlaceField(true);
-    }
-    public APIRequestGetFeed requestImplicitPlaceField (boolean value) {
-      this.requestField("implicit_place", value);
-      return this;
-    }
     public APIRequestGetFeed requestInstagramEligibilityField () {
       return this.requestInstagramEligibilityField(true);
     }
     public APIRequestGetFeed requestInstagramEligibilityField (boolean value) {
       this.requestField("instagram_eligibility", value);
-      return this;
-    }
-    public APIRequestGetFeed requestInstreamEligibilityField () {
-      return this.requestInstreamEligibilityField(true);
-    }
-    public APIRequestGetFeed requestInstreamEligibilityField (boolean value) {
-      this.requestField("instream_eligibility", value);
       return this;
     }
     public APIRequestGetFeed requestIsAppShareField () {
@@ -9647,13 +9400,6 @@ public class Page extends APINode {
       this.requestField("is_spherical", value);
       return this;
     }
-    public APIRequestGetFeed requestLiveVideoEligibilityField () {
-      return this.requestLiveVideoEligibilityField(true);
-    }
-    public APIRequestGetFeed requestLiveVideoEligibilityField (boolean value) {
-      this.requestField("live_video_eligibility", value);
-      return this;
-    }
     public APIRequestGetFeed requestMessageField () {
       return this.requestMessageField(true);
     }
@@ -9710,13 +9456,6 @@ public class Page extends APINode {
       this.requestField("place", value);
       return this;
     }
-    public APIRequestGetFeed requestPollField () {
-      return this.requestPollField(true);
-    }
-    public APIRequestGetFeed requestPollField (boolean value) {
-      this.requestField("poll", value);
-      return this;
-    }
     public APIRequestGetFeed requestPrivacyField () {
       return this.requestPrivacyField(true);
     }
@@ -9743,13 +9482,6 @@ public class Page extends APINode {
     }
     public APIRequestGetFeed requestPropertiesField (boolean value) {
       this.requestField("properties", value);
-      return this;
-    }
-    public APIRequestGetFeed requestPublishingStatsField () {
-      return this.requestPublishingStatsField(true);
-    }
-    public APIRequestGetFeed requestPublishingStatsField (boolean value) {
-      this.requestField("publishing_stats", value);
       return this;
     }
     public APIRequestGetFeed requestScheduledPublishTimeField () {
@@ -9815,13 +9547,6 @@ public class Page extends APINode {
       this.requestField("timeline_visibility", value);
       return this;
     }
-    public APIRequestGetFeed requestTranslationsField () {
-      return this.requestTranslationsField(true);
-    }
-    public APIRequestGetFeed requestTranslationsField (boolean value) {
-      this.requestField("translations", value);
-      return this;
-    }
     public APIRequestGetFeed requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -9848,13 +9573,6 @@ public class Page extends APINode {
     }
     public APIRequestGetFeed requestWidthField (boolean value) {
       this.requestField("width", value);
-      return this;
-    }
-    public APIRequestGetFeed requestWillBeAutocroppedWhenDeliverToInstagramField () {
-      return this.requestWillBeAutocroppedWhenDeliverToInstagramField(true);
-    }
-    public APIRequestGetFeed requestWillBeAutocroppedWhenDeliverToInstagramField (boolean value) {
-      this.requestField("will_be_autocropped_when_deliver_to_instagram", value);
       return this;
     }
   }
@@ -17709,7 +17427,6 @@ public class Page extends APINode {
       "location",
       "location_page_id",
       "old_store_number",
-      "page_username",
       "permanently_closed",
       "phone",
       "pickup_options",
@@ -17844,11 +17561,6 @@ public class Page extends APINode {
     }
     public APIRequestCreateLocation setOldStoreNumber (String oldStoreNumber) {
       this.setParam("old_store_number", oldStoreNumber);
-      return this;
-    }
-
-    public APIRequestCreateLocation setPageUsername (String pageUsername) {
-      this.setParam("page_username", pageUsername);
       return this;
     }
 
@@ -18808,6 +18520,7 @@ public class Page extends APINode {
       "ice_breakers",
       "payment_settings",
       "persistent_menu",
+      "subject_to_new_eu_privacy_rules",
       "target_audience",
       "whitelisted_domains",
     };
@@ -18941,6 +18654,13 @@ public class Page extends APINode {
     }
     public APIRequestGetMessengerProfile requestPersistentMenuField (boolean value) {
       this.requestField("persistent_menu", value);
+      return this;
+    }
+    public APIRequestGetMessengerProfile requestSubjectToNewEuPrivacyRulesField () {
+      return this.requestSubjectToNewEuPrivacyRulesField(true);
+    }
+    public APIRequestGetMessengerProfile requestSubjectToNewEuPrivacyRulesField (boolean value) {
+      this.requestField("subject_to_new_eu_privacy_rules", value);
       return this;
     }
     public APIRequestGetMessengerProfile requestTargetAudienceField () {
@@ -22268,21 +21988,16 @@ public class Page extends APINode {
       "comments_mirroring_domain",
       "coordinates",
       "created_time",
-      "delivery_growth_optimizations",
-      "entities",
       "event",
       "expanded_height",
       "expanded_width",
       "feed_targeting",
-      "formatting",
       "from",
       "full_picture",
       "height",
       "icon",
       "id",
-      "implicit_place",
       "instagram_eligibility",
-      "instream_eligibility",
       "is_app_share",
       "is_eligible_for_promotion",
       "is_expired",
@@ -22292,7 +22007,6 @@ public class Page extends APINode {
       "is_popular",
       "is_published",
       "is_spherical",
-      "live_video_eligibility",
       "message",
       "message_tags",
       "multi_share_end_card",
@@ -22301,12 +22015,10 @@ public class Page extends APINode {
       "permalink_url",
       "picture",
       "place",
-      "poll",
       "privacy",
       "promotable_id",
       "promotion_status",
       "properties",
-      "publishing_stats",
       "scheduled_publish_time",
       "shares",
       "status_type",
@@ -22316,12 +22028,10 @@ public class Page extends APINode {
       "target",
       "targeting",
       "timeline_visibility",
-      "translations",
       "updated_time",
       "via",
       "video_buying_eligibility",
       "width",
-      "will_be_autocropped_when_deliver_to_instagram",
     };
 
     @Override
@@ -22531,20 +22241,6 @@ public class Page extends APINode {
       this.requestField("created_time", value);
       return this;
     }
-    public APIRequestGetPosts requestDeliveryGrowthOptimizationsField () {
-      return this.requestDeliveryGrowthOptimizationsField(true);
-    }
-    public APIRequestGetPosts requestDeliveryGrowthOptimizationsField (boolean value) {
-      this.requestField("delivery_growth_optimizations", value);
-      return this;
-    }
-    public APIRequestGetPosts requestEntitiesField () {
-      return this.requestEntitiesField(true);
-    }
-    public APIRequestGetPosts requestEntitiesField (boolean value) {
-      this.requestField("entities", value);
-      return this;
-    }
     public APIRequestGetPosts requestEventField () {
       return this.requestEventField(true);
     }
@@ -22571,13 +22267,6 @@ public class Page extends APINode {
     }
     public APIRequestGetPosts requestFeedTargetingField (boolean value) {
       this.requestField("feed_targeting", value);
-      return this;
-    }
-    public APIRequestGetPosts requestFormattingField () {
-      return this.requestFormattingField(true);
-    }
-    public APIRequestGetPosts requestFormattingField (boolean value) {
-      this.requestField("formatting", value);
       return this;
     }
     public APIRequestGetPosts requestFromField () {
@@ -22615,25 +22304,11 @@ public class Page extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetPosts requestImplicitPlaceField () {
-      return this.requestImplicitPlaceField(true);
-    }
-    public APIRequestGetPosts requestImplicitPlaceField (boolean value) {
-      this.requestField("implicit_place", value);
-      return this;
-    }
     public APIRequestGetPosts requestInstagramEligibilityField () {
       return this.requestInstagramEligibilityField(true);
     }
     public APIRequestGetPosts requestInstagramEligibilityField (boolean value) {
       this.requestField("instagram_eligibility", value);
-      return this;
-    }
-    public APIRequestGetPosts requestInstreamEligibilityField () {
-      return this.requestInstreamEligibilityField(true);
-    }
-    public APIRequestGetPosts requestInstreamEligibilityField (boolean value) {
-      this.requestField("instream_eligibility", value);
       return this;
     }
     public APIRequestGetPosts requestIsAppShareField () {
@@ -22699,13 +22374,6 @@ public class Page extends APINode {
       this.requestField("is_spherical", value);
       return this;
     }
-    public APIRequestGetPosts requestLiveVideoEligibilityField () {
-      return this.requestLiveVideoEligibilityField(true);
-    }
-    public APIRequestGetPosts requestLiveVideoEligibilityField (boolean value) {
-      this.requestField("live_video_eligibility", value);
-      return this;
-    }
     public APIRequestGetPosts requestMessageField () {
       return this.requestMessageField(true);
     }
@@ -22762,13 +22430,6 @@ public class Page extends APINode {
       this.requestField("place", value);
       return this;
     }
-    public APIRequestGetPosts requestPollField () {
-      return this.requestPollField(true);
-    }
-    public APIRequestGetPosts requestPollField (boolean value) {
-      this.requestField("poll", value);
-      return this;
-    }
     public APIRequestGetPosts requestPrivacyField () {
       return this.requestPrivacyField(true);
     }
@@ -22795,13 +22456,6 @@ public class Page extends APINode {
     }
     public APIRequestGetPosts requestPropertiesField (boolean value) {
       this.requestField("properties", value);
-      return this;
-    }
-    public APIRequestGetPosts requestPublishingStatsField () {
-      return this.requestPublishingStatsField(true);
-    }
-    public APIRequestGetPosts requestPublishingStatsField (boolean value) {
-      this.requestField("publishing_stats", value);
       return this;
     }
     public APIRequestGetPosts requestScheduledPublishTimeField () {
@@ -22867,13 +22521,6 @@ public class Page extends APINode {
       this.requestField("timeline_visibility", value);
       return this;
     }
-    public APIRequestGetPosts requestTranslationsField () {
-      return this.requestTranslationsField(true);
-    }
-    public APIRequestGetPosts requestTranslationsField (boolean value) {
-      this.requestField("translations", value);
-      return this;
-    }
     public APIRequestGetPosts requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -22900,13 +22547,6 @@ public class Page extends APINode {
     }
     public APIRequestGetPosts requestWidthField (boolean value) {
       this.requestField("width", value);
-      return this;
-    }
-    public APIRequestGetPosts requestWillBeAutocroppedWhenDeliverToInstagramField () {
-      return this.requestWillBeAutocroppedWhenDeliverToInstagramField(true);
-    }
-    public APIRequestGetPosts requestWillBeAutocroppedWhenDeliverToInstagramField (boolean value) {
-      this.requestField("will_be_autocropped_when_deliver_to_instagram", value);
       return this;
     }
   }
@@ -23135,21 +22775,16 @@ public class Page extends APINode {
       "comments_mirroring_domain",
       "coordinates",
       "created_time",
-      "delivery_growth_optimizations",
-      "entities",
       "event",
       "expanded_height",
       "expanded_width",
       "feed_targeting",
-      "formatting",
       "from",
       "full_picture",
       "height",
       "icon",
       "id",
-      "implicit_place",
       "instagram_eligibility",
-      "instream_eligibility",
       "is_app_share",
       "is_eligible_for_promotion",
       "is_expired",
@@ -23159,7 +22794,6 @@ public class Page extends APINode {
       "is_popular",
       "is_published",
       "is_spherical",
-      "live_video_eligibility",
       "message",
       "message_tags",
       "multi_share_end_card",
@@ -23168,12 +22802,10 @@ public class Page extends APINode {
       "permalink_url",
       "picture",
       "place",
-      "poll",
       "privacy",
       "promotable_id",
       "promotion_status",
       "properties",
-      "publishing_stats",
       "scheduled_publish_time",
       "shares",
       "status_type",
@@ -23183,12 +22815,10 @@ public class Page extends APINode {
       "target",
       "targeting",
       "timeline_visibility",
-      "translations",
       "updated_time",
       "via",
       "video_buying_eligibility",
       "width",
-      "will_be_autocropped_when_deliver_to_instagram",
     };
 
     @Override
@@ -23367,20 +22997,6 @@ public class Page extends APINode {
       this.requestField("created_time", value);
       return this;
     }
-    public APIRequestGetPublishedPosts requestDeliveryGrowthOptimizationsField () {
-      return this.requestDeliveryGrowthOptimizationsField(true);
-    }
-    public APIRequestGetPublishedPosts requestDeliveryGrowthOptimizationsField (boolean value) {
-      this.requestField("delivery_growth_optimizations", value);
-      return this;
-    }
-    public APIRequestGetPublishedPosts requestEntitiesField () {
-      return this.requestEntitiesField(true);
-    }
-    public APIRequestGetPublishedPosts requestEntitiesField (boolean value) {
-      this.requestField("entities", value);
-      return this;
-    }
     public APIRequestGetPublishedPosts requestEventField () {
       return this.requestEventField(true);
     }
@@ -23407,13 +23023,6 @@ public class Page extends APINode {
     }
     public APIRequestGetPublishedPosts requestFeedTargetingField (boolean value) {
       this.requestField("feed_targeting", value);
-      return this;
-    }
-    public APIRequestGetPublishedPosts requestFormattingField () {
-      return this.requestFormattingField(true);
-    }
-    public APIRequestGetPublishedPosts requestFormattingField (boolean value) {
-      this.requestField("formatting", value);
       return this;
     }
     public APIRequestGetPublishedPosts requestFromField () {
@@ -23451,25 +23060,11 @@ public class Page extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetPublishedPosts requestImplicitPlaceField () {
-      return this.requestImplicitPlaceField(true);
-    }
-    public APIRequestGetPublishedPosts requestImplicitPlaceField (boolean value) {
-      this.requestField("implicit_place", value);
-      return this;
-    }
     public APIRequestGetPublishedPosts requestInstagramEligibilityField () {
       return this.requestInstagramEligibilityField(true);
     }
     public APIRequestGetPublishedPosts requestInstagramEligibilityField (boolean value) {
       this.requestField("instagram_eligibility", value);
-      return this;
-    }
-    public APIRequestGetPublishedPosts requestInstreamEligibilityField () {
-      return this.requestInstreamEligibilityField(true);
-    }
-    public APIRequestGetPublishedPosts requestInstreamEligibilityField (boolean value) {
-      this.requestField("instream_eligibility", value);
       return this;
     }
     public APIRequestGetPublishedPosts requestIsAppShareField () {
@@ -23535,13 +23130,6 @@ public class Page extends APINode {
       this.requestField("is_spherical", value);
       return this;
     }
-    public APIRequestGetPublishedPosts requestLiveVideoEligibilityField () {
-      return this.requestLiveVideoEligibilityField(true);
-    }
-    public APIRequestGetPublishedPosts requestLiveVideoEligibilityField (boolean value) {
-      this.requestField("live_video_eligibility", value);
-      return this;
-    }
     public APIRequestGetPublishedPosts requestMessageField () {
       return this.requestMessageField(true);
     }
@@ -23598,13 +23186,6 @@ public class Page extends APINode {
       this.requestField("place", value);
       return this;
     }
-    public APIRequestGetPublishedPosts requestPollField () {
-      return this.requestPollField(true);
-    }
-    public APIRequestGetPublishedPosts requestPollField (boolean value) {
-      this.requestField("poll", value);
-      return this;
-    }
     public APIRequestGetPublishedPosts requestPrivacyField () {
       return this.requestPrivacyField(true);
     }
@@ -23631,13 +23212,6 @@ public class Page extends APINode {
     }
     public APIRequestGetPublishedPosts requestPropertiesField (boolean value) {
       this.requestField("properties", value);
-      return this;
-    }
-    public APIRequestGetPublishedPosts requestPublishingStatsField () {
-      return this.requestPublishingStatsField(true);
-    }
-    public APIRequestGetPublishedPosts requestPublishingStatsField (boolean value) {
-      this.requestField("publishing_stats", value);
       return this;
     }
     public APIRequestGetPublishedPosts requestScheduledPublishTimeField () {
@@ -23703,13 +23277,6 @@ public class Page extends APINode {
       this.requestField("timeline_visibility", value);
       return this;
     }
-    public APIRequestGetPublishedPosts requestTranslationsField () {
-      return this.requestTranslationsField(true);
-    }
-    public APIRequestGetPublishedPosts requestTranslationsField (boolean value) {
-      this.requestField("translations", value);
-      return this;
-    }
     public APIRequestGetPublishedPosts requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -23736,13 +23303,6 @@ public class Page extends APINode {
     }
     public APIRequestGetPublishedPosts requestWidthField (boolean value) {
       this.requestField("width", value);
-      return this;
-    }
-    public APIRequestGetPublishedPosts requestWillBeAutocroppedWhenDeliverToInstagramField () {
-      return this.requestWillBeAutocroppedWhenDeliverToInstagramField(true);
-    }
-    public APIRequestGetPublishedPosts requestWillBeAutocroppedWhenDeliverToInstagramField (boolean value) {
-      this.requestField("will_be_autocropped_when_deliver_to_instagram", value);
       return this;
     }
   }
@@ -24163,14 +23723,10 @@ public class Page extends APINode {
 
     public static final String[] FIELDS = {
       "about",
-      "address",
-      "admin_notes",
       "age_range",
-      "auth_method",
       "birthday",
       "cover",
       "currency",
-      "devices",
       "education",
       "email",
       "favorite_athletes",
@@ -24193,15 +23749,12 @@ public class Page extends APINode {
       "locale",
       "location",
       "meeting_for",
-      "messenger_join_notifications_enabled",
       "middle_name",
       "name",
       "name_format",
       "payment_pricepoints",
       "political",
       "profile_pic",
-      "public_key",
-      "published_timeline",
       "quotes",
       "relationship_status",
       "religion",
@@ -24214,12 +23767,9 @@ public class Page extends APINode {
       "timezone",
       "token_for_business",
       "updated_time",
-      "user_storage_key",
-      "username",
       "verified",
       "video_upload_limits",
       "website",
-      "work",
     };
 
     @Override
@@ -24336,32 +23886,11 @@ public class Page extends APINode {
       this.requestField("about", value);
       return this;
     }
-    public APIRequestGetRoles requestAddressField () {
-      return this.requestAddressField(true);
-    }
-    public APIRequestGetRoles requestAddressField (boolean value) {
-      this.requestField("address", value);
-      return this;
-    }
-    public APIRequestGetRoles requestAdminNotesField () {
-      return this.requestAdminNotesField(true);
-    }
-    public APIRequestGetRoles requestAdminNotesField (boolean value) {
-      this.requestField("admin_notes", value);
-      return this;
-    }
     public APIRequestGetRoles requestAgeRangeField () {
       return this.requestAgeRangeField(true);
     }
     public APIRequestGetRoles requestAgeRangeField (boolean value) {
       this.requestField("age_range", value);
-      return this;
-    }
-    public APIRequestGetRoles requestAuthMethodField () {
-      return this.requestAuthMethodField(true);
-    }
-    public APIRequestGetRoles requestAuthMethodField (boolean value) {
-      this.requestField("auth_method", value);
       return this;
     }
     public APIRequestGetRoles requestBirthdayField () {
@@ -24383,13 +23912,6 @@ public class Page extends APINode {
     }
     public APIRequestGetRoles requestCurrencyField (boolean value) {
       this.requestField("currency", value);
-      return this;
-    }
-    public APIRequestGetRoles requestDevicesField () {
-      return this.requestDevicesField(true);
-    }
-    public APIRequestGetRoles requestDevicesField (boolean value) {
-      this.requestField("devices", value);
       return this;
     }
     public APIRequestGetRoles requestEducationField () {
@@ -24546,13 +24068,6 @@ public class Page extends APINode {
       this.requestField("meeting_for", value);
       return this;
     }
-    public APIRequestGetRoles requestMessengerJoinNotificationsEnabledField () {
-      return this.requestMessengerJoinNotificationsEnabledField(true);
-    }
-    public APIRequestGetRoles requestMessengerJoinNotificationsEnabledField (boolean value) {
-      this.requestField("messenger_join_notifications_enabled", value);
-      return this;
-    }
     public APIRequestGetRoles requestMiddleNameField () {
       return this.requestMiddleNameField(true);
     }
@@ -24593,20 +24108,6 @@ public class Page extends APINode {
     }
     public APIRequestGetRoles requestProfilePicField (boolean value) {
       this.requestField("profile_pic", value);
-      return this;
-    }
-    public APIRequestGetRoles requestPublicKeyField () {
-      return this.requestPublicKeyField(true);
-    }
-    public APIRequestGetRoles requestPublicKeyField (boolean value) {
-      this.requestField("public_key", value);
-      return this;
-    }
-    public APIRequestGetRoles requestPublishedTimelineField () {
-      return this.requestPublishedTimelineField(true);
-    }
-    public APIRequestGetRoles requestPublishedTimelineField (boolean value) {
-      this.requestField("published_timeline", value);
       return this;
     }
     public APIRequestGetRoles requestQuotesField () {
@@ -24693,20 +24194,6 @@ public class Page extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-    public APIRequestGetRoles requestUserStorageKeyField () {
-      return this.requestUserStorageKeyField(true);
-    }
-    public APIRequestGetRoles requestUserStorageKeyField (boolean value) {
-      this.requestField("user_storage_key", value);
-      return this;
-    }
-    public APIRequestGetRoles requestUsernameField () {
-      return this.requestUsernameField(true);
-    }
-    public APIRequestGetRoles requestUsernameField (boolean value) {
-      this.requestField("username", value);
-      return this;
-    }
     public APIRequestGetRoles requestVerifiedField () {
       return this.requestVerifiedField(true);
     }
@@ -24726,13 +24213,6 @@ public class Page extends APINode {
     }
     public APIRequestGetRoles requestWebsiteField (boolean value) {
       this.requestField("website", value);
-      return this;
-    }
-    public APIRequestGetRoles requestWorkField () {
-      return this.requestWorkField(true);
-    }
-    public APIRequestGetRoles requestWorkField (boolean value) {
-      this.requestField("work", value);
       return this;
     }
   }
@@ -24951,21 +24431,16 @@ public class Page extends APINode {
       "comments_mirroring_domain",
       "coordinates",
       "created_time",
-      "delivery_growth_optimizations",
-      "entities",
       "event",
       "expanded_height",
       "expanded_width",
       "feed_targeting",
-      "formatting",
       "from",
       "full_picture",
       "height",
       "icon",
       "id",
-      "implicit_place",
       "instagram_eligibility",
-      "instream_eligibility",
       "is_app_share",
       "is_eligible_for_promotion",
       "is_expired",
@@ -24975,7 +24450,6 @@ public class Page extends APINode {
       "is_popular",
       "is_published",
       "is_spherical",
-      "live_video_eligibility",
       "message",
       "message_tags",
       "multi_share_end_card",
@@ -24984,12 +24458,10 @@ public class Page extends APINode {
       "permalink_url",
       "picture",
       "place",
-      "poll",
       "privacy",
       "promotable_id",
       "promotion_status",
       "properties",
-      "publishing_stats",
       "scheduled_publish_time",
       "shares",
       "status_type",
@@ -24999,12 +24471,10 @@ public class Page extends APINode {
       "target",
       "targeting",
       "timeline_visibility",
-      "translations",
       "updated_time",
       "via",
       "video_buying_eligibility",
       "width",
-      "will_be_autocropped_when_deliver_to_instagram",
     };
 
     @Override
@@ -25173,20 +24643,6 @@ public class Page extends APINode {
       this.requestField("created_time", value);
       return this;
     }
-    public APIRequestGetScheduledPosts requestDeliveryGrowthOptimizationsField () {
-      return this.requestDeliveryGrowthOptimizationsField(true);
-    }
-    public APIRequestGetScheduledPosts requestDeliveryGrowthOptimizationsField (boolean value) {
-      this.requestField("delivery_growth_optimizations", value);
-      return this;
-    }
-    public APIRequestGetScheduledPosts requestEntitiesField () {
-      return this.requestEntitiesField(true);
-    }
-    public APIRequestGetScheduledPosts requestEntitiesField (boolean value) {
-      this.requestField("entities", value);
-      return this;
-    }
     public APIRequestGetScheduledPosts requestEventField () {
       return this.requestEventField(true);
     }
@@ -25213,13 +24669,6 @@ public class Page extends APINode {
     }
     public APIRequestGetScheduledPosts requestFeedTargetingField (boolean value) {
       this.requestField("feed_targeting", value);
-      return this;
-    }
-    public APIRequestGetScheduledPosts requestFormattingField () {
-      return this.requestFormattingField(true);
-    }
-    public APIRequestGetScheduledPosts requestFormattingField (boolean value) {
-      this.requestField("formatting", value);
       return this;
     }
     public APIRequestGetScheduledPosts requestFromField () {
@@ -25257,25 +24706,11 @@ public class Page extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetScheduledPosts requestImplicitPlaceField () {
-      return this.requestImplicitPlaceField(true);
-    }
-    public APIRequestGetScheduledPosts requestImplicitPlaceField (boolean value) {
-      this.requestField("implicit_place", value);
-      return this;
-    }
     public APIRequestGetScheduledPosts requestInstagramEligibilityField () {
       return this.requestInstagramEligibilityField(true);
     }
     public APIRequestGetScheduledPosts requestInstagramEligibilityField (boolean value) {
       this.requestField("instagram_eligibility", value);
-      return this;
-    }
-    public APIRequestGetScheduledPosts requestInstreamEligibilityField () {
-      return this.requestInstreamEligibilityField(true);
-    }
-    public APIRequestGetScheduledPosts requestInstreamEligibilityField (boolean value) {
-      this.requestField("instream_eligibility", value);
       return this;
     }
     public APIRequestGetScheduledPosts requestIsAppShareField () {
@@ -25341,13 +24776,6 @@ public class Page extends APINode {
       this.requestField("is_spherical", value);
       return this;
     }
-    public APIRequestGetScheduledPosts requestLiveVideoEligibilityField () {
-      return this.requestLiveVideoEligibilityField(true);
-    }
-    public APIRequestGetScheduledPosts requestLiveVideoEligibilityField (boolean value) {
-      this.requestField("live_video_eligibility", value);
-      return this;
-    }
     public APIRequestGetScheduledPosts requestMessageField () {
       return this.requestMessageField(true);
     }
@@ -25404,13 +24832,6 @@ public class Page extends APINode {
       this.requestField("place", value);
       return this;
     }
-    public APIRequestGetScheduledPosts requestPollField () {
-      return this.requestPollField(true);
-    }
-    public APIRequestGetScheduledPosts requestPollField (boolean value) {
-      this.requestField("poll", value);
-      return this;
-    }
     public APIRequestGetScheduledPosts requestPrivacyField () {
       return this.requestPrivacyField(true);
     }
@@ -25437,13 +24858,6 @@ public class Page extends APINode {
     }
     public APIRequestGetScheduledPosts requestPropertiesField (boolean value) {
       this.requestField("properties", value);
-      return this;
-    }
-    public APIRequestGetScheduledPosts requestPublishingStatsField () {
-      return this.requestPublishingStatsField(true);
-    }
-    public APIRequestGetScheduledPosts requestPublishingStatsField (boolean value) {
-      this.requestField("publishing_stats", value);
       return this;
     }
     public APIRequestGetScheduledPosts requestScheduledPublishTimeField () {
@@ -25509,13 +24923,6 @@ public class Page extends APINode {
       this.requestField("timeline_visibility", value);
       return this;
     }
-    public APIRequestGetScheduledPosts requestTranslationsField () {
-      return this.requestTranslationsField(true);
-    }
-    public APIRequestGetScheduledPosts requestTranslationsField (boolean value) {
-      this.requestField("translations", value);
-      return this;
-    }
     public APIRequestGetScheduledPosts requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -25542,13 +24949,6 @@ public class Page extends APINode {
     }
     public APIRequestGetScheduledPosts requestWidthField (boolean value) {
       this.requestField("width", value);
-      return this;
-    }
-    public APIRequestGetScheduledPosts requestWillBeAutocroppedWhenDeliverToInstagramField () {
-      return this.requestWillBeAutocroppedWhenDeliverToInstagramField(true);
-    }
-    public APIRequestGetScheduledPosts requestWillBeAutocroppedWhenDeliverToInstagramField (boolean value) {
-      this.requestField("will_be_autocropped_when_deliver_to_instagram", value);
       return this;
     }
   }
@@ -28349,21 +27749,16 @@ public class Page extends APINode {
       "comments_mirroring_domain",
       "coordinates",
       "created_time",
-      "delivery_growth_optimizations",
-      "entities",
       "event",
       "expanded_height",
       "expanded_width",
       "feed_targeting",
-      "formatting",
       "from",
       "full_picture",
       "height",
       "icon",
       "id",
-      "implicit_place",
       "instagram_eligibility",
-      "instream_eligibility",
       "is_app_share",
       "is_eligible_for_promotion",
       "is_expired",
@@ -28373,7 +27768,6 @@ public class Page extends APINode {
       "is_popular",
       "is_published",
       "is_spherical",
-      "live_video_eligibility",
       "message",
       "message_tags",
       "multi_share_end_card",
@@ -28382,12 +27776,10 @@ public class Page extends APINode {
       "permalink_url",
       "picture",
       "place",
-      "poll",
       "privacy",
       "promotable_id",
       "promotion_status",
       "properties",
-      "publishing_stats",
       "scheduled_publish_time",
       "shares",
       "status_type",
@@ -28397,12 +27789,10 @@ public class Page extends APINode {
       "target",
       "targeting",
       "timeline_visibility",
-      "translations",
       "updated_time",
       "via",
       "video_buying_eligibility",
       "width",
-      "will_be_autocropped_when_deliver_to_instagram",
     };
 
     @Override
@@ -28571,20 +27961,6 @@ public class Page extends APINode {
       this.requestField("created_time", value);
       return this;
     }
-    public APIRequestGetTagged requestDeliveryGrowthOptimizationsField () {
-      return this.requestDeliveryGrowthOptimizationsField(true);
-    }
-    public APIRequestGetTagged requestDeliveryGrowthOptimizationsField (boolean value) {
-      this.requestField("delivery_growth_optimizations", value);
-      return this;
-    }
-    public APIRequestGetTagged requestEntitiesField () {
-      return this.requestEntitiesField(true);
-    }
-    public APIRequestGetTagged requestEntitiesField (boolean value) {
-      this.requestField("entities", value);
-      return this;
-    }
     public APIRequestGetTagged requestEventField () {
       return this.requestEventField(true);
     }
@@ -28611,13 +27987,6 @@ public class Page extends APINode {
     }
     public APIRequestGetTagged requestFeedTargetingField (boolean value) {
       this.requestField("feed_targeting", value);
-      return this;
-    }
-    public APIRequestGetTagged requestFormattingField () {
-      return this.requestFormattingField(true);
-    }
-    public APIRequestGetTagged requestFormattingField (boolean value) {
-      this.requestField("formatting", value);
       return this;
     }
     public APIRequestGetTagged requestFromField () {
@@ -28655,25 +28024,11 @@ public class Page extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetTagged requestImplicitPlaceField () {
-      return this.requestImplicitPlaceField(true);
-    }
-    public APIRequestGetTagged requestImplicitPlaceField (boolean value) {
-      this.requestField("implicit_place", value);
-      return this;
-    }
     public APIRequestGetTagged requestInstagramEligibilityField () {
       return this.requestInstagramEligibilityField(true);
     }
     public APIRequestGetTagged requestInstagramEligibilityField (boolean value) {
       this.requestField("instagram_eligibility", value);
-      return this;
-    }
-    public APIRequestGetTagged requestInstreamEligibilityField () {
-      return this.requestInstreamEligibilityField(true);
-    }
-    public APIRequestGetTagged requestInstreamEligibilityField (boolean value) {
-      this.requestField("instream_eligibility", value);
       return this;
     }
     public APIRequestGetTagged requestIsAppShareField () {
@@ -28739,13 +28094,6 @@ public class Page extends APINode {
       this.requestField("is_spherical", value);
       return this;
     }
-    public APIRequestGetTagged requestLiveVideoEligibilityField () {
-      return this.requestLiveVideoEligibilityField(true);
-    }
-    public APIRequestGetTagged requestLiveVideoEligibilityField (boolean value) {
-      this.requestField("live_video_eligibility", value);
-      return this;
-    }
     public APIRequestGetTagged requestMessageField () {
       return this.requestMessageField(true);
     }
@@ -28802,13 +28150,6 @@ public class Page extends APINode {
       this.requestField("place", value);
       return this;
     }
-    public APIRequestGetTagged requestPollField () {
-      return this.requestPollField(true);
-    }
-    public APIRequestGetTagged requestPollField (boolean value) {
-      this.requestField("poll", value);
-      return this;
-    }
     public APIRequestGetTagged requestPrivacyField () {
       return this.requestPrivacyField(true);
     }
@@ -28835,13 +28176,6 @@ public class Page extends APINode {
     }
     public APIRequestGetTagged requestPropertiesField (boolean value) {
       this.requestField("properties", value);
-      return this;
-    }
-    public APIRequestGetTagged requestPublishingStatsField () {
-      return this.requestPublishingStatsField(true);
-    }
-    public APIRequestGetTagged requestPublishingStatsField (boolean value) {
-      this.requestField("publishing_stats", value);
       return this;
     }
     public APIRequestGetTagged requestScheduledPublishTimeField () {
@@ -28907,13 +28241,6 @@ public class Page extends APINode {
       this.requestField("timeline_visibility", value);
       return this;
     }
-    public APIRequestGetTagged requestTranslationsField () {
-      return this.requestTranslationsField(true);
-    }
-    public APIRequestGetTagged requestTranslationsField (boolean value) {
-      this.requestField("translations", value);
-      return this;
-    }
     public APIRequestGetTagged requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -28940,13 +28267,6 @@ public class Page extends APINode {
     }
     public APIRequestGetTagged requestWidthField (boolean value) {
       this.requestField("width", value);
-      return this;
-    }
-    public APIRequestGetTagged requestWillBeAutocroppedWhenDeliverToInstagramField () {
-      return this.requestWillBeAutocroppedWhenDeliverToInstagramField(true);
-    }
-    public APIRequestGetTagged requestWillBeAutocroppedWhenDeliverToInstagramField (boolean value) {
-      this.requestField("will_be_autocropped_when_deliver_to_instagram", value);
       return this;
     }
   }
@@ -29208,7 +28528,6 @@ public class Page extends APINode {
       "id",
       "is_subscribed",
       "link",
-      "linked_group",
       "message_count",
       "name",
       "participants",
@@ -29364,13 +28683,6 @@ public class Page extends APINode {
       this.requestField("link", value);
       return this;
     }
-    public APIRequestGetThreads requestLinkedGroupField () {
-      return this.requestLinkedGroupField(true);
-    }
-    public APIRequestGetThreads requestLinkedGroupField (boolean value) {
-      this.requestField("linked_group", value);
-      return this;
-    }
     public APIRequestGetThreads requestMessageCountField () {
       return this.requestMessageCountField(true);
     }
@@ -29443,59 +28755,45 @@ public class Page extends APINode {
     }
   }
 
-  public static class APIRequestGetTours extends APIRequest<EventTour> {
+  public static class APIRequestGetTours extends APIRequest<APINode> {
 
-    APINodeList<EventTour> lastResponse = null;
+    APINodeList<APINode> lastResponse = null;
     @Override
-    public APINodeList<EventTour> getLastResponse() {
+    public APINodeList<APINode> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "description",
-      "dominant_color",
-      "end_time",
-      "id",
-      "is_past",
-      "last_event_timestamp",
-      "name",
-      "num_events",
-      "photo",
-      "publishing_state",
-      "scheduled_publish_timestamp",
-      "start_time",
-      "ticketing_uri",
-      "video",
     };
 
     @Override
-    public APINodeList<EventTour> parseResponse(String response, String header) throws APIException {
-      return EventTour.parseResponse(response, getContext(), this, header);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<EventTour> execute() throws APIException {
+    public APINodeList<APINode> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<EventTour> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<EventTour>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<EventTour>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<EventTour>>() {
-           public APINodeList<EventTour> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
                return APIRequestGetTours.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -29559,104 +28857,6 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestGetTours requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGetTours requestDescriptionField (boolean value) {
-      this.requestField("description", value);
-      return this;
-    }
-    public APIRequestGetTours requestDominantColorField () {
-      return this.requestDominantColorField(true);
-    }
-    public APIRequestGetTours requestDominantColorField (boolean value) {
-      this.requestField("dominant_color", value);
-      return this;
-    }
-    public APIRequestGetTours requestEndTimeField () {
-      return this.requestEndTimeField(true);
-    }
-    public APIRequestGetTours requestEndTimeField (boolean value) {
-      this.requestField("end_time", value);
-      return this;
-    }
-    public APIRequestGetTours requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetTours requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetTours requestIsPastField () {
-      return this.requestIsPastField(true);
-    }
-    public APIRequestGetTours requestIsPastField (boolean value) {
-      this.requestField("is_past", value);
-      return this;
-    }
-    public APIRequestGetTours requestLastEventTimestampField () {
-      return this.requestLastEventTimestampField(true);
-    }
-    public APIRequestGetTours requestLastEventTimestampField (boolean value) {
-      this.requestField("last_event_timestamp", value);
-      return this;
-    }
-    public APIRequestGetTours requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetTours requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetTours requestNumEventsField () {
-      return this.requestNumEventsField(true);
-    }
-    public APIRequestGetTours requestNumEventsField (boolean value) {
-      this.requestField("num_events", value);
-      return this;
-    }
-    public APIRequestGetTours requestPhotoField () {
-      return this.requestPhotoField(true);
-    }
-    public APIRequestGetTours requestPhotoField (boolean value) {
-      this.requestField("photo", value);
-      return this;
-    }
-    public APIRequestGetTours requestPublishingStateField () {
-      return this.requestPublishingStateField(true);
-    }
-    public APIRequestGetTours requestPublishingStateField (boolean value) {
-      this.requestField("publishing_state", value);
-      return this;
-    }
-    public APIRequestGetTours requestScheduledPublishTimestampField () {
-      return this.requestScheduledPublishTimestampField(true);
-    }
-    public APIRequestGetTours requestScheduledPublishTimestampField (boolean value) {
-      this.requestField("scheduled_publish_timestamp", value);
-      return this;
-    }
-    public APIRequestGetTours requestStartTimeField () {
-      return this.requestStartTimeField(true);
-    }
-    public APIRequestGetTours requestStartTimeField (boolean value) {
-      this.requestField("start_time", value);
-      return this;
-    }
-    public APIRequestGetTours requestTicketingUriField () {
-      return this.requestTicketingUriField(true);
-    }
-    public APIRequestGetTours requestTicketingUriField (boolean value) {
-      this.requestField("ticketing_uri", value);
-      return this;
-    }
-    public APIRequestGetTours requestVideoField () {
-      return this.requestVideoField(true);
-    }
-    public APIRequestGetTours requestVideoField (boolean value) {
-      this.requestField("video", value);
-      return this;
-    }
   }
 
   public static class APIRequestCreateUnlinkAccount extends APIRequest<Page> {
@@ -31820,21 +31020,16 @@ public class Page extends APINode {
       "comments_mirroring_domain",
       "coordinates",
       "created_time",
-      "delivery_growth_optimizations",
-      "entities",
       "event",
       "expanded_height",
       "expanded_width",
       "feed_targeting",
-      "formatting",
       "from",
       "full_picture",
       "height",
       "icon",
       "id",
-      "implicit_place",
       "instagram_eligibility",
-      "instream_eligibility",
       "is_app_share",
       "is_eligible_for_promotion",
       "is_expired",
@@ -31844,7 +31039,6 @@ public class Page extends APINode {
       "is_popular",
       "is_published",
       "is_spherical",
-      "live_video_eligibility",
       "message",
       "message_tags",
       "multi_share_end_card",
@@ -31853,12 +31047,10 @@ public class Page extends APINode {
       "permalink_url",
       "picture",
       "place",
-      "poll",
       "privacy",
       "promotable_id",
       "promotion_status",
       "properties",
-      "publishing_stats",
       "scheduled_publish_time",
       "shares",
       "status_type",
@@ -31868,12 +31060,10 @@ public class Page extends APINode {
       "target",
       "targeting",
       "timeline_visibility",
-      "translations",
       "updated_time",
       "via",
       "video_buying_eligibility",
       "width",
-      "will_be_autocropped_when_deliver_to_instagram",
     };
 
     @Override
@@ -32051,20 +31241,6 @@ public class Page extends APINode {
       this.requestField("created_time", value);
       return this;
     }
-    public APIRequestGetVisitorPosts requestDeliveryGrowthOptimizationsField () {
-      return this.requestDeliveryGrowthOptimizationsField(true);
-    }
-    public APIRequestGetVisitorPosts requestDeliveryGrowthOptimizationsField (boolean value) {
-      this.requestField("delivery_growth_optimizations", value);
-      return this;
-    }
-    public APIRequestGetVisitorPosts requestEntitiesField () {
-      return this.requestEntitiesField(true);
-    }
-    public APIRequestGetVisitorPosts requestEntitiesField (boolean value) {
-      this.requestField("entities", value);
-      return this;
-    }
     public APIRequestGetVisitorPosts requestEventField () {
       return this.requestEventField(true);
     }
@@ -32091,13 +31267,6 @@ public class Page extends APINode {
     }
     public APIRequestGetVisitorPosts requestFeedTargetingField (boolean value) {
       this.requestField("feed_targeting", value);
-      return this;
-    }
-    public APIRequestGetVisitorPosts requestFormattingField () {
-      return this.requestFormattingField(true);
-    }
-    public APIRequestGetVisitorPosts requestFormattingField (boolean value) {
-      this.requestField("formatting", value);
       return this;
     }
     public APIRequestGetVisitorPosts requestFromField () {
@@ -32135,25 +31304,11 @@ public class Page extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetVisitorPosts requestImplicitPlaceField () {
-      return this.requestImplicitPlaceField(true);
-    }
-    public APIRequestGetVisitorPosts requestImplicitPlaceField (boolean value) {
-      this.requestField("implicit_place", value);
-      return this;
-    }
     public APIRequestGetVisitorPosts requestInstagramEligibilityField () {
       return this.requestInstagramEligibilityField(true);
     }
     public APIRequestGetVisitorPosts requestInstagramEligibilityField (boolean value) {
       this.requestField("instagram_eligibility", value);
-      return this;
-    }
-    public APIRequestGetVisitorPosts requestInstreamEligibilityField () {
-      return this.requestInstreamEligibilityField(true);
-    }
-    public APIRequestGetVisitorPosts requestInstreamEligibilityField (boolean value) {
-      this.requestField("instream_eligibility", value);
       return this;
     }
     public APIRequestGetVisitorPosts requestIsAppShareField () {
@@ -32219,13 +31374,6 @@ public class Page extends APINode {
       this.requestField("is_spherical", value);
       return this;
     }
-    public APIRequestGetVisitorPosts requestLiveVideoEligibilityField () {
-      return this.requestLiveVideoEligibilityField(true);
-    }
-    public APIRequestGetVisitorPosts requestLiveVideoEligibilityField (boolean value) {
-      this.requestField("live_video_eligibility", value);
-      return this;
-    }
     public APIRequestGetVisitorPosts requestMessageField () {
       return this.requestMessageField(true);
     }
@@ -32282,13 +31430,6 @@ public class Page extends APINode {
       this.requestField("place", value);
       return this;
     }
-    public APIRequestGetVisitorPosts requestPollField () {
-      return this.requestPollField(true);
-    }
-    public APIRequestGetVisitorPosts requestPollField (boolean value) {
-      this.requestField("poll", value);
-      return this;
-    }
     public APIRequestGetVisitorPosts requestPrivacyField () {
       return this.requestPrivacyField(true);
     }
@@ -32315,13 +31456,6 @@ public class Page extends APINode {
     }
     public APIRequestGetVisitorPosts requestPropertiesField (boolean value) {
       this.requestField("properties", value);
-      return this;
-    }
-    public APIRequestGetVisitorPosts requestPublishingStatsField () {
-      return this.requestPublishingStatsField(true);
-    }
-    public APIRequestGetVisitorPosts requestPublishingStatsField (boolean value) {
-      this.requestField("publishing_stats", value);
       return this;
     }
     public APIRequestGetVisitorPosts requestScheduledPublishTimeField () {
@@ -32387,13 +31521,6 @@ public class Page extends APINode {
       this.requestField("timeline_visibility", value);
       return this;
     }
-    public APIRequestGetVisitorPosts requestTranslationsField () {
-      return this.requestTranslationsField(true);
-    }
-    public APIRequestGetVisitorPosts requestTranslationsField (boolean value) {
-      this.requestField("translations", value);
-      return this;
-    }
     public APIRequestGetVisitorPosts requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -32420,13 +31547,6 @@ public class Page extends APINode {
     }
     public APIRequestGetVisitorPosts requestWidthField (boolean value) {
       this.requestField("width", value);
-      return this;
-    }
-    public APIRequestGetVisitorPosts requestWillBeAutocroppedWhenDeliverToInstagramField () {
-      return this.requestWillBeAutocroppedWhenDeliverToInstagramField(true);
-    }
-    public APIRequestGetVisitorPosts requestWillBeAutocroppedWhenDeliverToInstagramField (boolean value) {
-      this.requestField("will_be_autocropped_when_deliver_to_instagram", value);
       return this;
     }
   }
@@ -35168,6 +34288,8 @@ public class Page extends APINode {
       VALUE_PERSISTENT_MENU("PERSISTENT_MENU"),
       @SerializedName("PLATFORM")
       VALUE_PLATFORM("PLATFORM"),
+      @SerializedName("SUBJECT_TO_NEW_EU_PRIVACY_RULES")
+      VALUE_SUBJECT_TO_NEW_EU_PRIVACY_RULES("SUBJECT_TO_NEW_EU_PRIVACY_RULES"),
       @SerializedName("TARGET_AUDIENCE")
       VALUE_TARGET_AUDIENCE("TARGET_AUDIENCE"),
       @SerializedName("WHITELISTED_DOMAINS")

@@ -294,6 +294,8 @@ public class AdCampaignDeliveryEstimate extends APINode {
       VALUE_PAGE_LIKES("PAGE_LIKES"),
       @SerializedName("POST_ENGAGEMENT")
       VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
+      @SerializedName("QUALITY_CALL")
+      VALUE_QUALITY_CALL("QUALITY_CALL"),
       @SerializedName("QUALITY_LEAD")
       VALUE_QUALITY_LEAD("QUALITY_LEAD"),
       @SerializedName("REACH")

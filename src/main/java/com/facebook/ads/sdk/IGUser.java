@@ -67,8 +67,6 @@ public class IGUser extends APINode {
   private String mId = null;
   @SerializedName("ig_id")
   private Long mIgId = null;
-  @SerializedName("is_ig_shopping_seller_policy_enabled")
-  private Boolean mIsIgShoppingSellerPolicyEnabled = null;
   @SerializedName("media_count")
   private Long mMediaCount = null;
   @SerializedName("mentioned_comment")
@@ -358,10 +356,6 @@ public class IGUser extends APINode {
     return mIgId;
   }
 
-  public Boolean getFieldIsIgShoppingSellerPolicyEnabled() {
-    return mIsIgShoppingSellerPolicyEnabled;
-  }
-
   public Long getFieldMediaCount() {
     return mMediaCount;
   }
@@ -597,7 +591,6 @@ public class IGUser extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "alt_text",
       "caption",
       "comments_count",
       "id",
@@ -703,13 +696,6 @@ public class IGUser extends APINode {
       return this;
     }
 
-    public APIRequestGetMedia requestAltTextField () {
-      return this.requestAltTextField(true);
-    }
-    public APIRequestGetMedia requestAltTextField (boolean value) {
-      this.requestField("alt_text", value);
-      return this;
-    }
     public APIRequestGetMedia requestCaptionField () {
       return this.requestCaptionField(true);
     }
@@ -1311,7 +1297,6 @@ public class IGUser extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "alt_text",
       "caption",
       "comments_count",
       "id",
@@ -1417,13 +1402,6 @@ public class IGUser extends APINode {
       return this;
     }
 
-    public APIRequestGetStories requestAltTextField () {
-      return this.requestAltTextField(true);
-    }
-    public APIRequestGetStories requestAltTextField (boolean value) {
-      this.requestField("alt_text", value);
-      return this;
-    }
     public APIRequestGetStories requestCaptionField () {
       return this.requestCaptionField(true);
     }
@@ -1535,7 +1513,6 @@ public class IGUser extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "alt_text",
       "caption",
       "comments_count",
       "id",
@@ -1641,13 +1618,6 @@ public class IGUser extends APINode {
       return this;
     }
 
-    public APIRequestGetTags requestAltTextField () {
-      return this.requestAltTextField(true);
-    }
-    public APIRequestGetTags requestAltTextField (boolean value) {
-      this.requestField("alt_text", value);
-      return this;
-    }
     public APIRequestGetTags requestCaptionField () {
       return this.requestCaptionField(true);
     }
@@ -1766,7 +1736,6 @@ public class IGUser extends APINode {
       "follows_count",
       "id",
       "ig_id",
-      "is_ig_shopping_seller_policy_enabled",
       "media_count",
       "mentioned_comment",
       "mentioned_media",
@@ -1913,13 +1882,6 @@ public class IGUser extends APINode {
       this.requestField("ig_id", value);
       return this;
     }
-    public APIRequestGet requestIsIgShoppingSellerPolicyEnabledField () {
-      return this.requestIsIgShoppingSellerPolicyEnabledField(true);
-    }
-    public APIRequestGet requestIsIgShoppingSellerPolicyEnabledField (boolean value) {
-      this.requestField("is_ig_shopping_seller_policy_enabled", value);
-      return this;
-    }
     public APIRequestGet requestMediaCountField () {
       return this.requestMediaCountField(true);
     }
@@ -1999,7 +1961,6 @@ public class IGUser extends APINode {
     this.mFollowsCount = instance.mFollowsCount;
     this.mId = instance.mId;
     this.mIgId = instance.mIgId;
-    this.mIsIgShoppingSellerPolicyEnabled = instance.mIsIgShoppingSellerPolicyEnabled;
     this.mMediaCount = instance.mMediaCount;
     this.mMentionedComment = instance.mMentionedComment;
     this.mMentionedMedia = instance.mMentionedMedia;

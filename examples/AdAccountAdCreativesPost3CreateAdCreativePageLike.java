@@ -25,7 +25,7 @@
 import java.io.File;
 import java.util.Arrays;
 
-public class AdAccountAdCreativesPostCreateVideoPageLikeAd {
+public class AdAccountAdCreativesPost3CreateAdCreativePageLike {
   public static void main (String args[]) throws APIException {
 
     String access_token = "<ACCESS_TOKEN>";
@@ -35,12 +35,11 @@ public class AdAccountAdCreativesPostCreateVideoPageLikeAd {
     APIContext context = new APIContext(access_token).enableDebug(true);
 
     new AdAccount(id, context).createAdCreative()
-      .setName("Sample Creative")
+      .setName("Creative")
       .setObjectStorySpec(
           new AdCreativeObjectStorySpec()
-            .setFieldPageId("<pageID>")
-            .setFieldVideoData(
-              new AdCreativeVideoData()
+            .setFieldLinkData(
+              new AdCreativeLinkData()
                 .setFieldCallToAction(
                   new AdCreativeLinkDataCallToAction()
                     .setFieldType(AdCreativeLinkDataCallToAction.EnumType.VALUE_LIKE_PAGE)
@@ -49,9 +48,11 @@ public class AdAccountAdCreativesPostCreateVideoPageLikeAd {
                         .setFieldPage("<pageID>")
                     )
                 )
-                .setFieldImageUrl("<imageURL>")
-                .setFieldVideoId("<videoID>")
+                .setFieldImageHash("<imageHash>")
+                .setFieldLink("https://facebook.com/<pageID>")
+                .setFieldMessage("Creative message")
             )
+            .setFieldPageId("<pageID>")
         )
       .execute();
 

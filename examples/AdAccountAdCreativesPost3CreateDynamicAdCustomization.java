@@ -25,7 +25,7 @@
 import java.io.File;
 import java.util.Arrays;
 
-public class AdAccountAdCreativesPostCreateMAIDPA {
+public class AdAccountAdCreativesPost3CreateDynamicAdCustomization {
   public static void main (String args[]) throws APIException {
 
     String access_token = "<ACCESS_TOKEN>";
@@ -41,21 +41,29 @@ public class AdAccountAdCreativesPostCreateMAIDPA {
             .setFieldPageId("<pageID>")
             .setFieldTemplateData(
               new AdCreativeLinkData()
-                .setFieldCallToAction(
-                  new AdCreativeLinkDataCallToAction()
-                    .setFieldType(AdCreativeLinkDataCallToAction.EnumType.VALUE_INSTALL_MOBILE_APP)
-                    .setFieldValue(
-                      new AdCreativeLinkDataCallToActionValue()
-                        .setFieldLink("http://www.example.com/appstoreurl")
+                .setFieldCustomizationRulesSpec(Arrays.asList(
+                  new AdCustomizationRuleSpec()
+                    .setFieldCustomizationSpec("{\"language\":\"en_XX\"}")
+                , 
+                  new AdCustomizationRuleSpec()
+                    .setFieldCustomizationSpec("{\"language\":\"fr_XX\"}")
+                    .setFieldDescription("French Description {{product.description}}")
+                    .setFieldLink("http://www.example.com/frenchurl")
+                    .setFieldMessage("French Test {{product.name | titleize}}")
+                    .setFieldName("French Headline {{product.price}}")
+                    .setFieldTemplateUrlSpec(
+                      new AdCreativeTemplateURLSpec()
+                        .setFieldWeb("{\"url\":\"http://www.example.com/frenchdeeplink\"}")
                     )
-                )
-                .setFieldDescription("Description {{product.description}}")
-                .setFieldLink("http://www.example.com/appstoreurl")
-                .setFieldMessage("Test {{product.name | titleize}}")
-                .setFieldName("Headline {{product.price}}")
+                ))
+                .setFieldDescription("English Description {{product.description}}")
+                .setFieldLink("http://www.example.com/englishurl")
+                .setFieldMessage("English Test {{product.name | titleize}}")
+                .setFieldName("English Headline {{product.price}}")
             )
         )
       .setProductSetId("<productSetID>")
+      .setTemplateUrlSpec("{\"web\":{\"url\":\"http://www.example.com/englishdeeplink\"}}")
       .execute();
 
   }

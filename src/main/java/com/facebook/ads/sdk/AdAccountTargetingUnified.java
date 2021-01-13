@@ -806,6 +806,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_FB_CANVAS("fb_canvas"),
       @SerializedName("fb_gameroom")
       VALUE_FB_GAMEROOM("fb_gameroom"),
+      @SerializedName("galaxy_store")
+      VALUE_GALAXY_STORE("galaxy_store"),
       @SerializedName("google_play")
       VALUE_GOOGLE_PLAY("google_play"),
       @SerializedName("instant_game")

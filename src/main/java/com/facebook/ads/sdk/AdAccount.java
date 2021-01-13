@@ -59,8 +59,6 @@ public class AdAccount extends APINode {
   private String mAccountId = null;
   @SerializedName("account_status")
   private Long mAccountStatus = null;
-  @SerializedName("ad_account_creation_request")
-  private AdAccountCreationRequest mAdAccountCreationRequest = null;
   @SerializedName("ad_account_promotable_objects")
   private AdAccountPromotableObjects mAdAccountPromotableObjects = null;
   @SerializedName("age")
@@ -718,10 +716,6 @@ public class AdAccount extends APINode {
     return new APIRequestGetSavedAudiences(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateSponsoredMessageAd createSponsoredMessageAd() {
-    return new APIRequestCreateSponsoredMessageAd(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestDeleteSubscribedApps deleteSubscribedApps() {
     return new APIRequestDeleteSubscribedApps(this.getPrefixedId().toString(), context);
   }
@@ -785,13 +779,6 @@ public class AdAccount extends APINode {
 
   public Long getFieldAccountStatus() {
     return mAccountStatus;
-  }
-
-  public AdAccountCreationRequest getFieldAdAccountCreationRequest() {
-    if (mAdAccountCreationRequest != null) {
-      mAdAccountCreationRequest.context = getContext();
-    }
-    return mAdAccountCreationRequest;
   }
 
   public AdAccountPromotableObjects getFieldAdAccountPromotableObjects() {
@@ -5216,6 +5203,7 @@ public class AdAccount extends APINode {
       "campaign",
       "campaign_id",
       "configured_status",
+      "conversion_domain",
       "conversion_specs",
       "created_time",
       "creative",
@@ -5442,6 +5430,13 @@ public class AdAccount extends APINode {
       this.requestField("configured_status", value);
       return this;
     }
+    public APIRequestGetAds requestConversionDomainField () {
+      return this.requestConversionDomainField(true);
+    }
+    public APIRequestGetAds requestConversionDomainField (boolean value) {
+      this.requestField("conversion_domain", value);
+      return this;
+    }
     public APIRequestGetAds requestConversionSpecsField () {
       return this.requestConversionSpecsField(true);
     }
@@ -5611,6 +5606,7 @@ public class AdAccount extends APINode {
       "adset_spec",
       "audience_id",
       "bid_amount",
+      "conversion_domain",
       "creative",
       "date_format",
       "display_sequence",
@@ -5729,6 +5725,11 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAd setBidAmount (String bidAmount) {
       this.setParam("bid_amount", bidAmount);
+      return this;
+    }
+
+    public APIRequestCreateAd setConversionDomain (String conversionDomain) {
+      this.setParam("conversion_domain", conversionDomain);
       return this;
     }
 
@@ -6116,6 +6117,7 @@ public class AdAccount extends APINode {
       "campaign",
       "campaign_id",
       "configured_status",
+      "conversion_domain",
       "conversion_specs",
       "created_time",
       "creative",
@@ -6322,6 +6324,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdsByLabels requestConfiguredStatusField (boolean value) {
       this.requestField("configured_status", value);
+      return this;
+    }
+    public APIRequestGetAdsByLabels requestConversionDomainField () {
+      return this.requestConversionDomainField(true);
+    }
+    public APIRequestGetAdsByLabels requestConversionDomainField (boolean value) {
+      this.requestField("conversion_domain", value);
       return this;
     }
     public APIRequestGetAdsByLabels requestConversionSpecsField () {
@@ -14288,6 +14297,7 @@ public class AdAccount extends APINode {
       "daily_budget",
       "effective_status",
       "id",
+      "is_skadnetwork_attribution",
       "issues_info",
       "last_budget_toggling_time",
       "lifetime_budget",
@@ -14296,6 +14306,7 @@ public class AdAccount extends APINode {
       "pacing_type",
       "promoted_object",
       "recommendations",
+      "smart_promotion_type",
       "source_campaign",
       "source_campaign_id",
       "special_ad_categories",
@@ -14546,6 +14557,13 @@ public class AdAccount extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetCampaigns requestIsSkadnetworkAttributionField () {
+      return this.requestIsSkadnetworkAttributionField(true);
+    }
+    public APIRequestGetCampaigns requestIsSkadnetworkAttributionField (boolean value) {
+      this.requestField("is_skadnetwork_attribution", value);
+      return this;
+    }
     public APIRequestGetCampaigns requestIssuesInfoField () {
       return this.requestIssuesInfoField(true);
     }
@@ -14600,6 +14618,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetCampaigns requestRecommendationsField (boolean value) {
       this.requestField("recommendations", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestSmartPromotionTypeField () {
+      return this.requestSmartPromotionTypeField(true);
+    }
+    public APIRequestGetCampaigns requestSmartPromotionTypeField (boolean value) {
+      this.requestField("smart_promotion_type", value);
       return this;
     }
     public APIRequestGetCampaigns requestSourceCampaignField () {
@@ -14694,6 +14719,7 @@ public class AdAccount extends APINode {
       "buying_type",
       "daily_budget",
       "execution_options",
+      "is_skadnetwork_attribution",
       "iterative_split_test_configs",
       "lifetime_budget",
       "name",
@@ -14804,6 +14830,15 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateCampaign setExecutionOptions (String executionOptions) {
       this.setParam("execution_options", executionOptions);
+      return this;
+    }
+
+    public APIRequestCreateCampaign setIsSkadnetworkAttribution (Boolean isSkadnetworkAttribution) {
+      this.setParam("is_skadnetwork_attribution", isSkadnetworkAttribution);
+      return this;
+    }
+    public APIRequestCreateCampaign setIsSkadnetworkAttribution (String isSkadnetworkAttribution) {
+      this.setParam("is_skadnetwork_attribution", isSkadnetworkAttribution);
       return this;
     }
 
@@ -14988,6 +15023,7 @@ public class AdAccount extends APINode {
       "daily_budget",
       "effective_status",
       "id",
+      "is_skadnetwork_attribution",
       "issues_info",
       "last_budget_toggling_time",
       "lifetime_budget",
@@ -14996,6 +15032,7 @@ public class AdAccount extends APINode {
       "pacing_type",
       "promoted_object",
       "recommendations",
+      "smart_promotion_type",
       "source_campaign",
       "source_campaign_id",
       "special_ad_categories",
@@ -15228,6 +15265,13 @@ public class AdAccount extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetCampaignsByLabels requestIsSkadnetworkAttributionField () {
+      return this.requestIsSkadnetworkAttributionField(true);
+    }
+    public APIRequestGetCampaignsByLabels requestIsSkadnetworkAttributionField (boolean value) {
+      this.requestField("is_skadnetwork_attribution", value);
+      return this;
+    }
     public APIRequestGetCampaignsByLabels requestIssuesInfoField () {
       return this.requestIssuesInfoField(true);
     }
@@ -15282,6 +15326,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetCampaignsByLabels requestRecommendationsField (boolean value) {
       this.requestField("recommendations", value);
+      return this;
+    }
+    public APIRequestGetCampaignsByLabels requestSmartPromotionTypeField () {
+      return this.requestSmartPromotionTypeField(true);
+    }
+    public APIRequestGetCampaignsByLabels requestSmartPromotionTypeField (boolean value) {
+      this.requestField("smart_promotion_type", value);
       return this;
     }
     public APIRequestGetCampaignsByLabels requestSourceCampaignField () {
@@ -15380,7 +15431,6 @@ public class AdAccount extends APINode {
       "follows_count",
       "id",
       "ig_id",
-      "is_ig_shopping_seller_policy_enabled",
       "media_count",
       "mentioned_comment",
       "mentioned_media",
@@ -15520,13 +15570,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetConnectedInstagramAccounts requestIgIdField (boolean value) {
       this.requestField("ig_id", value);
-      return this;
-    }
-    public APIRequestGetConnectedInstagramAccounts requestIsIgShoppingSellerPolicyEnabledField () {
-      return this.requestIsIgShoppingSellerPolicyEnabledField(true);
-    }
-    public APIRequestGetConnectedInstagramAccounts requestIsIgShoppingSellerPolicyEnabledField (boolean value) {
-      this.requestField("is_ig_shopping_seller_policy_enabled", value);
       return this;
     }
     public APIRequestGetConnectedInstagramAccounts requestMediaCountField () {
@@ -18385,6 +18428,7 @@ public class AdAccount extends APINode {
       "time_range",
       "time_ranges",
       "use_account_attribution_setting",
+      "use_unified_attribution_setting",
     };
 
     public static final String[] FIELDS = {
@@ -18611,6 +18655,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetInsights setUseUnifiedAttributionSetting (Boolean useUnifiedAttributionSetting) {
+      this.setParam("use_unified_attribution_setting", useUnifiedAttributionSetting);
+      return this;
+    }
+    public APIRequestGetInsights setUseUnifiedAttributionSetting (String useUnifiedAttributionSetting) {
+      this.setParam("use_unified_attribution_setting", useUnifiedAttributionSetting);
+      return this;
+    }
+
     public APIRequestGetInsights requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -18677,6 +18730,7 @@ public class AdAccount extends APINode {
       "time_range",
       "time_ranges",
       "use_account_attribution_setting",
+      "use_unified_attribution_setting",
     };
 
     public static final String[] FIELDS = {
@@ -18900,6 +18954,15 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetInsightsAsync setUseAccountAttributionSetting (String useAccountAttributionSetting) {
       this.setParam("use_account_attribution_setting", useAccountAttributionSetting);
+      return this;
+    }
+
+    public APIRequestGetInsightsAsync setUseUnifiedAttributionSetting (Boolean useUnifiedAttributionSetting) {
+      this.setParam("use_unified_attribution_setting", useUnifiedAttributionSetting);
+      return this;
+    }
+    public APIRequestGetInsightsAsync setUseUnifiedAttributionSetting (String useUnifiedAttributionSetting) {
+      this.setParam("use_unified_attribution_setting", useUnifiedAttributionSetting);
       return this;
     }
 
@@ -19129,6 +19192,8 @@ public class AdAccount extends APINode {
       "app_store",
       "app_store_country",
       "business_id",
+      "is_skadnetwork_search",
+      "only_apps_with_permission",
       "query_term",
     };
 
@@ -19221,6 +19286,24 @@ public class AdAccount extends APINode {
 
     public APIRequestGetMatchedSearchApplications setBusinessId (String businessId) {
       this.setParam("business_id", businessId);
+      return this;
+    }
+
+    public APIRequestGetMatchedSearchApplications setIsSkadnetworkSearch (Boolean isSkadnetworkSearch) {
+      this.setParam("is_skadnetwork_search", isSkadnetworkSearch);
+      return this;
+    }
+    public APIRequestGetMatchedSearchApplications setIsSkadnetworkSearch (String isSkadnetworkSearch) {
+      this.setParam("is_skadnetwork_search", isSkadnetworkSearch);
+      return this;
+    }
+
+    public APIRequestGetMatchedSearchApplications setOnlyAppsWithPermission (Boolean onlyAppsWithPermission) {
+      this.setParam("only_apps_with_permission", onlyAppsWithPermission);
+      return this;
+    }
+    public APIRequestGetMatchedSearchApplications setOnlyAppsWithPermission (String onlyAppsWithPermission) {
+      this.setParam("only_apps_with_permission", onlyAppsWithPermission);
       return this;
     }
 
@@ -23507,146 +23590,6 @@ public class AdAccount extends APINode {
 
   }
 
-  public static class APIRequestCreateSponsoredMessageAd extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "bid_amount",
-      "daily_budget",
-      "message_creative_id",
-      "targeting",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateSponsoredMessageAd.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateSponsoredMessageAd(String nodeId, APIContext context) {
-      super(context, nodeId, "/sponsored_message_ads", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateSponsoredMessageAd setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateSponsoredMessageAd setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateSponsoredMessageAd setBidAmount (Long bidAmount) {
-      this.setParam("bid_amount", bidAmount);
-      return this;
-    }
-    public APIRequestCreateSponsoredMessageAd setBidAmount (String bidAmount) {
-      this.setParam("bid_amount", bidAmount);
-      return this;
-    }
-
-    public APIRequestCreateSponsoredMessageAd setDailyBudget (Long dailyBudget) {
-      this.setParam("daily_budget", dailyBudget);
-      return this;
-    }
-    public APIRequestCreateSponsoredMessageAd setDailyBudget (String dailyBudget) {
-      this.setParam("daily_budget", dailyBudget);
-      return this;
-    }
-
-    public APIRequestCreateSponsoredMessageAd setMessageCreativeId (String messageCreativeId) {
-      this.setParam("message_creative_id", messageCreativeId);
-      return this;
-    }
-
-    public APIRequestCreateSponsoredMessageAd setTargeting (Targeting targeting) {
-      this.setParam("targeting", targeting);
-      return this;
-    }
-    public APIRequestCreateSponsoredMessageAd setTargeting (String targeting) {
-      this.setParam("targeting", targeting);
-      return this;
-    }
-
-    public APIRequestCreateSponsoredMessageAd requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateSponsoredMessageAd requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateSponsoredMessageAd requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateSponsoredMessageAd requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateSponsoredMessageAd requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateSponsoredMessageAd requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestDeleteSubscribedApps extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -26084,7 +26027,6 @@ public class AdAccount extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "account_status",
-      "ad_account_creation_request",
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
@@ -26245,13 +26187,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGet requestAccountStatusField (boolean value) {
       this.requestField("account_status", value);
-      return this;
-    }
-    public APIRequestGet requestAdAccountCreationRequestField () {
-      return this.requestAdAccountCreationRequestField(true);
-    }
-    public APIRequestGet requestAdAccountCreationRequestField (boolean value) {
-      this.requestField("ad_account_creation_request", value);
       return this;
     }
     public APIRequestGet requestAdAccountPromotableObjectsField () {
@@ -26999,6 +26934,8 @@ public class AdAccount extends APINode {
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("ANALYZE")
       VALUE_ANALYZE("ANALYZE"),
+      @SerializedName("DRAFT")
+      VALUE_DRAFT("DRAFT"),
       @SerializedName("MANAGE")
       VALUE_MANAGE("MANAGE"),
       ;
@@ -27020,6 +26957,8 @@ public class AdAccount extends APINode {
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("ANALYZE")
       VALUE_ANALYZE("ANALYZE"),
+      @SerializedName("DRAFT")
+      VALUE_DRAFT("DRAFT"),
       @SerializedName("MANAGE")
       VALUE_MANAGE("MANAGE"),
       ;
@@ -27189,7 +27128,6 @@ public class AdAccount extends APINode {
   public AdAccount copyFrom(AdAccount instance) {
     this.mAccountId = instance.mAccountId;
     this.mAccountStatus = instance.mAccountStatus;
-    this.mAdAccountCreationRequest = instance.mAdAccountCreationRequest;
     this.mAdAccountPromotableObjects = instance.mAdAccountPromotableObjects;
     this.mAge = instance.mAge;
     this.mAgencyClientDeclaration = instance.mAgencyClientDeclaration;

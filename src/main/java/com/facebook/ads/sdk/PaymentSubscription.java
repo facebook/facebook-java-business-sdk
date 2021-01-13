@@ -60,7 +60,7 @@ public class PaymentSubscription extends APINode {
   @SerializedName("app_param_data")
   private String mAppParamData = null;
   @SerializedName("application")
-  private Profile mApplication = null;
+  private Application mApplication = null;
   @SerializedName("billing_period")
   private String mBillingPeriod = null;
   @SerializedName("canceled_reason")
@@ -72,7 +72,7 @@ public class PaymentSubscription extends APINode {
   @SerializedName("id")
   private String mId = null;
   @SerializedName("last_payment")
-  private String mLastPayment = null;
+  private PaymentEnginePayment mLastPayment = null;
   @SerializedName("next_bill_time")
   private String mNextBillTime = null;
   @SerializedName("next_period_amount")
@@ -102,7 +102,7 @@ public class PaymentSubscription extends APINode {
   @SerializedName("updated_time")
   private String mUpdatedTime = null;
   @SerializedName("user")
-  private Profile mUser = null;
+  private User mUser = null;
   protected static Gson gson = null;
 
   PaymentSubscription() {
@@ -325,7 +325,7 @@ public class PaymentSubscription extends APINode {
     return mAppParamData;
   }
 
-  public Profile getFieldApplication() {
+  public Application getFieldApplication() {
     if (mApplication != null) {
       mApplication.context = getContext();
     }
@@ -352,7 +352,10 @@ public class PaymentSubscription extends APINode {
     return mId;
   }
 
-  public String getFieldLastPayment() {
+  public PaymentEnginePayment getFieldLastPayment() {
+    if (mLastPayment != null) {
+      mLastPayment.context = getContext();
+    }
     return mLastPayment;
   }
 
@@ -412,7 +415,7 @@ public class PaymentSubscription extends APINode {
     return mUpdatedTime;
   }
 
-  public Profile getFieldUser() {
+  public User getFieldUser() {
     if (mUser != null) {
       mUser.context = getContext();
     }

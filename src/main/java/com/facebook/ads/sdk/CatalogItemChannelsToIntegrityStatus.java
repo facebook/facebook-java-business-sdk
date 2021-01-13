@@ -54,29 +54,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class UserPaymentModulesOptions extends APINode {
-  @SerializedName("account_id")
-  private String mAccountId = null;
-  @SerializedName("available_payment_options")
-  private List<Object> mAvailablePaymentOptions = null;
-  @SerializedName("country")
-  private String mCountry = null;
-  @SerializedName("currency")
-  private String mCurrency = null;
+public class CatalogItemChannelsToIntegrityStatus extends APINode {
+  @SerializedName("channels")
+  private List<String> mChannels = null;
+  @SerializedName("rejection_information")
+  private Object mRejectionInformation = null;
   protected static Gson gson = null;
 
-  public UserPaymentModulesOptions() {
+  public CatalogItemChannelsToIntegrityStatus() {
   }
 
   public String getId() {
     return null;
   }
-  public static UserPaymentModulesOptions loadJSON(String json, APIContext context, String header) {
-    UserPaymentModulesOptions userPaymentModulesOptions = getGson().fromJson(json, UserPaymentModulesOptions.class);
+  public static CatalogItemChannelsToIntegrityStatus loadJSON(String json, APIContext context, String header) {
+    CatalogItemChannelsToIntegrityStatus catalogItemChannelsToIntegrityStatus = getGson().fromJson(json, CatalogItemChannelsToIntegrityStatus.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(userPaymentModulesOptions.toString());
+      JsonElement o2 = parser.parse(catalogItemChannelsToIntegrityStatus.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -86,14 +82,14 @@ public class UserPaymentModulesOptions extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    userPaymentModulesOptions.context = context;
-    userPaymentModulesOptions.rawValue = json;
-    userPaymentModulesOptions.header = header;
-    return userPaymentModulesOptions;
+    catalogItemChannelsToIntegrityStatus.context = context;
+    catalogItemChannelsToIntegrityStatus.rawValue = json;
+    catalogItemChannelsToIntegrityStatus.header = header;
+    return catalogItemChannelsToIntegrityStatus;
   }
 
-  public static APINodeList<UserPaymentModulesOptions> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<UserPaymentModulesOptions> userPaymentModulesOptionss = new APINodeList<UserPaymentModulesOptions>(request, json, header);
+  public static APINodeList<CatalogItemChannelsToIntegrityStatus> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CatalogItemChannelsToIntegrityStatus> catalogItemChannelsToIntegrityStatuss = new APINodeList<CatalogItemChannelsToIntegrityStatus>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -104,9 +100,9 @@ public class UserPaymentModulesOptions extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          userPaymentModulesOptionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          catalogItemChannelsToIntegrityStatuss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return userPaymentModulesOptionss;
+        return catalogItemChannelsToIntegrityStatuss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -116,20 +112,20 @@ public class UserPaymentModulesOptions extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                userPaymentModulesOptionss.setCursors(before, after);
+                catalogItemChannelsToIntegrityStatuss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            userPaymentModulesOptionss.setPaging(previous, next);
+            catalogItemChannelsToIntegrityStatuss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              userPaymentModulesOptionss.setAppSecret(context.getAppSecretProof());
+              catalogItemChannelsToIntegrityStatuss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              userPaymentModulesOptionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              catalogItemChannelsToIntegrityStatuss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -140,23 +136,23 @@ public class UserPaymentModulesOptions extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  userPaymentModulesOptionss.add(loadJSON(entry.getValue().toString(), context, header));
+                  catalogItemChannelsToIntegrityStatuss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              userPaymentModulesOptionss.add(loadJSON(obj.toString(), context, header));
+              catalogItemChannelsToIntegrityStatuss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return userPaymentModulesOptionss;
+          return catalogItemChannelsToIntegrityStatuss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              userPaymentModulesOptionss.add(loadJSON(entry.getValue().toString(), context, header));
+              catalogItemChannelsToIntegrityStatuss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return userPaymentModulesOptionss;
+          return catalogItemChannelsToIntegrityStatuss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -173,20 +169,20 @@ public class UserPaymentModulesOptions extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              userPaymentModulesOptionss.add(loadJSON(value.toString(), context, header));
+              catalogItemChannelsToIntegrityStatuss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return userPaymentModulesOptionss;
+            return catalogItemChannelsToIntegrityStatuss;
           }
 
           // Sixth, check if it's pure JsonObject
-          userPaymentModulesOptionss.clear();
-          userPaymentModulesOptionss.add(loadJSON(json, context, header));
-          return userPaymentModulesOptionss;
+          catalogItemChannelsToIntegrityStatuss.clear();
+          catalogItemChannelsToIntegrityStatuss.add(loadJSON(json, context, header));
+          return catalogItemChannelsToIntegrityStatuss;
         }
       }
     } catch (Exception e) {
@@ -214,39 +210,21 @@ public class UserPaymentModulesOptions extends APINode {
   }
 
 
-  public String getFieldAccountId() {
-    return mAccountId;
+  public List<String> getFieldChannels() {
+    return mChannels;
   }
 
-  public UserPaymentModulesOptions setFieldAccountId(String value) {
-    this.mAccountId = value;
+  public CatalogItemChannelsToIntegrityStatus setFieldChannels(List<String> value) {
+    this.mChannels = value;
     return this;
   }
 
-  public List<Object> getFieldAvailablePaymentOptions() {
-    return mAvailablePaymentOptions;
+  public Object getFieldRejectionInformation() {
+    return mRejectionInformation;
   }
 
-  public UserPaymentModulesOptions setFieldAvailablePaymentOptions(List<Object> value) {
-    this.mAvailablePaymentOptions = value;
-    return this;
-  }
-
-  public String getFieldCountry() {
-    return mCountry;
-  }
-
-  public UserPaymentModulesOptions setFieldCountry(String value) {
-    this.mCountry = value;
-    return this;
-  }
-
-  public String getFieldCurrency() {
-    return mCurrency;
-  }
-
-  public UserPaymentModulesOptions setFieldCurrency(String value) {
-    this.mCurrency = value;
+  public CatalogItemChannelsToIntegrityStatus setFieldRejectionInformation(Object value) {
+    this.mRejectionInformation = value;
     return this;
   }
 
@@ -266,20 +244,18 @@ public class UserPaymentModulesOptions extends APINode {
     return gson;
   }
 
-  public UserPaymentModulesOptions copyFrom(UserPaymentModulesOptions instance) {
-    this.mAccountId = instance.mAccountId;
-    this.mAvailablePaymentOptions = instance.mAvailablePaymentOptions;
-    this.mCountry = instance.mCountry;
-    this.mCurrency = instance.mCurrency;
+  public CatalogItemChannelsToIntegrityStatus copyFrom(CatalogItemChannelsToIntegrityStatus instance) {
+    this.mChannels = instance.mChannels;
+    this.mRejectionInformation = instance.mRejectionInformation;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<UserPaymentModulesOptions> getParser() {
-    return new APIRequest.ResponseParser<UserPaymentModulesOptions>() {
-      public APINodeList<UserPaymentModulesOptions> parseResponse(String response, APIContext context, APIRequest<UserPaymentModulesOptions> request, String header) throws MalformedResponseException {
-        return UserPaymentModulesOptions.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<CatalogItemChannelsToIntegrityStatus> getParser() {
+    return new APIRequest.ResponseParser<CatalogItemChannelsToIntegrityStatus>() {
+      public APINodeList<CatalogItemChannelsToIntegrityStatus> parseResponse(String response, APIContext context, APIRequest<CatalogItemChannelsToIntegrityStatus> request, String header) throws MalformedResponseException {
+        return CatalogItemChannelsToIntegrityStatus.parseResponse(response, context, request, header);
       }
     };
   }

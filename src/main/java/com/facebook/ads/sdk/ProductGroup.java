@@ -272,6 +272,10 @@ public class ProductGroup extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestCreateArDatum createArDatum() {
+    return new APIRequestCreateArDatum(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetProducts getProducts() {
     return new APIRequestGetProducts(this.getPrefixedId().toString(), context);
   }
@@ -313,6 +317,140 @@ public class ProductGroup extends APINode {
   }
 
 
+
+  public static class APIRequestCreateArDatum extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "effect_icon",
+      "state",
+      "surfaces",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateArDatum.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateArDatum(String nodeId, APIContext context) {
+      super(context, nodeId, "/ar_data", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateArDatum setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateArDatum setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateArDatum setEffectIcon (File effectIcon) {
+      this.setParam("effect_icon", effectIcon);
+      return this;
+    }
+    public APIRequestCreateArDatum setEffectIcon (String effectIcon) {
+      this.setParam("effect_icon", effectIcon);
+      return this;
+    }
+
+    public APIRequestCreateArDatum setState (EnumState state) {
+      this.setParam("state", state);
+      return this;
+    }
+    public APIRequestCreateArDatum setState (String state) {
+      this.setParam("state", state);
+      return this;
+    }
+
+    public APIRequestCreateArDatum setSurfaces (List<EnumSurfaces> surfaces) {
+      this.setParam("surfaces", surfaces);
+      return this;
+    }
+    public APIRequestCreateArDatum setSurfaces (String surfaces) {
+      this.setParam("surfaces", surfaces);
+      return this;
+    }
+
+    public APIRequestCreateArDatum requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateArDatum requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateArDatum requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateArDatum requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateArDatum requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateArDatum requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
 
   public static class APIRequestGetProducts extends APIRequest<ProductItem> {
 
@@ -360,6 +498,7 @@ public class ProductGroup extends APINode {
       "mobile_link",
       "name",
       "ordering_index",
+      "parent_product_id",
       "pattern",
       "price",
       "product_catalog",
@@ -714,6 +853,13 @@ public class ProductGroup extends APINode {
     }
     public APIRequestGetProducts requestOrderingIndexField (boolean value) {
       this.requestField("ordering_index", value);
+      return this;
+    }
+    public APIRequestGetProducts requestParentProductIdField () {
+      return this.requestParentProductIdField(true);
+    }
+    public APIRequestGetProducts requestParentProductIdField (boolean value) {
+      this.requestField("parent_product_id", value);
       return this;
     }
     public APIRequestGetProducts requestPatternField () {
@@ -1754,6 +1900,50 @@ public class ProductGroup extends APINode {
       return this;
     }
 
+  }
+
+  public static enum EnumState {
+      @SerializedName("DISABLED")
+      VALUE_DISABLED("DISABLED"),
+      @SerializedName("ENABLED")
+      VALUE_ENABLED("ENABLED"),
+      @SerializedName("TEST")
+      VALUE_TEST("TEST"),
+      ;
+
+      private String value;
+
+      private EnumState(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumSurfaces {
+      @SerializedName("SHOPS")
+      VALUE_SHOPS("SHOPS"),
+      @SerializedName("TEST_CAPABILITY")
+      VALUE_TEST_CAPABILITY("TEST_CAPABILITY"),
+      @SerializedName("UNIVERSAL_CHECKOUT")
+      VALUE_UNIVERSAL_CHECKOUT("UNIVERSAL_CHECKOUT"),
+      @SerializedName("US_MARKETPLACE")
+      VALUE_US_MARKETPLACE("US_MARKETPLACE"),
+      ;
+
+      private String value;
+
+      private EnumSurfaces(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
 

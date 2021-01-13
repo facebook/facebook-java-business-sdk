@@ -25,7 +25,7 @@
 import java.io.File;
 import java.util.Arrays;
 
-public class AdAccountAdCreativesPostCreateAssetFeedSpec {
+public class AdAccountAdCreativesPost3CreateAssetFeedSpec {
   public static void main (String args[]) throws APIException {
 
     String access_token = "<ACCESS_TOKEN>";

@@ -87,6 +87,8 @@ public class Campaign extends APINode {
   private EnumEffectiveStatus mEffectiveStatus = null;
   @SerializedName(value="id", alternate={"copied_campaign_id"})
   private String mId = null;
+  @SerializedName("is_skadnetwork_attribution")
+  private Boolean mIsSkadnetworkAttribution = null;
   @SerializedName("issues_info")
   private List<AdCampaignIssuesInfo> mIssuesInfo = null;
   @SerializedName("last_budget_toggling_time")
@@ -103,6 +105,8 @@ public class Campaign extends APINode {
   private AdPromotedObject mPromotedObject = null;
   @SerializedName("recommendations")
   private List<AdRecommendation> mRecommendations = null;
+  @SerializedName("smart_promotion_type")
+  private String mSmartPromotionType = null;
   @SerializedName("source_campaign")
   private Campaign mSourceCampaign = null;
   @SerializedName("source_campaign_id")
@@ -451,6 +455,10 @@ public class Campaign extends APINode {
     return mId;
   }
 
+  public Boolean getFieldIsSkadnetworkAttribution() {
+    return mIsSkadnetworkAttribution;
+  }
+
   public List<AdCampaignIssuesInfo> getFieldIssuesInfo() {
     return mIssuesInfo;
   }
@@ -481,6 +489,10 @@ public class Campaign extends APINode {
 
   public List<AdRecommendation> getFieldRecommendations() {
     return mRecommendations;
+  }
+
+  public String getFieldSmartPromotionType() {
+    return mSmartPromotionType;
   }
 
   public Campaign getFieldSourceCampaign() {
@@ -1100,6 +1112,7 @@ public class Campaign extends APINode {
       "campaign",
       "campaign_id",
       "configured_status",
+      "conversion_domain",
       "conversion_specs",
       "created_time",
       "creative",
@@ -1324,6 +1337,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAds requestConfiguredStatusField (boolean value) {
       this.requestField("configured_status", value);
+      return this;
+    }
+    public APIRequestGetAds requestConversionDomainField () {
+      return this.requestConversionDomainField(true);
+    }
+    public APIRequestGetAds requestConversionDomainField (boolean value) {
+      this.requestField("conversion_domain", value);
       return this;
     }
     public APIRequestGetAds requestConversionSpecsField () {
@@ -2277,6 +2297,7 @@ public class Campaign extends APINode {
       "daily_budget",
       "effective_status",
       "id",
+      "is_skadnetwork_attribution",
       "issues_info",
       "last_budget_toggling_time",
       "lifetime_budget",
@@ -2285,6 +2306,7 @@ public class Campaign extends APINode {
       "pacing_type",
       "promoted_object",
       "recommendations",
+      "smart_promotion_type",
       "source_campaign",
       "source_campaign_id",
       "special_ad_categories",
@@ -2535,6 +2557,13 @@ public class Campaign extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetCopies requestIsSkadnetworkAttributionField () {
+      return this.requestIsSkadnetworkAttributionField(true);
+    }
+    public APIRequestGetCopies requestIsSkadnetworkAttributionField (boolean value) {
+      this.requestField("is_skadnetwork_attribution", value);
+      return this;
+    }
     public APIRequestGetCopies requestIssuesInfoField () {
       return this.requestIssuesInfoField(true);
     }
@@ -2589,6 +2618,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetCopies requestRecommendationsField (boolean value) {
       this.requestField("recommendations", value);
+      return this;
+    }
+    public APIRequestGetCopies requestSmartPromotionTypeField () {
+      return this.requestSmartPromotionTypeField(true);
+    }
+    public APIRequestGetCopies requestSmartPromotionTypeField (boolean value) {
+      this.requestField("smart_promotion_type", value);
       return this;
     }
     public APIRequestGetCopies requestSourceCampaignField () {
@@ -2844,6 +2880,7 @@ public class Campaign extends APINode {
       "time_range",
       "time_ranges",
       "use_account_attribution_setting",
+      "use_unified_attribution_setting",
     };
 
     public static final String[] FIELDS = {
@@ -3070,6 +3107,15 @@ public class Campaign extends APINode {
       return this;
     }
 
+    public APIRequestGetInsights setUseUnifiedAttributionSetting (Boolean useUnifiedAttributionSetting) {
+      this.setParam("use_unified_attribution_setting", useUnifiedAttributionSetting);
+      return this;
+    }
+    public APIRequestGetInsights setUseUnifiedAttributionSetting (String useUnifiedAttributionSetting) {
+      this.setParam("use_unified_attribution_setting", useUnifiedAttributionSetting);
+      return this;
+    }
+
     public APIRequestGetInsights requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -3136,6 +3182,7 @@ public class Campaign extends APINode {
       "time_range",
       "time_ranges",
       "use_account_attribution_setting",
+      "use_unified_attribution_setting",
     };
 
     public static final String[] FIELDS = {
@@ -3362,6 +3409,15 @@ public class Campaign extends APINode {
       return this;
     }
 
+    public APIRequestGetInsightsAsync setUseUnifiedAttributionSetting (Boolean useUnifiedAttributionSetting) {
+      this.setParam("use_unified_attribution_setting", useUnifiedAttributionSetting);
+      return this;
+    }
+    public APIRequestGetInsightsAsync setUseUnifiedAttributionSetting (String useUnifiedAttributionSetting) {
+      this.setParam("use_unified_attribution_setting", useUnifiedAttributionSetting);
+      return this;
+    }
+
     public APIRequestGetInsightsAsync requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -3535,6 +3591,7 @@ public class Campaign extends APINode {
       "daily_budget",
       "effective_status",
       "id",
+      "is_skadnetwork_attribution",
       "issues_info",
       "last_budget_toggling_time",
       "lifetime_budget",
@@ -3543,6 +3600,7 @@ public class Campaign extends APINode {
       "pacing_type",
       "promoted_object",
       "recommendations",
+      "smart_promotion_type",
       "source_campaign",
       "source_campaign_id",
       "special_ad_categories",
@@ -3793,6 +3851,13 @@ public class Campaign extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestIsSkadnetworkAttributionField () {
+      return this.requestIsSkadnetworkAttributionField(true);
+    }
+    public APIRequestGet requestIsSkadnetworkAttributionField (boolean value) {
+      this.requestField("is_skadnetwork_attribution", value);
+      return this;
+    }
     public APIRequestGet requestIssuesInfoField () {
       return this.requestIssuesInfoField(true);
     }
@@ -3847,6 +3912,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGet requestRecommendationsField (boolean value) {
       this.requestField("recommendations", value);
+      return this;
+    }
+    public APIRequestGet requestSmartPromotionTypeField () {
+      return this.requestSmartPromotionTypeField(true);
+    }
+    public APIRequestGet requestSmartPromotionTypeField (boolean value) {
+      this.requestField("smart_promotion_type", value);
       return this;
     }
     public APIRequestGet requestSourceCampaignField () {
@@ -3943,6 +4015,7 @@ public class Campaign extends APINode {
       "budget_rebalance_flag",
       "daily_budget",
       "execution_options",
+      "is_skadnetwork_attribution",
       "iterative_split_test_configs",
       "lifetime_budget",
       "name",
@@ -4074,6 +4147,15 @@ public class Campaign extends APINode {
     }
     public APIRequestUpdate setExecutionOptions (String executionOptions) {
       this.setParam("execution_options", executionOptions);
+      return this;
+    }
+
+    public APIRequestUpdate setIsSkadnetworkAttribution (Boolean isSkadnetworkAttribution) {
+      this.setParam("is_skadnetwork_attribution", isSkadnetworkAttribution);
+      return this;
+    }
+    public APIRequestUpdate setIsSkadnetworkAttribution (String isSkadnetworkAttribution) {
+      this.setParam("is_skadnetwork_attribution", isSkadnetworkAttribution);
       return this;
     }
 
@@ -4235,8 +4317,6 @@ public class Campaign extends APINode {
       VALUE_LOWEST_COST_WITHOUT_CAP("LOWEST_COST_WITHOUT_CAP"),
       @SerializedName("LOWEST_COST_WITH_BID_CAP")
       VALUE_LOWEST_COST_WITH_BID_CAP("LOWEST_COST_WITH_BID_CAP"),
-      @SerializedName("TARGET_COST")
-      VALUE_TARGET_COST("TARGET_COST"),
       ;
 
       private String value;
@@ -5100,6 +5180,7 @@ public class Campaign extends APINode {
     this.mDailyBudget = instance.mDailyBudget;
     this.mEffectiveStatus = instance.mEffectiveStatus;
     this.mId = instance.mId;
+    this.mIsSkadnetworkAttribution = instance.mIsSkadnetworkAttribution;
     this.mIssuesInfo = instance.mIssuesInfo;
     this.mLastBudgetTogglingTime = instance.mLastBudgetTogglingTime;
     this.mLifetimeBudget = instance.mLifetimeBudget;
@@ -5108,6 +5189,7 @@ public class Campaign extends APINode {
     this.mPacingType = instance.mPacingType;
     this.mPromotedObject = instance.mPromotedObject;
     this.mRecommendations = instance.mRecommendations;
+    this.mSmartPromotionType = instance.mSmartPromotionType;
     this.mSourceCampaign = instance.mSourceCampaign;
     this.mSourceCampaignId = instance.mSourceCampaignId;
     this.mSpecialAdCategories = instance.mSpecialAdCategories;

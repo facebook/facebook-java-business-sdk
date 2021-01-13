@@ -25,7 +25,7 @@
 import java.io.File;
 import java.util.Arrays;
 
-public class AdAccountAdCreativesPost2CreateCarouselCallToActionAppInstall {
+public class AdAccountAdCreativesPost3CreateCarouselCallToActionAppInstall {
   public static void main (String args[]) throws APIException {
 
     String access_token = "<ACCESS_TOKEN>";

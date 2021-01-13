@@ -67,6 +67,8 @@ public class MessengerProfile extends APINode {
   private Object mPaymentSettings = null;
   @SerializedName("persistent_menu")
   private List<Object> mPersistentMenu = null;
+  @SerializedName("subject_to_new_eu_privacy_rules")
+  private Boolean mSubjectToNewEuPrivacyRules = null;
   @SerializedName("target_audience")
   private Object mTargetAudience = null;
   @SerializedName("whitelisted_domains")
@@ -276,6 +278,15 @@ public class MessengerProfile extends APINode {
     return this;
   }
 
+  public Boolean getFieldSubjectToNewEuPrivacyRules() {
+    return mSubjectToNewEuPrivacyRules;
+  }
+
+  public MessengerProfile setFieldSubjectToNewEuPrivacyRules(Boolean value) {
+    this.mSubjectToNewEuPrivacyRules = value;
+    return this;
+  }
+
   public Object getFieldTargetAudience() {
     return mTargetAudience;
   }
@@ -317,6 +328,7 @@ public class MessengerProfile extends APINode {
     this.mIceBreakers = instance.mIceBreakers;
     this.mPaymentSettings = instance.mPaymentSettings;
     this.mPersistentMenu = instance.mPersistentMenu;
+    this.mSubjectToNewEuPrivacyRules = instance.mSubjectToNewEuPrivacyRules;
     this.mTargetAudience = instance.mTargetAudience;
     this.mWhitelistedDomains = instance.mWhitelistedDomains;
     this.context = instance.context;

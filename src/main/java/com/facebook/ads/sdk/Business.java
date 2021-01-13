@@ -4307,7 +4307,6 @@ public class Business extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "account_status",
-      "ad_account_creation_request",
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
@@ -4468,13 +4467,6 @@ public class Business extends APINode {
     }
     public APIRequestGetClientAdAccounts requestAccountStatusField (boolean value) {
       this.requestField("account_status", value);
-      return this;
-    }
-    public APIRequestGetClientAdAccounts requestAdAccountCreationRequestField () {
-      return this.requestAdAccountCreationRequestField(true);
-    }
-    public APIRequestGetClientAdAccounts requestAdAccountCreationRequestField (boolean value) {
-      this.requestField("ad_account_creation_request", value);
       return this;
     }
     public APIRequestGetClientAdAccounts requestAdAccountPromotableObjectsField () {
@@ -10769,7 +10761,6 @@ public class Business extends APINode {
       "follows_count",
       "id",
       "ig_id",
-      "is_ig_shopping_seller_policy_enabled",
       "media_count",
       "mentioned_comment",
       "mentioned_media",
@@ -10909,13 +10900,6 @@ public class Business extends APINode {
     }
     public APIRequestGetInstagramBusinessAccounts requestIgIdField (boolean value) {
       this.requestField("ig_id", value);
-      return this;
-    }
-    public APIRequestGetInstagramBusinessAccounts requestIsIgShoppingSellerPolicyEnabledField () {
-      return this.requestIsIgShoppingSellerPolicyEnabledField(true);
-    }
-    public APIRequestGetInstagramBusinessAccounts requestIsIgShoppingSellerPolicyEnabledField (boolean value) {
-      this.requestField("is_ig_shopping_seller_policy_enabled", value);
       return this;
     }
     public APIRequestGetInstagramBusinessAccounts requestMediaCountField () {
@@ -11803,7 +11787,6 @@ public class Business extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "account_status",
-      "ad_account_creation_request",
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
@@ -11964,13 +11947,6 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedAdAccounts requestAccountStatusField (boolean value) {
       this.requestField("account_status", value);
-      return this;
-    }
-    public APIRequestGetOwnedAdAccounts requestAdAccountCreationRequestField () {
-      return this.requestAdAccountCreationRequestField(true);
-    }
-    public APIRequestGetOwnedAdAccounts requestAdAccountCreationRequestField (boolean value) {
-      this.requestField("ad_account_creation_request", value);
       return this;
     }
     public APIRequestGetOwnedAdAccounts requestAdAccountPromotableObjectsField () {
@@ -18923,6 +18899,8 @@ public class Business extends APINode {
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("ANALYZE")
       VALUE_ANALYZE("ANALYZE"),
+      @SerializedName("DRAFT")
+      VALUE_DRAFT("DRAFT"),
       @SerializedName("MANAGE")
       VALUE_MANAGE("MANAGE"),
       ;

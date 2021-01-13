@@ -35,7 +35,7 @@ public class AdgroupLeadsEdgeAdgroupLeadsFiltered {
     APIContext context = new APIContext(access_token).enableDebug(true);
 
     new Ad(id, context).getLeads()
-      .setParam("filtering", "[{\"field\":\"time_created\",\"operator\":\"GREATER_THAN\",\"value\":1602826030}]")
+      .setParam("filtering", "[{\"field\":\"time_created\",\"operator\":\"GREATER_THAN\",\"value\":1607393319}]")
       .execute();
 
   }

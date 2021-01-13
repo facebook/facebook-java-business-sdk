@@ -496,14 +496,10 @@ public class LiveVideo extends APINode {
 
     public static final String[] FIELDS = {
       "about",
-      "address",
-      "admin_notes",
       "age_range",
-      "auth_method",
       "birthday",
       "cover",
       "currency",
-      "devices",
       "education",
       "email",
       "favorite_athletes",
@@ -526,15 +522,12 @@ public class LiveVideo extends APINode {
       "locale",
       "location",
       "meeting_for",
-      "messenger_join_notifications_enabled",
       "middle_name",
       "name",
       "name_format",
       "payment_pricepoints",
       "political",
       "profile_pic",
-      "public_key",
-      "published_timeline",
       "quotes",
       "relationship_status",
       "religion",
@@ -547,12 +540,9 @@ public class LiveVideo extends APINode {
       "timezone",
       "token_for_business",
       "updated_time",
-      "user_storage_key",
-      "username",
       "verified",
       "video_upload_limits",
       "website",
-      "work",
     };
 
     @Override
@@ -660,32 +650,11 @@ public class LiveVideo extends APINode {
       this.requestField("about", value);
       return this;
     }
-    public APIRequestGetBlockedUsers requestAddressField () {
-      return this.requestAddressField(true);
-    }
-    public APIRequestGetBlockedUsers requestAddressField (boolean value) {
-      this.requestField("address", value);
-      return this;
-    }
-    public APIRequestGetBlockedUsers requestAdminNotesField () {
-      return this.requestAdminNotesField(true);
-    }
-    public APIRequestGetBlockedUsers requestAdminNotesField (boolean value) {
-      this.requestField("admin_notes", value);
-      return this;
-    }
     public APIRequestGetBlockedUsers requestAgeRangeField () {
       return this.requestAgeRangeField(true);
     }
     public APIRequestGetBlockedUsers requestAgeRangeField (boolean value) {
       this.requestField("age_range", value);
-      return this;
-    }
-    public APIRequestGetBlockedUsers requestAuthMethodField () {
-      return this.requestAuthMethodField(true);
-    }
-    public APIRequestGetBlockedUsers requestAuthMethodField (boolean value) {
-      this.requestField("auth_method", value);
       return this;
     }
     public APIRequestGetBlockedUsers requestBirthdayField () {
@@ -707,13 +676,6 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetBlockedUsers requestCurrencyField (boolean value) {
       this.requestField("currency", value);
-      return this;
-    }
-    public APIRequestGetBlockedUsers requestDevicesField () {
-      return this.requestDevicesField(true);
-    }
-    public APIRequestGetBlockedUsers requestDevicesField (boolean value) {
-      this.requestField("devices", value);
       return this;
     }
     public APIRequestGetBlockedUsers requestEducationField () {
@@ -870,13 +832,6 @@ public class LiveVideo extends APINode {
       this.requestField("meeting_for", value);
       return this;
     }
-    public APIRequestGetBlockedUsers requestMessengerJoinNotificationsEnabledField () {
-      return this.requestMessengerJoinNotificationsEnabledField(true);
-    }
-    public APIRequestGetBlockedUsers requestMessengerJoinNotificationsEnabledField (boolean value) {
-      this.requestField("messenger_join_notifications_enabled", value);
-      return this;
-    }
     public APIRequestGetBlockedUsers requestMiddleNameField () {
       return this.requestMiddleNameField(true);
     }
@@ -917,20 +872,6 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetBlockedUsers requestProfilePicField (boolean value) {
       this.requestField("profile_pic", value);
-      return this;
-    }
-    public APIRequestGetBlockedUsers requestPublicKeyField () {
-      return this.requestPublicKeyField(true);
-    }
-    public APIRequestGetBlockedUsers requestPublicKeyField (boolean value) {
-      this.requestField("public_key", value);
-      return this;
-    }
-    public APIRequestGetBlockedUsers requestPublishedTimelineField () {
-      return this.requestPublishedTimelineField(true);
-    }
-    public APIRequestGetBlockedUsers requestPublishedTimelineField (boolean value) {
-      this.requestField("published_timeline", value);
       return this;
     }
     public APIRequestGetBlockedUsers requestQuotesField () {
@@ -1017,20 +958,6 @@ public class LiveVideo extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-    public APIRequestGetBlockedUsers requestUserStorageKeyField () {
-      return this.requestUserStorageKeyField(true);
-    }
-    public APIRequestGetBlockedUsers requestUserStorageKeyField (boolean value) {
-      this.requestField("user_storage_key", value);
-      return this;
-    }
-    public APIRequestGetBlockedUsers requestUsernameField () {
-      return this.requestUsernameField(true);
-    }
-    public APIRequestGetBlockedUsers requestUsernameField (boolean value) {
-      this.requestField("username", value);
-      return this;
-    }
     public APIRequestGetBlockedUsers requestVerifiedField () {
       return this.requestVerifiedField(true);
     }
@@ -1050,13 +977,6 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetBlockedUsers requestWebsiteField (boolean value) {
       this.requestField("website", value);
-      return this;
-    }
-    public APIRequestGetBlockedUsers requestWorkField () {
-      return this.requestWorkField(true);
-    }
-    public APIRequestGetBlockedUsers requestWorkField (boolean value) {
-      this.requestField("work", value);
       return this;
     }
   }
@@ -4511,39 +4431,6 @@ public class LiveVideo extends APINode {
 
   }
 
-  public static enum EnumBroadcastStatus {
-      @SerializedName("live")
-      VALUE_LIVE("live"),
-      @SerializedName("live_stopped")
-      VALUE_LIVE_STOPPED("live_stopped"),
-      @SerializedName("processing")
-      VALUE_PROCESSING("processing"),
-      @SerializedName("scheduled_canceled")
-      VALUE_SCHEDULED_CANCELED("scheduled_canceled"),
-      @SerializedName("scheduled_expired")
-      VALUE_SCHEDULED_EXPIRED("scheduled_expired"),
-      @SerializedName("scheduled_live")
-      VALUE_SCHEDULED_LIVE("scheduled_live"),
-      @SerializedName("scheduled_unpublished")
-      VALUE_SCHEDULED_UNPUBLISHED("scheduled_unpublished"),
-      @SerializedName("unpublished")
-      VALUE_UNPUBLISHED("unpublished"),
-      @SerializedName("vod")
-      VALUE_VOD("vod"),
-      ;
-
-      private String value;
-
-      private EnumBroadcastStatus(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
   public static enum EnumProjection {
       @SerializedName("CUBEMAP")
       VALUE_CUBEMAP("CUBEMAP"),
@@ -4638,6 +4525,39 @@ public class LiveVideo extends APINode {
       private String value;
 
       private EnumStreamType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumBroadcastStatus {
+      @SerializedName("LIVE")
+      VALUE_LIVE("LIVE"),
+      @SerializedName("LIVE_STOPPED")
+      VALUE_LIVE_STOPPED("LIVE_STOPPED"),
+      @SerializedName("PROCESSING")
+      VALUE_PROCESSING("PROCESSING"),
+      @SerializedName("SCHEDULED_CANCELED")
+      VALUE_SCHEDULED_CANCELED("SCHEDULED_CANCELED"),
+      @SerializedName("SCHEDULED_EXPIRED")
+      VALUE_SCHEDULED_EXPIRED("SCHEDULED_EXPIRED"),
+      @SerializedName("SCHEDULED_LIVE")
+      VALUE_SCHEDULED_LIVE("SCHEDULED_LIVE"),
+      @SerializedName("SCHEDULED_UNPUBLISHED")
+      VALUE_SCHEDULED_UNPUBLISHED("SCHEDULED_UNPUBLISHED"),
+      @SerializedName("UNPUBLISHED")
+      VALUE_UNPUBLISHED("UNPUBLISHED"),
+      @SerializedName("VOD")
+      VALUE_VOD("VOD"),
+      ;
+
+      private String value;
+
+      private EnumBroadcastStatus(String value) {
         this.value = value;
       }
 

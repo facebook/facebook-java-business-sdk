@@ -54,68 +54,66 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class OfflineTermsOfService extends APINode {
-  @SerializedName("accept_time")
-  private Long mAcceptTime = null;
+public class WhatsAppBusinessProfile extends APINode {
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("signed_by_user")
-  private User mSignedByUser = null;
+  @SerializedName("name_verification")
+  private Object mNameVerification = null;
   protected static Gson gson = null;
 
-  OfflineTermsOfService() {
+  WhatsAppBusinessProfile() {
   }
 
-  public OfflineTermsOfService(Long id, APIContext context) {
+  public WhatsAppBusinessProfile(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public OfflineTermsOfService(String id, APIContext context) {
+  public WhatsAppBusinessProfile(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public OfflineTermsOfService fetch() throws APIException{
-    OfflineTermsOfService newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public WhatsAppBusinessProfile fetch() throws APIException{
+    WhatsAppBusinessProfile newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static OfflineTermsOfService fetchById(Long id, APIContext context) throws APIException {
+  public static WhatsAppBusinessProfile fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<OfflineTermsOfService> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<WhatsAppBusinessProfile> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static OfflineTermsOfService fetchById(String id, APIContext context) throws APIException {
+  public static WhatsAppBusinessProfile fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<OfflineTermsOfService> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<WhatsAppBusinessProfile> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<OfflineTermsOfService> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<OfflineTermsOfService>)(
-      new APIRequest<OfflineTermsOfService>(context, "", "/", "GET", OfflineTermsOfService.getParser())
+  public static APINodeList<WhatsAppBusinessProfile> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<WhatsAppBusinessProfile>)(
+      new APIRequest<WhatsAppBusinessProfile>(context, "", "/", "GET", WhatsAppBusinessProfile.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<OfflineTermsOfService>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<WhatsAppBusinessProfile>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", OfflineTermsOfService.getParser())
+      new APIRequest(context, "", "/", "GET", WhatsAppBusinessProfile.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -128,12 +126,12 @@ public class OfflineTermsOfService extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static OfflineTermsOfService loadJSON(String json, APIContext context, String header) {
-    OfflineTermsOfService offlineTermsOfService = getGson().fromJson(json, OfflineTermsOfService.class);
+  public static WhatsAppBusinessProfile loadJSON(String json, APIContext context, String header) {
+    WhatsAppBusinessProfile whatsAppBusinessProfile = getGson().fromJson(json, WhatsAppBusinessProfile.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(offlineTermsOfService.toString());
+      JsonElement o2 = parser.parse(whatsAppBusinessProfile.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -143,14 +141,14 @@ public class OfflineTermsOfService extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    offlineTermsOfService.context = context;
-    offlineTermsOfService.rawValue = json;
-    offlineTermsOfService.header = header;
-    return offlineTermsOfService;
+    whatsAppBusinessProfile.context = context;
+    whatsAppBusinessProfile.rawValue = json;
+    whatsAppBusinessProfile.header = header;
+    return whatsAppBusinessProfile;
   }
 
-  public static APINodeList<OfflineTermsOfService> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<OfflineTermsOfService> offlineTermsOfServices = new APINodeList<OfflineTermsOfService>(request, json, header);
+  public static APINodeList<WhatsAppBusinessProfile> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<WhatsAppBusinessProfile> whatsAppBusinessProfiles = new APINodeList<WhatsAppBusinessProfile>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -161,9 +159,9 @@ public class OfflineTermsOfService extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          offlineTermsOfServices.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          whatsAppBusinessProfiles.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return offlineTermsOfServices;
+        return whatsAppBusinessProfiles;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -173,20 +171,20 @@ public class OfflineTermsOfService extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                offlineTermsOfServices.setCursors(before, after);
+                whatsAppBusinessProfiles.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            offlineTermsOfServices.setPaging(previous, next);
+            whatsAppBusinessProfiles.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              offlineTermsOfServices.setAppSecret(context.getAppSecretProof());
+              whatsAppBusinessProfiles.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              offlineTermsOfServices.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              whatsAppBusinessProfiles.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -197,23 +195,23 @@ public class OfflineTermsOfService extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  offlineTermsOfServices.add(loadJSON(entry.getValue().toString(), context, header));
+                  whatsAppBusinessProfiles.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              offlineTermsOfServices.add(loadJSON(obj.toString(), context, header));
+              whatsAppBusinessProfiles.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return offlineTermsOfServices;
+          return whatsAppBusinessProfiles;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              offlineTermsOfServices.add(loadJSON(entry.getValue().toString(), context, header));
+              whatsAppBusinessProfiles.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return offlineTermsOfServices;
+          return whatsAppBusinessProfiles;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -230,20 +228,20 @@ public class OfflineTermsOfService extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              offlineTermsOfServices.add(loadJSON(value.toString(), context, header));
+              whatsAppBusinessProfiles.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return offlineTermsOfServices;
+            return whatsAppBusinessProfiles;
           }
 
           // Sixth, check if it's pure JsonObject
-          offlineTermsOfServices.clear();
-          offlineTermsOfServices.add(loadJSON(json, context, header));
-          return offlineTermsOfServices;
+          whatsAppBusinessProfiles.clear();
+          whatsAppBusinessProfiles.add(loadJSON(json, context, header));
+          return whatsAppBusinessProfiles;
         }
       }
     } catch (Exception e) {
@@ -274,66 +272,62 @@ public class OfflineTermsOfService extends APINode {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
-
-  public Long getFieldAcceptTime() {
-    return mAcceptTime;
+  public APIRequestUpdate update() {
+    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
   }
+
 
   public String getFieldId() {
     return mId;
   }
 
-  public User getFieldSignedByUser() {
-    if (mSignedByUser != null) {
-      mSignedByUser.context = getContext();
-    }
-    return mSignedByUser;
+  public Object getFieldNameVerification() {
+    return mNameVerification;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<OfflineTermsOfService> {
+  public static class APIRequestGet extends APIRequest<WhatsAppBusinessProfile> {
 
-    OfflineTermsOfService lastResponse = null;
+    WhatsAppBusinessProfile lastResponse = null;
     @Override
-    public OfflineTermsOfService getLastResponse() {
+    public WhatsAppBusinessProfile getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "accept_time",
       "id",
-      "signed_by_user",
+      "name_verification",
     };
 
     @Override
-    public OfflineTermsOfService parseResponse(String response, String header) throws APIException {
-      return OfflineTermsOfService.parseResponse(response, getContext(), this, header).head();
+    public WhatsAppBusinessProfile parseResponse(String response, String header) throws APIException {
+      return WhatsAppBusinessProfile.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public OfflineTermsOfService execute() throws APIException {
+    public WhatsAppBusinessProfile execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public OfflineTermsOfService execute(Map<String, Object> extraParams) throws APIException {
+    public WhatsAppBusinessProfile execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<OfflineTermsOfService> executeAsync() throws APIException {
+    public ListenableFuture<WhatsAppBusinessProfile> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<OfflineTermsOfService> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<WhatsAppBusinessProfile> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, OfflineTermsOfService>() {
-           public OfflineTermsOfService apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, WhatsAppBusinessProfile>() {
+           public WhatsAppBusinessProfile apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -397,13 +391,6 @@ public class OfflineTermsOfService extends APINode {
       return this;
     }
 
-    public APIRequestGet requestAcceptTimeField () {
-      return this.requestAcceptTimeField(true);
-    }
-    public APIRequestGet requestAcceptTimeField (boolean value) {
-      this.requestField("accept_time", value);
-      return this;
-    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -411,13 +398,117 @@ public class OfflineTermsOfService extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestSignedByUserField () {
-      return this.requestSignedByUserField(true);
+    public APIRequestGet requestNameVerificationField () {
+      return this.requestNameVerificationField(true);
     }
-    public APIRequestGet requestSignedByUserField (boolean value) {
-      this.requestField("signed_by_user", value);
+    public APIRequestGet requestNameVerificationField (boolean value) {
+      this.requestField("name_verification", value);
       return this;
     }
+  }
+
+  public static class APIRequestUpdate extends APIRequest<WhatsAppBusinessProfile> {
+
+    WhatsAppBusinessProfile lastResponse = null;
+    @Override
+    public WhatsAppBusinessProfile getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public WhatsAppBusinessProfile parseResponse(String response, String header) throws APIException {
+      return WhatsAppBusinessProfile.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public WhatsAppBusinessProfile execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public WhatsAppBusinessProfile execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<WhatsAppBusinessProfile> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<WhatsAppBusinessProfile> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, WhatsAppBusinessProfile>() {
+           public WhatsAppBusinessProfile apply(ResponseWrapper result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestUpdate(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestUpdate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestUpdate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestUpdate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
 
@@ -434,19 +525,18 @@ public class OfflineTermsOfService extends APINode {
     return gson;
   }
 
-  public OfflineTermsOfService copyFrom(OfflineTermsOfService instance) {
-    this.mAcceptTime = instance.mAcceptTime;
+  public WhatsAppBusinessProfile copyFrom(WhatsAppBusinessProfile instance) {
     this.mId = instance.mId;
-    this.mSignedByUser = instance.mSignedByUser;
+    this.mNameVerification = instance.mNameVerification;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<OfflineTermsOfService> getParser() {
-    return new APIRequest.ResponseParser<OfflineTermsOfService>() {
-      public APINodeList<OfflineTermsOfService> parseResponse(String response, APIContext context, APIRequest<OfflineTermsOfService> request, String header) throws MalformedResponseException {
-        return OfflineTermsOfService.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<WhatsAppBusinessProfile> getParser() {
+    return new APIRequest.ResponseParser<WhatsAppBusinessProfile>() {
+      public APINodeList<WhatsAppBusinessProfile> parseResponse(String response, APIContext context, APIRequest<WhatsAppBusinessProfile> request, String header) throws MalformedResponseException {
+        return WhatsAppBusinessProfile.parseResponse(response, context, request, header);
       }
     };
   }

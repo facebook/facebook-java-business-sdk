@@ -2411,6 +2411,8 @@ public class AdCreative extends APINode {
       VALUE_USE_MOBILE_APP("USE_MOBILE_APP"),
       @SerializedName("VIDEO_ANNOTATION")
       VALUE_VIDEO_ANNOTATION("VIDEO_ANNOTATION"),
+      @SerializedName("VIDEO_CALL")
+      VALUE_VIDEO_CALL("VIDEO_CALL"),
       @SerializedName("VISIT_PAGES_FEED")
       VALUE_VISIT_PAGES_FEED("VISIT_PAGES_FEED"),
       @SerializedName("WATCH_MORE")

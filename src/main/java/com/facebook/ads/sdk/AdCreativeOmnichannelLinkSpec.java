@@ -54,35 +54,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class UserPaymentMethodsInfo extends APINode {
-  @SerializedName("account_id")
-  private String mAccountId = null;
-  @SerializedName("available_card_types")
-  private List<String> mAvailableCardTypes = null;
-  @SerializedName("available_payment_methods")
-  private List<String> mAvailablePaymentMethods = null;
-  @SerializedName("available_payment_methods_details")
-  private List<Object> mAvailablePaymentMethodsDetails = null;
-  @SerializedName("country")
-  private String mCountry = null;
-  @SerializedName("currency")
-  private String mCurrency = null;
-  @SerializedName("existing_payment_methods")
-  private List<Object> mExistingPaymentMethods = null;
+public class AdCreativeOmnichannelLinkSpec extends APINode {
+  @SerializedName("app")
+  private Object mApp = null;
+  @SerializedName("web")
+  private Object mWeb = null;
   protected static Gson gson = null;
 
-  public UserPaymentMethodsInfo() {
+  public AdCreativeOmnichannelLinkSpec() {
   }
 
   public String getId() {
     return null;
   }
-  public static UserPaymentMethodsInfo loadJSON(String json, APIContext context, String header) {
-    UserPaymentMethodsInfo userPaymentMethodsInfo = getGson().fromJson(json, UserPaymentMethodsInfo.class);
+  public static AdCreativeOmnichannelLinkSpec loadJSON(String json, APIContext context, String header) {
+    AdCreativeOmnichannelLinkSpec adCreativeOmnichannelLinkSpec = getGson().fromJson(json, AdCreativeOmnichannelLinkSpec.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(userPaymentMethodsInfo.toString());
+      JsonElement o2 = parser.parse(adCreativeOmnichannelLinkSpec.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -92,14 +82,14 @@ public class UserPaymentMethodsInfo extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    userPaymentMethodsInfo.context = context;
-    userPaymentMethodsInfo.rawValue = json;
-    userPaymentMethodsInfo.header = header;
-    return userPaymentMethodsInfo;
+    adCreativeOmnichannelLinkSpec.context = context;
+    adCreativeOmnichannelLinkSpec.rawValue = json;
+    adCreativeOmnichannelLinkSpec.header = header;
+    return adCreativeOmnichannelLinkSpec;
   }
 
-  public static APINodeList<UserPaymentMethodsInfo> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<UserPaymentMethodsInfo> userPaymentMethodsInfos = new APINodeList<UserPaymentMethodsInfo>(request, json, header);
+  public static APINodeList<AdCreativeOmnichannelLinkSpec> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCreativeOmnichannelLinkSpec> adCreativeOmnichannelLinkSpecs = new APINodeList<AdCreativeOmnichannelLinkSpec>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -110,9 +100,9 @@ public class UserPaymentMethodsInfo extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          userPaymentMethodsInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adCreativeOmnichannelLinkSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return userPaymentMethodsInfos;
+        return adCreativeOmnichannelLinkSpecs;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -122,20 +112,20 @@ public class UserPaymentMethodsInfo extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                userPaymentMethodsInfos.setCursors(before, after);
+                adCreativeOmnichannelLinkSpecs.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            userPaymentMethodsInfos.setPaging(previous, next);
+            adCreativeOmnichannelLinkSpecs.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              userPaymentMethodsInfos.setAppSecret(context.getAppSecretProof());
+              adCreativeOmnichannelLinkSpecs.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              userPaymentMethodsInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adCreativeOmnichannelLinkSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -146,23 +136,23 @@ public class UserPaymentMethodsInfo extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  userPaymentMethodsInfos.add(loadJSON(entry.getValue().toString(), context, header));
+                  adCreativeOmnichannelLinkSpecs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              userPaymentMethodsInfos.add(loadJSON(obj.toString(), context, header));
+              adCreativeOmnichannelLinkSpecs.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return userPaymentMethodsInfos;
+          return adCreativeOmnichannelLinkSpecs;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              userPaymentMethodsInfos.add(loadJSON(entry.getValue().toString(), context, header));
+              adCreativeOmnichannelLinkSpecs.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return userPaymentMethodsInfos;
+          return adCreativeOmnichannelLinkSpecs;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -179,20 +169,20 @@ public class UserPaymentMethodsInfo extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              userPaymentMethodsInfos.add(loadJSON(value.toString(), context, header));
+              adCreativeOmnichannelLinkSpecs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return userPaymentMethodsInfos;
+            return adCreativeOmnichannelLinkSpecs;
           }
 
           // Sixth, check if it's pure JsonObject
-          userPaymentMethodsInfos.clear();
-          userPaymentMethodsInfos.add(loadJSON(json, context, header));
-          return userPaymentMethodsInfos;
+          adCreativeOmnichannelLinkSpecs.clear();
+          adCreativeOmnichannelLinkSpecs.add(loadJSON(json, context, header));
+          return adCreativeOmnichannelLinkSpecs;
         }
       }
     } catch (Exception e) {
@@ -220,66 +210,21 @@ public class UserPaymentMethodsInfo extends APINode {
   }
 
 
-  public String getFieldAccountId() {
-    return mAccountId;
+  public Object getFieldApp() {
+    return mApp;
   }
 
-  public UserPaymentMethodsInfo setFieldAccountId(String value) {
-    this.mAccountId = value;
+  public AdCreativeOmnichannelLinkSpec setFieldApp(Object value) {
+    this.mApp = value;
     return this;
   }
 
-  public List<String> getFieldAvailableCardTypes() {
-    return mAvailableCardTypes;
+  public Object getFieldWeb() {
+    return mWeb;
   }
 
-  public UserPaymentMethodsInfo setFieldAvailableCardTypes(List<String> value) {
-    this.mAvailableCardTypes = value;
-    return this;
-  }
-
-  public List<String> getFieldAvailablePaymentMethods() {
-    return mAvailablePaymentMethods;
-  }
-
-  public UserPaymentMethodsInfo setFieldAvailablePaymentMethods(List<String> value) {
-    this.mAvailablePaymentMethods = value;
-    return this;
-  }
-
-  public List<Object> getFieldAvailablePaymentMethodsDetails() {
-    return mAvailablePaymentMethodsDetails;
-  }
-
-  public UserPaymentMethodsInfo setFieldAvailablePaymentMethodsDetails(List<Object> value) {
-    this.mAvailablePaymentMethodsDetails = value;
-    return this;
-  }
-
-  public String getFieldCountry() {
-    return mCountry;
-  }
-
-  public UserPaymentMethodsInfo setFieldCountry(String value) {
-    this.mCountry = value;
-    return this;
-  }
-
-  public String getFieldCurrency() {
-    return mCurrency;
-  }
-
-  public UserPaymentMethodsInfo setFieldCurrency(String value) {
-    this.mCurrency = value;
-    return this;
-  }
-
-  public List<Object> getFieldExistingPaymentMethods() {
-    return mExistingPaymentMethods;
-  }
-
-  public UserPaymentMethodsInfo setFieldExistingPaymentMethods(List<Object> value) {
-    this.mExistingPaymentMethods = value;
+  public AdCreativeOmnichannelLinkSpec setFieldWeb(Object value) {
+    this.mWeb = value;
     return this;
   }
 
@@ -299,23 +244,18 @@ public class UserPaymentMethodsInfo extends APINode {
     return gson;
   }
 
-  public UserPaymentMethodsInfo copyFrom(UserPaymentMethodsInfo instance) {
-    this.mAccountId = instance.mAccountId;
-    this.mAvailableCardTypes = instance.mAvailableCardTypes;
-    this.mAvailablePaymentMethods = instance.mAvailablePaymentMethods;
-    this.mAvailablePaymentMethodsDetails = instance.mAvailablePaymentMethodsDetails;
-    this.mCountry = instance.mCountry;
-    this.mCurrency = instance.mCurrency;
-    this.mExistingPaymentMethods = instance.mExistingPaymentMethods;
+  public AdCreativeOmnichannelLinkSpec copyFrom(AdCreativeOmnichannelLinkSpec instance) {
+    this.mApp = instance.mApp;
+    this.mWeb = instance.mWeb;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<UserPaymentMethodsInfo> getParser() {
-    return new APIRequest.ResponseParser<UserPaymentMethodsInfo>() {
-      public APINodeList<UserPaymentMethodsInfo> parseResponse(String response, APIContext context, APIRequest<UserPaymentMethodsInfo> request, String header) throws MalformedResponseException {
-        return UserPaymentMethodsInfo.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdCreativeOmnichannelLinkSpec> getParser() {
+    return new APIRequest.ResponseParser<AdCreativeOmnichannelLinkSpec>() {
+      public APINodeList<AdCreativeOmnichannelLinkSpec> parseResponse(String response, APIContext context, APIRequest<AdCreativeOmnichannelLinkSpec> request, String header) throws MalformedResponseException {
+        return AdCreativeOmnichannelLinkSpec.parseResponse(response, context, request, header);
       }
     };
   }

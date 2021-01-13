@@ -307,6 +307,8 @@ public class AdAccountMatchedSearchApplicationsEdgeData extends APINode {
       VALUE_FB_CANVAS("FB_CANVAS"),
       @SerializedName("FB_GAMEROOM")
       VALUE_FB_GAMEROOM("FB_GAMEROOM"),
+      @SerializedName("GALAXY_STORE")
+      VALUE_GALAXY_STORE("GALAXY_STORE"),
       @SerializedName("GOOGLE_PLAY")
       VALUE_GOOGLE_PLAY("GOOGLE_PLAY"),
       @SerializedName("INSTANT_GAME")
