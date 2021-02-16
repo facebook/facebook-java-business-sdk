@@ -310,6 +310,10 @@ public class AdsPixel extends APINode {
     return new APIRequestCreateEvent(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateShadowTrafficHelper createShadowTrafficHelper() {
+    return new APIRequestCreateShadowTrafficHelper(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestDeleteSharedAccounts deleteSharedAccounts() {
     return new APIRequestDeleteSharedAccounts(this.getPrefixedId().toString(), context);
   }
@@ -1002,6 +1006,110 @@ public class AdsPixel extends APINode {
 
     @Override
     public APIRequestCreateEvent requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateShadowTrafficHelper extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateShadowTrafficHelper.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateShadowTrafficHelper(String nodeId, APIContext context) {
+      super(context, nodeId, "/shadowtraffichelper", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateShadowTrafficHelper setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateShadowTrafficHelper setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateShadowTrafficHelper requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateShadowTrafficHelper requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateShadowTrafficHelper requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateShadowTrafficHelper requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateShadowTrafficHelper requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateShadowTrafficHelper requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

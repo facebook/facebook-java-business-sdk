@@ -99,6 +99,8 @@ public class AdsInsights extends APINode {
   private String mAdsetStart = null;
   @SerializedName("age_targeting")
   private String mAgeTargeting = null;
+  @SerializedName("attribution_setting")
+  private String mAttributionSetting = null;
   @SerializedName("auction_bid")
   private String mAuctionBid = null;
   @SerializedName("auction_competitiveness")
@@ -689,6 +691,15 @@ public class AdsInsights extends APINode {
 
   public AdsInsights setFieldAgeTargeting(String value) {
     this.mAgeTargeting = value;
+    return this;
+  }
+
+  public String getFieldAttributionSetting() {
+    return mAttributionSetting;
+  }
+
+  public AdsInsights setFieldAttributionSetting(String value) {
+    this.mAttributionSetting = value;
     return this;
   }
 
@@ -2231,6 +2242,7 @@ public class AdsInsights extends APINode {
     this.mAdsetName = instance.mAdsetName;
     this.mAdsetStart = instance.mAdsetStart;
     this.mAgeTargeting = instance.mAgeTargeting;
+    this.mAttributionSetting = instance.mAttributionSetting;
     this.mAuctionBid = instance.mAuctionBid;
     this.mAuctionCompetitiveness = instance.mAuctionCompetitiveness;
     this.mAuctionMaxCompetitorBid = instance.mAuctionMaxCompetitorBid;

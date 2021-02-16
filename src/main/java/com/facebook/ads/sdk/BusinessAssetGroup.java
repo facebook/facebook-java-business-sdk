@@ -4252,6 +4252,7 @@ public class BusinessAssetGroup extends APINode {
       "fan_count",
       "featured_video",
       "features",
+      "followers_count",
       "food_styles",
       "founded",
       "general_info",
@@ -4735,6 +4736,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedPages requestFeaturesField (boolean value) {
       this.requestField("features", value);
+      return this;
+    }
+    public APIRequestGetContainedPages requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
+    }
+    public APIRequestGetContainedPages requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
       return this;
     }
     public APIRequestGetContainedPages requestFoodStylesField () {

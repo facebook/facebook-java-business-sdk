@@ -991,6 +991,8 @@ public class PageCallToAction extends APINode {
       VALUE_MESSENGER("MESSENGER"),
       @SerializedName("MINI_SHOP")
       VALUE_MINI_SHOP("MINI_SHOP"),
+      @SerializedName("MOBILE_CENTER")
+      VALUE_MOBILE_CENTER("MOBILE_CENTER"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
       @SerializedName("PHONE_CALL")
@@ -1089,6 +1091,8 @@ public class PageCallToAction extends APINode {
       VALUE_LOCAL_DEV_PLATFORM("LOCAL_DEV_PLATFORM"),
       @SerializedName("MESSAGE")
       VALUE_MESSAGE("MESSAGE"),
+      @SerializedName("MOBILE_CENTER")
+      VALUE_MOBILE_CENTER("MOBILE_CENTER"),
       @SerializedName("OPEN_APP")
       VALUE_OPEN_APP("OPEN_APP"),
       @SerializedName("ORDER_FOOD")
@@ -1144,6 +1148,8 @@ public class PageCallToAction extends APINode {
       VALUE_FOLLOW("FOLLOW"),
       @SerializedName("MESSENGER")
       VALUE_MESSENGER("MESSENGER"),
+      @SerializedName("MOBILE_CENTER")
+      VALUE_MOBILE_CENTER("MOBILE_CENTER"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
       @SerializedName("SHOP_ON_FACEBOOK")

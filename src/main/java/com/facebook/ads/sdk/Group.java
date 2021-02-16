@@ -3672,8 +3672,6 @@ public class Group extends APINode {
       "post_requires_admin_approval",
       "privacy",
       "ref",
-      "suggestion_category",
-      "suggestion_identifier",
     };
 
     public static final String[] FIELDS = {
@@ -3812,20 +3810,6 @@ public class Group extends APINode {
 
     public APIRequestCreateGroup setRef (String ref) {
       this.setParam("ref", ref);
-      return this;
-    }
-
-    public APIRequestCreateGroup setSuggestionCategory (Group.EnumSuggestionCategory suggestionCategory) {
-      this.setParam("suggestion_category", suggestionCategory);
-      return this;
-    }
-    public APIRequestCreateGroup setSuggestionCategory (String suggestionCategory) {
-      this.setParam("suggestion_category", suggestionCategory);
-      return this;
-    }
-
-    public APIRequestCreateGroup setSuggestionIdentifier (String suggestionIdentifier) {
-      this.setParam("suggestion_identifier", suggestionIdentifier);
       return this;
     }
 
@@ -6471,7 +6455,6 @@ public class Group extends APINode {
       "animated_effect_id",
       "application_id",
       "asked_fun_fact_prompt_id",
-      "attribution_app_id",
       "audio_story_wave_animation_handle",
       "composer_entry_picker",
       "composer_entry_point",
@@ -6625,11 +6608,6 @@ public class Group extends APINode {
     }
     public APIRequestCreateVideo setAskedFunFactPromptId (String askedFunFactPromptId) {
       this.setParam("asked_fun_fact_prompt_id", askedFunFactPromptId);
-      return this;
-    }
-
-    public APIRequestCreateVideo setAttributionAppId (String attributionAppId) {
-      this.setParam("attribution_app_id", attributionAppId);
       return this;
     }
 
@@ -7946,33 +7924,6 @@ public class Group extends APINode {
       private String value;
 
       private EnumGroupType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumSuggestionCategory {
-      @SerializedName("EVENT")
-      VALUE_EVENT("EVENT"),
-      @SerializedName("MESSENGER")
-      VALUE_MESSENGER("MESSENGER"),
-      @SerializedName("WORK")
-      VALUE_WORK("WORK"),
-      @SerializedName("WORKPLACE")
-      VALUE_WORKPLACE("WORKPLACE"),
-      @SerializedName("WORKPLACE_1_1")
-      VALUE_WORKPLACE_1_1("WORKPLACE_1_1"),
-      @SerializedName("WORKPLACE_MANAGER")
-      VALUE_WORKPLACE_MANAGER("WORKPLACE_MANAGER"),
-      ;
-
-      private String value;
-
-      private EnumSuggestionCategory(String value) {
         this.value = value;
       }
 

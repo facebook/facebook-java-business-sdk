@@ -1131,6 +1131,7 @@ public class BusinessUser extends APINode {
       "fan_count",
       "featured_video",
       "features",
+      "followers_count",
       "food_styles",
       "founded",
       "general_info",
@@ -1614,6 +1615,13 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGetAssignedPages requestFeaturesField (boolean value) {
       this.requestField("features", value);
+      return this;
+    }
+    public APIRequestGetAssignedPages requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
+    }
+    public APIRequestGetAssignedPages requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
       return this;
     }
     public APIRequestGetAssignedPages requestFoodStylesField () {

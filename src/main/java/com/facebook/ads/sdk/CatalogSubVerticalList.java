@@ -89,6 +89,8 @@ public class CatalogSubVerticalList extends APINode {
   private Object mComputersLaptopsAndTablets = null;
   @SerializedName("diapering_and_potty_training")
   private Object mDiaperingAndPottyTraining = null;
+  @SerializedName("digital_product_offer")
+  private Object mDigitalProductOffer = null;
   @SerializedName("electronic_accessories_and_cables")
   private Object mElectronicAccessoriesAndCables = null;
   @SerializedName("electronics_accessories")
@@ -107,6 +109,10 @@ public class CatalogSubVerticalList extends APINode {
   private Object mJewelry = null;
   @SerializedName("large_appliances")
   private Object mLargeAppliances = null;
+  @SerializedName("local_service_business_item")
+  private Object mLocalServiceBusinessItem = null;
+  @SerializedName("local_service_business_restaurant")
+  private Object mLocalServiceBusinessRestaurant = null;
   @SerializedName("loyalty_offer")
   private Object mLoyaltyOffer = null;
   @SerializedName("meetup_space")
@@ -463,6 +469,15 @@ public class CatalogSubVerticalList extends APINode {
     return this;
   }
 
+  public Object getFieldDigitalProductOffer() {
+    return mDigitalProductOffer;
+  }
+
+  public CatalogSubVerticalList setFieldDigitalProductOffer(Object value) {
+    this.mDigitalProductOffer = value;
+    return this;
+  }
+
   public Object getFieldElectronicAccessoriesAndCables() {
     return mElectronicAccessoriesAndCables;
   }
@@ -541,6 +556,24 @@ public class CatalogSubVerticalList extends APINode {
 
   public CatalogSubVerticalList setFieldLargeAppliances(Object value) {
     this.mLargeAppliances = value;
+    return this;
+  }
+
+  public Object getFieldLocalServiceBusinessItem() {
+    return mLocalServiceBusinessItem;
+  }
+
+  public CatalogSubVerticalList setFieldLocalServiceBusinessItem(Object value) {
+    this.mLocalServiceBusinessItem = value;
+    return this;
+  }
+
+  public Object getFieldLocalServiceBusinessRestaurant() {
+    return mLocalServiceBusinessRestaurant;
+  }
+
+  public CatalogSubVerticalList setFieldLocalServiceBusinessRestaurant(Object value) {
+    this.mLocalServiceBusinessRestaurant = value;
     return this;
   }
 
@@ -812,6 +845,7 @@ public class CatalogSubVerticalList extends APINode {
     this.mComputersAndTablets = instance.mComputersAndTablets;
     this.mComputersLaptopsAndTablets = instance.mComputersLaptopsAndTablets;
     this.mDiaperingAndPottyTraining = instance.mDiaperingAndPottyTraining;
+    this.mDigitalProductOffer = instance.mDigitalProductOffer;
     this.mElectronicAccessoriesAndCables = instance.mElectronicAccessoriesAndCables;
     this.mElectronicsAccessories = instance.mElectronicsAccessories;
     this.mFurniture = instance.mFurniture;
@@ -821,6 +855,8 @@ public class CatalogSubVerticalList extends APINode {
     this.mHouseholdAndCleaningSupplies = instance.mHouseholdAndCleaningSupplies;
     this.mJewelry = instance.mJewelry;
     this.mLargeAppliances = instance.mLargeAppliances;
+    this.mLocalServiceBusinessItem = instance.mLocalServiceBusinessItem;
+    this.mLocalServiceBusinessRestaurant = instance.mLocalServiceBusinessRestaurant;
     this.mLoyaltyOffer = instance.mLoyaltyOffer;
     this.mMeetupSpace = instance.mMeetupSpace;
     this.mNursery = instance.mNursery;

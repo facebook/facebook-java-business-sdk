@@ -81,6 +81,8 @@ public class AdAssetFeedSpec extends APINode {
   private List<AdAssetFeedSpecImage> mImages = null;
   @SerializedName("link_urls")
   private List<AdAssetFeedSpecLinkURL> mLinkUrls = null;
+  @SerializedName("onsite_destinations")
+  private List<Object> mOnsiteDestinations = null;
   @SerializedName("optimization_type")
   private String mOptimizationType = null;
   @SerializedName("posts")
@@ -387,6 +389,15 @@ public class AdAssetFeedSpec extends APINode {
     this.mLinkUrls = AdAssetFeedSpecLinkURL.getGson().fromJson(value, type);
     return this;
   }
+  public List<Object> getFieldOnsiteDestinations() {
+    return mOnsiteDestinations;
+  }
+
+  public AdAssetFeedSpec setFieldOnsiteDestinations(List<Object> value) {
+    this.mOnsiteDestinations = value;
+    return this;
+  }
+
   public String getFieldOptimizationType() {
     return mOptimizationType;
   }
@@ -606,6 +617,7 @@ public class AdAssetFeedSpec extends APINode {
     this.mGroups = instance.mGroups;
     this.mImages = instance.mImages;
     this.mLinkUrls = instance.mLinkUrls;
+    this.mOnsiteDestinations = instance.mOnsiteDestinations;
     this.mOptimizationType = instance.mOptimizationType;
     this.mPosts = instance.mPosts;
     this.mTitles = instance.mTitles;

@@ -23,11 +23,12 @@
 
  import com.facebook.ads.sdk.APIContext;
 import com.facebook.ads.sdk.APIException;
+import com.facebook.ads.sdk.serverside.ActionSource;
+import com.facebook.ads.sdk.serverside.CustomData;
 import com.facebook.ads.sdk.serverside.Event;
 import com.facebook.ads.sdk.serverside.EventRequest;
 import com.facebook.ads.sdk.serverside.EventResponse;
 import com.facebook.ads.sdk.serverside.UserData;
-import com.facebook.ads.sdk.serverside.CustomData;
 
 public class ServerSideApiExample {
 
@@ -39,22 +40,27 @@ public class ServerSideApiExample {
     context.setLogger(System.out);
 
     UserData userData = new UserData()
+        .email("joe@eg.com")
+        // It is recommended to send Client IP and User Agent for Conversions API Events.
+        .clientIpAddress(clientIpAddress)
+        .clientUserAgent(clientUserAgent)
         .fbc("fb.1.1554763741205.AbCdEfGhIjKlMnOpQrStUvWxYz1234567890")
-        .fbp("fb.1.1558571054389.1098115397")
-        .email("joe@eg.com");
+        .fbp("fb.1.1558571054389.1098115397");
 
     CustomData customData = new CustomData()
         .currency("usd")
         .value(123.45F);
 
-    Event pageViewEvent = new Event();
-    pageViewEvent.eventName("Purchase")
+    Event purchaseEvent = new Event();
+    purchaseEvent.eventName("Purchase")
         .eventTime(System.currentTimeMillis() / 1000L)
         .userData(userData)
-        .customData(customData);
+        .customData(customData)
+        .eventSourceUrl("http://jaspers-market.com/product/123")
+        .actionSource(ActionSource.website);
 
     EventRequest eventRequest = new EventRequest(PIXEL_ID, context);
-    eventRequest.addDataItem(pageViewEvent);
+    eventRequest.addDataItem(purchaseEvent);
 
     try {
       EventResponse response = eventRequest.execute();

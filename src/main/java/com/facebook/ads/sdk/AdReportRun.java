@@ -395,6 +395,7 @@ public class AdReportRun extends APINode {
       "adset_name",
       "adset_start",
       "age_targeting",
+      "attribution_setting",
       "auction_bid",
       "auction_competitiveness",
       "auction_max_competitor_bid",
@@ -750,6 +751,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestAgeTargetingField (boolean value) {
       this.requestField("age_targeting", value);
+      return this;
+    }
+    public APIRequestGetInsights requestAttributionSettingField () {
+      return this.requestAttributionSettingField(true);
+    }
+    public APIRequestGetInsights requestAttributionSettingField (boolean value) {
+      this.requestField("attribution_setting", value);
       return this;
     }
     public APIRequestGetInsights requestAuctionBidField () {

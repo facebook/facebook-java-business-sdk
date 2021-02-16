@@ -1404,6 +1404,7 @@ public class AdVideo extends APINode {
       "fan_count",
       "featured_video",
       "features",
+      "followers_count",
       "food_styles",
       "founded",
       "general_info",
@@ -1887,6 +1888,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestFeaturesField (boolean value) {
       this.requestField("features", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestFoodStylesField () {
@@ -3402,6 +3410,7 @@ public class AdVideo extends APINode {
       "fan_count",
       "featured_video",
       "features",
+      "followers_count",
       "food_styles",
       "founded",
       "general_info",
@@ -3885,6 +3894,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetSponsorTags requestFeaturesField (boolean value) {
       this.requestField("features", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
+    }
+    public APIRequestGetSponsorTags requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
       return this;
     }
     public APIRequestGetSponsorTags requestFoodStylesField () {
@@ -6180,6 +6196,8 @@ public class AdVideo extends APINode {
   }
 
   public static enum EnumContainerType {
+      @SerializedName("ACO_AUTOEXTRACTED_VIDEO")
+      VALUE_ACO_AUTOEXTRACTED_VIDEO("ACO_AUTOEXTRACTED_VIDEO"),
       @SerializedName("ACO_VIDEO_VARIATION")
       VALUE_ACO_VIDEO_VARIATION("ACO_VIDEO_VARIATION"),
       @SerializedName("AD_BREAK_PREVIEW")
@@ -6254,6 +6272,8 @@ public class AdVideo extends APINode {
       VALUE_FACECAST_DVR("FACECAST_DVR"),
       @SerializedName("FB_SHORTS")
       VALUE_FB_SHORTS("FB_SHORTS"),
+      @SerializedName("FB_SHORTS_GROUP_POST")
+      VALUE_FB_SHORTS_GROUP_POST("FB_SHORTS_GROUP_POST"),
       @SerializedName("FB_SHORTS_POST")
       VALUE_FB_SHORTS_POST("FB_SHORTS_POST"),
       @SerializedName("FUNDRAISER_COVER_VIDEO")

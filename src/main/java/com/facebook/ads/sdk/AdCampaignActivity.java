@@ -1238,6 +1238,8 @@ public class AdCampaignActivity extends APINode {
       VALUE_IMPRESSIONS("IMPRESSIONS"),
       @SerializedName("LINK_CLICKS")
       VALUE_LINK_CLICKS("LINK_CLICKS"),
+      @SerializedName("LISTING_INTERACTION")
+      VALUE_LISTING_INTERACTION("LISTING_INTERACTION"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
       @SerializedName("OFFER_CLAIMS")
@@ -1246,6 +1248,8 @@ public class AdCampaignActivity extends APINode {
       VALUE_PAGE_LIKES("PAGE_LIKES"),
       @SerializedName("POST_ENGAGEMENT")
       VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
+      @SerializedName("PURCHASE")
+      VALUE_PURCHASE("PURCHASE"),
       @SerializedName("THRUPLAY")
       VALUE_THRUPLAY("THRUPLAY"),
       ;
@@ -1271,6 +1275,8 @@ public class AdCampaignActivity extends APINode {
       VALUE_IMPRESSIONS("IMPRESSIONS"),
       @SerializedName("LINK_CLICKS")
       VALUE_LINK_CLICKS("LINK_CLICKS"),
+      @SerializedName("LISTING_INTERACTION")
+      VALUE_LISTING_INTERACTION("LISTING_INTERACTION"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
       @SerializedName("OFFER_CLAIMS")
@@ -1279,6 +1285,8 @@ public class AdCampaignActivity extends APINode {
       VALUE_PAGE_LIKES("PAGE_LIKES"),
       @SerializedName("POST_ENGAGEMENT")
       VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
+      @SerializedName("PURCHASE")
+      VALUE_PURCHASE("PURCHASE"),
       @SerializedName("THRUPLAY")
       VALUE_THRUPLAY("THRUPLAY"),
       ;

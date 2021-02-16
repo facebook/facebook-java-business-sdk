@@ -708,10 +708,6 @@ public class AdAccount extends APINode {
     return new APIRequestCreateReachFrequencyPrediction(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetRoas getRoas() {
-    return new APIRequestGetRoas(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetSavedAudiences getSavedAudiences() {
     return new APIRequestGetSavedAudiences(this.getPrefixedId().toString(), context);
   }
@@ -2580,6 +2576,7 @@ public class AdAccount extends APINode {
       "object_story_spec",
       "object_type",
       "object_url",
+      "place_page_set_id",
       "platform_customizations",
       "playable_asset_id",
       "portrait_customizations",
@@ -2876,6 +2873,11 @@ public class AdAccount extends APINode {
 
     public APIRequestCreateAdCreative setObjectUrl (String objectUrl) {
       this.setParam("object_url", objectUrl);
+      return this;
+    }
+
+    public APIRequestCreateAdCreative setPlacePageSetId (String placePageSetId) {
+      this.setParam("place_page_set_id", placePageSetId);
       return this;
     }
 
@@ -10025,7 +10027,6 @@ public class AdAccount extends APINode {
       "animated_effect_id",
       "application_id",
       "asked_fun_fact_prompt_id",
-      "attribution_app_id",
       "audio_story_wave_animation_handle",
       "chunk_session_id",
       "composer_entry_picker",
@@ -10189,11 +10190,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdVideo setAskedFunFactPromptId (String askedFunFactPromptId) {
       this.setParam("asked_fun_fact_prompt_id", askedFunFactPromptId);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setAttributionAppId (String attributionAppId) {
-      this.setParam("attribution_app_id", attributionAppId);
       return this;
     }
 
@@ -20457,6 +20453,7 @@ public class AdAccount extends APINode {
       "fan_count",
       "featured_video",
       "features",
+      "followers_count",
       "food_styles",
       "founded",
       "general_info",
@@ -20940,6 +20937,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetPromotePages requestFeaturesField (boolean value) {
       this.requestField("features", value);
+      return this;
+    }
+    public APIRequestGetPromotePages requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
+    }
+    public APIRequestGetPromotePages requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
       return this;
     }
     public APIRequestGetPromotePages requestFoodStylesField () {
@@ -23314,146 +23318,6 @@ public class AdAccount extends APINode {
 
     @Override
     public APIRequestCreateReachFrequencyPrediction requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestGetRoas extends APIRequest<AdAccountRoas> {
-
-    APINodeList<AdAccountRoas> lastResponse = null;
-    @Override
-    public APINodeList<AdAccountRoas> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "fields",
-      "filtering",
-      "time_increment",
-      "time_range",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<AdAccountRoas> parseResponse(String response, String header) throws APIException {
-      return AdAccountRoas.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<AdAccountRoas> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<AdAccountRoas> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<AdAccountRoas>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<AdAccountRoas>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<AdAccountRoas>>() {
-           public APINodeList<AdAccountRoas> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetRoas.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetRoas(String nodeId, APIContext context) {
-      super(context, nodeId, "/roas", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetRoas setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetRoas setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetRoas setFields (List<String> fields) {
-      this.setParam("fields", fields);
-      return this;
-    }
-    public APIRequestGetRoas setFields (String fields) {
-      this.setParam("fields", fields);
-      return this;
-    }
-
-    public APIRequestGetRoas setFiltering (List<Object> filtering) {
-      this.setParam("filtering", filtering);
-      return this;
-    }
-    public APIRequestGetRoas setFiltering (String filtering) {
-      this.setParam("filtering", filtering);
-      return this;
-    }
-
-    public APIRequestGetRoas setTimeIncrement (String timeIncrement) {
-      this.setParam("time_increment", timeIncrement);
-      return this;
-    }
-
-    public APIRequestGetRoas setTimeRange (Object timeRange) {
-      this.setParam("time_range", timeRange);
-      return this;
-    }
-    public APIRequestGetRoas setTimeRange (String timeRange) {
-      this.setParam("time_range", timeRange);
-      return this;
-    }
-
-    public APIRequestGetRoas requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetRoas requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetRoas requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetRoas requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetRoas requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetRoas requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

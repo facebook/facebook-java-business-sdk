@@ -2800,6 +2800,7 @@ public class Post extends APINode {
       "fan_count",
       "featured_video",
       "features",
+      "followers_count",
       "food_styles",
       "founded",
       "general_info",
@@ -3283,6 +3284,13 @@ public class Post extends APINode {
     }
     public APIRequestGetSponsorTags requestFeaturesField (boolean value) {
       this.requestField("features", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
+    }
+    public APIRequestGetSponsorTags requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
       return this;
     }
     public APIRequestGetSponsorTags requestFoodStylesField () {

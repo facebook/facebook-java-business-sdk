@@ -382,6 +382,10 @@ public class Business extends APINode {
     return new APIRequestGetBusinessUsers(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateBusinessUser createBusinessUser() {
+    return new APIRequestCreateBusinessUser(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateClaimCustomConversion createClaimCustomConversion() {
     return new APIRequestCreateClaimCustomConversion(this.getPrefixedId().toString(), context);
   }
@@ -468,6 +472,10 @@ public class Business extends APINode {
 
   public APIRequestGetExtendedCredits getExtendedCredits() {
     return new APIRequestGetExtendedCredits(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateFranchiseProgram createFranchiseProgram() {
+    return new APIRequestCreateFranchiseProgram(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetInitiatedAudienceSharingRequests getInitiatedAudienceSharingRequests() {
@@ -612,6 +620,10 @@ public class Business extends APINode {
 
   public APIRequestGetSystemUsers getSystemUsers() {
     return new APIRequestGetSystemUsers(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateSystemUser createSystemUser() {
+    return new APIRequestCreateSystemUser(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetThirdPartyMeasurementReportDataset getThirdPartyMeasurementReportDataset() {
@@ -4184,6 +4196,126 @@ public class Business extends APINode {
     }
   }
 
+  public static class APIRequestCreateBusinessUser extends APIRequest<BusinessUser> {
+
+    BusinessUser lastResponse = null;
+    @Override
+    public BusinessUser getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "email",
+      "role",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public BusinessUser parseResponse(String response, String header) throws APIException {
+      return BusinessUser.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public BusinessUser execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public BusinessUser execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<BusinessUser> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<BusinessUser> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, BusinessUser>() {
+           public BusinessUser apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateBusinessUser.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateBusinessUser(String nodeId, APIContext context) {
+      super(context, nodeId, "/business_users", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateBusinessUser setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBusinessUser setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateBusinessUser setEmail (String email) {
+      this.setParam("email", email);
+      return this;
+    }
+
+    public APIRequestCreateBusinessUser setRole (BusinessUser.EnumRole role) {
+      this.setParam("role", role);
+      return this;
+    }
+    public APIRequestCreateBusinessUser setRole (String role) {
+      this.setParam("role", role);
+      return this;
+    }
+
+    public APIRequestCreateBusinessUser requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateBusinessUser requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBusinessUser requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateBusinessUser requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBusinessUser requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBusinessUser requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestCreateClaimCustomConversion extends APIRequest<CustomConversion> {
 
     CustomConversion lastResponse = null;
@@ -6069,6 +6201,7 @@ public class Business extends APINode {
       "fan_count",
       "featured_video",
       "features",
+      "followers_count",
       "food_styles",
       "founded",
       "general_info",
@@ -6552,6 +6685,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientPages requestFeaturesField (boolean value) {
       this.requestField("features", value);
+      return this;
+    }
+    public APIRequestGetClientPages requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
+    }
+    public APIRequestGetClientPages requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
       return this;
     }
     public APIRequestGetClientPages requestFoodStylesField () {
@@ -8900,6 +9040,7 @@ public class Business extends APINode {
       "external_merchant_id",
       "facebook_channel",
       "has_discount_code",
+      "has_onsite_intent",
       "id",
       "instagram_channel",
       "merchant_alert_email",
@@ -9067,6 +9208,13 @@ public class Business extends APINode {
     }
     public APIRequestGetCommerceMerchantSettings requestHasDiscountCodeField (boolean value) {
       this.requestField("has_discount_code", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestHasOnsiteIntentField () {
+      return this.requestHasOnsiteIntentField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestHasOnsiteIntentField (boolean value) {
+      this.requestField("has_onsite_intent", value);
       return this;
     }
     public APIRequestGetCommerceMerchantSettings requestIdField () {
@@ -10152,6 +10300,172 @@ public class Business extends APINode {
       this.requestField("send_bill_to_biz_name", value);
       return this;
     }
+  }
+
+  public static class APIRequestCreateFranchiseProgram extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "business_asset_group",
+      "creative_folder",
+      "creative_spec_template_data",
+      "description",
+      "end_date",
+      "name",
+      "program_approval_type",
+      "shared_custom_audience",
+      "start_date",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateFranchiseProgram.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateFranchiseProgram(String nodeId, APIContext context) {
+      super(context, nodeId, "/franchise_programs", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateFranchiseProgram setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateFranchiseProgram setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateFranchiseProgram setBusinessAssetGroup (String businessAssetGroup) {
+      this.setParam("business_asset_group", businessAssetGroup);
+      return this;
+    }
+
+    public APIRequestCreateFranchiseProgram setCreativeFolder (String creativeFolder) {
+      this.setParam("creative_folder", creativeFolder);
+      return this;
+    }
+
+    public APIRequestCreateFranchiseProgram setCreativeSpecTemplateData (Map<String, String> creativeSpecTemplateData) {
+      this.setParam("creative_spec_template_data", creativeSpecTemplateData);
+      return this;
+    }
+    public APIRequestCreateFranchiseProgram setCreativeSpecTemplateData (String creativeSpecTemplateData) {
+      this.setParam("creative_spec_template_data", creativeSpecTemplateData);
+      return this;
+    }
+
+    public APIRequestCreateFranchiseProgram setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestCreateFranchiseProgram setEndDate (String endDate) {
+      this.setParam("end_date", endDate);
+      return this;
+    }
+
+    public APIRequestCreateFranchiseProgram setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateFranchiseProgram setProgramApprovalType (EnumProgramApprovalType programApprovalType) {
+      this.setParam("program_approval_type", programApprovalType);
+      return this;
+    }
+    public APIRequestCreateFranchiseProgram setProgramApprovalType (String programApprovalType) {
+      this.setParam("program_approval_type", programApprovalType);
+      return this;
+    }
+
+    public APIRequestCreateFranchiseProgram setSharedCustomAudience (String sharedCustomAudience) {
+      this.setParam("shared_custom_audience", sharedCustomAudience);
+      return this;
+    }
+
+    public APIRequestCreateFranchiseProgram setStartDate (String startDate) {
+      this.setParam("start_date", startDate);
+      return this;
+    }
+
+    public APIRequestCreateFranchiseProgram requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateFranchiseProgram requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateFranchiseProgram requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateFranchiseProgram requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateFranchiseProgram requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateFranchiseProgram requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetInitiatedAudienceSharingRequests extends APIRequest<BusinessAssetSharingAgreement> {
@@ -14277,6 +14591,7 @@ public class Business extends APINode {
       "fan_count",
       "featured_video",
       "features",
+      "followers_count",
       "food_styles",
       "founded",
       "general_info",
@@ -14760,6 +15075,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedPages requestFeaturesField (boolean value) {
       this.requestField("features", value);
+      return this;
+    }
+    public APIRequestGetOwnedPages requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
+    }
+    public APIRequestGetOwnedPages requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
       return this;
     }
     public APIRequestGetOwnedPages requestFoodStylesField () {
@@ -18104,6 +18426,136 @@ public class Business extends APINode {
     }
   }
 
+  public static class APIRequestCreateSystemUser extends APIRequest<SystemUser> {
+
+    SystemUser lastResponse = null;
+    @Override
+    public SystemUser getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "name",
+      "role",
+      "system_user_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public SystemUser parseResponse(String response, String header) throws APIException {
+      return SystemUser.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public SystemUser execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public SystemUser execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<SystemUser> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<SystemUser> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, SystemUser>() {
+           public SystemUser apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateSystemUser.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateSystemUser(String nodeId, APIContext context) {
+      super(context, nodeId, "/system_users", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateSystemUser setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSystemUser setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateSystemUser setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateSystemUser setRole (SystemUser.EnumRole role) {
+      this.setParam("role", role);
+      return this;
+    }
+    public APIRequestCreateSystemUser setRole (String role) {
+      this.setParam("role", role);
+      return this;
+    }
+
+    public APIRequestCreateSystemUser setSystemUserId (Long systemUserId) {
+      this.setParam("system_user_id", systemUserId);
+      return this;
+    }
+    public APIRequestCreateSystemUser setSystemUserId (String systemUserId) {
+      this.setParam("system_user_id", systemUserId);
+      return this;
+    }
+
+    public APIRequestCreateSystemUser requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateSystemUser requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSystemUser requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateSystemUser requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSystemUser requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSystemUser requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetThirdPartyMeasurementReportDataset extends APIRequest<ThirdPartyMeasurementReportDataset> {
 
     APINodeList<ThirdPartyMeasurementReportDataset> lastResponse = null;
@@ -18986,6 +19438,25 @@ public class Business extends APINode {
       private String value;
 
       private EnumPagePermittedTasks(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumProgramApprovalType {
+      @SerializedName("APPROVAL")
+      VALUE_APPROVAL("APPROVAL"),
+      @SerializedName("PUBLIC")
+      VALUE_PUBLIC("PUBLIC"),
+      ;
+
+      private String value;
+
+      private EnumProgramApprovalType(String value) {
         this.value = value;
       }
 

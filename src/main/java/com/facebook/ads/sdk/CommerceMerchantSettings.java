@@ -73,6 +73,8 @@ public class CommerceMerchantSettings extends APINode {
   private Object mFacebookChannel = null;
   @SerializedName("has_discount_code")
   private Boolean mHasDiscountCode = null;
+  @SerializedName("has_onsite_intent")
+  private Boolean mHasOnsiteIntent = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("instagram_channel")
@@ -387,6 +389,10 @@ public class CommerceMerchantSettings extends APINode {
 
   public Boolean getFieldHasDiscountCode() {
     return mHasDiscountCode;
+  }
+
+  public Boolean getFieldHasOnsiteIntent() {
+    return mHasOnsiteIntent;
   }
 
   public String getFieldId() {
@@ -2458,6 +2464,7 @@ public class CommerceMerchantSettings extends APINode {
       "external_merchant_id",
       "facebook_channel",
       "has_discount_code",
+      "has_onsite_intent",
       "id",
       "instagram_channel",
       "merchant_alert_email",
@@ -2625,6 +2632,13 @@ public class CommerceMerchantSettings extends APINode {
     }
     public APIRequestGet requestHasDiscountCodeField (boolean value) {
       this.requestField("has_discount_code", value);
+      return this;
+    }
+    public APIRequestGet requestHasOnsiteIntentField () {
+      return this.requestHasOnsiteIntentField(true);
+    }
+    public APIRequestGet requestHasOnsiteIntentField (boolean value) {
+      this.requestField("has_onsite_intent", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -2802,6 +2816,7 @@ public class CommerceMerchantSettings extends APINode {
     this.mExternalMerchantId = instance.mExternalMerchantId;
     this.mFacebookChannel = instance.mFacebookChannel;
     this.mHasDiscountCode = instance.mHasDiscountCode;
+    this.mHasOnsiteIntent = instance.mHasOnsiteIntent;
     this.mId = instance.mId;
     this.mInstagramChannel = instance.mInstagramChannel;
     this.mMerchantAlertEmail = instance.mMerchantAlertEmail;

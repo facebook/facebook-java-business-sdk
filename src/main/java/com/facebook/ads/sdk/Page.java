@@ -139,6 +139,8 @@ public class Page extends APINode {
   private AdVideo mFeaturedVideo = null;
   @SerializedName("features")
   private String mFeatures = null;
+  @SerializedName("followers_count")
+  private Long mFollowersCount = null;
   @SerializedName("food_styles")
   private List<String> mFoodStyles = null;
   @SerializedName("founded")
@@ -624,6 +626,10 @@ public class Page extends APINode {
     return new APIRequestGetClaimedUrls(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetCommerceEligibility getCommerceEligibility() {
+    return new APIRequestGetCommerceEligibility(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetCommerceMerchantSettings getCommerceMerchantSettings() {
     return new APIRequestGetCommerceMerchantSettings(this.getPrefixedId().toString(), context);
   }
@@ -694,6 +700,14 @@ public class Page extends APINode {
 
   public APIRequestGetGlobalBrandChildren getGlobalBrandChildren() {
     return new APIRequestGetGlobalBrandChildren(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetImageCopyrights getImageCopyrights() {
+    return new APIRequestGetImageCopyrights(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateImageCopyright createImageCopyright() {
+    return new APIRequestCreateImageCopyright(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetIndexedVideos getIndexedVideos() {
@@ -1169,6 +1183,10 @@ public class Page extends APINode {
 
   public String getFieldFeatures() {
     return mFeatures;
+  }
+
+  public Long getFieldFollowersCount() {
+    return mFollowersCount;
   }
 
   public List<String> getFieldFoodStyles() {
@@ -5145,6 +5163,126 @@ public class Page extends APINode {
     }
   }
 
+  public static class APIRequestGetCommerceEligibility extends APIRequest<PageCommerceEligibility> {
+
+    APINodeList<PageCommerceEligibility> lastResponse = null;
+    @Override
+    public APINodeList<PageCommerceEligibility> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "offsite",
+      "onsite",
+    };
+
+    @Override
+    public APINodeList<PageCommerceEligibility> parseResponse(String response, String header) throws APIException {
+      return PageCommerceEligibility.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<PageCommerceEligibility> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<PageCommerceEligibility> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<PageCommerceEligibility>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<PageCommerceEligibility>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<PageCommerceEligibility>>() {
+           public APINodeList<PageCommerceEligibility> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetCommerceEligibility.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetCommerceEligibility(String nodeId, APIContext context) {
+      super(context, nodeId, "/commerce_eligibility", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCommerceEligibility setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCommerceEligibility setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCommerceEligibility requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCommerceEligibility requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCommerceEligibility requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCommerceEligibility requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCommerceEligibility requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCommerceEligibility requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetCommerceEligibility requestOffsiteField () {
+      return this.requestOffsiteField(true);
+    }
+    public APIRequestGetCommerceEligibility requestOffsiteField (boolean value) {
+      this.requestField("offsite", value);
+      return this;
+    }
+    public APIRequestGetCommerceEligibility requestOnsiteField () {
+      return this.requestOnsiteField(true);
+    }
+    public APIRequestGetCommerceEligibility requestOnsiteField (boolean value) {
+      this.requestField("onsite", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetCommerceMerchantSettings extends APIRequest<CommerceMerchantSettings> {
 
     APINodeList<CommerceMerchantSettings> lastResponse = null;
@@ -5165,6 +5303,7 @@ public class Page extends APINode {
       "external_merchant_id",
       "facebook_channel",
       "has_discount_code",
+      "has_onsite_intent",
       "id",
       "instagram_channel",
       "merchant_alert_email",
@@ -5332,6 +5471,13 @@ public class Page extends APINode {
     }
     public APIRequestGetCommerceMerchantSettings requestHasDiscountCodeField (boolean value) {
       this.requestField("has_discount_code", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestHasOnsiteIntentField () {
+      return this.requestHasOnsiteIntentField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestHasOnsiteIntentField (boolean value) {
+      this.requestField("has_onsite_intent", value);
       return this;
     }
     public APIRequestGetCommerceMerchantSettings requestIdField () {
@@ -6678,6 +6824,7 @@ public class Page extends APINode {
       "fan_count",
       "featured_video",
       "features",
+      "followers_count",
       "food_styles",
       "founded",
       "general_info",
@@ -7161,6 +7308,13 @@ public class Page extends APINode {
     }
     public APIRequestGetCrosspostWhitelistedPages requestFeaturesField (boolean value) {
       this.requestField("features", value);
+      return this;
+    }
+    public APIRequestGetCrosspostWhitelistedPages requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
+    }
+    public APIRequestGetCrosspostWhitelistedPages requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
       return this;
     }
     public APIRequestGetCrosspostWhitelistedPages requestFoodStylesField () {
@@ -10656,6 +10810,7 @@ public class Page extends APINode {
       "fan_count",
       "featured_video",
       "features",
+      "followers_count",
       "food_styles",
       "founded",
       "general_info",
@@ -11139,6 +11294,13 @@ public class Page extends APINode {
     }
     public APIRequestGetGlobalBrandChildren requestFeaturesField (boolean value) {
       this.requestField("features", value);
+      return this;
+    }
+    public APIRequestGetGlobalBrandChildren requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
+    }
+    public APIRequestGetGlobalBrandChildren requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
       return this;
     }
     public APIRequestGetGlobalBrandChildren requestFoodStylesField () {
@@ -11841,6 +12003,396 @@ public class Page extends APINode {
       this.requestField("written_by", value);
       return this;
     }
+  }
+
+  public static class APIRequestGetImageCopyrights extends APIRequest<ImageCopyright> {
+
+    APINodeList<ImageCopyright> lastResponse = null;
+    @Override
+    public APINodeList<ImageCopyright> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "artist",
+      "copyright_monitoring_status",
+      "creation_time",
+      "creator",
+      "custom_id",
+      "description",
+      "filename",
+      "id",
+      "image",
+      "matches_count",
+      "original_content_creation_date",
+      "ownership_countries",
+      "tags",
+      "title",
+      "update_time",
+    };
+
+    @Override
+    public APINodeList<ImageCopyright> parseResponse(String response, String header) throws APIException {
+      return ImageCopyright.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<ImageCopyright> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ImageCopyright> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<ImageCopyright>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<ImageCopyright>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<ImageCopyright>>() {
+           public APINodeList<ImageCopyright> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetImageCopyrights.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetImageCopyrights(String nodeId, APIContext context) {
+      super(context, nodeId, "/image_copyrights", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetImageCopyrights setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetImageCopyrights setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetImageCopyrights requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetImageCopyrights requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetImageCopyrights requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetImageCopyrights requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetImageCopyrights requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetImageCopyrights requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetImageCopyrights requestArtistField () {
+      return this.requestArtistField(true);
+    }
+    public APIRequestGetImageCopyrights requestArtistField (boolean value) {
+      this.requestField("artist", value);
+      return this;
+    }
+    public APIRequestGetImageCopyrights requestCopyrightMonitoringStatusField () {
+      return this.requestCopyrightMonitoringStatusField(true);
+    }
+    public APIRequestGetImageCopyrights requestCopyrightMonitoringStatusField (boolean value) {
+      this.requestField("copyright_monitoring_status", value);
+      return this;
+    }
+    public APIRequestGetImageCopyrights requestCreationTimeField () {
+      return this.requestCreationTimeField(true);
+    }
+    public APIRequestGetImageCopyrights requestCreationTimeField (boolean value) {
+      this.requestField("creation_time", value);
+      return this;
+    }
+    public APIRequestGetImageCopyrights requestCreatorField () {
+      return this.requestCreatorField(true);
+    }
+    public APIRequestGetImageCopyrights requestCreatorField (boolean value) {
+      this.requestField("creator", value);
+      return this;
+    }
+    public APIRequestGetImageCopyrights requestCustomIdField () {
+      return this.requestCustomIdField(true);
+    }
+    public APIRequestGetImageCopyrights requestCustomIdField (boolean value) {
+      this.requestField("custom_id", value);
+      return this;
+    }
+    public APIRequestGetImageCopyrights requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetImageCopyrights requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetImageCopyrights requestFilenameField () {
+      return this.requestFilenameField(true);
+    }
+    public APIRequestGetImageCopyrights requestFilenameField (boolean value) {
+      this.requestField("filename", value);
+      return this;
+    }
+    public APIRequestGetImageCopyrights requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetImageCopyrights requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetImageCopyrights requestImageField () {
+      return this.requestImageField(true);
+    }
+    public APIRequestGetImageCopyrights requestImageField (boolean value) {
+      this.requestField("image", value);
+      return this;
+    }
+    public APIRequestGetImageCopyrights requestMatchesCountField () {
+      return this.requestMatchesCountField(true);
+    }
+    public APIRequestGetImageCopyrights requestMatchesCountField (boolean value) {
+      this.requestField("matches_count", value);
+      return this;
+    }
+    public APIRequestGetImageCopyrights requestOriginalContentCreationDateField () {
+      return this.requestOriginalContentCreationDateField(true);
+    }
+    public APIRequestGetImageCopyrights requestOriginalContentCreationDateField (boolean value) {
+      this.requestField("original_content_creation_date", value);
+      return this;
+    }
+    public APIRequestGetImageCopyrights requestOwnershipCountriesField () {
+      return this.requestOwnershipCountriesField(true);
+    }
+    public APIRequestGetImageCopyrights requestOwnershipCountriesField (boolean value) {
+      this.requestField("ownership_countries", value);
+      return this;
+    }
+    public APIRequestGetImageCopyrights requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGetImageCopyrights requestTagsField (boolean value) {
+      this.requestField("tags", value);
+      return this;
+    }
+    public APIRequestGetImageCopyrights requestTitleField () {
+      return this.requestTitleField(true);
+    }
+    public APIRequestGetImageCopyrights requestTitleField (boolean value) {
+      this.requestField("title", value);
+      return this;
+    }
+    public APIRequestGetImageCopyrights requestUpdateTimeField () {
+      return this.requestUpdateTimeField(true);
+    }
+    public APIRequestGetImageCopyrights requestUpdateTimeField (boolean value) {
+      this.requestField("update_time", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreateImageCopyright extends APIRequest<ImageCopyright> {
+
+    ImageCopyright lastResponse = null;
+    @Override
+    public ImageCopyright getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "artist",
+      "creator",
+      "custom_id",
+      "description",
+      "filename",
+      "geo_ownership",
+      "original_content_creation_date",
+      "reference_photo",
+      "title",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public ImageCopyright parseResponse(String response, String header) throws APIException {
+      return ImageCopyright.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public ImageCopyright execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ImageCopyright execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<ImageCopyright> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ImageCopyright> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, ImageCopyright>() {
+           public ImageCopyright apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateImageCopyright.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateImageCopyright(String nodeId, APIContext context) {
+      super(context, nodeId, "/image_copyrights", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateImageCopyright setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateImageCopyright setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateImageCopyright setArtist (String artist) {
+      this.setParam("artist", artist);
+      return this;
+    }
+
+    public APIRequestCreateImageCopyright setCreator (String creator) {
+      this.setParam("creator", creator);
+      return this;
+    }
+
+    public APIRequestCreateImageCopyright setCustomId (String customId) {
+      this.setParam("custom_id", customId);
+      return this;
+    }
+
+    public APIRequestCreateImageCopyright setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestCreateImageCopyright setFilename (String filename) {
+      this.setParam("filename", filename);
+      return this;
+    }
+
+    public APIRequestCreateImageCopyright setGeoOwnership (List<ImageCopyright.EnumGeoOwnership> geoOwnership) {
+      this.setParam("geo_ownership", geoOwnership);
+      return this;
+    }
+    public APIRequestCreateImageCopyright setGeoOwnership (String geoOwnership) {
+      this.setParam("geo_ownership", geoOwnership);
+      return this;
+    }
+
+    public APIRequestCreateImageCopyright setOriginalContentCreationDate (Long originalContentCreationDate) {
+      this.setParam("original_content_creation_date", originalContentCreationDate);
+      return this;
+    }
+    public APIRequestCreateImageCopyright setOriginalContentCreationDate (String originalContentCreationDate) {
+      this.setParam("original_content_creation_date", originalContentCreationDate);
+      return this;
+    }
+
+    public APIRequestCreateImageCopyright setReferencePhoto (String referencePhoto) {
+      this.setParam("reference_photo", referencePhoto);
+      return this;
+    }
+
+    public APIRequestCreateImageCopyright setTitle (String title) {
+      this.setParam("title", title);
+      return this;
+    }
+
+    public APIRequestCreateImageCopyright requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateImageCopyright requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateImageCopyright requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateImageCopyright requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateImageCopyright requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateImageCopyright requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetIndexedVideos extends APIRequest<AdVideo> {
@@ -13855,6 +14407,7 @@ public class Page extends APINode {
       "fan_count",
       "featured_video",
       "features",
+      "followers_count",
       "food_styles",
       "founded",
       "general_info",
@@ -14343,6 +14896,13 @@ public class Page extends APINode {
     }
     public APIRequestGetLikes requestFeaturesField (boolean value) {
       this.requestField("features", value);
+      return this;
+    }
+    public APIRequestGetLikes requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
+    }
+    public APIRequestGetLikes requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
       return this;
     }
     public APIRequestGetLikes requestFoodStylesField () {
@@ -16224,6 +16784,7 @@ public class Page extends APINode {
       "fan_count",
       "featured_video",
       "features",
+      "followers_count",
       "food_styles",
       "founded",
       "general_info",
@@ -16707,6 +17268,13 @@ public class Page extends APINode {
     }
     public APIRequestGetLocations requestFeaturesField (boolean value) {
       this.requestField("features", value);
+      return this;
+    }
+    public APIRequestGetLocations requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
+    }
+    public APIRequestGetLocations requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
       return this;
     }
     public APIRequestGetLocations requestFoodStylesField () {
@@ -17427,6 +17995,7 @@ public class Page extends APINode {
       "location",
       "location_page_id",
       "old_store_number",
+      "page_username",
       "permanently_closed",
       "phone",
       "pickup_options",
@@ -17561,6 +18130,11 @@ public class Page extends APINode {
     }
     public APIRequestCreateLocation setOldStoreNumber (String oldStoreNumber) {
       this.setParam("old_store_number", oldStoreNumber);
+      return this;
+    }
+
+    public APIRequestCreateLocation setPageUsername (String pageUsername) {
+      this.setParam("page_username", pageUsername);
       return this;
     }
 
@@ -30110,7 +30684,6 @@ public class Page extends APINode {
       "animated_effect_id",
       "application_id",
       "asked_fun_fact_prompt_id",
-      "attribution_app_id",
       "audio_story_wave_animation_handle",
       "backdated_post",
       "call_to_action",
@@ -30293,11 +30866,6 @@ public class Page extends APINode {
     }
     public APIRequestCreateVideo setAskedFunFactPromptId (String askedFunFactPromptId) {
       this.setParam("asked_fun_fact_prompt_id", askedFunFactPromptId);
-      return this;
-    }
-
-    public APIRequestCreateVideo setAttributionAppId (String attributionAppId) {
-      this.setParam("attribution_app_id", attributionAppId);
       return this;
     }
 
@@ -31605,6 +32173,7 @@ public class Page extends APINode {
       "fan_count",
       "featured_video",
       "features",
+      "followers_count",
       "food_styles",
       "founded",
       "general_info",
@@ -32093,6 +32662,13 @@ public class Page extends APINode {
     }
     public APIRequestGet requestFeaturesField (boolean value) {
       this.requestField("features", value);
+      return this;
+    }
+    public APIRequestGet requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
+    }
+    public APIRequestGet requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
       return this;
     }
     public APIRequestGet requestFoodStylesField () {
@@ -34365,6 +34941,7 @@ public class Page extends APINode {
     this.mFanCount = instance.mFanCount;
     this.mFeaturedVideo = instance.mFeaturedVideo;
     this.mFeatures = instance.mFeatures;
+    this.mFollowersCount = instance.mFollowersCount;
     this.mFoodStyles = instance.mFoodStyles;
     this.mFounded = instance.mFounded;
     this.mGeneralInfo = instance.mGeneralInfo;

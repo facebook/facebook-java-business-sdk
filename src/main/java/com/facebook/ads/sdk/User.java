@@ -364,6 +364,10 @@ public class User extends APINode {
     return new APIRequestDeleteAccessTokens(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateAccessToken createAccessToken() {
+    return new APIRequestCreateAccessToken(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetAccounts getAccounts() {
     return new APIRequestGetAccounts(this.getPrefixedId().toString(), context);
   }
@@ -434,6 +438,10 @@ public class User extends APINode {
 
   public APIRequestGetConversations getConversations() {
     return new APIRequestGetConversations(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetCustomLabels getCustomLabels() {
+    return new APIRequestGetCustomLabels(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetEvents getEvents() {
@@ -876,6 +884,136 @@ public class User extends APINode {
 
   }
 
+  public static class APIRequestCreateAccessToken extends APIRequest<User> {
+
+    User lastResponse = null;
+    @Override
+    public User getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "business_app",
+      "page_id",
+      "scope",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public User parseResponse(String response, String header) throws APIException {
+      return User.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public User execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public User execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<User> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<User> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, User>() {
+           public User apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateAccessToken.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateAccessToken(String nodeId, APIContext context) {
+      super(context, nodeId, "/access_tokens", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateAccessToken setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAccessToken setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateAccessToken setBusinessApp (Long businessApp) {
+      this.setParam("business_app", businessApp);
+      return this;
+    }
+    public APIRequestCreateAccessToken setBusinessApp (String businessApp) {
+      this.setParam("business_app", businessApp);
+      return this;
+    }
+
+    public APIRequestCreateAccessToken setPageId (String pageId) {
+      this.setParam("page_id", pageId);
+      return this;
+    }
+
+    public APIRequestCreateAccessToken setScope (List<Permission> scope) {
+      this.setParam("scope", scope);
+      return this;
+    }
+    public APIRequestCreateAccessToken setScope (String scope) {
+      this.setParam("scope", scope);
+      return this;
+    }
+
+    public APIRequestCreateAccessToken requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateAccessToken requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAccessToken requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateAccessToken requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAccessToken requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAccessToken requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetAccounts extends APIRequest<Page> {
 
     APINodeList<Page> lastResponse = null;
@@ -931,6 +1069,7 @@ public class User extends APINode {
       "fan_count",
       "featured_video",
       "features",
+      "followers_count",
       "food_styles",
       "founded",
       "general_info",
@@ -1432,6 +1571,13 @@ public class User extends APINode {
     }
     public APIRequestGetAccounts requestFeaturesField (boolean value) {
       this.requestField("features", value);
+      return this;
+    }
+    public APIRequestGetAccounts requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
+    }
+    public APIRequestGetAccounts requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
       return this;
     }
     public APIRequestGetAccounts requestFoodStylesField () {
@@ -4825,6 +4971,7 @@ public class User extends APINode {
       "fan_count",
       "featured_video",
       "features",
+      "followers_count",
       "food_styles",
       "founded",
       "general_info",
@@ -5308,6 +5455,13 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedPages requestFeaturesField (boolean value) {
       this.requestField("features", value);
+      return this;
+    }
+    public APIRequestGetAssignedPages requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
+    }
+    public APIRequestGetAssignedPages requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
       return this;
     }
     public APIRequestGetAssignedPages requestFoodStylesField () {
@@ -7204,6 +7358,126 @@ public class User extends APINode {
     }
     public APIRequestGetConversations requestWallpaperField (boolean value) {
       this.requestField("wallpaper", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetCustomLabels extends APIRequest<PageUserMessageThreadLabel> {
+
+    APINodeList<PageUserMessageThreadLabel> lastResponse = null;
+    @Override
+    public APINodeList<PageUserMessageThreadLabel> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "id",
+      "name",
+    };
+
+    @Override
+    public APINodeList<PageUserMessageThreadLabel> parseResponse(String response, String header) throws APIException {
+      return PageUserMessageThreadLabel.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<PageUserMessageThreadLabel> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<PageUserMessageThreadLabel> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<PageUserMessageThreadLabel>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<PageUserMessageThreadLabel>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<PageUserMessageThreadLabel>>() {
+           public APINodeList<PageUserMessageThreadLabel> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetCustomLabels.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetCustomLabels(String nodeId, APIContext context) {
+      super(context, nodeId, "/custom_labels", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCustomLabels setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCustomLabels setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCustomLabels requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCustomLabels requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCustomLabels requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCustomLabels requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCustomLabels requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCustomLabels requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetCustomLabels requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetCustomLabels requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetCustomLabels requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetCustomLabels requestNameField (boolean value) {
+      this.requestField("name", value);
       return this;
     }
   }
@@ -11066,6 +11340,7 @@ public class User extends APINode {
       "fan_count",
       "featured_video",
       "features",
+      "followers_count",
       "food_styles",
       "founded",
       "general_info",
@@ -11554,6 +11829,13 @@ public class User extends APINode {
     }
     public APIRequestGetLikes requestFeaturesField (boolean value) {
       this.requestField("features", value);
+      return this;
+    }
+    public APIRequestGetLikes requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
+    }
+    public APIRequestGetLikes requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
       return this;
     }
     public APIRequestGetLikes requestFoodStylesField () {
@@ -13276,6 +13558,7 @@ public class User extends APINode {
       "fan_count",
       "featured_video",
       "features",
+      "followers_count",
       "food_styles",
       "founded",
       "general_info",
@@ -13764,6 +14047,13 @@ public class User extends APINode {
     }
     public APIRequestGetMusic requestFeaturesField (boolean value) {
       this.requestField("features", value);
+      return this;
+    }
+    public APIRequestGetMusic requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
+    }
+    public APIRequestGetMusic requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
       return this;
     }
     public APIRequestGetMusic requestFoodStylesField () {
@@ -18216,7 +18506,6 @@ public class User extends APINode {
       "animated_effect_id",
       "application_id",
       "asked_fun_fact_prompt_id",
-      "attribution_app_id",
       "audio_story_wave_animation_handle",
       "composer_entry_picker",
       "composer_entry_point",
@@ -18373,11 +18662,6 @@ public class User extends APINode {
     }
     public APIRequestCreateVideo setAskedFunFactPromptId (String askedFunFactPromptId) {
       this.setParam("asked_fun_fact_prompt_id", askedFunFactPromptId);
-      return this;
-    }
-
-    public APIRequestCreateVideo setAttributionAppId (String attributionAppId) {
-      this.setParam("attribution_app_id", attributionAppId);
       return this;
     }
 

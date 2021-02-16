@@ -2044,6 +2044,7 @@ public class ProductFeed extends APINode {
       "additional_variant_attributes",
       "age_group",
       "applinks",
+      "ar_data",
       "availability",
       "brand",
       "capability_to_review_status",
@@ -2237,6 +2238,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetProducts requestApplinksField (boolean value) {
       this.requestField("applinks", value);
+      return this;
+    }
+    public APIRequestGetProducts requestArDataField () {
+      return this.requestArDataField(true);
+    }
+    public APIRequestGetProducts requestArDataField (boolean value) {
+      this.requestField("ar_data", value);
       return this;
     }
     public APIRequestGetProducts requestAvailabilityField () {
@@ -5057,6 +5065,8 @@ public class ProductFeed extends APINode {
       VALUE_COMPUTERS_AND_TABLETS("COMPUTERS_AND_TABLETS"),
       @SerializedName("DIAPERING_AND_POTTY_TRAINING")
       VALUE_DIAPERING_AND_POTTY_TRAINING("DIAPERING_AND_POTTY_TRAINING"),
+      @SerializedName("DIGITAL_PRODUCT_OFFER")
+      VALUE_DIGITAL_PRODUCT_OFFER("DIGITAL_PRODUCT_OFFER"),
       @SerializedName("ELECTRONICS_ACCESSORIES")
       VALUE_ELECTRONICS_ACCESSORIES("ELECTRONICS_ACCESSORIES"),
       @SerializedName("FURNITURE")

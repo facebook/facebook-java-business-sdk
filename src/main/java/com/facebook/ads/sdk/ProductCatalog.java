@@ -316,6 +316,10 @@ public class ProductCatalog extends APINode {
     return new APIRequestGetAutomotiveModels(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateAutomotiveModel createAutomotiveModel() {
+    return new APIRequestCreateAutomotiveModel(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateBatch createBatch() {
     return new APIRequestCreateBatch(this.getPrefixedId().toString(), context);
   }
@@ -1732,6 +1736,192 @@ public class ProductCatalog extends APINode {
       this.requestField("year", value);
       return this;
     }
+  }
+
+  public static class APIRequestCreateAutomotiveModel extends APIRequest<AutomotiveModel> {
+
+    AutomotiveModel lastResponse = null;
+    @Override
+    public AutomotiveModel getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "automotive_model_id",
+      "body_style",
+      "currency",
+      "description",
+      "images",
+      "make",
+      "model",
+      "price",
+      "title",
+      "url",
+      "year",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AutomotiveModel parseResponse(String response, String header) throws APIException {
+      return AutomotiveModel.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public AutomotiveModel execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AutomotiveModel execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<AutomotiveModel> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AutomotiveModel> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, AutomotiveModel>() {
+           public AutomotiveModel apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateAutomotiveModel.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateAutomotiveModel(String nodeId, APIContext context) {
+      super(context, nodeId, "/automotive_models", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateAutomotiveModel setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAutomotiveModel setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateAutomotiveModel setAutomotiveModelId (String automotiveModelId) {
+      this.setParam("automotive_model_id", automotiveModelId);
+      return this;
+    }
+
+    public APIRequestCreateAutomotiveModel setBodyStyle (AutomotiveModel.EnumBodyStyle bodyStyle) {
+      this.setParam("body_style", bodyStyle);
+      return this;
+    }
+    public APIRequestCreateAutomotiveModel setBodyStyle (String bodyStyle) {
+      this.setParam("body_style", bodyStyle);
+      return this;
+    }
+
+    public APIRequestCreateAutomotiveModel setCurrency (String currency) {
+      this.setParam("currency", currency);
+      return this;
+    }
+
+    public APIRequestCreateAutomotiveModel setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestCreateAutomotiveModel setImages (List<Object> images) {
+      this.setParam("images", images);
+      return this;
+    }
+    public APIRequestCreateAutomotiveModel setImages (String images) {
+      this.setParam("images", images);
+      return this;
+    }
+
+    public APIRequestCreateAutomotiveModel setMake (String make) {
+      this.setParam("make", make);
+      return this;
+    }
+
+    public APIRequestCreateAutomotiveModel setModel (String model) {
+      this.setParam("model", model);
+      return this;
+    }
+
+    public APIRequestCreateAutomotiveModel setPrice (Long price) {
+      this.setParam("price", price);
+      return this;
+    }
+    public APIRequestCreateAutomotiveModel setPrice (String price) {
+      this.setParam("price", price);
+      return this;
+    }
+
+    public APIRequestCreateAutomotiveModel setTitle (String title) {
+      this.setParam("title", title);
+      return this;
+    }
+
+    public APIRequestCreateAutomotiveModel setUrl (String url) {
+      this.setParam("url", url);
+      return this;
+    }
+
+    public APIRequestCreateAutomotiveModel setYear (Long year) {
+      this.setParam("year", year);
+      return this;
+    }
+    public APIRequestCreateAutomotiveModel setYear (String year) {
+      this.setParam("year", year);
+      return this;
+    }
+
+    public APIRequestCreateAutomotiveModel requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateAutomotiveModel requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAutomotiveModel requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateAutomotiveModel requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAutomotiveModel requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAutomotiveModel requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestCreateBatch extends APIRequest<ProductCatalog> {
@@ -5703,8 +5893,8 @@ public class ProductCatalog extends APINode {
       "quoted_fields_mode",
       "rules",
       "schedule",
+      "selected_override_fields",
       "update_schedule",
-      "whitelisted_properties",
     };
 
     public static final String[] FIELDS = {
@@ -5870,17 +6060,17 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateProductFeed setUpdateSchedule (String updateSchedule) {
-      this.setParam("update_schedule", updateSchedule);
+    public APIRequestCreateProductFeed setSelectedOverrideFields (List<String> selectedOverrideFields) {
+      this.setParam("selected_override_fields", selectedOverrideFields);
+      return this;
+    }
+    public APIRequestCreateProductFeed setSelectedOverrideFields (String selectedOverrideFields) {
+      this.setParam("selected_override_fields", selectedOverrideFields);
       return this;
     }
 
-    public APIRequestCreateProductFeed setWhitelistedProperties (List<String> whitelistedProperties) {
-      this.setParam("whitelisted_properties", whitelistedProperties);
-      return this;
-    }
-    public APIRequestCreateProductFeed setWhitelistedProperties (String whitelistedProperties) {
-      this.setParam("whitelisted_properties", whitelistedProperties);
+    public APIRequestCreateProductFeed setUpdateSchedule (String updateSchedule) {
+      this.setParam("update_schedule", updateSchedule);
       return this;
     }
 
@@ -6679,6 +6869,7 @@ public class ProductCatalog extends APINode {
       "additional_variant_attributes",
       "age_group",
       "applinks",
+      "ar_data",
       "availability",
       "brand",
       "capability_to_review_status",
@@ -6881,6 +7072,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetProducts requestApplinksField (boolean value) {
       this.requestField("applinks", value);
+      return this;
+    }
+    public APIRequestGetProducts requestArDataField () {
+      return this.requestArDataField(true);
+    }
+    public APIRequestGetProducts requestArDataField (boolean value) {
+      this.requestField("ar_data", value);
       return this;
     }
     public APIRequestGetProducts requestAvailabilityField () {
@@ -7250,7 +7448,6 @@ public class ProductCatalog extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "additional_image_files",
       "additional_image_urls",
       "additional_uploaded_image_ids",
       "additional_variant_attributes",
@@ -7372,15 +7569,6 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-
-    public APIRequestCreateProduct setAdditionalImageFiles (List<File> additionalImageFiles) {
-      this.setParam("additional_image_files", additionalImageFiles);
-      return this;
-    }
-    public APIRequestCreateProduct setAdditionalImageFiles (String additionalImageFiles) {
-      this.setParam("additional_image_files", additionalImageFiles);
-      return this;
-    }
 
     public APIRequestCreateProduct setAdditionalImageUrls (List<String> additionalImageUrls) {
       this.setParam("additional_image_urls", additionalImageUrls);
@@ -9660,6 +9848,8 @@ public class ProductCatalog extends APINode {
       VALUE_COMPUTERS_AND_TABLETS("COMPUTERS_AND_TABLETS"),
       @SerializedName("DIAPERING_AND_POTTY_TRAINING")
       VALUE_DIAPERING_AND_POTTY_TRAINING("DIAPERING_AND_POTTY_TRAINING"),
+      @SerializedName("DIGITAL_PRODUCT_OFFER")
+      VALUE_DIGITAL_PRODUCT_OFFER("DIGITAL_PRODUCT_OFFER"),
       @SerializedName("ELECTRONICS_ACCESSORIES")
       VALUE_ELECTRONICS_ACCESSORIES("ELECTRONICS_ACCESSORIES"),
       @SerializedName("FURNITURE")

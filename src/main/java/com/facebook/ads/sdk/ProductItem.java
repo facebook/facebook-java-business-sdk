@@ -65,6 +65,8 @@ public class ProductItem extends APINode {
   private EnumAgeGroup mAgeGroup = null;
   @SerializedName("applinks")
   private CatalogItemAppLinks mApplinks = null;
+  @SerializedName("ar_data")
+  private ProductItemARData mArData = null;
   @SerializedName("availability")
   private EnumAvailability mAvailability = null;
   @SerializedName("brand")
@@ -376,10 +378,6 @@ public class ProductItem extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestCreateArDatum createArDatum() {
-    return new APIRequestCreateArDatum(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetChannelsToIntegrityStatus getChannelsToIntegrityStatus() {
     return new APIRequestGetChannelsToIntegrityStatus(this.getPrefixedId().toString(), context);
   }
@@ -419,6 +417,10 @@ public class ProductItem extends APINode {
 
   public CatalogItemAppLinks getFieldApplinks() {
     return mApplinks;
+  }
+
+  public ProductItemARData getFieldArData() {
+    return mArData;
   }
 
   public EnumAvailability getFieldAvailability() {
@@ -635,140 +637,6 @@ public class ProductItem extends APINode {
   }
 
 
-
-  public static class APIRequestCreateArDatum extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "container_effect",
-      "effect_parameters",
-      "picker_icon",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateArDatum.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateArDatum(String nodeId, APIContext context) {
-      super(context, nodeId, "/ar_data", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateArDatum setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateArDatum setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateArDatum setContainerEffect (EnumContainerEffect containerEffect) {
-      this.setParam("container_effect", containerEffect);
-      return this;
-    }
-    public APIRequestCreateArDatum setContainerEffect (String containerEffect) {
-      this.setParam("container_effect", containerEffect);
-      return this;
-    }
-
-    public APIRequestCreateArDatum setEffectParameters (Map<String, String> effectParameters) {
-      this.setParam("effect_parameters", effectParameters);
-      return this;
-    }
-    public APIRequestCreateArDatum setEffectParameters (String effectParameters) {
-      this.setParam("effect_parameters", effectParameters);
-      return this;
-    }
-
-    public APIRequestCreateArDatum setPickerIcon (File pickerIcon) {
-      this.setParam("picker_icon", pickerIcon);
-      return this;
-    }
-    public APIRequestCreateArDatum setPickerIcon (String pickerIcon) {
-      this.setParam("picker_icon", pickerIcon);
-      return this;
-    }
-
-    public APIRequestCreateArDatum requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateArDatum requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateArDatum requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateArDatum requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateArDatum requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateArDatum requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
 
   public static class APIRequestGetChannelsToIntegrityStatus extends APIRequest<CatalogItemChannelsToIntegrityStatus> {
 
@@ -1188,6 +1056,7 @@ public class ProductItem extends APINode {
       "additional_variant_attributes",
       "age_group",
       "applinks",
+      "ar_data",
       "availability",
       "brand",
       "capability_to_review_status",
@@ -1381,6 +1250,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestApplinksField (boolean value) {
       this.requestField("applinks", value);
+      return this;
+    }
+    public APIRequestGet requestArDataField () {
+      return this.requestArDataField(true);
+    }
+    public APIRequestGet requestArDataField (boolean value) {
+      this.requestField("ar_data", value);
       return this;
     }
     public APIRequestGet requestAvailabilityField () {
@@ -1750,7 +1626,6 @@ public class ProductItem extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "additional_image_files",
       "additional_image_urls",
       "additional_uploaded_image_ids",
       "additional_variant_attributes",
@@ -1871,15 +1746,6 @@ public class ProductItem extends APINode {
       return this;
     }
 
-
-    public APIRequestUpdate setAdditionalImageFiles (List<File> additionalImageFiles) {
-      this.setParam("additional_image_files", additionalImageFiles);
-      return this;
-    }
-    public APIRequestUpdate setAdditionalImageFiles (String additionalImageFiles) {
-      this.setParam("additional_image_files", additionalImageFiles);
-      return this;
-    }
 
     public APIRequestUpdate setAdditionalImageUrls (List<String> additionalImageUrls) {
       this.setParam("additional_image_urls", additionalImageUrls);
@@ -2902,23 +2768,6 @@ public class ProductItem extends APINode {
       }
   }
 
-  public static enum EnumContainerEffect {
-      @SerializedName("MAKEUP")
-      VALUE_MAKEUP("MAKEUP"),
-      ;
-
-      private String value;
-
-      private EnumContainerEffect(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -2939,6 +2788,7 @@ public class ProductItem extends APINode {
     this.mAdditionalVariantAttributes = instance.mAdditionalVariantAttributes;
     this.mAgeGroup = instance.mAgeGroup;
     this.mApplinks = instance.mApplinks;
+    this.mArData = instance.mArData;
     this.mAvailability = instance.mAvailability;
     this.mBrand = instance.mBrand;
     this.mCapabilityToReviewStatus = instance.mCapabilityToReviewStatus;

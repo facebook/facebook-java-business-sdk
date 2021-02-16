@@ -1966,6 +1966,7 @@ public class ProductSet extends APINode {
       "additional_variant_attributes",
       "age_group",
       "applinks",
+      "ar_data",
       "availability",
       "brand",
       "capability_to_review_status",
@@ -2159,6 +2160,13 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetProducts requestApplinksField (boolean value) {
       this.requestField("applinks", value);
+      return this;
+    }
+    public APIRequestGetProducts requestArDataField () {
+      return this.requestArDataField(true);
+    }
+    public APIRequestGetProducts requestArDataField (boolean value) {
+      this.requestField("ar_data", value);
       return this;
     }
     public APIRequestGetProducts requestAvailabilityField () {
