@@ -7706,8 +7706,6 @@ public class Group extends APINode {
       VALUE_EPHEMERAL("EPHEMERAL"),
       @SerializedName("EVENT_PLANNING")
       VALUE_EVENT_PLANNING("EVENT_PLANNING"),
-      @SerializedName("FAITH")
-      VALUE_FAITH("FAITH"),
       @SerializedName("FAMILY")
       VALUE_FAMILY("FAMILY"),
       @SerializedName("FITNESS")
@@ -7829,8 +7827,6 @@ public class Group extends APINode {
       VALUE_EPHEMERAL("EPHEMERAL"),
       @SerializedName("EVENT_PLANNING")
       VALUE_EVENT_PLANNING("EVENT_PLANNING"),
-      @SerializedName("FAITH")
-      VALUE_FAITH("FAITH"),
       @SerializedName("FAMILY")
       VALUE_FAMILY("FAMILY"),
       @SerializedName("FITNESS")

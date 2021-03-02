@@ -6280,8 +6280,6 @@ public class AdVideo extends APINode {
       VALUE_FUNDRAISER_COVER_VIDEO("FUNDRAISER_COVER_VIDEO"),
       @SerializedName("GAME_CLIP")
       VALUE_GAME_CLIP("GAME_CLIP"),
-      @SerializedName("GAMING_UPDATE_VIDEO")
-      VALUE_GAMING_UPDATE_VIDEO("GAMING_UPDATE_VIDEO"),
       @SerializedName("GEMSTONE")
       VALUE_GEMSTONE("GEMSTONE"),
       @SerializedName("GOODWILL_ANNIVERSARY_DEPRECATED")

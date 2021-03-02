@@ -2387,6 +2387,8 @@ public class AdCreative extends APINode {
       VALUE_SELL_NOW("SELL_NOW"),
       @SerializedName("SEND_A_GIFT")
       VALUE_SEND_A_GIFT("SEND_A_GIFT"),
+      @SerializedName("SEND_GIFT_MONEY")
+      VALUE_SEND_GIFT_MONEY("SEND_GIFT_MONEY"),
       @SerializedName("SHARE")
       VALUE_SHARE("SHARE"),
       @SerializedName("SHOP_NOW")

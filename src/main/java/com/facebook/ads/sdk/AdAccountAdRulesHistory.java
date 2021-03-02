@@ -225,6 +225,9 @@ public class AdAccountAdRulesHistory extends APINode {
 
 
   public AdRuleEvaluationSpec getFieldEvaluationSpec() {
+    if (mEvaluationSpec != null) {
+      mEvaluationSpec.context = getContext();
+    }
     return mEvaluationSpec;
   }
 

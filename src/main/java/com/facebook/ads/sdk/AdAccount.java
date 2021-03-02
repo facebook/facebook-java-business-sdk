@@ -16096,8 +16096,6 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "accountID",
-      "additionalMetadata",
       "allowed_domains",
       "associated_audience_id",
       "claim_objective",
@@ -16107,28 +16105,21 @@ public class AdAccount extends APINode {
       "customer_file_source",
       "dataset_id",
       "description",
-      "details",
       "enable_fetch_or_create",
       "event_source_group",
       "event_sources",
       "exclusions",
-      "expectedSize",
-      "gender",
       "inclusions",
-      "isPrivate",
       "is_household",
       "is_household_exclusion",
       "is_snapshot",
       "is_value_based",
       "list_of_accounts",
       "lookalike_spec",
-      "maxAge",
-      "minAge",
       "name",
       "opt_out_link",
       "origin_audience_id",
       "parent_audience_id",
-      "partnerID",
       "partner_reference_key",
       "pixel_id",
       "prefill",
@@ -16139,7 +16130,6 @@ public class AdAccount extends APINode {
       "rule",
       "rule_aggregation",
       "seed_audience",
-      "source",
       "subtype",
       "tags",
       "video_group_ids",
@@ -16200,16 +16190,6 @@ public class AdAccount extends APINode {
       return this;
     }
 
-
-    public APIRequestCreateCustomAudience setAccountid (String accountid) {
-      this.setParam("accountID", accountid);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setAdditionalmetadata (String additionalmetadata) {
-      this.setParam("additionalMetadata", additionalmetadata);
-      return this;
-    }
 
     public APIRequestCreateCustomAudience setAllowedDomains (List<String> allowedDomains) {
       this.setParam("allowed_domains", allowedDomains);
@@ -16280,11 +16260,6 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateCustomAudience setDetails (String details) {
-      this.setParam("details", details);
-      return this;
-    }
-
     public APIRequestCreateCustomAudience setEnableFetchOrCreate (Boolean enableFetchOrCreate) {
       this.setParam("enable_fetch_or_create", enableFetchOrCreate);
       return this;
@@ -16317,35 +16292,12 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateCustomAudience setExpectedsize (Long expectedsize) {
-      this.setParam("expectedSize", expectedsize);
-      return this;
-    }
-    public APIRequestCreateCustomAudience setExpectedsize (String expectedsize) {
-      this.setParam("expectedSize", expectedsize);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setGender (String gender) {
-      this.setParam("gender", gender);
-      return this;
-    }
-
     public APIRequestCreateCustomAudience setInclusions (List<Object> inclusions) {
       this.setParam("inclusions", inclusions);
       return this;
     }
     public APIRequestCreateCustomAudience setInclusions (String inclusions) {
       this.setParam("inclusions", inclusions);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setIsprivate (Boolean isprivate) {
-      this.setParam("isPrivate", isprivate);
-      return this;
-    }
-    public APIRequestCreateCustomAudience setIsprivate (String isprivate) {
-      this.setParam("isPrivate", isprivate);
       return this;
     }
 
@@ -16399,24 +16351,6 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateCustomAudience setMaxage (Long maxage) {
-      this.setParam("maxAge", maxage);
-      return this;
-    }
-    public APIRequestCreateCustomAudience setMaxage (String maxage) {
-      this.setParam("maxAge", maxage);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setMinage (Long minage) {
-      this.setParam("minAge", minage);
-      return this;
-    }
-    public APIRequestCreateCustomAudience setMinage (String minage) {
-      this.setParam("minAge", minage);
-      return this;
-    }
-
     public APIRequestCreateCustomAudience setName (String name) {
       this.setParam("name", name);
       return this;
@@ -16438,11 +16372,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateCustomAudience setParentAudienceId (String parentAudienceId) {
       this.setParam("parent_audience_id", parentAudienceId);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setPartnerid (String partnerid) {
-      this.setParam("partnerID", partnerid);
       return this;
     }
 
@@ -16509,11 +16438,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateCustomAudience setSeedAudience (String seedAudience) {
       this.setParam("seed_audience", seedAudience);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setSource (String source) {
-      this.setParam("source", source);
       return this;
     }
 

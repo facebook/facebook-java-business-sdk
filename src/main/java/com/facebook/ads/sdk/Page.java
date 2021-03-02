@@ -598,6 +598,10 @@ public class Page extends APINode {
     return new APIRequestCreateBlocked(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestDeleteBusinessData deleteBusinessData() {
+    return new APIRequestDeleteBusinessData(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateBusinessDatum createBusinessDatum() {
     return new APIRequestCreateBusinessDatum(this.getPrefixedId().toString(), context);
   }
@@ -928,6 +932,10 @@ public class Page extends APINode {
 
   public APIRequestCreateSubscribedApp createSubscribedApp() {
     return new APIRequestCreateSubscribedApp(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestDeleteTabs deleteTabs() {
+    return new APIRequestDeleteTabs(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetTabs getTabs() {
@@ -3935,6 +3943,144 @@ public class Page extends APINode {
 
     @Override
     public APIRequestCreateBlocked requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestDeleteBusinessData extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "email",
+      "external_id",
+      "object_name",
+      "order_id",
+      "order_item_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestDeleteBusinessData.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDeleteBusinessData(String nodeId, APIContext context) {
+      super(context, nodeId, "/business_data", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDeleteBusinessData setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteBusinessData setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDeleteBusinessData setEmail (String email) {
+      this.setParam("email", email);
+      return this;
+    }
+
+    public APIRequestDeleteBusinessData setExternalId (String externalId) {
+      this.setParam("external_id", externalId);
+      return this;
+    }
+
+    public APIRequestDeleteBusinessData setObjectName (EnumObjectName objectName) {
+      this.setParam("object_name", objectName);
+      return this;
+    }
+    public APIRequestDeleteBusinessData setObjectName (String objectName) {
+      this.setParam("object_name", objectName);
+      return this;
+    }
+
+    public APIRequestDeleteBusinessData setOrderId (String orderId) {
+      this.setParam("order_id", orderId);
+      return this;
+    }
+
+    public APIRequestDeleteBusinessData setOrderItemId (String orderItemId) {
+      this.setParam("order_item_id", orderItemId);
+      return this;
+    }
+
+    public APIRequestDeleteBusinessData requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDeleteBusinessData requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteBusinessData requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDeleteBusinessData requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteBusinessData requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteBusinessData requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -27955,6 +28101,116 @@ public class Page extends APINode {
 
   }
 
+  public static class APIRequestDeleteTabs extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "tab",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestDeleteTabs.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDeleteTabs(String nodeId, APIContext context) {
+      super(context, nodeId, "/tabs", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDeleteTabs setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteTabs setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDeleteTabs setTab (String tab) {
+      this.setParam("tab", tab);
+      return this;
+    }
+
+    public APIRequestDeleteTabs requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDeleteTabs requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteTabs requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDeleteTabs requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteTabs requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteTabs requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetTabs extends APIRequest<Tab> {
 
     APINodeList<Tab> lastResponse = null;
@@ -34746,6 +35002,27 @@ public class Page extends APINode {
       private String value;
 
       private EnumSubscribedFields(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumObjectName {
+      @SerializedName("contact")
+      VALUE_CONTACT("contact"),
+      @SerializedName("order")
+      VALUE_ORDER("order"),
+      @SerializedName("order_item")
+      VALUE_ORDER_ITEM("order_item"),
+      ;
+
+      private String value;
+
+      private EnumObjectName(String value) {
         this.value = value;
       }
 

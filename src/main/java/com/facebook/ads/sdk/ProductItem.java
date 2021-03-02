@@ -2368,6 +2368,8 @@ public class ProductItem extends APINode {
       VALUE_FB_APRL_COSTUME("FB_APRL_COSTUME"),
       @SerializedName("FB_APRL_CSTM")
       VALUE_FB_APRL_CSTM("FB_APRL_CSTM"),
+      @SerializedName("FB_APRL_FORMAL")
+      VALUE_FB_APRL_FORMAL("FB_APRL_FORMAL"),
       @SerializedName("FB_APRL_HANDBAG")
       VALUE_FB_APRL_HANDBAG("FB_APRL_HANDBAG"),
       @SerializedName("FB_APRL_JEWELRY")

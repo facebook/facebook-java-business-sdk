@@ -2984,40 +2984,29 @@ public class CustomAudience extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "accountID",
-      "additionalMetadata",
       "allowed_domains",
       "claim_objective",
       "content_type",
       "countries",
       "customer_file_source",
       "description",
-      "details",
       "enable_fetch_or_create",
       "event_source_group",
       "event_sources",
       "exclusions",
-      "expectedSize",
-      "gender",
       "inclusions",
-      "isPrivate",
       "is_household",
       "is_household_exclusion",
       "lookalike_spec",
-      "maxAge",
-      "minAge",
       "name",
       "opt_out_link",
       "parent_audience_id",
-      "partnerID",
-      "partner_reference_key",
       "product_set_id",
       "retention_days",
       "rev_share_policy_id",
       "rule",
       "rule_aggregation",
       "seed_audience",
-      "source",
       "tags",
     };
 
@@ -3077,16 +3066,6 @@ public class CustomAudience extends APINode {
     }
 
 
-    public APIRequestUpdate setAccountid (String accountid) {
-      this.setParam("accountID", accountid);
-      return this;
-    }
-
-    public APIRequestUpdate setAdditionalmetadata (String additionalmetadata) {
-      this.setParam("additionalMetadata", additionalmetadata);
-      return this;
-    }
-
     public APIRequestUpdate setAllowedDomains (List<String> allowedDomains) {
       this.setParam("allowed_domains", allowedDomains);
       return this;
@@ -3133,11 +3112,6 @@ public class CustomAudience extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setDetails (String details) {
-      this.setParam("details", details);
-      return this;
-    }
-
     public APIRequestUpdate setEnableFetchOrCreate (Boolean enableFetchOrCreate) {
       this.setParam("enable_fetch_or_create", enableFetchOrCreate);
       return this;
@@ -3170,35 +3144,12 @@ public class CustomAudience extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setExpectedsize (Long expectedsize) {
-      this.setParam("expectedSize", expectedsize);
-      return this;
-    }
-    public APIRequestUpdate setExpectedsize (String expectedsize) {
-      this.setParam("expectedSize", expectedsize);
-      return this;
-    }
-
-    public APIRequestUpdate setGender (String gender) {
-      this.setParam("gender", gender);
-      return this;
-    }
-
     public APIRequestUpdate setInclusions (List<Object> inclusions) {
       this.setParam("inclusions", inclusions);
       return this;
     }
     public APIRequestUpdate setInclusions (String inclusions) {
       this.setParam("inclusions", inclusions);
-      return this;
-    }
-
-    public APIRequestUpdate setIsprivate (Boolean isprivate) {
-      this.setParam("isPrivate", isprivate);
-      return this;
-    }
-    public APIRequestUpdate setIsprivate (String isprivate) {
-      this.setParam("isPrivate", isprivate);
       return this;
     }
 
@@ -3225,24 +3176,6 @@ public class CustomAudience extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setMaxage (Long maxage) {
-      this.setParam("maxAge", maxage);
-      return this;
-    }
-    public APIRequestUpdate setMaxage (String maxage) {
-      this.setParam("maxAge", maxage);
-      return this;
-    }
-
-    public APIRequestUpdate setMinage (Long minage) {
-      this.setParam("minAge", minage);
-      return this;
-    }
-    public APIRequestUpdate setMinage (String minage) {
-      this.setParam("minAge", minage);
-      return this;
-    }
-
     public APIRequestUpdate setName (String name) {
       this.setParam("name", name);
       return this;
@@ -3259,16 +3192,6 @@ public class CustomAudience extends APINode {
     }
     public APIRequestUpdate setParentAudienceId (String parentAudienceId) {
       this.setParam("parent_audience_id", parentAudienceId);
-      return this;
-    }
-
-    public APIRequestUpdate setPartnerid (String partnerid) {
-      this.setParam("partnerID", partnerid);
-      return this;
-    }
-
-    public APIRequestUpdate setPartnerReferenceKey (String partnerReferenceKey) {
-      this.setParam("partner_reference_key", partnerReferenceKey);
       return this;
     }
 
@@ -3311,11 +3234,6 @@ public class CustomAudience extends APINode {
     }
     public APIRequestUpdate setSeedAudience (String seedAudience) {
       this.setParam("seed_audience", seedAudience);
-      return this;
-    }
-
-    public APIRequestUpdate setSource (String source) {
-      this.setParam("source", source);
       return this;
     }
 
