@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Added
+- Support for sending multiple values for certain customer information parameters
+
 ## v10.0.0
 
 ### Changed

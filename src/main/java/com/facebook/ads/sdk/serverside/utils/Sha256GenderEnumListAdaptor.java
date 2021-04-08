@@ -15,28 +15,26 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.facebook.ads.utils;
+package com.facebook.ads.sdk.serverside.utils;
 
 import com.facebook.ads.sdk.serverside.GenderEnum;
-import com.google.gson.TypeAdapter;
+import com.facebook.ads.utils.ServerSideApiUtil;
 import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
-public class Sha256GenderEnumAdaptor extends TypeAdapter<GenderEnum> {
-
+public class Sha256GenderEnumListAdaptor extends HashedListAdaptor<GenderEnum> {
   @Override
-  public GenderEnum read(JsonReader reader) throws IOException {
+  protected GenderEnum readFromJson(JsonReader reader) throws IOException {
     throw new UnsupportedEncodingException();
   }
 
   @Override
-  public void write(JsonWriter writer, GenderEnum input) throws IOException {
+  protected String normalizeAndHash(GenderEnum input, String fieldName) {
     String hashedValue = null;
     if (input != null) {
       hashedValue = ServerSideApiUtil.hash(input.toString());
     }
-    writer.value(hashedValue);
+    return hashedValue;
   }
 }
