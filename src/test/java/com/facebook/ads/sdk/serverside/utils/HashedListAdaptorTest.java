@@ -23,7 +23,9 @@ package com.facebook.ads.sdk.serverside.utils;
 
 import com.facebook.ads.sdk.serverside.GenderEnum;
 import com.facebook.ads.sdk.serverside.UserData;
+import com.facebook.ads.utils.ServerSideApiConstants;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -94,6 +96,10 @@ public class HashedListAdaptorTest {
         assertTrue(actualJson.contains(expectedEmail2));
         assertTrue(actualJson.contains(expectedGender));
         assertTrue(actualJson.contains(expectedExternalId));
+        // Assert the deduplication works - although date of birth field contains 3 values,
+        // there should be only 2 values after serialization.
+        JsonObject jsonObject = new Gson().fromJson(actualJson, JsonObject.class);
+        assertEquals(jsonObject.get(ServerSideApiConstants.DATE_OF_BIRTH).getAsJsonArray().size(), 2);
     }
 
     @Test
