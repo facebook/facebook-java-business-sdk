@@ -93,7 +93,7 @@ public class UserDataTest {
     List<String> states = Arrays.asList("WA", "CA");
     List<String> zipcodes = Arrays.asList("98123", "98122");
     List<String> countryCodes = Arrays.asList("USA", "CA");
-    List<String> externalIds = Arrays.asList("external-1", "external-2");
+    List<String> externalIds = Arrays.asList("external-1", "external-2", "external-2");
     UserData userData = new UserData();
     userData
             .emails(emails)
@@ -118,7 +118,7 @@ public class UserDataTest {
     assertEquals(userData.getStates(), states);
     assertEquals(userData.getZipcodes(), zipcodes);
     assertEquals(userData.getCountryCodes(), countryCodes);
-    assertEquals(userData.getExternalIds(), externalIds);
+    assertEquals(userData.getExternalIds(), externalIds.subList(0, 2));
   }
 
   @Test

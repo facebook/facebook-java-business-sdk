@@ -71,7 +71,10 @@ public abstract class HashedListAdaptor<T> extends TypeAdapter<List<T>> {
                 ex.printStackTrace();
                 throw new RuntimeException("Error while reading current serializing field's name", ex);
             }
-            hashedValues.add(normalizeAndHash(value, fieldName));
+            String hashedValue = normalizeAndHash(value, fieldName);
+            if (hashedValue != null) {
+                hashedValues.add(hashedValue);
+            }
         }
 
         // Now actually write to Gson

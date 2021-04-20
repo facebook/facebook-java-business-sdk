@@ -24,12 +24,17 @@ package com.facebook.ads.sdk.serverside.utils;
 import com.facebook.ads.sdk.serverside.GenderEnum;
 import com.facebook.ads.sdk.serverside.UserData;
 import com.facebook.ads.utils.ServerSideApiConstants;
+import com.google.common.hash.Hashing;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.junit.Test;
 
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -60,18 +65,19 @@ public class HashedListAdaptorTest {
                     "\"dbd99967c9d90662dbff6fe2458a6bf0e8594090234dc0900874977ae55e3f7b\"]}\n";
 
     @Test
-    public void testSerialization() {
+    public void testSerializationAndDedup() {
         Gson gson = new Gson();
-        List<String> emails = Arrays.asList("joe@email.com", "smith@eg.com");
-        List<String> phones = Arrays.asList("1234567890", "2062062006");
+        List<String> emails = Arrays.asList("joe@email.com", "smith@eg.com", "smith@eg.com");
+        List<String> phones = Arrays.asList("1234567890", "2062062006", "2062062006");
         List<GenderEnum> genders = Arrays.asList(GenderEnum.MALE, GenderEnum.FEMALE, GenderEnum.FEMALE);
         List<String> datesOfBirth = Arrays.asList("20000101", "20000102", "20000102");
-        List<String> lastNames = Arrays.asList("lastname-1", "lastname-2");
-        List<String> firstNames = Arrays.asList("firstname-2", "firstname-3");
-        List<String> cities = Arrays.asList("Seattle", "Portland");
-        List<String> zipcodes = Arrays.asList("98123", "98122");
-        List<String> countryCodes = Arrays.asList("US", "CA");
-        List<String> externalIds = Arrays.asList("external-1", "external-2");
+        List<String> lastNames = Arrays.asList("lastname-1", "lastname-2", "lastname-2");
+        List<String> firstNames = Arrays.asList("firstname-2", "firstname-3", "firstname-3");
+        List<String> cities = Arrays.asList("seattle", "sanfrancisco", "seattle");
+        List<String> zipcodes = Arrays.asList("98123", "98122", "98122");
+        List<String> states = Arrays.asList("wa", "ca", "wa");
+        List<String> countryCodes = Arrays.asList("us", "ca", "ca");
+        List<String> externalIds = Arrays.asList("external-1", "external-2", "external-2");
         UserData userData = new UserData();
         userData
                 .emails(emails)
@@ -82,24 +88,66 @@ public class HashedListAdaptorTest {
                 .firstNames(firstNames)
                 .cities(cities)
                 .zipcodes(zipcodes)
+                .states(states)
                 .countryCodes(countryCodes)
                 .externalIds(externalIds);
 
         String actualJson = gson.toJson(userData);
-
-        String expectedEmail1 = "971fa2e631db2a508b3fc6ed98016d354e61ecf0d41268e8ab6396771233d293";
-        String expectedEmail2 = "e0ed81aaa6c505a9f092006a1c003bbbc9cc1a4217f680bd2cf0ad1c0e75f1a2";
-        String expectedGender = "62c66a7a5dd70c3146618063c344e531e6d4b59e379808443ce962b3abd63c5a";
-        String expectedExternalId = "dbd99967c9d90662dbff6fe2458a6bf0e8594090234dc0900874977ae55e3f7b";
-
-        assertTrue(actualJson.contains(expectedEmail1));
-        assertTrue(actualJson.contains(expectedEmail2));
-        assertTrue(actualJson.contains(expectedGender));
-        assertTrue(actualJson.contains(expectedExternalId));
-        // Assert the deduplication works - although date of birth field contains 3 values,
-        // there should be only 2 values after serialization.
         JsonObject jsonObject = new Gson().fromJson(actualJson, JsonObject.class);
-        assertEquals(jsonObject.get(ServerSideApiConstants.DATE_OF_BIRTH).getAsJsonArray().size(), 2);
+        assertListsEqual(sha256StringList(emails.subList(0, 2)), jsonObject.get(ServerSideApiConstants.EMAIL).getAsJsonArray());
+        assertListsEqual(sha256StringList(phones.subList(0, 2)), jsonObject.get(ServerSideApiConstants.PHONE_NUMBER).getAsJsonArray());
+        assertListsEqual(sha256GenderList(genders.subList(0, 2)), jsonObject.get(ServerSideApiConstants.GENDER).getAsJsonArray());
+        assertListsEqual(sha256StringList(datesOfBirth.subList(0, 2)), jsonObject.get(ServerSideApiConstants.DATE_OF_BIRTH).getAsJsonArray());
+        assertListsEqual(sha256StringList(lastNames.subList(0, 2)), jsonObject.get(ServerSideApiConstants.LAST_NAME).getAsJsonArray());
+        assertListsEqual(sha256StringList(firstNames.subList(0, 2)), jsonObject.get(ServerSideApiConstants.FIRST_NAME).getAsJsonArray());
+        assertListsEqual(sha256StringList(cities.subList(0, 2)), jsonObject.get(ServerSideApiConstants.CITY).getAsJsonArray());
+        assertListsEqual(sha256StringList(zipcodes.subList(0, 2)), jsonObject.get(ServerSideApiConstants.ZIP_CODE).getAsJsonArray());
+        assertListsEqual(sha256StringList(states.subList(0, 2)), jsonObject.get(ServerSideApiConstants.STATE).getAsJsonArray());
+        assertListsEqual(sha256StringList(countryCodes.subList(0, 2)), jsonObject.get(ServerSideApiConstants.COUNTRY).getAsJsonArray());
+        assertListsEqual(externalIds.subList(0, 2), jsonObject.get(ServerSideApiConstants.EXTERNAL_ID).getAsJsonArray());
+    }
+
+    @Test
+    public void testSerializationWithNullValues() {
+        Gson gson = new Gson();
+        List<String> emails = Arrays.asList("joe@email.com", "smith@eg.com", null);
+        List<String> phones = Arrays.asList("1234567890", "2062062006", null);
+        List<GenderEnum> genders = Arrays.asList(GenderEnum.MALE, GenderEnum.FEMALE, null);
+        List<String> datesOfBirth = Arrays.asList("20000101", "20000102", null);
+        List<String> lastNames = Arrays.asList("lastname-1", "lastname-2", null);
+        List<String> firstNames = Arrays.asList("firstname-2", "firstname-3", null);
+        List<String> cities = Arrays.asList("seattle", "sanfrancisco", null);
+        List<String> zipcodes = Arrays.asList("98123", "98122", null);
+        List<String> states = Arrays.asList("wa", "ca", null);
+        List<String> countryCodes = Arrays.asList("us", "ca", null);
+        List<String> externalIds = Arrays.asList("external-1", "external-2", null);
+        UserData userData = new UserData();
+        userData
+                .emails(emails)
+                .phones(phones)
+                .genders(genders)
+                .datesOfBirth(datesOfBirth)
+                .lastNames(lastNames)
+                .firstNames(firstNames)
+                .cities(cities)
+                .zipcodes(zipcodes)
+                .states(states)
+                .countryCodes(countryCodes)
+                .externalIds(externalIds);
+
+        String actualJson = gson.toJson(userData);
+        JsonObject jsonObject = new Gson().fromJson(actualJson, JsonObject.class);
+        assertListsEqual(sha256StringList(emails.subList(0, 2)), jsonObject.get(ServerSideApiConstants.EMAIL).getAsJsonArray());
+        assertListsEqual(sha256StringList(phones.subList(0, 2)), jsonObject.get(ServerSideApiConstants.PHONE_NUMBER).getAsJsonArray());
+        assertListsEqual(sha256GenderList(genders.subList(0, 2)), jsonObject.get(ServerSideApiConstants.GENDER).getAsJsonArray());
+        assertListsEqual(sha256StringList(datesOfBirth.subList(0, 2)), jsonObject.get(ServerSideApiConstants.DATE_OF_BIRTH).getAsJsonArray());
+        assertListsEqual(sha256StringList(lastNames.subList(0, 2)), jsonObject.get(ServerSideApiConstants.LAST_NAME).getAsJsonArray());
+        assertListsEqual(sha256StringList(firstNames.subList(0, 2)), jsonObject.get(ServerSideApiConstants.FIRST_NAME).getAsJsonArray());
+        assertListsEqual(sha256StringList(cities.subList(0, 2)), jsonObject.get(ServerSideApiConstants.CITY).getAsJsonArray());
+        assertListsEqual(sha256StringList(zipcodes.subList(0, 2)), jsonObject.get(ServerSideApiConstants.ZIP_CODE).getAsJsonArray());
+        assertListsEqual(sha256StringList(states.subList(0, 2)), jsonObject.get(ServerSideApiConstants.STATE).getAsJsonArray());
+        assertListsEqual(sha256StringList(countryCodes.subList(0, 2)), jsonObject.get(ServerSideApiConstants.COUNTRY).getAsJsonArray());
+        assertListsEqual(externalIds.subList(0, 2), jsonObject.get(ServerSideApiConstants.EXTERNAL_ID).getAsJsonArray());
     }
 
     @Test
@@ -116,5 +164,47 @@ public class HashedListAdaptorTest {
         assertEquals(actualUserData.getZipcodes().size(), 2);
         assertEquals(actualUserData.getCountryCodes().size(), 2);
         assertEquals(actualUserData.getExternalIds().size(), 2);
+    }
+
+    /**
+     * Assert helper to check the actual Json value of user data fields equals the expected value.
+     */
+    private void assertListsEqual(List<String> expected, JsonArray actualJsonArray) {
+        List<String> actual = jsonArrayToList(actualJsonArray);
+        assertTrue(actual.size() == expected.size() && expected.containsAll(actual) && actual.containsAll(expected));
+    }
+
+    /**
+     * Hash a given list of strings, using the same hashing function as in production.
+     */
+    private List<String> sha256StringList(List<String> list) {
+        List<String> result = new ArrayList<String>();
+        for (String s : list) {
+            result.add(Hashing.sha256().hashString(s, StandardCharsets.UTF_8).toString());
+        }
+        return result;
+    }
+
+    /**
+     * Hash a given list of GenderEnum, using the same hashing function as in production.
+     */
+    private List<String> sha256GenderList(List<GenderEnum> list) {
+        List<String> result = new ArrayList<String>();
+        for (GenderEnum ge : list) {
+            result.add(Hashing.sha256().hashString(ge.toString(), StandardCharsets.UTF_8).toString());
+        }
+        return result;
+    }
+
+    /**
+     * Convert a JsonArray to list of strings
+     */
+    private List<String> jsonArrayToList(JsonArray jsonArray) {
+        int len = jsonArray.size();
+        List<String> res = new ArrayList();
+        for (int i = 0; i < len; i++) {
+            res.add(jsonArray.get(i).toString().replace("\"", ""));
+        }
+        return res;
     }
 }

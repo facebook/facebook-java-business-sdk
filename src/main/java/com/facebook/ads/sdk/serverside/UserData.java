@@ -24,9 +24,13 @@ import com.facebook.ads.sdk.serverside.utils.Sha256StringListAdaptor;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * UserData is a set of identifiers Facebook can use for targeted attribution.
@@ -74,7 +78,6 @@ public class UserData {
   private List<String> countryCodes = null;
 
   @SerializedName(ServerSideApiConstants.EXTERNAL_ID)
-  @JsonAdapter(Sha256StringListAdaptor.class)
   private List<String> externalIds = null;
 
   @SerializedName(ServerSideApiConstants.CLIENT_IP_ADDRESS)
@@ -903,7 +906,7 @@ public class UserData {
    * @return UserData
    */
   public UserData externalIds(List<String> externalIds) {
-    this.externalIds = externalIds;
+    this.externalIds = dedup(externalIds);
     return this;
   }
 
@@ -928,7 +931,7 @@ public class UserData {
    * @param externalIds unique IDs from the advertiser
    */
   public void setExternalIds(List<String> externalIds) {
-    this.externalIds = externalIds;
+    this.externalIds = dedup(externalIds);
   }
 
   /**
@@ -1435,5 +1438,22 @@ public class UserData {
    */
   private <T> boolean isListNullOrEmpty(List<T> list) {
     return list == null || list.isEmpty();
+  }
+
+  /**
+   * Dedup the given list. This can be applied to fields that do not require normalization or hashing.
+   * This is currently only used for external_ids.
+   * @param values Input
+   * @return Deduped values
+   */
+  private List<String> dedup(List<String> values) {
+    if (isListNullOrEmpty(values)) return null;
+    Set<String> set = new HashSet();
+    for (String str : values) {
+      if (str != null) {
+        set.add(str);
+      }
+    }
+    return new ArrayList(set);
   }
 }
