@@ -560,6 +560,7 @@ public class Campaign extends APINode {
       "cooldown_start_time",
       "created_by",
       "created_time",
+      "datasets_information",
       "description",
       "end_time",
       "id",
@@ -694,6 +695,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAdStudies requestCreatedTimeField (boolean value) {
       this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGetAdStudies requestDatasetsInformationField () {
+      return this.requestDatasetsInformationField(true);
+    }
+    public APIRequestGetAdStudies requestDatasetsInformationField (boolean value) {
+      this.requestField("datasets_information", value);
       return this;
     }
     public APIRequestGetAdStudies requestDescriptionField () {
@@ -4027,7 +4035,9 @@ public class Campaign extends APINode {
       "special_ad_category",
       "special_ad_category_country",
       "spend_cap",
+      "start_time",
       "status",
+      "stop_time",
       "upstream_events",
     };
 
@@ -4254,12 +4264,22 @@ public class Campaign extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setStartTime (String startTime) {
+      this.setParam("start_time", startTime);
+      return this;
+    }
+
     public APIRequestUpdate setStatus (Campaign.EnumStatus status) {
       this.setParam("status", status);
       return this;
     }
     public APIRequestUpdate setStatus (String status) {
       this.setParam("status", status);
+      return this;
+    }
+
+    public APIRequestUpdate setStopTime (String stopTime) {
+      this.setParam("stop_time", stopTime);
       return this;
     }
 

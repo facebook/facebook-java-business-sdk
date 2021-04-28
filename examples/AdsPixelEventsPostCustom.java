@@ -24,7 +24,9 @@
  import com.facebook.ads.sdk.APIContext;
 import com.facebook.ads.sdk.APIException;
 import com.facebook.ads.sdk.serverside.ActionSource;
+import com.facebook.ads.sdk.serverside.Content;
 import com.facebook.ads.sdk.serverside.CustomData;
+import com.facebook.ads.sdk.serverside.DeliveryCategory;
 import com.facebook.ads.sdk.serverside.Event;
 import com.facebook.ads.sdk.serverside.EventRequest;
 import com.facebook.ads.sdk.serverside.EventResponse;
@@ -47,7 +49,13 @@ public class ServerSideApiExample {
         .fbc("fb.1.1554763741205.AbCdEfGhIjKlMnOpQrStUvWxYz1234567890")
         .fbp("fb.1.1558571054389.1098115397");
 
+    Content content = new Content()
+        .productId("product123")
+        .quantity(1L)
+        .deliveryCategory(DeliveryCategory.home_delivery);
+
     CustomData customData = new CustomData()
+        .addContent(content)
         .currency("usd")
         .value(123.45F);
 

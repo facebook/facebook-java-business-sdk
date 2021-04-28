@@ -111,6 +111,8 @@ public class ProductItem extends APINode {
   private String mId = null;
   @SerializedName("image_cdn_urls")
   private Map<String, String> mImageCdnUrls = null;
+  @SerializedName("image_fetch_status")
+  private EnumImageFetchStatus mImageFetchStatus = null;
   @SerializedName("image_url")
   private String mImageUrl = null;
   @SerializedName("images")
@@ -509,6 +511,10 @@ public class ProductItem extends APINode {
 
   public Map<String, String> getFieldImageCdnUrls() {
     return mImageCdnUrls;
+  }
+
+  public EnumImageFetchStatus getFieldImageFetchStatus() {
+    return mImageFetchStatus;
   }
 
   public String getFieldImageUrl() {
@@ -1046,6 +1052,7 @@ public class ProductItem extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "catalog_id",
       "image_height",
       "image_width",
     };
@@ -1079,6 +1086,7 @@ public class ProductItem extends APINode {
       "gtin",
       "id",
       "image_cdn_urls",
+      "image_fetch_status",
       "image_url",
       "images",
       "inventory",
@@ -1162,6 +1170,11 @@ public class ProductItem extends APINode {
       return this;
     }
 
+
+    public APIRequestGet setCatalogId (String catalogId) {
+      this.setParam("catalog_id", catalogId);
+      return this;
+    }
 
     public APIRequestGet setImageHeight (Long imageHeight) {
       this.setParam("image_height", imageHeight);
@@ -1411,6 +1424,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestImageCdnUrlsField (boolean value) {
       this.requestField("image_cdn_urls", value);
+      return this;
+    }
+    public APIRequestGet requestImageFetchStatusField () {
+      return this.requestImageFetchStatusField(true);
+    }
+    public APIRequestGet requestImageFetchStatusField (boolean value) {
+      this.requestField("image_fetch_status", value);
       return this;
     }
     public APIRequestGet requestImageUrlField () {
@@ -2284,6 +2304,33 @@ public class ProductItem extends APINode {
       }
   }
 
+  public static enum EnumImageFetchStatus {
+      @SerializedName("DIRECT_UPLOAD")
+      VALUE_DIRECT_UPLOAD("DIRECT_UPLOAD"),
+      @SerializedName("FETCHED")
+      VALUE_FETCHED("FETCHED"),
+      @SerializedName("FETCH_FAILED")
+      VALUE_FETCH_FAILED("FETCH_FAILED"),
+      @SerializedName("NO_STATUS")
+      VALUE_NO_STATUS("NO_STATUS"),
+      @SerializedName("OUTDATED")
+      VALUE_OUTDATED("OUTDATED"),
+      @SerializedName("PARTIAL_FETCH")
+      VALUE_PARTIAL_FETCH("PARTIAL_FETCH"),
+      ;
+
+      private String value;
+
+      private EnumImageFetchStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumReviewStatus {
       @SerializedName("approved")
       VALUE_APPROVED("approved"),
@@ -2813,6 +2860,7 @@ public class ProductItem extends APINode {
     this.mGtin = instance.mGtin;
     this.mId = instance.mId;
     this.mImageCdnUrls = instance.mImageCdnUrls;
+    this.mImageFetchStatus = instance.mImageFetchStatus;
     this.mImageUrl = instance.mImageUrl;
     this.mImages = instance.mImages;
     this.mInventory = instance.mInventory;

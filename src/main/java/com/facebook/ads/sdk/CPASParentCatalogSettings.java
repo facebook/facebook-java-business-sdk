@@ -59,6 +59,8 @@ public class CPASParentCatalogSettings extends APINode {
   private List<String> mAttributionWindows = null;
   @SerializedName("default_currency")
   private String mDefaultCurrency = null;
+  @SerializedName("disable_use_as_parent_catalog")
+  private Boolean mDisableUseAsParentCatalog = null;
   @SerializedName("id")
   private String mId = null;
   protected static Gson gson = null;
@@ -287,6 +289,10 @@ public class CPASParentCatalogSettings extends APINode {
     return mDefaultCurrency;
   }
 
+  public Boolean getFieldDisableUseAsParentCatalog() {
+    return mDisableUseAsParentCatalog;
+  }
+
   public String getFieldId() {
     return mId;
   }
@@ -306,6 +312,7 @@ public class CPASParentCatalogSettings extends APINode {
     public static final String[] FIELDS = {
       "attribution_windows",
       "default_currency",
+      "disable_use_as_parent_catalog",
       "id",
     };
 
@@ -410,6 +417,13 @@ public class CPASParentCatalogSettings extends APINode {
     }
     public APIRequestGet requestDefaultCurrencyField (boolean value) {
       this.requestField("default_currency", value);
+      return this;
+    }
+    public APIRequestGet requestDisableUseAsParentCatalogField () {
+      return this.requestDisableUseAsParentCatalogField(true);
+    }
+    public APIRequestGet requestDisableUseAsParentCatalogField (boolean value) {
+      this.requestField("disable_use_as_parent_catalog", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -583,6 +597,7 @@ public class CPASParentCatalogSettings extends APINode {
   public CPASParentCatalogSettings copyFrom(CPASParentCatalogSettings instance) {
     this.mAttributionWindows = instance.mAttributionWindows;
     this.mDefaultCurrency = instance.mDefaultCurrency;
+    this.mDisableUseAsParentCatalog = instance.mDisableUseAsParentCatalog;
     this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

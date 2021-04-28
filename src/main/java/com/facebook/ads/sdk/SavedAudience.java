@@ -59,6 +59,8 @@ public class SavedAudience extends APINode {
   private AdAccount mAccount = null;
   @SerializedName("approximate_count")
   private Long mApproximateCount = null;
+  @SerializedName("approximate_count_64bit")
+  private Long mApproximateCount64bit = null;
   @SerializedName("description")
   private String mDescription = null;
   @SerializedName("extra_info")
@@ -304,6 +306,10 @@ public class SavedAudience extends APINode {
     return mApproximateCount;
   }
 
+  public Long getFieldApproximateCount64bit() {
+    return mApproximateCount64bit;
+  }
+
   public String getFieldDescription() {
     return mDescription;
   }
@@ -359,6 +365,7 @@ public class SavedAudience extends APINode {
     public static final String[] FIELDS = {
       "account",
       "approximate_count",
+      "approximate_count_64bit",
       "description",
       "extra_info",
       "id",
@@ -474,6 +481,13 @@ public class SavedAudience extends APINode {
       this.requestField("approximate_count", value);
       return this;
     }
+    public APIRequestGet requestApproximateCount64bitField () {
+      return this.requestApproximateCount64bitField(true);
+    }
+    public APIRequestGet requestApproximateCount64bitField (boolean value) {
+      this.requestField("approximate_count_64bit", value);
+      return this;
+    }
     public APIRequestGet requestDescriptionField () {
       return this.requestDescriptionField(true);
     }
@@ -563,6 +577,7 @@ public class SavedAudience extends APINode {
   public SavedAudience copyFrom(SavedAudience instance) {
     this.mAccount = instance.mAccount;
     this.mApproximateCount = instance.mApproximateCount;
+    this.mApproximateCount64bit = instance.mApproximateCount64bit;
     this.mDescription = instance.mDescription;
     this.mExtraInfo = instance.mExtraInfo;
     this.mId = instance.mId;

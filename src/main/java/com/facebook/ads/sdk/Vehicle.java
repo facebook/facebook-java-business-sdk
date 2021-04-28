@@ -99,6 +99,8 @@ public class Vehicle extends APINode {
   private String mFuelType = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("image_fetch_status")
+  private EnumImageFetchStatus mImageFetchStatus = null;
   @SerializedName("images")
   private List<String> mImages = null;
   @SerializedName("interior_color")
@@ -354,6 +356,14 @@ public class Vehicle extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGetAugmentedRealitiesMetadata getAugmentedRealitiesMetadata() {
+    return new APIRequestGetAugmentedRealitiesMetadata(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetVideosMetadata getVideosMetadata() {
+    return new APIRequestGetVideosMetadata(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
@@ -454,6 +464,10 @@ public class Vehicle extends APINode {
     return mId;
   }
 
+  public EnumImageFetchStatus getFieldImageFetchStatus() {
+    return mImageFetchStatus;
+  }
+
   public List<String> getFieldImages() {
     return mImages;
   }
@@ -548,6 +562,214 @@ public class Vehicle extends APINode {
 
 
 
+  public static class APIRequestGetAugmentedRealitiesMetadata extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetAugmentedRealitiesMetadata.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetAugmentedRealitiesMetadata(String nodeId, APIContext context) {
+      super(context, nodeId, "/augmented_realities_metadata", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetAugmentedRealitiesMetadata setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAugmentedRealitiesMetadata setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetAugmentedRealitiesMetadata requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetAugmentedRealitiesMetadata requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAugmentedRealitiesMetadata requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetAugmentedRealitiesMetadata requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAugmentedRealitiesMetadata requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAugmentedRealitiesMetadata requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetVideosMetadata extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetVideosMetadata.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetVideosMetadata(String nodeId, APIContext context) {
+      super(context, nodeId, "/videos_metadata", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetVideosMetadata setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVideosMetadata setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetVideosMetadata requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetVideosMetadata requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVideosMetadata requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetVideosMetadata requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVideosMetadata requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVideosMetadata requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGet extends APIRequest<Vehicle> {
 
     Vehicle lastResponse = null;
@@ -581,6 +803,7 @@ public class Vehicle extends APINode {
       "features",
       "fuel_type",
       "id",
+      "image_fetch_status",
       "images",
       "interior_color",
       "legal_disclosure_impressum_url",
@@ -847,6 +1070,13 @@ public class Vehicle extends APINode {
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestImageFetchStatusField () {
+      return this.requestImageFetchStatusField(true);
+    }
+    public APIRequestGet requestImageFetchStatusField (boolean value) {
+      this.requestField("image_fetch_status", value);
       return this;
     }
     public APIRequestGet requestImagesField () {
@@ -1346,6 +1576,33 @@ public class Vehicle extends APINode {
 
   }
 
+  public static enum EnumImageFetchStatus {
+      @SerializedName("DIRECT_UPLOAD")
+      VALUE_DIRECT_UPLOAD("DIRECT_UPLOAD"),
+      @SerializedName("FETCHED")
+      VALUE_FETCHED("FETCHED"),
+      @SerializedName("FETCH_FAILED")
+      VALUE_FETCH_FAILED("FETCH_FAILED"),
+      @SerializedName("NO_STATUS")
+      VALUE_NO_STATUS("NO_STATUS"),
+      @SerializedName("OUTDATED")
+      VALUE_OUTDATED("OUTDATED"),
+      @SerializedName("PARTIAL_FETCH")
+      VALUE_PARTIAL_FETCH("PARTIAL_FETCH"),
+      ;
+
+      private String value;
+
+      private EnumImageFetchStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumAvailability {
       @SerializedName("AVAILABLE")
       VALUE_AVAILABLE("AVAILABLE"),
@@ -1611,6 +1868,7 @@ public class Vehicle extends APINode {
     this.mFeatures = instance.mFeatures;
     this.mFuelType = instance.mFuelType;
     this.mId = instance.mId;
+    this.mImageFetchStatus = instance.mImageFetchStatus;
     this.mImages = instance.mImages;
     this.mInteriorColor = instance.mInteriorColor;
     this.mLegalDisclosureImpressumUrl = instance.mLegalDisclosureImpressumUrl;

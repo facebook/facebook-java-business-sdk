@@ -605,6 +605,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_EFFECTIVE_INSTAGRAM_POSITIONS("effective_instagram_positions"),
       @SerializedName("effective_messenger_positions")
       VALUE_EFFECTIVE_MESSENGER_POSITIONS("effective_messenger_positions"),
+      @SerializedName("effective_oculus_positions")
+      VALUE_EFFECTIVE_OCULUS_POSITIONS("effective_oculus_positions"),
       @SerializedName("effective_publisher_platforms")
       VALUE_EFFECTIVE_PUBLISHER_PLATFORMS("effective_publisher_platforms"),
       @SerializedName("effective_whatsapp_positions")
@@ -721,6 +723,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_MOMS("moms"),
       @SerializedName("net_worth")
       VALUE_NET_WORTH("net_worth"),
+      @SerializedName("oculus_positions")
+      VALUE_OCULUS_POSITIONS("oculus_positions"),
       @SerializedName("office_type")
       VALUE_OFFICE_TYPE("office_type"),
       @SerializedName("page_types")

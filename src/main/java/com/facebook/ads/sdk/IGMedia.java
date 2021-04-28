@@ -67,6 +67,8 @@ public class IGMedia extends APINode {
   private Boolean mIsCommentEnabled = null;
   @SerializedName("like_count")
   private Long mLikeCount = null;
+  @SerializedName("media_product_type")
+  private String mMediaProductType = null;
   @SerializedName("media_type")
   private String mMediaType = null;
   @SerializedName("media_url")
@@ -83,6 +85,8 @@ public class IGMedia extends APINode {
   private String mTimestamp = null;
   @SerializedName("username")
   private String mUsername = null;
+  @SerializedName("video_title")
+  private String mVideoTitle = null;
   protected static Gson gson = null;
 
   IGMedia() {
@@ -341,6 +345,10 @@ public class IGMedia extends APINode {
     return mLikeCount;
   }
 
+  public String getFieldMediaProductType() {
+    return mMediaProductType;
+  }
+
   public String getFieldMediaType() {
     return mMediaType;
   }
@@ -376,6 +384,10 @@ public class IGMedia extends APINode {
     return mUsername;
   }
 
+  public String getFieldVideoTitle() {
+    return mVideoTitle;
+  }
+
 
 
   public static class APIRequestGetChildren extends APIRequest<IGMedia> {
@@ -395,6 +407,7 @@ public class IGMedia extends APINode {
       "ig_id",
       "is_comment_enabled",
       "like_count",
+      "media_product_type",
       "media_type",
       "media_url",
       "owner",
@@ -403,6 +416,7 @@ public class IGMedia extends APINode {
       "thumbnail_url",
       "timestamp",
       "username",
+      "video_title",
     };
 
     @Override
@@ -536,6 +550,13 @@ public class IGMedia extends APINode {
       this.requestField("like_count", value);
       return this;
     }
+    public APIRequestGetChildren requestMediaProductTypeField () {
+      return this.requestMediaProductTypeField(true);
+    }
+    public APIRequestGetChildren requestMediaProductTypeField (boolean value) {
+      this.requestField("media_product_type", value);
+      return this;
+    }
     public APIRequestGetChildren requestMediaTypeField () {
       return this.requestMediaTypeField(true);
     }
@@ -590,6 +611,13 @@ public class IGMedia extends APINode {
     }
     public APIRequestGetChildren requestUsernameField (boolean value) {
       this.requestField("username", value);
+      return this;
+    }
+    public APIRequestGetChildren requestVideoTitleField () {
+      return this.requestVideoTitleField(true);
+    }
+    public APIRequestGetChildren requestVideoTitleField (boolean value) {
+      this.requestField("video_title", value);
       return this;
     }
   }
@@ -1061,6 +1089,7 @@ public class IGMedia extends APINode {
       "ig_id",
       "is_comment_enabled",
       "like_count",
+      "media_product_type",
       "media_type",
       "media_url",
       "owner",
@@ -1069,6 +1098,7 @@ public class IGMedia extends APINode {
       "thumbnail_url",
       "timestamp",
       "username",
+      "video_title",
     };
 
     @Override
@@ -1202,6 +1232,13 @@ public class IGMedia extends APINode {
       this.requestField("like_count", value);
       return this;
     }
+    public APIRequestGet requestMediaProductTypeField () {
+      return this.requestMediaProductTypeField(true);
+    }
+    public APIRequestGet requestMediaProductTypeField (boolean value) {
+      this.requestField("media_product_type", value);
+      return this;
+    }
     public APIRequestGet requestMediaTypeField () {
       return this.requestMediaTypeField(true);
     }
@@ -1256,6 +1293,13 @@ public class IGMedia extends APINode {
     }
     public APIRequestGet requestUsernameField (boolean value) {
       this.requestField("username", value);
+      return this;
+    }
+    public APIRequestGet requestVideoTitleField () {
+      return this.requestVideoTitleField(true);
+    }
+    public APIRequestGet requestVideoTitleField (boolean value) {
+      this.requestField("video_title", value);
       return this;
     }
   }
@@ -1395,6 +1439,7 @@ public class IGMedia extends APINode {
     this.mIgId = instance.mIgId;
     this.mIsCommentEnabled = instance.mIsCommentEnabled;
     this.mLikeCount = instance.mLikeCount;
+    this.mMediaProductType = instance.mMediaProductType;
     this.mMediaType = instance.mMediaType;
     this.mMediaUrl = instance.mMediaUrl;
     this.mOwner = instance.mOwner;
@@ -1403,6 +1448,7 @@ public class IGMedia extends APINode {
     this.mThumbnailUrl = instance.mThumbnailUrl;
     this.mTimestamp = instance.mTimestamp;
     this.mUsername = instance.mUsername;
+    this.mVideoTitle = instance.mVideoTitle;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

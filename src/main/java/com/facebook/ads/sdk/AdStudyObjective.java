@@ -508,6 +508,7 @@ public class AdStudyObjective extends APINode {
       "first_party_cookie_status",
       "id",
       "is_created_by_business",
+      "is_crm",
       "is_unavailable",
       "last_fired_time",
       "name",
@@ -672,6 +673,13 @@ public class AdStudyObjective extends APINode {
     }
     public APIRequestGetAdsPixels requestIsCreatedByBusinessField (boolean value) {
       this.requestField("is_created_by_business", value);
+      return this;
+    }
+    public APIRequestGetAdsPixels requestIsCrmField () {
+      return this.requestIsCrmField(true);
+    }
+    public APIRequestGetAdsPixels requestIsCrmField (boolean value) {
+      this.requestField("is_crm", value);
       return this;
     }
     public APIRequestGetAdsPixels requestIsUnavailableField () {
@@ -2750,6 +2758,8 @@ public class AdStudyObjective extends APINode {
   }
 
   public static enum EnumType {
+      @SerializedName("AEP_CONVERSION")
+      VALUE_AEP_CONVERSION("AEP_CONVERSION"),
       @SerializedName("BRAND")
       VALUE_BRAND("BRAND"),
       @SerializedName("BRANDLIFT")
@@ -2760,6 +2770,8 @@ public class AdStudyObjective extends APINode {
       VALUE_MAE("MAE"),
       @SerializedName("MAI")
       VALUE_MAI("MAI"),
+      @SerializedName("MPC_CONVERSION")
+      VALUE_MPC_CONVERSION("MPC_CONVERSION"),
       @SerializedName("NONSALES")
       VALUE_NONSALES("NONSALES"),
       @SerializedName("PARTNER")

@@ -237,6 +237,8 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mMobileAppPurchaseRoas = null;
   @SerializedName("objective")
   private String mObjective = null;
+  @SerializedName("optimization_goal")
+  private String mOptimizationGoal = null;
   @SerializedName("outbound_clicks")
   private List<AdsActionStats> mOutboundClicks = null;
   @SerializedName("outbound_clicks_ctr")
@@ -1430,6 +1432,15 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public String getFieldOptimizationGoal() {
+    return mOptimizationGoal;
+  }
+
+  public AdsInsights setFieldOptimizationGoal(String value) {
+    this.mOptimizationGoal = value;
+    return this;
+  }
+
   public List<AdsActionStats> getFieldOutboundClicks() {
     return mOutboundClicks;
   }
@@ -2311,6 +2322,7 @@ public class AdsInsights extends APINode {
     this.mLocation = instance.mLocation;
     this.mMobileAppPurchaseRoas = instance.mMobileAppPurchaseRoas;
     this.mObjective = instance.mObjective;
+    this.mOptimizationGoal = instance.mOptimizationGoal;
     this.mOutboundClicks = instance.mOutboundClicks;
     this.mOutboundClicksCtr = instance.mOutboundClicksCtr;
     this.mPlacePageName = instance.mPlacePageName;

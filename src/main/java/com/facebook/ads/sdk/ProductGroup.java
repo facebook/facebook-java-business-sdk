@@ -353,6 +353,7 @@ public class ProductGroup extends APINode {
       "gtin",
       "id",
       "image_cdn_urls",
+      "image_fetch_status",
       "image_url",
       "images",
       "inventory",
@@ -667,6 +668,13 @@ public class ProductGroup extends APINode {
     }
     public APIRequestGetProducts requestImageCdnUrlsField (boolean value) {
       this.requestField("image_cdn_urls", value);
+      return this;
+    }
+    public APIRequestGetProducts requestImageFetchStatusField () {
+      return this.requestImageFetchStatusField(true);
+    }
+    public APIRequestGetProducts requestImageFetchStatusField (boolean value) {
+      this.requestField("image_fetch_status", value);
       return this;
     }
     public APIRequestGetProducts requestImageUrlField () {

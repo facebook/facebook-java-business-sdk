@@ -2995,8 +2995,6 @@ public class CustomAudience extends APINode {
       "event_sources",
       "exclusions",
       "inclusions",
-      "is_household",
-      "is_household_exclusion",
       "lookalike_spec",
       "name",
       "opt_out_link",
@@ -3006,7 +3004,6 @@ public class CustomAudience extends APINode {
       "rev_share_policy_id",
       "rule",
       "rule_aggregation",
-      "seed_audience",
       "tags",
     };
 
@@ -3153,24 +3150,6 @@ public class CustomAudience extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setIsHousehold (Boolean isHousehold) {
-      this.setParam("is_household", isHousehold);
-      return this;
-    }
-    public APIRequestUpdate setIsHousehold (String isHousehold) {
-      this.setParam("is_household", isHousehold);
-      return this;
-    }
-
-    public APIRequestUpdate setIsHouseholdExclusion (Boolean isHouseholdExclusion) {
-      this.setParam("is_household_exclusion", isHouseholdExclusion);
-      return this;
-    }
-    public APIRequestUpdate setIsHouseholdExclusion (String isHouseholdExclusion) {
-      this.setParam("is_household_exclusion", isHouseholdExclusion);
-      return this;
-    }
-
     public APIRequestUpdate setLookalikeSpec (String lookalikeSpec) {
       this.setParam("lookalike_spec", lookalikeSpec);
       return this;
@@ -3225,15 +3204,6 @@ public class CustomAudience extends APINode {
 
     public APIRequestUpdate setRuleAggregation (String ruleAggregation) {
       this.setParam("rule_aggregation", ruleAggregation);
-      return this;
-    }
-
-    public APIRequestUpdate setSeedAudience (Long seedAudience) {
-      this.setParam("seed_audience", seedAudience);
-      return this;
-    }
-    public APIRequestUpdate setSeedAudience (String seedAudience) {
-      this.setParam("seed_audience", seedAudience);
       return this;
     }
 

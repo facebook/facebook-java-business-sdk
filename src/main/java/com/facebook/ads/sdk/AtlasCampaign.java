@@ -69,22 +69,6 @@ public class AtlasCampaign extends APINode {
   private Object mCreatedBy = null;
   @SerializedName("created_date")
   private String mCreatedDate = null;
-  @SerializedName("data_driven_convs")
-  private Double mDataDrivenConvs = null;
-  @SerializedName("data_driven_convs_per_1k_impress")
-  private Double mDataDrivenConvsPer1kImpress = null;
-  @SerializedName("data_driven_convs_per_click")
-  private Double mDataDrivenConvsPerClick = null;
-  @SerializedName("data_driven_convs_per_visit")
-  private Double mDataDrivenConvsPerVisit = null;
-  @SerializedName("data_driven_cpa")
-  private Double mDataDrivenCpa = null;
-  @SerializedName("data_driven_nullable_convs")
-  private Double mDataDrivenNullableConvs = null;
-  @SerializedName("data_driven_revenue")
-  private Double mDataDrivenRevenue = null;
-  @SerializedName("data_driven_roas")
-  private Double mDataDrivenRoas = null;
   @SerializedName("even_credit_convs")
   private Double mEvenCreditConvs = null;
   @SerializedName("even_credit_convs_per_1k_impress")
@@ -507,38 +491,6 @@ public class AtlasCampaign extends APINode {
 
   public String getFieldCreatedDate() {
     return mCreatedDate;
-  }
-
-  public Double getFieldDataDrivenConvs() {
-    return mDataDrivenConvs;
-  }
-
-  public Double getFieldDataDrivenConvsPer1kImpress() {
-    return mDataDrivenConvsPer1kImpress;
-  }
-
-  public Double getFieldDataDrivenConvsPerClick() {
-    return mDataDrivenConvsPerClick;
-  }
-
-  public Double getFieldDataDrivenConvsPerVisit() {
-    return mDataDrivenConvsPerVisit;
-  }
-
-  public Double getFieldDataDrivenCpa() {
-    return mDataDrivenCpa;
-  }
-
-  public Double getFieldDataDrivenNullableConvs() {
-    return mDataDrivenNullableConvs;
-  }
-
-  public Double getFieldDataDrivenRevenue() {
-    return mDataDrivenRevenue;
-  }
-
-  public Double getFieldDataDrivenRoas() {
-    return mDataDrivenRoas;
   }
 
   public Double getFieldEvenCreditConvs() {
@@ -1466,14 +1418,6 @@ public class AtlasCampaign extends APINode {
       "cost_per_visit",
       "created_by",
       "created_date",
-      "data_driven_convs",
-      "data_driven_convs_per_1k_impress",
-      "data_driven_convs_per_click",
-      "data_driven_convs_per_visit",
-      "data_driven_cpa",
-      "data_driven_nullable_convs",
-      "data_driven_revenue",
-      "data_driven_roas",
       "even_credit_convs",
       "even_credit_convs_per_1k_impress",
       "even_credit_convs_per_click",
@@ -1704,62 +1648,6 @@ public class AtlasCampaign extends APINode {
     }
     public APIRequestGet requestCreatedDateField (boolean value) {
       this.requestField("created_date", value);
-      return this;
-    }
-    public APIRequestGet requestDataDrivenConvsField () {
-      return this.requestDataDrivenConvsField(true);
-    }
-    public APIRequestGet requestDataDrivenConvsField (boolean value) {
-      this.requestField("data_driven_convs", value);
-      return this;
-    }
-    public APIRequestGet requestDataDrivenConvsPer1kImpressField () {
-      return this.requestDataDrivenConvsPer1kImpressField(true);
-    }
-    public APIRequestGet requestDataDrivenConvsPer1kImpressField (boolean value) {
-      this.requestField("data_driven_convs_per_1k_impress", value);
-      return this;
-    }
-    public APIRequestGet requestDataDrivenConvsPerClickField () {
-      return this.requestDataDrivenConvsPerClickField(true);
-    }
-    public APIRequestGet requestDataDrivenConvsPerClickField (boolean value) {
-      this.requestField("data_driven_convs_per_click", value);
-      return this;
-    }
-    public APIRequestGet requestDataDrivenConvsPerVisitField () {
-      return this.requestDataDrivenConvsPerVisitField(true);
-    }
-    public APIRequestGet requestDataDrivenConvsPerVisitField (boolean value) {
-      this.requestField("data_driven_convs_per_visit", value);
-      return this;
-    }
-    public APIRequestGet requestDataDrivenCpaField () {
-      return this.requestDataDrivenCpaField(true);
-    }
-    public APIRequestGet requestDataDrivenCpaField (boolean value) {
-      this.requestField("data_driven_cpa", value);
-      return this;
-    }
-    public APIRequestGet requestDataDrivenNullableConvsField () {
-      return this.requestDataDrivenNullableConvsField(true);
-    }
-    public APIRequestGet requestDataDrivenNullableConvsField (boolean value) {
-      this.requestField("data_driven_nullable_convs", value);
-      return this;
-    }
-    public APIRequestGet requestDataDrivenRevenueField () {
-      return this.requestDataDrivenRevenueField(true);
-    }
-    public APIRequestGet requestDataDrivenRevenueField (boolean value) {
-      this.requestField("data_driven_revenue", value);
-      return this;
-    }
-    public APIRequestGet requestDataDrivenRoasField () {
-      return this.requestDataDrivenRoasField(true);
-    }
-    public APIRequestGet requestDataDrivenRoasField (boolean value) {
-      this.requestField("data_driven_roas", value);
       return this;
     }
     public APIRequestGet requestEvenCreditConvsField () {
@@ -2417,14 +2305,6 @@ public class AtlasCampaign extends APINode {
     this.mCostPerVisit = instance.mCostPerVisit;
     this.mCreatedBy = instance.mCreatedBy;
     this.mCreatedDate = instance.mCreatedDate;
-    this.mDataDrivenConvs = instance.mDataDrivenConvs;
-    this.mDataDrivenConvsPer1kImpress = instance.mDataDrivenConvsPer1kImpress;
-    this.mDataDrivenConvsPerClick = instance.mDataDrivenConvsPerClick;
-    this.mDataDrivenConvsPerVisit = instance.mDataDrivenConvsPerVisit;
-    this.mDataDrivenCpa = instance.mDataDrivenCpa;
-    this.mDataDrivenNullableConvs = instance.mDataDrivenNullableConvs;
-    this.mDataDrivenRevenue = instance.mDataDrivenRevenue;
-    this.mDataDrivenRoas = instance.mDataDrivenRoas;
     this.mEvenCreditConvs = instance.mEvenCreditConvs;
     this.mEvenCreditConvsPer1kImpress = instance.mEvenCreditConvsPer1kImpress;
     this.mEvenCreditConvsPerClick = instance.mEvenCreditConvsPerClick;

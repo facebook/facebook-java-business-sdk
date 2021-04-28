@@ -110,7 +110,7 @@ public class AdVideo extends APINode {
   @SerializedName("music_video_copyright")
   private MusicVideoCopyright mMusicVideoCopyright = null;
   @SerializedName("permalink_url")
-  private String mPermalinkUrl = null;
+  private Object mPermalinkUrl = null;
   @SerializedName("picture")
   private String mPicture = null;
   @SerializedName("place")
@@ -538,7 +538,7 @@ public class AdVideo extends APINode {
     return mMusicVideoCopyright;
   }
 
-  public String getFieldPermalinkUrl() {
+  public Object getFieldPermalinkUrl() {
     return mPermalinkUrl;
   }
 
@@ -1413,6 +1413,7 @@ public class AdVideo extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_number",
       "hometown",
@@ -1951,6 +1952,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestHasTransitionedToNewPageExperienceField () {
+      return this.requestHasTransitionedToNewPageExperienceField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestHasTransitionedToNewPageExperienceField (boolean value) {
+      this.requestField("has_transitioned_to_new_page_experience", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestHasWhatsappBusinessNumberField () {
@@ -3419,6 +3427,7 @@ public class AdVideo extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_number",
       "hometown",
@@ -3957,6 +3966,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetSponsorTags requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestHasTransitionedToNewPageExperienceField () {
+      return this.requestHasTransitionedToNewPageExperienceField(true);
+    }
+    public APIRequestGetSponsorTags requestHasTransitionedToNewPageExperienceField (boolean value) {
+      this.requestField("has_transitioned_to_new_page_experience", value);
       return this;
     }
     public APIRequestGetSponsorTags requestHasWhatsappBusinessNumberField () {
@@ -6218,10 +6234,6 @@ public class AdVideo extends APINode {
       VALUE_ATLAS_VIDEO("ATLAS_VIDEO"),
       @SerializedName("AUDIO_BROADCAST")
       VALUE_AUDIO_BROADCAST("AUDIO_BROADCAST"),
-      @SerializedName("BELL_POLL")
-      VALUE_BELL_POLL("BELL_POLL"),
-      @SerializedName("BRAND_EQUITY_POLL_VIDEO")
-      VALUE_BRAND_EQUITY_POLL_VIDEO("BRAND_EQUITY_POLL_VIDEO"),
       @SerializedName("BROADCAST")
       VALUE_BROADCAST("BROADCAST"),
       @SerializedName("CANDIDATE_VIDEOS")
@@ -6238,6 +6250,8 @@ public class AdVideo extends APINode {
       VALUE_CONTAINED_POST_AUDIO_BROADCAST("CONTAINED_POST_AUDIO_BROADCAST"),
       @SerializedName("CONTAINED_POST_BROADCAST")
       VALUE_CONTAINED_POST_BROADCAST("CONTAINED_POST_BROADCAST"),
+      @SerializedName("CONTAINED_POST_COPYRIGHT_REFERENCE_BROADCAST")
+      VALUE_CONTAINED_POST_COPYRIGHT_REFERENCE_BROADCAST("CONTAINED_POST_COPYRIGHT_REFERENCE_BROADCAST"),
       @SerializedName("COPYRIGHT_REFERENCE_BROADCAST")
       VALUE_COPYRIGHT_REFERENCE_BROADCAST("COPYRIGHT_REFERENCE_BROADCAST"),
       @SerializedName("COPYRIGHT_REFERENCE_VIDEO")
@@ -6296,12 +6310,16 @@ public class AdVideo extends APINode {
       VALUE_GOODWILL_VIDEO_TOKEN_REQUIRED("GOODWILL_VIDEO_TOKEN_REQUIRED"),
       @SerializedName("GROUP_POST")
       VALUE_GROUP_POST("GROUP_POST"),
+      @SerializedName("HACK_TV")
+      VALUE_HACK_TV("HACK_TV"),
       @SerializedName("HEURISTIC_CLUSTER_VIDEO")
       VALUE_HEURISTIC_CLUSTER_VIDEO("HEURISTIC_CLUSTER_VIDEO"),
       @SerializedName("HEURISTIC_PREVIEW")
       VALUE_HEURISTIC_PREVIEW("HEURISTIC_PREVIEW"),
       @SerializedName("HIGHLIGHT_CLIP_VIDEO")
       VALUE_HIGHLIGHT_CLIP_VIDEO("HIGHLIGHT_CLIP_VIDEO"),
+      @SerializedName("HUDDLE_BROADCAST")
+      VALUE_HUDDLE_BROADCAST("HUDDLE_BROADCAST"),
       @SerializedName("IG_REELS_XPV")
       VALUE_IG_REELS_XPV("IG_REELS_XPV"),
       @SerializedName("IG_STORIES_READER")
@@ -6318,6 +6336,8 @@ public class AdVideo extends APINode {
       VALUE_INSTANT_GAME_CLIP("INSTANT_GAME_CLIP"),
       @SerializedName("ISSUE_MODULE")
       VALUE_ISSUE_MODULE("ISSUE_MODULE"),
+      @SerializedName("JOBS_VISUAL_INTRO_ENTRY")
+      VALUE_JOBS_VISUAL_INTRO_ENTRY("JOBS_VISUAL_INTRO_ENTRY"),
       @SerializedName("JOB_APPLICATION_VIDEO")
       VALUE_JOB_APPLICATION_VIDEO("JOB_APPLICATION_VIDEO"),
       @SerializedName("JOB_OPENING_VIDEO")
@@ -6340,8 +6360,6 @@ public class AdVideo extends APINode {
       VALUE_MARKETPLACE_LISTING_VIDEO("MARKETPLACE_LISTING_VIDEO"),
       @SerializedName("MARKETPLACE_PRE_RECORDED_VIDEO")
       VALUE_MARKETPLACE_PRE_RECORDED_VIDEO("MARKETPLACE_PRE_RECORDED_VIDEO"),
-      @SerializedName("MOMENTS_VIDEO")
-      VALUE_MOMENTS_VIDEO("MOMENTS_VIDEO"),
       @SerializedName("NEO_ASYNC_GAME_VIDEO")
       VALUE_NEO_ASYNC_GAME_VIDEO("NEO_ASYNC_GAME_VIDEO"),
       @SerializedName("NO_STORY")
@@ -6360,10 +6378,20 @@ public class AdVideo extends APINode {
       VALUE_PAGE_REVIEW_SCREENCAST("PAGE_REVIEW_SCREENCAST"),
       @SerializedName("PAGE_SLIDESHOW_VIDEO")
       VALUE_PAGE_SLIDESHOW_VIDEO("PAGE_SLIDESHOW_VIDEO"),
+      @SerializedName("PARTNER_DIRECTORY_BRAND_MEDIA")
+      VALUE_PARTNER_DIRECTORY_BRAND_MEDIA("PARTNER_DIRECTORY_BRAND_MEDIA"),
       @SerializedName("PIXELCLOUD")
       VALUE_PIXELCLOUD("PIXELCLOUD"),
+      @SerializedName("PODCAST_RSS")
+      VALUE_PODCAST_RSS("PODCAST_RSS"),
+      @SerializedName("PODCAST_VOICES")
+      VALUE_PODCAST_VOICES("PODCAST_VOICES"),
       @SerializedName("PREMIERE_SOURCE")
       VALUE_PREMIERE_SOURCE("PREMIERE_SOURCE"),
+      @SerializedName("PREMIUM_MUSIC_VIDEO_NO_NEWSFEED_STORY")
+      VALUE_PREMIUM_MUSIC_VIDEO_NO_NEWSFEED_STORY("PREMIUM_MUSIC_VIDEO_NO_NEWSFEED_STORY"),
+      @SerializedName("PREMIUM_MUSIC_VIDEO_WITH_NEWSFEED_STORY")
+      VALUE_PREMIUM_MUSIC_VIDEO_WITH_NEWSFEED_STORY("PREMIUM_MUSIC_VIDEO_WITH_NEWSFEED_STORY"),
       @SerializedName("PRIVATE_GALLERY_VIDEO")
       VALUE_PRIVATE_GALLERY_VIDEO("PRIVATE_GALLERY_VIDEO"),
       @SerializedName("PRODUCT_VIDEO")
@@ -6372,8 +6400,6 @@ public class AdVideo extends APINode {
       VALUE_PROFILE_COVER_VIDEO("PROFILE_COVER_VIDEO"),
       @SerializedName("PROFILE_INTRO_CARD")
       VALUE_PROFILE_INTRO_CARD("PROFILE_INTRO_CARD"),
-      @SerializedName("PROFILE_TO_PAGE_UPLOADED_VIDEO")
-      VALUE_PROFILE_TO_PAGE_UPLOADED_VIDEO("PROFILE_TO_PAGE_UPLOADED_VIDEO"),
       @SerializedName("PROFILE_VIDEO")
       VALUE_PROFILE_VIDEO("PROFILE_VIDEO"),
       @SerializedName("PROTON")
@@ -6396,8 +6422,12 @@ public class AdVideo extends APINode {
       VALUE_SLIDESHOW_VARIATION_VIDEO("SLIDESHOW_VARIATION_VIDEO"),
       @SerializedName("SOTTO_CONTENT")
       VALUE_SOTTO_CONTENT("SOTTO_CONTENT"),
+      @SerializedName("SOUNDBITES_VIDEO")
+      VALUE_SOUNDBITES_VIDEO("SOUNDBITES_VIDEO"),
       @SerializedName("SOUND_PLATFORM_STREAM")
       VALUE_SOUND_PLATFORM_STREAM("SOUND_PLATFORM_STREAM"),
+      @SerializedName("SRT_ATTACHMENT")
+      VALUE_SRT_ATTACHMENT("SRT_ATTACHMENT"),
       @SerializedName("STORIES_VIDEO")
       VALUE_STORIES_VIDEO("STORIES_VIDEO"),
       @SerializedName("STORYLINE")
@@ -6416,8 +6446,14 @@ public class AdVideo extends APINode {
       VALUE_TEMP_MULTIMEDIA_POST("TEMP_MULTIMEDIA_POST"),
       @SerializedName("UNLISTED")
       VALUE_UNLISTED("UNLISTED"),
+      @SerializedName("UNLISTED_HACK_TV")
+      VALUE_UNLISTED_HACK_TV("UNLISTED_HACK_TV"),
+      @SerializedName("UNLISTED_OCULUS")
+      VALUE_UNLISTED_OCULUS("UNLISTED_OCULUS"),
       @SerializedName("VIDEO_COMMENT")
       VALUE_VIDEO_COMMENT("VIDEO_COMMENT"),
+      @SerializedName("VIDEO_COMPOSITION_VARIATION")
+      VALUE_VIDEO_COMPOSITION_VARIATION("VIDEO_COMPOSITION_VARIATION"),
       @SerializedName("VIDEO_CREATIVE_EDITOR_AUTOGEN_AD_VIDEO")
       VALUE_VIDEO_CREATIVE_EDITOR_AUTOGEN_AD_VIDEO("VIDEO_CREATIVE_EDITOR_AUTOGEN_AD_VIDEO"),
       @SerializedName("VIDEO_SUPERRES")

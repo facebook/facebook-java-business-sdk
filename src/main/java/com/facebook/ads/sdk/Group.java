@@ -344,6 +344,10 @@ public class Group extends APINode {
     return new APIRequestCreateGroup(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateImportantPost createImportantPost() {
+    return new APIRequestCreateImportantPost(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetLiveVideos getLiveVideos() {
     return new APIRequestGetLiveVideos(this.getPrefixedId().toString(), context);
   }
@@ -370,6 +374,14 @@ public class Group extends APINode {
 
   public APIRequestGetPicture getPicture() {
     return new APIRequestGetPicture(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestDeletePinnedPosts deletePinnedPosts() {
+    return new APIRequestDeletePinnedPosts(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreatePinnedPost createPinnedPost() {
+    return new APIRequestCreatePinnedPost(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetVideos getVideos() {
@@ -3851,6 +3863,132 @@ public class Group extends APINode {
 
   }
 
+  public static class APIRequestCreateImportantPost extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "button_type",
+      "expiration_time",
+      "post_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateImportantPost.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateImportantPost(String nodeId, APIContext context) {
+      super(context, nodeId, "/important_posts", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateImportantPost setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateImportantPost setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateImportantPost setButtonType (EnumButtonType buttonType) {
+      this.setParam("button_type", buttonType);
+      return this;
+    }
+    public APIRequestCreateImportantPost setButtonType (String buttonType) {
+      this.setParam("button_type", buttonType);
+      return this;
+    }
+
+    public APIRequestCreateImportantPost setExpirationTime (String expirationTime) {
+      this.setParam("expiration_time", expirationTime);
+      return this;
+    }
+
+    public APIRequestCreateImportantPost setPostId (String postId) {
+      this.setParam("post_id", postId);
+      return this;
+    }
+
+    public APIRequestCreateImportantPost requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateImportantPost requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateImportantPost requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateImportantPost requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateImportantPost requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateImportantPost requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetLiveVideos extends APIRequest<LiveVideo> {
 
     APINodeList<LiveVideo> lastResponse = null;
@@ -6009,6 +6147,230 @@ public class Group extends APINode {
     }
   }
 
+  public static class APIRequestDeletePinnedPosts extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "post_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestDeletePinnedPosts.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDeletePinnedPosts(String nodeId, APIContext context) {
+      super(context, nodeId, "/pinned_posts", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDeletePinnedPosts setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeletePinnedPosts setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDeletePinnedPosts setPostId (String postId) {
+      this.setParam("post_id", postId);
+      return this;
+    }
+
+    public APIRequestDeletePinnedPosts requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDeletePinnedPosts requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeletePinnedPosts requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDeletePinnedPosts requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeletePinnedPosts requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeletePinnedPosts requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreatePinnedPost extends APIRequest<Post> {
+
+    Post lastResponse = null;
+    @Override
+    public Post getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "post_ids",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Post parseResponse(String response, String header) throws APIException {
+      return Post.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Post execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Post execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Post> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Post> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, Post>() {
+           public Post apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreatePinnedPost.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreatePinnedPost(String nodeId, APIContext context) {
+      super(context, nodeId, "/pinned_posts", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreatePinnedPost setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePinnedPost setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreatePinnedPost setPostIds (List<String> postIds) {
+      this.setParam("post_ids", postIds);
+      return this;
+    }
+    public APIRequestCreatePinnedPost setPostIds (String postIds) {
+      this.setParam("post_ids", postIds);
+      return this;
+    }
+
+    public APIRequestCreatePinnedPost requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreatePinnedPost requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePinnedPost requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreatePinnedPost requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePinnedPost requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePinnedPost requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetVideos extends APIRequest<AdVideo> {
 
     APINodeList<AdVideo> lastResponse = null;
@@ -7920,6 +8282,27 @@ public class Group extends APINode {
       private String value;
 
       private EnumGroupType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumButtonType {
+      @SerializedName("DISMISS")
+      VALUE_DISMISS("DISMISS"),
+      @SerializedName("DONE")
+      VALUE_DONE("DONE"),
+      @SerializedName("MARK_AS_READ")
+      VALUE_MARK_AS_READ("MARK_AS_READ"),
+      ;
+
+      private String value;
+
+      private EnumButtonType(String value) {
         this.value = value;
       }
 

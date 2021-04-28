@@ -1772,6 +1772,8 @@ public class WhatsAppBusinessAccount extends APINode {
       VALUE_MANAGE_PHONE("MANAGE_PHONE"),
       @SerializedName("MANAGE_TEMPLATES")
       VALUE_MANAGE_TEMPLATES("MANAGE_TEMPLATES"),
+      @SerializedName("MESSAGING")
+      VALUE_MESSAGING("MESSAGING"),
       @SerializedName("VIEW_COST")
       VALUE_VIEW_COST("VIEW_COST"),
       ;

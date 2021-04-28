@@ -310,6 +310,8 @@ public class ProductItemARData extends APINode {
       VALUE_SHOPS("SHOPS"),
       @SerializedName("UNIVERSAL_CHECKOUT")
       VALUE_UNIVERSAL_CHECKOUT("UNIVERSAL_CHECKOUT"),
+      @SerializedName("WHATSAPP")
+      VALUE_WHATSAPP("WHATSAPP"),
       ;
 
       private String value;

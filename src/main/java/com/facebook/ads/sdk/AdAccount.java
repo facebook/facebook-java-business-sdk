@@ -568,10 +568,6 @@ public class AdAccount extends APINode {
     return new APIRequestCreateAsyncAdRequestSet(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateAudienceReplace createAudienceReplace() {
-    return new APIRequestCreateAudienceReplace(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestCreateBlockListDraft createBlockListDraft() {
     return new APIRequestCreateBlockListDraft(this.getPrefixedId().toString(), context);
   }
@@ -1767,6 +1763,7 @@ public class AdAccount extends APINode {
       "cooldown_start_time",
       "created_by",
       "created_time",
+      "datasets_information",
       "description",
       "end_time",
       "id",
@@ -1901,6 +1898,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdStudies requestCreatedTimeField (boolean value) {
       this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGetAdStudies requestDatasetsInformationField () {
+      return this.requestDatasetsInformationField(true);
+    }
+    public APIRequestGetAdStudies requestDatasetsInformationField (boolean value) {
+      this.requestField("datasets_information", value);
       return this;
     }
     public APIRequestGetAdStudies requestDescriptionField () {
@@ -8149,6 +8153,7 @@ public class AdAccount extends APINode {
       "first_party_cookie_status",
       "id",
       "is_created_by_business",
+      "is_crm",
       "is_unavailable",
       "last_fired_time",
       "name",
@@ -8322,6 +8327,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdsPixels requestIsCreatedByBusinessField (boolean value) {
       this.requestField("is_created_by_business", value);
+      return this;
+    }
+    public APIRequestGetAdsPixels requestIsCrmField () {
+      return this.requestIsCrmField(true);
+    }
+    public APIRequestGetAdsPixels requestIsCrmField (boolean value) {
+      this.requestField("is_crm", value);
       return this;
     }
     public APIRequestGetAdsPixels requestIsUnavailableField () {
@@ -13682,130 +13694,6 @@ public class AdAccount extends APINode {
 
   }
 
-  public static class APIRequestCreateAudienceReplace extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "payload",
-      "session",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateAudienceReplace.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateAudienceReplace(String nodeId, APIContext context) {
-      super(context, nodeId, "/audiencereplace", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateAudienceReplace setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAudienceReplace setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateAudienceReplace setPayload (Object payload) {
-      this.setParam("payload", payload);
-      return this;
-    }
-    public APIRequestCreateAudienceReplace setPayload (String payload) {
-      this.setParam("payload", payload);
-      return this;
-    }
-
-    public APIRequestCreateAudienceReplace setSession (Object session) {
-      this.setParam("session", session);
-      return this;
-    }
-    public APIRequestCreateAudienceReplace setSession (String session) {
-      this.setParam("session", session);
-      return this;
-    }
-
-    public APIRequestCreateAudienceReplace requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateAudienceReplace requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAudienceReplace requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateAudienceReplace requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAudienceReplace requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAudienceReplace requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestCreateBlockListDraft extends APIRequest<AdAccount> {
 
     AdAccount lastResponse = null;
@@ -14727,7 +14615,9 @@ public class AdAccount extends APINode {
       "special_ad_categories",
       "special_ad_category_country",
       "spend_cap",
+      "start_time",
       "status",
+      "stop_time",
       "topline_id",
       "upstream_events",
     };
@@ -14929,12 +14819,22 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateCampaign setStartTime (String startTime) {
+      this.setParam("start_time", startTime);
+      return this;
+    }
+
     public APIRequestCreateCampaign setStatus (Campaign.EnumStatus status) {
       this.setParam("status", status);
       return this;
     }
     public APIRequestCreateCampaign setStatus (String status) {
       this.setParam("status", status);
+      return this;
+    }
+
+    public APIRequestCreateCampaign setStopTime (String stopTime) {
+      this.setParam("stop_time", stopTime);
       return this;
     }
 
@@ -16110,8 +16010,6 @@ public class AdAccount extends APINode {
       "event_sources",
       "exclusions",
       "inclusions",
-      "is_household",
-      "is_household_exclusion",
       "is_snapshot",
       "is_value_based",
       "list_of_accounts",
@@ -16129,9 +16027,7 @@ public class AdAccount extends APINode {
       "rev_share_policy_id",
       "rule",
       "rule_aggregation",
-      "seed_audience",
       "subtype",
-      "tags",
       "video_group_ids",
     };
 
@@ -16301,24 +16197,6 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateCustomAudience setIsHousehold (Boolean isHousehold) {
-      this.setParam("is_household", isHousehold);
-      return this;
-    }
-    public APIRequestCreateCustomAudience setIsHousehold (String isHousehold) {
-      this.setParam("is_household", isHousehold);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setIsHouseholdExclusion (Boolean isHouseholdExclusion) {
-      this.setParam("is_household_exclusion", isHouseholdExclusion);
-      return this;
-    }
-    public APIRequestCreateCustomAudience setIsHouseholdExclusion (String isHouseholdExclusion) {
-      this.setParam("is_household_exclusion", isHouseholdExclusion);
-      return this;
-    }
-
     public APIRequestCreateCustomAudience setIsSnapshot (Boolean isSnapshot) {
       this.setParam("is_snapshot", isSnapshot);
       return this;
@@ -16432,30 +16310,12 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateCustomAudience setSeedAudience (Long seedAudience) {
-      this.setParam("seed_audience", seedAudience);
-      return this;
-    }
-    public APIRequestCreateCustomAudience setSeedAudience (String seedAudience) {
-      this.setParam("seed_audience", seedAudience);
-      return this;
-    }
-
     public APIRequestCreateCustomAudience setSubtype (CustomAudience.EnumSubtype subtype) {
       this.setParam("subtype", subtype);
       return this;
     }
     public APIRequestCreateCustomAudience setSubtype (String subtype) {
       this.setParam("subtype", subtype);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setTags (List<String> tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-    public APIRequestCreateCustomAudience setTags (String tags) {
-      this.setParam("tags", tags);
       return this;
     }
 
@@ -18112,6 +17972,7 @@ public class AdAccount extends APINode {
       "cooldown_start_time",
       "created_by",
       "created_time",
+      "datasets_information",
       "description",
       "end_time",
       "id",
@@ -18246,6 +18107,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetImpactingAdStudies requestCreatedTimeField (boolean value) {
       this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGetImpactingAdStudies requestDatasetsInformationField () {
+      return this.requestDatasetsInformationField(true);
+    }
+    public APIRequestGetImpactingAdStudies requestDatasetsInformationField (boolean value) {
+      this.requestField("datasets_information", value);
       return this;
     }
     public APIRequestGetImpactingAdStudies requestDescriptionField () {
@@ -20029,8 +19897,6 @@ public class AdAccount extends APINode {
       "event_sources",
       "exclusions",
       "inclusions",
-      "is_household",
-      "is_household_exclusion",
       "is_snapshot",
       "is_value_based",
       "name",
@@ -20038,9 +19904,7 @@ public class AdAccount extends APINode {
       "parent_audience_id",
       "product_set_id",
       "rev_share_policy_id",
-      "seed_audience",
       "subtype",
-      "tags",
     };
 
     public static final String[] FIELDS = {
@@ -20190,24 +20054,6 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateProductAudience setIsHousehold (Boolean isHousehold) {
-      this.setParam("is_household", isHousehold);
-      return this;
-    }
-    public APIRequestCreateProductAudience setIsHousehold (String isHousehold) {
-      this.setParam("is_household", isHousehold);
-      return this;
-    }
-
-    public APIRequestCreateProductAudience setIsHouseholdExclusion (Boolean isHouseholdExclusion) {
-      this.setParam("is_household_exclusion", isHouseholdExclusion);
-      return this;
-    }
-    public APIRequestCreateProductAudience setIsHouseholdExclusion (String isHouseholdExclusion) {
-      this.setParam("is_household_exclusion", isHouseholdExclusion);
-      return this;
-    }
-
     public APIRequestCreateProductAudience setIsSnapshot (Boolean isSnapshot) {
       this.setParam("is_snapshot", isSnapshot);
       return this;
@@ -20259,30 +20105,12 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateProductAudience setSeedAudience (Long seedAudience) {
-      this.setParam("seed_audience", seedAudience);
-      return this;
-    }
-    public APIRequestCreateProductAudience setSeedAudience (String seedAudience) {
-      this.setParam("seed_audience", seedAudience);
-      return this;
-    }
-
     public APIRequestCreateProductAudience setSubtype (AdAccount.EnumSubtype subtype) {
       this.setParam("subtype", subtype);
       return this;
     }
     public APIRequestCreateProductAudience setSubtype (String subtype) {
       this.setParam("subtype", subtype);
-      return this;
-    }
-
-    public APIRequestCreateProductAudience setTags (List<String> tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-    public APIRequestCreateProductAudience setTags (String tags) {
-      this.setParam("tags", tags);
       return this;
     }
 
@@ -20386,6 +20214,7 @@ public class AdAccount extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_number",
       "hometown",
@@ -20924,6 +20753,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetPromotePages requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetPromotePages requestHasTransitionedToNewPageExperienceField () {
+      return this.requestHasTransitionedToNewPageExperienceField(true);
+    }
+    public APIRequestGetPromotePages requestHasTransitionedToNewPageExperienceField (boolean value) {
+      this.requestField("has_transitioned_to_new_page_experience", value);
       return this;
     }
     public APIRequestGetPromotePages requestHasWhatsappBusinessNumberField () {

@@ -274,6 +274,8 @@ public class ContentDeliveryReport extends APINode {
       VALUE_INSTAGRAM("INSTAGRAM"),
       @SerializedName("MESSENGER")
       VALUE_MESSENGER("MESSENGER"),
+      @SerializedName("OCULUS")
+      VALUE_OCULUS("OCULUS"),
       @SerializedName("UNKNOWN")
       VALUE_UNKNOWN("UNKNOWN"),
       @SerializedName("WHATSAPP")
@@ -311,6 +313,8 @@ public class ContentDeliveryReport extends APINode {
       VALUE_INSTAGRAM_EXPLORE("INSTAGRAM_EXPLORE"),
       @SerializedName("INSTAGRAM_IGTV")
       VALUE_INSTAGRAM_IGTV("INSTAGRAM_IGTV"),
+      @SerializedName("INSTAGRAM_REELS")
+      VALUE_INSTAGRAM_REELS("INSTAGRAM_REELS"),
       @SerializedName("INSTAGRAM_STORIES")
       VALUE_INSTAGRAM_STORIES("INSTAGRAM_STORIES"),
       @SerializedName("INSTANT_ARTICLE")
@@ -325,6 +329,8 @@ public class ContentDeliveryReport extends APINode {
       VALUE_MESSENGER_INBOX("MESSENGER_INBOX"),
       @SerializedName("MESSENGER_STORIES")
       VALUE_MESSENGER_STORIES("MESSENGER_STORIES"),
+      @SerializedName("OCULUS_TWILIGHT_FEED")
+      VALUE_OCULUS_TWILIGHT_FEED("OCULUS_TWILIGHT_FEED"),
       @SerializedName("OTHERS")
       VALUE_OTHERS("OTHERS"),
       @SerializedName("REWARDED_VIDEO")
@@ -335,6 +341,8 @@ public class ContentDeliveryReport extends APINode {
       VALUE_SEARCH("SEARCH"),
       @SerializedName("STATUS")
       VALUE_STATUS("STATUS"),
+      @SerializedName("STICKERS")
+      VALUE_STICKERS("STICKERS"),
       @SerializedName("SUGGESTED_VIDEO")
       VALUE_SUGGESTED_VIDEO("SUGGESTED_VIDEO"),
       @SerializedName("UNKNOWN")

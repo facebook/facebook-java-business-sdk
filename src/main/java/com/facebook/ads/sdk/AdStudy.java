@@ -65,6 +65,8 @@ public class AdStudy extends APINode {
   private User mCreatedBy = null;
   @SerializedName("created_time")
   private String mCreatedTime = null;
+  @SerializedName("datasets_information")
+  private List<String> mDatasetsInformation = null;
   @SerializedName("description")
   private String mDescription = null;
   @SerializedName("end_time")
@@ -298,6 +300,14 @@ public class AdStudy extends APINode {
     return new APIRequestGetCells(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetInstances getInstances() {
+    return new APIRequestGetInstances(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateInstance createInstance() {
+    return new APIRequestCreateInstance(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetObjectives getObjectives() {
     return new APIRequestGetObjectives(this.getPrefixedId().toString(), context);
   }
@@ -339,6 +349,10 @@ public class AdStudy extends APINode {
 
   public String getFieldCreatedTime() {
     return mCreatedTime;
+  }
+
+  public List<String> getFieldDatasetsInformation() {
+    return mDatasetsInformation;
   }
 
   public String getFieldDescription() {
@@ -528,6 +542,272 @@ public class AdStudy extends APINode {
       this.requestField("treatment_percentage", value);
       return this;
     }
+  }
+
+  public static class APIRequestGetInstances extends APIRequest<PrivateLiftStudyInstance> {
+
+    APINodeList<PrivateLiftStudyInstance> lastResponse = null;
+    @Override
+    public APINodeList<PrivateLiftStudyInstance> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "breakdown_key",
+      "created_time",
+      "id",
+      "latest_status_update_time",
+      "server_ips",
+      "status",
+    };
+
+    @Override
+    public APINodeList<PrivateLiftStudyInstance> parseResponse(String response, String header) throws APIException {
+      return PrivateLiftStudyInstance.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<PrivateLiftStudyInstance> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<PrivateLiftStudyInstance> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<PrivateLiftStudyInstance>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<PrivateLiftStudyInstance>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<PrivateLiftStudyInstance>>() {
+           public APINodeList<PrivateLiftStudyInstance> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetInstances.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetInstances(String nodeId, APIContext context) {
+      super(context, nodeId, "/instances", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetInstances setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInstances setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetInstances requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetInstances requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInstances requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetInstances requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInstances requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInstances requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetInstances requestBreakdownKeyField () {
+      return this.requestBreakdownKeyField(true);
+    }
+    public APIRequestGetInstances requestBreakdownKeyField (boolean value) {
+      this.requestField("breakdown_key", value);
+      return this;
+    }
+    public APIRequestGetInstances requestCreatedTimeField () {
+      return this.requestCreatedTimeField(true);
+    }
+    public APIRequestGetInstances requestCreatedTimeField (boolean value) {
+      this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGetInstances requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetInstances requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetInstances requestLatestStatusUpdateTimeField () {
+      return this.requestLatestStatusUpdateTimeField(true);
+    }
+    public APIRequestGetInstances requestLatestStatusUpdateTimeField (boolean value) {
+      this.requestField("latest_status_update_time", value);
+      return this;
+    }
+    public APIRequestGetInstances requestServerIpsField () {
+      return this.requestServerIpsField(true);
+    }
+    public APIRequestGetInstances requestServerIpsField (boolean value) {
+      this.requestField("server_ips", value);
+      return this;
+    }
+    public APIRequestGetInstances requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetInstances requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreateInstance extends APIRequest<PrivateLiftStudyInstance> {
+
+    PrivateLiftStudyInstance lastResponse = null;
+    @Override
+    public PrivateLiftStudyInstance getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "breakdown_key",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public PrivateLiftStudyInstance parseResponse(String response, String header) throws APIException {
+      return PrivateLiftStudyInstance.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public PrivateLiftStudyInstance execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public PrivateLiftStudyInstance execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<PrivateLiftStudyInstance> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<PrivateLiftStudyInstance> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, PrivateLiftStudyInstance>() {
+           public PrivateLiftStudyInstance apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateInstance.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateInstance(String nodeId, APIContext context) {
+      super(context, nodeId, "/instances", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateInstance setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateInstance setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateInstance setBreakdownKey (Map<String, String> breakdownKey) {
+      this.setParam("breakdown_key", breakdownKey);
+      return this;
+    }
+    public APIRequestCreateInstance setBreakdownKey (String breakdownKey) {
+      this.setParam("breakdown_key", breakdownKey);
+      return this;
+    }
+
+    public APIRequestCreateInstance requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateInstance requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateInstance requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateInstance requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateInstance requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateInstance requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetObjectives extends APIRequest<AdStudyObjective> {
@@ -802,6 +1082,7 @@ public class AdStudy extends APINode {
       "cooldown_start_time",
       "created_by",
       "created_time",
+      "datasets_information",
       "description",
       "end_time",
       "id",
@@ -936,6 +1217,13 @@ public class AdStudy extends APINode {
     }
     public APIRequestGet requestCreatedTimeField (boolean value) {
       this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGet requestDatasetsInformationField () {
+      return this.requestDatasetsInformationField(true);
+    }
+    public APIRequestGet requestDatasetsInformationField (boolean value) {
+      this.requestField("datasets_information", value);
       return this;
     }
     public APIRequestGet requestDescriptionField () {
@@ -1267,6 +1555,7 @@ public class AdStudy extends APINode {
     this.mCooldownStartTime = instance.mCooldownStartTime;
     this.mCreatedBy = instance.mCreatedBy;
     this.mCreatedTime = instance.mCreatedTime;
+    this.mDatasetsInformation = instance.mDatasetsInformation;
     this.mDescription = instance.mDescription;
     this.mEndTime = instance.mEndTime;
     this.mId = instance.mId;

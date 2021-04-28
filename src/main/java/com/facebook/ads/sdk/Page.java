@@ -157,6 +157,8 @@ public class Page extends APINode {
   private String mGlobalBrandRootId = null;
   @SerializedName("has_added_app")
   private Boolean mHasAddedApp = null;
+  @SerializedName("has_transitioned_to_new_page_experience")
+  private Boolean mHasTransitionedToNewPageExperience = null;
   @SerializedName("has_whatsapp_business_number")
   private Boolean mHasWhatsappBusinessNumber = null;
   @SerializedName("has_whatsapp_number")
@@ -554,6 +556,10 @@ public class Page extends APINode {
     return new APIRequestCreateAcknowledgeOrder(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetAdminNotes getAdminNotes() {
+    return new APIRequestGetAdminNotes(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetAdsPosts getAdsPosts() {
     return new APIRequestGetAdsPosts(this.getPrefixedId().toString(), context);
   }
@@ -854,6 +860,10 @@ public class Page extends APINode {
     return new APIRequestCreatePersona(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreatePhoneDatum createPhoneDatum() {
+    return new APIRequestCreatePhoneDatum(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetPhotos getPhotos() {
     return new APIRequestGetPhotos(this.getPrefixedId().toString(), context);
   }
@@ -960,10 +970,6 @@ public class Page extends APINode {
 
   public APIRequestGetThreads getThreads() {
     return new APIRequestGetThreads(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetTours getTours() {
-    return new APIRequestGetTours(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateUnlinkAccount createUnlinkAccount() {
@@ -1227,6 +1233,10 @@ public class Page extends APINode {
 
   public Boolean getFieldHasAddedApp() {
     return mHasAddedApp;
+  }
+
+  public Boolean getFieldHasTransitionedToNewPageExperience() {
+    return mHasTransitionedToNewPageExperience;
   }
 
   public Boolean getFieldHasWhatsappBusinessNumber() {
@@ -1729,6 +1739,150 @@ public class Page extends APINode {
       return this;
     }
 
+  }
+
+  public static class APIRequestGetAdminNotes extends APIRequest<PageAdminNote> {
+
+    APINodeList<PageAdminNote> lastResponse = null;
+    @Override
+    public APINodeList<PageAdminNote> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "body",
+      "from",
+      "id",
+      "note_label",
+      "user",
+    };
+
+    @Override
+    public APINodeList<PageAdminNote> parseResponse(String response, String header) throws APIException {
+      return PageAdminNote.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<PageAdminNote> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<PageAdminNote> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<PageAdminNote>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<PageAdminNote>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<PageAdminNote>>() {
+           public APINodeList<PageAdminNote> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetAdminNotes.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetAdminNotes(String nodeId, APIContext context) {
+      super(context, nodeId, "/admin_notes", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetAdminNotes setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdminNotes setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetAdminNotes requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetAdminNotes requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdminNotes requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetAdminNotes requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdminNotes requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdminNotes requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetAdminNotes requestBodyField () {
+      return this.requestBodyField(true);
+    }
+    public APIRequestGetAdminNotes requestBodyField (boolean value) {
+      this.requestField("body", value);
+      return this;
+    }
+    public APIRequestGetAdminNotes requestFromField () {
+      return this.requestFromField(true);
+    }
+    public APIRequestGetAdminNotes requestFromField (boolean value) {
+      this.requestField("from", value);
+      return this;
+    }
+    public APIRequestGetAdminNotes requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetAdminNotes requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetAdminNotes requestNoteLabelField () {
+      return this.requestNoteLabelField(true);
+    }
+    public APIRequestGetAdminNotes requestNoteLabelField (boolean value) {
+      this.requestField("note_label", value);
+      return this;
+    }
+    public APIRequestGetAdminNotes requestUserField () {
+      return this.requestUserField(true);
+    }
+    public APIRequestGetAdminNotes requestUserField (boolean value) {
+      this.requestField("user", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetAdsPosts extends APIRequest<PagePost> {
@@ -5448,6 +5602,7 @@ public class Page extends APINode {
       "display_name",
       "external_merchant_id",
       "facebook_channel",
+      "feature_eligibility",
       "has_discount_code",
       "has_onsite_intent",
       "id",
@@ -5610,6 +5765,13 @@ public class Page extends APINode {
     }
     public APIRequestGetCommerceMerchantSettings requestFacebookChannelField (boolean value) {
       this.requestField("facebook_channel", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestFeatureEligibilityField () {
+      return this.requestFeatureEligibilityField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestFeatureEligibilityField (boolean value) {
+      this.requestField("feature_eligibility", value);
       return this;
     }
     public APIRequestGetCommerceMerchantSettings requestHasDiscountCodeField () {
@@ -6979,6 +7141,7 @@ public class Page extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_number",
       "hometown",
@@ -7517,6 +7680,13 @@ public class Page extends APINode {
     }
     public APIRequestGetCrosspostWhitelistedPages requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetCrosspostWhitelistedPages requestHasTransitionedToNewPageExperienceField () {
+      return this.requestHasTransitionedToNewPageExperienceField(true);
+    }
+    public APIRequestGetCrosspostWhitelistedPages requestHasTransitionedToNewPageExperienceField (boolean value) {
+      this.requestField("has_transitioned_to_new_page_experience", value);
       return this;
     }
     public APIRequestGetCrosspostWhitelistedPages requestHasWhatsappBusinessNumberField () {
@@ -10965,6 +11135,7 @@ public class Page extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_number",
       "hometown",
@@ -11503,6 +11674,13 @@ public class Page extends APINode {
     }
     public APIRequestGetGlobalBrandChildren requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetGlobalBrandChildren requestHasTransitionedToNewPageExperienceField () {
+      return this.requestHasTransitionedToNewPageExperienceField(true);
+    }
+    public APIRequestGetGlobalBrandChildren requestHasTransitionedToNewPageExperienceField (boolean value) {
+      this.requestField("has_transitioned_to_new_page_experience", value);
       return this;
     }
     public APIRequestGetGlobalBrandChildren requestHasWhatsappBusinessNumberField () {
@@ -14562,6 +14740,7 @@ public class Page extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_number",
       "hometown",
@@ -15105,6 +15284,13 @@ public class Page extends APINode {
     }
     public APIRequestGetLikes requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetLikes requestHasTransitionedToNewPageExperienceField () {
+      return this.requestHasTransitionedToNewPageExperienceField(true);
+    }
+    public APIRequestGetLikes requestHasTransitionedToNewPageExperienceField (boolean value) {
+      this.requestField("has_transitioned_to_new_page_experience", value);
       return this;
     }
     public APIRequestGetLikes requestHasWhatsappBusinessNumberField () {
@@ -16939,6 +17125,7 @@ public class Page extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_number",
       "hometown",
@@ -17477,6 +17664,13 @@ public class Page extends APINode {
     }
     public APIRequestGetLocations requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetLocations requestHasTransitionedToNewPageExperienceField () {
+      return this.requestHasTransitionedToNewPageExperienceField(true);
+    }
+    public APIRequestGetLocations requestHasTransitionedToNewPageExperienceField (boolean value) {
+      this.requestField("has_transitioned_to_new_page_experience", value);
       return this;
     }
     public APIRequestGetLocations requestHasWhatsappBusinessNumberField () {
@@ -21227,6 +21421,126 @@ public class Page extends APINode {
 
   }
 
+  public static class APIRequestCreatePhoneDatum extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "call_ads_phone_data_use_case",
+      "phone_number",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreatePhoneDatum.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreatePhoneDatum(String nodeId, APIContext context) {
+      super(context, nodeId, "/phone_data", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreatePhoneDatum setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePhoneDatum setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreatePhoneDatum setCallAdsPhoneDataUseCase (EnumCallAdsPhoneDataUseCase callAdsPhoneDataUseCase) {
+      this.setParam("call_ads_phone_data_use_case", callAdsPhoneDataUseCase);
+      return this;
+    }
+    public APIRequestCreatePhoneDatum setCallAdsPhoneDataUseCase (String callAdsPhoneDataUseCase) {
+      this.setParam("call_ads_phone_data_use_case", callAdsPhoneDataUseCase);
+      return this;
+    }
+
+    public APIRequestCreatePhoneDatum setPhoneNumber (String phoneNumber) {
+      this.setParam("phone_number", phoneNumber);
+      return this;
+    }
+
+    public APIRequestCreatePhoneDatum requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreatePhoneDatum requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePhoneDatum requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreatePhoneDatum requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePhoneDatum requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePhoneDatum requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetPhotos extends APIRequest<Photo> {
 
     APINodeList<Photo> lastResponse = null;
@@ -23479,8 +23793,10 @@ public class Page extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "since",
-      "until",
+      "include_hidden",
+      "limit",
+      "show_expired",
+      "with",
     };
 
     public static final String[] FIELDS = {
@@ -23594,13 +23910,39 @@ public class Page extends APINode {
     }
 
 
-    public APIRequestGetPublishedPosts setSince (String since) {
-      this.setParam("since", since);
+    public APIRequestGetPublishedPosts setIncludeHidden (Boolean includeHidden) {
+      this.setParam("include_hidden", includeHidden);
+      return this;
+    }
+    public APIRequestGetPublishedPosts setIncludeHidden (String includeHidden) {
+      this.setParam("include_hidden", includeHidden);
       return this;
     }
 
-    public APIRequestGetPublishedPosts setUntil (String until) {
-      this.setParam("until", until);
+    public APIRequestGetPublishedPosts setLimit (Long limit) {
+      this.setParam("limit", limit);
+      return this;
+    }
+    public APIRequestGetPublishedPosts setLimit (String limit) {
+      this.setParam("limit", limit);
+      return this;
+    }
+
+    public APIRequestGetPublishedPosts setShowExpired (Boolean showExpired) {
+      this.setParam("show_expired", showExpired);
+      return this;
+    }
+    public APIRequestGetPublishedPosts setShowExpired (String showExpired) {
+      this.setParam("show_expired", showExpired);
+      return this;
+    }
+
+    public APIRequestGetPublishedPosts setWith (PagePost.EnumWith with) {
+      this.setParam("with", with);
+      return this;
+    }
+    public APIRequestGetPublishedPosts setWith (String with) {
+      this.setParam("with", with);
       return this;
     }
 
@@ -29585,110 +29927,6 @@ public class Page extends APINode {
     }
   }
 
-  public static class APIRequestGetTours extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetTours.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetTours(String nodeId, APIContext context) {
-      super(context, nodeId, "/tours", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetTours setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetTours setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetTours requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetTours requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetTours requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetTours requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetTours requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetTours requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestCreateUnlinkAccount extends APIRequest<Page> {
 
     Page lastResponse = null;
@@ -32438,6 +32676,7 @@ public class Page extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_number",
       "hometown",
@@ -32981,6 +33220,13 @@ public class Page extends APINode {
     }
     public APIRequestGet requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGet requestHasTransitionedToNewPageExperienceField () {
+      return this.requestHasTransitionedToNewPageExperienceField(true);
+    }
+    public APIRequestGet requestHasTransitionedToNewPageExperienceField (boolean value) {
+      this.requestField("has_transitioned_to_new_page_experience", value);
       return this;
     }
     public APIRequestGet requestHasWhatsappBusinessNumberField () {
@@ -34434,6 +34680,8 @@ public class Page extends APINode {
       VALUE_PROFILE_PLUS_ANALYZE("PROFILE_PLUS_ANALYZE"),
       @SerializedName("PROFILE_PLUS_CREATE_CONTENT")
       VALUE_PROFILE_PLUS_CREATE_CONTENT("PROFILE_PLUS_CREATE_CONTENT"),
+      @SerializedName("PROFILE_PLUS_FACEBOOK_ACCESS")
+      VALUE_PROFILE_PLUS_FACEBOOK_ACCESS("PROFILE_PLUS_FACEBOOK_ACCESS"),
       @SerializedName("PROFILE_PLUS_MANAGE")
       VALUE_PROFILE_PLUS_MANAGE("PROFILE_PLUS_MANAGE"),
       @SerializedName("PROFILE_PLUS_MESSAGING")
@@ -34489,6 +34737,8 @@ public class Page extends APINode {
       VALUE_PROFILE_PLUS_ANALYZE("PROFILE_PLUS_ANALYZE"),
       @SerializedName("PROFILE_PLUS_CREATE_CONTENT")
       VALUE_PROFILE_PLUS_CREATE_CONTENT("PROFILE_PLUS_CREATE_CONTENT"),
+      @SerializedName("PROFILE_PLUS_FACEBOOK_ACCESS")
+      VALUE_PROFILE_PLUS_FACEBOOK_ACCESS("PROFILE_PLUS_FACEBOOK_ACCESS"),
       @SerializedName("PROFILE_PLUS_MANAGE")
       VALUE_PROFILE_PLUS_MANAGE("PROFILE_PLUS_MANAGE"),
       @SerializedName("PROFILE_PLUS_MESSAGING")
@@ -35161,6 +35411,25 @@ public class Page extends APINode {
       }
   }
 
+  public static enum EnumCallAdsPhoneDataUseCase {
+      @SerializedName("CALL_DESTINATION_AD")
+      VALUE_CALL_DESTINATION_AD("CALL_DESTINATION_AD"),
+      @SerializedName("CALL_EXTENSION_AD")
+      VALUE_CALL_EXTENSION_AD("CALL_EXTENSION_AD"),
+      ;
+
+      private String value;
+
+      private EnumCallAdsPhoneDataUseCase(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -35227,6 +35496,7 @@ public class Page extends APINode {
     this.mGlobalBrandPageName = instance.mGlobalBrandPageName;
     this.mGlobalBrandRootId = instance.mGlobalBrandRootId;
     this.mHasAddedApp = instance.mHasAddedApp;
+    this.mHasTransitionedToNewPageExperience = instance.mHasTransitionedToNewPageExperience;
     this.mHasWhatsappBusinessNumber = instance.mHasWhatsappBusinessNumber;
     this.mHasWhatsappNumber = instance.mHasWhatsappNumber;
     this.mHometown = instance.mHometown;

@@ -464,6 +464,7 @@ public class AdReportRun extends APINode {
       "location",
       "mobile_app_purchase_roas",
       "objective",
+      "optimization_goal",
       "outbound_clicks",
       "outbound_clicks_ctr",
       "place_page_name",
@@ -1234,6 +1235,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestObjectiveField (boolean value) {
       this.requestField("objective", value);
+      return this;
+    }
+    public APIRequestGetInsights requestOptimizationGoalField () {
+      return this.requestOptimizationGoalField(true);
+    }
+    public APIRequestGetInsights requestOptimizationGoalField (boolean value) {
+      this.requestField("optimization_goal", value);
       return this;
     }
     public APIRequestGetInsights requestOutboundClicksField () {
