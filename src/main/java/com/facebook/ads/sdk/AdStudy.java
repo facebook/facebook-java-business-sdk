@@ -65,8 +65,6 @@ public class AdStudy extends APINode {
   private User mCreatedBy = null;
   @SerializedName("created_time")
   private String mCreatedTime = null;
-  @SerializedName("datasets_information")
-  private List<String> mDatasetsInformation = null;
   @SerializedName("description")
   private String mDescription = null;
   @SerializedName("end_time")
@@ -349,10 +347,6 @@ public class AdStudy extends APINode {
 
   public String getFieldCreatedTime() {
     return mCreatedTime;
-  }
-
-  public List<String> getFieldDatasetsInformation() {
-    return mDatasetsInformation;
   }
 
   public String getFieldDescription() {
@@ -1082,7 +1076,6 @@ public class AdStudy extends APINode {
       "cooldown_start_time",
       "created_by",
       "created_time",
-      "datasets_information",
       "description",
       "end_time",
       "id",
@@ -1217,13 +1210,6 @@ public class AdStudy extends APINode {
     }
     public APIRequestGet requestCreatedTimeField (boolean value) {
       this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGet requestDatasetsInformationField () {
-      return this.requestDatasetsInformationField(true);
-    }
-    public APIRequestGet requestDatasetsInformationField (boolean value) {
-      this.requestField("datasets_information", value);
       return this;
     }
     public APIRequestGet requestDescriptionField () {
@@ -1555,7 +1541,6 @@ public class AdStudy extends APINode {
     this.mCooldownStartTime = instance.mCooldownStartTime;
     this.mCreatedBy = instance.mCreatedBy;
     this.mCreatedTime = instance.mCreatedTime;
-    this.mDatasetsInformation = instance.mDatasetsInformation;
     this.mDescription = instance.mDescription;
     this.mEndTime = instance.mEndTime;
     this.mId = instance.mId;

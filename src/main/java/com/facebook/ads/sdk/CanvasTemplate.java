@@ -54,92 +54,90 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class SavedAudience extends APINode {
-  @SerializedName("account")
-  private AdAccount mAccount = null;
-  @SerializedName("approximate_count")
-  private Long mApproximateCount = null;
-  @SerializedName("approximate_count_64bit")
-  private Long mApproximateCount64bit = null;
-  @SerializedName("delete_time")
-  private Long mDeleteTime = null;
+public class CanvasTemplate extends APINode {
+  @SerializedName("channels")
+  private Map<String, Map<String, String>> mChannels = null;
   @SerializedName("description")
   private String mDescription = null;
-  @SerializedName("extra_info")
-  private String mExtraInfo = null;
+  @SerializedName("document")
+  private Canvas mDocument = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("is_multi_tab_supportable")
+  private Boolean mIsMultiTabSupportable = null;
+  @SerializedName("is_new")
+  private Boolean mIsNew = null;
   @SerializedName("name")
   private String mName = null;
-  @SerializedName("operation_status")
-  private CustomAudienceStatus mOperationStatus = null;
-  @SerializedName("permission_for_actions")
-  private AudiencePermissionForActions mPermissionForActions = null;
-  @SerializedName("run_status")
-  private String mRunStatus = null;
-  @SerializedName("sentence_lines")
-  private JsonArray mSentenceLines = null;
-  @SerializedName("targeting")
-  private Targeting mTargeting = null;
-  @SerializedName("time_created")
-  private String mTimeCreated = null;
-  @SerializedName("time_updated")
-  private String mTimeUpdated = null;
+  @SerializedName("objectives")
+  private Map<Object, Object> mObjectives = null;
+  @SerializedName("owner_id")
+  private User mOwnerId = null;
+  @SerializedName("required_capabilities")
+  private List<String> mRequiredCapabilities = null;
+  @SerializedName("snapshot_photo")
+  private Photo mSnapshotPhoto = null;
+  @SerializedName("status")
+  private String mStatus = null;
+  @SerializedName("sub_verticals")
+  private List<String> mSubVerticals = null;
+  @SerializedName("verticals")
+  private Map<String, String> mVerticals = null;
   protected static Gson gson = null;
 
-  SavedAudience() {
+  CanvasTemplate() {
   }
 
-  public SavedAudience(Long id, APIContext context) {
+  public CanvasTemplate(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public SavedAudience(String id, APIContext context) {
+  public CanvasTemplate(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public SavedAudience fetch() throws APIException{
-    SavedAudience newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public CanvasTemplate fetch() throws APIException{
+    CanvasTemplate newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static SavedAudience fetchById(Long id, APIContext context) throws APIException {
+  public static CanvasTemplate fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<SavedAudience> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<CanvasTemplate> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static SavedAudience fetchById(String id, APIContext context) throws APIException {
+  public static CanvasTemplate fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<SavedAudience> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<CanvasTemplate> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<SavedAudience> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<SavedAudience>)(
-      new APIRequest<SavedAudience>(context, "", "/", "GET", SavedAudience.getParser())
+  public static APINodeList<CanvasTemplate> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<CanvasTemplate>)(
+      new APIRequest<CanvasTemplate>(context, "", "/", "GET", CanvasTemplate.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<SavedAudience>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<CanvasTemplate>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", SavedAudience.getParser())
+      new APIRequest(context, "", "/", "GET", CanvasTemplate.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -152,12 +150,12 @@ public class SavedAudience extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static SavedAudience loadJSON(String json, APIContext context, String header) {
-    SavedAudience savedAudience = getGson().fromJson(json, SavedAudience.class);
+  public static CanvasTemplate loadJSON(String json, APIContext context, String header) {
+    CanvasTemplate canvasTemplate = getGson().fromJson(json, CanvasTemplate.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(savedAudience.toString());
+      JsonElement o2 = parser.parse(canvasTemplate.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -167,14 +165,14 @@ public class SavedAudience extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    savedAudience.context = context;
-    savedAudience.rawValue = json;
-    savedAudience.header = header;
-    return savedAudience;
+    canvasTemplate.context = context;
+    canvasTemplate.rawValue = json;
+    canvasTemplate.header = header;
+    return canvasTemplate;
   }
 
-  public static APINodeList<SavedAudience> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<SavedAudience> savedAudiences = new APINodeList<SavedAudience>(request, json, header);
+  public static APINodeList<CanvasTemplate> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CanvasTemplate> canvasTemplates = new APINodeList<CanvasTemplate>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -185,9 +183,9 @@ public class SavedAudience extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          savedAudiences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          canvasTemplates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return savedAudiences;
+        return canvasTemplates;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -197,20 +195,20 @@ public class SavedAudience extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                savedAudiences.setCursors(before, after);
+                canvasTemplates.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            savedAudiences.setPaging(previous, next);
+            canvasTemplates.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              savedAudiences.setAppSecret(context.getAppSecretProof());
+              canvasTemplates.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              savedAudiences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              canvasTemplates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -221,23 +219,23 @@ public class SavedAudience extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  savedAudiences.add(loadJSON(entry.getValue().toString(), context, header));
+                  canvasTemplates.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              savedAudiences.add(loadJSON(obj.toString(), context, header));
+              canvasTemplates.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return savedAudiences;
+          return canvasTemplates;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              savedAudiences.add(loadJSON(entry.getValue().toString(), context, header));
+              canvasTemplates.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return savedAudiences;
+          return canvasTemplates;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -254,20 +252,20 @@ public class SavedAudience extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              savedAudiences.add(loadJSON(value.toString(), context, header));
+              canvasTemplates.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return savedAudiences;
+            return canvasTemplates;
           }
 
           // Sixth, check if it's pure JsonObject
-          savedAudiences.clear();
-          savedAudiences.add(loadJSON(json, context, header));
-          return savedAudiences;
+          canvasTemplates.clear();
+          canvasTemplates.add(loadJSON(json, context, header));
+          return canvasTemplates;
         }
       }
     } catch (Exception e) {
@@ -299,125 +297,126 @@ public class SavedAudience extends APINode {
   }
 
 
-  public AdAccount getFieldAccount() {
-    if (mAccount != null) {
-      mAccount.context = getContext();
-    }
-    return mAccount;
-  }
-
-  public Long getFieldApproximateCount() {
-    return mApproximateCount;
-  }
-
-  public Long getFieldApproximateCount64bit() {
-    return mApproximateCount64bit;
-  }
-
-  public Long getFieldDeleteTime() {
-    return mDeleteTime;
+  public Map<String, Map<String, String>> getFieldChannels() {
+    return mChannels;
   }
 
   public String getFieldDescription() {
     return mDescription;
   }
 
-  public String getFieldExtraInfo() {
-    return mExtraInfo;
+  public Canvas getFieldDocument() {
+    if (mDocument != null) {
+      mDocument.context = getContext();
+    }
+    return mDocument;
   }
 
   public String getFieldId() {
     return mId;
   }
 
+  public Boolean getFieldIsMultiTabSupportable() {
+    return mIsMultiTabSupportable;
+  }
+
+  public Boolean getFieldIsNew() {
+    return mIsNew;
+  }
+
   public String getFieldName() {
     return mName;
   }
 
-  public CustomAudienceStatus getFieldOperationStatus() {
-    return mOperationStatus;
+  public Map<Object, Object> getFieldObjectives() {
+    return mObjectives;
   }
 
-  public AudiencePermissionForActions getFieldPermissionForActions() {
-    return mPermissionForActions;
+  public User getFieldOwnerId() {
+    if (mOwnerId != null) {
+      mOwnerId.context = getContext();
+    }
+    return mOwnerId;
   }
 
-  public String getFieldRunStatus() {
-    return mRunStatus;
+  public List<String> getFieldRequiredCapabilities() {
+    return mRequiredCapabilities;
   }
 
-  public JsonArray getFieldSentenceLines() {
-    return mSentenceLines;
+  public Photo getFieldSnapshotPhoto() {
+    if (mSnapshotPhoto != null) {
+      mSnapshotPhoto.context = getContext();
+    }
+    return mSnapshotPhoto;
   }
 
-  public Targeting getFieldTargeting() {
-    return mTargeting;
+  public String getFieldStatus() {
+    return mStatus;
   }
 
-  public String getFieldTimeCreated() {
-    return mTimeCreated;
+  public List<String> getFieldSubVerticals() {
+    return mSubVerticals;
   }
 
-  public String getFieldTimeUpdated() {
-    return mTimeUpdated;
+  public Map<String, String> getFieldVerticals() {
+    return mVerticals;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<SavedAudience> {
+  public static class APIRequestGet extends APIRequest<CanvasTemplate> {
 
-    SavedAudience lastResponse = null;
+    CanvasTemplate lastResponse = null;
     @Override
-    public SavedAudience getLastResponse() {
+    public CanvasTemplate getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "account",
-      "approximate_count",
-      "approximate_count_64bit",
-      "delete_time",
+      "channels",
       "description",
-      "extra_info",
+      "document",
       "id",
+      "is_multi_tab_supportable",
+      "is_new",
       "name",
-      "operation_status",
-      "permission_for_actions",
-      "run_status",
-      "sentence_lines",
-      "targeting",
-      "time_created",
-      "time_updated",
+      "objectives",
+      "owner_id",
+      "required_capabilities",
+      "snapshot_photo",
+      "status",
+      "sub_verticals",
+      "verticals",
     };
 
     @Override
-    public SavedAudience parseResponse(String response, String header) throws APIException {
-      return SavedAudience.parseResponse(response, getContext(), this, header).head();
+    public CanvasTemplate parseResponse(String response, String header) throws APIException {
+      return CanvasTemplate.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public SavedAudience execute() throws APIException {
+    public CanvasTemplate execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public SavedAudience execute(Map<String, Object> extraParams) throws APIException {
+    public CanvasTemplate execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<SavedAudience> executeAsync() throws APIException {
+    public ListenableFuture<CanvasTemplate> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<SavedAudience> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<CanvasTemplate> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, SavedAudience>() {
-           public SavedAudience apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, CanvasTemplate>() {
+           public CanvasTemplate apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -481,32 +480,11 @@ public class SavedAudience extends APINode {
       return this;
     }
 
-    public APIRequestGet requestAccountField () {
-      return this.requestAccountField(true);
+    public APIRequestGet requestChannelsField () {
+      return this.requestChannelsField(true);
     }
-    public APIRequestGet requestAccountField (boolean value) {
-      this.requestField("account", value);
-      return this;
-    }
-    public APIRequestGet requestApproximateCountField () {
-      return this.requestApproximateCountField(true);
-    }
-    public APIRequestGet requestApproximateCountField (boolean value) {
-      this.requestField("approximate_count", value);
-      return this;
-    }
-    public APIRequestGet requestApproximateCount64bitField () {
-      return this.requestApproximateCount64bitField(true);
-    }
-    public APIRequestGet requestApproximateCount64bitField (boolean value) {
-      this.requestField("approximate_count_64bit", value);
-      return this;
-    }
-    public APIRequestGet requestDeleteTimeField () {
-      return this.requestDeleteTimeField(true);
-    }
-    public APIRequestGet requestDeleteTimeField (boolean value) {
-      this.requestField("delete_time", value);
+    public APIRequestGet requestChannelsField (boolean value) {
+      this.requestField("channels", value);
       return this;
     }
     public APIRequestGet requestDescriptionField () {
@@ -516,11 +494,11 @@ public class SavedAudience extends APINode {
       this.requestField("description", value);
       return this;
     }
-    public APIRequestGet requestExtraInfoField () {
-      return this.requestExtraInfoField(true);
+    public APIRequestGet requestDocumentField () {
+      return this.requestDocumentField(true);
     }
-    public APIRequestGet requestExtraInfoField (boolean value) {
-      this.requestField("extra_info", value);
+    public APIRequestGet requestDocumentField (boolean value) {
+      this.requestField("document", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -530,6 +508,20 @@ public class SavedAudience extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestIsMultiTabSupportableField () {
+      return this.requestIsMultiTabSupportableField(true);
+    }
+    public APIRequestGet requestIsMultiTabSupportableField (boolean value) {
+      this.requestField("is_multi_tab_supportable", value);
+      return this;
+    }
+    public APIRequestGet requestIsNewField () {
+      return this.requestIsNewField(true);
+    }
+    public APIRequestGet requestIsNewField (boolean value) {
+      this.requestField("is_new", value);
+      return this;
+    }
     public APIRequestGet requestNameField () {
       return this.requestNameField(true);
     }
@@ -537,53 +529,53 @@ public class SavedAudience extends APINode {
       this.requestField("name", value);
       return this;
     }
-    public APIRequestGet requestOperationStatusField () {
-      return this.requestOperationStatusField(true);
+    public APIRequestGet requestObjectivesField () {
+      return this.requestObjectivesField(true);
     }
-    public APIRequestGet requestOperationStatusField (boolean value) {
-      this.requestField("operation_status", value);
+    public APIRequestGet requestObjectivesField (boolean value) {
+      this.requestField("objectives", value);
       return this;
     }
-    public APIRequestGet requestPermissionForActionsField () {
-      return this.requestPermissionForActionsField(true);
+    public APIRequestGet requestOwnerIdField () {
+      return this.requestOwnerIdField(true);
     }
-    public APIRequestGet requestPermissionForActionsField (boolean value) {
-      this.requestField("permission_for_actions", value);
+    public APIRequestGet requestOwnerIdField (boolean value) {
+      this.requestField("owner_id", value);
       return this;
     }
-    public APIRequestGet requestRunStatusField () {
-      return this.requestRunStatusField(true);
+    public APIRequestGet requestRequiredCapabilitiesField () {
+      return this.requestRequiredCapabilitiesField(true);
     }
-    public APIRequestGet requestRunStatusField (boolean value) {
-      this.requestField("run_status", value);
+    public APIRequestGet requestRequiredCapabilitiesField (boolean value) {
+      this.requestField("required_capabilities", value);
       return this;
     }
-    public APIRequestGet requestSentenceLinesField () {
-      return this.requestSentenceLinesField(true);
+    public APIRequestGet requestSnapshotPhotoField () {
+      return this.requestSnapshotPhotoField(true);
     }
-    public APIRequestGet requestSentenceLinesField (boolean value) {
-      this.requestField("sentence_lines", value);
+    public APIRequestGet requestSnapshotPhotoField (boolean value) {
+      this.requestField("snapshot_photo", value);
       return this;
     }
-    public APIRequestGet requestTargetingField () {
-      return this.requestTargetingField(true);
+    public APIRequestGet requestStatusField () {
+      return this.requestStatusField(true);
     }
-    public APIRequestGet requestTargetingField (boolean value) {
-      this.requestField("targeting", value);
+    public APIRequestGet requestStatusField (boolean value) {
+      this.requestField("status", value);
       return this;
     }
-    public APIRequestGet requestTimeCreatedField () {
-      return this.requestTimeCreatedField(true);
+    public APIRequestGet requestSubVerticalsField () {
+      return this.requestSubVerticalsField(true);
     }
-    public APIRequestGet requestTimeCreatedField (boolean value) {
-      this.requestField("time_created", value);
+    public APIRequestGet requestSubVerticalsField (boolean value) {
+      this.requestField("sub_verticals", value);
       return this;
     }
-    public APIRequestGet requestTimeUpdatedField () {
-      return this.requestTimeUpdatedField(true);
+    public APIRequestGet requestVerticalsField () {
+      return this.requestVerticalsField(true);
     }
-    public APIRequestGet requestTimeUpdatedField (boolean value) {
-      this.requestField("time_updated", value);
+    public APIRequestGet requestVerticalsField (boolean value) {
+      this.requestField("verticals", value);
       return this;
     }
   }
@@ -602,31 +594,30 @@ public class SavedAudience extends APINode {
     return gson;
   }
 
-  public SavedAudience copyFrom(SavedAudience instance) {
-    this.mAccount = instance.mAccount;
-    this.mApproximateCount = instance.mApproximateCount;
-    this.mApproximateCount64bit = instance.mApproximateCount64bit;
-    this.mDeleteTime = instance.mDeleteTime;
+  public CanvasTemplate copyFrom(CanvasTemplate instance) {
+    this.mChannels = instance.mChannels;
     this.mDescription = instance.mDescription;
-    this.mExtraInfo = instance.mExtraInfo;
+    this.mDocument = instance.mDocument;
     this.mId = instance.mId;
+    this.mIsMultiTabSupportable = instance.mIsMultiTabSupportable;
+    this.mIsNew = instance.mIsNew;
     this.mName = instance.mName;
-    this.mOperationStatus = instance.mOperationStatus;
-    this.mPermissionForActions = instance.mPermissionForActions;
-    this.mRunStatus = instance.mRunStatus;
-    this.mSentenceLines = instance.mSentenceLines;
-    this.mTargeting = instance.mTargeting;
-    this.mTimeCreated = instance.mTimeCreated;
-    this.mTimeUpdated = instance.mTimeUpdated;
+    this.mObjectives = instance.mObjectives;
+    this.mOwnerId = instance.mOwnerId;
+    this.mRequiredCapabilities = instance.mRequiredCapabilities;
+    this.mSnapshotPhoto = instance.mSnapshotPhoto;
+    this.mStatus = instance.mStatus;
+    this.mSubVerticals = instance.mSubVerticals;
+    this.mVerticals = instance.mVerticals;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<SavedAudience> getParser() {
-    return new APIRequest.ResponseParser<SavedAudience>() {
-      public APINodeList<SavedAudience> parseResponse(String response, APIContext context, APIRequest<SavedAudience> request, String header) throws MalformedResponseException {
-        return SavedAudience.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<CanvasTemplate> getParser() {
+    return new APIRequest.ResponseParser<CanvasTemplate>() {
+      public APINodeList<CanvasTemplate> parseResponse(String response, APIContext context, APIRequest<CanvasTemplate> request, String header) throws MalformedResponseException {
+        return CanvasTemplate.parseResponse(response, context, request, header);
       }
     };
   }

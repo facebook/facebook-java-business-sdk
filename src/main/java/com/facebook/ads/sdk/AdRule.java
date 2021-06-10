@@ -1207,6 +1207,8 @@ public class AdRule extends APINode {
       VALUE_DISABLED("DISABLED"),
       @SerializedName("ENABLED")
       VALUE_ENABLED("ENABLED"),
+      @SerializedName("HAS_ISSUES")
+      VALUE_HAS_ISSUES("HAS_ISSUES"),
       ;
 
       private String value;

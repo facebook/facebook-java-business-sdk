@@ -161,8 +161,6 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mCostPerOneThousandAdImpression = null;
   @SerializedName("cost_per_outbound_click")
   private List<AdsActionStats> mCostPerOutboundClick = null;
-  @SerializedName("cost_per_store_visit_action")
-  private List<AdsActionStats> mCostPerStoreVisitAction = null;
   @SerializedName("cost_per_thruplay")
   private List<AdsActionStats> mCostPerThruplay = null;
   @SerializedName("cost_per_unique_action_type")
@@ -191,6 +189,8 @@ public class AdsInsights extends APINode {
   private String mDateStop = null;
   @SerializedName("dda_countby_convs")
   private String mDdaCountbyConvs = null;
+  @SerializedName("dda_results")
+  private List<Object> mDdaResults = null;
   @SerializedName("engagement_rate_ranking")
   private String mEngagementRateRanking = null;
   @SerializedName("estimated_ad_recall_rate")
@@ -226,7 +226,7 @@ public class AdsInsights extends APINode {
   @SerializedName("instant_experience_clicks_to_start")
   private String mInstantExperienceClicksToStart = null;
   @SerializedName("instant_experience_outbound_clicks")
-  private String mInstantExperienceOutboundClicks = null;
+  private List<AdsActionStats> mInstantExperienceOutboundClicks = null;
   @SerializedName("interactive_component_tap")
   private List<AdsActionStats> mInteractiveComponentTap = null;
   @SerializedName("labels")
@@ -263,8 +263,6 @@ public class AdsInsights extends APINode {
   private String mSocialSpend = null;
   @SerializedName("spend")
   private String mSpend = null;
-  @SerializedName("store_visit_actions")
-  private List<AdsActionStats> mStoreVisitActions = null;
   @SerializedName("unique_actions")
   private List<AdsActionStats> mUniqueActions = null;
   @SerializedName("unique_clicks")
@@ -1055,20 +1053,6 @@ public class AdsInsights extends APINode {
     this.mCostPerOutboundClick = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
-  public List<AdsActionStats> getFieldCostPerStoreVisitAction() {
-    return mCostPerStoreVisitAction;
-  }
-
-  public AdsInsights setFieldCostPerStoreVisitAction(List<AdsActionStats> value) {
-    this.mCostPerStoreVisitAction = value;
-    return this;
-  }
-
-  public AdsInsights setFieldCostPerStoreVisitAction(String value) {
-    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
-    this.mCostPerStoreVisitAction = AdsActionStats.getGson().fromJson(value, type);
-    return this;
-  }
   public List<AdsActionStats> getFieldCostPerThruplay() {
     return mCostPerThruplay;
   }
@@ -1212,6 +1196,15 @@ public class AdsInsights extends APINode {
 
   public AdsInsights setFieldDdaCountbyConvs(String value) {
     this.mDdaCountbyConvs = value;
+    return this;
+  }
+
+  public List<Object> getFieldDdaResults() {
+    return mDdaResults;
+  }
+
+  public AdsInsights setFieldDdaResults(List<Object> value) {
+    this.mDdaResults = value;
     return this;
   }
 
@@ -1368,15 +1361,20 @@ public class AdsInsights extends APINode {
     return this;
   }
 
-  public String getFieldInstantExperienceOutboundClicks() {
+  public List<AdsActionStats> getFieldInstantExperienceOutboundClicks() {
     return mInstantExperienceOutboundClicks;
   }
 
-  public AdsInsights setFieldInstantExperienceOutboundClicks(String value) {
+  public AdsInsights setFieldInstantExperienceOutboundClicks(List<AdsActionStats> value) {
     this.mInstantExperienceOutboundClicks = value;
     return this;
   }
 
+  public AdsInsights setFieldInstantExperienceOutboundClicks(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mInstantExperienceOutboundClicks = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldInteractiveComponentTap() {
     return mInteractiveComponentTap;
   }
@@ -1564,20 +1562,6 @@ public class AdsInsights extends APINode {
     return this;
   }
 
-  public List<AdsActionStats> getFieldStoreVisitActions() {
-    return mStoreVisitActions;
-  }
-
-  public AdsInsights setFieldStoreVisitActions(List<AdsActionStats> value) {
-    this.mStoreVisitActions = value;
-    return this;
-  }
-
-  public AdsInsights setFieldStoreVisitActions(String value) {
-    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
-    this.mStoreVisitActions = AdsActionStats.getGson().fromJson(value, type);
-    return this;
-  }
   public List<AdsActionStats> getFieldUniqueActions() {
     return mUniqueActions;
   }
@@ -2284,7 +2268,6 @@ public class AdsInsights extends APINode {
     this.mCostPerInlinePostEngagement = instance.mCostPerInlinePostEngagement;
     this.mCostPerOneThousandAdImpression = instance.mCostPerOneThousandAdImpression;
     this.mCostPerOutboundClick = instance.mCostPerOutboundClick;
-    this.mCostPerStoreVisitAction = instance.mCostPerStoreVisitAction;
     this.mCostPerThruplay = instance.mCostPerThruplay;
     this.mCostPerUniqueActionType = instance.mCostPerUniqueActionType;
     this.mCostPerUniqueClick = instance.mCostPerUniqueClick;
@@ -2299,6 +2282,7 @@ public class AdsInsights extends APINode {
     this.mDateStart = instance.mDateStart;
     this.mDateStop = instance.mDateStop;
     this.mDdaCountbyConvs = instance.mDdaCountbyConvs;
+    this.mDdaResults = instance.mDdaResults;
     this.mEngagementRateRanking = instance.mEngagementRateRanking;
     this.mEstimatedAdRecallRate = instance.mEstimatedAdRecallRate;
     this.mEstimatedAdRecallRateLowerBound = instance.mEstimatedAdRecallRateLowerBound;
@@ -2335,7 +2319,6 @@ public class AdsInsights extends APINode {
     this.mReach = instance.mReach;
     this.mSocialSpend = instance.mSocialSpend;
     this.mSpend = instance.mSpend;
-    this.mStoreVisitActions = instance.mStoreVisitActions;
     this.mUniqueActions = instance.mUniqueActions;
     this.mUniqueClicks = instance.mUniqueClicks;
     this.mUniqueConversions = instance.mUniqueConversions;

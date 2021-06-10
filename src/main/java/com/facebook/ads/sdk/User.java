@@ -2530,7 +2530,6 @@ public class User extends APINode {
       "cooldown_start_time",
       "created_by",
       "created_time",
-      "datasets_information",
       "description",
       "end_time",
       "id",
@@ -2665,13 +2664,6 @@ public class User extends APINode {
     }
     public APIRequestGetAdStudies requestCreatedTimeField (boolean value) {
       this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGetAdStudies requestDatasetsInformationField () {
-      return this.requestDatasetsInformationField(true);
-    }
-    public APIRequestGetAdStudies requestDatasetsInformationField (boolean value) {
-      this.requestField("datasets_information", value);
       return this;
     }
     public APIRequestGetAdStudies requestDescriptionField () {
@@ -17815,8 +17807,10 @@ public class User extends APINode {
       "is_hidden",
       "is_published",
       "last_editor",
+      "linked_documents",
       "name",
       "owner",
+      "source_template",
       "update_time",
     };
 
@@ -17963,6 +17957,13 @@ public class User extends APINode {
       this.requestField("last_editor", value);
       return this;
     }
+    public APIRequestGetRichMediaDocuments requestLinkedDocumentsField () {
+      return this.requestLinkedDocumentsField(true);
+    }
+    public APIRequestGetRichMediaDocuments requestLinkedDocumentsField (boolean value) {
+      this.requestField("linked_documents", value);
+      return this;
+    }
     public APIRequestGetRichMediaDocuments requestNameField () {
       return this.requestNameField(true);
     }
@@ -17975,6 +17976,13 @@ public class User extends APINode {
     }
     public APIRequestGetRichMediaDocuments requestOwnerField (boolean value) {
       this.requestField("owner", value);
+      return this;
+    }
+    public APIRequestGetRichMediaDocuments requestSourceTemplateField () {
+      return this.requestSourceTemplateField(true);
+    }
+    public APIRequestGetRichMediaDocuments requestSourceTemplateField (boolean value) {
+      this.requestField("source_template", value);
       return this;
     }
     public APIRequestGetRichMediaDocuments requestUpdateTimeField () {

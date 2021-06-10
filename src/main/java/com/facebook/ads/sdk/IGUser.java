@@ -702,6 +702,8 @@ public class IGUser extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "since",
+      "until",
     };
 
     public static final String[] FIELDS = {
@@ -775,6 +777,16 @@ public class IGUser extends APINode {
       return this;
     }
 
+
+    public APIRequestGetMedia setSince (String since) {
+      this.setParam("since", since);
+      return this;
+    }
+
+    public APIRequestGetMedia setUntil (String until) {
+      this.setParam("until", until);
+      return this;
+    }
 
     public APIRequestGetMedia requestAllFields () {
       return this.requestAllFields(true);

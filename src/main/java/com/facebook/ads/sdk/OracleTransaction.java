@@ -383,11 +383,11 @@ public class OracleTransaction extends APINode {
 
 
 
-  public static class APIRequestGetCampaigns extends APIRequest<InvoiceCampaignNew> {
+  public static class APIRequestGetCampaigns extends APIRequest<InvoiceCampaign> {
 
-    APINodeList<InvoiceCampaignNew> lastResponse = null;
+    APINodeList<InvoiceCampaign> lastResponse = null;
     @Override
-    public APINodeList<InvoiceCampaignNew> getLastResponse() {
+    public APINodeList<InvoiceCampaign> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -405,31 +405,31 @@ public class OracleTransaction extends APINode {
     };
 
     @Override
-    public APINodeList<InvoiceCampaignNew> parseResponse(String response, String header) throws APIException {
-      return InvoiceCampaignNew.parseResponse(response, getContext(), this, header);
+    public APINodeList<InvoiceCampaign> parseResponse(String response, String header) throws APIException {
+      return InvoiceCampaign.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<InvoiceCampaignNew> execute() throws APIException {
+    public APINodeList<InvoiceCampaign> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<InvoiceCampaignNew> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<InvoiceCampaign> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<InvoiceCampaignNew>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<InvoiceCampaign>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<InvoiceCampaignNew>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<InvoiceCampaign>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<InvoiceCampaignNew>>() {
-           public APINodeList<InvoiceCampaignNew> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<InvoiceCampaign>>() {
+           public APINodeList<InvoiceCampaign> apply(ResponseWrapper result) {
              try {
                return APIRequestGetCampaigns.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {

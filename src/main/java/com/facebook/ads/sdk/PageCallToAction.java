@@ -987,6 +987,8 @@ public class PageCallToAction extends APINode {
       VALUE_FOLLOW("FOLLOW"),
       @SerializedName("MARKETPLACE_INVENTORY_PAGE")
       VALUE_MARKETPLACE_INVENTORY_PAGE("MARKETPLACE_INVENTORY_PAGE"),
+      @SerializedName("MENU_ON_FACEBOOK")
+      VALUE_MENU_ON_FACEBOOK("MENU_ON_FACEBOOK"),
       @SerializedName("MESSENGER")
       VALUE_MESSENGER("MESSENGER"),
       @SerializedName("MINI_SHOP")
@@ -1028,6 +1030,8 @@ public class PageCallToAction extends APINode {
       VALUE_FOLLOW("FOLLOW"),
       @SerializedName("MARKETPLACE_INVENTORY_PAGE")
       VALUE_MARKETPLACE_INVENTORY_PAGE("MARKETPLACE_INVENTORY_PAGE"),
+      @SerializedName("MENU_ON_FACEBOOK")
+      VALUE_MENU_ON_FACEBOOK("MENU_ON_FACEBOOK"),
       @SerializedName("MESSENGER")
       VALUE_MESSENGER("MESSENGER"),
       @SerializedName("MINI_SHOP")
@@ -1115,6 +1119,8 @@ public class PageCallToAction extends APINode {
       VALUE_SIGN_UP("SIGN_UP"),
       @SerializedName("VIEW_INVENTORY")
       VALUE_VIEW_INVENTORY("VIEW_INVENTORY"),
+      @SerializedName("VIEW_MENU")
+      VALUE_VIEW_MENU("VIEW_MENU"),
       @SerializedName("VIEW_SHOP")
       VALUE_VIEW_SHOP("VIEW_SHOP"),
       @SerializedName("VISIT_GROUP")

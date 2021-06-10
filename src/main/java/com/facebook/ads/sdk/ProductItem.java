@@ -121,6 +121,8 @@ public class ProductItem extends APINode {
   private Long mInventory = null;
   @SerializedName("manufacturer_part_number")
   private String mManufacturerPartNumber = null;
+  @SerializedName("marked_for_product_launch")
+  private String mMarkedForProductLaunch = null;
   @SerializedName("material")
   private String mMaterial = null;
   @SerializedName("mobile_link")
@@ -143,6 +145,8 @@ public class ProductItem extends APINode {
   private ProductGroup mProductGroup = null;
   @SerializedName("product_type")
   private String mProductType = null;
+  @SerializedName("quantity_to_sell_on_facebook")
+  private Long mQuantityToSellOnFacebook = null;
   @SerializedName("retailer_id")
   private String mRetailerId = null;
   @SerializedName("retailer_product_group_id")
@@ -533,6 +537,10 @@ public class ProductItem extends APINode {
     return mManufacturerPartNumber;
   }
 
+  public String getFieldMarkedForProductLaunch() {
+    return mMarkedForProductLaunch;
+  }
+
   public String getFieldMaterial() {
     return mMaterial;
   }
@@ -584,6 +592,10 @@ public class ProductItem extends APINode {
 
   public String getFieldProductType() {
     return mProductType;
+  }
+
+  public Long getFieldQuantityToSellOnFacebook() {
+    return mQuantityToSellOnFacebook;
   }
 
   public String getFieldRetailerId() {
@@ -1055,6 +1067,8 @@ public class ProductItem extends APINode {
       "catalog_id",
       "image_height",
       "image_width",
+      "override_country",
+      "override_language",
     };
 
     public static final String[] FIELDS = {
@@ -1091,6 +1105,7 @@ public class ProductItem extends APINode {
       "images",
       "inventory",
       "manufacturer_part_number",
+      "marked_for_product_launch",
       "material",
       "mobile_link",
       "name",
@@ -1102,6 +1117,7 @@ public class ProductItem extends APINode {
       "product_feed",
       "product_group",
       "product_type",
+      "quantity_to_sell_on_facebook",
       "retailer_id",
       "retailer_product_group_id",
       "review_rejection_reasons",
@@ -1191,6 +1207,16 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet setImageWidth (String imageWidth) {
       this.setParam("image_width", imageWidth);
+      return this;
+    }
+
+    public APIRequestGet setOverrideCountry (String overrideCountry) {
+      this.setParam("override_country", overrideCountry);
+      return this;
+    }
+
+    public APIRequestGet setOverrideLanguage (String overrideLanguage) {
+      this.setParam("override_language", overrideLanguage);
       return this;
     }
 
@@ -1461,6 +1487,13 @@ public class ProductItem extends APINode {
       this.requestField("manufacturer_part_number", value);
       return this;
     }
+    public APIRequestGet requestMarkedForProductLaunchField () {
+      return this.requestMarkedForProductLaunchField(true);
+    }
+    public APIRequestGet requestMarkedForProductLaunchField (boolean value) {
+      this.requestField("marked_for_product_launch", value);
+      return this;
+    }
     public APIRequestGet requestMaterialField () {
       return this.requestMaterialField(true);
     }
@@ -1536,6 +1569,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestProductTypeField (boolean value) {
       this.requestField("product_type", value);
+      return this;
+    }
+    public APIRequestGet requestQuantityToSellOnFacebookField () {
+      return this.requestQuantityToSellOnFacebookField(true);
+    }
+    public APIRequestGet requestQuantityToSellOnFacebookField (boolean value) {
+      this.requestField("quantity_to_sell_on_facebook", value);
       return this;
     }
     public APIRequestGet requestRetailerIdField () {
@@ -1686,6 +1726,7 @@ public class ProductItem extends APINode {
       "iphone_url",
       "launch_date",
       "manufacturer_part_number",
+      "marked_for_product_launch",
       "material",
       "mobile_link",
       "name",
@@ -1696,6 +1737,7 @@ public class ProductItem extends APINode {
       "pattern",
       "price",
       "product_type",
+      "quantity_to_sell_on_facebook",
       "retailer_id",
       "return_policy_days",
       "sale_price",
@@ -2019,6 +2061,15 @@ public class ProductItem extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setMarkedForProductLaunch (ProductItem.EnumMarkedForProductLaunch markedForProductLaunch) {
+      this.setParam("marked_for_product_launch", markedForProductLaunch);
+      return this;
+    }
+    public APIRequestUpdate setMarkedForProductLaunch (String markedForProductLaunch) {
+      this.setParam("marked_for_product_launch", markedForProductLaunch);
+      return this;
+    }
+
     public APIRequestUpdate setMaterial (String material) {
       this.setParam("material", material);
       return this;
@@ -2078,6 +2129,15 @@ public class ProductItem extends APINode {
 
     public APIRequestUpdate setProductType (String productType) {
       this.setParam("product_type", productType);
+      return this;
+    }
+
+    public APIRequestUpdate setQuantityToSellOnFacebook (Long quantityToSellOnFacebook) {
+      this.setParam("quantity_to_sell_on_facebook", quantityToSellOnFacebook);
+      return this;
+    }
+    public APIRequestUpdate setQuantityToSellOnFacebook (String quantityToSellOnFacebook) {
+      this.setParam("quantity_to_sell_on_facebook", quantityToSellOnFacebook);
       return this;
     }
 
@@ -2817,6 +2877,27 @@ public class ProductItem extends APINode {
       }
   }
 
+  public static enum EnumMarkedForProductLaunch {
+      @SerializedName("default")
+      VALUE_DEFAULT("default"),
+      @SerializedName("marked")
+      VALUE_MARKED("marked"),
+      @SerializedName("not_marked")
+      VALUE_NOT_MARKED("not_marked"),
+      ;
+
+      private String value;
+
+      private EnumMarkedForProductLaunch(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -2865,6 +2946,7 @@ public class ProductItem extends APINode {
     this.mImages = instance.mImages;
     this.mInventory = instance.mInventory;
     this.mManufacturerPartNumber = instance.mManufacturerPartNumber;
+    this.mMarkedForProductLaunch = instance.mMarkedForProductLaunch;
     this.mMaterial = instance.mMaterial;
     this.mMobileLink = instance.mMobileLink;
     this.mName = instance.mName;
@@ -2876,6 +2958,7 @@ public class ProductItem extends APINode {
     this.mProductFeed = instance.mProductFeed;
     this.mProductGroup = instance.mProductGroup;
     this.mProductType = instance.mProductType;
+    this.mQuantityToSellOnFacebook = instance.mQuantityToSellOnFacebook;
     this.mRetailerId = instance.mRetailerId;
     this.mRetailerProductGroupId = instance.mRetailerProductGroupId;
     this.mReviewRejectionReasons = instance.mReviewRejectionReasons;

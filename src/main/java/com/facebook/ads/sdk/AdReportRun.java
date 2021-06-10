@@ -426,7 +426,6 @@ public class AdReportRun extends APINode {
       "cost_per_inline_post_engagement",
       "cost_per_one_thousand_ad_impression",
       "cost_per_outbound_click",
-      "cost_per_store_visit_action",
       "cost_per_thruplay",
       "cost_per_unique_action_type",
       "cost_per_unique_click",
@@ -441,6 +440,7 @@ public class AdReportRun extends APINode {
       "date_start",
       "date_stop",
       "dda_countby_convs",
+      "dda_results",
       "engagement_rate_ranking",
       "estimated_ad_recall_rate",
       "estimated_ad_recall_rate_lower_bound",
@@ -477,7 +477,6 @@ public class AdReportRun extends APINode {
       "reach",
       "social_spend",
       "spend",
-      "store_visit_actions",
       "unique_actions",
       "unique_clicks",
       "unique_conversions",
@@ -971,13 +970,6 @@ public class AdReportRun extends APINode {
       this.requestField("cost_per_outbound_click", value);
       return this;
     }
-    public APIRequestGetInsights requestCostPerStoreVisitActionField () {
-      return this.requestCostPerStoreVisitActionField(true);
-    }
-    public APIRequestGetInsights requestCostPerStoreVisitActionField (boolean value) {
-      this.requestField("cost_per_store_visit_action", value);
-      return this;
-    }
     public APIRequestGetInsights requestCostPerThruplayField () {
       return this.requestCostPerThruplayField(true);
     }
@@ -1074,6 +1066,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestDdaCountbyConvsField (boolean value) {
       this.requestField("dda_countby_convs", value);
+      return this;
+    }
+    public APIRequestGetInsights requestDdaResultsField () {
+      return this.requestDdaResultsField(true);
+    }
+    public APIRequestGetInsights requestDdaResultsField (boolean value) {
+      this.requestField("dda_results", value);
       return this;
     }
     public APIRequestGetInsights requestEngagementRateRankingField () {
@@ -1326,13 +1325,6 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestSpendField (boolean value) {
       this.requestField("spend", value);
-      return this;
-    }
-    public APIRequestGetInsights requestStoreVisitActionsField () {
-      return this.requestStoreVisitActionsField(true);
-    }
-    public APIRequestGetInsights requestStoreVisitActionsField (boolean value) {
-      this.requestField("store_visit_actions", value);
       return this;
     }
     public APIRequestGetInsights requestUniqueActionsField () {
