@@ -4261,6 +4261,7 @@ public class BusinessAssetGroup extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_number",
       "hometown",
@@ -4799,6 +4800,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedPages requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetContainedPages requestHasTransitionedToNewPageExperienceField () {
+      return this.requestHasTransitionedToNewPageExperienceField(true);
+    }
+    public APIRequestGetContainedPages requestHasTransitionedToNewPageExperienceField (boolean value) {
+      this.requestField("has_transitioned_to_new_page_experience", value);
       return this;
     }
     public APIRequestGetContainedPages requestHasWhatsappBusinessNumberField () {
@@ -5688,6 +5696,7 @@ public class BusinessAssetGroup extends APINode {
       "first_party_cookie_status",
       "id",
       "is_created_by_business",
+      "is_crm",
       "is_unavailable",
       "last_fired_time",
       "name",
@@ -5852,6 +5861,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedPixels requestIsCreatedByBusinessField (boolean value) {
       this.requestField("is_created_by_business", value);
+      return this;
+    }
+    public APIRequestGetContainedPixels requestIsCrmField () {
+      return this.requestIsCrmField(true);
+    }
+    public APIRequestGetContainedPixels requestIsCrmField (boolean value) {
+      this.requestField("is_crm", value);
       return this;
     }
     public APIRequestGetContainedPixels requestIsUnavailableField () {
@@ -6728,6 +6744,10 @@ public class BusinessAssetGroup extends APINode {
       VALUE_PROFILE_PLUS_ANALYZE("PROFILE_PLUS_ANALYZE"),
       @SerializedName("PROFILE_PLUS_CREATE_CONTENT")
       VALUE_PROFILE_PLUS_CREATE_CONTENT("PROFILE_PLUS_CREATE_CONTENT"),
+      @SerializedName("PROFILE_PLUS_FACEBOOK_ACCESS")
+      VALUE_PROFILE_PLUS_FACEBOOK_ACCESS("PROFILE_PLUS_FACEBOOK_ACCESS"),
+      @SerializedName("PROFILE_PLUS_FULL_CONTROL")
+      VALUE_PROFILE_PLUS_FULL_CONTROL("PROFILE_PLUS_FULL_CONTROL"),
       @SerializedName("PROFILE_PLUS_MANAGE")
       VALUE_PROFILE_PLUS_MANAGE("PROFILE_PLUS_MANAGE"),
       @SerializedName("PROFILE_PLUS_MESSAGING")

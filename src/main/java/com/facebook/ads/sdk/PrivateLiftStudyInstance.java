@@ -54,68 +54,74 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class CPASParentCatalogSettings extends APINode {
-  @SerializedName("attribution_windows")
-  private List<String> mAttributionWindows = null;
-  @SerializedName("default_currency")
-  private String mDefaultCurrency = null;
+public class PrivateLiftStudyInstance extends APINode {
+  @SerializedName("breakdown_key")
+  private String mBreakdownKey = null;
+  @SerializedName("created_time")
+  private String mCreatedTime = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("latest_status_update_time")
+  private String mLatestStatusUpdateTime = null;
+  @SerializedName("server_ips")
+  private List<String> mServerIps = null;
+  @SerializedName("status")
+  private String mStatus = null;
   protected static Gson gson = null;
 
-  CPASParentCatalogSettings() {
+  PrivateLiftStudyInstance() {
   }
 
-  public CPASParentCatalogSettings(Long id, APIContext context) {
+  public PrivateLiftStudyInstance(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public CPASParentCatalogSettings(String id, APIContext context) {
+  public PrivateLiftStudyInstance(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public CPASParentCatalogSettings fetch() throws APIException{
-    CPASParentCatalogSettings newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public PrivateLiftStudyInstance fetch() throws APIException{
+    PrivateLiftStudyInstance newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static CPASParentCatalogSettings fetchById(Long id, APIContext context) throws APIException {
+  public static PrivateLiftStudyInstance fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<CPASParentCatalogSettings> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<PrivateLiftStudyInstance> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static CPASParentCatalogSettings fetchById(String id, APIContext context) throws APIException {
+  public static PrivateLiftStudyInstance fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<CPASParentCatalogSettings> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<PrivateLiftStudyInstance> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<CPASParentCatalogSettings> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<CPASParentCatalogSettings>)(
-      new APIRequest<CPASParentCatalogSettings>(context, "", "/", "GET", CPASParentCatalogSettings.getParser())
+  public static APINodeList<PrivateLiftStudyInstance> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<PrivateLiftStudyInstance>)(
+      new APIRequest<PrivateLiftStudyInstance>(context, "", "/", "GET", PrivateLiftStudyInstance.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<CPASParentCatalogSettings>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<PrivateLiftStudyInstance>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", CPASParentCatalogSettings.getParser())
+      new APIRequest(context, "", "/", "GET", PrivateLiftStudyInstance.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -128,12 +134,12 @@ public class CPASParentCatalogSettings extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static CPASParentCatalogSettings loadJSON(String json, APIContext context, String header) {
-    CPASParentCatalogSettings cpasParentCatalogSettings = getGson().fromJson(json, CPASParentCatalogSettings.class);
+  public static PrivateLiftStudyInstance loadJSON(String json, APIContext context, String header) {
+    PrivateLiftStudyInstance privateLiftStudyInstance = getGson().fromJson(json, PrivateLiftStudyInstance.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(cpasParentCatalogSettings.toString());
+      JsonElement o2 = parser.parse(privateLiftStudyInstance.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -143,14 +149,14 @@ public class CPASParentCatalogSettings extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    cpasParentCatalogSettings.context = context;
-    cpasParentCatalogSettings.rawValue = json;
-    cpasParentCatalogSettings.header = header;
-    return cpasParentCatalogSettings;
+    privateLiftStudyInstance.context = context;
+    privateLiftStudyInstance.rawValue = json;
+    privateLiftStudyInstance.header = header;
+    return privateLiftStudyInstance;
   }
 
-  public static APINodeList<CPASParentCatalogSettings> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<CPASParentCatalogSettings> cpasParentCatalogSettingss = new APINodeList<CPASParentCatalogSettings>(request, json, header);
+  public static APINodeList<PrivateLiftStudyInstance> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PrivateLiftStudyInstance> privateLiftStudyInstances = new APINodeList<PrivateLiftStudyInstance>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -161,9 +167,9 @@ public class CPASParentCatalogSettings extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          cpasParentCatalogSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          privateLiftStudyInstances.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return cpasParentCatalogSettingss;
+        return privateLiftStudyInstances;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -173,20 +179,20 @@ public class CPASParentCatalogSettings extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                cpasParentCatalogSettingss.setCursors(before, after);
+                privateLiftStudyInstances.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            cpasParentCatalogSettingss.setPaging(previous, next);
+            privateLiftStudyInstances.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              cpasParentCatalogSettingss.setAppSecret(context.getAppSecretProof());
+              privateLiftStudyInstances.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              cpasParentCatalogSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              privateLiftStudyInstances.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -197,23 +203,23 @@ public class CPASParentCatalogSettings extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  cpasParentCatalogSettingss.add(loadJSON(entry.getValue().toString(), context, header));
+                  privateLiftStudyInstances.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              cpasParentCatalogSettingss.add(loadJSON(obj.toString(), context, header));
+              privateLiftStudyInstances.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return cpasParentCatalogSettingss;
+          return privateLiftStudyInstances;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              cpasParentCatalogSettingss.add(loadJSON(entry.getValue().toString(), context, header));
+              privateLiftStudyInstances.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return cpasParentCatalogSettingss;
+          return privateLiftStudyInstances;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -230,20 +236,20 @@ public class CPASParentCatalogSettings extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              cpasParentCatalogSettingss.add(loadJSON(value.toString(), context, header));
+              privateLiftStudyInstances.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return cpasParentCatalogSettingss;
+            return privateLiftStudyInstances;
           }
 
           // Sixth, check if it's pure JsonObject
-          cpasParentCatalogSettingss.clear();
-          cpasParentCatalogSettingss.add(loadJSON(json, context, header));
-          return cpasParentCatalogSettingss;
+          privateLiftStudyInstances.clear();
+          privateLiftStudyInstances.add(loadJSON(json, context, header));
+          return privateLiftStudyInstances;
         }
       }
     } catch (Exception e) {
@@ -279,62 +285,77 @@ public class CPASParentCatalogSettings extends APINode {
   }
 
 
-  public List<String> getFieldAttributionWindows() {
-    return mAttributionWindows;
+  public String getFieldBreakdownKey() {
+    return mBreakdownKey;
   }
 
-  public String getFieldDefaultCurrency() {
-    return mDefaultCurrency;
+  public String getFieldCreatedTime() {
+    return mCreatedTime;
   }
 
   public String getFieldId() {
     return mId;
   }
 
+  public String getFieldLatestStatusUpdateTime() {
+    return mLatestStatusUpdateTime;
+  }
+
+  public List<String> getFieldServerIps() {
+    return mServerIps;
+  }
+
+  public String getFieldStatus() {
+    return mStatus;
+  }
 
 
-  public static class APIRequestGet extends APIRequest<CPASParentCatalogSettings> {
 
-    CPASParentCatalogSettings lastResponse = null;
+  public static class APIRequestGet extends APIRequest<PrivateLiftStudyInstance> {
+
+    PrivateLiftStudyInstance lastResponse = null;
     @Override
-    public CPASParentCatalogSettings getLastResponse() {
+    public PrivateLiftStudyInstance getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "attribution_windows",
-      "default_currency",
+      "breakdown_key",
+      "created_time",
       "id",
+      "latest_status_update_time",
+      "server_ips",
+      "status",
     };
 
     @Override
-    public CPASParentCatalogSettings parseResponse(String response, String header) throws APIException {
-      return CPASParentCatalogSettings.parseResponse(response, getContext(), this, header).head();
+    public PrivateLiftStudyInstance parseResponse(String response, String header) throws APIException {
+      return PrivateLiftStudyInstance.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public CPASParentCatalogSettings execute() throws APIException {
+    public PrivateLiftStudyInstance execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public CPASParentCatalogSettings execute(Map<String, Object> extraParams) throws APIException {
+    public PrivateLiftStudyInstance execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<CPASParentCatalogSettings> executeAsync() throws APIException {
+    public ListenableFuture<PrivateLiftStudyInstance> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<CPASParentCatalogSettings> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<PrivateLiftStudyInstance> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, CPASParentCatalogSettings>() {
-           public CPASParentCatalogSettings apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, PrivateLiftStudyInstance>() {
+           public PrivateLiftStudyInstance apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -398,18 +419,18 @@ public class CPASParentCatalogSettings extends APINode {
       return this;
     }
 
-    public APIRequestGet requestAttributionWindowsField () {
-      return this.requestAttributionWindowsField(true);
+    public APIRequestGet requestBreakdownKeyField () {
+      return this.requestBreakdownKeyField(true);
     }
-    public APIRequestGet requestAttributionWindowsField (boolean value) {
-      this.requestField("attribution_windows", value);
+    public APIRequestGet requestBreakdownKeyField (boolean value) {
+      this.requestField("breakdown_key", value);
       return this;
     }
-    public APIRequestGet requestDefaultCurrencyField () {
-      return this.requestDefaultCurrencyField(true);
+    public APIRequestGet requestCreatedTimeField () {
+      return this.requestCreatedTimeField(true);
     }
-    public APIRequestGet requestDefaultCurrencyField (boolean value) {
-      this.requestField("default_currency", value);
+    public APIRequestGet requestCreatedTimeField (boolean value) {
+      this.requestField("created_time", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -419,48 +440,69 @@ public class CPASParentCatalogSettings extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestLatestStatusUpdateTimeField () {
+      return this.requestLatestStatusUpdateTimeField(true);
+    }
+    public APIRequestGet requestLatestStatusUpdateTimeField (boolean value) {
+      this.requestField("latest_status_update_time", value);
+      return this;
+    }
+    public APIRequestGet requestServerIpsField () {
+      return this.requestServerIpsField(true);
+    }
+    public APIRequestGet requestServerIpsField (boolean value) {
+      this.requestField("server_ips", value);
+      return this;
+    }
+    public APIRequestGet requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGet requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
   }
 
-  public static class APIRequestUpdate extends APIRequest<CPASParentCatalogSettings> {
+  public static class APIRequestUpdate extends APIRequest<PrivateLiftStudyInstance> {
 
-    CPASParentCatalogSettings lastResponse = null;
+    PrivateLiftStudyInstance lastResponse = null;
     @Override
-    public CPASParentCatalogSettings getLastResponse() {
+    public PrivateLiftStudyInstance getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "attribution_windows",
+      "operation",
     };
 
     public static final String[] FIELDS = {
     };
 
     @Override
-    public CPASParentCatalogSettings parseResponse(String response, String header) throws APIException {
-      return CPASParentCatalogSettings.parseResponse(response, getContext(), this, header).head();
+    public PrivateLiftStudyInstance parseResponse(String response, String header) throws APIException {
+      return PrivateLiftStudyInstance.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public CPASParentCatalogSettings execute() throws APIException {
+    public PrivateLiftStudyInstance execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public CPASParentCatalogSettings execute(Map<String, Object> extraParams) throws APIException {
+    public PrivateLiftStudyInstance execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<CPASParentCatalogSettings> executeAsync() throws APIException {
+    public ListenableFuture<PrivateLiftStudyInstance> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<CPASParentCatalogSettings> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<PrivateLiftStudyInstance> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, CPASParentCatalogSettings>() {
-           public CPASParentCatalogSettings apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, PrivateLiftStudyInstance>() {
+           public PrivateLiftStudyInstance apply(ResponseWrapper result) {
              try {
                return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -488,12 +530,12 @@ public class CPASParentCatalogSettings extends APINode {
     }
 
 
-    public APIRequestUpdate setAttributionWindows (List<CPASParentCatalogSettings.EnumAttributionWindows> attributionWindows) {
-      this.setParam("attribution_windows", attributionWindows);
+    public APIRequestUpdate setOperation (PrivateLiftStudyInstance.EnumOperation operation) {
+      this.setParam("operation", operation);
       return this;
     }
-    public APIRequestUpdate setAttributionWindows (String attributionWindows) {
-      this.setParam("attribution_windows", attributionWindows);
+    public APIRequestUpdate setOperation (String operation) {
+      this.setParam("operation", operation);
       return this;
     }
 
@@ -535,28 +577,20 @@ public class CPASParentCatalogSettings extends APINode {
 
   }
 
-  public static enum EnumAttributionWindows {
-      @SerializedName("DDA")
-      VALUE_DDA("DDA"),
-      @SerializedName("DEFAULT")
-      VALUE_DEFAULT("DEFAULT"),
-      @SerializedName("X1D_CLICK")
-      VALUE_X1D_CLICK("X1D_CLICK"),
-      @SerializedName("X1D_VIEW")
-      VALUE_X1D_VIEW("X1D_VIEW"),
-      @SerializedName("X28D_CLICK")
-      VALUE_X28D_CLICK("X28D_CLICK"),
-      @SerializedName("X28D_VIEW")
-      VALUE_X28D_VIEW("X28D_VIEW"),
-      @SerializedName("X7D_CLICK")
-      VALUE_X7D_CLICK("X7D_CLICK"),
-      @SerializedName("X7D_VIEW")
-      VALUE_X7D_VIEW("X7D_VIEW"),
+  public static enum EnumOperation {
+      @SerializedName("AGGREGATE")
+      VALUE_AGGREGATE("AGGREGATE"),
+      @SerializedName("COMPUTE")
+      VALUE_COMPUTE("COMPUTE"),
+      @SerializedName("ID_MATCH")
+      VALUE_ID_MATCH("ID_MATCH"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
       ;
 
       private String value;
 
-      private EnumAttributionWindows(String value) {
+      private EnumOperation(String value) {
         this.value = value;
       }
 
@@ -580,19 +614,22 @@ public class CPASParentCatalogSettings extends APINode {
     return gson;
   }
 
-  public CPASParentCatalogSettings copyFrom(CPASParentCatalogSettings instance) {
-    this.mAttributionWindows = instance.mAttributionWindows;
-    this.mDefaultCurrency = instance.mDefaultCurrency;
+  public PrivateLiftStudyInstance copyFrom(PrivateLiftStudyInstance instance) {
+    this.mBreakdownKey = instance.mBreakdownKey;
+    this.mCreatedTime = instance.mCreatedTime;
     this.mId = instance.mId;
+    this.mLatestStatusUpdateTime = instance.mLatestStatusUpdateTime;
+    this.mServerIps = instance.mServerIps;
+    this.mStatus = instance.mStatus;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<CPASParentCatalogSettings> getParser() {
-    return new APIRequest.ResponseParser<CPASParentCatalogSettings>() {
-      public APINodeList<CPASParentCatalogSettings> parseResponse(String response, APIContext context, APIRequest<CPASParentCatalogSettings> request, String header) throws MalformedResponseException {
-        return CPASParentCatalogSettings.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<PrivateLiftStudyInstance> getParser() {
+    return new APIRequest.ResponseParser<PrivateLiftStudyInstance>() {
+      public APINodeList<PrivateLiftStudyInstance> parseResponse(String response, APIContext context, APIRequest<PrivateLiftStudyInstance> request, String header) throws MalformedResponseException {
+        return PrivateLiftStudyInstance.parseResponse(response, context, request, header);
       }
     };
   }

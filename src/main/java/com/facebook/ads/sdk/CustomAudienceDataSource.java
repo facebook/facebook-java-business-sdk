@@ -272,6 +272,8 @@ public class CustomAudienceDataSource extends APINode {
       VALUE_EXTERNAL_IDS("EXTERNAL_IDS"),
       @SerializedName("EXTERNAL_IDS_MIX")
       VALUE_EXTERNAL_IDS_MIX("EXTERNAL_IDS_MIX"),
+      @SerializedName("FACEBOOK_WIFI_EVENTS")
+      VALUE_FACEBOOK_WIFI_EVENTS("FACEBOOK_WIFI_EVENTS"),
       @SerializedName("FB_EVENT_SIGNALS")
       VALUE_FB_EVENT_SIGNALS("FB_EVENT_SIGNALS"),
       @SerializedName("FB_PIXEL_HITS")

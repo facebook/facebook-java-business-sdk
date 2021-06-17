@@ -54,68 +54,90 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class WhatsAppBusinessProfile extends APINode {
+public class CanvasTemplate extends APINode {
+  @SerializedName("channels")
+  private Map<String, Map<String, String>> mChannels = null;
+  @SerializedName("description")
+  private String mDescription = null;
+  @SerializedName("document")
+  private Canvas mDocument = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("name_verification")
-  private Object mNameVerification = null;
-  @SerializedName("whatsapp_business_api_data")
-  private Object mWhatsappBusinessApiData = null;
+  @SerializedName("is_multi_tab_supportable")
+  private Boolean mIsMultiTabSupportable = null;
+  @SerializedName("is_new")
+  private Boolean mIsNew = null;
+  @SerializedName("name")
+  private String mName = null;
+  @SerializedName("objectives")
+  private Map<Object, Object> mObjectives = null;
+  @SerializedName("owner_id")
+  private User mOwnerId = null;
+  @SerializedName("required_capabilities")
+  private List<String> mRequiredCapabilities = null;
+  @SerializedName("snapshot_photo")
+  private Photo mSnapshotPhoto = null;
+  @SerializedName("status")
+  private String mStatus = null;
+  @SerializedName("sub_verticals")
+  private List<String> mSubVerticals = null;
+  @SerializedName("verticals")
+  private Map<String, String> mVerticals = null;
   protected static Gson gson = null;
 
-  WhatsAppBusinessProfile() {
+  CanvasTemplate() {
   }
 
-  public WhatsAppBusinessProfile(Long id, APIContext context) {
+  public CanvasTemplate(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public WhatsAppBusinessProfile(String id, APIContext context) {
+  public CanvasTemplate(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public WhatsAppBusinessProfile fetch() throws APIException{
-    WhatsAppBusinessProfile newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public CanvasTemplate fetch() throws APIException{
+    CanvasTemplate newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static WhatsAppBusinessProfile fetchById(Long id, APIContext context) throws APIException {
+  public static CanvasTemplate fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<WhatsAppBusinessProfile> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<CanvasTemplate> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static WhatsAppBusinessProfile fetchById(String id, APIContext context) throws APIException {
+  public static CanvasTemplate fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<WhatsAppBusinessProfile> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<CanvasTemplate> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<WhatsAppBusinessProfile> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<WhatsAppBusinessProfile>)(
-      new APIRequest<WhatsAppBusinessProfile>(context, "", "/", "GET", WhatsAppBusinessProfile.getParser())
+  public static APINodeList<CanvasTemplate> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<CanvasTemplate>)(
+      new APIRequest<CanvasTemplate>(context, "", "/", "GET", CanvasTemplate.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<WhatsAppBusinessProfile>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<CanvasTemplate>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", WhatsAppBusinessProfile.getParser())
+      new APIRequest(context, "", "/", "GET", CanvasTemplate.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -128,12 +150,12 @@ public class WhatsAppBusinessProfile extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static WhatsAppBusinessProfile loadJSON(String json, APIContext context, String header) {
-    WhatsAppBusinessProfile whatsAppBusinessProfile = getGson().fromJson(json, WhatsAppBusinessProfile.class);
+  public static CanvasTemplate loadJSON(String json, APIContext context, String header) {
+    CanvasTemplate canvasTemplate = getGson().fromJson(json, CanvasTemplate.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(whatsAppBusinessProfile.toString());
+      JsonElement o2 = parser.parse(canvasTemplate.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -143,14 +165,14 @@ public class WhatsAppBusinessProfile extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    whatsAppBusinessProfile.context = context;
-    whatsAppBusinessProfile.rawValue = json;
-    whatsAppBusinessProfile.header = header;
-    return whatsAppBusinessProfile;
+    canvasTemplate.context = context;
+    canvasTemplate.rawValue = json;
+    canvasTemplate.header = header;
+    return canvasTemplate;
   }
 
-  public static APINodeList<WhatsAppBusinessProfile> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<WhatsAppBusinessProfile> whatsAppBusinessProfiles = new APINodeList<WhatsAppBusinessProfile>(request, json, header);
+  public static APINodeList<CanvasTemplate> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CanvasTemplate> canvasTemplates = new APINodeList<CanvasTemplate>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -161,9 +183,9 @@ public class WhatsAppBusinessProfile extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          whatsAppBusinessProfiles.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          canvasTemplates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return whatsAppBusinessProfiles;
+        return canvasTemplates;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -173,20 +195,20 @@ public class WhatsAppBusinessProfile extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                whatsAppBusinessProfiles.setCursors(before, after);
+                canvasTemplates.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            whatsAppBusinessProfiles.setPaging(previous, next);
+            canvasTemplates.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              whatsAppBusinessProfiles.setAppSecret(context.getAppSecretProof());
+              canvasTemplates.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              whatsAppBusinessProfiles.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              canvasTemplates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -197,23 +219,23 @@ public class WhatsAppBusinessProfile extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  whatsAppBusinessProfiles.add(loadJSON(entry.getValue().toString(), context, header));
+                  canvasTemplates.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              whatsAppBusinessProfiles.add(loadJSON(obj.toString(), context, header));
+              canvasTemplates.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return whatsAppBusinessProfiles;
+          return canvasTemplates;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              whatsAppBusinessProfiles.add(loadJSON(entry.getValue().toString(), context, header));
+              canvasTemplates.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return whatsAppBusinessProfiles;
+          return canvasTemplates;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -230,20 +252,20 @@ public class WhatsAppBusinessProfile extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              whatsAppBusinessProfiles.add(loadJSON(value.toString(), context, header));
+              canvasTemplates.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return whatsAppBusinessProfiles;
+            return canvasTemplates;
           }
 
           // Sixth, check if it's pure JsonObject
-          whatsAppBusinessProfiles.clear();
-          whatsAppBusinessProfiles.add(loadJSON(json, context, header));
-          return whatsAppBusinessProfiles;
+          canvasTemplates.clear();
+          canvasTemplates.add(loadJSON(json, context, header));
+          return canvasTemplates;
         }
       }
     } catch (Exception e) {
@@ -274,67 +296,127 @@ public class WhatsAppBusinessProfile extends APINode {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestUpdate update() {
-    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
+
+  public Map<String, Map<String, String>> getFieldChannels() {
+    return mChannels;
   }
 
+  public String getFieldDescription() {
+    return mDescription;
+  }
+
+  public Canvas getFieldDocument() {
+    if (mDocument != null) {
+      mDocument.context = getContext();
+    }
+    return mDocument;
+  }
 
   public String getFieldId() {
     return mId;
   }
 
-  public Object getFieldNameVerification() {
-    return mNameVerification;
+  public Boolean getFieldIsMultiTabSupportable() {
+    return mIsMultiTabSupportable;
   }
 
-  public Object getFieldWhatsappBusinessApiData() {
-    return mWhatsappBusinessApiData;
+  public Boolean getFieldIsNew() {
+    return mIsNew;
+  }
+
+  public String getFieldName() {
+    return mName;
+  }
+
+  public Map<Object, Object> getFieldObjectives() {
+    return mObjectives;
+  }
+
+  public User getFieldOwnerId() {
+    if (mOwnerId != null) {
+      mOwnerId.context = getContext();
+    }
+    return mOwnerId;
+  }
+
+  public List<String> getFieldRequiredCapabilities() {
+    return mRequiredCapabilities;
+  }
+
+  public Photo getFieldSnapshotPhoto() {
+    if (mSnapshotPhoto != null) {
+      mSnapshotPhoto.context = getContext();
+    }
+    return mSnapshotPhoto;
+  }
+
+  public String getFieldStatus() {
+    return mStatus;
+  }
+
+  public List<String> getFieldSubVerticals() {
+    return mSubVerticals;
+  }
+
+  public Map<String, String> getFieldVerticals() {
+    return mVerticals;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<WhatsAppBusinessProfile> {
+  public static class APIRequestGet extends APIRequest<CanvasTemplate> {
 
-    WhatsAppBusinessProfile lastResponse = null;
+    CanvasTemplate lastResponse = null;
     @Override
-    public WhatsAppBusinessProfile getLastResponse() {
+    public CanvasTemplate getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
+      "channels",
+      "description",
+      "document",
       "id",
-      "name_verification",
-      "whatsapp_business_api_data",
+      "is_multi_tab_supportable",
+      "is_new",
+      "name",
+      "objectives",
+      "owner_id",
+      "required_capabilities",
+      "snapshot_photo",
+      "status",
+      "sub_verticals",
+      "verticals",
     };
 
     @Override
-    public WhatsAppBusinessProfile parseResponse(String response, String header) throws APIException {
-      return WhatsAppBusinessProfile.parseResponse(response, getContext(), this, header).head();
+    public CanvasTemplate parseResponse(String response, String header) throws APIException {
+      return CanvasTemplate.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public WhatsAppBusinessProfile execute() throws APIException {
+    public CanvasTemplate execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public WhatsAppBusinessProfile execute(Map<String, Object> extraParams) throws APIException {
+    public CanvasTemplate execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<WhatsAppBusinessProfile> executeAsync() throws APIException {
+    public ListenableFuture<CanvasTemplate> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<WhatsAppBusinessProfile> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<CanvasTemplate> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, WhatsAppBusinessProfile>() {
-           public WhatsAppBusinessProfile apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, CanvasTemplate>() {
+           public CanvasTemplate apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -398,6 +480,27 @@ public class WhatsAppBusinessProfile extends APINode {
       return this;
     }
 
+    public APIRequestGet requestChannelsField () {
+      return this.requestChannelsField(true);
+    }
+    public APIRequestGet requestChannelsField (boolean value) {
+      this.requestField("channels", value);
+      return this;
+    }
+    public APIRequestGet requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGet requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGet requestDocumentField () {
+      return this.requestDocumentField(true);
+    }
+    public APIRequestGet requestDocumentField (boolean value) {
+      this.requestField("document", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -405,124 +508,76 @@ public class WhatsAppBusinessProfile extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestNameVerificationField () {
-      return this.requestNameVerificationField(true);
+    public APIRequestGet requestIsMultiTabSupportableField () {
+      return this.requestIsMultiTabSupportableField(true);
     }
-    public APIRequestGet requestNameVerificationField (boolean value) {
-      this.requestField("name_verification", value);
+    public APIRequestGet requestIsMultiTabSupportableField (boolean value) {
+      this.requestField("is_multi_tab_supportable", value);
       return this;
     }
-    public APIRequestGet requestWhatsappBusinessApiDataField () {
-      return this.requestWhatsappBusinessApiDataField(true);
+    public APIRequestGet requestIsNewField () {
+      return this.requestIsNewField(true);
     }
-    public APIRequestGet requestWhatsappBusinessApiDataField (boolean value) {
-      this.requestField("whatsapp_business_api_data", value);
+    public APIRequestGet requestIsNewField (boolean value) {
+      this.requestField("is_new", value);
       return this;
     }
-  }
-
-  public static class APIRequestUpdate extends APIRequest<WhatsAppBusinessProfile> {
-
-    WhatsAppBusinessProfile lastResponse = null;
-    @Override
-    public WhatsAppBusinessProfile getLastResponse() {
-      return lastResponse;
+    public APIRequestGet requestNameField () {
+      return this.requestNameField(true);
     }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public WhatsAppBusinessProfile parseResponse(String response, String header) throws APIException {
-      return WhatsAppBusinessProfile.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public WhatsAppBusinessProfile execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public WhatsAppBusinessProfile execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<WhatsAppBusinessProfile> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<WhatsAppBusinessProfile> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, WhatsAppBusinessProfile>() {
-           public WhatsAppBusinessProfile apply(ResponseWrapper result) {
-             try {
-               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestUpdate(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestUpdate setParam(String param, Object value) {
-      setParamInternal(param, value);
+    public APIRequestGet requestNameField (boolean value) {
+      this.requestField("name", value);
       return this;
     }
-
-    @Override
-    public APIRequestUpdate setParams(Map<String, Object> params) {
-      setParamsInternal(params);
+    public APIRequestGet requestObjectivesField () {
+      return this.requestObjectivesField(true);
+    }
+    public APIRequestGet requestObjectivesField (boolean value) {
+      this.requestField("objectives", value);
       return this;
     }
-
-
-    public APIRequestUpdate requestAllFields () {
-      return this.requestAllFields(true);
+    public APIRequestGet requestOwnerIdField () {
+      return this.requestOwnerIdField(true);
     }
-
-    public APIRequestUpdate requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
+    public APIRequestGet requestOwnerIdField (boolean value) {
+      this.requestField("owner_id", value);
       return this;
     }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
+    public APIRequestGet requestRequiredCapabilitiesField () {
+      return this.requestRequiredCapabilitiesField(true);
     }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
+    public APIRequestGet requestRequiredCapabilitiesField (boolean value) {
+      this.requestField("required_capabilities", value);
       return this;
     }
-
-    @Override
-    public APIRequestUpdate requestField (String field) {
-      this.requestField(field, true);
+    public APIRequestGet requestSnapshotPhotoField () {
+      return this.requestSnapshotPhotoField(true);
+    }
+    public APIRequestGet requestSnapshotPhotoField (boolean value) {
+      this.requestField("snapshot_photo", value);
       return this;
     }
-
-    @Override
-    public APIRequestUpdate requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
+    public APIRequestGet requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGet requestStatusField (boolean value) {
+      this.requestField("status", value);
       return this;
     }
-
+    public APIRequestGet requestSubVerticalsField () {
+      return this.requestSubVerticalsField(true);
+    }
+    public APIRequestGet requestSubVerticalsField (boolean value) {
+      this.requestField("sub_verticals", value);
+      return this;
+    }
+    public APIRequestGet requestVerticalsField () {
+      return this.requestVerticalsField(true);
+    }
+    public APIRequestGet requestVerticalsField (boolean value) {
+      this.requestField("verticals", value);
+      return this;
+    }
   }
 
 
@@ -539,19 +594,30 @@ public class WhatsAppBusinessProfile extends APINode {
     return gson;
   }
 
-  public WhatsAppBusinessProfile copyFrom(WhatsAppBusinessProfile instance) {
+  public CanvasTemplate copyFrom(CanvasTemplate instance) {
+    this.mChannels = instance.mChannels;
+    this.mDescription = instance.mDescription;
+    this.mDocument = instance.mDocument;
     this.mId = instance.mId;
-    this.mNameVerification = instance.mNameVerification;
-    this.mWhatsappBusinessApiData = instance.mWhatsappBusinessApiData;
+    this.mIsMultiTabSupportable = instance.mIsMultiTabSupportable;
+    this.mIsNew = instance.mIsNew;
+    this.mName = instance.mName;
+    this.mObjectives = instance.mObjectives;
+    this.mOwnerId = instance.mOwnerId;
+    this.mRequiredCapabilities = instance.mRequiredCapabilities;
+    this.mSnapshotPhoto = instance.mSnapshotPhoto;
+    this.mStatus = instance.mStatus;
+    this.mSubVerticals = instance.mSubVerticals;
+    this.mVerticals = instance.mVerticals;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<WhatsAppBusinessProfile> getParser() {
-    return new APIRequest.ResponseParser<WhatsAppBusinessProfile>() {
-      public APINodeList<WhatsAppBusinessProfile> parseResponse(String response, APIContext context, APIRequest<WhatsAppBusinessProfile> request, String header) throws MalformedResponseException {
-        return WhatsAppBusinessProfile.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<CanvasTemplate> getParser() {
+    return new APIRequest.ResponseParser<CanvasTemplate>() {
+      public APINodeList<CanvasTemplate> parseResponse(String response, APIContext context, APIRequest<CanvasTemplate> request, String header) throws MalformedResponseException {
+        return CanvasTemplate.parseResponse(response, context, request, header);
       }
     };
   }

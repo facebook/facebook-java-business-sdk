@@ -79,8 +79,6 @@ public class CatalogSubVerticalList extends APINode {
   private Object mClothing = null;
   @SerializedName("clothing_accessories")
   private Object mClothingAccessories = null;
-  @SerializedName("clothing_group")
-  private Object mClothingGroup = null;
   @SerializedName("computer_components")
   private Object mComputerComponents = null;
   @SerializedName("computers_and_tablets")
@@ -421,15 +419,6 @@ public class CatalogSubVerticalList extends APINode {
 
   public CatalogSubVerticalList setFieldClothingAccessories(Object value) {
     this.mClothingAccessories = value;
-    return this;
-  }
-
-  public Object getFieldClothingGroup() {
-    return mClothingGroup;
-  }
-
-  public CatalogSubVerticalList setFieldClothingGroup(Object value) {
-    this.mClothingGroup = value;
     return this;
   }
 
@@ -840,7 +829,6 @@ public class CatalogSubVerticalList extends APINode {
     this.mCloOffer = instance.mCloOffer;
     this.mClothing = instance.mClothing;
     this.mClothingAccessories = instance.mClothingAccessories;
-    this.mClothingGroup = instance.mClothingGroup;
     this.mComputerComponents = instance.mComputerComponents;
     this.mComputersAndTablets = instance.mComputersAndTablets;
     this.mComputersLaptopsAndTablets = instance.mComputersLaptopsAndTablets;

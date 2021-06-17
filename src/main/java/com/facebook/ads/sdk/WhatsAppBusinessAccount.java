@@ -55,8 +55,12 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class WhatsAppBusinessAccount extends APINode {
+  @SerializedName("account_review_status")
+  private String mAccountReviewStatus = null;
   @SerializedName("analytics")
   private Object mAnalytics = null;
+  @SerializedName("creation_time")
+  private Long mCreationTime = null;
   @SerializedName("currency")
   private String mCurrency = null;
   @SerializedName("id")
@@ -331,8 +335,16 @@ public class WhatsAppBusinessAccount extends APINode {
   }
 
 
+  public String getFieldAccountReviewStatus() {
+    return mAccountReviewStatus;
+  }
+
   public Object getFieldAnalytics() {
     return mAnalytics;
+  }
+
+  public Long getFieldCreationTime() {
+    return mCreationTime;
   }
 
   public String getFieldCurrency() {
@@ -1582,7 +1594,9 @@ public class WhatsAppBusinessAccount extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "account_review_status",
       "analytics",
+      "creation_time",
       "currency",
       "id",
       "message_template_namespace",
@@ -1684,11 +1698,25 @@ public class WhatsAppBusinessAccount extends APINode {
       return this;
     }
 
+    public APIRequestGet requestAccountReviewStatusField () {
+      return this.requestAccountReviewStatusField(true);
+    }
+    public APIRequestGet requestAccountReviewStatusField (boolean value) {
+      this.requestField("account_review_status", value);
+      return this;
+    }
     public APIRequestGet requestAnalyticsField () {
       return this.requestAnalyticsField(true);
     }
     public APIRequestGet requestAnalyticsField (boolean value) {
       this.requestField("analytics", value);
+      return this;
+    }
+    public APIRequestGet requestCreationTimeField () {
+      return this.requestCreationTimeField(true);
+    }
+    public APIRequestGet requestCreationTimeField (boolean value) {
+      this.requestField("creation_time", value);
       return this;
     }
     public APIRequestGet requestCurrencyField () {
@@ -1772,6 +1800,8 @@ public class WhatsAppBusinessAccount extends APINode {
       VALUE_MANAGE_PHONE("MANAGE_PHONE"),
       @SerializedName("MANAGE_TEMPLATES")
       VALUE_MANAGE_TEMPLATES("MANAGE_TEMPLATES"),
+      @SerializedName("MESSAGING")
+      VALUE_MESSAGING("MESSAGING"),
       @SerializedName("VIEW_COST")
       VALUE_VIEW_COST("VIEW_COST"),
       ;
@@ -1869,7 +1899,9 @@ public class WhatsAppBusinessAccount extends APINode {
   }
 
   public WhatsAppBusinessAccount copyFrom(WhatsAppBusinessAccount instance) {
+    this.mAccountReviewStatus = instance.mAccountReviewStatus;
     this.mAnalytics = instance.mAnalytics;
+    this.mCreationTime = instance.mCreationTime;
     this.mCurrency = instance.mCurrency;
     this.mId = instance.mId;
     this.mMessageTemplateNamespace = instance.mMessageTemplateNamespace;

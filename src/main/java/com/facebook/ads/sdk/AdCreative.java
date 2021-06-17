@@ -62,7 +62,7 @@ public class AdCreative extends APINode {
   @SerializedName("adlabels")
   private List<AdLabel> mAdlabels = null;
   @SerializedName("applink_treatment")
-  private EnumApplinkTreatment mApplinkTreatment = null;
+  private String mApplinkTreatment = null;
   @SerializedName("asset_feed_spec")
   private AdAssetFeedSpec mAssetFeedSpec = null;
   @SerializedName("authorization_category")
@@ -440,11 +440,11 @@ public class AdCreative extends APINode {
     this.mAdlabels = AdLabel.getGson().fromJson(value, type);
     return this;
   }
-  public EnumApplinkTreatment getFieldApplinkTreatment() {
+  public String getFieldApplinkTreatment() {
     return mApplinkTreatment;
   }
 
-  public AdCreative setFieldApplinkTreatment(EnumApplinkTreatment value) {
+  public AdCreative setFieldApplinkTreatment(String value) {
     this.mApplinkTreatment = value;
     return this;
   }
@@ -2273,27 +2273,6 @@ public class AdCreative extends APINode {
 
   }
 
-  public static enum EnumApplinkTreatment {
-      @SerializedName("deeplink_with_appstore_fallback")
-      VALUE_DEEPLINK_WITH_APPSTORE_FALLBACK("deeplink_with_appstore_fallback"),
-      @SerializedName("deeplink_with_web_fallback")
-      VALUE_DEEPLINK_WITH_WEB_FALLBACK("deeplink_with_web_fallback"),
-      @SerializedName("web_only")
-      VALUE_WEB_ONLY("web_only"),
-      ;
-
-      private String value;
-
-      private EnumApplinkTreatment(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
   public static enum EnumCallToActionType {
       @SerializedName("ADD_TO_CART")
       VALUE_ADD_TO_CART("ADD_TO_CART"),
@@ -2494,6 +2473,27 @@ public class AdCreative extends APINode {
       private String value;
 
       private EnumStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumApplinkTreatment {
+      @SerializedName("deeplink_with_appstore_fallback")
+      VALUE_DEEPLINK_WITH_APPSTORE_FALLBACK("deeplink_with_appstore_fallback"),
+      @SerializedName("deeplink_with_web_fallback")
+      VALUE_DEEPLINK_WITH_WEB_FALLBACK("deeplink_with_web_fallback"),
+      @SerializedName("web_only")
+      VALUE_WEB_ONLY("web_only"),
+      ;
+
+      private String value;
+
+      private EnumApplinkTreatment(String value) {
         this.value = value;
       }
 

@@ -260,6 +260,9 @@ public class AdAccountAdRulesHistory extends APINode {
   }
 
   public AdRuleExecutionSpec getFieldExecutionSpec() {
+    if (mExecutionSpec != null) {
+      mExecutionSpec.context = getContext();
+    }
     return mExecutionSpec;
   }
 

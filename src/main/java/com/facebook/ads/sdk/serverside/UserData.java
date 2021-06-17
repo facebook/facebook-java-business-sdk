@@ -18,11 +18,19 @@
 package com.facebook.ads.sdk.serverside;
 
 import com.facebook.ads.utils.ServerSideApiConstants;
-import com.facebook.ads.utils.Sha256GenderEnumAdaptor;
-import com.facebook.ads.utils.Sha256StringAdaptor;
+import com.facebook.ads.sdk.serverside.utils.Sha256GenderEnumListAdaptor;
+import com.facebook.ads.sdk.serverside.utils.Sha256StringAdaptor;
+import com.facebook.ads.sdk.serverside.utils.Sha256StringListAdaptor;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * UserData is a set of identifiers Facebook can use for targeted attribution.
@@ -30,48 +38,47 @@ import java.util.Objects;
 public class UserData {
 
   @SerializedName(ServerSideApiConstants.EMAIL)
-  @JsonAdapter(Sha256StringAdaptor.class)
-  private String email = null;
+  @JsonAdapter(Sha256StringListAdaptor.class)
+  private List<String> emails = null;
 
   @SerializedName(ServerSideApiConstants.PHONE_NUMBER)
-  @JsonAdapter(Sha256StringAdaptor.class)
-  private String phone = null;
+  @JsonAdapter(Sha256StringListAdaptor.class)
+  private List<String> phones = null;
 
   @SerializedName(ServerSideApiConstants.GENDER)
-  @JsonAdapter(Sha256GenderEnumAdaptor.class)
-  private GenderEnum gender = null;
+  @JsonAdapter(Sha256GenderEnumListAdaptor.class)
+  private List<GenderEnum> genders = null;
 
   @SerializedName(ServerSideApiConstants.DATE_OF_BIRTH)
-  @JsonAdapter(Sha256StringAdaptor.class)
-  private String dateOfBirth = null;
+  @JsonAdapter(Sha256StringListAdaptor.class)
+  private List<String> datesOfBirth = null;
 
   @SerializedName(ServerSideApiConstants.LAST_NAME)
-  @JsonAdapter(Sha256StringAdaptor.class)
-  private String lastName = null;
+  @JsonAdapter(Sha256StringListAdaptor.class)
+  private List<String> lastNames = null;
 
   @SerializedName(ServerSideApiConstants.FIRST_NAME)
-  @JsonAdapter(Sha256StringAdaptor.class)
-  private String firstName = null;
+  @JsonAdapter(Sha256StringListAdaptor.class)
+  private List<String> firstNames = null;
 
   @SerializedName(ServerSideApiConstants.CITY)
-  @JsonAdapter(Sha256StringAdaptor.class)
-  private String city = null;
+  @JsonAdapter(Sha256StringListAdaptor.class)
+  private List<String> cities = null;
 
   @SerializedName(ServerSideApiConstants.STATE)
-  @JsonAdapter(Sha256StringAdaptor.class)
-  private String state = null;
+  @JsonAdapter(Sha256StringListAdaptor.class)
+  private List<String> states = null;
 
   @SerializedName(ServerSideApiConstants.ZIP_CODE)
-  @JsonAdapter(Sha256StringAdaptor.class)
-  private String zipcode = null;
+  @JsonAdapter(Sha256StringListAdaptor.class)
+  private List<String> zipcodes = null;
 
   @SerializedName(ServerSideApiConstants.COUNTRY)
-  @JsonAdapter(Sha256StringAdaptor.class)
-  private String countryCode = null;
+  @JsonAdapter(Sha256StringListAdaptor.class)
+  private List<String> countryCodes = null;
 
   @SerializedName(ServerSideApiConstants.EXTERNAL_ID)
-  @JsonAdapter(Sha256StringAdaptor.class)
-  private String externalId = null;
+  private List<String> externalIds = null;
 
   @SerializedName(ServerSideApiConstants.CLIENT_IP_ADDRESS)
   private String clientIpAddress = null;
@@ -157,17 +164,17 @@ public class UserData {
       String countryCode, String externalId, String clientIpAddress, String clientUserAgent,
       String fbc, String fbp, String subscriptionId, String fbLoginId, String leadId,
       String f5first, String f5last, String fi, String dobd, String dobm, String doby) {
-    this.email = email;
-    this.phone = phone;
-    this.gender = gender;
-    this.dateOfBirth = dateOfBirth;
-    this.lastName = lastName;
-    this.firstName = firstName;
-    this.city = city;
-    this.state = state;
-    this.zipcode = zipcode;
-    this.countryCode = countryCode;
-    this.externalId = externalId;
+    this.emails = Arrays.asList(email);
+    this.phones = Arrays.asList(phone);
+    this.genders = Arrays.asList(gender);
+    this.datesOfBirth = Arrays.asList(dateOfBirth);
+    this.lastNames = Arrays.asList(lastName);
+    this.firstNames = Arrays.asList(firstName);
+    this.cities = Arrays.asList(city);
+    this.states = Arrays.asList(state);
+    this.zipcodes = Arrays.asList(zipcode);
+    this.countryCodes = Arrays.asList(countryCode);
+    this.externalIds = Arrays.asList(externalId);
     this.clientIpAddress = clientIpAddress;
     this.clientUserAgent = clientUserAgent;
     this.fbc = fbc;
@@ -192,17 +199,18 @@ public class UserData {
    * @return UserData
    */
   public UserData email(String email) {
-    this.email = email;
+    this.emails = Arrays.asList(email);
     return this;
   }
 
   /**
    * An email address, in lowercase.
+   * Returns the 1st value if there are multiple.
    *
    * @return email
    */
   public String getEmail() {
-    return email;
+    return isListNullOrEmpty(this.emails) ? null : this.emails.get(0);
   }
 
   /**
@@ -213,7 +221,41 @@ public class UserData {
    * @param email an email address
    */
   public void setEmail(String email) {
-    this.email = email;
+    this.emails = Arrays.asList(email);
+  }
+
+
+  /**
+   * Set multiple email addresses, in lowercase.
+   *
+   * <p>Example: ["joe@eg.com","smith@test.com"]
+   *
+   * @param emails email addresses
+   * @return UserData
+   */
+  public UserData emails(List<String> emails) {
+    this.emails = emails;
+    return this;
+  }
+
+  /**
+   * Email addresses, in lowercase.
+   *
+   * @return emails
+   */
+  public List<String> getEmails() {
+    return this.emails;
+  }
+
+  /**
+   * Set email addresses, in lowercase.
+   *
+   * <p>Example: ["joe@eg.com","smith@test.com"]
+   *
+   * @param emails email addresses
+   */
+  public void setEmails(List<String> emails) {
+    this.emails = emails;
   }
 
   /**
@@ -225,17 +267,18 @@ public class UserData {
    * @return UserData
    */
   public UserData phone(String phone) {
-    this.phone = phone;
+    this.phones = Arrays.asList(phone);
     return this;
   }
 
   /**
    * A phone number. Include only digits with countryCode code, area code, and number.
+   * Returns the 1st value if there are multiple.
    *
    * @return phone
    */
   public String getPhone() {
-    return phone;
+    return isListNullOrEmpty(this.phones) ? null : this.phones.get(0);
   }
 
   /**
@@ -246,7 +289,40 @@ public class UserData {
    * @param phone a phone number
    */
   public void setPhone(String phone) {
-    this.phone = phone;
+    this.phones = Arrays.asList(phone);
+  }
+
+  /**
+   * Set a phone number. Include only digits with countryCode code, area code, and number.
+   *
+   * <p>Example: ["16505551212", "2062072008"]
+   *
+   * @param phones array of phone number
+   * @return UserData
+   */
+  public UserData phones(List<String> phones) {
+    this.phones = phones;
+    return this;
+  }
+
+  /**
+   * Phone numbers. Include only digits with countryCode code, area code, and number.
+   *
+   * @return phone
+   */
+  public List<String> getPhones() {
+    return this.phones;
+  }
+
+  /**
+   * Set phone numbers. Include only digits with countryCode code, area code, and number.
+   *
+   * <p>Example: ["16505551212", "12062072008"]
+   *
+   * @param phones a phone number
+   */
+  public void setPhones(List<String> phones) {
+    this.phones = phones;
   }
 
   /**
@@ -256,17 +332,18 @@ public class UserData {
    * @return UserData
    */
   public UserData gender(GenderEnum gender) {
-    this.gender = gender;
+    this.genders = Arrays.asList(gender);
     return this;
   }
 
   /**
    * Gender, Male or Female.
+   * Returns the 1st value if there are multiple.
    *
    * @return gender
    */
   public GenderEnum getGender() {
-    return gender;
+    return isListNullOrEmpty(this.genders) ? null : this.genders.get(0);
   }
 
   /**
@@ -275,7 +352,36 @@ public class UserData {
    * @param gender Male or Female.
    */
   public void setGender(GenderEnum gender) {
-    this.gender = gender;
+    this.genders = Arrays.asList(gender);
+  }
+
+  /**
+   * Gender. Male or Female.
+   *
+   * @param genders Male or Female.
+   * @return UserData
+   */
+  public UserData genders(List<GenderEnum> genders) {
+    this.genders = genders;
+    return this;
+  }
+
+  /**
+   * Gender, Male or Female.
+   *
+   * @return gender
+   */
+  public List<GenderEnum> getGenders() {
+    return this.genders;
+  }
+
+  /**
+   * Gender, Male or Female.
+   *
+   * @param genders Male or Female.
+   */
+  public void setGenders(List<GenderEnum> genders) {
+    this.genders = genders;
   }
 
   /**
@@ -287,17 +393,18 @@ public class UserData {
    * @return UserData
    */
   public UserData dateOfBirth(String dateOfBirth) {
-    this.dateOfBirth = dateOfBirth;
+    this.datesOfBirth = Arrays.asList(dateOfBirth);
     return this;
   }
 
   /**
    * Return a date of birth given as year, month, and day.
+   * Returns the 1st value if there are multiple.
    *
    * @return dateOfBirth
    */
   public String getDateOfBirth() {
-    return dateOfBirth;
+    return isListNullOrEmpty(this.datesOfBirth) ? null : this.datesOfBirth.get(0);
   }
 
   /**
@@ -308,7 +415,40 @@ public class UserData {
    * @param dateOfBirth a date of birth given as year, month, and day.
    */
   public void setDateOfBirth(String dateOfBirth) {
-    this.dateOfBirth = dateOfBirth;
+    this.datesOfBirth = Arrays.asList(dateOfBirth);
+  }
+
+  /**
+   * Set dates of birth given as year, month, and day.
+   *
+   * <p>Example: 19971226 for December 26, 1997.
+   *
+   * @param datesOfBirth an array of dates of birth given as year, month, and day.
+   * @return UserData
+   */
+  public UserData datesOfBirth(List<String> datesOfBirth) {
+    this.datesOfBirth = datesOfBirth;
+    return this;
+  }
+
+  /**
+   * Return dates of birth given as year, month, and day.
+   *
+   * @return datesOfBirth
+   */
+  public List<String> getDatesOfBirth() {
+    return this.datesOfBirth;
+  }
+
+  /**
+   * Dates of birth given as year, month, and day.
+   *
+   * <p>Example: 19971226 for December 26, 1997.
+   *
+   * @param datesOfBirth dates of birth given as year, month, and day.
+   */
+  public void setDatesOfBirth(List<String> datesOfBirth) {
+    this.datesOfBirth = datesOfBirth;
   }
 
   /**
@@ -320,17 +460,18 @@ public class UserData {
    * @return UserData
    */
   public UserData lastName(String lastName) {
-    this.lastName = lastName;
+    this.lastNames = Arrays.asList(lastName);
     return this;
   }
 
   /**
    * A last name in lowercase.
+   * Returns the 1st value if there are multiple.
    *
    * @return lastName
    */
   public String getLastName() {
-    return lastName;
+    return isListNullOrEmpty(this.lastNames) ? null : this.lastNames.get(0);
   }
 
   /**
@@ -341,7 +482,40 @@ public class UserData {
    * @param lastName last name
    */
   public void setLastName(String lastName) {
-    this.lastName = lastName;
+    this.lastNames = Arrays.asList(lastName);
+  }
+
+  /**
+   * Set last names in lowercase.
+   *
+   * <p>Example: {"smith", "williams"}
+   *
+   * @param lastNames last names
+   * @return UserData
+   */
+  public UserData lastNames(List<String> lastNames) {
+    this.lastNames = lastNames;
+    return this;
+  }
+
+  /**
+   * Last names in lowercase.
+   *
+   * @return lastNames
+   */
+  public List<String> getLastNames() {
+    return this.lastNames;
+  }
+
+  /**
+   * Set last names in lowercase.
+   *
+   * <p>Example: ["smith", "williams"]
+   *
+   * @param lastNames last names
+   */
+  public void setLastNames(List<String> lastNames) {
+    this.lastNames = lastNames;
   }
 
   /**
@@ -350,20 +524,21 @@ public class UserData {
    * <p>Example: joe
    *
    * @param firstName first name
-   * @return firstName
+   * @return UserData
    */
   public UserData firstName(String firstName) {
-    this.firstName = firstName;
+    this.firstNames = Arrays.asList(firstName);
     return this;
   }
 
   /**
    * A first name in lowercase.
+   * Returns the 1st value if there are multiple.
    *
    * @return firstName
    */
   public String getFirstName() {
-    return firstName;
+    return isListNullOrEmpty(this.firstNames) ? null : this.firstNames.get(0);
   }
 
   /**
@@ -374,7 +549,40 @@ public class UserData {
    * @param firstName first name
    */
   public void setFirstName(String firstName) {
-    this.firstName = firstName;
+    this.firstNames = Arrays.asList(firstName);
+  }
+
+  /**
+   * Set first names in lowercase.
+   *
+   * <p>Example: {"joe", "john"}
+   *
+   * @param firstNames first names
+   * @return UserData
+   */
+  public UserData firstNames(List<String> firstNames) {
+    this.firstNames = firstNames;
+    return this;
+  }
+
+  /**
+   * First names in lowercase.
+   *
+   * @return firstName
+   */
+  public List<String> getFirstNames() {
+    return this.firstNames;
+  }
+
+  /**
+   * Set first names in lowercase.
+   *
+   * <p>Example: ["joe", "john"]
+   *
+   * @param firstNames first names
+   */
+  public void setFirstNames(List<String> firstNames) {
+    this.firstNames = firstNames;
   }
 
   /**
@@ -386,17 +594,18 @@ public class UserData {
    * @return UserData
    */
   public UserData city(String city) {
-    this.city = city;
+    this.cities = Arrays.asList(city);
     return this;
   }
 
   /**
    * A city in lower-case without spaces or punctuation.
+   * Returns the 1st value if there are multiple.
    *
    * @return city
    */
   public String getCity() {
-    return city;
+    return isListNullOrEmpty(this.cities) ? null : this.cities.get(0);
   }
 
   /**
@@ -407,7 +616,40 @@ public class UserData {
    * @param city city
    */
   public void setCity(String city) {
-    this.city = city;
+    this.cities = Arrays.asList(city);
+  }
+
+  /**
+   * Set cities in lower-case without spaces or punctuation.
+   *
+   * <p>Example: {"menlopark", "seattle"}
+   *
+   * @param cities cities
+   * @return UserData
+   */
+  public UserData cities(List<String> cities) {
+    this.cities = cities;
+    return this;
+  }
+
+  /**
+   * Cities in lower-case without spaces or punctuation.
+   *
+   * @return cities
+   */
+  public List<String> getCities() {
+    return this.cities;
+  }
+
+  /**
+   * Set cities in lower-case without spaces or punctuation.
+   *
+   * <p>Example: ["menlopark", "seattle"]
+   *
+   * @param cities cities
+   */
+  public void setCities(List<String> cities) {
+    this.cities = cities;
   }
 
   /**
@@ -419,17 +661,18 @@ public class UserData {
    * @return UserData
    */
   public UserData state(String state) {
-    this.state = state;
+    this.states = Arrays.asList(state);
     return this;
   }
 
   /**
    * A two-letter state code in lowercase.
+   * Returns the 1st value if there are multiple.
    *
    * @return state
    */
   public String getState() {
-    return state;
+    return isListNullOrEmpty(this.states) ? null : this.states.get(0);
   }
 
   /**
@@ -440,7 +683,40 @@ public class UserData {
    * @param state two-letter state code
    */
   public void setState(String state) {
-    this.state = state;
+    this.states = Arrays.asList(state);
+  }
+
+  /**
+   * Set two-letter state codes in lowercase.
+   *
+   * <p>Example: ["ca", "wa"]
+   *
+   * @param states two-letter state codes
+   * @return UserData
+   */
+  public UserData states(List<String> states) {
+    this.states = states;
+    return this;
+  }
+
+  /**
+   * Two-letter state codes in lowercase.
+   *
+   * @return states
+   */
+  public List<String> getStates() {
+    return this.states;
+  }
+
+  /**
+   * Set a two-letter state codes in lowercase.
+   *
+   * <p>Example: ["ca", "wa"]
+   *
+   * @param states two-letter state codes
+   */
+  public void setStates(List<String> states) {
+    this.states = states;
   }
 
   /**
@@ -452,17 +728,18 @@ public class UserData {
    * @return UserData
    */
   public UserData zipcode(String zipcode) {
-    this.zipcode = zipcode;
+    this.zipcodes = Arrays.asList(zipcode);
     return this;
   }
 
   /**
    * A five-digit zip code.
+   * Returns the 1st value if there are multiple.
    *
    * @return zipcode
    */
   public String getZipcode() {
-    return zipcode;
+    return isListNullOrEmpty(this.zipcodes) ? null : this.zipcodes.get(0);
   }
 
   /**
@@ -473,7 +750,40 @@ public class UserData {
    * @param zipcode five-digit zip code
    */
   public void setZipcode(String zipcode) {
-    this.zipcode = zipcode;
+    this.zipcodes = Arrays.asList(zipcode);
+  }
+
+  /**
+   * Set five-digit zip codes.
+   *
+   * <p>Example: ["94035", "98101"]
+   *
+   * @param zipcodes five-digit zip codes
+   * @return UserData
+   */
+  public UserData zipcodes(List<String> zipcodes) {
+    this.zipcodes = zipcodes;
+    return this;
+  }
+
+  /**
+   * A five-digit zip codes.
+   *
+   * @return zipcodes
+   */
+  public List<String> getZipcodes() {
+    return this.zipcodes;
+  }
+
+  /**
+   * Set five-digit zip codes.
+   *
+   * <p>Example: ["94035", "98101"]
+   *
+   * @param zipcodes five-digit zip codes
+   */
+  public void setZipcodes(List<String> zipcodes) {
+    this.zipcodes = zipcodes;
   }
 
   /**
@@ -485,19 +795,20 @@ public class UserData {
    * @return UserData
    */
   public UserData countryCode(String countryCode) {
-    this.countryCode = countryCode;
+    this.countryCodes = Arrays.asList(countryCode);
     return this;
   }
 
   /**
    * A two-letter country code in lowercase.
+   * Returns the 1st value if there are multiple.
    *
    * <p>Example: us
    *
    * @return countryCode
    */
   public String getCountryCode() {
-    return countryCode;
+    return isListNullOrEmpty(this.countryCodes) ? null : this.countryCodes.get(0);
   }
 
   /**
@@ -508,7 +819,42 @@ public class UserData {
    * @param countryCode two-letter country code
    */
   public void setCountryCode(String countryCode) {
-    this.countryCode = countryCode;
+    this.countryCodes = Arrays.asList(countryCode);
+  }
+
+  /**
+   * Set two-letter country codes in lowercase.
+   *
+   * <p>Example: ["us", "ca"]
+   *
+   * @param countryCodes two-letter country codes
+   * @return UserData
+   */
+  public UserData countryCodes(List<String> countryCodes) {
+    this.countryCodes = countryCodes;
+    return this;
+  }
+
+  /**
+   * Two-letter country codes in lowercase.
+   *
+   * <p>Example: ["us", "ca"]
+   *
+   * @return countryCodes
+   */
+  public List<String> getCountryCodes() {
+    return this.countryCodes;
+  }
+
+  /**
+   * Set two-letter country codes in lowercase.
+   *
+   * <p>Example: ["us", "ca"]
+   *
+   * @param countryCodes two-letter country codes
+   */
+  public void setCountryCodes(List<String> countryCodes) {
+    this.countryCodes = countryCodes;
   }
 
   /**
@@ -521,7 +867,7 @@ public class UserData {
    * @return UserData
    */
   public UserData externalId(String externalId) {
-    this.externalId = externalId;
+    this.externalIds = Arrays.asList(externalId);
     return this;
   }
 
@@ -530,11 +876,12 @@ public class UserData {
    * cookie IDs. In the Offline Conversions API, this is known as extern_id. For more information,
    * see Offline Conversions, Providing External IDs. If External ID is being sent via other
    * channels, then it should be sent in the same format via the server-side API.
+   * Returns the 1st value if there are multiple.
    *
    * @return externalId
    */
   public String getExternalId() {
-    return externalId;
+    return isListNullOrEmpty(this.externalIds) ? null : this.externalIds.get(0);
   }
 
   /**
@@ -546,7 +893,45 @@ public class UserData {
    * @param externalId unique ID from the advertiser
    */
   public void setExternalId(String externalId) {
-    this.externalId = externalId;
+    this.externalIds = Arrays.asList(externalId);
+  }
+
+  /**
+   * Set any unique IDs from the advertiser, such as loyalty membership IDs, user IDs, and external
+   * cookie IDs. In the Offline Conversions API, this is known as extern_id. For more information,
+   * see Offline Conversions, Providing External IDs. If External ID is being sent via other
+   * channels, then it should be sent in the same format via the server-side API.
+   *
+   * @param externalIds unique IDs from the advertiser
+   * @return UserData
+   */
+  public UserData externalIds(List<String> externalIds) {
+    this.externalIds = dedup(externalIds);
+    return this;
+  }
+
+  /**
+   * Any unique ID from the advertiser, such as loyalty membership IDs, user IDs, and external
+   * cookie IDs. In the Offline Conversions API, this is known as extern_id. For more information,
+   * see Offline Conversions, Providing External IDs. If External ID is being sent via other
+   * channels, then it should be sent in the same format via the server-side API.
+   *
+   * @return externalIds
+   */
+  public List<String> getExternalIds() {
+    return this.externalIds;
+  }
+
+  /**
+   * Set any unique ID from the advertiser, such as loyalty membership IDs, user IDs, and external
+   * cookie IDs. In the Offline Conversions API, this is known as extern_id. For more information,
+   * see Offline Conversions, Providing External IDs. If External ID is being sent via other
+   * channels, then it should be sent in the same format via the server-side API.
+   *
+   * @param externalIds unique IDs from the advertiser
+   */
+  public void setExternalIds(List<String> externalIds) {
+    this.externalIds = dedup(externalIds);
   }
 
   /**
@@ -949,17 +1334,17 @@ public class UserData {
       return false;
     }
     UserData userData = (UserData) o;
-    return Objects.equals(this.email, userData.email)
-        && Objects.equals(this.phone, userData.phone)
-        && Objects.equals(this.gender, userData.gender)
-        && Objects.equals(this.dateOfBirth, userData.dateOfBirth)
-        && Objects.equals(this.lastName, userData.lastName)
-        && Objects.equals(this.firstName, userData.firstName)
-        && Objects.equals(this.city, userData.city)
-        && Objects.equals(this.state, userData.state)
-        && Objects.equals(this.zipcode, userData.zipcode)
-        && Objects.equals(this.countryCode, userData.countryCode)
-        && Objects.equals(this.externalId, userData.externalId)
+    return Objects.equals(this.emails, userData.emails)
+        && Objects.equals(this.phones, userData.phones)
+        && Objects.equals(this.genders, userData.genders)
+        && Objects.equals(this.datesOfBirth, userData.datesOfBirth)
+        && Objects.equals(this.lastNames, userData.lastNames)
+        && Objects.equals(this.firstNames, userData.firstNames)
+        && Objects.equals(this.cities, userData.cities)
+        && Objects.equals(this.states, userData.states)
+        && Objects.equals(this.zipcodes, userData.zipcodes)
+        && Objects.equals(this.countryCodes, userData.countryCodes)
+        && Objects.equals(this.externalIds, userData.externalIds)
         && Objects.equals(this.clientIpAddress, userData.clientIpAddress)
         && Objects.equals(this.clientUserAgent, userData.clientUserAgent)
         && Objects.equals(this.fbc, userData.fbc)
@@ -978,17 +1363,17 @@ public class UserData {
   @Override
   public int hashCode() {
     return Objects.hash(
-        email,
-        phone,
-        gender,
-        dateOfBirth,
-        lastName,
-        firstName,
-        city,
-        state,
-        zipcode,
-        countryCode,
-        externalId,
+        emails,
+        phones,
+        genders,
+        datesOfBirth,
+        lastNames,
+        firstNames,
+        cities,
+        states,
+        zipcodes,
+        countryCodes,
+        externalIds,
         clientIpAddress,
         clientUserAgent,
         fbc,
@@ -1009,17 +1394,17 @@ public class UserData {
     StringBuilder sb = new StringBuilder();
     sb.append("class UserData {\n");
 
-    sb.append("    email: ").append(toIndentedString(email)).append("\n");
-    sb.append("    phone: ").append(toIndentedString(phone)).append("\n");
-    sb.append("    gender: ").append(toIndentedString(gender)).append("\n");
-    sb.append("    dateOfBirth: ").append(toIndentedString(dateOfBirth)).append("\n");
-    sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
-    sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
-    sb.append("    city: ").append(toIndentedString(city)).append("\n");
-    sb.append("    state: ").append(toIndentedString(state)).append("\n");
-    sb.append("    zipcode: ").append(toIndentedString(zipcode)).append("\n");
-    sb.append("    countryCode: ").append(toIndentedString(countryCode)).append("\n");
-    sb.append("    externalId: ").append(toIndentedString(externalId)).append("\n");
+    sb.append("    email: ").append(toIndentedString(emails)).append("\n");
+    sb.append("    phone: ").append(toIndentedString(phones)).append("\n");
+    sb.append("    gender: ").append(toIndentedString(genders)).append("\n");
+    sb.append("    dateOfBirth: ").append(toIndentedString(datesOfBirth)).append("\n");
+    sb.append("    lastName: ").append(toIndentedString(lastNames)).append("\n");
+    sb.append("    firstName: ").append(toIndentedString(firstNames)).append("\n");
+    sb.append("    city: ").append(toIndentedString(cities)).append("\n");
+    sb.append("    state: ").append(toIndentedString(states)).append("\n");
+    sb.append("    zipcode: ").append(toIndentedString(zipcodes)).append("\n");
+    sb.append("    countryCode: ").append(toIndentedString(countryCodes)).append("\n");
+    sb.append("    externalId: ").append(toIndentedString(externalIds)).append("\n");
     sb.append("    clientIpAddress: ").append(toIndentedString(clientIpAddress)).append("\n");
     sb.append("    clientUserAgent: ").append(toIndentedString(clientUserAgent)).append("\n");
     sb.append("    fbc: ").append(toIndentedString(fbc)).append("\n");
@@ -1046,5 +1431,29 @@ public class UserData {
       return "null";
     }
     return o.toString().replace("\n", "\n    ");
+  }
+
+  /**
+   * Check if the given list is null or empty.
+   */
+  private <T> boolean isListNullOrEmpty(List<T> list) {
+    return list == null || list.isEmpty();
+  }
+
+  /**
+   * Dedup the given list. This can be applied to fields that do not require normalization or hashing.
+   * This is currently only used for external_ids.
+   * @param values Input
+   * @return Deduped values
+   */
+  private List<String> dedup(List<String> values) {
+    if (isListNullOrEmpty(values)) return null;
+    Set<String> set = new HashSet();
+    for (String str : values) {
+      if (str != null) {
+        set.add(str);
+      }
+    }
+    return new ArrayList(set);
   }
 }

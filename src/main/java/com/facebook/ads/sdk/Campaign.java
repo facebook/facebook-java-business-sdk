@@ -4027,7 +4027,9 @@ public class Campaign extends APINode {
       "special_ad_category",
       "special_ad_category_country",
       "spend_cap",
+      "start_time",
       "status",
+      "stop_time",
       "upstream_events",
     };
 
@@ -4254,12 +4256,22 @@ public class Campaign extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setStartTime (String startTime) {
+      this.setParam("start_time", startTime);
+      return this;
+    }
+
     public APIRequestUpdate setStatus (Campaign.EnumStatus status) {
       this.setParam("status", status);
       return this;
     }
     public APIRequestUpdate setStatus (String status) {
       this.setParam("status", status);
+      return this;
+    }
+
+    public APIRequestUpdate setStopTime (String stopTime) {
+      this.setParam("stop_time", stopTime);
       return this;
     }
 

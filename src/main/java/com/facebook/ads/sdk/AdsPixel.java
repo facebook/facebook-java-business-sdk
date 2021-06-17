@@ -75,6 +75,8 @@ public class AdsPixel extends APINode {
   private String mId = null;
   @SerializedName("is_created_by_business")
   private Boolean mIsCreatedByBusiness = null;
+  @SerializedName("is_crm")
+  private Boolean mIsCrm = null;
   @SerializedName("is_unavailable")
   private Boolean mIsUnavailable = null;
   @SerializedName("last_fired_time")
@@ -384,6 +386,10 @@ public class AdsPixel extends APINode {
 
   public Boolean getFieldIsCreatedByBusiness() {
     return mIsCreatedByBusiness;
+  }
+
+  public Boolean getFieldIsCrm() {
+    return mIsCrm;
   }
 
   public Boolean getFieldIsUnavailable() {
@@ -2361,6 +2367,7 @@ public class AdsPixel extends APINode {
       "first_party_cookie_status",
       "id",
       "is_created_by_business",
+      "is_crm",
       "is_unavailable",
       "last_fired_time",
       "name",
@@ -2525,6 +2532,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGet requestIsCreatedByBusinessField (boolean value) {
       this.requestField("is_created_by_business", value);
+      return this;
+    }
+    public APIRequestGet requestIsCrmField () {
+      return this.requestIsCrmField(true);
+    }
+    public APIRequestGet requestIsCrmField (boolean value) {
+      this.requestField("is_crm", value);
       return this;
     }
     public APIRequestGet requestIsUnavailableField () {
@@ -2866,6 +2880,7 @@ public class AdsPixel extends APINode {
     this.mFirstPartyCookieStatus = instance.mFirstPartyCookieStatus;
     this.mId = instance.mId;
     this.mIsCreatedByBusiness = instance.mIsCreatedByBusiness;
+    this.mIsCrm = instance.mIsCrm;
     this.mIsUnavailable = instance.mIsUnavailable;
     this.mLastFiredTime = instance.mLastFiredTime;
     this.mName = instance.mName;

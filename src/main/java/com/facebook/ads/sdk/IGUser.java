@@ -702,6 +702,8 @@ public class IGUser extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "since",
+      "until",
     };
 
     public static final String[] FIELDS = {
@@ -711,6 +713,7 @@ public class IGUser extends APINode {
       "ig_id",
       "is_comment_enabled",
       "like_count",
+      "media_product_type",
       "media_type",
       "media_url",
       "owner",
@@ -719,6 +722,7 @@ public class IGUser extends APINode {
       "thumbnail_url",
       "timestamp",
       "username",
+      "video_title",
     };
 
     @Override
@@ -773,6 +777,16 @@ public class IGUser extends APINode {
       return this;
     }
 
+
+    public APIRequestGetMedia setSince (String since) {
+      this.setParam("since", since);
+      return this;
+    }
+
+    public APIRequestGetMedia setUntil (String until) {
+      this.setParam("until", until);
+      return this;
+    }
 
     public APIRequestGetMedia requestAllFields () {
       return this.requestAllFields(true);
@@ -852,6 +866,13 @@ public class IGUser extends APINode {
       this.requestField("like_count", value);
       return this;
     }
+    public APIRequestGetMedia requestMediaProductTypeField () {
+      return this.requestMediaProductTypeField(true);
+    }
+    public APIRequestGetMedia requestMediaProductTypeField (boolean value) {
+      this.requestField("media_product_type", value);
+      return this;
+    }
     public APIRequestGetMedia requestMediaTypeField () {
       return this.requestMediaTypeField(true);
     }
@@ -906,6 +927,13 @@ public class IGUser extends APINode {
     }
     public APIRequestGetMedia requestUsernameField (boolean value) {
       this.requestField("username", value);
+      return this;
+    }
+    public APIRequestGetMedia requestVideoTitleField () {
+      return this.requestVideoTitleField(true);
+    }
+    public APIRequestGetMedia requestVideoTitleField (boolean value) {
+      this.requestField("video_title", value);
       return this;
     }
   }
@@ -1417,6 +1445,7 @@ public class IGUser extends APINode {
       "ig_id",
       "is_comment_enabled",
       "like_count",
+      "media_product_type",
       "media_type",
       "media_url",
       "owner",
@@ -1425,6 +1454,7 @@ public class IGUser extends APINode {
       "thumbnail_url",
       "timestamp",
       "username",
+      "video_title",
     };
 
     @Override
@@ -1558,6 +1588,13 @@ public class IGUser extends APINode {
       this.requestField("like_count", value);
       return this;
     }
+    public APIRequestGetStories requestMediaProductTypeField () {
+      return this.requestMediaProductTypeField(true);
+    }
+    public APIRequestGetStories requestMediaProductTypeField (boolean value) {
+      this.requestField("media_product_type", value);
+      return this;
+    }
     public APIRequestGetStories requestMediaTypeField () {
       return this.requestMediaTypeField(true);
     }
@@ -1614,6 +1651,13 @@ public class IGUser extends APINode {
       this.requestField("username", value);
       return this;
     }
+    public APIRequestGetStories requestVideoTitleField () {
+      return this.requestVideoTitleField(true);
+    }
+    public APIRequestGetStories requestVideoTitleField (boolean value) {
+      this.requestField("video_title", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetTags extends APIRequest<IGMedia> {
@@ -1633,6 +1677,7 @@ public class IGUser extends APINode {
       "ig_id",
       "is_comment_enabled",
       "like_count",
+      "media_product_type",
       "media_type",
       "media_url",
       "owner",
@@ -1641,6 +1686,7 @@ public class IGUser extends APINode {
       "thumbnail_url",
       "timestamp",
       "username",
+      "video_title",
     };
 
     @Override
@@ -1774,6 +1820,13 @@ public class IGUser extends APINode {
       this.requestField("like_count", value);
       return this;
     }
+    public APIRequestGetTags requestMediaProductTypeField () {
+      return this.requestMediaProductTypeField(true);
+    }
+    public APIRequestGetTags requestMediaProductTypeField (boolean value) {
+      this.requestField("media_product_type", value);
+      return this;
+    }
     public APIRequestGetTags requestMediaTypeField () {
       return this.requestMediaTypeField(true);
     }
@@ -1828,6 +1881,13 @@ public class IGUser extends APINode {
     }
     public APIRequestGetTags requestUsernameField (boolean value) {
       this.requestField("username", value);
+      return this;
+    }
+    public APIRequestGetTags requestVideoTitleField () {
+      return this.requestVideoTitleField(true);
+    }
+    public APIRequestGetTags requestVideoTitleField (boolean value) {
+      this.requestField("video_title", value);
       return this;
     }
   }

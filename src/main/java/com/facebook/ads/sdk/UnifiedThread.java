@@ -703,6 +703,25 @@ public class UnifiedThread extends APINode {
     }
   }
 
+  public static enum EnumPlatform {
+      @SerializedName("INSTAGRAM")
+      VALUE_INSTAGRAM("INSTAGRAM"),
+      @SerializedName("MESSENGER")
+      VALUE_MESSENGER("MESSENGER"),
+      ;
+
+      private String value;
+
+      private EnumPlatform(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumSource {
       @SerializedName("ALL")
       VALUE_ALL("ALL"),

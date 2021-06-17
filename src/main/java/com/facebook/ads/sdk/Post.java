@@ -2809,6 +2809,7 @@ public class Post extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_number",
       "hometown",
@@ -3347,6 +3348,13 @@ public class Post extends APINode {
     }
     public APIRequestGetSponsorTags requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestHasTransitionedToNewPageExperienceField () {
+      return this.requestHasTransitionedToNewPageExperienceField(true);
+    }
+    public APIRequestGetSponsorTags requestHasTransitionedToNewPageExperienceField (boolean value) {
+      this.requestField("has_transitioned_to_new_page_experience", value);
       return this;
     }
     public APIRequestGetSponsorTags requestHasWhatsappBusinessNumberField () {
@@ -4904,6 +4912,7 @@ public class Post extends APINode {
       "backdated_time_granularity",
       "composer_session_id",
       "direct_share_status",
+      "explicitly_added_mentionee_ids",
       "feed_story_visibility",
       "is_explicit_location",
       "is_hidden",
@@ -5021,6 +5030,15 @@ public class Post extends APINode {
     }
     public APIRequestUpdate setDirectShareStatus (String directShareStatus) {
       this.setParam("direct_share_status", directShareStatus);
+      return this;
+    }
+
+    public APIRequestUpdate setExplicitlyAddedMentioneeIds (List<Long> explicitlyAddedMentioneeIds) {
+      this.setParam("explicitly_added_mentionee_ids", explicitlyAddedMentioneeIds);
+      return this;
+    }
+    public APIRequestUpdate setExplicitlyAddedMentioneeIds (String explicitlyAddedMentioneeIds) {
+      this.setParam("explicitly_added_mentionee_ids", explicitlyAddedMentioneeIds);
       return this;
     }
 

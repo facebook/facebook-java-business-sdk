@@ -1078,6 +1078,7 @@ public class User extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_number",
       "hometown",
@@ -1634,6 +1635,13 @@ public class User extends APINode {
     }
     public APIRequestGetAccounts requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetAccounts requestHasTransitionedToNewPageExperienceField () {
+      return this.requestHasTransitionedToNewPageExperienceField(true);
+    }
+    public APIRequestGetAccounts requestHasTransitionedToNewPageExperienceField (boolean value) {
+      this.requestField("has_transitioned_to_new_page_experience", value);
       return this;
     }
     public APIRequestGetAccounts requestHasWhatsappBusinessNumberField () {
@@ -4980,6 +4988,7 @@ public class User extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_number",
       "hometown",
@@ -5518,6 +5527,13 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedPages requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetAssignedPages requestHasTransitionedToNewPageExperienceField () {
+      return this.requestHasTransitionedToNewPageExperienceField(true);
+    }
+    public APIRequestGetAssignedPages requestHasTransitionedToNewPageExperienceField (boolean value) {
+      this.requestField("has_transitioned_to_new_page_experience", value);
       return this;
     }
     public APIRequestGetAssignedPages requestHasWhatsappBusinessNumberField () {
@@ -11349,6 +11365,7 @@ public class User extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_number",
       "hometown",
@@ -11892,6 +11909,13 @@ public class User extends APINode {
     }
     public APIRequestGetLikes requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetLikes requestHasTransitionedToNewPageExperienceField () {
+      return this.requestHasTransitionedToNewPageExperienceField(true);
+    }
+    public APIRequestGetLikes requestHasTransitionedToNewPageExperienceField (boolean value) {
+      this.requestField("has_transitioned_to_new_page_experience", value);
       return this;
     }
     public APIRequestGetLikes requestHasWhatsappBusinessNumberField () {
@@ -13567,6 +13591,7 @@ public class User extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_number",
       "hometown",
@@ -14110,6 +14135,13 @@ public class User extends APINode {
     }
     public APIRequestGetMusic requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetMusic requestHasTransitionedToNewPageExperienceField () {
+      return this.requestHasTransitionedToNewPageExperienceField(true);
+    }
+    public APIRequestGetMusic requestHasTransitionedToNewPageExperienceField (boolean value) {
+      this.requestField("has_transitioned_to_new_page_experience", value);
       return this;
     }
     public APIRequestGetMusic requestHasWhatsappBusinessNumberField () {
@@ -17775,8 +17807,10 @@ public class User extends APINode {
       "is_hidden",
       "is_published",
       "last_editor",
+      "linked_documents",
       "name",
       "owner",
+      "source_template",
       "update_time",
     };
 
@@ -17923,6 +17957,13 @@ public class User extends APINode {
       this.requestField("last_editor", value);
       return this;
     }
+    public APIRequestGetRichMediaDocuments requestLinkedDocumentsField () {
+      return this.requestLinkedDocumentsField(true);
+    }
+    public APIRequestGetRichMediaDocuments requestLinkedDocumentsField (boolean value) {
+      this.requestField("linked_documents", value);
+      return this;
+    }
     public APIRequestGetRichMediaDocuments requestNameField () {
       return this.requestNameField(true);
     }
@@ -17935,6 +17976,13 @@ public class User extends APINode {
     }
     public APIRequestGetRichMediaDocuments requestOwnerField (boolean value) {
       this.requestField("owner", value);
+      return this;
+    }
+    public APIRequestGetRichMediaDocuments requestSourceTemplateField () {
+      return this.requestSourceTemplateField(true);
+    }
+    public APIRequestGetRichMediaDocuments requestSourceTemplateField (boolean value) {
+      this.requestField("source_template", value);
       return this;
     }
     public APIRequestGetRichMediaDocuments requestUpdateTimeField () {

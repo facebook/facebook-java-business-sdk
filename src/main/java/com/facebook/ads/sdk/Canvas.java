@@ -69,10 +69,14 @@ public class Canvas extends APINode {
   private Boolean mIsPublished = null;
   @SerializedName("last_editor")
   private User mLastEditor = null;
+  @SerializedName("linked_documents")
+  private List<Canvas> mLinkedDocuments = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("owner")
   private Page mOwner = null;
+  @SerializedName("source_template")
+  private CanvasTemplate mSourceTemplate = null;
   @SerializedName("update_time")
   private Long mUpdateTime = null;
   protected static Gson gson = null;
@@ -336,6 +340,10 @@ public class Canvas extends APINode {
     return mLastEditor;
   }
 
+  public List<Canvas> getFieldLinkedDocuments() {
+    return mLinkedDocuments;
+  }
+
   public String getFieldName() {
     return mName;
   }
@@ -345,6 +353,13 @@ public class Canvas extends APINode {
       mOwner.context = getContext();
     }
     return mOwner;
+  }
+
+  public CanvasTemplate getFieldSourceTemplate() {
+    if (mSourceTemplate != null) {
+      mSourceTemplate.context = getContext();
+    }
+    return mSourceTemplate;
   }
 
   public Long getFieldUpdateTime() {
@@ -693,8 +708,10 @@ public class Canvas extends APINode {
       "is_hidden",
       "is_published",
       "last_editor",
+      "linked_documents",
       "name",
       "owner",
+      "source_template",
       "update_time",
     };
 
@@ -836,6 +853,13 @@ public class Canvas extends APINode {
       this.requestField("last_editor", value);
       return this;
     }
+    public APIRequestGet requestLinkedDocumentsField () {
+      return this.requestLinkedDocumentsField(true);
+    }
+    public APIRequestGet requestLinkedDocumentsField (boolean value) {
+      this.requestField("linked_documents", value);
+      return this;
+    }
     public APIRequestGet requestNameField () {
       return this.requestNameField(true);
     }
@@ -848,6 +872,13 @@ public class Canvas extends APINode {
     }
     public APIRequestGet requestOwnerField (boolean value) {
       this.requestField("owner", value);
+      return this;
+    }
+    public APIRequestGet requestSourceTemplateField () {
+      return this.requestSourceTemplateField(true);
+    }
+    public APIRequestGet requestSourceTemplateField (boolean value) {
+      this.requestField("source_template", value);
       return this;
     }
     public APIRequestGet requestUpdateTimeField () {
@@ -873,6 +904,7 @@ public class Canvas extends APINode {
       "is_hidden",
       "is_published",
       "name",
+      "source_template_id",
     };
 
     public static final String[] FIELDS = {
@@ -977,6 +1009,11 @@ public class Canvas extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setSourceTemplateId (String sourceTemplateId) {
+      this.setParam("source_template_id", sourceTemplateId);
+      return this;
+    }
+
     public APIRequestUpdate requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -1037,8 +1074,10 @@ public class Canvas extends APINode {
     this.mIsHidden = instance.mIsHidden;
     this.mIsPublished = instance.mIsPublished;
     this.mLastEditor = instance.mLastEditor;
+    this.mLinkedDocuments = instance.mLinkedDocuments;
     this.mName = instance.mName;
     this.mOwner = instance.mOwner;
+    this.mSourceTemplate = instance.mSourceTemplate;
     this.mUpdateTime = instance.mUpdateTime;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

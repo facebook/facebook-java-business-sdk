@@ -55,6 +55,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdCreativePortraitCustomizations extends APINode {
+  @SerializedName("carousel_delivery_mode")
+  private String mCarouselDeliveryMode = null;
   @SerializedName("specifications")
   private List<Object> mSpecifications = null;
   protected static Gson gson = null;
@@ -208,6 +210,15 @@ public class AdCreativePortraitCustomizations extends APINode {
   }
 
 
+  public String getFieldCarouselDeliveryMode() {
+    return mCarouselDeliveryMode;
+  }
+
+  public AdCreativePortraitCustomizations setFieldCarouselDeliveryMode(String value) {
+    this.mCarouselDeliveryMode = value;
+    return this;
+  }
+
   public List<Object> getFieldSpecifications() {
     return mSpecifications;
   }
@@ -234,6 +245,7 @@ public class AdCreativePortraitCustomizations extends APINode {
   }
 
   public AdCreativePortraitCustomizations copyFrom(AdCreativePortraitCustomizations instance) {
+    this.mCarouselDeliveryMode = instance.mCarouselDeliveryMode;
     this.mSpecifications = instance.mSpecifications;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

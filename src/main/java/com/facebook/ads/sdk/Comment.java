@@ -96,7 +96,7 @@ public class Comment extends APINode {
   @SerializedName("parent")
   private Comment mParent = null;
   @SerializedName("permalink_url")
-  private String mPermalinkUrl = null;
+  private Object mPermalinkUrl = null;
   @SerializedName("private_reply_conversation")
   private Object mPrivateReplyConversation = null;
   @SerializedName("user_likes")
@@ -436,7 +436,7 @@ public class Comment extends APINode {
     return mParent;
   }
 
-  public String getFieldPermalinkUrl() {
+  public Object getFieldPermalinkUrl() {
     return mPermalinkUrl;
   }
 
@@ -2141,6 +2141,8 @@ public class Comment extends APINode {
   }
 
   public static enum EnumCommentPrivacyValue {
+      @SerializedName("DECLINED_BY_ADMIN_ASSISTANT")
+      VALUE_DECLINED_BY_ADMIN_ASSISTANT("DECLINED_BY_ADMIN_ASSISTANT"),
       @SerializedName("DEFAULT_PRIVACY")
       VALUE_DEFAULT_PRIVACY("DEFAULT_PRIVACY"),
       @SerializedName("FRIENDS_AND_POST_OWNER")

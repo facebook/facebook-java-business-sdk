@@ -7413,7 +7413,6 @@ public class Group extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "archive",
       "cover",
       "cover_url",
       "description",
@@ -7486,15 +7485,6 @@ public class Group extends APINode {
       return this;
     }
 
-
-    public APIRequestUpdate setArchive (Boolean archive) {
-      this.setParam("archive", archive);
-      return this;
-    }
-    public APIRequestUpdate setArchive (String archive) {
-      this.setParam("archive", archive);
-      return this;
-    }
 
     public APIRequestUpdate setCover (String cover) {
       this.setParam("cover", cover);

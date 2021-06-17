@@ -59,6 +59,10 @@ public class SavedAudience extends APINode {
   private AdAccount mAccount = null;
   @SerializedName("approximate_count")
   private Long mApproximateCount = null;
+  @SerializedName("approximate_count_64bit")
+  private Long mApproximateCount64bit = null;
+  @SerializedName("delete_time")
+  private Long mDeleteTime = null;
   @SerializedName("description")
   private String mDescription = null;
   @SerializedName("extra_info")
@@ -67,6 +71,8 @@ public class SavedAudience extends APINode {
   private String mId = null;
   @SerializedName("name")
   private String mName = null;
+  @SerializedName("operation_status")
+  private CustomAudienceStatus mOperationStatus = null;
   @SerializedName("permission_for_actions")
   private AudiencePermissionForActions mPermissionForActions = null;
   @SerializedName("run_status")
@@ -304,6 +310,14 @@ public class SavedAudience extends APINode {
     return mApproximateCount;
   }
 
+  public Long getFieldApproximateCount64bit() {
+    return mApproximateCount64bit;
+  }
+
+  public Long getFieldDeleteTime() {
+    return mDeleteTime;
+  }
+
   public String getFieldDescription() {
     return mDescription;
   }
@@ -318,6 +332,10 @@ public class SavedAudience extends APINode {
 
   public String getFieldName() {
     return mName;
+  }
+
+  public CustomAudienceStatus getFieldOperationStatus() {
+    return mOperationStatus;
   }
 
   public AudiencePermissionForActions getFieldPermissionForActions() {
@@ -359,10 +377,13 @@ public class SavedAudience extends APINode {
     public static final String[] FIELDS = {
       "account",
       "approximate_count",
+      "approximate_count_64bit",
+      "delete_time",
       "description",
       "extra_info",
       "id",
       "name",
+      "operation_status",
       "permission_for_actions",
       "run_status",
       "sentence_lines",
@@ -474,6 +495,20 @@ public class SavedAudience extends APINode {
       this.requestField("approximate_count", value);
       return this;
     }
+    public APIRequestGet requestApproximateCount64bitField () {
+      return this.requestApproximateCount64bitField(true);
+    }
+    public APIRequestGet requestApproximateCount64bitField (boolean value) {
+      this.requestField("approximate_count_64bit", value);
+      return this;
+    }
+    public APIRequestGet requestDeleteTimeField () {
+      return this.requestDeleteTimeField(true);
+    }
+    public APIRequestGet requestDeleteTimeField (boolean value) {
+      this.requestField("delete_time", value);
+      return this;
+    }
     public APIRequestGet requestDescriptionField () {
       return this.requestDescriptionField(true);
     }
@@ -500,6 +535,13 @@ public class SavedAudience extends APINode {
     }
     public APIRequestGet requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGet requestOperationStatusField () {
+      return this.requestOperationStatusField(true);
+    }
+    public APIRequestGet requestOperationStatusField (boolean value) {
+      this.requestField("operation_status", value);
       return this;
     }
     public APIRequestGet requestPermissionForActionsField () {
@@ -563,10 +605,13 @@ public class SavedAudience extends APINode {
   public SavedAudience copyFrom(SavedAudience instance) {
     this.mAccount = instance.mAccount;
     this.mApproximateCount = instance.mApproximateCount;
+    this.mApproximateCount64bit = instance.mApproximateCount64bit;
+    this.mDeleteTime = instance.mDeleteTime;
     this.mDescription = instance.mDescription;
     this.mExtraInfo = instance.mExtraInfo;
     this.mId = instance.mId;
     this.mName = instance.mName;
+    this.mOperationStatus = instance.mOperationStatus;
     this.mPermissionForActions = instance.mPermissionForActions;
     this.mRunStatus = instance.mRunStatus;
     this.mSentenceLines = instance.mSentenceLines;

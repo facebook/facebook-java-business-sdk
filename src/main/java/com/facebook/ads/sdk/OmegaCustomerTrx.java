@@ -54,7 +54,7 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class OracleTransaction extends APINode {
+public class OmegaCustomerTrx extends APINode {
   @SerializedName("ad_account_ids")
   private List<String> mAdAccountIds = null;
   @SerializedName("amount")
@@ -65,6 +65,8 @@ public class OracleTransaction extends APINode {
   private BilledAmountDetails mBilledAmountDetails = null;
   @SerializedName("billing_period")
   private String mBillingPeriod = null;
+  @SerializedName("campaign")
+  private AtlasCampaign mCampaign = null;
   @SerializedName("cdn_download_uri")
   private String mCdnDownloadUri = null;
   @SerializedName("currency")
@@ -93,59 +95,59 @@ public class OracleTransaction extends APINode {
   private String mType = null;
   protected static Gson gson = null;
 
-  OracleTransaction() {
+  OmegaCustomerTrx() {
   }
 
-  public OracleTransaction(Long id, APIContext context) {
+  public OmegaCustomerTrx(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public OracleTransaction(String id, APIContext context) {
+  public OmegaCustomerTrx(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public OracleTransaction fetch() throws APIException{
-    OracleTransaction newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public OmegaCustomerTrx fetch() throws APIException{
+    OmegaCustomerTrx newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static OracleTransaction fetchById(Long id, APIContext context) throws APIException {
+  public static OmegaCustomerTrx fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<OracleTransaction> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<OmegaCustomerTrx> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static OracleTransaction fetchById(String id, APIContext context) throws APIException {
+  public static OmegaCustomerTrx fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<OracleTransaction> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<OmegaCustomerTrx> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<OracleTransaction> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<OracleTransaction>)(
-      new APIRequest<OracleTransaction>(context, "", "/", "GET", OracleTransaction.getParser())
+  public static APINodeList<OmegaCustomerTrx> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<OmegaCustomerTrx>)(
+      new APIRequest<OmegaCustomerTrx>(context, "", "/", "GET", OmegaCustomerTrx.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<OracleTransaction>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<OmegaCustomerTrx>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", OracleTransaction.getParser())
+      new APIRequest(context, "", "/", "GET", OmegaCustomerTrx.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -158,12 +160,12 @@ public class OracleTransaction extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static OracleTransaction loadJSON(String json, APIContext context, String header) {
-    OracleTransaction oracleTransaction = getGson().fromJson(json, OracleTransaction.class);
+  public static OmegaCustomerTrx loadJSON(String json, APIContext context, String header) {
+    OmegaCustomerTrx omegaCustomerTrx = getGson().fromJson(json, OmegaCustomerTrx.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(oracleTransaction.toString());
+      JsonElement o2 = parser.parse(omegaCustomerTrx.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -173,14 +175,14 @@ public class OracleTransaction extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    oracleTransaction.context = context;
-    oracleTransaction.rawValue = json;
-    oracleTransaction.header = header;
-    return oracleTransaction;
+    omegaCustomerTrx.context = context;
+    omegaCustomerTrx.rawValue = json;
+    omegaCustomerTrx.header = header;
+    return omegaCustomerTrx;
   }
 
-  public static APINodeList<OracleTransaction> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<OracleTransaction> oracleTransactions = new APINodeList<OracleTransaction>(request, json, header);
+  public static APINodeList<OmegaCustomerTrx> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<OmegaCustomerTrx> omegaCustomerTrxs = new APINodeList<OmegaCustomerTrx>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -191,9 +193,9 @@ public class OracleTransaction extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          oracleTransactions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          omegaCustomerTrxs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return oracleTransactions;
+        return omegaCustomerTrxs;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -203,20 +205,20 @@ public class OracleTransaction extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                oracleTransactions.setCursors(before, after);
+                omegaCustomerTrxs.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            oracleTransactions.setPaging(previous, next);
+            omegaCustomerTrxs.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              oracleTransactions.setAppSecret(context.getAppSecretProof());
+              omegaCustomerTrxs.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              oracleTransactions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              omegaCustomerTrxs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -227,23 +229,23 @@ public class OracleTransaction extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  oracleTransactions.add(loadJSON(entry.getValue().toString(), context, header));
+                  omegaCustomerTrxs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              oracleTransactions.add(loadJSON(obj.toString(), context, header));
+              omegaCustomerTrxs.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return oracleTransactions;
+          return omegaCustomerTrxs;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              oracleTransactions.add(loadJSON(entry.getValue().toString(), context, header));
+              omegaCustomerTrxs.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return oracleTransactions;
+          return omegaCustomerTrxs;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -260,20 +262,20 @@ public class OracleTransaction extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              oracleTransactions.add(loadJSON(value.toString(), context, header));
+              omegaCustomerTrxs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return oracleTransactions;
+            return omegaCustomerTrxs;
           }
 
           // Sixth, check if it's pure JsonObject
-          oracleTransactions.clear();
-          oracleTransactions.add(loadJSON(json, context, header));
-          return oracleTransactions;
+          omegaCustomerTrxs.clear();
+          omegaCustomerTrxs.add(loadJSON(json, context, header));
+          return omegaCustomerTrxs;
         }
       }
     } catch (Exception e) {
@@ -327,6 +329,13 @@ public class OracleTransaction extends APINode {
 
   public String getFieldBillingPeriod() {
     return mBillingPeriod;
+  }
+
+  public AtlasCampaign getFieldCampaign() {
+    if (mCampaign != null) {
+      mCampaign.context = getContext();
+    }
+    return mCampaign;
   }
 
   public String getFieldCdnDownloadUri() {
@@ -551,11 +560,11 @@ public class OracleTransaction extends APINode {
     }
   }
 
-  public static class APIRequestGet extends APIRequest<OracleTransaction> {
+  public static class APIRequestGet extends APIRequest<OmegaCustomerTrx> {
 
-    OracleTransaction lastResponse = null;
+    OmegaCustomerTrx lastResponse = null;
     @Override
-    public OracleTransaction getLastResponse() {
+    public OmegaCustomerTrx getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -567,6 +576,7 @@ public class OracleTransaction extends APINode {
       "amount_due",
       "billed_amount_details",
       "billing_period",
+      "campaign",
       "cdn_download_uri",
       "currency",
       "download_uri",
@@ -583,31 +593,31 @@ public class OracleTransaction extends APINode {
     };
 
     @Override
-    public OracleTransaction parseResponse(String response, String header) throws APIException {
-      return OracleTransaction.parseResponse(response, getContext(), this, header).head();
+    public OmegaCustomerTrx parseResponse(String response, String header) throws APIException {
+      return OmegaCustomerTrx.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public OracleTransaction execute() throws APIException {
+    public OmegaCustomerTrx execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public OracleTransaction execute(Map<String, Object> extraParams) throws APIException {
+    public OmegaCustomerTrx execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<OracleTransaction> executeAsync() throws APIException {
+    public ListenableFuture<OmegaCustomerTrx> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<OracleTransaction> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<OmegaCustomerTrx> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, OracleTransaction>() {
-           public OracleTransaction apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, OmegaCustomerTrx>() {
+           public OmegaCustomerTrx apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -706,6 +716,13 @@ public class OracleTransaction extends APINode {
       this.requestField("billing_period", value);
       return this;
     }
+    public APIRequestGet requestCampaignField () {
+      return this.requestCampaignField(true);
+    }
+    public APIRequestGet requestCampaignField (boolean value) {
+      this.requestField("campaign", value);
+      return this;
+    }
     public APIRequestGet requestCdnDownloadUriField () {
       return this.requestCdnDownloadUriField(true);
     }
@@ -799,6 +816,29 @@ public class OracleTransaction extends APINode {
     }
   }
 
+  public static enum EnumType {
+      @SerializedName("CM")
+      VALUE_CM("CM"),
+      @SerializedName("DM")
+      VALUE_DM("DM"),
+      @SerializedName("INV")
+      VALUE_INV("INV"),
+      @SerializedName("PRO_FORMA")
+      VALUE_PRO_FORMA("PRO_FORMA"),
+      ;
+
+      private String value;
+
+      private EnumType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -813,12 +853,13 @@ public class OracleTransaction extends APINode {
     return gson;
   }
 
-  public OracleTransaction copyFrom(OracleTransaction instance) {
+  public OmegaCustomerTrx copyFrom(OmegaCustomerTrx instance) {
     this.mAdAccountIds = instance.mAdAccountIds;
     this.mAmount = instance.mAmount;
     this.mAmountDue = instance.mAmountDue;
     this.mBilledAmountDetails = instance.mBilledAmountDetails;
     this.mBillingPeriod = instance.mBillingPeriod;
+    this.mCampaign = instance.mCampaign;
     this.mCdnDownloadUri = instance.mCdnDownloadUri;
     this.mCurrency = instance.mCurrency;
     this.mDownloadUri = instance.mDownloadUri;
@@ -837,10 +878,10 @@ public class OracleTransaction extends APINode {
     return this;
   }
 
-  public static APIRequest.ResponseParser<OracleTransaction> getParser() {
-    return new APIRequest.ResponseParser<OracleTransaction>() {
-      public APINodeList<OracleTransaction> parseResponse(String response, APIContext context, APIRequest<OracleTransaction> request, String header) throws MalformedResponseException {
-        return OracleTransaction.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<OmegaCustomerTrx> getParser() {
+    return new APIRequest.ResponseParser<OmegaCustomerTrx>() {
+      public APINodeList<OmegaCustomerTrx> parseResponse(String response, APIContext context, APIRequest<OmegaCustomerTrx> request, String header) throws MalformedResponseException {
+        return OmegaCustomerTrx.parseResponse(response, context, request, header);
       }
     };
   }

@@ -90,7 +90,7 @@ public class LiveVideo extends APINode {
   @SerializedName("overlay_url")
   private String mOverlayUrl = null;
   @SerializedName("permalink_url")
-  private String mPermalinkUrl = null;
+  private Object mPermalinkUrl = null;
   @SerializedName("planned_start_time")
   private String mPlannedStartTime = null;
   @SerializedName("seconds_left")
@@ -438,7 +438,7 @@ public class LiveVideo extends APINode {
     return mOverlayUrl;
   }
 
-  public String getFieldPermalinkUrl() {
+  public Object getFieldPermalinkUrl() {
     return mPermalinkUrl;
   }
 
@@ -1367,6 +1367,7 @@ public class LiveVideo extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_number",
       "hometown",
@@ -1905,6 +1906,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestHasTransitionedToNewPageExperienceField () {
+      return this.requestHasTransitionedToNewPageExperienceField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestHasTransitionedToNewPageExperienceField (boolean value) {
+      this.requestField("has_transitioned_to_new_page_experience", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestHasWhatsappBusinessNumberField () {
@@ -4093,6 +4101,7 @@ public class LiveVideo extends APINode {
     public static final String[] PARAMS = {
       "allow_bm_crossposting",
       "content_tags",
+      "cross_share_to_group_ids",
       "crossposting_actions",
       "custom_labels",
       "description",
@@ -4106,6 +4115,7 @@ public class LiveVideo extends APINode {
       "master_ingest_stream_id",
       "og_icon_id",
       "og_phrase",
+      "persistent_stream_key_status",
       "place",
       "planned_start_time",
       "privacy",
@@ -4192,6 +4202,15 @@ public class LiveVideo extends APINode {
     }
     public APIRequestUpdate setContentTags (String contentTags) {
       this.setParam("content_tags", contentTags);
+      return this;
+    }
+
+    public APIRequestUpdate setCrossShareToGroupIds (List<String> crossShareToGroupIds) {
+      this.setParam("cross_share_to_group_ids", crossShareToGroupIds);
+      return this;
+    }
+    public APIRequestUpdate setCrossShareToGroupIds (String crossShareToGroupIds) {
+      this.setParam("cross_share_to_group_ids", crossShareToGroupIds);
       return this;
     }
 
@@ -4293,6 +4312,15 @@ public class LiveVideo extends APINode {
 
     public APIRequestUpdate setOgPhrase (String ogPhrase) {
       this.setParam("og_phrase", ogPhrase);
+      return this;
+    }
+
+    public APIRequestUpdate setPersistentStreamKeyStatus (LiveVideo.EnumPersistentStreamKeyStatus persistentStreamKeyStatus) {
+      this.setParam("persistent_stream_key_status", persistentStreamKeyStatus);
+      return this;
+    }
+    public APIRequestUpdate setPersistentStreamKeyStatus (String persistentStreamKeyStatus) {
+      this.setParam("persistent_stream_key_status", persistentStreamKeyStatus);
       return this;
     }
 
@@ -4595,6 +4623,8 @@ public class LiveVideo extends APINode {
   }
 
   public static enum EnumLiveCommentModerationSetting {
+      @SerializedName("DEFAULT")
+      VALUE_DEFAULT("DEFAULT"),
       @SerializedName("DISCUSSION")
       VALUE_DISCUSSION("DISCUSSION"),
       @SerializedName("FOLLOWER")
@@ -4612,6 +4642,27 @@ public class LiveVideo extends APINode {
       private String value;
 
       private EnumLiveCommentModerationSetting(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumPersistentStreamKeyStatus {
+      @SerializedName("DISABLE")
+      VALUE_DISABLE("DISABLE"),
+      @SerializedName("ENABLE")
+      VALUE_ENABLE("ENABLE"),
+      @SerializedName("REGENERATE")
+      VALUE_REGENERATE("REGENERATE"),
+      ;
+
+      private String value;
+
+      private EnumPersistentStreamKeyStatus(String value) {
         this.value = value;
       }
 

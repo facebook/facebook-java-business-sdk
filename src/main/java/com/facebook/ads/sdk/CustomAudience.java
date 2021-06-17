@@ -67,6 +67,8 @@ public class CustomAudience extends APINode {
   private String mDataSourceTypes = null;
   @SerializedName("datafile_custom_audience_uploading_status")
   private String mDatafileCustomAudienceUploadingStatus = null;
+  @SerializedName("delete_time")
+  private Long mDeleteTime = null;
   @SerializedName("delivery_status")
   private CustomAudienceStatus mDeliveryStatus = null;
   @SerializedName("description")
@@ -405,6 +407,10 @@ public class CustomAudience extends APINode {
 
   public String getFieldDatafileCustomAudienceUploadingStatus() {
     return mDatafileCustomAudienceUploadingStatus;
+  }
+
+  public Long getFieldDeleteTime() {
+    return mDeleteTime;
   }
 
   public CustomAudienceStatus getFieldDeliveryStatus() {
@@ -2595,6 +2601,7 @@ public class CustomAudience extends APINode {
       "data_source",
       "data_source_types",
       "datafile_custom_audience_uploading_status",
+      "delete_time",
       "delivery_status",
       "description",
       "excluded_custom_audiences",
@@ -2769,6 +2776,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGet requestDatafileCustomAudienceUploadingStatusField (boolean value) {
       this.requestField("datafile_custom_audience_uploading_status", value);
+      return this;
+    }
+    public APIRequestGet requestDeleteTimeField () {
+      return this.requestDeleteTimeField(true);
+    }
+    public APIRequestGet requestDeleteTimeField (boolean value) {
+      this.requestField("delete_time", value);
       return this;
     }
     public APIRequestGet requestDeliveryStatusField () {
@@ -2995,8 +3009,6 @@ public class CustomAudience extends APINode {
       "event_sources",
       "exclusions",
       "inclusions",
-      "is_household",
-      "is_household_exclusion",
       "lookalike_spec",
       "name",
       "opt_out_link",
@@ -3006,7 +3018,6 @@ public class CustomAudience extends APINode {
       "rev_share_policy_id",
       "rule",
       "rule_aggregation",
-      "seed_audience",
       "tags",
     };
 
@@ -3153,24 +3164,6 @@ public class CustomAudience extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setIsHousehold (Boolean isHousehold) {
-      this.setParam("is_household", isHousehold);
-      return this;
-    }
-    public APIRequestUpdate setIsHousehold (String isHousehold) {
-      this.setParam("is_household", isHousehold);
-      return this;
-    }
-
-    public APIRequestUpdate setIsHouseholdExclusion (Boolean isHouseholdExclusion) {
-      this.setParam("is_household_exclusion", isHouseholdExclusion);
-      return this;
-    }
-    public APIRequestUpdate setIsHouseholdExclusion (String isHouseholdExclusion) {
-      this.setParam("is_household_exclusion", isHouseholdExclusion);
-      return this;
-    }
-
     public APIRequestUpdate setLookalikeSpec (String lookalikeSpec) {
       this.setParam("lookalike_spec", lookalikeSpec);
       return this;
@@ -3225,15 +3218,6 @@ public class CustomAudience extends APINode {
 
     public APIRequestUpdate setRuleAggregation (String ruleAggregation) {
       this.setParam("rule_aggregation", ruleAggregation);
-      return this;
-    }
-
-    public APIRequestUpdate setSeedAudience (Long seedAudience) {
-      this.setParam("seed_audience", seedAudience);
-      return this;
-    }
-    public APIRequestUpdate setSeedAudience (String seedAudience) {
-      this.setParam("seed_audience", seedAudience);
       return this;
     }
 
@@ -3441,6 +3425,7 @@ public class CustomAudience extends APINode {
     this.mDataSource = instance.mDataSource;
     this.mDataSourceTypes = instance.mDataSourceTypes;
     this.mDatafileCustomAudienceUploadingStatus = instance.mDatafileCustomAudienceUploadingStatus;
+    this.mDeleteTime = instance.mDeleteTime;
     this.mDeliveryStatus = instance.mDeliveryStatus;
     this.mDescription = instance.mDescription;
     this.mExcludedCustomAudiences = instance.mExcludedCustomAudiences;

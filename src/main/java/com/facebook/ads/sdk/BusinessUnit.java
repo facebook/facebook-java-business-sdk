@@ -1323,14 +1323,6 @@ public class BusinessUnit extends APINode {
       "cost_per_visit",
       "created_by",
       "created_date",
-      "data_driven_convs",
-      "data_driven_convs_per_1k_impress",
-      "data_driven_convs_per_click",
-      "data_driven_convs_per_visit",
-      "data_driven_cpa",
-      "data_driven_nullable_convs",
-      "data_driven_revenue",
-      "data_driven_roas",
       "even_credit_convs",
       "even_credit_convs_per_1k_impress",
       "even_credit_convs_per_click",
@@ -1571,62 +1563,6 @@ public class BusinessUnit extends APINode {
     }
     public APIRequestGetCampaigns requestCreatedDateField (boolean value) {
       this.requestField("created_date", value);
-      return this;
-    }
-    public APIRequestGetCampaigns requestDataDrivenConvsField () {
-      return this.requestDataDrivenConvsField(true);
-    }
-    public APIRequestGetCampaigns requestDataDrivenConvsField (boolean value) {
-      this.requestField("data_driven_convs", value);
-      return this;
-    }
-    public APIRequestGetCampaigns requestDataDrivenConvsPer1kImpressField () {
-      return this.requestDataDrivenConvsPer1kImpressField(true);
-    }
-    public APIRequestGetCampaigns requestDataDrivenConvsPer1kImpressField (boolean value) {
-      this.requestField("data_driven_convs_per_1k_impress", value);
-      return this;
-    }
-    public APIRequestGetCampaigns requestDataDrivenConvsPerClickField () {
-      return this.requestDataDrivenConvsPerClickField(true);
-    }
-    public APIRequestGetCampaigns requestDataDrivenConvsPerClickField (boolean value) {
-      this.requestField("data_driven_convs_per_click", value);
-      return this;
-    }
-    public APIRequestGetCampaigns requestDataDrivenConvsPerVisitField () {
-      return this.requestDataDrivenConvsPerVisitField(true);
-    }
-    public APIRequestGetCampaigns requestDataDrivenConvsPerVisitField (boolean value) {
-      this.requestField("data_driven_convs_per_visit", value);
-      return this;
-    }
-    public APIRequestGetCampaigns requestDataDrivenCpaField () {
-      return this.requestDataDrivenCpaField(true);
-    }
-    public APIRequestGetCampaigns requestDataDrivenCpaField (boolean value) {
-      this.requestField("data_driven_cpa", value);
-      return this;
-    }
-    public APIRequestGetCampaigns requestDataDrivenNullableConvsField () {
-      return this.requestDataDrivenNullableConvsField(true);
-    }
-    public APIRequestGetCampaigns requestDataDrivenNullableConvsField (boolean value) {
-      this.requestField("data_driven_nullable_convs", value);
-      return this;
-    }
-    public APIRequestGetCampaigns requestDataDrivenRevenueField () {
-      return this.requestDataDrivenRevenueField(true);
-    }
-    public APIRequestGetCampaigns requestDataDrivenRevenueField (boolean value) {
-      this.requestField("data_driven_revenue", value);
-      return this;
-    }
-    public APIRequestGetCampaigns requestDataDrivenRoasField () {
-      return this.requestDataDrivenRoasField(true);
-    }
-    public APIRequestGetCampaigns requestDataDrivenRoasField (boolean value) {
-      this.requestField("data_driven_roas", value);
       return this;
     }
     public APIRequestGetCampaigns requestEvenCreditConvsField () {
