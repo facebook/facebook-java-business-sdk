@@ -65,6 +65,7 @@ public class MultiPromoteYourPage {
       .setName("My campaign")
       .setObjective(Campaign.EnumObjective.VALUE_LINK_CLICKS)
       .setStatus(Campaign.EnumStatus.VALUE_PAUSED)
+      .setParam("special_ad_categories", "[]")
       .execute();
     String adcampaign_id = adcampaign.getId();
 
@@ -78,6 +79,7 @@ public class MultiPromoteYourPage {
       .setCampaignId(adcampaign_id)
       .setTargeting(
           new Targeting()
+            .setFieldFacebookPositions(Arrays.asList("feed"))
             .setFieldGeoLocations(
               new TargetingGeoLocation()
                 .setFieldCountries(Arrays.asList("US"))

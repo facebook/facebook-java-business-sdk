@@ -75,6 +75,8 @@ public class AdsPixel extends APINode {
   private String mId = null;
   @SerializedName("is_created_by_business")
   private Boolean mIsCreatedByBusiness = null;
+  @SerializedName("is_crm")
+  private Boolean mIsCrm = null;
   @SerializedName("is_unavailable")
   private Boolean mIsUnavailable = null;
   @SerializedName("last_fired_time")
@@ -310,6 +312,10 @@ public class AdsPixel extends APINode {
     return new APIRequestCreateEvent(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateShadowTrafficHelper createShadowTrafficHelper() {
+    return new APIRequestCreateShadowTrafficHelper(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestDeleteSharedAccounts deleteSharedAccounts() {
     return new APIRequestDeleteSharedAccounts(this.getPrefixedId().toString(), context);
   }
@@ -380,6 +386,10 @@ public class AdsPixel extends APINode {
 
   public Boolean getFieldIsCreatedByBusiness() {
     return mIsCreatedByBusiness;
+  }
+
+  public Boolean getFieldIsCrm() {
+    return mIsCrm;
   }
 
   public Boolean getFieldIsUnavailable() {
@@ -1008,6 +1018,110 @@ public class AdsPixel extends APINode {
 
   }
 
+  public static class APIRequestCreateShadowTrafficHelper extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateShadowTrafficHelper.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateShadowTrafficHelper(String nodeId, APIContext context) {
+      super(context, nodeId, "/shadowtraffichelper", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateShadowTrafficHelper setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateShadowTrafficHelper setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateShadowTrafficHelper requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateShadowTrafficHelper requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateShadowTrafficHelper requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateShadowTrafficHelper requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateShadowTrafficHelper requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateShadowTrafficHelper requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestDeleteSharedAccounts extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -1138,7 +1252,6 @@ public class AdsPixel extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "account_status",
-      "ad_account_creation_request",
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
@@ -1304,13 +1417,6 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetSharedAccounts requestAccountStatusField (boolean value) {
       this.requestField("account_status", value);
-      return this;
-    }
-    public APIRequestGetSharedAccounts requestAdAccountCreationRequestField () {
-      return this.requestAdAccountCreationRequestField(true);
-    }
-    public APIRequestGetSharedAccounts requestAdAccountCreationRequestField (boolean value) {
-      this.requestField("ad_account_creation_request", value);
       return this;
     }
     public APIRequestGetSharedAccounts requestAdAccountPromotableObjectsField () {
@@ -2261,6 +2367,7 @@ public class AdsPixel extends APINode {
       "first_party_cookie_status",
       "id",
       "is_created_by_business",
+      "is_crm",
       "is_unavailable",
       "last_fired_time",
       "name",
@@ -2425,6 +2532,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGet requestIsCreatedByBusinessField (boolean value) {
       this.requestField("is_created_by_business", value);
+      return this;
+    }
+    public APIRequestGet requestIsCrmField () {
+      return this.requestIsCrmField(true);
+    }
+    public APIRequestGet requestIsCrmField (boolean value) {
+      this.requestField("is_crm", value);
       return this;
     }
     public APIRequestGet requestIsUnavailableField () {
@@ -2652,6 +2766,8 @@ public class AdsPixel extends APINode {
       VALUE_DB("db"),
       @SerializedName("em")
       VALUE_EM("em"),
+      @SerializedName("external_id")
+      VALUE_EXTERNAL_ID("external_id"),
       @SerializedName("fn")
       VALUE_FN("fn"),
       @SerializedName("ge")
@@ -2764,6 +2880,7 @@ public class AdsPixel extends APINode {
     this.mFirstPartyCookieStatus = instance.mFirstPartyCookieStatus;
     this.mId = instance.mId;
     this.mIsCreatedByBusiness = instance.mIsCreatedByBusiness;
+    this.mIsCrm = instance.mIsCrm;
     this.mIsUnavailable = instance.mIsUnavailable;
     this.mLastFiredTime = instance.mLastFiredTime;
     this.mName = instance.mName;

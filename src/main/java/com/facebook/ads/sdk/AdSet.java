@@ -1510,6 +1510,7 @@ public class AdSet extends APINode {
       "instagram_actor_id",
       "instagram_permalink_url",
       "instagram_story_id",
+      "instagram_user_id",
       "interactive_components_spec",
       "link_deep_link_url",
       "link_destination_display_url",
@@ -1529,6 +1530,7 @@ public class AdSet extends APINode {
       "portrait_customizations",
       "product_set_id",
       "recommender_settings",
+      "source_instagram_media_id",
       "status",
       "template_url",
       "template_url_spec",
@@ -1824,6 +1826,13 @@ public class AdSet extends APINode {
       this.requestField("instagram_story_id", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestInstagramUserIdField () {
+      return this.requestInstagramUserIdField(true);
+    }
+    public APIRequestGetAdCreatives requestInstagramUserIdField (boolean value) {
+      this.requestField("instagram_user_id", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestInteractiveComponentsSpecField () {
       return this.requestInteractiveComponentsSpecField(true);
     }
@@ -1955,6 +1964,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAdCreatives requestRecommenderSettingsField (boolean value) {
       this.requestField("recommender_settings", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestSourceInstagramMediaIdField () {
+      return this.requestSourceInstagramMediaIdField(true);
+    }
+    public APIRequestGetAdCreatives requestSourceInstagramMediaIdField (boolean value) {
+      this.requestField("source_instagram_media_id", value);
       return this;
     }
     public APIRequestGetAdCreatives requestStatusField () {
@@ -2483,6 +2499,7 @@ public class AdSet extends APINode {
       "campaign",
       "campaign_id",
       "configured_status",
+      "conversion_domain",
       "conversion_specs",
       "created_time",
       "creative",
@@ -2707,6 +2724,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAds requestConfiguredStatusField (boolean value) {
       this.requestField("configured_status", value);
+      return this;
+    }
+    public APIRequestGetAds requestConversionDomainField () {
+      return this.requestConversionDomainField(true);
+    }
+    public APIRequestGetAds requestConversionDomainField (boolean value) {
+      this.requestField("conversion_domain", value);
       return this;
     }
     public APIRequestGetAds requestConversionSpecsField () {
@@ -4161,6 +4185,7 @@ public class AdSet extends APINode {
       "time_range",
       "time_ranges",
       "use_account_attribution_setting",
+      "use_unified_attribution_setting",
     };
 
     public static final String[] FIELDS = {
@@ -4387,6 +4412,15 @@ public class AdSet extends APINode {
       return this;
     }
 
+    public APIRequestGetInsights setUseUnifiedAttributionSetting (Boolean useUnifiedAttributionSetting) {
+      this.setParam("use_unified_attribution_setting", useUnifiedAttributionSetting);
+      return this;
+    }
+    public APIRequestGetInsights setUseUnifiedAttributionSetting (String useUnifiedAttributionSetting) {
+      this.setParam("use_unified_attribution_setting", useUnifiedAttributionSetting);
+      return this;
+    }
+
     public APIRequestGetInsights requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -4453,6 +4487,7 @@ public class AdSet extends APINode {
       "time_range",
       "time_ranges",
       "use_account_attribution_setting",
+      "use_unified_attribution_setting",
     };
 
     public static final String[] FIELDS = {
@@ -4676,6 +4711,15 @@ public class AdSet extends APINode {
     }
     public APIRequestGetInsightsAsync setUseAccountAttributionSetting (String useAccountAttributionSetting) {
       this.setParam("use_account_attribution_setting", useAccountAttributionSetting);
+      return this;
+    }
+
+    public APIRequestGetInsightsAsync setUseUnifiedAttributionSetting (Boolean useUnifiedAttributionSetting) {
+      this.setParam("use_unified_attribution_setting", useUnifiedAttributionSetting);
+      return this;
+    }
+    public APIRequestGetInsightsAsync setUseUnifiedAttributionSetting (String useUnifiedAttributionSetting) {
+      this.setParam("use_unified_attribution_setting", useUnifiedAttributionSetting);
       return this;
     }
 
@@ -6002,8 +6046,6 @@ public class AdSet extends APINode {
       VALUE_LOWEST_COST_WITHOUT_CAP("LOWEST_COST_WITHOUT_CAP"),
       @SerializedName("LOWEST_COST_WITH_BID_CAP")
       VALUE_LOWEST_COST_WITH_BID_CAP("LOWEST_COST_WITH_BID_CAP"),
-      @SerializedName("TARGET_COST")
-      VALUE_TARGET_COST("TARGET_COST"),
       ;
 
       private String value;
@@ -6027,6 +6069,8 @@ public class AdSet extends APINode {
       VALUE_IMPRESSIONS("IMPRESSIONS"),
       @SerializedName("LINK_CLICKS")
       VALUE_LINK_CLICKS("LINK_CLICKS"),
+      @SerializedName("LISTING_INTERACTION")
+      VALUE_LISTING_INTERACTION("LISTING_INTERACTION"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
       @SerializedName("OFFER_CLAIMS")
@@ -6035,6 +6079,8 @@ public class AdSet extends APINode {
       VALUE_PAGE_LIKES("PAGE_LIKES"),
       @SerializedName("POST_ENGAGEMENT")
       VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
+      @SerializedName("PURCHASE")
+      VALUE_PURCHASE("PURCHASE"),
       @SerializedName("THRUPLAY")
       VALUE_THRUPLAY("THRUPLAY"),
       ;
@@ -6140,6 +6186,8 @@ public class AdSet extends APINode {
       VALUE_PAGE_LIKES("PAGE_LIKES"),
       @SerializedName("POST_ENGAGEMENT")
       VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
+      @SerializedName("QUALITY_CALL")
+      VALUE_QUALITY_CALL("QUALITY_CALL"),
       @SerializedName("QUALITY_LEAD")
       VALUE_QUALITY_LEAD("QUALITY_LEAD"),
       @SerializedName("REACH")
@@ -6216,8 +6264,8 @@ public class AdSet extends APINode {
       VALUE_LAST_WEEK_SUN_SAT("last_week_sun_sat"),
       @SerializedName("last_year")
       VALUE_LAST_YEAR("last_year"),
-      @SerializedName("lifetime")
-      VALUE_LIFETIME("lifetime"),
+      @SerializedName("maximum")
+      VALUE_MAXIMUM("maximum"),
       @SerializedName("this_month")
       VALUE_THIS_MONTH("this_month"),
       @SerializedName("this_quarter")

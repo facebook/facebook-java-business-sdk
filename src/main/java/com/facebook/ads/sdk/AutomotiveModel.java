@@ -85,6 +85,8 @@ public class AutomotiveModel extends APINode {
   private String mGeneration = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("image_fetch_status")
+  private EnumImageFetchStatus mImageFetchStatus = null;
   @SerializedName("images")
   private List<String> mImages = null;
   @SerializedName("interior_color")
@@ -318,6 +320,18 @@ public class AutomotiveModel extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGetAugmentedRealitiesMetadata getAugmentedRealitiesMetadata() {
+    return new APIRequestGetAugmentedRealitiesMetadata(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetChannelsToIntegrityStatus getChannelsToIntegrityStatus() {
+    return new APIRequestGetChannelsToIntegrityStatus(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetVideosMetadata getVideosMetadata() {
+    return new APIRequestGetVideosMetadata(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
@@ -383,6 +397,10 @@ public class AutomotiveModel extends APINode {
     return mId;
   }
 
+  public EnumImageFetchStatus getFieldImageFetchStatus() {
+    return mImageFetchStatus;
+  }
+
   public List<String> getFieldImages() {
     return mImages;
   }
@@ -433,6 +451,334 @@ public class AutomotiveModel extends APINode {
 
 
 
+  public static class APIRequestGetAugmentedRealitiesMetadata extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetAugmentedRealitiesMetadata.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetAugmentedRealitiesMetadata(String nodeId, APIContext context) {
+      super(context, nodeId, "/augmented_realities_metadata", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetAugmentedRealitiesMetadata setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAugmentedRealitiesMetadata setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetAugmentedRealitiesMetadata requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetAugmentedRealitiesMetadata requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAugmentedRealitiesMetadata requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetAugmentedRealitiesMetadata requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAugmentedRealitiesMetadata requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAugmentedRealitiesMetadata requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetChannelsToIntegrityStatus extends APIRequest<CatalogItemChannelsToIntegrityStatus> {
+
+    APINodeList<CatalogItemChannelsToIntegrityStatus> lastResponse = null;
+    @Override
+    public APINodeList<CatalogItemChannelsToIntegrityStatus> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "channels",
+      "rejection_information",
+    };
+
+    @Override
+    public APINodeList<CatalogItemChannelsToIntegrityStatus> parseResponse(String response, String header) throws APIException {
+      return CatalogItemChannelsToIntegrityStatus.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<CatalogItemChannelsToIntegrityStatus> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<CatalogItemChannelsToIntegrityStatus> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<CatalogItemChannelsToIntegrityStatus>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<CatalogItemChannelsToIntegrityStatus>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<CatalogItemChannelsToIntegrityStatus>>() {
+           public APINodeList<CatalogItemChannelsToIntegrityStatus> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetChannelsToIntegrityStatus.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetChannelsToIntegrityStatus(String nodeId, APIContext context) {
+      super(context, nodeId, "/channels_to_integrity_status", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetChannelsToIntegrityStatus setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetChannelsToIntegrityStatus setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetChannelsToIntegrityStatus requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetChannelsToIntegrityStatus requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetChannelsToIntegrityStatus requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetChannelsToIntegrityStatus requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetChannelsToIntegrityStatus requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetChannelsToIntegrityStatus requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetChannelsToIntegrityStatus requestChannelsField () {
+      return this.requestChannelsField(true);
+    }
+    public APIRequestGetChannelsToIntegrityStatus requestChannelsField (boolean value) {
+      this.requestField("channels", value);
+      return this;
+    }
+    public APIRequestGetChannelsToIntegrityStatus requestRejectionInformationField () {
+      return this.requestRejectionInformationField(true);
+    }
+    public APIRequestGetChannelsToIntegrityStatus requestRejectionInformationField (boolean value) {
+      this.requestField("rejection_information", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetVideosMetadata extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetVideosMetadata.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetVideosMetadata(String nodeId, APIContext context) {
+      super(context, nodeId, "/videos_metadata", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetVideosMetadata setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVideosMetadata setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetVideosMetadata requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetVideosMetadata requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVideosMetadata requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetVideosMetadata requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVideosMetadata requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVideosMetadata requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGet extends APIRequest<AutomotiveModel> {
 
     AutomotiveModel lastResponse = null;
@@ -459,6 +805,7 @@ public class AutomotiveModel extends APINode {
       "fuel_type",
       "generation",
       "id",
+      "image_fetch_status",
       "images",
       "interior_color",
       "interior_upholstery",
@@ -667,6 +1014,13 @@ public class AutomotiveModel extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestImageFetchStatusField () {
+      return this.requestImageFetchStatusField(true);
+    }
+    public APIRequestGet requestImageFetchStatusField (boolean value) {
+      this.requestField("image_fetch_status", value);
+      return this;
+    }
     public APIRequestGet requestImagesField () {
       return this.requestImagesField(true);
     }
@@ -753,6 +1107,92 @@ public class AutomotiveModel extends APINode {
     }
   }
 
+  public static enum EnumImageFetchStatus {
+      @SerializedName("DIRECT_UPLOAD")
+      VALUE_DIRECT_UPLOAD("DIRECT_UPLOAD"),
+      @SerializedName("FETCHED")
+      VALUE_FETCHED("FETCHED"),
+      @SerializedName("FETCH_FAILED")
+      VALUE_FETCH_FAILED("FETCH_FAILED"),
+      @SerializedName("NO_STATUS")
+      VALUE_NO_STATUS("NO_STATUS"),
+      @SerializedName("OUTDATED")
+      VALUE_OUTDATED("OUTDATED"),
+      @SerializedName("PARTIAL_FETCH")
+      VALUE_PARTIAL_FETCH("PARTIAL_FETCH"),
+      ;
+
+      private String value;
+
+      private EnumImageFetchStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumBodyStyle {
+      @SerializedName("CONVERTIBLE")
+      VALUE_CONVERTIBLE("CONVERTIBLE"),
+      @SerializedName("COUPE")
+      VALUE_COUPE("COUPE"),
+      @SerializedName("CROSSOVER")
+      VALUE_CROSSOVER("CROSSOVER"),
+      @SerializedName("ESTATE")
+      VALUE_ESTATE("ESTATE"),
+      @SerializedName("GRANDTOURER")
+      VALUE_GRANDTOURER("GRANDTOURER"),
+      @SerializedName("HATCHBACK")
+      VALUE_HATCHBACK("HATCHBACK"),
+      @SerializedName("MINIBUS")
+      VALUE_MINIBUS("MINIBUS"),
+      @SerializedName("MINIVAN")
+      VALUE_MINIVAN("MINIVAN"),
+      @SerializedName("MPV")
+      VALUE_MPV("MPV"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
+      @SerializedName("OTHER")
+      VALUE_OTHER("OTHER"),
+      @SerializedName("PICKUP")
+      VALUE_PICKUP("PICKUP"),
+      @SerializedName("ROADSTER")
+      VALUE_ROADSTER("ROADSTER"),
+      @SerializedName("SALOON")
+      VALUE_SALOON("SALOON"),
+      @SerializedName("SEDAN")
+      VALUE_SEDAN("SEDAN"),
+      @SerializedName("SPORTSCAR")
+      VALUE_SPORTSCAR("SPORTSCAR"),
+      @SerializedName("SUPERCAR")
+      VALUE_SUPERCAR("SUPERCAR"),
+      @SerializedName("SUPERMINI")
+      VALUE_SUPERMINI("SUPERMINI"),
+      @SerializedName("SUV")
+      VALUE_SUV("SUV"),
+      @SerializedName("TRUCK")
+      VALUE_TRUCK("TRUCK"),
+      @SerializedName("VAN")
+      VALUE_VAN("VAN"),
+      @SerializedName("WAGON")
+      VALUE_WAGON("WAGON"),
+      ;
+
+      private String value;
+
+      private EnumBodyStyle(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -783,6 +1223,7 @@ public class AutomotiveModel extends APINode {
     this.mFuelType = instance.mFuelType;
     this.mGeneration = instance.mGeneration;
     this.mId = instance.mId;
+    this.mImageFetchStatus = instance.mImageFetchStatus;
     this.mImages = instance.mImages;
     this.mInteriorColor = instance.mInteriorColor;
     this.mInteriorUpholstery = instance.mInteriorUpholstery;

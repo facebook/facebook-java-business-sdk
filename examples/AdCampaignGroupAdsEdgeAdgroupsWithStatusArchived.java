@@ -31,7 +31,7 @@ public class AdCampaignGroupAdsEdgeAdgroupsWithStatusArchived {
     String access_token = "<ACCESS_TOKEN>";
     String app_secret = "<APP_SECRET>";
     String app_id = "<APP_ID>";
-    String id = "<ID>";
+    String id = "<AD_CAMPAIGN_ID>";
     APIContext context = new APIContext(access_token).enableDebug(true);
 
     new Campaign(id, context).getAds()

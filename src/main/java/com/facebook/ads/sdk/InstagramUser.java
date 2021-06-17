@@ -282,10 +282,6 @@ public class InstagramUser extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestDeleteAgencies deleteAgencies() {
-    return new APIRequestDeleteAgencies(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetAgencies getAgencies() {
     return new APIRequestGetAgencies(this.getPrefixedId().toString(), context);
   }
@@ -340,116 +336,6 @@ public class InstagramUser extends APINode {
   }
 
 
-
-  public static class APIRequestDeleteAgencies extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "business",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestDeleteAgencies.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestDeleteAgencies(String nodeId, APIContext context) {
-      super(context, nodeId, "/agencies", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDeleteAgencies setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAgencies setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDeleteAgencies setBusiness (String business) {
-      this.setParam("business", business);
-      return this;
-    }
-
-    public APIRequestDeleteAgencies requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDeleteAgencies requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAgencies requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDeleteAgencies requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAgencies requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAgencies requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
 
   public static class APIRequestGetAgencies extends APIRequest<Business> {
 
@@ -713,7 +599,6 @@ public class InstagramUser extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "account_status",
-      "ad_account_creation_request",
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
@@ -879,13 +764,6 @@ public class InstagramUser extends APINode {
     }
     public APIRequestGetAuthorizedAdAccounts requestAccountStatusField (boolean value) {
       this.requestField("account_status", value);
-      return this;
-    }
-    public APIRequestGetAuthorizedAdAccounts requestAdAccountCreationRequestField () {
-      return this.requestAdAccountCreationRequestField(true);
-    }
-    public APIRequestGetAuthorizedAdAccounts requestAdAccountCreationRequestField (boolean value) {
-      this.requestField("ad_account_creation_request", value);
       return this;
     }
     public APIRequestGetAuthorizedAdAccounts requestAdAccountPromotableObjectsField () {
@@ -1413,6 +1291,7 @@ public class InstagramUser extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "adgroup_id",
     };
 
     public static final String[] FIELDS = {
@@ -1479,6 +1358,11 @@ public class InstagramUser extends APINode {
       return this;
     }
 
+
+    public APIRequestGet setAdgroupId (String adgroupId) {
+      this.setParam("adgroup_id", adgroupId);
+      return this;
+    }
 
     public APIRequestGet requestAllFields () {
       return this.requestAllFields(true);

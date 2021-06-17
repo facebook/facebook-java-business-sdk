@@ -21,4 +21,36 @@
  *
  */
 
- 
+ import com.facebook.ads.sdk.*;
+import java.io.File;
+import java.util.Arrays;
+
+public class AdAccountAdCreativesPost2CreateLinkAdImageCrop {
+  public static void main (String args[]) throws APIException {
+
+    String access_token = "<ACCESS_TOKEN>";
+    String app_secret = "<APP_SECRET>";
+    String app_id = "<APP_ID>";
+    String id = "<AD_ACCOUNT_ID>";
+    APIContext context = new APIContext(access_token).enableDebug(true);
+
+    new AdAccount(id, context).createAdCreative()
+      .setName("Image crop creative")
+      .setObjectStorySpec(
+          new AdCreativeObjectStorySpec()
+            .setFieldLinkData(
+              new AdCreativeLinkData()
+                .setFieldImageCrops(
+                  new AdsImageCrops()
+                    .setField100x100(Arrays.asList(Arrays.asList(0, 0), Arrays.asList(100, 100)))
+                )
+                .setFieldImageHash("<imageHash>")
+                .setFieldLink("<url>")
+                .setFieldMessage("Ad message")
+            )
+            .setFieldPageId("<pageID>")
+        )
+      .execute();
+
+  }
+}

@@ -460,7 +460,6 @@ public class OfflineConversionDataSet extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "account_status",
-      "ad_account_creation_request",
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
@@ -626,13 +625,6 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetAdAccounts requestAccountStatusField (boolean value) {
       this.requestField("account_status", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestAdAccountCreationRequestField () {
-      return this.requestAdAccountCreationRequestField(true);
-    }
-    public APIRequestGetAdAccounts requestAdAccountCreationRequestField (boolean value) {
-      this.requestField("ad_account_creation_request", value);
       return this;
     }
     public APIRequestGetAdAccounts requestAdAccountPromotableObjectsField () {
@@ -1564,6 +1556,7 @@ public class OfflineConversionDataSet extends APINode {
       "data_source",
       "data_source_types",
       "datafile_custom_audience_uploading_status",
+      "delete_time",
       "delivery_status",
       "description",
       "excluded_custom_audiences",
@@ -1729,6 +1722,13 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetAudiences requestDatafileCustomAudienceUploadingStatusField (boolean value) {
       this.requestField("datafile_custom_audience_uploading_status", value);
+      return this;
+    }
+    public APIRequestGetAudiences requestDeleteTimeField () {
+      return this.requestDeleteTimeField(true);
+    }
+    public APIRequestGetAudiences requestDeleteTimeField (boolean value) {
+      this.requestField("delete_time", value);
       return this;
     }
     public APIRequestGetAudiences requestDeliveryStatusField () {

@@ -37,7 +37,7 @@ public class AdCreativePreviewsEdgePreviewDynamicAdsWithCustomizations {
     new AdCreative(id, context).getPreviews()
       .setAdFormat(AdPreview.EnumAdFormat.VALUE_DESKTOP_FEED_STANDARD)
       .setProductItemIds("[\"<productItemID>\"]")
-      .setParam("dynamic_customization", "{\"language\":\"fr_XX\",\"country\":\"FR\"}")
+      .setDynamicCustomization("{\"language\":\"fr_XX\",\"country\":\"FR\"}")
       .execute();
 
   }

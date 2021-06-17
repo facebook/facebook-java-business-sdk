@@ -81,6 +81,8 @@ public class AdAssetFeedSpec extends APINode {
   private List<AdAssetFeedSpecImage> mImages = null;
   @SerializedName("link_urls")
   private List<AdAssetFeedSpecLinkURL> mLinkUrls = null;
+  @SerializedName("onsite_destinations")
+  private List<Object> mOnsiteDestinations = null;
   @SerializedName("optimization_type")
   private String mOptimizationType = null;
   @SerializedName("posts")
@@ -387,6 +389,15 @@ public class AdAssetFeedSpec extends APINode {
     this.mLinkUrls = AdAssetFeedSpecLinkURL.getGson().fromJson(value, type);
     return this;
   }
+  public List<Object> getFieldOnsiteDestinations() {
+    return mOnsiteDestinations;
+  }
+
+  public AdAssetFeedSpec setFieldOnsiteDestinations(List<Object> value) {
+    this.mOnsiteDestinations = value;
+    return this;
+  }
+
   public String getFieldOptimizationType() {
     return mOptimizationType;
   }
@@ -516,6 +527,8 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_PURCHASE_GIFT_CARDS("PURCHASE_GIFT_CARDS"),
       @SerializedName("RECORD_NOW")
       VALUE_RECORD_NOW("RECORD_NOW"),
+      @SerializedName("REFER_FRIENDS")
+      VALUE_REFER_FRIENDS("REFER_FRIENDS"),
       @SerializedName("REQUEST_TIME")
       VALUE_REQUEST_TIME("REQUEST_TIME"),
       @SerializedName("SAY_THANKS")
@@ -526,6 +539,8 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_SELL_NOW("SELL_NOW"),
       @SerializedName("SEND_A_GIFT")
       VALUE_SEND_A_GIFT("SEND_A_GIFT"),
+      @SerializedName("SEND_GIFT_MONEY")
+      VALUE_SEND_GIFT_MONEY("SEND_GIFT_MONEY"),
       @SerializedName("SHARE")
       VALUE_SHARE("SHARE"),
       @SerializedName("SHOP_NOW")
@@ -534,8 +549,14 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_SIGN_UP("SIGN_UP"),
       @SerializedName("SOTTO_SUBSCRIBE")
       VALUE_SOTTO_SUBSCRIBE("SOTTO_SUBSCRIBE"),
+      @SerializedName("START_ORDER")
+      VALUE_START_ORDER("START_ORDER"),
       @SerializedName("SUBSCRIBE")
       VALUE_SUBSCRIBE("SUBSCRIBE"),
+      @SerializedName("SWIPE_UP_PRODUCT")
+      VALUE_SWIPE_UP_PRODUCT("SWIPE_UP_PRODUCT"),
+      @SerializedName("SWIPE_UP_SHOP")
+      VALUE_SWIPE_UP_SHOP("SWIPE_UP_SHOP"),
       @SerializedName("UPDATE_APP")
       VALUE_UPDATE_APP("UPDATE_APP"),
       @SerializedName("USE_APP")
@@ -544,6 +565,8 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_USE_MOBILE_APP("USE_MOBILE_APP"),
       @SerializedName("VIDEO_ANNOTATION")
       VALUE_VIDEO_ANNOTATION("VIDEO_ANNOTATION"),
+      @SerializedName("VIDEO_CALL")
+      VALUE_VIDEO_CALL("VIDEO_CALL"),
       @SerializedName("VISIT_PAGES_FEED")
       VALUE_VISIT_PAGES_FEED("VISIT_PAGES_FEED"),
       @SerializedName("WATCH_MORE")
@@ -596,6 +619,7 @@ public class AdAssetFeedSpec extends APINode {
     this.mGroups = instance.mGroups;
     this.mImages = instance.mImages;
     this.mLinkUrls = instance.mLinkUrls;
+    this.mOnsiteDestinations = instance.mOnsiteDestinations;
     this.mOptimizationType = instance.mOptimizationType;
     this.mPosts = instance.mPosts;
     this.mTitles = instance.mTitles;

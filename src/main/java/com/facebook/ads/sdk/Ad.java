@@ -77,6 +77,8 @@ public class Ad extends APINode {
   private String mCampaignId = null;
   @SerializedName("configured_status")
   private EnumConfiguredStatus mConfiguredStatus = null;
+  @SerializedName("conversion_domain")
+  private String mConversionDomain = null;
   @SerializedName("conversion_specs")
   private List<ConversionActionQuery> mConversionSpecs = null;
   @SerializedName("created_time")
@@ -433,6 +435,10 @@ public class Ad extends APINode {
     return mConfiguredStatus;
   }
 
+  public String getFieldConversionDomain() {
+    return mConversionDomain;
+  }
+
   public List<ConversionActionQuery> getFieldConversionSpecs() {
     return mConversionSpecs;
   }
@@ -568,6 +574,7 @@ public class Ad extends APINode {
       "instagram_actor_id",
       "instagram_permalink_url",
       "instagram_story_id",
+      "instagram_user_id",
       "interactive_components_spec",
       "link_deep_link_url",
       "link_destination_display_url",
@@ -587,6 +594,7 @@ public class Ad extends APINode {
       "portrait_customizations",
       "product_set_id",
       "recommender_settings",
+      "source_instagram_media_id",
       "status",
       "template_url",
       "template_url_spec",
@@ -882,6 +890,13 @@ public class Ad extends APINode {
       this.requestField("instagram_story_id", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestInstagramUserIdField () {
+      return this.requestInstagramUserIdField(true);
+    }
+    public APIRequestGetAdCreatives requestInstagramUserIdField (boolean value) {
+      this.requestField("instagram_user_id", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestInteractiveComponentsSpecField () {
       return this.requestInteractiveComponentsSpecField(true);
     }
@@ -1013,6 +1028,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetAdCreatives requestRecommenderSettingsField (boolean value) {
       this.requestField("recommender_settings", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestSourceInstagramMediaIdField () {
+      return this.requestSourceInstagramMediaIdField(true);
+    }
+    public APIRequestGetAdCreatives requestSourceInstagramMediaIdField (boolean value) {
+      this.requestField("source_instagram_media_id", value);
       return this;
     }
     public APIRequestGetAdCreatives requestStatusField () {
@@ -1417,6 +1439,7 @@ public class Ad extends APINode {
       "campaign",
       "campaign_id",
       "configured_status",
+      "conversion_domain",
       "conversion_specs",
       "created_time",
       "creative",
@@ -1641,6 +1664,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetCopies requestConfiguredStatusField (boolean value) {
       this.requestField("configured_status", value);
+      return this;
+    }
+    public APIRequestGetCopies requestConversionDomainField () {
+      return this.requestConversionDomainField(true);
+    }
+    public APIRequestGetCopies requestConversionDomainField (boolean value) {
+      this.requestField("conversion_domain", value);
       return this;
     }
     public APIRequestGetCopies requestConversionSpecsField () {
@@ -1957,6 +1987,7 @@ public class Ad extends APINode {
       "time_range",
       "time_ranges",
       "use_account_attribution_setting",
+      "use_unified_attribution_setting",
     };
 
     public static final String[] FIELDS = {
@@ -2183,6 +2214,15 @@ public class Ad extends APINode {
       return this;
     }
 
+    public APIRequestGetInsights setUseUnifiedAttributionSetting (Boolean useUnifiedAttributionSetting) {
+      this.setParam("use_unified_attribution_setting", useUnifiedAttributionSetting);
+      return this;
+    }
+    public APIRequestGetInsights setUseUnifiedAttributionSetting (String useUnifiedAttributionSetting) {
+      this.setParam("use_unified_attribution_setting", useUnifiedAttributionSetting);
+      return this;
+    }
+
     public APIRequestGetInsights requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -2249,6 +2289,7 @@ public class Ad extends APINode {
       "time_range",
       "time_ranges",
       "use_account_attribution_setting",
+      "use_unified_attribution_setting",
     };
 
     public static final String[] FIELDS = {
@@ -2472,6 +2513,15 @@ public class Ad extends APINode {
     }
     public APIRequestGetInsightsAsync setUseAccountAttributionSetting (String useAccountAttributionSetting) {
       this.setParam("use_account_attribution_setting", useAccountAttributionSetting);
+      return this;
+    }
+
+    public APIRequestGetInsightsAsync setUseUnifiedAttributionSetting (Boolean useUnifiedAttributionSetting) {
+      this.setParam("use_unified_attribution_setting", useUnifiedAttributionSetting);
+      return this;
+    }
+    public APIRequestGetInsightsAsync setUseUnifiedAttributionSetting (String useUnifiedAttributionSetting) {
+      this.setParam("use_unified_attribution_setting", useUnifiedAttributionSetting);
       return this;
     }
 
@@ -3238,6 +3288,7 @@ public class Ad extends APINode {
       "campaign",
       "campaign_id",
       "configured_status",
+      "conversion_domain",
       "conversion_specs",
       "created_time",
       "creative",
@@ -3473,6 +3524,13 @@ public class Ad extends APINode {
       this.requestField("configured_status", value);
       return this;
     }
+    public APIRequestGet requestConversionDomainField () {
+      return this.requestConversionDomainField(true);
+    }
+    public APIRequestGet requestConversionDomainField (boolean value) {
+      this.requestField("conversion_domain", value);
+      return this;
+    }
     public APIRequestGet requestConversionSpecsField () {
       return this.requestConversionSpecsField(true);
     }
@@ -3641,6 +3699,7 @@ public class Ad extends APINode {
       "adset_spec",
       "audience_id",
       "bid_amount",
+      "conversion_domain",
       "creative",
       "display_sequence",
       "draft_adgroup_id",
@@ -3738,6 +3797,11 @@ public class Ad extends APINode {
     }
     public APIRequestUpdate setBidAmount (String bidAmount) {
       this.setParam("bid_amount", bidAmount);
+      return this;
+    }
+
+    public APIRequestUpdate setConversionDomain (String conversionDomain) {
+      this.setParam("conversion_domain", conversionDomain);
       return this;
     }
 
@@ -3994,8 +4058,8 @@ public class Ad extends APINode {
       VALUE_LAST_WEEK_SUN_SAT("last_week_sun_sat"),
       @SerializedName("last_year")
       VALUE_LAST_YEAR("last_year"),
-      @SerializedName("lifetime")
-      VALUE_LIFETIME("lifetime"),
+      @SerializedName("maximum")
+      VALUE_MAXIMUM("maximum"),
       @SerializedName("this_month")
       VALUE_THIS_MONTH("this_month"),
       @SerializedName("this_quarter")
@@ -4111,6 +4175,7 @@ public class Ad extends APINode {
     this.mCampaign = instance.mCampaign;
     this.mCampaignId = instance.mCampaignId;
     this.mConfiguredStatus = instance.mConfiguredStatus;
+    this.mConversionDomain = instance.mConversionDomain;
     this.mConversionSpecs = instance.mConversionSpecs;
     this.mCreatedTime = instance.mCreatedTime;
     this.mCreative = instance.mCreative;

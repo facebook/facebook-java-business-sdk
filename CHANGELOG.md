@@ -5,6 +5,47 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## v11.0.0
+
+
+### Changed
+- Graph API call upgrade to [v11.0]https://developers.facebook.com/docs/graph-api/changelog/version11.0
+
+## v10.0.1
+
+
+### Added
+- Support for sending multiple values for certain UserData parameters to Conversions API.
+
+## v10.0.0
+
+### Changed
+- Graph API call upgrade to [v10.0](https://developers.facebook.com/docs/graph-api/changelog/version10.0)
+
+## v9.0.1
+
+
+### Added
+- `action_source` field to Event for Conversions API.
+
+## v9.0.0
+### Changed
+- Graph API call upgrade to [v9.0](https://developers.facebook.com/docs/graph-api/changelog/version9.0)
+
+### Added
+- `delivery_category` field to Content for Conversions API.
+
+## v8.0.4
+
+### Fixed
+- Stop sending empty hashed strings when normalizing params.
+
+## v8.0.3
+
+### Added
+- Added HttpServiceInterface to enable the default request object to be overridden by a user-defined HTTP Request Service object. Available for Conversions API create event requests.
+- Added batching to Conversions API. Create batched event requests by using BatchProcessor.
+
 ## v8.0.0
 ### Changed
 - Graph API call upgrade to [v8.0](https://developers.facebook.com/docs/graph-api/changelog/version8.0)
@@ -58,3 +99,4 @@ All notable changes to this project will be documented in this file.
 ## v3.3.0
 ### Changed
 - Graph API call upgrade to [v3.3](https://developers.facebook.com/docs/graph-api/changelog/version3.3)
+

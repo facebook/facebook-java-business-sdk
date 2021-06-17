@@ -65,6 +65,8 @@ public class ProductItem extends APINode {
   private EnumAgeGroup mAgeGroup = null;
   @SerializedName("applinks")
   private CatalogItemAppLinks mApplinks = null;
+  @SerializedName("ar_data")
+  private ProductItemARData mArData = null;
   @SerializedName("availability")
   private EnumAvailability mAvailability = null;
   @SerializedName("brand")
@@ -109,12 +111,18 @@ public class ProductItem extends APINode {
   private String mId = null;
   @SerializedName("image_cdn_urls")
   private Map<String, String> mImageCdnUrls = null;
+  @SerializedName("image_fetch_status")
+  private EnumImageFetchStatus mImageFetchStatus = null;
   @SerializedName("image_url")
   private String mImageUrl = null;
+  @SerializedName("images")
+  private List<String> mImages = null;
   @SerializedName("inventory")
   private Long mInventory = null;
   @SerializedName("manufacturer_part_number")
   private String mManufacturerPartNumber = null;
+  @SerializedName("marked_for_product_launch")
+  private String mMarkedForProductLaunch = null;
   @SerializedName("material")
   private String mMaterial = null;
   @SerializedName("mobile_link")
@@ -123,6 +131,8 @@ public class ProductItem extends APINode {
   private String mName = null;
   @SerializedName("ordering_index")
   private Long mOrderingIndex = null;
+  @SerializedName("parent_product_id")
+  private String mParentProductId = null;
   @SerializedName("pattern")
   private String mPattern = null;
   @SerializedName("price")
@@ -135,6 +145,8 @@ public class ProductItem extends APINode {
   private ProductGroup mProductGroup = null;
   @SerializedName("product_type")
   private String mProductType = null;
+  @SerializedName("quantity_to_sell_on_facebook")
+  private Long mQuantityToSellOnFacebook = null;
   @SerializedName("retailer_id")
   private String mRetailerId = null;
   @SerializedName("retailer_product_group_id")
@@ -372,6 +384,10 @@ public class ProductItem extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGetChannelsToIntegrityStatus getChannelsToIntegrityStatus() {
+    return new APIRequestGetChannelsToIntegrityStatus(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetProductSets getProductSets() {
     return new APIRequestGetProductSets(this.getPrefixedId().toString(), context);
   }
@@ -407,6 +423,10 @@ public class ProductItem extends APINode {
 
   public CatalogItemAppLinks getFieldApplinks() {
     return mApplinks;
+  }
+
+  public ProductItemARData getFieldArData() {
+    return mArData;
   }
 
   public EnumAvailability getFieldAvailability() {
@@ -497,8 +517,16 @@ public class ProductItem extends APINode {
     return mImageCdnUrls;
   }
 
+  public EnumImageFetchStatus getFieldImageFetchStatus() {
+    return mImageFetchStatus;
+  }
+
   public String getFieldImageUrl() {
     return mImageUrl;
+  }
+
+  public List<String> getFieldImages() {
+    return mImages;
   }
 
   public Long getFieldInventory() {
@@ -507,6 +535,10 @@ public class ProductItem extends APINode {
 
   public String getFieldManufacturerPartNumber() {
     return mManufacturerPartNumber;
+  }
+
+  public String getFieldMarkedForProductLaunch() {
+    return mMarkedForProductLaunch;
   }
 
   public String getFieldMaterial() {
@@ -523,6 +555,10 @@ public class ProductItem extends APINode {
 
   public Long getFieldOrderingIndex() {
     return mOrderingIndex;
+  }
+
+  public String getFieldParentProductId() {
+    return mParentProductId;
   }
 
   public String getFieldPattern() {
@@ -556,6 +592,10 @@ public class ProductItem extends APINode {
 
   public String getFieldProductType() {
     return mProductType;
+  }
+
+  public Long getFieldQuantityToSellOnFacebook() {
+    return mQuantityToSellOnFacebook;
   }
 
   public String getFieldRetailerId() {
@@ -615,6 +655,126 @@ public class ProductItem extends APINode {
   }
 
 
+
+  public static class APIRequestGetChannelsToIntegrityStatus extends APIRequest<CatalogItemChannelsToIntegrityStatus> {
+
+    APINodeList<CatalogItemChannelsToIntegrityStatus> lastResponse = null;
+    @Override
+    public APINodeList<CatalogItemChannelsToIntegrityStatus> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "channels",
+      "rejection_information",
+    };
+
+    @Override
+    public APINodeList<CatalogItemChannelsToIntegrityStatus> parseResponse(String response, String header) throws APIException {
+      return CatalogItemChannelsToIntegrityStatus.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<CatalogItemChannelsToIntegrityStatus> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<CatalogItemChannelsToIntegrityStatus> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<CatalogItemChannelsToIntegrityStatus>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<CatalogItemChannelsToIntegrityStatus>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<CatalogItemChannelsToIntegrityStatus>>() {
+           public APINodeList<CatalogItemChannelsToIntegrityStatus> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetChannelsToIntegrityStatus.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetChannelsToIntegrityStatus(String nodeId, APIContext context) {
+      super(context, nodeId, "/channels_to_integrity_status", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetChannelsToIntegrityStatus setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetChannelsToIntegrityStatus setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetChannelsToIntegrityStatus requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetChannelsToIntegrityStatus requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetChannelsToIntegrityStatus requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetChannelsToIntegrityStatus requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetChannelsToIntegrityStatus requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetChannelsToIntegrityStatus requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetChannelsToIntegrityStatus requestChannelsField () {
+      return this.requestChannelsField(true);
+    }
+    public APIRequestGetChannelsToIntegrityStatus requestChannelsField (boolean value) {
+      this.requestField("channels", value);
+      return this;
+    }
+    public APIRequestGetChannelsToIntegrityStatus requestRejectionInformationField () {
+      return this.requestRejectionInformationField(true);
+    }
+    public APIRequestGetChannelsToIntegrityStatus requestRejectionInformationField (boolean value) {
+      this.requestField("rejection_information", value);
+      return this;
+    }
+  }
 
   public static class APIRequestGetProductSets extends APIRequest<ProductSet> {
 
@@ -904,8 +1064,11 @@ public class ProductItem extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "catalog_id",
       "image_height",
       "image_width",
+      "override_country",
+      "override_language",
     };
 
     public static final String[] FIELDS = {
@@ -914,6 +1077,7 @@ public class ProductItem extends APINode {
       "additional_variant_attributes",
       "age_group",
       "applinks",
+      "ar_data",
       "availability",
       "brand",
       "capability_to_review_status",
@@ -936,19 +1100,24 @@ public class ProductItem extends APINode {
       "gtin",
       "id",
       "image_cdn_urls",
+      "image_fetch_status",
       "image_url",
+      "images",
       "inventory",
       "manufacturer_part_number",
+      "marked_for_product_launch",
       "material",
       "mobile_link",
       "name",
       "ordering_index",
+      "parent_product_id",
       "pattern",
       "price",
       "product_catalog",
       "product_feed",
       "product_group",
       "product_type",
+      "quantity_to_sell_on_facebook",
       "retailer_id",
       "retailer_product_group_id",
       "review_rejection_reasons",
@@ -1018,6 +1187,11 @@ public class ProductItem extends APINode {
     }
 
 
+    public APIRequestGet setCatalogId (String catalogId) {
+      this.setParam("catalog_id", catalogId);
+      return this;
+    }
+
     public APIRequestGet setImageHeight (Long imageHeight) {
       this.setParam("image_height", imageHeight);
       return this;
@@ -1033,6 +1207,16 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet setImageWidth (String imageWidth) {
       this.setParam("image_width", imageWidth);
+      return this;
+    }
+
+    public APIRequestGet setOverrideCountry (String overrideCountry) {
+      this.setParam("override_country", overrideCountry);
+      return this;
+    }
+
+    public APIRequestGet setOverrideLanguage (String overrideLanguage) {
+      this.setParam("override_language", overrideLanguage);
       return this;
     }
 
@@ -1105,6 +1289,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestApplinksField (boolean value) {
       this.requestField("applinks", value);
+      return this;
+    }
+    public APIRequestGet requestArDataField () {
+      return this.requestArDataField(true);
+    }
+    public APIRequestGet requestArDataField (boolean value) {
+      this.requestField("ar_data", value);
       return this;
     }
     public APIRequestGet requestAvailabilityField () {
@@ -1261,11 +1452,25 @@ public class ProductItem extends APINode {
       this.requestField("image_cdn_urls", value);
       return this;
     }
+    public APIRequestGet requestImageFetchStatusField () {
+      return this.requestImageFetchStatusField(true);
+    }
+    public APIRequestGet requestImageFetchStatusField (boolean value) {
+      this.requestField("image_fetch_status", value);
+      return this;
+    }
     public APIRequestGet requestImageUrlField () {
       return this.requestImageUrlField(true);
     }
     public APIRequestGet requestImageUrlField (boolean value) {
       this.requestField("image_url", value);
+      return this;
+    }
+    public APIRequestGet requestImagesField () {
+      return this.requestImagesField(true);
+    }
+    public APIRequestGet requestImagesField (boolean value) {
+      this.requestField("images", value);
       return this;
     }
     public APIRequestGet requestInventoryField () {
@@ -1280,6 +1485,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestManufacturerPartNumberField (boolean value) {
       this.requestField("manufacturer_part_number", value);
+      return this;
+    }
+    public APIRequestGet requestMarkedForProductLaunchField () {
+      return this.requestMarkedForProductLaunchField(true);
+    }
+    public APIRequestGet requestMarkedForProductLaunchField (boolean value) {
+      this.requestField("marked_for_product_launch", value);
       return this;
     }
     public APIRequestGet requestMaterialField () {
@@ -1308,6 +1520,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestOrderingIndexField (boolean value) {
       this.requestField("ordering_index", value);
+      return this;
+    }
+    public APIRequestGet requestParentProductIdField () {
+      return this.requestParentProductIdField(true);
+    }
+    public APIRequestGet requestParentProductIdField (boolean value) {
+      this.requestField("parent_product_id", value);
       return this;
     }
     public APIRequestGet requestPatternField () {
@@ -1350,6 +1569,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestProductTypeField (boolean value) {
       this.requestField("product_type", value);
+      return this;
+    }
+    public APIRequestGet requestQuantityToSellOnFacebookField () {
+      return this.requestQuantityToSellOnFacebookField(true);
+    }
+    public APIRequestGet requestQuantityToSellOnFacebookField (boolean value) {
+      this.requestField("quantity_to_sell_on_facebook", value);
       return this;
     }
     public APIRequestGet requestRetailerIdField () {
@@ -1460,8 +1686,8 @@ public class ProductItem extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "additional_image_files",
       "additional_image_urls",
+      "additional_uploaded_image_ids",
       "additional_variant_attributes",
       "android_app_name",
       "android_class",
@@ -1500,6 +1726,7 @@ public class ProductItem extends APINode {
       "iphone_url",
       "launch_date",
       "manufacturer_part_number",
+      "marked_for_product_launch",
       "material",
       "mobile_link",
       "name",
@@ -1510,6 +1737,7 @@ public class ProductItem extends APINode {
       "pattern",
       "price",
       "product_type",
+      "quantity_to_sell_on_facebook",
       "retailer_id",
       "return_policy_days",
       "sale_price",
@@ -1581,21 +1809,21 @@ public class ProductItem extends APINode {
     }
 
 
-    public APIRequestUpdate setAdditionalImageFiles (List<File> additionalImageFiles) {
-      this.setParam("additional_image_files", additionalImageFiles);
-      return this;
-    }
-    public APIRequestUpdate setAdditionalImageFiles (String additionalImageFiles) {
-      this.setParam("additional_image_files", additionalImageFiles);
-      return this;
-    }
-
     public APIRequestUpdate setAdditionalImageUrls (List<String> additionalImageUrls) {
       this.setParam("additional_image_urls", additionalImageUrls);
       return this;
     }
     public APIRequestUpdate setAdditionalImageUrls (String additionalImageUrls) {
       this.setParam("additional_image_urls", additionalImageUrls);
+      return this;
+    }
+
+    public APIRequestUpdate setAdditionalUploadedImageIds (List<String> additionalUploadedImageIds) {
+      this.setParam("additional_uploaded_image_ids", additionalUploadedImageIds);
+      return this;
+    }
+    public APIRequestUpdate setAdditionalUploadedImageIds (String additionalUploadedImageIds) {
+      this.setParam("additional_uploaded_image_ids", additionalUploadedImageIds);
       return this;
     }
 
@@ -1833,6 +2061,15 @@ public class ProductItem extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setMarkedForProductLaunch (ProductItem.EnumMarkedForProductLaunch markedForProductLaunch) {
+      this.setParam("marked_for_product_launch", markedForProductLaunch);
+      return this;
+    }
+    public APIRequestUpdate setMarkedForProductLaunch (String markedForProductLaunch) {
+      this.setParam("marked_for_product_launch", markedForProductLaunch);
+      return this;
+    }
+
     public APIRequestUpdate setMaterial (String material) {
       this.setParam("material", material);
       return this;
@@ -1892,6 +2129,15 @@ public class ProductItem extends APINode {
 
     public APIRequestUpdate setProductType (String productType) {
       this.setParam("product_type", productType);
+      return this;
+    }
+
+    public APIRequestUpdate setQuantityToSellOnFacebook (Long quantityToSellOnFacebook) {
+      this.setParam("quantity_to_sell_on_facebook", quantityToSellOnFacebook);
+      return this;
+    }
+    public APIRequestUpdate setQuantityToSellOnFacebook (String quantityToSellOnFacebook) {
+      this.setParam("quantity_to_sell_on_facebook", quantityToSellOnFacebook);
       return this;
     }
 
@@ -2118,6 +2364,33 @@ public class ProductItem extends APINode {
       }
   }
 
+  public static enum EnumImageFetchStatus {
+      @SerializedName("DIRECT_UPLOAD")
+      VALUE_DIRECT_UPLOAD("DIRECT_UPLOAD"),
+      @SerializedName("FETCHED")
+      VALUE_FETCHED("FETCHED"),
+      @SerializedName("FETCH_FAILED")
+      VALUE_FETCH_FAILED("FETCH_FAILED"),
+      @SerializedName("NO_STATUS")
+      VALUE_NO_STATUS("NO_STATUS"),
+      @SerializedName("OUTDATED")
+      VALUE_OUTDATED("OUTDATED"),
+      @SerializedName("PARTIAL_FETCH")
+      VALUE_PARTIAL_FETCH("PARTIAL_FETCH"),
+      ;
+
+      private String value;
+
+      private EnumImageFetchStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumReviewStatus {
       @SerializedName("approved")
       VALUE_APPROVED("approved"),
@@ -2202,6 +2475,8 @@ public class ProductItem extends APINode {
       VALUE_FB_APRL_COSTUME("FB_APRL_COSTUME"),
       @SerializedName("FB_APRL_CSTM")
       VALUE_FB_APRL_CSTM("FB_APRL_CSTM"),
+      @SerializedName("FB_APRL_FORMAL")
+      VALUE_FB_APRL_FORMAL("FB_APRL_FORMAL"),
       @SerializedName("FB_APRL_HANDBAG")
       VALUE_FB_APRL_HANDBAG("FB_APRL_HANDBAG"),
       @SerializedName("FB_APRL_JEWELRY")
@@ -2602,6 +2877,27 @@ public class ProductItem extends APINode {
       }
   }
 
+  public static enum EnumMarkedForProductLaunch {
+      @SerializedName("default")
+      VALUE_DEFAULT("default"),
+      @SerializedName("marked")
+      VALUE_MARKED("marked"),
+      @SerializedName("not_marked")
+      VALUE_NOT_MARKED("not_marked"),
+      ;
+
+      private String value;
+
+      private EnumMarkedForProductLaunch(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -2622,6 +2918,7 @@ public class ProductItem extends APINode {
     this.mAdditionalVariantAttributes = instance.mAdditionalVariantAttributes;
     this.mAgeGroup = instance.mAgeGroup;
     this.mApplinks = instance.mApplinks;
+    this.mArData = instance.mArData;
     this.mAvailability = instance.mAvailability;
     this.mBrand = instance.mBrand;
     this.mCapabilityToReviewStatus = instance.mCapabilityToReviewStatus;
@@ -2644,19 +2941,24 @@ public class ProductItem extends APINode {
     this.mGtin = instance.mGtin;
     this.mId = instance.mId;
     this.mImageCdnUrls = instance.mImageCdnUrls;
+    this.mImageFetchStatus = instance.mImageFetchStatus;
     this.mImageUrl = instance.mImageUrl;
+    this.mImages = instance.mImages;
     this.mInventory = instance.mInventory;
     this.mManufacturerPartNumber = instance.mManufacturerPartNumber;
+    this.mMarkedForProductLaunch = instance.mMarkedForProductLaunch;
     this.mMaterial = instance.mMaterial;
     this.mMobileLink = instance.mMobileLink;
     this.mName = instance.mName;
     this.mOrderingIndex = instance.mOrderingIndex;
+    this.mParentProductId = instance.mParentProductId;
     this.mPattern = instance.mPattern;
     this.mPrice = instance.mPrice;
     this.mProductCatalog = instance.mProductCatalog;
     this.mProductFeed = instance.mProductFeed;
     this.mProductGroup = instance.mProductGroup;
     this.mProductType = instance.mProductType;
+    this.mQuantityToSellOnFacebook = instance.mQuantityToSellOnFacebook;
     this.mRetailerId = instance.mRetailerId;
     this.mRetailerProductGroupId = instance.mRetailerProductGroupId;
     this.mReviewRejectionReasons = instance.mReviewRejectionReasons;

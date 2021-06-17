@@ -55,8 +55,12 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class WhatsAppBusinessAccount extends APINode {
+  @SerializedName("account_review_status")
+  private String mAccountReviewStatus = null;
   @SerializedName("analytics")
   private Object mAnalytics = null;
+  @SerializedName("creation_time")
+  private Long mCreationTime = null;
   @SerializedName("currency")
   private String mCurrency = null;
   @SerializedName("id")
@@ -67,6 +71,8 @@ public class WhatsAppBusinessAccount extends APINode {
   private String mName = null;
   @SerializedName("on_behalf_of_business_info")
   private Object mOnBehalfOfBusinessInfo = null;
+  @SerializedName("owner_business_info")
+  private Object mOwnerBusinessInfo = null;
   @SerializedName("primary_funding_id")
   private String mPrimaryFundingId = null;
   @SerializedName("purchase_order_number")
@@ -312,6 +318,14 @@ public class WhatsAppBusinessAccount extends APINode {
     return new APIRequestGetPhoneNumbers(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestDeleteSubscribedApps deleteSubscribedApps() {
+    return new APIRequestDeleteSubscribedApps(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetSubscribedApps getSubscribedApps() {
+    return new APIRequestGetSubscribedApps(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateSubscribedApp createSubscribedApp() {
     return new APIRequestCreateSubscribedApp(this.getPrefixedId().toString(), context);
   }
@@ -321,8 +335,16 @@ public class WhatsAppBusinessAccount extends APINode {
   }
 
 
+  public String getFieldAccountReviewStatus() {
+    return mAccountReviewStatus;
+  }
+
   public Object getFieldAnalytics() {
     return mAnalytics;
+  }
+
+  public Long getFieldCreationTime() {
+    return mCreationTime;
   }
 
   public String getFieldCurrency() {
@@ -343,6 +365,10 @@ public class WhatsAppBusinessAccount extends APINode {
 
   public Object getFieldOnBehalfOfBusinessInfo() {
     return mOnBehalfOfBusinessInfo;
+  }
+
+  public Object getFieldOwnerBusinessInfo() {
+    return mOwnerBusinessInfo;
   }
 
   public String getFieldPrimaryFundingId() {
@@ -1245,6 +1271,214 @@ public class WhatsAppBusinessAccount extends APINode {
 
   }
 
+  public static class APIRequestDeleteSubscribedApps extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestDeleteSubscribedApps.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDeleteSubscribedApps(String nodeId, APIContext context) {
+      super(context, nodeId, "/subscribed_apps", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDeleteSubscribedApps setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteSubscribedApps setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDeleteSubscribedApps requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDeleteSubscribedApps requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteSubscribedApps requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDeleteSubscribedApps requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteSubscribedApps requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteSubscribedApps requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetSubscribedApps extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetSubscribedApps.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetSubscribedApps(String nodeId, APIContext context) {
+      super(context, nodeId, "/subscribed_apps", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetSubscribedApps setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSubscribedApps setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetSubscribedApps requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetSubscribedApps requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSubscribedApps requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetSubscribedApps requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSubscribedApps requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSubscribedApps requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestCreateSubscribedApp extends APIRequest<WhatsAppBusinessAccount> {
 
     WhatsAppBusinessAccount lastResponse = null;
@@ -1360,12 +1594,15 @@ public class WhatsAppBusinessAccount extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "account_review_status",
       "analytics",
+      "creation_time",
       "currency",
       "id",
       "message_template_namespace",
       "name",
       "on_behalf_of_business_info",
+      "owner_business_info",
       "primary_funding_id",
       "purchase_order_number",
       "status",
@@ -1461,11 +1698,25 @@ public class WhatsAppBusinessAccount extends APINode {
       return this;
     }
 
+    public APIRequestGet requestAccountReviewStatusField () {
+      return this.requestAccountReviewStatusField(true);
+    }
+    public APIRequestGet requestAccountReviewStatusField (boolean value) {
+      this.requestField("account_review_status", value);
+      return this;
+    }
     public APIRequestGet requestAnalyticsField () {
       return this.requestAnalyticsField(true);
     }
     public APIRequestGet requestAnalyticsField (boolean value) {
       this.requestField("analytics", value);
+      return this;
+    }
+    public APIRequestGet requestCreationTimeField () {
+      return this.requestCreationTimeField(true);
+    }
+    public APIRequestGet requestCreationTimeField (boolean value) {
+      this.requestField("creation_time", value);
       return this;
     }
     public APIRequestGet requestCurrencyField () {
@@ -1501,6 +1752,13 @@ public class WhatsAppBusinessAccount extends APINode {
     }
     public APIRequestGet requestOnBehalfOfBusinessInfoField (boolean value) {
       this.requestField("on_behalf_of_business_info", value);
+      return this;
+    }
+    public APIRequestGet requestOwnerBusinessInfoField () {
+      return this.requestOwnerBusinessInfoField(true);
+    }
+    public APIRequestGet requestOwnerBusinessInfoField (boolean value) {
+      this.requestField("owner_business_info", value);
       return this;
     }
     public APIRequestGet requestPrimaryFundingIdField () {
@@ -1542,6 +1800,8 @@ public class WhatsAppBusinessAccount extends APINode {
       VALUE_MANAGE_PHONE("MANAGE_PHONE"),
       @SerializedName("MANAGE_TEMPLATES")
       VALUE_MANAGE_TEMPLATES("MANAGE_TEMPLATES"),
+      @SerializedName("MESSAGING")
+      VALUE_MESSAGING("MESSAGING"),
       @SerializedName("VIEW_COST")
       VALUE_VIEW_COST("VIEW_COST"),
       ;
@@ -1639,12 +1899,15 @@ public class WhatsAppBusinessAccount extends APINode {
   }
 
   public WhatsAppBusinessAccount copyFrom(WhatsAppBusinessAccount instance) {
+    this.mAccountReviewStatus = instance.mAccountReviewStatus;
     this.mAnalytics = instance.mAnalytics;
+    this.mCreationTime = instance.mCreationTime;
     this.mCurrency = instance.mCurrency;
     this.mId = instance.mId;
     this.mMessageTemplateNamespace = instance.mMessageTemplateNamespace;
     this.mName = instance.mName;
     this.mOnBehalfOfBusinessInfo = instance.mOnBehalfOfBusinessInfo;
+    this.mOwnerBusinessInfo = instance.mOwnerBusinessInfo;
     this.mPrimaryFundingId = instance.mPrimaryFundingId;
     this.mPurchaseOrderNumber = instance.mPurchaseOrderNumber;
     this.mStatus = instance.mStatus;

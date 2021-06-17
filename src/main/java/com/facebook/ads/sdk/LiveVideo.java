@@ -90,7 +90,7 @@ public class LiveVideo extends APINode {
   @SerializedName("overlay_url")
   private String mOverlayUrl = null;
   @SerializedName("permalink_url")
-  private String mPermalinkUrl = null;
+  private Object mPermalinkUrl = null;
   @SerializedName("planned_start_time")
   private String mPlannedStartTime = null;
   @SerializedName("seconds_left")
@@ -438,7 +438,7 @@ public class LiveVideo extends APINode {
     return mOverlayUrl;
   }
 
-  public String getFieldPermalinkUrl() {
+  public Object getFieldPermalinkUrl() {
     return mPermalinkUrl;
   }
 
@@ -496,14 +496,10 @@ public class LiveVideo extends APINode {
 
     public static final String[] FIELDS = {
       "about",
-      "address",
-      "admin_notes",
       "age_range",
-      "auth_method",
       "birthday",
       "cover",
       "currency",
-      "devices",
       "education",
       "email",
       "favorite_athletes",
@@ -532,7 +528,6 @@ public class LiveVideo extends APINode {
       "payment_pricepoints",
       "political",
       "profile_pic",
-      "public_key",
       "quotes",
       "relationship_status",
       "religion",
@@ -548,7 +543,6 @@ public class LiveVideo extends APINode {
       "verified",
       "video_upload_limits",
       "website",
-      "work",
     };
 
     @Override
@@ -656,32 +650,11 @@ public class LiveVideo extends APINode {
       this.requestField("about", value);
       return this;
     }
-    public APIRequestGetBlockedUsers requestAddressField () {
-      return this.requestAddressField(true);
-    }
-    public APIRequestGetBlockedUsers requestAddressField (boolean value) {
-      this.requestField("address", value);
-      return this;
-    }
-    public APIRequestGetBlockedUsers requestAdminNotesField () {
-      return this.requestAdminNotesField(true);
-    }
-    public APIRequestGetBlockedUsers requestAdminNotesField (boolean value) {
-      this.requestField("admin_notes", value);
-      return this;
-    }
     public APIRequestGetBlockedUsers requestAgeRangeField () {
       return this.requestAgeRangeField(true);
     }
     public APIRequestGetBlockedUsers requestAgeRangeField (boolean value) {
       this.requestField("age_range", value);
-      return this;
-    }
-    public APIRequestGetBlockedUsers requestAuthMethodField () {
-      return this.requestAuthMethodField(true);
-    }
-    public APIRequestGetBlockedUsers requestAuthMethodField (boolean value) {
-      this.requestField("auth_method", value);
       return this;
     }
     public APIRequestGetBlockedUsers requestBirthdayField () {
@@ -703,13 +676,6 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetBlockedUsers requestCurrencyField (boolean value) {
       this.requestField("currency", value);
-      return this;
-    }
-    public APIRequestGetBlockedUsers requestDevicesField () {
-      return this.requestDevicesField(true);
-    }
-    public APIRequestGetBlockedUsers requestDevicesField (boolean value) {
-      this.requestField("devices", value);
       return this;
     }
     public APIRequestGetBlockedUsers requestEducationField () {
@@ -908,13 +874,6 @@ public class LiveVideo extends APINode {
       this.requestField("profile_pic", value);
       return this;
     }
-    public APIRequestGetBlockedUsers requestPublicKeyField () {
-      return this.requestPublicKeyField(true);
-    }
-    public APIRequestGetBlockedUsers requestPublicKeyField (boolean value) {
-      this.requestField("public_key", value);
-      return this;
-    }
     public APIRequestGetBlockedUsers requestQuotesField () {
       return this.requestQuotesField(true);
     }
@@ -1018,13 +977,6 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetBlockedUsers requestWebsiteField (boolean value) {
       this.requestField("website", value);
-      return this;
-    }
-    public APIRequestGetBlockedUsers requestWorkField () {
-      return this.requestWorkField(true);
-    }
-    public APIRequestGetBlockedUsers requestWorkField (boolean value) {
-      this.requestField("work", value);
       return this;
     }
   }
@@ -1387,6 +1339,7 @@ public class LiveVideo extends APINode {
       "checkins",
       "company_overview",
       "connected_instagram_account",
+      "connected_page_backed_instagram_account",
       "contact_address",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
@@ -1405,6 +1358,7 @@ public class LiveVideo extends APINode {
       "fan_count",
       "featured_video",
       "features",
+      "followers_count",
       "food_styles",
       "founded",
       "general_info",
@@ -1413,6 +1367,7 @@ public class LiveVideo extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_number",
       "hometown",
@@ -1757,6 +1712,13 @@ public class LiveVideo extends APINode {
       this.requestField("connected_instagram_account", value);
       return this;
     }
+    public APIRequestGetCrosspostSharedPages requestConnectedPageBackedInstagramAccountField () {
+      return this.requestConnectedPageBackedInstagramAccountField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestConnectedPageBackedInstagramAccountField (boolean value) {
+      this.requestField("connected_page_backed_instagram_account", value);
+      return this;
+    }
     public APIRequestGetCrosspostSharedPages requestContactAddressField () {
       return this.requestContactAddressField(true);
     }
@@ -1883,6 +1845,13 @@ public class LiveVideo extends APINode {
       this.requestField("features", value);
       return this;
     }
+    public APIRequestGetCrosspostSharedPages requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
+      return this;
+    }
     public APIRequestGetCrosspostSharedPages requestFoodStylesField () {
       return this.requestFoodStylesField(true);
     }
@@ -1937,6 +1906,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestHasTransitionedToNewPageExperienceField () {
+      return this.requestHasTransitionedToNewPageExperienceField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestHasTransitionedToNewPageExperienceField (boolean value) {
+      this.requestField("has_transitioned_to_new_page_experience", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestHasWhatsappBusinessNumberField () {
@@ -4123,16 +4099,9 @@ public class LiveVideo extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "ad_break_drop_live_stream",
-      "ad_break_duration",
-      "ad_break_encoder_drops_live_stream",
-      "ad_break_intent",
-      "ad_break_start_now",
-      "ad_break_time_offset",
       "allow_bm_crossposting",
-      "attribution_app_id",
-      "commercial_break_durations",
       "content_tags",
+      "cross_share_to_group_ids",
       "crossposting_actions",
       "custom_labels",
       "description",
@@ -4146,6 +4115,7 @@ public class LiveVideo extends APINode {
       "master_ingest_stream_id",
       "og_icon_id",
       "og_phrase",
+      "persistent_stream_key_status",
       "place",
       "planned_start_time",
       "privacy",
@@ -4217,60 +4187,6 @@ public class LiveVideo extends APINode {
     }
 
 
-    public APIRequestUpdate setAdBreakDropLiveStream (Boolean adBreakDropLiveStream) {
-      this.setParam("ad_break_drop_live_stream", adBreakDropLiveStream);
-      return this;
-    }
-    public APIRequestUpdate setAdBreakDropLiveStream (String adBreakDropLiveStream) {
-      this.setParam("ad_break_drop_live_stream", adBreakDropLiveStream);
-      return this;
-    }
-
-    public APIRequestUpdate setAdBreakDuration (Long adBreakDuration) {
-      this.setParam("ad_break_duration", adBreakDuration);
-      return this;
-    }
-    public APIRequestUpdate setAdBreakDuration (String adBreakDuration) {
-      this.setParam("ad_break_duration", adBreakDuration);
-      return this;
-    }
-
-    public APIRequestUpdate setAdBreakEncoderDropsLiveStream (Boolean adBreakEncoderDropsLiveStream) {
-      this.setParam("ad_break_encoder_drops_live_stream", adBreakEncoderDropsLiveStream);
-      return this;
-    }
-    public APIRequestUpdate setAdBreakEncoderDropsLiveStream (String adBreakEncoderDropsLiveStream) {
-      this.setParam("ad_break_encoder_drops_live_stream", adBreakEncoderDropsLiveStream);
-      return this;
-    }
-
-    public APIRequestUpdate setAdBreakIntent (Boolean adBreakIntent) {
-      this.setParam("ad_break_intent", adBreakIntent);
-      return this;
-    }
-    public APIRequestUpdate setAdBreakIntent (String adBreakIntent) {
-      this.setParam("ad_break_intent", adBreakIntent);
-      return this;
-    }
-
-    public APIRequestUpdate setAdBreakStartNow (Boolean adBreakStartNow) {
-      this.setParam("ad_break_start_now", adBreakStartNow);
-      return this;
-    }
-    public APIRequestUpdate setAdBreakStartNow (String adBreakStartNow) {
-      this.setParam("ad_break_start_now", adBreakStartNow);
-      return this;
-    }
-
-    public APIRequestUpdate setAdBreakTimeOffset (Double adBreakTimeOffset) {
-      this.setParam("ad_break_time_offset", adBreakTimeOffset);
-      return this;
-    }
-    public APIRequestUpdate setAdBreakTimeOffset (String adBreakTimeOffset) {
-      this.setParam("ad_break_time_offset", adBreakTimeOffset);
-      return this;
-    }
-
     public APIRequestUpdate setAllowBmCrossposting (Boolean allowBmCrossposting) {
       this.setParam("allow_bm_crossposting", allowBmCrossposting);
       return this;
@@ -4280,26 +4196,21 @@ public class LiveVideo extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setAttributionAppId (String attributionAppId) {
-      this.setParam("attribution_app_id", attributionAppId);
-      return this;
-    }
-
-    public APIRequestUpdate setCommercialBreakDurations (List<Long> commercialBreakDurations) {
-      this.setParam("commercial_break_durations", commercialBreakDurations);
-      return this;
-    }
-    public APIRequestUpdate setCommercialBreakDurations (String commercialBreakDurations) {
-      this.setParam("commercial_break_durations", commercialBreakDurations);
-      return this;
-    }
-
     public APIRequestUpdate setContentTags (List<String> contentTags) {
       this.setParam("content_tags", contentTags);
       return this;
     }
     public APIRequestUpdate setContentTags (String contentTags) {
       this.setParam("content_tags", contentTags);
+      return this;
+    }
+
+    public APIRequestUpdate setCrossShareToGroupIds (List<String> crossShareToGroupIds) {
+      this.setParam("cross_share_to_group_ids", crossShareToGroupIds);
+      return this;
+    }
+    public APIRequestUpdate setCrossShareToGroupIds (String crossShareToGroupIds) {
+      this.setParam("cross_share_to_group_ids", crossShareToGroupIds);
       return this;
     }
 
@@ -4401,6 +4312,15 @@ public class LiveVideo extends APINode {
 
     public APIRequestUpdate setOgPhrase (String ogPhrase) {
       this.setParam("og_phrase", ogPhrase);
+      return this;
+    }
+
+    public APIRequestUpdate setPersistentStreamKeyStatus (LiveVideo.EnumPersistentStreamKeyStatus persistentStreamKeyStatus) {
+      this.setParam("persistent_stream_key_status", persistentStreamKeyStatus);
+      return this;
+    }
+    public APIRequestUpdate setPersistentStreamKeyStatus (String persistentStreamKeyStatus) {
+      this.setParam("persistent_stream_key_status", persistentStreamKeyStatus);
       return this;
     }
 
@@ -4547,39 +4467,6 @@ public class LiveVideo extends APINode {
 
   }
 
-  public static enum EnumBroadcastStatus {
-      @SerializedName("live")
-      VALUE_LIVE("live"),
-      @SerializedName("live_stopped")
-      VALUE_LIVE_STOPPED("live_stopped"),
-      @SerializedName("processing")
-      VALUE_PROCESSING("processing"),
-      @SerializedName("scheduled_canceled")
-      VALUE_SCHEDULED_CANCELED("scheduled_canceled"),
-      @SerializedName("scheduled_expired")
-      VALUE_SCHEDULED_EXPIRED("scheduled_expired"),
-      @SerializedName("scheduled_live")
-      VALUE_SCHEDULED_LIVE("scheduled_live"),
-      @SerializedName("scheduled_unpublished")
-      VALUE_SCHEDULED_UNPUBLISHED("scheduled_unpublished"),
-      @SerializedName("unpublished")
-      VALUE_UNPUBLISHED("unpublished"),
-      @SerializedName("vod")
-      VALUE_VOD("vod"),
-      ;
-
-      private String value;
-
-      private EnumBroadcastStatus(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
   public static enum EnumProjection {
       @SerializedName("CUBEMAP")
       VALUE_CUBEMAP("CUBEMAP"),
@@ -4683,6 +4570,39 @@ public class LiveVideo extends APINode {
       }
   }
 
+  public static enum EnumBroadcastStatus {
+      @SerializedName("LIVE")
+      VALUE_LIVE("LIVE"),
+      @SerializedName("LIVE_STOPPED")
+      VALUE_LIVE_STOPPED("LIVE_STOPPED"),
+      @SerializedName("PROCESSING")
+      VALUE_PROCESSING("PROCESSING"),
+      @SerializedName("SCHEDULED_CANCELED")
+      VALUE_SCHEDULED_CANCELED("SCHEDULED_CANCELED"),
+      @SerializedName("SCHEDULED_EXPIRED")
+      VALUE_SCHEDULED_EXPIRED("SCHEDULED_EXPIRED"),
+      @SerializedName("SCHEDULED_LIVE")
+      VALUE_SCHEDULED_LIVE("SCHEDULED_LIVE"),
+      @SerializedName("SCHEDULED_UNPUBLISHED")
+      VALUE_SCHEDULED_UNPUBLISHED("SCHEDULED_UNPUBLISHED"),
+      @SerializedName("UNPUBLISHED")
+      VALUE_UNPUBLISHED("UNPUBLISHED"),
+      @SerializedName("VOD")
+      VALUE_VOD("VOD"),
+      ;
+
+      private String value;
+
+      private EnumBroadcastStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumSource {
       @SerializedName("owner")
       VALUE_OWNER("owner"),
@@ -4703,6 +4623,8 @@ public class LiveVideo extends APINode {
   }
 
   public static enum EnumLiveCommentModerationSetting {
+      @SerializedName("DEFAULT")
+      VALUE_DEFAULT("DEFAULT"),
       @SerializedName("DISCUSSION")
       VALUE_DISCUSSION("DISCUSSION"),
       @SerializedName("FOLLOWER")
@@ -4720,6 +4642,27 @@ public class LiveVideo extends APINode {
       private String value;
 
       private EnumLiveCommentModerationSetting(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumPersistentStreamKeyStatus {
+      @SerializedName("DISABLE")
+      VALUE_DISABLE("DISABLE"),
+      @SerializedName("ENABLE")
+      VALUE_ENABLE("ENABLE"),
+      @SerializedName("REGENERATE")
+      VALUE_REGENERATE("REGENERATE"),
+      ;
+
+      private String value;
+
+      private EnumPersistentStreamKeyStatus(String value) {
         this.value = value;
       }
 

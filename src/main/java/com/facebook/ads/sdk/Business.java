@@ -306,6 +306,10 @@ public class Business extends APINode {
     return new APIRequestCreateAccessToken(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestDeleteAdAccounts deleteAdAccounts() {
+    return new APIRequestDeleteAdAccounts(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetAdStudies getAdStudies() {
     return new APIRequestGetAdStudies(this.getPrefixedId().toString(), context);
   }
@@ -390,10 +394,6 @@ public class Business extends APINode {
     return new APIRequestGetClientAdAccounts(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateClientAdAccount createClientAdAccount() {
-    return new APIRequestCreateClientAdAccount(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetClientApps getClientApps() {
     return new APIRequestGetClientApps(this.getPrefixedId().toString(), context);
   }
@@ -466,6 +466,10 @@ public class Business extends APINode {
     return new APIRequestCreateEventSourceGroup(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetExtendedCreditApplications getExtendedCreditApplications() {
+    return new APIRequestGetExtendedCreditApplications(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetExtendedCredits getExtendedCredits() {
     return new APIRequestGetExtendedCredits(this.getPrefixedId().toString(), context);
   }
@@ -484,6 +488,10 @@ public class Business extends APINode {
 
   public APIRequestGetInstagramAccounts getInstagramAccounts() {
     return new APIRequestGetInstagramAccounts(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetInstagramBusinessAccounts getInstagramBusinessAccounts() {
+    return new APIRequestGetInstagramBusinessAccounts(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestDeleteManagedBusinesses deleteManagedBusinesses() {
@@ -558,6 +566,10 @@ public class Business extends APINode {
     return new APIRequestCreateOwnedProductCatalog(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetOwnedWhatsAppBusinessAccounts getOwnedWhatsAppBusinessAccounts() {
+    return new APIRequestGetOwnedWhatsAppBusinessAccounts(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestDeletePages deletePages() {
     return new APIRequestDeletePages(this.getPrefixedId().toString(), context);
   }
@@ -600,6 +612,10 @@ public class Business extends APINode {
 
   public APIRequestGetReceivedSharingAgreements getReceivedSharingAgreements() {
     return new APIRequestGetReceivedSharingAgreements(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetSpacoDataSetCollections getSpacoDataSetCollections() {
+    return new APIRequestGetSpacoDataSetCollections(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetSystemUsers getSystemUsers() {
@@ -834,6 +850,116 @@ public class Business extends APINode {
 
     @Override
     public APIRequestCreateAccessToken requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestDeleteAdAccounts extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "adaccount_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestDeleteAdAccounts.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDeleteAdAccounts(String nodeId, APIContext context) {
+      super(context, nodeId, "/ad_accounts", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDeleteAdAccounts setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteAdAccounts setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDeleteAdAccounts setAdaccountId (String adaccountId) {
+      this.setParam("adaccount_id", adaccountId);
+      return this;
+    }
+
+    public APIRequestDeleteAdAccounts requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDeleteAdAccounts requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteAdAccounts requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDeleteAdAccounts requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteAdAccounts requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteAdAccounts requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -2048,6 +2174,7 @@ public class Business extends APINode {
       "first_party_cookie_status",
       "id",
       "is_created_by_business",
+      "is_crm",
       "is_unavailable",
       "last_fired_time",
       "name",
@@ -2233,6 +2360,13 @@ public class Business extends APINode {
       this.requestField("is_created_by_business", value);
       return this;
     }
+    public APIRequestGetAdsPixels requestIsCrmField () {
+      return this.requestIsCrmField(true);
+    }
+    public APIRequestGetAdsPixels requestIsCrmField (boolean value) {
+      this.requestField("is_crm", value);
+      return this;
+    }
     public APIRequestGetAdsPixels requestIsUnavailableField () {
       return this.requestIsUnavailableField(true);
     }
@@ -2278,6 +2412,7 @@ public class Business extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "is_crm",
       "name",
     };
 
@@ -2336,6 +2471,15 @@ public class Business extends APINode {
       return this;
     }
 
+
+    public APIRequestCreateAdsPixel setIsCrm (Boolean isCrm) {
+      this.setParam("is_crm", isCrm);
+      return this;
+    }
+    public APIRequestCreateAdsPixel setIsCrm (String isCrm) {
+      this.setParam("is_crm", isCrm);
+      return this;
+    }
 
     public APIRequestCreateAdsPixel setName (String name) {
       this.setParam("name", name);
@@ -2749,6 +2893,7 @@ public class Business extends APINode {
       "ecpms",
       "query_ids",
       "request_id",
+      "sync_api",
     };
 
     public static final String[] FIELDS = {
@@ -2827,6 +2972,15 @@ public class Business extends APINode {
 
     public APIRequestCreateAggregateRevenue setRequestId (String requestId) {
       this.setParam("request_id", requestId);
+      return this;
+    }
+
+    public APIRequestCreateAggregateRevenue setSyncApi (Boolean syncApi) {
+      this.setParam("sync_api", syncApi);
+      return this;
+    }
+    public APIRequestCreateAggregateRevenue setSyncApi (String syncApi) {
+      this.setParam("sync_api", syncApi);
       return this;
     }
 
@@ -3270,11 +3424,11 @@ public class Business extends APINode {
     }
   }
 
-  public static class APIRequestGetBusinessInvoices extends APIRequest<OracleTransaction> {
+  public static class APIRequestGetBusinessInvoices extends APIRequest<OmegaCustomerTrx> {
 
-    APINodeList<OracleTransaction> lastResponse = null;
+    APINodeList<OmegaCustomerTrx> lastResponse = null;
     @Override
-    public APINodeList<OracleTransaction> getLastResponse() {
+    public APINodeList<OmegaCustomerTrx> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -3293,6 +3447,7 @@ public class Business extends APINode {
       "amount_due",
       "billed_amount_details",
       "billing_period",
+      "campaign",
       "cdn_download_uri",
       "currency",
       "download_uri",
@@ -3309,31 +3464,31 @@ public class Business extends APINode {
     };
 
     @Override
-    public APINodeList<OracleTransaction> parseResponse(String response, String header) throws APIException {
-      return OracleTransaction.parseResponse(response, getContext(), this, header);
+    public APINodeList<OmegaCustomerTrx> parseResponse(String response, String header) throws APIException {
+      return OmegaCustomerTrx.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<OracleTransaction> execute() throws APIException {
+    public APINodeList<OmegaCustomerTrx> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<OracleTransaction> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<OmegaCustomerTrx> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<OracleTransaction>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<OmegaCustomerTrx>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<OracleTransaction>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<OmegaCustomerTrx>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<OracleTransaction>>() {
-           public APINodeList<OracleTransaction> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<OmegaCustomerTrx>>() {
+           public APINodeList<OmegaCustomerTrx> apply(ResponseWrapper result) {
              try {
                return APIRequestGetBusinessInvoices.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -3366,10 +3521,6 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestGetBusinessInvoices setInvoiceId (Long invoiceId) {
-      this.setParam("invoice_id", invoiceId);
-      return this;
-    }
     public APIRequestGetBusinessInvoices setInvoiceId (String invoiceId) {
       this.setParam("invoice_id", invoiceId);
       return this;
@@ -3399,7 +3550,7 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestGetBusinessInvoices setType (OracleTransaction.EnumType type) {
+    public APIRequestGetBusinessInvoices setType (OmegaCustomerTrx.EnumType type) {
       this.setParam("type", type);
       return this;
     }
@@ -3477,6 +3628,13 @@ public class Business extends APINode {
     }
     public APIRequestGetBusinessInvoices requestBillingPeriodField (boolean value) {
       this.requestField("billing_period", value);
+      return this;
+    }
+    public APIRequestGetBusinessInvoices requestCampaignField () {
+      return this.requestCampaignField(true);
+    }
+    public APIRequestGetBusinessInvoices requestCampaignField (boolean value) {
+      this.requestField("campaign", value);
       return this;
     }
     public APIRequestGetBusinessInvoices requestCdnDownloadUriField () {
@@ -4313,7 +4471,6 @@ public class Business extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "account_status",
-      "ad_account_creation_request",
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
@@ -4474,13 +4631,6 @@ public class Business extends APINode {
     }
     public APIRequestGetClientAdAccounts requestAccountStatusField (boolean value) {
       this.requestField("account_status", value);
-      return this;
-    }
-    public APIRequestGetClientAdAccounts requestAdAccountCreationRequestField () {
-      return this.requestAdAccountCreationRequestField(true);
-    }
-    public APIRequestGetClientAdAccounts requestAdAccountCreationRequestField (boolean value) {
-      this.requestField("ad_account_creation_request", value);
       return this;
     }
     public APIRequestGetClientAdAccounts requestAdAccountPromotableObjectsField () {
@@ -4884,126 +5034,6 @@ public class Business extends APINode {
     }
   }
 
-  public static class APIRequestCreateClientAdAccount extends APIRequest<Business> {
-
-    Business lastResponse = null;
-    @Override
-    public Business getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "adaccount_id",
-      "permitted_tasks",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Business parseResponse(String response, String header) throws APIException {
-      return Business.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Business execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Business execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Business> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Business> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Business>() {
-           public Business apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateClientAdAccount.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateClientAdAccount(String nodeId, APIContext context) {
-      super(context, nodeId, "/client_ad_accounts", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateClientAdAccount setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateClientAdAccount setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateClientAdAccount setAdaccountId (String adaccountId) {
-      this.setParam("adaccount_id", adaccountId);
-      return this;
-    }
-
-    public APIRequestCreateClientAdAccount setPermittedTasks (List<Business.EnumPermittedTasks> permittedTasks) {
-      this.setParam("permitted_tasks", permittedTasks);
-      return this;
-    }
-    public APIRequestCreateClientAdAccount setPermittedTasks (String permittedTasks) {
-      this.setParam("permitted_tasks", permittedTasks);
-      return this;
-    }
-
-    public APIRequestCreateClientAdAccount requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateClientAdAccount requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateClientAdAccount requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateClientAdAccount requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateClientAdAccount requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateClientAdAccount requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetClientApps extends APIRequest<Application> {
 
     APINodeList<Application> lastResponse = null;
@@ -5021,6 +5051,7 @@ public class Business extends APINode {
       "android_key_hash",
       "android_sdk_error_categories",
       "app_domains",
+      "app_events_config",
       "app_events_feature_bitmask",
       "app_events_session_timeout",
       "app_install_tracked",
@@ -5246,6 +5277,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientApps requestAppDomainsField (boolean value) {
       this.requestField("app_domains", value);
+      return this;
+    }
+    public APIRequestGetClientApps requestAppEventsConfigField () {
+      return this.requestAppEventsConfigField(true);
+    }
+    public APIRequestGetClientApps requestAppEventsConfigField (boolean value) {
+      this.requestField("app_events_config", value);
       return this;
     }
     public APIRequestGetClientApps requestAppEventsFeatureBitmaskField () {
@@ -6056,6 +6094,7 @@ public class Business extends APINode {
       "checkins",
       "company_overview",
       "connected_instagram_account",
+      "connected_page_backed_instagram_account",
       "contact_address",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
@@ -6074,6 +6113,7 @@ public class Business extends APINode {
       "fan_count",
       "featured_video",
       "features",
+      "followers_count",
       "food_styles",
       "founded",
       "general_info",
@@ -6082,6 +6122,7 @@ public class Business extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_number",
       "hometown",
@@ -6426,6 +6467,13 @@ public class Business extends APINode {
       this.requestField("connected_instagram_account", value);
       return this;
     }
+    public APIRequestGetClientPages requestConnectedPageBackedInstagramAccountField () {
+      return this.requestConnectedPageBackedInstagramAccountField(true);
+    }
+    public APIRequestGetClientPages requestConnectedPageBackedInstagramAccountField (boolean value) {
+      this.requestField("connected_page_backed_instagram_account", value);
+      return this;
+    }
     public APIRequestGetClientPages requestContactAddressField () {
       return this.requestContactAddressField(true);
     }
@@ -6552,6 +6600,13 @@ public class Business extends APINode {
       this.requestField("features", value);
       return this;
     }
+    public APIRequestGetClientPages requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
+    }
+    public APIRequestGetClientPages requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
+      return this;
+    }
     public APIRequestGetClientPages requestFoodStylesField () {
       return this.requestFoodStylesField(true);
     }
@@ -6606,6 +6661,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientPages requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetClientPages requestHasTransitionedToNewPageExperienceField () {
+      return this.requestHasTransitionedToNewPageExperienceField(true);
+    }
+    public APIRequestGetClientPages requestHasTransitionedToNewPageExperienceField (boolean value) {
+      this.requestField("has_transitioned_to_new_page_experience", value);
       return this;
     }
     public APIRequestGetClientPages requestHasWhatsappBusinessNumberField () {
@@ -7399,6 +7461,7 @@ public class Business extends APINode {
       "first_party_cookie_status",
       "id",
       "is_created_by_business",
+      "is_crm",
       "is_unavailable",
       "last_fired_time",
       "name",
@@ -7563,6 +7626,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientPixels requestIsCreatedByBusinessField (boolean value) {
       this.requestField("is_created_by_business", value);
+      return this;
+    }
+    public APIRequestGetClientPixels requestIsCrmField () {
+      return this.requestIsCrmField(true);
+    }
+    public APIRequestGetClientPixels requestIsCrmField (boolean value) {
+      this.requestField("is_crm", value);
       return this;
     }
     public APIRequestGetClientPixels requestIsUnavailableField () {
@@ -7813,12 +7883,15 @@ public class Business extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "account_review_status",
       "analytics",
+      "creation_time",
       "currency",
       "id",
       "message_template_namespace",
       "name",
       "on_behalf_of_business_info",
+      "owner_business_info",
       "primary_funding_id",
       "purchase_order_number",
       "status",
@@ -7914,11 +7987,25 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestGetClientWhatsAppBusinessAccounts requestAccountReviewStatusField () {
+      return this.requestAccountReviewStatusField(true);
+    }
+    public APIRequestGetClientWhatsAppBusinessAccounts requestAccountReviewStatusField (boolean value) {
+      this.requestField("account_review_status", value);
+      return this;
+    }
     public APIRequestGetClientWhatsAppBusinessAccounts requestAnalyticsField () {
       return this.requestAnalyticsField(true);
     }
     public APIRequestGetClientWhatsAppBusinessAccounts requestAnalyticsField (boolean value) {
       this.requestField("analytics", value);
+      return this;
+    }
+    public APIRequestGetClientWhatsAppBusinessAccounts requestCreationTimeField () {
+      return this.requestCreationTimeField(true);
+    }
+    public APIRequestGetClientWhatsAppBusinessAccounts requestCreationTimeField (boolean value) {
+      this.requestField("creation_time", value);
       return this;
     }
     public APIRequestGetClientWhatsAppBusinessAccounts requestCurrencyField () {
@@ -7954,6 +8041,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientWhatsAppBusinessAccounts requestOnBehalfOfBusinessInfoField (boolean value) {
       this.requestField("on_behalf_of_business_info", value);
+      return this;
+    }
+    public APIRequestGetClientWhatsAppBusinessAccounts requestOwnerBusinessInfoField () {
+      return this.requestOwnerBusinessInfoField(true);
+    }
+    public APIRequestGetClientWhatsAppBusinessAccounts requestOwnerBusinessInfoField (boolean value) {
+      this.requestField("owner_business_info", value);
       return this;
     }
     public APIRequestGetClientWhatsAppBusinessAccounts requestPrimaryFundingIdField () {
@@ -8887,8 +8981,11 @@ public class Business extends APINode {
       "cta",
       "disable_checkout_urls",
       "display_name",
+      "external_merchant_id",
       "facebook_channel",
+      "feature_eligibility",
       "has_discount_code",
+      "has_onsite_intent",
       "id",
       "instagram_channel",
       "merchant_alert_email",
@@ -9037,6 +9134,13 @@ public class Business extends APINode {
       this.requestField("display_name", value);
       return this;
     }
+    public APIRequestGetCommerceMerchantSettings requestExternalMerchantIdField () {
+      return this.requestExternalMerchantIdField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestExternalMerchantIdField (boolean value) {
+      this.requestField("external_merchant_id", value);
+      return this;
+    }
     public APIRequestGetCommerceMerchantSettings requestFacebookChannelField () {
       return this.requestFacebookChannelField(true);
     }
@@ -9044,11 +9148,25 @@ public class Business extends APINode {
       this.requestField("facebook_channel", value);
       return this;
     }
+    public APIRequestGetCommerceMerchantSettings requestFeatureEligibilityField () {
+      return this.requestFeatureEligibilityField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestFeatureEligibilityField (boolean value) {
+      this.requestField("feature_eligibility", value);
+      return this;
+    }
     public APIRequestGetCommerceMerchantSettings requestHasDiscountCodeField () {
       return this.requestHasDiscountCodeField(true);
     }
     public APIRequestGetCommerceMerchantSettings requestHasDiscountCodeField (boolean value) {
       this.requestField("has_discount_code", value);
+      return this;
+    }
+    public APIRequestGetCommerceMerchantSettings requestHasOnsiteIntentField () {
+      return this.requestHasOnsiteIntentField(true);
+    }
+    public APIRequestGetCommerceMerchantSettings requestHasOnsiteIntentField (boolean value) {
+      this.requestField("has_onsite_intent", value);
       return this;
     }
     public APIRequestGetCommerceMerchantSettings requestIdField () {
@@ -9894,6 +10012,120 @@ public class Business extends APINode {
 
   }
 
+  public static class APIRequestGetExtendedCreditApplications extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "only_show_pending",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetExtendedCreditApplications.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetExtendedCreditApplications(String nodeId, APIContext context) {
+      super(context, nodeId, "/extendedcreditapplications", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetExtendedCreditApplications setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetExtendedCreditApplications setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetExtendedCreditApplications setOnlyShowPending (Boolean onlyShowPending) {
+      this.setParam("only_show_pending", onlyShowPending);
+      return this;
+    }
+    public APIRequestGetExtendedCreditApplications setOnlyShowPending (String onlyShowPending) {
+      this.setParam("only_show_pending", onlyShowPending);
+      return this;
+    }
+
+    public APIRequestGetExtendedCreditApplications requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetExtendedCreditApplications requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetExtendedCreditApplications requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetExtendedCreditApplications requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetExtendedCreditApplications requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetExtendedCreditApplications requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetExtendedCredits extends APIRequest<ExtendedCredit> {
 
     APINodeList<ExtendedCredit> lastResponse = null;
@@ -9913,7 +10145,6 @@ public class Business extends APINode {
       "id",
       "is_access_revoked",
       "is_automated_experience",
-      "last_payment_time",
       "legal_entity_name",
       "liable_biz_name",
       "max_balance",
@@ -10070,13 +10301,6 @@ public class Business extends APINode {
     }
     public APIRequestGetExtendedCredits requestIsAutomatedExperienceField (boolean value) {
       this.requestField("is_automated_experience", value);
-      return this;
-    }
-    public APIRequestGetExtendedCredits requestLastPaymentTimeField () {
-      return this.requestLastPaymentTimeField(true);
-    }
-    public APIRequestGetExtendedCredits requestLastPaymentTimeField (boolean value) {
-      this.requestField("last_payment_time", value);
       return this;
     }
     public APIRequestGetExtendedCredits requestLegalEntityNameField () {
@@ -10730,6 +10954,222 @@ public class Business extends APINode {
     }
     public APIRequestGetInstagramAccounts requestUsernameField (boolean value) {
       this.requestField("username", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetInstagramBusinessAccounts extends APIRequest<IGUser> {
+
+    APINodeList<IGUser> lastResponse = null;
+    @Override
+    public APINodeList<IGUser> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "biography",
+      "business_discovery",
+      "followers_count",
+      "follows_count",
+      "id",
+      "ig_id",
+      "media_count",
+      "mentioned_comment",
+      "mentioned_media",
+      "name",
+      "profile_picture_url",
+      "shopping_review_status",
+      "username",
+      "website",
+    };
+
+    @Override
+    public APINodeList<IGUser> parseResponse(String response, String header) throws APIException {
+      return IGUser.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<IGUser> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<IGUser> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<IGUser>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<IGUser>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<IGUser>>() {
+           public APINodeList<IGUser> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetInstagramBusinessAccounts.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetInstagramBusinessAccounts(String nodeId, APIContext context) {
+      super(context, nodeId, "/instagram_business_accounts", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetInstagramBusinessAccounts setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInstagramBusinessAccounts setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetInstagramBusinessAccounts requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetInstagramBusinessAccounts requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInstagramBusinessAccounts requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetInstagramBusinessAccounts requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInstagramBusinessAccounts requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInstagramBusinessAccounts requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetInstagramBusinessAccounts requestBiographyField () {
+      return this.requestBiographyField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestBiographyField (boolean value) {
+      this.requestField("biography", value);
+      return this;
+    }
+    public APIRequestGetInstagramBusinessAccounts requestBusinessDiscoveryField () {
+      return this.requestBusinessDiscoveryField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestBusinessDiscoveryField (boolean value) {
+      this.requestField("business_discovery", value);
+      return this;
+    }
+    public APIRequestGetInstagramBusinessAccounts requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
+      return this;
+    }
+    public APIRequestGetInstagramBusinessAccounts requestFollowsCountField () {
+      return this.requestFollowsCountField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestFollowsCountField (boolean value) {
+      this.requestField("follows_count", value);
+      return this;
+    }
+    public APIRequestGetInstagramBusinessAccounts requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetInstagramBusinessAccounts requestIgIdField () {
+      return this.requestIgIdField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestIgIdField (boolean value) {
+      this.requestField("ig_id", value);
+      return this;
+    }
+    public APIRequestGetInstagramBusinessAccounts requestMediaCountField () {
+      return this.requestMediaCountField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestMediaCountField (boolean value) {
+      this.requestField("media_count", value);
+      return this;
+    }
+    public APIRequestGetInstagramBusinessAccounts requestMentionedCommentField () {
+      return this.requestMentionedCommentField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestMentionedCommentField (boolean value) {
+      this.requestField("mentioned_comment", value);
+      return this;
+    }
+    public APIRequestGetInstagramBusinessAccounts requestMentionedMediaField () {
+      return this.requestMentionedMediaField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestMentionedMediaField (boolean value) {
+      this.requestField("mentioned_media", value);
+      return this;
+    }
+    public APIRequestGetInstagramBusinessAccounts requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetInstagramBusinessAccounts requestProfilePictureUrlField () {
+      return this.requestProfilePictureUrlField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestProfilePictureUrlField (boolean value) {
+      this.requestField("profile_picture_url", value);
+      return this;
+    }
+    public APIRequestGetInstagramBusinessAccounts requestShoppingReviewStatusField () {
+      return this.requestShoppingReviewStatusField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestShoppingReviewStatusField (boolean value) {
+      this.requestField("shopping_review_status", value);
+      return this;
+    }
+    public APIRequestGetInstagramBusinessAccounts requestUsernameField () {
+      return this.requestUsernameField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestUsernameField (boolean value) {
+      this.requestField("username", value);
+      return this;
+    }
+    public APIRequestGetInstagramBusinessAccounts requestWebsiteField () {
+      return this.requestWebsiteField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestWebsiteField (boolean value) {
+      this.requestField("website", value);
       return this;
     }
   }
@@ -11561,7 +12001,6 @@ public class Business extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "account_status",
-      "ad_account_creation_request",
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
@@ -11722,13 +12161,6 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedAdAccounts requestAccountStatusField (boolean value) {
       this.requestField("account_status", value);
-      return this;
-    }
-    public APIRequestGetOwnedAdAccounts requestAdAccountCreationRequestField () {
-      return this.requestAdAccountCreationRequestField(true);
-    }
-    public APIRequestGetOwnedAdAccounts requestAdAccountCreationRequestField (boolean value) {
-      this.requestField("ad_account_creation_request", value);
       return this;
     }
     public APIRequestGetOwnedAdAccounts requestAdAccountPromotableObjectsField () {
@@ -12259,6 +12691,7 @@ public class Business extends APINode {
       "android_key_hash",
       "android_sdk_error_categories",
       "app_domains",
+      "app_events_config",
       "app_events_feature_bitmask",
       "app_events_session_timeout",
       "app_install_tracked",
@@ -12484,6 +12917,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedApps requestAppDomainsField (boolean value) {
       this.requestField("app_domains", value);
+      return this;
+    }
+    public APIRequestGetOwnedApps requestAppEventsConfigField () {
+      return this.requestAppEventsConfigField(true);
+    }
+    public APIRequestGetOwnedApps requestAppEventsConfigField (boolean value) {
+      this.requestField("app_events_config", value);
       return this;
     }
     public APIRequestGetOwnedApps requestAppEventsFeatureBitmaskField () {
@@ -14032,6 +14472,7 @@ public class Business extends APINode {
       "checkins",
       "company_overview",
       "connected_instagram_account",
+      "connected_page_backed_instagram_account",
       "contact_address",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
@@ -14050,6 +14491,7 @@ public class Business extends APINode {
       "fan_count",
       "featured_video",
       "features",
+      "followers_count",
       "food_styles",
       "founded",
       "general_info",
@@ -14058,6 +14500,7 @@ public class Business extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_number",
       "hometown",
@@ -14402,6 +14845,13 @@ public class Business extends APINode {
       this.requestField("connected_instagram_account", value);
       return this;
     }
+    public APIRequestGetOwnedPages requestConnectedPageBackedInstagramAccountField () {
+      return this.requestConnectedPageBackedInstagramAccountField(true);
+    }
+    public APIRequestGetOwnedPages requestConnectedPageBackedInstagramAccountField (boolean value) {
+      this.requestField("connected_page_backed_instagram_account", value);
+      return this;
+    }
     public APIRequestGetOwnedPages requestContactAddressField () {
       return this.requestContactAddressField(true);
     }
@@ -14528,6 +14978,13 @@ public class Business extends APINode {
       this.requestField("features", value);
       return this;
     }
+    public APIRequestGetOwnedPages requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
+    }
+    public APIRequestGetOwnedPages requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
+      return this;
+    }
     public APIRequestGetOwnedPages requestFoodStylesField () {
       return this.requestFoodStylesField(true);
     }
@@ -14582,6 +15039,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedPages requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetOwnedPages requestHasTransitionedToNewPageExperienceField () {
+      return this.requestHasTransitionedToNewPageExperienceField(true);
+    }
+    public APIRequestGetOwnedPages requestHasTransitionedToNewPageExperienceField (boolean value) {
+      this.requestField("has_transitioned_to_new_page_experience", value);
       return this;
     }
     public APIRequestGetOwnedPages requestHasWhatsappBusinessNumberField () {
@@ -15371,6 +15835,7 @@ public class Business extends APINode {
       "first_party_cookie_status",
       "id",
       "is_created_by_business",
+      "is_crm",
       "is_unavailable",
       "last_fired_time",
       "name",
@@ -15535,6 +16000,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedPixels requestIsCreatedByBusinessField (boolean value) {
       this.requestField("is_created_by_business", value);
+      return this;
+    }
+    public APIRequestGetOwnedPixels requestIsCrmField () {
+      return this.requestIsCrmField(true);
+    }
+    public APIRequestGetOwnedPixels requestIsCrmField (boolean value) {
+      this.requestField("is_crm", value);
       return this;
     }
     public APIRequestGetOwnedPixels requestIsUnavailableField () {
@@ -15784,13 +16256,12 @@ public class Business extends APINode {
     public static final String[] PARAMS = {
       "catalog_segment_filter",
       "catalog_segment_product_set_id",
-      "commerce_merchant_settings",
       "da_display_settings",
       "destination_catalog_settings",
       "flight_catalog_settings",
       "name",
-      "onsite_commerce_merchant",
       "parent_catalog_id",
+      "partner_integration",
       "store_catalog_settings",
       "vertical",
     };
@@ -15865,15 +16336,6 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestCreateOwnedProductCatalog setCommerceMerchantSettings (Object commerceMerchantSettings) {
-      this.setParam("commerce_merchant_settings", commerceMerchantSettings);
-      return this;
-    }
-    public APIRequestCreateOwnedProductCatalog setCommerceMerchantSettings (String commerceMerchantSettings) {
-      this.setParam("commerce_merchant_settings", commerceMerchantSettings);
-      return this;
-    }
-
     public APIRequestCreateOwnedProductCatalog setDaDisplaySettings (Object daDisplaySettings) {
       this.setParam("da_display_settings", daDisplaySettings);
       return this;
@@ -15906,17 +16368,17 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestCreateOwnedProductCatalog setOnsiteCommerceMerchant (Object onsiteCommerceMerchant) {
-      this.setParam("onsite_commerce_merchant", onsiteCommerceMerchant);
-      return this;
-    }
-    public APIRequestCreateOwnedProductCatalog setOnsiteCommerceMerchant (String onsiteCommerceMerchant) {
-      this.setParam("onsite_commerce_merchant", onsiteCommerceMerchant);
+    public APIRequestCreateOwnedProductCatalog setParentCatalogId (String parentCatalogId) {
+      this.setParam("parent_catalog_id", parentCatalogId);
       return this;
     }
 
-    public APIRequestCreateOwnedProductCatalog setParentCatalogId (String parentCatalogId) {
-      this.setParam("parent_catalog_id", parentCatalogId);
+    public APIRequestCreateOwnedProductCatalog setPartnerIntegration (Map<String, String> partnerIntegration) {
+      this.setParam("partner_integration", partnerIntegration);
+      return this;
+    }
+    public APIRequestCreateOwnedProductCatalog setPartnerIntegration (String partnerIntegration) {
+      this.setParam("partner_integration", partnerIntegration);
       return this;
     }
 
@@ -15974,6 +16436,214 @@ public class Business extends APINode {
       return this;
     }
 
+  }
+
+  public static class APIRequestGetOwnedWhatsAppBusinessAccounts extends APIRequest<WhatsAppBusinessAccount> {
+
+    APINodeList<WhatsAppBusinessAccount> lastResponse = null;
+    @Override
+    public APINodeList<WhatsAppBusinessAccount> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "account_review_status",
+      "analytics",
+      "creation_time",
+      "currency",
+      "id",
+      "message_template_namespace",
+      "name",
+      "on_behalf_of_business_info",
+      "owner_business_info",
+      "primary_funding_id",
+      "purchase_order_number",
+      "status",
+      "timezone_id",
+    };
+
+    @Override
+    public APINodeList<WhatsAppBusinessAccount> parseResponse(String response, String header) throws APIException {
+      return WhatsAppBusinessAccount.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<WhatsAppBusinessAccount> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<WhatsAppBusinessAccount> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<WhatsAppBusinessAccount>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<WhatsAppBusinessAccount>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<WhatsAppBusinessAccount>>() {
+           public APINodeList<WhatsAppBusinessAccount> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetOwnedWhatsAppBusinessAccounts.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetOwnedWhatsAppBusinessAccounts(String nodeId, APIContext context) {
+      super(context, nodeId, "/owned_whatsapp_business_accounts", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetOwnedWhatsAppBusinessAccounts setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOwnedWhatsAppBusinessAccounts setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestAccountReviewStatusField () {
+      return this.requestAccountReviewStatusField(true);
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestAccountReviewStatusField (boolean value) {
+      this.requestField("account_review_status", value);
+      return this;
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestAnalyticsField () {
+      return this.requestAnalyticsField(true);
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestAnalyticsField (boolean value) {
+      this.requestField("analytics", value);
+      return this;
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestCreationTimeField () {
+      return this.requestCreationTimeField(true);
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestCreationTimeField (boolean value) {
+      this.requestField("creation_time", value);
+      return this;
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestCurrencyField () {
+      return this.requestCurrencyField(true);
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestCurrencyField (boolean value) {
+      this.requestField("currency", value);
+      return this;
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestMessageTemplateNamespaceField () {
+      return this.requestMessageTemplateNamespaceField(true);
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestMessageTemplateNamespaceField (boolean value) {
+      this.requestField("message_template_namespace", value);
+      return this;
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestOnBehalfOfBusinessInfoField () {
+      return this.requestOnBehalfOfBusinessInfoField(true);
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestOnBehalfOfBusinessInfoField (boolean value) {
+      this.requestField("on_behalf_of_business_info", value);
+      return this;
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestOwnerBusinessInfoField () {
+      return this.requestOwnerBusinessInfoField(true);
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestOwnerBusinessInfoField (boolean value) {
+      this.requestField("owner_business_info", value);
+      return this;
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestPrimaryFundingIdField () {
+      return this.requestPrimaryFundingIdField(true);
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestPrimaryFundingIdField (boolean value) {
+      this.requestField("primary_funding_id", value);
+      return this;
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestPurchaseOrderNumberField () {
+      return this.requestPurchaseOrderNumberField(true);
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestPurchaseOrderNumberField (boolean value) {
+      this.requestField("purchase_order_number", value);
+      return this;
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestTimezoneIdField () {
+      return this.requestTimezoneIdField(true);
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestTimezoneIdField (boolean value) {
+      this.requestField("timezone_id", value);
+      return this;
+    }
   }
 
   public static class APIRequestDeletePages extends APIRequest<APINode> {
@@ -17546,6 +18216,110 @@ public class Business extends APINode {
     }
   }
 
+  public static class APIRequestGetSpacoDataSetCollections extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetSpacoDataSetCollections.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetSpacoDataSetCollections(String nodeId, APIContext context) {
+      super(context, nodeId, "/spaco_dataset_collections", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetSpacoDataSetCollections setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSpacoDataSetCollections setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetSpacoDataSetCollections requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetSpacoDataSetCollections requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSpacoDataSetCollections requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetSpacoDataSetCollections requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSpacoDataSetCollections requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSpacoDataSetCollections requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetSystemUsers extends APIRequest<SystemUser> {
 
     APINodeList<SystemUser> lastResponse = null;
@@ -18623,8 +19397,46 @@ public class Business extends APINode {
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("ANALYZE")
       VALUE_ANALYZE("ANALYZE"),
+      @SerializedName("CASHIER_ROLE")
+      VALUE_CASHIER_ROLE("CASHIER_ROLE"),
+      @SerializedName("CREATE_CONTENT")
+      VALUE_CREATE_CONTENT("CREATE_CONTENT"),
       @SerializedName("MANAGE")
       VALUE_MANAGE("MANAGE"),
+      @SerializedName("MANAGE_JOBS")
+      VALUE_MANAGE_JOBS("MANAGE_JOBS"),
+      @SerializedName("MANAGE_LEADS")
+      VALUE_MANAGE_LEADS("MANAGE_LEADS"),
+      @SerializedName("MESSAGING")
+      VALUE_MESSAGING("MESSAGING"),
+      @SerializedName("MODERATE")
+      VALUE_MODERATE("MODERATE"),
+      @SerializedName("MODERATE_COMMUNITY")
+      VALUE_MODERATE_COMMUNITY("MODERATE_COMMUNITY"),
+      @SerializedName("PAGES_MESSAGING")
+      VALUE_PAGES_MESSAGING("PAGES_MESSAGING"),
+      @SerializedName("PAGES_MESSAGING_SUBSCRIPTIONS")
+      VALUE_PAGES_MESSAGING_SUBSCRIPTIONS("PAGES_MESSAGING_SUBSCRIPTIONS"),
+      @SerializedName("PROFILE_PLUS_ADVERTISE")
+      VALUE_PROFILE_PLUS_ADVERTISE("PROFILE_PLUS_ADVERTISE"),
+      @SerializedName("PROFILE_PLUS_ANALYZE")
+      VALUE_PROFILE_PLUS_ANALYZE("PROFILE_PLUS_ANALYZE"),
+      @SerializedName("PROFILE_PLUS_CREATE_CONTENT")
+      VALUE_PROFILE_PLUS_CREATE_CONTENT("PROFILE_PLUS_CREATE_CONTENT"),
+      @SerializedName("PROFILE_PLUS_FACEBOOK_ACCESS")
+      VALUE_PROFILE_PLUS_FACEBOOK_ACCESS("PROFILE_PLUS_FACEBOOK_ACCESS"),
+      @SerializedName("PROFILE_PLUS_FULL_CONTROL")
+      VALUE_PROFILE_PLUS_FULL_CONTROL("PROFILE_PLUS_FULL_CONTROL"),
+      @SerializedName("PROFILE_PLUS_MANAGE")
+      VALUE_PROFILE_PLUS_MANAGE("PROFILE_PLUS_MANAGE"),
+      @SerializedName("PROFILE_PLUS_MESSAGING")
+      VALUE_PROFILE_PLUS_MESSAGING("PROFILE_PLUS_MESSAGING"),
+      @SerializedName("PROFILE_PLUS_MODERATE")
+      VALUE_PROFILE_PLUS_MODERATE("PROFILE_PLUS_MODERATE"),
+      @SerializedName("READ_PAGE_MAILBOXES")
+      VALUE_READ_PAGE_MAILBOXES("READ_PAGE_MAILBOXES"),
+      @SerializedName("VIEW_MONETIZATION_INSIGHTS")
+      VALUE_VIEW_MONETIZATION_INSIGHTS("VIEW_MONETIZATION_INSIGHTS"),
       ;
 
       private String value;
@@ -18693,8 +19505,10 @@ public class Business extends APINode {
       VALUE_PROFILE_PLUS_ANALYZE("PROFILE_PLUS_ANALYZE"),
       @SerializedName("PROFILE_PLUS_CREATE_CONTENT")
       VALUE_PROFILE_PLUS_CREATE_CONTENT("PROFILE_PLUS_CREATE_CONTENT"),
-      @SerializedName("PROFILE_PLUS_LIVE_STREAM_MODERATION")
-      VALUE_PROFILE_PLUS_LIVE_STREAM_MODERATION("PROFILE_PLUS_LIVE_STREAM_MODERATION"),
+      @SerializedName("PROFILE_PLUS_FACEBOOK_ACCESS")
+      VALUE_PROFILE_PLUS_FACEBOOK_ACCESS("PROFILE_PLUS_FACEBOOK_ACCESS"),
+      @SerializedName("PROFILE_PLUS_FULL_CONTROL")
+      VALUE_PROFILE_PLUS_FULL_CONTROL("PROFILE_PLUS_FULL_CONTROL"),
       @SerializedName("PROFILE_PLUS_MANAGE")
       VALUE_PROFILE_PLUS_MANAGE("PROFILE_PLUS_MANAGE"),
       @SerializedName("PROFILE_PLUS_MESSAGING")

@@ -276,10 +276,6 @@ public class AdStudyObjective extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGetAdPlacePageSets getAdPlacePageSets() {
-    return new APIRequestGetAdPlacePageSets(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetAdsPixels getAdsPixels() {
     return new APIRequestGetAdsPixels(this.getPrefixedId().toString(), context);
   }
@@ -296,16 +292,8 @@ public class AdStudyObjective extends APINode {
     return new APIRequestGetOfflineConversionDataSets(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetOffsitePixels getOffsitePixels() {
-    return new APIRequestGetOffsitePixels(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetPartnerStudies getPartnerStudies() {
     return new APIRequestGetPartnerStudies(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestDelete delete() {
-    return new APIRequestDelete(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGet get() {
@@ -343,158 +331,6 @@ public class AdStudyObjective extends APINode {
 
 
 
-  public static class APIRequestGetAdPlacePageSets extends APIRequest<AdPlacePageSet> {
-
-    APINodeList<AdPlacePageSet> lastResponse = null;
-    @Override
-    public APINodeList<AdPlacePageSet> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "account_id",
-      "id",
-      "location_types",
-      "name",
-      "pages_count",
-      "parent_page",
-    };
-
-    @Override
-    public APINodeList<AdPlacePageSet> parseResponse(String response, String header) throws APIException {
-      return AdPlacePageSet.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<AdPlacePageSet> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<AdPlacePageSet> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<AdPlacePageSet>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<AdPlacePageSet>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<AdPlacePageSet>>() {
-           public APINodeList<AdPlacePageSet> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetAdPlacePageSets.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetAdPlacePageSets(String nodeId, APIContext context) {
-      super(context, nodeId, "/ad_place_page_sets", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetAdPlacePageSets setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdPlacePageSets setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetAdPlacePageSets requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetAdPlacePageSets requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdPlacePageSets requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetAdPlacePageSets requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdPlacePageSets requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdPlacePageSets requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetAdPlacePageSets requestAccountIdField () {
-      return this.requestAccountIdField(true);
-    }
-    public APIRequestGetAdPlacePageSets requestAccountIdField (boolean value) {
-      this.requestField("account_id", value);
-      return this;
-    }
-    public APIRequestGetAdPlacePageSets requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetAdPlacePageSets requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetAdPlacePageSets requestLocationTypesField () {
-      return this.requestLocationTypesField(true);
-    }
-    public APIRequestGetAdPlacePageSets requestLocationTypesField (boolean value) {
-      this.requestField("location_types", value);
-      return this;
-    }
-    public APIRequestGetAdPlacePageSets requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetAdPlacePageSets requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetAdPlacePageSets requestPagesCountField () {
-      return this.requestPagesCountField(true);
-    }
-    public APIRequestGetAdPlacePageSets requestPagesCountField (boolean value) {
-      this.requestField("pages_count", value);
-      return this;
-    }
-    public APIRequestGetAdPlacePageSets requestParentPageField () {
-      return this.requestParentPageField(true);
-    }
-    public APIRequestGetAdPlacePageSets requestParentPageField (boolean value) {
-      this.requestField("parent_page", value);
-      return this;
-    }
-  }
-
   public static class APIRequestGetAdsPixels extends APIRequest<AdsPixel> {
 
     APINodeList<AdsPixel> lastResponse = null;
@@ -516,6 +352,7 @@ public class AdStudyObjective extends APINode {
       "first_party_cookie_status",
       "id",
       "is_created_by_business",
+      "is_crm",
       "is_unavailable",
       "last_fired_time",
       "name",
@@ -682,6 +519,13 @@ public class AdStudyObjective extends APINode {
       this.requestField("is_created_by_business", value);
       return this;
     }
+    public APIRequestGetAdsPixels requestIsCrmField () {
+      return this.requestIsCrmField(true);
+    }
+    public APIRequestGetAdsPixels requestIsCrmField (boolean value) {
+      this.requestField("is_crm", value);
+      return this;
+    }
     public APIRequestGetAdsPixels requestIsUnavailableField () {
       return this.requestIsUnavailableField(true);
     }
@@ -736,6 +580,7 @@ public class AdStudyObjective extends APINode {
       "android_key_hash",
       "android_sdk_error_categories",
       "app_domains",
+      "app_events_config",
       "app_events_feature_bitmask",
       "app_events_session_timeout",
       "app_install_tracked",
@@ -961,6 +806,13 @@ public class AdStudyObjective extends APINode {
     }
     public APIRequestGetApplications requestAppDomainsField (boolean value) {
       this.requestField("app_domains", value);
+      return this;
+    }
+    public APIRequestGetApplications requestAppEventsConfigField () {
+      return this.requestAppEventsConfigField(true);
+    }
+    public APIRequestGetApplications requestAppEventsConfigField (boolean value) {
+      this.requestField("app_events_config", value);
       return this;
     }
     public APIRequestGetApplications requestAppEventsFeatureBitmaskField () {
@@ -2143,158 +1995,6 @@ public class AdStudyObjective extends APINode {
     }
   }
 
-  public static class APIRequestGetOffsitePixels extends APIRequest<OffsitePixel> {
-
-    APINodeList<OffsitePixel> lastResponse = null;
-    @Override
-    public APINodeList<OffsitePixel> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "creator",
-      "id",
-      "js_pixel",
-      "last_firing_time",
-      "name",
-      "tag",
-    };
-
-    @Override
-    public APINodeList<OffsitePixel> parseResponse(String response, String header) throws APIException {
-      return OffsitePixel.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<OffsitePixel> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<OffsitePixel> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<OffsitePixel>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<OffsitePixel>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<OffsitePixel>>() {
-           public APINodeList<OffsitePixel> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetOffsitePixels.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetOffsitePixels(String nodeId, APIContext context) {
-      super(context, nodeId, "/offsitepixels", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetOffsitePixels setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetOffsitePixels setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetOffsitePixels requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetOffsitePixels requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetOffsitePixels requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetOffsitePixels requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetOffsitePixels requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetOffsitePixels requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetOffsitePixels requestCreatorField () {
-      return this.requestCreatorField(true);
-    }
-    public APIRequestGetOffsitePixels requestCreatorField (boolean value) {
-      this.requestField("creator", value);
-      return this;
-    }
-    public APIRequestGetOffsitePixels requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetOffsitePixels requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetOffsitePixels requestJsPixelField () {
-      return this.requestJsPixelField(true);
-    }
-    public APIRequestGetOffsitePixels requestJsPixelField (boolean value) {
-      this.requestField("js_pixel", value);
-      return this;
-    }
-    public APIRequestGetOffsitePixels requestLastFiringTimeField () {
-      return this.requestLastFiringTimeField(true);
-    }
-    public APIRequestGetOffsitePixels requestLastFiringTimeField (boolean value) {
-      this.requestField("last_firing_time", value);
-      return this;
-    }
-    public APIRequestGetOffsitePixels requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetOffsitePixels requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetOffsitePixels requestTagField () {
-      return this.requestTagField(true);
-    }
-    public APIRequestGetOffsitePixels requestTagField (boolean value) {
-      this.requestField("tag", value);
-      return this;
-    }
-  }
-
   public static class APIRequestGetPartnerStudies extends APIRequest<PartnerStudy> {
 
     APINodeList<PartnerStudy> lastResponse = null;
@@ -2543,110 +2243,6 @@ public class AdStudyObjective extends APINode {
     }
   }
 
-  public static class APIRequestDelete extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestDelete(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDelete setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDelete setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDelete requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDelete requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDelete requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDelete requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDelete requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDelete requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGet extends APIRequest<AdStudyObjective> {
 
     AdStudyObjective lastResponse = null;
@@ -2829,7 +2425,6 @@ public class AdStudyObjective extends APINode {
       "is_primary",
       "name",
       "offline_conversion_data_sets",
-      "offsitepixels",
       "product_catalogs",
       "product_sets",
       "type",
@@ -2941,15 +2536,6 @@ public class AdStudyObjective extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setOffsitepixels (List<Object> offsitepixels) {
-      this.setParam("offsitepixels", offsitepixels);
-      return this;
-    }
-    public APIRequestUpdate setOffsitepixels (String offsitepixels) {
-      this.setParam("offsitepixels", offsitepixels);
-      return this;
-    }
-
     public APIRequestUpdate setProductCatalogs (List<Object> productCatalogs) {
       this.setParam("product_catalogs", productCatalogs);
       return this;
@@ -3016,6 +2602,8 @@ public class AdStudyObjective extends APINode {
   }
 
   public static enum EnumType {
+      @SerializedName("AEP_CONVERSION")
+      VALUE_AEP_CONVERSION("AEP_CONVERSION"),
       @SerializedName("BRAND")
       VALUE_BRAND("BRAND"),
       @SerializedName("BRANDLIFT")
@@ -3026,6 +2614,8 @@ public class AdStudyObjective extends APINode {
       VALUE_MAE("MAE"),
       @SerializedName("MAI")
       VALUE_MAI("MAI"),
+      @SerializedName("MPC_CONVERSION")
+      VALUE_MPC_CONVERSION("MPC_CONVERSION"),
       @SerializedName("NONSALES")
       VALUE_NONSALES("NONSALES"),
       @SerializedName("PARTNER")

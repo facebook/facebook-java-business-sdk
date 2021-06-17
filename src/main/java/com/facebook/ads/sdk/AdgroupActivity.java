@@ -143,10 +143,10 @@ public class AdgroupActivity extends APINode {
   private String mTargetSpecIdNew = null;
   @SerializedName("target_spec_id_old")
   private String mTargetSpecIdOld = null;
-  @SerializedName("tracking_pixel_ids_new")
-  private List<String> mTrackingPixelIdsNew = null;
-  @SerializedName("tracking_pixel_ids_old")
-  private List<String> mTrackingPixelIdsOld = null;
+  @SerializedName("targets_spec_new")
+  private Object mTargetsSpecNew = null;
+  @SerializedName("targets_spec_old")
+  private Object mTargetsSpecOld = null;
   @SerializedName("tracking_specs_new")
   private List<Object> mTrackingSpecsNew = null;
   @SerializedName("tracking_specs_old")
@@ -561,12 +561,12 @@ public class AdgroupActivity extends APINode {
     return mTargetSpecIdOld;
   }
 
-  public List<String> getFieldTrackingPixelIdsNew() {
-    return mTrackingPixelIdsNew;
+  public Object getFieldTargetsSpecNew() {
+    return mTargetsSpecNew;
   }
 
-  public List<String> getFieldTrackingPixelIdsOld() {
-    return mTrackingPixelIdsOld;
+  public Object getFieldTargetsSpecOld() {
+    return mTargetsSpecOld;
   }
 
   public List<Object> getFieldTrackingSpecsNew() {
@@ -650,8 +650,8 @@ public class AdgroupActivity extends APINode {
       "stop_time_old",
       "target_spec_id_new",
       "target_spec_id_old",
-      "tracking_pixel_ids_new",
-      "tracking_pixel_ids_old",
+      "targets_spec_new",
+      "targets_spec_old",
       "tracking_specs_new",
       "tracking_specs_old",
       "update_time_new",
@@ -1057,18 +1057,18 @@ public class AdgroupActivity extends APINode {
       this.requestField("target_spec_id_old", value);
       return this;
     }
-    public APIRequestGet requestTrackingPixelIdsNewField () {
-      return this.requestTrackingPixelIdsNewField(true);
+    public APIRequestGet requestTargetsSpecNewField () {
+      return this.requestTargetsSpecNewField(true);
     }
-    public APIRequestGet requestTrackingPixelIdsNewField (boolean value) {
-      this.requestField("tracking_pixel_ids_new", value);
+    public APIRequestGet requestTargetsSpecNewField (boolean value) {
+      this.requestField("targets_spec_new", value);
       return this;
     }
-    public APIRequestGet requestTrackingPixelIdsOldField () {
-      return this.requestTrackingPixelIdsOldField(true);
+    public APIRequestGet requestTargetsSpecOldField () {
+      return this.requestTargetsSpecOldField(true);
     }
-    public APIRequestGet requestTrackingPixelIdsOldField (boolean value) {
-      this.requestField("tracking_pixel_ids_old", value);
+    public APIRequestGet requestTargetsSpecOldField (boolean value) {
+      this.requestField("targets_spec_old", value);
       return this;
     }
     public APIRequestGet requestTrackingSpecsNewField () {
@@ -1276,8 +1276,8 @@ public class AdgroupActivity extends APINode {
     this.mStopTimeOld = instance.mStopTimeOld;
     this.mTargetSpecIdNew = instance.mTargetSpecIdNew;
     this.mTargetSpecIdOld = instance.mTargetSpecIdOld;
-    this.mTrackingPixelIdsNew = instance.mTrackingPixelIdsNew;
-    this.mTrackingPixelIdsOld = instance.mTrackingPixelIdsOld;
+    this.mTargetsSpecNew = instance.mTargetsSpecNew;
+    this.mTargetsSpecOld = instance.mTargetsSpecOld;
     this.mTrackingSpecsNew = instance.mTrackingSpecsNew;
     this.mTrackingSpecsOld = instance.mTrackingSpecsOld;
     this.mUpdateTimeNew = instance.mUpdateTimeNew;

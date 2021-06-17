@@ -135,6 +135,10 @@ public class AdCampaignActivity extends APINode {
   private Long mPacingTypeNew = null;
   @SerializedName("pacing_type_old")
   private Long mPacingTypeOld = null;
+  @SerializedName("promoted_object_id_new")
+  private String mPromotedObjectIdNew = null;
+  @SerializedName("promoted_object_id_old")
+  private String mPromotedObjectIdOld = null;
   @SerializedName("run_status_new")
   private String mRunStatusNew = null;
   @SerializedName("run_status_old")
@@ -159,6 +163,10 @@ public class AdCampaignActivity extends APINode {
   private Object mTargetingExpansionNew = null;
   @SerializedName("targeting_expansion_old")
   private Object mTargetingExpansionOld = null;
+  @SerializedName("targeting_new")
+  private Object mTargetingNew = null;
+  @SerializedName("targeting_old")
+  private Object mTargetingOld = null;
   @SerializedName("updated_time_new")
   private String mUpdatedTimeNew = null;
   @SerializedName("updated_time_old")
@@ -537,6 +545,14 @@ public class AdCampaignActivity extends APINode {
     return mPacingTypeOld;
   }
 
+  public String getFieldPromotedObjectIdNew() {
+    return mPromotedObjectIdNew;
+  }
+
+  public String getFieldPromotedObjectIdOld() {
+    return mPromotedObjectIdOld;
+  }
+
   public String getFieldRunStatusNew() {
     return mRunStatusNew;
   }
@@ -583,6 +599,14 @@ public class AdCampaignActivity extends APINode {
 
   public Object getFieldTargetingExpansionOld() {
     return mTargetingExpansionOld;
+  }
+
+  public Object getFieldTargetingNew() {
+    return mTargetingNew;
+  }
+
+  public Object getFieldTargetingOld() {
+    return mTargetingOld;
   }
 
   public String getFieldUpdatedTimeNew() {
@@ -646,6 +670,8 @@ public class AdCampaignActivity extends APINode {
       "optimization_goal_old",
       "pacing_type_new",
       "pacing_type_old",
+      "promoted_object_id_new",
+      "promoted_object_id_old",
       "run_status_new",
       "run_status_old",
       "schedule_new",
@@ -658,6 +684,8 @@ public class AdCampaignActivity extends APINode {
       "stop_time_old",
       "targeting_expansion_new",
       "targeting_expansion_old",
+      "targeting_new",
+      "targeting_old",
       "updated_time_new",
       "updated_time_old",
     };
@@ -1031,6 +1059,20 @@ public class AdCampaignActivity extends APINode {
       this.requestField("pacing_type_old", value);
       return this;
     }
+    public APIRequestGet requestPromotedObjectIdNewField () {
+      return this.requestPromotedObjectIdNewField(true);
+    }
+    public APIRequestGet requestPromotedObjectIdNewField (boolean value) {
+      this.requestField("promoted_object_id_new", value);
+      return this;
+    }
+    public APIRequestGet requestPromotedObjectIdOldField () {
+      return this.requestPromotedObjectIdOldField(true);
+    }
+    public APIRequestGet requestPromotedObjectIdOldField (boolean value) {
+      this.requestField("promoted_object_id_old", value);
+      return this;
+    }
     public APIRequestGet requestRunStatusNewField () {
       return this.requestRunStatusNewField(true);
     }
@@ -1115,6 +1157,20 @@ public class AdCampaignActivity extends APINode {
       this.requestField("targeting_expansion_old", value);
       return this;
     }
+    public APIRequestGet requestTargetingNewField () {
+      return this.requestTargetingNewField(true);
+    }
+    public APIRequestGet requestTargetingNewField (boolean value) {
+      this.requestField("targeting_new", value);
+      return this;
+    }
+    public APIRequestGet requestTargetingOldField () {
+      return this.requestTargetingOldField(true);
+    }
+    public APIRequestGet requestTargetingOldField (boolean value) {
+      this.requestField("targeting_old", value);
+      return this;
+    }
     public APIRequestGet requestUpdatedTimeNewField () {
       return this.requestUpdatedTimeNewField(true);
     }
@@ -1138,8 +1194,6 @@ public class AdCampaignActivity extends APINode {
       VALUE_LOWEST_COST_WITHOUT_CAP("LOWEST_COST_WITHOUT_CAP"),
       @SerializedName("LOWEST_COST_WITH_BID_CAP")
       VALUE_LOWEST_COST_WITH_BID_CAP("LOWEST_COST_WITH_BID_CAP"),
-      @SerializedName("TARGET_COST")
-      VALUE_TARGET_COST("TARGET_COST"),
       ;
 
       private String value;
@@ -1161,8 +1215,6 @@ public class AdCampaignActivity extends APINode {
       VALUE_LOWEST_COST_WITHOUT_CAP("LOWEST_COST_WITHOUT_CAP"),
       @SerializedName("LOWEST_COST_WITH_BID_CAP")
       VALUE_LOWEST_COST_WITH_BID_CAP("LOWEST_COST_WITH_BID_CAP"),
-      @SerializedName("TARGET_COST")
-      VALUE_TARGET_COST("TARGET_COST"),
       ;
 
       private String value;
@@ -1186,6 +1238,8 @@ public class AdCampaignActivity extends APINode {
       VALUE_IMPRESSIONS("IMPRESSIONS"),
       @SerializedName("LINK_CLICKS")
       VALUE_LINK_CLICKS("LINK_CLICKS"),
+      @SerializedName("LISTING_INTERACTION")
+      VALUE_LISTING_INTERACTION("LISTING_INTERACTION"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
       @SerializedName("OFFER_CLAIMS")
@@ -1194,6 +1248,8 @@ public class AdCampaignActivity extends APINode {
       VALUE_PAGE_LIKES("PAGE_LIKES"),
       @SerializedName("POST_ENGAGEMENT")
       VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
+      @SerializedName("PURCHASE")
+      VALUE_PURCHASE("PURCHASE"),
       @SerializedName("THRUPLAY")
       VALUE_THRUPLAY("THRUPLAY"),
       ;
@@ -1219,6 +1275,8 @@ public class AdCampaignActivity extends APINode {
       VALUE_IMPRESSIONS("IMPRESSIONS"),
       @SerializedName("LINK_CLICKS")
       VALUE_LINK_CLICKS("LINK_CLICKS"),
+      @SerializedName("LISTING_INTERACTION")
+      VALUE_LISTING_INTERACTION("LISTING_INTERACTION"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
       @SerializedName("OFFER_CLAIMS")
@@ -1227,6 +1285,8 @@ public class AdCampaignActivity extends APINode {
       VALUE_PAGE_LIKES("PAGE_LIKES"),
       @SerializedName("POST_ENGAGEMENT")
       VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
+      @SerializedName("PURCHASE")
+      VALUE_PURCHASE("PURCHASE"),
       @SerializedName("THRUPLAY")
       VALUE_THRUPLAY("THRUPLAY"),
       ;
@@ -1280,6 +1340,8 @@ public class AdCampaignActivity extends APINode {
       VALUE_PAGE_LIKES("PAGE_LIKES"),
       @SerializedName("POST_ENGAGEMENT")
       VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
+      @SerializedName("QUALITY_CALL")
+      VALUE_QUALITY_CALL("QUALITY_CALL"),
       @SerializedName("QUALITY_LEAD")
       VALUE_QUALITY_LEAD("QUALITY_LEAD"),
       @SerializedName("REACH")
@@ -1347,6 +1409,8 @@ public class AdCampaignActivity extends APINode {
       VALUE_PAGE_LIKES("PAGE_LIKES"),
       @SerializedName("POST_ENGAGEMENT")
       VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
+      @SerializedName("QUALITY_CALL")
+      VALUE_QUALITY_CALL("QUALITY_CALL"),
       @SerializedName("QUALITY_LEAD")
       VALUE_QUALITY_LEAD("QUALITY_LEAD"),
       @SerializedName("REACH")
@@ -1432,6 +1496,8 @@ public class AdCampaignActivity extends APINode {
     this.mOptimizationGoalOld = instance.mOptimizationGoalOld;
     this.mPacingTypeNew = instance.mPacingTypeNew;
     this.mPacingTypeOld = instance.mPacingTypeOld;
+    this.mPromotedObjectIdNew = instance.mPromotedObjectIdNew;
+    this.mPromotedObjectIdOld = instance.mPromotedObjectIdOld;
     this.mRunStatusNew = instance.mRunStatusNew;
     this.mRunStatusOld = instance.mRunStatusOld;
     this.mScheduleNew = instance.mScheduleNew;
@@ -1444,6 +1510,8 @@ public class AdCampaignActivity extends APINode {
     this.mStopTimeOld = instance.mStopTimeOld;
     this.mTargetingExpansionNew = instance.mTargetingExpansionNew;
     this.mTargetingExpansionOld = instance.mTargetingExpansionOld;
+    this.mTargetingNew = instance.mTargetingNew;
+    this.mTargetingOld = instance.mTargetingOld;
     this.mUpdatedTimeNew = instance.mUpdatedTimeNew;
     this.mUpdatedTimeOld = instance.mUpdatedTimeOld;
     this.context = instance.context;

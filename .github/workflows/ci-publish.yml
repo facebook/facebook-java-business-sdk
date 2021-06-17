@@ -1,0 +1,36 @@
+name: Publish package to the Maven Central Repository
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Maven Central Repository
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Configure GPG Key
+        run: |
+          mkdir -p ~/.gnupg/
+          printf "${GPG_SIGNING_KEY}" | base64 --decode > ~/.gnupg/private.key
+          gpg --import --no-tty --batch --yes ~/.gnupg/private.key
+          echo use-agent >> ~/.gnupg/gpg.conf
+          echo pinentry-mode loopback >> ~/.gnupg/gpg.conf
+          echo allow-loopback-pinentry >> ~/.gnupg/gpg-agent.conf
+          echo RELOADAGENT | gpg-connect-agent
+        env:
+          GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
+      - name: Configure Maven Credentials and GPG Key
+        run: ./release.sh config_maven
+        env:
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+          GPG_KEYNAME: ${{ secrets.GPG_KEYNAME }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+      - name: Publish package
+        run: mvn -Djava.net.preferIPv6Addresses=true clean deploy --settings="./.github/workflows/settings.xml"

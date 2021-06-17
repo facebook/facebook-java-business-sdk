@@ -334,7 +334,6 @@ public class AdStudyCell extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "account_status",
-      "ad_account_creation_request",
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
@@ -495,13 +494,6 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetAdAccounts requestAccountStatusField (boolean value) {
       this.requestField("account_status", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestAdAccountCreationRequestField () {
-      return this.requestAdAccountCreationRequestField(true);
-    }
-    public APIRequestGetAdAccounts requestAdAccountCreationRequestField (boolean value) {
-      this.requestField("ad_account_creation_request", value);
       return this;
     }
     public APIRequestGetAdAccounts requestAdAccountPromotableObjectsField () {
@@ -1445,6 +1437,7 @@ public class AdStudyCell extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
+      "ad_strategy_id",
       "adlabels",
       "bid_strategy",
       "boosted_object_id",
@@ -1459,6 +1452,7 @@ public class AdStudyCell extends APINode {
       "daily_budget",
       "effective_status",
       "id",
+      "is_skadnetwork_attribution",
       "issues_info",
       "last_budget_toggling_time",
       "lifetime_budget",
@@ -1467,6 +1461,7 @@ public class AdStudyCell extends APINode {
       "pacing_type",
       "promoted_object",
       "recommendations",
+      "smart_promotion_type",
       "source_campaign",
       "source_campaign_id",
       "special_ad_categories",
@@ -1576,6 +1571,13 @@ public class AdStudyCell extends APINode {
       this.requestField("account_id", value);
       return this;
     }
+    public APIRequestGetCampaigns requestAdStrategyIdField () {
+      return this.requestAdStrategyIdField(true);
+    }
+    public APIRequestGetCampaigns requestAdStrategyIdField (boolean value) {
+      this.requestField("ad_strategy_id", value);
+      return this;
+    }
     public APIRequestGetCampaigns requestAdlabelsField () {
       return this.requestAdlabelsField(true);
     }
@@ -1674,6 +1676,13 @@ public class AdStudyCell extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetCampaigns requestIsSkadnetworkAttributionField () {
+      return this.requestIsSkadnetworkAttributionField(true);
+    }
+    public APIRequestGetCampaigns requestIsSkadnetworkAttributionField (boolean value) {
+      this.requestField("is_skadnetwork_attribution", value);
+      return this;
+    }
     public APIRequestGetCampaigns requestIssuesInfoField () {
       return this.requestIssuesInfoField(true);
     }
@@ -1728,6 +1737,13 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetCampaigns requestRecommendationsField (boolean value) {
       this.requestField("recommendations", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestSmartPromotionTypeField () {
+      return this.requestSmartPromotionTypeField(true);
+    }
+    public APIRequestGetCampaigns requestSmartPromotionTypeField (boolean value) {
+      this.requestField("smart_promotion_type", value);
       return this;
     }
     public APIRequestGetCampaigns requestSourceCampaignField () {

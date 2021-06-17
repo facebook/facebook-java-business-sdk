@@ -349,6 +349,8 @@ public class AdAccountAdVolume extends APINode {
 
 
   public static enum EnumRecommendationType {
+      @SerializedName("ACO_TOGGLE")
+      VALUE_ACO_TOGGLE("ACO_TOGGLE"),
       @SerializedName("AGGREGATED_BID_LIMITED")
       VALUE_AGGREGATED_BID_LIMITED("AGGREGATED_BID_LIMITED"),
       @SerializedName("AGGREGATED_BUDGET_LIMITED")

@@ -339,7 +339,6 @@ public class SystemUser extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "account_status",
-      "ad_account_creation_request",
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
@@ -500,13 +499,6 @@ public class SystemUser extends APINode {
     }
     public APIRequestGetAssignedAdAccounts requestAccountStatusField (boolean value) {
       this.requestField("account_status", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestAdAccountCreationRequestField () {
-      return this.requestAdAccountCreationRequestField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestAdAccountCreationRequestField (boolean value) {
-      this.requestField("ad_account_creation_request", value);
       return this;
     }
     public APIRequestGetAssignedAdAccounts requestAdAccountPromotableObjectsField () {
@@ -1070,6 +1062,7 @@ public class SystemUser extends APINode {
       "checkins",
       "company_overview",
       "connected_instagram_account",
+      "connected_page_backed_instagram_account",
       "contact_address",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
@@ -1088,6 +1081,7 @@ public class SystemUser extends APINode {
       "fan_count",
       "featured_video",
       "features",
+      "followers_count",
       "food_styles",
       "founded",
       "general_info",
@@ -1096,6 +1090,7 @@ public class SystemUser extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_number",
       "hometown",
@@ -1440,6 +1435,13 @@ public class SystemUser extends APINode {
       this.requestField("connected_instagram_account", value);
       return this;
     }
+    public APIRequestGetAssignedPages requestConnectedPageBackedInstagramAccountField () {
+      return this.requestConnectedPageBackedInstagramAccountField(true);
+    }
+    public APIRequestGetAssignedPages requestConnectedPageBackedInstagramAccountField (boolean value) {
+      this.requestField("connected_page_backed_instagram_account", value);
+      return this;
+    }
     public APIRequestGetAssignedPages requestContactAddressField () {
       return this.requestContactAddressField(true);
     }
@@ -1566,6 +1568,13 @@ public class SystemUser extends APINode {
       this.requestField("features", value);
       return this;
     }
+    public APIRequestGetAssignedPages requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
+    }
+    public APIRequestGetAssignedPages requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
+      return this;
+    }
     public APIRequestGetAssignedPages requestFoodStylesField () {
       return this.requestFoodStylesField(true);
     }
@@ -1620,6 +1629,13 @@ public class SystemUser extends APINode {
     }
     public APIRequestGetAssignedPages requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetAssignedPages requestHasTransitionedToNewPageExperienceField () {
+      return this.requestHasTransitionedToNewPageExperienceField(true);
+    }
+    public APIRequestGetAssignedPages requestHasTransitionedToNewPageExperienceField (boolean value) {
+      this.requestField("has_transitioned_to_new_page_experience", value);
       return this;
     }
     public APIRequestGetAssignedPages requestHasWhatsappBusinessNumberField () {
@@ -2625,22 +2641,22 @@ public class SystemUser extends APINode {
       VALUE_ADMIN("ADMIN"),
       @SerializedName("ADS_RIGHTS_REVIEWER")
       VALUE_ADS_RIGHTS_REVIEWER("ADS_RIGHTS_REVIEWER"),
+      @SerializedName("DEFAULT")
+      VALUE_DEFAULT("DEFAULT"),
       @SerializedName("DEVELOPER")
       VALUE_DEVELOPER("DEVELOPER"),
       @SerializedName("EMPLOYEE")
       VALUE_EMPLOYEE("EMPLOYEE"),
       @SerializedName("FINANCE_ANALYST")
       VALUE_FINANCE_ANALYST("FINANCE_ANALYST"),
+      @SerializedName("FINANCE_EDIT")
+      VALUE_FINANCE_EDIT("FINANCE_EDIT"),
       @SerializedName("FINANCE_EDITOR")
       VALUE_FINANCE_EDITOR("FINANCE_EDITOR"),
-      @SerializedName("FINANCE_EDIT_TASK")
-      VALUE_FINANCE_EDIT_TASK("FINANCE_EDIT_TASK"),
-      @SerializedName("FINANCE_VIEW_TASK")
-      VALUE_FINANCE_VIEW_TASK("FINANCE_VIEW_TASK"),
-      @SerializedName("MODERATE_TASK")
-      VALUE_MODERATE_TASK("MODERATE_TASK"),
-      @SerializedName("OPERATE_TASK")
-      VALUE_OPERATE_TASK("OPERATE_TASK"),
+      @SerializedName("FINANCE_VIEW")
+      VALUE_FINANCE_VIEW("FINANCE_VIEW"),
+      @SerializedName("MANAGE")
+      VALUE_MANAGE("MANAGE"),
       @SerializedName("PARTNER_CENTER_ADMIN")
       VALUE_PARTNER_CENTER_ADMIN("PARTNER_CENTER_ADMIN"),
       @SerializedName("PARTNER_CENTER_ANALYST")

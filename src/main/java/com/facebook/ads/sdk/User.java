@@ -57,22 +57,14 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class User extends APINode {
   @SerializedName("about")
   private String mAbout = null;
-  @SerializedName("address")
-  private Location mAddress = null;
-  @SerializedName("admin_notes")
-  private List<PageAdminNote> mAdminNotes = null;
   @SerializedName("age_range")
   private AgeRange mAgeRange = null;
-  @SerializedName("auth_method")
-  private String mAuthMethod = null;
   @SerializedName("birthday")
   private String mBirthday = null;
   @SerializedName("cover")
   private UserCoverPhoto mCover = null;
   @SerializedName("currency")
   private Currency mCurrency = null;
-  @SerializedName("devices")
-  private List<UserDevice> mDevices = null;
   @SerializedName("education")
   private List<Object> mEducation = null;
   @SerializedName("email")
@@ -129,8 +121,6 @@ public class User extends APINode {
   private String mPolitical = null;
   @SerializedName("profile_pic")
   private String mProfilePic = null;
-  @SerializedName("public_key")
-  private String mPublicKey = null;
   @SerializedName("quotes")
   private String mQuotes = null;
   @SerializedName("relationship_status")
@@ -161,8 +151,6 @@ public class User extends APINode {
   private VideoUploadLimits mVideoUploadLimits = null;
   @SerializedName("website")
   private String mWebsite = null;
-  @SerializedName("work")
-  private List<Object> mWork = null;
   protected static Gson gson = null;
 
   User() {
@@ -460,6 +448,10 @@ public class User extends APINode {
     return new APIRequestGetEvents(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetFeed getFeed() {
+    return new APIRequestGetFeed(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateFeed createFeed() {
     return new APIRequestCreateFeed(this.getPrefixedId().toString(), context);
   }
@@ -524,8 +516,8 @@ public class User extends APINode {
     return new APIRequestCreateNotification(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetOwnedProductCatalogs getOwnedProductCatalogs() {
-    return new APIRequestGetOwnedProductCatalogs(this.getPrefixedId().toString(), context);
+  public APIRequestGetPaymentTransactions getPaymentTransactions() {
+    return new APIRequestGetPaymentTransactions(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestDeletePermissions deletePermissions() {
@@ -550,6 +542,10 @@ public class User extends APINode {
 
   public APIRequestGetPicture getPicture() {
     return new APIRequestGetPicture(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetPosts getPosts() {
+    return new APIRequestGetPosts(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetRichMediaDocuments getRichMediaDocuments() {
@@ -585,20 +581,8 @@ public class User extends APINode {
     return mAbout;
   }
 
-  public Location getFieldAddress() {
-    return mAddress;
-  }
-
-  public List<PageAdminNote> getFieldAdminNotes() {
-    return mAdminNotes;
-  }
-
   public AgeRange getFieldAgeRange() {
     return mAgeRange;
-  }
-
-  public String getFieldAuthMethod() {
-    return mAuthMethod;
   }
 
   public String getFieldBirthday() {
@@ -611,10 +595,6 @@ public class User extends APINode {
 
   public Currency getFieldCurrency() {
     return mCurrency;
-  }
-
-  public List<UserDevice> getFieldDevices() {
-    return mDevices;
   }
 
   public List<Object> getFieldEducation() {
@@ -735,10 +715,6 @@ public class User extends APINode {
     return mProfilePic;
   }
 
-  public String getFieldPublicKey() {
-    return mPublicKey;
-  }
-
   public String getFieldQuotes() {
     return mQuotes;
   }
@@ -800,10 +776,6 @@ public class User extends APINode {
 
   public String getFieldWebsite() {
     return mWebsite;
-  }
-
-  public List<Object> getFieldWork() {
-    return mWork;
   }
 
 
@@ -1078,6 +1050,7 @@ public class User extends APINode {
       "checkins",
       "company_overview",
       "connected_instagram_account",
+      "connected_page_backed_instagram_account",
       "contact_address",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
@@ -1096,6 +1069,7 @@ public class User extends APINode {
       "fan_count",
       "featured_video",
       "features",
+      "followers_count",
       "food_styles",
       "founded",
       "general_info",
@@ -1104,6 +1078,7 @@ public class User extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_number",
       "hometown",
@@ -1466,6 +1441,13 @@ public class User extends APINode {
       this.requestField("connected_instagram_account", value);
       return this;
     }
+    public APIRequestGetAccounts requestConnectedPageBackedInstagramAccountField () {
+      return this.requestConnectedPageBackedInstagramAccountField(true);
+    }
+    public APIRequestGetAccounts requestConnectedPageBackedInstagramAccountField (boolean value) {
+      this.requestField("connected_page_backed_instagram_account", value);
+      return this;
+    }
     public APIRequestGetAccounts requestContactAddressField () {
       return this.requestContactAddressField(true);
     }
@@ -1592,6 +1574,13 @@ public class User extends APINode {
       this.requestField("features", value);
       return this;
     }
+    public APIRequestGetAccounts requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
+    }
+    public APIRequestGetAccounts requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
+      return this;
+    }
     public APIRequestGetAccounts requestFoodStylesField () {
       return this.requestFoodStylesField(true);
     }
@@ -1646,6 +1635,13 @@ public class User extends APINode {
     }
     public APIRequestGetAccounts requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetAccounts requestHasTransitionedToNewPageExperienceField () {
+      return this.requestHasTransitionedToNewPageExperienceField(true);
+    }
+    public APIRequestGetAccounts requestHasTransitionedToNewPageExperienceField (boolean value) {
+      this.requestField("has_transitioned_to_new_page_experience", value);
       return this;
     }
     public APIRequestGetAccounts requestHasWhatsappBusinessNumberField () {
@@ -2967,7 +2963,6 @@ public class User extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "account_status",
-      "ad_account_creation_request",
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
@@ -3128,13 +3123,6 @@ public class User extends APINode {
     }
     public APIRequestGetAdAccounts requestAccountStatusField (boolean value) {
       this.requestField("account_status", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestAdAccountCreationRequestField () {
-      return this.requestAdAccountCreationRequestField(true);
-    }
-    public APIRequestGetAdAccounts requestAdAccountCreationRequestField (boolean value) {
-      this.requestField("ad_account_creation_request", value);
       return this;
     }
     public APIRequestGetAdAccounts requestAdAccountPromotableObjectsField () {
@@ -4249,7 +4237,6 @@ public class User extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "account_status",
-      "ad_account_creation_request",
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
@@ -4410,13 +4397,6 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedAdAccounts requestAccountStatusField (boolean value) {
       this.requestField("account_status", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestAdAccountCreationRequestField () {
-      return this.requestAdAccountCreationRequestField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestAdAccountCreationRequestField (boolean value) {
-      this.requestField("ad_account_creation_request", value);
       return this;
     }
     public APIRequestGetAssignedAdAccounts requestAdAccountPromotableObjectsField () {
@@ -4980,6 +4960,7 @@ public class User extends APINode {
       "checkins",
       "company_overview",
       "connected_instagram_account",
+      "connected_page_backed_instagram_account",
       "contact_address",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
@@ -4998,6 +4979,7 @@ public class User extends APINode {
       "fan_count",
       "featured_video",
       "features",
+      "followers_count",
       "food_styles",
       "founded",
       "general_info",
@@ -5006,6 +4988,7 @@ public class User extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_number",
       "hometown",
@@ -5350,6 +5333,13 @@ public class User extends APINode {
       this.requestField("connected_instagram_account", value);
       return this;
     }
+    public APIRequestGetAssignedPages requestConnectedPageBackedInstagramAccountField () {
+      return this.requestConnectedPageBackedInstagramAccountField(true);
+    }
+    public APIRequestGetAssignedPages requestConnectedPageBackedInstagramAccountField (boolean value) {
+      this.requestField("connected_page_backed_instagram_account", value);
+      return this;
+    }
     public APIRequestGetAssignedPages requestContactAddressField () {
       return this.requestContactAddressField(true);
     }
@@ -5476,6 +5466,13 @@ public class User extends APINode {
       this.requestField("features", value);
       return this;
     }
+    public APIRequestGetAssignedPages requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
+    }
+    public APIRequestGetAssignedPages requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
+      return this;
+    }
     public APIRequestGetAssignedPages requestFoodStylesField () {
       return this.requestFoodStylesField(true);
     }
@@ -5530,6 +5527,13 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedPages requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetAssignedPages requestHasTransitionedToNewPageExperienceField () {
+      return this.requestHasTransitionedToNewPageExperienceField(true);
+    }
+    public APIRequestGetAssignedPages requestHasTransitionedToNewPageExperienceField (boolean value) {
+      this.requestField("has_transitioned_to_new_page_experience", value);
       return this;
     }
     public APIRequestGetAssignedPages requestHasWhatsappBusinessNumberField () {
@@ -7147,7 +7151,6 @@ public class User extends APINode {
       "id",
       "is_subscribed",
       "link",
-      "linked_group",
       "message_count",
       "name",
       "participants",
@@ -7301,13 +7304,6 @@ public class User extends APINode {
     }
     public APIRequestGetConversations requestLinkField (boolean value) {
       this.requestField("link", value);
-      return this;
-    }
-    public APIRequestGetConversations requestLinkedGroupField () {
-      return this.requestLinkedGroupField(true);
-    }
-    public APIRequestGetConversations requestLinkedGroupField (boolean value) {
-      this.requestField("linked_group", value);
       return this;
     }
     public APIRequestGetConversations requestMessageCountField () {
@@ -7890,11 +7886,655 @@ public class User extends APINode {
     }
   }
 
-  public static class APIRequestCreateFeed extends APIRequest<APINode> {
+  public static class APIRequestGetFeed extends APIRequest<Post> {
 
-    APINode lastResponse = null;
+    APINodeList<Post> lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public APINodeList<Post> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "include_hidden",
+      "q",
+      "show_expired",
+      "since",
+      "until",
+      "with",
+    };
+
+    public static final String[] FIELDS = {
+      "actions",
+      "admin_creator",
+      "allowed_advertising_objectives",
+      "application",
+      "backdated_time",
+      "call_to_action",
+      "can_reply_privately",
+      "caption",
+      "child_attachments",
+      "comments_mirroring_domain",
+      "coordinates",
+      "created_time",
+      "description",
+      "event",
+      "expanded_height",
+      "expanded_width",
+      "feed_targeting",
+      "from",
+      "full_picture",
+      "height",
+      "icon",
+      "id",
+      "instagram_eligibility",
+      "is_app_share",
+      "is_eligible_for_promotion",
+      "is_expired",
+      "is_hidden",
+      "is_inline_created",
+      "is_instagram_eligible",
+      "is_popular",
+      "is_published",
+      "is_spherical",
+      "link",
+      "message",
+      "message_tags",
+      "multi_share_end_card",
+      "multi_share_optimized",
+      "name",
+      "object_id",
+      "parent_id",
+      "permalink_url",
+      "picture",
+      "place",
+      "privacy",
+      "promotable_id",
+      "promotion_status",
+      "properties",
+      "scheduled_publish_time",
+      "shares",
+      "source",
+      "status_type",
+      "story",
+      "story_tags",
+      "subscribed",
+      "target",
+      "targeting",
+      "timeline_visibility",
+      "type",
+      "updated_time",
+      "via",
+      "video_buying_eligibility",
+      "width",
+    };
+
+    @Override
+    public APINodeList<Post> parseResponse(String response, String header) throws APIException {
+      return Post.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<Post> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<Post> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<Post>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<Post>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<Post>>() {
+           public APINodeList<Post> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetFeed.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetFeed(String nodeId, APIContext context) {
+      super(context, nodeId, "/feed", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetFeed setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFeed setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetFeed setIncludeHidden (Boolean includeHidden) {
+      this.setParam("include_hidden", includeHidden);
+      return this;
+    }
+    public APIRequestGetFeed setIncludeHidden (String includeHidden) {
+      this.setParam("include_hidden", includeHidden);
+      return this;
+    }
+
+    public APIRequestGetFeed setQ (String q) {
+      this.setParam("q", q);
+      return this;
+    }
+
+    public APIRequestGetFeed setShowExpired (Boolean showExpired) {
+      this.setParam("show_expired", showExpired);
+      return this;
+    }
+    public APIRequestGetFeed setShowExpired (String showExpired) {
+      this.setParam("show_expired", showExpired);
+      return this;
+    }
+
+    public APIRequestGetFeed setSince (String since) {
+      this.setParam("since", since);
+      return this;
+    }
+
+    public APIRequestGetFeed setUntil (String until) {
+      this.setParam("until", until);
+      return this;
+    }
+
+    public APIRequestGetFeed setWith (String with) {
+      this.setParam("with", with);
+      return this;
+    }
+
+    public APIRequestGetFeed requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetFeed requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFeed requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetFeed requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFeed requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFeed requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetFeed requestActionsField () {
+      return this.requestActionsField(true);
+    }
+    public APIRequestGetFeed requestActionsField (boolean value) {
+      this.requestField("actions", value);
+      return this;
+    }
+    public APIRequestGetFeed requestAdminCreatorField () {
+      return this.requestAdminCreatorField(true);
+    }
+    public APIRequestGetFeed requestAdminCreatorField (boolean value) {
+      this.requestField("admin_creator", value);
+      return this;
+    }
+    public APIRequestGetFeed requestAllowedAdvertisingObjectivesField () {
+      return this.requestAllowedAdvertisingObjectivesField(true);
+    }
+    public APIRequestGetFeed requestAllowedAdvertisingObjectivesField (boolean value) {
+      this.requestField("allowed_advertising_objectives", value);
+      return this;
+    }
+    public APIRequestGetFeed requestApplicationField () {
+      return this.requestApplicationField(true);
+    }
+    public APIRequestGetFeed requestApplicationField (boolean value) {
+      this.requestField("application", value);
+      return this;
+    }
+    public APIRequestGetFeed requestBackdatedTimeField () {
+      return this.requestBackdatedTimeField(true);
+    }
+    public APIRequestGetFeed requestBackdatedTimeField (boolean value) {
+      this.requestField("backdated_time", value);
+      return this;
+    }
+    public APIRequestGetFeed requestCallToActionField () {
+      return this.requestCallToActionField(true);
+    }
+    public APIRequestGetFeed requestCallToActionField (boolean value) {
+      this.requestField("call_to_action", value);
+      return this;
+    }
+    public APIRequestGetFeed requestCanReplyPrivatelyField () {
+      return this.requestCanReplyPrivatelyField(true);
+    }
+    public APIRequestGetFeed requestCanReplyPrivatelyField (boolean value) {
+      this.requestField("can_reply_privately", value);
+      return this;
+    }
+    public APIRequestGetFeed requestCaptionField () {
+      return this.requestCaptionField(true);
+    }
+    public APIRequestGetFeed requestCaptionField (boolean value) {
+      this.requestField("caption", value);
+      return this;
+    }
+    public APIRequestGetFeed requestChildAttachmentsField () {
+      return this.requestChildAttachmentsField(true);
+    }
+    public APIRequestGetFeed requestChildAttachmentsField (boolean value) {
+      this.requestField("child_attachments", value);
+      return this;
+    }
+    public APIRequestGetFeed requestCommentsMirroringDomainField () {
+      return this.requestCommentsMirroringDomainField(true);
+    }
+    public APIRequestGetFeed requestCommentsMirroringDomainField (boolean value) {
+      this.requestField("comments_mirroring_domain", value);
+      return this;
+    }
+    public APIRequestGetFeed requestCoordinatesField () {
+      return this.requestCoordinatesField(true);
+    }
+    public APIRequestGetFeed requestCoordinatesField (boolean value) {
+      this.requestField("coordinates", value);
+      return this;
+    }
+    public APIRequestGetFeed requestCreatedTimeField () {
+      return this.requestCreatedTimeField(true);
+    }
+    public APIRequestGetFeed requestCreatedTimeField (boolean value) {
+      this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGetFeed requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetFeed requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetFeed requestEventField () {
+      return this.requestEventField(true);
+    }
+    public APIRequestGetFeed requestEventField (boolean value) {
+      this.requestField("event", value);
+      return this;
+    }
+    public APIRequestGetFeed requestExpandedHeightField () {
+      return this.requestExpandedHeightField(true);
+    }
+    public APIRequestGetFeed requestExpandedHeightField (boolean value) {
+      this.requestField("expanded_height", value);
+      return this;
+    }
+    public APIRequestGetFeed requestExpandedWidthField () {
+      return this.requestExpandedWidthField(true);
+    }
+    public APIRequestGetFeed requestExpandedWidthField (boolean value) {
+      this.requestField("expanded_width", value);
+      return this;
+    }
+    public APIRequestGetFeed requestFeedTargetingField () {
+      return this.requestFeedTargetingField(true);
+    }
+    public APIRequestGetFeed requestFeedTargetingField (boolean value) {
+      this.requestField("feed_targeting", value);
+      return this;
+    }
+    public APIRequestGetFeed requestFromField () {
+      return this.requestFromField(true);
+    }
+    public APIRequestGetFeed requestFromField (boolean value) {
+      this.requestField("from", value);
+      return this;
+    }
+    public APIRequestGetFeed requestFullPictureField () {
+      return this.requestFullPictureField(true);
+    }
+    public APIRequestGetFeed requestFullPictureField (boolean value) {
+      this.requestField("full_picture", value);
+      return this;
+    }
+    public APIRequestGetFeed requestHeightField () {
+      return this.requestHeightField(true);
+    }
+    public APIRequestGetFeed requestHeightField (boolean value) {
+      this.requestField("height", value);
+      return this;
+    }
+    public APIRequestGetFeed requestIconField () {
+      return this.requestIconField(true);
+    }
+    public APIRequestGetFeed requestIconField (boolean value) {
+      this.requestField("icon", value);
+      return this;
+    }
+    public APIRequestGetFeed requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetFeed requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetFeed requestInstagramEligibilityField () {
+      return this.requestInstagramEligibilityField(true);
+    }
+    public APIRequestGetFeed requestInstagramEligibilityField (boolean value) {
+      this.requestField("instagram_eligibility", value);
+      return this;
+    }
+    public APIRequestGetFeed requestIsAppShareField () {
+      return this.requestIsAppShareField(true);
+    }
+    public APIRequestGetFeed requestIsAppShareField (boolean value) {
+      this.requestField("is_app_share", value);
+      return this;
+    }
+    public APIRequestGetFeed requestIsEligibleForPromotionField () {
+      return this.requestIsEligibleForPromotionField(true);
+    }
+    public APIRequestGetFeed requestIsEligibleForPromotionField (boolean value) {
+      this.requestField("is_eligible_for_promotion", value);
+      return this;
+    }
+    public APIRequestGetFeed requestIsExpiredField () {
+      return this.requestIsExpiredField(true);
+    }
+    public APIRequestGetFeed requestIsExpiredField (boolean value) {
+      this.requestField("is_expired", value);
+      return this;
+    }
+    public APIRequestGetFeed requestIsHiddenField () {
+      return this.requestIsHiddenField(true);
+    }
+    public APIRequestGetFeed requestIsHiddenField (boolean value) {
+      this.requestField("is_hidden", value);
+      return this;
+    }
+    public APIRequestGetFeed requestIsInlineCreatedField () {
+      return this.requestIsInlineCreatedField(true);
+    }
+    public APIRequestGetFeed requestIsInlineCreatedField (boolean value) {
+      this.requestField("is_inline_created", value);
+      return this;
+    }
+    public APIRequestGetFeed requestIsInstagramEligibleField () {
+      return this.requestIsInstagramEligibleField(true);
+    }
+    public APIRequestGetFeed requestIsInstagramEligibleField (boolean value) {
+      this.requestField("is_instagram_eligible", value);
+      return this;
+    }
+    public APIRequestGetFeed requestIsPopularField () {
+      return this.requestIsPopularField(true);
+    }
+    public APIRequestGetFeed requestIsPopularField (boolean value) {
+      this.requestField("is_popular", value);
+      return this;
+    }
+    public APIRequestGetFeed requestIsPublishedField () {
+      return this.requestIsPublishedField(true);
+    }
+    public APIRequestGetFeed requestIsPublishedField (boolean value) {
+      this.requestField("is_published", value);
+      return this;
+    }
+    public APIRequestGetFeed requestIsSphericalField () {
+      return this.requestIsSphericalField(true);
+    }
+    public APIRequestGetFeed requestIsSphericalField (boolean value) {
+      this.requestField("is_spherical", value);
+      return this;
+    }
+    public APIRequestGetFeed requestLinkField () {
+      return this.requestLinkField(true);
+    }
+    public APIRequestGetFeed requestLinkField (boolean value) {
+      this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGetFeed requestMessageField () {
+      return this.requestMessageField(true);
+    }
+    public APIRequestGetFeed requestMessageField (boolean value) {
+      this.requestField("message", value);
+      return this;
+    }
+    public APIRequestGetFeed requestMessageTagsField () {
+      return this.requestMessageTagsField(true);
+    }
+    public APIRequestGetFeed requestMessageTagsField (boolean value) {
+      this.requestField("message_tags", value);
+      return this;
+    }
+    public APIRequestGetFeed requestMultiShareEndCardField () {
+      return this.requestMultiShareEndCardField(true);
+    }
+    public APIRequestGetFeed requestMultiShareEndCardField (boolean value) {
+      this.requestField("multi_share_end_card", value);
+      return this;
+    }
+    public APIRequestGetFeed requestMultiShareOptimizedField () {
+      return this.requestMultiShareOptimizedField(true);
+    }
+    public APIRequestGetFeed requestMultiShareOptimizedField (boolean value) {
+      this.requestField("multi_share_optimized", value);
+      return this;
+    }
+    public APIRequestGetFeed requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetFeed requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetFeed requestObjectIdField () {
+      return this.requestObjectIdField(true);
+    }
+    public APIRequestGetFeed requestObjectIdField (boolean value) {
+      this.requestField("object_id", value);
+      return this;
+    }
+    public APIRequestGetFeed requestParentIdField () {
+      return this.requestParentIdField(true);
+    }
+    public APIRequestGetFeed requestParentIdField (boolean value) {
+      this.requestField("parent_id", value);
+      return this;
+    }
+    public APIRequestGetFeed requestPermalinkUrlField () {
+      return this.requestPermalinkUrlField(true);
+    }
+    public APIRequestGetFeed requestPermalinkUrlField (boolean value) {
+      this.requestField("permalink_url", value);
+      return this;
+    }
+    public APIRequestGetFeed requestPictureField () {
+      return this.requestPictureField(true);
+    }
+    public APIRequestGetFeed requestPictureField (boolean value) {
+      this.requestField("picture", value);
+      return this;
+    }
+    public APIRequestGetFeed requestPlaceField () {
+      return this.requestPlaceField(true);
+    }
+    public APIRequestGetFeed requestPlaceField (boolean value) {
+      this.requestField("place", value);
+      return this;
+    }
+    public APIRequestGetFeed requestPrivacyField () {
+      return this.requestPrivacyField(true);
+    }
+    public APIRequestGetFeed requestPrivacyField (boolean value) {
+      this.requestField("privacy", value);
+      return this;
+    }
+    public APIRequestGetFeed requestPromotableIdField () {
+      return this.requestPromotableIdField(true);
+    }
+    public APIRequestGetFeed requestPromotableIdField (boolean value) {
+      this.requestField("promotable_id", value);
+      return this;
+    }
+    public APIRequestGetFeed requestPromotionStatusField () {
+      return this.requestPromotionStatusField(true);
+    }
+    public APIRequestGetFeed requestPromotionStatusField (boolean value) {
+      this.requestField("promotion_status", value);
+      return this;
+    }
+    public APIRequestGetFeed requestPropertiesField () {
+      return this.requestPropertiesField(true);
+    }
+    public APIRequestGetFeed requestPropertiesField (boolean value) {
+      this.requestField("properties", value);
+      return this;
+    }
+    public APIRequestGetFeed requestScheduledPublishTimeField () {
+      return this.requestScheduledPublishTimeField(true);
+    }
+    public APIRequestGetFeed requestScheduledPublishTimeField (boolean value) {
+      this.requestField("scheduled_publish_time", value);
+      return this;
+    }
+    public APIRequestGetFeed requestSharesField () {
+      return this.requestSharesField(true);
+    }
+    public APIRequestGetFeed requestSharesField (boolean value) {
+      this.requestField("shares", value);
+      return this;
+    }
+    public APIRequestGetFeed requestSourceField () {
+      return this.requestSourceField(true);
+    }
+    public APIRequestGetFeed requestSourceField (boolean value) {
+      this.requestField("source", value);
+      return this;
+    }
+    public APIRequestGetFeed requestStatusTypeField () {
+      return this.requestStatusTypeField(true);
+    }
+    public APIRequestGetFeed requestStatusTypeField (boolean value) {
+      this.requestField("status_type", value);
+      return this;
+    }
+    public APIRequestGetFeed requestStoryField () {
+      return this.requestStoryField(true);
+    }
+    public APIRequestGetFeed requestStoryField (boolean value) {
+      this.requestField("story", value);
+      return this;
+    }
+    public APIRequestGetFeed requestStoryTagsField () {
+      return this.requestStoryTagsField(true);
+    }
+    public APIRequestGetFeed requestStoryTagsField (boolean value) {
+      this.requestField("story_tags", value);
+      return this;
+    }
+    public APIRequestGetFeed requestSubscribedField () {
+      return this.requestSubscribedField(true);
+    }
+    public APIRequestGetFeed requestSubscribedField (boolean value) {
+      this.requestField("subscribed", value);
+      return this;
+    }
+    public APIRequestGetFeed requestTargetField () {
+      return this.requestTargetField(true);
+    }
+    public APIRequestGetFeed requestTargetField (boolean value) {
+      this.requestField("target", value);
+      return this;
+    }
+    public APIRequestGetFeed requestTargetingField () {
+      return this.requestTargetingField(true);
+    }
+    public APIRequestGetFeed requestTargetingField (boolean value) {
+      this.requestField("targeting", value);
+      return this;
+    }
+    public APIRequestGetFeed requestTimelineVisibilityField () {
+      return this.requestTimelineVisibilityField(true);
+    }
+    public APIRequestGetFeed requestTimelineVisibilityField (boolean value) {
+      this.requestField("timeline_visibility", value);
+      return this;
+    }
+    public APIRequestGetFeed requestTypeField () {
+      return this.requestTypeField(true);
+    }
+    public APIRequestGetFeed requestTypeField (boolean value) {
+      this.requestField("type", value);
+      return this;
+    }
+    public APIRequestGetFeed requestUpdatedTimeField () {
+      return this.requestUpdatedTimeField(true);
+    }
+    public APIRequestGetFeed requestUpdatedTimeField (boolean value) {
+      this.requestField("updated_time", value);
+      return this;
+    }
+    public APIRequestGetFeed requestViaField () {
+      return this.requestViaField(true);
+    }
+    public APIRequestGetFeed requestViaField (boolean value) {
+      this.requestField("via", value);
+      return this;
+    }
+    public APIRequestGetFeed requestVideoBuyingEligibilityField () {
+      return this.requestVideoBuyingEligibilityField(true);
+    }
+    public APIRequestGetFeed requestVideoBuyingEligibilityField (boolean value) {
+      this.requestField("video_buying_eligibility", value);
+      return this;
+    }
+    public APIRequestGetFeed requestWidthField () {
+      return this.requestWidthField(true);
+    }
+    public APIRequestGetFeed requestWidthField (boolean value) {
+      this.requestField("width", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreateFeed extends APIRequest<Post> {
+
+    Post lastResponse = null;
+    @Override
+    public Post getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -8016,31 +8656,31 @@ public class User extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
+    public Post parseResponse(String response, String header) throws APIException {
+      return Post.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public Post execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public Post execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINode> executeAsync() throws APIException {
+    public ListenableFuture<Post> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<Post> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, Post>() {
+           public Post apply(ResponseWrapper result) {
              try {
                return APIRequestCreateFeed.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -8161,7 +8801,7 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setBackdatedTimeGranularity (EnumBackdatedTimeGranularity backdatedTimeGranularity) {
+    public APIRequestCreateFeed setBackdatedTimeGranularity (Post.EnumBackdatedTimeGranularity backdatedTimeGranularity) {
       this.setParam("backdated_time_granularity", backdatedTimeGranularity);
       return this;
     }
@@ -8184,7 +8824,7 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setCheckinEntryPoint (EnumCheckinEntryPoint checkinEntryPoint) {
+    public APIRequestCreateFeed setCheckinEntryPoint (Post.EnumCheckinEntryPoint checkinEntryPoint) {
       this.setParam("checkin_entry_point", checkinEntryPoint);
       return this;
     }
@@ -8316,7 +8956,7 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setFormatting (EnumFormatting formatting) {
+    public APIRequestCreateFeed setFormatting (Post.EnumFormatting formatting) {
       this.setParam("formatting", formatting);
       return this;
     }
@@ -8585,7 +9225,7 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setPlaceAttachmentSetting (EnumPlaceAttachmentSetting placeAttachmentSetting) {
+    public APIRequestCreateFeed setPlaceAttachmentSetting (Post.EnumPlaceAttachmentSetting placeAttachmentSetting) {
       this.setParam("place_attachment_setting", placeAttachmentSetting);
       return this;
     }
@@ -8608,7 +9248,7 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setPostSurfacesBlacklist (List<EnumPostSurfacesBlacklist> postSurfacesBlacklist) {
+    public APIRequestCreateFeed setPostSurfacesBlacklist (List<Post.EnumPostSurfacesBlacklist> postSurfacesBlacklist) {
       this.setParam("post_surfaces_blacklist", postSurfacesBlacklist);
       return this;
     }
@@ -8617,7 +9257,7 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setPostingToRedspace (EnumPostingToRedspace postingToRedspace) {
+    public APIRequestCreateFeed setPostingToRedspace (Post.EnumPostingToRedspace postingToRedspace) {
       this.setParam("posting_to_redspace", postingToRedspace);
       return this;
     }
@@ -8757,7 +9397,7 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setTargetSurface (EnumTargetSurface targetSurface) {
+    public APIRequestCreateFeed setTargetSurface (Post.EnumTargetSurface targetSurface) {
       this.setParam("target_surface", targetSurface);
       return this;
     }
@@ -8823,7 +9463,7 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setUnpublishedContentType (EnumUnpublishedContentType unpublishedContentType) {
+    public APIRequestCreateFeed setUnpublishedContentType (Post.EnumUnpublishedContentType unpublishedContentType) {
       this.setParam("unpublished_content_type", unpublishedContentType);
       return this;
     }
@@ -8919,14 +9559,10 @@ public class User extends APINode {
 
     public static final String[] FIELDS = {
       "about",
-      "address",
-      "admin_notes",
       "age_range",
-      "auth_method",
       "birthday",
       "cover",
       "currency",
-      "devices",
       "education",
       "email",
       "favorite_athletes",
@@ -8955,7 +9591,6 @@ public class User extends APINode {
       "payment_pricepoints",
       "political",
       "profile_pic",
-      "public_key",
       "quotes",
       "relationship_status",
       "religion",
@@ -8971,7 +9606,6 @@ public class User extends APINode {
       "verified",
       "video_upload_limits",
       "website",
-      "work",
     };
 
     @Override
@@ -9079,32 +9713,11 @@ public class User extends APINode {
       this.requestField("about", value);
       return this;
     }
-    public APIRequestGetFriends requestAddressField () {
-      return this.requestAddressField(true);
-    }
-    public APIRequestGetFriends requestAddressField (boolean value) {
-      this.requestField("address", value);
-      return this;
-    }
-    public APIRequestGetFriends requestAdminNotesField () {
-      return this.requestAdminNotesField(true);
-    }
-    public APIRequestGetFriends requestAdminNotesField (boolean value) {
-      this.requestField("admin_notes", value);
-      return this;
-    }
     public APIRequestGetFriends requestAgeRangeField () {
       return this.requestAgeRangeField(true);
     }
     public APIRequestGetFriends requestAgeRangeField (boolean value) {
       this.requestField("age_range", value);
-      return this;
-    }
-    public APIRequestGetFriends requestAuthMethodField () {
-      return this.requestAuthMethodField(true);
-    }
-    public APIRequestGetFriends requestAuthMethodField (boolean value) {
-      this.requestField("auth_method", value);
       return this;
     }
     public APIRequestGetFriends requestBirthdayField () {
@@ -9126,13 +9739,6 @@ public class User extends APINode {
     }
     public APIRequestGetFriends requestCurrencyField (boolean value) {
       this.requestField("currency", value);
-      return this;
-    }
-    public APIRequestGetFriends requestDevicesField () {
-      return this.requestDevicesField(true);
-    }
-    public APIRequestGetFriends requestDevicesField (boolean value) {
-      this.requestField("devices", value);
       return this;
     }
     public APIRequestGetFriends requestEducationField () {
@@ -9331,13 +9937,6 @@ public class User extends APINode {
       this.requestField("profile_pic", value);
       return this;
     }
-    public APIRequestGetFriends requestPublicKeyField () {
-      return this.requestPublicKeyField(true);
-    }
-    public APIRequestGetFriends requestPublicKeyField (boolean value) {
-      this.requestField("public_key", value);
-      return this;
-    }
     public APIRequestGetFriends requestQuotesField () {
       return this.requestQuotesField(true);
     }
@@ -9441,13 +10040,6 @@ public class User extends APINode {
     }
     public APIRequestGetFriends requestWebsiteField (boolean value) {
       this.requestField("website", value);
-      return this;
-    }
-    public APIRequestGetFriends requestWorkField () {
-      return this.requestWorkField(true);
-    }
-    public APIRequestGetFriends requestWorkField (boolean value) {
-      this.requestField("work", value);
       return this;
     }
   }
@@ -10080,7 +10672,6 @@ public class User extends APINode {
       "member_count",
       "member_request_count",
       "name",
-      "owner",
       "parent",
       "permissions",
       "privacy",
@@ -10268,13 +10859,6 @@ public class User extends APINode {
     }
     public APIRequestGetGroups requestNameField (boolean value) {
       this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetGroups requestOwnerField () {
-      return this.requestOwnerField(true);
-    }
-    public APIRequestGetGroups requestOwnerField (boolean value) {
-      this.requestField("owner", value);
       return this;
     }
     public APIRequestGetGroups requestParentField () {
@@ -10753,6 +11337,7 @@ public class User extends APINode {
       "checkins",
       "company_overview",
       "connected_instagram_account",
+      "connected_page_backed_instagram_account",
       "contact_address",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
@@ -10771,6 +11356,7 @@ public class User extends APINode {
       "fan_count",
       "featured_video",
       "features",
+      "followers_count",
       "food_styles",
       "founded",
       "general_info",
@@ -10779,6 +11365,7 @@ public class User extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_number",
       "hometown",
@@ -11128,6 +11715,13 @@ public class User extends APINode {
       this.requestField("connected_instagram_account", value);
       return this;
     }
+    public APIRequestGetLikes requestConnectedPageBackedInstagramAccountField () {
+      return this.requestConnectedPageBackedInstagramAccountField(true);
+    }
+    public APIRequestGetLikes requestConnectedPageBackedInstagramAccountField (boolean value) {
+      this.requestField("connected_page_backed_instagram_account", value);
+      return this;
+    }
     public APIRequestGetLikes requestContactAddressField () {
       return this.requestContactAddressField(true);
     }
@@ -11254,6 +11848,13 @@ public class User extends APINode {
       this.requestField("features", value);
       return this;
     }
+    public APIRequestGetLikes requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
+    }
+    public APIRequestGetLikes requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
+      return this;
+    }
     public APIRequestGetLikes requestFoodStylesField () {
       return this.requestFoodStylesField(true);
     }
@@ -11308,6 +11909,13 @@ public class User extends APINode {
     }
     public APIRequestGetLikes requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetLikes requestHasTransitionedToNewPageExperienceField () {
+      return this.requestHasTransitionedToNewPageExperienceField(true);
+    }
+    public APIRequestGetLikes requestHasTransitionedToNewPageExperienceField (boolean value) {
+      this.requestField("has_transitioned_to_new_page_experience", value);
       return this;
     }
     public APIRequestGetLikes requestHasWhatsappBusinessNumberField () {
@@ -12955,6 +13563,7 @@ public class User extends APINode {
       "checkins",
       "company_overview",
       "connected_instagram_account",
+      "connected_page_backed_instagram_account",
       "contact_address",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
@@ -12973,6 +13582,7 @@ public class User extends APINode {
       "fan_count",
       "featured_video",
       "features",
+      "followers_count",
       "food_styles",
       "founded",
       "general_info",
@@ -12981,6 +13591,7 @@ public class User extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_number",
       "hometown",
@@ -13330,6 +13941,13 @@ public class User extends APINode {
       this.requestField("connected_instagram_account", value);
       return this;
     }
+    public APIRequestGetMusic requestConnectedPageBackedInstagramAccountField () {
+      return this.requestConnectedPageBackedInstagramAccountField(true);
+    }
+    public APIRequestGetMusic requestConnectedPageBackedInstagramAccountField (boolean value) {
+      this.requestField("connected_page_backed_instagram_account", value);
+      return this;
+    }
     public APIRequestGetMusic requestContactAddressField () {
       return this.requestContactAddressField(true);
     }
@@ -13456,6 +14074,13 @@ public class User extends APINode {
       this.requestField("features", value);
       return this;
     }
+    public APIRequestGetMusic requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
+    }
+    public APIRequestGetMusic requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
+      return this;
+    }
     public APIRequestGetMusic requestFoodStylesField () {
       return this.requestFoodStylesField(true);
     }
@@ -13510,6 +14135,13 @@ public class User extends APINode {
     }
     public APIRequestGetMusic requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetMusic requestHasTransitionedToNewPageExperienceField () {
+      return this.requestHasTransitionedToNewPageExperienceField(true);
+    }
+    public APIRequestGetMusic requestHasTransitionedToNewPageExperienceField (boolean value) {
+      this.requestField("has_transitioned_to_new_page_experience", value);
       return this;
     }
     public APIRequestGetMusic requestHasWhatsappBusinessNumberField () {
@@ -14338,59 +14970,66 @@ public class User extends APINode {
 
   }
 
-  public static class APIRequestGetOwnedProductCatalogs extends APIRequest<ProductCatalog> {
+  public static class APIRequestGetPaymentTransactions extends APIRequest<PaymentEnginePayment> {
 
-    APINodeList<ProductCatalog> lastResponse = null;
+    APINodeList<PaymentEnginePayment> lastResponse = null;
     @Override
-    public APINodeList<ProductCatalog> getLastResponse() {
+    public APINodeList<PaymentEnginePayment> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "business",
-      "commerce_merchant_settings",
-      "da_display_settings",
-      "default_image_url",
-      "fallback_image_url",
-      "feed_count",
+      "actions",
+      "application",
+      "country",
+      "created_time",
+      "disputes",
+      "fraud_status",
+      "fulfillment_status",
       "id",
-      "is_catalog_segment",
-      "name",
-      "product_count",
-      "store_catalog_settings",
-      "vertical",
+      "is_from_ad",
+      "is_from_page_post",
+      "items",
+      "payout_foreign_exchange_rate",
+      "phone_support_eligible",
+      "refundable_amount",
+      "request_id",
+      "tax",
+      "tax_country",
+      "test",
+      "user",
     };
 
     @Override
-    public APINodeList<ProductCatalog> parseResponse(String response, String header) throws APIException {
-      return ProductCatalog.parseResponse(response, getContext(), this, header);
+    public APINodeList<PaymentEnginePayment> parseResponse(String response, String header) throws APIException {
+      return PaymentEnginePayment.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<ProductCatalog> execute() throws APIException {
+    public APINodeList<PaymentEnginePayment> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<ProductCatalog> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<PaymentEnginePayment> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<ProductCatalog>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<PaymentEnginePayment>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<ProductCatalog>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<PaymentEnginePayment>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<ProductCatalog>>() {
-           public APINodeList<ProductCatalog> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<PaymentEnginePayment>>() {
+           public APINodeList<PaymentEnginePayment> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetOwnedProductCatalogs.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestGetPaymentTransactions.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -14399,28 +15038,28 @@ public class User extends APINode {
       );
     };
 
-    public APIRequestGetOwnedProductCatalogs(String nodeId, APIContext context) {
-      super(context, nodeId, "/owned_product_catalogs", "GET", Arrays.asList(PARAMS));
+    public APIRequestGetPaymentTransactions(String nodeId, APIContext context) {
+      super(context, nodeId, "/payment_transactions", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGetOwnedProductCatalogs setParam(String param, Object value) {
+    public APIRequestGetPaymentTransactions setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGetOwnedProductCatalogs setParams(Map<String, Object> params) {
+    public APIRequestGetPaymentTransactions setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGetOwnedProductCatalogs requestAllFields () {
+    public APIRequestGetPaymentTransactions requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGetOwnedProductCatalogs requestAllFields (boolean value) {
+    public APIRequestGetPaymentTransactions requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -14428,12 +15067,12 @@ public class User extends APINode {
     }
 
     @Override
-    public APIRequestGetOwnedProductCatalogs requestFields (List<String> fields) {
+    public APIRequestGetPaymentTransactions requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGetOwnedProductCatalogs requestFields (List<String> fields, boolean value) {
+    public APIRequestGetPaymentTransactions requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -14441,99 +15080,148 @@ public class User extends APINode {
     }
 
     @Override
-    public APIRequestGetOwnedProductCatalogs requestField (String field) {
+    public APIRequestGetPaymentTransactions requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGetOwnedProductCatalogs requestField (String field, boolean value) {
+    public APIRequestGetPaymentTransactions requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
-    public APIRequestGetOwnedProductCatalogs requestBusinessField () {
-      return this.requestBusinessField(true);
+    public APIRequestGetPaymentTransactions requestActionsField () {
+      return this.requestActionsField(true);
     }
-    public APIRequestGetOwnedProductCatalogs requestBusinessField (boolean value) {
-      this.requestField("business", value);
+    public APIRequestGetPaymentTransactions requestActionsField (boolean value) {
+      this.requestField("actions", value);
       return this;
     }
-    public APIRequestGetOwnedProductCatalogs requestCommerceMerchantSettingsField () {
-      return this.requestCommerceMerchantSettingsField(true);
+    public APIRequestGetPaymentTransactions requestApplicationField () {
+      return this.requestApplicationField(true);
     }
-    public APIRequestGetOwnedProductCatalogs requestCommerceMerchantSettingsField (boolean value) {
-      this.requestField("commerce_merchant_settings", value);
+    public APIRequestGetPaymentTransactions requestApplicationField (boolean value) {
+      this.requestField("application", value);
       return this;
     }
-    public APIRequestGetOwnedProductCatalogs requestDaDisplaySettingsField () {
-      return this.requestDaDisplaySettingsField(true);
+    public APIRequestGetPaymentTransactions requestCountryField () {
+      return this.requestCountryField(true);
     }
-    public APIRequestGetOwnedProductCatalogs requestDaDisplaySettingsField (boolean value) {
-      this.requestField("da_display_settings", value);
+    public APIRequestGetPaymentTransactions requestCountryField (boolean value) {
+      this.requestField("country", value);
       return this;
     }
-    public APIRequestGetOwnedProductCatalogs requestDefaultImageUrlField () {
-      return this.requestDefaultImageUrlField(true);
+    public APIRequestGetPaymentTransactions requestCreatedTimeField () {
+      return this.requestCreatedTimeField(true);
     }
-    public APIRequestGetOwnedProductCatalogs requestDefaultImageUrlField (boolean value) {
-      this.requestField("default_image_url", value);
+    public APIRequestGetPaymentTransactions requestCreatedTimeField (boolean value) {
+      this.requestField("created_time", value);
       return this;
     }
-    public APIRequestGetOwnedProductCatalogs requestFallbackImageUrlField () {
-      return this.requestFallbackImageUrlField(true);
+    public APIRequestGetPaymentTransactions requestDisputesField () {
+      return this.requestDisputesField(true);
     }
-    public APIRequestGetOwnedProductCatalogs requestFallbackImageUrlField (boolean value) {
-      this.requestField("fallback_image_url", value);
+    public APIRequestGetPaymentTransactions requestDisputesField (boolean value) {
+      this.requestField("disputes", value);
       return this;
     }
-    public APIRequestGetOwnedProductCatalogs requestFeedCountField () {
-      return this.requestFeedCountField(true);
+    public APIRequestGetPaymentTransactions requestFraudStatusField () {
+      return this.requestFraudStatusField(true);
     }
-    public APIRequestGetOwnedProductCatalogs requestFeedCountField (boolean value) {
-      this.requestField("feed_count", value);
+    public APIRequestGetPaymentTransactions requestFraudStatusField (boolean value) {
+      this.requestField("fraud_status", value);
       return this;
     }
-    public APIRequestGetOwnedProductCatalogs requestIdField () {
+    public APIRequestGetPaymentTransactions requestFulfillmentStatusField () {
+      return this.requestFulfillmentStatusField(true);
+    }
+    public APIRequestGetPaymentTransactions requestFulfillmentStatusField (boolean value) {
+      this.requestField("fulfillment_status", value);
+      return this;
+    }
+    public APIRequestGetPaymentTransactions requestIdField () {
       return this.requestIdField(true);
     }
-    public APIRequestGetOwnedProductCatalogs requestIdField (boolean value) {
+    public APIRequestGetPaymentTransactions requestIdField (boolean value) {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetOwnedProductCatalogs requestIsCatalogSegmentField () {
-      return this.requestIsCatalogSegmentField(true);
+    public APIRequestGetPaymentTransactions requestIsFromAdField () {
+      return this.requestIsFromAdField(true);
     }
-    public APIRequestGetOwnedProductCatalogs requestIsCatalogSegmentField (boolean value) {
-      this.requestField("is_catalog_segment", value);
+    public APIRequestGetPaymentTransactions requestIsFromAdField (boolean value) {
+      this.requestField("is_from_ad", value);
       return this;
     }
-    public APIRequestGetOwnedProductCatalogs requestNameField () {
-      return this.requestNameField(true);
+    public APIRequestGetPaymentTransactions requestIsFromPagePostField () {
+      return this.requestIsFromPagePostField(true);
     }
-    public APIRequestGetOwnedProductCatalogs requestNameField (boolean value) {
-      this.requestField("name", value);
+    public APIRequestGetPaymentTransactions requestIsFromPagePostField (boolean value) {
+      this.requestField("is_from_page_post", value);
       return this;
     }
-    public APIRequestGetOwnedProductCatalogs requestProductCountField () {
-      return this.requestProductCountField(true);
+    public APIRequestGetPaymentTransactions requestItemsField () {
+      return this.requestItemsField(true);
     }
-    public APIRequestGetOwnedProductCatalogs requestProductCountField (boolean value) {
-      this.requestField("product_count", value);
+    public APIRequestGetPaymentTransactions requestItemsField (boolean value) {
+      this.requestField("items", value);
       return this;
     }
-    public APIRequestGetOwnedProductCatalogs requestStoreCatalogSettingsField () {
-      return this.requestStoreCatalogSettingsField(true);
+    public APIRequestGetPaymentTransactions requestPayoutForeignExchangeRateField () {
+      return this.requestPayoutForeignExchangeRateField(true);
     }
-    public APIRequestGetOwnedProductCatalogs requestStoreCatalogSettingsField (boolean value) {
-      this.requestField("store_catalog_settings", value);
+    public APIRequestGetPaymentTransactions requestPayoutForeignExchangeRateField (boolean value) {
+      this.requestField("payout_foreign_exchange_rate", value);
       return this;
     }
-    public APIRequestGetOwnedProductCatalogs requestVerticalField () {
-      return this.requestVerticalField(true);
+    public APIRequestGetPaymentTransactions requestPhoneSupportEligibleField () {
+      return this.requestPhoneSupportEligibleField(true);
     }
-    public APIRequestGetOwnedProductCatalogs requestVerticalField (boolean value) {
-      this.requestField("vertical", value);
+    public APIRequestGetPaymentTransactions requestPhoneSupportEligibleField (boolean value) {
+      this.requestField("phone_support_eligible", value);
+      return this;
+    }
+    public APIRequestGetPaymentTransactions requestRefundableAmountField () {
+      return this.requestRefundableAmountField(true);
+    }
+    public APIRequestGetPaymentTransactions requestRefundableAmountField (boolean value) {
+      this.requestField("refundable_amount", value);
+      return this;
+    }
+    public APIRequestGetPaymentTransactions requestRequestIdField () {
+      return this.requestRequestIdField(true);
+    }
+    public APIRequestGetPaymentTransactions requestRequestIdField (boolean value) {
+      this.requestField("request_id", value);
+      return this;
+    }
+    public APIRequestGetPaymentTransactions requestTaxField () {
+      return this.requestTaxField(true);
+    }
+    public APIRequestGetPaymentTransactions requestTaxField (boolean value) {
+      this.requestField("tax", value);
+      return this;
+    }
+    public APIRequestGetPaymentTransactions requestTaxCountryField () {
+      return this.requestTaxCountryField(true);
+    }
+    public APIRequestGetPaymentTransactions requestTaxCountryField (boolean value) {
+      this.requestField("tax_country", value);
+      return this;
+    }
+    public APIRequestGetPaymentTransactions requestTestField () {
+      return this.requestTestField(true);
+    }
+    public APIRequestGetPaymentTransactions requestTestField (boolean value) {
+      this.requestField("test", value);
+      return this;
+    }
+    public APIRequestGetPaymentTransactions requestUserField () {
+      return this.requestUserField(true);
+    }
+    public APIRequestGetPaymentTransactions requestUserField (boolean value) {
+      this.requestField("user", value);
       return this;
     }
   }
@@ -14797,7 +15485,6 @@ public class User extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "account_status",
-      "ad_account_creation_request",
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
@@ -14958,13 +15645,6 @@ public class User extends APINode {
     }
     public APIRequestGetPersonalAdAccounts requestAccountStatusField (boolean value) {
       this.requestField("account_status", value);
-      return this;
-    }
-    public APIRequestGetPersonalAdAccounts requestAdAccountCreationRequestField () {
-      return this.requestAdAccountCreationRequestField(true);
-    }
-    public APIRequestGetPersonalAdAccounts requestAdAccountCreationRequestField (boolean value) {
-      this.requestField("ad_account_creation_request", value);
       return this;
     }
     public APIRequestGetPersonalAdAccounts requestAdAccountPromotableObjectsField () {
@@ -16464,6 +17144,650 @@ public class User extends APINode {
     }
   }
 
+  public static class APIRequestGetPosts extends APIRequest<Post> {
+
+    APINodeList<Post> lastResponse = null;
+    @Override
+    public APINodeList<Post> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "include_hidden",
+      "q",
+      "show_expired",
+      "since",
+      "until",
+      "with",
+    };
+
+    public static final String[] FIELDS = {
+      "actions",
+      "admin_creator",
+      "allowed_advertising_objectives",
+      "application",
+      "backdated_time",
+      "call_to_action",
+      "can_reply_privately",
+      "caption",
+      "child_attachments",
+      "comments_mirroring_domain",
+      "coordinates",
+      "created_time",
+      "description",
+      "event",
+      "expanded_height",
+      "expanded_width",
+      "feed_targeting",
+      "from",
+      "full_picture",
+      "height",
+      "icon",
+      "id",
+      "instagram_eligibility",
+      "is_app_share",
+      "is_eligible_for_promotion",
+      "is_expired",
+      "is_hidden",
+      "is_inline_created",
+      "is_instagram_eligible",
+      "is_popular",
+      "is_published",
+      "is_spherical",
+      "link",
+      "message",
+      "message_tags",
+      "multi_share_end_card",
+      "multi_share_optimized",
+      "name",
+      "object_id",
+      "parent_id",
+      "permalink_url",
+      "picture",
+      "place",
+      "privacy",
+      "promotable_id",
+      "promotion_status",
+      "properties",
+      "scheduled_publish_time",
+      "shares",
+      "source",
+      "status_type",
+      "story",
+      "story_tags",
+      "subscribed",
+      "target",
+      "targeting",
+      "timeline_visibility",
+      "type",
+      "updated_time",
+      "via",
+      "video_buying_eligibility",
+      "width",
+    };
+
+    @Override
+    public APINodeList<Post> parseResponse(String response, String header) throws APIException {
+      return Post.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<Post> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<Post> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<Post>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<Post>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<Post>>() {
+           public APINodeList<Post> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetPosts.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetPosts(String nodeId, APIContext context) {
+      super(context, nodeId, "/posts", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetPosts setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPosts setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetPosts setIncludeHidden (Boolean includeHidden) {
+      this.setParam("include_hidden", includeHidden);
+      return this;
+    }
+    public APIRequestGetPosts setIncludeHidden (String includeHidden) {
+      this.setParam("include_hidden", includeHidden);
+      return this;
+    }
+
+    public APIRequestGetPosts setQ (String q) {
+      this.setParam("q", q);
+      return this;
+    }
+
+    public APIRequestGetPosts setShowExpired (Boolean showExpired) {
+      this.setParam("show_expired", showExpired);
+      return this;
+    }
+    public APIRequestGetPosts setShowExpired (String showExpired) {
+      this.setParam("show_expired", showExpired);
+      return this;
+    }
+
+    public APIRequestGetPosts setSince (String since) {
+      this.setParam("since", since);
+      return this;
+    }
+
+    public APIRequestGetPosts setUntil (String until) {
+      this.setParam("until", until);
+      return this;
+    }
+
+    public APIRequestGetPosts setWith (String with) {
+      this.setParam("with", with);
+      return this;
+    }
+
+    public APIRequestGetPosts requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetPosts requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPosts requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetPosts requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPosts requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPosts requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetPosts requestActionsField () {
+      return this.requestActionsField(true);
+    }
+    public APIRequestGetPosts requestActionsField (boolean value) {
+      this.requestField("actions", value);
+      return this;
+    }
+    public APIRequestGetPosts requestAdminCreatorField () {
+      return this.requestAdminCreatorField(true);
+    }
+    public APIRequestGetPosts requestAdminCreatorField (boolean value) {
+      this.requestField("admin_creator", value);
+      return this;
+    }
+    public APIRequestGetPosts requestAllowedAdvertisingObjectivesField () {
+      return this.requestAllowedAdvertisingObjectivesField(true);
+    }
+    public APIRequestGetPosts requestAllowedAdvertisingObjectivesField (boolean value) {
+      this.requestField("allowed_advertising_objectives", value);
+      return this;
+    }
+    public APIRequestGetPosts requestApplicationField () {
+      return this.requestApplicationField(true);
+    }
+    public APIRequestGetPosts requestApplicationField (boolean value) {
+      this.requestField("application", value);
+      return this;
+    }
+    public APIRequestGetPosts requestBackdatedTimeField () {
+      return this.requestBackdatedTimeField(true);
+    }
+    public APIRequestGetPosts requestBackdatedTimeField (boolean value) {
+      this.requestField("backdated_time", value);
+      return this;
+    }
+    public APIRequestGetPosts requestCallToActionField () {
+      return this.requestCallToActionField(true);
+    }
+    public APIRequestGetPosts requestCallToActionField (boolean value) {
+      this.requestField("call_to_action", value);
+      return this;
+    }
+    public APIRequestGetPosts requestCanReplyPrivatelyField () {
+      return this.requestCanReplyPrivatelyField(true);
+    }
+    public APIRequestGetPosts requestCanReplyPrivatelyField (boolean value) {
+      this.requestField("can_reply_privately", value);
+      return this;
+    }
+    public APIRequestGetPosts requestCaptionField () {
+      return this.requestCaptionField(true);
+    }
+    public APIRequestGetPosts requestCaptionField (boolean value) {
+      this.requestField("caption", value);
+      return this;
+    }
+    public APIRequestGetPosts requestChildAttachmentsField () {
+      return this.requestChildAttachmentsField(true);
+    }
+    public APIRequestGetPosts requestChildAttachmentsField (boolean value) {
+      this.requestField("child_attachments", value);
+      return this;
+    }
+    public APIRequestGetPosts requestCommentsMirroringDomainField () {
+      return this.requestCommentsMirroringDomainField(true);
+    }
+    public APIRequestGetPosts requestCommentsMirroringDomainField (boolean value) {
+      this.requestField("comments_mirroring_domain", value);
+      return this;
+    }
+    public APIRequestGetPosts requestCoordinatesField () {
+      return this.requestCoordinatesField(true);
+    }
+    public APIRequestGetPosts requestCoordinatesField (boolean value) {
+      this.requestField("coordinates", value);
+      return this;
+    }
+    public APIRequestGetPosts requestCreatedTimeField () {
+      return this.requestCreatedTimeField(true);
+    }
+    public APIRequestGetPosts requestCreatedTimeField (boolean value) {
+      this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGetPosts requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetPosts requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetPosts requestEventField () {
+      return this.requestEventField(true);
+    }
+    public APIRequestGetPosts requestEventField (boolean value) {
+      this.requestField("event", value);
+      return this;
+    }
+    public APIRequestGetPosts requestExpandedHeightField () {
+      return this.requestExpandedHeightField(true);
+    }
+    public APIRequestGetPosts requestExpandedHeightField (boolean value) {
+      this.requestField("expanded_height", value);
+      return this;
+    }
+    public APIRequestGetPosts requestExpandedWidthField () {
+      return this.requestExpandedWidthField(true);
+    }
+    public APIRequestGetPosts requestExpandedWidthField (boolean value) {
+      this.requestField("expanded_width", value);
+      return this;
+    }
+    public APIRequestGetPosts requestFeedTargetingField () {
+      return this.requestFeedTargetingField(true);
+    }
+    public APIRequestGetPosts requestFeedTargetingField (boolean value) {
+      this.requestField("feed_targeting", value);
+      return this;
+    }
+    public APIRequestGetPosts requestFromField () {
+      return this.requestFromField(true);
+    }
+    public APIRequestGetPosts requestFromField (boolean value) {
+      this.requestField("from", value);
+      return this;
+    }
+    public APIRequestGetPosts requestFullPictureField () {
+      return this.requestFullPictureField(true);
+    }
+    public APIRequestGetPosts requestFullPictureField (boolean value) {
+      this.requestField("full_picture", value);
+      return this;
+    }
+    public APIRequestGetPosts requestHeightField () {
+      return this.requestHeightField(true);
+    }
+    public APIRequestGetPosts requestHeightField (boolean value) {
+      this.requestField("height", value);
+      return this;
+    }
+    public APIRequestGetPosts requestIconField () {
+      return this.requestIconField(true);
+    }
+    public APIRequestGetPosts requestIconField (boolean value) {
+      this.requestField("icon", value);
+      return this;
+    }
+    public APIRequestGetPosts requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetPosts requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetPosts requestInstagramEligibilityField () {
+      return this.requestInstagramEligibilityField(true);
+    }
+    public APIRequestGetPosts requestInstagramEligibilityField (boolean value) {
+      this.requestField("instagram_eligibility", value);
+      return this;
+    }
+    public APIRequestGetPosts requestIsAppShareField () {
+      return this.requestIsAppShareField(true);
+    }
+    public APIRequestGetPosts requestIsAppShareField (boolean value) {
+      this.requestField("is_app_share", value);
+      return this;
+    }
+    public APIRequestGetPosts requestIsEligibleForPromotionField () {
+      return this.requestIsEligibleForPromotionField(true);
+    }
+    public APIRequestGetPosts requestIsEligibleForPromotionField (boolean value) {
+      this.requestField("is_eligible_for_promotion", value);
+      return this;
+    }
+    public APIRequestGetPosts requestIsExpiredField () {
+      return this.requestIsExpiredField(true);
+    }
+    public APIRequestGetPosts requestIsExpiredField (boolean value) {
+      this.requestField("is_expired", value);
+      return this;
+    }
+    public APIRequestGetPosts requestIsHiddenField () {
+      return this.requestIsHiddenField(true);
+    }
+    public APIRequestGetPosts requestIsHiddenField (boolean value) {
+      this.requestField("is_hidden", value);
+      return this;
+    }
+    public APIRequestGetPosts requestIsInlineCreatedField () {
+      return this.requestIsInlineCreatedField(true);
+    }
+    public APIRequestGetPosts requestIsInlineCreatedField (boolean value) {
+      this.requestField("is_inline_created", value);
+      return this;
+    }
+    public APIRequestGetPosts requestIsInstagramEligibleField () {
+      return this.requestIsInstagramEligibleField(true);
+    }
+    public APIRequestGetPosts requestIsInstagramEligibleField (boolean value) {
+      this.requestField("is_instagram_eligible", value);
+      return this;
+    }
+    public APIRequestGetPosts requestIsPopularField () {
+      return this.requestIsPopularField(true);
+    }
+    public APIRequestGetPosts requestIsPopularField (boolean value) {
+      this.requestField("is_popular", value);
+      return this;
+    }
+    public APIRequestGetPosts requestIsPublishedField () {
+      return this.requestIsPublishedField(true);
+    }
+    public APIRequestGetPosts requestIsPublishedField (boolean value) {
+      this.requestField("is_published", value);
+      return this;
+    }
+    public APIRequestGetPosts requestIsSphericalField () {
+      return this.requestIsSphericalField(true);
+    }
+    public APIRequestGetPosts requestIsSphericalField (boolean value) {
+      this.requestField("is_spherical", value);
+      return this;
+    }
+    public APIRequestGetPosts requestLinkField () {
+      return this.requestLinkField(true);
+    }
+    public APIRequestGetPosts requestLinkField (boolean value) {
+      this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGetPosts requestMessageField () {
+      return this.requestMessageField(true);
+    }
+    public APIRequestGetPosts requestMessageField (boolean value) {
+      this.requestField("message", value);
+      return this;
+    }
+    public APIRequestGetPosts requestMessageTagsField () {
+      return this.requestMessageTagsField(true);
+    }
+    public APIRequestGetPosts requestMessageTagsField (boolean value) {
+      this.requestField("message_tags", value);
+      return this;
+    }
+    public APIRequestGetPosts requestMultiShareEndCardField () {
+      return this.requestMultiShareEndCardField(true);
+    }
+    public APIRequestGetPosts requestMultiShareEndCardField (boolean value) {
+      this.requestField("multi_share_end_card", value);
+      return this;
+    }
+    public APIRequestGetPosts requestMultiShareOptimizedField () {
+      return this.requestMultiShareOptimizedField(true);
+    }
+    public APIRequestGetPosts requestMultiShareOptimizedField (boolean value) {
+      this.requestField("multi_share_optimized", value);
+      return this;
+    }
+    public APIRequestGetPosts requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetPosts requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetPosts requestObjectIdField () {
+      return this.requestObjectIdField(true);
+    }
+    public APIRequestGetPosts requestObjectIdField (boolean value) {
+      this.requestField("object_id", value);
+      return this;
+    }
+    public APIRequestGetPosts requestParentIdField () {
+      return this.requestParentIdField(true);
+    }
+    public APIRequestGetPosts requestParentIdField (boolean value) {
+      this.requestField("parent_id", value);
+      return this;
+    }
+    public APIRequestGetPosts requestPermalinkUrlField () {
+      return this.requestPermalinkUrlField(true);
+    }
+    public APIRequestGetPosts requestPermalinkUrlField (boolean value) {
+      this.requestField("permalink_url", value);
+      return this;
+    }
+    public APIRequestGetPosts requestPictureField () {
+      return this.requestPictureField(true);
+    }
+    public APIRequestGetPosts requestPictureField (boolean value) {
+      this.requestField("picture", value);
+      return this;
+    }
+    public APIRequestGetPosts requestPlaceField () {
+      return this.requestPlaceField(true);
+    }
+    public APIRequestGetPosts requestPlaceField (boolean value) {
+      this.requestField("place", value);
+      return this;
+    }
+    public APIRequestGetPosts requestPrivacyField () {
+      return this.requestPrivacyField(true);
+    }
+    public APIRequestGetPosts requestPrivacyField (boolean value) {
+      this.requestField("privacy", value);
+      return this;
+    }
+    public APIRequestGetPosts requestPromotableIdField () {
+      return this.requestPromotableIdField(true);
+    }
+    public APIRequestGetPosts requestPromotableIdField (boolean value) {
+      this.requestField("promotable_id", value);
+      return this;
+    }
+    public APIRequestGetPosts requestPromotionStatusField () {
+      return this.requestPromotionStatusField(true);
+    }
+    public APIRequestGetPosts requestPromotionStatusField (boolean value) {
+      this.requestField("promotion_status", value);
+      return this;
+    }
+    public APIRequestGetPosts requestPropertiesField () {
+      return this.requestPropertiesField(true);
+    }
+    public APIRequestGetPosts requestPropertiesField (boolean value) {
+      this.requestField("properties", value);
+      return this;
+    }
+    public APIRequestGetPosts requestScheduledPublishTimeField () {
+      return this.requestScheduledPublishTimeField(true);
+    }
+    public APIRequestGetPosts requestScheduledPublishTimeField (boolean value) {
+      this.requestField("scheduled_publish_time", value);
+      return this;
+    }
+    public APIRequestGetPosts requestSharesField () {
+      return this.requestSharesField(true);
+    }
+    public APIRequestGetPosts requestSharesField (boolean value) {
+      this.requestField("shares", value);
+      return this;
+    }
+    public APIRequestGetPosts requestSourceField () {
+      return this.requestSourceField(true);
+    }
+    public APIRequestGetPosts requestSourceField (boolean value) {
+      this.requestField("source", value);
+      return this;
+    }
+    public APIRequestGetPosts requestStatusTypeField () {
+      return this.requestStatusTypeField(true);
+    }
+    public APIRequestGetPosts requestStatusTypeField (boolean value) {
+      this.requestField("status_type", value);
+      return this;
+    }
+    public APIRequestGetPosts requestStoryField () {
+      return this.requestStoryField(true);
+    }
+    public APIRequestGetPosts requestStoryField (boolean value) {
+      this.requestField("story", value);
+      return this;
+    }
+    public APIRequestGetPosts requestStoryTagsField () {
+      return this.requestStoryTagsField(true);
+    }
+    public APIRequestGetPosts requestStoryTagsField (boolean value) {
+      this.requestField("story_tags", value);
+      return this;
+    }
+    public APIRequestGetPosts requestSubscribedField () {
+      return this.requestSubscribedField(true);
+    }
+    public APIRequestGetPosts requestSubscribedField (boolean value) {
+      this.requestField("subscribed", value);
+      return this;
+    }
+    public APIRequestGetPosts requestTargetField () {
+      return this.requestTargetField(true);
+    }
+    public APIRequestGetPosts requestTargetField (boolean value) {
+      this.requestField("target", value);
+      return this;
+    }
+    public APIRequestGetPosts requestTargetingField () {
+      return this.requestTargetingField(true);
+    }
+    public APIRequestGetPosts requestTargetingField (boolean value) {
+      this.requestField("targeting", value);
+      return this;
+    }
+    public APIRequestGetPosts requestTimelineVisibilityField () {
+      return this.requestTimelineVisibilityField(true);
+    }
+    public APIRequestGetPosts requestTimelineVisibilityField (boolean value) {
+      this.requestField("timeline_visibility", value);
+      return this;
+    }
+    public APIRequestGetPosts requestTypeField () {
+      return this.requestTypeField(true);
+    }
+    public APIRequestGetPosts requestTypeField (boolean value) {
+      this.requestField("type", value);
+      return this;
+    }
+    public APIRequestGetPosts requestUpdatedTimeField () {
+      return this.requestUpdatedTimeField(true);
+    }
+    public APIRequestGetPosts requestUpdatedTimeField (boolean value) {
+      this.requestField("updated_time", value);
+      return this;
+    }
+    public APIRequestGetPosts requestViaField () {
+      return this.requestViaField(true);
+    }
+    public APIRequestGetPosts requestViaField (boolean value) {
+      this.requestField("via", value);
+      return this;
+    }
+    public APIRequestGetPosts requestVideoBuyingEligibilityField () {
+      return this.requestVideoBuyingEligibilityField(true);
+    }
+    public APIRequestGetPosts requestVideoBuyingEligibilityField (boolean value) {
+      this.requestField("video_buying_eligibility", value);
+      return this;
+    }
+    public APIRequestGetPosts requestWidthField () {
+      return this.requestWidthField(true);
+    }
+    public APIRequestGetPosts requestWidthField (boolean value) {
+      this.requestField("width", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetRichMediaDocuments extends APIRequest<Canvas> {
 
     APINodeList<Canvas> lastResponse = null;
@@ -16483,8 +17807,10 @@ public class User extends APINode {
       "is_hidden",
       "is_published",
       "last_editor",
+      "linked_documents",
       "name",
       "owner",
+      "source_template",
       "update_time",
     };
 
@@ -16631,6 +17957,13 @@ public class User extends APINode {
       this.requestField("last_editor", value);
       return this;
     }
+    public APIRequestGetRichMediaDocuments requestLinkedDocumentsField () {
+      return this.requestLinkedDocumentsField(true);
+    }
+    public APIRequestGetRichMediaDocuments requestLinkedDocumentsField (boolean value) {
+      this.requestField("linked_documents", value);
+      return this;
+    }
     public APIRequestGetRichMediaDocuments requestNameField () {
       return this.requestNameField(true);
     }
@@ -16643,6 +17976,13 @@ public class User extends APINode {
     }
     public APIRequestGetRichMediaDocuments requestOwnerField (boolean value) {
       this.requestField("owner", value);
+      return this;
+    }
+    public APIRequestGetRichMediaDocuments requestSourceTemplateField () {
+      return this.requestSourceTemplateField(true);
+    }
+    public APIRequestGetRichMediaDocuments requestSourceTemplateField (boolean value) {
+      this.requestField("source_template", value);
       return this;
     }
     public APIRequestGetRichMediaDocuments requestUpdateTimeField () {
@@ -17214,7 +18554,6 @@ public class User extends APINode {
       "animated_effect_id",
       "application_id",
       "asked_fun_fact_prompt_id",
-      "attribution_app_id",
       "audio_story_wave_animation_handle",
       "composer_entry_picker",
       "composer_entry_point",
@@ -17269,6 +18608,7 @@ public class User extends APINode {
       "sales_promo_id",
       "slideshow_spec",
       "source",
+      "source_instagram_media_id",
       "spherical",
       "sponsor_id",
       "start_offset",
@@ -17370,11 +18710,6 @@ public class User extends APINode {
     }
     public APIRequestCreateVideo setAskedFunFactPromptId (String askedFunFactPromptId) {
       this.setParam("asked_fun_fact_prompt_id", askedFunFactPromptId);
-      return this;
-    }
-
-    public APIRequestCreateVideo setAttributionAppId (String attributionAppId) {
-      this.setParam("attribution_app_id", attributionAppId);
       return this;
     }
 
@@ -17768,6 +19103,11 @@ public class User extends APINode {
       return this;
     }
 
+    public APIRequestCreateVideo setSourceInstagramMediaId (String sourceInstagramMediaId) {
+      this.setParam("source_instagram_media_id", sourceInstagramMediaId);
+      return this;
+    }
+
     public APIRequestCreateVideo setSpherical (Boolean spherical) {
       this.setParam("spherical", spherical);
       return this;
@@ -18044,14 +19384,10 @@ public class User extends APINode {
 
     public static final String[] FIELDS = {
       "about",
-      "address",
-      "admin_notes",
       "age_range",
-      "auth_method",
       "birthday",
       "cover",
       "currency",
-      "devices",
       "education",
       "email",
       "favorite_athletes",
@@ -18080,7 +19416,6 @@ public class User extends APINode {
       "payment_pricepoints",
       "political",
       "profile_pic",
-      "public_key",
       "quotes",
       "relationship_status",
       "religion",
@@ -18096,7 +19431,6 @@ public class User extends APINode {
       "verified",
       "video_upload_limits",
       "website",
-      "work",
     };
 
     @Override
@@ -18195,32 +19529,11 @@ public class User extends APINode {
       this.requestField("about", value);
       return this;
     }
-    public APIRequestGet requestAddressField () {
-      return this.requestAddressField(true);
-    }
-    public APIRequestGet requestAddressField (boolean value) {
-      this.requestField("address", value);
-      return this;
-    }
-    public APIRequestGet requestAdminNotesField () {
-      return this.requestAdminNotesField(true);
-    }
-    public APIRequestGet requestAdminNotesField (boolean value) {
-      this.requestField("admin_notes", value);
-      return this;
-    }
     public APIRequestGet requestAgeRangeField () {
       return this.requestAgeRangeField(true);
     }
     public APIRequestGet requestAgeRangeField (boolean value) {
       this.requestField("age_range", value);
-      return this;
-    }
-    public APIRequestGet requestAuthMethodField () {
-      return this.requestAuthMethodField(true);
-    }
-    public APIRequestGet requestAuthMethodField (boolean value) {
-      this.requestField("auth_method", value);
       return this;
     }
     public APIRequestGet requestBirthdayField () {
@@ -18242,13 +19555,6 @@ public class User extends APINode {
     }
     public APIRequestGet requestCurrencyField (boolean value) {
       this.requestField("currency", value);
-      return this;
-    }
-    public APIRequestGet requestDevicesField () {
-      return this.requestDevicesField(true);
-    }
-    public APIRequestGet requestDevicesField (boolean value) {
-      this.requestField("devices", value);
       return this;
     }
     public APIRequestGet requestEducationField () {
@@ -18447,13 +19753,6 @@ public class User extends APINode {
       this.requestField("profile_pic", value);
       return this;
     }
-    public APIRequestGet requestPublicKeyField () {
-      return this.requestPublicKeyField(true);
-    }
-    public APIRequestGet requestPublicKeyField (boolean value) {
-      this.requestField("public_key", value);
-      return this;
-    }
     public APIRequestGet requestQuotesField () {
       return this.requestQuotesField(true);
     }
@@ -18557,13 +19856,6 @@ public class User extends APINode {
     }
     public APIRequestGet requestWebsiteField (boolean value) {
       this.requestField("website", value);
-      return this;
-    }
-    public APIRequestGet requestWorkField () {
-      return this.requestWorkField(true);
-    }
-    public APIRequestGet requestWorkField (boolean value) {
-      this.requestField("work", value);
       return this;
     }
   }
@@ -18804,186 +20096,6 @@ public class User extends APINode {
       }
   }
 
-  public static enum EnumBackdatedTimeGranularity {
-      @SerializedName("day")
-      VALUE_DAY("day"),
-      @SerializedName("hour")
-      VALUE_HOUR("hour"),
-      @SerializedName("min")
-      VALUE_MIN("min"),
-      @SerializedName("month")
-      VALUE_MONTH("month"),
-      @SerializedName("none")
-      VALUE_NONE("none"),
-      @SerializedName("year")
-      VALUE_YEAR("year"),
-      ;
-
-      private String value;
-
-      private EnumBackdatedTimeGranularity(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumCheckinEntryPoint {
-      @SerializedName("BRANDING_CHECKIN")
-      VALUE_BRANDING_CHECKIN("BRANDING_CHECKIN"),
-      @SerializedName("BRANDING_OTHER")
-      VALUE_BRANDING_OTHER("BRANDING_OTHER"),
-      @SerializedName("BRANDING_PHOTO")
-      VALUE_BRANDING_PHOTO("BRANDING_PHOTO"),
-      @SerializedName("BRANDING_STATUS")
-      VALUE_BRANDING_STATUS("BRANDING_STATUS"),
-      ;
-
-      private String value;
-
-      private EnumCheckinEntryPoint(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumFormatting {
-      @SerializedName("MARKDOWN")
-      VALUE_MARKDOWN("MARKDOWN"),
-      @SerializedName("PLAINTEXT")
-      VALUE_PLAINTEXT("PLAINTEXT"),
-      ;
-
-      private String value;
-
-      private EnumFormatting(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumPlaceAttachmentSetting {
-      @SerializedName("1")
-      VALUE_1("1"),
-      @SerializedName("2")
-      VALUE_2("2"),
-      ;
-
-      private String value;
-
-      private EnumPlaceAttachmentSetting(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumPostSurfacesBlacklist {
-      @SerializedName("1")
-      VALUE_1("1"),
-      @SerializedName("2")
-      VALUE_2("2"),
-      @SerializedName("3")
-      VALUE_3("3"),
-      @SerializedName("4")
-      VALUE_4("4"),
-      @SerializedName("5")
-      VALUE_5("5"),
-      ;
-
-      private String value;
-
-      private EnumPostSurfacesBlacklist(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumPostingToRedspace {
-      @SerializedName("disabled")
-      VALUE_DISABLED("disabled"),
-      @SerializedName("enabled")
-      VALUE_ENABLED("enabled"),
-      ;
-
-      private String value;
-
-      private EnumPostingToRedspace(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumTargetSurface {
-      @SerializedName("STORY")
-      VALUE_STORY("STORY"),
-      @SerializedName("TIMELINE")
-      VALUE_TIMELINE("TIMELINE"),
-      ;
-
-      private String value;
-
-      private EnumTargetSurface(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumUnpublishedContentType {
-      @SerializedName("ADS_POST")
-      VALUE_ADS_POST("ADS_POST"),
-      @SerializedName("DRAFT")
-      VALUE_DRAFT("DRAFT"),
-      @SerializedName("INLINE_CREATED")
-      VALUE_INLINE_CREATED("INLINE_CREATED"),
-      @SerializedName("PUBLISHED")
-      VALUE_PUBLISHED("PUBLISHED"),
-      @SerializedName("REVIEWABLE_BRANDED_CONTENT")
-      VALUE_REVIEWABLE_BRANDED_CONTENT("REVIEWABLE_BRANDED_CONTENT"),
-      @SerializedName("SCHEDULED")
-      VALUE_SCHEDULED("SCHEDULED"),
-      @SerializedName("SCHEDULED_RECURRING")
-      VALUE_SCHEDULED_RECURRING("SCHEDULED_RECURRING"),
-      ;
-
-      private String value;
-
-      private EnumUnpublishedContentType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
   public static enum EnumAction {
       @SerializedName("CONSUME")
       VALUE_CONSUME("CONSUME"),
@@ -19021,14 +20133,10 @@ public class User extends APINode {
 
   public User copyFrom(User instance) {
     this.mAbout = instance.mAbout;
-    this.mAddress = instance.mAddress;
-    this.mAdminNotes = instance.mAdminNotes;
     this.mAgeRange = instance.mAgeRange;
-    this.mAuthMethod = instance.mAuthMethod;
     this.mBirthday = instance.mBirthday;
     this.mCover = instance.mCover;
     this.mCurrency = instance.mCurrency;
-    this.mDevices = instance.mDevices;
     this.mEducation = instance.mEducation;
     this.mEmail = instance.mEmail;
     this.mFavoriteAthletes = instance.mFavoriteAthletes;
@@ -19057,7 +20165,6 @@ public class User extends APINode {
     this.mPaymentPricepoints = instance.mPaymentPricepoints;
     this.mPolitical = instance.mPolitical;
     this.mProfilePic = instance.mProfilePic;
-    this.mPublicKey = instance.mPublicKey;
     this.mQuotes = instance.mQuotes;
     this.mRelationshipStatus = instance.mRelationshipStatus;
     this.mReligion = instance.mReligion;
@@ -19073,7 +20180,6 @@ public class User extends APINode {
     this.mVerified = instance.mVerified;
     this.mVideoUploadLimits = instance.mVideoUploadLimits;
     this.mWebsite = instance.mWebsite;
-    this.mWork = instance.mWork;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

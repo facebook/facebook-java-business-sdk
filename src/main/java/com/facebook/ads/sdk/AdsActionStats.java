@@ -67,6 +67,8 @@ public class AdsActionStats extends APINode {
   private String m7dClick = null;
   @SerializedName("7d_view")
   private String m7dView = null;
+  @SerializedName("action_brand")
+  private String mActionBrand = null;
   @SerializedName("action_canvas_component_id")
   private String mActionCanvasComponentId = null;
   @SerializedName("action_canvas_component_name")
@@ -75,6 +77,8 @@ public class AdsActionStats extends APINode {
   private String mActionCarouselCardId = null;
   @SerializedName("action_carousel_card_name")
   private String mActionCarouselCardName = null;
+  @SerializedName("action_category")
+  private String mActionCategory = null;
   @SerializedName("action_converted_product_id")
   private String mActionConvertedProductId = null;
   @SerializedName("action_destination")
@@ -314,6 +318,15 @@ public class AdsActionStats extends APINode {
     return this;
   }
 
+  public String getFieldActionBrand() {
+    return mActionBrand;
+  }
+
+  public AdsActionStats setFieldActionBrand(String value) {
+    this.mActionBrand = value;
+    return this;
+  }
+
   public String getFieldActionCanvasComponentId() {
     return mActionCanvasComponentId;
   }
@@ -347,6 +360,15 @@ public class AdsActionStats extends APINode {
 
   public AdsActionStats setFieldActionCarouselCardName(String value) {
     this.mActionCarouselCardName = value;
+    return this;
+  }
+
+  public String getFieldActionCategory() {
+    return mActionCategory;
+  }
+
+  public AdsActionStats setFieldActionCategory(String value) {
+    this.mActionCategory = value;
     return this;
   }
 
@@ -526,10 +548,12 @@ public class AdsActionStats extends APINode {
     this.m28dView = instance.m28dView;
     this.m7dClick = instance.m7dClick;
     this.m7dView = instance.m7dView;
+    this.mActionBrand = instance.mActionBrand;
     this.mActionCanvasComponentId = instance.mActionCanvasComponentId;
     this.mActionCanvasComponentName = instance.mActionCanvasComponentName;
     this.mActionCarouselCardId = instance.mActionCarouselCardId;
     this.mActionCarouselCardName = instance.mActionCarouselCardName;
+    this.mActionCategory = instance.mActionCategory;
     this.mActionConvertedProductId = instance.mActionConvertedProductId;
     this.mActionDestination = instance.mActionDestination;
     this.mActionDevice = instance.mActionDevice;

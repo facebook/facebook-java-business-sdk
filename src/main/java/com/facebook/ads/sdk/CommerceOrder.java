@@ -2185,41 +2185,6 @@ public class CommerceOrder extends APINode {
     }
   }
 
-  public static enum EnumReasonCode {
-      @SerializedName("BUYERS_REMORSE")
-      VALUE_BUYERS_REMORSE("BUYERS_REMORSE"),
-      @SerializedName("DAMAGED_GOODS")
-      VALUE_DAMAGED_GOODS("DAMAGED_GOODS"),
-      @SerializedName("NOT_AS_DESCRIBED")
-      VALUE_NOT_AS_DESCRIBED("NOT_AS_DESCRIBED"),
-      @SerializedName("QUALITY_ISSUE")
-      VALUE_QUALITY_ISSUE("QUALITY_ISSUE"),
-      @SerializedName("REFUND_COMPROMISED")
-      VALUE_REFUND_COMPROMISED("REFUND_COMPROMISED"),
-      @SerializedName("REFUND_FOR_RETURN")
-      VALUE_REFUND_FOR_RETURN("REFUND_FOR_RETURN"),
-      @SerializedName("REFUND_REASON_OTHER")
-      VALUE_REFUND_REASON_OTHER("REFUND_REASON_OTHER"),
-      @SerializedName("REFUND_SFI_FAKE")
-      VALUE_REFUND_SFI_FAKE("REFUND_SFI_FAKE"),
-      @SerializedName("REFUND_SFI_REAL")
-      VALUE_REFUND_SFI_REAL("REFUND_SFI_REAL"),
-      @SerializedName("WRONG_ITEM")
-      VALUE_WRONG_ITEM("WRONG_ITEM"),
-      ;
-
-      private String value;
-
-      private EnumReasonCode(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
   public static enum EnumFilters {
       @SerializedName("HAS_CANCELLATIONS")
       VALUE_HAS_CANCELLATIONS("HAS_CANCELLATIONS"),
@@ -2261,6 +2226,43 @@ public class CommerceOrder extends APINode {
       private String value;
 
       private EnumState(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumReasonCode {
+      @SerializedName("BUYERS_REMORSE")
+      VALUE_BUYERS_REMORSE("BUYERS_REMORSE"),
+      @SerializedName("DAMAGED_GOODS")
+      VALUE_DAMAGED_GOODS("DAMAGED_GOODS"),
+      @SerializedName("FACEBOOK_INITIATED")
+      VALUE_FACEBOOK_INITIATED("FACEBOOK_INITIATED"),
+      @SerializedName("NOT_AS_DESCRIBED")
+      VALUE_NOT_AS_DESCRIBED("NOT_AS_DESCRIBED"),
+      @SerializedName("QUALITY_ISSUE")
+      VALUE_QUALITY_ISSUE("QUALITY_ISSUE"),
+      @SerializedName("REFUND_COMPROMISED")
+      VALUE_REFUND_COMPROMISED("REFUND_COMPROMISED"),
+      @SerializedName("REFUND_FOR_RETURN")
+      VALUE_REFUND_FOR_RETURN("REFUND_FOR_RETURN"),
+      @SerializedName("REFUND_REASON_OTHER")
+      VALUE_REFUND_REASON_OTHER("REFUND_REASON_OTHER"),
+      @SerializedName("REFUND_SFI_FAKE")
+      VALUE_REFUND_SFI_FAKE("REFUND_SFI_FAKE"),
+      @SerializedName("REFUND_SFI_REAL")
+      VALUE_REFUND_SFI_REAL("REFUND_SFI_REAL"),
+      @SerializedName("WRONG_ITEM")
+      VALUE_WRONG_ITEM("WRONG_ITEM"),
+      ;
+
+      private String value;
+
+      private EnumReasonCode(String value) {
         this.value = value;
       }
 

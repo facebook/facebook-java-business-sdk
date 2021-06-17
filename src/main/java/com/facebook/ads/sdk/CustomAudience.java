@@ -67,6 +67,8 @@ public class CustomAudience extends APINode {
   private String mDataSourceTypes = null;
   @SerializedName("datafile_custom_audience_uploading_status")
   private String mDatafileCustomAudienceUploadingStatus = null;
+  @SerializedName("delete_time")
+  private Long mDeleteTime = null;
   @SerializedName("delivery_status")
   private CustomAudienceStatus mDeliveryStatus = null;
   @SerializedName("description")
@@ -366,6 +368,10 @@ public class CustomAudience extends APINode {
     return new APIRequestCreateUser(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateUsersReplace createUsersReplace() {
+    return new APIRequestCreateUsersReplace(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestDelete delete() {
     return new APIRequestDelete(this.getPrefixedId().toString(), context);
   }
@@ -401,6 +407,10 @@ public class CustomAudience extends APINode {
 
   public String getFieldDatafileCustomAudienceUploadingStatus() {
     return mDatafileCustomAudienceUploadingStatus;
+  }
+
+  public Long getFieldDeleteTime() {
+    return mDeleteTime;
   }
 
   public CustomAudienceStatus getFieldDeliveryStatus() {
@@ -652,7 +662,6 @@ public class CustomAudience extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "account_status",
-      "ad_account_creation_request",
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
@@ -818,13 +827,6 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAdAccounts requestAccountStatusField (boolean value) {
       this.requestField("account_status", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestAdAccountCreationRequestField () {
-      return this.requestAdAccountCreationRequestField(true);
-    }
-    public APIRequestGetAdAccounts requestAdAccountCreationRequestField (boolean value) {
-      this.requestField("ad_account_creation_request", value);
       return this;
     }
     public APIRequestGetAdAccounts requestAdAccountPromotableObjectsField () {
@@ -1392,6 +1394,7 @@ public class CustomAudience extends APINode {
       "campaign",
       "campaign_id",
       "configured_status",
+      "conversion_domain",
       "conversion_specs",
       "created_time",
       "creative",
@@ -1598,6 +1601,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAds requestConfiguredStatusField (boolean value) {
       this.requestField("configured_status", value);
+      return this;
+    }
+    public APIRequestGetAds requestConversionDomainField () {
+      return this.requestConversionDomainField(true);
+    }
+    public APIRequestGetAds requestConversionDomainField (boolean value) {
+      this.requestField("conversion_domain", value);
       return this;
     }
     public APIRequestGetAds requestConversionSpecsField () {
@@ -2338,6 +2348,136 @@ public class CustomAudience extends APINode {
 
   }
 
+  public static class APIRequestCreateUsersReplace extends APIRequest<CustomAudience> {
+
+    CustomAudience lastResponse = null;
+    @Override
+    public CustomAudience getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "namespace",
+      "payload",
+      "session",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public CustomAudience parseResponse(String response, String header) throws APIException {
+      return CustomAudience.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public CustomAudience execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public CustomAudience execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<CustomAudience> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<CustomAudience> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, CustomAudience>() {
+           public CustomAudience apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateUsersReplace.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateUsersReplace(String nodeId, APIContext context) {
+      super(context, nodeId, "/usersreplace", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateUsersReplace setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUsersReplace setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateUsersReplace setNamespace (String namespace) {
+      this.setParam("namespace", namespace);
+      return this;
+    }
+
+    public APIRequestCreateUsersReplace setPayload (Object payload) {
+      this.setParam("payload", payload);
+      return this;
+    }
+    public APIRequestCreateUsersReplace setPayload (String payload) {
+      this.setParam("payload", payload);
+      return this;
+    }
+
+    public APIRequestCreateUsersReplace setSession (Object session) {
+      this.setParam("session", session);
+      return this;
+    }
+    public APIRequestCreateUsersReplace setSession (String session) {
+      this.setParam("session", session);
+      return this;
+    }
+
+    public APIRequestCreateUsersReplace requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateUsersReplace requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUsersReplace requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateUsersReplace requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUsersReplace requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUsersReplace requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestDelete extends APIRequest<APINode> {
 
     APINode lastResponse = null;
@@ -2461,6 +2601,7 @@ public class CustomAudience extends APINode {
       "data_source",
       "data_source_types",
       "datafile_custom_audience_uploading_status",
+      "delete_time",
       "delivery_status",
       "description",
       "excluded_custom_audiences",
@@ -2635,6 +2776,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGet requestDatafileCustomAudienceUploadingStatusField (boolean value) {
       this.requestField("datafile_custom_audience_uploading_status", value);
+      return this;
+    }
+    public APIRequestGet requestDeleteTimeField () {
+      return this.requestDeleteTimeField(true);
+    }
+    public APIRequestGet requestDeleteTimeField (boolean value) {
+      this.requestField("delete_time", value);
       return this;
     }
     public APIRequestGet requestDeliveryStatusField () {
@@ -2850,40 +2998,26 @@ public class CustomAudience extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "accountID",
-      "additionalMetadata",
       "allowed_domains",
       "claim_objective",
       "content_type",
       "countries",
       "customer_file_source",
       "description",
-      "details",
       "enable_fetch_or_create",
       "event_source_group",
       "event_sources",
       "exclusions",
-      "expectedSize",
-      "gender",
       "inclusions",
-      "isPrivate",
-      "is_household",
-      "is_household_exclusion",
       "lookalike_spec",
-      "maxAge",
-      "minAge",
       "name",
       "opt_out_link",
       "parent_audience_id",
-      "partnerID",
-      "partner_reference_key",
       "product_set_id",
       "retention_days",
       "rev_share_policy_id",
       "rule",
       "rule_aggregation",
-      "seed_audience",
-      "source",
       "tags",
     };
 
@@ -2943,16 +3077,6 @@ public class CustomAudience extends APINode {
     }
 
 
-    public APIRequestUpdate setAccountid (String accountid) {
-      this.setParam("accountID", accountid);
-      return this;
-    }
-
-    public APIRequestUpdate setAdditionalmetadata (String additionalmetadata) {
-      this.setParam("additionalMetadata", additionalmetadata);
-      return this;
-    }
-
     public APIRequestUpdate setAllowedDomains (List<String> allowedDomains) {
       this.setParam("allowed_domains", allowedDomains);
       return this;
@@ -2999,11 +3123,6 @@ public class CustomAudience extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setDetails (String details) {
-      this.setParam("details", details);
-      return this;
-    }
-
     public APIRequestUpdate setEnableFetchOrCreate (Boolean enableFetchOrCreate) {
       this.setParam("enable_fetch_or_create", enableFetchOrCreate);
       return this;
@@ -3036,20 +3155,6 @@ public class CustomAudience extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setExpectedsize (Long expectedsize) {
-      this.setParam("expectedSize", expectedsize);
-      return this;
-    }
-    public APIRequestUpdate setExpectedsize (String expectedsize) {
-      this.setParam("expectedSize", expectedsize);
-      return this;
-    }
-
-    public APIRequestUpdate setGender (String gender) {
-      this.setParam("gender", gender);
-      return this;
-    }
-
     public APIRequestUpdate setInclusions (List<Object> inclusions) {
       this.setParam("inclusions", inclusions);
       return this;
@@ -3059,53 +3164,8 @@ public class CustomAudience extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setIsprivate (Boolean isprivate) {
-      this.setParam("isPrivate", isprivate);
-      return this;
-    }
-    public APIRequestUpdate setIsprivate (String isprivate) {
-      this.setParam("isPrivate", isprivate);
-      return this;
-    }
-
-    public APIRequestUpdate setIsHousehold (Boolean isHousehold) {
-      this.setParam("is_household", isHousehold);
-      return this;
-    }
-    public APIRequestUpdate setIsHousehold (String isHousehold) {
-      this.setParam("is_household", isHousehold);
-      return this;
-    }
-
-    public APIRequestUpdate setIsHouseholdExclusion (Boolean isHouseholdExclusion) {
-      this.setParam("is_household_exclusion", isHouseholdExclusion);
-      return this;
-    }
-    public APIRequestUpdate setIsHouseholdExclusion (String isHouseholdExclusion) {
-      this.setParam("is_household_exclusion", isHouseholdExclusion);
-      return this;
-    }
-
     public APIRequestUpdate setLookalikeSpec (String lookalikeSpec) {
       this.setParam("lookalike_spec", lookalikeSpec);
-      return this;
-    }
-
-    public APIRequestUpdate setMaxage (Long maxage) {
-      this.setParam("maxAge", maxage);
-      return this;
-    }
-    public APIRequestUpdate setMaxage (String maxage) {
-      this.setParam("maxAge", maxage);
-      return this;
-    }
-
-    public APIRequestUpdate setMinage (Long minage) {
-      this.setParam("minAge", minage);
-      return this;
-    }
-    public APIRequestUpdate setMinage (String minage) {
-      this.setParam("minAge", minage);
       return this;
     }
 
@@ -3125,16 +3185,6 @@ public class CustomAudience extends APINode {
     }
     public APIRequestUpdate setParentAudienceId (String parentAudienceId) {
       this.setParam("parent_audience_id", parentAudienceId);
-      return this;
-    }
-
-    public APIRequestUpdate setPartnerid (String partnerid) {
-      this.setParam("partnerID", partnerid);
-      return this;
-    }
-
-    public APIRequestUpdate setPartnerReferenceKey (String partnerReferenceKey) {
-      this.setParam("partner_reference_key", partnerReferenceKey);
       return this;
     }
 
@@ -3168,20 +3218,6 @@ public class CustomAudience extends APINode {
 
     public APIRequestUpdate setRuleAggregation (String ruleAggregation) {
       this.setParam("rule_aggregation", ruleAggregation);
-      return this;
-    }
-
-    public APIRequestUpdate setSeedAudience (Long seedAudience) {
-      this.setParam("seed_audience", seedAudience);
-      return this;
-    }
-    public APIRequestUpdate setSeedAudience (String seedAudience) {
-      this.setParam("seed_audience", seedAudience);
-      return this;
-    }
-
-    public APIRequestUpdate setSource (String source) {
-      this.setParam("source", source);
       return this;
     }
 
@@ -3389,6 +3425,7 @@ public class CustomAudience extends APINode {
     this.mDataSource = instance.mDataSource;
     this.mDataSourceTypes = instance.mDataSourceTypes;
     this.mDatafileCustomAudienceUploadingStatus = instance.mDatafileCustomAudienceUploadingStatus;
+    this.mDeleteTime = instance.mDeleteTime;
     this.mDeliveryStatus = instance.mDeliveryStatus;
     this.mDescription = instance.mDescription;
     this.mExcludedCustomAudiences = instance.mExcludedCustomAudiences;

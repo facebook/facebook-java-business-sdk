@@ -605,6 +605,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_EFFECTIVE_INSTAGRAM_POSITIONS("effective_instagram_positions"),
       @SerializedName("effective_messenger_positions")
       VALUE_EFFECTIVE_MESSENGER_POSITIONS("effective_messenger_positions"),
+      @SerializedName("effective_oculus_positions")
+      VALUE_EFFECTIVE_OCULUS_POSITIONS("effective_oculus_positions"),
       @SerializedName("effective_publisher_platforms")
       VALUE_EFFECTIVE_PUBLISHER_PLATFORMS("effective_publisher_platforms"),
       @SerializedName("effective_whatsapp_positions")
@@ -721,6 +723,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_MOMS("moms"),
       @SerializedName("net_worth")
       VALUE_NET_WORTH("net_worth"),
+      @SerializedName("oculus_positions")
+      VALUE_OCULUS_POSITIONS("oculus_positions"),
       @SerializedName("office_type")
       VALUE_OFFICE_TYPE("office_type"),
       @SerializedName("page_types")
@@ -795,20 +799,40 @@ public class AdAccountTargetingUnified extends APINode {
       }
   }
 
-  public static enum EnumMode {
-      @SerializedName("best_performing")
-      VALUE_BEST_PERFORMING("best_performing"),
-      @SerializedName("recently_used")
-      VALUE_RECENTLY_USED("recently_used"),
-      @SerializedName("related")
-      VALUE_RELATED("related"),
-      @SerializedName("suggestions")
-      VALUE_SUGGESTIONS("suggestions"),
+  public static enum EnumAppStore {
+      @SerializedName("amazon_app_store")
+      VALUE_AMAZON_APP_STORE("amazon_app_store"),
+      @SerializedName("does_not_exist")
+      VALUE_DOES_NOT_EXIST("does_not_exist"),
+      @SerializedName("fb_android_store")
+      VALUE_FB_ANDROID_STORE("fb_android_store"),
+      @SerializedName("fb_canvas")
+      VALUE_FB_CANVAS("fb_canvas"),
+      @SerializedName("fb_gameroom")
+      VALUE_FB_GAMEROOM("fb_gameroom"),
+      @SerializedName("galaxy_store")
+      VALUE_GALAXY_STORE("galaxy_store"),
+      @SerializedName("google_play")
+      VALUE_GOOGLE_PLAY("google_play"),
+      @SerializedName("instant_game")
+      VALUE_INSTANT_GAME("instant_game"),
+      @SerializedName("itunes")
+      VALUE_ITUNES("itunes"),
+      @SerializedName("itunes_ipad")
+      VALUE_ITUNES_IPAD("itunes_ipad"),
+      @SerializedName("oculus_app_store")
+      VALUE_OCULUS_APP_STORE("oculus_app_store"),
+      @SerializedName("roku_channel_store")
+      VALUE_ROKU_CHANNEL_STORE("roku_channel_store"),
+      @SerializedName("windows_10_store")
+      VALUE_WINDOWS_10_STORE("windows_10_store"),
+      @SerializedName("windows_store")
+      VALUE_WINDOWS_STORE("windows_store"),
       ;
 
       private String value;
 
-      private EnumMode(String value) {
+      private EnumAppStore(String value) {
         this.value = value;
       }
 
@@ -854,6 +878,29 @@ public class AdAccountTargetingUnified extends APINode {
       private String value;
 
       private EnumObjective(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumMode {
+      @SerializedName("best_performing")
+      VALUE_BEST_PERFORMING("best_performing"),
+      @SerializedName("recently_used")
+      VALUE_RECENTLY_USED("recently_used"),
+      @SerializedName("related")
+      VALUE_RELATED("related"),
+      @SerializedName("suggestions")
+      VALUE_SUGGESTIONS("suggestions"),
+      ;
+
+      private String value;
+
+      private EnumMode(String value) {
         this.value = value;
       }
 

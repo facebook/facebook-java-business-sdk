@@ -325,10 +325,16 @@ public class AdRule extends APINode {
   }
 
   public AdRuleEvaluationSpec getFieldEvaluationSpec() {
+    if (mEvaluationSpec != null) {
+      mEvaluationSpec.context = getContext();
+    }
     return mEvaluationSpec;
   }
 
   public AdRuleExecutionSpec getFieldExecutionSpec() {
+    if (mExecutionSpec != null) {
+      mExecutionSpec.context = getContext();
+    }
     return mExecutionSpec;
   }
 
@@ -1201,6 +1207,8 @@ public class AdRule extends APINode {
       VALUE_DISABLED("DISABLED"),
       @SerializedName("ENABLED")
       VALUE_ENABLED("ENABLED"),
+      @SerializedName("HAS_ISSUES")
+      VALUE_HAS_ISSUES("HAS_ISSUES"),
       ;
 
       private String value;

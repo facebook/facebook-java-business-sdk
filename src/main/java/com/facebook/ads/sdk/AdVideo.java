@@ -110,7 +110,7 @@ public class AdVideo extends APINode {
   @SerializedName("music_video_copyright")
   private MusicVideoCopyright mMusicVideoCopyright = null;
   @SerializedName("permalink_url")
-  private String mPermalinkUrl = null;
+  private Object mPermalinkUrl = null;
   @SerializedName("picture")
   private String mPicture = null;
   @SerializedName("place")
@@ -384,14 +384,6 @@ public class AdVideo extends APINode {
     return new APIRequestCreatePoll(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetReactions getReactions() {
-    return new APIRequestGetReactions(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetSharedPosts getSharedPosts() {
-    return new APIRequestGetSharedPosts(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetSponsorTags getSponsorTags() {
     return new APIRequestGetSponsorTags(this.getPrefixedId().toString(), context);
   }
@@ -546,7 +538,7 @@ public class AdVideo extends APINode {
     return mMusicVideoCopyright;
   }
 
-  public String getFieldPermalinkUrl() {
+  public Object getFieldPermalinkUrl() {
     return mPermalinkUrl;
   }
 
@@ -1393,6 +1385,7 @@ public class AdVideo extends APINode {
       "checkins",
       "company_overview",
       "connected_instagram_account",
+      "connected_page_backed_instagram_account",
       "contact_address",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
@@ -1411,6 +1404,7 @@ public class AdVideo extends APINode {
       "fan_count",
       "featured_video",
       "features",
+      "followers_count",
       "food_styles",
       "founded",
       "general_info",
@@ -1419,6 +1413,7 @@ public class AdVideo extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_number",
       "hometown",
@@ -1763,6 +1758,13 @@ public class AdVideo extends APINode {
       this.requestField("connected_instagram_account", value);
       return this;
     }
+    public APIRequestGetCrosspostSharedPages requestConnectedPageBackedInstagramAccountField () {
+      return this.requestConnectedPageBackedInstagramAccountField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestConnectedPageBackedInstagramAccountField (boolean value) {
+      this.requestField("connected_page_backed_instagram_account", value);
+      return this;
+    }
     public APIRequestGetCrosspostSharedPages requestContactAddressField () {
       return this.requestContactAddressField(true);
     }
@@ -1889,6 +1891,13 @@ public class AdVideo extends APINode {
       this.requestField("features", value);
       return this;
     }
+    public APIRequestGetCrosspostSharedPages requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
+      return this;
+    }
     public APIRequestGetCrosspostSharedPages requestFoodStylesField () {
       return this.requestFoodStylesField(true);
     }
@@ -1943,6 +1952,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestHasTransitionedToNewPageExperienceField () {
+      return this.requestHasTransitionedToNewPageExperienceField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestHasTransitionedToNewPageExperienceField (boolean value) {
+      this.requestField("has_transitioned_to_new_page_experience", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestHasWhatsappBusinessNumberField () {
@@ -3349,888 +3365,6 @@ public class AdVideo extends APINode {
 
   }
 
-  public static class APIRequestGetReactions extends APIRequest<Profile> {
-
-    APINodeList<Profile> lastResponse = null;
-    @Override
-    public APINodeList<Profile> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "type",
-    };
-
-    public static final String[] FIELDS = {
-      "can_post",
-      "id",
-      "link",
-      "name",
-      "pic",
-      "pic_crop",
-      "pic_large",
-      "pic_small",
-      "pic_square",
-      "profile_type",
-      "username",
-    };
-
-    @Override
-    public APINodeList<Profile> parseResponse(String response, String header) throws APIException {
-      return Profile.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<Profile> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<Profile> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<Profile>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<Profile>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<Profile>>() {
-           public APINodeList<Profile> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetReactions.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetReactions(String nodeId, APIContext context) {
-      super(context, nodeId, "/reactions", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetReactions setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetReactions setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetReactions setType (Profile.EnumType type) {
-      this.setParam("type", type);
-      return this;
-    }
-    public APIRequestGetReactions setType (String type) {
-      this.setParam("type", type);
-      return this;
-    }
-
-    public APIRequestGetReactions requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetReactions requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetReactions requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetReactions requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetReactions requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetReactions requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetReactions requestCanPostField () {
-      return this.requestCanPostField(true);
-    }
-    public APIRequestGetReactions requestCanPostField (boolean value) {
-      this.requestField("can_post", value);
-      return this;
-    }
-    public APIRequestGetReactions requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetReactions requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetReactions requestLinkField () {
-      return this.requestLinkField(true);
-    }
-    public APIRequestGetReactions requestLinkField (boolean value) {
-      this.requestField("link", value);
-      return this;
-    }
-    public APIRequestGetReactions requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetReactions requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetReactions requestPicField () {
-      return this.requestPicField(true);
-    }
-    public APIRequestGetReactions requestPicField (boolean value) {
-      this.requestField("pic", value);
-      return this;
-    }
-    public APIRequestGetReactions requestPicCropField () {
-      return this.requestPicCropField(true);
-    }
-    public APIRequestGetReactions requestPicCropField (boolean value) {
-      this.requestField("pic_crop", value);
-      return this;
-    }
-    public APIRequestGetReactions requestPicLargeField () {
-      return this.requestPicLargeField(true);
-    }
-    public APIRequestGetReactions requestPicLargeField (boolean value) {
-      this.requestField("pic_large", value);
-      return this;
-    }
-    public APIRequestGetReactions requestPicSmallField () {
-      return this.requestPicSmallField(true);
-    }
-    public APIRequestGetReactions requestPicSmallField (boolean value) {
-      this.requestField("pic_small", value);
-      return this;
-    }
-    public APIRequestGetReactions requestPicSquareField () {
-      return this.requestPicSquareField(true);
-    }
-    public APIRequestGetReactions requestPicSquareField (boolean value) {
-      this.requestField("pic_square", value);
-      return this;
-    }
-    public APIRequestGetReactions requestProfileTypeField () {
-      return this.requestProfileTypeField(true);
-    }
-    public APIRequestGetReactions requestProfileTypeField (boolean value) {
-      this.requestField("profile_type", value);
-      return this;
-    }
-    public APIRequestGetReactions requestUsernameField () {
-      return this.requestUsernameField(true);
-    }
-    public APIRequestGetReactions requestUsernameField (boolean value) {
-      this.requestField("username", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestGetSharedPosts extends APIRequest<Post> {
-
-    APINodeList<Post> lastResponse = null;
-    @Override
-    public APINodeList<Post> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "actions",
-      "admin_creator",
-      "allowed_advertising_objectives",
-      "application",
-      "backdated_time",
-      "call_to_action",
-      "can_reply_privately",
-      "caption",
-      "child_attachments",
-      "comments_mirroring_domain",
-      "coordinates",
-      "created_time",
-      "delivery_growth_optimizations",
-      "description",
-      "entities",
-      "event",
-      "expanded_height",
-      "expanded_width",
-      "feed_targeting",
-      "formatting",
-      "from",
-      "full_picture",
-      "height",
-      "icon",
-      "id",
-      "implicit_place",
-      "instagram_eligibility",
-      "instream_eligibility",
-      "is_app_share",
-      "is_eligible_for_promotion",
-      "is_expired",
-      "is_hidden",
-      "is_inline_created",
-      "is_instagram_eligible",
-      "is_popular",
-      "is_published",
-      "is_spherical",
-      "link",
-      "live_video_eligibility",
-      "message",
-      "message_tags",
-      "multi_share_end_card",
-      "multi_share_optimized",
-      "name",
-      "object_id",
-      "parent_id",
-      "permalink_url",
-      "picture",
-      "place",
-      "poll",
-      "privacy",
-      "promotable_id",
-      "promotion_status",
-      "properties",
-      "publishing_stats",
-      "scheduled_publish_time",
-      "shares",
-      "source",
-      "status_type",
-      "story",
-      "story_tags",
-      "subscribed",
-      "target",
-      "targeting",
-      "timeline_visibility",
-      "translations",
-      "type",
-      "updated_time",
-      "via",
-      "video_buying_eligibility",
-      "width",
-      "will_be_autocropped_when_deliver_to_instagram",
-    };
-
-    @Override
-    public APINodeList<Post> parseResponse(String response, String header) throws APIException {
-      return Post.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<Post> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<Post> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<Post>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<Post>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<Post>>() {
-           public APINodeList<Post> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetSharedPosts.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetSharedPosts(String nodeId, APIContext context) {
-      super(context, nodeId, "/sharedposts", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetSharedPosts setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetSharedPosts setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetSharedPosts requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetSharedPosts requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetSharedPosts requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetSharedPosts requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetSharedPosts requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetSharedPosts requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetSharedPosts requestActionsField () {
-      return this.requestActionsField(true);
-    }
-    public APIRequestGetSharedPosts requestActionsField (boolean value) {
-      this.requestField("actions", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestAdminCreatorField () {
-      return this.requestAdminCreatorField(true);
-    }
-    public APIRequestGetSharedPosts requestAdminCreatorField (boolean value) {
-      this.requestField("admin_creator", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestAllowedAdvertisingObjectivesField () {
-      return this.requestAllowedAdvertisingObjectivesField(true);
-    }
-    public APIRequestGetSharedPosts requestAllowedAdvertisingObjectivesField (boolean value) {
-      this.requestField("allowed_advertising_objectives", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestApplicationField () {
-      return this.requestApplicationField(true);
-    }
-    public APIRequestGetSharedPosts requestApplicationField (boolean value) {
-      this.requestField("application", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestBackdatedTimeField () {
-      return this.requestBackdatedTimeField(true);
-    }
-    public APIRequestGetSharedPosts requestBackdatedTimeField (boolean value) {
-      this.requestField("backdated_time", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestCallToActionField () {
-      return this.requestCallToActionField(true);
-    }
-    public APIRequestGetSharedPosts requestCallToActionField (boolean value) {
-      this.requestField("call_to_action", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestCanReplyPrivatelyField () {
-      return this.requestCanReplyPrivatelyField(true);
-    }
-    public APIRequestGetSharedPosts requestCanReplyPrivatelyField (boolean value) {
-      this.requestField("can_reply_privately", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestCaptionField () {
-      return this.requestCaptionField(true);
-    }
-    public APIRequestGetSharedPosts requestCaptionField (boolean value) {
-      this.requestField("caption", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestChildAttachmentsField () {
-      return this.requestChildAttachmentsField(true);
-    }
-    public APIRequestGetSharedPosts requestChildAttachmentsField (boolean value) {
-      this.requestField("child_attachments", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestCommentsMirroringDomainField () {
-      return this.requestCommentsMirroringDomainField(true);
-    }
-    public APIRequestGetSharedPosts requestCommentsMirroringDomainField (boolean value) {
-      this.requestField("comments_mirroring_domain", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestCoordinatesField () {
-      return this.requestCoordinatesField(true);
-    }
-    public APIRequestGetSharedPosts requestCoordinatesField (boolean value) {
-      this.requestField("coordinates", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestCreatedTimeField () {
-      return this.requestCreatedTimeField(true);
-    }
-    public APIRequestGetSharedPosts requestCreatedTimeField (boolean value) {
-      this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestDeliveryGrowthOptimizationsField () {
-      return this.requestDeliveryGrowthOptimizationsField(true);
-    }
-    public APIRequestGetSharedPosts requestDeliveryGrowthOptimizationsField (boolean value) {
-      this.requestField("delivery_growth_optimizations", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGetSharedPosts requestDescriptionField (boolean value) {
-      this.requestField("description", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestEntitiesField () {
-      return this.requestEntitiesField(true);
-    }
-    public APIRequestGetSharedPosts requestEntitiesField (boolean value) {
-      this.requestField("entities", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestEventField () {
-      return this.requestEventField(true);
-    }
-    public APIRequestGetSharedPosts requestEventField (boolean value) {
-      this.requestField("event", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestExpandedHeightField () {
-      return this.requestExpandedHeightField(true);
-    }
-    public APIRequestGetSharedPosts requestExpandedHeightField (boolean value) {
-      this.requestField("expanded_height", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestExpandedWidthField () {
-      return this.requestExpandedWidthField(true);
-    }
-    public APIRequestGetSharedPosts requestExpandedWidthField (boolean value) {
-      this.requestField("expanded_width", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestFeedTargetingField () {
-      return this.requestFeedTargetingField(true);
-    }
-    public APIRequestGetSharedPosts requestFeedTargetingField (boolean value) {
-      this.requestField("feed_targeting", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestFormattingField () {
-      return this.requestFormattingField(true);
-    }
-    public APIRequestGetSharedPosts requestFormattingField (boolean value) {
-      this.requestField("formatting", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestFromField () {
-      return this.requestFromField(true);
-    }
-    public APIRequestGetSharedPosts requestFromField (boolean value) {
-      this.requestField("from", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestFullPictureField () {
-      return this.requestFullPictureField(true);
-    }
-    public APIRequestGetSharedPosts requestFullPictureField (boolean value) {
-      this.requestField("full_picture", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestHeightField () {
-      return this.requestHeightField(true);
-    }
-    public APIRequestGetSharedPosts requestHeightField (boolean value) {
-      this.requestField("height", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestIconField () {
-      return this.requestIconField(true);
-    }
-    public APIRequestGetSharedPosts requestIconField (boolean value) {
-      this.requestField("icon", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetSharedPosts requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestImplicitPlaceField () {
-      return this.requestImplicitPlaceField(true);
-    }
-    public APIRequestGetSharedPosts requestImplicitPlaceField (boolean value) {
-      this.requestField("implicit_place", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestInstagramEligibilityField () {
-      return this.requestInstagramEligibilityField(true);
-    }
-    public APIRequestGetSharedPosts requestInstagramEligibilityField (boolean value) {
-      this.requestField("instagram_eligibility", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestInstreamEligibilityField () {
-      return this.requestInstreamEligibilityField(true);
-    }
-    public APIRequestGetSharedPosts requestInstreamEligibilityField (boolean value) {
-      this.requestField("instream_eligibility", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestIsAppShareField () {
-      return this.requestIsAppShareField(true);
-    }
-    public APIRequestGetSharedPosts requestIsAppShareField (boolean value) {
-      this.requestField("is_app_share", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestIsEligibleForPromotionField () {
-      return this.requestIsEligibleForPromotionField(true);
-    }
-    public APIRequestGetSharedPosts requestIsEligibleForPromotionField (boolean value) {
-      this.requestField("is_eligible_for_promotion", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestIsExpiredField () {
-      return this.requestIsExpiredField(true);
-    }
-    public APIRequestGetSharedPosts requestIsExpiredField (boolean value) {
-      this.requestField("is_expired", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestIsHiddenField () {
-      return this.requestIsHiddenField(true);
-    }
-    public APIRequestGetSharedPosts requestIsHiddenField (boolean value) {
-      this.requestField("is_hidden", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestIsInlineCreatedField () {
-      return this.requestIsInlineCreatedField(true);
-    }
-    public APIRequestGetSharedPosts requestIsInlineCreatedField (boolean value) {
-      this.requestField("is_inline_created", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestIsInstagramEligibleField () {
-      return this.requestIsInstagramEligibleField(true);
-    }
-    public APIRequestGetSharedPosts requestIsInstagramEligibleField (boolean value) {
-      this.requestField("is_instagram_eligible", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestIsPopularField () {
-      return this.requestIsPopularField(true);
-    }
-    public APIRequestGetSharedPosts requestIsPopularField (boolean value) {
-      this.requestField("is_popular", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestIsPublishedField () {
-      return this.requestIsPublishedField(true);
-    }
-    public APIRequestGetSharedPosts requestIsPublishedField (boolean value) {
-      this.requestField("is_published", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestIsSphericalField () {
-      return this.requestIsSphericalField(true);
-    }
-    public APIRequestGetSharedPosts requestIsSphericalField (boolean value) {
-      this.requestField("is_spherical", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestLinkField () {
-      return this.requestLinkField(true);
-    }
-    public APIRequestGetSharedPosts requestLinkField (boolean value) {
-      this.requestField("link", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestLiveVideoEligibilityField () {
-      return this.requestLiveVideoEligibilityField(true);
-    }
-    public APIRequestGetSharedPosts requestLiveVideoEligibilityField (boolean value) {
-      this.requestField("live_video_eligibility", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestMessageField () {
-      return this.requestMessageField(true);
-    }
-    public APIRequestGetSharedPosts requestMessageField (boolean value) {
-      this.requestField("message", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestMessageTagsField () {
-      return this.requestMessageTagsField(true);
-    }
-    public APIRequestGetSharedPosts requestMessageTagsField (boolean value) {
-      this.requestField("message_tags", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestMultiShareEndCardField () {
-      return this.requestMultiShareEndCardField(true);
-    }
-    public APIRequestGetSharedPosts requestMultiShareEndCardField (boolean value) {
-      this.requestField("multi_share_end_card", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestMultiShareOptimizedField () {
-      return this.requestMultiShareOptimizedField(true);
-    }
-    public APIRequestGetSharedPosts requestMultiShareOptimizedField (boolean value) {
-      this.requestField("multi_share_optimized", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetSharedPosts requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestObjectIdField () {
-      return this.requestObjectIdField(true);
-    }
-    public APIRequestGetSharedPosts requestObjectIdField (boolean value) {
-      this.requestField("object_id", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestParentIdField () {
-      return this.requestParentIdField(true);
-    }
-    public APIRequestGetSharedPosts requestParentIdField (boolean value) {
-      this.requestField("parent_id", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestPermalinkUrlField () {
-      return this.requestPermalinkUrlField(true);
-    }
-    public APIRequestGetSharedPosts requestPermalinkUrlField (boolean value) {
-      this.requestField("permalink_url", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestPictureField () {
-      return this.requestPictureField(true);
-    }
-    public APIRequestGetSharedPosts requestPictureField (boolean value) {
-      this.requestField("picture", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestPlaceField () {
-      return this.requestPlaceField(true);
-    }
-    public APIRequestGetSharedPosts requestPlaceField (boolean value) {
-      this.requestField("place", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestPollField () {
-      return this.requestPollField(true);
-    }
-    public APIRequestGetSharedPosts requestPollField (boolean value) {
-      this.requestField("poll", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestPrivacyField () {
-      return this.requestPrivacyField(true);
-    }
-    public APIRequestGetSharedPosts requestPrivacyField (boolean value) {
-      this.requestField("privacy", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestPromotableIdField () {
-      return this.requestPromotableIdField(true);
-    }
-    public APIRequestGetSharedPosts requestPromotableIdField (boolean value) {
-      this.requestField("promotable_id", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestPromotionStatusField () {
-      return this.requestPromotionStatusField(true);
-    }
-    public APIRequestGetSharedPosts requestPromotionStatusField (boolean value) {
-      this.requestField("promotion_status", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestPropertiesField () {
-      return this.requestPropertiesField(true);
-    }
-    public APIRequestGetSharedPosts requestPropertiesField (boolean value) {
-      this.requestField("properties", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestPublishingStatsField () {
-      return this.requestPublishingStatsField(true);
-    }
-    public APIRequestGetSharedPosts requestPublishingStatsField (boolean value) {
-      this.requestField("publishing_stats", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestScheduledPublishTimeField () {
-      return this.requestScheduledPublishTimeField(true);
-    }
-    public APIRequestGetSharedPosts requestScheduledPublishTimeField (boolean value) {
-      this.requestField("scheduled_publish_time", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestSharesField () {
-      return this.requestSharesField(true);
-    }
-    public APIRequestGetSharedPosts requestSharesField (boolean value) {
-      this.requestField("shares", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestSourceField () {
-      return this.requestSourceField(true);
-    }
-    public APIRequestGetSharedPosts requestSourceField (boolean value) {
-      this.requestField("source", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestStatusTypeField () {
-      return this.requestStatusTypeField(true);
-    }
-    public APIRequestGetSharedPosts requestStatusTypeField (boolean value) {
-      this.requestField("status_type", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestStoryField () {
-      return this.requestStoryField(true);
-    }
-    public APIRequestGetSharedPosts requestStoryField (boolean value) {
-      this.requestField("story", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestStoryTagsField () {
-      return this.requestStoryTagsField(true);
-    }
-    public APIRequestGetSharedPosts requestStoryTagsField (boolean value) {
-      this.requestField("story_tags", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestSubscribedField () {
-      return this.requestSubscribedField(true);
-    }
-    public APIRequestGetSharedPosts requestSubscribedField (boolean value) {
-      this.requestField("subscribed", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestTargetField () {
-      return this.requestTargetField(true);
-    }
-    public APIRequestGetSharedPosts requestTargetField (boolean value) {
-      this.requestField("target", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestTargetingField () {
-      return this.requestTargetingField(true);
-    }
-    public APIRequestGetSharedPosts requestTargetingField (boolean value) {
-      this.requestField("targeting", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestTimelineVisibilityField () {
-      return this.requestTimelineVisibilityField(true);
-    }
-    public APIRequestGetSharedPosts requestTimelineVisibilityField (boolean value) {
-      this.requestField("timeline_visibility", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestTranslationsField () {
-      return this.requestTranslationsField(true);
-    }
-    public APIRequestGetSharedPosts requestTranslationsField (boolean value) {
-      this.requestField("translations", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestTypeField () {
-      return this.requestTypeField(true);
-    }
-    public APIRequestGetSharedPosts requestTypeField (boolean value) {
-      this.requestField("type", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestUpdatedTimeField () {
-      return this.requestUpdatedTimeField(true);
-    }
-    public APIRequestGetSharedPosts requestUpdatedTimeField (boolean value) {
-      this.requestField("updated_time", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestViaField () {
-      return this.requestViaField(true);
-    }
-    public APIRequestGetSharedPosts requestViaField (boolean value) {
-      this.requestField("via", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestVideoBuyingEligibilityField () {
-      return this.requestVideoBuyingEligibilityField(true);
-    }
-    public APIRequestGetSharedPosts requestVideoBuyingEligibilityField (boolean value) {
-      this.requestField("video_buying_eligibility", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestWidthField () {
-      return this.requestWidthField(true);
-    }
-    public APIRequestGetSharedPosts requestWidthField (boolean value) {
-      this.requestField("width", value);
-      return this;
-    }
-    public APIRequestGetSharedPosts requestWillBeAutocroppedWhenDeliverToInstagramField () {
-      return this.requestWillBeAutocroppedWhenDeliverToInstagramField(true);
-    }
-    public APIRequestGetSharedPosts requestWillBeAutocroppedWhenDeliverToInstagramField (boolean value) {
-      this.requestField("will_be_autocropped_when_deliver_to_instagram", value);
-      return this;
-    }
-  }
-
   public static class APIRequestGetSponsorTags extends APIRequest<Page> {
 
     APINodeList<Page> lastResponse = null;
@@ -4265,6 +3399,7 @@ public class AdVideo extends APINode {
       "checkins",
       "company_overview",
       "connected_instagram_account",
+      "connected_page_backed_instagram_account",
       "contact_address",
       "copyright_whitelisted_ig_partners",
       "country_page_likes",
@@ -4283,6 +3418,7 @@ public class AdVideo extends APINode {
       "fan_count",
       "featured_video",
       "features",
+      "followers_count",
       "food_styles",
       "founded",
       "general_info",
@@ -4291,6 +3427,7 @@ public class AdVideo extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_number",
       "hometown",
@@ -4635,6 +3772,13 @@ public class AdVideo extends APINode {
       this.requestField("connected_instagram_account", value);
       return this;
     }
+    public APIRequestGetSponsorTags requestConnectedPageBackedInstagramAccountField () {
+      return this.requestConnectedPageBackedInstagramAccountField(true);
+    }
+    public APIRequestGetSponsorTags requestConnectedPageBackedInstagramAccountField (boolean value) {
+      this.requestField("connected_page_backed_instagram_account", value);
+      return this;
+    }
     public APIRequestGetSponsorTags requestContactAddressField () {
       return this.requestContactAddressField(true);
     }
@@ -4761,6 +3905,13 @@ public class AdVideo extends APINode {
       this.requestField("features", value);
       return this;
     }
+    public APIRequestGetSponsorTags requestFollowersCountField () {
+      return this.requestFollowersCountField(true);
+    }
+    public APIRequestGetSponsorTags requestFollowersCountField (boolean value) {
+      this.requestField("followers_count", value);
+      return this;
+    }
     public APIRequestGetSponsorTags requestFoodStylesField () {
       return this.requestFoodStylesField(true);
     }
@@ -4815,6 +3966,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetSponsorTags requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestHasTransitionedToNewPageExperienceField () {
+      return this.requestHasTransitionedToNewPageExperienceField(true);
+    }
+    public APIRequestGetSponsorTags requestHasTransitionedToNewPageExperienceField (boolean value) {
+      this.requestField("has_transitioned_to_new_page_experience", value);
       return this;
     }
     public APIRequestGetSponsorTags requestHasWhatsappBusinessNumberField () {
@@ -7054,6 +6212,8 @@ public class AdVideo extends APINode {
   }
 
   public static enum EnumContainerType {
+      @SerializedName("ACO_AUTOEXTRACTED_VIDEO")
+      VALUE_ACO_AUTOEXTRACTED_VIDEO("ACO_AUTOEXTRACTED_VIDEO"),
       @SerializedName("ACO_VIDEO_VARIATION")
       VALUE_ACO_VIDEO_VARIATION("ACO_VIDEO_VARIATION"),
       @SerializedName("AD_BREAK_PREVIEW")
@@ -7074,24 +6234,22 @@ public class AdVideo extends APINode {
       VALUE_ATLAS_VIDEO("ATLAS_VIDEO"),
       @SerializedName("AUDIO_BROADCAST")
       VALUE_AUDIO_BROADCAST("AUDIO_BROADCAST"),
-      @SerializedName("BELL_POLL")
-      VALUE_BELL_POLL("BELL_POLL"),
-      @SerializedName("BRAND_EQUITY_POLL_VIDEO")
-      VALUE_BRAND_EQUITY_POLL_VIDEO("BRAND_EQUITY_POLL_VIDEO"),
       @SerializedName("BROADCAST")
       VALUE_BROADCAST("BROADCAST"),
-      @SerializedName("CANDIDATE_VIDEOS")
-      VALUE_CANDIDATE_VIDEOS("CANDIDATE_VIDEOS"),
       @SerializedName("CANVAS")
       VALUE_CANVAS("CANVAS"),
       @SerializedName("CFC_VIDEO")
       VALUE_CFC_VIDEO("CFC_VIDEO"),
+      @SerializedName("CMS_MEDIA_MANAGER")
+      VALUE_CMS_MEDIA_MANAGER("CMS_MEDIA_MANAGER"),
       @SerializedName("CONTAINED_POST_ATTACHMENT")
       VALUE_CONTAINED_POST_ATTACHMENT("CONTAINED_POST_ATTACHMENT"),
       @SerializedName("CONTAINED_POST_AUDIO_BROADCAST")
       VALUE_CONTAINED_POST_AUDIO_BROADCAST("CONTAINED_POST_AUDIO_BROADCAST"),
       @SerializedName("CONTAINED_POST_BROADCAST")
       VALUE_CONTAINED_POST_BROADCAST("CONTAINED_POST_BROADCAST"),
+      @SerializedName("CONTAINED_POST_COPYRIGHT_REFERENCE_BROADCAST")
+      VALUE_CONTAINED_POST_COPYRIGHT_REFERENCE_BROADCAST("CONTAINED_POST_COPYRIGHT_REFERENCE_BROADCAST"),
       @SerializedName("COPYRIGHT_REFERENCE_BROADCAST")
       VALUE_COPYRIGHT_REFERENCE_BROADCAST("COPYRIGHT_REFERENCE_BROADCAST"),
       @SerializedName("COPYRIGHT_REFERENCE_VIDEO")
@@ -7126,12 +6284,16 @@ public class AdVideo extends APINode {
       VALUE_FACECAST_DVR("FACECAST_DVR"),
       @SerializedName("FB_SHORTS")
       VALUE_FB_SHORTS("FB_SHORTS"),
+      @SerializedName("FB_SHORTS_GROUP_POST")
+      VALUE_FB_SHORTS_GROUP_POST("FB_SHORTS_GROUP_POST"),
+      @SerializedName("FB_SHORTS_POST")
+      VALUE_FB_SHORTS_POST("FB_SHORTS_POST"),
+      @SerializedName("FB_SHORTS_REMIX_POST")
+      VALUE_FB_SHORTS_REMIX_POST("FB_SHORTS_REMIX_POST"),
       @SerializedName("FUNDRAISER_COVER_VIDEO")
       VALUE_FUNDRAISER_COVER_VIDEO("FUNDRAISER_COVER_VIDEO"),
       @SerializedName("GAME_CLIP")
       VALUE_GAME_CLIP("GAME_CLIP"),
-      @SerializedName("GAMING_UPDATE_VIDEO")
-      VALUE_GAMING_UPDATE_VIDEO("GAMING_UPDATE_VIDEO"),
       @SerializedName("GEMSTONE")
       VALUE_GEMSTONE("GEMSTONE"),
       @SerializedName("GOODWILL_ANNIVERSARY_DEPRECATED")
@@ -7148,12 +6310,18 @@ public class AdVideo extends APINode {
       VALUE_GOODWILL_VIDEO_TOKEN_REQUIRED("GOODWILL_VIDEO_TOKEN_REQUIRED"),
       @SerializedName("GROUP_POST")
       VALUE_GROUP_POST("GROUP_POST"),
+      @SerializedName("HACK_TV")
+      VALUE_HACK_TV("HACK_TV"),
       @SerializedName("HEURISTIC_CLUSTER_VIDEO")
       VALUE_HEURISTIC_CLUSTER_VIDEO("HEURISTIC_CLUSTER_VIDEO"),
       @SerializedName("HEURISTIC_PREVIEW")
       VALUE_HEURISTIC_PREVIEW("HEURISTIC_PREVIEW"),
       @SerializedName("HIGHLIGHT_CLIP_VIDEO")
       VALUE_HIGHLIGHT_CLIP_VIDEO("HIGHLIGHT_CLIP_VIDEO"),
+      @SerializedName("HUDDLE_BROADCAST")
+      VALUE_HUDDLE_BROADCAST("HUDDLE_BROADCAST"),
+      @SerializedName("IG_REELS_XPV")
+      VALUE_IG_REELS_XPV("IG_REELS_XPV"),
       @SerializedName("IG_STORIES_READER")
       VALUE_IG_STORIES_READER("IG_STORIES_READER"),
       @SerializedName("INSPIRATION_VIDEO")
@@ -7168,6 +6336,8 @@ public class AdVideo extends APINode {
       VALUE_INSTANT_GAME_CLIP("INSTANT_GAME_CLIP"),
       @SerializedName("ISSUE_MODULE")
       VALUE_ISSUE_MODULE("ISSUE_MODULE"),
+      @SerializedName("JOBS_VISUAL_INTRO_ENTRY")
+      VALUE_JOBS_VISUAL_INTRO_ENTRY("JOBS_VISUAL_INTRO_ENTRY"),
       @SerializedName("JOB_APPLICATION_VIDEO")
       VALUE_JOB_APPLICATION_VIDEO("JOB_APPLICATION_VIDEO"),
       @SerializedName("JOB_OPENING_VIDEO")
@@ -7190,8 +6360,8 @@ public class AdVideo extends APINode {
       VALUE_MARKETPLACE_LISTING_VIDEO("MARKETPLACE_LISTING_VIDEO"),
       @SerializedName("MARKETPLACE_PRE_RECORDED_VIDEO")
       VALUE_MARKETPLACE_PRE_RECORDED_VIDEO("MARKETPLACE_PRE_RECORDED_VIDEO"),
-      @SerializedName("MOMENTS_VIDEO")
-      VALUE_MOMENTS_VIDEO("MOMENTS_VIDEO"),
+      @SerializedName("MESSENGER_WATCH_TOGETHER")
+      VALUE_MESSENGER_WATCH_TOGETHER("MESSENGER_WATCH_TOGETHER"),
       @SerializedName("NEO_ASYNC_GAME_VIDEO")
       VALUE_NEO_ASYNC_GAME_VIDEO("NEO_ASYNC_GAME_VIDEO"),
       @SerializedName("NO_STORY")
@@ -7210,10 +6380,26 @@ public class AdVideo extends APINode {
       VALUE_PAGE_REVIEW_SCREENCAST("PAGE_REVIEW_SCREENCAST"),
       @SerializedName("PAGE_SLIDESHOW_VIDEO")
       VALUE_PAGE_SLIDESHOW_VIDEO("PAGE_SLIDESHOW_VIDEO"),
+      @SerializedName("PARTNER_DIRECTORY_BRAND_MEDIA")
+      VALUE_PARTNER_DIRECTORY_BRAND_MEDIA("PARTNER_DIRECTORY_BRAND_MEDIA"),
       @SerializedName("PIXELCLOUD")
       VALUE_PIXELCLOUD("PIXELCLOUD"),
+      @SerializedName("PODCAST_HIGHLIGHT")
+      VALUE_PODCAST_HIGHLIGHT("PODCAST_HIGHLIGHT"),
+      @SerializedName("PODCAST_RSS")
+      VALUE_PODCAST_RSS("PODCAST_RSS"),
+      @SerializedName("PODCAST_RSS_NO_NEWSFEED_STORY")
+      VALUE_PODCAST_RSS_NO_NEWSFEED_STORY("PODCAST_RSS_NO_NEWSFEED_STORY"),
+      @SerializedName("PODCAST_VOICES")
+      VALUE_PODCAST_VOICES("PODCAST_VOICES"),
+      @SerializedName("PODCAST_VOICES_NO_NEWSFEED_STORY")
+      VALUE_PODCAST_VOICES_NO_NEWSFEED_STORY("PODCAST_VOICES_NO_NEWSFEED_STORY"),
       @SerializedName("PREMIERE_SOURCE")
       VALUE_PREMIERE_SOURCE("PREMIERE_SOURCE"),
+      @SerializedName("PREMIUM_MUSIC_VIDEO_NO_NEWSFEED_STORY")
+      VALUE_PREMIUM_MUSIC_VIDEO_NO_NEWSFEED_STORY("PREMIUM_MUSIC_VIDEO_NO_NEWSFEED_STORY"),
+      @SerializedName("PREMIUM_MUSIC_VIDEO_WITH_NEWSFEED_STORY")
+      VALUE_PREMIUM_MUSIC_VIDEO_WITH_NEWSFEED_STORY("PREMIUM_MUSIC_VIDEO_WITH_NEWSFEED_STORY"),
       @SerializedName("PRIVATE_GALLERY_VIDEO")
       VALUE_PRIVATE_GALLERY_VIDEO("PRIVATE_GALLERY_VIDEO"),
       @SerializedName("PRODUCT_VIDEO")
@@ -7222,8 +6408,6 @@ public class AdVideo extends APINode {
       VALUE_PROFILE_COVER_VIDEO("PROFILE_COVER_VIDEO"),
       @SerializedName("PROFILE_INTRO_CARD")
       VALUE_PROFILE_INTRO_CARD("PROFILE_INTRO_CARD"),
-      @SerializedName("PROFILE_TO_PAGE_UPLOADED_VIDEO")
-      VALUE_PROFILE_TO_PAGE_UPLOADED_VIDEO("PROFILE_TO_PAGE_UPLOADED_VIDEO"),
       @SerializedName("PROFILE_VIDEO")
       VALUE_PROFILE_VIDEO("PROFILE_VIDEO"),
       @SerializedName("PROTON")
@@ -7246,8 +6430,14 @@ public class AdVideo extends APINode {
       VALUE_SLIDESHOW_VARIATION_VIDEO("SLIDESHOW_VARIATION_VIDEO"),
       @SerializedName("SOTTO_CONTENT")
       VALUE_SOTTO_CONTENT("SOTTO_CONTENT"),
+      @SerializedName("SOUNDBITES_VIDEO")
+      VALUE_SOUNDBITES_VIDEO("SOUNDBITES_VIDEO"),
       @SerializedName("SOUND_PLATFORM_STREAM")
       VALUE_SOUND_PLATFORM_STREAM("SOUND_PLATFORM_STREAM"),
+      @SerializedName("SRT_ATTACHMENT")
+      VALUE_SRT_ATTACHMENT("SRT_ATTACHMENT"),
+      @SerializedName("STAGES_BROADCAST")
+      VALUE_STAGES_BROADCAST("STAGES_BROADCAST"),
       @SerializedName("STORIES_VIDEO")
       VALUE_STORIES_VIDEO("STORIES_VIDEO"),
       @SerializedName("STORYLINE")
@@ -7258,18 +6448,30 @@ public class AdVideo extends APINode {
       VALUE_STORY_ARCHIVE_VIDEO("STORY_ARCHIVE_VIDEO"),
       @SerializedName("STORY_CARD_TEMPLATE")
       VALUE_STORY_CARD_TEMPLATE("STORY_CARD_TEMPLATE"),
+      @SerializedName("STREAM_HIGHLIGHTS_VIDEO")
+      VALUE_STREAM_HIGHLIGHTS_VIDEO("STREAM_HIGHLIGHTS_VIDEO"),
       @SerializedName("TAROT_DIGEST")
       VALUE_TAROT_DIGEST("TAROT_DIGEST"),
+      @SerializedName("TEMPORARY_UNLISTED")
+      VALUE_TEMPORARY_UNLISTED("TEMPORARY_UNLISTED"),
       @SerializedName("TEMP_MULTIMEDIA_POST")
       VALUE_TEMP_MULTIMEDIA_POST("TEMP_MULTIMEDIA_POST"),
       @SerializedName("UNLISTED")
       VALUE_UNLISTED("UNLISTED"),
+      @SerializedName("UNLISTED_HACK_TV")
+      VALUE_UNLISTED_HACK_TV("UNLISTED_HACK_TV"),
+      @SerializedName("UNLISTED_OCULUS")
+      VALUE_UNLISTED_OCULUS("UNLISTED_OCULUS"),
       @SerializedName("VIDEO_COMMENT")
       VALUE_VIDEO_COMMENT("VIDEO_COMMENT"),
+      @SerializedName("VIDEO_COMPOSITION_VARIATION")
+      VALUE_VIDEO_COMPOSITION_VARIATION("VIDEO_COMPOSITION_VARIATION"),
       @SerializedName("VIDEO_CREATIVE_EDITOR_AUTOGEN_AD_VIDEO")
       VALUE_VIDEO_CREATIVE_EDITOR_AUTOGEN_AD_VIDEO("VIDEO_CREATIVE_EDITOR_AUTOGEN_AD_VIDEO"),
       @SerializedName("VIDEO_SUPERRES")
       VALUE_VIDEO_SUPERRES("VIDEO_SUPERRES"),
+      @SerializedName("VOICES_ARTICLE_VIDEO")
+      VALUE_VOICES_ARTICLE_VIDEO("VOICES_ARTICLE_VIDEO"),
       @SerializedName("VU_GENERATED_VIDEO")
       VALUE_VU_GENERATED_VIDEO("VU_GENERATED_VIDEO"),
       @SerializedName("WOODHENGE")

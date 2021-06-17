@@ -298,12 +298,16 @@ public class AdStudy extends APINode {
     return new APIRequestGetCells(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetObjectives getObjectives() {
-    return new APIRequestGetObjectives(this.getPrefixedId().toString(), context);
+  public APIRequestGetInstances getInstances() {
+    return new APIRequestGetInstances(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateObjective createObjective() {
-    return new APIRequestCreateObjective(this.getPrefixedId().toString(), context);
+  public APIRequestCreateInstance createInstance() {
+    return new APIRequestCreateInstance(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetObjectives getObjectives() {
+    return new APIRequestGetObjectives(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestDelete delete() {
@@ -534,6 +538,272 @@ public class AdStudy extends APINode {
     }
   }
 
+  public static class APIRequestGetInstances extends APIRequest<PrivateLiftStudyInstance> {
+
+    APINodeList<PrivateLiftStudyInstance> lastResponse = null;
+    @Override
+    public APINodeList<PrivateLiftStudyInstance> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "breakdown_key",
+      "created_time",
+      "id",
+      "latest_status_update_time",
+      "server_ips",
+      "status",
+    };
+
+    @Override
+    public APINodeList<PrivateLiftStudyInstance> parseResponse(String response, String header) throws APIException {
+      return PrivateLiftStudyInstance.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<PrivateLiftStudyInstance> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<PrivateLiftStudyInstance> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<PrivateLiftStudyInstance>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<PrivateLiftStudyInstance>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<PrivateLiftStudyInstance>>() {
+           public APINodeList<PrivateLiftStudyInstance> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetInstances.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetInstances(String nodeId, APIContext context) {
+      super(context, nodeId, "/instances", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetInstances setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInstances setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetInstances requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetInstances requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInstances requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetInstances requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInstances requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInstances requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetInstances requestBreakdownKeyField () {
+      return this.requestBreakdownKeyField(true);
+    }
+    public APIRequestGetInstances requestBreakdownKeyField (boolean value) {
+      this.requestField("breakdown_key", value);
+      return this;
+    }
+    public APIRequestGetInstances requestCreatedTimeField () {
+      return this.requestCreatedTimeField(true);
+    }
+    public APIRequestGetInstances requestCreatedTimeField (boolean value) {
+      this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGetInstances requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetInstances requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetInstances requestLatestStatusUpdateTimeField () {
+      return this.requestLatestStatusUpdateTimeField(true);
+    }
+    public APIRequestGetInstances requestLatestStatusUpdateTimeField (boolean value) {
+      this.requestField("latest_status_update_time", value);
+      return this;
+    }
+    public APIRequestGetInstances requestServerIpsField () {
+      return this.requestServerIpsField(true);
+    }
+    public APIRequestGetInstances requestServerIpsField (boolean value) {
+      this.requestField("server_ips", value);
+      return this;
+    }
+    public APIRequestGetInstances requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetInstances requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreateInstance extends APIRequest<PrivateLiftStudyInstance> {
+
+    PrivateLiftStudyInstance lastResponse = null;
+    @Override
+    public PrivateLiftStudyInstance getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "breakdown_key",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public PrivateLiftStudyInstance parseResponse(String response, String header) throws APIException {
+      return PrivateLiftStudyInstance.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public PrivateLiftStudyInstance execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public PrivateLiftStudyInstance execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<PrivateLiftStudyInstance> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<PrivateLiftStudyInstance> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, PrivateLiftStudyInstance>() {
+           public PrivateLiftStudyInstance apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateInstance.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateInstance(String nodeId, APIContext context) {
+      super(context, nodeId, "/instances", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateInstance setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateInstance setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateInstance setBreakdownKey (Map<String, String> breakdownKey) {
+      this.setParam("breakdown_key", breakdownKey);
+      return this;
+    }
+    public APIRequestCreateInstance setBreakdownKey (String breakdownKey) {
+      this.setParam("breakdown_key", breakdownKey);
+      return this;
+    }
+
+    public APIRequestCreateInstance requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateInstance requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateInstance requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateInstance requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateInstance requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateInstance requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetObjectives extends APIRequest<AdStudyObjective> {
 
     APINodeList<AdStudyObjective> lastResponse = null;
@@ -684,206 +954,6 @@ public class AdStudy extends APINode {
       this.requestField("type", value);
       return this;
     }
-  }
-
-  public static class APIRequestCreateObjective extends APIRequest<AdStudyObjective> {
-
-    AdStudyObjective lastResponse = null;
-    @Override
-    public AdStudyObjective getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "adspixels",
-      "applications",
-      "customconversions",
-      "is_primary",
-      "name",
-      "offline_conversion_data_sets",
-      "offsitepixels",
-      "product_catalogs",
-      "product_sets",
-      "type",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public AdStudyObjective parseResponse(String response, String header) throws APIException {
-      return AdStudyObjective.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public AdStudyObjective execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdStudyObjective execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdStudyObjective> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdStudyObjective> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, AdStudyObjective>() {
-           public AdStudyObjective apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateObjective.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateObjective(String nodeId, APIContext context) {
-      super(context, nodeId, "/objectives", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateObjective setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateObjective setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateObjective setAdspixels (List<Object> adspixels) {
-      this.setParam("adspixels", adspixels);
-      return this;
-    }
-    public APIRequestCreateObjective setAdspixels (String adspixels) {
-      this.setParam("adspixels", adspixels);
-      return this;
-    }
-
-    public APIRequestCreateObjective setApplications (List<Object> applications) {
-      this.setParam("applications", applications);
-      return this;
-    }
-    public APIRequestCreateObjective setApplications (String applications) {
-      this.setParam("applications", applications);
-      return this;
-    }
-
-    public APIRequestCreateObjective setCustomconversions (List<Object> customconversions) {
-      this.setParam("customconversions", customconversions);
-      return this;
-    }
-    public APIRequestCreateObjective setCustomconversions (String customconversions) {
-      this.setParam("customconversions", customconversions);
-      return this;
-    }
-
-    public APIRequestCreateObjective setIsPrimary (Boolean isPrimary) {
-      this.setParam("is_primary", isPrimary);
-      return this;
-    }
-    public APIRequestCreateObjective setIsPrimary (String isPrimary) {
-      this.setParam("is_primary", isPrimary);
-      return this;
-    }
-
-    public APIRequestCreateObjective setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateObjective setOfflineConversionDataSets (List<Object> offlineConversionDataSets) {
-      this.setParam("offline_conversion_data_sets", offlineConversionDataSets);
-      return this;
-    }
-    public APIRequestCreateObjective setOfflineConversionDataSets (String offlineConversionDataSets) {
-      this.setParam("offline_conversion_data_sets", offlineConversionDataSets);
-      return this;
-    }
-
-    public APIRequestCreateObjective setOffsitepixels (List<Object> offsitepixels) {
-      this.setParam("offsitepixels", offsitepixels);
-      return this;
-    }
-    public APIRequestCreateObjective setOffsitepixels (String offsitepixels) {
-      this.setParam("offsitepixels", offsitepixels);
-      return this;
-    }
-
-    public APIRequestCreateObjective setProductCatalogs (List<Object> productCatalogs) {
-      this.setParam("product_catalogs", productCatalogs);
-      return this;
-    }
-    public APIRequestCreateObjective setProductCatalogs (String productCatalogs) {
-      this.setParam("product_catalogs", productCatalogs);
-      return this;
-    }
-
-    public APIRequestCreateObjective setProductSets (List<Object> productSets) {
-      this.setParam("product_sets", productSets);
-      return this;
-    }
-    public APIRequestCreateObjective setProductSets (String productSets) {
-      this.setParam("product_sets", productSets);
-      return this;
-    }
-
-    public APIRequestCreateObjective setType (AdStudyObjective.EnumType type) {
-      this.setParam("type", type);
-      return this;
-    }
-    public APIRequestCreateObjective setType (String type) {
-      this.setParam("type", type);
-      return this;
-    }
-
-    public APIRequestCreateObjective requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateObjective requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateObjective requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateObjective requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateObjective requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateObjective requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestDelete extends APIRequest<APINode> {

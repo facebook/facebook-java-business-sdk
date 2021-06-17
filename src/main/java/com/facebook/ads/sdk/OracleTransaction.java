@@ -799,25 +799,6 @@ public class OracleTransaction extends APINode {
     }
   }
 
-  public static enum EnumType {
-      @SerializedName("CM")
-      VALUE_CM("CM"),
-      @SerializedName("INV")
-      VALUE_INV("INV"),
-      ;
-
-      private String value;
-
-      private EnumType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {

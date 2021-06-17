@@ -37,6 +37,8 @@ public class Content {
   private String brand = null;
   @SerializedName("category")
   private String category = null;
+  @SerializedName("delivery_category")
+  private DeliveryCategory deliveryCategory = null;
 
   /**
    * Default Constructor.
@@ -54,8 +56,9 @@ public class Content {
    * @param description product description
    * @param brand product brand
    * @param category product category
+   * @param deliveryCategory type of delivery for a purchase event
    */
-  public Content(String productId, Long quantity, Float itemPrice, String title, String description, String brand, String category) {
+  public Content(String productId, Long quantity, Float itemPrice, String title, String description, String brand, String category, DeliveryCategory deliveryCategory) {
     this.productId = productId;
     this.quantity = quantity;
     this.itemPrice = itemPrice;
@@ -63,6 +66,7 @@ public class Content {
     this.description = description;
     this.brand = brand;
     this.category = category;
+    this.deliveryCategory = deliveryCategory;
   }
 
   /**
@@ -268,16 +272,47 @@ public class Content {
     return this;
   }
 
+  /**
+   * Type of delivery for a purchase event. Example: in_store.
+   *
+   * @return deliveryCategory
+   */
+  public DeliveryCategory getDeliveryCategory() {
+    return deliveryCategory;
+  }
+
+  /**
+   * Set a Type of delivery for a purchase event.
+   *
+   * @param deliveryCategory type of delivery
+   */
+  public void setDeliveryCategory(DeliveryCategory deliveryCategory) {
+    this.deliveryCategory = deliveryCategory;
+  }
+
+  /**
+   * Set a Type of delivery for a purchase event.
+   *
+   * @param deliveryCategory type of delivery
+   * @return CustomData
+   */
+  public Content deliveryCategory(DeliveryCategory deliveryCategory) {
+    this.deliveryCategory = deliveryCategory;
+    return this;
+  }
+
   @Override
   public int hashCode() {
     return Objects.hash(
-        productId,
-        quantity,
-        itemPrice,
-        title,
-        description,
-        brand,
-        category);
+      productId,
+      quantity,
+      itemPrice,
+      title,
+      description,
+      brand,
+      category,
+      deliveryCategory
+    );
   }
 
   @Override
@@ -292,6 +327,7 @@ public class Content {
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    brand: ").append(toIndentedString(brand)).append("\n");
     sb.append("    category: ").append(toIndentedString(category)).append("\n");
+    sb.append("    deliveryCategory: ").append(toIndentedString(deliveryCategory)).append("\n");
     sb.append("}");
     return sb.toString();
   }

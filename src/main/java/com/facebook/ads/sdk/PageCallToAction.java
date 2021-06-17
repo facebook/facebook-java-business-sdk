@@ -987,10 +987,14 @@ public class PageCallToAction extends APINode {
       VALUE_FOLLOW("FOLLOW"),
       @SerializedName("MARKETPLACE_INVENTORY_PAGE")
       VALUE_MARKETPLACE_INVENTORY_PAGE("MARKETPLACE_INVENTORY_PAGE"),
+      @SerializedName("MENU_ON_FACEBOOK")
+      VALUE_MENU_ON_FACEBOOK("MENU_ON_FACEBOOK"),
       @SerializedName("MESSENGER")
       VALUE_MESSENGER("MESSENGER"),
       @SerializedName("MINI_SHOP")
       VALUE_MINI_SHOP("MINI_SHOP"),
+      @SerializedName("MOBILE_CENTER")
+      VALUE_MOBILE_CENTER("MOBILE_CENTER"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
       @SerializedName("PHONE_CALL")
@@ -1026,6 +1030,8 @@ public class PageCallToAction extends APINode {
       VALUE_FOLLOW("FOLLOW"),
       @SerializedName("MARKETPLACE_INVENTORY_PAGE")
       VALUE_MARKETPLACE_INVENTORY_PAGE("MARKETPLACE_INVENTORY_PAGE"),
+      @SerializedName("MENU_ON_FACEBOOK")
+      VALUE_MENU_ON_FACEBOOK("MENU_ON_FACEBOOK"),
       @SerializedName("MESSENGER")
       VALUE_MESSENGER("MESSENGER"),
       @SerializedName("MINI_SHOP")
@@ -1089,6 +1095,8 @@ public class PageCallToAction extends APINode {
       VALUE_LOCAL_DEV_PLATFORM("LOCAL_DEV_PLATFORM"),
       @SerializedName("MESSAGE")
       VALUE_MESSAGE("MESSAGE"),
+      @SerializedName("MOBILE_CENTER")
+      VALUE_MOBILE_CENTER("MOBILE_CENTER"),
       @SerializedName("OPEN_APP")
       VALUE_OPEN_APP("OPEN_APP"),
       @SerializedName("ORDER_FOOD")
@@ -1111,6 +1119,8 @@ public class PageCallToAction extends APINode {
       VALUE_SIGN_UP("SIGN_UP"),
       @SerializedName("VIEW_INVENTORY")
       VALUE_VIEW_INVENTORY("VIEW_INVENTORY"),
+      @SerializedName("VIEW_MENU")
+      VALUE_VIEW_MENU("VIEW_MENU"),
       @SerializedName("VIEW_SHOP")
       VALUE_VIEW_SHOP("VIEW_SHOP"),
       @SerializedName("VISIT_GROUP")
@@ -1144,6 +1154,8 @@ public class PageCallToAction extends APINode {
       VALUE_FOLLOW("FOLLOW"),
       @SerializedName("MESSENGER")
       VALUE_MESSENGER("MESSENGER"),
+      @SerializedName("MOBILE_CENTER")
+      VALUE_MOBILE_CENTER("MOBILE_CENTER"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
       @SerializedName("SHOP_ON_FACEBOOK")

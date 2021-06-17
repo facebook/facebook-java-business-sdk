@@ -61,13 +61,74 @@ public class AdRuleEvaluationSpec extends APINode {
   private List<AdRuleFilters> mFilters = null;
   @SerializedName("trigger")
   private AdRuleTrigger mTrigger = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public AdRuleEvaluationSpec() {
+  AdRuleEvaluationSpec() {
+  }
+
+  public AdRuleEvaluationSpec(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public AdRuleEvaluationSpec(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public AdRuleEvaluationSpec fetch() throws APIException{
+    AdRuleEvaluationSpec newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static AdRuleEvaluationSpec fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<AdRuleEvaluationSpec> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static AdRuleEvaluationSpec fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<AdRuleEvaluationSpec> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<AdRuleEvaluationSpec> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<AdRuleEvaluationSpec>)(
+      new APIRequest<AdRuleEvaluationSpec>(context, "", "/", "GET", AdRuleEvaluationSpec.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<AdRuleEvaluationSpec>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", AdRuleEvaluationSpec.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static AdRuleEvaluationSpec loadJSON(String json, APIContext context, String header) {
     AdRuleEvaluationSpec adRuleEvaluationSpec = getGson().fromJson(json, AdRuleEvaluationSpec.class);
@@ -211,45 +272,164 @@ public class AdRuleEvaluationSpec extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public EnumEvaluationType getFieldEvaluationType() {
     return mEvaluationType;
-  }
-
-  public AdRuleEvaluationSpec setFieldEvaluationType(EnumEvaluationType value) {
-    this.mEvaluationType = value;
-    return this;
   }
 
   public List<AdRuleFilters> getFieldFilters() {
     return mFilters;
   }
 
-  public AdRuleEvaluationSpec setFieldFilters(List<AdRuleFilters> value) {
-    this.mFilters = value;
-    return this;
-  }
-
-  public AdRuleEvaluationSpec setFieldFilters(String value) {
-    Type type = new TypeToken<List<AdRuleFilters>>(){}.getType();
-    this.mFilters = AdRuleFilters.getGson().fromJson(value, type);
-    return this;
-  }
   public AdRuleTrigger getFieldTrigger() {
     return mTrigger;
   }
 
-  public AdRuleEvaluationSpec setFieldTrigger(AdRuleTrigger value) {
-    this.mTrigger = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
-  public AdRuleEvaluationSpec setFieldTrigger(String value) {
-    Type type = new TypeToken<AdRuleTrigger>(){}.getType();
-    this.mTrigger = AdRuleTrigger.getGson().fromJson(value, type);
-    return this;
-  }
 
+
+  public static class APIRequestGet extends APIRequest<AdRuleEvaluationSpec> {
+
+    AdRuleEvaluationSpec lastResponse = null;
+    @Override
+    public AdRuleEvaluationSpec getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "evaluation_type",
+      "filters",
+      "trigger",
+      "id",
+    };
+
+    @Override
+    public AdRuleEvaluationSpec parseResponse(String response, String header) throws APIException {
+      return AdRuleEvaluationSpec.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public AdRuleEvaluationSpec execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdRuleEvaluationSpec execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdRuleEvaluationSpec> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdRuleEvaluationSpec> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, AdRuleEvaluationSpec>() {
+           public AdRuleEvaluationSpec apply(ResponseWrapper result) {
+             try {
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestEvaluationTypeField () {
+      return this.requestEvaluationTypeField(true);
+    }
+    public APIRequestGet requestEvaluationTypeField (boolean value) {
+      this.requestField("evaluation_type", value);
+      return this;
+    }
+    public APIRequestGet requestFiltersField () {
+      return this.requestFiltersField(true);
+    }
+    public APIRequestGet requestFiltersField (boolean value) {
+      this.requestField("filters", value);
+      return this;
+    }
+    public APIRequestGet requestTriggerField () {
+      return this.requestTriggerField(true);
+    }
+    public APIRequestGet requestTriggerField (boolean value) {
+      this.requestField("trigger", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
   public static enum EnumEvaluationType {
       @SerializedName("SCHEDULE")
@@ -288,6 +468,7 @@ public class AdRuleEvaluationSpec extends APINode {
     this.mEvaluationType = instance.mEvaluationType;
     this.mFilters = instance.mFilters;
     this.mTrigger = instance.mTrigger;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
