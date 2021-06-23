@@ -31,7 +31,6 @@ import java.util.Map;
 import java.net.URL;
 import java.net.URLEncoder;
 import javax.net.ssl.HttpsURLConnection;
-import org.omg.CORBA.Request;
 import java.io.BufferedReader;
 import java.lang.reflect.Modifier;
 import java.lang.StringBuilder;
