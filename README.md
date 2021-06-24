@@ -149,7 +149,7 @@ for(Campaign campaign : campaigns) {
 }
 ```
 
-** Important **: Handling pagination:
+**Important**: Handling pagination:
 Most edge APIs have default pagination, which returns a limited number of objects (~30 objects) instead of the entire list. If you want to load more, you need to make a separate API call. In our SDK, you can call to `nextPage()`:
 
 ```java
@@ -162,7 +162,7 @@ campaigns = campaigns.nextPage();
 campaigns = campaigns.withAutoPaginationIterator(true);
 ```
 
-In this case, campaigns.iterator() will return an iterator that can fetch the next page automatically.
+In this case, `campaigns.iterator()` will return an iterator that can fetch the next page automatically.
 
 ```
 // Enhanced for loop
@@ -202,9 +202,9 @@ campaign.fetch();
 
 ### Batch Mode
 
-Every execute() is an HTTP request, which takes a network round trip. Facebook API does support <a href="https://developers.facebook.com/docs/graph-api/making-multiple-requests" target="_blank">batch mode</a>, which allows you to make multiple API calls in a single HTTP request.
+Every `execute()` is an HTTP request, which takes a network round trip. Facebook API does support <a href="https://developers.facebook.com/docs/graph-api/making-multiple-requests" target="_blank">batch mode</a>, which allows you to make multiple API calls in a single HTTP request.
 
-In this SDK, you can simply replace execute() with addToBatch() to prepare a batch API call. When it's ready, you call batch.execute().
+In this SDK, you can simply replace execute() with addToBatch() to prepare a batch API call. When it's ready, you call `batch.execute()`.
 
 Example:
 ```java
@@ -262,7 +262,7 @@ You can enable the debug output by setting the APIContext to debug mode:
 
     public static final APIContext context = new APIContext(ACCESS_TOKEN, APP_SECRET).enableDebug(true).setLogger(System.out);
 
-This will print out the network requests and responses. By default it prints on STDOUT, but you can customize by calling .setLogger(PrintSteam)
+This will print out the network requests and responses. By default it prints on STDOUT, but you can customize by calling `.setLogger(PrintSteam)`
 
 #### Customize Network
 In v0.2.0, we added APIRequest.changeRequestExecutor(IRequestExecutor), which can be used to set your own network request executor. This makes it possible to add proxy settings, automatic retry, or better network traffic management. See ``/example/NetworkCustomizationExample.java``.
