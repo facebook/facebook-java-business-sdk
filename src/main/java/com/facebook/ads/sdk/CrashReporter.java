@@ -74,8 +74,8 @@ public class CrashReporter implements Thread.UncaughtExceptionHandler {
 		return instance != null;
 	}
 
-  public static void setLogger(PrintStream logger) {
-    logger = logger;
+  public static void setLogger(PrintStream parameterLogger) {
+    logger = parameterLogger;
   }
 
 	@Override
