@@ -1,0 +1,65 @@
+FBSDKShareKit.framework 
+FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
+content.contentURL = [NSURL URLWithString:@"https://developers.facebook.com"];
+- (void)imagePickerController:(UIImagePickerController *)picker
+didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+  UIImage *image = info[UIImagePickerControllerOriginalImage];
+
+  FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
+  photo.image = image;
+  photo.userGenerated = YES;
+  FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
+  content.photos = @[photo];
+  ...
+}
+ - (void)imagePickerController:(UIImagePickerController *)picker
+didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+  FBSDKShareVideo *video = [[FBSDKShareVideo alloc] init];
+  if (@available(iOS 11, *)) {
+    video.videoAsset = [info objectForKey:UIImagePickerControllerPHAsset];
+  } else {
+    video.videoURL = [info objectForKey:UIImagePickerControllerReferenceURL];
+  }
+  FBSDKShareVideoContent *content = [[FBSDKShareVideoContent alloc] init];
+  content.video = video;
+  ...
+}
+FBSDKSharePhoto *photo = [FBSDKSharePhoto photoWith...
+FBSDKShareVideo *video = [FBSDKShareVideo videoWith...
+FBSDKShareMediaContent *content = [FBSDKShareMediaContent new];
+content.media = @[photo, video];
+}
+FBSDKShareButton *button = [[FBSDKShareButton alloc] init];
+button.shareContent = content;  
+[self.view addSubview:button];
+FBSDKSendButton *button = [[FBSDKSendButton alloc] init];
+button.shareContent = content; 
+[self.view addSubview:button];
+if (button.isHidden) {
+  NSLog(@"Is hidden");
+} else {
+  [self.view addSubview:button];
+}
+FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
+content.contentURL = [NSURL URLWithString:@"http://developers.facebook.com"];
+[FBSDKShareDialog showFromViewController:self
+                              withContent:content
+                                 delegate:nil];
+                                 [FBSDKMessageDialog showWithContent:content delegate:nil];
+                                 // Example content. Replace with content from your app.
+FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
+content.contentURL = [NSURL URLWithString:@"https://developers.facebook.com"];
+
+FBSDKShareDialog *dialog = [[FBSDKShareDialog alloc] init];
+dialog.fromViewController = self;
+dialog.content = content;
+dialog.mode = FBSDKShareDialogModeShareSheet;
+[dialog show];
+FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
+content.contentURL = [NSURL URLWithString:@"https://developers.facebook.com"];
+content.hashtag = [FBSDKHashtag hashtagWithString:@"#MadeWithHackbook"];
+FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
+content.contentURL = [@"https://developers.facebook.com/products/sharing"];
+content.quote = @"Learn quick and simple ways for people to share content from your app or website to Facebook.";
