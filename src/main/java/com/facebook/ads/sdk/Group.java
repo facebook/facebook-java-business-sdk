@@ -372,6 +372,10 @@ public class Group extends APINode {
     return new APIRequestGetPicture(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateShiftSetting createShiftSetting() {
+    return new APIRequestCreateShiftSetting(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetVideos getVideos() {
     return new APIRequestGetVideos(this.getPrefixedId().toString(), context);
   }
@@ -1288,6 +1292,7 @@ public class Group extends APINode {
       "can_guests_invite",
       "category",
       "cover",
+      "created_time",
       "declined_count",
       "description",
       "discount_code_enabled",
@@ -1434,6 +1439,13 @@ public class Group extends APINode {
     }
     public APIRequestGetEvents requestCoverField (boolean value) {
       this.requestField("cover", value);
+      return this;
+    }
+    public APIRequestGetEvents requestCreatedTimeField () {
+      return this.requestCreatedTimeField(true);
+    }
+    public APIRequestGetEvents requestCreatedTimeField (boolean value) {
+      this.requestField("created_time", value);
       return this;
     }
     public APIRequestGetEvents requestDeclinedCountField () {
@@ -4209,7 +4221,6 @@ public class Group extends APINode {
       "is_spherical",
       "live_encoders",
       "original_fov",
-      "planned_start_time",
       "privacy",
       "projection",
       "published",
@@ -4357,15 +4368,6 @@ public class Group extends APINode {
     }
     public APIRequestCreateLiveVideo setOriginalFov (String originalFov) {
       this.setParam("original_fov", originalFov);
-      return this;
-    }
-
-    public APIRequestCreateLiveVideo setPlannedStartTime (Long plannedStartTime) {
-      this.setParam("planned_start_time", plannedStartTime);
-      return this;
-    }
-    public APIRequestCreateLiveVideo setPlannedStartTime (String plannedStartTime) {
-      this.setParam("planned_start_time", plannedStartTime);
       return this;
     }
 
@@ -6009,6 +6011,126 @@ public class Group extends APINode {
     }
   }
 
+  public static class APIRequestCreateShiftSetting extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "external_id",
+      "shift_feature_setting",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateShiftSetting.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateShiftSetting(String nodeId, APIContext context) {
+      super(context, nodeId, "/shift_settings", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateShiftSetting setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateShiftSetting setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateShiftSetting setExternalId (String externalId) {
+      this.setParam("external_id", externalId);
+      return this;
+    }
+
+    public APIRequestCreateShiftSetting setShiftFeatureSetting (EnumShiftFeatureSetting shiftFeatureSetting) {
+      this.setParam("shift_feature_setting", shiftFeatureSetting);
+      return this;
+    }
+    public APIRequestCreateShiftSetting setShiftFeatureSetting (String shiftFeatureSetting) {
+      this.setParam("shift_feature_setting", shiftFeatureSetting);
+      return this;
+    }
+
+    public APIRequestCreateShiftSetting requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateShiftSetting requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateShiftSetting requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateShiftSetting requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateShiftSetting requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateShiftSetting requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetVideos extends APIRequest<AdVideo> {
 
     APINodeList<AdVideo> lastResponse = null;
@@ -6051,6 +6173,7 @@ public class Group extends APINode {
       "permalink_url",
       "picture",
       "place",
+      "post_views",
       "premiere_living_room_status",
       "privacy",
       "published",
@@ -6061,6 +6184,7 @@ public class Group extends APINode {
       "title",
       "universal_video_id",
       "updated_time",
+      "views",
     };
 
     @Override
@@ -6371,6 +6495,13 @@ public class Group extends APINode {
       this.requestField("place", value);
       return this;
     }
+    public APIRequestGetVideos requestPostViewsField () {
+      return this.requestPostViewsField(true);
+    }
+    public APIRequestGetVideos requestPostViewsField (boolean value) {
+      this.requestField("post_views", value);
+      return this;
+    }
     public APIRequestGetVideos requestPremiereLivingRoomStatusField () {
       return this.requestPremiereLivingRoomStatusField(true);
     }
@@ -6441,6 +6572,13 @@ public class Group extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
+    public APIRequestGetVideos requestViewsField () {
+      return this.requestViewsField(true);
+    }
+    public APIRequestGetVideos requestViewsField (boolean value) {
+      this.requestField("views", value);
+      return this;
+    }
   }
 
   public static class APIRequestCreateVideo extends APIRequest<AdVideo> {
@@ -6500,6 +6638,7 @@ public class Group extends APINode {
       "original_fov",
       "original_projection_type",
       "publish_event_id",
+      "published",
       "react_mode_metadata",
       "referenced_sticker_id",
       "replace_video_id",
@@ -6937,6 +7076,15 @@ public class Group extends APINode {
     }
     public APIRequestCreateVideo setPublishEventId (String publishEventId) {
       this.setParam("publish_event_id", publishEventId);
+      return this;
+    }
+
+    public APIRequestCreateVideo setPublished (Boolean published) {
+      this.setParam("published", published);
+      return this;
+    }
+    public APIRequestCreateVideo setPublished (String published) {
+      this.setParam("published", published);
       return this;
     }
 
@@ -7698,6 +7846,8 @@ public class Group extends APINode {
       VALUE_EVENT_PLANNING("EVENT_PLANNING"),
       @SerializedName("FAMILY")
       VALUE_FAMILY("FAMILY"),
+      @SerializedName("FANTASY_LEAGUE")
+      VALUE_FANTASY_LEAGUE("FANTASY_LEAGUE"),
       @SerializedName("FITNESS")
       VALUE_FITNESS("FITNESS"),
       @SerializedName("FOR_SALE")
@@ -7819,6 +7969,8 @@ public class Group extends APINode {
       VALUE_EVENT_PLANNING("EVENT_PLANNING"),
       @SerializedName("FAMILY")
       VALUE_FAMILY("FAMILY"),
+      @SerializedName("FANTASY_LEAGUE")
+      VALUE_FANTASY_LEAGUE("FANTASY_LEAGUE"),
       @SerializedName("FITNESS")
       VALUE_FITNESS("FITNESS"),
       @SerializedName("FOR_SALE")
@@ -7910,6 +8062,29 @@ public class Group extends APINode {
       private String value;
 
       private EnumGroupType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumShiftFeatureSetting {
+      @SerializedName("ALL_FEATURES_OFF")
+      VALUE_ALL_FEATURES_OFF("ALL_FEATURES_OFF"),
+      @SerializedName("ALL_FEATURES_ON")
+      VALUE_ALL_FEATURES_ON("ALL_FEATURES_ON"),
+      @SerializedName("SHIFT_COVER_ONLY_ON")
+      VALUE_SHIFT_COVER_ONLY_ON("SHIFT_COVER_ONLY_ON"),
+      @SerializedName("SHIFT_VIEWER_ONLY_ON")
+      VALUE_SHIFT_VIEWER_ONLY_ON("SHIFT_VIEWER_ONLY_ON"),
+      ;
+
+      private String value;
+
+      private EnumShiftFeatureSetting(String value) {
         this.value = value;
       }
 

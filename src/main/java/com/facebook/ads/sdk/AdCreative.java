@@ -2290,6 +2290,8 @@ public class AdCreative extends APINode {
       VALUE_CALL("CALL"),
       @SerializedName("CALL_ME")
       VALUE_CALL_ME("CALL_ME"),
+      @SerializedName("CALL_NOW")
+      VALUE_CALL_NOW("CALL_NOW"),
       @SerializedName("CONTACT")
       VALUE_CONTACT("CONTACT"),
       @SerializedName("CONTACT_US")
@@ -2483,6 +2485,8 @@ public class AdCreative extends APINode {
   }
 
   public static enum EnumApplinkTreatment {
+      @SerializedName("automatic")
+      VALUE_AUTOMATIC("automatic"),
       @SerializedName("deeplink_with_appstore_fallback")
       VALUE_DEEPLINK_WITH_APPSTORE_FALLBACK("deeplink_with_appstore_fallback"),
       @SerializedName("deeplink_with_web_fallback")

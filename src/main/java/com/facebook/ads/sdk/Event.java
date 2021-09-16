@@ -63,6 +63,8 @@ public class Event extends APINode {
   private EnumCategory mCategory = null;
   @SerializedName("cover")
   private CoverPhoto mCover = null;
+  @SerializedName("created_time")
+  private String mCreatedTime = null;
   @SerializedName("declined_count")
   private Long mDeclinedCount = null;
   @SerializedName("description")
@@ -389,6 +391,10 @@ public class Event extends APINode {
 
   public CoverPhoto getFieldCover() {
     return mCover;
+  }
+
+  public String getFieldCreatedTime() {
+    return mCreatedTime;
   }
 
   public Long getFieldDeclinedCount() {
@@ -845,7 +851,6 @@ public class Event extends APINode {
       "is_spherical",
       "live_encoders",
       "original_fov",
-      "planned_start_time",
       "privacy",
       "projection",
       "published",
@@ -993,15 +998,6 @@ public class Event extends APINode {
     }
     public APIRequestCreateLiveVideo setOriginalFov (String originalFov) {
       this.setParam("original_fov", originalFov);
-      return this;
-    }
-
-    public APIRequestCreateLiveVideo setPlannedStartTime (Long plannedStartTime) {
-      this.setParam("planned_start_time", plannedStartTime);
-      return this;
-    }
-    public APIRequestCreateLiveVideo setPlannedStartTime (String plannedStartTime) {
-      this.setParam("planned_start_time", plannedStartTime);
       return this;
     }
 
@@ -1852,6 +1848,7 @@ public class Event extends APINode {
       "can_guests_invite",
       "category",
       "cover",
+      "created_time",
       "declined_count",
       "description",
       "discount_code_enabled",
@@ -1998,6 +1995,13 @@ public class Event extends APINode {
     }
     public APIRequestGet requestCoverField (boolean value) {
       this.requestField("cover", value);
+      return this;
+    }
+    public APIRequestGet requestCreatedTimeField () {
+      return this.requestCreatedTimeField(true);
+    }
+    public APIRequestGet requestCreatedTimeField (boolean value) {
+      this.requestField("created_time", value);
       return this;
     }
     public APIRequestGet requestDeclinedCountField () {
@@ -2381,6 +2385,7 @@ public class Event extends APINode {
     this.mCanGuestsInvite = instance.mCanGuestsInvite;
     this.mCategory = instance.mCategory;
     this.mCover = instance.mCover;
+    this.mCreatedTime = instance.mCreatedTime;
     this.mDeclinedCount = instance.mDeclinedCount;
     this.mDescription = instance.mDescription;
     this.mDiscountCodeEnabled = instance.mDiscountCodeEnabled;

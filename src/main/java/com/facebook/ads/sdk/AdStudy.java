@@ -1503,8 +1503,6 @@ public class AdStudy extends APINode {
       VALUE_GEO_LIFT("GEO_LIFT"),
       @SerializedName("LIFT")
       VALUE_LIFT("LIFT"),
-      @SerializedName("PRIVATE_LIFT")
-      VALUE_PRIVATE_LIFT("PRIVATE_LIFT"),
       @SerializedName("SPLIT_TEST")
       VALUE_SPLIT_TEST("SPLIT_TEST"),
       ;

@@ -356,6 +356,7 @@ public class ProductGroup extends APINode {
       "image_fetch_status",
       "image_url",
       "images",
+      "invalidation_errors",
       "inventory",
       "manufacturer_part_number",
       "marked_for_product_launch",
@@ -691,6 +692,13 @@ public class ProductGroup extends APINode {
     }
     public APIRequestGetProducts requestImagesField (boolean value) {
       this.requestField("images", value);
+      return this;
+    }
+    public APIRequestGetProducts requestInvalidationErrorsField () {
+      return this.requestInvalidationErrorsField(true);
+    }
+    public APIRequestGetProducts requestInvalidationErrorsField (boolean value) {
+      this.requestField("invalidation_errors", value);
       return this;
     }
     public APIRequestGetProducts requestInventoryField () {

@@ -400,6 +400,7 @@ public class OracleTransaction extends APINode {
       "campaign_name",
       "clicks",
       "conversions",
+      "description",
       "impressions",
       "tags",
     };
@@ -533,6 +534,13 @@ public class OracleTransaction extends APINode {
     }
     public APIRequestGetCampaigns requestConversionsField (boolean value) {
       this.requestField("conversions", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetCampaigns requestDescriptionField (boolean value) {
+      this.requestField("description", value);
       return this;
     }
     public APIRequestGetCampaigns requestImpressionsField () {

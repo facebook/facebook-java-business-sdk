@@ -54,74 +54,70 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdPlacePageSet extends APINode {
-  @SerializedName("account_id")
-  private String mAccountId = null;
+public class WoodhengePurchasedPAYGReceipt extends APINode {
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("location_types")
-  private List<String> mLocationTypes = null;
-  @SerializedName("name")
-  private String mName = null;
-  @SerializedName("pages_count")
-  private Long mPagesCount = null;
-  @SerializedName("parent_page")
-  private Page mParentPage = null;
+  @SerializedName("number_of_subscriptions_purchased")
+  private Long mNumberOfSubscriptionsPurchased = null;
+  @SerializedName("purchase_time")
+  private String mPurchaseTime = null;
+  @SerializedName("user")
+  private User mUser = null;
   protected static Gson gson = null;
 
-  AdPlacePageSet() {
+  WoodhengePurchasedPAYGReceipt() {
   }
 
-  public AdPlacePageSet(Long id, APIContext context) {
+  public WoodhengePurchasedPAYGReceipt(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public AdPlacePageSet(String id, APIContext context) {
+  public WoodhengePurchasedPAYGReceipt(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public AdPlacePageSet fetch() throws APIException{
-    AdPlacePageSet newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public WoodhengePurchasedPAYGReceipt fetch() throws APIException{
+    WoodhengePurchasedPAYGReceipt newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static AdPlacePageSet fetchById(Long id, APIContext context) throws APIException {
+  public static WoodhengePurchasedPAYGReceipt fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<AdPlacePageSet> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<WoodhengePurchasedPAYGReceipt> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static AdPlacePageSet fetchById(String id, APIContext context) throws APIException {
+  public static WoodhengePurchasedPAYGReceipt fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<AdPlacePageSet> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<WoodhengePurchasedPAYGReceipt> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<AdPlacePageSet> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdPlacePageSet>)(
-      new APIRequest<AdPlacePageSet>(context, "", "/", "GET", AdPlacePageSet.getParser())
+  public static APINodeList<WoodhengePurchasedPAYGReceipt> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<WoodhengePurchasedPAYGReceipt>)(
+      new APIRequest<WoodhengePurchasedPAYGReceipt>(context, "", "/", "GET", WoodhengePurchasedPAYGReceipt.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<AdPlacePageSet>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<WoodhengePurchasedPAYGReceipt>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", AdPlacePageSet.getParser())
+      new APIRequest(context, "", "/", "GET", WoodhengePurchasedPAYGReceipt.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -134,12 +130,12 @@ public class AdPlacePageSet extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdPlacePageSet loadJSON(String json, APIContext context, String header) {
-    AdPlacePageSet adPlacePageSet = getGson().fromJson(json, AdPlacePageSet.class);
+  public static WoodhengePurchasedPAYGReceipt loadJSON(String json, APIContext context, String header) {
+    WoodhengePurchasedPAYGReceipt woodhengePurchasedPAYGReceipt = getGson().fromJson(json, WoodhengePurchasedPAYGReceipt.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adPlacePageSet.toString());
+      JsonElement o2 = parser.parse(woodhengePurchasedPAYGReceipt.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -149,14 +145,14 @@ public class AdPlacePageSet extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    adPlacePageSet.context = context;
-    adPlacePageSet.rawValue = json;
-    adPlacePageSet.header = header;
-    return adPlacePageSet;
+    woodhengePurchasedPAYGReceipt.context = context;
+    woodhengePurchasedPAYGReceipt.rawValue = json;
+    woodhengePurchasedPAYGReceipt.header = header;
+    return woodhengePurchasedPAYGReceipt;
   }
 
-  public static APINodeList<AdPlacePageSet> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdPlacePageSet> adPlacePageSets = new APINodeList<AdPlacePageSet>(request, json, header);
+  public static APINodeList<WoodhengePurchasedPAYGReceipt> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<WoodhengePurchasedPAYGReceipt> woodhengePurchasedPAYGReceipts = new APINodeList<WoodhengePurchasedPAYGReceipt>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -167,9 +163,9 @@ public class AdPlacePageSet extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adPlacePageSets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          woodhengePurchasedPAYGReceipts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adPlacePageSets;
+        return woodhengePurchasedPAYGReceipts;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -179,20 +175,20 @@ public class AdPlacePageSet extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adPlacePageSets.setCursors(before, after);
+                woodhengePurchasedPAYGReceipts.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adPlacePageSets.setPaging(previous, next);
+            woodhengePurchasedPAYGReceipts.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adPlacePageSets.setAppSecret(context.getAppSecretProof());
+              woodhengePurchasedPAYGReceipts.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adPlacePageSets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              woodhengePurchasedPAYGReceipts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -203,23 +199,23 @@ public class AdPlacePageSet extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adPlacePageSets.add(loadJSON(entry.getValue().toString(), context, header));
+                  woodhengePurchasedPAYGReceipts.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adPlacePageSets.add(loadJSON(obj.toString(), context, header));
+              woodhengePurchasedPAYGReceipts.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adPlacePageSets;
+          return woodhengePurchasedPAYGReceipts;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adPlacePageSets.add(loadJSON(entry.getValue().toString(), context, header));
+              woodhengePurchasedPAYGReceipts.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adPlacePageSets;
+          return woodhengePurchasedPAYGReceipts;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -236,20 +232,20 @@ public class AdPlacePageSet extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adPlacePageSets.add(loadJSON(value.toString(), context, header));
+              woodhengePurchasedPAYGReceipts.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adPlacePageSets;
+            return woodhengePurchasedPAYGReceipts;
           }
 
           // Sixth, check if it's pure JsonObject
-          adPlacePageSets.clear();
-          adPlacePageSets.add(loadJSON(json, context, header));
-          return adPlacePageSets;
+          woodhengePurchasedPAYGReceipts.clear();
+          woodhengePurchasedPAYGReceipts.add(loadJSON(json, context, header));
+          return woodhengePurchasedPAYGReceipts;
         }
       }
     } catch (Exception e) {
@@ -281,80 +277,70 @@ public class AdPlacePageSet extends APINode {
   }
 
 
-  public String getFieldAccountId() {
-    return mAccountId;
-  }
-
   public String getFieldId() {
     return mId;
   }
 
-  public List<String> getFieldLocationTypes() {
-    return mLocationTypes;
+  public Long getFieldNumberOfSubscriptionsPurchased() {
+    return mNumberOfSubscriptionsPurchased;
   }
 
-  public String getFieldName() {
-    return mName;
+  public String getFieldPurchaseTime() {
+    return mPurchaseTime;
   }
 
-  public Long getFieldPagesCount() {
-    return mPagesCount;
-  }
-
-  public Page getFieldParentPage() {
-    if (mParentPage != null) {
-      mParentPage.context = getContext();
+  public User getFieldUser() {
+    if (mUser != null) {
+      mUser.context = getContext();
     }
-    return mParentPage;
+    return mUser;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<AdPlacePageSet> {
+  public static class APIRequestGet extends APIRequest<WoodhengePurchasedPAYGReceipt> {
 
-    AdPlacePageSet lastResponse = null;
+    WoodhengePurchasedPAYGReceipt lastResponse = null;
     @Override
-    public AdPlacePageSet getLastResponse() {
+    public WoodhengePurchasedPAYGReceipt getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "account_id",
       "id",
-      "location_types",
-      "name",
-      "pages_count",
-      "parent_page",
+      "number_of_subscriptions_purchased",
+      "purchase_time",
+      "user",
     };
 
     @Override
-    public AdPlacePageSet parseResponse(String response, String header) throws APIException {
-      return AdPlacePageSet.parseResponse(response, getContext(), this, header).head();
+    public WoodhengePurchasedPAYGReceipt parseResponse(String response, String header) throws APIException {
+      return WoodhengePurchasedPAYGReceipt.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public AdPlacePageSet execute() throws APIException {
+    public WoodhengePurchasedPAYGReceipt execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public AdPlacePageSet execute(Map<String, Object> extraParams) throws APIException {
+    public WoodhengePurchasedPAYGReceipt execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<AdPlacePageSet> executeAsync() throws APIException {
+    public ListenableFuture<WoodhengePurchasedPAYGReceipt> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<AdPlacePageSet> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<WoodhengePurchasedPAYGReceipt> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, AdPlacePageSet>() {
-           public AdPlacePageSet apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, WoodhengePurchasedPAYGReceipt>() {
+           public WoodhengePurchasedPAYGReceipt apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -418,13 +404,6 @@ public class AdPlacePageSet extends APINode {
       return this;
     }
 
-    public APIRequestGet requestAccountIdField () {
-      return this.requestAccountIdField(true);
-    }
-    public APIRequestGet requestAccountIdField (boolean value) {
-      this.requestField("account_id", value);
-      return this;
-    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -432,74 +411,27 @@ public class AdPlacePageSet extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestLocationTypesField () {
-      return this.requestLocationTypesField(true);
+    public APIRequestGet requestNumberOfSubscriptionsPurchasedField () {
+      return this.requestNumberOfSubscriptionsPurchasedField(true);
     }
-    public APIRequestGet requestLocationTypesField (boolean value) {
-      this.requestField("location_types", value);
+    public APIRequestGet requestNumberOfSubscriptionsPurchasedField (boolean value) {
+      this.requestField("number_of_subscriptions_purchased", value);
       return this;
     }
-    public APIRequestGet requestNameField () {
-      return this.requestNameField(true);
+    public APIRequestGet requestPurchaseTimeField () {
+      return this.requestPurchaseTimeField(true);
     }
-    public APIRequestGet requestNameField (boolean value) {
-      this.requestField("name", value);
+    public APIRequestGet requestPurchaseTimeField (boolean value) {
+      this.requestField("purchase_time", value);
       return this;
     }
-    public APIRequestGet requestPagesCountField () {
-      return this.requestPagesCountField(true);
+    public APIRequestGet requestUserField () {
+      return this.requestUserField(true);
     }
-    public APIRequestGet requestPagesCountField (boolean value) {
-      this.requestField("pages_count", value);
+    public APIRequestGet requestUserField (boolean value) {
+      this.requestField("user", value);
       return this;
     }
-    public APIRequestGet requestParentPageField () {
-      return this.requestParentPageField(true);
-    }
-    public APIRequestGet requestParentPageField (boolean value) {
-      this.requestField("parent_page", value);
-      return this;
-    }
-  }
-
-  public static enum EnumLocationTypes {
-      @SerializedName("home")
-      VALUE_HOME("home"),
-      @SerializedName("recent")
-      VALUE_RECENT("recent"),
-      ;
-
-      private String value;
-
-      private EnumLocationTypes(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumTargetedAreaType {
-      @SerializedName("CUSTOM_RADIUS")
-      VALUE_CUSTOM_RADIUS("CUSTOM_RADIUS"),
-      @SerializedName("MARKETING_AREA")
-      VALUE_MARKETING_AREA("MARKETING_AREA"),
-      @SerializedName("NONE")
-      VALUE_NONE("NONE"),
-      ;
-
-      private String value;
-
-      private EnumTargetedAreaType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
   }
 
 
@@ -516,22 +448,20 @@ public class AdPlacePageSet extends APINode {
     return gson;
   }
 
-  public AdPlacePageSet copyFrom(AdPlacePageSet instance) {
-    this.mAccountId = instance.mAccountId;
+  public WoodhengePurchasedPAYGReceipt copyFrom(WoodhengePurchasedPAYGReceipt instance) {
     this.mId = instance.mId;
-    this.mLocationTypes = instance.mLocationTypes;
-    this.mName = instance.mName;
-    this.mPagesCount = instance.mPagesCount;
-    this.mParentPage = instance.mParentPage;
+    this.mNumberOfSubscriptionsPurchased = instance.mNumberOfSubscriptionsPurchased;
+    this.mPurchaseTime = instance.mPurchaseTime;
+    this.mUser = instance.mUser;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdPlacePageSet> getParser() {
-    return new APIRequest.ResponseParser<AdPlacePageSet>() {
-      public APINodeList<AdPlacePageSet> parseResponse(String response, APIContext context, APIRequest<AdPlacePageSet> request, String header) throws MalformedResponseException {
-        return AdPlacePageSet.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<WoodhengePurchasedPAYGReceipt> getParser() {
+    return new APIRequest.ResponseParser<WoodhengePurchasedPAYGReceipt>() {
+      public APINodeList<WoodhengePurchasedPAYGReceipt> parseResponse(String response, APIContext context, APIRequest<WoodhengePurchasedPAYGReceipt> request, String header) throws MalformedResponseException {
+        return WoodhengePurchasedPAYGReceipt.parseResponse(response, context, request, header);
       }
     };
   }

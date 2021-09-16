@@ -54,134 +54,96 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class VehicleOffer extends APINode {
-  @SerializedName("amount_currency")
-  private String mAmountCurrency = null;
-  @SerializedName("amount_percentage")
-  private Double mAmountPercentage = null;
-  @SerializedName("amount_price")
-  private String mAmountPrice = null;
-  @SerializedName("amount_qualifier")
-  private String mAmountQualifier = null;
+public class JobsJob extends APINode {
+  @SerializedName("address")
+  private Object mAddress = null;
   @SerializedName("applinks")
   private CatalogItemAppLinks mApplinks = null;
-  @SerializedName("body_style")
-  private String mBodyStyle = null;
-  @SerializedName("cashback_currency")
-  private String mCashbackCurrency = null;
-  @SerializedName("cashback_price")
-  private String mCashbackPrice = null;
   @SerializedName("category_specific_fields")
   private CatalogSubVerticalList mCategorySpecificFields = null;
-  @SerializedName("currency")
-  private String mCurrency = null;
-  @SerializedName("dma_codes")
-  private List<String> mDmaCodes = null;
-  @SerializedName("downpayment_currency")
-  private String mDownpaymentCurrency = null;
-  @SerializedName("downpayment_price")
-  private String mDownpaymentPrice = null;
-  @SerializedName("downpayment_qualifier")
-  private String mDownpaymentQualifier = null;
-  @SerializedName("end_date")
-  private String mEndDate = null;
-  @SerializedName("end_time")
-  private Long mEndTime = null;
+  @SerializedName("custom_label_0")
+  private String mCustomLabel0 = null;
+  @SerializedName("custom_label_1")
+  private String mCustomLabel1 = null;
+  @SerializedName("custom_label_2")
+  private String mCustomLabel2 = null;
+  @SerializedName("custom_label_3")
+  private String mCustomLabel3 = null;
+  @SerializedName("custom_label_4")
+  private String mCustomLabel4 = null;
+  @SerializedName("custom_label_5")
+  private String mCustomLabel5 = null;
+  @SerializedName("custom_label_6")
+  private String mCustomLabel6 = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("image_fetch_status")
   private EnumImageFetchStatus mImageFetchStatus = null;
   @SerializedName("images")
   private List<String> mImages = null;
-  @SerializedName("make")
-  private String mMake = null;
-  @SerializedName("model")
-  private String mModel = null;
-  @SerializedName("offer_description")
-  private String mOfferDescription = null;
-  @SerializedName("offer_disclaimer")
-  private String mOfferDisclaimer = null;
-  @SerializedName("offer_type")
-  private String mOfferType = null;
-  @SerializedName("price")
-  private String mPrice = null;
+  @SerializedName("jobs_job_id")
+  private String mJobsJobId = null;
   @SerializedName("sanitized_images")
   private List<String> mSanitizedImages = null;
-  @SerializedName("start_date")
-  private String mStartDate = null;
-  @SerializedName("start_time")
-  private Long mStartTime = null;
-  @SerializedName("term_length")
-  private Long mTermLength = null;
-  @SerializedName("term_qualifier")
-  private String mTermQualifier = null;
-  @SerializedName("title")
-  private String mTitle = null;
-  @SerializedName("trim")
-  private String mTrim = null;
   @SerializedName("unit_price")
   private Object mUnitPrice = null;
   @SerializedName("url")
   private String mUrl = null;
-  @SerializedName("vehicle_offer_id")
-  private String mVehicleOfferId = null;
-  @SerializedName("year")
-  private Long mYear = null;
   protected static Gson gson = null;
 
-  VehicleOffer() {
+  JobsJob() {
   }
 
-  public VehicleOffer(Long id, APIContext context) {
+  public JobsJob(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public VehicleOffer(String id, APIContext context) {
+  public JobsJob(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public VehicleOffer fetch() throws APIException{
-    VehicleOffer newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public JobsJob fetch() throws APIException{
+    JobsJob newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static VehicleOffer fetchById(Long id, APIContext context) throws APIException {
+  public static JobsJob fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<VehicleOffer> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<JobsJob> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static VehicleOffer fetchById(String id, APIContext context) throws APIException {
+  public static JobsJob fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<VehicleOffer> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<JobsJob> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<VehicleOffer> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<VehicleOffer>)(
-      new APIRequest<VehicleOffer>(context, "", "/", "GET", VehicleOffer.getParser())
+  public static APINodeList<JobsJob> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<JobsJob>)(
+      new APIRequest<JobsJob>(context, "", "/", "GET", JobsJob.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<VehicleOffer>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<JobsJob>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", VehicleOffer.getParser())
+      new APIRequest(context, "", "/", "GET", JobsJob.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -194,12 +156,12 @@ public class VehicleOffer extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static VehicleOffer loadJSON(String json, APIContext context, String header) {
-    VehicleOffer vehicleOffer = getGson().fromJson(json, VehicleOffer.class);
+  public static JobsJob loadJSON(String json, APIContext context, String header) {
+    JobsJob jobsJob = getGson().fromJson(json, JobsJob.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(vehicleOffer.toString());
+      JsonElement o2 = parser.parse(jobsJob.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -209,14 +171,14 @@ public class VehicleOffer extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    vehicleOffer.context = context;
-    vehicleOffer.rawValue = json;
-    vehicleOffer.header = header;
-    return vehicleOffer;
+    jobsJob.context = context;
+    jobsJob.rawValue = json;
+    jobsJob.header = header;
+    return jobsJob;
   }
 
-  public static APINodeList<VehicleOffer> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<VehicleOffer> vehicleOffers = new APINodeList<VehicleOffer>(request, json, header);
+  public static APINodeList<JobsJob> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<JobsJob> jobsJobs = new APINodeList<JobsJob>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -227,9 +189,9 @@ public class VehicleOffer extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          vehicleOffers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          jobsJobs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return vehicleOffers;
+        return jobsJobs;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -239,20 +201,20 @@ public class VehicleOffer extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                vehicleOffers.setCursors(before, after);
+                jobsJobs.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            vehicleOffers.setPaging(previous, next);
+            jobsJobs.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              vehicleOffers.setAppSecret(context.getAppSecretProof());
+              jobsJobs.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              vehicleOffers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              jobsJobs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -263,23 +225,23 @@ public class VehicleOffer extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  vehicleOffers.add(loadJSON(entry.getValue().toString(), context, header));
+                  jobsJobs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              vehicleOffers.add(loadJSON(obj.toString(), context, header));
+              jobsJobs.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return vehicleOffers;
+          return jobsJobs;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              vehicleOffers.add(loadJSON(entry.getValue().toString(), context, header));
+              jobsJobs.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return vehicleOffers;
+          return jobsJobs;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -296,20 +258,20 @@ public class VehicleOffer extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              vehicleOffers.add(loadJSON(value.toString(), context, header));
+              jobsJobs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return vehicleOffers;
+            return jobsJobs;
           }
 
           // Sixth, check if it's pure JsonObject
-          vehicleOffers.clear();
-          vehicleOffers.add(loadJSON(json, context, header));
-          return vehicleOffers;
+          jobsJobs.clear();
+          jobsJobs.add(loadJSON(json, context, header));
+          return jobsJobs;
         }
       }
     } catch (Exception e) {
@@ -353,68 +315,44 @@ public class VehicleOffer extends APINode {
   }
 
 
-  public String getFieldAmountCurrency() {
-    return mAmountCurrency;
-  }
-
-  public Double getFieldAmountPercentage() {
-    return mAmountPercentage;
-  }
-
-  public String getFieldAmountPrice() {
-    return mAmountPrice;
-  }
-
-  public String getFieldAmountQualifier() {
-    return mAmountQualifier;
+  public Object getFieldAddress() {
+    return mAddress;
   }
 
   public CatalogItemAppLinks getFieldApplinks() {
     return mApplinks;
   }
 
-  public String getFieldBodyStyle() {
-    return mBodyStyle;
-  }
-
-  public String getFieldCashbackCurrency() {
-    return mCashbackCurrency;
-  }
-
-  public String getFieldCashbackPrice() {
-    return mCashbackPrice;
-  }
-
   public CatalogSubVerticalList getFieldCategorySpecificFields() {
     return mCategorySpecificFields;
   }
 
-  public String getFieldCurrency() {
-    return mCurrency;
+  public String getFieldCustomLabel0() {
+    return mCustomLabel0;
   }
 
-  public List<String> getFieldDmaCodes() {
-    return mDmaCodes;
+  public String getFieldCustomLabel1() {
+    return mCustomLabel1;
   }
 
-  public String getFieldDownpaymentCurrency() {
-    return mDownpaymentCurrency;
+  public String getFieldCustomLabel2() {
+    return mCustomLabel2;
   }
 
-  public String getFieldDownpaymentPrice() {
-    return mDownpaymentPrice;
+  public String getFieldCustomLabel3() {
+    return mCustomLabel3;
   }
 
-  public String getFieldDownpaymentQualifier() {
-    return mDownpaymentQualifier;
+  public String getFieldCustomLabel4() {
+    return mCustomLabel4;
   }
 
-  public String getFieldEndDate() {
-    return mEndDate;
+  public String getFieldCustomLabel5() {
+    return mCustomLabel5;
   }
 
-  public Long getFieldEndTime() {
-    return mEndTime;
+  public String getFieldCustomLabel6() {
+    return mCustomLabel6;
   }
 
   public String getFieldId() {
@@ -429,56 +367,12 @@ public class VehicleOffer extends APINode {
     return mImages;
   }
 
-  public String getFieldMake() {
-    return mMake;
-  }
-
-  public String getFieldModel() {
-    return mModel;
-  }
-
-  public String getFieldOfferDescription() {
-    return mOfferDescription;
-  }
-
-  public String getFieldOfferDisclaimer() {
-    return mOfferDisclaimer;
-  }
-
-  public String getFieldOfferType() {
-    return mOfferType;
-  }
-
-  public String getFieldPrice() {
-    return mPrice;
+  public String getFieldJobsJobId() {
+    return mJobsJobId;
   }
 
   public List<String> getFieldSanitizedImages() {
     return mSanitizedImages;
-  }
-
-  public String getFieldStartDate() {
-    return mStartDate;
-  }
-
-  public Long getFieldStartTime() {
-    return mStartTime;
-  }
-
-  public Long getFieldTermLength() {
-    return mTermLength;
-  }
-
-  public String getFieldTermQualifier() {
-    return mTermQualifier;
-  }
-
-  public String getFieldTitle() {
-    return mTitle;
-  }
-
-  public String getFieldTrim() {
-    return mTrim;
   }
 
   public Object getFieldUnitPrice() {
@@ -487,14 +381,6 @@ public class VehicleOffer extends APINode {
 
   public String getFieldUrl() {
     return mUrl;
-  }
-
-  public String getFieldVehicleOfferId() {
-    return mVehicleOfferId;
-  }
-
-  public Long getFieldYear() {
-    return mYear;
   }
 
 
@@ -827,81 +713,62 @@ public class VehicleOffer extends APINode {
 
   }
 
-  public static class APIRequestGet extends APIRequest<VehicleOffer> {
+  public static class APIRequestGet extends APIRequest<JobsJob> {
 
-    VehicleOffer lastResponse = null;
+    JobsJob lastResponse = null;
     @Override
-    public VehicleOffer getLastResponse() {
+    public JobsJob getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "amount_currency",
-      "amount_percentage",
-      "amount_price",
-      "amount_qualifier",
+      "address",
       "applinks",
-      "body_style",
-      "cashback_currency",
-      "cashback_price",
       "category_specific_fields",
-      "currency",
-      "dma_codes",
-      "downpayment_currency",
-      "downpayment_price",
-      "downpayment_qualifier",
-      "end_date",
-      "end_time",
+      "custom_label_0",
+      "custom_label_1",
+      "custom_label_2",
+      "custom_label_3",
+      "custom_label_4",
+      "custom_label_5",
+      "custom_label_6",
       "id",
       "image_fetch_status",
       "images",
-      "make",
-      "model",
-      "offer_description",
-      "offer_disclaimer",
-      "offer_type",
-      "price",
+      "jobs_job_id",
       "sanitized_images",
-      "start_date",
-      "start_time",
-      "term_length",
-      "term_qualifier",
-      "title",
-      "trim",
       "unit_price",
       "url",
-      "vehicle_offer_id",
-      "year",
     };
 
     @Override
-    public VehicleOffer parseResponse(String response, String header) throws APIException {
-      return VehicleOffer.parseResponse(response, getContext(), this, header).head();
+    public JobsJob parseResponse(String response, String header) throws APIException {
+      return JobsJob.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public VehicleOffer execute() throws APIException {
+    public JobsJob execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public VehicleOffer execute(Map<String, Object> extraParams) throws APIException {
+    public JobsJob execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<VehicleOffer> executeAsync() throws APIException {
+    public ListenableFuture<JobsJob> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<VehicleOffer> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<JobsJob> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, VehicleOffer>() {
-           public VehicleOffer apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, JobsJob>() {
+           public JobsJob apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -965,32 +832,11 @@ public class VehicleOffer extends APINode {
       return this;
     }
 
-    public APIRequestGet requestAmountCurrencyField () {
-      return this.requestAmountCurrencyField(true);
+    public APIRequestGet requestAddressField () {
+      return this.requestAddressField(true);
     }
-    public APIRequestGet requestAmountCurrencyField (boolean value) {
-      this.requestField("amount_currency", value);
-      return this;
-    }
-    public APIRequestGet requestAmountPercentageField () {
-      return this.requestAmountPercentageField(true);
-    }
-    public APIRequestGet requestAmountPercentageField (boolean value) {
-      this.requestField("amount_percentage", value);
-      return this;
-    }
-    public APIRequestGet requestAmountPriceField () {
-      return this.requestAmountPriceField(true);
-    }
-    public APIRequestGet requestAmountPriceField (boolean value) {
-      this.requestField("amount_price", value);
-      return this;
-    }
-    public APIRequestGet requestAmountQualifierField () {
-      return this.requestAmountQualifierField(true);
-    }
-    public APIRequestGet requestAmountQualifierField (boolean value) {
-      this.requestField("amount_qualifier", value);
+    public APIRequestGet requestAddressField (boolean value) {
+      this.requestField("address", value);
       return this;
     }
     public APIRequestGet requestApplinksField () {
@@ -1000,27 +846,6 @@ public class VehicleOffer extends APINode {
       this.requestField("applinks", value);
       return this;
     }
-    public APIRequestGet requestBodyStyleField () {
-      return this.requestBodyStyleField(true);
-    }
-    public APIRequestGet requestBodyStyleField (boolean value) {
-      this.requestField("body_style", value);
-      return this;
-    }
-    public APIRequestGet requestCashbackCurrencyField () {
-      return this.requestCashbackCurrencyField(true);
-    }
-    public APIRequestGet requestCashbackCurrencyField (boolean value) {
-      this.requestField("cashback_currency", value);
-      return this;
-    }
-    public APIRequestGet requestCashbackPriceField () {
-      return this.requestCashbackPriceField(true);
-    }
-    public APIRequestGet requestCashbackPriceField (boolean value) {
-      this.requestField("cashback_price", value);
-      return this;
-    }
     public APIRequestGet requestCategorySpecificFieldsField () {
       return this.requestCategorySpecificFieldsField(true);
     }
@@ -1028,53 +853,53 @@ public class VehicleOffer extends APINode {
       this.requestField("category_specific_fields", value);
       return this;
     }
-    public APIRequestGet requestCurrencyField () {
-      return this.requestCurrencyField(true);
+    public APIRequestGet requestCustomLabel0Field () {
+      return this.requestCustomLabel0Field(true);
     }
-    public APIRequestGet requestCurrencyField (boolean value) {
-      this.requestField("currency", value);
+    public APIRequestGet requestCustomLabel0Field (boolean value) {
+      this.requestField("custom_label_0", value);
       return this;
     }
-    public APIRequestGet requestDmaCodesField () {
-      return this.requestDmaCodesField(true);
+    public APIRequestGet requestCustomLabel1Field () {
+      return this.requestCustomLabel1Field(true);
     }
-    public APIRequestGet requestDmaCodesField (boolean value) {
-      this.requestField("dma_codes", value);
+    public APIRequestGet requestCustomLabel1Field (boolean value) {
+      this.requestField("custom_label_1", value);
       return this;
     }
-    public APIRequestGet requestDownpaymentCurrencyField () {
-      return this.requestDownpaymentCurrencyField(true);
+    public APIRequestGet requestCustomLabel2Field () {
+      return this.requestCustomLabel2Field(true);
     }
-    public APIRequestGet requestDownpaymentCurrencyField (boolean value) {
-      this.requestField("downpayment_currency", value);
+    public APIRequestGet requestCustomLabel2Field (boolean value) {
+      this.requestField("custom_label_2", value);
       return this;
     }
-    public APIRequestGet requestDownpaymentPriceField () {
-      return this.requestDownpaymentPriceField(true);
+    public APIRequestGet requestCustomLabel3Field () {
+      return this.requestCustomLabel3Field(true);
     }
-    public APIRequestGet requestDownpaymentPriceField (boolean value) {
-      this.requestField("downpayment_price", value);
+    public APIRequestGet requestCustomLabel3Field (boolean value) {
+      this.requestField("custom_label_3", value);
       return this;
     }
-    public APIRequestGet requestDownpaymentQualifierField () {
-      return this.requestDownpaymentQualifierField(true);
+    public APIRequestGet requestCustomLabel4Field () {
+      return this.requestCustomLabel4Field(true);
     }
-    public APIRequestGet requestDownpaymentQualifierField (boolean value) {
-      this.requestField("downpayment_qualifier", value);
+    public APIRequestGet requestCustomLabel4Field (boolean value) {
+      this.requestField("custom_label_4", value);
       return this;
     }
-    public APIRequestGet requestEndDateField () {
-      return this.requestEndDateField(true);
+    public APIRequestGet requestCustomLabel5Field () {
+      return this.requestCustomLabel5Field(true);
     }
-    public APIRequestGet requestEndDateField (boolean value) {
-      this.requestField("end_date", value);
+    public APIRequestGet requestCustomLabel5Field (boolean value) {
+      this.requestField("custom_label_5", value);
       return this;
     }
-    public APIRequestGet requestEndTimeField () {
-      return this.requestEndTimeField(true);
+    public APIRequestGet requestCustomLabel6Field () {
+      return this.requestCustomLabel6Field(true);
     }
-    public APIRequestGet requestEndTimeField (boolean value) {
-      this.requestField("end_time", value);
+    public APIRequestGet requestCustomLabel6Field (boolean value) {
+      this.requestField("custom_label_6", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -1098,46 +923,11 @@ public class VehicleOffer extends APINode {
       this.requestField("images", value);
       return this;
     }
-    public APIRequestGet requestMakeField () {
-      return this.requestMakeField(true);
+    public APIRequestGet requestJobsJobIdField () {
+      return this.requestJobsJobIdField(true);
     }
-    public APIRequestGet requestMakeField (boolean value) {
-      this.requestField("make", value);
-      return this;
-    }
-    public APIRequestGet requestModelField () {
-      return this.requestModelField(true);
-    }
-    public APIRequestGet requestModelField (boolean value) {
-      this.requestField("model", value);
-      return this;
-    }
-    public APIRequestGet requestOfferDescriptionField () {
-      return this.requestOfferDescriptionField(true);
-    }
-    public APIRequestGet requestOfferDescriptionField (boolean value) {
-      this.requestField("offer_description", value);
-      return this;
-    }
-    public APIRequestGet requestOfferDisclaimerField () {
-      return this.requestOfferDisclaimerField(true);
-    }
-    public APIRequestGet requestOfferDisclaimerField (boolean value) {
-      this.requestField("offer_disclaimer", value);
-      return this;
-    }
-    public APIRequestGet requestOfferTypeField () {
-      return this.requestOfferTypeField(true);
-    }
-    public APIRequestGet requestOfferTypeField (boolean value) {
-      this.requestField("offer_type", value);
-      return this;
-    }
-    public APIRequestGet requestPriceField () {
-      return this.requestPriceField(true);
-    }
-    public APIRequestGet requestPriceField (boolean value) {
-      this.requestField("price", value);
+    public APIRequestGet requestJobsJobIdField (boolean value) {
+      this.requestField("jobs_job_id", value);
       return this;
     }
     public APIRequestGet requestSanitizedImagesField () {
@@ -1145,48 +935,6 @@ public class VehicleOffer extends APINode {
     }
     public APIRequestGet requestSanitizedImagesField (boolean value) {
       this.requestField("sanitized_images", value);
-      return this;
-    }
-    public APIRequestGet requestStartDateField () {
-      return this.requestStartDateField(true);
-    }
-    public APIRequestGet requestStartDateField (boolean value) {
-      this.requestField("start_date", value);
-      return this;
-    }
-    public APIRequestGet requestStartTimeField () {
-      return this.requestStartTimeField(true);
-    }
-    public APIRequestGet requestStartTimeField (boolean value) {
-      this.requestField("start_time", value);
-      return this;
-    }
-    public APIRequestGet requestTermLengthField () {
-      return this.requestTermLengthField(true);
-    }
-    public APIRequestGet requestTermLengthField (boolean value) {
-      this.requestField("term_length", value);
-      return this;
-    }
-    public APIRequestGet requestTermQualifierField () {
-      return this.requestTermQualifierField(true);
-    }
-    public APIRequestGet requestTermQualifierField (boolean value) {
-      this.requestField("term_qualifier", value);
-      return this;
-    }
-    public APIRequestGet requestTitleField () {
-      return this.requestTitleField(true);
-    }
-    public APIRequestGet requestTitleField (boolean value) {
-      this.requestField("title", value);
-      return this;
-    }
-    public APIRequestGet requestTrimField () {
-      return this.requestTrimField(true);
-    }
-    public APIRequestGet requestTrimField (boolean value) {
-      this.requestField("trim", value);
       return this;
     }
     public APIRequestGet requestUnitPriceField () {
@@ -1201,20 +949,6 @@ public class VehicleOffer extends APINode {
     }
     public APIRequestGet requestUrlField (boolean value) {
       this.requestField("url", value);
-      return this;
-    }
-    public APIRequestGet requestVehicleOfferIdField () {
-      return this.requestVehicleOfferIdField(true);
-    }
-    public APIRequestGet requestVehicleOfferIdField (boolean value) {
-      this.requestField("vehicle_offer_id", value);
-      return this;
-    }
-    public APIRequestGet requestYearField () {
-      return this.requestYearField(true);
-    }
-    public APIRequestGet requestYearField (boolean value) {
-      this.requestField("year", value);
       return this;
     }
   }
@@ -1260,52 +994,33 @@ public class VehicleOffer extends APINode {
     return gson;
   }
 
-  public VehicleOffer copyFrom(VehicleOffer instance) {
-    this.mAmountCurrency = instance.mAmountCurrency;
-    this.mAmountPercentage = instance.mAmountPercentage;
-    this.mAmountPrice = instance.mAmountPrice;
-    this.mAmountQualifier = instance.mAmountQualifier;
+  public JobsJob copyFrom(JobsJob instance) {
+    this.mAddress = instance.mAddress;
     this.mApplinks = instance.mApplinks;
-    this.mBodyStyle = instance.mBodyStyle;
-    this.mCashbackCurrency = instance.mCashbackCurrency;
-    this.mCashbackPrice = instance.mCashbackPrice;
     this.mCategorySpecificFields = instance.mCategorySpecificFields;
-    this.mCurrency = instance.mCurrency;
-    this.mDmaCodes = instance.mDmaCodes;
-    this.mDownpaymentCurrency = instance.mDownpaymentCurrency;
-    this.mDownpaymentPrice = instance.mDownpaymentPrice;
-    this.mDownpaymentQualifier = instance.mDownpaymentQualifier;
-    this.mEndDate = instance.mEndDate;
-    this.mEndTime = instance.mEndTime;
+    this.mCustomLabel0 = instance.mCustomLabel0;
+    this.mCustomLabel1 = instance.mCustomLabel1;
+    this.mCustomLabel2 = instance.mCustomLabel2;
+    this.mCustomLabel3 = instance.mCustomLabel3;
+    this.mCustomLabel4 = instance.mCustomLabel4;
+    this.mCustomLabel5 = instance.mCustomLabel5;
+    this.mCustomLabel6 = instance.mCustomLabel6;
     this.mId = instance.mId;
     this.mImageFetchStatus = instance.mImageFetchStatus;
     this.mImages = instance.mImages;
-    this.mMake = instance.mMake;
-    this.mModel = instance.mModel;
-    this.mOfferDescription = instance.mOfferDescription;
-    this.mOfferDisclaimer = instance.mOfferDisclaimer;
-    this.mOfferType = instance.mOfferType;
-    this.mPrice = instance.mPrice;
+    this.mJobsJobId = instance.mJobsJobId;
     this.mSanitizedImages = instance.mSanitizedImages;
-    this.mStartDate = instance.mStartDate;
-    this.mStartTime = instance.mStartTime;
-    this.mTermLength = instance.mTermLength;
-    this.mTermQualifier = instance.mTermQualifier;
-    this.mTitle = instance.mTitle;
-    this.mTrim = instance.mTrim;
     this.mUnitPrice = instance.mUnitPrice;
     this.mUrl = instance.mUrl;
-    this.mVehicleOfferId = instance.mVehicleOfferId;
-    this.mYear = instance.mYear;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<VehicleOffer> getParser() {
-    return new APIRequest.ResponseParser<VehicleOffer>() {
-      public APINodeList<VehicleOffer> parseResponse(String response, APIContext context, APIRequest<VehicleOffer> request, String header) throws MalformedResponseException {
-        return VehicleOffer.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<JobsJob> getParser() {
+    return new APIRequest.ResponseParser<JobsJob>() {
+      public APINodeList<JobsJob> parseResponse(String response, APIContext context, APIRequest<JobsJob> request, String header) throws MalformedResponseException {
+        return JobsJob.parseResponse(response, context, request, header);
       }
     };
   }

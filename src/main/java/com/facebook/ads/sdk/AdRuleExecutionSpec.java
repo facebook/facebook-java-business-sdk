@@ -422,6 +422,8 @@ public class AdRuleExecutionSpec extends APINode {
       VALUE_ADD_INTEREST_RELAXATION("ADD_INTEREST_RELAXATION"),
       @SerializedName("ADD_QUESTIONNAIRE_INTERESTS")
       VALUE_ADD_QUESTIONNAIRE_INTERESTS("ADD_QUESTIONNAIRE_INTERESTS"),
+      @SerializedName("AUDIENCE_CONSOLIDATION")
+      VALUE_AUDIENCE_CONSOLIDATION("AUDIENCE_CONSOLIDATION"),
       @SerializedName("CHANGE_BID")
       VALUE_CHANGE_BID("CHANGE_BID"),
       @SerializedName("CHANGE_BUDGET")
@@ -444,6 +446,10 @@ public class AdRuleExecutionSpec extends APINode {
       VALUE_UNPAUSE("UNPAUSE"),
       @SerializedName("UPDATE_CREATIVE")
       VALUE_UPDATE_CREATIVE("UPDATE_CREATIVE"),
+      @SerializedName("UPDATE_LAX_BUDGET")
+      VALUE_UPDATE_LAX_BUDGET("UPDATE_LAX_BUDGET"),
+      @SerializedName("UPDATE_LAX_DURATION")
+      VALUE_UPDATE_LAX_DURATION("UPDATE_LAX_DURATION"),
       ;
 
       private String value;

@@ -54,94 +54,98 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class Destination extends APINode {
-  @SerializedName("address")
-  private String mAddress = null;
+public class LocalServiceBusiness extends APINode {
   @SerializedName("applinks")
   private CatalogItemAppLinks mApplinks = null;
+  @SerializedName("brand")
+  private String mBrand = null;
   @SerializedName("category_specific_fields")
   private CatalogSubVerticalList mCategorySpecificFields = null;
   @SerializedName("currency")
   private String mCurrency = null;
+  @SerializedName("custom_label_0")
+  private String mCustomLabel0 = null;
+  @SerializedName("custom_label_1")
+  private String mCustomLabel1 = null;
+  @SerializedName("custom_label_2")
+  private String mCustomLabel2 = null;
+  @SerializedName("custom_label_3")
+  private String mCustomLabel3 = null;
+  @SerializedName("custom_label_4")
+  private String mCustomLabel4 = null;
   @SerializedName("description")
   private String mDescription = null;
-  @SerializedName("destination_id")
-  private String mDestinationId = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("image_fetch_status")
   private EnumImageFetchStatus mImageFetchStatus = null;
   @SerializedName("images")
   private List<String> mImages = null;
-  @SerializedName("name")
-  private String mName = null;
+  @SerializedName("local_service_business_id")
+  private String mLocalServiceBusinessId = null;
   @SerializedName("price")
   private String mPrice = null;
-  @SerializedName("price_change")
-  private String mPriceChange = null;
   @SerializedName("sanitized_images")
   private List<String> mSanitizedImages = null;
-  @SerializedName("types")
-  private List<String> mTypes = null;
-  @SerializedName("unit_price")
-  private Object mUnitPrice = null;
+  @SerializedName("title")
+  private String mTitle = null;
   @SerializedName("url")
   private String mUrl = null;
   protected static Gson gson = null;
 
-  Destination() {
+  LocalServiceBusiness() {
   }
 
-  public Destination(Long id, APIContext context) {
+  public LocalServiceBusiness(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public Destination(String id, APIContext context) {
+  public LocalServiceBusiness(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public Destination fetch() throws APIException{
-    Destination newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public LocalServiceBusiness fetch() throws APIException{
+    LocalServiceBusiness newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static Destination fetchById(Long id, APIContext context) throws APIException {
+  public static LocalServiceBusiness fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<Destination> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<LocalServiceBusiness> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static Destination fetchById(String id, APIContext context) throws APIException {
+  public static LocalServiceBusiness fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<Destination> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<LocalServiceBusiness> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<Destination> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<Destination>)(
-      new APIRequest<Destination>(context, "", "/", "GET", Destination.getParser())
+  public static APINodeList<LocalServiceBusiness> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<LocalServiceBusiness>)(
+      new APIRequest<LocalServiceBusiness>(context, "", "/", "GET", LocalServiceBusiness.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<Destination>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<LocalServiceBusiness>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", Destination.getParser())
+      new APIRequest(context, "", "/", "GET", LocalServiceBusiness.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -154,12 +158,12 @@ public class Destination extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static Destination loadJSON(String json, APIContext context, String header) {
-    Destination destination = getGson().fromJson(json, Destination.class);
+  public static LocalServiceBusiness loadJSON(String json, APIContext context, String header) {
+    LocalServiceBusiness localServiceBusiness = getGson().fromJson(json, LocalServiceBusiness.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(destination.toString());
+      JsonElement o2 = parser.parse(localServiceBusiness.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -169,14 +173,14 @@ public class Destination extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    destination.context = context;
-    destination.rawValue = json;
-    destination.header = header;
-    return destination;
+    localServiceBusiness.context = context;
+    localServiceBusiness.rawValue = json;
+    localServiceBusiness.header = header;
+    return localServiceBusiness;
   }
 
-  public static APINodeList<Destination> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<Destination> destinations = new APINodeList<Destination>(request, json, header);
+  public static APINodeList<LocalServiceBusiness> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<LocalServiceBusiness> localServiceBusinesss = new APINodeList<LocalServiceBusiness>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -187,9 +191,9 @@ public class Destination extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          destinations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          localServiceBusinesss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return destinations;
+        return localServiceBusinesss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -199,20 +203,20 @@ public class Destination extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                destinations.setCursors(before, after);
+                localServiceBusinesss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            destinations.setPaging(previous, next);
+            localServiceBusinesss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              destinations.setAppSecret(context.getAppSecretProof());
+              localServiceBusinesss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              destinations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              localServiceBusinesss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -223,23 +227,23 @@ public class Destination extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  destinations.add(loadJSON(entry.getValue().toString(), context, header));
+                  localServiceBusinesss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              destinations.add(loadJSON(obj.toString(), context, header));
+              localServiceBusinesss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return destinations;
+          return localServiceBusinesss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              destinations.add(loadJSON(entry.getValue().toString(), context, header));
+              localServiceBusinesss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return destinations;
+          return localServiceBusinesss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -256,20 +260,20 @@ public class Destination extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              destinations.add(loadJSON(value.toString(), context, header));
+              localServiceBusinesss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return destinations;
+            return localServiceBusinesss;
           }
 
           // Sixth, check if it's pure JsonObject
-          destinations.clear();
-          destinations.add(loadJSON(json, context, header));
-          return destinations;
+          localServiceBusinesss.clear();
+          localServiceBusinesss.add(loadJSON(json, context, header));
+          return localServiceBusinesss;
         }
       }
     } catch (Exception e) {
@@ -296,16 +300,8 @@ public class Destination extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGetAugmentedRealitiesMetadata getAugmentedRealitiesMetadata() {
-    return new APIRequestGetAugmentedRealitiesMetadata(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetChannelsToIntegrityStatus getChannelsToIntegrityStatus() {
     return new APIRequestGetChannelsToIntegrityStatus(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetVideosMetadata getVideosMetadata() {
-    return new APIRequestGetVideosMetadata(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGet get() {
@@ -313,12 +309,12 @@ public class Destination extends APINode {
   }
 
 
-  public String getFieldAddress() {
-    return mAddress;
-  }
-
   public CatalogItemAppLinks getFieldApplinks() {
     return mApplinks;
+  }
+
+  public String getFieldBrand() {
+    return mBrand;
   }
 
   public CatalogSubVerticalList getFieldCategorySpecificFields() {
@@ -329,12 +325,28 @@ public class Destination extends APINode {
     return mCurrency;
   }
 
-  public String getFieldDescription() {
-    return mDescription;
+  public String getFieldCustomLabel0() {
+    return mCustomLabel0;
   }
 
-  public String getFieldDestinationId() {
-    return mDestinationId;
+  public String getFieldCustomLabel1() {
+    return mCustomLabel1;
+  }
+
+  public String getFieldCustomLabel2() {
+    return mCustomLabel2;
+  }
+
+  public String getFieldCustomLabel3() {
+    return mCustomLabel3;
+  }
+
+  public String getFieldCustomLabel4() {
+    return mCustomLabel4;
+  }
+
+  public String getFieldDescription() {
+    return mDescription;
   }
 
   public String getFieldId() {
@@ -349,28 +361,20 @@ public class Destination extends APINode {
     return mImages;
   }
 
-  public String getFieldName() {
-    return mName;
+  public String getFieldLocalServiceBusinessId() {
+    return mLocalServiceBusinessId;
   }
 
   public String getFieldPrice() {
     return mPrice;
   }
 
-  public String getFieldPriceChange() {
-    return mPriceChange;
-  }
-
   public List<String> getFieldSanitizedImages() {
     return mSanitizedImages;
   }
 
-  public List<String> getFieldTypes() {
-    return mTypes;
-  }
-
-  public Object getFieldUnitPrice() {
-    return mUnitPrice;
+  public String getFieldTitle() {
+    return mTitle;
   }
 
   public String getFieldUrl() {
@@ -378,110 +382,6 @@ public class Destination extends APINode {
   }
 
 
-
-  public static class APIRequestGetAugmentedRealitiesMetadata extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetAugmentedRealitiesMetadata.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetAugmentedRealitiesMetadata(String nodeId, APIContext context) {
-      super(context, nodeId, "/augmented_realities_metadata", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetAugmentedRealitiesMetadata setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAugmentedRealitiesMetadata setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetAugmentedRealitiesMetadata requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetAugmentedRealitiesMetadata requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAugmentedRealitiesMetadata requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetAugmentedRealitiesMetadata requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAugmentedRealitiesMetadata requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAugmentedRealitiesMetadata requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
 
   public static class APIRequestGetChannelsToIntegrityStatus extends APIRequest<CatalogItemChannelsToIntegrityStatus> {
 
@@ -603,165 +503,63 @@ public class Destination extends APINode {
     }
   }
 
-  public static class APIRequestGetVideosMetadata extends APIRequest<APINode> {
+  public static class APIRequestGet extends APIRequest<LocalServiceBusiness> {
 
-    APINodeList<APINode> lastResponse = null;
+    LocalServiceBusiness lastResponse = null;
     @Override
-    public APINodeList<APINode> getLastResponse() {
+    public LocalServiceBusiness getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetVideosMetadata.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetVideosMetadata(String nodeId, APIContext context) {
-      super(context, nodeId, "/videos_metadata", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetVideosMetadata setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetVideosMetadata setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetVideosMetadata requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetVideosMetadata requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetVideosMetadata requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetVideosMetadata requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetVideosMetadata requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetVideosMetadata requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestGet extends APIRequest<Destination> {
-
-    Destination lastResponse = null;
-    @Override
-    public Destination getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "address",
       "applinks",
+      "brand",
       "category_specific_fields",
       "currency",
+      "custom_label_0",
+      "custom_label_1",
+      "custom_label_2",
+      "custom_label_3",
+      "custom_label_4",
       "description",
-      "destination_id",
       "id",
       "image_fetch_status",
       "images",
-      "name",
+      "local_service_business_id",
       "price",
-      "price_change",
       "sanitized_images",
-      "types",
-      "unit_price",
+      "title",
       "url",
     };
 
     @Override
-    public Destination parseResponse(String response, String header) throws APIException {
-      return Destination.parseResponse(response, getContext(), this, header).head();
+    public LocalServiceBusiness parseResponse(String response, String header) throws APIException {
+      return LocalServiceBusiness.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public Destination execute() throws APIException {
+    public LocalServiceBusiness execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public Destination execute(Map<String, Object> extraParams) throws APIException {
+    public LocalServiceBusiness execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<Destination> executeAsync() throws APIException {
+    public ListenableFuture<LocalServiceBusiness> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<Destination> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<LocalServiceBusiness> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Destination>() {
-           public Destination apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, LocalServiceBusiness>() {
+           public LocalServiceBusiness apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -825,18 +623,18 @@ public class Destination extends APINode {
       return this;
     }
 
-    public APIRequestGet requestAddressField () {
-      return this.requestAddressField(true);
-    }
-    public APIRequestGet requestAddressField (boolean value) {
-      this.requestField("address", value);
-      return this;
-    }
     public APIRequestGet requestApplinksField () {
       return this.requestApplinksField(true);
     }
     public APIRequestGet requestApplinksField (boolean value) {
       this.requestField("applinks", value);
+      return this;
+    }
+    public APIRequestGet requestBrandField () {
+      return this.requestBrandField(true);
+    }
+    public APIRequestGet requestBrandField (boolean value) {
+      this.requestField("brand", value);
       return this;
     }
     public APIRequestGet requestCategorySpecificFieldsField () {
@@ -853,18 +651,46 @@ public class Destination extends APINode {
       this.requestField("currency", value);
       return this;
     }
+    public APIRequestGet requestCustomLabel0Field () {
+      return this.requestCustomLabel0Field(true);
+    }
+    public APIRequestGet requestCustomLabel0Field (boolean value) {
+      this.requestField("custom_label_0", value);
+      return this;
+    }
+    public APIRequestGet requestCustomLabel1Field () {
+      return this.requestCustomLabel1Field(true);
+    }
+    public APIRequestGet requestCustomLabel1Field (boolean value) {
+      this.requestField("custom_label_1", value);
+      return this;
+    }
+    public APIRequestGet requestCustomLabel2Field () {
+      return this.requestCustomLabel2Field(true);
+    }
+    public APIRequestGet requestCustomLabel2Field (boolean value) {
+      this.requestField("custom_label_2", value);
+      return this;
+    }
+    public APIRequestGet requestCustomLabel3Field () {
+      return this.requestCustomLabel3Field(true);
+    }
+    public APIRequestGet requestCustomLabel3Field (boolean value) {
+      this.requestField("custom_label_3", value);
+      return this;
+    }
+    public APIRequestGet requestCustomLabel4Field () {
+      return this.requestCustomLabel4Field(true);
+    }
+    public APIRequestGet requestCustomLabel4Field (boolean value) {
+      this.requestField("custom_label_4", value);
+      return this;
+    }
     public APIRequestGet requestDescriptionField () {
       return this.requestDescriptionField(true);
     }
     public APIRequestGet requestDescriptionField (boolean value) {
       this.requestField("description", value);
-      return this;
-    }
-    public APIRequestGet requestDestinationIdField () {
-      return this.requestDestinationIdField(true);
-    }
-    public APIRequestGet requestDestinationIdField (boolean value) {
-      this.requestField("destination_id", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -888,11 +714,11 @@ public class Destination extends APINode {
       this.requestField("images", value);
       return this;
     }
-    public APIRequestGet requestNameField () {
-      return this.requestNameField(true);
+    public APIRequestGet requestLocalServiceBusinessIdField () {
+      return this.requestLocalServiceBusinessIdField(true);
     }
-    public APIRequestGet requestNameField (boolean value) {
-      this.requestField("name", value);
+    public APIRequestGet requestLocalServiceBusinessIdField (boolean value) {
+      this.requestField("local_service_business_id", value);
       return this;
     }
     public APIRequestGet requestPriceField () {
@@ -902,13 +728,6 @@ public class Destination extends APINode {
       this.requestField("price", value);
       return this;
     }
-    public APIRequestGet requestPriceChangeField () {
-      return this.requestPriceChangeField(true);
-    }
-    public APIRequestGet requestPriceChangeField (boolean value) {
-      this.requestField("price_change", value);
-      return this;
-    }
     public APIRequestGet requestSanitizedImagesField () {
       return this.requestSanitizedImagesField(true);
     }
@@ -916,18 +735,11 @@ public class Destination extends APINode {
       this.requestField("sanitized_images", value);
       return this;
     }
-    public APIRequestGet requestTypesField () {
-      return this.requestTypesField(true);
+    public APIRequestGet requestTitleField () {
+      return this.requestTitleField(true);
     }
-    public APIRequestGet requestTypesField (boolean value) {
-      this.requestField("types", value);
-      return this;
-    }
-    public APIRequestGet requestUnitPriceField () {
-      return this.requestUnitPriceField(true);
-    }
-    public APIRequestGet requestUnitPriceField (boolean value) {
-      this.requestField("unit_price", value);
+    public APIRequestGet requestTitleField (boolean value) {
+      this.requestField("title", value);
       return this;
     }
     public APIRequestGet requestUrlField () {
@@ -980,32 +792,34 @@ public class Destination extends APINode {
     return gson;
   }
 
-  public Destination copyFrom(Destination instance) {
-    this.mAddress = instance.mAddress;
+  public LocalServiceBusiness copyFrom(LocalServiceBusiness instance) {
     this.mApplinks = instance.mApplinks;
+    this.mBrand = instance.mBrand;
     this.mCategorySpecificFields = instance.mCategorySpecificFields;
     this.mCurrency = instance.mCurrency;
+    this.mCustomLabel0 = instance.mCustomLabel0;
+    this.mCustomLabel1 = instance.mCustomLabel1;
+    this.mCustomLabel2 = instance.mCustomLabel2;
+    this.mCustomLabel3 = instance.mCustomLabel3;
+    this.mCustomLabel4 = instance.mCustomLabel4;
     this.mDescription = instance.mDescription;
-    this.mDestinationId = instance.mDestinationId;
     this.mId = instance.mId;
     this.mImageFetchStatus = instance.mImageFetchStatus;
     this.mImages = instance.mImages;
-    this.mName = instance.mName;
+    this.mLocalServiceBusinessId = instance.mLocalServiceBusinessId;
     this.mPrice = instance.mPrice;
-    this.mPriceChange = instance.mPriceChange;
     this.mSanitizedImages = instance.mSanitizedImages;
-    this.mTypes = instance.mTypes;
-    this.mUnitPrice = instance.mUnitPrice;
+    this.mTitle = instance.mTitle;
     this.mUrl = instance.mUrl;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<Destination> getParser() {
-    return new APIRequest.ResponseParser<Destination>() {
-      public APINodeList<Destination> parseResponse(String response, APIContext context, APIRequest<Destination> request, String header) throws MalformedResponseException {
-        return Destination.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<LocalServiceBusiness> getParser() {
+    return new APIRequest.ResponseParser<LocalServiceBusiness>() {
+      public APINodeList<LocalServiceBusiness> parseResponse(String response, APIContext context, APIRequest<LocalServiceBusiness> request, String header) throws MalformedResponseException {
+        return LocalServiceBusiness.parseResponse(response, context, request, header);
       }
     };
   }

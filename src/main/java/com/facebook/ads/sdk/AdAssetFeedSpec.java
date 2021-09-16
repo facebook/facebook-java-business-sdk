@@ -75,16 +75,22 @@ public class AdAssetFeedSpec extends APINode {
   private List<Object> mCarousels = null;
   @SerializedName("descriptions")
   private List<AdAssetFeedSpecDescription> mDescriptions = null;
+  @SerializedName("events")
+  private List<Object> mEvents = null;
   @SerializedName("groups")
   private List<AdAssetFeedSpecGroupRule> mGroups = null;
   @SerializedName("images")
   private List<AdAssetFeedSpecImage> mImages = null;
   @SerializedName("link_urls")
   private List<AdAssetFeedSpecLinkURL> mLinkUrls = null;
+  @SerializedName("offer_ids")
+  private List<Object> mOfferIds = null;
   @SerializedName("onsite_destinations")
   private List<Object> mOnsiteDestinations = null;
   @SerializedName("optimization_type")
   private String mOptimizationType = null;
+  @SerializedName("phone_data_ids")
+  private List<Object> mPhoneDataIds = null;
   @SerializedName("posts")
   private List<Object> mPosts = null;
   @SerializedName("titles")
@@ -347,6 +353,15 @@ public class AdAssetFeedSpec extends APINode {
     this.mDescriptions = AdAssetFeedSpecDescription.getGson().fromJson(value, type);
     return this;
   }
+  public List<Object> getFieldEvents() {
+    return mEvents;
+  }
+
+  public AdAssetFeedSpec setFieldEvents(List<Object> value) {
+    this.mEvents = value;
+    return this;
+  }
+
   public List<AdAssetFeedSpecGroupRule> getFieldGroups() {
     return mGroups;
   }
@@ -389,6 +404,15 @@ public class AdAssetFeedSpec extends APINode {
     this.mLinkUrls = AdAssetFeedSpecLinkURL.getGson().fromJson(value, type);
     return this;
   }
+  public List<Object> getFieldOfferIds() {
+    return mOfferIds;
+  }
+
+  public AdAssetFeedSpec setFieldOfferIds(List<Object> value) {
+    this.mOfferIds = value;
+    return this;
+  }
+
   public List<Object> getFieldOnsiteDestinations() {
     return mOnsiteDestinations;
   }
@@ -404,6 +428,15 @@ public class AdAssetFeedSpec extends APINode {
 
   public AdAssetFeedSpec setFieldOptimizationType(String value) {
     this.mOptimizationType = value;
+    return this;
+  }
+
+  public List<Object> getFieldPhoneDataIds() {
+    return mPhoneDataIds;
+  }
+
+  public AdAssetFeedSpec setFieldPhoneDataIds(List<Object> value) {
+    this.mPhoneDataIds = value;
     return this;
   }
 
@@ -463,6 +496,8 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_CALL("CALL"),
       @SerializedName("CALL_ME")
       VALUE_CALL_ME("CALL_ME"),
+      @SerializedName("CALL_NOW")
+      VALUE_CALL_NOW("CALL_NOW"),
       @SerializedName("CONTACT")
       VALUE_CONTACT("CONTACT"),
       @SerializedName("CONTACT_US")
@@ -616,11 +651,14 @@ public class AdAssetFeedSpec extends APINode {
     this.mCaptions = instance.mCaptions;
     this.mCarousels = instance.mCarousels;
     this.mDescriptions = instance.mDescriptions;
+    this.mEvents = instance.mEvents;
     this.mGroups = instance.mGroups;
     this.mImages = instance.mImages;
     this.mLinkUrls = instance.mLinkUrls;
+    this.mOfferIds = instance.mOfferIds;
     this.mOnsiteDestinations = instance.mOnsiteDestinations;
     this.mOptimizationType = instance.mOptimizationType;
+    this.mPhoneDataIds = instance.mPhoneDataIds;
     this.mPosts = instance.mPosts;
     this.mTitles = instance.mTitles;
     this.mVideos = instance.mVideos;

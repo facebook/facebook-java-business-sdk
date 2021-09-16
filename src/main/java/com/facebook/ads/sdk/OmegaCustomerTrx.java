@@ -57,6 +57,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class OmegaCustomerTrx extends APINode {
   @SerializedName("ad_account_ids")
   private List<String> mAdAccountIds = null;
+  @SerializedName("advertiser_name")
+  private String mAdvertiserName = null;
   @SerializedName("amount")
   private String mAmount = null;
   @SerializedName("amount_due")
@@ -315,6 +317,10 @@ public class OmegaCustomerTrx extends APINode {
     return mAdAccountIds;
   }
 
+  public String getFieldAdvertiserName() {
+    return mAdvertiserName;
+  }
+
   public String getFieldAmount() {
     return mAmount;
   }
@@ -409,6 +415,7 @@ public class OmegaCustomerTrx extends APINode {
       "campaign_name",
       "clicks",
       "conversions",
+      "description",
       "impressions",
       "tags",
     };
@@ -544,6 +551,13 @@ public class OmegaCustomerTrx extends APINode {
       this.requestField("conversions", value);
       return this;
     }
+    public APIRequestGetCampaigns requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetCampaigns requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
     public APIRequestGetCampaigns requestImpressionsField () {
       return this.requestImpressionsField(true);
     }
@@ -572,6 +586,7 @@ public class OmegaCustomerTrx extends APINode {
 
     public static final String[] FIELDS = {
       "ad_account_ids",
+      "advertiser_name",
       "amount",
       "amount_due",
       "billed_amount_details",
@@ -686,6 +701,13 @@ public class OmegaCustomerTrx extends APINode {
     }
     public APIRequestGet requestAdAccountIdsField (boolean value) {
       this.requestField("ad_account_ids", value);
+      return this;
+    }
+    public APIRequestGet requestAdvertiserNameField () {
+      return this.requestAdvertiserNameField(true);
+    }
+    public APIRequestGet requestAdvertiserNameField (boolean value) {
+      this.requestField("advertiser_name", value);
       return this;
     }
     public APIRequestGet requestAmountField () {
@@ -855,6 +877,7 @@ public class OmegaCustomerTrx extends APINode {
 
   public OmegaCustomerTrx copyFrom(OmegaCustomerTrx instance) {
     this.mAdAccountIds = instance.mAdAccountIds;
+    this.mAdvertiserName = instance.mAdvertiserName;
     this.mAmount = instance.mAmount;
     this.mAmountDue = instance.mAmountDue;
     this.mBilledAmountDetails = instance.mBilledAmountDetails;

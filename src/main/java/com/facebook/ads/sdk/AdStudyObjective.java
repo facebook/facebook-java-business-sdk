@@ -2425,6 +2425,7 @@ public class AdStudyObjective extends APINode {
       "is_primary",
       "name",
       "offline_conversion_data_sets",
+      "offsite_datasets",
       "product_catalogs",
       "product_sets",
       "type",
@@ -2536,6 +2537,15 @@ public class AdStudyObjective extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setOffsiteDatasets (List<Object> offsiteDatasets) {
+      this.setParam("offsite_datasets", offsiteDatasets);
+      return this;
+    }
+    public APIRequestUpdate setOffsiteDatasets (String offsiteDatasets) {
+      this.setParam("offsite_datasets", offsiteDatasets);
+      return this;
+    }
+
     public APIRequestUpdate setProductCatalogs (List<Object> productCatalogs) {
       this.setParam("product_catalogs", productCatalogs);
       return this;
@@ -2602,12 +2612,12 @@ public class AdStudyObjective extends APINode {
   }
 
   public static enum EnumType {
-      @SerializedName("AEP_CONVERSION")
-      VALUE_AEP_CONVERSION("AEP_CONVERSION"),
       @SerializedName("BRAND")
       VALUE_BRAND("BRAND"),
       @SerializedName("BRANDLIFT")
       VALUE_BRANDLIFT("BRANDLIFT"),
+      @SerializedName("CONVERSIONS")
+      VALUE_CONVERSIONS("CONVERSIONS"),
       @SerializedName("FTL")
       VALUE_FTL("FTL"),
       @SerializedName("MAE")

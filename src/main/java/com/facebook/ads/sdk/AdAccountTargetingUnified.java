@@ -802,6 +802,16 @@ public class AdAccountTargetingUnified extends APINode {
   public static enum EnumAppStore {
       @SerializedName("amazon_app_store")
       VALUE_AMAZON_APP_STORE("amazon_app_store"),
+      @SerializedName("apk_mirror")
+      VALUE_APK_MIRROR("apk_mirror"),
+      @SerializedName("apk_monk")
+      VALUE_APK_MONK("apk_monk"),
+      @SerializedName("apk_pure")
+      VALUE_APK_PURE("apk_pure"),
+      @SerializedName("aptoide_a1_store")
+      VALUE_APTOIDE_A1_STORE("aptoide_a1_store"),
+      @SerializedName("bemobi_mobile_store")
+      VALUE_BEMOBI_MOBILE_STORE("bemobi_mobile_store"),
       @SerializedName("does_not_exist")
       VALUE_DOES_NOT_EXIST("does_not_exist"),
       @SerializedName("fb_android_store")
@@ -822,12 +832,20 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_ITUNES_IPAD("itunes_ipad"),
       @SerializedName("oculus_app_store")
       VALUE_OCULUS_APP_STORE("oculus_app_store"),
+      @SerializedName("oppo")
+      VALUE_OPPO("oppo"),
       @SerializedName("roku_channel_store")
       VALUE_ROKU_CHANNEL_STORE("roku_channel_store"),
+      @SerializedName("uptodown")
+      VALUE_UPTODOWN("uptodown"),
+      @SerializedName("vivo")
+      VALUE_VIVO("vivo"),
       @SerializedName("windows_10_store")
       VALUE_WINDOWS_10_STORE("windows_10_store"),
       @SerializedName("windows_store")
       VALUE_WINDOWS_STORE("windows_store"),
+      @SerializedName("xiaomi")
+      VALUE_XIAOMI("xiaomi"),
       ;
 
       private String value;

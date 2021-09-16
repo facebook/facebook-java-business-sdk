@@ -54,29 +54,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdAccountContentFilterLevelsInheritance extends APINode {
-  @SerializedName("an_business_ids")
-  private List<String> mAnBusinessIds = null;
-  @SerializedName("an_level")
-  private String mAnLevel = null;
-  @SerializedName("facebook_business_ids")
-  private List<String> mFacebookBusinessIds = null;
-  @SerializedName("facebook_level")
-  private String mFacebookLevel = null;
+public class AdStudyObjectiveOffsiteDatasets extends APINode {
+  @SerializedName("event_names")
+  private List<String> mEventNames = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public AdAccountContentFilterLevelsInheritance() {
+  public AdStudyObjectiveOffsiteDatasets() {
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
-  public static AdAccountContentFilterLevelsInheritance loadJSON(String json, APIContext context, String header) {
-    AdAccountContentFilterLevelsInheritance adAccountContentFilterLevelsInheritance = getGson().fromJson(json, AdAccountContentFilterLevelsInheritance.class);
+  public static AdStudyObjectiveOffsiteDatasets loadJSON(String json, APIContext context, String header) {
+    AdStudyObjectiveOffsiteDatasets adStudyObjectiveOffsiteDatasets = getGson().fromJson(json, AdStudyObjectiveOffsiteDatasets.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adAccountContentFilterLevelsInheritance.toString());
+      JsonElement o2 = parser.parse(adStudyObjectiveOffsiteDatasets.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -86,14 +82,14 @@ public class AdAccountContentFilterLevelsInheritance extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    adAccountContentFilterLevelsInheritance.context = context;
-    adAccountContentFilterLevelsInheritance.rawValue = json;
-    adAccountContentFilterLevelsInheritance.header = header;
-    return adAccountContentFilterLevelsInheritance;
+    adStudyObjectiveOffsiteDatasets.context = context;
+    adStudyObjectiveOffsiteDatasets.rawValue = json;
+    adStudyObjectiveOffsiteDatasets.header = header;
+    return adStudyObjectiveOffsiteDatasets;
   }
 
-  public static APINodeList<AdAccountContentFilterLevelsInheritance> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdAccountContentFilterLevelsInheritance> adAccountContentFilterLevelsInheritances = new APINodeList<AdAccountContentFilterLevelsInheritance>(request, json, header);
+  public static APINodeList<AdStudyObjectiveOffsiteDatasets> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdStudyObjectiveOffsiteDatasets> adStudyObjectiveOffsiteDatasetss = new APINodeList<AdStudyObjectiveOffsiteDatasets>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -104,9 +100,9 @@ public class AdAccountContentFilterLevelsInheritance extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adAccountContentFilterLevelsInheritances.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adStudyObjectiveOffsiteDatasetss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adAccountContentFilterLevelsInheritances;
+        return adStudyObjectiveOffsiteDatasetss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -116,20 +112,20 @@ public class AdAccountContentFilterLevelsInheritance extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adAccountContentFilterLevelsInheritances.setCursors(before, after);
+                adStudyObjectiveOffsiteDatasetss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adAccountContentFilterLevelsInheritances.setPaging(previous, next);
+            adStudyObjectiveOffsiteDatasetss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adAccountContentFilterLevelsInheritances.setAppSecret(context.getAppSecretProof());
+              adStudyObjectiveOffsiteDatasetss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adAccountContentFilterLevelsInheritances.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adStudyObjectiveOffsiteDatasetss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -140,23 +136,23 @@ public class AdAccountContentFilterLevelsInheritance extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adAccountContentFilterLevelsInheritances.add(loadJSON(entry.getValue().toString(), context, header));
+                  adStudyObjectiveOffsiteDatasetss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adAccountContentFilterLevelsInheritances.add(loadJSON(obj.toString(), context, header));
+              adStudyObjectiveOffsiteDatasetss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adAccountContentFilterLevelsInheritances;
+          return adStudyObjectiveOffsiteDatasetss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adAccountContentFilterLevelsInheritances.add(loadJSON(entry.getValue().toString(), context, header));
+              adStudyObjectiveOffsiteDatasetss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adAccountContentFilterLevelsInheritances;
+          return adStudyObjectiveOffsiteDatasetss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -173,20 +169,20 @@ public class AdAccountContentFilterLevelsInheritance extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adAccountContentFilterLevelsInheritances.add(loadJSON(value.toString(), context, header));
+              adStudyObjectiveOffsiteDatasetss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adAccountContentFilterLevelsInheritances;
+            return adStudyObjectiveOffsiteDatasetss;
           }
 
           // Sixth, check if it's pure JsonObject
-          adAccountContentFilterLevelsInheritances.clear();
-          adAccountContentFilterLevelsInheritances.add(loadJSON(json, context, header));
-          return adAccountContentFilterLevelsInheritances;
+          adStudyObjectiveOffsiteDatasetss.clear();
+          adStudyObjectiveOffsiteDatasetss.add(loadJSON(json, context, header));
+          return adStudyObjectiveOffsiteDatasetss;
         }
       }
     } catch (Exception e) {
@@ -214,39 +210,21 @@ public class AdAccountContentFilterLevelsInheritance extends APINode {
   }
 
 
-  public List<String> getFieldAnBusinessIds() {
-    return mAnBusinessIds;
+  public List<String> getFieldEventNames() {
+    return mEventNames;
   }
 
-  public AdAccountContentFilterLevelsInheritance setFieldAnBusinessIds(List<String> value) {
-    this.mAnBusinessIds = value;
+  public AdStudyObjectiveOffsiteDatasets setFieldEventNames(List<String> value) {
+    this.mEventNames = value;
     return this;
   }
 
-  public String getFieldAnLevel() {
-    return mAnLevel;
+  public String getFieldId() {
+    return mId;
   }
 
-  public AdAccountContentFilterLevelsInheritance setFieldAnLevel(String value) {
-    this.mAnLevel = value;
-    return this;
-  }
-
-  public List<String> getFieldFacebookBusinessIds() {
-    return mFacebookBusinessIds;
-  }
-
-  public AdAccountContentFilterLevelsInheritance setFieldFacebookBusinessIds(List<String> value) {
-    this.mFacebookBusinessIds = value;
-    return this;
-  }
-
-  public String getFieldFacebookLevel() {
-    return mFacebookLevel;
-  }
-
-  public AdAccountContentFilterLevelsInheritance setFieldFacebookLevel(String value) {
-    this.mFacebookLevel = value;
+  public AdStudyObjectiveOffsiteDatasets setFieldId(String value) {
+    this.mId = value;
     return this;
   }
 
@@ -266,20 +244,18 @@ public class AdAccountContentFilterLevelsInheritance extends APINode {
     return gson;
   }
 
-  public AdAccountContentFilterLevelsInheritance copyFrom(AdAccountContentFilterLevelsInheritance instance) {
-    this.mAnBusinessIds = instance.mAnBusinessIds;
-    this.mAnLevel = instance.mAnLevel;
-    this.mFacebookBusinessIds = instance.mFacebookBusinessIds;
-    this.mFacebookLevel = instance.mFacebookLevel;
+  public AdStudyObjectiveOffsiteDatasets copyFrom(AdStudyObjectiveOffsiteDatasets instance) {
+    this.mEventNames = instance.mEventNames;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdAccountContentFilterLevelsInheritance> getParser() {
-    return new APIRequest.ResponseParser<AdAccountContentFilterLevelsInheritance>() {
-      public APINodeList<AdAccountContentFilterLevelsInheritance> parseResponse(String response, APIContext context, APIRequest<AdAccountContentFilterLevelsInheritance> request, String header) throws MalformedResponseException {
-        return AdAccountContentFilterLevelsInheritance.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdStudyObjectiveOffsiteDatasets> getParser() {
+    return new APIRequest.ResponseParser<AdStudyObjectiveOffsiteDatasets>() {
+      public APINodeList<AdStudyObjectiveOffsiteDatasets> parseResponse(String response, APIContext context, APIRequest<AdStudyObjectiveOffsiteDatasets> request, String header) throws MalformedResponseException {
+        return AdStudyObjectiveOffsiteDatasets.parseResponse(response, context, request, header);
       }
     };
   }

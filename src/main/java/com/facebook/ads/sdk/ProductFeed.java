@@ -306,10 +306,6 @@ public class ProductFeed extends APINode {
     return new APIRequestGetAutomotiveModels(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetAutos getAutos() {
-    return new APIRequestGetAutos(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetDestinations getDestinations() {
     return new APIRequestGetDestinations(this.getPrefixedId().toString(), context);
   }
@@ -601,6 +597,7 @@ public class ProductFeed extends APINode {
       "title",
       "transmission",
       "trim",
+      "unit_price",
       "url",
       "year",
     };
@@ -894,6 +891,13 @@ public class ProductFeed extends APINode {
       this.requestField("trim", value);
       return this;
     }
+    public APIRequestGetAutomotiveModels requestUnitPriceField () {
+      return this.requestUnitPriceField(true);
+    }
+    public APIRequestGetAutomotiveModels requestUnitPriceField (boolean value) {
+      this.requestField("unit_price", value);
+      return this;
+    }
     public APIRequestGetAutomotiveModels requestUrlField () {
       return this.requestUrlField(true);
     }
@@ -908,110 +912,6 @@ public class ProductFeed extends APINode {
       this.requestField("year", value);
       return this;
     }
-  }
-
-  public static class APIRequestGetAutos extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetAutos.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetAutos(String nodeId, APIContext context) {
-      super(context, nodeId, "/autos", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetAutos setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAutos setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetAutos requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetAutos requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAutos requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetAutos requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAutos requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAutos requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestGetDestinations extends APIRequest<Destination> {
@@ -1041,6 +941,7 @@ public class ProductFeed extends APINode {
       "price_change",
       "sanitized_images",
       "types",
+      "unit_price",
       "url",
     };
 
@@ -1249,6 +1150,13 @@ public class ProductFeed extends APINode {
       this.requestField("types", value);
       return this;
     }
+    public APIRequestGetDestinations requestUnitPriceField () {
+      return this.requestUnitPriceField(true);
+    }
+    public APIRequestGetDestinations requestUnitPriceField (boolean value) {
+      this.requestField("unit_price", value);
+      return this;
+    }
     public APIRequestGetDestinations requestUrlField () {
       return this.requestUrlField(true);
     }
@@ -1287,6 +1195,7 @@ public class ProductFeed extends APINode {
       "origin_city",
       "price",
       "sanitized_images",
+      "unit_price",
       "url",
     };
 
@@ -1509,6 +1418,13 @@ public class ProductFeed extends APINode {
       this.requestField("sanitized_images", value);
       return this;
     }
+    public APIRequestGetFlights requestUnitPriceField () {
+      return this.requestUnitPriceField(true);
+    }
+    public APIRequestGetFlights requestUnitPriceField (boolean value) {
+      this.requestField("unit_price", value);
+      return this;
+    }
     public APIRequestGetFlights requestUrlField () {
       return this.requestUrlField(true);
     }
@@ -1573,6 +1489,7 @@ public class ProductFeed extends APINode {
       "price",
       "property_type",
       "sanitized_images",
+      "unit_price",
       "url",
       "year_built",
     };
@@ -1978,6 +1895,13 @@ public class ProductFeed extends APINode {
       this.requestField("sanitized_images", value);
       return this;
     }
+    public APIRequestGetHomeListings requestUnitPriceField () {
+      return this.requestUnitPriceField(true);
+    }
+    public APIRequestGetHomeListings requestUnitPriceField (boolean value) {
+      this.requestField("unit_price", value);
+      return this;
+    }
     public APIRequestGetHomeListings requestUrlField () {
       return this.requestUrlField(true);
     }
@@ -2027,6 +1951,7 @@ public class ProductFeed extends APINode {
       "sale_price",
       "sanitized_images",
       "star_rating",
+      "unit_price",
       "url",
     };
 
@@ -2277,6 +2202,13 @@ public class ProductFeed extends APINode {
       this.requestField("star_rating", value);
       return this;
     }
+    public APIRequestGetHotels requestUnitPriceField () {
+      return this.requestUnitPriceField(true);
+    }
+    public APIRequestGetHotels requestUnitPriceField (boolean value) {
+      this.requestField("unit_price", value);
+      return this;
+    }
     public APIRequestGetHotels requestUrlField () {
       return this.requestUrlField(true);
     }
@@ -2454,6 +2386,7 @@ public class ProductFeed extends APINode {
       "image_fetch_status",
       "image_url",
       "images",
+      "invalidation_errors",
       "inventory",
       "manufacturer_part_number",
       "marked_for_product_launch",
@@ -2807,6 +2740,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetProducts requestImagesField (boolean value) {
       this.requestField("images", value);
+      return this;
+    }
+    public APIRequestGetProducts requestInvalidationErrorsField () {
+      return this.requestInvalidationErrorsField(true);
+    }
+    public APIRequestGetProducts requestInvalidationErrorsField (boolean value) {
+      this.requestField("invalidation_errors", value);
       return this;
     }
     public APIRequestGetProducts requestInventoryField () {
@@ -3975,6 +3915,7 @@ public class ProductFeed extends APINode {
       "term_qualifier",
       "title",
       "trim",
+      "unit_price",
       "url",
       "vehicle_offer_id",
       "year",
@@ -4311,6 +4252,13 @@ public class ProductFeed extends APINode {
       this.requestField("trim", value);
       return this;
     }
+    public APIRequestGetVehicleOffers requestUnitPriceField () {
+      return this.requestUnitPriceField(true);
+    }
+    public APIRequestGetVehicleOffers requestUnitPriceField (boolean value) {
+      this.requestField("unit_price", value);
+      return this;
+    }
     public APIRequestGetVehicleOffers requestUrlField () {
       return this.requestUrlField(true);
     }
@@ -4386,6 +4334,7 @@ public class ProductFeed extends APINode {
       "title",
       "transmission",
       "trim",
+      "unit_price",
       "url",
       "vehicle_id",
       "vehicle_registration_plate",
@@ -4773,6 +4722,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetVehicles requestTrimField (boolean value) {
       this.requestField("trim", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestUnitPriceField () {
+      return this.requestUnitPriceField(true);
+    }
+    public APIRequestGetVehicles requestUnitPriceField (boolean value) {
+      this.requestField("unit_price", value);
       return this;
     }
     public APIRequestGetVehicles requestUrlField () {

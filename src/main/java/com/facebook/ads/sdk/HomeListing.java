@@ -139,6 +139,8 @@ public class HomeListing extends APINode {
   private String mPropertyType = null;
   @SerializedName("sanitized_images")
   private List<String> mSanitizedImages = null;
+  @SerializedName("unit_price")
+  private Object mUnitPrice = null;
   @SerializedName("url")
   private String mUrl = null;
   @SerializedName("year_built")
@@ -546,6 +548,10 @@ public class HomeListing extends APINode {
 
   public List<String> getFieldSanitizedImages() {
     return mSanitizedImages;
+  }
+
+  public Object getFieldUnitPrice() {
+    return mUnitPrice;
   }
 
   public String getFieldUrl() {
@@ -1043,6 +1049,7 @@ public class HomeListing extends APINode {
       "price",
       "property_type",
       "sanitized_images",
+      "unit_price",
       "url",
       "year_built",
     };
@@ -1430,6 +1437,13 @@ public class HomeListing extends APINode {
       this.requestField("sanitized_images", value);
       return this;
     }
+    public APIRequestGet requestUnitPriceField () {
+      return this.requestUnitPriceField(true);
+    }
+    public APIRequestGet requestUnitPriceField (boolean value) {
+      this.requestField("unit_price", value);
+      return this;
+    }
     public APIRequestGet requestUrlField () {
       return this.requestUrlField(true);
     }
@@ -1746,6 +1760,7 @@ public class HomeListing extends APINode {
     this.mPrice = instance.mPrice;
     this.mPropertyType = instance.mPropertyType;
     this.mSanitizedImages = instance.mSanitizedImages;
+    this.mUnitPrice = instance.mUnitPrice;
     this.mUrl = instance.mUrl;
     this.mYearBuilt = instance.mYearBuilt;
     this.context = instance.context;

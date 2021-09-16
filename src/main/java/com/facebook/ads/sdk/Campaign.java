@@ -1540,6 +1540,7 @@ public class Campaign extends APINode {
       "destination_type",
       "effective_status",
       "end_time",
+      "existing_customer_budget_percentage",
       "frequency_control_specs",
       "full_funnel_exploration_mode",
       "id",
@@ -1566,6 +1567,7 @@ public class Campaign extends APINode {
       "start_time",
       "status",
       "targeting",
+      "targeting_optimization_types",
       "time_based_ad_rotation_id_blocks",
       "time_based_ad_rotation_intervals",
       "updated_time",
@@ -1858,6 +1860,13 @@ public class Campaign extends APINode {
       this.requestField("end_time", value);
       return this;
     }
+    public APIRequestGetAdSets requestExistingCustomerBudgetPercentageField () {
+      return this.requestExistingCustomerBudgetPercentageField(true);
+    }
+    public APIRequestGetAdSets requestExistingCustomerBudgetPercentageField (boolean value) {
+      this.requestField("existing_customer_budget_percentage", value);
+      return this;
+    }
     public APIRequestGetAdSets requestFrequencyControlSpecsField () {
       return this.requestFrequencyControlSpecsField(true);
     }
@@ -2038,6 +2047,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAdSets requestTargetingField (boolean value) {
       this.requestField("targeting", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestTargetingOptimizationTypesField () {
+      return this.requestTargetingOptimizationTypesField(true);
+    }
+    public APIRequestGetAdSets requestTargetingOptimizationTypesField (boolean value) {
+      this.requestField("targeting_optimization_types", value);
       return this;
     }
     public APIRequestGetAdSets requestTimeBasedAdRotationIdBlocksField () {

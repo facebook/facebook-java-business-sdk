@@ -54,74 +54,80 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdPlacePageSet extends APINode {
-  @SerializedName("account_id")
-  private String mAccountId = null;
+public class CloudGame extends APINode {
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("location_types")
-  private List<String> mLocationTypes = null;
   @SerializedName("name")
   private String mName = null;
-  @SerializedName("pages_count")
-  private Long mPagesCount = null;
-  @SerializedName("parent_page")
-  private Page mParentPage = null;
+  @SerializedName("owner")
+  private Profile mOwner = null;
+  @SerializedName("playable_ad_file_size")
+  private Long mPlayableAdFileSize = null;
+  @SerializedName("playable_ad_orientation")
+  private String mPlayableAdOrientation = null;
+  @SerializedName("playable_ad_package_name")
+  private String mPlayableAdPackageName = null;
+  @SerializedName("playable_ad_reject_reason")
+  private String mPlayableAdRejectReason = null;
+  @SerializedName("playable_ad_status")
+  private String mPlayableAdStatus = null;
+  @SerializedName("playable_ad_upload_time")
+  private String mPlayableAdUploadTime = null;
   protected static Gson gson = null;
 
-  AdPlacePageSet() {
+  CloudGame() {
   }
 
-  public AdPlacePageSet(Long id, APIContext context) {
+  public CloudGame(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public AdPlacePageSet(String id, APIContext context) {
+  public CloudGame(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public AdPlacePageSet fetch() throws APIException{
-    AdPlacePageSet newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public CloudGame fetch() throws APIException{
+    CloudGame newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static AdPlacePageSet fetchById(Long id, APIContext context) throws APIException {
+  public static CloudGame fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<AdPlacePageSet> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<CloudGame> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static AdPlacePageSet fetchById(String id, APIContext context) throws APIException {
+  public static CloudGame fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<AdPlacePageSet> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<CloudGame> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<AdPlacePageSet> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdPlacePageSet>)(
-      new APIRequest<AdPlacePageSet>(context, "", "/", "GET", AdPlacePageSet.getParser())
+  public static APINodeList<CloudGame> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<CloudGame>)(
+      new APIRequest<CloudGame>(context, "", "/", "GET", CloudGame.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<AdPlacePageSet>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<CloudGame>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", AdPlacePageSet.getParser())
+      new APIRequest(context, "", "/", "GET", CloudGame.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -134,12 +140,12 @@ public class AdPlacePageSet extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdPlacePageSet loadJSON(String json, APIContext context, String header) {
-    AdPlacePageSet adPlacePageSet = getGson().fromJson(json, AdPlacePageSet.class);
+  public static CloudGame loadJSON(String json, APIContext context, String header) {
+    CloudGame cloudGame = getGson().fromJson(json, CloudGame.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adPlacePageSet.toString());
+      JsonElement o2 = parser.parse(cloudGame.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -149,14 +155,14 @@ public class AdPlacePageSet extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    adPlacePageSet.context = context;
-    adPlacePageSet.rawValue = json;
-    adPlacePageSet.header = header;
-    return adPlacePageSet;
+    cloudGame.context = context;
+    cloudGame.rawValue = json;
+    cloudGame.header = header;
+    return cloudGame;
   }
 
-  public static APINodeList<AdPlacePageSet> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdPlacePageSet> adPlacePageSets = new APINodeList<AdPlacePageSet>(request, json, header);
+  public static APINodeList<CloudGame> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CloudGame> cloudGames = new APINodeList<CloudGame>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -167,9 +173,9 @@ public class AdPlacePageSet extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adPlacePageSets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          cloudGames.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adPlacePageSets;
+        return cloudGames;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -179,20 +185,20 @@ public class AdPlacePageSet extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adPlacePageSets.setCursors(before, after);
+                cloudGames.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adPlacePageSets.setPaging(previous, next);
+            cloudGames.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adPlacePageSets.setAppSecret(context.getAppSecretProof());
+              cloudGames.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adPlacePageSets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              cloudGames.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -203,23 +209,23 @@ public class AdPlacePageSet extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adPlacePageSets.add(loadJSON(entry.getValue().toString(), context, header));
+                  cloudGames.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adPlacePageSets.add(loadJSON(obj.toString(), context, header));
+              cloudGames.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adPlacePageSets;
+          return cloudGames;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adPlacePageSets.add(loadJSON(entry.getValue().toString(), context, header));
+              cloudGames.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adPlacePageSets;
+          return cloudGames;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -236,20 +242,20 @@ public class AdPlacePageSet extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adPlacePageSets.add(loadJSON(value.toString(), context, header));
+              cloudGames.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adPlacePageSets;
+            return cloudGames;
           }
 
           // Sixth, check if it's pure JsonObject
-          adPlacePageSets.clear();
-          adPlacePageSets.add(loadJSON(json, context, header));
-          return adPlacePageSets;
+          cloudGames.clear();
+          cloudGames.add(loadJSON(json, context, header));
+          return cloudGames;
         }
       }
     } catch (Exception e) {
@@ -281,80 +287,95 @@ public class AdPlacePageSet extends APINode {
   }
 
 
-  public String getFieldAccountId() {
-    return mAccountId;
-  }
-
   public String getFieldId() {
     return mId;
-  }
-
-  public List<String> getFieldLocationTypes() {
-    return mLocationTypes;
   }
 
   public String getFieldName() {
     return mName;
   }
 
-  public Long getFieldPagesCount() {
-    return mPagesCount;
-  }
-
-  public Page getFieldParentPage() {
-    if (mParentPage != null) {
-      mParentPage.context = getContext();
+  public Profile getFieldOwner() {
+    if (mOwner != null) {
+      mOwner.context = getContext();
     }
-    return mParentPage;
+    return mOwner;
+  }
+
+  public Long getFieldPlayableAdFileSize() {
+    return mPlayableAdFileSize;
+  }
+
+  public String getFieldPlayableAdOrientation() {
+    return mPlayableAdOrientation;
+  }
+
+  public String getFieldPlayableAdPackageName() {
+    return mPlayableAdPackageName;
+  }
+
+  public String getFieldPlayableAdRejectReason() {
+    return mPlayableAdRejectReason;
+  }
+
+  public String getFieldPlayableAdStatus() {
+    return mPlayableAdStatus;
+  }
+
+  public String getFieldPlayableAdUploadTime() {
+    return mPlayableAdUploadTime;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<AdPlacePageSet> {
+  public static class APIRequestGet extends APIRequest<CloudGame> {
 
-    AdPlacePageSet lastResponse = null;
+    CloudGame lastResponse = null;
     @Override
-    public AdPlacePageSet getLastResponse() {
+    public CloudGame getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "account_id",
       "id",
-      "location_types",
       "name",
-      "pages_count",
-      "parent_page",
+      "owner",
+      "playable_ad_file_size",
+      "playable_ad_orientation",
+      "playable_ad_package_name",
+      "playable_ad_reject_reason",
+      "playable_ad_status",
+      "playable_ad_upload_time",
     };
 
     @Override
-    public AdPlacePageSet parseResponse(String response, String header) throws APIException {
-      return AdPlacePageSet.parseResponse(response, getContext(), this, header).head();
+    public CloudGame parseResponse(String response, String header) throws APIException {
+      return CloudGame.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public AdPlacePageSet execute() throws APIException {
+    public CloudGame execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public AdPlacePageSet execute(Map<String, Object> extraParams) throws APIException {
+    public CloudGame execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<AdPlacePageSet> executeAsync() throws APIException {
+    public ListenableFuture<CloudGame> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<AdPlacePageSet> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<CloudGame> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, AdPlacePageSet>() {
-           public AdPlacePageSet apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, CloudGame>() {
+           public CloudGame apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -418,25 +439,11 @@ public class AdPlacePageSet extends APINode {
       return this;
     }
 
-    public APIRequestGet requestAccountIdField () {
-      return this.requestAccountIdField(true);
-    }
-    public APIRequestGet requestAccountIdField (boolean value) {
-      this.requestField("account_id", value);
-      return this;
-    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestLocationTypesField () {
-      return this.requestLocationTypesField(true);
-    }
-    public APIRequestGet requestLocationTypesField (boolean value) {
-      this.requestField("location_types", value);
       return this;
     }
     public APIRequestGet requestNameField () {
@@ -446,60 +453,55 @@ public class AdPlacePageSet extends APINode {
       this.requestField("name", value);
       return this;
     }
-    public APIRequestGet requestPagesCountField () {
-      return this.requestPagesCountField(true);
+    public APIRequestGet requestOwnerField () {
+      return this.requestOwnerField(true);
     }
-    public APIRequestGet requestPagesCountField (boolean value) {
-      this.requestField("pages_count", value);
+    public APIRequestGet requestOwnerField (boolean value) {
+      this.requestField("owner", value);
       return this;
     }
-    public APIRequestGet requestParentPageField () {
-      return this.requestParentPageField(true);
+    public APIRequestGet requestPlayableAdFileSizeField () {
+      return this.requestPlayableAdFileSizeField(true);
     }
-    public APIRequestGet requestParentPageField (boolean value) {
-      this.requestField("parent_page", value);
+    public APIRequestGet requestPlayableAdFileSizeField (boolean value) {
+      this.requestField("playable_ad_file_size", value);
       return this;
     }
-  }
-
-  public static enum EnumLocationTypes {
-      @SerializedName("home")
-      VALUE_HOME("home"),
-      @SerializedName("recent")
-      VALUE_RECENT("recent"),
-      ;
-
-      private String value;
-
-      private EnumLocationTypes(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumTargetedAreaType {
-      @SerializedName("CUSTOM_RADIUS")
-      VALUE_CUSTOM_RADIUS("CUSTOM_RADIUS"),
-      @SerializedName("MARKETING_AREA")
-      VALUE_MARKETING_AREA("MARKETING_AREA"),
-      @SerializedName("NONE")
-      VALUE_NONE("NONE"),
-      ;
-
-      private String value;
-
-      private EnumTargetedAreaType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
+    public APIRequestGet requestPlayableAdOrientationField () {
+      return this.requestPlayableAdOrientationField(true);
+    }
+    public APIRequestGet requestPlayableAdOrientationField (boolean value) {
+      this.requestField("playable_ad_orientation", value);
+      return this;
+    }
+    public APIRequestGet requestPlayableAdPackageNameField () {
+      return this.requestPlayableAdPackageNameField(true);
+    }
+    public APIRequestGet requestPlayableAdPackageNameField (boolean value) {
+      this.requestField("playable_ad_package_name", value);
+      return this;
+    }
+    public APIRequestGet requestPlayableAdRejectReasonField () {
+      return this.requestPlayableAdRejectReasonField(true);
+    }
+    public APIRequestGet requestPlayableAdRejectReasonField (boolean value) {
+      this.requestField("playable_ad_reject_reason", value);
+      return this;
+    }
+    public APIRequestGet requestPlayableAdStatusField () {
+      return this.requestPlayableAdStatusField(true);
+    }
+    public APIRequestGet requestPlayableAdStatusField (boolean value) {
+      this.requestField("playable_ad_status", value);
+      return this;
+    }
+    public APIRequestGet requestPlayableAdUploadTimeField () {
+      return this.requestPlayableAdUploadTimeField(true);
+    }
+    public APIRequestGet requestPlayableAdUploadTimeField (boolean value) {
+      this.requestField("playable_ad_upload_time", value);
+      return this;
+    }
   }
 
 
@@ -516,22 +518,25 @@ public class AdPlacePageSet extends APINode {
     return gson;
   }
 
-  public AdPlacePageSet copyFrom(AdPlacePageSet instance) {
-    this.mAccountId = instance.mAccountId;
+  public CloudGame copyFrom(CloudGame instance) {
     this.mId = instance.mId;
-    this.mLocationTypes = instance.mLocationTypes;
     this.mName = instance.mName;
-    this.mPagesCount = instance.mPagesCount;
-    this.mParentPage = instance.mParentPage;
+    this.mOwner = instance.mOwner;
+    this.mPlayableAdFileSize = instance.mPlayableAdFileSize;
+    this.mPlayableAdOrientation = instance.mPlayableAdOrientation;
+    this.mPlayableAdPackageName = instance.mPlayableAdPackageName;
+    this.mPlayableAdRejectReason = instance.mPlayableAdRejectReason;
+    this.mPlayableAdStatus = instance.mPlayableAdStatus;
+    this.mPlayableAdUploadTime = instance.mPlayableAdUploadTime;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdPlacePageSet> getParser() {
-    return new APIRequest.ResponseParser<AdPlacePageSet>() {
-      public APINodeList<AdPlacePageSet> parseResponse(String response, APIContext context, APIRequest<AdPlacePageSet> request, String header) throws MalformedResponseException {
-        return AdPlacePageSet.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<CloudGame> getParser() {
+    return new APIRequest.ResponseParser<CloudGame>() {
+      public APINodeList<CloudGame> parseResponse(String response, APIContext context, APIRequest<CloudGame> request, String header) throws MalformedResponseException {
+        return CloudGame.parseResponse(response, context, request, header);
       }
     };
   }

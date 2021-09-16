@@ -59,8 +59,22 @@ public class Canvas extends APINode {
   private String mBackgroundColor = null;
   @SerializedName("body_elements")
   private List<Object> mBodyElements = null;
+  @SerializedName("business_id")
+  private String mBusinessId = null;
   @SerializedName("canvas_link")
   private String mCanvasLink = null;
+  @SerializedName("collection_hero_image")
+  private Photo mCollectionHeroImage = null;
+  @SerializedName("collection_hero_video")
+  private AdVideo mCollectionHeroVideo = null;
+  @SerializedName("collection_thumbnails")
+  private List<CanvasCollectionThumbnail> mCollectionThumbnails = null;
+  @SerializedName("element_payload")
+  private String mElementPayload = null;
+  @SerializedName("elements")
+  private List<RichMediaElement> mElements = null;
+  @SerializedName("fb_body_elements")
+  private List<Object> mFbBodyElements = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("is_hidden")
@@ -75,10 +89,24 @@ public class Canvas extends APINode {
   private String mName = null;
   @SerializedName("owner")
   private Page mOwner = null;
+  @SerializedName("property_list")
+  private List<String> mPropertyList = null;
   @SerializedName("source_template")
   private CanvasTemplate mSourceTemplate = null;
+  @SerializedName("store_url")
+  private String mStoreUrl = null;
+  @SerializedName("style_list")
+  private List<String> mStyleList = null;
+  @SerializedName("tags")
+  private List<String> mTags = null;
+  @SerializedName("ui_property_list")
+  private List<String> mUiPropertyList = null;
+  @SerializedName("unused_body_elements")
+  private List<Object> mUnusedBodyElements = null;
   @SerializedName("update_time")
   private Long mUpdateTime = null;
+  @SerializedName("use_retailer_item_ids")
+  private Boolean mUseRetailerItemIds = null;
   protected static Gson gson = null;
 
   Canvas() {
@@ -296,6 +324,10 @@ public class Canvas extends APINode {
     return new APIRequestCreatePreviewNotification(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetPreviews getPreviews() {
+    return new APIRequestGetPreviews(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestDelete delete() {
     return new APIRequestDelete(this.getPrefixedId().toString(), context);
   }
@@ -317,8 +349,42 @@ public class Canvas extends APINode {
     return mBodyElements;
   }
 
+  public String getFieldBusinessId() {
+    return mBusinessId;
+  }
+
   public String getFieldCanvasLink() {
     return mCanvasLink;
+  }
+
+  public Photo getFieldCollectionHeroImage() {
+    if (mCollectionHeroImage != null) {
+      mCollectionHeroImage.context = getContext();
+    }
+    return mCollectionHeroImage;
+  }
+
+  public AdVideo getFieldCollectionHeroVideo() {
+    if (mCollectionHeroVideo != null) {
+      mCollectionHeroVideo.context = getContext();
+    }
+    return mCollectionHeroVideo;
+  }
+
+  public List<CanvasCollectionThumbnail> getFieldCollectionThumbnails() {
+    return mCollectionThumbnails;
+  }
+
+  public String getFieldElementPayload() {
+    return mElementPayload;
+  }
+
+  public List<RichMediaElement> getFieldElements() {
+    return mElements;
+  }
+
+  public List<Object> getFieldFbBodyElements() {
+    return mFbBodyElements;
   }
 
   public String getFieldId() {
@@ -355,6 +421,10 @@ public class Canvas extends APINode {
     return mOwner;
   }
 
+  public List<String> getFieldPropertyList() {
+    return mPropertyList;
+  }
+
   public CanvasTemplate getFieldSourceTemplate() {
     if (mSourceTemplate != null) {
       mSourceTemplate.context = getContext();
@@ -362,8 +432,32 @@ public class Canvas extends APINode {
     return mSourceTemplate;
   }
 
+  public String getFieldStoreUrl() {
+    return mStoreUrl;
+  }
+
+  public List<String> getFieldStyleList() {
+    return mStyleList;
+  }
+
+  public List<String> getFieldTags() {
+    return mTags;
+  }
+
+  public List<String> getFieldUiPropertyList() {
+    return mUiPropertyList;
+  }
+
+  public List<Object> getFieldUnusedBodyElements() {
+    return mUnusedBodyElements;
+  }
+
   public Long getFieldUpdateTime() {
     return mUpdateTime;
+  }
+
+  public Boolean getFieldUseRetailerItemIds() {
+    return mUseRetailerItemIds;
   }
 
 
@@ -586,6 +680,128 @@ public class Canvas extends APINode {
 
   }
 
+  public static class APIRequestGetPreviews extends APIRequest<TextWithEntities> {
+
+    APINodeList<TextWithEntities> lastResponse = null;
+    @Override
+    public APINodeList<TextWithEntities> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "user_ids",
+    };
+
+    public static final String[] FIELDS = {
+      "text",
+    };
+
+    @Override
+    public APINodeList<TextWithEntities> parseResponse(String response, String header) throws APIException {
+      return TextWithEntities.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<TextWithEntities> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<TextWithEntities> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<TextWithEntities>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<TextWithEntities>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<TextWithEntities>>() {
+           public APINodeList<TextWithEntities> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetPreviews.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetPreviews(String nodeId, APIContext context) {
+      super(context, nodeId, "/previews", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetPreviews setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPreviews setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetPreviews setUserIds (List<Long> userIds) {
+      this.setParam("user_ids", userIds);
+      return this;
+    }
+    public APIRequestGetPreviews setUserIds (String userIds) {
+      this.setParam("user_ids", userIds);
+      return this;
+    }
+
+    public APIRequestGetPreviews requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetPreviews requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPreviews requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetPreviews requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPreviews requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPreviews requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetPreviews requestTextField () {
+      return this.requestTextField(true);
+    }
+    public APIRequestGetPreviews requestTextField (boolean value) {
+      this.requestField("text", value);
+      return this;
+    }
+  }
+
   public static class APIRequestDelete extends APIRequest<APINode> {
 
     APINode lastResponse = null;
@@ -703,7 +919,14 @@ public class Canvas extends APINode {
     public static final String[] FIELDS = {
       "background_color",
       "body_elements",
+      "business_id",
       "canvas_link",
+      "collection_hero_image",
+      "collection_hero_video",
+      "collection_thumbnails",
+      "element_payload",
+      "elements",
+      "fb_body_elements",
       "id",
       "is_hidden",
       "is_published",
@@ -711,8 +934,15 @@ public class Canvas extends APINode {
       "linked_documents",
       "name",
       "owner",
+      "property_list",
       "source_template",
+      "store_url",
+      "style_list",
+      "tags",
+      "ui_property_list",
+      "unused_body_elements",
       "update_time",
+      "use_retailer_item_ids",
     };
 
     @Override
@@ -818,11 +1048,60 @@ public class Canvas extends APINode {
       this.requestField("body_elements", value);
       return this;
     }
+    public APIRequestGet requestBusinessIdField () {
+      return this.requestBusinessIdField(true);
+    }
+    public APIRequestGet requestBusinessIdField (boolean value) {
+      this.requestField("business_id", value);
+      return this;
+    }
     public APIRequestGet requestCanvasLinkField () {
       return this.requestCanvasLinkField(true);
     }
     public APIRequestGet requestCanvasLinkField (boolean value) {
       this.requestField("canvas_link", value);
+      return this;
+    }
+    public APIRequestGet requestCollectionHeroImageField () {
+      return this.requestCollectionHeroImageField(true);
+    }
+    public APIRequestGet requestCollectionHeroImageField (boolean value) {
+      this.requestField("collection_hero_image", value);
+      return this;
+    }
+    public APIRequestGet requestCollectionHeroVideoField () {
+      return this.requestCollectionHeroVideoField(true);
+    }
+    public APIRequestGet requestCollectionHeroVideoField (boolean value) {
+      this.requestField("collection_hero_video", value);
+      return this;
+    }
+    public APIRequestGet requestCollectionThumbnailsField () {
+      return this.requestCollectionThumbnailsField(true);
+    }
+    public APIRequestGet requestCollectionThumbnailsField (boolean value) {
+      this.requestField("collection_thumbnails", value);
+      return this;
+    }
+    public APIRequestGet requestElementPayloadField () {
+      return this.requestElementPayloadField(true);
+    }
+    public APIRequestGet requestElementPayloadField (boolean value) {
+      this.requestField("element_payload", value);
+      return this;
+    }
+    public APIRequestGet requestElementsField () {
+      return this.requestElementsField(true);
+    }
+    public APIRequestGet requestElementsField (boolean value) {
+      this.requestField("elements", value);
+      return this;
+    }
+    public APIRequestGet requestFbBodyElementsField () {
+      return this.requestFbBodyElementsField(true);
+    }
+    public APIRequestGet requestFbBodyElementsField (boolean value) {
+      this.requestField("fb_body_elements", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -874,6 +1153,13 @@ public class Canvas extends APINode {
       this.requestField("owner", value);
       return this;
     }
+    public APIRequestGet requestPropertyListField () {
+      return this.requestPropertyListField(true);
+    }
+    public APIRequestGet requestPropertyListField (boolean value) {
+      this.requestField("property_list", value);
+      return this;
+    }
     public APIRequestGet requestSourceTemplateField () {
       return this.requestSourceTemplateField(true);
     }
@@ -881,11 +1167,53 @@ public class Canvas extends APINode {
       this.requestField("source_template", value);
       return this;
     }
+    public APIRequestGet requestStoreUrlField () {
+      return this.requestStoreUrlField(true);
+    }
+    public APIRequestGet requestStoreUrlField (boolean value) {
+      this.requestField("store_url", value);
+      return this;
+    }
+    public APIRequestGet requestStyleListField () {
+      return this.requestStyleListField(true);
+    }
+    public APIRequestGet requestStyleListField (boolean value) {
+      this.requestField("style_list", value);
+      return this;
+    }
+    public APIRequestGet requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGet requestTagsField (boolean value) {
+      this.requestField("tags", value);
+      return this;
+    }
+    public APIRequestGet requestUiPropertyListField () {
+      return this.requestUiPropertyListField(true);
+    }
+    public APIRequestGet requestUiPropertyListField (boolean value) {
+      this.requestField("ui_property_list", value);
+      return this;
+    }
+    public APIRequestGet requestUnusedBodyElementsField () {
+      return this.requestUnusedBodyElementsField(true);
+    }
+    public APIRequestGet requestUnusedBodyElementsField (boolean value) {
+      this.requestField("unused_body_elements", value);
+      return this;
+    }
     public APIRequestGet requestUpdateTimeField () {
       return this.requestUpdateTimeField(true);
     }
     public APIRequestGet requestUpdateTimeField (boolean value) {
       this.requestField("update_time", value);
+      return this;
+    }
+    public APIRequestGet requestUseRetailerItemIdsField () {
+      return this.requestUseRetailerItemIdsField(true);
+    }
+    public APIRequestGet requestUseRetailerItemIdsField (boolean value) {
+      this.requestField("use_retailer_item_ids", value);
       return this;
     }
   }
@@ -1069,7 +1397,14 @@ public class Canvas extends APINode {
   public Canvas copyFrom(Canvas instance) {
     this.mBackgroundColor = instance.mBackgroundColor;
     this.mBodyElements = instance.mBodyElements;
+    this.mBusinessId = instance.mBusinessId;
     this.mCanvasLink = instance.mCanvasLink;
+    this.mCollectionHeroImage = instance.mCollectionHeroImage;
+    this.mCollectionHeroVideo = instance.mCollectionHeroVideo;
+    this.mCollectionThumbnails = instance.mCollectionThumbnails;
+    this.mElementPayload = instance.mElementPayload;
+    this.mElements = instance.mElements;
+    this.mFbBodyElements = instance.mFbBodyElements;
     this.mId = instance.mId;
     this.mIsHidden = instance.mIsHidden;
     this.mIsPublished = instance.mIsPublished;
@@ -1077,8 +1412,15 @@ public class Canvas extends APINode {
     this.mLinkedDocuments = instance.mLinkedDocuments;
     this.mName = instance.mName;
     this.mOwner = instance.mOwner;
+    this.mPropertyList = instance.mPropertyList;
     this.mSourceTemplate = instance.mSourceTemplate;
+    this.mStoreUrl = instance.mStoreUrl;
+    this.mStyleList = instance.mStyleList;
+    this.mTags = instance.mTags;
+    this.mUiPropertyList = instance.mUiPropertyList;
+    this.mUnusedBodyElements = instance.mUnusedBodyElements;
     this.mUpdateTime = instance.mUpdateTime;
+    this.mUseRetailerItemIds = instance.mUseRetailerItemIds;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

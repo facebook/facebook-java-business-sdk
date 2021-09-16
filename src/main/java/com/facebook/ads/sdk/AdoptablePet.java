@@ -111,6 +111,8 @@ public class AdoptablePet extends APINode {
   private String mSize = null;
   @SerializedName("tertiary_color")
   private String mTertiaryColor = null;
+  @SerializedName("unit_price")
+  private Object mUnitPrice = null;
   @SerializedName("url")
   private String mUrl = null;
   protected static Gson gson = null;
@@ -452,6 +454,10 @@ public class AdoptablePet extends APINode {
 
   public String getFieldTertiaryColor() {
     return mTertiaryColor;
+  }
+
+  public Object getFieldUnitPrice() {
+    return mUnitPrice;
   }
 
   public String getFieldUrl() {
@@ -827,6 +833,7 @@ public class AdoptablePet extends APINode {
       "shelter_phone",
       "size",
       "tertiary_color",
+      "unit_price",
       "url",
     };
 
@@ -1115,6 +1122,13 @@ public class AdoptablePet extends APINode {
       this.requestField("tertiary_color", value);
       return this;
     }
+    public APIRequestGet requestUnitPriceField () {
+      return this.requestUnitPriceField(true);
+    }
+    public APIRequestGet requestUnitPriceField (boolean value) {
+      this.requestField("unit_price", value);
+      return this;
+    }
     public APIRequestGet requestUrlField () {
       return this.requestUrlField(true);
     }
@@ -1194,6 +1208,7 @@ public class AdoptablePet extends APINode {
     this.mShelterPhone = instance.mShelterPhone;
     this.mSize = instance.mSize;
     this.mTertiaryColor = instance.mTertiaryColor;
+    this.mUnitPrice = instance.mUnitPrice;
     this.mUrl = instance.mUrl;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

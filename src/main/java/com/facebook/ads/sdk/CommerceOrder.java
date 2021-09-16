@@ -1693,6 +1693,7 @@ public class CommerceOrder extends APINode {
       "merchant_order_reference",
       "shipment_origin_postal_code",
       "shipping_tax_details",
+      "should_use_default_fulfillment_location",
       "tracking_info",
     };
 
@@ -1801,6 +1802,15 @@ public class CommerceOrder extends APINode {
     }
     public APIRequestCreateShipment setShippingTaxDetails (String shippingTaxDetails) {
       this.setParam("shipping_tax_details", shippingTaxDetails);
+      return this;
+    }
+
+    public APIRequestCreateShipment setShouldUseDefaultFulfillmentLocation (Boolean shouldUseDefaultFulfillmentLocation) {
+      this.setParam("should_use_default_fulfillment_location", shouldUseDefaultFulfillmentLocation);
+      return this;
+    }
+    public APIRequestCreateShipment setShouldUseDefaultFulfillmentLocation (String shouldUseDefaultFulfillmentLocation) {
+      this.setParam("should_use_default_fulfillment_location", shouldUseDefaultFulfillmentLocation);
       return this;
     }
 

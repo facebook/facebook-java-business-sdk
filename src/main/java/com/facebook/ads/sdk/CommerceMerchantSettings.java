@@ -97,8 +97,6 @@ public class CommerceMerchantSettings extends APINode {
   private List<String> mReviewRejectionMessages = null;
   @SerializedName("review_rejection_reasons")
   private List<String> mReviewRejectionReasons = null;
-  @SerializedName("review_status")
-  private String mReviewStatus = null;
   @SerializedName("supported_card_types")
   private List<String> mSupportedCardTypes = null;
   @SerializedName("terms")
@@ -458,10 +456,6 @@ public class CommerceMerchantSettings extends APINode {
 
   public List<String> getFieldReviewRejectionReasons() {
     return mReviewRejectionReasons;
-  }
-
-  public String getFieldReviewStatus() {
-    return mReviewStatus;
   }
 
   public List<String> getFieldSupportedCardTypes() {
@@ -3208,7 +3202,6 @@ public class CommerceMerchantSettings extends APINode {
       "privacy_url_by_locale",
       "review_rejection_messages",
       "review_rejection_reasons",
-      "review_status",
       "supported_card_types",
       "terms",
       "terms_url_by_locale",
@@ -3451,13 +3444,6 @@ public class CommerceMerchantSettings extends APINode {
       this.requestField("review_rejection_reasons", value);
       return this;
     }
-    public APIRequestGet requestReviewStatusField () {
-      return this.requestReviewStatusField(true);
-    }
-    public APIRequestGet requestReviewStatusField (boolean value) {
-      this.requestField("review_status", value);
-      return this;
-    }
     public APIRequestGet requestSupportedCardTypesField () {
       return this.requestSupportedCardTypesField(true);
     }
@@ -3568,7 +3554,6 @@ public class CommerceMerchantSettings extends APINode {
     this.mPrivacyUrlByLocale = instance.mPrivacyUrlByLocale;
     this.mReviewRejectionMessages = instance.mReviewRejectionMessages;
     this.mReviewRejectionReasons = instance.mReviewRejectionReasons;
-    this.mReviewStatus = instance.mReviewStatus;
     this.mSupportedCardTypes = instance.mSupportedCardTypes;
     this.mTerms = instance.mTerms;
     this.mTermsUrlByLocale = instance.mTermsUrlByLocale;

@@ -95,6 +95,8 @@ public class Hotel extends APINode {
   private List<String> mSanitizedImages = null;
   @SerializedName("star_rating")
   private Double mStarRating = null;
+  @SerializedName("unit_price")
+  private Object mUnitPrice = null;
   @SerializedName("url")
   private String mUrl = null;
   protected static Gson gson = null;
@@ -413,6 +415,10 @@ public class Hotel extends APINode {
 
   public Double getFieldStarRating() {
     return mStarRating;
+  }
+
+  public Object getFieldUnitPrice() {
+    return mUnitPrice;
   }
 
   public String getFieldUrl() {
@@ -1076,6 +1082,7 @@ public class Hotel extends APINode {
       "sale_price",
       "sanitized_images",
       "star_rating",
+      "unit_price",
       "url",
     };
 
@@ -1306,6 +1313,13 @@ public class Hotel extends APINode {
     }
     public APIRequestGet requestStarRatingField (boolean value) {
       this.requestField("star_rating", value);
+      return this;
+    }
+    public APIRequestGet requestUnitPriceField () {
+      return this.requestUnitPriceField(true);
+    }
+    public APIRequestGet requestUnitPriceField (boolean value) {
+      this.requestField("unit_price", value);
       return this;
     }
     public APIRequestGet requestUrlField () {
@@ -1579,6 +1593,7 @@ public class Hotel extends APINode {
     this.mSalePrice = instance.mSalePrice;
     this.mSanitizedImages = instance.mSanitizedImages;
     this.mStarRating = instance.mStarRating;
+    this.mUnitPrice = instance.mUnitPrice;
     this.mUrl = instance.mUrl;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

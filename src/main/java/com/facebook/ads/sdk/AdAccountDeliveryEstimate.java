@@ -63,6 +63,8 @@ public class AdAccountDeliveryEstimate extends APINode {
   private Long mEstimateMau = null;
   @SerializedName("estimate_ready")
   private Boolean mEstimateReady = null;
+  @SerializedName("targeting_optimization_types")
+  private Map<String, Long> mTargetingOptimizationTypes = null;
   protected static Gson gson = null;
 
   public AdAccountDeliveryEstimate() {
@@ -255,6 +257,15 @@ public class AdAccountDeliveryEstimate extends APINode {
     return this;
   }
 
+  public Map<String, Long> getFieldTargetingOptimizationTypes() {
+    return mTargetingOptimizationTypes;
+  }
+
+  public AdAccountDeliveryEstimate setFieldTargetingOptimizationTypes(Map<String, Long> value) {
+    this.mTargetingOptimizationTypes = value;
+    return this;
+  }
+
 
 
   public static enum EnumOptimizationGoal {
@@ -345,6 +356,7 @@ public class AdAccountDeliveryEstimate extends APINode {
     this.mEstimateDau = instance.mEstimateDau;
     this.mEstimateMau = instance.mEstimateMau;
     this.mEstimateReady = instance.mEstimateReady;
+    this.mTargetingOptimizationTypes = instance.mTargetingOptimizationTypes;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

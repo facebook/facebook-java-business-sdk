@@ -117,6 +117,8 @@ public class ProductItem extends APINode {
   private String mImageUrl = null;
   @SerializedName("images")
   private List<String> mImages = null;
+  @SerializedName("invalidation_errors")
+  private List<Object> mInvalidationErrors = null;
   @SerializedName("inventory")
   private Long mInventory = null;
   @SerializedName("manufacturer_part_number")
@@ -529,6 +531,10 @@ public class ProductItem extends APINode {
     return mImages;
   }
 
+  public List<Object> getFieldInvalidationErrors() {
+    return mInvalidationErrors;
+  }
+
   public Long getFieldInventory() {
     return mInventory;
   }
@@ -793,6 +799,7 @@ public class ProductItem extends APINode {
       "latest_metadata",
       "live_metadata",
       "name",
+      "ordering_info",
       "product_catalog",
       "product_count",
       "retailer_id",
@@ -927,6 +934,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGetProductSets requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetProductSets requestOrderingInfoField () {
+      return this.requestOrderingInfoField(true);
+    }
+    public APIRequestGetProductSets requestOrderingInfoField (boolean value) {
+      this.requestField("ordering_info", value);
       return this;
     }
     public APIRequestGetProductSets requestProductCatalogField () {
@@ -1103,6 +1117,7 @@ public class ProductItem extends APINode {
       "image_fetch_status",
       "image_url",
       "images",
+      "invalidation_errors",
       "inventory",
       "manufacturer_part_number",
       "marked_for_product_launch",
@@ -1471,6 +1486,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestImagesField (boolean value) {
       this.requestField("images", value);
+      return this;
+    }
+    public APIRequestGet requestInvalidationErrorsField () {
+      return this.requestInvalidationErrorsField(true);
+    }
+    public APIRequestGet requestInvalidationErrorsField (boolean value) {
+      this.requestField("invalidation_errors", value);
       return this;
     }
     public APIRequestGet requestInventoryField () {
@@ -2944,6 +2966,7 @@ public class ProductItem extends APINode {
     this.mImageFetchStatus = instance.mImageFetchStatus;
     this.mImageUrl = instance.mImageUrl;
     this.mImages = instance.mImages;
+    this.mInvalidationErrors = instance.mInvalidationErrors;
     this.mInventory = instance.mInventory;
     this.mManufacturerPartNumber = instance.mManufacturerPartNumber;
     this.mMarkedForProductLaunch = instance.mMarkedForProductLaunch;

@@ -65,30 +65,18 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mActionValues = null;
   @SerializedName("actions")
   private List<AdsActionStats> mActions = null;
-  @SerializedName("ad_bid_type")
-  private String mAdBidType = null;
   @SerializedName("ad_bid_value")
   private String mAdBidValue = null;
   @SerializedName("ad_click_actions")
   private List<AdsActionStats> mAdClickActions = null;
-  @SerializedName("ad_delivery")
-  private String mAdDelivery = null;
   @SerializedName("ad_id")
   private String mAdId = null;
   @SerializedName("ad_impression_actions")
   private List<AdsActionStats> mAdImpressionActions = null;
   @SerializedName("ad_name")
   private String mAdName = null;
-  @SerializedName("adset_bid_type")
-  private String mAdsetBidType = null;
   @SerializedName("adset_bid_value")
   private String mAdsetBidValue = null;
-  @SerializedName("adset_budget_type")
-  private String mAdsetBudgetType = null;
-  @SerializedName("adset_budget_value")
-  private String mAdsetBudgetValue = null;
-  @SerializedName("adset_delivery")
-  private String mAdsetDelivery = null;
   @SerializedName("adset_end")
   private String mAdsetEnd = null;
   @SerializedName("adset_id")
@@ -263,6 +251,8 @@ public class AdsInsights extends APINode {
   private String mSocialSpend = null;
   @SerializedName("spend")
   private String mSpend = null;
+  @SerializedName("total_postbacks")
+  private String mTotalPostbacks = null;
   @SerializedName("unique_actions")
   private List<AdsActionStats> mUniqueActions = null;
   @SerializedName("unique_clicks")
@@ -531,15 +521,6 @@ public class AdsInsights extends APINode {
     this.mActions = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
-  public String getFieldAdBidType() {
-    return mAdBidType;
-  }
-
-  public AdsInsights setFieldAdBidType(String value) {
-    this.mAdBidType = value;
-    return this;
-  }
-
   public String getFieldAdBidValue() {
     return mAdBidValue;
   }
@@ -563,15 +544,6 @@ public class AdsInsights extends APINode {
     this.mAdClickActions = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
-  public String getFieldAdDelivery() {
-    return mAdDelivery;
-  }
-
-  public AdsInsights setFieldAdDelivery(String value) {
-    this.mAdDelivery = value;
-    return this;
-  }
-
   public String getFieldAdId() {
     return mAdId;
   }
@@ -604,48 +576,12 @@ public class AdsInsights extends APINode {
     return this;
   }
 
-  public String getFieldAdsetBidType() {
-    return mAdsetBidType;
-  }
-
-  public AdsInsights setFieldAdsetBidType(String value) {
-    this.mAdsetBidType = value;
-    return this;
-  }
-
   public String getFieldAdsetBidValue() {
     return mAdsetBidValue;
   }
 
   public AdsInsights setFieldAdsetBidValue(String value) {
     this.mAdsetBidValue = value;
-    return this;
-  }
-
-  public String getFieldAdsetBudgetType() {
-    return mAdsetBudgetType;
-  }
-
-  public AdsInsights setFieldAdsetBudgetType(String value) {
-    this.mAdsetBudgetType = value;
-    return this;
-  }
-
-  public String getFieldAdsetBudgetValue() {
-    return mAdsetBudgetValue;
-  }
-
-  public AdsInsights setFieldAdsetBudgetValue(String value) {
-    this.mAdsetBudgetValue = value;
-    return this;
-  }
-
-  public String getFieldAdsetDelivery() {
-    return mAdsetDelivery;
-  }
-
-  public AdsInsights setFieldAdsetDelivery(String value) {
-    this.mAdsetDelivery = value;
     return this;
   }
 
@@ -1562,6 +1498,15 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public String getFieldTotalPostbacks() {
+    return mTotalPostbacks;
+  }
+
+  public AdsInsights setFieldTotalPostbacks(String value) {
+    this.mTotalPostbacks = value;
+    return this;
+  }
+
   public List<AdsActionStats> getFieldUniqueActions() {
     return mUniqueActions;
   }
@@ -2035,6 +1980,8 @@ public class AdsInsights extends APINode {
       VALUE_AD_FORMAT_ASSET("ad_format_asset"),
       @SerializedName("age")
       VALUE_AGE("age"),
+      @SerializedName("app_id")
+      VALUE_APP_ID("app_id"),
       @SerializedName("body_asset")
       VALUE_BODY_ASSET("body_asset"),
       @SerializedName("call_to_action_asset")
@@ -2071,6 +2018,8 @@ public class AdsInsights extends APINode {
       VALUE_PUBLISHER_PLATFORM("publisher_platform"),
       @SerializedName("region")
       VALUE_REGION("region"),
+      @SerializedName("skan_conversion_id")
+      VALUE_SKAN_CONVERSION_ID("skan_conversion_id"),
       @SerializedName("title_asset")
       VALUE_TITLE_ASSET("title_asset"),
       @SerializedName("video_asset")
@@ -2220,18 +2169,12 @@ public class AdsInsights extends APINode {
     this.mAccountName = instance.mAccountName;
     this.mActionValues = instance.mActionValues;
     this.mActions = instance.mActions;
-    this.mAdBidType = instance.mAdBidType;
     this.mAdBidValue = instance.mAdBidValue;
     this.mAdClickActions = instance.mAdClickActions;
-    this.mAdDelivery = instance.mAdDelivery;
     this.mAdId = instance.mAdId;
     this.mAdImpressionActions = instance.mAdImpressionActions;
     this.mAdName = instance.mAdName;
-    this.mAdsetBidType = instance.mAdsetBidType;
     this.mAdsetBidValue = instance.mAdsetBidValue;
-    this.mAdsetBudgetType = instance.mAdsetBudgetType;
-    this.mAdsetBudgetValue = instance.mAdsetBudgetValue;
-    this.mAdsetDelivery = instance.mAdsetDelivery;
     this.mAdsetEnd = instance.mAdsetEnd;
     this.mAdsetId = instance.mAdsetId;
     this.mAdsetName = instance.mAdsetName;
@@ -2319,6 +2262,7 @@ public class AdsInsights extends APINode {
     this.mReach = instance.mReach;
     this.mSocialSpend = instance.mSocialSpend;
     this.mSpend = instance.mSpend;
+    this.mTotalPostbacks = instance.mTotalPostbacks;
     this.mUniqueActions = instance.mUniqueActions;
     this.mUniqueClicks = instance.mUniqueClicks;
     this.mUniqueConversions = instance.mUniqueConversions;

@@ -107,6 +107,8 @@ public class AutomotiveModel extends APINode {
   private String mTransmission = null;
   @SerializedName("trim")
   private String mTrim = null;
+  @SerializedName("unit_price")
+  private Object mUnitPrice = null;
   @SerializedName("url")
   private String mUrl = null;
   @SerializedName("year")
@@ -439,6 +441,10 @@ public class AutomotiveModel extends APINode {
 
   public String getFieldTrim() {
     return mTrim;
+  }
+
+  public Object getFieldUnitPrice() {
+    return mUnitPrice;
   }
 
   public String getFieldUrl() {
@@ -816,6 +822,7 @@ public class AutomotiveModel extends APINode {
       "title",
       "transmission",
       "trim",
+      "unit_price",
       "url",
       "year",
     };
@@ -1091,6 +1098,13 @@ public class AutomotiveModel extends APINode {
       this.requestField("trim", value);
       return this;
     }
+    public APIRequestGet requestUnitPriceField () {
+      return this.requestUnitPriceField(true);
+    }
+    public APIRequestGet requestUnitPriceField (boolean value) {
+      this.requestField("unit_price", value);
+      return this;
+    }
     public APIRequestGet requestUrlField () {
       return this.requestUrlField(true);
     }
@@ -1234,6 +1248,7 @@ public class AutomotiveModel extends APINode {
     this.mTitle = instance.mTitle;
     this.mTransmission = instance.mTransmission;
     this.mTrim = instance.mTrim;
+    this.mUnitPrice = instance.mUnitPrice;
     this.mUrl = instance.mUrl;
     this.mYear = instance.mYear;
     this.context = instance.context;

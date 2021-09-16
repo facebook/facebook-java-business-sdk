@@ -99,6 +99,8 @@ public class CustomAudience extends APINode {
   private CustomAudienceStatus mOperationStatus = null;
   @SerializedName("opt_out_link")
   private String mOptOutLink = null;
+  @SerializedName("page_deletion_marked_delete_time")
+  private Long mPageDeletionMarkedDeleteTime = null;
   @SerializedName("permission_for_actions")
   private AudiencePermissionForActions mPermissionForActions = null;
   @SerializedName("pixel_id")
@@ -476,6 +478,10 @@ public class CustomAudience extends APINode {
     return mOptOutLink;
   }
 
+  public Long getFieldPageDeletionMarkedDeleteTime() {
+    return mPageDeletionMarkedDeleteTime;
+  }
+
   public AudiencePermissionForActions getFieldPermissionForActions() {
     return mPermissionForActions;
   }
@@ -682,11 +688,13 @@ public class CustomAudience extends APINode {
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
+      "existing_customers",
       "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
       "funding_source",
       "funding_source_details",
+      "has_advertiser_opted_in_odax",
       "has_migrated_permissions",
       "has_page_authorized_adaccount",
       "id",
@@ -694,7 +702,6 @@ public class CustomAudience extends APINode {
       "is_attribution_spec_system_default",
       "is_direct_deals_enabled",
       "is_in_3ds_authorization_enabled_market",
-      "is_in_middle_of_local_entity_migration",
       "is_notifications_enabled",
       "is_personal",
       "is_prepay_account",
@@ -969,6 +976,13 @@ public class CustomAudience extends APINode {
       this.requestField("end_advertiser_name", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestExistingCustomersField () {
+      return this.requestExistingCustomersField(true);
+    }
+    public APIRequestGetAdAccounts requestExistingCustomersField (boolean value) {
+      this.requestField("existing_customers", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestExtendedCreditInvoiceGroupField () {
       return this.requestExtendedCreditInvoiceGroupField(true);
     }
@@ -1002,6 +1016,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAdAccounts requestFundingSourceDetailsField (boolean value) {
       this.requestField("funding_source_details", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestHasAdvertiserOptedInOdaxField () {
+      return this.requestHasAdvertiserOptedInOdaxField(true);
+    }
+    public APIRequestGetAdAccounts requestHasAdvertiserOptedInOdaxField (boolean value) {
+      this.requestField("has_advertiser_opted_in_odax", value);
       return this;
     }
     public APIRequestGetAdAccounts requestHasMigratedPermissionsField () {
@@ -1051,13 +1072,6 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAdAccounts requestIsIn3dsAuthorizationEnabledMarketField (boolean value) {
       this.requestField("is_in_3ds_authorization_enabled_market", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestIsInMiddleOfLocalEntityMigrationField () {
-      return this.requestIsInMiddleOfLocalEntityMigrationField(true);
-    }
-    public APIRequestGetAdAccounts requestIsInMiddleOfLocalEntityMigrationField (boolean value) {
-      this.requestField("is_in_middle_of_local_entity_migration", value);
       return this;
     }
     public APIRequestGetAdAccounts requestIsNotificationsEnabledField () {
@@ -2617,6 +2631,7 @@ public class CustomAudience extends APINode {
       "name",
       "operation_status",
       "opt_out_link",
+      "page_deletion_marked_delete_time",
       "permission_for_actions",
       "pixel_id",
       "regulated_audience_spec",
@@ -2888,6 +2903,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGet requestOptOutLinkField (boolean value) {
       this.requestField("opt_out_link", value);
+      return this;
+    }
+    public APIRequestGet requestPageDeletionMarkedDeleteTimeField () {
+      return this.requestPageDeletionMarkedDeleteTimeField(true);
+    }
+    public APIRequestGet requestPageDeletionMarkedDeleteTimeField (boolean value) {
+      this.requestField("page_deletion_marked_delete_time", value);
       return this;
     }
     public APIRequestGet requestPermissionForActionsField () {
@@ -3310,6 +3332,8 @@ public class CustomAudience extends APINode {
       VALUE_HOME_LISTING("HOME_LISTING"),
       @SerializedName("HOTEL")
       VALUE_HOTEL("HOTEL"),
+      @SerializedName("JOB")
+      VALUE_JOB("JOB"),
       @SerializedName("LOCAL_SERVICE_BUSINESS")
       VALUE_LOCAL_SERVICE_BUSINESS("LOCAL_SERVICE_BUSINESS"),
       @SerializedName("LOCATION_BASED_ITEM")
@@ -3441,6 +3465,7 @@ public class CustomAudience extends APINode {
     this.mName = instance.mName;
     this.mOperationStatus = instance.mOperationStatus;
     this.mOptOutLink = instance.mOptOutLink;
+    this.mPageDeletionMarkedDeleteTime = instance.mPageDeletionMarkedDeleteTime;
     this.mPermissionForActions = instance.mPermissionForActions;
     this.mPixelId = instance.mPixelId;
     this.mRegulatedAudienceSpec = instance.mRegulatedAudienceSpec;

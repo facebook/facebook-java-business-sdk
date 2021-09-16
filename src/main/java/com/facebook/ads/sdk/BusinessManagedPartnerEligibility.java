@@ -54,39 +54,27 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class InvoiceCampaign extends APINode {
-  @SerializedName("ad_account_id")
-  private String mAdAccountId = null;
-  @SerializedName("billed_amount_details")
-  private BilledAmountDetails mBilledAmountDetails = null;
-  @SerializedName("campaign_id")
-  private String mCampaignId = null;
-  @SerializedName("campaign_name")
-  private String mCampaignName = null;
-  @SerializedName("clicks")
-  private Long mClicks = null;
-  @SerializedName("conversions")
-  private Long mConversions = null;
-  @SerializedName("description")
-  private String mDescription = null;
-  @SerializedName("impressions")
-  private Long mImpressions = null;
-  @SerializedName("tags")
-  private List<String> mTags = null;
+public class BusinessManagedPartnerEligibility extends APINode {
+  @SerializedName("is_eligible")
+  private Boolean mIsEligible = null;
+  @SerializedName("reason_code")
+  private String mReasonCode = null;
+  @SerializedName("reason_description")
+  private String mReasonDescription = null;
   protected static Gson gson = null;
 
-  public InvoiceCampaign() {
+  public BusinessManagedPartnerEligibility() {
   }
 
   public String getId() {
     return null;
   }
-  public static InvoiceCampaign loadJSON(String json, APIContext context, String header) {
-    InvoiceCampaign invoiceCampaign = getGson().fromJson(json, InvoiceCampaign.class);
+  public static BusinessManagedPartnerEligibility loadJSON(String json, APIContext context, String header) {
+    BusinessManagedPartnerEligibility businessManagedPartnerEligibility = getGson().fromJson(json, BusinessManagedPartnerEligibility.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(invoiceCampaign.toString());
+      JsonElement o2 = parser.parse(businessManagedPartnerEligibility.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -96,14 +84,14 @@ public class InvoiceCampaign extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    invoiceCampaign.context = context;
-    invoiceCampaign.rawValue = json;
-    invoiceCampaign.header = header;
-    return invoiceCampaign;
+    businessManagedPartnerEligibility.context = context;
+    businessManagedPartnerEligibility.rawValue = json;
+    businessManagedPartnerEligibility.header = header;
+    return businessManagedPartnerEligibility;
   }
 
-  public static APINodeList<InvoiceCampaign> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<InvoiceCampaign> invoiceCampaigns = new APINodeList<InvoiceCampaign>(request, json, header);
+  public static APINodeList<BusinessManagedPartnerEligibility> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<BusinessManagedPartnerEligibility> businessManagedPartnerEligibilitys = new APINodeList<BusinessManagedPartnerEligibility>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -114,9 +102,9 @@ public class InvoiceCampaign extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          invoiceCampaigns.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          businessManagedPartnerEligibilitys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return invoiceCampaigns;
+        return businessManagedPartnerEligibilitys;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -126,20 +114,20 @@ public class InvoiceCampaign extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                invoiceCampaigns.setCursors(before, after);
+                businessManagedPartnerEligibilitys.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            invoiceCampaigns.setPaging(previous, next);
+            businessManagedPartnerEligibilitys.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              invoiceCampaigns.setAppSecret(context.getAppSecretProof());
+              businessManagedPartnerEligibilitys.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              invoiceCampaigns.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              businessManagedPartnerEligibilitys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -150,23 +138,23 @@ public class InvoiceCampaign extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  invoiceCampaigns.add(loadJSON(entry.getValue().toString(), context, header));
+                  businessManagedPartnerEligibilitys.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              invoiceCampaigns.add(loadJSON(obj.toString(), context, header));
+              businessManagedPartnerEligibilitys.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return invoiceCampaigns;
+          return businessManagedPartnerEligibilitys;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              invoiceCampaigns.add(loadJSON(entry.getValue().toString(), context, header));
+              businessManagedPartnerEligibilitys.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return invoiceCampaigns;
+          return businessManagedPartnerEligibilitys;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -183,20 +171,20 @@ public class InvoiceCampaign extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              invoiceCampaigns.add(loadJSON(value.toString(), context, header));
+              businessManagedPartnerEligibilitys.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return invoiceCampaigns;
+            return businessManagedPartnerEligibilitys;
           }
 
           // Sixth, check if it's pure JsonObject
-          invoiceCampaigns.clear();
-          invoiceCampaigns.add(loadJSON(json, context, header));
-          return invoiceCampaigns;
+          businessManagedPartnerEligibilitys.clear();
+          businessManagedPartnerEligibilitys.add(loadJSON(json, context, header));
+          return businessManagedPartnerEligibilitys;
         }
       }
     } catch (Exception e) {
@@ -224,89 +212,30 @@ public class InvoiceCampaign extends APINode {
   }
 
 
-  public String getFieldAdAccountId() {
-    return mAdAccountId;
+  public Boolean getFieldIsEligible() {
+    return mIsEligible;
   }
 
-  public InvoiceCampaign setFieldAdAccountId(String value) {
-    this.mAdAccountId = value;
+  public BusinessManagedPartnerEligibility setFieldIsEligible(Boolean value) {
+    this.mIsEligible = value;
     return this;
   }
 
-  public BilledAmountDetails getFieldBilledAmountDetails() {
-    return mBilledAmountDetails;
+  public String getFieldReasonCode() {
+    return mReasonCode;
   }
 
-  public InvoiceCampaign setFieldBilledAmountDetails(BilledAmountDetails value) {
-    this.mBilledAmountDetails = value;
+  public BusinessManagedPartnerEligibility setFieldReasonCode(String value) {
+    this.mReasonCode = value;
     return this;
   }
 
-  public InvoiceCampaign setFieldBilledAmountDetails(String value) {
-    Type type = new TypeToken<BilledAmountDetails>(){}.getType();
-    this.mBilledAmountDetails = BilledAmountDetails.getGson().fromJson(value, type);
-    return this;
-  }
-  public String getFieldCampaignId() {
-    return mCampaignId;
+  public String getFieldReasonDescription() {
+    return mReasonDescription;
   }
 
-  public InvoiceCampaign setFieldCampaignId(String value) {
-    this.mCampaignId = value;
-    return this;
-  }
-
-  public String getFieldCampaignName() {
-    return mCampaignName;
-  }
-
-  public InvoiceCampaign setFieldCampaignName(String value) {
-    this.mCampaignName = value;
-    return this;
-  }
-
-  public Long getFieldClicks() {
-    return mClicks;
-  }
-
-  public InvoiceCampaign setFieldClicks(Long value) {
-    this.mClicks = value;
-    return this;
-  }
-
-  public Long getFieldConversions() {
-    return mConversions;
-  }
-
-  public InvoiceCampaign setFieldConversions(Long value) {
-    this.mConversions = value;
-    return this;
-  }
-
-  public String getFieldDescription() {
-    return mDescription;
-  }
-
-  public InvoiceCampaign setFieldDescription(String value) {
-    this.mDescription = value;
-    return this;
-  }
-
-  public Long getFieldImpressions() {
-    return mImpressions;
-  }
-
-  public InvoiceCampaign setFieldImpressions(Long value) {
-    this.mImpressions = value;
-    return this;
-  }
-
-  public List<String> getFieldTags() {
-    return mTags;
-  }
-
-  public InvoiceCampaign setFieldTags(List<String> value) {
-    this.mTags = value;
+  public BusinessManagedPartnerEligibility setFieldReasonDescription(String value) {
+    this.mReasonDescription = value;
     return this;
   }
 
@@ -326,25 +255,19 @@ public class InvoiceCampaign extends APINode {
     return gson;
   }
 
-  public InvoiceCampaign copyFrom(InvoiceCampaign instance) {
-    this.mAdAccountId = instance.mAdAccountId;
-    this.mBilledAmountDetails = instance.mBilledAmountDetails;
-    this.mCampaignId = instance.mCampaignId;
-    this.mCampaignName = instance.mCampaignName;
-    this.mClicks = instance.mClicks;
-    this.mConversions = instance.mConversions;
-    this.mDescription = instance.mDescription;
-    this.mImpressions = instance.mImpressions;
-    this.mTags = instance.mTags;
+  public BusinessManagedPartnerEligibility copyFrom(BusinessManagedPartnerEligibility instance) {
+    this.mIsEligible = instance.mIsEligible;
+    this.mReasonCode = instance.mReasonCode;
+    this.mReasonDescription = instance.mReasonDescription;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<InvoiceCampaign> getParser() {
-    return new APIRequest.ResponseParser<InvoiceCampaign>() {
-      public APINodeList<InvoiceCampaign> parseResponse(String response, APIContext context, APIRequest<InvoiceCampaign> request, String header) throws MalformedResponseException {
-        return InvoiceCampaign.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<BusinessManagedPartnerEligibility> getParser() {
+    return new APIRequest.ResponseParser<BusinessManagedPartnerEligibility>() {
+      public APINodeList<BusinessManagedPartnerEligibility> parseResponse(String response, APIContext context, APIRequest<BusinessManagedPartnerEligibility> request, String header) throws MalformedResponseException {
+        return BusinessManagedPartnerEligibility.parseResponse(response, context, request, header);
       }
     };
   }

@@ -73,6 +73,8 @@ public class SavedAudience extends APINode {
   private String mName = null;
   @SerializedName("operation_status")
   private CustomAudienceStatus mOperationStatus = null;
+  @SerializedName("page_deletion_marked_delete_time")
+  private Long mPageDeletionMarkedDeleteTime = null;
   @SerializedName("permission_for_actions")
   private AudiencePermissionForActions mPermissionForActions = null;
   @SerializedName("run_status")
@@ -338,6 +340,10 @@ public class SavedAudience extends APINode {
     return mOperationStatus;
   }
 
+  public Long getFieldPageDeletionMarkedDeleteTime() {
+    return mPageDeletionMarkedDeleteTime;
+  }
+
   public AudiencePermissionForActions getFieldPermissionForActions() {
     return mPermissionForActions;
   }
@@ -384,6 +390,7 @@ public class SavedAudience extends APINode {
       "id",
       "name",
       "operation_status",
+      "page_deletion_marked_delete_time",
       "permission_for_actions",
       "run_status",
       "sentence_lines",
@@ -544,6 +551,13 @@ public class SavedAudience extends APINode {
       this.requestField("operation_status", value);
       return this;
     }
+    public APIRequestGet requestPageDeletionMarkedDeleteTimeField () {
+      return this.requestPageDeletionMarkedDeleteTimeField(true);
+    }
+    public APIRequestGet requestPageDeletionMarkedDeleteTimeField (boolean value) {
+      this.requestField("page_deletion_marked_delete_time", value);
+      return this;
+    }
     public APIRequestGet requestPermissionForActionsField () {
       return this.requestPermissionForActionsField(true);
     }
@@ -612,6 +626,7 @@ public class SavedAudience extends APINode {
     this.mId = instance.mId;
     this.mName = instance.mName;
     this.mOperationStatus = instance.mOperationStatus;
+    this.mPageDeletionMarkedDeleteTime = instance.mPageDeletionMarkedDeleteTime;
     this.mPermissionForActions = instance.mPermissionForActions;
     this.mRunStatus = instance.mRunStatus;
     this.mSentenceLines = instance.mSentenceLines;

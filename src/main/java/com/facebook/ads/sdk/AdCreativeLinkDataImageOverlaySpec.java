@@ -393,6 +393,8 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
   }
 
   public static enum EnumTextType {
+      @SerializedName("automated_personalize")
+      VALUE_AUTOMATED_PERSONALIZE("automated_personalize"),
       @SerializedName("custom")
       VALUE_CUSTOM("custom"),
       @SerializedName("disclaimer")

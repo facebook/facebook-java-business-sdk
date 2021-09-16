@@ -72,7 +72,7 @@ public class LiveVideo extends APINode {
   @SerializedName("description")
   private String mDescription = null;
   @SerializedName("embed_html")
-  private String mEmbedHtml = null;
+  private Object mEmbedHtml = null;
   @SerializedName("from")
   private Object mFrom = null;
   @SerializedName("id")
@@ -402,7 +402,7 @@ public class LiveVideo extends APINode {
     return mDescription;
   }
 
-  public String getFieldEmbedHtml() {
+  public Object getFieldEmbedHtml() {
     return mEmbedHtml;
   }
 
@@ -4117,7 +4117,6 @@ public class LiveVideo extends APINode {
       "og_phrase",
       "persistent_stream_key_status",
       "place",
-      "planned_start_time",
       "privacy",
       "published",
       "schedule_custom_profile_image",
@@ -4330,15 +4329,6 @@ public class LiveVideo extends APINode {
     }
     public APIRequestUpdate setPlace (String place) {
       this.setParam("place", place);
-      return this;
-    }
-
-    public APIRequestUpdate setPlannedStartTime (Long plannedStartTime) {
-      this.setParam("planned_start_time", plannedStartTime);
-      return this;
-    }
-    public APIRequestUpdate setPlannedStartTime (String plannedStartTime) {
-      this.setParam("planned_start_time", plannedStartTime);
       return this;
     }
 
@@ -4627,8 +4617,12 @@ public class LiveVideo extends APINode {
       VALUE_DEFAULT("DEFAULT"),
       @SerializedName("DISCUSSION")
       VALUE_DISCUSSION("DISCUSSION"),
+      @SerializedName("FOLLOWED")
+      VALUE_FOLLOWED("FOLLOWED"),
       @SerializedName("FOLLOWER")
       VALUE_FOLLOWER("FOLLOWER"),
+      @SerializedName("NO_HYPERLINK")
+      VALUE_NO_HYPERLINK("NO_HYPERLINK"),
       @SerializedName("PROTECTED_MODE")
       VALUE_PROTECTED_MODE("PROTECTED_MODE"),
       @SerializedName("RESTRICTED")
@@ -4637,6 +4631,8 @@ public class LiveVideo extends APINode {
       VALUE_SLOW("SLOW"),
       @SerializedName("SUPPORTER")
       VALUE_SUPPORTER("SUPPORTER"),
+      @SerializedName("TAGGED")
+      VALUE_TAGGED("TAGGED"),
       ;
 
       private String value;
