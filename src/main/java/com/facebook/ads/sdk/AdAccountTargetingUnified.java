@@ -57,6 +57,10 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdAccountTargetingUnified extends APINode {
   @SerializedName("audience_size")
   private Long mAudienceSize = null;
+  @SerializedName("audience_size_lower_bound")
+  private Long mAudienceSizeLowerBound = null;
+  @SerializedName("audience_size_upper_bound")
+  private Long mAudienceSizeUpperBound = null;
   @SerializedName("conversion_lift")
   private Double mConversionLift = null;
   @SerializedName("description")
@@ -256,6 +260,24 @@ public class AdAccountTargetingUnified extends APINode {
 
   public AdAccountTargetingUnified setFieldAudienceSize(Long value) {
     this.mAudienceSize = value;
+    return this;
+  }
+
+  public Long getFieldAudienceSizeLowerBound() {
+    return mAudienceSizeLowerBound;
+  }
+
+  public AdAccountTargetingUnified setFieldAudienceSizeLowerBound(Long value) {
+    this.mAudienceSizeLowerBound = value;
+    return this;
+  }
+
+  public Long getFieldAudienceSizeUpperBound() {
+    return mAudienceSizeUpperBound;
+  }
+
+  public AdAccountTargetingUnified setFieldAudienceSizeUpperBound(Long value) {
+    this.mAudienceSizeUpperBound = value;
     return this;
   }
 
@@ -528,6 +550,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_ISSUES_ELECTIONS_POLITICS("ISSUES_ELECTIONS_POLITICS"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
+      @SerializedName("ONLINE_GAMBLING_AND_GAMING")
+      VALUE_ONLINE_GAMBLING_AND_GAMING("ONLINE_GAMBLING_AND_GAMING"),
       ;
 
       private String value;
@@ -944,6 +968,8 @@ public class AdAccountTargetingUnified extends APINode {
 
   public AdAccountTargetingUnified copyFrom(AdAccountTargetingUnified instance) {
     this.mAudienceSize = instance.mAudienceSize;
+    this.mAudienceSizeLowerBound = instance.mAudienceSizeLowerBound;
+    this.mAudienceSizeUpperBound = instance.mAudienceSizeUpperBound;
     this.mConversionLift = instance.mConversionLift;
     this.mDescription = instance.mDescription;
     this.mId = instance.mId;

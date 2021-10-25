@@ -549,6 +549,8 @@ public class AdActivity extends APINode {
       VALUE_CALYPSO("CALYPSO"),
       @SerializedName("TAO")
       VALUE_TAO("TAO"),
+      @SerializedName("TAO_AD_ACCOUNT")
+      VALUE_TAO_AD_ACCOUNT("TAO_AD_ACCOUNT"),
       ;
 
       private String value;

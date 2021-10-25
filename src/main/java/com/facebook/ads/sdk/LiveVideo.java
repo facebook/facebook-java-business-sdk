@@ -93,6 +93,8 @@ public class LiveVideo extends APINode {
   private Object mPermalinkUrl = null;
   @SerializedName("planned_start_time")
   private String mPlannedStartTime = null;
+  @SerializedName("recommended_encoder_settings")
+  private LiveVideoRecommendedEncoderSettings mRecommendedEncoderSettings = null;
   @SerializedName("seconds_left")
   private Long mSecondsLeft = null;
   @SerializedName("secure_stream_url")
@@ -444,6 +446,10 @@ public class LiveVideo extends APINode {
 
   public String getFieldPlannedStartTime() {
     return mPlannedStartTime;
+  }
+
+  public LiveVideoRecommendedEncoderSettings getFieldRecommendedEncoderSettings() {
+    return mRecommendedEncoderSettings;
   }
 
   public Long getFieldSecondsLeft() {
@@ -1398,10 +1404,12 @@ public class LiveVideo extends APINode {
       "members",
       "merchant_id",
       "merchant_review_status",
+      "messaging_feature_status",
       "messenger_ads_default_icebreakers",
       "messenger_ads_default_page_welcome_message",
       "messenger_ads_default_quick_replies",
       "messenger_ads_quick_replies_type",
+      "mini_shop_storefront",
       "mission",
       "mpg",
       "name",
@@ -2125,6 +2133,13 @@ public class LiveVideo extends APINode {
       this.requestField("merchant_review_status", value);
       return this;
     }
+    public APIRequestGetCrosspostSharedPages requestMessagingFeatureStatusField () {
+      return this.requestMessagingFeatureStatusField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestMessagingFeatureStatusField (boolean value) {
+      this.requestField("messaging_feature_status", value);
+      return this;
+    }
     public APIRequestGetCrosspostSharedPages requestMessengerAdsDefaultIcebreakersField () {
       return this.requestMessengerAdsDefaultIcebreakersField(true);
     }
@@ -2151,6 +2166,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestMessengerAdsQuickRepliesTypeField (boolean value) {
       this.requestField("messenger_ads_quick_replies_type", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestMiniShopStorefrontField () {
+      return this.requestMiniShopStorefrontField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestMiniShopStorefrontField (boolean value) {
+      this.requestField("mini_shop_storefront", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestMissionField () {
@@ -2591,6 +2613,7 @@ public class LiveVideo extends APINode {
       "overlay_url",
       "permalink_url",
       "planned_start_time",
+      "recommended_encoder_settings",
       "seconds_left",
       "secure_stream_url",
       "status",
@@ -2821,6 +2844,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetCrosspostedBroadcasts requestPlannedStartTimeField (boolean value) {
       this.requestField("planned_start_time", value);
+      return this;
+    }
+    public APIRequestGetCrosspostedBroadcasts requestRecommendedEncoderSettingsField () {
+      return this.requestRecommendedEncoderSettingsField(true);
+    }
+    public APIRequestGetCrosspostedBroadcasts requestRecommendedEncoderSettingsField (boolean value) {
+      this.requestField("recommended_encoder_settings", value);
       return this;
     }
     public APIRequestGetCrosspostedBroadcasts requestSecondsLeftField () {
@@ -3796,6 +3826,7 @@ public class LiveVideo extends APINode {
       "overlay_url",
       "permalink_url",
       "planned_start_time",
+      "recommended_encoder_settings",
       "seconds_left",
       "secure_stream_url",
       "status",
@@ -4031,6 +4062,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGet requestPlannedStartTimeField (boolean value) {
       this.requestField("planned_start_time", value);
+      return this;
+    }
+    public APIRequestGet requestRecommendedEncoderSettingsField () {
+      return this.requestRecommendedEncoderSettingsField(true);
+    }
+    public APIRequestGet requestRecommendedEncoderSettingsField (boolean value) {
+      this.requestField("recommended_encoder_settings", value);
       return this;
     }
     public APIRequestGet requestSecondsLeftField () {
@@ -4457,6 +4495,39 @@ public class LiveVideo extends APINode {
 
   }
 
+  public static enum EnumBroadcastStatus {
+      @SerializedName("LIVE")
+      VALUE_LIVE("LIVE"),
+      @SerializedName("LIVE_STOPPED")
+      VALUE_LIVE_STOPPED("LIVE_STOPPED"),
+      @SerializedName("PROCESSING")
+      VALUE_PROCESSING("PROCESSING"),
+      @SerializedName("SCHEDULED_CANCELED")
+      VALUE_SCHEDULED_CANCELED("SCHEDULED_CANCELED"),
+      @SerializedName("SCHEDULED_EXPIRED")
+      VALUE_SCHEDULED_EXPIRED("SCHEDULED_EXPIRED"),
+      @SerializedName("SCHEDULED_LIVE")
+      VALUE_SCHEDULED_LIVE("SCHEDULED_LIVE"),
+      @SerializedName("SCHEDULED_UNPUBLISHED")
+      VALUE_SCHEDULED_UNPUBLISHED("SCHEDULED_UNPUBLISHED"),
+      @SerializedName("UNPUBLISHED")
+      VALUE_UNPUBLISHED("UNPUBLISHED"),
+      @SerializedName("VOD")
+      VALUE_VOD("VOD"),
+      ;
+
+      private String value;
+
+      private EnumBroadcastStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumProjection {
       @SerializedName("CUBEMAP")
       VALUE_CUBEMAP("CUBEMAP"),
@@ -4469,6 +4540,25 @@ public class LiveVideo extends APINode {
       private String value;
 
       private EnumProjection(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumSource {
+      @SerializedName("owner")
+      VALUE_OWNER("owner"),
+      @SerializedName("target")
+      VALUE_TARGET("target"),
+      ;
+
+      private String value;
+
+      private EnumSource(String value) {
         this.value = value;
       }
 
@@ -4551,58 +4641,6 @@ public class LiveVideo extends APINode {
       private String value;
 
       private EnumStreamType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumBroadcastStatus {
-      @SerializedName("LIVE")
-      VALUE_LIVE("LIVE"),
-      @SerializedName("LIVE_STOPPED")
-      VALUE_LIVE_STOPPED("LIVE_STOPPED"),
-      @SerializedName("PROCESSING")
-      VALUE_PROCESSING("PROCESSING"),
-      @SerializedName("SCHEDULED_CANCELED")
-      VALUE_SCHEDULED_CANCELED("SCHEDULED_CANCELED"),
-      @SerializedName("SCHEDULED_EXPIRED")
-      VALUE_SCHEDULED_EXPIRED("SCHEDULED_EXPIRED"),
-      @SerializedName("SCHEDULED_LIVE")
-      VALUE_SCHEDULED_LIVE("SCHEDULED_LIVE"),
-      @SerializedName("SCHEDULED_UNPUBLISHED")
-      VALUE_SCHEDULED_UNPUBLISHED("SCHEDULED_UNPUBLISHED"),
-      @SerializedName("UNPUBLISHED")
-      VALUE_UNPUBLISHED("UNPUBLISHED"),
-      @SerializedName("VOD")
-      VALUE_VOD("VOD"),
-      ;
-
-      private String value;
-
-      private EnumBroadcastStatus(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumSource {
-      @SerializedName("owner")
-      VALUE_OWNER("owner"),
-      @SerializedName("target")
-      VALUE_TARGET("target"),
-      ;
-
-      private String value;
-
-      private EnumSource(String value) {
         this.value = value;
       }
 
@@ -4702,6 +4740,7 @@ public class LiveVideo extends APINode {
     this.mOverlayUrl = instance.mOverlayUrl;
     this.mPermalinkUrl = instance.mPermalinkUrl;
     this.mPlannedStartTime = instance.mPlannedStartTime;
+    this.mRecommendedEncoderSettings = instance.mRecommendedEncoderSettings;
     this.mSecondsLeft = instance.mSecondsLeft;
     this.mSecureStreamUrl = instance.mSecureStreamUrl;
     this.mStatus = instance.mStatus;

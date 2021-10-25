@@ -633,10 +633,12 @@ public class IGMedia extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "from",
       "hidden",
       "id",
       "like_count",
       "media",
+      "parent_id",
       "text",
       "timestamp",
       "user",
@@ -732,6 +734,13 @@ public class IGMedia extends APINode {
       return this;
     }
 
+    public APIRequestGetComments requestFromField () {
+      return this.requestFromField(true);
+    }
+    public APIRequestGetComments requestFromField (boolean value) {
+      this.requestField("from", value);
+      return this;
+    }
     public APIRequestGetComments requestHiddenField () {
       return this.requestHiddenField(true);
     }
@@ -758,6 +767,13 @@ public class IGMedia extends APINode {
     }
     public APIRequestGetComments requestMediaField (boolean value) {
       this.requestField("media", value);
+      return this;
+    }
+    public APIRequestGetComments requestParentIdField () {
+      return this.requestParentIdField(true);
+    }
+    public APIRequestGetComments requestParentIdField (boolean value) {
+      this.requestField("parent_id", value);
       return this;
     }
     public APIRequestGetComments requestTextField () {

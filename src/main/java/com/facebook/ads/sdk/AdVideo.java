@@ -1460,10 +1460,12 @@ public class AdVideo extends APINode {
       "members",
       "merchant_id",
       "merchant_review_status",
+      "messaging_feature_status",
       "messenger_ads_default_icebreakers",
       "messenger_ads_default_page_welcome_message",
       "messenger_ads_default_quick_replies",
       "messenger_ads_quick_replies_type",
+      "mini_shop_storefront",
       "mission",
       "mpg",
       "name",
@@ -2187,6 +2189,13 @@ public class AdVideo extends APINode {
       this.requestField("merchant_review_status", value);
       return this;
     }
+    public APIRequestGetCrosspostSharedPages requestMessagingFeatureStatusField () {
+      return this.requestMessagingFeatureStatusField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestMessagingFeatureStatusField (boolean value) {
+      this.requestField("messaging_feature_status", value);
+      return this;
+    }
     public APIRequestGetCrosspostSharedPages requestMessengerAdsDefaultIcebreakersField () {
       return this.requestMessengerAdsDefaultIcebreakersField(true);
     }
@@ -2213,6 +2222,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestMessengerAdsQuickRepliesTypeField (boolean value) {
       this.requestField("messenger_ads_quick_replies_type", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestMiniShopStorefrontField () {
+      return this.requestMiniShopStorefrontField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestMiniShopStorefrontField (boolean value) {
+      this.requestField("mini_shop_storefront", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestMissionField () {
@@ -3588,10 +3604,12 @@ public class AdVideo extends APINode {
       "members",
       "merchant_id",
       "merchant_review_status",
+      "messaging_feature_status",
       "messenger_ads_default_icebreakers",
       "messenger_ads_default_page_welcome_message",
       "messenger_ads_default_quick_replies",
       "messenger_ads_quick_replies_type",
+      "mini_shop_storefront",
       "mission",
       "mpg",
       "name",
@@ -4315,6 +4333,13 @@ public class AdVideo extends APINode {
       this.requestField("merchant_review_status", value);
       return this;
     }
+    public APIRequestGetSponsorTags requestMessagingFeatureStatusField () {
+      return this.requestMessagingFeatureStatusField(true);
+    }
+    public APIRequestGetSponsorTags requestMessagingFeatureStatusField (boolean value) {
+      this.requestField("messaging_feature_status", value);
+      return this;
+    }
     public APIRequestGetSponsorTags requestMessengerAdsDefaultIcebreakersField () {
       return this.requestMessengerAdsDefaultIcebreakersField(true);
     }
@@ -4341,6 +4366,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetSponsorTags requestMessengerAdsQuickRepliesTypeField (boolean value) {
       this.requestField("messenger_ads_quick_replies_type", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestMiniShopStorefrontField () {
+      return this.requestMiniShopStorefrontField(true);
+    }
+    public APIRequestGetSponsorTags requestMiniShopStorefrontField (boolean value) {
+      this.requestField("mini_shop_storefront", value);
       return this;
     }
     public APIRequestGetSponsorTags requestMissionField () {
@@ -6374,6 +6406,8 @@ public class AdVideo extends APINode {
       VALUE_ALOHA_CALL_VIDEO("ALOHA_CALL_VIDEO"),
       @SerializedName("ALOHA_SUPERFRAME")
       VALUE_ALOHA_SUPERFRAME("ALOHA_SUPERFRAME"),
+      @SerializedName("APP_REREVIEW_SCREENCAST")
+      VALUE_APP_REREVIEW_SCREENCAST("APP_REREVIEW_SCREENCAST"),
       @SerializedName("APP_REVIEW_SCREENCAST")
       VALUE_APP_REVIEW_SCREENCAST("APP_REVIEW_SCREENCAST"),
       @SerializedName("ASSET_MANAGER")
@@ -6560,6 +6594,8 @@ public class AdVideo extends APINode {
       VALUE_PODCAST_VOICES_NO_NEWSFEED_STORY("PODCAST_VOICES_NO_NEWSFEED_STORY"),
       @SerializedName("PREMIERE_SOURCE")
       VALUE_PREMIERE_SOURCE("PREMIERE_SOURCE"),
+      @SerializedName("PREMIUM_MUSIC_VIDEO_CLIP")
+      VALUE_PREMIUM_MUSIC_VIDEO_CLIP("PREMIUM_MUSIC_VIDEO_CLIP"),
       @SerializedName("PREMIUM_MUSIC_VIDEO_NO_NEWSFEED_STORY")
       VALUE_PREMIUM_MUSIC_VIDEO_NO_NEWSFEED_STORY("PREMIUM_MUSIC_VIDEO_NO_NEWSFEED_STORY"),
       @SerializedName("PREMIUM_MUSIC_VIDEO_WITH_NEWSFEED_STORY")

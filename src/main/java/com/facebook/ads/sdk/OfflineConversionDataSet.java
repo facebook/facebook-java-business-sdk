@@ -1568,6 +1568,8 @@ public class OfflineConversionDataSet extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "approximate_count",
+      "approximate_count_lower_bound",
+      "approximate_count_upper_bound",
       "customer_file_source",
       "data_source",
       "data_source_types",
@@ -1711,6 +1713,20 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetAudiences requestApproximateCountField (boolean value) {
       this.requestField("approximate_count", value);
+      return this;
+    }
+    public APIRequestGetAudiences requestApproximateCountLowerBoundField () {
+      return this.requestApproximateCountLowerBoundField(true);
+    }
+    public APIRequestGetAudiences requestApproximateCountLowerBoundField (boolean value) {
+      this.requestField("approximate_count_lower_bound", value);
+      return this;
+    }
+    public APIRequestGetAudiences requestApproximateCountUpperBoundField () {
+      return this.requestApproximateCountUpperBoundField(true);
+    }
+    public APIRequestGetAudiences requestApproximateCountUpperBoundField (boolean value) {
+      this.requestField("approximate_count_upper_bound", value);
       return this;
     }
     public APIRequestGetAudiences requestCustomerFileSourceField () {

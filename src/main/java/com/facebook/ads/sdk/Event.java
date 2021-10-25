@@ -109,6 +109,8 @@ public class Event extends APINode {
   private String mScheduledPublishTime = null;
   @SerializedName("start_time")
   private String mStartTime = null;
+  @SerializedName("ticket_setting")
+  private Object mTicketSetting = null;
   @SerializedName("ticket_uri")
   private String mTicketUri = null;
   @SerializedName("ticket_uri_start_sales_time")
@@ -491,6 +493,10 @@ public class Event extends APINode {
     return mStartTime;
   }
 
+  public Object getFieldTicketSetting() {
+    return mTicketSetting;
+  }
+
   public String getFieldTicketUri() {
     return mTicketUri;
   }
@@ -833,11 +839,11 @@ public class Event extends APINode {
 
   }
 
-  public static class APIRequestCreateLiveVideo extends APIRequest<LiveVideo> {
+  public static class APIRequestCreateLiveVideo extends APIRequest<APINode> {
 
-    LiveVideo lastResponse = null;
+    APINode lastResponse = null;
     @Override
-    public LiveVideo getLastResponse() {
+    public APINode getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -867,31 +873,31 @@ public class Event extends APINode {
     };
 
     @Override
-    public LiveVideo parseResponse(String response, String header) throws APIException {
-      return LiveVideo.parseResponse(response, getContext(), this, header).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public LiveVideo execute() throws APIException {
+    public APINode execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public LiveVideo execute(Map<String, Object> extraParams) throws APIException {
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<LiveVideo> executeAsync() throws APIException {
+    public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<LiveVideo> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, LiveVideo>() {
-           public LiveVideo apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
                return APIRequestCreateLiveVideo.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -903,7 +909,7 @@ public class Event extends APINode {
     };
 
     public APIRequestCreateLiveVideo(String nodeId, APIContext context) {
-      super(context, nodeId, "/live_videos", "POST", Arrays.asList(PARAMS));
+      super(context, nodeId, "/livevideos", "POST", Arrays.asList(PARAMS));
     }
 
     @Override
@@ -1006,7 +1012,7 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestCreateLiveVideo setProjection (LiveVideo.EnumProjection projection) {
+    public APIRequestCreateLiveVideo setProjection (EnumProjection projection) {
       this.setParam("projection", projection);
       return this;
     }
@@ -1033,7 +1039,7 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestCreateLiveVideo setSpatialAudioFormat (LiveVideo.EnumSpatialAudioFormat spatialAudioFormat) {
+    public APIRequestCreateLiveVideo setSpatialAudioFormat (EnumSpatialAudioFormat spatialAudioFormat) {
       this.setParam("spatial_audio_format", spatialAudioFormat);
       return this;
     }
@@ -1042,7 +1048,7 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestCreateLiveVideo setStatus (LiveVideo.EnumStatus status) {
+    public APIRequestCreateLiveVideo setStatus (EnumStatus status) {
       this.setParam("status", status);
       return this;
     }
@@ -1051,7 +1057,7 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestCreateLiveVideo setStereoscopicMode (LiveVideo.EnumStereoscopicMode stereoscopicMode) {
+    public APIRequestCreateLiveVideo setStereoscopicMode (EnumStereoscopicMode stereoscopicMode) {
       this.setParam("stereoscopic_mode", stereoscopicMode);
       return this;
     }
@@ -1069,7 +1075,7 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestCreateLiveVideo setStreamType (LiveVideo.EnumStreamType streamType) {
+    public APIRequestCreateLiveVideo setStreamType (EnumStreamType streamType) {
       this.setParam("stream_type", streamType);
       return this;
     }
@@ -1871,6 +1877,7 @@ public class Event extends APINode {
       "place",
       "scheduled_publish_time",
       "start_time",
+      "ticket_setting",
       "ticket_uri",
       "ticket_uri_start_sales_time",
       "ticketing_privacy_uri",
@@ -2158,6 +2165,13 @@ public class Event extends APINode {
       this.requestField("start_time", value);
       return this;
     }
+    public APIRequestGet requestTicketSettingField () {
+      return this.requestTicketSettingField(true);
+    }
+    public APIRequestGet requestTicketSettingField (boolean value) {
+      this.requestField("ticket_setting", value);
+      return this;
+    }
     public APIRequestGet requestTicketUriField () {
       return this.requestTicketUriField(true);
     }
@@ -2310,6 +2324,8 @@ public class Event extends APINode {
       VALUE_PRIVATE("private"),
       @SerializedName("public")
       VALUE_PUBLIC("public"),
+      @SerializedName("work_company")
+      VALUE_WORK_COMPANY("work_company"),
       ;
 
       private String value;
@@ -2366,6 +2382,109 @@ public class Event extends APINode {
       }
   }
 
+  public static enum EnumProjection {
+      @SerializedName("CUBEMAP")
+      VALUE_CUBEMAP("CUBEMAP"),
+      @SerializedName("EQUIRECTANGULAR")
+      VALUE_EQUIRECTANGULAR("EQUIRECTANGULAR"),
+      @SerializedName("HALF_EQUIRECTANGULAR")
+      VALUE_HALF_EQUIRECTANGULAR("HALF_EQUIRECTANGULAR"),
+      ;
+
+      private String value;
+
+      private EnumProjection(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumSpatialAudioFormat {
+      @SerializedName("ambiX_4")
+      VALUE_AMBIX_4("ambiX_4"),
+      ;
+
+      private String value;
+
+      private EnumSpatialAudioFormat(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumStatus {
+      @SerializedName("LIVE_NOW")
+      VALUE_LIVE_NOW("LIVE_NOW"),
+      @SerializedName("SCHEDULED_CANCELED")
+      VALUE_SCHEDULED_CANCELED("SCHEDULED_CANCELED"),
+      @SerializedName("SCHEDULED_LIVE")
+      VALUE_SCHEDULED_LIVE("SCHEDULED_LIVE"),
+      @SerializedName("SCHEDULED_UNPUBLISHED")
+      VALUE_SCHEDULED_UNPUBLISHED("SCHEDULED_UNPUBLISHED"),
+      @SerializedName("UNPUBLISHED")
+      VALUE_UNPUBLISHED("UNPUBLISHED"),
+      ;
+
+      private String value;
+
+      private EnumStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumStereoscopicMode {
+      @SerializedName("LEFT_RIGHT")
+      VALUE_LEFT_RIGHT("LEFT_RIGHT"),
+      @SerializedName("MONO")
+      VALUE_MONO("MONO"),
+      @SerializedName("TOP_BOTTOM")
+      VALUE_TOP_BOTTOM("TOP_BOTTOM"),
+      ;
+
+      private String value;
+
+      private EnumStereoscopicMode(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumStreamType {
+      @SerializedName("AMBIENT")
+      VALUE_AMBIENT("AMBIENT"),
+      @SerializedName("REGULAR")
+      VALUE_REGULAR("REGULAR"),
+      ;
+
+      private String value;
+
+      private EnumStreamType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -2408,6 +2527,7 @@ public class Event extends APINode {
     this.mPlace = instance.mPlace;
     this.mScheduledPublishTime = instance.mScheduledPublishTime;
     this.mStartTime = instance.mStartTime;
+    this.mTicketSetting = instance.mTicketSetting;
     this.mTicketUri = instance.mTicketUri;
     this.mTicketUriStartSalesTime = instance.mTicketUriStartSalesTime;
     this.mTicketingPrivacyUri = instance.mTicketingPrivacyUri;

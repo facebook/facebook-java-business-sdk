@@ -63,6 +63,10 @@ public class ReachFrequencyPrediction extends APINode {
   private List<ReachFrequencyAdFormat> mAdFormats = null;
   @SerializedName("auction_entry_option_index")
   private Long mAuctionEntryOptionIndex = null;
+  @SerializedName("audience_size_lower_bound")
+  private Long mAudienceSizeLowerBound = null;
+  @SerializedName("audience_size_upper_bound")
+  private Long mAudienceSizeUpperBound = null;
   @SerializedName("business_id")
   private Long mBusinessId = null;
   @SerializedName("buying_type")
@@ -447,6 +451,14 @@ public class ReachFrequencyPrediction extends APINode {
     return mAuctionEntryOptionIndex;
   }
 
+  public Long getFieldAudienceSizeLowerBound() {
+    return mAudienceSizeLowerBound;
+  }
+
+  public Long getFieldAudienceSizeUpperBound() {
+    return mAudienceSizeUpperBound;
+  }
+
   public Long getFieldBusinessId() {
     return mBusinessId;
   }
@@ -772,6 +784,8 @@ public class ReachFrequencyPrediction extends APINode {
       "activity_status",
       "ad_formats",
       "auction_entry_option_index",
+      "audience_size_lower_bound",
+      "audience_size_upper_bound",
       "business_id",
       "buying_type",
       "campaign_group_id",
@@ -966,6 +980,20 @@ public class ReachFrequencyPrediction extends APINode {
     }
     public APIRequestGet requestAuctionEntryOptionIndexField (boolean value) {
       this.requestField("auction_entry_option_index", value);
+      return this;
+    }
+    public APIRequestGet requestAudienceSizeLowerBoundField () {
+      return this.requestAudienceSizeLowerBoundField(true);
+    }
+    public APIRequestGet requestAudienceSizeLowerBoundField (boolean value) {
+      this.requestField("audience_size_lower_bound", value);
+      return this;
+    }
+    public APIRequestGet requestAudienceSizeUpperBoundField () {
+      return this.requestAudienceSizeUpperBoundField(true);
+    }
+    public APIRequestGet requestAudienceSizeUpperBoundField (boolean value) {
+      this.requestField("audience_size_upper_bound", value);
       return this;
     }
     public APIRequestGet requestBusinessIdField () {
@@ -1621,6 +1649,8 @@ public class ReachFrequencyPrediction extends APINode {
     this.mActivityStatus = instance.mActivityStatus;
     this.mAdFormats = instance.mAdFormats;
     this.mAuctionEntryOptionIndex = instance.mAuctionEntryOptionIndex;
+    this.mAudienceSizeLowerBound = instance.mAudienceSizeLowerBound;
+    this.mAudienceSizeUpperBound = instance.mAudienceSizeUpperBound;
     this.mBusinessId = instance.mBusinessId;
     this.mBuyingType = instance.mBuyingType;
     this.mCampaignGroupId = instance.mCampaignGroupId;

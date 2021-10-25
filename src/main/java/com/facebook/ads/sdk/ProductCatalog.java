@@ -332,6 +332,10 @@ public class ProductCatalog extends APINode {
     return new APIRequestCreateBatch(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateCatalogWebsiteSetting createCatalogWebsiteSetting() {
+    return new APIRequestCreateCatalogWebsiteSetting(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetCategories getCategories() {
     return new APIRequestGetCategories(this.getPrefixedId().toString(), context);
   }
@@ -2330,6 +2334,120 @@ public class ProductCatalog extends APINode {
 
     @Override
     public APIRequestCreateBatch requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateCatalogWebsiteSetting extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "is_allowed_to_crawl",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateCatalogWebsiteSetting.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateCatalogWebsiteSetting(String nodeId, APIContext context) {
+      super(context, nodeId, "/catalog_website_settings", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateCatalogWebsiteSetting setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCatalogWebsiteSetting setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateCatalogWebsiteSetting setIsAllowedToCrawl (Boolean isAllowedToCrawl) {
+      this.setParam("is_allowed_to_crawl", isAllowedToCrawl);
+      return this;
+    }
+    public APIRequestCreateCatalogWebsiteSetting setIsAllowedToCrawl (String isAllowedToCrawl) {
+      this.setParam("is_allowed_to_crawl", isAllowedToCrawl);
+      return this;
+    }
+
+    public APIRequestCreateCatalogWebsiteSetting requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateCatalogWebsiteSetting requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCatalogWebsiteSetting requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateCatalogWebsiteSetting requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCatalogWebsiteSetting requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCatalogWebsiteSetting requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -6465,14 +6583,17 @@ public class ProductCatalog extends APINode {
       "encoding",
       "file_name",
       "id",
+      "ingestion_source_type",
       "item_sub_type",
       "latest_upload",
       "migrated_from_feed_id",
       "name",
       "override_type",
+      "primary_feeds",
       "product_count",
       "quoted_fields_mode",
       "schedule",
+      "supplementary_feeds",
       "update_schedule",
     };
 
@@ -6621,6 +6742,13 @@ public class ProductCatalog extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetProductFeeds requestIngestionSourceTypeField () {
+      return this.requestIngestionSourceTypeField(true);
+    }
+    public APIRequestGetProductFeeds requestIngestionSourceTypeField (boolean value) {
+      this.requestField("ingestion_source_type", value);
+      return this;
+    }
     public APIRequestGetProductFeeds requestItemSubTypeField () {
       return this.requestItemSubTypeField(true);
     }
@@ -6656,6 +6784,13 @@ public class ProductCatalog extends APINode {
       this.requestField("override_type", value);
       return this;
     }
+    public APIRequestGetProductFeeds requestPrimaryFeedsField () {
+      return this.requestPrimaryFeedsField(true);
+    }
+    public APIRequestGetProductFeeds requestPrimaryFeedsField (boolean value) {
+      this.requestField("primary_feeds", value);
+      return this;
+    }
     public APIRequestGetProductFeeds requestProductCountField () {
       return this.requestProductCountField(true);
     }
@@ -6675,6 +6810,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetProductFeeds requestScheduleField (boolean value) {
       this.requestField("schedule", value);
+      return this;
+    }
+    public APIRequestGetProductFeeds requestSupplementaryFeedsField () {
+      return this.requestSupplementaryFeedsField(true);
+    }
+    public APIRequestGetProductFeeds requestSupplementaryFeedsField (boolean value) {
+      this.requestField("supplementary_feeds", value);
       return this;
     }
     public APIRequestGetProductFeeds requestUpdateScheduleField () {
@@ -6701,11 +6843,13 @@ public class ProductCatalog extends APINode {
       "encoding",
       "feed_type",
       "file_name",
+      "ingestion_source_type",
       "item_sub_type",
       "migrated_from_feed_id",
       "name",
       "override_type",
       "override_value",
+      "primary_feed_ids",
       "quoted_fields_mode",
       "rules",
       "schedule",
@@ -6820,6 +6964,15 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateProductFeed setIngestionSourceType (ProductFeed.EnumIngestionSourceType ingestionSourceType) {
+      this.setParam("ingestion_source_type", ingestionSourceType);
+      return this;
+    }
+    public APIRequestCreateProductFeed setIngestionSourceType (String ingestionSourceType) {
+      this.setParam("ingestion_source_type", ingestionSourceType);
+      return this;
+    }
+
     public APIRequestCreateProductFeed setItemSubType (ProductFeed.EnumItemSubType itemSubType) {
       this.setParam("item_sub_type", itemSubType);
       return this;
@@ -6850,6 +7003,15 @@ public class ProductCatalog extends APINode {
 
     public APIRequestCreateProductFeed setOverrideValue (String overrideValue) {
       this.setParam("override_value", overrideValue);
+      return this;
+    }
+
+    public APIRequestCreateProductFeed setPrimaryFeedIds (List<String> primaryFeedIds) {
+      this.setParam("primary_feed_ids", primaryFeedIds);
+      return this;
+    }
+    public APIRequestCreateProductFeed setPrimaryFeedIds (String primaryFeedIds) {
+      this.setParam("primary_feed_ids", primaryFeedIds);
       return this;
     }
 
@@ -7408,6 +7570,7 @@ public class ProductCatalog extends APINode {
       "metadata",
       "name",
       "ordering_info",
+      "publish_to_shops",
       "retailer_id",
     };
 
@@ -7496,6 +7659,15 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestCreateProductSet setOrderingInfo (String orderingInfo) {
       this.setParam("ordering_info", orderingInfo);
+      return this;
+    }
+
+    public APIRequestCreateProductSet setPublishToShops (List<Map<String, String>> publishToShops) {
+      this.setParam("publish_to_shops", publishToShops);
+      return this;
+    }
+    public APIRequestCreateProductSet setPublishToShops (String publishToShops) {
+      this.setParam("publish_to_shops", publishToShops);
       return this;
     }
 
@@ -7729,14 +7901,18 @@ public class ProductCatalog extends APINode {
       "image_fetch_status",
       "image_url",
       "images",
+      "importer_address",
+      "importer_name",
       "invalidation_errors",
       "inventory",
+      "manufacturer_info",
       "manufacturer_part_number",
       "marked_for_product_launch",
       "material",
       "mobile_link",
       "name",
       "ordering_index",
+      "origin_country",
       "parent_product_id",
       "pattern",
       "price",
@@ -8094,6 +8270,20 @@ public class ProductCatalog extends APINode {
       this.requestField("images", value);
       return this;
     }
+    public APIRequestGetProducts requestImporterAddressField () {
+      return this.requestImporterAddressField(true);
+    }
+    public APIRequestGetProducts requestImporterAddressField (boolean value) {
+      this.requestField("importer_address", value);
+      return this;
+    }
+    public APIRequestGetProducts requestImporterNameField () {
+      return this.requestImporterNameField(true);
+    }
+    public APIRequestGetProducts requestImporterNameField (boolean value) {
+      this.requestField("importer_name", value);
+      return this;
+    }
     public APIRequestGetProducts requestInvalidationErrorsField () {
       return this.requestInvalidationErrorsField(true);
     }
@@ -8106,6 +8296,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetProducts requestInventoryField (boolean value) {
       this.requestField("inventory", value);
+      return this;
+    }
+    public APIRequestGetProducts requestManufacturerInfoField () {
+      return this.requestManufacturerInfoField(true);
+    }
+    public APIRequestGetProducts requestManufacturerInfoField (boolean value) {
+      this.requestField("manufacturer_info", value);
       return this;
     }
     public APIRequestGetProducts requestManufacturerPartNumberField () {
@@ -8148,6 +8345,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetProducts requestOrderingIndexField (boolean value) {
       this.requestField("ordering_index", value);
+      return this;
+    }
+    public APIRequestGetProducts requestOriginCountryField () {
+      return this.requestOriginCountryField(true);
+    }
+    public APIRequestGetProducts requestOriginCountryField (boolean value) {
+      this.requestField("origin_country", value);
       return this;
     }
     public APIRequestGetProducts requestParentProductIdField () {
@@ -8342,6 +8546,8 @@ public class ProductCatalog extends APINode {
       "gender",
       "gtin",
       "image_url",
+      "importer_address",
+      "importer_name",
       "inventory",
       "ios_app_name",
       "ios_app_store_id",
@@ -8353,6 +8559,7 @@ public class ProductCatalog extends APINode {
       "iphone_app_store_id",
       "iphone_url",
       "launch_date",
+      "manufacturer_info",
       "manufacturer_part_number",
       "marked_for_product_launch",
       "material",
@@ -8362,6 +8569,7 @@ public class ProductCatalog extends APINode {
       "offer_price_end_date",
       "offer_price_start_date",
       "ordering_index",
+      "origin_country",
       "pattern",
       "price",
       "product_type",
@@ -8614,6 +8822,20 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateProduct setImporterAddress (Map<String, String> importerAddress) {
+      this.setParam("importer_address", importerAddress);
+      return this;
+    }
+    public APIRequestCreateProduct setImporterAddress (String importerAddress) {
+      this.setParam("importer_address", importerAddress);
+      return this;
+    }
+
+    public APIRequestCreateProduct setImporterName (String importerName) {
+      this.setParam("importer_name", importerName);
+      return this;
+    }
+
     public APIRequestCreateProduct setInventory (Long inventory) {
       this.setParam("inventory", inventory);
       return this;
@@ -8685,6 +8907,11 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateProduct setManufacturerInfo (String manufacturerInfo) {
+      this.setParam("manufacturer_info", manufacturerInfo);
+      return this;
+    }
+
     public APIRequestCreateProduct setManufacturerPartNumber (String manufacturerPartNumber) {
       this.setParam("manufacturer_part_number", manufacturerPartNumber);
       return this;
@@ -8739,6 +8966,15 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestCreateProduct setOrderingIndex (String orderingIndex) {
       this.setParam("ordering_index", orderingIndex);
+      return this;
+    }
+
+    public APIRequestCreateProduct setOriginCountry (ProductItem.EnumOriginCountry originCountry) {
+      this.setParam("origin_country", originCountry);
+      return this;
+    }
+    public APIRequestCreateProduct setOriginCountry (String originCountry) {
+      this.setParam("origin_country", originCountry);
       return this;
     }
 
@@ -10839,6 +11075,8 @@ public class ProductCatalog extends APINode {
       VALUE_COLLAB_ADS_SEGMENT_WITHOUT_SEGMENT_SYNCING("COLLAB_ADS_SEGMENT_WITHOUT_SEGMENT_SYNCING"),
       @SerializedName("CREATORS_AS_SELLERS")
       VALUE_CREATORS_AS_SELLERS("CREATORS_AS_SELLERS"),
+      @SerializedName("DIGITAL_CIRCULARS")
+      VALUE_DIGITAL_CIRCULARS("DIGITAL_CIRCULARS"),
       @SerializedName("FB_LIVE_SHOPPING")
       VALUE_FB_LIVE_SHOPPING("FB_LIVE_SHOPPING"),
       @SerializedName("IG_SHOPPING")

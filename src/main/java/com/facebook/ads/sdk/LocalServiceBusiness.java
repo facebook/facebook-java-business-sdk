@@ -55,6 +55,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class LocalServiceBusiness extends APINode {
+  @SerializedName("address")
+  private Object mAddress = null;
   @SerializedName("applinks")
   private CatalogItemAppLinks mApplinks = null;
   @SerializedName("brand")
@@ -89,6 +91,8 @@ public class LocalServiceBusiness extends APINode {
   private List<String> mSanitizedImages = null;
   @SerializedName("title")
   private String mTitle = null;
+  @SerializedName("unit_price")
+  private Object mUnitPrice = null;
   @SerializedName("url")
   private String mUrl = null;
   protected static Gson gson = null;
@@ -309,6 +313,10 @@ public class LocalServiceBusiness extends APINode {
   }
 
 
+  public Object getFieldAddress() {
+    return mAddress;
+  }
+
   public CatalogItemAppLinks getFieldApplinks() {
     return mApplinks;
   }
@@ -375,6 +383,10 @@ public class LocalServiceBusiness extends APINode {
 
   public String getFieldTitle() {
     return mTitle;
+  }
+
+  public Object getFieldUnitPrice() {
+    return mUnitPrice;
   }
 
   public String getFieldUrl() {
@@ -514,6 +526,7 @@ public class LocalServiceBusiness extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "address",
       "applinks",
       "brand",
       "category_specific_fields",
@@ -531,6 +544,7 @@ public class LocalServiceBusiness extends APINode {
       "price",
       "sanitized_images",
       "title",
+      "unit_price",
       "url",
     };
 
@@ -623,6 +637,13 @@ public class LocalServiceBusiness extends APINode {
       return this;
     }
 
+    public APIRequestGet requestAddressField () {
+      return this.requestAddressField(true);
+    }
+    public APIRequestGet requestAddressField (boolean value) {
+      this.requestField("address", value);
+      return this;
+    }
     public APIRequestGet requestApplinksField () {
       return this.requestApplinksField(true);
     }
@@ -742,6 +763,13 @@ public class LocalServiceBusiness extends APINode {
       this.requestField("title", value);
       return this;
     }
+    public APIRequestGet requestUnitPriceField () {
+      return this.requestUnitPriceField(true);
+    }
+    public APIRequestGet requestUnitPriceField (boolean value) {
+      this.requestField("unit_price", value);
+      return this;
+    }
     public APIRequestGet requestUrlField () {
       return this.requestUrlField(true);
     }
@@ -793,6 +821,7 @@ public class LocalServiceBusiness extends APINode {
   }
 
   public LocalServiceBusiness copyFrom(LocalServiceBusiness instance) {
+    this.mAddress = instance.mAddress;
     this.mApplinks = instance.mApplinks;
     this.mBrand = instance.mBrand;
     this.mCategorySpecificFields = instance.mCategorySpecificFields;
@@ -810,6 +839,7 @@ public class LocalServiceBusiness extends APINode {
     this.mPrice = instance.mPrice;
     this.mSanitizedImages = instance.mSanitizedImages;
     this.mTitle = instance.mTitle;
+    this.mUnitPrice = instance.mUnitPrice;
     this.mUrl = instance.mUrl;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

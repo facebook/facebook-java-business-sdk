@@ -54,68 +54,82 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class PlayableContent extends APINode {
+public class BusinessImage extends APINode {
+  @SerializedName("business")
+  private Business mBusiness = null;
+  @SerializedName("creation_time")
+  private String mCreationTime = null;
+  @SerializedName("hash")
+  private String mHash = null;
+  @SerializedName("height")
+  private Long mHeight = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("media_library_url")
+  private String mMediaLibraryUrl = null;
   @SerializedName("name")
   private String mName = null;
-  @SerializedName("owner")
-  private Profile mOwner = null;
+  @SerializedName("url")
+  private String mUrl = null;
+  @SerializedName("url_128")
+  private String mUrl128 = null;
+  @SerializedName("width")
+  private Long mWidth = null;
   protected static Gson gson = null;
 
-  PlayableContent() {
+  BusinessImage() {
   }
 
-  public PlayableContent(Long id, APIContext context) {
+  public BusinessImage(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public PlayableContent(String id, APIContext context) {
+  public BusinessImage(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public PlayableContent fetch() throws APIException{
-    PlayableContent newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public BusinessImage fetch() throws APIException{
+    BusinessImage newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static PlayableContent fetchById(Long id, APIContext context) throws APIException {
+  public static BusinessImage fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<PlayableContent> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<BusinessImage> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static PlayableContent fetchById(String id, APIContext context) throws APIException {
+  public static BusinessImage fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<PlayableContent> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<BusinessImage> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<PlayableContent> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<PlayableContent>)(
-      new APIRequest<PlayableContent>(context, "", "/", "GET", PlayableContent.getParser())
+  public static APINodeList<BusinessImage> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<BusinessImage>)(
+      new APIRequest<BusinessImage>(context, "", "/", "GET", BusinessImage.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<PlayableContent>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<BusinessImage>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", PlayableContent.getParser())
+      new APIRequest(context, "", "/", "GET", BusinessImage.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -128,12 +142,12 @@ public class PlayableContent extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PlayableContent loadJSON(String json, APIContext context, String header) {
-    PlayableContent playableContent = getGson().fromJson(json, PlayableContent.class);
+  public static BusinessImage loadJSON(String json, APIContext context, String header) {
+    BusinessImage businessImage = getGson().fromJson(json, BusinessImage.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(playableContent.toString());
+      JsonElement o2 = parser.parse(businessImage.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -143,14 +157,14 @@ public class PlayableContent extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    playableContent.context = context;
-    playableContent.rawValue = json;
-    playableContent.header = header;
-    return playableContent;
+    businessImage.context = context;
+    businessImage.rawValue = json;
+    businessImage.header = header;
+    return businessImage;
   }
 
-  public static APINodeList<PlayableContent> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<PlayableContent> playableContents = new APINodeList<PlayableContent>(request, json, header);
+  public static APINodeList<BusinessImage> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<BusinessImage> businessImages = new APINodeList<BusinessImage>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -161,9 +175,9 @@ public class PlayableContent extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          playableContents.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          businessImages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return playableContents;
+        return businessImages;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -173,20 +187,20 @@ public class PlayableContent extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                playableContents.setCursors(before, after);
+                businessImages.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            playableContents.setPaging(previous, next);
+            businessImages.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              playableContents.setAppSecret(context.getAppSecretProof());
+              businessImages.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              playableContents.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              businessImages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -197,23 +211,23 @@ public class PlayableContent extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  playableContents.add(loadJSON(entry.getValue().toString(), context, header));
+                  businessImages.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              playableContents.add(loadJSON(obj.toString(), context, header));
+              businessImages.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return playableContents;
+          return businessImages;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              playableContents.add(loadJSON(entry.getValue().toString(), context, header));
+              businessImages.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return playableContents;
+          return businessImages;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -230,20 +244,20 @@ public class PlayableContent extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              playableContents.add(loadJSON(value.toString(), context, header));
+              businessImages.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return playableContents;
+            return businessImages;
           }
 
           // Sixth, check if it's pure JsonObject
-          playableContents.clear();
-          playableContents.add(loadJSON(json, context, header));
-          return playableContents;
+          businessImages.clear();
+          businessImages.add(loadJSON(json, context, header));
+          return businessImages;
         }
       }
     } catch (Exception e) {
@@ -275,65 +289,100 @@ public class PlayableContent extends APINode {
   }
 
 
+  public Business getFieldBusiness() {
+    if (mBusiness != null) {
+      mBusiness.context = getContext();
+    }
+    return mBusiness;
+  }
+
+  public String getFieldCreationTime() {
+    return mCreationTime;
+  }
+
+  public String getFieldHash() {
+    return mHash;
+  }
+
+  public Long getFieldHeight() {
+    return mHeight;
+  }
+
   public String getFieldId() {
     return mId;
+  }
+
+  public String getFieldMediaLibraryUrl() {
+    return mMediaLibraryUrl;
   }
 
   public String getFieldName() {
     return mName;
   }
 
-  public Profile getFieldOwner() {
-    if (mOwner != null) {
-      mOwner.context = getContext();
-    }
-    return mOwner;
+  public String getFieldUrl() {
+    return mUrl;
+  }
+
+  public String getFieldUrl128() {
+    return mUrl128;
+  }
+
+  public Long getFieldWidth() {
+    return mWidth;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<PlayableContent> {
+  public static class APIRequestGet extends APIRequest<BusinessImage> {
 
-    PlayableContent lastResponse = null;
+    BusinessImage lastResponse = null;
     @Override
-    public PlayableContent getLastResponse() {
+    public BusinessImage getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
+      "business",
+      "creation_time",
+      "hash",
+      "height",
       "id",
+      "media_library_url",
       "name",
-      "owner",
+      "url",
+      "url_128",
+      "width",
     };
 
     @Override
-    public PlayableContent parseResponse(String response, String header) throws APIException {
-      return PlayableContent.parseResponse(response, getContext(), this, header).head();
+    public BusinessImage parseResponse(String response, String header) throws APIException {
+      return BusinessImage.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public PlayableContent execute() throws APIException {
+    public BusinessImage execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public PlayableContent execute(Map<String, Object> extraParams) throws APIException {
+    public BusinessImage execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<PlayableContent> executeAsync() throws APIException {
+    public ListenableFuture<BusinessImage> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<PlayableContent> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<BusinessImage> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, PlayableContent>() {
-           public PlayableContent apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, BusinessImage>() {
+           public BusinessImage apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -397,11 +446,46 @@ public class PlayableContent extends APINode {
       return this;
     }
 
+    public APIRequestGet requestBusinessField () {
+      return this.requestBusinessField(true);
+    }
+    public APIRequestGet requestBusinessField (boolean value) {
+      this.requestField("business", value);
+      return this;
+    }
+    public APIRequestGet requestCreationTimeField () {
+      return this.requestCreationTimeField(true);
+    }
+    public APIRequestGet requestCreationTimeField (boolean value) {
+      this.requestField("creation_time", value);
+      return this;
+    }
+    public APIRequestGet requestHashField () {
+      return this.requestHashField(true);
+    }
+    public APIRequestGet requestHashField (boolean value) {
+      this.requestField("hash", value);
+      return this;
+    }
+    public APIRequestGet requestHeightField () {
+      return this.requestHeightField(true);
+    }
+    public APIRequestGet requestHeightField (boolean value) {
+      this.requestField("height", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestMediaLibraryUrlField () {
+      return this.requestMediaLibraryUrlField(true);
+    }
+    public APIRequestGet requestMediaLibraryUrlField (boolean value) {
+      this.requestField("media_library_url", value);
       return this;
     }
     public APIRequestGet requestNameField () {
@@ -411,11 +495,25 @@ public class PlayableContent extends APINode {
       this.requestField("name", value);
       return this;
     }
-    public APIRequestGet requestOwnerField () {
-      return this.requestOwnerField(true);
+    public APIRequestGet requestUrlField () {
+      return this.requestUrlField(true);
     }
-    public APIRequestGet requestOwnerField (boolean value) {
-      this.requestField("owner", value);
+    public APIRequestGet requestUrlField (boolean value) {
+      this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGet requestUrl128Field () {
+      return this.requestUrl128Field(true);
+    }
+    public APIRequestGet requestUrl128Field (boolean value) {
+      this.requestField("url_128", value);
+      return this;
+    }
+    public APIRequestGet requestWidthField () {
+      return this.requestWidthField(true);
+    }
+    public APIRequestGet requestWidthField (boolean value) {
+      this.requestField("width", value);
       return this;
     }
   }
@@ -434,19 +532,26 @@ public class PlayableContent extends APINode {
     return gson;
   }
 
-  public PlayableContent copyFrom(PlayableContent instance) {
+  public BusinessImage copyFrom(BusinessImage instance) {
+    this.mBusiness = instance.mBusiness;
+    this.mCreationTime = instance.mCreationTime;
+    this.mHash = instance.mHash;
+    this.mHeight = instance.mHeight;
     this.mId = instance.mId;
+    this.mMediaLibraryUrl = instance.mMediaLibraryUrl;
     this.mName = instance.mName;
-    this.mOwner = instance.mOwner;
+    this.mUrl = instance.mUrl;
+    this.mUrl128 = instance.mUrl128;
+    this.mWidth = instance.mWidth;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<PlayableContent> getParser() {
-    return new APIRequest.ResponseParser<PlayableContent>() {
-      public APINodeList<PlayableContent> parseResponse(String response, APIContext context, APIRequest<PlayableContent> request, String header) throws MalformedResponseException {
-        return PlayableContent.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<BusinessImage> getParser() {
+    return new APIRequest.ResponseParser<BusinessImage>() {
+      public APINodeList<BusinessImage> parseResponse(String response, APIContext context, APIRequest<BusinessImage> request, String header) throws MalformedResponseException {
+        return BusinessImage.parseResponse(response, context, request, header);
       }
     };
   }

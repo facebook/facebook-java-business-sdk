@@ -219,6 +219,8 @@ public class Page extends APINode {
   private String mMerchantId = null;
   @SerializedName("merchant_review_status")
   private String mMerchantReviewStatus = null;
+  @SerializedName("messaging_feature_status")
+  private MessagingFeatureStatus mMessagingFeatureStatus = null;
   @SerializedName("messenger_ads_default_icebreakers")
   private List<String> mMessengerAdsDefaultIcebreakers = null;
   @SerializedName("messenger_ads_default_page_welcome_message")
@@ -227,6 +229,8 @@ public class Page extends APINode {
   private List<String> mMessengerAdsDefaultQuickReplies = null;
   @SerializedName("messenger_ads_quick_replies_type")
   private String mMessengerAdsQuickRepliesType = null;
+  @SerializedName("mini_shop_storefront")
+  private Shop mMiniShopStorefront = null;
   @SerializedName("mission")
   private String mMission = null;
   @SerializedName("mpg")
@@ -1381,6 +1385,10 @@ public class Page extends APINode {
     return mMerchantReviewStatus;
   }
 
+  public MessagingFeatureStatus getFieldMessagingFeatureStatus() {
+    return mMessagingFeatureStatus;
+  }
+
   public List<String> getFieldMessengerAdsDefaultIcebreakers() {
     return mMessengerAdsDefaultIcebreakers;
   }
@@ -1395,6 +1403,13 @@ public class Page extends APINode {
 
   public String getFieldMessengerAdsQuickRepliesType() {
     return mMessengerAdsQuickRepliesType;
+  }
+
+  public Shop getFieldMiniShopStorefront() {
+    if (mMiniShopStorefront != null) {
+      mMiniShopStorefront.context = getContext();
+    }
+    return mMiniShopStorefront;
   }
 
   public String getFieldMission() {
@@ -4124,47 +4139,48 @@ public class Page extends APINode {
 
   }
 
-  public static class APIRequestCreateBusinessDatum extends APIRequest<Page> {
+  public static class APIRequestCreateBusinessDatum extends APIRequest<APINode> {
 
-    Page lastResponse = null;
+    APINode lastResponse = null;
     @Override
-    public Page getLastResponse() {
+    public APINode getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
       "data",
       "partner_agent",
+      "processing_type",
     };
 
     public static final String[] FIELDS = {
     };
 
     @Override
-    public Page parseResponse(String response, String header) throws APIException {
-      return Page.parseResponse(response, getContext(), this, header).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public Page execute() throws APIException {
+    public APINode execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public Page execute(Map<String, Object> extraParams) throws APIException {
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<Page> executeAsync() throws APIException {
+    public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<Page> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Page>() {
-           public Page apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
                return APIRequestCreateBusinessDatum.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -4203,6 +4219,11 @@ public class Page extends APINode {
 
     public APIRequestCreateBusinessDatum setPartnerAgent (String partnerAgent) {
       this.setParam("partner_agent", partnerAgent);
+      return this;
+    }
+
+    public APIRequestCreateBusinessDatum setProcessingType (String processingType) {
+      this.setParam("processing_type", processingType);
       return this;
     }
 
@@ -7717,10 +7738,12 @@ public class Page extends APINode {
       "members",
       "merchant_id",
       "merchant_review_status",
+      "messaging_feature_status",
       "messenger_ads_default_icebreakers",
       "messenger_ads_default_page_welcome_message",
       "messenger_ads_default_quick_replies",
       "messenger_ads_quick_replies_type",
+      "mini_shop_storefront",
       "mission",
       "mpg",
       "name",
@@ -8444,6 +8467,13 @@ public class Page extends APINode {
       this.requestField("merchant_review_status", value);
       return this;
     }
+    public APIRequestGetCrosspostWhitelistedPages requestMessagingFeatureStatusField () {
+      return this.requestMessagingFeatureStatusField(true);
+    }
+    public APIRequestGetCrosspostWhitelistedPages requestMessagingFeatureStatusField (boolean value) {
+      this.requestField("messaging_feature_status", value);
+      return this;
+    }
     public APIRequestGetCrosspostWhitelistedPages requestMessengerAdsDefaultIcebreakersField () {
       return this.requestMessengerAdsDefaultIcebreakersField(true);
     }
@@ -8470,6 +8500,13 @@ public class Page extends APINode {
     }
     public APIRequestGetCrosspostWhitelistedPages requestMessengerAdsQuickRepliesTypeField (boolean value) {
       this.requestField("messenger_ads_quick_replies_type", value);
+      return this;
+    }
+    public APIRequestGetCrosspostWhitelistedPages requestMiniShopStorefrontField () {
+      return this.requestMiniShopStorefrontField(true);
+    }
+    public APIRequestGetCrosspostWhitelistedPages requestMiniShopStorefrontField (boolean value) {
+      this.requestField("mini_shop_storefront", value);
       return this;
     }
     public APIRequestGetCrosspostWhitelistedPages requestMissionField () {
@@ -9524,6 +9561,7 @@ public class Page extends APINode {
       "place",
       "scheduled_publish_time",
       "start_time",
+      "ticket_setting",
       "ticket_uri",
       "ticket_uri_start_sales_time",
       "ticketing_privacy_uri",
@@ -9845,6 +9883,13 @@ public class Page extends APINode {
     }
     public APIRequestGetEvents requestStartTimeField (boolean value) {
       this.requestField("start_time", value);
+      return this;
+    }
+    public APIRequestGetEvents requestTicketSettingField () {
+      return this.requestTicketSettingField(true);
+    }
+    public APIRequestGetEvents requestTicketSettingField (boolean value) {
+      this.requestField("ticket_setting", value);
       return this;
     }
     public APIRequestGetEvents requestTicketUriField () {
@@ -11725,10 +11770,12 @@ public class Page extends APINode {
       "members",
       "merchant_id",
       "merchant_review_status",
+      "messaging_feature_status",
       "messenger_ads_default_icebreakers",
       "messenger_ads_default_page_welcome_message",
       "messenger_ads_default_quick_replies",
       "messenger_ads_quick_replies_type",
+      "mini_shop_storefront",
       "mission",
       "mpg",
       "name",
@@ -12452,6 +12499,13 @@ public class Page extends APINode {
       this.requestField("merchant_review_status", value);
       return this;
     }
+    public APIRequestGetGlobalBrandChildren requestMessagingFeatureStatusField () {
+      return this.requestMessagingFeatureStatusField(true);
+    }
+    public APIRequestGetGlobalBrandChildren requestMessagingFeatureStatusField (boolean value) {
+      this.requestField("messaging_feature_status", value);
+      return this;
+    }
     public APIRequestGetGlobalBrandChildren requestMessengerAdsDefaultIcebreakersField () {
       return this.requestMessengerAdsDefaultIcebreakersField(true);
     }
@@ -12478,6 +12532,13 @@ public class Page extends APINode {
     }
     public APIRequestGetGlobalBrandChildren requestMessengerAdsQuickRepliesTypeField (boolean value) {
       this.requestField("messenger_ads_quick_replies_type", value);
+      return this;
+    }
+    public APIRequestGetGlobalBrandChildren requestMiniShopStorefrontField () {
+      return this.requestMiniShopStorefrontField(true);
+    }
+    public APIRequestGetGlobalBrandChildren requestMiniShopStorefrontField (boolean value) {
+      this.requestField("mini_shop_storefront", value);
       return this;
     }
     public APIRequestGetGlobalBrandChildren requestMissionField () {
@@ -15730,10 +15791,12 @@ public class Page extends APINode {
       "members",
       "merchant_id",
       "merchant_review_status",
+      "messaging_feature_status",
       "messenger_ads_default_icebreakers",
       "messenger_ads_default_page_welcome_message",
       "messenger_ads_default_quick_replies",
       "messenger_ads_quick_replies_type",
+      "mini_shop_storefront",
       "mission",
       "mpg",
       "name",
@@ -16462,6 +16525,13 @@ public class Page extends APINode {
       this.requestField("merchant_review_status", value);
       return this;
     }
+    public APIRequestGetLikes requestMessagingFeatureStatusField () {
+      return this.requestMessagingFeatureStatusField(true);
+    }
+    public APIRequestGetLikes requestMessagingFeatureStatusField (boolean value) {
+      this.requestField("messaging_feature_status", value);
+      return this;
+    }
     public APIRequestGetLikes requestMessengerAdsDefaultIcebreakersField () {
       return this.requestMessengerAdsDefaultIcebreakersField(true);
     }
@@ -16488,6 +16558,13 @@ public class Page extends APINode {
     }
     public APIRequestGetLikes requestMessengerAdsQuickRepliesTypeField (boolean value) {
       this.requestField("messenger_ads_quick_replies_type", value);
+      return this;
+    }
+    public APIRequestGetLikes requestMiniShopStorefrontField () {
+      return this.requestMiniShopStorefrontField(true);
+    }
+    public APIRequestGetLikes requestMiniShopStorefrontField (boolean value) {
+      this.requestField("mini_shop_storefront", value);
       return this;
     }
     public APIRequestGetLikes requestMissionField () {
@@ -17256,6 +17333,7 @@ public class Page extends APINode {
       "overlay_url",
       "permalink_url",
       "planned_start_time",
+      "recommended_encoder_settings",
       "seconds_left",
       "secure_stream_url",
       "status",
@@ -17504,6 +17582,13 @@ public class Page extends APINode {
     }
     public APIRequestGetLiveVideos requestPlannedStartTimeField (boolean value) {
       this.requestField("planned_start_time", value);
+      return this;
+    }
+    public APIRequestGetLiveVideos requestRecommendedEncoderSettingsField () {
+      return this.requestRecommendedEncoderSettingsField(true);
+    }
+    public APIRequestGetLiveVideos requestRecommendedEncoderSettingsField (boolean value) {
+      this.requestField("recommended_encoder_settings", value);
       return this;
     }
     public APIRequestGetLiveVideos requestSecondsLeftField () {
@@ -18105,10 +18190,12 @@ public class Page extends APINode {
       "members",
       "merchant_id",
       "merchant_review_status",
+      "messaging_feature_status",
       "messenger_ads_default_icebreakers",
       "messenger_ads_default_page_welcome_message",
       "messenger_ads_default_quick_replies",
       "messenger_ads_quick_replies_type",
+      "mini_shop_storefront",
       "mission",
       "mpg",
       "name",
@@ -18832,6 +18919,13 @@ public class Page extends APINode {
       this.requestField("merchant_review_status", value);
       return this;
     }
+    public APIRequestGetLocations requestMessagingFeatureStatusField () {
+      return this.requestMessagingFeatureStatusField(true);
+    }
+    public APIRequestGetLocations requestMessagingFeatureStatusField (boolean value) {
+      this.requestField("messaging_feature_status", value);
+      return this;
+    }
     public APIRequestGetLocations requestMessengerAdsDefaultIcebreakersField () {
       return this.requestMessengerAdsDefaultIcebreakersField(true);
     }
@@ -18858,6 +18952,13 @@ public class Page extends APINode {
     }
     public APIRequestGetLocations requestMessengerAdsQuickRepliesTypeField (boolean value) {
       this.requestField("messenger_ads_quick_replies_type", value);
+      return this;
+    }
+    public APIRequestGetLocations requestMiniShopStorefrontField () {
+      return this.requestMiniShopStorefrontField(true);
+    }
+    public APIRequestGetLocations requestMiniShopStorefrontField (boolean value) {
+      this.requestField("mini_shop_storefront", value);
       return this;
     }
     public APIRequestGetLocations requestMissionField () {
@@ -33780,10 +33881,12 @@ public class Page extends APINode {
       "members",
       "merchant_id",
       "merchant_review_status",
+      "messaging_feature_status",
       "messenger_ads_default_icebreakers",
       "messenger_ads_default_page_welcome_message",
       "messenger_ads_default_quick_replies",
       "messenger_ads_quick_replies_type",
+      "mini_shop_storefront",
       "mission",
       "mpg",
       "name",
@@ -34512,6 +34615,13 @@ public class Page extends APINode {
       this.requestField("merchant_review_status", value);
       return this;
     }
+    public APIRequestGet requestMessagingFeatureStatusField () {
+      return this.requestMessagingFeatureStatusField(true);
+    }
+    public APIRequestGet requestMessagingFeatureStatusField (boolean value) {
+      this.requestField("messaging_feature_status", value);
+      return this;
+    }
     public APIRequestGet requestMessengerAdsDefaultIcebreakersField () {
       return this.requestMessengerAdsDefaultIcebreakersField(true);
     }
@@ -34538,6 +34648,13 @@ public class Page extends APINode {
     }
     public APIRequestGet requestMessengerAdsQuickRepliesTypeField (boolean value) {
       this.requestField("messenger_ads_quick_replies_type", value);
+      return this;
+    }
+    public APIRequestGet requestMiniShopStorefrontField () {
+      return this.requestMiniShopStorefrontField(true);
+    }
+    public APIRequestGet requestMiniShopStorefrontField (boolean value) {
+      this.requestField("mini_shop_storefront", value);
       return this;
     }
     public APIRequestGet requestMissionField () {
@@ -36513,6 +36630,8 @@ public class Page extends APINode {
   }
 
   public static enum EnumActionReason {
+      @SerializedName("ARTICLE_17_PREFLAGGING")
+      VALUE_ARTICLE_17_PREFLAGGING("ARTICLE_17_PREFLAGGING"),
       @SerializedName("ARTIST_OBJECTION")
       VALUE_ARTIST_OBJECTION("ARTIST_OBJECTION"),
       @SerializedName("OBJECTIONABLE_CONTENT")
@@ -36713,10 +36832,12 @@ public class Page extends APINode {
     this.mMembers = instance.mMembers;
     this.mMerchantId = instance.mMerchantId;
     this.mMerchantReviewStatus = instance.mMerchantReviewStatus;
+    this.mMessagingFeatureStatus = instance.mMessagingFeatureStatus;
     this.mMessengerAdsDefaultIcebreakers = instance.mMessengerAdsDefaultIcebreakers;
     this.mMessengerAdsDefaultPageWelcomeMessage = instance.mMessengerAdsDefaultPageWelcomeMessage;
     this.mMessengerAdsDefaultQuickReplies = instance.mMessengerAdsDefaultQuickReplies;
     this.mMessengerAdsQuickRepliesType = instance.mMessengerAdsQuickRepliesType;
+    this.mMiniShopStorefront = instance.mMiniShopStorefront;
     this.mMission = instance.mMission;
     this.mMpg = instance.mMpg;
     this.mName = instance.mName;

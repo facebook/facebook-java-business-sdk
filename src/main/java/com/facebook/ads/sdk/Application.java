@@ -606,10 +606,6 @@ public class Application extends APINode {
     return new APIRequestCreatePageActivity(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestDeletePaymentCurrencies deletePaymentCurrencies() {
-    return new APIRequestDeletePaymentCurrencies(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestCreatePaymentCurrency createPaymentCurrency() {
     return new APIRequestCreatePaymentCurrency(this.getPrefixedId().toString(), context);
   }
@@ -5375,6 +5371,7 @@ public class Application extends APINode {
       "place",
       "scheduled_publish_time",
       "start_time",
+      "ticket_setting",
       "ticket_uri",
       "ticket_uri_start_sales_time",
       "ticketing_privacy_uri",
@@ -5678,6 +5675,13 @@ public class Application extends APINode {
     }
     public APIRequestGetEvents requestStartTimeField (boolean value) {
       this.requestField("start_time", value);
+      return this;
+    }
+    public APIRequestGetEvents requestTicketSettingField () {
+      return this.requestTicketSettingField(true);
+    }
+    public APIRequestGetEvents requestTicketSettingField (boolean value) {
+      this.requestField("ticket_setting", value);
       return this;
     }
     public APIRequestGetEvents requestTicketUriField () {
@@ -7185,116 +7189,6 @@ public class Application extends APINode {
 
     @Override
     public APIRequestCreatePageActivity requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestDeletePaymentCurrencies extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "currency_url",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestDeletePaymentCurrencies.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestDeletePaymentCurrencies(String nodeId, APIContext context) {
-      super(context, nodeId, "/payment_currencies", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDeletePaymentCurrencies setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeletePaymentCurrencies setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDeletePaymentCurrencies setCurrencyUrl (String currencyUrl) {
-      this.setParam("currency_url", currencyUrl);
-      return this;
-    }
-
-    public APIRequestDeletePaymentCurrencies requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDeletePaymentCurrencies requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeletePaymentCurrencies requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDeletePaymentCurrencies requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeletePaymentCurrencies requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeletePaymentCurrencies requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -10418,6 +10312,8 @@ public class Application extends APINode {
       VALUE_WEB("WEB"),
       @SerializedName("WINDOWS")
       VALUE_WINDOWS("WINDOWS"),
+      @SerializedName("XIAOMI")
+      VALUE_XIAOMI("XIAOMI"),
       ;
 
       private String value;
@@ -10437,6 +10333,8 @@ public class Application extends APINode {
       VALUE_ANDROID("ANDROID"),
       @SerializedName("DESKTOP")
       VALUE_DESKTOP("DESKTOP"),
+      @SerializedName("GALAXY")
+      VALUE_GALAXY("GALAXY"),
       @SerializedName("INSTANT_ARTICLES")
       VALUE_INSTANT_ARTICLES("INSTANT_ARTICLES"),
       @SerializedName("IOS")

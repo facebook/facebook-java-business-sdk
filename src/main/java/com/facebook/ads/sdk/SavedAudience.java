@@ -61,6 +61,10 @@ public class SavedAudience extends APINode {
   private Long mApproximateCount = null;
   @SerializedName("approximate_count_64bit")
   private Long mApproximateCount64bit = null;
+  @SerializedName("approximate_count_lower_bound")
+  private Long mApproximateCountLowerBound = null;
+  @SerializedName("approximate_count_upper_bound")
+  private Long mApproximateCountUpperBound = null;
   @SerializedName("delete_time")
   private Long mDeleteTime = null;
   @SerializedName("description")
@@ -316,6 +320,14 @@ public class SavedAudience extends APINode {
     return mApproximateCount64bit;
   }
 
+  public Long getFieldApproximateCountLowerBound() {
+    return mApproximateCountLowerBound;
+  }
+
+  public Long getFieldApproximateCountUpperBound() {
+    return mApproximateCountUpperBound;
+  }
+
   public Long getFieldDeleteTime() {
     return mDeleteTime;
   }
@@ -384,6 +396,8 @@ public class SavedAudience extends APINode {
       "account",
       "approximate_count",
       "approximate_count_64bit",
+      "approximate_count_lower_bound",
+      "approximate_count_upper_bound",
       "delete_time",
       "description",
       "extra_info",
@@ -509,6 +523,20 @@ public class SavedAudience extends APINode {
       this.requestField("approximate_count_64bit", value);
       return this;
     }
+    public APIRequestGet requestApproximateCountLowerBoundField () {
+      return this.requestApproximateCountLowerBoundField(true);
+    }
+    public APIRequestGet requestApproximateCountLowerBoundField (boolean value) {
+      this.requestField("approximate_count_lower_bound", value);
+      return this;
+    }
+    public APIRequestGet requestApproximateCountUpperBoundField () {
+      return this.requestApproximateCountUpperBoundField(true);
+    }
+    public APIRequestGet requestApproximateCountUpperBoundField (boolean value) {
+      this.requestField("approximate_count_upper_bound", value);
+      return this;
+    }
     public APIRequestGet requestDeleteTimeField () {
       return this.requestDeleteTimeField(true);
     }
@@ -620,6 +648,8 @@ public class SavedAudience extends APINode {
     this.mAccount = instance.mAccount;
     this.mApproximateCount = instance.mApproximateCount;
     this.mApproximateCount64bit = instance.mApproximateCount64bit;
+    this.mApproximateCountLowerBound = instance.mApproximateCountLowerBound;
+    this.mApproximateCountUpperBound = instance.mApproximateCountUpperBound;
     this.mDeleteTime = instance.mDeleteTime;
     this.mDescription = instance.mDescription;
     this.mExtraInfo = instance.mExtraInfo;

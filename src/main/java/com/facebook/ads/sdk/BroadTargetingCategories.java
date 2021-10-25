@@ -67,6 +67,10 @@ public class BroadTargetingCategories extends APINode {
   private List<String> mPath = null;
   @SerializedName("size")
   private Long mSize = null;
+  @SerializedName("size_lower_bound")
+  private Long mSizeLowerBound = null;
+  @SerializedName("size_upper_bound")
+  private Long mSizeUpperBound = null;
   @SerializedName("source")
   private String mSource = null;
   @SerializedName("type")
@@ -282,6 +286,24 @@ public class BroadTargetingCategories extends APINode {
     return this;
   }
 
+  public Long getFieldSizeLowerBound() {
+    return mSizeLowerBound;
+  }
+
+  public BroadTargetingCategories setFieldSizeLowerBound(Long value) {
+    this.mSizeLowerBound = value;
+    return this;
+  }
+
+  public Long getFieldSizeUpperBound() {
+    return mSizeUpperBound;
+  }
+
+  public BroadTargetingCategories setFieldSizeUpperBound(Long value) {
+    this.mSizeUpperBound = value;
+    return this;
+  }
+
   public String getFieldSource() {
     return mSource;
   }
@@ -350,6 +372,8 @@ public class BroadTargetingCategories extends APINode {
     this.mParentCategory = instance.mParentCategory;
     this.mPath = instance.mPath;
     this.mSize = instance.mSize;
+    this.mSizeLowerBound = instance.mSizeLowerBound;
+    this.mSizeUpperBound = instance.mSizeUpperBound;
     this.mSource = instance.mSource;
     this.mType = instance.mType;
     this.mTypeName = instance.mTypeName;

@@ -305,6 +305,8 @@ public class ContentDeliveryReport extends APINode {
       VALUE_FACEBOOK_GROUPS_FEED("FACEBOOK_GROUPS_FEED"),
       @SerializedName("FACEBOOK_REELS")
       VALUE_FACEBOOK_REELS("FACEBOOK_REELS"),
+      @SerializedName("FACEBOOK_REELS_OVERLAY")
+      VALUE_FACEBOOK_REELS_OVERLAY("FACEBOOK_REELS_OVERLAY"),
       @SerializedName("FACEBOOK_STORIES")
       VALUE_FACEBOOK_STORIES("FACEBOOK_STORIES"),
       @SerializedName("FEED")
