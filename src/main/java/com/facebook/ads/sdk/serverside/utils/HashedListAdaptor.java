@@ -77,6 +77,10 @@ public abstract class HashedListAdaptor<T> extends TypeAdapter<List<T>> {
             }
         }
 
+        if(hashedValues.isEmpty()){
+            writer.nullValue();
+            return;
+        }
         // Now actually write to Gson
         writer.beginArray();
         for (String hashedVal : hashedValues) {

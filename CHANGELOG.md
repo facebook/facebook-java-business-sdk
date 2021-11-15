@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Added
+- Ignore empty UserData fields when serializing
+
 ## v11.0.0
 
 
