@@ -1731,6 +1731,10 @@ public class AdReportRun extends APINode {
       VALUE_DDA("dda"),
       @SerializedName("default")
       VALUE_DEFAULT("default"),
+      @SerializedName("skan_click")
+      VALUE_SKAN_CLICK("skan_click"),
+      @SerializedName("skan_view")
+      VALUE_SKAN_VIEW("skan_view"),
       ;
 
       private String value;
@@ -1865,6 +1869,8 @@ public class AdReportRun extends APINode {
   }
 
   public static enum EnumDatePreset {
+      @SerializedName("data_maximum")
+      VALUE_DATA_MAXIMUM("data_maximum"),
       @SerializedName("last_14d")
       VALUE_LAST_14D("last_14d"),
       @SerializedName("last_28d")

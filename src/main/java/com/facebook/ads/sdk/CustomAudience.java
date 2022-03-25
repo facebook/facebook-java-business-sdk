@@ -57,8 +57,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class CustomAudience extends APINode {
   @SerializedName("account_id")
   private String mAccountId = null;
-  @SerializedName("approximate_count")
-  private Long mApproximateCount = null;
   @SerializedName("approximate_count_lower_bound")
   private Long mApproximateCountLowerBound = null;
   @SerializedName("approximate_count_upper_bound")
@@ -393,10 +391,6 @@ public class CustomAudience extends APINode {
 
   public String getFieldAccountId() {
     return mAccountId;
-  }
-
-  public Long getFieldApproximateCount() {
-    return mApproximateCount;
   }
 
   public Long getFieldApproximateCountLowerBound() {
@@ -2622,7 +2616,6 @@ public class CustomAudience extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
-      "approximate_count",
       "approximate_count_lower_bound",
       "approximate_count_upper_bound",
       "customer_file_source",
@@ -2770,13 +2763,6 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGet requestAccountIdField (boolean value) {
       this.requestField("account_id", value);
-      return this;
-    }
-    public APIRequestGet requestApproximateCountField () {
-      return this.requestApproximateCountField(true);
-    }
-    public APIRequestGet requestApproximateCountField (boolean value) {
-      this.requestField("approximate_count", value);
       return this;
     }
     public APIRequestGet requestApproximateCountLowerBoundField () {
@@ -3456,6 +3442,25 @@ public class CustomAudience extends APINode {
       }
   }
 
+  public static enum EnumActionSource {
+      @SerializedName("PHYSICAL_STORE")
+      VALUE_PHYSICAL_STORE("PHYSICAL_STORE"),
+      @SerializedName("WEBSITE")
+      VALUE_WEBSITE("WEBSITE"),
+      ;
+
+      private String value;
+
+      private EnumActionSource(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -3472,7 +3477,6 @@ public class CustomAudience extends APINode {
 
   public CustomAudience copyFrom(CustomAudience instance) {
     this.mAccountId = instance.mAccountId;
-    this.mApproximateCount = instance.mApproximateCount;
     this.mApproximateCountLowerBound = instance.mApproximateCountLowerBound;
     this.mApproximateCountUpperBound = instance.mApproximateCountUpperBound;
     this.mCustomerFileSource = instance.mCustomerFileSource;

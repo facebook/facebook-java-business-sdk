@@ -302,6 +302,10 @@ public class WhatsAppBusinessAccount extends APINode {
     return new APIRequestCreateAssignedUser(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetConversationAnalytics getConversationAnalytics() {
+    return new APIRequestGetConversationAnalytics(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestDeleteMessageTemplates deleteMessageTemplates() {
     return new APIRequestDeleteMessageTemplates(this.getPrefixedId().toString(), context);
   }
@@ -779,6 +783,200 @@ public class WhatsAppBusinessAccount extends APINode {
 
     @Override
     public APIRequestCreateAssignedUser requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetConversationAnalytics extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "conversation_directions",
+      "conversation_types",
+      "country_codes",
+      "dimensions",
+      "end",
+      "granularity",
+      "metric_types",
+      "phone_numbers",
+      "start",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetConversationAnalytics.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetConversationAnalytics(String nodeId, APIContext context) {
+      super(context, nodeId, "/conversation_analytics", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetConversationAnalytics setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConversationAnalytics setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetConversationAnalytics setConversationDirections (List<EnumConversationDirections> conversationDirections) {
+      this.setParam("conversation_directions", conversationDirections);
+      return this;
+    }
+    public APIRequestGetConversationAnalytics setConversationDirections (String conversationDirections) {
+      this.setParam("conversation_directions", conversationDirections);
+      return this;
+    }
+
+    public APIRequestGetConversationAnalytics setConversationTypes (List<EnumConversationTypes> conversationTypes) {
+      this.setParam("conversation_types", conversationTypes);
+      return this;
+    }
+    public APIRequestGetConversationAnalytics setConversationTypes (String conversationTypes) {
+      this.setParam("conversation_types", conversationTypes);
+      return this;
+    }
+
+    public APIRequestGetConversationAnalytics setCountryCodes (List<String> countryCodes) {
+      this.setParam("country_codes", countryCodes);
+      return this;
+    }
+    public APIRequestGetConversationAnalytics setCountryCodes (String countryCodes) {
+      this.setParam("country_codes", countryCodes);
+      return this;
+    }
+
+    public APIRequestGetConversationAnalytics setDimensions (List<EnumDimensions> dimensions) {
+      this.setParam("dimensions", dimensions);
+      return this;
+    }
+    public APIRequestGetConversationAnalytics setDimensions (String dimensions) {
+      this.setParam("dimensions", dimensions);
+      return this;
+    }
+
+    public APIRequestGetConversationAnalytics setEnd (Long end) {
+      this.setParam("end", end);
+      return this;
+    }
+    public APIRequestGetConversationAnalytics setEnd (String end) {
+      this.setParam("end", end);
+      return this;
+    }
+
+    public APIRequestGetConversationAnalytics setGranularity (EnumGranularity granularity) {
+      this.setParam("granularity", granularity);
+      return this;
+    }
+    public APIRequestGetConversationAnalytics setGranularity (String granularity) {
+      this.setParam("granularity", granularity);
+      return this;
+    }
+
+    public APIRequestGetConversationAnalytics setMetricTypes (List<EnumMetricTypes> metricTypes) {
+      this.setParam("metric_types", metricTypes);
+      return this;
+    }
+    public APIRequestGetConversationAnalytics setMetricTypes (String metricTypes) {
+      this.setParam("metric_types", metricTypes);
+      return this;
+    }
+
+    public APIRequestGetConversationAnalytics setPhoneNumbers (List<String> phoneNumbers) {
+      this.setParam("phone_numbers", phoneNumbers);
+      return this;
+    }
+    public APIRequestGetConversationAnalytics setPhoneNumbers (String phoneNumbers) {
+      this.setParam("phone_numbers", phoneNumbers);
+      return this;
+    }
+
+    public APIRequestGetConversationAnalytics setStart (Long start) {
+      this.setParam("start", start);
+      return this;
+    }
+    public APIRequestGetConversationAnalytics setStart (String start) {
+      this.setParam("start", start);
+      return this;
+    }
+
+    public APIRequestGetConversationAnalytics requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetConversationAnalytics requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConversationAnalytics requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetConversationAnalytics requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConversationAnalytics requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetConversationAnalytics requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -2391,6 +2589,8 @@ public class WhatsAppBusinessAccount extends APINode {
       VALUE_AUTO_REPLY("AUTO_REPLY"),
       @SerializedName("ISSUE_RESOLUTION")
       VALUE_ISSUE_RESOLUTION("ISSUE_RESOLUTION"),
+      @SerializedName("OTP")
+      VALUE_OTP("OTP"),
       @SerializedName("PAYMENT_UPDATE")
       VALUE_PAYMENT_UPDATE("PAYMENT_UPDATE"),
       @SerializedName("PERSONAL_FINANCE_UPDATE")
@@ -2408,6 +2608,117 @@ public class WhatsAppBusinessAccount extends APINode {
       private String value;
 
       private EnumCategory(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumConversationDirections {
+      @SerializedName("BUSINESS_INITIATED")
+      VALUE_BUSINESS_INITIATED("BUSINESS_INITIATED"),
+      @SerializedName("UNKNOWN")
+      VALUE_UNKNOWN("UNKNOWN"),
+      @SerializedName("USER_INITIATED")
+      VALUE_USER_INITIATED("USER_INITIATED"),
+      ;
+
+      private String value;
+
+      private EnumConversationDirections(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumConversationTypes {
+      @SerializedName("FREE_ENTRY_POINT")
+      VALUE_FREE_ENTRY_POINT("FREE_ENTRY_POINT"),
+      @SerializedName("FREE_TIER")
+      VALUE_FREE_TIER("FREE_TIER"),
+      @SerializedName("REGULAR")
+      VALUE_REGULAR("REGULAR"),
+      @SerializedName("UNKNOWN")
+      VALUE_UNKNOWN("UNKNOWN"),
+      ;
+
+      private String value;
+
+      private EnumConversationTypes(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumDimensions {
+      @SerializedName("CONVERSATION_DIRECTION")
+      VALUE_CONVERSATION_DIRECTION("CONVERSATION_DIRECTION"),
+      @SerializedName("CONVERSATION_TYPE")
+      VALUE_CONVERSATION_TYPE("CONVERSATION_TYPE"),
+      @SerializedName("COUNTRY")
+      VALUE_COUNTRY("COUNTRY"),
+      @SerializedName("PHONE")
+      VALUE_PHONE("PHONE"),
+      @SerializedName("UNKNOWN")
+      VALUE_UNKNOWN("UNKNOWN"),
+      ;
+
+      private String value;
+
+      private EnumDimensions(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumGranularity {
+      @SerializedName("DAILY")
+      VALUE_DAILY("DAILY"),
+      @SerializedName("HALF_HOUR")
+      VALUE_HALF_HOUR("HALF_HOUR"),
+      @SerializedName("MONTHLY")
+      VALUE_MONTHLY("MONTHLY"),
+      ;
+
+      private String value;
+
+      private EnumGranularity(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumMetricTypes {
+      @SerializedName("CONVERSATION")
+      VALUE_CONVERSATION("CONVERSATION"),
+      @SerializedName("COST")
+      VALUE_COST("COST"),
+      @SerializedName("UNKNOWN")
+      VALUE_UNKNOWN("UNKNOWN"),
+      ;
+
+      private String value;
+
+      private EnumMetricTypes(String value) {
         this.value = value;
       }
 

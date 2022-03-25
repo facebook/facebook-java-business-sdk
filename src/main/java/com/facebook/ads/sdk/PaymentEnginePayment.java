@@ -81,6 +81,8 @@ public class PaymentEnginePayment extends APINode {
   private Double mPayoutForeignExchangeRate = null;
   @SerializedName("phone_support_eligible")
   private Boolean mPhoneSupportEligible = null;
+  @SerializedName("platform")
+  private String mPlatform = null;
   @SerializedName("refundable_amount")
   private CurrencyAmount mRefundableAmount = null;
   @SerializedName("request_id")
@@ -368,6 +370,10 @@ public class PaymentEnginePayment extends APINode {
 
   public Boolean getFieldPhoneSupportEligible() {
     return mPhoneSupportEligible;
+  }
+
+  public String getFieldPlatform() {
+    return mPlatform;
   }
 
   public CurrencyAmount getFieldRefundableAmount() {
@@ -667,6 +673,7 @@ public class PaymentEnginePayment extends APINode {
       "items",
       "payout_foreign_exchange_rate",
       "phone_support_eligible",
+      "platform",
       "refundable_amount",
       "request_id",
       "tax",
@@ -855,6 +862,13 @@ public class PaymentEnginePayment extends APINode {
       this.requestField("phone_support_eligible", value);
       return this;
     }
+    public APIRequestGet requestPlatformField () {
+      return this.requestPlatformField(true);
+    }
+    public APIRequestGet requestPlatformField (boolean value) {
+      this.requestField("platform", value);
+      return this;
+    }
     public APIRequestGet requestRefundableAmountField () {
       return this.requestRefundableAmountField(true);
     }
@@ -948,6 +962,7 @@ public class PaymentEnginePayment extends APINode {
     this.mItems = instance.mItems;
     this.mPayoutForeignExchangeRate = instance.mPayoutForeignExchangeRate;
     this.mPhoneSupportEligible = instance.mPhoneSupportEligible;
+    this.mPlatform = instance.mPlatform;
     this.mRefundableAmount = instance.mRefundableAmount;
     this.mRequestId = instance.mRequestId;
     this.mTax = instance.mTax;

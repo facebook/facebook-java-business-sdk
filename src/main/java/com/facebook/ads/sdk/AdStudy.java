@@ -555,6 +555,7 @@ public class AdStudy extends APINode {
       "latest_status_update_time",
       "server_ips",
       "status",
+      "tier",
     };
 
     @Override
@@ -686,6 +687,13 @@ public class AdStudy extends APINode {
     }
     public APIRequestGetInstances requestStatusField (boolean value) {
       this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGetInstances requestTierField () {
+      return this.requestTierField(true);
+    }
+    public APIRequestGetInstances requestTierField (boolean value) {
+      this.requestField("tier", value);
       return this;
     }
   }

@@ -54,29 +54,23 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class BilledAmountDetails extends APINode {
-  @SerializedName("currency")
-  private String mCurrency = null;
-  @SerializedName("net_amount")
-  private String mNetAmount = null;
-  @SerializedName("tax_amount")
-  private String mTaxAmount = null;
-  @SerializedName("total_amount")
-  private String mTotalAmount = null;
+public class OfflineConversionDataSetUsage extends APINode {
+  @SerializedName("num_lift_studies")
+  private Long mNumLiftStudies = null;
   protected static Gson gson = null;
 
-  public BilledAmountDetails() {
+  public OfflineConversionDataSetUsage() {
   }
 
   public String getId() {
     return null;
   }
-  public static BilledAmountDetails loadJSON(String json, APIContext context, String header) {
-    BilledAmountDetails billedAmountDetails = getGson().fromJson(json, BilledAmountDetails.class);
+  public static OfflineConversionDataSetUsage loadJSON(String json, APIContext context, String header) {
+    OfflineConversionDataSetUsage offlineConversionDataSetUsage = getGson().fromJson(json, OfflineConversionDataSetUsage.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(billedAmountDetails.toString());
+      JsonElement o2 = parser.parse(offlineConversionDataSetUsage.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -86,14 +80,14 @@ public class BilledAmountDetails extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    billedAmountDetails.context = context;
-    billedAmountDetails.rawValue = json;
-    billedAmountDetails.header = header;
-    return billedAmountDetails;
+    offlineConversionDataSetUsage.context = context;
+    offlineConversionDataSetUsage.rawValue = json;
+    offlineConversionDataSetUsage.header = header;
+    return offlineConversionDataSetUsage;
   }
 
-  public static APINodeList<BilledAmountDetails> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<BilledAmountDetails> billedAmountDetailss = new APINodeList<BilledAmountDetails>(request, json, header);
+  public static APINodeList<OfflineConversionDataSetUsage> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<OfflineConversionDataSetUsage> offlineConversionDataSetUsages = new APINodeList<OfflineConversionDataSetUsage>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -104,9 +98,9 @@ public class BilledAmountDetails extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          billedAmountDetailss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          offlineConversionDataSetUsages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return billedAmountDetailss;
+        return offlineConversionDataSetUsages;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -116,20 +110,20 @@ public class BilledAmountDetails extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                billedAmountDetailss.setCursors(before, after);
+                offlineConversionDataSetUsages.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            billedAmountDetailss.setPaging(previous, next);
+            offlineConversionDataSetUsages.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              billedAmountDetailss.setAppSecret(context.getAppSecretProof());
+              offlineConversionDataSetUsages.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              billedAmountDetailss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              offlineConversionDataSetUsages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -140,23 +134,23 @@ public class BilledAmountDetails extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  billedAmountDetailss.add(loadJSON(entry.getValue().toString(), context, header));
+                  offlineConversionDataSetUsages.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              billedAmountDetailss.add(loadJSON(obj.toString(), context, header));
+              offlineConversionDataSetUsages.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return billedAmountDetailss;
+          return offlineConversionDataSetUsages;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              billedAmountDetailss.add(loadJSON(entry.getValue().toString(), context, header));
+              offlineConversionDataSetUsages.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return billedAmountDetailss;
+          return offlineConversionDataSetUsages;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -173,20 +167,20 @@ public class BilledAmountDetails extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              billedAmountDetailss.add(loadJSON(value.toString(), context, header));
+              offlineConversionDataSetUsages.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return billedAmountDetailss;
+            return offlineConversionDataSetUsages;
           }
 
           // Sixth, check if it's pure JsonObject
-          billedAmountDetailss.clear();
-          billedAmountDetailss.add(loadJSON(json, context, header));
-          return billedAmountDetailss;
+          offlineConversionDataSetUsages.clear();
+          offlineConversionDataSetUsages.add(loadJSON(json, context, header));
+          return offlineConversionDataSetUsages;
         }
       }
     } catch (Exception e) {
@@ -214,39 +208,12 @@ public class BilledAmountDetails extends APINode {
   }
 
 
-  public String getFieldCurrency() {
-    return mCurrency;
+  public Long getFieldNumLiftStudies() {
+    return mNumLiftStudies;
   }
 
-  public BilledAmountDetails setFieldCurrency(String value) {
-    this.mCurrency = value;
-    return this;
-  }
-
-  public String getFieldNetAmount() {
-    return mNetAmount;
-  }
-
-  public BilledAmountDetails setFieldNetAmount(String value) {
-    this.mNetAmount = value;
-    return this;
-  }
-
-  public String getFieldTaxAmount() {
-    return mTaxAmount;
-  }
-
-  public BilledAmountDetails setFieldTaxAmount(String value) {
-    this.mTaxAmount = value;
-    return this;
-  }
-
-  public String getFieldTotalAmount() {
-    return mTotalAmount;
-  }
-
-  public BilledAmountDetails setFieldTotalAmount(String value) {
-    this.mTotalAmount = value;
+  public OfflineConversionDataSetUsage setFieldNumLiftStudies(Long value) {
+    this.mNumLiftStudies = value;
     return this;
   }
 
@@ -266,20 +233,17 @@ public class BilledAmountDetails extends APINode {
     return gson;
   }
 
-  public BilledAmountDetails copyFrom(BilledAmountDetails instance) {
-    this.mCurrency = instance.mCurrency;
-    this.mNetAmount = instance.mNetAmount;
-    this.mTaxAmount = instance.mTaxAmount;
-    this.mTotalAmount = instance.mTotalAmount;
+  public OfflineConversionDataSetUsage copyFrom(OfflineConversionDataSetUsage instance) {
+    this.mNumLiftStudies = instance.mNumLiftStudies;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<BilledAmountDetails> getParser() {
-    return new APIRequest.ResponseParser<BilledAmountDetails>() {
-      public APINodeList<BilledAmountDetails> parseResponse(String response, APIContext context, APIRequest<BilledAmountDetails> request, String header) throws MalformedResponseException {
-        return BilledAmountDetails.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<OfflineConversionDataSetUsage> getParser() {
+    return new APIRequest.ResponseParser<OfflineConversionDataSetUsage>() {
+      public APINodeList<OfflineConversionDataSetUsage> parseResponse(String response, APIContext context, APIRequest<OfflineConversionDataSetUsage> request, String header) throws MalformedResponseException {
+        return OfflineConversionDataSetUsage.parseResponse(response, context, request, header);
       }
     };
   }

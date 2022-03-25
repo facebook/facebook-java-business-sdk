@@ -352,6 +352,7 @@ public class AdLabel extends APINode {
       "call_to_action_type",
       "categorization_criteria",
       "category_media_source",
+      "collaborative_ads_lsb_image_bank_id",
       "destination_set_id",
       "dynamic_ad_voice",
       "effective_authorization_category",
@@ -381,6 +382,7 @@ public class AdLabel extends APINode {
       "object_story_spec",
       "object_type",
       "object_url",
+      "omnichannel_link_spec",
       "place_page_set_id",
       "platform_customizations",
       "playable_asset_id",
@@ -391,6 +393,7 @@ public class AdLabel extends APINode {
       "status",
       "template_url",
       "template_url_spec",
+      "thumbnail_id",
       "thumbnail_url",
       "title",
       "url_tags",
@@ -576,6 +579,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdCreatives requestCategoryMediaSourceField (boolean value) {
       this.requestField("category_media_source", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestCollaborativeAdsLsbImageBankIdField () {
+      return this.requestCollaborativeAdsLsbImageBankIdField(true);
+    }
+    public APIRequestGetAdCreatives requestCollaborativeAdsLsbImageBankIdField (boolean value) {
+      this.requestField("collaborative_ads_lsb_image_bank_id", value);
       return this;
     }
     public APIRequestGetAdCreatives requestDestinationSetIdField () {
@@ -781,6 +791,13 @@ public class AdLabel extends APINode {
       this.requestField("object_url", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestOmnichannelLinkSpecField () {
+      return this.requestOmnichannelLinkSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestOmnichannelLinkSpecField (boolean value) {
+      this.requestField("omnichannel_link_spec", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestPlacePageSetIdField () {
       return this.requestPlacePageSetIdField(true);
     }
@@ -849,6 +866,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdCreatives requestTemplateUrlSpecField (boolean value) {
       this.requestField("template_url_spec", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestThumbnailIdField () {
+      return this.requestThumbnailIdField(true);
+    }
+    public APIRequestGetAdCreatives requestThumbnailIdField (boolean value) {
+      this.requestField("thumbnail_id", value);
       return this;
     }
     public APIRequestGetAdCreatives requestThumbnailUrlField () {
@@ -1820,6 +1844,7 @@ public class AdLabel extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
+      "ad_strategy_group_id",
       "ad_strategy_id",
       "adlabels",
       "bid_strategy",
@@ -1952,6 +1977,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetCampaigns requestAccountIdField (boolean value) {
       this.requestField("account_id", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestAdStrategyGroupIdField () {
+      return this.requestAdStrategyGroupIdField(true);
+    }
+    public APIRequestGetCampaigns requestAdStrategyGroupIdField (boolean value) {
+      this.requestField("ad_strategy_group_id", value);
       return this;
     }
     public APIRequestGetCampaigns requestAdStrategyIdField () {

@@ -855,8 +855,8 @@ public class Event extends APINode {
       "front_z_rotation",
       "is_audio_only",
       "is_spherical",
-      "live_encoders",
       "original_fov",
+      "planned_start_time",
       "privacy",
       "projection",
       "published",
@@ -989,21 +989,21 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestCreateLiveVideo setLiveEncoders (List<String> liveEncoders) {
-      this.setParam("live_encoders", liveEncoders);
-      return this;
-    }
-    public APIRequestCreateLiveVideo setLiveEncoders (String liveEncoders) {
-      this.setParam("live_encoders", liveEncoders);
-      return this;
-    }
-
     public APIRequestCreateLiveVideo setOriginalFov (Long originalFov) {
       this.setParam("original_fov", originalFov);
       return this;
     }
     public APIRequestCreateLiveVideo setOriginalFov (String originalFov) {
       this.setParam("original_fov", originalFov);
+      return this;
+    }
+
+    public APIRequestCreateLiveVideo setPlannedStartTime (Long plannedStartTime) {
+      this.setParam("planned_start_time", plannedStartTime);
+      return this;
+    }
+    public APIRequestCreateLiveVideo setPlannedStartTime (String plannedStartTime) {
+      this.setParam("planned_start_time", plannedStartTime);
       return this;
     }
 

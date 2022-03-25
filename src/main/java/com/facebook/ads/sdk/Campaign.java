@@ -57,6 +57,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class Campaign extends APINode {
   @SerializedName("account_id")
   private String mAccountId = null;
+  @SerializedName("ad_strategy_group_id")
+  private String mAdStrategyGroupId = null;
   @SerializedName("ad_strategy_id")
   private String mAdStrategyId = null;
   @SerializedName("adlabels")
@@ -393,6 +395,10 @@ public class Campaign extends APINode {
 
   public String getFieldAccountId() {
     return mAccountId;
+  }
+
+  public String getFieldAdStrategyGroupId() {
+    return mAdStrategyGroupId;
   }
 
   public String getFieldAdStrategyId() {
@@ -2298,6 +2304,7 @@ public class Campaign extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
+      "ad_strategy_group_id",
       "ad_strategy_id",
       "adlabels",
       "bid_strategy",
@@ -2466,6 +2473,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetCopies requestAccountIdField (boolean value) {
       this.requestField("account_id", value);
+      return this;
+    }
+    public APIRequestGetCopies requestAdStrategyGroupIdField () {
+      return this.requestAdStrategyGroupIdField(true);
+    }
+    public APIRequestGetCopies requestAdStrategyGroupIdField (boolean value) {
+      this.requestField("ad_strategy_group_id", value);
       return this;
     }
     public APIRequestGetCopies requestAdStrategyIdField () {
@@ -3592,6 +3606,7 @@ public class Campaign extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
+      "ad_strategy_group_id",
       "ad_strategy_id",
       "adlabels",
       "bid_strategy",
@@ -3760,6 +3775,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGet requestAccountIdField (boolean value) {
       this.requestField("account_id", value);
+      return this;
+    }
+    public APIRequestGet requestAdStrategyGroupIdField () {
+      return this.requestAdStrategyGroupIdField(true);
+    }
+    public APIRequestGet requestAdStrategyGroupIdField (boolean value) {
+      this.requestField("ad_strategy_group_id", value);
       return this;
     }
     public APIRequestGet requestAdStrategyIdField () {
@@ -4433,6 +4455,8 @@ public class Campaign extends APINode {
   }
 
   public static enum EnumDatePreset {
+      @SerializedName("data_maximum")
+      VALUE_DATA_MAXIMUM("data_maximum"),
       @SerializedName("last_14d")
       VALUE_LAST_14D("last_14d"),
       @SerializedName("last_28d")
@@ -5195,6 +5219,7 @@ public class Campaign extends APINode {
 
   public Campaign copyFrom(Campaign instance) {
     this.mAccountId = instance.mAccountId;
+    this.mAdStrategyGroupId = instance.mAdStrategyGroupId;
     this.mAdStrategyId = instance.mAdStrategyId;
     this.mAdlabels = instance.mAdlabels;
     this.mBidStrategy = instance.mBidStrategy;

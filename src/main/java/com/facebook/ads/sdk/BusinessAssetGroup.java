@@ -3345,6 +3345,7 @@ public class BusinessAssetGroup extends APINode {
       "is_private",
       "is_published",
       "media_count",
+      "mini_shop_storefront",
       "profile_pic",
       "username",
     };
@@ -3485,6 +3486,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedInstagramAccounts requestMediaCountField (boolean value) {
       this.requestField("media_count", value);
+      return this;
+    }
+    public APIRequestGetContainedInstagramAccounts requestMiniShopStorefrontField () {
+      return this.requestMiniShopStorefrontField(true);
+    }
+    public APIRequestGetContainedInstagramAccounts requestMiniShopStorefrontField (boolean value) {
+      this.requestField("mini_shop_storefront", value);
       return this;
     }
     public APIRequestGetContainedInstagramAccounts requestProfilePicField () {

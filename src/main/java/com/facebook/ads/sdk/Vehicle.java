@@ -1769,18 +1769,38 @@ public class Vehicle extends APINode {
       VALUE_COUPE("COUPE"),
       @SerializedName("CROSSOVER")
       VALUE_CROSSOVER("CROSSOVER"),
+      @SerializedName("ESTATE")
+      VALUE_ESTATE("ESTATE"),
+      @SerializedName("GRANDTOURER")
+      VALUE_GRANDTOURER("GRANDTOURER"),
       @SerializedName("HATCHBACK")
       VALUE_HATCHBACK("HATCHBACK"),
+      @SerializedName("MINIBUS")
+      VALUE_MINIBUS("MINIBUS"),
       @SerializedName("MINIVAN")
       VALUE_MINIVAN("MINIVAN"),
+      @SerializedName("MPV")
+      VALUE_MPV("MPV"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
       @SerializedName("OTHER")
       VALUE_OTHER("OTHER"),
+      @SerializedName("PICKUP")
+      VALUE_PICKUP("PICKUP"),
+      @SerializedName("ROADSTER")
+      VALUE_ROADSTER("ROADSTER"),
+      @SerializedName("SALOON")
+      VALUE_SALOON("SALOON"),
       @SerializedName("SEDAN")
       VALUE_SEDAN("SEDAN"),
       @SerializedName("SMALL_CAR")
       VALUE_SMALL_CAR("SMALL_CAR"),
+      @SerializedName("SPORTSCAR")
+      VALUE_SPORTSCAR("SPORTSCAR"),
+      @SerializedName("SUPERCAR")
+      VALUE_SUPERCAR("SUPERCAR"),
+      @SerializedName("SUPERMINI")
+      VALUE_SUPERMINI("SUPERMINI"),
       @SerializedName("SUV")
       VALUE_SUV("SUV"),
       @SerializedName("TRUCK")

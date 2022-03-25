@@ -657,31 +657,6 @@ public class ProductFeedRule extends APINode {
 
   }
 
-  public static enum EnumRuleType {
-      @SerializedName("fallback_rule")
-      VALUE_FALLBACK_RULE("fallback_rule"),
-      @SerializedName("letter_case_rule")
-      VALUE_LETTER_CASE_RULE("letter_case_rule"),
-      @SerializedName("mapping_rule")
-      VALUE_MAPPING_RULE("mapping_rule"),
-      @SerializedName("regex_replace_rule")
-      VALUE_REGEX_REPLACE_RULE("regex_replace_rule"),
-      @SerializedName("value_mapping_rule")
-      VALUE_VALUE_MAPPING_RULE("value_mapping_rule"),
-      ;
-
-      private String value;
-
-      private EnumRuleType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {

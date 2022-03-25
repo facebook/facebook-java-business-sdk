@@ -54,66 +54,76 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class BusinessAgreement extends APINode {
+public class CPASMerchantConfig extends APINode {
+  @SerializedName("accepted_tos")
+  private Boolean mAcceptedTos = null;
+  @SerializedName("beta_features")
+  private List<String> mBetaFeatures = null;
+  @SerializedName("business_outcomes_status")
+  private Map<String, String> mBusinessOutcomesStatus = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("request_status")
-  private String mRequestStatus = null;
+  @SerializedName("is_test_merchant")
+  private Boolean mIsTestMerchant = null;
+  @SerializedName("outcomes_compliance_status")
+  private Map<String, Object> mOutcomesComplianceStatus = null;
+  @SerializedName("qualified_to_onboard")
+  private Boolean mQualifiedToOnboard = null;
   protected static Gson gson = null;
 
-  BusinessAgreement() {
+  CPASMerchantConfig() {
   }
 
-  public BusinessAgreement(Long id, APIContext context) {
+  public CPASMerchantConfig(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public BusinessAgreement(String id, APIContext context) {
+  public CPASMerchantConfig(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public BusinessAgreement fetch() throws APIException{
-    BusinessAgreement newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public CPASMerchantConfig fetch() throws APIException{
+    CPASMerchantConfig newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static BusinessAgreement fetchById(Long id, APIContext context) throws APIException {
+  public static CPASMerchantConfig fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<BusinessAgreement> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<CPASMerchantConfig> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static BusinessAgreement fetchById(String id, APIContext context) throws APIException {
+  public static CPASMerchantConfig fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<BusinessAgreement> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<CPASMerchantConfig> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<BusinessAgreement> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<BusinessAgreement>)(
-      new APIRequest<BusinessAgreement>(context, "", "/", "GET", BusinessAgreement.getParser())
+  public static APINodeList<CPASMerchantConfig> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<CPASMerchantConfig>)(
+      new APIRequest<CPASMerchantConfig>(context, "", "/", "GET", CPASMerchantConfig.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<BusinessAgreement>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<CPASMerchantConfig>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", BusinessAgreement.getParser())
+      new APIRequest(context, "", "/", "GET", CPASMerchantConfig.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -126,12 +136,12 @@ public class BusinessAgreement extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static BusinessAgreement loadJSON(String json, APIContext context, String header) {
-    BusinessAgreement businessAgreement = getGson().fromJson(json, BusinessAgreement.class);
+  public static CPASMerchantConfig loadJSON(String json, APIContext context, String header) {
+    CPASMerchantConfig cpasMerchantConfig = getGson().fromJson(json, CPASMerchantConfig.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(businessAgreement.toString());
+      JsonElement o2 = parser.parse(cpasMerchantConfig.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -141,14 +151,14 @@ public class BusinessAgreement extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    businessAgreement.context = context;
-    businessAgreement.rawValue = json;
-    businessAgreement.header = header;
-    return businessAgreement;
+    cpasMerchantConfig.context = context;
+    cpasMerchantConfig.rawValue = json;
+    cpasMerchantConfig.header = header;
+    return cpasMerchantConfig;
   }
 
-  public static APINodeList<BusinessAgreement> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<BusinessAgreement> businessAgreements = new APINodeList<BusinessAgreement>(request, json, header);
+  public static APINodeList<CPASMerchantConfig> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CPASMerchantConfig> cpasMerchantConfigs = new APINodeList<CPASMerchantConfig>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -159,9 +169,9 @@ public class BusinessAgreement extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          businessAgreements.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          cpasMerchantConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return businessAgreements;
+        return cpasMerchantConfigs;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -171,20 +181,20 @@ public class BusinessAgreement extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                businessAgreements.setCursors(before, after);
+                cpasMerchantConfigs.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            businessAgreements.setPaging(previous, next);
+            cpasMerchantConfigs.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              businessAgreements.setAppSecret(context.getAppSecretProof());
+              cpasMerchantConfigs.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              businessAgreements.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              cpasMerchantConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -195,23 +205,23 @@ public class BusinessAgreement extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  businessAgreements.add(loadJSON(entry.getValue().toString(), context, header));
+                  cpasMerchantConfigs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              businessAgreements.add(loadJSON(obj.toString(), context, header));
+              cpasMerchantConfigs.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return businessAgreements;
+          return cpasMerchantConfigs;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              businessAgreements.add(loadJSON(entry.getValue().toString(), context, header));
+              cpasMerchantConfigs.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return businessAgreements;
+          return cpasMerchantConfigs;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -228,20 +238,20 @@ public class BusinessAgreement extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              businessAgreements.add(loadJSON(value.toString(), context, header));
+              cpasMerchantConfigs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return businessAgreements;
+            return cpasMerchantConfigs;
           }
 
           // Sixth, check if it's pure JsonObject
-          businessAgreements.clear();
-          businessAgreements.add(loadJSON(json, context, header));
-          return businessAgreements;
+          cpasMerchantConfigs.clear();
+          cpasMerchantConfigs.add(loadJSON(json, context, header));
+          return cpasMerchantConfigs;
         }
       }
     } catch (Exception e) {
@@ -272,62 +282,83 @@ public class BusinessAgreement extends APINode {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestUpdate update() {
-    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
+
+  public Boolean getFieldAcceptedTos() {
+    return mAcceptedTos;
   }
 
+  public List<String> getFieldBetaFeatures() {
+    return mBetaFeatures;
+  }
+
+  public Map<String, String> getFieldBusinessOutcomesStatus() {
+    return mBusinessOutcomesStatus;
+  }
 
   public String getFieldId() {
     return mId;
   }
 
-  public String getFieldRequestStatus() {
-    return mRequestStatus;
+  public Boolean getFieldIsTestMerchant() {
+    return mIsTestMerchant;
+  }
+
+  public Map<String, Object> getFieldOutcomesComplianceStatus() {
+    return mOutcomesComplianceStatus;
+  }
+
+  public Boolean getFieldQualifiedToOnboard() {
+    return mQualifiedToOnboard;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<BusinessAgreement> {
+  public static class APIRequestGet extends APIRequest<CPASMerchantConfig> {
 
-    BusinessAgreement lastResponse = null;
+    CPASMerchantConfig lastResponse = null;
     @Override
-    public BusinessAgreement getLastResponse() {
+    public CPASMerchantConfig getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
+      "accepted_tos",
+      "beta_features",
+      "business_outcomes_status",
       "id",
-      "request_status",
+      "is_test_merchant",
+      "outcomes_compliance_status",
+      "qualified_to_onboard",
     };
 
     @Override
-    public BusinessAgreement parseResponse(String response, String header) throws APIException {
-      return BusinessAgreement.parseResponse(response, getContext(), this, header).head();
+    public CPASMerchantConfig parseResponse(String response, String header) throws APIException {
+      return CPASMerchantConfig.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public BusinessAgreement execute() throws APIException {
+    public CPASMerchantConfig execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public BusinessAgreement execute(Map<String, Object> extraParams) throws APIException {
+    public CPASMerchantConfig execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<BusinessAgreement> executeAsync() throws APIException {
+    public ListenableFuture<CPASMerchantConfig> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<BusinessAgreement> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<CPASMerchantConfig> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, BusinessAgreement>() {
-           public BusinessAgreement apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, CPASMerchantConfig>() {
+           public CPASMerchantConfig apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -391,6 +422,27 @@ public class BusinessAgreement extends APINode {
       return this;
     }
 
+    public APIRequestGet requestAcceptedTosField () {
+      return this.requestAcceptedTosField(true);
+    }
+    public APIRequestGet requestAcceptedTosField (boolean value) {
+      this.requestField("accepted_tos", value);
+      return this;
+    }
+    public APIRequestGet requestBetaFeaturesField () {
+      return this.requestBetaFeaturesField(true);
+    }
+    public APIRequestGet requestBetaFeaturesField (boolean value) {
+      this.requestField("beta_features", value);
+      return this;
+    }
+    public APIRequestGet requestBusinessOutcomesStatusField () {
+      return this.requestBusinessOutcomesStatusField(true);
+    }
+    public APIRequestGet requestBusinessOutcomesStatusField (boolean value) {
+      this.requestField("business_outcomes_status", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -398,162 +450,27 @@ public class BusinessAgreement extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestRequestStatusField () {
-      return this.requestRequestStatusField(true);
+    public APIRequestGet requestIsTestMerchantField () {
+      return this.requestIsTestMerchantField(true);
     }
-    public APIRequestGet requestRequestStatusField (boolean value) {
-      this.requestField("request_status", value);
+    public APIRequestGet requestIsTestMerchantField (boolean value) {
+      this.requestField("is_test_merchant", value);
       return this;
     }
-  }
-
-  public static class APIRequestUpdate extends APIRequest<BusinessAgreement> {
-
-    BusinessAgreement lastResponse = null;
-    @Override
-    public BusinessAgreement getLastResponse() {
-      return lastResponse;
+    public APIRequestGet requestOutcomesComplianceStatusField () {
+      return this.requestOutcomesComplianceStatusField(true);
     }
-    public static final String[] PARAMS = {
-      "asset_id",
-      "request_status",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public BusinessAgreement parseResponse(String response, String header) throws APIException {
-      return BusinessAgreement.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public BusinessAgreement execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public BusinessAgreement execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<BusinessAgreement> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<BusinessAgreement> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, BusinessAgreement>() {
-           public BusinessAgreement apply(ResponseWrapper result) {
-             try {
-               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestUpdate(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestUpdate setParam(String param, Object value) {
-      setParamInternal(param, value);
+    public APIRequestGet requestOutcomesComplianceStatusField (boolean value) {
+      this.requestField("outcomes_compliance_status", value);
       return this;
     }
-
-    @Override
-    public APIRequestUpdate setParams(Map<String, Object> params) {
-      setParamsInternal(params);
+    public APIRequestGet requestQualifiedToOnboardField () {
+      return this.requestQualifiedToOnboardField(true);
+    }
+    public APIRequestGet requestQualifiedToOnboardField (boolean value) {
+      this.requestField("qualified_to_onboard", value);
       return this;
     }
-
-
-    public APIRequestUpdate setAssetId (Long assetId) {
-      this.setParam("asset_id", assetId);
-      return this;
-    }
-    public APIRequestUpdate setAssetId (String assetId) {
-      this.setParam("asset_id", assetId);
-      return this;
-    }
-
-    public APIRequestUpdate setRequestStatus (BusinessAgreement.EnumRequestStatus requestStatus) {
-      this.setParam("request_status", requestStatus);
-      return this;
-    }
-    public APIRequestUpdate setRequestStatus (String requestStatus) {
-      this.setParam("request_status", requestStatus);
-      return this;
-    }
-
-    public APIRequestUpdate requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestUpdate requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static enum EnumRequestStatus {
-      @SerializedName("APPROVE")
-      VALUE_APPROVE("APPROVE"),
-      @SerializedName("DECLINE")
-      VALUE_DECLINE("DECLINE"),
-      @SerializedName("EXPIRED")
-      VALUE_EXPIRED("EXPIRED"),
-      @SerializedName("IN_PROGRESS")
-      VALUE_IN_PROGRESS("IN_PROGRESS"),
-      @SerializedName("PENDING")
-      VALUE_PENDING("PENDING"),
-      ;
-
-      private String value;
-
-      private EnumRequestStatus(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
   }
 
 
@@ -570,18 +487,23 @@ public class BusinessAgreement extends APINode {
     return gson;
   }
 
-  public BusinessAgreement copyFrom(BusinessAgreement instance) {
+  public CPASMerchantConfig copyFrom(CPASMerchantConfig instance) {
+    this.mAcceptedTos = instance.mAcceptedTos;
+    this.mBetaFeatures = instance.mBetaFeatures;
+    this.mBusinessOutcomesStatus = instance.mBusinessOutcomesStatus;
     this.mId = instance.mId;
-    this.mRequestStatus = instance.mRequestStatus;
+    this.mIsTestMerchant = instance.mIsTestMerchant;
+    this.mOutcomesComplianceStatus = instance.mOutcomesComplianceStatus;
+    this.mQualifiedToOnboard = instance.mQualifiedToOnboard;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<BusinessAgreement> getParser() {
-    return new APIRequest.ResponseParser<BusinessAgreement>() {
-      public APINodeList<BusinessAgreement> parseResponse(String response, APIContext context, APIRequest<BusinessAgreement> request, String header) throws MalformedResponseException {
-        return BusinessAgreement.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<CPASMerchantConfig> getParser() {
+    return new APIRequest.ResponseParser<CPASMerchantConfig>() {
+      public APINodeList<CPASMerchantConfig> parseResponse(String response, APIContext context, APIRequest<CPASMerchantConfig> request, String header) throws MalformedResponseException {
+        return CPASMerchantConfig.parseResponse(response, context, request, header);
       }
     };
   }

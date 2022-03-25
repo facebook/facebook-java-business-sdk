@@ -57,10 +57,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class SavedAudience extends APINode {
   @SerializedName("account")
   private AdAccount mAccount = null;
-  @SerializedName("approximate_count")
-  private Long mApproximateCount = null;
-  @SerializedName("approximate_count_64bit")
-  private Long mApproximateCount64bit = null;
   @SerializedName("approximate_count_lower_bound")
   private Long mApproximateCountLowerBound = null;
   @SerializedName("approximate_count_upper_bound")
@@ -312,14 +308,6 @@ public class SavedAudience extends APINode {
     return mAccount;
   }
 
-  public Long getFieldApproximateCount() {
-    return mApproximateCount;
-  }
-
-  public Long getFieldApproximateCount64bit() {
-    return mApproximateCount64bit;
-  }
-
   public Long getFieldApproximateCountLowerBound() {
     return mApproximateCountLowerBound;
   }
@@ -394,8 +382,6 @@ public class SavedAudience extends APINode {
 
     public static final String[] FIELDS = {
       "account",
-      "approximate_count",
-      "approximate_count_64bit",
       "approximate_count_lower_bound",
       "approximate_count_upper_bound",
       "delete_time",
@@ -507,20 +493,6 @@ public class SavedAudience extends APINode {
     }
     public APIRequestGet requestAccountField (boolean value) {
       this.requestField("account", value);
-      return this;
-    }
-    public APIRequestGet requestApproximateCountField () {
-      return this.requestApproximateCountField(true);
-    }
-    public APIRequestGet requestApproximateCountField (boolean value) {
-      this.requestField("approximate_count", value);
-      return this;
-    }
-    public APIRequestGet requestApproximateCount64bitField () {
-      return this.requestApproximateCount64bitField(true);
-    }
-    public APIRequestGet requestApproximateCount64bitField (boolean value) {
-      this.requestField("approximate_count_64bit", value);
       return this;
     }
     public APIRequestGet requestApproximateCountLowerBoundField () {
@@ -646,8 +618,6 @@ public class SavedAudience extends APINode {
 
   public SavedAudience copyFrom(SavedAudience instance) {
     this.mAccount = instance.mAccount;
-    this.mApproximateCount = instance.mApproximateCount;
-    this.mApproximateCount64bit = instance.mApproximateCount64bit;
     this.mApproximateCountLowerBound = instance.mApproximateCountLowerBound;
     this.mApproximateCountUpperBound = instance.mApproximateCountUpperBound;
     this.mDeleteTime = instance.mDeleteTime;

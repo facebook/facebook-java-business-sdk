@@ -59,8 +59,6 @@ public class HomeListing extends APINode {
   private String mAcType = null;
   @SerializedName("additional_fees_description")
   private String mAdditionalFeesDescription = null;
-  @SerializedName("address")
-  private Object mAddress = null;
   @SerializedName("agent_company")
   private String mAgentCompany = null;
   @SerializedName("agent_email")
@@ -81,16 +79,12 @@ public class HomeListing extends APINode {
   private String mAvailability = null;
   @SerializedName("category_specific_fields")
   private CatalogSubVerticalList mCategorySpecificFields = null;
-  @SerializedName("co_2_emission_rating_eu")
-  private Object mCo2EmissionRatingEu = null;
   @SerializedName("currency")
   private String mCurrency = null;
   @SerializedName("days_on_market")
   private Long mDaysOnMarket = null;
   @SerializedName("description")
   private String mDescription = null;
-  @SerializedName("energy_rating_eu")
-  private Object mEnergyRatingEu = null;
   @SerializedName("furnish_type")
   private String mFurnishType = null;
   @SerializedName("group_id")
@@ -139,8 +133,6 @@ public class HomeListing extends APINode {
   private String mPropertyType = null;
   @SerializedName("sanitized_images")
   private List<String> mSanitizedImages = null;
-  @SerializedName("unit_price")
-  private Object mUnitPrice = null;
   @SerializedName("url")
   private String mUrl = null;
   @SerializedName("year_built")
@@ -387,10 +379,6 @@ public class HomeListing extends APINode {
     return mAdditionalFeesDescription;
   }
 
-  public Object getFieldAddress() {
-    return mAddress;
-  }
-
   public String getFieldAgentCompany() {
     return mAgentCompany;
   }
@@ -434,10 +422,6 @@ public class HomeListing extends APINode {
     return mCategorySpecificFields;
   }
 
-  public Object getFieldCo2EmissionRatingEu() {
-    return mCo2EmissionRatingEu;
-  }
-
   public String getFieldCurrency() {
     return mCurrency;
   }
@@ -448,10 +432,6 @@ public class HomeListing extends APINode {
 
   public String getFieldDescription() {
     return mDescription;
-  }
-
-  public Object getFieldEnergyRatingEu() {
-    return mEnergyRatingEu;
   }
 
   public String getFieldFurnishType() {
@@ -548,10 +528,6 @@ public class HomeListing extends APINode {
 
   public List<String> getFieldSanitizedImages() {
     return mSanitizedImages;
-  }
-
-  public Object getFieldUnitPrice() {
-    return mUnitPrice;
   }
 
   public String getFieldUrl() {
@@ -1009,7 +985,6 @@ public class HomeListing extends APINode {
     public static final String[] FIELDS = {
       "ac_type",
       "additional_fees_description",
-      "address",
       "agent_company",
       "agent_email",
       "agent_fb_page_id",
@@ -1020,11 +995,9 @@ public class HomeListing extends APINode {
       "area_unit",
       "availability",
       "category_specific_fields",
-      "co_2_emission_rating_eu",
       "currency",
       "days_on_market",
       "description",
-      "energy_rating_eu",
       "furnish_type",
       "group_id",
       "heating_type",
@@ -1049,7 +1022,6 @@ public class HomeListing extends APINode {
       "price",
       "property_type",
       "sanitized_images",
-      "unit_price",
       "url",
       "year_built",
     };
@@ -1157,13 +1129,6 @@ public class HomeListing extends APINode {
       this.requestField("additional_fees_description", value);
       return this;
     }
-    public APIRequestGet requestAddressField () {
-      return this.requestAddressField(true);
-    }
-    public APIRequestGet requestAddressField (boolean value) {
-      this.requestField("address", value);
-      return this;
-    }
     public APIRequestGet requestAgentCompanyField () {
       return this.requestAgentCompanyField(true);
     }
@@ -1234,13 +1199,6 @@ public class HomeListing extends APINode {
       this.requestField("category_specific_fields", value);
       return this;
     }
-    public APIRequestGet requestCo2EmissionRatingEuField () {
-      return this.requestCo2EmissionRatingEuField(true);
-    }
-    public APIRequestGet requestCo2EmissionRatingEuField (boolean value) {
-      this.requestField("co_2_emission_rating_eu", value);
-      return this;
-    }
     public APIRequestGet requestCurrencyField () {
       return this.requestCurrencyField(true);
     }
@@ -1260,13 +1218,6 @@ public class HomeListing extends APINode {
     }
     public APIRequestGet requestDescriptionField (boolean value) {
       this.requestField("description", value);
-      return this;
-    }
-    public APIRequestGet requestEnergyRatingEuField () {
-      return this.requestEnergyRatingEuField(true);
-    }
-    public APIRequestGet requestEnergyRatingEuField (boolean value) {
-      this.requestField("energy_rating_eu", value);
       return this;
     }
     public APIRequestGet requestFurnishTypeField () {
@@ -1435,13 +1386,6 @@ public class HomeListing extends APINode {
     }
     public APIRequestGet requestSanitizedImagesField (boolean value) {
       this.requestField("sanitized_images", value);
-      return this;
-    }
-    public APIRequestGet requestUnitPriceField () {
-      return this.requestUnitPriceField(true);
-    }
-    public APIRequestGet requestUnitPriceField (boolean value) {
-      this.requestField("unit_price", value);
       return this;
     }
     public APIRequestGet requestUrlField () {
@@ -1720,7 +1664,6 @@ public class HomeListing extends APINode {
   public HomeListing copyFrom(HomeListing instance) {
     this.mAcType = instance.mAcType;
     this.mAdditionalFeesDescription = instance.mAdditionalFeesDescription;
-    this.mAddress = instance.mAddress;
     this.mAgentCompany = instance.mAgentCompany;
     this.mAgentEmail = instance.mAgentEmail;
     this.mAgentFbPageId = instance.mAgentFbPageId;
@@ -1731,11 +1674,9 @@ public class HomeListing extends APINode {
     this.mAreaUnit = instance.mAreaUnit;
     this.mAvailability = instance.mAvailability;
     this.mCategorySpecificFields = instance.mCategorySpecificFields;
-    this.mCo2EmissionRatingEu = instance.mCo2EmissionRatingEu;
     this.mCurrency = instance.mCurrency;
     this.mDaysOnMarket = instance.mDaysOnMarket;
     this.mDescription = instance.mDescription;
-    this.mEnergyRatingEu = instance.mEnergyRatingEu;
     this.mFurnishType = instance.mFurnishType;
     this.mGroupId = instance.mGroupId;
     this.mHeatingType = instance.mHeatingType;
@@ -1760,7 +1701,6 @@ public class HomeListing extends APINode {
     this.mPrice = instance.mPrice;
     this.mPropertyType = instance.mPropertyType;
     this.mSanitizedImages = instance.mSanitizedImages;
-    this.mUnitPrice = instance.mUnitPrice;
     this.mUrl = instance.mUrl;
     this.mYearBuilt = instance.mYearBuilt;
     this.context = instance.context;

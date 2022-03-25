@@ -67,6 +67,8 @@ public class AdPromotedObject extends APINode {
   private String mEventId = null;
   @SerializedName("fundraiser_campaign_id")
   private String mFundraiserCampaignId = null;
+  @SerializedName("mcme_conversion_id")
+  private String mMcmeConversionId = null;
   @SerializedName("object_store_url")
   private String mObjectStoreUrl = null;
   @SerializedName("offer_id")
@@ -296,6 +298,15 @@ public class AdPromotedObject extends APINode {
     return this;
   }
 
+  public String getFieldMcmeConversionId() {
+    return mMcmeConversionId;
+  }
+
+  public AdPromotedObject setFieldMcmeConversionId(String value) {
+    this.mMcmeConversionId = value;
+    return this;
+  }
+
   public String getFieldObjectStoreUrl() {
     return mObjectStoreUrl;
   }
@@ -498,6 +509,7 @@ public class AdPromotedObject extends APINode {
     this.mCustomEventType = instance.mCustomEventType;
     this.mEventId = instance.mEventId;
     this.mFundraiserCampaignId = instance.mFundraiserCampaignId;
+    this.mMcmeConversionId = instance.mMcmeConversionId;
     this.mObjectStoreUrl = instance.mObjectStoreUrl;
     this.mOfferId = instance.mOfferId;
     this.mOfflineConversionDataSetId = instance.mOfflineConversionDataSetId;

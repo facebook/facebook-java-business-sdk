@@ -201,8 +201,6 @@ public class ReachFrequencyPrediction extends APINode {
   private Long mStatus = null;
   @SerializedName("story_event_type")
   private Long mStoryEventType = null;
-  @SerializedName("target_audience_size")
-  private Long mTargetAudienceSize = null;
   @SerializedName("target_cpm")
   private Long mTargetCpm = null;
   @SerializedName("target_spec")
@@ -727,10 +725,6 @@ public class ReachFrequencyPrediction extends APINode {
     return mStoryEventType;
   }
 
-  public Long getFieldTargetAudienceSize() {
-    return mTargetAudienceSize;
-  }
-
   public Long getFieldTargetCpm() {
     return mTargetCpm;
   }
@@ -853,7 +847,6 @@ public class ReachFrequencyPrediction extends APINode {
       "start_time",
       "status",
       "story_event_type",
-      "target_audience_size",
       "target_cpm",
       "target_spec",
       "time_created",
@@ -1465,13 +1458,6 @@ public class ReachFrequencyPrediction extends APINode {
       this.requestField("story_event_type", value);
       return this;
     }
-    public APIRequestGet requestTargetAudienceSizeField () {
-      return this.requestTargetAudienceSizeField(true);
-    }
-    public APIRequestGet requestTargetAudienceSizeField (boolean value) {
-      this.requestField("target_audience_size", value);
-      return this;
-    }
     public APIRequestGet requestTargetCpmField () {
       return this.requestTargetCpmField(true);
     }
@@ -1718,7 +1704,6 @@ public class ReachFrequencyPrediction extends APINode {
     this.mStartTime = instance.mStartTime;
     this.mStatus = instance.mStatus;
     this.mStoryEventType = instance.mStoryEventType;
-    this.mTargetAudienceSize = instance.mTargetAudienceSize;
     this.mTargetCpm = instance.mTargetCpm;
     this.mTargetSpec = instance.mTargetSpec;
     this.mTimeCreated = instance.mTimeCreated;

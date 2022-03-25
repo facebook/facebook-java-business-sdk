@@ -260,6 +260,8 @@ public class CustomAudienceDataSource extends APINode {
       VALUE_COPY_PASTE_EMAIL_HASHES("COPY_PASTE_EMAIL_HASHES"),
       @SerializedName("CUSTOM_AUDIENCE_USERS")
       VALUE_CUSTOM_AUDIENCE_USERS("CUSTOM_AUDIENCE_USERS"),
+      @SerializedName("CUSTOM_DATA_TARGETING")
+      VALUE_CUSTOM_DATA_TARGETING("CUSTOM_DATA_TARGETING"),
       @SerializedName("DATA_FILE")
       VALUE_DATA_FILE("DATA_FILE"),
       @SerializedName("DYNAMIC_RULE")

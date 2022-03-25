@@ -92,7 +92,7 @@ public class OfflineConversionDataSet extends APINode {
   @SerializedName("name")
   private String mName = null;
   @SerializedName("usage")
-  private Object mUsage = null;
+  private OfflineConversionDataSetUsage mUsage = null;
   @SerializedName("valid_entries")
   private Long mValidEntries = null;
   protected static Gson gson = null;
@@ -436,7 +436,7 @@ public class OfflineConversionDataSet extends APINode {
     return mName;
   }
 
-  public Object getFieldUsage() {
+  public OfflineConversionDataSetUsage getFieldUsage() {
     return mUsage;
   }
 
@@ -1176,6 +1176,7 @@ public class OfflineConversionDataSet extends APINode {
       "block_offline_analytics",
       "collaborative_ads_managed_partner_business_info",
       "collaborative_ads_managed_partner_eligibility",
+      "cpas_business_setup_config",
       "created_by",
       "created_time",
       "extended_updated_time",
@@ -1302,6 +1303,13 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetAgencies requestCollaborativeAdsManagedPartnerEligibilityField (boolean value) {
       this.requestField("collaborative_ads_managed_partner_eligibility", value);
+      return this;
+    }
+    public APIRequestGetAgencies requestCpasBusinessSetupConfigField () {
+      return this.requestCpasBusinessSetupConfigField(true);
+    }
+    public APIRequestGetAgencies requestCpasBusinessSetupConfigField (boolean value) {
+      this.requestField("cpas_business_setup_config", value);
       return this;
     }
     public APIRequestGetAgencies requestCreatedByField () {
@@ -1562,12 +1570,12 @@ public class OfflineConversionDataSet extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "action_source",
       "ad_account",
     };
 
     public static final String[] FIELDS = {
       "account_id",
-      "approximate_count",
       "approximate_count_lower_bound",
       "approximate_count_upper_bound",
       "customer_file_source",
@@ -1660,6 +1668,15 @@ public class OfflineConversionDataSet extends APINode {
     }
 
 
+    public APIRequestGetAudiences setActionSource (CustomAudience.EnumActionSource actionSource) {
+      this.setParam("action_source", actionSource);
+      return this;
+    }
+    public APIRequestGetAudiences setActionSource (String actionSource) {
+      this.setParam("action_source", actionSource);
+      return this;
+    }
+
     public APIRequestGetAudiences setAdAccount (String adAccount) {
       this.setParam("ad_account", adAccount);
       return this;
@@ -1706,13 +1723,6 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetAudiences requestAccountIdField (boolean value) {
       this.requestField("account_id", value);
-      return this;
-    }
-    public APIRequestGetAudiences requestApproximateCountField () {
-      return this.requestApproximateCountField(true);
-    }
-    public APIRequestGetAudiences requestApproximateCountField (boolean value) {
-      this.requestField("approximate_count", value);
       return this;
     }
     public APIRequestGetAudiences requestApproximateCountLowerBoundField () {
@@ -2550,11 +2560,11 @@ public class OfflineConversionDataSet extends APINode {
 
   }
 
-  public static class APIRequestGetUploads extends APIRequest<APINode> {
+  public static class APIRequestGetUploads extends APIRequest<OfflineConversionDataSetUpload> {
 
-    APINodeList<APINode> lastResponse = null;
+    APINodeList<OfflineConversionDataSetUpload> lastResponse = null;
     @Override
-    public APINodeList<APINode> getLastResponse() {
+    public APINodeList<OfflineConversionDataSetUpload> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -2566,34 +2576,48 @@ public class OfflineConversionDataSet extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "api_calls",
+      "creation_time",
+      "duplicate_entries",
+      "event_stats",
+      "event_time_max",
+      "event_time_min",
+      "first_upload_time",
+      "id",
+      "is_excluded_for_lift",
+      "last_upload_time",
+      "match_rate_approx",
+      "matched_entries",
+      "upload_tag",
+      "valid_entries",
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
+    public APINodeList<OfflineConversionDataSetUpload> parseResponse(String response, String header) throws APIException {
+      return OfflineConversionDataSetUpload.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<APINode> execute() throws APIException {
+    public APINodeList<OfflineConversionDataSetUpload> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<OfflineConversionDataSetUpload> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<OfflineConversionDataSetUpload>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<OfflineConversionDataSetUpload>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<OfflineConversionDataSetUpload>>() {
+           public APINodeList<OfflineConversionDataSetUpload> apply(ResponseWrapper result) {
              try {
                return APIRequestGetUploads.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -2626,7 +2650,7 @@ public class OfflineConversionDataSet extends APINode {
       return this;
     }
 
-    public APIRequestGetUploads setOrder (EnumOrder order) {
+    public APIRequestGetUploads setOrder (OfflineConversionDataSetUpload.EnumOrder order) {
       this.setParam("order", order);
       return this;
     }
@@ -2635,7 +2659,7 @@ public class OfflineConversionDataSet extends APINode {
       return this;
     }
 
-    public APIRequestGetUploads setSortBy (EnumSortBy sortBy) {
+    public APIRequestGetUploads setSortBy (OfflineConversionDataSetUpload.EnumSortBy sortBy) {
       this.setParam("sort_by", sortBy);
       return this;
     }
@@ -2690,13 +2714,111 @@ public class OfflineConversionDataSet extends APINode {
       return this;
     }
 
+    public APIRequestGetUploads requestApiCallsField () {
+      return this.requestApiCallsField(true);
+    }
+    public APIRequestGetUploads requestApiCallsField (boolean value) {
+      this.requestField("api_calls", value);
+      return this;
+    }
+    public APIRequestGetUploads requestCreationTimeField () {
+      return this.requestCreationTimeField(true);
+    }
+    public APIRequestGetUploads requestCreationTimeField (boolean value) {
+      this.requestField("creation_time", value);
+      return this;
+    }
+    public APIRequestGetUploads requestDuplicateEntriesField () {
+      return this.requestDuplicateEntriesField(true);
+    }
+    public APIRequestGetUploads requestDuplicateEntriesField (boolean value) {
+      this.requestField("duplicate_entries", value);
+      return this;
+    }
+    public APIRequestGetUploads requestEventStatsField () {
+      return this.requestEventStatsField(true);
+    }
+    public APIRequestGetUploads requestEventStatsField (boolean value) {
+      this.requestField("event_stats", value);
+      return this;
+    }
+    public APIRequestGetUploads requestEventTimeMaxField () {
+      return this.requestEventTimeMaxField(true);
+    }
+    public APIRequestGetUploads requestEventTimeMaxField (boolean value) {
+      this.requestField("event_time_max", value);
+      return this;
+    }
+    public APIRequestGetUploads requestEventTimeMinField () {
+      return this.requestEventTimeMinField(true);
+    }
+    public APIRequestGetUploads requestEventTimeMinField (boolean value) {
+      this.requestField("event_time_min", value);
+      return this;
+    }
+    public APIRequestGetUploads requestFirstUploadTimeField () {
+      return this.requestFirstUploadTimeField(true);
+    }
+    public APIRequestGetUploads requestFirstUploadTimeField (boolean value) {
+      this.requestField("first_upload_time", value);
+      return this;
+    }
+    public APIRequestGetUploads requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetUploads requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetUploads requestIsExcludedForLiftField () {
+      return this.requestIsExcludedForLiftField(true);
+    }
+    public APIRequestGetUploads requestIsExcludedForLiftField (boolean value) {
+      this.requestField("is_excluded_for_lift", value);
+      return this;
+    }
+    public APIRequestGetUploads requestLastUploadTimeField () {
+      return this.requestLastUploadTimeField(true);
+    }
+    public APIRequestGetUploads requestLastUploadTimeField (boolean value) {
+      this.requestField("last_upload_time", value);
+      return this;
+    }
+    public APIRequestGetUploads requestMatchRateApproxField () {
+      return this.requestMatchRateApproxField(true);
+    }
+    public APIRequestGetUploads requestMatchRateApproxField (boolean value) {
+      this.requestField("match_rate_approx", value);
+      return this;
+    }
+    public APIRequestGetUploads requestMatchedEntriesField () {
+      return this.requestMatchedEntriesField(true);
+    }
+    public APIRequestGetUploads requestMatchedEntriesField (boolean value) {
+      this.requestField("matched_entries", value);
+      return this;
+    }
+    public APIRequestGetUploads requestUploadTagField () {
+      return this.requestUploadTagField(true);
+    }
+    public APIRequestGetUploads requestUploadTagField (boolean value) {
+      this.requestField("upload_tag", value);
+      return this;
+    }
+    public APIRequestGetUploads requestValidEntriesField () {
+      return this.requestValidEntriesField(true);
+    }
+    public APIRequestGetUploads requestValidEntriesField (boolean value) {
+      this.requestField("valid_entries", value);
+      return this;
+    }
   }
 
-  public static class APIRequestCreateUpload extends APIRequest<APINode> {
+  public static class APIRequestCreateUpload extends APIRequest<OfflineConversionDataSetUpload> {
 
-    APINode lastResponse = null;
+    OfflineConversionDataSetUpload lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public OfflineConversionDataSetUpload getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -2707,31 +2829,31 @@ public class OfflineConversionDataSet extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
+    public OfflineConversionDataSetUpload parseResponse(String response, String header) throws APIException {
+      return OfflineConversionDataSetUpload.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public OfflineConversionDataSetUpload execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public OfflineConversionDataSetUpload execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINode> executeAsync() throws APIException {
+    public ListenableFuture<OfflineConversionDataSetUpload> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<OfflineConversionDataSetUpload> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, OfflineConversionDataSetUpload>() {
+           public OfflineConversionDataSetUpload apply(ResponseWrapper result) {
              try {
                return APIRequestCreateUpload.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -3503,54 +3625,6 @@ public class OfflineConversionDataSet extends APINode {
       private String value;
 
       private EnumGranularity(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumOrder {
-      @SerializedName("ASCENDING")
-      VALUE_ASCENDING("ASCENDING"),
-      @SerializedName("DESCENDING")
-      VALUE_DESCENDING("DESCENDING"),
-      ;
-
-      private String value;
-
-      private EnumOrder(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumSortBy {
-      @SerializedName("API_CALLS")
-      VALUE_API_CALLS("API_CALLS"),
-      @SerializedName("CREATION_TIME")
-      VALUE_CREATION_TIME("CREATION_TIME"),
-      @SerializedName("EVENT_TIME_MAX")
-      VALUE_EVENT_TIME_MAX("EVENT_TIME_MAX"),
-      @SerializedName("EVENT_TIME_MIN")
-      VALUE_EVENT_TIME_MIN("EVENT_TIME_MIN"),
-      @SerializedName("FIRST_UPLOAD_TIME")
-      VALUE_FIRST_UPLOAD_TIME("FIRST_UPLOAD_TIME"),
-      @SerializedName("IS_EXCLUDED_FOR_LIFT")
-      VALUE_IS_EXCLUDED_FOR_LIFT("IS_EXCLUDED_FOR_LIFT"),
-      @SerializedName("LAST_UPLOAD_TIME")
-      VALUE_LAST_UPLOAD_TIME("LAST_UPLOAD_TIME"),
-      ;
-
-      private String value;
-
-      private EnumSortBy(String value) {
         this.value = value;
       }
 

@@ -300,6 +300,10 @@ public class IGUser extends APINode {
     return new APIRequestGetInsights(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetLiveMedia getLiveMedia() {
+    return new APIRequestGetLiveMedia(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetMedia getMedia() {
     return new APIRequestGetMedia(this.getPrefixedId().toString(), context);
   }
@@ -694,6 +698,242 @@ public class IGUser extends APINode {
     }
   }
 
+  public static class APIRequestGetLiveMedia extends APIRequest<IGMedia> {
+
+    APINodeList<IGMedia> lastResponse = null;
+    @Override
+    public APINodeList<IGMedia> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "since",
+      "until",
+    };
+
+    public static final String[] FIELDS = {
+      "caption",
+      "comments_count",
+      "id",
+      "ig_id",
+      "is_comment_enabled",
+      "like_count",
+      "media_product_type",
+      "media_type",
+      "media_url",
+      "owner",
+      "permalink",
+      "shortcode",
+      "thumbnail_url",
+      "timestamp",
+      "username",
+    };
+
+    @Override
+    public APINodeList<IGMedia> parseResponse(String response, String header) throws APIException {
+      return IGMedia.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<IGMedia> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<IGMedia> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<IGMedia>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<IGMedia>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<IGMedia>>() {
+           public APINodeList<IGMedia> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetLiveMedia.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetLiveMedia(String nodeId, APIContext context) {
+      super(context, nodeId, "/live_media", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetLiveMedia setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetLiveMedia setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetLiveMedia setSince (String since) {
+      this.setParam("since", since);
+      return this;
+    }
+
+    public APIRequestGetLiveMedia setUntil (String until) {
+      this.setParam("until", until);
+      return this;
+    }
+
+    public APIRequestGetLiveMedia requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetLiveMedia requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetLiveMedia requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetLiveMedia requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetLiveMedia requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetLiveMedia requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetLiveMedia requestCaptionField () {
+      return this.requestCaptionField(true);
+    }
+    public APIRequestGetLiveMedia requestCaptionField (boolean value) {
+      this.requestField("caption", value);
+      return this;
+    }
+    public APIRequestGetLiveMedia requestCommentsCountField () {
+      return this.requestCommentsCountField(true);
+    }
+    public APIRequestGetLiveMedia requestCommentsCountField (boolean value) {
+      this.requestField("comments_count", value);
+      return this;
+    }
+    public APIRequestGetLiveMedia requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetLiveMedia requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetLiveMedia requestIgIdField () {
+      return this.requestIgIdField(true);
+    }
+    public APIRequestGetLiveMedia requestIgIdField (boolean value) {
+      this.requestField("ig_id", value);
+      return this;
+    }
+    public APIRequestGetLiveMedia requestIsCommentEnabledField () {
+      return this.requestIsCommentEnabledField(true);
+    }
+    public APIRequestGetLiveMedia requestIsCommentEnabledField (boolean value) {
+      this.requestField("is_comment_enabled", value);
+      return this;
+    }
+    public APIRequestGetLiveMedia requestLikeCountField () {
+      return this.requestLikeCountField(true);
+    }
+    public APIRequestGetLiveMedia requestLikeCountField (boolean value) {
+      this.requestField("like_count", value);
+      return this;
+    }
+    public APIRequestGetLiveMedia requestMediaProductTypeField () {
+      return this.requestMediaProductTypeField(true);
+    }
+    public APIRequestGetLiveMedia requestMediaProductTypeField (boolean value) {
+      this.requestField("media_product_type", value);
+      return this;
+    }
+    public APIRequestGetLiveMedia requestMediaTypeField () {
+      return this.requestMediaTypeField(true);
+    }
+    public APIRequestGetLiveMedia requestMediaTypeField (boolean value) {
+      this.requestField("media_type", value);
+      return this;
+    }
+    public APIRequestGetLiveMedia requestMediaUrlField () {
+      return this.requestMediaUrlField(true);
+    }
+    public APIRequestGetLiveMedia requestMediaUrlField (boolean value) {
+      this.requestField("media_url", value);
+      return this;
+    }
+    public APIRequestGetLiveMedia requestOwnerField () {
+      return this.requestOwnerField(true);
+    }
+    public APIRequestGetLiveMedia requestOwnerField (boolean value) {
+      this.requestField("owner", value);
+      return this;
+    }
+    public APIRequestGetLiveMedia requestPermalinkField () {
+      return this.requestPermalinkField(true);
+    }
+    public APIRequestGetLiveMedia requestPermalinkField (boolean value) {
+      this.requestField("permalink", value);
+      return this;
+    }
+    public APIRequestGetLiveMedia requestShortcodeField () {
+      return this.requestShortcodeField(true);
+    }
+    public APIRequestGetLiveMedia requestShortcodeField (boolean value) {
+      this.requestField("shortcode", value);
+      return this;
+    }
+    public APIRequestGetLiveMedia requestThumbnailUrlField () {
+      return this.requestThumbnailUrlField(true);
+    }
+    public APIRequestGetLiveMedia requestThumbnailUrlField (boolean value) {
+      this.requestField("thumbnail_url", value);
+      return this;
+    }
+    public APIRequestGetLiveMedia requestTimestampField () {
+      return this.requestTimestampField(true);
+    }
+    public APIRequestGetLiveMedia requestTimestampField (boolean value) {
+      this.requestField("timestamp", value);
+      return this;
+    }
+    public APIRequestGetLiveMedia requestUsernameField () {
+      return this.requestUsernameField(true);
+    }
+    public APIRequestGetLiveMedia requestUsernameField (boolean value) {
+      this.requestField("username", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetMedia extends APIRequest<IGMedia> {
 
     APINodeList<IGMedia> lastResponse = null;
@@ -722,7 +962,6 @@ public class IGUser extends APINode {
       "thumbnail_url",
       "timestamp",
       "username",
-      "video_title",
     };
 
     @Override
@@ -929,13 +1168,6 @@ public class IGUser extends APINode {
       this.requestField("username", value);
       return this;
     }
-    public APIRequestGetMedia requestVideoTitleField () {
-      return this.requestVideoTitleField(true);
-    }
-    public APIRequestGetMedia requestVideoTitleField (boolean value) {
-      this.requestField("video_title", value);
-      return this;
-    }
   }
 
   public static class APIRequestCreateMedia extends APIRequest<IGMedia> {
@@ -947,7 +1179,9 @@ public class IGUser extends APINode {
     }
     public static final String[] PARAMS = {
       "caption",
+      "children",
       "image_url",
+      "is_carousel_item",
       "location_id",
       "media_type",
       "thumb_offset",
@@ -1016,8 +1250,26 @@ public class IGUser extends APINode {
       return this;
     }
 
+    public APIRequestCreateMedia setChildren (List<String> children) {
+      this.setParam("children", children);
+      return this;
+    }
+    public APIRequestCreateMedia setChildren (String children) {
+      this.setParam("children", children);
+      return this;
+    }
+
     public APIRequestCreateMedia setImageUrl (String imageUrl) {
       this.setParam("image_url", imageUrl);
+      return this;
+    }
+
+    public APIRequestCreateMedia setIsCarouselItem (Boolean isCarouselItem) {
+      this.setParam("is_carousel_item", isCarouselItem);
+      return this;
+    }
+    public APIRequestCreateMedia setIsCarouselItem (String isCarouselItem) {
+      this.setParam("is_carousel_item", isCarouselItem);
       return this;
     }
 
@@ -1454,7 +1706,6 @@ public class IGUser extends APINode {
       "thumbnail_url",
       "timestamp",
       "username",
-      "video_title",
     };
 
     @Override
@@ -1651,13 +1902,6 @@ public class IGUser extends APINode {
       this.requestField("username", value);
       return this;
     }
-    public APIRequestGetStories requestVideoTitleField () {
-      return this.requestVideoTitleField(true);
-    }
-    public APIRequestGetStories requestVideoTitleField (boolean value) {
-      this.requestField("video_title", value);
-      return this;
-    }
   }
 
   public static class APIRequestGetTags extends APIRequest<IGMedia> {
@@ -1686,7 +1930,6 @@ public class IGUser extends APINode {
       "thumbnail_url",
       "timestamp",
       "username",
-      "video_title",
     };
 
     @Override
@@ -1881,13 +2124,6 @@ public class IGUser extends APINode {
     }
     public APIRequestGetTags requestUsernameField (boolean value) {
       this.requestField("username", value);
-      return this;
-    }
-    public APIRequestGetTags requestVideoTitleField () {
-      return this.requestVideoTitleField(true);
-    }
-    public APIRequestGetTags requestVideoTitleField (boolean value) {
-      this.requestField("video_title", value);
       return this;
     }
   }

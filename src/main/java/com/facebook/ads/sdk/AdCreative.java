@@ -81,6 +81,8 @@ public class AdCreative extends APINode {
   private String mCategorizationCriteria = null;
   @SerializedName("category_media_source")
   private String mCategoryMediaSource = null;
+  @SerializedName("collaborative_ads_lsb_image_bank_id")
+  private String mCollaborativeAdsLsbImageBankId = null;
   @SerializedName("destination_set_id")
   private String mDestinationSetId = null;
   @SerializedName("dynamic_ad_voice")
@@ -139,6 +141,8 @@ public class AdCreative extends APINode {
   private EnumObjectType mObjectType = null;
   @SerializedName("object_url")
   private String mObjectUrl = null;
+  @SerializedName("omnichannel_link_spec")
+  private AdCreativeOmnichannelLinkSpec mOmnichannelLinkSpec = null;
   @SerializedName("place_page_set_id")
   private String mPlacePageSetId = null;
   @SerializedName("platform_customizations")
@@ -159,6 +163,8 @@ public class AdCreative extends APINode {
   private String mTemplateUrl = null;
   @SerializedName("template_url_spec")
   private AdCreativeTemplateURLSpec mTemplateUrlSpec = null;
+  @SerializedName("thumbnail_id")
+  private String mThumbnailId = null;
   @SerializedName("thumbnail_url")
   private String mThumbnailUrl = null;
   @SerializedName("title")
@@ -535,6 +541,15 @@ public class AdCreative extends APINode {
     return this;
   }
 
+  public String getFieldCollaborativeAdsLsbImageBankId() {
+    return mCollaborativeAdsLsbImageBankId;
+  }
+
+  public AdCreative setFieldCollaborativeAdsLsbImageBankId(String value) {
+    this.mCollaborativeAdsLsbImageBankId = value;
+    return this;
+  }
+
   public String getFieldDestinationSetId() {
     return mDestinationSetId;
   }
@@ -812,6 +827,20 @@ public class AdCreative extends APINode {
     return this;
   }
 
+  public AdCreativeOmnichannelLinkSpec getFieldOmnichannelLinkSpec() {
+    return mOmnichannelLinkSpec;
+  }
+
+  public AdCreative setFieldOmnichannelLinkSpec(AdCreativeOmnichannelLinkSpec value) {
+    this.mOmnichannelLinkSpec = value;
+    return this;
+  }
+
+  public AdCreative setFieldOmnichannelLinkSpec(String value) {
+    Type type = new TypeToken<AdCreativeOmnichannelLinkSpec>(){}.getType();
+    this.mOmnichannelLinkSpec = AdCreativeOmnichannelLinkSpec.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldPlacePageSetId() {
     return mPlacePageSetId;
   }
@@ -922,6 +951,15 @@ public class AdCreative extends APINode {
     this.mTemplateUrlSpec = AdCreativeTemplateURLSpec.getGson().fromJson(value, type);
     return this;
   }
+  public String getFieldThumbnailId() {
+    return mThumbnailId;
+  }
+
+  public AdCreative setFieldThumbnailId(String value) {
+    this.mThumbnailId = value;
+    return this;
+  }
+
   public String getFieldThumbnailUrl() {
     return mThumbnailUrl;
   }
@@ -1583,6 +1621,7 @@ public class AdCreative extends APINode {
       "call_to_action_type",
       "categorization_criteria",
       "category_media_source",
+      "collaborative_ads_lsb_image_bank_id",
       "destination_set_id",
       "dynamic_ad_voice",
       "effective_authorization_category",
@@ -1612,6 +1651,7 @@ public class AdCreative extends APINode {
       "object_story_spec",
       "object_type",
       "object_url",
+      "omnichannel_link_spec",
       "place_page_set_id",
       "platform_customizations",
       "playable_asset_id",
@@ -1622,6 +1662,7 @@ public class AdCreative extends APINode {
       "status",
       "template_url",
       "template_url_spec",
+      "thumbnail_id",
       "thumbnail_url",
       "title",
       "url_tags",
@@ -1827,6 +1868,13 @@ public class AdCreative extends APINode {
       this.requestField("category_media_source", value);
       return this;
     }
+    public APIRequestGet requestCollaborativeAdsLsbImageBankIdField () {
+      return this.requestCollaborativeAdsLsbImageBankIdField(true);
+    }
+    public APIRequestGet requestCollaborativeAdsLsbImageBankIdField (boolean value) {
+      this.requestField("collaborative_ads_lsb_image_bank_id", value);
+      return this;
+    }
     public APIRequestGet requestDestinationSetIdField () {
       return this.requestDestinationSetIdField(true);
     }
@@ -2030,6 +2078,13 @@ public class AdCreative extends APINode {
       this.requestField("object_url", value);
       return this;
     }
+    public APIRequestGet requestOmnichannelLinkSpecField () {
+      return this.requestOmnichannelLinkSpecField(true);
+    }
+    public APIRequestGet requestOmnichannelLinkSpecField (boolean value) {
+      this.requestField("omnichannel_link_spec", value);
+      return this;
+    }
     public APIRequestGet requestPlacePageSetIdField () {
       return this.requestPlacePageSetIdField(true);
     }
@@ -2098,6 +2153,13 @@ public class AdCreative extends APINode {
     }
     public APIRequestGet requestTemplateUrlSpecField (boolean value) {
       this.requestField("template_url_spec", value);
+      return this;
+    }
+    public APIRequestGet requestThumbnailIdField () {
+      return this.requestThumbnailIdField(true);
+    }
+    public APIRequestGet requestThumbnailIdField (boolean value) {
+      this.requestField("thumbnail_id", value);
       return this;
     }
     public APIRequestGet requestThumbnailUrlField () {
@@ -2352,6 +2414,8 @@ public class AdCreative extends APINode {
       VALUE_PAY_TO_ACCESS("PAY_TO_ACCESS"),
       @SerializedName("PLAY_GAME")
       VALUE_PLAY_GAME("PLAY_GAME"),
+      @SerializedName("PLAY_GAME_ON_FACEBOOK")
+      VALUE_PLAY_GAME_ON_FACEBOOK("PLAY_GAME_ON_FACEBOOK"),
       @SerializedName("PURCHASE_GIFT_CARDS")
       VALUE_PURCHASE_GIFT_CARDS("PURCHASE_GIFT_CARDS"),
       @SerializedName("RECORD_NOW")
@@ -2655,6 +2719,7 @@ public class AdCreative extends APINode {
     this.mCallToActionType = instance.mCallToActionType;
     this.mCategorizationCriteria = instance.mCategorizationCriteria;
     this.mCategoryMediaSource = instance.mCategoryMediaSource;
+    this.mCollaborativeAdsLsbImageBankId = instance.mCollaborativeAdsLsbImageBankId;
     this.mDestinationSetId = instance.mDestinationSetId;
     this.mDynamicAdVoice = instance.mDynamicAdVoice;
     this.mEffectiveAuthorizationCategory = instance.mEffectiveAuthorizationCategory;
@@ -2684,6 +2749,7 @@ public class AdCreative extends APINode {
     this.mObjectStorySpec = instance.mObjectStorySpec;
     this.mObjectType = instance.mObjectType;
     this.mObjectUrl = instance.mObjectUrl;
+    this.mOmnichannelLinkSpec = instance.mOmnichannelLinkSpec;
     this.mPlacePageSetId = instance.mPlacePageSetId;
     this.mPlatformCustomizations = instance.mPlatformCustomizations;
     this.mPlayableAssetId = instance.mPlayableAssetId;
@@ -2694,6 +2760,7 @@ public class AdCreative extends APINode {
     this.mStatus = instance.mStatus;
     this.mTemplateUrl = instance.mTemplateUrl;
     this.mTemplateUrlSpec = instance.mTemplateUrlSpec;
+    this.mThumbnailId = instance.mThumbnailId;
     this.mThumbnailUrl = instance.mThumbnailUrl;
     this.mTitle = instance.mTitle;
     this.mUrlTags = instance.mUrlTags;

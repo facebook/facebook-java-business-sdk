@@ -59,10 +59,18 @@ public class LocalServiceBusiness extends APINode {
   private Object mAddress = null;
   @SerializedName("applinks")
   private CatalogItemAppLinks mApplinks = null;
+  @SerializedName("availability")
+  private EnumAvailability mAvailability = null;
   @SerializedName("brand")
   private String mBrand = null;
+  @SerializedName("category")
+  private String mCategory = null;
   @SerializedName("category_specific_fields")
   private CatalogSubVerticalList mCategorySpecificFields = null;
+  @SerializedName("condition")
+  private EnumCondition mCondition = null;
+  @SerializedName("cuisine_type")
+  private String mCuisineType = null;
   @SerializedName("currency")
   private String mCurrency = null;
   @SerializedName("custom_label_0")
@@ -77,6 +85,10 @@ public class LocalServiceBusiness extends APINode {
   private String mCustomLabel4 = null;
   @SerializedName("description")
   private String mDescription = null;
+  @SerializedName("expiration_date")
+  private String mExpirationDate = null;
+  @SerializedName("gtin")
+  private String mGtin = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("image_fetch_status")
@@ -85,16 +97,26 @@ public class LocalServiceBusiness extends APINode {
   private List<String> mImages = null;
   @SerializedName("local_service_business_id")
   private String mLocalServiceBusinessId = null;
+  @SerializedName("phone")
+  private String mPhone = null;
   @SerializedName("price")
   private String mPrice = null;
+  @SerializedName("price_range")
+  private String mPriceRange = null;
+  @SerializedName("retailer_category")
+  private String mRetailerCategory = null;
   @SerializedName("sanitized_images")
   private List<String> mSanitizedImages = null;
+  @SerializedName("size")
+  private String mSize = null;
   @SerializedName("title")
   private String mTitle = null;
   @SerializedName("unit_price")
   private Object mUnitPrice = null;
   @SerializedName("url")
   private String mUrl = null;
+  @SerializedName("vendor_id")
+  private String mVendorId = null;
   protected static Gson gson = null;
 
   LocalServiceBusiness() {
@@ -321,12 +343,28 @@ public class LocalServiceBusiness extends APINode {
     return mApplinks;
   }
 
+  public EnumAvailability getFieldAvailability() {
+    return mAvailability;
+  }
+
   public String getFieldBrand() {
     return mBrand;
   }
 
+  public String getFieldCategory() {
+    return mCategory;
+  }
+
   public CatalogSubVerticalList getFieldCategorySpecificFields() {
     return mCategorySpecificFields;
+  }
+
+  public EnumCondition getFieldCondition() {
+    return mCondition;
+  }
+
+  public String getFieldCuisineType() {
+    return mCuisineType;
   }
 
   public String getFieldCurrency() {
@@ -357,6 +395,14 @@ public class LocalServiceBusiness extends APINode {
     return mDescription;
   }
 
+  public String getFieldExpirationDate() {
+    return mExpirationDate;
+  }
+
+  public String getFieldGtin() {
+    return mGtin;
+  }
+
   public String getFieldId() {
     return mId;
   }
@@ -373,12 +419,28 @@ public class LocalServiceBusiness extends APINode {
     return mLocalServiceBusinessId;
   }
 
+  public String getFieldPhone() {
+    return mPhone;
+  }
+
   public String getFieldPrice() {
     return mPrice;
   }
 
+  public String getFieldPriceRange() {
+    return mPriceRange;
+  }
+
+  public String getFieldRetailerCategory() {
+    return mRetailerCategory;
+  }
+
   public List<String> getFieldSanitizedImages() {
     return mSanitizedImages;
+  }
+
+  public String getFieldSize() {
+    return mSize;
   }
 
   public String getFieldTitle() {
@@ -391,6 +453,10 @@ public class LocalServiceBusiness extends APINode {
 
   public String getFieldUrl() {
     return mUrl;
+  }
+
+  public String getFieldVendorId() {
+    return mVendorId;
   }
 
 
@@ -528,8 +594,12 @@ public class LocalServiceBusiness extends APINode {
     public static final String[] FIELDS = {
       "address",
       "applinks",
+      "availability",
       "brand",
+      "category",
       "category_specific_fields",
+      "condition",
+      "cuisine_type",
       "currency",
       "custom_label_0",
       "custom_label_1",
@@ -537,15 +607,22 @@ public class LocalServiceBusiness extends APINode {
       "custom_label_3",
       "custom_label_4",
       "description",
+      "expiration_date",
+      "gtin",
       "id",
       "image_fetch_status",
       "images",
       "local_service_business_id",
+      "phone",
       "price",
+      "price_range",
+      "retailer_category",
       "sanitized_images",
+      "size",
       "title",
       "unit_price",
       "url",
+      "vendor_id",
     };
 
     @Override
@@ -651,6 +728,13 @@ public class LocalServiceBusiness extends APINode {
       this.requestField("applinks", value);
       return this;
     }
+    public APIRequestGet requestAvailabilityField () {
+      return this.requestAvailabilityField(true);
+    }
+    public APIRequestGet requestAvailabilityField (boolean value) {
+      this.requestField("availability", value);
+      return this;
+    }
     public APIRequestGet requestBrandField () {
       return this.requestBrandField(true);
     }
@@ -658,11 +742,32 @@ public class LocalServiceBusiness extends APINode {
       this.requestField("brand", value);
       return this;
     }
+    public APIRequestGet requestCategoryField () {
+      return this.requestCategoryField(true);
+    }
+    public APIRequestGet requestCategoryField (boolean value) {
+      this.requestField("category", value);
+      return this;
+    }
     public APIRequestGet requestCategorySpecificFieldsField () {
       return this.requestCategorySpecificFieldsField(true);
     }
     public APIRequestGet requestCategorySpecificFieldsField (boolean value) {
       this.requestField("category_specific_fields", value);
+      return this;
+    }
+    public APIRequestGet requestConditionField () {
+      return this.requestConditionField(true);
+    }
+    public APIRequestGet requestConditionField (boolean value) {
+      this.requestField("condition", value);
+      return this;
+    }
+    public APIRequestGet requestCuisineTypeField () {
+      return this.requestCuisineTypeField(true);
+    }
+    public APIRequestGet requestCuisineTypeField (boolean value) {
+      this.requestField("cuisine_type", value);
       return this;
     }
     public APIRequestGet requestCurrencyField () {
@@ -714,6 +819,20 @@ public class LocalServiceBusiness extends APINode {
       this.requestField("description", value);
       return this;
     }
+    public APIRequestGet requestExpirationDateField () {
+      return this.requestExpirationDateField(true);
+    }
+    public APIRequestGet requestExpirationDateField (boolean value) {
+      this.requestField("expiration_date", value);
+      return this;
+    }
+    public APIRequestGet requestGtinField () {
+      return this.requestGtinField(true);
+    }
+    public APIRequestGet requestGtinField (boolean value) {
+      this.requestField("gtin", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -742,6 +861,13 @@ public class LocalServiceBusiness extends APINode {
       this.requestField("local_service_business_id", value);
       return this;
     }
+    public APIRequestGet requestPhoneField () {
+      return this.requestPhoneField(true);
+    }
+    public APIRequestGet requestPhoneField (boolean value) {
+      this.requestField("phone", value);
+      return this;
+    }
     public APIRequestGet requestPriceField () {
       return this.requestPriceField(true);
     }
@@ -749,11 +875,32 @@ public class LocalServiceBusiness extends APINode {
       this.requestField("price", value);
       return this;
     }
+    public APIRequestGet requestPriceRangeField () {
+      return this.requestPriceRangeField(true);
+    }
+    public APIRequestGet requestPriceRangeField (boolean value) {
+      this.requestField("price_range", value);
+      return this;
+    }
+    public APIRequestGet requestRetailerCategoryField () {
+      return this.requestRetailerCategoryField(true);
+    }
+    public APIRequestGet requestRetailerCategoryField (boolean value) {
+      this.requestField("retailer_category", value);
+      return this;
+    }
     public APIRequestGet requestSanitizedImagesField () {
       return this.requestSanitizedImagesField(true);
     }
     public APIRequestGet requestSanitizedImagesField (boolean value) {
       this.requestField("sanitized_images", value);
+      return this;
+    }
+    public APIRequestGet requestSizeField () {
+      return this.requestSizeField(true);
+    }
+    public APIRequestGet requestSizeField (boolean value) {
+      this.requestField("size", value);
       return this;
     }
     public APIRequestGet requestTitleField () {
@@ -777,6 +924,71 @@ public class LocalServiceBusiness extends APINode {
       this.requestField("url", value);
       return this;
     }
+    public APIRequestGet requestVendorIdField () {
+      return this.requestVendorIdField(true);
+    }
+    public APIRequestGet requestVendorIdField (boolean value) {
+      this.requestField("vendor_id", value);
+      return this;
+    }
+  }
+
+  public static enum EnumAvailability {
+      @SerializedName("AVAILABLE_FOR_ORDER")
+      VALUE_AVAILABLE_FOR_ORDER("AVAILABLE_FOR_ORDER"),
+      @SerializedName("DISCONTINUED")
+      VALUE_DISCONTINUED("DISCONTINUED"),
+      @SerializedName("IN_STOCK")
+      VALUE_IN_STOCK("IN_STOCK"),
+      @SerializedName("OUT_OF_STOCK")
+      VALUE_OUT_OF_STOCK("OUT_OF_STOCK"),
+      @SerializedName("PENDING")
+      VALUE_PENDING("PENDING"),
+      @SerializedName("PREORDER")
+      VALUE_PREORDER("PREORDER"),
+      ;
+
+      private String value;
+
+      private EnumAvailability(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumCondition {
+      @SerializedName("PC_CPO")
+      VALUE_PC_CPO("PC_CPO"),
+      @SerializedName("PC_NEW")
+      VALUE_PC_NEW("PC_NEW"),
+      @SerializedName("PC_OPEN_BOX_NEW")
+      VALUE_PC_OPEN_BOX_NEW("PC_OPEN_BOX_NEW"),
+      @SerializedName("PC_REFURBISHED")
+      VALUE_PC_REFURBISHED("PC_REFURBISHED"),
+      @SerializedName("PC_USED")
+      VALUE_PC_USED("PC_USED"),
+      @SerializedName("PC_USED_FAIR")
+      VALUE_PC_USED_FAIR("PC_USED_FAIR"),
+      @SerializedName("PC_USED_GOOD")
+      VALUE_PC_USED_GOOD("PC_USED_GOOD"),
+      @SerializedName("PC_USED_LIKE_NEW")
+      VALUE_PC_USED_LIKE_NEW("PC_USED_LIKE_NEW"),
+      ;
+
+      private String value;
+
+      private EnumCondition(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
   public static enum EnumImageFetchStatus {
@@ -823,8 +1035,12 @@ public class LocalServiceBusiness extends APINode {
   public LocalServiceBusiness copyFrom(LocalServiceBusiness instance) {
     this.mAddress = instance.mAddress;
     this.mApplinks = instance.mApplinks;
+    this.mAvailability = instance.mAvailability;
     this.mBrand = instance.mBrand;
+    this.mCategory = instance.mCategory;
     this.mCategorySpecificFields = instance.mCategorySpecificFields;
+    this.mCondition = instance.mCondition;
+    this.mCuisineType = instance.mCuisineType;
     this.mCurrency = instance.mCurrency;
     this.mCustomLabel0 = instance.mCustomLabel0;
     this.mCustomLabel1 = instance.mCustomLabel1;
@@ -832,15 +1048,22 @@ public class LocalServiceBusiness extends APINode {
     this.mCustomLabel3 = instance.mCustomLabel3;
     this.mCustomLabel4 = instance.mCustomLabel4;
     this.mDescription = instance.mDescription;
+    this.mExpirationDate = instance.mExpirationDate;
+    this.mGtin = instance.mGtin;
     this.mId = instance.mId;
     this.mImageFetchStatus = instance.mImageFetchStatus;
     this.mImages = instance.mImages;
     this.mLocalServiceBusinessId = instance.mLocalServiceBusinessId;
+    this.mPhone = instance.mPhone;
     this.mPrice = instance.mPrice;
+    this.mPriceRange = instance.mPriceRange;
+    this.mRetailerCategory = instance.mRetailerCategory;
     this.mSanitizedImages = instance.mSanitizedImages;
+    this.mSize = instance.mSize;
     this.mTitle = instance.mTitle;
     this.mUnitPrice = instance.mUnitPrice;
     this.mUrl = instance.mUrl;
+    this.mVendorId = instance.mVendorId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

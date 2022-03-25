@@ -57,8 +57,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdAccountReachEstimate extends APINode {
   @SerializedName("estimate_ready")
   private Boolean mEstimateReady = null;
-  @SerializedName("users")
-  private Long mUsers = null;
   @SerializedName("users_lower_bound")
   private Long mUsersLowerBound = null;
   @SerializedName("users_upper_bound")
@@ -223,15 +221,6 @@ public class AdAccountReachEstimate extends APINode {
     return this;
   }
 
-  public Long getFieldUsers() {
-    return mUsers;
-  }
-
-  public AdAccountReachEstimate setFieldUsers(Long value) {
-    this.mUsers = value;
-    return this;
-  }
-
   public Long getFieldUsersLowerBound() {
     return mUsersLowerBound;
   }
@@ -268,7 +257,6 @@ public class AdAccountReachEstimate extends APINode {
 
   public AdAccountReachEstimate copyFrom(AdAccountReachEstimate instance) {
     this.mEstimateReady = instance.mEstimateReady;
-    this.mUsers = instance.mUsers;
     this.mUsersLowerBound = instance.mUsersLowerBound;
     this.mUsersUpperBound = instance.mUsersUpperBound;
     this.context = instance.context;

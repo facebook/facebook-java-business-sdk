@@ -55,8 +55,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdAccountTargetingUnified extends APINode {
-  @SerializedName("audience_size")
-  private Long mAudienceSize = null;
   @SerializedName("audience_size_lower_bound")
   private Long mAudienceSizeLowerBound = null;
   @SerializedName("audience_size_upper_bound")
@@ -253,15 +251,6 @@ public class AdAccountTargetingUnified extends APINode {
     return getGson().toJson(this);
   }
 
-
-  public Long getFieldAudienceSize() {
-    return mAudienceSize;
-  }
-
-  public AdAccountTargetingUnified setFieldAudienceSize(Long value) {
-    this.mAudienceSize = value;
-    return this;
-  }
 
   public Long getFieldAudienceSizeLowerBound() {
     return mAudienceSizeLowerBound;
@@ -967,7 +956,6 @@ public class AdAccountTargetingUnified extends APINode {
   }
 
   public AdAccountTargetingUnified copyFrom(AdAccountTargetingUnified instance) {
-    this.mAudienceSize = instance.mAudienceSize;
     this.mAudienceSizeLowerBound = instance.mAudienceSizeLowerBound;
     this.mAudienceSizeUpperBound = instance.mAudienceSizeUpperBound;
     this.mConversionLift = instance.mConversionLift;

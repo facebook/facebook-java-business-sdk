@@ -83,8 +83,6 @@ public class LiveVideo extends APINode {
   private Boolean mIsManualMode = null;
   @SerializedName("is_reference_only")
   private Boolean mIsReferenceOnly = null;
-  @SerializedName("live_encoders")
-  private List<LiveEncoder> mLiveEncoders = null;
   @SerializedName("live_views")
   private Long mLiveViews = null;
   @SerializedName("overlay_url")
@@ -428,10 +426,6 @@ public class LiveVideo extends APINode {
     return mIsReferenceOnly;
   }
 
-  public List<LiveEncoder> getFieldLiveEncoders() {
-    return mLiveEncoders;
-  }
-
   public Long getFieldLiveViews() {
     return mLiveViews;
   }
@@ -517,9 +511,7 @@ public class LiveVideo extends APINode {
       "inspirational_people",
       "install_type",
       "installed",
-      "interested_in",
       "is_guest_user",
-      "is_verified",
       "languages",
       "last_name",
       "link",
@@ -536,7 +528,6 @@ public class LiveVideo extends APINode {
       "profile_pic",
       "quotes",
       "relationship_status",
-      "religion",
       "shared_login_upgrade_required_by",
       "short_name",
       "significant_other",
@@ -761,25 +752,11 @@ public class LiveVideo extends APINode {
       this.requestField("installed", value);
       return this;
     }
-    public APIRequestGetBlockedUsers requestInterestedInField () {
-      return this.requestInterestedInField(true);
-    }
-    public APIRequestGetBlockedUsers requestInterestedInField (boolean value) {
-      this.requestField("interested_in", value);
-      return this;
-    }
     public APIRequestGetBlockedUsers requestIsGuestUserField () {
       return this.requestIsGuestUserField(true);
     }
     public APIRequestGetBlockedUsers requestIsGuestUserField (boolean value) {
       this.requestField("is_guest_user", value);
-      return this;
-    }
-    public APIRequestGetBlockedUsers requestIsVerifiedField () {
-      return this.requestIsVerifiedField(true);
-    }
-    public APIRequestGetBlockedUsers requestIsVerifiedField (boolean value) {
-      this.requestField("is_verified", value);
       return this;
     }
     public APIRequestGetBlockedUsers requestLanguagesField () {
@@ -892,13 +869,6 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetBlockedUsers requestRelationshipStatusField (boolean value) {
       this.requestField("relationship_status", value);
-      return this;
-    }
-    public APIRequestGetBlockedUsers requestReligionField () {
-      return this.requestReligionField(true);
-    }
-    public APIRequestGetBlockedUsers requestReligionField (boolean value) {
-      this.requestField("religion", value);
       return this;
     }
     public APIRequestGetBlockedUsers requestSharedLoginUpgradeRequiredByField () {
@@ -2608,7 +2578,6 @@ public class LiveVideo extends APINode {
       "ingest_streams",
       "is_manual_mode",
       "is_reference_only",
-      "live_encoders",
       "live_views",
       "overlay_url",
       "permalink_url",
@@ -2809,13 +2778,6 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetCrosspostedBroadcasts requestIsReferenceOnlyField (boolean value) {
       this.requestField("is_reference_only", value);
-      return this;
-    }
-    public APIRequestGetCrosspostedBroadcasts requestLiveEncodersField () {
-      return this.requestLiveEncodersField(true);
-    }
-    public APIRequestGetCrosspostedBroadcasts requestLiveEncodersField (boolean value) {
-      this.requestField("live_encoders", value);
       return this;
     }
     public APIRequestGetCrosspostedBroadcasts requestLiveViewsField () {
@@ -3821,7 +3783,6 @@ public class LiveVideo extends APINode {
       "ingest_streams",
       "is_manual_mode",
       "is_reference_only",
-      "live_encoders",
       "live_views",
       "overlay_url",
       "permalink_url",
@@ -4029,13 +3990,6 @@ public class LiveVideo extends APINode {
       this.requestField("is_reference_only", value);
       return this;
     }
-    public APIRequestGet requestLiveEncodersField () {
-      return this.requestLiveEncodersField(true);
-    }
-    public APIRequestGet requestLiveEncodersField (boolean value) {
-      this.requestField("live_encoders", value);
-      return this;
-    }
     public APIRequestGet requestLiveViewsField () {
       return this.requestLiveViewsField(true);
     }
@@ -4149,12 +4103,12 @@ public class LiveVideo extends APINode {
       "is_audio_only",
       "is_manual_mode",
       "live_comment_moderation_setting",
-      "live_encoders",
       "master_ingest_stream_id",
       "og_icon_id",
       "og_phrase",
       "persistent_stream_key_status",
       "place",
+      "planned_start_time",
       "privacy",
       "published",
       "schedule_custom_profile_image",
@@ -4328,15 +4282,6 @@ public class LiveVideo extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setLiveEncoders (List<String> liveEncoders) {
-      this.setParam("live_encoders", liveEncoders);
-      return this;
-    }
-    public APIRequestUpdate setLiveEncoders (String liveEncoders) {
-      this.setParam("live_encoders", liveEncoders);
-      return this;
-    }
-
     public APIRequestUpdate setMasterIngestStreamId (String masterIngestStreamId) {
       this.setParam("master_ingest_stream_id", masterIngestStreamId);
       return this;
@@ -4367,6 +4312,11 @@ public class LiveVideo extends APINode {
     }
     public APIRequestUpdate setPlace (String place) {
       this.setParam("place", place);
+      return this;
+    }
+
+    public APIRequestUpdate setPlannedStartTime (String plannedStartTime) {
+      this.setParam("planned_start_time", plannedStartTime);
       return this;
     }
 
@@ -4735,7 +4685,6 @@ public class LiveVideo extends APINode {
     this.mIngestStreams = instance.mIngestStreams;
     this.mIsManualMode = instance.mIsManualMode;
     this.mIsReferenceOnly = instance.mIsReferenceOnly;
-    this.mLiveEncoders = instance.mLiveEncoders;
     this.mLiveViews = instance.mLiveViews;
     this.mOverlayUrl = instance.mOverlayUrl;
     this.mPermalinkUrl = instance.mPermalinkUrl;

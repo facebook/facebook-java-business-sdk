@@ -59,8 +59,6 @@ public class AdAccountDeliveryEstimate extends APINode {
   private List<OutcomePredictionPoint> mDailyOutcomesCurve = null;
   @SerializedName("estimate_dau")
   private Long mEstimateDau = null;
-  @SerializedName("estimate_mau")
-  private Long mEstimateMau = null;
   @SerializedName("estimate_mau_lower_bound")
   private Long mEstimateMauLowerBound = null;
   @SerializedName("estimate_mau_upper_bound")
@@ -243,15 +241,6 @@ public class AdAccountDeliveryEstimate extends APINode {
     return this;
   }
 
-  public Long getFieldEstimateMau() {
-    return mEstimateMau;
-  }
-
-  public AdAccountDeliveryEstimate setFieldEstimateMau(Long value) {
-    this.mEstimateMau = value;
-    return this;
-  }
-
   public Long getFieldEstimateMauLowerBound() {
     return mEstimateMauLowerBound;
   }
@@ -307,6 +296,8 @@ public class AdAccountDeliveryEstimate extends APINode {
       VALUE_EVENT_RESPONSES("EVENT_RESPONSES"),
       @SerializedName("IMPRESSIONS")
       VALUE_IMPRESSIONS("IMPRESSIONS"),
+      @SerializedName("IN_APP_VALUE")
+      VALUE_IN_APP_VALUE("IN_APP_VALUE"),
       @SerializedName("LANDING_PAGE_VIEWS")
       VALUE_LANDING_PAGE_VIEWS("LANDING_PAGE_VIEWS"),
       @SerializedName("LEAD_GENERATION")
@@ -364,7 +355,6 @@ public class AdAccountDeliveryEstimate extends APINode {
   public AdAccountDeliveryEstimate copyFrom(AdAccountDeliveryEstimate instance) {
     this.mDailyOutcomesCurve = instance.mDailyOutcomesCurve;
     this.mEstimateDau = instance.mEstimateDau;
-    this.mEstimateMau = instance.mEstimateMau;
     this.mEstimateMauLowerBound = instance.mEstimateMauLowerBound;
     this.mEstimateMauUpperBound = instance.mEstimateMauUpperBound;
     this.mEstimateReady = instance.mEstimateReady;

@@ -54,37 +54,29 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AudienceInsightsStudySpec extends APINode {
-  @SerializedName("audience_definition")
-  private Object mAudienceDefinition = null;
-  @SerializedName("author_info")
-  private Object mAuthorInfo = null;
-  @SerializedName("creation_time")
-  private Long mCreationTime = null;
-  @SerializedName("end_time")
-  private Long mEndTime = null;
-  @SerializedName("excluded_rules")
-  private List<Object> mExcludedRules = null;
-  @SerializedName("included_rules")
-  private List<Object> mIncludedRules = null;
-  @SerializedName("start_time")
-  private Long mStartTime = null;
-  @SerializedName("status")
-  private String mStatus = null;
+public class OfflineConversionDataSetPermissions extends APINode {
+  @SerializedName("can_edit")
+  private Boolean mCanEdit = null;
+  @SerializedName("can_edit_or_upload")
+  private Boolean mCanEditOrUpload = null;
+  @SerializedName("can_upload")
+  private Boolean mCanUpload = null;
+  @SerializedName("should_block_vanilla_business_employee_access")
+  private Boolean mShouldBlockVanillaBusinessEmployeeAccess = null;
   protected static Gson gson = null;
 
-  public AudienceInsightsStudySpec() {
+  public OfflineConversionDataSetPermissions() {
   }
 
   public String getId() {
     return null;
   }
-  public static AudienceInsightsStudySpec loadJSON(String json, APIContext context, String header) {
-    AudienceInsightsStudySpec audienceInsightsStudySpec = getGson().fromJson(json, AudienceInsightsStudySpec.class);
+  public static OfflineConversionDataSetPermissions loadJSON(String json, APIContext context, String header) {
+    OfflineConversionDataSetPermissions offlineConversionDataSetPermissions = getGson().fromJson(json, OfflineConversionDataSetPermissions.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(audienceInsightsStudySpec.toString());
+      JsonElement o2 = parser.parse(offlineConversionDataSetPermissions.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -94,14 +86,14 @@ public class AudienceInsightsStudySpec extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    audienceInsightsStudySpec.context = context;
-    audienceInsightsStudySpec.rawValue = json;
-    audienceInsightsStudySpec.header = header;
-    return audienceInsightsStudySpec;
+    offlineConversionDataSetPermissions.context = context;
+    offlineConversionDataSetPermissions.rawValue = json;
+    offlineConversionDataSetPermissions.header = header;
+    return offlineConversionDataSetPermissions;
   }
 
-  public static APINodeList<AudienceInsightsStudySpec> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AudienceInsightsStudySpec> audienceInsightsStudySpecs = new APINodeList<AudienceInsightsStudySpec>(request, json, header);
+  public static APINodeList<OfflineConversionDataSetPermissions> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<OfflineConversionDataSetPermissions> offlineConversionDataSetPermissionss = new APINodeList<OfflineConversionDataSetPermissions>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -112,9 +104,9 @@ public class AudienceInsightsStudySpec extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          audienceInsightsStudySpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          offlineConversionDataSetPermissionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return audienceInsightsStudySpecs;
+        return offlineConversionDataSetPermissionss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -124,20 +116,20 @@ public class AudienceInsightsStudySpec extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                audienceInsightsStudySpecs.setCursors(before, after);
+                offlineConversionDataSetPermissionss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            audienceInsightsStudySpecs.setPaging(previous, next);
+            offlineConversionDataSetPermissionss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              audienceInsightsStudySpecs.setAppSecret(context.getAppSecretProof());
+              offlineConversionDataSetPermissionss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              audienceInsightsStudySpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              offlineConversionDataSetPermissionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -148,23 +140,23 @@ public class AudienceInsightsStudySpec extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  audienceInsightsStudySpecs.add(loadJSON(entry.getValue().toString(), context, header));
+                  offlineConversionDataSetPermissionss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              audienceInsightsStudySpecs.add(loadJSON(obj.toString(), context, header));
+              offlineConversionDataSetPermissionss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return audienceInsightsStudySpecs;
+          return offlineConversionDataSetPermissionss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              audienceInsightsStudySpecs.add(loadJSON(entry.getValue().toString(), context, header));
+              offlineConversionDataSetPermissionss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return audienceInsightsStudySpecs;
+          return offlineConversionDataSetPermissionss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -181,20 +173,20 @@ public class AudienceInsightsStudySpec extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              audienceInsightsStudySpecs.add(loadJSON(value.toString(), context, header));
+              offlineConversionDataSetPermissionss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return audienceInsightsStudySpecs;
+            return offlineConversionDataSetPermissionss;
           }
 
           // Sixth, check if it's pure JsonObject
-          audienceInsightsStudySpecs.clear();
-          audienceInsightsStudySpecs.add(loadJSON(json, context, header));
-          return audienceInsightsStudySpecs;
+          offlineConversionDataSetPermissionss.clear();
+          offlineConversionDataSetPermissionss.add(loadJSON(json, context, header));
+          return offlineConversionDataSetPermissionss;
         }
       }
     } catch (Exception e) {
@@ -222,75 +214,39 @@ public class AudienceInsightsStudySpec extends APINode {
   }
 
 
-  public Object getFieldAudienceDefinition() {
-    return mAudienceDefinition;
+  public Boolean getFieldCanEdit() {
+    return mCanEdit;
   }
 
-  public AudienceInsightsStudySpec setFieldAudienceDefinition(Object value) {
-    this.mAudienceDefinition = value;
+  public OfflineConversionDataSetPermissions setFieldCanEdit(Boolean value) {
+    this.mCanEdit = value;
     return this;
   }
 
-  public Object getFieldAuthorInfo() {
-    return mAuthorInfo;
+  public Boolean getFieldCanEditOrUpload() {
+    return mCanEditOrUpload;
   }
 
-  public AudienceInsightsStudySpec setFieldAuthorInfo(Object value) {
-    this.mAuthorInfo = value;
+  public OfflineConversionDataSetPermissions setFieldCanEditOrUpload(Boolean value) {
+    this.mCanEditOrUpload = value;
     return this;
   }
 
-  public Long getFieldCreationTime() {
-    return mCreationTime;
+  public Boolean getFieldCanUpload() {
+    return mCanUpload;
   }
 
-  public AudienceInsightsStudySpec setFieldCreationTime(Long value) {
-    this.mCreationTime = value;
+  public OfflineConversionDataSetPermissions setFieldCanUpload(Boolean value) {
+    this.mCanUpload = value;
     return this;
   }
 
-  public Long getFieldEndTime() {
-    return mEndTime;
+  public Boolean getFieldShouldBlockVanillaBusinessEmployeeAccess() {
+    return mShouldBlockVanillaBusinessEmployeeAccess;
   }
 
-  public AudienceInsightsStudySpec setFieldEndTime(Long value) {
-    this.mEndTime = value;
-    return this;
-  }
-
-  public List<Object> getFieldExcludedRules() {
-    return mExcludedRules;
-  }
-
-  public AudienceInsightsStudySpec setFieldExcludedRules(List<Object> value) {
-    this.mExcludedRules = value;
-    return this;
-  }
-
-  public List<Object> getFieldIncludedRules() {
-    return mIncludedRules;
-  }
-
-  public AudienceInsightsStudySpec setFieldIncludedRules(List<Object> value) {
-    this.mIncludedRules = value;
-    return this;
-  }
-
-  public Long getFieldStartTime() {
-    return mStartTime;
-  }
-
-  public AudienceInsightsStudySpec setFieldStartTime(Long value) {
-    this.mStartTime = value;
-    return this;
-  }
-
-  public String getFieldStatus() {
-    return mStatus;
-  }
-
-  public AudienceInsightsStudySpec setFieldStatus(String value) {
-    this.mStatus = value;
+  public OfflineConversionDataSetPermissions setFieldShouldBlockVanillaBusinessEmployeeAccess(Boolean value) {
+    this.mShouldBlockVanillaBusinessEmployeeAccess = value;
     return this;
   }
 
@@ -310,24 +266,20 @@ public class AudienceInsightsStudySpec extends APINode {
     return gson;
   }
 
-  public AudienceInsightsStudySpec copyFrom(AudienceInsightsStudySpec instance) {
-    this.mAudienceDefinition = instance.mAudienceDefinition;
-    this.mAuthorInfo = instance.mAuthorInfo;
-    this.mCreationTime = instance.mCreationTime;
-    this.mEndTime = instance.mEndTime;
-    this.mExcludedRules = instance.mExcludedRules;
-    this.mIncludedRules = instance.mIncludedRules;
-    this.mStartTime = instance.mStartTime;
-    this.mStatus = instance.mStatus;
+  public OfflineConversionDataSetPermissions copyFrom(OfflineConversionDataSetPermissions instance) {
+    this.mCanEdit = instance.mCanEdit;
+    this.mCanEditOrUpload = instance.mCanEditOrUpload;
+    this.mCanUpload = instance.mCanUpload;
+    this.mShouldBlockVanillaBusinessEmployeeAccess = instance.mShouldBlockVanillaBusinessEmployeeAccess;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AudienceInsightsStudySpec> getParser() {
-    return new APIRequest.ResponseParser<AudienceInsightsStudySpec>() {
-      public APINodeList<AudienceInsightsStudySpec> parseResponse(String response, APIContext context, APIRequest<AudienceInsightsStudySpec> request, String header) throws MalformedResponseException {
-        return AudienceInsightsStudySpec.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<OfflineConversionDataSetPermissions> getParser() {
+    return new APIRequest.ResponseParser<OfflineConversionDataSetPermissions>() {
+      public APINodeList<OfflineConversionDataSetPermissions> parseResponse(String response, APIContext context, APIRequest<OfflineConversionDataSetPermissions> request, String header) throws MalformedResponseException {
+        return OfflineConversionDataSetPermissions.parseResponse(response, context, request, header);
       }
     };
   }

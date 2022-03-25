@@ -1962,6 +1962,7 @@ public class AdsPixel extends APINode {
       "block_offline_analytics",
       "collaborative_ads_managed_partner_business_info",
       "collaborative_ads_managed_partner_eligibility",
+      "cpas_business_setup_config",
       "created_by",
       "created_time",
       "extended_updated_time",
@@ -2088,6 +2089,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetSharedAgencies requestCollaborativeAdsManagedPartnerEligibilityField (boolean value) {
       this.requestField("collaborative_ads_managed_partner_eligibility", value);
+      return this;
+    }
+    public APIRequestGetSharedAgencies requestCpasBusinessSetupConfigField () {
+      return this.requestCpasBusinessSetupConfigField(true);
+    }
+    public APIRequestGetSharedAgencies requestCpasBusinessSetupConfigField (boolean value) {
+      this.requestField("cpas_business_setup_config", value);
       return this;
     }
     public APIRequestGetSharedAgencies requestCreatedByField () {

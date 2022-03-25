@@ -87,12 +87,8 @@ public class User extends APINode {
   private String mInstallType = null;
   @SerializedName("installed")
   private Boolean mInstalled = null;
-  @SerializedName("interested_in")
-  private List<String> mInterestedIn = null;
   @SerializedName("is_guest_user")
   private Boolean mIsGuestUser = null;
-  @SerializedName("is_verified")
-  private Boolean mIsVerified = null;
   @SerializedName("languages")
   private List<Experience> mLanguages = null;
   @SerializedName("last_name")
@@ -125,8 +121,6 @@ public class User extends APINode {
   private String mQuotes = null;
   @SerializedName("relationship_status")
   private String mRelationshipStatus = null;
-  @SerializedName("religion")
-  private String mReligion = null;
   @SerializedName("shared_login_upgrade_required_by")
   private String mSharedLoginUpgradeRequiredBy = null;
   @SerializedName("short_name")
@@ -460,6 +454,10 @@ public class User extends APINode {
     return new APIRequestGetFriends(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateFundraiser createFundraiser() {
+    return new APIRequestCreateFundraiser(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateGameItem createGameItem() {
     return new APIRequestCreateGameItem(this.getPrefixedId().toString(), context);
   }
@@ -486,14 +484,6 @@ public class User extends APINode {
 
   public APIRequestGetLikes getLikes() {
     return new APIRequestGetLikes(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetLiveEncoders getLiveEncoders() {
-    return new APIRequestGetLiveEncoders(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateLiveEncoder createLiveEncoder() {
-    return new APIRequestCreateLiveEncoder(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetLiveVideos getLiveVideos() {
@@ -640,16 +630,8 @@ public class User extends APINode {
     return mInstalled;
   }
 
-  public List<String> getFieldInterestedIn() {
-    return mInterestedIn;
-  }
-
   public Boolean getFieldIsGuestUser() {
     return mIsGuestUser;
-  }
-
-  public Boolean getFieldIsVerified() {
-    return mIsVerified;
   }
 
   public List<Experience> getFieldLanguages() {
@@ -717,10 +699,6 @@ public class User extends APINode {
 
   public String getFieldRelationshipStatus() {
     return mRelationshipStatus;
-  }
-
-  public String getFieldReligion() {
-    return mReligion;
   }
 
   public String getFieldSharedLoginUpgradeRequiredBy() {
@@ -6758,6 +6736,7 @@ public class User extends APINode {
       "block_offline_analytics",
       "collaborative_ads_managed_partner_business_info",
       "collaborative_ads_managed_partner_eligibility",
+      "cpas_business_setup_config",
       "created_by",
       "created_time",
       "extended_updated_time",
@@ -6884,6 +6863,13 @@ public class User extends APINode {
     }
     public APIRequestGetBusinesses requestCollaborativeAdsManagedPartnerEligibilityField (boolean value) {
       this.requestField("collaborative_ads_managed_partner_eligibility", value);
+      return this;
+    }
+    public APIRequestGetBusinesses requestCpasBusinessSetupConfigField () {
+      return this.requestCpasBusinessSetupConfigField(true);
+    }
+    public APIRequestGetBusinesses requestCpasBusinessSetupConfigField (boolean value) {
+      this.requestField("cpas_business_setup_config", value);
       return this;
     }
     public APIRequestGetBusinesses requestCreatedByField () {
@@ -8696,7 +8682,6 @@ public class User extends APINode {
       "ref",
       "referenceable_image_ids",
       "referral_id",
-      "sales_promo_id",
       "scheduled_publish_time",
       "source",
       "sponsor_id",
@@ -9414,15 +9399,6 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setSalesPromoId (Long salesPromoId) {
-      this.setParam("sales_promo_id", salesPromoId);
-      return this;
-    }
-    public APIRequestCreateFeed setSalesPromoId (String salesPromoId) {
-      this.setParam("sales_promo_id", salesPromoId);
-      return this;
-    }
-
     public APIRequestCreateFeed setScheduledPublishTime (String scheduledPublishTime) {
       this.setParam("scheduled_publish_time", scheduledPublishTime);
       return this;
@@ -9642,9 +9618,7 @@ public class User extends APINode {
       "inspirational_people",
       "install_type",
       "installed",
-      "interested_in",
       "is_guest_user",
-      "is_verified",
       "languages",
       "last_name",
       "link",
@@ -9661,7 +9635,6 @@ public class User extends APINode {
       "profile_pic",
       "quotes",
       "relationship_status",
-      "religion",
       "shared_login_upgrade_required_by",
       "short_name",
       "significant_other",
@@ -9886,25 +9859,11 @@ public class User extends APINode {
       this.requestField("installed", value);
       return this;
     }
-    public APIRequestGetFriends requestInterestedInField () {
-      return this.requestInterestedInField(true);
-    }
-    public APIRequestGetFriends requestInterestedInField (boolean value) {
-      this.requestField("interested_in", value);
-      return this;
-    }
     public APIRequestGetFriends requestIsGuestUserField () {
       return this.requestIsGuestUserField(true);
     }
     public APIRequestGetFriends requestIsGuestUserField (boolean value) {
       this.requestField("is_guest_user", value);
-      return this;
-    }
-    public APIRequestGetFriends requestIsVerifiedField () {
-      return this.requestIsVerifiedField(true);
-    }
-    public APIRequestGetFriends requestIsVerifiedField (boolean value) {
-      this.requestField("is_verified", value);
       return this;
     }
     public APIRequestGetFriends requestLanguagesField () {
@@ -10019,13 +9978,6 @@ public class User extends APINode {
       this.requestField("relationship_status", value);
       return this;
     }
-    public APIRequestGetFriends requestReligionField () {
-      return this.requestReligionField(true);
-    }
-    public APIRequestGetFriends requestReligionField (boolean value) {
-      this.requestField("religion", value);
-      return this;
-    }
     public APIRequestGetFriends requestSharedLoginUpgradeRequiredByField () {
       return this.requestSharedLoginUpgradeRequiredByField(true);
     }
@@ -10110,6 +10062,214 @@ public class User extends APINode {
       this.requestField("website", value);
       return this;
     }
+  }
+
+  public static class APIRequestCreateFundraiser extends APIRequest<FundraiserPersonToCharity> {
+
+    FundraiserPersonToCharity lastResponse = null;
+    @Override
+    public FundraiserPersonToCharity getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "charity_id",
+      "cover_photo",
+      "currency",
+      "description",
+      "end_time",
+      "external_event_name",
+      "external_event_start_time",
+      "external_event_uri",
+      "external_fundraiser_uri",
+      "external_id",
+      "fundraiser_type",
+      "goal_amount",
+      "name",
+      "page_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public FundraiserPersonToCharity parseResponse(String response, String header) throws APIException {
+      return FundraiserPersonToCharity.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public FundraiserPersonToCharity execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public FundraiserPersonToCharity execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<FundraiserPersonToCharity> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<FundraiserPersonToCharity> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, FundraiserPersonToCharity>() {
+           public FundraiserPersonToCharity apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateFundraiser.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateFundraiser(String nodeId, APIContext context) {
+      super(context, nodeId, "/fundraisers", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateFundraiser setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateFundraiser setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateFundraiser setCharityId (String charityId) {
+      this.setParam("charity_id", charityId);
+      return this;
+    }
+
+    public APIRequestCreateFundraiser setCoverPhoto (File coverPhoto) {
+      this.setParam("cover_photo", coverPhoto);
+      return this;
+    }
+    public APIRequestCreateFundraiser setCoverPhoto (String coverPhoto) {
+      this.setParam("cover_photo", coverPhoto);
+      return this;
+    }
+
+    public APIRequestCreateFundraiser setCurrency (String currency) {
+      this.setParam("currency", currency);
+      return this;
+    }
+
+    public APIRequestCreateFundraiser setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestCreateFundraiser setEndTime (Long endTime) {
+      this.setParam("end_time", endTime);
+      return this;
+    }
+    public APIRequestCreateFundraiser setEndTime (String endTime) {
+      this.setParam("end_time", endTime);
+      return this;
+    }
+
+    public APIRequestCreateFundraiser setExternalEventName (String externalEventName) {
+      this.setParam("external_event_name", externalEventName);
+      return this;
+    }
+
+    public APIRequestCreateFundraiser setExternalEventStartTime (Long externalEventStartTime) {
+      this.setParam("external_event_start_time", externalEventStartTime);
+      return this;
+    }
+    public APIRequestCreateFundraiser setExternalEventStartTime (String externalEventStartTime) {
+      this.setParam("external_event_start_time", externalEventStartTime);
+      return this;
+    }
+
+    public APIRequestCreateFundraiser setExternalEventUri (String externalEventUri) {
+      this.setParam("external_event_uri", externalEventUri);
+      return this;
+    }
+
+    public APIRequestCreateFundraiser setExternalFundraiserUri (String externalFundraiserUri) {
+      this.setParam("external_fundraiser_uri", externalFundraiserUri);
+      return this;
+    }
+
+    public APIRequestCreateFundraiser setExternalId (String externalId) {
+      this.setParam("external_id", externalId);
+      return this;
+    }
+
+    public APIRequestCreateFundraiser setFundraiserType (FundraiserPersonToCharity.EnumFundraiserType fundraiserType) {
+      this.setParam("fundraiser_type", fundraiserType);
+      return this;
+    }
+    public APIRequestCreateFundraiser setFundraiserType (String fundraiserType) {
+      this.setParam("fundraiser_type", fundraiserType);
+      return this;
+    }
+
+    public APIRequestCreateFundraiser setGoalAmount (Long goalAmount) {
+      this.setParam("goal_amount", goalAmount);
+      return this;
+    }
+    public APIRequestCreateFundraiser setGoalAmount (String goalAmount) {
+      this.setParam("goal_amount", goalAmount);
+      return this;
+    }
+
+    public APIRequestCreateFundraiser setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateFundraiser setPageId (String pageId) {
+      this.setParam("page_id", pageId);
+      return this;
+    }
+
+    public APIRequestCreateFundraiser requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateFundraiser requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateFundraiser requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateFundraiser requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateFundraiser requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateFundraiser requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestCreateGameItem extends APIRequest<APINode> {
@@ -12306,332 +12466,6 @@ public class User extends APINode {
     }
   }
 
-  public static class APIRequestGetLiveEncoders extends APIRequest<LiveEncoder> {
-
-    APINodeList<LiveEncoder> lastResponse = null;
-    @Override
-    public APINodeList<LiveEncoder> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "brand",
-      "creation_time",
-      "current_broadcast",
-      "current_input_stream",
-      "device_id",
-      "id",
-      "last_heartbeat_time",
-      "model",
-      "name",
-      "status",
-      "version",
-    };
-
-    @Override
-    public APINodeList<LiveEncoder> parseResponse(String response, String header) throws APIException {
-      return LiveEncoder.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<LiveEncoder> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<LiveEncoder> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<LiveEncoder>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<LiveEncoder>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<LiveEncoder>>() {
-           public APINodeList<LiveEncoder> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetLiveEncoders.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetLiveEncoders(String nodeId, APIContext context) {
-      super(context, nodeId, "/live_encoders", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetLiveEncoders setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetLiveEncoders setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetLiveEncoders requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetLiveEncoders requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetLiveEncoders requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetLiveEncoders requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetLiveEncoders requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetLiveEncoders requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetLiveEncoders requestBrandField () {
-      return this.requestBrandField(true);
-    }
-    public APIRequestGetLiveEncoders requestBrandField (boolean value) {
-      this.requestField("brand", value);
-      return this;
-    }
-    public APIRequestGetLiveEncoders requestCreationTimeField () {
-      return this.requestCreationTimeField(true);
-    }
-    public APIRequestGetLiveEncoders requestCreationTimeField (boolean value) {
-      this.requestField("creation_time", value);
-      return this;
-    }
-    public APIRequestGetLiveEncoders requestCurrentBroadcastField () {
-      return this.requestCurrentBroadcastField(true);
-    }
-    public APIRequestGetLiveEncoders requestCurrentBroadcastField (boolean value) {
-      this.requestField("current_broadcast", value);
-      return this;
-    }
-    public APIRequestGetLiveEncoders requestCurrentInputStreamField () {
-      return this.requestCurrentInputStreamField(true);
-    }
-    public APIRequestGetLiveEncoders requestCurrentInputStreamField (boolean value) {
-      this.requestField("current_input_stream", value);
-      return this;
-    }
-    public APIRequestGetLiveEncoders requestDeviceIdField () {
-      return this.requestDeviceIdField(true);
-    }
-    public APIRequestGetLiveEncoders requestDeviceIdField (boolean value) {
-      this.requestField("device_id", value);
-      return this;
-    }
-    public APIRequestGetLiveEncoders requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetLiveEncoders requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetLiveEncoders requestLastHeartbeatTimeField () {
-      return this.requestLastHeartbeatTimeField(true);
-    }
-    public APIRequestGetLiveEncoders requestLastHeartbeatTimeField (boolean value) {
-      this.requestField("last_heartbeat_time", value);
-      return this;
-    }
-    public APIRequestGetLiveEncoders requestModelField () {
-      return this.requestModelField(true);
-    }
-    public APIRequestGetLiveEncoders requestModelField (boolean value) {
-      this.requestField("model", value);
-      return this;
-    }
-    public APIRequestGetLiveEncoders requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetLiveEncoders requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetLiveEncoders requestStatusField () {
-      return this.requestStatusField(true);
-    }
-    public APIRequestGetLiveEncoders requestStatusField (boolean value) {
-      this.requestField("status", value);
-      return this;
-    }
-    public APIRequestGetLiveEncoders requestVersionField () {
-      return this.requestVersionField(true);
-    }
-    public APIRequestGetLiveEncoders requestVersionField (boolean value) {
-      this.requestField("version", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestCreateLiveEncoder extends APIRequest<LiveEncoder> {
-
-    LiveEncoder lastResponse = null;
-    @Override
-    public LiveEncoder getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "brand",
-      "device_id",
-      "model",
-      "name",
-      "version",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public LiveEncoder parseResponse(String response, String header) throws APIException {
-      return LiveEncoder.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public LiveEncoder execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public LiveEncoder execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<LiveEncoder> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<LiveEncoder> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, LiveEncoder>() {
-           public LiveEncoder apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateLiveEncoder.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateLiveEncoder(String nodeId, APIContext context) {
-      super(context, nodeId, "/live_encoders", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateLiveEncoder setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateLiveEncoder setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateLiveEncoder setBrand (String brand) {
-      this.setParam("brand", brand);
-      return this;
-    }
-
-    public APIRequestCreateLiveEncoder setDeviceId (String deviceId) {
-      this.setParam("device_id", deviceId);
-      return this;
-    }
-
-    public APIRequestCreateLiveEncoder setModel (String model) {
-      this.setParam("model", model);
-      return this;
-    }
-
-    public APIRequestCreateLiveEncoder setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateLiveEncoder setVersion (String version) {
-      this.setParam("version", version);
-      return this;
-    }
-
-    public APIRequestCreateLiveEncoder requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateLiveEncoder requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateLiveEncoder requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateLiveEncoder requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateLiveEncoder requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateLiveEncoder requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetLiveVideos extends APIRequest<LiveVideo> {
 
     APINodeList<LiveVideo> lastResponse = null;
@@ -12659,7 +12493,6 @@ public class User extends APINode {
       "ingest_streams",
       "is_manual_mode",
       "is_reference_only",
-      "live_encoders",
       "live_views",
       "overlay_url",
       "permalink_url",
@@ -12880,13 +12713,6 @@ public class User extends APINode {
       this.requestField("is_reference_only", value);
       return this;
     }
-    public APIRequestGetLiveVideos requestLiveEncodersField () {
-      return this.requestLiveEncodersField(true);
-    }
-    public APIRequestGetLiveVideos requestLiveEncodersField (boolean value) {
-      this.requestField("live_encoders", value);
-      return this;
-    }
     public APIRequestGetLiveVideos requestLiveViewsField () {
       return this.requestLiveViewsField(true);
     }
@@ -12996,8 +12822,8 @@ public class User extends APINode {
       "front_z_rotation",
       "is_audio_only",
       "is_spherical",
-      "live_encoders",
       "original_fov",
+      "planned_start_time",
       "privacy",
       "projection",
       "published",
@@ -13130,21 +12956,21 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateLiveVideo setLiveEncoders (List<String> liveEncoders) {
-      this.setParam("live_encoders", liveEncoders);
-      return this;
-    }
-    public APIRequestCreateLiveVideo setLiveEncoders (String liveEncoders) {
-      this.setParam("live_encoders", liveEncoders);
-      return this;
-    }
-
     public APIRequestCreateLiveVideo setOriginalFov (Long originalFov) {
       this.setParam("original_fov", originalFov);
       return this;
     }
     public APIRequestCreateLiveVideo setOriginalFov (String originalFov) {
       this.setParam("original_fov", originalFov);
+      return this;
+    }
+
+    public APIRequestCreateLiveVideo setPlannedStartTime (Long plannedStartTime) {
+      this.setParam("planned_start_time", plannedStartTime);
+      return this;
+    }
+    public APIRequestCreateLiveVideo setPlannedStartTime (String plannedStartTime) {
+      this.setParam("planned_start_time", plannedStartTime);
       return this;
     }
 
@@ -14750,6 +14576,7 @@ public class User extends APINode {
       "items",
       "payout_foreign_exchange_rate",
       "phone_support_eligible",
+      "platform",
       "refundable_amount",
       "request_id",
       "tax",
@@ -14936,6 +14763,13 @@ public class User extends APINode {
     }
     public APIRequestGetPaymentTransactions requestPhoneSupportEligibleField (boolean value) {
       this.requestField("phone_support_eligible", value);
+      return this;
+    }
+    public APIRequestGetPaymentTransactions requestPlatformField () {
+      return this.requestPlatformField(true);
+    }
+    public APIRequestGetPaymentTransactions requestPlatformField (boolean value) {
+      this.requestField("platform", value);
       return this;
     }
     public APIRequestGetPaymentTransactions requestRefundableAmountField () {
@@ -16171,7 +16005,6 @@ public class User extends APINode {
       "ios_bundle_id",
       "is_explicit_location",
       "is_explicit_place",
-      "is_visual_search",
       "manual_privacy",
       "message",
       "name",
@@ -16414,15 +16247,6 @@ public class User extends APINode {
     }
     public APIRequestCreatePhoto setIsExplicitPlace (String isExplicitPlace) {
       this.setParam("is_explicit_place", isExplicitPlace);
-      return this;
-    }
-
-    public APIRequestCreatePhoto setIsVisualSearch (Boolean isVisualSearch) {
-      this.setParam("is_visual_search", isVisualSearch);
-      return this;
-    }
-    public APIRequestCreatePhoto setIsVisualSearch (String isVisualSearch) {
-      this.setParam("is_visual_search", isVisualSearch);
       return this;
     }
 
@@ -18497,7 +18321,6 @@ public class User extends APINode {
       "react_mode_metadata",
       "referenced_sticker_id",
       "replace_video_id",
-      "sales_promo_id",
       "slideshow_spec",
       "source",
       "source_instagram_media_id",
@@ -18972,15 +18795,6 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateVideo setSalesPromoId (Long salesPromoId) {
-      this.setParam("sales_promo_id", salesPromoId);
-      return this;
-    }
-    public APIRequestCreateVideo setSalesPromoId (String salesPromoId) {
-      this.setParam("sales_promo_id", salesPromoId);
-      return this;
-    }
-
     public APIRequestCreateVideo setSlideshowSpec (Map<String, String> slideshowSpec) {
       this.setParam("slideshow_spec", slideshowSpec);
       return this;
@@ -19291,9 +19105,7 @@ public class User extends APINode {
       "inspirational_people",
       "install_type",
       "installed",
-      "interested_in",
       "is_guest_user",
-      "is_verified",
       "languages",
       "last_name",
       "link",
@@ -19310,7 +19122,6 @@ public class User extends APINode {
       "profile_pic",
       "quotes",
       "relationship_status",
-      "religion",
       "shared_login_upgrade_required_by",
       "short_name",
       "significant_other",
@@ -19526,25 +19337,11 @@ public class User extends APINode {
       this.requestField("installed", value);
       return this;
     }
-    public APIRequestGet requestInterestedInField () {
-      return this.requestInterestedInField(true);
-    }
-    public APIRequestGet requestInterestedInField (boolean value) {
-      this.requestField("interested_in", value);
-      return this;
-    }
     public APIRequestGet requestIsGuestUserField () {
       return this.requestIsGuestUserField(true);
     }
     public APIRequestGet requestIsGuestUserField (boolean value) {
       this.requestField("is_guest_user", value);
-      return this;
-    }
-    public APIRequestGet requestIsVerifiedField () {
-      return this.requestIsVerifiedField(true);
-    }
-    public APIRequestGet requestIsVerifiedField (boolean value) {
-      this.requestField("is_verified", value);
       return this;
     }
     public APIRequestGet requestLanguagesField () {
@@ -19657,13 +19454,6 @@ public class User extends APINode {
     }
     public APIRequestGet requestRelationshipStatusField (boolean value) {
       this.requestField("relationship_status", value);
-      return this;
-    }
-    public APIRequestGet requestReligionField () {
-      return this.requestReligionField(true);
-    }
-    public APIRequestGet requestReligionField (boolean value) {
-      this.requestField("religion", value);
       return this;
     }
     public APIRequestGet requestSharedLoginUpgradeRequiredByField () {
@@ -20040,9 +19830,7 @@ public class User extends APINode {
     this.mInspirationalPeople = instance.mInspirationalPeople;
     this.mInstallType = instance.mInstallType;
     this.mInstalled = instance.mInstalled;
-    this.mInterestedIn = instance.mInterestedIn;
     this.mIsGuestUser = instance.mIsGuestUser;
-    this.mIsVerified = instance.mIsVerified;
     this.mLanguages = instance.mLanguages;
     this.mLastName = instance.mLastName;
     this.mLink = instance.mLink;
@@ -20059,7 +19847,6 @@ public class User extends APINode {
     this.mProfilePic = instance.mProfilePic;
     this.mQuotes = instance.mQuotes;
     this.mRelationshipStatus = instance.mRelationshipStatus;
-    this.mReligion = instance.mReligion;
     this.mSharedLoginUpgradeRequiredBy = instance.mSharedLoginUpgradeRequiredBy;
     this.mShortName = instance.mShortName;
     this.mSignificantOther = instance.mSignificantOther;

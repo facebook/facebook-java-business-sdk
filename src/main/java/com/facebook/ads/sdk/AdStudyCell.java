@@ -1461,6 +1461,7 @@ public class AdStudyCell extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
+      "ad_strategy_group_id",
       "ad_strategy_id",
       "adlabels",
       "bid_strategy",
@@ -1593,6 +1594,13 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetCampaigns requestAccountIdField (boolean value) {
       this.requestField("account_id", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestAdStrategyGroupIdField () {
+      return this.requestAdStrategyGroupIdField(true);
+    }
+    public APIRequestGetCampaigns requestAdStrategyGroupIdField (boolean value) {
+      this.requestField("ad_strategy_group_id", value);
       return this;
     }
     public APIRequestGetCampaigns requestAdStrategyIdField () {

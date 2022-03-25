@@ -85,8 +85,6 @@ public class IGMedia extends APINode {
   private String mTimestamp = null;
   @SerializedName("username")
   private String mUsername = null;
-  @SerializedName("video_title")
-  private String mVideoTitle = null;
   protected static Gson gson = null;
 
   IGMedia() {
@@ -384,10 +382,6 @@ public class IGMedia extends APINode {
     return mUsername;
   }
 
-  public String getFieldVideoTitle() {
-    return mVideoTitle;
-  }
-
 
 
   public static class APIRequestGetChildren extends APIRequest<IGMedia> {
@@ -416,7 +410,6 @@ public class IGMedia extends APINode {
       "thumbnail_url",
       "timestamp",
       "username",
-      "video_title",
     };
 
     @Override
@@ -611,13 +604,6 @@ public class IGMedia extends APINode {
     }
     public APIRequestGetChildren requestUsernameField (boolean value) {
       this.requestField("username", value);
-      return this;
-    }
-    public APIRequestGetChildren requestVideoTitleField () {
-      return this.requestVideoTitleField(true);
-    }
-    public APIRequestGetChildren requestVideoTitleField (boolean value) {
-      this.requestField("video_title", value);
       return this;
     }
   }
@@ -1114,7 +1100,6 @@ public class IGMedia extends APINode {
       "thumbnail_url",
       "timestamp",
       "username",
-      "video_title",
     };
 
     @Override
@@ -1311,13 +1296,6 @@ public class IGMedia extends APINode {
       this.requestField("username", value);
       return this;
     }
-    public APIRequestGet requestVideoTitleField () {
-      return this.requestVideoTitleField(true);
-    }
-    public APIRequestGet requestVideoTitleField (boolean value) {
-      this.requestField("video_title", value);
-      return this;
-    }
   }
 
   public static class APIRequestUpdate extends APIRequest<IGMedia> {
@@ -1464,7 +1442,6 @@ public class IGMedia extends APINode {
     this.mThumbnailUrl = instance.mThumbnailUrl;
     this.mTimestamp = instance.mTimestamp;
     this.mUsername = instance.mUsername;
-    this.mVideoTitle = instance.mVideoTitle;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

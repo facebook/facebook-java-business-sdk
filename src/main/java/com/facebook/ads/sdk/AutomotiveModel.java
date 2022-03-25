@@ -1179,6 +1179,8 @@ public class AutomotiveModel extends APINode {
       VALUE_SALOON("SALOON"),
       @SerializedName("SEDAN")
       VALUE_SEDAN("SEDAN"),
+      @SerializedName("SMALL_CAR")
+      VALUE_SMALL_CAR("SMALL_CAR"),
       @SerializedName("SPORTSCAR")
       VALUE_SPORTSCAR("SPORTSCAR"),
       @SerializedName("SUPERCAR")

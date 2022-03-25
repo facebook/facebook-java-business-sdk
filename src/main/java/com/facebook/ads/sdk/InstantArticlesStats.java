@@ -54,39 +54,31 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class InvoiceCampaign extends APINode {
-  @SerializedName("ad_account_id")
-  private String mAdAccountId = null;
-  @SerializedName("billed_amount_details")
-  private BilledAmountDetails mBilledAmountDetails = null;
-  @SerializedName("campaign_id")
-  private String mCampaignId = null;
-  @SerializedName("campaign_name")
-  private String mCampaignName = null;
-  @SerializedName("clicks")
-  private Long mClicks = null;
-  @SerializedName("conversions")
-  private Long mConversions = null;
-  @SerializedName("description")
-  private String mDescription = null;
-  @SerializedName("impressions")
-  private Long mImpressions = null;
-  @SerializedName("tags")
-  private List<String> mTags = null;
+public class InstantArticlesStats extends APINode {
+  @SerializedName("error")
+  private String mError = null;
+  @SerializedName("metadata")
+  private Map<String, Object> mMetadata = null;
+  @SerializedName("metric")
+  private Object mMetric = null;
+  @SerializedName("totals")
+  private Map<String, Object> mTotals = null;
+  @SerializedName("x_axis_breakdown")
+  private List<Map<String, Object>> mXAxisBreakdown = null;
   protected static Gson gson = null;
 
-  public InvoiceCampaign() {
+  public InstantArticlesStats() {
   }
 
   public String getId() {
     return null;
   }
-  public static InvoiceCampaign loadJSON(String json, APIContext context, String header) {
-    InvoiceCampaign invoiceCampaign = getGson().fromJson(json, InvoiceCampaign.class);
+  public static InstantArticlesStats loadJSON(String json, APIContext context, String header) {
+    InstantArticlesStats instantArticlesStats = getGson().fromJson(json, InstantArticlesStats.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(invoiceCampaign.toString());
+      JsonElement o2 = parser.parse(instantArticlesStats.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -96,14 +88,14 @@ public class InvoiceCampaign extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    invoiceCampaign.context = context;
-    invoiceCampaign.rawValue = json;
-    invoiceCampaign.header = header;
-    return invoiceCampaign;
+    instantArticlesStats.context = context;
+    instantArticlesStats.rawValue = json;
+    instantArticlesStats.header = header;
+    return instantArticlesStats;
   }
 
-  public static APINodeList<InvoiceCampaign> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<InvoiceCampaign> invoiceCampaigns = new APINodeList<InvoiceCampaign>(request, json, header);
+  public static APINodeList<InstantArticlesStats> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<InstantArticlesStats> instantArticlesStatss = new APINodeList<InstantArticlesStats>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -114,9 +106,9 @@ public class InvoiceCampaign extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          invoiceCampaigns.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          instantArticlesStatss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return invoiceCampaigns;
+        return instantArticlesStatss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -126,20 +118,20 @@ public class InvoiceCampaign extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                invoiceCampaigns.setCursors(before, after);
+                instantArticlesStatss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            invoiceCampaigns.setPaging(previous, next);
+            instantArticlesStatss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              invoiceCampaigns.setAppSecret(context.getAppSecretProof());
+              instantArticlesStatss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              invoiceCampaigns.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              instantArticlesStatss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -150,23 +142,23 @@ public class InvoiceCampaign extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  invoiceCampaigns.add(loadJSON(entry.getValue().toString(), context, header));
+                  instantArticlesStatss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              invoiceCampaigns.add(loadJSON(obj.toString(), context, header));
+              instantArticlesStatss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return invoiceCampaigns;
+          return instantArticlesStatss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              invoiceCampaigns.add(loadJSON(entry.getValue().toString(), context, header));
+              instantArticlesStatss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return invoiceCampaigns;
+          return instantArticlesStatss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -183,20 +175,20 @@ public class InvoiceCampaign extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              invoiceCampaigns.add(loadJSON(value.toString(), context, header));
+              instantArticlesStatss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return invoiceCampaigns;
+            return instantArticlesStatss;
           }
 
           // Sixth, check if it's pure JsonObject
-          invoiceCampaigns.clear();
-          invoiceCampaigns.add(loadJSON(json, context, header));
-          return invoiceCampaigns;
+          instantArticlesStatss.clear();
+          instantArticlesStatss.add(loadJSON(json, context, header));
+          return instantArticlesStatss;
         }
       }
     } catch (Exception e) {
@@ -224,89 +216,48 @@ public class InvoiceCampaign extends APINode {
   }
 
 
-  public String getFieldAdAccountId() {
-    return mAdAccountId;
+  public String getFieldError() {
+    return mError;
   }
 
-  public InvoiceCampaign setFieldAdAccountId(String value) {
-    this.mAdAccountId = value;
+  public InstantArticlesStats setFieldError(String value) {
+    this.mError = value;
     return this;
   }
 
-  public BilledAmountDetails getFieldBilledAmountDetails() {
-    return mBilledAmountDetails;
+  public Map<String, Object> getFieldMetadata() {
+    return mMetadata;
   }
 
-  public InvoiceCampaign setFieldBilledAmountDetails(BilledAmountDetails value) {
-    this.mBilledAmountDetails = value;
+  public InstantArticlesStats setFieldMetadata(Map<String, Object> value) {
+    this.mMetadata = value;
     return this;
   }
 
-  public InvoiceCampaign setFieldBilledAmountDetails(String value) {
-    Type type = new TypeToken<BilledAmountDetails>(){}.getType();
-    this.mBilledAmountDetails = BilledAmountDetails.getGson().fromJson(value, type);
-    return this;
-  }
-  public String getFieldCampaignId() {
-    return mCampaignId;
+  public Object getFieldMetric() {
+    return mMetric;
   }
 
-  public InvoiceCampaign setFieldCampaignId(String value) {
-    this.mCampaignId = value;
+  public InstantArticlesStats setFieldMetric(Object value) {
+    this.mMetric = value;
     return this;
   }
 
-  public String getFieldCampaignName() {
-    return mCampaignName;
+  public Map<String, Object> getFieldTotals() {
+    return mTotals;
   }
 
-  public InvoiceCampaign setFieldCampaignName(String value) {
-    this.mCampaignName = value;
+  public InstantArticlesStats setFieldTotals(Map<String, Object> value) {
+    this.mTotals = value;
     return this;
   }
 
-  public Long getFieldClicks() {
-    return mClicks;
+  public List<Map<String, Object>> getFieldXAxisBreakdown() {
+    return mXAxisBreakdown;
   }
 
-  public InvoiceCampaign setFieldClicks(Long value) {
-    this.mClicks = value;
-    return this;
-  }
-
-  public Long getFieldConversions() {
-    return mConversions;
-  }
-
-  public InvoiceCampaign setFieldConversions(Long value) {
-    this.mConversions = value;
-    return this;
-  }
-
-  public String getFieldDescription() {
-    return mDescription;
-  }
-
-  public InvoiceCampaign setFieldDescription(String value) {
-    this.mDescription = value;
-    return this;
-  }
-
-  public Long getFieldImpressions() {
-    return mImpressions;
-  }
-
-  public InvoiceCampaign setFieldImpressions(Long value) {
-    this.mImpressions = value;
-    return this;
-  }
-
-  public List<String> getFieldTags() {
-    return mTags;
-  }
-
-  public InvoiceCampaign setFieldTags(List<String> value) {
-    this.mTags = value;
+  public InstantArticlesStats setFieldXAxisBreakdown(List<Map<String, Object>> value) {
+    this.mXAxisBreakdown = value;
     return this;
   }
 
@@ -326,25 +277,21 @@ public class InvoiceCampaign extends APINode {
     return gson;
   }
 
-  public InvoiceCampaign copyFrom(InvoiceCampaign instance) {
-    this.mAdAccountId = instance.mAdAccountId;
-    this.mBilledAmountDetails = instance.mBilledAmountDetails;
-    this.mCampaignId = instance.mCampaignId;
-    this.mCampaignName = instance.mCampaignName;
-    this.mClicks = instance.mClicks;
-    this.mConversions = instance.mConversions;
-    this.mDescription = instance.mDescription;
-    this.mImpressions = instance.mImpressions;
-    this.mTags = instance.mTags;
+  public InstantArticlesStats copyFrom(InstantArticlesStats instance) {
+    this.mError = instance.mError;
+    this.mMetadata = instance.mMetadata;
+    this.mMetric = instance.mMetric;
+    this.mTotals = instance.mTotals;
+    this.mXAxisBreakdown = instance.mXAxisBreakdown;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<InvoiceCampaign> getParser() {
-    return new APIRequest.ResponseParser<InvoiceCampaign>() {
-      public APINodeList<InvoiceCampaign> parseResponse(String response, APIContext context, APIRequest<InvoiceCampaign> request, String header) throws MalformedResponseException {
-        return InvoiceCampaign.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<InstantArticlesStats> getParser() {
+    return new APIRequest.ResponseParser<InstantArticlesStats>() {
+      public APINodeList<InstantArticlesStats> parseResponse(String response, APIContext context, APIRequest<InstantArticlesStats> request, String header) throws MalformedResponseException {
+        return InstantArticlesStats.parseResponse(response, context, request, header);
       }
     };
   }

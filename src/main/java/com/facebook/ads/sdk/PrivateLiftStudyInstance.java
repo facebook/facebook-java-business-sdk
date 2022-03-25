@@ -67,6 +67,8 @@ public class PrivateLiftStudyInstance extends APINode {
   private List<String> mServerIps = null;
   @SerializedName("status")
   private String mStatus = null;
+  @SerializedName("tier")
+  private String mTier = null;
   protected static Gson gson = null;
 
   PrivateLiftStudyInstance() {
@@ -309,6 +311,10 @@ public class PrivateLiftStudyInstance extends APINode {
     return mStatus;
   }
 
+  public String getFieldTier() {
+    return mTier;
+  }
+
 
 
   public static class APIRequestGet extends APIRequest<PrivateLiftStudyInstance> {
@@ -328,6 +334,7 @@ public class PrivateLiftStudyInstance extends APINode {
       "latest_status_update_time",
       "server_ips",
       "status",
+      "tier",
     };
 
     @Override
@@ -461,6 +468,13 @@ public class PrivateLiftStudyInstance extends APINode {
       this.requestField("status", value);
       return this;
     }
+    public APIRequestGet requestTierField () {
+      return this.requestTierField(true);
+    }
+    public APIRequestGet requestTierField (boolean value) {
+      this.requestField("tier", value);
+      return this;
+    }
   }
 
   public static class APIRequestUpdate extends APIRequest<PrivateLiftStudyInstance> {
@@ -584,6 +598,8 @@ public class PrivateLiftStudyInstance extends APINode {
       VALUE_COMPUTE("COMPUTE"),
       @SerializedName("ID_MATCH")
       VALUE_ID_MATCH("ID_MATCH"),
+      @SerializedName("NEXT")
+      VALUE_NEXT("NEXT"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
       ;
@@ -621,6 +637,7 @@ public class PrivateLiftStudyInstance extends APINode {
     this.mLatestStatusUpdateTime = instance.mLatestStatusUpdateTime;
     this.mServerIps = instance.mServerIps;
     this.mStatus = instance.mStatus;
+    this.mTier = instance.mTier;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -97,6 +97,16 @@ public class ProductItem extends APINode {
   private String mCustomLabel3 = null;
   @SerializedName("custom_label_4")
   private String mCustomLabel4 = null;
+  @SerializedName("custom_number_0")
+  private String mCustomNumber0 = null;
+  @SerializedName("custom_number_1")
+  private String mCustomNumber1 = null;
+  @SerializedName("custom_number_2")
+  private String mCustomNumber2 = null;
+  @SerializedName("custom_number_3")
+  private String mCustomNumber3 = null;
+  @SerializedName("custom_number_4")
+  private String mCustomNumber4 = null;
   @SerializedName("description")
   private String mDescription = null;
   @SerializedName("expiration_date")
@@ -185,6 +195,8 @@ public class ProductItem extends APINode {
   private String mUrl = null;
   @SerializedName("visibility")
   private EnumVisibility mVisibility = null;
+  @SerializedName("wa_compliance_category")
+  private String mWaComplianceCategory = null;
   protected static Gson gson = null;
 
   ProductItem() {
@@ -499,6 +511,26 @@ public class ProductItem extends APINode {
     return mCustomLabel4;
   }
 
+  public String getFieldCustomNumber0() {
+    return mCustomNumber0;
+  }
+
+  public String getFieldCustomNumber1() {
+    return mCustomNumber1;
+  }
+
+  public String getFieldCustomNumber2() {
+    return mCustomNumber2;
+  }
+
+  public String getFieldCustomNumber3() {
+    return mCustomNumber3;
+  }
+
+  public String getFieldCustomNumber4() {
+    return mCustomNumber4;
+  }
+
   public String getFieldDescription() {
     return mDescription;
   }
@@ -682,6 +714,10 @@ public class ProductItem extends APINode {
 
   public EnumVisibility getFieldVisibility() {
     return mVisibility;
+  }
+
+  public String getFieldWaComplianceCategory() {
+    return mWaComplianceCategory;
   }
 
 
@@ -1131,6 +1167,11 @@ public class ProductItem extends APINode {
       "custom_label_2",
       "custom_label_3",
       "custom_label_4",
+      "custom_number_0",
+      "custom_number_1",
+      "custom_number_2",
+      "custom_number_3",
+      "custom_number_4",
       "description",
       "expiration_date",
       "fb_product_category",
@@ -1175,6 +1216,7 @@ public class ProductItem extends APINode {
       "start_date",
       "url",
       "visibility",
+      "wa_compliance_category",
     };
 
     @Override
@@ -1444,6 +1486,41 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestCustomLabel4Field (boolean value) {
       this.requestField("custom_label_4", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNumber0Field () {
+      return this.requestCustomNumber0Field(true);
+    }
+    public APIRequestGet requestCustomNumber0Field (boolean value) {
+      this.requestField("custom_number_0", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNumber1Field () {
+      return this.requestCustomNumber1Field(true);
+    }
+    public APIRequestGet requestCustomNumber1Field (boolean value) {
+      this.requestField("custom_number_1", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNumber2Field () {
+      return this.requestCustomNumber2Field(true);
+    }
+    public APIRequestGet requestCustomNumber2Field (boolean value) {
+      this.requestField("custom_number_2", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNumber3Field () {
+      return this.requestCustomNumber3Field(true);
+    }
+    public APIRequestGet requestCustomNumber3Field (boolean value) {
+      this.requestField("custom_number_3", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNumber4Field () {
+      return this.requestCustomNumber4Field(true);
+    }
+    public APIRequestGet requestCustomNumber4Field (boolean value) {
+      this.requestField("custom_number_4", value);
       return this;
     }
     public APIRequestGet requestDescriptionField () {
@@ -1754,6 +1831,13 @@ public class ProductItem extends APINode {
       this.requestField("visibility", value);
       return this;
     }
+    public APIRequestGet requestWaComplianceCategoryField () {
+      return this.requestWaComplianceCategoryField(true);
+    }
+    public APIRequestGet requestWaComplianceCategoryField (boolean value) {
+      this.requestField("wa_compliance_category", value);
+      return this;
+    }
   }
 
   public static class APIRequestUpdate extends APIRequest<ProductItem> {
@@ -1786,6 +1870,11 @@ public class ProductItem extends APINode {
       "custom_label_2",
       "custom_label_3",
       "custom_label_4",
+      "custom_number_0",
+      "custom_number_1",
+      "custom_number_2",
+      "custom_number_3",
+      "custom_number_4",
       "description",
       "expiration_date",
       "fb_product_category",
@@ -1830,6 +1919,7 @@ public class ProductItem extends APINode {
       "start_date",
       "url",
       "visibility",
+      "wa_compliance_category",
       "windows_phone_app_id",
       "windows_phone_app_name",
       "windows_phone_url",
@@ -2030,6 +2120,51 @@ public class ProductItem extends APINode {
 
     public APIRequestUpdate setCustomLabel4 (String customLabel4) {
       this.setParam("custom_label_4", customLabel4);
+      return this;
+    }
+
+    public APIRequestUpdate setCustomNumber0 (Long customNumber0) {
+      this.setParam("custom_number_0", customNumber0);
+      return this;
+    }
+    public APIRequestUpdate setCustomNumber0 (String customNumber0) {
+      this.setParam("custom_number_0", customNumber0);
+      return this;
+    }
+
+    public APIRequestUpdate setCustomNumber1 (Long customNumber1) {
+      this.setParam("custom_number_1", customNumber1);
+      return this;
+    }
+    public APIRequestUpdate setCustomNumber1 (String customNumber1) {
+      this.setParam("custom_number_1", customNumber1);
+      return this;
+    }
+
+    public APIRequestUpdate setCustomNumber2 (Long customNumber2) {
+      this.setParam("custom_number_2", customNumber2);
+      return this;
+    }
+    public APIRequestUpdate setCustomNumber2 (String customNumber2) {
+      this.setParam("custom_number_2", customNumber2);
+      return this;
+    }
+
+    public APIRequestUpdate setCustomNumber3 (Long customNumber3) {
+      this.setParam("custom_number_3", customNumber3);
+      return this;
+    }
+    public APIRequestUpdate setCustomNumber3 (String customNumber3) {
+      this.setParam("custom_number_3", customNumber3);
+      return this;
+    }
+
+    public APIRequestUpdate setCustomNumber4 (Long customNumber4) {
+      this.setParam("custom_number_4", customNumber4);
+      return this;
+    }
+    public APIRequestUpdate setCustomNumber4 (String customNumber4) {
+      this.setParam("custom_number_4", customNumber4);
       return this;
     }
 
@@ -2310,6 +2445,15 @@ public class ProductItem extends APINode {
     }
     public APIRequestUpdate setVisibility (String visibility) {
       this.setParam("visibility", visibility);
+      return this;
+    }
+
+    public APIRequestUpdate setWaComplianceCategory (ProductItem.EnumWaComplianceCategory waComplianceCategory) {
+      this.setParam("wa_compliance_category", waComplianceCategory);
+      return this;
+    }
+    public APIRequestUpdate setWaComplianceCategory (String waComplianceCategory) {
+      this.setParam("wa_compliance_category", waComplianceCategory);
       return this;
     }
 
@@ -2759,8 +2903,12 @@ public class ProductItem extends APINode {
       VALUE_FB_ELEC_PRINT("FB_ELEC_PRINT"),
       @SerializedName("FB_ELEC_RADAR")
       VALUE_FB_ELEC_RADAR("FB_ELEC_RADAR"),
+      @SerializedName("FB_ELEC_SFTWR")
+      VALUE_FB_ELEC_SFTWR("FB_ELEC_SFTWR"),
       @SerializedName("FB_ELEC_SPEED_RDR")
       VALUE_FB_ELEC_SPEED_RDR("FB_ELEC_SPEED_RDR"),
+      @SerializedName("FB_ELEC_TELEVISION")
+      VALUE_FB_ELEC_TELEVISION("FB_ELEC_TELEVISION"),
       @SerializedName("FB_ELEC_TOLL")
       VALUE_FB_ELEC_TOLL("FB_ELEC_TOLL"),
       @SerializedName("FB_ELEC_VIDEO")
@@ -3525,6 +3673,25 @@ public class ProductItem extends APINode {
       }
   }
 
+  public static enum EnumWaComplianceCategory {
+      @SerializedName("COUNTRY_ORIGIN_EXEMPT")
+      VALUE_COUNTRY_ORIGIN_EXEMPT("COUNTRY_ORIGIN_EXEMPT"),
+      @SerializedName("DEFAULT")
+      VALUE_DEFAULT("DEFAULT"),
+      ;
+
+      private String value;
+
+      private EnumWaComplianceCategory(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -3561,6 +3728,11 @@ public class ProductItem extends APINode {
     this.mCustomLabel2 = instance.mCustomLabel2;
     this.mCustomLabel3 = instance.mCustomLabel3;
     this.mCustomLabel4 = instance.mCustomLabel4;
+    this.mCustomNumber0 = instance.mCustomNumber0;
+    this.mCustomNumber1 = instance.mCustomNumber1;
+    this.mCustomNumber2 = instance.mCustomNumber2;
+    this.mCustomNumber3 = instance.mCustomNumber3;
+    this.mCustomNumber4 = instance.mCustomNumber4;
     this.mDescription = instance.mDescription;
     this.mExpirationDate = instance.mExpirationDate;
     this.mFbProductCategory = instance.mFbProductCategory;
@@ -3605,6 +3777,7 @@ public class ProductItem extends APINode {
     this.mStartDate = instance.mStartDate;
     this.mUrl = instance.mUrl;
     this.mVisibility = instance.mVisibility;
+    this.mWaComplianceCategory = instance.mWaComplianceCategory;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
