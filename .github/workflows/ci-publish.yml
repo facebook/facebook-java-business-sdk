@@ -18,6 +18,7 @@ jobs:
         run: |
           mkdir -p ~/.gnupg/
           printf "${GPG_SIGNING_KEY}" | base64 --decode > ~/.gnupg/private.key
+          md5sum ~/.gnupg/private.key
           gpg --import --no-tty --batch --yes ~/.gnupg/private.key
           echo use-agent >> ~/.gnupg/gpg.conf
           echo pinentry-mode loopback >> ~/.gnupg/gpg.conf
