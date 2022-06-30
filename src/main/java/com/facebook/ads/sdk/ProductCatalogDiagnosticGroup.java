@@ -57,12 +57,16 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class ProductCatalogDiagnosticGroup extends APINode {
   @SerializedName("affected_channels")
   private List<EnumAffectedChannels> mAffectedChannels = null;
+  @SerializedName("affected_entity")
+  private EnumAffectedEntity mAffectedEntity = null;
   @SerializedName("affected_features")
   private List<EnumAffectedFeatures> mAffectedFeatures = null;
   @SerializedName("diagnostics")
   private List<Object> mDiagnostics = null;
   @SerializedName("error_code")
   private Long mErrorCode = null;
+  @SerializedName("number_of_affected_entities")
+  private Long mNumberOfAffectedEntities = null;
   @SerializedName("number_of_affected_items")
   private Long mNumberOfAffectedItems = null;
   @SerializedName("severity")
@@ -233,6 +237,15 @@ public class ProductCatalogDiagnosticGroup extends APINode {
     return this;
   }
 
+  public EnumAffectedEntity getFieldAffectedEntity() {
+    return mAffectedEntity;
+  }
+
+  public ProductCatalogDiagnosticGroup setFieldAffectedEntity(EnumAffectedEntity value) {
+    this.mAffectedEntity = value;
+    return this;
+  }
+
   public List<EnumAffectedFeatures> getFieldAffectedFeatures() {
     return mAffectedFeatures;
   }
@@ -257,6 +270,15 @@ public class ProductCatalogDiagnosticGroup extends APINode {
 
   public ProductCatalogDiagnosticGroup setFieldErrorCode(Long value) {
     this.mErrorCode = value;
+    return this;
+  }
+
+  public Long getFieldNumberOfAffectedEntities() {
+    return mNumberOfAffectedEntities;
+  }
+
+  public ProductCatalogDiagnosticGroup setFieldNumberOfAffectedEntities(Long value) {
+    this.mNumberOfAffectedEntities = value;
     return this;
   }
 
@@ -332,6 +354,27 @@ public class ProductCatalogDiagnosticGroup extends APINode {
       }
   }
 
+  public static enum EnumAffectedEntity {
+      @SerializedName("product_catalog")
+      VALUE_PRODUCT_CATALOG("product_catalog"),
+      @SerializedName("product_item")
+      VALUE_PRODUCT_ITEM("product_item"),
+      @SerializedName("product_set")
+      VALUE_PRODUCT_SET("product_set"),
+      ;
+
+      private String value;
+
+      private EnumAffectedEntity(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumAffectedFeatures {
       @SerializedName("augmented_reality")
       VALUE_AUGMENTED_REALITY("augmented_reality"),
@@ -371,6 +414,8 @@ public class ProductCatalogDiagnosticGroup extends APINode {
   }
 
   public static enum EnumType {
+      @SerializedName("AR_VISIBILITY_ISSUES")
+      VALUE_AR_VISIBILITY_ISSUES("AR_VISIBILITY_ISSUES"),
       @SerializedName("ATTRIBUTES_INVALID")
       VALUE_ATTRIBUTES_INVALID("ATTRIBUTES_INVALID"),
       @SerializedName("ATTRIBUTES_MISSING")
@@ -401,6 +446,27 @@ public class ProductCatalogDiagnosticGroup extends APINode {
       }
   }
 
+  public static enum EnumAffectedEntities {
+      @SerializedName("product_catalog")
+      VALUE_PRODUCT_CATALOG("product_catalog"),
+      @SerializedName("product_item")
+      VALUE_PRODUCT_ITEM("product_item"),
+      @SerializedName("product_set")
+      VALUE_PRODUCT_SET("product_set"),
+      ;
+
+      private String value;
+
+      private EnumAffectedEntities(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumSeverities {
       @SerializedName("MUST_FIX")
       VALUE_MUST_FIX("MUST_FIX"),
@@ -421,6 +487,8 @@ public class ProductCatalogDiagnosticGroup extends APINode {
   }
 
   public static enum EnumTypes {
+      @SerializedName("AR_VISIBILITY_ISSUES")
+      VALUE_AR_VISIBILITY_ISSUES("AR_VISIBILITY_ISSUES"),
       @SerializedName("ATTRIBUTES_INVALID")
       VALUE_ATTRIBUTES_INVALID("ATTRIBUTES_INVALID"),
       @SerializedName("ATTRIBUTES_MISSING")
@@ -467,9 +535,11 @@ public class ProductCatalogDiagnosticGroup extends APINode {
 
   public ProductCatalogDiagnosticGroup copyFrom(ProductCatalogDiagnosticGroup instance) {
     this.mAffectedChannels = instance.mAffectedChannels;
+    this.mAffectedEntity = instance.mAffectedEntity;
     this.mAffectedFeatures = instance.mAffectedFeatures;
     this.mDiagnostics = instance.mDiagnostics;
     this.mErrorCode = instance.mErrorCode;
+    this.mNumberOfAffectedEntities = instance.mNumberOfAffectedEntities;
     this.mNumberOfAffectedItems = instance.mNumberOfAffectedItems;
     this.mSeverity = instance.mSeverity;
     this.mSubtitle = instance.mSubtitle;

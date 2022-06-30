@@ -6178,6 +6178,7 @@ public class BusinessAssetGroup extends APINode {
       "feed_count",
       "id",
       "is_catalog_segment",
+      "latest_feed_upload_session",
       "name",
       "product_count",
       "store_catalog_settings",
@@ -6327,6 +6328,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedProductCatalogs requestIsCatalogSegmentField (boolean value) {
       this.requestField("is_catalog_segment", value);
+      return this;
+    }
+    public APIRequestGetContainedProductCatalogs requestLatestFeedUploadSessionField () {
+      return this.requestLatestFeedUploadSessionField(true);
+    }
+    public APIRequestGetContainedProductCatalogs requestLatestFeedUploadSessionField (boolean value) {
+      this.requestField("latest_feed_upload_session", value);
       return this;
     }
     public APIRequestGetContainedProductCatalogs requestNameField () {
@@ -6790,6 +6798,8 @@ public class BusinessAssetGroup extends APINode {
       VALUE_PROFILE_PLUS_MESSAGING("PROFILE_PLUS_MESSAGING"),
       @SerializedName("PROFILE_PLUS_MODERATE")
       VALUE_PROFILE_PLUS_MODERATE("PROFILE_PLUS_MODERATE"),
+      @SerializedName("PROFILE_PLUS_MODERATE_DELEGATE_COMMUNITY")
+      VALUE_PROFILE_PLUS_MODERATE_DELEGATE_COMMUNITY("PROFILE_PLUS_MODERATE_DELEGATE_COMMUNITY"),
       @SerializedName("PROFILE_PLUS_REVENUE")
       VALUE_PROFILE_PLUS_REVENUE("PROFILE_PLUS_REVENUE"),
       @SerializedName("READ_PAGE_MAILBOXES")

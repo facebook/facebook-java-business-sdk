@@ -69,6 +69,8 @@ public class Group extends APINode {
   private String mIcon = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("install")
+  private Object mInstall = null;
   @SerializedName("link")
   private String mLink = null;
   @SerializedName("member_count")
@@ -316,12 +318,28 @@ public class Group extends APINode {
     return new APIRequestCreateAlbum(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetAttachmentSurfaces getAttachmentSurfaces() {
+    return new APIRequestGetAttachmentSurfaces(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateAttachmentSurface createAttachmentSurface() {
+    return new APIRequestCreateAttachmentSurface(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetDocs getDocs() {
     return new APIRequestGetDocs(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetEvents getEvents() {
     return new APIRequestGetEvents(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetFeaturedCards getFeaturedCards() {
+    return new APIRequestGetFeaturedCards(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateFeaturedCard createFeaturedCard() {
+    return new APIRequestCreateFeaturedCard(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetFeed getFeed() {
@@ -419,6 +437,10 @@ public class Group extends APINode {
 
   public String getFieldId() {
     return mId;
+  }
+
+  public Object getFieldInstall() {
+    return mInstall;
   }
 
   public String getFieldLink() {
@@ -1173,6 +1195,224 @@ public class Group extends APINode {
 
   }
 
+  public static class APIRequestGetAttachmentSurfaces extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetAttachmentSurfaces.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetAttachmentSurfaces(String nodeId, APIContext context) {
+      super(context, nodeId, "/attachment_surfaces", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetAttachmentSurfaces setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAttachmentSurfaces setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetAttachmentSurfaces requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetAttachmentSurfaces requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAttachmentSurfaces requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetAttachmentSurfaces requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAttachmentSurfaces requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAttachmentSurfaces requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateAttachmentSurface extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "title",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateAttachmentSurface.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateAttachmentSurface(String nodeId, APIContext context) {
+      super(context, nodeId, "/attachment_surfaces", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateAttachmentSurface setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAttachmentSurface setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateAttachmentSurface setTitle (Map<String, String> title) {
+      this.setParam("title", title);
+      return this;
+    }
+    public APIRequestCreateAttachmentSurface setTitle (String title) {
+      this.setParam("title", title);
+      return this;
+    }
+
+    public APIRequestCreateAttachmentSurface requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateAttachmentSurface requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAttachmentSurface requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateAttachmentSurface requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAttachmentSurface requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAttachmentSurface requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetDocs extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -1659,6 +1899,244 @@ public class Group extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
+  }
+
+  public static class APIRequestGetFeaturedCards extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetFeaturedCards.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetFeaturedCards(String nodeId, APIContext context) {
+      super(context, nodeId, "/featured_cards", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetFeaturedCards setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFeaturedCards setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetFeaturedCards requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetFeaturedCards requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFeaturedCards requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetFeaturedCards requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFeaturedCards requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFeaturedCards requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateFeaturedCard extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "body",
+      "description",
+      "title",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateFeaturedCard.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateFeaturedCard(String nodeId, APIContext context) {
+      super(context, nodeId, "/featured_cards", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateFeaturedCard setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateFeaturedCard setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateFeaturedCard setBody (Map<String, String> body) {
+      this.setParam("body", body);
+      return this;
+    }
+    public APIRequestCreateFeaturedCard setBody (String body) {
+      this.setParam("body", body);
+      return this;
+    }
+
+    public APIRequestCreateFeaturedCard setDescription (Map<String, String> description) {
+      this.setParam("description", description);
+      return this;
+    }
+    public APIRequestCreateFeaturedCard setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestCreateFeaturedCard setTitle (Map<String, String> title) {
+      this.setParam("title", title);
+      return this;
+    }
+    public APIRequestCreateFeaturedCard setTitle (String title) {
+      this.setParam("title", title);
+      return this;
+    }
+
+    public APIRequestCreateFeaturedCard requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateFeaturedCard requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateFeaturedCard requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateFeaturedCard requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateFeaturedCard requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateFeaturedCard requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetFeed extends APIRequest<Post> {
@@ -3433,6 +3911,7 @@ public class Group extends APINode {
       "email",
       "icon",
       "id",
+      "install",
       "link",
       "member_count",
       "member_request_count",
@@ -3582,6 +4061,13 @@ public class Group extends APINode {
     }
     public APIRequestGetGroups requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetGroups requestInstallField () {
+      return this.requestInstallField(true);
+    }
+    public APIRequestGetGroups requestInstallField (boolean value) {
+      this.requestField("install", value);
       return this;
     }
     public APIRequestGetGroups requestLinkField () {
@@ -4213,6 +4699,7 @@ public class Group extends APINode {
       "description",
       "enable_backup_ingest",
       "encoding_settings",
+      "event_params",
       "fisheye_video_cropped",
       "front_z_rotation",
       "is_audio_only",
@@ -4312,6 +4799,15 @@ public class Group extends APINode {
 
     public APIRequestCreateLiveVideo setEncodingSettings (String encodingSettings) {
       this.setParam("encoding_settings", encodingSettings);
+      return this;
+    }
+
+    public APIRequestCreateLiveVideo setEventParams (Object eventParams) {
+      this.setParam("event_params", eventParams);
+      return this;
+    }
+    public APIRequestCreateLiveVideo setEventParams (String eventParams) {
+      this.setParam("event_params", eventParams);
       return this;
     }
 
@@ -6108,6 +6604,7 @@ public class Group extends APINode {
 
     public static final String[] FIELDS = {
       "ad_breaks",
+      "audio_isrc",
       "backdated_time",
       "backdated_time_granularity",
       "content_category",
@@ -6254,6 +6751,13 @@ public class Group extends APINode {
     }
     public APIRequestGetVideos requestAdBreaksField (boolean value) {
       this.requestField("ad_breaks", value);
+      return this;
+    }
+    public APIRequestGetVideos requestAudioIsrcField () {
+      return this.requestAudioIsrcField(true);
+    }
+    public APIRequestGetVideos requestAudioIsrcField (boolean value) {
+      this.requestField("audio_isrc", value);
       return this;
     }
     public APIRequestGetVideos requestBackdatedTimeField () {
@@ -7268,6 +7772,7 @@ public class Group extends APINode {
       "email",
       "icon",
       "id",
+      "install",
       "link",
       "member_count",
       "member_request_count",
@@ -7426,6 +7931,13 @@ public class Group extends APINode {
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestInstallField () {
+      return this.requestInstallField(true);
+    }
+    public APIRequestGet requestInstallField (boolean value) {
+      this.requestField("install", value);
       return this;
     }
     public APIRequestGet requestLinkField () {
@@ -7854,6 +8366,8 @@ public class Group extends APINode {
       VALUE_REAL_WORLD("REAL_WORLD"),
       @SerializedName("REAL_WORLD_AT_WORK")
       VALUE_REAL_WORLD_AT_WORK("REAL_WORLD_AT_WORK"),
+      @SerializedName("RESTYLE")
+      VALUE_RESTYLE("RESTYLE"),
       @SerializedName("SCHOOL_CLASS")
       VALUE_SCHOOL_CLASS("SCHOOL_CLASS"),
       @SerializedName("SORORITY")
@@ -7892,6 +8406,8 @@ public class Group extends APINode {
       VALUE_WORK_GARDEN("WORK_GARDEN"),
       @SerializedName("WORK_GUEST_GROUP")
       VALUE_WORK_GUEST_GROUP("WORK_GUEST_GROUP"),
+      @SerializedName("WORK_INTEGRITY")
+      VALUE_WORK_INTEGRITY("WORK_INTEGRITY"),
       @SerializedName("WORK_LEARNING")
       VALUE_WORK_LEARNING("WORK_LEARNING"),
       @SerializedName("WORK_MENTORSHIP")
@@ -7991,6 +8507,8 @@ public class Group extends APINode {
       VALUE_REAL_WORLD("REAL_WORLD"),
       @SerializedName("REAL_WORLD_AT_WORK")
       VALUE_REAL_WORLD_AT_WORK("REAL_WORLD_AT_WORK"),
+      @SerializedName("RESTYLE")
+      VALUE_RESTYLE("RESTYLE"),
       @SerializedName("SCHOOL_CLASS")
       VALUE_SCHOOL_CLASS("SCHOOL_CLASS"),
       @SerializedName("SORORITY")
@@ -8029,6 +8547,8 @@ public class Group extends APINode {
       VALUE_WORK_GARDEN("WORK_GARDEN"),
       @SerializedName("WORK_GUEST_GROUP")
       VALUE_WORK_GUEST_GROUP("WORK_GUEST_GROUP"),
+      @SerializedName("WORK_INTEGRITY")
+      VALUE_WORK_INTEGRITY("WORK_INTEGRITY"),
       @SerializedName("WORK_LEARNING")
       VALUE_WORK_LEARNING("WORK_LEARNING"),
       @SerializedName("WORK_MENTORSHIP")
@@ -8131,6 +8651,7 @@ public class Group extends APINode {
     this.mEmail = instance.mEmail;
     this.mIcon = instance.mIcon;
     this.mId = instance.mId;
+    this.mInstall = instance.mInstall;
     this.mLink = instance.mLink;
     this.mMemberCount = instance.mMemberCount;
     this.mMemberRequestCount = instance.mMemberRequestCount;

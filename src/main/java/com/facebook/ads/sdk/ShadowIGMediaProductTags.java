@@ -54,33 +54,43 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class InstagramInsightsResult extends APINode {
-  @SerializedName("description")
-  private String mDescription = null;
-  @SerializedName("id")
-  private String mId = null;
+public class ShadowIGMediaProductTags extends APINode {
+  @SerializedName("image_url")
+  private String mImageUrl = null;
+  @SerializedName("is_checkout")
+  private Boolean mIsCheckout = null;
+  @SerializedName("merchant_id")
+  private Long mMerchantId = null;
   @SerializedName("name")
   private String mName = null;
-  @SerializedName("period")
-  private String mPeriod = null;
-  @SerializedName("title")
-  private String mTitle = null;
-  @SerializedName("values")
-  private List<InstagramInsightsValue> mValues = null;
+  @SerializedName("price_string")
+  private String mPriceString = null;
+  @SerializedName("product_id")
+  private Long mProductId = null;
+  @SerializedName("review_status")
+  private String mReviewStatus = null;
+  @SerializedName("stripped_price_string")
+  private String mStrippedPriceString = null;
+  @SerializedName("stripped_sale_price_string")
+  private String mStrippedSalePriceString = null;
+  @SerializedName("x")
+  private Double mX = null;
+  @SerializedName("y")
+  private Double mY = null;
   protected static Gson gson = null;
 
-  public InstagramInsightsResult() {
+  public ShadowIGMediaProductTags() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
-  public static InstagramInsightsResult loadJSON(String json, APIContext context, String header) {
-    InstagramInsightsResult instagramInsightsResult = getGson().fromJson(json, InstagramInsightsResult.class);
+  public static ShadowIGMediaProductTags loadJSON(String json, APIContext context, String header) {
+    ShadowIGMediaProductTags shadowIGMediaProductTags = getGson().fromJson(json, ShadowIGMediaProductTags.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(instagramInsightsResult.toString());
+      JsonElement o2 = parser.parse(shadowIGMediaProductTags.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -90,14 +100,14 @@ public class InstagramInsightsResult extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    instagramInsightsResult.context = context;
-    instagramInsightsResult.rawValue = json;
-    instagramInsightsResult.header = header;
-    return instagramInsightsResult;
+    shadowIGMediaProductTags.context = context;
+    shadowIGMediaProductTags.rawValue = json;
+    shadowIGMediaProductTags.header = header;
+    return shadowIGMediaProductTags;
   }
 
-  public static APINodeList<InstagramInsightsResult> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<InstagramInsightsResult> instagramInsightsResults = new APINodeList<InstagramInsightsResult>(request, json, header);
+  public static APINodeList<ShadowIGMediaProductTags> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ShadowIGMediaProductTags> shadowIGMediaProductTagss = new APINodeList<ShadowIGMediaProductTags>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -108,9 +118,9 @@ public class InstagramInsightsResult extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          instagramInsightsResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          shadowIGMediaProductTagss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return instagramInsightsResults;
+        return shadowIGMediaProductTagss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -120,20 +130,20 @@ public class InstagramInsightsResult extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                instagramInsightsResults.setCursors(before, after);
+                shadowIGMediaProductTagss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            instagramInsightsResults.setPaging(previous, next);
+            shadowIGMediaProductTagss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              instagramInsightsResults.setAppSecret(context.getAppSecretProof());
+              shadowIGMediaProductTagss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              instagramInsightsResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              shadowIGMediaProductTagss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -144,23 +154,23 @@ public class InstagramInsightsResult extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  instagramInsightsResults.add(loadJSON(entry.getValue().toString(), context, header));
+                  shadowIGMediaProductTagss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              instagramInsightsResults.add(loadJSON(obj.toString(), context, header));
+              shadowIGMediaProductTagss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return instagramInsightsResults;
+          return shadowIGMediaProductTagss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              instagramInsightsResults.add(loadJSON(entry.getValue().toString(), context, header));
+              shadowIGMediaProductTagss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return instagramInsightsResults;
+          return shadowIGMediaProductTagss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -177,20 +187,20 @@ public class InstagramInsightsResult extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              instagramInsightsResults.add(loadJSON(value.toString(), context, header));
+              shadowIGMediaProductTagss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return instagramInsightsResults;
+            return shadowIGMediaProductTagss;
           }
 
           // Sixth, check if it's pure JsonObject
-          instagramInsightsResults.clear();
-          instagramInsightsResults.add(loadJSON(json, context, header));
-          return instagramInsightsResults;
+          shadowIGMediaProductTagss.clear();
+          shadowIGMediaProductTagss.add(loadJSON(json, context, header));
+          return shadowIGMediaProductTagss;
         }
       }
     } catch (Exception e) {
@@ -218,21 +228,30 @@ public class InstagramInsightsResult extends APINode {
   }
 
 
-  public String getFieldDescription() {
-    return mDescription;
+  public String getFieldImageUrl() {
+    return mImageUrl;
   }
 
-  public InstagramInsightsResult setFieldDescription(String value) {
-    this.mDescription = value;
+  public ShadowIGMediaProductTags setFieldImageUrl(String value) {
+    this.mImageUrl = value;
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
+  public Boolean getFieldIsCheckout() {
+    return mIsCheckout;
   }
 
-  public InstagramInsightsResult setFieldId(String value) {
-    this.mId = value;
+  public ShadowIGMediaProductTags setFieldIsCheckout(Boolean value) {
+    this.mIsCheckout = value;
+    return this;
+  }
+
+  public Long getFieldMerchantId() {
+    return mMerchantId;
+  }
+
+  public ShadowIGMediaProductTags setFieldMerchantId(Long value) {
+    this.mMerchantId = value;
     return this;
   }
 
@@ -240,130 +259,75 @@ public class InstagramInsightsResult extends APINode {
     return mName;
   }
 
-  public InstagramInsightsResult setFieldName(String value) {
+  public ShadowIGMediaProductTags setFieldName(String value) {
     this.mName = value;
     return this;
   }
 
-  public String getFieldPeriod() {
-    return mPeriod;
+  public String getFieldPriceString() {
+    return mPriceString;
   }
 
-  public InstagramInsightsResult setFieldPeriod(String value) {
-    this.mPeriod = value;
+  public ShadowIGMediaProductTags setFieldPriceString(String value) {
+    this.mPriceString = value;
     return this;
   }
 
-  public String getFieldTitle() {
-    return mTitle;
+  public Long getFieldProductId() {
+    return mProductId;
   }
 
-  public InstagramInsightsResult setFieldTitle(String value) {
-    this.mTitle = value;
+  public ShadowIGMediaProductTags setFieldProductId(Long value) {
+    this.mProductId = value;
     return this;
   }
 
-  public List<InstagramInsightsValue> getFieldValues() {
-    return mValues;
+  public String getFieldReviewStatus() {
+    return mReviewStatus;
   }
 
-  public InstagramInsightsResult setFieldValues(List<InstagramInsightsValue> value) {
-    this.mValues = value;
+  public ShadowIGMediaProductTags setFieldReviewStatus(String value) {
+    this.mReviewStatus = value;
     return this;
   }
 
-  public InstagramInsightsResult setFieldValues(String value) {
-    Type type = new TypeToken<List<InstagramInsightsValue>>(){}.getType();
-    this.mValues = InstagramInsightsValue.getGson().fromJson(value, type);
+  public String getFieldStrippedPriceString() {
+    return mStrippedPriceString;
+  }
+
+  public ShadowIGMediaProductTags setFieldStrippedPriceString(String value) {
+    this.mStrippedPriceString = value;
+    return this;
+  }
+
+  public String getFieldStrippedSalePriceString() {
+    return mStrippedSalePriceString;
+  }
+
+  public ShadowIGMediaProductTags setFieldStrippedSalePriceString(String value) {
+    this.mStrippedSalePriceString = value;
+    return this;
+  }
+
+  public Double getFieldX() {
+    return mX;
+  }
+
+  public ShadowIGMediaProductTags setFieldX(Double value) {
+    this.mX = value;
+    return this;
+  }
+
+  public Double getFieldY() {
+    return mY;
+  }
+
+  public ShadowIGMediaProductTags setFieldY(Double value) {
+    this.mY = value;
     return this;
   }
 
 
-  public static enum EnumMetric {
-      @SerializedName("carousel_album_engagement")
-      VALUE_CAROUSEL_ALBUM_ENGAGEMENT("carousel_album_engagement"),
-      @SerializedName("carousel_album_impressions")
-      VALUE_CAROUSEL_ALBUM_IMPRESSIONS("carousel_album_impressions"),
-      @SerializedName("carousel_album_reach")
-      VALUE_CAROUSEL_ALBUM_REACH("carousel_album_reach"),
-      @SerializedName("carousel_album_saved")
-      VALUE_CAROUSEL_ALBUM_SAVED("carousel_album_saved"),
-      @SerializedName("carousel_album_video_views")
-      VALUE_CAROUSEL_ALBUM_VIDEO_VIEWS("carousel_album_video_views"),
-      @SerializedName("comments")
-      VALUE_COMMENTS("comments"),
-      @SerializedName("engagement")
-      VALUE_ENGAGEMENT("engagement"),
-      @SerializedName("exits")
-      VALUE_EXITS("exits"),
-      @SerializedName("follows_from_impressions")
-      VALUE_FOLLOWS_FROM_IMPRESSIONS("follows_from_impressions"),
-      @SerializedName("impressions")
-      VALUE_IMPRESSIONS("impressions"),
-      @SerializedName("likes")
-      VALUE_LIKES("likes"),
-      @SerializedName("navigation")
-      VALUE_NAVIGATION("navigation"),
-      @SerializedName("plays")
-      VALUE_PLAYS("plays"),
-      @SerializedName("profile_views_from_impressions")
-      VALUE_PROFILE_VIEWS_FROM_IMPRESSIONS("profile_views_from_impressions"),
-      @SerializedName("reach")
-      VALUE_REACH("reach"),
-      @SerializedName("replies")
-      VALUE_REPLIES("replies"),
-      @SerializedName("saved")
-      VALUE_SAVED("saved"),
-      @SerializedName("shares")
-      VALUE_SHARES("shares"),
-      @SerializedName("taps_back")
-      VALUE_TAPS_BACK("taps_back"),
-      @SerializedName("taps_forward")
-      VALUE_TAPS_FORWARD("taps_forward"),
-      @SerializedName("total_interactions")
-      VALUE_TOTAL_INTERACTIONS("total_interactions"),
-      @SerializedName("total_media_attributed_actions")
-      VALUE_TOTAL_MEDIA_ATTRIBUTED_ACTIONS("total_media_attributed_actions"),
-      @SerializedName("video_views")
-      VALUE_VIDEO_VIEWS("video_views"),
-      ;
-
-      private String value;
-
-      private EnumMetric(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumPeriod {
-      @SerializedName("day")
-      VALUE_DAY("day"),
-      @SerializedName("days_28")
-      VALUE_DAYS_28("days_28"),
-      @SerializedName("lifetime")
-      VALUE_LIFETIME("lifetime"),
-      @SerializedName("month")
-      VALUE_MONTH("month"),
-      @SerializedName("week")
-      VALUE_WEEK("week"),
-      ;
-
-      private String value;
-
-      private EnumPeriod(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -379,22 +343,27 @@ public class InstagramInsightsResult extends APINode {
     return gson;
   }
 
-  public InstagramInsightsResult copyFrom(InstagramInsightsResult instance) {
-    this.mDescription = instance.mDescription;
-    this.mId = instance.mId;
+  public ShadowIGMediaProductTags copyFrom(ShadowIGMediaProductTags instance) {
+    this.mImageUrl = instance.mImageUrl;
+    this.mIsCheckout = instance.mIsCheckout;
+    this.mMerchantId = instance.mMerchantId;
     this.mName = instance.mName;
-    this.mPeriod = instance.mPeriod;
-    this.mTitle = instance.mTitle;
-    this.mValues = instance.mValues;
+    this.mPriceString = instance.mPriceString;
+    this.mProductId = instance.mProductId;
+    this.mReviewStatus = instance.mReviewStatus;
+    this.mStrippedPriceString = instance.mStrippedPriceString;
+    this.mStrippedSalePriceString = instance.mStrippedSalePriceString;
+    this.mX = instance.mX;
+    this.mY = instance.mY;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<InstagramInsightsResult> getParser() {
-    return new APIRequest.ResponseParser<InstagramInsightsResult>() {
-      public APINodeList<InstagramInsightsResult> parseResponse(String response, APIContext context, APIRequest<InstagramInsightsResult> request, String header) throws MalformedResponseException {
-        return InstagramInsightsResult.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ShadowIGMediaProductTags> getParser() {
+    return new APIRequest.ResponseParser<ShadowIGMediaProductTags>() {
+      public APINodeList<ShadowIGMediaProductTags> parseResponse(String response, APIContext context, APIRequest<ShadowIGMediaProductTags> request, String header) throws MalformedResponseException {
+        return ShadowIGMediaProductTags.parseResponse(response, context, request, header);
       }
     };
   }

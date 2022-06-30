@@ -72,7 +72,7 @@ public class ProductFeed extends APINode {
   @SerializedName("id")
   private String mId = null;
   @SerializedName("ingestion_source_type")
-  private String mIngestionSourceType = null;
+  private EnumIngestionSourceType mIngestionSourceType = null;
   @SerializedName("item_sub_type")
   private String mItemSubType = null;
   @SerializedName("latest_upload")
@@ -409,7 +409,7 @@ public class ProductFeed extends APINode {
     return mId;
   }
 
-  public String getFieldIngestionSourceType() {
+  public EnumIngestionSourceType getFieldIngestionSourceType() {
     return mIngestionSourceType;
   }
 
@@ -1359,6 +1359,7 @@ public class ProductFeed extends APINode {
     public static final String[] FIELDS = {
       "ac_type",
       "additional_fees_description",
+      "address",
       "agent_company",
       "agent_email",
       "agent_fb_page_id",
@@ -1369,9 +1370,11 @@ public class ProductFeed extends APINode {
       "area_unit",
       "availability",
       "category_specific_fields",
+      "co_2_emission_rating_eu",
       "currency",
       "days_on_market",
       "description",
+      "energy_rating_eu",
       "furnish_type",
       "group_id",
       "heating_type",
@@ -1396,6 +1399,7 @@ public class ProductFeed extends APINode {
       "price",
       "property_type",
       "sanitized_images",
+      "unit_price",
       "url",
       "year_built",
     };
@@ -1521,6 +1525,13 @@ public class ProductFeed extends APINode {
       this.requestField("additional_fees_description", value);
       return this;
     }
+    public APIRequestGetHomeListings requestAddressField () {
+      return this.requestAddressField(true);
+    }
+    public APIRequestGetHomeListings requestAddressField (boolean value) {
+      this.requestField("address", value);
+      return this;
+    }
     public APIRequestGetHomeListings requestAgentCompanyField () {
       return this.requestAgentCompanyField(true);
     }
@@ -1591,6 +1602,13 @@ public class ProductFeed extends APINode {
       this.requestField("category_specific_fields", value);
       return this;
     }
+    public APIRequestGetHomeListings requestCo2EmissionRatingEuField () {
+      return this.requestCo2EmissionRatingEuField(true);
+    }
+    public APIRequestGetHomeListings requestCo2EmissionRatingEuField (boolean value) {
+      this.requestField("co_2_emission_rating_eu", value);
+      return this;
+    }
     public APIRequestGetHomeListings requestCurrencyField () {
       return this.requestCurrencyField(true);
     }
@@ -1610,6 +1628,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetHomeListings requestDescriptionField (boolean value) {
       this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestEnergyRatingEuField () {
+      return this.requestEnergyRatingEuField(true);
+    }
+    public APIRequestGetHomeListings requestEnergyRatingEuField (boolean value) {
+      this.requestField("energy_rating_eu", value);
       return this;
     }
     public APIRequestGetHomeListings requestFurnishTypeField () {
@@ -1778,6 +1803,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetHomeListings requestSanitizedImagesField (boolean value) {
       this.requestField("sanitized_images", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestUnitPriceField () {
+      return this.requestUnitPriceField(true);
+    }
+    public APIRequestGetHomeListings requestUnitPriceField (boolean value) {
+      this.requestField("unit_price", value);
       return this;
     }
     public APIRequestGetHomeListings requestUrlField () {
@@ -2105,6 +2137,8 @@ public class ProductFeed extends APINode {
     }
     public static final String[] PARAMS = {
       "bulk_pagination",
+      "error_priority",
+      "error_type",
       "filter",
     };
 
@@ -2136,6 +2170,7 @@ public class ProductFeed extends APINode {
       "custom_number_3",
       "custom_number_4",
       "description",
+      "errors",
       "expiration_date",
       "fb_product_category",
       "gender",
@@ -2241,6 +2276,24 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetProducts setBulkPagination (String bulkPagination) {
       this.setParam("bulk_pagination", bulkPagination);
+      return this;
+    }
+
+    public APIRequestGetProducts setErrorPriority (ProductItem.EnumErrorPriority errorPriority) {
+      this.setParam("error_priority", errorPriority);
+      return this;
+    }
+    public APIRequestGetProducts setErrorPriority (String errorPriority) {
+      this.setParam("error_priority", errorPriority);
+      return this;
+    }
+
+    public APIRequestGetProducts setErrorType (ProductItem.EnumErrorType errorType) {
+      this.setParam("error_type", errorType);
+      return this;
+    }
+    public APIRequestGetProducts setErrorType (String errorType) {
+      this.setParam("error_type", errorType);
       return this;
     }
 
@@ -2476,6 +2529,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetProducts requestDescriptionField (boolean value) {
       this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetProducts requestErrorsField () {
+      return this.requestErrorsField(true);
+    }
+    public APIRequestGetProducts requestErrorsField (boolean value) {
+      this.requestField("errors", value);
       return this;
     }
     public APIRequestGetProducts requestExpirationDateField () {
@@ -2924,11 +2984,11 @@ public class ProductFeed extends APINode {
     }
   }
 
-  public static class APIRequestCreateRule extends APIRequest<APINode> {
+  public static class APIRequestCreateRule extends APIRequest<ProductFeedRule> {
 
-    APINode lastResponse = null;
+    ProductFeedRule lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public ProductFeedRule getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -2941,31 +3001,31 @@ public class ProductFeed extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
+    public ProductFeedRule parseResponse(String response, String header) throws APIException {
+      return ProductFeedRule.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public ProductFeedRule execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public ProductFeedRule execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINode> executeAsync() throws APIException {
+    public ListenableFuture<ProductFeedRule> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<ProductFeedRule> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, ProductFeedRule>() {
+           public ProductFeedRule apply(ResponseWrapper result) {
              try {
                return APIRequestCreateRule.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -3007,7 +3067,7 @@ public class ProductFeed extends APINode {
       return this;
     }
 
-    public APIRequestCreateRule setRuleType (EnumRuleType ruleType) {
+    public APIRequestCreateRule setRuleType (ProductFeedRule.EnumRuleType ruleType) {
       this.setParam("rule_type", ruleType);
       return this;
     }
@@ -5299,6 +5359,25 @@ public class ProductFeed extends APINode {
       }
   }
 
+  public static enum EnumIngestionSourceType {
+      @SerializedName("primary_feed")
+      VALUE_PRIMARY_FEED("primary_feed"),
+      @SerializedName("supplementary_feed")
+      VALUE_SUPPLEMENTARY_FEED("supplementary_feed"),
+      ;
+
+      private String value;
+
+      private EnumIngestionSourceType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumQuotedFieldsMode {
       @SerializedName("AUTODETECT")
       VALUE_AUTODETECT("AUTODETECT"),
@@ -5394,25 +5473,6 @@ public class ProductFeed extends APINode {
       }
   }
 
-  public static enum EnumIngestionSourceType {
-      @SerializedName("PRIMARY_FEED")
-      VALUE_PRIMARY_FEED("PRIMARY_FEED"),
-      @SerializedName("SUPPLEMENTARY_FEED")
-      VALUE_SUPPLEMENTARY_FEED("SUPPLEMENTARY_FEED"),
-      ;
-
-      private String value;
-
-      private EnumIngestionSourceType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
   public static enum EnumItemSubType {
       @SerializedName("APPLIANCES")
       VALUE_APPLIANCES("APPLIANCES"),
@@ -5496,31 +5556,6 @@ public class ProductFeed extends APINode {
       private String value;
 
       private EnumOverrideType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumRuleType {
-      @SerializedName("fallback_rule")
-      VALUE_FALLBACK_RULE("fallback_rule"),
-      @SerializedName("letter_case_rule")
-      VALUE_LETTER_CASE_RULE("letter_case_rule"),
-      @SerializedName("mapping_rule")
-      VALUE_MAPPING_RULE("mapping_rule"),
-      @SerializedName("regex_replace_rule")
-      VALUE_REGEX_REPLACE_RULE("regex_replace_rule"),
-      @SerializedName("value_mapping_rule")
-      VALUE_VALUE_MAPPING_RULE("value_mapping_rule"),
-      ;
-
-      private String value;
-
-      private EnumRuleType(String value) {
         this.value = value;
       }
 

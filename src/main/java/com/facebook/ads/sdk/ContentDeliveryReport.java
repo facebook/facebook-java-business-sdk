@@ -321,6 +321,8 @@ public class ContentDeliveryReport extends APINode {
       VALUE_INSTAGRAM_IGTV("INSTAGRAM_IGTV"),
       @SerializedName("INSTAGRAM_REELS")
       VALUE_INSTAGRAM_REELS("INSTAGRAM_REELS"),
+      @SerializedName("INSTAGRAM_REELS_OVERLAY")
+      VALUE_INSTAGRAM_REELS_OVERLAY("INSTAGRAM_REELS_OVERLAY"),
       @SerializedName("INSTAGRAM_SHOP")
       VALUE_INSTAGRAM_SHOP("INSTAGRAM_SHOP"),
       @SerializedName("INSTAGRAM_STORIES")

@@ -57,6 +57,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdVideo extends APINode {
   @SerializedName("ad_breaks")
   private List<Long> mAdBreaks = null;
+  @SerializedName("audio_isrc")
+  private Object mAudioIsrc = null;
   @SerializedName("backdated_time")
   private String mBackdatedTime = null;
   @SerializedName("backdated_time_granularity")
@@ -431,6 +433,10 @@ public class AdVideo extends APINode {
 
   public List<Long> getFieldAdBreaks() {
     return mAdBreaks;
+  }
+
+  public Object getFieldAudioIsrc() {
+    return mAudioIsrc;
   }
 
   public String getFieldBackdatedTime() {
@@ -5609,6 +5615,7 @@ public class AdVideo extends APINode {
 
     public static final String[] FIELDS = {
       "ad_breaks",
+      "audio_isrc",
       "backdated_time",
       "backdated_time_granularity",
       "content_category",
@@ -5746,6 +5753,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGet requestAdBreaksField (boolean value) {
       this.requestField("ad_breaks", value);
+      return this;
+    }
+    public APIRequestGet requestAudioIsrcField () {
+      return this.requestAudioIsrcField(true);
+    }
+    public APIRequestGet requestAudioIsrcField (boolean value) {
+      this.requestField("audio_isrc", value);
       return this;
     }
     public APIRequestGet requestBackdatedTimeField () {
@@ -6394,6 +6408,8 @@ public class AdVideo extends APINode {
       VALUE_ACO_AUTOEXTRACTED_VIDEO("ACO_AUTOEXTRACTED_VIDEO"),
       @SerializedName("ACO_VIDEO_VARIATION")
       VALUE_ACO_VIDEO_VARIATION("ACO_VIDEO_VARIATION"),
+      @SerializedName("ADS_AI_GENERATED")
+      VALUE_ADS_AI_GENERATED("ADS_AI_GENERATED"),
       @SerializedName("AD_BREAK_PREVIEW")
       VALUE_AD_BREAK_PREVIEW("AD_BREAK_PREVIEW"),
       @SerializedName("AD_DERIVATIVE")
@@ -6414,6 +6430,8 @@ public class AdVideo extends APINode {
       VALUE_ASSET_MANAGER("ASSET_MANAGER"),
       @SerializedName("ATLAS_VIDEO")
       VALUE_ATLAS_VIDEO("ATLAS_VIDEO"),
+      @SerializedName("AUDIO_BRIEF")
+      VALUE_AUDIO_BRIEF("AUDIO_BRIEF"),
       @SerializedName("AUDIO_BROADCAST")
       VALUE_AUDIO_BROADCAST("AUDIO_BROADCAST"),
       @SerializedName("AUDIO_COMMENT")
@@ -6440,8 +6458,6 @@ public class AdVideo extends APINode {
       VALUE_COPYRIGHT_REFERENCE_VIDEO("COPYRIGHT_REFERENCE_VIDEO"),
       @SerializedName("CREATION_ML_PRECREATION")
       VALUE_CREATION_ML_PRECREATION("CREATION_ML_PRECREATION"),
-      @SerializedName("CULTURAL_MOMENT_DEPRECATED")
-      VALUE_CULTURAL_MOMENT_DEPRECATED("CULTURAL_MOMENT_DEPRECATED"),
       @SerializedName("DCO_AD_ASSET_FEED")
       VALUE_DCO_AD_ASSET_FEED("DCO_AD_ASSET_FEED"),
       @SerializedName("DCO_AUTOGEN_VIDEO")
@@ -6468,8 +6484,14 @@ public class AdVideo extends APINode {
       VALUE_EVENT_TOUR("EVENT_TOUR"),
       @SerializedName("FACECAST_DVR")
       VALUE_FACECAST_DVR("FACECAST_DVR"),
+      @SerializedName("FB_COLLECTIBLE_VIDEO")
+      VALUE_FB_COLLECTIBLE_VIDEO("FB_COLLECTIBLE_VIDEO"),
       @SerializedName("FB_SHORTS")
       VALUE_FB_SHORTS("FB_SHORTS"),
+      @SerializedName("FB_SHORTS_CONTENT_REMIXABLE")
+      VALUE_FB_SHORTS_CONTENT_REMIXABLE("FB_SHORTS_CONTENT_REMIXABLE"),
+      @SerializedName("FB_SHORTS_CROSS_META_POST")
+      VALUE_FB_SHORTS_CROSS_META_POST("FB_SHORTS_CROSS_META_POST"),
       @SerializedName("FB_SHORTS_GROUP_POST")
       VALUE_FB_SHORTS_GROUP_POST("FB_SHORTS_GROUP_POST"),
       @SerializedName("FB_SHORTS_PMV_POST")
@@ -6484,6 +6506,8 @@ public class AdVideo extends APINode {
       VALUE_GAME_CLIP("GAME_CLIP"),
       @SerializedName("GEMSTONE")
       VALUE_GEMSTONE("GEMSTONE"),
+      @SerializedName("GIF_TO_VIDEO")
+      VALUE_GIF_TO_VIDEO("GIF_TO_VIDEO"),
       @SerializedName("GOODWILL_ANNIVERSARY_DEPRECATED")
       VALUE_GOODWILL_ANNIVERSARY_DEPRECATED("GOODWILL_ANNIVERSARY_DEPRECATED"),
       @SerializedName("GOODWILL_ANNIVERSARY_PROMOTION_DEPRECATED")
@@ -6512,6 +6536,8 @@ public class AdVideo extends APINode {
       VALUE_IG_REELS_XPV("IG_REELS_XPV"),
       @SerializedName("IG_STORIES_READER")
       VALUE_IG_STORIES_READER("IG_STORIES_READER"),
+      @SerializedName("INJECTABLE")
+      VALUE_INJECTABLE("INJECTABLE"),
       @SerializedName("INSPIRATION_VIDEO")
       VALUE_INSPIRATION_VIDEO("INSPIRATION_VIDEO"),
       @SerializedName("INSTAGRAM_VIDEO_COPY")
@@ -6540,6 +6566,8 @@ public class AdVideo extends APINode {
       VALUE_LEGACY("LEGACY"),
       @SerializedName("LEGACY_CONTAINED_POST_BROADCAST")
       VALUE_LEGACY_CONTAINED_POST_BROADCAST("LEGACY_CONTAINED_POST_BROADCAST"),
+      @SerializedName("LIVE_AUDIO_ROOM_BROADCAST")
+      VALUE_LIVE_AUDIO_ROOM_BROADCAST("LIVE_AUDIO_ROOM_BROADCAST"),
       @SerializedName("LIVE_CLIP_PREVIEW")
       VALUE_LIVE_CLIP_PREVIEW("LIVE_CLIP_PREVIEW"),
       @SerializedName("LIVE_CREATIVE_KIT_VIDEO")
@@ -6558,6 +6586,8 @@ public class AdVideo extends APINode {
       VALUE_MOMENTS_VIDEO("MOMENTS_VIDEO"),
       @SerializedName("MUSIC_CLIP")
       VALUE_MUSIC_CLIP("MUSIC_CLIP"),
+      @SerializedName("MUSIC_CLIP_IN_AUDIO_DIGEST")
+      VALUE_MUSIC_CLIP_IN_AUDIO_DIGEST("MUSIC_CLIP_IN_AUDIO_DIGEST"),
       @SerializedName("MUSIC_CLIP_IN_COMMENT")
       VALUE_MUSIC_CLIP_IN_COMMENT("MUSIC_CLIP_IN_COMMENT"),
       @SerializedName("MUSIC_CLIP_IN_LIGHTWEIGHT_STATUS")
@@ -6594,8 +6624,6 @@ public class AdVideo extends APINode {
       VALUE_PAID_CONTENT_VIDEO("PAID_CONTENT_VIDEO"),
       @SerializedName("PAID_CONTENT_VIDEO__POST")
       VALUE_PAID_CONTENT_VIDEO__POST("PAID_CONTENT_VIDEO__POST"),
-      @SerializedName("PARTNER_DIRECTORY_BRAND_MEDIA")
-      VALUE_PARTNER_DIRECTORY_BRAND_MEDIA("PARTNER_DIRECTORY_BRAND_MEDIA"),
       @SerializedName("PIXELCLOUD")
       VALUE_PIXELCLOUD("PIXELCLOUD"),
       @SerializedName("PODCAST_HIGHLIGHT")
@@ -6664,6 +6692,8 @@ public class AdVideo extends APINode {
       VALUE_STAGES_BROADCAST("STAGES_BROADCAST"),
       @SerializedName("STORIES_VIDEO")
       VALUE_STORIES_VIDEO("STORIES_VIDEO"),
+      @SerializedName("STORIES_WEARABLE")
+      VALUE_STORIES_WEARABLE("STORIES_WEARABLE"),
       @SerializedName("STORYLINE")
       VALUE_STORYLINE("STORYLINE"),
       @SerializedName("STORYLINE_WITH_EXTERNAL_MUSIC")
@@ -6684,6 +6714,8 @@ public class AdVideo extends APINode {
       VALUE_UNLISTED("UNLISTED"),
       @SerializedName("UNLISTED_HACK_TV")
       VALUE_UNLISTED_HACK_TV("UNLISTED_HACK_TV"),
+      @SerializedName("UNLISTED_HORIZON")
+      VALUE_UNLISTED_HORIZON("UNLISTED_HORIZON"),
       @SerializedName("UNLISTED_OCULUS")
       VALUE_UNLISTED_OCULUS("UNLISTED_OCULUS"),
       @SerializedName("VIDEO_COMMENT")
@@ -6940,6 +6972,7 @@ public class AdVideo extends APINode {
 
   public AdVideo copyFrom(AdVideo instance) {
     this.mAdBreaks = instance.mAdBreaks;
+    this.mAudioIsrc = instance.mAudioIsrc;
     this.mBackdatedTime = instance.mBackdatedTime;
     this.mBackdatedTimeGranularity = instance.mBackdatedTimeGranularity;
     this.mContentCategory = instance.mContentCategory;

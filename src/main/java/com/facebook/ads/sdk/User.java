@@ -454,6 +454,10 @@ public class User extends APINode {
     return new APIRequestGetFriends(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetFundraisers getFundraisers() {
+    return new APIRequestGetFundraisers(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateFundraiser createFundraiser() {
     return new APIRequestCreateFundraiser(this.getPrefixedId().toString(), context);
   }
@@ -528,6 +532,14 @@ public class User extends APINode {
 
   public APIRequestGetPicture getPicture() {
     return new APIRequestGetPicture(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetPioneerData getPioneerData() {
+    return new APIRequestGetPioneerData(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreatePioneerDatum createPioneerDatum() {
+    return new APIRequestCreatePioneerDatum(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetPosts getPosts() {
@@ -6223,6 +6235,7 @@ public class User extends APINode {
       "feed_count",
       "id",
       "is_catalog_segment",
+      "latest_feed_upload_session",
       "name",
       "product_count",
       "store_catalog_settings",
@@ -6372,6 +6385,13 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedProductCatalogs requestIsCatalogSegmentField (boolean value) {
       this.requestField("is_catalog_segment", value);
+      return this;
+    }
+    public APIRequestGetAssignedProductCatalogs requestLatestFeedUploadSessionField () {
+      return this.requestLatestFeedUploadSessionField(true);
+    }
+    public APIRequestGetAssignedProductCatalogs requestLatestFeedUploadSessionField (boolean value) {
+      this.requestField("latest_feed_upload_session", value);
       return this;
     }
     public APIRequestGetAssignedProductCatalogs requestNameField () {
@@ -6736,7 +6756,6 @@ public class User extends APINode {
       "block_offline_analytics",
       "collaborative_ads_managed_partner_business_info",
       "collaborative_ads_managed_partner_eligibility",
-      "cpas_business_setup_config",
       "created_by",
       "created_time",
       "extended_updated_time",
@@ -6863,13 +6882,6 @@ public class User extends APINode {
     }
     public APIRequestGetBusinesses requestCollaborativeAdsManagedPartnerEligibilityField (boolean value) {
       this.requestField("collaborative_ads_managed_partner_eligibility", value);
-      return this;
-    }
-    public APIRequestGetBusinesses requestCpasBusinessSetupConfigField () {
-      return this.requestCpasBusinessSetupConfigField(true);
-    }
-    public APIRequestGetBusinesses requestCpasBusinessSetupConfigField (boolean value) {
-      this.requestField("cpas_business_setup_config", value);
       return this;
     }
     public APIRequestGetBusinesses requestCreatedByField () {
@@ -10064,6 +10076,286 @@ public class User extends APINode {
     }
   }
 
+  public static class APIRequestGetFundraisers extends APIRequest<FundraiserPersonToCharity> {
+
+    APINodeList<FundraiserPersonToCharity> lastResponse = null;
+    @Override
+    public APINodeList<FundraiserPersonToCharity> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "amount_raised",
+      "charity_id",
+      "currency",
+      "description",
+      "donations_count",
+      "donors_count",
+      "end_time",
+      "external_amount_raised",
+      "external_donations_count",
+      "external_donors_count",
+      "external_event_name",
+      "external_event_start_time",
+      "external_event_uri",
+      "external_fundraiser_uri",
+      "external_id",
+      "goal_amount",
+      "id",
+      "internal_amount_raised",
+      "internal_donations_count",
+      "internal_donors_count",
+      "name",
+      "uri",
+    };
+
+    @Override
+    public APINodeList<FundraiserPersonToCharity> parseResponse(String response, String header) throws APIException {
+      return FundraiserPersonToCharity.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<FundraiserPersonToCharity> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<FundraiserPersonToCharity> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<FundraiserPersonToCharity>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<FundraiserPersonToCharity>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<FundraiserPersonToCharity>>() {
+           public APINodeList<FundraiserPersonToCharity> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetFundraisers.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetFundraisers(String nodeId, APIContext context) {
+      super(context, nodeId, "/fundraisers", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetFundraisers setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFundraisers setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetFundraisers requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetFundraisers requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFundraisers requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetFundraisers requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFundraisers requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFundraisers requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetFundraisers requestAmountRaisedField () {
+      return this.requestAmountRaisedField(true);
+    }
+    public APIRequestGetFundraisers requestAmountRaisedField (boolean value) {
+      this.requestField("amount_raised", value);
+      return this;
+    }
+    public APIRequestGetFundraisers requestCharityIdField () {
+      return this.requestCharityIdField(true);
+    }
+    public APIRequestGetFundraisers requestCharityIdField (boolean value) {
+      this.requestField("charity_id", value);
+      return this;
+    }
+    public APIRequestGetFundraisers requestCurrencyField () {
+      return this.requestCurrencyField(true);
+    }
+    public APIRequestGetFundraisers requestCurrencyField (boolean value) {
+      this.requestField("currency", value);
+      return this;
+    }
+    public APIRequestGetFundraisers requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetFundraisers requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetFundraisers requestDonationsCountField () {
+      return this.requestDonationsCountField(true);
+    }
+    public APIRequestGetFundraisers requestDonationsCountField (boolean value) {
+      this.requestField("donations_count", value);
+      return this;
+    }
+    public APIRequestGetFundraisers requestDonorsCountField () {
+      return this.requestDonorsCountField(true);
+    }
+    public APIRequestGetFundraisers requestDonorsCountField (boolean value) {
+      this.requestField("donors_count", value);
+      return this;
+    }
+    public APIRequestGetFundraisers requestEndTimeField () {
+      return this.requestEndTimeField(true);
+    }
+    public APIRequestGetFundraisers requestEndTimeField (boolean value) {
+      this.requestField("end_time", value);
+      return this;
+    }
+    public APIRequestGetFundraisers requestExternalAmountRaisedField () {
+      return this.requestExternalAmountRaisedField(true);
+    }
+    public APIRequestGetFundraisers requestExternalAmountRaisedField (boolean value) {
+      this.requestField("external_amount_raised", value);
+      return this;
+    }
+    public APIRequestGetFundraisers requestExternalDonationsCountField () {
+      return this.requestExternalDonationsCountField(true);
+    }
+    public APIRequestGetFundraisers requestExternalDonationsCountField (boolean value) {
+      this.requestField("external_donations_count", value);
+      return this;
+    }
+    public APIRequestGetFundraisers requestExternalDonorsCountField () {
+      return this.requestExternalDonorsCountField(true);
+    }
+    public APIRequestGetFundraisers requestExternalDonorsCountField (boolean value) {
+      this.requestField("external_donors_count", value);
+      return this;
+    }
+    public APIRequestGetFundraisers requestExternalEventNameField () {
+      return this.requestExternalEventNameField(true);
+    }
+    public APIRequestGetFundraisers requestExternalEventNameField (boolean value) {
+      this.requestField("external_event_name", value);
+      return this;
+    }
+    public APIRequestGetFundraisers requestExternalEventStartTimeField () {
+      return this.requestExternalEventStartTimeField(true);
+    }
+    public APIRequestGetFundraisers requestExternalEventStartTimeField (boolean value) {
+      this.requestField("external_event_start_time", value);
+      return this;
+    }
+    public APIRequestGetFundraisers requestExternalEventUriField () {
+      return this.requestExternalEventUriField(true);
+    }
+    public APIRequestGetFundraisers requestExternalEventUriField (boolean value) {
+      this.requestField("external_event_uri", value);
+      return this;
+    }
+    public APIRequestGetFundraisers requestExternalFundraiserUriField () {
+      return this.requestExternalFundraiserUriField(true);
+    }
+    public APIRequestGetFundraisers requestExternalFundraiserUriField (boolean value) {
+      this.requestField("external_fundraiser_uri", value);
+      return this;
+    }
+    public APIRequestGetFundraisers requestExternalIdField () {
+      return this.requestExternalIdField(true);
+    }
+    public APIRequestGetFundraisers requestExternalIdField (boolean value) {
+      this.requestField("external_id", value);
+      return this;
+    }
+    public APIRequestGetFundraisers requestGoalAmountField () {
+      return this.requestGoalAmountField(true);
+    }
+    public APIRequestGetFundraisers requestGoalAmountField (boolean value) {
+      this.requestField("goal_amount", value);
+      return this;
+    }
+    public APIRequestGetFundraisers requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetFundraisers requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetFundraisers requestInternalAmountRaisedField () {
+      return this.requestInternalAmountRaisedField(true);
+    }
+    public APIRequestGetFundraisers requestInternalAmountRaisedField (boolean value) {
+      this.requestField("internal_amount_raised", value);
+      return this;
+    }
+    public APIRequestGetFundraisers requestInternalDonationsCountField () {
+      return this.requestInternalDonationsCountField(true);
+    }
+    public APIRequestGetFundraisers requestInternalDonationsCountField (boolean value) {
+      this.requestField("internal_donations_count", value);
+      return this;
+    }
+    public APIRequestGetFundraisers requestInternalDonorsCountField () {
+      return this.requestInternalDonorsCountField(true);
+    }
+    public APIRequestGetFundraisers requestInternalDonorsCountField (boolean value) {
+      this.requestField("internal_donors_count", value);
+      return this;
+    }
+    public APIRequestGetFundraisers requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetFundraisers requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetFundraisers requestUriField () {
+      return this.requestUriField(true);
+    }
+    public APIRequestGetFundraisers requestUriField (boolean value) {
+      this.requestField("uri", value);
+      return this;
+    }
+  }
+
   public static class APIRequestCreateFundraiser extends APIRequest<FundraiserPersonToCharity> {
 
     FundraiserPersonToCharity lastResponse = null;
@@ -10272,11 +10564,11 @@ public class User extends APINode {
 
   }
 
-  public static class APIRequestCreateGameItem extends APIRequest<APINode> {
+  public static class APIRequestCreateGameItem extends APIRequest<GameItem> {
 
-    APINode lastResponse = null;
+    GameItem lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public GameItem getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -10292,31 +10584,31 @@ public class User extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
+    public GameItem parseResponse(String response, String header) throws APIException {
+      return GameItem.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public GameItem execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public GameItem execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINode> executeAsync() throws APIException {
+    public ListenableFuture<GameItem> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<GameItem> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, GameItem>() {
+           public GameItem apply(ResponseWrapper result) {
              try {
                return APIRequestCreateGameItem.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -10344,7 +10636,7 @@ public class User extends APINode {
     }
 
 
-    public APIRequestCreateGameItem setAction (EnumAction action) {
+    public APIRequestCreateGameItem setAction (GameItem.EnumAction action) {
       this.setParam("action", action);
       return this;
     }
@@ -10554,6 +10846,7 @@ public class User extends APINode {
       "email",
       "icon",
       "id",
+      "install",
       "link",
       "member_count",
       "member_request_count",
@@ -10717,6 +11010,13 @@ public class User extends APINode {
     }
     public APIRequestGetGroups requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetGroups requestInstallField () {
+      return this.requestInstallField(true);
+    }
+    public APIRequestGetGroups requestInstallField (boolean value) {
+      this.requestField("install", value);
       return this;
     }
     public APIRequestGetGroups requestLinkField () {
@@ -12818,6 +13118,7 @@ public class User extends APINode {
       "description",
       "enable_backup_ingest",
       "encoding_settings",
+      "event_params",
       "fisheye_video_cropped",
       "front_z_rotation",
       "is_audio_only",
@@ -12917,6 +13218,15 @@ public class User extends APINode {
 
     public APIRequestCreateLiveVideo setEncodingSettings (String encodingSettings) {
       this.setParam("encoding_settings", encodingSettings);
+      return this;
+    }
+
+    public APIRequestCreateLiveVideo setEventParams (Object eventParams) {
+      this.setParam("event_params", eventParams);
+      return this;
+    }
+    public APIRequestCreateLiveVideo setEventParams (String eventParams) {
+      this.setParam("event_params", eventParams);
       return this;
     }
 
@@ -16732,6 +17042,220 @@ public class User extends APINode {
     }
   }
 
+  public static class APIRequestGetPioneerData extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetPioneerData.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetPioneerData(String nodeId, APIContext context) {
+      super(context, nodeId, "/pioneer_data", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetPioneerData setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPioneerData setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetPioneerData requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetPioneerData requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPioneerData requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetPioneerData requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPioneerData requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPioneerData requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreatePioneerDatum extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "json_data",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreatePioneerDatum.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreatePioneerDatum(String nodeId, APIContext context) {
+      super(context, nodeId, "/pioneer_data", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreatePioneerDatum setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePioneerDatum setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreatePioneerDatum setJsonData (String jsonData) {
+      this.setParam("json_data", jsonData);
+      return this;
+    }
+
+    public APIRequestCreatePioneerDatum requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreatePioneerDatum requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePioneerDatum requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreatePioneerDatum requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePioneerDatum requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePioneerDatum requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetPosts extends APIRequest<Post> {
 
     APINodeList<Post> lastResponse = null;
@@ -17821,6 +18345,7 @@ public class User extends APINode {
 
     public static final String[] FIELDS = {
       "ad_breaks",
+      "audio_isrc",
       "backdated_time",
       "backdated_time_granularity",
       "content_category",
@@ -17967,6 +18492,13 @@ public class User extends APINode {
     }
     public APIRequestGetVideos requestAdBreaksField (boolean value) {
       this.requestField("ad_breaks", value);
+      return this;
+    }
+    public APIRequestGetVideos requestAudioIsrcField () {
+      return this.requestAudioIsrcField(true);
+    }
+    public APIRequestGetVideos requestAudioIsrcField (boolean value) {
+      this.requestField("audio_isrc", value);
       return this;
     }
     public APIRequestGetVideos requestBackdatedTimeField () {
@@ -19779,12 +20311,12 @@ public class User extends APINode {
   }
 
   public static enum EnumAction {
-      @SerializedName("CONSUME")
-      VALUE_CONSUME("CONSUME"),
-      @SerializedName("DROP")
-      VALUE_DROP("DROP"),
-      @SerializedName("MARK")
-      VALUE_MARK("MARK"),
+      @SerializedName("END")
+      VALUE_END("END"),
+      @SerializedName("HEARTBEAT")
+      VALUE_HEARTBEAT("HEARTBEAT"),
+      @SerializedName("START")
+      VALUE_START("START"),
       ;
 
       private String value;

@@ -55,6 +55,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class CopyrightAudioAsset extends APINode {
+  @SerializedName("copyright")
+  private AudioCopyright mCopyright = null;
   @SerializedName("creation_time")
   private String mCreationTime = null;
   @SerializedName("id")
@@ -277,6 +279,13 @@ public class CopyrightAudioAsset extends APINode {
   }
 
 
+  public AudioCopyright getFieldCopyright() {
+    if (mCopyright != null) {
+      mCopyright.context = getContext();
+    }
+    return mCopyright;
+  }
+
   public String getFieldCreationTime() {
     return mCreationTime;
   }
@@ -306,6 +315,7 @@ public class CopyrightAudioAsset extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "copyright",
       "creation_time",
       "id",
       "title",
@@ -401,6 +411,13 @@ public class CopyrightAudioAsset extends APINode {
       return this;
     }
 
+    public APIRequestGet requestCopyrightField () {
+      return this.requestCopyrightField(true);
+    }
+    public APIRequestGet requestCopyrightField (boolean value) {
+      this.requestField("copyright", value);
+      return this;
+    }
     public APIRequestGet requestCreationTimeField () {
       return this.requestCreationTimeField(true);
     }
@@ -446,6 +463,7 @@ public class CopyrightAudioAsset extends APINode {
   }
 
   public CopyrightAudioAsset copyFrom(CopyrightAudioAsset instance) {
+    this.mCopyright = instance.mCopyright;
     this.mCreationTime = instance.mCreationTime;
     this.mId = instance.mId;
     this.mTitle = instance.mTitle;

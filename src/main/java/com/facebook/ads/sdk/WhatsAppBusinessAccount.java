@@ -1106,6 +1106,7 @@ public class WhatsAppBusinessAccount extends APINode {
       "language",
       "name",
       "name_or_content",
+      "quality_score",
       "status",
     };
 
@@ -1195,6 +1196,15 @@ public class WhatsAppBusinessAccount extends APINode {
 
     public APIRequestGetMessageTemplates setNameOrContent (String nameOrContent) {
       this.setParam("name_or_content", nameOrContent);
+      return this;
+    }
+
+    public APIRequestGetMessageTemplates setQualityScore (List<EnumQualityScore> qualityScore) {
+      this.setParam("quality_score", qualityScore);
+      return this;
+    }
+    public APIRequestGetMessageTemplates setQualityScore (String qualityScore) {
+      this.setParam("quality_score", qualityScore);
       return this;
     }
 
@@ -1740,6 +1750,7 @@ public class WhatsAppBusinessAccount extends APINode {
       "feed_count",
       "id",
       "is_catalog_segment",
+      "latest_feed_upload_session",
       "name",
       "product_count",
       "store_catalog_settings",
@@ -1889,6 +1900,13 @@ public class WhatsAppBusinessAccount extends APINode {
     }
     public APIRequestGetProductCatalogs requestIsCatalogSegmentField (boolean value) {
       this.requestField("is_catalog_segment", value);
+      return this;
+    }
+    public APIRequestGetProductCatalogs requestLatestFeedUploadSessionField () {
+      return this.requestLatestFeedUploadSessionField(true);
+    }
+    public APIRequestGetProductCatalogs requestLatestFeedUploadSessionField (boolean value) {
+      this.requestField("latest_feed_upload_session", value);
       return this;
     }
     public APIRequestGetProductCatalogs requestNameField () {
@@ -2579,30 +2597,12 @@ public class WhatsAppBusinessAccount extends APINode {
   }
 
   public static enum EnumCategory {
-      @SerializedName("ACCOUNT_UPDATE")
-      VALUE_ACCOUNT_UPDATE("ACCOUNT_UPDATE"),
-      @SerializedName("ALERT_UPDATE")
-      VALUE_ALERT_UPDATE("ALERT_UPDATE"),
-      @SerializedName("APPOINTMENT_UPDATE")
-      VALUE_APPOINTMENT_UPDATE("APPOINTMENT_UPDATE"),
-      @SerializedName("AUTO_REPLY")
-      VALUE_AUTO_REPLY("AUTO_REPLY"),
-      @SerializedName("ISSUE_RESOLUTION")
-      VALUE_ISSUE_RESOLUTION("ISSUE_RESOLUTION"),
+      @SerializedName("MARKETING")
+      VALUE_MARKETING("MARKETING"),
       @SerializedName("OTP")
       VALUE_OTP("OTP"),
-      @SerializedName("PAYMENT_UPDATE")
-      VALUE_PAYMENT_UPDATE("PAYMENT_UPDATE"),
-      @SerializedName("PERSONAL_FINANCE_UPDATE")
-      VALUE_PERSONAL_FINANCE_UPDATE("PERSONAL_FINANCE_UPDATE"),
-      @SerializedName("RESERVATION_UPDATE")
-      VALUE_RESERVATION_UPDATE("RESERVATION_UPDATE"),
-      @SerializedName("SHIPPING_UPDATE")
-      VALUE_SHIPPING_UPDATE("SHIPPING_UPDATE"),
-      @SerializedName("TICKET_UPDATE")
-      VALUE_TICKET_UPDATE("TICKET_UPDATE"),
-      @SerializedName("TRANSPORTATION_UPDATE")
-      VALUE_TRANSPORTATION_UPDATE("TRANSPORTATION_UPDATE"),
+      @SerializedName("TRANSACTIONAL")
+      VALUE_TRANSACTIONAL("TRANSACTIONAL"),
       ;
 
       private String value;
@@ -2728,6 +2728,29 @@ public class WhatsAppBusinessAccount extends APINode {
       }
   }
 
+  public static enum EnumQualityScore {
+      @SerializedName("GREEN")
+      VALUE_GREEN("GREEN"),
+      @SerializedName("RED")
+      VALUE_RED("RED"),
+      @SerializedName("UNKNOWN")
+      VALUE_UNKNOWN("UNKNOWN"),
+      @SerializedName("YELLOW")
+      VALUE_YELLOW("YELLOW"),
+      ;
+
+      private String value;
+
+      private EnumQualityScore(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumStatus {
       @SerializedName("APPROVED")
       VALUE_APPROVED("APPROVED"),
@@ -2737,6 +2760,8 @@ public class WhatsAppBusinessAccount extends APINode {
       VALUE_DISABLED("DISABLED"),
       @SerializedName("IN_APPEAL")
       VALUE_IN_APPEAL("IN_APPEAL"),
+      @SerializedName("LOCKED")
+      VALUE_LOCKED("LOCKED"),
       @SerializedName("PENDING")
       VALUE_PENDING("PENDING"),
       @SerializedName("PENDING_DELETION")

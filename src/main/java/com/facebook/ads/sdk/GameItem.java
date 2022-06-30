@@ -54,72 +54,78 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class PageAdminNote extends APINode {
-  @SerializedName("body")
-  private String mBody = null;
-  @SerializedName("from")
-  private Page mFrom = null;
+public class GameItem extends APINode {
+  @SerializedName("count")
+  private Long mCount = null;
+  @SerializedName("created")
+  private String mCreated = null;
+  @SerializedName("ext_id")
+  private String mExtId = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("note_label")
-  private String mNoteLabel = null;
-  @SerializedName("user")
-  private User mUser = null;
+  @SerializedName("item_def")
+  private String mItemDef = null;
+  @SerializedName("owner")
+  private User mOwner = null;
+  @SerializedName("status")
+  private String mStatus = null;
+  @SerializedName("updated")
+  private String mUpdated = null;
   protected static Gson gson = null;
 
-  PageAdminNote() {
+  GameItem() {
   }
 
-  public PageAdminNote(Long id, APIContext context) {
+  public GameItem(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public PageAdminNote(String id, APIContext context) {
+  public GameItem(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public PageAdminNote fetch() throws APIException{
-    PageAdminNote newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public GameItem fetch() throws APIException{
+    GameItem newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static PageAdminNote fetchById(Long id, APIContext context) throws APIException {
+  public static GameItem fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<PageAdminNote> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<GameItem> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static PageAdminNote fetchById(String id, APIContext context) throws APIException {
+  public static GameItem fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<PageAdminNote> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<GameItem> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<PageAdminNote> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<PageAdminNote>)(
-      new APIRequest<PageAdminNote>(context, "", "/", "GET", PageAdminNote.getParser())
+  public static APINodeList<GameItem> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<GameItem>)(
+      new APIRequest<GameItem>(context, "", "/", "GET", GameItem.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<PageAdminNote>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<GameItem>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", PageAdminNote.getParser())
+      new APIRequest(context, "", "/", "GET", GameItem.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -132,12 +138,12 @@ public class PageAdminNote extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PageAdminNote loadJSON(String json, APIContext context, String header) {
-    PageAdminNote pageAdminNote = getGson().fromJson(json, PageAdminNote.class);
+  public static GameItem loadJSON(String json, APIContext context, String header) {
+    GameItem gameItem = getGson().fromJson(json, GameItem.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(pageAdminNote.toString());
+      JsonElement o2 = parser.parse(gameItem.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -147,14 +153,14 @@ public class PageAdminNote extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    pageAdminNote.context = context;
-    pageAdminNote.rawValue = json;
-    pageAdminNote.header = header;
-    return pageAdminNote;
+    gameItem.context = context;
+    gameItem.rawValue = json;
+    gameItem.header = header;
+    return gameItem;
   }
 
-  public static APINodeList<PageAdminNote> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<PageAdminNote> pageAdminNotes = new APINodeList<PageAdminNote>(request, json, header);
+  public static APINodeList<GameItem> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<GameItem> gameItems = new APINodeList<GameItem>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -165,9 +171,9 @@ public class PageAdminNote extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          pageAdminNotes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          gameItems.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return pageAdminNotes;
+        return gameItems;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -177,20 +183,20 @@ public class PageAdminNote extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                pageAdminNotes.setCursors(before, after);
+                gameItems.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            pageAdminNotes.setPaging(previous, next);
+            gameItems.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              pageAdminNotes.setAppSecret(context.getAppSecretProof());
+              gameItems.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              pageAdminNotes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              gameItems.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -201,23 +207,23 @@ public class PageAdminNote extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  pageAdminNotes.add(loadJSON(entry.getValue().toString(), context, header));
+                  gameItems.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              pageAdminNotes.add(loadJSON(obj.toString(), context, header));
+              gameItems.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return pageAdminNotes;
+          return gameItems;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              pageAdminNotes.add(loadJSON(entry.getValue().toString(), context, header));
+              gameItems.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return pageAdminNotes;
+          return gameItems;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -234,20 +240,20 @@ public class PageAdminNote extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              pageAdminNotes.add(loadJSON(value.toString(), context, header));
+              gameItems.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return pageAdminNotes;
+            return gameItems;
           }
 
           // Sixth, check if it's pure JsonObject
-          pageAdminNotes.clear();
-          pageAdminNotes.add(loadJSON(json, context, header));
-          return pageAdminNotes;
+          gameItems.clear();
+          gameItems.add(loadJSON(json, context, header));
+          return gameItems;
         }
       }
     } catch (Exception e) {
@@ -279,78 +285,90 @@ public class PageAdminNote extends APINode {
   }
 
 
-  public String getFieldBody() {
-    return mBody;
+  public Long getFieldCount() {
+    return mCount;
   }
 
-  public Page getFieldFrom() {
-    if (mFrom != null) {
-      mFrom.context = getContext();
-    }
-    return mFrom;
+  public String getFieldCreated() {
+    return mCreated;
+  }
+
+  public String getFieldExtId() {
+    return mExtId;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-  public String getFieldNoteLabel() {
-    return mNoteLabel;
+  public String getFieldItemDef() {
+    return mItemDef;
   }
 
-  public User getFieldUser() {
-    if (mUser != null) {
-      mUser.context = getContext();
+  public User getFieldOwner() {
+    if (mOwner != null) {
+      mOwner.context = getContext();
     }
-    return mUser;
+    return mOwner;
+  }
+
+  public String getFieldStatus() {
+    return mStatus;
+  }
+
+  public String getFieldUpdated() {
+    return mUpdated;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<PageAdminNote> {
+  public static class APIRequestGet extends APIRequest<GameItem> {
 
-    PageAdminNote lastResponse = null;
+    GameItem lastResponse = null;
     @Override
-    public PageAdminNote getLastResponse() {
+    public GameItem getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "body",
-      "from",
+      "count",
+      "created",
+      "ext_id",
       "id",
-      "note_label",
-      "user",
+      "item_def",
+      "owner",
+      "status",
+      "updated",
     };
 
     @Override
-    public PageAdminNote parseResponse(String response, String header) throws APIException {
-      return PageAdminNote.parseResponse(response, getContext(), this, header).head();
+    public GameItem parseResponse(String response, String header) throws APIException {
+      return GameItem.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public PageAdminNote execute() throws APIException {
+    public GameItem execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public PageAdminNote execute(Map<String, Object> extraParams) throws APIException {
+    public GameItem execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<PageAdminNote> executeAsync() throws APIException {
+    public ListenableFuture<GameItem> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<PageAdminNote> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<GameItem> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, PageAdminNote>() {
-           public PageAdminNote apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, GameItem>() {
+           public GameItem apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -414,18 +432,25 @@ public class PageAdminNote extends APINode {
       return this;
     }
 
-    public APIRequestGet requestBodyField () {
-      return this.requestBodyField(true);
+    public APIRequestGet requestCountField () {
+      return this.requestCountField(true);
     }
-    public APIRequestGet requestBodyField (boolean value) {
-      this.requestField("body", value);
+    public APIRequestGet requestCountField (boolean value) {
+      this.requestField("count", value);
       return this;
     }
-    public APIRequestGet requestFromField () {
-      return this.requestFromField(true);
+    public APIRequestGet requestCreatedField () {
+      return this.requestCreatedField(true);
     }
-    public APIRequestGet requestFromField (boolean value) {
-      this.requestField("from", value);
+    public APIRequestGet requestCreatedField (boolean value) {
+      this.requestField("created", value);
+      return this;
+    }
+    public APIRequestGet requestExtIdField () {
+      return this.requestExtIdField(true);
+    }
+    public APIRequestGet requestExtIdField (boolean value) {
+      this.requestField("ext_id", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -435,20 +460,55 @@ public class PageAdminNote extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestNoteLabelField () {
-      return this.requestNoteLabelField(true);
+    public APIRequestGet requestItemDefField () {
+      return this.requestItemDefField(true);
     }
-    public APIRequestGet requestNoteLabelField (boolean value) {
-      this.requestField("note_label", value);
+    public APIRequestGet requestItemDefField (boolean value) {
+      this.requestField("item_def", value);
       return this;
     }
-    public APIRequestGet requestUserField () {
-      return this.requestUserField(true);
+    public APIRequestGet requestOwnerField () {
+      return this.requestOwnerField(true);
     }
-    public APIRequestGet requestUserField (boolean value) {
-      this.requestField("user", value);
+    public APIRequestGet requestOwnerField (boolean value) {
+      this.requestField("owner", value);
       return this;
     }
+    public APIRequestGet requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGet requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGet requestUpdatedField () {
+      return this.requestUpdatedField(true);
+    }
+    public APIRequestGet requestUpdatedField (boolean value) {
+      this.requestField("updated", value);
+      return this;
+    }
+  }
+
+  public static enum EnumAction {
+      @SerializedName("CONSUME")
+      VALUE_CONSUME("CONSUME"),
+      @SerializedName("DROP")
+      VALUE_DROP("DROP"),
+      @SerializedName("MARK")
+      VALUE_MARK("MARK"),
+      ;
+
+      private String value;
+
+      private EnumAction(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
 
@@ -465,21 +525,24 @@ public class PageAdminNote extends APINode {
     return gson;
   }
 
-  public PageAdminNote copyFrom(PageAdminNote instance) {
-    this.mBody = instance.mBody;
-    this.mFrom = instance.mFrom;
+  public GameItem copyFrom(GameItem instance) {
+    this.mCount = instance.mCount;
+    this.mCreated = instance.mCreated;
+    this.mExtId = instance.mExtId;
     this.mId = instance.mId;
-    this.mNoteLabel = instance.mNoteLabel;
-    this.mUser = instance.mUser;
+    this.mItemDef = instance.mItemDef;
+    this.mOwner = instance.mOwner;
+    this.mStatus = instance.mStatus;
+    this.mUpdated = instance.mUpdated;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<PageAdminNote> getParser() {
-    return new APIRequest.ResponseParser<PageAdminNote>() {
-      public APINodeList<PageAdminNote> parseResponse(String response, APIContext context, APIRequest<PageAdminNote> request, String header) throws MalformedResponseException {
-        return PageAdminNote.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<GameItem> getParser() {
+    return new APIRequest.ResponseParser<GameItem>() {
+      public APINodeList<GameItem> parseResponse(String response, APIContext context, APIRequest<GameItem> request, String header) throws MalformedResponseException {
+        return GameItem.parseResponse(response, context, request, header);
       }
     };
   }

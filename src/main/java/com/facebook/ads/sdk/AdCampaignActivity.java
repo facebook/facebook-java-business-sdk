@@ -1328,6 +1328,8 @@ public class AdCampaignActivity extends APINode {
       VALUE_LEAD_GENERATION("LEAD_GENERATION"),
       @SerializedName("LINK_CLICKS")
       VALUE_LINK_CLICKS("LINK_CLICKS"),
+      @SerializedName("MESSAGING_PURCHASE_CONVERSION")
+      VALUE_MESSAGING_PURCHASE_CONVERSION("MESSAGING_PURCHASE_CONVERSION"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
       @SerializedName("OFFSITE_CONVERSIONS")
@@ -1387,6 +1389,8 @@ public class AdCampaignActivity extends APINode {
       VALUE_LEAD_GENERATION("LEAD_GENERATION"),
       @SerializedName("LINK_CLICKS")
       VALUE_LINK_CLICKS("LINK_CLICKS"),
+      @SerializedName("MESSAGING_PURCHASE_CONVERSION")
+      VALUE_MESSAGING_PURCHASE_CONVERSION("MESSAGING_PURCHASE_CONVERSION"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
       @SerializedName("OFFSITE_CONVERSIONS")

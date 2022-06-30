@@ -109,6 +109,8 @@ public class ProductItem extends APINode {
   private String mCustomNumber4 = null;
   @SerializedName("description")
   private String mDescription = null;
+  @SerializedName("errors")
+  private List<ProductItemError> mErrors = null;
   @SerializedName("expiration_date")
   private String mExpirationDate = null;
   @SerializedName("fb_product_category")
@@ -533,6 +535,10 @@ public class ProductItem extends APINode {
 
   public String getFieldDescription() {
     return mDescription;
+  }
+
+  public List<ProductItemError> getFieldErrors() {
+    return mErrors;
   }
 
   public String getFieldExpirationDate() {
@@ -1173,6 +1179,7 @@ public class ProductItem extends APINode {
       "custom_number_3",
       "custom_number_4",
       "description",
+      "errors",
       "expiration_date",
       "fb_product_category",
       "gender",
@@ -1528,6 +1535,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestDescriptionField (boolean value) {
       this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGet requestErrorsField () {
+      return this.requestErrorsField(true);
+    }
+    public APIRequestGet requestErrorsField (boolean value) {
+      this.requestField("errors", value);
       return this;
     }
     public APIRequestGet requestExpirationDateField () {
@@ -3135,6 +3149,172 @@ public class ProductItem extends APINode {
       }
   }
 
+  public static enum EnumErrorPriority {
+      @SerializedName("HIGH")
+      VALUE_HIGH("HIGH"),
+      @SerializedName("LOW")
+      VALUE_LOW("LOW"),
+      @SerializedName("MEDIUM")
+      VALUE_MEDIUM("MEDIUM"),
+      ;
+
+      private String value;
+
+      private EnumErrorPriority(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumErrorType {
+      @SerializedName("AR_DELETED_DUE_TO_UPDATE")
+      VALUE_AR_DELETED_DUE_TO_UPDATE("AR_DELETED_DUE_TO_UPDATE"),
+      @SerializedName("AR_POLICY_VIOLATED")
+      VALUE_AR_POLICY_VIOLATED("AR_POLICY_VIOLATED"),
+      @SerializedName("AVAILABLE")
+      VALUE_AVAILABLE("AVAILABLE"),
+      @SerializedName("BAD_QUALITY_IMAGE")
+      VALUE_BAD_QUALITY_IMAGE("BAD_QUALITY_IMAGE"),
+      @SerializedName("CANNOT_EDIT_SUBSCRIPTION_PRODUCTS")
+      VALUE_CANNOT_EDIT_SUBSCRIPTION_PRODUCTS("CANNOT_EDIT_SUBSCRIPTION_PRODUCTS"),
+      @SerializedName("CRAWLED_AVAILABILITY_MISMATCH")
+      VALUE_CRAWLED_AVAILABILITY_MISMATCH("CRAWLED_AVAILABILITY_MISMATCH"),
+      @SerializedName("DIGITAL_GOODS_NOT_AVAILABLE_FOR_CHECKOUT")
+      VALUE_DIGITAL_GOODS_NOT_AVAILABLE_FOR_CHECKOUT("DIGITAL_GOODS_NOT_AVAILABLE_FOR_CHECKOUT"),
+      @SerializedName("DUPLICATE_IMAGES")
+      VALUE_DUPLICATE_IMAGES("DUPLICATE_IMAGES"),
+      @SerializedName("DUPLICATE_TITLE_AND_DESCRIPTION")
+      VALUE_DUPLICATE_TITLE_AND_DESCRIPTION("DUPLICATE_TITLE_AND_DESCRIPTION"),
+      @SerializedName("GENERIC_INVALID_FIELD")
+      VALUE_GENERIC_INVALID_FIELD("GENERIC_INVALID_FIELD"),
+      @SerializedName("HIDDEN_UNTIL_PRODUCT_LAUNCH")
+      VALUE_HIDDEN_UNTIL_PRODUCT_LAUNCH("HIDDEN_UNTIL_PRODUCT_LAUNCH"),
+      @SerializedName("IMAGE_RESOLUTION_LOW")
+      VALUE_IMAGE_RESOLUTION_LOW("IMAGE_RESOLUTION_LOW"),
+      @SerializedName("INACTIVE_SHOPIFY_PRODUCT")
+      VALUE_INACTIVE_SHOPIFY_PRODUCT("INACTIVE_SHOPIFY_PRODUCT"),
+      @SerializedName("INVALID_COMMERCE_TAX_CATEGORY")
+      VALUE_INVALID_COMMERCE_TAX_CATEGORY("INVALID_COMMERCE_TAX_CATEGORY"),
+      @SerializedName("INVALID_IMAGES")
+      VALUE_INVALID_IMAGES("INVALID_IMAGES"),
+      @SerializedName("INVALID_MONETIZER_RETURN_POLICY")
+      VALUE_INVALID_MONETIZER_RETURN_POLICY("INVALID_MONETIZER_RETURN_POLICY"),
+      @SerializedName("INVALID_PRE_ORDER_PARAMS")
+      VALUE_INVALID_PRE_ORDER_PARAMS("INVALID_PRE_ORDER_PARAMS"),
+      @SerializedName("INVALID_SHIPPING_PROFILE_PARAMS")
+      VALUE_INVALID_SHIPPING_PROFILE_PARAMS("INVALID_SHIPPING_PROFILE_PARAMS"),
+      @SerializedName("INVALID_SUBSCRIPTION_DISABLE_PARAMS")
+      VALUE_INVALID_SUBSCRIPTION_DISABLE_PARAMS("INVALID_SUBSCRIPTION_DISABLE_PARAMS"),
+      @SerializedName("INVALID_SUBSCRIPTION_ENABLE_PARAMS")
+      VALUE_INVALID_SUBSCRIPTION_ENABLE_PARAMS("INVALID_SUBSCRIPTION_ENABLE_PARAMS"),
+      @SerializedName("INVALID_SUBSCRIPTION_PARAMS")
+      VALUE_INVALID_SUBSCRIPTION_PARAMS("INVALID_SUBSCRIPTION_PARAMS"),
+      @SerializedName("INVENTORY_ZERO_AVAILABILITY_IN_STOCK")
+      VALUE_INVENTORY_ZERO_AVAILABILITY_IN_STOCK("INVENTORY_ZERO_AVAILABILITY_IN_STOCK"),
+      @SerializedName("IN_ANOTHER_PRODUCT_LAUNCH")
+      VALUE_IN_ANOTHER_PRODUCT_LAUNCH("IN_ANOTHER_PRODUCT_LAUNCH"),
+      @SerializedName("ITEM_GROUP_NOT_SPECIFIED")
+      VALUE_ITEM_GROUP_NOT_SPECIFIED("ITEM_GROUP_NOT_SPECIFIED"),
+      @SerializedName("ITEM_NOT_SHIPPABLE_FOR_SCA_SHOP")
+      VALUE_ITEM_NOT_SHIPPABLE_FOR_SCA_SHOP("ITEM_NOT_SHIPPABLE_FOR_SCA_SHOP"),
+      @SerializedName("ITEM_OVERRIDE_NOT_VISIBLE")
+      VALUE_ITEM_OVERRIDE_NOT_VISIBLE("ITEM_OVERRIDE_NOT_VISIBLE"),
+      @SerializedName("ITEM_STALE_OUT_OF_STOCK")
+      VALUE_ITEM_STALE_OUT_OF_STOCK("ITEM_STALE_OUT_OF_STOCK"),
+      @SerializedName("MINI_SHOPS_DISABLED_BY_USER")
+      VALUE_MINI_SHOPS_DISABLED_BY_USER("MINI_SHOPS_DISABLED_BY_USER"),
+      @SerializedName("MISSING_CHECKOUT")
+      VALUE_MISSING_CHECKOUT("MISSING_CHECKOUT"),
+      @SerializedName("MISSING_CHECKOUT_CURRENCY")
+      VALUE_MISSING_CHECKOUT_CURRENCY("MISSING_CHECKOUT_CURRENCY"),
+      @SerializedName("MISSING_COLOR")
+      VALUE_MISSING_COLOR("MISSING_COLOR"),
+      @SerializedName("MISSING_COUNTRY_OVERRIDE_IN_SHIPPING_PROFILE")
+      VALUE_MISSING_COUNTRY_OVERRIDE_IN_SHIPPING_PROFILE("MISSING_COUNTRY_OVERRIDE_IN_SHIPPING_PROFILE"),
+      @SerializedName("MISSING_INDIA_COMPLIANCE_FIELDS")
+      VALUE_MISSING_INDIA_COMPLIANCE_FIELDS("MISSING_INDIA_COMPLIANCE_FIELDS"),
+      @SerializedName("MISSING_SHIPPING_PROFILE")
+      VALUE_MISSING_SHIPPING_PROFILE("MISSING_SHIPPING_PROFILE"),
+      @SerializedName("MISSING_SIZE")
+      VALUE_MISSING_SIZE("MISSING_SIZE"),
+      @SerializedName("MISSING_TAX_CATEGORY")
+      VALUE_MISSING_TAX_CATEGORY("MISSING_TAX_CATEGORY"),
+      @SerializedName("NOT_ENOUGH_IMAGES")
+      VALUE_NOT_ENOUGH_IMAGES("NOT_ENOUGH_IMAGES"),
+      @SerializedName("PART_OF_PRODUCT_LAUNCH")
+      VALUE_PART_OF_PRODUCT_LAUNCH("PART_OF_PRODUCT_LAUNCH"),
+      @SerializedName("PRODUCT_EXPIRED")
+      VALUE_PRODUCT_EXPIRED("PRODUCT_EXPIRED"),
+      @SerializedName("PRODUCT_ITEM_NOT_VISIBLE")
+      VALUE_PRODUCT_ITEM_NOT_VISIBLE("PRODUCT_ITEM_NOT_VISIBLE"),
+      @SerializedName("PRODUCT_NOT_APPROVED")
+      VALUE_PRODUCT_NOT_APPROVED("PRODUCT_NOT_APPROVED"),
+      @SerializedName("PRODUCT_NOT_DOMINANT_CURRENCY")
+      VALUE_PRODUCT_NOT_DOMINANT_CURRENCY("PRODUCT_NOT_DOMINANT_CURRENCY"),
+      @SerializedName("PRODUCT_OUT_OF_STOCK")
+      VALUE_PRODUCT_OUT_OF_STOCK("PRODUCT_OUT_OF_STOCK"),
+      @SerializedName("PRODUCT_URL_EQUALS_DOMAIN")
+      VALUE_PRODUCT_URL_EQUALS_DOMAIN("PRODUCT_URL_EQUALS_DOMAIN"),
+      @SerializedName("PROPERTY_PRICE_CURRENCY_NOT_SUPPORTED")
+      VALUE_PROPERTY_PRICE_CURRENCY_NOT_SUPPORTED("PROPERTY_PRICE_CURRENCY_NOT_SUPPORTED"),
+      @SerializedName("PROPERTY_PRICE_TOO_HIGH")
+      VALUE_PROPERTY_PRICE_TOO_HIGH("PROPERTY_PRICE_TOO_HIGH"),
+      @SerializedName("PROPERTY_PRICE_TOO_LOW")
+      VALUE_PROPERTY_PRICE_TOO_LOW("PROPERTY_PRICE_TOO_LOW"),
+      @SerializedName("PROPERTY_VALUE_CONTAINS_HTML_TAGS")
+      VALUE_PROPERTY_VALUE_CONTAINS_HTML_TAGS("PROPERTY_VALUE_CONTAINS_HTML_TAGS"),
+      @SerializedName("PROPERTY_VALUE_DESCRIPTION_CONTAINS_OFF_PLATFORM_LINK")
+      VALUE_PROPERTY_VALUE_DESCRIPTION_CONTAINS_OFF_PLATFORM_LINK("PROPERTY_VALUE_DESCRIPTION_CONTAINS_OFF_PLATFORM_LINK"),
+      @SerializedName("PROPERTY_VALUE_FORMAT")
+      VALUE_PROPERTY_VALUE_FORMAT("PROPERTY_VALUE_FORMAT"),
+      @SerializedName("PROPERTY_VALUE_MISSING")
+      VALUE_PROPERTY_VALUE_MISSING("PROPERTY_VALUE_MISSING"),
+      @SerializedName("PROPERTY_VALUE_MISSING_WARNING")
+      VALUE_PROPERTY_VALUE_MISSING_WARNING("PROPERTY_VALUE_MISSING_WARNING"),
+      @SerializedName("PROPERTY_VALUE_NON_POSITIVE")
+      VALUE_PROPERTY_VALUE_NON_POSITIVE("PROPERTY_VALUE_NON_POSITIVE"),
+      @SerializedName("PROPERTY_VALUE_STRING_EXCEEDS_LENGTH")
+      VALUE_PROPERTY_VALUE_STRING_EXCEEDS_LENGTH("PROPERTY_VALUE_STRING_EXCEEDS_LENGTH"),
+      @SerializedName("PROPERTY_VALUE_STRING_TOO_SHORT")
+      VALUE_PROPERTY_VALUE_STRING_TOO_SHORT("PROPERTY_VALUE_STRING_TOO_SHORT"),
+      @SerializedName("PROPERTY_VALUE_UPPERCASE_WARNING")
+      VALUE_PROPERTY_VALUE_UPPERCASE_WARNING("PROPERTY_VALUE_UPPERCASE_WARNING"),
+      @SerializedName("QUALITY_DUPLICATED_DESCRIPTION")
+      VALUE_QUALITY_DUPLICATED_DESCRIPTION("QUALITY_DUPLICATED_DESCRIPTION"),
+      @SerializedName("QUALITY_ITEM_LINK_BROKEN")
+      VALUE_QUALITY_ITEM_LINK_BROKEN("QUALITY_ITEM_LINK_BROKEN"),
+      @SerializedName("QUALITY_ITEM_LINK_REDIRECTING")
+      VALUE_QUALITY_ITEM_LINK_REDIRECTING("QUALITY_ITEM_LINK_REDIRECTING"),
+      @SerializedName("RETAILER_ID_NOT_PROVIDED")
+      VALUE_RETAILER_ID_NOT_PROVIDED("RETAILER_ID_NOT_PROVIDED"),
+      @SerializedName("SHOPIFY_ITEM_MISSING_SHIPPING_PROFILE")
+      VALUE_SHOPIFY_ITEM_MISSING_SHIPPING_PROFILE("SHOPIFY_ITEM_MISSING_SHIPPING_PROFILE"),
+      @SerializedName("SUBSCRIPTION_INFO_NOT_ENABLED_FOR_FEED")
+      VALUE_SUBSCRIPTION_INFO_NOT_ENABLED_FOR_FEED("SUBSCRIPTION_INFO_NOT_ENABLED_FOR_FEED"),
+      @SerializedName("TAX_CATEGORY_NOT_SUPPORTED_IN_UK")
+      VALUE_TAX_CATEGORY_NOT_SUPPORTED_IN_UK("TAX_CATEGORY_NOT_SUPPORTED_IN_UK"),
+      @SerializedName("UNSUPPORTED_PRODUCT_CATEGORY")
+      VALUE_UNSUPPORTED_PRODUCT_CATEGORY("UNSUPPORTED_PRODUCT_CATEGORY"),
+      @SerializedName("VARIANT_ATTRIBUTE_ISSUE")
+      VALUE_VARIANT_ATTRIBUTE_ISSUE("VARIANT_ATTRIBUTE_ISSUE"),
+      ;
+
+      private String value;
+
+      private EnumErrorType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumMarkedForProductLaunch {
       @SerializedName("default")
       VALUE_DEFAULT("default"),
@@ -3734,6 +3914,7 @@ public class ProductItem extends APINode {
     this.mCustomNumber3 = instance.mCustomNumber3;
     this.mCustomNumber4 = instance.mCustomNumber4;
     this.mDescription = instance.mDescription;
+    this.mErrors = instance.mErrors;
     this.mExpirationDate = instance.mExpirationDate;
     this.mFbProductCategory = instance.mFbProductCategory;
     this.mGender = instance.mGender;

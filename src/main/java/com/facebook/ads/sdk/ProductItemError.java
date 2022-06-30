@@ -54,33 +54,29 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class InstagramInsightsResult extends APINode {
+public class ProductItemError extends APINode {
   @SerializedName("description")
   private String mDescription = null;
-  @SerializedName("id")
-  private String mId = null;
-  @SerializedName("name")
-  private String mName = null;
-  @SerializedName("period")
-  private String mPeriod = null;
+  @SerializedName("error_priority")
+  private String mErrorPriority = null;
+  @SerializedName("error_type")
+  private String mErrorType = null;
   @SerializedName("title")
   private String mTitle = null;
-  @SerializedName("values")
-  private List<InstagramInsightsValue> mValues = null;
   protected static Gson gson = null;
 
-  public InstagramInsightsResult() {
+  public ProductItemError() {
   }
 
   public String getId() {
-    return getFieldId().toString();
+    return null;
   }
-  public static InstagramInsightsResult loadJSON(String json, APIContext context, String header) {
-    InstagramInsightsResult instagramInsightsResult = getGson().fromJson(json, InstagramInsightsResult.class);
+  public static ProductItemError loadJSON(String json, APIContext context, String header) {
+    ProductItemError productItemError = getGson().fromJson(json, ProductItemError.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(instagramInsightsResult.toString());
+      JsonElement o2 = parser.parse(productItemError.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -90,14 +86,14 @@ public class InstagramInsightsResult extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    instagramInsightsResult.context = context;
-    instagramInsightsResult.rawValue = json;
-    instagramInsightsResult.header = header;
-    return instagramInsightsResult;
+    productItemError.context = context;
+    productItemError.rawValue = json;
+    productItemError.header = header;
+    return productItemError;
   }
 
-  public static APINodeList<InstagramInsightsResult> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<InstagramInsightsResult> instagramInsightsResults = new APINodeList<InstagramInsightsResult>(request, json, header);
+  public static APINodeList<ProductItemError> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ProductItemError> productItemErrors = new APINodeList<ProductItemError>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -108,9 +104,9 @@ public class InstagramInsightsResult extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          instagramInsightsResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          productItemErrors.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return instagramInsightsResults;
+        return productItemErrors;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -120,20 +116,20 @@ public class InstagramInsightsResult extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                instagramInsightsResults.setCursors(before, after);
+                productItemErrors.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            instagramInsightsResults.setPaging(previous, next);
+            productItemErrors.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              instagramInsightsResults.setAppSecret(context.getAppSecretProof());
+              productItemErrors.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              instagramInsightsResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              productItemErrors.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -144,23 +140,23 @@ public class InstagramInsightsResult extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  instagramInsightsResults.add(loadJSON(entry.getValue().toString(), context, header));
+                  productItemErrors.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              instagramInsightsResults.add(loadJSON(obj.toString(), context, header));
+              productItemErrors.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return instagramInsightsResults;
+          return productItemErrors;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              instagramInsightsResults.add(loadJSON(entry.getValue().toString(), context, header));
+              productItemErrors.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return instagramInsightsResults;
+          return productItemErrors;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -177,20 +173,20 @@ public class InstagramInsightsResult extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              instagramInsightsResults.add(loadJSON(value.toString(), context, header));
+              productItemErrors.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return instagramInsightsResults;
+            return productItemErrors;
           }
 
           // Sixth, check if it's pure JsonObject
-          instagramInsightsResults.clear();
-          instagramInsightsResults.add(loadJSON(json, context, header));
-          return instagramInsightsResults;
+          productItemErrors.clear();
+          productItemErrors.add(loadJSON(json, context, header));
+          return productItemErrors;
         }
       }
     } catch (Exception e) {
@@ -222,35 +218,26 @@ public class InstagramInsightsResult extends APINode {
     return mDescription;
   }
 
-  public InstagramInsightsResult setFieldDescription(String value) {
+  public ProductItemError setFieldDescription(String value) {
     this.mDescription = value;
     return this;
   }
 
-  public String getFieldId() {
-    return mId;
+  public String getFieldErrorPriority() {
+    return mErrorPriority;
   }
 
-  public InstagramInsightsResult setFieldId(String value) {
-    this.mId = value;
+  public ProductItemError setFieldErrorPriority(String value) {
+    this.mErrorPriority = value;
     return this;
   }
 
-  public String getFieldName() {
-    return mName;
+  public String getFieldErrorType() {
+    return mErrorType;
   }
 
-  public InstagramInsightsResult setFieldName(String value) {
-    this.mName = value;
-    return this;
-  }
-
-  public String getFieldPeriod() {
-    return mPeriod;
-  }
-
-  public InstagramInsightsResult setFieldPeriod(String value) {
-    this.mPeriod = value;
+  public ProductItemError setFieldErrorType(String value) {
+    this.mErrorType = value;
     return this;
   }
 
@@ -258,112 +245,12 @@ public class InstagramInsightsResult extends APINode {
     return mTitle;
   }
 
-  public InstagramInsightsResult setFieldTitle(String value) {
+  public ProductItemError setFieldTitle(String value) {
     this.mTitle = value;
     return this;
   }
 
-  public List<InstagramInsightsValue> getFieldValues() {
-    return mValues;
-  }
 
-  public InstagramInsightsResult setFieldValues(List<InstagramInsightsValue> value) {
-    this.mValues = value;
-    return this;
-  }
-
-  public InstagramInsightsResult setFieldValues(String value) {
-    Type type = new TypeToken<List<InstagramInsightsValue>>(){}.getType();
-    this.mValues = InstagramInsightsValue.getGson().fromJson(value, type);
-    return this;
-  }
-
-
-  public static enum EnumMetric {
-      @SerializedName("carousel_album_engagement")
-      VALUE_CAROUSEL_ALBUM_ENGAGEMENT("carousel_album_engagement"),
-      @SerializedName("carousel_album_impressions")
-      VALUE_CAROUSEL_ALBUM_IMPRESSIONS("carousel_album_impressions"),
-      @SerializedName("carousel_album_reach")
-      VALUE_CAROUSEL_ALBUM_REACH("carousel_album_reach"),
-      @SerializedName("carousel_album_saved")
-      VALUE_CAROUSEL_ALBUM_SAVED("carousel_album_saved"),
-      @SerializedName("carousel_album_video_views")
-      VALUE_CAROUSEL_ALBUM_VIDEO_VIEWS("carousel_album_video_views"),
-      @SerializedName("comments")
-      VALUE_COMMENTS("comments"),
-      @SerializedName("engagement")
-      VALUE_ENGAGEMENT("engagement"),
-      @SerializedName("exits")
-      VALUE_EXITS("exits"),
-      @SerializedName("follows_from_impressions")
-      VALUE_FOLLOWS_FROM_IMPRESSIONS("follows_from_impressions"),
-      @SerializedName("impressions")
-      VALUE_IMPRESSIONS("impressions"),
-      @SerializedName("likes")
-      VALUE_LIKES("likes"),
-      @SerializedName("navigation")
-      VALUE_NAVIGATION("navigation"),
-      @SerializedName("plays")
-      VALUE_PLAYS("plays"),
-      @SerializedName("profile_views_from_impressions")
-      VALUE_PROFILE_VIEWS_FROM_IMPRESSIONS("profile_views_from_impressions"),
-      @SerializedName("reach")
-      VALUE_REACH("reach"),
-      @SerializedName("replies")
-      VALUE_REPLIES("replies"),
-      @SerializedName("saved")
-      VALUE_SAVED("saved"),
-      @SerializedName("shares")
-      VALUE_SHARES("shares"),
-      @SerializedName("taps_back")
-      VALUE_TAPS_BACK("taps_back"),
-      @SerializedName("taps_forward")
-      VALUE_TAPS_FORWARD("taps_forward"),
-      @SerializedName("total_interactions")
-      VALUE_TOTAL_INTERACTIONS("total_interactions"),
-      @SerializedName("total_media_attributed_actions")
-      VALUE_TOTAL_MEDIA_ATTRIBUTED_ACTIONS("total_media_attributed_actions"),
-      @SerializedName("video_views")
-      VALUE_VIDEO_VIEWS("video_views"),
-      ;
-
-      private String value;
-
-      private EnumMetric(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumPeriod {
-      @SerializedName("day")
-      VALUE_DAY("day"),
-      @SerializedName("days_28")
-      VALUE_DAYS_28("days_28"),
-      @SerializedName("lifetime")
-      VALUE_LIFETIME("lifetime"),
-      @SerializedName("month")
-      VALUE_MONTH("month"),
-      @SerializedName("week")
-      VALUE_WEEK("week"),
-      ;
-
-      private String value;
-
-      private EnumPeriod(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -379,22 +266,20 @@ public class InstagramInsightsResult extends APINode {
     return gson;
   }
 
-  public InstagramInsightsResult copyFrom(InstagramInsightsResult instance) {
+  public ProductItemError copyFrom(ProductItemError instance) {
     this.mDescription = instance.mDescription;
-    this.mId = instance.mId;
-    this.mName = instance.mName;
-    this.mPeriod = instance.mPeriod;
+    this.mErrorPriority = instance.mErrorPriority;
+    this.mErrorType = instance.mErrorType;
     this.mTitle = instance.mTitle;
-    this.mValues = instance.mValues;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<InstagramInsightsResult> getParser() {
-    return new APIRequest.ResponseParser<InstagramInsightsResult>() {
-      public APINodeList<InstagramInsightsResult> parseResponse(String response, APIContext context, APIRequest<InstagramInsightsResult> request, String header) throws MalformedResponseException {
-        return InstagramInsightsResult.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ProductItemError> getParser() {
+    return new APIRequest.ResponseParser<ProductItemError>() {
+      public APINodeList<ProductItemError> parseResponse(String response, APIContext context, APIRequest<ProductItemError> request, String header) throws MalformedResponseException {
+        return ProductItemError.parseResponse(response, context, request, header);
       }
     };
   }

@@ -6278,6 +6278,8 @@ public class AdSet extends APINode {
       VALUE_LEAD_GENERATION("LEAD_GENERATION"),
       @SerializedName("LINK_CLICKS")
       VALUE_LINK_CLICKS("LINK_CLICKS"),
+      @SerializedName("MESSAGING_PURCHASE_CONVERSION")
+      VALUE_MESSAGING_PURCHASE_CONVERSION("MESSAGING_PURCHASE_CONVERSION"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
       @SerializedName("OFFSITE_CONVERSIONS")
@@ -6381,25 +6383,6 @@ public class AdSet extends APINode {
       private String value;
 
       private EnumDatePreset(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumOperator {
-      @SerializedName("ALL")
-      VALUE_ALL("ALL"),
-      @SerializedName("ANY")
-      VALUE_ANY("ANY"),
-      ;
-
-      private String value;
-
-      private EnumOperator(String value) {
         this.value = value;
       }
 
@@ -6552,6 +6535,25 @@ public class AdSet extends APINode {
       private String value;
 
       private EnumTuneForCategory(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumOperator {
+      @SerializedName("ALL")
+      VALUE_ALL("ALL"),
+      @SerializedName("ANY")
+      VALUE_ANY("ANY"),
+      ;
+
+      private String value;
+
+      private EnumOperator(String value) {
         this.value = value;
       }
 

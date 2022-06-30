@@ -1265,6 +1265,7 @@ public class ProductSet extends APINode {
     public static final String[] FIELDS = {
       "ac_type",
       "additional_fees_description",
+      "address",
       "agent_company",
       "agent_email",
       "agent_fb_page_id",
@@ -1275,9 +1276,11 @@ public class ProductSet extends APINode {
       "area_unit",
       "availability",
       "category_specific_fields",
+      "co_2_emission_rating_eu",
       "currency",
       "days_on_market",
       "description",
+      "energy_rating_eu",
       "furnish_type",
       "group_id",
       "heating_type",
@@ -1302,6 +1305,7 @@ public class ProductSet extends APINode {
       "price",
       "property_type",
       "sanitized_images",
+      "unit_price",
       "url",
       "year_built",
     };
@@ -1427,6 +1431,13 @@ public class ProductSet extends APINode {
       this.requestField("additional_fees_description", value);
       return this;
     }
+    public APIRequestGetHomeListings requestAddressField () {
+      return this.requestAddressField(true);
+    }
+    public APIRequestGetHomeListings requestAddressField (boolean value) {
+      this.requestField("address", value);
+      return this;
+    }
     public APIRequestGetHomeListings requestAgentCompanyField () {
       return this.requestAgentCompanyField(true);
     }
@@ -1497,6 +1508,13 @@ public class ProductSet extends APINode {
       this.requestField("category_specific_fields", value);
       return this;
     }
+    public APIRequestGetHomeListings requestCo2EmissionRatingEuField () {
+      return this.requestCo2EmissionRatingEuField(true);
+    }
+    public APIRequestGetHomeListings requestCo2EmissionRatingEuField (boolean value) {
+      this.requestField("co_2_emission_rating_eu", value);
+      return this;
+    }
     public APIRequestGetHomeListings requestCurrencyField () {
       return this.requestCurrencyField(true);
     }
@@ -1516,6 +1534,13 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetHomeListings requestDescriptionField (boolean value) {
       this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestEnergyRatingEuField () {
+      return this.requestEnergyRatingEuField(true);
+    }
+    public APIRequestGetHomeListings requestEnergyRatingEuField (boolean value) {
+      this.requestField("energy_rating_eu", value);
       return this;
     }
     public APIRequestGetHomeListings requestFurnishTypeField () {
@@ -1684,6 +1709,13 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetHomeListings requestSanitizedImagesField (boolean value) {
       this.requestField("sanitized_images", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestUnitPriceField () {
+      return this.requestUnitPriceField(true);
+    }
+    public APIRequestGetHomeListings requestUnitPriceField (boolean value) {
+      this.requestField("unit_price", value);
       return this;
     }
     public APIRequestGetHomeListings requestUrlField () {
@@ -2011,6 +2043,8 @@ public class ProductSet extends APINode {
     }
     public static final String[] PARAMS = {
       "bulk_pagination",
+      "error_priority",
+      "error_type",
       "filter",
     };
 
@@ -2042,6 +2076,7 @@ public class ProductSet extends APINode {
       "custom_number_3",
       "custom_number_4",
       "description",
+      "errors",
       "expiration_date",
       "fb_product_category",
       "gender",
@@ -2147,6 +2182,24 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetProducts setBulkPagination (String bulkPagination) {
       this.setParam("bulk_pagination", bulkPagination);
+      return this;
+    }
+
+    public APIRequestGetProducts setErrorPriority (ProductItem.EnumErrorPriority errorPriority) {
+      this.setParam("error_priority", errorPriority);
+      return this;
+    }
+    public APIRequestGetProducts setErrorPriority (String errorPriority) {
+      this.setParam("error_priority", errorPriority);
+      return this;
+    }
+
+    public APIRequestGetProducts setErrorType (ProductItem.EnumErrorType errorType) {
+      this.setParam("error_type", errorType);
+      return this;
+    }
+    public APIRequestGetProducts setErrorType (String errorType) {
+      this.setParam("error_type", errorType);
       return this;
     }
 
@@ -2382,6 +2435,13 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetProducts requestDescriptionField (boolean value) {
       this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetProducts requestErrorsField () {
+      return this.requestErrorsField(true);
+    }
+    public APIRequestGetProducts requestErrorsField (boolean value) {
+      this.requestField("errors", value);
       return this;
     }
     public APIRequestGetProducts requestExpirationDateField () {

@@ -59,6 +59,8 @@ public class PrivateLiftStudyInstance extends APINode {
   private String mBreakdownKey = null;
   @SerializedName("created_time")
   private String mCreatedTime = null;
+  @SerializedName("feature_list")
+  private List<String> mFeatureList = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("latest_status_update_time")
@@ -295,6 +297,10 @@ public class PrivateLiftStudyInstance extends APINode {
     return mCreatedTime;
   }
 
+  public List<String> getFieldFeatureList() {
+    return mFeatureList;
+  }
+
   public String getFieldId() {
     return mId;
   }
@@ -330,6 +336,7 @@ public class PrivateLiftStudyInstance extends APINode {
     public static final String[] FIELDS = {
       "breakdown_key",
       "created_time",
+      "feature_list",
       "id",
       "latest_status_update_time",
       "server_ips",
@@ -438,6 +445,13 @@ public class PrivateLiftStudyInstance extends APINode {
     }
     public APIRequestGet requestCreatedTimeField (boolean value) {
       this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGet requestFeatureListField () {
+      return this.requestFeatureListField(true);
+    }
+    public APIRequestGet requestFeatureListField (boolean value) {
+      this.requestField("feature_list", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -633,6 +647,7 @@ public class PrivateLiftStudyInstance extends APINode {
   public PrivateLiftStudyInstance copyFrom(PrivateLiftStudyInstance instance) {
     this.mBreakdownKey = instance.mBreakdownKey;
     this.mCreatedTime = instance.mCreatedTime;
+    this.mFeatureList = instance.mFeatureList;
     this.mId = instance.mId;
     this.mLatestStatusUpdateTime = instance.mLatestStatusUpdateTime;
     this.mServerIps = instance.mServerIps;

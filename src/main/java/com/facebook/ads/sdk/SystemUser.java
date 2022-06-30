@@ -2327,6 +2327,7 @@ public class SystemUser extends APINode {
       "feed_count",
       "id",
       "is_catalog_segment",
+      "latest_feed_upload_session",
       "name",
       "product_count",
       "store_catalog_settings",
@@ -2476,6 +2477,13 @@ public class SystemUser extends APINode {
     }
     public APIRequestGetAssignedProductCatalogs requestIsCatalogSegmentField (boolean value) {
       this.requestField("is_catalog_segment", value);
+      return this;
+    }
+    public APIRequestGetAssignedProductCatalogs requestLatestFeedUploadSessionField () {
+      return this.requestLatestFeedUploadSessionField(true);
+    }
+    public APIRequestGetAssignedProductCatalogs requestLatestFeedUploadSessionField (boolean value) {
+      this.requestField("latest_feed_upload_session", value);
       return this;
     }
     public APIRequestGetAssignedProductCatalogs requestNameField () {

@@ -54,33 +54,31 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class NativeOfferDiscount extends APINode {
-  @SerializedName("currency")
-  private String mCurrency = null;
-  @SerializedName("override")
-  private String mOverride = null;
-  @SerializedName("text")
-  private String mText = null;
-  @SerializedName("type")
-  private String mType = null;
-  @SerializedName("value1")
-  private Double mValue1 = null;
-  @SerializedName("value2")
-  private Double mValue2 = null;
+public class ProductCatalogDataSource extends APINode {
+  @SerializedName("app_id")
+  private String mAppId = null;
+  @SerializedName("id")
+  private String mId = null;
+  @SerializedName("ingestion_source_type")
+  private String mIngestionSourceType = null;
+  @SerializedName("name")
+  private String mName = null;
+  @SerializedName("upload_type")
+  private String mUploadType = null;
   protected static Gson gson = null;
 
-  public NativeOfferDiscount() {
+  public ProductCatalogDataSource() {
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
-  public static NativeOfferDiscount loadJSON(String json, APIContext context, String header) {
-    NativeOfferDiscount nativeOfferDiscount = getGson().fromJson(json, NativeOfferDiscount.class);
+  public static ProductCatalogDataSource loadJSON(String json, APIContext context, String header) {
+    ProductCatalogDataSource productCatalogDataSource = getGson().fromJson(json, ProductCatalogDataSource.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(nativeOfferDiscount.toString());
+      JsonElement o2 = parser.parse(productCatalogDataSource.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -90,14 +88,14 @@ public class NativeOfferDiscount extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    nativeOfferDiscount.context = context;
-    nativeOfferDiscount.rawValue = json;
-    nativeOfferDiscount.header = header;
-    return nativeOfferDiscount;
+    productCatalogDataSource.context = context;
+    productCatalogDataSource.rawValue = json;
+    productCatalogDataSource.header = header;
+    return productCatalogDataSource;
   }
 
-  public static APINodeList<NativeOfferDiscount> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<NativeOfferDiscount> nativeOfferDiscounts = new APINodeList<NativeOfferDiscount>(request, json, header);
+  public static APINodeList<ProductCatalogDataSource> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ProductCatalogDataSource> productCatalogDataSources = new APINodeList<ProductCatalogDataSource>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -108,9 +106,9 @@ public class NativeOfferDiscount extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          nativeOfferDiscounts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          productCatalogDataSources.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return nativeOfferDiscounts;
+        return productCatalogDataSources;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -120,20 +118,20 @@ public class NativeOfferDiscount extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                nativeOfferDiscounts.setCursors(before, after);
+                productCatalogDataSources.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            nativeOfferDiscounts.setPaging(previous, next);
+            productCatalogDataSources.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              nativeOfferDiscounts.setAppSecret(context.getAppSecretProof());
+              productCatalogDataSources.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              nativeOfferDiscounts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              productCatalogDataSources.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -144,23 +142,23 @@ public class NativeOfferDiscount extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  nativeOfferDiscounts.add(loadJSON(entry.getValue().toString(), context, header));
+                  productCatalogDataSources.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              nativeOfferDiscounts.add(loadJSON(obj.toString(), context, header));
+              productCatalogDataSources.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return nativeOfferDiscounts;
+          return productCatalogDataSources;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              nativeOfferDiscounts.add(loadJSON(entry.getValue().toString(), context, header));
+              productCatalogDataSources.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return nativeOfferDiscounts;
+          return productCatalogDataSources;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -177,20 +175,20 @@ public class NativeOfferDiscount extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              nativeOfferDiscounts.add(loadJSON(value.toString(), context, header));
+              productCatalogDataSources.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return nativeOfferDiscounts;
+            return productCatalogDataSources;
           }
 
           // Sixth, check if it's pure JsonObject
-          nativeOfferDiscounts.clear();
-          nativeOfferDiscounts.add(loadJSON(json, context, header));
-          return nativeOfferDiscounts;
+          productCatalogDataSources.clear();
+          productCatalogDataSources.add(loadJSON(json, context, header));
+          return productCatalogDataSources;
         }
       }
     } catch (Exception e) {
@@ -218,61 +216,73 @@ public class NativeOfferDiscount extends APINode {
   }
 
 
-  public String getFieldCurrency() {
-    return mCurrency;
+  public String getFieldAppId() {
+    return mAppId;
   }
 
-  public NativeOfferDiscount setFieldCurrency(String value) {
-    this.mCurrency = value;
+  public ProductCatalogDataSource setFieldAppId(String value) {
+    this.mAppId = value;
     return this;
   }
 
-  public String getFieldOverride() {
-    return mOverride;
+  public String getFieldId() {
+    return mId;
   }
 
-  public NativeOfferDiscount setFieldOverride(String value) {
-    this.mOverride = value;
+  public ProductCatalogDataSource setFieldId(String value) {
+    this.mId = value;
     return this;
   }
 
-  public String getFieldText() {
-    return mText;
+  public String getFieldIngestionSourceType() {
+    return mIngestionSourceType;
   }
 
-  public NativeOfferDiscount setFieldText(String value) {
-    this.mText = value;
+  public ProductCatalogDataSource setFieldIngestionSourceType(String value) {
+    this.mIngestionSourceType = value;
     return this;
   }
 
-  public String getFieldType() {
-    return mType;
+  public String getFieldName() {
+    return mName;
   }
 
-  public NativeOfferDiscount setFieldType(String value) {
-    this.mType = value;
+  public ProductCatalogDataSource setFieldName(String value) {
+    this.mName = value;
     return this;
   }
 
-  public Double getFieldValue1() {
-    return mValue1;
+  public String getFieldUploadType() {
+    return mUploadType;
   }
 
-  public NativeOfferDiscount setFieldValue1(Double value) {
-    this.mValue1 = value;
-    return this;
-  }
-
-  public Double getFieldValue2() {
-    return mValue2;
-  }
-
-  public NativeOfferDiscount setFieldValue2(Double value) {
-    this.mValue2 = value;
+  public ProductCatalogDataSource setFieldUploadType(String value) {
+    this.mUploadType = value;
     return this;
   }
 
 
+
+  public static enum EnumIngestionSourceType {
+      @SerializedName("ALL")
+      VALUE_ALL("ALL"),
+      @SerializedName("PRIMARY")
+      VALUE_PRIMARY("PRIMARY"),
+      @SerializedName("SUPPLEMENTARY")
+      VALUE_SUPPLEMENTARY("SUPPLEMENTARY"),
+      ;
+
+      private String value;
+
+      private EnumIngestionSourceType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -288,22 +298,21 @@ public class NativeOfferDiscount extends APINode {
     return gson;
   }
 
-  public NativeOfferDiscount copyFrom(NativeOfferDiscount instance) {
-    this.mCurrency = instance.mCurrency;
-    this.mOverride = instance.mOverride;
-    this.mText = instance.mText;
-    this.mType = instance.mType;
-    this.mValue1 = instance.mValue1;
-    this.mValue2 = instance.mValue2;
+  public ProductCatalogDataSource copyFrom(ProductCatalogDataSource instance) {
+    this.mAppId = instance.mAppId;
+    this.mId = instance.mId;
+    this.mIngestionSourceType = instance.mIngestionSourceType;
+    this.mName = instance.mName;
+    this.mUploadType = instance.mUploadType;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<NativeOfferDiscount> getParser() {
-    return new APIRequest.ResponseParser<NativeOfferDiscount>() {
-      public APINodeList<NativeOfferDiscount> parseResponse(String response, APIContext context, APIRequest<NativeOfferDiscount> request, String header) throws MalformedResponseException {
-        return NativeOfferDiscount.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ProductCatalogDataSource> getParser() {
+    return new APIRequest.ResponseParser<ProductCatalogDataSource>() {
+      public APINodeList<ProductCatalogDataSource> parseResponse(String response, APIContext context, APIRequest<ProductCatalogDataSource> request, String header) throws MalformedResponseException {
+        return ProductCatalogDataSource.parseResponse(response, context, request, header);
       }
     };
   }

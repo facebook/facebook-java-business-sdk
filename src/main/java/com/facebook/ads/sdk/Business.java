@@ -61,8 +61,6 @@ public class Business extends APINode {
   private ManagedPartnerBusiness mCollaborativeAdsManagedPartnerBusinessInfo = null;
   @SerializedName("collaborative_ads_managed_partner_eligibility")
   private BusinessManagedPartnerEligibility mCollaborativeAdsManagedPartnerEligibility = null;
-  @SerializedName("cpas_business_setup_config")
-  private CPASBusinessSetupConfig mCpasBusinessSetupConfig = null;
   @SerializedName("created_by")
   private Object mCreatedBy = null;
   @SerializedName("created_time")
@@ -450,6 +448,10 @@ public class Business extends APINode {
     return new APIRequestGetContentDeliveryReport(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetCpasBusinessSetupConfig getCpasBusinessSetupConfig() {
+    return new APIRequestGetCpasBusinessSetupConfig(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateCpasBusinessSetupConfig createCpasBusinessSetupConfig() {
     return new APIRequestCreateCpasBusinessSetupConfig(this.getPrefixedId().toString(), context);
   }
@@ -460,6 +462,10 @@ public class Business extends APINode {
 
   public APIRequestCreateCreateAndApplyPublisherBlockList createCreateAndApplyPublisherBlockList() {
     return new APIRequestCreateCreateAndApplyPublisherBlockList(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetCreditCards getCreditCards() {
+    return new APIRequestGetCreditCards(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateCustomConversion createCustomConversion() {
@@ -669,13 +675,6 @@ public class Business extends APINode {
 
   public BusinessManagedPartnerEligibility getFieldCollaborativeAdsManagedPartnerEligibility() {
     return mCollaborativeAdsManagedPartnerEligibility;
-  }
-
-  public CPASBusinessSetupConfig getFieldCpasBusinessSetupConfig() {
-    if (mCpasBusinessSetupConfig != null) {
-      mCpasBusinessSetupConfig.context = getContext();
-    }
-    return mCpasBusinessSetupConfig;
   }
 
   public Object getFieldCreatedBy() {
@@ -2785,7 +2784,6 @@ public class Business extends APINode {
       "block_offline_analytics",
       "collaborative_ads_managed_partner_business_info",
       "collaborative_ads_managed_partner_eligibility",
-      "cpas_business_setup_config",
       "created_by",
       "created_time",
       "extended_updated_time",
@@ -2912,13 +2910,6 @@ public class Business extends APINode {
     }
     public APIRequestGetAgencies requestCollaborativeAdsManagedPartnerEligibilityField (boolean value) {
       this.requestField("collaborative_ads_managed_partner_eligibility", value);
-      return this;
-    }
-    public APIRequestGetAgencies requestCpasBusinessSetupConfigField () {
-      return this.requestCpasBusinessSetupConfigField(true);
-    }
-    public APIRequestGetAgencies requestCpasBusinessSetupConfigField (boolean value) {
-      this.requestField("cpas_business_setup_config", value);
       return this;
     }
     public APIRequestGetAgencies requestCreatedByField () {
@@ -3052,6 +3043,7 @@ public class Business extends APINode {
       "google_display_format",
       "id",
       "name",
+      "placement_group",
       "platform",
       "status",
     };
@@ -3185,6 +3177,13 @@ public class Business extends APINode {
     }
     public APIRequestGetAnPlacements requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAnPlacements requestPlacementGroupField () {
+      return this.requestPlacementGroupField(true);
+    }
+    public APIRequestGetAnPlacements requestPlacementGroupField (boolean value) {
+      this.requestField("placement_group", value);
       return this;
     }
     public APIRequestGetAnPlacements requestPlatformField () {
@@ -7542,6 +7541,7 @@ public class Business extends APINode {
       "feed_count",
       "id",
       "is_catalog_segment",
+      "latest_feed_upload_session",
       "name",
       "product_count",
       "store_catalog_settings",
@@ -7691,6 +7691,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientProductCatalogs requestIsCatalogSegmentField (boolean value) {
       this.requestField("is_catalog_segment", value);
+      return this;
+    }
+    public APIRequestGetClientProductCatalogs requestLatestFeedUploadSessionField () {
+      return this.requestLatestFeedUploadSessionField(true);
+    }
+    public APIRequestGetClientProductCatalogs requestLatestFeedUploadSessionField (boolean value) {
+      this.requestField("latest_feed_upload_session", value);
       return this;
     }
     public APIRequestGetClientProductCatalogs requestNameField () {
@@ -8055,7 +8062,6 @@ public class Business extends APINode {
       "block_offline_analytics",
       "collaborative_ads_managed_partner_business_info",
       "collaborative_ads_managed_partner_eligibility",
-      "cpas_business_setup_config",
       "created_by",
       "created_time",
       "extended_updated_time",
@@ -8182,13 +8188,6 @@ public class Business extends APINode {
     }
     public APIRequestGetClients requestCollaborativeAdsManagedPartnerEligibilityField (boolean value) {
       this.requestField("collaborative_ads_managed_partner_eligibility", value);
-      return this;
-    }
-    public APIRequestGetClients requestCpasBusinessSetupConfigField () {
-      return this.requestCpasBusinessSetupConfigField(true);
-    }
-    public APIRequestGetClients requestCpasBusinessSetupConfigField (boolean value) {
-      this.requestField("cpas_business_setup_config", value);
       return this;
     }
     public APIRequestGetClients requestCreatedByField () {
@@ -9339,6 +9338,150 @@ public class Business extends APINode {
     }
   }
 
+  public static class APIRequestGetCpasBusinessSetupConfig extends APIRequest<CPASBusinessSetupConfig> {
+
+    APINodeList<CPASBusinessSetupConfig> lastResponse = null;
+    @Override
+    public APINodeList<CPASBusinessSetupConfig> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "accepted_collab_ads_tos",
+      "business",
+      "business_capabilities_status",
+      "capabilities_compliance_status",
+      "id",
+    };
+
+    @Override
+    public APINodeList<CPASBusinessSetupConfig> parseResponse(String response, String header) throws APIException {
+      return CPASBusinessSetupConfig.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<CPASBusinessSetupConfig> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<CPASBusinessSetupConfig> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<CPASBusinessSetupConfig>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<CPASBusinessSetupConfig>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<CPASBusinessSetupConfig>>() {
+           public APINodeList<CPASBusinessSetupConfig> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetCpasBusinessSetupConfig.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetCpasBusinessSetupConfig(String nodeId, APIContext context) {
+      super(context, nodeId, "/cpas_business_setup_config", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCpasBusinessSetupConfig setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCpasBusinessSetupConfig setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCpasBusinessSetupConfig requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCpasBusinessSetupConfig requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCpasBusinessSetupConfig requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCpasBusinessSetupConfig requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCpasBusinessSetupConfig requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCpasBusinessSetupConfig requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetCpasBusinessSetupConfig requestAcceptedCollabAdsTosField () {
+      return this.requestAcceptedCollabAdsTosField(true);
+    }
+    public APIRequestGetCpasBusinessSetupConfig requestAcceptedCollabAdsTosField (boolean value) {
+      this.requestField("accepted_collab_ads_tos", value);
+      return this;
+    }
+    public APIRequestGetCpasBusinessSetupConfig requestBusinessField () {
+      return this.requestBusinessField(true);
+    }
+    public APIRequestGetCpasBusinessSetupConfig requestBusinessField (boolean value) {
+      this.requestField("business", value);
+      return this;
+    }
+    public APIRequestGetCpasBusinessSetupConfig requestBusinessCapabilitiesStatusField () {
+      return this.requestBusinessCapabilitiesStatusField(true);
+    }
+    public APIRequestGetCpasBusinessSetupConfig requestBusinessCapabilitiesStatusField (boolean value) {
+      this.requestField("business_capabilities_status", value);
+      return this;
+    }
+    public APIRequestGetCpasBusinessSetupConfig requestCapabilitiesComplianceStatusField () {
+      return this.requestCapabilitiesComplianceStatusField(true);
+    }
+    public APIRequestGetCpasBusinessSetupConfig requestCapabilitiesComplianceStatusField (boolean value) {
+      this.requestField("capabilities_compliance_status", value);
+      return this;
+    }
+    public APIRequestGetCpasBusinessSetupConfig requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetCpasBusinessSetupConfig requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
+
   public static class APIRequestCreateCpasBusinessSetupConfig extends APIRequest<CPASBusinessSetupConfig> {
 
     CPASBusinessSetupConfig lastResponse = null;
@@ -9771,6 +9914,278 @@ public class Business extends APINode {
       return this;
     }
 
+  }
+
+  public static class APIRequestGetCreditCards extends APIRequest<CreditCard> {
+
+    APINodeList<CreditCard> lastResponse = null;
+    @Override
+    public APINodeList<CreditCard> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "billing_address",
+      "card_cobadging",
+      "card_holder_name",
+      "card_type",
+      "credential_id",
+      "default_receiving_method_products",
+      "expiry_month",
+      "expiry_year",
+      "id",
+      "is_cvv_tricky_bin",
+      "is_enabled",
+      "is_last_used",
+      "is_network_tokenized_in_india",
+      "is_soft_disabled",
+      "is_user_verified",
+      "is_zip_verified",
+      "last4",
+      "readable_card_type",
+      "time_created",
+      "time_created_ts",
+      "type",
+    };
+
+    @Override
+    public APINodeList<CreditCard> parseResponse(String response, String header) throws APIException {
+      return CreditCard.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<CreditCard> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<CreditCard> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<CreditCard>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<CreditCard>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<CreditCard>>() {
+           public APINodeList<CreditCard> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetCreditCards.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetCreditCards(String nodeId, APIContext context) {
+      super(context, nodeId, "/creditcards", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCreditCards setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCreditCards setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCreditCards requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCreditCards requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCreditCards requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCreditCards requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCreditCards requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCreditCards requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetCreditCards requestBillingAddressField () {
+      return this.requestBillingAddressField(true);
+    }
+    public APIRequestGetCreditCards requestBillingAddressField (boolean value) {
+      this.requestField("billing_address", value);
+      return this;
+    }
+    public APIRequestGetCreditCards requestCardCobadgingField () {
+      return this.requestCardCobadgingField(true);
+    }
+    public APIRequestGetCreditCards requestCardCobadgingField (boolean value) {
+      this.requestField("card_cobadging", value);
+      return this;
+    }
+    public APIRequestGetCreditCards requestCardHolderNameField () {
+      return this.requestCardHolderNameField(true);
+    }
+    public APIRequestGetCreditCards requestCardHolderNameField (boolean value) {
+      this.requestField("card_holder_name", value);
+      return this;
+    }
+    public APIRequestGetCreditCards requestCardTypeField () {
+      return this.requestCardTypeField(true);
+    }
+    public APIRequestGetCreditCards requestCardTypeField (boolean value) {
+      this.requestField("card_type", value);
+      return this;
+    }
+    public APIRequestGetCreditCards requestCredentialIdField () {
+      return this.requestCredentialIdField(true);
+    }
+    public APIRequestGetCreditCards requestCredentialIdField (boolean value) {
+      this.requestField("credential_id", value);
+      return this;
+    }
+    public APIRequestGetCreditCards requestDefaultReceivingMethodProductsField () {
+      return this.requestDefaultReceivingMethodProductsField(true);
+    }
+    public APIRequestGetCreditCards requestDefaultReceivingMethodProductsField (boolean value) {
+      this.requestField("default_receiving_method_products", value);
+      return this;
+    }
+    public APIRequestGetCreditCards requestExpiryMonthField () {
+      return this.requestExpiryMonthField(true);
+    }
+    public APIRequestGetCreditCards requestExpiryMonthField (boolean value) {
+      this.requestField("expiry_month", value);
+      return this;
+    }
+    public APIRequestGetCreditCards requestExpiryYearField () {
+      return this.requestExpiryYearField(true);
+    }
+    public APIRequestGetCreditCards requestExpiryYearField (boolean value) {
+      this.requestField("expiry_year", value);
+      return this;
+    }
+    public APIRequestGetCreditCards requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetCreditCards requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetCreditCards requestIsCvvTrickyBinField () {
+      return this.requestIsCvvTrickyBinField(true);
+    }
+    public APIRequestGetCreditCards requestIsCvvTrickyBinField (boolean value) {
+      this.requestField("is_cvv_tricky_bin", value);
+      return this;
+    }
+    public APIRequestGetCreditCards requestIsEnabledField () {
+      return this.requestIsEnabledField(true);
+    }
+    public APIRequestGetCreditCards requestIsEnabledField (boolean value) {
+      this.requestField("is_enabled", value);
+      return this;
+    }
+    public APIRequestGetCreditCards requestIsLastUsedField () {
+      return this.requestIsLastUsedField(true);
+    }
+    public APIRequestGetCreditCards requestIsLastUsedField (boolean value) {
+      this.requestField("is_last_used", value);
+      return this;
+    }
+    public APIRequestGetCreditCards requestIsNetworkTokenizedInIndiaField () {
+      return this.requestIsNetworkTokenizedInIndiaField(true);
+    }
+    public APIRequestGetCreditCards requestIsNetworkTokenizedInIndiaField (boolean value) {
+      this.requestField("is_network_tokenized_in_india", value);
+      return this;
+    }
+    public APIRequestGetCreditCards requestIsSoftDisabledField () {
+      return this.requestIsSoftDisabledField(true);
+    }
+    public APIRequestGetCreditCards requestIsSoftDisabledField (boolean value) {
+      this.requestField("is_soft_disabled", value);
+      return this;
+    }
+    public APIRequestGetCreditCards requestIsUserVerifiedField () {
+      return this.requestIsUserVerifiedField(true);
+    }
+    public APIRequestGetCreditCards requestIsUserVerifiedField (boolean value) {
+      this.requestField("is_user_verified", value);
+      return this;
+    }
+    public APIRequestGetCreditCards requestIsZipVerifiedField () {
+      return this.requestIsZipVerifiedField(true);
+    }
+    public APIRequestGetCreditCards requestIsZipVerifiedField (boolean value) {
+      this.requestField("is_zip_verified", value);
+      return this;
+    }
+    public APIRequestGetCreditCards requestLast4Field () {
+      return this.requestLast4Field(true);
+    }
+    public APIRequestGetCreditCards requestLast4Field (boolean value) {
+      this.requestField("last4", value);
+      return this;
+    }
+    public APIRequestGetCreditCards requestReadableCardTypeField () {
+      return this.requestReadableCardTypeField(true);
+    }
+    public APIRequestGetCreditCards requestReadableCardTypeField (boolean value) {
+      this.requestField("readable_card_type", value);
+      return this;
+    }
+    public APIRequestGetCreditCards requestTimeCreatedField () {
+      return this.requestTimeCreatedField(true);
+    }
+    public APIRequestGetCreditCards requestTimeCreatedField (boolean value) {
+      this.requestField("time_created", value);
+      return this;
+    }
+    public APIRequestGetCreditCards requestTimeCreatedTsField () {
+      return this.requestTimeCreatedTsField(true);
+    }
+    public APIRequestGetCreditCards requestTimeCreatedTsField (boolean value) {
+      this.requestField("time_created_ts", value);
+      return this;
+    }
+    public APIRequestGetCreditCards requestTypeField () {
+      return this.requestTypeField(true);
+    }
+    public APIRequestGetCreditCards requestTypeField (boolean value) {
+      this.requestField("type", value);
+      return this;
+    }
   }
 
   public static class APIRequestCreateCustomConversion extends APIRequest<CustomConversion> {
@@ -11137,6 +11552,7 @@ public class Business extends APINode {
       "mentioned_media",
       "name",
       "profile_picture_url",
+      "shopping_product_tag_eligibility",
       "shopping_review_status",
       "username",
       "website",
@@ -11306,6 +11722,13 @@ public class Business extends APINode {
     }
     public APIRequestGetInstagramBusinessAccounts requestProfilePictureUrlField (boolean value) {
       this.requestField("profile_picture_url", value);
+      return this;
+    }
+    public APIRequestGetInstagramBusinessAccounts requestShoppingProductTagEligibilityField () {
+      return this.requestShoppingProductTagEligibilityField(true);
+    }
+    public APIRequestGetInstagramBusinessAccounts requestShoppingProductTagEligibilityField (boolean value) {
+      this.requestField("shopping_product_tag_eligibility", value);
       return this;
     }
     public APIRequestGetInstagramBusinessAccounts requestShoppingReviewStatusField () {
@@ -14517,7 +14940,6 @@ public class Business extends APINode {
       "block_offline_analytics",
       "collaborative_ads_managed_partner_business_info",
       "collaborative_ads_managed_partner_eligibility",
-      "cpas_business_setup_config",
       "created_by",
       "created_time",
       "extended_updated_time",
@@ -14658,13 +15080,6 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedBusinesses requestCollaborativeAdsManagedPartnerEligibilityField (boolean value) {
       this.requestField("collaborative_ads_managed_partner_eligibility", value);
-      return this;
-    }
-    public APIRequestGetOwnedBusinesses requestCpasBusinessSetupConfigField () {
-      return this.requestCpasBusinessSetupConfigField(true);
-    }
-    public APIRequestGetOwnedBusinesses requestCpasBusinessSetupConfigField (boolean value) {
-      this.requestField("cpas_business_setup_config", value);
       return this;
     }
     public APIRequestGetOwnedBusinesses requestCreatedByField () {
@@ -16900,6 +17315,7 @@ public class Business extends APINode {
       "feed_count",
       "id",
       "is_catalog_segment",
+      "latest_feed_upload_session",
       "name",
       "product_count",
       "store_catalog_settings",
@@ -17049,6 +17465,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedProductCatalogs requestIsCatalogSegmentField (boolean value) {
       this.requestField("is_catalog_segment", value);
+      return this;
+    }
+    public APIRequestGetOwnedProductCatalogs requestLatestFeedUploadSessionField () {
+      return this.requestLatestFeedUploadSessionField(true);
+    }
+    public APIRequestGetOwnedProductCatalogs requestLatestFeedUploadSessionField (boolean value) {
+      this.requestField("latest_feed_upload_session", value);
       return this;
     }
     public APIRequestGetOwnedProductCatalogs requestNameField () {
@@ -18797,7 +19220,7 @@ public class Business extends APINode {
     };
 
     public APIRequestCreatePixelTo(String nodeId, APIContext context) {
-      super(context, nodeId, "/pixeltos", "POST", Arrays.asList(PARAMS));
+      super(context, nodeId, "/pixel_tos", "POST", Arrays.asList(PARAMS));
     }
 
     @Override
@@ -19459,7 +19882,6 @@ public class Business extends APINode {
       "block_offline_analytics",
       "collaborative_ads_managed_partner_business_info",
       "collaborative_ads_managed_partner_eligibility",
-      "cpas_business_setup_config",
       "created_by",
       "created_time",
       "extended_updated_time",
@@ -19586,13 +20008,6 @@ public class Business extends APINode {
     }
     public APIRequestGet requestCollaborativeAdsManagedPartnerEligibilityField (boolean value) {
       this.requestField("collaborative_ads_managed_partner_eligibility", value);
-      return this;
-    }
-    public APIRequestGet requestCpasBusinessSetupConfigField () {
-      return this.requestCpasBusinessSetupConfigField(true);
-    }
-    public APIRequestGet requestCpasBusinessSetupConfigField (boolean value) {
-      this.requestField("cpas_business_setup_config", value);
       return this;
     }
     public APIRequestGet requestCreatedByField () {
@@ -19976,6 +20391,8 @@ public class Business extends APINode {
       VALUE_PROFILE_PLUS_MESSAGING("PROFILE_PLUS_MESSAGING"),
       @SerializedName("PROFILE_PLUS_MODERATE")
       VALUE_PROFILE_PLUS_MODERATE("PROFILE_PLUS_MODERATE"),
+      @SerializedName("PROFILE_PLUS_MODERATE_DELEGATE_COMMUNITY")
+      VALUE_PROFILE_PLUS_MODERATE_DELEGATE_COMMUNITY("PROFILE_PLUS_MODERATE_DELEGATE_COMMUNITY"),
       @SerializedName("PROFILE_PLUS_REVENUE")
       VALUE_PROFILE_PLUS_REVENUE("PROFILE_PLUS_REVENUE"),
       @SerializedName("READ_PAGE_MAILBOXES")
@@ -20060,6 +20477,8 @@ public class Business extends APINode {
       VALUE_PROFILE_PLUS_MESSAGING("PROFILE_PLUS_MESSAGING"),
       @SerializedName("PROFILE_PLUS_MODERATE")
       VALUE_PROFILE_PLUS_MODERATE("PROFILE_PLUS_MODERATE"),
+      @SerializedName("PROFILE_PLUS_MODERATE_DELEGATE_COMMUNITY")
+      VALUE_PROFILE_PLUS_MODERATE_DELEGATE_COMMUNITY("PROFILE_PLUS_MODERATE_DELEGATE_COMMUNITY"),
       @SerializedName("PROFILE_PLUS_REVENUE")
       VALUE_PROFILE_PLUS_REVENUE("PROFILE_PLUS_REVENUE"),
       @SerializedName("READ_PAGE_MAILBOXES")
@@ -20098,7 +20517,6 @@ public class Business extends APINode {
     this.mBlockOfflineAnalytics = instance.mBlockOfflineAnalytics;
     this.mCollaborativeAdsManagedPartnerBusinessInfo = instance.mCollaborativeAdsManagedPartnerBusinessInfo;
     this.mCollaborativeAdsManagedPartnerEligibility = instance.mCollaborativeAdsManagedPartnerEligibility;
-    this.mCpasBusinessSetupConfig = instance.mCpasBusinessSetupConfig;
     this.mCreatedBy = instance.mCreatedBy;
     this.mCreatedTime = instance.mCreatedTime;
     this.mExtendedUpdatedTime = instance.mExtendedUpdatedTime;

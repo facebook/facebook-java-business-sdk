@@ -551,6 +551,7 @@ public class AdStudy extends APINode {
     public static final String[] FIELDS = {
       "breakdown_key",
       "created_time",
+      "feature_list",
       "id",
       "latest_status_update_time",
       "server_ips",
@@ -659,6 +660,13 @@ public class AdStudy extends APINode {
     }
     public APIRequestGetInstances requestCreatedTimeField (boolean value) {
       this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGetInstances requestFeatureListField () {
+      return this.requestFeatureListField(true);
+    }
+    public APIRequestGetInstances requestFeatureListField (boolean value) {
+      this.requestField("feature_list", value);
       return this;
     }
     public APIRequestGetInstances requestIdField () {

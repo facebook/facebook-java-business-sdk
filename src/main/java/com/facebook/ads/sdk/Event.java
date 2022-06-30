@@ -839,11 +839,11 @@ public class Event extends APINode {
 
   }
 
-  public static class APIRequestCreateLiveVideo extends APIRequest<APINode> {
+  public static class APIRequestCreateLiveVideo extends APIRequest<LiveVideo> {
 
-    APINode lastResponse = null;
+    LiveVideo lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public LiveVideo getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -851,6 +851,7 @@ public class Event extends APINode {
       "description",
       "enable_backup_ingest",
       "encoding_settings",
+      "event_params",
       "fisheye_video_cropped",
       "front_z_rotation",
       "is_audio_only",
@@ -873,31 +874,31 @@ public class Event extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
+    public LiveVideo parseResponse(String response, String header) throws APIException {
+      return LiveVideo.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public LiveVideo execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public LiveVideo execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINode> executeAsync() throws APIException {
+    public ListenableFuture<LiveVideo> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<LiveVideo> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, LiveVideo>() {
+           public LiveVideo apply(ResponseWrapper result) {
              try {
                return APIRequestCreateLiveVideo.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -909,7 +910,7 @@ public class Event extends APINode {
     };
 
     public APIRequestCreateLiveVideo(String nodeId, APIContext context) {
-      super(context, nodeId, "/livevideos", "POST", Arrays.asList(PARAMS));
+      super(context, nodeId, "/live_videos", "POST", Arrays.asList(PARAMS));
     }
 
     @Override
@@ -950,6 +951,15 @@ public class Event extends APINode {
 
     public APIRequestCreateLiveVideo setEncodingSettings (String encodingSettings) {
       this.setParam("encoding_settings", encodingSettings);
+      return this;
+    }
+
+    public APIRequestCreateLiveVideo setEventParams (Object eventParams) {
+      this.setParam("event_params", eventParams);
+      return this;
+    }
+    public APIRequestCreateLiveVideo setEventParams (String eventParams) {
+      this.setParam("event_params", eventParams);
       return this;
     }
 
@@ -1012,7 +1022,7 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestCreateLiveVideo setProjection (EnumProjection projection) {
+    public APIRequestCreateLiveVideo setProjection (LiveVideo.EnumProjection projection) {
       this.setParam("projection", projection);
       return this;
     }
@@ -1039,7 +1049,7 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestCreateLiveVideo setSpatialAudioFormat (EnumSpatialAudioFormat spatialAudioFormat) {
+    public APIRequestCreateLiveVideo setSpatialAudioFormat (LiveVideo.EnumSpatialAudioFormat spatialAudioFormat) {
       this.setParam("spatial_audio_format", spatialAudioFormat);
       return this;
     }
@@ -1048,7 +1058,7 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestCreateLiveVideo setStatus (EnumStatus status) {
+    public APIRequestCreateLiveVideo setStatus (LiveVideo.EnumStatus status) {
       this.setParam("status", status);
       return this;
     }
@@ -1057,7 +1067,7 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestCreateLiveVideo setStereoscopicMode (EnumStereoscopicMode stereoscopicMode) {
+    public APIRequestCreateLiveVideo setStereoscopicMode (LiveVideo.EnumStereoscopicMode stereoscopicMode) {
       this.setParam("stereoscopic_mode", stereoscopicMode);
       return this;
     }
@@ -1075,7 +1085,7 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestCreateLiveVideo setStreamType (EnumStreamType streamType) {
+    public APIRequestCreateLiveVideo setStreamType (LiveVideo.EnumStreamType streamType) {
       this.setParam("stream_type", streamType);
       return this;
     }
@@ -2373,109 +2383,6 @@ public class Event extends APINode {
       private String value;
 
       private EnumTimeFilter(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumProjection {
-      @SerializedName("CUBEMAP")
-      VALUE_CUBEMAP("CUBEMAP"),
-      @SerializedName("EQUIRECTANGULAR")
-      VALUE_EQUIRECTANGULAR("EQUIRECTANGULAR"),
-      @SerializedName("HALF_EQUIRECTANGULAR")
-      VALUE_HALF_EQUIRECTANGULAR("HALF_EQUIRECTANGULAR"),
-      ;
-
-      private String value;
-
-      private EnumProjection(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumSpatialAudioFormat {
-      @SerializedName("ambiX_4")
-      VALUE_AMBIX_4("ambiX_4"),
-      ;
-
-      private String value;
-
-      private EnumSpatialAudioFormat(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumStatus {
-      @SerializedName("LIVE_NOW")
-      VALUE_LIVE_NOW("LIVE_NOW"),
-      @SerializedName("SCHEDULED_CANCELED")
-      VALUE_SCHEDULED_CANCELED("SCHEDULED_CANCELED"),
-      @SerializedName("SCHEDULED_LIVE")
-      VALUE_SCHEDULED_LIVE("SCHEDULED_LIVE"),
-      @SerializedName("SCHEDULED_UNPUBLISHED")
-      VALUE_SCHEDULED_UNPUBLISHED("SCHEDULED_UNPUBLISHED"),
-      @SerializedName("UNPUBLISHED")
-      VALUE_UNPUBLISHED("UNPUBLISHED"),
-      ;
-
-      private String value;
-
-      private EnumStatus(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumStereoscopicMode {
-      @SerializedName("LEFT_RIGHT")
-      VALUE_LEFT_RIGHT("LEFT_RIGHT"),
-      @SerializedName("MONO")
-      VALUE_MONO("MONO"),
-      @SerializedName("TOP_BOTTOM")
-      VALUE_TOP_BOTTOM("TOP_BOTTOM"),
-      ;
-
-      private String value;
-
-      private EnumStereoscopicMode(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumStreamType {
-      @SerializedName("AMBIENT")
-      VALUE_AMBIENT("AMBIENT"),
-      @SerializedName("REGULAR")
-      VALUE_REGULAR("REGULAR"),
-      ;
-
-      private String value;
-
-      private EnumStreamType(String value) {
         this.value = value;
       }
 
