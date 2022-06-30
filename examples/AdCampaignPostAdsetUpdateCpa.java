@@ -21,11 +21,32 @@
  *
  */
 
-package com.facebook.ads.sdk;
+ import com.facebook.ads.sdk.*;
+import java.io.File;
+import java.util.Arrays;
 
-public class APIConfig {
-  public static final String DEFAULT_API_VERSION = "v14.0";
-  public static final String DEFAULT_API_BASE = "https://graph.facebook.com";
-  public static final String DEFAULT_VIDEO_API_BASE = "https://graph-video.facebook.com";
-  public static final String USER_AGENT = "fbbizsdk-java-v14.0.0";
-};
+public class AdCampaignPostAdsetUpdateCpa {
+  public static void main (String args[]) throws APIException {
+
+    String access_token = "<ACCESS_TOKEN>";
+    String app_secret = "<APP_SECRET>";
+    String app_id = "<APP_ID>";
+    String id = "<AD_SET_ID>";
+    APIContext context = new APIContext(access_token).enableDebug(true);
+
+    new AdSet(id, context).update()
+      .setBillingEvent(AdSet.EnumBillingEvent.VALUE_IMPRESSIONS)
+      .setOptimizationGoal(AdSet.EnumOptimizationGoal.VALUE_LINK_CLICKS)
+      .setBidAmount(200L)
+      .setTargeting(
+          new Targeting()
+            .setFieldFacebookPositions(Arrays.asList("feed"))
+            .setFieldGeoLocations(
+              new TargetingGeoLocation()
+                .setFieldCountries(Arrays.asList("US"))
+            )
+        )
+      .execute();
+
+  }
+}

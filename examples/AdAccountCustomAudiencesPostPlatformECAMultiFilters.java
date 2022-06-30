@@ -21,11 +21,24 @@
  *
  */
 
-package com.facebook.ads.sdk;
+ import com.facebook.ads.sdk.*;
+import java.io.File;
+import java.util.Arrays;
 
-public class APIConfig {
-  public static final String DEFAULT_API_VERSION = "v14.0";
-  public static final String DEFAULT_API_BASE = "https://graph.facebook.com";
-  public static final String DEFAULT_VIDEO_API_BASE = "https://graph-video.facebook.com";
-  public static final String USER_AGENT = "fbbizsdk-java-v14.0.0";
-};
+public class AdAccountCustomAudiencesPostPlatformECAMultiFilters {
+  public static void main (String args[]) throws APIException {
+
+    String access_token = "<ACCESS_TOKEN>";
+    String app_secret = "<APP_SECRET>";
+    String app_id = "<APP_ID>";
+    String id = "<AD_ACCOUNT_ID>";
+    APIContext context = new APIContext(access_token).enableDebug(true);
+
+    new AdAccount(id, context).createCustomAudience()
+      .setName("My Test Engagement Custom Audience")
+      .setRule("{\"inclusions\":{\"operator\":\"or\",\"rules\":[{\"event_sources\":[{\"id\":\"<pageID>\",\"type\":\"page\"}],\"retention_seconds\":31536000,\"filter\":{\"operator\":\"and\",\"filters\":[{\"field\":\"event\",\"operator\":\"eq\",\"value\":\"page_engaged\"},{\"field\":\"event\",\"operator\":\"eq\",\"value\":\"page_engaged\"}]}}]}}")
+      .setPrefill(true)
+      .execute();
+
+  }
+}
