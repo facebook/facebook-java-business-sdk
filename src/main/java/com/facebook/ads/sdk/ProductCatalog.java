@@ -6297,11 +6297,11 @@ public class ProductCatalog extends APINode {
 
   }
 
-  public static class APIRequestCreateMediaTitle extends APIRequest<APINode> {
+  public static class APIRequestCreateMediaTitle extends APIRequest<MediaTitle> {
 
-    APINode lastResponse = null;
+    MediaTitle lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public MediaTitle getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -6324,31 +6324,31 @@ public class ProductCatalog extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
+    public MediaTitle parseResponse(String response, String header) throws APIException {
+      return MediaTitle.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public MediaTitle execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public MediaTitle execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINode> executeAsync() throws APIException {
+    public ListenableFuture<MediaTitle> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<MediaTitle> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, MediaTitle>() {
+           public MediaTitle apply(ResponseWrapper result) {
              try {
                return APIRequestCreateMediaTitle.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -6385,7 +6385,7 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateMediaTitle setContentCategory (EnumContentCategory contentCategory) {
+    public APIRequestCreateMediaTitle setContentCategory (MediaTitle.EnumContentCategory contentCategory) {
       this.setParam("content_category", contentCategory);
       return this;
     }
@@ -11428,27 +11428,6 @@ public class ProductCatalog extends APINode {
       private String value;
 
       private EnumItemSubType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumContentCategory {
-      @SerializedName("MOVIE")
-      VALUE_MOVIE("MOVIE"),
-      @SerializedName("MUSIC")
-      VALUE_MUSIC("MUSIC"),
-      @SerializedName("TV_SHOW")
-      VALUE_TV_SHOW("TV_SHOW"),
-      ;
-
-      private String value;
-
-      private EnumContentCategory(String value) {
         this.value = value;
       }
 
