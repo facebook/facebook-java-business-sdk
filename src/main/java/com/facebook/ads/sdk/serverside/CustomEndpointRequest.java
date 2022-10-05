@@ -3,13 +3,13 @@ package com.facebook.ads.sdk.serverside;
 import com.facebook.ads.sdk.APIContext;
 import com.facebook.ads.sdk.APIException;
 
-import java.util.Map;
+import java.util.List;
 
 public interface CustomEndpointRequest {
 
-    public void sendEvent(APIContext context, String pixelId, Event data) throws APIException.FailedRequestException;
+    public void sendEvent(APIContext context, String pixelId, List<Event> data) throws APIException.FailedRequestException;
 
-    public void sendEventAsync(APIContext context, Event data);
+    public void sendEventAsync(APIContext context, List<Event> data);
 
     public void setFilter(Filter filter);
 

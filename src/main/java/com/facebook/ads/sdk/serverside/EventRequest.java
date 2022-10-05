@@ -69,6 +69,8 @@ public class EventRequest {
   private APIContext context;
   private HttpServiceInterface httpServiceClient;
 
+  private CustomEndpointRequest endpointRequest;
+
   /**
    * Constructor.
    *
@@ -135,6 +137,10 @@ public class EventRequest {
   public EventRequest data(List<Event> data) {
     this.data = data;
     return this;
+  }
+
+  public void setCustomEndpoint(CustomEndpointRequest endpointRequest) {
+    this.endpointRequest = endpointRequest;
   }
 
   /**
