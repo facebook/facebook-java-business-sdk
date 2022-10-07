@@ -3,6 +3,8 @@ package com.facebook.ads.sdk.serverside;
 
 import com.facebook.ads.sdk.APIContext;
 import com.facebook.ads.sdk.APIException;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.Gson;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -33,7 +35,6 @@ public class CAPIGIngressRequest implements CustomEndpointRequest {
     private final OkHttpClient client = new OkHttpClient();
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-
     public CAPIGIngressRequest(String endpointURL, String pixelId, String accessKey) {
         validateEndpoint(endpointURL);
         this.endpointURL = endpointURL;
@@ -55,16 +56,21 @@ public class CAPIGIngressRequest implements CustomEndpointRequest {
     public void setFilter(Filter filter) {
         this.filter = filter;
     }
-    public void sendEvent(APIContext context, String pixelId, List<Event> events) throws APIException.FailedRequestException {
+
+    @Override
+    public String getEndpoint() {
+        return this.endpointURL;
+    }
+    public CustomEndpointResponse sendEvent(APIContext context,  String pixelId, List<Event> events) throws APIException.FailedRequestException {
         // filter out events
         if (this.filter != null) {
             events = events.stream().filter(event -> this.filter.shouldSendEvent(event)).collect(Collectors.toList());
         }
         if (events.isEmpty()) {
             context.log("No events to send");
-            return;
+            return new CustomEndpointResponse("No events to send", null);
         }
-        Request request = createSynchronousRequest(events);
+        final Request request = createRequest(events);
         context.log("========Start of CAPIG Ingress API Call========");
         try (Response httpResponse = client.newCall(request).execute()) {
             if (httpResponse.code() != 202) {
@@ -72,16 +78,17 @@ public class CAPIGIngressRequest implements CustomEndpointRequest {
                 throw new APIException.FailedRequestException("Server response code is " + httpResponse.code() + " , expect: 202");
             } else {
                 context.log("Events successfully received");
+                return new CustomEndpointResponse(httpResponse.message(), String.valueOf((httpResponse.code())));
             }
         } catch (IOException ex) {
             context.log(ex.getMessage());
-            throw new APIException.FailedRequestException("Server failed to accept events");
+            throw new APIException.FailedRequestException("Server failed to accept events. " + ex.getMessage());
         } finally {
             context.log("========End of API Call========");
         }
     }
 
-    private Request createSynchronousRequest(List<Event> events) {
+    private Request createRequest(List<Event> events) {
         final Map<String, Object> bodyParams = new HashMap();
         bodyParams.put("accessKey", accessKey);
         bodyParams.put("data", events);
@@ -93,7 +100,31 @@ public class CAPIGIngressRequest implements CustomEndpointRequest {
     }
 
     @Override
-    public void sendEventAsync(APIContext context, List<Event> Data) {
-        // TODO(T125695640)
+    public ListenableFuture<CustomEndpointResponse> sendEventAsync(APIContext context, String pixelId, List<Event> data) {
+            context.log("========Start of Async API Call========");
+            Request request = createRequest(data);
+            final SettableFuture<CustomEndpointResponse> future = SettableFuture.create();
+            client.newCall(request).enqueue(
+                    new okhttp3.Callback() {
+                        @Override
+                        public void onFailure(final okhttp3.Call call, IOException e) {
+                            context.log(e.getMessage());
+                            future.setException(
+                                    new APIException.FailedRequestException("Server failed to accept events. " + e.getMessage())
+                            );
+                        }
+
+                        @Override
+                        public void onResponse(okhttp3.Call call, final okhttp3.Response response) throws IOException {
+                            if (response.code() != 202) {
+                                // a HTTP response code of 202 means the events were accepted
+                                future.setException(new APIException.FailedRequestException("Server response code is " + response.code() + " , expect: 202"));
+                            } else {
+                                context.log("Events successfully received");
+                                future.set(new CustomEndpointResponse(response.message().toString(), String.valueOf(response.code())));
+                            }
+                        }
+                    });
+            return future;
     }
 }
