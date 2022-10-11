@@ -29,18 +29,16 @@ public class CAPIGIngressRequest implements CustomEndpointRequest {
     private final boolean sendToDestinationOnly;
     private final String endpointURL;
     private Filter filter;
-    private final String pixelId;
     private final String accessKey;
 
     private final OkHttpClient client = new OkHttpClient();
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-    public CAPIGIngressRequest(String endpointURL, String pixelId, String accessKey) {
+    public CAPIGIngressRequest(String endpointURL, String accessKey) {
         validateEndpoint(endpointURL);
         this.endpointURL = endpointURL;
         this.sendToDestinationOnly = false;
         this.filter = null;
-        this.pixelId = pixelId;
         this.accessKey = accessKey;
     }
 
@@ -70,7 +68,7 @@ public class CAPIGIngressRequest implements CustomEndpointRequest {
             context.log("No events to send");
             return new CustomEndpointResponse("No events to send", null);
         }
-        final Request request = createRequest(events);
+        final Request request = createRequest(events, pixelId);
         context.log("========Start of CAPIG Ingress API Call========");
         try (Response httpResponse = client.newCall(request).execute()) {
             if (httpResponse.code() != 202) {
@@ -88,7 +86,7 @@ public class CAPIGIngressRequest implements CustomEndpointRequest {
         }
     }
 
-    private Request createRequest(List<Event> events) {
+    private Request createRequest(List<Event> events, String pixelId) {
         final Map<String, Object> bodyParams = new HashMap();
         bodyParams.put("accessKey", accessKey);
         bodyParams.put("data", events);
@@ -102,7 +100,7 @@ public class CAPIGIngressRequest implements CustomEndpointRequest {
     @Override
     public ListenableFuture<CustomEndpointResponse> sendEventAsync(APIContext context, String pixelId, List<Event> data) {
             context.log("========Start of Async API Call========");
-            Request request = createRequest(data);
+            Request request = createRequest(data, pixelId);
             final SettableFuture<CustomEndpointResponse> future = SettableFuture.create();
             client.newCall(request).enqueue(
                     new okhttp3.Callback() {
