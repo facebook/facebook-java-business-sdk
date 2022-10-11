@@ -24,6 +24,7 @@ import com.facebook.ads.sdk.AdsPixel;
 import com.facebook.ads.sdk.AdsPixel.APIRequestCreateEvent;
 import com.facebook.ads.utils.CustomDataAdapter;
 import com.google.common.util.concurrent.AsyncFunction;
+import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.gson.Gson;
@@ -36,6 +37,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 /**
  * Server side pixel event request
@@ -110,6 +113,7 @@ public class EventRequest {
     this.uploadTag = uploadTag;
     this.uploadSource = uploadSource;
     this.httpServiceClient = httpServiceClient;
+    this.endpointRequest = null;
   }
 
   static /*package*/ synchronized Gson getGson() {
@@ -390,6 +394,12 @@ public class EventRequest {
       } else {
         response = executeCustomHttpService(httpServiceClient);
       }
+      if (endpointRequest != null) {
+        Map<String, CustomEndpointResponse> responses = new HashMap();
+        CustomEndpointResponse customResponse = endpointRequest.sendEvent(context, pixelId, data);
+        responses.put(endpointRequest.getEndpoint(), customResponse);
+        response.setCustomEndpointResponses(responses);
+      }
       context.log(String.format("Successfully sent %d event(s)", response.getEventsReceived()));
       return response;
     } catch (APIException e) {
@@ -409,20 +419,49 @@ public class EventRequest {
     ListenableFuture<EventResponse> response = null;
     try {
       ListenableFuture<AdsPixel> pixelFuture = event.executeAsync();
+      if (endpointRequest != null) {
+        ListenableFuture<CustomEndpointResponse> customEndpointFuture = endpointRequest.sendEventAsync(context, pixelId, data);
+        // put CAPI endpoint and custom endpoint into a list of futures
+        ListenableFuture<List<Object>> futureOfList = Futures.allAsList(pixelFuture, customEndpointFuture);
+        response =
+                Futures.transformAsync(
+                        futureOfList,
+                        new AsyncFunction<List<Object>, EventResponse>() {
+                          @Override
+                          public ListenableFuture<EventResponse> apply(List<Object> endpoints) {
+                            // the first response is CAPI response
+                            EventResponse capiEventResponse =
+                                    gson.fromJson(((AdsPixel) endpoints.get(0)).getRawResponse(), EventResponse.class);
+                            // second response is custom endpoint response
+                            CustomEndpointResponse customEndpointResponse= (CustomEndpointResponse) endpoints.get(1);
+                            // now we merge the two responses and send the merged eventResponse
+                            Map<String, CustomEndpointResponse> responses = new HashMap();
+                            responses.put(endpointRequest.getEndpoint(), customEndpointResponse);
+                            capiEventResponse.setCustomEndpointResponses(responses);
+                            context.log(
+                                    String.format(
+                                            "Successfully sent %d event(s)", capiEventResponse.getEventsReceived()));
+                            return Futures.immediateFuture(capiEventResponse);
+                          }
+                        });
 
-      response =
-          Futures.transformAsync(
-              pixelFuture,
-              new AsyncFunction<AdsPixel, EventResponse>() {
-                public ListenableFuture<EventResponse> apply(AdsPixel pixel) {
-                  EventResponse eventResponse =
-                      gson.fromJson(pixel.getRawResponse(), EventResponse.class);
-                  context.log(
-                      String.format(
-                          "Successfully sent %d event(s)", eventResponse.getEventsReceived()));
-                  return Futures.immediateFuture(eventResponse);
-                }
-              });
+      } else {
+        response =
+                Futures.transformAsync(
+                        pixelFuture,
+                        new AsyncFunction<AdsPixel, EventResponse>() {
+                          public ListenableFuture<EventResponse> apply(AdsPixel pixel) {
+                            EventResponse eventResponse =
+                                    gson.fromJson(pixel.getRawResponse(), EventResponse.class);
+
+
+                              context.log(
+                                    String.format(
+                                            "Successfully sent %d event(s)", eventResponse.getEventsReceived()));
+                            return Futures.immediateFuture(eventResponse);
+                          }
+                        });
+      }
       return response;
     } catch (APIException e) {
       context.log(e.getMessage());
