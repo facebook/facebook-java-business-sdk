@@ -14,6 +14,10 @@ public interface CustomEndpointRequest {
 
     public void setFilter(Filter filter);
 
+    public void setSendToDestinationOnly(boolean sendToDestinationOnly);
+
+    public boolean isSendToDestinationOnly();
+
     public String getEndpoint();
 
     interface Filter<Boolean> {

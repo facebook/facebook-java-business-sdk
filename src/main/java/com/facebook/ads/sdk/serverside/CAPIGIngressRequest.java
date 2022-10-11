@@ -23,10 +23,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class CAPIGIngressRequest implements CustomEndpointRequest {
-    public boolean isSendToDestinationOnly() {
-        return sendToDestinationOnly;
-    }
-    private final boolean sendToDestinationOnly;
+    private boolean sendToDestinationOnly;
     private final String endpointURL;
     private Filter filter;
     private final String accessKey;
@@ -48,6 +45,15 @@ public class CAPIGIngressRequest implements CustomEndpointRequest {
         } catch (MalformedURLException | URISyntaxException e) {
             throw new InvalidParameterException("URL is invalid format " + e.getMessage());
         }
+    }
+
+    @Override
+    public boolean isSendToDestinationOnly() {
+        return sendToDestinationOnly;
+    }
+    @Override
+    public void setSendToDestinationOnly(boolean sendToDestinationOnly) {
+        this.sendToDestinationOnly = sendToDestinationOnly;
     }
 
     @Override
