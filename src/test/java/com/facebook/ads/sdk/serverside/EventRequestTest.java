@@ -20,21 +20,75 @@ package com.facebook.ads.sdk.serverside;
 import com.facebook.ads.sdk.APIConfig;
 import com.facebook.ads.sdk.APIContext;
 import com.facebook.ads.sdk.APIException;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import org.junit.After;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentMatchers;
+import static org.mockito.Mockito.doCallRealMethod;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.times;
+import java.util.concurrent.ExecutionException;
 
 public class EventRequestTest {
+  private CustomEndpointRequest mockEndpointRequest;
+  private EventRequest eventRequest;
+
+  @Before
+  public void mockCustomEndpointClient() {
+    mockEndpointRequest = new CustomEndpointRequest() {
+      private Filter filter;
+      private boolean sendToDestinationOnly;
+      @Override
+      public CustomEndpointResponse sendEvent(APIContext context, String pixelId, List<Event> data) throws APIException.FailedRequestException {
+        return (sendToDestinationOnly)? new CustomEndpointResponse("Events sent to mock custom endpoint only", "224"):
+                new CustomEndpointResponse("Events sent to mock endpoint and CAPI", "222");
+      }
+
+      @Override
+      public ListenableFuture<CustomEndpointResponse> sendEventAsync(APIContext context, String pixelId, List<Event> Data) {
+        return (sendToDestinationOnly)? Futures.immediateFuture(new CustomEndpointResponse("Events asynchronously sent to mock custom endpoint only", "224")) :
+                Futures.immediateFuture(new CustomEndpointResponse("Events asynchronously sent to mock endpoint and CAPI", "222"));
+      }
+
+      @Override
+      public void setFilter(Filter filter) {
+        this.filter = filter;
+      }
+
+      @Override
+      public void setSendToDestinationOnly(boolean sendToDestinationOnly) {
+        this.sendToDestinationOnly = sendToDestinationOnly;
+      }
+
+      @Override
+      public boolean isSendToDestinationOnly() {
+        return sendToDestinationOnly;
+      }
+
+      @Override
+      public String getEndpoint() {
+        return "www.endpoint.com";
+      }
+    };
+  }
+
+  @After
+  public void Cleanup() {
+    mockEndpointRequest = null;
+    eventRequest = null;
+  }
   @Test
   public void BuildersAndGettersTest() {
     EventRequest eventRequest = new EventRequest("pixelid", null);
@@ -187,5 +241,79 @@ public class EventRequestTest {
         .partnerAgent(eventRequest.getPartnerAgent());
 
     assertEquals(expectedEventRequest, eventRequest.cloneWithoutData());
+  }
+
+  private EventRequest setupClientForCustomEndpoint() {
+    String pixelId = "pixelid";
+    APIContext mockApiContext = mock(APIContext.class);
+    EventRequest eventRequest = new EventRequest(pixelId, mockApiContext);
+    HttpServiceInterface mockClient = mock(HttpServiceInterface.class);
+    EventResponse mockEventResponse = mock(EventResponse.class);
+    doReturn(mockEventResponse).when(mockClient).executeRequest(
+            ArgumentMatchers.<String>any(),
+            ArgumentMatchers.<HttpMethodEnum>any(),
+            ArgumentMatchers.<Map<String, String>>any(),
+            ArgumentMatchers.<HttpServiceParams>any()
+    );
+    doCallRealMethod().when(mockEventResponse).setCustomEndpointResponses(ArgumentMatchers.any());
+    doCallRealMethod().when(mockEventResponse).getCustomEndpointResponses();
+    eventRequest.setHttpServiceClient(mockClient);
+    eventRequest.setCustomEndpoint(mockEndpointRequest);
+    return eventRequest;
+  }
+
+  private EventRequest addEventsToRequest() {
+    // Append events to eventRequest
+    Event testEvent1 = new Event();
+    testEvent1.setEventId("1");
+    testEvent1.setEventName("testEvent1");
+    Event testEvent2 = new Event();
+    testEvent2.setEventId("2");
+    testEvent2.setEventName("testEvent2");
+    eventRequest.addDataItem(testEvent1);
+    eventRequest.addDataItem(testEvent2);
+    return eventRequest;
+  }
+
+  @Test
+  public void sendSyncToCustomEndpoint() throws APIException {
+    eventRequest = setupClientForCustomEndpoint();
+    EventResponse testResponse = eventRequest.execute();
+    assertEquals(testResponse.getEventsReceived(), new Integer(0));
+    addEventsToRequest();
+
+    EventResponse testResponse2 = eventRequest.execute();
+    assertNotNull(testResponse2.getCustomEndpointResponses());
+    assertEquals(testResponse2.getCustomEndpointResponses().get(mockEndpointRequest.getEndpoint()).message, "Events sent to mock endpoint and CAPI");
+    assertEquals(testResponse2.getCustomEndpointResponses().get(mockEndpointRequest.getEndpoint()).responseCode, "222");
+  }
+
+  @Test
+  public void sendSyncToCustomEndpointOnly() throws APIException {
+    mockEndpointRequest.setSendToDestinationOnly(true);
+    eventRequest = setupClientForCustomEndpoint();
+    eventRequest.setCustomEndpoint(mockEndpointRequest);
+    EventResponse testResponse = eventRequest.execute();
+    assertEquals(testResponse.getEventsReceived(), new Integer(0));
+    addEventsToRequest();
+
+    EventResponse testResponse2 = eventRequest.execute();
+    assertEquals(testResponse2.getCustomEndpointResponses().size(), 0);
+    assertEquals(testResponse2.getMessages(), new ArrayList());
+    assertEquals(testResponse2.getEventsReceived(), new Integer(2));
+  }
+
+  @Test
+  public void sendAsyncToCustomEndpointOnly() throws APIException, ExecutionException, InterruptedException {
+    mockEndpointRequest.setSendToDestinationOnly(true);
+    eventRequest = setupClientForCustomEndpoint();
+    eventRequest.setCustomEndpoint(mockEndpointRequest);
+    EventResponse testResponse = eventRequest.executeAsync().get();
+    assertEquals(testResponse.getEventsReceived(), new Integer(0));
+    addEventsToRequest();
+
+    EventResponse testResponse2 = eventRequest.executeAsync().get();
+    assertEquals(testResponse2.getEventsReceived(), new Integer(2));
+    assertEquals(testResponse2.getMessages(), new ArrayList());
   }
 }

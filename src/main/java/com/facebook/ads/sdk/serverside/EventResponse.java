@@ -126,6 +126,16 @@ public class EventResponse {
     this.customEndpointResponses = customEndpointResponses;
   }
 
+  /**
+   * Gets a map that maps each response to each custom endpoint that we sent the events to.
+   *
+   * @return customEndpointResponses Map of requests to endpoints
+   */
+
+  public Map<String, CustomEndpointResponse> getCustomEndpointResponses() {
+    return customEndpointResponses;
+  }
+
 
   /**
    * Get response messages

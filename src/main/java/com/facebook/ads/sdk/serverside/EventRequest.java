@@ -413,7 +413,7 @@ public class EventRequest {
    * @return event response
    * @throws APIException Api Exception
    */
-  public EventResponse sendToCAPIEndpoint() throws APIException {
+  private EventResponse sendToCAPIEndpoint() throws APIException {
     EventResponse response;
     if (httpServiceClient == null) {
       final APIRequestCreateEvent event = getPixelCreateEvent();
