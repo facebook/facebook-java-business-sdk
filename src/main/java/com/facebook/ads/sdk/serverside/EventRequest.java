@@ -386,7 +386,7 @@ public class EventRequest {
    */
   public EventResponse execute() throws APIException {
     try {
-      EventResponse response = null;
+      EventResponse response;
       if (endpointRequest != null) {
         // send to custom Endpoint first
         final Map<String, CustomEndpointResponse> responses = new HashMap();
@@ -418,10 +418,10 @@ public class EventRequest {
    * @throws APIException Api Exception
    */
   public EventResponse sendToCAPIEndpoint() throws APIException {
-    EventResponse response = null;
+    EventResponse response;
     if (httpServiceClient == null) {
-      APIRequestCreateEvent event = getPixelCreateEvent();
-      AdsPixel pixel = event.execute();
+      final APIRequestCreateEvent event = getPixelCreateEvent();
+      final AdsPixel pixel = event.execute();
       response = gson.fromJson(pixel.getRawResponse(), EventResponse.class);
     } else {
       response = executeCustomHttpService(httpServiceClient);
@@ -451,7 +451,7 @@ public class EventRequest {
                               // do not send to CAPI Endpoint. If no exception was thrown, we can assume all events were sent successfully
                               context.log(String.format("Successfully sent %d event(s) to %s only", data.size(), endpointRequest.getEndpoint()));
                               context.log("Skipping CAPI Endpoint");
-                              EventResponse customEndpointResponse = new EventResponse(data.size(), new ArrayList(), "");
+                              final EventResponse customEndpointResponse = new EventResponse(data.size(), new ArrayList(), "");
                               return Futures.immediateFuture(customEndpointResponse);
                             }
                           });
@@ -501,7 +501,7 @@ public class EventRequest {
                         });
       }
       return response;
-    } catch (APIException e) {
+    } catch (final APIException e) {
       context.log(e.getMessage());
       throw e;
     }
