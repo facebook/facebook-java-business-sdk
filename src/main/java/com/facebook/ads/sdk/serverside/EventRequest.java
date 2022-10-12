@@ -495,13 +495,10 @@ public class EventRequest {
    */
   public ListenableFuture<EventResponse> executeAsync() throws APIException {
     try {
-      if (endpointRequest != null && endpointRequest.isSendToDestinationOnly()) {
-          return sendEventAsyncToCustomEndpointOnly();
-      } else if (endpointRequest != null) {
-        return sendEventAsyncToCAPIAndCustomEndpoint();
-      } else {
+      if (endpointRequest == null) {
         return sendEventToCAPIOnly();
       }
+      return (endpointRequest.isSendToDestinationOnly()) ? sendEventAsyncToCustomEndpointOnly() : sendEventAsyncToCAPIAndCustomEndpoint();
     } catch (final APIException e) {
       context.log(e.getMessage());
       throw e;
