@@ -24,7 +24,6 @@ import com.facebook.ads.sdk.AdsPixel;
 import com.facebook.ads.sdk.AdsPixel.APIRequestCreateEvent;
 import com.facebook.ads.utils.CustomDataAdapter;
 import com.google.common.util.concurrent.AsyncFunction;
-import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.gson.Gson;
@@ -37,8 +36,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
 /**
  * Server side pixel event request
@@ -387,17 +384,16 @@ public class EventRequest {
   public EventResponse execute() throws APIException {
     try {
       EventResponse response;
-      if (endpointRequest != null) {
+      if (endpointRequest != null && endpointRequest.isSendToDestinationOnly()) {
+        // do not send to CAPI Endpoint. If no exception was thrown, we can assume all events were sent successfully
+        context.log(String.format("Successfully sent %d event(s) to %s only", data.size(), endpointRequest.getEndpoint()));
+        context.log("Skipping CAPI Endpoint");
+        return new EventResponse(data.size(), new ArrayList(), "");
+      } else if (endpointRequest != null) {
         // send to custom Endpoint first
         final Map<String, CustomEndpointResponse> responses = new HashMap();
         final CustomEndpointResponse customEndpointResponse = endpointRequest.sendEvent(context, pixelId, data);
         responses.put(endpointRequest.getEndpoint(), customEndpointResponse);
-        if (endpointRequest.isSendToDestinationOnly()) {
-          // do not send to CAPI Endpoint. If no exception was thrown, we can assume all events were sent successfully
-          context.log(String.format("Successfully sent %d event(s) to %s only", data.size(), endpointRequest.getEndpoint()));
-          context.log("Skipping CAPI Endpoint");
-          return new EventResponse(data.size(), new ArrayList(), "");
-        }
         response = sendToCAPIEndpoint();
         response.setCustomEndpointResponses(responses);
       } else {
@@ -429,6 +425,68 @@ public class EventRequest {
     return response;
   }
 
+  private ListenableFuture<EventResponse> sendEventAsyncToCustomEndpointOnly() {
+    final ListenableFuture<CustomEndpointResponse> customEndpointFuture = endpointRequest.sendEventAsync(context, pixelId, data);
+    return Futures.transformAsync(
+      customEndpointFuture,
+      new AsyncFunction<CustomEndpointResponse, EventResponse>() {
+        @Override
+        public ListenableFuture<EventResponse> apply(final CustomEndpointResponse response) {
+          // do not send to CAPI Endpoint. If no exception was thrown, we can assume all events were sent successfully
+          context.log(String.format("Successfully sent %d event(s) to %s only", data.size(), endpointRequest.getEndpoint()));
+          context.log("Skipping CAPI Endpoint");
+          final EventResponse customEndpointResponse = new EventResponse(data.size(), new ArrayList(), "");
+          return Futures.immediateFuture(customEndpointResponse);
+        }
+      });
+  }
+
+  private ListenableFuture<EventResponse> sendEventAsyncToCAPIAndCustomEndpoint() throws APIException {
+    final AdsPixel.APIRequestCreateEvent event = getPixelCreateEvent();
+    final ListenableFuture<AdsPixel> pixelFuture = event.executeAsync();
+    final ListenableFuture<CustomEndpointResponse> customEndpointFuture = endpointRequest.sendEventAsync(context, pixelId, data);
+    // put CAPI endpoint and custom endpoint into a list of futures
+    final ListenableFuture<List<Object>> futureOfList = Futures.allAsList(pixelFuture, customEndpointFuture);
+    return Futures.transformAsync(
+      futureOfList,
+      new AsyncFunction<List<Object>, EventResponse>() {
+        @Override
+        public ListenableFuture<EventResponse> apply(final List<Object> responses) {
+          // now we merge the two responses and send the merged eventResponse
+          // the first response is CAPI response
+          final EventResponse capiEventResponse =
+                  gson.fromJson(((AdsPixel) responses.get(0)).getRawResponse(), EventResponse.class);
+          // second response is custom endpoint response
+          final CustomEndpointResponse customEndpointResponse= (CustomEndpointResponse) responses.get(1);
+          // now we merge the two responses and send the merged eventResponse
+          final Map<String, CustomEndpointResponse> endpointResponses = new HashMap();
+          endpointResponses.put(endpointRequest.getEndpoint(), customEndpointResponse);
+          capiEventResponse.setCustomEndpointResponses(endpointResponses);
+          context.log(
+                  String.format(
+                          "Successfully sent %d event(s)", capiEventResponse.getEventsReceived()));
+          return Futures.immediateFuture(capiEventResponse);
+        }
+      });
+  }
+
+  private ListenableFuture<EventResponse> sendEventToCAPIOnly() throws APIException {
+    final AdsPixel.APIRequestCreateEvent event = getPixelCreateEvent();
+    final ListenableFuture<AdsPixel> pixelFuture = event.executeAsync();
+    return Futures.transformAsync(
+      pixelFuture,
+      new AsyncFunction<AdsPixel, EventResponse>() {
+        public ListenableFuture<EventResponse> apply(final AdsPixel pixel) {
+          final EventResponse eventResponse =
+                  gson.fromJson(pixel.getRawResponse(), EventResponse.class);
+          context.log(
+                  String.format(
+                          "Successfully sent %d event(s)", eventResponse.getEventsReceived()));
+          return Futures.immediateFuture(eventResponse);
+        }
+      });
+  }
+
   /**
    * Asynchronously send Event to Facebook GraphAPI.
    *
@@ -436,71 +494,14 @@ public class EventRequest {
    * @throws APIException Api Exception
    */
   public ListenableFuture<EventResponse> executeAsync() throws APIException {
-    final AdsPixel.APIRequestCreateEvent event = getPixelCreateEvent();
-    ListenableFuture<EventResponse> response = null;
     try {
-      if (endpointRequest != null) {
-        final ListenableFuture<CustomEndpointResponse> customEndpointFuture = endpointRequest.sendEventAsync(context, pixelId, data);
-        if (endpointRequest.isSendToDestinationOnly()) {
-          response =
-                  Futures.transformAsync(
-                          customEndpointFuture,
-                          new AsyncFunction<CustomEndpointResponse, EventResponse>() {
-                            @Override
-                            public ListenableFuture<EventResponse> apply(final CustomEndpointResponse response) {
-                              // do not send to CAPI Endpoint. If no exception was thrown, we can assume all events were sent successfully
-                              context.log(String.format("Successfully sent %d event(s) to %s only", data.size(), endpointRequest.getEndpoint()));
-                              context.log("Skipping CAPI Endpoint");
-                              final EventResponse customEndpointResponse = new EventResponse(data.size(), new ArrayList(), "");
-                              return Futures.immediateFuture(customEndpointResponse);
-                            }
-                          });
-        } else {
-          final ListenableFuture<AdsPixel> pixelFuture = event.executeAsync();
-          // put CAPI endpoint and custom endpoint into a list of futures
-          final ListenableFuture<List<Object>> futureOfList = Futures.allAsList(pixelFuture, customEndpointFuture);
-          response =
-                  Futures.transformAsync(
-                          futureOfList,
-                          new AsyncFunction<List<Object>, EventResponse>() {
-                            @Override
-                            public ListenableFuture<EventResponse> apply(final List<Object> responses) {
-                              // now we merge the two responses and send the merged eventResponse
-                              // the first response is CAPI response
-                              final EventResponse capiEventResponse =
-                                      gson.fromJson(((AdsPixel) responses.get(0)).getRawResponse(), EventResponse.class);
-                              // second response is custom endpoint response
-                              final CustomEndpointResponse customEndpointResponse= (CustomEndpointResponse) responses.get(1);
-                              // now we merge the two responses and send the merged eventResponse
-                              final Map<String, CustomEndpointResponse> endpointResponses = new HashMap();
-                              endpointResponses.put(endpointRequest.getEndpoint(), customEndpointResponse);
-                              capiEventResponse.setCustomEndpointResponses(endpointResponses);
-                              context.log(
-                                      String.format(
-                                              "Successfully sent %d event(s)", capiEventResponse.getEventsReceived()));
-                              return Futures.immediateFuture(capiEventResponse);
-                            }
-                          });
-        }
+      if (endpointRequest != null && endpointRequest.isSendToDestinationOnly()) {
+          return sendEventAsyncToCustomEndpointOnly();
+      } else if (endpointRequest != null) {
+        return sendEventAsyncToCAPIAndCustomEndpoint();
       } else {
-        final ListenableFuture<AdsPixel> pixelFuture = event.executeAsync();
-        response =
-                Futures.transformAsync(
-                        pixelFuture,
-                        new AsyncFunction<AdsPixel, EventResponse>() {
-                          public ListenableFuture<EventResponse> apply(final AdsPixel pixel) {
-                            final EventResponse eventResponse =
-                                    gson.fromJson(pixel.getRawResponse(), EventResponse.class);
-
-
-                              context.log(
-                                    String.format(
-                                            "Successfully sent %d event(s)", eventResponse.getEventsReceived()));
-                            return Futures.immediateFuture(eventResponse);
-                          }
-                        });
+        return sendEventToCAPIOnly();
       }
-      return response;
     } catch (final APIException e) {
       context.log(e.getMessage());
       throw e;
