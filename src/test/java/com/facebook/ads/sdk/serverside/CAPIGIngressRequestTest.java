@@ -30,7 +30,7 @@ public class CAPIGIngressRequestTest {
     public void invalidURLTest() {
         thrown.expect(InvalidParameterException.class);
         new CAPIGIngressRequest("badDomain", "ACCESS_KEY");
-        thrown.expectMessage("URL is invalid format");
+        thrown.expectMessage("URL is in invalid format");
     }
 
     @Test

@@ -43,7 +43,7 @@ public class CAPIGIngressRequest implements CustomEndpointRequest {
         try {
             new URL(url).toURI();
         } catch (MalformedURLException | URISyntaxException e) {
-            throw new InvalidParameterException("URL is invalid format " + e.getMessage());
+            throw new InvalidParameterException("URL is in invalid format " + e.getMessage());
         }
     }
 
