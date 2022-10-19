@@ -382,20 +382,20 @@ public class EventRequest {
    * @throws APIException Api Exception
    */
   public EventResponse execute() throws APIException {
+    EventResponse response;
     try {
-      EventResponse response;
       if (endpointRequest != null && endpointRequest.isSendToDestinationOnly()) {
         // do not send to CAPI Endpoint. If no exception was thrown, we can assume all events were sent successfully
+        final Map<String, CustomEndpointResponse> customEndpointResponses = sendEventsToCustomEndpoint();
         context.log(String.format("Successfully sent %d event(s) to %s only", data.size(), endpointRequest.getEndpoint()));
         context.log("Skipping CAPI Endpoint");
-        return new EventResponse(data.size(), new ArrayList(), "");
+        response = new EventResponse(data.size(), new ArrayList(), "");
+        response.setCustomEndpointResponses(customEndpointResponses);
+        return response;
       } else if (endpointRequest != null) {
-        // send to custom Endpoint first
-        final Map<String, CustomEndpointResponse> responses = new HashMap();
-        final CustomEndpointResponse customEndpointResponse = endpointRequest.sendEvent(context, pixelId, data);
-        responses.put(endpointRequest.getEndpoint(), customEndpointResponse);
         response = sendToCAPIEndpoint();
-        response.setCustomEndpointResponses(responses);
+        final Map<String, CustomEndpointResponse> customEndpointResponses = sendEventsToCustomEndpoint();
+        response.setCustomEndpointResponses(customEndpointResponses);
       } else {
         response = sendToCAPIEndpoint();
       }
@@ -408,7 +408,20 @@ public class EventRequest {
   }
 
   /**
-   * Synchronously send Event to Facebook Conversions API.
+   * Synchronously send events to Custom Endpoint.
+   *
+   * @return event response
+   * @throws APIException Api Exception
+   */
+  private Map<String, CustomEndpointResponse> sendEventsToCustomEndpoint() throws APIException.FailedRequestException {
+      final Map<String, CustomEndpointResponse> responses = new HashMap();
+      final CustomEndpointResponse customEndpointResponse = endpointRequest.sendEvent(context, pixelId, data);
+      responses.put(endpointRequest.getEndpoint(), customEndpointResponse);
+      return responses;
+  }
+
+  /**
+   * Synchronously send events to Facebook Conversions API.
    *
    * @return event response
    * @throws APIException Api Exception
@@ -436,6 +449,9 @@ public class EventRequest {
           context.log(String.format("Successfully sent %d event(s) to %s only", data.size(), endpointRequest.getEndpoint()));
           context.log("Skipping CAPI Endpoint");
           final EventResponse customEndpointResponse = new EventResponse(data.size(), new ArrayList(), "");
+          final Map<String, CustomEndpointResponse> endpointResponses = new HashMap();
+          endpointResponses.put(endpointRequest.getEndpoint(), response);
+          customEndpointResponse.setCustomEndpointResponses(endpointResponses);
           return Futures.immediateFuture(customEndpointResponse);
         }
       });

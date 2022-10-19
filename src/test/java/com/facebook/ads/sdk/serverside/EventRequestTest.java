@@ -296,7 +296,7 @@ public class EventRequestTest {
     addEventsToRequest();
 
     final EventResponse testResponse2 = eventRequest.execute();
-    assertEquals(testResponse2.getCustomEndpointResponses().size(), 0);
+    assertEquals(testResponse2.getCustomEndpointResponses().size(), 1);
     assertEquals(testResponse2.getMessages(), new ArrayList());
     assertEquals(testResponse2.getEventsReceived(), new Integer(2));
   }
@@ -311,6 +311,7 @@ public class EventRequestTest {
     addEventsToRequest();
 
     final EventResponse testResponse2 = eventRequest.executeAsync().get();
+    assertEquals(testResponse2.getCustomEndpointResponses().size(), 1);
     assertEquals(testResponse2.getEventsReceived(), new Integer(2));
     assertEquals(testResponse2.getMessages(), new ArrayList());
   }
