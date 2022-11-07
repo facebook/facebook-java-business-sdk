@@ -71,6 +71,8 @@ public class InstagramUser extends APINode {
   private Long mMediaCount = null;
   @SerializedName("mini_shop_storefront")
   private Shop mMiniShopStorefront = null;
+  @SerializedName("owner_business")
+  private Business mOwnerBusiness = null;
   @SerializedName("profile_pic")
   private String mProfilePic = null;
   @SerializedName("username")
@@ -336,6 +338,13 @@ public class InstagramUser extends APINode {
     return mMiniShopStorefront;
   }
 
+  public Business getFieldOwnerBusiness() {
+    if (mOwnerBusiness != null) {
+      mOwnerBusiness.context = getContext();
+    }
+    return mOwnerBusiness;
+  }
+
   public String getFieldProfilePic() {
     return mProfilePic;
   }
@@ -360,6 +369,7 @@ public class InstagramUser extends APINode {
       "block_offline_analytics",
       "collaborative_ads_managed_partner_business_info",
       "collaborative_ads_managed_partner_eligibility",
+      "collaborative_ads_partner_premium_options",
       "created_by",
       "created_time",
       "extended_updated_time",
@@ -486,6 +496,13 @@ public class InstagramUser extends APINode {
     }
     public APIRequestGetAgencies requestCollaborativeAdsManagedPartnerEligibilityField (boolean value) {
       this.requestField("collaborative_ads_managed_partner_eligibility", value);
+      return this;
+    }
+    public APIRequestGetAgencies requestCollaborativeAdsPartnerPremiumOptionsField () {
+      return this.requestCollaborativeAdsPartnerPremiumOptionsField(true);
+    }
+    public APIRequestGetAgencies requestCollaborativeAdsPartnerPremiumOptionsField (boolean value) {
+      this.requestField("collaborative_ads_partner_premium_options", value);
       return this;
     }
     public APIRequestGetAgencies requestCreatedByField () {
@@ -633,6 +650,7 @@ public class InstagramUser extends APINode {
       "capabilities",
       "created_time",
       "currency",
+      "custom_audience_info",
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
@@ -654,6 +672,7 @@ public class InstagramUser extends APINode {
       "is_personal",
       "is_prepay_account",
       "is_tax_id_required",
+      "liable_address",
       "line_numbers",
       "media_agency",
       "min_campaign_group_spend_cap",
@@ -661,9 +680,12 @@ public class InstagramUser extends APINode {
       "name",
       "offsite_pixels_tos_accepted",
       "owner",
+      "owner_business",
       "partner",
       "rf_spec",
+      "send_bill_to_address",
       "show_checkout_experience",
+      "sold_to_address",
       "spend_cap",
       "tax_id",
       "tax_id_status",
@@ -674,6 +696,7 @@ public class InstagramUser extends APINode {
       "tos_accepted",
       "user_tasks",
       "user_tos_accepted",
+      "viewable_business",
     };
 
     @Override
@@ -903,6 +926,13 @@ public class InstagramUser extends APINode {
       this.requestField("currency", value);
       return this;
     }
+    public APIRequestGetAuthorizedAdAccounts requestCustomAudienceInfoField () {
+      return this.requestCustomAudienceInfoField(true);
+    }
+    public APIRequestGetAuthorizedAdAccounts requestCustomAudienceInfoField (boolean value) {
+      this.requestField("custom_audience_info", value);
+      return this;
+    }
     public APIRequestGetAuthorizedAdAccounts requestDisableReasonField () {
       return this.requestDisableReasonField(true);
     }
@@ -1050,6 +1080,13 @@ public class InstagramUser extends APINode {
       this.requestField("is_tax_id_required", value);
       return this;
     }
+    public APIRequestGetAuthorizedAdAccounts requestLiableAddressField () {
+      return this.requestLiableAddressField(true);
+    }
+    public APIRequestGetAuthorizedAdAccounts requestLiableAddressField (boolean value) {
+      this.requestField("liable_address", value);
+      return this;
+    }
     public APIRequestGetAuthorizedAdAccounts requestLineNumbersField () {
       return this.requestLineNumbersField(true);
     }
@@ -1099,6 +1136,13 @@ public class InstagramUser extends APINode {
       this.requestField("owner", value);
       return this;
     }
+    public APIRequestGetAuthorizedAdAccounts requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetAuthorizedAdAccounts requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
+      return this;
+    }
     public APIRequestGetAuthorizedAdAccounts requestPartnerField () {
       return this.requestPartnerField(true);
     }
@@ -1113,11 +1157,25 @@ public class InstagramUser extends APINode {
       this.requestField("rf_spec", value);
       return this;
     }
+    public APIRequestGetAuthorizedAdAccounts requestSendBillToAddressField () {
+      return this.requestSendBillToAddressField(true);
+    }
+    public APIRequestGetAuthorizedAdAccounts requestSendBillToAddressField (boolean value) {
+      this.requestField("send_bill_to_address", value);
+      return this;
+    }
     public APIRequestGetAuthorizedAdAccounts requestShowCheckoutExperienceField () {
       return this.requestShowCheckoutExperienceField(true);
     }
     public APIRequestGetAuthorizedAdAccounts requestShowCheckoutExperienceField (boolean value) {
       this.requestField("show_checkout_experience", value);
+      return this;
+    }
+    public APIRequestGetAuthorizedAdAccounts requestSoldToAddressField () {
+      return this.requestSoldToAddressField(true);
+    }
+    public APIRequestGetAuthorizedAdAccounts requestSoldToAddressField (boolean value) {
+      this.requestField("sold_to_address", value);
       return this;
     }
     public APIRequestGetAuthorizedAdAccounts requestSpendCapField () {
@@ -1188,6 +1246,13 @@ public class InstagramUser extends APINode {
     }
     public APIRequestGetAuthorizedAdAccounts requestUserTosAcceptedField (boolean value) {
       this.requestField("user_tos_accepted", value);
+      return this;
+    }
+    public APIRequestGetAuthorizedAdAccounts requestViewableBusinessField () {
+      return this.requestViewableBusinessField(true);
+    }
+    public APIRequestGetAuthorizedAdAccounts requestViewableBusinessField (boolean value) {
+      this.requestField("viewable_business", value);
       return this;
     }
   }
@@ -1328,6 +1393,7 @@ public class InstagramUser extends APINode {
       "is_published",
       "media_count",
       "mini_shop_storefront",
+      "owner_business",
       "profile_pic",
       "username",
     };
@@ -1482,6 +1548,13 @@ public class InstagramUser extends APINode {
       this.requestField("mini_shop_storefront", value);
       return this;
     }
+    public APIRequestGet requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGet requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
+      return this;
+    }
     public APIRequestGet requestProfilePicField () {
       return this.requestProfilePicField(true);
     }
@@ -1521,6 +1594,7 @@ public class InstagramUser extends APINode {
     this.mIsPublished = instance.mIsPublished;
     this.mMediaCount = instance.mMediaCount;
     this.mMiniShopStorefront = instance.mMiniShopStorefront;
+    this.mOwnerBusiness = instance.mOwnerBusiness;
     this.mProfilePic = instance.mProfilePic;
     this.mUsername = instance.mUsername;
     this.context = instance.context;

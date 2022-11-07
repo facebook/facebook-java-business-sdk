@@ -101,6 +101,8 @@ public class CustomAudience extends APINode {
   private CustomAudienceStatus mOperationStatus = null;
   @SerializedName("opt_out_link")
   private String mOptOutLink = null;
+  @SerializedName("owner_business")
+  private Business mOwnerBusiness = null;
   @SerializedName("page_deletion_marked_delete_time")
   private Long mPageDeletionMarkedDeleteTime = null;
   @SerializedName("permission_for_actions")
@@ -484,6 +486,13 @@ public class CustomAudience extends APINode {
     return mOptOutLink;
   }
 
+  public Business getFieldOwnerBusiness() {
+    if (mOwnerBusiness != null) {
+      mOwnerBusiness.context = getContext();
+    }
+    return mOwnerBusiness;
+  }
+
   public Long getFieldPageDeletionMarkedDeleteTime() {
     return mPageDeletionMarkedDeleteTime;
   }
@@ -691,6 +700,7 @@ public class CustomAudience extends APINode {
       "capabilities",
       "created_time",
       "currency",
+      "custom_audience_info",
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
@@ -712,6 +722,7 @@ public class CustomAudience extends APINode {
       "is_personal",
       "is_prepay_account",
       "is_tax_id_required",
+      "liable_address",
       "line_numbers",
       "media_agency",
       "min_campaign_group_spend_cap",
@@ -719,9 +730,12 @@ public class CustomAudience extends APINode {
       "name",
       "offsite_pixels_tos_accepted",
       "owner",
+      "owner_business",
       "partner",
       "rf_spec",
+      "send_bill_to_address",
       "show_checkout_experience",
+      "sold_to_address",
       "spend_cap",
       "tax_id",
       "tax_id_status",
@@ -732,6 +746,7 @@ public class CustomAudience extends APINode {
       "tos_accepted",
       "user_tasks",
       "user_tos_accepted",
+      "viewable_business",
     };
 
     @Override
@@ -961,6 +976,13 @@ public class CustomAudience extends APINode {
       this.requestField("currency", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestCustomAudienceInfoField () {
+      return this.requestCustomAudienceInfoField(true);
+    }
+    public APIRequestGetAdAccounts requestCustomAudienceInfoField (boolean value) {
+      this.requestField("custom_audience_info", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestDisableReasonField () {
       return this.requestDisableReasonField(true);
     }
@@ -1108,6 +1130,13 @@ public class CustomAudience extends APINode {
       this.requestField("is_tax_id_required", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestLiableAddressField () {
+      return this.requestLiableAddressField(true);
+    }
+    public APIRequestGetAdAccounts requestLiableAddressField (boolean value) {
+      this.requestField("liable_address", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestLineNumbersField () {
       return this.requestLineNumbersField(true);
     }
@@ -1157,6 +1186,13 @@ public class CustomAudience extends APINode {
       this.requestField("owner", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetAdAccounts requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestPartnerField () {
       return this.requestPartnerField(true);
     }
@@ -1171,11 +1207,25 @@ public class CustomAudience extends APINode {
       this.requestField("rf_spec", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestSendBillToAddressField () {
+      return this.requestSendBillToAddressField(true);
+    }
+    public APIRequestGetAdAccounts requestSendBillToAddressField (boolean value) {
+      this.requestField("send_bill_to_address", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestShowCheckoutExperienceField () {
       return this.requestShowCheckoutExperienceField(true);
     }
     public APIRequestGetAdAccounts requestShowCheckoutExperienceField (boolean value) {
       this.requestField("show_checkout_experience", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestSoldToAddressField () {
+      return this.requestSoldToAddressField(true);
+    }
+    public APIRequestGetAdAccounts requestSoldToAddressField (boolean value) {
+      this.requestField("sold_to_address", value);
       return this;
     }
     public APIRequestGetAdAccounts requestSpendCapField () {
@@ -1246,6 +1296,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAdAccounts requestUserTosAcceptedField (boolean value) {
       this.requestField("user_tos_accepted", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestViewableBusinessField () {
+      return this.requestViewableBusinessField(true);
+    }
+    public APIRequestGetAdAccounts requestViewableBusinessField (boolean value) {
+      this.requestField("viewable_business", value);
       return this;
     }
   }
@@ -2638,6 +2695,7 @@ public class CustomAudience extends APINode {
       "name",
       "operation_status",
       "opt_out_link",
+      "owner_business",
       "page_deletion_marked_delete_time",
       "permission_for_actions",
       "pixel_id",
@@ -2917,6 +2975,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGet requestOptOutLinkField (boolean value) {
       this.requestField("opt_out_link", value);
+      return this;
+    }
+    public APIRequestGet requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGet requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
       return this;
     }
     public APIRequestGet requestPageDeletionMarkedDeleteTimeField () {
@@ -3499,6 +3564,7 @@ public class CustomAudience extends APINode {
     this.mName = instance.mName;
     this.mOperationStatus = instance.mOperationStatus;
     this.mOptOutLink = instance.mOptOutLink;
+    this.mOwnerBusiness = instance.mOwnerBusiness;
     this.mPageDeletionMarkedDeleteTime = instance.mPageDeletionMarkedDeleteTime;
     this.mPermissionForActions = instance.mPermissionForActions;
     this.mPixelId = instance.mPixelId;

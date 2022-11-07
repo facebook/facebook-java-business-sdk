@@ -341,6 +341,7 @@ public class VideoList extends APINode {
 
     public static final String[] FIELDS = {
       "ad_breaks",
+      "admin_creator",
       "audio_isrc",
       "backdated_time",
       "backdated_time_granularity",
@@ -479,6 +480,13 @@ public class VideoList extends APINode {
     }
     public APIRequestGetVideos requestAdBreaksField (boolean value) {
       this.requestField("ad_breaks", value);
+      return this;
+    }
+    public APIRequestGetVideos requestAdminCreatorField () {
+      return this.requestAdminCreatorField(true);
+    }
+    public APIRequestGetVideos requestAdminCreatorField (boolean value) {
+      this.requestField("admin_creator", value);
       return this;
     }
     public APIRequestGetVideos requestAudioIsrcField () {

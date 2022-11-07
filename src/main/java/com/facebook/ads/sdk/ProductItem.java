@@ -157,6 +157,8 @@ public class ProductItem extends APINode {
   private String mParentProductId = null;
   @SerializedName("pattern")
   private String mPattern = null;
+  @SerializedName("post_conversion_signal_based_enforcement_appeal_eligibility")
+  private Boolean mPostConversionSignalBasedEnforcementAppealEligibility = null;
   @SerializedName("price")
   private String mPrice = null;
   @SerializedName("product_catalog")
@@ -631,6 +633,10 @@ public class ProductItem extends APINode {
 
   public String getFieldPattern() {
     return mPattern;
+  }
+
+  public Boolean getFieldPostConversionSignalBasedEnforcementAppealEligibility() {
+    return mPostConversionSignalBasedEnforcementAppealEligibility;
   }
 
   public String getFieldPrice() {
@@ -1203,6 +1209,7 @@ public class ProductItem extends APINode {
       "origin_country",
       "parent_product_id",
       "pattern",
+      "post_conversion_signal_based_enforcement_appeal_eligibility",
       "price",
       "product_catalog",
       "product_feed",
@@ -1703,6 +1710,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestPatternField (boolean value) {
       this.requestField("pattern", value);
+      return this;
+    }
+    public APIRequestGet requestPostConversionSignalBasedEnforcementAppealEligibilityField () {
+      return this.requestPostConversionSignalBasedEnforcementAppealEligibilityField(true);
+    }
+    public APIRequestGet requestPostConversionSignalBasedEnforcementAppealEligibilityField (boolean value) {
+      this.requestField("post_conversion_signal_based_enforcement_appeal_eligibility", value);
       return this;
     }
     public APIRequestGet requestPriceField () {
@@ -3193,6 +3207,18 @@ public class ProductItem extends APINode {
       VALUE_GENERIC_INVALID_FIELD("GENERIC_INVALID_FIELD"),
       @SerializedName("HIDDEN_UNTIL_PRODUCT_LAUNCH")
       VALUE_HIDDEN_UNTIL_PRODUCT_LAUNCH("HIDDEN_UNTIL_PRODUCT_LAUNCH"),
+      @SerializedName("IMAGE_FETCH_FAILED")
+      VALUE_IMAGE_FETCH_FAILED("IMAGE_FETCH_FAILED"),
+      @SerializedName("IMAGE_FETCH_FAILED_BAD_GATEWAY")
+      VALUE_IMAGE_FETCH_FAILED_BAD_GATEWAY("IMAGE_FETCH_FAILED_BAD_GATEWAY"),
+      @SerializedName("IMAGE_FETCH_FAILED_FILE_SIZE_EXCEEDED")
+      VALUE_IMAGE_FETCH_FAILED_FILE_SIZE_EXCEEDED("IMAGE_FETCH_FAILED_FILE_SIZE_EXCEEDED"),
+      @SerializedName("IMAGE_FETCH_FAILED_FORBIDDEN")
+      VALUE_IMAGE_FETCH_FAILED_FORBIDDEN("IMAGE_FETCH_FAILED_FORBIDDEN"),
+      @SerializedName("IMAGE_FETCH_FAILED_LINK_BROKEN")
+      VALUE_IMAGE_FETCH_FAILED_LINK_BROKEN("IMAGE_FETCH_FAILED_LINK_BROKEN"),
+      @SerializedName("IMAGE_FETCH_FAILED_TIMED_OUT")
+      VALUE_IMAGE_FETCH_FAILED_TIMED_OUT("IMAGE_FETCH_FAILED_TIMED_OUT"),
       @SerializedName("IMAGE_RESOLUTION_LOW")
       VALUE_IMAGE_RESOLUTION_LOW("IMAGE_RESOLUTION_LOW"),
       @SerializedName("INACTIVE_SHOPIFY_PRODUCT")
@@ -3243,12 +3269,18 @@ public class ProductItem extends APINode {
       VALUE_MISSING_SIZE("MISSING_SIZE"),
       @SerializedName("MISSING_TAX_CATEGORY")
       VALUE_MISSING_TAX_CATEGORY("MISSING_TAX_CATEGORY"),
+      @SerializedName("NEGATIVE_COMMUNITY_FEEDBACK")
+      VALUE_NEGATIVE_COMMUNITY_FEEDBACK("NEGATIVE_COMMUNITY_FEEDBACK"),
       @SerializedName("NOT_ENOUGH_IMAGES")
       VALUE_NOT_ENOUGH_IMAGES("NOT_ENOUGH_IMAGES"),
       @SerializedName("PART_OF_PRODUCT_LAUNCH")
       VALUE_PART_OF_PRODUCT_LAUNCH("PART_OF_PRODUCT_LAUNCH"),
       @SerializedName("PRODUCT_EXPIRED")
       VALUE_PRODUCT_EXPIRED("PRODUCT_EXPIRED"),
+      @SerializedName("PRODUCT_ITEM_HIDDEN_FROM_ALL_SHOPS")
+      VALUE_PRODUCT_ITEM_HIDDEN_FROM_ALL_SHOPS("PRODUCT_ITEM_HIDDEN_FROM_ALL_SHOPS"),
+      @SerializedName("PRODUCT_ITEM_NOT_INCLUDED_IN_ANY_SHOP")
+      VALUE_PRODUCT_ITEM_NOT_INCLUDED_IN_ANY_SHOP("PRODUCT_ITEM_NOT_INCLUDED_IN_ANY_SHOP"),
       @SerializedName("PRODUCT_ITEM_NOT_VISIBLE")
       VALUE_PRODUCT_ITEM_NOT_VISIBLE("PRODUCT_ITEM_NOT_VISIBLE"),
       @SerializedName("PRODUCT_NOT_APPROVED")
@@ -3938,6 +3970,7 @@ public class ProductItem extends APINode {
     this.mOriginCountry = instance.mOriginCountry;
     this.mParentProductId = instance.mParentProductId;
     this.mPattern = instance.mPattern;
+    this.mPostConversionSignalBasedEnforcementAppealEligibility = instance.mPostConversionSignalBasedEnforcementAppealEligibility;
     this.mPrice = instance.mPrice;
     this.mProductCatalog = instance.mProductCatalog;
     this.mProductFeed = instance.mProductFeed;

@@ -55,6 +55,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdMonetizationProperty extends APINode {
+  @SerializedName("owner_business")
+  private Business mOwnerBusiness = null;
   @SerializedName("id")
   private String mId = null;
   protected static Gson gson = null;
@@ -283,6 +285,13 @@ public class AdMonetizationProperty extends APINode {
   }
 
 
+  public Business getFieldOwnerBusiness() {
+    if (mOwnerBusiness != null) {
+      mOwnerBusiness.context = getContext();
+    }
+    return mOwnerBusiness;
+  }
+
   public String getFieldId() {
     return mId;
   }
@@ -309,6 +318,7 @@ public class AdMonetizationProperty extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "omitted_results",
       "query_id",
       "results",
     };
@@ -475,6 +485,13 @@ public class AdMonetizationProperty extends APINode {
       return this;
     }
 
+    public APIRequestGetAdNetworkAnalytics requestOmittedResultsField () {
+      return this.requestOmittedResultsField(true);
+    }
+    public APIRequestGetAdNetworkAnalytics requestOmittedResultsField (boolean value) {
+      this.requestField("omitted_results", value);
+      return this;
+    }
     public APIRequestGetAdNetworkAnalytics requestQueryIdField () {
       return this.requestQueryIdField(true);
     }
@@ -691,6 +708,7 @@ public class AdMonetizationProperty extends APINode {
     public static final String[] FIELDS = {
       "data",
       "error",
+      "omitted_results",
       "query_id",
       "results",
       "status",
@@ -808,6 +826,13 @@ public class AdMonetizationProperty extends APINode {
       this.requestField("error", value);
       return this;
     }
+    public APIRequestGetAdNetworkAnalyticsResults requestOmittedResultsField () {
+      return this.requestOmittedResultsField(true);
+    }
+    public APIRequestGetAdNetworkAnalyticsResults requestOmittedResultsField (boolean value) {
+      this.requestField("omitted_results", value);
+      return this;
+    }
     public APIRequestGetAdNetworkAnalyticsResults requestQueryIdField () {
       return this.requestQueryIdField(true);
     }
@@ -842,6 +867,7 @@ public class AdMonetizationProperty extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "owner_business",
       "id",
     };
 
@@ -934,6 +960,13 @@ public class AdMonetizationProperty extends APINode {
       return this;
     }
 
+    public APIRequestGet requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGet requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -958,6 +991,7 @@ public class AdMonetizationProperty extends APINode {
   }
 
   public AdMonetizationProperty copyFrom(AdMonetizationProperty instance) {
+    this.mOwnerBusiness = instance.mOwnerBusiness;
     this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

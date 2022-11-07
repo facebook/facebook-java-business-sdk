@@ -20,6 +20,7 @@ package com.facebook.ads.sdk.serverside;
 import com.facebook.ads.sdk.APIConfig;
 import com.facebook.ads.sdk.APIContext;
 import com.facebook.ads.sdk.APIException;
+import com.facebook.ads.sdk.APINode;
 import com.facebook.ads.sdk.AdsPixel;
 import com.facebook.ads.sdk.AdsPixel.APIRequestCreateEvent;
 import com.facebook.ads.utils.CustomDataAdapter;
@@ -430,7 +431,7 @@ public class EventRequest {
     EventResponse response;
     if (httpServiceClient == null) {
       final APIRequestCreateEvent event = getPixelCreateEvent();
-      final AdsPixel pixel = event.execute();
+      final AdsPixel pixel = (AdsPixel) event.execute();
       response = gson.fromJson(pixel.getRawResponse(), EventResponse.class);
     } else {
       response = executeCustomHttpService(httpServiceClient);
@@ -459,7 +460,7 @@ public class EventRequest {
 
   private ListenableFuture<EventResponse> sendEventAsyncToCAPIAndCustomEndpoint() throws APIException {
     final AdsPixel.APIRequestCreateEvent event = getPixelCreateEvent();
-    final ListenableFuture<AdsPixel> pixelFuture = event.executeAsync();
+    final ListenableFuture pixelFuture = event.executeAsync();
     final ListenableFuture<CustomEndpointResponse> customEndpointFuture = endpointRequest.sendEventAsync(context, pixelId, data);
     // put CAPI endpoint and custom endpoint into a list of futures
     final ListenableFuture<List<Object>> futureOfList = Futures.allAsList(pixelFuture, customEndpointFuture);
@@ -488,7 +489,7 @@ public class EventRequest {
 
   private ListenableFuture<EventResponse> sendEventToCAPIOnly() throws APIException {
     final AdsPixel.APIRequestCreateEvent event = getPixelCreateEvent();
-    final ListenableFuture<AdsPixel> pixelFuture = event.executeAsync();
+    final ListenableFuture pixelFuture = event.executeAsync();
     return Futures.transformAsync(
       pixelFuture,
       new AsyncFunction<AdsPixel, EventResponse>() {

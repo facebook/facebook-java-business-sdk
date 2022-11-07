@@ -365,6 +365,10 @@ public class AdAccountAdVolume extends APINode {
       VALUE_AUDIENCE_EXPANSION("AUDIENCE_EXPANSION"),
       @SerializedName("AUTOFLOW_OPT_IN")
       VALUE_AUTOFLOW_OPT_IN("AUTOFLOW_OPT_IN"),
+      @SerializedName("AUTOMATIC_PLACEMENTS")
+      VALUE_AUTOMATIC_PLACEMENTS("AUTOMATIC_PLACEMENTS"),
+      @SerializedName("CAPI")
+      VALUE_CAPI("CAPI"),
       @SerializedName("CREATIVE_BADGE")
       VALUE_CREATIVE_BADGE("CREATIVE_BADGE"),
       @SerializedName("CREATIVE_FATIGUE")
@@ -379,6 +383,16 @@ public class AdAccountAdVolume extends APINode {
       VALUE_FRAGMENTATION("FRAGMENTATION"),
       @SerializedName("LEARNING_LIMITED")
       VALUE_LEARNING_LIMITED("LEARNING_LIMITED"),
+      @SerializedName("LOW_OUTCOME")
+      VALUE_LOW_OUTCOME("LOW_OUTCOME"),
+      @SerializedName("MULTI_TEXT")
+      VALUE_MULTI_TEXT("MULTI_TEXT"),
+      @SerializedName("MUSIC")
+      VALUE_MUSIC("MUSIC"),
+      @SerializedName("PREDICTIVE_CREATIVE_LIMITED")
+      VALUE_PREDICTIVE_CREATIVE_LIMITED("PREDICTIVE_CREATIVE_LIMITED"),
+      @SerializedName("REVERT")
+      VALUE_REVERT("REVERT"),
       @SerializedName("SYD_TEST_MODE")
       VALUE_SYD_TEST_MODE("SYD_TEST_MODE"),
       @SerializedName("TOP_ADSETS_WITH_ADS_UNDER_CAP")
@@ -387,6 +401,8 @@ public class AdAccountAdVolume extends APINode {
       VALUE_TOP_CAMPAIGNS_WITH_ADS_UNDER_CAP("TOP_CAMPAIGNS_WITH_ADS_UNDER_CAP"),
       @SerializedName("UNECONOMICAL_ADS_THROTTLING")
       VALUE_UNECONOMICAL_ADS_THROTTLING("UNECONOMICAL_ADS_THROTTLING"),
+      @SerializedName("UNUSED_BUDGET")
+      VALUE_UNUSED_BUDGET("UNUSED_BUDGET"),
       @SerializedName("ZERO_IMPRESSION")
       VALUE_ZERO_IMPRESSION("ZERO_IMPRESSION"),
       ;

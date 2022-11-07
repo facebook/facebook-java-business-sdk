@@ -57,6 +57,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdVideo extends APINode {
   @SerializedName("ad_breaks")
   private List<Long> mAdBreaks = null;
+  @SerializedName("admin_creator")
+  private User mAdminCreator = null;
   @SerializedName("audio_isrc")
   private Object mAudioIsrc = null;
   @SerializedName("backdated_time")
@@ -433,6 +435,13 @@ public class AdVideo extends APINode {
 
   public List<Long> getFieldAdBreaks() {
     return mAdBreaks;
+  }
+
+  public User getFieldAdminCreator() {
+    if (mAdminCreator != null) {
+      mAdminCreator.context = getContext();
+    }
+    return mAdminCreator;
   }
 
   public Object getFieldAudioIsrc() {
@@ -1480,6 +1489,7 @@ public class AdVideo extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
+      "owner_business",
       "page_token",
       "parent_page",
       "parking",
@@ -2291,6 +2301,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestOverallStarRatingField (boolean value) {
       this.requestField("overall_star_rating", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestPageTokenField () {
@@ -3624,6 +3641,7 @@ public class AdVideo extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
+      "owner_business",
       "page_token",
       "parent_page",
       "parking",
@@ -4435,6 +4453,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetSponsorTags requestOverallStarRatingField (boolean value) {
       this.requestField("overall_star_rating", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetSponsorTags requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
       return this;
     }
     public APIRequestGetSponsorTags requestPageTokenField () {
@@ -5615,6 +5640,7 @@ public class AdVideo extends APINode {
 
     public static final String[] FIELDS = {
       "ad_breaks",
+      "admin_creator",
       "audio_isrc",
       "backdated_time",
       "backdated_time_granularity",
@@ -5753,6 +5779,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGet requestAdBreaksField (boolean value) {
       this.requestField("ad_breaks", value);
+      return this;
+    }
+    public APIRequestGet requestAdminCreatorField () {
+      return this.requestAdminCreatorField(true);
+    }
+    public APIRequestGet requestAdminCreatorField (boolean value) {
+      this.requestField("admin_creator", value);
       return this;
     }
     public APIRequestGet requestAudioIsrcField () {
@@ -6440,6 +6473,8 @@ public class AdVideo extends APINode {
       VALUE_BROADCAST("BROADCAST"),
       @SerializedName("BULLETIN_ARTICLE_AUDIO")
       VALUE_BULLETIN_ARTICLE_AUDIO("BULLETIN_ARTICLE_AUDIO"),
+      @SerializedName("CANDIDATE_VIDEOS_DELETED")
+      VALUE_CANDIDATE_VIDEOS_DELETED("CANDIDATE_VIDEOS_DELETED"),
       @SerializedName("CANVAS")
       VALUE_CANVAS("CANVAS"),
       @SerializedName("CFC_VIDEO")
@@ -6472,6 +6507,8 @@ public class AdVideo extends APINode {
       VALUE_DIRECT_INBOX("DIRECT_INBOX"),
       @SerializedName("DIRECT_INBOX_REACTION")
       VALUE_DIRECT_INBOX_REACTION("DIRECT_INBOX_REACTION"),
+      @SerializedName("DROPS_SHOPPING_EVENT_PAGE")
+      VALUE_DROPS_SHOPPING_EVENT_PAGE("DROPS_SHOPPING_EVENT_PAGE"),
       @SerializedName("DYNAMIC_ITEM_DISPLAY_BUNDLE")
       VALUE_DYNAMIC_ITEM_DISPLAY_BUNDLE("DYNAMIC_ITEM_DISPLAY_BUNDLE"),
       @SerializedName("DYNAMIC_ITEM_VIDEO")
@@ -6496,6 +6533,8 @@ public class AdVideo extends APINode {
       VALUE_FB_SHORTS_GROUP_POST("FB_SHORTS_GROUP_POST"),
       @SerializedName("FB_SHORTS_PMV_POST")
       VALUE_FB_SHORTS_PMV_POST("FB_SHORTS_PMV_POST"),
+      @SerializedName("FB_SHORTS_PMV_POST_NO_NEWSFEED_NOR_TIMELINE")
+      VALUE_FB_SHORTS_PMV_POST_NO_NEWSFEED_NOR_TIMELINE("FB_SHORTS_PMV_POST_NO_NEWSFEED_NOR_TIMELINE"),
       @SerializedName("FB_SHORTS_POST")
       VALUE_FB_SHORTS_POST("FB_SHORTS_POST"),
       @SerializedName("FB_SHORTS_REMIX_POST")
@@ -6624,6 +6663,10 @@ public class AdVideo extends APINode {
       VALUE_PAID_CONTENT_VIDEO("PAID_CONTENT_VIDEO"),
       @SerializedName("PAID_CONTENT_VIDEO__POST")
       VALUE_PAID_CONTENT_VIDEO__POST("PAID_CONTENT_VIDEO__POST"),
+      @SerializedName("PAPER_DOCUMENT_AUDIO")
+      VALUE_PAPER_DOCUMENT_AUDIO("PAPER_DOCUMENT_AUDIO"),
+      @SerializedName("PAPER_DOCUMENT_VIDEO")
+      VALUE_PAPER_DOCUMENT_VIDEO("PAPER_DOCUMENT_VIDEO"),
       @SerializedName("PIXELCLOUD")
       VALUE_PIXELCLOUD("PIXELCLOUD"),
       @SerializedName("PODCAST_HIGHLIGHT")
@@ -6929,6 +6972,27 @@ public class AdVideo extends APINode {
       }
   }
 
+  public static enum EnumVideoState {
+      @SerializedName("DRAFT")
+      VALUE_DRAFT("DRAFT"),
+      @SerializedName("PUBLISHED")
+      VALUE_PUBLISHED("PUBLISHED"),
+      @SerializedName("SCHEDULED")
+      VALUE_SCHEDULED("SCHEDULED"),
+      ;
+
+      private String value;
+
+      private EnumVideoState(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumBackdatedTimeGranularity {
       @SerializedName("day")
       VALUE_DAY("day"),
@@ -6972,6 +7036,7 @@ public class AdVideo extends APINode {
 
   public AdVideo copyFrom(AdVideo instance) {
     this.mAdBreaks = instance.mAdBreaks;
+    this.mAdminCreator = instance.mAdminCreator;
     this.mAudioIsrc = instance.mAudioIsrc;
     this.mBackdatedTime = instance.mBackdatedTime;
     this.mBackdatedTimeGranularity = instance.mBackdatedTimeGranularity;

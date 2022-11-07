@@ -65,6 +65,8 @@ public class PrivateLiftStudyInstance extends APINode {
   private String mId = null;
   @SerializedName("latest_status_update_time")
   private String mLatestStatusUpdateTime = null;
+  @SerializedName("run_id")
+  private String mRunId = null;
   @SerializedName("server_ips")
   private List<String> mServerIps = null;
   @SerializedName("status")
@@ -309,6 +311,10 @@ public class PrivateLiftStudyInstance extends APINode {
     return mLatestStatusUpdateTime;
   }
 
+  public String getFieldRunId() {
+    return mRunId;
+  }
+
   public List<String> getFieldServerIps() {
     return mServerIps;
   }
@@ -339,6 +345,7 @@ public class PrivateLiftStudyInstance extends APINode {
       "feature_list",
       "id",
       "latest_status_update_time",
+      "run_id",
       "server_ips",
       "status",
       "tier",
@@ -466,6 +473,13 @@ public class PrivateLiftStudyInstance extends APINode {
     }
     public APIRequestGet requestLatestStatusUpdateTimeField (boolean value) {
       this.requestField("latest_status_update_time", value);
+      return this;
+    }
+    public APIRequestGet requestRunIdField () {
+      return this.requestRunIdField(true);
+    }
+    public APIRequestGet requestRunIdField (boolean value) {
+      this.requestField("run_id", value);
       return this;
     }
     public APIRequestGet requestServerIpsField () {
@@ -608,6 +622,8 @@ public class PrivateLiftStudyInstance extends APINode {
   public static enum EnumOperation {
       @SerializedName("AGGREGATE")
       VALUE_AGGREGATE("AGGREGATE"),
+      @SerializedName("CANCEL")
+      VALUE_CANCEL("CANCEL"),
       @SerializedName("COMPUTE")
       VALUE_COMPUTE("COMPUTE"),
       @SerializedName("ID_MATCH")
@@ -650,6 +666,7 @@ public class PrivateLiftStudyInstance extends APINode {
     this.mFeatureList = instance.mFeatureList;
     this.mId = instance.mId;
     this.mLatestStatusUpdateTime = instance.mLatestStatusUpdateTime;
+    this.mRunId = instance.mRunId;
     this.mServerIps = instance.mServerIps;
     this.mStatus = instance.mStatus;
     this.mTier = instance.mTier;

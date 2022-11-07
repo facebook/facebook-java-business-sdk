@@ -69,6 +69,8 @@ public class Canvas extends APINode {
   private AdVideo mCollectionHeroVideo = null;
   @SerializedName("collection_thumbnails")
   private List<CanvasCollectionThumbnail> mCollectionThumbnails = null;
+  @SerializedName("dynamic_setting")
+  private CanvasDynamicSetting mDynamicSetting = null;
   @SerializedName("element_payload")
   private String mElementPayload = null;
   @SerializedName("elements")
@@ -92,7 +94,7 @@ public class Canvas extends APINode {
   @SerializedName("property_list")
   private List<String> mPropertyList = null;
   @SerializedName("source_template")
-  private CanvasTemplate mSourceTemplate = null;
+  private Object mSourceTemplate = null;
   @SerializedName("store_url")
   private String mStoreUrl = null;
   @SerializedName("style_list")
@@ -316,8 +318,8 @@ public class Canvas extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGetPreviews getPreviews() {
-    return new APIRequestGetPreviews(this.getPrefixedId().toString(), context);
+  public APIRequestGetPreViews getPreViews() {
+    return new APIRequestGetPreViews(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGet get() {
@@ -361,6 +363,13 @@ public class Canvas extends APINode {
 
   public List<CanvasCollectionThumbnail> getFieldCollectionThumbnails() {
     return mCollectionThumbnails;
+  }
+
+  public CanvasDynamicSetting getFieldDynamicSetting() {
+    if (mDynamicSetting != null) {
+      mDynamicSetting.context = getContext();
+    }
+    return mDynamicSetting;
   }
 
   public String getFieldElementPayload() {
@@ -413,10 +422,7 @@ public class Canvas extends APINode {
     return mPropertyList;
   }
 
-  public CanvasTemplate getFieldSourceTemplate() {
-    if (mSourceTemplate != null) {
-      mSourceTemplate.context = getContext();
-    }
+  public Object getFieldSourceTemplate() {
     return mSourceTemplate;
   }
 
@@ -450,7 +456,7 @@ public class Canvas extends APINode {
 
 
 
-  public static class APIRequestGetPreviews extends APIRequest<TextWithEntities> {
+  public static class APIRequestGetPreViews extends APIRequest<TextWithEntities> {
 
     APINodeList<TextWithEntities> lastResponse = null;
     @Override
@@ -492,7 +498,7 @@ public class Canvas extends APINode {
         new Function<ResponseWrapper, APINodeList<TextWithEntities>>() {
            public APINodeList<TextWithEntities> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetPreviews.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestGetPreViews.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -501,37 +507,37 @@ public class Canvas extends APINode {
       );
     };
 
-    public APIRequestGetPreviews(String nodeId, APIContext context) {
+    public APIRequestGetPreViews(String nodeId, APIContext context) {
       super(context, nodeId, "/previews", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGetPreviews setParam(String param, Object value) {
+    public APIRequestGetPreViews setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGetPreviews setParams(Map<String, Object> params) {
+    public APIRequestGetPreViews setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGetPreviews setUserIds (List<Long> userIds) {
+    public APIRequestGetPreViews setUserIds (List<Long> userIds) {
       this.setParam("user_ids", userIds);
       return this;
     }
-    public APIRequestGetPreviews setUserIds (String userIds) {
+    public APIRequestGetPreViews setUserIds (String userIds) {
       this.setParam("user_ids", userIds);
       return this;
     }
 
-    public APIRequestGetPreviews requestAllFields () {
+    public APIRequestGetPreViews requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGetPreviews requestAllFields (boolean value) {
+    public APIRequestGetPreViews requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -539,12 +545,12 @@ public class Canvas extends APINode {
     }
 
     @Override
-    public APIRequestGetPreviews requestFields (List<String> fields) {
+    public APIRequestGetPreViews requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGetPreviews requestFields (List<String> fields, boolean value) {
+    public APIRequestGetPreViews requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -552,21 +558,21 @@ public class Canvas extends APINode {
     }
 
     @Override
-    public APIRequestGetPreviews requestField (String field) {
+    public APIRequestGetPreViews requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGetPreviews requestField (String field, boolean value) {
+    public APIRequestGetPreViews requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
-    public APIRequestGetPreviews requestTextField () {
+    public APIRequestGetPreViews requestTextField () {
       return this.requestTextField(true);
     }
-    public APIRequestGetPreviews requestTextField (boolean value) {
+    public APIRequestGetPreViews requestTextField (boolean value) {
       this.requestField("text", value);
       return this;
     }
@@ -590,6 +596,7 @@ public class Canvas extends APINode {
       "collection_hero_image",
       "collection_hero_video",
       "collection_thumbnails",
+      "dynamic_setting",
       "element_payload",
       "elements",
       "fb_body_elements",
@@ -747,6 +754,13 @@ public class Canvas extends APINode {
     }
     public APIRequestGet requestCollectionThumbnailsField (boolean value) {
       this.requestField("collection_thumbnails", value);
+      return this;
+    }
+    public APIRequestGet requestDynamicSettingField () {
+      return this.requestDynamicSettingField(true);
+    }
+    public APIRequestGet requestDynamicSettingField (boolean value) {
+      this.requestField("dynamic_setting", value);
       return this;
     }
     public APIRequestGet requestElementPayloadField () {
@@ -1068,6 +1082,7 @@ public class Canvas extends APINode {
     this.mCollectionHeroImage = instance.mCollectionHeroImage;
     this.mCollectionHeroVideo = instance.mCollectionHeroVideo;
     this.mCollectionThumbnails = instance.mCollectionThumbnails;
+    this.mDynamicSetting = instance.mDynamicSetting;
     this.mElementPayload = instance.mElementPayload;
     this.mElements = instance.mElements;
     this.mFbBodyElements = instance.mFbBodyElements;
