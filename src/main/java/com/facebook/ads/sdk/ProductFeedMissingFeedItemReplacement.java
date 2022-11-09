@@ -59,8 +59,6 @@ public class ProductFeedMissingFeedItemReplacement extends APINode {
   private Object mHomeListing = null;
   @SerializedName("product_item")
   private Object mProductItem = null;
-  @SerializedName("store_product_item")
-  private Object mStoreProductItem = null;
   @SerializedName("vehicle")
   private Object mVehicle = null;
   protected static Gson gson = null;
@@ -232,15 +230,6 @@ public class ProductFeedMissingFeedItemReplacement extends APINode {
     return this;
   }
 
-  public Object getFieldStoreProductItem() {
-    return mStoreProductItem;
-  }
-
-  public ProductFeedMissingFeedItemReplacement setFieldStoreProductItem(Object value) {
-    this.mStoreProductItem = value;
-    return this;
-  }
-
   public Object getFieldVehicle() {
     return mVehicle;
   }
@@ -269,7 +258,6 @@ public class ProductFeedMissingFeedItemReplacement extends APINode {
   public ProductFeedMissingFeedItemReplacement copyFrom(ProductFeedMissingFeedItemReplacement instance) {
     this.mHomeListing = instance.mHomeListing;
     this.mProductItem = instance.mProductItem;
-    this.mStoreProductItem = instance.mStoreProductItem;
     this.mVehicle = instance.mVehicle;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

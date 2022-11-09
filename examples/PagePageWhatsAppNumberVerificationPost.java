@@ -25,17 +25,18 @@
 import java.io.File;
 import java.util.Arrays;
 
-public class AdCampaignGroupActivityNode {
+public class PagePageWhatsAppNumberVerificationPost {
   public static void main (String args[]) throws APIException {
 
     String access_token = "<ACCESS_TOKEN>";
     String app_secret = "<APP_SECRET>";
     String app_id = "<APP_ID>";
-    String id = "<ACTIVITY_ID>";
+    String id = "<PAGE_ID>";
     APIContext context = new APIContext(access_token).enableDebug(true);
 
-    new Campaign(id, context).get()
-      .requestField("time_created")
+    new Page(id, context).createPageWhatsappNumberVerification()
+      .setWhatsappNumber("123456789")
+      .setVerificationCode("12345")
       .execute();
 
   }

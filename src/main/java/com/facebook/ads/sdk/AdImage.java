@@ -75,6 +75,8 @@ public class AdImage extends APINode {
   private Long mOriginalHeight = null;
   @SerializedName("original_width")
   private Long mOriginalWidth = null;
+  @SerializedName("owner_business")
+  private Business mOwnerBusiness = null;
   @SerializedName("permalink_url")
   private String mPermalinkUrl = null;
   @SerializedName("status")
@@ -341,6 +343,13 @@ public class AdImage extends APINode {
     return mOriginalWidth;
   }
 
+  public Business getFieldOwnerBusiness() {
+    if (mOwnerBusiness != null) {
+      mOwnerBusiness.context = getContext();
+    }
+    return mOwnerBusiness;
+  }
+
   public String getFieldPermalinkUrl() {
     return mPermalinkUrl;
   }
@@ -388,6 +397,7 @@ public class AdImage extends APINode {
       "name",
       "original_height",
       "original_width",
+      "owner_business",
       "permalink_url",
       "status",
       "updated_time",
@@ -555,6 +565,13 @@ public class AdImage extends APINode {
       this.requestField("original_width", value);
       return this;
     }
+    public APIRequestGet requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGet requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
+      return this;
+    }
     public APIRequestGet requestPermalinkUrlField () {
       return this.requestPermalinkUrlField(true);
     }
@@ -645,6 +662,7 @@ public class AdImage extends APINode {
     this.mName = instance.mName;
     this.mOriginalHeight = instance.mOriginalHeight;
     this.mOriginalWidth = instance.mOriginalWidth;
+    this.mOwnerBusiness = instance.mOwnerBusiness;
     this.mPermalinkUrl = instance.mPermalinkUrl;
     this.mStatus = instance.mStatus;
     this.mUpdatedTime = instance.mUpdatedTime;

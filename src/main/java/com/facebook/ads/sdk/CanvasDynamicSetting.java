@@ -54,72 +54,68 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class PageAdminNote extends APINode {
-  @SerializedName("body")
-  private String mBody = null;
-  @SerializedName("from")
-  private Page mFrom = null;
+public class CanvasDynamicSetting extends APINode {
+  @SerializedName("child_documents")
+  private List<Canvas> mChildDocuments = null;
+  @SerializedName("product_set_id")
+  private String mProductSetId = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("note_label")
-  private String mNoteLabel = null;
-  @SerializedName("user")
-  private User mUser = null;
   protected static Gson gson = null;
 
-  PageAdminNote() {
+  CanvasDynamicSetting() {
   }
 
-  public PageAdminNote(Long id, APIContext context) {
+  public CanvasDynamicSetting(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public PageAdminNote(String id, APIContext context) {
+  public CanvasDynamicSetting(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public PageAdminNote fetch() throws APIException{
-    PageAdminNote newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public CanvasDynamicSetting fetch() throws APIException{
+    CanvasDynamicSetting newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static PageAdminNote fetchById(Long id, APIContext context) throws APIException {
+  public static CanvasDynamicSetting fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<PageAdminNote> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<CanvasDynamicSetting> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static PageAdminNote fetchById(String id, APIContext context) throws APIException {
+  public static CanvasDynamicSetting fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<PageAdminNote> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<CanvasDynamicSetting> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<PageAdminNote> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<PageAdminNote>)(
-      new APIRequest<PageAdminNote>(context, "", "/", "GET", PageAdminNote.getParser())
+  public static APINodeList<CanvasDynamicSetting> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<CanvasDynamicSetting>)(
+      new APIRequest<CanvasDynamicSetting>(context, "", "/", "GET", CanvasDynamicSetting.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<PageAdminNote>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<CanvasDynamicSetting>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", PageAdminNote.getParser())
+      new APIRequest(context, "", "/", "GET", CanvasDynamicSetting.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -132,12 +128,12 @@ public class PageAdminNote extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PageAdminNote loadJSON(String json, APIContext context, String header) {
-    PageAdminNote pageAdminNote = getGson().fromJson(json, PageAdminNote.class);
+  public static CanvasDynamicSetting loadJSON(String json, APIContext context, String header) {
+    CanvasDynamicSetting canvasDynamicSetting = getGson().fromJson(json, CanvasDynamicSetting.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(pageAdminNote.toString());
+      JsonElement o2 = parser.parse(canvasDynamicSetting.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -147,14 +143,14 @@ public class PageAdminNote extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    pageAdminNote.context = context;
-    pageAdminNote.rawValue = json;
-    pageAdminNote.header = header;
-    return pageAdminNote;
+    canvasDynamicSetting.context = context;
+    canvasDynamicSetting.rawValue = json;
+    canvasDynamicSetting.header = header;
+    return canvasDynamicSetting;
   }
 
-  public static APINodeList<PageAdminNote> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<PageAdminNote> pageAdminNotes = new APINodeList<PageAdminNote>(request, json, header);
+  public static APINodeList<CanvasDynamicSetting> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CanvasDynamicSetting> canvasDynamicSettings = new APINodeList<CanvasDynamicSetting>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -165,9 +161,9 @@ public class PageAdminNote extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          pageAdminNotes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          canvasDynamicSettings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return pageAdminNotes;
+        return canvasDynamicSettings;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -177,20 +173,20 @@ public class PageAdminNote extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                pageAdminNotes.setCursors(before, after);
+                canvasDynamicSettings.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            pageAdminNotes.setPaging(previous, next);
+            canvasDynamicSettings.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              pageAdminNotes.setAppSecret(context.getAppSecretProof());
+              canvasDynamicSettings.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              pageAdminNotes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              canvasDynamicSettings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -201,23 +197,23 @@ public class PageAdminNote extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  pageAdminNotes.add(loadJSON(entry.getValue().toString(), context, header));
+                  canvasDynamicSettings.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              pageAdminNotes.add(loadJSON(obj.toString(), context, header));
+              canvasDynamicSettings.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return pageAdminNotes;
+          return canvasDynamicSettings;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              pageAdminNotes.add(loadJSON(entry.getValue().toString(), context, header));
+              canvasDynamicSettings.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return pageAdminNotes;
+          return canvasDynamicSettings;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -234,20 +230,20 @@ public class PageAdminNote extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              pageAdminNotes.add(loadJSON(value.toString(), context, header));
+              canvasDynamicSettings.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return pageAdminNotes;
+            return canvasDynamicSettings;
           }
 
           // Sixth, check if it's pure JsonObject
-          pageAdminNotes.clear();
-          pageAdminNotes.add(loadJSON(json, context, header));
-          return pageAdminNotes;
+          canvasDynamicSettings.clear();
+          canvasDynamicSettings.add(loadJSON(json, context, header));
+          return canvasDynamicSettings;
         }
       }
     } catch (Exception e) {
@@ -279,78 +275,62 @@ public class PageAdminNote extends APINode {
   }
 
 
-  public String getFieldBody() {
-    return mBody;
+  public List<Canvas> getFieldChildDocuments() {
+    return mChildDocuments;
   }
 
-  public Page getFieldFrom() {
-    if (mFrom != null) {
-      mFrom.context = getContext();
-    }
-    return mFrom;
+  public String getFieldProductSetId() {
+    return mProductSetId;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-  public String getFieldNoteLabel() {
-    return mNoteLabel;
-  }
-
-  public User getFieldUser() {
-    if (mUser != null) {
-      mUser.context = getContext();
-    }
-    return mUser;
-  }
 
 
+  public static class APIRequestGet extends APIRequest<CanvasDynamicSetting> {
 
-  public static class APIRequestGet extends APIRequest<PageAdminNote> {
-
-    PageAdminNote lastResponse = null;
+    CanvasDynamicSetting lastResponse = null;
     @Override
-    public PageAdminNote getLastResponse() {
+    public CanvasDynamicSetting getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "body",
-      "from",
+      "child_documents",
+      "product_set_id",
       "id",
-      "note_label",
-      "user",
     };
 
     @Override
-    public PageAdminNote parseResponse(String response, String header) throws APIException {
-      return PageAdminNote.parseResponse(response, getContext(), this, header).head();
+    public CanvasDynamicSetting parseResponse(String response, String header) throws APIException {
+      return CanvasDynamicSetting.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public PageAdminNote execute() throws APIException {
+    public CanvasDynamicSetting execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public PageAdminNote execute(Map<String, Object> extraParams) throws APIException {
+    public CanvasDynamicSetting execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<PageAdminNote> executeAsync() throws APIException {
+    public ListenableFuture<CanvasDynamicSetting> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<PageAdminNote> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<CanvasDynamicSetting> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, PageAdminNote>() {
-           public PageAdminNote apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, CanvasDynamicSetting>() {
+           public CanvasDynamicSetting apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -414,18 +394,18 @@ public class PageAdminNote extends APINode {
       return this;
     }
 
-    public APIRequestGet requestBodyField () {
-      return this.requestBodyField(true);
+    public APIRequestGet requestChildDocumentsField () {
+      return this.requestChildDocumentsField(true);
     }
-    public APIRequestGet requestBodyField (boolean value) {
-      this.requestField("body", value);
+    public APIRequestGet requestChildDocumentsField (boolean value) {
+      this.requestField("child_documents", value);
       return this;
     }
-    public APIRequestGet requestFromField () {
-      return this.requestFromField(true);
+    public APIRequestGet requestProductSetIdField () {
+      return this.requestProductSetIdField(true);
     }
-    public APIRequestGet requestFromField (boolean value) {
-      this.requestField("from", value);
+    public APIRequestGet requestProductSetIdField (boolean value) {
+      this.requestField("product_set_id", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -433,20 +413,6 @@ public class PageAdminNote extends APINode {
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestNoteLabelField () {
-      return this.requestNoteLabelField(true);
-    }
-    public APIRequestGet requestNoteLabelField (boolean value) {
-      this.requestField("note_label", value);
-      return this;
-    }
-    public APIRequestGet requestUserField () {
-      return this.requestUserField(true);
-    }
-    public APIRequestGet requestUserField (boolean value) {
-      this.requestField("user", value);
       return this;
     }
   }
@@ -465,21 +431,19 @@ public class PageAdminNote extends APINode {
     return gson;
   }
 
-  public PageAdminNote copyFrom(PageAdminNote instance) {
-    this.mBody = instance.mBody;
-    this.mFrom = instance.mFrom;
+  public CanvasDynamicSetting copyFrom(CanvasDynamicSetting instance) {
+    this.mChildDocuments = instance.mChildDocuments;
+    this.mProductSetId = instance.mProductSetId;
     this.mId = instance.mId;
-    this.mNoteLabel = instance.mNoteLabel;
-    this.mUser = instance.mUser;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<PageAdminNote> getParser() {
-    return new APIRequest.ResponseParser<PageAdminNote>() {
-      public APINodeList<PageAdminNote> parseResponse(String response, APIContext context, APIRequest<PageAdminNote> request, String header) throws MalformedResponseException {
-        return PageAdminNote.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<CanvasDynamicSetting> getParser() {
+    return new APIRequest.ResponseParser<CanvasDynamicSetting>() {
+      public APINodeList<CanvasDynamicSetting> parseResponse(String response, APIContext context, APIRequest<CanvasDynamicSetting> request, String header) throws MalformedResponseException {
+        return CanvasDynamicSetting.parseResponse(response, context, request, header);
       }
     };
   }

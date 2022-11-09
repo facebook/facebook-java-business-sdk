@@ -296,12 +296,20 @@ public class InstagramInsightsResult extends APINode {
       VALUE_ENGAGEMENT("engagement"),
       @SerializedName("exits")
       VALUE_EXITS("exits"),
+      @SerializedName("follows")
+      VALUE_FOLLOWS("follows"),
       @SerializedName("impressions")
       VALUE_IMPRESSIONS("impressions"),
       @SerializedName("likes")
       VALUE_LIKES("likes"),
+      @SerializedName("navigation")
+      VALUE_NAVIGATION("navigation"),
       @SerializedName("plays")
       VALUE_PLAYS("plays"),
+      @SerializedName("profile_activity")
+      VALUE_PROFILE_ACTIVITY("profile_activity"),
+      @SerializedName("profile_visits")
+      VALUE_PROFILE_VISITS("profile_visits"),
       @SerializedName("reach")
       VALUE_REACH("reach"),
       @SerializedName("replies")
@@ -314,6 +322,8 @@ public class InstagramInsightsResult extends APINode {
       VALUE_TAPS_BACK("taps_back"),
       @SerializedName("taps_forward")
       VALUE_TAPS_FORWARD("taps_forward"),
+      @SerializedName("total_interactions")
+      VALUE_TOTAL_INTERACTIONS("total_interactions"),
       @SerializedName("video_views")
       VALUE_VIDEO_VIEWS("video_views"),
       ;

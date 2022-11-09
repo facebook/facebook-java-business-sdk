@@ -61,6 +61,8 @@ public class Shop extends APINode {
   private String mId = null;
   @SerializedName("ig_sales_channel")
   private Object mIgSalesChannel = null;
+  @SerializedName("workspace")
+  private Object mWorkspace = null;
   protected static Gson gson = null;
 
   Shop() {
@@ -287,6 +289,10 @@ public class Shop extends APINode {
     return mIgSalesChannel;
   }
 
+  public Object getFieldWorkspace() {
+    return mWorkspace;
+  }
+
 
 
   public static class APIRequestGet extends APIRequest<Shop> {
@@ -303,6 +309,7 @@ public class Shop extends APINode {
       "fb_sales_channel",
       "id",
       "ig_sales_channel",
+      "workspace",
     };
 
     @Override
@@ -415,6 +422,13 @@ public class Shop extends APINode {
       this.requestField("ig_sales_channel", value);
       return this;
     }
+    public APIRequestGet requestWorkspaceField () {
+      return this.requestWorkspaceField(true);
+    }
+    public APIRequestGet requestWorkspaceField (boolean value) {
+      this.requestField("workspace", value);
+      return this;
+    }
   }
 
 
@@ -435,6 +449,7 @@ public class Shop extends APINode {
     this.mFbSalesChannel = instance.mFbSalesChannel;
     this.mId = instance.mId;
     this.mIgSalesChannel = instance.mIgSalesChannel;
+    this.mWorkspace = instance.mWorkspace;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

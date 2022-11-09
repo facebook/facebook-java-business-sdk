@@ -351,6 +351,7 @@ public class AdStudyCell extends APINode {
       "capabilities",
       "created_time",
       "currency",
+      "custom_audience_info",
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
@@ -372,6 +373,7 @@ public class AdStudyCell extends APINode {
       "is_personal",
       "is_prepay_account",
       "is_tax_id_required",
+      "liable_address",
       "line_numbers",
       "media_agency",
       "min_campaign_group_spend_cap",
@@ -379,9 +381,12 @@ public class AdStudyCell extends APINode {
       "name",
       "offsite_pixels_tos_accepted",
       "owner",
+      "owner_business",
       "partner",
       "rf_spec",
+      "send_bill_to_address",
       "show_checkout_experience",
+      "sold_to_address",
       "spend_cap",
       "tax_id",
       "tax_id_status",
@@ -392,6 +397,7 @@ public class AdStudyCell extends APINode {
       "tos_accepted",
       "user_tasks",
       "user_tos_accepted",
+      "viewable_business",
     };
 
     @Override
@@ -616,6 +622,13 @@ public class AdStudyCell extends APINode {
       this.requestField("currency", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestCustomAudienceInfoField () {
+      return this.requestCustomAudienceInfoField(true);
+    }
+    public APIRequestGetAdAccounts requestCustomAudienceInfoField (boolean value) {
+      this.requestField("custom_audience_info", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestDisableReasonField () {
       return this.requestDisableReasonField(true);
     }
@@ -763,6 +776,13 @@ public class AdStudyCell extends APINode {
       this.requestField("is_tax_id_required", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestLiableAddressField () {
+      return this.requestLiableAddressField(true);
+    }
+    public APIRequestGetAdAccounts requestLiableAddressField (boolean value) {
+      this.requestField("liable_address", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestLineNumbersField () {
       return this.requestLineNumbersField(true);
     }
@@ -812,6 +832,13 @@ public class AdStudyCell extends APINode {
       this.requestField("owner", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetAdAccounts requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestPartnerField () {
       return this.requestPartnerField(true);
     }
@@ -826,11 +853,25 @@ public class AdStudyCell extends APINode {
       this.requestField("rf_spec", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestSendBillToAddressField () {
+      return this.requestSendBillToAddressField(true);
+    }
+    public APIRequestGetAdAccounts requestSendBillToAddressField (boolean value) {
+      this.requestField("send_bill_to_address", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestShowCheckoutExperienceField () {
       return this.requestShowCheckoutExperienceField(true);
     }
     public APIRequestGetAdAccounts requestShowCheckoutExperienceField (boolean value) {
       this.requestField("show_checkout_experience", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestSoldToAddressField () {
+      return this.requestSoldToAddressField(true);
+    }
+    public APIRequestGetAdAccounts requestSoldToAddressField (boolean value) {
+      this.requestField("sold_to_address", value);
       return this;
     }
     public APIRequestGetAdAccounts requestSpendCapField () {
@@ -901,6 +942,13 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetAdAccounts requestUserTosAcceptedField (boolean value) {
       this.requestField("user_tos_accepted", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestViewableBusinessField () {
+      return this.requestViewableBusinessField(true);
+    }
+    public APIRequestGetAdAccounts requestViewableBusinessField (boolean value) {
+      this.requestField("viewable_business", value);
       return this;
     }
   }
@@ -1464,6 +1512,7 @@ public class AdStudyCell extends APINode {
       "ad_strategy_group_id",
       "ad_strategy_id",
       "adlabels",
+      "benchmark_report_count",
       "bid_strategy",
       "boosted_object_id",
       "brand_lift_studies",
@@ -1476,6 +1525,7 @@ public class AdStudyCell extends APINode {
       "created_time",
       "daily_budget",
       "effective_status",
+      "has_secondary_skadnetwork_reporting",
       "id",
       "is_skadnetwork_attribution",
       "issues_info",
@@ -1484,6 +1534,7 @@ public class AdStudyCell extends APINode {
       "name",
       "objective",
       "pacing_type",
+      "primary_attribution",
       "promoted_object",
       "recommendations",
       "smart_promotion_type",
@@ -1617,6 +1668,13 @@ public class AdStudyCell extends APINode {
       this.requestField("adlabels", value);
       return this;
     }
+    public APIRequestGetCampaigns requestBenchmarkReportCountField () {
+      return this.requestBenchmarkReportCountField(true);
+    }
+    public APIRequestGetCampaigns requestBenchmarkReportCountField (boolean value) {
+      this.requestField("benchmark_report_count", value);
+      return this;
+    }
     public APIRequestGetCampaigns requestBidStrategyField () {
       return this.requestBidStrategyField(true);
     }
@@ -1701,6 +1759,13 @@ public class AdStudyCell extends APINode {
       this.requestField("effective_status", value);
       return this;
     }
+    public APIRequestGetCampaigns requestHasSecondarySkadnetworkReportingField () {
+      return this.requestHasSecondarySkadnetworkReportingField(true);
+    }
+    public APIRequestGetCampaigns requestHasSecondarySkadnetworkReportingField (boolean value) {
+      this.requestField("has_secondary_skadnetwork_reporting", value);
+      return this;
+    }
     public APIRequestGetCampaigns requestIdField () {
       return this.requestIdField(true);
     }
@@ -1755,6 +1820,13 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetCampaigns requestPacingTypeField (boolean value) {
       this.requestField("pacing_type", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestPrimaryAttributionField () {
+      return this.requestPrimaryAttributionField(true);
+    }
+    public APIRequestGetCampaigns requestPrimaryAttributionField (boolean value) {
+      this.requestField("primary_attribution", value);
       return this;
     }
     public APIRequestGetCampaigns requestPromotedObjectField () {

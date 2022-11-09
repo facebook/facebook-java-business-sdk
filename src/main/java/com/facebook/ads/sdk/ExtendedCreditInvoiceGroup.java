@@ -57,6 +57,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class ExtendedCreditInvoiceGroup extends APINode {
   @SerializedName("auto_enroll")
   private Boolean mAutoEnroll = null;
+  @SerializedName("bill_to_address")
+  private CRMAddress mBillToAddress = null;
   @SerializedName("customer_po_number")
   private String mCustomerPoNumber = null;
   @SerializedName("email")
@@ -65,8 +67,12 @@ public class ExtendedCreditInvoiceGroup extends APINode {
   private List<String> mEmails = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("liable_address")
+  private CRMAddress mLiableAddress = null;
   @SerializedName("name")
   private String mName = null;
+  @SerializedName("sold_to_address")
+  private CRMAddress mSoldToAddress = null;
   protected static Gson gson = null;
 
   ExtendedCreditInvoiceGroup() {
@@ -305,6 +311,13 @@ public class ExtendedCreditInvoiceGroup extends APINode {
     return mAutoEnroll;
   }
 
+  public CRMAddress getFieldBillToAddress() {
+    if (mBillToAddress != null) {
+      mBillToAddress.context = getContext();
+    }
+    return mBillToAddress;
+  }
+
   public String getFieldCustomerPoNumber() {
     return mCustomerPoNumber;
   }
@@ -321,8 +334,22 @@ public class ExtendedCreditInvoiceGroup extends APINode {
     return mId;
   }
 
+  public CRMAddress getFieldLiableAddress() {
+    if (mLiableAddress != null) {
+      mLiableAddress.context = getContext();
+    }
+    return mLiableAddress;
+  }
+
   public String getFieldName() {
     return mName;
+  }
+
+  public CRMAddress getFieldSoldToAddress() {
+    if (mSoldToAddress != null) {
+      mSoldToAddress.context = getContext();
+    }
+    return mSoldToAddress;
   }
 
 
@@ -467,6 +494,7 @@ public class ExtendedCreditInvoiceGroup extends APINode {
       "capabilities",
       "created_time",
       "currency",
+      "custom_audience_info",
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
@@ -488,6 +516,7 @@ public class ExtendedCreditInvoiceGroup extends APINode {
       "is_personal",
       "is_prepay_account",
       "is_tax_id_required",
+      "liable_address",
       "line_numbers",
       "media_agency",
       "min_campaign_group_spend_cap",
@@ -495,9 +524,12 @@ public class ExtendedCreditInvoiceGroup extends APINode {
       "name",
       "offsite_pixels_tos_accepted",
       "owner",
+      "owner_business",
       "partner",
       "rf_spec",
+      "send_bill_to_address",
       "show_checkout_experience",
+      "sold_to_address",
       "spend_cap",
       "tax_id",
       "tax_id_status",
@@ -508,6 +540,7 @@ public class ExtendedCreditInvoiceGroup extends APINode {
       "tos_accepted",
       "user_tasks",
       "user_tos_accepted",
+      "viewable_business",
     };
 
     @Override
@@ -732,6 +765,13 @@ public class ExtendedCreditInvoiceGroup extends APINode {
       this.requestField("currency", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestCustomAudienceInfoField () {
+      return this.requestCustomAudienceInfoField(true);
+    }
+    public APIRequestGetAdAccounts requestCustomAudienceInfoField (boolean value) {
+      this.requestField("custom_audience_info", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestDisableReasonField () {
       return this.requestDisableReasonField(true);
     }
@@ -879,6 +919,13 @@ public class ExtendedCreditInvoiceGroup extends APINode {
       this.requestField("is_tax_id_required", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestLiableAddressField () {
+      return this.requestLiableAddressField(true);
+    }
+    public APIRequestGetAdAccounts requestLiableAddressField (boolean value) {
+      this.requestField("liable_address", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestLineNumbersField () {
       return this.requestLineNumbersField(true);
     }
@@ -928,6 +975,13 @@ public class ExtendedCreditInvoiceGroup extends APINode {
       this.requestField("owner", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetAdAccounts requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestPartnerField () {
       return this.requestPartnerField(true);
     }
@@ -942,11 +996,25 @@ public class ExtendedCreditInvoiceGroup extends APINode {
       this.requestField("rf_spec", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestSendBillToAddressField () {
+      return this.requestSendBillToAddressField(true);
+    }
+    public APIRequestGetAdAccounts requestSendBillToAddressField (boolean value) {
+      this.requestField("send_bill_to_address", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestShowCheckoutExperienceField () {
       return this.requestShowCheckoutExperienceField(true);
     }
     public APIRequestGetAdAccounts requestShowCheckoutExperienceField (boolean value) {
       this.requestField("show_checkout_experience", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestSoldToAddressField () {
+      return this.requestSoldToAddressField(true);
+    }
+    public APIRequestGetAdAccounts requestSoldToAddressField (boolean value) {
+      this.requestField("sold_to_address", value);
       return this;
     }
     public APIRequestGetAdAccounts requestSpendCapField () {
@@ -1017,6 +1085,13 @@ public class ExtendedCreditInvoiceGroup extends APINode {
     }
     public APIRequestGetAdAccounts requestUserTosAcceptedField (boolean value) {
       this.requestField("user_tos_accepted", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestViewableBusinessField () {
+      return this.requestViewableBusinessField(true);
+    }
+    public APIRequestGetAdAccounts requestViewableBusinessField (boolean value) {
+      this.requestField("viewable_business", value);
       return this;
     }
   }
@@ -1247,11 +1322,14 @@ public class ExtendedCreditInvoiceGroup extends APINode {
 
     public static final String[] FIELDS = {
       "auto_enroll",
+      "bill_to_address",
       "customer_po_number",
       "email",
       "emails",
       "id",
+      "liable_address",
       "name",
+      "sold_to_address",
     };
 
     @Override
@@ -1350,6 +1428,13 @@ public class ExtendedCreditInvoiceGroup extends APINode {
       this.requestField("auto_enroll", value);
       return this;
     }
+    public APIRequestGet requestBillToAddressField () {
+      return this.requestBillToAddressField(true);
+    }
+    public APIRequestGet requestBillToAddressField (boolean value) {
+      this.requestField("bill_to_address", value);
+      return this;
+    }
     public APIRequestGet requestCustomerPoNumberField () {
       return this.requestCustomerPoNumberField(true);
     }
@@ -1378,11 +1463,25 @@ public class ExtendedCreditInvoiceGroup extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestLiableAddressField () {
+      return this.requestLiableAddressField(true);
+    }
+    public APIRequestGet requestLiableAddressField (boolean value) {
+      this.requestField("liable_address", value);
+      return this;
+    }
     public APIRequestGet requestNameField () {
       return this.requestNameField(true);
     }
     public APIRequestGet requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGet requestSoldToAddressField () {
+      return this.requestSoldToAddressField(true);
+    }
+    public APIRequestGet requestSoldToAddressField (boolean value) {
+      this.requestField("sold_to_address", value);
       return this;
     }
   }
@@ -1523,11 +1622,14 @@ public class ExtendedCreditInvoiceGroup extends APINode {
 
   public ExtendedCreditInvoiceGroup copyFrom(ExtendedCreditInvoiceGroup instance) {
     this.mAutoEnroll = instance.mAutoEnroll;
+    this.mBillToAddress = instance.mBillToAddress;
     this.mCustomerPoNumber = instance.mCustomerPoNumber;
     this.mEmail = instance.mEmail;
     this.mEmails = instance.mEmails;
     this.mId = instance.mId;
+    this.mLiableAddress = instance.mLiableAddress;
     this.mName = instance.mName;
+    this.mSoldToAddress = instance.mSoldToAddress;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

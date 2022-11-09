@@ -312,6 +312,10 @@ public class AdsPixel extends APINode {
     return new APIRequestCreateEvent(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateMeapitocapiconsolidationhelper createMeapitocapiconsolidationhelper() {
+    return new APIRequestCreateMeapitocapiconsolidationhelper(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateShadowTrafficHelper createShadowTrafficHelper() {
     return new APIRequestCreateShadowTrafficHelper(this.getPrefixedId().toString(), context);
   }
@@ -862,17 +866,18 @@ public class AdsPixel extends APINode {
     }
   }
 
-  public static class APIRequestCreateEvent extends APIRequest<AdsPixel> {
+  public static class APIRequestCreateEvent extends APIRequest<APINode> {
 
-    AdsPixel lastResponse = null;
+    APINode lastResponse = null;
     @Override
-    public AdsPixel getLastResponse() {
+    public APINode getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
       "data",
       "namespace_id",
       "partner_agent",
+      "platforms",
       "test_event_code",
       "trace",
       "upload_id",
@@ -884,31 +889,31 @@ public class AdsPixel extends APINode {
     };
 
     @Override
-    public AdsPixel parseResponse(String response, String header) throws APIException {
-      return AdsPixel.parseResponse(response, getContext(), this, header).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public AdsPixel execute() throws APIException {
+    public APINode execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public AdsPixel execute(Map<String, Object> extraParams) throws APIException {
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<AdsPixel> executeAsync() throws APIException {
+    public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<AdsPixel> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, AdsPixel>() {
-           public AdsPixel apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
                return APIRequestCreateEvent.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -952,6 +957,15 @@ public class AdsPixel extends APINode {
 
     public APIRequestCreateEvent setPartnerAgent (String partnerAgent) {
       this.setParam("partner_agent", partnerAgent);
+      return this;
+    }
+
+    public APIRequestCreateEvent setPlatforms (List<Map<String, String>> platforms) {
+      this.setParam("platforms", platforms);
+      return this;
+    }
+    public APIRequestCreateEvent setPlatforms (String platforms) {
+      this.setParam("platforms", platforms);
       return this;
     }
 
@@ -1016,6 +1030,110 @@ public class AdsPixel extends APINode {
 
     @Override
     public APIRequestCreateEvent requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateMeapitocapiconsolidationhelper extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateMeapitocapiconsolidationhelper.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateMeapitocapiconsolidationhelper(String nodeId, APIContext context) {
+      super(context, nodeId, "/meapitocapiconsolidationhelper", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateMeapitocapiconsolidationhelper setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMeapitocapiconsolidationhelper setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateMeapitocapiconsolidationhelper requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateMeapitocapiconsolidationhelper requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMeapitocapiconsolidationhelper requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateMeapitocapiconsolidationhelper requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMeapitocapiconsolidationhelper requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMeapitocapiconsolidationhelper requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -1273,6 +1391,7 @@ public class AdsPixel extends APINode {
       "capabilities",
       "created_time",
       "currency",
+      "custom_audience_info",
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
@@ -1294,6 +1413,7 @@ public class AdsPixel extends APINode {
       "is_personal",
       "is_prepay_account",
       "is_tax_id_required",
+      "liable_address",
       "line_numbers",
       "media_agency",
       "min_campaign_group_spend_cap",
@@ -1301,9 +1421,12 @@ public class AdsPixel extends APINode {
       "name",
       "offsite_pixels_tos_accepted",
       "owner",
+      "owner_business",
       "partner",
       "rf_spec",
+      "send_bill_to_address",
       "show_checkout_experience",
+      "sold_to_address",
       "spend_cap",
       "tax_id",
       "tax_id_status",
@@ -1314,6 +1437,7 @@ public class AdsPixel extends APINode {
       "tos_accepted",
       "user_tasks",
       "user_tos_accepted",
+      "viewable_business",
     };
 
     @Override
@@ -1543,6 +1667,13 @@ public class AdsPixel extends APINode {
       this.requestField("currency", value);
       return this;
     }
+    public APIRequestGetSharedAccounts requestCustomAudienceInfoField () {
+      return this.requestCustomAudienceInfoField(true);
+    }
+    public APIRequestGetSharedAccounts requestCustomAudienceInfoField (boolean value) {
+      this.requestField("custom_audience_info", value);
+      return this;
+    }
     public APIRequestGetSharedAccounts requestDisableReasonField () {
       return this.requestDisableReasonField(true);
     }
@@ -1690,6 +1821,13 @@ public class AdsPixel extends APINode {
       this.requestField("is_tax_id_required", value);
       return this;
     }
+    public APIRequestGetSharedAccounts requestLiableAddressField () {
+      return this.requestLiableAddressField(true);
+    }
+    public APIRequestGetSharedAccounts requestLiableAddressField (boolean value) {
+      this.requestField("liable_address", value);
+      return this;
+    }
     public APIRequestGetSharedAccounts requestLineNumbersField () {
       return this.requestLineNumbersField(true);
     }
@@ -1739,6 +1877,13 @@ public class AdsPixel extends APINode {
       this.requestField("owner", value);
       return this;
     }
+    public APIRequestGetSharedAccounts requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetSharedAccounts requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
+      return this;
+    }
     public APIRequestGetSharedAccounts requestPartnerField () {
       return this.requestPartnerField(true);
     }
@@ -1753,11 +1898,25 @@ public class AdsPixel extends APINode {
       this.requestField("rf_spec", value);
       return this;
     }
+    public APIRequestGetSharedAccounts requestSendBillToAddressField () {
+      return this.requestSendBillToAddressField(true);
+    }
+    public APIRequestGetSharedAccounts requestSendBillToAddressField (boolean value) {
+      this.requestField("send_bill_to_address", value);
+      return this;
+    }
     public APIRequestGetSharedAccounts requestShowCheckoutExperienceField () {
       return this.requestShowCheckoutExperienceField(true);
     }
     public APIRequestGetSharedAccounts requestShowCheckoutExperienceField (boolean value) {
       this.requestField("show_checkout_experience", value);
+      return this;
+    }
+    public APIRequestGetSharedAccounts requestSoldToAddressField () {
+      return this.requestSoldToAddressField(true);
+    }
+    public APIRequestGetSharedAccounts requestSoldToAddressField (boolean value) {
+      this.requestField("sold_to_address", value);
       return this;
     }
     public APIRequestGetSharedAccounts requestSpendCapField () {
@@ -1828,6 +1987,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetSharedAccounts requestUserTosAcceptedField (boolean value) {
       this.requestField("user_tos_accepted", value);
+      return this;
+    }
+    public APIRequestGetSharedAccounts requestViewableBusinessField () {
+      return this.requestViewableBusinessField(true);
+    }
+    public APIRequestGetSharedAccounts requestViewableBusinessField (boolean value) {
+      this.requestField("viewable_business", value);
       return this;
     }
   }
@@ -1962,7 +2128,7 @@ public class AdsPixel extends APINode {
       "block_offline_analytics",
       "collaborative_ads_managed_partner_business_info",
       "collaborative_ads_managed_partner_eligibility",
-      "cpas_business_setup_config",
+      "collaborative_ads_partner_premium_options",
       "created_by",
       "created_time",
       "extended_updated_time",
@@ -2091,11 +2257,11 @@ public class AdsPixel extends APINode {
       this.requestField("collaborative_ads_managed_partner_eligibility", value);
       return this;
     }
-    public APIRequestGetSharedAgencies requestCpasBusinessSetupConfigField () {
-      return this.requestCpasBusinessSetupConfigField(true);
+    public APIRequestGetSharedAgencies requestCollaborativeAdsPartnerPremiumOptionsField () {
+      return this.requestCollaborativeAdsPartnerPremiumOptionsField(true);
     }
-    public APIRequestGetSharedAgencies requestCpasBusinessSetupConfigField (boolean value) {
-      this.requestField("cpas_business_setup_config", value);
+    public APIRequestGetSharedAgencies requestCollaborativeAdsPartnerPremiumOptionsField (boolean value) {
+      this.requestField("collaborative_ads_partner_premium_options", value);
       return this;
     }
     public APIRequestGetSharedAgencies requestCreatedByField () {

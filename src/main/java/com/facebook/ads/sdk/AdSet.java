@@ -406,10 +406,6 @@ public class AdSet extends APINode {
     return new APIRequestGetAsyncAdRequests(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetContentDeliveryReport getContentDeliveryReport() {
-    return new APIRequestGetContentDeliveryReport(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetCopies getCopies() {
     return new APIRequestGetCopies(this.getPrefixedId().toString(), context);
   }
@@ -1282,15 +1278,18 @@ public class AdSet extends APINode {
     public static final String[] FIELDS = {
       "business",
       "canceled_time",
+      "client_business",
       "cooldown_start_time",
       "created_by",
       "created_time",
       "description",
       "end_time",
       "id",
+      "measurement_contact",
       "name",
       "observation_end_time",
       "results_first_available_date",
+      "sales_contact",
       "start_time",
       "type",
       "updated_by",
@@ -1400,6 +1399,13 @@ public class AdSet extends APINode {
       this.requestField("canceled_time", value);
       return this;
     }
+    public APIRequestGetAdStudies requestClientBusinessField () {
+      return this.requestClientBusinessField(true);
+    }
+    public APIRequestGetAdStudies requestClientBusinessField (boolean value) {
+      this.requestField("client_business", value);
+      return this;
+    }
     public APIRequestGetAdStudies requestCooldownStartTimeField () {
       return this.requestCooldownStartTimeField(true);
     }
@@ -1442,6 +1448,13 @@ public class AdSet extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetAdStudies requestMeasurementContactField () {
+      return this.requestMeasurementContactField(true);
+    }
+    public APIRequestGetAdStudies requestMeasurementContactField (boolean value) {
+      this.requestField("measurement_contact", value);
+      return this;
+    }
     public APIRequestGetAdStudies requestNameField () {
       return this.requestNameField(true);
     }
@@ -1461,6 +1474,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAdStudies requestResultsFirstAvailableDateField (boolean value) {
       this.requestField("results_first_available_date", value);
+      return this;
+    }
+    public APIRequestGetAdStudies requestSalesContactField () {
+      return this.requestSalesContactField(true);
+    }
+    public APIRequestGetAdStudies requestSalesContactField (boolean value) {
+      this.requestField("sales_contact", value);
       return this;
     }
     public APIRequestGetAdStudies requestStartTimeField () {
@@ -3117,192 +3137,6 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAsyncAdRequests requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestGetContentDeliveryReport extends APIRequest<ContentDeliveryReport> {
-
-    APINodeList<ContentDeliveryReport> lastResponse = null;
-    @Override
-    public APINodeList<ContentDeliveryReport> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "end_date",
-      "platform",
-      "position",
-      "start_date",
-      "summary",
-    };
-
-    public static final String[] FIELDS = {
-      "content_name",
-      "content_url",
-      "creator_name",
-      "creator_url",
-      "estimated_impressions",
-    };
-
-    @Override
-    public APINodeList<ContentDeliveryReport> parseResponse(String response, String header) throws APIException {
-      return ContentDeliveryReport.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<ContentDeliveryReport> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<ContentDeliveryReport> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<ContentDeliveryReport>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<ContentDeliveryReport>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<ContentDeliveryReport>>() {
-           public APINodeList<ContentDeliveryReport> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetContentDeliveryReport.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetContentDeliveryReport(String nodeId, APIContext context) {
-      super(context, nodeId, "/content_delivery_report", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetContentDeliveryReport setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetContentDeliveryReport setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetContentDeliveryReport setEndDate (String endDate) {
-      this.setParam("end_date", endDate);
-      return this;
-    }
-
-    public APIRequestGetContentDeliveryReport setPlatform (ContentDeliveryReport.EnumPlatform platform) {
-      this.setParam("platform", platform);
-      return this;
-    }
-    public APIRequestGetContentDeliveryReport setPlatform (String platform) {
-      this.setParam("platform", platform);
-      return this;
-    }
-
-    public APIRequestGetContentDeliveryReport setPosition (ContentDeliveryReport.EnumPosition position) {
-      this.setParam("position", position);
-      return this;
-    }
-    public APIRequestGetContentDeliveryReport setPosition (String position) {
-      this.setParam("position", position);
-      return this;
-    }
-
-    public APIRequestGetContentDeliveryReport setStartDate (String startDate) {
-      this.setParam("start_date", startDate);
-      return this;
-    }
-
-    public APIRequestGetContentDeliveryReport setSummary (Boolean summary) {
-      this.setParam("summary", summary);
-      return this;
-    }
-    public APIRequestGetContentDeliveryReport setSummary (String summary) {
-      this.setParam("summary", summary);
-      return this;
-    }
-
-    public APIRequestGetContentDeliveryReport requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetContentDeliveryReport requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetContentDeliveryReport requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetContentDeliveryReport requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetContentDeliveryReport requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetContentDeliveryReport requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetContentDeliveryReport requestContentNameField () {
-      return this.requestContentNameField(true);
-    }
-    public APIRequestGetContentDeliveryReport requestContentNameField (boolean value) {
-      this.requestField("content_name", value);
-      return this;
-    }
-    public APIRequestGetContentDeliveryReport requestContentUrlField () {
-      return this.requestContentUrlField(true);
-    }
-    public APIRequestGetContentDeliveryReport requestContentUrlField (boolean value) {
-      this.requestField("content_url", value);
-      return this;
-    }
-    public APIRequestGetContentDeliveryReport requestCreatorNameField () {
-      return this.requestCreatorNameField(true);
-    }
-    public APIRequestGetContentDeliveryReport requestCreatorNameField (boolean value) {
-      this.requestField("creator_name", value);
-      return this;
-    }
-    public APIRequestGetContentDeliveryReport requestCreatorUrlField () {
-      return this.requestCreatorUrlField(true);
-    }
-    public APIRequestGetContentDeliveryReport requestCreatorUrlField (boolean value) {
-      this.requestField("creator_url", value);
-      return this;
-    }
-    public APIRequestGetContentDeliveryReport requestEstimatedImpressionsField () {
-      return this.requestEstimatedImpressionsField(true);
-    }
-    public APIRequestGetContentDeliveryReport requestEstimatedImpressionsField (boolean value) {
-      this.requestField("estimated_impressions", value);
       return this;
     }
   }
@@ -6278,6 +6112,8 @@ public class AdSet extends APINode {
       VALUE_LEAD_GENERATION("LEAD_GENERATION"),
       @SerializedName("LINK_CLICKS")
       VALUE_LINK_CLICKS("LINK_CLICKS"),
+      @SerializedName("MESSAGING_PURCHASE_CONVERSION")
+      VALUE_MESSAGING_PURCHASE_CONVERSION("MESSAGING_PURCHASE_CONVERSION"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
       @SerializedName("OFFSITE_CONVERSIONS")
@@ -6381,25 +6217,6 @@ public class AdSet extends APINode {
       private String value;
 
       private EnumDatePreset(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumOperator {
-      @SerializedName("ALL")
-      VALUE_ALL("ALL"),
-      @SerializedName("ANY")
-      VALUE_ANY("ANY"),
-      ;
-
-      private String value;
-
-      private EnumOperator(String value) {
         this.value = value;
       }
 
@@ -6552,6 +6369,25 @@ public class AdSet extends APINode {
       private String value;
 
       private EnumTuneForCategory(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumOperator {
+      @SerializedName("ALL")
+      VALUE_ALL("ALL"),
+      @SerializedName("ANY")
+      VALUE_ANY("ANY"),
+      ;
+
+      private String value;
+
+      private EnumOperator(String value) {
         this.value = value;
       }
 
