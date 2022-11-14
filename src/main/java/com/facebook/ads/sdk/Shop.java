@@ -54,68 +54,70 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class DynamicContentSet extends APINode {
-  @SerializedName("business_id")
-  private String mBusinessId = null;
+public class Shop extends APINode {
+  @SerializedName("fb_sales_channel")
+  private Object mFbSalesChannel = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("name")
-  private String mName = null;
+  @SerializedName("ig_sales_channel")
+  private Object mIgSalesChannel = null;
+  @SerializedName("workspace")
+  private Object mWorkspace = null;
   protected static Gson gson = null;
 
-  DynamicContentSet() {
+  Shop() {
   }
 
-  public DynamicContentSet(Long id, APIContext context) {
+  public Shop(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public DynamicContentSet(String id, APIContext context) {
+  public Shop(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public DynamicContentSet fetch() throws APIException{
-    DynamicContentSet newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public Shop fetch() throws APIException{
+    Shop newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static DynamicContentSet fetchById(Long id, APIContext context) throws APIException {
+  public static Shop fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<DynamicContentSet> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<Shop> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static DynamicContentSet fetchById(String id, APIContext context) throws APIException {
+  public static Shop fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<DynamicContentSet> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<Shop> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<DynamicContentSet> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<DynamicContentSet>)(
-      new APIRequest<DynamicContentSet>(context, "", "/", "GET", DynamicContentSet.getParser())
+  public static APINodeList<Shop> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<Shop>)(
+      new APIRequest<Shop>(context, "", "/", "GET", Shop.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<DynamicContentSet>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<Shop>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", DynamicContentSet.getParser())
+      new APIRequest(context, "", "/", "GET", Shop.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -128,12 +130,12 @@ public class DynamicContentSet extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static DynamicContentSet loadJSON(String json, APIContext context, String header) {
-    DynamicContentSet dynamicContentSet = getGson().fromJson(json, DynamicContentSet.class);
+  public static Shop loadJSON(String json, APIContext context, String header) {
+    Shop shop = getGson().fromJson(json, Shop.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(dynamicContentSet.toString());
+      JsonElement o2 = parser.parse(shop.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -143,14 +145,14 @@ public class DynamicContentSet extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    dynamicContentSet.context = context;
-    dynamicContentSet.rawValue = json;
-    dynamicContentSet.header = header;
-    return dynamicContentSet;
+    shop.context = context;
+    shop.rawValue = json;
+    shop.header = header;
+    return shop;
   }
 
-  public static APINodeList<DynamicContentSet> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<DynamicContentSet> dynamicContentSets = new APINodeList<DynamicContentSet>(request, json, header);
+  public static APINodeList<Shop> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<Shop> shops = new APINodeList<Shop>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -161,9 +163,9 @@ public class DynamicContentSet extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          dynamicContentSets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          shops.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return dynamicContentSets;
+        return shops;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -173,20 +175,20 @@ public class DynamicContentSet extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                dynamicContentSets.setCursors(before, after);
+                shops.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            dynamicContentSets.setPaging(previous, next);
+            shops.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              dynamicContentSets.setAppSecret(context.getAppSecretProof());
+              shops.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              dynamicContentSets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              shops.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -197,23 +199,23 @@ public class DynamicContentSet extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  dynamicContentSets.add(loadJSON(entry.getValue().toString(), context, header));
+                  shops.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              dynamicContentSets.add(loadJSON(obj.toString(), context, header));
+              shops.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return dynamicContentSets;
+          return shops;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              dynamicContentSets.add(loadJSON(entry.getValue().toString(), context, header));
+              shops.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return dynamicContentSets;
+          return shops;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -230,20 +232,20 @@ public class DynamicContentSet extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              dynamicContentSets.add(loadJSON(value.toString(), context, header));
+              shops.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return dynamicContentSets;
+            return shops;
           }
 
           // Sixth, check if it's pure JsonObject
-          dynamicContentSets.clear();
-          dynamicContentSets.add(loadJSON(json, context, header));
-          return dynamicContentSets;
+          shops.clear();
+          shops.add(loadJSON(json, context, header));
+          return shops;
         }
       }
     } catch (Exception e) {
@@ -275,62 +277,67 @@ public class DynamicContentSet extends APINode {
   }
 
 
-  public String getFieldBusinessId() {
-    return mBusinessId;
+  public Object getFieldFbSalesChannel() {
+    return mFbSalesChannel;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-  public String getFieldName() {
-    return mName;
+  public Object getFieldIgSalesChannel() {
+    return mIgSalesChannel;
+  }
+
+  public Object getFieldWorkspace() {
+    return mWorkspace;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<DynamicContentSet> {
+  public static class APIRequestGet extends APIRequest<Shop> {
 
-    DynamicContentSet lastResponse = null;
+    Shop lastResponse = null;
     @Override
-    public DynamicContentSet getLastResponse() {
+    public Shop getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "business_id",
+      "fb_sales_channel",
       "id",
-      "name",
+      "ig_sales_channel",
+      "workspace",
     };
 
     @Override
-    public DynamicContentSet parseResponse(String response, String header) throws APIException {
-      return DynamicContentSet.parseResponse(response, getContext(), this, header).head();
+    public Shop parseResponse(String response, String header) throws APIException {
+      return Shop.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public DynamicContentSet execute() throws APIException {
+    public Shop execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public DynamicContentSet execute(Map<String, Object> extraParams) throws APIException {
+    public Shop execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<DynamicContentSet> executeAsync() throws APIException {
+    public ListenableFuture<Shop> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<DynamicContentSet> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<Shop> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, DynamicContentSet>() {
-           public DynamicContentSet apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, Shop>() {
+           public Shop apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -394,11 +401,11 @@ public class DynamicContentSet extends APINode {
       return this;
     }
 
-    public APIRequestGet requestBusinessIdField () {
-      return this.requestBusinessIdField(true);
+    public APIRequestGet requestFbSalesChannelField () {
+      return this.requestFbSalesChannelField(true);
     }
-    public APIRequestGet requestBusinessIdField (boolean value) {
-      this.requestField("business_id", value);
+    public APIRequestGet requestFbSalesChannelField (boolean value) {
+      this.requestField("fb_sales_channel", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -408,11 +415,18 @@ public class DynamicContentSet extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestNameField () {
-      return this.requestNameField(true);
+    public APIRequestGet requestIgSalesChannelField () {
+      return this.requestIgSalesChannelField(true);
     }
-    public APIRequestGet requestNameField (boolean value) {
-      this.requestField("name", value);
+    public APIRequestGet requestIgSalesChannelField (boolean value) {
+      this.requestField("ig_sales_channel", value);
+      return this;
+    }
+    public APIRequestGet requestWorkspaceField () {
+      return this.requestWorkspaceField(true);
+    }
+    public APIRequestGet requestWorkspaceField (boolean value) {
+      this.requestField("workspace", value);
       return this;
     }
   }
@@ -431,19 +445,20 @@ public class DynamicContentSet extends APINode {
     return gson;
   }
 
-  public DynamicContentSet copyFrom(DynamicContentSet instance) {
-    this.mBusinessId = instance.mBusinessId;
+  public Shop copyFrom(Shop instance) {
+    this.mFbSalesChannel = instance.mFbSalesChannel;
     this.mId = instance.mId;
-    this.mName = instance.mName;
+    this.mIgSalesChannel = instance.mIgSalesChannel;
+    this.mWorkspace = instance.mWorkspace;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<DynamicContentSet> getParser() {
-    return new APIRequest.ResponseParser<DynamicContentSet>() {
-      public APINodeList<DynamicContentSet> parseResponse(String response, APIContext context, APIRequest<DynamicContentSet> request, String header) throws MalformedResponseException {
-        return DynamicContentSet.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<Shop> getParser() {
+    return new APIRequest.ResponseParser<Shop>() {
+      public APINodeList<Shop> parseResponse(String response, APIContext context, APIRequest<Shop> request, String header) throws MalformedResponseException {
+        return Shop.parseResponse(response, context, request, header);
       }
     };
   }

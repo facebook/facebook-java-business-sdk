@@ -641,6 +641,8 @@ public class AdCreativeLinkData extends APINode {
   }
 
   public static enum EnumFormatOption {
+      @SerializedName("carousel_ar_effects")
+      VALUE_CAROUSEL_AR_EFFECTS("carousel_ar_effects"),
       @SerializedName("carousel_images_multi_items")
       VALUE_CAROUSEL_IMAGES_MULTI_ITEMS("carousel_images_multi_items"),
       @SerializedName("carousel_images_single_item")

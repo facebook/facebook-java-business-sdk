@@ -290,22 +290,40 @@ public class InstagramInsightsResult extends APINode {
       VALUE_CAROUSEL_ALBUM_SAVED("carousel_album_saved"),
       @SerializedName("carousel_album_video_views")
       VALUE_CAROUSEL_ALBUM_VIDEO_VIEWS("carousel_album_video_views"),
+      @SerializedName("comments")
+      VALUE_COMMENTS("comments"),
       @SerializedName("engagement")
       VALUE_ENGAGEMENT("engagement"),
       @SerializedName("exits")
       VALUE_EXITS("exits"),
+      @SerializedName("follows")
+      VALUE_FOLLOWS("follows"),
       @SerializedName("impressions")
       VALUE_IMPRESSIONS("impressions"),
+      @SerializedName("likes")
+      VALUE_LIKES("likes"),
+      @SerializedName("navigation")
+      VALUE_NAVIGATION("navigation"),
+      @SerializedName("plays")
+      VALUE_PLAYS("plays"),
+      @SerializedName("profile_activity")
+      VALUE_PROFILE_ACTIVITY("profile_activity"),
+      @SerializedName("profile_visits")
+      VALUE_PROFILE_VISITS("profile_visits"),
       @SerializedName("reach")
       VALUE_REACH("reach"),
       @SerializedName("replies")
       VALUE_REPLIES("replies"),
       @SerializedName("saved")
       VALUE_SAVED("saved"),
+      @SerializedName("shares")
+      VALUE_SHARES("shares"),
       @SerializedName("taps_back")
       VALUE_TAPS_BACK("taps_back"),
       @SerializedName("taps_forward")
       VALUE_TAPS_FORWARD("taps_forward"),
+      @SerializedName("total_interactions")
+      VALUE_TOTAL_INTERACTIONS("total_interactions"),
       @SerializedName("video_views")
       VALUE_VIDEO_VIEWS("video_views"),
       ;

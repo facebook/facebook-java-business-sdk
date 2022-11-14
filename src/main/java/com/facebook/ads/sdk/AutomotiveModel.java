@@ -1148,65 +1148,6 @@ public class AutomotiveModel extends APINode {
       }
   }
 
-  public static enum EnumBodyStyle {
-      @SerializedName("CONVERTIBLE")
-      VALUE_CONVERTIBLE("CONVERTIBLE"),
-      @SerializedName("COUPE")
-      VALUE_COUPE("COUPE"),
-      @SerializedName("CROSSOVER")
-      VALUE_CROSSOVER("CROSSOVER"),
-      @SerializedName("ESTATE")
-      VALUE_ESTATE("ESTATE"),
-      @SerializedName("GRANDTOURER")
-      VALUE_GRANDTOURER("GRANDTOURER"),
-      @SerializedName("HATCHBACK")
-      VALUE_HATCHBACK("HATCHBACK"),
-      @SerializedName("MINIBUS")
-      VALUE_MINIBUS("MINIBUS"),
-      @SerializedName("MINIVAN")
-      VALUE_MINIVAN("MINIVAN"),
-      @SerializedName("MPV")
-      VALUE_MPV("MPV"),
-      @SerializedName("NONE")
-      VALUE_NONE("NONE"),
-      @SerializedName("OTHER")
-      VALUE_OTHER("OTHER"),
-      @SerializedName("PICKUP")
-      VALUE_PICKUP("PICKUP"),
-      @SerializedName("ROADSTER")
-      VALUE_ROADSTER("ROADSTER"),
-      @SerializedName("SALOON")
-      VALUE_SALOON("SALOON"),
-      @SerializedName("SEDAN")
-      VALUE_SEDAN("SEDAN"),
-      @SerializedName("SPORTSCAR")
-      VALUE_SPORTSCAR("SPORTSCAR"),
-      @SerializedName("SUPERCAR")
-      VALUE_SUPERCAR("SUPERCAR"),
-      @SerializedName("SUPERMINI")
-      VALUE_SUPERMINI("SUPERMINI"),
-      @SerializedName("SUV")
-      VALUE_SUV("SUV"),
-      @SerializedName("TRUCK")
-      VALUE_TRUCK("TRUCK"),
-      @SerializedName("VAN")
-      VALUE_VAN("VAN"),
-      @SerializedName("WAGON")
-      VALUE_WAGON("WAGON"),
-      ;
-
-      private String value;
-
-      private EnumBodyStyle(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {

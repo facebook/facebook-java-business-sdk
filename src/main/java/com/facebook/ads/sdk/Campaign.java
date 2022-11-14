@@ -57,10 +57,14 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class Campaign extends APINode {
   @SerializedName("account_id")
   private String mAccountId = null;
+  @SerializedName("ad_strategy_group_id")
+  private String mAdStrategyGroupId = null;
   @SerializedName("ad_strategy_id")
   private String mAdStrategyId = null;
   @SerializedName("adlabels")
   private List<AdLabel> mAdlabels = null;
+  @SerializedName("benchmark_report_count")
+  private Long mBenchmarkReportCount = null;
   @SerializedName("bid_strategy")
   private EnumBidStrategy mBidStrategy = null;
   @SerializedName("boosted_object_id")
@@ -85,6 +89,8 @@ public class Campaign extends APINode {
   private String mDailyBudget = null;
   @SerializedName("effective_status")
   private EnumEffectiveStatus mEffectiveStatus = null;
+  @SerializedName("has_secondary_skadnetwork_reporting")
+  private Boolean mHasSecondarySkadnetworkReporting = null;
   @SerializedName(value="id", alternate={"copied_campaign_id"})
   private String mId = null;
   @SerializedName("is_skadnetwork_attribution")
@@ -101,6 +107,8 @@ public class Campaign extends APINode {
   private String mObjective = null;
   @SerializedName("pacing_type")
   private List<String> mPacingType = null;
+  @SerializedName("primary_attribution")
+  private String mPrimaryAttribution = null;
   @SerializedName("promoted_object")
   private AdPromotedObject mPromotedObject = null;
   @SerializedName("recommendations")
@@ -358,10 +366,6 @@ public class Campaign extends APINode {
     return new APIRequestGetAdSets(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetContentDeliveryReport getContentDeliveryReport() {
-    return new APIRequestGetContentDeliveryReport(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetCopies getCopies() {
     return new APIRequestGetCopies(this.getPrefixedId().toString(), context);
   }
@@ -395,12 +399,20 @@ public class Campaign extends APINode {
     return mAccountId;
   }
 
+  public String getFieldAdStrategyGroupId() {
+    return mAdStrategyGroupId;
+  }
+
   public String getFieldAdStrategyId() {
     return mAdStrategyId;
   }
 
   public List<AdLabel> getFieldAdlabels() {
     return mAdlabels;
+  }
+
+  public Long getFieldBenchmarkReportCount() {
+    return mBenchmarkReportCount;
   }
 
   public EnumBidStrategy getFieldBidStrategy() {
@@ -451,6 +463,10 @@ public class Campaign extends APINode {
     return mEffectiveStatus;
   }
 
+  public Boolean getFieldHasSecondarySkadnetworkReporting() {
+    return mHasSecondarySkadnetworkReporting;
+  }
+
   public String getFieldId() {
     return mId;
   }
@@ -481,6 +497,10 @@ public class Campaign extends APINode {
 
   public List<String> getFieldPacingType() {
     return mPacingType;
+  }
+
+  public String getFieldPrimaryAttribution() {
+    return mPrimaryAttribution;
   }
 
   public AdPromotedObject getFieldPromotedObject() {
@@ -557,15 +577,18 @@ public class Campaign extends APINode {
     public static final String[] FIELDS = {
       "business",
       "canceled_time",
+      "client_business",
       "cooldown_start_time",
       "created_by",
       "created_time",
       "description",
       "end_time",
       "id",
+      "measurement_contact",
       "name",
       "observation_end_time",
       "results_first_available_date",
+      "sales_contact",
       "start_time",
       "type",
       "updated_by",
@@ -675,6 +698,13 @@ public class Campaign extends APINode {
       this.requestField("canceled_time", value);
       return this;
     }
+    public APIRequestGetAdStudies requestClientBusinessField () {
+      return this.requestClientBusinessField(true);
+    }
+    public APIRequestGetAdStudies requestClientBusinessField (boolean value) {
+      this.requestField("client_business", value);
+      return this;
+    }
     public APIRequestGetAdStudies requestCooldownStartTimeField () {
       return this.requestCooldownStartTimeField(true);
     }
@@ -717,6 +747,13 @@ public class Campaign extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetAdStudies requestMeasurementContactField () {
+      return this.requestMeasurementContactField(true);
+    }
+    public APIRequestGetAdStudies requestMeasurementContactField (boolean value) {
+      this.requestField("measurement_contact", value);
+      return this;
+    }
     public APIRequestGetAdStudies requestNameField () {
       return this.requestNameField(true);
     }
@@ -736,6 +773,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAdStudies requestResultsFirstAvailableDateField (boolean value) {
       this.requestField("results_first_available_date", value);
+      return this;
+    }
+    public APIRequestGetAdStudies requestSalesContactField () {
+      return this.requestSalesContactField(true);
+    }
+    public APIRequestGetAdStudies requestSalesContactField (boolean value) {
+      this.requestField("sales_contact", value);
       return this;
     }
     public APIRequestGetAdStudies requestStartTimeField () {
@@ -2086,202 +2130,6 @@ public class Campaign extends APINode {
     }
   }
 
-  public static class APIRequestGetContentDeliveryReport extends APIRequest<ContentDeliveryReport> {
-
-    APINodeList<ContentDeliveryReport> lastResponse = null;
-    @Override
-    public APINodeList<ContentDeliveryReport> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "end_date",
-      "page_id",
-      "platform",
-      "position",
-      "start_date",
-      "summary",
-    };
-
-    public static final String[] FIELDS = {
-      "content_name",
-      "content_url",
-      "creator_name",
-      "creator_url",
-      "estimated_impressions",
-    };
-
-    @Override
-    public APINodeList<ContentDeliveryReport> parseResponse(String response, String header) throws APIException {
-      return ContentDeliveryReport.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<ContentDeliveryReport> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<ContentDeliveryReport> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<ContentDeliveryReport>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<ContentDeliveryReport>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<ContentDeliveryReport>>() {
-           public APINodeList<ContentDeliveryReport> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetContentDeliveryReport.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetContentDeliveryReport(String nodeId, APIContext context) {
-      super(context, nodeId, "/content_delivery_report", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetContentDeliveryReport setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetContentDeliveryReport setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetContentDeliveryReport setEndDate (String endDate) {
-      this.setParam("end_date", endDate);
-      return this;
-    }
-
-    public APIRequestGetContentDeliveryReport setPageId (Long pageId) {
-      this.setParam("page_id", pageId);
-      return this;
-    }
-    public APIRequestGetContentDeliveryReport setPageId (String pageId) {
-      this.setParam("page_id", pageId);
-      return this;
-    }
-
-    public APIRequestGetContentDeliveryReport setPlatform (ContentDeliveryReport.EnumPlatform platform) {
-      this.setParam("platform", platform);
-      return this;
-    }
-    public APIRequestGetContentDeliveryReport setPlatform (String platform) {
-      this.setParam("platform", platform);
-      return this;
-    }
-
-    public APIRequestGetContentDeliveryReport setPosition (ContentDeliveryReport.EnumPosition position) {
-      this.setParam("position", position);
-      return this;
-    }
-    public APIRequestGetContentDeliveryReport setPosition (String position) {
-      this.setParam("position", position);
-      return this;
-    }
-
-    public APIRequestGetContentDeliveryReport setStartDate (String startDate) {
-      this.setParam("start_date", startDate);
-      return this;
-    }
-
-    public APIRequestGetContentDeliveryReport setSummary (Boolean summary) {
-      this.setParam("summary", summary);
-      return this;
-    }
-    public APIRequestGetContentDeliveryReport setSummary (String summary) {
-      this.setParam("summary", summary);
-      return this;
-    }
-
-    public APIRequestGetContentDeliveryReport requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetContentDeliveryReport requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetContentDeliveryReport requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetContentDeliveryReport requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetContentDeliveryReport requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetContentDeliveryReport requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetContentDeliveryReport requestContentNameField () {
-      return this.requestContentNameField(true);
-    }
-    public APIRequestGetContentDeliveryReport requestContentNameField (boolean value) {
-      this.requestField("content_name", value);
-      return this;
-    }
-    public APIRequestGetContentDeliveryReport requestContentUrlField () {
-      return this.requestContentUrlField(true);
-    }
-    public APIRequestGetContentDeliveryReport requestContentUrlField (boolean value) {
-      this.requestField("content_url", value);
-      return this;
-    }
-    public APIRequestGetContentDeliveryReport requestCreatorNameField () {
-      return this.requestCreatorNameField(true);
-    }
-    public APIRequestGetContentDeliveryReport requestCreatorNameField (boolean value) {
-      this.requestField("creator_name", value);
-      return this;
-    }
-    public APIRequestGetContentDeliveryReport requestCreatorUrlField () {
-      return this.requestCreatorUrlField(true);
-    }
-    public APIRequestGetContentDeliveryReport requestCreatorUrlField (boolean value) {
-      this.requestField("creator_url", value);
-      return this;
-    }
-    public APIRequestGetContentDeliveryReport requestEstimatedImpressionsField () {
-      return this.requestEstimatedImpressionsField(true);
-    }
-    public APIRequestGetContentDeliveryReport requestEstimatedImpressionsField (boolean value) {
-      this.requestField("estimated_impressions", value);
-      return this;
-    }
-  }
-
   public static class APIRequestGetCopies extends APIRequest<Campaign> {
 
     APINodeList<Campaign> lastResponse = null;
@@ -2298,8 +2146,10 @@ public class Campaign extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
+      "ad_strategy_group_id",
       "ad_strategy_id",
       "adlabels",
+      "benchmark_report_count",
       "bid_strategy",
       "boosted_object_id",
       "brand_lift_studies",
@@ -2312,6 +2162,7 @@ public class Campaign extends APINode {
       "created_time",
       "daily_budget",
       "effective_status",
+      "has_secondary_skadnetwork_reporting",
       "id",
       "is_skadnetwork_attribution",
       "issues_info",
@@ -2320,6 +2171,7 @@ public class Campaign extends APINode {
       "name",
       "objective",
       "pacing_type",
+      "primary_attribution",
       "promoted_object",
       "recommendations",
       "smart_promotion_type",
@@ -2468,6 +2320,13 @@ public class Campaign extends APINode {
       this.requestField("account_id", value);
       return this;
     }
+    public APIRequestGetCopies requestAdStrategyGroupIdField () {
+      return this.requestAdStrategyGroupIdField(true);
+    }
+    public APIRequestGetCopies requestAdStrategyGroupIdField (boolean value) {
+      this.requestField("ad_strategy_group_id", value);
+      return this;
+    }
     public APIRequestGetCopies requestAdStrategyIdField () {
       return this.requestAdStrategyIdField(true);
     }
@@ -2480,6 +2339,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetCopies requestAdlabelsField (boolean value) {
       this.requestField("adlabels", value);
+      return this;
+    }
+    public APIRequestGetCopies requestBenchmarkReportCountField () {
+      return this.requestBenchmarkReportCountField(true);
+    }
+    public APIRequestGetCopies requestBenchmarkReportCountField (boolean value) {
+      this.requestField("benchmark_report_count", value);
       return this;
     }
     public APIRequestGetCopies requestBidStrategyField () {
@@ -2566,6 +2432,13 @@ public class Campaign extends APINode {
       this.requestField("effective_status", value);
       return this;
     }
+    public APIRequestGetCopies requestHasSecondarySkadnetworkReportingField () {
+      return this.requestHasSecondarySkadnetworkReportingField(true);
+    }
+    public APIRequestGetCopies requestHasSecondarySkadnetworkReportingField (boolean value) {
+      this.requestField("has_secondary_skadnetwork_reporting", value);
+      return this;
+    }
     public APIRequestGetCopies requestIdField () {
       return this.requestIdField(true);
     }
@@ -2620,6 +2493,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetCopies requestPacingTypeField (boolean value) {
       this.requestField("pacing_type", value);
+      return this;
+    }
+    public APIRequestGetCopies requestPrimaryAttributionField () {
+      return this.requestPrimaryAttributionField(true);
+    }
+    public APIRequestGetCopies requestPrimaryAttributionField (boolean value) {
+      this.requestField("primary_attribution", value);
       return this;
     }
     public APIRequestGetCopies requestPromotedObjectField () {
@@ -3592,8 +3472,10 @@ public class Campaign extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
+      "ad_strategy_group_id",
       "ad_strategy_id",
       "adlabels",
+      "benchmark_report_count",
       "bid_strategy",
       "boosted_object_id",
       "brand_lift_studies",
@@ -3606,6 +3488,7 @@ public class Campaign extends APINode {
       "created_time",
       "daily_budget",
       "effective_status",
+      "has_secondary_skadnetwork_reporting",
       "id",
       "is_skadnetwork_attribution",
       "issues_info",
@@ -3614,6 +3497,7 @@ public class Campaign extends APINode {
       "name",
       "objective",
       "pacing_type",
+      "primary_attribution",
       "promoted_object",
       "recommendations",
       "smart_promotion_type",
@@ -3762,6 +3646,13 @@ public class Campaign extends APINode {
       this.requestField("account_id", value);
       return this;
     }
+    public APIRequestGet requestAdStrategyGroupIdField () {
+      return this.requestAdStrategyGroupIdField(true);
+    }
+    public APIRequestGet requestAdStrategyGroupIdField (boolean value) {
+      this.requestField("ad_strategy_group_id", value);
+      return this;
+    }
     public APIRequestGet requestAdStrategyIdField () {
       return this.requestAdStrategyIdField(true);
     }
@@ -3774,6 +3665,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGet requestAdlabelsField (boolean value) {
       this.requestField("adlabels", value);
+      return this;
+    }
+    public APIRequestGet requestBenchmarkReportCountField () {
+      return this.requestBenchmarkReportCountField(true);
+    }
+    public APIRequestGet requestBenchmarkReportCountField (boolean value) {
+      this.requestField("benchmark_report_count", value);
       return this;
     }
     public APIRequestGet requestBidStrategyField () {
@@ -3860,6 +3758,13 @@ public class Campaign extends APINode {
       this.requestField("effective_status", value);
       return this;
     }
+    public APIRequestGet requestHasSecondarySkadnetworkReportingField () {
+      return this.requestHasSecondarySkadnetworkReportingField(true);
+    }
+    public APIRequestGet requestHasSecondarySkadnetworkReportingField (boolean value) {
+      this.requestField("has_secondary_skadnetwork_reporting", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -3914,6 +3819,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGet requestPacingTypeField (boolean value) {
       this.requestField("pacing_type", value);
+      return this;
+    }
+    public APIRequestGet requestPrimaryAttributionField () {
+      return this.requestPrimaryAttributionField(true);
+    }
+    public APIRequestGet requestPrimaryAttributionField (boolean value) {
+      this.requestField("primary_attribution", value);
       return this;
     }
     public APIRequestGet requestPromotedObjectField () {
@@ -4433,6 +4345,8 @@ public class Campaign extends APINode {
   }
 
   public static enum EnumDatePreset {
+      @SerializedName("data_maximum")
+      VALUE_DATA_MAXIMUM("data_maximum"),
       @SerializedName("last_14d")
       VALUE_LAST_14D("last_14d"),
       @SerializedName("last_28d")
@@ -4579,6 +4493,8 @@ public class Campaign extends APINode {
       VALUE_ISSUES_ELECTIONS_POLITICS("ISSUES_ELECTIONS_POLITICS"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
+      @SerializedName("ONLINE_GAMBLING_AND_GAMING")
+      VALUE_ONLINE_GAMBLING_AND_GAMING("ONLINE_GAMBLING_AND_GAMING"),
       ;
 
       private String value;
@@ -5140,6 +5056,8 @@ public class Campaign extends APINode {
       VALUE_ISSUES_ELECTIONS_POLITICS("ISSUES_ELECTIONS_POLITICS"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
+      @SerializedName("ONLINE_GAMBLING_AND_GAMING")
+      VALUE_ONLINE_GAMBLING_AND_GAMING("ONLINE_GAMBLING_AND_GAMING"),
       ;
 
       private String value;
@@ -5191,8 +5109,10 @@ public class Campaign extends APINode {
 
   public Campaign copyFrom(Campaign instance) {
     this.mAccountId = instance.mAccountId;
+    this.mAdStrategyGroupId = instance.mAdStrategyGroupId;
     this.mAdStrategyId = instance.mAdStrategyId;
     this.mAdlabels = instance.mAdlabels;
+    this.mBenchmarkReportCount = instance.mBenchmarkReportCount;
     this.mBidStrategy = instance.mBidStrategy;
     this.mBoostedObjectId = instance.mBoostedObjectId;
     this.mBrandLiftStudies = instance.mBrandLiftStudies;
@@ -5205,6 +5125,7 @@ public class Campaign extends APINode {
     this.mCreatedTime = instance.mCreatedTime;
     this.mDailyBudget = instance.mDailyBudget;
     this.mEffectiveStatus = instance.mEffectiveStatus;
+    this.mHasSecondarySkadnetworkReporting = instance.mHasSecondarySkadnetworkReporting;
     this.mId = instance.mId;
     this.mIsSkadnetworkAttribution = instance.mIsSkadnetworkAttribution;
     this.mIssuesInfo = instance.mIssuesInfo;
@@ -5213,6 +5134,7 @@ public class Campaign extends APINode {
     this.mName = instance.mName;
     this.mObjective = instance.mObjective;
     this.mPacingType = instance.mPacingType;
+    this.mPrimaryAttribution = instance.mPrimaryAttribution;
     this.mPromotedObject = instance.mPromotedObject;
     this.mRecommendations = instance.mRecommendations;
     this.mSmartPromotionType = instance.mSmartPromotionType;

@@ -299,6 +299,8 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
   public static enum EnumCustomTextType {
       @SerializedName("free_shipping")
       VALUE_FREE_SHIPPING("free_shipping"),
+      @SerializedName("popular")
+      VALUE_POPULAR("popular"),
       ;
 
       private String value;

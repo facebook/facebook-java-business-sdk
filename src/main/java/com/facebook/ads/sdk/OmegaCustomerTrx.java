@@ -64,11 +64,9 @@ public class OmegaCustomerTrx extends APINode {
   @SerializedName("amount_due")
   private CurrencyAmount mAmountDue = null;
   @SerializedName("billed_amount_details")
-  private BilledAmountDetails mBilledAmountDetails = null;
+  private Object mBilledAmountDetails = null;
   @SerializedName("billing_period")
   private String mBillingPeriod = null;
-  @SerializedName("campaign")
-  private AtlasCampaign mCampaign = null;
   @SerializedName("cdn_download_uri")
   private String mCdnDownloadUri = null;
   @SerializedName("currency")
@@ -329,19 +327,12 @@ public class OmegaCustomerTrx extends APINode {
     return mAmountDue;
   }
 
-  public BilledAmountDetails getFieldBilledAmountDetails() {
+  public Object getFieldBilledAmountDetails() {
     return mBilledAmountDetails;
   }
 
   public String getFieldBillingPeriod() {
     return mBillingPeriod;
-  }
-
-  public AtlasCampaign getFieldCampaign() {
-    if (mCampaign != null) {
-      mCampaign.context = getContext();
-    }
-    return mCampaign;
   }
 
   public String getFieldCdnDownloadUri() {
@@ -398,54 +389,45 @@ public class OmegaCustomerTrx extends APINode {
 
 
 
-  public static class APIRequestGetCampaigns extends APIRequest<InvoiceCampaign> {
+  public static class APIRequestGetCampaigns extends APIRequest<APINode> {
 
-    APINodeList<InvoiceCampaign> lastResponse = null;
+    APINodeList<APINode> lastResponse = null;
     @Override
-    public APINodeList<InvoiceCampaign> getLastResponse() {
+    public APINodeList<APINode> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "ad_account_id",
-      "billed_amount_details",
-      "campaign_id",
-      "campaign_name",
-      "clicks",
-      "conversions",
-      "description",
-      "impressions",
-      "tags",
     };
 
     @Override
-    public APINodeList<InvoiceCampaign> parseResponse(String response, String header) throws APIException {
-      return InvoiceCampaign.parseResponse(response, getContext(), this, header);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<InvoiceCampaign> execute() throws APIException {
+    public APINodeList<APINode> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<InvoiceCampaign> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<InvoiceCampaign>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<InvoiceCampaign>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<InvoiceCampaign>>() {
-           public APINodeList<InvoiceCampaign> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
                return APIRequestGetCampaigns.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -509,69 +491,6 @@ public class OmegaCustomerTrx extends APINode {
       return this;
     }
 
-    public APIRequestGetCampaigns requestAdAccountIdField () {
-      return this.requestAdAccountIdField(true);
-    }
-    public APIRequestGetCampaigns requestAdAccountIdField (boolean value) {
-      this.requestField("ad_account_id", value);
-      return this;
-    }
-    public APIRequestGetCampaigns requestBilledAmountDetailsField () {
-      return this.requestBilledAmountDetailsField(true);
-    }
-    public APIRequestGetCampaigns requestBilledAmountDetailsField (boolean value) {
-      this.requestField("billed_amount_details", value);
-      return this;
-    }
-    public APIRequestGetCampaigns requestCampaignIdField () {
-      return this.requestCampaignIdField(true);
-    }
-    public APIRequestGetCampaigns requestCampaignIdField (boolean value) {
-      this.requestField("campaign_id", value);
-      return this;
-    }
-    public APIRequestGetCampaigns requestCampaignNameField () {
-      return this.requestCampaignNameField(true);
-    }
-    public APIRequestGetCampaigns requestCampaignNameField (boolean value) {
-      this.requestField("campaign_name", value);
-      return this;
-    }
-    public APIRequestGetCampaigns requestClicksField () {
-      return this.requestClicksField(true);
-    }
-    public APIRequestGetCampaigns requestClicksField (boolean value) {
-      this.requestField("clicks", value);
-      return this;
-    }
-    public APIRequestGetCampaigns requestConversionsField () {
-      return this.requestConversionsField(true);
-    }
-    public APIRequestGetCampaigns requestConversionsField (boolean value) {
-      this.requestField("conversions", value);
-      return this;
-    }
-    public APIRequestGetCampaigns requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGetCampaigns requestDescriptionField (boolean value) {
-      this.requestField("description", value);
-      return this;
-    }
-    public APIRequestGetCampaigns requestImpressionsField () {
-      return this.requestImpressionsField(true);
-    }
-    public APIRequestGetCampaigns requestImpressionsField (boolean value) {
-      this.requestField("impressions", value);
-      return this;
-    }
-    public APIRequestGetCampaigns requestTagsField () {
-      return this.requestTagsField(true);
-    }
-    public APIRequestGetCampaigns requestTagsField (boolean value) {
-      this.requestField("tags", value);
-      return this;
-    }
   }
 
   public static class APIRequestGet extends APIRequest<OmegaCustomerTrx> {
@@ -591,7 +510,6 @@ public class OmegaCustomerTrx extends APINode {
       "amount_due",
       "billed_amount_details",
       "billing_period",
-      "campaign",
       "cdn_download_uri",
       "currency",
       "download_uri",
@@ -738,13 +656,6 @@ public class OmegaCustomerTrx extends APINode {
       this.requestField("billing_period", value);
       return this;
     }
-    public APIRequestGet requestCampaignField () {
-      return this.requestCampaignField(true);
-    }
-    public APIRequestGet requestCampaignField (boolean value) {
-      this.requestField("campaign", value);
-      return this;
-    }
     public APIRequestGet requestCdnDownloadUriField () {
       return this.requestCdnDownloadUriField(true);
     }
@@ -882,7 +793,6 @@ public class OmegaCustomerTrx extends APINode {
     this.mAmountDue = instance.mAmountDue;
     this.mBilledAmountDetails = instance.mBilledAmountDetails;
     this.mBillingPeriod = instance.mBillingPeriod;
-    this.mCampaign = instance.mCampaign;
     this.mCdnDownloadUri = instance.mCdnDownloadUri;
     this.mCurrency = instance.mCurrency;
     this.mDownloadUri = instance.mDownloadUri;

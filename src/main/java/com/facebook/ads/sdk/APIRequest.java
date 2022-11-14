@@ -37,6 +37,7 @@ import java.lang.StringBuilder;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.Random;
@@ -297,14 +298,16 @@ public class APIRequest<T extends APINode> {
       in.close();
       return new ResponseWrapper(response.toString(), header);
     } catch(Exception e) {
-      BufferedReader in = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-      String inputLine;
+      InputStream errorStream = con.getErrorStream();
       StringBuilder response = new StringBuilder();
-
-      while ((inputLine = in.readLine()) != null) {
-        response.append(inputLine);
+      if (errorStream != null) {
+        BufferedReader in = new BufferedReader(new InputStreamReader(errorStream));
+        String inputLine;
+        while ((inputLine = in.readLine()) != null) {
+          response.append(inputLine);
+        }
+        in.close();
       }
-      in.close();
       throw new APIException.FailedRequestException(
         convertToString(con.getHeaderFields()), response.toString(), e
       );

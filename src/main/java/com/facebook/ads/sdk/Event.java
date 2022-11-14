@@ -109,6 +109,8 @@ public class Event extends APINode {
   private String mScheduledPublishTime = null;
   @SerializedName("start_time")
   private String mStartTime = null;
+  @SerializedName("ticket_setting")
+  private Object mTicketSetting = null;
   @SerializedName("ticket_uri")
   private String mTicketUri = null;
   @SerializedName("ticket_uri_start_sales_time")
@@ -491,6 +493,10 @@ public class Event extends APINode {
     return mStartTime;
   }
 
+  public Object getFieldTicketSetting() {
+    return mTicketSetting;
+  }
+
   public String getFieldTicketUri() {
     return mTicketUri;
   }
@@ -845,11 +851,11 @@ public class Event extends APINode {
       "description",
       "enable_backup_ingest",
       "encoding_settings",
+      "event_params",
       "fisheye_video_cropped",
       "front_z_rotation",
       "is_audio_only",
       "is_spherical",
-      "live_encoders",
       "original_fov",
       "privacy",
       "projection",
@@ -947,6 +953,15 @@ public class Event extends APINode {
       return this;
     }
 
+    public APIRequestCreateLiveVideo setEventParams (Object eventParams) {
+      this.setParam("event_params", eventParams);
+      return this;
+    }
+    public APIRequestCreateLiveVideo setEventParams (String eventParams) {
+      this.setParam("event_params", eventParams);
+      return this;
+    }
+
     public APIRequestCreateLiveVideo setFisheyeVideoCropped (Boolean fisheyeVideoCropped) {
       this.setParam("fisheye_video_cropped", fisheyeVideoCropped);
       return this;
@@ -980,15 +995,6 @@ public class Event extends APINode {
     }
     public APIRequestCreateLiveVideo setIsSpherical (String isSpherical) {
       this.setParam("is_spherical", isSpherical);
-      return this;
-    }
-
-    public APIRequestCreateLiveVideo setLiveEncoders (List<String> liveEncoders) {
-      this.setParam("live_encoders", liveEncoders);
-      return this;
-    }
-    public APIRequestCreateLiveVideo setLiveEncoders (String liveEncoders) {
-      this.setParam("live_encoders", liveEncoders);
       return this;
     }
 
@@ -1871,6 +1877,7 @@ public class Event extends APINode {
       "place",
       "scheduled_publish_time",
       "start_time",
+      "ticket_setting",
       "ticket_uri",
       "ticket_uri_start_sales_time",
       "ticketing_privacy_uri",
@@ -2158,6 +2165,13 @@ public class Event extends APINode {
       this.requestField("start_time", value);
       return this;
     }
+    public APIRequestGet requestTicketSettingField () {
+      return this.requestTicketSettingField(true);
+    }
+    public APIRequestGet requestTicketSettingField (boolean value) {
+      this.requestField("ticket_setting", value);
+      return this;
+    }
     public APIRequestGet requestTicketUriField () {
       return this.requestTicketUriField(true);
     }
@@ -2210,56 +2224,50 @@ public class Event extends APINode {
   }
 
   public static enum EnumCategory {
-      @SerializedName("ART_EVENT")
-      VALUE_ART_EVENT("ART_EVENT"),
-      @SerializedName("BOOK_EVENT")
-      VALUE_BOOK_EVENT("BOOK_EVENT"),
-      @SerializedName("CLASS_EVENT")
-      VALUE_CLASS_EVENT("CLASS_EVENT"),
-      @SerializedName("COMEDY_EVENT")
-      VALUE_COMEDY_EVENT("COMEDY_EVENT"),
-      @SerializedName("CONFERENCE_EVENT")
-      VALUE_CONFERENCE_EVENT("CONFERENCE_EVENT"),
-      @SerializedName("DANCE_EVENT")
-      VALUE_DANCE_EVENT("DANCE_EVENT"),
-      @SerializedName("DINING_EVENT")
-      VALUE_DINING_EVENT("DINING_EVENT"),
-      @SerializedName("FAMILY_EVENT")
-      VALUE_FAMILY_EVENT("FAMILY_EVENT"),
-      @SerializedName("FESTIVAL_EVENT")
-      VALUE_FESTIVAL_EVENT("FESTIVAL_EVENT"),
-      @SerializedName("FITNESS")
-      VALUE_FITNESS("FITNESS"),
-      @SerializedName("FOOD_TASTING")
-      VALUE_FOOD_TASTING("FOOD_TASTING"),
-      @SerializedName("FUNDRAISER")
-      VALUE_FUNDRAISER("FUNDRAISER"),
-      @SerializedName("LECTURE")
-      VALUE_LECTURE("LECTURE"),
-      @SerializedName("MEETUP")
-      VALUE_MEETUP("MEETUP"),
-      @SerializedName("MOVIE_EVENT")
-      VALUE_MOVIE_EVENT("MOVIE_EVENT"),
-      @SerializedName("MUSIC_EVENT")
-      VALUE_MUSIC_EVENT("MUSIC_EVENT"),
-      @SerializedName("NEIGHBORHOOD")
-      VALUE_NEIGHBORHOOD("NEIGHBORHOOD"),
-      @SerializedName("NIGHTLIFE")
-      VALUE_NIGHTLIFE("NIGHTLIFE"),
-      @SerializedName("OTHER")
-      VALUE_OTHER("OTHER"),
-      @SerializedName("RELIGIOUS_EVENT")
-      VALUE_RELIGIOUS_EVENT("RELIGIOUS_EVENT"),
-      @SerializedName("SHOPPING")
-      VALUE_SHOPPING("SHOPPING"),
-      @SerializedName("SPORTS_EVENT")
-      VALUE_SPORTS_EVENT("SPORTS_EVENT"),
-      @SerializedName("THEATER_EVENT")
-      VALUE_THEATER_EVENT("THEATER_EVENT"),
-      @SerializedName("VOLUNTEERING")
-      VALUE_VOLUNTEERING("VOLUNTEERING"),
-      @SerializedName("WORKSHOP")
-      VALUE_WORKSHOP("WORKSHOP"),
+      @SerializedName("CLASSIC_LITERATURE")
+      VALUE_CLASSIC_LITERATURE("CLASSIC_LITERATURE"),
+      @SerializedName("COMEDY")
+      VALUE_COMEDY("COMEDY"),
+      @SerializedName("CRAFTS")
+      VALUE_CRAFTS("CRAFTS"),
+      @SerializedName("DANCE")
+      VALUE_DANCE("DANCE"),
+      @SerializedName("DRINKS")
+      VALUE_DRINKS("DRINKS"),
+      @SerializedName("FITNESS_AND_WORKOUTS")
+      VALUE_FITNESS_AND_WORKOUTS("FITNESS_AND_WORKOUTS"),
+      @SerializedName("FOODS")
+      VALUE_FOODS("FOODS"),
+      @SerializedName("GAMES")
+      VALUE_GAMES("GAMES"),
+      @SerializedName("GARDENING")
+      VALUE_GARDENING("GARDENING"),
+      @SerializedName("HEALTHY_LIVING_AND_SELF_CARE")
+      VALUE_HEALTHY_LIVING_AND_SELF_CARE("HEALTHY_LIVING_AND_SELF_CARE"),
+      @SerializedName("HEALTH_AND_MEDICAL")
+      VALUE_HEALTH_AND_MEDICAL("HEALTH_AND_MEDICAL"),
+      @SerializedName("HOME_AND_GARDEN")
+      VALUE_HOME_AND_GARDEN("HOME_AND_GARDEN"),
+      @SerializedName("MUSIC_AND_AUDIO")
+      VALUE_MUSIC_AND_AUDIO("MUSIC_AND_AUDIO"),
+      @SerializedName("PARTIES")
+      VALUE_PARTIES("PARTIES"),
+      @SerializedName("PROFESSIONAL_NETWORKING")
+      VALUE_PROFESSIONAL_NETWORKING("PROFESSIONAL_NETWORKING"),
+      @SerializedName("RELIGIONS")
+      VALUE_RELIGIONS("RELIGIONS"),
+      @SerializedName("SHOPPING_EVENT")
+      VALUE_SHOPPING_EVENT("SHOPPING_EVENT"),
+      @SerializedName("SOCIAL_ISSUES")
+      VALUE_SOCIAL_ISSUES("SOCIAL_ISSUES"),
+      @SerializedName("SPORTS")
+      VALUE_SPORTS("SPORTS"),
+      @SerializedName("THEATER")
+      VALUE_THEATER("THEATER"),
+      @SerializedName("TV_AND_MOVIES")
+      VALUE_TV_AND_MOVIES("TV_AND_MOVIES"),
+      @SerializedName("VISUAL_ARTS")
+      VALUE_VISUAL_ARTS("VISUAL_ARTS"),
       ;
 
       private String value;
@@ -2310,6 +2318,8 @@ public class Event extends APINode {
       VALUE_PRIVATE("private"),
       @SerializedName("public")
       VALUE_PUBLIC("public"),
+      @SerializedName("work_company")
+      VALUE_WORK_COMPANY("work_company"),
       ;
 
       private String value;
@@ -2408,6 +2418,7 @@ public class Event extends APINode {
     this.mPlace = instance.mPlace;
     this.mScheduledPublishTime = instance.mScheduledPublishTime;
     this.mStartTime = instance.mStartTime;
+    this.mTicketSetting = instance.mTicketSetting;
     this.mTicketUri = instance.mTicketUri;
     this.mTicketUriStartSalesTime = instance.mTicketUriStartSalesTime;
     this.mTicketingPrivacyUri = instance.mTicketingPrivacyUri;

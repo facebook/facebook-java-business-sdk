@@ -65,6 +65,8 @@ public class IGMedia extends APINode {
   private String mIgId = null;
   @SerializedName("is_comment_enabled")
   private Boolean mIsCommentEnabled = null;
+  @SerializedName("is_shared_to_feed")
+  private Boolean mIsSharedToFeed = null;
   @SerializedName("like_count")
   private Long mLikeCount = null;
   @SerializedName("media_product_type")
@@ -85,8 +87,6 @@ public class IGMedia extends APINode {
   private String mTimestamp = null;
   @SerializedName("username")
   private String mUsername = null;
-  @SerializedName("video_title")
-  private String mVideoTitle = null;
   protected static Gson gson = null;
 
   IGMedia() {
@@ -312,6 +312,18 @@ public class IGMedia extends APINode {
     return new APIRequestGetInsights(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestDeleteProductTags deleteProductTags() {
+    return new APIRequestDeleteProductTags(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetProductTags getProductTags() {
+    return new APIRequestGetProductTags(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateProductTag createProductTag() {
+    return new APIRequestCreateProductTag(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
@@ -339,6 +351,10 @@ public class IGMedia extends APINode {
 
   public Boolean getFieldIsCommentEnabled() {
     return mIsCommentEnabled;
+  }
+
+  public Boolean getFieldIsSharedToFeed() {
+    return mIsSharedToFeed;
   }
 
   public Long getFieldLikeCount() {
@@ -384,10 +400,6 @@ public class IGMedia extends APINode {
     return mUsername;
   }
 
-  public String getFieldVideoTitle() {
-    return mVideoTitle;
-  }
-
 
 
   public static class APIRequestGetChildren extends APIRequest<IGMedia> {
@@ -406,6 +418,7 @@ public class IGMedia extends APINode {
       "id",
       "ig_id",
       "is_comment_enabled",
+      "is_shared_to_feed",
       "like_count",
       "media_product_type",
       "media_type",
@@ -416,7 +429,6 @@ public class IGMedia extends APINode {
       "thumbnail_url",
       "timestamp",
       "username",
-      "video_title",
     };
 
     @Override
@@ -543,6 +555,13 @@ public class IGMedia extends APINode {
       this.requestField("is_comment_enabled", value);
       return this;
     }
+    public APIRequestGetChildren requestIsSharedToFeedField () {
+      return this.requestIsSharedToFeedField(true);
+    }
+    public APIRequestGetChildren requestIsSharedToFeedField (boolean value) {
+      this.requestField("is_shared_to_feed", value);
+      return this;
+    }
     public APIRequestGetChildren requestLikeCountField () {
       return this.requestLikeCountField(true);
     }
@@ -613,13 +632,6 @@ public class IGMedia extends APINode {
       this.requestField("username", value);
       return this;
     }
-    public APIRequestGetChildren requestVideoTitleField () {
-      return this.requestVideoTitleField(true);
-    }
-    public APIRequestGetChildren requestVideoTitleField (boolean value) {
-      this.requestField("video_title", value);
-      return this;
-    }
   }
 
   public static class APIRequestGetComments extends APIRequest<IGComment> {
@@ -633,10 +645,12 @@ public class IGMedia extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "from",
       "hidden",
       "id",
       "like_count",
       "media",
+      "parent_id",
       "text",
       "timestamp",
       "user",
@@ -732,6 +746,13 @@ public class IGMedia extends APINode {
       return this;
     }
 
+    public APIRequestGetComments requestFromField () {
+      return this.requestFromField(true);
+    }
+    public APIRequestGetComments requestFromField (boolean value) {
+      this.requestField("from", value);
+      return this;
+    }
     public APIRequestGetComments requestHiddenField () {
       return this.requestHiddenField(true);
     }
@@ -758,6 +779,13 @@ public class IGMedia extends APINode {
     }
     public APIRequestGetComments requestMediaField (boolean value) {
       this.requestField("media", value);
+      return this;
+    }
+    public APIRequestGetComments requestParentIdField () {
+      return this.requestParentIdField(true);
+    }
+    public APIRequestGetComments requestParentIdField (boolean value) {
+      this.requestField("parent_id", value);
       return this;
     }
     public APIRequestGetComments requestTextField () {
@@ -1072,6 +1100,446 @@ public class IGMedia extends APINode {
     }
   }
 
+  public static class APIRequestDeleteProductTags extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "child_index",
+      "deleted_tags",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestDeleteProductTags.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDeleteProductTags(String nodeId, APIContext context) {
+      super(context, nodeId, "/product_tags", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDeleteProductTags setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteProductTags setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDeleteProductTags setChildIndex (Long childIndex) {
+      this.setParam("child_index", childIndex);
+      return this;
+    }
+    public APIRequestDeleteProductTags setChildIndex (String childIndex) {
+      this.setParam("child_index", childIndex);
+      return this;
+    }
+
+    public APIRequestDeleteProductTags setDeletedTags (List<Map<String, String>> deletedTags) {
+      this.setParam("deleted_tags", deletedTags);
+      return this;
+    }
+    public APIRequestDeleteProductTags setDeletedTags (String deletedTags) {
+      this.setParam("deleted_tags", deletedTags);
+      return this;
+    }
+
+    public APIRequestDeleteProductTags requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDeleteProductTags requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteProductTags requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDeleteProductTags requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteProductTags requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteProductTags requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetProductTags extends APIRequest<ShadowIGMediaProductTags> {
+
+    APINodeList<ShadowIGMediaProductTags> lastResponse = null;
+    @Override
+    public APINodeList<ShadowIGMediaProductTags> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "image_url",
+      "is_checkout",
+      "merchant_id",
+      "name",
+      "price_string",
+      "product_id",
+      "review_status",
+      "stripped_price_string",
+      "stripped_sale_price_string",
+      "x",
+      "y",
+    };
+
+    @Override
+    public APINodeList<ShadowIGMediaProductTags> parseResponse(String response, String header) throws APIException {
+      return ShadowIGMediaProductTags.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<ShadowIGMediaProductTags> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ShadowIGMediaProductTags> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<ShadowIGMediaProductTags>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<ShadowIGMediaProductTags>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<ShadowIGMediaProductTags>>() {
+           public APINodeList<ShadowIGMediaProductTags> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetProductTags.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetProductTags(String nodeId, APIContext context) {
+      super(context, nodeId, "/product_tags", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetProductTags setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetProductTags setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetProductTags requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetProductTags requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetProductTags requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetProductTags requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetProductTags requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetProductTags requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetProductTags requestImageUrlField () {
+      return this.requestImageUrlField(true);
+    }
+    public APIRequestGetProductTags requestImageUrlField (boolean value) {
+      this.requestField("image_url", value);
+      return this;
+    }
+    public APIRequestGetProductTags requestIsCheckoutField () {
+      return this.requestIsCheckoutField(true);
+    }
+    public APIRequestGetProductTags requestIsCheckoutField (boolean value) {
+      this.requestField("is_checkout", value);
+      return this;
+    }
+    public APIRequestGetProductTags requestMerchantIdField () {
+      return this.requestMerchantIdField(true);
+    }
+    public APIRequestGetProductTags requestMerchantIdField (boolean value) {
+      this.requestField("merchant_id", value);
+      return this;
+    }
+    public APIRequestGetProductTags requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetProductTags requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetProductTags requestPriceStringField () {
+      return this.requestPriceStringField(true);
+    }
+    public APIRequestGetProductTags requestPriceStringField (boolean value) {
+      this.requestField("price_string", value);
+      return this;
+    }
+    public APIRequestGetProductTags requestProductIdField () {
+      return this.requestProductIdField(true);
+    }
+    public APIRequestGetProductTags requestProductIdField (boolean value) {
+      this.requestField("product_id", value);
+      return this;
+    }
+    public APIRequestGetProductTags requestReviewStatusField () {
+      return this.requestReviewStatusField(true);
+    }
+    public APIRequestGetProductTags requestReviewStatusField (boolean value) {
+      this.requestField("review_status", value);
+      return this;
+    }
+    public APIRequestGetProductTags requestStrippedPriceStringField () {
+      return this.requestStrippedPriceStringField(true);
+    }
+    public APIRequestGetProductTags requestStrippedPriceStringField (boolean value) {
+      this.requestField("stripped_price_string", value);
+      return this;
+    }
+    public APIRequestGetProductTags requestStrippedSalePriceStringField () {
+      return this.requestStrippedSalePriceStringField(true);
+    }
+    public APIRequestGetProductTags requestStrippedSalePriceStringField (boolean value) {
+      this.requestField("stripped_sale_price_string", value);
+      return this;
+    }
+    public APIRequestGetProductTags requestXField () {
+      return this.requestXField(true);
+    }
+    public APIRequestGetProductTags requestXField (boolean value) {
+      this.requestField("x", value);
+      return this;
+    }
+    public APIRequestGetProductTags requestYField () {
+      return this.requestYField(true);
+    }
+    public APIRequestGetProductTags requestYField (boolean value) {
+      this.requestField("y", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreateProductTag extends APIRequest<ShadowIGMediaProductTags> {
+
+    ShadowIGMediaProductTags lastResponse = null;
+    @Override
+    public ShadowIGMediaProductTags getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "child_index",
+      "updated_tags",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public ShadowIGMediaProductTags parseResponse(String response, String header) throws APIException {
+      return ShadowIGMediaProductTags.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public ShadowIGMediaProductTags execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ShadowIGMediaProductTags execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<ShadowIGMediaProductTags> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ShadowIGMediaProductTags> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, ShadowIGMediaProductTags>() {
+           public ShadowIGMediaProductTags apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateProductTag.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateProductTag(String nodeId, APIContext context) {
+      super(context, nodeId, "/product_tags", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateProductTag setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateProductTag setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateProductTag setChildIndex (Long childIndex) {
+      this.setParam("child_index", childIndex);
+      return this;
+    }
+    public APIRequestCreateProductTag setChildIndex (String childIndex) {
+      this.setParam("child_index", childIndex);
+      return this;
+    }
+
+    public APIRequestCreateProductTag setUpdatedTags (List<Map<String, String>> updatedTags) {
+      this.setParam("updated_tags", updatedTags);
+      return this;
+    }
+    public APIRequestCreateProductTag setUpdatedTags (String updatedTags) {
+      this.setParam("updated_tags", updatedTags);
+      return this;
+    }
+
+    public APIRequestCreateProductTag requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateProductTag requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateProductTag requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateProductTag requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateProductTag requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateProductTag requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGet extends APIRequest<IGMedia> {
 
     IGMedia lastResponse = null;
@@ -1088,6 +1556,7 @@ public class IGMedia extends APINode {
       "id",
       "ig_id",
       "is_comment_enabled",
+      "is_shared_to_feed",
       "like_count",
       "media_product_type",
       "media_type",
@@ -1098,7 +1567,6 @@ public class IGMedia extends APINode {
       "thumbnail_url",
       "timestamp",
       "username",
-      "video_title",
     };
 
     @Override
@@ -1225,6 +1693,13 @@ public class IGMedia extends APINode {
       this.requestField("is_comment_enabled", value);
       return this;
     }
+    public APIRequestGet requestIsSharedToFeedField () {
+      return this.requestIsSharedToFeedField(true);
+    }
+    public APIRequestGet requestIsSharedToFeedField (boolean value) {
+      this.requestField("is_shared_to_feed", value);
+      return this;
+    }
     public APIRequestGet requestLikeCountField () {
       return this.requestLikeCountField(true);
     }
@@ -1293,13 +1768,6 @@ public class IGMedia extends APINode {
     }
     public APIRequestGet requestUsernameField (boolean value) {
       this.requestField("username", value);
-      return this;
-    }
-    public APIRequestGet requestVideoTitleField () {
-      return this.requestVideoTitleField(true);
-    }
-    public APIRequestGet requestVideoTitleField (boolean value) {
-      this.requestField("video_title", value);
       return this;
     }
   }
@@ -1438,6 +1906,7 @@ public class IGMedia extends APINode {
     this.mId = instance.mId;
     this.mIgId = instance.mIgId;
     this.mIsCommentEnabled = instance.mIsCommentEnabled;
+    this.mIsSharedToFeed = instance.mIsSharedToFeed;
     this.mLikeCount = instance.mLikeCount;
     this.mMediaProductType = instance.mMediaProductType;
     this.mMediaType = instance.mMediaType;
@@ -1448,7 +1917,6 @@ public class IGMedia extends APINode {
     this.mThumbnailUrl = instance.mThumbnailUrl;
     this.mTimestamp = instance.mTimestamp;
     this.mUsername = instance.mUsername;
-    this.mVideoTitle = instance.mVideoTitle;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

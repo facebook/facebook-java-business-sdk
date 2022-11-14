@@ -97,8 +97,20 @@ public class ProductItem extends APINode {
   private String mCustomLabel3 = null;
   @SerializedName("custom_label_4")
   private String mCustomLabel4 = null;
+  @SerializedName("custom_number_0")
+  private String mCustomNumber0 = null;
+  @SerializedName("custom_number_1")
+  private String mCustomNumber1 = null;
+  @SerializedName("custom_number_2")
+  private String mCustomNumber2 = null;
+  @SerializedName("custom_number_3")
+  private String mCustomNumber3 = null;
+  @SerializedName("custom_number_4")
+  private String mCustomNumber4 = null;
   @SerializedName("description")
   private String mDescription = null;
+  @SerializedName("errors")
+  private List<ProductItemError> mErrors = null;
   @SerializedName("expiration_date")
   private String mExpirationDate = null;
   @SerializedName("fb_product_category")
@@ -117,10 +129,16 @@ public class ProductItem extends APINode {
   private String mImageUrl = null;
   @SerializedName("images")
   private List<String> mImages = null;
+  @SerializedName("importer_address")
+  private ProductItemImporterAddress mImporterAddress = null;
+  @SerializedName("importer_name")
+  private String mImporterName = null;
   @SerializedName("invalidation_errors")
   private List<Object> mInvalidationErrors = null;
   @SerializedName("inventory")
   private Long mInventory = null;
+  @SerializedName("manufacturer_info")
+  private String mManufacturerInfo = null;
   @SerializedName("manufacturer_part_number")
   private String mManufacturerPartNumber = null;
   @SerializedName("marked_for_product_launch")
@@ -133,10 +151,14 @@ public class ProductItem extends APINode {
   private String mName = null;
   @SerializedName("ordering_index")
   private Long mOrderingIndex = null;
+  @SerializedName("origin_country")
+  private String mOriginCountry = null;
   @SerializedName("parent_product_id")
   private String mParentProductId = null;
   @SerializedName("pattern")
   private String mPattern = null;
+  @SerializedName("post_conversion_signal_based_enforcement_appeal_eligibility")
+  private Boolean mPostConversionSignalBasedEnforcementAppealEligibility = null;
   @SerializedName("price")
   private String mPrice = null;
   @SerializedName("product_catalog")
@@ -177,6 +199,8 @@ public class ProductItem extends APINode {
   private String mUrl = null;
   @SerializedName("visibility")
   private EnumVisibility mVisibility = null;
+  @SerializedName("wa_compliance_category")
+  private String mWaComplianceCategory = null;
   protected static Gson gson = null;
 
   ProductItem() {
@@ -491,8 +515,32 @@ public class ProductItem extends APINode {
     return mCustomLabel4;
   }
 
+  public String getFieldCustomNumber0() {
+    return mCustomNumber0;
+  }
+
+  public String getFieldCustomNumber1() {
+    return mCustomNumber1;
+  }
+
+  public String getFieldCustomNumber2() {
+    return mCustomNumber2;
+  }
+
+  public String getFieldCustomNumber3() {
+    return mCustomNumber3;
+  }
+
+  public String getFieldCustomNumber4() {
+    return mCustomNumber4;
+  }
+
   public String getFieldDescription() {
     return mDescription;
+  }
+
+  public List<ProductItemError> getFieldErrors() {
+    return mErrors;
   }
 
   public String getFieldExpirationDate() {
@@ -531,12 +579,24 @@ public class ProductItem extends APINode {
     return mImages;
   }
 
+  public ProductItemImporterAddress getFieldImporterAddress() {
+    return mImporterAddress;
+  }
+
+  public String getFieldImporterName() {
+    return mImporterName;
+  }
+
   public List<Object> getFieldInvalidationErrors() {
     return mInvalidationErrors;
   }
 
   public Long getFieldInventory() {
     return mInventory;
+  }
+
+  public String getFieldManufacturerInfo() {
+    return mManufacturerInfo;
   }
 
   public String getFieldManufacturerPartNumber() {
@@ -563,12 +623,20 @@ public class ProductItem extends APINode {
     return mOrderingIndex;
   }
 
+  public String getFieldOriginCountry() {
+    return mOriginCountry;
+  }
+
   public String getFieldParentProductId() {
     return mParentProductId;
   }
 
   public String getFieldPattern() {
     return mPattern;
+  }
+
+  public Boolean getFieldPostConversionSignalBasedEnforcementAppealEligibility() {
+    return mPostConversionSignalBasedEnforcementAppealEligibility;
   }
 
   public String getFieldPrice() {
@@ -658,6 +726,10 @@ public class ProductItem extends APINode {
 
   public EnumVisibility getFieldVisibility() {
     return mVisibility;
+  }
+
+  public String getFieldWaComplianceCategory() {
+    return mWaComplianceCategory;
   }
 
 
@@ -1107,7 +1179,13 @@ public class ProductItem extends APINode {
       "custom_label_2",
       "custom_label_3",
       "custom_label_4",
+      "custom_number_0",
+      "custom_number_1",
+      "custom_number_2",
+      "custom_number_3",
+      "custom_number_4",
       "description",
+      "errors",
       "expiration_date",
       "fb_product_category",
       "gender",
@@ -1117,16 +1195,21 @@ public class ProductItem extends APINode {
       "image_fetch_status",
       "image_url",
       "images",
+      "importer_address",
+      "importer_name",
       "invalidation_errors",
       "inventory",
+      "manufacturer_info",
       "manufacturer_part_number",
       "marked_for_product_launch",
       "material",
       "mobile_link",
       "name",
       "ordering_index",
+      "origin_country",
       "parent_product_id",
       "pattern",
+      "post_conversion_signal_based_enforcement_appeal_eligibility",
       "price",
       "product_catalog",
       "product_feed",
@@ -1147,6 +1230,7 @@ public class ProductItem extends APINode {
       "start_date",
       "url",
       "visibility",
+      "wa_compliance_category",
     };
 
     @Override
@@ -1418,11 +1502,53 @@ public class ProductItem extends APINode {
       this.requestField("custom_label_4", value);
       return this;
     }
+    public APIRequestGet requestCustomNumber0Field () {
+      return this.requestCustomNumber0Field(true);
+    }
+    public APIRequestGet requestCustomNumber0Field (boolean value) {
+      this.requestField("custom_number_0", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNumber1Field () {
+      return this.requestCustomNumber1Field(true);
+    }
+    public APIRequestGet requestCustomNumber1Field (boolean value) {
+      this.requestField("custom_number_1", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNumber2Field () {
+      return this.requestCustomNumber2Field(true);
+    }
+    public APIRequestGet requestCustomNumber2Field (boolean value) {
+      this.requestField("custom_number_2", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNumber3Field () {
+      return this.requestCustomNumber3Field(true);
+    }
+    public APIRequestGet requestCustomNumber3Field (boolean value) {
+      this.requestField("custom_number_3", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNumber4Field () {
+      return this.requestCustomNumber4Field(true);
+    }
+    public APIRequestGet requestCustomNumber4Field (boolean value) {
+      this.requestField("custom_number_4", value);
+      return this;
+    }
     public APIRequestGet requestDescriptionField () {
       return this.requestDescriptionField(true);
     }
     public APIRequestGet requestDescriptionField (boolean value) {
       this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGet requestErrorsField () {
+      return this.requestErrorsField(true);
+    }
+    public APIRequestGet requestErrorsField (boolean value) {
+      this.requestField("errors", value);
       return this;
     }
     public APIRequestGet requestExpirationDateField () {
@@ -1488,6 +1614,20 @@ public class ProductItem extends APINode {
       this.requestField("images", value);
       return this;
     }
+    public APIRequestGet requestImporterAddressField () {
+      return this.requestImporterAddressField(true);
+    }
+    public APIRequestGet requestImporterAddressField (boolean value) {
+      this.requestField("importer_address", value);
+      return this;
+    }
+    public APIRequestGet requestImporterNameField () {
+      return this.requestImporterNameField(true);
+    }
+    public APIRequestGet requestImporterNameField (boolean value) {
+      this.requestField("importer_name", value);
+      return this;
+    }
     public APIRequestGet requestInvalidationErrorsField () {
       return this.requestInvalidationErrorsField(true);
     }
@@ -1500,6 +1640,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestInventoryField (boolean value) {
       this.requestField("inventory", value);
+      return this;
+    }
+    public APIRequestGet requestManufacturerInfoField () {
+      return this.requestManufacturerInfoField(true);
+    }
+    public APIRequestGet requestManufacturerInfoField (boolean value) {
+      this.requestField("manufacturer_info", value);
       return this;
     }
     public APIRequestGet requestManufacturerPartNumberField () {
@@ -1544,6 +1691,13 @@ public class ProductItem extends APINode {
       this.requestField("ordering_index", value);
       return this;
     }
+    public APIRequestGet requestOriginCountryField () {
+      return this.requestOriginCountryField(true);
+    }
+    public APIRequestGet requestOriginCountryField (boolean value) {
+      this.requestField("origin_country", value);
+      return this;
+    }
     public APIRequestGet requestParentProductIdField () {
       return this.requestParentProductIdField(true);
     }
@@ -1556,6 +1710,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestPatternField (boolean value) {
       this.requestField("pattern", value);
+      return this;
+    }
+    public APIRequestGet requestPostConversionSignalBasedEnforcementAppealEligibilityField () {
+      return this.requestPostConversionSignalBasedEnforcementAppealEligibilityField(true);
+    }
+    public APIRequestGet requestPostConversionSignalBasedEnforcementAppealEligibilityField (boolean value) {
+      this.requestField("post_conversion_signal_based_enforcement_appeal_eligibility", value);
       return this;
     }
     public APIRequestGet requestPriceField () {
@@ -1698,6 +1859,13 @@ public class ProductItem extends APINode {
       this.requestField("visibility", value);
       return this;
     }
+    public APIRequestGet requestWaComplianceCategoryField () {
+      return this.requestWaComplianceCategoryField(true);
+    }
+    public APIRequestGet requestWaComplianceCategoryField (boolean value) {
+      this.requestField("wa_compliance_category", value);
+      return this;
+    }
   }
 
   public static class APIRequestUpdate extends APIRequest<ProductItem> {
@@ -1730,12 +1898,19 @@ public class ProductItem extends APINode {
       "custom_label_2",
       "custom_label_3",
       "custom_label_4",
+      "custom_number_0",
+      "custom_number_1",
+      "custom_number_2",
+      "custom_number_3",
+      "custom_number_4",
       "description",
       "expiration_date",
       "fb_product_category",
       "gender",
       "gtin",
       "image_url",
+      "importer_address",
+      "importer_name",
       "inventory",
       "ios_app_name",
       "ios_app_store_id",
@@ -1747,6 +1922,7 @@ public class ProductItem extends APINode {
       "iphone_app_store_id",
       "iphone_url",
       "launch_date",
+      "manufacturer_info",
       "manufacturer_part_number",
       "marked_for_product_launch",
       "material",
@@ -1756,6 +1932,7 @@ public class ProductItem extends APINode {
       "offer_price_end_date",
       "offer_price_start_date",
       "ordering_index",
+      "origin_country",
       "pattern",
       "price",
       "product_type",
@@ -1770,6 +1947,7 @@ public class ProductItem extends APINode {
       "start_date",
       "url",
       "visibility",
+      "wa_compliance_category",
       "windows_phone_app_id",
       "windows_phone_app_name",
       "windows_phone_url",
@@ -1973,6 +2151,51 @@ public class ProductItem extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setCustomNumber0 (Long customNumber0) {
+      this.setParam("custom_number_0", customNumber0);
+      return this;
+    }
+    public APIRequestUpdate setCustomNumber0 (String customNumber0) {
+      this.setParam("custom_number_0", customNumber0);
+      return this;
+    }
+
+    public APIRequestUpdate setCustomNumber1 (Long customNumber1) {
+      this.setParam("custom_number_1", customNumber1);
+      return this;
+    }
+    public APIRequestUpdate setCustomNumber1 (String customNumber1) {
+      this.setParam("custom_number_1", customNumber1);
+      return this;
+    }
+
+    public APIRequestUpdate setCustomNumber2 (Long customNumber2) {
+      this.setParam("custom_number_2", customNumber2);
+      return this;
+    }
+    public APIRequestUpdate setCustomNumber2 (String customNumber2) {
+      this.setParam("custom_number_2", customNumber2);
+      return this;
+    }
+
+    public APIRequestUpdate setCustomNumber3 (Long customNumber3) {
+      this.setParam("custom_number_3", customNumber3);
+      return this;
+    }
+    public APIRequestUpdate setCustomNumber3 (String customNumber3) {
+      this.setParam("custom_number_3", customNumber3);
+      return this;
+    }
+
+    public APIRequestUpdate setCustomNumber4 (Long customNumber4) {
+      this.setParam("custom_number_4", customNumber4);
+      return this;
+    }
+    public APIRequestUpdate setCustomNumber4 (String customNumber4) {
+      this.setParam("custom_number_4", customNumber4);
+      return this;
+    }
+
     public APIRequestUpdate setDescription (String description) {
       this.setParam("description", description);
       return this;
@@ -2004,6 +2227,20 @@ public class ProductItem extends APINode {
 
     public APIRequestUpdate setImageUrl (String imageUrl) {
       this.setParam("image_url", imageUrl);
+      return this;
+    }
+
+    public APIRequestUpdate setImporterAddress (Map<String, String> importerAddress) {
+      this.setParam("importer_address", importerAddress);
+      return this;
+    }
+    public APIRequestUpdate setImporterAddress (String importerAddress) {
+      this.setParam("importer_address", importerAddress);
+      return this;
+    }
+
+    public APIRequestUpdate setImporterName (String importerName) {
+      this.setParam("importer_name", importerName);
       return this;
     }
 
@@ -2078,6 +2315,11 @@ public class ProductItem extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setManufacturerInfo (String manufacturerInfo) {
+      this.setParam("manufacturer_info", manufacturerInfo);
+      return this;
+    }
+
     public APIRequestUpdate setManufacturerPartNumber (String manufacturerPartNumber) {
       this.setParam("manufacturer_part_number", manufacturerPartNumber);
       return this;
@@ -2132,6 +2374,15 @@ public class ProductItem extends APINode {
     }
     public APIRequestUpdate setOrderingIndex (String orderingIndex) {
       this.setParam("ordering_index", orderingIndex);
+      return this;
+    }
+
+    public APIRequestUpdate setOriginCountry (ProductItem.EnumOriginCountry originCountry) {
+      this.setParam("origin_country", originCountry);
+      return this;
+    }
+    public APIRequestUpdate setOriginCountry (String originCountry) {
+      this.setParam("origin_country", originCountry);
       return this;
     }
 
@@ -2222,6 +2473,15 @@ public class ProductItem extends APINode {
     }
     public APIRequestUpdate setVisibility (String visibility) {
       this.setParam("visibility", visibility);
+      return this;
+    }
+
+    public APIRequestUpdate setWaComplianceCategory (ProductItem.EnumWaComplianceCategory waComplianceCategory) {
+      this.setParam("wa_compliance_category", waComplianceCategory);
+      return this;
+    }
+    public APIRequestUpdate setWaComplianceCategory (String waComplianceCategory) {
+      this.setParam("wa_compliance_category", waComplianceCategory);
       return this;
     }
 
@@ -2671,8 +2931,12 @@ public class ProductItem extends APINode {
       VALUE_FB_ELEC_PRINT("FB_ELEC_PRINT"),
       @SerializedName("FB_ELEC_RADAR")
       VALUE_FB_ELEC_RADAR("FB_ELEC_RADAR"),
+      @SerializedName("FB_ELEC_SFTWR")
+      VALUE_FB_ELEC_SFTWR("FB_ELEC_SFTWR"),
       @SerializedName("FB_ELEC_SPEED_RDR")
       VALUE_FB_ELEC_SPEED_RDR("FB_ELEC_SPEED_RDR"),
+      @SerializedName("FB_ELEC_TELEVISION")
+      VALUE_FB_ELEC_TELEVISION("FB_ELEC_TELEVISION"),
       @SerializedName("FB_ELEC_TOLL")
       VALUE_FB_ELEC_TOLL("FB_ELEC_TOLL"),
       @SerializedName("FB_ELEC_VIDEO")
@@ -2899,6 +3163,190 @@ public class ProductItem extends APINode {
       }
   }
 
+  public static enum EnumErrorPriority {
+      @SerializedName("HIGH")
+      VALUE_HIGH("HIGH"),
+      @SerializedName("LOW")
+      VALUE_LOW("LOW"),
+      @SerializedName("MEDIUM")
+      VALUE_MEDIUM("MEDIUM"),
+      ;
+
+      private String value;
+
+      private EnumErrorPriority(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumErrorType {
+      @SerializedName("AR_DELETED_DUE_TO_UPDATE")
+      VALUE_AR_DELETED_DUE_TO_UPDATE("AR_DELETED_DUE_TO_UPDATE"),
+      @SerializedName("AR_POLICY_VIOLATED")
+      VALUE_AR_POLICY_VIOLATED("AR_POLICY_VIOLATED"),
+      @SerializedName("AVAILABLE")
+      VALUE_AVAILABLE("AVAILABLE"),
+      @SerializedName("BAD_QUALITY_IMAGE")
+      VALUE_BAD_QUALITY_IMAGE("BAD_QUALITY_IMAGE"),
+      @SerializedName("CANNOT_EDIT_SUBSCRIPTION_PRODUCTS")
+      VALUE_CANNOT_EDIT_SUBSCRIPTION_PRODUCTS("CANNOT_EDIT_SUBSCRIPTION_PRODUCTS"),
+      @SerializedName("CRAWLED_AVAILABILITY_MISMATCH")
+      VALUE_CRAWLED_AVAILABILITY_MISMATCH("CRAWLED_AVAILABILITY_MISMATCH"),
+      @SerializedName("DIGITAL_GOODS_NOT_AVAILABLE_FOR_CHECKOUT")
+      VALUE_DIGITAL_GOODS_NOT_AVAILABLE_FOR_CHECKOUT("DIGITAL_GOODS_NOT_AVAILABLE_FOR_CHECKOUT"),
+      @SerializedName("DUPLICATE_IMAGES")
+      VALUE_DUPLICATE_IMAGES("DUPLICATE_IMAGES"),
+      @SerializedName("DUPLICATE_TITLE_AND_DESCRIPTION")
+      VALUE_DUPLICATE_TITLE_AND_DESCRIPTION("DUPLICATE_TITLE_AND_DESCRIPTION"),
+      @SerializedName("GENERIC_INVALID_FIELD")
+      VALUE_GENERIC_INVALID_FIELD("GENERIC_INVALID_FIELD"),
+      @SerializedName("HIDDEN_UNTIL_PRODUCT_LAUNCH")
+      VALUE_HIDDEN_UNTIL_PRODUCT_LAUNCH("HIDDEN_UNTIL_PRODUCT_LAUNCH"),
+      @SerializedName("IMAGE_FETCH_FAILED")
+      VALUE_IMAGE_FETCH_FAILED("IMAGE_FETCH_FAILED"),
+      @SerializedName("IMAGE_FETCH_FAILED_BAD_GATEWAY")
+      VALUE_IMAGE_FETCH_FAILED_BAD_GATEWAY("IMAGE_FETCH_FAILED_BAD_GATEWAY"),
+      @SerializedName("IMAGE_FETCH_FAILED_FILE_SIZE_EXCEEDED")
+      VALUE_IMAGE_FETCH_FAILED_FILE_SIZE_EXCEEDED("IMAGE_FETCH_FAILED_FILE_SIZE_EXCEEDED"),
+      @SerializedName("IMAGE_FETCH_FAILED_FORBIDDEN")
+      VALUE_IMAGE_FETCH_FAILED_FORBIDDEN("IMAGE_FETCH_FAILED_FORBIDDEN"),
+      @SerializedName("IMAGE_FETCH_FAILED_LINK_BROKEN")
+      VALUE_IMAGE_FETCH_FAILED_LINK_BROKEN("IMAGE_FETCH_FAILED_LINK_BROKEN"),
+      @SerializedName("IMAGE_FETCH_FAILED_TIMED_OUT")
+      VALUE_IMAGE_FETCH_FAILED_TIMED_OUT("IMAGE_FETCH_FAILED_TIMED_OUT"),
+      @SerializedName("IMAGE_RESOLUTION_LOW")
+      VALUE_IMAGE_RESOLUTION_LOW("IMAGE_RESOLUTION_LOW"),
+      @SerializedName("INACTIVE_SHOPIFY_PRODUCT")
+      VALUE_INACTIVE_SHOPIFY_PRODUCT("INACTIVE_SHOPIFY_PRODUCT"),
+      @SerializedName("INVALID_COMMERCE_TAX_CATEGORY")
+      VALUE_INVALID_COMMERCE_TAX_CATEGORY("INVALID_COMMERCE_TAX_CATEGORY"),
+      @SerializedName("INVALID_IMAGES")
+      VALUE_INVALID_IMAGES("INVALID_IMAGES"),
+      @SerializedName("INVALID_MONETIZER_RETURN_POLICY")
+      VALUE_INVALID_MONETIZER_RETURN_POLICY("INVALID_MONETIZER_RETURN_POLICY"),
+      @SerializedName("INVALID_PRE_ORDER_PARAMS")
+      VALUE_INVALID_PRE_ORDER_PARAMS("INVALID_PRE_ORDER_PARAMS"),
+      @SerializedName("INVALID_SHIPPING_PROFILE_PARAMS")
+      VALUE_INVALID_SHIPPING_PROFILE_PARAMS("INVALID_SHIPPING_PROFILE_PARAMS"),
+      @SerializedName("INVALID_SUBSCRIPTION_DISABLE_PARAMS")
+      VALUE_INVALID_SUBSCRIPTION_DISABLE_PARAMS("INVALID_SUBSCRIPTION_DISABLE_PARAMS"),
+      @SerializedName("INVALID_SUBSCRIPTION_ENABLE_PARAMS")
+      VALUE_INVALID_SUBSCRIPTION_ENABLE_PARAMS("INVALID_SUBSCRIPTION_ENABLE_PARAMS"),
+      @SerializedName("INVALID_SUBSCRIPTION_PARAMS")
+      VALUE_INVALID_SUBSCRIPTION_PARAMS("INVALID_SUBSCRIPTION_PARAMS"),
+      @SerializedName("INVENTORY_ZERO_AVAILABILITY_IN_STOCK")
+      VALUE_INVENTORY_ZERO_AVAILABILITY_IN_STOCK("INVENTORY_ZERO_AVAILABILITY_IN_STOCK"),
+      @SerializedName("IN_ANOTHER_PRODUCT_LAUNCH")
+      VALUE_IN_ANOTHER_PRODUCT_LAUNCH("IN_ANOTHER_PRODUCT_LAUNCH"),
+      @SerializedName("ITEM_GROUP_NOT_SPECIFIED")
+      VALUE_ITEM_GROUP_NOT_SPECIFIED("ITEM_GROUP_NOT_SPECIFIED"),
+      @SerializedName("ITEM_NOT_SHIPPABLE_FOR_SCA_SHOP")
+      VALUE_ITEM_NOT_SHIPPABLE_FOR_SCA_SHOP("ITEM_NOT_SHIPPABLE_FOR_SCA_SHOP"),
+      @SerializedName("ITEM_OVERRIDE_NOT_VISIBLE")
+      VALUE_ITEM_OVERRIDE_NOT_VISIBLE("ITEM_OVERRIDE_NOT_VISIBLE"),
+      @SerializedName("ITEM_STALE_OUT_OF_STOCK")
+      VALUE_ITEM_STALE_OUT_OF_STOCK("ITEM_STALE_OUT_OF_STOCK"),
+      @SerializedName("MINI_SHOPS_DISABLED_BY_USER")
+      VALUE_MINI_SHOPS_DISABLED_BY_USER("MINI_SHOPS_DISABLED_BY_USER"),
+      @SerializedName("MISSING_CHECKOUT")
+      VALUE_MISSING_CHECKOUT("MISSING_CHECKOUT"),
+      @SerializedName("MISSING_CHECKOUT_CURRENCY")
+      VALUE_MISSING_CHECKOUT_CURRENCY("MISSING_CHECKOUT_CURRENCY"),
+      @SerializedName("MISSING_COLOR")
+      VALUE_MISSING_COLOR("MISSING_COLOR"),
+      @SerializedName("MISSING_COUNTRY_OVERRIDE_IN_SHIPPING_PROFILE")
+      VALUE_MISSING_COUNTRY_OVERRIDE_IN_SHIPPING_PROFILE("MISSING_COUNTRY_OVERRIDE_IN_SHIPPING_PROFILE"),
+      @SerializedName("MISSING_INDIA_COMPLIANCE_FIELDS")
+      VALUE_MISSING_INDIA_COMPLIANCE_FIELDS("MISSING_INDIA_COMPLIANCE_FIELDS"),
+      @SerializedName("MISSING_SHIPPING_PROFILE")
+      VALUE_MISSING_SHIPPING_PROFILE("MISSING_SHIPPING_PROFILE"),
+      @SerializedName("MISSING_SIZE")
+      VALUE_MISSING_SIZE("MISSING_SIZE"),
+      @SerializedName("MISSING_TAX_CATEGORY")
+      VALUE_MISSING_TAX_CATEGORY("MISSING_TAX_CATEGORY"),
+      @SerializedName("NEGATIVE_COMMUNITY_FEEDBACK")
+      VALUE_NEGATIVE_COMMUNITY_FEEDBACK("NEGATIVE_COMMUNITY_FEEDBACK"),
+      @SerializedName("NOT_ENOUGH_IMAGES")
+      VALUE_NOT_ENOUGH_IMAGES("NOT_ENOUGH_IMAGES"),
+      @SerializedName("PART_OF_PRODUCT_LAUNCH")
+      VALUE_PART_OF_PRODUCT_LAUNCH("PART_OF_PRODUCT_LAUNCH"),
+      @SerializedName("PRODUCT_EXPIRED")
+      VALUE_PRODUCT_EXPIRED("PRODUCT_EXPIRED"),
+      @SerializedName("PRODUCT_ITEM_HIDDEN_FROM_ALL_SHOPS")
+      VALUE_PRODUCT_ITEM_HIDDEN_FROM_ALL_SHOPS("PRODUCT_ITEM_HIDDEN_FROM_ALL_SHOPS"),
+      @SerializedName("PRODUCT_ITEM_NOT_INCLUDED_IN_ANY_SHOP")
+      VALUE_PRODUCT_ITEM_NOT_INCLUDED_IN_ANY_SHOP("PRODUCT_ITEM_NOT_INCLUDED_IN_ANY_SHOP"),
+      @SerializedName("PRODUCT_ITEM_NOT_VISIBLE")
+      VALUE_PRODUCT_ITEM_NOT_VISIBLE("PRODUCT_ITEM_NOT_VISIBLE"),
+      @SerializedName("PRODUCT_NOT_APPROVED")
+      VALUE_PRODUCT_NOT_APPROVED("PRODUCT_NOT_APPROVED"),
+      @SerializedName("PRODUCT_NOT_DOMINANT_CURRENCY")
+      VALUE_PRODUCT_NOT_DOMINANT_CURRENCY("PRODUCT_NOT_DOMINANT_CURRENCY"),
+      @SerializedName("PRODUCT_OUT_OF_STOCK")
+      VALUE_PRODUCT_OUT_OF_STOCK("PRODUCT_OUT_OF_STOCK"),
+      @SerializedName("PRODUCT_URL_EQUALS_DOMAIN")
+      VALUE_PRODUCT_URL_EQUALS_DOMAIN("PRODUCT_URL_EQUALS_DOMAIN"),
+      @SerializedName("PROPERTY_PRICE_CURRENCY_NOT_SUPPORTED")
+      VALUE_PROPERTY_PRICE_CURRENCY_NOT_SUPPORTED("PROPERTY_PRICE_CURRENCY_NOT_SUPPORTED"),
+      @SerializedName("PROPERTY_PRICE_TOO_HIGH")
+      VALUE_PROPERTY_PRICE_TOO_HIGH("PROPERTY_PRICE_TOO_HIGH"),
+      @SerializedName("PROPERTY_PRICE_TOO_LOW")
+      VALUE_PROPERTY_PRICE_TOO_LOW("PROPERTY_PRICE_TOO_LOW"),
+      @SerializedName("PROPERTY_VALUE_CONTAINS_HTML_TAGS")
+      VALUE_PROPERTY_VALUE_CONTAINS_HTML_TAGS("PROPERTY_VALUE_CONTAINS_HTML_TAGS"),
+      @SerializedName("PROPERTY_VALUE_DESCRIPTION_CONTAINS_OFF_PLATFORM_LINK")
+      VALUE_PROPERTY_VALUE_DESCRIPTION_CONTAINS_OFF_PLATFORM_LINK("PROPERTY_VALUE_DESCRIPTION_CONTAINS_OFF_PLATFORM_LINK"),
+      @SerializedName("PROPERTY_VALUE_FORMAT")
+      VALUE_PROPERTY_VALUE_FORMAT("PROPERTY_VALUE_FORMAT"),
+      @SerializedName("PROPERTY_VALUE_MISSING")
+      VALUE_PROPERTY_VALUE_MISSING("PROPERTY_VALUE_MISSING"),
+      @SerializedName("PROPERTY_VALUE_MISSING_WARNING")
+      VALUE_PROPERTY_VALUE_MISSING_WARNING("PROPERTY_VALUE_MISSING_WARNING"),
+      @SerializedName("PROPERTY_VALUE_NON_POSITIVE")
+      VALUE_PROPERTY_VALUE_NON_POSITIVE("PROPERTY_VALUE_NON_POSITIVE"),
+      @SerializedName("PROPERTY_VALUE_STRING_EXCEEDS_LENGTH")
+      VALUE_PROPERTY_VALUE_STRING_EXCEEDS_LENGTH("PROPERTY_VALUE_STRING_EXCEEDS_LENGTH"),
+      @SerializedName("PROPERTY_VALUE_STRING_TOO_SHORT")
+      VALUE_PROPERTY_VALUE_STRING_TOO_SHORT("PROPERTY_VALUE_STRING_TOO_SHORT"),
+      @SerializedName("PROPERTY_VALUE_UPPERCASE_WARNING")
+      VALUE_PROPERTY_VALUE_UPPERCASE_WARNING("PROPERTY_VALUE_UPPERCASE_WARNING"),
+      @SerializedName("QUALITY_DUPLICATED_DESCRIPTION")
+      VALUE_QUALITY_DUPLICATED_DESCRIPTION("QUALITY_DUPLICATED_DESCRIPTION"),
+      @SerializedName("QUALITY_ITEM_LINK_BROKEN")
+      VALUE_QUALITY_ITEM_LINK_BROKEN("QUALITY_ITEM_LINK_BROKEN"),
+      @SerializedName("QUALITY_ITEM_LINK_REDIRECTING")
+      VALUE_QUALITY_ITEM_LINK_REDIRECTING("QUALITY_ITEM_LINK_REDIRECTING"),
+      @SerializedName("RETAILER_ID_NOT_PROVIDED")
+      VALUE_RETAILER_ID_NOT_PROVIDED("RETAILER_ID_NOT_PROVIDED"),
+      @SerializedName("SHOPIFY_ITEM_MISSING_SHIPPING_PROFILE")
+      VALUE_SHOPIFY_ITEM_MISSING_SHIPPING_PROFILE("SHOPIFY_ITEM_MISSING_SHIPPING_PROFILE"),
+      @SerializedName("SUBSCRIPTION_INFO_NOT_ENABLED_FOR_FEED")
+      VALUE_SUBSCRIPTION_INFO_NOT_ENABLED_FOR_FEED("SUBSCRIPTION_INFO_NOT_ENABLED_FOR_FEED"),
+      @SerializedName("TAX_CATEGORY_NOT_SUPPORTED_IN_UK")
+      VALUE_TAX_CATEGORY_NOT_SUPPORTED_IN_UK("TAX_CATEGORY_NOT_SUPPORTED_IN_UK"),
+      @SerializedName("UNSUPPORTED_PRODUCT_CATEGORY")
+      VALUE_UNSUPPORTED_PRODUCT_CATEGORY("UNSUPPORTED_PRODUCT_CATEGORY"),
+      @SerializedName("VARIANT_ATTRIBUTE_ISSUE")
+      VALUE_VARIANT_ATTRIBUTE_ISSUE("VARIANT_ATTRIBUTE_ISSUE"),
+      ;
+
+      private String value;
+
+      private EnumErrorType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumMarkedForProductLaunch {
       @SerializedName("default")
       VALUE_DEFAULT("default"),
@@ -2911,6 +3359,542 @@ public class ProductItem extends APINode {
       private String value;
 
       private EnumMarkedForProductLaunch(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumOriginCountry {
+      @SerializedName("AD")
+      VALUE_AD("AD"),
+      @SerializedName("AE")
+      VALUE_AE("AE"),
+      @SerializedName("AF")
+      VALUE_AF("AF"),
+      @SerializedName("AG")
+      VALUE_AG("AG"),
+      @SerializedName("AI")
+      VALUE_AI("AI"),
+      @SerializedName("AL")
+      VALUE_AL("AL"),
+      @SerializedName("AM")
+      VALUE_AM("AM"),
+      @SerializedName("AN")
+      VALUE_AN("AN"),
+      @SerializedName("AO")
+      VALUE_AO("AO"),
+      @SerializedName("AQ")
+      VALUE_AQ("AQ"),
+      @SerializedName("AR")
+      VALUE_AR("AR"),
+      @SerializedName("AS")
+      VALUE_AS("AS"),
+      @SerializedName("AT")
+      VALUE_AT("AT"),
+      @SerializedName("AU")
+      VALUE_AU("AU"),
+      @SerializedName("AW")
+      VALUE_AW("AW"),
+      @SerializedName("AX")
+      VALUE_AX("AX"),
+      @SerializedName("AZ")
+      VALUE_AZ("AZ"),
+      @SerializedName("BA")
+      VALUE_BA("BA"),
+      @SerializedName("BB")
+      VALUE_BB("BB"),
+      @SerializedName("BD")
+      VALUE_BD("BD"),
+      @SerializedName("BE")
+      VALUE_BE("BE"),
+      @SerializedName("BF")
+      VALUE_BF("BF"),
+      @SerializedName("BG")
+      VALUE_BG("BG"),
+      @SerializedName("BH")
+      VALUE_BH("BH"),
+      @SerializedName("BI")
+      VALUE_BI("BI"),
+      @SerializedName("BJ")
+      VALUE_BJ("BJ"),
+      @SerializedName("BL")
+      VALUE_BL("BL"),
+      @SerializedName("BM")
+      VALUE_BM("BM"),
+      @SerializedName("BN")
+      VALUE_BN("BN"),
+      @SerializedName("BO")
+      VALUE_BO("BO"),
+      @SerializedName("BQ")
+      VALUE_BQ("BQ"),
+      @SerializedName("BR")
+      VALUE_BR("BR"),
+      @SerializedName("BS")
+      VALUE_BS("BS"),
+      @SerializedName("BT")
+      VALUE_BT("BT"),
+      @SerializedName("BV")
+      VALUE_BV("BV"),
+      @SerializedName("BW")
+      VALUE_BW("BW"),
+      @SerializedName("BY")
+      VALUE_BY("BY"),
+      @SerializedName("BZ")
+      VALUE_BZ("BZ"),
+      @SerializedName("CA")
+      VALUE_CA("CA"),
+      @SerializedName("CC")
+      VALUE_CC("CC"),
+      @SerializedName("CD")
+      VALUE_CD("CD"),
+      @SerializedName("CF")
+      VALUE_CF("CF"),
+      @SerializedName("CG")
+      VALUE_CG("CG"),
+      @SerializedName("CH")
+      VALUE_CH("CH"),
+      @SerializedName("CI")
+      VALUE_CI("CI"),
+      @SerializedName("CK")
+      VALUE_CK("CK"),
+      @SerializedName("CL")
+      VALUE_CL("CL"),
+      @SerializedName("CM")
+      VALUE_CM("CM"),
+      @SerializedName("CN")
+      VALUE_CN("CN"),
+      @SerializedName("CO")
+      VALUE_CO("CO"),
+      @SerializedName("CR")
+      VALUE_CR("CR"),
+      @SerializedName("CU")
+      VALUE_CU("CU"),
+      @SerializedName("CV")
+      VALUE_CV("CV"),
+      @SerializedName("CW")
+      VALUE_CW("CW"),
+      @SerializedName("CX")
+      VALUE_CX("CX"),
+      @SerializedName("CY")
+      VALUE_CY("CY"),
+      @SerializedName("CZ")
+      VALUE_CZ("CZ"),
+      @SerializedName("DE")
+      VALUE_DE("DE"),
+      @SerializedName("DJ")
+      VALUE_DJ("DJ"),
+      @SerializedName("DK")
+      VALUE_DK("DK"),
+      @SerializedName("DM")
+      VALUE_DM("DM"),
+      @SerializedName("DO")
+      VALUE_DO("DO"),
+      @SerializedName("DZ")
+      VALUE_DZ("DZ"),
+      @SerializedName("EC")
+      VALUE_EC("EC"),
+      @SerializedName("EE")
+      VALUE_EE("EE"),
+      @SerializedName("EG")
+      VALUE_EG("EG"),
+      @SerializedName("EH")
+      VALUE_EH("EH"),
+      @SerializedName("ER")
+      VALUE_ER("ER"),
+      @SerializedName("ES")
+      VALUE_ES("ES"),
+      @SerializedName("ET")
+      VALUE_ET("ET"),
+      @SerializedName("FI")
+      VALUE_FI("FI"),
+      @SerializedName("FJ")
+      VALUE_FJ("FJ"),
+      @SerializedName("FK")
+      VALUE_FK("FK"),
+      @SerializedName("FM")
+      VALUE_FM("FM"),
+      @SerializedName("FO")
+      VALUE_FO("FO"),
+      @SerializedName("FR")
+      VALUE_FR("FR"),
+      @SerializedName("GA")
+      VALUE_GA("GA"),
+      @SerializedName("GB")
+      VALUE_GB("GB"),
+      @SerializedName("GD")
+      VALUE_GD("GD"),
+      @SerializedName("GE")
+      VALUE_GE("GE"),
+      @SerializedName("GF")
+      VALUE_GF("GF"),
+      @SerializedName("GG")
+      VALUE_GG("GG"),
+      @SerializedName("GH")
+      VALUE_GH("GH"),
+      @SerializedName("GI")
+      VALUE_GI("GI"),
+      @SerializedName("GL")
+      VALUE_GL("GL"),
+      @SerializedName("GM")
+      VALUE_GM("GM"),
+      @SerializedName("GN")
+      VALUE_GN("GN"),
+      @SerializedName("GP")
+      VALUE_GP("GP"),
+      @SerializedName("GQ")
+      VALUE_GQ("GQ"),
+      @SerializedName("GR")
+      VALUE_GR("GR"),
+      @SerializedName("GS")
+      VALUE_GS("GS"),
+      @SerializedName("GT")
+      VALUE_GT("GT"),
+      @SerializedName("GU")
+      VALUE_GU("GU"),
+      @SerializedName("GW")
+      VALUE_GW("GW"),
+      @SerializedName("GY")
+      VALUE_GY("GY"),
+      @SerializedName("HK")
+      VALUE_HK("HK"),
+      @SerializedName("HM")
+      VALUE_HM("HM"),
+      @SerializedName("HN")
+      VALUE_HN("HN"),
+      @SerializedName("HR")
+      VALUE_HR("HR"),
+      @SerializedName("HT")
+      VALUE_HT("HT"),
+      @SerializedName("HU")
+      VALUE_HU("HU"),
+      @SerializedName("ID")
+      VALUE_ID("ID"),
+      @SerializedName("IE")
+      VALUE_IE("IE"),
+      @SerializedName("IL")
+      VALUE_IL("IL"),
+      @SerializedName("IM")
+      VALUE_IM("IM"),
+      @SerializedName("IN")
+      VALUE_IN("IN"),
+      @SerializedName("IO")
+      VALUE_IO("IO"),
+      @SerializedName("IQ")
+      VALUE_IQ("IQ"),
+      @SerializedName("IR")
+      VALUE_IR("IR"),
+      @SerializedName("IS")
+      VALUE_IS("IS"),
+      @SerializedName("IT")
+      VALUE_IT("IT"),
+      @SerializedName("JE")
+      VALUE_JE("JE"),
+      @SerializedName("JM")
+      VALUE_JM("JM"),
+      @SerializedName("JO")
+      VALUE_JO("JO"),
+      @SerializedName("JP")
+      VALUE_JP("JP"),
+      @SerializedName("KE")
+      VALUE_KE("KE"),
+      @SerializedName("KG")
+      VALUE_KG("KG"),
+      @SerializedName("KH")
+      VALUE_KH("KH"),
+      @SerializedName("KI")
+      VALUE_KI("KI"),
+      @SerializedName("KM")
+      VALUE_KM("KM"),
+      @SerializedName("KN")
+      VALUE_KN("KN"),
+      @SerializedName("KP")
+      VALUE_KP("KP"),
+      @SerializedName("KR")
+      VALUE_KR("KR"),
+      @SerializedName("KW")
+      VALUE_KW("KW"),
+      @SerializedName("KY")
+      VALUE_KY("KY"),
+      @SerializedName("KZ")
+      VALUE_KZ("KZ"),
+      @SerializedName("LA")
+      VALUE_LA("LA"),
+      @SerializedName("LB")
+      VALUE_LB("LB"),
+      @SerializedName("LC")
+      VALUE_LC("LC"),
+      @SerializedName("LI")
+      VALUE_LI("LI"),
+      @SerializedName("LK")
+      VALUE_LK("LK"),
+      @SerializedName("LR")
+      VALUE_LR("LR"),
+      @SerializedName("LS")
+      VALUE_LS("LS"),
+      @SerializedName("LT")
+      VALUE_LT("LT"),
+      @SerializedName("LU")
+      VALUE_LU("LU"),
+      @SerializedName("LV")
+      VALUE_LV("LV"),
+      @SerializedName("LY")
+      VALUE_LY("LY"),
+      @SerializedName("MA")
+      VALUE_MA("MA"),
+      @SerializedName("MC")
+      VALUE_MC("MC"),
+      @SerializedName("MD")
+      VALUE_MD("MD"),
+      @SerializedName("ME")
+      VALUE_ME("ME"),
+      @SerializedName("MF")
+      VALUE_MF("MF"),
+      @SerializedName("MG")
+      VALUE_MG("MG"),
+      @SerializedName("MH")
+      VALUE_MH("MH"),
+      @SerializedName("MK")
+      VALUE_MK("MK"),
+      @SerializedName("ML")
+      VALUE_ML("ML"),
+      @SerializedName("MM")
+      VALUE_MM("MM"),
+      @SerializedName("MN")
+      VALUE_MN("MN"),
+      @SerializedName("MO")
+      VALUE_MO("MO"),
+      @SerializedName("MP")
+      VALUE_MP("MP"),
+      @SerializedName("MQ")
+      VALUE_MQ("MQ"),
+      @SerializedName("MR")
+      VALUE_MR("MR"),
+      @SerializedName("MS")
+      VALUE_MS("MS"),
+      @SerializedName("MT")
+      VALUE_MT("MT"),
+      @SerializedName("MU")
+      VALUE_MU("MU"),
+      @SerializedName("MV")
+      VALUE_MV("MV"),
+      @SerializedName("MW")
+      VALUE_MW("MW"),
+      @SerializedName("MX")
+      VALUE_MX("MX"),
+      @SerializedName("MY")
+      VALUE_MY("MY"),
+      @SerializedName("MZ")
+      VALUE_MZ("MZ"),
+      @SerializedName("NA")
+      VALUE_NA("NA"),
+      @SerializedName("NC")
+      VALUE_NC("NC"),
+      @SerializedName("NE")
+      VALUE_NE("NE"),
+      @SerializedName("NF")
+      VALUE_NF("NF"),
+      @SerializedName("NG")
+      VALUE_NG("NG"),
+      @SerializedName("NI")
+      VALUE_NI("NI"),
+      @SerializedName("NL")
+      VALUE_NL("NL"),
+      @SerializedName("NO")
+      VALUE_NO("NO"),
+      @SerializedName("NP")
+      VALUE_NP("NP"),
+      @SerializedName("NR")
+      VALUE_NR("NR"),
+      @SerializedName("NU")
+      VALUE_NU("NU"),
+      @SerializedName("NZ")
+      VALUE_NZ("NZ"),
+      @SerializedName("OM")
+      VALUE_OM("OM"),
+      @SerializedName("PA")
+      VALUE_PA("PA"),
+      @SerializedName("PE")
+      VALUE_PE("PE"),
+      @SerializedName("PF")
+      VALUE_PF("PF"),
+      @SerializedName("PG")
+      VALUE_PG("PG"),
+      @SerializedName("PH")
+      VALUE_PH("PH"),
+      @SerializedName("PK")
+      VALUE_PK("PK"),
+      @SerializedName("PL")
+      VALUE_PL("PL"),
+      @SerializedName("PM")
+      VALUE_PM("PM"),
+      @SerializedName("PN")
+      VALUE_PN("PN"),
+      @SerializedName("PR")
+      VALUE_PR("PR"),
+      @SerializedName("PS")
+      VALUE_PS("PS"),
+      @SerializedName("PT")
+      VALUE_PT("PT"),
+      @SerializedName("PW")
+      VALUE_PW("PW"),
+      @SerializedName("PY")
+      VALUE_PY("PY"),
+      @SerializedName("QA")
+      VALUE_QA("QA"),
+      @SerializedName("RE")
+      VALUE_RE("RE"),
+      @SerializedName("RO")
+      VALUE_RO("RO"),
+      @SerializedName("RS")
+      VALUE_RS("RS"),
+      @SerializedName("RU")
+      VALUE_RU("RU"),
+      @SerializedName("RW")
+      VALUE_RW("RW"),
+      @SerializedName("SA")
+      VALUE_SA("SA"),
+      @SerializedName("SB")
+      VALUE_SB("SB"),
+      @SerializedName("SC")
+      VALUE_SC("SC"),
+      @SerializedName("SD")
+      VALUE_SD("SD"),
+      @SerializedName("SE")
+      VALUE_SE("SE"),
+      @SerializedName("SG")
+      VALUE_SG("SG"),
+      @SerializedName("SH")
+      VALUE_SH("SH"),
+      @SerializedName("SI")
+      VALUE_SI("SI"),
+      @SerializedName("SJ")
+      VALUE_SJ("SJ"),
+      @SerializedName("SK")
+      VALUE_SK("SK"),
+      @SerializedName("SL")
+      VALUE_SL("SL"),
+      @SerializedName("SM")
+      VALUE_SM("SM"),
+      @SerializedName("SN")
+      VALUE_SN("SN"),
+      @SerializedName("SO")
+      VALUE_SO("SO"),
+      @SerializedName("SR")
+      VALUE_SR("SR"),
+      @SerializedName("SS")
+      VALUE_SS("SS"),
+      @SerializedName("ST")
+      VALUE_ST("ST"),
+      @SerializedName("SV")
+      VALUE_SV("SV"),
+      @SerializedName("SX")
+      VALUE_SX("SX"),
+      @SerializedName("SY")
+      VALUE_SY("SY"),
+      @SerializedName("SZ")
+      VALUE_SZ("SZ"),
+      @SerializedName("TC")
+      VALUE_TC("TC"),
+      @SerializedName("TD")
+      VALUE_TD("TD"),
+      @SerializedName("TF")
+      VALUE_TF("TF"),
+      @SerializedName("TG")
+      VALUE_TG("TG"),
+      @SerializedName("TH")
+      VALUE_TH("TH"),
+      @SerializedName("TJ")
+      VALUE_TJ("TJ"),
+      @SerializedName("TK")
+      VALUE_TK("TK"),
+      @SerializedName("TL")
+      VALUE_TL("TL"),
+      @SerializedName("TM")
+      VALUE_TM("TM"),
+      @SerializedName("TN")
+      VALUE_TN("TN"),
+      @SerializedName("TO")
+      VALUE_TO("TO"),
+      @SerializedName("TR")
+      VALUE_TR("TR"),
+      @SerializedName("TT")
+      VALUE_TT("TT"),
+      @SerializedName("TV")
+      VALUE_TV("TV"),
+      @SerializedName("TW")
+      VALUE_TW("TW"),
+      @SerializedName("TZ")
+      VALUE_TZ("TZ"),
+      @SerializedName("UA")
+      VALUE_UA("UA"),
+      @SerializedName("UG")
+      VALUE_UG("UG"),
+      @SerializedName("UM")
+      VALUE_UM("UM"),
+      @SerializedName("US")
+      VALUE_US("US"),
+      @SerializedName("UY")
+      VALUE_UY("UY"),
+      @SerializedName("UZ")
+      VALUE_UZ("UZ"),
+      @SerializedName("VA")
+      VALUE_VA("VA"),
+      @SerializedName("VC")
+      VALUE_VC("VC"),
+      @SerializedName("VE")
+      VALUE_VE("VE"),
+      @SerializedName("VG")
+      VALUE_VG("VG"),
+      @SerializedName("VI")
+      VALUE_VI("VI"),
+      @SerializedName("VN")
+      VALUE_VN("VN"),
+      @SerializedName("VU")
+      VALUE_VU("VU"),
+      @SerializedName("WF")
+      VALUE_WF("WF"),
+      @SerializedName("WS")
+      VALUE_WS("WS"),
+      @SerializedName("XK")
+      VALUE_XK("XK"),
+      @SerializedName("YE")
+      VALUE_YE("YE"),
+      @SerializedName("YT")
+      VALUE_YT("YT"),
+      @SerializedName("ZA")
+      VALUE_ZA("ZA"),
+      @SerializedName("ZM")
+      VALUE_ZM("ZM"),
+      @SerializedName("ZW")
+      VALUE_ZW("ZW"),
+      ;
+
+      private String value;
+
+      private EnumOriginCountry(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumWaComplianceCategory {
+      @SerializedName("COUNTRY_ORIGIN_EXEMPT")
+      VALUE_COUNTRY_ORIGIN_EXEMPT("COUNTRY_ORIGIN_EXEMPT"),
+      @SerializedName("DEFAULT")
+      VALUE_DEFAULT("DEFAULT"),
+      ;
+
+      private String value;
+
+      private EnumWaComplianceCategory(String value) {
         this.value = value;
       }
 
@@ -2956,7 +3940,13 @@ public class ProductItem extends APINode {
     this.mCustomLabel2 = instance.mCustomLabel2;
     this.mCustomLabel3 = instance.mCustomLabel3;
     this.mCustomLabel4 = instance.mCustomLabel4;
+    this.mCustomNumber0 = instance.mCustomNumber0;
+    this.mCustomNumber1 = instance.mCustomNumber1;
+    this.mCustomNumber2 = instance.mCustomNumber2;
+    this.mCustomNumber3 = instance.mCustomNumber3;
+    this.mCustomNumber4 = instance.mCustomNumber4;
     this.mDescription = instance.mDescription;
+    this.mErrors = instance.mErrors;
     this.mExpirationDate = instance.mExpirationDate;
     this.mFbProductCategory = instance.mFbProductCategory;
     this.mGender = instance.mGender;
@@ -2966,16 +3956,21 @@ public class ProductItem extends APINode {
     this.mImageFetchStatus = instance.mImageFetchStatus;
     this.mImageUrl = instance.mImageUrl;
     this.mImages = instance.mImages;
+    this.mImporterAddress = instance.mImporterAddress;
+    this.mImporterName = instance.mImporterName;
     this.mInvalidationErrors = instance.mInvalidationErrors;
     this.mInventory = instance.mInventory;
+    this.mManufacturerInfo = instance.mManufacturerInfo;
     this.mManufacturerPartNumber = instance.mManufacturerPartNumber;
     this.mMarkedForProductLaunch = instance.mMarkedForProductLaunch;
     this.mMaterial = instance.mMaterial;
     this.mMobileLink = instance.mMobileLink;
     this.mName = instance.mName;
     this.mOrderingIndex = instance.mOrderingIndex;
+    this.mOriginCountry = instance.mOriginCountry;
     this.mParentProductId = instance.mParentProductId;
     this.mPattern = instance.mPattern;
+    this.mPostConversionSignalBasedEnforcementAppealEligibility = instance.mPostConversionSignalBasedEnforcementAppealEligibility;
     this.mPrice = instance.mPrice;
     this.mProductCatalog = instance.mProductCatalog;
     this.mProductFeed = instance.mProductFeed;
@@ -2996,6 +3991,7 @@ public class ProductItem extends APINode {
     this.mStartDate = instance.mStartDate;
     this.mUrl = instance.mUrl;
     this.mVisibility = instance.mVisibility;
+    this.mWaComplianceCategory = instance.mWaComplianceCategory;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

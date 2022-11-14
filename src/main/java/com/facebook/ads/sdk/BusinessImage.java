@@ -54,72 +54,82 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class PageAdminNote extends APINode {
-  @SerializedName("body")
-  private String mBody = null;
-  @SerializedName("from")
-  private Page mFrom = null;
+public class BusinessImage extends APINode {
+  @SerializedName("business")
+  private Business mBusiness = null;
+  @SerializedName("creation_time")
+  private String mCreationTime = null;
+  @SerializedName("hash")
+  private String mHash = null;
+  @SerializedName("height")
+  private Long mHeight = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("note_label")
-  private String mNoteLabel = null;
-  @SerializedName("user")
-  private User mUser = null;
+  @SerializedName("media_library_url")
+  private String mMediaLibraryUrl = null;
+  @SerializedName("name")
+  private String mName = null;
+  @SerializedName("url")
+  private String mUrl = null;
+  @SerializedName("url_128")
+  private String mUrl128 = null;
+  @SerializedName("width")
+  private Long mWidth = null;
   protected static Gson gson = null;
 
-  PageAdminNote() {
+  BusinessImage() {
   }
 
-  public PageAdminNote(Long id, APIContext context) {
+  public BusinessImage(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public PageAdminNote(String id, APIContext context) {
+  public BusinessImage(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public PageAdminNote fetch() throws APIException{
-    PageAdminNote newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public BusinessImage fetch() throws APIException{
+    BusinessImage newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static PageAdminNote fetchById(Long id, APIContext context) throws APIException {
+  public static BusinessImage fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<PageAdminNote> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<BusinessImage> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static PageAdminNote fetchById(String id, APIContext context) throws APIException {
+  public static BusinessImage fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<PageAdminNote> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<BusinessImage> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<PageAdminNote> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<PageAdminNote>)(
-      new APIRequest<PageAdminNote>(context, "", "/", "GET", PageAdminNote.getParser())
+  public static APINodeList<BusinessImage> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<BusinessImage>)(
+      new APIRequest<BusinessImage>(context, "", "/", "GET", BusinessImage.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<PageAdminNote>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<BusinessImage>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", PageAdminNote.getParser())
+      new APIRequest(context, "", "/", "GET", BusinessImage.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -132,12 +142,12 @@ public class PageAdminNote extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PageAdminNote loadJSON(String json, APIContext context, String header) {
-    PageAdminNote pageAdminNote = getGson().fromJson(json, PageAdminNote.class);
+  public static BusinessImage loadJSON(String json, APIContext context, String header) {
+    BusinessImage businessImage = getGson().fromJson(json, BusinessImage.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(pageAdminNote.toString());
+      JsonElement o2 = parser.parse(businessImage.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -147,14 +157,14 @@ public class PageAdminNote extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    pageAdminNote.context = context;
-    pageAdminNote.rawValue = json;
-    pageAdminNote.header = header;
-    return pageAdminNote;
+    businessImage.context = context;
+    businessImage.rawValue = json;
+    businessImage.header = header;
+    return businessImage;
   }
 
-  public static APINodeList<PageAdminNote> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<PageAdminNote> pageAdminNotes = new APINodeList<PageAdminNote>(request, json, header);
+  public static APINodeList<BusinessImage> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<BusinessImage> businessImages = new APINodeList<BusinessImage>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -165,9 +175,9 @@ public class PageAdminNote extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          pageAdminNotes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          businessImages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return pageAdminNotes;
+        return businessImages;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -177,20 +187,20 @@ public class PageAdminNote extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                pageAdminNotes.setCursors(before, after);
+                businessImages.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            pageAdminNotes.setPaging(previous, next);
+            businessImages.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              pageAdminNotes.setAppSecret(context.getAppSecretProof());
+              businessImages.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              pageAdminNotes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              businessImages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -201,23 +211,23 @@ public class PageAdminNote extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  pageAdminNotes.add(loadJSON(entry.getValue().toString(), context, header));
+                  businessImages.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              pageAdminNotes.add(loadJSON(obj.toString(), context, header));
+              businessImages.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return pageAdminNotes;
+          return businessImages;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              pageAdminNotes.add(loadJSON(entry.getValue().toString(), context, header));
+              businessImages.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return pageAdminNotes;
+          return businessImages;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -234,20 +244,20 @@ public class PageAdminNote extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              pageAdminNotes.add(loadJSON(value.toString(), context, header));
+              businessImages.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return pageAdminNotes;
+            return businessImages;
           }
 
           // Sixth, check if it's pure JsonObject
-          pageAdminNotes.clear();
-          pageAdminNotes.add(loadJSON(json, context, header));
-          return pageAdminNotes;
+          businessImages.clear();
+          businessImages.add(loadJSON(json, context, header));
+          return businessImages;
         }
       }
     } catch (Exception e) {
@@ -279,78 +289,100 @@ public class PageAdminNote extends APINode {
   }
 
 
-  public String getFieldBody() {
-    return mBody;
+  public Business getFieldBusiness() {
+    if (mBusiness != null) {
+      mBusiness.context = getContext();
+    }
+    return mBusiness;
   }
 
-  public Page getFieldFrom() {
-    if (mFrom != null) {
-      mFrom.context = getContext();
-    }
-    return mFrom;
+  public String getFieldCreationTime() {
+    return mCreationTime;
+  }
+
+  public String getFieldHash() {
+    return mHash;
+  }
+
+  public Long getFieldHeight() {
+    return mHeight;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-  public String getFieldNoteLabel() {
-    return mNoteLabel;
+  public String getFieldMediaLibraryUrl() {
+    return mMediaLibraryUrl;
   }
 
-  public User getFieldUser() {
-    if (mUser != null) {
-      mUser.context = getContext();
-    }
-    return mUser;
+  public String getFieldName() {
+    return mName;
+  }
+
+  public String getFieldUrl() {
+    return mUrl;
+  }
+
+  public String getFieldUrl128() {
+    return mUrl128;
+  }
+
+  public Long getFieldWidth() {
+    return mWidth;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<PageAdminNote> {
+  public static class APIRequestGet extends APIRequest<BusinessImage> {
 
-    PageAdminNote lastResponse = null;
+    BusinessImage lastResponse = null;
     @Override
-    public PageAdminNote getLastResponse() {
+    public BusinessImage getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "body",
-      "from",
+      "business",
+      "creation_time",
+      "hash",
+      "height",
       "id",
-      "note_label",
-      "user",
+      "media_library_url",
+      "name",
+      "url",
+      "url_128",
+      "width",
     };
 
     @Override
-    public PageAdminNote parseResponse(String response, String header) throws APIException {
-      return PageAdminNote.parseResponse(response, getContext(), this, header).head();
+    public BusinessImage parseResponse(String response, String header) throws APIException {
+      return BusinessImage.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public PageAdminNote execute() throws APIException {
+    public BusinessImage execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public PageAdminNote execute(Map<String, Object> extraParams) throws APIException {
+    public BusinessImage execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<PageAdminNote> executeAsync() throws APIException {
+    public ListenableFuture<BusinessImage> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<PageAdminNote> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<BusinessImage> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, PageAdminNote>() {
-           public PageAdminNote apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, BusinessImage>() {
+           public BusinessImage apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -414,18 +446,32 @@ public class PageAdminNote extends APINode {
       return this;
     }
 
-    public APIRequestGet requestBodyField () {
-      return this.requestBodyField(true);
+    public APIRequestGet requestBusinessField () {
+      return this.requestBusinessField(true);
     }
-    public APIRequestGet requestBodyField (boolean value) {
-      this.requestField("body", value);
+    public APIRequestGet requestBusinessField (boolean value) {
+      this.requestField("business", value);
       return this;
     }
-    public APIRequestGet requestFromField () {
-      return this.requestFromField(true);
+    public APIRequestGet requestCreationTimeField () {
+      return this.requestCreationTimeField(true);
     }
-    public APIRequestGet requestFromField (boolean value) {
-      this.requestField("from", value);
+    public APIRequestGet requestCreationTimeField (boolean value) {
+      this.requestField("creation_time", value);
+      return this;
+    }
+    public APIRequestGet requestHashField () {
+      return this.requestHashField(true);
+    }
+    public APIRequestGet requestHashField (boolean value) {
+      this.requestField("hash", value);
+      return this;
+    }
+    public APIRequestGet requestHeightField () {
+      return this.requestHeightField(true);
+    }
+    public APIRequestGet requestHeightField (boolean value) {
+      this.requestField("height", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -435,18 +481,39 @@ public class PageAdminNote extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestNoteLabelField () {
-      return this.requestNoteLabelField(true);
+    public APIRequestGet requestMediaLibraryUrlField () {
+      return this.requestMediaLibraryUrlField(true);
     }
-    public APIRequestGet requestNoteLabelField (boolean value) {
-      this.requestField("note_label", value);
+    public APIRequestGet requestMediaLibraryUrlField (boolean value) {
+      this.requestField("media_library_url", value);
       return this;
     }
-    public APIRequestGet requestUserField () {
-      return this.requestUserField(true);
+    public APIRequestGet requestNameField () {
+      return this.requestNameField(true);
     }
-    public APIRequestGet requestUserField (boolean value) {
-      this.requestField("user", value);
+    public APIRequestGet requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGet requestUrlField () {
+      return this.requestUrlField(true);
+    }
+    public APIRequestGet requestUrlField (boolean value) {
+      this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGet requestUrl128Field () {
+      return this.requestUrl128Field(true);
+    }
+    public APIRequestGet requestUrl128Field (boolean value) {
+      this.requestField("url_128", value);
+      return this;
+    }
+    public APIRequestGet requestWidthField () {
+      return this.requestWidthField(true);
+    }
+    public APIRequestGet requestWidthField (boolean value) {
+      this.requestField("width", value);
       return this;
     }
   }
@@ -465,21 +532,26 @@ public class PageAdminNote extends APINode {
     return gson;
   }
 
-  public PageAdminNote copyFrom(PageAdminNote instance) {
-    this.mBody = instance.mBody;
-    this.mFrom = instance.mFrom;
+  public BusinessImage copyFrom(BusinessImage instance) {
+    this.mBusiness = instance.mBusiness;
+    this.mCreationTime = instance.mCreationTime;
+    this.mHash = instance.mHash;
+    this.mHeight = instance.mHeight;
     this.mId = instance.mId;
-    this.mNoteLabel = instance.mNoteLabel;
-    this.mUser = instance.mUser;
+    this.mMediaLibraryUrl = instance.mMediaLibraryUrl;
+    this.mName = instance.mName;
+    this.mUrl = instance.mUrl;
+    this.mUrl128 = instance.mUrl128;
+    this.mWidth = instance.mWidth;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<PageAdminNote> getParser() {
-    return new APIRequest.ResponseParser<PageAdminNote>() {
-      public APINodeList<PageAdminNote> parseResponse(String response, APIContext context, APIRequest<PageAdminNote> request, String header) throws MalformedResponseException {
-        return PageAdminNote.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<BusinessImage> getParser() {
+    return new APIRequest.ResponseParser<BusinessImage>() {
+      public APINodeList<BusinessImage> parseResponse(String response, APIContext context, APIRequest<BusinessImage> request, String header) throws MalformedResponseException {
+        return BusinessImage.parseResponse(response, context, request, header);
       }
     };
   }

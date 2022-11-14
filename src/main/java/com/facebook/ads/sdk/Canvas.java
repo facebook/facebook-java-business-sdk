@@ -69,6 +69,8 @@ public class Canvas extends APINode {
   private AdVideo mCollectionHeroVideo = null;
   @SerializedName("collection_thumbnails")
   private List<CanvasCollectionThumbnail> mCollectionThumbnails = null;
+  @SerializedName("dynamic_setting")
+  private CanvasDynamicSetting mDynamicSetting = null;
   @SerializedName("element_payload")
   private String mElementPayload = null;
   @SerializedName("elements")
@@ -92,7 +94,7 @@ public class Canvas extends APINode {
   @SerializedName("property_list")
   private List<String> mPropertyList = null;
   @SerializedName("source_template")
-  private CanvasTemplate mSourceTemplate = null;
+  private Object mSourceTemplate = null;
   @SerializedName("store_url")
   private String mStoreUrl = null;
   @SerializedName("style_list")
@@ -316,20 +318,8 @@ public class Canvas extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestCreateDuplicateCanva createDuplicateCanva() {
-    return new APIRequestCreateDuplicateCanva(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreatePreviewNotification createPreviewNotification() {
-    return new APIRequestCreatePreviewNotification(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetPreviews getPreviews() {
-    return new APIRequestGetPreviews(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestDelete delete() {
-    return new APIRequestDelete(this.getPrefixedId().toString(), context);
+  public APIRequestGetPreViews getPreViews() {
+    return new APIRequestGetPreViews(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGet get() {
@@ -373,6 +363,13 @@ public class Canvas extends APINode {
 
   public List<CanvasCollectionThumbnail> getFieldCollectionThumbnails() {
     return mCollectionThumbnails;
+  }
+
+  public CanvasDynamicSetting getFieldDynamicSetting() {
+    if (mDynamicSetting != null) {
+      mDynamicSetting.context = getContext();
+    }
+    return mDynamicSetting;
   }
 
   public String getFieldElementPayload() {
@@ -425,10 +422,7 @@ public class Canvas extends APINode {
     return mPropertyList;
   }
 
-  public CanvasTemplate getFieldSourceTemplate() {
-    if (mSourceTemplate != null) {
-      mSourceTemplate.context = getContext();
-    }
+  public Object getFieldSourceTemplate() {
     return mSourceTemplate;
   }
 
@@ -462,225 +456,7 @@ public class Canvas extends APINode {
 
 
 
-  public static class APIRequestCreateDuplicateCanva extends APIRequest<Canvas> {
-
-    Canvas lastResponse = null;
-    @Override
-    public Canvas getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Canvas parseResponse(String response, String header) throws APIException {
-      return Canvas.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Canvas execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Canvas execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Canvas> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Canvas> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Canvas>() {
-           public Canvas apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateDuplicateCanva.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateDuplicateCanva(String nodeId, APIContext context) {
-      super(context, nodeId, "/duplicate_canvas", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateDuplicateCanva setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateDuplicateCanva setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateDuplicateCanva requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateDuplicateCanva requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateDuplicateCanva requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateDuplicateCanva requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateDuplicateCanva requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateDuplicateCanva requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreatePreviewNotification extends APIRequest<Canvas> {
-
-    Canvas lastResponse = null;
-    @Override
-    public Canvas getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "user_ids",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Canvas parseResponse(String response, String header) throws APIException {
-      return Canvas.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Canvas execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Canvas execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Canvas> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Canvas> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Canvas>() {
-           public Canvas apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreatePreviewNotification.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreatePreviewNotification(String nodeId, APIContext context) {
-      super(context, nodeId, "/preview_notifications", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreatePreviewNotification setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePreviewNotification setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreatePreviewNotification setUserIds (List<Long> userIds) {
-      this.setParam("user_ids", userIds);
-      return this;
-    }
-    public APIRequestCreatePreviewNotification setUserIds (String userIds) {
-      this.setParam("user_ids", userIds);
-      return this;
-    }
-
-    public APIRequestCreatePreviewNotification requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreatePreviewNotification requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePreviewNotification requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreatePreviewNotification requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePreviewNotification requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePreviewNotification requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestGetPreviews extends APIRequest<TextWithEntities> {
+  public static class APIRequestGetPreViews extends APIRequest<TextWithEntities> {
 
     APINodeList<TextWithEntities> lastResponse = null;
     @Override
@@ -722,7 +498,7 @@ public class Canvas extends APINode {
         new Function<ResponseWrapper, APINodeList<TextWithEntities>>() {
            public APINodeList<TextWithEntities> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetPreviews.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestGetPreViews.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -731,37 +507,37 @@ public class Canvas extends APINode {
       );
     };
 
-    public APIRequestGetPreviews(String nodeId, APIContext context) {
+    public APIRequestGetPreViews(String nodeId, APIContext context) {
       super(context, nodeId, "/previews", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGetPreviews setParam(String param, Object value) {
+    public APIRequestGetPreViews setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGetPreviews setParams(Map<String, Object> params) {
+    public APIRequestGetPreViews setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGetPreviews setUserIds (List<Long> userIds) {
+    public APIRequestGetPreViews setUserIds (List<Long> userIds) {
       this.setParam("user_ids", userIds);
       return this;
     }
-    public APIRequestGetPreviews setUserIds (String userIds) {
+    public APIRequestGetPreViews setUserIds (String userIds) {
       this.setParam("user_ids", userIds);
       return this;
     }
 
-    public APIRequestGetPreviews requestAllFields () {
+    public APIRequestGetPreViews requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGetPreviews requestAllFields (boolean value) {
+    public APIRequestGetPreViews requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -769,12 +545,12 @@ public class Canvas extends APINode {
     }
 
     @Override
-    public APIRequestGetPreviews requestFields (List<String> fields) {
+    public APIRequestGetPreViews requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGetPreviews requestFields (List<String> fields, boolean value) {
+    public APIRequestGetPreViews requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -782,128 +558,24 @@ public class Canvas extends APINode {
     }
 
     @Override
-    public APIRequestGetPreviews requestField (String field) {
+    public APIRequestGetPreViews requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGetPreviews requestField (String field, boolean value) {
+    public APIRequestGetPreViews requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
-    public APIRequestGetPreviews requestTextField () {
+    public APIRequestGetPreViews requestTextField () {
       return this.requestTextField(true);
     }
-    public APIRequestGetPreviews requestTextField (boolean value) {
+    public APIRequestGetPreViews requestTextField (boolean value) {
       this.requestField("text", value);
       return this;
     }
-  }
-
-  public static class APIRequestDelete extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestDelete(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDelete setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDelete setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDelete requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDelete requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDelete requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDelete requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDelete requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDelete requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestGet extends APIRequest<Canvas> {
@@ -924,6 +596,7 @@ public class Canvas extends APINode {
       "collection_hero_image",
       "collection_hero_video",
       "collection_thumbnails",
+      "dynamic_setting",
       "element_payload",
       "elements",
       "fb_body_elements",
@@ -1081,6 +754,13 @@ public class Canvas extends APINode {
     }
     public APIRequestGet requestCollectionThumbnailsField (boolean value) {
       this.requestField("collection_thumbnails", value);
+      return this;
+    }
+    public APIRequestGet requestDynamicSettingField () {
+      return this.requestDynamicSettingField(true);
+    }
+    public APIRequestGet requestDynamicSettingField (boolean value) {
+      this.requestField("dynamic_setting", value);
       return this;
     }
     public APIRequestGet requestElementPayloadField () {
@@ -1402,6 +1082,7 @@ public class Canvas extends APINode {
     this.mCollectionHeroImage = instance.mCollectionHeroImage;
     this.mCollectionHeroVideo = instance.mCollectionHeroVideo;
     this.mCollectionThumbnails = instance.mCollectionThumbnails;
+    this.mDynamicSetting = instance.mDynamicSetting;
     this.mElementPayload = instance.mElementPayload;
     this.mElements = instance.mElements;
     this.mFbBodyElements = instance.mFbBodyElements;

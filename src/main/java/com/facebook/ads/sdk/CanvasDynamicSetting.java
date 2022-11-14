@@ -54,66 +54,68 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class BusinessAgreement extends APINode {
+public class CanvasDynamicSetting extends APINode {
+  @SerializedName("child_documents")
+  private List<Canvas> mChildDocuments = null;
+  @SerializedName("product_set_id")
+  private String mProductSetId = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("request_status")
-  private String mRequestStatus = null;
   protected static Gson gson = null;
 
-  BusinessAgreement() {
+  CanvasDynamicSetting() {
   }
 
-  public BusinessAgreement(Long id, APIContext context) {
+  public CanvasDynamicSetting(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public BusinessAgreement(String id, APIContext context) {
+  public CanvasDynamicSetting(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public BusinessAgreement fetch() throws APIException{
-    BusinessAgreement newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public CanvasDynamicSetting fetch() throws APIException{
+    CanvasDynamicSetting newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static BusinessAgreement fetchById(Long id, APIContext context) throws APIException {
+  public static CanvasDynamicSetting fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<BusinessAgreement> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<CanvasDynamicSetting> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static BusinessAgreement fetchById(String id, APIContext context) throws APIException {
+  public static CanvasDynamicSetting fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<BusinessAgreement> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<CanvasDynamicSetting> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<BusinessAgreement> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<BusinessAgreement>)(
-      new APIRequest<BusinessAgreement>(context, "", "/", "GET", BusinessAgreement.getParser())
+  public static APINodeList<CanvasDynamicSetting> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<CanvasDynamicSetting>)(
+      new APIRequest<CanvasDynamicSetting>(context, "", "/", "GET", CanvasDynamicSetting.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<BusinessAgreement>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<CanvasDynamicSetting>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", BusinessAgreement.getParser())
+      new APIRequest(context, "", "/", "GET", CanvasDynamicSetting.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -126,12 +128,12 @@ public class BusinessAgreement extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static BusinessAgreement loadJSON(String json, APIContext context, String header) {
-    BusinessAgreement businessAgreement = getGson().fromJson(json, BusinessAgreement.class);
+  public static CanvasDynamicSetting loadJSON(String json, APIContext context, String header) {
+    CanvasDynamicSetting canvasDynamicSetting = getGson().fromJson(json, CanvasDynamicSetting.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(businessAgreement.toString());
+      JsonElement o2 = parser.parse(canvasDynamicSetting.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -141,14 +143,14 @@ public class BusinessAgreement extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    businessAgreement.context = context;
-    businessAgreement.rawValue = json;
-    businessAgreement.header = header;
-    return businessAgreement;
+    canvasDynamicSetting.context = context;
+    canvasDynamicSetting.rawValue = json;
+    canvasDynamicSetting.header = header;
+    return canvasDynamicSetting;
   }
 
-  public static APINodeList<BusinessAgreement> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<BusinessAgreement> businessAgreements = new APINodeList<BusinessAgreement>(request, json, header);
+  public static APINodeList<CanvasDynamicSetting> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CanvasDynamicSetting> canvasDynamicSettings = new APINodeList<CanvasDynamicSetting>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -159,9 +161,9 @@ public class BusinessAgreement extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          businessAgreements.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          canvasDynamicSettings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return businessAgreements;
+        return canvasDynamicSettings;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -171,20 +173,20 @@ public class BusinessAgreement extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                businessAgreements.setCursors(before, after);
+                canvasDynamicSettings.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            businessAgreements.setPaging(previous, next);
+            canvasDynamicSettings.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              businessAgreements.setAppSecret(context.getAppSecretProof());
+              canvasDynamicSettings.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              businessAgreements.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              canvasDynamicSettings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -195,23 +197,23 @@ public class BusinessAgreement extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  businessAgreements.add(loadJSON(entry.getValue().toString(), context, header));
+                  canvasDynamicSettings.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              businessAgreements.add(loadJSON(obj.toString(), context, header));
+              canvasDynamicSettings.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return businessAgreements;
+          return canvasDynamicSettings;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              businessAgreements.add(loadJSON(entry.getValue().toString(), context, header));
+              canvasDynamicSettings.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return businessAgreements;
+          return canvasDynamicSettings;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -228,20 +230,20 @@ public class BusinessAgreement extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              businessAgreements.add(loadJSON(value.toString(), context, header));
+              canvasDynamicSettings.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return businessAgreements;
+            return canvasDynamicSettings;
           }
 
           // Sixth, check if it's pure JsonObject
-          businessAgreements.clear();
-          businessAgreements.add(loadJSON(json, context, header));
-          return businessAgreements;
+          canvasDynamicSettings.clear();
+          canvasDynamicSettings.add(loadJSON(json, context, header));
+          return canvasDynamicSettings;
         }
       }
     } catch (Exception e) {
@@ -272,62 +274,63 @@ public class BusinessAgreement extends APINode {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestUpdate update() {
-    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
+
+  public List<Canvas> getFieldChildDocuments() {
+    return mChildDocuments;
   }
 
+  public String getFieldProductSetId() {
+    return mProductSetId;
+  }
 
   public String getFieldId() {
     return mId;
   }
 
-  public String getFieldRequestStatus() {
-    return mRequestStatus;
-  }
 
 
+  public static class APIRequestGet extends APIRequest<CanvasDynamicSetting> {
 
-  public static class APIRequestGet extends APIRequest<BusinessAgreement> {
-
-    BusinessAgreement lastResponse = null;
+    CanvasDynamicSetting lastResponse = null;
     @Override
-    public BusinessAgreement getLastResponse() {
+    public CanvasDynamicSetting getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
+      "child_documents",
+      "product_set_id",
       "id",
-      "request_status",
     };
 
     @Override
-    public BusinessAgreement parseResponse(String response, String header) throws APIException {
-      return BusinessAgreement.parseResponse(response, getContext(), this, header).head();
+    public CanvasDynamicSetting parseResponse(String response, String header) throws APIException {
+      return CanvasDynamicSetting.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public BusinessAgreement execute() throws APIException {
+    public CanvasDynamicSetting execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public BusinessAgreement execute(Map<String, Object> extraParams) throws APIException {
+    public CanvasDynamicSetting execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<BusinessAgreement> executeAsync() throws APIException {
+    public ListenableFuture<CanvasDynamicSetting> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<BusinessAgreement> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<CanvasDynamicSetting> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, BusinessAgreement>() {
-           public BusinessAgreement apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, CanvasDynamicSetting>() {
+           public CanvasDynamicSetting apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -391,6 +394,20 @@ public class BusinessAgreement extends APINode {
       return this;
     }
 
+    public APIRequestGet requestChildDocumentsField () {
+      return this.requestChildDocumentsField(true);
+    }
+    public APIRequestGet requestChildDocumentsField (boolean value) {
+      this.requestField("child_documents", value);
+      return this;
+    }
+    public APIRequestGet requestProductSetIdField () {
+      return this.requestProductSetIdField(true);
+    }
+    public APIRequestGet requestProductSetIdField (boolean value) {
+      this.requestField("product_set_id", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -398,162 +415,6 @@ public class BusinessAgreement extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestRequestStatusField () {
-      return this.requestRequestStatusField(true);
-    }
-    public APIRequestGet requestRequestStatusField (boolean value) {
-      this.requestField("request_status", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestUpdate extends APIRequest<BusinessAgreement> {
-
-    BusinessAgreement lastResponse = null;
-    @Override
-    public BusinessAgreement getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "asset_id",
-      "request_status",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public BusinessAgreement parseResponse(String response, String header) throws APIException {
-      return BusinessAgreement.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public BusinessAgreement execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public BusinessAgreement execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<BusinessAgreement> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<BusinessAgreement> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, BusinessAgreement>() {
-           public BusinessAgreement apply(ResponseWrapper result) {
-             try {
-               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestUpdate(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestUpdate setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestUpdate setAssetId (Long assetId) {
-      this.setParam("asset_id", assetId);
-      return this;
-    }
-    public APIRequestUpdate setAssetId (String assetId) {
-      this.setParam("asset_id", assetId);
-      return this;
-    }
-
-    public APIRequestUpdate setRequestStatus (BusinessAgreement.EnumRequestStatus requestStatus) {
-      this.setParam("request_status", requestStatus);
-      return this;
-    }
-    public APIRequestUpdate setRequestStatus (String requestStatus) {
-      this.setParam("request_status", requestStatus);
-      return this;
-    }
-
-    public APIRequestUpdate requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestUpdate requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static enum EnumRequestStatus {
-      @SerializedName("APPROVE")
-      VALUE_APPROVE("APPROVE"),
-      @SerializedName("DECLINE")
-      VALUE_DECLINE("DECLINE"),
-      @SerializedName("EXPIRED")
-      VALUE_EXPIRED("EXPIRED"),
-      @SerializedName("IN_PROGRESS")
-      VALUE_IN_PROGRESS("IN_PROGRESS"),
-      @SerializedName("PENDING")
-      VALUE_PENDING("PENDING"),
-      ;
-
-      private String value;
-
-      private EnumRequestStatus(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
   }
 
 
@@ -570,18 +431,19 @@ public class BusinessAgreement extends APINode {
     return gson;
   }
 
-  public BusinessAgreement copyFrom(BusinessAgreement instance) {
+  public CanvasDynamicSetting copyFrom(CanvasDynamicSetting instance) {
+    this.mChildDocuments = instance.mChildDocuments;
+    this.mProductSetId = instance.mProductSetId;
     this.mId = instance.mId;
-    this.mRequestStatus = instance.mRequestStatus;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<BusinessAgreement> getParser() {
-    return new APIRequest.ResponseParser<BusinessAgreement>() {
-      public APINodeList<BusinessAgreement> parseResponse(String response, APIContext context, APIRequest<BusinessAgreement> request, String header) throws MalformedResponseException {
-        return BusinessAgreement.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<CanvasDynamicSetting> getParser() {
+    return new APIRequest.ResponseParser<CanvasDynamicSetting>() {
+      public APINodeList<CanvasDynamicSetting> parseResponse(String response, APIContext context, APIRequest<CanvasDynamicSetting> request, String header) throws MalformedResponseException {
+        return CanvasDynamicSetting.parseResponse(response, context, request, header);
       }
     };
   }

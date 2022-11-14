@@ -54,68 +54,88 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class Domain extends APINode {
+public class PagePostExperiment extends APINode {
+  @SerializedName("auto_resolve_settings")
+  private Object mAutoResolveSettings = null;
+  @SerializedName("creation_time")
+  private String mCreationTime = null;
+  @SerializedName("creator")
+  private User mCreator = null;
+  @SerializedName("declared_winning_time")
+  private String mDeclaredWinningTime = null;
+  @SerializedName("description")
+  private String mDescription = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("insight_snapshots")
+  private Map<String, Map<Long, Object>> mInsightSnapshots = null;
   @SerializedName("name")
   private String mName = null;
-  @SerializedName("url")
-  private String mUrl = null;
+  @SerializedName("optimization_goal")
+  private String mOptimizationGoal = null;
+  @SerializedName("publish_status")
+  private String mPublishStatus = null;
+  @SerializedName("publish_time")
+  private String mPublishTime = null;
+  @SerializedName("scheduled_experiment_timestamp")
+  private String mScheduledExperimentTimestamp = null;
+  @SerializedName("updated_time")
+  private String mUpdatedTime = null;
   protected static Gson gson = null;
 
-  Domain() {
+  PagePostExperiment() {
   }
 
-  public Domain(Long id, APIContext context) {
+  public PagePostExperiment(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public Domain(String id, APIContext context) {
+  public PagePostExperiment(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public Domain fetch() throws APIException{
-    Domain newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public PagePostExperiment fetch() throws APIException{
+    PagePostExperiment newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static Domain fetchById(Long id, APIContext context) throws APIException {
+  public static PagePostExperiment fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<Domain> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<PagePostExperiment> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static Domain fetchById(String id, APIContext context) throws APIException {
+  public static PagePostExperiment fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<Domain> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<PagePostExperiment> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<Domain> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<Domain>)(
-      new APIRequest<Domain>(context, "", "/", "GET", Domain.getParser())
+  public static APINodeList<PagePostExperiment> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<PagePostExperiment>)(
+      new APIRequest<PagePostExperiment>(context, "", "/", "GET", PagePostExperiment.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<Domain>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<PagePostExperiment>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", Domain.getParser())
+      new APIRequest(context, "", "/", "GET", PagePostExperiment.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -128,12 +148,12 @@ public class Domain extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static Domain loadJSON(String json, APIContext context, String header) {
-    Domain domain = getGson().fromJson(json, Domain.class);
+  public static PagePostExperiment loadJSON(String json, APIContext context, String header) {
+    PagePostExperiment pagePostExperiment = getGson().fromJson(json, PagePostExperiment.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(domain.toString());
+      JsonElement o2 = parser.parse(pagePostExperiment.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -143,14 +163,14 @@ public class Domain extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    domain.context = context;
-    domain.rawValue = json;
-    domain.header = header;
-    return domain;
+    pagePostExperiment.context = context;
+    pagePostExperiment.rawValue = json;
+    pagePostExperiment.header = header;
+    return pagePostExperiment;
   }
 
-  public static APINodeList<Domain> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<Domain> domains = new APINodeList<Domain>(request, json, header);
+  public static APINodeList<PagePostExperiment> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PagePostExperiment> pagePostExperiments = new APINodeList<PagePostExperiment>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -161,9 +181,9 @@ public class Domain extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          domains.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          pagePostExperiments.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return domains;
+        return pagePostExperiments;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -173,20 +193,20 @@ public class Domain extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                domains.setCursors(before, after);
+                pagePostExperiments.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            domains.setPaging(previous, next);
+            pagePostExperiments.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              domains.setAppSecret(context.getAppSecretProof());
+              pagePostExperiments.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              domains.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              pagePostExperiments.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -197,23 +217,23 @@ public class Domain extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  domains.add(loadJSON(entry.getValue().toString(), context, header));
+                  pagePostExperiments.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              domains.add(loadJSON(obj.toString(), context, header));
+              pagePostExperiments.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return domains;
+          return pagePostExperiments;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              domains.add(loadJSON(entry.getValue().toString(), context, header));
+              pagePostExperiments.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return domains;
+          return pagePostExperiments;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -230,20 +250,20 @@ public class Domain extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              domains.add(loadJSON(value.toString(), context, header));
+              pagePostExperiments.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return domains;
+            return pagePostExperiments;
           }
 
           // Sixth, check if it's pure JsonObject
-          domains.clear();
-          domains.add(loadJSON(json, context, header));
-          return domains;
+          pagePostExperiments.clear();
+          pagePostExperiments.add(loadJSON(json, context, header));
+          return pagePostExperiments;
         }
       }
     } catch (Exception e) {
@@ -275,62 +295,115 @@ public class Domain extends APINode {
   }
 
 
+  public Object getFieldAutoResolveSettings() {
+    return mAutoResolveSettings;
+  }
+
+  public String getFieldCreationTime() {
+    return mCreationTime;
+  }
+
+  public User getFieldCreator() {
+    if (mCreator != null) {
+      mCreator.context = getContext();
+    }
+    return mCreator;
+  }
+
+  public String getFieldDeclaredWinningTime() {
+    return mDeclaredWinningTime;
+  }
+
+  public String getFieldDescription() {
+    return mDescription;
+  }
+
   public String getFieldId() {
     return mId;
+  }
+
+  public Map<String, Map<Long, Object>> getFieldInsightSnapshots() {
+    return mInsightSnapshots;
   }
 
   public String getFieldName() {
     return mName;
   }
 
-  public String getFieldUrl() {
-    return mUrl;
+  public String getFieldOptimizationGoal() {
+    return mOptimizationGoal;
+  }
+
+  public String getFieldPublishStatus() {
+    return mPublishStatus;
+  }
+
+  public String getFieldPublishTime() {
+    return mPublishTime;
+  }
+
+  public String getFieldScheduledExperimentTimestamp() {
+    return mScheduledExperimentTimestamp;
+  }
+
+  public String getFieldUpdatedTime() {
+    return mUpdatedTime;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<Domain> {
+  public static class APIRequestGet extends APIRequest<PagePostExperiment> {
 
-    Domain lastResponse = null;
+    PagePostExperiment lastResponse = null;
     @Override
-    public Domain getLastResponse() {
+    public PagePostExperiment getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
+      "auto_resolve_settings",
+      "creation_time",
+      "creator",
+      "declared_winning_time",
+      "description",
       "id",
+      "insight_snapshots",
       "name",
-      "url",
+      "optimization_goal",
+      "publish_status",
+      "publish_time",
+      "scheduled_experiment_timestamp",
+      "updated_time",
     };
 
     @Override
-    public Domain parseResponse(String response, String header) throws APIException {
-      return Domain.parseResponse(response, getContext(), this, header).head();
+    public PagePostExperiment parseResponse(String response, String header) throws APIException {
+      return PagePostExperiment.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public Domain execute() throws APIException {
+    public PagePostExperiment execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public Domain execute(Map<String, Object> extraParams) throws APIException {
+    public PagePostExperiment execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<Domain> executeAsync() throws APIException {
+    public ListenableFuture<PagePostExperiment> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<Domain> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<PagePostExperiment> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Domain>() {
-           public Domain apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, PagePostExperiment>() {
+           public PagePostExperiment apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -394,11 +467,53 @@ public class Domain extends APINode {
       return this;
     }
 
+    public APIRequestGet requestAutoResolveSettingsField () {
+      return this.requestAutoResolveSettingsField(true);
+    }
+    public APIRequestGet requestAutoResolveSettingsField (boolean value) {
+      this.requestField("auto_resolve_settings", value);
+      return this;
+    }
+    public APIRequestGet requestCreationTimeField () {
+      return this.requestCreationTimeField(true);
+    }
+    public APIRequestGet requestCreationTimeField (boolean value) {
+      this.requestField("creation_time", value);
+      return this;
+    }
+    public APIRequestGet requestCreatorField () {
+      return this.requestCreatorField(true);
+    }
+    public APIRequestGet requestCreatorField (boolean value) {
+      this.requestField("creator", value);
+      return this;
+    }
+    public APIRequestGet requestDeclaredWinningTimeField () {
+      return this.requestDeclaredWinningTimeField(true);
+    }
+    public APIRequestGet requestDeclaredWinningTimeField (boolean value) {
+      this.requestField("declared_winning_time", value);
+      return this;
+    }
+    public APIRequestGet requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGet requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestInsightSnapshotsField () {
+      return this.requestInsightSnapshotsField(true);
+    }
+    public APIRequestGet requestInsightSnapshotsField (boolean value) {
+      this.requestField("insight_snapshots", value);
       return this;
     }
     public APIRequestGet requestNameField () {
@@ -408,11 +523,39 @@ public class Domain extends APINode {
       this.requestField("name", value);
       return this;
     }
-    public APIRequestGet requestUrlField () {
-      return this.requestUrlField(true);
+    public APIRequestGet requestOptimizationGoalField () {
+      return this.requestOptimizationGoalField(true);
     }
-    public APIRequestGet requestUrlField (boolean value) {
-      this.requestField("url", value);
+    public APIRequestGet requestOptimizationGoalField (boolean value) {
+      this.requestField("optimization_goal", value);
+      return this;
+    }
+    public APIRequestGet requestPublishStatusField () {
+      return this.requestPublishStatusField(true);
+    }
+    public APIRequestGet requestPublishStatusField (boolean value) {
+      this.requestField("publish_status", value);
+      return this;
+    }
+    public APIRequestGet requestPublishTimeField () {
+      return this.requestPublishTimeField(true);
+    }
+    public APIRequestGet requestPublishTimeField (boolean value) {
+      this.requestField("publish_time", value);
+      return this;
+    }
+    public APIRequestGet requestScheduledExperimentTimestampField () {
+      return this.requestScheduledExperimentTimestampField(true);
+    }
+    public APIRequestGet requestScheduledExperimentTimestampField (boolean value) {
+      this.requestField("scheduled_experiment_timestamp", value);
+      return this;
+    }
+    public APIRequestGet requestUpdatedTimeField () {
+      return this.requestUpdatedTimeField(true);
+    }
+    public APIRequestGet requestUpdatedTimeField (boolean value) {
+      this.requestField("updated_time", value);
       return this;
     }
   }
@@ -431,19 +574,29 @@ public class Domain extends APINode {
     return gson;
   }
 
-  public Domain copyFrom(Domain instance) {
+  public PagePostExperiment copyFrom(PagePostExperiment instance) {
+    this.mAutoResolveSettings = instance.mAutoResolveSettings;
+    this.mCreationTime = instance.mCreationTime;
+    this.mCreator = instance.mCreator;
+    this.mDeclaredWinningTime = instance.mDeclaredWinningTime;
+    this.mDescription = instance.mDescription;
     this.mId = instance.mId;
+    this.mInsightSnapshots = instance.mInsightSnapshots;
     this.mName = instance.mName;
-    this.mUrl = instance.mUrl;
+    this.mOptimizationGoal = instance.mOptimizationGoal;
+    this.mPublishStatus = instance.mPublishStatus;
+    this.mPublishTime = instance.mPublishTime;
+    this.mScheduledExperimentTimestamp = instance.mScheduledExperimentTimestamp;
+    this.mUpdatedTime = instance.mUpdatedTime;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<Domain> getParser() {
-    return new APIRequest.ResponseParser<Domain>() {
-      public APINodeList<Domain> parseResponse(String response, APIContext context, APIRequest<Domain> request, String header) throws MalformedResponseException {
-        return Domain.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<PagePostExperiment> getParser() {
+    return new APIRequest.ResponseParser<PagePostExperiment>() {
+      public APINodeList<PagePostExperiment> parseResponse(String response, APIContext context, APIRequest<PagePostExperiment> request, String header) throws MalformedResponseException {
+        return PagePostExperiment.parseResponse(response, context, request, header);
       }
     };
   }

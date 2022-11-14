@@ -253,6 +253,8 @@ public class AdsInsights extends APINode {
   private String mSpend = null;
   @SerializedName("total_postbacks")
   private String mTotalPostbacks = null;
+  @SerializedName("total_postbacks_detailed")
+  private List<AdsActionStats> mTotalPostbacksDetailed = null;
   @SerializedName("unique_actions")
   private List<AdsActionStats> mUniqueActions = null;
   @SerializedName("unique_clicks")
@@ -1507,6 +1509,20 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public List<AdsActionStats> getFieldTotalPostbacksDetailed() {
+    return mTotalPostbacksDetailed;
+  }
+
+  public AdsInsights setFieldTotalPostbacksDetailed(List<AdsActionStats> value) {
+    this.mTotalPostbacksDetailed = value;
+    return this;
+  }
+
+  public AdsInsights setFieldTotalPostbacksDetailed(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mTotalPostbacksDetailed = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldUniqueActions() {
     return mUniqueActions;
   }
@@ -1905,6 +1921,10 @@ public class AdsInsights extends APINode {
       VALUE_DDA("dda"),
       @SerializedName("default")
       VALUE_DEFAULT("default"),
+      @SerializedName("skan_click")
+      VALUE_SKAN_CLICK("skan_click"),
+      @SerializedName("skan_view")
+      VALUE_SKAN_VIEW("skan_view"),
       ;
 
       private String value;
@@ -2006,8 +2026,12 @@ public class AdsInsights extends APINode {
       VALUE_IMAGE_ASSET("image_asset"),
       @SerializedName("impression_device")
       VALUE_IMPRESSION_DEVICE("impression_device"),
+      @SerializedName("is_conversion_id_modeled")
+      VALUE_IS_CONVERSION_ID_MODELED("is_conversion_id_modeled"),
       @SerializedName("link_url_asset")
       VALUE_LINK_URL_ASSET("link_url_asset"),
+      @SerializedName("mmm")
+      VALUE_MMM("mmm"),
       @SerializedName("place_page_id")
       VALUE_PLACE_PAGE_ID("place_page_id"),
       @SerializedName("platform_position")
@@ -2018,6 +2042,8 @@ public class AdsInsights extends APINode {
       VALUE_PUBLISHER_PLATFORM("publisher_platform"),
       @SerializedName("region")
       VALUE_REGION("region"),
+      @SerializedName("skan_campaign_id")
+      VALUE_SKAN_CAMPAIGN_ID("skan_campaign_id"),
       @SerializedName("skan_conversion_id")
       VALUE_SKAN_CONVERSION_ID("skan_conversion_id"),
       @SerializedName("title_asset")
@@ -2039,6 +2065,8 @@ public class AdsInsights extends APINode {
   }
 
   public static enum EnumDatePreset {
+      @SerializedName("data_maximum")
+      VALUE_DATA_MAXIMUM("data_maximum"),
       @SerializedName("last_14d")
       VALUE_LAST_14D("last_14d"),
       @SerializedName("last_28d")
@@ -2263,6 +2291,7 @@ public class AdsInsights extends APINode {
     this.mSocialSpend = instance.mSocialSpend;
     this.mSpend = instance.mSpend;
     this.mTotalPostbacks = instance.mTotalPostbacks;
+    this.mTotalPostbacksDetailed = instance.mTotalPostbacksDetailed;
     this.mUniqueActions = instance.mUniqueActions;
     this.mUniqueClicks = instance.mUniqueClicks;
     this.mUniqueConversions = instance.mUniqueConversions;

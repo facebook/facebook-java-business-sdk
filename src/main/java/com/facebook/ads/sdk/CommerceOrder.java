@@ -302,6 +302,10 @@ public class CommerceOrder extends APINode {
     return new APIRequestCreateCancellation(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateFulfillOrder createFulfillOrder() {
+    return new APIRequestCreateFulfillOrder(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetItems getItems() {
     return new APIRequestGetItems(this.getPrefixedId().toString(), context);
   }
@@ -328,6 +332,10 @@ public class CommerceOrder extends APINode {
 
   public APIRequestGetReturns getReturns() {
     return new APIRequestGetReturns(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateReturn createReturn() {
+    return new APIRequestCreateReturn(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetShipments getShipments() {
@@ -765,6 +773,126 @@ public class CommerceOrder extends APINode {
 
     @Override
     public APIRequestCreateCancellation requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateFulfillOrder extends APIRequest<CommerceOrder> {
+
+    CommerceOrder lastResponse = null;
+    @Override
+    public CommerceOrder getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "idempotency_key",
+      "items",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public CommerceOrder parseResponse(String response, String header) throws APIException {
+      return CommerceOrder.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public CommerceOrder execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public CommerceOrder execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<CommerceOrder> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<CommerceOrder> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, CommerceOrder>() {
+           public CommerceOrder apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateFulfillOrder.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateFulfillOrder(String nodeId, APIContext context) {
+      super(context, nodeId, "/fulfill_order", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateFulfillOrder setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateFulfillOrder setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateFulfillOrder setIdempotencyKey (String idempotencyKey) {
+      this.setParam("idempotency_key", idempotencyKey);
+      return this;
+    }
+
+    public APIRequestCreateFulfillOrder setItems (List<Map<String, String>> items) {
+      this.setParam("items", items);
+      return this;
+    }
+    public APIRequestCreateFulfillOrder setItems (String items) {
+      this.setParam("items", items);
+      return this;
+    }
+
+    public APIRequestCreateFulfillOrder requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateFulfillOrder requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateFulfillOrder requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateFulfillOrder requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateFulfillOrder requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateFulfillOrder requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -1573,6 +1701,142 @@ public class CommerceOrder extends APINode {
 
   }
 
+  public static class APIRequestCreateReturn extends APIRequest<CommerceOrder> {
+
+    CommerceOrder lastResponse = null;
+    @Override
+    public CommerceOrder getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "items",
+      "merchant_return_id",
+      "return_message",
+      "update",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public CommerceOrder parseResponse(String response, String header) throws APIException {
+      return CommerceOrder.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public CommerceOrder execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public CommerceOrder execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<CommerceOrder> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<CommerceOrder> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, CommerceOrder>() {
+           public CommerceOrder apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateReturn.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateReturn(String nodeId, APIContext context) {
+      super(context, nodeId, "/returns", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateReturn setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateReturn setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateReturn setItems (List<Map<String, String>> items) {
+      this.setParam("items", items);
+      return this;
+    }
+    public APIRequestCreateReturn setItems (String items) {
+      this.setParam("items", items);
+      return this;
+    }
+
+    public APIRequestCreateReturn setMerchantReturnId (String merchantReturnId) {
+      this.setParam("merchant_return_id", merchantReturnId);
+      return this;
+    }
+
+    public APIRequestCreateReturn setReturnMessage (String returnMessage) {
+      this.setParam("return_message", returnMessage);
+      return this;
+    }
+
+    public APIRequestCreateReturn setUpdate (Map<String, String> update) {
+      this.setParam("update", update);
+      return this;
+    }
+    public APIRequestCreateReturn setUpdate (String update) {
+      this.setParam("update", update);
+      return this;
+    }
+
+    public APIRequestCreateReturn requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateReturn requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateReturn requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateReturn requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateReturn requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateReturn requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetShipments extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -1869,8 +2133,10 @@ public class CommerceOrder extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "external_shipment_id",
       "fulfillment_id",
       "idempotency_key",
+      "shipment_id",
       "tracking_info",
     };
 
@@ -1930,6 +2196,11 @@ public class CommerceOrder extends APINode {
     }
 
 
+    public APIRequestCreateUpdateShipment setExternalShipmentId (String externalShipmentId) {
+      this.setParam("external_shipment_id", externalShipmentId);
+      return this;
+    }
+
     public APIRequestCreateUpdateShipment setFulfillmentId (String fulfillmentId) {
       this.setParam("fulfillment_id", fulfillmentId);
       return this;
@@ -1937,6 +2208,11 @@ public class CommerceOrder extends APINode {
 
     public APIRequestCreateUpdateShipment setIdempotencyKey (String idempotencyKey) {
       this.setParam("idempotency_key", idempotencyKey);
+      return this;
+    }
+
+    public APIRequestCreateUpdateShipment setShipmentId (String shipmentId) {
+      this.setParam("shipment_id", shipmentId);
       return this;
     }
 

@@ -771,14 +771,12 @@ public class PageCallToAction extends APINode {
     }
     public static final String[] PARAMS = {
       "android_app_id",
-      "android_deeplink",
       "android_destination_type",
       "android_package_name",
       "android_url",
       "email_address",
       "intl_number_with_plus",
       "iphone_app_id",
-      "iphone_deeplink",
       "iphone_destination_type",
       "iphone_url",
       "type",
@@ -851,11 +849,6 @@ public class PageCallToAction extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setAndroidDeeplink (String androidDeeplink) {
-      this.setParam("android_deeplink", androidDeeplink);
-      return this;
-    }
-
     public APIRequestUpdate setAndroidDestinationType (PageCallToAction.EnumAndroidDestinationType androidDestinationType) {
       this.setParam("android_destination_type", androidDestinationType);
       return this;
@@ -891,11 +884,6 @@ public class PageCallToAction extends APINode {
     }
     public APIRequestUpdate setIphoneAppId (String iphoneAppId) {
       this.setParam("iphone_app_id", iphoneAppId);
-      return this;
-    }
-
-    public APIRequestUpdate setIphoneDeeplink (String iphoneDeeplink) {
-      this.setParam("iphone_deeplink", iphoneDeeplink);
       return this;
     }
 

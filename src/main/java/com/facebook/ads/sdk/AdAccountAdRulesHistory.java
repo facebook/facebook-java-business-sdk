@@ -342,6 +342,8 @@ public class AdAccountAdRulesHistory extends APINode {
       VALUE_CHANGED_BUDGET("CHANGED_BUDGET"),
       @SerializedName("EMAIL")
       VALUE_EMAIL("EMAIL"),
+      @SerializedName("ENABLE_AUTOFLOW")
+      VALUE_ENABLE_AUTOFLOW("ENABLE_AUTOFLOW"),
       @SerializedName("ENDPOINT_PINGED")
       VALUE_ENDPOINT_PINGED("ENDPOINT_PINGED"),
       @SerializedName("ERROR")

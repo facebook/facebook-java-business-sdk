@@ -54,29 +54,31 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class BilledAmountDetails extends APINode {
-  @SerializedName("currency")
-  private String mCurrency = null;
-  @SerializedName("net_amount")
-  private String mNetAmount = null;
-  @SerializedName("tax_amount")
-  private String mTaxAmount = null;
-  @SerializedName("total_amount")
-  private String mTotalAmount = null;
+public class ProductCatalogDataSource extends APINode {
+  @SerializedName("app_id")
+  private String mAppId = null;
+  @SerializedName("id")
+  private String mId = null;
+  @SerializedName("ingestion_source_type")
+  private String mIngestionSourceType = null;
+  @SerializedName("name")
+  private String mName = null;
+  @SerializedName("upload_type")
+  private String mUploadType = null;
   protected static Gson gson = null;
 
-  public BilledAmountDetails() {
+  public ProductCatalogDataSource() {
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
-  public static BilledAmountDetails loadJSON(String json, APIContext context, String header) {
-    BilledAmountDetails billedAmountDetails = getGson().fromJson(json, BilledAmountDetails.class);
+  public static ProductCatalogDataSource loadJSON(String json, APIContext context, String header) {
+    ProductCatalogDataSource productCatalogDataSource = getGson().fromJson(json, ProductCatalogDataSource.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(billedAmountDetails.toString());
+      JsonElement o2 = parser.parse(productCatalogDataSource.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -86,14 +88,14 @@ public class BilledAmountDetails extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    billedAmountDetails.context = context;
-    billedAmountDetails.rawValue = json;
-    billedAmountDetails.header = header;
-    return billedAmountDetails;
+    productCatalogDataSource.context = context;
+    productCatalogDataSource.rawValue = json;
+    productCatalogDataSource.header = header;
+    return productCatalogDataSource;
   }
 
-  public static APINodeList<BilledAmountDetails> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<BilledAmountDetails> billedAmountDetailss = new APINodeList<BilledAmountDetails>(request, json, header);
+  public static APINodeList<ProductCatalogDataSource> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ProductCatalogDataSource> productCatalogDataSources = new APINodeList<ProductCatalogDataSource>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -104,9 +106,9 @@ public class BilledAmountDetails extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          billedAmountDetailss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          productCatalogDataSources.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return billedAmountDetailss;
+        return productCatalogDataSources;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -116,20 +118,20 @@ public class BilledAmountDetails extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                billedAmountDetailss.setCursors(before, after);
+                productCatalogDataSources.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            billedAmountDetailss.setPaging(previous, next);
+            productCatalogDataSources.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              billedAmountDetailss.setAppSecret(context.getAppSecretProof());
+              productCatalogDataSources.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              billedAmountDetailss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              productCatalogDataSources.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -140,23 +142,23 @@ public class BilledAmountDetails extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  billedAmountDetailss.add(loadJSON(entry.getValue().toString(), context, header));
+                  productCatalogDataSources.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              billedAmountDetailss.add(loadJSON(obj.toString(), context, header));
+              productCatalogDataSources.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return billedAmountDetailss;
+          return productCatalogDataSources;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              billedAmountDetailss.add(loadJSON(entry.getValue().toString(), context, header));
+              productCatalogDataSources.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return billedAmountDetailss;
+          return productCatalogDataSources;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -173,20 +175,20 @@ public class BilledAmountDetails extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              billedAmountDetailss.add(loadJSON(value.toString(), context, header));
+              productCatalogDataSources.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return billedAmountDetailss;
+            return productCatalogDataSources;
           }
 
           // Sixth, check if it's pure JsonObject
-          billedAmountDetailss.clear();
-          billedAmountDetailss.add(loadJSON(json, context, header));
-          return billedAmountDetailss;
+          productCatalogDataSources.clear();
+          productCatalogDataSources.add(loadJSON(json, context, header));
+          return productCatalogDataSources;
         }
       }
     } catch (Exception e) {
@@ -214,43 +216,73 @@ public class BilledAmountDetails extends APINode {
   }
 
 
-  public String getFieldCurrency() {
-    return mCurrency;
+  public String getFieldAppId() {
+    return mAppId;
   }
 
-  public BilledAmountDetails setFieldCurrency(String value) {
-    this.mCurrency = value;
+  public ProductCatalogDataSource setFieldAppId(String value) {
+    this.mAppId = value;
     return this;
   }
 
-  public String getFieldNetAmount() {
-    return mNetAmount;
+  public String getFieldId() {
+    return mId;
   }
 
-  public BilledAmountDetails setFieldNetAmount(String value) {
-    this.mNetAmount = value;
+  public ProductCatalogDataSource setFieldId(String value) {
+    this.mId = value;
     return this;
   }
 
-  public String getFieldTaxAmount() {
-    return mTaxAmount;
+  public String getFieldIngestionSourceType() {
+    return mIngestionSourceType;
   }
 
-  public BilledAmountDetails setFieldTaxAmount(String value) {
-    this.mTaxAmount = value;
+  public ProductCatalogDataSource setFieldIngestionSourceType(String value) {
+    this.mIngestionSourceType = value;
     return this;
   }
 
-  public String getFieldTotalAmount() {
-    return mTotalAmount;
+  public String getFieldName() {
+    return mName;
   }
 
-  public BilledAmountDetails setFieldTotalAmount(String value) {
-    this.mTotalAmount = value;
+  public ProductCatalogDataSource setFieldName(String value) {
+    this.mName = value;
+    return this;
+  }
+
+  public String getFieldUploadType() {
+    return mUploadType;
+  }
+
+  public ProductCatalogDataSource setFieldUploadType(String value) {
+    this.mUploadType = value;
     return this;
   }
 
 
+
+  public static enum EnumIngestionSourceType {
+      @SerializedName("ALL")
+      VALUE_ALL("ALL"),
+      @SerializedName("PRIMARY")
+      VALUE_PRIMARY("PRIMARY"),
+      @SerializedName("SUPPLEMENTARY")
+      VALUE_SUPPLEMENTARY("SUPPLEMENTARY"),
+      ;
+
+      private String value;
+
+      private EnumIngestionSourceType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -266,20 +298,21 @@ public class BilledAmountDetails extends APINode {
     return gson;
   }
 
-  public BilledAmountDetails copyFrom(BilledAmountDetails instance) {
-    this.mCurrency = instance.mCurrency;
-    this.mNetAmount = instance.mNetAmount;
-    this.mTaxAmount = instance.mTaxAmount;
-    this.mTotalAmount = instance.mTotalAmount;
+  public ProductCatalogDataSource copyFrom(ProductCatalogDataSource instance) {
+    this.mAppId = instance.mAppId;
+    this.mId = instance.mId;
+    this.mIngestionSourceType = instance.mIngestionSourceType;
+    this.mName = instance.mName;
+    this.mUploadType = instance.mUploadType;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<BilledAmountDetails> getParser() {
-    return new APIRequest.ResponseParser<BilledAmountDetails>() {
-      public APINodeList<BilledAmountDetails> parseResponse(String response, APIContext context, APIRequest<BilledAmountDetails> request, String header) throws MalformedResponseException {
-        return BilledAmountDetails.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ProductCatalogDataSource> getParser() {
+    return new APIRequest.ResponseParser<ProductCatalogDataSource>() {
+      public APINodeList<ProductCatalogDataSource> parseResponse(String response, APIContext context, APIRequest<ProductCatalogDataSource> request, String header) throws MalformedResponseException {
+        return ProductCatalogDataSource.parseResponse(response, context, request, header);
       }
     };
   }
