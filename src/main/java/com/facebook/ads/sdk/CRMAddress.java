@@ -54,72 +54,90 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ThirdPartyMeasurementReportDataset extends APINode {
-  @SerializedName("category")
-  private String mCategory = null;
+public class CRMAddress extends APINode {
+  @SerializedName("city")
+  private String mCity = null;
+  @SerializedName("cnpj_tax_id")
+  private String mCnpjTaxId = null;
+  @SerializedName("country")
+  private String mCountry = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("partner")
-  private Business mPartner = null;
-  @SerializedName("product")
-  private String mProduct = null;
-  @SerializedName("schema")
-  private List<Object> mSchema = null;
+  @SerializedName("postal_code")
+  private String mPostalCode = null;
+  @SerializedName("registration_label")
+  private String mRegistrationLabel = null;
+  @SerializedName("registration_number")
+  private String mRegistrationNumber = null;
+  @SerializedName("state")
+  private String mState = null;
+  @SerializedName("street1")
+  private String mStreet1 = null;
+  @SerializedName("street2")
+  private String mStreet2 = null;
+  @SerializedName("street3")
+  private String mStreet3 = null;
+  @SerializedName("street4")
+  private String mStreet4 = null;
+  @SerializedName("validation_status")
+  private String mValidationStatus = null;
+  @SerializedName("vat_tax_id")
+  private String mVatTaxId = null;
   protected static Gson gson = null;
 
-  ThirdPartyMeasurementReportDataset() {
+  CRMAddress() {
   }
 
-  public ThirdPartyMeasurementReportDataset(Long id, APIContext context) {
+  public CRMAddress(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public ThirdPartyMeasurementReportDataset(String id, APIContext context) {
+  public CRMAddress(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public ThirdPartyMeasurementReportDataset fetch() throws APIException{
-    ThirdPartyMeasurementReportDataset newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public CRMAddress fetch() throws APIException{
+    CRMAddress newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static ThirdPartyMeasurementReportDataset fetchById(Long id, APIContext context) throws APIException {
+  public static CRMAddress fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<ThirdPartyMeasurementReportDataset> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<CRMAddress> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static ThirdPartyMeasurementReportDataset fetchById(String id, APIContext context) throws APIException {
+  public static CRMAddress fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<ThirdPartyMeasurementReportDataset> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<CRMAddress> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<ThirdPartyMeasurementReportDataset> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<ThirdPartyMeasurementReportDataset>)(
-      new APIRequest<ThirdPartyMeasurementReportDataset>(context, "", "/", "GET", ThirdPartyMeasurementReportDataset.getParser())
+  public static APINodeList<CRMAddress> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<CRMAddress>)(
+      new APIRequest<CRMAddress>(context, "", "/", "GET", CRMAddress.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<ThirdPartyMeasurementReportDataset>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<CRMAddress>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", ThirdPartyMeasurementReportDataset.getParser())
+      new APIRequest(context, "", "/", "GET", CRMAddress.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -132,12 +150,12 @@ public class ThirdPartyMeasurementReportDataset extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ThirdPartyMeasurementReportDataset loadJSON(String json, APIContext context, String header) {
-    ThirdPartyMeasurementReportDataset thirdPartyMeasurementReportDataset = getGson().fromJson(json, ThirdPartyMeasurementReportDataset.class);
+  public static CRMAddress loadJSON(String json, APIContext context, String header) {
+    CRMAddress crmAddress = getGson().fromJson(json, CRMAddress.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(thirdPartyMeasurementReportDataset.toString());
+      JsonElement o2 = parser.parse(crmAddress.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -147,14 +165,14 @@ public class ThirdPartyMeasurementReportDataset extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    thirdPartyMeasurementReportDataset.context = context;
-    thirdPartyMeasurementReportDataset.rawValue = json;
-    thirdPartyMeasurementReportDataset.header = header;
-    return thirdPartyMeasurementReportDataset;
+    crmAddress.context = context;
+    crmAddress.rawValue = json;
+    crmAddress.header = header;
+    return crmAddress;
   }
 
-  public static APINodeList<ThirdPartyMeasurementReportDataset> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ThirdPartyMeasurementReportDataset> thirdPartyMeasurementReportDatasets = new APINodeList<ThirdPartyMeasurementReportDataset>(request, json, header);
+  public static APINodeList<CRMAddress> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CRMAddress> crmAddresss = new APINodeList<CRMAddress>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -165,9 +183,9 @@ public class ThirdPartyMeasurementReportDataset extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          thirdPartyMeasurementReportDatasets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          crmAddresss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return thirdPartyMeasurementReportDatasets;
+        return crmAddresss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -177,20 +195,20 @@ public class ThirdPartyMeasurementReportDataset extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                thirdPartyMeasurementReportDatasets.setCursors(before, after);
+                crmAddresss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            thirdPartyMeasurementReportDatasets.setPaging(previous, next);
+            crmAddresss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              thirdPartyMeasurementReportDatasets.setAppSecret(context.getAppSecretProof());
+              crmAddresss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              thirdPartyMeasurementReportDatasets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              crmAddresss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -201,23 +219,23 @@ public class ThirdPartyMeasurementReportDataset extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  thirdPartyMeasurementReportDatasets.add(loadJSON(entry.getValue().toString(), context, header));
+                  crmAddresss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              thirdPartyMeasurementReportDatasets.add(loadJSON(obj.toString(), context, header));
+              crmAddresss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return thirdPartyMeasurementReportDatasets;
+          return crmAddresss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              thirdPartyMeasurementReportDatasets.add(loadJSON(entry.getValue().toString(), context, header));
+              crmAddresss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return thirdPartyMeasurementReportDatasets;
+          return crmAddresss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -234,20 +252,20 @@ public class ThirdPartyMeasurementReportDataset extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              thirdPartyMeasurementReportDatasets.add(loadJSON(value.toString(), context, header));
+              crmAddresss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return thirdPartyMeasurementReportDatasets;
+            return crmAddresss;
           }
 
           // Sixth, check if it's pure JsonObject
-          thirdPartyMeasurementReportDatasets.clear();
-          thirdPartyMeasurementReportDatasets.add(loadJSON(json, context, header));
-          return thirdPartyMeasurementReportDatasets;
+          crmAddresss.clear();
+          crmAddresss.add(loadJSON(json, context, header));
+          return crmAddresss;
         }
       }
     } catch (Exception e) {
@@ -278,80 +296,118 @@ public class ThirdPartyMeasurementReportDataset extends APINode {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestUpdate update() {
-    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
+
+  public String getFieldCity() {
+    return mCity;
   }
 
+  public String getFieldCnpjTaxId() {
+    return mCnpjTaxId;
+  }
 
-  public String getFieldCategory() {
-    return mCategory;
+  public String getFieldCountry() {
+    return mCountry;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-  public Business getFieldPartner() {
-    if (mPartner != null) {
-      mPartner.context = getContext();
-    }
-    return mPartner;
+  public String getFieldPostalCode() {
+    return mPostalCode;
   }
 
-  public String getFieldProduct() {
-    return mProduct;
+  public String getFieldRegistrationLabel() {
+    return mRegistrationLabel;
   }
 
-  public List<Object> getFieldSchema() {
-    return mSchema;
+  public String getFieldRegistrationNumber() {
+    return mRegistrationNumber;
+  }
+
+  public String getFieldState() {
+    return mState;
+  }
+
+  public String getFieldStreet1() {
+    return mStreet1;
+  }
+
+  public String getFieldStreet2() {
+    return mStreet2;
+  }
+
+  public String getFieldStreet3() {
+    return mStreet3;
+  }
+
+  public String getFieldStreet4() {
+    return mStreet4;
+  }
+
+  public String getFieldValidationStatus() {
+    return mValidationStatus;
+  }
+
+  public String getFieldVatTaxId() {
+    return mVatTaxId;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<ThirdPartyMeasurementReportDataset> {
+  public static class APIRequestGet extends APIRequest<CRMAddress> {
 
-    ThirdPartyMeasurementReportDataset lastResponse = null;
+    CRMAddress lastResponse = null;
     @Override
-    public ThirdPartyMeasurementReportDataset getLastResponse() {
+    public CRMAddress getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "category",
+      "city",
+      "cnpj_tax_id",
+      "country",
       "id",
-      "partner",
-      "product",
-      "schema",
+      "postal_code",
+      "registration_label",
+      "registration_number",
+      "state",
+      "street1",
+      "street2",
+      "street3",
+      "street4",
+      "validation_status",
+      "vat_tax_id",
     };
 
     @Override
-    public ThirdPartyMeasurementReportDataset parseResponse(String response, String header) throws APIException {
-      return ThirdPartyMeasurementReportDataset.parseResponse(response, getContext(), this, header).head();
+    public CRMAddress parseResponse(String response, String header) throws APIException {
+      return CRMAddress.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public ThirdPartyMeasurementReportDataset execute() throws APIException {
+    public CRMAddress execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public ThirdPartyMeasurementReportDataset execute(Map<String, Object> extraParams) throws APIException {
+    public CRMAddress execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<ThirdPartyMeasurementReportDataset> executeAsync() throws APIException {
+    public ListenableFuture<CRMAddress> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<ThirdPartyMeasurementReportDataset> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<CRMAddress> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, ThirdPartyMeasurementReportDataset>() {
-           public ThirdPartyMeasurementReportDataset apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, CRMAddress>() {
+           public CRMAddress apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -415,11 +471,25 @@ public class ThirdPartyMeasurementReportDataset extends APINode {
       return this;
     }
 
-    public APIRequestGet requestCategoryField () {
-      return this.requestCategoryField(true);
+    public APIRequestGet requestCityField () {
+      return this.requestCityField(true);
     }
-    public APIRequestGet requestCategoryField (boolean value) {
-      this.requestField("category", value);
+    public APIRequestGet requestCityField (boolean value) {
+      this.requestField("city", value);
+      return this;
+    }
+    public APIRequestGet requestCnpjTaxIdField () {
+      return this.requestCnpjTaxIdField(true);
+    }
+    public APIRequestGet requestCnpjTaxIdField (boolean value) {
+      this.requestField("cnpj_tax_id", value);
+      return this;
+    }
+    public APIRequestGet requestCountryField () {
+      return this.requestCountryField(true);
+    }
+    public APIRequestGet requestCountryField (boolean value) {
+      this.requestField("country", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -429,141 +499,76 @@ public class ThirdPartyMeasurementReportDataset extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestPartnerField () {
-      return this.requestPartnerField(true);
+    public APIRequestGet requestPostalCodeField () {
+      return this.requestPostalCodeField(true);
     }
-    public APIRequestGet requestPartnerField (boolean value) {
-      this.requestField("partner", value);
+    public APIRequestGet requestPostalCodeField (boolean value) {
+      this.requestField("postal_code", value);
       return this;
     }
-    public APIRequestGet requestProductField () {
-      return this.requestProductField(true);
+    public APIRequestGet requestRegistrationLabelField () {
+      return this.requestRegistrationLabelField(true);
     }
-    public APIRequestGet requestProductField (boolean value) {
-      this.requestField("product", value);
+    public APIRequestGet requestRegistrationLabelField (boolean value) {
+      this.requestField("registration_label", value);
       return this;
     }
-    public APIRequestGet requestSchemaField () {
-      return this.requestSchemaField(true);
+    public APIRequestGet requestRegistrationNumberField () {
+      return this.requestRegistrationNumberField(true);
     }
-    public APIRequestGet requestSchemaField (boolean value) {
-      this.requestField("schema", value);
+    public APIRequestGet requestRegistrationNumberField (boolean value) {
+      this.requestField("registration_number", value);
       return this;
     }
-  }
-
-  public static class APIRequestUpdate extends APIRequest<ThirdPartyMeasurementReportDataset> {
-
-    ThirdPartyMeasurementReportDataset lastResponse = null;
-    @Override
-    public ThirdPartyMeasurementReportDataset getLastResponse() {
-      return lastResponse;
+    public APIRequestGet requestStateField () {
+      return this.requestStateField(true);
     }
-    public static final String[] PARAMS = {
-      "data",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public ThirdPartyMeasurementReportDataset parseResponse(String response, String header) throws APIException {
-      return ThirdPartyMeasurementReportDataset.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public ThirdPartyMeasurementReportDataset execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public ThirdPartyMeasurementReportDataset execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<ThirdPartyMeasurementReportDataset> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<ThirdPartyMeasurementReportDataset> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, ThirdPartyMeasurementReportDataset>() {
-           public ThirdPartyMeasurementReportDataset apply(ResponseWrapper result) {
-             try {
-               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestUpdate(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestUpdate setParam(String param, Object value) {
-      setParamInternal(param, value);
+    public APIRequestGet requestStateField (boolean value) {
+      this.requestField("state", value);
       return this;
     }
-
-    @Override
-    public APIRequestUpdate setParams(Map<String, Object> params) {
-      setParamsInternal(params);
+    public APIRequestGet requestStreet1Field () {
+      return this.requestStreet1Field(true);
+    }
+    public APIRequestGet requestStreet1Field (boolean value) {
+      this.requestField("street1", value);
       return this;
     }
-
-
-    public APIRequestUpdate setData (List<Map<String, String>> data) {
-      this.setParam("data", data);
+    public APIRequestGet requestStreet2Field () {
+      return this.requestStreet2Field(true);
+    }
+    public APIRequestGet requestStreet2Field (boolean value) {
+      this.requestField("street2", value);
       return this;
     }
-    public APIRequestUpdate setData (String data) {
-      this.setParam("data", data);
+    public APIRequestGet requestStreet3Field () {
+      return this.requestStreet3Field(true);
+    }
+    public APIRequestGet requestStreet3Field (boolean value) {
+      this.requestField("street3", value);
       return this;
     }
-
-    public APIRequestUpdate requestAllFields () {
-      return this.requestAllFields(true);
+    public APIRequestGet requestStreet4Field () {
+      return this.requestStreet4Field(true);
     }
-
-    public APIRequestUpdate requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
+    public APIRequestGet requestStreet4Field (boolean value) {
+      this.requestField("street4", value);
       return this;
     }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
+    public APIRequestGet requestValidationStatusField () {
+      return this.requestValidationStatusField(true);
     }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
+    public APIRequestGet requestValidationStatusField (boolean value) {
+      this.requestField("validation_status", value);
       return this;
     }
-
-    @Override
-    public APIRequestUpdate requestField (String field) {
-      this.requestField(field, true);
+    public APIRequestGet requestVatTaxIdField () {
+      return this.requestVatTaxIdField(true);
+    }
+    public APIRequestGet requestVatTaxIdField (boolean value) {
+      this.requestField("vat_tax_id", value);
       return this;
     }
-
-    @Override
-    public APIRequestUpdate requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
 
@@ -580,21 +585,30 @@ public class ThirdPartyMeasurementReportDataset extends APINode {
     return gson;
   }
 
-  public ThirdPartyMeasurementReportDataset copyFrom(ThirdPartyMeasurementReportDataset instance) {
-    this.mCategory = instance.mCategory;
+  public CRMAddress copyFrom(CRMAddress instance) {
+    this.mCity = instance.mCity;
+    this.mCnpjTaxId = instance.mCnpjTaxId;
+    this.mCountry = instance.mCountry;
     this.mId = instance.mId;
-    this.mPartner = instance.mPartner;
-    this.mProduct = instance.mProduct;
-    this.mSchema = instance.mSchema;
+    this.mPostalCode = instance.mPostalCode;
+    this.mRegistrationLabel = instance.mRegistrationLabel;
+    this.mRegistrationNumber = instance.mRegistrationNumber;
+    this.mState = instance.mState;
+    this.mStreet1 = instance.mStreet1;
+    this.mStreet2 = instance.mStreet2;
+    this.mStreet3 = instance.mStreet3;
+    this.mStreet4 = instance.mStreet4;
+    this.mValidationStatus = instance.mValidationStatus;
+    this.mVatTaxId = instance.mVatTaxId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ThirdPartyMeasurementReportDataset> getParser() {
-    return new APIRequest.ResponseParser<ThirdPartyMeasurementReportDataset>() {
-      public APINodeList<ThirdPartyMeasurementReportDataset> parseResponse(String response, APIContext context, APIRequest<ThirdPartyMeasurementReportDataset> request, String header) throws MalformedResponseException {
-        return ThirdPartyMeasurementReportDataset.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<CRMAddress> getParser() {
+    return new APIRequest.ResponseParser<CRMAddress>() {
+      public APINodeList<CRMAddress> parseResponse(String response, APIContext context, APIRequest<CRMAddress> request, String header) throws MalformedResponseException {
+        return CRMAddress.parseResponse(response, context, request, header);
       }
     };
   }

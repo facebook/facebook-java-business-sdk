@@ -1097,11 +1097,11 @@ public class PagePost extends APINode {
     }
   }
 
-  public static class APIRequestCreateComment extends APIRequest<APINode> {
+  public static class APIRequestCreateComment extends APIRequest<Comment> {
 
-    APINode lastResponse = null;
+    Comment lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public Comment getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -1122,31 +1122,31 @@ public class PagePost extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
+    public Comment parseResponse(String response, String header) throws APIException {
+      return Comment.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public Comment execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public Comment execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINode> executeAsync() throws APIException {
+    public ListenableFuture<Comment> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<Comment> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, Comment>() {
+           public Comment apply(ResponseWrapper result) {
              try {
                return APIRequestCreateComment.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -1194,7 +1194,7 @@ public class PagePost extends APINode {
       return this;
     }
 
-    public APIRequestCreateComment setCommentPrivacyValue (EnumCommentPrivacyValue commentPrivacyValue) {
+    public APIRequestCreateComment setCommentPrivacyValue (Comment.EnumCommentPrivacyValue commentPrivacyValue) {
       this.setParam("comment_privacy_value", commentPrivacyValue);
       return this;
     }
@@ -3008,6 +3008,7 @@ public class PagePost extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
+      "owner_business",
       "page_token",
       "parent_page",
       "parking",
@@ -3819,6 +3820,13 @@ public class PagePost extends APINode {
     }
     public APIRequestGetSponsorTags requestOverallStarRatingField (boolean value) {
       this.requestField("overall_star_rating", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetSponsorTags requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
       return this;
     }
     public APIRequestGetSponsorTags requestPageTokenField () {
@@ -5450,43 +5458,6 @@ public class PagePost extends APINode {
       private String value;
 
       private EnumTimelineVisibility(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumCommentPrivacyValue {
-      @SerializedName("DECLINED_BY_ADMIN_ASSISTANT")
-      VALUE_DECLINED_BY_ADMIN_ASSISTANT("DECLINED_BY_ADMIN_ASSISTANT"),
-      @SerializedName("DEFAULT_PRIVACY")
-      VALUE_DEFAULT_PRIVACY("DEFAULT_PRIVACY"),
-      @SerializedName("FRIENDS_AND_POST_OWNER")
-      VALUE_FRIENDS_AND_POST_OWNER("FRIENDS_AND_POST_OWNER"),
-      @SerializedName("FRIENDS_ONLY")
-      VALUE_FRIENDS_ONLY("FRIENDS_ONLY"),
-      @SerializedName("GRAPHQL_MULTIPLE_VALUE_HACK_DO_NOT_USE")
-      VALUE_GRAPHQL_MULTIPLE_VALUE_HACK_DO_NOT_USE("GRAPHQL_MULTIPLE_VALUE_HACK_DO_NOT_USE"),
-      @SerializedName("OWNER_OR_COMMENTER")
-      VALUE_OWNER_OR_COMMENTER("OWNER_OR_COMMENTER"),
-      @SerializedName("PENDING_APPROVAL")
-      VALUE_PENDING_APPROVAL("PENDING_APPROVAL"),
-      @SerializedName("REMOVED_BY_ADMIN_ASSISTANT")
-      VALUE_REMOVED_BY_ADMIN_ASSISTANT("REMOVED_BY_ADMIN_ASSISTANT"),
-      @SerializedName("SIDE_CONVERSATION")
-      VALUE_SIDE_CONVERSATION("SIDE_CONVERSATION"),
-      @SerializedName("SIDE_CONVERSATION_AND_POST_OWNER")
-      VALUE_SIDE_CONVERSATION_AND_POST_OWNER("SIDE_CONVERSATION_AND_POST_OWNER"),
-      @SerializedName("SPOTLIGHT_TAB")
-      VALUE_SPOTLIGHT_TAB("SPOTLIGHT_TAB"),
-      ;
-
-      private String value;
-
-      private EnumCommentPrivacyValue(String value) {
         this.value = value;
       }
 

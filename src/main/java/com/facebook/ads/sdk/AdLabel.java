@@ -1847,6 +1847,7 @@ public class AdLabel extends APINode {
       "ad_strategy_group_id",
       "ad_strategy_id",
       "adlabels",
+      "benchmark_report_count",
       "bid_strategy",
       "boosted_object_id",
       "brand_lift_studies",
@@ -1859,6 +1860,7 @@ public class AdLabel extends APINode {
       "created_time",
       "daily_budget",
       "effective_status",
+      "has_secondary_skadnetwork_reporting",
       "id",
       "is_skadnetwork_attribution",
       "issues_info",
@@ -1867,6 +1869,7 @@ public class AdLabel extends APINode {
       "name",
       "objective",
       "pacing_type",
+      "primary_attribution",
       "promoted_object",
       "recommendations",
       "smart_promotion_type",
@@ -2000,6 +2003,13 @@ public class AdLabel extends APINode {
       this.requestField("adlabels", value);
       return this;
     }
+    public APIRequestGetCampaigns requestBenchmarkReportCountField () {
+      return this.requestBenchmarkReportCountField(true);
+    }
+    public APIRequestGetCampaigns requestBenchmarkReportCountField (boolean value) {
+      this.requestField("benchmark_report_count", value);
+      return this;
+    }
     public APIRequestGetCampaigns requestBidStrategyField () {
       return this.requestBidStrategyField(true);
     }
@@ -2084,6 +2094,13 @@ public class AdLabel extends APINode {
       this.requestField("effective_status", value);
       return this;
     }
+    public APIRequestGetCampaigns requestHasSecondarySkadnetworkReportingField () {
+      return this.requestHasSecondarySkadnetworkReportingField(true);
+    }
+    public APIRequestGetCampaigns requestHasSecondarySkadnetworkReportingField (boolean value) {
+      this.requestField("has_secondary_skadnetwork_reporting", value);
+      return this;
+    }
     public APIRequestGetCampaigns requestIdField () {
       return this.requestIdField(true);
     }
@@ -2138,6 +2155,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetCampaigns requestPacingTypeField (boolean value) {
       this.requestField("pacing_type", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestPrimaryAttributionField () {
+      return this.requestPrimaryAttributionField(true);
+    }
+    public APIRequestGetCampaigns requestPrimaryAttributionField (boolean value) {
+      this.requestField("primary_attribution", value);
       return this;
     }
     public APIRequestGetCampaigns requestPromotedObjectField () {

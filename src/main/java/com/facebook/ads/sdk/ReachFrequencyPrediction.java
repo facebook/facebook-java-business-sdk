@@ -177,6 +177,14 @@ public class ReachFrequencyPrediction extends APINode {
   private Long mObjective = null;
   @SerializedName("objective_name")
   private String mObjectiveName = null;
+  @SerializedName("odax_objective")
+  private Long mOdaxObjective = null;
+  @SerializedName("odax_objective_name")
+  private String mOdaxObjectiveName = null;
+  @SerializedName("optimization_goal")
+  private Long mOptimizationGoal = null;
+  @SerializedName("optimization_goal_name")
+  private String mOptimizationGoalName = null;
   @SerializedName("pause_periods")
   private List<Object> mPausePeriods = null;
   @SerializedName("placement_breakdown")
@@ -677,6 +685,22 @@ public class ReachFrequencyPrediction extends APINode {
     return mObjectiveName;
   }
 
+  public Long getFieldOdaxObjective() {
+    return mOdaxObjective;
+  }
+
+  public String getFieldOdaxObjectiveName() {
+    return mOdaxObjectiveName;
+  }
+
+  public Long getFieldOptimizationGoal() {
+    return mOptimizationGoal;
+  }
+
+  public String getFieldOptimizationGoalName() {
+    return mOptimizationGoalName;
+  }
+
   public List<Object> getFieldPausePeriods() {
     return mPausePeriods;
   }
@@ -835,6 +859,10 @@ public class ReachFrequencyPrediction extends APINode {
       "name",
       "objective",
       "objective_name",
+      "odax_objective",
+      "odax_objective_name",
+      "optimization_goal",
+      "optimization_goal_name",
       "pause_periods",
       "placement_breakdown",
       "placement_breakdown_map",
@@ -1374,6 +1402,34 @@ public class ReachFrequencyPrediction extends APINode {
       this.requestField("objective_name", value);
       return this;
     }
+    public APIRequestGet requestOdaxObjectiveField () {
+      return this.requestOdaxObjectiveField(true);
+    }
+    public APIRequestGet requestOdaxObjectiveField (boolean value) {
+      this.requestField("odax_objective", value);
+      return this;
+    }
+    public APIRequestGet requestOdaxObjectiveNameField () {
+      return this.requestOdaxObjectiveNameField(true);
+    }
+    public APIRequestGet requestOdaxObjectiveNameField (boolean value) {
+      this.requestField("odax_objective_name", value);
+      return this;
+    }
+    public APIRequestGet requestOptimizationGoalField () {
+      return this.requestOptimizationGoalField(true);
+    }
+    public APIRequestGet requestOptimizationGoalField (boolean value) {
+      this.requestField("optimization_goal", value);
+      return this;
+    }
+    public APIRequestGet requestOptimizationGoalNameField () {
+      return this.requestOptimizationGoalNameField(true);
+    }
+    public APIRequestGet requestOptimizationGoalNameField (boolean value) {
+      this.requestField("optimization_goal_name", value);
+      return this;
+    }
     public APIRequestGet requestPausePeriodsField () {
       return this.requestPausePeriodsField(true);
     }
@@ -1692,6 +1748,10 @@ public class ReachFrequencyPrediction extends APINode {
     this.mName = instance.mName;
     this.mObjective = instance.mObjective;
     this.mObjectiveName = instance.mObjectiveName;
+    this.mOdaxObjective = instance.mOdaxObjective;
+    this.mOdaxObjectiveName = instance.mOdaxObjectiveName;
+    this.mOptimizationGoal = instance.mOptimizationGoal;
+    this.mOptimizationGoalName = instance.mOptimizationGoalName;
     this.mPausePeriods = instance.mPausePeriods;
     this.mPlacementBreakdown = instance.mPlacementBreakdown;
     this.mPlacementBreakdownMap = instance.mPlacementBreakdownMap;

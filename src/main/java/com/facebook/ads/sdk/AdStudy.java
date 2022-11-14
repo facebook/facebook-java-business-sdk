@@ -59,6 +59,8 @@ public class AdStudy extends APINode {
   private Business mBusiness = null;
   @SerializedName("canceled_time")
   private String mCanceledTime = null;
+  @SerializedName("client_business")
+  private Business mClientBusiness = null;
   @SerializedName("cooldown_start_time")
   private String mCooldownStartTime = null;
   @SerializedName("created_by")
@@ -71,12 +73,16 @@ public class AdStudy extends APINode {
   private String mEndTime = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("measurement_contact")
+  private User mMeasurementContact = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("observation_end_time")
   private String mObservationEndTime = null;
   @SerializedName("results_first_available_date")
   private String mResultsFirstAvailableDate = null;
+  @SerializedName("sales_contact")
+  private User mSalesContact = null;
   @SerializedName("start_time")
   private String mStartTime = null;
   @SerializedName("type")
@@ -298,6 +304,10 @@ public class AdStudy extends APINode {
     return new APIRequestGetCells(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateCheckPoint createCheckPoint() {
+    return new APIRequestCreateCheckPoint(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetInstances getInstances() {
     return new APIRequestGetInstances(this.getPrefixedId().toString(), context);
   }
@@ -334,6 +344,13 @@ public class AdStudy extends APINode {
     return mCanceledTime;
   }
 
+  public Business getFieldClientBusiness() {
+    if (mClientBusiness != null) {
+      mClientBusiness.context = getContext();
+    }
+    return mClientBusiness;
+  }
+
   public String getFieldCooldownStartTime() {
     return mCooldownStartTime;
   }
@@ -361,6 +378,13 @@ public class AdStudy extends APINode {
     return mId;
   }
 
+  public User getFieldMeasurementContact() {
+    if (mMeasurementContact != null) {
+      mMeasurementContact.context = getContext();
+    }
+    return mMeasurementContact;
+  }
+
   public String getFieldName() {
     return mName;
   }
@@ -371,6 +395,13 @@ public class AdStudy extends APINode {
 
   public String getFieldResultsFirstAvailableDate() {
     return mResultsFirstAvailableDate;
+  }
+
+  public User getFieldSalesContact() {
+    if (mSalesContact != null) {
+      mSalesContact.context = getContext();
+    }
+    return mSalesContact;
   }
 
   public String getFieldStartTime() {
@@ -538,6 +569,140 @@ public class AdStudy extends APINode {
     }
   }
 
+  public static class APIRequestCreateCheckPoint extends APIRequest<AdStudy> {
+
+    AdStudy lastResponse = null;
+    @Override
+    public AdStudy getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "checkpoint_data",
+      "checkpoint_name",
+      "component",
+      "instance_id",
+      "run_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AdStudy parseResponse(String response, String header) throws APIException {
+      return AdStudy.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public AdStudy execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdStudy execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdStudy> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdStudy> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, AdStudy>() {
+           public AdStudy apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateCheckPoint.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateCheckPoint(String nodeId, APIContext context) {
+      super(context, nodeId, "/checkpoint", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateCheckPoint setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCheckPoint setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateCheckPoint setCheckpointData (String checkpointData) {
+      this.setParam("checkpoint_data", checkpointData);
+      return this;
+    }
+
+    public APIRequestCreateCheckPoint setCheckpointName (String checkpointName) {
+      this.setParam("checkpoint_name", checkpointName);
+      return this;
+    }
+
+    public APIRequestCreateCheckPoint setComponent (String component) {
+      this.setParam("component", component);
+      return this;
+    }
+
+    public APIRequestCreateCheckPoint setInstanceId (String instanceId) {
+      this.setParam("instance_id", instanceId);
+      return this;
+    }
+
+    public APIRequestCreateCheckPoint setRunId (String runId) {
+      this.setParam("run_id", runId);
+      return this;
+    }
+
+    public APIRequestCreateCheckPoint requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateCheckPoint requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCheckPoint requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateCheckPoint requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCheckPoint requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCheckPoint requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetInstances extends APIRequest<PrivateLiftStudyInstance> {
 
     APINodeList<PrivateLiftStudyInstance> lastResponse = null;
@@ -551,8 +716,10 @@ public class AdStudy extends APINode {
     public static final String[] FIELDS = {
       "breakdown_key",
       "created_time",
+      "feature_list",
       "id",
       "latest_status_update_time",
+      "run_id",
       "server_ips",
       "status",
       "tier",
@@ -661,6 +828,13 @@ public class AdStudy extends APINode {
       this.requestField("created_time", value);
       return this;
     }
+    public APIRequestGetInstances requestFeatureListField () {
+      return this.requestFeatureListField(true);
+    }
+    public APIRequestGetInstances requestFeatureListField (boolean value) {
+      this.requestField("feature_list", value);
+      return this;
+    }
     public APIRequestGetInstances requestIdField () {
       return this.requestIdField(true);
     }
@@ -673,6 +847,13 @@ public class AdStudy extends APINode {
     }
     public APIRequestGetInstances requestLatestStatusUpdateTimeField (boolean value) {
       this.requestField("latest_status_update_time", value);
+      return this;
+    }
+    public APIRequestGetInstances requestRunIdField () {
+      return this.requestRunIdField(true);
+    }
+    public APIRequestGetInstances requestRunIdField (boolean value) {
+      this.requestField("run_id", value);
       return this;
     }
     public APIRequestGetInstances requestServerIpsField () {
@@ -707,6 +888,7 @@ public class AdStudy extends APINode {
     }
     public static final String[] PARAMS = {
       "breakdown_key",
+      "run_id",
     };
 
     public static final String[] FIELDS = {
@@ -771,6 +953,11 @@ public class AdStudy extends APINode {
     }
     public APIRequestCreateInstance setBreakdownKey (String breakdownKey) {
       this.setParam("breakdown_key", breakdownKey);
+      return this;
+    }
+
+    public APIRequestCreateInstance setRunId (String runId) {
+      this.setParam("run_id", runId);
       return this;
     }
 
@@ -1081,15 +1268,18 @@ public class AdStudy extends APINode {
     public static final String[] FIELDS = {
       "business",
       "canceled_time",
+      "client_business",
       "cooldown_start_time",
       "created_by",
       "created_time",
       "description",
       "end_time",
       "id",
+      "measurement_contact",
       "name",
       "observation_end_time",
       "results_first_available_date",
+      "sales_contact",
       "start_time",
       "type",
       "updated_by",
@@ -1199,6 +1389,13 @@ public class AdStudy extends APINode {
       this.requestField("canceled_time", value);
       return this;
     }
+    public APIRequestGet requestClientBusinessField () {
+      return this.requestClientBusinessField(true);
+    }
+    public APIRequestGet requestClientBusinessField (boolean value) {
+      this.requestField("client_business", value);
+      return this;
+    }
     public APIRequestGet requestCooldownStartTimeField () {
       return this.requestCooldownStartTimeField(true);
     }
@@ -1241,6 +1438,13 @@ public class AdStudy extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestMeasurementContactField () {
+      return this.requestMeasurementContactField(true);
+    }
+    public APIRequestGet requestMeasurementContactField (boolean value) {
+      this.requestField("measurement_contact", value);
+      return this;
+    }
     public APIRequestGet requestNameField () {
       return this.requestNameField(true);
     }
@@ -1260,6 +1464,13 @@ public class AdStudy extends APINode {
     }
     public APIRequestGet requestResultsFirstAvailableDateField (boolean value) {
       this.requestField("results_first_available_date", value);
+      return this;
+    }
+    public APIRequestGet requestSalesContactField () {
+      return this.requestSalesContactField(true);
+    }
+    public APIRequestGet requestSalesContactField (boolean value) {
+      this.requestField("sales_contact", value);
       return this;
     }
     public APIRequestGet requestStartTimeField () {
@@ -1544,15 +1755,18 @@ public class AdStudy extends APINode {
   public AdStudy copyFrom(AdStudy instance) {
     this.mBusiness = instance.mBusiness;
     this.mCanceledTime = instance.mCanceledTime;
+    this.mClientBusiness = instance.mClientBusiness;
     this.mCooldownStartTime = instance.mCooldownStartTime;
     this.mCreatedBy = instance.mCreatedBy;
     this.mCreatedTime = instance.mCreatedTime;
     this.mDescription = instance.mDescription;
     this.mEndTime = instance.mEndTime;
     this.mId = instance.mId;
+    this.mMeasurementContact = instance.mMeasurementContact;
     this.mName = instance.mName;
     this.mObservationEndTime = instance.mObservationEndTime;
     this.mResultsFirstAvailableDate = instance.mResultsFirstAvailableDate;
+    this.mSalesContact = instance.mSalesContact;
     this.mStartTime = instance.mStartTime;
     this.mType = instance.mType;
     this.mUpdatedBy = instance.mUpdatedBy;

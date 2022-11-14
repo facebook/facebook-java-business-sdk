@@ -57,6 +57,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class BusinessUser extends APINode {
   @SerializedName("business")
   private Business mBusiness = null;
+  @SerializedName("business_role_request")
+  private BusinessRoleRequest mBusinessRoleRequest = null;
   @SerializedName("email")
   private String mEmail = null;
   @SerializedName("finance_permission")
@@ -326,6 +328,13 @@ public class BusinessUser extends APINode {
     return mBusiness;
   }
 
+  public BusinessRoleRequest getFieldBusinessRoleRequest() {
+    if (mBusinessRoleRequest != null) {
+      mBusinessRoleRequest.context = getContext();
+    }
+    return mBusinessRoleRequest;
+  }
+
   public String getFieldEmail() {
     return mEmail;
   }
@@ -406,6 +415,7 @@ public class BusinessUser extends APINode {
       "capabilities",
       "created_time",
       "currency",
+      "custom_audience_info",
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
@@ -427,6 +437,7 @@ public class BusinessUser extends APINode {
       "is_personal",
       "is_prepay_account",
       "is_tax_id_required",
+      "liable_address",
       "line_numbers",
       "media_agency",
       "min_campaign_group_spend_cap",
@@ -434,9 +445,12 @@ public class BusinessUser extends APINode {
       "name",
       "offsite_pixels_tos_accepted",
       "owner",
+      "owner_business",
       "partner",
       "rf_spec",
+      "send_bill_to_address",
       "show_checkout_experience",
+      "sold_to_address",
       "spend_cap",
       "tax_id",
       "tax_id_status",
@@ -447,6 +461,7 @@ public class BusinessUser extends APINode {
       "tos_accepted",
       "user_tasks",
       "user_tos_accepted",
+      "viewable_business",
     };
 
     @Override
@@ -671,6 +686,13 @@ public class BusinessUser extends APINode {
       this.requestField("currency", value);
       return this;
     }
+    public APIRequestGetAssignedAdAccounts requestCustomAudienceInfoField () {
+      return this.requestCustomAudienceInfoField(true);
+    }
+    public APIRequestGetAssignedAdAccounts requestCustomAudienceInfoField (boolean value) {
+      this.requestField("custom_audience_info", value);
+      return this;
+    }
     public APIRequestGetAssignedAdAccounts requestDisableReasonField () {
       return this.requestDisableReasonField(true);
     }
@@ -818,6 +840,13 @@ public class BusinessUser extends APINode {
       this.requestField("is_tax_id_required", value);
       return this;
     }
+    public APIRequestGetAssignedAdAccounts requestLiableAddressField () {
+      return this.requestLiableAddressField(true);
+    }
+    public APIRequestGetAssignedAdAccounts requestLiableAddressField (boolean value) {
+      this.requestField("liable_address", value);
+      return this;
+    }
     public APIRequestGetAssignedAdAccounts requestLineNumbersField () {
       return this.requestLineNumbersField(true);
     }
@@ -867,6 +896,13 @@ public class BusinessUser extends APINode {
       this.requestField("owner", value);
       return this;
     }
+    public APIRequestGetAssignedAdAccounts requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetAssignedAdAccounts requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
+      return this;
+    }
     public APIRequestGetAssignedAdAccounts requestPartnerField () {
       return this.requestPartnerField(true);
     }
@@ -881,11 +917,25 @@ public class BusinessUser extends APINode {
       this.requestField("rf_spec", value);
       return this;
     }
+    public APIRequestGetAssignedAdAccounts requestSendBillToAddressField () {
+      return this.requestSendBillToAddressField(true);
+    }
+    public APIRequestGetAssignedAdAccounts requestSendBillToAddressField (boolean value) {
+      this.requestField("send_bill_to_address", value);
+      return this;
+    }
     public APIRequestGetAssignedAdAccounts requestShowCheckoutExperienceField () {
       return this.requestShowCheckoutExperienceField(true);
     }
     public APIRequestGetAssignedAdAccounts requestShowCheckoutExperienceField (boolean value) {
       this.requestField("show_checkout_experience", value);
+      return this;
+    }
+    public APIRequestGetAssignedAdAccounts requestSoldToAddressField () {
+      return this.requestSoldToAddressField(true);
+    }
+    public APIRequestGetAssignedAdAccounts requestSoldToAddressField (boolean value) {
+      this.requestField("sold_to_address", value);
       return this;
     }
     public APIRequestGetAssignedAdAccounts requestSpendCapField () {
@@ -958,6 +1008,13 @@ public class BusinessUser extends APINode {
       this.requestField("user_tos_accepted", value);
       return this;
     }
+    public APIRequestGetAssignedAdAccounts requestViewableBusinessField () {
+      return this.requestViewableBusinessField(true);
+    }
+    public APIRequestGetAssignedAdAccounts requestViewableBusinessField (boolean value) {
+      this.requestField("viewable_business", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetAssignedBusinessAssetGroups extends APIRequest<BusinessAssetGroup> {
@@ -974,6 +1031,7 @@ public class BusinessUser extends APINode {
     public static final String[] FIELDS = {
       "id",
       "name",
+      "owner_business",
     };
 
     @Override
@@ -1082,6 +1140,13 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGetAssignedBusinessAssetGroups requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAssignedBusinessAssetGroups requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetAssignedBusinessAssetGroups requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
       return this;
     }
   }
@@ -1193,6 +1258,7 @@ public class BusinessUser extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
+      "owner_business",
       "page_token",
       "parent_page",
       "parking",
@@ -2006,6 +2072,13 @@ public class BusinessUser extends APINode {
       this.requestField("overall_star_rating", value);
       return this;
     }
+    public APIRequestGetAssignedPages requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetAssignedPages requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
+      return this;
+    }
     public APIRequestGetAssignedPages requestPageTokenField () {
       return this.requestPageTokenField(true);
     }
@@ -2370,7 +2443,9 @@ public class BusinessUser extends APINode {
 
     public static final String[] FIELDS = {
       "business",
+      "catalog_store",
       "commerce_merchant_settings",
+      "creator_user",
       "da_display_settings",
       "default_image_url",
       "fallback_image_url",
@@ -2378,6 +2453,7 @@ public class BusinessUser extends APINode {
       "id",
       "is_catalog_segment",
       "name",
+      "owner_business",
       "product_count",
       "store_catalog_settings",
       "vertical",
@@ -2479,11 +2555,25 @@ public class BusinessUser extends APINode {
       this.requestField("business", value);
       return this;
     }
+    public APIRequestGetAssignedProductCatalogs requestCatalogStoreField () {
+      return this.requestCatalogStoreField(true);
+    }
+    public APIRequestGetAssignedProductCatalogs requestCatalogStoreField (boolean value) {
+      this.requestField("catalog_store", value);
+      return this;
+    }
     public APIRequestGetAssignedProductCatalogs requestCommerceMerchantSettingsField () {
       return this.requestCommerceMerchantSettingsField(true);
     }
     public APIRequestGetAssignedProductCatalogs requestCommerceMerchantSettingsField (boolean value) {
       this.requestField("commerce_merchant_settings", value);
+      return this;
+    }
+    public APIRequestGetAssignedProductCatalogs requestCreatorUserField () {
+      return this.requestCreatorUserField(true);
+    }
+    public APIRequestGetAssignedProductCatalogs requestCreatorUserField (boolean value) {
+      this.requestField("creator_user", value);
       return this;
     }
     public APIRequestGetAssignedProductCatalogs requestDaDisplaySettingsField () {
@@ -2533,6 +2623,13 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGetAssignedProductCatalogs requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAssignedProductCatalogs requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetAssignedProductCatalogs requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
       return this;
     }
     public APIRequestGetAssignedProductCatalogs requestProductCountField () {
@@ -2674,6 +2771,7 @@ public class BusinessUser extends APINode {
 
     public static final String[] FIELDS = {
       "business",
+      "business_role_request",
       "email",
       "finance_permission",
       "first_name",
@@ -2782,6 +2880,13 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGet requestBusinessField (boolean value) {
       this.requestField("business", value);
+      return this;
+    }
+    public APIRequestGet requestBusinessRoleRequestField () {
+      return this.requestBusinessRoleRequestField(true);
+    }
+    public APIRequestGet requestBusinessRoleRequestField (boolean value) {
+      this.requestField("business_role_request", value);
       return this;
     }
     public APIRequestGet requestEmailField () {
@@ -3085,6 +3190,7 @@ public class BusinessUser extends APINode {
 
   public BusinessUser copyFrom(BusinessUser instance) {
     this.mBusiness = instance.mBusiness;
+    this.mBusinessRoleRequest = instance.mBusinessRoleRequest;
     this.mEmail = instance.mEmail;
     this.mFinancePermission = instance.mFinancePermission;
     this.mFirstName = instance.mFirstName;

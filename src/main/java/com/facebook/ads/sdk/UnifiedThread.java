@@ -708,6 +708,8 @@ public class UnifiedThread extends APINode {
       VALUE_INSTAGRAM("INSTAGRAM"),
       @SerializedName("MESSENGER")
       VALUE_MESSENGER("MESSENGER"),
+      @SerializedName("WHATSAPP")
+      VALUE_WHATSAPP("WHATSAPP"),
       ;
 
       private String value;

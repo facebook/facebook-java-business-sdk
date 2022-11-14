@@ -285,6 +285,27 @@ public class CheckBatchRequestStatus extends APINode {
 
 
 
+  public static enum EnumErrorPriority {
+      @SerializedName("HIGH")
+      VALUE_HIGH("HIGH"),
+      @SerializedName("LOW")
+      VALUE_LOW("LOW"),
+      @SerializedName("MEDIUM")
+      VALUE_MEDIUM("MEDIUM"),
+      ;
+
+      private String value;
+
+      private EnumErrorPriority(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
