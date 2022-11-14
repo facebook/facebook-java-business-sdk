@@ -55,6 +55,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdNetworkAnalyticsSyncQueryResult extends APINode {
+  @SerializedName("omitted_results")
+  private List<Object> mOmittedResults = null;
   @SerializedName("query_id")
   private String mQueryId = null;
   @SerializedName("results")
@@ -210,6 +212,15 @@ public class AdNetworkAnalyticsSyncQueryResult extends APINode {
   }
 
 
+  public List<Object> getFieldOmittedResults() {
+    return mOmittedResults;
+  }
+
+  public AdNetworkAnalyticsSyncQueryResult setFieldOmittedResults(List<Object> value) {
+    this.mOmittedResults = value;
+    return this;
+  }
+
   public String getFieldQueryId() {
     return mQueryId;
   }
@@ -337,8 +348,6 @@ public class AdNetworkAnalyticsSyncQueryResult extends APINode {
       VALUE_FB_AD_NETWORK_REVENUE("FB_AD_NETWORK_REVENUE"),
       @SerializedName("FB_AD_NETWORK_SHOW_RATE")
       VALUE_FB_AD_NETWORK_SHOW_RATE("FB_AD_NETWORK_SHOW_RATE"),
-      @SerializedName("FB_AD_NETWORK_UA_SPEND")
-      VALUE_FB_AD_NETWORK_UA_SPEND("FB_AD_NETWORK_UA_SPEND"),
       @SerializedName("FB_AD_NETWORK_VIDEO_GUARANTEE_REVENUE")
       VALUE_FB_AD_NETWORK_VIDEO_GUARANTEE_REVENUE("FB_AD_NETWORK_VIDEO_GUARANTEE_REVENUE"),
       @SerializedName("FB_AD_NETWORK_VIDEO_MRC")
@@ -418,6 +427,7 @@ public class AdNetworkAnalyticsSyncQueryResult extends APINode {
   }
 
   public AdNetworkAnalyticsSyncQueryResult copyFrom(AdNetworkAnalyticsSyncQueryResult instance) {
+    this.mOmittedResults = instance.mOmittedResults;
     this.mQueryId = instance.mQueryId;
     this.mResults = instance.mResults;
     this.context = instance.context;

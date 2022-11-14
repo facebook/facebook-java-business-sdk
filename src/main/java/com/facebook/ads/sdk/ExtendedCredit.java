@@ -71,6 +71,8 @@ public class ExtendedCredit extends APINode {
   private Boolean mIsAutomatedExperience = null;
   @SerializedName("legal_entity_name")
   private String mLegalEntityName = null;
+  @SerializedName("liable_address")
+  private CRMAddress mLiableAddress = null;
   @SerializedName("liable_biz_name")
   private String mLiableBizName = null;
   @SerializedName("max_balance")
@@ -85,8 +87,12 @@ public class ExtendedCredit extends APINode {
   private String mPartitionFrom = null;
   @SerializedName("receiving_credit_allocation_config")
   private ExtendedCreditAllocationConfig mReceivingCreditAllocationConfig = null;
+  @SerializedName("send_bill_to_address")
+  private CRMAddress mSendBillToAddress = null;
   @SerializedName("send_bill_to_biz_name")
   private String mSendBillToBizName = null;
+  @SerializedName("sold_to_address")
+  private CRMAddress mSoldToAddress = null;
   protected static Gson gson = null;
 
   ExtendedCredit() {
@@ -353,6 +359,13 @@ public class ExtendedCredit extends APINode {
     return mLegalEntityName;
   }
 
+  public CRMAddress getFieldLiableAddress() {
+    if (mLiableAddress != null) {
+      mLiableAddress.context = getContext();
+    }
+    return mLiableAddress;
+  }
+
   public String getFieldLiableBizName() {
     return mLiableBizName;
   }
@@ -387,8 +400,22 @@ public class ExtendedCredit extends APINode {
     return mReceivingCreditAllocationConfig;
   }
 
+  public CRMAddress getFieldSendBillToAddress() {
+    if (mSendBillToAddress != null) {
+      mSendBillToAddress.context = getContext();
+    }
+    return mSendBillToAddress;
+  }
+
   public String getFieldSendBillToBizName() {
     return mSendBillToBizName;
+  }
+
+  public CRMAddress getFieldSoldToAddress() {
+    if (mSoldToAddress != null) {
+      mSoldToAddress.context = getContext();
+    }
+    return mSoldToAddress;
   }
 
 
@@ -405,11 +432,14 @@ public class ExtendedCredit extends APINode {
 
     public static final String[] FIELDS = {
       "auto_enroll",
+      "bill_to_address",
       "customer_po_number",
       "email",
       "emails",
       "id",
+      "liable_address",
       "name",
+      "sold_to_address",
     };
 
     @Override
@@ -508,6 +538,13 @@ public class ExtendedCredit extends APINode {
       this.requestField("auto_enroll", value);
       return this;
     }
+    public APIRequestGetExtendedCreditInvoiceGroups requestBillToAddressField () {
+      return this.requestBillToAddressField(true);
+    }
+    public APIRequestGetExtendedCreditInvoiceGroups requestBillToAddressField (boolean value) {
+      this.requestField("bill_to_address", value);
+      return this;
+    }
     public APIRequestGetExtendedCreditInvoiceGroups requestCustomerPoNumberField () {
       return this.requestCustomerPoNumberField(true);
     }
@@ -536,11 +573,25 @@ public class ExtendedCredit extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetExtendedCreditInvoiceGroups requestLiableAddressField () {
+      return this.requestLiableAddressField(true);
+    }
+    public APIRequestGetExtendedCreditInvoiceGroups requestLiableAddressField (boolean value) {
+      this.requestField("liable_address", value);
+      return this;
+    }
     public APIRequestGetExtendedCreditInvoiceGroups requestNameField () {
       return this.requestNameField(true);
     }
     public APIRequestGetExtendedCreditInvoiceGroups requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetExtendedCreditInvoiceGroups requestSoldToAddressField () {
+      return this.requestSoldToAddressField(true);
+    }
+    public APIRequestGetExtendedCreditInvoiceGroups requestSoldToAddressField (boolean value) {
+      this.requestField("sold_to_address", value);
       return this;
     }
   }
@@ -1140,6 +1191,7 @@ public class ExtendedCredit extends APINode {
       "is_access_revoked",
       "is_automated_experience",
       "legal_entity_name",
+      "liable_address",
       "liable_biz_name",
       "max_balance",
       "online_max_balance",
@@ -1147,7 +1199,9 @@ public class ExtendedCredit extends APINode {
       "owner_business_name",
       "partition_from",
       "receiving_credit_allocation_config",
+      "send_bill_to_address",
       "send_bill_to_biz_name",
+      "sold_to_address",
     };
 
     @Override
@@ -1295,6 +1349,13 @@ public class ExtendedCredit extends APINode {
       this.requestField("legal_entity_name", value);
       return this;
     }
+    public APIRequestGet requestLiableAddressField () {
+      return this.requestLiableAddressField(true);
+    }
+    public APIRequestGet requestLiableAddressField (boolean value) {
+      this.requestField("liable_address", value);
+      return this;
+    }
     public APIRequestGet requestLiableBizNameField () {
       return this.requestLiableBizNameField(true);
     }
@@ -1344,11 +1405,25 @@ public class ExtendedCredit extends APINode {
       this.requestField("receiving_credit_allocation_config", value);
       return this;
     }
+    public APIRequestGet requestSendBillToAddressField () {
+      return this.requestSendBillToAddressField(true);
+    }
+    public APIRequestGet requestSendBillToAddressField (boolean value) {
+      this.requestField("send_bill_to_address", value);
+      return this;
+    }
     public APIRequestGet requestSendBillToBizNameField () {
       return this.requestSendBillToBizNameField(true);
     }
     public APIRequestGet requestSendBillToBizNameField (boolean value) {
       this.requestField("send_bill_to_biz_name", value);
+      return this;
+    }
+    public APIRequestGet requestSoldToAddressField () {
+      return this.requestSoldToAddressField(true);
+    }
+    public APIRequestGet requestSoldToAddressField (boolean value) {
+      this.requestField("sold_to_address", value);
       return this;
     }
   }
@@ -1376,6 +1451,7 @@ public class ExtendedCredit extends APINode {
     this.mIsAccessRevoked = instance.mIsAccessRevoked;
     this.mIsAutomatedExperience = instance.mIsAutomatedExperience;
     this.mLegalEntityName = instance.mLegalEntityName;
+    this.mLiableAddress = instance.mLiableAddress;
     this.mLiableBizName = instance.mLiableBizName;
     this.mMaxBalance = instance.mMaxBalance;
     this.mOnlineMaxBalance = instance.mOnlineMaxBalance;
@@ -1383,7 +1459,9 @@ public class ExtendedCredit extends APINode {
     this.mOwnerBusinessName = instance.mOwnerBusinessName;
     this.mPartitionFrom = instance.mPartitionFrom;
     this.mReceivingCreditAllocationConfig = instance.mReceivingCreditAllocationConfig;
+    this.mSendBillToAddress = instance.mSendBillToAddress;
     this.mSendBillToBizName = instance.mSendBillToBizName;
+    this.mSoldToAddress = instance.mSoldToAddress;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

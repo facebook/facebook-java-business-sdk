@@ -75,6 +75,8 @@ public class AdPromotedObject extends APINode {
   private String mOfferId = null;
   @SerializedName("offline_conversion_data_set_id")
   private String mOfflineConversionDataSetId = null;
+  @SerializedName("omnichannel_object")
+  private Object mOmnichannelObject = null;
   @SerializedName("page_id")
   private String mPageId = null;
   @SerializedName("pixel_aggregation_rule")
@@ -334,6 +336,15 @@ public class AdPromotedObject extends APINode {
     return this;
   }
 
+  public Object getFieldOmnichannelObject() {
+    return mOmnichannelObject;
+  }
+
+  public AdPromotedObject setFieldOmnichannelObject(Object value) {
+    this.mOmnichannelObject = value;
+    return this;
+  }
+
   public String getFieldPageId() {
     return mPageId;
   }
@@ -513,6 +524,7 @@ public class AdPromotedObject extends APINode {
     this.mObjectStoreUrl = instance.mObjectStoreUrl;
     this.mOfferId = instance.mOfferId;
     this.mOfflineConversionDataSetId = instance.mOfflineConversionDataSetId;
+    this.mOmnichannelObject = instance.mOmnichannelObject;
     this.mPageId = instance.mPageId;
     this.mPixelAggregationRule = instance.mPixelAggregationRule;
     this.mPixelId = instance.mPixelId;

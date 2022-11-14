@@ -462,6 +462,8 @@ public class BusinessOwnedObjectOnBehalfOfRequest extends APINode {
       VALUE_IN_PROGRESS("IN_PROGRESS"),
       @SerializedName("PENDING")
       VALUE_PENDING("PENDING"),
+      @SerializedName("PENDING_INTEGRITY_REVIEW")
+      VALUE_PENDING_INTEGRITY_REVIEW("PENDING_INTEGRITY_REVIEW"),
       ;
 
       private String value;

@@ -58,7 +58,7 @@ public class Experience extends APINode {
   @SerializedName("description")
   private String mDescription = null;
   @SerializedName("from")
-  private User mFrom = null;
+  private Object mFrom = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("name")
@@ -225,23 +225,15 @@ public class Experience extends APINode {
     return this;
   }
 
-  public User getFieldFrom() {
-    if (mFrom != null) {
-      mFrom.context = getContext();
-    }
+  public Object getFieldFrom() {
     return mFrom;
   }
 
-  public Experience setFieldFrom(User value) {
+  public Experience setFieldFrom(Object value) {
     this.mFrom = value;
     return this;
   }
 
-  public Experience setFieldFrom(String value) {
-    Type type = new TypeToken<User>(){}.getType();
-    this.mFrom = User.getGson().fromJson(value, type);
-    return this;
-  }
   public String getFieldId() {
     return mId;
   }

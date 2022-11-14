@@ -105,6 +105,8 @@ public class Application extends APINode {
   private List<Object> mAutoEventMappingIos = null;
   @SerializedName("auto_event_setup_enabled")
   private Boolean mAutoEventSetupEnabled = null;
+  @SerializedName("business")
+  private Business mBusiness = null;
   @SerializedName("canvas_fluid_height")
   private Boolean mCanvasFluidHeight = null;
   @SerializedName("canvas_fluid_width")
@@ -195,6 +197,8 @@ public class Application extends APINode {
   private String mNamespace = null;
   @SerializedName("object_store_urls")
   private Object mObjectStoreUrls = null;
+  @SerializedName("owner_business")
+  private Business mOwnerBusiness = null;
   @SerializedName("page_tab_default_name")
   private String mPageTabDefaultName = null;
   @SerializedName("page_tab_url")
@@ -482,6 +486,10 @@ public class Application extends APINode {
     return new APIRequestCreateActivity(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetAdPlacementGroups getAdPlacementGroups() {
+    return new APIRequestGetAdPlacementGroups(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetAdNetworkPlacements getAdNetworkPlacements() {
     return new APIRequestGetAdNetworkPlacements(this.getPrefixedId().toString(), context);
   }
@@ -602,10 +610,6 @@ public class Application extends APINode {
     return new APIRequestCreateLeaderboardsDeleteEntry(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateLeaderboardsReset createLeaderboardsReset() {
-    return new APIRequestCreateLeaderboardsReset(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestCreateMmpAuditing createMmpAuditing() {
     return new APIRequestCreateMmpAuditing(this.getPrefixedId().toString(), context);
   }
@@ -614,8 +618,16 @@ public class Application extends APINode {
     return new APIRequestGetMobileSdkGk(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetMonetizedDigitalStoreObjects getMonetizedDigitalStoreObjects() {
+    return new APIRequestGetMonetizedDigitalStoreObjects(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateMonetizedDigitalStoreObject createMonetizedDigitalStoreObject() {
     return new APIRequestCreateMonetizedDigitalStoreObject(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetObjectTypes getObjectTypes() {
+    return new APIRequestGetObjectTypes(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateOccludesPopup createOccludesPopup() {
@@ -785,6 +797,13 @@ public class Application extends APINode {
 
   public Boolean getFieldAutoEventSetupEnabled() {
     return mAutoEventSetupEnabled;
+  }
+
+  public Business getFieldBusiness() {
+    if (mBusiness != null) {
+      mBusiness.context = getContext();
+    }
+    return mBusiness;
   }
 
   public Boolean getFieldCanvasFluidHeight() {
@@ -965,6 +984,13 @@ public class Application extends APINode {
 
   public Object getFieldObjectStoreUrls() {
     return mObjectStoreUrls;
+  }
+
+  public Business getFieldOwnerBusiness() {
+    if (mOwnerBusiness != null) {
+      mOwnerBusiness.context = getContext();
+    }
+    return mOwnerBusiness;
   }
 
   public String getFieldPageTabDefaultName() {
@@ -1515,6 +1541,7 @@ public class Application extends APINode {
       "bundle_id",
       "bundle_short_version",
       "bundle_version",
+      "campaign_ids",
       "click_id",
       "consider_views",
       "custom_events",
@@ -1657,6 +1684,11 @@ public class Application extends APINode {
 
     public APIRequestCreateActivity setBundleVersion (String bundleVersion) {
       this.setParam("bundle_version", bundleVersion);
+      return this;
+    }
+
+    public APIRequestCreateActivity setCampaignIds (String campaignIds) {
+      this.setParam("campaign_ids", campaignIds);
       return this;
     }
 
@@ -1891,6 +1923,110 @@ public class Application extends APINode {
 
   }
 
+  public static class APIRequestGetAdPlacementGroups extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetAdPlacementGroups.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetAdPlacementGroups(String nodeId, APIContext context) {
+      super(context, nodeId, "/ad_placement_groups", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetAdPlacementGroups setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdPlacementGroups setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetAdPlacementGroups requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetAdPlacementGroups requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdPlacementGroups requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetAdPlacementGroups requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdPlacementGroups requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdPlacementGroups requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetAdNetworkPlacements extends APIRequest<AdPlacement> {
 
     APINodeList<AdPlacement> lastResponse = null;
@@ -1909,6 +2045,7 @@ public class Application extends APINode {
       "google_display_format",
       "id",
       "name",
+      "placement_group",
       "platform",
       "status",
     };
@@ -2049,6 +2186,13 @@ public class Application extends APINode {
       this.requestField("name", value);
       return this;
     }
+    public APIRequestGetAdNetworkPlacements requestPlacementGroupField () {
+      return this.requestPlacementGroupField(true);
+    }
+    public APIRequestGetAdNetworkPlacements requestPlacementGroupField (boolean value) {
+      this.requestField("placement_group", value);
+      return this;
+    }
     public APIRequestGetAdNetworkPlacements requestPlatformField () {
       return this.requestPlatformField(true);
     }
@@ -2085,6 +2229,7 @@ public class Application extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "omitted_results",
       "query_id",
       "results",
     };
@@ -2251,6 +2396,13 @@ public class Application extends APINode {
       return this;
     }
 
+    public APIRequestGetAdNetworkAnalytics requestOmittedResultsField () {
+      return this.requestOmittedResultsField(true);
+    }
+    public APIRequestGetAdNetworkAnalytics requestOmittedResultsField (boolean value) {
+      this.requestField("omitted_results", value);
+      return this;
+    }
     public APIRequestGetAdNetworkAnalytics requestQueryIdField () {
       return this.requestQueryIdField(true);
     }
@@ -2467,6 +2619,7 @@ public class Application extends APINode {
     public static final String[] FIELDS = {
       "data",
       "error",
+      "omitted_results",
       "query_id",
       "results",
       "status",
@@ -2582,6 +2735,13 @@ public class Application extends APINode {
     }
     public APIRequestGetAdNetworkAnalyticsResults requestErrorField (boolean value) {
       this.requestField("error", value);
+      return this;
+    }
+    public APIRequestGetAdNetworkAnalyticsResults requestOmittedResultsField () {
+      return this.requestOmittedResultsField(true);
+    }
+    public APIRequestGetAdNetworkAnalyticsResults requestOmittedResultsField (boolean value) {
+      this.requestField("omitted_results", value);
       return this;
     }
     public APIRequestGetAdNetworkAnalyticsResults requestQueryIdField () {
@@ -2961,6 +3121,7 @@ public class Application extends APINode {
     public static final String[] PARAMS = {
       "app_id",
       "is_aem_ready",
+      "is_aem_v2_ready",
       "is_skan_ready",
     };
 
@@ -3038,6 +3199,15 @@ public class Application extends APINode {
       return this;
     }
 
+    public APIRequestCreateAemSkanReadiness setIsAemV2Ready (Boolean isAemV2Ready) {
+      this.setParam("is_aem_v2_ready", isAemV2Ready);
+      return this;
+    }
+    public APIRequestCreateAemSkanReadiness setIsAemV2Ready (String isAemV2Ready) {
+      this.setParam("is_aem_v2_ready", isAemV2Ready);
+      return this;
+    }
+
     public APIRequestCreateAemSkanReadiness setIsSkanReady (Boolean isSkanReady) {
       this.setParam("is_skan_ready", isSkanReady);
       return this;
@@ -3099,7 +3269,7 @@ public class Application extends APINode {
       "block_offline_analytics",
       "collaborative_ads_managed_partner_business_info",
       "collaborative_ads_managed_partner_eligibility",
-      "cpas_business_setup_config",
+      "collaborative_ads_partner_premium_options",
       "created_by",
       "created_time",
       "extended_updated_time",
@@ -3228,11 +3398,11 @@ public class Application extends APINode {
       this.requestField("collaborative_ads_managed_partner_eligibility", value);
       return this;
     }
-    public APIRequestGetAgencies requestCpasBusinessSetupConfigField () {
-      return this.requestCpasBusinessSetupConfigField(true);
+    public APIRequestGetAgencies requestCollaborativeAdsPartnerPremiumOptionsField () {
+      return this.requestCollaborativeAdsPartnerPremiumOptionsField(true);
     }
-    public APIRequestGetAgencies requestCpasBusinessSetupConfigField (boolean value) {
-      this.requestField("cpas_business_setup_config", value);
+    public APIRequestGetAgencies requestCollaborativeAdsPartnerPremiumOptionsField (boolean value) {
+      this.requestField("collaborative_ads_partner_premium_options", value);
       return this;
     }
     public APIRequestGetAgencies requestCreatedByField () {
@@ -3984,6 +4154,7 @@ public class Application extends APINode {
       "email",
       "icon",
       "id",
+      "install",
       "link",
       "member_count",
       "member_request_count",
@@ -4138,6 +4309,13 @@ public class Application extends APINode {
     }
     public APIRequestGetAppInstalledGroups requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetAppInstalledGroups requestInstallField () {
+      return this.requestInstallField(true);
+    }
+    public APIRequestGetAppInstalledGroups requestInstallField (boolean value) {
+      this.requestField("install", value);
       return this;
     }
     public APIRequestGetAppInstalledGroups requestLinkField () {
@@ -4606,6 +4784,7 @@ public class Application extends APINode {
       "capabilities",
       "created_time",
       "currency",
+      "custom_audience_info",
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
@@ -4627,6 +4806,7 @@ public class Application extends APINode {
       "is_personal",
       "is_prepay_account",
       "is_tax_id_required",
+      "liable_address",
       "line_numbers",
       "media_agency",
       "min_campaign_group_spend_cap",
@@ -4634,9 +4814,12 @@ public class Application extends APINode {
       "name",
       "offsite_pixels_tos_accepted",
       "owner",
+      "owner_business",
       "partner",
       "rf_spec",
+      "send_bill_to_address",
       "show_checkout_experience",
+      "sold_to_address",
       "spend_cap",
       "tax_id",
       "tax_id_status",
@@ -4647,6 +4830,7 @@ public class Application extends APINode {
       "tos_accepted",
       "user_tasks",
       "user_tos_accepted",
+      "viewable_business",
     };
 
     @Override
@@ -4876,6 +5060,13 @@ public class Application extends APINode {
       this.requestField("currency", value);
       return this;
     }
+    public APIRequestGetAuthorizedAdAccounts requestCustomAudienceInfoField () {
+      return this.requestCustomAudienceInfoField(true);
+    }
+    public APIRequestGetAuthorizedAdAccounts requestCustomAudienceInfoField (boolean value) {
+      this.requestField("custom_audience_info", value);
+      return this;
+    }
     public APIRequestGetAuthorizedAdAccounts requestDisableReasonField () {
       return this.requestDisableReasonField(true);
     }
@@ -5023,6 +5214,13 @@ public class Application extends APINode {
       this.requestField("is_tax_id_required", value);
       return this;
     }
+    public APIRequestGetAuthorizedAdAccounts requestLiableAddressField () {
+      return this.requestLiableAddressField(true);
+    }
+    public APIRequestGetAuthorizedAdAccounts requestLiableAddressField (boolean value) {
+      this.requestField("liable_address", value);
+      return this;
+    }
     public APIRequestGetAuthorizedAdAccounts requestLineNumbersField () {
       return this.requestLineNumbersField(true);
     }
@@ -5072,6 +5270,13 @@ public class Application extends APINode {
       this.requestField("owner", value);
       return this;
     }
+    public APIRequestGetAuthorizedAdAccounts requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetAuthorizedAdAccounts requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
+      return this;
+    }
     public APIRequestGetAuthorizedAdAccounts requestPartnerField () {
       return this.requestPartnerField(true);
     }
@@ -5086,11 +5291,25 @@ public class Application extends APINode {
       this.requestField("rf_spec", value);
       return this;
     }
+    public APIRequestGetAuthorizedAdAccounts requestSendBillToAddressField () {
+      return this.requestSendBillToAddressField(true);
+    }
+    public APIRequestGetAuthorizedAdAccounts requestSendBillToAddressField (boolean value) {
+      this.requestField("send_bill_to_address", value);
+      return this;
+    }
     public APIRequestGetAuthorizedAdAccounts requestShowCheckoutExperienceField () {
       return this.requestShowCheckoutExperienceField(true);
     }
     public APIRequestGetAuthorizedAdAccounts requestShowCheckoutExperienceField (boolean value) {
       this.requestField("show_checkout_experience", value);
+      return this;
+    }
+    public APIRequestGetAuthorizedAdAccounts requestSoldToAddressField () {
+      return this.requestSoldToAddressField(true);
+    }
+    public APIRequestGetAuthorizedAdAccounts requestSoldToAddressField (boolean value) {
+      this.requestField("sold_to_address", value);
       return this;
     }
     public APIRequestGetAuthorizedAdAccounts requestSpendCapField () {
@@ -5161,6 +5380,13 @@ public class Application extends APINode {
     }
     public APIRequestGetAuthorizedAdAccounts requestUserTosAcceptedField (boolean value) {
       this.requestField("user_tos_accepted", value);
+      return this;
+    }
+    public APIRequestGetAuthorizedAdAccounts requestViewableBusinessField () {
+      return this.requestViewableBusinessField(true);
+    }
+    public APIRequestGetAuthorizedAdAccounts requestViewableBusinessField (boolean value) {
+      this.requestField("viewable_business", value);
       return this;
     }
   }
@@ -6897,122 +7123,6 @@ public class Application extends APINode {
 
   }
 
-  public static class APIRequestCreateLeaderboardsReset extends APIRequest<Application> {
-
-    Application lastResponse = null;
-    @Override
-    public Application getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "name",
-      "reset_time",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Application parseResponse(String response, String header) throws APIException {
-      return Application.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Application execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Application execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Application> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Application>() {
-           public Application apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateLeaderboardsReset.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateLeaderboardsReset(String nodeId, APIContext context) {
-      super(context, nodeId, "/leaderboards_reset", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateLeaderboardsReset setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateLeaderboardsReset setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateLeaderboardsReset setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateLeaderboardsReset setResetTime (String resetTime) {
-      this.setParam("reset_time", resetTime);
-      return this;
-    }
-
-    public APIRequestCreateLeaderboardsReset requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateLeaderboardsReset requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateLeaderboardsReset requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateLeaderboardsReset requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateLeaderboardsReset requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateLeaderboardsReset requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestCreateMmpAuditing extends APIRequest<APINode> {
 
     APINode lastResponse = null;
@@ -7034,6 +7144,7 @@ public class Application extends APINode {
       "fb_click_time",
       "fb_view_time",
       "is_fb",
+      "used_install_referrer",
       "view_attr_window",
     };
 
@@ -7183,6 +7294,15 @@ public class Application extends APINode {
     }
     public APIRequestCreateMmpAuditing setIsFb (String isFb) {
       this.setParam("is_fb", isFb);
+      return this;
+    }
+
+    public APIRequestCreateMmpAuditing setUsedInstallReferrer (Boolean usedInstallReferrer) {
+      this.setParam("used_install_referrer", usedInstallReferrer);
+      return this;
+    }
+    public APIRequestCreateMmpAuditing setUsedInstallReferrer (String usedInstallReferrer) {
+      this.setParam("used_install_referrer", usedInstallReferrer);
       return this;
     }
 
@@ -7375,6 +7495,110 @@ public class Application extends APINode {
 
   }
 
+  public static class APIRequestGetMonetizedDigitalStoreObjects extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetMonetizedDigitalStoreObjects.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetMonetizedDigitalStoreObjects(String nodeId, APIContext context) {
+      super(context, nodeId, "/monetized_digital_store_objects", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetMonetizedDigitalStoreObjects setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMonetizedDigitalStoreObjects setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetMonetizedDigitalStoreObjects requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetMonetizedDigitalStoreObjects requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMonetizedDigitalStoreObjects requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetMonetizedDigitalStoreObjects requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMonetizedDigitalStoreObjects requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMonetizedDigitalStoreObjects requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestCreateMonetizedDigitalStoreObject extends APIRequest<APINode> {
 
     APINode lastResponse = null;
@@ -7485,6 +7709,110 @@ public class Application extends APINode {
 
     @Override
     public APIRequestCreateMonetizedDigitalStoreObject requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetObjectTypes extends APIRequest<NullNode> {
+
+    APINodeList<NullNode> lastResponse = null;
+    @Override
+    public APINodeList<NullNode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<NullNode> parseResponse(String response, String header) throws APIException {
+      return NullNode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<NullNode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<NullNode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<NullNode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<NullNode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<NullNode>>() {
+           public APINodeList<NullNode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetObjectTypes.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetObjectTypes(String nodeId, APIContext context) {
+      super(context, nodeId, "/object_types", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetObjectTypes setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetObjectTypes setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetObjectTypes requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetObjectTypes requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetObjectTypes requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetObjectTypes requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetObjectTypes requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetObjectTypes requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -9390,6 +9718,7 @@ public class Application extends APINode {
       "auto_event_mapping_android",
       "auto_event_mapping_ios",
       "auto_event_setup_enabled",
+      "business",
       "canvas_fluid_height",
       "canvas_fluid_width",
       "canvas_url",
@@ -9435,6 +9764,7 @@ public class Application extends APINode {
       "name",
       "namespace",
       "object_store_urls",
+      "owner_business",
       "page_tab_default_name",
       "page_tab_url",
       "photo_url",
@@ -9735,6 +10065,13 @@ public class Application extends APINode {
     }
     public APIRequestGet requestAutoEventSetupEnabledField (boolean value) {
       this.requestField("auto_event_setup_enabled", value);
+      return this;
+    }
+    public APIRequestGet requestBusinessField () {
+      return this.requestBusinessField(true);
+    }
+    public APIRequestGet requestBusinessField (boolean value) {
+      this.requestField("business", value);
       return this;
     }
     public APIRequestGet requestCanvasFluidHeightField () {
@@ -10052,6 +10389,13 @@ public class Application extends APINode {
       this.requestField("object_store_urls", value);
       return this;
     }
+    public APIRequestGet requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGet requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
+      return this;
+    }
     public APIRequestGet requestPageTabDefaultNameField () {
       return this.requestPageTabDefaultNameField(true);
     }
@@ -10281,10 +10625,6 @@ public class Application extends APINode {
     public static final String[] PARAMS = {
       "allow_cycle_app_secret",
       "an_platforms",
-      "android_class_name",
-      "android_key_hashes",
-      "android_package_name",
-      "android_sso",
       "app_domains",
       "app_name",
       "app_type",
@@ -10301,7 +10641,6 @@ public class Application extends APINode {
       "canvas_url",
       "contact_email",
       "deauth_callback_url",
-      "ios_bundle_id",
       "mobile_web_url",
       "namespace",
       "page_tab_default_name",
@@ -10388,34 +10727,6 @@ public class Application extends APINode {
     }
     public APIRequestUpdate setAnPlatforms (String anPlatforms) {
       this.setParam("an_platforms", anPlatforms);
-      return this;
-    }
-
-    public APIRequestUpdate setAndroidClassName (String androidClassName) {
-      this.setParam("android_class_name", androidClassName);
-      return this;
-    }
-
-    public APIRequestUpdate setAndroidKeyHashes (List<String> androidKeyHashes) {
-      this.setParam("android_key_hashes", androidKeyHashes);
-      return this;
-    }
-    public APIRequestUpdate setAndroidKeyHashes (String androidKeyHashes) {
-      this.setParam("android_key_hashes", androidKeyHashes);
-      return this;
-    }
-
-    public APIRequestUpdate setAndroidPackageName (String androidPackageName) {
-      this.setParam("android_package_name", androidPackageName);
-      return this;
-    }
-
-    public APIRequestUpdate setAndroidSso (Boolean androidSso) {
-      this.setParam("android_sso", androidSso);
-      return this;
-    }
-    public APIRequestUpdate setAndroidSso (String androidSso) {
-      this.setParam("android_sso", androidSso);
       return this;
     }
 
@@ -10528,15 +10839,6 @@ public class Application extends APINode {
 
     public APIRequestUpdate setDeauthCallbackUrl (String deauthCallbackUrl) {
       this.setParam("deauth_callback_url", deauthCallbackUrl);
-      return this;
-    }
-
-    public APIRequestUpdate setIosBundleId (List<String> iosBundleId) {
-      this.setParam("ios_bundle_id", iosBundleId);
-      return this;
-    }
-    public APIRequestUpdate setIosBundleId (String iosBundleId) {
-      this.setParam("ios_bundle_id", iosBundleId);
       return this;
     }
 
@@ -11062,6 +11364,7 @@ public class Application extends APINode {
     this.mAutoEventMappingAndroid = instance.mAutoEventMappingAndroid;
     this.mAutoEventMappingIos = instance.mAutoEventMappingIos;
     this.mAutoEventSetupEnabled = instance.mAutoEventSetupEnabled;
+    this.mBusiness = instance.mBusiness;
     this.mCanvasFluidHeight = instance.mCanvasFluidHeight;
     this.mCanvasFluidWidth = instance.mCanvasFluidWidth;
     this.mCanvasUrl = instance.mCanvasUrl;
@@ -11107,6 +11410,7 @@ public class Application extends APINode {
     this.mName = instance.mName;
     this.mNamespace = instance.mNamespace;
     this.mObjectStoreUrls = instance.mObjectStoreUrls;
+    this.mOwnerBusiness = instance.mOwnerBusiness;
     this.mPageTabDefaultName = instance.mPageTabDefaultName;
     this.mPageTabUrl = instance.mPageTabUrl;
     this.mPhotoUrl = instance.mPhotoUrl;

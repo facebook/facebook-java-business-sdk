@@ -208,9 +208,9 @@ public class Event {
    * Get flag that indicates we should not use this event for ads delivery optimization. If set to
    * true, we only use the event for attribution.
    *
-   * @return boolean
+   * @return Boolean
    */
-  public boolean getOptOut() {
+  public Boolean getOptOut() {
     return this.optOut;
   }
 

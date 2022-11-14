@@ -59,6 +59,8 @@ public class AdNetworkAnalyticsAsyncQueryResult extends APINode {
   private Object mData = null;
   @SerializedName("error")
   private Object mError = null;
+  @SerializedName("omitted_results")
+  private List<Object> mOmittedResults = null;
   @SerializedName("query_id")
   private String mQueryId = null;
   @SerializedName("results")
@@ -234,6 +236,15 @@ public class AdNetworkAnalyticsAsyncQueryResult extends APINode {
     return this;
   }
 
+  public List<Object> getFieldOmittedResults() {
+    return mOmittedResults;
+  }
+
+  public AdNetworkAnalyticsAsyncQueryResult setFieldOmittedResults(List<Object> value) {
+    this.mOmittedResults = value;
+    return this;
+  }
+
   public String getFieldQueryId() {
     return mQueryId;
   }
@@ -280,6 +291,7 @@ public class AdNetworkAnalyticsAsyncQueryResult extends APINode {
   public AdNetworkAnalyticsAsyncQueryResult copyFrom(AdNetworkAnalyticsAsyncQueryResult instance) {
     this.mData = instance.mData;
     this.mError = instance.mError;
+    this.mOmittedResults = instance.mOmittedResults;
     this.mQueryId = instance.mQueryId;
     this.mResults = instance.mResults;
     this.mStatus = instance.mStatus;

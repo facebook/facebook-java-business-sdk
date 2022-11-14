@@ -83,6 +83,16 @@ public class LocalServiceBusiness extends APINode {
   private String mCustomLabel3 = null;
   @SerializedName("custom_label_4")
   private String mCustomLabel4 = null;
+  @SerializedName("custom_number_0")
+  private Long mCustomNumber0 = null;
+  @SerializedName("custom_number_1")
+  private Long mCustomNumber1 = null;
+  @SerializedName("custom_number_2")
+  private Long mCustomNumber2 = null;
+  @SerializedName("custom_number_3")
+  private Long mCustomNumber3 = null;
+  @SerializedName("custom_number_4")
+  private Long mCustomNumber4 = null;
   @SerializedName("description")
   private String mDescription = null;
   @SerializedName("expiration_date")
@@ -391,6 +401,26 @@ public class LocalServiceBusiness extends APINode {
     return mCustomLabel4;
   }
 
+  public Long getFieldCustomNumber0() {
+    return mCustomNumber0;
+  }
+
+  public Long getFieldCustomNumber1() {
+    return mCustomNumber1;
+  }
+
+  public Long getFieldCustomNumber2() {
+    return mCustomNumber2;
+  }
+
+  public Long getFieldCustomNumber3() {
+    return mCustomNumber3;
+  }
+
+  public Long getFieldCustomNumber4() {
+    return mCustomNumber4;
+  }
+
   public String getFieldDescription() {
     return mDescription;
   }
@@ -606,6 +636,11 @@ public class LocalServiceBusiness extends APINode {
       "custom_label_2",
       "custom_label_3",
       "custom_label_4",
+      "custom_number_0",
+      "custom_number_1",
+      "custom_number_2",
+      "custom_number_3",
+      "custom_number_4",
       "description",
       "expiration_date",
       "gtin",
@@ -810,6 +845,41 @@ public class LocalServiceBusiness extends APINode {
     }
     public APIRequestGet requestCustomLabel4Field (boolean value) {
       this.requestField("custom_label_4", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNumber0Field () {
+      return this.requestCustomNumber0Field(true);
+    }
+    public APIRequestGet requestCustomNumber0Field (boolean value) {
+      this.requestField("custom_number_0", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNumber1Field () {
+      return this.requestCustomNumber1Field(true);
+    }
+    public APIRequestGet requestCustomNumber1Field (boolean value) {
+      this.requestField("custom_number_1", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNumber2Field () {
+      return this.requestCustomNumber2Field(true);
+    }
+    public APIRequestGet requestCustomNumber2Field (boolean value) {
+      this.requestField("custom_number_2", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNumber3Field () {
+      return this.requestCustomNumber3Field(true);
+    }
+    public APIRequestGet requestCustomNumber3Field (boolean value) {
+      this.requestField("custom_number_3", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNumber4Field () {
+      return this.requestCustomNumber4Field(true);
+    }
+    public APIRequestGet requestCustomNumber4Field (boolean value) {
+      this.requestField("custom_number_4", value);
       return this;
     }
     public APIRequestGet requestDescriptionField () {
@@ -1047,6 +1117,11 @@ public class LocalServiceBusiness extends APINode {
     this.mCustomLabel2 = instance.mCustomLabel2;
     this.mCustomLabel3 = instance.mCustomLabel3;
     this.mCustomLabel4 = instance.mCustomLabel4;
+    this.mCustomNumber0 = instance.mCustomNumber0;
+    this.mCustomNumber1 = instance.mCustomNumber1;
+    this.mCustomNumber2 = instance.mCustomNumber2;
+    this.mCustomNumber3 = instance.mCustomNumber3;
+    this.mCustomNumber4 = instance.mCustomNumber4;
     this.mDescription = instance.mDescription;
     this.mExpirationDate = instance.mExpirationDate;
     this.mGtin = instance.mGtin;

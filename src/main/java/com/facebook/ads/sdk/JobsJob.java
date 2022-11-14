@@ -75,6 +75,20 @@ public class JobsJob extends APINode {
   private String mCustomLabel5 = null;
   @SerializedName("custom_label_6")
   private String mCustomLabel6 = null;
+  @SerializedName("custom_number_0")
+  private Long mCustomNumber0 = null;
+  @SerializedName("custom_number_1")
+  private Long mCustomNumber1 = null;
+  @SerializedName("custom_number_2")
+  private Long mCustomNumber2 = null;
+  @SerializedName("custom_number_3")
+  private Long mCustomNumber3 = null;
+  @SerializedName("custom_number_4")
+  private Long mCustomNumber4 = null;
+  @SerializedName("custom_number_5")
+  private Long mCustomNumber5 = null;
+  @SerializedName("custom_number_6")
+  private Long mCustomNumber6 = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("image_fetch_status")
@@ -353,6 +367,34 @@ public class JobsJob extends APINode {
 
   public String getFieldCustomLabel6() {
     return mCustomLabel6;
+  }
+
+  public Long getFieldCustomNumber0() {
+    return mCustomNumber0;
+  }
+
+  public Long getFieldCustomNumber1() {
+    return mCustomNumber1;
+  }
+
+  public Long getFieldCustomNumber2() {
+    return mCustomNumber2;
+  }
+
+  public Long getFieldCustomNumber3() {
+    return mCustomNumber3;
+  }
+
+  public Long getFieldCustomNumber4() {
+    return mCustomNumber4;
+  }
+
+  public Long getFieldCustomNumber5() {
+    return mCustomNumber5;
+  }
+
+  public Long getFieldCustomNumber6() {
+    return mCustomNumber6;
   }
 
   public String getFieldId() {
@@ -734,6 +776,13 @@ public class JobsJob extends APINode {
       "custom_label_4",
       "custom_label_5",
       "custom_label_6",
+      "custom_number_0",
+      "custom_number_1",
+      "custom_number_2",
+      "custom_number_3",
+      "custom_number_4",
+      "custom_number_5",
+      "custom_number_6",
       "id",
       "image_fetch_status",
       "images",
@@ -902,6 +951,55 @@ public class JobsJob extends APINode {
       this.requestField("custom_label_6", value);
       return this;
     }
+    public APIRequestGet requestCustomNumber0Field () {
+      return this.requestCustomNumber0Field(true);
+    }
+    public APIRequestGet requestCustomNumber0Field (boolean value) {
+      this.requestField("custom_number_0", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNumber1Field () {
+      return this.requestCustomNumber1Field(true);
+    }
+    public APIRequestGet requestCustomNumber1Field (boolean value) {
+      this.requestField("custom_number_1", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNumber2Field () {
+      return this.requestCustomNumber2Field(true);
+    }
+    public APIRequestGet requestCustomNumber2Field (boolean value) {
+      this.requestField("custom_number_2", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNumber3Field () {
+      return this.requestCustomNumber3Field(true);
+    }
+    public APIRequestGet requestCustomNumber3Field (boolean value) {
+      this.requestField("custom_number_3", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNumber4Field () {
+      return this.requestCustomNumber4Field(true);
+    }
+    public APIRequestGet requestCustomNumber4Field (boolean value) {
+      this.requestField("custom_number_4", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNumber5Field () {
+      return this.requestCustomNumber5Field(true);
+    }
+    public APIRequestGet requestCustomNumber5Field (boolean value) {
+      this.requestField("custom_number_5", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNumber6Field () {
+      return this.requestCustomNumber6Field(true);
+    }
+    public APIRequestGet requestCustomNumber6Field (boolean value) {
+      this.requestField("custom_number_6", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -1005,6 +1103,13 @@ public class JobsJob extends APINode {
     this.mCustomLabel4 = instance.mCustomLabel4;
     this.mCustomLabel5 = instance.mCustomLabel5;
     this.mCustomLabel6 = instance.mCustomLabel6;
+    this.mCustomNumber0 = instance.mCustomNumber0;
+    this.mCustomNumber1 = instance.mCustomNumber1;
+    this.mCustomNumber2 = instance.mCustomNumber2;
+    this.mCustomNumber3 = instance.mCustomNumber3;
+    this.mCustomNumber4 = instance.mCustomNumber4;
+    this.mCustomNumber5 = instance.mCustomNumber5;
+    this.mCustomNumber6 = instance.mCustomNumber6;
     this.mId = instance.mId;
     this.mImageFetchStatus = instance.mImageFetchStatus;
     this.mImages = instance.mImages;

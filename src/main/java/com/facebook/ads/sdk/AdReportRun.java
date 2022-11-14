@@ -472,6 +472,7 @@ public class AdReportRun extends APINode {
       "social_spend",
       "spend",
       "total_postbacks",
+      "total_postbacks_detailed",
       "unique_actions",
       "unique_clicks",
       "unique_conversions",
@@ -1287,6 +1288,13 @@ public class AdReportRun extends APINode {
       this.requestField("total_postbacks", value);
       return this;
     }
+    public APIRequestGetInsights requestTotalPostbacksDetailedField () {
+      return this.requestTotalPostbacksDetailedField(true);
+    }
+    public APIRequestGetInsights requestTotalPostbacksDetailedField (boolean value) {
+      this.requestField("total_postbacks_detailed", value);
+      return this;
+    }
     public APIRequestGetInsights requestUniqueActionsField () {
       return this.requestUniqueActionsField(true);
     }
@@ -1836,8 +1844,12 @@ public class AdReportRun extends APINode {
       VALUE_IMAGE_ASSET("image_asset"),
       @SerializedName("impression_device")
       VALUE_IMPRESSION_DEVICE("impression_device"),
+      @SerializedName("is_conversion_id_modeled")
+      VALUE_IS_CONVERSION_ID_MODELED("is_conversion_id_modeled"),
       @SerializedName("link_url_asset")
       VALUE_LINK_URL_ASSET("link_url_asset"),
+      @SerializedName("mmm")
+      VALUE_MMM("mmm"),
       @SerializedName("place_page_id")
       VALUE_PLACE_PAGE_ID("place_page_id"),
       @SerializedName("platform_position")
@@ -1848,6 +1860,8 @@ public class AdReportRun extends APINode {
       VALUE_PUBLISHER_PLATFORM("publisher_platform"),
       @SerializedName("region")
       VALUE_REGION("region"),
+      @SerializedName("skan_campaign_id")
+      VALUE_SKAN_CAMPAIGN_ID("skan_campaign_id"),
       @SerializedName("skan_conversion_id")
       VALUE_SKAN_CONVERSION_ID("skan_conversion_id"),
       @SerializedName("title_asset")

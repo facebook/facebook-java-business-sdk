@@ -54,122 +54,102 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdoptablePet extends APINode {
-  @SerializedName("address")
-  private Object mAddress = null;
-  @SerializedName("adoptable_pet_id")
-  private String mAdoptablePetId = null;
-  @SerializedName("adoption_application_form_url")
-  private String mAdoptionApplicationFormUrl = null;
-  @SerializedName("age_bucket")
-  private String mAgeBucket = null;
-  @SerializedName("animal_type")
-  private String mAnimalType = null;
+public class MediaTitle extends APINode {
   @SerializedName("applinks")
   private CatalogItemAppLinks mApplinks = null;
-  @SerializedName("availability")
-  private String mAvailability = null;
-  @SerializedName("breed")
-  private String mBreed = null;
   @SerializedName("category_specific_fields")
   private CatalogSubVerticalList mCategorySpecificFields = null;
-  @SerializedName("coat_length")
-  private String mCoatLength = null;
-  @SerializedName("color")
-  private String mColor = null;
+  @SerializedName("content_category")
+  private String mContentCategory = null;
   @SerializedName("currency")
   private String mCurrency = null;
   @SerializedName("description")
   private String mDescription = null;
-  @SerializedName("features")
-  private List<String> mFeatures = null;
-  @SerializedName("gender")
-  private String mGender = null;
+  @SerializedName("fb_page_alias")
+  private String mFbPageAlias = null;
+  @SerializedName("fb_page_id")
+  private Page mFbPageId = null;
+  @SerializedName("genres")
+  private List<String> mGenres = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("image_fetch_status")
   private EnumImageFetchStatus mImageFetchStatus = null;
   @SerializedName("images")
   private List<String> mImages = null;
-  @SerializedName("name")
-  private String mName = null;
+  @SerializedName("kg_fb_id")
+  private String mKgFbId = null;
+  @SerializedName("media_title_id")
+  private String mMediaTitleId = null;
   @SerializedName("price")
   private String mPrice = null;
   @SerializedName("sanitized_images")
   private List<String> mSanitizedImages = null;
-  @SerializedName("secondary_color")
-  private String mSecondaryColor = null;
-  @SerializedName("shelter_email")
-  private String mShelterEmail = null;
-  @SerializedName("shelter_name")
-  private String mShelterName = null;
-  @SerializedName("shelter_page_id")
-  private Page mShelterPageId = null;
-  @SerializedName("shelter_phone")
-  private String mShelterPhone = null;
-  @SerializedName("size")
-  private String mSize = null;
-  @SerializedName("tertiary_color")
-  private String mTertiaryColor = null;
+  @SerializedName("title")
+  private String mTitle = null;
+  @SerializedName("title_display_name")
+  private String mTitleDisplayName = null;
   @SerializedName("unit_price")
   private Object mUnitPrice = null;
   @SerializedName("url")
   private String mUrl = null;
+  @SerializedName("wiki_data_item")
+  private String mWikiDataItem = null;
   protected static Gson gson = null;
 
-  AdoptablePet() {
+  MediaTitle() {
   }
 
-  public AdoptablePet(Long id, APIContext context) {
+  public MediaTitle(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public AdoptablePet(String id, APIContext context) {
+  public MediaTitle(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public AdoptablePet fetch() throws APIException{
-    AdoptablePet newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public MediaTitle fetch() throws APIException{
+    MediaTitle newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static AdoptablePet fetchById(Long id, APIContext context) throws APIException {
+  public static MediaTitle fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<AdoptablePet> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<MediaTitle> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static AdoptablePet fetchById(String id, APIContext context) throws APIException {
+  public static MediaTitle fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<AdoptablePet> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<MediaTitle> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<AdoptablePet> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdoptablePet>)(
-      new APIRequest<AdoptablePet>(context, "", "/", "GET", AdoptablePet.getParser())
+  public static APINodeList<MediaTitle> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<MediaTitle>)(
+      new APIRequest<MediaTitle>(context, "", "/", "GET", MediaTitle.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<AdoptablePet>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<MediaTitle>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", AdoptablePet.getParser())
+      new APIRequest(context, "", "/", "GET", MediaTitle.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -182,12 +162,12 @@ public class AdoptablePet extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdoptablePet loadJSON(String json, APIContext context, String header) {
-    AdoptablePet adoptablePet = getGson().fromJson(json, AdoptablePet.class);
+  public static MediaTitle loadJSON(String json, APIContext context, String header) {
+    MediaTitle mediaTitle = getGson().fromJson(json, MediaTitle.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adoptablePet.toString());
+      JsonElement o2 = parser.parse(mediaTitle.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -197,14 +177,14 @@ public class AdoptablePet extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    adoptablePet.context = context;
-    adoptablePet.rawValue = json;
-    adoptablePet.header = header;
-    return adoptablePet;
+    mediaTitle.context = context;
+    mediaTitle.rawValue = json;
+    mediaTitle.header = header;
+    return mediaTitle;
   }
 
-  public static APINodeList<AdoptablePet> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdoptablePet> adoptablePets = new APINodeList<AdoptablePet>(request, json, header);
+  public static APINodeList<MediaTitle> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<MediaTitle> mediaTitles = new APINodeList<MediaTitle>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -215,9 +195,9 @@ public class AdoptablePet extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adoptablePets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          mediaTitles.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adoptablePets;
+        return mediaTitles;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -227,20 +207,20 @@ public class AdoptablePet extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adoptablePets.setCursors(before, after);
+                mediaTitles.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adoptablePets.setPaging(previous, next);
+            mediaTitles.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adoptablePets.setAppSecret(context.getAppSecretProof());
+              mediaTitles.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adoptablePets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              mediaTitles.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -251,23 +231,23 @@ public class AdoptablePet extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adoptablePets.add(loadJSON(entry.getValue().toString(), context, header));
+                  mediaTitles.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adoptablePets.add(loadJSON(obj.toString(), context, header));
+              mediaTitles.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adoptablePets;
+          return mediaTitles;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adoptablePets.add(loadJSON(entry.getValue().toString(), context, header));
+              mediaTitles.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adoptablePets;
+          return mediaTitles;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -284,20 +264,20 @@ public class AdoptablePet extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adoptablePets.add(loadJSON(value.toString(), context, header));
+              mediaTitles.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adoptablePets;
+            return mediaTitles;
           }
 
           // Sixth, check if it's pure JsonObject
-          adoptablePets.clear();
-          adoptablePets.add(loadJSON(json, context, header));
-          return adoptablePets;
+          mediaTitles.clear();
+          mediaTitles.add(loadJSON(json, context, header));
+          return mediaTitles;
         }
       }
     } catch (Exception e) {
@@ -336,53 +316,29 @@ public class AdoptablePet extends APINode {
     return new APIRequestGetVideosMetadata(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestDelete delete() {
+    return new APIRequestDelete(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
-
-  public Object getFieldAddress() {
-    return mAddress;
+  public APIRequestUpdate update() {
+    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
   }
 
-  public String getFieldAdoptablePetId() {
-    return mAdoptablePetId;
-  }
-
-  public String getFieldAdoptionApplicationFormUrl() {
-    return mAdoptionApplicationFormUrl;
-  }
-
-  public String getFieldAgeBucket() {
-    return mAgeBucket;
-  }
-
-  public String getFieldAnimalType() {
-    return mAnimalType;
-  }
 
   public CatalogItemAppLinks getFieldApplinks() {
     return mApplinks;
-  }
-
-  public String getFieldAvailability() {
-    return mAvailability;
-  }
-
-  public String getFieldBreed() {
-    return mBreed;
   }
 
   public CatalogSubVerticalList getFieldCategorySpecificFields() {
     return mCategorySpecificFields;
   }
 
-  public String getFieldCoatLength() {
-    return mCoatLength;
-  }
-
-  public String getFieldColor() {
-    return mColor;
+  public String getFieldContentCategory() {
+    return mContentCategory;
   }
 
   public String getFieldCurrency() {
@@ -393,12 +349,19 @@ public class AdoptablePet extends APINode {
     return mDescription;
   }
 
-  public List<String> getFieldFeatures() {
-    return mFeatures;
+  public String getFieldFbPageAlias() {
+    return mFbPageAlias;
   }
 
-  public String getFieldGender() {
-    return mGender;
+  public Page getFieldFbPageId() {
+    if (mFbPageId != null) {
+      mFbPageId.context = getContext();
+    }
+    return mFbPageId;
+  }
+
+  public List<String> getFieldGenres() {
+    return mGenres;
   }
 
   public String getFieldId() {
@@ -413,8 +376,12 @@ public class AdoptablePet extends APINode {
     return mImages;
   }
 
-  public String getFieldName() {
-    return mName;
+  public String getFieldKgFbId() {
+    return mKgFbId;
+  }
+
+  public String getFieldMediaTitleId() {
+    return mMediaTitleId;
   }
 
   public String getFieldPrice() {
@@ -425,35 +392,12 @@ public class AdoptablePet extends APINode {
     return mSanitizedImages;
   }
 
-  public String getFieldSecondaryColor() {
-    return mSecondaryColor;
+  public String getFieldTitle() {
+    return mTitle;
   }
 
-  public String getFieldShelterEmail() {
-    return mShelterEmail;
-  }
-
-  public String getFieldShelterName() {
-    return mShelterName;
-  }
-
-  public Page getFieldShelterPageId() {
-    if (mShelterPageId != null) {
-      mShelterPageId.context = getContext();
-    }
-    return mShelterPageId;
-  }
-
-  public String getFieldShelterPhone() {
-    return mShelterPhone;
-  }
-
-  public String getFieldSize() {
-    return mSize;
-  }
-
-  public String getFieldTertiaryColor() {
-    return mTertiaryColor;
+  public String getFieldTitleDisplayName() {
+    return mTitleDisplayName;
   }
 
   public Object getFieldUnitPrice() {
@@ -462,6 +406,10 @@ public class AdoptablePet extends APINode {
 
   public String getFieldUrl() {
     return mUrl;
+  }
+
+  public String getFieldWikiDataItem() {
+    return mWikiDataItem;
   }
 
 
@@ -794,75 +742,169 @@ public class AdoptablePet extends APINode {
 
   }
 
-  public static class APIRequestGet extends APIRequest<AdoptablePet> {
+  public static class APIRequestDelete extends APIRequest<APINode> {
 
-    AdoptablePet lastResponse = null;
+    APINode lastResponse = null;
     @Override
-    public AdoptablePet getLastResponse() {
+    public APINode getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "address",
-      "adoptable_pet_id",
-      "adoption_application_form_url",
-      "age_bucket",
-      "animal_type",
-      "applinks",
-      "availability",
-      "breed",
-      "category_specific_fields",
-      "coat_length",
-      "color",
-      "currency",
-      "description",
-      "features",
-      "gender",
-      "id",
-      "image_fetch_status",
-      "images",
-      "name",
-      "price",
-      "sanitized_images",
-      "secondary_color",
-      "shelter_email",
-      "shelter_name",
-      "shelter_page_id",
-      "shelter_phone",
-      "size",
-      "tertiary_color",
-      "unit_price",
-      "url",
     };
 
     @Override
-    public AdoptablePet parseResponse(String response, String header) throws APIException {
-      return AdoptablePet.parseResponse(response, getContext(), this, header).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public AdoptablePet execute() throws APIException {
+    public APINode execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public AdoptablePet execute(Map<String, Object> extraParams) throws APIException {
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<AdoptablePet> executeAsync() throws APIException {
+    public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<AdoptablePet> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, AdoptablePet>() {
-           public AdoptablePet apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDelete(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDelete setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDelete requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDelete requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGet extends APIRequest<MediaTitle> {
+
+    MediaTitle lastResponse = null;
+    @Override
+    public MediaTitle getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "applinks",
+      "category_specific_fields",
+      "content_category",
+      "currency",
+      "description",
+      "fb_page_alias",
+      "fb_page_id",
+      "genres",
+      "id",
+      "image_fetch_status",
+      "images",
+      "kg_fb_id",
+      "media_title_id",
+      "price",
+      "sanitized_images",
+      "title",
+      "title_display_name",
+      "unit_price",
+      "url",
+      "wiki_data_item",
+    };
+
+    @Override
+    public MediaTitle parseResponse(String response, String header) throws APIException {
+      return MediaTitle.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public MediaTitle execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public MediaTitle execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<MediaTitle> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<MediaTitle> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, MediaTitle>() {
+           public MediaTitle apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -926,60 +968,11 @@ public class AdoptablePet extends APINode {
       return this;
     }
 
-    public APIRequestGet requestAddressField () {
-      return this.requestAddressField(true);
-    }
-    public APIRequestGet requestAddressField (boolean value) {
-      this.requestField("address", value);
-      return this;
-    }
-    public APIRequestGet requestAdoptablePetIdField () {
-      return this.requestAdoptablePetIdField(true);
-    }
-    public APIRequestGet requestAdoptablePetIdField (boolean value) {
-      this.requestField("adoptable_pet_id", value);
-      return this;
-    }
-    public APIRequestGet requestAdoptionApplicationFormUrlField () {
-      return this.requestAdoptionApplicationFormUrlField(true);
-    }
-    public APIRequestGet requestAdoptionApplicationFormUrlField (boolean value) {
-      this.requestField("adoption_application_form_url", value);
-      return this;
-    }
-    public APIRequestGet requestAgeBucketField () {
-      return this.requestAgeBucketField(true);
-    }
-    public APIRequestGet requestAgeBucketField (boolean value) {
-      this.requestField("age_bucket", value);
-      return this;
-    }
-    public APIRequestGet requestAnimalTypeField () {
-      return this.requestAnimalTypeField(true);
-    }
-    public APIRequestGet requestAnimalTypeField (boolean value) {
-      this.requestField("animal_type", value);
-      return this;
-    }
     public APIRequestGet requestApplinksField () {
       return this.requestApplinksField(true);
     }
     public APIRequestGet requestApplinksField (boolean value) {
       this.requestField("applinks", value);
-      return this;
-    }
-    public APIRequestGet requestAvailabilityField () {
-      return this.requestAvailabilityField(true);
-    }
-    public APIRequestGet requestAvailabilityField (boolean value) {
-      this.requestField("availability", value);
-      return this;
-    }
-    public APIRequestGet requestBreedField () {
-      return this.requestBreedField(true);
-    }
-    public APIRequestGet requestBreedField (boolean value) {
-      this.requestField("breed", value);
       return this;
     }
     public APIRequestGet requestCategorySpecificFieldsField () {
@@ -989,18 +982,11 @@ public class AdoptablePet extends APINode {
       this.requestField("category_specific_fields", value);
       return this;
     }
-    public APIRequestGet requestCoatLengthField () {
-      return this.requestCoatLengthField(true);
+    public APIRequestGet requestContentCategoryField () {
+      return this.requestContentCategoryField(true);
     }
-    public APIRequestGet requestCoatLengthField (boolean value) {
-      this.requestField("coat_length", value);
-      return this;
-    }
-    public APIRequestGet requestColorField () {
-      return this.requestColorField(true);
-    }
-    public APIRequestGet requestColorField (boolean value) {
-      this.requestField("color", value);
+    public APIRequestGet requestContentCategoryField (boolean value) {
+      this.requestField("content_category", value);
       return this;
     }
     public APIRequestGet requestCurrencyField () {
@@ -1017,18 +1003,25 @@ public class AdoptablePet extends APINode {
       this.requestField("description", value);
       return this;
     }
-    public APIRequestGet requestFeaturesField () {
-      return this.requestFeaturesField(true);
+    public APIRequestGet requestFbPageAliasField () {
+      return this.requestFbPageAliasField(true);
     }
-    public APIRequestGet requestFeaturesField (boolean value) {
-      this.requestField("features", value);
+    public APIRequestGet requestFbPageAliasField (boolean value) {
+      this.requestField("fb_page_alias", value);
       return this;
     }
-    public APIRequestGet requestGenderField () {
-      return this.requestGenderField(true);
+    public APIRequestGet requestFbPageIdField () {
+      return this.requestFbPageIdField(true);
     }
-    public APIRequestGet requestGenderField (boolean value) {
-      this.requestField("gender", value);
+    public APIRequestGet requestFbPageIdField (boolean value) {
+      this.requestField("fb_page_id", value);
+      return this;
+    }
+    public APIRequestGet requestGenresField () {
+      return this.requestGenresField(true);
+    }
+    public APIRequestGet requestGenresField (boolean value) {
+      this.requestField("genres", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -1052,11 +1045,18 @@ public class AdoptablePet extends APINode {
       this.requestField("images", value);
       return this;
     }
-    public APIRequestGet requestNameField () {
-      return this.requestNameField(true);
+    public APIRequestGet requestKgFbIdField () {
+      return this.requestKgFbIdField(true);
     }
-    public APIRequestGet requestNameField (boolean value) {
-      this.requestField("name", value);
+    public APIRequestGet requestKgFbIdField (boolean value) {
+      this.requestField("kg_fb_id", value);
+      return this;
+    }
+    public APIRequestGet requestMediaTitleIdField () {
+      return this.requestMediaTitleIdField(true);
+    }
+    public APIRequestGet requestMediaTitleIdField (boolean value) {
+      this.requestField("media_title_id", value);
       return this;
     }
     public APIRequestGet requestPriceField () {
@@ -1073,53 +1073,18 @@ public class AdoptablePet extends APINode {
       this.requestField("sanitized_images", value);
       return this;
     }
-    public APIRequestGet requestSecondaryColorField () {
-      return this.requestSecondaryColorField(true);
+    public APIRequestGet requestTitleField () {
+      return this.requestTitleField(true);
     }
-    public APIRequestGet requestSecondaryColorField (boolean value) {
-      this.requestField("secondary_color", value);
+    public APIRequestGet requestTitleField (boolean value) {
+      this.requestField("title", value);
       return this;
     }
-    public APIRequestGet requestShelterEmailField () {
-      return this.requestShelterEmailField(true);
+    public APIRequestGet requestTitleDisplayNameField () {
+      return this.requestTitleDisplayNameField(true);
     }
-    public APIRequestGet requestShelterEmailField (boolean value) {
-      this.requestField("shelter_email", value);
-      return this;
-    }
-    public APIRequestGet requestShelterNameField () {
-      return this.requestShelterNameField(true);
-    }
-    public APIRequestGet requestShelterNameField (boolean value) {
-      this.requestField("shelter_name", value);
-      return this;
-    }
-    public APIRequestGet requestShelterPageIdField () {
-      return this.requestShelterPageIdField(true);
-    }
-    public APIRequestGet requestShelterPageIdField (boolean value) {
-      this.requestField("shelter_page_id", value);
-      return this;
-    }
-    public APIRequestGet requestShelterPhoneField () {
-      return this.requestShelterPhoneField(true);
-    }
-    public APIRequestGet requestShelterPhoneField (boolean value) {
-      this.requestField("shelter_phone", value);
-      return this;
-    }
-    public APIRequestGet requestSizeField () {
-      return this.requestSizeField(true);
-    }
-    public APIRequestGet requestSizeField (boolean value) {
-      this.requestField("size", value);
-      return this;
-    }
-    public APIRequestGet requestTertiaryColorField () {
-      return this.requestTertiaryColorField(true);
-    }
-    public APIRequestGet requestTertiaryColorField (boolean value) {
-      this.requestField("tertiary_color", value);
+    public APIRequestGet requestTitleDisplayNameField (boolean value) {
+      this.requestField("title_display_name", value);
       return this;
     }
     public APIRequestGet requestUnitPriceField () {
@@ -1136,6 +1101,209 @@ public class AdoptablePet extends APINode {
       this.requestField("url", value);
       return this;
     }
+    public APIRequestGet requestWikiDataItemField () {
+      return this.requestWikiDataItemField(true);
+    }
+    public APIRequestGet requestWikiDataItemField (boolean value) {
+      this.requestField("wiki_data_item", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestUpdate extends APIRequest<MediaTitle> {
+
+    MediaTitle lastResponse = null;
+    @Override
+    public MediaTitle getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "applinks",
+      "content_category",
+      "currency",
+      "description",
+      "fb_page_id",
+      "genres",
+      "images",
+      "kg_fb_id",
+      "price",
+      "title",
+      "title_display_name",
+      "url",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public MediaTitle parseResponse(String response, String header) throws APIException {
+      return MediaTitle.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public MediaTitle execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public MediaTitle execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<MediaTitle> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<MediaTitle> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, MediaTitle>() {
+           public MediaTitle apply(ResponseWrapper result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestUpdate(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestUpdate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestUpdate setApplinks (Object applinks) {
+      this.setParam("applinks", applinks);
+      return this;
+    }
+    public APIRequestUpdate setApplinks (String applinks) {
+      this.setParam("applinks", applinks);
+      return this;
+    }
+
+    public APIRequestUpdate setContentCategory (MediaTitle.EnumContentCategory contentCategory) {
+      this.setParam("content_category", contentCategory);
+      return this;
+    }
+    public APIRequestUpdate setContentCategory (String contentCategory) {
+      this.setParam("content_category", contentCategory);
+      return this;
+    }
+
+    public APIRequestUpdate setCurrency (String currency) {
+      this.setParam("currency", currency);
+      return this;
+    }
+
+    public APIRequestUpdate setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestUpdate setFbPageId (String fbPageId) {
+      this.setParam("fb_page_id", fbPageId);
+      return this;
+    }
+
+    public APIRequestUpdate setGenres (List<String> genres) {
+      this.setParam("genres", genres);
+      return this;
+    }
+    public APIRequestUpdate setGenres (String genres) {
+      this.setParam("genres", genres);
+      return this;
+    }
+
+    public APIRequestUpdate setImages (List<Object> images) {
+      this.setParam("images", images);
+      return this;
+    }
+    public APIRequestUpdate setImages (String images) {
+      this.setParam("images", images);
+      return this;
+    }
+
+    public APIRequestUpdate setKgFbId (String kgFbId) {
+      this.setParam("kg_fb_id", kgFbId);
+      return this;
+    }
+
+    public APIRequestUpdate setPrice (Long price) {
+      this.setParam("price", price);
+      return this;
+    }
+    public APIRequestUpdate setPrice (String price) {
+      this.setParam("price", price);
+      return this;
+    }
+
+    public APIRequestUpdate setTitle (String title) {
+      this.setParam("title", title);
+      return this;
+    }
+
+    public APIRequestUpdate setTitleDisplayName (String titleDisplayName) {
+      this.setParam("title_display_name", titleDisplayName);
+      return this;
+    }
+
+    public APIRequestUpdate setUrl (String url) {
+      this.setParam("url", url);
+      return this;
+    }
+
+    public APIRequestUpdate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestUpdate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static enum EnumImageFetchStatus {
@@ -1165,6 +1333,27 @@ public class AdoptablePet extends APINode {
       }
   }
 
+  public static enum EnumContentCategory {
+      @SerializedName("MOVIE")
+      VALUE_MOVIE("MOVIE"),
+      @SerializedName("MUSIC")
+      VALUE_MUSIC("MUSIC"),
+      @SerializedName("TV_SHOW")
+      VALUE_TV_SHOW("TV_SHOW"),
+      ;
+
+      private String value;
+
+      private EnumContentCategory(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -1179,46 +1368,36 @@ public class AdoptablePet extends APINode {
     return gson;
   }
 
-  public AdoptablePet copyFrom(AdoptablePet instance) {
-    this.mAddress = instance.mAddress;
-    this.mAdoptablePetId = instance.mAdoptablePetId;
-    this.mAdoptionApplicationFormUrl = instance.mAdoptionApplicationFormUrl;
-    this.mAgeBucket = instance.mAgeBucket;
-    this.mAnimalType = instance.mAnimalType;
+  public MediaTitle copyFrom(MediaTitle instance) {
     this.mApplinks = instance.mApplinks;
-    this.mAvailability = instance.mAvailability;
-    this.mBreed = instance.mBreed;
     this.mCategorySpecificFields = instance.mCategorySpecificFields;
-    this.mCoatLength = instance.mCoatLength;
-    this.mColor = instance.mColor;
+    this.mContentCategory = instance.mContentCategory;
     this.mCurrency = instance.mCurrency;
     this.mDescription = instance.mDescription;
-    this.mFeatures = instance.mFeatures;
-    this.mGender = instance.mGender;
+    this.mFbPageAlias = instance.mFbPageAlias;
+    this.mFbPageId = instance.mFbPageId;
+    this.mGenres = instance.mGenres;
     this.mId = instance.mId;
     this.mImageFetchStatus = instance.mImageFetchStatus;
     this.mImages = instance.mImages;
-    this.mName = instance.mName;
+    this.mKgFbId = instance.mKgFbId;
+    this.mMediaTitleId = instance.mMediaTitleId;
     this.mPrice = instance.mPrice;
     this.mSanitizedImages = instance.mSanitizedImages;
-    this.mSecondaryColor = instance.mSecondaryColor;
-    this.mShelterEmail = instance.mShelterEmail;
-    this.mShelterName = instance.mShelterName;
-    this.mShelterPageId = instance.mShelterPageId;
-    this.mShelterPhone = instance.mShelterPhone;
-    this.mSize = instance.mSize;
-    this.mTertiaryColor = instance.mTertiaryColor;
+    this.mTitle = instance.mTitle;
+    this.mTitleDisplayName = instance.mTitleDisplayName;
     this.mUnitPrice = instance.mUnitPrice;
     this.mUrl = instance.mUrl;
+    this.mWikiDataItem = instance.mWikiDataItem;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdoptablePet> getParser() {
-    return new APIRequest.ResponseParser<AdoptablePet>() {
-      public APINodeList<AdoptablePet> parseResponse(String response, APIContext context, APIRequest<AdoptablePet> request, String header) throws MalformedResponseException {
-        return AdoptablePet.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<MediaTitle> getParser() {
+    return new APIRequest.ResponseParser<MediaTitle>() {
+      public APINodeList<MediaTitle> parseResponse(String response, APIContext context, APIRequest<MediaTitle> request, String header) throws MalformedResponseException {
+        return MediaTitle.parseResponse(response, context, request, header);
       }
     };
   }

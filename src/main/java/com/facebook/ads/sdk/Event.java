@@ -839,11 +839,11 @@ public class Event extends APINode {
 
   }
 
-  public static class APIRequestCreateLiveVideo extends APIRequest<APINode> {
+  public static class APIRequestCreateLiveVideo extends APIRequest<LiveVideo> {
 
-    APINode lastResponse = null;
+    LiveVideo lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public LiveVideo getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -851,12 +851,12 @@ public class Event extends APINode {
       "description",
       "enable_backup_ingest",
       "encoding_settings",
+      "event_params",
       "fisheye_video_cropped",
       "front_z_rotation",
       "is_audio_only",
       "is_spherical",
       "original_fov",
-      "planned_start_time",
       "privacy",
       "projection",
       "published",
@@ -873,31 +873,31 @@ public class Event extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
+    public LiveVideo parseResponse(String response, String header) throws APIException {
+      return LiveVideo.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public LiveVideo execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public LiveVideo execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINode> executeAsync() throws APIException {
+    public ListenableFuture<LiveVideo> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<LiveVideo> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, LiveVideo>() {
+           public LiveVideo apply(ResponseWrapper result) {
              try {
                return APIRequestCreateLiveVideo.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -909,7 +909,7 @@ public class Event extends APINode {
     };
 
     public APIRequestCreateLiveVideo(String nodeId, APIContext context) {
-      super(context, nodeId, "/livevideos", "POST", Arrays.asList(PARAMS));
+      super(context, nodeId, "/live_videos", "POST", Arrays.asList(PARAMS));
     }
 
     @Override
@@ -950,6 +950,15 @@ public class Event extends APINode {
 
     public APIRequestCreateLiveVideo setEncodingSettings (String encodingSettings) {
       this.setParam("encoding_settings", encodingSettings);
+      return this;
+    }
+
+    public APIRequestCreateLiveVideo setEventParams (Object eventParams) {
+      this.setParam("event_params", eventParams);
+      return this;
+    }
+    public APIRequestCreateLiveVideo setEventParams (String eventParams) {
+      this.setParam("event_params", eventParams);
       return this;
     }
 
@@ -998,21 +1007,12 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestCreateLiveVideo setPlannedStartTime (Long plannedStartTime) {
-      this.setParam("planned_start_time", plannedStartTime);
-      return this;
-    }
-    public APIRequestCreateLiveVideo setPlannedStartTime (String plannedStartTime) {
-      this.setParam("planned_start_time", plannedStartTime);
-      return this;
-    }
-
     public APIRequestCreateLiveVideo setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;
     }
 
-    public APIRequestCreateLiveVideo setProjection (EnumProjection projection) {
+    public APIRequestCreateLiveVideo setProjection (LiveVideo.EnumProjection projection) {
       this.setParam("projection", projection);
       return this;
     }
@@ -1039,7 +1039,7 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestCreateLiveVideo setSpatialAudioFormat (EnumSpatialAudioFormat spatialAudioFormat) {
+    public APIRequestCreateLiveVideo setSpatialAudioFormat (LiveVideo.EnumSpatialAudioFormat spatialAudioFormat) {
       this.setParam("spatial_audio_format", spatialAudioFormat);
       return this;
     }
@@ -1048,7 +1048,7 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestCreateLiveVideo setStatus (EnumStatus status) {
+    public APIRequestCreateLiveVideo setStatus (LiveVideo.EnumStatus status) {
       this.setParam("status", status);
       return this;
     }
@@ -1057,7 +1057,7 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestCreateLiveVideo setStereoscopicMode (EnumStereoscopicMode stereoscopicMode) {
+    public APIRequestCreateLiveVideo setStereoscopicMode (LiveVideo.EnumStereoscopicMode stereoscopicMode) {
       this.setParam("stereoscopic_mode", stereoscopicMode);
       return this;
     }
@@ -1075,7 +1075,7 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestCreateLiveVideo setStreamType (EnumStreamType streamType) {
+    public APIRequestCreateLiveVideo setStreamType (LiveVideo.EnumStreamType streamType) {
       this.setParam("stream_type", streamType);
       return this;
     }
@@ -2224,56 +2224,50 @@ public class Event extends APINode {
   }
 
   public static enum EnumCategory {
-      @SerializedName("ART_EVENT")
-      VALUE_ART_EVENT("ART_EVENT"),
-      @SerializedName("BOOK_EVENT")
-      VALUE_BOOK_EVENT("BOOK_EVENT"),
-      @SerializedName("CLASS_EVENT")
-      VALUE_CLASS_EVENT("CLASS_EVENT"),
-      @SerializedName("COMEDY_EVENT")
-      VALUE_COMEDY_EVENT("COMEDY_EVENT"),
-      @SerializedName("CONFERENCE_EVENT")
-      VALUE_CONFERENCE_EVENT("CONFERENCE_EVENT"),
-      @SerializedName("DANCE_EVENT")
-      VALUE_DANCE_EVENT("DANCE_EVENT"),
-      @SerializedName("DINING_EVENT")
-      VALUE_DINING_EVENT("DINING_EVENT"),
-      @SerializedName("FAMILY_EVENT")
-      VALUE_FAMILY_EVENT("FAMILY_EVENT"),
-      @SerializedName("FESTIVAL_EVENT")
-      VALUE_FESTIVAL_EVENT("FESTIVAL_EVENT"),
-      @SerializedName("FITNESS")
-      VALUE_FITNESS("FITNESS"),
-      @SerializedName("FOOD_TASTING")
-      VALUE_FOOD_TASTING("FOOD_TASTING"),
-      @SerializedName("FUNDRAISER")
-      VALUE_FUNDRAISER("FUNDRAISER"),
-      @SerializedName("LECTURE")
-      VALUE_LECTURE("LECTURE"),
-      @SerializedName("MEETUP")
-      VALUE_MEETUP("MEETUP"),
-      @SerializedName("MOVIE_EVENT")
-      VALUE_MOVIE_EVENT("MOVIE_EVENT"),
-      @SerializedName("MUSIC_EVENT")
-      VALUE_MUSIC_EVENT("MUSIC_EVENT"),
-      @SerializedName("NEIGHBORHOOD")
-      VALUE_NEIGHBORHOOD("NEIGHBORHOOD"),
-      @SerializedName("NIGHTLIFE")
-      VALUE_NIGHTLIFE("NIGHTLIFE"),
-      @SerializedName("OTHER")
-      VALUE_OTHER("OTHER"),
-      @SerializedName("RELIGIOUS_EVENT")
-      VALUE_RELIGIOUS_EVENT("RELIGIOUS_EVENT"),
-      @SerializedName("SHOPPING")
-      VALUE_SHOPPING("SHOPPING"),
-      @SerializedName("SPORTS_EVENT")
-      VALUE_SPORTS_EVENT("SPORTS_EVENT"),
-      @SerializedName("THEATER_EVENT")
-      VALUE_THEATER_EVENT("THEATER_EVENT"),
-      @SerializedName("VOLUNTEERING")
-      VALUE_VOLUNTEERING("VOLUNTEERING"),
-      @SerializedName("WORKSHOP")
-      VALUE_WORKSHOP("WORKSHOP"),
+      @SerializedName("CLASSIC_LITERATURE")
+      VALUE_CLASSIC_LITERATURE("CLASSIC_LITERATURE"),
+      @SerializedName("COMEDY")
+      VALUE_COMEDY("COMEDY"),
+      @SerializedName("CRAFTS")
+      VALUE_CRAFTS("CRAFTS"),
+      @SerializedName("DANCE")
+      VALUE_DANCE("DANCE"),
+      @SerializedName("DRINKS")
+      VALUE_DRINKS("DRINKS"),
+      @SerializedName("FITNESS_AND_WORKOUTS")
+      VALUE_FITNESS_AND_WORKOUTS("FITNESS_AND_WORKOUTS"),
+      @SerializedName("FOODS")
+      VALUE_FOODS("FOODS"),
+      @SerializedName("GAMES")
+      VALUE_GAMES("GAMES"),
+      @SerializedName("GARDENING")
+      VALUE_GARDENING("GARDENING"),
+      @SerializedName("HEALTHY_LIVING_AND_SELF_CARE")
+      VALUE_HEALTHY_LIVING_AND_SELF_CARE("HEALTHY_LIVING_AND_SELF_CARE"),
+      @SerializedName("HEALTH_AND_MEDICAL")
+      VALUE_HEALTH_AND_MEDICAL("HEALTH_AND_MEDICAL"),
+      @SerializedName("HOME_AND_GARDEN")
+      VALUE_HOME_AND_GARDEN("HOME_AND_GARDEN"),
+      @SerializedName("MUSIC_AND_AUDIO")
+      VALUE_MUSIC_AND_AUDIO("MUSIC_AND_AUDIO"),
+      @SerializedName("PARTIES")
+      VALUE_PARTIES("PARTIES"),
+      @SerializedName("PROFESSIONAL_NETWORKING")
+      VALUE_PROFESSIONAL_NETWORKING("PROFESSIONAL_NETWORKING"),
+      @SerializedName("RELIGIONS")
+      VALUE_RELIGIONS("RELIGIONS"),
+      @SerializedName("SHOPPING_EVENT")
+      VALUE_SHOPPING_EVENT("SHOPPING_EVENT"),
+      @SerializedName("SOCIAL_ISSUES")
+      VALUE_SOCIAL_ISSUES("SOCIAL_ISSUES"),
+      @SerializedName("SPORTS")
+      VALUE_SPORTS("SPORTS"),
+      @SerializedName("THEATER")
+      VALUE_THEATER("THEATER"),
+      @SerializedName("TV_AND_MOVIES")
+      VALUE_TV_AND_MOVIES("TV_AND_MOVIES"),
+      @SerializedName("VISUAL_ARTS")
+      VALUE_VISUAL_ARTS("VISUAL_ARTS"),
       ;
 
       private String value;
@@ -2373,109 +2367,6 @@ public class Event extends APINode {
       private String value;
 
       private EnumTimeFilter(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumProjection {
-      @SerializedName("CUBEMAP")
-      VALUE_CUBEMAP("CUBEMAP"),
-      @SerializedName("EQUIRECTANGULAR")
-      VALUE_EQUIRECTANGULAR("EQUIRECTANGULAR"),
-      @SerializedName("HALF_EQUIRECTANGULAR")
-      VALUE_HALF_EQUIRECTANGULAR("HALF_EQUIRECTANGULAR"),
-      ;
-
-      private String value;
-
-      private EnumProjection(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumSpatialAudioFormat {
-      @SerializedName("ambiX_4")
-      VALUE_AMBIX_4("ambiX_4"),
-      ;
-
-      private String value;
-
-      private EnumSpatialAudioFormat(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumStatus {
-      @SerializedName("LIVE_NOW")
-      VALUE_LIVE_NOW("LIVE_NOW"),
-      @SerializedName("SCHEDULED_CANCELED")
-      VALUE_SCHEDULED_CANCELED("SCHEDULED_CANCELED"),
-      @SerializedName("SCHEDULED_LIVE")
-      VALUE_SCHEDULED_LIVE("SCHEDULED_LIVE"),
-      @SerializedName("SCHEDULED_UNPUBLISHED")
-      VALUE_SCHEDULED_UNPUBLISHED("SCHEDULED_UNPUBLISHED"),
-      @SerializedName("UNPUBLISHED")
-      VALUE_UNPUBLISHED("UNPUBLISHED"),
-      ;
-
-      private String value;
-
-      private EnumStatus(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumStereoscopicMode {
-      @SerializedName("LEFT_RIGHT")
-      VALUE_LEFT_RIGHT("LEFT_RIGHT"),
-      @SerializedName("MONO")
-      VALUE_MONO("MONO"),
-      @SerializedName("TOP_BOTTOM")
-      VALUE_TOP_BOTTOM("TOP_BOTTOM"),
-      ;
-
-      private String value;
-
-      private EnumStereoscopicMode(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumStreamType {
-      @SerializedName("AMBIENT")
-      VALUE_AMBIENT("AMBIENT"),
-      @SerializedName("REGULAR")
-      VALUE_REGULAR("REGULAR"),
-      ;
-
-      private String value;
-
-      private EnumStreamType(String value) {
         this.value = value;
       }
 
