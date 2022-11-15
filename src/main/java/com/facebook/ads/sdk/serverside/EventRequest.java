@@ -431,7 +431,7 @@ public class EventRequest {
     EventResponse response;
     if (httpServiceClient == null) {
       final APIRequestCreateEvent event = getPixelCreateEvent();
-      final AdsPixel pixel = (AdsPixel) event.execute();
+      final APINode pixel = event.execute();
       response = gson.fromJson(pixel.getRawResponse(), EventResponse.class);
     } else {
       response = executeCustomHttpService(httpServiceClient);
