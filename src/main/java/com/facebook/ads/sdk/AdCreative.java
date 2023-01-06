@@ -397,8 +397,8 @@ public class AdCreative extends APINode {
     return new APIRequestGetCreativeInsights(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetPreviews getPreviews() {
-    return new APIRequestGetPreviews(this.getPrefixedId().toString(), context);
+  public APIRequestGetPreViews getPreViews() {
+    return new APIRequestGetPreViews(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestDelete delete() {
@@ -1233,7 +1233,7 @@ public class AdCreative extends APINode {
     }
   }
 
-  public static class APIRequestGetPreviews extends APIRequest<AdPreview> {
+  public static class APIRequestGetPreViews extends APIRequest<AdPreview> {
 
     APINodeList<AdPreview> lastResponse = null;
     @Override
@@ -1287,7 +1287,7 @@ public class AdCreative extends APINode {
         new Function<ResponseWrapper, APINodeList<AdPreview>>() {
            public APINodeList<AdPreview> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetPreviews.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestGetPreViews.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1296,129 +1296,129 @@ public class AdCreative extends APINode {
       );
     };
 
-    public APIRequestGetPreviews(String nodeId, APIContext context) {
+    public APIRequestGetPreViews(String nodeId, APIContext context) {
       super(context, nodeId, "/previews", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGetPreviews setParam(String param, Object value) {
+    public APIRequestGetPreViews setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGetPreviews setParams(Map<String, Object> params) {
+    public APIRequestGetPreViews setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGetPreviews setAdFormat (AdPreview.EnumAdFormat adFormat) {
+    public APIRequestGetPreViews setAdFormat (AdPreview.EnumAdFormat adFormat) {
       this.setParam("ad_format", adFormat);
       return this;
     }
-    public APIRequestGetPreviews setAdFormat (String adFormat) {
+    public APIRequestGetPreViews setAdFormat (String adFormat) {
       this.setParam("ad_format", adFormat);
       return this;
     }
 
-    public APIRequestGetPreviews setDynamicAssetLabel (String dynamicAssetLabel) {
+    public APIRequestGetPreViews setDynamicAssetLabel (String dynamicAssetLabel) {
       this.setParam("dynamic_asset_label", dynamicAssetLabel);
       return this;
     }
 
-    public APIRequestGetPreviews setDynamicCreativeSpec (Object dynamicCreativeSpec) {
+    public APIRequestGetPreViews setDynamicCreativeSpec (Object dynamicCreativeSpec) {
       this.setParam("dynamic_creative_spec", dynamicCreativeSpec);
       return this;
     }
-    public APIRequestGetPreviews setDynamicCreativeSpec (String dynamicCreativeSpec) {
+    public APIRequestGetPreViews setDynamicCreativeSpec (String dynamicCreativeSpec) {
       this.setParam("dynamic_creative_spec", dynamicCreativeSpec);
       return this;
     }
 
-    public APIRequestGetPreviews setDynamicCustomization (Object dynamicCustomization) {
+    public APIRequestGetPreViews setDynamicCustomization (Object dynamicCustomization) {
       this.setParam("dynamic_customization", dynamicCustomization);
       return this;
     }
-    public APIRequestGetPreviews setDynamicCustomization (String dynamicCustomization) {
+    public APIRequestGetPreViews setDynamicCustomization (String dynamicCustomization) {
       this.setParam("dynamic_customization", dynamicCustomization);
       return this;
     }
 
-    public APIRequestGetPreviews setEndDate (String endDate) {
+    public APIRequestGetPreViews setEndDate (String endDate) {
       this.setParam("end_date", endDate);
       return this;
     }
 
-    public APIRequestGetPreviews setHeight (Long height) {
+    public APIRequestGetPreViews setHeight (Long height) {
       this.setParam("height", height);
       return this;
     }
-    public APIRequestGetPreviews setHeight (String height) {
+    public APIRequestGetPreViews setHeight (String height) {
       this.setParam("height", height);
       return this;
     }
 
-    public APIRequestGetPreviews setLocale (String locale) {
+    public APIRequestGetPreViews setLocale (String locale) {
       this.setParam("locale", locale);
       return this;
     }
 
-    public APIRequestGetPreviews setPlacePageId (Long placePageId) {
+    public APIRequestGetPreViews setPlacePageId (Long placePageId) {
       this.setParam("place_page_id", placePageId);
       return this;
     }
-    public APIRequestGetPreviews setPlacePageId (String placePageId) {
+    public APIRequestGetPreViews setPlacePageId (String placePageId) {
       this.setParam("place_page_id", placePageId);
       return this;
     }
 
-    public APIRequestGetPreviews setPost (Object post) {
+    public APIRequestGetPreViews setPost (Object post) {
       this.setParam("post", post);
       return this;
     }
-    public APIRequestGetPreviews setPost (String post) {
+    public APIRequestGetPreViews setPost (String post) {
       this.setParam("post", post);
       return this;
     }
 
-    public APIRequestGetPreviews setProductItemIds (List<String> productItemIds) {
+    public APIRequestGetPreViews setProductItemIds (List<String> productItemIds) {
       this.setParam("product_item_ids", productItemIds);
       return this;
     }
-    public APIRequestGetPreviews setProductItemIds (String productItemIds) {
+    public APIRequestGetPreViews setProductItemIds (String productItemIds) {
       this.setParam("product_item_ids", productItemIds);
       return this;
     }
 
-    public APIRequestGetPreviews setRenderType (AdPreview.EnumRenderType renderType) {
+    public APIRequestGetPreViews setRenderType (AdPreview.EnumRenderType renderType) {
       this.setParam("render_type", renderType);
       return this;
     }
-    public APIRequestGetPreviews setRenderType (String renderType) {
+    public APIRequestGetPreViews setRenderType (String renderType) {
       this.setParam("render_type", renderType);
       return this;
     }
 
-    public APIRequestGetPreviews setStartDate (String startDate) {
+    public APIRequestGetPreViews setStartDate (String startDate) {
       this.setParam("start_date", startDate);
       return this;
     }
 
-    public APIRequestGetPreviews setWidth (Long width) {
+    public APIRequestGetPreViews setWidth (Long width) {
       this.setParam("width", width);
       return this;
     }
-    public APIRequestGetPreviews setWidth (String width) {
+    public APIRequestGetPreViews setWidth (String width) {
       this.setParam("width", width);
       return this;
     }
 
-    public APIRequestGetPreviews requestAllFields () {
+    public APIRequestGetPreViews requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGetPreviews requestAllFields (boolean value) {
+    public APIRequestGetPreViews requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -1426,12 +1426,12 @@ public class AdCreative extends APINode {
     }
 
     @Override
-    public APIRequestGetPreviews requestFields (List<String> fields) {
+    public APIRequestGetPreViews requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGetPreviews requestFields (List<String> fields, boolean value) {
+    public APIRequestGetPreViews requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -1439,21 +1439,21 @@ public class AdCreative extends APINode {
     }
 
     @Override
-    public APIRequestGetPreviews requestField (String field) {
+    public APIRequestGetPreViews requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGetPreviews requestField (String field, boolean value) {
+    public APIRequestGetPreViews requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
-    public APIRequestGetPreviews requestBodyField () {
+    public APIRequestGetPreViews requestBodyField () {
       return this.requestBodyField(true);
     }
-    public APIRequestGetPreviews requestBodyField (boolean value) {
+    public APIRequestGetPreViews requestBodyField (boolean value) {
       this.requestField("body", value);
       return this;
     }
@@ -2408,6 +2408,8 @@ public class AdCreative extends APINode {
       VALUE_MOMENTS("MOMENTS"),
       @SerializedName("NO_BUTTON")
       VALUE_NO_BUTTON("NO_BUTTON"),
+      @SerializedName("OPEN_INSTANT_APP")
+      VALUE_OPEN_INSTANT_APP("OPEN_INSTANT_APP"),
       @SerializedName("OPEN_LINK")
       VALUE_OPEN_LINK("OPEN_LINK"),
       @SerializedName("ORDER_NOW")
@@ -2420,6 +2422,8 @@ public class AdCreative extends APINode {
       VALUE_PLAY_GAME_ON_FACEBOOK("PLAY_GAME_ON_FACEBOOK"),
       @SerializedName("PURCHASE_GIFT_CARDS")
       VALUE_PURCHASE_GIFT_CARDS("PURCHASE_GIFT_CARDS"),
+      @SerializedName("RAISE_MONEY")
+      VALUE_RAISE_MONEY("RAISE_MONEY"),
       @SerializedName("RECORD_NOW")
       VALUE_RECORD_NOW("RECORD_NOW"),
       @SerializedName("REFER_FRIENDS")
@@ -2646,25 +2650,6 @@ public class AdCreative extends APINode {
       private String value;
 
       private EnumDynamicAdVoice(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumInstantCheckoutSetting {
-      @SerializedName("off")
-      VALUE_OFF("off"),
-      @SerializedName("on")
-      VALUE_ON("on"),
-      ;
-
-      private String value;
-
-      private EnumInstantCheckoutSetting(String value) {
         this.value = value;
       }
 

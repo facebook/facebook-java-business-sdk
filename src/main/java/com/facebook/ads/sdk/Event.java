@@ -857,7 +857,6 @@ public class Event extends APINode {
       "is_audio_only",
       "is_spherical",
       "original_fov",
-      "planned_start_time",
       "privacy",
       "projection",
       "published",
@@ -1005,15 +1004,6 @@ public class Event extends APINode {
     }
     public APIRequestCreateLiveVideo setOriginalFov (String originalFov) {
       this.setParam("original_fov", originalFov);
-      return this;
-    }
-
-    public APIRequestCreateLiveVideo setPlannedStartTime (Long plannedStartTime) {
-      this.setParam("planned_start_time", plannedStartTime);
-      return this;
-    }
-    public APIRequestCreateLiveVideo setPlannedStartTime (String plannedStartTime) {
-      this.setParam("planned_start_time", plannedStartTime);
       return this;
     }
 
@@ -2234,56 +2224,50 @@ public class Event extends APINode {
   }
 
   public static enum EnumCategory {
-      @SerializedName("ART_EVENT")
-      VALUE_ART_EVENT("ART_EVENT"),
-      @SerializedName("BOOK_EVENT")
-      VALUE_BOOK_EVENT("BOOK_EVENT"),
-      @SerializedName("CLASS_EVENT")
-      VALUE_CLASS_EVENT("CLASS_EVENT"),
-      @SerializedName("COMEDY_EVENT")
-      VALUE_COMEDY_EVENT("COMEDY_EVENT"),
-      @SerializedName("CONFERENCE_EVENT")
-      VALUE_CONFERENCE_EVENT("CONFERENCE_EVENT"),
-      @SerializedName("DANCE_EVENT")
-      VALUE_DANCE_EVENT("DANCE_EVENT"),
-      @SerializedName("DINING_EVENT")
-      VALUE_DINING_EVENT("DINING_EVENT"),
-      @SerializedName("FAMILY_EVENT")
-      VALUE_FAMILY_EVENT("FAMILY_EVENT"),
-      @SerializedName("FESTIVAL_EVENT")
-      VALUE_FESTIVAL_EVENT("FESTIVAL_EVENT"),
-      @SerializedName("FITNESS")
-      VALUE_FITNESS("FITNESS"),
-      @SerializedName("FOOD_TASTING")
-      VALUE_FOOD_TASTING("FOOD_TASTING"),
-      @SerializedName("FUNDRAISER")
-      VALUE_FUNDRAISER("FUNDRAISER"),
-      @SerializedName("LECTURE")
-      VALUE_LECTURE("LECTURE"),
-      @SerializedName("MEETUP")
-      VALUE_MEETUP("MEETUP"),
-      @SerializedName("MOVIE_EVENT")
-      VALUE_MOVIE_EVENT("MOVIE_EVENT"),
-      @SerializedName("MUSIC_EVENT")
-      VALUE_MUSIC_EVENT("MUSIC_EVENT"),
-      @SerializedName("NEIGHBORHOOD")
-      VALUE_NEIGHBORHOOD("NEIGHBORHOOD"),
-      @SerializedName("NIGHTLIFE")
-      VALUE_NIGHTLIFE("NIGHTLIFE"),
-      @SerializedName("OTHER")
-      VALUE_OTHER("OTHER"),
-      @SerializedName("RELIGIOUS_EVENT")
-      VALUE_RELIGIOUS_EVENT("RELIGIOUS_EVENT"),
-      @SerializedName("SHOPPING")
-      VALUE_SHOPPING("SHOPPING"),
-      @SerializedName("SPORTS_EVENT")
-      VALUE_SPORTS_EVENT("SPORTS_EVENT"),
-      @SerializedName("THEATER_EVENT")
-      VALUE_THEATER_EVENT("THEATER_EVENT"),
-      @SerializedName("VOLUNTEERING")
-      VALUE_VOLUNTEERING("VOLUNTEERING"),
-      @SerializedName("WORKSHOP")
-      VALUE_WORKSHOP("WORKSHOP"),
+      @SerializedName("CLASSIC_LITERATURE")
+      VALUE_CLASSIC_LITERATURE("CLASSIC_LITERATURE"),
+      @SerializedName("COMEDY")
+      VALUE_COMEDY("COMEDY"),
+      @SerializedName("CRAFTS")
+      VALUE_CRAFTS("CRAFTS"),
+      @SerializedName("DANCE")
+      VALUE_DANCE("DANCE"),
+      @SerializedName("DRINKS")
+      VALUE_DRINKS("DRINKS"),
+      @SerializedName("FITNESS_AND_WORKOUTS")
+      VALUE_FITNESS_AND_WORKOUTS("FITNESS_AND_WORKOUTS"),
+      @SerializedName("FOODS")
+      VALUE_FOODS("FOODS"),
+      @SerializedName("GAMES")
+      VALUE_GAMES("GAMES"),
+      @SerializedName("GARDENING")
+      VALUE_GARDENING("GARDENING"),
+      @SerializedName("HEALTHY_LIVING_AND_SELF_CARE")
+      VALUE_HEALTHY_LIVING_AND_SELF_CARE("HEALTHY_LIVING_AND_SELF_CARE"),
+      @SerializedName("HEALTH_AND_MEDICAL")
+      VALUE_HEALTH_AND_MEDICAL("HEALTH_AND_MEDICAL"),
+      @SerializedName("HOME_AND_GARDEN")
+      VALUE_HOME_AND_GARDEN("HOME_AND_GARDEN"),
+      @SerializedName("MUSIC_AND_AUDIO")
+      VALUE_MUSIC_AND_AUDIO("MUSIC_AND_AUDIO"),
+      @SerializedName("PARTIES")
+      VALUE_PARTIES("PARTIES"),
+      @SerializedName("PROFESSIONAL_NETWORKING")
+      VALUE_PROFESSIONAL_NETWORKING("PROFESSIONAL_NETWORKING"),
+      @SerializedName("RELIGIONS")
+      VALUE_RELIGIONS("RELIGIONS"),
+      @SerializedName("SHOPPING_EVENT")
+      VALUE_SHOPPING_EVENT("SHOPPING_EVENT"),
+      @SerializedName("SOCIAL_ISSUES")
+      VALUE_SOCIAL_ISSUES("SOCIAL_ISSUES"),
+      @SerializedName("SPORTS")
+      VALUE_SPORTS("SPORTS"),
+      @SerializedName("THEATER")
+      VALUE_THEATER("THEATER"),
+      @SerializedName("TV_AND_MOVIES")
+      VALUE_TV_AND_MOVIES("TV_AND_MOVIES"),
+      @SerializedName("VISUAL_ARTS")
+      VALUE_VISUAL_ARTS("VISUAL_ARTS"),
       ;
 
       private String value;

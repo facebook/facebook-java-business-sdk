@@ -75,6 +75,8 @@ public class IGUser extends APINode {
   private IGMedia mMentionedMedia = null;
   @SerializedName("name")
   private String mName = null;
+  @SerializedName("owner_business")
+  private Business mOwnerBusiness = null;
   @SerializedName("profile_picture_url")
   private String mProfilePictureUrl = null;
   @SerializedName("shopping_product_tag_eligibility")
@@ -402,6 +404,13 @@ public class IGUser extends APINode {
 
   public String getFieldName() {
     return mName;
+  }
+
+  public Business getFieldOwnerBusiness() {
+    if (mOwnerBusiness != null) {
+      mOwnerBusiness.context = getContext();
+    }
+    return mOwnerBusiness;
   }
 
   public String getFieldProfilePictureUrl() {
@@ -2670,6 +2679,7 @@ public class IGUser extends APINode {
       "mentioned_comment",
       "mentioned_media",
       "name",
+      "owner_business",
       "profile_picture_url",
       "shopping_product_tag_eligibility",
       "shopping_review_status",
@@ -2841,6 +2851,13 @@ public class IGUser extends APINode {
       this.requestField("name", value);
       return this;
     }
+    public APIRequestGet requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGet requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
+      return this;
+    }
     public APIRequestGet requestProfilePictureUrlField () {
       return this.requestProfilePictureUrlField(true);
     }
@@ -2903,6 +2920,7 @@ public class IGUser extends APINode {
     this.mMentionedComment = instance.mMentionedComment;
     this.mMentionedMedia = instance.mMentionedMedia;
     this.mName = instance.mName;
+    this.mOwnerBusiness = instance.mOwnerBusiness;
     this.mProfilePictureUrl = instance.mProfilePictureUrl;
     this.mShoppingProductTagEligibility = instance.mShoppingProductTagEligibility;
     this.mShoppingReviewStatus = instance.mShoppingReviewStatus;

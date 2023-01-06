@@ -61,6 +61,8 @@ public class OfflineConversionDataSet extends APINode {
   private String mConfig = null;
   @SerializedName("creation_time")
   private String mCreationTime = null;
+  @SerializedName("creator")
+  private User mCreator = null;
   @SerializedName("description")
   private String mDescription = null;
   @SerializedName("duplicate_entries")
@@ -91,6 +93,8 @@ public class OfflineConversionDataSet extends APINode {
   private Long mMatchedEntries = null;
   @SerializedName("name")
   private String mName = null;
+  @SerializedName("owner_business")
+  private Business mOwnerBusiness = null;
   @SerializedName("usage")
   private OfflineConversionDataSetUsage mUsage = null;
   @SerializedName("valid_entries")
@@ -376,6 +380,13 @@ public class OfflineConversionDataSet extends APINode {
     return mCreationTime;
   }
 
+  public User getFieldCreator() {
+    if (mCreator != null) {
+      mCreator.context = getContext();
+    }
+    return mCreator;
+  }
+
   public String getFieldDescription() {
     return mDescription;
   }
@@ -436,6 +447,13 @@ public class OfflineConversionDataSet extends APINode {
     return mName;
   }
 
+  public Business getFieldOwnerBusiness() {
+    if (mOwnerBusiness != null) {
+      mOwnerBusiness.context = getContext();
+    }
+    return mOwnerBusiness;
+  }
+
   public OfflineConversionDataSetUsage getFieldUsage() {
     return mUsage;
   }
@@ -477,6 +495,7 @@ public class OfflineConversionDataSet extends APINode {
       "capabilities",
       "created_time",
       "currency",
+      "custom_audience_info",
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
@@ -498,6 +517,7 @@ public class OfflineConversionDataSet extends APINode {
       "is_personal",
       "is_prepay_account",
       "is_tax_id_required",
+      "liable_address",
       "line_numbers",
       "media_agency",
       "min_campaign_group_spend_cap",
@@ -505,9 +525,12 @@ public class OfflineConversionDataSet extends APINode {
       "name",
       "offsite_pixels_tos_accepted",
       "owner",
+      "owner_business",
       "partner",
       "rf_spec",
+      "send_bill_to_address",
       "show_checkout_experience",
+      "sold_to_address",
       "spend_cap",
       "tax_id",
       "tax_id_status",
@@ -518,6 +541,7 @@ public class OfflineConversionDataSet extends APINode {
       "tos_accepted",
       "user_tasks",
       "user_tos_accepted",
+      "viewable_business",
     };
 
     @Override
@@ -747,6 +771,13 @@ public class OfflineConversionDataSet extends APINode {
       this.requestField("currency", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestCustomAudienceInfoField () {
+      return this.requestCustomAudienceInfoField(true);
+    }
+    public APIRequestGetAdAccounts requestCustomAudienceInfoField (boolean value) {
+      this.requestField("custom_audience_info", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestDisableReasonField () {
       return this.requestDisableReasonField(true);
     }
@@ -894,6 +925,13 @@ public class OfflineConversionDataSet extends APINode {
       this.requestField("is_tax_id_required", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestLiableAddressField () {
+      return this.requestLiableAddressField(true);
+    }
+    public APIRequestGetAdAccounts requestLiableAddressField (boolean value) {
+      this.requestField("liable_address", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestLineNumbersField () {
       return this.requestLineNumbersField(true);
     }
@@ -943,6 +981,13 @@ public class OfflineConversionDataSet extends APINode {
       this.requestField("owner", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetAdAccounts requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestPartnerField () {
       return this.requestPartnerField(true);
     }
@@ -957,11 +1002,25 @@ public class OfflineConversionDataSet extends APINode {
       this.requestField("rf_spec", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestSendBillToAddressField () {
+      return this.requestSendBillToAddressField(true);
+    }
+    public APIRequestGetAdAccounts requestSendBillToAddressField (boolean value) {
+      this.requestField("send_bill_to_address", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestShowCheckoutExperienceField () {
       return this.requestShowCheckoutExperienceField(true);
     }
     public APIRequestGetAdAccounts requestShowCheckoutExperienceField (boolean value) {
       this.requestField("show_checkout_experience", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestSoldToAddressField () {
+      return this.requestSoldToAddressField(true);
+    }
+    public APIRequestGetAdAccounts requestSoldToAddressField (boolean value) {
+      this.requestField("sold_to_address", value);
       return this;
     }
     public APIRequestGetAdAccounts requestSpendCapField () {
@@ -1032,6 +1091,13 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetAdAccounts requestUserTosAcceptedField (boolean value) {
       this.requestField("user_tos_accepted", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestViewableBusinessField () {
+      return this.requestViewableBusinessField(true);
+    }
+    public APIRequestGetAdAccounts requestViewableBusinessField (boolean value) {
+      this.requestField("viewable_business", value);
       return this;
     }
   }
@@ -1176,6 +1242,7 @@ public class OfflineConversionDataSet extends APINode {
       "block_offline_analytics",
       "collaborative_ads_managed_partner_business_info",
       "collaborative_ads_managed_partner_eligibility",
+      "collaborative_ads_partner_premium_options",
       "created_by",
       "created_time",
       "extended_updated_time",
@@ -1302,6 +1369,13 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetAgencies requestCollaborativeAdsManagedPartnerEligibilityField (boolean value) {
       this.requestField("collaborative_ads_managed_partner_eligibility", value);
+      return this;
+    }
+    public APIRequestGetAgencies requestCollaborativeAdsPartnerPremiumOptionsField () {
+      return this.requestCollaborativeAdsPartnerPremiumOptionsField(true);
+    }
+    public APIRequestGetAgencies requestCollaborativeAdsPartnerPremiumOptionsField (boolean value) {
+      this.requestField("collaborative_ads_partner_premium_options", value);
       return this;
     }
     public APIRequestGetAgencies requestCreatedByField () {
@@ -1590,6 +1664,7 @@ public class OfflineConversionDataSet extends APINode {
       "name",
       "operation_status",
       "opt_out_link",
+      "owner_business",
       "page_deletion_marked_delete_time",
       "permission_for_actions",
       "pixel_id",
@@ -1869,6 +1944,13 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetAudiences requestOptOutLinkField (boolean value) {
       this.requestField("opt_out_link", value);
+      return this;
+    }
+    public APIRequestGetAudiences requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetAudiences requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
       return this;
     }
     public APIRequestGetAudiences requestPageDeletionMarkedDeleteTimeField () {
@@ -3154,6 +3236,7 @@ public class OfflineConversionDataSet extends APINode {
       "business",
       "config",
       "creation_time",
+      "creator",
       "description",
       "duplicate_entries",
       "enable_auto_assign_to_accounts",
@@ -3169,6 +3252,7 @@ public class OfflineConversionDataSet extends APINode {
       "match_rate_approx",
       "matched_entries",
       "name",
+      "owner_business",
       "usage",
       "valid_entries",
     };
@@ -3283,6 +3367,13 @@ public class OfflineConversionDataSet extends APINode {
       this.requestField("creation_time", value);
       return this;
     }
+    public APIRequestGet requestCreatorField () {
+      return this.requestCreatorField(true);
+    }
+    public APIRequestGet requestCreatorField (boolean value) {
+      this.requestField("creator", value);
+      return this;
+    }
     public APIRequestGet requestDescriptionField () {
       return this.requestDescriptionField(true);
     }
@@ -3386,6 +3477,13 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGet requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGet requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGet requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
       return this;
     }
     public APIRequestGet requestUsageField () {
@@ -3644,6 +3742,7 @@ public class OfflineConversionDataSet extends APINode {
     this.mBusiness = instance.mBusiness;
     this.mConfig = instance.mConfig;
     this.mCreationTime = instance.mCreationTime;
+    this.mCreator = instance.mCreator;
     this.mDescription = instance.mDescription;
     this.mDuplicateEntries = instance.mDuplicateEntries;
     this.mEnableAutoAssignToAccounts = instance.mEnableAutoAssignToAccounts;
@@ -3659,6 +3758,7 @@ public class OfflineConversionDataSet extends APINode {
     this.mMatchRateApprox = instance.mMatchRateApprox;
     this.mMatchedEntries = instance.mMatchedEntries;
     this.mName = instance.mName;
+    this.mOwnerBusiness = instance.mOwnerBusiness;
     this.mUsage = instance.mUsage;
     this.mValidEntries = instance.mValidEntries;
     this.context = instance.context;

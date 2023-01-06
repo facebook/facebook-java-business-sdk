@@ -376,6 +376,7 @@ public class ProductGroup extends APINode {
       "origin_country",
       "parent_product_id",
       "pattern",
+      "post_conversion_signal_based_enforcement_appeal_eligibility",
       "price",
       "product_catalog",
       "product_feed",
@@ -843,6 +844,13 @@ public class ProductGroup extends APINode {
     }
     public APIRequestGetProducts requestPatternField (boolean value) {
       this.requestField("pattern", value);
+      return this;
+    }
+    public APIRequestGetProducts requestPostConversionSignalBasedEnforcementAppealEligibilityField () {
+      return this.requestPostConversionSignalBasedEnforcementAppealEligibilityField(true);
+    }
+    public APIRequestGetProducts requestPostConversionSignalBasedEnforcementAppealEligibilityField (boolean value) {
+      this.requestField("post_conversion_signal_based_enforcement_appeal_eligibility", value);
       return this;
     }
     public APIRequestGetProducts requestPriceField () {

@@ -766,6 +766,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_RTB_FLAG("rtb_flag"),
       @SerializedName("site_category")
       VALUE_SITE_CATEGORY("site_category"),
+      @SerializedName("targeting_automation")
+      VALUE_TARGETING_AUTOMATION("targeting_automation"),
       @SerializedName("targeting_optimization")
       VALUE_TARGETING_OPTIMIZATION("targeting_optimization"),
       @SerializedName("targeting_relaxation_types")

@@ -332,6 +332,10 @@ public class CommerceMerchantSettings extends APINode {
     return new APIRequestGetCommerceTransactions(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetOnsiteConversionEvents getOnsiteConversionEvents() {
+    return new APIRequestGetOnsiteConversionEvents(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetOrderManagementApps getOrderManagementApps() {
     return new APIRequestGetOrderManagementApps(this.getPrefixedId().toString(), context);
   }
@@ -346,6 +350,10 @@ public class CommerceMerchantSettings extends APINode {
 
   public APIRequestGetReturns getReturns() {
     return new APIRequestGetReturns(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetSellerIssues getSellerIssues() {
+    return new APIRequestGetSellerIssues(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetSetupStatus getSetupStatus() {
@@ -1196,6 +1204,122 @@ public class CommerceMerchantSettings extends APINode {
     }
   }
 
+  public static class APIRequestGetOnsiteConversionEvents extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "created_after",
+      "created_before",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetOnsiteConversionEvents.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetOnsiteConversionEvents(String nodeId, APIContext context) {
+      super(context, nodeId, "/onsite_conversion_events", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetOnsiteConversionEvents setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOnsiteConversionEvents setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetOnsiteConversionEvents setCreatedAfter (String createdAfter) {
+      this.setParam("created_after", createdAfter);
+      return this;
+    }
+
+    public APIRequestGetOnsiteConversionEvents setCreatedBefore (String createdBefore) {
+      this.setParam("created_before", createdBefore);
+      return this;
+    }
+
+    public APIRequestGetOnsiteConversionEvents requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetOnsiteConversionEvents requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOnsiteConversionEvents requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetOnsiteConversionEvents requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOnsiteConversionEvents requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOnsiteConversionEvents requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetOrderManagementApps extends APIRequest<Application> {
 
     APINodeList<Application> lastResponse = null;
@@ -1232,6 +1356,7 @@ public class CommerceMerchantSettings extends APINode {
       "auto_event_mapping_android",
       "auto_event_mapping_ios",
       "auto_event_setup_enabled",
+      "business",
       "canvas_fluid_height",
       "canvas_fluid_width",
       "canvas_url",
@@ -1277,6 +1402,7 @@ public class CommerceMerchantSettings extends APINode {
       "name",
       "namespace",
       "object_store_urls",
+      "owner_business",
       "page_tab_default_name",
       "page_tab_url",
       "photo_url",
@@ -1572,6 +1698,13 @@ public class CommerceMerchantSettings extends APINode {
     }
     public APIRequestGetOrderManagementApps requestAutoEventSetupEnabledField (boolean value) {
       this.requestField("auto_event_setup_enabled", value);
+      return this;
+    }
+    public APIRequestGetOrderManagementApps requestBusinessField () {
+      return this.requestBusinessField(true);
+    }
+    public APIRequestGetOrderManagementApps requestBusinessField (boolean value) {
+      this.requestField("business", value);
       return this;
     }
     public APIRequestGetOrderManagementApps requestCanvasFluidHeightField () {
@@ -1887,6 +2020,13 @@ public class CommerceMerchantSettings extends APINode {
     }
     public APIRequestGetOrderManagementApps requestObjectStoreUrlsField (boolean value) {
       this.requestField("object_store_urls", value);
+      return this;
+    }
+    public APIRequestGetOrderManagementApps requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetOrderManagementApps requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
       return this;
     }
     public APIRequestGetOrderManagementApps requestPageTabDefaultNameField () {
@@ -2224,15 +2364,17 @@ public class CommerceMerchantSettings extends APINode {
 
     public static final String[] FIELDS = {
       "business",
+      "catalog_store",
       "commerce_merchant_settings",
+      "creator_user",
       "da_display_settings",
       "default_image_url",
       "fallback_image_url",
       "feed_count",
       "id",
       "is_catalog_segment",
-      "latest_feed_upload_session",
       "name",
+      "owner_business",
       "product_count",
       "store_catalog_settings",
       "vertical",
@@ -2334,11 +2476,25 @@ public class CommerceMerchantSettings extends APINode {
       this.requestField("business", value);
       return this;
     }
+    public APIRequestGetProductCatalogs requestCatalogStoreField () {
+      return this.requestCatalogStoreField(true);
+    }
+    public APIRequestGetProductCatalogs requestCatalogStoreField (boolean value) {
+      this.requestField("catalog_store", value);
+      return this;
+    }
     public APIRequestGetProductCatalogs requestCommerceMerchantSettingsField () {
       return this.requestCommerceMerchantSettingsField(true);
     }
     public APIRequestGetProductCatalogs requestCommerceMerchantSettingsField (boolean value) {
       this.requestField("commerce_merchant_settings", value);
+      return this;
+    }
+    public APIRequestGetProductCatalogs requestCreatorUserField () {
+      return this.requestCreatorUserField(true);
+    }
+    public APIRequestGetProductCatalogs requestCreatorUserField (boolean value) {
+      this.requestField("creator_user", value);
       return this;
     }
     public APIRequestGetProductCatalogs requestDaDisplaySettingsField () {
@@ -2383,18 +2539,18 @@ public class CommerceMerchantSettings extends APINode {
       this.requestField("is_catalog_segment", value);
       return this;
     }
-    public APIRequestGetProductCatalogs requestLatestFeedUploadSessionField () {
-      return this.requestLatestFeedUploadSessionField(true);
-    }
-    public APIRequestGetProductCatalogs requestLatestFeedUploadSessionField (boolean value) {
-      this.requestField("latest_feed_upload_session", value);
-      return this;
-    }
     public APIRequestGetProductCatalogs requestNameField () {
       return this.requestNameField(true);
     }
     public APIRequestGetProductCatalogs requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetProductCatalogs requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetProductCatalogs requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
       return this;
     }
     public APIRequestGetProductCatalogs requestProductCountField () {
@@ -2546,6 +2702,110 @@ public class CommerceMerchantSettings extends APINode {
 
     @Override
     public APIRequestGetReturns requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetSellerIssues extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetSellerIssues.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetSellerIssues(String nodeId, APIContext context) {
+      super(context, nodeId, "/seller_issues", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetSellerIssues setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSellerIssues setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetSellerIssues requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetSellerIssues requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSellerIssues requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetSellerIssues requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSellerIssues requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSellerIssues requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -2984,6 +3244,7 @@ public class CommerceMerchantSettings extends APINode {
       "fb_sales_channel",
       "id",
       "ig_sales_channel",
+      "workspace",
     };
 
     @Override
@@ -3094,6 +3355,13 @@ public class CommerceMerchantSettings extends APINode {
     }
     public APIRequestGetShops requestIgSalesChannelField (boolean value) {
       this.requestField("ig_sales_channel", value);
+      return this;
+    }
+    public APIRequestGetShops requestWorkspaceField () {
+      return this.requestWorkspaceField(true);
+    }
+    public APIRequestGetShops requestWorkspaceField (boolean value) {
+      this.requestField("workspace", value);
       return this;
     }
   }

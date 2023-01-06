@@ -21,6 +21,8 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Map;
+import java.util.HashMap;
 
 /**
  * Server side pixel event response.
@@ -36,6 +38,9 @@ public class EventResponse {
 
   @SerializedName("fbtrace_id")
   private String fbTraceId = null;
+
+  @SerializedName("custom_endpoint_responses")
+  private Map<String, CustomEndpointResponse> customEndpointResponses;
 
   /**
    * Default Constructor.
@@ -54,6 +59,7 @@ public class EventResponse {
     this.eventsReceived = eventsReceived;
     this.messages = messages;
     this.fbTraceId = fbTraceId;
+    this.customEndpointResponses = new HashMap();
   }
 
   /**
@@ -109,6 +115,27 @@ public class EventResponse {
     this.messages.add(messagesItem);
     return this;
   }
+
+  /**
+   * Set responses that map to each custom endpoint that we sent the events to.
+   *
+   * @param customEndpointResponses Map of requests to endpoints
+   */
+
+  public void setCustomEndpointResponses(Map<String, CustomEndpointResponse> customEndpointResponses) {
+    this.customEndpointResponses = customEndpointResponses;
+  }
+
+  /**
+   * Gets a map that maps each response to each custom endpoint that we sent the events to.
+   *
+   * @return customEndpointResponses Map of requests to endpoints
+   */
+
+  public Map<String, CustomEndpointResponse> getCustomEndpointResponses() {
+    return customEndpointResponses;
+  }
+
 
   /**
    * Get response messages

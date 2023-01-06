@@ -2013,7 +2013,6 @@ public class Group extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "body",
       "description",
       "title",
     };
@@ -2073,15 +2072,6 @@ public class Group extends APINode {
       return this;
     }
 
-
-    public APIRequestCreateFeaturedCard setBody (Map<String, String> body) {
-      this.setParam("body", body);
-      return this;
-    }
-    public APIRequestCreateFeaturedCard setBody (String body) {
-      this.setParam("body", body);
-      return this;
-    }
 
     public APIRequestCreateFeaturedCard setDescription (Map<String, String> description) {
       this.setParam("description", description);
@@ -4705,7 +4695,6 @@ public class Group extends APINode {
       "is_audio_only",
       "is_spherical",
       "original_fov",
-      "planned_start_time",
       "privacy",
       "projection",
       "published",
@@ -4853,15 +4842,6 @@ public class Group extends APINode {
     }
     public APIRequestCreateLiveVideo setOriginalFov (String originalFov) {
       this.setParam("original_fov", originalFov);
-      return this;
-    }
-
-    public APIRequestCreateLiveVideo setPlannedStartTime (Long plannedStartTime) {
-      this.setParam("planned_start_time", plannedStartTime);
-      return this;
-    }
-    public APIRequestCreateLiveVideo setPlannedStartTime (String plannedStartTime) {
-      this.setParam("planned_start_time", plannedStartTime);
       return this;
     }
 
@@ -6604,6 +6584,7 @@ public class Group extends APINode {
 
     public static final String[] FIELDS = {
       "ad_breaks",
+      "admin_creator",
       "audio_isrc",
       "backdated_time",
       "backdated_time_granularity",
@@ -6751,6 +6732,13 @@ public class Group extends APINode {
     }
     public APIRequestGetVideos requestAdBreaksField (boolean value) {
       this.requestField("ad_breaks", value);
+      return this;
+    }
+    public APIRequestGetVideos requestAdminCreatorField () {
+      return this.requestAdminCreatorField(true);
+    }
+    public APIRequestGetVideos requestAdminCreatorField (boolean value) {
+      this.requestField("admin_creator", value);
       return this;
     }
     public APIRequestGetVideos requestAudioIsrcField () {
@@ -8302,94 +8290,32 @@ public class Group extends APINode {
   }
 
   public static enum EnumPurpose {
-      @SerializedName("BOOKS")
-      VALUE_BOOKS("BOOKS"),
       @SerializedName("CASUAL")
       VALUE_CASUAL("CASUAL"),
-      @SerializedName("CLOSE_FRIENDS")
-      VALUE_CLOSE_FRIENDS("CLOSE_FRIENDS"),
-      @SerializedName("CLUB")
-      VALUE_CLUB("CLUB"),
-      @SerializedName("COUPLE")
-      VALUE_COUPLE("COUPLE"),
       @SerializedName("COWORKERS")
       VALUE_COWORKERS("COWORKERS"),
       @SerializedName("CUSTOM")
       VALUE_CUSTOM("CUSTOM"),
-      @SerializedName("DEALS")
-      VALUE_DEALS("DEALS"),
-      @SerializedName("EPHEMERAL")
-      VALUE_EPHEMERAL("EPHEMERAL"),
-      @SerializedName("EVENT_PLANNING")
-      VALUE_EVENT_PLANNING("EVENT_PLANNING"),
-      @SerializedName("FAMILY")
-      VALUE_FAMILY("FAMILY"),
-      @SerializedName("FANDOM_RADAR")
-      VALUE_FANDOM_RADAR("FANDOM_RADAR"),
-      @SerializedName("FANTASY_LEAGUE")
-      VALUE_FANTASY_LEAGUE("FANTASY_LEAGUE"),
-      @SerializedName("FITNESS")
-      VALUE_FITNESS("FITNESS"),
       @SerializedName("FOR_SALE")
       VALUE_FOR_SALE("FOR_SALE"),
       @SerializedName("FOR_WORK")
       VALUE_FOR_WORK("FOR_WORK"),
-      @SerializedName("FRATERNITY")
-      VALUE_FRATERNITY("FRATERNITY"),
       @SerializedName("GAME")
       VALUE_GAME("GAME"),
       @SerializedName("HEALTH_SUPPORT")
       VALUE_HEALTH_SUPPORT("HEALTH_SUPPORT"),
-      @SerializedName("HIGH_SCHOOL_FORUM")
-      VALUE_HIGH_SCHOOL_FORUM("HIGH_SCHOOL_FORUM"),
       @SerializedName("JOBS")
       VALUE_JOBS("JOBS"),
       @SerializedName("LEARNING")
       VALUE_LEARNING("LEARNING"),
-      @SerializedName("MENTORSHIP")
-      VALUE_MENTORSHIP("MENTORSHIP"),
-      @SerializedName("MUSIC_CASA_BUNDLE")
-      VALUE_MUSIC_CASA_BUNDLE("MUSIC_CASA_BUNDLE"),
-      @SerializedName("NEIGHBORS")
-      VALUE_NEIGHBORS("NEIGHBORS"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
-      @SerializedName("OCULUS")
-      VALUE_OCULUS("OCULUS"),
       @SerializedName("PARENTING")
       VALUE_PARENTING("PARENTING"),
-      @SerializedName("PARENTS")
-      VALUE_PARENTS("PARENTS"),
-      @SerializedName("PROJECT")
-      VALUE_PROJECT("PROJECT"),
-      @SerializedName("REAL_WORLD")
-      VALUE_REAL_WORLD("REAL_WORLD"),
       @SerializedName("REAL_WORLD_AT_WORK")
       VALUE_REAL_WORLD_AT_WORK("REAL_WORLD_AT_WORK"),
-      @SerializedName("RESTYLE")
-      VALUE_RESTYLE("RESTYLE"),
-      @SerializedName("SCHOOL_CLASS")
-      VALUE_SCHOOL_CLASS("SCHOOL_CLASS"),
-      @SerializedName("SORORITY")
-      VALUE_SORORITY("SORORITY"),
-      @SerializedName("SPORTS")
-      VALUE_SPORTS("SPORTS"),
-      @SerializedName("SPORTS_ACTIVITY")
-      VALUE_SPORTS_ACTIVITY("SPORTS_ACTIVITY"),
       @SerializedName("STREAMER")
       VALUE_STREAMER("STREAMER"),
-      @SerializedName("STUDY_GROUP")
-      VALUE_STUDY_GROUP("STUDY_GROUP"),
-      @SerializedName("SUPPORT")
-      VALUE_SUPPORT("SUPPORT"),
-      @SerializedName("TEAMMATES")
-      VALUE_TEAMMATES("TEAMMATES"),
-      @SerializedName("THEME")
-      VALUE_THEME("THEME"),
-      @SerializedName("TOGETHER_VR")
-      VALUE_TOGETHER_VR("TOGETHER_VR"),
-      @SerializedName("TRAVEL_PLANNING")
-      VALUE_TRAVEL_PLANNING("TRAVEL_PLANNING"),
       @SerializedName("WORK_ANNOUNCEMENT")
       VALUE_WORK_ANNOUNCEMENT("WORK_ANNOUNCEMENT"),
       @SerializedName("WORK_DEMO_GROUP")
@@ -8404,8 +8330,6 @@ public class Group extends APINode {
       VALUE_WORK_FOR_SALE("WORK_FOR_SALE"),
       @SerializedName("WORK_GARDEN")
       VALUE_WORK_GARDEN("WORK_GARDEN"),
-      @SerializedName("WORK_GUEST_GROUP")
-      VALUE_WORK_GUEST_GROUP("WORK_GUEST_GROUP"),
       @SerializedName("WORK_INTEGRITY")
       VALUE_WORK_INTEGRITY("WORK_INTEGRITY"),
       @SerializedName("WORK_LEARNING")
@@ -8416,8 +8340,6 @@ public class Group extends APINode {
       VALUE_WORK_MULTI_COMPANY("WORK_MULTI_COMPANY"),
       @SerializedName("WORK_RECRUITING")
       VALUE_WORK_RECRUITING("WORK_RECRUITING"),
-      @SerializedName("WORK_RESUME_REVIEW")
-      VALUE_WORK_RESUME_REVIEW("WORK_RESUME_REVIEW"),
       @SerializedName("WORK_SOCIAL")
       VALUE_WORK_SOCIAL("WORK_SOCIAL"),
       @SerializedName("WORK_STAGES")
@@ -8426,8 +8348,6 @@ public class Group extends APINode {
       VALUE_WORK_TEAM("WORK_TEAM"),
       @SerializedName("WORK_TEAMWORK")
       VALUE_WORK_TEAMWORK("WORK_TEAMWORK"),
-      @SerializedName("WORK_VC_CALL")
-      VALUE_WORK_VC_CALL("WORK_VC_CALL"),
       ;
 
       private String value;
@@ -8443,94 +8363,32 @@ public class Group extends APINode {
   }
 
   public static enum EnumGroupType {
-      @SerializedName("BOOKS")
-      VALUE_BOOKS("BOOKS"),
       @SerializedName("CASUAL")
       VALUE_CASUAL("CASUAL"),
-      @SerializedName("CLOSE_FRIENDS")
-      VALUE_CLOSE_FRIENDS("CLOSE_FRIENDS"),
-      @SerializedName("CLUB")
-      VALUE_CLUB("CLUB"),
-      @SerializedName("COUPLE")
-      VALUE_COUPLE("COUPLE"),
       @SerializedName("COWORKERS")
       VALUE_COWORKERS("COWORKERS"),
       @SerializedName("CUSTOM")
       VALUE_CUSTOM("CUSTOM"),
-      @SerializedName("DEALS")
-      VALUE_DEALS("DEALS"),
-      @SerializedName("EPHEMERAL")
-      VALUE_EPHEMERAL("EPHEMERAL"),
-      @SerializedName("EVENT_PLANNING")
-      VALUE_EVENT_PLANNING("EVENT_PLANNING"),
-      @SerializedName("FAMILY")
-      VALUE_FAMILY("FAMILY"),
-      @SerializedName("FANDOM_RADAR")
-      VALUE_FANDOM_RADAR("FANDOM_RADAR"),
-      @SerializedName("FANTASY_LEAGUE")
-      VALUE_FANTASY_LEAGUE("FANTASY_LEAGUE"),
-      @SerializedName("FITNESS")
-      VALUE_FITNESS("FITNESS"),
       @SerializedName("FOR_SALE")
       VALUE_FOR_SALE("FOR_SALE"),
       @SerializedName("FOR_WORK")
       VALUE_FOR_WORK("FOR_WORK"),
-      @SerializedName("FRATERNITY")
-      VALUE_FRATERNITY("FRATERNITY"),
       @SerializedName("GAME")
       VALUE_GAME("GAME"),
       @SerializedName("HEALTH_SUPPORT")
       VALUE_HEALTH_SUPPORT("HEALTH_SUPPORT"),
-      @SerializedName("HIGH_SCHOOL_FORUM")
-      VALUE_HIGH_SCHOOL_FORUM("HIGH_SCHOOL_FORUM"),
       @SerializedName("JOBS")
       VALUE_JOBS("JOBS"),
       @SerializedName("LEARNING")
       VALUE_LEARNING("LEARNING"),
-      @SerializedName("MENTORSHIP")
-      VALUE_MENTORSHIP("MENTORSHIP"),
-      @SerializedName("MUSIC_CASA_BUNDLE")
-      VALUE_MUSIC_CASA_BUNDLE("MUSIC_CASA_BUNDLE"),
-      @SerializedName("NEIGHBORS")
-      VALUE_NEIGHBORS("NEIGHBORS"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
-      @SerializedName("OCULUS")
-      VALUE_OCULUS("OCULUS"),
       @SerializedName("PARENTING")
       VALUE_PARENTING("PARENTING"),
-      @SerializedName("PARENTS")
-      VALUE_PARENTS("PARENTS"),
-      @SerializedName("PROJECT")
-      VALUE_PROJECT("PROJECT"),
-      @SerializedName("REAL_WORLD")
-      VALUE_REAL_WORLD("REAL_WORLD"),
       @SerializedName("REAL_WORLD_AT_WORK")
       VALUE_REAL_WORLD_AT_WORK("REAL_WORLD_AT_WORK"),
-      @SerializedName("RESTYLE")
-      VALUE_RESTYLE("RESTYLE"),
-      @SerializedName("SCHOOL_CLASS")
-      VALUE_SCHOOL_CLASS("SCHOOL_CLASS"),
-      @SerializedName("SORORITY")
-      VALUE_SORORITY("SORORITY"),
-      @SerializedName("SPORTS")
-      VALUE_SPORTS("SPORTS"),
-      @SerializedName("SPORTS_ACTIVITY")
-      VALUE_SPORTS_ACTIVITY("SPORTS_ACTIVITY"),
       @SerializedName("STREAMER")
       VALUE_STREAMER("STREAMER"),
-      @SerializedName("STUDY_GROUP")
-      VALUE_STUDY_GROUP("STUDY_GROUP"),
-      @SerializedName("SUPPORT")
-      VALUE_SUPPORT("SUPPORT"),
-      @SerializedName("TEAMMATES")
-      VALUE_TEAMMATES("TEAMMATES"),
-      @SerializedName("THEME")
-      VALUE_THEME("THEME"),
-      @SerializedName("TOGETHER_VR")
-      VALUE_TOGETHER_VR("TOGETHER_VR"),
-      @SerializedName("TRAVEL_PLANNING")
-      VALUE_TRAVEL_PLANNING("TRAVEL_PLANNING"),
       @SerializedName("WORK_ANNOUNCEMENT")
       VALUE_WORK_ANNOUNCEMENT("WORK_ANNOUNCEMENT"),
       @SerializedName("WORK_DEMO_GROUP")
@@ -8545,8 +8403,6 @@ public class Group extends APINode {
       VALUE_WORK_FOR_SALE("WORK_FOR_SALE"),
       @SerializedName("WORK_GARDEN")
       VALUE_WORK_GARDEN("WORK_GARDEN"),
-      @SerializedName("WORK_GUEST_GROUP")
-      VALUE_WORK_GUEST_GROUP("WORK_GUEST_GROUP"),
       @SerializedName("WORK_INTEGRITY")
       VALUE_WORK_INTEGRITY("WORK_INTEGRITY"),
       @SerializedName("WORK_LEARNING")
@@ -8557,8 +8413,6 @@ public class Group extends APINode {
       VALUE_WORK_MULTI_COMPANY("WORK_MULTI_COMPANY"),
       @SerializedName("WORK_RECRUITING")
       VALUE_WORK_RECRUITING("WORK_RECRUITING"),
-      @SerializedName("WORK_RESUME_REVIEW")
-      VALUE_WORK_RESUME_REVIEW("WORK_RESUME_REVIEW"),
       @SerializedName("WORK_SOCIAL")
       VALUE_WORK_SOCIAL("WORK_SOCIAL"),
       @SerializedName("WORK_STAGES")
@@ -8567,8 +8421,6 @@ public class Group extends APINode {
       VALUE_WORK_TEAM("WORK_TEAM"),
       @SerializedName("WORK_TEAMWORK")
       VALUE_WORK_TEAMWORK("WORK_TEAMWORK"),
-      @SerializedName("WORK_VC_CALL")
-      VALUE_WORK_VC_CALL("WORK_VC_CALL"),
       ;
 
       private String value;

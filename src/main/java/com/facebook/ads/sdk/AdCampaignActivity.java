@@ -171,6 +171,8 @@ public class AdCampaignActivity extends APINode {
   private String mUpdatedTimeNew = null;
   @SerializedName("updated_time_old")
   private String mUpdatedTimeOld = null;
+  @SerializedName("user")
+  private User mUser = null;
   protected static Gson gson = null;
 
   AdCampaignActivity() {
@@ -617,6 +619,13 @@ public class AdCampaignActivity extends APINode {
     return mUpdatedTimeOld;
   }
 
+  public User getFieldUser() {
+    if (mUser != null) {
+      mUser.context = getContext();
+    }
+    return mUser;
+  }
+
 
 
   public static class APIRequestGet extends APIRequest<AdCampaignActivity> {
@@ -688,6 +697,7 @@ public class AdCampaignActivity extends APINode {
       "targeting_old",
       "updated_time_new",
       "updated_time_old",
+      "user",
     };
 
     @Override
@@ -1185,6 +1195,13 @@ public class AdCampaignActivity extends APINode {
       this.requestField("updated_time_old", value);
       return this;
     }
+    public APIRequestGet requestUserField () {
+      return this.requestUserField(true);
+    }
+    public APIRequestGet requestUserField (boolean value) {
+      this.requestField("user", value);
+      return this;
+    }
   }
 
   public static enum EnumBidStrategyNew {
@@ -1498,6 +1515,7 @@ public class AdCampaignActivity extends APINode {
     this.mTargetingOld = instance.mTargetingOld;
     this.mUpdatedTimeNew = instance.mUpdatedTimeNew;
     this.mUpdatedTimeOld = instance.mUpdatedTimeOld;
+    this.mUser = instance.mUser;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
