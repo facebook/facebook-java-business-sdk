@@ -1,5 +1,6 @@
 /**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
  * You are hereby granted a non-exclusive, worldwide, royalty-free license to
  * use, copy, modify, and distribute this software in source code or binary
@@ -38,8 +39,8 @@ public class AdAccountAdSetsPostAdSetCreateCpaAppEvents {
       .setName("A CPA Ad Set optimized for App Events")
       .setCampaignId("<adCampaignAppInstallsID>")
       .setDailyBudget(300L)
-      .setStartTime("2022-09-26T21:39:28-0700")
-      .setEndTime("2022-10-03T21:39:28-0700")
+      .setStartTime("2023-01-16T15:02:32-0800")
+      .setEndTime("2023-01-23T15:02:32-0800")
       .setBillingEvent(AdSet.EnumBillingEvent.VALUE_IMPRESSIONS)
       .setOptimizationGoal(AdSet.EnumOptimizationGoal.VALUE_OFFSITE_CONVERSIONS)
       .setBidAmount(100L)
