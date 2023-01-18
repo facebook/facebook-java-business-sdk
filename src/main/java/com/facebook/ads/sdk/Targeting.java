@@ -217,6 +217,8 @@ public class Targeting extends APINode {
   private List<String> mSiteCategory = null;
   @SerializedName("targeting_optimization")
   private String mTargetingOptimization = null;
+  @SerializedName("targeting_relaxation_types")
+  private TargetingRelaxation mTargetingRelaxationTypes = null;
   @SerializedName("user_adclusters")
   private List<IDName> mUserAdclusters = null;
   @SerializedName("user_device")
@@ -1293,6 +1295,20 @@ public class Targeting extends APINode {
     return this;
   }
 
+  public TargetingRelaxation getFieldTargetingRelaxationTypes() {
+    return mTargetingRelaxationTypes;
+  }
+
+  public Targeting setFieldTargetingRelaxationTypes(TargetingRelaxation value) {
+    this.mTargetingRelaxationTypes = value;
+    return this;
+  }
+
+  public Targeting setFieldTargetingRelaxationTypes(String value) {
+    Type type = new TypeToken<TargetingRelaxation>(){}.getType();
+    this.mTargetingRelaxationTypes = TargetingRelaxation.getGson().fromJson(value, type);
+    return this;
+  }
   public List<IDName> getFieldUserAdclusters() {
     return mUserAdclusters;
   }
@@ -1516,6 +1532,7 @@ public class Targeting extends APINode {
     this.mRelationshipStatuses = instance.mRelationshipStatuses;
     this.mSiteCategory = instance.mSiteCategory;
     this.mTargetingOptimization = instance.mTargetingOptimization;
+    this.mTargetingRelaxationTypes = instance.mTargetingRelaxationTypes;
     this.mUserAdclusters = instance.mUserAdclusters;
     this.mUserDevice = instance.mUserDevice;
     this.mUserEvent = instance.mUserEvent;

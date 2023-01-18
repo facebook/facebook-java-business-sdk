@@ -369,6 +369,12 @@ public class AdAccountAdVolume extends APINode {
       VALUE_AUTOMATIC_PLACEMENTS("AUTOMATIC_PLACEMENTS"),
       @SerializedName("CAPI")
       VALUE_CAPI("CAPI"),
+      @SerializedName("COST_GOAL")
+      VALUE_COST_GOAL("COST_GOAL"),
+      @SerializedName("COST_GOAL_BUDGET_LIMITED")
+      VALUE_COST_GOAL_BUDGET_LIMITED("COST_GOAL_BUDGET_LIMITED"),
+      @SerializedName("COST_GOAL_CPA_LIMITED")
+      VALUE_COST_GOAL_CPA_LIMITED("COST_GOAL_CPA_LIMITED"),
       @SerializedName("CREATIVE_BADGE")
       VALUE_CREATIVE_BADGE("CREATIVE_BADGE"),
       @SerializedName("CREATIVE_FATIGUE")
@@ -393,6 +399,8 @@ public class AdAccountAdVolume extends APINode {
       VALUE_PREDICTIVE_CREATIVE_LIMITED("PREDICTIVE_CREATIVE_LIMITED"),
       @SerializedName("REVERT")
       VALUE_REVERT("REVERT"),
+      @SerializedName("SIGNALS_GROWTH_CAPI")
+      VALUE_SIGNALS_GROWTH_CAPI("SIGNALS_GROWTH_CAPI"),
       @SerializedName("SYD_TEST_MODE")
       VALUE_SYD_TEST_MODE("SYD_TEST_MODE"),
       @SerializedName("TOP_ADSETS_WITH_ADS_UNDER_CAP")

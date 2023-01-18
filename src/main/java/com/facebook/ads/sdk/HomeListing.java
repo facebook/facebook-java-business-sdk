@@ -143,6 +143,8 @@ public class HomeListing extends APINode {
   private Object mUnitPrice = null;
   @SerializedName("url")
   private String mUrl = null;
+  @SerializedName("visibility")
+  private EnumVisibility mVisibility = null;
   @SerializedName("year_built")
   private Long mYearBuilt = null;
   protected static Gson gson = null;
@@ -556,6 +558,10 @@ public class HomeListing extends APINode {
 
   public String getFieldUrl() {
     return mUrl;
+  }
+
+  public EnumVisibility getFieldVisibility() {
+    return mVisibility;
   }
 
   public Long getFieldYearBuilt() {
@@ -1051,6 +1057,7 @@ public class HomeListing extends APINode {
       "sanitized_images",
       "unit_price",
       "url",
+      "visibility",
       "year_built",
     };
 
@@ -1451,6 +1458,13 @@ public class HomeListing extends APINode {
       this.requestField("url", value);
       return this;
     }
+    public APIRequestGet requestVisibilityField () {
+      return this.requestVisibilityField(true);
+    }
+    public APIRequestGet requestVisibilityField (boolean value) {
+      this.requestField("visibility", value);
+      return this;
+    }
     public APIRequestGet requestYearBuiltField () {
       return this.requestYearBuiltField(true);
     }
@@ -1703,6 +1717,25 @@ public class HomeListing extends APINode {
       }
   }
 
+  public static enum EnumVisibility {
+      @SerializedName("PUBLISHED")
+      VALUE_PUBLISHED("PUBLISHED"),
+      @SerializedName("STAGING")
+      VALUE_STAGING("STAGING"),
+      ;
+
+      private String value;
+
+      private EnumVisibility(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -1762,6 +1795,7 @@ public class HomeListing extends APINode {
     this.mSanitizedImages = instance.mSanitizedImages;
     this.mUnitPrice = instance.mUnitPrice;
     this.mUrl = instance.mUrl;
+    this.mVisibility = instance.mVisibility;
     this.mYearBuilt = instance.mYearBuilt;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

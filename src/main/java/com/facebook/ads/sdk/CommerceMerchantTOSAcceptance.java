@@ -54,68 +54,66 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class WhatsAppBusinessPreVerifiedPhoneNumber extends APINode {
-  @SerializedName("code_verification_status")
-  private String mCodeVerificationStatus = null;
+public class CommerceMerchantTOSAcceptance extends APINode {
+  @SerializedName("business")
+  private Business mBusiness = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("phone_number")
-  private String mPhoneNumber = null;
   protected static Gson gson = null;
 
-  WhatsAppBusinessPreVerifiedPhoneNumber() {
+  CommerceMerchantTOSAcceptance() {
   }
 
-  public WhatsAppBusinessPreVerifiedPhoneNumber(Long id, APIContext context) {
+  public CommerceMerchantTOSAcceptance(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public WhatsAppBusinessPreVerifiedPhoneNumber(String id, APIContext context) {
+  public CommerceMerchantTOSAcceptance(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public WhatsAppBusinessPreVerifiedPhoneNumber fetch() throws APIException{
-    WhatsAppBusinessPreVerifiedPhoneNumber newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public CommerceMerchantTOSAcceptance fetch() throws APIException{
+    CommerceMerchantTOSAcceptance newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static WhatsAppBusinessPreVerifiedPhoneNumber fetchById(Long id, APIContext context) throws APIException {
+  public static CommerceMerchantTOSAcceptance fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<WhatsAppBusinessPreVerifiedPhoneNumber> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<CommerceMerchantTOSAcceptance> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static WhatsAppBusinessPreVerifiedPhoneNumber fetchById(String id, APIContext context) throws APIException {
+  public static CommerceMerchantTOSAcceptance fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<WhatsAppBusinessPreVerifiedPhoneNumber> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<CommerceMerchantTOSAcceptance> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<WhatsAppBusinessPreVerifiedPhoneNumber> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<WhatsAppBusinessPreVerifiedPhoneNumber>)(
-      new APIRequest<WhatsAppBusinessPreVerifiedPhoneNumber>(context, "", "/", "GET", WhatsAppBusinessPreVerifiedPhoneNumber.getParser())
+  public static APINodeList<CommerceMerchantTOSAcceptance> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<CommerceMerchantTOSAcceptance>)(
+      new APIRequest<CommerceMerchantTOSAcceptance>(context, "", "/", "GET", CommerceMerchantTOSAcceptance.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<WhatsAppBusinessPreVerifiedPhoneNumber>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<CommerceMerchantTOSAcceptance>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", WhatsAppBusinessPreVerifiedPhoneNumber.getParser())
+      new APIRequest(context, "", "/", "GET", CommerceMerchantTOSAcceptance.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -128,12 +126,12 @@ public class WhatsAppBusinessPreVerifiedPhoneNumber extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static WhatsAppBusinessPreVerifiedPhoneNumber loadJSON(String json, APIContext context, String header) {
-    WhatsAppBusinessPreVerifiedPhoneNumber whatsAppBusinessPreVerifiedPhoneNumber = getGson().fromJson(json, WhatsAppBusinessPreVerifiedPhoneNumber.class);
+  public static CommerceMerchantTOSAcceptance loadJSON(String json, APIContext context, String header) {
+    CommerceMerchantTOSAcceptance commerceMerchantTOSAcceptance = getGson().fromJson(json, CommerceMerchantTOSAcceptance.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(whatsAppBusinessPreVerifiedPhoneNumber.toString());
+      JsonElement o2 = parser.parse(commerceMerchantTOSAcceptance.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -143,14 +141,14 @@ public class WhatsAppBusinessPreVerifiedPhoneNumber extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    whatsAppBusinessPreVerifiedPhoneNumber.context = context;
-    whatsAppBusinessPreVerifiedPhoneNumber.rawValue = json;
-    whatsAppBusinessPreVerifiedPhoneNumber.header = header;
-    return whatsAppBusinessPreVerifiedPhoneNumber;
+    commerceMerchantTOSAcceptance.context = context;
+    commerceMerchantTOSAcceptance.rawValue = json;
+    commerceMerchantTOSAcceptance.header = header;
+    return commerceMerchantTOSAcceptance;
   }
 
-  public static APINodeList<WhatsAppBusinessPreVerifiedPhoneNumber> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<WhatsAppBusinessPreVerifiedPhoneNumber> whatsAppBusinessPreVerifiedPhoneNumbers = new APINodeList<WhatsAppBusinessPreVerifiedPhoneNumber>(request, json, header);
+  public static APINodeList<CommerceMerchantTOSAcceptance> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CommerceMerchantTOSAcceptance> commerceMerchantTOSAcceptances = new APINodeList<CommerceMerchantTOSAcceptance>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -161,9 +159,9 @@ public class WhatsAppBusinessPreVerifiedPhoneNumber extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          whatsAppBusinessPreVerifiedPhoneNumbers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          commerceMerchantTOSAcceptances.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return whatsAppBusinessPreVerifiedPhoneNumbers;
+        return commerceMerchantTOSAcceptances;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -173,20 +171,20 @@ public class WhatsAppBusinessPreVerifiedPhoneNumber extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                whatsAppBusinessPreVerifiedPhoneNumbers.setCursors(before, after);
+                commerceMerchantTOSAcceptances.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            whatsAppBusinessPreVerifiedPhoneNumbers.setPaging(previous, next);
+            commerceMerchantTOSAcceptances.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              whatsAppBusinessPreVerifiedPhoneNumbers.setAppSecret(context.getAppSecretProof());
+              commerceMerchantTOSAcceptances.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              whatsAppBusinessPreVerifiedPhoneNumbers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              commerceMerchantTOSAcceptances.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -197,23 +195,23 @@ public class WhatsAppBusinessPreVerifiedPhoneNumber extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  whatsAppBusinessPreVerifiedPhoneNumbers.add(loadJSON(entry.getValue().toString(), context, header));
+                  commerceMerchantTOSAcceptances.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              whatsAppBusinessPreVerifiedPhoneNumbers.add(loadJSON(obj.toString(), context, header));
+              commerceMerchantTOSAcceptances.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return whatsAppBusinessPreVerifiedPhoneNumbers;
+          return commerceMerchantTOSAcceptances;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              whatsAppBusinessPreVerifiedPhoneNumbers.add(loadJSON(entry.getValue().toString(), context, header));
+              commerceMerchantTOSAcceptances.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return whatsAppBusinessPreVerifiedPhoneNumbers;
+          return commerceMerchantTOSAcceptances;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -230,20 +228,20 @@ public class WhatsAppBusinessPreVerifiedPhoneNumber extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              whatsAppBusinessPreVerifiedPhoneNumbers.add(loadJSON(value.toString(), context, header));
+              commerceMerchantTOSAcceptances.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return whatsAppBusinessPreVerifiedPhoneNumbers;
+            return commerceMerchantTOSAcceptances;
           }
 
           // Sixth, check if it's pure JsonObject
-          whatsAppBusinessPreVerifiedPhoneNumbers.clear();
-          whatsAppBusinessPreVerifiedPhoneNumbers.add(loadJSON(json, context, header));
-          return whatsAppBusinessPreVerifiedPhoneNumbers;
+          commerceMerchantTOSAcceptances.clear();
+          commerceMerchantTOSAcceptances.add(loadJSON(json, context, header));
+          return commerceMerchantTOSAcceptances;
         }
       }
     } catch (Exception e) {
@@ -275,62 +273,60 @@ public class WhatsAppBusinessPreVerifiedPhoneNumber extends APINode {
   }
 
 
-  public String getFieldCodeVerificationStatus() {
-    return mCodeVerificationStatus;
+  public Business getFieldBusiness() {
+    if (mBusiness != null) {
+      mBusiness.context = getContext();
+    }
+    return mBusiness;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-  public String getFieldPhoneNumber() {
-    return mPhoneNumber;
-  }
 
 
+  public static class APIRequestGet extends APIRequest<CommerceMerchantTOSAcceptance> {
 
-  public static class APIRequestGet extends APIRequest<WhatsAppBusinessPreVerifiedPhoneNumber> {
-
-    WhatsAppBusinessPreVerifiedPhoneNumber lastResponse = null;
+    CommerceMerchantTOSAcceptance lastResponse = null;
     @Override
-    public WhatsAppBusinessPreVerifiedPhoneNumber getLastResponse() {
+    public CommerceMerchantTOSAcceptance getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "code_verification_status",
+      "business",
       "id",
-      "phone_number",
     };
 
     @Override
-    public WhatsAppBusinessPreVerifiedPhoneNumber parseResponse(String response, String header) throws APIException {
-      return WhatsAppBusinessPreVerifiedPhoneNumber.parseResponse(response, getContext(), this, header).head();
+    public CommerceMerchantTOSAcceptance parseResponse(String response, String header) throws APIException {
+      return CommerceMerchantTOSAcceptance.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public WhatsAppBusinessPreVerifiedPhoneNumber execute() throws APIException {
+    public CommerceMerchantTOSAcceptance execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public WhatsAppBusinessPreVerifiedPhoneNumber execute(Map<String, Object> extraParams) throws APIException {
+    public CommerceMerchantTOSAcceptance execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<WhatsAppBusinessPreVerifiedPhoneNumber> executeAsync() throws APIException {
+    public ListenableFuture<CommerceMerchantTOSAcceptance> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<WhatsAppBusinessPreVerifiedPhoneNumber> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<CommerceMerchantTOSAcceptance> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, WhatsAppBusinessPreVerifiedPhoneNumber>() {
-           public WhatsAppBusinessPreVerifiedPhoneNumber apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, CommerceMerchantTOSAcceptance>() {
+           public CommerceMerchantTOSAcceptance apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -394,11 +390,11 @@ public class WhatsAppBusinessPreVerifiedPhoneNumber extends APINode {
       return this;
     }
 
-    public APIRequestGet requestCodeVerificationStatusField () {
-      return this.requestCodeVerificationStatusField(true);
+    public APIRequestGet requestBusinessField () {
+      return this.requestBusinessField(true);
     }
-    public APIRequestGet requestCodeVerificationStatusField (boolean value) {
-      this.requestField("code_verification_status", value);
+    public APIRequestGet requestBusinessField (boolean value) {
+      this.requestField("business", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -406,13 +402,6 @@ public class WhatsAppBusinessPreVerifiedPhoneNumber extends APINode {
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestPhoneNumberField () {
-      return this.requestPhoneNumberField(true);
-    }
-    public APIRequestGet requestPhoneNumberField (boolean value) {
-      this.requestField("phone_number", value);
       return this;
     }
   }
@@ -431,19 +420,18 @@ public class WhatsAppBusinessPreVerifiedPhoneNumber extends APINode {
     return gson;
   }
 
-  public WhatsAppBusinessPreVerifiedPhoneNumber copyFrom(WhatsAppBusinessPreVerifiedPhoneNumber instance) {
-    this.mCodeVerificationStatus = instance.mCodeVerificationStatus;
+  public CommerceMerchantTOSAcceptance copyFrom(CommerceMerchantTOSAcceptance instance) {
+    this.mBusiness = instance.mBusiness;
     this.mId = instance.mId;
-    this.mPhoneNumber = instance.mPhoneNumber;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<WhatsAppBusinessPreVerifiedPhoneNumber> getParser() {
-    return new APIRequest.ResponseParser<WhatsAppBusinessPreVerifiedPhoneNumber>() {
-      public APINodeList<WhatsAppBusinessPreVerifiedPhoneNumber> parseResponse(String response, APIContext context, APIRequest<WhatsAppBusinessPreVerifiedPhoneNumber> request, String header) throws MalformedResponseException {
-        return WhatsAppBusinessPreVerifiedPhoneNumber.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<CommerceMerchantTOSAcceptance> getParser() {
+    return new APIRequest.ResponseParser<CommerceMerchantTOSAcceptance>() {
+      public APINodeList<CommerceMerchantTOSAcceptance> parseResponse(String response, APIContext context, APIRequest<CommerceMerchantTOSAcceptance> request, String header) throws MalformedResponseException {
+        return CommerceMerchantTOSAcceptance.parseResponse(response, context, request, header);
       }
     };
   }

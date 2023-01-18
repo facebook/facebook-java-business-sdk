@@ -280,10 +280,6 @@ public class PageUpcomingChange extends APINode {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestUpdate update() {
-    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldChangeType() {
     return mChangeType;
@@ -464,120 +460,6 @@ public class PageUpcomingChange extends APINode {
       this.requestField("timer_status", value);
       return this;
     }
-  }
-
-  public static class APIRequestUpdate extends APIRequest<PageUpcomingChange> {
-
-    PageUpcomingChange lastResponse = null;
-    @Override
-    public PageUpcomingChange getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "accept",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public PageUpcomingChange parseResponse(String response, String header) throws APIException {
-      return PageUpcomingChange.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public PageUpcomingChange execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public PageUpcomingChange execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<PageUpcomingChange> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<PageUpcomingChange> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, PageUpcomingChange>() {
-           public PageUpcomingChange apply(ResponseWrapper result) {
-             try {
-               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestUpdate(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestUpdate setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestUpdate setAccept (Boolean accept) {
-      this.setParam("accept", accept);
-      return this;
-    }
-    public APIRequestUpdate setAccept (String accept) {
-      this.setParam("accept", accept);
-      return this;
-    }
-
-    public APIRequestUpdate requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestUpdate requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
 

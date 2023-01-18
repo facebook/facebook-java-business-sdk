@@ -1848,7 +1848,6 @@ public class BusinessAssetGroup extends APINode {
       "latest_sdk_version",
       "link",
       "logging_token",
-      "login_secret",
       "logo_url",
       "migrations",
       "mobile_profile_section_url",
@@ -2406,13 +2405,6 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedApplications requestLoggingTokenField (boolean value) {
       this.requestField("logging_token", value);
-      return this;
-    }
-    public APIRequestGetContainedApplications requestLoginSecretField () {
-      return this.requestLoginSecretField(true);
-    }
-    public APIRequestGetContainedApplications requestLoginSecretField (boolean value) {
-      this.requestField("login_secret", value);
       return this;
     }
     public APIRequestGetContainedApplications requestLogoUrlField () {
@@ -6275,6 +6267,8 @@ public class BusinessAssetGroup extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "ad_account_to_collaborative_ads_share_settings",
+      "agency_collaborative_ads_share_settings",
       "business",
       "catalog_store",
       "commerce_merchant_settings",
@@ -6381,6 +6375,20 @@ public class BusinessAssetGroup extends APINode {
       return this;
     }
 
+    public APIRequestGetContainedProductCatalogs requestAdAccountToCollaborativeAdsShareSettingsField () {
+      return this.requestAdAccountToCollaborativeAdsShareSettingsField(true);
+    }
+    public APIRequestGetContainedProductCatalogs requestAdAccountToCollaborativeAdsShareSettingsField (boolean value) {
+      this.requestField("ad_account_to_collaborative_ads_share_settings", value);
+      return this;
+    }
+    public APIRequestGetContainedProductCatalogs requestAgencyCollaborativeAdsShareSettingsField () {
+      return this.requestAgencyCollaborativeAdsShareSettingsField(true);
+    }
+    public APIRequestGetContainedProductCatalogs requestAgencyCollaborativeAdsShareSettingsField (boolean value) {
+      this.requestField("agency_collaborative_ads_share_settings", value);
+      return this;
+    }
     public APIRequestGetContainedProductCatalogs requestBusinessField () {
       return this.requestBusinessField(true);
     }
@@ -6923,6 +6931,8 @@ public class BusinessAssetGroup extends APINode {
       VALUE_PROFILE_PLUS_FULL_CONTROL("PROFILE_PLUS_FULL_CONTROL"),
       @SerializedName("PROFILE_PLUS_MANAGE")
       VALUE_PROFILE_PLUS_MANAGE("PROFILE_PLUS_MANAGE"),
+      @SerializedName("PROFILE_PLUS_MANAGE_LEADS")
+      VALUE_PROFILE_PLUS_MANAGE_LEADS("PROFILE_PLUS_MANAGE_LEADS"),
       @SerializedName("PROFILE_PLUS_MESSAGING")
       VALUE_PROFILE_PLUS_MESSAGING("PROFILE_PLUS_MESSAGING"),
       @SerializedName("PROFILE_PLUS_MODERATE")

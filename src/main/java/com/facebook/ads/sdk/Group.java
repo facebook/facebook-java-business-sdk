@@ -5255,6 +5255,7 @@ public class Group extends APINode {
       "gender",
       "hometown",
       "id",
+      "id_for_avatars",
       "inspirational_people",
       "install_type",
       "installed",
@@ -5467,6 +5468,13 @@ public class Group extends APINode {
     }
     public APIRequestGetOptedInMembers requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetOptedInMembers requestIdForAvatarsField () {
+      return this.requestIdForAvatarsField(true);
+    }
+    public APIRequestGetOptedInMembers requestIdForAvatarsField (boolean value) {
+      this.requestField("id_for_avatars", value);
       return this;
     }
     public APIRequestGetOptedInMembers requestInspirationalPeopleField () {
@@ -8312,8 +8320,6 @@ public class Group extends APINode {
       VALUE_NONE("NONE"),
       @SerializedName("PARENTING")
       VALUE_PARENTING("PARENTING"),
-      @SerializedName("REAL_WORLD_AT_WORK")
-      VALUE_REAL_WORLD_AT_WORK("REAL_WORLD_AT_WORK"),
       @SerializedName("STREAMER")
       VALUE_STREAMER("STREAMER"),
       @SerializedName("WORK_ANNOUNCEMENT")
@@ -8385,8 +8391,6 @@ public class Group extends APINode {
       VALUE_NONE("NONE"),
       @SerializedName("PARENTING")
       VALUE_PARENTING("PARENTING"),
-      @SerializedName("REAL_WORLD_AT_WORK")
-      VALUE_REAL_WORLD_AT_WORK("REAL_WORLD_AT_WORK"),
       @SerializedName("STREAMER")
       VALUE_STREAMER("STREAMER"),
       @SerializedName("WORK_ANNOUNCEMENT")

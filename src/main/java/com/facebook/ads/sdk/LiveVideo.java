@@ -508,6 +508,7 @@ public class LiveVideo extends APINode {
       "gender",
       "hometown",
       "id",
+      "id_for_avatars",
       "inspirational_people",
       "install_type",
       "installed",
@@ -729,6 +730,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetBlockedUsers requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetBlockedUsers requestIdForAvatarsField () {
+      return this.requestIdForAvatarsField(true);
+    }
+    public APIRequestGetBlockedUsers requestIdForAvatarsField (boolean value) {
+      this.requestField("id_for_avatars", value);
       return this;
     }
     public APIRequestGetBlockedUsers requestInspirationalPeopleField () {

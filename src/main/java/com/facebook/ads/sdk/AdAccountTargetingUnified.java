@@ -894,6 +894,18 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_MESSAGES("MESSAGES"),
       @SerializedName("OFFER_CLAIMS")
       VALUE_OFFER_CLAIMS("OFFER_CLAIMS"),
+      @SerializedName("OUTCOME_APP_PROMOTION")
+      VALUE_OUTCOME_APP_PROMOTION("OUTCOME_APP_PROMOTION"),
+      @SerializedName("OUTCOME_AWARENESS")
+      VALUE_OUTCOME_AWARENESS("OUTCOME_AWARENESS"),
+      @SerializedName("OUTCOME_ENGAGEMENT")
+      VALUE_OUTCOME_ENGAGEMENT("OUTCOME_ENGAGEMENT"),
+      @SerializedName("OUTCOME_LEADS")
+      VALUE_OUTCOME_LEADS("OUTCOME_LEADS"),
+      @SerializedName("OUTCOME_SALES")
+      VALUE_OUTCOME_SALES("OUTCOME_SALES"),
+      @SerializedName("OUTCOME_TRAFFIC")
+      VALUE_OUTCOME_TRAFFIC("OUTCOME_TRAFFIC"),
       @SerializedName("PAGE_LIKES")
       VALUE_PAGE_LIKES("PAGE_LIKES"),
       @SerializedName("POST_ENGAGEMENT")

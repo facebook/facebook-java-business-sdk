@@ -93,6 +93,8 @@ public class MediaTitle extends APINode {
   private Object mUnitPrice = null;
   @SerializedName("url")
   private String mUrl = null;
+  @SerializedName("visibility")
+  private EnumVisibility mVisibility = null;
   @SerializedName("wiki_data_item")
   private String mWikiDataItem = null;
   protected static Gson gson = null;
@@ -406,6 +408,10 @@ public class MediaTitle extends APINode {
 
   public String getFieldUrl() {
     return mUrl;
+  }
+
+  public EnumVisibility getFieldVisibility() {
+    return mVisibility;
   }
 
   public String getFieldWikiDataItem() {
@@ -876,6 +882,7 @@ public class MediaTitle extends APINode {
       "title_display_name",
       "unit_price",
       "url",
+      "visibility",
       "wiki_data_item",
     };
 
@@ -1099,6 +1106,13 @@ public class MediaTitle extends APINode {
     }
     public APIRequestGet requestUrlField (boolean value) {
       this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGet requestVisibilityField () {
+      return this.requestVisibilityField(true);
+    }
+    public APIRequestGet requestVisibilityField (boolean value) {
+      this.requestField("visibility", value);
       return this;
     }
     public APIRequestGet requestWikiDataItemField () {
@@ -1333,6 +1347,25 @@ public class MediaTitle extends APINode {
       }
   }
 
+  public static enum EnumVisibility {
+      @SerializedName("PUBLISHED")
+      VALUE_PUBLISHED("PUBLISHED"),
+      @SerializedName("STAGING")
+      VALUE_STAGING("STAGING"),
+      ;
+
+      private String value;
+
+      private EnumVisibility(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumContentCategory {
       @SerializedName("MOVIE")
       VALUE_MOVIE("MOVIE"),
@@ -1388,6 +1421,7 @@ public class MediaTitle extends APINode {
     this.mTitleDisplayName = instance.mTitleDisplayName;
     this.mUnitPrice = instance.mUnitPrice;
     this.mUrl = instance.mUrl;
+    this.mVisibility = instance.mVisibility;
     this.mWikiDataItem = instance.mWikiDataItem;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

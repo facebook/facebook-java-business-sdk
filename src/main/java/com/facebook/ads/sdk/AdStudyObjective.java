@@ -635,7 +635,6 @@ public class AdStudyObjective extends APINode {
       "latest_sdk_version",
       "link",
       "logging_token",
-      "login_secret",
       "logo_url",
       "migrations",
       "mobile_profile_section_url",
@@ -1193,13 +1192,6 @@ public class AdStudyObjective extends APINode {
     }
     public APIRequestGetApplications requestLoggingTokenField (boolean value) {
       this.requestField("logging_token", value);
-      return this;
-    }
-    public APIRequestGetApplications requestLoginSecretField () {
-      return this.requestLoginSecretField(true);
-    }
-    public APIRequestGetApplications requestLoginSecretField (boolean value) {
-      this.requestField("login_secret", value);
       return this;
     }
     public APIRequestGetApplications requestLogoUrlField () {

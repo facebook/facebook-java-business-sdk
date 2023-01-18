@@ -353,6 +353,7 @@ public class AdLabel extends APINode {
       "categorization_criteria",
       "category_media_source",
       "collaborative_ads_lsb_image_bank_id",
+      "degrees_of_freedom_spec",
       "destination_set_id",
       "dynamic_ad_voice",
       "effective_authorization_category",
@@ -586,6 +587,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdCreatives requestCollaborativeAdsLsbImageBankIdField (boolean value) {
       this.requestField("collaborative_ads_lsb_image_bank_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestDegreesOfFreedomSpecField () {
+      return this.requestDegreesOfFreedomSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestDegreesOfFreedomSpecField (boolean value) {
+      this.requestField("degrees_of_freedom_spec", value);
       return this;
     }
     public APIRequestGetAdCreatives requestDestinationSetIdField () {
@@ -1847,7 +1855,6 @@ public class AdLabel extends APINode {
       "ad_strategy_group_id",
       "ad_strategy_id",
       "adlabels",
-      "benchmark_report_count",
       "bid_strategy",
       "boosted_object_id",
       "brand_lift_studies",
@@ -2001,13 +2008,6 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetCampaigns requestAdlabelsField (boolean value) {
       this.requestField("adlabels", value);
-      return this;
-    }
-    public APIRequestGetCampaigns requestBenchmarkReportCountField () {
-      return this.requestBenchmarkReportCountField(true);
-    }
-    public APIRequestGetCampaigns requestBenchmarkReportCountField (boolean value) {
-      this.requestField("benchmark_report_count", value);
       return this;
     }
     public APIRequestGetCampaigns requestBidStrategyField () {

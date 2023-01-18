@@ -81,6 +81,8 @@ public class User extends APINode {
   private Page mHometown = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("id_for_avatars")
+  private String mIdForAvatars = null;
   @SerializedName("inspirational_people")
   private List<Experience> mInspirationalPeople = null;
   @SerializedName("install_type")
@@ -502,6 +504,10 @@ public class User extends APINode {
     return new APIRequestCreateLiveVideo(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateMessengerDesktopPerformanceTrace createMessengerDesktopPerformanceTrace() {
+    return new APIRequestCreateMessengerDesktopPerformanceTrace(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetMusic getMusic() {
     return new APIRequestGetMusic(this.getPrefixedId().toString(), context);
   }
@@ -624,6 +630,10 @@ public class User extends APINode {
 
   public String getFieldId() {
     return mId;
+  }
+
+  public String getFieldIdForAvatars() {
+    return mIdForAvatars;
   }
 
   public List<Experience> getFieldInspirationalPeople() {
@@ -5084,6 +5094,7 @@ public class User extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "pages",
     };
 
     public static final String[] FIELDS = {
@@ -5288,6 +5299,15 @@ public class User extends APINode {
       return this;
     }
 
+
+    public APIRequestGetAssignedPages setPages (List<Long> pages) {
+      this.setParam("pages", pages);
+      return this;
+    }
+    public APIRequestGetAssignedPages setPages (String pages) {
+      this.setParam("pages", pages);
+      return this;
+    }
 
     public APIRequestGetAssignedPages requestAllFields () {
       return this.requestAllFields(true);
@@ -6367,6 +6387,8 @@ public class User extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "ad_account_to_collaborative_ads_share_settings",
+      "agency_collaborative_ads_share_settings",
       "business",
       "catalog_store",
       "commerce_merchant_settings",
@@ -6473,6 +6495,20 @@ public class User extends APINode {
       return this;
     }
 
+    public APIRequestGetAssignedProductCatalogs requestAdAccountToCollaborativeAdsShareSettingsField () {
+      return this.requestAdAccountToCollaborativeAdsShareSettingsField(true);
+    }
+    public APIRequestGetAssignedProductCatalogs requestAdAccountToCollaborativeAdsShareSettingsField (boolean value) {
+      this.requestField("ad_account_to_collaborative_ads_share_settings", value);
+      return this;
+    }
+    public APIRequestGetAssignedProductCatalogs requestAgencyCollaborativeAdsShareSettingsField () {
+      return this.requestAgencyCollaborativeAdsShareSettingsField(true);
+    }
+    public APIRequestGetAssignedProductCatalogs requestAgencyCollaborativeAdsShareSettingsField (boolean value) {
+      this.requestField("agency_collaborative_ads_share_settings", value);
+      return this;
+    }
     public APIRequestGetAssignedProductCatalogs requestBusinessField () {
       return this.requestBusinessField(true);
     }
@@ -7473,6 +7509,7 @@ public class User extends APINode {
 
     public static final String[] FIELDS = {
       "can_reply",
+      "folder",
       "former_participants",
       "id",
       "is_subscribed",
@@ -7602,6 +7639,13 @@ public class User extends APINode {
     }
     public APIRequestGetConversations requestCanReplyField (boolean value) {
       this.requestField("can_reply", value);
+      return this;
+    }
+    public APIRequestGetConversations requestFolderField () {
+      return this.requestFolderField(true);
+    }
+    public APIRequestGetConversations requestFolderField (boolean value) {
+      this.requestField("folder", value);
       return this;
     }
     public APIRequestGetConversations requestFormerParticipantsField () {
@@ -9903,6 +9947,7 @@ public class User extends APINode {
       "gender",
       "hometown",
       "id",
+      "id_for_avatars",
       "inspirational_people",
       "install_type",
       "installed",
@@ -10124,6 +10169,13 @@ public class User extends APINode {
     }
     public APIRequestGetFriends requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetFriends requestIdForAvatarsField () {
+      return this.requestIdForAvatarsField(true);
+    }
+    public APIRequestGetFriends requestIdForAvatarsField (boolean value) {
+      this.requestField("id_for_avatars", value);
       return this;
     }
     public APIRequestGetFriends requestInspirationalPeopleField () {
@@ -13678,6 +13730,110 @@ public class User extends APINode {
 
   }
 
+  public static class APIRequestCreateMessengerDesktopPerformanceTrace extends APIRequest<User> {
+
+    User lastResponse = null;
+    @Override
+    public User getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public User parseResponse(String response, String header) throws APIException {
+      return User.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public User execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public User execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<User> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<User> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, User>() {
+           public User apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateMessengerDesktopPerformanceTrace.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateMessengerDesktopPerformanceTrace(String nodeId, APIContext context) {
+      super(context, nodeId, "/messenger_desktop_performance_traces", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateMessengerDesktopPerformanceTrace setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMessengerDesktopPerformanceTrace setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateMessengerDesktopPerformanceTrace requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateMessengerDesktopPerformanceTrace requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMessengerDesktopPerformanceTrace requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateMessengerDesktopPerformanceTrace requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMessengerDesktopPerformanceTrace requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMessengerDesktopPerformanceTrace requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetMusic extends APIRequest<Page> {
 
     APINodeList<Page> lastResponse = null;
@@ -14980,7 +15136,7 @@ public class User extends APINode {
       "payload",
       "read",
       "ref",
-      "scheduleInterval",
+      "schedule_interval",
       "seen",
       "template",
       "type",
@@ -15102,12 +15258,12 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateNotification setScheduleinterval (Long scheduleinterval) {
-      this.setParam("scheduleInterval", scheduleinterval);
+    public APIRequestCreateNotification setScheduleInterval (Long scheduleInterval) {
+      this.setParam("schedule_interval", scheduleInterval);
       return this;
     }
-    public APIRequestCreateNotification setScheduleinterval (String scheduleinterval) {
-      this.setParam("scheduleInterval", scheduleinterval);
+    public APIRequestCreateNotification setScheduleInterval (String scheduleInterval) {
+      this.setParam("schedule_interval", scheduleInterval);
       return this;
     }
 
@@ -19798,6 +19954,7 @@ public class User extends APINode {
       "gender",
       "hometown",
       "id",
+      "id_for_avatars",
       "inspirational_people",
       "install_type",
       "installed",
@@ -20010,6 +20167,13 @@ public class User extends APINode {
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestIdForAvatarsField () {
+      return this.requestIdForAvatarsField(true);
+    }
+    public APIRequestGet requestIdForAvatarsField (boolean value) {
+      this.requestField("id_for_avatars", value);
       return this;
     }
     public APIRequestGet requestInspirationalPeopleField () {
@@ -20523,6 +20687,7 @@ public class User extends APINode {
     this.mGender = instance.mGender;
     this.mHometown = instance.mHometown;
     this.mId = instance.mId;
+    this.mIdForAvatars = instance.mIdForAvatars;
     this.mInspirationalPeople = instance.mInspirationalPeople;
     this.mInstallType = instance.mInstallType;
     this.mInstalled = instance.mInstalled;
