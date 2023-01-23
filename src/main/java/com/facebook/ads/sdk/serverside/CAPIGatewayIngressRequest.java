@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class CAPIGIngressRequest implements CustomEndpointRequest {
+public class CAPIGatewayIngressRequest implements CustomEndpointRequest {
     private boolean sendToDestinationOnly;
     private final String endpointURL;
     private Filter filter;
@@ -31,7 +31,7 @@ public class CAPIGIngressRequest implements CustomEndpointRequest {
     private final OkHttpClient client = new OkHttpClient();
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-    public CAPIGIngressRequest(String endpointURL, String accessKey) {
+    public CAPIGatewayIngressRequest(String endpointURL, String accessKey) {
         validateEndpoint(endpointURL);
         this.endpointURL = endpointURL;
         this.sendToDestinationOnly = false;
