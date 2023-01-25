@@ -69,66 +69,7 @@ public class MessengerDestinationPageWelcomeMessage extends APINode {
   private String mTimeLastUsed = null;
   protected static Gson gson = null;
 
-  MessengerDestinationPageWelcomeMessage() {
-  }
-
-  public MessengerDestinationPageWelcomeMessage(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public MessengerDestinationPageWelcomeMessage(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public MessengerDestinationPageWelcomeMessage fetch() throws APIException{
-    MessengerDestinationPageWelcomeMessage newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static MessengerDestinationPageWelcomeMessage fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<MessengerDestinationPageWelcomeMessage> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static MessengerDestinationPageWelcomeMessage fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<MessengerDestinationPageWelcomeMessage> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<MessengerDestinationPageWelcomeMessage> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<MessengerDestinationPageWelcomeMessage>)(
-      new APIRequest<MessengerDestinationPageWelcomeMessage>(context, "", "/", "GET", MessengerDestinationPageWelcomeMessage.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<MessengerDestinationPageWelcomeMessage>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", MessengerDestinationPageWelcomeMessage.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public MessengerDestinationPageWelcomeMessage() {
   }
 
   public String getId() {
@@ -276,188 +217,62 @@ public class MessengerDestinationPageWelcomeMessage extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldId() {
     return mId;
+  }
+
+  public MessengerDestinationPageWelcomeMessage setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
 
   public String getFieldPageWelcomeMessageBody() {
     return mPageWelcomeMessageBody;
   }
 
+  public MessengerDestinationPageWelcomeMessage setFieldPageWelcomeMessageBody(String value) {
+    this.mPageWelcomeMessageBody = value;
+    return this;
+  }
+
   public String getFieldPageWelcomeMessageType() {
     return mPageWelcomeMessageType;
+  }
+
+  public MessengerDestinationPageWelcomeMessage setFieldPageWelcomeMessageType(String value) {
+    this.mPageWelcomeMessageType = value;
+    return this;
   }
 
   public String getFieldTemplateName() {
     return mTemplateName;
   }
 
+  public MessengerDestinationPageWelcomeMessage setFieldTemplateName(String value) {
+    this.mTemplateName = value;
+    return this;
+  }
+
   public String getFieldTimeCreated() {
     return mTimeCreated;
+  }
+
+  public MessengerDestinationPageWelcomeMessage setFieldTimeCreated(String value) {
+    this.mTimeCreated = value;
+    return this;
   }
 
   public String getFieldTimeLastUsed() {
     return mTimeLastUsed;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<MessengerDestinationPageWelcomeMessage> {
-
-    MessengerDestinationPageWelcomeMessage lastResponse = null;
-    @Override
-    public MessengerDestinationPageWelcomeMessage getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "id",
-      "page_welcome_message_body",
-      "page_welcome_message_type",
-      "template_name",
-      "time_created",
-      "time_last_used",
-    };
-
-    @Override
-    public MessengerDestinationPageWelcomeMessage parseResponse(String response, String header) throws APIException {
-      return MessengerDestinationPageWelcomeMessage.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public MessengerDestinationPageWelcomeMessage execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public MessengerDestinationPageWelcomeMessage execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<MessengerDestinationPageWelcomeMessage> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<MessengerDestinationPageWelcomeMessage> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, MessengerDestinationPageWelcomeMessage>() {
-           public MessengerDestinationPageWelcomeMessage apply(ResponseWrapper result) {
-             try {
-               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestPageWelcomeMessageBodyField () {
-      return this.requestPageWelcomeMessageBodyField(true);
-    }
-    public APIRequestGet requestPageWelcomeMessageBodyField (boolean value) {
-      this.requestField("page_welcome_message_body", value);
-      return this;
-    }
-    public APIRequestGet requestPageWelcomeMessageTypeField () {
-      return this.requestPageWelcomeMessageTypeField(true);
-    }
-    public APIRequestGet requestPageWelcomeMessageTypeField (boolean value) {
-      this.requestField("page_welcome_message_type", value);
-      return this;
-    }
-    public APIRequestGet requestTemplateNameField () {
-      return this.requestTemplateNameField(true);
-    }
-    public APIRequestGet requestTemplateNameField (boolean value) {
-      this.requestField("template_name", value);
-      return this;
-    }
-    public APIRequestGet requestTimeCreatedField () {
-      return this.requestTimeCreatedField(true);
-    }
-    public APIRequestGet requestTimeCreatedField (boolean value) {
-      this.requestField("time_created", value);
-      return this;
-    }
-    public APIRequestGet requestTimeLastUsedField () {
-      return this.requestTimeLastUsedField(true);
-    }
-    public APIRequestGet requestTimeLastUsedField (boolean value) {
-      this.requestField("time_last_used", value);
-      return this;
-    }
+  public MessengerDestinationPageWelcomeMessage setFieldTimeLastUsed(String value) {
+    this.mTimeLastUsed = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

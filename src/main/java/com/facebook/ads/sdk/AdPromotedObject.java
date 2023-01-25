@@ -67,12 +67,16 @@ public class AdPromotedObject extends APINode {
   private String mEventId = null;
   @SerializedName("fundraiser_campaign_id")
   private String mFundraiserCampaignId = null;
+  @SerializedName("mcme_conversion_id")
+  private String mMcmeConversionId = null;
   @SerializedName("object_store_url")
   private String mObjectStoreUrl = null;
   @SerializedName("offer_id")
   private String mOfferId = null;
   @SerializedName("offline_conversion_data_set_id")
   private String mOfflineConversionDataSetId = null;
+  @SerializedName("omnichannel_object")
+  private Object mOmnichannelObject = null;
   @SerializedName("page_id")
   private String mPageId = null;
   @SerializedName("pixel_aggregation_rule")
@@ -296,6 +300,15 @@ public class AdPromotedObject extends APINode {
     return this;
   }
 
+  public String getFieldMcmeConversionId() {
+    return mMcmeConversionId;
+  }
+
+  public AdPromotedObject setFieldMcmeConversionId(String value) {
+    this.mMcmeConversionId = value;
+    return this;
+  }
+
   public String getFieldObjectStoreUrl() {
     return mObjectStoreUrl;
   }
@@ -320,6 +333,15 @@ public class AdPromotedObject extends APINode {
 
   public AdPromotedObject setFieldOfflineConversionDataSetId(String value) {
     this.mOfflineConversionDataSetId = value;
+    return this;
+  }
+
+  public Object getFieldOmnichannelObject() {
+    return mOmnichannelObject;
+  }
+
+  public AdPromotedObject setFieldOmnichannelObject(Object value) {
+    this.mOmnichannelObject = value;
     return this;
   }
 
@@ -498,9 +520,11 @@ public class AdPromotedObject extends APINode {
     this.mCustomEventType = instance.mCustomEventType;
     this.mEventId = instance.mEventId;
     this.mFundraiserCampaignId = instance.mFundraiserCampaignId;
+    this.mMcmeConversionId = instance.mMcmeConversionId;
     this.mObjectStoreUrl = instance.mObjectStoreUrl;
     this.mOfferId = instance.mOfferId;
     this.mOfflineConversionDataSetId = instance.mOfflineConversionDataSetId;
+    this.mOmnichannelObject = instance.mOmnichannelObject;
     this.mPageId = instance.mPageId;
     this.mPixelAggregationRule = instance.mPixelAggregationRule;
     this.mPixelId = instance.mPixelId;

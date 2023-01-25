@@ -469,6 +469,7 @@ public class ProductFeedUpload extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "error_priority",
     };
 
     public static final String[] FIELDS = {
@@ -533,6 +534,15 @@ public class ProductFeedUpload extends APINode {
       return this;
     }
 
+
+    public APIRequestGetErrors setErrorPriority (ProductFeedUploadError.EnumErrorPriority errorPriority) {
+      this.setParam("error_priority", errorPriority);
+      return this;
+    }
+    public APIRequestGetErrors setErrorPriority (String errorPriority) {
+      this.setParam("error_priority", errorPriority);
+      return this;
+    }
 
     public APIRequestGetErrors requestAllFields () {
       return this.requestAllFields(true);

@@ -34,9 +34,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class HashedListAdaptorTest {
@@ -164,6 +164,54 @@ public class HashedListAdaptorTest {
         assertEquals(actualUserData.getZipcodes().size(), 2);
         assertEquals(actualUserData.getCountryCodes().size(), 2);
         assertEquals(actualUserData.getExternalIds().size(), 2);
+    }
+
+    @Test
+    public void testSerializationWithOnlyNullOrNoValues(){
+        Gson gson = new Gson();
+        List<String> emails = new ArrayList<>();
+        List<String> phones = new ArrayList<>();
+        List<GenderEnum> genders = new ArrayList<>();
+        List<String> datesOfBirth = new ArrayList<>();
+        List<String> lastNames = new ArrayList<>();
+        List<String> firstNames = new ArrayList<>();
+        List<String> cities = new ArrayList<>();
+        cities.add(null);
+        List<String> zipcodes = new ArrayList<>();
+        zipcodes.add(null);
+        List<String> states = new ArrayList<>();
+        states.add(null);
+        List<String> countryCodes = new ArrayList<>();
+        countryCodes.add(null);
+        List<String> externalIds = Arrays.asList("external-1", "external-2", null);
+        UserData userData = new UserData();
+        userData
+                .emails(emails)
+                .phones(phones)
+                .genders(genders)
+                .datesOfBirth(datesOfBirth)
+                .lastNames(lastNames)
+                .firstNames(firstNames)
+                .cities(cities)
+                .zipcodes(zipcodes)
+                .states(states)
+                .countryCodes(countryCodes)
+                .externalIds(externalIds);
+
+        String actualJson = gson.toJson(userData);
+        System.out.println(actualJson);
+        JsonObject jsonObject = new Gson().fromJson(actualJson, JsonObject.class);
+        assertFalse(jsonObject.has(ServerSideApiConstants.EMAIL));
+        assertFalse(jsonObject.has(ServerSideApiConstants.PHONE_NUMBER));
+        assertFalse(jsonObject.has(ServerSideApiConstants.GENDER));
+        assertFalse(jsonObject.has(ServerSideApiConstants.DATE_OF_BIRTH));
+        assertFalse(jsonObject.has(ServerSideApiConstants.LAST_NAME));
+        assertFalse(jsonObject.has(ServerSideApiConstants.FIRST_NAME));
+        assertFalse(jsonObject.has(ServerSideApiConstants.CITY));
+        assertFalse(jsonObject.has(ServerSideApiConstants.ZIP_CODE));
+        assertFalse(jsonObject.has(ServerSideApiConstants.STATE));
+        assertFalse(jsonObject.has(ServerSideApiConstants.COUNTRY));
+        assertTrue(jsonObject.has(ServerSideApiConstants.EXTERNAL_ID));
     }
 
     /**

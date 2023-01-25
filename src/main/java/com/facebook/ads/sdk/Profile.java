@@ -789,8 +789,12 @@ public class Profile extends APINode {
       VALUE_ANGRY("ANGRY"),
       @SerializedName("CARE")
       VALUE_CARE("CARE"),
+      @SerializedName("FIRE")
+      VALUE_FIRE("FIRE"),
       @SerializedName("HAHA")
       VALUE_HAHA("HAHA"),
+      @SerializedName("HUNDRED")
+      VALUE_HUNDRED("HUNDRED"),
       @SerializedName("LIKE")
       VALUE_LIKE("LIKE"),
       @SerializedName("LOVE")

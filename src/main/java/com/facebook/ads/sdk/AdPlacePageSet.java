@@ -462,25 +462,6 @@ public class AdPlacePageSet extends APINode {
     }
   }
 
-  public static enum EnumCategory {
-      @SerializedName("BOPUS")
-      VALUE_BOPUS("BOPUS"),
-      @SerializedName("GENERAL")
-      VALUE_GENERAL("GENERAL"),
-      ;
-
-      private String value;
-
-      private EnumCategory(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
   public static enum EnumLocationTypes {
       @SerializedName("home")
       VALUE_HOME("home"),

@@ -280,10 +280,6 @@ public class CollaborativeAdsShareSettings extends APINode {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestUpdate update() {
-    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
-  }
-
 
   public Business getFieldAgencyBusiness() {
     if (mAgencyBusiness != null) {
@@ -464,128 +460,6 @@ public class CollaborativeAdsShareSettings extends APINode {
       this.requestField("utm_source", value);
       return this;
     }
-  }
-
-  public static class APIRequestUpdate extends APIRequest<CollaborativeAdsShareSettings> {
-
-    CollaborativeAdsShareSettings lastResponse = null;
-    @Override
-    public CollaborativeAdsShareSettings getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "utm_campaign",
-      "utm_medium",
-      "utm_source",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public CollaborativeAdsShareSettings parseResponse(String response, String header) throws APIException {
-      return CollaborativeAdsShareSettings.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public CollaborativeAdsShareSettings execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public CollaborativeAdsShareSettings execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<CollaborativeAdsShareSettings> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<CollaborativeAdsShareSettings> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, CollaborativeAdsShareSettings>() {
-           public CollaborativeAdsShareSettings apply(ResponseWrapper result) {
-             try {
-               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestUpdate(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestUpdate setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestUpdate setUtmCampaign (String utmCampaign) {
-      this.setParam("utm_campaign", utmCampaign);
-      return this;
-    }
-
-    public APIRequestUpdate setUtmMedium (String utmMedium) {
-      this.setParam("utm_medium", utmMedium);
-      return this;
-    }
-
-    public APIRequestUpdate setUtmSource (String utmSource) {
-      this.setParam("utm_source", utmSource);
-      return this;
-    }
-
-    public APIRequestUpdate requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestUpdate requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
 

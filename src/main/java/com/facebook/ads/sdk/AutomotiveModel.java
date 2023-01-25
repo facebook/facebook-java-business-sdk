@@ -107,8 +107,12 @@ public class AutomotiveModel extends APINode {
   private String mTransmission = null;
   @SerializedName("trim")
   private String mTrim = null;
+  @SerializedName("unit_price")
+  private Object mUnitPrice = null;
   @SerializedName("url")
   private String mUrl = null;
+  @SerializedName("visibility")
+  private EnumVisibility mVisibility = null;
   @SerializedName("year")
   private Long mYear = null;
   protected static Gson gson = null;
@@ -324,6 +328,10 @@ public class AutomotiveModel extends APINode {
     return new APIRequestGetAugmentedRealitiesMetadata(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetChannelsToIntegrityStatus getChannelsToIntegrityStatus() {
+    return new APIRequestGetChannelsToIntegrityStatus(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetVideosMetadata getVideosMetadata() {
     return new APIRequestGetVideosMetadata(this.getPrefixedId().toString(), context);
   }
@@ -437,8 +445,16 @@ public class AutomotiveModel extends APINode {
     return mTrim;
   }
 
+  public Object getFieldUnitPrice() {
+    return mUnitPrice;
+  }
+
   public String getFieldUrl() {
     return mUrl;
+  }
+
+  public EnumVisibility getFieldVisibility() {
+    return mVisibility;
   }
 
   public Long getFieldYear() {
@@ -549,6 +565,126 @@ public class AutomotiveModel extends APINode {
       return this;
     }
 
+  }
+
+  public static class APIRequestGetChannelsToIntegrityStatus extends APIRequest<CatalogItemChannelsToIntegrityStatus> {
+
+    APINodeList<CatalogItemChannelsToIntegrityStatus> lastResponse = null;
+    @Override
+    public APINodeList<CatalogItemChannelsToIntegrityStatus> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "channels",
+      "rejection_information",
+    };
+
+    @Override
+    public APINodeList<CatalogItemChannelsToIntegrityStatus> parseResponse(String response, String header) throws APIException {
+      return CatalogItemChannelsToIntegrityStatus.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<CatalogItemChannelsToIntegrityStatus> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<CatalogItemChannelsToIntegrityStatus> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<CatalogItemChannelsToIntegrityStatus>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<CatalogItemChannelsToIntegrityStatus>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<CatalogItemChannelsToIntegrityStatus>>() {
+           public APINodeList<CatalogItemChannelsToIntegrityStatus> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetChannelsToIntegrityStatus.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetChannelsToIntegrityStatus(String nodeId, APIContext context) {
+      super(context, nodeId, "/channels_to_integrity_status", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetChannelsToIntegrityStatus setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetChannelsToIntegrityStatus setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetChannelsToIntegrityStatus requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetChannelsToIntegrityStatus requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetChannelsToIntegrityStatus requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetChannelsToIntegrityStatus requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetChannelsToIntegrityStatus requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetChannelsToIntegrityStatus requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetChannelsToIntegrityStatus requestChannelsField () {
+      return this.requestChannelsField(true);
+    }
+    public APIRequestGetChannelsToIntegrityStatus requestChannelsField (boolean value) {
+      this.requestField("channels", value);
+      return this;
+    }
+    public APIRequestGetChannelsToIntegrityStatus requestRejectionInformationField () {
+      return this.requestRejectionInformationField(true);
+    }
+    public APIRequestGetChannelsToIntegrityStatus requestRejectionInformationField (boolean value) {
+      this.requestField("rejection_information", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetVideosMetadata extends APIRequest<APINode> {
@@ -692,7 +828,9 @@ public class AutomotiveModel extends APINode {
       "title",
       "transmission",
       "trim",
+      "unit_price",
       "url",
+      "visibility",
       "year",
     };
 
@@ -967,11 +1105,25 @@ public class AutomotiveModel extends APINode {
       this.requestField("trim", value);
       return this;
     }
+    public APIRequestGet requestUnitPriceField () {
+      return this.requestUnitPriceField(true);
+    }
+    public APIRequestGet requestUnitPriceField (boolean value) {
+      this.requestField("unit_price", value);
+      return this;
+    }
     public APIRequestGet requestUrlField () {
       return this.requestUrlField(true);
     }
     public APIRequestGet requestUrlField (boolean value) {
       this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGet requestVisibilityField () {
+      return this.requestVisibilityField(true);
+    }
+    public APIRequestGet requestVisibilityField (boolean value) {
+      this.requestField("visibility", value);
       return this;
     }
     public APIRequestGet requestYearField () {
@@ -1010,56 +1162,16 @@ public class AutomotiveModel extends APINode {
       }
   }
 
-  public static enum EnumBodyStyle {
-      @SerializedName("CONVERTIBLE")
-      VALUE_CONVERTIBLE("CONVERTIBLE"),
-      @SerializedName("COUPE")
-      VALUE_COUPE("COUPE"),
-      @SerializedName("CROSSOVER")
-      VALUE_CROSSOVER("CROSSOVER"),
-      @SerializedName("ESTATE")
-      VALUE_ESTATE("ESTATE"),
-      @SerializedName("GRANDTOURER")
-      VALUE_GRANDTOURER("GRANDTOURER"),
-      @SerializedName("HATCHBACK")
-      VALUE_HATCHBACK("HATCHBACK"),
-      @SerializedName("MINIBUS")
-      VALUE_MINIBUS("MINIBUS"),
-      @SerializedName("MINIVAN")
-      VALUE_MINIVAN("MINIVAN"),
-      @SerializedName("MPV")
-      VALUE_MPV("MPV"),
-      @SerializedName("NONE")
-      VALUE_NONE("NONE"),
-      @SerializedName("OTHER")
-      VALUE_OTHER("OTHER"),
-      @SerializedName("PICKUP")
-      VALUE_PICKUP("PICKUP"),
-      @SerializedName("ROADSTER")
-      VALUE_ROADSTER("ROADSTER"),
-      @SerializedName("SALOON")
-      VALUE_SALOON("SALOON"),
-      @SerializedName("SEDAN")
-      VALUE_SEDAN("SEDAN"),
-      @SerializedName("SPORTSCAR")
-      VALUE_SPORTSCAR("SPORTSCAR"),
-      @SerializedName("SUPERCAR")
-      VALUE_SUPERCAR("SUPERCAR"),
-      @SerializedName("SUPERMINI")
-      VALUE_SUPERMINI("SUPERMINI"),
-      @SerializedName("SUV")
-      VALUE_SUV("SUV"),
-      @SerializedName("TRUCK")
-      VALUE_TRUCK("TRUCK"),
-      @SerializedName("VAN")
-      VALUE_VAN("VAN"),
-      @SerializedName("WAGON")
-      VALUE_WAGON("WAGON"),
+  public static enum EnumVisibility {
+      @SerializedName("PUBLISHED")
+      VALUE_PUBLISHED("PUBLISHED"),
+      @SerializedName("STAGING")
+      VALUE_STAGING("STAGING"),
       ;
 
       private String value;
 
-      private EnumBodyStyle(String value) {
+      private EnumVisibility(String value) {
         this.value = value;
       }
 
@@ -1110,7 +1222,9 @@ public class AutomotiveModel extends APINode {
     this.mTitle = instance.mTitle;
     this.mTransmission = instance.mTransmission;
     this.mTrim = instance.mTrim;
+    this.mUnitPrice = instance.mUnitPrice;
     this.mUrl = instance.mUrl;
+    this.mVisibility = instance.mVisibility;
     this.mYear = instance.mYear;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

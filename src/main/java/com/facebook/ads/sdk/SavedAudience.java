@@ -57,10 +57,12 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class SavedAudience extends APINode {
   @SerializedName("account")
   private AdAccount mAccount = null;
-  @SerializedName("approximate_count")
-  private Long mApproximateCount = null;
-  @SerializedName("approximate_count_64bit")
-  private Long mApproximateCount64bit = null;
+  @SerializedName("approximate_count_lower_bound")
+  private Long mApproximateCountLowerBound = null;
+  @SerializedName("approximate_count_upper_bound")
+  private Long mApproximateCountUpperBound = null;
+  @SerializedName("delete_time")
+  private Long mDeleteTime = null;
   @SerializedName("description")
   private String mDescription = null;
   @SerializedName("extra_info")
@@ -69,6 +71,12 @@ public class SavedAudience extends APINode {
   private String mId = null;
   @SerializedName("name")
   private String mName = null;
+  @SerializedName("operation_status")
+  private CustomAudienceStatus mOperationStatus = null;
+  @SerializedName("owner_business")
+  private Business mOwnerBusiness = null;
+  @SerializedName("page_deletion_marked_delete_time")
+  private Long mPageDeletionMarkedDeleteTime = null;
   @SerializedName("permission_for_actions")
   private AudiencePermissionForActions mPermissionForActions = null;
   @SerializedName("run_status")
@@ -302,12 +310,16 @@ public class SavedAudience extends APINode {
     return mAccount;
   }
 
-  public Long getFieldApproximateCount() {
-    return mApproximateCount;
+  public Long getFieldApproximateCountLowerBound() {
+    return mApproximateCountLowerBound;
   }
 
-  public Long getFieldApproximateCount64bit() {
-    return mApproximateCount64bit;
+  public Long getFieldApproximateCountUpperBound() {
+    return mApproximateCountUpperBound;
+  }
+
+  public Long getFieldDeleteTime() {
+    return mDeleteTime;
   }
 
   public String getFieldDescription() {
@@ -324,6 +336,21 @@ public class SavedAudience extends APINode {
 
   public String getFieldName() {
     return mName;
+  }
+
+  public CustomAudienceStatus getFieldOperationStatus() {
+    return mOperationStatus;
+  }
+
+  public Business getFieldOwnerBusiness() {
+    if (mOwnerBusiness != null) {
+      mOwnerBusiness.context = getContext();
+    }
+    return mOwnerBusiness;
+  }
+
+  public Long getFieldPageDeletionMarkedDeleteTime() {
+    return mPageDeletionMarkedDeleteTime;
   }
 
   public AudiencePermissionForActions getFieldPermissionForActions() {
@@ -364,12 +391,16 @@ public class SavedAudience extends APINode {
 
     public static final String[] FIELDS = {
       "account",
-      "approximate_count",
-      "approximate_count_64bit",
+      "approximate_count_lower_bound",
+      "approximate_count_upper_bound",
+      "delete_time",
       "description",
       "extra_info",
       "id",
       "name",
+      "operation_status",
+      "owner_business",
+      "page_deletion_marked_delete_time",
       "permission_for_actions",
       "run_status",
       "sentence_lines",
@@ -474,18 +505,25 @@ public class SavedAudience extends APINode {
       this.requestField("account", value);
       return this;
     }
-    public APIRequestGet requestApproximateCountField () {
-      return this.requestApproximateCountField(true);
+    public APIRequestGet requestApproximateCountLowerBoundField () {
+      return this.requestApproximateCountLowerBoundField(true);
     }
-    public APIRequestGet requestApproximateCountField (boolean value) {
-      this.requestField("approximate_count", value);
+    public APIRequestGet requestApproximateCountLowerBoundField (boolean value) {
+      this.requestField("approximate_count_lower_bound", value);
       return this;
     }
-    public APIRequestGet requestApproximateCount64bitField () {
-      return this.requestApproximateCount64bitField(true);
+    public APIRequestGet requestApproximateCountUpperBoundField () {
+      return this.requestApproximateCountUpperBoundField(true);
     }
-    public APIRequestGet requestApproximateCount64bitField (boolean value) {
-      this.requestField("approximate_count_64bit", value);
+    public APIRequestGet requestApproximateCountUpperBoundField (boolean value) {
+      this.requestField("approximate_count_upper_bound", value);
+      return this;
+    }
+    public APIRequestGet requestDeleteTimeField () {
+      return this.requestDeleteTimeField(true);
+    }
+    public APIRequestGet requestDeleteTimeField (boolean value) {
+      this.requestField("delete_time", value);
       return this;
     }
     public APIRequestGet requestDescriptionField () {
@@ -514,6 +552,27 @@ public class SavedAudience extends APINode {
     }
     public APIRequestGet requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGet requestOperationStatusField () {
+      return this.requestOperationStatusField(true);
+    }
+    public APIRequestGet requestOperationStatusField (boolean value) {
+      this.requestField("operation_status", value);
+      return this;
+    }
+    public APIRequestGet requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGet requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
+      return this;
+    }
+    public APIRequestGet requestPageDeletionMarkedDeleteTimeField () {
+      return this.requestPageDeletionMarkedDeleteTimeField(true);
+    }
+    public APIRequestGet requestPageDeletionMarkedDeleteTimeField (boolean value) {
+      this.requestField("page_deletion_marked_delete_time", value);
       return this;
     }
     public APIRequestGet requestPermissionForActionsField () {
@@ -576,12 +635,16 @@ public class SavedAudience extends APINode {
 
   public SavedAudience copyFrom(SavedAudience instance) {
     this.mAccount = instance.mAccount;
-    this.mApproximateCount = instance.mApproximateCount;
-    this.mApproximateCount64bit = instance.mApproximateCount64bit;
+    this.mApproximateCountLowerBound = instance.mApproximateCountLowerBound;
+    this.mApproximateCountUpperBound = instance.mApproximateCountUpperBound;
+    this.mDeleteTime = instance.mDeleteTime;
     this.mDescription = instance.mDescription;
     this.mExtraInfo = instance.mExtraInfo;
     this.mId = instance.mId;
     this.mName = instance.mName;
+    this.mOperationStatus = instance.mOperationStatus;
+    this.mOwnerBusiness = instance.mOwnerBusiness;
+    this.mPageDeletionMarkedDeleteTime = instance.mPageDeletionMarkedDeleteTime;
     this.mPermissionForActions = instance.mPermissionForActions;
     this.mRunStatus = instance.mRunStatus;
     this.mSentenceLines = instance.mSentenceLines;

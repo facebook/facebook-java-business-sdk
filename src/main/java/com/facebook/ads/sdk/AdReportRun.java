@@ -378,18 +378,12 @@ public class AdReportRun extends APINode {
       "account_name",
       "action_values",
       "actions",
-      "ad_bid_type",
       "ad_bid_value",
       "ad_click_actions",
-      "ad_delivery",
       "ad_id",
       "ad_impression_actions",
       "ad_name",
-      "adset_bid_type",
       "adset_bid_value",
-      "adset_budget_type",
-      "adset_budget_value",
-      "adset_delivery",
       "adset_end",
       "adset_id",
       "adset_name",
@@ -426,7 +420,6 @@ public class AdReportRun extends APINode {
       "cost_per_inline_post_engagement",
       "cost_per_one_thousand_ad_impression",
       "cost_per_outbound_click",
-      "cost_per_store_visit_action",
       "cost_per_thruplay",
       "cost_per_unique_action_type",
       "cost_per_unique_click",
@@ -441,6 +434,7 @@ public class AdReportRun extends APINode {
       "date_start",
       "date_stop",
       "dda_countby_convs",
+      "dda_results",
       "engagement_rate_ranking",
       "estimated_ad_recall_rate",
       "estimated_ad_recall_rate_lower_bound",
@@ -477,7 +471,8 @@ public class AdReportRun extends APINode {
       "reach",
       "social_spend",
       "spend",
-      "store_visit_actions",
+      "total_postbacks",
+      "total_postbacks_detailed",
       "unique_actions",
       "unique_clicks",
       "unique_conversions",
@@ -635,13 +630,6 @@ public class AdReportRun extends APINode {
       this.requestField("actions", value);
       return this;
     }
-    public APIRequestGetInsights requestAdBidTypeField () {
-      return this.requestAdBidTypeField(true);
-    }
-    public APIRequestGetInsights requestAdBidTypeField (boolean value) {
-      this.requestField("ad_bid_type", value);
-      return this;
-    }
     public APIRequestGetInsights requestAdBidValueField () {
       return this.requestAdBidValueField(true);
     }
@@ -654,13 +642,6 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestAdClickActionsField (boolean value) {
       this.requestField("ad_click_actions", value);
-      return this;
-    }
-    public APIRequestGetInsights requestAdDeliveryField () {
-      return this.requestAdDeliveryField(true);
-    }
-    public APIRequestGetInsights requestAdDeliveryField (boolean value) {
-      this.requestField("ad_delivery", value);
       return this;
     }
     public APIRequestGetInsights requestAdIdField () {
@@ -684,39 +665,11 @@ public class AdReportRun extends APINode {
       this.requestField("ad_name", value);
       return this;
     }
-    public APIRequestGetInsights requestAdsetBidTypeField () {
-      return this.requestAdsetBidTypeField(true);
-    }
-    public APIRequestGetInsights requestAdsetBidTypeField (boolean value) {
-      this.requestField("adset_bid_type", value);
-      return this;
-    }
     public APIRequestGetInsights requestAdsetBidValueField () {
       return this.requestAdsetBidValueField(true);
     }
     public APIRequestGetInsights requestAdsetBidValueField (boolean value) {
       this.requestField("adset_bid_value", value);
-      return this;
-    }
-    public APIRequestGetInsights requestAdsetBudgetTypeField () {
-      return this.requestAdsetBudgetTypeField(true);
-    }
-    public APIRequestGetInsights requestAdsetBudgetTypeField (boolean value) {
-      this.requestField("adset_budget_type", value);
-      return this;
-    }
-    public APIRequestGetInsights requestAdsetBudgetValueField () {
-      return this.requestAdsetBudgetValueField(true);
-    }
-    public APIRequestGetInsights requestAdsetBudgetValueField (boolean value) {
-      this.requestField("adset_budget_value", value);
-      return this;
-    }
-    public APIRequestGetInsights requestAdsetDeliveryField () {
-      return this.requestAdsetDeliveryField(true);
-    }
-    public APIRequestGetInsights requestAdsetDeliveryField (boolean value) {
-      this.requestField("adset_delivery", value);
       return this;
     }
     public APIRequestGetInsights requestAdsetEndField () {
@@ -971,13 +924,6 @@ public class AdReportRun extends APINode {
       this.requestField("cost_per_outbound_click", value);
       return this;
     }
-    public APIRequestGetInsights requestCostPerStoreVisitActionField () {
-      return this.requestCostPerStoreVisitActionField(true);
-    }
-    public APIRequestGetInsights requestCostPerStoreVisitActionField (boolean value) {
-      this.requestField("cost_per_store_visit_action", value);
-      return this;
-    }
     public APIRequestGetInsights requestCostPerThruplayField () {
       return this.requestCostPerThruplayField(true);
     }
@@ -1074,6 +1020,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestDdaCountbyConvsField (boolean value) {
       this.requestField("dda_countby_convs", value);
+      return this;
+    }
+    public APIRequestGetInsights requestDdaResultsField () {
+      return this.requestDdaResultsField(true);
+    }
+    public APIRequestGetInsights requestDdaResultsField (boolean value) {
+      this.requestField("dda_results", value);
       return this;
     }
     public APIRequestGetInsights requestEngagementRateRankingField () {
@@ -1328,11 +1281,18 @@ public class AdReportRun extends APINode {
       this.requestField("spend", value);
       return this;
     }
-    public APIRequestGetInsights requestStoreVisitActionsField () {
-      return this.requestStoreVisitActionsField(true);
+    public APIRequestGetInsights requestTotalPostbacksField () {
+      return this.requestTotalPostbacksField(true);
     }
-    public APIRequestGetInsights requestStoreVisitActionsField (boolean value) {
-      this.requestField("store_visit_actions", value);
+    public APIRequestGetInsights requestTotalPostbacksField (boolean value) {
+      this.requestField("total_postbacks", value);
+      return this;
+    }
+    public APIRequestGetInsights requestTotalPostbacksDetailedField () {
+      return this.requestTotalPostbacksDetailedField(true);
+    }
+    public APIRequestGetInsights requestTotalPostbacksDetailedField (boolean value) {
+      this.requestField("total_postbacks_detailed", value);
       return this;
     }
     public APIRequestGetInsights requestUniqueActionsField () {
@@ -1779,6 +1739,10 @@ public class AdReportRun extends APINode {
       VALUE_DDA("dda"),
       @SerializedName("default")
       VALUE_DEFAULT("default"),
+      @SerializedName("skan_click")
+      VALUE_SKAN_CLICK("skan_click"),
+      @SerializedName("skan_view")
+      VALUE_SKAN_VIEW("skan_view"),
       ;
 
       private String value;
@@ -1854,6 +1818,8 @@ public class AdReportRun extends APINode {
       VALUE_AD_FORMAT_ASSET("ad_format_asset"),
       @SerializedName("age")
       VALUE_AGE("age"),
+      @SerializedName("app_id")
+      VALUE_APP_ID("app_id"),
       @SerializedName("body_asset")
       VALUE_BODY_ASSET("body_asset"),
       @SerializedName("call_to_action_asset")
@@ -1878,8 +1844,12 @@ public class AdReportRun extends APINode {
       VALUE_IMAGE_ASSET("image_asset"),
       @SerializedName("impression_device")
       VALUE_IMPRESSION_DEVICE("impression_device"),
+      @SerializedName("is_conversion_id_modeled")
+      VALUE_IS_CONVERSION_ID_MODELED("is_conversion_id_modeled"),
       @SerializedName("link_url_asset")
       VALUE_LINK_URL_ASSET("link_url_asset"),
+      @SerializedName("mmm")
+      VALUE_MMM("mmm"),
       @SerializedName("place_page_id")
       VALUE_PLACE_PAGE_ID("place_page_id"),
       @SerializedName("platform_position")
@@ -1890,6 +1860,10 @@ public class AdReportRun extends APINode {
       VALUE_PUBLISHER_PLATFORM("publisher_platform"),
       @SerializedName("region")
       VALUE_REGION("region"),
+      @SerializedName("skan_campaign_id")
+      VALUE_SKAN_CAMPAIGN_ID("skan_campaign_id"),
+      @SerializedName("skan_conversion_id")
+      VALUE_SKAN_CONVERSION_ID("skan_conversion_id"),
       @SerializedName("title_asset")
       VALUE_TITLE_ASSET("title_asset"),
       @SerializedName("video_asset")
@@ -1909,6 +1883,8 @@ public class AdReportRun extends APINode {
   }
 
   public static enum EnumDatePreset {
+      @SerializedName("data_maximum")
+      VALUE_DATA_MAXIMUM("data_maximum"),
       @SerializedName("last_14d")
       VALUE_LAST_14D("last_14d"),
       @SerializedName("last_28d")

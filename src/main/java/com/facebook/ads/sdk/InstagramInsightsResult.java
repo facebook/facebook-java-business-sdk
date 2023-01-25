@@ -65,6 +65,8 @@ public class InstagramInsightsResult extends APINode {
   private String mPeriod = null;
   @SerializedName("title")
   private String mTitle = null;
+  @SerializedName("total_value")
+  private Object mTotalValue = null;
   @SerializedName("values")
   private List<InstagramInsightsValue> mValues = null;
   protected static Gson gson = null;
@@ -263,6 +265,15 @@ public class InstagramInsightsResult extends APINode {
     return this;
   }
 
+  public Object getFieldTotalValue() {
+    return mTotalValue;
+  }
+
+  public InstagramInsightsResult setFieldTotalValue(Object value) {
+    this.mTotalValue = value;
+    return this;
+  }
+
   public List<InstagramInsightsValue> getFieldValues() {
     return mValues;
   }
@@ -279,6 +290,29 @@ public class InstagramInsightsResult extends APINode {
   }
 
 
+  public static enum EnumBreakdown {
+      @SerializedName("action_type")
+      VALUE_ACTION_TYPE("action_type"),
+      @SerializedName("follow_type")
+      VALUE_FOLLOW_TYPE("follow_type"),
+      @SerializedName("story_navigation_action_type")
+      VALUE_STORY_NAVIGATION_ACTION_TYPE("story_navigation_action_type"),
+      @SerializedName("surface_type")
+      VALUE_SURFACE_TYPE("surface_type"),
+      ;
+
+      private String value;
+
+      private EnumBreakdown(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumMetric {
       @SerializedName("carousel_album_engagement")
       VALUE_CAROUSEL_ALBUM_ENGAGEMENT("carousel_album_engagement"),
@@ -290,22 +324,40 @@ public class InstagramInsightsResult extends APINode {
       VALUE_CAROUSEL_ALBUM_SAVED("carousel_album_saved"),
       @SerializedName("carousel_album_video_views")
       VALUE_CAROUSEL_ALBUM_VIDEO_VIEWS("carousel_album_video_views"),
+      @SerializedName("comments")
+      VALUE_COMMENTS("comments"),
       @SerializedName("engagement")
       VALUE_ENGAGEMENT("engagement"),
       @SerializedName("exits")
       VALUE_EXITS("exits"),
+      @SerializedName("follows")
+      VALUE_FOLLOWS("follows"),
       @SerializedName("impressions")
       VALUE_IMPRESSIONS("impressions"),
+      @SerializedName("likes")
+      VALUE_LIKES("likes"),
+      @SerializedName("navigation")
+      VALUE_NAVIGATION("navigation"),
+      @SerializedName("plays")
+      VALUE_PLAYS("plays"),
+      @SerializedName("profile_activity")
+      VALUE_PROFILE_ACTIVITY("profile_activity"),
+      @SerializedName("profile_visits")
+      VALUE_PROFILE_VISITS("profile_visits"),
       @SerializedName("reach")
       VALUE_REACH("reach"),
       @SerializedName("replies")
       VALUE_REPLIES("replies"),
       @SerializedName("saved")
       VALUE_SAVED("saved"),
+      @SerializedName("shares")
+      VALUE_SHARES("shares"),
       @SerializedName("taps_back")
       VALUE_TAPS_BACK("taps_back"),
       @SerializedName("taps_forward")
       VALUE_TAPS_FORWARD("taps_forward"),
+      @SerializedName("total_interactions")
+      VALUE_TOTAL_INTERACTIONS("total_interactions"),
       @SerializedName("video_views")
       VALUE_VIDEO_VIEWS("video_views"),
       ;
@@ -331,6 +383,8 @@ public class InstagramInsightsResult extends APINode {
       VALUE_LIFETIME("lifetime"),
       @SerializedName("month")
       VALUE_MONTH("month"),
+      @SerializedName("total_over_range")
+      VALUE_TOTAL_OVER_RANGE("total_over_range"),
       @SerializedName("week")
       VALUE_WEEK("week"),
       ;
@@ -338,6 +392,54 @@ public class InstagramInsightsResult extends APINode {
       private String value;
 
       private EnumPeriod(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumMetricType {
+      @SerializedName("default")
+      VALUE_DEFAULT("default"),
+      @SerializedName("time_series")
+      VALUE_TIME_SERIES("time_series"),
+      @SerializedName("total_value")
+      VALUE_TOTAL_VALUE("total_value"),
+      ;
+
+      private String value;
+
+      private EnumMetricType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumTimeframe {
+      @SerializedName("last_14_days")
+      VALUE_LAST_14_DAYS("last_14_days"),
+      @SerializedName("last_30_days")
+      VALUE_LAST_30_DAYS("last_30_days"),
+      @SerializedName("last_90_days")
+      VALUE_LAST_90_DAYS("last_90_days"),
+      @SerializedName("prev_month")
+      VALUE_PREV_MONTH("prev_month"),
+      @SerializedName("this_month")
+      VALUE_THIS_MONTH("this_month"),
+      @SerializedName("this_week")
+      VALUE_THIS_WEEK("this_week"),
+      ;
+
+      private String value;
+
+      private EnumTimeframe(String value) {
         this.value = value;
       }
 
@@ -367,6 +469,7 @@ public class InstagramInsightsResult extends APINode {
     this.mName = instance.mName;
     this.mPeriod = instance.mPeriod;
     this.mTitle = instance.mTitle;
+    this.mTotalValue = instance.mTotalValue;
     this.mValues = instance.mValues;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

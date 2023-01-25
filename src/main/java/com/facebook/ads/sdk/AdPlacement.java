@@ -67,6 +67,8 @@ public class AdPlacement extends APINode {
   private String mId = null;
   @SerializedName("name")
   private String mName = null;
+  @SerializedName("placement_group")
+  private Object mPlacementGroup = null;
   @SerializedName("platform")
   private String mPlatform = null;
   @SerializedName("status")
@@ -309,6 +311,10 @@ public class AdPlacement extends APINode {
     return mName;
   }
 
+  public Object getFieldPlacementGroup() {
+    return mPlacementGroup;
+  }
+
   public String getFieldPlatform() {
     return mPlatform;
   }
@@ -336,6 +342,7 @@ public class AdPlacement extends APINode {
       "google_display_format",
       "id",
       "name",
+      "placement_group",
       "platform",
       "status",
     };
@@ -471,6 +478,13 @@ public class AdPlacement extends APINode {
       this.requestField("name", value);
       return this;
     }
+    public APIRequestGet requestPlacementGroupField () {
+      return this.requestPlacementGroupField(true);
+    }
+    public APIRequestGet requestPlacementGroupField (boolean value) {
+      this.requestField("placement_group", value);
+      return this;
+    }
     public APIRequestGet requestPlatformField () {
       return this.requestPlatformField(true);
     }
@@ -508,6 +522,7 @@ public class AdPlacement extends APINode {
     this.mGoogleDisplayFormat = instance.mGoogleDisplayFormat;
     this.mId = instance.mId;
     this.mName = instance.mName;
+    this.mPlacementGroup = instance.mPlacementGroup;
     this.mPlatform = instance.mPlatform;
     this.mStatus = instance.mStatus;
     this.context = instance.context;

@@ -85,6 +85,8 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
   private Map<String, String> mFacebook = null;
   @SerializedName("facebook_pages_live_shopping")
   private Map<String, String> mFacebookPagesLiveShopping = null;
+  @SerializedName("independent_work")
+  private Map<String, String> mIndependentWork = null;
   @SerializedName("instagram")
   private Map<String, String> mInstagram = null;
   @SerializedName("instagram_shop")
@@ -105,6 +107,8 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
   private Map<String, String> mMarketplaceShops = null;
   @SerializedName("max_review_placements")
   private Map<String, String> mMaxReviewPlacements = null;
+  @SerializedName("neighborhoods")
+  private Map<String, String> mNeighborhoods = null;
   @SerializedName("page_admin")
   private Map<String, String> mPageAdmin = null;
   @SerializedName("product")
@@ -119,6 +123,8 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
   private Map<String, String> mShops = null;
   @SerializedName("traffic_quality")
   private Map<String, String> mTrafficQuality = null;
+  @SerializedName("unified_commerce_content")
+  private Map<String, String> mUnifiedCommerceContent = null;
   @SerializedName("whatsapp")
   private Map<String, String> mWhatsapp = null;
   protected static Gson gson = null;
@@ -407,6 +413,15 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
     return this;
   }
 
+  public Map<String, String> getFieldIndependentWork() {
+    return mIndependentWork;
+  }
+
+  public AdgroupPlacementSpecificReviewFeedback setFieldIndependentWork(Map<String, String> value) {
+    this.mIndependentWork = value;
+    return this;
+  }
+
   public Map<String, String> getFieldInstagram() {
     return mInstagram;
   }
@@ -497,6 +512,15 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
     return this;
   }
 
+  public Map<String, String> getFieldNeighborhoods() {
+    return mNeighborhoods;
+  }
+
+  public AdgroupPlacementSpecificReviewFeedback setFieldNeighborhoods(Map<String, String> value) {
+    this.mNeighborhoods = value;
+    return this;
+  }
+
   public Map<String, String> getFieldPageAdmin() {
     return mPageAdmin;
   }
@@ -560,6 +584,15 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
     return this;
   }
 
+  public Map<String, String> getFieldUnifiedCommerceContent() {
+    return mUnifiedCommerceContent;
+  }
+
+  public AdgroupPlacementSpecificReviewFeedback setFieldUnifiedCommerceContent(Map<String, String> value) {
+    this.mUnifiedCommerceContent = value;
+    return this;
+  }
+
   public Map<String, String> getFieldWhatsapp() {
     return mWhatsapp;
   }
@@ -601,6 +634,7 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
     this.mDriCounterfeit = instance.mDriCounterfeit;
     this.mFacebook = instance.mFacebook;
     this.mFacebookPagesLiveShopping = instance.mFacebookPagesLiveShopping;
+    this.mIndependentWork = instance.mIndependentWork;
     this.mInstagram = instance.mInstagram;
     this.mInstagramShop = instance.mInstagramShop;
     this.mJobSearch = instance.mJobSearch;
@@ -611,6 +645,7 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
     this.mMarketplaceMotors = instance.mMarketplaceMotors;
     this.mMarketplaceShops = instance.mMarketplaceShops;
     this.mMaxReviewPlacements = instance.mMaxReviewPlacements;
+    this.mNeighborhoods = instance.mNeighborhoods;
     this.mPageAdmin = instance.mPageAdmin;
     this.mProduct = instance.mProduct;
     this.mProductService = instance.mProductService;
@@ -618,6 +653,7 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
     this.mSeller = instance.mSeller;
     this.mShops = instance.mShops;
     this.mTrafficQuality = instance.mTrafficQuality;
+    this.mUnifiedCommerceContent = instance.mUnifiedCommerceContent;
     this.mWhatsapp = instance.mWhatsapp;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

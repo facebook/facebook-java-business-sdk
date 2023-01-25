@@ -55,6 +55,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdCreativeLinkData extends APINode {
+  @SerializedName("ad_context")
+  private String mAdContext = null;
   @SerializedName("additional_image_index")
   private Long mAdditionalImageIndex = null;
   @SerializedName("app_link_spec")
@@ -269,6 +271,15 @@ public class AdCreativeLinkData extends APINode {
     return getGson().toJson(this);
   }
 
+
+  public String getFieldAdContext() {
+    return mAdContext;
+  }
+
+  public AdCreativeLinkData setFieldAdContext(String value) {
+    this.mAdContext = value;
+    return this;
+  }
 
   public Long getFieldAdditionalImageIndex() {
     return mAdditionalImageIndex;
@@ -630,6 +641,8 @@ public class AdCreativeLinkData extends APINode {
   }
 
   public static enum EnumFormatOption {
+      @SerializedName("carousel_ar_effects")
+      VALUE_CAROUSEL_AR_EFFECTS("carousel_ar_effects"),
       @SerializedName("carousel_images_multi_items")
       VALUE_CAROUSEL_IMAGES_MULTI_ITEMS("carousel_images_multi_items"),
       @SerializedName("carousel_images_single_item")
@@ -667,6 +680,7 @@ public class AdCreativeLinkData extends APINode {
   }
 
   public AdCreativeLinkData copyFrom(AdCreativeLinkData instance) {
+    this.mAdContext = instance.mAdContext;
     this.mAdditionalImageIndex = instance.mAdditionalImageIndex;
     this.mAppLinkSpec = instance.mAppLinkSpec;
     this.mAttachmentStyle = instance.mAttachmentStyle;

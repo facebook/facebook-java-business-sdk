@@ -1,5 +1,6 @@
 /**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
  * You are hereby granted a non-exclusive, worldwide, royalty-free license to
  * use, copy, modify, and distribute this software in source code or binary
@@ -37,8 +38,8 @@ public class AdAccountAdSetsPostOfferClaim {
     new AdAccount(id, context).createAdSet()
       .setName("My Offer Claim AdSet")
       .setLifetimeBudget(56000L)
-      .setStartTime("2021-04-18T09:43:15-0700")
-      .setEndTime("2021-04-25T09:43:15-0700")
+      .setStartTime("2022-05-23T13:26:58-0700")
+      .setEndTime("2022-05-30T13:26:58-0700")
       .setCampaignId("<adCampaignLinkClicksID>")
       .setBillingEvent(AdSet.EnumBillingEvent.VALUE_LINK_CLICKS)
       .setOptimizationGoal(AdSet.EnumOptimizationGoal.VALUE_LINK_CLICKS)

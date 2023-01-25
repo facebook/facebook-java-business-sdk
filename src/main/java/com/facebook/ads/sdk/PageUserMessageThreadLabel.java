@@ -57,8 +57,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class PageUserMessageThreadLabel extends APINode {
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("name")
-  private String mName = null;
+  @SerializedName("page_label_name")
+  private String mPageLabelName = null;
   protected static Gson gson = null;
 
   PageUserMessageThreadLabel() {
@@ -289,8 +289,8 @@ public class PageUserMessageThreadLabel extends APINode {
     return mId;
   }
 
-  public String getFieldName() {
-    return mName;
+  public String getFieldPageLabelName() {
+    return mPageLabelName;
   }
 
 
@@ -639,7 +639,7 @@ public class PageUserMessageThreadLabel extends APINode {
 
     public static final String[] FIELDS = {
       "id",
-      "name",
+      "page_label_name",
     };
 
     @Override
@@ -738,11 +738,11 @@ public class PageUserMessageThreadLabel extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestNameField () {
-      return this.requestNameField(true);
+    public APIRequestGet requestPageLabelNameField () {
+      return this.requestPageLabelNameField(true);
     }
-    public APIRequestGet requestNameField (boolean value) {
-      this.requestField("name", value);
+    public APIRequestGet requestPageLabelNameField (boolean value) {
+      this.requestField("page_label_name", value);
       return this;
     }
   }
@@ -763,7 +763,7 @@ public class PageUserMessageThreadLabel extends APINode {
 
   public PageUserMessageThreadLabel copyFrom(PageUserMessageThreadLabel instance) {
     this.mId = instance.mId;
-    this.mName = instance.mName;
+    this.mPageLabelName = instance.mPageLabelName;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

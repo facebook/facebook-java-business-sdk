@@ -55,6 +55,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class TargetingRelaxation extends APINode {
+  @SerializedName("custom_audience")
+  private Long mCustomAudience = null;
   @SerializedName("lookalike")
   private Long mLookalike = null;
   protected static Gson gson = null;
@@ -208,6 +210,15 @@ public class TargetingRelaxation extends APINode {
   }
 
 
+  public Long getFieldCustomAudience() {
+    return mCustomAudience;
+  }
+
+  public TargetingRelaxation setFieldCustomAudience(Long value) {
+    this.mCustomAudience = value;
+    return this;
+  }
+
   public Long getFieldLookalike() {
     return mLookalike;
   }
@@ -234,6 +245,7 @@ public class TargetingRelaxation extends APINode {
   }
 
   public TargetingRelaxation copyFrom(TargetingRelaxation instance) {
+    this.mCustomAudience = instance.mCustomAudience;
     this.mLookalike = instance.mLookalike;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
