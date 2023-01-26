@@ -25,16 +25,16 @@ public class EventRequestCustomEndpointTest {
     @Before
     public void mockCustomEndpointClient() {
         mockEndpointRequest = new CustomEndpointRequest() {
-            private boolean sendToDestinationOnly;
+            private boolean sendToEndpointOnly;
             @Override
             public CustomEndpointResponse sendEvent(final APIContext context, final String pixelId, final List<Event> data) throws APIException.FailedRequestException {
-                return (sendToDestinationOnly)? new CustomEndpointResponse("Events sent to mock custom endpoint only", "224"):
+                return (sendToEndpointOnly)? new CustomEndpointResponse("Events sent to mock custom endpoint only", "224"):
                         new CustomEndpointResponse("Events sent to mock endpoint and CAPI", "222");
             }
 
             @Override
             public ListenableFuture<CustomEndpointResponse> sendEventAsync(final APIContext context, final String pixelId, final List<Event> Data) {
-                return (sendToDestinationOnly)? Futures.immediateFuture(new CustomEndpointResponse("Events asynchronously sent to mock custom endpoint only", "224")) :
+                return (sendToEndpointOnly)? Futures.immediateFuture(new CustomEndpointResponse("Events asynchronously sent to mock custom endpoint only", "224")) :
                         Futures.immediateFuture(new CustomEndpointResponse("Events asynchronously sent to mock endpoint and CAPI", "222"));
             }
 
@@ -43,15 +43,14 @@ public class EventRequestCustomEndpointTest {
             }
 
             @Override
-            public void setSendToDestinationOnly(final boolean sendToDestinationOnly) {
-                this.sendToDestinationOnly = sendToDestinationOnly;
+            public void setSendToEndpointOnly(final boolean sendToEndpointOnly) {
+                this.sendToEndpointOnly = sendToEndpointOnly;
             }
 
             @Override
-            public boolean isSendToDestinationOnly() {
-                return sendToDestinationOnly;
+            public boolean isSendToEndpointOnly() {
+                return this.sendToEndpointOnly;
             }
-
             @Override
             public String getEndpoint() {
                 return "www.endpoint.com";
@@ -111,7 +110,7 @@ public class EventRequestCustomEndpointTest {
 
     @Test
     public void sendSyncToCustomEndpointOnly() throws APIException {
-        mockEndpointRequest.setSendToDestinationOnly(true);
+        mockEndpointRequest.setSendToEndpointOnly(true);
         eventRequest = setupClientForCustomEndpoint();
         eventRequest.setCustomEndpoint(mockEndpointRequest);
         final EventResponse testResponse = eventRequest.execute();
@@ -126,7 +125,7 @@ public class EventRequestCustomEndpointTest {
 
     @Test
     public void sendAsyncToCustomEndpointOnly() throws APIException, ExecutionException, InterruptedException {
-        mockEndpointRequest.setSendToDestinationOnly(true);
+        mockEndpointRequest.setSendToEndpointOnly(true);
         eventRequest = setupClientForCustomEndpoint();
         eventRequest.setCustomEndpoint(mockEndpointRequest);
         final EventResponse testResponse = eventRequest.executeAsync().get();

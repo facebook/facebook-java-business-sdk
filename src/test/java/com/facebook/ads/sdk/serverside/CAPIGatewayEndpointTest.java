@@ -13,30 +13,30 @@ import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CAPIGatewayIngressRequestTest {
+public class CAPIGatewayEndpointTest {
     @Rule
     public final ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void BuildersAndGettersTest() {
-        final CAPIGatewayIngressRequest capigIngressRequest = new CAPIGatewayIngressRequest("https://example.com", "ACCESS_KEY");
+        final CAPIGatewayEndpoint capigIngressRequest = new CAPIGatewayEndpoint("https://example.com", "ACCESS_KEY");
         assertEquals(capigIngressRequest.getEndpoint(), "https://example.com");
-        assertFalse(capigIngressRequest.isSendToDestinationOnly());
-        capigIngressRequest.setSendToDestinationOnly(true);
-        assertTrue(capigIngressRequest.isSendToDestinationOnly());
+        assertFalse(capigIngressRequest.isSendToEndpointOnly());
+        capigIngressRequest.setSendToEndpointOnly(true);
+        assertTrue(capigIngressRequest.isSendToEndpointOnly());
     }
 
     @Test
     public void invalidURLTest() {
         thrown.expect(InvalidParameterException.class);
-        new CAPIGatewayIngressRequest("badDomain", "ACCESS_KEY");
+        new CAPIGatewayEndpoint("badDomain", "ACCESS_KEY");
         thrown.expectMessage("URL is in invalid format");
     }
 
     @Test
     public void filterAllEvents() throws APIException.FailedRequestException {
         final CustomEndpointRequest.Filter filterAllEvents = a -> false;
-        final CAPIGatewayIngressRequest capigIngressRequest = new CAPIGatewayIngressRequest("https://capig-instance.com", "ACCESS_KEY");
+        final CAPIGatewayEndpoint capigIngressRequest = new CAPIGatewayEndpoint("https://capig-instance.com", "ACCESS_KEY");
         capigIngressRequest.setFilter(filterAllEvents);
         final List<Event> events = new ArrayList();
         final Event event1 = new Event();
