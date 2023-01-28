@@ -385,7 +385,7 @@ public class EventRequest {
   public EventResponse execute() throws APIException {
     EventResponse response;
     try {
-      if (endpointRequest != null && endpointRequest.isSendToDestinationOnly()) {
+      if (endpointRequest != null && endpointRequest.isSendToEndpointOnly()) {
         // do not send to CAPI Endpoint. If no exception was thrown, we can assume all events were sent successfully
         final Map<String, CustomEndpointResponse> customEndpointResponses = sendEventsToCustomEndpoint();
         context.log(String.format("Successfully sent %d event(s) to %s only", data.size(), endpointRequest.getEndpoint()));
@@ -515,7 +515,7 @@ public class EventRequest {
       if (endpointRequest == null) {
         return sendEventToCAPIOnly();
       }
-      return (endpointRequest.isSendToDestinationOnly()) ? sendEventAsyncToCustomEndpointOnly() : sendEventAsyncToCAPIAndCustomEndpoint();
+      return (endpointRequest.isSendToEndpointOnly()) ? sendEventAsyncToCustomEndpointOnly() : sendEventAsyncToCAPIAndCustomEndpoint();
     } catch (final APIException e) {
       context.log(e.getMessage());
       throw e;
