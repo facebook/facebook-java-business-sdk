@@ -284,8 +284,8 @@ public class PublisherBlockList extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestCreateAppendPublisherUrl createAppendPublisherUrl() {
-    return new APIRequestCreateAppendPublisherUrl(this.getPrefixedId().toString(), context);
+  public APIRequestCreateAppEndPublisherUrl createAppEndPublisherUrl() {
+    return new APIRequestCreateAppEndPublisherUrl(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetPagedWebPublishers getPagedWebPublishers() {
@@ -347,7 +347,7 @@ public class PublisherBlockList extends APINode {
 
 
 
-  public static class APIRequestCreateAppendPublisherUrl extends APIRequest<APINode> {
+  public static class APIRequestCreateAppEndPublisherUrl extends APIRequest<APINode> {
 
     APINode lastResponse = null;
     @Override
@@ -388,7 +388,7 @@ public class PublisherBlockList extends APINode {
         new Function<ResponseWrapper, APINode>() {
            public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAppendPublisherUrl.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestCreateAppEndPublisherUrl.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -397,37 +397,37 @@ public class PublisherBlockList extends APINode {
       );
     };
 
-    public APIRequestCreateAppendPublisherUrl(String nodeId, APIContext context) {
+    public APIRequestCreateAppEndPublisherUrl(String nodeId, APIContext context) {
       super(context, nodeId, "/append_publisher_urls", "POST", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestCreateAppendPublisherUrl setParam(String param, Object value) {
+    public APIRequestCreateAppEndPublisherUrl setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestCreateAppendPublisherUrl setParams(Map<String, Object> params) {
+    public APIRequestCreateAppEndPublisherUrl setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestCreateAppendPublisherUrl setPublisherUrls (List<String> publisherUrls) {
+    public APIRequestCreateAppEndPublisherUrl setPublisherUrls (List<String> publisherUrls) {
       this.setParam("publisher_urls", publisherUrls);
       return this;
     }
-    public APIRequestCreateAppendPublisherUrl setPublisherUrls (String publisherUrls) {
+    public APIRequestCreateAppEndPublisherUrl setPublisherUrls (String publisherUrls) {
       this.setParam("publisher_urls", publisherUrls);
       return this;
     }
 
-    public APIRequestCreateAppendPublisherUrl requestAllFields () {
+    public APIRequestCreateAppEndPublisherUrl requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestCreateAppendPublisherUrl requestAllFields (boolean value) {
+    public APIRequestCreateAppEndPublisherUrl requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -435,12 +435,12 @@ public class PublisherBlockList extends APINode {
     }
 
     @Override
-    public APIRequestCreateAppendPublisherUrl requestFields (List<String> fields) {
+    public APIRequestCreateAppEndPublisherUrl requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestCreateAppendPublisherUrl requestFields (List<String> fields, boolean value) {
+    public APIRequestCreateAppEndPublisherUrl requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -448,13 +448,13 @@ public class PublisherBlockList extends APINode {
     }
 
     @Override
-    public APIRequestCreateAppendPublisherUrl requestField (String field) {
+    public APIRequestCreateAppEndPublisherUrl requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestCreateAppendPublisherUrl requestField (String field, boolean value) {
+    public APIRequestCreateAppEndPublisherUrl requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

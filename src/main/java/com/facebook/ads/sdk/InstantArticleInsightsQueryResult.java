@@ -294,6 +294,8 @@ public class InstantArticleInsightsQueryResult extends APINode {
       VALUE_LIFETIME("lifetime"),
       @SerializedName("month")
       VALUE_MONTH("month"),
+      @SerializedName("total_over_range")
+      VALUE_TOTAL_OVER_RANGE("total_over_range"),
       @SerializedName("week")
       VALUE_WEEK("week"),
       ;

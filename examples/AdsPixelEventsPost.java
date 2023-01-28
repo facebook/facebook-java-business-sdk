@@ -1,5 +1,6 @@
 /**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
  * You are hereby granted a non-exclusive, worldwide, royalty-free license to
  * use, copy, modify, and distribute this software in source code or binary
@@ -35,7 +36,7 @@ public class AdsPixelEventsPost {
     APIContext context = new APIContext(access_token).enableDebug(true);
 
     new AdsPixel(id, context).createEvent()
-      .setData("[{\"event_name\":\"PageView\",\"event_time\":1618763836,\"user_data\":{\"fbc\":\"fb.1.1554763741205.AbCdEfGhIjKlMnOpQrStUvWxYz1234567890\",\"fbp\":\"fb.1.1558571054389.1098115397\",\"em\":\"309a0a5c3e211326ae75ca18196d301a9bdbd1a882a4d2569511033da23f0abd\"}}]")
+      .setData("[{\"event_name\":\"PageView\",\"event_time\":1673305167,\"user_data\":{\"fbc\":\"fb.1.1554763741205.AbCdEfGhIjKlMnOpQrStUvWxYz1234567890\",\"fbp\":\"fb.1.1558571054389.1098115397\",\"em\":\"309a0a5c3e211326ae75ca18196d301a9bdbd1a882a4d2569511033da23f0abd\"}}]")
       .execute();
 
   }

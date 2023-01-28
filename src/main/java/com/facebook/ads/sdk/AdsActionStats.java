@@ -111,6 +111,10 @@ public class AdsActionStats extends APINode {
   private String mInteractiveComponentStickerId = null;
   @SerializedName("interactive_component_sticker_response")
   private String mInteractiveComponentStickerResponse = null;
+  @SerializedName("skan_click")
+  private String mSkanClick = null;
+  @SerializedName("skan_view")
+  private String mSkanView = null;
   @SerializedName("value")
   private String mValue = null;
   protected static Gson gson = null;
@@ -516,6 +520,24 @@ public class AdsActionStats extends APINode {
     return this;
   }
 
+  public String getFieldSkanClick() {
+    return mSkanClick;
+  }
+
+  public AdsActionStats setFieldSkanClick(String value) {
+    this.mSkanClick = value;
+    return this;
+  }
+
+  public String getFieldSkanView() {
+    return mSkanView;
+  }
+
+  public AdsActionStats setFieldSkanView(String value) {
+    this.mSkanView = value;
+    return this;
+  }
+
   public String getFieldValue() {
     return mValue;
   }
@@ -570,6 +592,8 @@ public class AdsActionStats extends APINode {
     this.mInline = instance.mInline;
     this.mInteractiveComponentStickerId = instance.mInteractiveComponentStickerId;
     this.mInteractiveComponentStickerResponse = instance.mInteractiveComponentStickerResponse;
+    this.mSkanClick = instance.mSkanClick;
+    this.mSkanView = instance.mSkanView;
     this.mValue = instance.mValue;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

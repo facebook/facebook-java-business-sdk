@@ -67,6 +67,8 @@ public class ReachFrequencyEstimatesPlacementBreakdown extends APINode {
   private List<Double> mIgIos = null;
   @SerializedName("ig_other")
   private List<Double> mIgOther = null;
+  @SerializedName("ig_reels")
+  private List<Double> mIgReels = null;
   @SerializedName("ig_story")
   private List<Double> mIgStory = null;
   @SerializedName("instant_articles")
@@ -284,6 +286,15 @@ public class ReachFrequencyEstimatesPlacementBreakdown extends APINode {
     return this;
   }
 
+  public List<Double> getFieldIgReels() {
+    return mIgReels;
+  }
+
+  public ReachFrequencyEstimatesPlacementBreakdown setFieldIgReels(List<Double> value) {
+    this.mIgReels = value;
+    return this;
+  }
+
   public List<Double> getFieldIgStory() {
     return mIgStory;
   }
@@ -361,6 +372,7 @@ public class ReachFrequencyEstimatesPlacementBreakdown extends APINode {
     this.mIgAndroid = instance.mIgAndroid;
     this.mIgIos = instance.mIgIos;
     this.mIgOther = instance.mIgOther;
+    this.mIgReels = instance.mIgReels;
     this.mIgStory = instance.mIgStory;
     this.mInstantArticles = instance.mInstantArticles;
     this.mInstreamVideos = instance.mInstreamVideos;

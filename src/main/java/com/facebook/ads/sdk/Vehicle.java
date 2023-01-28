@@ -71,6 +71,8 @@ public class Vehicle extends APINode {
   private String mCurrency = null;
   @SerializedName("custom_label_0")
   private String mCustomLabel0 = null;
+  @SerializedName("custom_number_0")
+  private Long mCustomNumber0 = null;
   @SerializedName("date_first_on_lot")
   private String mDateFirstOnLot = null;
   @SerializedName("dealer_communication_channel")
@@ -133,6 +135,8 @@ public class Vehicle extends APINode {
   private String mTransmission = null;
   @SerializedName("trim")
   private String mTrim = null;
+  @SerializedName("unit_price")
+  private Object mUnitPrice = null;
   @SerializedName("url")
   private String mUrl = null;
   @SerializedName("vehicle_id")
@@ -145,6 +149,8 @@ public class Vehicle extends APINode {
   private String mVehicleType = null;
   @SerializedName("vin")
   private String mVin = null;
+  @SerializedName("visibility")
+  private EnumVisibility mVisibility = null;
   @SerializedName("year")
   private Long mYear = null;
   protected static Gson gson = null;
@@ -360,6 +366,10 @@ public class Vehicle extends APINode {
     return new APIRequestGetAugmentedRealitiesMetadata(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetChannelsToIntegrityStatus getChannelsToIntegrityStatus() {
+    return new APIRequestGetChannelsToIntegrityStatus(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetVideosMetadata getVideosMetadata() {
     return new APIRequestGetVideosMetadata(this.getPrefixedId().toString(), context);
   }
@@ -403,6 +413,10 @@ public class Vehicle extends APINode {
 
   public String getFieldCustomLabel0() {
     return mCustomLabel0;
+  }
+
+  public Long getFieldCustomNumber0() {
+    return mCustomNumber0;
   }
 
   public String getFieldDateFirstOnLot() {
@@ -532,6 +546,10 @@ public class Vehicle extends APINode {
     return mTrim;
   }
 
+  public Object getFieldUnitPrice() {
+    return mUnitPrice;
+  }
+
   public String getFieldUrl() {
     return mUrl;
   }
@@ -554,6 +572,10 @@ public class Vehicle extends APINode {
 
   public String getFieldVin() {
     return mVin;
+  }
+
+  public EnumVisibility getFieldVisibility() {
+    return mVisibility;
   }
 
   public Long getFieldYear() {
@@ -664,6 +686,126 @@ public class Vehicle extends APINode {
       return this;
     }
 
+  }
+
+  public static class APIRequestGetChannelsToIntegrityStatus extends APIRequest<CatalogItemChannelsToIntegrityStatus> {
+
+    APINodeList<CatalogItemChannelsToIntegrityStatus> lastResponse = null;
+    @Override
+    public APINodeList<CatalogItemChannelsToIntegrityStatus> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "channels",
+      "rejection_information",
+    };
+
+    @Override
+    public APINodeList<CatalogItemChannelsToIntegrityStatus> parseResponse(String response, String header) throws APIException {
+      return CatalogItemChannelsToIntegrityStatus.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<CatalogItemChannelsToIntegrityStatus> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<CatalogItemChannelsToIntegrityStatus> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<CatalogItemChannelsToIntegrityStatus>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<CatalogItemChannelsToIntegrityStatus>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<CatalogItemChannelsToIntegrityStatus>>() {
+           public APINodeList<CatalogItemChannelsToIntegrityStatus> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetChannelsToIntegrityStatus.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetChannelsToIntegrityStatus(String nodeId, APIContext context) {
+      super(context, nodeId, "/channels_to_integrity_status", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetChannelsToIntegrityStatus setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetChannelsToIntegrityStatus setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetChannelsToIntegrityStatus requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetChannelsToIntegrityStatus requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetChannelsToIntegrityStatus requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetChannelsToIntegrityStatus requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetChannelsToIntegrityStatus requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetChannelsToIntegrityStatus requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetChannelsToIntegrityStatus requestChannelsField () {
+      return this.requestChannelsField(true);
+    }
+    public APIRequestGetChannelsToIntegrityStatus requestChannelsField (boolean value) {
+      this.requestField("channels", value);
+      return this;
+    }
+    public APIRequestGetChannelsToIntegrityStatus requestRejectionInformationField () {
+      return this.requestRejectionInformationField(true);
+    }
+    public APIRequestGetChannelsToIntegrityStatus requestRejectionInformationField (boolean value) {
+      this.requestField("rejection_information", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetVideosMetadata extends APIRequest<APINode> {
@@ -789,6 +931,7 @@ public class Vehicle extends APINode {
       "condition",
       "currency",
       "custom_label_0",
+      "custom_number_0",
       "date_first_on_lot",
       "dealer_communication_channel",
       "dealer_email",
@@ -820,12 +963,14 @@ public class Vehicle extends APINode {
       "title",
       "transmission",
       "trim",
+      "unit_price",
       "url",
       "vehicle_id",
       "vehicle_registration_plate",
       "vehicle_specifications",
       "vehicle_type",
       "vin",
+      "visibility",
       "year",
     };
 
@@ -972,6 +1117,13 @@ public class Vehicle extends APINode {
     }
     public APIRequestGet requestCustomLabel0Field (boolean value) {
       this.requestField("custom_label_0", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNumber0Field () {
+      return this.requestCustomNumber0Field(true);
+    }
+    public APIRequestGet requestCustomNumber0Field (boolean value) {
+      this.requestField("custom_number_0", value);
       return this;
     }
     public APIRequestGet requestDateFirstOnLotField () {
@@ -1191,6 +1343,13 @@ public class Vehicle extends APINode {
       this.requestField("trim", value);
       return this;
     }
+    public APIRequestGet requestUnitPriceField () {
+      return this.requestUnitPriceField(true);
+    }
+    public APIRequestGet requestUnitPriceField (boolean value) {
+      this.requestField("unit_price", value);
+      return this;
+    }
     public APIRequestGet requestUrlField () {
       return this.requestUrlField(true);
     }
@@ -1231,6 +1390,13 @@ public class Vehicle extends APINode {
     }
     public APIRequestGet requestVinField (boolean value) {
       this.requestField("vin", value);
+      return this;
+    }
+    public APIRequestGet requestVisibilityField () {
+      return this.requestVisibilityField(true);
+    }
+    public APIRequestGet requestVisibilityField (boolean value) {
+      this.requestField("visibility", value);
       return this;
     }
     public APIRequestGet requestYearField () {
@@ -1603,6 +1769,25 @@ public class Vehicle extends APINode {
       }
   }
 
+  public static enum EnumVisibility {
+      @SerializedName("PUBLISHED")
+      VALUE_PUBLISHED("PUBLISHED"),
+      @SerializedName("STAGING")
+      VALUE_STAGING("STAGING"),
+      ;
+
+      private String value;
+
+      private EnumVisibility(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumAvailability {
       @SerializedName("AVAILABLE")
       VALUE_AVAILABLE("AVAILABLE"),
@@ -1631,18 +1816,38 @@ public class Vehicle extends APINode {
       VALUE_COUPE("COUPE"),
       @SerializedName("CROSSOVER")
       VALUE_CROSSOVER("CROSSOVER"),
+      @SerializedName("ESTATE")
+      VALUE_ESTATE("ESTATE"),
+      @SerializedName("GRANDTOURER")
+      VALUE_GRANDTOURER("GRANDTOURER"),
       @SerializedName("HATCHBACK")
       VALUE_HATCHBACK("HATCHBACK"),
+      @SerializedName("MINIBUS")
+      VALUE_MINIBUS("MINIBUS"),
       @SerializedName("MINIVAN")
       VALUE_MINIVAN("MINIVAN"),
+      @SerializedName("MPV")
+      VALUE_MPV("MPV"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
       @SerializedName("OTHER")
       VALUE_OTHER("OTHER"),
+      @SerializedName("PICKUP")
+      VALUE_PICKUP("PICKUP"),
+      @SerializedName("ROADSTER")
+      VALUE_ROADSTER("ROADSTER"),
+      @SerializedName("SALOON")
+      VALUE_SALOON("SALOON"),
       @SerializedName("SEDAN")
       VALUE_SEDAN("SEDAN"),
       @SerializedName("SMALL_CAR")
       VALUE_SMALL_CAR("SMALL_CAR"),
+      @SerializedName("SPORTSCAR")
+      VALUE_SPORTSCAR("SPORTSCAR"),
+      @SerializedName("SUPERCAR")
+      VALUE_SUPERCAR("SUPERCAR"),
+      @SerializedName("SUPERMINI")
+      VALUE_SUPERMINI("SUPERMINI"),
       @SerializedName("SUV")
       VALUE_SUV("SUV"),
       @SerializedName("TRUCK")
@@ -1854,6 +2059,7 @@ public class Vehicle extends APINode {
     this.mCondition = instance.mCondition;
     this.mCurrency = instance.mCurrency;
     this.mCustomLabel0 = instance.mCustomLabel0;
+    this.mCustomNumber0 = instance.mCustomNumber0;
     this.mDateFirstOnLot = instance.mDateFirstOnLot;
     this.mDealerCommunicationChannel = instance.mDealerCommunicationChannel;
     this.mDealerEmail = instance.mDealerEmail;
@@ -1885,12 +2091,14 @@ public class Vehicle extends APINode {
     this.mTitle = instance.mTitle;
     this.mTransmission = instance.mTransmission;
     this.mTrim = instance.mTrim;
+    this.mUnitPrice = instance.mUnitPrice;
     this.mUrl = instance.mUrl;
     this.mVehicleId = instance.mVehicleId;
     this.mVehicleRegistrationPlate = instance.mVehicleRegistrationPlate;
     this.mVehicleSpecifications = instance.mVehicleSpecifications;
     this.mVehicleType = instance.mVehicleType;
     this.mVin = instance.mVin;
+    this.mVisibility = instance.mVisibility;
     this.mYear = instance.mYear;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

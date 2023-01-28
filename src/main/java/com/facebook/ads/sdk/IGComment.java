@@ -55,6 +55,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class IGComment extends APINode {
+  @SerializedName("from")
+  private Object mFrom = null;
   @SerializedName("hidden")
   private Boolean mHidden = null;
   @SerializedName("id")
@@ -63,6 +65,8 @@ public class IGComment extends APINode {
   private Long mLikeCount = null;
   @SerializedName("media")
   private IGMedia mMedia = null;
+  @SerializedName("parent_id")
+  private String mParentId = null;
   @SerializedName("text")
   private String mText = null;
   @SerializedName("timestamp")
@@ -301,6 +305,10 @@ public class IGComment extends APINode {
   }
 
 
+  public Object getFieldFrom() {
+    return mFrom;
+  }
+
   public Boolean getFieldHidden() {
     return mHidden;
   }
@@ -318,6 +326,10 @@ public class IGComment extends APINode {
       mMedia.context = getContext();
     }
     return mMedia;
+  }
+
+  public String getFieldParentId() {
+    return mParentId;
   }
 
   public String getFieldText() {
@@ -352,10 +364,12 @@ public class IGComment extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "from",
       "hidden",
       "id",
       "like_count",
       "media",
+      "parent_id",
       "text",
       "timestamp",
       "user",
@@ -451,6 +465,13 @@ public class IGComment extends APINode {
       return this;
     }
 
+    public APIRequestGetReplies requestFromField () {
+      return this.requestFromField(true);
+    }
+    public APIRequestGetReplies requestFromField (boolean value) {
+      this.requestField("from", value);
+      return this;
+    }
     public APIRequestGetReplies requestHiddenField () {
       return this.requestHiddenField(true);
     }
@@ -477,6 +498,13 @@ public class IGComment extends APINode {
     }
     public APIRequestGetReplies requestMediaField (boolean value) {
       this.requestField("media", value);
+      return this;
+    }
+    public APIRequestGetReplies requestParentIdField () {
+      return this.requestParentIdField(true);
+    }
+    public APIRequestGetReplies requestParentIdField (boolean value) {
+      this.requestField("parent_id", value);
       return this;
     }
     public APIRequestGetReplies requestTextField () {
@@ -734,10 +762,12 @@ public class IGComment extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "from",
       "hidden",
       "id",
       "like_count",
       "media",
+      "parent_id",
       "text",
       "timestamp",
       "user",
@@ -833,6 +863,13 @@ public class IGComment extends APINode {
       return this;
     }
 
+    public APIRequestGet requestFromField () {
+      return this.requestFromField(true);
+    }
+    public APIRequestGet requestFromField (boolean value) {
+      this.requestField("from", value);
+      return this;
+    }
     public APIRequestGet requestHiddenField () {
       return this.requestHiddenField(true);
     }
@@ -859,6 +896,13 @@ public class IGComment extends APINode {
     }
     public APIRequestGet requestMediaField (boolean value) {
       this.requestField("media", value);
+      return this;
+    }
+    public APIRequestGet requestParentIdField () {
+      return this.requestParentIdField(true);
+    }
+    public APIRequestGet requestParentIdField (boolean value) {
+      this.requestField("parent_id", value);
       return this;
     }
     public APIRequestGet requestTextField () {
@@ -1020,10 +1064,12 @@ public class IGComment extends APINode {
   }
 
   public IGComment copyFrom(IGComment instance) {
+    this.mFrom = instance.mFrom;
     this.mHidden = instance.mHidden;
     this.mId = instance.mId;
     this.mLikeCount = instance.mLikeCount;
     this.mMedia = instance.mMedia;
+    this.mParentId = instance.mParentId;
     this.mText = instance.mText;
     this.mTimestamp = instance.mTimestamp;
     this.mUser = instance.mUser;

@@ -246,6 +246,8 @@ public class CustomAudienceDataSource extends APINode {
       VALUE_ANYTHING("ANYTHING"),
       @SerializedName("APP_USERS")
       VALUE_APP_USERS("APP_USERS"),
+      @SerializedName("AR_EXPERIENCE_EVENTS")
+      VALUE_AR_EXPERIENCE_EVENTS("AR_EXPERIENCE_EVENTS"),
       @SerializedName("CAMPAIGN_CONVERSIONS")
       VALUE_CAMPAIGN_CONVERSIONS("CAMPAIGN_CONVERSIONS"),
       @SerializedName("COMBINATION_CUSTOM_AUDIENCE_USERS")
@@ -260,6 +262,8 @@ public class CustomAudienceDataSource extends APINode {
       VALUE_COPY_PASTE_EMAIL_HASHES("COPY_PASTE_EMAIL_HASHES"),
       @SerializedName("CUSTOM_AUDIENCE_USERS")
       VALUE_CUSTOM_AUDIENCE_USERS("CUSTOM_AUDIENCE_USERS"),
+      @SerializedName("CUSTOM_DATA_TARGETING")
+      VALUE_CUSTOM_DATA_TARGETING("CUSTOM_DATA_TARGETING"),
       @SerializedName("DATA_FILE")
       VALUE_DATA_FILE("DATA_FILE"),
       @SerializedName("DYNAMIC_RULE")

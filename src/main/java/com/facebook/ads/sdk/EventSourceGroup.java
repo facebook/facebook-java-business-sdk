@@ -63,6 +63,8 @@ public class EventSourceGroup extends APINode {
   private String mId = null;
   @SerializedName("name")
   private String mName = null;
+  @SerializedName("owner_business")
+  private Business mOwnerBusiness = null;
   protected static Gson gson = null;
 
   EventSourceGroup() {
@@ -308,6 +310,13 @@ public class EventSourceGroup extends APINode {
     return mName;
   }
 
+  public Business getFieldOwnerBusiness() {
+    if (mOwnerBusiness != null) {
+      mOwnerBusiness.context = getContext();
+    }
+    return mOwnerBusiness;
+  }
+
 
 
   public static class APIRequestGetSharedAccounts extends APIRequest<AdAccount> {
@@ -340,14 +349,17 @@ public class EventSourceGroup extends APINode {
       "capabilities",
       "created_time",
       "currency",
+      "custom_audience_info",
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
+      "existing_customers",
       "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
       "funding_source",
       "funding_source_details",
+      "has_advertiser_opted_in_odax",
       "has_migrated_permissions",
       "has_page_authorized_adaccount",
       "id",
@@ -355,11 +367,11 @@ public class EventSourceGroup extends APINode {
       "is_attribution_spec_system_default",
       "is_direct_deals_enabled",
       "is_in_3ds_authorization_enabled_market",
-      "is_in_middle_of_local_entity_migration",
       "is_notifications_enabled",
       "is_personal",
       "is_prepay_account",
       "is_tax_id_required",
+      "liable_address",
       "line_numbers",
       "media_agency",
       "min_campaign_group_spend_cap",
@@ -367,9 +379,12 @@ public class EventSourceGroup extends APINode {
       "name",
       "offsite_pixels_tos_accepted",
       "owner",
+      "owner_business",
       "partner",
       "rf_spec",
+      "send_bill_to_address",
       "show_checkout_experience",
+      "sold_to_address",
       "spend_cap",
       "tax_id",
       "tax_id_status",
@@ -380,6 +395,7 @@ public class EventSourceGroup extends APINode {
       "tos_accepted",
       "user_tasks",
       "user_tos_accepted",
+      "viewable_business",
     };
 
     @Override
@@ -604,6 +620,13 @@ public class EventSourceGroup extends APINode {
       this.requestField("currency", value);
       return this;
     }
+    public APIRequestGetSharedAccounts requestCustomAudienceInfoField () {
+      return this.requestCustomAudienceInfoField(true);
+    }
+    public APIRequestGetSharedAccounts requestCustomAudienceInfoField (boolean value) {
+      this.requestField("custom_audience_info", value);
+      return this;
+    }
     public APIRequestGetSharedAccounts requestDisableReasonField () {
       return this.requestDisableReasonField(true);
     }
@@ -623,6 +646,13 @@ public class EventSourceGroup extends APINode {
     }
     public APIRequestGetSharedAccounts requestEndAdvertiserNameField (boolean value) {
       this.requestField("end_advertiser_name", value);
+      return this;
+    }
+    public APIRequestGetSharedAccounts requestExistingCustomersField () {
+      return this.requestExistingCustomersField(true);
+    }
+    public APIRequestGetSharedAccounts requestExistingCustomersField (boolean value) {
+      this.requestField("existing_customers", value);
       return this;
     }
     public APIRequestGetSharedAccounts requestExtendedCreditInvoiceGroupField () {
@@ -658,6 +688,13 @@ public class EventSourceGroup extends APINode {
     }
     public APIRequestGetSharedAccounts requestFundingSourceDetailsField (boolean value) {
       this.requestField("funding_source_details", value);
+      return this;
+    }
+    public APIRequestGetSharedAccounts requestHasAdvertiserOptedInOdaxField () {
+      return this.requestHasAdvertiserOptedInOdaxField(true);
+    }
+    public APIRequestGetSharedAccounts requestHasAdvertiserOptedInOdaxField (boolean value) {
+      this.requestField("has_advertiser_opted_in_odax", value);
       return this;
     }
     public APIRequestGetSharedAccounts requestHasMigratedPermissionsField () {
@@ -709,13 +746,6 @@ public class EventSourceGroup extends APINode {
       this.requestField("is_in_3ds_authorization_enabled_market", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestIsInMiddleOfLocalEntityMigrationField () {
-      return this.requestIsInMiddleOfLocalEntityMigrationField(true);
-    }
-    public APIRequestGetSharedAccounts requestIsInMiddleOfLocalEntityMigrationField (boolean value) {
-      this.requestField("is_in_middle_of_local_entity_migration", value);
-      return this;
-    }
     public APIRequestGetSharedAccounts requestIsNotificationsEnabledField () {
       return this.requestIsNotificationsEnabledField(true);
     }
@@ -742,6 +772,13 @@ public class EventSourceGroup extends APINode {
     }
     public APIRequestGetSharedAccounts requestIsTaxIdRequiredField (boolean value) {
       this.requestField("is_tax_id_required", value);
+      return this;
+    }
+    public APIRequestGetSharedAccounts requestLiableAddressField () {
+      return this.requestLiableAddressField(true);
+    }
+    public APIRequestGetSharedAccounts requestLiableAddressField (boolean value) {
+      this.requestField("liable_address", value);
       return this;
     }
     public APIRequestGetSharedAccounts requestLineNumbersField () {
@@ -793,6 +830,13 @@ public class EventSourceGroup extends APINode {
       this.requestField("owner", value);
       return this;
     }
+    public APIRequestGetSharedAccounts requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetSharedAccounts requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
+      return this;
+    }
     public APIRequestGetSharedAccounts requestPartnerField () {
       return this.requestPartnerField(true);
     }
@@ -807,11 +851,25 @@ public class EventSourceGroup extends APINode {
       this.requestField("rf_spec", value);
       return this;
     }
+    public APIRequestGetSharedAccounts requestSendBillToAddressField () {
+      return this.requestSendBillToAddressField(true);
+    }
+    public APIRequestGetSharedAccounts requestSendBillToAddressField (boolean value) {
+      this.requestField("send_bill_to_address", value);
+      return this;
+    }
     public APIRequestGetSharedAccounts requestShowCheckoutExperienceField () {
       return this.requestShowCheckoutExperienceField(true);
     }
     public APIRequestGetSharedAccounts requestShowCheckoutExperienceField (boolean value) {
       this.requestField("show_checkout_experience", value);
+      return this;
+    }
+    public APIRequestGetSharedAccounts requestSoldToAddressField () {
+      return this.requestSoldToAddressField(true);
+    }
+    public APIRequestGetSharedAccounts requestSoldToAddressField (boolean value) {
+      this.requestField("sold_to_address", value);
       return this;
     }
     public APIRequestGetSharedAccounts requestSpendCapField () {
@@ -882,6 +940,13 @@ public class EventSourceGroup extends APINode {
     }
     public APIRequestGetSharedAccounts requestUserTosAcceptedField (boolean value) {
       this.requestField("user_tos_accepted", value);
+      return this;
+    }
+    public APIRequestGetSharedAccounts requestViewableBusinessField () {
+      return this.requestViewableBusinessField(true);
+    }
+    public APIRequestGetSharedAccounts requestViewableBusinessField (boolean value) {
+      this.requestField("viewable_business", value);
       return this;
     }
   }
@@ -1015,6 +1080,7 @@ public class EventSourceGroup extends APINode {
       "event_sources",
       "id",
       "name",
+      "owner_business",
     };
 
     @Override
@@ -1132,6 +1198,13 @@ public class EventSourceGroup extends APINode {
     }
     public APIRequestGet requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGet requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGet requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
       return this;
     }
   }
@@ -1275,6 +1348,7 @@ public class EventSourceGroup extends APINode {
     this.mEventSources = instance.mEventSources;
     this.mId = instance.mId;
     this.mName = instance.mName;
+    this.mOwnerBusiness = instance.mOwnerBusiness;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -18,11 +18,13 @@ jobs:
         run: |
           mkdir -p ~/.gnupg/
           printf "${GPG_SIGNING_KEY}" | base64 --decode > ~/.gnupg/private.key
+          md5sum ~/.gnupg/private.key
           gpg --import --no-tty --batch --yes ~/.gnupg/private.key
           echo use-agent >> ~/.gnupg/gpg.conf
           echo pinentry-mode loopback >> ~/.gnupg/gpg.conf
           echo allow-loopback-pinentry >> ~/.gnupg/gpg-agent.conf
           echo RELOADAGENT | gpg-connect-agent
+          gpg --list-keys
         env:
           GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
       - name: Configure Maven Credentials and GPG Key

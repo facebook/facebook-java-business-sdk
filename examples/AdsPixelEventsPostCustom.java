@@ -1,5 +1,6 @@
 /**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
  * You are hereby granted a non-exclusive, worldwide, royalty-free license to
  * use, copy, modify, and distribute this software in source code or binary
@@ -32,6 +33,8 @@ import com.facebook.ads.sdk.serverside.EventRequest;
 import com.facebook.ads.sdk.serverside.EventResponse;
 import com.facebook.ads.sdk.serverside.UserData;
 
+import java.util.Arrays;
+
 public class ServerSideApiExample {
 
   public static final String ACCESS_TOKEN = "<ACCESS_TOKEN>";
@@ -42,7 +45,8 @@ public class ServerSideApiExample {
     context.setLogger(System.out);
 
     UserData userData = new UserData()
-        .email("joe@eg.com")
+        .emails(Arrays.asList("joe@eg.com"))
+        .phones(Arrays.asList("12345678901", "14251234567"))
         // It is recommended to send Client IP and User Agent for Conversions API Events.
         .clientIpAddress(clientIpAddress)
         .clientUserAgent(clientUserAgent)

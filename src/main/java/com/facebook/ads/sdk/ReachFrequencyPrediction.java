@@ -63,6 +63,10 @@ public class ReachFrequencyPrediction extends APINode {
   private List<ReachFrequencyAdFormat> mAdFormats = null;
   @SerializedName("auction_entry_option_index")
   private Long mAuctionEntryOptionIndex = null;
+  @SerializedName("audience_size_lower_bound")
+  private Long mAudienceSizeLowerBound = null;
+  @SerializedName("audience_size_upper_bound")
+  private Long mAudienceSizeUpperBound = null;
   @SerializedName("business_id")
   private Long mBusinessId = null;
   @SerializedName("buying_type")
@@ -173,6 +177,14 @@ public class ReachFrequencyPrediction extends APINode {
   private Long mObjective = null;
   @SerializedName("objective_name")
   private String mObjectiveName = null;
+  @SerializedName("odax_objective")
+  private Long mOdaxObjective = null;
+  @SerializedName("odax_objective_name")
+  private String mOdaxObjectiveName = null;
+  @SerializedName("optimization_goal")
+  private Long mOptimizationGoal = null;
+  @SerializedName("optimization_goal_name")
+  private String mOptimizationGoalName = null;
   @SerializedName("pause_periods")
   private List<Object> mPausePeriods = null;
   @SerializedName("placement_breakdown")
@@ -197,8 +209,6 @@ public class ReachFrequencyPrediction extends APINode {
   private Long mStatus = null;
   @SerializedName("story_event_type")
   private Long mStoryEventType = null;
-  @SerializedName("target_audience_size")
-  private Long mTargetAudienceSize = null;
   @SerializedName("target_cpm")
   private Long mTargetCpm = null;
   @SerializedName("target_spec")
@@ -447,6 +457,14 @@ public class ReachFrequencyPrediction extends APINode {
     return mAuctionEntryOptionIndex;
   }
 
+  public Long getFieldAudienceSizeLowerBound() {
+    return mAudienceSizeLowerBound;
+  }
+
+  public Long getFieldAudienceSizeUpperBound() {
+    return mAudienceSizeUpperBound;
+  }
+
   public Long getFieldBusinessId() {
     return mBusinessId;
   }
@@ -667,6 +685,22 @@ public class ReachFrequencyPrediction extends APINode {
     return mObjectiveName;
   }
 
+  public Long getFieldOdaxObjective() {
+    return mOdaxObjective;
+  }
+
+  public String getFieldOdaxObjectiveName() {
+    return mOdaxObjectiveName;
+  }
+
+  public Long getFieldOptimizationGoal() {
+    return mOptimizationGoal;
+  }
+
+  public String getFieldOptimizationGoalName() {
+    return mOptimizationGoalName;
+  }
+
   public List<Object> getFieldPausePeriods() {
     return mPausePeriods;
   }
@@ -713,10 +747,6 @@ public class ReachFrequencyPrediction extends APINode {
 
   public Long getFieldStoryEventType() {
     return mStoryEventType;
-  }
-
-  public Long getFieldTargetAudienceSize() {
-    return mTargetAudienceSize;
   }
 
   public Long getFieldTargetCpm() {
@@ -772,6 +802,8 @@ public class ReachFrequencyPrediction extends APINode {
       "activity_status",
       "ad_formats",
       "auction_entry_option_index",
+      "audience_size_lower_bound",
+      "audience_size_upper_bound",
       "business_id",
       "buying_type",
       "campaign_group_id",
@@ -827,6 +859,10 @@ public class ReachFrequencyPrediction extends APINode {
       "name",
       "objective",
       "objective_name",
+      "odax_objective",
+      "odax_objective_name",
+      "optimization_goal",
+      "optimization_goal_name",
       "pause_periods",
       "placement_breakdown",
       "placement_breakdown_map",
@@ -839,7 +875,6 @@ public class ReachFrequencyPrediction extends APINode {
       "start_time",
       "status",
       "story_event_type",
-      "target_audience_size",
       "target_cpm",
       "target_spec",
       "time_created",
@@ -966,6 +1001,20 @@ public class ReachFrequencyPrediction extends APINode {
     }
     public APIRequestGet requestAuctionEntryOptionIndexField (boolean value) {
       this.requestField("auction_entry_option_index", value);
+      return this;
+    }
+    public APIRequestGet requestAudienceSizeLowerBoundField () {
+      return this.requestAudienceSizeLowerBoundField(true);
+    }
+    public APIRequestGet requestAudienceSizeLowerBoundField (boolean value) {
+      this.requestField("audience_size_lower_bound", value);
+      return this;
+    }
+    public APIRequestGet requestAudienceSizeUpperBoundField () {
+      return this.requestAudienceSizeUpperBoundField(true);
+    }
+    public APIRequestGet requestAudienceSizeUpperBoundField (boolean value) {
+      this.requestField("audience_size_upper_bound", value);
       return this;
     }
     public APIRequestGet requestBusinessIdField () {
@@ -1353,6 +1402,34 @@ public class ReachFrequencyPrediction extends APINode {
       this.requestField("objective_name", value);
       return this;
     }
+    public APIRequestGet requestOdaxObjectiveField () {
+      return this.requestOdaxObjectiveField(true);
+    }
+    public APIRequestGet requestOdaxObjectiveField (boolean value) {
+      this.requestField("odax_objective", value);
+      return this;
+    }
+    public APIRequestGet requestOdaxObjectiveNameField () {
+      return this.requestOdaxObjectiveNameField(true);
+    }
+    public APIRequestGet requestOdaxObjectiveNameField (boolean value) {
+      this.requestField("odax_objective_name", value);
+      return this;
+    }
+    public APIRequestGet requestOptimizationGoalField () {
+      return this.requestOptimizationGoalField(true);
+    }
+    public APIRequestGet requestOptimizationGoalField (boolean value) {
+      this.requestField("optimization_goal", value);
+      return this;
+    }
+    public APIRequestGet requestOptimizationGoalNameField () {
+      return this.requestOptimizationGoalNameField(true);
+    }
+    public APIRequestGet requestOptimizationGoalNameField (boolean value) {
+      this.requestField("optimization_goal_name", value);
+      return this;
+    }
     public APIRequestGet requestPausePeriodsField () {
       return this.requestPausePeriodsField(true);
     }
@@ -1435,13 +1512,6 @@ public class ReachFrequencyPrediction extends APINode {
     }
     public APIRequestGet requestStoryEventTypeField (boolean value) {
       this.requestField("story_event_type", value);
-      return this;
-    }
-    public APIRequestGet requestTargetAudienceSizeField () {
-      return this.requestTargetAudienceSizeField(true);
-    }
-    public APIRequestGet requestTargetAudienceSizeField (boolean value) {
-      this.requestField("target_audience_size", value);
       return this;
     }
     public APIRequestGet requestTargetCpmField () {
@@ -1621,6 +1691,8 @@ public class ReachFrequencyPrediction extends APINode {
     this.mActivityStatus = instance.mActivityStatus;
     this.mAdFormats = instance.mAdFormats;
     this.mAuctionEntryOptionIndex = instance.mAuctionEntryOptionIndex;
+    this.mAudienceSizeLowerBound = instance.mAudienceSizeLowerBound;
+    this.mAudienceSizeUpperBound = instance.mAudienceSizeUpperBound;
     this.mBusinessId = instance.mBusinessId;
     this.mBuyingType = instance.mBuyingType;
     this.mCampaignGroupId = instance.mCampaignGroupId;
@@ -1676,6 +1748,10 @@ public class ReachFrequencyPrediction extends APINode {
     this.mName = instance.mName;
     this.mObjective = instance.mObjective;
     this.mObjectiveName = instance.mObjectiveName;
+    this.mOdaxObjective = instance.mOdaxObjective;
+    this.mOdaxObjectiveName = instance.mOdaxObjectiveName;
+    this.mOptimizationGoal = instance.mOptimizationGoal;
+    this.mOptimizationGoalName = instance.mOptimizationGoalName;
     this.mPausePeriods = instance.mPausePeriods;
     this.mPlacementBreakdown = instance.mPlacementBreakdown;
     this.mPlacementBreakdownMap = instance.mPlacementBreakdownMap;
@@ -1688,7 +1764,6 @@ public class ReachFrequencyPrediction extends APINode {
     this.mStartTime = instance.mStartTime;
     this.mStatus = instance.mStatus;
     this.mStoryEventType = instance.mStoryEventType;
-    this.mTargetAudienceSize = instance.mTargetAudienceSize;
     this.mTargetCpm = instance.mTargetCpm;
     this.mTargetSpec = instance.mTargetSpec;
     this.mTimeCreated = instance.mTimeCreated;

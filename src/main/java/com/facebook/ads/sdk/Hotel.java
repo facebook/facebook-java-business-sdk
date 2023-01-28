@@ -95,8 +95,12 @@ public class Hotel extends APINode {
   private List<String> mSanitizedImages = null;
   @SerializedName("star_rating")
   private Double mStarRating = null;
+  @SerializedName("unit_price")
+  private Object mUnitPrice = null;
   @SerializedName("url")
   private String mUrl = null;
+  @SerializedName("visibility")
+  private EnumVisibility mVisibility = null;
   protected static Gson gson = null;
 
   Hotel() {
@@ -310,6 +314,10 @@ public class Hotel extends APINode {
     return new APIRequestGetAugmentedRealitiesMetadata(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetChannelsToIntegrityStatus getChannelsToIntegrityStatus() {
+    return new APIRequestGetChannelsToIntegrityStatus(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetHotelRooms getHotelRooms() {
     return new APIRequestGetHotelRooms(this.getPrefixedId().toString(), context);
   }
@@ -411,8 +419,16 @@ public class Hotel extends APINode {
     return mStarRating;
   }
 
+  public Object getFieldUnitPrice() {
+    return mUnitPrice;
+  }
+
   public String getFieldUrl() {
     return mUrl;
+  }
+
+  public EnumVisibility getFieldVisibility() {
+    return mVisibility;
   }
 
 
@@ -519,6 +535,126 @@ public class Hotel extends APINode {
       return this;
     }
 
+  }
+
+  public static class APIRequestGetChannelsToIntegrityStatus extends APIRequest<CatalogItemChannelsToIntegrityStatus> {
+
+    APINodeList<CatalogItemChannelsToIntegrityStatus> lastResponse = null;
+    @Override
+    public APINodeList<CatalogItemChannelsToIntegrityStatus> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "channels",
+      "rejection_information",
+    };
+
+    @Override
+    public APINodeList<CatalogItemChannelsToIntegrityStatus> parseResponse(String response, String header) throws APIException {
+      return CatalogItemChannelsToIntegrityStatus.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<CatalogItemChannelsToIntegrityStatus> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<CatalogItemChannelsToIntegrityStatus> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<CatalogItemChannelsToIntegrityStatus>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<CatalogItemChannelsToIntegrityStatus>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<CatalogItemChannelsToIntegrityStatus>>() {
+           public APINodeList<CatalogItemChannelsToIntegrityStatus> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetChannelsToIntegrityStatus.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetChannelsToIntegrityStatus(String nodeId, APIContext context) {
+      super(context, nodeId, "/channels_to_integrity_status", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetChannelsToIntegrityStatus setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetChannelsToIntegrityStatus setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetChannelsToIntegrityStatus requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetChannelsToIntegrityStatus requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetChannelsToIntegrityStatus requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetChannelsToIntegrityStatus requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetChannelsToIntegrityStatus requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetChannelsToIntegrityStatus requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetChannelsToIntegrityStatus requestChannelsField () {
+      return this.requestChannelsField(true);
+    }
+    public APIRequestGetChannelsToIntegrityStatus requestChannelsField (boolean value) {
+      this.requestField("channels", value);
+      return this;
+    }
+    public APIRequestGetChannelsToIntegrityStatus requestRejectionInformationField () {
+      return this.requestRejectionInformationField(true);
+    }
+    public APIRequestGetChannelsToIntegrityStatus requestRejectionInformationField (boolean value) {
+      this.requestField("rejection_information", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetHotelRooms extends APIRequest<HotelRoom> {
@@ -952,7 +1088,9 @@ public class Hotel extends APINode {
       "sale_price",
       "sanitized_images",
       "star_rating",
+      "unit_price",
       "url",
+      "visibility",
     };
 
     @Override
@@ -1184,11 +1322,25 @@ public class Hotel extends APINode {
       this.requestField("star_rating", value);
       return this;
     }
+    public APIRequestGet requestUnitPriceField () {
+      return this.requestUnitPriceField(true);
+    }
+    public APIRequestGet requestUnitPriceField (boolean value) {
+      this.requestField("unit_price", value);
+      return this;
+    }
     public APIRequestGet requestUrlField () {
       return this.requestUrlField(true);
     }
     public APIRequestGet requestUrlField (boolean value) {
       this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGet requestVisibilityField () {
+      return this.requestVisibilityField(true);
+    }
+    public APIRequestGet requestVisibilityField (boolean value) {
+      this.requestField("visibility", value);
       return this;
     }
   }
@@ -1420,6 +1572,25 @@ public class Hotel extends APINode {
       }
   }
 
+  public static enum EnumVisibility {
+      @SerializedName("PUBLISHED")
+      VALUE_PUBLISHED("PUBLISHED"),
+      @SerializedName("STAGING")
+      VALUE_STAGING("STAGING"),
+      ;
+
+      private String value;
+
+      private EnumVisibility(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -1455,7 +1626,9 @@ public class Hotel extends APINode {
     this.mSalePrice = instance.mSalePrice;
     this.mSanitizedImages = instance.mSanitizedImages;
     this.mStarRating = instance.mStarRating;
+    this.mUnitPrice = instance.mUnitPrice;
     this.mUrl = instance.mUrl;
+    this.mVisibility = instance.mVisibility;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -276,10 +276,6 @@ public class AdStudyObjective extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGetAdPlacePageSets getAdPlacePageSets() {
-    return new APIRequestGetAdPlacePageSets(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetAdsPixels getAdsPixels() {
     return new APIRequestGetAdsPixels(this.getPrefixedId().toString(), context);
   }
@@ -334,158 +330,6 @@ public class AdStudyObjective extends APINode {
   }
 
 
-
-  public static class APIRequestGetAdPlacePageSets extends APIRequest<AdPlacePageSet> {
-
-    APINodeList<AdPlacePageSet> lastResponse = null;
-    @Override
-    public APINodeList<AdPlacePageSet> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "account_id",
-      "id",
-      "location_types",
-      "name",
-      "pages_count",
-      "parent_page",
-    };
-
-    @Override
-    public APINodeList<AdPlacePageSet> parseResponse(String response, String header) throws APIException {
-      return AdPlacePageSet.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<AdPlacePageSet> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<AdPlacePageSet> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<AdPlacePageSet>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<AdPlacePageSet>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<AdPlacePageSet>>() {
-           public APINodeList<AdPlacePageSet> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetAdPlacePageSets.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetAdPlacePageSets(String nodeId, APIContext context) {
-      super(context, nodeId, "/ad_place_page_sets", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetAdPlacePageSets setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdPlacePageSets setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetAdPlacePageSets requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetAdPlacePageSets requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdPlacePageSets requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetAdPlacePageSets requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdPlacePageSets requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdPlacePageSets requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetAdPlacePageSets requestAccountIdField () {
-      return this.requestAccountIdField(true);
-    }
-    public APIRequestGetAdPlacePageSets requestAccountIdField (boolean value) {
-      this.requestField("account_id", value);
-      return this;
-    }
-    public APIRequestGetAdPlacePageSets requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetAdPlacePageSets requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetAdPlacePageSets requestLocationTypesField () {
-      return this.requestLocationTypesField(true);
-    }
-    public APIRequestGetAdPlacePageSets requestLocationTypesField (boolean value) {
-      this.requestField("location_types", value);
-      return this;
-    }
-    public APIRequestGetAdPlacePageSets requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetAdPlacePageSets requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetAdPlacePageSets requestPagesCountField () {
-      return this.requestPagesCountField(true);
-    }
-    public APIRequestGetAdPlacePageSets requestPagesCountField (boolean value) {
-      this.requestField("pages_count", value);
-      return this;
-    }
-    public APIRequestGetAdPlacePageSets requestParentPageField () {
-      return this.requestParentPageField(true);
-    }
-    public APIRequestGetAdPlacePageSets requestParentPageField (boolean value) {
-      this.requestField("parent_page", value);
-      return this;
-    }
-  }
 
   public static class APIRequestGetAdsPixels extends APIRequest<AdsPixel> {
 
@@ -755,6 +599,7 @@ public class AdStudyObjective extends APINode {
       "auto_event_mapping_android",
       "auto_event_mapping_ios",
       "auto_event_setup_enabled",
+      "business",
       "canvas_fluid_height",
       "canvas_fluid_width",
       "canvas_url",
@@ -790,7 +635,6 @@ public class AdStudyObjective extends APINode {
       "latest_sdk_version",
       "link",
       "logging_token",
-      "login_secret",
       "logo_url",
       "migrations",
       "mobile_profile_section_url",
@@ -800,6 +644,7 @@ public class AdStudyObjective extends APINode {
       "name",
       "namespace",
       "object_store_urls",
+      "owner_business",
       "page_tab_default_name",
       "page_tab_url",
       "photo_url",
@@ -1097,6 +942,13 @@ public class AdStudyObjective extends APINode {
       this.requestField("auto_event_setup_enabled", value);
       return this;
     }
+    public APIRequestGetApplications requestBusinessField () {
+      return this.requestBusinessField(true);
+    }
+    public APIRequestGetApplications requestBusinessField (boolean value) {
+      this.requestField("business", value);
+      return this;
+    }
     public APIRequestGetApplications requestCanvasFluidHeightField () {
       return this.requestCanvasFluidHeightField(true);
     }
@@ -1342,13 +1194,6 @@ public class AdStudyObjective extends APINode {
       this.requestField("logging_token", value);
       return this;
     }
-    public APIRequestGetApplications requestLoginSecretField () {
-      return this.requestLoginSecretField(true);
-    }
-    public APIRequestGetApplications requestLoginSecretField (boolean value) {
-      this.requestField("login_secret", value);
-      return this;
-    }
     public APIRequestGetApplications requestLogoUrlField () {
       return this.requestLogoUrlField(true);
     }
@@ -1410,6 +1255,13 @@ public class AdStudyObjective extends APINode {
     }
     public APIRequestGetApplications requestObjectStoreUrlsField (boolean value) {
       this.requestField("object_store_urls", value);
+      return this;
+    }
+    public APIRequestGetApplications requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetApplications requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
       return this;
     }
     public APIRequestGetApplications requestPageTabDefaultNameField () {
@@ -1901,6 +1753,7 @@ public class AdStudyObjective extends APINode {
       "business",
       "config",
       "creation_time",
+      "creator",
       "description",
       "duplicate_entries",
       "enable_auto_assign_to_accounts",
@@ -1916,6 +1769,7 @@ public class AdStudyObjective extends APINode {
       "match_rate_approx",
       "matched_entries",
       "name",
+      "owner_business",
       "usage",
       "valid_entries",
     };
@@ -2030,6 +1884,13 @@ public class AdStudyObjective extends APINode {
       this.requestField("creation_time", value);
       return this;
     }
+    public APIRequestGetOfflineConversionDataSets requestCreatorField () {
+      return this.requestCreatorField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestCreatorField (boolean value) {
+      this.requestField("creator", value);
+      return this;
+    }
     public APIRequestGetOfflineConversionDataSets requestDescriptionField () {
       return this.requestDescriptionField(true);
     }
@@ -2133,6 +1994,13 @@ public class AdStudyObjective extends APINode {
     }
     public APIRequestGetOfflineConversionDataSets requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetOfflineConversionDataSets requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
       return this;
     }
     public APIRequestGetOfflineConversionDataSets requestUsageField () {
@@ -2581,6 +2449,7 @@ public class AdStudyObjective extends APINode {
       "is_primary",
       "name",
       "offline_conversion_data_sets",
+      "offsite_datasets",
       "product_catalogs",
       "product_sets",
       "type",
@@ -2692,6 +2561,15 @@ public class AdStudyObjective extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setOffsiteDatasets (List<Object> offsiteDatasets) {
+      this.setParam("offsite_datasets", offsiteDatasets);
+      return this;
+    }
+    public APIRequestUpdate setOffsiteDatasets (String offsiteDatasets) {
+      this.setParam("offsite_datasets", offsiteDatasets);
+      return this;
+    }
+
     public APIRequestUpdate setProductCatalogs (List<Object> productCatalogs) {
       this.setParam("product_catalogs", productCatalogs);
       return this;
@@ -2758,12 +2636,12 @@ public class AdStudyObjective extends APINode {
   }
 
   public static enum EnumType {
-      @SerializedName("AEP_CONVERSION")
-      VALUE_AEP_CONVERSION("AEP_CONVERSION"),
       @SerializedName("BRAND")
       VALUE_BRAND("BRAND"),
       @SerializedName("BRANDLIFT")
       VALUE_BRANDLIFT("BRANDLIFT"),
+      @SerializedName("CONVERSIONS")
+      VALUE_CONVERSIONS("CONVERSIONS"),
       @SerializedName("FTL")
       VALUE_FTL("FTL"),
       @SerializedName("MAE")

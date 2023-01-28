@@ -1,5 +1,6 @@
 /**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
  * You are hereby granted a non-exclusive, worldwide, royalty-free license to
  * use, copy, modify, and distribute this software in source code or binary
@@ -37,8 +38,8 @@ public class AdAccountAdSetsPostOptimizePostEngagement {
     new AdAccount(id, context).createAdSet()
       .setName("My First Adset")
       .setLifetimeBudget(20000L)
-      .setStartTime("2021-04-18T09:43:43-0700")
-      .setEndTime("2021-04-28T09:43:43-0700")
+      .setStartTime("2023-01-09T15:02:22-0800")
+      .setEndTime("2023-01-19T15:02:22-0800")
       .setCampaignId("<adCampaignLinkClicksID>")
       .setBidAmount(500L)
       .setBillingEvent(AdSet.EnumBillingEvent.VALUE_IMPRESSIONS)

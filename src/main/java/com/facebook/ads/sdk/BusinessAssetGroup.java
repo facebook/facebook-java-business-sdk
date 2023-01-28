@@ -59,6 +59,8 @@ public class BusinessAssetGroup extends APINode {
   private String mId = null;
   @SerializedName("name")
   private String mName = null;
+  @SerializedName("owner_business")
+  private Business mOwnerBusiness = null;
   protected static Gson gson = null;
 
   BusinessAssetGroup() {
@@ -391,6 +393,13 @@ public class BusinessAssetGroup extends APINode {
 
   public String getFieldName() {
     return mName;
+  }
+
+  public Business getFieldOwnerBusiness() {
+    if (mOwnerBusiness != null) {
+      mOwnerBusiness.context = getContext();
+    }
+    return mOwnerBusiness;
   }
 
 
@@ -945,14 +954,17 @@ public class BusinessAssetGroup extends APINode {
       "capabilities",
       "created_time",
       "currency",
+      "custom_audience_info",
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
+      "existing_customers",
       "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
       "funding_source",
       "funding_source_details",
+      "has_advertiser_opted_in_odax",
       "has_migrated_permissions",
       "has_page_authorized_adaccount",
       "id",
@@ -960,11 +972,11 @@ public class BusinessAssetGroup extends APINode {
       "is_attribution_spec_system_default",
       "is_direct_deals_enabled",
       "is_in_3ds_authorization_enabled_market",
-      "is_in_middle_of_local_entity_migration",
       "is_notifications_enabled",
       "is_personal",
       "is_prepay_account",
       "is_tax_id_required",
+      "liable_address",
       "line_numbers",
       "media_agency",
       "min_campaign_group_spend_cap",
@@ -972,9 +984,12 @@ public class BusinessAssetGroup extends APINode {
       "name",
       "offsite_pixels_tos_accepted",
       "owner",
+      "owner_business",
       "partner",
       "rf_spec",
+      "send_bill_to_address",
       "show_checkout_experience",
+      "sold_to_address",
       "spend_cap",
       "tax_id",
       "tax_id_status",
@@ -985,6 +1000,7 @@ public class BusinessAssetGroup extends APINode {
       "tos_accepted",
       "user_tasks",
       "user_tos_accepted",
+      "viewable_business",
     };
 
     @Override
@@ -1209,6 +1225,13 @@ public class BusinessAssetGroup extends APINode {
       this.requestField("currency", value);
       return this;
     }
+    public APIRequestGetContainedAdAccounts requestCustomAudienceInfoField () {
+      return this.requestCustomAudienceInfoField(true);
+    }
+    public APIRequestGetContainedAdAccounts requestCustomAudienceInfoField (boolean value) {
+      this.requestField("custom_audience_info", value);
+      return this;
+    }
     public APIRequestGetContainedAdAccounts requestDisableReasonField () {
       return this.requestDisableReasonField(true);
     }
@@ -1228,6 +1251,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedAdAccounts requestEndAdvertiserNameField (boolean value) {
       this.requestField("end_advertiser_name", value);
+      return this;
+    }
+    public APIRequestGetContainedAdAccounts requestExistingCustomersField () {
+      return this.requestExistingCustomersField(true);
+    }
+    public APIRequestGetContainedAdAccounts requestExistingCustomersField (boolean value) {
+      this.requestField("existing_customers", value);
       return this;
     }
     public APIRequestGetContainedAdAccounts requestExtendedCreditInvoiceGroupField () {
@@ -1263,6 +1293,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedAdAccounts requestFundingSourceDetailsField (boolean value) {
       this.requestField("funding_source_details", value);
+      return this;
+    }
+    public APIRequestGetContainedAdAccounts requestHasAdvertiserOptedInOdaxField () {
+      return this.requestHasAdvertiserOptedInOdaxField(true);
+    }
+    public APIRequestGetContainedAdAccounts requestHasAdvertiserOptedInOdaxField (boolean value) {
+      this.requestField("has_advertiser_opted_in_odax", value);
       return this;
     }
     public APIRequestGetContainedAdAccounts requestHasMigratedPermissionsField () {
@@ -1314,13 +1351,6 @@ public class BusinessAssetGroup extends APINode {
       this.requestField("is_in_3ds_authorization_enabled_market", value);
       return this;
     }
-    public APIRequestGetContainedAdAccounts requestIsInMiddleOfLocalEntityMigrationField () {
-      return this.requestIsInMiddleOfLocalEntityMigrationField(true);
-    }
-    public APIRequestGetContainedAdAccounts requestIsInMiddleOfLocalEntityMigrationField (boolean value) {
-      this.requestField("is_in_middle_of_local_entity_migration", value);
-      return this;
-    }
     public APIRequestGetContainedAdAccounts requestIsNotificationsEnabledField () {
       return this.requestIsNotificationsEnabledField(true);
     }
@@ -1347,6 +1377,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedAdAccounts requestIsTaxIdRequiredField (boolean value) {
       this.requestField("is_tax_id_required", value);
+      return this;
+    }
+    public APIRequestGetContainedAdAccounts requestLiableAddressField () {
+      return this.requestLiableAddressField(true);
+    }
+    public APIRequestGetContainedAdAccounts requestLiableAddressField (boolean value) {
+      this.requestField("liable_address", value);
       return this;
     }
     public APIRequestGetContainedAdAccounts requestLineNumbersField () {
@@ -1398,6 +1435,13 @@ public class BusinessAssetGroup extends APINode {
       this.requestField("owner", value);
       return this;
     }
+    public APIRequestGetContainedAdAccounts requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetContainedAdAccounts requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
+      return this;
+    }
     public APIRequestGetContainedAdAccounts requestPartnerField () {
       return this.requestPartnerField(true);
     }
@@ -1412,11 +1456,25 @@ public class BusinessAssetGroup extends APINode {
       this.requestField("rf_spec", value);
       return this;
     }
+    public APIRequestGetContainedAdAccounts requestSendBillToAddressField () {
+      return this.requestSendBillToAddressField(true);
+    }
+    public APIRequestGetContainedAdAccounts requestSendBillToAddressField (boolean value) {
+      this.requestField("send_bill_to_address", value);
+      return this;
+    }
     public APIRequestGetContainedAdAccounts requestShowCheckoutExperienceField () {
       return this.requestShowCheckoutExperienceField(true);
     }
     public APIRequestGetContainedAdAccounts requestShowCheckoutExperienceField (boolean value) {
       this.requestField("show_checkout_experience", value);
+      return this;
+    }
+    public APIRequestGetContainedAdAccounts requestSoldToAddressField () {
+      return this.requestSoldToAddressField(true);
+    }
+    public APIRequestGetContainedAdAccounts requestSoldToAddressField (boolean value) {
+      this.requestField("sold_to_address", value);
       return this;
     }
     public APIRequestGetContainedAdAccounts requestSpendCapField () {
@@ -1487,6 +1545,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedAdAccounts requestUserTosAcceptedField (boolean value) {
       this.requestField("user_tos_accepted", value);
+      return this;
+    }
+    public APIRequestGetContainedAdAccounts requestViewableBusinessField () {
+      return this.requestViewableBusinessField(true);
+    }
+    public APIRequestGetContainedAdAccounts requestViewableBusinessField (boolean value) {
+      this.requestField("viewable_business", value);
       return this;
     }
   }
@@ -1747,6 +1812,7 @@ public class BusinessAssetGroup extends APINode {
       "auto_event_mapping_android",
       "auto_event_mapping_ios",
       "auto_event_setup_enabled",
+      "business",
       "canvas_fluid_height",
       "canvas_fluid_width",
       "canvas_url",
@@ -1782,7 +1848,6 @@ public class BusinessAssetGroup extends APINode {
       "latest_sdk_version",
       "link",
       "logging_token",
-      "login_secret",
       "logo_url",
       "migrations",
       "mobile_profile_section_url",
@@ -1792,6 +1857,7 @@ public class BusinessAssetGroup extends APINode {
       "name",
       "namespace",
       "object_store_urls",
+      "owner_business",
       "page_tab_default_name",
       "page_tab_url",
       "photo_url",
@@ -2089,6 +2155,13 @@ public class BusinessAssetGroup extends APINode {
       this.requestField("auto_event_setup_enabled", value);
       return this;
     }
+    public APIRequestGetContainedApplications requestBusinessField () {
+      return this.requestBusinessField(true);
+    }
+    public APIRequestGetContainedApplications requestBusinessField (boolean value) {
+      this.requestField("business", value);
+      return this;
+    }
     public APIRequestGetContainedApplications requestCanvasFluidHeightField () {
       return this.requestCanvasFluidHeightField(true);
     }
@@ -2334,13 +2407,6 @@ public class BusinessAssetGroup extends APINode {
       this.requestField("logging_token", value);
       return this;
     }
-    public APIRequestGetContainedApplications requestLoginSecretField () {
-      return this.requestLoginSecretField(true);
-    }
-    public APIRequestGetContainedApplications requestLoginSecretField (boolean value) {
-      this.requestField("login_secret", value);
-      return this;
-    }
     public APIRequestGetContainedApplications requestLogoUrlField () {
       return this.requestLogoUrlField(true);
     }
@@ -2402,6 +2468,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedApplications requestObjectStoreUrlsField (boolean value) {
       this.requestField("object_store_urls", value);
+      return this;
+    }
+    public APIRequestGetContainedApplications requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetContainedApplications requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
       return this;
     }
     public APIRequestGetContainedApplications requestPageTabDefaultNameField () {
@@ -3337,6 +3410,8 @@ public class BusinessAssetGroup extends APINode {
       "is_private",
       "is_published",
       "media_count",
+      "mini_shop_storefront",
+      "owner_business",
       "profile_pic",
       "username",
     };
@@ -3477,6 +3552,20 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedInstagramAccounts requestMediaCountField (boolean value) {
       this.requestField("media_count", value);
+      return this;
+    }
+    public APIRequestGetContainedInstagramAccounts requestMiniShopStorefrontField () {
+      return this.requestMiniShopStorefrontField(true);
+    }
+    public APIRequestGetContainedInstagramAccounts requestMiniShopStorefrontField (boolean value) {
+      this.requestField("mini_shop_storefront", value);
+      return this;
+    }
+    public APIRequestGetContainedInstagramAccounts requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetContainedInstagramAccounts requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
       return this;
     }
     public APIRequestGetContainedInstagramAccounts requestProfilePicField () {
@@ -3729,6 +3818,7 @@ public class BusinessAssetGroup extends APINode {
       "business",
       "config",
       "creation_time",
+      "creator",
       "description",
       "duplicate_entries",
       "enable_auto_assign_to_accounts",
@@ -3744,6 +3834,7 @@ public class BusinessAssetGroup extends APINode {
       "match_rate_approx",
       "matched_entries",
       "name",
+      "owner_business",
       "usage",
       "valid_entries",
     };
@@ -3858,6 +3949,13 @@ public class BusinessAssetGroup extends APINode {
       this.requestField("creation_time", value);
       return this;
     }
+    public APIRequestGetContainedOfflineConversionDataSets requestCreatorField () {
+      return this.requestCreatorField(true);
+    }
+    public APIRequestGetContainedOfflineConversionDataSets requestCreatorField (boolean value) {
+      this.requestField("creator", value);
+      return this;
+    }
     public APIRequestGetContainedOfflineConversionDataSets requestDescriptionField () {
       return this.requestDescriptionField(true);
     }
@@ -3961,6 +4059,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedOfflineConversionDataSets requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetContainedOfflineConversionDataSets requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetContainedOfflineConversionDataSets requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
       return this;
     }
     public APIRequestGetContainedOfflineConversionDataSets requestUsageField () {
@@ -4292,10 +4397,12 @@ public class BusinessAssetGroup extends APINode {
       "members",
       "merchant_id",
       "merchant_review_status",
+      "messaging_feature_status",
       "messenger_ads_default_icebreakers",
       "messenger_ads_default_page_welcome_message",
       "messenger_ads_default_quick_replies",
       "messenger_ads_quick_replies_type",
+      "mini_shop_storefront",
       "mission",
       "mpg",
       "name",
@@ -4304,6 +4411,7 @@ public class BusinessAssetGroup extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
+      "owner_business",
       "page_token",
       "parent_page",
       "parking",
@@ -5019,6 +5127,13 @@ public class BusinessAssetGroup extends APINode {
       this.requestField("merchant_review_status", value);
       return this;
     }
+    public APIRequestGetContainedPages requestMessagingFeatureStatusField () {
+      return this.requestMessagingFeatureStatusField(true);
+    }
+    public APIRequestGetContainedPages requestMessagingFeatureStatusField (boolean value) {
+      this.requestField("messaging_feature_status", value);
+      return this;
+    }
     public APIRequestGetContainedPages requestMessengerAdsDefaultIcebreakersField () {
       return this.requestMessengerAdsDefaultIcebreakersField(true);
     }
@@ -5045,6 +5160,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedPages requestMessengerAdsQuickRepliesTypeField (boolean value) {
       this.requestField("messenger_ads_quick_replies_type", value);
+      return this;
+    }
+    public APIRequestGetContainedPages requestMiniShopStorefrontField () {
+      return this.requestMiniShopStorefrontField(true);
+    }
+    public APIRequestGetContainedPages requestMiniShopStorefrontField (boolean value) {
+      this.requestField("mini_shop_storefront", value);
       return this;
     }
     public APIRequestGetContainedPages requestMissionField () {
@@ -5101,6 +5223,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedPages requestOverallStarRatingField (boolean value) {
       this.requestField("overall_star_rating", value);
+      return this;
+    }
+    public APIRequestGetContainedPages requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetContainedPages requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
       return this;
     }
     public APIRequestGetContainedPages requestPageTokenField () {
@@ -6138,8 +6267,12 @@ public class BusinessAssetGroup extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "ad_account_to_collaborative_ads_share_settings",
+      "agency_collaborative_ads_share_settings",
       "business",
+      "catalog_store",
       "commerce_merchant_settings",
+      "creator_user",
       "da_display_settings",
       "default_image_url",
       "fallback_image_url",
@@ -6147,6 +6280,7 @@ public class BusinessAssetGroup extends APINode {
       "id",
       "is_catalog_segment",
       "name",
+      "owner_business",
       "product_count",
       "store_catalog_settings",
       "vertical",
@@ -6241,6 +6375,20 @@ public class BusinessAssetGroup extends APINode {
       return this;
     }
 
+    public APIRequestGetContainedProductCatalogs requestAdAccountToCollaborativeAdsShareSettingsField () {
+      return this.requestAdAccountToCollaborativeAdsShareSettingsField(true);
+    }
+    public APIRequestGetContainedProductCatalogs requestAdAccountToCollaborativeAdsShareSettingsField (boolean value) {
+      this.requestField("ad_account_to_collaborative_ads_share_settings", value);
+      return this;
+    }
+    public APIRequestGetContainedProductCatalogs requestAgencyCollaborativeAdsShareSettingsField () {
+      return this.requestAgencyCollaborativeAdsShareSettingsField(true);
+    }
+    public APIRequestGetContainedProductCatalogs requestAgencyCollaborativeAdsShareSettingsField (boolean value) {
+      this.requestField("agency_collaborative_ads_share_settings", value);
+      return this;
+    }
     public APIRequestGetContainedProductCatalogs requestBusinessField () {
       return this.requestBusinessField(true);
     }
@@ -6248,11 +6396,25 @@ public class BusinessAssetGroup extends APINode {
       this.requestField("business", value);
       return this;
     }
+    public APIRequestGetContainedProductCatalogs requestCatalogStoreField () {
+      return this.requestCatalogStoreField(true);
+    }
+    public APIRequestGetContainedProductCatalogs requestCatalogStoreField (boolean value) {
+      this.requestField("catalog_store", value);
+      return this;
+    }
     public APIRequestGetContainedProductCatalogs requestCommerceMerchantSettingsField () {
       return this.requestCommerceMerchantSettingsField(true);
     }
     public APIRequestGetContainedProductCatalogs requestCommerceMerchantSettingsField (boolean value) {
       this.requestField("commerce_merchant_settings", value);
+      return this;
+    }
+    public APIRequestGetContainedProductCatalogs requestCreatorUserField () {
+      return this.requestCreatorUserField(true);
+    }
+    public APIRequestGetContainedProductCatalogs requestCreatorUserField (boolean value) {
+      this.requestField("creator_user", value);
       return this;
     }
     public APIRequestGetContainedProductCatalogs requestDaDisplaySettingsField () {
@@ -6302,6 +6464,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedProductCatalogs requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetContainedProductCatalogs requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetContainedProductCatalogs requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
       return this;
     }
     public APIRequestGetContainedProductCatalogs requestProductCountField () {
@@ -6450,6 +6619,7 @@ public class BusinessAssetGroup extends APINode {
     public static final String[] FIELDS = {
       "id",
       "name",
+      "owner_business",
     };
 
     @Override
@@ -6553,6 +6723,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGet requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGet requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGet requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
       return this;
     }
   }
@@ -6668,6 +6845,8 @@ public class BusinessAssetGroup extends APINode {
   }
 
   public static enum EnumAdaccountTasks {
+      @SerializedName("AA_ANALYZE")
+      VALUE_AA_ANALYZE("AA_ANALYZE"),
       @SerializedName("ADVERTISE")
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("ANALYZE")
@@ -6691,6 +6870,8 @@ public class BusinessAssetGroup extends APINode {
   }
 
   public static enum EnumOfflineConversionDataSetTasks {
+      @SerializedName("AA_ANALYZE")
+      VALUE_AA_ANALYZE("AA_ANALYZE"),
       @SerializedName("ADVERTISE")
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("MANAGE")
@@ -6746,12 +6927,20 @@ public class BusinessAssetGroup extends APINode {
       VALUE_PROFILE_PLUS_CREATE_CONTENT("PROFILE_PLUS_CREATE_CONTENT"),
       @SerializedName("PROFILE_PLUS_FACEBOOK_ACCESS")
       VALUE_PROFILE_PLUS_FACEBOOK_ACCESS("PROFILE_PLUS_FACEBOOK_ACCESS"),
+      @SerializedName("PROFILE_PLUS_FULL_CONTROL")
+      VALUE_PROFILE_PLUS_FULL_CONTROL("PROFILE_PLUS_FULL_CONTROL"),
       @SerializedName("PROFILE_PLUS_MANAGE")
       VALUE_PROFILE_PLUS_MANAGE("PROFILE_PLUS_MANAGE"),
+      @SerializedName("PROFILE_PLUS_MANAGE_LEADS")
+      VALUE_PROFILE_PLUS_MANAGE_LEADS("PROFILE_PLUS_MANAGE_LEADS"),
       @SerializedName("PROFILE_PLUS_MESSAGING")
       VALUE_PROFILE_PLUS_MESSAGING("PROFILE_PLUS_MESSAGING"),
       @SerializedName("PROFILE_PLUS_MODERATE")
       VALUE_PROFILE_PLUS_MODERATE("PROFILE_PLUS_MODERATE"),
+      @SerializedName("PROFILE_PLUS_MODERATE_DELEGATE_COMMUNITY")
+      VALUE_PROFILE_PLUS_MODERATE_DELEGATE_COMMUNITY("PROFILE_PLUS_MODERATE_DELEGATE_COMMUNITY"),
+      @SerializedName("PROFILE_PLUS_REVENUE")
+      VALUE_PROFILE_PLUS_REVENUE("PROFILE_PLUS_REVENUE"),
       @SerializedName("READ_PAGE_MAILBOXES")
       VALUE_READ_PAGE_MAILBOXES("READ_PAGE_MAILBOXES"),
       @SerializedName("VIEW_MONETIZATION_INSIGHTS")
@@ -6771,10 +6960,16 @@ public class BusinessAssetGroup extends APINode {
   }
 
   public static enum EnumPixelTasks {
+      @SerializedName("AA_ANALYZE")
+      VALUE_AA_ANALYZE("AA_ANALYZE"),
+      @SerializedName("ADVERTISE")
+      VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("ANALYZE")
       VALUE_ANALYZE("ANALYZE"),
       @SerializedName("EDIT")
       VALUE_EDIT("EDIT"),
+      @SerializedName("UPLOAD")
+      VALUE_UPLOAD("UPLOAD"),
       ;
 
       private String value;
@@ -6806,6 +7001,7 @@ public class BusinessAssetGroup extends APINode {
   public BusinessAssetGroup copyFrom(BusinessAssetGroup instance) {
     this.mId = instance.mId;
     this.mName = instance.mName;
+    this.mOwnerBusiness = instance.mOwnerBusiness;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

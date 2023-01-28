@@ -346,7 +346,13 @@ public class ProductGroup extends APINode {
       "custom_label_2",
       "custom_label_3",
       "custom_label_4",
+      "custom_number_0",
+      "custom_number_1",
+      "custom_number_2",
+      "custom_number_3",
+      "custom_number_4",
       "description",
+      "errors",
       "expiration_date",
       "fb_product_category",
       "gender",
@@ -356,19 +362,27 @@ public class ProductGroup extends APINode {
       "image_fetch_status",
       "image_url",
       "images",
+      "importer_address",
+      "importer_name",
+      "invalidation_errors",
       "inventory",
+      "manufacturer_info",
       "manufacturer_part_number",
+      "marked_for_product_launch",
       "material",
       "mobile_link",
       "name",
       "ordering_index",
+      "origin_country",
       "parent_product_id",
       "pattern",
+      "post_conversion_signal_based_enforcement_appeal_eligibility",
       "price",
       "product_catalog",
       "product_feed",
       "product_group",
       "product_type",
+      "quantity_to_sell_on_facebook",
       "retailer_id",
       "retailer_product_group_id",
       "review_rejection_reasons",
@@ -383,6 +397,7 @@ public class ProductGroup extends APINode {
       "start_date",
       "url",
       "visibility",
+      "wa_compliance_category",
     };
 
     @Override
@@ -621,11 +636,53 @@ public class ProductGroup extends APINode {
       this.requestField("custom_label_4", value);
       return this;
     }
+    public APIRequestGetProducts requestCustomNumber0Field () {
+      return this.requestCustomNumber0Field(true);
+    }
+    public APIRequestGetProducts requestCustomNumber0Field (boolean value) {
+      this.requestField("custom_number_0", value);
+      return this;
+    }
+    public APIRequestGetProducts requestCustomNumber1Field () {
+      return this.requestCustomNumber1Field(true);
+    }
+    public APIRequestGetProducts requestCustomNumber1Field (boolean value) {
+      this.requestField("custom_number_1", value);
+      return this;
+    }
+    public APIRequestGetProducts requestCustomNumber2Field () {
+      return this.requestCustomNumber2Field(true);
+    }
+    public APIRequestGetProducts requestCustomNumber2Field (boolean value) {
+      this.requestField("custom_number_2", value);
+      return this;
+    }
+    public APIRequestGetProducts requestCustomNumber3Field () {
+      return this.requestCustomNumber3Field(true);
+    }
+    public APIRequestGetProducts requestCustomNumber3Field (boolean value) {
+      this.requestField("custom_number_3", value);
+      return this;
+    }
+    public APIRequestGetProducts requestCustomNumber4Field () {
+      return this.requestCustomNumber4Field(true);
+    }
+    public APIRequestGetProducts requestCustomNumber4Field (boolean value) {
+      this.requestField("custom_number_4", value);
+      return this;
+    }
     public APIRequestGetProducts requestDescriptionField () {
       return this.requestDescriptionField(true);
     }
     public APIRequestGetProducts requestDescriptionField (boolean value) {
       this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetProducts requestErrorsField () {
+      return this.requestErrorsField(true);
+    }
+    public APIRequestGetProducts requestErrorsField (boolean value) {
+      this.requestField("errors", value);
       return this;
     }
     public APIRequestGetProducts requestExpirationDateField () {
@@ -691,6 +748,27 @@ public class ProductGroup extends APINode {
       this.requestField("images", value);
       return this;
     }
+    public APIRequestGetProducts requestImporterAddressField () {
+      return this.requestImporterAddressField(true);
+    }
+    public APIRequestGetProducts requestImporterAddressField (boolean value) {
+      this.requestField("importer_address", value);
+      return this;
+    }
+    public APIRequestGetProducts requestImporterNameField () {
+      return this.requestImporterNameField(true);
+    }
+    public APIRequestGetProducts requestImporterNameField (boolean value) {
+      this.requestField("importer_name", value);
+      return this;
+    }
+    public APIRequestGetProducts requestInvalidationErrorsField () {
+      return this.requestInvalidationErrorsField(true);
+    }
+    public APIRequestGetProducts requestInvalidationErrorsField (boolean value) {
+      this.requestField("invalidation_errors", value);
+      return this;
+    }
     public APIRequestGetProducts requestInventoryField () {
       return this.requestInventoryField(true);
     }
@@ -698,11 +776,25 @@ public class ProductGroup extends APINode {
       this.requestField("inventory", value);
       return this;
     }
+    public APIRequestGetProducts requestManufacturerInfoField () {
+      return this.requestManufacturerInfoField(true);
+    }
+    public APIRequestGetProducts requestManufacturerInfoField (boolean value) {
+      this.requestField("manufacturer_info", value);
+      return this;
+    }
     public APIRequestGetProducts requestManufacturerPartNumberField () {
       return this.requestManufacturerPartNumberField(true);
     }
     public APIRequestGetProducts requestManufacturerPartNumberField (boolean value) {
       this.requestField("manufacturer_part_number", value);
+      return this;
+    }
+    public APIRequestGetProducts requestMarkedForProductLaunchField () {
+      return this.requestMarkedForProductLaunchField(true);
+    }
+    public APIRequestGetProducts requestMarkedForProductLaunchField (boolean value) {
+      this.requestField("marked_for_product_launch", value);
       return this;
     }
     public APIRequestGetProducts requestMaterialField () {
@@ -733,6 +825,13 @@ public class ProductGroup extends APINode {
       this.requestField("ordering_index", value);
       return this;
     }
+    public APIRequestGetProducts requestOriginCountryField () {
+      return this.requestOriginCountryField(true);
+    }
+    public APIRequestGetProducts requestOriginCountryField (boolean value) {
+      this.requestField("origin_country", value);
+      return this;
+    }
     public APIRequestGetProducts requestParentProductIdField () {
       return this.requestParentProductIdField(true);
     }
@@ -745,6 +844,13 @@ public class ProductGroup extends APINode {
     }
     public APIRequestGetProducts requestPatternField (boolean value) {
       this.requestField("pattern", value);
+      return this;
+    }
+    public APIRequestGetProducts requestPostConversionSignalBasedEnforcementAppealEligibilityField () {
+      return this.requestPostConversionSignalBasedEnforcementAppealEligibilityField(true);
+    }
+    public APIRequestGetProducts requestPostConversionSignalBasedEnforcementAppealEligibilityField (boolean value) {
+      this.requestField("post_conversion_signal_based_enforcement_appeal_eligibility", value);
       return this;
     }
     public APIRequestGetProducts requestPriceField () {
@@ -780,6 +886,13 @@ public class ProductGroup extends APINode {
     }
     public APIRequestGetProducts requestProductTypeField (boolean value) {
       this.requestField("product_type", value);
+      return this;
+    }
+    public APIRequestGetProducts requestQuantityToSellOnFacebookField () {
+      return this.requestQuantityToSellOnFacebookField(true);
+    }
+    public APIRequestGetProducts requestQuantityToSellOnFacebookField (boolean value) {
+      this.requestField("quantity_to_sell_on_facebook", value);
       return this;
     }
     public APIRequestGetProducts requestRetailerIdField () {
@@ -880,6 +993,13 @@ public class ProductGroup extends APINode {
       this.requestField("visibility", value);
       return this;
     }
+    public APIRequestGetProducts requestWaComplianceCategoryField () {
+      return this.requestWaComplianceCategoryField(true);
+    }
+    public APIRequestGetProducts requestWaComplianceCategoryField (boolean value) {
+      this.requestField("wa_compliance_category", value);
+      return this;
+    }
   }
 
   public static class APIRequestCreateProduct extends APIRequest<ProductItem> {
@@ -910,6 +1030,11 @@ public class ProductGroup extends APINode {
       "custom_label_2",
       "custom_label_3",
       "custom_label_4",
+      "custom_number_0",
+      "custom_number_1",
+      "custom_number_2",
+      "custom_number_3",
+      "custom_number_4",
       "description",
       "expiration_date",
       "fb_product_category",
@@ -928,6 +1053,7 @@ public class ProductGroup extends APINode {
       "iphone_url",
       "launch_date",
       "manufacturer_part_number",
+      "marked_for_product_launch",
       "material",
       "mobile_link",
       "name",
@@ -938,6 +1064,7 @@ public class ProductGroup extends APINode {
       "pattern",
       "price",
       "product_type",
+      "quantity_to_sell_on_facebook",
       "retailer_id",
       "return_policy_days",
       "sale_price",
@@ -1133,6 +1260,51 @@ public class ProductGroup extends APINode {
       return this;
     }
 
+    public APIRequestCreateProduct setCustomNumber0 (Long customNumber0) {
+      this.setParam("custom_number_0", customNumber0);
+      return this;
+    }
+    public APIRequestCreateProduct setCustomNumber0 (String customNumber0) {
+      this.setParam("custom_number_0", customNumber0);
+      return this;
+    }
+
+    public APIRequestCreateProduct setCustomNumber1 (Long customNumber1) {
+      this.setParam("custom_number_1", customNumber1);
+      return this;
+    }
+    public APIRequestCreateProduct setCustomNumber1 (String customNumber1) {
+      this.setParam("custom_number_1", customNumber1);
+      return this;
+    }
+
+    public APIRequestCreateProduct setCustomNumber2 (Long customNumber2) {
+      this.setParam("custom_number_2", customNumber2);
+      return this;
+    }
+    public APIRequestCreateProduct setCustomNumber2 (String customNumber2) {
+      this.setParam("custom_number_2", customNumber2);
+      return this;
+    }
+
+    public APIRequestCreateProduct setCustomNumber3 (Long customNumber3) {
+      this.setParam("custom_number_3", customNumber3);
+      return this;
+    }
+    public APIRequestCreateProduct setCustomNumber3 (String customNumber3) {
+      this.setParam("custom_number_3", customNumber3);
+      return this;
+    }
+
+    public APIRequestCreateProduct setCustomNumber4 (Long customNumber4) {
+      this.setParam("custom_number_4", customNumber4);
+      return this;
+    }
+    public APIRequestCreateProduct setCustomNumber4 (String customNumber4) {
+      this.setParam("custom_number_4", customNumber4);
+      return this;
+    }
+
     public APIRequestCreateProduct setDescription (String description) {
       this.setParam("description", description);
       return this;
@@ -1243,6 +1415,15 @@ public class ProductGroup extends APINode {
       return this;
     }
 
+    public APIRequestCreateProduct setMarkedForProductLaunch (ProductItem.EnumMarkedForProductLaunch markedForProductLaunch) {
+      this.setParam("marked_for_product_launch", markedForProductLaunch);
+      return this;
+    }
+    public APIRequestCreateProduct setMarkedForProductLaunch (String markedForProductLaunch) {
+      this.setParam("marked_for_product_launch", markedForProductLaunch);
+      return this;
+    }
+
     public APIRequestCreateProduct setMaterial (String material) {
       this.setParam("material", material);
       return this;
@@ -1302,6 +1483,15 @@ public class ProductGroup extends APINode {
 
     public APIRequestCreateProduct setProductType (String productType) {
       this.setParam("product_type", productType);
+      return this;
+    }
+
+    public APIRequestCreateProduct setQuantityToSellOnFacebook (Long quantityToSellOnFacebook) {
+      this.setParam("quantity_to_sell_on_facebook", quantityToSellOnFacebook);
+      return this;
+    }
+    public APIRequestCreateProduct setQuantityToSellOnFacebook (String quantityToSellOnFacebook) {
+      this.setParam("quantity_to_sell_on_facebook", quantityToSellOnFacebook);
       return this;
     }
 
@@ -1428,6 +1618,7 @@ public class ProductGroup extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "deletion_method",
     };
 
     public static final String[] FIELDS = {
@@ -1485,6 +1676,15 @@ public class ProductGroup extends APINode {
       return this;
     }
 
+
+    public APIRequestDelete setDeletionMethod (EnumDeletionMethod deletionMethod) {
+      this.setParam("deletion_method", deletionMethod);
+      return this;
+    }
+    public APIRequestDelete setDeletionMethod (String deletionMethod) {
+      this.setParam("deletion_method", deletionMethod);
+      return this;
+    }
 
     public APIRequestDelete requestAllFields () {
       return this.requestAllFields(true);
@@ -1778,6 +1978,25 @@ public class ProductGroup extends APINode {
       return this;
     }
 
+  }
+
+  public static enum EnumDeletionMethod {
+      @SerializedName("DELETE_ITEMS")
+      VALUE_DELETE_ITEMS("DELETE_ITEMS"),
+      @SerializedName("ONLY_IF_EMPTY")
+      VALUE_ONLY_IF_EMPTY("ONLY_IF_EMPTY"),
+      ;
+
+      private String value;
+
+      private EnumDeletionMethod(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
 

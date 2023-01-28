@@ -413,6 +413,8 @@ public class AdActivity extends APINode {
       VALUE_FUNDING_EVENT_SUCCESSFUL("funding_event_successful"),
       @SerializedName("lifetime_budget_spent")
       VALUE_LIFETIME_BUDGET_SPENT("lifetime_budget_spent"),
+      @SerializedName("merge_campaigns")
+      VALUE_MERGE_CAMPAIGNS("merge_campaigns"),
       @SerializedName("receive_audience")
       VALUE_RECEIVE_AUDIENCE("receive_audience"),
       @SerializedName("remove_funding_source")
@@ -549,6 +551,10 @@ public class AdActivity extends APINode {
       VALUE_CALYPSO("CALYPSO"),
       @SerializedName("TAO")
       VALUE_TAO("TAO"),
+      @SerializedName("TAO_AD_ACCOUNT")
+      VALUE_TAO_AD_ACCOUNT("TAO_AD_ACCOUNT"),
+      @SerializedName("TAO_AD_STATUS")
+      VALUE_TAO_AD_STATUS("TAO_AD_STATUS"),
       ;
 
       private String value;

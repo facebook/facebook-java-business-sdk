@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## v13.0.0
+
+
+### Added
+- Ignore empty UserData fields when serializing
+
+## v11.0.0
+
+
+### Changed
+- Graph API call upgrade to [v11.0]https://developers.facebook.com/docs/graph-api/changelog/version11.0
+
 ## v10.0.1
 
 

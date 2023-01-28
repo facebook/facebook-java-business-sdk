@@ -76,7 +76,7 @@ public class AdAsyncRequestSet extends APINode {
   @SerializedName("notification_result")
   private AdAsyncRequestSetNotificationResult mNotificationResult = null;
   @SerializedName("notification_status")
-  private EnumNotificationStatus mNotificationStatus = null;
+  private String mNotificationStatus = null;
   @SerializedName("notification_uri")
   private String mNotificationUri = null;
   @SerializedName("owner_id")
@@ -353,7 +353,7 @@ public class AdAsyncRequestSet extends APINode {
     return mNotificationResult;
   }
 
-  public EnumNotificationStatus getFieldNotificationStatus() {
+  public String getFieldNotificationStatus() {
     return mNotificationStatus;
   }
 
@@ -1037,27 +1037,6 @@ public class AdAsyncRequestSet extends APINode {
       private String value;
 
       private EnumNotificationMode(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumNotificationStatus {
-      @SerializedName("NOT_SENT")
-      VALUE_NOT_SENT("NOT_SENT"),
-      @SerializedName("SENDING")
-      VALUE_SENDING("SENDING"),
-      @SerializedName("SENT")
-      VALUE_SENT("SENT"),
-      ;
-
-      private String value;
-
-      private EnumNotificationStatus(String value) {
         this.value = value;
       }
 
