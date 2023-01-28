@@ -57,6 +57,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class UnifiedThread extends APINode {
   @SerializedName("can_reply")
   private Boolean mCanReply = null;
+  @SerializedName("folder")
+  private String mFolder = null;
   @SerializedName("former_participants")
   private Object mFormerParticipants = null;
   @SerializedName("id")
@@ -307,6 +309,10 @@ public class UnifiedThread extends APINode {
     return mCanReply;
   }
 
+  public String getFieldFolder() {
+    return mFolder;
+  }
+
   public Object getFieldFormerParticipants() {
     return mFormerParticipants;
   }
@@ -491,6 +497,7 @@ public class UnifiedThread extends APINode {
 
     public static final String[] FIELDS = {
       "can_reply",
+      "folder",
       "former_participants",
       "id",
       "is_subscribed",
@@ -603,6 +610,13 @@ public class UnifiedThread extends APINode {
       this.requestField("can_reply", value);
       return this;
     }
+    public APIRequestGet requestFolderField () {
+      return this.requestFolderField(true);
+    }
+    public APIRequestGet requestFolderField (boolean value) {
+      this.requestField("folder", value);
+      return this;
+    }
     public APIRequestGet requestFormerParticipantsField () {
       return this.requestFormerParticipantsField(true);
     }
@@ -708,8 +722,6 @@ public class UnifiedThread extends APINode {
       VALUE_INSTAGRAM("INSTAGRAM"),
       @SerializedName("MESSENGER")
       VALUE_MESSENGER("MESSENGER"),
-      @SerializedName("WHATSAPP")
-      VALUE_WHATSAPP("WHATSAPP"),
       ;
 
       private String value;
@@ -759,6 +771,7 @@ public class UnifiedThread extends APINode {
 
   public UnifiedThread copyFrom(UnifiedThread instance) {
     this.mCanReply = instance.mCanReply;
+    this.mFolder = instance.mFolder;
     this.mFormerParticipants = instance.mFormerParticipants;
     this.mId = instance.mId;
     this.mIsSubscribed = instance.mIsSubscribed;

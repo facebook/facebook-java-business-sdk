@@ -502,6 +502,10 @@ public class AdAccount extends APINode {
     return new APIRequestGetAdsReportingMmmReports(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetAdsReportingMmmSchedulers getAdsReportingMmmSchedulers() {
+    return new APIRequestGetAdsReportingMmmSchedulers(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetAdsVolume getAdsVolume() {
     return new APIRequestGetAdsVolume(this.getPrefixedId().toString(), context);
   }
@@ -650,8 +654,8 @@ public class AdAccount extends APINode {
     return new APIRequestGetDeprecatedTargetingAdSets(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetGeneratePreViews getGeneratePreViews() {
-    return new APIRequestGetGeneratePreViews(this.getPrefixedId().toString(), context);
+  public APIRequestGetGeneratePreviews getGeneratePreviews() {
+    return new APIRequestGetGeneratePreviews(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetImpactingAdStudies getImpactingAdStudies() {
@@ -2355,6 +2359,7 @@ public class AdAccount extends APINode {
       "categorization_criteria",
       "category_media_source",
       "collaborative_ads_lsb_image_bank_id",
+      "degrees_of_freedom_spec",
       "destination_set_id",
       "dynamic_ad_voice",
       "effective_authorization_category",
@@ -2588,6 +2593,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdCreatives requestCollaborativeAdsLsbImageBankIdField (boolean value) {
       this.requestField("collaborative_ads_lsb_image_bank_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestDegreesOfFreedomSpecField () {
+      return this.requestDegreesOfFreedomSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestDegreesOfFreedomSpecField (boolean value) {
+      this.requestField("degrees_of_freedom_spec", value);
       return this;
     }
     public APIRequestGetAdCreatives requestDestinationSetIdField () {
@@ -2933,6 +2945,7 @@ public class AdAccount extends APINode {
       "call_to_action",
       "categorization_criteria",
       "category_media_source",
+      "degrees_of_freedom_spec",
       "destination_set_id",
       "dynamic_ad_voice",
       "enable_launch_instant_app",
@@ -3110,6 +3123,15 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdCreative setCategoryMediaSource (String categoryMediaSource) {
       this.setParam("category_media_source", categoryMediaSource);
+      return this;
+    }
+
+    public APIRequestCreateAdCreative setDegreesOfFreedomSpec (Map<String, String> degreesOfFreedomSpec) {
+      this.setParam("degrees_of_freedom_spec", degreesOfFreedomSpec);
+      return this;
+    }
+    public APIRequestCreateAdCreative setDegreesOfFreedomSpec (String degreesOfFreedomSpec) {
+      this.setParam("degrees_of_freedom_spec", degreesOfFreedomSpec);
       return this;
     }
 
@@ -3405,6 +3427,7 @@ public class AdAccount extends APINode {
       "categorization_criteria",
       "category_media_source",
       "collaborative_ads_lsb_image_bank_id",
+      "degrees_of_freedom_spec",
       "destination_set_id",
       "dynamic_ad_voice",
       "effective_authorization_category",
@@ -3656,6 +3679,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdCreativesByLabels requestCollaborativeAdsLsbImageBankIdField (boolean value) {
       this.requestField("collaborative_ads_lsb_image_bank_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreativesByLabels requestDegreesOfFreedomSpecField () {
+      return this.requestDegreesOfFreedomSpecField(true);
+    }
+    public APIRequestGetAdCreativesByLabels requestDegreesOfFreedomSpecField (boolean value) {
+      this.requestField("degrees_of_freedom_spec", value);
       return this;
     }
     public APIRequestGetAdCreativesByLabels requestDestinationSetIdField () {
@@ -6410,6 +6440,110 @@ public class AdAccount extends APINode {
 
   }
 
+  public static class APIRequestGetAdsReportingMmmSchedulers extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetAdsReportingMmmSchedulers.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetAdsReportingMmmSchedulers(String nodeId, APIContext context) {
+      super(context, nodeId, "/ads_reporting_mmm_schedulers", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetAdsReportingMmmSchedulers setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdsReportingMmmSchedulers setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetAdsReportingMmmSchedulers requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetAdsReportingMmmSchedulers requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdsReportingMmmSchedulers requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetAdsReportingMmmSchedulers requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdsReportingMmmSchedulers requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdsReportingMmmSchedulers requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetAdsVolume extends APIRequest<AdAccountAdVolume> {
 
     APINodeList<AdAccountAdVolume> lastResponse = null;
@@ -9140,7 +9274,6 @@ public class AdAccount extends APINode {
       "latest_sdk_version",
       "link",
       "logging_token",
-      "login_secret",
       "logo_url",
       "migrations",
       "mobile_profile_section_url",
@@ -9708,13 +9841,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdvertisableApplications requestLoggingTokenField (boolean value) {
       this.requestField("logging_token", value);
-      return this;
-    }
-    public APIRequestGetAdvertisableApplications requestLoginSecretField () {
-      return this.requestLoginSecretField(true);
-    }
-    public APIRequestGetAdvertisableApplications requestLoginSecretField (boolean value) {
-      this.requestField("login_secret", value);
       return this;
     }
     public APIRequestGetAdvertisableApplications requestLogoUrlField () {
@@ -12353,7 +12479,6 @@ public class AdAccount extends APINode {
       "latest_sdk_version",
       "link",
       "logging_token",
-      "login_secret",
       "logo_url",
       "migrations",
       "mobile_profile_section_url",
@@ -12911,13 +13036,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetApplications requestLoggingTokenField (boolean value) {
       this.requestField("logging_token", value);
-      return this;
-    }
-    public APIRequestGetApplications requestLoginSecretField () {
-      return this.requestLoginSecretField(true);
-    }
-    public APIRequestGetApplications requestLoginSecretField (boolean value) {
-      this.requestField("login_secret", value);
       return this;
     }
     public APIRequestGetApplications requestLogoUrlField () {
@@ -14726,7 +14844,6 @@ public class AdAccount extends APINode {
       "ad_strategy_group_id",
       "ad_strategy_id",
       "adlabels",
-      "benchmark_report_count",
       "bid_strategy",
       "boosted_object_id",
       "brand_lift_studies",
@@ -14916,13 +15033,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetCampaigns requestAdlabelsField (boolean value) {
       this.requestField("adlabels", value);
-      return this;
-    }
-    public APIRequestGetCampaigns requestBenchmarkReportCountField () {
-      return this.requestBenchmarkReportCountField(true);
-    }
-    public APIRequestGetCampaigns requestBenchmarkReportCountField (boolean value) {
-      this.requestField("benchmark_report_count", value);
       return this;
     }
     public APIRequestGetCampaigns requestBidStrategyField () {
@@ -15496,7 +15606,6 @@ public class AdAccount extends APINode {
       "ad_strategy_group_id",
       "ad_strategy_id",
       "adlabels",
-      "benchmark_report_count",
       "bid_strategy",
       "boosted_object_id",
       "brand_lift_studies",
@@ -15668,13 +15777,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetCampaignsByLabels requestAdlabelsField (boolean value) {
       this.requestField("adlabels", value);
-      return this;
-    }
-    public APIRequestGetCampaignsByLabels requestBenchmarkReportCountField () {
-      return this.requestBenchmarkReportCountField(true);
-    }
-    public APIRequestGetCampaignsByLabels requestBenchmarkReportCountField (boolean value) {
-      this.requestField("benchmark_report_count", value);
       return this;
     }
     public APIRequestGetCampaignsByLabels requestBidStrategyField () {
@@ -18063,7 +18165,7 @@ public class AdAccount extends APINode {
     }
   }
 
-  public static class APIRequestGetGeneratePreViews extends APIRequest<AdPreview> {
+  public static class APIRequestGetGeneratePreviews extends APIRequest<AdPreview> {
 
     APINodeList<AdPreview> lastResponse = null;
     @Override
@@ -18118,7 +18220,7 @@ public class AdAccount extends APINode {
         new Function<ResponseWrapper, APINodeList<AdPreview>>() {
            public APINodeList<AdPreview> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetGeneratePreViews.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestGetGeneratePreviews.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -18127,138 +18229,138 @@ public class AdAccount extends APINode {
       );
     };
 
-    public APIRequestGetGeneratePreViews(String nodeId, APIContext context) {
+    public APIRequestGetGeneratePreviews(String nodeId, APIContext context) {
       super(context, nodeId, "/generatepreviews", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGetGeneratePreViews setParam(String param, Object value) {
+    public APIRequestGetGeneratePreviews setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGetGeneratePreViews setParams(Map<String, Object> params) {
+    public APIRequestGetGeneratePreviews setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGetGeneratePreViews setAdFormat (AdPreview.EnumAdFormat adFormat) {
+    public APIRequestGetGeneratePreviews setAdFormat (AdPreview.EnumAdFormat adFormat) {
       this.setParam("ad_format", adFormat);
       return this;
     }
-    public APIRequestGetGeneratePreViews setAdFormat (String adFormat) {
+    public APIRequestGetGeneratePreviews setAdFormat (String adFormat) {
       this.setParam("ad_format", adFormat);
       return this;
     }
 
-    public APIRequestGetGeneratePreViews setCreative (AdCreative creative) {
+    public APIRequestGetGeneratePreviews setCreative (AdCreative creative) {
       this.setParam("creative", creative);
       return this;
     }
-    public APIRequestGetGeneratePreViews setCreative (String creative) {
+    public APIRequestGetGeneratePreviews setCreative (String creative) {
       this.setParam("creative", creative);
       return this;
     }
 
-    public APIRequestGetGeneratePreViews setDynamicAssetLabel (String dynamicAssetLabel) {
+    public APIRequestGetGeneratePreviews setDynamicAssetLabel (String dynamicAssetLabel) {
       this.setParam("dynamic_asset_label", dynamicAssetLabel);
       return this;
     }
 
-    public APIRequestGetGeneratePreViews setDynamicCreativeSpec (Object dynamicCreativeSpec) {
+    public APIRequestGetGeneratePreviews setDynamicCreativeSpec (Object dynamicCreativeSpec) {
       this.setParam("dynamic_creative_spec", dynamicCreativeSpec);
       return this;
     }
-    public APIRequestGetGeneratePreViews setDynamicCreativeSpec (String dynamicCreativeSpec) {
+    public APIRequestGetGeneratePreviews setDynamicCreativeSpec (String dynamicCreativeSpec) {
       this.setParam("dynamic_creative_spec", dynamicCreativeSpec);
       return this;
     }
 
-    public APIRequestGetGeneratePreViews setDynamicCustomization (Object dynamicCustomization) {
+    public APIRequestGetGeneratePreviews setDynamicCustomization (Object dynamicCustomization) {
       this.setParam("dynamic_customization", dynamicCustomization);
       return this;
     }
-    public APIRequestGetGeneratePreViews setDynamicCustomization (String dynamicCustomization) {
+    public APIRequestGetGeneratePreviews setDynamicCustomization (String dynamicCustomization) {
       this.setParam("dynamic_customization", dynamicCustomization);
       return this;
     }
 
-    public APIRequestGetGeneratePreViews setEndDate (String endDate) {
+    public APIRequestGetGeneratePreviews setEndDate (String endDate) {
       this.setParam("end_date", endDate);
       return this;
     }
 
-    public APIRequestGetGeneratePreViews setHeight (Long height) {
+    public APIRequestGetGeneratePreviews setHeight (Long height) {
       this.setParam("height", height);
       return this;
     }
-    public APIRequestGetGeneratePreViews setHeight (String height) {
+    public APIRequestGetGeneratePreviews setHeight (String height) {
       this.setParam("height", height);
       return this;
     }
 
-    public APIRequestGetGeneratePreViews setLocale (String locale) {
+    public APIRequestGetGeneratePreviews setLocale (String locale) {
       this.setParam("locale", locale);
       return this;
     }
 
-    public APIRequestGetGeneratePreViews setPlacePageId (Long placePageId) {
+    public APIRequestGetGeneratePreviews setPlacePageId (Long placePageId) {
       this.setParam("place_page_id", placePageId);
       return this;
     }
-    public APIRequestGetGeneratePreViews setPlacePageId (String placePageId) {
+    public APIRequestGetGeneratePreviews setPlacePageId (String placePageId) {
       this.setParam("place_page_id", placePageId);
       return this;
     }
 
-    public APIRequestGetGeneratePreViews setPost (Object post) {
+    public APIRequestGetGeneratePreviews setPost (Object post) {
       this.setParam("post", post);
       return this;
     }
-    public APIRequestGetGeneratePreViews setPost (String post) {
+    public APIRequestGetGeneratePreviews setPost (String post) {
       this.setParam("post", post);
       return this;
     }
 
-    public APIRequestGetGeneratePreViews setProductItemIds (List<String> productItemIds) {
+    public APIRequestGetGeneratePreviews setProductItemIds (List<String> productItemIds) {
       this.setParam("product_item_ids", productItemIds);
       return this;
     }
-    public APIRequestGetGeneratePreViews setProductItemIds (String productItemIds) {
+    public APIRequestGetGeneratePreviews setProductItemIds (String productItemIds) {
       this.setParam("product_item_ids", productItemIds);
       return this;
     }
 
-    public APIRequestGetGeneratePreViews setRenderType (AdPreview.EnumRenderType renderType) {
+    public APIRequestGetGeneratePreviews setRenderType (AdPreview.EnumRenderType renderType) {
       this.setParam("render_type", renderType);
       return this;
     }
-    public APIRequestGetGeneratePreViews setRenderType (String renderType) {
+    public APIRequestGetGeneratePreviews setRenderType (String renderType) {
       this.setParam("render_type", renderType);
       return this;
     }
 
-    public APIRequestGetGeneratePreViews setStartDate (String startDate) {
+    public APIRequestGetGeneratePreviews setStartDate (String startDate) {
       this.setParam("start_date", startDate);
       return this;
     }
 
-    public APIRequestGetGeneratePreViews setWidth (Long width) {
+    public APIRequestGetGeneratePreviews setWidth (Long width) {
       this.setParam("width", width);
       return this;
     }
-    public APIRequestGetGeneratePreViews setWidth (String width) {
+    public APIRequestGetGeneratePreviews setWidth (String width) {
       this.setParam("width", width);
       return this;
     }
 
-    public APIRequestGetGeneratePreViews requestAllFields () {
+    public APIRequestGetGeneratePreviews requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGetGeneratePreViews requestAllFields (boolean value) {
+    public APIRequestGetGeneratePreviews requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -18266,12 +18368,12 @@ public class AdAccount extends APINode {
     }
 
     @Override
-    public APIRequestGetGeneratePreViews requestFields (List<String> fields) {
+    public APIRequestGetGeneratePreviews requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGetGeneratePreViews requestFields (List<String> fields, boolean value) {
+    public APIRequestGetGeneratePreviews requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -18279,21 +18381,21 @@ public class AdAccount extends APINode {
     }
 
     @Override
-    public APIRequestGetGeneratePreViews requestField (String field) {
+    public APIRequestGetGeneratePreviews requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGetGeneratePreViews requestField (String field, boolean value) {
+    public APIRequestGetGeneratePreviews requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
-    public APIRequestGetGeneratePreViews requestBodyField () {
+    public APIRequestGetGeneratePreviews requestBodyField () {
       return this.requestBodyField(true);
     }
-    public APIRequestGetGeneratePreViews requestBodyField (boolean value) {
+    public APIRequestGetGeneratePreviews requestBodyField (boolean value) {
       this.requestField("body", value);
       return this;
     }

@@ -22,8 +22,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class CAPIGIngressRequest implements CustomEndpointRequest {
-    private boolean sendToDestinationOnly;
+public class CAPIGatewayEndpoint implements CustomEndpointRequest {
+    private boolean sendToEndpointOnly;
     private final String endpointURL;
     private Filter filter;
     private final String accessKey;
@@ -31,10 +31,10 @@ public class CAPIGIngressRequest implements CustomEndpointRequest {
     private final OkHttpClient client = new OkHttpClient();
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-    public CAPIGIngressRequest(String endpointURL, String accessKey) {
+    public CAPIGatewayEndpoint(String endpointURL, String accessKey) {
         validateEndpoint(endpointURL);
         this.endpointURL = endpointURL;
-        this.sendToDestinationOnly = false;
+        this.sendToEndpointOnly = false;
         this.filter = null;
         this.accessKey = accessKey;
     }
@@ -47,18 +47,19 @@ public class CAPIGIngressRequest implements CustomEndpointRequest {
         }
     }
 
-    @Override
-    public boolean isSendToDestinationOnly() {
-        return sendToDestinationOnly;
-    }
-    @Override
-    public void setSendToDestinationOnly(boolean sendToDestinationOnly) {
-        this.sendToDestinationOnly = sendToDestinationOnly;
+
+    public boolean isSendToEndpointOnly() {
+        return sendToEndpointOnly;
     }
 
     @Override
     public void setFilter(Filter filter) {
         this.filter = filter;
+    }
+
+    @Override
+    public void setSendToEndpointOnly(boolean sendToEndpointOnly) {
+        this.sendToEndpointOnly = sendToEndpointOnly;
     }
 
     @Override

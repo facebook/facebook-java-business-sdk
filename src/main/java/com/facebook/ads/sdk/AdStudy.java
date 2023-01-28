@@ -718,8 +718,10 @@ public class AdStudy extends APINode {
       "created_time",
       "feature_list",
       "id",
+      "issuer_certificate",
       "latest_status_update_time",
       "run_id",
+      "server_hostnames",
       "server_ips",
       "status",
       "tier",
@@ -842,6 +844,13 @@ public class AdStudy extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetInstances requestIssuerCertificateField () {
+      return this.requestIssuerCertificateField(true);
+    }
+    public APIRequestGetInstances requestIssuerCertificateField (boolean value) {
+      this.requestField("issuer_certificate", value);
+      return this;
+    }
     public APIRequestGetInstances requestLatestStatusUpdateTimeField () {
       return this.requestLatestStatusUpdateTimeField(true);
     }
@@ -854,6 +863,13 @@ public class AdStudy extends APINode {
     }
     public APIRequestGetInstances requestRunIdField (boolean value) {
       this.requestField("run_id", value);
+      return this;
+    }
+    public APIRequestGetInstances requestServerHostnamesField () {
+      return this.requestServerHostnamesField(true);
+    }
+    public APIRequestGetInstances requestServerHostnamesField (boolean value) {
+      this.requestField("server_hostnames", value);
       return this;
     }
     public APIRequestGetInstances requestServerIpsField () {

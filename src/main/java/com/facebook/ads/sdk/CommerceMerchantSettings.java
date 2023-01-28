@@ -1392,7 +1392,6 @@ public class CommerceMerchantSettings extends APINode {
       "latest_sdk_version",
       "link",
       "logging_token",
-      "login_secret",
       "logo_url",
       "migrations",
       "mobile_profile_section_url",
@@ -1952,13 +1951,6 @@ public class CommerceMerchantSettings extends APINode {
       this.requestField("logging_token", value);
       return this;
     }
-    public APIRequestGetOrderManagementApps requestLoginSecretField () {
-      return this.requestLoginSecretField(true);
-    }
-    public APIRequestGetOrderManagementApps requestLoginSecretField (boolean value) {
-      this.requestField("login_secret", value);
-      return this;
-    }
     public APIRequestGetOrderManagementApps requestLogoUrlField () {
       return this.requestLogoUrlField(true);
     }
@@ -2363,6 +2355,8 @@ public class CommerceMerchantSettings extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "ad_account_to_collaborative_ads_share_settings",
+      "agency_collaborative_ads_share_settings",
       "business",
       "catalog_store",
       "commerce_merchant_settings",
@@ -2469,6 +2463,20 @@ public class CommerceMerchantSettings extends APINode {
       return this;
     }
 
+    public APIRequestGetProductCatalogs requestAdAccountToCollaborativeAdsShareSettingsField () {
+      return this.requestAdAccountToCollaborativeAdsShareSettingsField(true);
+    }
+    public APIRequestGetProductCatalogs requestAdAccountToCollaborativeAdsShareSettingsField (boolean value) {
+      this.requestField("ad_account_to_collaborative_ads_share_settings", value);
+      return this;
+    }
+    public APIRequestGetProductCatalogs requestAgencyCollaborativeAdsShareSettingsField () {
+      return this.requestAgencyCollaborativeAdsShareSettingsField(true);
+    }
+    public APIRequestGetProductCatalogs requestAgencyCollaborativeAdsShareSettingsField (boolean value) {
+      this.requestField("agency_collaborative_ads_share_settings", value);
+      return this;
+    }
     public APIRequestGetProductCatalogs requestBusinessField () {
       return this.requestBusinessField(true);
     }

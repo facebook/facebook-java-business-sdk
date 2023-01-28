@@ -54,25 +54,33 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class TargetingRelaxation extends APINode {
-  @SerializedName("custom_audience")
-  private Long mCustomAudience = null;
-  @SerializedName("lookalike")
-  private Long mLookalike = null;
+public class CatalogSegmentAllMatchCountLaser extends APINode {
+  @SerializedName("date_start")
+  private String mDateStart = null;
+  @SerializedName("date_stop")
+  private String mDateStop = null;
+  @SerializedName("event")
+  private String mEvent = null;
+  @SerializedName("source")
+  private ExternalEventSource mSource = null;
+  @SerializedName("total_matched_content_ids")
+  private Long mTotalMatchedContentIds = null;
+  @SerializedName("unique_matched_content_ids")
+  private Long mUniqueMatchedContentIds = null;
   protected static Gson gson = null;
 
-  public TargetingRelaxation() {
+  public CatalogSegmentAllMatchCountLaser() {
   }
 
   public String getId() {
     return null;
   }
-  public static TargetingRelaxation loadJSON(String json, APIContext context, String header) {
-    TargetingRelaxation targetingRelaxation = getGson().fromJson(json, TargetingRelaxation.class);
+  public static CatalogSegmentAllMatchCountLaser loadJSON(String json, APIContext context, String header) {
+    CatalogSegmentAllMatchCountLaser catalogSegmentAllMatchCountLaser = getGson().fromJson(json, CatalogSegmentAllMatchCountLaser.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(targetingRelaxation.toString());
+      JsonElement o2 = parser.parse(catalogSegmentAllMatchCountLaser.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -82,14 +90,14 @@ public class TargetingRelaxation extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    targetingRelaxation.context = context;
-    targetingRelaxation.rawValue = json;
-    targetingRelaxation.header = header;
-    return targetingRelaxation;
+    catalogSegmentAllMatchCountLaser.context = context;
+    catalogSegmentAllMatchCountLaser.rawValue = json;
+    catalogSegmentAllMatchCountLaser.header = header;
+    return catalogSegmentAllMatchCountLaser;
   }
 
-  public static APINodeList<TargetingRelaxation> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<TargetingRelaxation> targetingRelaxations = new APINodeList<TargetingRelaxation>(request, json, header);
+  public static APINodeList<CatalogSegmentAllMatchCountLaser> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CatalogSegmentAllMatchCountLaser> catalogSegmentAllMatchCountLasers = new APINodeList<CatalogSegmentAllMatchCountLaser>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -100,9 +108,9 @@ public class TargetingRelaxation extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          targetingRelaxations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          catalogSegmentAllMatchCountLasers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return targetingRelaxations;
+        return catalogSegmentAllMatchCountLasers;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -112,20 +120,20 @@ public class TargetingRelaxation extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                targetingRelaxations.setCursors(before, after);
+                catalogSegmentAllMatchCountLasers.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            targetingRelaxations.setPaging(previous, next);
+            catalogSegmentAllMatchCountLasers.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              targetingRelaxations.setAppSecret(context.getAppSecretProof());
+              catalogSegmentAllMatchCountLasers.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              targetingRelaxations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              catalogSegmentAllMatchCountLasers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -136,23 +144,23 @@ public class TargetingRelaxation extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  targetingRelaxations.add(loadJSON(entry.getValue().toString(), context, header));
+                  catalogSegmentAllMatchCountLasers.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              targetingRelaxations.add(loadJSON(obj.toString(), context, header));
+              catalogSegmentAllMatchCountLasers.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return targetingRelaxations;
+          return catalogSegmentAllMatchCountLasers;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              targetingRelaxations.add(loadJSON(entry.getValue().toString(), context, header));
+              catalogSegmentAllMatchCountLasers.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return targetingRelaxations;
+          return catalogSegmentAllMatchCountLasers;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -169,20 +177,20 @@ public class TargetingRelaxation extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              targetingRelaxations.add(loadJSON(value.toString(), context, header));
+              catalogSegmentAllMatchCountLasers.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return targetingRelaxations;
+            return catalogSegmentAllMatchCountLasers;
           }
 
           // Sixth, check if it's pure JsonObject
-          targetingRelaxations.clear();
-          targetingRelaxations.add(loadJSON(json, context, header));
-          return targetingRelaxations;
+          catalogSegmentAllMatchCountLasers.clear();
+          catalogSegmentAllMatchCountLasers.add(loadJSON(json, context, header));
+          return catalogSegmentAllMatchCountLasers;
         }
       }
     } catch (Exception e) {
@@ -210,21 +218,62 @@ public class TargetingRelaxation extends APINode {
   }
 
 
-  public Long getFieldCustomAudience() {
-    return mCustomAudience;
+  public String getFieldDateStart() {
+    return mDateStart;
   }
 
-  public TargetingRelaxation setFieldCustomAudience(Long value) {
-    this.mCustomAudience = value;
+  public CatalogSegmentAllMatchCountLaser setFieldDateStart(String value) {
+    this.mDateStart = value;
     return this;
   }
 
-  public Long getFieldLookalike() {
-    return mLookalike;
+  public String getFieldDateStop() {
+    return mDateStop;
   }
 
-  public TargetingRelaxation setFieldLookalike(Long value) {
-    this.mLookalike = value;
+  public CatalogSegmentAllMatchCountLaser setFieldDateStop(String value) {
+    this.mDateStop = value;
+    return this;
+  }
+
+  public String getFieldEvent() {
+    return mEvent;
+  }
+
+  public CatalogSegmentAllMatchCountLaser setFieldEvent(String value) {
+    this.mEvent = value;
+    return this;
+  }
+
+  public ExternalEventSource getFieldSource() {
+    return mSource;
+  }
+
+  public CatalogSegmentAllMatchCountLaser setFieldSource(ExternalEventSource value) {
+    this.mSource = value;
+    return this;
+  }
+
+  public CatalogSegmentAllMatchCountLaser setFieldSource(String value) {
+    Type type = new TypeToken<ExternalEventSource>(){}.getType();
+    this.mSource = ExternalEventSource.getGson().fromJson(value, type);
+    return this;
+  }
+  public Long getFieldTotalMatchedContentIds() {
+    return mTotalMatchedContentIds;
+  }
+
+  public CatalogSegmentAllMatchCountLaser setFieldTotalMatchedContentIds(Long value) {
+    this.mTotalMatchedContentIds = value;
+    return this;
+  }
+
+  public Long getFieldUniqueMatchedContentIds() {
+    return mUniqueMatchedContentIds;
+  }
+
+  public CatalogSegmentAllMatchCountLaser setFieldUniqueMatchedContentIds(Long value) {
+    this.mUniqueMatchedContentIds = value;
     return this;
   }
 
@@ -244,18 +293,22 @@ public class TargetingRelaxation extends APINode {
     return gson;
   }
 
-  public TargetingRelaxation copyFrom(TargetingRelaxation instance) {
-    this.mCustomAudience = instance.mCustomAudience;
-    this.mLookalike = instance.mLookalike;
+  public CatalogSegmentAllMatchCountLaser copyFrom(CatalogSegmentAllMatchCountLaser instance) {
+    this.mDateStart = instance.mDateStart;
+    this.mDateStop = instance.mDateStop;
+    this.mEvent = instance.mEvent;
+    this.mSource = instance.mSource;
+    this.mTotalMatchedContentIds = instance.mTotalMatchedContentIds;
+    this.mUniqueMatchedContentIds = instance.mUniqueMatchedContentIds;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<TargetingRelaxation> getParser() {
-    return new APIRequest.ResponseParser<TargetingRelaxation>() {
-      public APINodeList<TargetingRelaxation> parseResponse(String response, APIContext context, APIRequest<TargetingRelaxation> request, String header) throws MalformedResponseException {
-        return TargetingRelaxation.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<CatalogSegmentAllMatchCountLaser> getParser() {
+    return new APIRequest.ResponseParser<CatalogSegmentAllMatchCountLaser>() {
+      public APINodeList<CatalogSegmentAllMatchCountLaser> parseResponse(String response, APIContext context, APIRequest<CatalogSegmentAllMatchCountLaser> request, String header) throws MalformedResponseException {
+        return CatalogSegmentAllMatchCountLaser.parseResponse(response, context, request, header);
       }
     };
   }

@@ -1,5 +1,6 @@
 /**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
  * You are hereby granted a non-exclusive, worldwide, royalty-free license to
  * use, copy, modify, and distribute this software in source code or binary
@@ -37,8 +38,8 @@ public class AdAccountAdSetsPostDailyBudget20 {
     new AdAccount(id, context).createAdSet()
       .setName("My First Adset")
       .setDailyBudget(2000L)
-      .setStartTime("2022-09-19T21:38:59-0700")
-      .setEndTime("2022-09-26T21:38:59-0700")
+      .setStartTime("2023-01-09T15:02:03-0800")
+      .setEndTime("2023-01-16T15:02:03-0800")
       .setCampaignId("<adCampaignLinkClicksID>")
       .setBidAmount(100L)
       .setBillingEvent(AdSet.EnumBillingEvent.VALUE_LINK_CLICKS)

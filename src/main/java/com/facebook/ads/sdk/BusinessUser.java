@@ -1159,6 +1159,7 @@ public class BusinessUser extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "pages",
     };
 
     public static final String[] FIELDS = {
@@ -1363,6 +1364,15 @@ public class BusinessUser extends APINode {
       return this;
     }
 
+
+    public APIRequestGetAssignedPages setPages (List<Long> pages) {
+      this.setParam("pages", pages);
+      return this;
+    }
+    public APIRequestGetAssignedPages setPages (String pages) {
+      this.setParam("pages", pages);
+      return this;
+    }
 
     public APIRequestGetAssignedPages requestAllFields () {
       return this.requestAllFields(true);
@@ -2442,6 +2452,8 @@ public class BusinessUser extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "ad_account_to_collaborative_ads_share_settings",
+      "agency_collaborative_ads_share_settings",
       "business",
       "catalog_store",
       "commerce_merchant_settings",
@@ -2548,6 +2560,20 @@ public class BusinessUser extends APINode {
       return this;
     }
 
+    public APIRequestGetAssignedProductCatalogs requestAdAccountToCollaborativeAdsShareSettingsField () {
+      return this.requestAdAccountToCollaborativeAdsShareSettingsField(true);
+    }
+    public APIRequestGetAssignedProductCatalogs requestAdAccountToCollaborativeAdsShareSettingsField (boolean value) {
+      this.requestField("ad_account_to_collaborative_ads_share_settings", value);
+      return this;
+    }
+    public APIRequestGetAssignedProductCatalogs requestAgencyCollaborativeAdsShareSettingsField () {
+      return this.requestAgencyCollaborativeAdsShareSettingsField(true);
+    }
+    public APIRequestGetAssignedProductCatalogs requestAgencyCollaborativeAdsShareSettingsField (boolean value) {
+      this.requestField("agency_collaborative_ads_share_settings", value);
+      return this;
+    }
     public APIRequestGetAssignedProductCatalogs requestBusinessField () {
       return this.requestBusinessField(true);
     }

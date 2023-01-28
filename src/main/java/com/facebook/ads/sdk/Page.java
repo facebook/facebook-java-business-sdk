@@ -674,10 +674,6 @@ public class Page extends APINode {
     return new APIRequestCreateCopyrightManualClaim(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetCopyrightWhitelistedPartners getCopyrightWhitelistedPartners() {
-    return new APIRequestGetCopyrightWhitelistedPartners(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetCrosspostWhitelistedPages getCrosspostWhitelistedPages() {
     return new APIRequestGetCrosspostWhitelistedPages(this.getPrefixedId().toString(), context);
   }
@@ -772,10 +768,6 @@ public class Page extends APINode {
 
   public APIRequestGetInvoiceAccessBankAccount getInvoiceAccessBankAccount() {
     return new APIRequestGetInvoiceAccessBankAccount(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateInvoiceAccessInvoiceEdit createInvoiceAccessInvoiceEdit() {
-    return new APIRequestCreateInvoiceAccessInvoiceEdit(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetLeadGenForms getLeadGenForms() {
@@ -6936,6 +6928,7 @@ public class Page extends APINode {
 
     public static final String[] FIELDS = {
       "can_reply",
+      "folder",
       "former_participants",
       "id",
       "is_subscribed",
@@ -7074,6 +7067,13 @@ public class Page extends APINode {
     }
     public APIRequestGetConversations requestCanReplyField (boolean value) {
       this.requestField("can_reply", value);
+      return this;
+    }
+    public APIRequestGetConversations requestFolderField () {
+      return this.requestFolderField(true);
+    }
+    public APIRequestGetConversations requestFolderField (boolean value) {
+      this.requestField("folder", value);
       return this;
     }
     public APIRequestGetConversations requestFormerParticipantsField () {
@@ -7330,198 +7330,6 @@ public class Page extends APINode {
       return this;
     }
 
-  }
-
-  public static class APIRequestGetCopyrightWhitelistedPartners extends APIRequest<Profile> {
-
-    APINodeList<Profile> lastResponse = null;
-    @Override
-    public APINodeList<Profile> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "can_post",
-      "id",
-      "link",
-      "name",
-      "pic",
-      "pic_crop",
-      "pic_large",
-      "pic_small",
-      "pic_square",
-      "profile_type",
-      "username",
-    };
-
-    @Override
-    public APINodeList<Profile> parseResponse(String response, String header) throws APIException {
-      return Profile.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<Profile> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<Profile> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<Profile>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<Profile>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<Profile>>() {
-           public APINodeList<Profile> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetCopyrightWhitelistedPartners.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetCopyrightWhitelistedPartners(String nodeId, APIContext context) {
-      super(context, nodeId, "/copyright_whitelisted_partners", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetCopyrightWhitelistedPartners setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetCopyrightWhitelistedPartners setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetCopyrightWhitelistedPartners requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetCopyrightWhitelistedPartners requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetCopyrightWhitelistedPartners requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetCopyrightWhitelistedPartners requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetCopyrightWhitelistedPartners requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetCopyrightWhitelistedPartners requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetCopyrightWhitelistedPartners requestCanPostField () {
-      return this.requestCanPostField(true);
-    }
-    public APIRequestGetCopyrightWhitelistedPartners requestCanPostField (boolean value) {
-      this.requestField("can_post", value);
-      return this;
-    }
-    public APIRequestGetCopyrightWhitelistedPartners requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetCopyrightWhitelistedPartners requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetCopyrightWhitelistedPartners requestLinkField () {
-      return this.requestLinkField(true);
-    }
-    public APIRequestGetCopyrightWhitelistedPartners requestLinkField (boolean value) {
-      this.requestField("link", value);
-      return this;
-    }
-    public APIRequestGetCopyrightWhitelistedPartners requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetCopyrightWhitelistedPartners requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetCopyrightWhitelistedPartners requestPicField () {
-      return this.requestPicField(true);
-    }
-    public APIRequestGetCopyrightWhitelistedPartners requestPicField (boolean value) {
-      this.requestField("pic", value);
-      return this;
-    }
-    public APIRequestGetCopyrightWhitelistedPartners requestPicCropField () {
-      return this.requestPicCropField(true);
-    }
-    public APIRequestGetCopyrightWhitelistedPartners requestPicCropField (boolean value) {
-      this.requestField("pic_crop", value);
-      return this;
-    }
-    public APIRequestGetCopyrightWhitelistedPartners requestPicLargeField () {
-      return this.requestPicLargeField(true);
-    }
-    public APIRequestGetCopyrightWhitelistedPartners requestPicLargeField (boolean value) {
-      this.requestField("pic_large", value);
-      return this;
-    }
-    public APIRequestGetCopyrightWhitelistedPartners requestPicSmallField () {
-      return this.requestPicSmallField(true);
-    }
-    public APIRequestGetCopyrightWhitelistedPartners requestPicSmallField (boolean value) {
-      this.requestField("pic_small", value);
-      return this;
-    }
-    public APIRequestGetCopyrightWhitelistedPartners requestPicSquareField () {
-      return this.requestPicSquareField(true);
-    }
-    public APIRequestGetCopyrightWhitelistedPartners requestPicSquareField (boolean value) {
-      this.requestField("pic_square", value);
-      return this;
-    }
-    public APIRequestGetCopyrightWhitelistedPartners requestProfileTypeField () {
-      return this.requestProfileTypeField(true);
-    }
-    public APIRequestGetCopyrightWhitelistedPartners requestProfileTypeField (boolean value) {
-      this.requestField("profile_type", value);
-      return this;
-    }
-    public APIRequestGetCopyrightWhitelistedPartners requestUsernameField () {
-      return this.requestUsernameField(true);
-    }
-    public APIRequestGetCopyrightWhitelistedPartners requestUsernameField (boolean value) {
-      this.requestField("username", value);
-      return this;
-    }
   }
 
   public static class APIRequestGetCrosspostWhitelistedPages extends APIRequest<Page> {
@@ -14064,6 +13872,7 @@ public class Page extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "breakdown",
       "date_preset",
       "metric",
       "period",
@@ -14134,6 +13943,15 @@ public class Page extends APINode {
       return this;
     }
 
+
+    public APIRequestGetInsights setBreakdown (List<Object> breakdown) {
+      this.setParam("breakdown", breakdown);
+      return this;
+    }
+    public APIRequestGetInsights setBreakdown (String breakdown) {
+      this.setParam("breakdown", breakdown);
+      return this;
+    }
 
     public APIRequestGetInsights setDatePreset (InsightsResult.EnumDatePreset datePreset) {
       this.setParam("date_preset", datePreset);
@@ -15358,162 +15176,6 @@ public class Page extends APINode {
 
     @Override
     public APIRequestGetInvoiceAccessBankAccount requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateInvoiceAccessInvoiceEdit extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "additional_amounts",
-      "invoice_id",
-      "notes",
-      "paid_amount",
-      "product_items",
-      "shipping_address",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateInvoiceAccessInvoiceEdit.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateInvoiceAccessInvoiceEdit(String nodeId, APIContext context) {
-      super(context, nodeId, "/invoice_access_invoice_edit", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateInvoiceAccessInvoiceEdit setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateInvoiceAccessInvoiceEdit setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateInvoiceAccessInvoiceEdit setAdditionalAmounts (List<Map<String, String>> additionalAmounts) {
-      this.setParam("additional_amounts", additionalAmounts);
-      return this;
-    }
-    public APIRequestCreateInvoiceAccessInvoiceEdit setAdditionalAmounts (String additionalAmounts) {
-      this.setParam("additional_amounts", additionalAmounts);
-      return this;
-    }
-
-    public APIRequestCreateInvoiceAccessInvoiceEdit setInvoiceId (String invoiceId) {
-      this.setParam("invoice_id", invoiceId);
-      return this;
-    }
-
-    public APIRequestCreateInvoiceAccessInvoiceEdit setNotes (String notes) {
-      this.setParam("notes", notes);
-      return this;
-    }
-
-    public APIRequestCreateInvoiceAccessInvoiceEdit setPaidAmount (Map<String, String> paidAmount) {
-      this.setParam("paid_amount", paidAmount);
-      return this;
-    }
-    public APIRequestCreateInvoiceAccessInvoiceEdit setPaidAmount (String paidAmount) {
-      this.setParam("paid_amount", paidAmount);
-      return this;
-    }
-
-    public APIRequestCreateInvoiceAccessInvoiceEdit setProductItems (List<Map<String, String>> productItems) {
-      this.setParam("product_items", productItems);
-      return this;
-    }
-    public APIRequestCreateInvoiceAccessInvoiceEdit setProductItems (String productItems) {
-      this.setParam("product_items", productItems);
-      return this;
-    }
-
-    public APIRequestCreateInvoiceAccessInvoiceEdit setShippingAddress (Map<String, String> shippingAddress) {
-      this.setParam("shipping_address", shippingAddress);
-      return this;
-    }
-    public APIRequestCreateInvoiceAccessInvoiceEdit setShippingAddress (String shippingAddress) {
-      this.setParam("shipping_address", shippingAddress);
-      return this;
-    }
-
-    public APIRequestCreateInvoiceAccessInvoiceEdit requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateInvoiceAccessInvoiceEdit requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateInvoiceAccessInvoiceEdit requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateInvoiceAccessInvoiceEdit requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateInvoiceAccessInvoiceEdit requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateInvoiceAccessInvoiceEdit requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -19993,6 +19655,7 @@ public class Page extends APINode {
     }
     public static final String[] PARAMS = {
       "message",
+      "platform",
     };
 
     public static final String[] FIELDS = {
@@ -20057,6 +19720,15 @@ public class Page extends APINode {
     }
     public APIRequestCreateMessageAttachment setMessage (String message) {
       this.setParam("message", message);
+      return this;
+    }
+
+    public APIRequestCreateMessageAttachment setPlatform (EnumPlatform platform) {
+      this.setParam("platform", platform);
+      return this;
+    }
+    public APIRequestCreateMessageAttachment setPlatform (String platform) {
+      this.setParam("platform", platform);
       return this;
     }
 
@@ -24349,6 +24021,8 @@ public class Page extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "ad_account_to_collaborative_ads_share_settings",
+      "agency_collaborative_ads_share_settings",
       "business",
       "catalog_store",
       "commerce_merchant_settings",
@@ -24455,6 +24129,20 @@ public class Page extends APINode {
       return this;
     }
 
+    public APIRequestGetProductCatalogs requestAdAccountToCollaborativeAdsShareSettingsField () {
+      return this.requestAdAccountToCollaborativeAdsShareSettingsField(true);
+    }
+    public APIRequestGetProductCatalogs requestAdAccountToCollaborativeAdsShareSettingsField (boolean value) {
+      this.requestField("ad_account_to_collaborative_ads_share_settings", value);
+      return this;
+    }
+    public APIRequestGetProductCatalogs requestAgencyCollaborativeAdsShareSettingsField () {
+      return this.requestAgencyCollaborativeAdsShareSettingsField(true);
+    }
+    public APIRequestGetProductCatalogs requestAgencyCollaborativeAdsShareSettingsField (boolean value) {
+      this.requestField("agency_collaborative_ads_share_settings", value);
+      return this;
+    }
     public APIRequestGetProductCatalogs requestBusinessField () {
       return this.requestBusinessField(true);
     }
@@ -25574,6 +25262,7 @@ public class Page extends APINode {
       "gender",
       "hometown",
       "id",
+      "id_for_avatars",
       "inspirational_people",
       "install_type",
       "installed",
@@ -25804,6 +25493,13 @@ public class Page extends APINode {
     }
     public APIRequestGetRoles requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetRoles requestIdForAvatarsField () {
+      return this.requestIdForAvatarsField(true);
+    }
+    public APIRequestGetRoles requestIdForAvatarsField (boolean value) {
+      this.requestField("id_for_avatars", value);
       return this;
     }
     public APIRequestGetRoles requestInspirationalPeopleField () {
@@ -26841,7 +26537,6 @@ public class Page extends APINode {
       "latest_sdk_version",
       "link",
       "logging_token",
-      "login_secret",
       "logo_url",
       "migrations",
       "mobile_profile_section_url",
@@ -27408,13 +27103,6 @@ public class Page extends APINode {
     }
     public APIRequestGetSecondaryReceivers requestLoggingTokenField (boolean value) {
       this.requestField("logging_token", value);
-      return this;
-    }
-    public APIRequestGetSecondaryReceivers requestLoginSecretField () {
-      return this.requestLoginSecretField(true);
-    }
-    public APIRequestGetSecondaryReceivers requestLoginSecretField (boolean value) {
-      this.requestField("login_secret", value);
       return this;
     }
     public APIRequestGetSecondaryReceivers requestLogoUrlField () {
@@ -28268,7 +27956,6 @@ public class Page extends APINode {
       "latest_sdk_version",
       "link",
       "logging_token",
-      "login_secret",
       "logo_url",
       "migrations",
       "mobile_profile_section_url",
@@ -28826,13 +28513,6 @@ public class Page extends APINode {
     }
     public APIRequestGetSubscribedApps requestLoggingTokenField (boolean value) {
       this.requestField("logging_token", value);
-      return this;
-    }
-    public APIRequestGetSubscribedApps requestLoginSecretField () {
-      return this.requestLoginSecretField(true);
-    }
-    public APIRequestGetSubscribedApps requestLoginSecretField (boolean value) {
-      this.requestField("login_secret", value);
       return this;
     }
     public APIRequestGetSubscribedApps requestLogoUrlField () {
@@ -30229,6 +29909,7 @@ public class Page extends APINode {
 
     public static final String[] FIELDS = {
       "can_reply",
+      "folder",
       "former_participants",
       "id",
       "is_subscribed",
@@ -30358,6 +30039,13 @@ public class Page extends APINode {
     }
     public APIRequestGetThreads requestCanReplyField (boolean value) {
       this.requestField("can_reply", value);
+      return this;
+    }
+    public APIRequestGetThreads requestFolderField () {
+      return this.requestFolderField(true);
+    }
+    public APIRequestGetThreads requestFolderField (boolean value) {
+      this.requestField("folder", value);
       return this;
     }
     public APIRequestGetThreads requestFormerParticipantsField () {
@@ -35923,6 +35611,8 @@ public class Page extends APINode {
       VALUE_PROFILE_PLUS_FULL_CONTROL("PROFILE_PLUS_FULL_CONTROL"),
       @SerializedName("PROFILE_PLUS_MANAGE")
       VALUE_PROFILE_PLUS_MANAGE("PROFILE_PLUS_MANAGE"),
+      @SerializedName("PROFILE_PLUS_MANAGE_LEADS")
+      VALUE_PROFILE_PLUS_MANAGE_LEADS("PROFILE_PLUS_MANAGE_LEADS"),
       @SerializedName("PROFILE_PLUS_MESSAGING")
       VALUE_PROFILE_PLUS_MESSAGING("PROFILE_PLUS_MESSAGING"),
       @SerializedName("PROFILE_PLUS_MODERATE")
@@ -35986,6 +35676,8 @@ public class Page extends APINode {
       VALUE_PROFILE_PLUS_FULL_CONTROL("PROFILE_PLUS_FULL_CONTROL"),
       @SerializedName("PROFILE_PLUS_MANAGE")
       VALUE_PROFILE_PLUS_MANAGE("PROFILE_PLUS_MANAGE"),
+      @SerializedName("PROFILE_PLUS_MANAGE_LEADS")
+      VALUE_PROFILE_PLUS_MANAGE_LEADS("PROFILE_PLUS_MANAGE_LEADS"),
       @SerializedName("PROFILE_PLUS_MESSAGING")
       VALUE_PROFILE_PLUS_MESSAGING("PROFILE_PLUS_MESSAGING"),
       @SerializedName("PROFILE_PLUS_MODERATE")
@@ -36407,8 +36099,6 @@ public class Page extends APINode {
       VALUE_INSTAGRAM("INSTAGRAM"),
       @SerializedName("MESSENGER")
       VALUE_MESSENGER("MESSENGER"),
-      @SerializedName("WHATSAPP")
-      VALUE_WHATSAPP("WHATSAPP"),
       ;
 
       private String value;
@@ -36548,6 +36238,8 @@ public class Page extends APINode {
       VALUE_INBOX_LABELS("inbox_labels"),
       @SerializedName("invoice_access_invoice_change")
       VALUE_INVOICE_ACCESS_INVOICE_CHANGE("invoice_access_invoice_change"),
+      @SerializedName("invoice_access_invoice_draft_change")
+      VALUE_INVOICE_ACCESS_INVOICE_DRAFT_CHANGE("invoice_access_invoice_draft_change"),
       @SerializedName("invoice_access_onboarding_status_active")
       VALUE_INVOICE_ACCESS_ONBOARDING_STATUS_ACTIVE("invoice_access_onboarding_status_active"),
       @SerializedName("leadgen")

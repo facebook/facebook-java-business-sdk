@@ -419,6 +419,7 @@ public class ProductSet extends APINode {
       "trim",
       "unit_price",
       "url",
+      "visibility",
       "year",
     };
 
@@ -725,6 +726,13 @@ public class ProductSet extends APINode {
       this.requestField("url", value);
       return this;
     }
+    public APIRequestGetAutomotiveModels requestVisibilityField () {
+      return this.requestVisibilityField(true);
+    }
+    public APIRequestGetAutomotiveModels requestVisibilityField (boolean value) {
+      this.requestField("visibility", value);
+      return this;
+    }
     public APIRequestGetAutomotiveModels requestYearField () {
       return this.requestYearField(true);
     }
@@ -763,6 +771,7 @@ public class ProductSet extends APINode {
       "types",
       "unit_price",
       "url",
+      "visibility",
     };
 
     @Override
@@ -984,6 +993,13 @@ public class ProductSet extends APINode {
       this.requestField("url", value);
       return this;
     }
+    public APIRequestGetDestinations requestVisibilityField () {
+      return this.requestVisibilityField(true);
+    }
+    public APIRequestGetDestinations requestVisibilityField (boolean value) {
+      this.requestField("visibility", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetFlights extends APIRequest<Flight> {
@@ -1017,6 +1033,7 @@ public class ProductSet extends APINode {
       "sanitized_images",
       "unit_price",
       "url",
+      "visibility",
     };
 
     @Override
@@ -1252,6 +1269,13 @@ public class ProductSet extends APINode {
       this.requestField("url", value);
       return this;
     }
+    public APIRequestGetFlights requestVisibilityField () {
+      return this.requestVisibilityField(true);
+    }
+    public APIRequestGetFlights requestVisibilityField (boolean value) {
+      this.requestField("visibility", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetHomeListings extends APIRequest<HomeListing> {
@@ -1311,6 +1335,7 @@ public class ProductSet extends APINode {
       "sanitized_images",
       "unit_price",
       "url",
+      "visibility",
       "year_built",
     };
 
@@ -1729,6 +1754,13 @@ public class ProductSet extends APINode {
       this.requestField("url", value);
       return this;
     }
+    public APIRequestGetHomeListings requestVisibilityField () {
+      return this.requestVisibilityField(true);
+    }
+    public APIRequestGetHomeListings requestVisibilityField (boolean value) {
+      this.requestField("visibility", value);
+      return this;
+    }
     public APIRequestGetHomeListings requestYearBuiltField () {
       return this.requestYearBuiltField(true);
     }
@@ -1773,6 +1805,7 @@ public class ProductSet extends APINode {
       "star_rating",
       "unit_price",
       "url",
+      "visibility",
     };
 
     @Override
@@ -2036,6 +2069,13 @@ public class ProductSet extends APINode {
       this.requestField("url", value);
       return this;
     }
+    public APIRequestGetHotels requestVisibilityField () {
+      return this.requestVisibilityField(true);
+    }
+    public APIRequestGetHotels requestVisibilityField (boolean value) {
+      this.requestField("visibility", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetMediaTitles extends APIRequest<MediaTitle> {
@@ -2070,6 +2110,7 @@ public class ProductSet extends APINode {
       "title_display_name",
       "unit_price",
       "url",
+      "visibility",
       "wiki_data_item",
     };
 
@@ -2311,6 +2352,13 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetMediaTitles requestUrlField (boolean value) {
       this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGetMediaTitles requestVisibilityField () {
+      return this.requestVisibilityField(true);
+    }
+    public APIRequestGetMediaTitles requestVisibilityField (boolean value) {
+      this.requestField("visibility", value);
       return this;
     }
     public APIRequestGetMediaTitles requestWikiDataItemField () {
@@ -3098,6 +3146,7 @@ public class ProductSet extends APINode {
       "unit_price",
       "url",
       "vehicle_offer_id",
+      "visibility",
       "year",
     };
 
@@ -3453,6 +3502,13 @@ public class ProductSet extends APINode {
       this.requestField("vehicle_offer_id", value);
       return this;
     }
+    public APIRequestGetVehicleOffers requestVisibilityField () {
+      return this.requestVisibilityField(true);
+    }
+    public APIRequestGetVehicleOffers requestVisibilityField (boolean value) {
+      this.requestField("visibility", value);
+      return this;
+    }
     public APIRequestGetVehicleOffers requestYearField () {
       return this.requestYearField(true);
     }
@@ -3522,6 +3578,7 @@ public class ProductSet extends APINode {
       "vehicle_specifications",
       "vehicle_type",
       "vin",
+      "visibility",
       "year",
     };
 
@@ -3959,6 +4016,13 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetVehicles requestVinField (boolean value) {
       this.requestField("vin", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestVisibilityField () {
+      return this.requestVisibilityField(true);
+    }
+    public APIRequestGetVehicles requestVisibilityField (boolean value) {
+      this.requestField("visibility", value);
       return this;
     }
     public APIRequestGetVehicles requestYearField () {

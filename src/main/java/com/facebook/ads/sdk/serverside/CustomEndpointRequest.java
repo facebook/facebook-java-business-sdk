@@ -14,9 +14,9 @@ public interface CustomEndpointRequest {
 
     public void setFilter(Filter filter);
 
-    public void setSendToDestinationOnly(boolean sendToDestinationOnly);
+    public void setSendToEndpointOnly(boolean sendToEndpointOnly);
 
-    public boolean isSendToDestinationOnly();
+    public boolean isSendToEndpointOnly();
 
     public String getEndpoint();
 

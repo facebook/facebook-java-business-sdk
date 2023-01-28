@@ -936,6 +936,7 @@ public class IGMedia extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "breakdown",
       "metric",
       "period",
     };
@@ -946,6 +947,7 @@ public class IGMedia extends APINode {
       "name",
       "period",
       "title",
+      "total_value",
       "values",
     };
 
@@ -1001,6 +1003,15 @@ public class IGMedia extends APINode {
       return this;
     }
 
+
+    public APIRequestGetInsights setBreakdown (List<InstagramInsightsResult.EnumBreakdown> breakdown) {
+      this.setParam("breakdown", breakdown);
+      return this;
+    }
+    public APIRequestGetInsights setBreakdown (String breakdown) {
+      this.setParam("breakdown", breakdown);
+      return this;
+    }
 
     public APIRequestGetInsights setMetric (List<InstagramInsightsResult.EnumMetric> metric) {
       this.setParam("metric", metric);
@@ -1089,6 +1100,13 @@ public class IGMedia extends APINode {
     }
     public APIRequestGetInsights requestTitleField (boolean value) {
       this.requestField("title", value);
+      return this;
+    }
+    public APIRequestGetInsights requestTotalValueField () {
+      return this.requestTotalValueField(true);
+    }
+    public APIRequestGetInsights requestTotalValueField (boolean value) {
+      this.requestField("total_value", value);
       return this;
     }
     public APIRequestGetInsights requestValuesField () {

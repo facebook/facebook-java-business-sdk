@@ -127,6 +127,8 @@ public class LocalServiceBusiness extends APINode {
   private String mUrl = null;
   @SerializedName("vendor_id")
   private String mVendorId = null;
+  @SerializedName("visibility")
+  private EnumVisibility mVisibility = null;
   protected static Gson gson = null;
 
   LocalServiceBusiness() {
@@ -489,6 +491,10 @@ public class LocalServiceBusiness extends APINode {
     return mVendorId;
   }
 
+  public EnumVisibility getFieldVisibility() {
+    return mVisibility;
+  }
+
 
 
   public static class APIRequestGetChannelsToIntegrityStatus extends APIRequest<CatalogItemChannelsToIntegrityStatus> {
@@ -658,6 +664,7 @@ public class LocalServiceBusiness extends APINode {
       "unit_price",
       "url",
       "vendor_id",
+      "visibility",
     };
 
     @Override
@@ -1001,6 +1008,13 @@ public class LocalServiceBusiness extends APINode {
       this.requestField("vendor_id", value);
       return this;
     }
+    public APIRequestGet requestVisibilityField () {
+      return this.requestVisibilityField(true);
+    }
+    public APIRequestGet requestVisibilityField (boolean value) {
+      this.requestField("visibility", value);
+      return this;
+    }
   }
 
   public static enum EnumAvailability {
@@ -1088,6 +1102,25 @@ public class LocalServiceBusiness extends APINode {
       }
   }
 
+  public static enum EnumVisibility {
+      @SerializedName("PUBLISHED")
+      VALUE_PUBLISHED("PUBLISHED"),
+      @SerializedName("STAGING")
+      VALUE_STAGING("STAGING"),
+      ;
+
+      private String value;
+
+      private EnumVisibility(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -1139,6 +1172,7 @@ public class LocalServiceBusiness extends APINode {
     this.mUnitPrice = instance.mUnitPrice;
     this.mUrl = instance.mUrl;
     this.mVendorId = instance.mVendorId;
+    this.mVisibility = instance.mVisibility;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

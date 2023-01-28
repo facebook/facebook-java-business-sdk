@@ -63,8 +63,6 @@ public class Campaign extends APINode {
   private String mAdStrategyId = null;
   @SerializedName("adlabels")
   private List<AdLabel> mAdlabels = null;
-  @SerializedName("benchmark_report_count")
-  private Long mBenchmarkReportCount = null;
   @SerializedName("bid_strategy")
   private EnumBidStrategy mBidStrategy = null;
   @SerializedName("boosted_object_id")
@@ -409,10 +407,6 @@ public class Campaign extends APINode {
 
   public List<AdLabel> getFieldAdlabels() {
     return mAdlabels;
-  }
-
-  public Long getFieldBenchmarkReportCount() {
-    return mBenchmarkReportCount;
   }
 
   public EnumBidStrategy getFieldBidStrategy() {
@@ -2149,7 +2143,6 @@ public class Campaign extends APINode {
       "ad_strategy_group_id",
       "ad_strategy_id",
       "adlabels",
-      "benchmark_report_count",
       "bid_strategy",
       "boosted_object_id",
       "brand_lift_studies",
@@ -2339,13 +2332,6 @@ public class Campaign extends APINode {
     }
     public APIRequestGetCopies requestAdlabelsField (boolean value) {
       this.requestField("adlabels", value);
-      return this;
-    }
-    public APIRequestGetCopies requestBenchmarkReportCountField () {
-      return this.requestBenchmarkReportCountField(true);
-    }
-    public APIRequestGetCopies requestBenchmarkReportCountField (boolean value) {
-      this.requestField("benchmark_report_count", value);
       return this;
     }
     public APIRequestGetCopies requestBidStrategyField () {
@@ -3475,7 +3461,6 @@ public class Campaign extends APINode {
       "ad_strategy_group_id",
       "ad_strategy_id",
       "adlabels",
-      "benchmark_report_count",
       "bid_strategy",
       "boosted_object_id",
       "brand_lift_studies",
@@ -3665,13 +3650,6 @@ public class Campaign extends APINode {
     }
     public APIRequestGet requestAdlabelsField (boolean value) {
       this.requestField("adlabels", value);
-      return this;
-    }
-    public APIRequestGet requestBenchmarkReportCountField () {
-      return this.requestBenchmarkReportCountField(true);
-    }
-    public APIRequestGet requestBenchmarkReportCountField (boolean value) {
-      this.requestField("benchmark_report_count", value);
       return this;
     }
     public APIRequestGet requestBidStrategyField () {
@@ -4437,6 +4415,18 @@ public class Campaign extends APINode {
       VALUE_MESSAGES("MESSAGES"),
       @SerializedName("OFFER_CLAIMS")
       VALUE_OFFER_CLAIMS("OFFER_CLAIMS"),
+      @SerializedName("OUTCOME_APP_PROMOTION")
+      VALUE_OUTCOME_APP_PROMOTION("OUTCOME_APP_PROMOTION"),
+      @SerializedName("OUTCOME_AWARENESS")
+      VALUE_OUTCOME_AWARENESS("OUTCOME_AWARENESS"),
+      @SerializedName("OUTCOME_ENGAGEMENT")
+      VALUE_OUTCOME_ENGAGEMENT("OUTCOME_ENGAGEMENT"),
+      @SerializedName("OUTCOME_LEADS")
+      VALUE_OUTCOME_LEADS("OUTCOME_LEADS"),
+      @SerializedName("OUTCOME_SALES")
+      VALUE_OUTCOME_SALES("OUTCOME_SALES"),
+      @SerializedName("OUTCOME_TRAFFIC")
+      VALUE_OUTCOME_TRAFFIC("OUTCOME_TRAFFIC"),
       @SerializedName("PAGE_LIKES")
       VALUE_PAGE_LIKES("PAGE_LIKES"),
       @SerializedName("POST_ENGAGEMENT")
@@ -5112,7 +5102,6 @@ public class Campaign extends APINode {
     this.mAdStrategyGroupId = instance.mAdStrategyGroupId;
     this.mAdStrategyId = instance.mAdStrategyId;
     this.mAdlabels = instance.mAdlabels;
-    this.mBenchmarkReportCount = instance.mBenchmarkReportCount;
     this.mBidStrategy = instance.mBidStrategy;
     this.mBoostedObjectId = instance.mBoostedObjectId;
     this.mBrandLiftStudies = instance.mBrandLiftStudies;

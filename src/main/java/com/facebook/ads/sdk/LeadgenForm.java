@@ -1469,6 +1469,8 @@ public class LeadgenForm extends APINode {
       VALUE_DA_DK("DA_DK"),
       @SerializedName("DE_DE")
       VALUE_DE_DE("DE_DE"),
+      @SerializedName("EL_GR")
+      VALUE_EL_GR("EL_GR"),
       @SerializedName("EN_GB")
       VALUE_EN_GB("EN_GB"),
       @SerializedName("EN_US")

@@ -773,9 +773,12 @@ public class IGUser extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "breakdown",
       "metric",
+      "metric_type",
       "period",
       "since",
+      "timeframe",
       "until",
     };
 
@@ -785,6 +788,7 @@ public class IGUser extends APINode {
       "name",
       "period",
       "title",
+      "total_value",
       "values",
     };
 
@@ -841,12 +845,30 @@ public class IGUser extends APINode {
     }
 
 
+    public APIRequestGetInsights setBreakdown (List<InstagramInsightsResult.EnumBreakdown> breakdown) {
+      this.setParam("breakdown", breakdown);
+      return this;
+    }
+    public APIRequestGetInsights setBreakdown (String breakdown) {
+      this.setParam("breakdown", breakdown);
+      return this;
+    }
+
     public APIRequestGetInsights setMetric (List<InstagramInsightsResult.EnumMetric> metric) {
       this.setParam("metric", metric);
       return this;
     }
     public APIRequestGetInsights setMetric (String metric) {
       this.setParam("metric", metric);
+      return this;
+    }
+
+    public APIRequestGetInsights setMetricType (InstagramInsightsResult.EnumMetricType metricType) {
+      this.setParam("metric_type", metricType);
+      return this;
+    }
+    public APIRequestGetInsights setMetricType (String metricType) {
+      this.setParam("metric_type", metricType);
       return this;
     }
 
@@ -861,6 +883,15 @@ public class IGUser extends APINode {
 
     public APIRequestGetInsights setSince (String since) {
       this.setParam("since", since);
+      return this;
+    }
+
+    public APIRequestGetInsights setTimeframe (InstagramInsightsResult.EnumTimeframe timeframe) {
+      this.setParam("timeframe", timeframe);
+      return this;
+    }
+    public APIRequestGetInsights setTimeframe (String timeframe) {
+      this.setParam("timeframe", timeframe);
       return this;
     }
 
@@ -938,6 +969,13 @@ public class IGUser extends APINode {
     }
     public APIRequestGetInsights requestTitleField (boolean value) {
       this.requestField("title", value);
+      return this;
+    }
+    public APIRequestGetInsights requestTotalValueField () {
+      return this.requestTotalValueField(true);
+    }
+    public APIRequestGetInsights requestTotalValueField (boolean value) {
+      this.requestField("total_value", value);
       return this;
     }
     public APIRequestGetInsights requestValuesField () {
@@ -1447,6 +1485,7 @@ public class IGUser extends APINode {
     public static final String[] PARAMS = {
       "caption",
       "children",
+      "cover_url",
       "image_url",
       "is_carousel_item",
       "location_id",
@@ -1525,6 +1564,11 @@ public class IGUser extends APINode {
     }
     public APIRequestCreateMedia setChildren (String children) {
       this.setParam("children", children);
+      return this;
+    }
+
+    public APIRequestCreateMedia setCoverUrl (String coverUrl) {
+      this.setParam("cover_url", coverUrl);
       return this;
     }
 

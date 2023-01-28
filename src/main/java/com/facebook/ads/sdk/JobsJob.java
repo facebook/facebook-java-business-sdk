@@ -103,6 +103,8 @@ public class JobsJob extends APINode {
   private Object mUnitPrice = null;
   @SerializedName("url")
   private String mUrl = null;
+  @SerializedName("visibility")
+  private EnumVisibility mVisibility = null;
   protected static Gson gson = null;
 
   JobsJob() {
@@ -423,6 +425,10 @@ public class JobsJob extends APINode {
 
   public String getFieldUrl() {
     return mUrl;
+  }
+
+  public EnumVisibility getFieldVisibility() {
+    return mVisibility;
   }
 
 
@@ -790,6 +796,7 @@ public class JobsJob extends APINode {
       "sanitized_images",
       "unit_price",
       "url",
+      "visibility",
     };
 
     @Override
@@ -1049,6 +1056,13 @@ public class JobsJob extends APINode {
       this.requestField("url", value);
       return this;
     }
+    public APIRequestGet requestVisibilityField () {
+      return this.requestVisibilityField(true);
+    }
+    public APIRequestGet requestVisibilityField (boolean value) {
+      this.requestField("visibility", value);
+      return this;
+    }
   }
 
   public static enum EnumImageFetchStatus {
@@ -1069,6 +1083,25 @@ public class JobsJob extends APINode {
       private String value;
 
       private EnumImageFetchStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumVisibility {
+      @SerializedName("PUBLISHED")
+      VALUE_PUBLISHED("PUBLISHED"),
+      @SerializedName("STAGING")
+      VALUE_STAGING("STAGING"),
+      ;
+
+      private String value;
+
+      private EnumVisibility(String value) {
         this.value = value;
       }
 
@@ -1117,6 +1150,7 @@ public class JobsJob extends APINode {
     this.mSanitizedImages = instance.mSanitizedImages;
     this.mUnitPrice = instance.mUnitPrice;
     this.mUrl = instance.mUrl;
+    this.mVisibility = instance.mVisibility;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

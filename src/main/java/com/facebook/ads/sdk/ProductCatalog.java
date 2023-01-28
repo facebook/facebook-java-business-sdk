@@ -55,6 +55,10 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class ProductCatalog extends APINode {
+  @SerializedName("ad_account_to_collaborative_ads_share_settings")
+  private CollaborativeAdsShareSettings mAdAccountToCollaborativeAdsShareSettings = null;
+  @SerializedName("agency_collaborative_ads_share_settings")
+  private CollaborativeAdsShareSettings mAgencyCollaborativeAdsShareSettings = null;
   @SerializedName("business")
   private Business mBusiness = null;
   @SerializedName("catalog_store")
@@ -330,8 +334,8 @@ public class ProductCatalog extends APINode {
     return new APIRequestCreateBatch(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateCatalogWebsiteSetting createCatalogWebsiteSetting() {
-    return new APIRequestCreateCatalogWebsiteSetting(this.getPrefixedId().toString(), context);
+  public APIRequestCreateCatalogStore createCatalogStore() {
+    return new APIRequestCreateCatalogStore(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetCategories getCategories() {
@@ -344,6 +348,10 @@ public class ProductCatalog extends APINode {
 
   public APIRequestGetCheckBatchRequestStatus getCheckBatchRequestStatus() {
     return new APIRequestGetCheckBatchRequestStatus(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetCollaborativeAdsEventStats getCollaborativeAdsEventStats() {
+    return new APIRequestGetCollaborativeAdsEventStats(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetCollaborativeAdsLsbImageBank getCollaborativeAdsLsbImageBank() {
@@ -498,6 +506,20 @@ public class ProductCatalog extends APINode {
     return new APIRequestUpdate(this.getPrefixedId().toString(), context);
   }
 
+
+  public CollaborativeAdsShareSettings getFieldAdAccountToCollaborativeAdsShareSettings() {
+    if (mAdAccountToCollaborativeAdsShareSettings != null) {
+      mAdAccountToCollaborativeAdsShareSettings.context = getContext();
+    }
+    return mAdAccountToCollaborativeAdsShareSettings;
+  }
+
+  public CollaborativeAdsShareSettings getFieldAgencyCollaborativeAdsShareSettings() {
+    if (mAgencyCollaborativeAdsShareSettings != null) {
+      mAgencyCollaborativeAdsShareSettings.context = getContext();
+    }
+    return mAgencyCollaborativeAdsShareSettings;
+  }
 
   public Business getFieldBusiness() {
     if (mBusiness != null) {
@@ -1648,6 +1670,7 @@ public class ProductCatalog extends APINode {
       "trim",
       "unit_price",
       "url",
+      "visibility",
       "year",
     };
 
@@ -1954,6 +1977,13 @@ public class ProductCatalog extends APINode {
       this.requestField("url", value);
       return this;
     }
+    public APIRequestGetAutomotiveModels requestVisibilityField () {
+      return this.requestVisibilityField(true);
+    }
+    public APIRequestGetAutomotiveModels requestVisibilityField (boolean value) {
+      this.requestField("visibility", value);
+      return this;
+    }
     public APIRequestGetAutomotiveModels requestYearField () {
       return this.requestYearField(true);
     }
@@ -2093,48 +2123,48 @@ public class ProductCatalog extends APINode {
 
   }
 
-  public static class APIRequestCreateCatalogWebsiteSetting extends APIRequest<APINode> {
+  public static class APIRequestCreateCatalogStore extends APIRequest<StoreCatalogSettings> {
 
-    APINode lastResponse = null;
+    StoreCatalogSettings lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public StoreCatalogSettings getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "is_allowed_to_crawl",
+      "page",
     };
 
     public static final String[] FIELDS = {
     };
 
     @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
+    public StoreCatalogSettings parseResponse(String response, String header) throws APIException {
+      return StoreCatalogSettings.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public StoreCatalogSettings execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public StoreCatalogSettings execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINode> executeAsync() throws APIException {
+    public ListenableFuture<StoreCatalogSettings> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<StoreCatalogSettings> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, StoreCatalogSettings>() {
+           public StoreCatalogSettings apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateCatalogWebsiteSetting.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestCreateCatalogStore.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2143,37 +2173,37 @@ public class ProductCatalog extends APINode {
       );
     };
 
-    public APIRequestCreateCatalogWebsiteSetting(String nodeId, APIContext context) {
-      super(context, nodeId, "/catalog_website_settings", "POST", Arrays.asList(PARAMS));
+    public APIRequestCreateCatalogStore(String nodeId, APIContext context) {
+      super(context, nodeId, "/catalog_store", "POST", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestCreateCatalogWebsiteSetting setParam(String param, Object value) {
+    public APIRequestCreateCatalogStore setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestCreateCatalogWebsiteSetting setParams(Map<String, Object> params) {
+    public APIRequestCreateCatalogStore setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestCreateCatalogWebsiteSetting setIsAllowedToCrawl (Boolean isAllowedToCrawl) {
-      this.setParam("is_allowed_to_crawl", isAllowedToCrawl);
+    public APIRequestCreateCatalogStore setPage (Long page) {
+      this.setParam("page", page);
       return this;
     }
-    public APIRequestCreateCatalogWebsiteSetting setIsAllowedToCrawl (String isAllowedToCrawl) {
-      this.setParam("is_allowed_to_crawl", isAllowedToCrawl);
+    public APIRequestCreateCatalogStore setPage (String page) {
+      this.setParam("page", page);
       return this;
     }
 
-    public APIRequestCreateCatalogWebsiteSetting requestAllFields () {
+    public APIRequestCreateCatalogStore requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestCreateCatalogWebsiteSetting requestAllFields (boolean value) {
+    public APIRequestCreateCatalogStore requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -2181,12 +2211,12 @@ public class ProductCatalog extends APINode {
     }
 
     @Override
-    public APIRequestCreateCatalogWebsiteSetting requestFields (List<String> fields) {
+    public APIRequestCreateCatalogStore requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestCreateCatalogWebsiteSetting requestFields (List<String> fields, boolean value) {
+    public APIRequestCreateCatalogStore requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -2194,13 +2224,13 @@ public class ProductCatalog extends APINode {
     }
 
     @Override
-    public APIRequestCreateCatalogWebsiteSetting requestField (String field) {
+    public APIRequestCreateCatalogStore requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestCreateCatalogWebsiteSetting requestField (String field, boolean value) {
+    public APIRequestCreateCatalogStore requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -2683,6 +2713,158 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetCheckBatchRequestStatus requestWarningsTotalCountField (boolean value) {
       this.requestField("warnings_total_count", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetCollaborativeAdsEventStats extends APIRequest<CatalogSegmentAllMatchCountLaser> {
+
+    APINodeList<CatalogSegmentAllMatchCountLaser> lastResponse = null;
+    @Override
+    public APINodeList<CatalogSegmentAllMatchCountLaser> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "date_start",
+      "date_stop",
+      "event",
+      "source",
+      "total_matched_content_ids",
+      "unique_matched_content_ids",
+    };
+
+    @Override
+    public APINodeList<CatalogSegmentAllMatchCountLaser> parseResponse(String response, String header) throws APIException {
+      return CatalogSegmentAllMatchCountLaser.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<CatalogSegmentAllMatchCountLaser> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<CatalogSegmentAllMatchCountLaser> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<CatalogSegmentAllMatchCountLaser>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<CatalogSegmentAllMatchCountLaser>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<CatalogSegmentAllMatchCountLaser>>() {
+           public APINodeList<CatalogSegmentAllMatchCountLaser> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetCollaborativeAdsEventStats.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetCollaborativeAdsEventStats(String nodeId, APIContext context) {
+      super(context, nodeId, "/collaborative_ads_event_stats", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCollaborativeAdsEventStats setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCollaborativeAdsEventStats setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCollaborativeAdsEventStats requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCollaborativeAdsEventStats requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCollaborativeAdsEventStats requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCollaborativeAdsEventStats requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCollaborativeAdsEventStats requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCollaborativeAdsEventStats requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetCollaborativeAdsEventStats requestDateStartField () {
+      return this.requestDateStartField(true);
+    }
+    public APIRequestGetCollaborativeAdsEventStats requestDateStartField (boolean value) {
+      this.requestField("date_start", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeAdsEventStats requestDateStopField () {
+      return this.requestDateStopField(true);
+    }
+    public APIRequestGetCollaborativeAdsEventStats requestDateStopField (boolean value) {
+      this.requestField("date_stop", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeAdsEventStats requestEventField () {
+      return this.requestEventField(true);
+    }
+    public APIRequestGetCollaborativeAdsEventStats requestEventField (boolean value) {
+      this.requestField("event", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeAdsEventStats requestSourceField () {
+      return this.requestSourceField(true);
+    }
+    public APIRequestGetCollaborativeAdsEventStats requestSourceField (boolean value) {
+      this.requestField("source", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeAdsEventStats requestTotalMatchedContentIdsField () {
+      return this.requestTotalMatchedContentIdsField(true);
+    }
+    public APIRequestGetCollaborativeAdsEventStats requestTotalMatchedContentIdsField (boolean value) {
+      this.requestField("total_matched_content_ids", value);
+      return this;
+    }
+    public APIRequestGetCollaborativeAdsEventStats requestUniqueMatchedContentIdsField () {
+      return this.requestUniqueMatchedContentIdsField(true);
+    }
+    public APIRequestGetCollaborativeAdsEventStats requestUniqueMatchedContentIdsField (boolean value) {
+      this.requestField("unique_matched_content_ids", value);
       return this;
     }
   }
@@ -3260,6 +3442,7 @@ public class ProductCatalog extends APINode {
       "types",
       "unit_price",
       "url",
+      "visibility",
     };
 
     @Override
@@ -3479,6 +3662,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetDestinations requestUrlField (boolean value) {
       this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGetDestinations requestVisibilityField () {
+      return this.requestVisibilityField(true);
+    }
+    public APIRequestGetDestinations requestVisibilityField (boolean value) {
+      this.requestField("visibility", value);
       return this;
     }
   }
@@ -4314,6 +4504,7 @@ public class ProductCatalog extends APINode {
       "sanitized_images",
       "unit_price",
       "url",
+      "visibility",
     };
 
     @Override
@@ -4549,6 +4740,13 @@ public class ProductCatalog extends APINode {
       this.requestField("url", value);
       return this;
     }
+    public APIRequestGetFlights requestVisibilityField () {
+      return this.requestVisibilityField(true);
+    }
+    public APIRequestGetFlights requestVisibilityField (boolean value) {
+      this.requestField("visibility", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetHomeListings extends APIRequest<HomeListing> {
@@ -4608,6 +4806,7 @@ public class ProductCatalog extends APINode {
       "sanitized_images",
       "unit_price",
       "url",
+      "visibility",
       "year_built",
     };
 
@@ -5024,6 +5223,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetHomeListings requestUrlField (boolean value) {
       this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestVisibilityField () {
+      return this.requestVisibilityField(true);
+    }
+    public APIRequestGetHomeListings requestVisibilityField (boolean value) {
+      this.requestField("visibility", value);
       return this;
     }
     public APIRequestGetHomeListings requestYearBuiltField () {
@@ -5586,6 +5792,7 @@ public class ProductCatalog extends APINode {
       "star_rating",
       "unit_price",
       "url",
+      "visibility",
     };
 
     @Override
@@ -5847,6 +6054,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetHotels requestUrlField (boolean value) {
       this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGetHotels requestVisibilityField () {
+      return this.requestVisibilityField(true);
+    }
+    public APIRequestGetHotels requestVisibilityField (boolean value) {
+      this.requestField("visibility", value);
       return this;
     }
   }
@@ -6359,6 +6573,7 @@ public class ProductCatalog extends APINode {
       "title_display_name",
       "unit_price",
       "url",
+      "visibility",
       "wiki_data_item",
     };
 
@@ -6600,6 +6815,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetMediaTitles requestUrlField (boolean value) {
       this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGetMediaTitles requestVisibilityField () {
+      return this.requestVisibilityField(true);
+    }
+    public APIRequestGetMediaTitles requestVisibilityField (boolean value) {
+      this.requestField("visibility", value);
       return this;
     }
     public APIRequestGetMediaTitles requestWikiDataItemField () {
@@ -9861,6 +10083,7 @@ public class ProductCatalog extends APINode {
       "unit_price",
       "url",
       "vehicle_offer_id",
+      "visibility",
       "year",
     };
 
@@ -10216,6 +10439,13 @@ public class ProductCatalog extends APINode {
       this.requestField("vehicle_offer_id", value);
       return this;
     }
+    public APIRequestGetVehicleOffers requestVisibilityField () {
+      return this.requestVisibilityField(true);
+    }
+    public APIRequestGetVehicleOffers requestVisibilityField (boolean value) {
+      this.requestField("visibility", value);
+      return this;
+    }
     public APIRequestGetVehicleOffers requestYearField () {
       return this.requestYearField(true);
     }
@@ -10285,6 +10515,7 @@ public class ProductCatalog extends APINode {
       "vehicle_specifications",
       "vehicle_type",
       "vin",
+      "visibility",
       "year",
     };
 
@@ -10722,6 +10953,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetVehicles requestVinField (boolean value) {
       this.requestField("vin", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestVisibilityField () {
+      return this.requestVisibilityField(true);
+    }
+    public APIRequestGetVehicles requestVisibilityField (boolean value) {
+      this.requestField("visibility", value);
       return this;
     }
     public APIRequestGetVehicles requestYearField () {
@@ -11199,6 +11437,8 @@ public class ProductCatalog extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "ad_account_to_collaborative_ads_share_settings",
+      "agency_collaborative_ads_share_settings",
       "business",
       "catalog_store",
       "commerce_merchant_settings",
@@ -11314,6 +11554,20 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestGet requestAdAccountToCollaborativeAdsShareSettingsField () {
+      return this.requestAdAccountToCollaborativeAdsShareSettingsField(true);
+    }
+    public APIRequestGet requestAdAccountToCollaborativeAdsShareSettingsField (boolean value) {
+      this.requestField("ad_account_to_collaborative_ads_share_settings", value);
+      return this;
+    }
+    public APIRequestGet requestAgencyCollaborativeAdsShareSettingsField () {
+      return this.requestAgencyCollaborativeAdsShareSettingsField(true);
+    }
+    public APIRequestGet requestAgencyCollaborativeAdsShareSettingsField (boolean value) {
+      this.requestField("agency_collaborative_ads_share_settings", value);
+      return this;
+    }
     public APIRequestGet requestBusinessField () {
       return this.requestBusinessField(true);
     }
@@ -11837,6 +12091,8 @@ public class ProductCatalog extends APINode {
   }
 
   public ProductCatalog copyFrom(ProductCatalog instance) {
+    this.mAdAccountToCollaborativeAdsShareSettings = instance.mAdAccountToCollaborativeAdsShareSettings;
+    this.mAgencyCollaborativeAdsShareSettings = instance.mAgencyCollaborativeAdsShareSettings;
     this.mBusiness = instance.mBusiness;
     this.mCatalogStore = instance.mCatalogStore;
     this.mCommerceMerchantSettings = instance.mCommerceMerchantSettings;
