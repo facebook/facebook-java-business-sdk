@@ -472,7 +472,7 @@ public class EventRequest {
           // now we merge the two responses and send the merged eventResponse
           // the first response is CAPI response
           final EventResponse capiEventResponse =
-                  gson.fromJson(((AdsPixel) responses.get(0)).getRawResponse(), EventResponse.class);
+                  gson.fromJson(((APINode) responses.get(0)).getRawResponse(), EventResponse.class);
           // second response is custom endpoint response
           final CustomEndpointResponse customEndpointResponse= (CustomEndpointResponse) responses.get(1);
           // now we merge the two responses and send the merged eventResponse
