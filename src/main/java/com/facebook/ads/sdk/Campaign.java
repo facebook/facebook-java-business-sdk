@@ -1568,6 +1568,7 @@ public class Campaign extends APINode {
       "billing_event",
       "budget_remaining",
       "campaign",
+      "campaign_attribution",
       "campaign_id",
       "configured_status",
       "created_time",
@@ -1826,6 +1827,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAdSets requestCampaignField (boolean value) {
       this.requestField("campaign", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestCampaignAttributionField () {
+      return this.requestCampaignAttributionField(true);
+    }
+    public APIRequestGetAdSets requestCampaignAttributionField (boolean value) {
+      this.requestField("campaign_attribution", value);
       return this;
     }
     public APIRequestGetAdSets requestCampaignIdField () {

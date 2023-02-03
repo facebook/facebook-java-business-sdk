@@ -390,6 +390,10 @@ public class Business extends APINode {
     return new APIRequestCreateBusinessUser(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetBusinessProjects getBusinessProjects() {
+    return new APIRequestGetBusinessProjects(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateClaimCustomConversion createClaimCustomConversion() {
     return new APIRequestCreateClaimCustomConversion(this.getPrefixedId().toString(), context);
   }
@@ -2571,19 +2575,35 @@ public class Business extends APINode {
       "automatic_matching_fields",
       "can_proxy",
       "code",
+      "config",
       "creation_time",
       "creator",
       "data_use_setting",
+      "description",
+      "duplicate_entries",
+      "enable_auto_assign_to_accounts",
       "enable_automatic_matching",
+      "event_stats",
+      "event_time_max",
+      "event_time_min",
       "first_party_cookie_status",
       "id",
+      "is_consolidated_container",
       "is_created_by_business",
       "is_crm",
+      "is_mta_use",
+      "is_restricted_use",
       "is_unavailable",
       "last_fired_time",
+      "last_upload_app",
+      "last_upload_app_changed_time",
+      "match_rate_approx",
+      "matched_entries",
       "name",
       "owner_ad_account",
       "owner_business",
+      "usage",
+      "valid_entries",
     };
 
     @Override
@@ -2715,6 +2735,13 @@ public class Business extends APINode {
       this.requestField("code", value);
       return this;
     }
+    public APIRequestGetAdsPixels requestConfigField () {
+      return this.requestConfigField(true);
+    }
+    public APIRequestGetAdsPixels requestConfigField (boolean value) {
+      this.requestField("config", value);
+      return this;
+    }
     public APIRequestGetAdsPixels requestCreationTimeField () {
       return this.requestCreationTimeField(true);
     }
@@ -2736,11 +2763,53 @@ public class Business extends APINode {
       this.requestField("data_use_setting", value);
       return this;
     }
+    public APIRequestGetAdsPixels requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetAdsPixels requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetAdsPixels requestDuplicateEntriesField () {
+      return this.requestDuplicateEntriesField(true);
+    }
+    public APIRequestGetAdsPixels requestDuplicateEntriesField (boolean value) {
+      this.requestField("duplicate_entries", value);
+      return this;
+    }
+    public APIRequestGetAdsPixels requestEnableAutoAssignToAccountsField () {
+      return this.requestEnableAutoAssignToAccountsField(true);
+    }
+    public APIRequestGetAdsPixels requestEnableAutoAssignToAccountsField (boolean value) {
+      this.requestField("enable_auto_assign_to_accounts", value);
+      return this;
+    }
     public APIRequestGetAdsPixels requestEnableAutomaticMatchingField () {
       return this.requestEnableAutomaticMatchingField(true);
     }
     public APIRequestGetAdsPixels requestEnableAutomaticMatchingField (boolean value) {
       this.requestField("enable_automatic_matching", value);
+      return this;
+    }
+    public APIRequestGetAdsPixels requestEventStatsField () {
+      return this.requestEventStatsField(true);
+    }
+    public APIRequestGetAdsPixels requestEventStatsField (boolean value) {
+      this.requestField("event_stats", value);
+      return this;
+    }
+    public APIRequestGetAdsPixels requestEventTimeMaxField () {
+      return this.requestEventTimeMaxField(true);
+    }
+    public APIRequestGetAdsPixels requestEventTimeMaxField (boolean value) {
+      this.requestField("event_time_max", value);
+      return this;
+    }
+    public APIRequestGetAdsPixels requestEventTimeMinField () {
+      return this.requestEventTimeMinField(true);
+    }
+    public APIRequestGetAdsPixels requestEventTimeMinField (boolean value) {
+      this.requestField("event_time_min", value);
       return this;
     }
     public APIRequestGetAdsPixels requestFirstPartyCookieStatusField () {
@@ -2757,6 +2826,13 @@ public class Business extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetAdsPixels requestIsConsolidatedContainerField () {
+      return this.requestIsConsolidatedContainerField(true);
+    }
+    public APIRequestGetAdsPixels requestIsConsolidatedContainerField (boolean value) {
+      this.requestField("is_consolidated_container", value);
+      return this;
+    }
     public APIRequestGetAdsPixels requestIsCreatedByBusinessField () {
       return this.requestIsCreatedByBusinessField(true);
     }
@@ -2771,6 +2847,20 @@ public class Business extends APINode {
       this.requestField("is_crm", value);
       return this;
     }
+    public APIRequestGetAdsPixels requestIsMtaUseField () {
+      return this.requestIsMtaUseField(true);
+    }
+    public APIRequestGetAdsPixels requestIsMtaUseField (boolean value) {
+      this.requestField("is_mta_use", value);
+      return this;
+    }
+    public APIRequestGetAdsPixels requestIsRestrictedUseField () {
+      return this.requestIsRestrictedUseField(true);
+    }
+    public APIRequestGetAdsPixels requestIsRestrictedUseField (boolean value) {
+      this.requestField("is_restricted_use", value);
+      return this;
+    }
     public APIRequestGetAdsPixels requestIsUnavailableField () {
       return this.requestIsUnavailableField(true);
     }
@@ -2783,6 +2873,34 @@ public class Business extends APINode {
     }
     public APIRequestGetAdsPixels requestLastFiredTimeField (boolean value) {
       this.requestField("last_fired_time", value);
+      return this;
+    }
+    public APIRequestGetAdsPixels requestLastUploadAppField () {
+      return this.requestLastUploadAppField(true);
+    }
+    public APIRequestGetAdsPixels requestLastUploadAppField (boolean value) {
+      this.requestField("last_upload_app", value);
+      return this;
+    }
+    public APIRequestGetAdsPixels requestLastUploadAppChangedTimeField () {
+      return this.requestLastUploadAppChangedTimeField(true);
+    }
+    public APIRequestGetAdsPixels requestLastUploadAppChangedTimeField (boolean value) {
+      this.requestField("last_upload_app_changed_time", value);
+      return this;
+    }
+    public APIRequestGetAdsPixels requestMatchRateApproxField () {
+      return this.requestMatchRateApproxField(true);
+    }
+    public APIRequestGetAdsPixels requestMatchRateApproxField (boolean value) {
+      this.requestField("match_rate_approx", value);
+      return this;
+    }
+    public APIRequestGetAdsPixels requestMatchedEntriesField () {
+      return this.requestMatchedEntriesField(true);
+    }
+    public APIRequestGetAdsPixels requestMatchedEntriesField (boolean value) {
+      this.requestField("matched_entries", value);
       return this;
     }
     public APIRequestGetAdsPixels requestNameField () {
@@ -2804,6 +2922,20 @@ public class Business extends APINode {
     }
     public APIRequestGetAdsPixels requestOwnerBusinessField (boolean value) {
       this.requestField("owner_business", value);
+      return this;
+    }
+    public APIRequestGetAdsPixels requestUsageField () {
+      return this.requestUsageField(true);
+    }
+    public APIRequestGetAdsPixels requestUsageField (boolean value) {
+      this.requestField("usage", value);
+      return this;
+    }
+    public APIRequestGetAdsPixels requestValidEntriesField () {
+      return this.requestValidEntriesField(true);
+    }
+    public APIRequestGetAdsPixels requestValidEntriesField (boolean value) {
+      this.requestField("valid_entries", value);
       return this;
     }
   }
@@ -4356,6 +4488,110 @@ public class Business extends APINode {
 
     @Override
     public APIRequestCreateBusinessUser requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetBusinessProjects extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetBusinessProjects.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetBusinessProjects(String nodeId, APIContext context) {
+      super(context, nodeId, "/businessprojects", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetBusinessProjects setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessProjects setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetBusinessProjects requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetBusinessProjects requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessProjects requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetBusinessProjects requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessProjects requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessProjects requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -7666,19 +7902,35 @@ public class Business extends APINode {
       "automatic_matching_fields",
       "can_proxy",
       "code",
+      "config",
       "creation_time",
       "creator",
       "data_use_setting",
+      "description",
+      "duplicate_entries",
+      "enable_auto_assign_to_accounts",
       "enable_automatic_matching",
+      "event_stats",
+      "event_time_max",
+      "event_time_min",
       "first_party_cookie_status",
       "id",
+      "is_consolidated_container",
       "is_created_by_business",
       "is_crm",
+      "is_mta_use",
+      "is_restricted_use",
       "is_unavailable",
       "last_fired_time",
+      "last_upload_app",
+      "last_upload_app_changed_time",
+      "match_rate_approx",
+      "matched_entries",
       "name",
       "owner_ad_account",
       "owner_business",
+      "usage",
+      "valid_entries",
     };
 
     @Override
@@ -7791,6 +8043,13 @@ public class Business extends APINode {
       this.requestField("code", value);
       return this;
     }
+    public APIRequestGetClientPixels requestConfigField () {
+      return this.requestConfigField(true);
+    }
+    public APIRequestGetClientPixels requestConfigField (boolean value) {
+      this.requestField("config", value);
+      return this;
+    }
     public APIRequestGetClientPixels requestCreationTimeField () {
       return this.requestCreationTimeField(true);
     }
@@ -7812,11 +8071,53 @@ public class Business extends APINode {
       this.requestField("data_use_setting", value);
       return this;
     }
+    public APIRequestGetClientPixels requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetClientPixels requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetClientPixels requestDuplicateEntriesField () {
+      return this.requestDuplicateEntriesField(true);
+    }
+    public APIRequestGetClientPixels requestDuplicateEntriesField (boolean value) {
+      this.requestField("duplicate_entries", value);
+      return this;
+    }
+    public APIRequestGetClientPixels requestEnableAutoAssignToAccountsField () {
+      return this.requestEnableAutoAssignToAccountsField(true);
+    }
+    public APIRequestGetClientPixels requestEnableAutoAssignToAccountsField (boolean value) {
+      this.requestField("enable_auto_assign_to_accounts", value);
+      return this;
+    }
     public APIRequestGetClientPixels requestEnableAutomaticMatchingField () {
       return this.requestEnableAutomaticMatchingField(true);
     }
     public APIRequestGetClientPixels requestEnableAutomaticMatchingField (boolean value) {
       this.requestField("enable_automatic_matching", value);
+      return this;
+    }
+    public APIRequestGetClientPixels requestEventStatsField () {
+      return this.requestEventStatsField(true);
+    }
+    public APIRequestGetClientPixels requestEventStatsField (boolean value) {
+      this.requestField("event_stats", value);
+      return this;
+    }
+    public APIRequestGetClientPixels requestEventTimeMaxField () {
+      return this.requestEventTimeMaxField(true);
+    }
+    public APIRequestGetClientPixels requestEventTimeMaxField (boolean value) {
+      this.requestField("event_time_max", value);
+      return this;
+    }
+    public APIRequestGetClientPixels requestEventTimeMinField () {
+      return this.requestEventTimeMinField(true);
+    }
+    public APIRequestGetClientPixels requestEventTimeMinField (boolean value) {
+      this.requestField("event_time_min", value);
       return this;
     }
     public APIRequestGetClientPixels requestFirstPartyCookieStatusField () {
@@ -7833,6 +8134,13 @@ public class Business extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetClientPixels requestIsConsolidatedContainerField () {
+      return this.requestIsConsolidatedContainerField(true);
+    }
+    public APIRequestGetClientPixels requestIsConsolidatedContainerField (boolean value) {
+      this.requestField("is_consolidated_container", value);
+      return this;
+    }
     public APIRequestGetClientPixels requestIsCreatedByBusinessField () {
       return this.requestIsCreatedByBusinessField(true);
     }
@@ -7847,6 +8155,20 @@ public class Business extends APINode {
       this.requestField("is_crm", value);
       return this;
     }
+    public APIRequestGetClientPixels requestIsMtaUseField () {
+      return this.requestIsMtaUseField(true);
+    }
+    public APIRequestGetClientPixels requestIsMtaUseField (boolean value) {
+      this.requestField("is_mta_use", value);
+      return this;
+    }
+    public APIRequestGetClientPixels requestIsRestrictedUseField () {
+      return this.requestIsRestrictedUseField(true);
+    }
+    public APIRequestGetClientPixels requestIsRestrictedUseField (boolean value) {
+      this.requestField("is_restricted_use", value);
+      return this;
+    }
     public APIRequestGetClientPixels requestIsUnavailableField () {
       return this.requestIsUnavailableField(true);
     }
@@ -7859,6 +8181,34 @@ public class Business extends APINode {
     }
     public APIRequestGetClientPixels requestLastFiredTimeField (boolean value) {
       this.requestField("last_fired_time", value);
+      return this;
+    }
+    public APIRequestGetClientPixels requestLastUploadAppField () {
+      return this.requestLastUploadAppField(true);
+    }
+    public APIRequestGetClientPixels requestLastUploadAppField (boolean value) {
+      this.requestField("last_upload_app", value);
+      return this;
+    }
+    public APIRequestGetClientPixels requestLastUploadAppChangedTimeField () {
+      return this.requestLastUploadAppChangedTimeField(true);
+    }
+    public APIRequestGetClientPixels requestLastUploadAppChangedTimeField (boolean value) {
+      this.requestField("last_upload_app_changed_time", value);
+      return this;
+    }
+    public APIRequestGetClientPixels requestMatchRateApproxField () {
+      return this.requestMatchRateApproxField(true);
+    }
+    public APIRequestGetClientPixels requestMatchRateApproxField (boolean value) {
+      this.requestField("match_rate_approx", value);
+      return this;
+    }
+    public APIRequestGetClientPixels requestMatchedEntriesField () {
+      return this.requestMatchedEntriesField(true);
+    }
+    public APIRequestGetClientPixels requestMatchedEntriesField (boolean value) {
+      this.requestField("matched_entries", value);
       return this;
     }
     public APIRequestGetClientPixels requestNameField () {
@@ -7880,6 +8230,20 @@ public class Business extends APINode {
     }
     public APIRequestGetClientPixels requestOwnerBusinessField (boolean value) {
       this.requestField("owner_business", value);
+      return this;
+    }
+    public APIRequestGetClientPixels requestUsageField () {
+      return this.requestUsageField(true);
+    }
+    public APIRequestGetClientPixels requestUsageField (boolean value) {
+      this.requestField("usage", value);
+      return this;
+    }
+    public APIRequestGetClientPixels requestValidEntriesField () {
+      return this.requestValidEntriesField(true);
+    }
+    public APIRequestGetClientPixels requestValidEntriesField (boolean value) {
+      this.requestField("valid_entries", value);
       return this;
     }
   }
@@ -12841,25 +13205,35 @@ public class Business extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "automatic_matching_fields",
       "business",
+      "can_proxy",
       "config",
       "creation_time",
       "creator",
+      "data_use_setting",
       "description",
       "duplicate_entries",
       "enable_auto_assign_to_accounts",
+      "enable_automatic_matching",
       "event_stats",
       "event_time_max",
       "event_time_min",
+      "first_party_cookie_status",
       "id",
+      "is_consolidated_container",
+      "is_created_by_business",
+      "is_crm",
       "is_mta_use",
       "is_restricted_use",
       "is_unavailable",
+      "last_fired_time",
       "last_upload_app",
       "last_upload_app_changed_time",
       "match_rate_approx",
       "matched_entries",
       "name",
+      "owner_ad_account",
       "owner_business",
       "usage",
       "valid_entries",
@@ -12954,11 +13328,25 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestGetOfflineConversionDataSets requestAutomaticMatchingFieldsField () {
+      return this.requestAutomaticMatchingFieldsField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestAutomaticMatchingFieldsField (boolean value) {
+      this.requestField("automatic_matching_fields", value);
+      return this;
+    }
     public APIRequestGetOfflineConversionDataSets requestBusinessField () {
       return this.requestBusinessField(true);
     }
     public APIRequestGetOfflineConversionDataSets requestBusinessField (boolean value) {
       this.requestField("business", value);
+      return this;
+    }
+    public APIRequestGetOfflineConversionDataSets requestCanProxyField () {
+      return this.requestCanProxyField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestCanProxyField (boolean value) {
+      this.requestField("can_proxy", value);
       return this;
     }
     public APIRequestGetOfflineConversionDataSets requestConfigField () {
@@ -12982,6 +13370,13 @@ public class Business extends APINode {
       this.requestField("creator", value);
       return this;
     }
+    public APIRequestGetOfflineConversionDataSets requestDataUseSettingField () {
+      return this.requestDataUseSettingField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestDataUseSettingField (boolean value) {
+      this.requestField("data_use_setting", value);
+      return this;
+    }
     public APIRequestGetOfflineConversionDataSets requestDescriptionField () {
       return this.requestDescriptionField(true);
     }
@@ -13001,6 +13396,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOfflineConversionDataSets requestEnableAutoAssignToAccountsField (boolean value) {
       this.requestField("enable_auto_assign_to_accounts", value);
+      return this;
+    }
+    public APIRequestGetOfflineConversionDataSets requestEnableAutomaticMatchingField () {
+      return this.requestEnableAutomaticMatchingField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestEnableAutomaticMatchingField (boolean value) {
+      this.requestField("enable_automatic_matching", value);
       return this;
     }
     public APIRequestGetOfflineConversionDataSets requestEventStatsField () {
@@ -13024,11 +13426,39 @@ public class Business extends APINode {
       this.requestField("event_time_min", value);
       return this;
     }
+    public APIRequestGetOfflineConversionDataSets requestFirstPartyCookieStatusField () {
+      return this.requestFirstPartyCookieStatusField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestFirstPartyCookieStatusField (boolean value) {
+      this.requestField("first_party_cookie_status", value);
+      return this;
+    }
     public APIRequestGetOfflineConversionDataSets requestIdField () {
       return this.requestIdField(true);
     }
     public APIRequestGetOfflineConversionDataSets requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetOfflineConversionDataSets requestIsConsolidatedContainerField () {
+      return this.requestIsConsolidatedContainerField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestIsConsolidatedContainerField (boolean value) {
+      this.requestField("is_consolidated_container", value);
+      return this;
+    }
+    public APIRequestGetOfflineConversionDataSets requestIsCreatedByBusinessField () {
+      return this.requestIsCreatedByBusinessField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestIsCreatedByBusinessField (boolean value) {
+      this.requestField("is_created_by_business", value);
+      return this;
+    }
+    public APIRequestGetOfflineConversionDataSets requestIsCrmField () {
+      return this.requestIsCrmField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestIsCrmField (boolean value) {
+      this.requestField("is_crm", value);
       return this;
     }
     public APIRequestGetOfflineConversionDataSets requestIsMtaUseField () {
@@ -13050,6 +13480,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOfflineConversionDataSets requestIsUnavailableField (boolean value) {
       this.requestField("is_unavailable", value);
+      return this;
+    }
+    public APIRequestGetOfflineConversionDataSets requestLastFiredTimeField () {
+      return this.requestLastFiredTimeField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestLastFiredTimeField (boolean value) {
+      this.requestField("last_fired_time", value);
       return this;
     }
     public APIRequestGetOfflineConversionDataSets requestLastUploadAppField () {
@@ -13085,6 +13522,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOfflineConversionDataSets requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetOfflineConversionDataSets requestOwnerAdAccountField () {
+      return this.requestOwnerAdAccountField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestOwnerAdAccountField (boolean value) {
+      this.requestField("owner_ad_account", value);
       return this;
     }
     public APIRequestGetOfflineConversionDataSets requestOwnerBusinessField () {
@@ -17326,19 +17770,35 @@ public class Business extends APINode {
       "automatic_matching_fields",
       "can_proxy",
       "code",
+      "config",
       "creation_time",
       "creator",
       "data_use_setting",
+      "description",
+      "duplicate_entries",
+      "enable_auto_assign_to_accounts",
       "enable_automatic_matching",
+      "event_stats",
+      "event_time_max",
+      "event_time_min",
       "first_party_cookie_status",
       "id",
+      "is_consolidated_container",
       "is_created_by_business",
       "is_crm",
+      "is_mta_use",
+      "is_restricted_use",
       "is_unavailable",
       "last_fired_time",
+      "last_upload_app",
+      "last_upload_app_changed_time",
+      "match_rate_approx",
+      "matched_entries",
       "name",
       "owner_ad_account",
       "owner_business",
+      "usage",
+      "valid_entries",
     };
 
     @Override
@@ -17451,6 +17911,13 @@ public class Business extends APINode {
       this.requestField("code", value);
       return this;
     }
+    public APIRequestGetOwnedPixels requestConfigField () {
+      return this.requestConfigField(true);
+    }
+    public APIRequestGetOwnedPixels requestConfigField (boolean value) {
+      this.requestField("config", value);
+      return this;
+    }
     public APIRequestGetOwnedPixels requestCreationTimeField () {
       return this.requestCreationTimeField(true);
     }
@@ -17472,11 +17939,53 @@ public class Business extends APINode {
       this.requestField("data_use_setting", value);
       return this;
     }
+    public APIRequestGetOwnedPixels requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetOwnedPixels requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetOwnedPixels requestDuplicateEntriesField () {
+      return this.requestDuplicateEntriesField(true);
+    }
+    public APIRequestGetOwnedPixels requestDuplicateEntriesField (boolean value) {
+      this.requestField("duplicate_entries", value);
+      return this;
+    }
+    public APIRequestGetOwnedPixels requestEnableAutoAssignToAccountsField () {
+      return this.requestEnableAutoAssignToAccountsField(true);
+    }
+    public APIRequestGetOwnedPixels requestEnableAutoAssignToAccountsField (boolean value) {
+      this.requestField("enable_auto_assign_to_accounts", value);
+      return this;
+    }
     public APIRequestGetOwnedPixels requestEnableAutomaticMatchingField () {
       return this.requestEnableAutomaticMatchingField(true);
     }
     public APIRequestGetOwnedPixels requestEnableAutomaticMatchingField (boolean value) {
       this.requestField("enable_automatic_matching", value);
+      return this;
+    }
+    public APIRequestGetOwnedPixels requestEventStatsField () {
+      return this.requestEventStatsField(true);
+    }
+    public APIRequestGetOwnedPixels requestEventStatsField (boolean value) {
+      this.requestField("event_stats", value);
+      return this;
+    }
+    public APIRequestGetOwnedPixels requestEventTimeMaxField () {
+      return this.requestEventTimeMaxField(true);
+    }
+    public APIRequestGetOwnedPixels requestEventTimeMaxField (boolean value) {
+      this.requestField("event_time_max", value);
+      return this;
+    }
+    public APIRequestGetOwnedPixels requestEventTimeMinField () {
+      return this.requestEventTimeMinField(true);
+    }
+    public APIRequestGetOwnedPixels requestEventTimeMinField (boolean value) {
+      this.requestField("event_time_min", value);
       return this;
     }
     public APIRequestGetOwnedPixels requestFirstPartyCookieStatusField () {
@@ -17493,6 +18002,13 @@ public class Business extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetOwnedPixels requestIsConsolidatedContainerField () {
+      return this.requestIsConsolidatedContainerField(true);
+    }
+    public APIRequestGetOwnedPixels requestIsConsolidatedContainerField (boolean value) {
+      this.requestField("is_consolidated_container", value);
+      return this;
+    }
     public APIRequestGetOwnedPixels requestIsCreatedByBusinessField () {
       return this.requestIsCreatedByBusinessField(true);
     }
@@ -17507,6 +18023,20 @@ public class Business extends APINode {
       this.requestField("is_crm", value);
       return this;
     }
+    public APIRequestGetOwnedPixels requestIsMtaUseField () {
+      return this.requestIsMtaUseField(true);
+    }
+    public APIRequestGetOwnedPixels requestIsMtaUseField (boolean value) {
+      this.requestField("is_mta_use", value);
+      return this;
+    }
+    public APIRequestGetOwnedPixels requestIsRestrictedUseField () {
+      return this.requestIsRestrictedUseField(true);
+    }
+    public APIRequestGetOwnedPixels requestIsRestrictedUseField (boolean value) {
+      this.requestField("is_restricted_use", value);
+      return this;
+    }
     public APIRequestGetOwnedPixels requestIsUnavailableField () {
       return this.requestIsUnavailableField(true);
     }
@@ -17519,6 +18049,34 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedPixels requestLastFiredTimeField (boolean value) {
       this.requestField("last_fired_time", value);
+      return this;
+    }
+    public APIRequestGetOwnedPixels requestLastUploadAppField () {
+      return this.requestLastUploadAppField(true);
+    }
+    public APIRequestGetOwnedPixels requestLastUploadAppField (boolean value) {
+      this.requestField("last_upload_app", value);
+      return this;
+    }
+    public APIRequestGetOwnedPixels requestLastUploadAppChangedTimeField () {
+      return this.requestLastUploadAppChangedTimeField(true);
+    }
+    public APIRequestGetOwnedPixels requestLastUploadAppChangedTimeField (boolean value) {
+      this.requestField("last_upload_app_changed_time", value);
+      return this;
+    }
+    public APIRequestGetOwnedPixels requestMatchRateApproxField () {
+      return this.requestMatchRateApproxField(true);
+    }
+    public APIRequestGetOwnedPixels requestMatchRateApproxField (boolean value) {
+      this.requestField("match_rate_approx", value);
+      return this;
+    }
+    public APIRequestGetOwnedPixels requestMatchedEntriesField () {
+      return this.requestMatchedEntriesField(true);
+    }
+    public APIRequestGetOwnedPixels requestMatchedEntriesField (boolean value) {
+      this.requestField("matched_entries", value);
       return this;
     }
     public APIRequestGetOwnedPixels requestNameField () {
@@ -17540,6 +18098,20 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedPixels requestOwnerBusinessField (boolean value) {
       this.requestField("owner_business", value);
+      return this;
+    }
+    public APIRequestGetOwnedPixels requestUsageField () {
+      return this.requestUsageField(true);
+    }
+    public APIRequestGetOwnedPixels requestUsageField (boolean value) {
+      this.requestField("usage", value);
+      return this;
+    }
+    public APIRequestGetOwnedPixels requestValidEntriesField () {
+      return this.requestValidEntriesField(true);
+    }
+    public APIRequestGetOwnedPixels requestValidEntriesField (boolean value) {
+      this.requestField("valid_entries", value);
       return this;
     }
   }
@@ -20926,6 +21498,25 @@ public class Business extends APINode {
       private String value;
 
       private EnumPagePermittedTasks(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumActionSource {
+      @SerializedName("PHYSICAL_STORE")
+      VALUE_PHYSICAL_STORE("PHYSICAL_STORE"),
+      @SerializedName("WEBSITE")
+      VALUE_WEBSITE("WEBSITE"),
+      ;
+
+      private String value;
+
+      private EnumActionSource(String value) {
         this.value = value;
       }
 

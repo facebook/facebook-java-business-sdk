@@ -3013,12 +3013,12 @@ public class WhatsAppBusinessAccount extends APINode {
       VALUE_FULL_CONTROL("FULL_CONTROL"),
       @SerializedName("MANAGE")
       VALUE_MANAGE("MANAGE"),
+      @SerializedName("MANAGE_EXTENSIONS")
+      VALUE_MANAGE_EXTENSIONS("MANAGE_EXTENSIONS"),
       @SerializedName("MANAGE_PHONE")
       VALUE_MANAGE_PHONE("MANAGE_PHONE"),
       @SerializedName("MANAGE_TEMPLATES")
       VALUE_MANAGE_TEMPLATES("MANAGE_TEMPLATES"),
-      @SerializedName("MANAGE_TEMPLATES_AND_PHONE")
-      VALUE_MANAGE_TEMPLATES_AND_PHONE("MANAGE_TEMPLATES_AND_PHONE"),
       @SerializedName("MESSAGING")
       VALUE_MESSAGING("MESSAGING"),
       @SerializedName("VIEW_COST")
@@ -3038,12 +3038,12 @@ public class WhatsAppBusinessAccount extends APINode {
   }
 
   public static enum EnumCategory {
+      @SerializedName("AUTHENTICATION")
+      VALUE_AUTHENTICATION("AUTHENTICATION"),
       @SerializedName("MARKETING")
       VALUE_MARKETING("MARKETING"),
-      @SerializedName("OTP")
-      VALUE_OTP("OTP"),
-      @SerializedName("TRANSACTIONAL")
-      VALUE_TRANSACTIONAL("TRANSACTIONAL"),
+      @SerializedName("UTILITY")
+      VALUE_UTILITY("UTILITY"),
       ;
 
       private String value;

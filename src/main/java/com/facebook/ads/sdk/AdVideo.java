@@ -6447,6 +6447,8 @@ public class AdVideo extends APINode {
       VALUE_AD_BREAK_PREVIEW("AD_BREAK_PREVIEW"),
       @SerializedName("AD_DERIVATIVE")
       VALUE_AD_DERIVATIVE("AD_DERIVATIVE"),
+      @SerializedName("AD_LIBRARY_WATERMARK")
+      VALUE_AD_LIBRARY_WATERMARK("AD_LIBRARY_WATERMARK"),
       @SerializedName("AGE_UP")
       VALUE_AGE_UP("AGE_UP"),
       @SerializedName("ALBUM_MULTIMEDIA_POST")
@@ -6609,6 +6611,8 @@ public class AdVideo extends APINode {
       VALUE_LIVE_AUDIO_ROOM_BROADCAST("LIVE_AUDIO_ROOM_BROADCAST"),
       @SerializedName("LIVE_CLIP_PREVIEW")
       VALUE_LIVE_CLIP_PREVIEW("LIVE_CLIP_PREVIEW"),
+      @SerializedName("LIVE_CLIP_WORKCHAT")
+      VALUE_LIVE_CLIP_WORKCHAT("LIVE_CLIP_WORKCHAT"),
       @SerializedName("LIVE_CREATIVE_KIT_VIDEO")
       VALUE_LIVE_CREATIVE_KIT_VIDEO("LIVE_CREATIVE_KIT_VIDEO"),
       @SerializedName("LIVE_PHOTO")

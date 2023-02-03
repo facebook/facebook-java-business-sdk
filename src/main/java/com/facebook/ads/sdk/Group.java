@@ -334,14 +334,6 @@ public class Group extends APINode {
     return new APIRequestGetEvents(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetFeaturedCards getFeaturedCards() {
-    return new APIRequestGetFeaturedCards(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateFeaturedCard createFeaturedCard() {
-    return new APIRequestCreateFeaturedCard(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetFeed getFeed() {
     return new APIRequestGetFeed(this.getPrefixedId().toString(), context);
   }
@@ -1553,6 +1545,7 @@ public class Group extends APINode {
       "owner",
       "parent_group",
       "place",
+      "registration_setting",
       "scheduled_publish_time",
       "start_time",
       "ticket_setting",
@@ -1829,6 +1822,13 @@ public class Group extends APINode {
       this.requestField("place", value);
       return this;
     }
+    public APIRequestGetEvents requestRegistrationSettingField () {
+      return this.requestRegistrationSettingField(true);
+    }
+    public APIRequestGetEvents requestRegistrationSettingField (boolean value) {
+      this.requestField("registration_setting", value);
+      return this;
+    }
     public APIRequestGetEvents requestScheduledPublishTimeField () {
       return this.requestScheduledPublishTimeField(true);
     }
@@ -1899,234 +1899,6 @@ public class Group extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-  }
-
-  public static class APIRequestGetFeaturedCards extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetFeaturedCards.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetFeaturedCards(String nodeId, APIContext context) {
-      super(context, nodeId, "/featured_cards", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetFeaturedCards setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetFeaturedCards setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetFeaturedCards requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetFeaturedCards requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetFeaturedCards requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetFeaturedCards requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetFeaturedCards requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetFeaturedCards requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateFeaturedCard extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "description",
-      "title",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateFeaturedCard.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateFeaturedCard(String nodeId, APIContext context) {
-      super(context, nodeId, "/featured_cards", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateFeaturedCard setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateFeaturedCard setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateFeaturedCard setDescription (Map<String, String> description) {
-      this.setParam("description", description);
-      return this;
-    }
-    public APIRequestCreateFeaturedCard setDescription (String description) {
-      this.setParam("description", description);
-      return this;
-    }
-
-    public APIRequestCreateFeaturedCard setTitle (Map<String, String> title) {
-      this.setParam("title", title);
-      return this;
-    }
-    public APIRequestCreateFeaturedCard setTitle (String title) {
-      this.setParam("title", title);
-      return this;
-    }
-
-    public APIRequestCreateFeaturedCard requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateFeaturedCard requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateFeaturedCard requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateFeaturedCard requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateFeaturedCard requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateFeaturedCard requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestGetFeed extends APIRequest<Post> {

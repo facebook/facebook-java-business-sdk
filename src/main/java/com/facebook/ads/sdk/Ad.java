@@ -2621,6 +2621,7 @@ public class Ad extends APINode {
       "is_organic",
       "partner_name",
       "platform",
+      "post",
       "retailer_item_id",
       "vehicle",
     };
@@ -2817,6 +2818,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetLeads requestPlatformField (boolean value) {
       this.requestField("platform", value);
+      return this;
+    }
+    public APIRequestGetLeads requestPostField () {
+      return this.requestPostField(true);
+    }
+    public APIRequestGetLeads requestPostField (boolean value) {
+      this.requestField("post", value);
       return this;
     }
     public APIRequestGetLeads requestRetailerItemIdField () {

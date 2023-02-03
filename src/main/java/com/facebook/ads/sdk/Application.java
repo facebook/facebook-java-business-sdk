@@ -6165,6 +6165,7 @@ public class Application extends APINode {
       "owner",
       "parent_group",
       "place",
+      "registration_setting",
       "scheduled_publish_time",
       "start_time",
       "ticket_setting",
@@ -6457,6 +6458,13 @@ public class Application extends APINode {
     }
     public APIRequestGetEvents requestPlaceField (boolean value) {
       this.requestField("place", value);
+      return this;
+    }
+    public APIRequestGetEvents requestRegistrationSettingField () {
+      return this.requestRegistrationSettingField(true);
+    }
+    public APIRequestGetEvents requestRegistrationSettingField (boolean value) {
+      this.requestField("registration_setting", value);
       return this;
     }
     public APIRequestGetEvents requestScheduledPublishTimeField () {

@@ -614,6 +614,10 @@ public class Page extends APINode {
     return new APIRequestCreateBusinessDatum(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetBusinessProjects getBusinessProjects() {
+    return new APIRequestGetBusinessProjects(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetCallToActions getCallToActions() {
     return new APIRequestGetCallToActions(this.getPrefixedId().toString(), context);
   }
@@ -4224,6 +4228,116 @@ public class Page extends APINode {
 
     @Override
     public APIRequestCreateBusinessDatum requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetBusinessProjects extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "business",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetBusinessProjects.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetBusinessProjects(String nodeId, APIContext context) {
+      super(context, nodeId, "/businessprojects", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetBusinessProjects setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessProjects setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetBusinessProjects setBusiness (String business) {
+      this.setParam("business", business);
+      return this;
+    }
+
+    public APIRequestGetBusinessProjects requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetBusinessProjects requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessProjects requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetBusinessProjects requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessProjects requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessProjects requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -9254,6 +9368,7 @@ public class Page extends APINode {
       "owner",
       "parent_group",
       "place",
+      "registration_setting",
       "scheduled_publish_time",
       "start_time",
       "ticket_setting",
@@ -9564,6 +9679,13 @@ public class Page extends APINode {
     }
     public APIRequestGetEvents requestPlaceField (boolean value) {
       this.requestField("place", value);
+      return this;
+    }
+    public APIRequestGetEvents requestRegistrationSettingField () {
+      return this.requestRegistrationSettingField(true);
+    }
+    public APIRequestGetEvents requestRegistrationSettingField (boolean value) {
+      this.requestField("registration_setting", value);
       return this;
     }
     public APIRequestGetEvents requestScheduledPublishTimeField () {
@@ -20758,6 +20880,7 @@ public class Page extends APINode {
 
     public static final String[] FIELDS = {
       "creation_timestamp",
+      "next_eligible_time",
       "notification_messages_frequency",
       "notification_messages_reoptin",
       "notification_messages_timezone",
@@ -20863,6 +20986,13 @@ public class Page extends APINode {
     }
     public APIRequestGetNotificationMessageTokens requestCreationTimestampField (boolean value) {
       this.requestField("creation_timestamp", value);
+      return this;
+    }
+    public APIRequestGetNotificationMessageTokens requestNextEligibleTimeField () {
+      return this.requestNextEligibleTimeField(true);
+    }
+    public APIRequestGetNotificationMessageTokens requestNextEligibleTimeField (boolean value) {
+      this.requestField("next_eligible_time", value);
       return this;
     }
     public APIRequestGetNotificationMessageTokens requestNotificationMessagesFrequencyField () {

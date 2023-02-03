@@ -391,6 +391,8 @@ public class AdAccountAdVolume extends APINode {
       VALUE_LEARNING_LIMITED("LEARNING_LIMITED"),
       @SerializedName("LOW_OUTCOME")
       VALUE_LOW_OUTCOME("LOW_OUTCOME"),
+      @SerializedName("MMT_CAROUSEL_TO_VIDEO")
+      VALUE_MMT_CAROUSEL_TO_VIDEO("MMT_CAROUSEL_TO_VIDEO"),
       @SerializedName("MULTI_TEXT")
       VALUE_MULTI_TEXT("MULTI_TEXT"),
       @SerializedName("MUSIC")
@@ -399,6 +401,8 @@ public class AdAccountAdVolume extends APINode {
       VALUE_PREDICTIVE_CREATIVE_LIMITED("PREDICTIVE_CREATIVE_LIMITED"),
       @SerializedName("REVERT")
       VALUE_REVERT("REVERT"),
+      @SerializedName("SEMANTIC_BASED_AUDIENCE_EXPANSION")
+      VALUE_SEMANTIC_BASED_AUDIENCE_EXPANSION("SEMANTIC_BASED_AUDIENCE_EXPANSION"),
       @SerializedName("SIGNALS_GROWTH_CAPI")
       VALUE_SIGNALS_GROWTH_CAPI("SIGNALS_GROWTH_CAPI"),
       @SerializedName("SYD_TEST_MODE")

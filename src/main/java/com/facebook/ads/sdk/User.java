@@ -885,6 +885,7 @@ public class User extends APINode {
     }
     public static final String[] PARAMS = {
       "business_app",
+      "is_permanent_token",
       "page_id",
       "scope",
     };
@@ -951,6 +952,15 @@ public class User extends APINode {
     }
     public APIRequestCreateAccessToken setBusinessApp (String businessApp) {
       this.setParam("business_app", businessApp);
+      return this;
+    }
+
+    public APIRequestCreateAccessToken setIsPermanentToken (Boolean isPermanentToken) {
+      this.setParam("is_permanent_token", isPermanentToken);
+      return this;
+    }
+    public APIRequestCreateAccessToken setIsPermanentToken (String isPermanentToken) {
+      this.setParam("is_permanent_token", isPermanentToken);
       return this;
     }
 
@@ -7906,6 +7916,7 @@ public class User extends APINode {
       "owner",
       "parent_group",
       "place",
+      "registration_setting",
       "scheduled_publish_time",
       "start_time",
       "ticket_setting",
@@ -8198,6 +8209,13 @@ public class User extends APINode {
     }
     public APIRequestGetEvents requestPlaceField (boolean value) {
       this.requestField("place", value);
+      return this;
+    }
+    public APIRequestGetEvents requestRegistrationSettingField () {
+      return this.requestRegistrationSettingField(true);
+    }
+    public APIRequestGetEvents requestRegistrationSettingField (boolean value) {
+      this.requestField("registration_setting", value);
       return this;
     }
     public APIRequestGetEvents requestScheduledPublishTimeField () {
@@ -15128,6 +15146,7 @@ public class User extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "bot_message_payload_elements",
       "filtering",
       "href",
       "label",
@@ -15197,6 +15216,11 @@ public class User extends APINode {
       return this;
     }
 
+
+    public APIRequestCreateNotification setBotMessagePayloadElements (String botMessagePayloadElements) {
+      this.setParam("bot_message_payload_elements", botMessagePayloadElements);
+      return this;
+    }
 
     public APIRequestCreateNotification setFiltering (List<User.EnumFiltering> filtering) {
       this.setParam("filtering", filtering);

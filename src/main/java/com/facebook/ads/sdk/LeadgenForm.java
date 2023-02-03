@@ -457,6 +457,7 @@ public class LeadgenForm extends APINode {
       "is_organic",
       "partner_name",
       "platform",
+      "post",
       "retailer_item_id",
       "vehicle",
     };
@@ -655,6 +656,13 @@ public class LeadgenForm extends APINode {
       this.requestField("platform", value);
       return this;
     }
+    public APIRequestGetLeads requestPostField () {
+      return this.requestPostField(true);
+    }
+    public APIRequestGetLeads requestPostField (boolean value) {
+      this.requestField("post", value);
+      return this;
+    }
     public APIRequestGetLeads requestRetailerItemIdField () {
       return this.requestRetailerItemIdField(true);
     }
@@ -697,6 +705,7 @@ public class LeadgenForm extends APINode {
       "is_organic",
       "partner_name",
       "platform",
+      "post",
       "retailer_item_id",
       "vehicle",
     };
@@ -893,6 +902,13 @@ public class LeadgenForm extends APINode {
     }
     public APIRequestGetTestLeads requestPlatformField (boolean value) {
       this.requestField("platform", value);
+      return this;
+    }
+    public APIRequestGetTestLeads requestPostField () {
+      return this.requestPostField(true);
+    }
+    public APIRequestGetTestLeads requestPostField (boolean value) {
+      this.requestField("post", value);
       return this;
     }
     public APIRequestGetTestLeads requestRetailerItemIdField () {

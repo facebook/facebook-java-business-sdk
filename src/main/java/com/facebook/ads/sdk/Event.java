@@ -105,6 +105,8 @@ public class Event extends APINode {
   private Group mParentGroup = null;
   @SerializedName("place")
   private Place mPlace = null;
+  @SerializedName("registration_setting")
+  private Object mRegistrationSetting = null;
   @SerializedName("scheduled_publish_time")
   private String mScheduledPublishTime = null;
   @SerializedName("start_time")
@@ -483,6 +485,10 @@ public class Event extends APINode {
       mPlace.context = getContext();
     }
     return mPlace;
+  }
+
+  public Object getFieldRegistrationSetting() {
+    return mRegistrationSetting;
   }
 
   public String getFieldScheduledPublishTime() {
@@ -1875,6 +1881,7 @@ public class Event extends APINode {
       "owner",
       "parent_group",
       "place",
+      "registration_setting",
       "scheduled_publish_time",
       "start_time",
       "ticket_setting",
@@ -2151,6 +2158,13 @@ public class Event extends APINode {
       this.requestField("place", value);
       return this;
     }
+    public APIRequestGet requestRegistrationSettingField () {
+      return this.requestRegistrationSettingField(true);
+    }
+    public APIRequestGet requestRegistrationSettingField (boolean value) {
+      this.requestField("registration_setting", value);
+      return this;
+    }
     public APIRequestGet requestScheduledPublishTimeField () {
       return this.requestScheduledPublishTimeField(true);
     }
@@ -2416,6 +2430,7 @@ public class Event extends APINode {
     this.mOwner = instance.mOwner;
     this.mParentGroup = instance.mParentGroup;
     this.mPlace = instance.mPlace;
+    this.mRegistrationSetting = instance.mRegistrationSetting;
     this.mScheduledPublishTime = instance.mScheduledPublishTime;
     this.mStartTime = instance.mStartTime;
     this.mTicketSetting = instance.mTicketSetting;

@@ -81,6 +81,8 @@ public class AdSet extends APINode {
   private String mBudgetRemaining = null;
   @SerializedName("campaign")
   private Campaign mCampaign = null;
+  @SerializedName("campaign_attribution")
+  private String mCampaignAttribution = null;
   @SerializedName("campaign_id")
   private String mCampaignId = null;
   @SerializedName("configured_status")
@@ -593,6 +595,15 @@ public class AdSet extends APINode {
     this.mCampaign = Campaign.getGson().fromJson(value, type);
     return this;
   }
+  public String getFieldCampaignAttribution() {
+    return mCampaignAttribution;
+  }
+
+  public AdSet setFieldCampaignAttribution(String value) {
+    this.mCampaignAttribution = value;
+    return this;
+  }
+
   public String getFieldCampaignId() {
     return mCampaignId;
   }
@@ -3177,6 +3188,7 @@ public class AdSet extends APINode {
       "billing_event",
       "budget_remaining",
       "campaign",
+      "campaign_attribution",
       "campaign_id",
       "configured_status",
       "created_time",
@@ -3435,6 +3447,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestCampaignField (boolean value) {
       this.requestField("campaign", value);
+      return this;
+    }
+    public APIRequestGetCopies requestCampaignAttributionField () {
+      return this.requestCampaignAttributionField(true);
+    }
+    public APIRequestGetCopies requestCampaignAttributionField (boolean value) {
+      this.requestField("campaign_attribution", value);
       return this;
     }
     public APIRequestGetCopies requestCampaignIdField () {
@@ -4941,6 +4960,7 @@ public class AdSet extends APINode {
       "billing_event",
       "budget_remaining",
       "campaign",
+      "campaign_attribution",
       "campaign_id",
       "configured_status",
       "created_time",
@@ -5199,6 +5219,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGet requestCampaignField (boolean value) {
       this.requestField("campaign", value);
+      return this;
+    }
+    public APIRequestGet requestCampaignAttributionField () {
+      return this.requestCampaignAttributionField(true);
+    }
+    public APIRequestGet requestCampaignAttributionField (boolean value) {
+      this.requestField("campaign_attribution", value);
       return this;
     }
     public APIRequestGet requestCampaignIdField () {
@@ -6456,6 +6483,7 @@ public class AdSet extends APINode {
     this.mBillingEvent = instance.mBillingEvent;
     this.mBudgetRemaining = instance.mBudgetRemaining;
     this.mCampaign = instance.mCampaign;
+    this.mCampaignAttribution = instance.mCampaignAttribution;
     this.mCampaignId = instance.mCampaignId;
     this.mConfiguredStatus = instance.mConfiguredStatus;
     this.mCreatedTime = instance.mCreatedTime;

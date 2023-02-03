@@ -71,8 +71,6 @@ public class Vehicle extends APINode {
   private String mCurrency = null;
   @SerializedName("custom_label_0")
   private String mCustomLabel0 = null;
-  @SerializedName("custom_number_0")
-  private Long mCustomNumber0 = null;
   @SerializedName("date_first_on_lot")
   private String mDateFirstOnLot = null;
   @SerializedName("dealer_communication_channel")
@@ -413,10 +411,6 @@ public class Vehicle extends APINode {
 
   public String getFieldCustomLabel0() {
     return mCustomLabel0;
-  }
-
-  public Long getFieldCustomNumber0() {
-    return mCustomNumber0;
   }
 
   public String getFieldDateFirstOnLot() {
@@ -931,7 +925,6 @@ public class Vehicle extends APINode {
       "condition",
       "currency",
       "custom_label_0",
-      "custom_number_0",
       "date_first_on_lot",
       "dealer_communication_channel",
       "dealer_email",
@@ -1117,13 +1110,6 @@ public class Vehicle extends APINode {
     }
     public APIRequestGet requestCustomLabel0Field (boolean value) {
       this.requestField("custom_label_0", value);
-      return this;
-    }
-    public APIRequestGet requestCustomNumber0Field () {
-      return this.requestCustomNumber0Field(true);
-    }
-    public APIRequestGet requestCustomNumber0Field (boolean value) {
-      this.requestField("custom_number_0", value);
       return this;
     }
     public APIRequestGet requestDateFirstOnLotField () {
@@ -2059,7 +2045,6 @@ public class Vehicle extends APINode {
     this.mCondition = instance.mCondition;
     this.mCurrency = instance.mCurrency;
     this.mCustomLabel0 = instance.mCustomLabel0;
-    this.mCustomNumber0 = instance.mCustomNumber0;
     this.mDateFirstOnLot = instance.mDateFirstOnLot;
     this.mDealerCommunicationChannel = instance.mDealerCommunicationChannel;
     this.mDealerEmail = instance.mDealerEmail;

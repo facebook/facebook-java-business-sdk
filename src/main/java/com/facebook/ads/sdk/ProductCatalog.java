@@ -10476,7 +10476,6 @@ public class ProductCatalog extends APINode {
       "condition",
       "currency",
       "custom_label_0",
-      "custom_number_0",
       "date_first_on_lot",
       "dealer_communication_channel",
       "dealer_email",
@@ -10680,13 +10679,6 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetVehicles requestCustomLabel0Field (boolean value) {
       this.requestField("custom_label_0", value);
-      return this;
-    }
-    public APIRequestGetVehicles requestCustomNumber0Field () {
-      return this.requestCustomNumber0Field(true);
-    }
-    public APIRequestGetVehicles requestCustomNumber0Field (boolean value) {
-      this.requestField("custom_number_0", value);
       return this;
     }
     public APIRequestGetVehicles requestDateFirstOnLotField () {
