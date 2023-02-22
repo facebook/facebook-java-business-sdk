@@ -27,7 +27,6 @@ import com.facebook.ads.sdk.AdAccount;
 import com.facebook.ads.sdk.APIContext;
 import com.facebook.ads.sdk.APIException;
 import com.facebook.ads.sdk.APINode;
-import com.facebook.ads.sdk.APINodeList;
 import com.facebook.ads.sdk.APIRequest;
 import com.facebook.ads.sdk.AdVideo.EnumUploadPhase;
 import com.google.gson.JsonObject;
