@@ -492,8 +492,8 @@ public class EventRequest {
     final ListenableFuture pixelFuture = event.executeAsync();
     return Futures.transformAsync(
       pixelFuture,
-      new AsyncFunction<AdsPixel, EventResponse>() {
-        public ListenableFuture<EventResponse> apply(final AdsPixel pixel) {
+      new AsyncFunction<APINode, EventResponse>() {
+        public ListenableFuture<EventResponse> apply(final APINode pixel) {
           final EventResponse eventResponse =
                   gson.fromJson(pixel.getRawResponse(), EventResponse.class);
           context.log(
