@@ -654,6 +654,10 @@ public class Business extends APINode {
     return new APIRequestGetReceivedAudienceSharingRequests(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateSetupManagedPartnerAdAccount createSetupManagedPartnerAdAccount() {
+    return new APIRequestCreateSetupManagedPartnerAdAccount(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetSystemUsers getSystemUsers() {
     return new APIRequestGetSystemUsers(this.getPrefixedId().toString(), context);
   }
@@ -20478,6 +20482,148 @@ public class Business extends APINode {
     }
   }
 
+  public static class APIRequestCreateSetupManagedPartnerAdAccount extends APIRequest<Business> {
+
+    Business lastResponse = null;
+    @Override
+    public Business getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "credit_line_id",
+      "marketplace_business_id",
+      "subvertical_v2",
+      "vendor_id",
+      "vertical_v2",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Business parseResponse(String response, String header) throws APIException {
+      return Business.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Business execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Business execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Business> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Business> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, Business>() {
+           public Business apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateSetupManagedPartnerAdAccount.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateSetupManagedPartnerAdAccount(String nodeId, APIContext context) {
+      super(context, nodeId, "/setup_managed_partner_adaccounts", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateSetupManagedPartnerAdAccount setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSetupManagedPartnerAdAccount setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateSetupManagedPartnerAdAccount setCreditLineId (String creditLineId) {
+      this.setParam("credit_line_id", creditLineId);
+      return this;
+    }
+
+    public APIRequestCreateSetupManagedPartnerAdAccount setMarketplaceBusinessId (String marketplaceBusinessId) {
+      this.setParam("marketplace_business_id", marketplaceBusinessId);
+      return this;
+    }
+
+    public APIRequestCreateSetupManagedPartnerAdAccount setSubverticalV2 (Business.EnumSubverticalV2 subverticalV2) {
+      this.setParam("subvertical_v2", subverticalV2);
+      return this;
+    }
+    public APIRequestCreateSetupManagedPartnerAdAccount setSubverticalV2 (String subverticalV2) {
+      this.setParam("subvertical_v2", subverticalV2);
+      return this;
+    }
+
+    public APIRequestCreateSetupManagedPartnerAdAccount setVendorId (String vendorId) {
+      this.setParam("vendor_id", vendorId);
+      return this;
+    }
+
+    public APIRequestCreateSetupManagedPartnerAdAccount setVerticalV2 (Business.EnumVerticalV2 verticalV2) {
+      this.setParam("vertical_v2", verticalV2);
+      return this;
+    }
+    public APIRequestCreateSetupManagedPartnerAdAccount setVerticalV2 (String verticalV2) {
+      this.setParam("vertical_v2", verticalV2);
+      return this;
+    }
+
+    public APIRequestCreateSetupManagedPartnerAdAccount requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateSetupManagedPartnerAdAccount requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSetupManagedPartnerAdAccount requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateSetupManagedPartnerAdAccount requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSetupManagedPartnerAdAccount requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSetupManagedPartnerAdAccount requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetSystemUsers extends APIRequest<SystemUser> {
 
     APINodeList<SystemUser> lastResponse = null;
@@ -21498,6 +21644,424 @@ public class Business extends APINode {
       private String value;
 
       private EnumPagePermittedTasks(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumSubverticalV2 {
+      @SerializedName("ACCOUNTING_AND_TAX")
+      VALUE_ACCOUNTING_AND_TAX("ACCOUNTING_AND_TAX"),
+      @SerializedName("ACTIVITIES_AND_LEISURE")
+      VALUE_ACTIVITIES_AND_LEISURE("ACTIVITIES_AND_LEISURE"),
+      @SerializedName("AIR")
+      VALUE_AIR("AIR"),
+      @SerializedName("APPAREL_AND_ACCESSORIES")
+      VALUE_APPAREL_AND_ACCESSORIES("APPAREL_AND_ACCESSORIES"),
+      @SerializedName("ARTS_AND_HERITAGE_AND_EDUCATION")
+      VALUE_ARTS_AND_HERITAGE_AND_EDUCATION("ARTS_AND_HERITAGE_AND_EDUCATION"),
+      @SerializedName("AR_OR_VR_GAMING")
+      VALUE_AR_OR_VR_GAMING("AR_OR_VR_GAMING"),
+      @SerializedName("AUDIO_STREAMING")
+      VALUE_AUDIO_STREAMING("AUDIO_STREAMING"),
+      @SerializedName("AUTO")
+      VALUE_AUTO("AUTO"),
+      @SerializedName("AUTO_INSURANCE")
+      VALUE_AUTO_INSURANCE("AUTO_INSURANCE"),
+      @SerializedName("AUTO_RENTAL")
+      VALUE_AUTO_RENTAL("AUTO_RENTAL"),
+      @SerializedName("BABY")
+      VALUE_BABY("BABY"),
+      @SerializedName("BALLOT_INITIATIVE_OR_REFERENDUM")
+      VALUE_BALLOT_INITIATIVE_OR_REFERENDUM("BALLOT_INITIATIVE_OR_REFERENDUM"),
+      @SerializedName("BEAUTY")
+      VALUE_BEAUTY("BEAUTY"),
+      @SerializedName("BEAUTY_AND_FASHION")
+      VALUE_BEAUTY_AND_FASHION("BEAUTY_AND_FASHION"),
+      @SerializedName("BEER_AND_WINE_AND_LIQUOR_AND_MALT_BEVERAGES")
+      VALUE_BEER_AND_WINE_AND_LIQUOR_AND_MALT_BEVERAGES("BEER_AND_WINE_AND_LIQUOR_AND_MALT_BEVERAGES"),
+      @SerializedName("BOOKSTORES")
+      VALUE_BOOKSTORES("BOOKSTORES"),
+      @SerializedName("BROADCAST_TELEVISION")
+      VALUE_BROADCAST_TELEVISION("BROADCAST_TELEVISION"),
+      @SerializedName("BUSINESS_CONSULTANTS")
+      VALUE_BUSINESS_CONSULTANTS("BUSINESS_CONSULTANTS"),
+      @SerializedName("BUYING_AGENCY")
+      VALUE_BUYING_AGENCY("BUYING_AGENCY"),
+      @SerializedName("CABLE_AND_SATELLITE")
+      VALUE_CABLE_AND_SATELLITE("CABLE_AND_SATELLITE"),
+      @SerializedName("CABLE_TELEVISION")
+      VALUE_CABLE_TELEVISION("CABLE_TELEVISION"),
+      @SerializedName("CALL_CENTER_AND_MESSAGING_SERVICES")
+      VALUE_CALL_CENTER_AND_MESSAGING_SERVICES("CALL_CENTER_AND_MESSAGING_SERVICES"),
+      @SerializedName("CANDIDATE_OR_POLITICIAN")
+      VALUE_CANDIDATE_OR_POLITICIAN("CANDIDATE_OR_POLITICIAN"),
+      @SerializedName("CAREER")
+      VALUE_CAREER("CAREER"),
+      @SerializedName("CAREER_AND_TECH")
+      VALUE_CAREER_AND_TECH("CAREER_AND_TECH"),
+      @SerializedName("CASUAL_DINING")
+      VALUE_CASUAL_DINING("CASUAL_DINING"),
+      @SerializedName("CHRONIC_CONDITIONS_AND_MEDICAL_CAUSES")
+      VALUE_CHRONIC_CONDITIONS_AND_MEDICAL_CAUSES("CHRONIC_CONDITIONS_AND_MEDICAL_CAUSES"),
+      @SerializedName("CIVIC_INFLUENCERS")
+      VALUE_CIVIC_INFLUENCERS("CIVIC_INFLUENCERS"),
+      @SerializedName("CLINICAL_TRIALS")
+      VALUE_CLINICAL_TRIALS("CLINICAL_TRIALS"),
+      @SerializedName("COFFEE")
+      VALUE_COFFEE("COFFEE"),
+      @SerializedName("COMPUTER_AND_SOFTWARE_AND_HARDWARE")
+      VALUE_COMPUTER_AND_SOFTWARE_AND_HARDWARE("COMPUTER_AND_SOFTWARE_AND_HARDWARE"),
+      @SerializedName("CONSOLE_AND_CROSS_PLATFORM_GAMING")
+      VALUE_CONSOLE_AND_CROSS_PLATFORM_GAMING("CONSOLE_AND_CROSS_PLATFORM_GAMING"),
+      @SerializedName("CONSULTING")
+      VALUE_CONSULTING("CONSULTING"),
+      @SerializedName("CONSUMER_ELECTRONICS")
+      VALUE_CONSUMER_ELECTRONICS("CONSUMER_ELECTRONICS"),
+      @SerializedName("COUNSELING_AND_PSYCHOTHERAPY")
+      VALUE_COUNSELING_AND_PSYCHOTHERAPY("COUNSELING_AND_PSYCHOTHERAPY"),
+      @SerializedName("CREATIVE_AGENCY")
+      VALUE_CREATIVE_AGENCY("CREATIVE_AGENCY"),
+      @SerializedName("CREDIT_AND_FINANCING_AND_MORTAGES")
+      VALUE_CREDIT_AND_FINANCING_AND_MORTAGES("CREDIT_AND_FINANCING_AND_MORTAGES"),
+      @SerializedName("CRUISES_AND_MARINE")
+      VALUE_CRUISES_AND_MARINE("CRUISES_AND_MARINE"),
+      @SerializedName("CULTURE_AND_LIFESTYLE")
+      VALUE_CULTURE_AND_LIFESTYLE("CULTURE_AND_LIFESTYLE"),
+      @SerializedName("DATA_ANALYTICS_AND_DATA_MANAGEMENT")
+      VALUE_DATA_ANALYTICS_AND_DATA_MANAGEMENT("DATA_ANALYTICS_AND_DATA_MANAGEMENT"),
+      @SerializedName("DATING_AND_TECHNOLOGY_APPS")
+      VALUE_DATING_AND_TECHNOLOGY_APPS("DATING_AND_TECHNOLOGY_APPS"),
+      @SerializedName("DEPARTMENT_STORE")
+      VALUE_DEPARTMENT_STORE("DEPARTMENT_STORE"),
+      @SerializedName("DESKTOP_SOFTWARE")
+      VALUE_DESKTOP_SOFTWARE("DESKTOP_SOFTWARE"),
+      @SerializedName("DIETING_AND_FITNESS_PROGRAMS")
+      VALUE_DIETING_AND_FITNESS_PROGRAMS("DIETING_AND_FITNESS_PROGRAMS"),
+      @SerializedName("DIGITAL_NATIVE_EDUCATION_OR_TRAINING")
+      VALUE_DIGITAL_NATIVE_EDUCATION_OR_TRAINING("DIGITAL_NATIVE_EDUCATION_OR_TRAINING"),
+      @SerializedName("DRINKING_PLACES")
+      VALUE_DRINKING_PLACES("DRINKING_PLACES"),
+      @SerializedName("EDUCATION_RESOURCES")
+      VALUE_EDUCATION_RESOURCES("EDUCATION_RESOURCES"),
+      @SerializedName("ED_TECH")
+      VALUE_ED_TECH("ED_TECH"),
+      @SerializedName("ELEARNING_AND_MASSIVE_ONLINE_OPEN_COURSES")
+      VALUE_ELEARNING_AND_MASSIVE_ONLINE_OPEN_COURSES("ELEARNING_AND_MASSIVE_ONLINE_OPEN_COURSES"),
+      @SerializedName("ELECTION_COMMISSION")
+      VALUE_ELECTION_COMMISSION("ELECTION_COMMISSION"),
+      @SerializedName("ELECTRONICS_AND_APPLIANCES")
+      VALUE_ELECTRONICS_AND_APPLIANCES("ELECTRONICS_AND_APPLIANCES"),
+      @SerializedName("ENGINEERING_AND_DESIGN")
+      VALUE_ENGINEERING_AND_DESIGN("ENGINEERING_AND_DESIGN"),
+      @SerializedName("ENVIRONMENT_AND_ANIMAL_WELFARE")
+      VALUE_ENVIRONMENT_AND_ANIMAL_WELFARE("ENVIRONMENT_AND_ANIMAL_WELFARE"),
+      @SerializedName("ESPORTS")
+      VALUE_ESPORTS("ESPORTS"),
+      @SerializedName("EVENTS")
+      VALUE_EVENTS("EVENTS"),
+      @SerializedName("FARMING_AND_RANCHING")
+      VALUE_FARMING_AND_RANCHING("FARMING_AND_RANCHING"),
+      @SerializedName("FILE_STORAGE_AND_CLOUD_AND_DATA_SERVICES")
+      VALUE_FILE_STORAGE_AND_CLOUD_AND_DATA_SERVICES("FILE_STORAGE_AND_CLOUD_AND_DATA_SERVICES"),
+      @SerializedName("FINANCE")
+      VALUE_FINANCE("FINANCE"),
+      @SerializedName("FIN_TECH")
+      VALUE_FIN_TECH("FIN_TECH"),
+      @SerializedName("FISHING_AND_HUNTING_AND_FORESTRY_AND_LOGGING")
+      VALUE_FISHING_AND_HUNTING_AND_FORESTRY_AND_LOGGING("FISHING_AND_HUNTING_AND_FORESTRY_AND_LOGGING"),
+      @SerializedName("FITNESS")
+      VALUE_FITNESS("FITNESS"),
+      @SerializedName("FOOD")
+      VALUE_FOOD("FOOD"),
+      @SerializedName("FOOTWEAR")
+      VALUE_FOOTWEAR("FOOTWEAR"),
+      @SerializedName("FOR_PROFIT_COLLEGES_AND_UNIVERSITIES")
+      VALUE_FOR_PROFIT_COLLEGES_AND_UNIVERSITIES("FOR_PROFIT_COLLEGES_AND_UNIVERSITIES"),
+      @SerializedName("FULL_SERVICE_AGENCY")
+      VALUE_FULL_SERVICE_AGENCY("FULL_SERVICE_AGENCY"),
+      @SerializedName("GOVERNMENT_CONTROLLED_ENTITY")
+      VALUE_GOVERNMENT_CONTROLLED_ENTITY("GOVERNMENT_CONTROLLED_ENTITY"),
+      @SerializedName("GOVERNMENT_DEPARTMENT_OR_AGENCY")
+      VALUE_GOVERNMENT_DEPARTMENT_OR_AGENCY("GOVERNMENT_DEPARTMENT_OR_AGENCY"),
+      @SerializedName("GOVERNMENT_OFFICIAL")
+      VALUE_GOVERNMENT_OFFICIAL("GOVERNMENT_OFFICIAL"),
+      @SerializedName("GOVERNMENT_OWNED_MEDIA")
+      VALUE_GOVERNMENT_OWNED_MEDIA("GOVERNMENT_OWNED_MEDIA"),
+      @SerializedName("GROCERY_AND_DRUG_AND_CONVENIENCE")
+      VALUE_GROCERY_AND_DRUG_AND_CONVENIENCE("GROCERY_AND_DRUG_AND_CONVENIENCE"),
+      @SerializedName("HEAD_OF_STATE")
+      VALUE_HEAD_OF_STATE("HEAD_OF_STATE"),
+      @SerializedName("HEALTH_INSURANCE")
+      VALUE_HEALTH_INSURANCE("HEALTH_INSURANCE"),
+      @SerializedName("HEALTH_SYSTEMS_AND_PRACTITIONERS")
+      VALUE_HEALTH_SYSTEMS_AND_PRACTITIONERS("HEALTH_SYSTEMS_AND_PRACTITIONERS"),
+      @SerializedName("HEALTH_TECH")
+      VALUE_HEALTH_TECH("HEALTH_TECH"),
+      @SerializedName("HOME_AND_FURNITURE_AND_OFFICE")
+      VALUE_HOME_AND_FURNITURE_AND_OFFICE("HOME_AND_FURNITURE_AND_OFFICE"),
+      @SerializedName("HOME_IMPROVEMENT")
+      VALUE_HOME_IMPROVEMENT("HOME_IMPROVEMENT"),
+      @SerializedName("HOME_INSURANCE")
+      VALUE_HOME_INSURANCE("HOME_INSURANCE"),
+      @SerializedName("HOME_TECH")
+      VALUE_HOME_TECH("HOME_TECH"),
+      @SerializedName("HOTEL_AND_ACCOMODATION")
+      VALUE_HOTEL_AND_ACCOMODATION("HOTEL_AND_ACCOMODATION"),
+      @SerializedName("HOUSEHOLD_GOODS_DURABLE")
+      VALUE_HOUSEHOLD_GOODS_DURABLE("HOUSEHOLD_GOODS_DURABLE"),
+      @SerializedName("HOUSEHOLD_GOODS_NON_DURABLE")
+      VALUE_HOUSEHOLD_GOODS_NON_DURABLE("HOUSEHOLD_GOODS_NON_DURABLE"),
+      @SerializedName("HR_AND_FINANCIAL_MANAGEMENT")
+      VALUE_HR_AND_FINANCIAL_MANAGEMENT("HR_AND_FINANCIAL_MANAGEMENT"),
+      @SerializedName("HUMANITARIAN_OR_DISASTER_RELIEF")
+      VALUE_HUMANITARIAN_OR_DISASTER_RELIEF("HUMANITARIAN_OR_DISASTER_RELIEF"),
+      @SerializedName("INDEPENDENT_EXPENDITURE_GROUP")
+      VALUE_INDEPENDENT_EXPENDITURE_GROUP("INDEPENDENT_EXPENDITURE_GROUP"),
+      @SerializedName("INSURANCE_TECH")
+      VALUE_INSURANCE_TECH("INSURANCE_TECH"),
+      @SerializedName("INTERNATIONAL_ORGANIZATON")
+      VALUE_INTERNATIONAL_ORGANIZATON("INTERNATIONAL_ORGANIZATON"),
+      @SerializedName("INVESTMENT_BANK_AND_BROKERAGE")
+      VALUE_INVESTMENT_BANK_AND_BROKERAGE("INVESTMENT_BANK_AND_BROKERAGE"),
+      @SerializedName("ISSUE_ADVOCACY")
+      VALUE_ISSUE_ADVOCACY("ISSUE_ADVOCACY"),
+      @SerializedName("LEGAL")
+      VALUE_LEGAL("LEGAL"),
+      @SerializedName("LIFE_INSURANCE")
+      VALUE_LIFE_INSURANCE("LIFE_INSURANCE"),
+      @SerializedName("LOGISTICS_AND_TRANSPORTATION_AND_FLEET_MANAGEMENT")
+      VALUE_LOGISTICS_AND_TRANSPORTATION_AND_FLEET_MANAGEMENT("LOGISTICS_AND_TRANSPORTATION_AND_FLEET_MANAGEMENT"),
+      @SerializedName("MANUFACTURING")
+      VALUE_MANUFACTURING("MANUFACTURING"),
+      @SerializedName("MEDICAL_DEVICES_AND_SUPPLIES_AND_EQUIPMENT")
+      VALUE_MEDICAL_DEVICES_AND_SUPPLIES_AND_EQUIPMENT("MEDICAL_DEVICES_AND_SUPPLIES_AND_EQUIPMENT"),
+      @SerializedName("MEDSPA_AND_ELECTIVE_SURGERIES_AND_ALTERNATIVE_MEDICINE")
+      VALUE_MEDSPA_AND_ELECTIVE_SURGERIES_AND_ALTERNATIVE_MEDICINE("MEDSPA_AND_ELECTIVE_SURGERIES_AND_ALTERNATIVE_MEDICINE"),
+      @SerializedName("MINING_AND_QUARRYING")
+      VALUE_MINING_AND_QUARRYING("MINING_AND_QUARRYING"),
+      @SerializedName("MOBILE_GAMING")
+      VALUE_MOBILE_GAMING("MOBILE_GAMING"),
+      @SerializedName("MOVIES")
+      VALUE_MOVIES("MOVIES"),
+      @SerializedName("MUSEUMS_AND_PARKS_AND_LIBRARIES")
+      VALUE_MUSEUMS_AND_PARKS_AND_LIBRARIES("MUSEUMS_AND_PARKS_AND_LIBRARIES"),
+      @SerializedName("MUSIC")
+      VALUE_MUSIC("MUSIC"),
+      @SerializedName("NETWORK_SECURITY_PRODUCTS")
+      VALUE_NETWORK_SECURITY_PRODUCTS("NETWORK_SECURITY_PRODUCTS"),
+      @SerializedName("NEWS_AND_CURRENT_EVENTS")
+      VALUE_NEWS_AND_CURRENT_EVENTS("NEWS_AND_CURRENT_EVENTS"),
+      @SerializedName("NON_PRESCRIPTION")
+      VALUE_NON_PRESCRIPTION("NON_PRESCRIPTION"),
+      @SerializedName("NOT_FOR_PROFIT_COLLEGES_AND_UNIVERSITIES")
+      VALUE_NOT_FOR_PROFIT_COLLEGES_AND_UNIVERSITIES("NOT_FOR_PROFIT_COLLEGES_AND_UNIVERSITIES"),
+      @SerializedName("OFFICE")
+      VALUE_OFFICE("OFFICE"),
+      @SerializedName("OFFICE_OR_BUSINESS_SUPPLIES")
+      VALUE_OFFICE_OR_BUSINESS_SUPPLIES("OFFICE_OR_BUSINESS_SUPPLIES"),
+      @SerializedName("OIL_AND_GAS_AND_CONSUMABLE_FUEL")
+      VALUE_OIL_AND_GAS_AND_CONSUMABLE_FUEL("OIL_AND_GAS_AND_CONSUMABLE_FUEL"),
+      @SerializedName("ONLINE_ONLY_PUBLICATIONS")
+      VALUE_ONLINE_ONLY_PUBLICATIONS("ONLINE_ONLY_PUBLICATIONS"),
+      @SerializedName("PACKAGE_OR_FREIGHT_DELIVERY")
+      VALUE_PACKAGE_OR_FREIGHT_DELIVERY("PACKAGE_OR_FREIGHT_DELIVERY"),
+      @SerializedName("PARTY_INDEPENDENT_EXPENDITURE_GROUP_US")
+      VALUE_PARTY_INDEPENDENT_EXPENDITURE_GROUP_US("PARTY_INDEPENDENT_EXPENDITURE_GROUP_US"),
+      @SerializedName("PAYMENT_PROCESSING_AND_GATEWAY_SOLUTIONS")
+      VALUE_PAYMENT_PROCESSING_AND_GATEWAY_SOLUTIONS("PAYMENT_PROCESSING_AND_GATEWAY_SOLUTIONS"),
+      @SerializedName("PC_GAMING")
+      VALUE_PC_GAMING("PC_GAMING"),
+      @SerializedName("PEOPLE")
+      VALUE_PEOPLE("PEOPLE"),
+      @SerializedName("PERSONAL_CARE")
+      VALUE_PERSONAL_CARE("PERSONAL_CARE"),
+      @SerializedName("PET")
+      VALUE_PET("PET"),
+      @SerializedName("PHOTOGRAPHY_AND_FILMING_SERVICES")
+      VALUE_PHOTOGRAPHY_AND_FILMING_SERVICES("PHOTOGRAPHY_AND_FILMING_SERVICES"),
+      @SerializedName("PIZZA")
+      VALUE_PIZZA("PIZZA"),
+      @SerializedName("PLANNING_AGENCY")
+      VALUE_PLANNING_AGENCY("PLANNING_AGENCY"),
+      @SerializedName("POLITICAL_PARTY_OR_COMMITTEE")
+      VALUE_POLITICAL_PARTY_OR_COMMITTEE("POLITICAL_PARTY_OR_COMMITTEE"),
+      @SerializedName("PRESCRIPTION")
+      VALUE_PRESCRIPTION("PRESCRIPTION"),
+      @SerializedName("PROFESSIONAL_ASSOCIATIONS")
+      VALUE_PROFESSIONAL_ASSOCIATIONS("PROFESSIONAL_ASSOCIATIONS"),
+      @SerializedName("PROPERTY_AND_CASUALTY")
+      VALUE_PROPERTY_AND_CASUALTY("PROPERTY_AND_CASUALTY"),
+      @SerializedName("QUICK_SERVICE")
+      VALUE_QUICK_SERVICE("QUICK_SERVICE"),
+      @SerializedName("RADIO")
+      VALUE_RADIO("RADIO"),
+      @SerializedName("RAILROADS")
+      VALUE_RAILROADS("RAILROADS"),
+      @SerializedName("REAL_ESTATE")
+      VALUE_REAL_ESTATE("REAL_ESTATE"),
+      @SerializedName("REAL_MONEY_GAMING")
+      VALUE_REAL_MONEY_GAMING("REAL_MONEY_GAMING"),
+      @SerializedName("RECREATIONAL")
+      VALUE_RECREATIONAL("RECREATIONAL"),
+      @SerializedName("RELIGIOUS")
+      VALUE_RELIGIOUS("RELIGIOUS"),
+      @SerializedName("RESELLER")
+      VALUE_RESELLER("RESELLER"),
+      @SerializedName("RESIDENTIAL_AND_LONG_TERM_CARE_FACILITIES_AND_OUTPATIENT_CARE_CENTERS")
+      VALUE_RESIDENTIAL_AND_LONG_TERM_CARE_FACILITIES_AND_OUTPATIENT_CARE_CENTERS("RESIDENTIAL_AND_LONG_TERM_CARE_FACILITIES_AND_OUTPATIENT_CARE_CENTERS"),
+      @SerializedName("RETAIL_AND_CREDIT_UNION_AND_COMMERCIAL_BANK")
+      VALUE_RETAIL_AND_CREDIT_UNION_AND_COMMERCIAL_BANK("RETAIL_AND_CREDIT_UNION_AND_COMMERCIAL_BANK"),
+      @SerializedName("RIDE_SHARING_OR_TAXI_SERVICES")
+      VALUE_RIDE_SHARING_OR_TAXI_SERVICES("RIDE_SHARING_OR_TAXI_SERVICES"),
+      @SerializedName("SAFETY_SERVICES")
+      VALUE_SAFETY_SERVICES("SAFETY_SERVICES"),
+      @SerializedName("SCHOLARLY")
+      VALUE_SCHOLARLY("SCHOLARLY"),
+      @SerializedName("SCHOOL_AND_EARLY_CHILDREN_EDCATION")
+      VALUE_SCHOOL_AND_EARLY_CHILDREN_EDCATION("SCHOOL_AND_EARLY_CHILDREN_EDCATION"),
+      @SerializedName("SOCIAL_MEDIA")
+      VALUE_SOCIAL_MEDIA("SOCIAL_MEDIA"),
+      @SerializedName("SOFTWARE_AS_A_SERVICE")
+      VALUE_SOFTWARE_AS_A_SERVICE("SOFTWARE_AS_A_SERVICE"),
+      @SerializedName("SPORTING")
+      VALUE_SPORTING("SPORTING"),
+      @SerializedName("SPORTING_AND_OUTDOOR")
+      VALUE_SPORTING_AND_OUTDOOR("SPORTING_AND_OUTDOOR"),
+      @SerializedName("SPORTS")
+      VALUE_SPORTS("SPORTS"),
+      @SerializedName("SUPERSTORES")
+      VALUE_SUPERSTORES("SUPERSTORES"),
+      @SerializedName("T1_AUTOMOTIVE_MANUFACTURER")
+      VALUE_T1_AUTOMOTIVE_MANUFACTURER("T1_AUTOMOTIVE_MANUFACTURER"),
+      @SerializedName("T1_MOTORCYCLE")
+      VALUE_T1_MOTORCYCLE("T1_MOTORCYCLE"),
+      @SerializedName("T2_DEALER_ASSOCIATIONS")
+      VALUE_T2_DEALER_ASSOCIATIONS("T2_DEALER_ASSOCIATIONS"),
+      @SerializedName("T3_AUTO_AGENCY")
+      VALUE_T3_AUTO_AGENCY("T3_AUTO_AGENCY"),
+      @SerializedName("T3_AUTO_RESELLERS")
+      VALUE_T3_AUTO_RESELLERS("T3_AUTO_RESELLERS"),
+      @SerializedName("T3_DEALER_GROUPS")
+      VALUE_T3_DEALER_GROUPS("T3_DEALER_GROUPS"),
+      @SerializedName("T3_FRANCHISE_DEALER")
+      VALUE_T3_FRANCHISE_DEALER("T3_FRANCHISE_DEALER"),
+      @SerializedName("T3_INDEPENDENT_DEALER")
+      VALUE_T3_INDEPENDENT_DEALER("T3_INDEPENDENT_DEALER"),
+      @SerializedName("T3_PARTS_AND_SERVICES")
+      VALUE_T3_PARTS_AND_SERVICES("T3_PARTS_AND_SERVICES"),
+      @SerializedName("T3_PORTALS")
+      VALUE_T3_PORTALS("T3_PORTALS"),
+      @SerializedName("TELECOMMUNICATIONS_EQUIPMENT_AND_ACCESSORIES")
+      VALUE_TELECOMMUNICATIONS_EQUIPMENT_AND_ACCESSORIES("TELECOMMUNICATIONS_EQUIPMENT_AND_ACCESSORIES"),
+      @SerializedName("TELEPHONE_SERVICE_PROVIDERS_AND_CARRIERS")
+      VALUE_TELEPHONE_SERVICE_PROVIDERS_AND_CARRIERS("TELEPHONE_SERVICE_PROVIDERS_AND_CARRIERS"),
+      @SerializedName("TICKETING")
+      VALUE_TICKETING("TICKETING"),
+      @SerializedName("TOBACCO")
+      VALUE_TOBACCO("TOBACCO"),
+      @SerializedName("TOURISM_AND_TRAVEL_SERVICES")
+      VALUE_TOURISM_AND_TRAVEL_SERVICES("TOURISM_AND_TRAVEL_SERVICES"),
+      @SerializedName("TOURISM_BOARD")
+      VALUE_TOURISM_BOARD("TOURISM_BOARD"),
+      @SerializedName("TOY_AND_HOBBY")
+      VALUE_TOY_AND_HOBBY("TOY_AND_HOBBY"),
+      @SerializedName("TRADE_SCHOOL")
+      VALUE_TRADE_SCHOOL("TRADE_SCHOOL"),
+      @SerializedName("TRAVEL_AGENCIES_AND_GUIDES_AND_OTAS")
+      VALUE_TRAVEL_AGENCIES_AND_GUIDES_AND_OTAS("TRAVEL_AGENCIES_AND_GUIDES_AND_OTAS"),
+      @SerializedName("UTILITIES_AND_ENERGY_EQUIPMENT_AND_SERVICES")
+      VALUE_UTILITIES_AND_ENERGY_EQUIPMENT_AND_SERVICES("UTILITIES_AND_ENERGY_EQUIPMENT_AND_SERVICES"),
+      @SerializedName("VETERINARY_CLINICS_AND_SERVICES")
+      VALUE_VETERINARY_CLINICS_AND_SERVICES("VETERINARY_CLINICS_AND_SERVICES"),
+      @SerializedName("VIDEO_STREAMING")
+      VALUE_VIDEO_STREAMING("VIDEO_STREAMING"),
+      @SerializedName("VIRTUAL_SERVICES")
+      VALUE_VIRTUAL_SERVICES("VIRTUAL_SERVICES"),
+      @SerializedName("VITAMINS_OR_WELLNESS")
+      VALUE_VITAMINS_OR_WELLNESS("VITAMINS_OR_WELLNESS"),
+      @SerializedName("WAREHOUSING_AND_STORAGE")
+      VALUE_WAREHOUSING_AND_STORAGE("WAREHOUSING_AND_STORAGE"),
+      @SerializedName("WATER_AND_SOFT_DRINK_AND_BAVERAGE")
+      VALUE_WATER_AND_SOFT_DRINK_AND_BAVERAGE("WATER_AND_SOFT_DRINK_AND_BAVERAGE"),
+      @SerializedName("WEBSITE_DESIGNERS_OR_GRAPHIC_DESIGNERS")
+      VALUE_WEBSITE_DESIGNERS_OR_GRAPHIC_DESIGNERS("WEBSITE_DESIGNERS_OR_GRAPHIC_DESIGNERS"),
+      @SerializedName("WHOLESALE")
+      VALUE_WHOLESALE("WHOLESALE"),
+      @SerializedName("WIRELESS_SERVICES")
+      VALUE_WIRELESS_SERVICES("WIRELESS_SERVICES"),
+      ;
+
+      private String value;
+
+      private EnumSubverticalV2(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumVerticalV2 {
+      @SerializedName("ADVERTISING_AND_MARKETING")
+      VALUE_ADVERTISING_AND_MARKETING("ADVERTISING_AND_MARKETING"),
+      @SerializedName("AGRICULTURE")
+      VALUE_AGRICULTURE("AGRICULTURE"),
+      @SerializedName("AUTOMOTIVE")
+      VALUE_AUTOMOTIVE("AUTOMOTIVE"),
+      @SerializedName("BANKING_AND_CREDIT_CARDS")
+      VALUE_BANKING_AND_CREDIT_CARDS("BANKING_AND_CREDIT_CARDS"),
+      @SerializedName("BUSINESS_TO_BUSINESS")
+      VALUE_BUSINESS_TO_BUSINESS("BUSINESS_TO_BUSINESS"),
+      @SerializedName("CONSUMER_PACKAGED_GOODS")
+      VALUE_CONSUMER_PACKAGED_GOODS("CONSUMER_PACKAGED_GOODS"),
+      @SerializedName("ECOMMERCE")
+      VALUE_ECOMMERCE("ECOMMERCE"),
+      @SerializedName("EDUCATION")
+      VALUE_EDUCATION("EDUCATION"),
+      @SerializedName("ENERGY_AND_NATURAL_RESOURCES_AND_UTILITIES")
+      VALUE_ENERGY_AND_NATURAL_RESOURCES_AND_UTILITIES("ENERGY_AND_NATURAL_RESOURCES_AND_UTILITIES"),
+      @SerializedName("ENTERTAINMENT_AND_MEDIA")
+      VALUE_ENTERTAINMENT_AND_MEDIA("ENTERTAINMENT_AND_MEDIA"),
+      @SerializedName("GAMING")
+      VALUE_GAMING("GAMING"),
+      @SerializedName("GOVERNMENT")
+      VALUE_GOVERNMENT("GOVERNMENT"),
+      @SerializedName("HEALTHCARE_AND_PHARMACEUTICALS_AND_BIOTECH")
+      VALUE_HEALTHCARE_AND_PHARMACEUTICALS_AND_BIOTECH("HEALTHCARE_AND_PHARMACEUTICALS_AND_BIOTECH"),
+      @SerializedName("INSURANCE")
+      VALUE_INSURANCE("INSURANCE"),
+      @SerializedName("NON_PROFIT")
+      VALUE_NON_PROFIT("NON_PROFIT"),
+      @SerializedName("ORGANIZATIONS_AND_ASSOCIATIONS")
+      VALUE_ORGANIZATIONS_AND_ASSOCIATIONS("ORGANIZATIONS_AND_ASSOCIATIONS"),
+      @SerializedName("POLITICS")
+      VALUE_POLITICS("POLITICS"),
+      @SerializedName("PROFESSIONAL_SERVICES")
+      VALUE_PROFESSIONAL_SERVICES("PROFESSIONAL_SERVICES"),
+      @SerializedName("PUBLISHING")
+      VALUE_PUBLISHING("PUBLISHING"),
+      @SerializedName("RESTAURANTS")
+      VALUE_RESTAURANTS("RESTAURANTS"),
+      @SerializedName("RETAIL")
+      VALUE_RETAIL("RETAIL"),
+      @SerializedName("TECHNOLOGY")
+      VALUE_TECHNOLOGY("TECHNOLOGY"),
+      @SerializedName("TELECOM")
+      VALUE_TELECOM("TELECOM"),
+      @SerializedName("TRAVEL")
+      VALUE_TRAVEL("TRAVEL"),
+      ;
+
+      private String value;
+
+      private EnumVerticalV2(String value) {
         this.value = value;
       }
 
