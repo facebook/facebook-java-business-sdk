@@ -24,6 +24,7 @@ import com.facebook.ads.sdk.APINode;
 import com.facebook.ads.sdk.AdsPixel;
 import com.facebook.ads.sdk.AdsPixel.APIRequestCreateEvent;
 import com.facebook.ads.utils.CustomDataAdapter;
+import com.facebook.ads.utils.AppDataAdapter;
 import com.google.common.util.concurrent.AsyncFunction;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -120,10 +121,10 @@ public class EventRequest {
     } else {
       gson =
           new GsonBuilder()
-              .excludeFieldsWithModifiers(Modifier.STATIC)
-              .excludeFieldsWithModifiers(Modifier.PROTECTED)
+              .excludeFieldsWithModifiers(Modifier.STATIC, Modifier.PROTECTED)
               .disableHtmlEscaping()
               .registerTypeAdapter(CustomData.class, new CustomDataAdapter())
+              .registerTypeAdapter(AppData.class, new AppDataAdapter())
               .create();
     }
 

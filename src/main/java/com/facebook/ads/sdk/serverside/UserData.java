@@ -125,6 +125,9 @@ public class UserData {
   @JsonAdapter(Sha256StringAdaptor.class)
   private String doby = null;
 
+  @SerializedName(ServerSideApiConstants.MOBILE_ADVERTISER_ID)
+  private String madid = null;
+
   /**
    * Default Constructor.
    */
@@ -158,12 +161,13 @@ public class UserData {
    * @param dobd Date of birth day
    * @param dobm Date of birth month
    * @param doby Date of birth year
+   * @param madid Mobile Advertiser ID
    */
   public UserData(String email, String phone, GenderEnum gender, String dateOfBirth,
       String lastName, String firstName, String city, String state, String zipcode,
       String countryCode, String externalId, String clientIpAddress, String clientUserAgent,
       String fbc, String fbp, String subscriptionId, String fbLoginId, String leadId,
-      String f5first, String f5last, String fi, String dobd, String dobm, String doby) {
+      String f5first, String f5last, String fi, String dobd, String dobm, String doby, String madid) {
     this.emails = Arrays.asList(email);
     this.phones = Arrays.asList(phone);
     this.genders = Arrays.asList(gender);
@@ -188,6 +192,7 @@ public class UserData {
     this.dobd = dobd;
     this.dobm = dobm;
     this.doby = doby;
+    this.madid = madid;
   }
 
   /**
@@ -1325,6 +1330,37 @@ public class UserData {
     this.doby = doby;
   }
 
+  /**
+   * Set the mobile advertiser id which is either Apple's Advertising Identifier (IDFA) or
+   * Google Android's advertising ID
+   *
+   * @param madid is the mobile advertiser id
+   * @return UserData
+   */
+  public UserData madid(String madid) {
+    setMadid(madid);
+    return this;
+  }
+
+  /**
+   * The mobile advertiser id
+   *
+   * @return madid
+   */
+  public String getMadid() {
+      return this.madid;
+  }
+
+  /**
+   * Set the mobile advertiser id which is either Apple's Advertising Identifier (IDFA) or
+   * Google Android's advertising ID
+   *
+   * @param madid is the mobile advertiser id
+   */
+  public void setMadid(String madid) {
+      this.madid = madid;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -1357,7 +1393,8 @@ public class UserData {
         && Objects.equals(this.fi, userData.fi)
         && Objects.equals(this.dobd, userData.dobd)
         && Objects.equals(this.dobm, userData.dobm)
-        && Objects.equals(this.doby, userData.doby);
+        && Objects.equals(this.doby, userData.doby)
+        && Objects.equals(this.madid, userData.madid);
   }
 
   @Override
@@ -1386,7 +1423,8 @@ public class UserData {
         fi,
         dobd,
         dobm,
-        doby);
+        doby,
+        madid);
   }
 
   @Override
@@ -1418,6 +1456,7 @@ public class UserData {
     sb.append("    dobd: ").append(toIndentedString(dobd)).append("\n");
     sb.append("    dobm: ").append(toIndentedString(dobm)).append("\n");
     sb.append("    doby: ").append(toIndentedString(doby)).append("\n");
+    sb.append("    madid: ").append(toIndentedString(madid)).append("\n");
     sb.append("}");
     return sb.toString();
   }
