@@ -490,13 +490,13 @@ public class EventRequest {
 
   private ListenableFuture<EventResponse> sendEventToCAPIOnly() throws APIException {
     final AdsPixel.APIRequestCreateEvent event = getPixelCreateEvent();
-    final ListenableFuture pixelFuture = event.executeAsync();
+    final ListenableFuture nodeFuture = event.executeAsync();
     return Futures.transformAsync(
-      pixelFuture,
-      new AsyncFunction<AdsPixel, EventResponse>() {
-        public ListenableFuture<EventResponse> apply(final AdsPixel pixel) {
+      nodeFuture,
+      new AsyncFunction<APINode, EventResponse>() {
+        public ListenableFuture<EventResponse> apply(final APINode node) {
           final EventResponse eventResponse =
-                  gson.fromJson(pixel.getRawResponse(), EventResponse.class);
+                  gson.fromJson(node.getRawResponse(), EventResponse.class);
           context.log(
                   String.format(
                           "Successfully sent %d event(s)", eventResponse.getEventsReceived()));
