@@ -70,4 +70,6 @@ public class ServerSideApiConstants {
     public static final String DOBY = "doby";
 
     public static final String MOBILE_ADVERTISER_ID = "madid";
+
+    public static final String ANONYMOUS_ID = "anon_id";
 }

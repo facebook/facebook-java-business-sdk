@@ -21,9 +21,6 @@ import com.google.gson.annotations.SerializedName;
 
  public class AppData{
 
-    @SerializedName("anon_id")
-    private String anonId = null;
-
     @SerializedName("application_tracking_enabled")
     private boolean applicationTrackingEnabled = false;
 
@@ -37,14 +34,6 @@ import com.google.gson.annotations.SerializedName;
      * Default Constructor.
      */
     public AppData() {
-    }
-
-    public String getAnonId() {
-        return this.anonId;
-    }
-
-    public void setAnonId(String anonId) {
-        this.anonId = anonId;
     }
 
     public boolean isApplicationTrackingEnabled() {
@@ -77,11 +66,6 @@ import com.google.gson.annotations.SerializedName;
 
     public void setExtinfo(ExtendedDeviceInfo extinfo) {
         this.extinfo = extinfo;
-    }
-
-    public AppData anonId(String anonId) {
-        setAnonId(anonId);
-        return this;
     }
 
     public AppData applicationTrackingEnabled(boolean applicationTrackingEnabled) {

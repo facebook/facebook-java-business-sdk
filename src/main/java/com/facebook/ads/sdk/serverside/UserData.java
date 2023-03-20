@@ -128,6 +128,9 @@ public class UserData {
   @SerializedName(ServerSideApiConstants.MOBILE_ADVERTISER_ID)
   private String madid = null;
 
+  @SerializedName(ServerSideApiConstants.ANONYMOUS_ID)
+  private String anonId = null;
+
   /**
    * Default Constructor.
    */
@@ -162,12 +165,13 @@ public class UserData {
    * @param dobm Date of birth month
    * @param doby Date of birth year
    * @param madid Mobile Advertiser ID
+   * @param anonId ID of a person who has installed the app anonymously
    */
   public UserData(String email, String phone, GenderEnum gender, String dateOfBirth,
       String lastName, String firstName, String city, String state, String zipcode,
       String countryCode, String externalId, String clientIpAddress, String clientUserAgent,
       String fbc, String fbp, String subscriptionId, String fbLoginId, String leadId,
-      String f5first, String f5last, String fi, String dobd, String dobm, String doby, String madid) {
+      String f5first, String f5last, String fi, String dobd, String dobm, String doby, String madid, String anonId) {
     this.emails = Arrays.asList(email);
     this.phones = Arrays.asList(phone);
     this.genders = Arrays.asList(gender);
@@ -193,6 +197,7 @@ public class UserData {
     this.dobm = dobm;
     this.doby = doby;
     this.madid = madid;
+    this.anonId = anonId;
   }
 
   /**
@@ -1361,6 +1366,36 @@ public class UserData {
       this.madid = madid;
   }
 
+  /**
+   * Set the ID of a person who has installed the app anonymously
+   *
+   * @param anonId the anonymous id
+   * @return UserData
+   */
+  public UserData anonId(String anonId) {
+    setAnonId(anonId);
+    return this;
+  }
+
+  /**
+   * ID of the person who has installed the app anonymously
+   *
+   * @return anonId
+   */
+  public String getAnonId() {
+    return this.anonId;
+  }
+
+  /**
+   * Set the ID of a person who has installed the app anonymously
+   *
+   * @param anonId
+   * @return void
+   */
+  public void setAnonId(String anonId) {
+    this.anonId = anonId;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -1394,7 +1429,8 @@ public class UserData {
         && Objects.equals(this.dobd, userData.dobd)
         && Objects.equals(this.dobm, userData.dobm)
         && Objects.equals(this.doby, userData.doby)
-        && Objects.equals(this.madid, userData.madid);
+        && Objects.equals(this.madid, userData.madid)
+        && Objects.equals(this.anonId, userData.anonId);
   }
 
   @Override
@@ -1424,7 +1460,8 @@ public class UserData {
         dobd,
         dobm,
         doby,
-        madid);
+        madid,
+        anonId);
   }
 
   @Override
@@ -1457,6 +1494,7 @@ public class UserData {
     sb.append("    dobm: ").append(toIndentedString(dobm)).append("\n");
     sb.append("    doby: ").append(toIndentedString(doby)).append("\n");
     sb.append("    madid: ").append(toIndentedString(madid)).append("\n");
+    sb.append("    anonId: ").append(toIndentedString(anonId)).append("\n");
     sb.append("}");
     return sb.toString();
   }
