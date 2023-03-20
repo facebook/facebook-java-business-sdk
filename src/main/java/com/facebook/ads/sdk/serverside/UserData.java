@@ -125,6 +125,12 @@ public class UserData {
   @JsonAdapter(Sha256StringAdaptor.class)
   private String doby = null;
 
+  @SerializedName(ServerSideApiConstants.MOBILE_ADVERTISER_ID)
+  private String madid = null;
+
+  @SerializedName(ServerSideApiConstants.ANONYMOUS_ID)
+  private String anonId = null;
+
   /**
    * Default Constructor.
    */
@@ -158,12 +164,14 @@ public class UserData {
    * @param dobd Date of birth day
    * @param dobm Date of birth month
    * @param doby Date of birth year
+   * @param madid Mobile Advertiser ID
+   * @param anonId ID of a person who has installed the app anonymously
    */
   public UserData(String email, String phone, GenderEnum gender, String dateOfBirth,
       String lastName, String firstName, String city, String state, String zipcode,
       String countryCode, String externalId, String clientIpAddress, String clientUserAgent,
       String fbc, String fbp, String subscriptionId, String fbLoginId, String leadId,
-      String f5first, String f5last, String fi, String dobd, String dobm, String doby) {
+      String f5first, String f5last, String fi, String dobd, String dobm, String doby, String madid, String anonId) {
     this.emails = Arrays.asList(email);
     this.phones = Arrays.asList(phone);
     this.genders = Arrays.asList(gender);
@@ -188,6 +196,8 @@ public class UserData {
     this.dobd = dobd;
     this.dobm = dobm;
     this.doby = doby;
+    this.madid = madid;
+    this.anonId = anonId;
   }
 
   /**
@@ -1325,6 +1335,67 @@ public class UserData {
     this.doby = doby;
   }
 
+  /**
+   * Set the mobile advertiser id which is either Apple's Advertising Identifier (IDFA) or
+   * Google Android's advertising ID
+   *
+   * @param madid is the mobile advertiser id
+   * @return UserData
+   */
+  public UserData madid(String madid) {
+    setMadid(madid);
+    return this;
+  }
+
+  /**
+   * The mobile advertiser id
+   *
+   * @return madid
+   */
+  public String getMadid() {
+      return this.madid;
+  }
+
+  /**
+   * Set the mobile advertiser id which is either Apple's Advertising Identifier (IDFA) or
+   * Google Android's advertising ID
+   *
+   * @param madid is the mobile advertiser id
+   */
+  public void setMadid(String madid) {
+      this.madid = madid;
+  }
+
+  /**
+   * Set the ID of a person who has installed the app anonymously
+   *
+   * @param anonId the anonymous id
+   * @return UserData
+   */
+  public UserData anonId(String anonId) {
+    setAnonId(anonId);
+    return this;
+  }
+
+  /**
+   * ID of the person who has installed the app anonymously
+   *
+   * @return anonId
+   */
+  public String getAnonId() {
+    return this.anonId;
+  }
+
+  /**
+   * Set the ID of a person who has installed the app anonymously
+   *
+   * @param anonId
+   * @return void
+   */
+  public void setAnonId(String anonId) {
+    this.anonId = anonId;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -1357,7 +1428,9 @@ public class UserData {
         && Objects.equals(this.fi, userData.fi)
         && Objects.equals(this.dobd, userData.dobd)
         && Objects.equals(this.dobm, userData.dobm)
-        && Objects.equals(this.doby, userData.doby);
+        && Objects.equals(this.doby, userData.doby)
+        && Objects.equals(this.madid, userData.madid)
+        && Objects.equals(this.anonId, userData.anonId);
   }
 
   @Override
@@ -1386,7 +1459,9 @@ public class UserData {
         fi,
         dobd,
         dobm,
-        doby);
+        doby,
+        madid,
+        anonId);
   }
 
   @Override
@@ -1418,6 +1493,8 @@ public class UserData {
     sb.append("    dobd: ").append(toIndentedString(dobd)).append("\n");
     sb.append("    dobm: ").append(toIndentedString(dobm)).append("\n");
     sb.append("    doby: ").append(toIndentedString(doby)).append("\n");
+    sb.append("    madid: ").append(toIndentedString(madid)).append("\n");
+    sb.append("    anonId: ").append(toIndentedString(anonId)).append("\n");
     sb.append("}");
     return sb.toString();
   }
