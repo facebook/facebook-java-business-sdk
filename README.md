@@ -1,9 +1,7 @@
 # Facebook Business SDK for Java
 
-**BREAKING CHANGES NOTES (v3.0.0)**: New Release for the Java SDK (v3.0.0) includes following breaking changes:
-
-* **API version upgrade:** The new SDK version calls Facebook Graph API endpoints related to the Pages, Instagram, Business Manager, and Marketing products. Classes now use new fields/params/endpoints. Please refer to the <a href="https://developers.facebook.com/docs/graph-api/changelog" target="_blank">Graph API Changelog</a> for details.
-
+[![Maven Central](https://img.shields.io/maven-central/v/com.facebook.business.sdk/facebook-java-business-sdk)](https://mvnrepository.com/artifact/com.facebook.business.sdk/facebook-java-business-sdk)
+[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Ffacebook%2Ffacebook-java-business-sdk%2Fbadge%3Fref%3Dmain&style=flat)](https://actions-badge.atrox.dev/facebook/facebook-java-business-sdk/goto?ref=main)
 
 ## Introduction
 
