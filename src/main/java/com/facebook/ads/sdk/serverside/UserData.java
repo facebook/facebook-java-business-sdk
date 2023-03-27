@@ -1389,8 +1389,7 @@ public class UserData {
   /**
    * Set the ID of a person who has installed the app anonymously
    *
-   * @param anonId
-   * @return void
+   * @param anonId the anonymous Id
    */
   public void setAnonId(String anonId) {
     this.anonId = anonId;

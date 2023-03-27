@@ -438,6 +438,7 @@ public class Event {
    * Set appData for the event.
    * @param appData contains app data and device information for events happening from an app
    * @see <a href="https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/server-event#app_data">App Data for the event</a>
+   * @return Event
    */
   public Event appData(AppData appData) {
     this.appData = appData;
@@ -447,7 +448,7 @@ public class Event {
   /**
    * Get appData
    *
-   * @return appData
+   * @return AppData
    */
    public AppData getAppData() {
      return appData;
