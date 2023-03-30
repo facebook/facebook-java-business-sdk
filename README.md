@@ -1,11 +1,12 @@
 # Facebook Business SDK for Java
 
 [![Maven Central](https://img.shields.io/maven-central/v/com.facebook.business.sdk/facebook-java-business-sdk)](https://mvnrepository.com/artifact/com.facebook.business.sdk/facebook-java-business-sdk)
+[![License](https://img.shields.io/badge/license-Facebook%20Platform-blue.svg?style=flat-square)](https://github.com/facebook/facebook-java-business-sdk/blob/main/LICENSE.txt)
 [![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Ffacebook%2Ffacebook-java-business-sdk%2Fbadge%3Fref%3Dmain&style=flat)](https://actions-badge.atrox.dev/facebook/facebook-java-business-sdk/goto?ref=main)
 
 ## Introduction
 
-The Facebook <a href="https://developers.facebook.com/docs/business-sdk" target="_blank">Business SDK</a> is a one-stop shop to help our partners better serve their businesses. Partners are using multiple Facebook API's to server the needs of their clients. Adopting all these API's and keeping them up to date across the various platforms can be time consuming and ultimately prohibitive. For this reason Facebook has developed the Business SDK bundling many of its APIs into one SDK to ease implementation and upkeep. The Business SDK is an upgraded version of the Marketing API SDK that includes the Marketing API as well as many Facebook APIs from different platforms such as Pages, Business Manager, Instagram, etc.
+The Facebook <a href="https://developers.facebook.com/docs/business-sdk" target="_blank">Business SDK</a> is a one-stop shop to help our partners better serve their businesses. Partners are using multiple Facebook API's to serve the needs of their clients. Adopting all these API's and keeping them up to date across the various platforms can be time consuming and ultimately prohibitive. For this reason Facebook has developed the Business SDK bundling many of its APIs into one SDK to ease implementation and upkeep. The Business SDK is an upgraded version of the Marketing API SDK that includes the Marketing API as well as many Facebook APIs from different platforms such as Pages, Business Manager, Instagram, etc.
 
 ``facebook-java-business-sdk`` is a Java library that provides an interface
 between your Java application and Facebook's
@@ -297,7 +298,7 @@ If you believe that certain fields are returned from server, but they are missin
 
 	campaign.getRawResponseAsJsonObject().get("field").getAsString();
 
-This situation can occasionally happen if new fields are added to server response while SDK is not up-to-date. We'll update the SDK periodically to include new fields.
+This situation can occasionally happen if new fields are added to serve response while SDK is not up-to-date. We'll update the SDK periodically to include new fields.
 
 #### Ad-hoc APIRequest
 Most of Marketing API can be found in SDK classes. If you don't find the one you want to access, it is possible to construct an Ad-hoc APIRequest:
