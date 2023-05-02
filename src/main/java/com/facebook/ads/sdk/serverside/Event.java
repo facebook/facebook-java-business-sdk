@@ -61,6 +61,9 @@ public class Event {
   @SerializedName("app_data")
   private AppData appData = null;
 
+  @SerializedName("advanced_measurement_table")
+  private String advancedMeasurementTable = null;
+
   /**
    * Default Constructor.
    */
@@ -82,10 +85,12 @@ public class Event {
    * @param dataProcessingOptionsState state that you want to associate with this data processing option.
    * @param actionSource Where the conversion occurred.
    * @param appData AppData object that contains app data and device information
+   * @param advancedMeasurementTable Only used for Advanced Measurement in the Advanced Analytics product.
    */
   public Event(String eventName, Long eventTime, String eventSourceUrl, Boolean optOut,
       String eventId, UserData userData, CustomData customData, String[] dataProcessingOptions,
-      Integer dataProcessingOptionsCountry, Integer dataProcessingOptionsState, ActionSource actionSource, AppData appData) {
+      Integer dataProcessingOptionsCountry, Integer dataProcessingOptionsState, ActionSource actionSource, AppData appData,
+      String advancedMeasurementTable) {
     this.eventName = eventName;
     this.eventTime = eventTime;
     this.eventSourceUrl = eventSourceUrl;
@@ -98,6 +103,7 @@ public class Event {
     this.dataProcessingOptionsState = dataProcessingOptionsState;
     this.actionSource = actionSource;
     this.appData = appData;
+    this.advancedMeasurementTable = advancedMeasurementTable;
   }
 
   /**
@@ -461,6 +467,35 @@ public class Event {
    */
   public void setAppData(AppData appData) {
     this.appData = appData;
+  }
+
+  /**
+   * Set advancedMeasurementTable for the event.
+   *
+   * @param advancedMeasurementTable The target table for Advanced Measurement in Advanced Analytics.
+   * @return Event
+   */
+  public Event advancedMeasurementTable(String advancedMeasurementTable) {
+    this.advancedMeasurementTable = advancedMeasurementTable;
+    return this;
+  }
+
+  /**
+   * Get advancedMeasurementTable
+   *
+   * @return advancedMeasurementTable
+   */
+  public String getAdvancedMeasurementTable() {
+    return advancedMeasurementTable;
+  }
+
+  /**
+   * Set advancedMeasurementTable for the event.
+   *
+   * @param advancedMeasurementTable The target table for Advanced Measurement in Advanced Analytics.
+   */
+  public void setAdvancedMeasurementTable(String advancedMeasurementTable) {
+    this.advancedMeasurementTable = advancedMeasurementTable;
   }
 
   @Override
