@@ -66,7 +66,7 @@ public class AdAccountDeliveryEstimate extends APINode {
   @SerializedName("estimate_ready")
   private Boolean mEstimateReady = null;
   @SerializedName("targeting_optimization_types")
-  private Map<String, Long> mTargetingOptimizationTypes = null;
+  private List<com.facebook.ads.sdk.customtype.TargetingOptimizationTuple> mTargetingOptimizationTypes = null;
   protected static Gson gson = null;
 
   public AdAccountDeliveryEstimate() {
@@ -268,11 +268,11 @@ public class AdAccountDeliveryEstimate extends APINode {
     return this;
   }
 
-  public Map<String, Long> getFieldTargetingOptimizationTypes() {
+  public List<com.facebook.ads.sdk.customtype.TargetingOptimizationTuple> getFieldTargetingOptimizationTypes() {
     return mTargetingOptimizationTypes;
   }
 
-  public AdAccountDeliveryEstimate setFieldTargetingOptimizationTypes(Map<String, Long> value) {
+  public AdAccountDeliveryEstimate setFieldTargetingOptimizationTypes(List<com.facebook.ads.sdk.customtype.TargetingOptimizationTuple> value) {
     this.mTargetingOptimizationTypes = value;
     return this;
   }
