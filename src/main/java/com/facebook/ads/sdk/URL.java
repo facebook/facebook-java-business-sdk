@@ -55,14 +55,10 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class URL extends APINode {
-  @SerializedName("development_instant_article")
-  private InstantArticle mDevelopmentInstantArticle = null;
   @SerializedName("engagement")
   private Object mEngagement = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("instant_article")
-  private InstantArticle mInstantArticle = null;
   @SerializedName("og_object")
   private Object mOgObject = null;
   @SerializedName("ownership_permissions")
@@ -287,26 +283,12 @@ public class URL extends APINode {
   }
 
 
-  public InstantArticle getFieldDevelopmentInstantArticle() {
-    if (mDevelopmentInstantArticle != null) {
-      mDevelopmentInstantArticle.context = getContext();
-    }
-    return mDevelopmentInstantArticle;
-  }
-
   public Object getFieldEngagement() {
     return mEngagement;
   }
 
   public String getFieldId() {
     return mId;
-  }
-
-  public InstantArticle getFieldInstantArticle() {
-    if (mInstantArticle != null) {
-      mInstantArticle.context = getContext();
-    }
-    return mInstantArticle;
   }
 
   public Object getFieldOgObject() {
@@ -334,10 +316,8 @@ public class URL extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "development_instant_article",
       "engagement",
       "id",
-      "instant_article",
       "og_object",
       "ownership_permissions",
       "scopes",
@@ -432,13 +412,6 @@ public class URL extends APINode {
       return this;
     }
 
-    public APIRequestGet requestDevelopmentInstantArticleField () {
-      return this.requestDevelopmentInstantArticleField(true);
-    }
-    public APIRequestGet requestDevelopmentInstantArticleField (boolean value) {
-      this.requestField("development_instant_article", value);
-      return this;
-    }
     public APIRequestGet requestEngagementField () {
       return this.requestEngagementField(true);
     }
@@ -451,13 +424,6 @@ public class URL extends APINode {
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestInstantArticleField () {
-      return this.requestInstantArticleField(true);
-    }
-    public APIRequestGet requestInstantArticleField (boolean value) {
-      this.requestField("instant_article", value);
       return this;
     }
     public APIRequestGet requestOgObjectField () {
@@ -673,10 +639,8 @@ public class URL extends APINode {
   }
 
   public URL copyFrom(URL instance) {
-    this.mDevelopmentInstantArticle = instance.mDevelopmentInstantArticle;
     this.mEngagement = instance.mEngagement;
     this.mId = instance.mId;
-    this.mInstantArticle = instance.mInstantArticle;
     this.mOgObject = instance.mOgObject;
     this.mOwnershipPermissions = instance.mOwnershipPermissions;
     this.mScopes = instance.mScopes;

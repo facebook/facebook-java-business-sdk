@@ -65,8 +65,6 @@ public class SavedAudience extends APINode {
   private Long mDeleteTime = null;
   @SerializedName("description")
   private String mDescription = null;
-  @SerializedName("extra_info")
-  private String mExtraInfo = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("name")
@@ -326,10 +324,6 @@ public class SavedAudience extends APINode {
     return mDescription;
   }
 
-  public String getFieldExtraInfo() {
-    return mExtraInfo;
-  }
-
   public String getFieldId() {
     return mId;
   }
@@ -395,7 +389,6 @@ public class SavedAudience extends APINode {
       "approximate_count_upper_bound",
       "delete_time",
       "description",
-      "extra_info",
       "id",
       "name",
       "operation_status",
@@ -533,13 +526,6 @@ public class SavedAudience extends APINode {
       this.requestField("description", value);
       return this;
     }
-    public APIRequestGet requestExtraInfoField () {
-      return this.requestExtraInfoField(true);
-    }
-    public APIRequestGet requestExtraInfoField (boolean value) {
-      this.requestField("extra_info", value);
-      return this;
-    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -639,7 +625,6 @@ public class SavedAudience extends APINode {
     this.mApproximateCountUpperBound = instance.mApproximateCountUpperBound;
     this.mDeleteTime = instance.mDeleteTime;
     this.mDescription = instance.mDescription;
-    this.mExtraInfo = instance.mExtraInfo;
     this.mId = instance.mId;
     this.mName = instance.mName;
     this.mOperationStatus = instance.mOperationStatus;

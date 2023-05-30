@@ -360,6 +360,10 @@ public class AdsPixel extends APINode {
     return new APIRequestGetOfflineEventUploads(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetOpenBridgeConfigurations getOpenBridgeConfigurations() {
+    return new APIRequestGetOpenBridgeConfigurations(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateShadowTrafficHelper createShadowTrafficHelper() {
     return new APIRequestCreateShadowTrafficHelper(this.getPrefixedId().toString(), context);
   }
@@ -577,7 +581,6 @@ public class AdsPixel extends APINode {
       "fb_entity",
       "funding_source",
       "funding_source_details",
-      "has_advertiser_opted_in_odax",
       "has_migrated_permissions",
       "has_page_authorized_adaccount",
       "id",
@@ -911,13 +914,6 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetAdAccounts requestFundingSourceDetailsField (boolean value) {
       this.requestField("funding_source_details", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestHasAdvertiserOptedInOdaxField () {
-      return this.requestHasAdvertiserOptedInOdaxField(true);
-    }
-    public APIRequestGetAdAccounts requestHasAdvertiserOptedInOdaxField (boolean value) {
-      this.requestField("has_advertiser_opted_in_odax", value);
       return this;
     }
     public APIRequestGetAdAccounts requestHasMigratedPermissionsField () {
@@ -2404,6 +2400,166 @@ public class AdsPixel extends APINode {
     }
   }
 
+  public static class APIRequestGetOpenBridgeConfigurations extends APIRequest<OpenBridgeConfiguration> {
+
+    APINodeList<OpenBridgeConfiguration> lastResponse = null;
+    @Override
+    public APINodeList<OpenBridgeConfiguration> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "access_key",
+      "active",
+      "endpoint",
+      "host_business_id",
+      "host_external_id",
+      "id",
+      "pixel_id",
+    };
+
+    @Override
+    public APINodeList<OpenBridgeConfiguration> parseResponse(String response, String header) throws APIException {
+      return OpenBridgeConfiguration.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<OpenBridgeConfiguration> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<OpenBridgeConfiguration> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<OpenBridgeConfiguration>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<OpenBridgeConfiguration>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<OpenBridgeConfiguration>>() {
+           public APINodeList<OpenBridgeConfiguration> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetOpenBridgeConfigurations.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetOpenBridgeConfigurations(String nodeId, APIContext context) {
+      super(context, nodeId, "/openbridge_configurations", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetOpenBridgeConfigurations setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOpenBridgeConfigurations setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetOpenBridgeConfigurations requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetOpenBridgeConfigurations requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOpenBridgeConfigurations requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetOpenBridgeConfigurations requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOpenBridgeConfigurations requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOpenBridgeConfigurations requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetOpenBridgeConfigurations requestAccessKeyField () {
+      return this.requestAccessKeyField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestAccessKeyField (boolean value) {
+      this.requestField("access_key", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestActiveField () {
+      return this.requestActiveField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestActiveField (boolean value) {
+      this.requestField("active", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestEndpointField () {
+      return this.requestEndpointField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestEndpointField (boolean value) {
+      this.requestField("endpoint", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestHostBusinessIdField () {
+      return this.requestHostBusinessIdField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestHostBusinessIdField (boolean value) {
+      this.requestField("host_business_id", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestHostExternalIdField () {
+      return this.requestHostExternalIdField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestHostExternalIdField (boolean value) {
+      this.requestField("host_external_id", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestPixelIdField () {
+      return this.requestPixelIdField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestPixelIdField (boolean value) {
+      this.requestField("pixel_id", value);
+      return this;
+    }
+  }
+
   public static class APIRequestCreateShadowTrafficHelper extends APIRequest<APINode> {
 
     APINode lastResponse = null;
@@ -2665,7 +2821,6 @@ public class AdsPixel extends APINode {
       "fb_entity",
       "funding_source",
       "funding_source_details",
-      "has_advertiser_opted_in_odax",
       "has_migrated_permissions",
       "has_page_authorized_adaccount",
       "id",
@@ -2999,13 +3154,6 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetSharedAccounts requestFundingSourceDetailsField (boolean value) {
       this.requestField("funding_source_details", value);
-      return this;
-    }
-    public APIRequestGetSharedAccounts requestHasAdvertiserOptedInOdaxField () {
-      return this.requestHasAdvertiserOptedInOdaxField(true);
-    }
-    public APIRequestGetSharedAccounts requestHasAdvertiserOptedInOdaxField (boolean value) {
-      this.requestField("has_advertiser_opted_in_odax", value);
       return this;
     }
     public APIRequestGetSharedAccounts requestHasMigratedPermissionsField () {

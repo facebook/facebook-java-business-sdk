@@ -65,8 +65,6 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mActionValues = null;
   @SerializedName("actions")
   private List<AdsActionStats> mActions = null;
-  @SerializedName("ad_bid_value")
-  private String mAdBidValue = null;
   @SerializedName("ad_click_actions")
   private List<AdsActionStats> mAdClickActions = null;
   @SerializedName("ad_id")
@@ -75,8 +73,6 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mAdImpressionActions = null;
   @SerializedName("ad_name")
   private String mAdName = null;
-  @SerializedName("adset_bid_value")
-  private String mAdsetBidValue = null;
   @SerializedName("adset_end")
   private String mAdsetEnd = null;
   @SerializedName("adset_id")
@@ -169,6 +165,8 @@ public class AdsInsights extends APINode {
   private String mCpp = null;
   @SerializedName("created_time")
   private String mCreatedTime = null;
+  @SerializedName("creative_media_type")
+  private String mCreativeMediaType = null;
   @SerializedName("ctr")
   private String mCtr = null;
   @SerializedName("date_start")
@@ -209,6 +207,8 @@ public class AdsInsights extends APINode {
   private String mInlineLinkClicks = null;
   @SerializedName("inline_post_engagement")
   private String mInlinePostEngagement = null;
+  @SerializedName("instagram_upcoming_event_reminders_set")
+  private String mInstagramUpcomingEventRemindersSet = null;
   @SerializedName("instant_experience_clicks_to_open")
   private String mInstantExperienceClicksToOpen = null;
   @SerializedName("instant_experience_clicks_to_start")
@@ -255,6 +255,8 @@ public class AdsInsights extends APINode {
   private String mTotalPostbacks = null;
   @SerializedName("total_postbacks_detailed")
   private List<AdsActionStats> mTotalPostbacksDetailed = null;
+  @SerializedName("total_postbacks_detailed_v4")
+  private String mTotalPostbacksDetailedV4 = null;
   @SerializedName("unique_actions")
   private List<AdsActionStats> mUniqueActions = null;
   @SerializedName("unique_clicks")
@@ -523,15 +525,6 @@ public class AdsInsights extends APINode {
     this.mActions = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
-  public String getFieldAdBidValue() {
-    return mAdBidValue;
-  }
-
-  public AdsInsights setFieldAdBidValue(String value) {
-    this.mAdBidValue = value;
-    return this;
-  }
-
   public List<AdsActionStats> getFieldAdClickActions() {
     return mAdClickActions;
   }
@@ -575,15 +568,6 @@ public class AdsInsights extends APINode {
 
   public AdsInsights setFieldAdName(String value) {
     this.mAdName = value;
-    return this;
-  }
-
-  public String getFieldAdsetBidValue() {
-    return mAdsetBidValue;
-  }
-
-  public AdsInsights setFieldAdsetBidValue(String value) {
-    this.mAdsetBidValue = value;
     return this;
   }
 
@@ -1101,6 +1085,15 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public String getFieldCreativeMediaType() {
+    return mCreativeMediaType;
+  }
+
+  public AdsInsights setFieldCreativeMediaType(String value) {
+    this.mCreativeMediaType = value;
+    return this;
+  }
+
   public String getFieldCtr() {
     return mCtr;
   }
@@ -1278,6 +1271,15 @@ public class AdsInsights extends APINode {
 
   public AdsInsights setFieldInlinePostEngagement(String value) {
     this.mInlinePostEngagement = value;
+    return this;
+  }
+
+  public String getFieldInstagramUpcomingEventRemindersSet() {
+    return mInstagramUpcomingEventRemindersSet;
+  }
+
+  public AdsInsights setFieldInstagramUpcomingEventRemindersSet(String value) {
+    this.mInstagramUpcomingEventRemindersSet = value;
     return this;
   }
 
@@ -1523,6 +1525,15 @@ public class AdsInsights extends APINode {
     this.mTotalPostbacksDetailed = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
+  public String getFieldTotalPostbacksDetailedV4() {
+    return mTotalPostbacksDetailedV4;
+  }
+
+  public AdsInsights setFieldTotalPostbacksDetailedV4(String value) {
+    this.mTotalPostbacksDetailedV4 = value;
+    return this;
+  }
+
   public List<AdsActionStats> getFieldUniqueActions() {
     return mUniqueActions;
   }
@@ -2006,6 +2017,8 @@ public class AdsInsights extends APINode {
       VALUE_BODY_ASSET("body_asset"),
       @SerializedName("call_to_action_asset")
       VALUE_CALL_TO_ACTION_ASSET("call_to_action_asset"),
+      @SerializedName("coarse_conversion_value")
+      VALUE_COARSE_CONVERSION_VALUE("coarse_conversion_value"),
       @SerializedName("country")
       VALUE_COUNTRY("country"),
       @SerializedName("description_asset")
@@ -2014,6 +2027,8 @@ public class AdsInsights extends APINode {
       VALUE_DEVICE_PLATFORM("device_platform"),
       @SerializedName("dma")
       VALUE_DMA("dma"),
+      @SerializedName("fidelity_type")
+      VALUE_FIDELITY_TYPE("fidelity_type"),
       @SerializedName("frequency_value")
       VALUE_FREQUENCY_VALUE("frequency_value"),
       @SerializedName("gender")
@@ -2022,6 +2037,8 @@ public class AdsInsights extends APINode {
       VALUE_HOURLY_STATS_AGGREGATED_BY_ADVERTISER_TIME_ZONE("hourly_stats_aggregated_by_advertiser_time_zone"),
       @SerializedName("hourly_stats_aggregated_by_audience_time_zone")
       VALUE_HOURLY_STATS_AGGREGATED_BY_AUDIENCE_TIME_ZONE("hourly_stats_aggregated_by_audience_time_zone"),
+      @SerializedName("hsid")
+      VALUE_HSID("hsid"),
       @SerializedName("image_asset")
       VALUE_IMAGE_ASSET("image_asset"),
       @SerializedName("impression_device")
@@ -2036,10 +2053,14 @@ public class AdsInsights extends APINode {
       VALUE_PLACE_PAGE_ID("place_page_id"),
       @SerializedName("platform_position")
       VALUE_PLATFORM_POSITION("platform_position"),
+      @SerializedName("postback_sequence_index")
+      VALUE_POSTBACK_SEQUENCE_INDEX("postback_sequence_index"),
       @SerializedName("product_id")
       VALUE_PRODUCT_ID("product_id"),
       @SerializedName("publisher_platform")
       VALUE_PUBLISHER_PLATFORM("publisher_platform"),
+      @SerializedName("redownload")
+      VALUE_REDOWNLOAD("redownload"),
       @SerializedName("region")
       VALUE_REGION("region"),
       @SerializedName("skan_campaign_id")
@@ -2197,12 +2218,10 @@ public class AdsInsights extends APINode {
     this.mAccountName = instance.mAccountName;
     this.mActionValues = instance.mActionValues;
     this.mActions = instance.mActions;
-    this.mAdBidValue = instance.mAdBidValue;
     this.mAdClickActions = instance.mAdClickActions;
     this.mAdId = instance.mAdId;
     this.mAdImpressionActions = instance.mAdImpressionActions;
     this.mAdName = instance.mAdName;
-    this.mAdsetBidValue = instance.mAdsetBidValue;
     this.mAdsetEnd = instance.mAdsetEnd;
     this.mAdsetId = instance.mAdsetId;
     this.mAdsetName = instance.mAdsetName;
@@ -2249,6 +2268,7 @@ public class AdsInsights extends APINode {
     this.mCpm = instance.mCpm;
     this.mCpp = instance.mCpp;
     this.mCreatedTime = instance.mCreatedTime;
+    this.mCreativeMediaType = instance.mCreativeMediaType;
     this.mCtr = instance.mCtr;
     this.mDateStart = instance.mDateStart;
     this.mDateStop = instance.mDateStop;
@@ -2269,6 +2289,7 @@ public class AdsInsights extends APINode {
     this.mInlineLinkClickCtr = instance.mInlineLinkClickCtr;
     this.mInlineLinkClicks = instance.mInlineLinkClicks;
     this.mInlinePostEngagement = instance.mInlinePostEngagement;
+    this.mInstagramUpcomingEventRemindersSet = instance.mInstagramUpcomingEventRemindersSet;
     this.mInstantExperienceClicksToOpen = instance.mInstantExperienceClicksToOpen;
     this.mInstantExperienceClicksToStart = instance.mInstantExperienceClicksToStart;
     this.mInstantExperienceOutboundClicks = instance.mInstantExperienceOutboundClicks;
@@ -2292,6 +2313,7 @@ public class AdsInsights extends APINode {
     this.mSpend = instance.mSpend;
     this.mTotalPostbacks = instance.mTotalPostbacks;
     this.mTotalPostbacksDetailed = instance.mTotalPostbacksDetailed;
+    this.mTotalPostbacksDetailedV4 = instance.mTotalPostbacksDetailedV4;
     this.mUniqueActions = instance.mUniqueActions;
     this.mUniqueClicks = instance.mUniqueClicks;
     this.mUniqueConversions = instance.mUniqueConversions;

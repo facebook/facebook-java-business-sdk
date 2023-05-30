@@ -58,7 +58,7 @@ public class SplitTestWinner extends APINode {
   @SerializedName("ad_object_level")
   private String mAdObjectLevel = null;
   @SerializedName("confidences")
-  private Map<String, Double> mConfidences = null;
+  private List<Map<String, Double>> mConfidences = null;
   @SerializedName("winner_ad_object_id")
   private String mWinnerAdObjectId = null;
   protected static Gson gson = null;
@@ -221,11 +221,11 @@ public class SplitTestWinner extends APINode {
     return this;
   }
 
-  public Map<String, Double> getFieldConfidences() {
+  public List<Map<String, Double>> getFieldConfidences() {
     return mConfidences;
   }
 
-  public SplitTestWinner setFieldConfidences(Map<String, Double> value) {
+  public SplitTestWinner setFieldConfidences(List<Map<String, Double>> value) {
     this.mConfidences = value;
     return this;
   }

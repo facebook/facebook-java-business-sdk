@@ -425,7 +425,6 @@ public class BusinessUser extends APINode {
       "fb_entity",
       "funding_source",
       "funding_source_details",
-      "has_advertiser_opted_in_odax",
       "has_migrated_permissions",
       "has_page_authorized_adaccount",
       "id",
@@ -754,13 +753,6 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGetAssignedAdAccounts requestFundingSourceDetailsField (boolean value) {
       this.requestField("funding_source_details", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestHasAdvertiserOptedInOdaxField () {
-      return this.requestHasAdvertiserOptedInOdaxField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestHasAdvertiserOptedInOdaxField (boolean value) {
-      this.requestField("has_advertiser_opted_in_odax", value);
       return this;
     }
     public APIRequestGetAssignedAdAccounts requestHasMigratedPermissionsField () {
@@ -1223,7 +1215,6 @@ public class BusinessUser extends APINode {
       "impressum",
       "influences",
       "instagram_business_account",
-      "instant_articles_review_status",
       "is_always_open",
       "is_chain",
       "is_community_page",
@@ -1297,7 +1288,6 @@ public class BusinessUser extends APINode {
       "store_number",
       "studio",
       "supports_donate_button_in_live_video",
-      "supports_instant_articles",
       "talking_about_count",
       "temporary_status",
       "unread_message_count",
@@ -1830,13 +1820,6 @@ public class BusinessUser extends APINode {
       this.requestField("instagram_business_account", value);
       return this;
     }
-    public APIRequestGetAssignedPages requestInstantArticlesReviewStatusField () {
-      return this.requestInstantArticlesReviewStatusField(true);
-    }
-    public APIRequestGetAssignedPages requestInstantArticlesReviewStatusField (boolean value) {
-      this.requestField("instant_articles_review_status", value);
-      return this;
-    }
     public APIRequestGetAssignedPages requestIsAlwaysOpenField () {
       return this.requestIsAlwaysOpenField(true);
     }
@@ -2346,13 +2329,6 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGetAssignedPages requestSupportsDonateButtonInLiveVideoField (boolean value) {
       this.requestField("supports_donate_button_in_live_video", value);
-      return this;
-    }
-    public APIRequestGetAssignedPages requestSupportsInstantArticlesField () {
-      return this.requestSupportsInstantArticlesField(true);
-    }
-    public APIRequestGetAssignedPages requestSupportsInstantArticlesField (boolean value) {
-      this.requestField("supports_instant_articles", value);
       return this;
     }
     public APIRequestGetAssignedPages requestTalkingAboutCountField () {

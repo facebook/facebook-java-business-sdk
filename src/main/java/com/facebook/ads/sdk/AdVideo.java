@@ -360,6 +360,14 @@ public class AdVideo extends APINode {
     return new APIRequestCreateCaption(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetCollaborators getCollaborators() {
+    return new APIRequestGetCollaborators(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateCollaborator createCollaborator() {
+    return new APIRequestCreateCollaborator(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetComments getComments() {
     return new APIRequestGetComments(this.getPrefixedId().toString(), context);
   }
@@ -854,6 +862,220 @@ public class AdVideo extends APINode {
 
     @Override
     public APIRequestCreateCaption requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetCollaborators extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetCollaborators.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetCollaborators(String nodeId, APIContext context) {
+      super(context, nodeId, "/collaborators", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCollaborators setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCollaborators setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCollaborators requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCollaborators requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCollaborators requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCollaborators requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCollaborators requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCollaborators requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateCollaborator extends APIRequest<AdVideo> {
+
+    AdVideo lastResponse = null;
+    @Override
+    public AdVideo getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "target_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AdVideo parseResponse(String response, String header) throws APIException {
+      return AdVideo.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public AdVideo execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdVideo execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdVideo> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdVideo> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, AdVideo>() {
+           public AdVideo apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateCollaborator.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateCollaborator(String nodeId, APIContext context) {
+      super(context, nodeId, "/collaborators", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateCollaborator setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCollaborator setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateCollaborator setTargetId (String targetId) {
+      this.setParam("target_id", targetId);
+      return this;
+    }
+
+    public APIRequestCreateCollaborator requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateCollaborator requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCollaborator requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateCollaborator requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCollaborator requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCollaborator requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -1453,7 +1675,6 @@ public class AdVideo extends APINode {
       "impressum",
       "influences",
       "instagram_business_account",
-      "instant_articles_review_status",
       "is_always_open",
       "is_chain",
       "is_community_page",
@@ -1527,7 +1748,6 @@ public class AdVideo extends APINode {
       "store_number",
       "studio",
       "supports_donate_button_in_live_video",
-      "supports_instant_articles",
       "talking_about_count",
       "temporary_status",
       "unread_message_count",
@@ -2051,13 +2271,6 @@ public class AdVideo extends APINode {
       this.requestField("instagram_business_account", value);
       return this;
     }
-    public APIRequestGetCrosspostSharedPages requestInstantArticlesReviewStatusField () {
-      return this.requestInstantArticlesReviewStatusField(true);
-    }
-    public APIRequestGetCrosspostSharedPages requestInstantArticlesReviewStatusField (boolean value) {
-      this.requestField("instant_articles_review_status", value);
-      return this;
-    }
     public APIRequestGetCrosspostSharedPages requestIsAlwaysOpenField () {
       return this.requestIsAlwaysOpenField(true);
     }
@@ -2567,13 +2780,6 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestSupportsDonateButtonInLiveVideoField (boolean value) {
       this.requestField("supports_donate_button_in_live_video", value);
-      return this;
-    }
-    public APIRequestGetCrosspostSharedPages requestSupportsInstantArticlesField () {
-      return this.requestSupportsInstantArticlesField(true);
-    }
-    public APIRequestGetCrosspostSharedPages requestSupportsInstantArticlesField (boolean value) {
-      this.requestField("supports_instant_articles", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestTalkingAboutCountField () {
@@ -3605,7 +3811,6 @@ public class AdVideo extends APINode {
       "impressum",
       "influences",
       "instagram_business_account",
-      "instant_articles_review_status",
       "is_always_open",
       "is_chain",
       "is_community_page",
@@ -3679,7 +3884,6 @@ public class AdVideo extends APINode {
       "store_number",
       "studio",
       "supports_donate_button_in_live_video",
-      "supports_instant_articles",
       "talking_about_count",
       "temporary_status",
       "unread_message_count",
@@ -4203,13 +4407,6 @@ public class AdVideo extends APINode {
       this.requestField("instagram_business_account", value);
       return this;
     }
-    public APIRequestGetSponsorTags requestInstantArticlesReviewStatusField () {
-      return this.requestInstantArticlesReviewStatusField(true);
-    }
-    public APIRequestGetSponsorTags requestInstantArticlesReviewStatusField (boolean value) {
-      this.requestField("instant_articles_review_status", value);
-      return this;
-    }
     public APIRequestGetSponsorTags requestIsAlwaysOpenField () {
       return this.requestIsAlwaysOpenField(true);
     }
@@ -4719,13 +4916,6 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetSponsorTags requestSupportsDonateButtonInLiveVideoField (boolean value) {
       this.requestField("supports_donate_button_in_live_video", value);
-      return this;
-    }
-    public APIRequestGetSponsorTags requestSupportsInstantArticlesField () {
-      return this.requestSupportsInstantArticlesField(true);
-    }
-    public APIRequestGetSponsorTags requestSupportsInstantArticlesField (boolean value) {
-      this.requestField("supports_instant_articles", value);
       return this;
     }
     public APIRequestGetSponsorTags requestTalkingAboutCountField () {
@@ -6523,6 +6713,8 @@ public class AdVideo extends APINode {
       VALUE_EVENT_TOUR("EVENT_TOUR"),
       @SerializedName("FACECAST_DVR")
       VALUE_FACECAST_DVR("FACECAST_DVR"),
+      @SerializedName("FB_AVATAR_ANIMATED_SATP")
+      VALUE_FB_AVATAR_ANIMATED_SATP("FB_AVATAR_ANIMATED_SATP"),
       @SerializedName("FB_COLLECTIBLE_VIDEO")
       VALUE_FB_COLLECTIBLE_VIDEO("FB_COLLECTIBLE_VIDEO"),
       @SerializedName("FB_SHORTS")

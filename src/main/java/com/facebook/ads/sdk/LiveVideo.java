@@ -498,6 +498,7 @@ public class LiveVideo extends APINode {
       "about",
       "age_range",
       "birthday",
+      "community",
       "cover",
       "currency",
       "education",
@@ -660,6 +661,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetBlockedUsers requestBirthdayField (boolean value) {
       this.requestField("birthday", value);
+      return this;
+    }
+    public APIRequestGetBlockedUsers requestCommunityField () {
+      return this.requestCommunityField(true);
+    }
+    public APIRequestGetBlockedUsers requestCommunityField (boolean value) {
+      this.requestField("community", value);
       return this;
     }
     public APIRequestGetBlockedUsers requestCoverField () {
@@ -1360,7 +1368,6 @@ public class LiveVideo extends APINode {
       "impressum",
       "influences",
       "instagram_business_account",
-      "instant_articles_review_status",
       "is_always_open",
       "is_chain",
       "is_community_page",
@@ -1434,7 +1441,6 @@ public class LiveVideo extends APINode {
       "store_number",
       "studio",
       "supports_donate_button_in_live_video",
-      "supports_instant_articles",
       "talking_about_count",
       "temporary_status",
       "unread_message_count",
@@ -1958,13 +1964,6 @@ public class LiveVideo extends APINode {
       this.requestField("instagram_business_account", value);
       return this;
     }
-    public APIRequestGetCrosspostSharedPages requestInstantArticlesReviewStatusField () {
-      return this.requestInstantArticlesReviewStatusField(true);
-    }
-    public APIRequestGetCrosspostSharedPages requestInstantArticlesReviewStatusField (boolean value) {
-      this.requestField("instant_articles_review_status", value);
-      return this;
-    }
     public APIRequestGetCrosspostSharedPages requestIsAlwaysOpenField () {
       return this.requestIsAlwaysOpenField(true);
     }
@@ -2474,13 +2473,6 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestSupportsDonateButtonInLiveVideoField (boolean value) {
       this.requestField("supports_donate_button_in_live_video", value);
-      return this;
-    }
-    public APIRequestGetCrosspostSharedPages requestSupportsInstantArticlesField () {
-      return this.requestSupportsInstantArticlesField(true);
-    }
-    public APIRequestGetCrosspostSharedPages requestSupportsInstantArticlesField (boolean value) {
-      this.requestField("supports_instant_articles", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestTalkingAboutCountField () {

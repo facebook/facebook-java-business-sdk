@@ -246,6 +246,8 @@ public class CustomAudienceDataSource extends APINode {
       VALUE_ANYTHING("ANYTHING"),
       @SerializedName("APP_USERS")
       VALUE_APP_USERS("APP_USERS"),
+      @SerializedName("AR_EFFECTS_EVENTS")
+      VALUE_AR_EFFECTS_EVENTS("AR_EFFECTS_EVENTS"),
       @SerializedName("AR_EXPERIENCE_EVENTS")
       VALUE_AR_EXPERIENCE_EVENTS("AR_EXPERIENCE_EVENTS"),
       @SerializedName("CAMPAIGN_CONVERSIONS")
@@ -338,6 +340,8 @@ public class CustomAudienceDataSource extends APINode {
       VALUE_SMART_AUDIENCE("SMART_AUDIENCE"),
       @SerializedName("STORE_VISIT_EVENTS")
       VALUE_STORE_VISIT_EVENTS("STORE_VISIT_EVENTS"),
+      @SerializedName("SUBSCRIBER_LIST")
+      VALUE_SUBSCRIBER_LIST("SUBSCRIBER_LIST"),
       @SerializedName("S_EXPR")
       VALUE_S_EXPR("S_EXPR"),
       @SerializedName("TOKENS")

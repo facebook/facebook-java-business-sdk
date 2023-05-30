@@ -56,7 +56,7 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  */
 public class AdCreativeInsights extends APINode {
   @SerializedName("aesthetics")
-  private Map<String, String> mAesthetics = null;
+  private List<Map<String, String>> mAesthetics = null;
   protected static Gson gson = null;
 
   public AdCreativeInsights() {
@@ -208,11 +208,11 @@ public class AdCreativeInsights extends APINode {
   }
 
 
-  public Map<String, String> getFieldAesthetics() {
+  public List<Map<String, String>> getFieldAesthetics() {
     return mAesthetics;
   }
 
-  public AdCreativeInsights setFieldAesthetics(Map<String, String> value) {
+  public AdCreativeInsights setFieldAesthetics(List<Map<String, String>> value) {
     this.mAesthetics = value;
     return this;
   }

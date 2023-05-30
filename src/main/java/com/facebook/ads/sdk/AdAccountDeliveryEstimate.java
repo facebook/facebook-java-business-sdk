@@ -322,6 +322,8 @@ public class AdAccountDeliveryEstimate extends APINode {
       VALUE_QUALITY_LEAD("QUALITY_LEAD"),
       @SerializedName("REACH")
       VALUE_REACH("REACH"),
+      @SerializedName("SUBSCRIBERS")
+      VALUE_SUBSCRIBERS("SUBSCRIBERS"),
       @SerializedName("THRUPLAY")
       VALUE_THRUPLAY("THRUPLAY"),
       @SerializedName("VALUE")

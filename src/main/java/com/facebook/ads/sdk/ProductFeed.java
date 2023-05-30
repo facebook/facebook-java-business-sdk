@@ -4240,6 +4240,7 @@ public class ProductFeed extends APINode {
       "amount_price",
       "amount_qualifier",
       "applinks",
+      "availability",
       "body_style",
       "cashback_currency",
       "cashback_price",
@@ -4249,11 +4250,17 @@ public class ProductFeed extends APINode {
       "downpayment_currency",
       "downpayment_price",
       "downpayment_qualifier",
+      "drivetrain",
       "end_date",
       "end_time",
+      "exterior_color",
+      "fuel_type",
+      "generation",
       "id",
       "image_fetch_status",
       "images",
+      "interior_color",
+      "interior_upholstery",
       "make",
       "model",
       "offer_description",
@@ -4266,6 +4273,7 @@ public class ProductFeed extends APINode {
       "term_length",
       "term_qualifier",
       "title",
+      "transmission",
       "trim",
       "unit_price",
       "url",
@@ -4416,6 +4424,13 @@ public class ProductFeed extends APINode {
       this.requestField("applinks", value);
       return this;
     }
+    public APIRequestGetVehicleOffers requestAvailabilityField () {
+      return this.requestAvailabilityField(true);
+    }
+    public APIRequestGetVehicleOffers requestAvailabilityField (boolean value) {
+      this.requestField("availability", value);
+      return this;
+    }
     public APIRequestGetVehicleOffers requestBodyStyleField () {
       return this.requestBodyStyleField(true);
     }
@@ -4479,6 +4494,13 @@ public class ProductFeed extends APINode {
       this.requestField("downpayment_qualifier", value);
       return this;
     }
+    public APIRequestGetVehicleOffers requestDrivetrainField () {
+      return this.requestDrivetrainField(true);
+    }
+    public APIRequestGetVehicleOffers requestDrivetrainField (boolean value) {
+      this.requestField("drivetrain", value);
+      return this;
+    }
     public APIRequestGetVehicleOffers requestEndDateField () {
       return this.requestEndDateField(true);
     }
@@ -4491,6 +4513,27 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetVehicleOffers requestEndTimeField (boolean value) {
       this.requestField("end_time", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestExteriorColorField () {
+      return this.requestExteriorColorField(true);
+    }
+    public APIRequestGetVehicleOffers requestExteriorColorField (boolean value) {
+      this.requestField("exterior_color", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestFuelTypeField () {
+      return this.requestFuelTypeField(true);
+    }
+    public APIRequestGetVehicleOffers requestFuelTypeField (boolean value) {
+      this.requestField("fuel_type", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestGenerationField () {
+      return this.requestGenerationField(true);
+    }
+    public APIRequestGetVehicleOffers requestGenerationField (boolean value) {
+      this.requestField("generation", value);
       return this;
     }
     public APIRequestGetVehicleOffers requestIdField () {
@@ -4512,6 +4555,20 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetVehicleOffers requestImagesField (boolean value) {
       this.requestField("images", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestInteriorColorField () {
+      return this.requestInteriorColorField(true);
+    }
+    public APIRequestGetVehicleOffers requestInteriorColorField (boolean value) {
+      this.requestField("interior_color", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestInteriorUpholsteryField () {
+      return this.requestInteriorUpholsteryField(true);
+    }
+    public APIRequestGetVehicleOffers requestInteriorUpholsteryField (boolean value) {
+      this.requestField("interior_upholstery", value);
       return this;
     }
     public APIRequestGetVehicleOffers requestMakeField () {
@@ -4596,6 +4653,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetVehicleOffers requestTitleField (boolean value) {
       this.requestField("title", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestTransmissionField () {
+      return this.requestTransmissionField(true);
+    }
+    public APIRequestGetVehicleOffers requestTransmissionField (boolean value) {
+      this.requestField("transmission", value);
       return this;
     }
     public APIRequestGetVehicleOffers requestTrimField () {

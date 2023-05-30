@@ -56,7 +56,7 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  */
 public class AdCampaignDeliveryStatsUnsupportedReasons extends APINode {
   @SerializedName("reason_data")
-  private Map<String, String> mReasonData = null;
+  private List<Map<String, String>> mReasonData = null;
   @SerializedName("reason_type")
   private String mReasonType = null;
   protected static Gson gson = null;
@@ -210,11 +210,11 @@ public class AdCampaignDeliveryStatsUnsupportedReasons extends APINode {
   }
 
 
-  public Map<String, String> getFieldReasonData() {
+  public List<Map<String, String>> getFieldReasonData() {
     return mReasonData;
   }
 
-  public AdCampaignDeliveryStatsUnsupportedReasons setFieldReasonData(Map<String, String> value) {
+  public AdCampaignDeliveryStatsUnsupportedReasons setFieldReasonData(List<Map<String, String>> value) {
     this.mReasonData = value;
     return this;
   }

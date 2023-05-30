@@ -36,7 +36,7 @@ public class AdsPixelEventsPost {
     APIContext context = new APIContext(access_token).enableDebug(true);
 
     new AdsPixel(id, context).createEvent()
-      .setData("[{\"event_name\":\"PageView\",\"event_time\":1678231512,\"user_data\":{\"fbc\":\"fb.1.1554763741205.AbCdEfGhIjKlMnOpQrStUvWxYz1234567890\",\"fbp\":\"fb.1.1558571054389.1098115397\",\"em\":\"309a0a5c3e211326ae75ca18196d301a9bdbd1a882a4d2569511033da23f0abd\"}}]")
+      .setData("[{\"event_name\":\"PageView\",\"event_time\":1681748568,\"user_data\":{\"fbc\":\"fb.1.1554763741205.AbCdEfGhIjKlMnOpQrStUvWxYz1234567890\",\"fbp\":\"fb.1.1558571054389.1098115397\",\"em\":\"309a0a5c3e211326ae75ca18196d301a9bdbd1a882a4d2569511033da23f0abd\"}}]")
       .execute();
 
   }

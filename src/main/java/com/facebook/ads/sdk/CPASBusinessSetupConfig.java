@@ -60,9 +60,9 @@ public class CPASBusinessSetupConfig extends APINode {
   @SerializedName("business")
   private Business mBusiness = null;
   @SerializedName("business_capabilities_status")
-  private Map<String, String> mBusinessCapabilitiesStatus = null;
+  private List<Map<String, String>> mBusinessCapabilitiesStatus = null;
   @SerializedName("capabilities_compliance_status")
-  private Map<String, Object> mCapabilitiesComplianceStatus = null;
+  private List<Map<String, Object>> mCapabilitiesComplianceStatus = null;
   @SerializedName("id")
   private String mId = null;
   protected static Gson gson = null;
@@ -294,11 +294,11 @@ public class CPASBusinessSetupConfig extends APINode {
     return mBusiness;
   }
 
-  public Map<String, String> getFieldBusinessCapabilitiesStatus() {
+  public List<Map<String, String>> getFieldBusinessCapabilitiesStatus() {
     return mBusinessCapabilitiesStatus;
   }
 
-  public Map<String, Object> getFieldCapabilitiesComplianceStatus() {
+  public List<Map<String, Object>> getFieldCapabilitiesComplianceStatus() {
     return mCapabilitiesComplianceStatus;
   }
 
@@ -348,7 +348,6 @@ public class CPASBusinessSetupConfig extends APINode {
       "fb_entity",
       "funding_source",
       "funding_source_details",
-      "has_advertiser_opted_in_odax",
       "has_migrated_permissions",
       "has_page_authorized_adaccount",
       "id",
@@ -677,13 +676,6 @@ public class CPASBusinessSetupConfig extends APINode {
     }
     public APIRequestGetAdAccounts requestFundingSourceDetailsField (boolean value) {
       this.requestField("funding_source_details", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestHasAdvertiserOptedInOdaxField () {
-      return this.requestHasAdvertiserOptedInOdaxField(true);
-    }
-    public APIRequestGetAdAccounts requestHasAdvertiserOptedInOdaxField (boolean value) {
-      this.requestField("has_advertiser_opted_in_odax", value);
       return this;
     }
     public APIRequestGetAdAccounts requestHasMigratedPermissionsField () {

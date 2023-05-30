@@ -68,7 +68,7 @@ public class ProductCatalogCategory extends APINode {
   @SerializedName("num_items")
   private Long mNumItems = null;
   @SerializedName("tokens")
-  private Map<String, String> mTokens = null;
+  private List<Map<String, String>> mTokens = null;
   protected static Gson gson = null;
 
   public ProductCatalogCategory() {
@@ -274,11 +274,11 @@ public class ProductCatalogCategory extends APINode {
     return this;
   }
 
-  public Map<String, String> getFieldTokens() {
+  public List<Map<String, String>> getFieldTokens() {
     return mTokens;
   }
 
-  public ProductCatalogCategory setFieldTokens(Map<String, String> value) {
+  public ProductCatalogCategory setFieldTokens(List<Map<String, String>> value) {
     this.mTokens = value;
     return this;
   }

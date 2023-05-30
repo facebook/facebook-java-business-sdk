@@ -37,7 +37,7 @@ public class AdAccountCampaignsPostLinkClicks {
 
     new AdAccount(id, context).createCampaign()
       .setName("My campaign")
-      .setObjective(Campaign.EnumObjective.VALUE_LINK_CLICKS)
+      .setObjective(Campaign.EnumObjective.VALUE_OUTCOME_TRAFFIC)
       .setStatus(Campaign.EnumStatus.VALUE_PAUSED)
       .setParam("special_ad_categories", "[]")
       .execute();

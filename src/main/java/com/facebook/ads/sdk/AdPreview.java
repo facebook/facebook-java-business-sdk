@@ -57,6 +57,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdPreview extends APINode {
   @SerializedName("body")
   private String mBody = null;
+  @SerializedName("transformation_spec")
+  private Object mTransformationSpec = null;
   protected static Gson gson = null;
 
   public AdPreview() {
@@ -217,6 +219,15 @@ public class AdPreview extends APINode {
     return this;
   }
 
+  public Object getFieldTransformationSpec() {
+    return mTransformationSpec;
+  }
+
+  public AdPreview setFieldTransformationSpec(Object value) {
+    this.mTransformationSpec = value;
+    return this;
+  }
+
 
 
   public static enum EnumAdFormat {
@@ -266,12 +277,12 @@ public class AdPreview extends APINode {
       VALUE_INSTAGRAM_SEARCH_CHAIN("INSTAGRAM_SEARCH_CHAIN"),
       @SerializedName("INSTAGRAM_SEARCH_GRID")
       VALUE_INSTAGRAM_SEARCH_GRID("INSTAGRAM_SEARCH_GRID"),
-      @SerializedName("INSTAGRAM_SHOP")
-      VALUE_INSTAGRAM_SHOP("INSTAGRAM_SHOP"),
       @SerializedName("INSTAGRAM_STANDARD")
       VALUE_INSTAGRAM_STANDARD("INSTAGRAM_STANDARD"),
       @SerializedName("INSTAGRAM_STORY")
       VALUE_INSTAGRAM_STORY("INSTAGRAM_STORY"),
+      @SerializedName("INSTAGRAM_STORY_CAMERA_TRAY")
+      VALUE_INSTAGRAM_STORY_CAMERA_TRAY("INSTAGRAM_STORY_CAMERA_TRAY"),
       @SerializedName("INSTAGRAM_STORY_WEB")
       VALUE_INSTAGRAM_STORY_WEB("INSTAGRAM_STORY_WEB"),
       @SerializedName("INSTAGRAM_STORY_WEB_M_SITE")
@@ -338,6 +349,23 @@ public class AdPreview extends APINode {
       }
   }
 
+  public static enum EnumCreativeFeature {
+      @SerializedName("profile_card")
+      VALUE_PROFILE_CARD("profile_card"),
+      ;
+
+      private String value;
+
+      private EnumCreativeFeature(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumRenderType {
       @SerializedName("FALLBACK")
       VALUE_FALLBACK("FALLBACK"),
@@ -371,6 +399,7 @@ public class AdPreview extends APINode {
 
   public AdPreview copyFrom(AdPreview instance) {
     this.mBody = instance.mBody;
+    this.mTransformationSpec = instance.mTransformationSpec;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -352,10 +352,6 @@ public class OfflineConversionDataSet extends APINode {
     return new APIRequestGetCustomConversions(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateEvent createEvent() {
-    return new APIRequestCreateEvent(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetServerEventsPermittedBusiness getServerEventsPermittedBusiness() {
     return new APIRequestGetServerEventsPermittedBusiness(this.getPrefixedId().toString(), context);
   }
@@ -580,7 +576,6 @@ public class OfflineConversionDataSet extends APINode {
       "fb_entity",
       "funding_source",
       "funding_source_details",
-      "has_advertiser_opted_in_odax",
       "has_migrated_permissions",
       "has_page_authorized_adaccount",
       "id",
@@ -914,13 +909,6 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetAdAccounts requestFundingSourceDetailsField (boolean value) {
       this.requestField("funding_source_details", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestHasAdvertiserOptedInOdaxField () {
-      return this.requestHasAdvertiserOptedInOdaxField(true);
-    }
-    public APIRequestGetAdAccounts requestHasAdvertiserOptedInOdaxField (boolean value) {
-      this.requestField("has_advertiser_opted_in_odax", value);
       return this;
     }
     public APIRequestGetAdAccounts requestHasMigratedPermissionsField () {
@@ -2397,154 +2385,6 @@ public class OfflineConversionDataSet extends APINode {
     }
   }
 
-  public static class APIRequestCreateEvent extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "data",
-      "namespace_id",
-      "progress",
-      "upload_id",
-      "upload_source",
-      "upload_tag",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateEvent.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateEvent(String nodeId, APIContext context) {
-      super(context, nodeId, "/events", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateEvent setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateEvent setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateEvent setData (List<String> data) {
-      this.setParam("data", data);
-      return this;
-    }
-    public APIRequestCreateEvent setData (String data) {
-      this.setParam("data", data);
-      return this;
-    }
-
-    public APIRequestCreateEvent setNamespaceId (String namespaceId) {
-      this.setParam("namespace_id", namespaceId);
-      return this;
-    }
-
-    public APIRequestCreateEvent setProgress (Object progress) {
-      this.setParam("progress", progress);
-      return this;
-    }
-    public APIRequestCreateEvent setProgress (String progress) {
-      this.setParam("progress", progress);
-      return this;
-    }
-
-    public APIRequestCreateEvent setUploadId (String uploadId) {
-      this.setParam("upload_id", uploadId);
-      return this;
-    }
-
-    public APIRequestCreateEvent setUploadSource (String uploadSource) {
-      this.setParam("upload_source", uploadSource);
-      return this;
-    }
-
-    public APIRequestCreateEvent setUploadTag (String uploadTag) {
-      this.setParam("upload_tag", uploadTag);
-      return this;
-    }
-
-    public APIRequestCreateEvent requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateEvent requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateEvent requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateEvent requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateEvent requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateEvent requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetServerEventsPermittedBusiness extends APIRequest<Business> {
 
     APINodeList<Business> lastResponse = null;
@@ -2851,7 +2691,6 @@ public class OfflineConversionDataSet extends APINode {
       "fb_entity",
       "funding_source",
       "funding_source_details",
-      "has_advertiser_opted_in_odax",
       "has_migrated_permissions",
       "has_page_authorized_adaccount",
       "id",
@@ -3194,13 +3033,6 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetSharedAccounts requestFundingSourceDetailsField (boolean value) {
       this.requestField("funding_source_details", value);
-      return this;
-    }
-    public APIRequestGetSharedAccounts requestHasAdvertiserOptedInOdaxField () {
-      return this.requestHasAdvertiserOptedInOdaxField(true);
-    }
-    public APIRequestGetSharedAccounts requestHasAdvertiserOptedInOdaxField (boolean value) {
-      this.requestField("has_advertiser_opted_in_odax", value);
       return this;
     }
     public APIRequestGetSharedAccounts requestHasMigratedPermissionsField () {

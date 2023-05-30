@@ -122,7 +122,7 @@ public class Page extends APINode {
   @SerializedName("description_html")
   private String mDescriptionHtml = null;
   @SerializedName("differently_open_offerings")
-  private Map<String, Boolean> mDifferentlyOpenOfferings = null;
+  private List<Map<String, Boolean>> mDifferentlyOpenOfferings = null;
   @SerializedName("directed_by")
   private String mDirectedBy = null;
   @SerializedName("display_subtext")
@@ -175,8 +175,6 @@ public class Page extends APINode {
   private String mInfluences = null;
   @SerializedName("instagram_business_account")
   private IGUser mInstagramBusinessAccount = null;
-  @SerializedName("instant_articles_review_status")
-  private String mInstantArticlesReviewStatus = null;
   @SerializedName("is_always_open")
   private Boolean mIsAlwaysOpen = null;
   @SerializedName("is_chain")
@@ -323,8 +321,6 @@ public class Page extends APINode {
   private String mStudio = null;
   @SerializedName("supports_donate_button_in_live_video")
   private Boolean mSupportsDonateButtonInLiveVideo = null;
-  @SerializedName("supports_instant_articles")
-  private Boolean mSupportsInstantArticles = null;
   @SerializedName("talking_about_count")
   private Long mTalkingAboutCount = null;
   @SerializedName("temporary_status")
@@ -646,10 +642,6 @@ public class Page extends APINode {
     return new APIRequestCreateChatPlugin(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetClaimedUrls getClaimedUrls() {
-    return new APIRequestGetClaimedUrls(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetCommerceEligibility getCommerceEligibility() {
     return new APIRequestGetCommerceEligibility(this.getPrefixedId().toString(), context);
   }
@@ -748,22 +740,6 @@ public class Page extends APINode {
 
   public APIRequestGetInstagramAccounts getInstagramAccounts() {
     return new APIRequestGetInstagramAccounts(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetInstantArticles getInstantArticles() {
-    return new APIRequestGetInstantArticles(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateInstantArticle createInstantArticle() {
-    return new APIRequestCreateInstantArticle(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetInstantArticlesInsights getInstantArticlesInsights() {
-    return new APIRequestGetInstantArticlesInsights(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateInstantArticlesPublish createInstantArticlesPublish() {
-    return new APIRequestCreateInstantArticlesPublish(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetInstantArticlesStats getInstantArticlesStats() {
@@ -1018,6 +994,10 @@ public class Page extends APINode {
     return new APIRequestGetVisitorPosts(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetWelcomeMessageFlows getWelcomeMessageFlows() {
+    return new APIRequestGetWelcomeMessageFlows(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
@@ -1174,7 +1154,7 @@ public class Page extends APINode {
     return mDescriptionHtml;
   }
 
-  public Map<String, Boolean> getFieldDifferentlyOpenOfferings() {
+  public List<Map<String, Boolean>> getFieldDifferentlyOpenOfferings() {
     return mDifferentlyOpenOfferings;
   }
 
@@ -1286,10 +1266,6 @@ public class Page extends APINode {
       mInstagramBusinessAccount.context = getContext();
     }
     return mInstagramBusinessAccount;
-  }
-
-  public String getFieldInstantArticlesReviewStatus() {
-    return mInstantArticlesReviewStatus;
   }
 
   public Boolean getFieldIsAlwaysOpen() {
@@ -1594,10 +1570,6 @@ public class Page extends APINode {
 
   public Boolean getFieldSupportsDonateButtonInLiveVideo() {
     return mSupportsDonateButtonInLiveVideo;
-  }
-
-  public Boolean getFieldSupportsInstantArticles() {
-    return mSupportsInstantArticles;
   }
 
   public Long getFieldTalkingAboutCount() {
@@ -4729,6 +4701,7 @@ public class Page extends APINode {
       "canvas_product_list",
       "canvas_product_set",
       "canvas_store_locator",
+      "canvas_template_video",
       "canvas_text",
       "canvas_video",
     };
@@ -4867,6 +4840,15 @@ public class Page extends APINode {
     }
     public APIRequestCreateCanvasElement setCanvasStoreLocator (String canvasStoreLocator) {
       this.setParam("canvas_store_locator", canvasStoreLocator);
+      return this;
+    }
+
+    public APIRequestCreateCanvasElement setCanvasTemplateVideo (Object canvasTemplateVideo) {
+      this.setParam("canvas_template_video", canvasTemplateVideo);
+      return this;
+    }
+    public APIRequestCreateCanvasElement setCanvasTemplateVideo (String canvasTemplateVideo) {
+      this.setParam("canvas_template_video", canvasTemplateVideo);
       return this;
     }
 
@@ -5842,166 +5824,6 @@ public class Page extends APINode {
       return this;
     }
 
-  }
-
-  public static class APIRequestGetClaimedUrls extends APIRequest<URL> {
-
-    APINodeList<URL> lastResponse = null;
-    @Override
-    public APINodeList<URL> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "development_instant_article",
-      "engagement",
-      "id",
-      "instant_article",
-      "og_object",
-      "ownership_permissions",
-      "scopes",
-    };
-
-    @Override
-    public APINodeList<URL> parseResponse(String response, String header) throws APIException {
-      return URL.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<URL> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<URL> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<URL>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<URL>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<URL>>() {
-           public APINodeList<URL> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetClaimedUrls.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetClaimedUrls(String nodeId, APIContext context) {
-      super(context, nodeId, "/claimed_urls", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetClaimedUrls setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetClaimedUrls setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetClaimedUrls requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetClaimedUrls requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetClaimedUrls requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetClaimedUrls requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetClaimedUrls requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetClaimedUrls requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetClaimedUrls requestDevelopmentInstantArticleField () {
-      return this.requestDevelopmentInstantArticleField(true);
-    }
-    public APIRequestGetClaimedUrls requestDevelopmentInstantArticleField (boolean value) {
-      this.requestField("development_instant_article", value);
-      return this;
-    }
-    public APIRequestGetClaimedUrls requestEngagementField () {
-      return this.requestEngagementField(true);
-    }
-    public APIRequestGetClaimedUrls requestEngagementField (boolean value) {
-      this.requestField("engagement", value);
-      return this;
-    }
-    public APIRequestGetClaimedUrls requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetClaimedUrls requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetClaimedUrls requestInstantArticleField () {
-      return this.requestInstantArticleField(true);
-    }
-    public APIRequestGetClaimedUrls requestInstantArticleField (boolean value) {
-      this.requestField("instant_article", value);
-      return this;
-    }
-    public APIRequestGetClaimedUrls requestOgObjectField () {
-      return this.requestOgObjectField(true);
-    }
-    public APIRequestGetClaimedUrls requestOgObjectField (boolean value) {
-      this.requestField("og_object", value);
-      return this;
-    }
-    public APIRequestGetClaimedUrls requestOwnershipPermissionsField () {
-      return this.requestOwnershipPermissionsField(true);
-    }
-    public APIRequestGetClaimedUrls requestOwnershipPermissionsField (boolean value) {
-      this.requestField("ownership_permissions", value);
-      return this;
-    }
-    public APIRequestGetClaimedUrls requestScopesField () {
-      return this.requestScopesField(true);
-    }
-    public APIRequestGetClaimedUrls requestScopesField (boolean value) {
-      this.requestField("scopes", value);
-      return this;
-    }
   }
 
   public static class APIRequestGetCommerceEligibility extends APIRequest<PageCommerceEligibility> {
@@ -7047,6 +6869,7 @@ public class Page extends APINode {
       "id",
       "is_subscribed",
       "link",
+      "linked_group",
       "message_count",
       "name",
       "participants",
@@ -7216,6 +7039,13 @@ public class Page extends APINode {
     }
     public APIRequestGetConversations requestLinkField (boolean value) {
       this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGetConversations requestLinkedGroupField () {
+      return this.requestLinkedGroupField(true);
+    }
+    public APIRequestGetConversations requestLinkedGroupField (boolean value) {
+      this.requestField("linked_group", value);
       return this;
     }
     public APIRequestGetConversations requestMessageCountField () {
@@ -7517,7 +7347,6 @@ public class Page extends APINode {
       "impressum",
       "influences",
       "instagram_business_account",
-      "instant_articles_review_status",
       "is_always_open",
       "is_chain",
       "is_community_page",
@@ -7591,7 +7420,6 @@ public class Page extends APINode {
       "store_number",
       "studio",
       "supports_donate_button_in_live_video",
-      "supports_instant_articles",
       "talking_about_count",
       "temporary_status",
       "unread_message_count",
@@ -8115,13 +7943,6 @@ public class Page extends APINode {
       this.requestField("instagram_business_account", value);
       return this;
     }
-    public APIRequestGetCrosspostWhitelistedPages requestInstantArticlesReviewStatusField () {
-      return this.requestInstantArticlesReviewStatusField(true);
-    }
-    public APIRequestGetCrosspostWhitelistedPages requestInstantArticlesReviewStatusField (boolean value) {
-      this.requestField("instant_articles_review_status", value);
-      return this;
-    }
     public APIRequestGetCrosspostWhitelistedPages requestIsAlwaysOpenField () {
       return this.requestIsAlwaysOpenField(true);
     }
@@ -8631,13 +8452,6 @@ public class Page extends APINode {
     }
     public APIRequestGetCrosspostWhitelistedPages requestSupportsDonateButtonInLiveVideoField (boolean value) {
       this.requestField("supports_donate_button_in_live_video", value);
-      return this;
-    }
-    public APIRequestGetCrosspostWhitelistedPages requestSupportsInstantArticlesField () {
-      return this.requestSupportsInstantArticlesField(true);
-    }
-    public APIRequestGetCrosspostWhitelistedPages requestSupportsInstantArticlesField (boolean value) {
-      this.requestField("supports_instant_articles", value);
       return this;
     }
     public APIRequestGetCrosspostWhitelistedPages requestTalkingAboutCountField () {
@@ -11659,7 +11473,6 @@ public class Page extends APINode {
       "impressum",
       "influences",
       "instagram_business_account",
-      "instant_articles_review_status",
       "is_always_open",
       "is_chain",
       "is_community_page",
@@ -11733,7 +11546,6 @@ public class Page extends APINode {
       "store_number",
       "studio",
       "supports_donate_button_in_live_video",
-      "supports_instant_articles",
       "talking_about_count",
       "temporary_status",
       "unread_message_count",
@@ -12257,13 +12069,6 @@ public class Page extends APINode {
       this.requestField("instagram_business_account", value);
       return this;
     }
-    public APIRequestGetGlobalBrandChildren requestInstantArticlesReviewStatusField () {
-      return this.requestInstantArticlesReviewStatusField(true);
-    }
-    public APIRequestGetGlobalBrandChildren requestInstantArticlesReviewStatusField (boolean value) {
-      this.requestField("instant_articles_review_status", value);
-      return this;
-    }
     public APIRequestGetGlobalBrandChildren requestIsAlwaysOpenField () {
       return this.requestIsAlwaysOpenField(true);
     }
@@ -12773,13 +12578,6 @@ public class Page extends APINode {
     }
     public APIRequestGetGlobalBrandChildren requestSupportsDonateButtonInLiveVideoField (boolean value) {
       this.requestField("supports_donate_button_in_live_video", value);
-      return this;
-    }
-    public APIRequestGetGlobalBrandChildren requestSupportsInstantArticlesField () {
-      return this.requestSupportsInstantArticlesField(true);
-    }
-    public APIRequestGetGlobalBrandChildren requestSupportsInstantArticlesField (boolean value) {
-      this.requestField("supports_instant_articles", value);
       return this;
     }
     public APIRequestGetGlobalBrandChildren requestTalkingAboutCountField () {
@@ -14400,630 +14198,6 @@ public class Page extends APINode {
     }
   }
 
-  public static class APIRequestGetInstantArticles extends APIRequest<InstantArticle> {
-
-    APINodeList<InstantArticle> lastResponse = null;
-    @Override
-    public APINodeList<InstantArticle> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "development_mode",
-    };
-
-    public static final String[] FIELDS = {
-      "canonical_url",
-      "development_mode",
-      "html_source",
-      "id",
-      "most_recent_import_status",
-      "photos",
-      "publish_status",
-      "published",
-      "videos",
-    };
-
-    @Override
-    public APINodeList<InstantArticle> parseResponse(String response, String header) throws APIException {
-      return InstantArticle.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<InstantArticle> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<InstantArticle> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<InstantArticle>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<InstantArticle>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<InstantArticle>>() {
-           public APINodeList<InstantArticle> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetInstantArticles.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetInstantArticles(String nodeId, APIContext context) {
-      super(context, nodeId, "/instant_articles", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetInstantArticles setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetInstantArticles setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetInstantArticles setDevelopmentMode (Boolean developmentMode) {
-      this.setParam("development_mode", developmentMode);
-      return this;
-    }
-    public APIRequestGetInstantArticles setDevelopmentMode (String developmentMode) {
-      this.setParam("development_mode", developmentMode);
-      return this;
-    }
-
-    public APIRequestGetInstantArticles requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetInstantArticles requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetInstantArticles requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetInstantArticles requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetInstantArticles requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetInstantArticles requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetInstantArticles requestCanonicalUrlField () {
-      return this.requestCanonicalUrlField(true);
-    }
-    public APIRequestGetInstantArticles requestCanonicalUrlField (boolean value) {
-      this.requestField("canonical_url", value);
-      return this;
-    }
-    public APIRequestGetInstantArticles requestDevelopmentModeField () {
-      return this.requestDevelopmentModeField(true);
-    }
-    public APIRequestGetInstantArticles requestDevelopmentModeField (boolean value) {
-      this.requestField("development_mode", value);
-      return this;
-    }
-    public APIRequestGetInstantArticles requestHtmlSourceField () {
-      return this.requestHtmlSourceField(true);
-    }
-    public APIRequestGetInstantArticles requestHtmlSourceField (boolean value) {
-      this.requestField("html_source", value);
-      return this;
-    }
-    public APIRequestGetInstantArticles requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetInstantArticles requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetInstantArticles requestMostRecentImportStatusField () {
-      return this.requestMostRecentImportStatusField(true);
-    }
-    public APIRequestGetInstantArticles requestMostRecentImportStatusField (boolean value) {
-      this.requestField("most_recent_import_status", value);
-      return this;
-    }
-    public APIRequestGetInstantArticles requestPhotosField () {
-      return this.requestPhotosField(true);
-    }
-    public APIRequestGetInstantArticles requestPhotosField (boolean value) {
-      this.requestField("photos", value);
-      return this;
-    }
-    public APIRequestGetInstantArticles requestPublishStatusField () {
-      return this.requestPublishStatusField(true);
-    }
-    public APIRequestGetInstantArticles requestPublishStatusField (boolean value) {
-      this.requestField("publish_status", value);
-      return this;
-    }
-    public APIRequestGetInstantArticles requestPublishedField () {
-      return this.requestPublishedField(true);
-    }
-    public APIRequestGetInstantArticles requestPublishedField (boolean value) {
-      this.requestField("published", value);
-      return this;
-    }
-    public APIRequestGetInstantArticles requestVideosField () {
-      return this.requestVideosField(true);
-    }
-    public APIRequestGetInstantArticles requestVideosField (boolean value) {
-      this.requestField("videos", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestCreateInstantArticle extends APIRequest<InstantArticle> {
-
-    InstantArticle lastResponse = null;
-    @Override
-    public InstantArticle getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "development_mode",
-      "html_source",
-      "published",
-      "take_live",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public InstantArticle parseResponse(String response, String header) throws APIException {
-      return InstantArticle.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public InstantArticle execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public InstantArticle execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<InstantArticle> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<InstantArticle> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, InstantArticle>() {
-           public InstantArticle apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateInstantArticle.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateInstantArticle(String nodeId, APIContext context) {
-      super(context, nodeId, "/instant_articles", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateInstantArticle setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateInstantArticle setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateInstantArticle setDevelopmentMode (Boolean developmentMode) {
-      this.setParam("development_mode", developmentMode);
-      return this;
-    }
-    public APIRequestCreateInstantArticle setDevelopmentMode (String developmentMode) {
-      this.setParam("development_mode", developmentMode);
-      return this;
-    }
-
-    public APIRequestCreateInstantArticle setHtmlSource (String htmlSource) {
-      this.setParam("html_source", htmlSource);
-      return this;
-    }
-
-    public APIRequestCreateInstantArticle setPublished (Boolean published) {
-      this.setParam("published", published);
-      return this;
-    }
-    public APIRequestCreateInstantArticle setPublished (String published) {
-      this.setParam("published", published);
-      return this;
-    }
-
-    public APIRequestCreateInstantArticle setTakeLive (Boolean takeLive) {
-      this.setParam("take_live", takeLive);
-      return this;
-    }
-    public APIRequestCreateInstantArticle setTakeLive (String takeLive) {
-      this.setParam("take_live", takeLive);
-      return this;
-    }
-
-    public APIRequestCreateInstantArticle requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateInstantArticle requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateInstantArticle requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateInstantArticle requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateInstantArticle requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateInstantArticle requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestGetInstantArticlesInsights extends APIRequest<InstantArticleInsightsQueryResult> {
-
-    APINodeList<InstantArticleInsightsQueryResult> lastResponse = null;
-    @Override
-    public APINodeList<InstantArticleInsightsQueryResult> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "breakdown",
-      "metric",
-      "period",
-      "since",
-      "until",
-    };
-
-    public static final String[] FIELDS = {
-      "breakdowns",
-      "name",
-      "time",
-      "value",
-    };
-
-    @Override
-    public APINodeList<InstantArticleInsightsQueryResult> parseResponse(String response, String header) throws APIException {
-      return InstantArticleInsightsQueryResult.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<InstantArticleInsightsQueryResult> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<InstantArticleInsightsQueryResult> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<InstantArticleInsightsQueryResult>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<InstantArticleInsightsQueryResult>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<InstantArticleInsightsQueryResult>>() {
-           public APINodeList<InstantArticleInsightsQueryResult> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetInstantArticlesInsights.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetInstantArticlesInsights(String nodeId, APIContext context) {
-      super(context, nodeId, "/instant_articles_insights", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetInstantArticlesInsights setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetInstantArticlesInsights setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetInstantArticlesInsights setBreakdown (InstantArticleInsightsQueryResult.EnumBreakdown breakdown) {
-      this.setParam("breakdown", breakdown);
-      return this;
-    }
-    public APIRequestGetInstantArticlesInsights setBreakdown (String breakdown) {
-      this.setParam("breakdown", breakdown);
-      return this;
-    }
-
-    public APIRequestGetInstantArticlesInsights setMetric (List<Object> metric) {
-      this.setParam("metric", metric);
-      return this;
-    }
-    public APIRequestGetInstantArticlesInsights setMetric (String metric) {
-      this.setParam("metric", metric);
-      return this;
-    }
-
-    public APIRequestGetInstantArticlesInsights setPeriod (InstantArticleInsightsQueryResult.EnumPeriod period) {
-      this.setParam("period", period);
-      return this;
-    }
-    public APIRequestGetInstantArticlesInsights setPeriod (String period) {
-      this.setParam("period", period);
-      return this;
-    }
-
-    public APIRequestGetInstantArticlesInsights setSince (String since) {
-      this.setParam("since", since);
-      return this;
-    }
-
-    public APIRequestGetInstantArticlesInsights setUntil (String until) {
-      this.setParam("until", until);
-      return this;
-    }
-
-    public APIRequestGetInstantArticlesInsights requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetInstantArticlesInsights requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetInstantArticlesInsights requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetInstantArticlesInsights requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetInstantArticlesInsights requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetInstantArticlesInsights requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetInstantArticlesInsights requestBreakdownsField () {
-      return this.requestBreakdownsField(true);
-    }
-    public APIRequestGetInstantArticlesInsights requestBreakdownsField (boolean value) {
-      this.requestField("breakdowns", value);
-      return this;
-    }
-    public APIRequestGetInstantArticlesInsights requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetInstantArticlesInsights requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetInstantArticlesInsights requestTimeField () {
-      return this.requestTimeField(true);
-    }
-    public APIRequestGetInstantArticlesInsights requestTimeField (boolean value) {
-      this.requestField("time", value);
-      return this;
-    }
-    public APIRequestGetInstantArticlesInsights requestValueField () {
-      return this.requestValueField(true);
-    }
-    public APIRequestGetInstantArticlesInsights requestValueField (boolean value) {
-      this.requestField("value", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestCreateInstantArticlesPublish extends APIRequest<Page> {
-
-    Page lastResponse = null;
-    @Override
-    public Page getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "canonical_url",
-      "publish_status",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Page parseResponse(String response, String header) throws APIException {
-      return Page.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Page execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Page execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Page> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Page> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Page>() {
-           public Page apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateInstantArticlesPublish.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateInstantArticlesPublish(String nodeId, APIContext context) {
-      super(context, nodeId, "/instant_articles_publish", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateInstantArticlesPublish setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateInstantArticlesPublish setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateInstantArticlesPublish setCanonicalUrl (String canonicalUrl) {
-      this.setParam("canonical_url", canonicalUrl);
-      return this;
-    }
-
-    public APIRequestCreateInstantArticlesPublish setPublishStatus (Page.EnumPublishStatus publishStatus) {
-      this.setParam("publish_status", publishStatus);
-      return this;
-    }
-    public APIRequestCreateInstantArticlesPublish setPublishStatus (String publishStatus) {
-      this.setParam("publish_status", publishStatus);
-      return this;
-    }
-
-    public APIRequestCreateInstantArticlesPublish requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateInstantArticlesPublish requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateInstantArticlesPublish requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateInstantArticlesPublish requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateInstantArticlesPublish requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateInstantArticlesPublish requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetInstantArticlesStats extends APIRequest<InstantArticlesStats> {
 
     APINodeList<InstantArticlesStats> lastResponse = null;
@@ -15906,7 +15080,6 @@ public class Page extends APINode {
       "impressum",
       "influences",
       "instagram_business_account",
-      "instant_articles_review_status",
       "is_always_open",
       "is_chain",
       "is_community_page",
@@ -15980,7 +15153,6 @@ public class Page extends APINode {
       "store_number",
       "studio",
       "supports_donate_button_in_live_video",
-      "supports_instant_articles",
       "talking_about_count",
       "temporary_status",
       "unread_message_count",
@@ -16509,13 +15681,6 @@ public class Page extends APINode {
       this.requestField("instagram_business_account", value);
       return this;
     }
-    public APIRequestGetLikes requestInstantArticlesReviewStatusField () {
-      return this.requestInstantArticlesReviewStatusField(true);
-    }
-    public APIRequestGetLikes requestInstantArticlesReviewStatusField (boolean value) {
-      this.requestField("instant_articles_review_status", value);
-      return this;
-    }
     public APIRequestGetLikes requestIsAlwaysOpenField () {
       return this.requestIsAlwaysOpenField(true);
     }
@@ -17025,13 +16190,6 @@ public class Page extends APINode {
     }
     public APIRequestGetLikes requestSupportsDonateButtonInLiveVideoField (boolean value) {
       this.requestField("supports_donate_button_in_live_video", value);
-      return this;
-    }
-    public APIRequestGetLikes requestSupportsInstantArticlesField () {
-      return this.requestSupportsInstantArticlesField(true);
-    }
-    public APIRequestGetLikes requestSupportsInstantArticlesField (boolean value) {
-      this.requestField("supports_instant_articles", value);
       return this;
     }
     public APIRequestGetLikes requestTalkingAboutCountField () {
@@ -17979,7 +17137,6 @@ public class Page extends APINode {
       "impressum",
       "influences",
       "instagram_business_account",
-      "instant_articles_review_status",
       "is_always_open",
       "is_chain",
       "is_community_page",
@@ -18053,7 +17210,6 @@ public class Page extends APINode {
       "store_number",
       "studio",
       "supports_donate_button_in_live_video",
-      "supports_instant_articles",
       "talking_about_count",
       "temporary_status",
       "unread_message_count",
@@ -18577,13 +17733,6 @@ public class Page extends APINode {
       this.requestField("instagram_business_account", value);
       return this;
     }
-    public APIRequestGetLocations requestInstantArticlesReviewStatusField () {
-      return this.requestInstantArticlesReviewStatusField(true);
-    }
-    public APIRequestGetLocations requestInstantArticlesReviewStatusField (boolean value) {
-      this.requestField("instant_articles_review_status", value);
-      return this;
-    }
     public APIRequestGetLocations requestIsAlwaysOpenField () {
       return this.requestIsAlwaysOpenField(true);
     }
@@ -19093,13 +18242,6 @@ public class Page extends APINode {
     }
     public APIRequestGetLocations requestSupportsDonateButtonInLiveVideoField (boolean value) {
       this.requestField("supports_donate_button_in_live_video", value);
-      return this;
-    }
-    public APIRequestGetLocations requestSupportsInstantArticlesField () {
-      return this.requestSupportsInstantArticlesField(true);
-    }
-    public APIRequestGetLocations requestSupportsInstantArticlesField (boolean value) {
-      this.requestField("supports_instant_articles", value);
       return this;
     }
     public APIRequestGetLocations requestTalkingAboutCountField () {
@@ -19907,6 +19049,7 @@ public class Page extends APINode {
       "persona_id",
       "recipient",
       "sender_action",
+      "suggestion_action",
       "tag",
       "thread_control",
     };
@@ -20019,6 +19162,15 @@ public class Page extends APINode {
     }
     public APIRequestCreateMessage setSenderAction (String senderAction) {
       this.setParam("sender_action", senderAction);
+      return this;
+    }
+
+    public APIRequestCreateMessage setSuggestionAction (Page.EnumSuggestionAction suggestionAction) {
+      this.setParam("suggestion_action", suggestionAction);
+      return this;
+    }
+    public APIRequestCreateMessage setSuggestionAction (String suggestionAction) {
+      this.setParam("suggestion_action", suggestionAction);
       return this;
     }
 
@@ -25382,6 +24534,7 @@ public class Page extends APINode {
       "about",
       "age_range",
       "birthday",
+      "community",
       "cover",
       "currency",
       "education",
@@ -25553,6 +24706,13 @@ public class Page extends APINode {
     }
     public APIRequestGetRoles requestBirthdayField (boolean value) {
       this.requestField("birthday", value);
+      return this;
+    }
+    public APIRequestGetRoles requestCommunityField () {
+      return this.requestCommunityField(true);
+    }
+    public APIRequestGetRoles requestCommunityField (boolean value) {
+      this.requestField("community", value);
       return this;
     }
     public APIRequestGetRoles requestCoverField () {
@@ -30044,6 +29204,7 @@ public class Page extends APINode {
       "id",
       "is_subscribed",
       "link",
+      "linked_group",
       "message_count",
       "name",
       "participants",
@@ -30204,6 +29365,13 @@ public class Page extends APINode {
     }
     public APIRequestGetThreads requestLinkField (boolean value) {
       this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGetThreads requestLinkedGroupField () {
+      return this.requestLinkedGroupField(true);
+    }
+    public APIRequestGetThreads requestLinkedGroupField (boolean value) {
+      this.requestField("linked_group", value);
       return this;
     }
     public APIRequestGetThreads requestMessageCountField () {
@@ -31090,6 +30258,8 @@ public class Page extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "since",
+      "until",
     };
 
     public static final String[] FIELDS = {
@@ -31191,6 +30361,16 @@ public class Page extends APINode {
       return this;
     }
 
+
+    public APIRequestGetVideoReels setSince (String since) {
+      this.setParam("since", since);
+      return this;
+    }
+
+    public APIRequestGetVideoReels setUntil (String until) {
+      this.setParam("until", until);
+      return this;
+    }
 
     public APIRequestGetVideoReels requestAllFields () {
       return this.requestAllFields(true);
@@ -33644,6 +32824,116 @@ public class Page extends APINode {
     }
   }
 
+  public static class APIRequestGetWelcomeMessageFlows extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "flow_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetWelcomeMessageFlows.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetWelcomeMessageFlows(String nodeId, APIContext context) {
+      super(context, nodeId, "/welcome_message_flows", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetWelcomeMessageFlows setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetWelcomeMessageFlows setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetWelcomeMessageFlows setFlowId (String flowId) {
+      this.setParam("flow_id", flowId);
+      return this;
+    }
+
+    public APIRequestGetWelcomeMessageFlows requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetWelcomeMessageFlows requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetWelcomeMessageFlows requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetWelcomeMessageFlows requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetWelcomeMessageFlows requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetWelcomeMessageFlows requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGet extends APIRequest<Page> {
 
     Page lastResponse = null;
@@ -33716,7 +33006,6 @@ public class Page extends APINode {
       "impressum",
       "influences",
       "instagram_business_account",
-      "instant_articles_review_status",
       "is_always_open",
       "is_chain",
       "is_community_page",
@@ -33790,7 +33079,6 @@ public class Page extends APINode {
       "store_number",
       "studio",
       "supports_donate_button_in_live_video",
-      "supports_instant_articles",
       "talking_about_count",
       "temporary_status",
       "unread_message_count",
@@ -34319,13 +33607,6 @@ public class Page extends APINode {
       this.requestField("instagram_business_account", value);
       return this;
     }
-    public APIRequestGet requestInstantArticlesReviewStatusField () {
-      return this.requestInstantArticlesReviewStatusField(true);
-    }
-    public APIRequestGet requestInstantArticlesReviewStatusField (boolean value) {
-      this.requestField("instant_articles_review_status", value);
-      return this;
-    }
     public APIRequestGet requestIsAlwaysOpenField () {
       return this.requestIsAlwaysOpenField(true);
     }
@@ -34837,13 +34118,6 @@ public class Page extends APINode {
       this.requestField("supports_donate_button_in_live_video", value);
       return this;
     }
-    public APIRequestGet requestSupportsInstantArticlesField () {
-      return this.requestSupportsInstantArticlesField(true);
-    }
-    public APIRequestGet requestSupportsInstantArticlesField (boolean value) {
-      this.requestField("supports_instant_articles", value);
-      return this;
-    }
     public APIRequestGet requestTalkingAboutCountField () {
       return this.requestTalkingAboutCountField(true);
     }
@@ -34964,7 +34238,6 @@ public class Page extends APINode {
       "hours",
       "ignore_coordinate_warnings",
       "impressum",
-      "instant_articles_submit_for_review",
       "is_always_open",
       "is_permanently_closed",
       "is_published",
@@ -35235,15 +34508,6 @@ public class Page extends APINode {
 
     public APIRequestUpdate setImpressum (String impressum) {
       this.setParam("impressum", impressum);
-      return this;
-    }
-
-    public APIRequestUpdate setInstantArticlesSubmitForReview (Boolean instantArticlesSubmitForReview) {
-      this.setParam("instant_articles_submit_for_review", instantArticlesSubmitForReview);
-      return this;
-    }
-    public APIRequestUpdate setInstantArticlesSubmitForReview (String instantArticlesSubmitForReview) {
-      this.setParam("instant_articles_submit_for_review", instantArticlesSubmitForReview);
       return this;
     }
 
@@ -36138,25 +35402,6 @@ public class Page extends APINode {
       }
   }
 
-  public static enum EnumPublishStatus {
-      @SerializedName("DRAFT")
-      VALUE_DRAFT("DRAFT"),
-      @SerializedName("LIVE")
-      VALUE_LIVE("LIVE"),
-      ;
-
-      private String value;
-
-      private EnumPublishStatus(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
   public static enum EnumMessagingType {
       @SerializedName("MESSAGE_TAG")
       VALUE_MESSAGE_TAG("MESSAGE_TAG"),
@@ -36215,6 +35460,27 @@ public class Page extends APINode {
       private String value;
 
       private EnumSenderAction(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumSuggestionAction {
+      @SerializedName("ACCEPT")
+      VALUE_ACCEPT("ACCEPT"),
+      @SerializedName("DISMISS")
+      VALUE_DISMISS("DISMISS"),
+      @SerializedName("IMPRESSION")
+      VALUE_IMPRESSION("IMPRESSION"),
+      ;
+
+      private String value;
+
+      private EnumSuggestionAction(String value) {
         this.value = value;
       }
 
@@ -36360,12 +35626,18 @@ public class Page extends APINode {
       VALUE_GENERAL_INFO("general_info"),
       @SerializedName("general_manager")
       VALUE_GENERAL_MANAGER("general_manager"),
+      @SerializedName("group_feed")
+      VALUE_GROUP_FEED("group_feed"),
       @SerializedName("hometown")
       VALUE_HOMETOWN("hometown"),
       @SerializedName("hours")
       VALUE_HOURS("hours"),
+      @SerializedName("in_thread_lead_form_submit")
+      VALUE_IN_THREAD_LEAD_FORM_SUBMIT("in_thread_lead_form_submit"),
       @SerializedName("inbox_labels")
       VALUE_INBOX_LABELS("inbox_labels"),
+      @SerializedName("invoice_access_bank_slip_events")
+      VALUE_INVOICE_ACCESS_BANK_SLIP_EVENTS("invoice_access_bank_slip_events"),
       @SerializedName("invoice_access_invoice_change")
       VALUE_INVOICE_ACCESS_INVOICE_CHANGE("invoice_access_invoice_change"),
       @SerializedName("invoice_access_invoice_draft_change")
@@ -36390,6 +35662,8 @@ public class Page extends APINode {
       VALUE_MENTION("mention"),
       @SerializedName("merchant_review")
       VALUE_MERCHANT_REVIEW("merchant_review"),
+      @SerializedName("message_context")
+      VALUE_MESSAGE_CONTEXT("message_context"),
       @SerializedName("message_deliveries")
       VALUE_MESSAGE_DELIVERIES("message_deliveries"),
       @SerializedName("message_echoes")
@@ -36470,6 +35744,8 @@ public class Page extends APINode {
       VALUE_RATINGS("ratings"),
       @SerializedName("registration")
       VALUE_REGISTRATION("registration"),
+      @SerializedName("send_cart")
+      VALUE_SEND_CART("send_cart"),
       @SerializedName("standby")
       VALUE_STANDBY("standby"),
       @SerializedName("user_action")
@@ -36700,7 +35976,6 @@ public class Page extends APINode {
     this.mImpressum = instance.mImpressum;
     this.mInfluences = instance.mInfluences;
     this.mInstagramBusinessAccount = instance.mInstagramBusinessAccount;
-    this.mInstantArticlesReviewStatus = instance.mInstantArticlesReviewStatus;
     this.mIsAlwaysOpen = instance.mIsAlwaysOpen;
     this.mIsChain = instance.mIsChain;
     this.mIsCommunityPage = instance.mIsCommunityPage;
@@ -36774,7 +36049,6 @@ public class Page extends APINode {
     this.mStoreNumber = instance.mStoreNumber;
     this.mStudio = instance.mStudio;
     this.mSupportsDonateButtonInLiveVideo = instance.mSupportsDonateButtonInLiveVideo;
-    this.mSupportsInstantArticles = instance.mSupportsInstantArticles;
     this.mTalkingAboutCount = instance.mTalkingAboutCount;
     this.mTemporaryStatus = instance.mTemporaryStatus;
     this.mUnreadMessageCount = instance.mUnreadMessageCount;

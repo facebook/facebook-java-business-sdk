@@ -94,7 +94,7 @@ public class CommerceMerchantSettings extends APINode {
   @SerializedName("payment_provider")
   private String mPaymentProvider = null;
   @SerializedName("privacy_url_by_locale")
-  private Map<String, String> mPrivacyUrlByLocale = null;
+  private List<Map<String, String>> mPrivacyUrlByLocale = null;
   @SerializedName("review_rejection_messages")
   private List<String> mReviewRejectionMessages = null;
   @SerializedName("review_rejection_reasons")
@@ -104,7 +104,7 @@ public class CommerceMerchantSettings extends APINode {
   @SerializedName("terms")
   private String mTerms = null;
   @SerializedName("terms_url_by_locale")
-  private Map<String, String> mTermsUrlByLocale = null;
+  private List<Map<String, String>> mTermsUrlByLocale = null;
   @SerializedName("whatsapp_channel")
   private Object mWhatsappChannel = null;
   protected static Gson gson = null;
@@ -464,7 +464,7 @@ public class CommerceMerchantSettings extends APINode {
     return mPaymentProvider;
   }
 
-  public Map<String, String> getFieldPrivacyUrlByLocale() {
+  public List<Map<String, String>> getFieldPrivacyUrlByLocale() {
     return mPrivacyUrlByLocale;
   }
 
@@ -484,7 +484,7 @@ public class CommerceMerchantSettings extends APINode {
     return mTerms;
   }
 
-  public Map<String, String> getFieldTermsUrlByLocale() {
+  public List<Map<String, String>> getFieldTermsUrlByLocale() {
     return mTermsUrlByLocale;
   }
 

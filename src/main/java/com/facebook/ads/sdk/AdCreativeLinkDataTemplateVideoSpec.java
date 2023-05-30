@@ -58,7 +58,7 @@ public class AdCreativeLinkDataTemplateVideoSpec extends APINode {
   @SerializedName("categorization_criteria")
   private String mCategorizationCriteria = null;
   @SerializedName("customization")
-  private Map<String, String> mCustomization = null;
+  private List<Map<String, String>> mCustomization = null;
   @SerializedName("template_id")
   private String mTemplateId = null;
   protected static Gson gson = null;
@@ -221,11 +221,11 @@ public class AdCreativeLinkDataTemplateVideoSpec extends APINode {
     return this;
   }
 
-  public Map<String, String> getFieldCustomization() {
+  public List<Map<String, String>> getFieldCustomization() {
     return mCustomization;
   }
 
-  public AdCreativeLinkDataTemplateVideoSpec setFieldCustomization(Map<String, String> value) {
+  public AdCreativeLinkDataTemplateVideoSpec setFieldCustomization(List<Map<String, String>> value) {
     this.mCustomization = value;
     return this;
   }

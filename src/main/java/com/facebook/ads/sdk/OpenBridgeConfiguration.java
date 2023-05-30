@@ -54,100 +54,76 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class Lead extends APINode {
-  @SerializedName("ad_id")
-  private String mAdId = null;
-  @SerializedName("ad_name")
-  private String mAdName = null;
-  @SerializedName("adset_id")
-  private String mAdsetId = null;
-  @SerializedName("adset_name")
-  private String mAdsetName = null;
-  @SerializedName("campaign_id")
-  private String mCampaignId = null;
-  @SerializedName("campaign_name")
-  private String mCampaignName = null;
-  @SerializedName("created_time")
-  private String mCreatedTime = null;
-  @SerializedName("custom_disclaimer_responses")
-  private List<UserLeadGenDisclaimerResponse> mCustomDisclaimerResponses = null;
-  @SerializedName("field_data")
-  private List<UserLeadGenFieldData> mFieldData = null;
-  @SerializedName("form_id")
-  private String mFormId = null;
-  @SerializedName("home_listing")
-  private HomeListing mHomeListing = null;
+public class OpenBridgeConfiguration extends APINode {
+  @SerializedName("access_key")
+  private String mAccessKey = null;
+  @SerializedName("active")
+  private Boolean mActive = null;
+  @SerializedName("endpoint")
+  private String mEndpoint = null;
+  @SerializedName("host_business_id")
+  private String mHostBusinessId = null;
+  @SerializedName("host_external_id")
+  private String mHostExternalId = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("is_organic")
-  private Boolean mIsOrganic = null;
-  @SerializedName("partner_name")
-  private String mPartnerName = null;
-  @SerializedName("platform")
-  private String mPlatform = null;
-  @SerializedName("post")
-  private Link mPost = null;
-  @SerializedName("post_submission_check_result")
-  private LeadGenPostSubmissionCheckResult mPostSubmissionCheckResult = null;
-  @SerializedName("retailer_item_id")
-  private String mRetailerItemId = null;
-  @SerializedName("vehicle")
-  private Vehicle mVehicle = null;
+  @SerializedName("pixel_id")
+  private String mPixelId = null;
   protected static Gson gson = null;
 
-  Lead() {
+  OpenBridgeConfiguration() {
   }
 
-  public Lead(Long id, APIContext context) {
+  public OpenBridgeConfiguration(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public Lead(String id, APIContext context) {
+  public OpenBridgeConfiguration(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public Lead fetch() throws APIException{
-    Lead newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public OpenBridgeConfiguration fetch() throws APIException{
+    OpenBridgeConfiguration newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static Lead fetchById(Long id, APIContext context) throws APIException {
+  public static OpenBridgeConfiguration fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<Lead> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<OpenBridgeConfiguration> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static Lead fetchById(String id, APIContext context) throws APIException {
+  public static OpenBridgeConfiguration fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<Lead> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<OpenBridgeConfiguration> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<Lead> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<Lead>)(
-      new APIRequest<Lead>(context, "", "/", "GET", Lead.getParser())
+  public static APINodeList<OpenBridgeConfiguration> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<OpenBridgeConfiguration>)(
+      new APIRequest<OpenBridgeConfiguration>(context, "", "/", "GET", OpenBridgeConfiguration.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<Lead>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<OpenBridgeConfiguration>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", Lead.getParser())
+      new APIRequest(context, "", "/", "GET", OpenBridgeConfiguration.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -160,12 +136,12 @@ public class Lead extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static Lead loadJSON(String json, APIContext context, String header) {
-    Lead lead = getGson().fromJson(json, Lead.class);
+  public static OpenBridgeConfiguration loadJSON(String json, APIContext context, String header) {
+    OpenBridgeConfiguration openBridgeConfiguration = getGson().fromJson(json, OpenBridgeConfiguration.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(lead.toString());
+      JsonElement o2 = parser.parse(openBridgeConfiguration.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -175,14 +151,14 @@ public class Lead extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    lead.context = context;
-    lead.rawValue = json;
-    lead.header = header;
-    return lead;
+    openBridgeConfiguration.context = context;
+    openBridgeConfiguration.rawValue = json;
+    openBridgeConfiguration.header = header;
+    return openBridgeConfiguration;
   }
 
-  public static APINodeList<Lead> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<Lead> leads = new APINodeList<Lead>(request, json, header);
+  public static APINodeList<OpenBridgeConfiguration> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<OpenBridgeConfiguration> openBridgeConfigurations = new APINodeList<OpenBridgeConfiguration>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -193,9 +169,9 @@ public class Lead extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          leads.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          openBridgeConfigurations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return leads;
+        return openBridgeConfigurations;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -205,20 +181,20 @@ public class Lead extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                leads.setCursors(before, after);
+                openBridgeConfigurations.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            leads.setPaging(previous, next);
+            openBridgeConfigurations.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              leads.setAppSecret(context.getAppSecretProof());
+              openBridgeConfigurations.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              leads.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              openBridgeConfigurations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -229,23 +205,23 @@ public class Lead extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  leads.add(loadJSON(entry.getValue().toString(), context, header));
+                  openBridgeConfigurations.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              leads.add(loadJSON(obj.toString(), context, header));
+              openBridgeConfigurations.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return leads;
+          return openBridgeConfigurations;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              leads.add(loadJSON(entry.getValue().toString(), context, header));
+              openBridgeConfigurations.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return leads;
+          return openBridgeConfigurations;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -262,20 +238,20 @@ public class Lead extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              leads.add(loadJSON(value.toString(), context, header));
+              openBridgeConfigurations.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return leads;
+            return openBridgeConfigurations;
           }
 
           // Sixth, check if it's pure JsonObject
-          leads.clear();
-          leads.add(loadJSON(json, context, header));
-          return leads;
+          openBridgeConfigurations.clear();
+          openBridgeConfigurations.add(loadJSON(json, context, header));
+          return openBridgeConfigurations;
         }
       }
     } catch (Exception e) {
@@ -310,90 +286,37 @@ public class Lead extends APINode {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
-
-  public String getFieldAdId() {
-    return mAdId;
+  public APIRequestUpdate update() {
+    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
   }
 
-  public String getFieldAdName() {
-    return mAdName;
+
+  public String getFieldAccessKey() {
+    return mAccessKey;
   }
 
-  public String getFieldAdsetId() {
-    return mAdsetId;
+  public Boolean getFieldActive() {
+    return mActive;
   }
 
-  public String getFieldAdsetName() {
-    return mAdsetName;
+  public String getFieldEndpoint() {
+    return mEndpoint;
   }
 
-  public String getFieldCampaignId() {
-    return mCampaignId;
+  public String getFieldHostBusinessId() {
+    return mHostBusinessId;
   }
 
-  public String getFieldCampaignName() {
-    return mCampaignName;
-  }
-
-  public String getFieldCreatedTime() {
-    return mCreatedTime;
-  }
-
-  public List<UserLeadGenDisclaimerResponse> getFieldCustomDisclaimerResponses() {
-    return mCustomDisclaimerResponses;
-  }
-
-  public List<UserLeadGenFieldData> getFieldFieldData() {
-    return mFieldData;
-  }
-
-  public String getFieldFormId() {
-    return mFormId;
-  }
-
-  public HomeListing getFieldHomeListing() {
-    if (mHomeListing != null) {
-      mHomeListing.context = getContext();
-    }
-    return mHomeListing;
+  public String getFieldHostExternalId() {
+    return mHostExternalId;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-  public Boolean getFieldIsOrganic() {
-    return mIsOrganic;
-  }
-
-  public String getFieldPartnerName() {
-    return mPartnerName;
-  }
-
-  public String getFieldPlatform() {
-    return mPlatform;
-  }
-
-  public Link getFieldPost() {
-    if (mPost != null) {
-      mPost.context = getContext();
-    }
-    return mPost;
-  }
-
-  public LeadGenPostSubmissionCheckResult getFieldPostSubmissionCheckResult() {
-    return mPostSubmissionCheckResult;
-  }
-
-  public String getFieldRetailerItemId() {
-    return mRetailerItemId;
-  }
-
-  public Vehicle getFieldVehicle() {
-    if (mVehicle != null) {
-      mVehicle.context = getContext();
-    }
-    return mVehicle;
+  public String getFieldPixelId() {
+    return mPixelId;
   }
 
 
@@ -502,64 +425,52 @@ public class Lead extends APINode {
 
   }
 
-  public static class APIRequestGet extends APIRequest<Lead> {
+  public static class APIRequestGet extends APIRequest<OpenBridgeConfiguration> {
 
-    Lead lastResponse = null;
+    OpenBridgeConfiguration lastResponse = null;
     @Override
-    public Lead getLastResponse() {
+    public OpenBridgeConfiguration getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "ad_id",
-      "ad_name",
-      "adset_id",
-      "adset_name",
-      "campaign_id",
-      "campaign_name",
-      "created_time",
-      "custom_disclaimer_responses",
-      "field_data",
-      "form_id",
-      "home_listing",
+      "access_key",
+      "active",
+      "endpoint",
+      "host_business_id",
+      "host_external_id",
       "id",
-      "is_organic",
-      "partner_name",
-      "platform",
-      "post",
-      "post_submission_check_result",
-      "retailer_item_id",
-      "vehicle",
+      "pixel_id",
     };
 
     @Override
-    public Lead parseResponse(String response, String header) throws APIException {
-      return Lead.parseResponse(response, getContext(), this, header).head();
+    public OpenBridgeConfiguration parseResponse(String response, String header) throws APIException {
+      return OpenBridgeConfiguration.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public Lead execute() throws APIException {
+    public OpenBridgeConfiguration execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public Lead execute(Map<String, Object> extraParams) throws APIException {
+    public OpenBridgeConfiguration execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<Lead> executeAsync() throws APIException {
+    public ListenableFuture<OpenBridgeConfiguration> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<Lead> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<OpenBridgeConfiguration> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Lead>() {
-           public Lead apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, OpenBridgeConfiguration>() {
+           public OpenBridgeConfiguration apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -623,81 +534,39 @@ public class Lead extends APINode {
       return this;
     }
 
-    public APIRequestGet requestAdIdField () {
-      return this.requestAdIdField(true);
+    public APIRequestGet requestAccessKeyField () {
+      return this.requestAccessKeyField(true);
     }
-    public APIRequestGet requestAdIdField (boolean value) {
-      this.requestField("ad_id", value);
+    public APIRequestGet requestAccessKeyField (boolean value) {
+      this.requestField("access_key", value);
       return this;
     }
-    public APIRequestGet requestAdNameField () {
-      return this.requestAdNameField(true);
+    public APIRequestGet requestActiveField () {
+      return this.requestActiveField(true);
     }
-    public APIRequestGet requestAdNameField (boolean value) {
-      this.requestField("ad_name", value);
+    public APIRequestGet requestActiveField (boolean value) {
+      this.requestField("active", value);
       return this;
     }
-    public APIRequestGet requestAdsetIdField () {
-      return this.requestAdsetIdField(true);
+    public APIRequestGet requestEndpointField () {
+      return this.requestEndpointField(true);
     }
-    public APIRequestGet requestAdsetIdField (boolean value) {
-      this.requestField("adset_id", value);
+    public APIRequestGet requestEndpointField (boolean value) {
+      this.requestField("endpoint", value);
       return this;
     }
-    public APIRequestGet requestAdsetNameField () {
-      return this.requestAdsetNameField(true);
+    public APIRequestGet requestHostBusinessIdField () {
+      return this.requestHostBusinessIdField(true);
     }
-    public APIRequestGet requestAdsetNameField (boolean value) {
-      this.requestField("adset_name", value);
+    public APIRequestGet requestHostBusinessIdField (boolean value) {
+      this.requestField("host_business_id", value);
       return this;
     }
-    public APIRequestGet requestCampaignIdField () {
-      return this.requestCampaignIdField(true);
+    public APIRequestGet requestHostExternalIdField () {
+      return this.requestHostExternalIdField(true);
     }
-    public APIRequestGet requestCampaignIdField (boolean value) {
-      this.requestField("campaign_id", value);
-      return this;
-    }
-    public APIRequestGet requestCampaignNameField () {
-      return this.requestCampaignNameField(true);
-    }
-    public APIRequestGet requestCampaignNameField (boolean value) {
-      this.requestField("campaign_name", value);
-      return this;
-    }
-    public APIRequestGet requestCreatedTimeField () {
-      return this.requestCreatedTimeField(true);
-    }
-    public APIRequestGet requestCreatedTimeField (boolean value) {
-      this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGet requestCustomDisclaimerResponsesField () {
-      return this.requestCustomDisclaimerResponsesField(true);
-    }
-    public APIRequestGet requestCustomDisclaimerResponsesField (boolean value) {
-      this.requestField("custom_disclaimer_responses", value);
-      return this;
-    }
-    public APIRequestGet requestFieldDataField () {
-      return this.requestFieldDataField(true);
-    }
-    public APIRequestGet requestFieldDataField (boolean value) {
-      this.requestField("field_data", value);
-      return this;
-    }
-    public APIRequestGet requestFormIdField () {
-      return this.requestFormIdField(true);
-    }
-    public APIRequestGet requestFormIdField (boolean value) {
-      this.requestField("form_id", value);
-      return this;
-    }
-    public APIRequestGet requestHomeListingField () {
-      return this.requestHomeListingField(true);
-    }
-    public APIRequestGet requestHomeListingField (boolean value) {
-      this.requestField("home_listing", value);
+    public APIRequestGet requestHostExternalIdField (boolean value) {
+      this.requestField("host_external_id", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -707,55 +576,155 @@ public class Lead extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestIsOrganicField () {
-      return this.requestIsOrganicField(true);
+    public APIRequestGet requestPixelIdField () {
+      return this.requestPixelIdField(true);
     }
-    public APIRequestGet requestIsOrganicField (boolean value) {
-      this.requestField("is_organic", value);
+    public APIRequestGet requestPixelIdField (boolean value) {
+      this.requestField("pixel_id", value);
       return this;
     }
-    public APIRequestGet requestPartnerNameField () {
-      return this.requestPartnerNameField(true);
+  }
+
+  public static class APIRequestUpdate extends APIRequest<OpenBridgeConfiguration> {
+
+    OpenBridgeConfiguration lastResponse = null;
+    @Override
+    public OpenBridgeConfiguration getLastResponse() {
+      return lastResponse;
     }
-    public APIRequestGet requestPartnerNameField (boolean value) {
-      this.requestField("partner_name", value);
+    public static final String[] PARAMS = {
+      "access_key",
+      "active",
+      "endpoint",
+      "host_business_id",
+      "host_external_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public OpenBridgeConfiguration parseResponse(String response, String header) throws APIException {
+      return OpenBridgeConfiguration.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public OpenBridgeConfiguration execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public OpenBridgeConfiguration execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<OpenBridgeConfiguration> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<OpenBridgeConfiguration> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, OpenBridgeConfiguration>() {
+           public OpenBridgeConfiguration apply(ResponseWrapper result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestUpdate(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestUpdate setParam(String param, Object value) {
+      setParamInternal(param, value);
       return this;
     }
-    public APIRequestGet requestPlatformField () {
-      return this.requestPlatformField(true);
-    }
-    public APIRequestGet requestPlatformField (boolean value) {
-      this.requestField("platform", value);
+
+    @Override
+    public APIRequestUpdate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
       return this;
     }
-    public APIRequestGet requestPostField () {
-      return this.requestPostField(true);
-    }
-    public APIRequestGet requestPostField (boolean value) {
-      this.requestField("post", value);
+
+
+    public APIRequestUpdate setAccessKey (String accessKey) {
+      this.setParam("access_key", accessKey);
       return this;
     }
-    public APIRequestGet requestPostSubmissionCheckResultField () {
-      return this.requestPostSubmissionCheckResultField(true);
-    }
-    public APIRequestGet requestPostSubmissionCheckResultField (boolean value) {
-      this.requestField("post_submission_check_result", value);
+
+    public APIRequestUpdate setActive (Boolean active) {
+      this.setParam("active", active);
       return this;
     }
-    public APIRequestGet requestRetailerItemIdField () {
-      return this.requestRetailerItemIdField(true);
-    }
-    public APIRequestGet requestRetailerItemIdField (boolean value) {
-      this.requestField("retailer_item_id", value);
+    public APIRequestUpdate setActive (String active) {
+      this.setParam("active", active);
       return this;
     }
-    public APIRequestGet requestVehicleField () {
-      return this.requestVehicleField(true);
-    }
-    public APIRequestGet requestVehicleField (boolean value) {
-      this.requestField("vehicle", value);
+
+    public APIRequestUpdate setEndpoint (String endpoint) {
+      this.setParam("endpoint", endpoint);
       return this;
     }
+
+    public APIRequestUpdate setHostBusinessId (Long hostBusinessId) {
+      this.setParam("host_business_id", hostBusinessId);
+      return this;
+    }
+    public APIRequestUpdate setHostBusinessId (String hostBusinessId) {
+      this.setParam("host_business_id", hostBusinessId);
+      return this;
+    }
+
+    public APIRequestUpdate setHostExternalId (String hostExternalId) {
+      this.setParam("host_external_id", hostExternalId);
+      return this;
+    }
+
+    public APIRequestUpdate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestUpdate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
 
@@ -772,35 +741,23 @@ public class Lead extends APINode {
     return gson;
   }
 
-  public Lead copyFrom(Lead instance) {
-    this.mAdId = instance.mAdId;
-    this.mAdName = instance.mAdName;
-    this.mAdsetId = instance.mAdsetId;
-    this.mAdsetName = instance.mAdsetName;
-    this.mCampaignId = instance.mCampaignId;
-    this.mCampaignName = instance.mCampaignName;
-    this.mCreatedTime = instance.mCreatedTime;
-    this.mCustomDisclaimerResponses = instance.mCustomDisclaimerResponses;
-    this.mFieldData = instance.mFieldData;
-    this.mFormId = instance.mFormId;
-    this.mHomeListing = instance.mHomeListing;
+  public OpenBridgeConfiguration copyFrom(OpenBridgeConfiguration instance) {
+    this.mAccessKey = instance.mAccessKey;
+    this.mActive = instance.mActive;
+    this.mEndpoint = instance.mEndpoint;
+    this.mHostBusinessId = instance.mHostBusinessId;
+    this.mHostExternalId = instance.mHostExternalId;
     this.mId = instance.mId;
-    this.mIsOrganic = instance.mIsOrganic;
-    this.mPartnerName = instance.mPartnerName;
-    this.mPlatform = instance.mPlatform;
-    this.mPost = instance.mPost;
-    this.mPostSubmissionCheckResult = instance.mPostSubmissionCheckResult;
-    this.mRetailerItemId = instance.mRetailerItemId;
-    this.mVehicle = instance.mVehicle;
+    this.mPixelId = instance.mPixelId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<Lead> getParser() {
-    return new APIRequest.ResponseParser<Lead>() {
-      public APINodeList<Lead> parseResponse(String response, APIContext context, APIRequest<Lead> request, String header) throws MalformedResponseException {
-        return Lead.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<OpenBridgeConfiguration> getParser() {
+    return new APIRequest.ResponseParser<OpenBridgeConfiguration>() {
+      public APINodeList<OpenBridgeConfiguration> parseResponse(String response, APIContext context, APIRequest<OpenBridgeConfiguration> request, String header) throws MalformedResponseException {
+        return OpenBridgeConfiguration.parseResponse(response, context, request, header);
       }
     };
   }

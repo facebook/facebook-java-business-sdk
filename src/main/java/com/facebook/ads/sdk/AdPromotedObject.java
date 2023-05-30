@@ -57,6 +57,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdPromotedObject extends APINode {
   @SerializedName("application_id")
   private String mApplicationId = null;
+  @SerializedName("conversion_goal_id")
+  private String mConversionGoalId = null;
   @SerializedName("custom_conversion_id")
   private String mCustomConversionId = null;
   @SerializedName("custom_event_str")
@@ -85,6 +87,8 @@ public class AdPromotedObject extends APINode {
   private String mPixelId = null;
   @SerializedName("pixel_rule")
   private String mPixelRule = null;
+  @SerializedName("place_page_set")
+  private AdPlacePageSet mPlacePageSet = null;
   @SerializedName("place_page_set_id")
   private String mPlacePageSetId = null;
   @SerializedName("product_catalog_id")
@@ -255,6 +259,15 @@ public class AdPromotedObject extends APINode {
     return this;
   }
 
+  public String getFieldConversionGoalId() {
+    return mConversionGoalId;
+  }
+
+  public AdPromotedObject setFieldConversionGoalId(String value) {
+    this.mConversionGoalId = value;
+    return this;
+  }
+
   public String getFieldCustomConversionId() {
     return mCustomConversionId;
   }
@@ -381,6 +394,23 @@ public class AdPromotedObject extends APINode {
     return this;
   }
 
+  public AdPlacePageSet getFieldPlacePageSet() {
+    if (mPlacePageSet != null) {
+      mPlacePageSet.context = getContext();
+    }
+    return mPlacePageSet;
+  }
+
+  public AdPromotedObject setFieldPlacePageSet(AdPlacePageSet value) {
+    this.mPlacePageSet = value;
+    return this;
+  }
+
+  public AdPromotedObject setFieldPlacePageSet(String value) {
+    Type type = new TypeToken<AdPlacePageSet>(){}.getType();
+    this.mPlacePageSet = AdPlacePageSet.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldPlacePageSetId() {
     return mPlacePageSetId;
   }
@@ -515,6 +545,7 @@ public class AdPromotedObject extends APINode {
 
   public AdPromotedObject copyFrom(AdPromotedObject instance) {
     this.mApplicationId = instance.mApplicationId;
+    this.mConversionGoalId = instance.mConversionGoalId;
     this.mCustomConversionId = instance.mCustomConversionId;
     this.mCustomEventStr = instance.mCustomEventStr;
     this.mCustomEventType = instance.mCustomEventType;
@@ -529,6 +560,7 @@ public class AdPromotedObject extends APINode {
     this.mPixelAggregationRule = instance.mPixelAggregationRule;
     this.mPixelId = instance.mPixelId;
     this.mPixelRule = instance.mPixelRule;
+    this.mPlacePageSet = instance.mPlacePageSet;
     this.mPlacePageSetId = instance.mPlacePageSetId;
     this.mProductCatalogId = instance.mProductCatalogId;
     this.mProductItemId = instance.mProductItemId;

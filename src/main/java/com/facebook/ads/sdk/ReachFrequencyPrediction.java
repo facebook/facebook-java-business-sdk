@@ -90,7 +90,7 @@ public class ReachFrequencyPrediction extends APINode {
   @SerializedName("daily_impression_curve")
   private List<Double> mDailyImpressionCurve = null;
   @SerializedName("daily_impression_curve_map")
-  private Map<Long, List<Double>> mDailyImpressionCurveMap = null;
+  private List<Map<Long, List<Double>>> mDailyImpressionCurveMap = null;
   @SerializedName("day_parting_schedule")
   private List<ReachFrequencyDayPart> mDayPartingSchedule = null;
   @SerializedName("destination_id")
@@ -122,9 +122,9 @@ public class ReachFrequencyPrediction extends APINode {
   @SerializedName("frequency_cap")
   private Long mFrequencyCap = null;
   @SerializedName("frequency_distribution_map")
-  private Map<Long, List<Double>> mFrequencyDistributionMap = null;
+  private List<Map<Long, List<Double>>> mFrequencyDistributionMap = null;
   @SerializedName("frequency_distribution_map_agg")
-  private Map<Long, List<Long>> mFrequencyDistributionMapAgg = null;
+  private List<Map<Long, List<Long>>> mFrequencyDistributionMapAgg = null;
   @SerializedName("grp_audience_size")
   private Double mGrpAudienceSize = null;
   @SerializedName("grp_avg_probability_map")
@@ -190,7 +190,7 @@ public class ReachFrequencyPrediction extends APINode {
   @SerializedName("placement_breakdown")
   private ReachFrequencyEstimatesPlacementBreakdown mPlacementBreakdown = null;
   @SerializedName("placement_breakdown_map")
-  private Map<Long, ReachFrequencyEstimatesPlacementBreakdown> mPlacementBreakdownMap = null;
+  private List<Map<Long, ReachFrequencyEstimatesPlacementBreakdown>> mPlacementBreakdownMap = null;
   @SerializedName("plan_name")
   private String mPlanName = null;
   @SerializedName("plan_type")
@@ -509,7 +509,7 @@ public class ReachFrequencyPrediction extends APINode {
     return mDailyImpressionCurve;
   }
 
-  public Map<Long, List<Double>> getFieldDailyImpressionCurveMap() {
+  public List<Map<Long, List<Double>>> getFieldDailyImpressionCurveMap() {
     return mDailyImpressionCurveMap;
   }
 
@@ -573,11 +573,11 @@ public class ReachFrequencyPrediction extends APINode {
     return mFrequencyCap;
   }
 
-  public Map<Long, List<Double>> getFieldFrequencyDistributionMap() {
+  public List<Map<Long, List<Double>>> getFieldFrequencyDistributionMap() {
     return mFrequencyDistributionMap;
   }
 
-  public Map<Long, List<Long>> getFieldFrequencyDistributionMapAgg() {
+  public List<Map<Long, List<Long>>> getFieldFrequencyDistributionMapAgg() {
     return mFrequencyDistributionMapAgg;
   }
 
@@ -709,7 +709,7 @@ public class ReachFrequencyPrediction extends APINode {
     return mPlacementBreakdown;
   }
 
-  public Map<Long, ReachFrequencyEstimatesPlacementBreakdown> getFieldPlacementBreakdownMap() {
+  public List<Map<Long, ReachFrequencyEstimatesPlacementBreakdown>> getFieldPlacementBreakdownMap() {
     return mPlacementBreakdownMap;
   }
 

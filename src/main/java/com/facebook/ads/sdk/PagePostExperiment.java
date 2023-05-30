@@ -68,7 +68,7 @@ public class PagePostExperiment extends APINode {
   @SerializedName("id")
   private String mId = null;
   @SerializedName("insight_snapshots")
-  private Map<String, Map<Long, Object>> mInsightSnapshots = null;
+  private List<Map<String, List<Map<Long, Object>>>> mInsightSnapshots = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("optimization_goal")
@@ -322,7 +322,7 @@ public class PagePostExperiment extends APINode {
     return mId;
   }
 
-  public Map<String, Map<Long, Object>> getFieldInsightSnapshots() {
+  public List<Map<String, List<Map<Long, Object>>>> getFieldInsightSnapshots() {
     return mInsightSnapshots;
   }
 

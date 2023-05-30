@@ -61,6 +61,12 @@ public class ReachFrequencyEstimatesPlacementBreakdown extends APINode {
   private List<Double> mAudienceNetwork = null;
   @SerializedName("desktop")
   private List<Double> mDesktop = null;
+  @SerializedName("facebook_search")
+  private List<Double> mFacebookSearch = null;
+  @SerializedName("fb_reels")
+  private List<Double> mFbReels = null;
+  @SerializedName("fb_reels_overlay")
+  private List<Double> mFbReelsOverlay = null;
   @SerializedName("ig_android")
   private List<Double> mIgAndroid = null;
   @SerializedName("ig_ios")
@@ -259,6 +265,33 @@ public class ReachFrequencyEstimatesPlacementBreakdown extends APINode {
     return this;
   }
 
+  public List<Double> getFieldFacebookSearch() {
+    return mFacebookSearch;
+  }
+
+  public ReachFrequencyEstimatesPlacementBreakdown setFieldFacebookSearch(List<Double> value) {
+    this.mFacebookSearch = value;
+    return this;
+  }
+
+  public List<Double> getFieldFbReels() {
+    return mFbReels;
+  }
+
+  public ReachFrequencyEstimatesPlacementBreakdown setFieldFbReels(List<Double> value) {
+    this.mFbReels = value;
+    return this;
+  }
+
+  public List<Double> getFieldFbReelsOverlay() {
+    return mFbReelsOverlay;
+  }
+
+  public ReachFrequencyEstimatesPlacementBreakdown setFieldFbReelsOverlay(List<Double> value) {
+    this.mFbReelsOverlay = value;
+    return this;
+  }
+
   public List<Double> getFieldIgAndroid() {
     return mIgAndroid;
   }
@@ -369,6 +402,9 @@ public class ReachFrequencyEstimatesPlacementBreakdown extends APINode {
     this.mAndroid = instance.mAndroid;
     this.mAudienceNetwork = instance.mAudienceNetwork;
     this.mDesktop = instance.mDesktop;
+    this.mFacebookSearch = instance.mFacebookSearch;
+    this.mFbReels = instance.mFbReels;
+    this.mFbReelsOverlay = instance.mFbReelsOverlay;
     this.mIgAndroid = instance.mIgAndroid;
     this.mIgIos = instance.mIgIos;
     this.mIgOther = instance.mIgOther;

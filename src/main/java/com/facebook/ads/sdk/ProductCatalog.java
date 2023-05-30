@@ -430,14 +430,6 @@ public class ProductCatalog extends APINode {
     return new APIRequestCreateLocalizedItemsBatch(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetMediaTitles getMediaTitles() {
-    return new APIRequestGetMediaTitles(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateMediaTitle createMediaTitle() {
-    return new APIRequestCreateMediaTitle(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetPricingVariablesBatch getPricingVariablesBatch() {
     return new APIRequestGetPricingVariablesBatch(this.getPrefixedId().toString(), context);
   }
@@ -2004,6 +1996,7 @@ public class ProductCatalog extends APINode {
       "allow_upsert",
       "fbe_external_business_id",
       "requests",
+      "version",
     };
 
     public static final String[] FIELDS = {
@@ -2082,6 +2075,15 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestCreateBatch setRequests (String requests) {
       this.setParam("requests", requests);
+      return this;
+    }
+
+    public APIRequestCreateBatch setVersion (Long version) {
+      this.setParam("version", version);
+      return this;
+    }
+    public APIRequestCreateBatch setVersion (String version) {
+      this.setParam("version", version);
       return this;
     }
 
@@ -6283,6 +6285,7 @@ public class ProductCatalog extends APINode {
       "item_sub_type",
       "item_type",
       "requests",
+      "version",
     };
 
     public static final String[] FIELDS = {
@@ -6373,6 +6376,15 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateItemsBatch setVersion (Long version) {
+      this.setParam("version", version);
+      return this;
+    }
+    public APIRequestCreateItemsBatch setVersion (String version) {
+      this.setParam("version", version);
+      return this;
+    }
+
     public APIRequestCreateItemsBatch requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -6422,6 +6434,7 @@ public class ProductCatalog extends APINode {
       "allow_upsert",
       "item_type",
       "requests",
+      "version",
     };
 
     public static final String[] FIELDS = {
@@ -6503,6 +6516,15 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateLocalizedItemsBatch setVersion (Long version) {
+      this.setParam("version", version);
+      return this;
+    }
+    public APIRequestCreateLocalizedItemsBatch setVersion (String version) {
+      this.setParam("version", version);
+      return this;
+    }
+
     public APIRequestCreateLocalizedItemsBatch requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -6535,500 +6557,6 @@ public class ProductCatalog extends APINode {
 
     @Override
     public APIRequestCreateLocalizedItemsBatch requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestGetMediaTitles extends APIRequest<MediaTitle> {
-
-    APINodeList<MediaTitle> lastResponse = null;
-    @Override
-    public APINodeList<MediaTitle> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "bulk_pagination",
-      "filter",
-    };
-
-    public static final String[] FIELDS = {
-      "applinks",
-      "category_specific_fields",
-      "content_category",
-      "currency",
-      "description",
-      "fb_page_alias",
-      "fb_page_id",
-      "genres",
-      "id",
-      "image_fetch_status",
-      "images",
-      "kg_fb_id",
-      "media_title_id",
-      "price",
-      "sanitized_images",
-      "title",
-      "title_display_name",
-      "unit_price",
-      "url",
-      "visibility",
-      "wiki_data_item",
-    };
-
-    @Override
-    public APINodeList<MediaTitle> parseResponse(String response, String header) throws APIException {
-      return MediaTitle.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<MediaTitle> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<MediaTitle> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<MediaTitle>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<MediaTitle>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<MediaTitle>>() {
-           public APINodeList<MediaTitle> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetMediaTitles.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetMediaTitles(String nodeId, APIContext context) {
-      super(context, nodeId, "/media_titles", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetMediaTitles setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMediaTitles setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetMediaTitles setBulkPagination (Boolean bulkPagination) {
-      this.setParam("bulk_pagination", bulkPagination);
-      return this;
-    }
-    public APIRequestGetMediaTitles setBulkPagination (String bulkPagination) {
-      this.setParam("bulk_pagination", bulkPagination);
-      return this;
-    }
-
-    public APIRequestGetMediaTitles setFilter (Object filter) {
-      this.setParam("filter", filter);
-      return this;
-    }
-    public APIRequestGetMediaTitles setFilter (String filter) {
-      this.setParam("filter", filter);
-      return this;
-    }
-
-    public APIRequestGetMediaTitles requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetMediaTitles requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMediaTitles requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetMediaTitles requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMediaTitles requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMediaTitles requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetMediaTitles requestApplinksField () {
-      return this.requestApplinksField(true);
-    }
-    public APIRequestGetMediaTitles requestApplinksField (boolean value) {
-      this.requestField("applinks", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestCategorySpecificFieldsField () {
-      return this.requestCategorySpecificFieldsField(true);
-    }
-    public APIRequestGetMediaTitles requestCategorySpecificFieldsField (boolean value) {
-      this.requestField("category_specific_fields", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestContentCategoryField () {
-      return this.requestContentCategoryField(true);
-    }
-    public APIRequestGetMediaTitles requestContentCategoryField (boolean value) {
-      this.requestField("content_category", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestCurrencyField () {
-      return this.requestCurrencyField(true);
-    }
-    public APIRequestGetMediaTitles requestCurrencyField (boolean value) {
-      this.requestField("currency", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGetMediaTitles requestDescriptionField (boolean value) {
-      this.requestField("description", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestFbPageAliasField () {
-      return this.requestFbPageAliasField(true);
-    }
-    public APIRequestGetMediaTitles requestFbPageAliasField (boolean value) {
-      this.requestField("fb_page_alias", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestFbPageIdField () {
-      return this.requestFbPageIdField(true);
-    }
-    public APIRequestGetMediaTitles requestFbPageIdField (boolean value) {
-      this.requestField("fb_page_id", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestGenresField () {
-      return this.requestGenresField(true);
-    }
-    public APIRequestGetMediaTitles requestGenresField (boolean value) {
-      this.requestField("genres", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetMediaTitles requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestImageFetchStatusField () {
-      return this.requestImageFetchStatusField(true);
-    }
-    public APIRequestGetMediaTitles requestImageFetchStatusField (boolean value) {
-      this.requestField("image_fetch_status", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestImagesField () {
-      return this.requestImagesField(true);
-    }
-    public APIRequestGetMediaTitles requestImagesField (boolean value) {
-      this.requestField("images", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestKgFbIdField () {
-      return this.requestKgFbIdField(true);
-    }
-    public APIRequestGetMediaTitles requestKgFbIdField (boolean value) {
-      this.requestField("kg_fb_id", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestMediaTitleIdField () {
-      return this.requestMediaTitleIdField(true);
-    }
-    public APIRequestGetMediaTitles requestMediaTitleIdField (boolean value) {
-      this.requestField("media_title_id", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestPriceField () {
-      return this.requestPriceField(true);
-    }
-    public APIRequestGetMediaTitles requestPriceField (boolean value) {
-      this.requestField("price", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestSanitizedImagesField () {
-      return this.requestSanitizedImagesField(true);
-    }
-    public APIRequestGetMediaTitles requestSanitizedImagesField (boolean value) {
-      this.requestField("sanitized_images", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestTitleField () {
-      return this.requestTitleField(true);
-    }
-    public APIRequestGetMediaTitles requestTitleField (boolean value) {
-      this.requestField("title", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestTitleDisplayNameField () {
-      return this.requestTitleDisplayNameField(true);
-    }
-    public APIRequestGetMediaTitles requestTitleDisplayNameField (boolean value) {
-      this.requestField("title_display_name", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestUnitPriceField () {
-      return this.requestUnitPriceField(true);
-    }
-    public APIRequestGetMediaTitles requestUnitPriceField (boolean value) {
-      this.requestField("unit_price", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestUrlField () {
-      return this.requestUrlField(true);
-    }
-    public APIRequestGetMediaTitles requestUrlField (boolean value) {
-      this.requestField("url", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestVisibilityField () {
-      return this.requestVisibilityField(true);
-    }
-    public APIRequestGetMediaTitles requestVisibilityField (boolean value) {
-      this.requestField("visibility", value);
-      return this;
-    }
-    public APIRequestGetMediaTitles requestWikiDataItemField () {
-      return this.requestWikiDataItemField(true);
-    }
-    public APIRequestGetMediaTitles requestWikiDataItemField (boolean value) {
-      this.requestField("wiki_data_item", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestCreateMediaTitle extends APIRequest<MediaTitle> {
-
-    MediaTitle lastResponse = null;
-    @Override
-    public MediaTitle getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "applinks",
-      "content_category",
-      "currency",
-      "description",
-      "fb_page_id",
-      "genres",
-      "images",
-      "kg_fb_id",
-      "media_title_id",
-      "price",
-      "title",
-      "title_display_name",
-      "url",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public MediaTitle parseResponse(String response, String header) throws APIException {
-      return MediaTitle.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public MediaTitle execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public MediaTitle execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<MediaTitle> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<MediaTitle> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, MediaTitle>() {
-           public MediaTitle apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateMediaTitle.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateMediaTitle(String nodeId, APIContext context) {
-      super(context, nodeId, "/media_titles", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateMediaTitle setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateMediaTitle setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateMediaTitle setApplinks (Object applinks) {
-      this.setParam("applinks", applinks);
-      return this;
-    }
-    public APIRequestCreateMediaTitle setApplinks (String applinks) {
-      this.setParam("applinks", applinks);
-      return this;
-    }
-
-    public APIRequestCreateMediaTitle setContentCategory (MediaTitle.EnumContentCategory contentCategory) {
-      this.setParam("content_category", contentCategory);
-      return this;
-    }
-    public APIRequestCreateMediaTitle setContentCategory (String contentCategory) {
-      this.setParam("content_category", contentCategory);
-      return this;
-    }
-
-    public APIRequestCreateMediaTitle setCurrency (String currency) {
-      this.setParam("currency", currency);
-      return this;
-    }
-
-    public APIRequestCreateMediaTitle setDescription (String description) {
-      this.setParam("description", description);
-      return this;
-    }
-
-    public APIRequestCreateMediaTitle setFbPageId (String fbPageId) {
-      this.setParam("fb_page_id", fbPageId);
-      return this;
-    }
-
-    public APIRequestCreateMediaTitle setGenres (List<String> genres) {
-      this.setParam("genres", genres);
-      return this;
-    }
-    public APIRequestCreateMediaTitle setGenres (String genres) {
-      this.setParam("genres", genres);
-      return this;
-    }
-
-    public APIRequestCreateMediaTitle setImages (List<Object> images) {
-      this.setParam("images", images);
-      return this;
-    }
-    public APIRequestCreateMediaTitle setImages (String images) {
-      this.setParam("images", images);
-      return this;
-    }
-
-    public APIRequestCreateMediaTitle setKgFbId (String kgFbId) {
-      this.setParam("kg_fb_id", kgFbId);
-      return this;
-    }
-
-    public APIRequestCreateMediaTitle setMediaTitleId (String mediaTitleId) {
-      this.setParam("media_title_id", mediaTitleId);
-      return this;
-    }
-
-    public APIRequestCreateMediaTitle setPrice (Long price) {
-      this.setParam("price", price);
-      return this;
-    }
-    public APIRequestCreateMediaTitle setPrice (String price) {
-      this.setParam("price", price);
-      return this;
-    }
-
-    public APIRequestCreateMediaTitle setTitle (String title) {
-      this.setParam("title", title);
-      return this;
-    }
-
-    public APIRequestCreateMediaTitle setTitleDisplayName (String titleDisplayName) {
-      this.setParam("title_display_name", titleDisplayName);
-      return this;
-    }
-
-    public APIRequestCreateMediaTitle setUrl (String url) {
-      this.setParam("url", url);
-      return this;
-    }
-
-    public APIRequestCreateMediaTitle requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateMediaTitle requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateMediaTitle requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateMediaTitle requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateMediaTitle requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateMediaTitle requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -10053,6 +9581,7 @@ public class ProductCatalog extends APINode {
       "amount_price",
       "amount_qualifier",
       "applinks",
+      "availability",
       "body_style",
       "cashback_currency",
       "cashback_price",
@@ -10062,11 +9591,17 @@ public class ProductCatalog extends APINode {
       "downpayment_currency",
       "downpayment_price",
       "downpayment_qualifier",
+      "drivetrain",
       "end_date",
       "end_time",
+      "exterior_color",
+      "fuel_type",
+      "generation",
       "id",
       "image_fetch_status",
       "images",
+      "interior_color",
+      "interior_upholstery",
       "make",
       "model",
       "offer_description",
@@ -10079,6 +9614,7 @@ public class ProductCatalog extends APINode {
       "term_length",
       "term_qualifier",
       "title",
+      "transmission",
       "trim",
       "unit_price",
       "url",
@@ -10229,6 +9765,13 @@ public class ProductCatalog extends APINode {
       this.requestField("applinks", value);
       return this;
     }
+    public APIRequestGetVehicleOffers requestAvailabilityField () {
+      return this.requestAvailabilityField(true);
+    }
+    public APIRequestGetVehicleOffers requestAvailabilityField (boolean value) {
+      this.requestField("availability", value);
+      return this;
+    }
     public APIRequestGetVehicleOffers requestBodyStyleField () {
       return this.requestBodyStyleField(true);
     }
@@ -10292,6 +9835,13 @@ public class ProductCatalog extends APINode {
       this.requestField("downpayment_qualifier", value);
       return this;
     }
+    public APIRequestGetVehicleOffers requestDrivetrainField () {
+      return this.requestDrivetrainField(true);
+    }
+    public APIRequestGetVehicleOffers requestDrivetrainField (boolean value) {
+      this.requestField("drivetrain", value);
+      return this;
+    }
     public APIRequestGetVehicleOffers requestEndDateField () {
       return this.requestEndDateField(true);
     }
@@ -10304,6 +9854,27 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetVehicleOffers requestEndTimeField (boolean value) {
       this.requestField("end_time", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestExteriorColorField () {
+      return this.requestExteriorColorField(true);
+    }
+    public APIRequestGetVehicleOffers requestExteriorColorField (boolean value) {
+      this.requestField("exterior_color", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestFuelTypeField () {
+      return this.requestFuelTypeField(true);
+    }
+    public APIRequestGetVehicleOffers requestFuelTypeField (boolean value) {
+      this.requestField("fuel_type", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestGenerationField () {
+      return this.requestGenerationField(true);
+    }
+    public APIRequestGetVehicleOffers requestGenerationField (boolean value) {
+      this.requestField("generation", value);
       return this;
     }
     public APIRequestGetVehicleOffers requestIdField () {
@@ -10325,6 +9896,20 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetVehicleOffers requestImagesField (boolean value) {
       this.requestField("images", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestInteriorColorField () {
+      return this.requestInteriorColorField(true);
+    }
+    public APIRequestGetVehicleOffers requestInteriorColorField (boolean value) {
+      this.requestField("interior_color", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestInteriorUpholsteryField () {
+      return this.requestInteriorUpholsteryField(true);
+    }
+    public APIRequestGetVehicleOffers requestInteriorUpholsteryField (boolean value) {
+      this.requestField("interior_upholstery", value);
       return this;
     }
     public APIRequestGetVehicleOffers requestMakeField () {
@@ -10409,6 +9994,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetVehicleOffers requestTitleField (boolean value) {
       this.requestField("title", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestTransmissionField () {
+      return this.requestTransmissionField(true);
+    }
+    public APIRequestGetVehicleOffers requestTransmissionField (boolean value) {
+      this.requestField("transmission", value);
       return this;
     }
     public APIRequestGetVehicleOffers requestTrimField () {

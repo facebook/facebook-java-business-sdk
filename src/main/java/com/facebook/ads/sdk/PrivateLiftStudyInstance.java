@@ -542,6 +542,7 @@ public class PrivateLiftStudyInstance extends APINode {
     }
     public static final String[] PARAMS = {
       "operation",
+      "run_id",
     };
 
     public static final String[] FIELDS = {
@@ -606,6 +607,11 @@ public class PrivateLiftStudyInstance extends APINode {
     }
     public APIRequestUpdate setOperation (String operation) {
       this.setParam("operation", operation);
+      return this;
+    }
+
+    public APIRequestUpdate setRunId (String runId) {
+      this.setParam("run_id", runId);
       return this;
     }
 

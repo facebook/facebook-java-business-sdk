@@ -54,80 +54,72 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class InstantArticle extends APINode {
-  @SerializedName("canonical_url")
-  private String mCanonicalUrl = null;
-  @SerializedName("development_mode")
-  private Boolean mDevelopmentMode = null;
-  @SerializedName("html_source")
-  private String mHtmlSource = null;
+public class WhatsAppBusinessPreVerifiedPhoneNumber extends APINode {
+  @SerializedName("code_verification_status")
+  private String mCodeVerificationStatus = null;
+  @SerializedName("code_verification_time")
+  private String mCodeVerificationTime = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("most_recent_import_status")
-  private Object mMostRecentImportStatus = null;
-  @SerializedName("photos")
-  private List<Object> mPhotos = null;
-  @SerializedName("publish_status")
-  private String mPublishStatus = null;
-  @SerializedName("published")
-  private Boolean mPublished = null;
-  @SerializedName("videos")
-  private List<Object> mVideos = null;
+  @SerializedName("phone_number")
+  private String mPhoneNumber = null;
+  @SerializedName("verification_expiry_time")
+  private String mVerificationExpiryTime = null;
   protected static Gson gson = null;
 
-  InstantArticle() {
+  WhatsAppBusinessPreVerifiedPhoneNumber() {
   }
 
-  public InstantArticle(Long id, APIContext context) {
+  public WhatsAppBusinessPreVerifiedPhoneNumber(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public InstantArticle(String id, APIContext context) {
+  public WhatsAppBusinessPreVerifiedPhoneNumber(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public InstantArticle fetch() throws APIException{
-    InstantArticle newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public WhatsAppBusinessPreVerifiedPhoneNumber fetch() throws APIException{
+    WhatsAppBusinessPreVerifiedPhoneNumber newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static InstantArticle fetchById(Long id, APIContext context) throws APIException {
+  public static WhatsAppBusinessPreVerifiedPhoneNumber fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<InstantArticle> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<WhatsAppBusinessPreVerifiedPhoneNumber> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static InstantArticle fetchById(String id, APIContext context) throws APIException {
+  public static WhatsAppBusinessPreVerifiedPhoneNumber fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<InstantArticle> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<WhatsAppBusinessPreVerifiedPhoneNumber> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<InstantArticle> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<InstantArticle>)(
-      new APIRequest<InstantArticle>(context, "", "/", "GET", InstantArticle.getParser())
+  public static APINodeList<WhatsAppBusinessPreVerifiedPhoneNumber> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<WhatsAppBusinessPreVerifiedPhoneNumber>)(
+      new APIRequest<WhatsAppBusinessPreVerifiedPhoneNumber>(context, "", "/", "GET", WhatsAppBusinessPreVerifiedPhoneNumber.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<InstantArticle>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<WhatsAppBusinessPreVerifiedPhoneNumber>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", InstantArticle.getParser())
+      new APIRequest(context, "", "/", "GET", WhatsAppBusinessPreVerifiedPhoneNumber.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -140,12 +132,12 @@ public class InstantArticle extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static InstantArticle loadJSON(String json, APIContext context, String header) {
-    InstantArticle instantArticle = getGson().fromJson(json, InstantArticle.class);
+  public static WhatsAppBusinessPreVerifiedPhoneNumber loadJSON(String json, APIContext context, String header) {
+    WhatsAppBusinessPreVerifiedPhoneNumber whatsAppBusinessPreVerifiedPhoneNumber = getGson().fromJson(json, WhatsAppBusinessPreVerifiedPhoneNumber.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(instantArticle.toString());
+      JsonElement o2 = parser.parse(whatsAppBusinessPreVerifiedPhoneNumber.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -155,14 +147,14 @@ public class InstantArticle extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    instantArticle.context = context;
-    instantArticle.rawValue = json;
-    instantArticle.header = header;
-    return instantArticle;
+    whatsAppBusinessPreVerifiedPhoneNumber.context = context;
+    whatsAppBusinessPreVerifiedPhoneNumber.rawValue = json;
+    whatsAppBusinessPreVerifiedPhoneNumber.header = header;
+    return whatsAppBusinessPreVerifiedPhoneNumber;
   }
 
-  public static APINodeList<InstantArticle> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<InstantArticle> instantArticles = new APINodeList<InstantArticle>(request, json, header);
+  public static APINodeList<WhatsAppBusinessPreVerifiedPhoneNumber> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<WhatsAppBusinessPreVerifiedPhoneNumber> whatsAppBusinessPreVerifiedPhoneNumbers = new APINodeList<WhatsAppBusinessPreVerifiedPhoneNumber>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -173,9 +165,9 @@ public class InstantArticle extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          instantArticles.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          whatsAppBusinessPreVerifiedPhoneNumbers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return instantArticles;
+        return whatsAppBusinessPreVerifiedPhoneNumbers;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -185,20 +177,20 @@ public class InstantArticle extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                instantArticles.setCursors(before, after);
+                whatsAppBusinessPreVerifiedPhoneNumbers.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            instantArticles.setPaging(previous, next);
+            whatsAppBusinessPreVerifiedPhoneNumbers.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              instantArticles.setAppSecret(context.getAppSecretProof());
+              whatsAppBusinessPreVerifiedPhoneNumbers.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              instantArticles.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              whatsAppBusinessPreVerifiedPhoneNumbers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -209,23 +201,23 @@ public class InstantArticle extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  instantArticles.add(loadJSON(entry.getValue().toString(), context, header));
+                  whatsAppBusinessPreVerifiedPhoneNumbers.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              instantArticles.add(loadJSON(obj.toString(), context, header));
+              whatsAppBusinessPreVerifiedPhoneNumbers.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return instantArticles;
+          return whatsAppBusinessPreVerifiedPhoneNumbers;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              instantArticles.add(loadJSON(entry.getValue().toString(), context, header));
+              whatsAppBusinessPreVerifiedPhoneNumbers.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return instantArticles;
+          return whatsAppBusinessPreVerifiedPhoneNumbers;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -242,20 +234,20 @@ public class InstantArticle extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              instantArticles.add(loadJSON(value.toString(), context, header));
+              whatsAppBusinessPreVerifiedPhoneNumbers.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return instantArticles;
+            return whatsAppBusinessPreVerifiedPhoneNumbers;
           }
 
           // Sixth, check if it's pure JsonObject
-          instantArticles.clear();
-          instantArticles.add(loadJSON(json, context, header));
-          return instantArticles;
+          whatsAppBusinessPreVerifiedPhoneNumbers.clear();
+          whatsAppBusinessPreVerifiedPhoneNumbers.add(loadJSON(json, context, header));
+          return whatsAppBusinessPreVerifiedPhoneNumbers;
         }
       }
     } catch (Exception e) {
@@ -282,8 +274,12 @@ public class InstantArticle extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGetInsights getInsights() {
-    return new APIRequestGetInsights(this.getPrefixedId().toString(), context);
+  public APIRequestCreateRequestCode createRequestCode() {
+    return new APIRequestCreateRequestCode(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateVerifyCode createVerifyCode() {
+    return new APIRequestCreateVerifyCode(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestDelete delete() {
@@ -295,94 +291,71 @@ public class InstantArticle extends APINode {
   }
 
 
-  public String getFieldCanonicalUrl() {
-    return mCanonicalUrl;
+  public String getFieldCodeVerificationStatus() {
+    return mCodeVerificationStatus;
   }
 
-  public Boolean getFieldDevelopmentMode() {
-    return mDevelopmentMode;
-  }
-
-  public String getFieldHtmlSource() {
-    return mHtmlSource;
+  public String getFieldCodeVerificationTime() {
+    return mCodeVerificationTime;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-  public Object getFieldMostRecentImportStatus() {
-    return mMostRecentImportStatus;
+  public String getFieldPhoneNumber() {
+    return mPhoneNumber;
   }
 
-  public List<Object> getFieldPhotos() {
-    return mPhotos;
-  }
-
-  public String getFieldPublishStatus() {
-    return mPublishStatus;
-  }
-
-  public Boolean getFieldPublished() {
-    return mPublished;
-  }
-
-  public List<Object> getFieldVideos() {
-    return mVideos;
+  public String getFieldVerificationExpiryTime() {
+    return mVerificationExpiryTime;
   }
 
 
 
-  public static class APIRequestGetInsights extends APIRequest<InstantArticleInsightsQueryResult> {
+  public static class APIRequestCreateRequestCode extends APIRequest<APINode> {
 
-    APINodeList<InstantArticleInsightsQueryResult> lastResponse = null;
+    APINode lastResponse = null;
     @Override
-    public APINodeList<InstantArticleInsightsQueryResult> getLastResponse() {
+    public APINode getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "breakdown",
-      "metric",
-      "period",
-      "since",
-      "until",
+      "code_method",
+      "language",
     };
 
     public static final String[] FIELDS = {
-      "breakdowns",
-      "name",
-      "time",
-      "value",
     };
 
     @Override
-    public APINodeList<InstantArticleInsightsQueryResult> parseResponse(String response, String header) throws APIException {
-      return InstantArticleInsightsQueryResult.parseResponse(response, getContext(), this, header);
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public APINodeList<InstantArticleInsightsQueryResult> execute() throws APIException {
+    public APINode execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<InstantArticleInsightsQueryResult> execute(Map<String, Object> extraParams) throws APIException {
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<InstantArticleInsightsQueryResult>> executeAsync() throws APIException {
+    public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<InstantArticleInsightsQueryResult>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<InstantArticleInsightsQueryResult>>() {
-           public APINodeList<InstantArticleInsightsQueryResult> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestGetInsights.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestCreateRequestCode.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -391,65 +364,46 @@ public class InstantArticle extends APINode {
       );
     };
 
-    public APIRequestGetInsights(String nodeId, APIContext context) {
-      super(context, nodeId, "/insights", "GET", Arrays.asList(PARAMS));
+    public APIRequestCreateRequestCode(String nodeId, APIContext context) {
+      super(context, nodeId, "/request_code", "POST", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGetInsights setParam(String param, Object value) {
+    public APIRequestCreateRequestCode setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGetInsights setParams(Map<String, Object> params) {
+    public APIRequestCreateRequestCode setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGetInsights setBreakdown (InstantArticleInsightsQueryResult.EnumBreakdown breakdown) {
-      this.setParam("breakdown", breakdown);
+    public APIRequestCreateRequestCode setCodeMethod (EnumCodeMethod codeMethod) {
+      this.setParam("code_method", codeMethod);
       return this;
     }
-    public APIRequestGetInsights setBreakdown (String breakdown) {
-      this.setParam("breakdown", breakdown);
-      return this;
-    }
-
-    public APIRequestGetInsights setMetric (List<Object> metric) {
-      this.setParam("metric", metric);
-      return this;
-    }
-    public APIRequestGetInsights setMetric (String metric) {
-      this.setParam("metric", metric);
+    public APIRequestCreateRequestCode setCodeMethod (String codeMethod) {
+      this.setParam("code_method", codeMethod);
       return this;
     }
 
-    public APIRequestGetInsights setPeriod (InstantArticleInsightsQueryResult.EnumPeriod period) {
-      this.setParam("period", period);
+    public APIRequestCreateRequestCode setLanguage (Object language) {
+      this.setParam("language", language);
       return this;
     }
-    public APIRequestGetInsights setPeriod (String period) {
-      this.setParam("period", period);
-      return this;
-    }
-
-    public APIRequestGetInsights setSince (String since) {
-      this.setParam("since", since);
+    public APIRequestCreateRequestCode setLanguage (String language) {
+      this.setParam("language", language);
       return this;
     }
 
-    public APIRequestGetInsights setUntil (String until) {
-      this.setParam("until", until);
-      return this;
-    }
-
-    public APIRequestGetInsights requestAllFields () {
+    public APIRequestCreateRequestCode requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGetInsights requestAllFields (boolean value) {
+    public APIRequestCreateRequestCode requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -457,12 +411,12 @@ public class InstantArticle extends APINode {
     }
 
     @Override
-    public APIRequestGetInsights requestFields (List<String> fields) {
+    public APIRequestCreateRequestCode requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGetInsights requestFields (List<String> fields, boolean value) {
+    public APIRequestCreateRequestCode requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -470,45 +424,127 @@ public class InstantArticle extends APINode {
     }
 
     @Override
-    public APIRequestGetInsights requestField (String field) {
+    public APIRequestCreateRequestCode requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGetInsights requestField (String field, boolean value) {
+    public APIRequestCreateRequestCode requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
-    public APIRequestGetInsights requestBreakdownsField () {
-      return this.requestBreakdownsField(true);
+  }
+
+  public static class APIRequestCreateVerifyCode extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
     }
-    public APIRequestGetInsights requestBreakdownsField (boolean value) {
-      this.requestField("breakdowns", value);
+    public static final String[] PARAMS = {
+      "code",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateVerifyCode.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateVerifyCode(String nodeId, APIContext context) {
+      super(context, nodeId, "/verify_code", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateVerifyCode setParam(String param, Object value) {
+      setParamInternal(param, value);
       return this;
     }
-    public APIRequestGetInsights requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetInsights requestNameField (boolean value) {
-      this.requestField("name", value);
+
+    @Override
+    public APIRequestCreateVerifyCode setParams(Map<String, Object> params) {
+      setParamsInternal(params);
       return this;
     }
-    public APIRequestGetInsights requestTimeField () {
-      return this.requestTimeField(true);
-    }
-    public APIRequestGetInsights requestTimeField (boolean value) {
-      this.requestField("time", value);
+
+
+    public APIRequestCreateVerifyCode setCode (String code) {
+      this.setParam("code", code);
       return this;
     }
-    public APIRequestGetInsights requestValueField () {
-      return this.requestValueField(true);
+
+    public APIRequestCreateVerifyCode requestAllFields () {
+      return this.requestAllFields(true);
     }
-    public APIRequestGetInsights requestValueField (boolean value) {
-      this.requestField("value", value);
+
+    public APIRequestCreateVerifyCode requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
       return this;
     }
+
+    @Override
+    public APIRequestCreateVerifyCode requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateVerifyCode requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateVerifyCode requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateVerifyCode requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestDelete extends APIRequest<APINode> {
@@ -615,54 +651,50 @@ public class InstantArticle extends APINode {
 
   }
 
-  public static class APIRequestGet extends APIRequest<InstantArticle> {
+  public static class APIRequestGet extends APIRequest<WhatsAppBusinessPreVerifiedPhoneNumber> {
 
-    InstantArticle lastResponse = null;
+    WhatsAppBusinessPreVerifiedPhoneNumber lastResponse = null;
     @Override
-    public InstantArticle getLastResponse() {
+    public WhatsAppBusinessPreVerifiedPhoneNumber getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "canonical_url",
-      "development_mode",
-      "html_source",
+      "code_verification_status",
+      "code_verification_time",
       "id",
-      "most_recent_import_status",
-      "photos",
-      "publish_status",
-      "published",
-      "videos",
+      "phone_number",
+      "verification_expiry_time",
     };
 
     @Override
-    public InstantArticle parseResponse(String response, String header) throws APIException {
-      return InstantArticle.parseResponse(response, getContext(), this, header).head();
+    public WhatsAppBusinessPreVerifiedPhoneNumber parseResponse(String response, String header) throws APIException {
+      return WhatsAppBusinessPreVerifiedPhoneNumber.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public InstantArticle execute() throws APIException {
+    public WhatsAppBusinessPreVerifiedPhoneNumber execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public InstantArticle execute(Map<String, Object> extraParams) throws APIException {
+    public WhatsAppBusinessPreVerifiedPhoneNumber execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<InstantArticle> executeAsync() throws APIException {
+    public ListenableFuture<WhatsAppBusinessPreVerifiedPhoneNumber> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<InstantArticle> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<WhatsAppBusinessPreVerifiedPhoneNumber> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, InstantArticle>() {
-           public InstantArticle apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, WhatsAppBusinessPreVerifiedPhoneNumber>() {
+           public WhatsAppBusinessPreVerifiedPhoneNumber apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -726,25 +758,18 @@ public class InstantArticle extends APINode {
       return this;
     }
 
-    public APIRequestGet requestCanonicalUrlField () {
-      return this.requestCanonicalUrlField(true);
+    public APIRequestGet requestCodeVerificationStatusField () {
+      return this.requestCodeVerificationStatusField(true);
     }
-    public APIRequestGet requestCanonicalUrlField (boolean value) {
-      this.requestField("canonical_url", value);
+    public APIRequestGet requestCodeVerificationStatusField (boolean value) {
+      this.requestField("code_verification_status", value);
       return this;
     }
-    public APIRequestGet requestDevelopmentModeField () {
-      return this.requestDevelopmentModeField(true);
+    public APIRequestGet requestCodeVerificationTimeField () {
+      return this.requestCodeVerificationTimeField(true);
     }
-    public APIRequestGet requestDevelopmentModeField (boolean value) {
-      this.requestField("development_mode", value);
-      return this;
-    }
-    public APIRequestGet requestHtmlSourceField () {
-      return this.requestHtmlSourceField(true);
-    }
-    public APIRequestGet requestHtmlSourceField (boolean value) {
-      this.requestField("html_source", value);
+    public APIRequestGet requestCodeVerificationTimeField (boolean value) {
+      this.requestField("code_verification_time", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -754,41 +779,60 @@ public class InstantArticle extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestMostRecentImportStatusField () {
-      return this.requestMostRecentImportStatusField(true);
+    public APIRequestGet requestPhoneNumberField () {
+      return this.requestPhoneNumberField(true);
     }
-    public APIRequestGet requestMostRecentImportStatusField (boolean value) {
-      this.requestField("most_recent_import_status", value);
+    public APIRequestGet requestPhoneNumberField (boolean value) {
+      this.requestField("phone_number", value);
       return this;
     }
-    public APIRequestGet requestPhotosField () {
-      return this.requestPhotosField(true);
+    public APIRequestGet requestVerificationExpiryTimeField () {
+      return this.requestVerificationExpiryTimeField(true);
     }
-    public APIRequestGet requestPhotosField (boolean value) {
-      this.requestField("photos", value);
+    public APIRequestGet requestVerificationExpiryTimeField (boolean value) {
+      this.requestField("verification_expiry_time", value);
       return this;
     }
-    public APIRequestGet requestPublishStatusField () {
-      return this.requestPublishStatusField(true);
-    }
-    public APIRequestGet requestPublishStatusField (boolean value) {
-      this.requestField("publish_status", value);
-      return this;
-    }
-    public APIRequestGet requestPublishedField () {
-      return this.requestPublishedField(true);
-    }
-    public APIRequestGet requestPublishedField (boolean value) {
-      this.requestField("published", value);
-      return this;
-    }
-    public APIRequestGet requestVideosField () {
-      return this.requestVideosField(true);
-    }
-    public APIRequestGet requestVideosField (boolean value) {
-      this.requestField("videos", value);
-      return this;
-    }
+  }
+
+  public static enum EnumCodeVerificationStatus {
+      @SerializedName("EXPIRED")
+      VALUE_EXPIRED("EXPIRED"),
+      @SerializedName("NOT_VERIFIED")
+      VALUE_NOT_VERIFIED("NOT_VERIFIED"),
+      @SerializedName("VERIFIED")
+      VALUE_VERIFIED("VERIFIED"),
+      ;
+
+      private String value;
+
+      private EnumCodeVerificationStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumCodeMethod {
+      @SerializedName("SMS")
+      VALUE_SMS("SMS"),
+      @SerializedName("VOICE")
+      VALUE_VOICE("VOICE"),
+      ;
+
+      private String value;
+
+      private EnumCodeMethod(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
 
@@ -805,25 +849,21 @@ public class InstantArticle extends APINode {
     return gson;
   }
 
-  public InstantArticle copyFrom(InstantArticle instance) {
-    this.mCanonicalUrl = instance.mCanonicalUrl;
-    this.mDevelopmentMode = instance.mDevelopmentMode;
-    this.mHtmlSource = instance.mHtmlSource;
+  public WhatsAppBusinessPreVerifiedPhoneNumber copyFrom(WhatsAppBusinessPreVerifiedPhoneNumber instance) {
+    this.mCodeVerificationStatus = instance.mCodeVerificationStatus;
+    this.mCodeVerificationTime = instance.mCodeVerificationTime;
     this.mId = instance.mId;
-    this.mMostRecentImportStatus = instance.mMostRecentImportStatus;
-    this.mPhotos = instance.mPhotos;
-    this.mPublishStatus = instance.mPublishStatus;
-    this.mPublished = instance.mPublished;
-    this.mVideos = instance.mVideos;
+    this.mPhoneNumber = instance.mPhoneNumber;
+    this.mVerificationExpiryTime = instance.mVerificationExpiryTime;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<InstantArticle> getParser() {
-    return new APIRequest.ResponseParser<InstantArticle>() {
-      public APINodeList<InstantArticle> parseResponse(String response, APIContext context, APIRequest<InstantArticle> request, String header) throws MalformedResponseException {
-        return InstantArticle.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<WhatsAppBusinessPreVerifiedPhoneNumber> getParser() {
+    return new APIRequest.ResponseParser<WhatsAppBusinessPreVerifiedPhoneNumber>() {
+      public APINodeList<WhatsAppBusinessPreVerifiedPhoneNumber> parseResponse(String response, APIContext context, APIRequest<WhatsAppBusinessPreVerifiedPhoneNumber> request, String header) throws MalformedResponseException {
+        return WhatsAppBusinessPreVerifiedPhoneNumber.parseResponse(response, context, request, header);
       }
     };
   }

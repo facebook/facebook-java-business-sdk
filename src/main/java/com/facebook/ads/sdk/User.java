@@ -61,6 +61,8 @@ public class User extends APINode {
   private AgeRange mAgeRange = null;
   @SerializedName("birthday")
   private String mBirthday = null;
+  @SerializedName("community")
+  private Group mCommunity = null;
   @SerializedName("cover")
   private UserCoverPhoto mCover = null;
   @SerializedName("currency")
@@ -589,6 +591,13 @@ public class User extends APINode {
     return mBirthday;
   }
 
+  public Group getFieldCommunity() {
+    if (mCommunity != null) {
+      mCommunity.context = getContext();
+    }
+    return mCommunity;
+  }
+
   public UserCoverPhoto getFieldCover() {
     return mCover;
   }
@@ -885,9 +894,9 @@ public class User extends APINode {
     }
     public static final String[] PARAMS = {
       "business_app",
-      "is_permanent_token",
       "page_id",
       "scope",
+      "set_token_expires_in_60_days",
     };
 
     public static final String[] FIELDS = {
@@ -955,15 +964,6 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateAccessToken setIsPermanentToken (Boolean isPermanentToken) {
-      this.setParam("is_permanent_token", isPermanentToken);
-      return this;
-    }
-    public APIRequestCreateAccessToken setIsPermanentToken (String isPermanentToken) {
-      this.setParam("is_permanent_token", isPermanentToken);
-      return this;
-    }
-
     public APIRequestCreateAccessToken setPageId (String pageId) {
       this.setParam("page_id", pageId);
       return this;
@@ -975,6 +975,15 @@ public class User extends APINode {
     }
     public APIRequestCreateAccessToken setScope (String scope) {
       this.setParam("scope", scope);
+      return this;
+    }
+
+    public APIRequestCreateAccessToken setSetTokenExpiresIn60Days (Boolean setTokenExpiresIn60Days) {
+      this.setParam("set_token_expires_in_60_days", setTokenExpiresIn60Days);
+      return this;
+    }
+    public APIRequestCreateAccessToken setSetTokenExpiresIn60Days (String setTokenExpiresIn60Days) {
+      this.setParam("set_token_expires_in_60_days", setTokenExpiresIn60Days);
       return this;
     }
 
@@ -1089,7 +1098,6 @@ public class User extends APINode {
       "impressum",
       "influences",
       "instagram_business_account",
-      "instant_articles_review_status",
       "is_always_open",
       "is_chain",
       "is_community_page",
@@ -1163,7 +1171,6 @@ public class User extends APINode {
       "store_number",
       "studio",
       "supports_donate_button_in_live_video",
-      "supports_instant_articles",
       "talking_about_count",
       "temporary_status",
       "unread_message_count",
@@ -1705,13 +1712,6 @@ public class User extends APINode {
       this.requestField("instagram_business_account", value);
       return this;
     }
-    public APIRequestGetAccounts requestInstantArticlesReviewStatusField () {
-      return this.requestInstantArticlesReviewStatusField(true);
-    }
-    public APIRequestGetAccounts requestInstantArticlesReviewStatusField (boolean value) {
-      this.requestField("instant_articles_review_status", value);
-      return this;
-    }
     public APIRequestGetAccounts requestIsAlwaysOpenField () {
       return this.requestIsAlwaysOpenField(true);
     }
@@ -2223,13 +2223,6 @@ public class User extends APINode {
       this.requestField("supports_donate_button_in_live_video", value);
       return this;
     }
-    public APIRequestGetAccounts requestSupportsInstantArticlesField () {
-      return this.requestSupportsInstantArticlesField(true);
-    }
-    public APIRequestGetAccounts requestSupportsInstantArticlesField (boolean value) {
-      this.requestField("supports_instant_articles", value);
-      return this;
-    }
     public APIRequestGetAccounts requestTalkingAboutCountField () {
       return this.requestTalkingAboutCountField(true);
     }
@@ -2316,11 +2309,11 @@ public class User extends APINode {
     }
   }
 
-  public static class APIRequestCreateAccount extends APIRequest<Page> {
+  public static class APIRequestCreateAccount extends APIRequest<APINode> {
 
-    Page lastResponse = null;
+    APINode lastResponse = null;
     @Override
-    public Page getLastResponse() {
+    public APINode getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -2346,31 +2339,31 @@ public class User extends APINode {
     };
 
     @Override
-    public Page parseResponse(String response, String header) throws APIException {
-      return Page.parseResponse(response, getContext(), this, header).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public Page execute() throws APIException {
+    public APINode execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public Page execute(Map<String, Object> extraParams) throws APIException {
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<Page> executeAsync() throws APIException {
+    public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<Page> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Page>() {
-           public Page apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
                return APIRequestCreateAccount.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -3040,7 +3033,6 @@ public class User extends APINode {
       "fb_entity",
       "funding_source",
       "funding_source_details",
-      "has_advertiser_opted_in_odax",
       "has_migrated_permissions",
       "has_page_authorized_adaccount",
       "id",
@@ -3369,13 +3361,6 @@ public class User extends APINode {
     }
     public APIRequestGetAdAccounts requestFundingSourceDetailsField (boolean value) {
       this.requestField("funding_source_details", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestHasAdvertiserOptedInOdaxField () {
-      return this.requestHasAdvertiserOptedInOdaxField(true);
-    }
-    public APIRequestGetAdAccounts requestHasAdvertiserOptedInOdaxField (boolean value) {
-      this.requestField("has_advertiser_opted_in_odax", value);
       return this;
     }
     public APIRequestGetAdAccounts requestHasMigratedPermissionsField () {
@@ -4370,7 +4355,6 @@ public class User extends APINode {
       "fb_entity",
       "funding_source",
       "funding_source_details",
-      "has_advertiser_opted_in_odax",
       "has_migrated_permissions",
       "has_page_authorized_adaccount",
       "id",
@@ -4699,13 +4683,6 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedAdAccounts requestFundingSourceDetailsField (boolean value) {
       this.requestField("funding_source_details", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestHasAdvertiserOptedInOdaxField () {
-      return this.requestHasAdvertiserOptedInOdaxField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestHasAdvertiserOptedInOdaxField (boolean value) {
-      this.requestField("has_advertiser_opted_in_odax", value);
       return this;
     }
     public APIRequestGetAssignedAdAccounts requestHasMigratedPermissionsField () {
@@ -5168,7 +5145,6 @@ public class User extends APINode {
       "impressum",
       "influences",
       "instagram_business_account",
-      "instant_articles_review_status",
       "is_always_open",
       "is_chain",
       "is_community_page",
@@ -5242,7 +5218,6 @@ public class User extends APINode {
       "store_number",
       "studio",
       "supports_donate_button_in_live_video",
-      "supports_instant_articles",
       "talking_about_count",
       "temporary_status",
       "unread_message_count",
@@ -5775,13 +5750,6 @@ public class User extends APINode {
       this.requestField("instagram_business_account", value);
       return this;
     }
-    public APIRequestGetAssignedPages requestInstantArticlesReviewStatusField () {
-      return this.requestInstantArticlesReviewStatusField(true);
-    }
-    public APIRequestGetAssignedPages requestInstantArticlesReviewStatusField (boolean value) {
-      this.requestField("instant_articles_review_status", value);
-      return this;
-    }
     public APIRequestGetAssignedPages requestIsAlwaysOpenField () {
       return this.requestIsAlwaysOpenField(true);
     }
@@ -6291,13 +6259,6 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedPages requestSupportsDonateButtonInLiveVideoField (boolean value) {
       this.requestField("supports_donate_button_in_live_video", value);
-      return this;
-    }
-    public APIRequestGetAssignedPages requestSupportsInstantArticlesField () {
-      return this.requestSupportsInstantArticlesField(true);
-    }
-    public APIRequestGetAssignedPages requestSupportsInstantArticlesField (boolean value) {
-      this.requestField("supports_instant_articles", value);
       return this;
     }
     public APIRequestGetAssignedPages requestTalkingAboutCountField () {
@@ -7524,6 +7485,7 @@ public class User extends APINode {
       "id",
       "is_subscribed",
       "link",
+      "linked_group",
       "message_count",
       "name",
       "participants",
@@ -7684,6 +7646,13 @@ public class User extends APINode {
     }
     public APIRequestGetConversations requestLinkField (boolean value) {
       this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGetConversations requestLinkedGroupField () {
+      return this.requestLinkedGroupField(true);
+    }
+    public APIRequestGetConversations requestLinkedGroupField (boolean value) {
+      this.requestField("linked_group", value);
       return this;
     }
     public APIRequestGetConversations requestMessageCountField () {
@@ -9955,6 +9924,7 @@ public class User extends APINode {
       "about",
       "age_range",
       "birthday",
+      "community",
       "cover",
       "currency",
       "education",
@@ -10117,6 +10087,13 @@ public class User extends APINode {
     }
     public APIRequestGetFriends requestBirthdayField (boolean value) {
       this.requestField("birthday", value);
+      return this;
+    }
+    public APIRequestGetFriends requestCommunityField () {
+      return this.requestCommunityField(true);
+    }
+    public APIRequestGetFriends requestCommunityField (boolean value) {
+      this.requestField("community", value);
       return this;
     }
     public APIRequestGetFriends requestCoverField () {
@@ -11906,7 +11883,6 @@ public class User extends APINode {
       "impressum",
       "influences",
       "instagram_business_account",
-      "instant_articles_review_status",
       "is_always_open",
       "is_chain",
       "is_community_page",
@@ -11980,7 +11956,6 @@ public class User extends APINode {
       "store_number",
       "studio",
       "supports_donate_button_in_live_video",
-      "supports_instant_articles",
       "talking_about_count",
       "temporary_status",
       "unread_message_count",
@@ -12509,13 +12484,6 @@ public class User extends APINode {
       this.requestField("instagram_business_account", value);
       return this;
     }
-    public APIRequestGetLikes requestInstantArticlesReviewStatusField () {
-      return this.requestInstantArticlesReviewStatusField(true);
-    }
-    public APIRequestGetLikes requestInstantArticlesReviewStatusField (boolean value) {
-      this.requestField("instant_articles_review_status", value);
-      return this;
-    }
     public APIRequestGetLikes requestIsAlwaysOpenField () {
       return this.requestIsAlwaysOpenField(true);
     }
@@ -13025,13 +12993,6 @@ public class User extends APINode {
     }
     public APIRequestGetLikes requestSupportsDonateButtonInLiveVideoField (boolean value) {
       this.requestField("supports_donate_button_in_live_video", value);
-      return this;
-    }
-    public APIRequestGetLikes requestSupportsInstantArticlesField () {
-      return this.requestSupportsInstantArticlesField(true);
-    }
-    public APIRequestGetLikes requestSupportsInstantArticlesField (boolean value) {
-      this.requestField("supports_instant_articles", value);
       return this;
     }
     public APIRequestGetLikes requestTalkingAboutCountField () {
@@ -13924,7 +13885,6 @@ public class User extends APINode {
       "impressum",
       "influences",
       "instagram_business_account",
-      "instant_articles_review_status",
       "is_always_open",
       "is_chain",
       "is_community_page",
@@ -13998,7 +13958,6 @@ public class User extends APINode {
       "store_number",
       "studio",
       "supports_donate_button_in_live_video",
-      "supports_instant_articles",
       "talking_about_count",
       "temporary_status",
       "unread_message_count",
@@ -14527,13 +14486,6 @@ public class User extends APINode {
       this.requestField("instagram_business_account", value);
       return this;
     }
-    public APIRequestGetMusic requestInstantArticlesReviewStatusField () {
-      return this.requestInstantArticlesReviewStatusField(true);
-    }
-    public APIRequestGetMusic requestInstantArticlesReviewStatusField (boolean value) {
-      this.requestField("instant_articles_review_status", value);
-      return this;
-    }
     public APIRequestGetMusic requestIsAlwaysOpenField () {
       return this.requestIsAlwaysOpenField(true);
     }
@@ -15043,13 +14995,6 @@ public class User extends APINode {
     }
     public APIRequestGetMusic requestSupportsDonateButtonInLiveVideoField (boolean value) {
       this.requestField("supports_donate_button_in_live_video", value);
-      return this;
-    }
-    public APIRequestGetMusic requestSupportsInstantArticlesField () {
-      return this.requestSupportsInstantArticlesField(true);
-    }
-    public APIRequestGetMusic requestSupportsInstantArticlesField (boolean value) {
-      this.requestField("supports_instant_articles", value);
       return this;
     }
     public APIRequestGetMusic requestTalkingAboutCountField () {
@@ -15906,7 +15851,6 @@ public class User extends APINode {
       "fb_entity",
       "funding_source",
       "funding_source_details",
-      "has_advertiser_opted_in_odax",
       "has_migrated_permissions",
       "has_page_authorized_adaccount",
       "id",
@@ -16235,13 +16179,6 @@ public class User extends APINode {
     }
     public APIRequestGetPersonalAdAccounts requestFundingSourceDetailsField (boolean value) {
       this.requestField("funding_source_details", value);
-      return this;
-    }
-    public APIRequestGetPersonalAdAccounts requestHasAdvertiserOptedInOdaxField () {
-      return this.requestHasAdvertiserOptedInOdaxField(true);
-    }
-    public APIRequestGetPersonalAdAccounts requestHasAdvertiserOptedInOdaxField (boolean value) {
-      this.requestField("has_advertiser_opted_in_odax", value);
       return this;
     }
     public APIRequestGetPersonalAdAccounts requestHasMigratedPermissionsField () {
@@ -19968,6 +19905,7 @@ public class User extends APINode {
       "about",
       "age_range",
       "birthday",
+      "community",
       "cover",
       "currency",
       "education",
@@ -20121,6 +20059,13 @@ public class User extends APINode {
     }
     public APIRequestGet requestBirthdayField (boolean value) {
       this.requestField("birthday", value);
+      return this;
+    }
+    public APIRequestGet requestCommunityField () {
+      return this.requestCommunityField(true);
+    }
+    public APIRequestGet requestCommunityField (boolean value) {
+      this.requestField("community", value);
       return this;
     }
     public APIRequestGet requestCoverField () {
@@ -20701,6 +20646,7 @@ public class User extends APINode {
     this.mAbout = instance.mAbout;
     this.mAgeRange = instance.mAgeRange;
     this.mBirthday = instance.mBirthday;
+    this.mCommunity = instance.mCommunity;
     this.mCover = instance.mCover;
     this.mCurrency = instance.mCurrency;
     this.mEducation = instance.mEducation;

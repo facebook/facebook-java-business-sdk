@@ -99,6 +99,10 @@ public class AdSet extends APINode {
   private String mDailySpendCap = null;
   @SerializedName("destination_type")
   private String mDestinationType = null;
+  @SerializedName("dsa_beneficiary")
+  private String mDsaBeneficiary = null;
+  @SerializedName("dsa_payor")
+  private String mDsaPayor = null;
   @SerializedName("effective_status")
   private EnumEffectiveStatus mEffectiveStatus = null;
   @SerializedName("end_time")
@@ -673,6 +677,24 @@ public class AdSet extends APINode {
 
   public AdSet setFieldDestinationType(String value) {
     this.mDestinationType = value;
+    return this;
+  }
+
+  public String getFieldDsaBeneficiary() {
+    return mDsaBeneficiary;
+  }
+
+  public AdSet setFieldDsaBeneficiary(String value) {
+    this.mDsaBeneficiary = value;
+    return this;
+  }
+
+  public String getFieldDsaPayor() {
+    return mDsaPayor;
+  }
+
+  public AdSet setFieldDsaPayor(String value) {
+    this.mDsaPayor = value;
     return this;
   }
 
@@ -1543,6 +1565,7 @@ public class AdSet extends APINode {
       "authorization_category",
       "auto_update",
       "body",
+      "branded_content",
       "branded_content_sponsor_page_id",
       "bundle_folder_id",
       "call_to_action_type",
@@ -1558,11 +1581,13 @@ public class AdSet extends APINode {
       "effective_object_story_id",
       "enable_direct_install",
       "enable_launch_instant_app",
+      "facebook_branded_content",
       "id",
       "image_crops",
       "image_hash",
       "image_url",
       "instagram_actor_id",
+      "instagram_branded_content",
       "instagram_permalink_url",
       "instagram_story_id",
       "instagram_user_id",
@@ -1743,6 +1768,13 @@ public class AdSet extends APINode {
       this.requestField("body", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestBrandedContentField () {
+      return this.requestBrandedContentField(true);
+    }
+    public APIRequestGetAdCreatives requestBrandedContentField (boolean value) {
+      this.requestField("branded_content", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestBrandedContentSponsorPageIdField () {
       return this.requestBrandedContentSponsorPageIdField(true);
     }
@@ -1848,6 +1880,13 @@ public class AdSet extends APINode {
       this.requestField("enable_launch_instant_app", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestFacebookBrandedContentField () {
+      return this.requestFacebookBrandedContentField(true);
+    }
+    public APIRequestGetAdCreatives requestFacebookBrandedContentField (boolean value) {
+      this.requestField("facebook_branded_content", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestIdField () {
       return this.requestIdField(true);
     }
@@ -1881,6 +1920,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAdCreatives requestInstagramActorIdField (boolean value) {
       this.requestField("instagram_actor_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestInstagramBrandedContentField () {
+      return this.requestInstagramBrandedContentField(true);
+    }
+    public APIRequestGetAdCreatives requestInstagramBrandedContentField (boolean value) {
+      this.requestField("instagram_branded_content", value);
       return this;
     }
     public APIRequestGetAdCreatives requestInstagramPermalinkUrlField () {
@@ -2596,6 +2642,7 @@ public class AdSet extends APINode {
       "id",
       "issues_info",
       "last_updated_by_app_id",
+      "meta_reward_adgroup_status",
       "name",
       "preview_shareable_link",
       "priority",
@@ -2893,6 +2940,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAds requestLastUpdatedByAppIdField (boolean value) {
       this.requestField("last_updated_by_app_id", value);
+      return this;
+    }
+    public APIRequestGetAds requestMetaRewardAdgroupStatusField () {
+      return this.requestMetaRewardAdgroupStatusField(true);
+    }
+    public APIRequestGetAds requestMetaRewardAdgroupStatusField (boolean value) {
+      this.requestField("meta_reward_adgroup_status", value);
       return this;
     }
     public APIRequestGetAds requestNameField () {
@@ -3197,6 +3251,8 @@ public class AdSet extends APINode {
       "daily_min_spend_target",
       "daily_spend_cap",
       "destination_type",
+      "dsa_beneficiary",
+      "dsa_payor",
       "effective_status",
       "end_time",
       "existing_customer_budget_percentage",
@@ -3510,6 +3566,20 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestDestinationTypeField (boolean value) {
       this.requestField("destination_type", value);
+      return this;
+    }
+    public APIRequestGetCopies requestDsaBeneficiaryField () {
+      return this.requestDsaBeneficiaryField(true);
+    }
+    public APIRequestGetCopies requestDsaBeneficiaryField (boolean value) {
+      this.requestField("dsa_beneficiary", value);
+      return this;
+    }
+    public APIRequestGetCopies requestDsaPayorField () {
+      return this.requestDsaPayorField(true);
+    }
+    public APIRequestGetCopies requestDsaPayorField (boolean value) {
+      this.requestField("dsa_payor", value);
       return this;
     }
     public APIRequestGetCopies requestEffectiveStatusField () {
@@ -4969,6 +5039,8 @@ public class AdSet extends APINode {
       "daily_min_spend_target",
       "daily_spend_cap",
       "destination_type",
+      "dsa_beneficiary",
+      "dsa_payor",
       "effective_status",
       "end_time",
       "existing_customer_budget_percentage",
@@ -5284,6 +5356,20 @@ public class AdSet extends APINode {
       this.requestField("destination_type", value);
       return this;
     }
+    public APIRequestGet requestDsaBeneficiaryField () {
+      return this.requestDsaBeneficiaryField(true);
+    }
+    public APIRequestGet requestDsaBeneficiaryField (boolean value) {
+      this.requestField("dsa_beneficiary", value);
+      return this;
+    }
+    public APIRequestGet requestDsaPayorField () {
+      return this.requestDsaPayorField(true);
+    }
+    public APIRequestGet requestDsaPayorField (boolean value) {
+      this.requestField("dsa_payor", value);
+      return this;
+    }
     public APIRequestGet requestEffectiveStatusField () {
       return this.requestEffectiveStatusField(true);
     }
@@ -5549,6 +5635,8 @@ public class AdSet extends APINode {
       "daily_spend_cap",
       "date_format",
       "destination_type",
+      "dsa_beneficiary",
+      "dsa_payor",
       "end_time",
       "execution_options",
       "existing_customer_budget_percentage",
@@ -5573,7 +5661,6 @@ public class AdSet extends APINode {
       "time_start",
       "time_stop",
       "tune_for_category",
-      "upstream_events",
     };
 
     public static final String[] FIELDS = {
@@ -5777,6 +5864,16 @@ public class AdSet extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setDsaBeneficiary (String dsaBeneficiary) {
+      this.setParam("dsa_beneficiary", dsaBeneficiary);
+      return this;
+    }
+
+    public APIRequestUpdate setDsaPayor (String dsaPayor) {
+      this.setParam("dsa_payor", dsaPayor);
+      return this;
+    }
+
     public APIRequestUpdate setEndTime (String endTime) {
       this.setParam("end_time", endTime);
       return this;
@@ -5962,15 +6059,6 @@ public class AdSet extends APINode {
     }
     public APIRequestUpdate setTuneForCategory (String tuneForCategory) {
       this.setParam("tune_for_category", tuneForCategory);
-      return this;
-    }
-
-    public APIRequestUpdate setUpstreamEvents (Map<String, String> upstreamEvents) {
-      this.setParam("upstream_events", upstreamEvents);
-      return this;
-    }
-    public APIRequestUpdate setUpstreamEvents (String upstreamEvents) {
-      this.setParam("upstream_events", upstreamEvents);
       return this;
     }
 
@@ -6165,6 +6253,8 @@ public class AdSet extends APINode {
       VALUE_QUALITY_LEAD("QUALITY_LEAD"),
       @SerializedName("REACH")
       VALUE_REACH("REACH"),
+      @SerializedName("SUBSCRIBERS")
+      VALUE_SUBSCRIBERS("SUBSCRIBERS"),
       @SerializedName("THRUPLAY")
       VALUE_THRUPLAY("THRUPLAY"),
       @SerializedName("VALUE")
@@ -6492,6 +6582,8 @@ public class AdSet extends APINode {
     this.mDailyMinSpendTarget = instance.mDailyMinSpendTarget;
     this.mDailySpendCap = instance.mDailySpendCap;
     this.mDestinationType = instance.mDestinationType;
+    this.mDsaBeneficiary = instance.mDsaBeneficiary;
+    this.mDsaPayor = instance.mDsaPayor;
     this.mEffectiveStatus = instance.mEffectiveStatus;
     this.mEndTime = instance.mEndTime;
     this.mExistingCustomerBudgetPercentage = instance.mExistingCustomerBudgetPercentage;

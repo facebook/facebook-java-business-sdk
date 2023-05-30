@@ -284,12 +284,16 @@ public class AdCreativeLinkDataCallToAction extends APINode {
       VALUE_GET_OFFER("GET_OFFER"),
       @SerializedName("GET_OFFER_VIEW")
       VALUE_GET_OFFER_VIEW("GET_OFFER_VIEW"),
+      @SerializedName("GET_PROMOTIONS")
+      VALUE_GET_PROMOTIONS("GET_PROMOTIONS"),
       @SerializedName("GET_QUOTE")
       VALUE_GET_QUOTE("GET_QUOTE"),
       @SerializedName("GET_SHOWTIMES")
       VALUE_GET_SHOWTIMES("GET_SHOWTIMES"),
       @SerializedName("GET_STARTED")
       VALUE_GET_STARTED("GET_STARTED"),
+      @SerializedName("INQUIRE_NOW")
+      VALUE_INQUIRE_NOW("INQUIRE_NOW"),
       @SerializedName("INSTALL_APP")
       VALUE_INSTALL_APP("INSTALL_APP"),
       @SerializedName("INSTALL_MOBILE_APP")

@@ -378,12 +378,10 @@ public class AdReportRun extends APINode {
       "account_name",
       "action_values",
       "actions",
-      "ad_bid_value",
       "ad_click_actions",
       "ad_id",
       "ad_impression_actions",
       "ad_name",
-      "adset_bid_value",
       "adset_end",
       "adset_id",
       "adset_name",
@@ -430,6 +428,7 @@ public class AdReportRun extends APINode {
       "cpm",
       "cpp",
       "created_time",
+      "creative_media_type",
       "ctr",
       "date_start",
       "date_stop",
@@ -450,6 +449,7 @@ public class AdReportRun extends APINode {
       "inline_link_click_ctr",
       "inline_link_clicks",
       "inline_post_engagement",
+      "instagram_upcoming_event_reminders_set",
       "instant_experience_clicks_to_open",
       "instant_experience_clicks_to_start",
       "instant_experience_outbound_clicks",
@@ -473,6 +473,7 @@ public class AdReportRun extends APINode {
       "spend",
       "total_postbacks",
       "total_postbacks_detailed",
+      "total_postbacks_detailed_v4",
       "unique_actions",
       "unique_clicks",
       "unique_conversions",
@@ -630,13 +631,6 @@ public class AdReportRun extends APINode {
       this.requestField("actions", value);
       return this;
     }
-    public APIRequestGetInsights requestAdBidValueField () {
-      return this.requestAdBidValueField(true);
-    }
-    public APIRequestGetInsights requestAdBidValueField (boolean value) {
-      this.requestField("ad_bid_value", value);
-      return this;
-    }
     public APIRequestGetInsights requestAdClickActionsField () {
       return this.requestAdClickActionsField(true);
     }
@@ -663,13 +657,6 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestAdNameField (boolean value) {
       this.requestField("ad_name", value);
-      return this;
-    }
-    public APIRequestGetInsights requestAdsetBidValueField () {
-      return this.requestAdsetBidValueField(true);
-    }
-    public APIRequestGetInsights requestAdsetBidValueField (boolean value) {
-      this.requestField("adset_bid_value", value);
       return this;
     }
     public APIRequestGetInsights requestAdsetEndField () {
@@ -994,6 +981,13 @@ public class AdReportRun extends APINode {
       this.requestField("created_time", value);
       return this;
     }
+    public APIRequestGetInsights requestCreativeMediaTypeField () {
+      return this.requestCreativeMediaTypeField(true);
+    }
+    public APIRequestGetInsights requestCreativeMediaTypeField (boolean value) {
+      this.requestField("creative_media_type", value);
+      return this;
+    }
     public APIRequestGetInsights requestCtrField () {
       return this.requestCtrField(true);
     }
@@ -1132,6 +1126,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestInlinePostEngagementField (boolean value) {
       this.requestField("inline_post_engagement", value);
+      return this;
+    }
+    public APIRequestGetInsights requestInstagramUpcomingEventRemindersSetField () {
+      return this.requestInstagramUpcomingEventRemindersSetField(true);
+    }
+    public APIRequestGetInsights requestInstagramUpcomingEventRemindersSetField (boolean value) {
+      this.requestField("instagram_upcoming_event_reminders_set", value);
       return this;
     }
     public APIRequestGetInsights requestInstantExperienceClicksToOpenField () {
@@ -1293,6 +1294,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestTotalPostbacksDetailedField (boolean value) {
       this.requestField("total_postbacks_detailed", value);
+      return this;
+    }
+    public APIRequestGetInsights requestTotalPostbacksDetailedV4Field () {
+      return this.requestTotalPostbacksDetailedV4Field(true);
+    }
+    public APIRequestGetInsights requestTotalPostbacksDetailedV4Field (boolean value) {
+      this.requestField("total_postbacks_detailed_v4", value);
       return this;
     }
     public APIRequestGetInsights requestUniqueActionsField () {
@@ -1824,6 +1832,8 @@ public class AdReportRun extends APINode {
       VALUE_BODY_ASSET("body_asset"),
       @SerializedName("call_to_action_asset")
       VALUE_CALL_TO_ACTION_ASSET("call_to_action_asset"),
+      @SerializedName("coarse_conversion_value")
+      VALUE_COARSE_CONVERSION_VALUE("coarse_conversion_value"),
       @SerializedName("country")
       VALUE_COUNTRY("country"),
       @SerializedName("description_asset")
@@ -1832,6 +1842,8 @@ public class AdReportRun extends APINode {
       VALUE_DEVICE_PLATFORM("device_platform"),
       @SerializedName("dma")
       VALUE_DMA("dma"),
+      @SerializedName("fidelity_type")
+      VALUE_FIDELITY_TYPE("fidelity_type"),
       @SerializedName("frequency_value")
       VALUE_FREQUENCY_VALUE("frequency_value"),
       @SerializedName("gender")
@@ -1840,6 +1852,8 @@ public class AdReportRun extends APINode {
       VALUE_HOURLY_STATS_AGGREGATED_BY_ADVERTISER_TIME_ZONE("hourly_stats_aggregated_by_advertiser_time_zone"),
       @SerializedName("hourly_stats_aggregated_by_audience_time_zone")
       VALUE_HOURLY_STATS_AGGREGATED_BY_AUDIENCE_TIME_ZONE("hourly_stats_aggregated_by_audience_time_zone"),
+      @SerializedName("hsid")
+      VALUE_HSID("hsid"),
       @SerializedName("image_asset")
       VALUE_IMAGE_ASSET("image_asset"),
       @SerializedName("impression_device")
@@ -1854,10 +1868,14 @@ public class AdReportRun extends APINode {
       VALUE_PLACE_PAGE_ID("place_page_id"),
       @SerializedName("platform_position")
       VALUE_PLATFORM_POSITION("platform_position"),
+      @SerializedName("postback_sequence_index")
+      VALUE_POSTBACK_SEQUENCE_INDEX("postback_sequence_index"),
       @SerializedName("product_id")
       VALUE_PRODUCT_ID("product_id"),
       @SerializedName("publisher_platform")
       VALUE_PUBLISHER_PLATFORM("publisher_platform"),
+      @SerializedName("redownload")
+      VALUE_REDOWNLOAD("redownload"),
       @SerializedName("region")
       VALUE_REGION("region"),
       @SerializedName("skan_campaign_id")

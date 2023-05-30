@@ -458,6 +458,7 @@ public class LeadgenForm extends APINode {
       "partner_name",
       "platform",
       "post",
+      "post_submission_check_result",
       "retailer_item_id",
       "vehicle",
     };
@@ -663,6 +664,13 @@ public class LeadgenForm extends APINode {
       this.requestField("post", value);
       return this;
     }
+    public APIRequestGetLeads requestPostSubmissionCheckResultField () {
+      return this.requestPostSubmissionCheckResultField(true);
+    }
+    public APIRequestGetLeads requestPostSubmissionCheckResultField (boolean value) {
+      this.requestField("post_submission_check_result", value);
+      return this;
+    }
     public APIRequestGetLeads requestRetailerItemIdField () {
       return this.requestRetailerItemIdField(true);
     }
@@ -706,6 +714,7 @@ public class LeadgenForm extends APINode {
       "partner_name",
       "platform",
       "post",
+      "post_submission_check_result",
       "retailer_item_id",
       "vehicle",
     };
@@ -909,6 +918,13 @@ public class LeadgenForm extends APINode {
     }
     public APIRequestGetTestLeads requestPostField (boolean value) {
       this.requestField("post", value);
+      return this;
+    }
+    public APIRequestGetTestLeads requestPostSubmissionCheckResultField () {
+      return this.requestPostSubmissionCheckResultField(true);
+    }
+    public APIRequestGetTestLeads requestPostSubmissionCheckResultField (boolean value) {
+      this.requestField("post_submission_check_result", value);
       return this;
     }
     public APIRequestGetTestLeads requestRetailerItemIdField () {

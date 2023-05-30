@@ -54,31 +54,31 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class InstantArticlesStats extends APINode {
-  @SerializedName("error")
-  private String mError = null;
-  @SerializedName("metadata")
-  private List<Map<String, Object>> mMetadata = null;
-  @SerializedName("metric")
-  private Object mMetric = null;
-  @SerializedName("totals")
-  private List<Map<String, Object>> mTotals = null;
-  @SerializedName("x_axis_breakdown")
-  private List<List<Map<String, Object>>> mXAxisBreakdown = null;
+public class AdCreativeBrandedContentAds extends APINode {
+  @SerializedName("ad_format")
+  private Long mAdFormat = null;
+  @SerializedName("creator_ad_permission_type")
+  private String mCreatorAdPermissionType = null;
+  @SerializedName("instagram_boost_post_access_token")
+  private String mInstagramBoostPostAccessToken = null;
+  @SerializedName("partners")
+  private List<Object> mPartners = null;
+  @SerializedName("ui_version")
+  private Long mUiVersion = null;
   protected static Gson gson = null;
 
-  public InstantArticlesStats() {
+  public AdCreativeBrandedContentAds() {
   }
 
   public String getId() {
     return null;
   }
-  public static InstantArticlesStats loadJSON(String json, APIContext context, String header) {
-    InstantArticlesStats instantArticlesStats = getGson().fromJson(json, InstantArticlesStats.class);
+  public static AdCreativeBrandedContentAds loadJSON(String json, APIContext context, String header) {
+    AdCreativeBrandedContentAds adCreativeBrandedContentAds = getGson().fromJson(json, AdCreativeBrandedContentAds.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(instantArticlesStats.toString());
+      JsonElement o2 = parser.parse(adCreativeBrandedContentAds.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -88,14 +88,14 @@ public class InstantArticlesStats extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    instantArticlesStats.context = context;
-    instantArticlesStats.rawValue = json;
-    instantArticlesStats.header = header;
-    return instantArticlesStats;
+    adCreativeBrandedContentAds.context = context;
+    adCreativeBrandedContentAds.rawValue = json;
+    adCreativeBrandedContentAds.header = header;
+    return adCreativeBrandedContentAds;
   }
 
-  public static APINodeList<InstantArticlesStats> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<InstantArticlesStats> instantArticlesStatss = new APINodeList<InstantArticlesStats>(request, json, header);
+  public static APINodeList<AdCreativeBrandedContentAds> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCreativeBrandedContentAds> adCreativeBrandedContentAdss = new APINodeList<AdCreativeBrandedContentAds>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -106,9 +106,9 @@ public class InstantArticlesStats extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          instantArticlesStatss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adCreativeBrandedContentAdss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return instantArticlesStatss;
+        return adCreativeBrandedContentAdss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -118,20 +118,20 @@ public class InstantArticlesStats extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                instantArticlesStatss.setCursors(before, after);
+                adCreativeBrandedContentAdss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            instantArticlesStatss.setPaging(previous, next);
+            adCreativeBrandedContentAdss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              instantArticlesStatss.setAppSecret(context.getAppSecretProof());
+              adCreativeBrandedContentAdss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              instantArticlesStatss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adCreativeBrandedContentAdss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -142,23 +142,23 @@ public class InstantArticlesStats extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  instantArticlesStatss.add(loadJSON(entry.getValue().toString(), context, header));
+                  adCreativeBrandedContentAdss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              instantArticlesStatss.add(loadJSON(obj.toString(), context, header));
+              adCreativeBrandedContentAdss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return instantArticlesStatss;
+          return adCreativeBrandedContentAdss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              instantArticlesStatss.add(loadJSON(entry.getValue().toString(), context, header));
+              adCreativeBrandedContentAdss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return instantArticlesStatss;
+          return adCreativeBrandedContentAdss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -175,20 +175,20 @@ public class InstantArticlesStats extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              instantArticlesStatss.add(loadJSON(value.toString(), context, header));
+              adCreativeBrandedContentAdss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return instantArticlesStatss;
+            return adCreativeBrandedContentAdss;
           }
 
           // Sixth, check if it's pure JsonObject
-          instantArticlesStatss.clear();
-          instantArticlesStatss.add(loadJSON(json, context, header));
-          return instantArticlesStatss;
+          adCreativeBrandedContentAdss.clear();
+          adCreativeBrandedContentAdss.add(loadJSON(json, context, header));
+          return adCreativeBrandedContentAdss;
         }
       }
     } catch (Exception e) {
@@ -216,48 +216,48 @@ public class InstantArticlesStats extends APINode {
   }
 
 
-  public String getFieldError() {
-    return mError;
+  public Long getFieldAdFormat() {
+    return mAdFormat;
   }
 
-  public InstantArticlesStats setFieldError(String value) {
-    this.mError = value;
+  public AdCreativeBrandedContentAds setFieldAdFormat(Long value) {
+    this.mAdFormat = value;
     return this;
   }
 
-  public List<Map<String, Object>> getFieldMetadata() {
-    return mMetadata;
+  public String getFieldCreatorAdPermissionType() {
+    return mCreatorAdPermissionType;
   }
 
-  public InstantArticlesStats setFieldMetadata(List<Map<String, Object>> value) {
-    this.mMetadata = value;
+  public AdCreativeBrandedContentAds setFieldCreatorAdPermissionType(String value) {
+    this.mCreatorAdPermissionType = value;
     return this;
   }
 
-  public Object getFieldMetric() {
-    return mMetric;
+  public String getFieldInstagramBoostPostAccessToken() {
+    return mInstagramBoostPostAccessToken;
   }
 
-  public InstantArticlesStats setFieldMetric(Object value) {
-    this.mMetric = value;
+  public AdCreativeBrandedContentAds setFieldInstagramBoostPostAccessToken(String value) {
+    this.mInstagramBoostPostAccessToken = value;
     return this;
   }
 
-  public List<Map<String, Object>> getFieldTotals() {
-    return mTotals;
+  public List<Object> getFieldPartners() {
+    return mPartners;
   }
 
-  public InstantArticlesStats setFieldTotals(List<Map<String, Object>> value) {
-    this.mTotals = value;
+  public AdCreativeBrandedContentAds setFieldPartners(List<Object> value) {
+    this.mPartners = value;
     return this;
   }
 
-  public List<List<Map<String, Object>>> getFieldXAxisBreakdown() {
-    return mXAxisBreakdown;
+  public Long getFieldUiVersion() {
+    return mUiVersion;
   }
 
-  public InstantArticlesStats setFieldXAxisBreakdown(List<List<Map<String, Object>>> value) {
-    this.mXAxisBreakdown = value;
+  public AdCreativeBrandedContentAds setFieldUiVersion(Long value) {
+    this.mUiVersion = value;
     return this;
   }
 
@@ -277,21 +277,21 @@ public class InstantArticlesStats extends APINode {
     return gson;
   }
 
-  public InstantArticlesStats copyFrom(InstantArticlesStats instance) {
-    this.mError = instance.mError;
-    this.mMetadata = instance.mMetadata;
-    this.mMetric = instance.mMetric;
-    this.mTotals = instance.mTotals;
-    this.mXAxisBreakdown = instance.mXAxisBreakdown;
+  public AdCreativeBrandedContentAds copyFrom(AdCreativeBrandedContentAds instance) {
+    this.mAdFormat = instance.mAdFormat;
+    this.mCreatorAdPermissionType = instance.mCreatorAdPermissionType;
+    this.mInstagramBoostPostAccessToken = instance.mInstagramBoostPostAccessToken;
+    this.mPartners = instance.mPartners;
+    this.mUiVersion = instance.mUiVersion;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<InstantArticlesStats> getParser() {
-    return new APIRequest.ResponseParser<InstantArticlesStats>() {
-      public APINodeList<InstantArticlesStats> parseResponse(String response, APIContext context, APIRequest<InstantArticlesStats> request, String header) throws MalformedResponseException {
-        return InstantArticlesStats.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdCreativeBrandedContentAds> getParser() {
+    return new APIRequest.ResponseParser<AdCreativeBrandedContentAds>() {
+      public APINodeList<AdCreativeBrandedContentAds> parseResponse(String response, APIContext context, APIRequest<AdCreativeBrandedContentAds> request, String header) throws MalformedResponseException {
+        return AdCreativeBrandedContentAds.parseResponse(response, context, request, header);
       }
     };
   }

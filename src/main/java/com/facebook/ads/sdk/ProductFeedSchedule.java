@@ -58,7 +58,7 @@ public class ProductFeedSchedule extends APINode {
   @SerializedName("day_of_month")
   private Long mDayOfMonth = null;
   @SerializedName("day_of_week")
-  private EnumDayOfWeek mDayOfWeek = null;
+  private String mDayOfWeek = null;
   @SerializedName("hour")
   private Long mHour = null;
   @SerializedName("id")
@@ -293,7 +293,7 @@ public class ProductFeedSchedule extends APINode {
     return mDayOfMonth;
   }
 
-  public EnumDayOfWeek getFieldDayOfWeek() {
+  public String getFieldDayOfWeek() {
     return mDayOfWeek;
   }
 
@@ -513,35 +513,6 @@ public class ProductFeedSchedule extends APINode {
       this.requestField("username", value);
       return this;
     }
-  }
-
-  public static enum EnumDayOfWeek {
-      @SerializedName("FRIDAY")
-      VALUE_FRIDAY("FRIDAY"),
-      @SerializedName("MONDAY")
-      VALUE_MONDAY("MONDAY"),
-      @SerializedName("SATURDAY")
-      VALUE_SATURDAY("SATURDAY"),
-      @SerializedName("SUNDAY")
-      VALUE_SUNDAY("SUNDAY"),
-      @SerializedName("THURSDAY")
-      VALUE_THURSDAY("THURSDAY"),
-      @SerializedName("TUESDAY")
-      VALUE_TUESDAY("TUESDAY"),
-      @SerializedName("WEDNESDAY")
-      VALUE_WEDNESDAY("WEDNESDAY"),
-      ;
-
-      private String value;
-
-      private EnumDayOfWeek(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
   }
 
   public static enum EnumInterval {

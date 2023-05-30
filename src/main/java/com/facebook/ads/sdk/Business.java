@@ -326,6 +326,10 @@ public class Business extends APINode {
     return new APIRequestCreateAdAccount(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateAddPhoneNumber createAddPhoneNumber() {
+    return new APIRequestCreateAddPhoneNumber(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateAdNetworkApplication createAdNetworkApplication() {
     return new APIRequestCreateAdNetworkApplication(this.getPrefixedId().toString(), context);
   }
@@ -546,6 +550,14 @@ public class Business extends APINode {
     return new APIRequestCreateOfflineConversionDataSet(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetOpenBridgeConfigurations getOpenBridgeConfigurations() {
+    return new APIRequestGetOpenBridgeConfigurations(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateOpenBridgeConfiguration createOpenBridgeConfiguration() {
+    return new APIRequestCreateOpenBridgeConfiguration(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetOwnedAdAccounts getOwnedAdAccounts() {
     return new APIRequestGetOwnedAdAccounts(this.getPrefixedId().toString(), context);
   }
@@ -648,6 +660,10 @@ public class Business extends APINode {
 
   public APIRequestCreatePixelTo createPixelTo() {
     return new APIRequestCreatePixelTo(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetPreVerifiedNumbers getPreVerifiedNumbers() {
+    return new APIRequestGetPreVerifiedNumbers(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetReceivedAudienceSharingRequests getReceivedAudienceSharingRequests() {
@@ -1670,6 +1686,116 @@ public class Business extends APINode {
 
     @Override
     public APIRequestCreateAdAccount requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateAddPhoneNumber extends APIRequest<Business> {
+
+    Business lastResponse = null;
+    @Override
+    public Business getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "phone_number",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Business parseResponse(String response, String header) throws APIException {
+      return Business.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Business execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Business execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Business> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Business> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, Business>() {
+           public Business apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateAddPhoneNumber.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateAddPhoneNumber(String nodeId, APIContext context) {
+      super(context, nodeId, "/add_phone_numbers", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateAddPhoneNumber setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAddPhoneNumber setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateAddPhoneNumber setPhoneNumber (String phoneNumber) {
+      this.setParam("phone_number", phoneNumber);
+      return this;
+    }
+
+    public APIRequestCreateAddPhoneNumber requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateAddPhoneNumber requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAddPhoneNumber requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateAddPhoneNumber requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAddPhoneNumber requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAddPhoneNumber requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -4753,7 +4879,6 @@ public class Business extends APINode {
       "fb_entity",
       "funding_source",
       "funding_source_details",
-      "has_advertiser_opted_in_odax",
       "has_migrated_permissions",
       "has_page_authorized_adaccount",
       "id",
@@ -5087,13 +5212,6 @@ public class Business extends APINode {
     }
     public APIRequestGetClientAdAccounts requestFundingSourceDetailsField (boolean value) {
       this.requestField("funding_source_details", value);
-      return this;
-    }
-    public APIRequestGetClientAdAccounts requestHasAdvertiserOptedInOdaxField () {
-      return this.requestHasAdvertiserOptedInOdaxField(true);
-    }
-    public APIRequestGetClientAdAccounts requestHasAdvertiserOptedInOdaxField (boolean value) {
-      this.requestField("has_advertiser_opted_in_odax", value);
       return this;
     }
     public APIRequestGetClientAdAccounts requestHasMigratedPermissionsField () {
@@ -6559,7 +6677,6 @@ public class Business extends APINode {
       "impressum",
       "influences",
       "instagram_business_account",
-      "instant_articles_review_status",
       "is_always_open",
       "is_chain",
       "is_community_page",
@@ -6633,7 +6750,6 @@ public class Business extends APINode {
       "store_number",
       "studio",
       "supports_donate_button_in_live_video",
-      "supports_instant_articles",
       "talking_about_count",
       "temporary_status",
       "unread_message_count",
@@ -7157,13 +7273,6 @@ public class Business extends APINode {
       this.requestField("instagram_business_account", value);
       return this;
     }
-    public APIRequestGetClientPages requestInstantArticlesReviewStatusField () {
-      return this.requestInstantArticlesReviewStatusField(true);
-    }
-    public APIRequestGetClientPages requestInstantArticlesReviewStatusField (boolean value) {
-      this.requestField("instant_articles_review_status", value);
-      return this;
-    }
     public APIRequestGetClientPages requestIsAlwaysOpenField () {
       return this.requestIsAlwaysOpenField(true);
     }
@@ -7673,13 +7782,6 @@ public class Business extends APINode {
     }
     public APIRequestGetClientPages requestSupportsDonateButtonInLiveVideoField (boolean value) {
       this.requestField("supports_donate_button_in_live_video", value);
-      return this;
-    }
-    public APIRequestGetClientPages requestSupportsInstantArticlesField () {
-      return this.requestSupportsInstantArticlesField(true);
-    }
-    public APIRequestGetClientPages requestSupportsInstantArticlesField (boolean value) {
-      this.requestField("supports_instant_articles", value);
       return this;
     }
     public APIRequestGetClientPages requestTalkingAboutCountField () {
@@ -13704,6 +13806,318 @@ public class Business extends APINode {
 
   }
 
+  public static class APIRequestGetOpenBridgeConfigurations extends APIRequest<OpenBridgeConfiguration> {
+
+    APINodeList<OpenBridgeConfiguration> lastResponse = null;
+    @Override
+    public APINodeList<OpenBridgeConfiguration> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "access_key",
+      "active",
+      "endpoint",
+      "host_business_id",
+      "host_external_id",
+      "id",
+      "pixel_id",
+    };
+
+    @Override
+    public APINodeList<OpenBridgeConfiguration> parseResponse(String response, String header) throws APIException {
+      return OpenBridgeConfiguration.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<OpenBridgeConfiguration> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<OpenBridgeConfiguration> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<OpenBridgeConfiguration>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<OpenBridgeConfiguration>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<OpenBridgeConfiguration>>() {
+           public APINodeList<OpenBridgeConfiguration> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetOpenBridgeConfigurations.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetOpenBridgeConfigurations(String nodeId, APIContext context) {
+      super(context, nodeId, "/openbridge_configurations", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetOpenBridgeConfigurations setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOpenBridgeConfigurations setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetOpenBridgeConfigurations requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetOpenBridgeConfigurations requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOpenBridgeConfigurations requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetOpenBridgeConfigurations requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOpenBridgeConfigurations requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOpenBridgeConfigurations requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetOpenBridgeConfigurations requestAccessKeyField () {
+      return this.requestAccessKeyField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestAccessKeyField (boolean value) {
+      this.requestField("access_key", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestActiveField () {
+      return this.requestActiveField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestActiveField (boolean value) {
+      this.requestField("active", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestEndpointField () {
+      return this.requestEndpointField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestEndpointField (boolean value) {
+      this.requestField("endpoint", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestHostBusinessIdField () {
+      return this.requestHostBusinessIdField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestHostBusinessIdField (boolean value) {
+      this.requestField("host_business_id", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestHostExternalIdField () {
+      return this.requestHostExternalIdField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestHostExternalIdField (boolean value) {
+      this.requestField("host_external_id", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestPixelIdField () {
+      return this.requestPixelIdField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestPixelIdField (boolean value) {
+      this.requestField("pixel_id", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreateOpenBridgeConfiguration extends APIRequest<OpenBridgeConfiguration> {
+
+    OpenBridgeConfiguration lastResponse = null;
+    @Override
+    public OpenBridgeConfiguration getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "access_key",
+      "active",
+      "endpoint",
+      "host_business_id",
+      "host_external_id",
+      "pixel_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public OpenBridgeConfiguration parseResponse(String response, String header) throws APIException {
+      return OpenBridgeConfiguration.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public OpenBridgeConfiguration execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public OpenBridgeConfiguration execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<OpenBridgeConfiguration> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<OpenBridgeConfiguration> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, OpenBridgeConfiguration>() {
+           public OpenBridgeConfiguration apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateOpenBridgeConfiguration.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateOpenBridgeConfiguration(String nodeId, APIContext context) {
+      super(context, nodeId, "/openbridge_configurations", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateOpenBridgeConfiguration setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateOpenBridgeConfiguration setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateOpenBridgeConfiguration setAccessKey (String accessKey) {
+      this.setParam("access_key", accessKey);
+      return this;
+    }
+
+    public APIRequestCreateOpenBridgeConfiguration setActive (Boolean active) {
+      this.setParam("active", active);
+      return this;
+    }
+    public APIRequestCreateOpenBridgeConfiguration setActive (String active) {
+      this.setParam("active", active);
+      return this;
+    }
+
+    public APIRequestCreateOpenBridgeConfiguration setEndpoint (String endpoint) {
+      this.setParam("endpoint", endpoint);
+      return this;
+    }
+
+    public APIRequestCreateOpenBridgeConfiguration setHostBusinessId (Long hostBusinessId) {
+      this.setParam("host_business_id", hostBusinessId);
+      return this;
+    }
+    public APIRequestCreateOpenBridgeConfiguration setHostBusinessId (String hostBusinessId) {
+      this.setParam("host_business_id", hostBusinessId);
+      return this;
+    }
+
+    public APIRequestCreateOpenBridgeConfiguration setHostExternalId (String hostExternalId) {
+      this.setParam("host_external_id", hostExternalId);
+      return this;
+    }
+
+    public APIRequestCreateOpenBridgeConfiguration setPixelId (Long pixelId) {
+      this.setParam("pixel_id", pixelId);
+      return this;
+    }
+    public APIRequestCreateOpenBridgeConfiguration setPixelId (String pixelId) {
+      this.setParam("pixel_id", pixelId);
+      return this;
+    }
+
+    public APIRequestCreateOpenBridgeConfiguration requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateOpenBridgeConfiguration requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateOpenBridgeConfiguration requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateOpenBridgeConfiguration requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateOpenBridgeConfiguration requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateOpenBridgeConfiguration requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetOwnedAdAccounts extends APIRequest<AdAccount> {
 
     APINodeList<AdAccount> lastResponse = null;
@@ -13745,7 +14159,6 @@ public class Business extends APINode {
       "fb_entity",
       "funding_source",
       "funding_source_details",
-      "has_advertiser_opted_in_odax",
       "has_migrated_permissions",
       "has_page_authorized_adaccount",
       "id",
@@ -14079,13 +14492,6 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedAdAccounts requestFundingSourceDetailsField (boolean value) {
       this.requestField("funding_source_details", value);
-      return this;
-    }
-    public APIRequestGetOwnedAdAccounts requestHasAdvertiserOptedInOdaxField () {
-      return this.requestHasAdvertiserOptedInOdaxField(true);
-    }
-    public APIRequestGetOwnedAdAccounts requestHasAdvertiserOptedInOdaxField (boolean value) {
-      this.requestField("has_advertiser_opted_in_odax", value);
       return this;
     }
     public APIRequestGetOwnedAdAccounts requestHasMigratedPermissionsField () {
@@ -16431,7 +16837,6 @@ public class Business extends APINode {
       "impressum",
       "influences",
       "instagram_business_account",
-      "instant_articles_review_status",
       "is_always_open",
       "is_chain",
       "is_community_page",
@@ -16505,7 +16910,6 @@ public class Business extends APINode {
       "store_number",
       "studio",
       "supports_donate_button_in_live_video",
-      "supports_instant_articles",
       "talking_about_count",
       "temporary_status",
       "unread_message_count",
@@ -17029,13 +17433,6 @@ public class Business extends APINode {
       this.requestField("instagram_business_account", value);
       return this;
     }
-    public APIRequestGetOwnedPages requestInstantArticlesReviewStatusField () {
-      return this.requestInstantArticlesReviewStatusField(true);
-    }
-    public APIRequestGetOwnedPages requestInstantArticlesReviewStatusField (boolean value) {
-      this.requestField("instant_articles_review_status", value);
-      return this;
-    }
     public APIRequestGetOwnedPages requestIsAlwaysOpenField () {
       return this.requestIsAlwaysOpenField(true);
     }
@@ -17545,13 +17942,6 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedPages requestSupportsDonateButtonInLiveVideoField (boolean value) {
       this.requestField("supports_donate_button_in_live_video", value);
-      return this;
-    }
-    public APIRequestGetOwnedPages requestSupportsInstantArticlesField () {
-      return this.requestSupportsInstantArticlesField(true);
-    }
-    public APIRequestGetOwnedPages requestSupportsInstantArticlesField (boolean value) {
-      this.requestField("supports_instant_articles", value);
       return this;
     }
     public APIRequestGetOwnedPages requestTalkingAboutCountField () {
@@ -20312,6 +20702,166 @@ public class Business extends APINode {
       return this;
     }
 
+  }
+
+  public static class APIRequestGetPreVerifiedNumbers extends APIRequest<WhatsAppBusinessPreVerifiedPhoneNumber> {
+
+    APINodeList<WhatsAppBusinessPreVerifiedPhoneNumber> lastResponse = null;
+    @Override
+    public APINodeList<WhatsAppBusinessPreVerifiedPhoneNumber> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "code_verification_status",
+      "phone_number",
+    };
+
+    public static final String[] FIELDS = {
+      "code_verification_status",
+      "code_verification_time",
+      "id",
+      "phone_number",
+      "verification_expiry_time",
+    };
+
+    @Override
+    public APINodeList<WhatsAppBusinessPreVerifiedPhoneNumber> parseResponse(String response, String header) throws APIException {
+      return WhatsAppBusinessPreVerifiedPhoneNumber.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<WhatsAppBusinessPreVerifiedPhoneNumber> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<WhatsAppBusinessPreVerifiedPhoneNumber> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<WhatsAppBusinessPreVerifiedPhoneNumber>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<WhatsAppBusinessPreVerifiedPhoneNumber>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<WhatsAppBusinessPreVerifiedPhoneNumber>>() {
+           public APINodeList<WhatsAppBusinessPreVerifiedPhoneNumber> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetPreVerifiedNumbers.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetPreVerifiedNumbers(String nodeId, APIContext context) {
+      super(context, nodeId, "/preverified_numbers", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetPreVerifiedNumbers setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPreVerifiedNumbers setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetPreVerifiedNumbers setCodeVerificationStatus (WhatsAppBusinessPreVerifiedPhoneNumber.EnumCodeVerificationStatus codeVerificationStatus) {
+      this.setParam("code_verification_status", codeVerificationStatus);
+      return this;
+    }
+    public APIRequestGetPreVerifiedNumbers setCodeVerificationStatus (String codeVerificationStatus) {
+      this.setParam("code_verification_status", codeVerificationStatus);
+      return this;
+    }
+
+    public APIRequestGetPreVerifiedNumbers setPhoneNumber (String phoneNumber) {
+      this.setParam("phone_number", phoneNumber);
+      return this;
+    }
+
+    public APIRequestGetPreVerifiedNumbers requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetPreVerifiedNumbers requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPreVerifiedNumbers requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetPreVerifiedNumbers requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPreVerifiedNumbers requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPreVerifiedNumbers requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetPreVerifiedNumbers requestCodeVerificationStatusField () {
+      return this.requestCodeVerificationStatusField(true);
+    }
+    public APIRequestGetPreVerifiedNumbers requestCodeVerificationStatusField (boolean value) {
+      this.requestField("code_verification_status", value);
+      return this;
+    }
+    public APIRequestGetPreVerifiedNumbers requestCodeVerificationTimeField () {
+      return this.requestCodeVerificationTimeField(true);
+    }
+    public APIRequestGetPreVerifiedNumbers requestCodeVerificationTimeField (boolean value) {
+      this.requestField("code_verification_time", value);
+      return this;
+    }
+    public APIRequestGetPreVerifiedNumbers requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetPreVerifiedNumbers requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetPreVerifiedNumbers requestPhoneNumberField () {
+      return this.requestPhoneNumberField(true);
+    }
+    public APIRequestGetPreVerifiedNumbers requestPhoneNumberField (boolean value) {
+      this.requestField("phone_number", value);
+      return this;
+    }
+    public APIRequestGetPreVerifiedNumbers requestVerificationExpiryTimeField () {
+      return this.requestVerificationExpiryTimeField(true);
+    }
+    public APIRequestGetPreVerifiedNumbers requestVerificationExpiryTimeField (boolean value) {
+      this.requestField("verification_expiry_time", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetReceivedAudienceSharingRequests extends APIRequest<BusinessAssetSharingAgreement> {

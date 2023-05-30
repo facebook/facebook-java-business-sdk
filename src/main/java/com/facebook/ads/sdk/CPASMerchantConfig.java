@@ -60,13 +60,13 @@ public class CPASMerchantConfig extends APINode {
   @SerializedName("beta_features")
   private List<String> mBetaFeatures = null;
   @SerializedName("business_outcomes_status")
-  private Map<String, String> mBusinessOutcomesStatus = null;
+  private List<Map<String, String>> mBusinessOutcomesStatus = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("is_test_merchant")
   private Boolean mIsTestMerchant = null;
   @SerializedName("outcomes_compliance_status")
-  private Map<String, Object> mOutcomesComplianceStatus = null;
+  private List<Map<String, Object>> mOutcomesComplianceStatus = null;
   @SerializedName("qualified_to_onboard")
   private Boolean mQualifiedToOnboard = null;
   protected static Gson gson = null;
@@ -291,7 +291,7 @@ public class CPASMerchantConfig extends APINode {
     return mBetaFeatures;
   }
 
-  public Map<String, String> getFieldBusinessOutcomesStatus() {
+  public List<Map<String, String>> getFieldBusinessOutcomesStatus() {
     return mBusinessOutcomesStatus;
   }
 
@@ -303,7 +303,7 @@ public class CPASMerchantConfig extends APINode {
     return mIsTestMerchant;
   }
 
-  public Map<String, Object> getFieldOutcomesComplianceStatus() {
+  public List<Map<String, Object>> getFieldOutcomesComplianceStatus() {
     return mOutcomesComplianceStatus;
   }
 

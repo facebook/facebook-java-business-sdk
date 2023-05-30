@@ -600,6 +600,10 @@ public class Application extends APINode {
     return new APIRequestGetIosDialogConfigs(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetLinkedDataset getLinkedDataset() {
+    return new APIRequestGetLinkedDataset(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateMmpAuditing createMmpAuditing() {
     return new APIRequestCreateMmpAuditing(this.getPrefixedId().toString(), context);
   }
@@ -3223,8 +3227,9 @@ public class Application extends APINode {
     public static final String[] PARAMS = {
       "app_id",
       "is_aem_ready",
-      "is_aem_v2_ready",
+      "is_app_aem_ready",
       "is_skan_ready",
+      "message",
     };
 
     public static final String[] FIELDS = {
@@ -3301,12 +3306,12 @@ public class Application extends APINode {
       return this;
     }
 
-    public APIRequestCreateAemSkanReadiness setIsAemV2Ready (Boolean isAemV2Ready) {
-      this.setParam("is_aem_v2_ready", isAemV2Ready);
+    public APIRequestCreateAemSkanReadiness setIsAppAemReady (Boolean isAppAemReady) {
+      this.setParam("is_app_aem_ready", isAppAemReady);
       return this;
     }
-    public APIRequestCreateAemSkanReadiness setIsAemV2Ready (String isAemV2Ready) {
-      this.setParam("is_aem_v2_ready", isAemV2Ready);
+    public APIRequestCreateAemSkanReadiness setIsAppAemReady (String isAppAemReady) {
+      this.setParam("is_app_aem_ready", isAppAemReady);
       return this;
     }
 
@@ -3316,6 +3321,11 @@ public class Application extends APINode {
     }
     public APIRequestCreateAemSkanReadiness setIsSkanReady (String isSkanReady) {
       this.setParam("is_skan_ready", isSkanReady);
+      return this;
+    }
+
+    public APIRequestCreateAemSkanReadiness setMessage (String message) {
+      this.setParam("message", message);
       return this;
     }
 
@@ -5000,7 +5010,6 @@ public class Application extends APINode {
       "fb_entity",
       "funding_source",
       "funding_source_details",
-      "has_advertiser_opted_in_odax",
       "has_migrated_permissions",
       "has_page_authorized_adaccount",
       "id",
@@ -5334,13 +5343,6 @@ public class Application extends APINode {
     }
     public APIRequestGetAuthorizedAdAccounts requestFundingSourceDetailsField (boolean value) {
       this.requestField("funding_source_details", value);
-      return this;
-    }
-    public APIRequestGetAuthorizedAdAccounts requestHasAdvertiserOptedInOdaxField () {
-      return this.requestHasAdvertiserOptedInOdaxField(true);
-    }
-    public APIRequestGetAuthorizedAdAccounts requestHasAdvertiserOptedInOdaxField (boolean value) {
-      this.requestField("has_advertiser_opted_in_odax", value);
       return this;
     }
     public APIRequestGetAuthorizedAdAccounts requestHasMigratedPermissionsField () {
@@ -6741,6 +6743,110 @@ public class Application extends APINode {
 
     @Override
     public APIRequestGetIosDialogConfigs requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetLinkedDataset extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetLinkedDataset.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetLinkedDataset(String nodeId, APIContext context) {
+      super(context, nodeId, "/linked_dataset", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetLinkedDataset setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetLinkedDataset setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetLinkedDataset requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetLinkedDataset requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetLinkedDataset requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetLinkedDataset requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetLinkedDataset requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetLinkedDataset requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -10598,6 +10704,8 @@ public class Application extends APINode {
   }
 
   public static enum EnumLoggingSource {
+      @SerializedName("DETECTION")
+      VALUE_DETECTION("DETECTION"),
       @SerializedName("MESSENGER_BOT")
       VALUE_MESSENGER_BOT("MESSENGER_BOT"),
       ;

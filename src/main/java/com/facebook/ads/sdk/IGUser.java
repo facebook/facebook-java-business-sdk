@@ -1487,6 +1487,7 @@ public class IGUser extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "audio_name",
       "caption",
       "children",
       "cover_url",
@@ -1556,6 +1557,11 @@ public class IGUser extends APINode {
       return this;
     }
 
+
+    public APIRequestCreateMedia setAudioName (String audioName) {
+      this.setParam("audio_name", audioName);
+      return this;
+    }
 
     public APIRequestCreateMedia setCaption (String caption) {
       this.setParam("caption", caption);

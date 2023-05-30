@@ -57,6 +57,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class TargetingGeoLocationElectoralDistrict extends APINode {
   @SerializedName("country")
   private String mCountry = null;
+  @SerializedName("deprecation_code")
+  private String mDeprecationCode = null;
   @SerializedName("electoral_district")
   private String mElectoralDistrict = null;
   @SerializedName("key")
@@ -223,6 +225,15 @@ public class TargetingGeoLocationElectoralDistrict extends APINode {
     return this;
   }
 
+  public String getFieldDeprecationCode() {
+    return mDeprecationCode;
+  }
+
+  public TargetingGeoLocationElectoralDistrict setFieldDeprecationCode(String value) {
+    this.mDeprecationCode = value;
+    return this;
+  }
+
   public String getFieldElectoralDistrict() {
     return mElectoralDistrict;
   }
@@ -268,6 +279,7 @@ public class TargetingGeoLocationElectoralDistrict extends APINode {
 
   public TargetingGeoLocationElectoralDistrict copyFrom(TargetingGeoLocationElectoralDistrict instance) {
     this.mCountry = instance.mCountry;
+    this.mDeprecationCode = instance.mDeprecationCode;
     this.mElectoralDistrict = instance.mElectoralDistrict;
     this.mKey = instance.mKey;
     this.mName = instance.mName;

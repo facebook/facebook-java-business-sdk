@@ -54,29 +54,27 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class InstantArticleInsightsQueryResult extends APINode {
-  @SerializedName("breakdowns")
-  private Map<String, String> mBreakdowns = null;
-  @SerializedName("name")
-  private String mName = null;
-  @SerializedName("time")
-  private String mTime = null;
-  @SerializedName("value")
-  private String mValue = null;
+public class AdCreativeFacebookBrandedContent extends APINode {
+  @SerializedName("shared_to_sponsor_status")
+  private String mSharedToSponsorStatus = null;
+  @SerializedName("sponsor_page_id")
+  private String mSponsorPageId = null;
+  @SerializedName("sponsor_relationship")
+  private String mSponsorRelationship = null;
   protected static Gson gson = null;
 
-  public InstantArticleInsightsQueryResult() {
+  public AdCreativeFacebookBrandedContent() {
   }
 
   public String getId() {
     return null;
   }
-  public static InstantArticleInsightsQueryResult loadJSON(String json, APIContext context, String header) {
-    InstantArticleInsightsQueryResult instantArticleInsightsQueryResult = getGson().fromJson(json, InstantArticleInsightsQueryResult.class);
+  public static AdCreativeFacebookBrandedContent loadJSON(String json, APIContext context, String header) {
+    AdCreativeFacebookBrandedContent adCreativeFacebookBrandedContent = getGson().fromJson(json, AdCreativeFacebookBrandedContent.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(instantArticleInsightsQueryResult.toString());
+      JsonElement o2 = parser.parse(adCreativeFacebookBrandedContent.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -86,14 +84,14 @@ public class InstantArticleInsightsQueryResult extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    instantArticleInsightsQueryResult.context = context;
-    instantArticleInsightsQueryResult.rawValue = json;
-    instantArticleInsightsQueryResult.header = header;
-    return instantArticleInsightsQueryResult;
+    adCreativeFacebookBrandedContent.context = context;
+    adCreativeFacebookBrandedContent.rawValue = json;
+    adCreativeFacebookBrandedContent.header = header;
+    return adCreativeFacebookBrandedContent;
   }
 
-  public static APINodeList<InstantArticleInsightsQueryResult> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<InstantArticleInsightsQueryResult> instantArticleInsightsQueryResults = new APINodeList<InstantArticleInsightsQueryResult>(request, json, header);
+  public static APINodeList<AdCreativeFacebookBrandedContent> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCreativeFacebookBrandedContent> adCreativeFacebookBrandedContents = new APINodeList<AdCreativeFacebookBrandedContent>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -104,9 +102,9 @@ public class InstantArticleInsightsQueryResult extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          instantArticleInsightsQueryResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adCreativeFacebookBrandedContents.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return instantArticleInsightsQueryResults;
+        return adCreativeFacebookBrandedContents;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -116,20 +114,20 @@ public class InstantArticleInsightsQueryResult extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                instantArticleInsightsQueryResults.setCursors(before, after);
+                adCreativeFacebookBrandedContents.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            instantArticleInsightsQueryResults.setPaging(previous, next);
+            adCreativeFacebookBrandedContents.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              instantArticleInsightsQueryResults.setAppSecret(context.getAppSecretProof());
+              adCreativeFacebookBrandedContents.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              instantArticleInsightsQueryResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adCreativeFacebookBrandedContents.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -140,23 +138,23 @@ public class InstantArticleInsightsQueryResult extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  instantArticleInsightsQueryResults.add(loadJSON(entry.getValue().toString(), context, header));
+                  adCreativeFacebookBrandedContents.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              instantArticleInsightsQueryResults.add(loadJSON(obj.toString(), context, header));
+              adCreativeFacebookBrandedContents.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return instantArticleInsightsQueryResults;
+          return adCreativeFacebookBrandedContents;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              instantArticleInsightsQueryResults.add(loadJSON(entry.getValue().toString(), context, header));
+              adCreativeFacebookBrandedContents.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return instantArticleInsightsQueryResults;
+          return adCreativeFacebookBrandedContents;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -173,20 +171,20 @@ public class InstantArticleInsightsQueryResult extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              instantArticleInsightsQueryResults.add(loadJSON(value.toString(), context, header));
+              adCreativeFacebookBrandedContents.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return instantArticleInsightsQueryResults;
+            return adCreativeFacebookBrandedContents;
           }
 
           // Sixth, check if it's pure JsonObject
-          instantArticleInsightsQueryResults.clear();
-          instantArticleInsightsQueryResults.add(loadJSON(json, context, header));
-          return instantArticleInsightsQueryResults;
+          adCreativeFacebookBrandedContents.clear();
+          adCreativeFacebookBrandedContents.add(loadJSON(json, context, header));
+          return adCreativeFacebookBrandedContents;
         }
       }
     } catch (Exception e) {
@@ -214,103 +212,34 @@ public class InstantArticleInsightsQueryResult extends APINode {
   }
 
 
-  public Map<String, String> getFieldBreakdowns() {
-    return mBreakdowns;
+  public String getFieldSharedToSponsorStatus() {
+    return mSharedToSponsorStatus;
   }
 
-  public InstantArticleInsightsQueryResult setFieldBreakdowns(Map<String, String> value) {
-    this.mBreakdowns = value;
+  public AdCreativeFacebookBrandedContent setFieldSharedToSponsorStatus(String value) {
+    this.mSharedToSponsorStatus = value;
     return this;
   }
 
-  public String getFieldName() {
-    return mName;
+  public String getFieldSponsorPageId() {
+    return mSponsorPageId;
   }
 
-  public InstantArticleInsightsQueryResult setFieldName(String value) {
-    this.mName = value;
+  public AdCreativeFacebookBrandedContent setFieldSponsorPageId(String value) {
+    this.mSponsorPageId = value;
     return this;
   }
 
-  public String getFieldTime() {
-    return mTime;
+  public String getFieldSponsorRelationship() {
+    return mSponsorRelationship;
   }
 
-  public InstantArticleInsightsQueryResult setFieldTime(String value) {
-    this.mTime = value;
-    return this;
-  }
-
-  public String getFieldValue() {
-    return mValue;
-  }
-
-  public InstantArticleInsightsQueryResult setFieldValue(String value) {
-    this.mValue = value;
+  public AdCreativeFacebookBrandedContent setFieldSponsorRelationship(String value) {
+    this.mSponsorRelationship = value;
     return this;
   }
 
 
-
-  public static enum EnumBreakdown {
-      @SerializedName("age")
-      VALUE_AGE("age"),
-      @SerializedName("country")
-      VALUE_COUNTRY("country"),
-      @SerializedName("gender")
-      VALUE_GENDER("gender"),
-      @SerializedName("gender_and_age")
-      VALUE_GENDER_AND_AGE("gender_and_age"),
-      @SerializedName("is_organic")
-      VALUE_IS_ORGANIC("is_organic"),
-      @SerializedName("is_shared_by_ia_owner")
-      VALUE_IS_SHARED_BY_IA_OWNER("is_shared_by_ia_owner"),
-      @SerializedName("no_breakdown")
-      VALUE_NO_BREAKDOWN("no_breakdown"),
-      @SerializedName("platform")
-      VALUE_PLATFORM("platform"),
-      @SerializedName("region")
-      VALUE_REGION("region"),
-      ;
-
-      private String value;
-
-      private EnumBreakdown(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumPeriod {
-      @SerializedName("day")
-      VALUE_DAY("day"),
-      @SerializedName("days_28")
-      VALUE_DAYS_28("days_28"),
-      @SerializedName("lifetime")
-      VALUE_LIFETIME("lifetime"),
-      @SerializedName("month")
-      VALUE_MONTH("month"),
-      @SerializedName("total_over_range")
-      VALUE_TOTAL_OVER_RANGE("total_over_range"),
-      @SerializedName("week")
-      VALUE_WEEK("week"),
-      ;
-
-      private String value;
-
-      private EnumPeriod(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -326,20 +255,19 @@ public class InstantArticleInsightsQueryResult extends APINode {
     return gson;
   }
 
-  public InstantArticleInsightsQueryResult copyFrom(InstantArticleInsightsQueryResult instance) {
-    this.mBreakdowns = instance.mBreakdowns;
-    this.mName = instance.mName;
-    this.mTime = instance.mTime;
-    this.mValue = instance.mValue;
+  public AdCreativeFacebookBrandedContent copyFrom(AdCreativeFacebookBrandedContent instance) {
+    this.mSharedToSponsorStatus = instance.mSharedToSponsorStatus;
+    this.mSponsorPageId = instance.mSponsorPageId;
+    this.mSponsorRelationship = instance.mSponsorRelationship;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<InstantArticleInsightsQueryResult> getParser() {
-    return new APIRequest.ResponseParser<InstantArticleInsightsQueryResult>() {
-      public APINodeList<InstantArticleInsightsQueryResult> parseResponse(String response, APIContext context, APIRequest<InstantArticleInsightsQueryResult> request, String header) throws MalformedResponseException {
-        return InstantArticleInsightsQueryResult.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdCreativeFacebookBrandedContent> getParser() {
+    return new APIRequest.ResponseParser<AdCreativeFacebookBrandedContent>() {
+      public APINodeList<AdCreativeFacebookBrandedContent> parseResponse(String response, APIContext context, APIRequest<AdCreativeFacebookBrandedContent> request, String header) throws MalformedResponseException {
+        return AdCreativeFacebookBrandedContent.parseResponse(response, context, request, header);
       }
     };
   }

@@ -382,10 +382,6 @@ public class Group extends APINode {
     return new APIRequestGetPicture(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateShiftSetting createShiftSetting() {
-    return new APIRequestCreateShiftSetting(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetVideos getVideos() {
     return new APIRequestGetVideos(this.getPrefixedId().toString(), context);
   }
@@ -5017,6 +5013,7 @@ public class Group extends APINode {
       "about",
       "age_range",
       "birthday",
+      "community",
       "cover",
       "currency",
       "education",
@@ -5170,6 +5167,13 @@ public class Group extends APINode {
     }
     public APIRequestGetOptedInMembers requestBirthdayField (boolean value) {
       this.requestField("birthday", value);
+      return this;
+    }
+    public APIRequestGetOptedInMembers requestCommunityField () {
+      return this.requestCommunityField(true);
+    }
+    public APIRequestGetOptedInMembers requestCommunityField (boolean value) {
+      this.requestField("community", value);
       return this;
     }
     public APIRequestGetOptedInMembers requestCoverField () {
@@ -6229,126 +6233,6 @@ public class Group extends APINode {
       this.requestField("width", value);
       return this;
     }
-  }
-
-  public static class APIRequestCreateShiftSetting extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "external_id",
-      "shift_feature_setting",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateShiftSetting.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateShiftSetting(String nodeId, APIContext context) {
-      super(context, nodeId, "/shift_settings", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateShiftSetting setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateShiftSetting setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateShiftSetting setExternalId (String externalId) {
-      this.setParam("external_id", externalId);
-      return this;
-    }
-
-    public APIRequestCreateShiftSetting setShiftFeatureSetting (EnumShiftFeatureSetting shiftFeatureSetting) {
-      this.setParam("shift_feature_setting", shiftFeatureSetting);
-      return this;
-    }
-    public APIRequestCreateShiftSetting setShiftFeatureSetting (String shiftFeatureSetting) {
-      this.setParam("shift_feature_setting", shiftFeatureSetting);
-      return this;
-    }
-
-    public APIRequestCreateShiftSetting requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateShiftSetting requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateShiftSetting requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateShiftSetting requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateShiftSetting requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateShiftSetting requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestGetVideos extends APIRequest<AdVideo> {
@@ -8202,29 +8086,6 @@ public class Group extends APINode {
       private String value;
 
       private EnumGroupType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumShiftFeatureSetting {
-      @SerializedName("ALL_FEATURES_OFF")
-      VALUE_ALL_FEATURES_OFF("ALL_FEATURES_OFF"),
-      @SerializedName("ALL_FEATURES_ON")
-      VALUE_ALL_FEATURES_ON("ALL_FEATURES_ON"),
-      @SerializedName("SHIFT_COVER_ONLY_ON")
-      VALUE_SHIFT_COVER_ONLY_ON("SHIFT_COVER_ONLY_ON"),
-      @SerializedName("SHIFT_VIEWER_ONLY_ON")
-      VALUE_SHIFT_VIEWER_ONLY_ON("SHIFT_VIEWER_ONLY_ON"),
-      ;
-
-      private String value;
-
-      private EnumShiftFeatureSetting(String value) {
         this.value = value;
       }
 

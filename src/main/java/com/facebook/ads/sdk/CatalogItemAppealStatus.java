@@ -60,7 +60,7 @@ public class CatalogItemAppealStatus extends APINode {
   @SerializedName("item_id")
   private Long mItemId = null;
   @SerializedName("status")
-  private String mStatus = null;
+  private EnumStatus mStatus = null;
   @SerializedName("use_cases")
   private List<Object> mUseCases = null;
   protected static Gson gson = null;
@@ -232,11 +232,11 @@ public class CatalogItemAppealStatus extends APINode {
     return this;
   }
 
-  public String getFieldStatus() {
+  public EnumStatus getFieldStatus() {
     return mStatus;
   }
 
-  public CatalogItemAppealStatus setFieldStatus(String value) {
+  public CatalogItemAppealStatus setFieldStatus(EnumStatus value) {
     this.mStatus = value;
     return this;
   }
@@ -251,6 +251,31 @@ public class CatalogItemAppealStatus extends APINode {
   }
 
 
+
+  public static enum EnumStatus {
+      @SerializedName("This item cannot be appealed as it is either approved or already has an appeal")
+      VALUE_THIS_ITEM_CANNOT_BE_APPEALED_AS_IT_IS_EITHER_APPROVED_OR_ALREADY_HAS_AN_APPEAL("This item cannot be appealed as it is either approved or already has an appeal"),
+      @SerializedName("This item is not rejected for any of channels")
+      VALUE_THIS_ITEM_IS_NOT_REJECTED_FOR_ANY_OF_CHANNELS("This item is not rejected for any of channels"),
+      @SerializedName("We've encountered unexpected error while processing this request. Please try again later !")
+      VALUE_WE_VE_ENCOUNTERED_UNEXPECTED_ERROR_WHILE_PROCESSING_THIS_REQUEST_PLEASE_TRY_AGAIN_LATER_("We've encountered unexpected error while processing this request. Please try again later !"),
+      @SerializedName("You've reached the maximum number of item requests you can make this week. You'll be able to request item reviews again within the next 7 days.")
+      VALUE_YOU_VE_REACHED_THE_MAXIMUM_NUMBER_OF_ITEM_REQUESTS_YOU_CAN_MAKE_THIS_WEEK_YOU_LL_BE_ABLE_TO_REQUEST_ITEM_REVIEWS_AGAIN_WITHIN_THE_NEXT_7_DAYS_("You've reached the maximum number of item requests you can make this week. You'll be able to request item reviews again within the next 7 days."),
+      @SerializedName("Your request was received. See information below to learn more.")
+      VALUE_YOUR_REQUEST_WAS_RECEIVED_SEE_INFORMATION_BELOW_TO_LEARN_MORE_("Your request was received. See information below to learn more."),
+      ;
+
+      private String value;
+
+      private EnumStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {

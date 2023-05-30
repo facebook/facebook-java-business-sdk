@@ -357,7 +357,6 @@ public class AdStudyCell extends APINode {
       "fb_entity",
       "funding_source",
       "funding_source_details",
-      "has_advertiser_opted_in_odax",
       "has_migrated_permissions",
       "has_page_authorized_adaccount",
       "id",
@@ -688,13 +687,6 @@ public class AdStudyCell extends APINode {
       this.requestField("funding_source_details", value);
       return this;
     }
-    public APIRequestGetAdAccounts requestHasAdvertiserOptedInOdaxField () {
-      return this.requestHasAdvertiserOptedInOdaxField(true);
-    }
-    public APIRequestGetAdAccounts requestHasAdvertiserOptedInOdaxField (boolean value) {
-      this.requestField("has_advertiser_opted_in_odax", value);
-      return this;
-    }
     public APIRequestGetAdAccounts requestHasMigratedPermissionsField () {
       return this.requestHasMigratedPermissionsField(true);
     }
@@ -982,6 +974,8 @@ public class AdStudyCell extends APINode {
       "daily_min_spend_target",
       "daily_spend_cap",
       "destination_type",
+      "dsa_beneficiary",
+      "dsa_payor",
       "effective_status",
       "end_time",
       "existing_customer_budget_percentage",
@@ -1261,6 +1255,20 @@ public class AdStudyCell extends APINode {
       this.requestField("destination_type", value);
       return this;
     }
+    public APIRequestGetAdSets requestDsaBeneficiaryField () {
+      return this.requestDsaBeneficiaryField(true);
+    }
+    public APIRequestGetAdSets requestDsaBeneficiaryField (boolean value) {
+      this.requestField("dsa_beneficiary", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestDsaPayorField () {
+      return this.requestDsaPayorField(true);
+    }
+    public APIRequestGetAdSets requestDsaPayorField (boolean value) {
+      this.requestField("dsa_payor", value);
+      return this;
+    }
     public APIRequestGetAdSets requestEffectiveStatusField () {
       return this.requestEffectiveStatusField(true);
     }
@@ -1513,8 +1521,6 @@ public class AdStudyCell extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
-      "ad_strategy_group_id",
-      "ad_strategy_id",
       "adlabels",
       "bid_strategy",
       "boosted_object_id",
@@ -1648,20 +1654,6 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetCampaigns requestAccountIdField (boolean value) {
       this.requestField("account_id", value);
-      return this;
-    }
-    public APIRequestGetCampaigns requestAdStrategyGroupIdField () {
-      return this.requestAdStrategyGroupIdField(true);
-    }
-    public APIRequestGetCampaigns requestAdStrategyGroupIdField (boolean value) {
-      this.requestField("ad_strategy_group_id", value);
-      return this;
-    }
-    public APIRequestGetCampaigns requestAdStrategyIdField () {
-      return this.requestAdStrategyIdField(true);
-    }
-    public APIRequestGetCampaigns requestAdStrategyIdField (boolean value) {
-      this.requestField("ad_strategy_id", value);
       return this;
     }
     public APIRequestGetCampaigns requestAdlabelsField () {

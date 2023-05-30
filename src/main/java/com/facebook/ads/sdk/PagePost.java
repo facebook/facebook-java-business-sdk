@@ -2972,7 +2972,6 @@ public class PagePost extends APINode {
       "impressum",
       "influences",
       "instagram_business_account",
-      "instant_articles_review_status",
       "is_always_open",
       "is_chain",
       "is_community_page",
@@ -3046,7 +3045,6 @@ public class PagePost extends APINode {
       "store_number",
       "studio",
       "supports_donate_button_in_live_video",
-      "supports_instant_articles",
       "talking_about_count",
       "temporary_status",
       "unread_message_count",
@@ -3570,13 +3568,6 @@ public class PagePost extends APINode {
       this.requestField("instagram_business_account", value);
       return this;
     }
-    public APIRequestGetSponsorTags requestInstantArticlesReviewStatusField () {
-      return this.requestInstantArticlesReviewStatusField(true);
-    }
-    public APIRequestGetSponsorTags requestInstantArticlesReviewStatusField (boolean value) {
-      this.requestField("instant_articles_review_status", value);
-      return this;
-    }
     public APIRequestGetSponsorTags requestIsAlwaysOpenField () {
       return this.requestIsAlwaysOpenField(true);
     }
@@ -4086,13 +4077,6 @@ public class PagePost extends APINode {
     }
     public APIRequestGetSponsorTags requestSupportsDonateButtonInLiveVideoField (boolean value) {
       this.requestField("supports_donate_button_in_live_video", value);
-      return this;
-    }
-    public APIRequestGetSponsorTags requestSupportsInstantArticlesField () {
-      return this.requestSupportsInstantArticlesField(true);
-    }
-    public APIRequestGetSponsorTags requestSupportsInstantArticlesField (boolean value) {
-      this.requestField("supports_instant_articles", value);
       return this;
     }
     public APIRequestGetSponsorTags requestTalkingAboutCountField () {

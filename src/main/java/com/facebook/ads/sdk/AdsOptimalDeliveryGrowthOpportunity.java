@@ -56,7 +56,7 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  */
 public class AdsOptimalDeliveryGrowthOpportunity extends APINode {
   @SerializedName("child_metadata")
-  private Map<String, Object> mChildMetadata = null;
+  private List<Map<String, Object>> mChildMetadata = null;
   @SerializedName("metadata")
   private Object mMetadata = null;
   @SerializedName("optimization_type")
@@ -212,11 +212,11 @@ public class AdsOptimalDeliveryGrowthOpportunity extends APINode {
   }
 
 
-  public Map<String, Object> getFieldChildMetadata() {
+  public List<Map<String, Object>> getFieldChildMetadata() {
     return mChildMetadata;
   }
 
-  public AdsOptimalDeliveryGrowthOpportunity setFieldChildMetadata(Map<String, Object> value) {
+  public AdsOptimalDeliveryGrowthOpportunity setFieldChildMetadata(List<Map<String, Object>> value) {
     this.mChildMetadata = value;
     return this;
   }

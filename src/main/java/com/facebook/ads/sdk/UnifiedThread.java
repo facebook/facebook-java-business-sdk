@@ -67,6 +67,8 @@ public class UnifiedThread extends APINode {
   private Boolean mIsSubscribed = null;
   @SerializedName("link")
   private String mLink = null;
+  @SerializedName("linked_group")
+  private Group mLinkedGroup = null;
   @SerializedName("message_count")
   private Long mMessageCount = null;
   @SerializedName("name")
@@ -329,6 +331,13 @@ public class UnifiedThread extends APINode {
     return mLink;
   }
 
+  public Group getFieldLinkedGroup() {
+    if (mLinkedGroup != null) {
+      mLinkedGroup.context = getContext();
+    }
+    return mLinkedGroup;
+  }
+
   public Long getFieldMessageCount() {
     return mMessageCount;
   }
@@ -502,6 +511,7 @@ public class UnifiedThread extends APINode {
       "id",
       "is_subscribed",
       "link",
+      "linked_group",
       "message_count",
       "name",
       "participants",
@@ -645,6 +655,13 @@ public class UnifiedThread extends APINode {
       this.requestField("link", value);
       return this;
     }
+    public APIRequestGet requestLinkedGroupField () {
+      return this.requestLinkedGroupField(true);
+    }
+    public APIRequestGet requestLinkedGroupField (boolean value) {
+      this.requestField("linked_group", value);
+      return this;
+    }
     public APIRequestGet requestMessageCountField () {
       return this.requestMessageCountField(true);
     }
@@ -776,6 +793,7 @@ public class UnifiedThread extends APINode {
     this.mId = instance.mId;
     this.mIsSubscribed = instance.mIsSubscribed;
     this.mLink = instance.mLink;
+    this.mLinkedGroup = instance.mLinkedGroup;
     this.mMessageCount = instance.mMessageCount;
     this.mName = instance.mName;
     this.mParticipants = instance.mParticipants;

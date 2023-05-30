@@ -57,10 +57,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class Campaign extends APINode {
   @SerializedName("account_id")
   private String mAccountId = null;
-  @SerializedName("ad_strategy_group_id")
-  private String mAdStrategyGroupId = null;
-  @SerializedName("ad_strategy_id")
-  private String mAdStrategyId = null;
   @SerializedName("adlabels")
   private List<AdLabel> mAdlabels = null;
   @SerializedName("bid_strategy")
@@ -395,14 +391,6 @@ public class Campaign extends APINode {
 
   public String getFieldAccountId() {
     return mAccountId;
-  }
-
-  public String getFieldAdStrategyGroupId() {
-    return mAdStrategyGroupId;
-  }
-
-  public String getFieldAdStrategyId() {
-    return mAdStrategyId;
   }
 
   public List<AdLabel> getFieldAdlabels() {
@@ -1162,6 +1150,7 @@ public class Campaign extends APINode {
       "id",
       "issues_info",
       "last_updated_by_app_id",
+      "meta_reward_adgroup_status",
       "name",
       "preview_shareable_link",
       "priority",
@@ -1461,6 +1450,13 @@ public class Campaign extends APINode {
       this.requestField("last_updated_by_app_id", value);
       return this;
     }
+    public APIRequestGetAds requestMetaRewardAdgroupStatusField () {
+      return this.requestMetaRewardAdgroupStatusField(true);
+    }
+    public APIRequestGetAds requestMetaRewardAdgroupStatusField (boolean value) {
+      this.requestField("meta_reward_adgroup_status", value);
+      return this;
+    }
     public APIRequestGetAds requestNameField () {
       return this.requestNameField(true);
     }
@@ -1577,6 +1573,8 @@ public class Campaign extends APINode {
       "daily_min_spend_target",
       "daily_spend_cap",
       "destination_type",
+      "dsa_beneficiary",
+      "dsa_payor",
       "effective_status",
       "end_time",
       "existing_customer_budget_percentage",
@@ -1892,6 +1890,20 @@ public class Campaign extends APINode {
       this.requestField("destination_type", value);
       return this;
     }
+    public APIRequestGetAdSets requestDsaBeneficiaryField () {
+      return this.requestDsaBeneficiaryField(true);
+    }
+    public APIRequestGetAdSets requestDsaBeneficiaryField (boolean value) {
+      this.requestField("dsa_beneficiary", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestDsaPayorField () {
+      return this.requestDsaPayorField(true);
+    }
+    public APIRequestGetAdSets requestDsaPayorField (boolean value) {
+      this.requestField("dsa_payor", value);
+      return this;
+    }
     public APIRequestGetAdSets requestEffectiveStatusField () {
       return this.requestEffectiveStatusField(true);
     }
@@ -2148,8 +2160,6 @@ public class Campaign extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
-      "ad_strategy_group_id",
-      "ad_strategy_id",
       "adlabels",
       "bid_strategy",
       "boosted_object_id",
@@ -2319,20 +2329,6 @@ public class Campaign extends APINode {
     }
     public APIRequestGetCopies requestAccountIdField (boolean value) {
       this.requestField("account_id", value);
-      return this;
-    }
-    public APIRequestGetCopies requestAdStrategyGroupIdField () {
-      return this.requestAdStrategyGroupIdField(true);
-    }
-    public APIRequestGetCopies requestAdStrategyGroupIdField (boolean value) {
-      this.requestField("ad_strategy_group_id", value);
-      return this;
-    }
-    public APIRequestGetCopies requestAdStrategyIdField () {
-      return this.requestAdStrategyIdField(true);
-    }
-    public APIRequestGetCopies requestAdStrategyIdField (boolean value) {
-      this.requestField("ad_strategy_id", value);
       return this;
     }
     public APIRequestGetCopies requestAdlabelsField () {
@@ -3466,8 +3462,6 @@ public class Campaign extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
-      "ad_strategy_group_id",
-      "ad_strategy_id",
       "adlabels",
       "bid_strategy",
       "boosted_object_id",
@@ -3637,20 +3631,6 @@ public class Campaign extends APINode {
     }
     public APIRequestGet requestAccountIdField (boolean value) {
       this.requestField("account_id", value);
-      return this;
-    }
-    public APIRequestGet requestAdStrategyGroupIdField () {
-      return this.requestAdStrategyGroupIdField(true);
-    }
-    public APIRequestGet requestAdStrategyGroupIdField (boolean value) {
-      this.requestField("ad_strategy_group_id", value);
-      return this;
-    }
-    public APIRequestGet requestAdStrategyIdField () {
-      return this.requestAdStrategyIdField(true);
-    }
-    public APIRequestGet requestAdStrategyIdField (boolean value) {
-      this.requestField("ad_strategy_id", value);
       return this;
     }
     public APIRequestGet requestAdlabelsField () {
@@ -3944,7 +3924,6 @@ public class Campaign extends APINode {
       "start_time",
       "status",
       "stop_time",
-      "upstream_events",
     };
 
     public static final String[] FIELDS = {
@@ -4186,15 +4165,6 @@ public class Campaign extends APINode {
 
     public APIRequestUpdate setStopTime (String stopTime) {
       this.setParam("stop_time", stopTime);
-      return this;
-    }
-
-    public APIRequestUpdate setUpstreamEvents (Map<String, String> upstreamEvents) {
-      this.setParam("upstream_events", upstreamEvents);
-      return this;
-    }
-    public APIRequestUpdate setUpstreamEvents (String upstreamEvents) {
-      this.setParam("upstream_events", upstreamEvents);
       return this;
     }
 
@@ -5107,8 +5077,6 @@ public class Campaign extends APINode {
 
   public Campaign copyFrom(Campaign instance) {
     this.mAccountId = instance.mAccountId;
-    this.mAdStrategyGroupId = instance.mAdStrategyGroupId;
-    this.mAdStrategyId = instance.mAdStrategyId;
     this.mAdlabels = instance.mAdlabels;
     this.mBidStrategy = instance.mBidStrategy;
     this.mBoostedObjectId = instance.mBoostedObjectId;

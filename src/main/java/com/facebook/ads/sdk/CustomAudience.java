@@ -710,7 +710,6 @@ public class CustomAudience extends APINode {
       "fb_entity",
       "funding_source",
       "funding_source_details",
-      "has_advertiser_opted_in_odax",
       "has_migrated_permissions",
       "has_page_authorized_adaccount",
       "id",
@@ -1044,13 +1043,6 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAdAccounts requestFundingSourceDetailsField (boolean value) {
       this.requestField("funding_source_details", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestHasAdvertiserOptedInOdaxField () {
-      return this.requestHasAdvertiserOptedInOdaxField(true);
-    }
-    public APIRequestGetAdAccounts requestHasAdvertiserOptedInOdaxField (boolean value) {
-      this.requestField("has_advertiser_opted_in_odax", value);
       return this;
     }
     public APIRequestGetAdAccounts requestHasMigratedPermissionsField () {
@@ -1483,6 +1475,7 @@ public class CustomAudience extends APINode {
       "id",
       "issues_info",
       "last_updated_by_app_id",
+      "meta_reward_adgroup_status",
       "name",
       "preview_shareable_link",
       "priority",
@@ -1762,6 +1755,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAds requestLastUpdatedByAppIdField (boolean value) {
       this.requestField("last_updated_by_app_id", value);
+      return this;
+    }
+    public APIRequestGetAds requestMetaRewardAdgroupStatusField () {
+      return this.requestMetaRewardAdgroupStatusField(true);
+    }
+    public APIRequestGetAds requestMetaRewardAdgroupStatusField (boolean value) {
+      this.requestField("meta_reward_adgroup_status", value);
       return this;
     }
     public APIRequestGetAds requestNameField () {
@@ -3120,6 +3120,7 @@ public class CustomAudience extends APINode {
       "rule",
       "rule_aggregation",
       "tags",
+      "use_in_campaigns",
     };
 
     public static final String[] FIELDS = {
@@ -3331,6 +3332,15 @@ public class CustomAudience extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setUseInCampaigns (Boolean useInCampaigns) {
+      this.setParam("use_in_campaigns", useInCampaigns);
+      return this;
+    }
+    public APIRequestUpdate setUseInCampaigns (String useInCampaigns) {
+      this.setParam("use_in_campaigns", useInCampaigns);
+      return this;
+    }
+
     public APIRequestUpdate requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -3467,6 +3477,8 @@ public class CustomAudience extends APINode {
       VALUE_APP("APP"),
       @SerializedName("BAG_OF_ACCOUNTS")
       VALUE_BAG_OF_ACCOUNTS("BAG_OF_ACCOUNTS"),
+      @SerializedName("BIDDING")
+      VALUE_BIDDING("BIDDING"),
       @SerializedName("CLAIM")
       VALUE_CLAIM("CLAIM"),
       @SerializedName("CUSTOM")
@@ -3485,6 +3497,8 @@ public class CustomAudience extends APINode {
       VALUE_OFFLINE_CONVERSION("OFFLINE_CONVERSION"),
       @SerializedName("PARTNER")
       VALUE_PARTNER("PARTNER"),
+      @SerializedName("PRIMARY")
+      VALUE_PRIMARY("PRIMARY"),
       @SerializedName("REGULATED_CATEGORIES_AUDIENCE")
       VALUE_REGULATED_CATEGORIES_AUDIENCE("REGULATED_CATEGORIES_AUDIENCE"),
       @SerializedName("STUDY_RULE_AUDIENCE")

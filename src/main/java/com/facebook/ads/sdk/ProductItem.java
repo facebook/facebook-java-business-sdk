@@ -56,11 +56,11 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  */
 public class ProductItem extends APINode {
   @SerializedName("additional_image_cdn_urls")
-  private List<Map<String, String>> mAdditionalImageCdnUrls = null;
+  private List<List<Map<String, String>>> mAdditionalImageCdnUrls = null;
   @SerializedName("additional_image_urls")
   private List<String> mAdditionalImageUrls = null;
   @SerializedName("additional_variant_attributes")
-  private Map<String, String> mAdditionalVariantAttributes = null;
+  private List<Map<String, String>> mAdditionalVariantAttributes = null;
   @SerializedName("age_group")
   private EnumAgeGroup mAgeGroup = null;
   @SerializedName("applinks")
@@ -72,7 +72,7 @@ public class ProductItem extends APINode {
   @SerializedName("brand")
   private String mBrand = null;
   @SerializedName("capability_to_review_status")
-  private Map<Object, Object> mCapabilityToReviewStatus = null;
+  private List<Map<Object, Object>> mCapabilityToReviewStatus = null;
   @SerializedName("category")
   private String mCategory = null;
   @SerializedName("category_specific_fields")
@@ -86,7 +86,7 @@ public class ProductItem extends APINode {
   @SerializedName("currency")
   private String mCurrency = null;
   @SerializedName("custom_data")
-  private Map<String, String> mCustomData = null;
+  private List<Map<String, String>> mCustomData = null;
   @SerializedName("custom_label_0")
   private String mCustomLabel0 = null;
   @SerializedName("custom_label_1")
@@ -122,7 +122,7 @@ public class ProductItem extends APINode {
   @SerializedName("id")
   private String mId = null;
   @SerializedName("image_cdn_urls")
-  private Map<String, String> mImageCdnUrls = null;
+  private List<Map<String, String>> mImageCdnUrls = null;
   @SerializedName("image_fetch_status")
   private EnumImageFetchStatus mImageFetchStatus = null;
   @SerializedName("image_url")
@@ -418,6 +418,10 @@ public class ProductItem extends APINode {
     return new APIRequestGetProductSets(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetVideosMetadata getVideosMetadata() {
+    return new APIRequestGetVideosMetadata(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestDelete delete() {
     return new APIRequestDelete(this.getPrefixedId().toString(), context);
   }
@@ -431,7 +435,7 @@ public class ProductItem extends APINode {
   }
 
 
-  public List<Map<String, String>> getFieldAdditionalImageCdnUrls() {
+  public List<List<Map<String, String>>> getFieldAdditionalImageCdnUrls() {
     return mAdditionalImageCdnUrls;
   }
 
@@ -439,7 +443,7 @@ public class ProductItem extends APINode {
     return mAdditionalImageUrls;
   }
 
-  public Map<String, String> getFieldAdditionalVariantAttributes() {
+  public List<Map<String, String>> getFieldAdditionalVariantAttributes() {
     return mAdditionalVariantAttributes;
   }
 
@@ -463,7 +467,7 @@ public class ProductItem extends APINode {
     return mBrand;
   }
 
-  public Map<Object, Object> getFieldCapabilityToReviewStatus() {
+  public List<Map<Object, Object>> getFieldCapabilityToReviewStatus() {
     return mCapabilityToReviewStatus;
   }
 
@@ -491,7 +495,7 @@ public class ProductItem extends APINode {
     return mCurrency;
   }
 
-  public Map<String, String> getFieldCustomData() {
+  public List<Map<String, String>> getFieldCustomData() {
     return mCustomData;
   }
 
@@ -563,7 +567,7 @@ public class ProductItem extends APINode {
     return mId;
   }
 
-  public Map<String, String> getFieldImageCdnUrls() {
+  public List<Map<String, String>> getFieldImageCdnUrls() {
     return mImageCdnUrls;
   }
 
@@ -1036,6 +1040,110 @@ public class ProductItem extends APINode {
       this.requestField("retailer_id", value);
       return this;
     }
+  }
+
+  public static class APIRequestGetVideosMetadata extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetVideosMetadata.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetVideosMetadata(String nodeId, APIContext context) {
+      super(context, nodeId, "/videos_metadata", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetVideosMetadata setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVideosMetadata setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetVideosMetadata requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetVideosMetadata requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVideosMetadata requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetVideosMetadata requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVideosMetadata requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVideosMetadata requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestDelete extends APIRequest<APINode> {
@@ -3203,6 +3311,8 @@ public class ProductItem extends APINode {
       VALUE_DUPLICATE_IMAGES("DUPLICATE_IMAGES"),
       @SerializedName("DUPLICATE_TITLE_AND_DESCRIPTION")
       VALUE_DUPLICATE_TITLE_AND_DESCRIPTION("DUPLICATE_TITLE_AND_DESCRIPTION"),
+      @SerializedName("EMPTY_DESCRIPTION")
+      VALUE_EMPTY_DESCRIPTION("EMPTY_DESCRIPTION"),
       @SerializedName("GENERIC_INVALID_FIELD")
       VALUE_GENERIC_INVALID_FIELD("GENERIC_INVALID_FIELD"),
       @SerializedName("HIDDEN_UNTIL_PRODUCT_LAUNCH")

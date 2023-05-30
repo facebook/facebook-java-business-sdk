@@ -347,6 +347,7 @@ public class AdLabel extends APINode {
       "authorization_category",
       "auto_update",
       "body",
+      "branded_content",
       "branded_content_sponsor_page_id",
       "bundle_folder_id",
       "call_to_action_type",
@@ -362,11 +363,13 @@ public class AdLabel extends APINode {
       "effective_object_story_id",
       "enable_direct_install",
       "enable_launch_instant_app",
+      "facebook_branded_content",
       "id",
       "image_crops",
       "image_hash",
       "image_url",
       "instagram_actor_id",
+      "instagram_branded_content",
       "instagram_permalink_url",
       "instagram_story_id",
       "instagram_user_id",
@@ -547,6 +550,13 @@ public class AdLabel extends APINode {
       this.requestField("body", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestBrandedContentField () {
+      return this.requestBrandedContentField(true);
+    }
+    public APIRequestGetAdCreatives requestBrandedContentField (boolean value) {
+      this.requestField("branded_content", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestBrandedContentSponsorPageIdField () {
       return this.requestBrandedContentSponsorPageIdField(true);
     }
@@ -652,6 +662,13 @@ public class AdLabel extends APINode {
       this.requestField("enable_launch_instant_app", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestFacebookBrandedContentField () {
+      return this.requestFacebookBrandedContentField(true);
+    }
+    public APIRequestGetAdCreatives requestFacebookBrandedContentField (boolean value) {
+      this.requestField("facebook_branded_content", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestIdField () {
       return this.requestIdField(true);
     }
@@ -685,6 +702,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdCreatives requestInstagramActorIdField (boolean value) {
       this.requestField("instagram_actor_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestInstagramBrandedContentField () {
+      return this.requestInstagramBrandedContentField(true);
+    }
+    public APIRequestGetAdCreatives requestInstagramBrandedContentField (boolean value) {
+      this.requestField("instagram_branded_content", value);
       return this;
     }
     public APIRequestGetAdCreatives requestInstagramPermalinkUrlField () {
@@ -954,6 +978,7 @@ public class AdLabel extends APINode {
       "id",
       "issues_info",
       "last_updated_by_app_id",
+      "meta_reward_adgroup_status",
       "name",
       "preview_shareable_link",
       "priority",
@@ -1217,6 +1242,13 @@ public class AdLabel extends APINode {
       this.requestField("last_updated_by_app_id", value);
       return this;
     }
+    public APIRequestGetAds requestMetaRewardAdgroupStatusField () {
+      return this.requestMetaRewardAdgroupStatusField(true);
+    }
+    public APIRequestGetAds requestMetaRewardAdgroupStatusField (boolean value) {
+      this.requestField("meta_reward_adgroup_status", value);
+      return this;
+    }
     public APIRequestGetAds requestNameField () {
       return this.requestNameField(true);
     }
@@ -1329,6 +1361,8 @@ public class AdLabel extends APINode {
       "daily_min_spend_target",
       "daily_spend_cap",
       "destination_type",
+      "dsa_beneficiary",
+      "dsa_payor",
       "effective_status",
       "end_time",
       "existing_customer_budget_percentage",
@@ -1608,6 +1642,20 @@ public class AdLabel extends APINode {
       this.requestField("destination_type", value);
       return this;
     }
+    public APIRequestGetAdSets requestDsaBeneficiaryField () {
+      return this.requestDsaBeneficiaryField(true);
+    }
+    public APIRequestGetAdSets requestDsaBeneficiaryField (boolean value) {
+      this.requestField("dsa_beneficiary", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestDsaPayorField () {
+      return this.requestDsaPayorField(true);
+    }
+    public APIRequestGetAdSets requestDsaPayorField (boolean value) {
+      this.requestField("dsa_payor", value);
+      return this;
+    }
     public APIRequestGetAdSets requestEffectiveStatusField () {
       return this.requestEffectiveStatusField(true);
     }
@@ -1860,8 +1908,6 @@ public class AdLabel extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
-      "ad_strategy_group_id",
-      "ad_strategy_id",
       "adlabels",
       "bid_strategy",
       "boosted_object_id",
@@ -1995,20 +2041,6 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetCampaigns requestAccountIdField (boolean value) {
       this.requestField("account_id", value);
-      return this;
-    }
-    public APIRequestGetCampaigns requestAdStrategyGroupIdField () {
-      return this.requestAdStrategyGroupIdField(true);
-    }
-    public APIRequestGetCampaigns requestAdStrategyGroupIdField (boolean value) {
-      this.requestField("ad_strategy_group_id", value);
-      return this;
-    }
-    public APIRequestGetCampaigns requestAdStrategyIdField () {
-      return this.requestAdStrategyIdField(true);
-    }
-    public APIRequestGetCampaigns requestAdStrategyIdField (boolean value) {
-      this.requestField("ad_strategy_id", value);
       return this;
     }
     public APIRequestGetCampaigns requestAdlabelsField () {

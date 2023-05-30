@@ -59,6 +59,8 @@ public class AdAssetFeedSpec extends APINode {
   private List<String> mAdFormats = null;
   @SerializedName("additional_data")
   private Object mAdditionalData = null;
+  @SerializedName("app_product_page_id")
+  private String mAppProductPageId = null;
   @SerializedName("asset_customization_rules")
   private List<Object> mAssetCustomizationRules = null;
   @SerializedName("autotranslate")
@@ -255,6 +257,15 @@ public class AdAssetFeedSpec extends APINode {
 
   public AdAssetFeedSpec setFieldAdditionalData(Object value) {
     this.mAdditionalData = value;
+    return this;
+  }
+
+  public String getFieldAppProductPageId() {
+    return mAppProductPageId;
+  }
+
+  public AdAssetFeedSpec setFieldAppProductPageId(String value) {
+    this.mAppProductPageId = value;
     return this;
   }
 
@@ -484,12 +495,16 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_GET_OFFER("GET_OFFER"),
       @SerializedName("GET_OFFER_VIEW")
       VALUE_GET_OFFER_VIEW("GET_OFFER_VIEW"),
+      @SerializedName("GET_PROMOTIONS")
+      VALUE_GET_PROMOTIONS("GET_PROMOTIONS"),
       @SerializedName("GET_QUOTE")
       VALUE_GET_QUOTE("GET_QUOTE"),
       @SerializedName("GET_SHOWTIMES")
       VALUE_GET_SHOWTIMES("GET_SHOWTIMES"),
       @SerializedName("GET_STARTED")
       VALUE_GET_STARTED("GET_STARTED"),
+      @SerializedName("INQUIRE_NOW")
+      VALUE_INQUIRE_NOW("INQUIRE_NOW"),
       @SerializedName("INSTALL_APP")
       VALUE_INSTALL_APP("INSTALL_APP"),
       @SerializedName("INSTALL_MOBILE_APP")
@@ -611,6 +626,7 @@ public class AdAssetFeedSpec extends APINode {
   public AdAssetFeedSpec copyFrom(AdAssetFeedSpec instance) {
     this.mAdFormats = instance.mAdFormats;
     this.mAdditionalData = instance.mAdditionalData;
+    this.mAppProductPageId = instance.mAppProductPageId;
     this.mAssetCustomizationRules = instance.mAssetCustomizationRules;
     this.mAutotranslate = instance.mAutotranslate;
     this.mBodies = instance.mBodies;

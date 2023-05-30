@@ -54,27 +54,23 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdAccountCustomAudience extends APINode {
-  @SerializedName("audience_type_param_name")
-  private String mAudienceTypeParamName = null;
-  @SerializedName("existing_customer_tag")
-  private String mExistingCustomerTag = null;
-  @SerializedName("new_customer_tag")
-  private String mNewCustomerTag = null;
+public class AdAccountBusinessConstraints extends APINode {
+  @SerializedName("audience_controls")
+  private Object mAudienceControls = null;
   protected static Gson gson = null;
 
-  public AdAccountCustomAudience() {
+  public AdAccountBusinessConstraints() {
   }
 
   public String getId() {
     return null;
   }
-  public static AdAccountCustomAudience loadJSON(String json, APIContext context, String header) {
-    AdAccountCustomAudience adAccountCustomAudience = getGson().fromJson(json, AdAccountCustomAudience.class);
+  public static AdAccountBusinessConstraints loadJSON(String json, APIContext context, String header) {
+    AdAccountBusinessConstraints adAccountBusinessConstraints = getGson().fromJson(json, AdAccountBusinessConstraints.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adAccountCustomAudience.toString());
+      JsonElement o2 = parser.parse(adAccountBusinessConstraints.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -84,14 +80,14 @@ public class AdAccountCustomAudience extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    adAccountCustomAudience.context = context;
-    adAccountCustomAudience.rawValue = json;
-    adAccountCustomAudience.header = header;
-    return adAccountCustomAudience;
+    adAccountBusinessConstraints.context = context;
+    adAccountBusinessConstraints.rawValue = json;
+    adAccountBusinessConstraints.header = header;
+    return adAccountBusinessConstraints;
   }
 
-  public static APINodeList<AdAccountCustomAudience> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdAccountCustomAudience> adAccountCustomAudiences = new APINodeList<AdAccountCustomAudience>(request, json, header);
+  public static APINodeList<AdAccountBusinessConstraints> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdAccountBusinessConstraints> adAccountBusinessConstraintss = new APINodeList<AdAccountBusinessConstraints>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -102,9 +98,9 @@ public class AdAccountCustomAudience extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adAccountCustomAudiences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adAccountBusinessConstraintss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adAccountCustomAudiences;
+        return adAccountBusinessConstraintss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -114,20 +110,20 @@ public class AdAccountCustomAudience extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adAccountCustomAudiences.setCursors(before, after);
+                adAccountBusinessConstraintss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adAccountCustomAudiences.setPaging(previous, next);
+            adAccountBusinessConstraintss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adAccountCustomAudiences.setAppSecret(context.getAppSecretProof());
+              adAccountBusinessConstraintss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adAccountCustomAudiences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adAccountBusinessConstraintss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -138,23 +134,23 @@ public class AdAccountCustomAudience extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adAccountCustomAudiences.add(loadJSON(entry.getValue().toString(), context, header));
+                  adAccountBusinessConstraintss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adAccountCustomAudiences.add(loadJSON(obj.toString(), context, header));
+              adAccountBusinessConstraintss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adAccountCustomAudiences;
+          return adAccountBusinessConstraintss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adAccountCustomAudiences.add(loadJSON(entry.getValue().toString(), context, header));
+              adAccountBusinessConstraintss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adAccountCustomAudiences;
+          return adAccountBusinessConstraintss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -171,20 +167,20 @@ public class AdAccountCustomAudience extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adAccountCustomAudiences.add(loadJSON(value.toString(), context, header));
+              adAccountBusinessConstraintss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adAccountCustomAudiences;
+            return adAccountBusinessConstraintss;
           }
 
           // Sixth, check if it's pure JsonObject
-          adAccountCustomAudiences.clear();
-          adAccountCustomAudiences.add(loadJSON(json, context, header));
-          return adAccountCustomAudiences;
+          adAccountBusinessConstraintss.clear();
+          adAccountBusinessConstraintss.add(loadJSON(json, context, header));
+          return adAccountBusinessConstraintss;
         }
       }
     } catch (Exception e) {
@@ -212,30 +208,12 @@ public class AdAccountCustomAudience extends APINode {
   }
 
 
-  public String getFieldAudienceTypeParamName() {
-    return mAudienceTypeParamName;
+  public Object getFieldAudienceControls() {
+    return mAudienceControls;
   }
 
-  public AdAccountCustomAudience setFieldAudienceTypeParamName(String value) {
-    this.mAudienceTypeParamName = value;
-    return this;
-  }
-
-  public String getFieldExistingCustomerTag() {
-    return mExistingCustomerTag;
-  }
-
-  public AdAccountCustomAudience setFieldExistingCustomerTag(String value) {
-    this.mExistingCustomerTag = value;
-    return this;
-  }
-
-  public String getFieldNewCustomerTag() {
-    return mNewCustomerTag;
-  }
-
-  public AdAccountCustomAudience setFieldNewCustomerTag(String value) {
-    this.mNewCustomerTag = value;
+  public AdAccountBusinessConstraints setFieldAudienceControls(Object value) {
+    this.mAudienceControls = value;
     return this;
   }
 
@@ -255,19 +233,17 @@ public class AdAccountCustomAudience extends APINode {
     return gson;
   }
 
-  public AdAccountCustomAudience copyFrom(AdAccountCustomAudience instance) {
-    this.mAudienceTypeParamName = instance.mAudienceTypeParamName;
-    this.mExistingCustomerTag = instance.mExistingCustomerTag;
-    this.mNewCustomerTag = instance.mNewCustomerTag;
+  public AdAccountBusinessConstraints copyFrom(AdAccountBusinessConstraints instance) {
+    this.mAudienceControls = instance.mAudienceControls;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdAccountCustomAudience> getParser() {
-    return new APIRequest.ResponseParser<AdAccountCustomAudience>() {
-      public APINodeList<AdAccountCustomAudience> parseResponse(String response, APIContext context, APIRequest<AdAccountCustomAudience> request, String header) throws MalformedResponseException {
-        return AdAccountCustomAudience.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdAccountBusinessConstraints> getParser() {
+    return new APIRequest.ResponseParser<AdAccountBusinessConstraints>() {
+      public APINodeList<AdAccountBusinessConstraints> parseResponse(String response, APIContext context, APIRequest<AdAccountBusinessConstraints> request, String header) throws MalformedResponseException {
+        return AdAccountBusinessConstraints.parseResponse(response, context, request, header);
       }
     };
   }

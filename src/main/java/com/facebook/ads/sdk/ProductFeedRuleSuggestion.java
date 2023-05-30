@@ -58,7 +58,7 @@ public class ProductFeedRuleSuggestion extends APINode {
   @SerializedName("attribute")
   private String mAttribute = null;
   @SerializedName("params")
-  private Map<String, String> mParams = null;
+  private List<Map<String, String>> mParams = null;
   @SerializedName("type")
   private String mType = null;
   protected static Gson gson = null;
@@ -221,11 +221,11 @@ public class ProductFeedRuleSuggestion extends APINode {
     return this;
   }
 
-  public Map<String, String> getFieldParams() {
+  public List<Map<String, String>> getFieldParams() {
     return mParams;
   }
 
-  public ProductFeedRuleSuggestion setFieldParams(Map<String, String> value) {
+  public ProductFeedRuleSuggestion setFieldParams(List<Map<String, String>> value) {
     this.mParams = value;
     return this;
   }

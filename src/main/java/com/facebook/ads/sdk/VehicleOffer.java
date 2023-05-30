@@ -65,6 +65,8 @@ public class VehicleOffer extends APINode {
   private String mAmountQualifier = null;
   @SerializedName("applinks")
   private CatalogItemAppLinks mApplinks = null;
+  @SerializedName("availability")
+  private String mAvailability = null;
   @SerializedName("body_style")
   private String mBodyStyle = null;
   @SerializedName("cashback_currency")
@@ -83,16 +85,28 @@ public class VehicleOffer extends APINode {
   private String mDownpaymentPrice = null;
   @SerializedName("downpayment_qualifier")
   private String mDownpaymentQualifier = null;
+  @SerializedName("drivetrain")
+  private String mDrivetrain = null;
   @SerializedName("end_date")
   private String mEndDate = null;
   @SerializedName("end_time")
   private Long mEndTime = null;
+  @SerializedName("exterior_color")
+  private String mExteriorColor = null;
+  @SerializedName("fuel_type")
+  private String mFuelType = null;
+  @SerializedName("generation")
+  private String mGeneration = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("image_fetch_status")
   private EnumImageFetchStatus mImageFetchStatus = null;
   @SerializedName("images")
   private List<String> mImages = null;
+  @SerializedName("interior_color")
+  private String mInteriorColor = null;
+  @SerializedName("interior_upholstery")
+  private String mInteriorUpholstery = null;
   @SerializedName("make")
   private String mMake = null;
   @SerializedName("model")
@@ -117,6 +131,8 @@ public class VehicleOffer extends APINode {
   private String mTermQualifier = null;
   @SerializedName("title")
   private String mTitle = null;
+  @SerializedName("transmission")
+  private String mTransmission = null;
   @SerializedName("trim")
   private String mTrim = null;
   @SerializedName("unit_price")
@@ -375,6 +391,10 @@ public class VehicleOffer extends APINode {
     return mApplinks;
   }
 
+  public String getFieldAvailability() {
+    return mAvailability;
+  }
+
   public String getFieldBodyStyle() {
     return mBodyStyle;
   }
@@ -411,12 +431,28 @@ public class VehicleOffer extends APINode {
     return mDownpaymentQualifier;
   }
 
+  public String getFieldDrivetrain() {
+    return mDrivetrain;
+  }
+
   public String getFieldEndDate() {
     return mEndDate;
   }
 
   public Long getFieldEndTime() {
     return mEndTime;
+  }
+
+  public String getFieldExteriorColor() {
+    return mExteriorColor;
+  }
+
+  public String getFieldFuelType() {
+    return mFuelType;
+  }
+
+  public String getFieldGeneration() {
+    return mGeneration;
   }
 
   public String getFieldId() {
@@ -429,6 +465,14 @@ public class VehicleOffer extends APINode {
 
   public List<String> getFieldImages() {
     return mImages;
+  }
+
+  public String getFieldInteriorColor() {
+    return mInteriorColor;
+  }
+
+  public String getFieldInteriorUpholstery() {
+    return mInteriorUpholstery;
   }
 
   public String getFieldMake() {
@@ -477,6 +521,10 @@ public class VehicleOffer extends APINode {
 
   public String getFieldTitle() {
     return mTitle;
+  }
+
+  public String getFieldTransmission() {
+    return mTransmission;
   }
 
   public String getFieldTrim() {
@@ -849,6 +897,7 @@ public class VehicleOffer extends APINode {
       "amount_price",
       "amount_qualifier",
       "applinks",
+      "availability",
       "body_style",
       "cashback_currency",
       "cashback_price",
@@ -858,11 +907,17 @@ public class VehicleOffer extends APINode {
       "downpayment_currency",
       "downpayment_price",
       "downpayment_qualifier",
+      "drivetrain",
       "end_date",
       "end_time",
+      "exterior_color",
+      "fuel_type",
+      "generation",
       "id",
       "image_fetch_status",
       "images",
+      "interior_color",
+      "interior_upholstery",
       "make",
       "model",
       "offer_description",
@@ -875,6 +930,7 @@ public class VehicleOffer extends APINode {
       "term_length",
       "term_qualifier",
       "title",
+      "transmission",
       "trim",
       "unit_price",
       "url",
@@ -1007,6 +1063,13 @@ public class VehicleOffer extends APINode {
       this.requestField("applinks", value);
       return this;
     }
+    public APIRequestGet requestAvailabilityField () {
+      return this.requestAvailabilityField(true);
+    }
+    public APIRequestGet requestAvailabilityField (boolean value) {
+      this.requestField("availability", value);
+      return this;
+    }
     public APIRequestGet requestBodyStyleField () {
       return this.requestBodyStyleField(true);
     }
@@ -1070,6 +1133,13 @@ public class VehicleOffer extends APINode {
       this.requestField("downpayment_qualifier", value);
       return this;
     }
+    public APIRequestGet requestDrivetrainField () {
+      return this.requestDrivetrainField(true);
+    }
+    public APIRequestGet requestDrivetrainField (boolean value) {
+      this.requestField("drivetrain", value);
+      return this;
+    }
     public APIRequestGet requestEndDateField () {
       return this.requestEndDateField(true);
     }
@@ -1082,6 +1152,27 @@ public class VehicleOffer extends APINode {
     }
     public APIRequestGet requestEndTimeField (boolean value) {
       this.requestField("end_time", value);
+      return this;
+    }
+    public APIRequestGet requestExteriorColorField () {
+      return this.requestExteriorColorField(true);
+    }
+    public APIRequestGet requestExteriorColorField (boolean value) {
+      this.requestField("exterior_color", value);
+      return this;
+    }
+    public APIRequestGet requestFuelTypeField () {
+      return this.requestFuelTypeField(true);
+    }
+    public APIRequestGet requestFuelTypeField (boolean value) {
+      this.requestField("fuel_type", value);
+      return this;
+    }
+    public APIRequestGet requestGenerationField () {
+      return this.requestGenerationField(true);
+    }
+    public APIRequestGet requestGenerationField (boolean value) {
+      this.requestField("generation", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -1103,6 +1194,20 @@ public class VehicleOffer extends APINode {
     }
     public APIRequestGet requestImagesField (boolean value) {
       this.requestField("images", value);
+      return this;
+    }
+    public APIRequestGet requestInteriorColorField () {
+      return this.requestInteriorColorField(true);
+    }
+    public APIRequestGet requestInteriorColorField (boolean value) {
+      this.requestField("interior_color", value);
+      return this;
+    }
+    public APIRequestGet requestInteriorUpholsteryField () {
+      return this.requestInteriorUpholsteryField(true);
+    }
+    public APIRequestGet requestInteriorUpholsteryField (boolean value) {
+      this.requestField("interior_upholstery", value);
       return this;
     }
     public APIRequestGet requestMakeField () {
@@ -1187,6 +1292,13 @@ public class VehicleOffer extends APINode {
     }
     public APIRequestGet requestTitleField (boolean value) {
       this.requestField("title", value);
+      return this;
+    }
+    public APIRequestGet requestTransmissionField () {
+      return this.requestTransmissionField(true);
+    }
+    public APIRequestGet requestTransmissionField (boolean value) {
+      this.requestField("transmission", value);
       return this;
     }
     public APIRequestGet requestTrimField () {
@@ -1299,6 +1411,7 @@ public class VehicleOffer extends APINode {
     this.mAmountPrice = instance.mAmountPrice;
     this.mAmountQualifier = instance.mAmountQualifier;
     this.mApplinks = instance.mApplinks;
+    this.mAvailability = instance.mAvailability;
     this.mBodyStyle = instance.mBodyStyle;
     this.mCashbackCurrency = instance.mCashbackCurrency;
     this.mCashbackPrice = instance.mCashbackPrice;
@@ -1308,11 +1421,17 @@ public class VehicleOffer extends APINode {
     this.mDownpaymentCurrency = instance.mDownpaymentCurrency;
     this.mDownpaymentPrice = instance.mDownpaymentPrice;
     this.mDownpaymentQualifier = instance.mDownpaymentQualifier;
+    this.mDrivetrain = instance.mDrivetrain;
     this.mEndDate = instance.mEndDate;
     this.mEndTime = instance.mEndTime;
+    this.mExteriorColor = instance.mExteriorColor;
+    this.mFuelType = instance.mFuelType;
+    this.mGeneration = instance.mGeneration;
     this.mId = instance.mId;
     this.mImageFetchStatus = instance.mImageFetchStatus;
     this.mImages = instance.mImages;
+    this.mInteriorColor = instance.mInteriorColor;
+    this.mInteriorUpholstery = instance.mInteriorUpholstery;
     this.mMake = instance.mMake;
     this.mModel = instance.mModel;
     this.mOfferDescription = instance.mOfferDescription;
@@ -1325,6 +1444,7 @@ public class VehicleOffer extends APINode {
     this.mTermLength = instance.mTermLength;
     this.mTermQualifier = instance.mTermQualifier;
     this.mTitle = instance.mTitle;
+    this.mTransmission = instance.mTransmission;
     this.mTrim = instance.mTrim;
     this.mUnitPrice = instance.mUnitPrice;
     this.mUrl = instance.mUrl;
