@@ -17,39 +17,37 @@
  */
 package com.facebook.ads.sdk.serverside;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
-import java.util.ArrayList;
+
+import static java.util.stream.Collectors.toList;
 
 public class ExtendedDeviceInfo {
 
-    static int EXT_INFO_ARRAY_MAX_SIZE = 16;
+    private static final int EXT_INFO_ARRAY_MAX_SIZE = 16;
 
-    static int EXT_INFO_VERSION        = 0;
-    static int APP_PACKAGE_NAME        = 1;
-    static int SHORT_VERSION           = 2;
-    static int LONG_VERSION            = 3;
-    static int OS_VERSION              = 4;
-    static int DEVICE_MODEL_NAME       = 5;
-    static int LOCALE                  = 6;
-    static int TIMEZONE_ABBREVIATION   = 7;
-    static int CARRIER                 = 8;
-    static int SCREEN_WIDTH            = 9;
-    static int SCREEN_HEIGHT           = 10;
-    static int SCREEN_DENSITY          = 11;
-    static int CPU_CORE_COUNT          = 12;
-    static int TOTAL_DISK_SPACE_GB     = 13;
-    static int FREE_DISK_SPACE_GB      = 14;
-    static int DEVICE_TIME_ZONE        = 15;
+    private static final int EXT_INFO_VERSION        = 0;
+    private static final int APP_PACKAGE_NAME        = 1;
+    private static final int SHORT_VERSION           = 2;
+    private static final int LONG_VERSION            = 3;
+    private static final int OS_VERSION              = 4;
+    private static final int DEVICE_MODEL_NAME       = 5;
+    private static final int LOCALE                  = 6;
+    private static final int TIMEZONE_ABBREVIATION   = 7;
+    private static final int CARRIER                 = 8;
+    private static final int SCREEN_WIDTH            = 9;
+    private static final int SCREEN_HEIGHT           = 10;
+    private static final int SCREEN_DENSITY          = 11;
+    private static final int CPU_CORE_COUNT          = 12;
+    private static final int TOTAL_DISK_SPACE_GB     = 13;
+    private static final int FREE_DISK_SPACE_GB      = 14;
+    private static final int DEVICE_TIME_ZONE        = 15;
 
-    private ArrayList<String> extendedDeviceInfoArray = null;
+    private final String[] extendedDeviceInfoArray = new String[EXT_INFO_ARRAY_MAX_SIZE];
 
-    public ArrayList<String> getExtendedDeviceInfoArray() {
-        return extendedDeviceInfoArray;
-    }
-
-    public ExtendedDeviceInfo() {
-        extendedDeviceInfoArray = new ArrayList<String>(ExtendedDeviceInfo.EXT_INFO_ARRAY_MAX_SIZE);
-        System.out.println(extendedDeviceInfoArray.size());
+    public List<String> getExtendedDeviceInfoArray() {
+        return Arrays.stream(extendedDeviceInfoArray).map(it -> it != null ? it : "").collect(toList());
     }
 
     public ExtendedDeviceInfo extinfoVersion(String extinfoVersion) {
@@ -58,11 +56,11 @@ public class ExtendedDeviceInfo {
     }
 
     public String getExtinfoVersion() {
-        return this.extendedDeviceInfoArray.get(ExtendedDeviceInfo.EXT_INFO_VERSION);
+        return this.extendedDeviceInfoArray[EXT_INFO_VERSION];
     }
 
     public void setExtinfoVersion(String extinfoVersion) {
-        this.extendedDeviceInfoArray.add(ExtendedDeviceInfo.EXT_INFO_VERSION, extinfoVersion);
+        this.extendedDeviceInfoArray[EXT_INFO_VERSION] = extinfoVersion;
     }
 
     public ExtendedDeviceInfo appPackageName(String appPackageName) {
@@ -71,11 +69,11 @@ public class ExtendedDeviceInfo {
     }
 
     public String getAppPackageName() {
-        return this.extendedDeviceInfoArray.get(ExtendedDeviceInfo.APP_PACKAGE_NAME);
+        return this.extendedDeviceInfoArray[APP_PACKAGE_NAME];
     }
 
     public void setAppPackageName(String appPackageName) {
-        this.extendedDeviceInfoArray.add(ExtendedDeviceInfo.APP_PACKAGE_NAME, appPackageName);
+        this.extendedDeviceInfoArray[APP_PACKAGE_NAME] = appPackageName;
     }
 
     public ExtendedDeviceInfo shortVersion(String shortVersion) {
@@ -84,11 +82,11 @@ public class ExtendedDeviceInfo {
     }
 
     public String getShortVersion() {
-        return this.extendedDeviceInfoArray.get(ExtendedDeviceInfo.SHORT_VERSION);
+        return this.extendedDeviceInfoArray[SHORT_VERSION];
     }
 
     public void setShortVersion(String shortVersion) {
-        this.extendedDeviceInfoArray.add(ExtendedDeviceInfo.SHORT_VERSION, shortVersion);
+        this.extendedDeviceInfoArray[SHORT_VERSION] = shortVersion;
     }
 
     public ExtendedDeviceInfo longVersion(String longVersion) {
@@ -97,11 +95,11 @@ public class ExtendedDeviceInfo {
     }
 
     public String getLongVersion() {
-        return this.extendedDeviceInfoArray.get(ExtendedDeviceInfo.LONG_VERSION);
+        return this.extendedDeviceInfoArray[LONG_VERSION];
     }
 
     public void setLongVersion(String longVersion) {
-        this.extendedDeviceInfoArray.add(ExtendedDeviceInfo.LONG_VERSION, longVersion);
+        this.extendedDeviceInfoArray[LONG_VERSION] = longVersion;
     }
 
     public ExtendedDeviceInfo osVersion(String osVersion) {
@@ -110,11 +108,11 @@ public class ExtendedDeviceInfo {
     }
 
     public String getOsVersion() {
-        return this.extendedDeviceInfoArray.get(ExtendedDeviceInfo.OS_VERSION);
+        return this.extendedDeviceInfoArray[OS_VERSION];
     }
 
     public void setOsVersion(String osVersion) {
-        this.extendedDeviceInfoArray.add(ExtendedDeviceInfo.OS_VERSION, osVersion);
+        this.extendedDeviceInfoArray[OS_VERSION] = osVersion;
     }
 
     public ExtendedDeviceInfo deviceModelName(String deviceModelName) {
@@ -123,11 +121,11 @@ public class ExtendedDeviceInfo {
     }
 
     public String getDeviceModelName() {
-        return this.extendedDeviceInfoArray.get(ExtendedDeviceInfo.DEVICE_MODEL_NAME);
+        return this.extendedDeviceInfoArray[DEVICE_MODEL_NAME];
     }
 
     public void setDeviceModelName(String deviceModelName) {
-        this.extendedDeviceInfoArray.add(ExtendedDeviceInfo.DEVICE_MODEL_NAME, deviceModelName);
+        this.extendedDeviceInfoArray[DEVICE_MODEL_NAME] = deviceModelName;
     }
 
     public ExtendedDeviceInfo locale(String locale) {
@@ -136,11 +134,11 @@ public class ExtendedDeviceInfo {
     }
 
     public String getLocale() {
-        return this.extendedDeviceInfoArray.get(ExtendedDeviceInfo.LOCALE);
+        return this.extendedDeviceInfoArray[LOCALE];
     }
 
     public void setLocale(String locale) {
-        this.extendedDeviceInfoArray.add(ExtendedDeviceInfo.LOCALE, locale);
+        this.extendedDeviceInfoArray[LOCALE] = locale;
     }
 
     public ExtendedDeviceInfo timezoneAbbreviation(String timezoneAbbreviation) {
@@ -149,11 +147,11 @@ public class ExtendedDeviceInfo {
     }
 
     public String getTimezoneAbbreviation() {
-        return this.extendedDeviceInfoArray.get(ExtendedDeviceInfo.TIMEZONE_ABBREVIATION);
+        return this.extendedDeviceInfoArray[TIMEZONE_ABBREVIATION];
     }
 
     public void setTimezoneAbbreviation(String timezoneAbbreviation) {
-        this.extendedDeviceInfoArray.add(ExtendedDeviceInfo.TIMEZONE_ABBREVIATION, timezoneAbbreviation);
+        this.extendedDeviceInfoArray[TIMEZONE_ABBREVIATION] = timezoneAbbreviation;
     }
 
     public ExtendedDeviceInfo carrier(String carrier) {
@@ -162,37 +160,39 @@ public class ExtendedDeviceInfo {
     }
 
     public String getCarrier() {
-        return this.extendedDeviceInfoArray.get(ExtendedDeviceInfo.CARRIER);
+        return this.extendedDeviceInfoArray[CARRIER];
     }
 
     public void setCarrier(String carrier) {
-        this.extendedDeviceInfoArray.add(ExtendedDeviceInfo.CARRIER, carrier);
+        this.extendedDeviceInfoArray[CARRIER] = carrier;
     }
 
-    public ExtendedDeviceInfo screenWidth(int screenWidth) {
+    public ExtendedDeviceInfo screenWidth(Integer screenWidth) {
         setScreenWidth(screenWidth);
         return this;
     }
 
-    public int getScreenWidth() {
-        return Integer.parseInt(this.extendedDeviceInfoArray.get(ExtendedDeviceInfo.SCREEN_WIDTH));
+    public Integer getScreenWidth() {
+        final String screenWithStr = this.extendedDeviceInfoArray[SCREEN_WIDTH];
+        return screenWithStr != null ? Integer.parseInt(screenWithStr) : null;
     }
 
-    public void setScreenWidth(int screenWidth) {
-        this.extendedDeviceInfoArray.add(ExtendedDeviceInfo.SCREEN_WIDTH, String.valueOf(screenWidth));
+    public void setScreenWidth(Integer screenWidth) {
+        this.extendedDeviceInfoArray[SCREEN_WIDTH] = screenWidth != null ? String.valueOf(screenWidth) : null;
     }
 
-    public ExtendedDeviceInfo screenHeight(int screenHeight) {
+    public ExtendedDeviceInfo screenHeight(Integer screenHeight) {
         setScreenHeight(screenHeight);
         return this;
     }
 
-    public int getScreenHeight() {
-        return Integer.parseInt(this.extendedDeviceInfoArray.get(ExtendedDeviceInfo.SCREEN_HEIGHT));
+    public Integer getScreenHeight() {
+        final String screenHeightStr = this.extendedDeviceInfoArray[SCREEN_HEIGHT];
+        return screenHeightStr != null ? Integer.parseInt(screenHeightStr) : null;
     }
 
-    public void setScreenHeight(int screenHeight) {
-        this.extendedDeviceInfoArray.add(ExtendedDeviceInfo.SCREEN_HEIGHT, String.valueOf(screenHeight));
+    public void setScreenHeight(Integer screenHeight) {
+        this.extendedDeviceInfoArray[SCREEN_HEIGHT] = screenHeight != null ? String.valueOf(screenHeight) : null;
     }
 
     public ExtendedDeviceInfo screenDensity(String screenDensity) {
@@ -201,50 +201,53 @@ public class ExtendedDeviceInfo {
     }
 
     public String getScreenDensity() {
-        return this.extendedDeviceInfoArray.get(ExtendedDeviceInfo.SCREEN_DENSITY);
+        return this.extendedDeviceInfoArray[SCREEN_DENSITY];
     }
 
     public void setScreenDensity(String screenDensity) {
-        this.extendedDeviceInfoArray.add(ExtendedDeviceInfo.SCREEN_DENSITY, screenDensity);
+        this.extendedDeviceInfoArray[SCREEN_DENSITY] = screenDensity;
     }
 
-    public ExtendedDeviceInfo cpuCoresCount(int cpuCoresCount) {
+    public ExtendedDeviceInfo cpuCoresCount(Integer cpuCoresCount) {
         setCpuCoresCount(cpuCoresCount);
         return this;
     }
 
-    public int getCpuCoresCount() {
-        return Integer.parseInt(this.extendedDeviceInfoArray.get(ExtendedDeviceInfo.CPU_CORE_COUNT));
+    public Integer getCpuCoresCount() {
+        final String cpuCoresCount = this.extendedDeviceInfoArray[CPU_CORE_COUNT];
+        return cpuCoresCount != null ? Integer.parseInt(cpuCoresCount) : null;
     }
 
-    public void setCpuCoresCount(int cpuCoresCount) {
-        this.extendedDeviceInfoArray.add(ExtendedDeviceInfo.CPU_CORE_COUNT, String.valueOf(cpuCoresCount));
+    public void setCpuCoresCount(Integer cpuCoresCount) {
+        this.extendedDeviceInfoArray[CPU_CORE_COUNT] = cpuCoresCount != null ? String.valueOf(cpuCoresCount) : null;
     }
 
-    public ExtendedDeviceInfo totalDiskGB(int totalDiskGB) {
+    public ExtendedDeviceInfo totalDiskGB(Integer totalDiskGB) {
         setTotalDiskGB(totalDiskGB);
         return this;
     }
 
-    public int getTotalDiskGB() {
-        return Integer.parseInt(this.extendedDeviceInfoArray.get(ExtendedDeviceInfo.TOTAL_DISK_SPACE_GB));
+    public Integer getTotalDiskGB() {
+        final String totalDiskGBStr = this.extendedDeviceInfoArray[TOTAL_DISK_SPACE_GB];
+        return totalDiskGBStr != null ? Integer.parseInt(totalDiskGBStr) : null;
     }
 
-    public void setTotalDiskGB(int totalDiskGB) {
-        this.extendedDeviceInfoArray.add(ExtendedDeviceInfo.TOTAL_DISK_SPACE_GB, String.valueOf(totalDiskGB));
+    public void setTotalDiskGB(Integer totalDiskGB) {
+        this.extendedDeviceInfoArray[TOTAL_DISK_SPACE_GB] = totalDiskGB != null ? String.valueOf(totalDiskGB) : null;
     }
 
-    public ExtendedDeviceInfo freeDiskGB(int freeDiskGB) {
+    public ExtendedDeviceInfo freeDiskGB(Integer freeDiskGB) {
         setFreeDiskGB(freeDiskGB);
         return this;
     }
 
-    public int getFreeDiskGB() {
-        return Integer.parseInt(this.extendedDeviceInfoArray.get(ExtendedDeviceInfo.FREE_DISK_SPACE_GB));
+    public Integer getFreeDiskGB() {
+        final String freeDiskGBStr = this.extendedDeviceInfoArray[FREE_DISK_SPACE_GB];
+        return freeDiskGBStr != null ? Integer.parseInt(freeDiskGBStr) : null;
     }
 
-    public void setFreeDiskGB(int freeDiskGB) {
-        this.extendedDeviceInfoArray.add(ExtendedDeviceInfo.FREE_DISK_SPACE_GB, String.valueOf(freeDiskGB));
+    public void setFreeDiskGB(Integer freeDiskGB) {
+        this.extendedDeviceInfoArray[FREE_DISK_SPACE_GB] = freeDiskGB != null ? String.valueOf(freeDiskGB) : null;
     }
 
     public ExtendedDeviceInfo deviceTimeZone(String deviceTimeZone) {
@@ -253,11 +256,11 @@ public class ExtendedDeviceInfo {
     }
 
     public String getDeviceTimeZone() {
-        return this.extendedDeviceInfoArray.get(ExtendedDeviceInfo.DEVICE_TIME_ZONE);
+        return this.extendedDeviceInfoArray[DEVICE_TIME_ZONE];
     }
 
     public void setDeviceTimeZone(String deviceTimeZone) {
-        this.extendedDeviceInfoArray.add(ExtendedDeviceInfo.DEVICE_TIME_ZONE, deviceTimeZone);
+        this.extendedDeviceInfoArray[DEVICE_TIME_ZONE] = deviceTimeZone;
     }
 
     @Override
