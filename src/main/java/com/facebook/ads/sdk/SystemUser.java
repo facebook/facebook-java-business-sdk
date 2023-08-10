@@ -357,6 +357,8 @@ public class SystemUser extends APINode {
       "created_time",
       "currency",
       "custom_audience_info",
+      "default_dsa_beneficiary",
+      "default_dsa_payor",
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
@@ -631,6 +633,20 @@ public class SystemUser extends APINode {
     }
     public APIRequestGetAssignedAdAccounts requestCustomAudienceInfoField (boolean value) {
       this.requestField("custom_audience_info", value);
+      return this;
+    }
+    public APIRequestGetAssignedAdAccounts requestDefaultDsaBeneficiaryField () {
+      return this.requestDefaultDsaBeneficiaryField(true);
+    }
+    public APIRequestGetAssignedAdAccounts requestDefaultDsaBeneficiaryField (boolean value) {
+      this.requestField("default_dsa_beneficiary", value);
+      return this;
+    }
+    public APIRequestGetAssignedAdAccounts requestDefaultDsaPayorField () {
+      return this.requestDefaultDsaPayorField(true);
+    }
+    public APIRequestGetAssignedAdAccounts requestDefaultDsaPayorField (boolean value) {
+      this.requestField("default_dsa_payor", value);
       return this;
     }
     public APIRequestGetAssignedAdAccounts requestDisableReasonField () {

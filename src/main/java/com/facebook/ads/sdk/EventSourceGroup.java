@@ -350,6 +350,8 @@ public class EventSourceGroup extends APINode {
       "created_time",
       "currency",
       "custom_audience_info",
+      "default_dsa_beneficiary",
+      "default_dsa_payor",
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
@@ -624,6 +626,20 @@ public class EventSourceGroup extends APINode {
     }
     public APIRequestGetSharedAccounts requestCustomAudienceInfoField (boolean value) {
       this.requestField("custom_audience_info", value);
+      return this;
+    }
+    public APIRequestGetSharedAccounts requestDefaultDsaBeneficiaryField () {
+      return this.requestDefaultDsaBeneficiaryField(true);
+    }
+    public APIRequestGetSharedAccounts requestDefaultDsaBeneficiaryField (boolean value) {
+      this.requestField("default_dsa_beneficiary", value);
+      return this;
+    }
+    public APIRequestGetSharedAccounts requestDefaultDsaPayorField () {
+      return this.requestDefaultDsaPayorField(true);
+    }
+    public APIRequestGetSharedAccounts requestDefaultDsaPayorField (boolean value) {
+      this.requestField("default_dsa_payor", value);
       return this;
     }
     public APIRequestGetSharedAccounts requestDisableReasonField () {

@@ -157,6 +157,8 @@ public class AdsInsights extends APINode {
   private String mCostPerUniqueInlineLinkClick = null;
   @SerializedName("cost_per_unique_outbound_click")
   private List<AdsActionStats> mCostPerUniqueOutboundClick = null;
+  @SerializedName("country")
+  private String mCountry = null;
   @SerializedName("cpc")
   private String mCpc = null;
   @SerializedName("cpm")
@@ -1049,6 +1051,15 @@ public class AdsInsights extends APINode {
     this.mCostPerUniqueOutboundClick = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
+  public String getFieldCountry() {
+    return mCountry;
+  }
+
+  public AdsInsights setFieldCountry(String value) {
+    this.mCountry = value;
+    return this;
+  }
+
   public String getFieldCpc() {
     return mCpc;
   }
@@ -2264,6 +2275,7 @@ public class AdsInsights extends APINode {
     this.mCostPerUniqueConversion = instance.mCostPerUniqueConversion;
     this.mCostPerUniqueInlineLinkClick = instance.mCostPerUniqueInlineLinkClick;
     this.mCostPerUniqueOutboundClick = instance.mCostPerUniqueOutboundClick;
+    this.mCountry = instance.mCountry;
     this.mCpc = instance.mCpc;
     this.mCpm = instance.mCpm;
     this.mCpp = instance.mCpp;

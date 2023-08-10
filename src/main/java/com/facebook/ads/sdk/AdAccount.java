@@ -97,6 +97,10 @@ public class AdAccount extends APINode {
   private String mCurrency = null;
   @SerializedName("custom_audience_info")
   private CustomAudienceGroup mCustomAudienceInfo = null;
+  @SerializedName("default_dsa_beneficiary")
+  private String mDefaultDsaBeneficiary = null;
+  @SerializedName("default_dsa_payor")
+  private String mDefaultDsaPayor = null;
   @SerializedName("disable_reason")
   private Long mDisableReason = null;
   @SerializedName("end_advertiser")
@@ -894,6 +898,14 @@ public class AdAccount extends APINode {
 
   public CustomAudienceGroup getFieldCustomAudienceInfo() {
     return mCustomAudienceInfo;
+  }
+
+  public String getFieldDefaultDsaBeneficiary() {
+    return mDefaultDsaBeneficiary;
+  }
+
+  public String getFieldDefaultDsaPayor() {
+    return mDefaultDsaPayor;
   }
 
   public Long getFieldDisableReason() {
@@ -27628,6 +27640,8 @@ public class AdAccount extends APINode {
       "created_time",
       "currency",
       "custom_audience_info",
+      "default_dsa_beneficiary",
+      "default_dsa_payor",
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
@@ -27902,6 +27916,20 @@ public class AdAccount extends APINode {
     }
     public APIRequestGet requestCustomAudienceInfoField (boolean value) {
       this.requestField("custom_audience_info", value);
+      return this;
+    }
+    public APIRequestGet requestDefaultDsaBeneficiaryField () {
+      return this.requestDefaultDsaBeneficiaryField(true);
+    }
+    public APIRequestGet requestDefaultDsaBeneficiaryField (boolean value) {
+      this.requestField("default_dsa_beneficiary", value);
+      return this;
+    }
+    public APIRequestGet requestDefaultDsaPayorField () {
+      return this.requestDefaultDsaPayorField(true);
+    }
+    public APIRequestGet requestDefaultDsaPayorField (boolean value) {
+      this.requestField("default_dsa_payor", value);
       return this;
     }
     public APIRequestGet requestDisableReasonField () {
@@ -28234,6 +28262,8 @@ public class AdAccount extends APINode {
       "business_info",
       "currency",
       "custom_audience_info",
+      "default_dsa_beneficiary",
+      "default_dsa_payor",
       "end_advertiser",
       "existing_customers",
       "is_notifications_enabled",
@@ -28344,6 +28374,16 @@ public class AdAccount extends APINode {
     }
     public APIRequestUpdate setCustomAudienceInfo (String customAudienceInfo) {
       this.setParam("custom_audience_info", customAudienceInfo);
+      return this;
+    }
+
+    public APIRequestUpdate setDefaultDsaBeneficiary (String defaultDsaBeneficiary) {
+      this.setParam("default_dsa_beneficiary", defaultDsaBeneficiary);
+      return this;
+    }
+
+    public APIRequestUpdate setDefaultDsaPayor (String defaultDsaPayor) {
+      this.setParam("default_dsa_payor", defaultDsaPayor);
       return this;
     }
 
@@ -28862,6 +28902,8 @@ public class AdAccount extends APINode {
     this.mCreatedTime = instance.mCreatedTime;
     this.mCurrency = instance.mCurrency;
     this.mCustomAudienceInfo = instance.mCustomAudienceInfo;
+    this.mDefaultDsaBeneficiary = instance.mDefaultDsaBeneficiary;
+    this.mDefaultDsaPayor = instance.mDefaultDsaPayor;
     this.mDisableReason = instance.mDisableReason;
     this.mEndAdvertiser = instance.mEndAdvertiser;
     this.mEndAdvertiserName = instance.mEndAdvertiserName;
