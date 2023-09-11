@@ -157,8 +157,6 @@ public class AdsInsights extends APINode {
   private String mCostPerUniqueInlineLinkClick = null;
   @SerializedName("cost_per_unique_outbound_click")
   private List<AdsActionStats> mCostPerUniqueOutboundClick = null;
-  @SerializedName("country")
-  private String mCountry = null;
   @SerializedName("cpc")
   private String mCpc = null;
   @SerializedName("cpm")
@@ -321,6 +319,71 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mWebsitePurchaseRoas = null;
   @SerializedName("wish_bid")
   private String mWishBid = null;
+  // Breakdowns
+  @SerializedName("ad_format_asset")
+  private String mAdFormatAsset = null;
+  @SerializedName("age")
+  private String mAge = null;
+  @SerializedName("app_id")
+  private String mAppId = null;
+  @SerializedName("body_asset")
+  private String mBodyAsset = null;
+  @SerializedName("call_to_action_asset")
+  private String mCallToActionAsset = null;
+  @SerializedName("coarse_conversion_value")
+  private String mCoarseConversionValue = null;
+  @SerializedName("country")
+  private String mCountry = null;
+  @SerializedName("description_asset")
+  private String mDescriptionAsset = null;
+  @SerializedName("device_platform")
+  private String mDevicePlatform = null;
+  @SerializedName("dma")
+  private String mDma = null;
+  @SerializedName("fidelity_type")
+  private String mFidelityType = null;
+  @SerializedName("frequency_value")
+  private String mFrequencyValue = null;
+  @SerializedName("gender")
+  private String mGender = null;
+  @SerializedName("hourly_stats_aggregated_by_advertiser_time_zone")
+  private String mHourlyStatsAggregatedByAdvertiserTimeZone = null;
+  @SerializedName("hourly_stats_aggregated_by_audience_time_zone")
+  private String mHourlyStatsAggregatedByAudienceTimeZone = null;
+  @SerializedName("hsid")
+  private String mHsid = null;
+  @SerializedName("image_asset")
+  private String mImageAsset = null;
+  @SerializedName("impression_device")
+  private String mImpressionDevice = null;
+  @SerializedName("is_conversion_id_modeled")
+  private String mIsConversionIdModeled = null;
+  @SerializedName("link_url_asset")
+  private String mLinkUrlAsset = null;
+  @SerializedName("mmm")
+  private String mMmm = null;
+  @SerializedName("place_page_id")
+  private String mPlacePageId = null;
+  @SerializedName("platform_position")
+  private String mPlatformPosition = null;
+  @SerializedName("postback_sequence_index")
+  private String mPostbackSequenceIndex = null;
+  @SerializedName("product_id")
+  private String mProductId = null;
+  @SerializedName("publisher_platform")
+  private String mPublisherPlatform = null;
+  @SerializedName("redownload")
+  private String mRedownload = null;
+  @SerializedName("region")
+  private String mRegion = null;
+  @SerializedName("skan_campaign_id")
+  private String mSkanCampaignId = null;
+  @SerializedName("skan_conversion_id")
+  private String mSkanConversionId = null;
+  @SerializedName("title_asset")
+  private String mTitleAsset = null;
+  @SerializedName("video_asset")
+  private String mVideoAsset = null;
   protected static Gson gson = null;
 
   public AdsInsights() {
@@ -1051,15 +1114,6 @@ public class AdsInsights extends APINode {
     this.mCostPerUniqueOutboundClick = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
-  public String getFieldCountry() {
-    return mCountry;
-  }
-
-  public AdsInsights setFieldCountry(String value) {
-    this.mCountry = value;
-    return this;
-  }
-
   public String getFieldCpc() {
     return mCpc;
   }
@@ -1924,6 +1978,134 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public String getFieldAdFormatAsset() {
+    return mAdFormatAsset;
+  }
+
+  public String getFieldAge() {
+    return mAge;
+  }
+
+  public String getFieldAppId() {
+    return mAppId;
+  }
+
+  public String getFieldBodyAsset() {
+    return mBodyAsset;
+  }
+
+  public String getFieldCallToActionAsset() {
+    return mCallToActionAsset;
+  }
+
+  public String getFieldCoarseConversionValue() {
+    return mCoarseConversionValue;
+  }
+
+  public String getFieldCountry() {
+    return mCountry;
+  }
+
+  public String getFieldDescriptionAsset() {
+    return mDescriptionAsset;
+  }
+
+  public String getFieldDevicePlatform() {
+    return mDevicePlatform;
+  }
+
+  public String getFieldDma() {
+    return mDma;
+  }
+
+  public String getFieldFidelityType() {
+    return mFidelityType;
+  }
+
+  public String getFieldFrequencyValue() {
+    return mFrequencyValue;
+  }
+
+  public String getFieldGender() {
+    return mGender;
+  }
+
+  public String getFieldHourlyStatsAggregatedByAdvertiserTimeZone() {
+    return mHourlyStatsAggregatedByAdvertiserTimeZone;
+  }
+
+  public String getFieldHourlyStatsAggregatedByAudienceTimeZone() {
+    return mHourlyStatsAggregatedByAudienceTimeZone;
+  }
+
+  public String getFieldHsid() {
+    return mHsid;
+  }
+
+  public String getFieldImageAsset() {
+    return mImageAsset;
+  }
+
+  public String getFieldImpressionDevice() {
+    return mImpressionDevice;
+  }
+
+  public String getFieldIsConversionIdModeled() {
+    return mIsConversionIdModeled;
+  }
+
+  public String getFieldLinkUrlAsset() {
+    return mLinkUrlAsset;
+  }
+
+  public String getFieldMmm() {
+    return mMmm;
+  }
+
+  public String getFieldPlacePageId() {
+    return mPlacePageId;
+  }
+
+  public String getFieldPlatformPosition() {
+    return mPlatformPosition;
+  }
+
+  public String getFieldPostbackSequenceIndex() {
+    return mPostbackSequenceIndex;
+  }
+
+  public String getFieldProductId() {
+    return mProductId;
+  }
+
+  public String getFieldPublisherPlatform() {
+    return mPublisherPlatform;
+  }
+
+  public String getFieldRedownload() {
+    return mRedownload;
+  }
+
+  public String getFieldRegion() {
+    return mRegion;
+  }
+
+  public String getFieldSkanCampaignId() {
+    return mSkanCampaignId;
+  }
+
+  public String getFieldSkanConversionId() {
+    return mSkanConversionId;
+  }
+
+  public String getFieldTitleAsset() {
+    return mTitleAsset;
+  }
+
+  public String getFieldVideoAsset() {
+    return mVideoAsset;
+  }
+
 
 
   public static enum EnumActionAttributionWindows {
@@ -2275,7 +2457,6 @@ public class AdsInsights extends APINode {
     this.mCostPerUniqueConversion = instance.mCostPerUniqueConversion;
     this.mCostPerUniqueInlineLinkClick = instance.mCostPerUniqueInlineLinkClick;
     this.mCostPerUniqueOutboundClick = instance.mCostPerUniqueOutboundClick;
-    this.mCountry = instance.mCountry;
     this.mCpc = instance.mCpc;
     this.mCpm = instance.mCpm;
     this.mCpp = instance.mCpp;
@@ -2357,6 +2538,38 @@ public class AdsInsights extends APINode {
     this.mWebsiteCtr = instance.mWebsiteCtr;
     this.mWebsitePurchaseRoas = instance.mWebsitePurchaseRoas;
     this.mWishBid = instance.mWishBid;
+    this.mAdFormatAsset = instance.mAdFormatAsset;
+    this.mAge = instance.mAge;
+    this.mAppId = instance.mAppId;
+    this.mBodyAsset = instance.mBodyAsset;
+    this.mCallToActionAsset = instance.mCallToActionAsset;
+    this.mCoarseConversionValue = instance.mCoarseConversionValue;
+    this.mCountry = instance.mCountry;
+    this.mDescriptionAsset = instance.mDescriptionAsset;
+    this.mDevicePlatform = instance.mDevicePlatform;
+    this.mDma = instance.mDma;
+    this.mFidelityType = instance.mFidelityType;
+    this.mFrequencyValue = instance.mFrequencyValue;
+    this.mGender = instance.mGender;
+    this.mHourlyStatsAggregatedByAdvertiserTimeZone = instance.mHourlyStatsAggregatedByAdvertiserTimeZone;
+    this.mHourlyStatsAggregatedByAudienceTimeZone = instance.mHourlyStatsAggregatedByAudienceTimeZone;
+    this.mHsid = instance.mHsid;
+    this.mImageAsset = instance.mImageAsset;
+    this.mImpressionDevice = instance.mImpressionDevice;
+    this.mIsConversionIdModeled = instance.mIsConversionIdModeled;
+    this.mLinkUrlAsset = instance.mLinkUrlAsset;
+    this.mMmm = instance.mMmm;
+    this.mPlacePageId = instance.mPlacePageId;
+    this.mPlatformPosition = instance.mPlatformPosition;
+    this.mPostbackSequenceIndex = instance.mPostbackSequenceIndex;
+    this.mProductId = instance.mProductId;
+    this.mPublisherPlatform = instance.mPublisherPlatform;
+    this.mRedownload = instance.mRedownload;
+    this.mRegion = instance.mRegion;
+    this.mSkanCampaignId = instance.mSkanCampaignId;
+    this.mSkanConversionId = instance.mSkanConversionId;
+    this.mTitleAsset = instance.mTitleAsset;
+    this.mVideoAsset = instance.mVideoAsset;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
