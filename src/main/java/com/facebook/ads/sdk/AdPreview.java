@@ -228,6 +228,10 @@ public class AdPreview extends APINode {
       VALUE_BIZ_DISCO_FEED_MOBILE("BIZ_DISCO_FEED_MOBILE"),
       @SerializedName("DESKTOP_FEED_STANDARD")
       VALUE_DESKTOP_FEED_STANDARD("DESKTOP_FEED_STANDARD"),
+      @SerializedName("FACEBOOK_PROFILE_FEED_DESKTOP")
+      VALUE_FACEBOOK_PROFILE_FEED_DESKTOP("FACEBOOK_PROFILE_FEED_DESKTOP"),
+      @SerializedName("FACEBOOK_PROFILE_FEED_MOBILE")
+      VALUE_FACEBOOK_PROFILE_FEED_MOBILE("FACEBOOK_PROFILE_FEED_MOBILE"),
       @SerializedName("FACEBOOK_REELS_BANNER")
       VALUE_FACEBOOK_REELS_BANNER("FACEBOOK_REELS_BANNER"),
       @SerializedName("FACEBOOK_REELS_BANNER_DESKTOP")
@@ -254,6 +258,8 @@ public class AdPreview extends APINode {
       VALUE_INSTAGRAM_FEED_WEB_M_SITE("INSTAGRAM_FEED_WEB_M_SITE"),
       @SerializedName("INSTAGRAM_PROFILE_FEED")
       VALUE_INSTAGRAM_PROFILE_FEED("INSTAGRAM_PROFILE_FEED"),
+      @SerializedName("INSTAGRAM_PROFILE_REELS")
+      VALUE_INSTAGRAM_PROFILE_REELS("INSTAGRAM_PROFILE_REELS"),
       @SerializedName("INSTAGRAM_REELS")
       VALUE_INSTAGRAM_REELS("INSTAGRAM_REELS"),
       @SerializedName("INSTAGRAM_REELS_OVERLAY")
@@ -266,8 +272,8 @@ public class AdPreview extends APINode {
       VALUE_INSTAGRAM_STANDARD("INSTAGRAM_STANDARD"),
       @SerializedName("INSTAGRAM_STORY")
       VALUE_INSTAGRAM_STORY("INSTAGRAM_STORY"),
-      @SerializedName("INSTAGRAM_STORY_CAMERA_TRAY")
-      VALUE_INSTAGRAM_STORY_CAMERA_TRAY("INSTAGRAM_STORY_CAMERA_TRAY"),
+      @SerializedName("INSTAGRAM_STORY_EFFECT_TRAY")
+      VALUE_INSTAGRAM_STORY_EFFECT_TRAY("INSTAGRAM_STORY_EFFECT_TRAY"),
       @SerializedName("INSTAGRAM_STORY_WEB")
       VALUE_INSTAGRAM_STORY_WEB("INSTAGRAM_STORY_WEB"),
       @SerializedName("INSTAGRAM_STORY_WEB_M_SITE")
@@ -337,6 +343,8 @@ public class AdPreview extends APINode {
   public static enum EnumCreativeFeature {
       @SerializedName("profile_card")
       VALUE_PROFILE_CARD("profile_card"),
+      @SerializedName("standard_enhancements_catalog")
+      VALUE_STANDARD_ENHANCEMENTS_CATALOG("standard_enhancements_catalog"),
       ;
 
       private String value;

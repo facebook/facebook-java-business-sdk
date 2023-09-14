@@ -39,35 +39,27 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ProductItemARData extends APINode {
-  @SerializedName("container_effect")
-  private String mContainerEffect = null;
-  @SerializedName("effect_icon")
-  private String mEffectIcon = null;
-  @SerializedName("effect_parameters")
-  private Object mEffectParameters = null;
-  @SerializedName("picker_icon")
-  private String mPickerIcon = null;
-  @SerializedName("product_ar_link")
-  private Object mProductArLink = null;
-  @SerializedName("state")
-  private String mState = null;
-  @SerializedName("surfaces")
-  private List<EnumSurfaces> mSurfaces = null;
+public class PageAboutStoryComposedBlockEntityRanges extends APINode {
+  @SerializedName("key")
+  private String mKey = null;
+  @SerializedName("length")
+  private Long mLength = null;
+  @SerializedName("offset")
+  private Long mOffset = null;
   protected static Gson gson = null;
 
-  public ProductItemARData() {
+  public PageAboutStoryComposedBlockEntityRanges() {
   }
 
   public String getId() {
     return null;
   }
-  public static ProductItemARData loadJSON(String json, APIContext context, String header) {
-    ProductItemARData productItemARData = getGson().fromJson(json, ProductItemARData.class);
+  public static PageAboutStoryComposedBlockEntityRanges loadJSON(String json, APIContext context, String header) {
+    PageAboutStoryComposedBlockEntityRanges pageAboutStoryComposedBlockEntityRanges = getGson().fromJson(json, PageAboutStoryComposedBlockEntityRanges.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(productItemARData.toString());
+      JsonElement o2 = parser.parse(pageAboutStoryComposedBlockEntityRanges.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -77,14 +69,14 @@ public class ProductItemARData extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    productItemARData.context = context;
-    productItemARData.rawValue = json;
-    productItemARData.header = header;
-    return productItemARData;
+    pageAboutStoryComposedBlockEntityRanges.context = context;
+    pageAboutStoryComposedBlockEntityRanges.rawValue = json;
+    pageAboutStoryComposedBlockEntityRanges.header = header;
+    return pageAboutStoryComposedBlockEntityRanges;
   }
 
-  public static APINodeList<ProductItemARData> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ProductItemARData> productItemARDatas = new APINodeList<ProductItemARData>(request, json, header);
+  public static APINodeList<PageAboutStoryComposedBlockEntityRanges> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PageAboutStoryComposedBlockEntityRanges> pageAboutStoryComposedBlockEntityRangess = new APINodeList<PageAboutStoryComposedBlockEntityRanges>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -95,9 +87,9 @@ public class ProductItemARData extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productItemARDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          pageAboutStoryComposedBlockEntityRangess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return productItemARDatas;
+        return pageAboutStoryComposedBlockEntityRangess;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -107,20 +99,20 @@ public class ProductItemARData extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                productItemARDatas.setCursors(before, after);
+                pageAboutStoryComposedBlockEntityRangess.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            productItemARDatas.setPaging(previous, next);
+            pageAboutStoryComposedBlockEntityRangess.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              productItemARDatas.setAppSecret(context.getAppSecretProof());
+              pageAboutStoryComposedBlockEntityRangess.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productItemARDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              pageAboutStoryComposedBlockEntityRangess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -131,23 +123,23 @@ public class ProductItemARData extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productItemARDatas.add(loadJSON(entry.getValue().toString(), context, header));
+                  pageAboutStoryComposedBlockEntityRangess.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productItemARDatas.add(loadJSON(obj.toString(), context, header));
+              pageAboutStoryComposedBlockEntityRangess.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return productItemARDatas;
+          return pageAboutStoryComposedBlockEntityRangess;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productItemARDatas.add(loadJSON(entry.getValue().toString(), context, header));
+              pageAboutStoryComposedBlockEntityRangess.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return productItemARDatas;
+          return pageAboutStoryComposedBlockEntityRangess;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -164,20 +156,20 @@ public class ProductItemARData extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productItemARDatas.add(loadJSON(value.toString(), context, header));
+              pageAboutStoryComposedBlockEntityRangess.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return productItemARDatas;
+            return pageAboutStoryComposedBlockEntityRangess;
           }
 
           // Sixth, check if it's pure JsonObject
-          productItemARDatas.clear();
-          productItemARDatas.add(loadJSON(json, context, header));
-          return productItemARDatas;
+          pageAboutStoryComposedBlockEntityRangess.clear();
+          pageAboutStoryComposedBlockEntityRangess.add(loadJSON(json, context, header));
+          return pageAboutStoryComposedBlockEntityRangess;
         }
       }
     } catch (Exception e) {
@@ -205,113 +197,34 @@ public class ProductItemARData extends APINode {
   }
 
 
-  public String getFieldContainerEffect() {
-    return mContainerEffect;
+  public String getFieldKey() {
+    return mKey;
   }
 
-  public ProductItemARData setFieldContainerEffect(String value) {
-    this.mContainerEffect = value;
+  public PageAboutStoryComposedBlockEntityRanges setFieldKey(String value) {
+    this.mKey = value;
     return this;
   }
 
-  public String getFieldEffectIcon() {
-    return mEffectIcon;
+  public Long getFieldLength() {
+    return mLength;
   }
 
-  public ProductItemARData setFieldEffectIcon(String value) {
-    this.mEffectIcon = value;
+  public PageAboutStoryComposedBlockEntityRanges setFieldLength(Long value) {
+    this.mLength = value;
     return this;
   }
 
-  public Object getFieldEffectParameters() {
-    return mEffectParameters;
+  public Long getFieldOffset() {
+    return mOffset;
   }
 
-  public ProductItemARData setFieldEffectParameters(Object value) {
-    this.mEffectParameters = value;
-    return this;
-  }
-
-  public String getFieldPickerIcon() {
-    return mPickerIcon;
-  }
-
-  public ProductItemARData setFieldPickerIcon(String value) {
-    this.mPickerIcon = value;
-    return this;
-  }
-
-  public Object getFieldProductArLink() {
-    return mProductArLink;
-  }
-
-  public ProductItemARData setFieldProductArLink(Object value) {
-    this.mProductArLink = value;
-    return this;
-  }
-
-  public String getFieldState() {
-    return mState;
-  }
-
-  public ProductItemARData setFieldState(String value) {
-    this.mState = value;
-    return this;
-  }
-
-  public List<EnumSurfaces> getFieldSurfaces() {
-    return mSurfaces;
-  }
-
-  public ProductItemARData setFieldSurfaces(List<EnumSurfaces> value) {
-    this.mSurfaces = value;
+  public PageAboutStoryComposedBlockEntityRanges setFieldOffset(Long value) {
+    this.mOffset = value;
     return this;
   }
 
 
-
-  public static enum EnumSurfaces {
-      @SerializedName("B2C_MARKETPLACE")
-      VALUE_B2C_MARKETPLACE("B2C_MARKETPLACE"),
-      @SerializedName("C2C_MARKETPLACE")
-      VALUE_C2C_MARKETPLACE("C2C_MARKETPLACE"),
-      @SerializedName("DA")
-      VALUE_DA("DA"),
-      @SerializedName("DAILY_DEALS")
-      VALUE_DAILY_DEALS("DAILY_DEALS"),
-      @SerializedName("DAILY_DEALS_LEGACY")
-      VALUE_DAILY_DEALS_LEGACY("DAILY_DEALS_LEGACY"),
-      @SerializedName("IG_PRODUCT_TAGGING")
-      VALUE_IG_PRODUCT_TAGGING("IG_PRODUCT_TAGGING"),
-      @SerializedName("MARKETPLACE")
-      VALUE_MARKETPLACE("MARKETPLACE"),
-      @SerializedName("MARKETPLACE_ADS_DEPRECATED")
-      VALUE_MARKETPLACE_ADS_DEPRECATED("MARKETPLACE_ADS_DEPRECATED"),
-      @SerializedName("MARKETPLACE_SHOPS")
-      VALUE_MARKETPLACE_SHOPS("MARKETPLACE_SHOPS"),
-      @SerializedName("MINI_SHOPS")
-      VALUE_MINI_SHOPS("MINI_SHOPS"),
-      @SerializedName("OFFLINE_CONVERSIONS")
-      VALUE_OFFLINE_CONVERSIONS("OFFLINE_CONVERSIONS"),
-      @SerializedName("SHOPS")
-      VALUE_SHOPS("SHOPS"),
-      @SerializedName("UNIVERSAL_CHECKOUT")
-      VALUE_UNIVERSAL_CHECKOUT("UNIVERSAL_CHECKOUT"),
-      @SerializedName("WHATSAPP")
-      VALUE_WHATSAPP("WHATSAPP"),
-      ;
-
-      private String value;
-
-      private EnumSurfaces(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -327,23 +240,19 @@ public class ProductItemARData extends APINode {
     return gson;
   }
 
-  public ProductItemARData copyFrom(ProductItemARData instance) {
-    this.mContainerEffect = instance.mContainerEffect;
-    this.mEffectIcon = instance.mEffectIcon;
-    this.mEffectParameters = instance.mEffectParameters;
-    this.mPickerIcon = instance.mPickerIcon;
-    this.mProductArLink = instance.mProductArLink;
-    this.mState = instance.mState;
-    this.mSurfaces = instance.mSurfaces;
+  public PageAboutStoryComposedBlockEntityRanges copyFrom(PageAboutStoryComposedBlockEntityRanges instance) {
+    this.mKey = instance.mKey;
+    this.mLength = instance.mLength;
+    this.mOffset = instance.mOffset;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ProductItemARData> getParser() {
-    return new APIRequest.ResponseParser<ProductItemARData>() {
-      public APINodeList<ProductItemARData> parseResponse(String response, APIContext context, APIRequest<ProductItemARData> request, String header) throws MalformedResponseException {
-        return ProductItemARData.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<PageAboutStoryComposedBlockEntityRanges> getParser() {
+    return new APIRequest.ResponseParser<PageAboutStoryComposedBlockEntityRanges>() {
+      public APINodeList<PageAboutStoryComposedBlockEntityRanges> parseResponse(String response, APIContext context, APIRequest<PageAboutStoryComposedBlockEntityRanges> request, String header) throws MalformedResponseException {
+        return PageAboutStoryComposedBlockEntityRanges.parseResponse(response, context, request, header);
       }
     };
   }

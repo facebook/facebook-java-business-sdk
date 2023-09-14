@@ -307,6 +307,8 @@ public class AdCampaignDeliveryEstimate extends APINode {
       VALUE_QUALITY_LEAD("QUALITY_LEAD"),
       @SerializedName("REACH")
       VALUE_REACH("REACH"),
+      @SerializedName("REMINDERS_SET")
+      VALUE_REMINDERS_SET("REMINDERS_SET"),
       @SerializedName("SUBSCRIBERS")
       VALUE_SUBSCRIBERS("SUBSCRIBERS"),
       @SerializedName("THRUPLAY")

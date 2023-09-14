@@ -42,8 +42,14 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class Ad extends APINode {
   @SerializedName("account_id")
   private String mAccountId = null;
+  @SerializedName("ad_active_time")
+  private String mAdActiveTime = null;
   @SerializedName("ad_review_feedback")
   private AdgroupReviewFeedback mAdReviewFeedback = null;
+  @SerializedName("ad_schedule_end_time")
+  private String mAdScheduleEndTime = null;
+  @SerializedName("ad_schedule_start_time")
+  private String mAdScheduleStartTime = null;
   @SerializedName("adlabels")
   private List<AdLabel> mAdlabels = null;
   @SerializedName("adset")
@@ -376,8 +382,20 @@ public class Ad extends APINode {
     return mAccountId;
   }
 
+  public String getFieldAdActiveTime() {
+    return mAdActiveTime;
+  }
+
   public AdgroupReviewFeedback getFieldAdReviewFeedback() {
     return mAdReviewFeedback;
+  }
+
+  public String getFieldAdScheduleEndTime() {
+    return mAdScheduleEndTime;
+  }
+
+  public String getFieldAdScheduleStartTime() {
+    return mAdScheduleStartTime;
   }
 
   public List<AdLabel> getFieldAdlabels() {
@@ -1476,7 +1494,10 @@ public class Ad extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
+      "ad_active_time",
       "ad_review_feedback",
+      "ad_schedule_end_time",
+      "ad_schedule_start_time",
       "adlabels",
       "adset",
       "adset_id",
@@ -1583,7 +1604,7 @@ public class Ad extends APINode {
       return this;
     }
 
-    public APIRequestGetCopies setTimeRange (Object timeRange) {
+    public APIRequestGetCopies setTimeRange (Map<String, String> timeRange) {
       this.setParam("time_range", timeRange);
       return this;
     }
@@ -1644,11 +1665,32 @@ public class Ad extends APINode {
       this.requestField("account_id", value);
       return this;
     }
+    public APIRequestGetCopies requestAdActiveTimeField () {
+      return this.requestAdActiveTimeField(true);
+    }
+    public APIRequestGetCopies requestAdActiveTimeField (boolean value) {
+      this.requestField("ad_active_time", value);
+      return this;
+    }
     public APIRequestGetCopies requestAdReviewFeedbackField () {
       return this.requestAdReviewFeedbackField(true);
     }
     public APIRequestGetCopies requestAdReviewFeedbackField (boolean value) {
       this.requestField("ad_review_feedback", value);
+      return this;
+    }
+    public APIRequestGetCopies requestAdScheduleEndTimeField () {
+      return this.requestAdScheduleEndTimeField(true);
+    }
+    public APIRequestGetCopies requestAdScheduleEndTimeField (boolean value) {
+      this.requestField("ad_schedule_end_time", value);
+      return this;
+    }
+    public APIRequestGetCopies requestAdScheduleStartTimeField () {
+      return this.requestAdScheduleStartTimeField(true);
+    }
+    public APIRequestGetCopies requestAdScheduleStartTimeField (boolean value) {
+      this.requestField("ad_schedule_start_time", value);
       return this;
     }
     public APIRequestGetCopies requestAdlabelsField () {
@@ -2242,7 +2284,7 @@ public class Ad extends APINode {
       return this;
     }
 
-    public APIRequestGetInsights setTimeRange (Object timeRange) {
+    public APIRequestGetInsights setTimeRange (Map<String, String> timeRange) {
       this.setParam("time_range", timeRange);
       return this;
     }
@@ -2251,7 +2293,7 @@ public class Ad extends APINode {
       return this;
     }
 
-    public APIRequestGetInsights setTimeRanges (List<Object> timeRanges) {
+    public APIRequestGetInsights setTimeRanges (List<Map<String, String>> timeRanges) {
       this.setParam("time_ranges", timeRanges);
       return this;
     }
@@ -2544,7 +2586,7 @@ public class Ad extends APINode {
       return this;
     }
 
-    public APIRequestGetInsightsAsync setTimeRange (Object timeRange) {
+    public APIRequestGetInsightsAsync setTimeRange (Map<String, String> timeRange) {
       this.setParam("time_range", timeRange);
       return this;
     }
@@ -2553,7 +2595,7 @@ public class Ad extends APINode {
       return this;
     }
 
-    public APIRequestGetInsightsAsync setTimeRanges (List<Object> timeRanges) {
+    public APIRequestGetInsightsAsync setTimeRanges (List<Map<String, String>> timeRanges) {
       this.setParam("time_ranges", timeRanges);
       return this;
     }
@@ -3367,7 +3409,10 @@ public class Ad extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
+      "ad_active_time",
       "ad_review_feedback",
+      "ad_schedule_end_time",
+      "ad_schedule_start_time",
       "adlabels",
       "adset",
       "adset_id",
@@ -3492,7 +3537,7 @@ public class Ad extends APINode {
       return this;
     }
 
-    public APIRequestGet setTimeRange (Object timeRange) {
+    public APIRequestGet setTimeRange (Map<String, String> timeRange) {
       this.setParam("time_range", timeRange);
       return this;
     }
@@ -3544,11 +3589,32 @@ public class Ad extends APINode {
       this.requestField("account_id", value);
       return this;
     }
+    public APIRequestGet requestAdActiveTimeField () {
+      return this.requestAdActiveTimeField(true);
+    }
+    public APIRequestGet requestAdActiveTimeField (boolean value) {
+      this.requestField("ad_active_time", value);
+      return this;
+    }
     public APIRequestGet requestAdReviewFeedbackField () {
       return this.requestAdReviewFeedbackField(true);
     }
     public APIRequestGet requestAdReviewFeedbackField (boolean value) {
       this.requestField("ad_review_feedback", value);
+      return this;
+    }
+    public APIRequestGet requestAdScheduleEndTimeField () {
+      return this.requestAdScheduleEndTimeField(true);
+    }
+    public APIRequestGet requestAdScheduleEndTimeField (boolean value) {
+      this.requestField("ad_schedule_end_time", value);
+      return this;
+    }
+    public APIRequestGet requestAdScheduleStartTimeField () {
+      return this.requestAdScheduleStartTimeField(true);
+    }
+    public APIRequestGet requestAdScheduleStartTimeField (boolean value) {
+      this.requestField("ad_schedule_start_time", value);
       return this;
     }
     public APIRequestGet requestAdlabelsField () {
@@ -3792,6 +3858,8 @@ public class Ad extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "ad_schedule_end_time",
+      "ad_schedule_start_time",
       "adlabels",
       "adset_spec",
       "audience_id",
@@ -3865,6 +3933,16 @@ public class Ad extends APINode {
       return this;
     }
 
+
+    public APIRequestUpdate setAdScheduleEndTime (String adScheduleEndTime) {
+      this.setParam("ad_schedule_end_time", adScheduleEndTime);
+      return this;
+    }
+
+    public APIRequestUpdate setAdScheduleStartTime (String adScheduleStartTime) {
+      this.setParam("ad_schedule_start_time", adScheduleStartTime);
+      return this;
+    }
 
     public APIRequestUpdate setAdlabels (List<Object> adlabels) {
       this.setParam("adlabels", adlabels);
@@ -4293,7 +4371,10 @@ public class Ad extends APINode {
 
   public Ad copyFrom(Ad instance) {
     this.mAccountId = instance.mAccountId;
+    this.mAdActiveTime = instance.mAdActiveTime;
     this.mAdReviewFeedback = instance.mAdReviewFeedback;
+    this.mAdScheduleEndTime = instance.mAdScheduleEndTime;
+    this.mAdScheduleStartTime = instance.mAdScheduleStartTime;
     this.mAdlabels = instance.mAdlabels;
     this.mAdset = instance.mAdset;
     this.mAdsetId = instance.mAdsetId;

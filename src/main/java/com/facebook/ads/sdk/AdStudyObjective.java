@@ -366,6 +366,7 @@ public class AdStudyObjective extends APINode {
       "owner_ad_account",
       "owner_business",
       "usage",
+      "user_access_expire_time",
       "valid_entries",
     };
 
@@ -675,6 +676,13 @@ public class AdStudyObjective extends APINode {
       this.requestField("usage", value);
       return this;
     }
+    public APIRequestGetAdsPixels requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetAdsPixels requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
+      return this;
+    }
     public APIRequestGetAdsPixels requestValidEntriesField () {
       return this.requestValidEntriesField(true);
     }
@@ -772,6 +780,7 @@ public class AdStudyObjective extends APINode {
       "privacy_policy_url",
       "profile_section_url",
       "property_id",
+      "protected_mode_rules",
       "real_time_mode_devices",
       "restrictions",
       "restrictive_data_filter_params",
@@ -1425,6 +1434,13 @@ public class AdStudyObjective extends APINode {
     }
     public APIRequestGetApplications requestPropertyIdField (boolean value) {
       this.requestField("property_id", value);
+      return this;
+    }
+    public APIRequestGetApplications requestProtectedModeRulesField () {
+      return this.requestProtectedModeRulesField(true);
+    }
+    public APIRequestGetApplications requestProtectedModeRulesField (boolean value) {
+      this.requestField("protected_mode_rules", value);
       return this;
     }
     public APIRequestGetApplications requestRealTimeModeDevicesField () {
@@ -2520,6 +2536,7 @@ public class AdStudyObjective extends APINode {
       "two_factor_type",
       "updated_by",
       "updated_time",
+      "user_access_expire_time",
       "verification_status",
       "vertical",
       "vertical_id",
@@ -2731,6 +2748,13 @@ public class AdStudyObjective extends APINode {
     }
     public APIRequestGetPartnerPrivateStudies requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
+      return this;
+    }
+    public APIRequestGetPartnerPrivateStudies requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetPartnerPrivateStudies requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetPartnerPrivateStudies requestVerificationStatusField () {

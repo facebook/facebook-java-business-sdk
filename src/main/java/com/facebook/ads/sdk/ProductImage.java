@@ -40,10 +40,14 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class ProductImage extends APINode {
+  @SerializedName("height")
+  private Long mHeight = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("image_url")
   private String mImageUrl = null;
+  @SerializedName("width")
+  private Long mWidth = null;
   protected static Gson gson = null;
 
   ProductImage() {
@@ -258,12 +262,20 @@ public class ProductImage extends APINode {
   }
 
 
+  public Long getFieldHeight() {
+    return mHeight;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
   public String getFieldImageUrl() {
     return mImageUrl;
+  }
+
+  public Long getFieldWidth() {
+    return mWidth;
   }
 
 
@@ -279,8 +291,10 @@ public class ProductImage extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "height",
       "id",
       "image_url",
+      "width",
     };
 
     @Override
@@ -372,6 +386,13 @@ public class ProductImage extends APINode {
       return this;
     }
 
+    public APIRequestGet requestHeightField () {
+      return this.requestHeightField(true);
+    }
+    public APIRequestGet requestHeightField (boolean value) {
+      this.requestField("height", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -384,6 +405,13 @@ public class ProductImage extends APINode {
     }
     public APIRequestGet requestImageUrlField (boolean value) {
       this.requestField("image_url", value);
+      return this;
+    }
+    public APIRequestGet requestWidthField () {
+      return this.requestWidthField(true);
+    }
+    public APIRequestGet requestWidthField (boolean value) {
+      this.requestField("width", value);
       return this;
     }
   }
@@ -403,8 +431,10 @@ public class ProductImage extends APINode {
   }
 
   public ProductImage copyFrom(ProductImage instance) {
+    this.mHeight = instance.mHeight;
     this.mId = instance.mId;
     this.mImageUrl = instance.mImageUrl;
+    this.mWidth = instance.mWidth;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

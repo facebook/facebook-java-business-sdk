@@ -315,7 +315,6 @@ public class ProductGroup extends APINode {
       "additional_variant_attributes",
       "age_group",
       "applinks",
-      "ar_data",
       "availability",
       "brand",
       "capability_to_review_status",
@@ -366,6 +365,7 @@ public class ProductGroup extends APINode {
       "product_catalog",
       "product_feed",
       "product_group",
+      "product_local_info",
       "product_type",
       "quantity_to_sell_on_facebook",
       "retailer_id",
@@ -507,13 +507,6 @@ public class ProductGroup extends APINode {
     }
     public APIRequestGetProducts requestApplinksField (boolean value) {
       this.requestField("applinks", value);
-      return this;
-    }
-    public APIRequestGetProducts requestArDataField () {
-      return this.requestArDataField(true);
-    }
-    public APIRequestGetProducts requestArDataField (boolean value) {
-      this.requestField("ar_data", value);
       return this;
     }
     public APIRequestGetProducts requestAvailabilityField () {
@@ -864,6 +857,13 @@ public class ProductGroup extends APINode {
     }
     public APIRequestGetProducts requestProductGroupField (boolean value) {
       this.requestField("product_group", value);
+      return this;
+    }
+    public APIRequestGetProducts requestProductLocalInfoField () {
+      return this.requestProductLocalInfoField(true);
+    }
+    public APIRequestGetProducts requestProductLocalInfoField (boolean value) {
+      this.requestField("product_local_info", value);
       return this;
     }
     public APIRequestGetProducts requestProductTypeField () {

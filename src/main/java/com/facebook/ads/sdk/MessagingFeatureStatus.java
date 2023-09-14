@@ -42,6 +42,10 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class MessagingFeatureStatus extends APINode {
   @SerializedName("hop_v2")
   private Boolean mHopV2 = null;
+  @SerializedName("ig_multi_app")
+  private Boolean mIgMultiApp = null;
+  @SerializedName("msgr_multi_app")
+  private Boolean mMsgrMultiApp = null;
   protected static Gson gson = null;
 
   public MessagingFeatureStatus() {
@@ -202,6 +206,24 @@ public class MessagingFeatureStatus extends APINode {
     return this;
   }
 
+  public Boolean getFieldIgMultiApp() {
+    return mIgMultiApp;
+  }
+
+  public MessagingFeatureStatus setFieldIgMultiApp(Boolean value) {
+    this.mIgMultiApp = value;
+    return this;
+  }
+
+  public Boolean getFieldMsgrMultiApp() {
+    return mMsgrMultiApp;
+  }
+
+  public MessagingFeatureStatus setFieldMsgrMultiApp(Boolean value) {
+    this.mMsgrMultiApp = value;
+    return this;
+  }
+
 
 
 
@@ -220,6 +242,8 @@ public class MessagingFeatureStatus extends APINode {
 
   public MessagingFeatureStatus copyFrom(MessagingFeatureStatus instance) {
     this.mHopV2 = instance.mHopV2;
+    this.mIgMultiApp = instance.mIgMultiApp;
+    this.mMsgrMultiApp = instance.mMsgrMultiApp;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

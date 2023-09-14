@@ -105,7 +105,7 @@ public class Post extends APINode {
   @SerializedName("is_spherical")
   private Boolean mIsSpherical = null;
   @SerializedName("link")
-  private Object mLink = null;
+  private String mLink = null;
   @SerializedName("message")
   private String mMessage = null;
   @SerializedName("message_tags")
@@ -121,7 +121,7 @@ public class Post extends APINode {
   @SerializedName("parent_id")
   private String mParentId = null;
   @SerializedName("permalink_url")
-  private Object mPermalinkUrl = null;
+  private String mPermalinkUrl = null;
   @SerializedName("picture")
   private String mPicture = null;
   @SerializedName("place")
@@ -564,7 +564,7 @@ public class Post extends APINode {
     return mIsSpherical;
   }
 
-  public Object getFieldLink() {
+  public String getFieldLink() {
     return mLink;
   }
 
@@ -596,7 +596,7 @@ public class Post extends APINode {
     return mParentId;
   }
 
-  public Object getFieldPermalinkUrl() {
+  public String getFieldPermalinkUrl() {
     return mPermalinkUrl;
   }
 
@@ -2796,6 +2796,7 @@ public class Post extends APINode {
       "has_added_app",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
+      "has_whatsapp_enterprise_number_using_cloud_api",
       "has_whatsapp_number",
       "hometown",
       "hours",
@@ -2839,6 +2840,7 @@ public class Post extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -2881,6 +2883,7 @@ public class Post extends APINode {
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
+      "user_access_expire_time",
       "username",
       "verification_status",
       "voip_info",
@@ -3350,6 +3353,13 @@ public class Post extends APINode {
       this.requestField("has_whatsapp_business_number", value);
       return this;
     }
+    public APIRequestGetSponsorTags requestHasWhatsappEnterpriseNumberUsingCloudApiField () {
+      return this.requestHasWhatsappEnterpriseNumberUsingCloudApiField(true);
+    }
+    public APIRequestGetSponsorTags requestHasWhatsappEnterpriseNumberUsingCloudApiField (boolean value) {
+      this.requestField("has_whatsapp_enterprise_number_using_cloud_api", value);
+      return this;
+    }
     public APIRequestGetSponsorTags requestHasWhatsappNumberField () {
       return this.requestHasWhatsappNumberField(true);
     }
@@ -3651,6 +3661,13 @@ public class Post extends APINode {
       this.requestField("owner_business", value);
       return this;
     }
+    public APIRequestGetSponsorTags requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetSponsorTags requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
+      return this;
+    }
     public APIRequestGetSponsorTags requestPageTokenField () {
       return this.requestPageTokenField(true);
     }
@@ -3943,6 +3960,13 @@ public class Post extends APINode {
     }
     public APIRequestGetSponsorTags requestUnseenMessageCountField (boolean value) {
       this.requestField("unseen_message_count", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetSponsorTags requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetSponsorTags requestUsernameField () {
@@ -5272,29 +5296,6 @@ public class Post extends APINode {
       private String value;
 
       private EnumBackdatedTimeGranularity(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumCheckinEntryPoint {
-      @SerializedName("BRANDING_CHECKIN")
-      VALUE_BRANDING_CHECKIN("BRANDING_CHECKIN"),
-      @SerializedName("BRANDING_OTHER")
-      VALUE_BRANDING_OTHER("BRANDING_OTHER"),
-      @SerializedName("BRANDING_PHOTO")
-      VALUE_BRANDING_PHOTO("BRANDING_PHOTO"),
-      @SerializedName("BRANDING_STATUS")
-      VALUE_BRANDING_STATUS("BRANDING_STATUS"),
-      ;
-
-      private String value;
-
-      private EnumCheckinEntryPoint(String value) {
         this.value = value;
       }
 

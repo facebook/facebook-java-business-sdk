@@ -57,7 +57,7 @@ public class Album extends APINode {
   @SerializedName("description")
   private String mDescription = null;
   @SerializedName("edit_link")
-  private Object mEditLink = null;
+  private String mEditLink = null;
   @SerializedName("event")
   private Event mEvent = null;
   @SerializedName("from")
@@ -67,7 +67,7 @@ public class Album extends APINode {
   @SerializedName("is_user_facing")
   private Boolean mIsUserFacing = null;
   @SerializedName("link")
-  private Object mLink = null;
+  private String mLink = null;
   @SerializedName("location")
   private String mLocation = null;
   @SerializedName("modified_major")
@@ -363,7 +363,7 @@ public class Album extends APINode {
     return mDescription;
   }
 
-  public Object getFieldEditLink() {
+  public String getFieldEditLink() {
     return mEditLink;
   }
 
@@ -386,7 +386,7 @@ public class Album extends APINode {
     return mIsUserFacing;
   }
 
-  public Object getFieldLink() {
+  public String getFieldLink() {
     return mLink;
   }
 

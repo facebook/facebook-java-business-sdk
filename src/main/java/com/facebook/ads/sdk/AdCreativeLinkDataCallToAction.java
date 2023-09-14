@@ -227,6 +227,8 @@ public class AdCreativeLinkDataCallToAction extends APINode {
       VALUE_APPLY_NOW("APPLY_NOW"),
       @SerializedName("AUDIO_CALL")
       VALUE_AUDIO_CALL("AUDIO_CALL"),
+      @SerializedName("BOOK_NOW")
+      VALUE_BOOK_NOW("BOOK_NOW"),
       @SerializedName("BOOK_TRAVEL")
       VALUE_BOOK_TRAVEL("BOOK_TRAVEL"),
       @SerializedName("BUY")

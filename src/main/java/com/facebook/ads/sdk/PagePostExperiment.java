@@ -42,14 +42,20 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class PagePostExperiment extends APINode {
   @SerializedName("auto_resolve_settings")
   private Object mAutoResolveSettings = null;
+  @SerializedName("control_video_id")
+  private String mControlVideoId = null;
   @SerializedName("creation_time")
   private String mCreationTime = null;
   @SerializedName("creator")
   private User mCreator = null;
   @SerializedName("declared_winning_time")
   private String mDeclaredWinningTime = null;
+  @SerializedName("declared_winning_video_id")
+  private String mDeclaredWinningVideoId = null;
   @SerializedName("description")
   private String mDescription = null;
+  @SerializedName("experiment_video_ids")
+  private List<String> mExperimentVideoIds = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("insight_snapshots")
@@ -275,6 +281,10 @@ public class PagePostExperiment extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGetVideoInsights getVideoInsights() {
+    return new APIRequestGetVideoInsights(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
@@ -282,6 +292,10 @@ public class PagePostExperiment extends APINode {
 
   public Object getFieldAutoResolveSettings() {
     return mAutoResolveSettings;
+  }
+
+  public String getFieldControlVideoId() {
+    return mControlVideoId;
   }
 
   public String getFieldCreationTime() {
@@ -299,8 +313,16 @@ public class PagePostExperiment extends APINode {
     return mDeclaredWinningTime;
   }
 
+  public String getFieldDeclaredWinningVideoId() {
+    return mDeclaredWinningVideoId;
+  }
+
   public String getFieldDescription() {
     return mDescription;
+  }
+
+  public List<String> getFieldExperimentVideoIds() {
+    return mExperimentVideoIds;
   }
 
   public String getFieldId() {
@@ -337,6 +359,110 @@ public class PagePostExperiment extends APINode {
 
 
 
+  public static class APIRequestGetVideoInsights extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetVideoInsights.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetVideoInsights(String nodeId, APIContext context) {
+      super(context, nodeId, "/video_insights", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetVideoInsights setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVideoInsights setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetVideoInsights requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetVideoInsights requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVideoInsights requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetVideoInsights requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVideoInsights requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVideoInsights requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGet extends APIRequest<PagePostExperiment> {
 
     PagePostExperiment lastResponse = null;
@@ -349,10 +475,13 @@ public class PagePostExperiment extends APINode {
 
     public static final String[] FIELDS = {
       "auto_resolve_settings",
+      "control_video_id",
       "creation_time",
       "creator",
       "declared_winning_time",
+      "declared_winning_video_id",
       "description",
+      "experiment_video_ids",
       "id",
       "insight_snapshots",
       "name",
@@ -459,6 +588,13 @@ public class PagePostExperiment extends APINode {
       this.requestField("auto_resolve_settings", value);
       return this;
     }
+    public APIRequestGet requestControlVideoIdField () {
+      return this.requestControlVideoIdField(true);
+    }
+    public APIRequestGet requestControlVideoIdField (boolean value) {
+      this.requestField("control_video_id", value);
+      return this;
+    }
     public APIRequestGet requestCreationTimeField () {
       return this.requestCreationTimeField(true);
     }
@@ -480,11 +616,25 @@ public class PagePostExperiment extends APINode {
       this.requestField("declared_winning_time", value);
       return this;
     }
+    public APIRequestGet requestDeclaredWinningVideoIdField () {
+      return this.requestDeclaredWinningVideoIdField(true);
+    }
+    public APIRequestGet requestDeclaredWinningVideoIdField (boolean value) {
+      this.requestField("declared_winning_video_id", value);
+      return this;
+    }
     public APIRequestGet requestDescriptionField () {
       return this.requestDescriptionField(true);
     }
     public APIRequestGet requestDescriptionField (boolean value) {
       this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGet requestExperimentVideoIdsField () {
+      return this.requestExperimentVideoIdsField(true);
+    }
+    public APIRequestGet requestExperimentVideoIdsField (boolean value) {
+      this.requestField("experiment_video_ids", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -561,10 +711,13 @@ public class PagePostExperiment extends APINode {
 
   public PagePostExperiment copyFrom(PagePostExperiment instance) {
     this.mAutoResolveSettings = instance.mAutoResolveSettings;
+    this.mControlVideoId = instance.mControlVideoId;
     this.mCreationTime = instance.mCreationTime;
     this.mCreator = instance.mCreator;
     this.mDeclaredWinningTime = instance.mDeclaredWinningTime;
+    this.mDeclaredWinningVideoId = instance.mDeclaredWinningVideoId;
     this.mDescription = instance.mDescription;
+    this.mExperimentVideoIds = instance.mExperimentVideoIds;
     this.mId = instance.mId;
     this.mInsightSnapshots = instance.mInsightSnapshots;
     this.mName = instance.mName;

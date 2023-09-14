@@ -47,7 +47,7 @@ public class AdCreativeLinkData extends APINode {
   @SerializedName("app_link_spec")
   private AdCreativeLinkDataAppLinkSpec mAppLinkSpec = null;
   @SerializedName("attachment_style")
-  private EnumAttachmentStyle mAttachmentStyle = null;
+  private String mAttachmentStyle = null;
   @SerializedName("branded_content_shared_to_sponsor_status")
   private String mBrandedContentSharedToSponsorStatus = null;
   @SerializedName("branded_content_sponsor_page_id")
@@ -289,11 +289,11 @@ public class AdCreativeLinkData extends APINode {
     this.mAppLinkSpec = AdCreativeLinkDataAppLinkSpec.getGson().fromJson(value, type);
     return this;
   }
-  public EnumAttachmentStyle getFieldAttachmentStyle() {
+  public String getFieldAttachmentStyle() {
     return mAttachmentStyle;
   }
 
-  public AdCreativeLinkData setFieldAttachmentStyle(EnumAttachmentStyle value) {
+  public AdCreativeLinkData setFieldAttachmentStyle(String value) {
     this.mAttachmentStyle = value;
     return this;
   }
@@ -605,25 +605,6 @@ public class AdCreativeLinkData extends APINode {
   }
 
 
-
-  public static enum EnumAttachmentStyle {
-      @SerializedName("default")
-      VALUE_DEFAULT("default"),
-      @SerializedName("link")
-      VALUE_LINK("link"),
-      ;
-
-      private String value;
-
-      private EnumAttachmentStyle(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
 
   public static enum EnumFormatOption {
       @SerializedName("carousel_ar_effects")

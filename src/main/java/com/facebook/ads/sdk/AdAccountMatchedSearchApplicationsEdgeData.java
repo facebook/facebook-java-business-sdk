@@ -294,6 +294,8 @@ public class AdAccountMatchedSearchApplicationsEdgeData extends APINode {
       VALUE_APTOIDE_A1_STORE("APTOIDE_A1_STORE"),
       @SerializedName("BEMOBI_MOBILE_STORE")
       VALUE_BEMOBI_MOBILE_STORE("BEMOBI_MOBILE_STORE"),
+      @SerializedName("DIGITAL_TURBINE_STORE")
+      VALUE_DIGITAL_TURBINE_STORE("DIGITAL_TURBINE_STORE"),
       @SerializedName("DOES_NOT_EXIST")
       VALUE_DOES_NOT_EXIST("DOES_NOT_EXIST"),
       @SerializedName("FB_ANDROID_STORE")

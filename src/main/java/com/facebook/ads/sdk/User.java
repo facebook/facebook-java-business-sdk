@@ -44,6 +44,8 @@ public class User extends APINode {
   private String mAbout = null;
   @SerializedName("age_range")
   private AgeRange mAgeRange = null;
+  @SerializedName("avatar_2d_profile_picture")
+  private AvatarProfilePicture mAvatar2dProfilePicture = null;
   @SerializedName("birthday")
   private String mBirthday = null;
   @SerializedName("community")
@@ -78,6 +80,8 @@ public class User extends APINode {
   private Boolean mInstalled = null;
   @SerializedName("is_guest_user")
   private Boolean mIsGuestUser = null;
+  @SerializedName("is_work_account")
+  private Boolean mIsWorkAccount = null;
   @SerializedName("languages")
   private List<Experience> mLanguages = null;
   @SerializedName("last_name")
@@ -111,7 +115,7 @@ public class User extends APINode {
   @SerializedName("relationship_status")
   private String mRelationshipStatus = null;
   @SerializedName("shared_login_upgrade_required_by")
-  private Object mSharedLoginUpgradeRequiredBy = null;
+  private String mSharedLoginUpgradeRequiredBy = null;
   @SerializedName("short_name")
   private String mShortName = null;
   @SerializedName("significant_other")
@@ -572,6 +576,13 @@ public class User extends APINode {
     return mAgeRange;
   }
 
+  public AvatarProfilePicture getFieldAvatar2dProfilePicture() {
+    if (mAvatar2dProfilePicture != null) {
+      mAvatar2dProfilePicture.context = getContext();
+    }
+    return mAvatar2dProfilePicture;
+  }
+
   public String getFieldBirthday() {
     return mBirthday;
   }
@@ -646,6 +657,10 @@ public class User extends APINode {
     return mIsGuestUser;
   }
 
+  public Boolean getFieldIsWorkAccount() {
+    return mIsWorkAccount;
+  }
+
   public List<Experience> getFieldLanguages() {
     return mLanguages;
   }
@@ -713,7 +728,7 @@ public class User extends APINode {
     return mRelationshipStatus;
   }
 
-  public Object getFieldSharedLoginUpgradeRequiredBy() {
+  public String getFieldSharedLoginUpgradeRequiredBy() {
     return mSharedLoginUpgradeRequiredBy;
   }
 
@@ -1076,6 +1091,7 @@ public class User extends APINode {
       "has_added_app",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
+      "has_whatsapp_enterprise_number_using_cloud_api",
       "has_whatsapp_number",
       "hometown",
       "hours",
@@ -1119,6 +1135,7 @@ public class User extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -1161,6 +1178,7 @@ public class User extends APINode {
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
+      "user_access_expire_time",
       "username",
       "verification_status",
       "voip_info",
@@ -1648,6 +1666,13 @@ public class User extends APINode {
       this.requestField("has_whatsapp_business_number", value);
       return this;
     }
+    public APIRequestGetAccounts requestHasWhatsappEnterpriseNumberUsingCloudApiField () {
+      return this.requestHasWhatsappEnterpriseNumberUsingCloudApiField(true);
+    }
+    public APIRequestGetAccounts requestHasWhatsappEnterpriseNumberUsingCloudApiField (boolean value) {
+      this.requestField("has_whatsapp_enterprise_number_using_cloud_api", value);
+      return this;
+    }
     public APIRequestGetAccounts requestHasWhatsappNumberField () {
       return this.requestHasWhatsappNumberField(true);
     }
@@ -1949,6 +1974,13 @@ public class User extends APINode {
       this.requestField("owner_business", value);
       return this;
     }
+    public APIRequestGetAccounts requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetAccounts requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
+      return this;
+    }
     public APIRequestGetAccounts requestPageTokenField () {
       return this.requestPageTokenField(true);
     }
@@ -2241,6 +2273,13 @@ public class User extends APINode {
     }
     public APIRequestGetAccounts requestUnseenMessageCountField (boolean value) {
       this.requestField("unseen_message_count", value);
+      return this;
+    }
+    public APIRequestGetAccounts requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetAccounts requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetAccounts requestUsernameField () {
@@ -2994,6 +3033,7 @@ public class User extends APINode {
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
+      "all_capabilities",
       "amount_spent",
       "attribution_spec",
       "balance",
@@ -3053,6 +3093,7 @@ public class User extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
+      "user_access_expire_time",
       "user_tasks",
       "user_tos_accepted",
       "viewable_business",
@@ -3180,6 +3221,13 @@ public class User extends APINode {
     }
     public APIRequestGetAdAccounts requestAgencyClientDeclarationField (boolean value) {
       this.requestField("agency_client_declaration", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestAllCapabilitiesField () {
+      return this.requestAllCapabilitiesField(true);
+    }
+    public APIRequestGetAdAccounts requestAllCapabilitiesField (boolean value) {
+      this.requestField("all_capabilities", value);
       return this;
     }
     public APIRequestGetAdAccounts requestAmountSpentField () {
@@ -3593,6 +3641,13 @@ public class User extends APINode {
     }
     public APIRequestGetAdAccounts requestTosAcceptedField (boolean value) {
       this.requestField("tos_accepted", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetAdAccounts requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetAdAccounts requestUserTasksField () {
@@ -4332,6 +4387,7 @@ public class User extends APINode {
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
+      "all_capabilities",
       "amount_spent",
       "attribution_spec",
       "balance",
@@ -4391,6 +4447,7 @@ public class User extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
+      "user_access_expire_time",
       "user_tasks",
       "user_tos_accepted",
       "viewable_business",
@@ -4518,6 +4575,13 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedAdAccounts requestAgencyClientDeclarationField (boolean value) {
       this.requestField("agency_client_declaration", value);
+      return this;
+    }
+    public APIRequestGetAssignedAdAccounts requestAllCapabilitiesField () {
+      return this.requestAllCapabilitiesField(true);
+    }
+    public APIRequestGetAssignedAdAccounts requestAllCapabilitiesField (boolean value) {
+      this.requestField("all_capabilities", value);
       return this;
     }
     public APIRequestGetAssignedAdAccounts requestAmountSpentField () {
@@ -4933,6 +4997,13 @@ public class User extends APINode {
       this.requestField("tos_accepted", value);
       return this;
     }
+    public APIRequestGetAssignedAdAccounts requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetAssignedAdAccounts requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
+      return this;
+    }
     public APIRequestGetAssignedAdAccounts requestUserTasksField () {
       return this.requestUserTasksField(true);
     }
@@ -5155,6 +5226,7 @@ public class User extends APINode {
       "has_added_app",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
+      "has_whatsapp_enterprise_number_using_cloud_api",
       "has_whatsapp_number",
       "hometown",
       "hours",
@@ -5198,6 +5270,7 @@ public class User extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -5240,6 +5313,7 @@ public class User extends APINode {
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
+      "user_access_expire_time",
       "username",
       "verification_status",
       "voip_info",
@@ -5718,6 +5792,13 @@ public class User extends APINode {
       this.requestField("has_whatsapp_business_number", value);
       return this;
     }
+    public APIRequestGetAssignedPages requestHasWhatsappEnterpriseNumberUsingCloudApiField () {
+      return this.requestHasWhatsappEnterpriseNumberUsingCloudApiField(true);
+    }
+    public APIRequestGetAssignedPages requestHasWhatsappEnterpriseNumberUsingCloudApiField (boolean value) {
+      this.requestField("has_whatsapp_enterprise_number_using_cloud_api", value);
+      return this;
+    }
     public APIRequestGetAssignedPages requestHasWhatsappNumberField () {
       return this.requestHasWhatsappNumberField(true);
     }
@@ -6019,6 +6100,13 @@ public class User extends APINode {
       this.requestField("owner_business", value);
       return this;
     }
+    public APIRequestGetAssignedPages requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetAssignedPages requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
+      return this;
+    }
     public APIRequestGetAssignedPages requestPageTokenField () {
       return this.requestPageTokenField(true);
     }
@@ -6313,6 +6401,13 @@ public class User extends APINode {
       this.requestField("unseen_message_count", value);
       return this;
     }
+    public APIRequestGetAssignedPages requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetAssignedPages requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
+      return this;
+    }
     public APIRequestGetAssignedPages requestUsernameField () {
       return this.requestUsernameField(true);
     }
@@ -6391,6 +6486,7 @@ public class User extends APINode {
       "owner_business",
       "product_count",
       "store_catalog_settings",
+      "user_access_expire_time",
       "vertical",
     };
 
@@ -6595,6 +6691,13 @@ public class User extends APINode {
       this.requestField("store_catalog_settings", value);
       return this;
     }
+    public APIRequestGetAssignedProductCatalogs requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetAssignedProductCatalogs requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
+      return this;
+    }
     public APIRequestGetAssignedProductCatalogs requestVerticalField () {
       return this.requestVerticalField(true);
     }
@@ -6604,45 +6707,46 @@ public class User extends APINode {
     }
   }
 
-  public static class APIRequestGetAvatars extends APIRequest<APINode> {
+  public static class APIRequestGetAvatars extends APIRequest<Avatar> {
 
-    APINodeList<APINode> lastResponse = null;
+    APINodeList<Avatar> lastResponse = null;
     @Override
-    public APINodeList<APINode> getLastResponse() {
+    public APINodeList<Avatar> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
+      "id",
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
+    public APINodeList<Avatar> parseResponse(String response, String header) throws APIException {
+      return Avatar.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<APINode> execute() throws APIException {
+    public APINodeList<Avatar> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<Avatar> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<Avatar>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<Avatar>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<Avatar>>() {
+           public APINodeList<Avatar> apply(ResponseWrapper result) {
              try {
                return APIRequestGetAvatars.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -6706,6 +6810,13 @@ public class User extends APINode {
       return this;
     }
 
+    public APIRequestGetAvatars requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetAvatars requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetBusinessUsers extends APIRequest<BusinessUser> {
@@ -7062,6 +7173,7 @@ public class User extends APINode {
       "two_factor_type",
       "updated_by",
       "updated_time",
+      "user_access_expire_time",
       "verification_status",
       "vertical",
       "vertical_id",
@@ -7273,6 +7385,13 @@ public class User extends APINode {
     }
     public APIRequestGetBusinesses requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
+      return this;
+    }
+    public APIRequestGetBusinesses requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetBusinesses requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetBusinesses requestVerificationStatusField () {
@@ -7491,6 +7610,7 @@ public class User extends APINode {
     }
     public static final String[] PARAMS = {
       "folder",
+      "platform",
       "tags",
       "user_id",
     };
@@ -7570,6 +7690,15 @@ public class User extends APINode {
 
     public APIRequestGetConversations setFolder (String folder) {
       this.setParam("folder", folder);
+      return this;
+    }
+
+    public APIRequestGetConversations setPlatform (UnifiedThread.EnumPlatform platform) {
+      this.setParam("platform", platform);
+      return this;
+    }
+    public APIRequestGetConversations setPlatform (String platform) {
+      this.setParam("platform", platform);
       return this;
     }
 
@@ -8944,7 +9073,6 @@ public class User extends APINode {
       "backdated_time_granularity",
       "call_to_action",
       "caption",
-      "checkin_entry_point",
       "child_attachments",
       "client_mutation_id",
       "composer_entry_picker",
@@ -9210,15 +9338,6 @@ public class User extends APINode {
 
     public APIRequestCreateFeed setCaption (String caption) {
       this.setParam("caption", caption);
-      return this;
-    }
-
-    public APIRequestCreateFeed setCheckinEntryPoint (Post.EnumCheckinEntryPoint checkinEntryPoint) {
-      this.setParam("checkin_entry_point", checkinEntryPoint);
-      return this;
-    }
-    public APIRequestCreateFeed setCheckinEntryPoint (String checkinEntryPoint) {
-      this.setParam("checkin_entry_point", checkinEntryPoint);
       return this;
     }
 
@@ -9940,6 +10059,7 @@ public class User extends APINode {
     public static final String[] FIELDS = {
       "about",
       "age_range",
+      "avatar_2d_profile_picture",
       "birthday",
       "community",
       "cover",
@@ -9957,6 +10077,7 @@ public class User extends APINode {
       "install_type",
       "installed",
       "is_guest_user",
+      "is_work_account",
       "languages",
       "last_name",
       "link",
@@ -10099,6 +10220,13 @@ public class User extends APINode {
       this.requestField("age_range", value);
       return this;
     }
+    public APIRequestGetFriends requestAvatar2dProfilePictureField () {
+      return this.requestAvatar2dProfilePictureField(true);
+    }
+    public APIRequestGetFriends requestAvatar2dProfilePictureField (boolean value) {
+      this.requestField("avatar_2d_profile_picture", value);
+      return this;
+    }
     public APIRequestGetFriends requestBirthdayField () {
       return this.requestBirthdayField(true);
     }
@@ -10216,6 +10344,13 @@ public class User extends APINode {
     }
     public APIRequestGetFriends requestIsGuestUserField (boolean value) {
       this.requestField("is_guest_user", value);
+      return this;
+    }
+    public APIRequestGetFriends requestIsWorkAccountField () {
+      return this.requestIsWorkAccountField(true);
+    }
+    public APIRequestGetFriends requestIsWorkAccountField (boolean value) {
+      this.requestField("is_work_account", value);
       return this;
     }
     public APIRequestGetFriends requestLanguagesField () {
@@ -11893,6 +12028,7 @@ public class User extends APINode {
       "has_added_app",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
+      "has_whatsapp_enterprise_number_using_cloud_api",
       "has_whatsapp_number",
       "hometown",
       "hours",
@@ -11936,6 +12072,7 @@ public class User extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -11978,6 +12115,7 @@ public class User extends APINode {
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
+      "user_access_expire_time",
       "username",
       "verification_status",
       "voip_info",
@@ -12452,6 +12590,13 @@ public class User extends APINode {
       this.requestField("has_whatsapp_business_number", value);
       return this;
     }
+    public APIRequestGetLikes requestHasWhatsappEnterpriseNumberUsingCloudApiField () {
+      return this.requestHasWhatsappEnterpriseNumberUsingCloudApiField(true);
+    }
+    public APIRequestGetLikes requestHasWhatsappEnterpriseNumberUsingCloudApiField (boolean value) {
+      this.requestField("has_whatsapp_enterprise_number_using_cloud_api", value);
+      return this;
+    }
     public APIRequestGetLikes requestHasWhatsappNumberField () {
       return this.requestHasWhatsappNumberField(true);
     }
@@ -12753,6 +12898,13 @@ public class User extends APINode {
       this.requestField("owner_business", value);
       return this;
     }
+    public APIRequestGetLikes requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetLikes requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
+      return this;
+    }
     public APIRequestGetLikes requestPageTokenField () {
       return this.requestPageTokenField(true);
     }
@@ -13045,6 +13197,13 @@ public class User extends APINode {
     }
     public APIRequestGetLikes requestUnseenMessageCountField (boolean value) {
       this.requestField("unseen_message_count", value);
+      return this;
+    }
+    public APIRequestGetLikes requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetLikes requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetLikes requestUsernameField () {
@@ -13895,6 +14054,7 @@ public class User extends APINode {
       "has_added_app",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
+      "has_whatsapp_enterprise_number_using_cloud_api",
       "has_whatsapp_number",
       "hometown",
       "hours",
@@ -13938,6 +14098,7 @@ public class User extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -13980,6 +14141,7 @@ public class User extends APINode {
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
+      "user_access_expire_time",
       "username",
       "verification_status",
       "voip_info",
@@ -14454,6 +14616,13 @@ public class User extends APINode {
       this.requestField("has_whatsapp_business_number", value);
       return this;
     }
+    public APIRequestGetMusic requestHasWhatsappEnterpriseNumberUsingCloudApiField () {
+      return this.requestHasWhatsappEnterpriseNumberUsingCloudApiField(true);
+    }
+    public APIRequestGetMusic requestHasWhatsappEnterpriseNumberUsingCloudApiField (boolean value) {
+      this.requestField("has_whatsapp_enterprise_number_using_cloud_api", value);
+      return this;
+    }
     public APIRequestGetMusic requestHasWhatsappNumberField () {
       return this.requestHasWhatsappNumberField(true);
     }
@@ -14755,6 +14924,13 @@ public class User extends APINode {
       this.requestField("owner_business", value);
       return this;
     }
+    public APIRequestGetMusic requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetMusic requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
+      return this;
+    }
     public APIRequestGetMusic requestPageTokenField () {
       return this.requestPageTokenField(true);
     }
@@ -15047,6 +15223,13 @@ public class User extends APINode {
     }
     public APIRequestGetMusic requestUnseenMessageCountField (boolean value) {
       this.requestField("unseen_message_count", value);
+      return this;
+    }
+    public APIRequestGetMusic requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetMusic requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetMusic requestUsernameField () {
@@ -15844,6 +16027,7 @@ public class User extends APINode {
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
+      "all_capabilities",
       "amount_spent",
       "attribution_spec",
       "balance",
@@ -15903,6 +16087,7 @@ public class User extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
+      "user_access_expire_time",
       "user_tasks",
       "user_tos_accepted",
       "viewable_business",
@@ -16030,6 +16215,13 @@ public class User extends APINode {
     }
     public APIRequestGetPersonalAdAccounts requestAgencyClientDeclarationField (boolean value) {
       this.requestField("agency_client_declaration", value);
+      return this;
+    }
+    public APIRequestGetPersonalAdAccounts requestAllCapabilitiesField () {
+      return this.requestAllCapabilitiesField(true);
+    }
+    public APIRequestGetPersonalAdAccounts requestAllCapabilitiesField (boolean value) {
+      this.requestField("all_capabilities", value);
       return this;
     }
     public APIRequestGetPersonalAdAccounts requestAmountSpentField () {
@@ -16443,6 +16635,13 @@ public class User extends APINode {
     }
     public APIRequestGetPersonalAdAccounts requestTosAcceptedField (boolean value) {
       this.requestField("tos_accepted", value);
+      return this;
+    }
+    public APIRequestGetPersonalAdAccounts requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetPersonalAdAccounts requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetPersonalAdAccounts requestUserTasksField () {
@@ -18682,6 +18881,7 @@ public class User extends APINode {
       "permalink_url",
       "picture",
       "place",
+      "post_id",
       "post_views",
       "premiere_living_room_status",
       "privacy",
@@ -19016,6 +19216,13 @@ public class User extends APINode {
     }
     public APIRequestGetVideos requestPlaceField (boolean value) {
       this.requestField("place", value);
+      return this;
+    }
+    public APIRequestGetVideos requestPostIdField () {
+      return this.requestPostIdField(true);
+    }
+    public APIRequestGetVideos requestPostIdField (boolean value) {
+      this.requestField("post_id", value);
       return this;
     }
     public APIRequestGetVideos requestPostViewsField () {
@@ -19937,6 +20144,7 @@ public class User extends APINode {
     public static final String[] FIELDS = {
       "about",
       "age_range",
+      "avatar_2d_profile_picture",
       "birthday",
       "community",
       "cover",
@@ -19954,6 +20162,7 @@ public class User extends APINode {
       "install_type",
       "installed",
       "is_guest_user",
+      "is_work_account",
       "languages",
       "last_name",
       "link",
@@ -20087,6 +20296,13 @@ public class User extends APINode {
       this.requestField("age_range", value);
       return this;
     }
+    public APIRequestGet requestAvatar2dProfilePictureField () {
+      return this.requestAvatar2dProfilePictureField(true);
+    }
+    public APIRequestGet requestAvatar2dProfilePictureField (boolean value) {
+      this.requestField("avatar_2d_profile_picture", value);
+      return this;
+    }
     public APIRequestGet requestBirthdayField () {
       return this.requestBirthdayField(true);
     }
@@ -20204,6 +20420,13 @@ public class User extends APINode {
     }
     public APIRequestGet requestIsGuestUserField (boolean value) {
       this.requestField("is_guest_user", value);
+      return this;
+    }
+    public APIRequestGet requestIsWorkAccountField () {
+      return this.requestIsWorkAccountField(true);
+    }
+    public APIRequestGet requestIsWorkAccountField (boolean value) {
+      this.requestField("is_work_account", value);
       return this;
     }
     public APIRequestGet requestLanguagesField () {
@@ -20678,6 +20901,7 @@ public class User extends APINode {
   public User copyFrom(User instance) {
     this.mAbout = instance.mAbout;
     this.mAgeRange = instance.mAgeRange;
+    this.mAvatar2dProfilePicture = instance.mAvatar2dProfilePicture;
     this.mBirthday = instance.mBirthday;
     this.mCommunity = instance.mCommunity;
     this.mCover = instance.mCover;
@@ -20695,6 +20919,7 @@ public class User extends APINode {
     this.mInstallType = instance.mInstallType;
     this.mInstalled = instance.mInstalled;
     this.mIsGuestUser = instance.mIsGuestUser;
+    this.mIsWorkAccount = instance.mIsWorkAccount;
     this.mLanguages = instance.mLanguages;
     this.mLastName = instance.mLastName;
     this.mLink = instance.mLink;

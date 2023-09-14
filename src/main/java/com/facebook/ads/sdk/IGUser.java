@@ -293,6 +293,10 @@ public class IGUser extends APINode {
     return new APIRequestGetContentPublishingLimit(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetDataset getDataset() {
+    return new APIRequestGetDataset(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetInsights getInsights() {
     return new APIRequestGetInsights(this.getPrefixedId().toString(), context);
   }
@@ -752,6 +756,118 @@ public class IGUser extends APINode {
       return this;
     }
 
+  }
+
+  public static class APIRequestGetDataset extends APIRequest<Dataset> {
+
+    APINodeList<Dataset> lastResponse = null;
+    @Override
+    public APINodeList<Dataset> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "id",
+    };
+
+    @Override
+    public APINodeList<Dataset> parseResponse(String response, String header) throws APIException {
+      return Dataset.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<Dataset> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<Dataset> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<Dataset>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<Dataset>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<Dataset>>() {
+           public APINodeList<Dataset> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetDataset.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetDataset(String nodeId, APIContext context) {
+      super(context, nodeId, "/dataset", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetDataset setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDataset setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetDataset requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetDataset requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDataset requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetDataset requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDataset requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDataset requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetDataset requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetDataset requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetInsights extends APIRequest<InstagramInsightsResult> {
@@ -1475,6 +1591,7 @@ public class IGUser extends APINode {
       "audio_name",
       "caption",
       "children",
+      "collaborators",
       "cover_url",
       "image_url",
       "is_carousel_item",
@@ -1559,6 +1676,15 @@ public class IGUser extends APINode {
     }
     public APIRequestCreateMedia setChildren (String children) {
       this.setParam("children", children);
+      return this;
+    }
+
+    public APIRequestCreateMedia setCollaborators (List<String> collaborators) {
+      this.setParam("collaborators", collaborators);
+      return this;
+    }
+    public APIRequestCreateMedia setCollaborators (String collaborators) {
+      this.setParam("collaborators", collaborators);
       return this;
     }
 

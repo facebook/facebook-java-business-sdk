@@ -46,6 +46,8 @@ public class WhatsAppBusinessPreVerifiedPhoneNumber extends APINode {
   private String mCodeVerificationTime = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("owner_business")
+  private Business mOwnerBusiness = null;
   @SerializedName("phone_number")
   private String mPhoneNumber = null;
   @SerializedName("verification_expiry_time")
@@ -259,6 +261,10 @@ public class WhatsAppBusinessPreVerifiedPhoneNumber extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGetPartners getPartners() {
+    return new APIRequestGetPartners(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateRequestCode createRequestCode() {
     return new APIRequestCreateRequestCode(this.getPrefixedId().toString(), context);
   }
@@ -288,6 +294,13 @@ public class WhatsAppBusinessPreVerifiedPhoneNumber extends APINode {
     return mId;
   }
 
+  public Business getFieldOwnerBusiness() {
+    if (mOwnerBusiness != null) {
+      mOwnerBusiness.context = getContext();
+    }
+    return mOwnerBusiness;
+  }
+
   public String getFieldPhoneNumber() {
     return mPhoneNumber;
   }
@@ -297,6 +310,278 @@ public class WhatsAppBusinessPreVerifiedPhoneNumber extends APINode {
   }
 
 
+
+  public static class APIRequestGetPartners extends APIRequest<Business> {
+
+    APINodeList<Business> lastResponse = null;
+    @Override
+    public APINodeList<Business> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "block_offline_analytics",
+      "collaborative_ads_managed_partner_business_info",
+      "collaborative_ads_managed_partner_eligibility",
+      "collaborative_ads_partner_premium_options",
+      "created_by",
+      "created_time",
+      "extended_updated_time",
+      "id",
+      "is_hidden",
+      "link",
+      "name",
+      "primary_page",
+      "profile_picture_uri",
+      "timezone_id",
+      "two_factor_type",
+      "updated_by",
+      "updated_time",
+      "user_access_expire_time",
+      "verification_status",
+      "vertical",
+      "vertical_id",
+    };
+
+    @Override
+    public APINodeList<Business> parseResponse(String response, String header) throws APIException {
+      return Business.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<Business> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<Business> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<Business>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<Business>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<Business>>() {
+           public APINodeList<Business> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetPartners.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetPartners(String nodeId, APIContext context) {
+      super(context, nodeId, "/partners", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetPartners setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPartners setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetPartners requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetPartners requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPartners requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetPartners requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPartners requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPartners requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetPartners requestBlockOfflineAnalyticsField () {
+      return this.requestBlockOfflineAnalyticsField(true);
+    }
+    public APIRequestGetPartners requestBlockOfflineAnalyticsField (boolean value) {
+      this.requestField("block_offline_analytics", value);
+      return this;
+    }
+    public APIRequestGetPartners requestCollaborativeAdsManagedPartnerBusinessInfoField () {
+      return this.requestCollaborativeAdsManagedPartnerBusinessInfoField(true);
+    }
+    public APIRequestGetPartners requestCollaborativeAdsManagedPartnerBusinessInfoField (boolean value) {
+      this.requestField("collaborative_ads_managed_partner_business_info", value);
+      return this;
+    }
+    public APIRequestGetPartners requestCollaborativeAdsManagedPartnerEligibilityField () {
+      return this.requestCollaborativeAdsManagedPartnerEligibilityField(true);
+    }
+    public APIRequestGetPartners requestCollaborativeAdsManagedPartnerEligibilityField (boolean value) {
+      this.requestField("collaborative_ads_managed_partner_eligibility", value);
+      return this;
+    }
+    public APIRequestGetPartners requestCollaborativeAdsPartnerPremiumOptionsField () {
+      return this.requestCollaborativeAdsPartnerPremiumOptionsField(true);
+    }
+    public APIRequestGetPartners requestCollaborativeAdsPartnerPremiumOptionsField (boolean value) {
+      this.requestField("collaborative_ads_partner_premium_options", value);
+      return this;
+    }
+    public APIRequestGetPartners requestCreatedByField () {
+      return this.requestCreatedByField(true);
+    }
+    public APIRequestGetPartners requestCreatedByField (boolean value) {
+      this.requestField("created_by", value);
+      return this;
+    }
+    public APIRequestGetPartners requestCreatedTimeField () {
+      return this.requestCreatedTimeField(true);
+    }
+    public APIRequestGetPartners requestCreatedTimeField (boolean value) {
+      this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGetPartners requestExtendedUpdatedTimeField () {
+      return this.requestExtendedUpdatedTimeField(true);
+    }
+    public APIRequestGetPartners requestExtendedUpdatedTimeField (boolean value) {
+      this.requestField("extended_updated_time", value);
+      return this;
+    }
+    public APIRequestGetPartners requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetPartners requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetPartners requestIsHiddenField () {
+      return this.requestIsHiddenField(true);
+    }
+    public APIRequestGetPartners requestIsHiddenField (boolean value) {
+      this.requestField("is_hidden", value);
+      return this;
+    }
+    public APIRequestGetPartners requestLinkField () {
+      return this.requestLinkField(true);
+    }
+    public APIRequestGetPartners requestLinkField (boolean value) {
+      this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGetPartners requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetPartners requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetPartners requestPrimaryPageField () {
+      return this.requestPrimaryPageField(true);
+    }
+    public APIRequestGetPartners requestPrimaryPageField (boolean value) {
+      this.requestField("primary_page", value);
+      return this;
+    }
+    public APIRequestGetPartners requestProfilePictureUriField () {
+      return this.requestProfilePictureUriField(true);
+    }
+    public APIRequestGetPartners requestProfilePictureUriField (boolean value) {
+      this.requestField("profile_picture_uri", value);
+      return this;
+    }
+    public APIRequestGetPartners requestTimezoneIdField () {
+      return this.requestTimezoneIdField(true);
+    }
+    public APIRequestGetPartners requestTimezoneIdField (boolean value) {
+      this.requestField("timezone_id", value);
+      return this;
+    }
+    public APIRequestGetPartners requestTwoFactorTypeField () {
+      return this.requestTwoFactorTypeField(true);
+    }
+    public APIRequestGetPartners requestTwoFactorTypeField (boolean value) {
+      this.requestField("two_factor_type", value);
+      return this;
+    }
+    public APIRequestGetPartners requestUpdatedByField () {
+      return this.requestUpdatedByField(true);
+    }
+    public APIRequestGetPartners requestUpdatedByField (boolean value) {
+      this.requestField("updated_by", value);
+      return this;
+    }
+    public APIRequestGetPartners requestUpdatedTimeField () {
+      return this.requestUpdatedTimeField(true);
+    }
+    public APIRequestGetPartners requestUpdatedTimeField (boolean value) {
+      this.requestField("updated_time", value);
+      return this;
+    }
+    public APIRequestGetPartners requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetPartners requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
+      return this;
+    }
+    public APIRequestGetPartners requestVerificationStatusField () {
+      return this.requestVerificationStatusField(true);
+    }
+    public APIRequestGetPartners requestVerificationStatusField (boolean value) {
+      this.requestField("verification_status", value);
+      return this;
+    }
+    public APIRequestGetPartners requestVerticalField () {
+      return this.requestVerticalField(true);
+    }
+    public APIRequestGetPartners requestVerticalField (boolean value) {
+      this.requestField("vertical", value);
+      return this;
+    }
+    public APIRequestGetPartners requestVerticalIdField () {
+      return this.requestVerticalIdField(true);
+    }
+    public APIRequestGetPartners requestVerticalIdField (boolean value) {
+      this.requestField("vertical_id", value);
+      return this;
+    }
+  }
 
   public static class APIRequestCreateRequestCode extends APIRequest<APINode> {
 
@@ -375,10 +660,6 @@ public class WhatsAppBusinessPreVerifiedPhoneNumber extends APINode {
       return this;
     }
 
-    public APIRequestCreateRequestCode setLanguage (Object language) {
-      this.setParam("language", language);
-      return this;
-    }
     public APIRequestCreateRequestCode setLanguage (String language) {
       this.setParam("language", language);
       return this;
@@ -650,6 +931,7 @@ public class WhatsAppBusinessPreVerifiedPhoneNumber extends APINode {
       "code_verification_status",
       "code_verification_time",
       "id",
+      "owner_business",
       "phone_number",
       "verification_expiry_time",
     };
@@ -764,6 +1046,13 @@ public class WhatsAppBusinessPreVerifiedPhoneNumber extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGet requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
+      return this;
+    }
     public APIRequestGet requestPhoneNumberField () {
       return this.requestPhoneNumberField(true);
     }
@@ -838,6 +1127,7 @@ public class WhatsAppBusinessPreVerifiedPhoneNumber extends APINode {
     this.mCodeVerificationStatus = instance.mCodeVerificationStatus;
     this.mCodeVerificationTime = instance.mCodeVerificationTime;
     this.mId = instance.mId;
+    this.mOwnerBusiness = instance.mOwnerBusiness;
     this.mPhoneNumber = instance.mPhoneNumber;
     this.mVerificationExpiryTime = instance.mVerificationExpiryTime;
     this.context = instance.context;

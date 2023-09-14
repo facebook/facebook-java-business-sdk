@@ -995,6 +995,7 @@ public class Group extends APINode {
       "name",
       "place",
       "privacy",
+      "session_id",
       "tags",
       "visible",
     };
@@ -1113,6 +1114,11 @@ public class Group extends APINode {
 
     public APIRequestCreateAlbum setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
+      return this;
+    }
+
+    public APIRequestCreateAlbum setSessionId (String sessionId) {
+      this.setParam("session_id", sessionId);
       return this;
     }
 
@@ -2550,7 +2556,6 @@ public class Group extends APINode {
       "backdated_time_granularity",
       "call_to_action",
       "caption",
-      "checkin_entry_point",
       "child_attachments",
       "client_mutation_id",
       "composer_entry_picker",
@@ -2816,15 +2821,6 @@ public class Group extends APINode {
 
     public APIRequestCreateFeed setCaption (String caption) {
       this.setParam("caption", caption);
-      return this;
-    }
-
-    public APIRequestCreateFeed setCheckinEntryPoint (Post.EnumCheckinEntryPoint checkinEntryPoint) {
-      this.setParam("checkin_entry_point", checkinEntryPoint);
-      return this;
-    }
-    public APIRequestCreateFeed setCheckinEntryPoint (String checkinEntryPoint) {
-      this.setParam("checkin_entry_point", checkinEntryPoint);
       return this;
     }
 
@@ -3983,10 +3979,6 @@ public class Group extends APINode {
       return this;
     }
 
-    public APIRequestCreateGroup setGroupIconId (Object groupIconId) {
-      this.setParam("group_icon_id", groupIconId);
-      return this;
-    }
     public APIRequestCreateGroup setGroupIconId (String groupIconId) {
       this.setParam("group_icon_id", groupIconId);
       return this;
@@ -4015,10 +4007,6 @@ public class Group extends APINode {
       return this;
     }
 
-    public APIRequestCreateGroup setParentId (Object parentId) {
-      this.setParam("parent_id", parentId);
-      return this;
-    }
     public APIRequestCreateGroup setParentId (String parentId) {
       this.setParam("parent_id", parentId);
       return this;
@@ -4997,6 +4985,7 @@ public class Group extends APINode {
     public static final String[] FIELDS = {
       "about",
       "age_range",
+      "avatar_2d_profile_picture",
       "birthday",
       "community",
       "cover",
@@ -5014,6 +5003,7 @@ public class Group extends APINode {
       "install_type",
       "installed",
       "is_guest_user",
+      "is_work_account",
       "languages",
       "last_name",
       "link",
@@ -5147,6 +5137,13 @@ public class Group extends APINode {
       this.requestField("age_range", value);
       return this;
     }
+    public APIRequestGetOptedInMembers requestAvatar2dProfilePictureField () {
+      return this.requestAvatar2dProfilePictureField(true);
+    }
+    public APIRequestGetOptedInMembers requestAvatar2dProfilePictureField (boolean value) {
+      this.requestField("avatar_2d_profile_picture", value);
+      return this;
+    }
     public APIRequestGetOptedInMembers requestBirthdayField () {
       return this.requestBirthdayField(true);
     }
@@ -5264,6 +5261,13 @@ public class Group extends APINode {
     }
     public APIRequestGetOptedInMembers requestIsGuestUserField (boolean value) {
       this.requestField("is_guest_user", value);
+      return this;
+    }
+    public APIRequestGetOptedInMembers requestIsWorkAccountField () {
+      return this.requestIsWorkAccountField(true);
+    }
+    public APIRequestGetOptedInMembers requestIsWorkAccountField (boolean value) {
+      this.requestField("is_work_account", value);
       return this;
     }
     public APIRequestGetOptedInMembers requestLanguagesField () {
@@ -6264,6 +6268,7 @@ public class Group extends APINode {
       "permalink_url",
       "picture",
       "place",
+      "post_id",
       "post_views",
       "premiere_living_room_status",
       "privacy",
@@ -6598,6 +6603,13 @@ public class Group extends APINode {
     }
     public APIRequestGetVideos requestPlaceField (boolean value) {
       this.requestField("place", value);
+      return this;
+    }
+    public APIRequestGetVideos requestPostIdField () {
+      return this.requestPostIdField(true);
+    }
+    public APIRequestGetVideos requestPostIdField (boolean value) {
+      this.requestField("post_id", value);
       return this;
     }
     public APIRequestGetVideos requestPostViewsField () {

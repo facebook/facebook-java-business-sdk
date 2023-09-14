@@ -81,7 +81,7 @@ public class Comment extends APINode {
   @SerializedName("parent")
   private Comment mParent = null;
   @SerializedName("permalink_url")
-  private Object mPermalinkUrl = null;
+  private String mPermalinkUrl = null;
   @SerializedName("private_reply_conversation")
   private Object mPrivateReplyConversation = null;
   @SerializedName("user_likes")
@@ -421,7 +421,7 @@ public class Comment extends APINode {
     return mParent;
   }
 
-  public Object getFieldPermalinkUrl() {
+  public String getFieldPermalinkUrl() {
     return mPermalinkUrl;
   }
 

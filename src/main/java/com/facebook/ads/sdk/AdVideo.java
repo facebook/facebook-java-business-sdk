@@ -99,11 +99,13 @@ public class AdVideo extends APINode {
   @SerializedName("music_video_copyright")
   private MusicVideoCopyright mMusicVideoCopyright = null;
   @SerializedName("permalink_url")
-  private Object mPermalinkUrl = null;
+  private String mPermalinkUrl = null;
   @SerializedName("picture")
   private String mPicture = null;
   @SerializedName("place")
   private Place mPlace = null;
+  @SerializedName("post_id")
+  private String mPostId = null;
   @SerializedName("post_views")
   private Long mPostViews = null;
   @SerializedName("premiere_living_room_status")
@@ -554,7 +556,7 @@ public class AdVideo extends APINode {
     return mMusicVideoCopyright;
   }
 
-  public Object getFieldPermalinkUrl() {
+  public String getFieldPermalinkUrl() {
     return mPermalinkUrl;
   }
 
@@ -567,6 +569,10 @@ public class AdVideo extends APINode {
       mPlace.context = getContext();
     }
     return mPlace;
+  }
+
+  public String getFieldPostId() {
+    return mPostId;
   }
 
   public Long getFieldPostViews() {
@@ -1653,6 +1659,7 @@ public class AdVideo extends APINode {
       "has_added_app",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
+      "has_whatsapp_enterprise_number_using_cloud_api",
       "has_whatsapp_number",
       "hometown",
       "hours",
@@ -1696,6 +1703,7 @@ public class AdVideo extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -1738,6 +1746,7 @@ public class AdVideo extends APINode {
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
+      "user_access_expire_time",
       "username",
       "verification_status",
       "voip_info",
@@ -2207,6 +2216,13 @@ public class AdVideo extends APINode {
       this.requestField("has_whatsapp_business_number", value);
       return this;
     }
+    public APIRequestGetCrosspostSharedPages requestHasWhatsappEnterpriseNumberUsingCloudApiField () {
+      return this.requestHasWhatsappEnterpriseNumberUsingCloudApiField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestHasWhatsappEnterpriseNumberUsingCloudApiField (boolean value) {
+      this.requestField("has_whatsapp_enterprise_number_using_cloud_api", value);
+      return this;
+    }
     public APIRequestGetCrosspostSharedPages requestHasWhatsappNumberField () {
       return this.requestHasWhatsappNumberField(true);
     }
@@ -2508,6 +2524,13 @@ public class AdVideo extends APINode {
       this.requestField("owner_business", value);
       return this;
     }
+    public APIRequestGetCrosspostSharedPages requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
+      return this;
+    }
     public APIRequestGetCrosspostSharedPages requestPageTokenField () {
       return this.requestPageTokenField(true);
     }
@@ -2800,6 +2823,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestUnseenMessageCountField (boolean value) {
       this.requestField("unseen_message_count", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestUsernameField () {
@@ -3789,6 +3819,7 @@ public class AdVideo extends APINode {
       "has_added_app",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
+      "has_whatsapp_enterprise_number_using_cloud_api",
       "has_whatsapp_number",
       "hometown",
       "hours",
@@ -3832,6 +3863,7 @@ public class AdVideo extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -3874,6 +3906,7 @@ public class AdVideo extends APINode {
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
+      "user_access_expire_time",
       "username",
       "verification_status",
       "voip_info",
@@ -4343,6 +4376,13 @@ public class AdVideo extends APINode {
       this.requestField("has_whatsapp_business_number", value);
       return this;
     }
+    public APIRequestGetSponsorTags requestHasWhatsappEnterpriseNumberUsingCloudApiField () {
+      return this.requestHasWhatsappEnterpriseNumberUsingCloudApiField(true);
+    }
+    public APIRequestGetSponsorTags requestHasWhatsappEnterpriseNumberUsingCloudApiField (boolean value) {
+      this.requestField("has_whatsapp_enterprise_number_using_cloud_api", value);
+      return this;
+    }
     public APIRequestGetSponsorTags requestHasWhatsappNumberField () {
       return this.requestHasWhatsappNumberField(true);
     }
@@ -4644,6 +4684,13 @@ public class AdVideo extends APINode {
       this.requestField("owner_business", value);
       return this;
     }
+    public APIRequestGetSponsorTags requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetSponsorTags requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
+      return this;
+    }
     public APIRequestGetSponsorTags requestPageTokenField () {
       return this.requestPageTokenField(true);
     }
@@ -4936,6 +4983,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetSponsorTags requestUnseenMessageCountField (boolean value) {
       this.requestField("unseen_message_count", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetSponsorTags requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetSponsorTags requestUsernameField () {
@@ -5846,6 +5900,7 @@ public class AdVideo extends APINode {
       "permalink_url",
       "picture",
       "place",
+      "post_id",
       "post_views",
       "premiere_living_room_status",
       "privacy",
@@ -6171,6 +6226,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGet requestPlaceField (boolean value) {
       this.requestField("place", value);
+      return this;
+    }
+    public APIRequestGet requestPostIdField () {
+      return this.requestPostIdField(true);
+    }
+    public APIRequestGet requestPostIdField (boolean value) {
+      this.requestField("post_id", value);
       return this;
     }
     public APIRequestGet requestPostViewsField () {
@@ -6650,8 +6712,6 @@ public class AdVideo extends APINode {
       VALUE_BROADCAST("BROADCAST"),
       @SerializedName("BULLETIN_ARTICLE_AUDIO")
       VALUE_BULLETIN_ARTICLE_AUDIO("BULLETIN_ARTICLE_AUDIO"),
-      @SerializedName("CANDIDATE_VIDEOS_DELETED")
-      VALUE_CANDIDATE_VIDEOS_DELETED("CANDIDATE_VIDEOS_DELETED"),
       @SerializedName("CANVAS")
       VALUE_CANVAS("CANVAS"),
       @SerializedName("CFC_VIDEO")
@@ -6744,8 +6804,6 @@ public class AdVideo extends APINode {
       VALUE_HACK_TV("HACK_TV"),
       @SerializedName("HEURISTIC_CLUSTER_VIDEO")
       VALUE_HEURISTIC_CLUSTER_VIDEO("HEURISTIC_CLUSTER_VIDEO"),
-      @SerializedName("HEURISTIC_PREVIEW")
-      VALUE_HEURISTIC_PREVIEW("HEURISTIC_PREVIEW"),
       @SerializedName("HIGHLIGHT_CLIP_VIDEO")
       VALUE_HIGHLIGHT_CLIP_VIDEO("HIGHLIGHT_CLIP_VIDEO"),
       @SerializedName("HUDDLE_BROADCAST")
@@ -6776,8 +6834,6 @@ public class AdVideo extends APINode {
       VALUE_JOB_APPLICATION_VIDEO("JOB_APPLICATION_VIDEO"),
       @SerializedName("JOB_OPENING_VIDEO")
       VALUE_JOB_OPENING_VIDEO("JOB_OPENING_VIDEO"),
-      @SerializedName("KOTOTORO")
-      VALUE_KOTOTORO("KOTOTORO"),
       @SerializedName("LEARN")
       VALUE_LEARN("LEARN"),
       @SerializedName("LEGACY")
@@ -6888,6 +6944,8 @@ public class AdVideo extends APINode {
       VALUE_PROFILE_VIDEO("PROFILE_VIDEO"),
       @SerializedName("PROTON")
       VALUE_PROTON("PROTON"),
+      @SerializedName("QUICK_CLIP_WORKPLACE_POST")
+      VALUE_QUICK_CLIP_WORKPLACE_POST("QUICK_CLIP_WORKPLACE_POST"),
       @SerializedName("QUICK_PROMOTION")
       VALUE_QUICK_PROMOTION("QUICK_PROMOTION"),
       @SerializedName("REPLACE_VIDEO")
@@ -6904,8 +6962,6 @@ public class AdVideo extends APINode {
       VALUE_SLIDESHOW_SHAKR("SLIDESHOW_SHAKR"),
       @SerializedName("SLIDESHOW_VARIATION_VIDEO")
       VALUE_SLIDESHOW_VARIATION_VIDEO("SLIDESHOW_VARIATION_VIDEO"),
-      @SerializedName("SOTTO_CONTENT")
-      VALUE_SOTTO_CONTENT("SOTTO_CONTENT"),
       @SerializedName("SOUNDBITES_VIDEO")
       VALUE_SOUNDBITES_VIDEO("SOUNDBITES_VIDEO"),
       @SerializedName("SOUND_PLATFORM_STREAM")
@@ -7134,6 +7190,67 @@ public class AdVideo extends APINode {
       }
   }
 
+  public static enum EnumValidationAdPlacements {
+      @SerializedName("AUDIENCE_NETWORK_INSTREAM_VIDEO")
+      VALUE_AUDIENCE_NETWORK_INSTREAM_VIDEO("AUDIENCE_NETWORK_INSTREAM_VIDEO"),
+      @SerializedName("AUDIENCE_NETWORK_INSTREAM_VIDEO_MOBILE")
+      VALUE_AUDIENCE_NETWORK_INSTREAM_VIDEO_MOBILE("AUDIENCE_NETWORK_INSTREAM_VIDEO_MOBILE"),
+      @SerializedName("AUDIENCE_NETWORK_REWARDED_VIDEO")
+      VALUE_AUDIENCE_NETWORK_REWARDED_VIDEO("AUDIENCE_NETWORK_REWARDED_VIDEO"),
+      @SerializedName("DESKTOP_FEED_STANDARD")
+      VALUE_DESKTOP_FEED_STANDARD("DESKTOP_FEED_STANDARD"),
+      @SerializedName("FACEBOOK_STORY_MOBILE")
+      VALUE_FACEBOOK_STORY_MOBILE("FACEBOOK_STORY_MOBILE"),
+      @SerializedName("FACEBOOK_STORY_STICKER_MOBILE")
+      VALUE_FACEBOOK_STORY_STICKER_MOBILE("FACEBOOK_STORY_STICKER_MOBILE"),
+      @SerializedName("INSTAGRAM_STANDARD")
+      VALUE_INSTAGRAM_STANDARD("INSTAGRAM_STANDARD"),
+      @SerializedName("INSTAGRAM_STORY")
+      VALUE_INSTAGRAM_STORY("INSTAGRAM_STORY"),
+      @SerializedName("INSTANT_ARTICLE_STANDARD")
+      VALUE_INSTANT_ARTICLE_STANDARD("INSTANT_ARTICLE_STANDARD"),
+      @SerializedName("INSTREAM_BANNER_DESKTOP")
+      VALUE_INSTREAM_BANNER_DESKTOP("INSTREAM_BANNER_DESKTOP"),
+      @SerializedName("INSTREAM_BANNER_MOBILE")
+      VALUE_INSTREAM_BANNER_MOBILE("INSTREAM_BANNER_MOBILE"),
+      @SerializedName("INSTREAM_VIDEO_DESKTOP")
+      VALUE_INSTREAM_VIDEO_DESKTOP("INSTREAM_VIDEO_DESKTOP"),
+      @SerializedName("INSTREAM_VIDEO_IMAGE")
+      VALUE_INSTREAM_VIDEO_IMAGE("INSTREAM_VIDEO_IMAGE"),
+      @SerializedName("INSTREAM_VIDEO_MOBILE")
+      VALUE_INSTREAM_VIDEO_MOBILE("INSTREAM_VIDEO_MOBILE"),
+      @SerializedName("MESSENGER_MOBILE_INBOX_MEDIA")
+      VALUE_MESSENGER_MOBILE_INBOX_MEDIA("MESSENGER_MOBILE_INBOX_MEDIA"),
+      @SerializedName("MESSENGER_MOBILE_STORY_MEDIA")
+      VALUE_MESSENGER_MOBILE_STORY_MEDIA("MESSENGER_MOBILE_STORY_MEDIA"),
+      @SerializedName("MOBILE_FEED_STANDARD")
+      VALUE_MOBILE_FEED_STANDARD("MOBILE_FEED_STANDARD"),
+      @SerializedName("MOBILE_FULLWIDTH")
+      VALUE_MOBILE_FULLWIDTH("MOBILE_FULLWIDTH"),
+      @SerializedName("MOBILE_INTERSTITIAL")
+      VALUE_MOBILE_INTERSTITIAL("MOBILE_INTERSTITIAL"),
+      @SerializedName("MOBILE_MEDIUM_RECTANGLE")
+      VALUE_MOBILE_MEDIUM_RECTANGLE("MOBILE_MEDIUM_RECTANGLE"),
+      @SerializedName("MOBILE_NATIVE")
+      VALUE_MOBILE_NATIVE("MOBILE_NATIVE"),
+      @SerializedName("RIGHT_COLUMN_STANDARD")
+      VALUE_RIGHT_COLUMN_STANDARD("RIGHT_COLUMN_STANDARD"),
+      @SerializedName("SUGGESTED_VIDEO_MOBILE")
+      VALUE_SUGGESTED_VIDEO_MOBILE("SUGGESTED_VIDEO_MOBILE"),
+      ;
+
+      private String value;
+
+      private EnumValidationAdPlacements(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumType {
       @SerializedName("tagged")
       VALUE_TAGGED("tagged"),
@@ -7248,6 +7365,7 @@ public class AdVideo extends APINode {
     this.mPermalinkUrl = instance.mPermalinkUrl;
     this.mPicture = instance.mPicture;
     this.mPlace = instance.mPlace;
+    this.mPostId = instance.mPostId;
     this.mPostViews = instance.mPostViews;
     this.mPremiereLivingRoomStatus = instance.mPremiereLivingRoomStatus;
     this.mPrivacy = instance.mPrivacy;

@@ -73,7 +73,7 @@ public class LiveVideo extends APINode {
   @SerializedName("overlay_url")
   private String mOverlayUrl = null;
   @SerializedName("permalink_url")
-  private Object mPermalinkUrl = null;
+  private String mPermalinkUrl = null;
   @SerializedName("planned_start_time")
   private String mPlannedStartTime = null;
   @SerializedName("recommended_encoder_settings")
@@ -419,7 +419,7 @@ public class LiveVideo extends APINode {
     return mOverlayUrl;
   }
 
-  public Object getFieldPermalinkUrl() {
+  public String getFieldPermalinkUrl() {
     return mPermalinkUrl;
   }
 
@@ -482,6 +482,7 @@ public class LiveVideo extends APINode {
     public static final String[] FIELDS = {
       "about",
       "age_range",
+      "avatar_2d_profile_picture",
       "birthday",
       "community",
       "cover",
@@ -499,6 +500,7 @@ public class LiveVideo extends APINode {
       "install_type",
       "installed",
       "is_guest_user",
+      "is_work_account",
       "languages",
       "last_name",
       "link",
@@ -582,10 +584,6 @@ public class LiveVideo extends APINode {
     }
 
 
-    public APIRequestGetBlockedUsers setUid (Object uid) {
-      this.setParam("uid", uid);
-      return this;
-    }
     public APIRequestGetBlockedUsers setUid (String uid) {
       this.setParam("uid", uid);
       return this;
@@ -639,6 +637,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetBlockedUsers requestAgeRangeField (boolean value) {
       this.requestField("age_range", value);
+      return this;
+    }
+    public APIRequestGetBlockedUsers requestAvatar2dProfilePictureField () {
+      return this.requestAvatar2dProfilePictureField(true);
+    }
+    public APIRequestGetBlockedUsers requestAvatar2dProfilePictureField (boolean value) {
+      this.requestField("avatar_2d_profile_picture", value);
       return this;
     }
     public APIRequestGetBlockedUsers requestBirthdayField () {
@@ -758,6 +763,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetBlockedUsers requestIsGuestUserField (boolean value) {
       this.requestField("is_guest_user", value);
+      return this;
+    }
+    public APIRequestGetBlockedUsers requestIsWorkAccountField () {
+      return this.requestIsWorkAccountField(true);
+    }
+    public APIRequestGetBlockedUsers requestIsWorkAccountField (boolean value) {
+      this.requestField("is_work_account", value);
       return this;
     }
     public APIRequestGetBlockedUsers requestLanguagesField () {
@@ -1346,6 +1358,7 @@ public class LiveVideo extends APINode {
       "has_added_app",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
+      "has_whatsapp_enterprise_number_using_cloud_api",
       "has_whatsapp_number",
       "hometown",
       "hours",
@@ -1389,6 +1402,7 @@ public class LiveVideo extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -1431,6 +1445,7 @@ public class LiveVideo extends APINode {
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
+      "user_access_expire_time",
       "username",
       "verification_status",
       "voip_info",
@@ -1900,6 +1915,13 @@ public class LiveVideo extends APINode {
       this.requestField("has_whatsapp_business_number", value);
       return this;
     }
+    public APIRequestGetCrosspostSharedPages requestHasWhatsappEnterpriseNumberUsingCloudApiField () {
+      return this.requestHasWhatsappEnterpriseNumberUsingCloudApiField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestHasWhatsappEnterpriseNumberUsingCloudApiField (boolean value) {
+      this.requestField("has_whatsapp_enterprise_number_using_cloud_api", value);
+      return this;
+    }
     public APIRequestGetCrosspostSharedPages requestHasWhatsappNumberField () {
       return this.requestHasWhatsappNumberField(true);
     }
@@ -2201,6 +2223,13 @@ public class LiveVideo extends APINode {
       this.requestField("owner_business", value);
       return this;
     }
+    public APIRequestGetCrosspostSharedPages requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
+      return this;
+    }
     public APIRequestGetCrosspostSharedPages requestPageTokenField () {
       return this.requestPageTokenField(true);
     }
@@ -2493,6 +2522,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestUnseenMessageCountField (boolean value) {
       this.requestField("unseen_message_count", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestUsernameField () {

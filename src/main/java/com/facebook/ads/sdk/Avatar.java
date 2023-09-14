@@ -39,66 +39,64 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ShopOrder extends APINode {
-  @SerializedName("creation_time")
-  private String mCreationTime = null;
+public class Avatar extends APINode {
   @SerializedName("id")
   private String mId = null;
   protected static Gson gson = null;
 
-  ShopOrder() {
+  Avatar() {
   }
 
-  public ShopOrder(Long id, APIContext context) {
+  public Avatar(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public ShopOrder(String id, APIContext context) {
+  public Avatar(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public ShopOrder fetch() throws APIException{
-    ShopOrder newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public Avatar fetch() throws APIException{
+    Avatar newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static ShopOrder fetchById(Long id, APIContext context) throws APIException {
+  public static Avatar fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<ShopOrder> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<Avatar> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static ShopOrder fetchById(String id, APIContext context) throws APIException {
+  public static Avatar fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<ShopOrder> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<Avatar> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<ShopOrder> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<ShopOrder>)(
-      new APIRequest<ShopOrder>(context, "", "/", "GET", ShopOrder.getParser())
+  public static APINodeList<Avatar> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<Avatar>)(
+      new APIRequest<Avatar>(context, "", "/", "GET", Avatar.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<ShopOrder>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<Avatar>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", ShopOrder.getParser())
+      new APIRequest(context, "", "/", "GET", Avatar.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -111,12 +109,12 @@ public class ShopOrder extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ShopOrder loadJSON(String json, APIContext context, String header) {
-    ShopOrder shopOrder = getGson().fromJson(json, ShopOrder.class);
+  public static Avatar loadJSON(String json, APIContext context, String header) {
+    Avatar avatar = getGson().fromJson(json, Avatar.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(shopOrder.toString());
+      JsonElement o2 = parser.parse(avatar.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -126,14 +124,14 @@ public class ShopOrder extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    shopOrder.context = context;
-    shopOrder.rawValue = json;
-    shopOrder.header = header;
-    return shopOrder;
+    avatar.context = context;
+    avatar.rawValue = json;
+    avatar.header = header;
+    return avatar;
   }
 
-  public static APINodeList<ShopOrder> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ShopOrder> shopOrders = new APINodeList<ShopOrder>(request, json, header);
+  public static APINodeList<Avatar> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<Avatar> avatars = new APINodeList<Avatar>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -144,9 +142,9 @@ public class ShopOrder extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          shopOrders.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          avatars.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return shopOrders;
+        return avatars;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -156,20 +154,20 @@ public class ShopOrder extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                shopOrders.setCursors(before, after);
+                avatars.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            shopOrders.setPaging(previous, next);
+            avatars.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              shopOrders.setAppSecret(context.getAppSecretProof());
+              avatars.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              shopOrders.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              avatars.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -180,23 +178,23 @@ public class ShopOrder extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  shopOrders.add(loadJSON(entry.getValue().toString(), context, header));
+                  avatars.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              shopOrders.add(loadJSON(obj.toString(), context, header));
+              avatars.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return shopOrders;
+          return avatars;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              shopOrders.add(loadJSON(entry.getValue().toString(), context, header));
+              avatars.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return shopOrders;
+          return avatars;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -213,20 +211,20 @@ public class ShopOrder extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              shopOrders.add(loadJSON(value.toString(), context, header));
+              avatars.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return shopOrders;
+            return avatars;
           }
 
           // Sixth, check if it's pure JsonObject
-          shopOrders.clear();
-          shopOrders.add(loadJSON(json, context, header));
-          return shopOrders;
+          avatars.clear();
+          avatars.add(loadJSON(json, context, header));
+          return avatars;
         }
       }
     } catch (Exception e) {
@@ -253,14 +251,14 @@ public class ShopOrder extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGetModels getModels() {
+    return new APIRequestGetModels(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
-
-  public String getFieldCreationTime() {
-    return mCreationTime;
-  }
 
   public String getFieldId() {
     return mId;
@@ -268,47 +266,190 @@ public class ShopOrder extends APINode {
 
 
 
-  public static class APIRequestGet extends APIRequest<ShopOrder> {
+  public static class APIRequestGetModels extends APIRequest<APINode> {
 
-    ShopOrder lastResponse = null;
+    APINodeList<APINode> lastResponse = null;
     @Override
-    public ShopOrder getLastResponse() {
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "client_name",
+      "client_version",
+      "force_generate",
+      "platform",
+      "profile",
+      "sdk_version",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetModels.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetModels(String nodeId, APIContext context) {
+      super(context, nodeId, "/models", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetModels setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetModels setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetModels setClientName (String clientName) {
+      this.setParam("client_name", clientName);
+      return this;
+    }
+
+    public APIRequestGetModels setClientVersion (String clientVersion) {
+      this.setParam("client_version", clientVersion);
+      return this;
+    }
+
+    public APIRequestGetModels setForceGenerate (Boolean forceGenerate) {
+      this.setParam("force_generate", forceGenerate);
+      return this;
+    }
+    public APIRequestGetModels setForceGenerate (String forceGenerate) {
+      this.setParam("force_generate", forceGenerate);
+      return this;
+    }
+
+    public APIRequestGetModels setPlatform (String platform) {
+      this.setParam("platform", platform);
+      return this;
+    }
+
+    public APIRequestGetModels setProfile (String profile) {
+      this.setParam("profile", profile);
+      return this;
+    }
+
+    public APIRequestGetModels setSdkVersion (String sdkVersion) {
+      this.setParam("sdk_version", sdkVersion);
+      return this;
+    }
+
+    public APIRequestGetModels requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetModels requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetModels requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetModels requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetModels requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetModels requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGet extends APIRequest<Avatar> {
+
+    Avatar lastResponse = null;
+    @Override
+    public Avatar getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "creation_time",
       "id",
     };
 
     @Override
-    public ShopOrder parseResponse(String response, String header) throws APIException {
-      return ShopOrder.parseResponse(response, getContext(), this, header).head();
+    public Avatar parseResponse(String response, String header) throws APIException {
+      return Avatar.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public ShopOrder execute() throws APIException {
+    public Avatar execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public ShopOrder execute(Map<String, Object> extraParams) throws APIException {
+    public Avatar execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<ShopOrder> executeAsync() throws APIException {
+    public ListenableFuture<Avatar> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<ShopOrder> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<Avatar> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, ShopOrder>() {
-           public ShopOrder apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, Avatar>() {
+           public Avatar apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -372,13 +513,6 @@ public class ShopOrder extends APINode {
       return this;
     }
 
-    public APIRequestGet requestCreationTimeField () {
-      return this.requestCreationTimeField(true);
-    }
-    public APIRequestGet requestCreationTimeField (boolean value) {
-      this.requestField("creation_time", value);
-      return this;
-    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -402,18 +536,17 @@ public class ShopOrder extends APINode {
     return gson;
   }
 
-  public ShopOrder copyFrom(ShopOrder instance) {
-    this.mCreationTime = instance.mCreationTime;
+  public Avatar copyFrom(Avatar instance) {
     this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ShopOrder> getParser() {
-    return new APIRequest.ResponseParser<ShopOrder>() {
-      public APINodeList<ShopOrder> parseResponse(String response, APIContext context, APIRequest<ShopOrder> request, String header) throws MalformedResponseException {
-        return ShopOrder.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<Avatar> getParser() {
+    return new APIRequest.ResponseParser<Avatar>() {
+      public APINodeList<Avatar> parseResponse(String response, APIContext context, APIRequest<Avatar> request, String header) throws MalformedResponseException {
+        return Avatar.parseResponse(response, context, request, header);
       }
     };
   }

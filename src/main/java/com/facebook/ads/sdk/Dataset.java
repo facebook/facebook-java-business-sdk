@@ -39,27 +39,23 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AREffectsBatchStatus extends APINode {
-  @SerializedName("errors")
-  private List<String> mErrors = null;
-  @SerializedName("product_groups")
-  private List<Object> mProductGroups = null;
-  @SerializedName("status")
-  private String mStatus = null;
+public class Dataset extends APINode {
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public AREffectsBatchStatus() {
+  public Dataset() {
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
-  public static AREffectsBatchStatus loadJSON(String json, APIContext context, String header) {
-    AREffectsBatchStatus arEffectsBatchStatus = getGson().fromJson(json, AREffectsBatchStatus.class);
+  public static Dataset loadJSON(String json, APIContext context, String header) {
+    Dataset dataset = getGson().fromJson(json, Dataset.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(arEffectsBatchStatus.toString());
+      JsonElement o2 = parser.parse(dataset.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -69,14 +65,14 @@ public class AREffectsBatchStatus extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    arEffectsBatchStatus.context = context;
-    arEffectsBatchStatus.rawValue = json;
-    arEffectsBatchStatus.header = header;
-    return arEffectsBatchStatus;
+    dataset.context = context;
+    dataset.rawValue = json;
+    dataset.header = header;
+    return dataset;
   }
 
-  public static APINodeList<AREffectsBatchStatus> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AREffectsBatchStatus> arEffectsBatchStatuss = new APINodeList<AREffectsBatchStatus>(request, json, header);
+  public static APINodeList<Dataset> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<Dataset> datasets = new APINodeList<Dataset>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -87,9 +83,9 @@ public class AREffectsBatchStatus extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          arEffectsBatchStatuss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          datasets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return arEffectsBatchStatuss;
+        return datasets;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -99,20 +95,20 @@ public class AREffectsBatchStatus extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                arEffectsBatchStatuss.setCursors(before, after);
+                datasets.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            arEffectsBatchStatuss.setPaging(previous, next);
+            datasets.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              arEffectsBatchStatuss.setAppSecret(context.getAppSecretProof());
+              datasets.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              arEffectsBatchStatuss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              datasets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -123,23 +119,23 @@ public class AREffectsBatchStatus extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  arEffectsBatchStatuss.add(loadJSON(entry.getValue().toString(), context, header));
+                  datasets.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              arEffectsBatchStatuss.add(loadJSON(obj.toString(), context, header));
+              datasets.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return arEffectsBatchStatuss;
+          return datasets;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              arEffectsBatchStatuss.add(loadJSON(entry.getValue().toString(), context, header));
+              datasets.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return arEffectsBatchStatuss;
+          return datasets;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -156,20 +152,20 @@ public class AREffectsBatchStatus extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              arEffectsBatchStatuss.add(loadJSON(value.toString(), context, header));
+              datasets.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return arEffectsBatchStatuss;
+            return datasets;
           }
 
           // Sixth, check if it's pure JsonObject
-          arEffectsBatchStatuss.clear();
-          arEffectsBatchStatuss.add(loadJSON(json, context, header));
-          return arEffectsBatchStatuss;
+          datasets.clear();
+          datasets.add(loadJSON(json, context, header));
+          return datasets;
         }
       }
     } catch (Exception e) {
@@ -197,30 +193,12 @@ public class AREffectsBatchStatus extends APINode {
   }
 
 
-  public List<String> getFieldErrors() {
-    return mErrors;
+  public String getFieldId() {
+    return mId;
   }
 
-  public AREffectsBatchStatus setFieldErrors(List<String> value) {
-    this.mErrors = value;
-    return this;
-  }
-
-  public List<Object> getFieldProductGroups() {
-    return mProductGroups;
-  }
-
-  public AREffectsBatchStatus setFieldProductGroups(List<Object> value) {
-    this.mProductGroups = value;
-    return this;
-  }
-
-  public String getFieldStatus() {
-    return mStatus;
-  }
-
-  public AREffectsBatchStatus setFieldStatus(String value) {
-    this.mStatus = value;
+  public Dataset setFieldId(String value) {
+    this.mId = value;
     return this;
   }
 
@@ -240,19 +218,17 @@ public class AREffectsBatchStatus extends APINode {
     return gson;
   }
 
-  public AREffectsBatchStatus copyFrom(AREffectsBatchStatus instance) {
-    this.mErrors = instance.mErrors;
-    this.mProductGroups = instance.mProductGroups;
-    this.mStatus = instance.mStatus;
+  public Dataset copyFrom(Dataset instance) {
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AREffectsBatchStatus> getParser() {
-    return new APIRequest.ResponseParser<AREffectsBatchStatus>() {
-      public APINodeList<AREffectsBatchStatus> parseResponse(String response, APIContext context, APIRequest<AREffectsBatchStatus> request, String header) throws MalformedResponseException {
-        return AREffectsBatchStatus.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<Dataset> getParser() {
+    return new APIRequest.ResponseParser<Dataset>() {
+      public APINodeList<Dataset> parseResponse(String response, APIContext context, APIRequest<Dataset> request, String header) throws MalformedResponseException {
+        return Dataset.parseResponse(response, context, request, header);
       }
     };
   }

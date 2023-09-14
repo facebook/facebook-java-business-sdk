@@ -317,6 +317,10 @@ public class InstagramInsightsResult extends APINode {
       VALUE_EXITS("exits"),
       @SerializedName("follows")
       VALUE_FOLLOWS("follows"),
+      @SerializedName("ig_reels_avg_watch_time")
+      VALUE_IG_REELS_AVG_WATCH_TIME("ig_reels_avg_watch_time"),
+      @SerializedName("ig_reels_video_view_total_time")
+      VALUE_IG_REELS_VIDEO_VIEW_TOTAL_TIME("ig_reels_video_view_total_time"),
       @SerializedName("impressions")
       VALUE_IMPRESSIONS("impressions"),
       @SerializedName("likes")

@@ -102,6 +102,8 @@ public class AdsPixel extends APINode {
   private Business mOwnerBusiness = null;
   @SerializedName("usage")
   private OfflineConversionDataSetUsage mUsage = null;
+  @SerializedName("user_access_expire_time")
+  private String mUserAccessExpireTime = null;
   @SerializedName("valid_entries")
   private Long mValidEntries = null;
   protected static Gson gson = null;
@@ -519,6 +521,10 @@ public class AdsPixel extends APINode {
     return mUsage;
   }
 
+  public String getFieldUserAccessExpireTime() {
+    return mUserAccessExpireTime;
+  }
+
   public Long getFieldValidEntries() {
     return mValidEntries;
   }
@@ -542,6 +548,7 @@ public class AdsPixel extends APINode {
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
+      "all_capabilities",
       "amount_spent",
       "attribution_spec",
       "balance",
@@ -601,6 +608,7 @@ public class AdsPixel extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
+      "user_access_expire_time",
       "user_tasks",
       "user_tos_accepted",
       "viewable_business",
@@ -733,6 +741,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetAdAccounts requestAgencyClientDeclarationField (boolean value) {
       this.requestField("agency_client_declaration", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestAllCapabilitiesField () {
+      return this.requestAllCapabilitiesField(true);
+    }
+    public APIRequestGetAdAccounts requestAllCapabilitiesField (boolean value) {
+      this.requestField("all_capabilities", value);
       return this;
     }
     public APIRequestGetAdAccounts requestAmountSpentField () {
@@ -1148,6 +1163,13 @@ public class AdsPixel extends APINode {
       this.requestField("tos_accepted", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetAdAccounts requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestUserTasksField () {
       return this.requestUserTasksField(true);
     }
@@ -1199,6 +1221,7 @@ public class AdsPixel extends APINode {
       "two_factor_type",
       "updated_by",
       "updated_time",
+      "user_access_expire_time",
       "verification_status",
       "vertical",
       "vertical_id",
@@ -1410,6 +1433,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetAgencies requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
+      return this;
+    }
+    public APIRequestGetAgencies requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetAgencies requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetAgencies requestVerificationStatusField () {
@@ -2798,6 +2828,7 @@ public class AdsPixel extends APINode {
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
+      "all_capabilities",
       "amount_spent",
       "attribution_spec",
       "balance",
@@ -2857,6 +2888,7 @@ public class AdsPixel extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
+      "user_access_expire_time",
       "user_tasks",
       "user_tos_accepted",
       "viewable_business",
@@ -2989,6 +3021,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetSharedAccounts requestAgencyClientDeclarationField (boolean value) {
       this.requestField("agency_client_declaration", value);
+      return this;
+    }
+    public APIRequestGetSharedAccounts requestAllCapabilitiesField () {
+      return this.requestAllCapabilitiesField(true);
+    }
+    public APIRequestGetSharedAccounts requestAllCapabilitiesField (boolean value) {
+      this.requestField("all_capabilities", value);
       return this;
     }
     public APIRequestGetSharedAccounts requestAmountSpentField () {
@@ -3404,6 +3443,13 @@ public class AdsPixel extends APINode {
       this.requestField("tos_accepted", value);
       return this;
     }
+    public APIRequestGetSharedAccounts requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetSharedAccounts requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
+      return this;
+    }
     public APIRequestGetSharedAccounts requestUserTasksField () {
       return this.requestUserTasksField(true);
     }
@@ -3571,6 +3617,7 @@ public class AdsPixel extends APINode {
       "two_factor_type",
       "updated_by",
       "updated_time",
+      "user_access_expire_time",
       "verification_status",
       "vertical",
       "vertical_id",
@@ -3782,6 +3829,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetSharedAgencies requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
+      return this;
+    }
+    public APIRequestGetSharedAgencies requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetSharedAgencies requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetSharedAgencies requestVerificationStatusField () {
@@ -4115,6 +4169,7 @@ public class AdsPixel extends APINode {
       "owner_ad_account",
       "owner_business",
       "usage",
+      "user_access_expire_time",
       "valid_entries",
     };
 
@@ -4422,6 +4477,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGet requestUsageField (boolean value) {
       this.requestField("usage", value);
+      return this;
+    }
+    public APIRequestGet requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGet requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGet requestValidEntriesField () {
@@ -4762,6 +4824,7 @@ public class AdsPixel extends APINode {
     this.mOwnerAdAccount = instance.mOwnerAdAccount;
     this.mOwnerBusiness = instance.mOwnerBusiness;
     this.mUsage = instance.mUsage;
+    this.mUserAccessExpireTime = instance.mUserAccessExpireTime;
     this.mValidEntries = instance.mValidEntries;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

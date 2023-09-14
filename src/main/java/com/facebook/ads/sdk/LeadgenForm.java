@@ -45,7 +45,7 @@ public class LeadgenForm extends APINode {
   @SerializedName("block_display_for_non_targeted_viewer")
   private Boolean mBlockDisplayForNonTargetedViewer = null;
   @SerializedName("context_card")
-  private Object mContextCard = null;
+  private LeadGenContextCard mContextCard = null;
   @SerializedName("created_time")
   private String mCreatedTime = null;
   @SerializedName("creator")
@@ -63,7 +63,7 @@ public class LeadgenForm extends APINode {
   @SerializedName("leads_count")
   private Long mLeadsCount = null;
   @SerializedName("legal_content")
-  private Object mLegalContent = null;
+  private LeadGenLegalContent mLegalContent = null;
   @SerializedName("locale")
   private String mLocale = null;
   @SerializedName("name")
@@ -83,7 +83,7 @@ public class LeadgenForm extends APINode {
   @SerializedName("status")
   private String mStatus = null;
   @SerializedName("thank_you_page")
-  private Object mThankYouPage = null;
+  private LeadGenThankYouPage mThankYouPage = null;
   @SerializedName("tracking_parameters")
   private List<KeyValue> mTrackingParameters = null;
   protected static Gson gson = null;
@@ -324,7 +324,7 @@ public class LeadgenForm extends APINode {
     return mBlockDisplayForNonTargetedViewer;
   }
 
-  public Object getFieldContextCard() {
+  public LeadGenContextCard getFieldContextCard() {
     return mContextCard;
   }
 
@@ -363,7 +363,7 @@ public class LeadgenForm extends APINode {
     return mLeadsCount;
   }
 
-  public Object getFieldLegalContent() {
+  public LeadGenLegalContent getFieldLegalContent() {
     return mLegalContent;
   }
 
@@ -406,7 +406,7 @@ public class LeadgenForm extends APINode {
     return mStatus;
   }
 
-  public Object getFieldThankYouPage() {
+  public LeadGenThankYouPage getFieldThankYouPage() {
     return mThankYouPage;
   }
 

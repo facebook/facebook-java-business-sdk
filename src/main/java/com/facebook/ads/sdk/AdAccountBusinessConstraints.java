@@ -42,6 +42,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdAccountBusinessConstraints extends APINode {
   @SerializedName("audience_controls")
   private Object mAudienceControls = null;
+  @SerializedName("placement_controls")
+  private Object mPlacementControls = null;
   protected static Gson gson = null;
 
   public AdAccountBusinessConstraints() {
@@ -202,6 +204,15 @@ public class AdAccountBusinessConstraints extends APINode {
     return this;
   }
 
+  public Object getFieldPlacementControls() {
+    return mPlacementControls;
+  }
+
+  public AdAccountBusinessConstraints setFieldPlacementControls(Object value) {
+    this.mPlacementControls = value;
+    return this;
+  }
+
 
 
 
@@ -220,6 +231,7 @@ public class AdAccountBusinessConstraints extends APINode {
 
   public AdAccountBusinessConstraints copyFrom(AdAccountBusinessConstraints instance) {
     this.mAudienceControls = instance.mAudienceControls;
+    this.mPlacementControls = instance.mPlacementControls;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

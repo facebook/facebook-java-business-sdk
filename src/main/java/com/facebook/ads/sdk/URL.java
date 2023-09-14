@@ -529,7 +529,7 @@ public class URL extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setLocale (List<Object> locale) {
+    public APIRequestUpdate setLocale (List<String> locale) {
       this.setParam("locale", locale);
       return this;
     }

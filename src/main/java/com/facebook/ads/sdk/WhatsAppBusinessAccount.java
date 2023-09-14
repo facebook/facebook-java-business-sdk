@@ -54,6 +54,8 @@ public class WhatsAppBusinessAccount extends APINode {
   private String mCurrency = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("is_enabled_for_insights")
+  private Boolean mIsEnabledForInsights = null;
   @SerializedName("message_template_namespace")
   private String mMessageTemplateNamespace = null;
   @SerializedName("name")
@@ -307,8 +309,16 @@ public class WhatsAppBusinessAccount extends APINode {
     return new APIRequestGetExtensions(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetFlows getFlows() {
+    return new APIRequestGetFlows(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetMessageCampaigns getMessageCampaigns() {
     return new APIRequestGetMessageCampaigns(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetMessageTemplatePreviews getMessageTemplatePreviews() {
+    return new APIRequestGetMessageTemplatePreviews(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestDeleteMessageTemplates deleteMessageTemplates() {
@@ -321,6 +331,10 @@ public class WhatsAppBusinessAccount extends APINode {
 
   public APIRequestCreateMessageTemplate createMessageTemplate() {
     return new APIRequestCreateMessageTemplate(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateMigrateMessageTemplate createMigrateMessageTemplate() {
+    return new APIRequestCreateMigrateMessageTemplate(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetPhoneNumbers getPhoneNumbers() {
@@ -359,12 +373,24 @@ public class WhatsAppBusinessAccount extends APINode {
     return new APIRequestCreateSubscribedApp(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetTemplateAnalytics getTemplateAnalytics() {
+    return new APIRequestGetTemplateAnalytics(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetTemplatePerformanceMetrics getTemplatePerformanceMetrics() {
     return new APIRequestGetTemplatePerformanceMetrics(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateUpsertMessageTemplate createUpsertMessageTemplate() {
+    return new APIRequestCreateUpsertMessageTemplate(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestUpdate update() {
+    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
   }
 
 
@@ -394,6 +420,10 @@ public class WhatsAppBusinessAccount extends APINode {
 
   public String getFieldId() {
     return mId;
+  }
+
+  public Boolean getFieldIsEnabledForInsights() {
+    return mIsEnabledForInsights;
   }
 
   public String getFieldMessageTemplateNamespace() {
@@ -1233,6 +1263,110 @@ public class WhatsAppBusinessAccount extends APINode {
 
   }
 
+  public static class APIRequestGetFlows extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetFlows.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetFlows(String nodeId, APIContext context) {
+      super(context, nodeId, "/flows", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetFlows setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFlows setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetFlows requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetFlows requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFlows requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetFlows requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFlows requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFlows requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetMessageCampaigns extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -1331,6 +1465,160 @@ public class WhatsAppBusinessAccount extends APINode {
 
     @Override
     public APIRequestGetMessageCampaigns requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetMessageTemplatePreviews extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "add_security_recommendation",
+      "button_types",
+      "category",
+      "code_expiration_minutes",
+      "languages",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetMessageTemplatePreviews.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetMessageTemplatePreviews(String nodeId, APIContext context) {
+      super(context, nodeId, "/message_template_previews", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetMessageTemplatePreviews setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMessageTemplatePreviews setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetMessageTemplatePreviews setAddSecurityRecommendation (Boolean addSecurityRecommendation) {
+      this.setParam("add_security_recommendation", addSecurityRecommendation);
+      return this;
+    }
+    public APIRequestGetMessageTemplatePreviews setAddSecurityRecommendation (String addSecurityRecommendation) {
+      this.setParam("add_security_recommendation", addSecurityRecommendation);
+      return this;
+    }
+
+    public APIRequestGetMessageTemplatePreviews setButtonTypes (List<EnumButtonTypes> buttonTypes) {
+      this.setParam("button_types", buttonTypes);
+      return this;
+    }
+    public APIRequestGetMessageTemplatePreviews setButtonTypes (String buttonTypes) {
+      this.setParam("button_types", buttonTypes);
+      return this;
+    }
+
+    public APIRequestGetMessageTemplatePreviews setCategory (EnumCategory category) {
+      this.setParam("category", category);
+      return this;
+    }
+    public APIRequestGetMessageTemplatePreviews setCategory (String category) {
+      this.setParam("category", category);
+      return this;
+    }
+
+    public APIRequestGetMessageTemplatePreviews setCodeExpirationMinutes (Long codeExpirationMinutes) {
+      this.setParam("code_expiration_minutes", codeExpirationMinutes);
+      return this;
+    }
+    public APIRequestGetMessageTemplatePreviews setCodeExpirationMinutes (String codeExpirationMinutes) {
+      this.setParam("code_expiration_minutes", codeExpirationMinutes);
+      return this;
+    }
+
+    public APIRequestGetMessageTemplatePreviews setLanguages (List<String> languages) {
+      this.setParam("languages", languages);
+      return this;
+    }
+    public APIRequestGetMessageTemplatePreviews setLanguages (String languages) {
+      this.setParam("languages", languages);
+      return this;
+    }
+
+    public APIRequestGetMessageTemplatePreviews requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetMessageTemplatePreviews requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMessageTemplatePreviews requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetMessageTemplatePreviews requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMessageTemplatePreviews requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMessageTemplatePreviews requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -1628,7 +1916,9 @@ public class WhatsAppBusinessAccount extends APINode {
       "components",
       "cta_url_link_tracking_opted_out",
       "language",
+      "message_send_ttl_seconds",
       "name",
+      "sub_category",
     };
 
     public static final String[] FIELDS = {
@@ -1728,8 +2018,26 @@ public class WhatsAppBusinessAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateMessageTemplate setMessageSendTtlSeconds (Long messageSendTtlSeconds) {
+      this.setParam("message_send_ttl_seconds", messageSendTtlSeconds);
+      return this;
+    }
+    public APIRequestCreateMessageTemplate setMessageSendTtlSeconds (String messageSendTtlSeconds) {
+      this.setParam("message_send_ttl_seconds", messageSendTtlSeconds);
+      return this;
+    }
+
     public APIRequestCreateMessageTemplate setName (String name) {
       this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateMessageTemplate setSubCategory (Object subCategory) {
+      this.setParam("sub_category", subCategory);
+      return this;
+    }
+    public APIRequestCreateMessageTemplate setSubCategory (String subCategory) {
+      this.setParam("sub_category", subCategory);
       return this;
     }
 
@@ -1765,6 +2073,126 @@ public class WhatsAppBusinessAccount extends APINode {
 
     @Override
     public APIRequestCreateMessageTemplate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateMigrateMessageTemplate extends APIRequest<WhatsAppBusinessAccount> {
+
+    WhatsAppBusinessAccount lastResponse = null;
+    @Override
+    public WhatsAppBusinessAccount getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "page_number",
+      "source_waba_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public WhatsAppBusinessAccount parseResponse(String response, String header) throws APIException {
+      return WhatsAppBusinessAccount.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public WhatsAppBusinessAccount execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public WhatsAppBusinessAccount execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<WhatsAppBusinessAccount> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<WhatsAppBusinessAccount> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, WhatsAppBusinessAccount>() {
+           public WhatsAppBusinessAccount apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateMigrateMessageTemplate.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateMigrateMessageTemplate(String nodeId, APIContext context) {
+      super(context, nodeId, "/migrate_message_templates", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateMigrateMessageTemplate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMigrateMessageTemplate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateMigrateMessageTemplate setPageNumber (Long pageNumber) {
+      this.setParam("page_number", pageNumber);
+      return this;
+    }
+    public APIRequestCreateMigrateMessageTemplate setPageNumber (String pageNumber) {
+      this.setParam("page_number", pageNumber);
+      return this;
+    }
+
+    public APIRequestCreateMigrateMessageTemplate setSourceWabaId (String sourceWabaId) {
+      this.setParam("source_waba_id", sourceWabaId);
+      return this;
+    }
+
+    public APIRequestCreateMigrateMessageTemplate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateMigrateMessageTemplate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMigrateMessageTemplate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateMigrateMessageTemplate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMigrateMessageTemplate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMigrateMessageTemplate requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -1886,6 +2314,7 @@ public class WhatsAppBusinessAccount extends APINode {
       "cc",
       "migrate_phone_number",
       "phone_number",
+      "preverified_id",
       "verified_name",
     };
 
@@ -1961,6 +2390,11 @@ public class WhatsAppBusinessAccount extends APINode {
 
     public APIRequestCreatePhoneNumber setPhoneNumber (String phoneNumber) {
       this.setParam("phone_number", phoneNumber);
+      return this;
+    }
+
+    public APIRequestCreatePhoneNumber setPreverifiedId (String preverifiedId) {
+      this.setParam("preverified_id", preverifiedId);
       return this;
     }
 
@@ -2144,6 +2578,7 @@ public class WhatsAppBusinessAccount extends APINode {
       "owner_business",
       "product_count",
       "store_catalog_settings",
+      "user_access_expire_time",
       "vertical",
     };
 
@@ -2346,6 +2781,13 @@ public class WhatsAppBusinessAccount extends APINode {
     }
     public APIRequestGetProductCatalogs requestStoreCatalogSettingsField (boolean value) {
       this.requestField("store_catalog_settings", value);
+      return this;
+    }
+    public APIRequestGetProductCatalogs requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetProductCatalogs requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetProductCatalogs requestVerticalField () {
@@ -2895,6 +3337,152 @@ public class WhatsAppBusinessAccount extends APINode {
 
   }
 
+  public static class APIRequestGetTemplateAnalytics extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "end",
+      "granularity",
+      "metric_types",
+      "start",
+      "template_ids",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetTemplateAnalytics.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetTemplateAnalytics(String nodeId, APIContext context) {
+      super(context, nodeId, "/template_analytics", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetTemplateAnalytics setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetTemplateAnalytics setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetTemplateAnalytics setEnd (String end) {
+      this.setParam("end", end);
+      return this;
+    }
+
+    public APIRequestGetTemplateAnalytics setGranularity (EnumGranularity granularity) {
+      this.setParam("granularity", granularity);
+      return this;
+    }
+    public APIRequestGetTemplateAnalytics setGranularity (String granularity) {
+      this.setParam("granularity", granularity);
+      return this;
+    }
+
+    public APIRequestGetTemplateAnalytics setMetricTypes (List<EnumMetricTypes> metricTypes) {
+      this.setParam("metric_types", metricTypes);
+      return this;
+    }
+    public APIRequestGetTemplateAnalytics setMetricTypes (String metricTypes) {
+      this.setParam("metric_types", metricTypes);
+      return this;
+    }
+
+    public APIRequestGetTemplateAnalytics setStart (String start) {
+      this.setParam("start", start);
+      return this;
+    }
+
+    public APIRequestGetTemplateAnalytics setTemplateIds (List<String> templateIds) {
+      this.setParam("template_ids", templateIds);
+      return this;
+    }
+    public APIRequestGetTemplateAnalytics setTemplateIds (String templateIds) {
+      this.setParam("template_ids", templateIds);
+      return this;
+    }
+
+    public APIRequestGetTemplateAnalytics requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetTemplateAnalytics requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetTemplateAnalytics requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetTemplateAnalytics requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetTemplateAnalytics requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetTemplateAnalytics requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetTemplatePerformanceMetrics extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -3011,6 +3599,156 @@ public class WhatsAppBusinessAccount extends APINode {
 
   }
 
+  public static class APIRequestCreateUpsertMessageTemplate extends APIRequest<WhatsAppBusinessAccount> {
+
+    WhatsAppBusinessAccount lastResponse = null;
+    @Override
+    public WhatsAppBusinessAccount getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "category",
+      "components",
+      "languages",
+      "message_send_ttl_seconds",
+      "name",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public WhatsAppBusinessAccount parseResponse(String response, String header) throws APIException {
+      return WhatsAppBusinessAccount.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public WhatsAppBusinessAccount execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public WhatsAppBusinessAccount execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<WhatsAppBusinessAccount> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<WhatsAppBusinessAccount> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, WhatsAppBusinessAccount>() {
+           public WhatsAppBusinessAccount apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateUpsertMessageTemplate.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateUpsertMessageTemplate(String nodeId, APIContext context) {
+      super(context, nodeId, "/upsert_message_templates", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateUpsertMessageTemplate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUpsertMessageTemplate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateUpsertMessageTemplate setCategory (WhatsAppBusinessAccount.EnumCategory category) {
+      this.setParam("category", category);
+      return this;
+    }
+    public APIRequestCreateUpsertMessageTemplate setCategory (String category) {
+      this.setParam("category", category);
+      return this;
+    }
+
+    public APIRequestCreateUpsertMessageTemplate setComponents (List<Map<String, String>> components) {
+      this.setParam("components", components);
+      return this;
+    }
+    public APIRequestCreateUpsertMessageTemplate setComponents (String components) {
+      this.setParam("components", components);
+      return this;
+    }
+
+    public APIRequestCreateUpsertMessageTemplate setLanguages (List<String> languages) {
+      this.setParam("languages", languages);
+      return this;
+    }
+    public APIRequestCreateUpsertMessageTemplate setLanguages (String languages) {
+      this.setParam("languages", languages);
+      return this;
+    }
+
+    public APIRequestCreateUpsertMessageTemplate setMessageSendTtlSeconds (Long messageSendTtlSeconds) {
+      this.setParam("message_send_ttl_seconds", messageSendTtlSeconds);
+      return this;
+    }
+    public APIRequestCreateUpsertMessageTemplate setMessageSendTtlSeconds (String messageSendTtlSeconds) {
+      this.setParam("message_send_ttl_seconds", messageSendTtlSeconds);
+      return this;
+    }
+
+    public APIRequestCreateUpsertMessageTemplate setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateUpsertMessageTemplate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateUpsertMessageTemplate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUpsertMessageTemplate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateUpsertMessageTemplate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUpsertMessageTemplate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUpsertMessageTemplate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGet extends APIRequest<WhatsAppBusinessAccount> {
 
     WhatsAppBusinessAccount lastResponse = null;
@@ -3029,6 +3767,7 @@ public class WhatsAppBusinessAccount extends APINode {
       "creation_time",
       "currency",
       "id",
+      "is_enabled_for_insights",
       "message_template_namespace",
       "name",
       "on_behalf_of_business_info",
@@ -3179,6 +3918,13 @@ public class WhatsAppBusinessAccount extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestIsEnabledForInsightsField () {
+      return this.requestIsEnabledForInsightsField(true);
+    }
+    public APIRequestGet requestIsEnabledForInsightsField (boolean value) {
+      this.requestField("is_enabled_for_insights", value);
+      return this;
+    }
     public APIRequestGet requestMessageTemplateNamespaceField () {
       return this.requestMessageTemplateNamespaceField(true);
     }
@@ -3251,29 +3997,131 @@ public class WhatsAppBusinessAccount extends APINode {
     }
   }
 
+  public static class APIRequestUpdate extends APIRequest<WhatsAppBusinessAccount> {
+
+    WhatsAppBusinessAccount lastResponse = null;
+    @Override
+    public WhatsAppBusinessAccount getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "is_enabled_for_insights",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public WhatsAppBusinessAccount parseResponse(String response, String header) throws APIException {
+      return WhatsAppBusinessAccount.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public WhatsAppBusinessAccount execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public WhatsAppBusinessAccount execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<WhatsAppBusinessAccount> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<WhatsAppBusinessAccount> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, WhatsAppBusinessAccount>() {
+           public WhatsAppBusinessAccount apply(ResponseWrapper result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestUpdate(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestUpdate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestUpdate setIsEnabledForInsights (Boolean isEnabledForInsights) {
+      this.setParam("is_enabled_for_insights", isEnabledForInsights);
+      return this;
+    }
+    public APIRequestUpdate setIsEnabledForInsights (String isEnabledForInsights) {
+      this.setParam("is_enabled_for_insights", isEnabledForInsights);
+      return this;
+    }
+
+    public APIRequestUpdate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestUpdate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static enum EnumTasks {
       @SerializedName("DEVELOP")
       VALUE_DEVELOP("DEVELOP"),
-      @SerializedName("FULL_CONTROL")
-      VALUE_FULL_CONTROL("FULL_CONTROL"),
       @SerializedName("MANAGE")
       VALUE_MANAGE("MANAGE"),
       @SerializedName("MANAGE_EXTENSIONS")
       VALUE_MANAGE_EXTENSIONS("MANAGE_EXTENSIONS"),
       @SerializedName("MANAGE_PHONE")
       VALUE_MANAGE_PHONE("MANAGE_PHONE"),
-      @SerializedName("MANAGE_PHONE_ASSETS")
-      VALUE_MANAGE_PHONE_ASSETS("MANAGE_PHONE_ASSETS"),
-      @SerializedName("MANAGE_TEMPLATES")
-      VALUE_MANAGE_TEMPLATES("MANAGE_TEMPLATES"),
-      @SerializedName("MESSAGING")
-      VALUE_MESSAGING("MESSAGING"),
       @SerializedName("VIEW_COST")
       VALUE_VIEW_COST("VIEW_COST"),
-      @SerializedName("VIEW_PHONE_ASSETS")
-      VALUE_VIEW_PHONE_ASSETS("VIEW_PHONE_ASSETS"),
-      @SerializedName("VIEW_TEMPLATES")
-      VALUE_VIEW_TEMPLATES("VIEW_TEMPLATES"),
       ;
 
       private String value;
@@ -3314,6 +4162,8 @@ public class WhatsAppBusinessAccount extends APINode {
       VALUE_AUTHENTICATION("AUTHENTICATION"),
       @SerializedName("MARKETING")
       VALUE_MARKETING("MARKETING"),
+      @SerializedName("MARKETING_OPTIMIZED_DELIVERY")
+      VALUE_MARKETING_OPTIMIZED_DELIVERY("MARKETING_OPTIMIZED_DELIVERY"),
       @SerializedName("SERVICE")
       VALUE_SERVICE("SERVICE"),
       @SerializedName("UNKNOWN")
@@ -3447,6 +4297,23 @@ public class WhatsAppBusinessAccount extends APINode {
       }
   }
 
+  public static enum EnumButtonTypes {
+      @SerializedName("OTP")
+      VALUE_OTP("OTP"),
+      ;
+
+      private String value;
+
+      private EnumButtonTypes(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumQualityScore {
       @SerializedName("GREEN")
       VALUE_GREEN("GREEN"),
@@ -3525,6 +4392,7 @@ public class WhatsAppBusinessAccount extends APINode {
     this.mCreationTime = instance.mCreationTime;
     this.mCurrency = instance.mCurrency;
     this.mId = instance.mId;
+    this.mIsEnabledForInsights = instance.mIsEnabledForInsights;
     this.mMessageTemplateNamespace = instance.mMessageTemplateNamespace;
     this.mName = instance.mName;
     this.mOnBehalfOfBusinessInfo = instance.mOnBehalfOfBusinessInfo;

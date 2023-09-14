@@ -45,7 +45,7 @@ public class LeadGenAppointmentBookingInfo extends APINode {
   @SerializedName("appointment_durations")
   private List<String> mAppointmentDurations = null;
   @SerializedName("appointment_slots_by_day")
-  private List<Object> mAppointmentSlotsByDay = null;
+  private List<LeadGenAppointmentSlotsByDay> mAppointmentSlotsByDay = null;
   protected static Gson gson = null;
 
   public LeadGenAppointmentBookingInfo() {
@@ -215,15 +215,20 @@ public class LeadGenAppointmentBookingInfo extends APINode {
     return this;
   }
 
-  public List<Object> getFieldAppointmentSlotsByDay() {
+  public List<LeadGenAppointmentSlotsByDay> getFieldAppointmentSlotsByDay() {
     return mAppointmentSlotsByDay;
   }
 
-  public LeadGenAppointmentBookingInfo setFieldAppointmentSlotsByDay(List<Object> value) {
+  public LeadGenAppointmentBookingInfo setFieldAppointmentSlotsByDay(List<LeadGenAppointmentSlotsByDay> value) {
     this.mAppointmentSlotsByDay = value;
     return this;
   }
 
+  public LeadGenAppointmentBookingInfo setFieldAppointmentSlotsByDay(String value) {
+    Type type = new TypeToken<List<LeadGenAppointmentSlotsByDay>>(){}.getType();
+    this.mAppointmentSlotsByDay = LeadGenAppointmentSlotsByDay.getGson().fromJson(value, type);
+    return this;
+  }
 
 
 

@@ -42,6 +42,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdsActionStats extends APINode {
   @SerializedName("1d_click")
   private String m1dClick = null;
+  @SerializedName("1d_ev")
+  private String m1dEv = null;
   @SerializedName("1d_view")
   private String m1dView = null;
   @SerializedName("28d_click")
@@ -259,6 +261,15 @@ public class AdsActionStats extends APINode {
 
   public AdsActionStats setField1dClick(String value) {
     this.m1dClick = value;
+    return this;
+  }
+
+  public String getField1dEv() {
+    return m1dEv;
+  }
+
+  public AdsActionStats setField1dEv(String value) {
+    this.m1dEv = value;
     return this;
   }
 
@@ -550,6 +561,7 @@ public class AdsActionStats extends APINode {
 
   public AdsActionStats copyFrom(AdsActionStats instance) {
     this.m1dClick = instance.m1dClick;
+    this.m1dEv = instance.m1dEv;
     this.m1dView = instance.m1dView;
     this.m28dClick = instance.m28dClick;
     this.m28dView = instance.m28dView;

@@ -764,6 +764,8 @@ public class ExtendedCreditAllocationConfig extends APINode {
       VALUE_AUTH("AUTH"),
       @SerializedName("FIXED")
       VALUE_FIXED("FIXED"),
+      @SerializedName("FIXED_WITHOUT_PARTITION")
+      VALUE_FIXED_WITHOUT_PARTITION("FIXED_WITHOUT_PARTITION"),
       ;
 
       private String value;

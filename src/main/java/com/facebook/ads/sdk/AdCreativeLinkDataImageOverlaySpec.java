@@ -398,6 +398,8 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
       VALUE_STAR_RATING("star_rating"),
       @SerializedName("strikethrough_price")
       VALUE_STRIKETHROUGH_PRICE("strikethrough_price"),
+      @SerializedName("sustainable")
+      VALUE_SUSTAINABLE("sustainable"),
       ;
 
       private String value;

@@ -50,8 +50,6 @@ public class ProductItem extends APINode {
   private EnumAgeGroup mAgeGroup = null;
   @SerializedName("applinks")
   private CatalogItemAppLinks mApplinks = null;
-  @SerializedName("ar_data")
-  private ProductItemARData mArData = null;
   @SerializedName("availability")
   private EnumAvailability mAvailability = null;
   @SerializedName("brand")
@@ -152,6 +150,8 @@ public class ProductItem extends APINode {
   private ProductFeed mProductFeed = null;
   @SerializedName("product_group")
   private ProductGroup mProductGroup = null;
+  @SerializedName("product_local_info")
+  private ProductItemLocalInfo mProductLocalInfo = null;
   @SerializedName("product_type")
   private String mProductType = null;
   @SerializedName("quantity_to_sell_on_facebook")
@@ -440,10 +440,6 @@ public class ProductItem extends APINode {
     return mApplinks;
   }
 
-  public ProductItemARData getFieldArData() {
-    return mArData;
-  }
-
   public EnumAvailability getFieldAvailability() {
     return mAvailability;
   }
@@ -651,6 +647,13 @@ public class ProductItem extends APINode {
       mProductGroup.context = getContext();
     }
     return mProductGroup;
+  }
+
+  public ProductItemLocalInfo getFieldProductLocalInfo() {
+    if (mProductLocalInfo != null) {
+      mProductLocalInfo.context = getContext();
+    }
+    return mProductLocalInfo;
   }
 
   public String getFieldProductType() {
@@ -1256,7 +1259,6 @@ public class ProductItem extends APINode {
       "additional_variant_attributes",
       "age_group",
       "applinks",
-      "ar_data",
       "availability",
       "brand",
       "capability_to_review_status",
@@ -1307,6 +1309,7 @@ public class ProductItem extends APINode {
       "product_catalog",
       "product_feed",
       "product_group",
+      "product_local_info",
       "product_type",
       "quantity_to_sell_on_facebook",
       "retailer_id",
@@ -1481,13 +1484,6 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestApplinksField (boolean value) {
       this.requestField("applinks", value);
-      return this;
-    }
-    public APIRequestGet requestArDataField () {
-      return this.requestArDataField(true);
-    }
-    public APIRequestGet requestArDataField (boolean value) {
-      this.requestField("ar_data", value);
       return this;
     }
     public APIRequestGet requestAvailabilityField () {
@@ -1838,6 +1834,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestProductGroupField (boolean value) {
       this.requestField("product_group", value);
+      return this;
+    }
+    public APIRequestGet requestProductLocalInfoField () {
+      return this.requestProductLocalInfoField(true);
+    }
+    public APIRequestGet requestProductLocalInfoField (boolean value) {
+      this.requestField("product_local_info", value);
       return this;
     }
     public APIRequestGet requestProductTypeField () {
@@ -2667,6 +2670,8 @@ public class ProductItem extends APINode {
       VALUE_DISCONTINUED("discontinued"),
       @SerializedName("in stock")
       VALUE_IN_STOCK("in stock"),
+      @SerializedName("mark_as_sold")
+      VALUE_MARK_AS_SOLD("mark_as_sold"),
       @SerializedName("out of stock")
       VALUE_OUT_OF_STOCK("out of stock"),
       @SerializedName("pending")
@@ -3290,14 +3295,26 @@ public class ProductItem extends APINode {
       VALUE_CANNOT_EDIT_SUBSCRIPTION_PRODUCTS("CANNOT_EDIT_SUBSCRIPTION_PRODUCTS"),
       @SerializedName("CRAWLED_AVAILABILITY_MISMATCH")
       VALUE_CRAWLED_AVAILABILITY_MISMATCH("CRAWLED_AVAILABILITY_MISMATCH"),
+      @SerializedName("DA_DISABLED_BY_USER")
+      VALUE_DA_DISABLED_BY_USER("DA_DISABLED_BY_USER"),
+      @SerializedName("DA_POLICY_VIOLATION")
+      VALUE_DA_POLICY_VIOLATION("DA_POLICY_VIOLATION"),
       @SerializedName("DIGITAL_GOODS_NOT_AVAILABLE_FOR_CHECKOUT")
       VALUE_DIGITAL_GOODS_NOT_AVAILABLE_FOR_CHECKOUT("DIGITAL_GOODS_NOT_AVAILABLE_FOR_CHECKOUT"),
       @SerializedName("DUPLICATE_IMAGES")
       VALUE_DUPLICATE_IMAGES("DUPLICATE_IMAGES"),
       @SerializedName("DUPLICATE_TITLE_AND_DESCRIPTION")
       VALUE_DUPLICATE_TITLE_AND_DESCRIPTION("DUPLICATE_TITLE_AND_DESCRIPTION"),
+      @SerializedName("EMPTY_AVAILABILITY")
+      VALUE_EMPTY_AVAILABILITY("EMPTY_AVAILABILITY"),
+      @SerializedName("EMPTY_CONDITION")
+      VALUE_EMPTY_CONDITION("EMPTY_CONDITION"),
       @SerializedName("EMPTY_DESCRIPTION")
       VALUE_EMPTY_DESCRIPTION("EMPTY_DESCRIPTION"),
+      @SerializedName("EMPTY_PRODUCT_URL")
+      VALUE_EMPTY_PRODUCT_URL("EMPTY_PRODUCT_URL"),
+      @SerializedName("EMPTY_SELLER_DESCRIPTION")
+      VALUE_EMPTY_SELLER_DESCRIPTION("EMPTY_SELLER_DESCRIPTION"),
       @SerializedName("GENERIC_INVALID_FIELD")
       VALUE_GENERIC_INVALID_FIELD("GENERIC_INVALID_FIELD"),
       @SerializedName("HIDDEN_UNTIL_PRODUCT_LAUNCH")
@@ -3342,6 +3359,10 @@ public class ProductItem extends APINode {
       VALUE_ITEM_GROUP_NOT_SPECIFIED("ITEM_GROUP_NOT_SPECIFIED"),
       @SerializedName("ITEM_NOT_SHIPPABLE_FOR_SCA_SHOP")
       VALUE_ITEM_NOT_SHIPPABLE_FOR_SCA_SHOP("ITEM_NOT_SHIPPABLE_FOR_SCA_SHOP"),
+      @SerializedName("ITEM_OVERRIDE_EMPTY_AVAILABILITY")
+      VALUE_ITEM_OVERRIDE_EMPTY_AVAILABILITY("ITEM_OVERRIDE_EMPTY_AVAILABILITY"),
+      @SerializedName("ITEM_OVERRIDE_EMPTY_PRICE")
+      VALUE_ITEM_OVERRIDE_EMPTY_PRICE("ITEM_OVERRIDE_EMPTY_PRICE"),
       @SerializedName("ITEM_OVERRIDE_NOT_VISIBLE")
       VALUE_ITEM_OVERRIDE_NOT_VISIBLE("ITEM_OVERRIDE_NOT_VISIBLE"),
       @SerializedName("ITEM_STALE_OUT_OF_STOCK")
@@ -3392,6 +3413,8 @@ public class ProductItem extends APINode {
       VALUE_PROPERTY_PRICE_TOO_HIGH("PROPERTY_PRICE_TOO_HIGH"),
       @SerializedName("PROPERTY_PRICE_TOO_LOW")
       VALUE_PROPERTY_PRICE_TOO_LOW("PROPERTY_PRICE_TOO_LOW"),
+      @SerializedName("PROPERTY_UNIT_PRICE_CURRENCY_MISMATCH_ITEM_PRICE_CURRENCY")
+      VALUE_PROPERTY_UNIT_PRICE_CURRENCY_MISMATCH_ITEM_PRICE_CURRENCY("PROPERTY_UNIT_PRICE_CURRENCY_MISMATCH_ITEM_PRICE_CURRENCY"),
       @SerializedName("PROPERTY_VALUE_CONTAINS_HTML_TAGS")
       VALUE_PROPERTY_VALUE_CONTAINS_HTML_TAGS("PROPERTY_VALUE_CONTAINS_HTML_TAGS"),
       @SerializedName("PROPERTY_VALUE_DESCRIPTION_CONTAINS_OFF_PLATFORM_LINK")
@@ -3408,6 +3431,8 @@ public class ProductItem extends APINode {
       VALUE_PROPERTY_VALUE_STRING_EXCEEDS_LENGTH("PROPERTY_VALUE_STRING_EXCEEDS_LENGTH"),
       @SerializedName("PROPERTY_VALUE_STRING_TOO_SHORT")
       VALUE_PROPERTY_VALUE_STRING_TOO_SHORT("PROPERTY_VALUE_STRING_TOO_SHORT"),
+      @SerializedName("PROPERTY_VALUE_UPPERCASE")
+      VALUE_PROPERTY_VALUE_UPPERCASE("PROPERTY_VALUE_UPPERCASE"),
       @SerializedName("PROPERTY_VALUE_UPPERCASE_WARNING")
       VALUE_PROPERTY_VALUE_UPPERCASE_WARNING("PROPERTY_VALUE_UPPERCASE_WARNING"),
       @SerializedName("QUALITY_DUPLICATED_DESCRIPTION")
@@ -3420,6 +3445,8 @@ public class ProductItem extends APINode {
       VALUE_RETAILER_ID_NOT_PROVIDED("RETAILER_ID_NOT_PROVIDED"),
       @SerializedName("SHOPIFY_ITEM_MISSING_SHIPPING_PROFILE")
       VALUE_SHOPIFY_ITEM_MISSING_SHIPPING_PROFILE("SHOPIFY_ITEM_MISSING_SHIPPING_PROFILE"),
+      @SerializedName("SHOPS_POLICY_VIOLATION")
+      VALUE_SHOPS_POLICY_VIOLATION("SHOPS_POLICY_VIOLATION"),
       @SerializedName("SUBSCRIPTION_INFO_NOT_ENABLED_FOR_FEED")
       VALUE_SUBSCRIPTION_INFO_NOT_ENABLED_FOR_FEED("SUBSCRIPTION_INFO_NOT_ENABLED_FOR_FEED"),
       @SerializedName("TAX_CATEGORY_NOT_SUPPORTED_IN_UK")
@@ -3428,6 +3455,20 @@ public class ProductItem extends APINode {
       VALUE_UNSUPPORTED_PRODUCT_CATEGORY("UNSUPPORTED_PRODUCT_CATEGORY"),
       @SerializedName("VARIANT_ATTRIBUTE_ISSUE")
       VALUE_VARIANT_ATTRIBUTE_ISSUE("VARIANT_ATTRIBUTE_ISSUE"),
+      @SerializedName("VIDEO_FETCH_FAILED")
+      VALUE_VIDEO_FETCH_FAILED("VIDEO_FETCH_FAILED"),
+      @SerializedName("VIDEO_FETCH_FAILED_BAD_GATEWAY")
+      VALUE_VIDEO_FETCH_FAILED_BAD_GATEWAY("VIDEO_FETCH_FAILED_BAD_GATEWAY"),
+      @SerializedName("VIDEO_FETCH_FAILED_FILE_SIZE_EXCEEDED")
+      VALUE_VIDEO_FETCH_FAILED_FILE_SIZE_EXCEEDED("VIDEO_FETCH_FAILED_FILE_SIZE_EXCEEDED"),
+      @SerializedName("VIDEO_FETCH_FAILED_FORBIDDEN")
+      VALUE_VIDEO_FETCH_FAILED_FORBIDDEN("VIDEO_FETCH_FAILED_FORBIDDEN"),
+      @SerializedName("VIDEO_FETCH_FAILED_LINK_BROKEN")
+      VALUE_VIDEO_FETCH_FAILED_LINK_BROKEN("VIDEO_FETCH_FAILED_LINK_BROKEN"),
+      @SerializedName("VIDEO_FETCH_FAILED_TIMED_OUT")
+      VALUE_VIDEO_FETCH_FAILED_TIMED_OUT("VIDEO_FETCH_FAILED_TIMED_OUT"),
+      @SerializedName("VIDEO_NOT_DOWNLOADABLE")
+      VALUE_VIDEO_NOT_DOWNLOADABLE("VIDEO_NOT_DOWNLOADABLE"),
       ;
 
       private String value;
@@ -4019,7 +4060,6 @@ public class ProductItem extends APINode {
     this.mAdditionalVariantAttributes = instance.mAdditionalVariantAttributes;
     this.mAgeGroup = instance.mAgeGroup;
     this.mApplinks = instance.mApplinks;
-    this.mArData = instance.mArData;
     this.mAvailability = instance.mAvailability;
     this.mBrand = instance.mBrand;
     this.mCapabilityToReviewStatus = instance.mCapabilityToReviewStatus;
@@ -4070,6 +4110,7 @@ public class ProductItem extends APINode {
     this.mProductCatalog = instance.mProductCatalog;
     this.mProductFeed = instance.mProductFeed;
     this.mProductGroup = instance.mProductGroup;
+    this.mProductLocalInfo = instance.mProductLocalInfo;
     this.mProductType = instance.mProductType;
     this.mQuantityToSellOnFacebook = instance.mQuantityToSellOnFacebook;
     this.mRetailerId = instance.mRetailerId;
