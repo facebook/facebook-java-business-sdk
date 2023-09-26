@@ -44,8 +44,6 @@ public class CommerceMerchantSettings extends APINode {
   private String mBraintreeMerchantId = null;
   @SerializedName("checkout_message")
   private String mCheckoutMessage = null;
-  @SerializedName("commerce_store")
-  private Object mCommerceStore = null;
   @SerializedName("contact_email")
   private String mContactEmail = null;
   @SerializedName("cta")
@@ -376,10 +374,6 @@ public class CommerceMerchantSettings extends APINode {
 
   public String getFieldCheckoutMessage() {
     return mCheckoutMessage;
-  }
-
-  public Object getFieldCommerceStore() {
-    return mCommerceStore;
   }
 
   public String getFieldContactEmail() {
@@ -3616,7 +3610,6 @@ public class CommerceMerchantSettings extends APINode {
     public static final String[] FIELDS = {
       "braintree_merchant_id",
       "checkout_message",
-      "commerce_store",
       "contact_email",
       "cta",
       "disable_checkout_urls",
@@ -3743,13 +3736,6 @@ public class CommerceMerchantSettings extends APINode {
     }
     public APIRequestGet requestCheckoutMessageField (boolean value) {
       this.requestField("checkout_message", value);
-      return this;
-    }
-    public APIRequestGet requestCommerceStoreField () {
-      return this.requestCommerceStoreField(true);
-    }
-    public APIRequestGet requestCommerceStoreField (boolean value) {
-      this.requestField("commerce_store", value);
       return this;
     }
     public APIRequestGet requestContactEmailField () {
@@ -3976,7 +3962,6 @@ public class CommerceMerchantSettings extends APINode {
   public CommerceMerchantSettings copyFrom(CommerceMerchantSettings instance) {
     this.mBraintreeMerchantId = instance.mBraintreeMerchantId;
     this.mCheckoutMessage = instance.mCheckoutMessage;
-    this.mCommerceStore = instance.mCommerceStore;
     this.mContactEmail = instance.mContactEmail;
     this.mCta = instance.mCta;
     this.mDisableCheckoutUrls = instance.mDisableCheckoutUrls;

@@ -39,33 +39,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class Stories extends APINode {
-  @SerializedName("creation_time")
-  private String mCreationTime = null;
-  @SerializedName("media_id")
-  private String mMediaId = null;
-  @SerializedName("media_type")
-  private String mMediaType = null;
-  @SerializedName("post_id")
-  private String mPostId = null;
-  @SerializedName("status")
-  private String mStatus = null;
-  @SerializedName("url")
-  private String mUrl = null;
+public class InstagramShoppingMerchantReviewMessage extends APINode {
+  @SerializedName("help_url")
+  private String mHelpUrl = null;
+  @SerializedName("message")
+  private String mMessage = null;
   protected static Gson gson = null;
 
-  public Stories() {
+  public InstagramShoppingMerchantReviewMessage() {
   }
 
   public String getId() {
     return null;
   }
-  public static Stories loadJSON(String json, APIContext context, String header) {
-    Stories stories = getGson().fromJson(json, Stories.class);
+  public static InstagramShoppingMerchantReviewMessage loadJSON(String json, APIContext context, String header) {
+    InstagramShoppingMerchantReviewMessage instagramShoppingMerchantReviewMessage = getGson().fromJson(json, InstagramShoppingMerchantReviewMessage.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(stories.toString());
+      JsonElement o2 = parser.parse(instagramShoppingMerchantReviewMessage.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -75,14 +67,14 @@ public class Stories extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    stories.context = context;
-    stories.rawValue = json;
-    stories.header = header;
-    return stories;
+    instagramShoppingMerchantReviewMessage.context = context;
+    instagramShoppingMerchantReviewMessage.rawValue = json;
+    instagramShoppingMerchantReviewMessage.header = header;
+    return instagramShoppingMerchantReviewMessage;
   }
 
-  public static APINodeList<Stories> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<Stories> storiess = new APINodeList<Stories>(request, json, header);
+  public static APINodeList<InstagramShoppingMerchantReviewMessage> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<InstagramShoppingMerchantReviewMessage> instagramShoppingMerchantReviewMessages = new APINodeList<InstagramShoppingMerchantReviewMessage>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -93,9 +85,9 @@ public class Stories extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          storiess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          instagramShoppingMerchantReviewMessages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return storiess;
+        return instagramShoppingMerchantReviewMessages;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -105,20 +97,20 @@ public class Stories extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                storiess.setCursors(before, after);
+                instagramShoppingMerchantReviewMessages.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            storiess.setPaging(previous, next);
+            instagramShoppingMerchantReviewMessages.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              storiess.setAppSecret(context.getAppSecretProof());
+              instagramShoppingMerchantReviewMessages.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              storiess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              instagramShoppingMerchantReviewMessages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -129,23 +121,23 @@ public class Stories extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  storiess.add(loadJSON(entry.getValue().toString(), context, header));
+                  instagramShoppingMerchantReviewMessages.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              storiess.add(loadJSON(obj.toString(), context, header));
+              instagramShoppingMerchantReviewMessages.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return storiess;
+          return instagramShoppingMerchantReviewMessages;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              storiess.add(loadJSON(entry.getValue().toString(), context, header));
+              instagramShoppingMerchantReviewMessages.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return storiess;
+          return instagramShoppingMerchantReviewMessages;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -162,20 +154,20 @@ public class Stories extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              storiess.add(loadJSON(value.toString(), context, header));
+              instagramShoppingMerchantReviewMessages.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return storiess;
+            return instagramShoppingMerchantReviewMessages;
           }
 
           // Sixth, check if it's pure JsonObject
-          storiess.clear();
-          storiess.add(loadJSON(json, context, header));
-          return storiess;
+          instagramShoppingMerchantReviewMessages.clear();
+          instagramShoppingMerchantReviewMessages.add(loadJSON(json, context, header));
+          return instagramShoppingMerchantReviewMessages;
         }
       }
     } catch (Exception e) {
@@ -203,80 +195,25 @@ public class Stories extends APINode {
   }
 
 
-  public String getFieldCreationTime() {
-    return mCreationTime;
+  public String getFieldHelpUrl() {
+    return mHelpUrl;
   }
 
-  public Stories setFieldCreationTime(String value) {
-    this.mCreationTime = value;
+  public InstagramShoppingMerchantReviewMessage setFieldHelpUrl(String value) {
+    this.mHelpUrl = value;
     return this;
   }
 
-  public String getFieldMediaId() {
-    return mMediaId;
+  public String getFieldMessage() {
+    return mMessage;
   }
 
-  public Stories setFieldMediaId(String value) {
-    this.mMediaId = value;
-    return this;
-  }
-
-  public String getFieldMediaType() {
-    return mMediaType;
-  }
-
-  public Stories setFieldMediaType(String value) {
-    this.mMediaType = value;
-    return this;
-  }
-
-  public String getFieldPostId() {
-    return mPostId;
-  }
-
-  public Stories setFieldPostId(String value) {
-    this.mPostId = value;
-    return this;
-  }
-
-  public String getFieldStatus() {
-    return mStatus;
-  }
-
-  public Stories setFieldStatus(String value) {
-    this.mStatus = value;
-    return this;
-  }
-
-  public String getFieldUrl() {
-    return mUrl;
-  }
-
-  public Stories setFieldUrl(String value) {
-    this.mUrl = value;
+  public InstagramShoppingMerchantReviewMessage setFieldMessage(String value) {
+    this.mMessage = value;
     return this;
   }
 
 
-
-  public static enum EnumStatus {
-      @SerializedName("ARCHIVED")
-      VALUE_ARCHIVED("ARCHIVED"),
-      @SerializedName("PUBLISHED")
-      VALUE_PUBLISHED("PUBLISHED"),
-      ;
-
-      private String value;
-
-      private EnumStatus(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -292,22 +229,18 @@ public class Stories extends APINode {
     return gson;
   }
 
-  public Stories copyFrom(Stories instance) {
-    this.mCreationTime = instance.mCreationTime;
-    this.mMediaId = instance.mMediaId;
-    this.mMediaType = instance.mMediaType;
-    this.mPostId = instance.mPostId;
-    this.mStatus = instance.mStatus;
-    this.mUrl = instance.mUrl;
+  public InstagramShoppingMerchantReviewMessage copyFrom(InstagramShoppingMerchantReviewMessage instance) {
+    this.mHelpUrl = instance.mHelpUrl;
+    this.mMessage = instance.mMessage;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<Stories> getParser() {
-    return new APIRequest.ResponseParser<Stories>() {
-      public APINodeList<Stories> parseResponse(String response, APIContext context, APIRequest<Stories> request, String header) throws MalformedResponseException {
-        return Stories.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<InstagramShoppingMerchantReviewMessage> getParser() {
+    return new APIRequest.ResponseParser<InstagramShoppingMerchantReviewMessage>() {
+      public APINodeList<InstagramShoppingMerchantReviewMessage> parseResponse(String response, APIContext context, APIRequest<InstagramShoppingMerchantReviewMessage> request, String header) throws MalformedResponseException {
+        return InstagramShoppingMerchantReviewMessage.parseResponse(response, context, request, header);
       }
     };
   }

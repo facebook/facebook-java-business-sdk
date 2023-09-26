@@ -347,6 +347,18 @@ public class AdsInsights extends APINode {
   private String mLinkUrlAsset = null;
   @SerializedName("marketing_messages_btn_name")
   private String mMarketingMessagesBtnName = null;
+  @SerializedName("media_asset_url")
+  private String mMediaAssetUrl = null;
+  @SerializedName("media_creator")
+  private String mMediaCreator = null;
+  @SerializedName("media_destination_url")
+  private String mMediaDestinationUrl = null;
+  @SerializedName("media_format")
+  private String mMediaFormat = null;
+  @SerializedName("media_origin_url")
+  private String mMediaOriginUrl = null;
+  @SerializedName("media_text_content")
+  private String mMediaTextContent = null;
   @SerializedName("mmm")
   private String mMmm = null;
   @SerializedName("place_page_id")
@@ -2078,6 +2090,30 @@ public class AdsInsights extends APINode {
     return mMarketingMessagesBtnName;
   }
 
+  public String getFieldMediaAssetUrl() {
+    return mMediaAssetUrl;
+  }
+
+  public String getFieldMediaCreator() {
+    return mMediaCreator;
+  }
+
+  public String getFieldMediaDestinationUrl() {
+    return mMediaDestinationUrl;
+  }
+
+  public String getFieldMediaFormat() {
+    return mMediaFormat;
+  }
+
+  public String getFieldMediaOriginUrl() {
+    return mMediaOriginUrl;
+  }
+
+  public String getFieldMediaTextContent() {
+    return mMediaTextContent;
+  }
+
   public String getFieldMmm() {
     return mMmm;
   }
@@ -2274,6 +2310,18 @@ public class AdsInsights extends APINode {
       VALUE_LINK_URL_ASSET("link_url_asset"),
       @SerializedName("marketing_messages_btn_name")
       VALUE_MARKETING_MESSAGES_BTN_NAME("marketing_messages_btn_name"),
+      @SerializedName("media_asset_url")
+      VALUE_MEDIA_ASSET_URL("media_asset_url"),
+      @SerializedName("media_creator")
+      VALUE_MEDIA_CREATOR("media_creator"),
+      @SerializedName("media_destination_url")
+      VALUE_MEDIA_DESTINATION_URL("media_destination_url"),
+      @SerializedName("media_format")
+      VALUE_MEDIA_FORMAT("media_format"),
+      @SerializedName("media_origin_url")
+      VALUE_MEDIA_ORIGIN_URL("media_origin_url"),
+      @SerializedName("media_text_content")
+      VALUE_MEDIA_TEXT_CONTENT("media_text_content"),
       @SerializedName("mmm")
       VALUE_MMM("mmm"),
       @SerializedName("place_page_id")
@@ -2599,6 +2647,12 @@ public class AdsInsights extends APINode {
     this.mIsConversionIdModeled = instance.mIsConversionIdModeled;
     this.mLinkUrlAsset = instance.mLinkUrlAsset;
     this.mMarketingMessagesBtnName = instance.mMarketingMessagesBtnName;
+    this.mMediaAssetUrl = instance.mMediaAssetUrl;
+    this.mMediaCreator = instance.mMediaCreator;
+    this.mMediaDestinationUrl = instance.mMediaDestinationUrl;
+    this.mMediaFormat = instance.mMediaFormat;
+    this.mMediaOriginUrl = instance.mMediaOriginUrl;
+    this.mMediaTextContent = instance.mMediaTextContent;
     this.mMmm = instance.mMmm;
     this.mPlacePageId = instance.mPlacePageId;
     this.mPlatformPosition = instance.mPlatformPosition;

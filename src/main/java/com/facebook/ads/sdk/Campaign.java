@@ -56,6 +56,8 @@ public class Campaign extends APINode {
   private String mBudgetRemaining = null;
   @SerializedName("buying_type")
   private String mBuyingType = null;
+  @SerializedName("campaign_group_active_time")
+  private String mCampaignGroupActiveTime = null;
   @SerializedName("can_create_brand_lift_study")
   private Boolean mCanCreateBrandLiftStudy = null;
   @SerializedName("can_use_spend_cap")
@@ -406,6 +408,10 @@ public class Campaign extends APINode {
 
   public String getFieldBuyingType() {
     return mBuyingType;
+  }
+
+  public String getFieldCampaignGroupActiveTime() {
+    return mCampaignGroupActiveTime;
   }
 
   public Boolean getFieldCanCreateBrandLiftStudy() {
@@ -2198,6 +2204,7 @@ public class Campaign extends APINode {
       "budget_rebalance_flag",
       "budget_remaining",
       "buying_type",
+      "campaign_group_active_time",
       "can_create_brand_lift_study",
       "can_use_spend_cap",
       "configured_status",
@@ -2410,6 +2417,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetCopies requestBuyingTypeField (boolean value) {
       this.requestField("buying_type", value);
+      return this;
+    }
+    public APIRequestGetCopies requestCampaignGroupActiveTimeField () {
+      return this.requestCampaignGroupActiveTimeField(true);
+    }
+    public APIRequestGetCopies requestCampaignGroupActiveTimeField (boolean value) {
+      this.requestField("campaign_group_active_time", value);
       return this;
     }
     public APIRequestGetCopies requestCanCreateBrandLiftStudyField () {
@@ -3508,6 +3522,7 @@ public class Campaign extends APINode {
       "budget_rebalance_flag",
       "budget_remaining",
       "buying_type",
+      "campaign_group_active_time",
       "can_create_brand_lift_study",
       "can_use_spend_cap",
       "configured_status",
@@ -3720,6 +3735,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGet requestBuyingTypeField (boolean value) {
       this.requestField("buying_type", value);
+      return this;
+    }
+    public APIRequestGet requestCampaignGroupActiveTimeField () {
+      return this.requestCampaignGroupActiveTimeField(true);
+    }
+    public APIRequestGet requestCampaignGroupActiveTimeField (boolean value) {
+      this.requestField("campaign_group_active_time", value);
       return this;
     }
     public APIRequestGet requestCanCreateBrandLiftStudyField () {
@@ -5131,6 +5153,7 @@ public class Campaign extends APINode {
     this.mBudgetRebalanceFlag = instance.mBudgetRebalanceFlag;
     this.mBudgetRemaining = instance.mBudgetRemaining;
     this.mBuyingType = instance.mBuyingType;
+    this.mCampaignGroupActiveTime = instance.mCampaignGroupActiveTime;
     this.mCanCreateBrandLiftStudy = instance.mCanCreateBrandLiftStudy;
     this.mCanUseSpendCap = instance.mCanUseSpendCap;
     this.mConfiguredStatus = instance.mConfiguredStatus;

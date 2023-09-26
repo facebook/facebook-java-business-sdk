@@ -2635,6 +2635,7 @@ public class AdAccount extends APINode {
       "categorization_criteria",
       "category_media_source",
       "collaborative_ads_lsb_image_bank_id",
+      "creative_sourcing_spec",
       "degrees_of_freedom_spec",
       "destination_set_id",
       "dynamic_ad_voice",
@@ -2878,6 +2879,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdCreatives requestCollaborativeAdsLsbImageBankIdField (boolean value) {
       this.requestField("collaborative_ads_lsb_image_bank_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestCreativeSourcingSpecField () {
+      return this.requestCreativeSourcingSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestCreativeSourcingSpecField (boolean value) {
+      this.requestField("creative_sourcing_spec", value);
       return this;
     }
     public APIRequestGetAdCreatives requestDegreesOfFreedomSpecField () {
@@ -3753,6 +3761,7 @@ public class AdAccount extends APINode {
       "categorization_criteria",
       "category_media_source",
       "collaborative_ads_lsb_image_bank_id",
+      "creative_sourcing_spec",
       "degrees_of_freedom_spec",
       "destination_set_id",
       "dynamic_ad_voice",
@@ -4014,6 +4023,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdCreativesByLabels requestCollaborativeAdsLsbImageBankIdField (boolean value) {
       this.requestField("collaborative_ads_lsb_image_bank_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreativesByLabels requestCreativeSourcingSpecField () {
+      return this.requestCreativeSourcingSpecField(true);
+    }
+    public APIRequestGetAdCreativesByLabels requestCreativeSourcingSpecField (boolean value) {
+      this.requestField("creative_sourcing_spec", value);
       return this;
     }
     public APIRequestGetAdCreativesByLabels requestDegreesOfFreedomSpecField () {
@@ -11117,6 +11133,7 @@ public class AdAccount extends APINode {
       "content_category",
       "content_tags",
       "copyright",
+      "copyright_check_information",
       "copyright_monitoring_status",
       "created_time",
       "custom_labels",
@@ -11376,6 +11393,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdVideos requestCopyrightField (boolean value) {
       this.requestField("copyright", value);
+      return this;
+    }
+    public APIRequestGetAdVideos requestCopyrightCheckInformationField () {
+      return this.requestCopyrightCheckInformationField(true);
+    }
+    public APIRequestGetAdVideos requestCopyrightCheckInformationField (boolean value) {
+      this.requestField("copyright_check_information", value);
       return this;
     }
     public APIRequestGetAdVideos requestCopyrightMonitoringStatusField () {
@@ -15869,6 +15893,7 @@ public class AdAccount extends APINode {
       "budget_rebalance_flag",
       "budget_remaining",
       "buying_type",
+      "campaign_group_active_time",
       "can_create_brand_lift_study",
       "can_use_spend_cap",
       "configured_status",
@@ -16081,6 +16106,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetCampaigns requestBuyingTypeField (boolean value) {
       this.requestField("buying_type", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestCampaignGroupActiveTimeField () {
+      return this.requestCampaignGroupActiveTimeField(true);
+    }
+    public APIRequestGetCampaigns requestCampaignGroupActiveTimeField (boolean value) {
+      this.requestField("campaign_group_active_time", value);
       return this;
     }
     public APIRequestGetCampaigns requestCanCreateBrandLiftStudyField () {
@@ -16613,6 +16645,7 @@ public class AdAccount extends APINode {
       "budget_rebalance_flag",
       "budget_remaining",
       "buying_type",
+      "campaign_group_active_time",
       "can_create_brand_lift_study",
       "can_use_spend_cap",
       "configured_status",
@@ -16807,6 +16840,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetCampaignsByLabels requestBuyingTypeField (boolean value) {
       this.requestField("buying_type", value);
+      return this;
+    }
+    public APIRequestGetCampaignsByLabels requestCampaignGroupActiveTimeField () {
+      return this.requestCampaignGroupActiveTimeField(true);
+    }
+    public APIRequestGetCampaignsByLabels requestCampaignGroupActiveTimeField (boolean value) {
+      this.requestField("campaign_group_active_time", value);
       return this;
     }
     public APIRequestGetCampaignsByLabels requestCanCreateBrandLiftStudyField () {

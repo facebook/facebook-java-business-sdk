@@ -9878,7 +9878,6 @@ public class Business extends APINode {
     public static final String[] FIELDS = {
       "braintree_merchant_id",
       "checkout_message",
-      "commerce_store",
       "contact_email",
       "cta",
       "disable_checkout_urls",
@@ -10005,13 +10004,6 @@ public class Business extends APINode {
     }
     public APIRequestGetCommerceMerchantSettings requestCheckoutMessageField (boolean value) {
       this.requestField("checkout_message", value);
-      return this;
-    }
-    public APIRequestGetCommerceMerchantSettings requestCommerceStoreField () {
-      return this.requestCommerceStoreField(true);
-    }
-    public APIRequestGetCommerceMerchantSettings requestCommerceStoreField (boolean value) {
-      this.requestField("commerce_store", value);
       return this;
     }
     public APIRequestGetCommerceMerchantSettings requestContactEmailField () {

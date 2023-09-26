@@ -56,6 +56,8 @@ public class AdVideo extends APINode {
   private List<String> mContentTags = null;
   @SerializedName("copyright")
   private VideoCopyright mCopyright = null;
+  @SerializedName("copyright_check_information")
+  private Object mCopyrightCheckInformation = null;
   @SerializedName("copyright_monitoring_status")
   private String mCopyrightMonitoringStatus = null;
   @SerializedName("created_time")
@@ -464,6 +466,10 @@ public class AdVideo extends APINode {
       mCopyright.context = getContext();
     }
     return mCopyright;
+  }
+
+  public Object getFieldCopyrightCheckInformation() {
+    return mCopyrightCheckInformation;
   }
 
   public String getFieldCopyrightMonitoringStatus() {
@@ -5876,6 +5882,7 @@ public class AdVideo extends APINode {
       "content_category",
       "content_tags",
       "copyright",
+      "copyright_check_information",
       "copyright_monitoring_status",
       "created_time",
       "custom_labels",
@@ -6058,6 +6065,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGet requestCopyrightField (boolean value) {
       this.requestField("copyright", value);
+      return this;
+    }
+    public APIRequestGet requestCopyrightCheckInformationField () {
+      return this.requestCopyrightCheckInformationField(true);
+    }
+    public APIRequestGet requestCopyrightCheckInformationField (boolean value) {
+      this.requestField("copyright_check_information", value);
       return this;
     }
     public APIRequestGet requestCopyrightMonitoringStatusField () {
@@ -7341,6 +7355,7 @@ public class AdVideo extends APINode {
     this.mContentCategory = instance.mContentCategory;
     this.mContentTags = instance.mContentTags;
     this.mCopyright = instance.mCopyright;
+    this.mCopyrightCheckInformation = instance.mCopyrightCheckInformation;
     this.mCopyrightMonitoringStatus = instance.mCopyrightMonitoringStatus;
     this.mCreatedTime = instance.mCreatedTime;
     this.mCustomLabels = instance.mCustomLabels;

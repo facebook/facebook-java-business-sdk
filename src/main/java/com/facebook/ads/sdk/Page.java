@@ -1675,6 +1675,7 @@ public class Page extends APINode {
       "insight_snapshots",
       "name",
       "optimization_goal",
+      "post_variant_fields",
       "publish_status",
       "publish_time",
       "scheduled_experiment_timestamp",
@@ -1852,6 +1853,13 @@ public class Page extends APINode {
     }
     public APIRequestGetAbTests requestOptimizationGoalField (boolean value) {
       this.requestField("optimization_goal", value);
+      return this;
+    }
+    public APIRequestGetAbTests requestPostVariantFieldsField () {
+      return this.requestPostVariantFieldsField(true);
+    }
+    public APIRequestGetAbTests requestPostVariantFieldsField (boolean value) {
+      this.requestField("post_variant_fields", value);
       return this;
     }
     public APIRequestGetAbTests requestPublishStatusField () {
@@ -6229,7 +6237,6 @@ public class Page extends APINode {
     public static final String[] FIELDS = {
       "braintree_merchant_id",
       "checkout_message",
-      "commerce_store",
       "contact_email",
       "cta",
       "disable_checkout_urls",
@@ -6356,13 +6363,6 @@ public class Page extends APINode {
     }
     public APIRequestGetCommerceMerchantSettings requestCheckoutMessageField (boolean value) {
       this.requestField("checkout_message", value);
-      return this;
-    }
-    public APIRequestGetCommerceMerchantSettings requestCommerceStoreField () {
-      return this.requestCommerceStoreField(true);
-    }
-    public APIRequestGetCommerceMerchantSettings requestCommerceStoreField (boolean value) {
-      this.requestField("commerce_store", value);
       return this;
     }
     public APIRequestGetCommerceMerchantSettings requestContactEmailField () {
@@ -13783,6 +13783,7 @@ public class Page extends APINode {
       "content_category",
       "content_tags",
       "copyright",
+      "copyright_check_information",
       "copyright_monitoring_status",
       "created_time",
       "custom_labels",
@@ -13965,6 +13966,13 @@ public class Page extends APINode {
     }
     public APIRequestGetIndexedVideos requestCopyrightField (boolean value) {
       this.requestField("copyright", value);
+      return this;
+    }
+    public APIRequestGetIndexedVideos requestCopyrightCheckInformationField () {
+      return this.requestCopyrightCheckInformationField(true);
+    }
+    public APIRequestGetIndexedVideos requestCopyrightCheckInformationField (boolean value) {
+      this.requestField("copyright_check_information", value);
       return this;
     }
     public APIRequestGetIndexedVideos requestCopyrightMonitoringStatusField () {
@@ -27962,10 +27970,14 @@ public class Page extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "since",
+      "status",
+      "until",
     };
 
     public static final String[] FIELDS = {
       "creation_time",
+      "media_id",
       "media_type",
       "post_id",
       "status",
@@ -28025,6 +28037,25 @@ public class Page extends APINode {
     }
 
 
+    public APIRequestGetStories setSince (String since) {
+      this.setParam("since", since);
+      return this;
+    }
+
+    public APIRequestGetStories setStatus (List<Stories.EnumStatus> status) {
+      this.setParam("status", status);
+      return this;
+    }
+    public APIRequestGetStories setStatus (String status) {
+      this.setParam("status", status);
+      return this;
+    }
+
+    public APIRequestGetStories setUntil (String until) {
+      this.setParam("until", until);
+      return this;
+    }
+
     public APIRequestGetStories requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -28066,6 +28097,13 @@ public class Page extends APINode {
     }
     public APIRequestGetStories requestCreationTimeField (boolean value) {
       this.requestField("creation_time", value);
+      return this;
+    }
+    public APIRequestGetStories requestMediaIdField () {
+      return this.requestMediaIdField(true);
+    }
+    public APIRequestGetStories requestMediaIdField (boolean value) {
+      this.requestField("media_id", value);
       return this;
     }
     public APIRequestGetStories requestMediaTypeField () {
@@ -31317,6 +31355,7 @@ public class Page extends APINode {
       "content_category",
       "content_tags",
       "copyright",
+      "copyright_check_information",
       "copyright_monitoring_status",
       "created_time",
       "custom_labels",
@@ -31509,6 +31548,13 @@ public class Page extends APINode {
     }
     public APIRequestGetVideoReels requestCopyrightField (boolean value) {
       this.requestField("copyright", value);
+      return this;
+    }
+    public APIRequestGetVideoReels requestCopyrightCheckInformationField () {
+      return this.requestCopyrightCheckInformationField(true);
+    }
+    public APIRequestGetVideoReels requestCopyrightCheckInformationField (boolean value) {
+      this.requestField("copyright_check_information", value);
       return this;
     }
     public APIRequestGetVideoReels requestCopyrightMonitoringStatusField () {
@@ -32140,6 +32186,7 @@ public class Page extends APINode {
       "content_category",
       "content_tags",
       "copyright",
+      "copyright_check_information",
       "copyright_monitoring_status",
       "created_time",
       "custom_labels",
@@ -32331,6 +32378,13 @@ public class Page extends APINode {
     }
     public APIRequestGetVideos requestCopyrightField (boolean value) {
       this.requestField("copyright", value);
+      return this;
+    }
+    public APIRequestGetVideos requestCopyrightCheckInformationField () {
+      return this.requestCopyrightCheckInformationField(true);
+    }
+    public APIRequestGetVideos requestCopyrightCheckInformationField (boolean value) {
+      this.requestField("copyright_check_information", value);
       return this;
     }
     public APIRequestGetVideos requestCopyrightMonitoringStatusField () {

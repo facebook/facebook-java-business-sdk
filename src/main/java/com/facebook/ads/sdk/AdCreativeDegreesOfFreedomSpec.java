@@ -43,7 +43,7 @@ public class AdCreativeDegreesOfFreedomSpec extends APINode {
   @SerializedName("ad_handle_type")
   private String mAdHandleType = null;
   @SerializedName("creative_features_spec")
-  private Object mCreativeFeaturesSpec = null;
+  private AdCreativeFeaturesSpec mCreativeFeaturesSpec = null;
   @SerializedName("degrees_of_freedom_type")
   private String mDegreesOfFreedomType = null;
   @SerializedName("image_transformation_types")
@@ -216,15 +216,20 @@ public class AdCreativeDegreesOfFreedomSpec extends APINode {
     return this;
   }
 
-  public Object getFieldCreativeFeaturesSpec() {
+  public AdCreativeFeaturesSpec getFieldCreativeFeaturesSpec() {
     return mCreativeFeaturesSpec;
   }
 
-  public AdCreativeDegreesOfFreedomSpec setFieldCreativeFeaturesSpec(Object value) {
+  public AdCreativeDegreesOfFreedomSpec setFieldCreativeFeaturesSpec(AdCreativeFeaturesSpec value) {
     this.mCreativeFeaturesSpec = value;
     return this;
   }
 
+  public AdCreativeDegreesOfFreedomSpec setFieldCreativeFeaturesSpec(String value) {
+    Type type = new TypeToken<AdCreativeFeaturesSpec>(){}.getType();
+    this.mCreativeFeaturesSpec = AdCreativeFeaturesSpec.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldDegreesOfFreedomType() {
     return mDegreesOfFreedomType;
   }

@@ -182,6 +182,8 @@ public class ProductItem extends APINode {
   private String mStartDate = null;
   @SerializedName("url")
   private String mUrl = null;
+  @SerializedName("video_fetch_status")
+  private EnumVideoFetchStatus mVideoFetchStatus = null;
   @SerializedName("visibility")
   private EnumVisibility mVisibility = null;
   @SerializedName("wa_compliance_category")
@@ -716,6 +718,10 @@ public class ProductItem extends APINode {
     return mUrl;
   }
 
+  public EnumVideoFetchStatus getFieldVideoFetchStatus() {
+    return mVideoFetchStatus;
+  }
+
   public EnumVisibility getFieldVisibility() {
     return mVisibility;
   }
@@ -1030,45 +1036,49 @@ public class ProductItem extends APINode {
     }
   }
 
-  public static class APIRequestGetVideosMetadata extends APIRequest<APINode> {
+  public static class APIRequestGetVideosMetadata extends APIRequest<DynamicVideoMetadata> {
 
-    APINodeList<APINode> lastResponse = null;
+    APINodeList<DynamicVideoMetadata> lastResponse = null;
     @Override
-    public APINodeList<APINode> getLastResponse() {
+    public APINodeList<DynamicVideoMetadata> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
+      "id",
+      "tags",
+      "url",
+      "video",
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
+    public APINodeList<DynamicVideoMetadata> parseResponse(String response, String header) throws APIException {
+      return DynamicVideoMetadata.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<APINode> execute() throws APIException {
+    public APINodeList<DynamicVideoMetadata> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<DynamicVideoMetadata> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<DynamicVideoMetadata>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<DynamicVideoMetadata>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<DynamicVideoMetadata>>() {
+           public APINodeList<DynamicVideoMetadata> apply(ResponseWrapper result) {
              try {
                return APIRequestGetVideosMetadata.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -1132,6 +1142,34 @@ public class ProductItem extends APINode {
       return this;
     }
 
+    public APIRequestGetVideosMetadata requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetVideosMetadata requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetVideosMetadata requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGetVideosMetadata requestTagsField (boolean value) {
+      this.requestField("tags", value);
+      return this;
+    }
+    public APIRequestGetVideosMetadata requestUrlField () {
+      return this.requestUrlField(true);
+    }
+    public APIRequestGetVideosMetadata requestUrlField (boolean value) {
+      this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGetVideosMetadata requestVideoField () {
+      return this.requestVideoField(true);
+    }
+    public APIRequestGetVideosMetadata requestVideoField (boolean value) {
+      this.requestField("video", value);
+      return this;
+    }
   }
 
   public static class APIRequestDelete extends APIRequest<APINode> {
@@ -1325,6 +1363,7 @@ public class ProductItem extends APINode {
       "size",
       "start_date",
       "url",
+      "video_fetch_status",
       "visibility",
       "wa_compliance_category",
     };
@@ -1946,6 +1985,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestUrlField (boolean value) {
       this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGet requestVideoFetchStatusField () {
+      return this.requestVideoFetchStatusField(true);
+    }
+    public APIRequestGet requestVideoFetchStatusField (boolean value) {
+      this.requestField("video_fetch_status", value);
       return this;
     }
     public APIRequestGet requestVisibilityField () {
@@ -2808,6 +2854,33 @@ public class ProductItem extends APINode {
       private String value;
 
       private EnumShippingWeightUnit(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumVideoFetchStatus {
+      @SerializedName("DIRECT_UPLOAD")
+      VALUE_DIRECT_UPLOAD("DIRECT_UPLOAD"),
+      @SerializedName("FETCHED")
+      VALUE_FETCHED("FETCHED"),
+      @SerializedName("FETCH_FAILED")
+      VALUE_FETCH_FAILED("FETCH_FAILED"),
+      @SerializedName("NO_STATUS")
+      VALUE_NO_STATUS("NO_STATUS"),
+      @SerializedName("OUTDATED")
+      VALUE_OUTDATED("OUTDATED"),
+      @SerializedName("PARTIAL_FETCH")
+      VALUE_PARTIAL_FETCH("PARTIAL_FETCH"),
+      ;
+
+      private String value;
+
+      private EnumVideoFetchStatus(String value) {
         this.value = value;
       }
 
@@ -4126,6 +4199,7 @@ public class ProductItem extends APINode {
     this.mSize = instance.mSize;
     this.mStartDate = instance.mStartDate;
     this.mUrl = instance.mUrl;
+    this.mVideoFetchStatus = instance.mVideoFetchStatus;
     this.mVisibility = instance.mVisibility;
     this.mWaComplianceCategory = instance.mWaComplianceCategory;
     this.context = instance.context;

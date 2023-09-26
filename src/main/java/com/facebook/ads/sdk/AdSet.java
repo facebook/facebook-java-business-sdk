@@ -1579,6 +1579,7 @@ public class AdSet extends APINode {
       "categorization_criteria",
       "category_media_source",
       "collaborative_ads_lsb_image_bank_id",
+      "creative_sourcing_spec",
       "degrees_of_freedom_spec",
       "destination_set_id",
       "dynamic_ad_voice",
@@ -1822,6 +1823,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAdCreatives requestCollaborativeAdsLsbImageBankIdField (boolean value) {
       this.requestField("collaborative_ads_lsb_image_bank_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestCreativeSourcingSpecField () {
+      return this.requestCreativeSourcingSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestCreativeSourcingSpecField (boolean value) {
+      this.requestField("creative_sourcing_spec", value);
       return this;
     }
     public APIRequestGetAdCreatives requestDegreesOfFreedomSpecField () {

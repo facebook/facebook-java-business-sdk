@@ -309,8 +309,16 @@ public class WhatsAppBusinessAccount extends APINode {
     return new APIRequestGetExtensions(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateExtension createExtension() {
+    return new APIRequestCreateExtension(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetFlows getFlows() {
     return new APIRequestGetFlows(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateFlow createFlow() {
+    return new APIRequestCreateFlow(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetMessageCampaigns getMessageCampaigns() {
@@ -1263,6 +1271,134 @@ public class WhatsAppBusinessAccount extends APINode {
 
   }
 
+  public static class APIRequestCreateExtension extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "clone_extension_id",
+      "clone_template",
+      "data_channel_uri",
+      "name",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateExtension.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateExtension(String nodeId, APIContext context) {
+      super(context, nodeId, "/extensions", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateExtension setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateExtension setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateExtension setCloneExtensionId (String cloneExtensionId) {
+      this.setParam("clone_extension_id", cloneExtensionId);
+      return this;
+    }
+
+    public APIRequestCreateExtension setCloneTemplate (String cloneTemplate) {
+      this.setParam("clone_template", cloneTemplate);
+      return this;
+    }
+
+    public APIRequestCreateExtension setDataChannelUri (String dataChannelUri) {
+      this.setParam("data_channel_uri", dataChannelUri);
+      return this;
+    }
+
+    public APIRequestCreateExtension setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateExtension requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateExtension requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateExtension requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateExtension requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateExtension requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateExtension requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetFlows extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -1361,6 +1497,134 @@ public class WhatsAppBusinessAccount extends APINode {
 
     @Override
     public APIRequestGetFlows requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateFlow extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "clone_flow_id",
+      "clone_template",
+      "data_channel_uri",
+      "name",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateFlow.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateFlow(String nodeId, APIContext context) {
+      super(context, nodeId, "/flows", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateFlow setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateFlow setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateFlow setCloneFlowId (String cloneFlowId) {
+      this.setParam("clone_flow_id", cloneFlowId);
+      return this;
+    }
+
+    public APIRequestCreateFlow setCloneTemplate (String cloneTemplate) {
+      this.setParam("clone_template", cloneTemplate);
+      return this;
+    }
+
+    public APIRequestCreateFlow setDataChannelUri (String dataChannelUri) {
+      this.setParam("data_channel_uri", dataChannelUri);
+      return this;
+    }
+
+    public APIRequestCreateFlow setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateFlow requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateFlow requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateFlow requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateFlow requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateFlow requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateFlow requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -2032,7 +2296,7 @@ public class WhatsAppBusinessAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateMessageTemplate setSubCategory (Object subCategory) {
+    public APIRequestCreateMessageTemplate setSubCategory (WhatsAppBusinessAccount.EnumSubCategory subCategory) {
       this.setParam("sub_category", subCategory);
       return this;
     }
@@ -4148,6 +4412,27 @@ public class WhatsAppBusinessAccount extends APINode {
       private String value;
 
       private EnumCategory(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumSubCategory {
+      @SerializedName("CUSTOM")
+      VALUE_CUSTOM("CUSTOM"),
+      @SerializedName("ORDER_DETAILS")
+      VALUE_ORDER_DETAILS("ORDER_DETAILS"),
+      @SerializedName("ORDER_STATUS")
+      VALUE_ORDER_STATUS("ORDER_STATUS"),
+      ;
+
+      private String value;
+
+      private EnumSubCategory(String value) {
         this.value = value;
       }
 

@@ -70,6 +70,8 @@ public class AdCreative extends APINode {
   private String mCategoryMediaSource = null;
   @SerializedName("collaborative_ads_lsb_image_bank_id")
   private String mCollaborativeAdsLsbImageBankId = null;
+  @SerializedName("creative_sourcing_spec")
+  private AdCreativeSourcingSpec mCreativeSourcingSpec = null;
   @SerializedName("degrees_of_freedom_spec")
   private AdCreativeDegreesOfFreedomSpec mDegreesOfFreedomSpec = null;
   @SerializedName("destination_set_id")
@@ -557,6 +559,20 @@ public class AdCreative extends APINode {
     return this;
   }
 
+  public AdCreativeSourcingSpec getFieldCreativeSourcingSpec() {
+    return mCreativeSourcingSpec;
+  }
+
+  public AdCreative setFieldCreativeSourcingSpec(AdCreativeSourcingSpec value) {
+    this.mCreativeSourcingSpec = value;
+    return this;
+  }
+
+  public AdCreative setFieldCreativeSourcingSpec(String value) {
+    Type type = new TypeToken<AdCreativeSourcingSpec>(){}.getType();
+    this.mCreativeSourcingSpec = AdCreativeSourcingSpec.getGson().fromJson(value, type);
+    return this;
+  }
   public AdCreativeDegreesOfFreedomSpec getFieldDegreesOfFreedomSpec() {
     return mDegreesOfFreedomSpec;
   }
@@ -1690,6 +1706,7 @@ public class AdCreative extends APINode {
       "categorization_criteria",
       "category_media_source",
       "collaborative_ads_lsb_image_bank_id",
+      "creative_sourcing_spec",
       "degrees_of_freedom_spec",
       "destination_set_id",
       "dynamic_ad_voice",
@@ -1951,6 +1968,13 @@ public class AdCreative extends APINode {
     }
     public APIRequestGet requestCollaborativeAdsLsbImageBankIdField (boolean value) {
       this.requestField("collaborative_ads_lsb_image_bank_id", value);
+      return this;
+    }
+    public APIRequestGet requestCreativeSourcingSpecField () {
+      return this.requestCreativeSourcingSpecField(true);
+    }
+    public APIRequestGet requestCreativeSourcingSpecField (boolean value) {
+      this.requestField("creative_sourcing_spec", value);
       return this;
     }
     public APIRequestGet requestDegreesOfFreedomSpecField () {
@@ -2817,6 +2841,7 @@ public class AdCreative extends APINode {
     this.mCategorizationCriteria = instance.mCategorizationCriteria;
     this.mCategoryMediaSource = instance.mCategoryMediaSource;
     this.mCollaborativeAdsLsbImageBankId = instance.mCollaborativeAdsLsbImageBankId;
+    this.mCreativeSourcingSpec = instance.mCreativeSourcingSpec;
     this.mDegreesOfFreedomSpec = instance.mDegreesOfFreedomSpec;
     this.mDestinationSetId = instance.mDestinationSetId;
     this.mDynamicAdVoice = instance.mDynamicAdVoice;

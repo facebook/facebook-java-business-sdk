@@ -41,7 +41,7 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  */
 public class IGComment extends APINode {
   @SerializedName("from")
-  private Object mFrom = null;
+  private IGCommentFromUser mFrom = null;
   @SerializedName("hidden")
   private Boolean mHidden = null;
   @SerializedName("id")
@@ -290,7 +290,7 @@ public class IGComment extends APINode {
   }
 
 
-  public Object getFieldFrom() {
+  public IGCommentFromUser getFieldFrom() {
     return mFrom;
   }
 

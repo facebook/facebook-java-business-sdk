@@ -583,6 +583,10 @@ public class Application extends APINode {
     return new APIRequestGetEvents(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetIapPurchases getIapPurchases() {
+    return new APIRequestGetIapPurchases(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetInsightsPushSchedule getInsightsPushSchedule() {
     return new APIRequestGetInsightsPushSchedule(this.getPrefixedId().toString(), context);
   }
@@ -613,6 +617,10 @@ public class Application extends APINode {
 
   public APIRequestGetObjectTypes getObjectTypes() {
     return new APIRequestGetObjectTypes(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetObjects getObjects() {
+    return new APIRequestGetObjects(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateOccludesPopup createOccludesPopup() {
@@ -7102,6 +7110,116 @@ public class Application extends APINode {
     }
   }
 
+  public static class APIRequestGetIapPurchases extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "order_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetIapPurchases.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetIapPurchases(String nodeId, APIContext context) {
+      super(context, nodeId, "/iap_purchases", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetIapPurchases setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetIapPurchases setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetIapPurchases setOrderId (String orderId) {
+      this.setParam("order_id", orderId);
+      return this;
+    }
+
+    public APIRequestGetIapPurchases requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetIapPurchases requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetIapPurchases requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetIapPurchases requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetIapPurchases requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetIapPurchases requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetInsightsPushSchedule extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -8104,6 +8222,110 @@ public class Application extends APINode {
 
     @Override
     public APIRequestGetObjectTypes requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetObjects extends APIRequest<NullNode> {
+
+    APINodeList<NullNode> lastResponse = null;
+    @Override
+    public APINodeList<NullNode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<NullNode> parseResponse(String response, String header) throws APIException {
+      return NullNode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<NullNode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<NullNode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<NullNode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<NullNode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<NullNode>>() {
+           public APINodeList<NullNode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetObjects.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetObjects(String nodeId, APIContext context) {
+      super(context, nodeId, "/objects", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetObjects setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetObjects setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetObjects requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetObjects requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetObjects requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetObjects requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetObjects requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetObjects requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

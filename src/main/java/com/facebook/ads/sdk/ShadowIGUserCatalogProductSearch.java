@@ -39,33 +39,37 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class Stories extends APINode {
-  @SerializedName("creation_time")
-  private String mCreationTime = null;
-  @SerializedName("media_id")
-  private String mMediaId = null;
-  @SerializedName("media_type")
-  private String mMediaType = null;
-  @SerializedName("post_id")
-  private String mPostId = null;
-  @SerializedName("status")
-  private String mStatus = null;
-  @SerializedName("url")
-  private String mUrl = null;
+public class ShadowIGUserCatalogProductSearch extends APINode {
+  @SerializedName("image_url")
+  private String mImageUrl = null;
+  @SerializedName("is_checkout_flow")
+  private Boolean mIsCheckoutFlow = null;
+  @SerializedName("merchant_id")
+  private Long mMerchantId = null;
+  @SerializedName("product_id")
+  private Long mProductId = null;
+  @SerializedName("product_name")
+  private String mProductName = null;
+  @SerializedName("product_variants")
+  private List<ShadowIGUserCatalogProductVariant> mProductVariants = null;
+  @SerializedName("retailer_id")
+  private String mRetailerId = null;
+  @SerializedName("review_status")
+  private String mReviewStatus = null;
   protected static Gson gson = null;
 
-  public Stories() {
+  public ShadowIGUserCatalogProductSearch() {
   }
 
   public String getId() {
     return null;
   }
-  public static Stories loadJSON(String json, APIContext context, String header) {
-    Stories stories = getGson().fromJson(json, Stories.class);
+  public static ShadowIGUserCatalogProductSearch loadJSON(String json, APIContext context, String header) {
+    ShadowIGUserCatalogProductSearch shadowIGUserCatalogProductSearch = getGson().fromJson(json, ShadowIGUserCatalogProductSearch.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(stories.toString());
+      JsonElement o2 = parser.parse(shadowIGUserCatalogProductSearch.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -75,14 +79,14 @@ public class Stories extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    stories.context = context;
-    stories.rawValue = json;
-    stories.header = header;
-    return stories;
+    shadowIGUserCatalogProductSearch.context = context;
+    shadowIGUserCatalogProductSearch.rawValue = json;
+    shadowIGUserCatalogProductSearch.header = header;
+    return shadowIGUserCatalogProductSearch;
   }
 
-  public static APINodeList<Stories> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<Stories> storiess = new APINodeList<Stories>(request, json, header);
+  public static APINodeList<ShadowIGUserCatalogProductSearch> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ShadowIGUserCatalogProductSearch> shadowIGUserCatalogProductSearchs = new APINodeList<ShadowIGUserCatalogProductSearch>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -93,9 +97,9 @@ public class Stories extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          storiess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          shadowIGUserCatalogProductSearchs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return storiess;
+        return shadowIGUserCatalogProductSearchs;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -105,20 +109,20 @@ public class Stories extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                storiess.setCursors(before, after);
+                shadowIGUserCatalogProductSearchs.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            storiess.setPaging(previous, next);
+            shadowIGUserCatalogProductSearchs.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              storiess.setAppSecret(context.getAppSecretProof());
+              shadowIGUserCatalogProductSearchs.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              storiess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              shadowIGUserCatalogProductSearchs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -129,23 +133,23 @@ public class Stories extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  storiess.add(loadJSON(entry.getValue().toString(), context, header));
+                  shadowIGUserCatalogProductSearchs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              storiess.add(loadJSON(obj.toString(), context, header));
+              shadowIGUserCatalogProductSearchs.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return storiess;
+          return shadowIGUserCatalogProductSearchs;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              storiess.add(loadJSON(entry.getValue().toString(), context, header));
+              shadowIGUserCatalogProductSearchs.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return storiess;
+          return shadowIGUserCatalogProductSearchs;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -162,20 +166,20 @@ public class Stories extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              storiess.add(loadJSON(value.toString(), context, header));
+              shadowIGUserCatalogProductSearchs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return storiess;
+            return shadowIGUserCatalogProductSearchs;
           }
 
           // Sixth, check if it's pure JsonObject
-          storiess.clear();
-          storiess.add(loadJSON(json, context, header));
-          return storiess;
+          shadowIGUserCatalogProductSearchs.clear();
+          shadowIGUserCatalogProductSearchs.add(loadJSON(json, context, header));
+          return shadowIGUserCatalogProductSearchs;
         }
       }
     } catch (Exception e) {
@@ -203,80 +207,84 @@ public class Stories extends APINode {
   }
 
 
-  public String getFieldCreationTime() {
-    return mCreationTime;
+  public String getFieldImageUrl() {
+    return mImageUrl;
   }
 
-  public Stories setFieldCreationTime(String value) {
-    this.mCreationTime = value;
+  public ShadowIGUserCatalogProductSearch setFieldImageUrl(String value) {
+    this.mImageUrl = value;
     return this;
   }
 
-  public String getFieldMediaId() {
-    return mMediaId;
+  public Boolean getFieldIsCheckoutFlow() {
+    return mIsCheckoutFlow;
   }
 
-  public Stories setFieldMediaId(String value) {
-    this.mMediaId = value;
+  public ShadowIGUserCatalogProductSearch setFieldIsCheckoutFlow(Boolean value) {
+    this.mIsCheckoutFlow = value;
     return this;
   }
 
-  public String getFieldMediaType() {
-    return mMediaType;
+  public Long getFieldMerchantId() {
+    return mMerchantId;
   }
 
-  public Stories setFieldMediaType(String value) {
-    this.mMediaType = value;
+  public ShadowIGUserCatalogProductSearch setFieldMerchantId(Long value) {
+    this.mMerchantId = value;
     return this;
   }
 
-  public String getFieldPostId() {
-    return mPostId;
+  public Long getFieldProductId() {
+    return mProductId;
   }
 
-  public Stories setFieldPostId(String value) {
-    this.mPostId = value;
+  public ShadowIGUserCatalogProductSearch setFieldProductId(Long value) {
+    this.mProductId = value;
     return this;
   }
 
-  public String getFieldStatus() {
-    return mStatus;
+  public String getFieldProductName() {
+    return mProductName;
   }
 
-  public Stories setFieldStatus(String value) {
-    this.mStatus = value;
+  public ShadowIGUserCatalogProductSearch setFieldProductName(String value) {
+    this.mProductName = value;
     return this;
   }
 
-  public String getFieldUrl() {
-    return mUrl;
+  public List<ShadowIGUserCatalogProductVariant> getFieldProductVariants() {
+    return mProductVariants;
   }
 
-  public Stories setFieldUrl(String value) {
-    this.mUrl = value;
+  public ShadowIGUserCatalogProductSearch setFieldProductVariants(List<ShadowIGUserCatalogProductVariant> value) {
+    this.mProductVariants = value;
+    return this;
+  }
+
+  public ShadowIGUserCatalogProductSearch setFieldProductVariants(String value) {
+    Type type = new TypeToken<List<ShadowIGUserCatalogProductVariant>>(){}.getType();
+    this.mProductVariants = ShadowIGUserCatalogProductVariant.getGson().fromJson(value, type);
+    return this;
+  }
+  public String getFieldRetailerId() {
+    return mRetailerId;
+  }
+
+  public ShadowIGUserCatalogProductSearch setFieldRetailerId(String value) {
+    this.mRetailerId = value;
+    return this;
+  }
+
+  public String getFieldReviewStatus() {
+    return mReviewStatus;
+  }
+
+  public ShadowIGUserCatalogProductSearch setFieldReviewStatus(String value) {
+    this.mReviewStatus = value;
     return this;
   }
 
 
-
-  public static enum EnumStatus {
-      @SerializedName("ARCHIVED")
-      VALUE_ARCHIVED("ARCHIVED"),
-      @SerializedName("PUBLISHED")
-      VALUE_PUBLISHED("PUBLISHED"),
-      ;
-
-      private String value;
-
-      private EnumStatus(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -292,22 +300,24 @@ public class Stories extends APINode {
     return gson;
   }
 
-  public Stories copyFrom(Stories instance) {
-    this.mCreationTime = instance.mCreationTime;
-    this.mMediaId = instance.mMediaId;
-    this.mMediaType = instance.mMediaType;
-    this.mPostId = instance.mPostId;
-    this.mStatus = instance.mStatus;
-    this.mUrl = instance.mUrl;
+  public ShadowIGUserCatalogProductSearch copyFrom(ShadowIGUserCatalogProductSearch instance) {
+    this.mImageUrl = instance.mImageUrl;
+    this.mIsCheckoutFlow = instance.mIsCheckoutFlow;
+    this.mMerchantId = instance.mMerchantId;
+    this.mProductId = instance.mProductId;
+    this.mProductName = instance.mProductName;
+    this.mProductVariants = instance.mProductVariants;
+    this.mRetailerId = instance.mRetailerId;
+    this.mReviewStatus = instance.mReviewStatus;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<Stories> getParser() {
-    return new APIRequest.ResponseParser<Stories>() {
-      public APINodeList<Stories> parseResponse(String response, APIContext context, APIRequest<Stories> request, String header) throws MalformedResponseException {
-        return Stories.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ShadowIGUserCatalogProductSearch> getParser() {
+    return new APIRequest.ResponseParser<ShadowIGUserCatalogProductSearch>() {
+      public APINodeList<ShadowIGUserCatalogProductSearch> parseResponse(String response, APIContext context, APIRequest<ShadowIGUserCatalogProductSearch> request, String header) throws MalformedResponseException {
+        return ShadowIGUserCatalogProductSearch.parseResponse(response, context, request, header);
       }
     };
   }

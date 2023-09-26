@@ -341,6 +341,8 @@ public class AdPreview extends APINode {
   }
 
   public static enum EnumCreativeFeature {
+      @SerializedName("product_metadata_automation")
+      VALUE_PRODUCT_METADATA_AUTOMATION("product_metadata_automation"),
       @SerializedName("profile_card")
       VALUE_PROFILE_CARD("profile_card"),
       @SerializedName("standard_enhancements_catalog")

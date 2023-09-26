@@ -1561,6 +1561,7 @@ public class AdStudyCell extends APINode {
       "budget_rebalance_flag",
       "budget_remaining",
       "buying_type",
+      "campaign_group_active_time",
       "can_create_brand_lift_study",
       "can_use_spend_cap",
       "configured_status",
@@ -1737,6 +1738,13 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetCampaigns requestBuyingTypeField (boolean value) {
       this.requestField("buying_type", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestCampaignGroupActiveTimeField () {
+      return this.requestCampaignGroupActiveTimeField(true);
+    }
+    public APIRequestGetCampaigns requestCampaignGroupActiveTimeField (boolean value) {
+      this.requestField("campaign_group_active_time", value);
       return this;
     }
     public APIRequestGetCampaigns requestCanCreateBrandLiftStudyField () {

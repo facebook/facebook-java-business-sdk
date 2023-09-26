@@ -39,33 +39,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class Stories extends APINode {
-  @SerializedName("creation_time")
-  private String mCreationTime = null;
-  @SerializedName("media_id")
-  private String mMediaId = null;
-  @SerializedName("media_type")
-  private String mMediaType = null;
-  @SerializedName("post_id")
-  private String mPostId = null;
-  @SerializedName("status")
-  private String mStatus = null;
-  @SerializedName("url")
-  private String mUrl = null;
+public class ContentPublishingLimitResponse extends APINode {
+  @SerializedName("config")
+  private Object mConfig = null;
+  @SerializedName("quota_usage")
+  private Long mQuotaUsage = null;
   protected static Gson gson = null;
 
-  public Stories() {
+  public ContentPublishingLimitResponse() {
   }
 
   public String getId() {
     return null;
   }
-  public static Stories loadJSON(String json, APIContext context, String header) {
-    Stories stories = getGson().fromJson(json, Stories.class);
+  public static ContentPublishingLimitResponse loadJSON(String json, APIContext context, String header) {
+    ContentPublishingLimitResponse contentPublishingLimitResponse = getGson().fromJson(json, ContentPublishingLimitResponse.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(stories.toString());
+      JsonElement o2 = parser.parse(contentPublishingLimitResponse.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -75,14 +67,14 @@ public class Stories extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    stories.context = context;
-    stories.rawValue = json;
-    stories.header = header;
-    return stories;
+    contentPublishingLimitResponse.context = context;
+    contentPublishingLimitResponse.rawValue = json;
+    contentPublishingLimitResponse.header = header;
+    return contentPublishingLimitResponse;
   }
 
-  public static APINodeList<Stories> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<Stories> storiess = new APINodeList<Stories>(request, json, header);
+  public static APINodeList<ContentPublishingLimitResponse> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ContentPublishingLimitResponse> contentPublishingLimitResponses = new APINodeList<ContentPublishingLimitResponse>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -93,9 +85,9 @@ public class Stories extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          storiess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          contentPublishingLimitResponses.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return storiess;
+        return contentPublishingLimitResponses;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -105,20 +97,20 @@ public class Stories extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                storiess.setCursors(before, after);
+                contentPublishingLimitResponses.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            storiess.setPaging(previous, next);
+            contentPublishingLimitResponses.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              storiess.setAppSecret(context.getAppSecretProof());
+              contentPublishingLimitResponses.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              storiess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              contentPublishingLimitResponses.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -129,23 +121,23 @@ public class Stories extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  storiess.add(loadJSON(entry.getValue().toString(), context, header));
+                  contentPublishingLimitResponses.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              storiess.add(loadJSON(obj.toString(), context, header));
+              contentPublishingLimitResponses.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return storiess;
+          return contentPublishingLimitResponses;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              storiess.add(loadJSON(entry.getValue().toString(), context, header));
+              contentPublishingLimitResponses.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return storiess;
+          return contentPublishingLimitResponses;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -162,20 +154,20 @@ public class Stories extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              storiess.add(loadJSON(value.toString(), context, header));
+              contentPublishingLimitResponses.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return storiess;
+            return contentPublishingLimitResponses;
           }
 
           // Sixth, check if it's pure JsonObject
-          storiess.clear();
-          storiess.add(loadJSON(json, context, header));
-          return storiess;
+          contentPublishingLimitResponses.clear();
+          contentPublishingLimitResponses.add(loadJSON(json, context, header));
+          return contentPublishingLimitResponses;
         }
       }
     } catch (Exception e) {
@@ -203,80 +195,25 @@ public class Stories extends APINode {
   }
 
 
-  public String getFieldCreationTime() {
-    return mCreationTime;
+  public Object getFieldConfig() {
+    return mConfig;
   }
 
-  public Stories setFieldCreationTime(String value) {
-    this.mCreationTime = value;
+  public ContentPublishingLimitResponse setFieldConfig(Object value) {
+    this.mConfig = value;
     return this;
   }
 
-  public String getFieldMediaId() {
-    return mMediaId;
+  public Long getFieldQuotaUsage() {
+    return mQuotaUsage;
   }
 
-  public Stories setFieldMediaId(String value) {
-    this.mMediaId = value;
-    return this;
-  }
-
-  public String getFieldMediaType() {
-    return mMediaType;
-  }
-
-  public Stories setFieldMediaType(String value) {
-    this.mMediaType = value;
-    return this;
-  }
-
-  public String getFieldPostId() {
-    return mPostId;
-  }
-
-  public Stories setFieldPostId(String value) {
-    this.mPostId = value;
-    return this;
-  }
-
-  public String getFieldStatus() {
-    return mStatus;
-  }
-
-  public Stories setFieldStatus(String value) {
-    this.mStatus = value;
-    return this;
-  }
-
-  public String getFieldUrl() {
-    return mUrl;
-  }
-
-  public Stories setFieldUrl(String value) {
-    this.mUrl = value;
+  public ContentPublishingLimitResponse setFieldQuotaUsage(Long value) {
+    this.mQuotaUsage = value;
     return this;
   }
 
 
-
-  public static enum EnumStatus {
-      @SerializedName("ARCHIVED")
-      VALUE_ARCHIVED("ARCHIVED"),
-      @SerializedName("PUBLISHED")
-      VALUE_PUBLISHED("PUBLISHED"),
-      ;
-
-      private String value;
-
-      private EnumStatus(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -292,22 +229,18 @@ public class Stories extends APINode {
     return gson;
   }
 
-  public Stories copyFrom(Stories instance) {
-    this.mCreationTime = instance.mCreationTime;
-    this.mMediaId = instance.mMediaId;
-    this.mMediaType = instance.mMediaType;
-    this.mPostId = instance.mPostId;
-    this.mStatus = instance.mStatus;
-    this.mUrl = instance.mUrl;
+  public ContentPublishingLimitResponse copyFrom(ContentPublishingLimitResponse instance) {
+    this.mConfig = instance.mConfig;
+    this.mQuotaUsage = instance.mQuotaUsage;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<Stories> getParser() {
-    return new APIRequest.ResponseParser<Stories>() {
-      public APINodeList<Stories> parseResponse(String response, APIContext context, APIRequest<Stories> request, String header) throws MalformedResponseException {
-        return Stories.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ContentPublishingLimitResponse> getParser() {
+    return new APIRequest.ResponseParser<ContentPublishingLimitResponse>() {
+      public APINodeList<ContentPublishingLimitResponse> parseResponse(String response, APIContext context, APIRequest<ContentPublishingLimitResponse> request, String header) throws MalformedResponseException {
+        return ContentPublishingLimitResponse.parseResponse(response, context, request, header);
       }
     };
   }

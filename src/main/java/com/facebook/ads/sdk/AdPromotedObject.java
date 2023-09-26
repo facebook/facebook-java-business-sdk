@@ -86,6 +86,8 @@ public class AdPromotedObject extends APINode {
   private String mProductSetId = null;
   @SerializedName("retention_days")
   private String mRetentionDays = null;
+  @SerializedName("whats_app_business_phone_number_id")
+  private Object mWhatsAppBusinessPhoneNumberId = null;
   protected static Gson gson = null;
 
   public AdPromotedObject() {
@@ -452,6 +454,15 @@ public class AdPromotedObject extends APINode {
     return this;
   }
 
+  public Object getFieldWhatsAppBusinessPhoneNumberId() {
+    return mWhatsAppBusinessPhoneNumberId;
+  }
+
+  public AdPromotedObject setFieldWhatsAppBusinessPhoneNumberId(Object value) {
+    this.mWhatsAppBusinessPhoneNumberId = value;
+    return this;
+  }
+
 
 
   public static enum EnumCustomEventType {
@@ -563,6 +574,7 @@ public class AdPromotedObject extends APINode {
     this.mProductItemId = instance.mProductItemId;
     this.mProductSetId = instance.mProductSetId;
     this.mRetentionDays = instance.mRetentionDays;
+    this.mWhatsAppBusinessPhoneNumberId = instance.mWhatsAppBusinessPhoneNumberId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

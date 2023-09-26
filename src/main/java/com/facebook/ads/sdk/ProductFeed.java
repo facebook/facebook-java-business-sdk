@@ -2535,6 +2535,7 @@ public class ProductFeed extends APINode {
       "size",
       "start_date",
       "url",
+      "video_fetch_status",
       "visibility",
       "wa_compliance_category",
     };
@@ -3159,6 +3160,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetProducts requestUrlField (boolean value) {
       this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGetProducts requestVideoFetchStatusField () {
+      return this.requestVideoFetchStatusField(true);
+    }
+    public APIRequestGetProducts requestVideoFetchStatusField (boolean value) {
+      this.requestField("video_fetch_status", value);
       return this;
     }
     public APIRequestGetProducts requestVisibilityField () {
