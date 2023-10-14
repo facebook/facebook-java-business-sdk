@@ -1853,6 +1853,8 @@ public class AdReportRun extends APINode {
       VALUE_LINK_URL_ASSET("link_url_asset"),
       @SerializedName("marketing_messages_btn_name")
       VALUE_MARKETING_MESSAGES_BTN_NAME("marketing_messages_btn_name"),
+      @SerializedName("mdsa_landing_destination")
+      VALUE_MDSA_LANDING_DESTINATION("mdsa_landing_destination"),
       @SerializedName("media_asset_url")
       VALUE_MEDIA_ASSET_URL("media_asset_url"),
       @SerializedName("media_creator")

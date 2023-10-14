@@ -375,6 +375,7 @@ public class InstagramMedia extends APINode {
       "instagram_user",
       "mentioned_instagram_users",
       "message",
+      "username",
     };
 
     @Override
@@ -513,6 +514,13 @@ public class InstagramMedia extends APINode {
     }
     public APIRequestGetComments requestMessageField (boolean value) {
       this.requestField("message", value);
+      return this;
+    }
+    public APIRequestGetComments requestUsernameField () {
+      return this.requestUsernameField(true);
+    }
+    public APIRequestGetComments requestUsernameField (boolean value) {
+      this.requestField("username", value);
       return this;
     }
   }

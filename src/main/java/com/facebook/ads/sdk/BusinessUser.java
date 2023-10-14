@@ -1209,6 +1209,7 @@ public class BusinessUser extends APINode {
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
+      "does_viewer_have_page_permission_link_ig",
       "emails",
       "engagement",
       "fan_count",
@@ -1237,6 +1238,7 @@ public class BusinessUser extends APINode {
       "is_chain",
       "is_community_page",
       "is_eligible_for_branded_content",
+      "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -1256,7 +1258,6 @@ public class BusinessUser extends APINode {
       "merchant_review_status",
       "messaging_feature_status",
       "messenger_ads_default_icebreakers",
-      "messenger_ads_default_page_welcome_message",
       "messenger_ads_default_quick_replies",
       "messenger_ads_quick_replies_type",
       "mini_shop_storefront",
@@ -1679,6 +1680,13 @@ public class BusinessUser extends APINode {
       this.requestField("displayed_message_response_time", value);
       return this;
     }
+    public APIRequestGetAssignedPages requestDoesViewerHavePagePermissionLinkIgField () {
+      return this.requestDoesViewerHavePagePermissionLinkIgField(true);
+    }
+    public APIRequestGetAssignedPages requestDoesViewerHavePagePermissionLinkIgField (boolean value) {
+      this.requestField("does_viewer_have_page_permission_link_ig", value);
+      return this;
+    }
     public APIRequestGetAssignedPages requestEmailsField () {
       return this.requestEmailsField(true);
     }
@@ -1875,6 +1883,13 @@ public class BusinessUser extends APINode {
       this.requestField("is_eligible_for_branded_content", value);
       return this;
     }
+    public APIRequestGetAssignedPages requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField () {
+      return this.requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField(true);
+    }
+    public APIRequestGetAssignedPages requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
+      this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
+      return this;
+    }
     public APIRequestGetAssignedPages requestIsMessengerBotGetStartedEnabledField () {
       return this.requestIsMessengerBotGetStartedEnabledField(true);
     }
@@ -2006,13 +2021,6 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGetAssignedPages requestMessengerAdsDefaultIcebreakersField (boolean value) {
       this.requestField("messenger_ads_default_icebreakers", value);
-      return this;
-    }
-    public APIRequestGetAssignedPages requestMessengerAdsDefaultPageWelcomeMessageField () {
-      return this.requestMessengerAdsDefaultPageWelcomeMessageField(true);
-    }
-    public APIRequestGetAssignedPages requestMessengerAdsDefaultPageWelcomeMessageField (boolean value) {
-      this.requestField("messenger_ads_default_page_welcome_message", value);
       return this;
     }
     public APIRequestGetAssignedPages requestMessengerAdsDefaultQuickRepliesField () {

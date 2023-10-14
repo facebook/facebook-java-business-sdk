@@ -6729,6 +6729,7 @@ public class Business extends APINode {
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
+      "does_viewer_have_page_permission_link_ig",
       "emails",
       "engagement",
       "fan_count",
@@ -6757,6 +6758,7 @@ public class Business extends APINode {
       "is_chain",
       "is_community_page",
       "is_eligible_for_branded_content",
+      "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -6776,7 +6778,6 @@ public class Business extends APINode {
       "merchant_review_status",
       "messaging_feature_status",
       "messenger_ads_default_icebreakers",
-      "messenger_ads_default_page_welcome_message",
       "messenger_ads_default_quick_replies",
       "messenger_ads_quick_replies_type",
       "mini_shop_storefront",
@@ -7190,6 +7191,13 @@ public class Business extends APINode {
       this.requestField("displayed_message_response_time", value);
       return this;
     }
+    public APIRequestGetClientPages requestDoesViewerHavePagePermissionLinkIgField () {
+      return this.requestDoesViewerHavePagePermissionLinkIgField(true);
+    }
+    public APIRequestGetClientPages requestDoesViewerHavePagePermissionLinkIgField (boolean value) {
+      this.requestField("does_viewer_have_page_permission_link_ig", value);
+      return this;
+    }
     public APIRequestGetClientPages requestEmailsField () {
       return this.requestEmailsField(true);
     }
@@ -7386,6 +7394,13 @@ public class Business extends APINode {
       this.requestField("is_eligible_for_branded_content", value);
       return this;
     }
+    public APIRequestGetClientPages requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField () {
+      return this.requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField(true);
+    }
+    public APIRequestGetClientPages requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
+      this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
+      return this;
+    }
     public APIRequestGetClientPages requestIsMessengerBotGetStartedEnabledField () {
       return this.requestIsMessengerBotGetStartedEnabledField(true);
     }
@@ -7517,13 +7532,6 @@ public class Business extends APINode {
     }
     public APIRequestGetClientPages requestMessengerAdsDefaultIcebreakersField (boolean value) {
       this.requestField("messenger_ads_default_icebreakers", value);
-      return this;
-    }
-    public APIRequestGetClientPages requestMessengerAdsDefaultPageWelcomeMessageField () {
-      return this.requestMessengerAdsDefaultPageWelcomeMessageField(true);
-    }
-    public APIRequestGetClientPages requestMessengerAdsDefaultPageWelcomeMessageField (boolean value) {
-      this.requestField("messenger_ads_default_page_welcome_message", value);
       return this;
     }
     public APIRequestGetClientPages requestMessengerAdsDefaultQuickRepliesField () {
@@ -14221,6 +14229,8 @@ public class Business extends APINode {
       "access_key",
       "active",
       "endpoint",
+      "fallback_domain",
+      "fallback_domain_enabled",
       "host_business_id",
       "host_external_id",
       "id",
@@ -14337,6 +14347,20 @@ public class Business extends APINode {
       this.requestField("endpoint", value);
       return this;
     }
+    public APIRequestGetOpenBridgeConfigurations requestFallbackDomainField () {
+      return this.requestFallbackDomainField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestFallbackDomainField (boolean value) {
+      this.requestField("fallback_domain", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestFallbackDomainEnabledField () {
+      return this.requestFallbackDomainEnabledField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestFallbackDomainEnabledField (boolean value) {
+      this.requestField("fallback_domain_enabled", value);
+      return this;
+    }
     public APIRequestGetOpenBridgeConfigurations requestHostBusinessIdField () {
       return this.requestHostBusinessIdField(true);
     }
@@ -14378,6 +14402,8 @@ public class Business extends APINode {
       "access_key",
       "active",
       "endpoint",
+      "fallback_domain",
+      "fallback_domain_enabled",
       "host_business_id",
       "host_external_id",
       "pixel_id",
@@ -14455,6 +14481,20 @@ public class Business extends APINode {
 
     public APIRequestCreateOpenBridgeConfiguration setEndpoint (String endpoint) {
       this.setParam("endpoint", endpoint);
+      return this;
+    }
+
+    public APIRequestCreateOpenBridgeConfiguration setFallbackDomain (String fallbackDomain) {
+      this.setParam("fallback_domain", fallbackDomain);
+      return this;
+    }
+
+    public APIRequestCreateOpenBridgeConfiguration setFallbackDomainEnabled (Boolean fallbackDomainEnabled) {
+      this.setParam("fallback_domain_enabled", fallbackDomainEnabled);
+      return this;
+    }
+    public APIRequestCreateOpenBridgeConfiguration setFallbackDomainEnabled (String fallbackDomainEnabled) {
+      this.setParam("fallback_domain_enabled", fallbackDomainEnabled);
       return this;
     }
 
@@ -17263,6 +17303,7 @@ public class Business extends APINode {
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
+      "does_viewer_have_page_permission_link_ig",
       "emails",
       "engagement",
       "fan_count",
@@ -17291,6 +17332,7 @@ public class Business extends APINode {
       "is_chain",
       "is_community_page",
       "is_eligible_for_branded_content",
+      "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -17310,7 +17352,6 @@ public class Business extends APINode {
       "merchant_review_status",
       "messaging_feature_status",
       "messenger_ads_default_icebreakers",
-      "messenger_ads_default_page_welcome_message",
       "messenger_ads_default_quick_replies",
       "messenger_ads_quick_replies_type",
       "mini_shop_storefront",
@@ -17724,6 +17765,13 @@ public class Business extends APINode {
       this.requestField("displayed_message_response_time", value);
       return this;
     }
+    public APIRequestGetOwnedPages requestDoesViewerHavePagePermissionLinkIgField () {
+      return this.requestDoesViewerHavePagePermissionLinkIgField(true);
+    }
+    public APIRequestGetOwnedPages requestDoesViewerHavePagePermissionLinkIgField (boolean value) {
+      this.requestField("does_viewer_have_page_permission_link_ig", value);
+      return this;
+    }
     public APIRequestGetOwnedPages requestEmailsField () {
       return this.requestEmailsField(true);
     }
@@ -17920,6 +17968,13 @@ public class Business extends APINode {
       this.requestField("is_eligible_for_branded_content", value);
       return this;
     }
+    public APIRequestGetOwnedPages requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField () {
+      return this.requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField(true);
+    }
+    public APIRequestGetOwnedPages requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
+      this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
+      return this;
+    }
     public APIRequestGetOwnedPages requestIsMessengerBotGetStartedEnabledField () {
       return this.requestIsMessengerBotGetStartedEnabledField(true);
     }
@@ -18051,13 +18106,6 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedPages requestMessengerAdsDefaultIcebreakersField (boolean value) {
       this.requestField("messenger_ads_default_icebreakers", value);
-      return this;
-    }
-    public APIRequestGetOwnedPages requestMessengerAdsDefaultPageWelcomeMessageField () {
-      return this.requestMessengerAdsDefaultPageWelcomeMessageField(true);
-    }
-    public APIRequestGetOwnedPages requestMessengerAdsDefaultPageWelcomeMessageField (boolean value) {
-      this.requestField("messenger_ads_default_page_welcome_message", value);
       return this;
     }
     public APIRequestGetOwnedPages requestMessengerAdsDefaultQuickRepliesField () {
@@ -18512,6 +18560,7 @@ public class Business extends APINode {
     }
     public static final String[] PARAMS = {
       "code",
+      "entry_point",
       "page_id",
     };
 
@@ -18573,6 +18622,11 @@ public class Business extends APINode {
 
     public APIRequestCreateOwnedPage setCode (String code) {
       this.setParam("code", code);
+      return this;
+    }
+
+    public APIRequestCreateOwnedPage setEntryPoint (String entryPoint) {
+      this.setParam("entry_point", entryPoint);
       return this;
     }
 
@@ -23531,6 +23585,7 @@ public class Business extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "entry_point",
       "name",
       "primary_page",
       "timezone_id",
@@ -23593,6 +23648,11 @@ public class Business extends APINode {
       return this;
     }
 
+
+    public APIRequestUpdate setEntryPoint (String entryPoint) {
+      this.setParam("entry_point", entryPoint);
+      return this;
+    }
 
     public APIRequestUpdate setName (String name) {
       this.setParam("name", name);

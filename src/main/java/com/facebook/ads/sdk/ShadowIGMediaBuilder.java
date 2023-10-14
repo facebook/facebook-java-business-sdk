@@ -40,6 +40,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class ShadowIGMediaBuilder extends APINode {
+  @SerializedName("copyright_check_status")
+  private IGVideoCopyrightCheckStatus mCopyrightCheckStatus = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("status")
@@ -260,6 +262,10 @@ public class ShadowIGMediaBuilder extends APINode {
   }
 
 
+  public IGVideoCopyrightCheckStatus getFieldCopyrightCheckStatus() {
+    return mCopyrightCheckStatus;
+  }
+
   public String getFieldId() {
     return mId;
   }
@@ -285,6 +291,7 @@ public class ShadowIGMediaBuilder extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "copyright_check_status",
       "id",
       "status",
       "status_code",
@@ -379,6 +386,13 @@ public class ShadowIGMediaBuilder extends APINode {
       return this;
     }
 
+    public APIRequestGet requestCopyrightCheckStatusField () {
+      return this.requestCopyrightCheckStatusField(true);
+    }
+    public APIRequestGet requestCopyrightCheckStatusField (boolean value) {
+      this.requestField("copyright_check_status", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -417,6 +431,7 @@ public class ShadowIGMediaBuilder extends APINode {
   }
 
   public ShadowIGMediaBuilder copyFrom(ShadowIGMediaBuilder instance) {
+    this.mCopyrightCheckStatus = instance.mCopyrightCheckStatus;
     this.mId = instance.mId;
     this.mStatus = instance.mStatus;
     this.mStatusCode = instance.mStatusCode;

@@ -54,6 +54,8 @@ public class InstagramComment extends APINode {
   private List<InstagramUser> mMentionedInstagramUsers = null;
   @SerializedName("message")
   private String mMessage = null;
+  @SerializedName("username")
+  private String mUsername = null;
   protected static Gson gson = null;
 
   InstagramComment() {
@@ -315,6 +317,10 @@ public class InstagramComment extends APINode {
     return mMessage;
   }
 
+  public String getFieldUsername() {
+    return mUsername;
+  }
+
 
 
   public static class APIRequestGetReplies extends APIRequest<InstagramComment> {
@@ -335,6 +341,7 @@ public class InstagramComment extends APINode {
       "instagram_user",
       "mentioned_instagram_users",
       "message",
+      "username",
     };
 
     @Override
@@ -473,6 +480,13 @@ public class InstagramComment extends APINode {
     }
     public APIRequestGetReplies requestMessageField (boolean value) {
       this.requestField("message", value);
+      return this;
+    }
+    public APIRequestGetReplies requestUsernameField () {
+      return this.requestUsernameField(true);
+    }
+    public APIRequestGetReplies requestUsernameField (boolean value) {
+      this.requestField("username", value);
       return this;
     }
   }
@@ -721,6 +735,7 @@ public class InstagramComment extends APINode {
       "instagram_user",
       "mentioned_instagram_users",
       "message",
+      "username",
     };
 
     @Override
@@ -859,6 +874,13 @@ public class InstagramComment extends APINode {
     }
     public APIRequestGet requestMessageField (boolean value) {
       this.requestField("message", value);
+      return this;
+    }
+    public APIRequestGet requestUsernameField () {
+      return this.requestUsernameField(true);
+    }
+    public APIRequestGet requestUsernameField (boolean value) {
+      this.requestField("username", value);
       return this;
     }
   }
@@ -1005,6 +1027,7 @@ public class InstagramComment extends APINode {
     this.mInstagramUser = instance.mInstagramUser;
     this.mMentionedInstagramUsers = instance.mMentionedInstagramUsers;
     this.mMessage = instance.mMessage;
+    this.mUsername = instance.mUsername;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

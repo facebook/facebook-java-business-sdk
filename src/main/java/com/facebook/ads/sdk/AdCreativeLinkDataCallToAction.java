@@ -243,6 +243,8 @@ public class AdCreativeLinkDataCallToAction extends APINode {
       VALUE_CALL_ME("CALL_ME"),
       @SerializedName("CALL_NOW")
       VALUE_CALL_NOW("CALL_NOW"),
+      @SerializedName("CONFIRM")
+      VALUE_CONFIRM("CONFIRM"),
       @SerializedName("CONTACT")
       VALUE_CONTACT("CONTACT"),
       @SerializedName("CONTACT_US")

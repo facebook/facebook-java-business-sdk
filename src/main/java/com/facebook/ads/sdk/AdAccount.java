@@ -497,10 +497,6 @@ public class AdAccount extends APINode {
     return new APIRequestCreateAd(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateAdsConversionGoal createAdsConversionGoal() {
-    return new APIRequestCreateAdsConversionGoal(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetAdsReportingMmmReports getAdsReportingMmmReports() {
     return new APIRequestGetAdsReportingMmmReports(this.getPrefixedId().toString(), context);
   }
@@ -6739,172 +6735,6 @@ public class AdAccount extends APINode {
 
     @Override
     public APIRequestCreateAd requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateAdsConversionGoal extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "conversion_event_value_source",
-      "description",
-      "goal_creation_method",
-      "goal_name",
-      "performance_goal",
-      "single_channel_conversion_events",
-      "value_adjustment_rule",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateAdsConversionGoal.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateAdsConversionGoal(String nodeId, APIContext context) {
-      super(context, nodeId, "/ads_conversion_goal", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateAdsConversionGoal setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdsConversionGoal setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateAdsConversionGoal setConversionEventValueSource (EnumConversionEventValueSource conversionEventValueSource) {
-      this.setParam("conversion_event_value_source", conversionEventValueSource);
-      return this;
-    }
-    public APIRequestCreateAdsConversionGoal setConversionEventValueSource (String conversionEventValueSource) {
-      this.setParam("conversion_event_value_source", conversionEventValueSource);
-      return this;
-    }
-
-    public APIRequestCreateAdsConversionGoal setDescription (String description) {
-      this.setParam("description", description);
-      return this;
-    }
-
-    public APIRequestCreateAdsConversionGoal setGoalCreationMethod (EnumGoalCreationMethod goalCreationMethod) {
-      this.setParam("goal_creation_method", goalCreationMethod);
-      return this;
-    }
-    public APIRequestCreateAdsConversionGoal setGoalCreationMethod (String goalCreationMethod) {
-      this.setParam("goal_creation_method", goalCreationMethod);
-      return this;
-    }
-
-    public APIRequestCreateAdsConversionGoal setGoalName (String goalName) {
-      this.setParam("goal_name", goalName);
-      return this;
-    }
-
-    public APIRequestCreateAdsConversionGoal setPerformanceGoal (EnumPerformanceGoal performanceGoal) {
-      this.setParam("performance_goal", performanceGoal);
-      return this;
-    }
-    public APIRequestCreateAdsConversionGoal setPerformanceGoal (String performanceGoal) {
-      this.setParam("performance_goal", performanceGoal);
-      return this;
-    }
-
-    public APIRequestCreateAdsConversionGoal setSingleChannelConversionEvents (List<Map<String, String>> singleChannelConversionEvents) {
-      this.setParam("single_channel_conversion_events", singleChannelConversionEvents);
-      return this;
-    }
-    public APIRequestCreateAdsConversionGoal setSingleChannelConversionEvents (String singleChannelConversionEvents) {
-      this.setParam("single_channel_conversion_events", singleChannelConversionEvents);
-      return this;
-    }
-
-    public APIRequestCreateAdsConversionGoal setValueAdjustmentRule (Map<String, String> valueAdjustmentRule) {
-      this.setParam("value_adjustment_rule", valueAdjustmentRule);
-      return this;
-    }
-    public APIRequestCreateAdsConversionGoal setValueAdjustmentRule (String valueAdjustmentRule) {
-      this.setParam("value_adjustment_rule", valueAdjustmentRule);
-      return this;
-    }
-
-    public APIRequestCreateAdsConversionGoal requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateAdsConversionGoal requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdsConversionGoal requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateAdsConversionGoal requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdsConversionGoal requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdsConversionGoal requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -22470,6 +22300,7 @@ public class AdAccount extends APINode {
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
+      "does_viewer_have_page_permission_link_ig",
       "emails",
       "engagement",
       "fan_count",
@@ -22498,6 +22329,7 @@ public class AdAccount extends APINode {
       "is_chain",
       "is_community_page",
       "is_eligible_for_branded_content",
+      "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -22517,7 +22349,6 @@ public class AdAccount extends APINode {
       "merchant_review_status",
       "messaging_feature_status",
       "messenger_ads_default_icebreakers",
-      "messenger_ads_default_page_welcome_message",
       "messenger_ads_default_quick_replies",
       "messenger_ads_quick_replies_type",
       "mini_shop_storefront",
@@ -22931,6 +22762,13 @@ public class AdAccount extends APINode {
       this.requestField("displayed_message_response_time", value);
       return this;
     }
+    public APIRequestGetPromotePages requestDoesViewerHavePagePermissionLinkIgField () {
+      return this.requestDoesViewerHavePagePermissionLinkIgField(true);
+    }
+    public APIRequestGetPromotePages requestDoesViewerHavePagePermissionLinkIgField (boolean value) {
+      this.requestField("does_viewer_have_page_permission_link_ig", value);
+      return this;
+    }
     public APIRequestGetPromotePages requestEmailsField () {
       return this.requestEmailsField(true);
     }
@@ -23127,6 +22965,13 @@ public class AdAccount extends APINode {
       this.requestField("is_eligible_for_branded_content", value);
       return this;
     }
+    public APIRequestGetPromotePages requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField () {
+      return this.requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField(true);
+    }
+    public APIRequestGetPromotePages requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
+      this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
+      return this;
+    }
     public APIRequestGetPromotePages requestIsMessengerBotGetStartedEnabledField () {
       return this.requestIsMessengerBotGetStartedEnabledField(true);
     }
@@ -23258,13 +23103,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetPromotePages requestMessengerAdsDefaultIcebreakersField (boolean value) {
       this.requestField("messenger_ads_default_icebreakers", value);
-      return this;
-    }
-    public APIRequestGetPromotePages requestMessengerAdsDefaultPageWelcomeMessageField () {
-      return this.requestMessengerAdsDefaultPageWelcomeMessageField(true);
-    }
-    public APIRequestGetPromotePages requestMessengerAdsDefaultPageWelcomeMessageField (boolean value) {
-      this.requestField("messenger_ads_default_page_welcome_message", value);
       return this;
     }
     public APIRequestGetPromotePages requestMessengerAdsDefaultQuickRepliesField () {
@@ -29375,173 +29213,6 @@ public class AdAccount extends APINode {
       private String value;
 
       private EnumActionSource(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumConversionEventValueSource {
-      @SerializedName("DATA_SOURCE")
-      VALUE_DATA_SOURCE("DATA_SOURCE"),
-      @SerializedName("VALUE_RULE")
-      VALUE_VALUE_RULE("VALUE_RULE"),
-      ;
-
-      private String value;
-
-      private EnumConversionEventValueSource(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumGoalCreationMethod {
-      @SerializedName("ADVERTISER_CREATED_UI")
-      VALUE_ADVERTISER_CREATED_UI("ADVERTISER_CREATED_UI"),
-      @SerializedName("AUTO_MIGRATION")
-      VALUE_AUTO_MIGRATION("AUTO_MIGRATION"),
-      @SerializedName("L2_ENHANCE_API_MIGRATION")
-      VALUE_L2_ENHANCE_API_MIGRATION("L2_ENHANCE_API_MIGRATION"),
-      ;
-
-      private String value;
-
-      private EnumGoalCreationMethod(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumPerformanceGoal {
-      @SerializedName("AD_OPTIMIZATION_GOAL_AD_RECALL_LIFT")
-      VALUE_AD_OPTIMIZATION_GOAL_AD_RECALL_LIFT("AD_OPTIMIZATION_GOAL_AD_RECALL_LIFT"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_APP_DOWNLOADS")
-      VALUE_AD_OPTIMIZATION_GOAL_APP_DOWNLOADS("AD_OPTIMIZATION_GOAL_APP_DOWNLOADS"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_APP_INSTALLS")
-      VALUE_AD_OPTIMIZATION_GOAL_APP_INSTALLS("AD_OPTIMIZATION_GOAL_APP_INSTALLS"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_APP_INSTALLS_AND_OFFSITE_CONVERSIONS")
-      VALUE_AD_OPTIMIZATION_GOAL_APP_INSTALLS_AND_OFFSITE_CONVERSIONS("AD_OPTIMIZATION_GOAL_APP_INSTALLS_AND_OFFSITE_CONVERSIONS"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_BRAND_AWARENESS")
-      VALUE_AD_OPTIMIZATION_GOAL_BRAND_AWARENESS("AD_OPTIMIZATION_GOAL_BRAND_AWARENESS"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_CLICKS")
-      VALUE_AD_OPTIMIZATION_GOAL_CLICKS("AD_OPTIMIZATION_GOAL_CLICKS"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_COMPLETED_VIDEO_VIEWS")
-      VALUE_AD_OPTIMIZATION_GOAL_COMPLETED_VIDEO_VIEWS("AD_OPTIMIZATION_GOAL_COMPLETED_VIDEO_VIEWS"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_CONVERSATIONS")
-      VALUE_AD_OPTIMIZATION_GOAL_CONVERSATIONS("AD_OPTIMIZATION_GOAL_CONVERSATIONS"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_DERIVED_EVENTS")
-      VALUE_AD_OPTIMIZATION_GOAL_DERIVED_EVENTS("AD_OPTIMIZATION_GOAL_DERIVED_EVENTS"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_DWELLS")
-      VALUE_AD_OPTIMIZATION_GOAL_DWELLS("AD_OPTIMIZATION_GOAL_DWELLS"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_ENGAGED_REACH")
-      VALUE_AD_OPTIMIZATION_GOAL_ENGAGED_REACH("AD_OPTIMIZATION_GOAL_ENGAGED_REACH"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_ENGAGED_USERS")
-      VALUE_AD_OPTIMIZATION_GOAL_ENGAGED_USERS("AD_OPTIMIZATION_GOAL_ENGAGED_USERS"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_EVENT_RESPONSES")
-      VALUE_AD_OPTIMIZATION_GOAL_EVENT_RESPONSES("AD_OPTIMIZATION_GOAL_EVENT_RESPONSES"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_EXTERNAL")
-      VALUE_AD_OPTIMIZATION_GOAL_EXTERNAL("AD_OPTIMIZATION_GOAL_EXTERNAL"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_IMPRESSIONS")
-      VALUE_AD_OPTIMIZATION_GOAL_IMPRESSIONS("AD_OPTIMIZATION_GOAL_IMPRESSIONS"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_INCREMENTAL_OFFSITE_CONVERSIONS")
-      VALUE_AD_OPTIMIZATION_GOAL_INCREMENTAL_OFFSITE_CONVERSIONS("AD_OPTIMIZATION_GOAL_INCREMENTAL_OFFSITE_CONVERSIONS"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_IN_APP_VALUE")
-      VALUE_AD_OPTIMIZATION_GOAL_IN_APP_VALUE("AD_OPTIMIZATION_GOAL_IN_APP_VALUE"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_JOB_APPLICATIONS")
-      VALUE_AD_OPTIMIZATION_GOAL_JOB_APPLICATIONS("AD_OPTIMIZATION_GOAL_JOB_APPLICATIONS"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_LANDING_PAGE_VIEWS")
-      VALUE_AD_OPTIMIZATION_GOAL_LANDING_PAGE_VIEWS("AD_OPTIMIZATION_GOAL_LANDING_PAGE_VIEWS"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_LEAD_GENERATION")
-      VALUE_AD_OPTIMIZATION_GOAL_LEAD_GENERATION("AD_OPTIMIZATION_GOAL_LEAD_GENERATION"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_MEDIA_DOWNLOADS")
-      VALUE_AD_OPTIMIZATION_GOAL_MEDIA_DOWNLOADS("AD_OPTIMIZATION_GOAL_MEDIA_DOWNLOADS"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_MESSAGING_APPOINTMENT_CONVERSION")
-      VALUE_AD_OPTIMIZATION_GOAL_MESSAGING_APPOINTMENT_CONVERSION("AD_OPTIMIZATION_GOAL_MESSAGING_APPOINTMENT_CONVERSION"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_MESSAGING_DEEP_CONVERSATION_AND_FOLLOW")
-      VALUE_AD_OPTIMIZATION_GOAL_MESSAGING_DEEP_CONVERSATION_AND_FOLLOW("AD_OPTIMIZATION_GOAL_MESSAGING_DEEP_CONVERSATION_AND_FOLLOW"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_MESSAGING_DEEP_CONVERSATION_AND_REPLY")
-      VALUE_AD_OPTIMIZATION_GOAL_MESSAGING_DEEP_CONVERSATION_AND_REPLY("AD_OPTIMIZATION_GOAL_MESSAGING_DEEP_CONVERSATION_AND_REPLY"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_MESSAGING_PURCHASE_CONVERSION")
-      VALUE_AD_OPTIMIZATION_GOAL_MESSAGING_PURCHASE_CONVERSION("AD_OPTIMIZATION_GOAL_MESSAGING_PURCHASE_CONVERSION"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_MID_FUNNEL_EVENT")
-      VALUE_AD_OPTIMIZATION_GOAL_MID_FUNNEL_EVENT("AD_OPTIMIZATION_GOAL_MID_FUNNEL_EVENT"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_MRC_VIDEO_VIEWS")
-      VALUE_AD_OPTIMIZATION_GOAL_MRC_VIDEO_VIEWS("AD_OPTIMIZATION_GOAL_MRC_VIDEO_VIEWS"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_MULTI_CONVERSIONS")
-      VALUE_AD_OPTIMIZATION_GOAL_MULTI_CONVERSIONS("AD_OPTIMIZATION_GOAL_MULTI_CONVERSIONS"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_NONE")
-      VALUE_AD_OPTIMIZATION_GOAL_NONE("AD_OPTIMIZATION_GOAL_NONE"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_OFFER_CLAIMS")
-      VALUE_AD_OPTIMIZATION_GOAL_OFFER_CLAIMS("AD_OPTIMIZATION_GOAL_OFFER_CLAIMS"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_OFFLINE_CONVERSIONS")
-      VALUE_AD_OPTIMIZATION_GOAL_OFFLINE_CONVERSIONS("AD_OPTIMIZATION_GOAL_OFFLINE_CONVERSIONS"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_OFFSITE_CLICKS")
-      VALUE_AD_OPTIMIZATION_GOAL_OFFSITE_CLICKS("AD_OPTIMIZATION_GOAL_OFFSITE_CLICKS"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_OFFSITE_CONVERSIONS")
-      VALUE_AD_OPTIMIZATION_GOAL_OFFSITE_CONVERSIONS("AD_OPTIMIZATION_GOAL_OFFSITE_CONVERSIONS"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_ONSITE_CONVERSIONS")
-      VALUE_AD_OPTIMIZATION_GOAL_ONSITE_CONVERSIONS("AD_OPTIMIZATION_GOAL_ONSITE_CONVERSIONS"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_PAGE_ENGAGEMENT")
-      VALUE_AD_OPTIMIZATION_GOAL_PAGE_ENGAGEMENT("AD_OPTIMIZATION_GOAL_PAGE_ENGAGEMENT"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_PAGE_FOLLOWS")
-      VALUE_AD_OPTIMIZATION_GOAL_PAGE_FOLLOWS("AD_OPTIMIZATION_GOAL_PAGE_FOLLOWS"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_PAGE_LIKES")
-      VALUE_AD_OPTIMIZATION_GOAL_PAGE_LIKES("AD_OPTIMIZATION_GOAL_PAGE_LIKES"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_POST_ENGAGEMENT")
-      VALUE_AD_OPTIMIZATION_GOAL_POST_ENGAGEMENT("AD_OPTIMIZATION_GOAL_POST_ENGAGEMENT"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_QUALITY_CALL")
-      VALUE_AD_OPTIMIZATION_GOAL_QUALITY_CALL("AD_OPTIMIZATION_GOAL_QUALITY_CALL"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_QUALITY_LEAD")
-      VALUE_AD_OPTIMIZATION_GOAL_QUALITY_LEAD("AD_OPTIMIZATION_GOAL_QUALITY_LEAD"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_REACH")
-      VALUE_AD_OPTIMIZATION_GOAL_REACH("AD_OPTIMIZATION_GOAL_REACH"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_REMINDERS_SET")
-      VALUE_AD_OPTIMIZATION_GOAL_REMINDERS_SET("AD_OPTIMIZATION_GOAL_REMINDERS_SET"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_REPLIES")
-      VALUE_AD_OPTIMIZATION_GOAL_REPLIES("AD_OPTIMIZATION_GOAL_REPLIES"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_RESEARCH_POLL_RESPONSES")
-      VALUE_AD_OPTIMIZATION_GOAL_RESEARCH_POLL_RESPONSES("AD_OPTIMIZATION_GOAL_RESEARCH_POLL_RESPONSES"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_RETENTION")
-      VALUE_AD_OPTIMIZATION_GOAL_RETENTION("AD_OPTIMIZATION_GOAL_RETENTION"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_RETURN_ON_AD_SPEND")
-      VALUE_AD_OPTIMIZATION_GOAL_RETURN_ON_AD_SPEND("AD_OPTIMIZATION_GOAL_RETURN_ON_AD_SPEND"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_SOCIAL_IMPRESSIONS")
-      VALUE_AD_OPTIMIZATION_GOAL_SOCIAL_IMPRESSIONS("AD_OPTIMIZATION_GOAL_SOCIAL_IMPRESSIONS"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_STORE_VISITS")
-      VALUE_AD_OPTIMIZATION_GOAL_STORE_VISITS("AD_OPTIMIZATION_GOAL_STORE_VISITS"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_SUBSCRIBERS")
-      VALUE_AD_OPTIMIZATION_GOAL_SUBSCRIBERS("AD_OPTIMIZATION_GOAL_SUBSCRIBERS"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_TICKET_PURCHASE")
-      VALUE_AD_OPTIMIZATION_GOAL_TICKET_PURCHASE("AD_OPTIMIZATION_GOAL_TICKET_PURCHASE"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_VALUE")
-      VALUE_AD_OPTIMIZATION_GOAL_VALUE("AD_OPTIMIZATION_GOAL_VALUE"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_VIDEO_LONG_VIEWS")
-      VALUE_AD_OPTIMIZATION_GOAL_VIDEO_LONG_VIEWS("AD_OPTIMIZATION_GOAL_VIDEO_LONG_VIEWS"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_VIDEO_VIEWS")
-      VALUE_AD_OPTIMIZATION_GOAL_VIDEO_VIEWS("AD_OPTIMIZATION_GOAL_VIDEO_VIEWS"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_VIDEO_VIEWS_15S")
-      VALUE_AD_OPTIMIZATION_GOAL_VIDEO_VIEWS_15S("AD_OPTIMIZATION_GOAL_VIDEO_VIEWS_15S"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_VISIT_INSTAGRAM_PROFILE")
-      VALUE_AD_OPTIMIZATION_GOAL_VISIT_INSTAGRAM_PROFILE("AD_OPTIMIZATION_GOAL_VISIT_INSTAGRAM_PROFILE"),
-      @SerializedName("AD_OPTIMIZATION_GOAL_VISIT_INSTAGRAM_PROFILE_AND_PROFILE_ACTIONS")
-      VALUE_AD_OPTIMIZATION_GOAL_VISIT_INSTAGRAM_PROFILE_AND_PROFILE_ACTIONS("AD_OPTIMIZATION_GOAL_VISIT_INSTAGRAM_PROFILE_AND_PROFILE_ACTIONS"),
-      ;
-
-      private String value;
-
-      private EnumPerformanceGoal(String value) {
         this.value = value;
       }
 

@@ -323,6 +323,10 @@ public class AdsPixel extends APINode {
     return new APIRequestGetAgencies(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateAhpConfig createAhpConfig() {
+    return new APIRequestCreateAhpConfig(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetAssignedUsers getAssignedUsers() {
     return new APIRequestGetAssignedUsers(this.getPrefixedId().toString(), context);
   }
@@ -1465,6 +1469,120 @@ public class AdsPixel extends APINode {
     }
   }
 
+  public static class APIRequestCreateAhpConfig extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "applink_autosetup",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateAhpConfig.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateAhpConfig(String nodeId, APIContext context) {
+      super(context, nodeId, "/ahp_configs", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateAhpConfig setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAhpConfig setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateAhpConfig setApplinkAutosetup (Boolean applinkAutosetup) {
+      this.setParam("applink_autosetup", applinkAutosetup);
+      return this;
+    }
+    public APIRequestCreateAhpConfig setApplinkAutosetup (String applinkAutosetup) {
+      this.setParam("applink_autosetup", applinkAutosetup);
+      return this;
+    }
+
+    public APIRequestCreateAhpConfig requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateAhpConfig requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAhpConfig requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateAhpConfig requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAhpConfig requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAhpConfig requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetAssignedUsers extends APIRequest<AssignedUser> {
 
     APINodeList<AssignedUser> lastResponse = null;
@@ -2445,6 +2563,8 @@ public class AdsPixel extends APINode {
       "access_key",
       "active",
       "endpoint",
+      "fallback_domain",
+      "fallback_domain_enabled",
       "host_business_id",
       "host_external_id",
       "id",
@@ -2559,6 +2679,20 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetOpenBridgeConfigurations requestEndpointField (boolean value) {
       this.requestField("endpoint", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestFallbackDomainField () {
+      return this.requestFallbackDomainField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestFallbackDomainField (boolean value) {
+      this.requestField("fallback_domain", value);
+      return this;
+    }
+    public APIRequestGetOpenBridgeConfigurations requestFallbackDomainEnabledField () {
+      return this.requestFallbackDomainEnabledField(true);
+    }
+    public APIRequestGetOpenBridgeConfigurations requestFallbackDomainEnabledField (boolean value) {
+      this.requestField("fallback_domain_enabled", value);
       return this;
     }
     public APIRequestGetOpenBridgeConfigurations requestHostBusinessIdField () {

@@ -1219,6 +1219,7 @@ public class IGUser extends APINode {
     public static final String[] FIELDS = {
       "caption",
       "comments_count",
+      "copyright_check_information",
       "id",
       "ig_id",
       "is_comment_enabled",
@@ -1348,6 +1349,13 @@ public class IGUser extends APINode {
       this.requestField("comments_count", value);
       return this;
     }
+    public APIRequestGetLiveMedia requestCopyrightCheckInformationField () {
+      return this.requestCopyrightCheckInformationField(true);
+    }
+    public APIRequestGetLiveMedia requestCopyrightCheckInformationField (boolean value) {
+      this.requestField("copyright_check_information", value);
+      return this;
+    }
     public APIRequestGetLiveMedia requestIdField () {
       return this.requestIdField(true);
     }
@@ -1463,6 +1471,7 @@ public class IGUser extends APINode {
     public static final String[] FIELDS = {
       "caption",
       "comments_count",
+      "copyright_check_information",
       "id",
       "ig_id",
       "is_comment_enabled",
@@ -1590,6 +1599,13 @@ public class IGUser extends APINode {
     }
     public APIRequestGetMedia requestCommentsCountField (boolean value) {
       this.requestField("comments_count", value);
+      return this;
+    }
+    public APIRequestGetMedia requestCopyrightCheckInformationField () {
+      return this.requestCopyrightCheckInformationField(true);
+    }
+    public APIRequestGetMedia requestCopyrightCheckInformationField (boolean value) {
+      this.requestField("copyright_check_information", value);
       return this;
     }
     public APIRequestGetMedia requestIdField () {
@@ -2731,6 +2747,7 @@ public class IGUser extends APINode {
     public static final String[] FIELDS = {
       "caption",
       "comments_count",
+      "copyright_check_information",
       "id",
       "ig_id",
       "is_comment_enabled",
@@ -2850,6 +2867,13 @@ public class IGUser extends APINode {
       this.requestField("comments_count", value);
       return this;
     }
+    public APIRequestGetStories requestCopyrightCheckInformationField () {
+      return this.requestCopyrightCheckInformationField(true);
+    }
+    public APIRequestGetStories requestCopyrightCheckInformationField (boolean value) {
+      this.requestField("copyright_check_information", value);
+      return this;
+    }
     public APIRequestGetStories requestIdField () {
       return this.requestIdField(true);
     }
@@ -2963,6 +2987,7 @@ public class IGUser extends APINode {
     public static final String[] FIELDS = {
       "caption",
       "comments_count",
+      "copyright_check_information",
       "id",
       "ig_id",
       "is_comment_enabled",
@@ -3080,6 +3105,13 @@ public class IGUser extends APINode {
     }
     public APIRequestGetTags requestCommentsCountField (boolean value) {
       this.requestField("comments_count", value);
+      return this;
+    }
+    public APIRequestGetTags requestCopyrightCheckInformationField () {
+      return this.requestCopyrightCheckInformationField(true);
+    }
+    public APIRequestGetTags requestCopyrightCheckInformationField (boolean value) {
+      this.requestField("copyright_check_information", value);
       return this;
     }
     public APIRequestGetTags requestIdField () {

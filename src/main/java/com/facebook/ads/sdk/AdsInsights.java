@@ -347,6 +347,8 @@ public class AdsInsights extends APINode {
   private String mLinkUrlAsset = null;
   @SerializedName("marketing_messages_btn_name")
   private String mMarketingMessagesBtnName = null;
+  @SerializedName("mdsa_landing_destination")
+  private String mMdsaLandingDestination = null;
   @SerializedName("media_asset_url")
   private String mMediaAssetUrl = null;
   @SerializedName("media_creator")
@@ -2090,6 +2092,10 @@ public class AdsInsights extends APINode {
     return mMarketingMessagesBtnName;
   }
 
+  public String getFieldMdsaLandingDestination() {
+    return mMdsaLandingDestination;
+  }
+
   public String getFieldMediaAssetUrl() {
     return mMediaAssetUrl;
   }
@@ -2310,6 +2316,8 @@ public class AdsInsights extends APINode {
       VALUE_LINK_URL_ASSET("link_url_asset"),
       @SerializedName("marketing_messages_btn_name")
       VALUE_MARKETING_MESSAGES_BTN_NAME("marketing_messages_btn_name"),
+      @SerializedName("mdsa_landing_destination")
+      VALUE_MDSA_LANDING_DESTINATION("mdsa_landing_destination"),
       @SerializedName("media_asset_url")
       VALUE_MEDIA_ASSET_URL("media_asset_url"),
       @SerializedName("media_creator")
@@ -2647,6 +2655,7 @@ public class AdsInsights extends APINode {
     this.mIsConversionIdModeled = instance.mIsConversionIdModeled;
     this.mLinkUrlAsset = instance.mLinkUrlAsset;
     this.mMarketingMessagesBtnName = instance.mMarketingMessagesBtnName;
+    this.mMdsaLandingDestination = instance.mMdsaLandingDestination;
     this.mMediaAssetUrl = instance.mMediaAssetUrl;
     this.mMediaCreator = instance.mMediaCreator;
     this.mMediaDestinationUrl = instance.mMediaDestinationUrl;

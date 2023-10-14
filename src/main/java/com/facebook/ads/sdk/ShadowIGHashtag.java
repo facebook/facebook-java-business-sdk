@@ -290,6 +290,7 @@ public class ShadowIGHashtag extends APINode {
     public static final String[] FIELDS = {
       "caption",
       "comments_count",
+      "copyright_check_information",
       "id",
       "ig_id",
       "is_comment_enabled",
@@ -414,6 +415,13 @@ public class ShadowIGHashtag extends APINode {
       this.requestField("comments_count", value);
       return this;
     }
+    public APIRequestGetRecentMedia requestCopyrightCheckInformationField () {
+      return this.requestCopyrightCheckInformationField(true);
+    }
+    public APIRequestGetRecentMedia requestCopyrightCheckInformationField (boolean value) {
+      this.requestField("copyright_check_information", value);
+      return this;
+    }
     public APIRequestGetRecentMedia requestIdField () {
       return this.requestIdField(true);
     }
@@ -528,6 +536,7 @@ public class ShadowIGHashtag extends APINode {
     public static final String[] FIELDS = {
       "caption",
       "comments_count",
+      "copyright_check_information",
       "id",
       "ig_id",
       "is_comment_enabled",
@@ -650,6 +659,13 @@ public class ShadowIGHashtag extends APINode {
     }
     public APIRequestGetTopMedia requestCommentsCountField (boolean value) {
       this.requestField("comments_count", value);
+      return this;
+    }
+    public APIRequestGetTopMedia requestCopyrightCheckInformationField () {
+      return this.requestCopyrightCheckInformationField(true);
+    }
+    public APIRequestGetTopMedia requestCopyrightCheckInformationField (boolean value) {
+      this.requestField("copyright_check_information", value);
       return this;
     }
     public APIRequestGetTopMedia requestIdField () {

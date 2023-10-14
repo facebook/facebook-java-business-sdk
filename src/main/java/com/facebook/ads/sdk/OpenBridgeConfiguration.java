@@ -46,6 +46,10 @@ public class OpenBridgeConfiguration extends APINode {
   private Boolean mActive = null;
   @SerializedName("endpoint")
   private String mEndpoint = null;
+  @SerializedName("fallback_domain")
+  private String mFallbackDomain = null;
+  @SerializedName("fallback_domain_enabled")
+  private Boolean mFallbackDomainEnabled = null;
   @SerializedName("host_business_id")
   private String mHostBusinessId = null;
   @SerializedName("host_external_id")
@@ -288,6 +292,14 @@ public class OpenBridgeConfiguration extends APINode {
     return mEndpoint;
   }
 
+  public String getFieldFallbackDomain() {
+    return mFallbackDomain;
+  }
+
+  public Boolean getFieldFallbackDomainEnabled() {
+    return mFallbackDomainEnabled;
+  }
+
   public String getFieldHostBusinessId() {
     return mHostBusinessId;
   }
@@ -424,6 +436,8 @@ public class OpenBridgeConfiguration extends APINode {
       "access_key",
       "active",
       "endpoint",
+      "fallback_domain",
+      "fallback_domain_enabled",
       "host_business_id",
       "host_external_id",
       "id",
@@ -540,6 +554,20 @@ public class OpenBridgeConfiguration extends APINode {
       this.requestField("endpoint", value);
       return this;
     }
+    public APIRequestGet requestFallbackDomainField () {
+      return this.requestFallbackDomainField(true);
+    }
+    public APIRequestGet requestFallbackDomainField (boolean value) {
+      this.requestField("fallback_domain", value);
+      return this;
+    }
+    public APIRequestGet requestFallbackDomainEnabledField () {
+      return this.requestFallbackDomainEnabledField(true);
+    }
+    public APIRequestGet requestFallbackDomainEnabledField (boolean value) {
+      this.requestField("fallback_domain_enabled", value);
+      return this;
+    }
     public APIRequestGet requestHostBusinessIdField () {
       return this.requestHostBusinessIdField(true);
     }
@@ -581,6 +609,8 @@ public class OpenBridgeConfiguration extends APINode {
       "access_key",
       "active",
       "endpoint",
+      "fallback_domain",
+      "fallback_domain_enabled",
       "host_business_id",
       "host_external_id",
     };
@@ -660,6 +690,20 @@ public class OpenBridgeConfiguration extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setFallbackDomain (String fallbackDomain) {
+      this.setParam("fallback_domain", fallbackDomain);
+      return this;
+    }
+
+    public APIRequestUpdate setFallbackDomainEnabled (Boolean fallbackDomainEnabled) {
+      this.setParam("fallback_domain_enabled", fallbackDomainEnabled);
+      return this;
+    }
+    public APIRequestUpdate setFallbackDomainEnabled (String fallbackDomainEnabled) {
+      this.setParam("fallback_domain_enabled", fallbackDomainEnabled);
+      return this;
+    }
+
     public APIRequestUpdate setHostBusinessId (Long hostBusinessId) {
       this.setParam("host_business_id", hostBusinessId);
       return this;
@@ -730,6 +774,8 @@ public class OpenBridgeConfiguration extends APINode {
     this.mAccessKey = instance.mAccessKey;
     this.mActive = instance.mActive;
     this.mEndpoint = instance.mEndpoint;
+    this.mFallbackDomain = instance.mFallbackDomain;
+    this.mFallbackDomainEnabled = instance.mFallbackDomainEnabled;
     this.mHostBusinessId = instance.mHostBusinessId;
     this.mHostExternalId = instance.mHostExternalId;
     this.mId = instance.mId;

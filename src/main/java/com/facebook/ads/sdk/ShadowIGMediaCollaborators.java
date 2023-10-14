@@ -39,33 +39,27 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class MessengerDestinationPageWelcomeMessage extends APINode {
+public class ShadowIGMediaCollaborators extends APINode {
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("page_welcome_message_body")
-  private String mPageWelcomeMessageBody = null;
-  @SerializedName("page_welcome_message_type")
-  private String mPageWelcomeMessageType = null;
-  @SerializedName("template_name")
-  private String mTemplateName = null;
-  @SerializedName("time_created")
-  private String mTimeCreated = null;
-  @SerializedName("time_last_used")
-  private String mTimeLastUsed = null;
+  @SerializedName("invite_status")
+  private String mInviteStatus = null;
+  @SerializedName("username")
+  private String mUsername = null;
   protected static Gson gson = null;
 
-  public MessengerDestinationPageWelcomeMessage() {
+  public ShadowIGMediaCollaborators() {
   }
 
   public String getId() {
     return getFieldId().toString();
   }
-  public static MessengerDestinationPageWelcomeMessage loadJSON(String json, APIContext context, String header) {
-    MessengerDestinationPageWelcomeMessage messengerDestinationPageWelcomeMessage = getGson().fromJson(json, MessengerDestinationPageWelcomeMessage.class);
+  public static ShadowIGMediaCollaborators loadJSON(String json, APIContext context, String header) {
+    ShadowIGMediaCollaborators shadowIGMediaCollaborators = getGson().fromJson(json, ShadowIGMediaCollaborators.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(messengerDestinationPageWelcomeMessage.toString());
+      JsonElement o2 = parser.parse(shadowIGMediaCollaborators.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -75,14 +69,14 @@ public class MessengerDestinationPageWelcomeMessage extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    messengerDestinationPageWelcomeMessage.context = context;
-    messengerDestinationPageWelcomeMessage.rawValue = json;
-    messengerDestinationPageWelcomeMessage.header = header;
-    return messengerDestinationPageWelcomeMessage;
+    shadowIGMediaCollaborators.context = context;
+    shadowIGMediaCollaborators.rawValue = json;
+    shadowIGMediaCollaborators.header = header;
+    return shadowIGMediaCollaborators;
   }
 
-  public static APINodeList<MessengerDestinationPageWelcomeMessage> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<MessengerDestinationPageWelcomeMessage> messengerDestinationPageWelcomeMessages = new APINodeList<MessengerDestinationPageWelcomeMessage>(request, json, header);
+  public static APINodeList<ShadowIGMediaCollaborators> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ShadowIGMediaCollaborators> shadowIGMediaCollaboratorss = new APINodeList<ShadowIGMediaCollaborators>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -93,9 +87,9 @@ public class MessengerDestinationPageWelcomeMessage extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          messengerDestinationPageWelcomeMessages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          shadowIGMediaCollaboratorss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return messengerDestinationPageWelcomeMessages;
+        return shadowIGMediaCollaboratorss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -105,20 +99,20 @@ public class MessengerDestinationPageWelcomeMessage extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                messengerDestinationPageWelcomeMessages.setCursors(before, after);
+                shadowIGMediaCollaboratorss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            messengerDestinationPageWelcomeMessages.setPaging(previous, next);
+            shadowIGMediaCollaboratorss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              messengerDestinationPageWelcomeMessages.setAppSecret(context.getAppSecretProof());
+              shadowIGMediaCollaboratorss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              messengerDestinationPageWelcomeMessages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              shadowIGMediaCollaboratorss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -129,23 +123,23 @@ public class MessengerDestinationPageWelcomeMessage extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  messengerDestinationPageWelcomeMessages.add(loadJSON(entry.getValue().toString(), context, header));
+                  shadowIGMediaCollaboratorss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              messengerDestinationPageWelcomeMessages.add(loadJSON(obj.toString(), context, header));
+              shadowIGMediaCollaboratorss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return messengerDestinationPageWelcomeMessages;
+          return shadowIGMediaCollaboratorss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              messengerDestinationPageWelcomeMessages.add(loadJSON(entry.getValue().toString(), context, header));
+              shadowIGMediaCollaboratorss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return messengerDestinationPageWelcomeMessages;
+          return shadowIGMediaCollaboratorss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -162,20 +156,20 @@ public class MessengerDestinationPageWelcomeMessage extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              messengerDestinationPageWelcomeMessages.add(loadJSON(value.toString(), context, header));
+              shadowIGMediaCollaboratorss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return messengerDestinationPageWelcomeMessages;
+            return shadowIGMediaCollaboratorss;
           }
 
           // Sixth, check if it's pure JsonObject
-          messengerDestinationPageWelcomeMessages.clear();
-          messengerDestinationPageWelcomeMessages.add(loadJSON(json, context, header));
-          return messengerDestinationPageWelcomeMessages;
+          shadowIGMediaCollaboratorss.clear();
+          shadowIGMediaCollaboratorss.add(loadJSON(json, context, header));
+          return shadowIGMediaCollaboratorss;
         }
       }
     } catch (Exception e) {
@@ -207,53 +201,26 @@ public class MessengerDestinationPageWelcomeMessage extends APINode {
     return mId;
   }
 
-  public MessengerDestinationPageWelcomeMessage setFieldId(String value) {
+  public ShadowIGMediaCollaborators setFieldId(String value) {
     this.mId = value;
     return this;
   }
 
-  public String getFieldPageWelcomeMessageBody() {
-    return mPageWelcomeMessageBody;
+  public String getFieldInviteStatus() {
+    return mInviteStatus;
   }
 
-  public MessengerDestinationPageWelcomeMessage setFieldPageWelcomeMessageBody(String value) {
-    this.mPageWelcomeMessageBody = value;
+  public ShadowIGMediaCollaborators setFieldInviteStatus(String value) {
+    this.mInviteStatus = value;
     return this;
   }
 
-  public String getFieldPageWelcomeMessageType() {
-    return mPageWelcomeMessageType;
+  public String getFieldUsername() {
+    return mUsername;
   }
 
-  public MessengerDestinationPageWelcomeMessage setFieldPageWelcomeMessageType(String value) {
-    this.mPageWelcomeMessageType = value;
-    return this;
-  }
-
-  public String getFieldTemplateName() {
-    return mTemplateName;
-  }
-
-  public MessengerDestinationPageWelcomeMessage setFieldTemplateName(String value) {
-    this.mTemplateName = value;
-    return this;
-  }
-
-  public String getFieldTimeCreated() {
-    return mTimeCreated;
-  }
-
-  public MessengerDestinationPageWelcomeMessage setFieldTimeCreated(String value) {
-    this.mTimeCreated = value;
-    return this;
-  }
-
-  public String getFieldTimeLastUsed() {
-    return mTimeLastUsed;
-  }
-
-  public MessengerDestinationPageWelcomeMessage setFieldTimeLastUsed(String value) {
-    this.mTimeLastUsed = value;
+  public ShadowIGMediaCollaborators setFieldUsername(String value) {
+    this.mUsername = value;
     return this;
   }
 
@@ -273,22 +240,19 @@ public class MessengerDestinationPageWelcomeMessage extends APINode {
     return gson;
   }
 
-  public MessengerDestinationPageWelcomeMessage copyFrom(MessengerDestinationPageWelcomeMessage instance) {
+  public ShadowIGMediaCollaborators copyFrom(ShadowIGMediaCollaborators instance) {
     this.mId = instance.mId;
-    this.mPageWelcomeMessageBody = instance.mPageWelcomeMessageBody;
-    this.mPageWelcomeMessageType = instance.mPageWelcomeMessageType;
-    this.mTemplateName = instance.mTemplateName;
-    this.mTimeCreated = instance.mTimeCreated;
-    this.mTimeLastUsed = instance.mTimeLastUsed;
+    this.mInviteStatus = instance.mInviteStatus;
+    this.mUsername = instance.mUsername;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<MessengerDestinationPageWelcomeMessage> getParser() {
-    return new APIRequest.ResponseParser<MessengerDestinationPageWelcomeMessage>() {
-      public APINodeList<MessengerDestinationPageWelcomeMessage> parseResponse(String response, APIContext context, APIRequest<MessengerDestinationPageWelcomeMessage> request, String header) throws MalformedResponseException {
-        return MessengerDestinationPageWelcomeMessage.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ShadowIGMediaCollaborators> getParser() {
+    return new APIRequest.ResponseParser<ShadowIGMediaCollaborators>() {
+      public APINodeList<ShadowIGMediaCollaborators> parseResponse(String response, APIContext context, APIRequest<ShadowIGMediaCollaborators> request, String header) throws MalformedResponseException {
+        return ShadowIGMediaCollaborators.parseResponse(response, context, request, header);
       }
     };
   }

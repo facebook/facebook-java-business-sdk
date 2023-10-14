@@ -1279,6 +1279,7 @@ public class WhatsAppBusinessAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "categories",
       "clone_extension_id",
       "clone_template",
       "data_channel_uri",
@@ -1340,6 +1341,15 @@ public class WhatsAppBusinessAccount extends APINode {
       return this;
     }
 
+
+    public APIRequestCreateExtension setCategories (List<EnumCategories> categories) {
+      this.setParam("categories", categories);
+      return this;
+    }
+    public APIRequestCreateExtension setCategories (String categories) {
+      this.setParam("categories", categories);
+      return this;
+    }
 
     public APIRequestCreateExtension setCloneExtensionId (String cloneExtensionId) {
       this.setParam("clone_extension_id", cloneExtensionId);
@@ -1511,6 +1521,7 @@ public class WhatsAppBusinessAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "categories",
       "clone_flow_id",
       "clone_template",
       "data_channel_uri",
@@ -1572,6 +1583,15 @@ public class WhatsAppBusinessAccount extends APINode {
       return this;
     }
 
+
+    public APIRequestCreateFlow setCategories (List<EnumCategories> categories) {
+      this.setParam("categories", categories);
+      return this;
+    }
+    public APIRequestCreateFlow setCategories (String categories) {
+      this.setParam("categories", categories);
+      return this;
+    }
 
     public APIRequestCreateFlow setCloneFlowId (String cloneFlowId) {
       this.setParam("clone_flow_id", cloneFlowId);
@@ -4384,8 +4404,16 @@ public class WhatsAppBusinessAccount extends APINode {
       VALUE_MANAGE_EXTENSIONS("MANAGE_EXTENSIONS"),
       @SerializedName("MANAGE_PHONE")
       VALUE_MANAGE_PHONE("MANAGE_PHONE"),
+      @SerializedName("MANAGE_PHONE_ASSETS")
+      VALUE_MANAGE_PHONE_ASSETS("MANAGE_PHONE_ASSETS"),
+      @SerializedName("MANAGE_TEMPLATES")
+      VALUE_MANAGE_TEMPLATES("MANAGE_TEMPLATES"),
       @SerializedName("VIEW_COST")
       VALUE_VIEW_COST("VIEW_COST"),
+      @SerializedName("VIEW_PHONE_ASSETS")
+      VALUE_VIEW_PHONE_ASSETS("VIEW_PHONE_ASSETS"),
+      @SerializedName("VIEW_TEMPLATES")
+      VALUE_VIEW_TEMPLATES("VIEW_TEMPLATES"),
       ;
 
       private String value;
@@ -4573,6 +4601,37 @@ public class WhatsAppBusinessAccount extends APINode {
       private String value;
 
       private EnumMetricTypes(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumCategories {
+      @SerializedName("APPOINTMENT_BOOKING")
+      VALUE_APPOINTMENT_BOOKING("APPOINTMENT_BOOKING"),
+      @SerializedName("CONTACT_US")
+      VALUE_CONTACT_US("CONTACT_US"),
+      @SerializedName("CUSTOMER_SUPPORT")
+      VALUE_CUSTOMER_SUPPORT("CUSTOMER_SUPPORT"),
+      @SerializedName("LEAD_GENERATION")
+      VALUE_LEAD_GENERATION("LEAD_GENERATION"),
+      @SerializedName("OTHER")
+      VALUE_OTHER("OTHER"),
+      @SerializedName("SIGN_IN")
+      VALUE_SIGN_IN("SIGN_IN"),
+      @SerializedName("SIGN_UP")
+      VALUE_SIGN_UP("SIGN_UP"),
+      @SerializedName("SURVEY")
+      VALUE_SURVEY("SURVEY"),
+      ;
+
+      private String value;
+
+      private EnumCategories(String value) {
         this.value = value;
       }
 

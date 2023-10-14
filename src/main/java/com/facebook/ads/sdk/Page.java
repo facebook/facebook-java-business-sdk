@@ -114,6 +114,8 @@ public class Page extends APINode {
   private String mDisplaySubtext = null;
   @SerializedName("displayed_message_response_time")
   private String mDisplayedMessageResponseTime = null;
+  @SerializedName("does_viewer_have_page_permission_link_ig")
+  private Boolean mDoesViewerHavePagePermissionLinkIg = null;
   @SerializedName("emails")
   private List<String> mEmails = null;
   @SerializedName("engagement")
@@ -170,6 +172,8 @@ public class Page extends APINode {
   private Boolean mIsCommunityPage = null;
   @SerializedName("is_eligible_for_branded_content")
   private Boolean mIsEligibleForBrandedContent = null;
+  @SerializedName("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web")
+  private Boolean mIsEligibleForDisableConnectIgBtnForNonPageAdminAmWeb = null;
   @SerializedName("is_messenger_bot_get_started_enabled")
   private Boolean mIsMessengerBotGetStartedEnabled = null;
   @SerializedName("is_messenger_platform_bot")
@@ -208,8 +212,6 @@ public class Page extends APINode {
   private MessagingFeatureStatus mMessagingFeatureStatus = null;
   @SerializedName("messenger_ads_default_icebreakers")
   private List<String> mMessengerAdsDefaultIcebreakers = null;
-  @SerializedName("messenger_ads_default_page_welcome_message")
-  private MessengerDestinationPageWelcomeMessage mMessengerAdsDefaultPageWelcomeMessage = null;
   @SerializedName("messenger_ads_default_quick_replies")
   private List<String> mMessengerAdsDefaultQuickReplies = null;
   @SerializedName("messenger_ads_quick_replies_type")
@@ -1185,6 +1187,10 @@ public class Page extends APINode {
     return mDisplayedMessageResponseTime;
   }
 
+  public Boolean getFieldDoesViewerHavePagePermissionLinkIg() {
+    return mDoesViewerHavePagePermissionLinkIg;
+  }
+
   public List<String> getFieldEmails() {
     return mEmails;
   }
@@ -1303,6 +1309,10 @@ public class Page extends APINode {
     return mIsEligibleForBrandedContent;
   }
 
+  public Boolean getFieldIsEligibleForDisableConnectIgBtnForNonPageAdminAmWeb() {
+    return mIsEligibleForDisableConnectIgBtnForNonPageAdminAmWeb;
+  }
+
   public Boolean getFieldIsMessengerBotGetStartedEnabled() {
     return mIsMessengerBotGetStartedEnabled;
   }
@@ -1380,10 +1390,6 @@ public class Page extends APINode {
 
   public List<String> getFieldMessengerAdsDefaultIcebreakers() {
     return mMessengerAdsDefaultIcebreakers;
-  }
-
-  public MessengerDestinationPageWelcomeMessage getFieldMessengerAdsDefaultPageWelcomeMessage() {
-    return mMessengerAdsDefaultPageWelcomeMessage;
   }
 
   public List<String> getFieldMessengerAdsDefaultQuickReplies() {
@@ -7604,6 +7610,7 @@ public class Page extends APINode {
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
+      "does_viewer_have_page_permission_link_ig",
       "emails",
       "engagement",
       "fan_count",
@@ -7632,6 +7639,7 @@ public class Page extends APINode {
       "is_chain",
       "is_community_page",
       "is_eligible_for_branded_content",
+      "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -7651,7 +7659,6 @@ public class Page extends APINode {
       "merchant_review_status",
       "messaging_feature_status",
       "messenger_ads_default_icebreakers",
-      "messenger_ads_default_page_welcome_message",
       "messenger_ads_default_quick_replies",
       "messenger_ads_quick_replies_type",
       "mini_shop_storefront",
@@ -8065,6 +8072,13 @@ public class Page extends APINode {
       this.requestField("displayed_message_response_time", value);
       return this;
     }
+    public APIRequestGetCrosspostWhitelistedPages requestDoesViewerHavePagePermissionLinkIgField () {
+      return this.requestDoesViewerHavePagePermissionLinkIgField(true);
+    }
+    public APIRequestGetCrosspostWhitelistedPages requestDoesViewerHavePagePermissionLinkIgField (boolean value) {
+      this.requestField("does_viewer_have_page_permission_link_ig", value);
+      return this;
+    }
     public APIRequestGetCrosspostWhitelistedPages requestEmailsField () {
       return this.requestEmailsField(true);
     }
@@ -8261,6 +8275,13 @@ public class Page extends APINode {
       this.requestField("is_eligible_for_branded_content", value);
       return this;
     }
+    public APIRequestGetCrosspostWhitelistedPages requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField () {
+      return this.requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField(true);
+    }
+    public APIRequestGetCrosspostWhitelistedPages requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
+      this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
+      return this;
+    }
     public APIRequestGetCrosspostWhitelistedPages requestIsMessengerBotGetStartedEnabledField () {
       return this.requestIsMessengerBotGetStartedEnabledField(true);
     }
@@ -8392,13 +8413,6 @@ public class Page extends APINode {
     }
     public APIRequestGetCrosspostWhitelistedPages requestMessengerAdsDefaultIcebreakersField (boolean value) {
       this.requestField("messenger_ads_default_icebreakers", value);
-      return this;
-    }
-    public APIRequestGetCrosspostWhitelistedPages requestMessengerAdsDefaultPageWelcomeMessageField () {
-      return this.requestMessengerAdsDefaultPageWelcomeMessageField(true);
-    }
-    public APIRequestGetCrosspostWhitelistedPages requestMessengerAdsDefaultPageWelcomeMessageField (boolean value) {
-      this.requestField("messenger_ads_default_page_welcome_message", value);
       return this;
     }
     public APIRequestGetCrosspostWhitelistedPages requestMessengerAdsDefaultQuickRepliesField () {
@@ -11856,6 +11870,7 @@ public class Page extends APINode {
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
+      "does_viewer_have_page_permission_link_ig",
       "emails",
       "engagement",
       "fan_count",
@@ -11884,6 +11899,7 @@ public class Page extends APINode {
       "is_chain",
       "is_community_page",
       "is_eligible_for_branded_content",
+      "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -11903,7 +11919,6 @@ public class Page extends APINode {
       "merchant_review_status",
       "messaging_feature_status",
       "messenger_ads_default_icebreakers",
-      "messenger_ads_default_page_welcome_message",
       "messenger_ads_default_quick_replies",
       "messenger_ads_quick_replies_type",
       "mini_shop_storefront",
@@ -12317,6 +12332,13 @@ public class Page extends APINode {
       this.requestField("displayed_message_response_time", value);
       return this;
     }
+    public APIRequestGetGlobalBrandChildren requestDoesViewerHavePagePermissionLinkIgField () {
+      return this.requestDoesViewerHavePagePermissionLinkIgField(true);
+    }
+    public APIRequestGetGlobalBrandChildren requestDoesViewerHavePagePermissionLinkIgField (boolean value) {
+      this.requestField("does_viewer_have_page_permission_link_ig", value);
+      return this;
+    }
     public APIRequestGetGlobalBrandChildren requestEmailsField () {
       return this.requestEmailsField(true);
     }
@@ -12513,6 +12535,13 @@ public class Page extends APINode {
       this.requestField("is_eligible_for_branded_content", value);
       return this;
     }
+    public APIRequestGetGlobalBrandChildren requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField () {
+      return this.requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField(true);
+    }
+    public APIRequestGetGlobalBrandChildren requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
+      this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
+      return this;
+    }
     public APIRequestGetGlobalBrandChildren requestIsMessengerBotGetStartedEnabledField () {
       return this.requestIsMessengerBotGetStartedEnabledField(true);
     }
@@ -12644,13 +12673,6 @@ public class Page extends APINode {
     }
     public APIRequestGetGlobalBrandChildren requestMessengerAdsDefaultIcebreakersField (boolean value) {
       this.requestField("messenger_ads_default_icebreakers", value);
-      return this;
-    }
-    public APIRequestGetGlobalBrandChildren requestMessengerAdsDefaultPageWelcomeMessageField () {
-      return this.requestMessengerAdsDefaultPageWelcomeMessageField(true);
-    }
-    public APIRequestGetGlobalBrandChildren requestMessengerAdsDefaultPageWelcomeMessageField (boolean value) {
-      this.requestField("messenger_ads_default_page_welcome_message", value);
       return this;
     }
     public APIRequestGetGlobalBrandChildren requestMessengerAdsDefaultQuickRepliesField () {
@@ -15405,6 +15427,7 @@ public class Page extends APINode {
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
+      "does_viewer_have_page_permission_link_ig",
       "emails",
       "engagement",
       "fan_count",
@@ -15433,6 +15456,7 @@ public class Page extends APINode {
       "is_chain",
       "is_community_page",
       "is_eligible_for_branded_content",
+      "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -15452,7 +15476,6 @@ public class Page extends APINode {
       "merchant_review_status",
       "messaging_feature_status",
       "messenger_ads_default_icebreakers",
-      "messenger_ads_default_page_welcome_message",
       "messenger_ads_default_quick_replies",
       "messenger_ads_quick_replies_type",
       "mini_shop_storefront",
@@ -15871,6 +15894,13 @@ public class Page extends APINode {
       this.requestField("displayed_message_response_time", value);
       return this;
     }
+    public APIRequestGetLikes requestDoesViewerHavePagePermissionLinkIgField () {
+      return this.requestDoesViewerHavePagePermissionLinkIgField(true);
+    }
+    public APIRequestGetLikes requestDoesViewerHavePagePermissionLinkIgField (boolean value) {
+      this.requestField("does_viewer_have_page_permission_link_ig", value);
+      return this;
+    }
     public APIRequestGetLikes requestEmailsField () {
       return this.requestEmailsField(true);
     }
@@ -16067,6 +16097,13 @@ public class Page extends APINode {
       this.requestField("is_eligible_for_branded_content", value);
       return this;
     }
+    public APIRequestGetLikes requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField () {
+      return this.requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField(true);
+    }
+    public APIRequestGetLikes requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
+      this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
+      return this;
+    }
     public APIRequestGetLikes requestIsMessengerBotGetStartedEnabledField () {
       return this.requestIsMessengerBotGetStartedEnabledField(true);
     }
@@ -16198,13 +16235,6 @@ public class Page extends APINode {
     }
     public APIRequestGetLikes requestMessengerAdsDefaultIcebreakersField (boolean value) {
       this.requestField("messenger_ads_default_icebreakers", value);
-      return this;
-    }
-    public APIRequestGetLikes requestMessengerAdsDefaultPageWelcomeMessageField () {
-      return this.requestMessengerAdsDefaultPageWelcomeMessageField(true);
-    }
-    public APIRequestGetLikes requestMessengerAdsDefaultPageWelcomeMessageField (boolean value) {
-      this.requestField("messenger_ads_default_page_welcome_message", value);
       return this;
     }
     public APIRequestGetLikes requestMessengerAdsDefaultQuickRepliesField () {
@@ -17326,8 +17356,8 @@ public class Page extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "location_page_id",
-      "store_number",
+      "location_page_ids",
+      "store_numbers",
     };
 
     public static final String[] FIELDS = {
@@ -17386,17 +17416,21 @@ public class Page extends APINode {
     }
 
 
-    public APIRequestDeleteLocations setLocationPageId (String locationPageId) {
-      this.setParam("location_page_id", locationPageId);
+    public APIRequestDeleteLocations setLocationPageIds (List<String> locationPageIds) {
+      this.setParam("location_page_ids", locationPageIds);
+      return this;
+    }
+    public APIRequestDeleteLocations setLocationPageIds (String locationPageIds) {
+      this.setParam("location_page_ids", locationPageIds);
       return this;
     }
 
-    public APIRequestDeleteLocations setStoreNumber (Long storeNumber) {
-      this.setParam("store_number", storeNumber);
+    public APIRequestDeleteLocations setStoreNumbers (List<Long> storeNumbers) {
+      this.setParam("store_numbers", storeNumbers);
       return this;
     }
-    public APIRequestDeleteLocations setStoreNumber (String storeNumber) {
-      this.setParam("store_number", storeNumber);
+    public APIRequestDeleteLocations setStoreNumbers (String storeNumbers) {
+      this.setParam("store_numbers", storeNumbers);
       return this;
     }
 
@@ -17486,6 +17520,7 @@ public class Page extends APINode {
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
+      "does_viewer_have_page_permission_link_ig",
       "emails",
       "engagement",
       "fan_count",
@@ -17514,6 +17549,7 @@ public class Page extends APINode {
       "is_chain",
       "is_community_page",
       "is_eligible_for_branded_content",
+      "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -17533,7 +17569,6 @@ public class Page extends APINode {
       "merchant_review_status",
       "messaging_feature_status",
       "messenger_ads_default_icebreakers",
-      "messenger_ads_default_page_welcome_message",
       "messenger_ads_default_quick_replies",
       "messenger_ads_quick_replies_type",
       "mini_shop_storefront",
@@ -17947,6 +17982,13 @@ public class Page extends APINode {
       this.requestField("displayed_message_response_time", value);
       return this;
     }
+    public APIRequestGetLocations requestDoesViewerHavePagePermissionLinkIgField () {
+      return this.requestDoesViewerHavePagePermissionLinkIgField(true);
+    }
+    public APIRequestGetLocations requestDoesViewerHavePagePermissionLinkIgField (boolean value) {
+      this.requestField("does_viewer_have_page_permission_link_ig", value);
+      return this;
+    }
     public APIRequestGetLocations requestEmailsField () {
       return this.requestEmailsField(true);
     }
@@ -18143,6 +18185,13 @@ public class Page extends APINode {
       this.requestField("is_eligible_for_branded_content", value);
       return this;
     }
+    public APIRequestGetLocations requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField () {
+      return this.requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField(true);
+    }
+    public APIRequestGetLocations requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
+      this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
+      return this;
+    }
     public APIRequestGetLocations requestIsMessengerBotGetStartedEnabledField () {
       return this.requestIsMessengerBotGetStartedEnabledField(true);
     }
@@ -18274,13 +18323,6 @@ public class Page extends APINode {
     }
     public APIRequestGetLocations requestMessengerAdsDefaultIcebreakersField (boolean value) {
       this.requestField("messenger_ads_default_icebreakers", value);
-      return this;
-    }
-    public APIRequestGetLocations requestMessengerAdsDefaultPageWelcomeMessageField () {
-      return this.requestMessengerAdsDefaultPageWelcomeMessageField(true);
-    }
-    public APIRequestGetLocations requestMessengerAdsDefaultPageWelcomeMessageField (boolean value) {
-      this.requestField("messenger_ads_default_page_welcome_message", value);
       return this;
     }
     public APIRequestGetLocations requestMessengerAdsDefaultQuickRepliesField () {
@@ -34281,6 +34323,7 @@ public class Page extends APINode {
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
+      "does_viewer_have_page_permission_link_ig",
       "emails",
       "engagement",
       "fan_count",
@@ -34309,6 +34352,7 @@ public class Page extends APINode {
       "is_chain",
       "is_community_page",
       "is_eligible_for_branded_content",
+      "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -34328,7 +34372,6 @@ public class Page extends APINode {
       "merchant_review_status",
       "messaging_feature_status",
       "messenger_ads_default_icebreakers",
-      "messenger_ads_default_page_welcome_message",
       "messenger_ads_default_quick_replies",
       "messenger_ads_quick_replies_type",
       "mini_shop_storefront",
@@ -34747,6 +34790,13 @@ public class Page extends APINode {
       this.requestField("displayed_message_response_time", value);
       return this;
     }
+    public APIRequestGet requestDoesViewerHavePagePermissionLinkIgField () {
+      return this.requestDoesViewerHavePagePermissionLinkIgField(true);
+    }
+    public APIRequestGet requestDoesViewerHavePagePermissionLinkIgField (boolean value) {
+      this.requestField("does_viewer_have_page_permission_link_ig", value);
+      return this;
+    }
     public APIRequestGet requestEmailsField () {
       return this.requestEmailsField(true);
     }
@@ -34943,6 +34993,13 @@ public class Page extends APINode {
       this.requestField("is_eligible_for_branded_content", value);
       return this;
     }
+    public APIRequestGet requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField () {
+      return this.requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField(true);
+    }
+    public APIRequestGet requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
+      this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
+      return this;
+    }
     public APIRequestGet requestIsMessengerBotGetStartedEnabledField () {
       return this.requestIsMessengerBotGetStartedEnabledField(true);
     }
@@ -35074,13 +35131,6 @@ public class Page extends APINode {
     }
     public APIRequestGet requestMessengerAdsDefaultIcebreakersField (boolean value) {
       this.requestField("messenger_ads_default_icebreakers", value);
-      return this;
-    }
-    public APIRequestGet requestMessengerAdsDefaultPageWelcomeMessageField () {
-      return this.requestMessengerAdsDefaultPageWelcomeMessageField(true);
-    }
-    public APIRequestGet requestMessengerAdsDefaultPageWelcomeMessageField (boolean value) {
-      this.requestField("messenger_ads_default_page_welcome_message", value);
       return this;
     }
     public APIRequestGet requestMessengerAdsDefaultQuickRepliesField () {
@@ -37294,6 +37344,7 @@ public class Page extends APINode {
     this.mDirectedBy = instance.mDirectedBy;
     this.mDisplaySubtext = instance.mDisplaySubtext;
     this.mDisplayedMessageResponseTime = instance.mDisplayedMessageResponseTime;
+    this.mDoesViewerHavePagePermissionLinkIg = instance.mDoesViewerHavePagePermissionLinkIg;
     this.mEmails = instance.mEmails;
     this.mEngagement = instance.mEngagement;
     this.mFanCount = instance.mFanCount;
@@ -37322,6 +37373,7 @@ public class Page extends APINode {
     this.mIsChain = instance.mIsChain;
     this.mIsCommunityPage = instance.mIsCommunityPage;
     this.mIsEligibleForBrandedContent = instance.mIsEligibleForBrandedContent;
+    this.mIsEligibleForDisableConnectIgBtnForNonPageAdminAmWeb = instance.mIsEligibleForDisableConnectIgBtnForNonPageAdminAmWeb;
     this.mIsMessengerBotGetStartedEnabled = instance.mIsMessengerBotGetStartedEnabled;
     this.mIsMessengerPlatformBot = instance.mIsMessengerPlatformBot;
     this.mIsOwned = instance.mIsOwned;
@@ -37341,7 +37393,6 @@ public class Page extends APINode {
     this.mMerchantReviewStatus = instance.mMerchantReviewStatus;
     this.mMessagingFeatureStatus = instance.mMessagingFeatureStatus;
     this.mMessengerAdsDefaultIcebreakers = instance.mMessengerAdsDefaultIcebreakers;
-    this.mMessengerAdsDefaultPageWelcomeMessage = instance.mMessengerAdsDefaultPageWelcomeMessage;
     this.mMessengerAdsDefaultQuickReplies = instance.mMessengerAdsDefaultQuickReplies;
     this.mMessengerAdsQuickRepliesType = instance.mMessengerAdsQuickRepliesType;
     this.mMiniShopStorefront = instance.mMiniShopStorefront;
