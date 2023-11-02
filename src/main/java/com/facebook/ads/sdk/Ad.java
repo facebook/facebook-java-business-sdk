@@ -92,8 +92,6 @@ public class Ad extends APINode {
   private List<AdgroupIssuesInfo> mIssuesInfo = null;
   @SerializedName("last_updated_by_app_id")
   private String mLastUpdatedByAppId = null;
-  @SerializedName("meta_reward_adgroup_status")
-  private String mMetaRewardAdgroupStatus = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("preview_shareable_link")
@@ -491,10 +489,6 @@ public class Ad extends APINode {
     return mLastUpdatedByAppId;
   }
 
-  public String getFieldMetaRewardAdgroupStatus() {
-    return mMetaRewardAdgroupStatus;
-  }
-
   public String getFieldName() {
     return mName;
   }
@@ -604,6 +598,7 @@ public class Ad extends APINode {
       "object_type",
       "object_url",
       "omnichannel_link_spec",
+      "photo_album_source_object_story_id",
       "place_page_set_id",
       "platform_customizations",
       "playable_asset_id",
@@ -1052,6 +1047,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetAdCreatives requestOmnichannelLinkSpecField (boolean value) {
       this.requestField("omnichannel_link_spec", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestPhotoAlbumSourceObjectStoryIdField () {
+      return this.requestPhotoAlbumSourceObjectStoryIdField(true);
+    }
+    public APIRequestGetAdCreatives requestPhotoAlbumSourceObjectStoryIdField (boolean value) {
+      this.requestField("photo_album_source_object_story_id", value);
       return this;
     }
     public APIRequestGetAdCreatives requestPlacePageSetIdField () {
@@ -1527,7 +1529,6 @@ public class Ad extends APINode {
       "id",
       "issues_info",
       "last_updated_by_app_id",
-      "meta_reward_adgroup_status",
       "name",
       "preview_shareable_link",
       "priority",
@@ -1846,13 +1847,6 @@ public class Ad extends APINode {
     }
     public APIRequestGetCopies requestLastUpdatedByAppIdField (boolean value) {
       this.requestField("last_updated_by_app_id", value);
-      return this;
-    }
-    public APIRequestGetCopies requestMetaRewardAdgroupStatusField () {
-      return this.requestMetaRewardAdgroupStatusField(true);
-    }
-    public APIRequestGetCopies requestMetaRewardAdgroupStatusField (boolean value) {
-      this.requestField("meta_reward_adgroup_status", value);
       return this;
     }
     public APIRequestGetCopies requestNameField () {
@@ -3442,7 +3436,6 @@ public class Ad extends APINode {
       "id",
       "issues_info",
       "last_updated_by_app_id",
-      "meta_reward_adgroup_status",
       "name",
       "preview_shareable_link",
       "priority",
@@ -3772,13 +3765,6 @@ public class Ad extends APINode {
       this.requestField("last_updated_by_app_id", value);
       return this;
     }
-    public APIRequestGet requestMetaRewardAdgroupStatusField () {
-      return this.requestMetaRewardAdgroupStatusField(true);
-    }
-    public APIRequestGet requestMetaRewardAdgroupStatusField (boolean value) {
-      this.requestField("meta_reward_adgroup_status", value);
-      return this;
-    }
     public APIRequestGet requestNameField () {
       return this.requestNameField(true);
     }
@@ -3879,7 +3865,6 @@ public class Ad extends APINode {
       "engagement_audience",
       "execution_options",
       "include_demolink_hashes",
-      "meta_reward_adgroup_status",
       "name",
       "priority",
       "status",
@@ -4036,15 +4021,6 @@ public class Ad extends APINode {
     }
     public APIRequestUpdate setIncludeDemolinkHashes (String includeDemolinkHashes) {
       this.setParam("include_demolink_hashes", includeDemolinkHashes);
-      return this;
-    }
-
-    public APIRequestUpdate setMetaRewardAdgroupStatus (Ad.EnumMetaRewardAdgroupStatus metaRewardAdgroupStatus) {
-      this.setParam("meta_reward_adgroup_status", metaRewardAdgroupStatus);
-      return this;
-    }
-    public APIRequestUpdate setMetaRewardAdgroupStatus (String metaRewardAdgroupStatus) {
-      this.setParam("meta_reward_adgroup_status", metaRewardAdgroupStatus);
       return this;
     }
 
@@ -4304,25 +4280,6 @@ public class Ad extends APINode {
       }
   }
 
-  public static enum EnumMetaRewardAdgroupStatus {
-      @SerializedName("ACTIVE")
-      VALUE_ACTIVE("ACTIVE"),
-      @SerializedName("INACTIVE")
-      VALUE_INACTIVE("INACTIVE"),
-      ;
-
-      private String value;
-
-      private EnumMetaRewardAdgroupStatus(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
   public static enum EnumOperator {
       @SerializedName("ALL")
       VALUE_ALL("ALL"),
@@ -4404,7 +4361,6 @@ public class Ad extends APINode {
     this.mId = instance.mId;
     this.mIssuesInfo = instance.mIssuesInfo;
     this.mLastUpdatedByAppId = instance.mLastUpdatedByAppId;
-    this.mMetaRewardAdgroupStatus = instance.mMetaRewardAdgroupStatus;
     this.mName = instance.mName;
     this.mPreviewShareableLink = instance.mPreviewShareableLink;
     this.mPriority = instance.mPriority;

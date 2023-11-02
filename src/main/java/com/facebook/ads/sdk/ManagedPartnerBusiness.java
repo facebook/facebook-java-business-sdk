@@ -45,7 +45,7 @@ public class ManagedPartnerBusiness extends APINode {
   @SerializedName("catalog_segment")
   private ProductCatalog mCatalogSegment = null;
   @SerializedName("extended_credit")
-  private ExtendedCredit mExtendedCredit = null;
+  private ManagedPartnerExtendedCredit mExtendedCredit = null;
   @SerializedName("page")
   private Page mPage = null;
   @SerializedName("seller_business_info")
@@ -239,21 +239,18 @@ public class ManagedPartnerBusiness extends APINode {
     this.mCatalogSegment = ProductCatalog.getGson().fromJson(value, type);
     return this;
   }
-  public ExtendedCredit getFieldExtendedCredit() {
-    if (mExtendedCredit != null) {
-      mExtendedCredit.context = getContext();
-    }
+  public ManagedPartnerExtendedCredit getFieldExtendedCredit() {
     return mExtendedCredit;
   }
 
-  public ManagedPartnerBusiness setFieldExtendedCredit(ExtendedCredit value) {
+  public ManagedPartnerBusiness setFieldExtendedCredit(ManagedPartnerExtendedCredit value) {
     this.mExtendedCredit = value;
     return this;
   }
 
   public ManagedPartnerBusiness setFieldExtendedCredit(String value) {
-    Type type = new TypeToken<ExtendedCredit>(){}.getType();
-    this.mExtendedCredit = ExtendedCredit.getGson().fromJson(value, type);
+    Type type = new TypeToken<ManagedPartnerExtendedCredit>(){}.getType();
+    this.mExtendedCredit = ManagedPartnerExtendedCredit.getGson().fromJson(value, type);
     return this;
   }
   public Page getFieldPage() {

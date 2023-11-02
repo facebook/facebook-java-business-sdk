@@ -785,6 +785,8 @@ public class AdStudyObjective extends APINode {
       "restrictions",
       "restrictive_data_filter_params",
       "restrictive_data_filter_rules",
+      "sdk_auto_logging_default_value",
+      "sdk_auto_logging_override_value",
       "sdk_update_message",
       "seamless_login",
       "secure_canvas_url",
@@ -1469,6 +1471,20 @@ public class AdStudyObjective extends APINode {
     }
     public APIRequestGetApplications requestRestrictiveDataFilterRulesField (boolean value) {
       this.requestField("restrictive_data_filter_rules", value);
+      return this;
+    }
+    public APIRequestGetApplications requestSdkAutoLoggingDefaultValueField () {
+      return this.requestSdkAutoLoggingDefaultValueField(true);
+    }
+    public APIRequestGetApplications requestSdkAutoLoggingDefaultValueField (boolean value) {
+      this.requestField("sdk_auto_logging_default_value", value);
+      return this;
+    }
+    public APIRequestGetApplications requestSdkAutoLoggingOverrideValueField () {
+      return this.requestSdkAutoLoggingOverrideValueField(true);
+    }
+    public APIRequestGetApplications requestSdkAutoLoggingOverrideValueField (boolean value) {
+      this.requestField("sdk_auto_logging_override_value", value);
       return this;
     }
     public APIRequestGetApplications requestSdkUpdateMessageField () {

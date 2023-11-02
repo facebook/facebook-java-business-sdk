@@ -2665,6 +2665,7 @@ public class AdAccount extends APINode {
       "object_type",
       "object_url",
       "omnichannel_link_spec",
+      "photo_album_source_object_story_id",
       "place_page_set_id",
       "platform_customizations",
       "playable_asset_id",
@@ -3113,6 +3114,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdCreatives requestOmnichannelLinkSpecField (boolean value) {
       this.requestField("omnichannel_link_spec", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestPhotoAlbumSourceObjectStoryIdField () {
+      return this.requestPhotoAlbumSourceObjectStoryIdField(true);
+    }
+    public APIRequestGetAdCreatives requestPhotoAlbumSourceObjectStoryIdField (boolean value) {
+      this.requestField("photo_album_source_object_story_id", value);
       return this;
     }
     public APIRequestGetAdCreatives requestPlacePageSetIdField () {
@@ -3791,6 +3799,7 @@ public class AdAccount extends APINode {
       "object_type",
       "object_url",
       "omnichannel_link_spec",
+      "photo_album_source_object_story_id",
       "place_page_set_id",
       "platform_customizations",
       "playable_asset_id",
@@ -4257,6 +4266,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdCreativesByLabels requestOmnichannelLinkSpecField (boolean value) {
       this.requestField("omnichannel_link_spec", value);
+      return this;
+    }
+    public APIRequestGetAdCreativesByLabels requestPhotoAlbumSourceObjectStoryIdField () {
+      return this.requestPhotoAlbumSourceObjectStoryIdField(true);
+    }
+    public APIRequestGetAdCreativesByLabels requestPhotoAlbumSourceObjectStoryIdField (boolean value) {
+      this.requestField("photo_album_source_object_story_id", value);
       return this;
     }
     public APIRequestGetAdCreativesByLabels requestPlacePageSetIdField () {
@@ -6042,7 +6058,6 @@ public class AdAccount extends APINode {
       "id",
       "issues_info",
       "last_updated_by_app_id",
-      "meta_reward_adgroup_status",
       "name",
       "preview_shareable_link",
       "priority",
@@ -6363,13 +6378,6 @@ public class AdAccount extends APINode {
       this.requestField("last_updated_by_app_id", value);
       return this;
     }
-    public APIRequestGetAds requestMetaRewardAdgroupStatusField () {
-      return this.requestMetaRewardAdgroupStatusField(true);
-    }
-    public APIRequestGetAds requestMetaRewardAdgroupStatusField (boolean value) {
-      this.requestField("meta_reward_adgroup_status", value);
-      return this;
-    }
     public APIRequestGetAds requestNameField () {
       return this.requestNameField(true);
     }
@@ -6472,7 +6480,6 @@ public class AdAccount extends APINode {
       "engagement_audience",
       "execution_options",
       "include_demolink_hashes",
-      "meta_reward_adgroup_status",
       "name",
       "priority",
       "source_ad_id",
@@ -6654,15 +6661,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAd setIncludeDemolinkHashes (String includeDemolinkHashes) {
       this.setParam("include_demolink_hashes", includeDemolinkHashes);
-      return this;
-    }
-
-    public APIRequestCreateAd setMetaRewardAdgroupStatus (Ad.EnumMetaRewardAdgroupStatus metaRewardAdgroupStatus) {
-      this.setParam("meta_reward_adgroup_status", metaRewardAdgroupStatus);
-      return this;
-    }
-    public APIRequestCreateAd setMetaRewardAdgroupStatus (String metaRewardAdgroupStatus) {
-      this.setParam("meta_reward_adgroup_status", metaRewardAdgroupStatus);
       return this;
     }
 
@@ -7228,7 +7226,6 @@ public class AdAccount extends APINode {
       "id",
       "issues_info",
       "last_updated_by_app_id",
-      "meta_reward_adgroup_status",
       "name",
       "preview_shareable_link",
       "priority",
@@ -7529,13 +7526,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdsByLabels requestLastUpdatedByAppIdField (boolean value) {
       this.requestField("last_updated_by_app_id", value);
-      return this;
-    }
-    public APIRequestGetAdsByLabels requestMetaRewardAdgroupStatusField () {
-      return this.requestMetaRewardAdgroupStatusField(true);
-    }
-    public APIRequestGetAdsByLabels requestMetaRewardAdgroupStatusField (boolean value) {
-      this.requestField("meta_reward_adgroup_status", value);
       return this;
     }
     public APIRequestGetAdsByLabels requestNameField () {
@@ -9980,6 +9970,8 @@ public class AdAccount extends APINode {
       "restrictions",
       "restrictive_data_filter_params",
       "restrictive_data_filter_rules",
+      "sdk_auto_logging_default_value",
+      "sdk_auto_logging_override_value",
       "sdk_update_message",
       "seamless_login",
       "secure_canvas_url",
@@ -10674,6 +10666,20 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdvertisableApplications requestRestrictiveDataFilterRulesField (boolean value) {
       this.requestField("restrictive_data_filter_rules", value);
+      return this;
+    }
+    public APIRequestGetAdvertisableApplications requestSdkAutoLoggingDefaultValueField () {
+      return this.requestSdkAutoLoggingDefaultValueField(true);
+    }
+    public APIRequestGetAdvertisableApplications requestSdkAutoLoggingDefaultValueField (boolean value) {
+      this.requestField("sdk_auto_logging_default_value", value);
+      return this;
+    }
+    public APIRequestGetAdvertisableApplications requestSdkAutoLoggingOverrideValueField () {
+      return this.requestSdkAutoLoggingOverrideValueField(true);
+    }
+    public APIRequestGetAdvertisableApplications requestSdkAutoLoggingOverrideValueField (boolean value) {
+      this.requestField("sdk_auto_logging_override_value", value);
       return this;
     }
     public APIRequestGetAdvertisableApplications requestSdkUpdateMessageField () {
@@ -13257,6 +13263,8 @@ public class AdAccount extends APINode {
       "restrictions",
       "restrictive_data_filter_params",
       "restrictive_data_filter_rules",
+      "sdk_auto_logging_default_value",
+      "sdk_auto_logging_override_value",
       "sdk_update_message",
       "seamless_login",
       "secure_canvas_url",
@@ -13941,6 +13949,20 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetApplications requestRestrictiveDataFilterRulesField (boolean value) {
       this.requestField("restrictive_data_filter_rules", value);
+      return this;
+    }
+    public APIRequestGetApplications requestSdkAutoLoggingDefaultValueField () {
+      return this.requestSdkAutoLoggingDefaultValueField(true);
+    }
+    public APIRequestGetApplications requestSdkAutoLoggingDefaultValueField (boolean value) {
+      this.requestField("sdk_auto_logging_default_value", value);
+      return this;
+    }
+    public APIRequestGetApplications requestSdkAutoLoggingOverrideValueField () {
+      return this.requestSdkAutoLoggingOverrideValueField(true);
+    }
+    public APIRequestGetApplications requestSdkAutoLoggingOverrideValueField (boolean value) {
+      this.requestField("sdk_auto_logging_override_value", value);
       return this;
     }
     public APIRequestGetApplications requestSdkUpdateMessageField () {
@@ -17422,6 +17444,7 @@ public class AdAccount extends APINode {
       "subtype",
       "use_in_campaigns",
       "video_group_ids",
+      "whats_app_business_phone_number_id",
     };
 
     public static final String[] FIELDS = {
@@ -17727,6 +17750,11 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateCustomAudience setVideoGroupIds (String videoGroupIds) {
       this.setParam("video_group_ids", videoGroupIds);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setWhatsAppBusinessPhoneNumberId (String whatsAppBusinessPhoneNumberId) {
+      this.setParam("whats_app_business_phone_number_id", whatsAppBusinessPhoneNumberId);
       return this;
     }
 
@@ -22315,6 +22343,7 @@ public class AdAccount extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_lead_access",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_enterprise_number_using_cloud_api",
@@ -22865,6 +22894,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetPromotePages requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetPromotePages requestHasLeadAccessField () {
+      return this.requestHasLeadAccessField(true);
+    }
+    public APIRequestGetPromotePages requestHasLeadAccessField (boolean value) {
+      this.requestField("has_lead_access", value);
       return this;
     }
     public APIRequestGetPromotePages requestHasTransitionedToNewPageExperienceField () {

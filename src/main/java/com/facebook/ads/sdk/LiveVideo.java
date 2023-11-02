@@ -1357,6 +1357,7 @@ public class LiveVideo extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_lead_access",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_enterprise_number_using_cloud_api",
@@ -1907,6 +1908,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestHasLeadAccessField () {
+      return this.requestHasLeadAccessField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestHasLeadAccessField (boolean value) {
+      this.requestField("has_lead_access", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestHasTransitionedToNewPageExperienceField () {

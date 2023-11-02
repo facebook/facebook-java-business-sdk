@@ -463,6 +463,8 @@ public class AdPromotedObject extends APINode {
       VALUE_ADD_TO_CART("ADD_TO_CART"),
       @SerializedName("ADD_TO_WISHLIST")
       VALUE_ADD_TO_WISHLIST("ADD_TO_WISHLIST"),
+      @SerializedName("AD_IMPRESSION")
+      VALUE_AD_IMPRESSION("AD_IMPRESSION"),
       @SerializedName("COMPLETE_REGISTRATION")
       VALUE_COMPLETE_REGISTRATION("COMPLETE_REGISTRATION"),
       @SerializedName("CONTACT")

@@ -1090,6 +1090,7 @@ public class User extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_lead_access",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_enterprise_number_using_cloud_api",
@@ -1658,6 +1659,13 @@ public class User extends APINode {
     }
     public APIRequestGetAccounts requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetAccounts requestHasLeadAccessField () {
+      return this.requestHasLeadAccessField(true);
+    }
+    public APIRequestGetAccounts requestHasLeadAccessField (boolean value) {
+      this.requestField("has_lead_access", value);
       return this;
     }
     public APIRequestGetAccounts requestHasTransitionedToNewPageExperienceField () {
@@ -5233,6 +5241,7 @@ public class User extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_lead_access",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_enterprise_number_using_cloud_api",
@@ -5792,6 +5801,13 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedPages requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetAssignedPages requestHasLeadAccessField () {
+      return this.requestHasLeadAccessField(true);
+    }
+    public APIRequestGetAssignedPages requestHasLeadAccessField (boolean value) {
+      this.requestField("has_lead_access", value);
       return this;
     }
     public APIRequestGetAssignedPages requestHasTransitionedToNewPageExperienceField () {
@@ -12043,6 +12059,7 @@ public class User extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_lead_access",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_enterprise_number_using_cloud_api",
@@ -12598,6 +12615,13 @@ public class User extends APINode {
     }
     public APIRequestGetLikes requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetLikes requestHasLeadAccessField () {
+      return this.requestHasLeadAccessField(true);
+    }
+    public APIRequestGetLikes requestHasLeadAccessField (boolean value) {
+      this.requestField("has_lead_access", value);
       return this;
     }
     public APIRequestGetLikes requestHasTransitionedToNewPageExperienceField () {
@@ -14077,6 +14101,7 @@ public class User extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_lead_access",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_enterprise_number_using_cloud_api",
@@ -14632,6 +14657,13 @@ public class User extends APINode {
     }
     public APIRequestGetMusic requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetMusic requestHasLeadAccessField () {
+      return this.requestHasLeadAccessField(true);
+    }
+    public APIRequestGetMusic requestHasLeadAccessField (boolean value) {
+      this.requestField("has_lead_access", value);
       return this;
     }
     public APIRequestGetMusic requestHasTransitionedToNewPageExperienceField () {

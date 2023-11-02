@@ -401,6 +401,10 @@ public class AdSet extends APINode {
     return new APIRequestGetAsyncAdRequests(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateBudgetSchedule createBudgetSchedule() {
+    return new APIRequestCreateBudgetSchedule(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetCopies getCopies() {
     return new APIRequestGetCopies(this.getPrefixedId().toString(), context);
   }
@@ -1613,6 +1617,7 @@ public class AdSet extends APINode {
       "object_type",
       "object_url",
       "omnichannel_link_spec",
+      "photo_album_source_object_story_id",
       "place_page_set_id",
       "platform_customizations",
       "playable_asset_id",
@@ -2061,6 +2066,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAdCreatives requestOmnichannelLinkSpecField (boolean value) {
       this.requestField("omnichannel_link_spec", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestPhotoAlbumSourceObjectStoryIdField () {
+      return this.requestPhotoAlbumSourceObjectStoryIdField(true);
+    }
+    public APIRequestGetAdCreatives requestPhotoAlbumSourceObjectStoryIdField (boolean value) {
+      this.requestField("photo_album_source_object_story_id", value);
       return this;
     }
     public APIRequestGetAdCreatives requestPlacePageSetIdField () {
@@ -2660,7 +2672,6 @@ public class AdSet extends APINode {
       "id",
       "issues_info",
       "last_updated_by_app_id",
-      "meta_reward_adgroup_status",
       "name",
       "preview_shareable_link",
       "priority",
@@ -2981,13 +2992,6 @@ public class AdSet extends APINode {
       this.requestField("last_updated_by_app_id", value);
       return this;
     }
-    public APIRequestGetAds requestMetaRewardAdgroupStatusField () {
-      return this.requestMetaRewardAdgroupStatusField(true);
-    }
-    public APIRequestGetAds requestMetaRewardAdgroupStatusField (boolean value) {
-      this.requestField("meta_reward_adgroup_status", value);
-      return this;
-    }
     public APIRequestGetAds requestNameField () {
       return this.requestNameField(true);
     }
@@ -3251,6 +3255,150 @@ public class AdSet extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
+  }
+
+  public static class APIRequestCreateBudgetSchedule extends APIRequest<HighDemandPeriod> {
+
+    HighDemandPeriod lastResponse = null;
+    @Override
+    public HighDemandPeriod getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "budget_value",
+      "budget_value_type",
+      "time_end",
+      "time_start",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public HighDemandPeriod parseResponse(String response, String header) throws APIException {
+      return HighDemandPeriod.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public HighDemandPeriod execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public HighDemandPeriod execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<HighDemandPeriod> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<HighDemandPeriod> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, HighDemandPeriod>() {
+           public HighDemandPeriod apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateBudgetSchedule.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateBudgetSchedule(String nodeId, APIContext context) {
+      super(context, nodeId, "/budget_schedules", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateBudgetSchedule setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBudgetSchedule setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateBudgetSchedule setBudgetValue (Long budgetValue) {
+      this.setParam("budget_value", budgetValue);
+      return this;
+    }
+    public APIRequestCreateBudgetSchedule setBudgetValue (String budgetValue) {
+      this.setParam("budget_value", budgetValue);
+      return this;
+    }
+
+    public APIRequestCreateBudgetSchedule setBudgetValueType (HighDemandPeriod.EnumBudgetValueType budgetValueType) {
+      this.setParam("budget_value_type", budgetValueType);
+      return this;
+    }
+    public APIRequestCreateBudgetSchedule setBudgetValueType (String budgetValueType) {
+      this.setParam("budget_value_type", budgetValueType);
+      return this;
+    }
+
+    public APIRequestCreateBudgetSchedule setTimeEnd (Long timeEnd) {
+      this.setParam("time_end", timeEnd);
+      return this;
+    }
+    public APIRequestCreateBudgetSchedule setTimeEnd (String timeEnd) {
+      this.setParam("time_end", timeEnd);
+      return this;
+    }
+
+    public APIRequestCreateBudgetSchedule setTimeStart (Long timeStart) {
+      this.setParam("time_start", timeStart);
+      return this;
+    }
+    public APIRequestCreateBudgetSchedule setTimeStart (String timeStart) {
+      this.setParam("time_start", timeStart);
+      return this;
+    }
+
+    public APIRequestCreateBudgetSchedule requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateBudgetSchedule requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBudgetSchedule requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateBudgetSchedule requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBudgetSchedule requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBudgetSchedule requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetCopies extends APIRequest<AdSet> {

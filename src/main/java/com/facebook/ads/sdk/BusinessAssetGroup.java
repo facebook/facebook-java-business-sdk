@@ -1878,6 +1878,8 @@ public class BusinessAssetGroup extends APINode {
       "restrictions",
       "restrictive_data_filter_params",
       "restrictive_data_filter_rules",
+      "sdk_auto_logging_default_value",
+      "sdk_auto_logging_override_value",
       "sdk_update_message",
       "seamless_login",
       "secure_canvas_url",
@@ -2562,6 +2564,20 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedApplications requestRestrictiveDataFilterRulesField (boolean value) {
       this.requestField("restrictive_data_filter_rules", value);
+      return this;
+    }
+    public APIRequestGetContainedApplications requestSdkAutoLoggingDefaultValueField () {
+      return this.requestSdkAutoLoggingDefaultValueField(true);
+    }
+    public APIRequestGetContainedApplications requestSdkAutoLoggingDefaultValueField (boolean value) {
+      this.requestField("sdk_auto_logging_default_value", value);
+      return this;
+    }
+    public APIRequestGetContainedApplications requestSdkAutoLoggingOverrideValueField () {
+      return this.requestSdkAutoLoggingOverrideValueField(true);
+    }
+    public APIRequestGetContainedApplications requestSdkAutoLoggingOverrideValueField (boolean value) {
+      this.requestField("sdk_auto_logging_override_value", value);
       return this;
     }
     public APIRequestGetContainedApplications requestSdkUpdateMessageField () {
@@ -4464,6 +4480,7 @@ public class BusinessAssetGroup extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_lead_access",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_enterprise_number_using_cloud_api",
@@ -5014,6 +5031,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedPages requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetContainedPages requestHasLeadAccessField () {
+      return this.requestHasLeadAccessField(true);
+    }
+    public APIRequestGetContainedPages requestHasLeadAccessField (boolean value) {
+      this.requestField("has_lead_access", value);
       return this;
     }
     public APIRequestGetContainedPages requestHasTransitionedToNewPageExperienceField () {

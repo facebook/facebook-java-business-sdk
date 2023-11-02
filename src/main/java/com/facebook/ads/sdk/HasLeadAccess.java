@@ -39,33 +39,39 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdCreativeBrandedContentAds extends APINode {
-  @SerializedName("ad_format")
-  private Long mAdFormat = null;
-  @SerializedName("creator_ad_permission_type")
-  private String mCreatorAdPermissionType = null;
-  @SerializedName("instagram_boost_post_access_token")
-  private String mInstagramBoostPostAccessToken = null;
-  @SerializedName("is_mca_internal")
-  private Boolean mIsMcaInternal = null;
-  @SerializedName("partners")
-  private List<Object> mPartners = null;
-  @SerializedName("ui_version")
-  private Long mUiVersion = null;
+public class HasLeadAccess extends APINode {
+  @SerializedName("app_has_leads_permission")
+  private Boolean mAppHasLeadsPermission = null;
+  @SerializedName("can_access_lead")
+  private Boolean mCanAccessLead = null;
+  @SerializedName("enabled_lead_access_manager")
+  private Boolean mEnabledLeadAccessManager = null;
+  @SerializedName("failure_reason")
+  private String mFailureReason = null;
+  @SerializedName("failure_resolution")
+  private String mFailureResolution = null;
+  @SerializedName("is_page_admin")
+  private Boolean mIsPageAdmin = null;
+  @SerializedName("page_id")
+  private String mPageId = null;
+  @SerializedName("user_has_leads_permission")
+  private Boolean mUserHasLeadsPermission = null;
+  @SerializedName("user_id")
+  private String mUserId = null;
   protected static Gson gson = null;
 
-  public AdCreativeBrandedContentAds() {
+  public HasLeadAccess() {
   }
 
   public String getId() {
     return null;
   }
-  public static AdCreativeBrandedContentAds loadJSON(String json, APIContext context, String header) {
-    AdCreativeBrandedContentAds adCreativeBrandedContentAds = getGson().fromJson(json, AdCreativeBrandedContentAds.class);
+  public static HasLeadAccess loadJSON(String json, APIContext context, String header) {
+    HasLeadAccess hasLeadAccess = getGson().fromJson(json, HasLeadAccess.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adCreativeBrandedContentAds.toString());
+      JsonElement o2 = parser.parse(hasLeadAccess.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -75,14 +81,14 @@ public class AdCreativeBrandedContentAds extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    adCreativeBrandedContentAds.context = context;
-    adCreativeBrandedContentAds.rawValue = json;
-    adCreativeBrandedContentAds.header = header;
-    return adCreativeBrandedContentAds;
+    hasLeadAccess.context = context;
+    hasLeadAccess.rawValue = json;
+    hasLeadAccess.header = header;
+    return hasLeadAccess;
   }
 
-  public static APINodeList<AdCreativeBrandedContentAds> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdCreativeBrandedContentAds> adCreativeBrandedContentAdss = new APINodeList<AdCreativeBrandedContentAds>(request, json, header);
+  public static APINodeList<HasLeadAccess> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<HasLeadAccess> hasLeadAccesss = new APINodeList<HasLeadAccess>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -93,9 +99,9 @@ public class AdCreativeBrandedContentAds extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCreativeBrandedContentAdss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          hasLeadAccesss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adCreativeBrandedContentAdss;
+        return hasLeadAccesss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -105,20 +111,20 @@ public class AdCreativeBrandedContentAds extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adCreativeBrandedContentAdss.setCursors(before, after);
+                hasLeadAccesss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adCreativeBrandedContentAdss.setPaging(previous, next);
+            hasLeadAccesss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adCreativeBrandedContentAdss.setAppSecret(context.getAppSecretProof());
+              hasLeadAccesss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCreativeBrandedContentAdss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              hasLeadAccesss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -129,23 +135,23 @@ public class AdCreativeBrandedContentAds extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCreativeBrandedContentAdss.add(loadJSON(entry.getValue().toString(), context, header));
+                  hasLeadAccesss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCreativeBrandedContentAdss.add(loadJSON(obj.toString(), context, header));
+              hasLeadAccesss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adCreativeBrandedContentAdss;
+          return hasLeadAccesss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCreativeBrandedContentAdss.add(loadJSON(entry.getValue().toString(), context, header));
+              hasLeadAccesss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adCreativeBrandedContentAdss;
+          return hasLeadAccesss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -162,20 +168,20 @@ public class AdCreativeBrandedContentAds extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCreativeBrandedContentAdss.add(loadJSON(value.toString(), context, header));
+              hasLeadAccesss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adCreativeBrandedContentAdss;
+            return hasLeadAccesss;
           }
 
           // Sixth, check if it's pure JsonObject
-          adCreativeBrandedContentAdss.clear();
-          adCreativeBrandedContentAdss.add(loadJSON(json, context, header));
-          return adCreativeBrandedContentAdss;
+          hasLeadAccesss.clear();
+          hasLeadAccesss.add(loadJSON(json, context, header));
+          return hasLeadAccesss;
         }
       }
     } catch (Exception e) {
@@ -203,57 +209,84 @@ public class AdCreativeBrandedContentAds extends APINode {
   }
 
 
-  public Long getFieldAdFormat() {
-    return mAdFormat;
+  public Boolean getFieldAppHasLeadsPermission() {
+    return mAppHasLeadsPermission;
   }
 
-  public AdCreativeBrandedContentAds setFieldAdFormat(Long value) {
-    this.mAdFormat = value;
+  public HasLeadAccess setFieldAppHasLeadsPermission(Boolean value) {
+    this.mAppHasLeadsPermission = value;
     return this;
   }
 
-  public String getFieldCreatorAdPermissionType() {
-    return mCreatorAdPermissionType;
+  public Boolean getFieldCanAccessLead() {
+    return mCanAccessLead;
   }
 
-  public AdCreativeBrandedContentAds setFieldCreatorAdPermissionType(String value) {
-    this.mCreatorAdPermissionType = value;
+  public HasLeadAccess setFieldCanAccessLead(Boolean value) {
+    this.mCanAccessLead = value;
     return this;
   }
 
-  public String getFieldInstagramBoostPostAccessToken() {
-    return mInstagramBoostPostAccessToken;
+  public Boolean getFieldEnabledLeadAccessManager() {
+    return mEnabledLeadAccessManager;
   }
 
-  public AdCreativeBrandedContentAds setFieldInstagramBoostPostAccessToken(String value) {
-    this.mInstagramBoostPostAccessToken = value;
+  public HasLeadAccess setFieldEnabledLeadAccessManager(Boolean value) {
+    this.mEnabledLeadAccessManager = value;
     return this;
   }
 
-  public Boolean getFieldIsMcaInternal() {
-    return mIsMcaInternal;
+  public String getFieldFailureReason() {
+    return mFailureReason;
   }
 
-  public AdCreativeBrandedContentAds setFieldIsMcaInternal(Boolean value) {
-    this.mIsMcaInternal = value;
+  public HasLeadAccess setFieldFailureReason(String value) {
+    this.mFailureReason = value;
     return this;
   }
 
-  public List<Object> getFieldPartners() {
-    return mPartners;
+  public String getFieldFailureResolution() {
+    return mFailureResolution;
   }
 
-  public AdCreativeBrandedContentAds setFieldPartners(List<Object> value) {
-    this.mPartners = value;
+  public HasLeadAccess setFieldFailureResolution(String value) {
+    this.mFailureResolution = value;
     return this;
   }
 
-  public Long getFieldUiVersion() {
-    return mUiVersion;
+  public Boolean getFieldIsPageAdmin() {
+    return mIsPageAdmin;
   }
 
-  public AdCreativeBrandedContentAds setFieldUiVersion(Long value) {
-    this.mUiVersion = value;
+  public HasLeadAccess setFieldIsPageAdmin(Boolean value) {
+    this.mIsPageAdmin = value;
+    return this;
+  }
+
+  public String getFieldPageId() {
+    return mPageId;
+  }
+
+  public HasLeadAccess setFieldPageId(String value) {
+    this.mPageId = value;
+    return this;
+  }
+
+  public Boolean getFieldUserHasLeadsPermission() {
+    return mUserHasLeadsPermission;
+  }
+
+  public HasLeadAccess setFieldUserHasLeadsPermission(Boolean value) {
+    this.mUserHasLeadsPermission = value;
+    return this;
+  }
+
+  public String getFieldUserId() {
+    return mUserId;
+  }
+
+  public HasLeadAccess setFieldUserId(String value) {
+    this.mUserId = value;
     return this;
   }
 
@@ -273,22 +306,25 @@ public class AdCreativeBrandedContentAds extends APINode {
     return gson;
   }
 
-  public AdCreativeBrandedContentAds copyFrom(AdCreativeBrandedContentAds instance) {
-    this.mAdFormat = instance.mAdFormat;
-    this.mCreatorAdPermissionType = instance.mCreatorAdPermissionType;
-    this.mInstagramBoostPostAccessToken = instance.mInstagramBoostPostAccessToken;
-    this.mIsMcaInternal = instance.mIsMcaInternal;
-    this.mPartners = instance.mPartners;
-    this.mUiVersion = instance.mUiVersion;
+  public HasLeadAccess copyFrom(HasLeadAccess instance) {
+    this.mAppHasLeadsPermission = instance.mAppHasLeadsPermission;
+    this.mCanAccessLead = instance.mCanAccessLead;
+    this.mEnabledLeadAccessManager = instance.mEnabledLeadAccessManager;
+    this.mFailureReason = instance.mFailureReason;
+    this.mFailureResolution = instance.mFailureResolution;
+    this.mIsPageAdmin = instance.mIsPageAdmin;
+    this.mPageId = instance.mPageId;
+    this.mUserHasLeadsPermission = instance.mUserHasLeadsPermission;
+    this.mUserId = instance.mUserId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdCreativeBrandedContentAds> getParser() {
-    return new APIRequest.ResponseParser<AdCreativeBrandedContentAds>() {
-      public APINodeList<AdCreativeBrandedContentAds> parseResponse(String response, APIContext context, APIRequest<AdCreativeBrandedContentAds> request, String header) throws MalformedResponseException {
-        return AdCreativeBrandedContentAds.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<HasLeadAccess> getParser() {
+    return new APIRequest.ResponseParser<HasLeadAccess>() {
+      public APINodeList<HasLeadAccess> parseResponse(String response, APIContext context, APIRequest<HasLeadAccess> request, String header) throws MalformedResponseException {
+        return HasLeadAccess.parseResponse(response, context, request, header);
       }
     };
   }

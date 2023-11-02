@@ -299,8 +299,6 @@ public class AdCreativeLinkDataCallToAction extends APINode {
       VALUE_MESSAGE_PAGE("MESSAGE_PAGE"),
       @SerializedName("MOBILE_DOWNLOAD")
       VALUE_MOBILE_DOWNLOAD("MOBILE_DOWNLOAD"),
-      @SerializedName("MOMENTS")
-      VALUE_MOMENTS("MOMENTS"),
       @SerializedName("NO_BUTTON")
       VALUE_NO_BUTTON("NO_BUTTON"),
       @SerializedName("OPEN_INSTANT_APP")

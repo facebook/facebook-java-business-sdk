@@ -48,6 +48,8 @@ public class AdCreativeLinkData extends APINode {
   private AdCreativeLinkDataAppLinkSpec mAppLinkSpec = null;
   @SerializedName("attachment_style")
   private String mAttachmentStyle = null;
+  @SerializedName("automated_product_tags")
+  private Boolean mAutomatedProductTags = null;
   @SerializedName("branded_content_shared_to_sponsor_status")
   private String mBrandedContentSharedToSponsorStatus = null;
   @SerializedName("branded_content_sponsor_page_id")
@@ -295,6 +297,15 @@ public class AdCreativeLinkData extends APINode {
 
   public AdCreativeLinkData setFieldAttachmentStyle(String value) {
     this.mAttachmentStyle = value;
+    return this;
+  }
+
+  public Boolean getFieldAutomatedProductTags() {
+    return mAutomatedProductTags;
+  }
+
+  public AdCreativeLinkData setFieldAutomatedProductTags(Boolean value) {
+    this.mAutomatedProductTags = value;
     return this;
   }
 
@@ -650,6 +661,7 @@ public class AdCreativeLinkData extends APINode {
     this.mAdditionalImageIndex = instance.mAdditionalImageIndex;
     this.mAppLinkSpec = instance.mAppLinkSpec;
     this.mAttachmentStyle = instance.mAttachmentStyle;
+    this.mAutomatedProductTags = instance.mAutomatedProductTags;
     this.mBrandedContentSharedToSponsorStatus = instance.mBrandedContentSharedToSponsorStatus;
     this.mBrandedContentSponsorPageId = instance.mBrandedContentSponsorPageId;
     this.mCallToAction = instance.mCallToAction;

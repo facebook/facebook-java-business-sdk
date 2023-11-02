@@ -98,6 +98,8 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mCatalogSegmentValueWebsitePurchaseRoas = null;
   @SerializedName("clicks")
   private String mClicks = null;
+  @SerializedName("conversion_lead_rate")
+  private String mConversionLeadRate = null;
   @SerializedName("conversion_rate_ranking")
   private String mConversionRateRanking = null;
   @SerializedName("conversion_values")
@@ -118,6 +120,8 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mCostPerAdClick = null;
   @SerializedName("cost_per_conversion")
   private List<AdsActionStats> mCostPerConversion = null;
+  @SerializedName("cost_per_conversion_lead")
+  private String mCostPerConversionLead = null;
   @SerializedName("cost_per_dda_countby_convs")
   private String mCostPerDdaCountbyConvs = null;
   @SerializedName("cost_per_estimated_ad_recallers")
@@ -846,6 +850,15 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public String getFieldConversionLeadRate() {
+    return mConversionLeadRate;
+  }
+
+  public AdsInsights setFieldConversionLeadRate(String value) {
+    this.mConversionLeadRate = value;
+    return this;
+  }
+
   public String getFieldConversionRateRanking() {
     return mConversionRateRanking;
   }
@@ -981,6 +994,15 @@ public class AdsInsights extends APINode {
     this.mCostPerConversion = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
+  public String getFieldCostPerConversionLead() {
+    return mCostPerConversionLead;
+  }
+
+  public AdsInsights setFieldCostPerConversionLead(String value) {
+    this.mCostPerConversionLead = value;
+    return this;
+  }
+
   public String getFieldCostPerDdaCountbyConvs() {
     return mCostPerDdaCountbyConvs;
   }
@@ -2531,6 +2553,7 @@ public class AdsInsights extends APINode {
     this.mCatalogSegmentValueOmniPurchaseRoas = instance.mCatalogSegmentValueOmniPurchaseRoas;
     this.mCatalogSegmentValueWebsitePurchaseRoas = instance.mCatalogSegmentValueWebsitePurchaseRoas;
     this.mClicks = instance.mClicks;
+    this.mConversionLeadRate = instance.mConversionLeadRate;
     this.mConversionRateRanking = instance.mConversionRateRanking;
     this.mConversionValues = instance.mConversionValues;
     this.mConversions = instance.mConversions;
@@ -2541,6 +2564,7 @@ public class AdsInsights extends APINode {
     this.mCostPerActionType = instance.mCostPerActionType;
     this.mCostPerAdClick = instance.mCostPerAdClick;
     this.mCostPerConversion = instance.mCostPerConversion;
+    this.mCostPerConversionLead = instance.mCostPerConversionLead;
     this.mCostPerDdaCountbyConvs = instance.mCostPerDdaCountbyConvs;
     this.mCostPerEstimatedAdRecallers = instance.mCostPerEstimatedAdRecallers;
     this.mCostPerInlineLinkClick = instance.mCostPerInlineLinkClick;

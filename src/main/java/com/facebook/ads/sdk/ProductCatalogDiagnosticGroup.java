@@ -409,6 +409,8 @@ public class ProductCatalogDiagnosticGroup extends APINode {
       VALUE_CATEGORY("CATEGORY"),
       @SerializedName("CHECKOUT")
       VALUE_CHECKOUT("CHECKOUT"),
+      @SerializedName("DA_VISIBILITY_ISSUES")
+      VALUE_DA_VISIBILITY_ISSUES("DA_VISIBILITY_ISSUES"),
       @SerializedName("IMAGE_QUALITY")
       VALUE_IMAGE_QUALITY("IMAGE_QUALITY"),
       @SerializedName("LOW_QUALITY_TITLE_AND_DESCRIPTION")
@@ -482,6 +484,8 @@ public class ProductCatalogDiagnosticGroup extends APINode {
       VALUE_CATEGORY("CATEGORY"),
       @SerializedName("CHECKOUT")
       VALUE_CHECKOUT("CHECKOUT"),
+      @SerializedName("DA_VISIBILITY_ISSUES")
+      VALUE_DA_VISIBILITY_ISSUES("DA_VISIBILITY_ISSUES"),
       @SerializedName("IMAGE_QUALITY")
       VALUE_IMAGE_QUALITY("IMAGE_QUALITY"),
       @SerializedName("LOW_QUALITY_TITLE_AND_DESCRIPTION")

@@ -72,8 +72,14 @@ public class AdAssetFeedSpec extends APINode {
   private List<AdAssetFeedSpecLinkURL> mLinkUrls = null;
   @SerializedName("message_extensions")
   private List<AdAssetMessageExtensions> mMessageExtensions = null;
+  @SerializedName("onsite_destinations")
+  private List<Object> mOnsiteDestinations = null;
   @SerializedName("optimization_type")
   private String mOptimizationType = null;
+  @SerializedName("reasons_to_shop")
+  private Boolean mReasonsToShop = null;
+  @SerializedName("shops_bundle")
+  private Boolean mShopsBundle = null;
   @SerializedName("titles")
   private List<AdAssetFeedSpecTitle> mTitles = null;
   @SerializedName("videos")
@@ -413,12 +419,39 @@ public class AdAssetFeedSpec extends APINode {
     this.mMessageExtensions = AdAssetMessageExtensions.getGson().fromJson(value, type);
     return this;
   }
+  public List<Object> getFieldOnsiteDestinations() {
+    return mOnsiteDestinations;
+  }
+
+  public AdAssetFeedSpec setFieldOnsiteDestinations(List<Object> value) {
+    this.mOnsiteDestinations = value;
+    return this;
+  }
+
   public String getFieldOptimizationType() {
     return mOptimizationType;
   }
 
   public AdAssetFeedSpec setFieldOptimizationType(String value) {
     this.mOptimizationType = value;
+    return this;
+  }
+
+  public Boolean getFieldReasonsToShop() {
+    return mReasonsToShop;
+  }
+
+  public AdAssetFeedSpec setFieldReasonsToShop(Boolean value) {
+    this.mReasonsToShop = value;
+    return this;
+  }
+
+  public Boolean getFieldShopsBundle() {
+    return mShopsBundle;
+  }
+
+  public AdAssetFeedSpec setFieldShopsBundle(Boolean value) {
+    this.mShopsBundle = value;
     return this;
   }
 
@@ -531,8 +564,6 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_MESSAGE_PAGE("MESSAGE_PAGE"),
       @SerializedName("MOBILE_DOWNLOAD")
       VALUE_MOBILE_DOWNLOAD("MOBILE_DOWNLOAD"),
-      @SerializedName("MOMENTS")
-      VALUE_MOMENTS("MOMENTS"),
       @SerializedName("NO_BUTTON")
       VALUE_NO_BUTTON("NO_BUTTON"),
       @SerializedName("OPEN_INSTANT_APP")
@@ -650,7 +681,10 @@ public class AdAssetFeedSpec extends APINode {
     this.mImages = instance.mImages;
     this.mLinkUrls = instance.mLinkUrls;
     this.mMessageExtensions = instance.mMessageExtensions;
+    this.mOnsiteDestinations = instance.mOnsiteDestinations;
     this.mOptimizationType = instance.mOptimizationType;
+    this.mReasonsToShop = instance.mReasonsToShop;
+    this.mShopsBundle = instance.mShopsBundle;
     this.mTitles = instance.mTitles;
     this.mVideos = instance.mVideos;
     this.context = instance.context;

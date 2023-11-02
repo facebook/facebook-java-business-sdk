@@ -1392,6 +1392,8 @@ public class CommerceMerchantSettings extends APINode {
       "restrictions",
       "restrictive_data_filter_params",
       "restrictive_data_filter_rules",
+      "sdk_auto_logging_default_value",
+      "sdk_auto_logging_override_value",
       "sdk_update_message",
       "seamless_login",
       "secure_canvas_url",
@@ -2076,6 +2078,20 @@ public class CommerceMerchantSettings extends APINode {
     }
     public APIRequestGetOrderManagementApps requestRestrictiveDataFilterRulesField (boolean value) {
       this.requestField("restrictive_data_filter_rules", value);
+      return this;
+    }
+    public APIRequestGetOrderManagementApps requestSdkAutoLoggingDefaultValueField () {
+      return this.requestSdkAutoLoggingDefaultValueField(true);
+    }
+    public APIRequestGetOrderManagementApps requestSdkAutoLoggingDefaultValueField (boolean value) {
+      this.requestField("sdk_auto_logging_default_value", value);
+      return this;
+    }
+    public APIRequestGetOrderManagementApps requestSdkAutoLoggingOverrideValueField () {
+      return this.requestSdkAutoLoggingOverrideValueField(true);
+    }
+    public APIRequestGetOrderManagementApps requestSdkAutoLoggingOverrideValueField (boolean value) {
+      this.requestField("sdk_auto_logging_override_value", value);
       return this;
     }
     public APIRequestGetOrderManagementApps requestSdkUpdateMessageField () {
@@ -3247,6 +3263,8 @@ public class CommerceMerchantSettings extends APINode {
       "fb_sales_channel",
       "id",
       "ig_sales_channel",
+      "is_onsite_enabled",
+      "shop_status",
       "workspace",
     };
 
@@ -3358,6 +3376,20 @@ public class CommerceMerchantSettings extends APINode {
     }
     public APIRequestGetShops requestIgSalesChannelField (boolean value) {
       this.requestField("ig_sales_channel", value);
+      return this;
+    }
+    public APIRequestGetShops requestIsOnsiteEnabledField () {
+      return this.requestIsOnsiteEnabledField(true);
+    }
+    public APIRequestGetShops requestIsOnsiteEnabledField (boolean value) {
+      this.requestField("is_onsite_enabled", value);
+      return this;
+    }
+    public APIRequestGetShops requestShopStatusField () {
+      return this.requestShopStatusField(true);
+    }
+    public APIRequestGetShops requestShopStatusField (boolean value) {
+      this.requestField("shop_status", value);
       return this;
     }
     public APIRequestGetShops requestWorkspaceField () {

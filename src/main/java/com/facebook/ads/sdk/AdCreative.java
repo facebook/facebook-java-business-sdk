@@ -138,6 +138,8 @@ public class AdCreative extends APINode {
   private String mObjectUrl = null;
   @SerializedName("omnichannel_link_spec")
   private AdCreativeOmnichannelLinkSpec mOmnichannelLinkSpec = null;
+  @SerializedName("photo_album_source_object_story_id")
+  private String mPhotoAlbumSourceObjectStoryId = null;
   @SerializedName("place_page_set_id")
   private String mPlacePageSetId = null;
   @SerializedName("platform_customizations")
@@ -906,6 +908,15 @@ public class AdCreative extends APINode {
     this.mOmnichannelLinkSpec = AdCreativeOmnichannelLinkSpec.getGson().fromJson(value, type);
     return this;
   }
+  public String getFieldPhotoAlbumSourceObjectStoryId() {
+    return mPhotoAlbumSourceObjectStoryId;
+  }
+
+  public AdCreative setFieldPhotoAlbumSourceObjectStoryId(String value) {
+    this.mPhotoAlbumSourceObjectStoryId = value;
+    return this;
+  }
+
   public String getFieldPlacePageSetId() {
     return mPlacePageSetId;
   }
@@ -1740,6 +1751,7 @@ public class AdCreative extends APINode {
       "object_type",
       "object_url",
       "omnichannel_link_spec",
+      "photo_album_source_object_story_id",
       "place_page_set_id",
       "platform_customizations",
       "playable_asset_id",
@@ -2208,6 +2220,13 @@ public class AdCreative extends APINode {
       this.requestField("omnichannel_link_spec", value);
       return this;
     }
+    public APIRequestGet requestPhotoAlbumSourceObjectStoryIdField () {
+      return this.requestPhotoAlbumSourceObjectStoryIdField(true);
+    }
+    public APIRequestGet requestPhotoAlbumSourceObjectStoryIdField (boolean value) {
+      this.requestField("photo_album_source_object_story_id", value);
+      return this;
+    }
     public APIRequestGet requestPlacePageSetIdField () {
       return this.requestPlacePageSetIdField(true);
     }
@@ -2537,8 +2556,6 @@ public class AdCreative extends APINode {
       VALUE_MESSAGE_PAGE("MESSAGE_PAGE"),
       @SerializedName("MOBILE_DOWNLOAD")
       VALUE_MOBILE_DOWNLOAD("MOBILE_DOWNLOAD"),
-      @SerializedName("MOMENTS")
-      VALUE_MOMENTS("MOMENTS"),
       @SerializedName("NO_BUTTON")
       VALUE_NO_BUTTON("NO_BUTTON"),
       @SerializedName("OPEN_INSTANT_APP")
@@ -2877,6 +2894,7 @@ public class AdCreative extends APINode {
     this.mObjectType = instance.mObjectType;
     this.mObjectUrl = instance.mObjectUrl;
     this.mOmnichannelLinkSpec = instance.mOmnichannelLinkSpec;
+    this.mPhotoAlbumSourceObjectStoryId = instance.mPhotoAlbumSourceObjectStoryId;
     this.mPlacePageSetId = instance.mPlacePageSetId;
     this.mPlatformCustomizations = instance.mPlatformCustomizations;
     this.mPlayableAssetId = instance.mPlayableAssetId;

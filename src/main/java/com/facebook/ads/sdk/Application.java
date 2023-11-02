@@ -204,6 +204,10 @@ public class Application extends APINode {
   private String mRestrictiveDataFilterParams = null;
   @SerializedName("restrictive_data_filter_rules")
   private String mRestrictiveDataFilterRules = null;
+  @SerializedName("sdk_auto_logging_default_value")
+  private Boolean mSdkAutoLoggingDefaultValue = null;
+  @SerializedName("sdk_auto_logging_override_value")
+  private Boolean mSdkAutoLoggingOverrideValue = null;
   @SerializedName("sdk_update_message")
   private String mSdkUpdateMessage = null;
   @SerializedName("seamless_login")
@@ -1024,6 +1028,14 @@ public class Application extends APINode {
 
   public String getFieldRestrictiveDataFilterRules() {
     return mRestrictiveDataFilterRules;
+  }
+
+  public Boolean getFieldSdkAutoLoggingDefaultValue() {
+    return mSdkAutoLoggingDefaultValue;
+  }
+
+  public Boolean getFieldSdkAutoLoggingOverrideValue() {
+    return mSdkAutoLoggingOverrideValue;
   }
 
   public String getFieldSdkUpdateMessage() {
@@ -10268,6 +10280,8 @@ public class Application extends APINode {
       "restrictions",
       "restrictive_data_filter_params",
       "restrictive_data_filter_rules",
+      "sdk_auto_logging_default_value",
+      "sdk_auto_logging_override_value",
       "sdk_update_message",
       "seamless_login",
       "secure_canvas_url",
@@ -10957,6 +10971,20 @@ public class Application extends APINode {
     }
     public APIRequestGet requestRestrictiveDataFilterRulesField (boolean value) {
       this.requestField("restrictive_data_filter_rules", value);
+      return this;
+    }
+    public APIRequestGet requestSdkAutoLoggingDefaultValueField () {
+      return this.requestSdkAutoLoggingDefaultValueField(true);
+    }
+    public APIRequestGet requestSdkAutoLoggingDefaultValueField (boolean value) {
+      this.requestField("sdk_auto_logging_default_value", value);
+      return this;
+    }
+    public APIRequestGet requestSdkAutoLoggingOverrideValueField () {
+      return this.requestSdkAutoLoggingOverrideValueField(true);
+    }
+    public APIRequestGet requestSdkAutoLoggingOverrideValueField (boolean value) {
+      this.requestField("sdk_auto_logging_override_value", value);
       return this;
     }
     public APIRequestGet requestSdkUpdateMessageField () {
@@ -11826,6 +11854,8 @@ public class Application extends APINode {
     this.mRestrictions = instance.mRestrictions;
     this.mRestrictiveDataFilterParams = instance.mRestrictiveDataFilterParams;
     this.mRestrictiveDataFilterRules = instance.mRestrictiveDataFilterRules;
+    this.mSdkAutoLoggingDefaultValue = instance.mSdkAutoLoggingDefaultValue;
+    this.mSdkAutoLoggingOverrideValue = instance.mSdkAutoLoggingOverrideValue;
     this.mSdkUpdateMessage = instance.mSdkUpdateMessage;
     this.mSeamlessLogin = instance.mSeamlessLogin;
     this.mSecureCanvasUrl = instance.mSecureCanvasUrl;

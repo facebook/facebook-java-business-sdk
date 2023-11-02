@@ -5628,6 +5628,8 @@ public class Business extends APINode {
       "restrictions",
       "restrictive_data_filter_params",
       "restrictive_data_filter_rules",
+      "sdk_auto_logging_default_value",
+      "sdk_auto_logging_override_value",
       "sdk_update_message",
       "seamless_login",
       "secure_canvas_url",
@@ -6314,6 +6316,20 @@ public class Business extends APINode {
       this.requestField("restrictive_data_filter_rules", value);
       return this;
     }
+    public APIRequestGetClientApps requestSdkAutoLoggingDefaultValueField () {
+      return this.requestSdkAutoLoggingDefaultValueField(true);
+    }
+    public APIRequestGetClientApps requestSdkAutoLoggingDefaultValueField (boolean value) {
+      this.requestField("sdk_auto_logging_default_value", value);
+      return this;
+    }
+    public APIRequestGetClientApps requestSdkAutoLoggingOverrideValueField () {
+      return this.requestSdkAutoLoggingOverrideValueField(true);
+    }
+    public APIRequestGetClientApps requestSdkAutoLoggingOverrideValueField (boolean value) {
+      this.requestField("sdk_auto_logging_override_value", value);
+      return this;
+    }
     public APIRequestGetClientApps requestSdkUpdateMessageField () {
       return this.requestSdkUpdateMessageField(true);
     }
@@ -6744,6 +6760,7 @@ public class Business extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_lead_access",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_enterprise_number_using_cloud_api",
@@ -7294,6 +7311,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientPages requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetClientPages requestHasLeadAccessField () {
+      return this.requestHasLeadAccessField(true);
+    }
+    public APIRequestGetClientPages requestHasLeadAccessField (boolean value) {
+      this.requestField("has_lead_access", value);
       return this;
     }
     public APIRequestGetClientPages requestHasTransitionedToNewPageExperienceField () {
@@ -8734,6 +8758,7 @@ public class Business extends APINode {
       "country",
       "creation_time",
       "currency",
+      "health_status",
       "id",
       "is_enabled_for_insights",
       "message_template_namespace",
@@ -8877,6 +8902,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientWhatsAppBusinessAccounts requestCurrencyField (boolean value) {
       this.requestField("currency", value);
+      return this;
+    }
+    public APIRequestGetClientWhatsAppBusinessAccounts requestHealthStatusField () {
+      return this.requestHealthStatusField(true);
+    }
+    public APIRequestGetClientWhatsAppBusinessAccounts requestHealthStatusField (boolean value) {
+      this.requestField("health_status", value);
       return this;
     }
     public APIRequestGetClientWhatsAppBusinessAccounts requestIdField () {
@@ -13364,6 +13396,7 @@ public class Business extends APINode {
       "sales_rep_email",
       "seller_external_website_url",
       "seller_targeting_countries",
+      "skip_partner_page_creation",
       "survey_business_type",
       "survey_num_assets",
       "survey_num_people",
@@ -13519,6 +13552,15 @@ public class Business extends APINode {
     }
     public APIRequestCreateManagedPartnerBusiness setSellerTargetingCountries (String sellerTargetingCountries) {
       this.setParam("seller_targeting_countries", sellerTargetingCountries);
+      return this;
+    }
+
+    public APIRequestCreateManagedPartnerBusiness setSkipPartnerPageCreation (Boolean skipPartnerPageCreation) {
+      this.setParam("skip_partner_page_creation", skipPartnerPageCreation);
+      return this;
+    }
+    public APIRequestCreateManagedPartnerBusiness setSkipPartnerPageCreation (String skipPartnerPageCreation) {
+      this.setParam("skip_partner_page_creation", skipPartnerPageCreation);
       return this;
     }
 
@@ -15424,6 +15466,8 @@ public class Business extends APINode {
       "restrictions",
       "restrictive_data_filter_params",
       "restrictive_data_filter_rules",
+      "sdk_auto_logging_default_value",
+      "sdk_auto_logging_override_value",
       "sdk_update_message",
       "seamless_login",
       "secure_canvas_url",
@@ -16108,6 +16152,20 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedApps requestRestrictiveDataFilterRulesField (boolean value) {
       this.requestField("restrictive_data_filter_rules", value);
+      return this;
+    }
+    public APIRequestGetOwnedApps requestSdkAutoLoggingDefaultValueField () {
+      return this.requestSdkAutoLoggingDefaultValueField(true);
+    }
+    public APIRequestGetOwnedApps requestSdkAutoLoggingDefaultValueField (boolean value) {
+      this.requestField("sdk_auto_logging_default_value", value);
+      return this;
+    }
+    public APIRequestGetOwnedApps requestSdkAutoLoggingOverrideValueField () {
+      return this.requestSdkAutoLoggingOverrideValueField(true);
+    }
+    public APIRequestGetOwnedApps requestSdkAutoLoggingOverrideValueField (boolean value) {
+      this.requestField("sdk_auto_logging_override_value", value);
       return this;
     }
     public APIRequestGetOwnedApps requestSdkUpdateMessageField () {
@@ -17318,6 +17376,7 @@ public class Business extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_lead_access",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
       "has_whatsapp_enterprise_number_using_cloud_api",
@@ -17868,6 +17927,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedPages requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
+      return this;
+    }
+    public APIRequestGetOwnedPages requestHasLeadAccessField () {
+      return this.requestHasLeadAccessField(true);
+    }
+    public APIRequestGetOwnedPages requestHasLeadAccessField (boolean value) {
+      this.requestField("has_lead_access", value);
       return this;
     }
     public APIRequestGetOwnedPages requestHasTransitionedToNewPageExperienceField () {
@@ -19502,6 +19568,7 @@ public class Business extends APINode {
       "country",
       "creation_time",
       "currency",
+      "health_status",
       "id",
       "is_enabled_for_insights",
       "message_template_namespace",
@@ -19645,6 +19712,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedWhatsAppBusinessAccounts requestCurrencyField (boolean value) {
       this.requestField("currency", value);
+      return this;
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestHealthStatusField () {
+      return this.requestHealthStatusField(true);
+    }
+    public APIRequestGetOwnedWhatsAppBusinessAccounts requestHealthStatusField (boolean value) {
+      this.requestField("health_status", value);
       return this;
     }
     public APIRequestGetOwnedWhatsAppBusinessAccounts requestIdField () {
