@@ -16,10 +16,10 @@
   </licenses>
   <developers>
     <developer>
-      <name>Ellen Tao</name>
-      <email>ellentao@fb.com</email>
-      <organization>Facebook Inc.</organization>
-      <organizationUrl>https://www.facebook.com</organizationUrl>
+      <name>Shuotian Cheng</name>
+      <email>shuotian@meta.com</email>
+      <organization>Meta</organization>
+      <organizationUrl>https://www.meta.com/</organizationUrl>
     </developer>
   </developers>
   <build>
