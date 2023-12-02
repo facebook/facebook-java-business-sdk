@@ -180,6 +180,8 @@ public class ProductItem extends APINode {
   private String mSize = null;
   @SerializedName("start_date")
   private String mStartDate = null;
+  @SerializedName("tags")
+  private List<String> mTags = null;
   @SerializedName("url")
   private String mUrl = null;
   @SerializedName("video_fetch_status")
@@ -712,6 +714,10 @@ public class ProductItem extends APINode {
 
   public String getFieldStartDate() {
     return mStartDate;
+  }
+
+  public List<String> getFieldTags() {
+    return mTags;
   }
 
   public String getFieldUrl() {
@@ -1362,6 +1368,7 @@ public class ProductItem extends APINode {
       "short_description",
       "size",
       "start_date",
+      "tags",
       "url",
       "video_fetch_status",
       "visibility",
@@ -1978,6 +1985,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestStartDateField (boolean value) {
       this.requestField("start_date", value);
+      return this;
+    }
+    public APIRequestGet requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGet requestTagsField (boolean value) {
+      this.requestField("tags", value);
       return this;
     }
     public APIRequestGet requestUrlField () {
@@ -3366,6 +3380,8 @@ public class ProductItem extends APINode {
       VALUE_BAD_QUALITY_IMAGE("BAD_QUALITY_IMAGE"),
       @SerializedName("CANNOT_EDIT_SUBSCRIPTION_PRODUCTS")
       VALUE_CANNOT_EDIT_SUBSCRIPTION_PRODUCTS("CANNOT_EDIT_SUBSCRIPTION_PRODUCTS"),
+      @SerializedName("CHECKOUT_DISABLED_BY_USER")
+      VALUE_CHECKOUT_DISABLED_BY_USER("CHECKOUT_DISABLED_BY_USER"),
       @SerializedName("COMMERCE_ACCOUNT_NOT_LEGALLY_COMPLIANT")
       VALUE_COMMERCE_ACCOUNT_NOT_LEGALLY_COMPLIANT("COMMERCE_ACCOUNT_NOT_LEGALLY_COMPLIANT"),
       @SerializedName("CRAWLED_AVAILABILITY_MISMATCH")
@@ -3444,6 +3460,8 @@ public class ProductItem extends APINode {
       VALUE_ITEM_OVERRIDE_NOT_VISIBLE("ITEM_OVERRIDE_NOT_VISIBLE"),
       @SerializedName("ITEM_STALE_OUT_OF_STOCK")
       VALUE_ITEM_STALE_OUT_OF_STOCK("ITEM_STALE_OUT_OF_STOCK"),
+      @SerializedName("MARKETPLACE_DISABLED_BY_USER")
+      VALUE_MARKETPLACE_DISABLED_BY_USER("MARKETPLACE_DISABLED_BY_USER"),
       @SerializedName("MINI_SHOPS_DISABLED_BY_USER")
       VALUE_MINI_SHOPS_DISABLED_BY_USER("MINI_SHOPS_DISABLED_BY_USER"),
       @SerializedName("MISSING_CHECKOUT")
@@ -4208,6 +4226,7 @@ public class ProductItem extends APINode {
     this.mShortDescription = instance.mShortDescription;
     this.mSize = instance.mSize;
     this.mStartDate = instance.mStartDate;
+    this.mTags = instance.mTags;
     this.mUrl = instance.mUrl;
     this.mVideoFetchStatus = instance.mVideoFetchStatus;
     this.mVisibility = instance.mVisibility;

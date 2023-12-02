@@ -1335,6 +1335,8 @@ public class CommerceMerchantSettings extends APINode {
       "auto_event_mapping_android",
       "auto_event_mapping_ios",
       "auto_event_setup_enabled",
+      "auto_log_app_events_default",
+      "auto_log_app_events_enabled",
       "business",
       "canvas_fluid_height",
       "canvas_fluid_width",
@@ -1392,8 +1394,6 @@ public class CommerceMerchantSettings extends APINode {
       "restrictions",
       "restrictive_data_filter_params",
       "restrictive_data_filter_rules",
-      "sdk_auto_logging_default_value",
-      "sdk_auto_logging_override_value",
       "sdk_update_message",
       "seamless_login",
       "secure_canvas_url",
@@ -1679,6 +1679,20 @@ public class CommerceMerchantSettings extends APINode {
     }
     public APIRequestGetOrderManagementApps requestAutoEventSetupEnabledField (boolean value) {
       this.requestField("auto_event_setup_enabled", value);
+      return this;
+    }
+    public APIRequestGetOrderManagementApps requestAutoLogAppEventsDefaultField () {
+      return this.requestAutoLogAppEventsDefaultField(true);
+    }
+    public APIRequestGetOrderManagementApps requestAutoLogAppEventsDefaultField (boolean value) {
+      this.requestField("auto_log_app_events_default", value);
+      return this;
+    }
+    public APIRequestGetOrderManagementApps requestAutoLogAppEventsEnabledField () {
+      return this.requestAutoLogAppEventsEnabledField(true);
+    }
+    public APIRequestGetOrderManagementApps requestAutoLogAppEventsEnabledField (boolean value) {
+      this.requestField("auto_log_app_events_enabled", value);
       return this;
     }
     public APIRequestGetOrderManagementApps requestBusinessField () {
@@ -2078,20 +2092,6 @@ public class CommerceMerchantSettings extends APINode {
     }
     public APIRequestGetOrderManagementApps requestRestrictiveDataFilterRulesField (boolean value) {
       this.requestField("restrictive_data_filter_rules", value);
-      return this;
-    }
-    public APIRequestGetOrderManagementApps requestSdkAutoLoggingDefaultValueField () {
-      return this.requestSdkAutoLoggingDefaultValueField(true);
-    }
-    public APIRequestGetOrderManagementApps requestSdkAutoLoggingDefaultValueField (boolean value) {
-      this.requestField("sdk_auto_logging_default_value", value);
-      return this;
-    }
-    public APIRequestGetOrderManagementApps requestSdkAutoLoggingOverrideValueField () {
-      return this.requestSdkAutoLoggingOverrideValueField(true);
-    }
-    public APIRequestGetOrderManagementApps requestSdkAutoLoggingOverrideValueField (boolean value) {
-      this.requestField("sdk_auto_logging_override_value", value);
       return this;
     }
     public APIRequestGetOrderManagementApps requestSdkUpdateMessageField () {

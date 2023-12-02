@@ -2534,6 +2534,7 @@ public class ProductFeed extends APINode {
       "short_description",
       "size",
       "start_date",
+      "tags",
       "url",
       "video_fetch_status",
       "visibility",
@@ -3153,6 +3154,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetProducts requestStartDateField (boolean value) {
       this.requestField("start_date", value);
+      return this;
+    }
+    public APIRequestGetProducts requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGetProducts requestTagsField (boolean value) {
+      this.requestField("tags", value);
       return this;
     }
     public APIRequestGetProducts requestUrlField () {

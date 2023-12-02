@@ -49,7 +49,7 @@ public class AdCreativeBrandedContentAds extends APINode {
   @SerializedName("is_mca_internal")
   private Boolean mIsMcaInternal = null;
   @SerializedName("partners")
-  private List<Object> mPartners = null;
+  private List<AdCreativeBrandedContentAdsPartners> mPartners = null;
   @SerializedName("ui_version")
   private Long mUiVersion = null;
   protected static Gson gson = null;
@@ -239,15 +239,20 @@ public class AdCreativeBrandedContentAds extends APINode {
     return this;
   }
 
-  public List<Object> getFieldPartners() {
+  public List<AdCreativeBrandedContentAdsPartners> getFieldPartners() {
     return mPartners;
   }
 
-  public AdCreativeBrandedContentAds setFieldPartners(List<Object> value) {
+  public AdCreativeBrandedContentAds setFieldPartners(List<AdCreativeBrandedContentAdsPartners> value) {
     this.mPartners = value;
     return this;
   }
 
+  public AdCreativeBrandedContentAds setFieldPartners(String value) {
+    Type type = new TypeToken<List<AdCreativeBrandedContentAdsPartners>>(){}.getType();
+    this.mPartners = AdCreativeBrandedContentAdsPartners.getGson().fromJson(value, type);
+    return this;
+  }
   public Long getFieldUiVersion() {
     return mUiVersion;
   }

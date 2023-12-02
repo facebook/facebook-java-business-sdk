@@ -5571,6 +5571,8 @@ public class Business extends APINode {
       "auto_event_mapping_android",
       "auto_event_mapping_ios",
       "auto_event_setup_enabled",
+      "auto_log_app_events_default",
+      "auto_log_app_events_enabled",
       "business",
       "canvas_fluid_height",
       "canvas_fluid_width",
@@ -5628,8 +5630,6 @@ public class Business extends APINode {
       "restrictions",
       "restrictive_data_filter_params",
       "restrictive_data_filter_rules",
-      "sdk_auto_logging_default_value",
-      "sdk_auto_logging_override_value",
       "sdk_update_message",
       "seamless_login",
       "secure_canvas_url",
@@ -5915,6 +5915,20 @@ public class Business extends APINode {
     }
     public APIRequestGetClientApps requestAutoEventSetupEnabledField (boolean value) {
       this.requestField("auto_event_setup_enabled", value);
+      return this;
+    }
+    public APIRequestGetClientApps requestAutoLogAppEventsDefaultField () {
+      return this.requestAutoLogAppEventsDefaultField(true);
+    }
+    public APIRequestGetClientApps requestAutoLogAppEventsDefaultField (boolean value) {
+      this.requestField("auto_log_app_events_default", value);
+      return this;
+    }
+    public APIRequestGetClientApps requestAutoLogAppEventsEnabledField () {
+      return this.requestAutoLogAppEventsEnabledField(true);
+    }
+    public APIRequestGetClientApps requestAutoLogAppEventsEnabledField (boolean value) {
+      this.requestField("auto_log_app_events_enabled", value);
       return this;
     }
     public APIRequestGetClientApps requestBusinessField () {
@@ -6314,20 +6328,6 @@ public class Business extends APINode {
     }
     public APIRequestGetClientApps requestRestrictiveDataFilterRulesField (boolean value) {
       this.requestField("restrictive_data_filter_rules", value);
-      return this;
-    }
-    public APIRequestGetClientApps requestSdkAutoLoggingDefaultValueField () {
-      return this.requestSdkAutoLoggingDefaultValueField(true);
-    }
-    public APIRequestGetClientApps requestSdkAutoLoggingDefaultValueField (boolean value) {
-      this.requestField("sdk_auto_logging_default_value", value);
-      return this;
-    }
-    public APIRequestGetClientApps requestSdkAutoLoggingOverrideValueField () {
-      return this.requestSdkAutoLoggingOverrideValueField(true);
-    }
-    public APIRequestGetClientApps requestSdkAutoLoggingOverrideValueField (boolean value) {
-      this.requestField("sdk_auto_logging_override_value", value);
       return this;
     }
     public APIRequestGetClientApps requestSdkUpdateMessageField () {
@@ -15409,6 +15409,8 @@ public class Business extends APINode {
       "auto_event_mapping_android",
       "auto_event_mapping_ios",
       "auto_event_setup_enabled",
+      "auto_log_app_events_default",
+      "auto_log_app_events_enabled",
       "business",
       "canvas_fluid_height",
       "canvas_fluid_width",
@@ -15466,8 +15468,6 @@ public class Business extends APINode {
       "restrictions",
       "restrictive_data_filter_params",
       "restrictive_data_filter_rules",
-      "sdk_auto_logging_default_value",
-      "sdk_auto_logging_override_value",
       "sdk_update_message",
       "seamless_login",
       "secure_canvas_url",
@@ -15753,6 +15753,20 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedApps requestAutoEventSetupEnabledField (boolean value) {
       this.requestField("auto_event_setup_enabled", value);
+      return this;
+    }
+    public APIRequestGetOwnedApps requestAutoLogAppEventsDefaultField () {
+      return this.requestAutoLogAppEventsDefaultField(true);
+    }
+    public APIRequestGetOwnedApps requestAutoLogAppEventsDefaultField (boolean value) {
+      this.requestField("auto_log_app_events_default", value);
+      return this;
+    }
+    public APIRequestGetOwnedApps requestAutoLogAppEventsEnabledField () {
+      return this.requestAutoLogAppEventsEnabledField(true);
+    }
+    public APIRequestGetOwnedApps requestAutoLogAppEventsEnabledField (boolean value) {
+      this.requestField("auto_log_app_events_enabled", value);
       return this;
     }
     public APIRequestGetOwnedApps requestBusinessField () {
@@ -16152,20 +16166,6 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedApps requestRestrictiveDataFilterRulesField (boolean value) {
       this.requestField("restrictive_data_filter_rules", value);
-      return this;
-    }
-    public APIRequestGetOwnedApps requestSdkAutoLoggingDefaultValueField () {
-      return this.requestSdkAutoLoggingDefaultValueField(true);
-    }
-    public APIRequestGetOwnedApps requestSdkAutoLoggingDefaultValueField (boolean value) {
-      this.requestField("sdk_auto_logging_default_value", value);
-      return this;
-    }
-    public APIRequestGetOwnedApps requestSdkAutoLoggingOverrideValueField () {
-      return this.requestSdkAutoLoggingOverrideValueField(true);
-    }
-    public APIRequestGetOwnedApps requestSdkAutoLoggingOverrideValueField (boolean value) {
-      this.requestField("sdk_auto_logging_override_value", value);
       return this;
     }
     public APIRequestGetOwnedApps requestSdkUpdateMessageField () {
