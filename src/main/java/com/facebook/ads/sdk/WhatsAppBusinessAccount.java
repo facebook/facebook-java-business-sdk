@@ -53,7 +53,7 @@ public class WhatsAppBusinessAccount extends APINode {
   @SerializedName("currency")
   private String mCurrency = null;
   @SerializedName("health_status")
-  private Object mHealthStatus = null;
+  private WhatsAppBusinessHealthStatusForMessageSend mHealthStatus = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("is_enabled_for_insights")
@@ -307,6 +307,10 @@ public class WhatsAppBusinessAccount extends APINode {
     return new APIRequestGetConversationAnalytics(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetDccConfig getDccConfig() {
+    return new APIRequestGetDccConfig(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetFlows getFlows() {
     return new APIRequestGetFlows(this.getPrefixedId().toString(), context);
   }
@@ -420,7 +424,7 @@ public class WhatsAppBusinessAccount extends APINode {
     return mCurrency;
   }
 
-  public Object getFieldHealthStatus() {
+  public WhatsAppBusinessHealthStatusForMessageSend getFieldHealthStatus() {
     return mHealthStatus;
   }
 
@@ -1165,6 +1169,110 @@ public class WhatsAppBusinessAccount extends APINode {
 
   }
 
+  public static class APIRequestGetDccConfig extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetDccConfig.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetDccConfig(String nodeId, APIContext context) {
+      super(context, nodeId, "/dcc_config", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetDccConfig setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDccConfig setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetDccConfig requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetDccConfig requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDccConfig requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetDccConfig requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDccConfig requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDccConfig requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetFlows extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -1280,7 +1388,7 @@ public class WhatsAppBusinessAccount extends APINode {
       "categories",
       "clone_flow_id",
       "clone_template",
-      "data_channel_uri",
+      "endpoint_uri",
       "name",
     };
 
@@ -1359,8 +1467,8 @@ public class WhatsAppBusinessAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateFlow setDataChannelUri (String dataChannelUri) {
-      this.setParam("data_channel_uri", dataChannelUri);
+    public APIRequestCreateFlow setEndpointUri (String endpointUri) {
+      this.setParam("endpoint_uri", endpointUri);
       return this;
     }
 

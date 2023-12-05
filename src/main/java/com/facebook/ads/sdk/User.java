@@ -439,6 +439,10 @@ public class User extends APINode {
     return new APIRequestGetEvents(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetFbdlRuns getFbdlRuns() {
+    return new APIRequestGetFbdlRuns(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetFeed getFeed() {
     return new APIRequestGetFeed(this.getPrefixedId().toString(), context);
   }
@@ -8433,6 +8437,174 @@ public class User extends APINode {
     }
     public APIRequestGetEvents requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetFbdlRuns extends APIRequest<WhitehatFBDLRun> {
+
+    APINodeList<WhitehatFBDLRun> lastResponse = null;
+    @Override
+    public APINodeList<WhitehatFBDLRun> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "creation_time",
+      "id",
+      "is_pinned",
+      "note",
+      "result",
+      "run_code",
+      "status",
+      "user_type",
+    };
+
+    @Override
+    public APINodeList<WhitehatFBDLRun> parseResponse(String response, String header) throws APIException {
+      return WhitehatFBDLRun.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<WhitehatFBDLRun> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<WhitehatFBDLRun> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<WhitehatFBDLRun>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<WhitehatFBDLRun>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<WhitehatFBDLRun>>() {
+           public APINodeList<WhitehatFBDLRun> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetFbdlRuns.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetFbdlRuns(String nodeId, APIContext context) {
+      super(context, nodeId, "/fbdl_runs", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetFbdlRuns setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFbdlRuns setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetFbdlRuns requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetFbdlRuns requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFbdlRuns requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetFbdlRuns requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFbdlRuns requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFbdlRuns requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetFbdlRuns requestCreationTimeField () {
+      return this.requestCreationTimeField(true);
+    }
+    public APIRequestGetFbdlRuns requestCreationTimeField (boolean value) {
+      this.requestField("creation_time", value);
+      return this;
+    }
+    public APIRequestGetFbdlRuns requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetFbdlRuns requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetFbdlRuns requestIsPinnedField () {
+      return this.requestIsPinnedField(true);
+    }
+    public APIRequestGetFbdlRuns requestIsPinnedField (boolean value) {
+      this.requestField("is_pinned", value);
+      return this;
+    }
+    public APIRequestGetFbdlRuns requestNoteField () {
+      return this.requestNoteField(true);
+    }
+    public APIRequestGetFbdlRuns requestNoteField (boolean value) {
+      this.requestField("note", value);
+      return this;
+    }
+    public APIRequestGetFbdlRuns requestResultField () {
+      return this.requestResultField(true);
+    }
+    public APIRequestGetFbdlRuns requestResultField (boolean value) {
+      this.requestField("result", value);
+      return this;
+    }
+    public APIRequestGetFbdlRuns requestRunCodeField () {
+      return this.requestRunCodeField(true);
+    }
+    public APIRequestGetFbdlRuns requestRunCodeField (boolean value) {
+      this.requestField("run_code", value);
+      return this;
+    }
+    public APIRequestGetFbdlRuns requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetFbdlRuns requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGetFbdlRuns requestUserTypeField () {
+      return this.requestUserTypeField(true);
+    }
+    public APIRequestGetFbdlRuns requestUserTypeField (boolean value) {
+      this.requestField("user_type", value);
       return this;
     }
   }

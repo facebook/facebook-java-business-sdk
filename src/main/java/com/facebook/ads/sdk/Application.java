@@ -90,6 +90,10 @@ public class Application extends APINode {
   private List<Object> mAutoEventMappingIos = null;
   @SerializedName("auto_event_setup_enabled")
   private Boolean mAutoEventSetupEnabled = null;
+  @SerializedName("auto_log_app_events_default")
+  private Boolean mAutoLogAppEventsDefault = null;
+  @SerializedName("auto_log_app_events_enabled")
+  private Boolean mAutoLogAppEventsEnabled = null;
   @SerializedName("business")
   private Business mBusiness = null;
   @SerializedName("canvas_fluid_height")
@@ -204,10 +208,6 @@ public class Application extends APINode {
   private String mRestrictiveDataFilterParams = null;
   @SerializedName("restrictive_data_filter_rules")
   private String mRestrictiveDataFilterRules = null;
-  @SerializedName("sdk_auto_logging_default_value")
-  private Boolean mSdkAutoLoggingDefaultValue = null;
-  @SerializedName("sdk_auto_logging_override_value")
-  private Boolean mSdkAutoLoggingOverrideValue = null;
   @SerializedName("sdk_update_message")
   private String mSdkUpdateMessage = null;
   @SerializedName("seamless_login")
@@ -563,10 +563,6 @@ public class Application extends APINode {
     return new APIRequestGetAuthorizedAdAccounts(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetBanned getBanned() {
-    return new APIRequestGetBanned(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetButtonAutoDetectionDeviceSelection getButtonAutoDetectionDeviceSelection() {
     return new APIRequestGetButtonAutoDetectionDeviceSelection(this.getPrefixedId().toString(), context);
   }
@@ -794,6 +790,14 @@ public class Application extends APINode {
 
   public Boolean getFieldAutoEventSetupEnabled() {
     return mAutoEventSetupEnabled;
+  }
+
+  public Boolean getFieldAutoLogAppEventsDefault() {
+    return mAutoLogAppEventsDefault;
+  }
+
+  public Boolean getFieldAutoLogAppEventsEnabled() {
+    return mAutoLogAppEventsEnabled;
   }
 
   public Business getFieldBusiness() {
@@ -1028,14 +1032,6 @@ public class Application extends APINode {
 
   public String getFieldRestrictiveDataFilterRules() {
     return mRestrictiveDataFilterRules;
-  }
-
-  public Boolean getFieldSdkAutoLoggingDefaultValue() {
-    return mSdkAutoLoggingDefaultValue;
-  }
-
-  public Boolean getFieldSdkAutoLoggingOverrideValue() {
-    return mSdkAutoLoggingOverrideValue;
   }
 
   public String getFieldSdkUpdateMessage() {
@@ -5674,512 +5670,6 @@ public class Application extends APINode {
     }
   }
 
-  public static class APIRequestGetBanned extends APIRequest<User> {
-
-    APINodeList<User> lastResponse = null;
-    @Override
-    public APINodeList<User> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "uid",
-    };
-
-    public static final String[] FIELDS = {
-      "about",
-      "age_range",
-      "avatar_2d_profile_picture",
-      "birthday",
-      "community",
-      "cover",
-      "currency",
-      "education",
-      "email",
-      "favorite_athletes",
-      "favorite_teams",
-      "first_name",
-      "gender",
-      "hometown",
-      "id",
-      "id_for_avatars",
-      "inspirational_people",
-      "install_type",
-      "installed",
-      "is_guest_user",
-      "is_work_account",
-      "languages",
-      "last_name",
-      "link",
-      "local_news_megaphone_dismiss_status",
-      "local_news_subscription_status",
-      "locale",
-      "location",
-      "meeting_for",
-      "middle_name",
-      "name",
-      "name_format",
-      "payment_pricepoints",
-      "political",
-      "profile_pic",
-      "quotes",
-      "relationship_status",
-      "shared_login_upgrade_required_by",
-      "short_name",
-      "significant_other",
-      "sports",
-      "supports_donate_button_in_live_video",
-      "third_party_id",
-      "timezone",
-      "token_for_business",
-      "updated_time",
-      "verified",
-      "video_upload_limits",
-      "website",
-    };
-
-    @Override
-    public APINodeList<User> parseResponse(String response, String header) throws APIException {
-      return User.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<User> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<User> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<User>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<User>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<User>>() {
-           public APINodeList<User> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetBanned.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetBanned(String nodeId, APIContext context) {
-      super(context, nodeId, "/banned", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetBanned setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBanned setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetBanned setUid (Long uid) {
-      this.setParam("uid", uid);
-      return this;
-    }
-    public APIRequestGetBanned setUid (String uid) {
-      this.setParam("uid", uid);
-      return this;
-    }
-
-    public APIRequestGetBanned requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetBanned requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBanned requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetBanned requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBanned requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetBanned requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetBanned requestAboutField () {
-      return this.requestAboutField(true);
-    }
-    public APIRequestGetBanned requestAboutField (boolean value) {
-      this.requestField("about", value);
-      return this;
-    }
-    public APIRequestGetBanned requestAgeRangeField () {
-      return this.requestAgeRangeField(true);
-    }
-    public APIRequestGetBanned requestAgeRangeField (boolean value) {
-      this.requestField("age_range", value);
-      return this;
-    }
-    public APIRequestGetBanned requestAvatar2dProfilePictureField () {
-      return this.requestAvatar2dProfilePictureField(true);
-    }
-    public APIRequestGetBanned requestAvatar2dProfilePictureField (boolean value) {
-      this.requestField("avatar_2d_profile_picture", value);
-      return this;
-    }
-    public APIRequestGetBanned requestBirthdayField () {
-      return this.requestBirthdayField(true);
-    }
-    public APIRequestGetBanned requestBirthdayField (boolean value) {
-      this.requestField("birthday", value);
-      return this;
-    }
-    public APIRequestGetBanned requestCommunityField () {
-      return this.requestCommunityField(true);
-    }
-    public APIRequestGetBanned requestCommunityField (boolean value) {
-      this.requestField("community", value);
-      return this;
-    }
-    public APIRequestGetBanned requestCoverField () {
-      return this.requestCoverField(true);
-    }
-    public APIRequestGetBanned requestCoverField (boolean value) {
-      this.requestField("cover", value);
-      return this;
-    }
-    public APIRequestGetBanned requestCurrencyField () {
-      return this.requestCurrencyField(true);
-    }
-    public APIRequestGetBanned requestCurrencyField (boolean value) {
-      this.requestField("currency", value);
-      return this;
-    }
-    public APIRequestGetBanned requestEducationField () {
-      return this.requestEducationField(true);
-    }
-    public APIRequestGetBanned requestEducationField (boolean value) {
-      this.requestField("education", value);
-      return this;
-    }
-    public APIRequestGetBanned requestEmailField () {
-      return this.requestEmailField(true);
-    }
-    public APIRequestGetBanned requestEmailField (boolean value) {
-      this.requestField("email", value);
-      return this;
-    }
-    public APIRequestGetBanned requestFavoriteAthletesField () {
-      return this.requestFavoriteAthletesField(true);
-    }
-    public APIRequestGetBanned requestFavoriteAthletesField (boolean value) {
-      this.requestField("favorite_athletes", value);
-      return this;
-    }
-    public APIRequestGetBanned requestFavoriteTeamsField () {
-      return this.requestFavoriteTeamsField(true);
-    }
-    public APIRequestGetBanned requestFavoriteTeamsField (boolean value) {
-      this.requestField("favorite_teams", value);
-      return this;
-    }
-    public APIRequestGetBanned requestFirstNameField () {
-      return this.requestFirstNameField(true);
-    }
-    public APIRequestGetBanned requestFirstNameField (boolean value) {
-      this.requestField("first_name", value);
-      return this;
-    }
-    public APIRequestGetBanned requestGenderField () {
-      return this.requestGenderField(true);
-    }
-    public APIRequestGetBanned requestGenderField (boolean value) {
-      this.requestField("gender", value);
-      return this;
-    }
-    public APIRequestGetBanned requestHometownField () {
-      return this.requestHometownField(true);
-    }
-    public APIRequestGetBanned requestHometownField (boolean value) {
-      this.requestField("hometown", value);
-      return this;
-    }
-    public APIRequestGetBanned requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetBanned requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetBanned requestIdForAvatarsField () {
-      return this.requestIdForAvatarsField(true);
-    }
-    public APIRequestGetBanned requestIdForAvatarsField (boolean value) {
-      this.requestField("id_for_avatars", value);
-      return this;
-    }
-    public APIRequestGetBanned requestInspirationalPeopleField () {
-      return this.requestInspirationalPeopleField(true);
-    }
-    public APIRequestGetBanned requestInspirationalPeopleField (boolean value) {
-      this.requestField("inspirational_people", value);
-      return this;
-    }
-    public APIRequestGetBanned requestInstallTypeField () {
-      return this.requestInstallTypeField(true);
-    }
-    public APIRequestGetBanned requestInstallTypeField (boolean value) {
-      this.requestField("install_type", value);
-      return this;
-    }
-    public APIRequestGetBanned requestInstalledField () {
-      return this.requestInstalledField(true);
-    }
-    public APIRequestGetBanned requestInstalledField (boolean value) {
-      this.requestField("installed", value);
-      return this;
-    }
-    public APIRequestGetBanned requestIsGuestUserField () {
-      return this.requestIsGuestUserField(true);
-    }
-    public APIRequestGetBanned requestIsGuestUserField (boolean value) {
-      this.requestField("is_guest_user", value);
-      return this;
-    }
-    public APIRequestGetBanned requestIsWorkAccountField () {
-      return this.requestIsWorkAccountField(true);
-    }
-    public APIRequestGetBanned requestIsWorkAccountField (boolean value) {
-      this.requestField("is_work_account", value);
-      return this;
-    }
-    public APIRequestGetBanned requestLanguagesField () {
-      return this.requestLanguagesField(true);
-    }
-    public APIRequestGetBanned requestLanguagesField (boolean value) {
-      this.requestField("languages", value);
-      return this;
-    }
-    public APIRequestGetBanned requestLastNameField () {
-      return this.requestLastNameField(true);
-    }
-    public APIRequestGetBanned requestLastNameField (boolean value) {
-      this.requestField("last_name", value);
-      return this;
-    }
-    public APIRequestGetBanned requestLinkField () {
-      return this.requestLinkField(true);
-    }
-    public APIRequestGetBanned requestLinkField (boolean value) {
-      this.requestField("link", value);
-      return this;
-    }
-    public APIRequestGetBanned requestLocalNewsMegaphoneDismissStatusField () {
-      return this.requestLocalNewsMegaphoneDismissStatusField(true);
-    }
-    public APIRequestGetBanned requestLocalNewsMegaphoneDismissStatusField (boolean value) {
-      this.requestField("local_news_megaphone_dismiss_status", value);
-      return this;
-    }
-    public APIRequestGetBanned requestLocalNewsSubscriptionStatusField () {
-      return this.requestLocalNewsSubscriptionStatusField(true);
-    }
-    public APIRequestGetBanned requestLocalNewsSubscriptionStatusField (boolean value) {
-      this.requestField("local_news_subscription_status", value);
-      return this;
-    }
-    public APIRequestGetBanned requestLocaleField () {
-      return this.requestLocaleField(true);
-    }
-    public APIRequestGetBanned requestLocaleField (boolean value) {
-      this.requestField("locale", value);
-      return this;
-    }
-    public APIRequestGetBanned requestLocationField () {
-      return this.requestLocationField(true);
-    }
-    public APIRequestGetBanned requestLocationField (boolean value) {
-      this.requestField("location", value);
-      return this;
-    }
-    public APIRequestGetBanned requestMeetingForField () {
-      return this.requestMeetingForField(true);
-    }
-    public APIRequestGetBanned requestMeetingForField (boolean value) {
-      this.requestField("meeting_for", value);
-      return this;
-    }
-    public APIRequestGetBanned requestMiddleNameField () {
-      return this.requestMiddleNameField(true);
-    }
-    public APIRequestGetBanned requestMiddleNameField (boolean value) {
-      this.requestField("middle_name", value);
-      return this;
-    }
-    public APIRequestGetBanned requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetBanned requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetBanned requestNameFormatField () {
-      return this.requestNameFormatField(true);
-    }
-    public APIRequestGetBanned requestNameFormatField (boolean value) {
-      this.requestField("name_format", value);
-      return this;
-    }
-    public APIRequestGetBanned requestPaymentPricepointsField () {
-      return this.requestPaymentPricepointsField(true);
-    }
-    public APIRequestGetBanned requestPaymentPricepointsField (boolean value) {
-      this.requestField("payment_pricepoints", value);
-      return this;
-    }
-    public APIRequestGetBanned requestPoliticalField () {
-      return this.requestPoliticalField(true);
-    }
-    public APIRequestGetBanned requestPoliticalField (boolean value) {
-      this.requestField("political", value);
-      return this;
-    }
-    public APIRequestGetBanned requestProfilePicField () {
-      return this.requestProfilePicField(true);
-    }
-    public APIRequestGetBanned requestProfilePicField (boolean value) {
-      this.requestField("profile_pic", value);
-      return this;
-    }
-    public APIRequestGetBanned requestQuotesField () {
-      return this.requestQuotesField(true);
-    }
-    public APIRequestGetBanned requestQuotesField (boolean value) {
-      this.requestField("quotes", value);
-      return this;
-    }
-    public APIRequestGetBanned requestRelationshipStatusField () {
-      return this.requestRelationshipStatusField(true);
-    }
-    public APIRequestGetBanned requestRelationshipStatusField (boolean value) {
-      this.requestField("relationship_status", value);
-      return this;
-    }
-    public APIRequestGetBanned requestSharedLoginUpgradeRequiredByField () {
-      return this.requestSharedLoginUpgradeRequiredByField(true);
-    }
-    public APIRequestGetBanned requestSharedLoginUpgradeRequiredByField (boolean value) {
-      this.requestField("shared_login_upgrade_required_by", value);
-      return this;
-    }
-    public APIRequestGetBanned requestShortNameField () {
-      return this.requestShortNameField(true);
-    }
-    public APIRequestGetBanned requestShortNameField (boolean value) {
-      this.requestField("short_name", value);
-      return this;
-    }
-    public APIRequestGetBanned requestSignificantOtherField () {
-      return this.requestSignificantOtherField(true);
-    }
-    public APIRequestGetBanned requestSignificantOtherField (boolean value) {
-      this.requestField("significant_other", value);
-      return this;
-    }
-    public APIRequestGetBanned requestSportsField () {
-      return this.requestSportsField(true);
-    }
-    public APIRequestGetBanned requestSportsField (boolean value) {
-      this.requestField("sports", value);
-      return this;
-    }
-    public APIRequestGetBanned requestSupportsDonateButtonInLiveVideoField () {
-      return this.requestSupportsDonateButtonInLiveVideoField(true);
-    }
-    public APIRequestGetBanned requestSupportsDonateButtonInLiveVideoField (boolean value) {
-      this.requestField("supports_donate_button_in_live_video", value);
-      return this;
-    }
-    public APIRequestGetBanned requestThirdPartyIdField () {
-      return this.requestThirdPartyIdField(true);
-    }
-    public APIRequestGetBanned requestThirdPartyIdField (boolean value) {
-      this.requestField("third_party_id", value);
-      return this;
-    }
-    public APIRequestGetBanned requestTimezoneField () {
-      return this.requestTimezoneField(true);
-    }
-    public APIRequestGetBanned requestTimezoneField (boolean value) {
-      this.requestField("timezone", value);
-      return this;
-    }
-    public APIRequestGetBanned requestTokenForBusinessField () {
-      return this.requestTokenForBusinessField(true);
-    }
-    public APIRequestGetBanned requestTokenForBusinessField (boolean value) {
-      this.requestField("token_for_business", value);
-      return this;
-    }
-    public APIRequestGetBanned requestUpdatedTimeField () {
-      return this.requestUpdatedTimeField(true);
-    }
-    public APIRequestGetBanned requestUpdatedTimeField (boolean value) {
-      this.requestField("updated_time", value);
-      return this;
-    }
-    public APIRequestGetBanned requestVerifiedField () {
-      return this.requestVerifiedField(true);
-    }
-    public APIRequestGetBanned requestVerifiedField (boolean value) {
-      this.requestField("verified", value);
-      return this;
-    }
-    public APIRequestGetBanned requestVideoUploadLimitsField () {
-      return this.requestVideoUploadLimitsField(true);
-    }
-    public APIRequestGetBanned requestVideoUploadLimitsField (boolean value) {
-      this.requestField("video_upload_limits", value);
-      return this;
-    }
-    public APIRequestGetBanned requestWebsiteField () {
-      return this.requestWebsiteField(true);
-    }
-    public APIRequestGetBanned requestWebsiteField (boolean value) {
-      this.requestField("website", value);
-      return this;
-    }
-  }
-
   public static class APIRequestGetButtonAutoDetectionDeviceSelection extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -10223,6 +9713,8 @@ public class Application extends APINode {
       "auto_event_mapping_android",
       "auto_event_mapping_ios",
       "auto_event_setup_enabled",
+      "auto_log_app_events_default",
+      "auto_log_app_events_enabled",
       "business",
       "canvas_fluid_height",
       "canvas_fluid_width",
@@ -10280,8 +9772,6 @@ public class Application extends APINode {
       "restrictions",
       "restrictive_data_filter_params",
       "restrictive_data_filter_rules",
-      "sdk_auto_logging_default_value",
-      "sdk_auto_logging_override_value",
       "sdk_update_message",
       "seamless_login",
       "secure_canvas_url",
@@ -10572,6 +10062,20 @@ public class Application extends APINode {
     }
     public APIRequestGet requestAutoEventSetupEnabledField (boolean value) {
       this.requestField("auto_event_setup_enabled", value);
+      return this;
+    }
+    public APIRequestGet requestAutoLogAppEventsDefaultField () {
+      return this.requestAutoLogAppEventsDefaultField(true);
+    }
+    public APIRequestGet requestAutoLogAppEventsDefaultField (boolean value) {
+      this.requestField("auto_log_app_events_default", value);
+      return this;
+    }
+    public APIRequestGet requestAutoLogAppEventsEnabledField () {
+      return this.requestAutoLogAppEventsEnabledField(true);
+    }
+    public APIRequestGet requestAutoLogAppEventsEnabledField (boolean value) {
+      this.requestField("auto_log_app_events_enabled", value);
       return this;
     }
     public APIRequestGet requestBusinessField () {
@@ -10971,20 +10475,6 @@ public class Application extends APINode {
     }
     public APIRequestGet requestRestrictiveDataFilterRulesField (boolean value) {
       this.requestField("restrictive_data_filter_rules", value);
-      return this;
-    }
-    public APIRequestGet requestSdkAutoLoggingDefaultValueField () {
-      return this.requestSdkAutoLoggingDefaultValueField(true);
-    }
-    public APIRequestGet requestSdkAutoLoggingDefaultValueField (boolean value) {
-      this.requestField("sdk_auto_logging_default_value", value);
-      return this;
-    }
-    public APIRequestGet requestSdkAutoLoggingOverrideValueField () {
-      return this.requestSdkAutoLoggingOverrideValueField(true);
-    }
-    public APIRequestGet requestSdkAutoLoggingOverrideValueField (boolean value) {
-      this.requestField("sdk_auto_logging_override_value", value);
       return this;
     }
     public APIRequestGet requestSdkUpdateMessageField () {
@@ -11797,6 +11287,8 @@ public class Application extends APINode {
     this.mAutoEventMappingAndroid = instance.mAutoEventMappingAndroid;
     this.mAutoEventMappingIos = instance.mAutoEventMappingIos;
     this.mAutoEventSetupEnabled = instance.mAutoEventSetupEnabled;
+    this.mAutoLogAppEventsDefault = instance.mAutoLogAppEventsDefault;
+    this.mAutoLogAppEventsEnabled = instance.mAutoLogAppEventsEnabled;
     this.mBusiness = instance.mBusiness;
     this.mCanvasFluidHeight = instance.mCanvasFluidHeight;
     this.mCanvasFluidWidth = instance.mCanvasFluidWidth;
@@ -11854,8 +11346,6 @@ public class Application extends APINode {
     this.mRestrictions = instance.mRestrictions;
     this.mRestrictiveDataFilterParams = instance.mRestrictiveDataFilterParams;
     this.mRestrictiveDataFilterRules = instance.mRestrictiveDataFilterRules;
-    this.mSdkAutoLoggingDefaultValue = instance.mSdkAutoLoggingDefaultValue;
-    this.mSdkAutoLoggingOverrideValue = instance.mSdkAutoLoggingOverrideValue;
     this.mSdkUpdateMessage = instance.mSdkUpdateMessage;
     this.mSeamlessLogin = instance.mSeamlessLogin;
     this.mSecureCanvasUrl = instance.mSecureCanvasUrl;

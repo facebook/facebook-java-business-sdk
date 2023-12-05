@@ -3056,6 +3056,7 @@ public class BusinessUser extends APINode {
       "last_name",
       "pending_email",
       "role",
+      "skip_verification_email",
       "title",
     };
 
@@ -3150,6 +3151,15 @@ public class BusinessUser extends APINode {
     }
     public APIRequestUpdate setRole (String role) {
       this.setParam("role", role);
+      return this;
+    }
+
+    public APIRequestUpdate setSkipVerificationEmail (Boolean skipVerificationEmail) {
+      this.setParam("skip_verification_email", skipVerificationEmail);
+      return this;
+    }
+    public APIRequestUpdate setSkipVerificationEmail (String skipVerificationEmail) {
+      this.setParam("skip_verification_email", skipVerificationEmail);
       return this;
     }
 

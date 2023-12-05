@@ -64,8 +64,6 @@ public class PagePostExperiment extends APINode {
   private String mName = null;
   @SerializedName("optimization_goal")
   private String mOptimizationGoal = null;
-  @SerializedName("post_variant_fields")
-  private List<String> mPostVariantFields = null;
   @SerializedName("publish_status")
   private String mPublishStatus = null;
   @SerializedName("publish_time")
@@ -347,10 +345,6 @@ public class PagePostExperiment extends APINode {
     return mOptimizationGoal;
   }
 
-  public List<String> getFieldPostVariantFields() {
-    return mPostVariantFields;
-  }
-
   public String getFieldPublishStatus() {
     return mPublishStatus;
   }
@@ -600,7 +594,6 @@ public class PagePostExperiment extends APINode {
       "insight_snapshots",
       "name",
       "optimization_goal",
-      "post_variant_fields",
       "publish_status",
       "publish_time",
       "scheduled_experiment_timestamp",
@@ -780,13 +773,6 @@ public class PagePostExperiment extends APINode {
       this.requestField("optimization_goal", value);
       return this;
     }
-    public APIRequestGet requestPostVariantFieldsField () {
-      return this.requestPostVariantFieldsField(true);
-    }
-    public APIRequestGet requestPostVariantFieldsField (boolean value) {
-      this.requestField("post_variant_fields", value);
-      return this;
-    }
     public APIRequestGet requestPublishStatusField () {
       return this.requestPublishStatusField(true);
     }
@@ -881,7 +867,6 @@ public class PagePostExperiment extends APINode {
     this.mInsightSnapshots = instance.mInsightSnapshots;
     this.mName = instance.mName;
     this.mOptimizationGoal = instance.mOptimizationGoal;
-    this.mPostVariantFields = instance.mPostVariantFields;
     this.mPublishStatus = instance.mPublishStatus;
     this.mPublishTime = instance.mPublishTime;
     this.mScheduledExperimentTimestamp = instance.mScheduledExperimentTimestamp;

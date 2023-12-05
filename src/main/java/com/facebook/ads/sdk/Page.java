@@ -1699,7 +1699,6 @@ public class Page extends APINode {
       "insight_snapshots",
       "name",
       "optimization_goal",
-      "post_variant_fields",
       "publish_status",
       "publish_time",
       "scheduled_experiment_timestamp",
@@ -1877,13 +1876,6 @@ public class Page extends APINode {
     }
     public APIRequestGetAbTests requestOptimizationGoalField (boolean value) {
       this.requestField("optimization_goal", value);
-      return this;
-    }
-    public APIRequestGetAbTests requestPostVariantFieldsField () {
-      return this.requestPostVariantFieldsField(true);
-    }
-    public APIRequestGetAbTests requestPostVariantFieldsField (boolean value) {
-      this.requestField("post_variant_fields", value);
       return this;
     }
     public APIRequestGetAbTests requestPublishStatusField () {
@@ -20491,6 +20483,7 @@ public class Page extends APINode {
 
     public static final String[] FIELDS = {
       "account_linking_url",
+      "commands",
       "get_started",
       "greeting",
       "ice_breakers",
@@ -20604,6 +20597,13 @@ public class Page extends APINode {
     }
     public APIRequestGetMessengerProfile requestAccountLinkingUrlField (boolean value) {
       this.requestField("account_linking_url", value);
+      return this;
+    }
+    public APIRequestGetMessengerProfile requestCommandsField () {
+      return this.requestCommandsField(true);
+    }
+    public APIRequestGetMessengerProfile requestCommandsField (boolean value) {
+      this.requestField("commands", value);
       return this;
     }
     public APIRequestGetMessengerProfile requestGetStartedField () {
@@ -26959,6 +26959,8 @@ public class Page extends APINode {
       "auto_event_mapping_android",
       "auto_event_mapping_ios",
       "auto_event_setup_enabled",
+      "auto_log_app_events_default",
+      "auto_log_app_events_enabled",
       "business",
       "canvas_fluid_height",
       "canvas_fluid_width",
@@ -27016,8 +27018,6 @@ public class Page extends APINode {
       "restrictions",
       "restrictive_data_filter_params",
       "restrictive_data_filter_rules",
-      "sdk_auto_logging_default_value",
-      "sdk_auto_logging_override_value",
       "sdk_update_message",
       "seamless_login",
       "secure_canvas_url",
@@ -27312,6 +27312,20 @@ public class Page extends APINode {
     }
     public APIRequestGetSecondaryReceivers requestAutoEventSetupEnabledField (boolean value) {
       this.requestField("auto_event_setup_enabled", value);
+      return this;
+    }
+    public APIRequestGetSecondaryReceivers requestAutoLogAppEventsDefaultField () {
+      return this.requestAutoLogAppEventsDefaultField(true);
+    }
+    public APIRequestGetSecondaryReceivers requestAutoLogAppEventsDefaultField (boolean value) {
+      this.requestField("auto_log_app_events_default", value);
+      return this;
+    }
+    public APIRequestGetSecondaryReceivers requestAutoLogAppEventsEnabledField () {
+      return this.requestAutoLogAppEventsEnabledField(true);
+    }
+    public APIRequestGetSecondaryReceivers requestAutoLogAppEventsEnabledField (boolean value) {
+      this.requestField("auto_log_app_events_enabled", value);
       return this;
     }
     public APIRequestGetSecondaryReceivers requestBusinessField () {
@@ -27711,20 +27725,6 @@ public class Page extends APINode {
     }
     public APIRequestGetSecondaryReceivers requestRestrictiveDataFilterRulesField (boolean value) {
       this.requestField("restrictive_data_filter_rules", value);
-      return this;
-    }
-    public APIRequestGetSecondaryReceivers requestSdkAutoLoggingDefaultValueField () {
-      return this.requestSdkAutoLoggingDefaultValueField(true);
-    }
-    public APIRequestGetSecondaryReceivers requestSdkAutoLoggingDefaultValueField (boolean value) {
-      this.requestField("sdk_auto_logging_default_value", value);
-      return this;
-    }
-    public APIRequestGetSecondaryReceivers requestSdkAutoLoggingOverrideValueField () {
-      return this.requestSdkAutoLoggingOverrideValueField(true);
-    }
-    public APIRequestGetSecondaryReceivers requestSdkAutoLoggingOverrideValueField (boolean value) {
-      this.requestField("sdk_auto_logging_override_value", value);
       return this;
     }
     public APIRequestGetSecondaryReceivers requestSdkUpdateMessageField () {
@@ -28576,6 +28576,8 @@ public class Page extends APINode {
       "auto_event_mapping_android",
       "auto_event_mapping_ios",
       "auto_event_setup_enabled",
+      "auto_log_app_events_default",
+      "auto_log_app_events_enabled",
       "business",
       "canvas_fluid_height",
       "canvas_fluid_width",
@@ -28633,8 +28635,6 @@ public class Page extends APINode {
       "restrictions",
       "restrictive_data_filter_params",
       "restrictive_data_filter_rules",
-      "sdk_auto_logging_default_value",
-      "sdk_auto_logging_override_value",
       "sdk_update_message",
       "seamless_login",
       "secure_canvas_url",
@@ -28920,6 +28920,20 @@ public class Page extends APINode {
     }
     public APIRequestGetSubscribedApps requestAutoEventSetupEnabledField (boolean value) {
       this.requestField("auto_event_setup_enabled", value);
+      return this;
+    }
+    public APIRequestGetSubscribedApps requestAutoLogAppEventsDefaultField () {
+      return this.requestAutoLogAppEventsDefaultField(true);
+    }
+    public APIRequestGetSubscribedApps requestAutoLogAppEventsDefaultField (boolean value) {
+      this.requestField("auto_log_app_events_default", value);
+      return this;
+    }
+    public APIRequestGetSubscribedApps requestAutoLogAppEventsEnabledField () {
+      return this.requestAutoLogAppEventsEnabledField(true);
+    }
+    public APIRequestGetSubscribedApps requestAutoLogAppEventsEnabledField (boolean value) {
+      this.requestField("auto_log_app_events_enabled", value);
       return this;
     }
     public APIRequestGetSubscribedApps requestBusinessField () {
@@ -29319,20 +29333,6 @@ public class Page extends APINode {
     }
     public APIRequestGetSubscribedApps requestRestrictiveDataFilterRulesField (boolean value) {
       this.requestField("restrictive_data_filter_rules", value);
-      return this;
-    }
-    public APIRequestGetSubscribedApps requestSdkAutoLoggingDefaultValueField () {
-      return this.requestSdkAutoLoggingDefaultValueField(true);
-    }
-    public APIRequestGetSubscribedApps requestSdkAutoLoggingDefaultValueField (boolean value) {
-      this.requestField("sdk_auto_logging_default_value", value);
-      return this;
-    }
-    public APIRequestGetSubscribedApps requestSdkAutoLoggingOverrideValueField () {
-      return this.requestSdkAutoLoggingOverrideValueField(true);
-    }
-    public APIRequestGetSubscribedApps requestSdkAutoLoggingOverrideValueField (boolean value) {
-      this.requestField("sdk_auto_logging_override_value", value);
       return this;
     }
     public APIRequestGetSubscribedApps requestSdkUpdateMessageField () {

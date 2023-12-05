@@ -9913,6 +9913,8 @@ public class AdAccount extends APINode {
       "auto_event_mapping_android",
       "auto_event_mapping_ios",
       "auto_event_setup_enabled",
+      "auto_log_app_events_default",
+      "auto_log_app_events_enabled",
       "business",
       "canvas_fluid_height",
       "canvas_fluid_width",
@@ -9970,8 +9972,6 @@ public class AdAccount extends APINode {
       "restrictions",
       "restrictive_data_filter_params",
       "restrictive_data_filter_rules",
-      "sdk_auto_logging_default_value",
-      "sdk_auto_logging_override_value",
       "sdk_update_message",
       "seamless_login",
       "secure_canvas_url",
@@ -10267,6 +10267,20 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdvertisableApplications requestAutoEventSetupEnabledField (boolean value) {
       this.requestField("auto_event_setup_enabled", value);
+      return this;
+    }
+    public APIRequestGetAdvertisableApplications requestAutoLogAppEventsDefaultField () {
+      return this.requestAutoLogAppEventsDefaultField(true);
+    }
+    public APIRequestGetAdvertisableApplications requestAutoLogAppEventsDefaultField (boolean value) {
+      this.requestField("auto_log_app_events_default", value);
+      return this;
+    }
+    public APIRequestGetAdvertisableApplications requestAutoLogAppEventsEnabledField () {
+      return this.requestAutoLogAppEventsEnabledField(true);
+    }
+    public APIRequestGetAdvertisableApplications requestAutoLogAppEventsEnabledField (boolean value) {
+      this.requestField("auto_log_app_events_enabled", value);
       return this;
     }
     public APIRequestGetAdvertisableApplications requestBusinessField () {
@@ -10666,20 +10680,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdvertisableApplications requestRestrictiveDataFilterRulesField (boolean value) {
       this.requestField("restrictive_data_filter_rules", value);
-      return this;
-    }
-    public APIRequestGetAdvertisableApplications requestSdkAutoLoggingDefaultValueField () {
-      return this.requestSdkAutoLoggingDefaultValueField(true);
-    }
-    public APIRequestGetAdvertisableApplications requestSdkAutoLoggingDefaultValueField (boolean value) {
-      this.requestField("sdk_auto_logging_default_value", value);
-      return this;
-    }
-    public APIRequestGetAdvertisableApplications requestSdkAutoLoggingOverrideValueField () {
-      return this.requestSdkAutoLoggingOverrideValueField(true);
-    }
-    public APIRequestGetAdvertisableApplications requestSdkAutoLoggingOverrideValueField (boolean value) {
-      this.requestField("sdk_auto_logging_override_value", value);
       return this;
     }
     public APIRequestGetAdvertisableApplications requestSdkUpdateMessageField () {
@@ -13206,6 +13206,8 @@ public class AdAccount extends APINode {
       "auto_event_mapping_android",
       "auto_event_mapping_ios",
       "auto_event_setup_enabled",
+      "auto_log_app_events_default",
+      "auto_log_app_events_enabled",
       "business",
       "canvas_fluid_height",
       "canvas_fluid_width",
@@ -13263,8 +13265,6 @@ public class AdAccount extends APINode {
       "restrictions",
       "restrictive_data_filter_params",
       "restrictive_data_filter_rules",
-      "sdk_auto_logging_default_value",
-      "sdk_auto_logging_override_value",
       "sdk_update_message",
       "seamless_login",
       "secure_canvas_url",
@@ -13550,6 +13550,20 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetApplications requestAutoEventSetupEnabledField (boolean value) {
       this.requestField("auto_event_setup_enabled", value);
+      return this;
+    }
+    public APIRequestGetApplications requestAutoLogAppEventsDefaultField () {
+      return this.requestAutoLogAppEventsDefaultField(true);
+    }
+    public APIRequestGetApplications requestAutoLogAppEventsDefaultField (boolean value) {
+      this.requestField("auto_log_app_events_default", value);
+      return this;
+    }
+    public APIRequestGetApplications requestAutoLogAppEventsEnabledField () {
+      return this.requestAutoLogAppEventsEnabledField(true);
+    }
+    public APIRequestGetApplications requestAutoLogAppEventsEnabledField (boolean value) {
+      this.requestField("auto_log_app_events_enabled", value);
       return this;
     }
     public APIRequestGetApplications requestBusinessField () {
@@ -13949,20 +13963,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetApplications requestRestrictiveDataFilterRulesField (boolean value) {
       this.requestField("restrictive_data_filter_rules", value);
-      return this;
-    }
-    public APIRequestGetApplications requestSdkAutoLoggingDefaultValueField () {
-      return this.requestSdkAutoLoggingDefaultValueField(true);
-    }
-    public APIRequestGetApplications requestSdkAutoLoggingDefaultValueField (boolean value) {
-      this.requestField("sdk_auto_logging_default_value", value);
-      return this;
-    }
-    public APIRequestGetApplications requestSdkAutoLoggingOverrideValueField () {
-      return this.requestSdkAutoLoggingOverrideValueField(true);
-    }
-    public APIRequestGetApplications requestSdkAutoLoggingOverrideValueField (boolean value) {
-      this.requestField("sdk_auto_logging_override_value", value);
       return this;
     }
     public APIRequestGetApplications requestSdkUpdateMessageField () {
