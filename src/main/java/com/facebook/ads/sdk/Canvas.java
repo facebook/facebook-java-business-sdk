@@ -303,6 +303,10 @@ public class Canvas extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGetPreview getPreview() {
+    return new APIRequestGetPreview(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetPreviews getPreviews() {
     return new APIRequestGetPreviews(this.getPrefixedId().toString(), context);
   }
@@ -440,6 +444,118 @@ public class Canvas extends APINode {
   }
 
 
+
+  public static class APIRequestGetPreview extends APIRequest<CanvasPreview> {
+
+    APINodeList<CanvasPreview> lastResponse = null;
+    @Override
+    public APINodeList<CanvasPreview> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "body",
+    };
+
+    @Override
+    public APINodeList<CanvasPreview> parseResponse(String response, String header) throws APIException {
+      return CanvasPreview.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<CanvasPreview> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<CanvasPreview> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<CanvasPreview>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<CanvasPreview>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<CanvasPreview>>() {
+           public APINodeList<CanvasPreview> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetPreview.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetPreview(String nodeId, APIContext context) {
+      super(context, nodeId, "/preview", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetPreview setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPreview setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetPreview requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetPreview requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPreview requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetPreview requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPreview requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPreview requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetPreview requestBodyField () {
+      return this.requestBodyField(true);
+    }
+    public APIRequestGetPreview requestBodyField (boolean value) {
+      this.requestField("body", value);
+      return this;
+    }
+  }
 
   public static class APIRequestGetPreviews extends APIRequest<TextWithEntities> {
 

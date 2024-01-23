@@ -82,10 +82,14 @@ public class AdPromotedObject extends APINode {
   private String mProductCatalogId = null;
   @SerializedName("product_item_id")
   private String mProductItemId = null;
+  @SerializedName("product_set")
+  private ProductSet mProductSet = null;
   @SerializedName("product_set_id")
   private String mProductSetId = null;
   @SerializedName("retention_days")
   private String mRetentionDays = null;
+  @SerializedName("whatsapp_phone_number")
+  private String mWhatsappPhoneNumber = null;
   protected static Gson gson = null;
 
   public AdPromotedObject() {
@@ -434,6 +438,23 @@ public class AdPromotedObject extends APINode {
     return this;
   }
 
+  public ProductSet getFieldProductSet() {
+    if (mProductSet != null) {
+      mProductSet.context = getContext();
+    }
+    return mProductSet;
+  }
+
+  public AdPromotedObject setFieldProductSet(ProductSet value) {
+    this.mProductSet = value;
+    return this;
+  }
+
+  public AdPromotedObject setFieldProductSet(String value) {
+    Type type = new TypeToken<ProductSet>(){}.getType();
+    this.mProductSet = ProductSet.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldProductSetId() {
     return mProductSetId;
   }
@@ -449,6 +470,15 @@ public class AdPromotedObject extends APINode {
 
   public AdPromotedObject setFieldRetentionDays(String value) {
     this.mRetentionDays = value;
+    return this;
+  }
+
+  public String getFieldWhatsappPhoneNumber() {
+    return mWhatsappPhoneNumber;
+  }
+
+  public AdPromotedObject setFieldWhatsappPhoneNumber(String value) {
+    this.mWhatsappPhoneNumber = value;
     return this;
   }
 
@@ -563,8 +593,10 @@ public class AdPromotedObject extends APINode {
     this.mPlacePageSetId = instance.mPlacePageSetId;
     this.mProductCatalogId = instance.mProductCatalogId;
     this.mProductItemId = instance.mProductItemId;
+    this.mProductSet = instance.mProductSet;
     this.mProductSetId = instance.mProductSetId;
     this.mRetentionDays = instance.mRetentionDays;
+    this.mWhatsappPhoneNumber = instance.mWhatsappPhoneNumber;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

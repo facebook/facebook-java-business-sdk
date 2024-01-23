@@ -21111,7 +21111,6 @@ public class Business extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "breaking_change",
       "height",
       "redirect",
       "type",
@@ -21182,15 +21181,6 @@ public class Business extends APINode {
       return this;
     }
 
-
-    public APIRequestGetPicture setBreakingChange (ProfilePictureSource.EnumBreakingChange breakingChange) {
-      this.setParam("breaking_change", breakingChange);
-      return this;
-    }
-    public APIRequestGetPicture setBreakingChange (String breakingChange) {
-      this.setParam("breaking_change", breakingChange);
-      return this;
-    }
 
     public APIRequestGetPicture setHeight (Long height) {
       this.setParam("height", height);
@@ -23853,6 +23843,8 @@ public class Business extends APINode {
       VALUE_MARKETING("MARKETING"),
       @SerializedName("NON_PROFIT")
       VALUE_NON_PROFIT("NON_PROFIT"),
+      @SerializedName("NOT_SET")
+      VALUE_NOT_SET("NOT_SET"),
       @SerializedName("ORGANIZATIONS_AND_ASSOCIATIONS")
       VALUE_ORGANIZATIONS_AND_ASSOCIATIONS("ORGANIZATIONS_AND_ASSOCIATIONS"),
       @SerializedName("OTHER")

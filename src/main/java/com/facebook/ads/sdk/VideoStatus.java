@@ -39,39 +39,33 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ProfilePictureSource extends APINode {
-  @SerializedName("bottom")
-  private Long mBottom = null;
-  @SerializedName("cache_key")
-  private String mCacheKey = null;
-  @SerializedName("height")
-  private Long mHeight = null;
-  @SerializedName("is_silhouette")
-  private Boolean mIsSilhouette = null;
-  @SerializedName("left")
-  private Long mLeft = null;
-  @SerializedName("right")
-  private Long mRight = null;
-  @SerializedName("top")
-  private Long mTop = null;
-  @SerializedName("url")
-  private String mUrl = null;
-  @SerializedName("width")
-  private Long mWidth = null;
+public class VideoStatus extends APINode {
+  @SerializedName("copyright_check_status")
+  private VideoCopyrightCheckStatus mCopyrightCheckStatus = null;
+  @SerializedName("processing_phase")
+  private VideoStatusProcessingPhase mProcessingPhase = null;
+  @SerializedName("processing_progress")
+  private Long mProcessingProgress = null;
+  @SerializedName("publishing_phase")
+  private VideoStatusPublishingPhase mPublishingPhase = null;
+  @SerializedName("uploading_phase")
+  private VideoStatusUploadingPhase mUploadingPhase = null;
+  @SerializedName("video_status")
+  private String mVideoStatus = null;
   protected static Gson gson = null;
 
-  public ProfilePictureSource() {
+  public VideoStatus() {
   }
 
   public String getId() {
     return null;
   }
-  public static ProfilePictureSource loadJSON(String json, APIContext context, String header) {
-    ProfilePictureSource profilePictureSource = getGson().fromJson(json, ProfilePictureSource.class);
+  public static VideoStatus loadJSON(String json, APIContext context, String header) {
+    VideoStatus videoStatus = getGson().fromJson(json, VideoStatus.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(profilePictureSource.toString());
+      JsonElement o2 = parser.parse(videoStatus.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -81,14 +75,14 @@ public class ProfilePictureSource extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    profilePictureSource.context = context;
-    profilePictureSource.rawValue = json;
-    profilePictureSource.header = header;
-    return profilePictureSource;
+    videoStatus.context = context;
+    videoStatus.rawValue = json;
+    videoStatus.header = header;
+    return videoStatus;
   }
 
-  public static APINodeList<ProfilePictureSource> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ProfilePictureSource> profilePictureSources = new APINodeList<ProfilePictureSource>(request, json, header);
+  public static APINodeList<VideoStatus> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<VideoStatus> videoStatuss = new APINodeList<VideoStatus>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -99,9 +93,9 @@ public class ProfilePictureSource extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          profilePictureSources.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          videoStatuss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return profilePictureSources;
+        return videoStatuss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -111,20 +105,20 @@ public class ProfilePictureSource extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                profilePictureSources.setCursors(before, after);
+                videoStatuss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            profilePictureSources.setPaging(previous, next);
+            videoStatuss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              profilePictureSources.setAppSecret(context.getAppSecretProof());
+              videoStatuss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              profilePictureSources.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              videoStatuss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -135,23 +129,23 @@ public class ProfilePictureSource extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  profilePictureSources.add(loadJSON(entry.getValue().toString(), context, header));
+                  videoStatuss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              profilePictureSources.add(loadJSON(obj.toString(), context, header));
+              videoStatuss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return profilePictureSources;
+          return videoStatuss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              profilePictureSources.add(loadJSON(entry.getValue().toString(), context, header));
+              videoStatuss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return profilePictureSources;
+          return videoStatuss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -168,20 +162,20 @@ public class ProfilePictureSource extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              profilePictureSources.add(loadJSON(value.toString(), context, header));
+              videoStatuss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return profilePictureSources;
+            return videoStatuss;
           }
 
           // Sixth, check if it's pure JsonObject
-          profilePictureSources.clear();
-          profilePictureSources.add(loadJSON(json, context, header));
-          return profilePictureSources;
+          videoStatuss.clear();
+          videoStatuss.add(loadJSON(json, context, header));
+          return videoStatuss;
         }
       }
     } catch (Exception e) {
@@ -209,109 +203,81 @@ public class ProfilePictureSource extends APINode {
   }
 
 
-  public Long getFieldBottom() {
-    return mBottom;
+  public VideoCopyrightCheckStatus getFieldCopyrightCheckStatus() {
+    return mCopyrightCheckStatus;
   }
 
-  public ProfilePictureSource setFieldBottom(Long value) {
-    this.mBottom = value;
+  public VideoStatus setFieldCopyrightCheckStatus(VideoCopyrightCheckStatus value) {
+    this.mCopyrightCheckStatus = value;
     return this;
   }
 
-  public String getFieldCacheKey() {
-    return mCacheKey;
+  public VideoStatus setFieldCopyrightCheckStatus(String value) {
+    Type type = new TypeToken<VideoCopyrightCheckStatus>(){}.getType();
+    this.mCopyrightCheckStatus = VideoCopyrightCheckStatus.getGson().fromJson(value, type);
+    return this;
+  }
+  public VideoStatusProcessingPhase getFieldProcessingPhase() {
+    return mProcessingPhase;
   }
 
-  public ProfilePictureSource setFieldCacheKey(String value) {
-    this.mCacheKey = value;
+  public VideoStatus setFieldProcessingPhase(VideoStatusProcessingPhase value) {
+    this.mProcessingPhase = value;
     return this;
   }
 
-  public Long getFieldHeight() {
-    return mHeight;
+  public VideoStatus setFieldProcessingPhase(String value) {
+    Type type = new TypeToken<VideoStatusProcessingPhase>(){}.getType();
+    this.mProcessingPhase = VideoStatusProcessingPhase.getGson().fromJson(value, type);
+    return this;
+  }
+  public Long getFieldProcessingProgress() {
+    return mProcessingProgress;
   }
 
-  public ProfilePictureSource setFieldHeight(Long value) {
-    this.mHeight = value;
+  public VideoStatus setFieldProcessingProgress(Long value) {
+    this.mProcessingProgress = value;
     return this;
   }
 
-  public Boolean getFieldIsSilhouette() {
-    return mIsSilhouette;
+  public VideoStatusPublishingPhase getFieldPublishingPhase() {
+    return mPublishingPhase;
   }
 
-  public ProfilePictureSource setFieldIsSilhouette(Boolean value) {
-    this.mIsSilhouette = value;
+  public VideoStatus setFieldPublishingPhase(VideoStatusPublishingPhase value) {
+    this.mPublishingPhase = value;
     return this;
   }
 
-  public Long getFieldLeft() {
-    return mLeft;
+  public VideoStatus setFieldPublishingPhase(String value) {
+    Type type = new TypeToken<VideoStatusPublishingPhase>(){}.getType();
+    this.mPublishingPhase = VideoStatusPublishingPhase.getGson().fromJson(value, type);
+    return this;
+  }
+  public VideoStatusUploadingPhase getFieldUploadingPhase() {
+    return mUploadingPhase;
   }
 
-  public ProfilePictureSource setFieldLeft(Long value) {
-    this.mLeft = value;
+  public VideoStatus setFieldUploadingPhase(VideoStatusUploadingPhase value) {
+    this.mUploadingPhase = value;
     return this;
   }
 
-  public Long getFieldRight() {
-    return mRight;
-  }
-
-  public ProfilePictureSource setFieldRight(Long value) {
-    this.mRight = value;
+  public VideoStatus setFieldUploadingPhase(String value) {
+    Type type = new TypeToken<VideoStatusUploadingPhase>(){}.getType();
+    this.mUploadingPhase = VideoStatusUploadingPhase.getGson().fromJson(value, type);
     return this;
   }
-
-  public Long getFieldTop() {
-    return mTop;
+  public String getFieldVideoStatus() {
+    return mVideoStatus;
   }
 
-  public ProfilePictureSource setFieldTop(Long value) {
-    this.mTop = value;
-    return this;
-  }
-
-  public String getFieldUrl() {
-    return mUrl;
-  }
-
-  public ProfilePictureSource setFieldUrl(String value) {
-    this.mUrl = value;
-    return this;
-  }
-
-  public Long getFieldWidth() {
-    return mWidth;
-  }
-
-  public ProfilePictureSource setFieldWidth(Long value) {
-    this.mWidth = value;
+  public VideoStatus setFieldVideoStatus(String value) {
+    this.mVideoStatus = value;
     return this;
   }
 
 
-
-  public static enum EnumType {
-      @SerializedName("album")
-      VALUE_ALBUM("album"),
-      @SerializedName("small")
-      VALUE_SMALL("small"),
-      @SerializedName("thumbnail")
-      VALUE_THUMBNAIL("thumbnail"),
-      ;
-
-      private String value;
-
-      private EnumType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -327,25 +293,22 @@ public class ProfilePictureSource extends APINode {
     return gson;
   }
 
-  public ProfilePictureSource copyFrom(ProfilePictureSource instance) {
-    this.mBottom = instance.mBottom;
-    this.mCacheKey = instance.mCacheKey;
-    this.mHeight = instance.mHeight;
-    this.mIsSilhouette = instance.mIsSilhouette;
-    this.mLeft = instance.mLeft;
-    this.mRight = instance.mRight;
-    this.mTop = instance.mTop;
-    this.mUrl = instance.mUrl;
-    this.mWidth = instance.mWidth;
+  public VideoStatus copyFrom(VideoStatus instance) {
+    this.mCopyrightCheckStatus = instance.mCopyrightCheckStatus;
+    this.mProcessingPhase = instance.mProcessingPhase;
+    this.mProcessingProgress = instance.mProcessingProgress;
+    this.mPublishingPhase = instance.mPublishingPhase;
+    this.mUploadingPhase = instance.mUploadingPhase;
+    this.mVideoStatus = instance.mVideoStatus;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ProfilePictureSource> getParser() {
-    return new APIRequest.ResponseParser<ProfilePictureSource>() {
-      public APINodeList<ProfilePictureSource> parseResponse(String response, APIContext context, APIRequest<ProfilePictureSource> request, String header) throws MalformedResponseException {
-        return ProfilePictureSource.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<VideoStatus> getParser() {
+    return new APIRequest.ResponseParser<VideoStatus>() {
+      public APINodeList<VideoStatus> parseResponse(String response, APIContext context, APIRequest<VideoStatus> request, String header) throws MalformedResponseException {
+        return VideoStatus.parseResponse(response, context, request, header);
       }
     };
   }

@@ -2734,6 +2734,8 @@ public class AdCreative extends APINode {
       VALUE_NONE("NONE"),
       @SerializedName("POLITICAL")
       VALUE_POLITICAL("POLITICAL"),
+      @SerializedName("POLITICAL_WITH_DIGITALLY_CREATED_MEDIA")
+      VALUE_POLITICAL_WITH_DIGITALLY_CREATED_MEDIA("POLITICAL_WITH_DIGITALLY_CREATED_MEDIA"),
       ;
 
       private String value;

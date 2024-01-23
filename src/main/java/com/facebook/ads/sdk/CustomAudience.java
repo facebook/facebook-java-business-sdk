@@ -343,6 +343,14 @@ public class CustomAudience extends APINode {
     return new APIRequestGetAds(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetSalts getSalts() {
+    return new APIRequestGetSalts(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateSalt createSalt() {
+    return new APIRequestCreateSalt(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetSessions getSessions() {
     return new APIRequestGetSessions(this.getPrefixedId().toString(), context);
   }
@@ -1874,6 +1882,258 @@ public class CustomAudience extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
+  }
+
+  public static class APIRequestGetSalts extends APIRequest<CustomAudienceSalts> {
+
+    APINodeList<CustomAudienceSalts> lastResponse = null;
+    @Override
+    public APINodeList<CustomAudienceSalts> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "params",
+    };
+
+    public static final String[] FIELDS = {
+      "app_id",
+      "public_key",
+    };
+
+    @Override
+    public APINodeList<CustomAudienceSalts> parseResponse(String response, String header) throws APIException {
+      return CustomAudienceSalts.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<CustomAudienceSalts> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<CustomAudienceSalts> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<CustomAudienceSalts>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<CustomAudienceSalts>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<CustomAudienceSalts>>() {
+           public APINodeList<CustomAudienceSalts> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetSalts.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetSalts(String nodeId, APIContext context) {
+      super(context, nodeId, "/salts", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetSalts setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSalts setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetSalts setparamParams (List<String> params) {
+      this.setParam("params", params);
+      return this;
+    }
+    public APIRequestGetSalts setParams (String params) {
+      this.setParam("params", params);
+      return this;
+    }
+
+    public APIRequestGetSalts requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetSalts requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSalts requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetSalts requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSalts requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSalts requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetSalts requestAppIdField () {
+      return this.requestAppIdField(true);
+    }
+    public APIRequestGetSalts requestAppIdField (boolean value) {
+      this.requestField("app_id", value);
+      return this;
+    }
+    public APIRequestGetSalts requestPublicKeyField () {
+      return this.requestPublicKeyField(true);
+    }
+    public APIRequestGetSalts requestPublicKeyField (boolean value) {
+      this.requestField("public_key", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreateSalt extends APIRequest<CustomAudience> {
+
+    CustomAudience lastResponse = null;
+    @Override
+    public CustomAudience getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "salt",
+      "valid_from",
+      "valid_to",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public CustomAudience parseResponse(String response, String header) throws APIException {
+      return CustomAudience.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public CustomAudience execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public CustomAudience execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<CustomAudience> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<CustomAudience> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, CustomAudience>() {
+           public CustomAudience apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateSalt.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateSalt(String nodeId, APIContext context) {
+      super(context, nodeId, "/salts", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateSalt setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSalt setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateSalt setSalt (String salt) {
+      this.setParam("salt", salt);
+      return this;
+    }
+
+    public APIRequestCreateSalt setValidFrom (String validFrom) {
+      this.setParam("valid_from", validFrom);
+      return this;
+    }
+
+    public APIRequestCreateSalt setValidTo (String validTo) {
+      this.setParam("valid_to", validTo);
+      return this;
+    }
+
+    public APIRequestCreateSalt requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateSalt requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSalt requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateSalt requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSalt requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSalt requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetSessions extends APIRequest<CustomAudienceSession> {

@@ -561,6 +561,10 @@ public class AdAccount extends APINode {
     return new APIRequestGetAgencies(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateAgency createAgency() {
+    return new APIRequestCreateAgency(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetApplications getApplications() {
     return new APIRequestGetApplications(this.getPrefixedId().toString(), context);
   }
@@ -1121,7 +1125,9 @@ public class AdAccount extends APINode {
 
     public static final String[] FIELDS = {
       "audience_controls",
+      "campaigns_with_error",
       "placement_controls",
+      "status",
     };
 
     @Override
@@ -1220,11 +1226,25 @@ public class AdAccount extends APINode {
       this.requestField("audience_controls", value);
       return this;
     }
+    public APIRequestGetAccountControls requestCampaignsWithErrorField () {
+      return this.requestCampaignsWithErrorField(true);
+    }
+    public APIRequestGetAccountControls requestCampaignsWithErrorField (boolean value) {
+      this.requestField("campaigns_with_error", value);
+      return this;
+    }
     public APIRequestGetAccountControls requestPlacementControlsField () {
       return this.requestPlacementControlsField(true);
     }
     public APIRequestGetAccountControls requestPlacementControlsField (boolean value) {
       this.requestField("placement_controls", value);
+      return this;
+    }
+    public APIRequestGetAccountControls requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetAccountControls requestStatusField (boolean value) {
+      this.requestField("status", value);
       return this;
     }
   }
@@ -13168,6 +13188,126 @@ public class AdAccount extends APINode {
       this.requestField("vertical_id", value);
       return this;
     }
+  }
+
+  public static class APIRequestCreateAgency extends APIRequest<AdAccount> {
+
+    AdAccount lastResponse = null;
+    @Override
+    public AdAccount getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "business",
+      "permitted_tasks",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AdAccount parseResponse(String response, String header) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public AdAccount execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdAccount execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdAccount> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdAccount> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, AdAccount>() {
+           public AdAccount apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateAgency.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateAgency(String nodeId, APIContext context) {
+      super(context, nodeId, "/agencies", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateAgency setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAgency setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateAgency setBusiness (String business) {
+      this.setParam("business", business);
+      return this;
+    }
+
+    public APIRequestCreateAgency setPermittedTasks (List<AdAccount.EnumPermittedTasks> permittedTasks) {
+      this.setParam("permitted_tasks", permittedTasks);
+      return this;
+    }
+    public APIRequestCreateAgency setPermittedTasks (String permittedTasks) {
+      this.setParam("permitted_tasks", permittedTasks);
+      return this;
+    }
+
+    public APIRequestCreateAgency requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateAgency requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAgency requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateAgency requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAgency requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAgency requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetApplications extends APIRequest<Application> {
@@ -29082,6 +29222,31 @@ public class AdAccount extends APINode {
       private String value;
 
       private EnumCurrency(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumPermittedTasks {
+      @SerializedName("AA_ANALYZE")
+      VALUE_AA_ANALYZE("AA_ANALYZE"),
+      @SerializedName("ADVERTISE")
+      VALUE_ADVERTISE("ADVERTISE"),
+      @SerializedName("ANALYZE")
+      VALUE_ANALYZE("ANALYZE"),
+      @SerializedName("DRAFT")
+      VALUE_DRAFT("DRAFT"),
+      @SerializedName("MANAGE")
+      VALUE_MANAGE("MANAGE"),
+      ;
+
+      private String value;
+
+      private EnumPermittedTasks(String value) {
         this.value = value;
       }
 

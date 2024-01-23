@@ -1865,6 +1865,8 @@ public class AdReportRun extends APINode {
       VALUE_IMPRESSION_DEVICE("impression_device"),
       @SerializedName("is_conversion_id_modeled")
       VALUE_IS_CONVERSION_ID_MODELED("is_conversion_id_modeled"),
+      @SerializedName("landing_destination")
+      VALUE_LANDING_DESTINATION("landing_destination"),
       @SerializedName("link_url_asset")
       VALUE_LINK_URL_ASSET("link_url_asset"),
       @SerializedName("marketing_messages_btn_name")

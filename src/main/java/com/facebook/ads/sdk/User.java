@@ -439,10 +439,6 @@ public class User extends APINode {
     return new APIRequestGetEvents(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetFbdlRuns getFbdlRuns() {
-    return new APIRequestGetFbdlRuns(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetFeed getFeed() {
     return new APIRequestGetFeed(this.getPrefixedId().toString(), context);
   }
@@ -461,10 +457,6 @@ public class User extends APINode {
 
   public APIRequestCreateFundraiser createFundraiser() {
     return new APIRequestCreateFundraiser(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateGameItem createGameItem() {
-    return new APIRequestCreateGameItem(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateGameTime createGameTime() {
@@ -8441,174 +8433,6 @@ public class User extends APINode {
     }
   }
 
-  public static class APIRequestGetFbdlRuns extends APIRequest<WhitehatFBDLRun> {
-
-    APINodeList<WhitehatFBDLRun> lastResponse = null;
-    @Override
-    public APINodeList<WhitehatFBDLRun> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "creation_time",
-      "id",
-      "is_pinned",
-      "note",
-      "result",
-      "run_code",
-      "status",
-      "user_type",
-    };
-
-    @Override
-    public APINodeList<WhitehatFBDLRun> parseResponse(String response, String header) throws APIException {
-      return WhitehatFBDLRun.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<WhitehatFBDLRun> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<WhitehatFBDLRun> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<WhitehatFBDLRun>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<WhitehatFBDLRun>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<WhitehatFBDLRun>>() {
-           public APINodeList<WhitehatFBDLRun> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetFbdlRuns.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetFbdlRuns(String nodeId, APIContext context) {
-      super(context, nodeId, "/fbdl_runs", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetFbdlRuns setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetFbdlRuns setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetFbdlRuns requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetFbdlRuns requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetFbdlRuns requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetFbdlRuns requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetFbdlRuns requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetFbdlRuns requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetFbdlRuns requestCreationTimeField () {
-      return this.requestCreationTimeField(true);
-    }
-    public APIRequestGetFbdlRuns requestCreationTimeField (boolean value) {
-      this.requestField("creation_time", value);
-      return this;
-    }
-    public APIRequestGetFbdlRuns requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetFbdlRuns requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetFbdlRuns requestIsPinnedField () {
-      return this.requestIsPinnedField(true);
-    }
-    public APIRequestGetFbdlRuns requestIsPinnedField (boolean value) {
-      this.requestField("is_pinned", value);
-      return this;
-    }
-    public APIRequestGetFbdlRuns requestNoteField () {
-      return this.requestNoteField(true);
-    }
-    public APIRequestGetFbdlRuns requestNoteField (boolean value) {
-      this.requestField("note", value);
-      return this;
-    }
-    public APIRequestGetFbdlRuns requestResultField () {
-      return this.requestResultField(true);
-    }
-    public APIRequestGetFbdlRuns requestResultField (boolean value) {
-      this.requestField("result", value);
-      return this;
-    }
-    public APIRequestGetFbdlRuns requestRunCodeField () {
-      return this.requestRunCodeField(true);
-    }
-    public APIRequestGetFbdlRuns requestRunCodeField (boolean value) {
-      this.requestField("run_code", value);
-      return this;
-    }
-    public APIRequestGetFbdlRuns requestStatusField () {
-      return this.requestStatusField(true);
-    }
-    public APIRequestGetFbdlRuns requestStatusField (boolean value) {
-      this.requestField("status", value);
-      return this;
-    }
-    public APIRequestGetFbdlRuns requestUserTypeField () {
-      return this.requestUserTypeField(true);
-    }
-    public APIRequestGetFbdlRuns requestUserTypeField (boolean value) {
-      this.requestField("user_type", value);
-      return this;
-    }
-  }
-
   public static class APIRequestGetFeed extends APIRequest<Post> {
 
     APINodeList<Post> lastResponse = null;
@@ -11237,154 +11061,6 @@ public class User extends APINode {
 
     @Override
     public APIRequestCreateFundraiser requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateGameItem extends APIRequest<GameItem> {
-
-    GameItem lastResponse = null;
-    @Override
-    public GameItem getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "action",
-      "app_id",
-      "drop_table_id",
-      "ext_id",
-      "item_id",
-      "quantity",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public GameItem parseResponse(String response, String header) throws APIException {
-      return GameItem.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public GameItem execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public GameItem execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<GameItem> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<GameItem> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, GameItem>() {
-           public GameItem apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateGameItem.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateGameItem(String nodeId, APIContext context) {
-      super(context, nodeId, "/game_items", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateGameItem setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateGameItem setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateGameItem setAction (GameItem.EnumAction action) {
-      this.setParam("action", action);
-      return this;
-    }
-    public APIRequestCreateGameItem setAction (String action) {
-      this.setParam("action", action);
-      return this;
-    }
-
-    public APIRequestCreateGameItem setAppId (String appId) {
-      this.setParam("app_id", appId);
-      return this;
-    }
-
-    public APIRequestCreateGameItem setDropTableId (String dropTableId) {
-      this.setParam("drop_table_id", dropTableId);
-      return this;
-    }
-
-    public APIRequestCreateGameItem setExtId (String extId) {
-      this.setParam("ext_id", extId);
-      return this;
-    }
-
-    public APIRequestCreateGameItem setItemId (String itemId) {
-      this.setParam("item_id", itemId);
-      return this;
-    }
-
-    public APIRequestCreateGameItem setQuantity (Long quantity) {
-      this.setParam("quantity", quantity);
-      return this;
-    }
-    public APIRequestCreateGameItem setQuantity (String quantity) {
-      this.setParam("quantity", quantity);
-      return this;
-    }
-
-    public APIRequestCreateGameItem requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateGameItem requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateGameItem requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateGameItem requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateGameItem requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateGameItem requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -17771,7 +17447,6 @@ public class User extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "breaking_change",
       "height",
       "redirect",
       "type",
@@ -17842,15 +17517,6 @@ public class User extends APINode {
       return this;
     }
 
-
-    public APIRequestGetPicture setBreakingChange (ProfilePictureSource.EnumBreakingChange breakingChange) {
-      this.setParam("breaking_change", breakingChange);
-      return this;
-    }
-    public APIRequestGetPicture setBreakingChange (String breakingChange) {
-      this.setParam("breaking_change", breakingChange);
-      return this;
-    }
 
     public APIRequestGetPicture setHeight (Long height) {
       this.setParam("height", height);

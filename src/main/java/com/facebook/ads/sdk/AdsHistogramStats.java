@@ -100,8 +100,16 @@ public class AdsHistogramStats extends APINode {
   private String mInteractiveComponentStickerResponse = null;
   @SerializedName("skan_click")
   private List<Long> mSkanClick = null;
+  @SerializedName("skan_click_second_postback")
+  private List<Long> mSkanClickSecondPostback = null;
+  @SerializedName("skan_click_third_postback")
+  private List<Long> mSkanClickThirdPostback = null;
   @SerializedName("skan_view")
   private List<Long> mSkanView = null;
+  @SerializedName("skan_view_second_postback")
+  private List<Long> mSkanViewSecondPostback = null;
+  @SerializedName("skan_view_third_postback")
+  private List<Long> mSkanViewThirdPostback = null;
   @SerializedName("value")
   private List<Long> mValue = null;
   protected static Gson gson = null;
@@ -525,12 +533,48 @@ public class AdsHistogramStats extends APINode {
     return this;
   }
 
+  public List<Long> getFieldSkanClickSecondPostback() {
+    return mSkanClickSecondPostback;
+  }
+
+  public AdsHistogramStats setFieldSkanClickSecondPostback(List<Long> value) {
+    this.mSkanClickSecondPostback = value;
+    return this;
+  }
+
+  public List<Long> getFieldSkanClickThirdPostback() {
+    return mSkanClickThirdPostback;
+  }
+
+  public AdsHistogramStats setFieldSkanClickThirdPostback(List<Long> value) {
+    this.mSkanClickThirdPostback = value;
+    return this;
+  }
+
   public List<Long> getFieldSkanView() {
     return mSkanView;
   }
 
   public AdsHistogramStats setFieldSkanView(List<Long> value) {
     this.mSkanView = value;
+    return this;
+  }
+
+  public List<Long> getFieldSkanViewSecondPostback() {
+    return mSkanViewSecondPostback;
+  }
+
+  public AdsHistogramStats setFieldSkanViewSecondPostback(List<Long> value) {
+    this.mSkanViewSecondPostback = value;
+    return this;
+  }
+
+  public List<Long> getFieldSkanViewThirdPostback() {
+    return mSkanViewThirdPostback;
+  }
+
+  public AdsHistogramStats setFieldSkanViewThirdPostback(List<Long> value) {
+    this.mSkanViewThirdPostback = value;
     return this;
   }
 
@@ -590,7 +634,11 @@ public class AdsHistogramStats extends APINode {
     this.mInteractiveComponentStickerId = instance.mInteractiveComponentStickerId;
     this.mInteractiveComponentStickerResponse = instance.mInteractiveComponentStickerResponse;
     this.mSkanClick = instance.mSkanClick;
+    this.mSkanClickSecondPostback = instance.mSkanClickSecondPostback;
+    this.mSkanClickThirdPostback = instance.mSkanClickThirdPostback;
     this.mSkanView = instance.mSkanView;
+    this.mSkanViewSecondPostback = instance.mSkanViewSecondPostback;
+    this.mSkanViewThirdPostback = instance.mSkanViewThirdPostback;
     this.mValue = instance.mValue;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

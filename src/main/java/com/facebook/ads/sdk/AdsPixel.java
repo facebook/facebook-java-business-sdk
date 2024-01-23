@@ -2033,6 +2033,7 @@ public class AdsPixel extends APINode {
       "namespace_id",
       "partner_agent",
       "platforms",
+      "progress",
       "test_event_code",
       "trace",
       "upload_id",
@@ -2121,6 +2122,15 @@ public class AdsPixel extends APINode {
     }
     public APIRequestCreateEvent setPlatforms (String platforms) {
       this.setParam("platforms", platforms);
+      return this;
+    }
+
+    public APIRequestCreateEvent setProgress (Object progress) {
+      this.setParam("progress", progress);
+      return this;
+    }
+    public APIRequestCreateEvent setProgress (String progress) {
+      this.setParam("progress", progress);
       return this;
     }
 

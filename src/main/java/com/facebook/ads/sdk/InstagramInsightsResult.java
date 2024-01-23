@@ -309,6 +309,8 @@ public class InstagramInsightsResult extends APINode {
       VALUE_CAROUSEL_ALBUM_SAVED("carousel_album_saved"),
       @SerializedName("carousel_album_video_views")
       VALUE_CAROUSEL_ALBUM_VIDEO_VIEWS("carousel_album_video_views"),
+      @SerializedName("clips_replays_count")
+      VALUE_CLIPS_REPLAYS_COUNT("clips_replays_count"),
       @SerializedName("comments")
       VALUE_COMMENTS("comments"),
       @SerializedName("engagement")
@@ -317,6 +319,8 @@ public class InstagramInsightsResult extends APINode {
       VALUE_EXITS("exits"),
       @SerializedName("follows")
       VALUE_FOLLOWS("follows"),
+      @SerializedName("ig_reels_aggregated_all_plays_count")
+      VALUE_IG_REELS_AGGREGATED_ALL_PLAYS_COUNT("ig_reels_aggregated_all_plays_count"),
       @SerializedName("ig_reels_avg_watch_time")
       VALUE_IG_REELS_AVG_WATCH_TIME("ig_reels_avg_watch_time"),
       @SerializedName("ig_reels_video_view_total_time")

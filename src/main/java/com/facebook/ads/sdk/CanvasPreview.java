@@ -39,31 +39,23 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class InstantArticlesStats extends APINode {
-  @SerializedName("error")
-  private String mError = null;
-  @SerializedName("metadata")
-  private List<Map<String, Object>> mMetadata = null;
-  @SerializedName("metric")
-  private Object mMetric = null;
-  @SerializedName("totals")
-  private List<Map<String, Object>> mTotals = null;
-  @SerializedName("x_axis_breakdown")
-  private List<List<Map<String, Object>>> mXAxisBreakdown = null;
+public class CanvasPreview extends APINode {
+  @SerializedName("body")
+  private String mBody = null;
   protected static Gson gson = null;
 
-  public InstantArticlesStats() {
+  public CanvasPreview() {
   }
 
   public String getId() {
     return null;
   }
-  public static InstantArticlesStats loadJSON(String json, APIContext context, String header) {
-    InstantArticlesStats instantArticlesStats = getGson().fromJson(json, InstantArticlesStats.class);
+  public static CanvasPreview loadJSON(String json, APIContext context, String header) {
+    CanvasPreview canvasPreview = getGson().fromJson(json, CanvasPreview.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(instantArticlesStats.toString());
+      JsonElement o2 = parser.parse(canvasPreview.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -73,14 +65,14 @@ public class InstantArticlesStats extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    instantArticlesStats.context = context;
-    instantArticlesStats.rawValue = json;
-    instantArticlesStats.header = header;
-    return instantArticlesStats;
+    canvasPreview.context = context;
+    canvasPreview.rawValue = json;
+    canvasPreview.header = header;
+    return canvasPreview;
   }
 
-  public static APINodeList<InstantArticlesStats> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<InstantArticlesStats> instantArticlesStatss = new APINodeList<InstantArticlesStats>(request, json, header);
+  public static APINodeList<CanvasPreview> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CanvasPreview> canvasPreviews = new APINodeList<CanvasPreview>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -91,9 +83,9 @@ public class InstantArticlesStats extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          instantArticlesStatss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          canvasPreviews.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return instantArticlesStatss;
+        return canvasPreviews;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -103,20 +95,20 @@ public class InstantArticlesStats extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                instantArticlesStatss.setCursors(before, after);
+                canvasPreviews.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            instantArticlesStatss.setPaging(previous, next);
+            canvasPreviews.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              instantArticlesStatss.setAppSecret(context.getAppSecretProof());
+              canvasPreviews.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              instantArticlesStatss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              canvasPreviews.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -127,23 +119,23 @@ public class InstantArticlesStats extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  instantArticlesStatss.add(loadJSON(entry.getValue().toString(), context, header));
+                  canvasPreviews.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              instantArticlesStatss.add(loadJSON(obj.toString(), context, header));
+              canvasPreviews.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return instantArticlesStatss;
+          return canvasPreviews;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              instantArticlesStatss.add(loadJSON(entry.getValue().toString(), context, header));
+              canvasPreviews.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return instantArticlesStatss;
+          return canvasPreviews;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -160,20 +152,20 @@ public class InstantArticlesStats extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              instantArticlesStatss.add(loadJSON(value.toString(), context, header));
+              canvasPreviews.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return instantArticlesStatss;
+            return canvasPreviews;
           }
 
           // Sixth, check if it's pure JsonObject
-          instantArticlesStatss.clear();
-          instantArticlesStatss.add(loadJSON(json, context, header));
-          return instantArticlesStatss;
+          canvasPreviews.clear();
+          canvasPreviews.add(loadJSON(json, context, header));
+          return canvasPreviews;
         }
       }
     } catch (Exception e) {
@@ -201,48 +193,12 @@ public class InstantArticlesStats extends APINode {
   }
 
 
-  public String getFieldError() {
-    return mError;
+  public String getFieldBody() {
+    return mBody;
   }
 
-  public InstantArticlesStats setFieldError(String value) {
-    this.mError = value;
-    return this;
-  }
-
-  public List<Map<String, Object>> getFieldMetadata() {
-    return mMetadata;
-  }
-
-  public InstantArticlesStats setFieldMetadata(List<Map<String, Object>> value) {
-    this.mMetadata = value;
-    return this;
-  }
-
-  public Object getFieldMetric() {
-    return mMetric;
-  }
-
-  public InstantArticlesStats setFieldMetric(Object value) {
-    this.mMetric = value;
-    return this;
-  }
-
-  public List<Map<String, Object>> getFieldTotals() {
-    return mTotals;
-  }
-
-  public InstantArticlesStats setFieldTotals(List<Map<String, Object>> value) {
-    this.mTotals = value;
-    return this;
-  }
-
-  public List<List<Map<String, Object>>> getFieldXAxisBreakdown() {
-    return mXAxisBreakdown;
-  }
-
-  public InstantArticlesStats setFieldXAxisBreakdown(List<List<Map<String, Object>>> value) {
-    this.mXAxisBreakdown = value;
+  public CanvasPreview setFieldBody(String value) {
+    this.mBody = value;
     return this;
   }
 
@@ -262,21 +218,17 @@ public class InstantArticlesStats extends APINode {
     return gson;
   }
 
-  public InstantArticlesStats copyFrom(InstantArticlesStats instance) {
-    this.mError = instance.mError;
-    this.mMetadata = instance.mMetadata;
-    this.mMetric = instance.mMetric;
-    this.mTotals = instance.mTotals;
-    this.mXAxisBreakdown = instance.mXAxisBreakdown;
+  public CanvasPreview copyFrom(CanvasPreview instance) {
+    this.mBody = instance.mBody;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<InstantArticlesStats> getParser() {
-    return new APIRequest.ResponseParser<InstantArticlesStats>() {
-      public APINodeList<InstantArticlesStats> parseResponse(String response, APIContext context, APIRequest<InstantArticlesStats> request, String header) throws MalformedResponseException {
-        return InstantArticlesStats.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<CanvasPreview> getParser() {
+    return new APIRequest.ResponseParser<CanvasPreview>() {
+      public APINodeList<CanvasPreview> parseResponse(String response, APIContext context, APIRequest<CanvasPreview> request, String header) throws MalformedResponseException {
+        return CanvasPreview.parseResponse(response, context, request, header);
       }
     };
   }

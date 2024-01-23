@@ -417,6 +417,8 @@ public class AdRuleExecutionSpec extends APINode {
       VALUE_CHANGE_BUDGET("CHANGE_BUDGET"),
       @SerializedName("CHANGE_CAMPAIGN_BUDGET")
       VALUE_CHANGE_CAMPAIGN_BUDGET("CHANGE_CAMPAIGN_BUDGET"),
+      @SerializedName("DCO")
+      VALUE_DCO("DCO"),
       @SerializedName("INCREASE_RADIUS")
       VALUE_INCREASE_RADIUS("INCREASE_RADIUS"),
       @SerializedName("NOTIFICATION")

@@ -1387,7 +1387,6 @@ public class WhatsAppBusinessAccount extends APINode {
     public static final String[] PARAMS = {
       "categories",
       "clone_flow_id",
-      "clone_template",
       "endpoint_uri",
       "name",
     };
@@ -1459,11 +1458,6 @@ public class WhatsAppBusinessAccount extends APINode {
 
     public APIRequestCreateFlow setCloneFlowId (String cloneFlowId) {
       this.setParam("clone_flow_id", cloneFlowId);
-      return this;
-    }
-
-    public APIRequestCreateFlow setCloneTemplate (String cloneTemplate) {
-      this.setParam("clone_template", cloneTemplate);
       return this;
     }
 

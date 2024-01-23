@@ -100,8 +100,16 @@ public class AdsActionStats extends APINode {
   private String mInteractiveComponentStickerResponse = null;
   @SerializedName("skan_click")
   private String mSkanClick = null;
+  @SerializedName("skan_click_second_postback")
+  private String mSkanClickSecondPostback = null;
+  @SerializedName("skan_click_third_postback")
+  private String mSkanClickThirdPostback = null;
   @SerializedName("skan_view")
   private String mSkanView = null;
+  @SerializedName("skan_view_second_postback")
+  private String mSkanViewSecondPostback = null;
+  @SerializedName("skan_view_third_postback")
+  private String mSkanViewThirdPostback = null;
   @SerializedName("value")
   private String mValue = null;
   protected static Gson gson = null;
@@ -525,12 +533,48 @@ public class AdsActionStats extends APINode {
     return this;
   }
 
+  public String getFieldSkanClickSecondPostback() {
+    return mSkanClickSecondPostback;
+  }
+
+  public AdsActionStats setFieldSkanClickSecondPostback(String value) {
+    this.mSkanClickSecondPostback = value;
+    return this;
+  }
+
+  public String getFieldSkanClickThirdPostback() {
+    return mSkanClickThirdPostback;
+  }
+
+  public AdsActionStats setFieldSkanClickThirdPostback(String value) {
+    this.mSkanClickThirdPostback = value;
+    return this;
+  }
+
   public String getFieldSkanView() {
     return mSkanView;
   }
 
   public AdsActionStats setFieldSkanView(String value) {
     this.mSkanView = value;
+    return this;
+  }
+
+  public String getFieldSkanViewSecondPostback() {
+    return mSkanViewSecondPostback;
+  }
+
+  public AdsActionStats setFieldSkanViewSecondPostback(String value) {
+    this.mSkanViewSecondPostback = value;
+    return this;
+  }
+
+  public String getFieldSkanViewThirdPostback() {
+    return mSkanViewThirdPostback;
+  }
+
+  public AdsActionStats setFieldSkanViewThirdPostback(String value) {
+    this.mSkanViewThirdPostback = value;
     return this;
   }
 
@@ -590,7 +634,11 @@ public class AdsActionStats extends APINode {
     this.mInteractiveComponentStickerId = instance.mInteractiveComponentStickerId;
     this.mInteractiveComponentStickerResponse = instance.mInteractiveComponentStickerResponse;
     this.mSkanClick = instance.mSkanClick;
+    this.mSkanClickSecondPostback = instance.mSkanClickSecondPostback;
+    this.mSkanClickThirdPostback = instance.mSkanClickThirdPostback;
     this.mSkanView = instance.mSkanView;
+    this.mSkanViewSecondPostback = instance.mSkanViewSecondPostback;
+    this.mSkanViewThirdPostback = instance.mSkanViewThirdPostback;
     this.mValue = instance.mValue;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

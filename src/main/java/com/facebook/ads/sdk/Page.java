@@ -749,10 +749,6 @@ public class Page extends APINode {
     return new APIRequestGetInstagramAccounts(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetInstantArticlesStats getInstantArticlesStats() {
-    return new APIRequestGetInstantArticlesStats(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetLeadGenForms getLeadGenForms() {
     return new APIRequestGetLeadGenForms(this.getPrefixedId().toString(), context);
   }
@@ -14860,182 +14856,6 @@ public class Page extends APINode {
     }
   }
 
-  public static class APIRequestGetInstantArticlesStats extends APIRequest<InstantArticlesStats> {
-
-    APINodeList<InstantArticlesStats> lastResponse = null;
-    @Override
-    public APINodeList<InstantArticlesStats> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "metrics_list",
-      "page_list",
-      "since",
-      "until",
-    };
-
-    public static final String[] FIELDS = {
-      "error",
-      "metadata",
-      "metric",
-      "totals",
-      "x_axis_breakdown",
-    };
-
-    @Override
-    public APINodeList<InstantArticlesStats> parseResponse(String response, String header) throws APIException {
-      return InstantArticlesStats.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<InstantArticlesStats> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<InstantArticlesStats> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<InstantArticlesStats>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<InstantArticlesStats>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<InstantArticlesStats>>() {
-           public APINodeList<InstantArticlesStats> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetInstantArticlesStats.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetInstantArticlesStats(String nodeId, APIContext context) {
-      super(context, nodeId, "/instant_articles_stats", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetInstantArticlesStats setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetInstantArticlesStats setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetInstantArticlesStats setMetricsList (List<Map<String, String>> metricsList) {
-      this.setParam("metrics_list", metricsList);
-      return this;
-    }
-    public APIRequestGetInstantArticlesStats setMetricsList (String metricsList) {
-      this.setParam("metrics_list", metricsList);
-      return this;
-    }
-
-    public APIRequestGetInstantArticlesStats setPageList (List<String> pageList) {
-      this.setParam("page_list", pageList);
-      return this;
-    }
-    public APIRequestGetInstantArticlesStats setPageList (String pageList) {
-      this.setParam("page_list", pageList);
-      return this;
-    }
-
-    public APIRequestGetInstantArticlesStats setSince (String since) {
-      this.setParam("since", since);
-      return this;
-    }
-
-    public APIRequestGetInstantArticlesStats setUntil (String until) {
-      this.setParam("until", until);
-      return this;
-    }
-
-    public APIRequestGetInstantArticlesStats requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetInstantArticlesStats requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetInstantArticlesStats requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetInstantArticlesStats requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetInstantArticlesStats requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetInstantArticlesStats requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetInstantArticlesStats requestErrorField () {
-      return this.requestErrorField(true);
-    }
-    public APIRequestGetInstantArticlesStats requestErrorField (boolean value) {
-      this.requestField("error", value);
-      return this;
-    }
-    public APIRequestGetInstantArticlesStats requestMetadataField () {
-      return this.requestMetadataField(true);
-    }
-    public APIRequestGetInstantArticlesStats requestMetadataField (boolean value) {
-      this.requestField("metadata", value);
-      return this;
-    }
-    public APIRequestGetInstantArticlesStats requestMetricField () {
-      return this.requestMetricField(true);
-    }
-    public APIRequestGetInstantArticlesStats requestMetricField (boolean value) {
-      this.requestField("metric", value);
-      return this;
-    }
-    public APIRequestGetInstantArticlesStats requestTotalsField () {
-      return this.requestTotalsField(true);
-    }
-    public APIRequestGetInstantArticlesStats requestTotalsField (boolean value) {
-      this.requestField("totals", value);
-      return this;
-    }
-    public APIRequestGetInstantArticlesStats requestXAxisBreakdownField () {
-      return this.requestXAxisBreakdownField(true);
-    }
-    public APIRequestGetInstantArticlesStats requestXAxisBreakdownField (boolean value) {
-      this.requestField("x_axis_breakdown", value);
-      return this;
-    }
-  }
-
   public static class APIRequestGetLeadGenForms extends APIRequest<LeadgenForm> {
 
     APINodeList<LeadgenForm> lastResponse = null;
@@ -23312,7 +23132,6 @@ public class Page extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "breaking_change",
       "height",
       "redirect",
       "type",
@@ -23383,15 +23202,6 @@ public class Page extends APINode {
       return this;
     }
 
-
-    public APIRequestGetPicture setBreakingChange (ProfilePictureSource.EnumBreakingChange breakingChange) {
-      this.setParam("breaking_change", breakingChange);
-      return this;
-    }
-    public APIRequestGetPicture setBreakingChange (String breakingChange) {
-      this.setParam("breaking_change", breakingChange);
-      return this;
-    }
 
     public APIRequestGetPicture setHeight (Long height) {
       this.setParam("height", height);

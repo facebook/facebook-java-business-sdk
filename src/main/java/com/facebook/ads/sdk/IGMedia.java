@@ -1697,6 +1697,10 @@ public class IGMedia extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "primary_fb_page_id",
+      "primary_ig_user_id",
+      "secondary_fb_page_id",
+      "secondary_ig_user_id",
     };
 
     public static final String[] FIELDS = {
@@ -1771,6 +1775,26 @@ public class IGMedia extends APINode {
       return this;
     }
 
+
+    public APIRequestGet setPrimaryFbPageId (String primaryFbPageId) {
+      this.setParam("primary_fb_page_id", primaryFbPageId);
+      return this;
+    }
+
+    public APIRequestGet setPrimaryIgUserId (String primaryIgUserId) {
+      this.setParam("primary_ig_user_id", primaryIgUserId);
+      return this;
+    }
+
+    public APIRequestGet setSecondaryFbPageId (String secondaryFbPageId) {
+      this.setParam("secondary_fb_page_id", secondaryFbPageId);
+      return this;
+    }
+
+    public APIRequestGet setSecondaryIgUserId (String secondaryIgUserId) {
+      this.setParam("secondary_ig_user_id", secondaryIgUserId);
+      return this;
+    }
 
     public APIRequestGet requestAllFields () {
       return this.requestAllFields(true);

@@ -7049,6 +7049,7 @@ public class Application extends APINode {
       "click_attr_window",
       "custom_events",
       "decline_reason",
+      "engagement_type",
       "event",
       "event_reported_time",
       "fb_ad_id",
@@ -7155,6 +7156,11 @@ public class Application extends APINode {
 
     public APIRequestCreateMmpAuditing setDeclineReason (String declineReason) {
       this.setParam("decline_reason", declineReason);
+      return this;
+    }
+
+    public APIRequestCreateMmpAuditing setEngagementType (String engagementType) {
+      this.setParam("engagement_type", engagementType);
       return this;
     }
 

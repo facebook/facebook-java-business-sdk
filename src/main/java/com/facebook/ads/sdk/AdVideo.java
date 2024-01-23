@@ -123,7 +123,7 @@ public class AdVideo extends APINode {
   @SerializedName("spherical")
   private Boolean mSpherical = null;
   @SerializedName("status")
-  private Object mStatus = null;
+  private VideoStatus mStatus = null;
   @SerializedName("title")
   private String mTitle = null;
   @SerializedName("universal_video_id")
@@ -609,7 +609,7 @@ public class AdVideo extends APINode {
     return mSpherical;
   }
 
-  public Object getFieldStatus() {
+  public VideoStatus getFieldStatus() {
     return mStatus;
   }
 
@@ -6772,6 +6772,8 @@ public class AdVideo extends APINode {
       VALUE_CONTAINED_POST_COPYRIGHT_REFERENCE_BROADCAST("CONTAINED_POST_COPYRIGHT_REFERENCE_BROADCAST"),
       @SerializedName("COPYRIGHT_REFERENCE_BROADCAST")
       VALUE_COPYRIGHT_REFERENCE_BROADCAST("COPYRIGHT_REFERENCE_BROADCAST"),
+      @SerializedName("COPYRIGHT_REFERENCE_IG_XPOST_VIDEO")
+      VALUE_COPYRIGHT_REFERENCE_IG_XPOST_VIDEO("COPYRIGHT_REFERENCE_IG_XPOST_VIDEO"),
       @SerializedName("COPYRIGHT_REFERENCE_VIDEO")
       VALUE_COPYRIGHT_REFERENCE_VIDEO("COPYRIGHT_REFERENCE_VIDEO"),
       @SerializedName("CREATION_ML_PRECREATION")
